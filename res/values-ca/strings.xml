@@ -2533,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Cap aplicació instal·lada ha sol·licitat accés a les notificacions."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Vols que <xliff:g id="SERVICE">%1$s</xliff:g> tingui accés a les notificacions?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrà llegir totes les notificacions, inclosa la informació personal, com ara els noms de contactes i el text dels missatges que reps. També podrà ignorar les notificacions o bé activar els botons d\'acció que continguin."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Serveis d\'ajuda per a la realitat virtual"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Cap aplicació instal·lada no ha sol·licitat que s\'executi com un servei d\'ajuda per a la realitat virtual."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Vols permetre que <xliff:g id="SERVICE">%1$s</xliff:g> accedeixi al servei de realitat virtual?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> es podrà executar quan utilitzis aplicacions en el mode de realitat virtual."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Accés No molesteu"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Cap aplicació instal·lada no ha sol·licitat accés No molesteu."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"S\'estan carregant les aplicacions..."</string>
@@ -2618,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Evita que les notificacions silenciades pel mode No molesteu apareguin a la pantalla"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Bloqueja quan la pantalla està desactivada"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Evita que les notificacions silenciades pel mode No molesteu activin la pantalla o el llum de notificació"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Desactivades"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Quan la pantalla està activada"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Quan la pantalla està desactivada"</string>
@@ -2686,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Normals"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Bloquejades"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Notificacions silenciades"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> permisos concedits</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> permís concedit</item>
@@ -2846,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Permet dibuixar sobre altres aplicacions"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Permís de l\'aplicació per dibuixar a sobre"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Amb aquest permís l\'aplicació es pot mostrar sobre les altres aplicacions que utilitzes i pot interferir amb l\'ús que fas de la interfície en altres aplicacions o canviar el que penses que estàs veient en altres aplicacions."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"RV realitat virtual processador estèreo servei ajuda"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"finestra de diàleg d\'alerta del sistema per dibuixar sobre altres aplicacions"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Dibuixa sobre altres aplicac."</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> de <xliff:g id="COUNT_1">%d</xliff:g> aplicacions tenen permís per dibuixar sobre aplicacions"</string>
@@ -2894,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"Mostra\'n menys"</string>
     <string name="disconnected" msgid="5787956818111197212">"Desconnectada"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"S\'ha utilitzat un <xliff:g id="AMOUNT">%1$s</xliff:g> de dades"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> aplicacions no poden enviar notificacions"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Totes les aplicacions poden enviar notificacions"</string>
     <string name="apps_summary" msgid="193158055537070092">"S\'han instal·lat <xliff:g id="COUNT">%1$d</xliff:g> aplicacions"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 aplicacions instal·lades"</string>

@@ -2533,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"គ្មានកម្មវិធីបានដំឡើងណាមួយបានស្នើចូលដំណើរការការជូនដំណឹងទេ។"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"អនុញ្ញាតឲ្យចូលដំណើរការជូនដំណឹងសម្រាប់ <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> នឹងអាចអានការជូនដំណឹងបានទាំងអស់រាប់បញ្ចូលទាំងព័ត៌មានផ្ទាល់ខ្លួន ដូចជាឈ្មោះទំនាក់ទំនង និងសារជាអក្សរដែលអ្នកបានទទួល។ វាក៏អាចបដិសេធការជូនដំណឹង ឬចាប់ផ្តើមប៊ូតុងសកម្មភាពដែលមានផងដែរ។"</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"សេវាកម្មជំនួយ VR"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"មិនមានកម្មវិធីដែលបានដំឡើងត្រូវបានស្នើឲ្យដំណើរការជាសេវាកម្មជំនួយ VR នោះទេ។"</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"អនុញ្ញាតឲ្យសេវាកម្ម VR ចូលដំណើរការ <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> នឹងអាចដំណើរការនៅពេលដែលអ្នកប្រើកម្មវិធីនៅក្នុងរបៀបរូបភាពជាក់ស្តែងបែបនិម្មិត។"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"ចូលដំណើរមុខងារកុំរំខាន"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"គ្មានកម្មវិធីបានដំឡើងណាមួយបានស្នើការចូលដំណើរការមុខងារកុំរំខានទេ"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"កំពុង​ផ្ទុក​កម្មវិធី..."</string>
@@ -2618,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"ទប់ស្កាត់ការជូនដំណឹងដែលបិទសំឡេងដោយមុខងារ កុំរំខាន កុំុំឲ្យបញ្ចេញ ឬលោតលើអេក្រង់"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"រារាំងនៅពេលអេក្រង់បិទ"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"ទប់ស្កាត់ការជូនដំណឹងដែលបិទសំឡេងដោយមុខងារ កុំរំខាន កុំុំឲ្យបើកអេក្រង់ ឬបាញ់ភ្លើងការជូនដំណឹង"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"បិទ"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"នៅពេលអេក្រង់បើក"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"នៅពេលអេក្រង់បិទ"</string>
@@ -2686,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"ធម្មតា"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"បានរារាំង"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"បានបិទសំឡេង"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>ការអនុញ្ញាតដែលទទួលបាន</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>ការអនុញ្ញាតដែលទទួលបាន</item>
@@ -2846,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"អនុញ្ញាតឲ្យគូរលើកម្មវិធីផ្សេងទៀត"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"សិទ្ធិអនុញ្ញាតកម្មវិធីគូរពីលើ"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"សិទ្ធិនេះអនុញ្ញាតឲ្យកម្មវិធីបង្ហាញនៅខាងលើកម្មវិធីផ្សេងទៀត ដែលអ្នកកំពុងប្រើ ហើយវាអាចរំខានការប្រើប្រាស់ចំណុចប្រទាក់របស់អ្នកនៅក្នុងកម្មវិធីផ្សេងទៀត ឬប្តូរអ្វីដែលអ្នកគិតថាអ្នកកំពុងមើលនៅក្នុងកម្មវិធីផ្សេងទៀត។"</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"សេវាកម្មជំនួយសំឡេងស្តេរ៉េអូកម្មវិធីស្តាប់រូបភាពជាក់ស្តែងបែបនិម្មិត vr"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"ប្រព័ន្ធដាស់តឿនការគូរប្រអប់វិនដូនៅលើកម្មវិធីផ្សេងទៀត"</string>
     <string name="overlay_settings" msgid="222062091489691363">"គូរលើកម្មវិធីផ្សេងទៀត"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"បានអនុញ្ញាតកម្មវិធី <xliff:g id="COUNT_0">%d</xliff:g> ក្នុងចំណោម <xliff:g id="COUNT_1">%d</xliff:g> ឲ្យគូរនៅលើកម្មវិធីផ្សេងទៀត"</string>
@@ -2894,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"​មើល​តិច​ជាង"</string>
     <string name="disconnected" msgid="5787956818111197212">"បាន​ផ្ដាច់"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"បានប្រើទិន្នន័យអស់ <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"កម្មវិធីចំនួន <xliff:g id="COUNT">%1$d</xliff:g> ត្រូវបានរារាំងមិនឲ្យផ្ញើ"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"កម្មវិធីទាំងអស់ត្រូវបានអនុញ្ញាតឲ្យផ្ញើ"</string>
     <string name="apps_summary" msgid="193158055537070092">"បានដំឡើងកម្មវិធី <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"កម្មវិធី 24 ត្រូវបានដំឡើង"</string>

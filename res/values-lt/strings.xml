@@ -76,8 +76,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Išimti SD kortelę"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Ištrinti USB atmintinę"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Ištrinti SD kortelę"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Peržiūrėti <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> ekraną iš <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Sumažinkite arba padidinkite ekrane rodomą tekstą."</string>
     <string name="small_font" msgid="2295331917424072635">"Mažas"</string>
     <string name="medium_font" msgid="2068475425515133701">"Vidutinis"</string>
@@ -2570,6 +2569,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Jokios įdiegtos programos nepateikė pranešimo prieigos užklausos."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Leisti <xliff:g id="SERVICE">%1$s</xliff:g> pranešimo prieigą?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> galės skaityti visus pranešimus, įskaitant asmeninę informaciją, pvz., kontaktų vardus ir gaunamų pranešimų tekstą. Be to, bus galima atsisakyti pranešimų ar suaktyvinti jų veiksmų mygtukus."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Pagalbinės virtualiosios realybės paslaugos"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Nėra įdiegtų programų, kurios pateikė užklausą būti vykdomos kaip pagalbinės virtualiosios realybės paslaugos."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Leisti „<xliff:g id="SERVICE">%1$s</xliff:g>“ pasiekti virtualiosios realybės paslaugą?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"„<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>“ galės veikti, kai programas naudosite virtualiosios realybės režimu."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Prieiga „Netrukdyti“"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Jokios įdiegtos programos nepateikė prieigos „Netrukdyti“ užklausos"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Įkeliamos programos..."</string>
@@ -2659,6 +2662,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Neleisti, kad gavus pranešimų, nutildytų naudojant režimą „Netrukdyti“, jie būtų rodomi arba iššoktų ekrane"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Blokuoti, kai ekranas išjungtas"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Neleisti, kad gavus pranešimų, nutildytų naudojant režimą „Netrukdyti“, ekranas būtų įjungiamas ar pulsuotų pranešimų lemputė"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Išjungta"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Kai ekranas įjungtas"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Kai ekranas išjungtas"</string>
@@ -2727,8 +2732,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Įprastas"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Užblokuota"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Nutildyta"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one">Suteiktas <xliff:g id="COUNT_1">%d</xliff:g> leidimas</item>
       <item quantity="few">Suteikti <xliff:g id="COUNT_1">%d</xliff:g> leidimai</item>
@@ -2834,18 +2845,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Rodyti sistemos NS derinimo priemonę"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Papildomi leidimai"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Dar <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Bendrinti pranešimą apie riktą?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Jūsų IT administratorius pateikė pranešimo apie riktą užklausą, kad galėtų padėti pašalinti triktis šiame įrenginyje. Programos ir duomenys gali būti bendrinami."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Jūsų IT administratorius pateikė pranešimo apie riktą užklausą, kad galėtų padėti pašalinti triktis šiame įrenginyje. Programos bei duomenys gali būti bendrinami ir įrenginys gali laikinai lėčiau veikti."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Šis pranešimas apie riktą bendrinamas su jūsų IT administratoriumi. Jei reikia išsamesnės informacijos, susisiekite su juo."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Bendrinti"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Atmesti"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Įkrovimas"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Įkrauti tik šį įrenginį"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Maitinimo šaltinis"</string>
@@ -2907,6 +2912,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Leisti rodyti virš kitų programų"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Leidimas rodyti programą viršuje"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Suteikus šį leidimą, programą bus leidžiama rodyti virš kitų naudojamų programų ir ji gali trukdyti naudoti kitų programų sąsajas arba pakeisti tai, ką, jūsų manymu, matote kitose programose."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtualioji realybė apdorojimo priemonė stereofoninis garsas pagalbinė paslauga"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"sistemos įspėjimo dialogo langas dėl rodymo virš kitų programų"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Rodyti virš kitų programų"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> iš <xliff:g id="COUNT_1">%d</xliff:g> program. leidžiama rodyti virš kitų programų"</string>
@@ -2955,7 +2961,7 @@
     <string name="see_less" msgid="1250265310929558370">"Žr. mažiau"</string>
     <string name="disconnected" msgid="5787956818111197212">"Atsijungta"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Panaudota duomenų: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"Programų, kurioms neleidžiama siųsti: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Visoms programoms leidžiama siųsti"</string>
     <string name="apps_summary" msgid="193158055537070092">"Įdiegtų programų: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Įdiegtos 24 programos"</string>

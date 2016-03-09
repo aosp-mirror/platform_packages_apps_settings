@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD kartının bağlantısını kes"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB belleği sil"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD kartı sil"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Önizleme ekranı <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> / <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Ekrandaki metni daha küçük veya daha büyük yapın."</string>
     <string name="small_font" msgid="2295331917424072635">"Küçük"</string>
     <string name="medium_font" msgid="2068475425515133701">"Ortam"</string>
@@ -2534,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Yüklü hiçbir uygulama, bildirim erişimi isteğinde bulunmadı."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> için bildirim erişimine izin verilsin mi?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kişi adları ve aldığınız kısa mesajlar gibi kişisel bilgiler dahil olmak üzere tüm bildirimleri okuyabilecektir. Ayrıca bildirimleri kapatabilecek veya bildirimdeki işlem düğmelerini tetikleyebilecektir."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Sanal Gerçeklik yardımcı hizmetleri"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Yüklü hiçbir uygulamanın Sanal Gerçeklik yardımcı hizmetleri olarak çalışması istenmedi."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"<xliff:g id="SERVICE">%1$s</xliff:g> için Sanal Gerçeklik hizmetine erişim izni verilsin mi?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"Uygulamaları sanal gerçeklik modunda kullandığınızda <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> çalışabilir."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Rahatsız Etmeyin erişimi"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Yüklü hiçbir uygulama Rahatsız Etmeyin erişimi isteğinde bulunmadı"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Uygulamalar yükleniyor..."</string>
@@ -2619,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Rahatsız Etmeyin ayarıyla sessize alınan bildirimlerin ekranda kısaca belirmesini veya ekranda açılmasını engelle"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Ekran kapalıyken engelle"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Rahatsız Etmeyin ayarıyla sessize alınan bildirimlerin ekranı açmasını veya bildirim ışığını yakıp söndürmesini engelle"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Kapalı"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Ekran açıkken"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Ekran kapalıyken"</string>
@@ -2687,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Normal"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Engellendi"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Sesi kapatıldı"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> izin verildi</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> izin verildi</item>
@@ -2782,18 +2793,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI Ayarlayıcısını Göster"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Ek izinler"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> tane daha"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Hata raporu paylaşılsın mı?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"BT yöneticiniz, bu cihazda sorun gidermeye yardımcı olması için bir hata raporu istedi. Uygulamalar ve veriler paylaşılabilir."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"BT yöneticiniz, bu cihazda sorun gidermeye yardımcı olması için bir hata raporu istedi. Uygulamalar ve veriler paylaşılabilir. Bu durum, cihazınızı geçici olarak yavaşlatabilir."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Bu hata raporu BT yöneticinizle paylaşılıyor. Daha fazla ayrıntı için kendisiyle iletişim kurun."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Paylaş"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Reddet"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Şarj etme"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Yalnızca bu cihazı şarj et"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Güç kaynağı"</string>
@@ -2853,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Diğer uygl. üzerinde görüntülenmeye izin ver"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Uygulamayı en üstte görüntüleme izni"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Bu izin, bir uygulamanın kullandığınız diğer uygulamaların üstünde görüntülenmesine olanak verir ve diğer uygulamalardaki arayüz kullanımınızı etkileyebilir veya diğer uygulamalarda gördüğünüzü düşündüğünüz arayüz öğelerini değiştirebilir."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr sanal gerçeklik dinleyici stereo yardımcı hizmeti"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"sistem uyarı penceresi iletişim kutusu görüntüleme en üstte diğer uygulamalar"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Diğer uygl. üzerinde görüntü."</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> / <xliff:g id="COUNT_1">%d</xliff:g> uygulama, başka uygulamaların üzerinde görüntülenebilir"</string>
@@ -2901,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"Daha az göster"</string>
     <string name="disconnected" msgid="5787956818111197212">"Bağlantı kesildi"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> veri kullanıldı"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> uygulamanın bildirim göndermesi engelleniyor"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Tüm uygulamaların bildirim göndermesine izin veriliyor"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> uygulama yüklü"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 uygulama yüklendi"</string>

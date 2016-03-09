@@ -2533,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"इंस्टॉल किए गए किसी भी ऐप द्वारा नोटिफिकेशन ऐक्सेस का अनुरोध नहीं किया गया."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> के लिए नोटिफिकेशन ऐक्सेस की अनुमति दें?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> सभी नोटिफिकेशन पढ़ सकेगा, जिसमें संपर्क नाम और आपको प्राप्त होने वाले संदेश का लेख जैसी व्यक्तिगत जानकारी शामिल है. वह नोटिफिकेशन को ख़ारिज भी कर सकेगा या उनमें मौजूद कार्रवाई बटनों को ट्रिगर कर सकेगा."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR सहायक सेवाएं"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"इंस्टॉल किए गए किसी भी ऐप ने VR सहायक सेवाओं के रूप में चलाए जाने के लिए अनुरोध नहीं किया है."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"<xliff:g id="SERVICE">%1$s</xliff:g> के लिए VR सेवा के एक्सेस की अनुमति दें?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"जब आप वर्चुअल रिएलिटी मोड में ऐप्लिकेशन का उपयोग कर रहे होते हैं, तब <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> चला पाएगा."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"परेशान ना करें ऐक्सेस"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"इंस्टॉल किए गए किसी भी ऐप द्वारा परेशान ना करें ऐक्सेस का अनुरोध नहीं किया है"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"ऐप्स लोड हो रहे हैं..."</string>
@@ -2618,6 +2622,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"परेशान न करें द्वारा मौन किए गए नोटिफिकेशन को स्क्रीन पर तांक-झांक करने या पॉप अप होने से रोकें"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"स्क्रीन बंद होने पर अवरुद्ध करें"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"परेशान न करें द्वारा मौन किए गए नोटिफिकेशन को स्क्रीन को चालू करने से या नोटिफिकेशन की रोशनी को पल्स करने से रोकें"</string>
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"परेशान न करें द्वारा मौन किए गए नोटिफ़िकेशन को स्क्रीन चालू करने से रोकें"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"बंद"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"स्क्रीन के चालू होने पर"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"स्क्रीन के बंद होने पर"</string>
@@ -2686,8 +2691,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"सामान्य"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"अवरोधित"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"मौन किया गया"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <string name="notifications_redacted" msgid="4493588975742803160">"संवेदनशील जानकारी लॉक स्क्रीन पर नहीं है"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"लॉक स्क्रीन पर नहीं है"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"परेशान न करें को ओवरराइड किया गया"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> अनुमतियां दी गईं</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> अनुमतियां दी गईं</item>
@@ -2846,6 +2853,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"अन्‍य ऐप्स के ऊपर ले जाने की अनुमति दें"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"ऐप को शीर्ष पर ले जाने की अनुमति"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"इस अनुमति से कोई ऐप आपके द्वारा उपयोग किए जा रहे अन्‍य ऐप्‍स में सबसे ऊपर दिखाई देता है और अन्‍य ऐप्‍लिकेशन में इंटरफ़ेस के आपके उपयोग में हस्‍तक्षेप हो सकता है या आपके विचार में आप अन्‍य ऐप्‍लिकेशन में जो कुछ देख रहे हैं वह बदल सकता है."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr वर्चुअल रिएलिटी श्रोता स्टीरियो सहायक सेवा"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"सिस्‍टम अलर्ट विंडो संवाद को अन्‍य ऐप्‍स के ऊपर ले जाएं"</string>
     <string name="overlay_settings" msgid="222062091489691363">"अन्‍य ऐप्स के ऊपर ले जाएं"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_1">%d</xliff:g> में से <xliff:g id="COUNT_0">%d</xliff:g> ऐप्‍स को अन्‍य ऐप्‍स के ऊपर ले जाया जा सकता है"</string>
@@ -2894,7 +2902,10 @@
     <string name="see_less" msgid="1250265310929558370">"कम देखें"</string>
     <string name="disconnected" msgid="5787956818111197212">"डिस्कनेक्ट किया गया"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> डेटा का उपयोग किया गया है"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> ऐप्लिकेशन भेजने से अवरोधित हैं"</string>
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ऐप्लिकेशन भेजने से अवरुद्ध किए गए</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ऐप्लिकेशन भेजने से अवरुद्ध किए गए</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"सभी ऐप्लिकेशन को भेजने की अनुमति है"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> ऐप्‍स इंस्‍टॉल किए गए हैं"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 ऐप्स इंस्टॉल किए गए"</string>

@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Avmonter minnekort"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Slett USB-lagring"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Tøm SD-kort"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Forhåndsvisning av skjerm <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> av <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Gjør teksten på skjermen større eller mindre."</string>
     <string name="small_font" msgid="2295331917424072635">"Liten"</string>
     <string name="medium_font" msgid="2068475425515133701">"Middels"</string>
@@ -2534,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Ingen installerte apper har bedt om tilgang til varsler."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Vil du gi tilgang til varsler for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan lese alle varsler, inkludert personlig informasjon som kontaktnavn og meldingene du mottar. Den kan også avvise varsler eller utløse handlingsknapper i dem."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Hjelpetjenester for virtuell virkelighet"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Ingen av de installerte appene har bedt om å bli kjørt som hjelpetjeneste for virtuell virkelighet."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Vil du tillate tjenestetilgang for virtuell virkelighet for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> kan kjøres når du bruker apper i virtuell virkelighet-modus."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"«Ikke forstyrr»-tilgang"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Ingen installerte apper har bedt om «Ikke forstyrr»-tilgang"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Laster inn apper …"</string>
@@ -2619,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Unngå at varsler som er lydløse når «Ikke forstyrr»-modusen er slått på, vises på skjermen"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Blokkér når skjermen er av"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Unngå at varsler som er lydløse når Ikke forstyrr er aktivert, slår skjermen på eller får varsellyset til å blinke"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Av"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Når skjermen er på"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Når skjermen er av"</string>
@@ -2687,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Vanlig"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Blokkert"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Lydløs"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> tillatelser er gitt</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> tillatelse er gitt</item>
@@ -2782,18 +2793,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Vis SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Flere tillatelser"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> til"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Vil du dele feilrapporten?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"IT-administratoren har bedt om en feilrapport for å hjelpe med feilsøkingen på denne enheten. Apper og data kan bli delt."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"IT-administratoren har bedt om en feilrapport for å hjelpe med feilsøkingen på denne enheten. Apper og data kan bli delt. Dette kan midlertidig gjøre enheten din tregere."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Feilrapporten blir delt med IT-administratoren. Ta kontakt med vedkommende for mer informasjon."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Del"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Avslå"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Lader"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Bare lad enheten"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Strømforsyning"</string>
@@ -2853,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Tillat å ligge over andre apper"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Tillatelse til å ligge over andre"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Med denne tillatelsen kan apper vises over andre apper du bruker, og det kan ha en innvirkning på bruken din av grensesnittet i andre apper, eller endre det du tror du ser i andre apper."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr, lyttetjeneste for virtuell virkelighet, stereo, hjelpetjenester"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"systemvarsel vindusdialogboks ligge over andre apper"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Ligge over andre apper"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> av <xliff:g id="COUNT_1">%d</xliff:g> apper kan ligge over andre apper"</string>
@@ -2901,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"Se mindre"</string>
     <string name="disconnected" msgid="5787956818111197212">"Frakoblet"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> av dataen er brukt"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> apper er blokkert fra å sende"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Alle apper kan sende"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> apper er installert"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 apper er installert"</string>

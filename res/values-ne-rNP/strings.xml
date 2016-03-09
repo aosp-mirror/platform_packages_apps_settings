@@ -2533,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"कुनै स्थापित अनुप्रयोगहरूले सूचना पहुँच अनुरोध गरेका छैनन्।"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> का लागि सूचना पहुँच अनुमति दिने हो?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> सबै सूचनाहरू पढ्न सक्षम हुनेछ, व्यक्तिगत जानकारी जस्तै सम्पर्क नाम र तपाईँले पाउनुहुने सन्देशका पाठहरू लगायत।यसले सूचनाहरू खारेज गर्न वा तिनीहरूमा रहेका कार्य बटनहरू ट्रिगर गर्न पनि सक्नेछ।"</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR का सहायक सेवाहरू"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"कुनै पनि स्थापित अनुप्रयोगहरूले VR का सहायक सेवाहरूको रूपमा चल्नका लागि अनुरोध गरेका छैनन्।"</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"<xliff:g id="SERVICE">%1$s</xliff:g> लाई VR को सेवामा पहुँचका लागि अनुमति दिने हो?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"तपाईँले अनुप्रयोगहरूलाई भर्चुअल रियालिटी मोडमा प्रयोग गरिरहेको बेला <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> चल्नका लागि सक्षम हुनेछ।"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"पहुँचमा बाधा नपुर्‍यानुहोस्"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"कुनै पनि स्थापित अनुप्रयोगहरू द्वारा पहुँचमा बाधा नपुर्‍यानुहोस् को माग गरेका छैनन्"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"अनुप्रयोगहरू लोड हुँदै..."</string>
@@ -2618,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"स्क्रिनमा नियालेर वा बाहिर ल्याएर बाधा नपुर्‍याउनुहोस् द्वारा सुचनाहरू शान्त पार्ने कार्यलाई रोक्नुहोस्"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"स्क्रिन अफ हुँदा ब्लक गर्नुहोस्"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"स्क्रिनमा बाधा नपुर्‍याउनुहोस् लाई अन वा सूचना बत्तीलाई पल्स गरी सूचनाहरू शान्त पार्ने कार्यलाई रोक्नुहोस्"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"निष्क्रिय गर्नुहोस्"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"स्क्रिन अन हुँदा"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"स्क्रिन अफ हुँदा"</string>
@@ -2686,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"सामान्य"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"रोकियो"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"मौन पारिएको छ"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> अनुमतिहरू दिइयो</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> अनुमति दिइयो</item>
@@ -2711,7 +2723,7 @@
     <string name="filter_notif_priority_apps" msgid="5056470299318500609">"बाधा नपुर्याउनुहोस् लाई ओभरराइड गर्छ"</string>
     <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"लक स्क्रिनमा कुनै पनि संवेदनशील सामग्री नदेखाउने"</string>
     <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"लक स्क्रिनमा कहिल्यै नदेखाइने"</string>
-    <string name="filter_notif_silent" msgid="8533960664617048281">"बिना आवाज देखाउने"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"बिना आवाज देखाइएको"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"उन्नत"</string>
     <string name="configure_apps" msgid="6685680790825882528">"अनुप्रयोगहरू कन्फिगर गर्नुहोस्"</string>
     <string name="unknown_app" msgid="5275921288718717656">"अज्ञात अनुप्रयोग"</string>
@@ -2846,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"अन्य अनुप्रयोगहरूमा तान्न अनुमति दिनुहोस्"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"शीर्ष अनुमतिमा अनुप्रयोग तान्ने"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"यो अनुमतिले अनुप्रयोगलाई तपाईँले प्रयोग गरिरहनुभएका अन्य अनुप्रयोगहरूमाथि प्रदर्शन गर्न र अन्य अनुप्रयोगहरूमा इन्टरफेस प्रयोग गर्न हस्तक्षेप गर्न, वा तपाईँ अन्य अनुप्रयोगहरूमा देखे जस्तै गरी परिवर्तन गर्न अनुमति दिन्छ।"</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr भर्चुअल रियालिटी श्रोता स्टेरियो सहायक सेवा"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"शीर्ष अन्य विन्डोमाथि तानिएको प्रणाली चेतावनी संवाद"</string>
     <string name="overlay_settings" msgid="222062091489691363">"अन्य अनुप्रयोगहरूमाथि तान्नुहोस्"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_1">%d</xliff:g> को <xliff:g id="COUNT_0">%d</xliff:g> अनुप्रयोगहरूले अन्य अनुप्रयोगहरूको शीर्षमा तान्न अनुमति दिए"</string>
@@ -2894,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"कम हेर्नुहोस्"</string>
     <string name="disconnected" msgid="5787956818111197212">"विच्छेद भयो"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"डेटाको <xliff:g id="AMOUNT">%1$s</xliff:g> प्रयोग गरियो"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> अनुप्रयोगहरूलाई पठाउनदेखि रोकिएको छ"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"सबै अनुप्रयोगहरूलाई पठाउने अनुमति दिइएको छ"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> अनुप्रयोगहरू स्थापना गरियो"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"२४ अनुप्रयोगहरू स्थापित गरियो"</string>
