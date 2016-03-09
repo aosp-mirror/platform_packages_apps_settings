@@ -2533,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Орнатылған қолданбалардың ешбірі хабарландыруға кіруге рұқсат сұрамады."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> үшін хабарландыруға кіру рұқсатын беру қажет пе?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> құралы контакт аттары және сіз қабылдайтын хабарлар мәтіні сияқты жеке ақпаратты қамтитын барлық хабарландыруларды оқи алады. Сонымен қатар ол хабарландыруларды жабуы немесе олар қамтитын әрекет түймелерін іске қосуы да мүмкін."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR көмекші қызметтері"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Орнатылған қолданбалардың ешқайсысы VR көмекші қызметтері ретінде іске қосуды сұрамады."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"VR қызметіне <xliff:g id="SERVICE">%1$s</xliff:g> қызметіне қатынасуға рұқсат етілсін бе?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> қолданбаларды виртуалды шындық режимінде пайдаланып жатқанда іске қосыла алады."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Мазаламау режиміне кіру"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Орнатылған қолданбалардың ешбірі Мазаламау режиміне кіруге рұқсат сұрамады"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Қолданбаларды жүктеу…"</string>
@@ -2618,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"\"Мазаламау\" арқылы үнсіз етілген хабарландырулардың ағымдағы экранда қысқа уақытқа көрінуін немесе қалқып шығуын болдырмайды"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Экран өшірулі кезде бұғаттау"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"\"Мазаламау\" арқылы үнсіз етілген хабарландырулардың экранды қосуын немесе хабарландыру шамын жыпылықтатуын болдырмайды"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Өшірулі"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Экран қосулы кезде"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Экран өшірулі кезде"</string>
@@ -2686,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Қалыпты"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Бөгелген"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Үнсіз етілген"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> рұқсат берілген</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> рұқсат берілген</item>
@@ -2846,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Басқа қолданбалар үстінен ашылуға рұқсат ету"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Қолданбаны үстінен бейнелеу рұқсаты"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Бұл рұқсат қолданбаны сіз пайдаланып жатқан басқа қолданбалардың үстінен көрсетуге рұқсат етеді және басқа қолданбалардағы интерфейсті пайдалануға кедергі келтіруі немесе басқа қолданбалардың интерфейсін өзгертіп көрсетуі мүмкін."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr виртуалды шындық тыңдаушы стерео көмекші қызмет"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"жүйелік ескерту терезесі, тілқатысу терезелерін басқа қолданбалардың үстінен бейнелеу"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Басқа қолданбалар үстінен ашу"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_1">%d</xliff:g> ішінен <xliff:g id="COUNT_0">%d</xliff:g> қолданбаға басқа қолданбалардың үстінен бейнеленуге рұқсат етілген"</string>
@@ -2894,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"Азырақ көру"</string>
     <string name="disconnected" msgid="5787956818111197212">"Ажыратылған"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Деректердің <xliff:g id="AMOUNT">%1$s</xliff:g> пайдаланылған"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> қолданбаның жіберуі бөгелді"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Барлық қолданбаларға жіберуге рұқсат етілген"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> қолданба орнатылған"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 қолданба орнатылған"</string>

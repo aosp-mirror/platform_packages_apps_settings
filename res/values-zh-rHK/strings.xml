@@ -2538,6 +2538,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"沒有已安裝的應用程式要求通知存取權。"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"授權 <xliff:g id="SERVICE">%1$s</xliff:g> 存取通知 ？"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> 將可讀取所有通知，包括聯絡人姓名和您收到的訊息文字之類的個人資訊，並可關閉這些通知或觸發其中的操作按鈕。"</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"虛擬現實協助服務"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"沒有已安裝的應用程式要求使用虛擬現實協助服務。"</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"允許虛擬現實服務存取 <xliff:g id="SERVICE">%1$s</xliff:g> 嗎？"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"在虛擬現實模式下使用應用程式時，方可使用「<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>」。"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"[請勿騷擾] 存取"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"沒有已安裝的應用程式要求 [請勿騷擾] 存取。"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在載入應用程式…"</string>
@@ -2623,6 +2627,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"防止已透過「請勿騷擾」模式設為靜音的通知在螢幕上出現或彈出"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"螢幕關閉時封鎖"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"防止已透過「請勿騷擾」模式設為靜音的通知開啟螢幕或令通知燈閃爍"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"關閉"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"螢幕開啟時"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"螢幕關閉時"</string>
@@ -2691,8 +2697,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"正常"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"已封鎖"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"不顯示通知"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other">已授予 <xliff:g id="COUNT_1">%d</xliff:g> 項權限</item>
       <item quantity="one">已授予 <xliff:g id="COUNT_0">%d</xliff:g> 項權限</item>
@@ -2851,6 +2863,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"允許覆蓋其他應用程式"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"覆蓋應用程式權限"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"此權限允許應用程式在其他使用中的應用程式上顯示內容，這可能會影響您使用其他應用程式的介面，或變更您預期在其他應用程式看到的內容。"</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"VR 虛擬現實 接聽器 立體聲 協助服務"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"系統提示對話視窗覆蓋其他應用程式"</string>
     <string name="overlay_settings" msgid="222062091489691363">"覆蓋其他應用程式"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> 個應用程式 (共 <xliff:g id="COUNT_1">%d</xliff:g> 個) 可以覆蓋其他應用程式"</string>
@@ -2899,7 +2912,7 @@
     <string name="see_less" msgid="1250265310929558370">"顯示較少"</string>
     <string name="disconnected" msgid="5787956818111197212">"已中斷連線"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"已使用 <xliff:g id="AMOUNT">%1$s</xliff:g> 數據"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> 個應用程式不允許發出通知"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"所有應用程式均允許發出通知"</string>
     <string name="apps_summary" msgid="193158055537070092">"已安裝 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"已安裝 24 個應用程式"</string>

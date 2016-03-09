@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SDカードのマウント解除"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USBストレージ内データの消去"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SDカード内データを消去"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> ページ中 <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> ページ目のプレビュー"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"画面上のテキストのサイズを変更します。"</string>
     <string name="small_font" msgid="2295331917424072635">"小"</string>
     <string name="medium_font" msgid="2068475425515133701">"中"</string>
@@ -445,12 +444,9 @@
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"高レベルのセキュリティ"</string>
     <string name="unlock_set_do_later_title" msgid="4894767558414979243">"後で行う"</string>
     <string name="current_screen_lock" msgid="4104091715420072219">"現在の画面ロック"</string>
-    <!-- no translation found for fingerprint_unlock_set_unlock_pattern (4939057588092120368) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_set_unlock_pin (8010746824051056986) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_set_unlock_password (7351131075806338634) -->
-    <skip />
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"指紋 + パターン"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"指紋 + PIN"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"指紋 + パスワード"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"管理者、暗号化ポリシー、または認証情報により無効"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"なし"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"スワイプ"</string>
@@ -460,8 +456,7 @@
     <string name="unlock_setup_wizard_fingerprint_details" msgid="7893457665921363009">"画面ロックの設定を完了したら、[設定]&gt;[セキュリティ]で指紋を追加することもできます。"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"画面ロックをOFFにする"</string>
     <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"端末保護を削除しますか？"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title_profile (5507136301904313583) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title_profile" msgid="5507136301904313583">"プロファイル保護を削除しますか？"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"パターンがないと、端末保護機能は利用できません。"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"パターンがないと、端末保護機能は利用できません。<xliff:g id="EMPTY_LINE">
 
@@ -478,22 +473,22 @@
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6363091330281670692">"画面ロックがないと、端末保護機能は利用できません。<xliff:g id="EMPTY_LINE">
 
 </xliff:g>保存してある指紋もこの端末から削除されるため、指紋認証を使用してスマートフォンのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_profile (8682200103576359918) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint_profile (3675154828957224316) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_profile (7790688070593867767) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint_profile (4879321153584598940) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_profile (7569285520567674461) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint_profile (3527188316958917839) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_profile (6984215718701688202) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint_profile (1962204059377724158) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_pattern_profile" msgid="8682200103576359918">"パターンがないと、プロファイル保護機能は利用できません。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint_profile" msgid="3675154828957224316">"パターンがないと、プロファイル保護機能は利用できません。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>保存してある指紋もこのプロファイルから削除されるため、指紋を使用してプロファイルのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_profile" msgid="7790688070593867767">"PIN がないと、プロファイル保護機能は利用できません。"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint_profile" msgid="4879321153584598940">"PIN がないと、プロファイル保護機能は利用できません。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>保存してある指紋もこのプロファイルから削除されるため、指紋を使用してプロファイルのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_password_profile" msgid="7569285520567674461">"パスワードがないと、プロファイル保護機能は利用できません。"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint_profile" msgid="3527188316958917839">"パスワードがないと、プロファイル保護機能は利用できません。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>保存してある指紋もこのプロファイルから削除されるため、指紋を使用してプロファイルのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
+    <string name="unlock_disable_frp_warning_content_unknown_profile" msgid="6984215718701688202">"画面ロックがないと、プロファイル保護機能は利用できません。"</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint_profile" msgid="1962204059377724158">"画面ロックがないと、プロファイル保護機能は利用できません。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>保存してある指紋もこのプロファイルから削除されるため、指紋を使用してプロファイルのロック解除、購入の許可、アプリへのログインを行うことはできなくなります。"</string>
     <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"削除する"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"ロック解除パターンの変更"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"ロック解除PINの変更"</string>
@@ -1311,12 +1306,9 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"続行するには端末のパターンを使用してください。"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"続行するには端末のPINを入力してください。"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"続行するには端末のパスワードを入力してください。"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (5395218530319918943) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (4835615379207382790) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (7102131871989498470) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="5395218530319918943">"続行するにはプロファイルのパターンを使用してください。"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="4835615379207382790">"続行するにはプロファイルの PIN を入力してください。"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="7102131871989498470">"続行するにはプロファイルのパスワードを入力してください。"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PINが正しくありません"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"パスワードが正しくありません"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"パターンが正しくありません"</string>
@@ -1549,22 +1541,14 @@
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"設定"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"言語"</string>
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"<xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>の設定を開くことができませんでした"</string>
-    <!-- no translation found for keyboard_and_input_methods_category (212319666432360385) -->
-    <skip />
-    <!-- no translation found for virtual_keyboard_category (1012830752318677119) -->
-    <skip />
-    <!-- no translation found for physical_keyboard_category (7946003168662969622) -->
-    <skip />
-    <!-- no translation found for available_virtual_keyboard_category (7645766574969139819) -->
-    <skip />
-    <!-- no translation found for add_virtual_keyboard (2867069766124874859) -->
-    <skip />
-    <!-- no translation found for keyboard_assistance_category (5843634175231134014) -->
-    <skip />
-    <!-- no translation found for show_ime (2658582193437188227) -->
-    <skip />
-    <!-- no translation found for show_ime_summary (8164993045923240698) -->
-    <skip />
+    <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"キーボードと入力方法"</string>
+    <string name="virtual_keyboard_category" msgid="1012830752318677119">"仮想キーボード"</string>
+    <string name="physical_keyboard_category" msgid="7946003168662969622">"物理キーボード"</string>
+    <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"利用可能な仮想キーボード"</string>
+    <string name="add_virtual_keyboard" msgid="2867069766124874859">"仮想キーボードを追加"</string>
+    <string name="keyboard_assistance_category" msgid="5843634175231134014">"キーボード アシスタント"</string>
+    <string name="show_ime" msgid="2658582193437188227">"仮想キーボードの表示"</string>
+    <string name="show_ime_summary" msgid="8164993045923240698">"物理キーボードが有効になっていても画面に表示されます"</string>
     <string name="physical_device_title" msgid="79889057252418427">"<xliff:g id="INPUT_METHOD_SUBTYPE">%1$s</xliff:g> - <xliff:g id="INPUT_METHOD_EDITOR">%2$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"マウス/トラックパッド"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"ポインタの速度"</string>
@@ -2148,10 +2132,8 @@
     <string name="data_usage_forground_label" msgid="7654319010655983591">"フォアグラウンド:"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"バックグラウンド:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"アプリの設定"</string>
-    <!-- no translation found for data_usage_app_restrict_background (7359227831562303223) -->
-    <skip />
-    <!-- no translation found for data_usage_app_restrict_background_summary (4669789008211107454) -->
-    <skip />
+    <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"バックグラウンド データ"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="4669789008211107454">"バックグラウンドでのモバイルデータの使用を有効にする"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"このアプリのバックグラウンドデータを制限するには、先にモバイルデータの上限を設定します。"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"バックグラウンドデータを制限しますか？"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"この機能をONにすると、モバイルネットワークしか使用できない場合にバックグラウンドデータに依存するアプリが停止する可能性があります。\n\nデータ使用をより適切に管理できるオプションがアプリの設定画面にないかどうかを確認してください。"</string>
@@ -2555,6 +2537,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"通知へのアクセスをリクエストしたインストール済みアプリはありません。"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g>での通知へのアクセスを許可しますか？"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>はすべての通知を読み取ることができます。通知には、連絡先名などの個人情報やユーザーに送信されたメッセージの本文も含まれます。また、通知を非表示にしたり、通知内の操作ボタンをトリガーしたりすることもできます。"</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR ヘルパー サービス"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"VR ヘルパー サービスとして実行されるようにリクエストしたインストール済みアプリはありません。"</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"VR サービスから <xliff:g id="SERVICE">%1$s</xliff:g> へのアクセスの許可"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> は、アプリをバーチャル リアリティ モードで使用している場合に実行できるようになります。"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"[通知を非表示]へのアクセス"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"[通知を非表示]へのアクセスをリクエストしたインストール済みアプリはありません"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"アプリを読み込んでいます..."</string>
@@ -2640,6 +2626,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"[通知を非表示] でサイレントに設定した通知を受信したときに、画面上にポップアップ表示されなくなります"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"画面が OFF のときにブロックする"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"[通知を非表示] でサイレントに設定した通知を受信したときに、画面が ON になったり光が点滅したりしなくなります"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"OFF"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"画面が ON のとき"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"画面が OFF のとき"</string>
@@ -2708,8 +2696,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"標準"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"ブロック済み"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"マナーモード"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>件の権限を付与</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>件の権限を付与</item>
@@ -2803,18 +2797,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI調整ツールを表示"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"その他の権限"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"他<xliff:g id="COUNT">%1$d</xliff:g>件"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"バグレポートを共有しますか？"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"IT 管理者からこの端末のトラブルシューティングに役立てるためバグレポートを共有するようリクエストがありました。アプリやデータが共有されることがあります。"</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"IT 管理者からこの端末のトラブルシューティングに役立てるためバグレポートを共有するようリクエストがありました。アプリやデータが共有され、端末の動作が一時的に遅くなる場合があります。"</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"このバグレポートを IT 管理者と共有しています。詳しくは、IT 管理者にお問い合わせください。"</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"共有する"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"共有しない"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"充電"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"この端末の充電のみを行う"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"電源"</string>
@@ -2874,6 +2862,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"他のアプリの上に重ねて描画することを許可"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"アプリが上に重ねて描画する権限"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"この権限により、アプリは使用中の他のアプリの上に重ねて表示できるようになります。これにより、他のアプリのインターフェースを使用する際に邪魔になったり、他のアプリに表示されていると思われるものが変更されたりする場合があります。"</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr バーチャル リアリティ リスナー ステレオ ヘルパー サービス"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"システムの警告ウィンドウ ダイアログ 上に重ねて描画 他のアプリ"</string>
     <string name="overlay_settings" msgid="222062091489691363">"他のアプリの上に重ねて描画"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"他のアプリの上に重ねて表示できるアプリ: <xliff:g id="COUNT_1">%d</xliff:g>個中<xliff:g id="COUNT_0">%d</xliff:g>個"</string>
@@ -2922,7 +2911,7 @@
     <string name="see_less" msgid="1250265310929558370">"一部を表示"</string>
     <string name="disconnected" msgid="5787956818111197212">"切断されています"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"データの <xliff:g id="AMOUNT">%1$s</xliff:g> を使用しています"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> 個のアプリが送信をブロックされています"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"すべてのアプリが送信を許可されています"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> 個のアプリがインストールされています"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 個のインストール済みアプリ"</string>
@@ -2953,8 +2942,7 @@
     <string name="condition_battery_summary" msgid="4418839236027977450">"パフォーマンスが制限されています。位置情報サービスとバックグラウンド データは OFF です。"</string>
     <string name="condition_cellular_title" msgid="2398754272044917264">"モバイルデータ OFF"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"インターネットは Wi-Fi 接続時のみ利用できます"</string>
-    <!-- no translation found for condition_bg_data_title (2483860304802846542) -->
-    <skip />
+    <string name="condition_bg_data_title" msgid="2483860304802846542">"データセーバー ON"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"バックグラウンド  データは Wi-Fi 接続時のみ利用できます。Wi-Fi に接続できない場合、一部のアプリやサービスに影響する可能性があります。"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"仕事用プロファイルが OFF"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"仕事用プロファイルに関連するアプリ、バックグラウンド同期などの機能が OFF になっています。"</string>
@@ -2986,19 +2974,16 @@
     <string name="data_limit" msgid="1885406964934590552">"データ上限"</string>
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> 使用（<xliff:g id="ID_2">%2$s</xliff:g>）"</string>
     <string name="configure" msgid="1029654422228677273">"設定"</string>
-    <!-- no translation found for data_saver_unrestricted_summary (2635267833484232703) -->
-    <!-- no translation found for data_saver_title (8034286939200289826) -->
-    <skip />
-    <!-- no translation found for unrestricted_data_saver (7019858887510062789) -->
-    <skip />
-    <!-- no translation found for data_saver_on (6774217590237934709) -->
-    <skip />
-    <!-- no translation found for data_saver_off (6892309031162738794) -->
-    <skip />
-    <!-- no translation found for unrestricted_app_title (4465437191723332066) -->
-    <skip />
-    <!-- no translation found for unrestricted_app_summary (6458008993501723912) -->
-    <skip />
+    <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
+      <item quantity="other">データセーバーが ON のときのデータ無制限使用を <xliff:g id="COUNT">%1$d</xliff:g> 個のアプリに許可しました</item>
+      <item quantity="one">データセーバーが ON のときのデータ無制限使用を 1 個のアプリに許可しました</item>
+    </plurals>
+    <string name="data_saver_title" msgid="8034286939200289826">"データセーバー"</string>
+    <string name="unrestricted_data_saver" msgid="7019858887510062789">"データへの無制限アクセス"</string>
+    <string name="data_saver_on" msgid="6774217590237934709">"ON"</string>
+    <string name="data_saver_off" msgid="6892309031162738794">"OFF"</string>
+    <string name="unrestricted_app_title" msgid="4465437191723332066">"データの無制限使用"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"データセーバーが ON のときのデータ無制限アクセスを許可"</string>
     <string name="home_app" msgid="4066188520886810030">"ホームアプリ"</string>
     <string name="no_default_home" msgid="7184117487704520238">"デフォルトのホームがありません"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"安全な起動"</string>

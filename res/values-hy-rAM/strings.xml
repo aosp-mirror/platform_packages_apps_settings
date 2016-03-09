@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Անջատել SD քարտը"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Ջնջել USB կրիչը"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Ջնջել SD քարտը"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Դիտման էկրան <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>՝ <xliff:g id="NUM_PAGES">%2$d</xliff:g>-ից"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Խոշորացնել կամ մանրացնել էկրանի տեքստը:"</string>
     <string name="small_font" msgid="2295331917424072635">"Փոքր"</string>
     <string name="medium_font" msgid="2068475425515133701">"Միջին"</string>
@@ -2534,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Տեղադրված հավելվածներից ոչ մեկը հարցում չի ուղարկել"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Թո՞ւյլ տալ ծանուցմանը օգտվել <xliff:g id="SERVICE">%1$s</xliff:g>-ից:"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>-ը կկարողանա կարդալ բոլոր ծանուցումները, այդ թվում նաև՝ կոնտակտների անունները, ձեր ստացած հաղորդագրությունները և այլ անձնական տեղեկություններ: Այն կարող է նաև բաց թողնել ծանուցումները կամ սեղմել նրանցում առկա գործողության կոճակը:"</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR օգնության ծառայություններ"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Տեղադրված հավելվածներից ոչ մեկը որպես VR օգնության ծառայություն գործարկվելու հարցում չի ուղարկել:"</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Թույլ տա՞լ VR ծառայությանն օգտագործել <xliff:g id="SERVICE">%1$s</xliff:g> ծառայությունը:"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>-ը կկարողանա գործարկվել, եթե դուք հավելվածներն օգտագործում եք վիրտուալ իրականության ռեժիմում:"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Հասանելիությունը՝ «չանհանգստացնել»"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Տեղադրված հավելվածներից ոչ մեկը Չանհանգստացնել հարցում չի ուղարկել"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Ծրագրերը բեռնվում են..."</string>
@@ -2619,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"«Չընդհատել» գործառույթի կողմից լռեցված ծանուցումներին արգելել հայտնվել էկրանի վրա՝ նույնիսկ թռուցիկ"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Արգելափակել երբ էկրանն անջատված է"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"«Չընդհատել» գործառույթի կողմից լռեցված ծանուցումներին արգելել միացնել էկրանը կամ գործարկել ծանուցման լույսի թարթումը"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Անջատված է"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Երբ էկրանը միացված է"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Երբ էկրանն անջատված է"</string>
@@ -2687,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Սովորական"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Արգելափակված է"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Լռեցված"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one">Տրամադրվել է <xliff:g id="COUNT_1">%d</xliff:g> թույլտվություն</item>
       <item quantity="other">Տրամադրվել է <xliff:g id="COUNT_1">%d</xliff:g> թույլտվություն</item>
@@ -2782,18 +2793,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Ցուցադրել Համակարգի ՕՄ-ի ընդունիչը"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Լրացուցիչ թույլտվություններ"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Եվս <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Տրամադրե՞լ վրիպակի զեկույցը:"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Այս սարքի անսարքությունների վերացման նպատակով ձեր ՏՏ ադմինիստրատորին անհրաժեշտ է վրիպակի զեկույց: Կարող են տրամադրվել տեղեկություններ ձեր հավելվածների մասին և այլ տվյալներ:"</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Այս սարքի անսարքությունների վերացման նպատակով ձեր ՏՏ ադմինիստրատորին անհրաժեշտ է վրիպակի զեկույց: Կարող են տրամադրվել տեղեկություններ ձեր հավելվածների մասին և այլ տվյալներ, իսկ սարքի աշխատանքը կարող է ժամանակավորապես դանդաղել:"</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Այս վրիպակի զեկույցը տրամադրվում է ձեր ՏՏ ադմինիստրատորին: Կապվեք նրա հետ՝ լրացուցիչ տեղեկություններ ստանալու համար:"</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Տրամադրել"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Մերժել"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Լիցքավորում"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Պարզապես այս սարքի լիցքավորում"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Հոսանքի սնուցում"</string>
@@ -2853,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Թույլ տալ անցնել այլ հավելվածների վրայով"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"«Հավելվածը՝ վերևում» թույլտվություն"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Միացնելով այս թույլտվությունը՝ ձեր նախընտրած հավելվածը ցուցադրվում է ձեր օգտագործած հավելվածների ցանկի առաջին գծում: Այն կարող է փոխել այլ հավելվածների միջերեսը կամ այն կարգավորումները, որոնք նշել եք այլ հավելվածների ցուցադրման համար:"</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr վիրտուալ իրականություն ունկնդրիչ ստերեո օգնության ծառայություն"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"համակարգի ծանուցումների երկխոսության պատուհանը՝ այլ հավելվածների վերևում"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Անցնել այլ հավելվածների վրայով"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_1">%d</xliff:g>-ից <xliff:g id="COUNT_0">%d</xliff:g> հավելված կարող է լինել այլ հավելվածների վերևում"</string>
@@ -2901,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"Տեսնել ավելի քիչ"</string>
     <string name="disconnected" msgid="5787956818111197212">"Անջատված է"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Օգտագործած տվյալներ՝ <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"Ուղարկումն արգելափակվել է <xliff:g id="COUNT">%1$d</xliff:g> հավելվածի համար"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Ուղարկումը թույլատրվել է բոլոր հավելվածներին"</string>
     <string name="apps_summary" msgid="193158055537070092">"Տեղադրված հավելվածներ՝ <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Տեղադրվել է 24 հավելված"</string>

@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD கார்டை அகற்று"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB சேமிப்பிடத்தை அழி"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD கார்டை அழி"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"மாதிரிக்காட்சித் திரை <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> / <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"திரையில் காட்டப்படும் உரையைச் சிறிதாக்கும் அல்லது பெரிதாக்கும்."</string>
     <string name="small_font" msgid="2295331917424072635">"சிறிய"</string>
     <string name="medium_font" msgid="2068475425515133701">"நடுத்தரம்"</string>
@@ -2534,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"அறிவிப்பு அணுகலைக் கோரும் பயன்பாடுகள் எதுவும் நிறுவப்படவில்லை."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g>க்கான அறிவிப்பு அணுகலை அனுமதிக்கவா?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"தொடர்புப் பெயர்கள், நீங்கள் பெறும் உரைச் செய்திகள் போன்ற தனிப்பட்ட தகவல் உள்ளிட்ட எல்லா அறிவிப்புகளையும் <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ஆல் படிக்க முடியும். அதனால் அறிவிப்புகளை நிராகரிக்கவும் அல்லது அவற்றில் இருக்கும் செயல் பொத்தான்களைத் தூண்டவும் முடியும்."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR உதவிச் சேவைகள்"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"VR உதவிச் சேவைகளாக இயங்குவதற்காகக் கோரிய பயன்பாடுகள் எதுவும் நிறுவப்படவில்லை."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"<xliff:g id="SERVICE">%1$s</xliff:g>ஐ அணுக VR சேவையை அனுமதிக்கவா?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"விர்ச்சுவல் ரியாலிட்டி பயன்முறையில் பயன்பாடுகளைப் பயன்படுத்தும்போது, <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> இயங்க முடியும்."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"தொந்தரவு செய்ய வேண்டாம் என்பதன் அணுகல்"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"தொந்தரவு செய்ய வேண்டாம் என்பதன் அணுகலை நிறுவப்பட்ட பயன்பாடுகள் எதுவும் கோரவில்லை"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"பயன்பாடுகளை ஏற்றுகிறது..."</string>
@@ -2619,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"தொந்தரவு செய்ய வேண்டாம் என்பதன் மூலம் நிசப்தமாக்கப்பட்ட அறிவிப்புகள், திரையில் குறுக்கிடுவதை அல்லது தோன்றுவதைத் தடு"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"திரை முடக்கப்பட்டிருக்கும் போது தடு"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"தொந்தரவு செய்ய வேண்டாம் என்பதன் மூலம் நிசப்தமாக்கப்பட்ட அறிவிப்புகள் வரும் போது, திரையை இயக்குவதை அல்லது அறிவிப்பு ஒளி ஒளிர்வதைத் தடு"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"முடக்கத்தில்"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"திரை இயக்கப்பட்டிருக்கும் போது"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"திரை முடக்கப்பட்டிருக்கும் போது"</string>
@@ -2687,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"இயல்பு"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"தடுக்கப்பட்டுள்ளன"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"தடுக்கப்பட்டுள்ளன"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> அனுமதிகள் வழங்கப்பட்டன</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> அனுமதி வழங்கப்பட்டது</item>
@@ -2782,18 +2793,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI ட்யூனரைக் காட்டு"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"கூடுதல் அனுமதிகள்"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"மேலும் <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"பிழை அறிக்கையைப் பகிரவா?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"இந்தச் சாதனத்தின் பிழைகாண்பதற்கு உதவ, உங்கள் ஐடி நிர்வாகி பிழை அறிக்கையைக் கோரியுள்ளார். பயன்பாடுகளும் தரவும் பகிரப்படலாம்."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"இந்தச் சாதனத்தின் பிழைகாண்பதற்கு உதவ, உங்கள் ஐடி நிர்வாகி பிழை அறிக்கையைக் கோரியுள்ளார். பயன்பாடுகளும் தரவும் பகிரப்படலாம், மேலும் சாதனத்தின் வேகம் தற்காலிகமாகக் குறையலாம்."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"இந்தப் பிழை அறிக்கை உங்கள் ஐடி நிர்வாகியுடன் பகிரப்படுகிறது. மேலும் விவரங்களுக்கு அவரைத் தொடர்புகொள்ளவும்."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"பகிர்"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"வேண்டாம்"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"சார்ஜ் செய்தல்"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"இந்தச் சாதனத்தைச் சார்ஜ் செய்யும்"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"பவர் சப்ளை"</string>
@@ -2853,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"பிற பயன்பாடுகளின் மேலே செயல்பட அனுமதி"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"பயன்பாடு மேலே செயல்படுவதற்கான அனுமதி"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"இந்த அனுமதியானது நீங்கள் பயன்படுத்தும் பிற பயன்பாடுகளின் மேலே காட்ட, பயன்பாட்டை அனுமதிக்கிறது மற்றும் இது பிற பயன்பாடுகளில் இடைமுகம் தொடர்பான உங்கள் உபயோகத்தில் குறுக்கிடலாம் அல்லது பிற பயன்பாடுகளில் நீங்கள் எதைப் பார்க்க வேண்டும் என்பதை மாற்றலாம்."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr விர்ச்சுவல் ரியாலிட்டி லிஷனர் ஸ்டீரியோ உதவிச் சேவை"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"முறைமை விழிப்பூட்டல் சாளரச் செய்தி பிற பயன்பாடுகளின் மேலே செயல்படுதல்"</string>
     <string name="overlay_settings" msgid="222062091489691363">"பிற பயன்பாடுகளின் இடைமுகத்தின் மேல் செயல்படுதல்"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"பிற பயன்பாடுகளின் மேல் பகுதியில் செயல்படுவதற்கு, <xliff:g id="COUNT_1">%d</xliff:g> இல் <xliff:g id="COUNT_0">%d</xliff:g> பயன்பாடுகள் அனுமதிக்கப்பட்டுள்ளன"</string>
@@ -2901,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"குறைவாகக் காட்டு"</string>
     <string name="disconnected" msgid="5787956818111197212">"துண்டிக்கப்பட்டது"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> தரவு பயன்படுத்தப்பட்டுள்ளது"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"அறிவிப்புகளை அனுப்புவதிலிருந்து <xliff:g id="COUNT">%1$d</xliff:g> பயன்பாடுகள் தடுக்கப்பட்டன"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"அறிவிப்புகளை அனுப்புவதற்கு எல்லா பயன்பாடுகளும் அனுமதிக்கப்பட்டன"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> பயன்பாடுகள் நிறுவப்பட்டுள்ளன"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 பயன்பாடுகள் நிறுவப்பட்டன"</string>

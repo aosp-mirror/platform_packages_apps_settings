@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"ยกเลิกการต่อเชื่อมการ์ด SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"ลบที่เก็บข้อมูล USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"ลบการ์ด SD"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"หน้าจอตัวอย่าง <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> จาก <xliff:g id="NUM_PAGES">%2$d</xliff:g> หน้า"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"ทำให้ข้อความบนหน้าจอมีขนาดเล็กลงหรือใหญ่ขึ้น"</string>
     <string name="small_font" msgid="2295331917424072635">"ขนาดเล็ก"</string>
     <string name="medium_font" msgid="2068475425515133701">"ปานกลาง"</string>
@@ -2534,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"ไม่มีแอปใดที่ติดตั้งไว้ขอเข้าถึงการแจ้งเตือน"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงการแจ้งเตือนไหม"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> จะสามารถอ่านการแจ้งเตือนทั้งหมด รวมถึงข้อมูลส่วนบุคคล เช่น ชื่อผู้ติดต่อและข้อความที่คุณได้รับ โดยจะสามารถปิดการแจ้งเตือนหรือทริกเกอร์ปุ่มการทำงานที่มีในการแจ้งเตือนด้วย"</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"บริการตัวช่วยความเป็นจริงเสมือน"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"แอปที่ติดตั้งอยู่ไม่ได้ขอให้เรียกใช้เป็นบริการตัวช่วยความเป็นจริงเสมือน"</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงบริการความเป็นจริงเสมือนไหม"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> จะเรียกใช้ได้เมื่อคุณกำลังใช้แอปพลิเคชันในโหมดความเป็นจริงเสมือน"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"การเข้าถึง \"ห้ามรบกวน\""</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"ไม่มีแอปที่ติดตั้งใดๆ ส่งคำขอสิทธิ์เข้าถึง \"ห้ามรบกวน\""</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"กำลังโหลดแอป..."</string>
@@ -2619,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"ป้องกันไม่ให้การแจ้งเตือนที่ปิดไว้โดย \"ห้ามรบกวน\" แจ้งหรือแสดงบนหน้าจอ"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"บล็อกเมื่อหน้าจอปิดอยู่"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"ป้องกันไม่ให้การแจ้งเตือนที่ปิดไว้โดย \"ห้ามรบกวน\" เปิดหน้าจอหรือกะพริบไฟแจ้งเตือน"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"ปิด"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"เมื่อหน้าจอเปิดอยู่"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"เมื่อหน้าจอปิดอยู่"</string>
@@ -2687,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"ปกติ"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"ถูกบล็อก"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"ปิดเสียงเตือน"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other">มอบสิทธิ์ <xliff:g id="COUNT_1">%d</xliff:g> รายการ</item>
       <item quantity="one">มอบสิทธิ์ <xliff:g id="COUNT_0">%d</xliff:g> รายการ</item>
@@ -2782,18 +2793,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"แสดงตัวรับสัญญาณ SystemUI"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"สิทธิ์เพิ่มเติม"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"และอีก <xliff:g id="COUNT">%1$d</xliff:g> สิทธิ์"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"แชร์รายงานข้อบกพร่องไหม"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"ผู้ดูแลระบบไอทีของคุณขอรายงานข้อบกพร่องเพื่อช่วยในการแก้ปัญหาอุปกรณ์นี้ อาจมีการแชร์แอปและข้อมูล"</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"ผู้ดูแลระบบไอทีของคุณขอรายงานข้อบกพร่องเพื่อช่วยในการแก้ปัญหาอุปกรณ์นี้ อาจมีการแชร์แอปและข้อมูล ซึ่งอาจทำให้อุปกรณ์ทำงานช้าลงชั่วคราว"</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"รายงานข้อบกพร่องนี้จะแชร์กับผู้ดูแลระบบไอทีของคุณ โปรดขอรายละเอียดเพิ่มเติมจากเขา"</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"แชร์"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"ปฏิเสธ"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"การชาร์จ"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"เพียงแค่ชาร์จอุปกรณ์นี้"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"แหล่งจ่ายไฟ"</string>
@@ -2853,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"อนุญาตให้วาดทับแอปอื่นๆ"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"วาดแอปด้วยสิทธิ์ระดับสูงสุด"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"สิทธิ์นี้อนุญาตให้แอปแสดงทับแอปอื่นๆ ที่คุณกำลังใช้อยู่ ซึ่งอาจรบกวนการใช้อินเทอร์เฟซบนแอปพลิเคชันอื่นๆ ของคุณหรือทำให้คุณเข้าใจสิ่งที่คุณเห็นผิดไป"</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"ความเป็นจริงเสมือน Listener ความเป็นจริงเสมือน บริการตัวช่วยสเตอริโอ"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"วาดหน้าต่างแจ้งเตือนของระบบทับแอปอื่นๆ"</string>
     <string name="overlay_settings" msgid="222062091489691363">"วาดทับแอปอื่นๆ"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"อนุญาตแอป <xliff:g id="COUNT_0">%d</xliff:g> จาก <xliff:g id="COUNT_1">%d</xliff:g> แอปให้วาดทับแอปอื่นๆ"</string>
@@ -2901,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"ดูน้อยลง"</string>
     <string name="disconnected" msgid="5787956818111197212">"ยกเลิกการเชื่อมต่อแล้ว"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"ใช้อินเทอร์เน็ตไป <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> แอปถูกบล็อกไม่ให้ส่ง"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"อนุญาตให้ทุกแอปส่ง"</string>
     <string name="apps_summary" msgid="193158055537070092">"ติดตั้งแล้ว <xliff:g id="COUNT">%1$d</xliff:g> แอป"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"ติดตั้งแล้ว 24 แอป"</string>

@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Ontkoppel SD-kaart"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Vee USB-berging uit"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Vee SD-kaart uit"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Voorskouskerm <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> van <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Maak die teks op skerm kleiner of groter."</string>
     <string name="small_font" msgid="2295331917424072635">"Klein"</string>
     <string name="medium_font" msgid="2068475425515133701">"Medium"</string>
@@ -2534,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Geen geïnstalleerde programme het kennisgewingtoegang versoek nie."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Laat kennisgewingtoegang vir <xliff:g id="SERVICE">%1$s</xliff:g> toe?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> sal alle kennisgewings, insluitend persoonlike inligting soos kontakname en die teks van boodskappe wat jy ontvang, kan lees. Dit sal ook kennisgewings kan verwerp of handelingknoppies wat hulle bevat, kan gebruik."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR-helperdienste"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Geen geïnstalleerde programme het versoek om as VR-helperdienste te werk nie."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Gee <xliff:g id="SERVICE">%1$s</xliff:g> toegang tot VR-diens?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> sal kan werk wanneer jy programme in virtuelerealiteit-modus gebruik."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Toegang tot Moenie steur nie"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Geen geïnstalleerde programme het toegang tot Moenie steur nie versoek nie"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Laai tans programme …"</string>
@@ -2619,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Verhoed dat kennisgewings wat stilgemaak is deur Moenie steur nie, op die skerm opspring of verskyn"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Blokkeer wanneer skerm af is"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Verhoed dat kennisgewings wat stilgemaak is deur Moenie steur nie, die skerm laat aanskakel of die kennisgewinglig laat flikker"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Af"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Wanneer skerm aan is"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Wanneer skerm af is"</string>
@@ -2687,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Normaal"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Geblokkeer"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Stilgemaak"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> toestemmings verleen</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> toestemming verleen</item>
@@ -2782,18 +2793,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Wys stelsel-UI-ontvanger"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Bykomende toestemmings"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"nog <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Deel foutverslag?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Jou IT-administrateur het \'n foutverslag versoek om met die foutsporing van hierdie toestel te help. Programme en data sal dalk gedeel word."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Jou IT-administrateur het \'n foutverslag versoek om met die foutsporing van hierdie toestel te help. Programme en data sal dalk gedeel word en jou toestel sal dalk tydelik stadiger wees."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Hierdie foutverslag word tans met jou IT-administrateur gedeel. Kontak jou IT-administrateur vir meer besonderhede."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Deel"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Weier"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Laai tans"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Laai net hierdie toestel"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Kragbron"</string>
@@ -2853,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Laat toe dat oor ander programme geteken word"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Program teken bo-op-toestemming"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Hierdie toestemming laat \'n program toe om te vertoon bo-op ander programme wat jy gebruik, en sal dalk met jou gebruik van die koppelvlak in ander programme inmeng, of verander wat jy dink jy in ander programme sien."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtuele realiteit luisteraar stereo helper diens"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"stelselwaarskuwingvenster-dialoog teken bo-op ander programme"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Teken oor ander programme"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> van <xliff:g id="COUNT_1">%d</xliff:g> programme toegelaat om bo-op ander programme te teken"</string>
@@ -2901,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"Sien minder"</string>
     <string name="disconnected" msgid="5787956818111197212">"Ontkoppel"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> van die data is gebruik"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> programme mag nie stuur nie"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Alle programme mag stuur"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> programme is geïnstalleer"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 programme is geïnstalleer"</string>

@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"I-unmount ang SD card"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Burahin imbakan na USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Burahin ang SD card"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Screen ng preview <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> ng <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Gawing mas maliit o mas malaki ang text sa screen."</string>
     <string name="small_font" msgid="2295331917424072635">"Maliit"</string>
     <string name="medium_font" msgid="2068475425515133701">"Katamtaman"</string>
@@ -2534,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Walang mga naka-install na app ang humiling ng access sa notification."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Payagan ang pag-access sa notification para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"Mababasa ng <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ang lahat ng notification, kasama na ang personal na impormasyon gaya ng mga pangalan ng contact at ang text ng mga mensaheng natatanggap mo. Madi-dismiss din nito ang mga notification o mati-trigger ang mga button ng pagkilos na taglay ng mga ito."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Mga serbisyong pantulong sa VR"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Walang mga naka-install na app ang humiling na mapagana bilang mga serbisyong pantulong sa VR."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Payagan ang access sa serbisyo ng VR para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"Gagana ang <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> kapag gumagamit ka ng mga application sa virtual reality mode."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Access na Huwag Istorbohin"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Walang mga naka-install na app ang humiling ng access na Huwag Istorbohin"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Naglo-load ng mga app..."</string>
@@ -2619,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Pigilang lumabas sa screen ang mga notification na hinaharangan ng Huwag Istorbohin"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"I-block kapag naka-off ang screen"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Pigilan ang mga notification na hinaharangan ng Huwag Istorbohin na i-on ang screen o ipatay-sindi ang ilaw ng notification"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Naka-off"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Kapag naka-on ang screen"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Kapag naka-off ang screen"</string>
@@ -2687,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Normal"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Naka-block"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Pinatahimik"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> pahintulot ang ibinigay</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> na pahintulot ang ibinigay</item>
@@ -2782,18 +2793,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Ipakita ang SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Mga karagdagang pahintulot"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> pa"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Gusto mo bang ibahagi ang ulat ng bug?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Humiling ang iyong IT admin ng isang ulat ng bug upang makatulong sa pag-troubleshoot sa device na ito. Maaaring ibahagi ang mga app at data."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Humiling ang iyong IT admin ng isang ulat ng bug upang makatulong sa pag-troubleshoot sa device na ito. Maaaring ibahagi ang mga app at data, at maaaring pansamantalang bumagal ang iyong device."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Ibinabahagi ang ulat ng bug na ito sa iyong IT admin. Makipag-ugnayan sa kanila para sa higit pang mga detalye."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Ibahagi"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Tanggihan"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Nagcha-charge"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"I-charge lang ang device na ito"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Power supply"</string>
@@ -2853,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Pahintulutan paglabas sa ibabaw ng ibang app"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Pahintulot na lumabas sa ibabaw ang app"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Papayagan ng pahintulot na ito ang isang app na lumabas sa ibabaw ng iba pang mga app na iyong ginagamit at maaari itong makagambala sa paggamit mo sa interface sa iba pang mga application, o maaari nitong baguhin ang sa tingin mo ay nakikita mo sa iba pang mga application."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtual reality listener stereo pantulong serbisyo"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"lalabas sa ibabaw ng iba pang mga app ang dialog ng window ng alerto ng system"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Lumabas sa ibabaw ng ibang app"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> sa <xliff:g id="COUNT_1">%d</xliff:g> app ang pinapayagang lumabas sa ibabaw ng ibang mga app"</string>
@@ -2901,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"Tumingin nang kaunti"</string>
     <string name="disconnected" msgid="5787956818111197212">"Naputol ang Koneksyon"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> ng data ang ginamit"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> (na) app ang na-block mula sa pagpapadala"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Pinapayagan ang lahat ng app na magpadala"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> (na) app ang naka-install"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 na naka-install na app"</string>

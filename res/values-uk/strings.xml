@@ -2569,6 +2569,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Установлені додатки не просять доступу до сповіщень."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ для сповіщень?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"Додаток <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе переглядати всі сповіщення, зокрема особисту інформацію, як-от імена контактів і тексти отриманих повідомлень. Він також зможе закривати сповіщення або виконувати дії в них."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Допоміжні служби віртуальної реальності"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Установлені додатки не запитують запуск у режимі допоміжних служб віртуальної реальності."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Надати службі віртуальної реальності доступ до <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> запускатиметься, коли ви вмикатимете в додатках в режим віртуальної реальності"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Доступ у режимі \"Не турбувати\""</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Установлені додатки не просили доступу в режимі \"Не турбувати\""</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Завантаження додатків…"</string>
@@ -2658,6 +2662,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Не виводити на екран сповіщення, для яких вибрано режим \"Не турбувати\""</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Блокувати, коли екран вимкнено"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Заборонити сповіщенням, для яких вибрано режим \"Не турбувати\", вмикати екран і світловий індикатор"</string>
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Заборонити вмикати екран сповіщенням, для яких вибрано режим \"Не турбувати\""</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Вимкнено"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Коли екран увімкнено"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Коли екран вимкнено"</string>
@@ -2726,8 +2731,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Звичайні"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Заблоковано"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Сповіщення вимкнено"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <string name="notifications_redacted" msgid="4493588975742803160">"Немає конфіденційного вмісту на заблокованому екрані"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"Немає на заблокованому екрані"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"Режим \"Не турбувати\" замінено"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one">Надано <xliff:g id="COUNT_1">%d</xliff:g> дозвіл</item>
       <item quantity="few">Надано <xliff:g id="COUNT_1">%d</xliff:g> дозволи</item>
@@ -2898,6 +2905,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Дозволити відображати поверх додатків"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Дозвіл відображати поверх інших додатків"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Додаток із цим дозволом може відображатися поверх інших активних додатків, заважаючи користуватися їх інтерфейсом і переглядати в них вміст."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"обробник віртуальна реальність стерео допоміжна служба"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"відображати діалогове вікно сповіщень системи поверх інших додатків"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Відображати поверх додатків"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"Додатки, які можуть відображатися поверх інших додатків: <xliff:g id="COUNT_0">%d</xliff:g> з <xliff:g id="COUNT_1">%d</xliff:g>"</string>
@@ -2946,7 +2954,12 @@
     <string name="see_less" msgid="1250265310929558370">"Показати менше"</string>
     <string name="disconnected" msgid="5787956818111197212">"Від’єднано"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Використовується трафіку: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"Додатків, яким заборонено надсилати сповіщення: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> додатку заборонено надсилати сповіщення</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> додаткам заборонено надсилати сповіщення</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> додаткам заборонено надсилати сповіщення</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> додатка заборонено надсилати сповіщення</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"Усім додаткам дозволено надсилати сповіщення"</string>
     <string name="apps_summary" msgid="193158055537070092">"Установлено додатків: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Установлено 24 додатки"</string>
