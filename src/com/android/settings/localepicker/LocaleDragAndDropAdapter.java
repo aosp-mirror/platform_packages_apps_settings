@@ -153,7 +153,7 @@ class LocaleDragAndDropAdapter
         dragCell.setMiniLabel(mNumberFormatter.format(i + 1));
         dragCell.setShowCheckbox(mRemoveMode);
         dragCell.setShowMiniLabel(!mRemoveMode);
-        dragCell.setShowHandle(!mRemoveMode);
+        dragCell.setShowHandle(!mRemoveMode && mDragEnabled);
         dragCell.setChecked(false);
         dragCell.setTag(feedItem);
         dragCell.getCheckbox()
