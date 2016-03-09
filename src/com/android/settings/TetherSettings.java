@@ -16,10 +16,6 @@
 
 package com.android.settings;
 
-import static android.net.ConnectivityManager.TETHERING_BLUETOOTH;
-import static android.net.ConnectivityManager.TETHERING_USB;
-import static android.net.ConnectivityManager.TETHERING_WIFI;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
@@ -43,7 +39,6 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
-
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.wifi.WifiApDialog;
 import com.android.settings.wifi.WifiApEnabler;
@@ -52,6 +47,10 @@ import com.android.settingslib.TetherUtil;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static android.net.ConnectivityManager.TETHERING_BLUETOOTH;
+import static android.net.ConnectivityManager.TETHERING_USB;
+import static android.net.ConnectivityManager.TETHERING_WIFI;
 
 /*
  * Displays preferences for Tethering.
@@ -147,6 +146,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         mBluetoothTether = (SwitchPreference) findPreference(ENABLE_BLUETOOTH_TETHERING);
 
         mCm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         mUsbRegexs = mCm.getTetherableUsbRegexs();
         mWifiRegexs = mCm.getTetherableWifiRegexs();
@@ -182,7 +182,6 @@ public class TetherSettings extends RestrictedSettingsFragment
 
     private void initWifiTethering() {
         final Activity activity = getActivity();
-        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         mWifiConfig = mWifiManager.getWifiApConfiguration();
         mSecurityType = getResources().getStringArray(R.array.wifi_ap_security);
 
