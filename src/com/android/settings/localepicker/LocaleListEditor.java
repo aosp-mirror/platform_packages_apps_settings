@@ -67,7 +67,7 @@ public class LocaleListEditor extends SettingsPreferenceFragment
         setHasOptionsMenu(true);
 
         LocaleStore.fillCache(this.getContext());
-        List<LocaleStore.LocaleInfo> feedsList = getUserLocaleList(this.getContext());
+        final List<LocaleStore.LocaleInfo> feedsList = getUserLocaleList(this.getContext());
         mAdapter = new LocaleDragAndDropAdapter(this.getContext(), feedsList);
     }
 
@@ -144,6 +144,7 @@ public class LocaleListEditor extends SettingsPreferenceFragment
                     public void onClick(DialogInterface dialog, int which) {
                         mAdapter.removeChecked();
                         setRemoveMode(!mRemoveMode);
+                        updateVisibilityOfRemoveMenu();
                     }
                 })
                 .create()
@@ -158,6 +159,7 @@ public class LocaleListEditor extends SettingsPreferenceFragment
         menuItem.setIcon(R.drawable.ic_delete);
         super.onCreateOptionsMenu(menu, inflater);
         mMenu = menu;
+        updateVisibilityOfRemoveMenu();
     }
 
     private static List<LocaleStore.LocaleInfo> getUserLocaleList(Context context) {
@@ -201,6 +203,15 @@ public class LocaleListEditor extends SettingsPreferenceFragment
     @Override
     public void onLocaleSelected(LocaleStore.LocaleInfo locale) {
         mAdapter.addLocale(locale);
+        updateVisibilityOfRemoveMenu();
     }
 
+    // Hide the "Remove" menu if there is only one locale in the list, show it otherwise
+    // This is called when the menu is first created, and then one add / remove locale
+    private void updateVisibilityOfRemoveMenu() {
+        final MenuItem menuItemRemove = mMenu.findItem(MENU_ID_REMOVE);
+        if (menuItemRemove != null) {
+            menuItemRemove.setVisible(mAdapter.getItemCount() > 1);
+        }
+    }
 }
