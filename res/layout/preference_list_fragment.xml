@@ -33,14 +33,14 @@
         android:id="@android:id/list_container"
         android:layout_height="0px"
         android:layout_weight="1"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:paddingStart="@dimen/settings_side_margin"
+        android:paddingEnd="@dimen/settings_side_margin">
 
         <ListView android:id="@+id/backup_list"
             style="@style/PreferenceFragmentListSinglePane"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingStart="@dimen/settings_side_margin"
-            android:paddingEnd="@dimen/settings_side_margin"
             android:paddingTop="@dimen/dashboard_padding_top"
             android:paddingBottom="@dimen/dashboard_padding_bottom"
             android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle"
