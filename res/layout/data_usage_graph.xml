@@ -22,26 +22,10 @@
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/charge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="36sp"
-        android:textColor="?android:attr/colorAccent" />
-
-    <TextView
-        android:id="@+id/estimation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="?android:attr/textColorSecondary" />
-
     <com.android.settingslib.graph.UsageView
-        android:id="@+id/battery_usage"
+        android:id="@+id/data_usage"
         android:layout_width="match_parent"
-        android:layout_height="141dp"
+        android:layout_height="@dimen/data_usage_chart_height"
         settings:sideLabels="@array/battery_labels"
         android:colorAccent="?android:attr/colorAccent"
         android:gravity="end"
