@@ -29,19 +29,19 @@ import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings.Secure;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceCategory;
-import android.support.v14.preference.SwitchPreference;
 import android.util.Pair;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 import com.android.internal.inputmethod.InputMethodUtils;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -161,7 +161,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.PHYSICAL_KEYBOARDS;
+        return MetricsEvent.PHYSICAL_KEYBOARDS;
     }
 
     private void updateHardKeyboards() {

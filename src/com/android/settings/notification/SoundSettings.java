@@ -49,8 +49,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.TwoStatePreference;
 import android.util.Log;
-
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.SettingsPreferenceFragment;
@@ -119,7 +118,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.SOUND;
+        return MetricsEvent.SOUND;
     }
 
     @Override

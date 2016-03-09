@@ -16,19 +16,18 @@
 
 package com.android.settings.display;
 
-import com.android.settings.InstrumentedFragment;
-import com.android.settings.R;
-import com.android.settings.PreviewSeekBarPreferenceFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
-
 import android.annotation.Nullable;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Display;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.PreviewSeekBarPreferenceFragment;
+import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +94,7 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.DISPLAY_SCREEN_ZOOM;
+        return MetricsEvent.DISPLAY_SCREEN_ZOOM;
     }
 
     /** Index provider used to expose this fragment in search. */
