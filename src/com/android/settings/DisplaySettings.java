@@ -62,7 +62,6 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
-import static com.android.settings.RestrictedListPreference.RestrictedItem;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
@@ -88,7 +87,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private Preference mFontSizePref;
 
-    private RestrictedListPreference mScreenTimeoutPreference;
+    private TimeoutListPreference mScreenTimeoutPreference;
     private ListPreference mNightModePreference;
     private Preference mScreenSaverPreference;
     private SwitchPreference mLiftToWakePreference;
@@ -118,7 +117,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             getPreferenceScreen().removePreference(mScreenSaverPreference);
         }
 
-        mScreenTimeoutPreference = (RestrictedListPreference) findPreference(KEY_SCREEN_TIMEOUT);
+        mScreenTimeoutPreference = (TimeoutListPreference) findPreference(KEY_SCREEN_TIMEOUT);
 
         mFontSizePref = findPreference(KEY_FONT_SIZE);
 
@@ -263,7 +262,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
-        RestrictedListPreference preference = mScreenTimeoutPreference;
+        TimeoutListPreference preference = mScreenTimeoutPreference;
         String summary;
         if (preference.isDisabledByAdmin()) {
             summary = getString(R.string.disabled_by_policy_title);
@@ -278,9 +277,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             } else {
                 int best = 0;
                 for (int i = 0; i < values.length; i++) {
-                    if (preference.isRestrictedForEntry(entries[i])) {
-                        break;
-                    }
                     long timeout = Long.parseLong(values[i].toString());
                     if (currentTimeout >= timeout) {
                         best = i;
@@ -292,59 +288,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         preference.setSummary(summary);
     }
 
-    private void disableUnusableTimeouts(RestrictedListPreference screenTimeoutPreference) {
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(
-                getActivity());
-        if (admin == null) {
-            return; // policy not enforced
-        }
-
-        final DevicePolicyManager dpm = (DevicePolicyManager) getActivity().getSystemService(
-                Context.DEVICE_POLICY_SERVICE);
-        if (dpm == null) {
-            return;
-        }
-        final long maxTimeout = dpm.getMaximumTimeToLock(null);
-        final CharSequence[] entries = screenTimeoutPreference.getEntries();
-        final CharSequence[] values = screenTimeoutPreference.getEntryValues();
-        long maxTimeoutSelectable = 0;
-        int maxTimeoutEntryIndex = -1;
-        for (int i = 0; i < values.length; i++) {
-            long timeout = Long.parseLong(values[i].toString());
-            if (timeout > maxTimeout) {
-                break;
-            }
-            maxTimeoutSelectable = timeout;
-            maxTimeoutEntryIndex = i;
-        }
-        // If there are no possible options for the user, then set this preference as disabled
-        // by admin, otherwise remove the padlock in case it was set earlier.
-        if (maxTimeoutSelectable == 0) {
-            screenTimeoutPreference.setDisabledByAdmin(admin);
-            return;
-        } else {
-            screenTimeoutPreference.setDisabledByAdmin(null);
-        }
-
-        screenTimeoutPreference.clearRestrictedItems();
-        // Set all the entries after the maximum selectable timeout as disabled by admin.
-        for (int i = maxTimeoutEntryIndex + 1; i < values.length; i++) {
-            screenTimeoutPreference.addRestrictedItem(
-                    new RestrictedItem(entries[i], values[i], admin));
-        }
-
-        final int userPreference = Integer.parseInt(screenTimeoutPreference.getValue());
-        if (userPreference <= maxTimeout) {
-            screenTimeoutPreference.setValue(String.valueOf(userPreference));
-        } else if (maxTimeoutSelectable == maxTimeout) {
-            screenTimeoutPreference.setValue(String.valueOf(maxTimeout));
-        } else {
-            // There will be no highlighted selection since nothing in the list matches
-            // maxTimeout. The user can still select anything less than maxTimeout.
-            // TODO: maybe append maxTimeout to the list and mark selected.
-        }
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -354,7 +297,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
         mScreenTimeoutPreference.setValue(String.valueOf(currentTimeout));
         mScreenTimeoutPreference.setOnPreferenceChangeListener(this);
-        disableUnusableTimeouts(mScreenTimeoutPreference);
+        final DevicePolicyManager dpm = (DevicePolicyManager) getActivity().getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        if (dpm != null) {
+            final EnforcedAdmin admin = RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(
+                    getActivity());
+            final long maxTimeout = dpm.getMaximumTimeToLock(null);
+            mScreenTimeoutPreference.removeUnusableTimeouts(maxTimeout, admin);
+        }
         updateTimeoutPreferenceDescription(currentTimeout);
     }
 

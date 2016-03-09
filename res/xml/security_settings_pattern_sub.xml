@@ -23,7 +23,7 @@
                 android:key="visiblepattern"
                 android:title="@string/lockpattern_settings_enable_visible_pattern_title"/>
 
-        <com.android.settings.RestrictedListPreference
+        <com.android.settings.TimeoutListPreference
                 android:key="lock_after_timeout"
                 android:title="@string/lock_after_timeout"
                 android:summary="@string/lock_after_timeout_summary"
