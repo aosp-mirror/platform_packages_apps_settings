@@ -255,7 +255,7 @@ public class DataUsageList extends DataUsageBase {
         final NetworkPolicy policy = services.mPolicyEditor.getPolicy(mTemplate);
         //SUB SELECT
         if (isNetworkPolicyModifiable(policy, mSubId) && isMobileDataAvailable(mSubId)) {
-            mChart.bindNetworkPolicy(policy);
+            mChart.setNetworkPolicy(policy);
             mHeader.findViewById(R.id.filter_settings).setVisibility(View.VISIBLE);
             mHeader.findViewById(R.id.filter_settings).setOnClickListener(
                     new View.OnClickListener() {
@@ -269,7 +269,7 @@ public class DataUsageList extends DataUsageBase {
             });
         } else {
             // controls are disabled; don't bind warning/limit sweeps
-            mChart.bindNetworkPolicy(null);
+            mChart.setNetworkPolicy(null);
             mHeader.findViewById(R.id.filter_settings).setVisibility(View.GONE);
         }
 
@@ -521,7 +521,7 @@ public class DataUsageList extends DataUsageBase {
         public void onLoadFinished(Loader<ChartData> loader, ChartData data) {
             setLoading(false, true);
             mChartData = data;
-            mChart.bindNetworkStats(mChartData.network);
+            mChart.setNetworkStats(mChartData.network);
 
             // calcuate policy cycles based on available data
             updatePolicy(true);
@@ -530,7 +530,7 @@ public class DataUsageList extends DataUsageBase {
         @Override
         public void onLoaderReset(Loader<ChartData> loader) {
             mChartData = null;
-            mChart.bindNetworkStats(null);
+            mChart.setNetworkStats(null);
         }
     };
 
