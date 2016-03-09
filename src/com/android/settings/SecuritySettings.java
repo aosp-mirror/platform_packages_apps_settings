@@ -55,7 +55,7 @@ import android.util.Log;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.RestrictedListPreference;
+import com.android.settings.TimeoutListPreference;
 import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -71,7 +71,6 @@ import java.util.List;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
-import static com.android.settings.RestrictedListPreference.RestrictedItem;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
@@ -937,7 +936,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         private static final String SWITCH_PREFERENCE_KEYS[] = { KEY_LOCK_AFTER_TIMEOUT,
                 KEY_VISIBLE_PATTERN, KEY_POWER_INSTANTLY_LOCKS, KEY_REQUIRE_CRED_BEFORE_STARTUP };
 
-        private RestrictedListPreference mLockAfter;
+        private TimeoutListPreference mLockAfter;
         private SwitchPreference mVisiblePattern;
         private SwitchPreference mPowerButtonInstantlyLocks;
         private RestrictedPreference mOwnerInfoPref;
@@ -994,7 +993,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             addPreferencesFromResource(resid);
 
             // lock after preference
-            mLockAfter = (RestrictedListPreference) findPreference(KEY_LOCK_AFTER_TIMEOUT);
+            mLockAfter = (TimeoutListPreference) findPreference(KEY_LOCK_AFTER_TIMEOUT);
             if (mLockAfter != null) {
                 setupLockAfterPreference();
                 updateLockAfterPreferenceSummary();
@@ -1065,18 +1064,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 5000);
             mLockAfter.setValue(String.valueOf(currentTimeout));
             mLockAfter.setOnPreferenceChangeListener(this);
-            final EnforcedAdmin admin = RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(
-                    getActivity());
-            if (admin != null) {
-                final long adminTimeout = (mDPM != null ? mDPM.getMaximumTimeToLock(null) : 0);
+            if (mDPM != null) {
+                final EnforcedAdmin admin = RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(
+                        getActivity());
+                final long adminTimeout = mDPM.getMaximumTimeToLock(null);
                 final long displayTimeout = Math.max(0,
                         Settings.System.getInt(getContentResolver(), SCREEN_OFF_TIMEOUT, 0));
-                if (adminTimeout > 0) {
-                    // This setting is a slave to display timeout when a device policy is enforced.
-                    // As such, maxLockTimeout = adminTimeout - displayTimeout.
-                    // If there isn't enough time, shows "immediately" setting.
-                    disableUnusableTimeouts(Math.max(0, adminTimeout - displayTimeout), admin);
-                }
+                // This setting is a slave to display timeout when a device policy is enforced.
+                // As such, maxLockTimeout = adminTimeout - displayTimeout.
+                // If there isn't enough time, shows "immediately" setting.
+                final long maxTimeout = Math.max(0, adminTimeout - displayTimeout);
+                mLockAfter.removeUnusableTimeouts(maxTimeout, admin);
             }
         }
 
@@ -1092,9 +1090,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 final CharSequence[] values = mLockAfter.getEntryValues();
                 int best = 0;
                 for (int i = 0; i < values.length; i++) {
-                    if (mLockAfter.isRestrictedForEntry(entries[i])) {
-                        break;
-                    }
                     long timeout = Long.valueOf(values[i].toString());
                     if (currentTimeout >= timeout) {
                         best = i;
@@ -1115,47 +1110,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 }
             }
             mLockAfter.setSummary(summary);
-        }
-
-        private void disableUnusableTimeouts(long maxTimeout, EnforcedAdmin admin) {
-            final CharSequence[] entries = mLockAfter.getEntries();
-            final CharSequence[] values = mLockAfter.getEntryValues();
-            long maxTimeoutSelectable = 0;
-            int maxTimeoutEntryIndex = -1;
-            for (int i = 0; i < values.length; i++) {
-                long timeout = Long.parseLong(values[i].toString());
-                if (timeout > maxTimeout) {
-                    break;
-                }
-                maxTimeoutSelectable = timeout;
-                maxTimeoutEntryIndex = i;
-            }
-            // If there are no possible options for the user, then set this preference as
-            // disabled by admin, otherwise remove the padlock in case it was set earlier.
-            if (maxTimeoutSelectable == 0) {
-                mLockAfter.setDisabledByAdmin(admin);
-                return;
-            } else {
-                mLockAfter.setDisabledByAdmin(null);
-            }
-
-            mLockAfter.clearRestrictedItems();
-            // Set all the entries after the maximum selectable timeout as disabled by admin.
-            for (int i = maxTimeoutEntryIndex + 1; i < values.length; i++) {
-                mLockAfter.addRestrictedItem(
-                        new RestrictedItem(entries[i], values[i], admin));
-            }
-
-            final int userPreference = Integer.valueOf(mLockAfter.getValue());
-            if (userPreference <= maxTimeout) {
-                mLockAfter.setValue(String.valueOf(userPreference));
-            } else if (maxTimeoutSelectable == maxTimeout) {
-                mLockAfter.setValue(String.valueOf(maxTimeout));
-            } else {
-                // There will be no highlighted selection since nothing in the list matches
-                // maxTimeout. The user can still select anything less than maxTimeout.
-                // TODO: maybe append maxTimeout to the list and mark selected.
-            }
         }
 
         public void updateOwnerInfo() {
