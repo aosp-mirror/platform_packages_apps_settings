@@ -48,6 +48,7 @@ import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Set;
 
+import static android.provider.Settings.Secure.TTS_DEFAULT_PITCH;
 import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 
@@ -59,9 +60,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private static final boolean DBG = false;
 
     /** Preference key for the "play TTS example" preference. */
-    private static final String KEY_PLAY_EXAMPLE = "tts_play_example";
+    private static final String KEY_PLAY_EXAMPLE = "tts_play_example";;
 
-    /** Preference key for the TTS rate selection dialog. */
+    /** Preference key for the TTS pitch selection slider. */
+    private static final String KEY_DEFAULT_PITCH = "tts_default_pitch";
+
+    /** Preference key for the TTS rate selection slider. */
     private static final String KEY_DEFAULT_RATE = "tts_default_rate";
 
     /** Preference key for the TTS reset speech rate preference. */
@@ -83,16 +87,29 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private static final int VOICE_DATA_INTEGRITY_CHECK = 1977;
 
     /**
-     * Maximum speech rate values.
+     * Maximum speech rate value.
+     * This value should be kept in sync with the max value set in tts_settings xml.
      */
     private static final int MAX_SPEECH_RATE = 600;
 
+    /**
+     * Maximum speech pitch value. Pitch value varies from 50 to 500, where 100
+     * is the value for normal pitch. The max pitch value is set to 500, based on
+     * feedback from a few accessibility users. The range for pitch is not set in stone,
+     * and should be readjusted based on user need.
+     *
+     * This value should be kept in sync with the max value set in tts_settings xml.
+     */
+    private static final int MAX_SPEECH_PITCH = 500;
+
     private PreferenceCategory mEnginePreferenceCategory;
+    private SeekBarPreference mDefaultPitchPref;
     private SeekBarPreference mDefaultRatePref;
     private Preference mResetSpeechRate;
     private Preference mPlayExample;
     private Preference mEngineStatus;
 
+    private int mDefaultPitch = TextToSpeech.Engine.DEFAULT_PITCH;
     private int mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
 
     /**
@@ -174,6 +191,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         mEnginePreferenceCategory = (PreferenceCategory) findPreference(
                 KEY_ENGINE_PREFERENCE_SECTION);
+        mDefaultPitchPref = (SeekBarPreference) findPreference(KEY_DEFAULT_PITCH);
         mDefaultRatePref = (SeekBarPreference) findPreference(KEY_DEFAULT_RATE);
 
         mEngineStatus = findPreference(KEY_STATUS);
@@ -233,16 +251,22 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private void initSettings() {
         final ContentResolver resolver = getContentResolver();
 
-        // Set up the default rate.
+         // Set up the default rate and pitch.
         try {
+            mDefaultPitch = android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_PITCH);
             mDefaultRate = android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_RATE);
         } catch (SettingNotFoundException e) {
-            // Default rate setting not found, initialize it
+            // Default rate and pitch setting not found, initialize it.
+            mDefaultPitch = TextToSpeech.Engine.DEFAULT_PITCH;
             mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
         }
         mDefaultRatePref.setProgress(mDefaultRate);
         mDefaultRatePref.setOnPreferenceChangeListener(this);
         mDefaultRatePref.setMax(MAX_SPEECH_RATE);
+
+        mDefaultPitchPref.setProgress(mDefaultPitch);
+        mDefaultPitchPref.setOnPreferenceChangeListener(this);
+        mDefaultPitchPref.setMax(MAX_SPEECH_PITCH);
 
         mCurrentEngine = mTts.getCurrentEngine();
 
@@ -461,6 +485,18 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (KEY_DEFAULT_RATE.equals(preference.getKey())) {
             updateSpeechRate(((Integer) objValue).intValue());
+        } else if (KEY_DEFAULT_PITCH.equals(preference.getKey())) {
+            mDefaultPitch = ((Integer) objValue).intValue();
+            try {
+                android.provider.Settings.Secure.putInt(getContentResolver(),
+                        TTS_DEFAULT_PITCH, mDefaultPitch);
+               if (mTts != null) {
+                   mTts.setPitch(mDefaultPitch / 100.0f);
+               }
+               if (DBG) Log.d(TAG, "TTS default pitch changed, now" + mDefaultPitch);
+           } catch (NumberFormatException e) {
+               Log.e(TAG, "could not persist default TTS pitch setting", e);
+           }
         }
         return true;
     }
