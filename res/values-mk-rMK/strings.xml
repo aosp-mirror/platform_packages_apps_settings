@@ -2533,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Ниедна од инсталираните апликации не побара пристап до известувања."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Дозволи пристап до известувања на <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ќе може да ги чита сите известувања, вклучувајќи лични информации како што се имиња на контакти и текстот од пораките што ги добивате. Ќе може и да отфрла известувања или да активира копчиња за дејство во нив."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR помошни услуги"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Ниедна инсталирана апликација не побара да се извршува како VR помошните услуги."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Дозволете пристап до VR услугата за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> ќе може да се извршува кога користите апликации во режим на виртуелна реалност."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Пристап до „Не вознемирувај“"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Ниту една од инсталираните апликации не побарала пристап до „Не вознемирувај“"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Вчитување апликации…"</string>
@@ -2618,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Спречи ги известувањата стишени од „Не вознемирувај“ од ѕиркање или појавување на екранот"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Блокирај кога екранот е исклучен"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Спречи ги известувањата стишени од „Не вознемирувај“ да го вклучат екранот или да направат да трепка светлото за известување"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Исклучено"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Кога екранот е вклучен"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Кога екранот е исклучен"</string>
@@ -2686,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Нормално"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Блокирани"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Стишено"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> дозвола е одобрена</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> дозволи се одобрени</item>
@@ -2846,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Дозволи цртање врз други апликации"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Дозвола на апликацијата да црта врз други"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Оваа дозвола овозможува апликацијата да прикажува врз другите апликации што ги користите и може да го попречува користењето на интерфејсот во другите апликации или да го менува она што мислите дека го гледате во другите апликации."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr виртуелна реалност слушател стерео помошна услуга"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"дијалогот на прозорецот за системски предупредувања цртај врз други апликации"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Цртај врз други апликации"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"На <xliff:g id="COUNT_0">%d</xliff:g> од <xliff:g id="COUNT_1">%d</xliff:g> им е дозволено да цртаат врз други апликации"</string>
@@ -2894,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"Види помалку"</string>
     <string name="disconnected" msgid="5787956818111197212">"Исклучено"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> од податоците се искористени"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> апликации се блокирани за испраќање"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"На сите апликации им е дозволено да се испратат"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> апликации се инсталирани"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Инсталирани се 24 апликации"</string>

@@ -76,8 +76,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Odpojiť SD kartu"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Vymazať ukladací priestor USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Vymazať SD kartu"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Zobraziť ukážku obrazovky <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> z <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Zväčšite alebo zmenšite text na obrazovke."</string>
     <string name="small_font" msgid="2295331917424072635">"Malé"</string>
     <string name="medium_font" msgid="2068475425515133701">"Stredné"</string>
@@ -2570,6 +2569,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Prístup k upozorneniam si nevyžiadali žiadne nainštalované aplikácie"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Povoliť prístup k upozorneniam pre službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude môcť čítať všetky upozornenia vrátane osobných informácií, ako sú mená kontaktov a texty vašich prijatých správ. Aplikácia bude tiež môcť tieto upozornenia zatvoriť alebo spustiť v nich tlačidlá akcií."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Pomocné služby VR"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Žiadne nainštalované aplikácie nežiadali, aby boli spúšťané ako pomocné služby VR."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Umožniť službe VR prístup do služby <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> bude možné spustiť pri používaní aplikácií v režime virtuálnej reality."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Prístup k nastaveniu Nerušiť"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Prístup k nastaveniu Nerušiť si nevyžiadali žiadne nainštalované aplikácie"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Načítavajú sa aplikácie..."</string>
@@ -2659,6 +2662,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Zabrániť, aby sa upozornenia stlmené nastavením Nerušiť čiastočne alebo úplne zobrazovali na obrazovke"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Blokovať, keď je obrazovka vypnutá"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Zabrániť, aby upozornenia stlmené nastavením Nerušiť spúšťali obrazovku alebo blikajúce svetlo upozornení"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Vypnuté"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Keď je obrazovka zapnutá"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Keď je obrazovka vypnutá"</string>
@@ -2727,8 +2732,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Normálne"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Blokované"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Stlmené"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="few">Boli udelené <xliff:g id="COUNT_1">%d</xliff:g> povolenia</item>
       <item quantity="many">Bolo udeleného <xliff:g id="COUNT_1">%d</xliff:g> povolenia</item>
@@ -2832,18 +2843,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Zobraziť tuner SystemUI"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Ďalšie povolenia"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Počet ďalších povolení: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Chcete zdieľať hlásenie chyby?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"Správca IT si vyžiadal hlásenie chyby, aby mohol vyriešiť problém na tomto zariadení. Aplikácie a dáta môžu byť zdieľané."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"Správca IT si vyžiadal hlásenie chyby, aby mohol vyriešiť problém na tomto zariadení. Aplikácie a dáta môžu byť zdieľané. Môže to dočasne spomaliť vaše zariadenie."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Toto hlásenie chyby sa zdieľa s vaším správcom IT. Ak potrebujete ďalšie podrobnosti, kontaktujte ho."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Zdieľať"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Odmietnuť"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Nabíja sa"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Iba nabiť toto zariadenie"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Zdroj napájania"</string>
@@ -2905,6 +2910,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Povoliť vykresľovanie cez ďalšie aplikácie"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Povolenie na vykreslenie aplikácie navrchu"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Toto povolenie umožňuje aplikácii zobrazovanie nad inými aplikáciami, ktoré používate. Táto funkcia môže zasahovať do vášho používania rozhrania inej aplikácie alebo meniť zobrazovaný obsah v iných aplikáciách."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtuálna realita prijímač stereo pomocné zariadenie"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"vykreslenie dialógového okna s upozornením systému nad inými aplikáciami"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Vykresliť cez ďalšie aplikácie"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"Vykreslenie cez ďalšie aplikácie je povolené pre <xliff:g id="COUNT_0">%d</xliff:g> z <xliff:g id="COUNT_1">%d</xliff:g> aplikácií"</string>
@@ -2953,7 +2959,7 @@
     <string name="see_less" msgid="1250265310929558370">"Zobraziť menej"</string>
     <string name="disconnected" msgid="5787956818111197212">"Odpojené"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Objem využitých dát: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"Počet aplikácií so zablokovaným odosielaním upozornení: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"Všetky aplikácie majú povolené odosielať upozornenia"</string>
     <string name="apps_summary" msgid="193158055537070092">"Počet nainštalovaných aplikácií: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 nainštalovaných aplikácií"</string>

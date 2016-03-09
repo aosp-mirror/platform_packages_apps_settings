@@ -2533,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"ইনস্টল করা কোনো অ্যাপের অনুরোধকৃত বিজ্ঞপ্তির অ্যাক্সেস নেই৷"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> এর জন্য বিজ্ঞপ্তির অ্যাক্সেসে অনুমতি দেবেন?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> সমস্ত বিজ্ঞপ্তিগুলি, ব্যক্তিগত তথ্যের সাথে পরিচিতি নাম এবং আপনার পাওয়া পাঠ্য বার্তাগুলি পড়তে পারবে। এটি আবার এর মধ্যে থাকা বিজ্ঞপ্তিগুলি বা ট্রিগার ক্রিয়া খারিজ করতে পারবে।"</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR সহায়তাকারী পরিষেবাগুলি"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"vr সহায়তাকারী পরিষেবা হিসাবে চলার জন্য কোনো অ্যাপ্লিকেশান ইনস্টল করা নেই৷"</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"<xliff:g id="SERVICE">%1$s</xliff:g> এর জন্য VR পরিষেবার অ্যাক্সেসের মঞ্জুরি দেবেন?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"ভার্চুয়াল রিয়েলিটি মোডে আপনি যখন অ্যাপ্লিকেশানগুলি ব্যবহার করবেন তখন <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> চালাতে পারবেন৷"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"বিরক্ত করবেন না অ্যাক্সেস করুন"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"ইনস্টল করা নেই এমন অ্যাপগুলি বিরক্ত করবেন না অ্যাক্সেস করুন এর অনুরোধ জানিয়েছে"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"অ্যাপ্লিকেশানগুলি লোড করা হচ্ছে..."</string>
@@ -2618,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"বিরক্ত করবেন না\' দ্বারা নীরব করা বিজ্ঞপ্তিগুলিকে স্ক্রীনে দেখতে পাওয়া বা উপস্থিত হওয়া থেকে আটকান"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"স্ক্রীন বন্ধ থাকলে অবরুদ্ধ করুন"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"বিরক্ত করবেন না\' দ্বারা নীরব করা বিজ্ঞপ্তিগুলিকে স্ক্রীণ চালু করা বা বিজ্ঞপ্তি লাইটটি জ্বলা ও নেভা থেকে আটকান"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"বন্ধ আছে"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"যখন স্ক্রীন চালু থাকে"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"যখন স্ক্রীন বন্ধ থাকে"</string>
@@ -2686,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"স্বাভাবিক"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"অবরুদ্ধ"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"নিঃশব্দ করা হয়েছে"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি অনুমতি মঞ্জুর করা হয়েছে</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>টি অনুমতি মঞ্জুর করা হয়েছে</item>
@@ -2846,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"অন্য অ্যাপ্লিকেশানগুলির উপর অঙ্কন করার মঞ্জুরি দিন"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"উপরে অ্যাপ্লিকেশানের অঙ্কনের অনুমতি"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"এই অনুমতিটি একটি অ্যাপ্লিকেশানকে আপনি যে অন্যান্য অ্যাপ্লিকেশানগুলি ব্যবহার করছেন সেগুলির উপরে প্রদর্শিত হওয়ার অনুমতি দেয় এবং তা আপনার অন্যান্য অ্যাপ্লিকেশানে ইন্টারফেস ব্যবহারের ক্ষেত্রে হস্তক্ষেপ করতে পারে অথবা আপনি অন্য অ্যাপ্লিকেশানগুলিতে যা দেখছেন বলে মনে করছেন সেটি পরিবর্তন করতে পারে৷"</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr ভার্চুয়াল রিয়েলিটি শ্রোতা স্টিরিও সহায়তাকারী পরিষেবা"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"সিস্টেম সতর্কতা উইন্ডো ডায়লগ অন্যান্য অ্যাপ্লিকেশানের উপরে অঙ্কন"</string>
     <string name="overlay_settings" msgid="222062091489691363">"অন্যান্য অ্যাপ্লিকেশানের উপর অঙ্কন"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_1">%d</xliff:g>টির মধ্যে <xliff:g id="COUNT_0">%d</xliff:g>টি অ্যাপ্লিকেশানকে অন্যান্য অ্যাপ্লিকেশানের উপরে অঙ্কনের অনুমতি দেওয়া হয়েছে"</string>
@@ -2894,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"কম দেখুন"</string>
     <string name="disconnected" msgid="5787956818111197212">"সংযোগ বিচ্ছিন্ন হয়েছে"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> ডেটা ব্যবহৃত হয়েছে"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g>টি অ্যাপ্লিকেশানের \'পাঠানোর কাজ\' অবরুদ্ধ করা হয়েছে"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"সমস্ত অ্যাপ্লিকেশান পাঠাতে সক্ষম"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g>টি অ্যাপ্লিকেশান ইনস্টল করা হয়েছে"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"২৪টি অ্যাপ্লিকেশান ইনস্টল করা হয়েছে"</string>

@@ -2533,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"स्थापित केलेल्या कोणत्याही अ‍ॅप्सने सूचना प्रवेशाची विनंती केली नाही."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> साठी सूचना प्रवेशास अनुमती द्यायची?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"संपर्क नावे आणि आपल्याला प्राप्त होतात त्या संदेशांचा मजकूर यासारख्‍या वैयक्तिक माहितीसह सर्व सूचना वाचण्‍यात <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> सक्षम असेल. तो सूचना डिसमिस करण्‍यात किंवा त्यामध्‍ये असणार्‍या क्रिया बटणांना ट्रिगर करण्‍यात देखील सक्षम असेल."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR मदतकर्ता सेवा"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"कोणत्याही स्थापित अॅप्सनी VR मदतकर्ता सेवा म्हणून चालविण्यासाठी विनंती केली नाही."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"<xliff:g id="SERVICE">%1$s</xliff:g> साठी VR सेवा प्रवेशाची अनुमती द्यायची?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"आपण आभासी वास्तविकता मोडमध्ये अनुप्रयोग वापरता तेव्हा <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> चालविण्यास सक्षम असेल."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"व्यत्यय आणू नका प्रवेश"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"कोणत्याही स्थापित केलेल्या अॅप्सने व्यत्यय आणू नका प्रवेशाची विनंती केली नाही"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"अॅप्स लोड करीत आहे..."</string>
@@ -2618,6 +2622,8 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"व्यत्यय आणू नका द्वारे न दिसणाऱ्या सूचनांना स्क्रीनवर दिसण्यापासून किंवा डोकावण्यापासून प्रतिबंधित करा"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"स्क्रीन बंद असते तेव्हा अवरोधित करा"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"व्यत्यय आणू नका द्वारे न दिसणाऱ्या सूचनांना स्क्रीन चालू करण्यापासून किंवा सूचना प्रकाशाची उघडझाप करण्यापासून प्रतिबंधित करा"</string>
+    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
+    <skip />
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"बंद"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"स्क्रीन चालू असताना"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"स्क्रीन बंद असताना"</string>
@@ -2686,8 +2692,14 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"सामान्य"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"अवरोधित केले"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"शांत केले"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g> / <xliff:g id="NOTIF_STATE_1">%2$s</xliff:g> / <xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <!-- no translation found for notifications_redacted (4493588975742803160) -->
+    <skip />
+    <!-- no translation found for notifications_hidden (3619610536038757468) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1066342037602085552) -->
+    <skip />
+    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
+    <skip />
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> परवानगीस मंजूरी दिली</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> परवानग्यांना मंजूरी दिली</item>
@@ -2846,6 +2858,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"इतर अ‍ॅप्‍स वरून काढण्‍यास परवानगी देणे"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"शीर्ष परवानगी वरील अ‍ॅप काढा"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"ही परवानगी अ‍ॅपला आपण वापरत असलेल्या इतर अ‍ॅपच्या शीर्षस्थानी प्रदर्शित करण्‍याची अनुमती देते आणि इतर अनुप्रयोगांमधील इंटरफेसच्या आपल्‍या वापरामध्‍ये हस्तक्षेप करू शकते किंवा इतर अनुप्रयोगांमध्‍ये आपण जे पाहता त्याबद्दल आपण जो विचार करता ते बदलू शकते."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr आभासी वास्तविकता श्रोता स्टीरीओ मदतकर्ता सेवा"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"इतर शीर्षस्थानी असलेल्या अ‍ॅप्सवर सिस्टीम सूचना विंडो संवाद काढा"</string>
     <string name="overlay_settings" msgid="222062091489691363">"अन्य अॅप्सवर काढा"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_1">%d</xliff:g> पैकी <xliff:g id="COUNT_0">%d</xliff:g> अ‍ॅप्सना इतर अ‍ॅप्सच्या शीर्षस्थानी काढण्‍याची अनुमती आहे"</string>
@@ -2894,7 +2907,7 @@
     <string name="see_less" msgid="1250265310929558370">"कमी पहा"</string>
     <string name="disconnected" msgid="5787956818111197212">"डिस्कनेक्ट केले"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> डेटा वापरला"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> ना पाठविण्यापासून अवरोधित केले"</string>
+    <!-- no translation found for notification_summary (4019451362120557382) -->
     <string name="notification_summary_none" msgid="3440195312233351409">"सर्व अॅप्सना पाठविण्याची परवानगी दिली"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> अॅप्स स्थापित केले"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 अॅप्स स्थापित केले"</string>

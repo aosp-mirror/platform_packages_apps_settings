@@ -74,8 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Desmontar cartão SD"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Apagar armazenamento USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Apagar cartão SD"</string>
-    <!-- no translation found for preview_page_indicator_content_description (3263162369344886880) -->
-    <skip />
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Ecrã de pré-visualização <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> de <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Aumente ou diminua o texto no ecrã."</string>
     <string name="small_font" msgid="2295331917424072635">"Pequeno"</string>
     <string name="medium_font" msgid="2068475425515133701">"Médio"</string>
@@ -2534,6 +2533,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nenhuma aplicação instalada solicitou acesso a notificações"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Pretende permitir o acesso a notificações de <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> conseguirá ler todas as notificações, incluindo informações pessoais, como nomes de contactos e o texto de mensagens recebidas. Conseguirá ainda ignorar notificações ou acionar os respetivos botões de ação."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Serviços de assistente de RV"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Nenhuma aplicação instalada pediu para ser executada como serviço de assistente de RV."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Pretende permitir que o serviço de RV tenha acesso a <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"Será possível executar o <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> quando estiver a utilizar aplicações no modo de realidade virtual."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Acesso Não incomodar"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Nenhuma aplicação instalada solicitou acesso Não incomodar"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"A carregar aplicações..."</string>
@@ -2619,6 +2622,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Evitar que as notificações silenciadas pelo modo Não incomodar surjam no ecrã"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Bloquear quando o ecrã está desligado"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Evitar que as notificações silenciadas pelo modo Não incomodar liguem o ecrã ou ativem a luz de notificação de forma intermitente"</string>
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Evitar que as notificações silenciadas pelo modo Não incomodar surjam no ecrã"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Desativado"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Quando o ecrã está ligado"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Quando o ecrã está desligado"</string>
@@ -2687,8 +2691,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Normal"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Bloqueado"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Sem som"</string>
-    <string name="notifications_two_items" msgid="4619842959192163127">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>"</string>
-    <string name="notifications_three_items" msgid="7536490263864218246">"<xliff:g id="NOTIF_STATE_0">%1$s</xliff:g>/<xliff:g id="NOTIF_STATE_1">%2$s</xliff:g>/<xliff:g id="NOTIF_STATE_2">%3$s</xliff:g>"</string>
+    <string name="notifications_redacted" msgid="4493588975742803160">"Conteúdo confidencial não apresentado no ecrã de bloqueio"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"Não no ecrã de bloqueio"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"Não incomodar substituído"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> autorizações concedidas</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> autorização concedida</item>
@@ -2782,18 +2788,12 @@
     <string name="system_ui_settings" msgid="579824306467081123">"Mostrar SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Autorizações adicionais"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Mais <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for share_remote_bugreport_dialog_title (1124840737776588602) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message_finished (4973886976504823801) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_dialog_message (3495929560689435496) -->
-    <skip />
-    <!-- no translation found for sharing_remote_bugreport_dialog_message (5859287696666024466) -->
-    <skip />
-    <!-- no translation found for share_remote_bugreport_action (532226159318779397) -->
-    <skip />
-    <!-- no translation found for decline_remote_bugreport_action (518720235407565134) -->
-    <skip />
+    <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Pretende partilhar o relatório de erro?"</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"O seu administrador de TI solicitou um relatório de erro para ajudar na resolução de problemas deste dispositivo. As aplicações e os dados podem ser partilhados."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"O seu administrador de TI solicitou um relatório de erro para ajudar na resolução de problemas deste dispositivo. As aplicações e os dados podem ser partilhados e o dispositivo pode tornar-se temporariamente mais lento."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Este relatório de erro está a ser partilhado com o seu administrador de TI. Contacte-o para obter mais detalhes."</string>
+    <string name="share_remote_bugreport_action" msgid="532226159318779397">"Partilhar"</string>
+    <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Recusar"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Carregamento"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Apenas carregar este dispositivo"</string>
     <string name="usb_use_power_only" msgid="6304554004177083963">"Fonte de alimentação"</string>
@@ -2853,6 +2853,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Permitir a sobreposição a outras aplicações"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Autorização de sobreposição da aplicação"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Esta autorização permite que uma aplicação se sobreponha a outras aplicações que esteja a utilizar e pode interferir com a sua utilização da interface noutras aplicações ou alterar o que pensa estar a ver noutras aplicações."</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"rv realidade virtual serviço de escuta estéreo serviço assistente"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"janela de alerta do sistema caixa de diálogo sobrepor-se a outras aplicações"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Sobrepor a outras aplicações"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%d</xliff:g> de <xliff:g id="COUNT_1">%d</xliff:g> aplicações autorizadas a sobreporem-se a outras aplic."</string>
@@ -2901,7 +2902,10 @@
     <string name="see_less" msgid="1250265310929558370">"Ver menos"</string>
     <string name="disconnected" msgid="5787956818111197212">"Desligado"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> dos dados utilizados"</string>
-    <string name="notification_summary" msgid="3071284223009798461">"<xliff:g id="COUNT">%1$d</xliff:g> aplicações impedidas de enviar"</string>
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplicações impedidas de enviar</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicação impedida de enviar</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"Todas as aplicações têm autorização para enviar"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> aplicações instaladas"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 aplicações instaladas"</string>
