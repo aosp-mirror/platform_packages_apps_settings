@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SeekBarPreference;
@@ -101,7 +102,7 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.ACCESSIBILITY_TOGGLE_AUTOCLICK;
+        return MetricsEvent.ACCESSIBILITY_TOGGLE_AUTOCLICK;
     }
 
     @Override

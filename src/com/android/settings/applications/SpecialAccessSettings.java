@@ -15,7 +15,7 @@
 package com.android.settings.applications;
 
 import android.os.Bundle;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -28,6 +28,6 @@ public class SpecialAccessSettings extends SettingsPreferenceFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.SPECIAL_ACCESS;
+        return MetricsEvent.SPECIAL_ACCESS;
     }
 }

@@ -29,9 +29,8 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.TwoStatePreference;
 import android.util.Log;
-
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference.RestrictedItem;
 import com.android.settings.SettingsPreferenceFragment;
@@ -42,7 +41,6 @@ import java.util.ArrayList;
 
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
-
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
@@ -68,7 +66,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.CONFIGURE_NOTIFICATION;
+        return MetricsEvent.CONFIGURE_NOTIFICATION;
     }
 
     @Override

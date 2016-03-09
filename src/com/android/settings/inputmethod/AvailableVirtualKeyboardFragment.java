@@ -27,9 +27,8 @@ import android.os.Bundle;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
-
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.text.Collator;
@@ -83,7 +82,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.ENABLE_VIRTUAL_KEYBOARDS;
+        return MetricsEvent.ENABLE_VIRTUAL_KEYBOARDS;
     }
 
     private void updateInputMethodPreferenceViews() {

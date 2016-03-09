@@ -37,8 +37,8 @@ import android.text.format.Formatter;
 import android.util.ArraySet;
 import android.view.View;
 import android.widget.AdapterView;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.AppItem;
@@ -287,7 +287,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
 
     @Override
     protected int getMetricsCategory() {
-        return InstrumentedFragment.APP_DATA_USAGE;
+        return MetricsEvent.APP_DATA_USAGE;
     }
 
     private AdapterView.OnItemSelectedListener mCycleListener =
