@@ -44,7 +44,7 @@
 
         <RadioGroup
             android:id="@+id/radio_group"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/redaction_vertical_margins"
             android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
@@ -72,26 +72,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lock_screen_notifications_summary_disable" />
 
-            <!-- CheckBox is styled with SuwRadioButton to make it line up nicely with the radios
-                 above. -->
+            <!-- Place the checkbox inside RadioGroup and use SuwRadioButton style instead of
+                 SuwCheckBox style so that the checkbox and text is aligned with radio buttons. -->
             <CheckBox
                 android:id="@+id/lockscreen_remote_input"
-                android:layout_width="match_parent"
+                style="@style/SuwRadioButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/suw_check_box_margin_top"
-                android:text="@string/lockscreen_remote_input"
-                style="@style/SuwRadioButton" />
+                android:layout_marginTop="@dimen/redaction_vertical_margins"
+                android:text="@string/lockscreen_remote_input" />
         </RadioGroup>
-
-        <CheckBox
-            android:id="@+id/lockscreen_remote_input"
-            style="@style/SuwCheckBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/redaction_vertical_margins"
-            android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
-            android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
-            android:text="@string/lockscreen_remote_input" />
 
     </LinearLayout>
 
