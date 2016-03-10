@@ -24,8 +24,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/topLayout"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="@dimen/confirm_credentials_layout_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|center_horizontal">
 
         <TextView
             style="@android:style/TextAppearance.Material.Headline"
