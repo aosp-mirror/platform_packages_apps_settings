@@ -130,7 +130,7 @@ public class UsbModeChooserActivity extends Activity {
 
     private void inflateOption(final int mode, boolean selected, LinearLayout container,
             final boolean disallowedByAdmin) {
-        View v = mLayoutInflater.inflate(R.layout.radio_with_summary, container, false);
+        View v = mLayoutInflater.inflate(R.layout.restricted_radio_with_summary, container, false);
 
         TextView titleView = (TextView) v.findViewById(android.R.id.title);
         titleView.setText(getTitle(mode));
@@ -139,7 +139,7 @@ public class UsbModeChooserActivity extends Activity {
 
         if (disallowedByAdmin) {
             if (mEnforcedAdmin != null) {
-                setDisabledByAdmin(titleView, summaryView);
+                setDisabledByAdmin(v, titleView, summaryView);
             } else {
                 return;
             }
@@ -164,12 +164,11 @@ public class UsbModeChooserActivity extends Activity {
         container.addView(v);
     }
 
-    private void setDisabledByAdmin(TextView titleView, TextView summaryView) {
+    private void setDisabledByAdmin(View rootView, TextView titleView, TextView summaryView) {
         if (mEnforcedAdmin != null) {
             titleView.setEnabled(false);
             summaryView.setEnabled(false);
-            RestrictedLockUtils.setTextViewPadlock(this,
-                    titleView, true /* showPadlock */);
+            rootView.findViewById(R.id.restricted_icon).setVisibility(View.VISIBLE);
             Drawable[] compoundDrawables = titleView.getCompoundDrawablesRelative();
             compoundDrawables[0 /* start */].mutate().setColorFilter(
                     getColor(R.color.disabled_text_color), PorterDuff.Mode.MULTIPLY);
