@@ -831,6 +831,18 @@
                 android:resource="@string/zen_mode_automation_suggestion_summary" />
         </activity>
 
+        <activity android:name="Settings$WallpaperSettingsActivity"
+                  android:label="@string/wallpaper_settings_fragment_title"
+                  android:icon="@drawable/ic_wallpaper"
+                  android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.WALLPAPER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.WallpaperTypeSettings" />
+        </activity>
+
         <activity android:name="Settings$WallpaperSuggestionActivity"
                 android:label="@string/wallpaper_settings_title"
                 android:exported="true"
