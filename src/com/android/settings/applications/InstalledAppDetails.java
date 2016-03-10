@@ -485,17 +485,9 @@ public class InstalledAppDetails extends AppInfoBase
         if (requestCode == REQUEST_UNINSTALL) {
             if (mDisableAfterUninstall) {
                 mDisableAfterUninstall = false;
-                try {
-                    ApplicationInfo ainfo = getActivity().getPackageManager().getApplicationInfo(
-                            mAppEntry.info.packageName, PackageManager.GET_UNINSTALLED_PACKAGES
-                            | PackageManager.GET_DISABLED_COMPONENTS);
-                    if ((ainfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
-                        new DisableChanger(this, mAppEntry.info,
-                                PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
-                                .execute((Object)null);
-                    }
-                } catch (NameNotFoundException e) {
-                }
+                new DisableChanger(this, mAppEntry.info,
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
+                        .execute((Object)null);
             }
             if (!refreshUi()) {
                 setIntentAndFinish(true, true);
@@ -656,11 +648,11 @@ public class InstalledAppDetails extends AppInfoBase
                         .create();
             case DLG_SPECIAL_DISABLE:
                 return new AlertDialog.Builder(getActivity())
-                        .setMessage(getActivity().getText(R.string.app_special_disable_dlg_text))
+                        .setMessage(getActivity().getText(R.string.app_disable_dlg_text))
                         .setPositiveButton(R.string.app_disable_dlg_positive,
                                 new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // Clear user data here
+                                // Disable the app and ask for uninstall
                                 uninstallPkg(mAppEntry.info.packageName,
                                         false, true);
                             }
@@ -706,7 +698,7 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void forceStopPackage(String pkgName) {
-        ActivityManager am = (ActivityManager)getActivity().getSystemService(
+        ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);
@@ -779,7 +771,7 @@ public class InstalledAppDetails extends AppInfoBase
             return;
         }
         String packageName = mAppEntry.info.packageName;
-        if(v == mUninstallButton) {
+        if (v == mUninstallButton) {
             if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
                 Activity activity = getActivity();
                 Intent uninstallDAIntent = new Intent(activity, DeviceAdminAdd.class);
@@ -796,7 +788,10 @@ public class InstalledAppDetails extends AppInfoBase
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(), admin);
             } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
-                    if (mUpdatedSysApp) {
+                    // If the system app has an update and this is the only user on the device,
+                    // then offer to downgrade the app, otherwise only offer to disable the
+                    // app for this user.
+                    if (mUpdatedSysApp && isSingleUser()) {
                         showDialogInner(DLG_SPECIAL_DISABLE, 0);
                     } else {
                         showDialogInner(DLG_DISABLE, 0);
@@ -820,6 +815,13 @@ public class InstalledAppDetails extends AppInfoBase
                 //forceStopPackage(mAppInfo.packageName);
             }
         }
+    }
+
+    /** Returns whether there is only one user on this device, not including the system-only user */
+    private boolean isSingleUser() {
+        final int userCount = mUserManager.getUserCount();
+        return userCount == 1
+                || (mUserManager.isSplitSystemUser() && userCount == 2);
     }
 
     @Override
