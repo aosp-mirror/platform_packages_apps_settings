@@ -71,6 +71,8 @@
             android:visibility="gone"
             android:orientation="vertical">
 
+            <!-- TODO: Don't set alpha here, and do proper themeing that
+                 handles night mode -->
             <TextView
                 android:id="@android:id/summary"
                 android:layout_width="match_parent"
@@ -78,6 +80,7 @@
                 android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
                 android:paddingBottom="16dp"
                 android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                android:alpha=".7"
                 android:textColor="?android:attr/textColorPrimaryInverse" />
 
             <!-- TODO: Better background -->
@@ -99,6 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="0dp"
+                    android:alpha=".7"
                     android:textColor="?android:attr/textColorPrimaryInverse"
                     style="?android:attr/buttonBarButtonStyle" />
 
@@ -106,6 +110,7 @@
                     android:id="@+id/second_action"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:alpha=".7"
                     android:textColor="?android:attr/textColorPrimaryInverse"
                     style="?android:attr/buttonBarButtonStyle" />
 
