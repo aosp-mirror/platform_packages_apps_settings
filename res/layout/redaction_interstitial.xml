@@ -44,21 +44,21 @@
 
         <com.android.settings.RestrictedRadioButton
                 android:id="@+id/show_all"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/redaction_vertical_margins"
                 android:text="@string/lock_screen_notifications_summary_show" />
 
         <com.android.settings.RestrictedRadioButton
                 android:id="@+id/redact_sensitive"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/redaction_vertical_margins"
                 android:text="@string/lock_screen_notifications_summary_hide" />
 
         <RadioButton
                 android:id="@+id/hide_all"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/redaction_vertical_margins"
                 android:text="@string/lock_screen_notifications_summary_disable" />
