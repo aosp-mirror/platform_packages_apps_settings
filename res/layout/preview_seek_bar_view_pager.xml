@@ -14,37 +14,28 @@
      limitations under the License.
 -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-    android:foreground="@drawable/preview_seek_bar_outline" >
+    android:orientation="vertical"
+    android:padding="@dimen/preview_pager_padding"
+    android:background="@drawable/preview_seek_bar_outline" >
 
     <android.support.v4.view.ViewPager
         android:id="@+id/preview_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="?android:attr/colorBackgroundFloating" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="8dp"
-        android:background="@color/seek_bar_preference_preview_border_tint" />
-
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:layout_marginStart="32dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
+        android:paddingStart="32dp"
+        android:gravity="start|center"
         android:text="@string/screen_zoom_preview_title"
         android:textAppearance="@android:style/TextAppearance.Material.Widget.ActionBar.Title"
-        android:textColor="@color/seek_bar_preference_preview_text"
-        android:elevation="2dp"/>
-</RelativeLayout>
+        android:textColor="@color/seek_bar_preference_preview_text" />
+</LinearLayout>
 
