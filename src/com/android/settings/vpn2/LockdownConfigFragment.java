@@ -71,14 +71,9 @@ public class LockdownConfigFragment extends DialogFragment {
         dialog.show(parent.getFragmentManager(), TAG_LOCKDOWN);
     }
 
-    private static String getStringOrNull(KeyStore keyStore, String key) {
-        final byte[] value = keyStore.get(key);
-        return value == null ? null : new String(value);
-    }
-
     private void initProfiles(KeyStore keyStore, Resources res) {
         final ConnectivityManager cm = ConnectivityManager.from(getActivity());
-        final String lockdownKey = getStringOrNull(keyStore, Credentials.LOCKDOWN_VPN);
+        final String lockdownKey = VpnUtils.getLockdownVpn();
         final String alwaysOnPackage =  cm.getAlwaysOnVpnPackageForUser(UserHandle.myUserId());
 
         // Legacy VPN has a separate always-on mechanism which takes over the whole device, so

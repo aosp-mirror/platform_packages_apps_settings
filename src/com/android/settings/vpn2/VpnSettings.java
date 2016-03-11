@@ -355,8 +355,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             } else if (tag instanceof AppPreference) {
                 AppPreference pref = (AppPreference) tag;
                 boolean connected = (pref.getState() == AppPreference.STATE_CONNECTED);
-                AppDialogFragment.show(VpnSettings.this, pref.getPackageInfo(), pref.getLabel(),
-                        true /* editing */, connected);
+                AppManagementFragment.show(getPrefContext(), pref);
             }
         }
     };
