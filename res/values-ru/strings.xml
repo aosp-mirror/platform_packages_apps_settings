@@ -2016,6 +2016,8 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Администратор активирован и разрешает приложению <xliff:g id="APP_NAME">%1$s</xliff:g> выполнять следующие операции:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Включить менеджер профилей?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"Администратор будет управлять этим профилем и сможет сохранять связанные с ним данные, а также вашу личную информацию.\n\nКроме того, администратор сможет контролировать и изменять настройки и параметры доступа, а также управлять данными этого профиля, в том числе получать сведения о действиях в сети и местоположении."</string>
+    <string name="admin_disabled_other_options" msgid="4564776259414246934">"Другие функции отключены администратором."</string>
+    <string name="admin_more_details" msgid="7901420667346456102">"Подробнее…"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Без названия"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Общие"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Журнал уведомлений"</string>
@@ -2185,8 +2187,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"Если ограничить передачу данных в фоновом режиме по мобильной сети, некоторые приложения и сервисы не будут работать без подключения к сети Wi-Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"Если ограничить передачу данных в фоновом режиме по мобильной сети, некоторые приложения и сервисы не будут работать без подключения к сети Wi-Fi.\n\nНастройки будут изменены для всех пользователей устройства."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"Если ограничить передачу данных в фоновом режиме по мобильной сети, некоторые приложения и сервисы не будут работать без подключения к сети Wi-Fi.\n\nНастройки будут изменены для всех пользователей устройства."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Предупреждение"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Предупреждение"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Лимит"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Удаленные приложения"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Удаленные приложения и пользователи"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"Получено: <xliff:g id="RECEIVED">%1$s</xliff:g>; отправлено: <xliff:g id="SENT">%2$s</xliff:g>"</string>
@@ -2553,7 +2555,7 @@
     <string name="notification_importance_min" msgid="2370444628448134377">"Наименьшая: показывать без звука в конце списка уведомлений"</string>
     <string name="notification_importance_low" msgid="979932751695283877">"Низкая: показывать без звука"</string>
     <string name="notification_importance_default" msgid="8789180840561778039">"Средняя: показывать со звуком"</string>
-    <string name="notification_importance_high" msgid="5044607814670313040">"Важно: показывать со звуковым сигналом поверх всех окон"</string>
+    <string name="notification_importance_high" msgid="5044607814670313040">"Важно: поверх всех окон и звуковой сигнал"</string>
     <string name="notification_importance_max" msgid="6036245535555486319">"Наивысшая: показывать со звуком в начале списка уведомлений и поверх всех окон"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Сбросить"</string>
     <string name="show_silently" msgid="2222875799232222056">"Без звука"</string>
@@ -2662,8 +2664,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Не показывать на экране уведомления, отключенные в режиме \"Не беспокоить\""</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Блокировать при отключенном экране"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Не включать экран и световой индикатор для уведомлений, отключенных в режиме \"Не беспокоить\""</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Не включать экран для уведомлений, отключенных в режиме \"Не беспокоить\""</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Отключено"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"При включенном экране"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"При отключенном экране"</string>
@@ -2731,15 +2732,11 @@
     <string name="notifications_label" msgid="2872668710589600731">"Уведомления"</string>
     <string name="notifications_enabled" msgid="4386196629684749507">"Обычные"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Заблокировано"</string>
-    <string name="notifications_silenced" msgid="4728603513072110381">"Оповещения отключены"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_silenced" msgid="4728603513072110381">"Уведомления отключены"</string>
+    <string name="notifications_redacted" msgid="4493588975742803160">"Без конфиденциальных данных на заблокированном экране"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"Без уведомлений на заблок. экране"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"Без учета режима \"Не беспокоить\""</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one">Предоставлено <xliff:g id="COUNT_1">%d</xliff:g> разрешение</item>
       <item quantity="few">Предоставлено <xliff:g id="COUNT_1">%d</xliff:g> разрешения</item>
@@ -2766,9 +2763,9 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Рабочие"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Заблокированные"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"С URL домена"</string>
-    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Переопределяет отключение оповещений"</string>
-    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Не показ. конфиденц. данные на заблок. экране"</string>
-    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Не показывать на заблок. экране"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Не учитывают \"Не беспокоить\""</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Без конф. данных на заблок. экране"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Без уведомл. на заблок. экране"</string>
     <string name="filter_notif_silent" msgid="8533960664617048281">"Без звука"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Дополнительные настройки"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Настроить приложения"</string>
@@ -2959,8 +2956,13 @@
     <string name="see_less" msgid="1250265310929558370">"Скрыть"</string>
     <string name="disconnected" msgid="5787956818111197212">"Отключено"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Использовано трафика: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
-    <string name="notification_summary_none" msgid="3440195312233351409">"Оповещения разрешены во всех приложениях"</string>
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="one">Показывать уведомления запрещено <xliff:g id="COUNT_1">%d</xliff:g> приложению</item>
+      <item quantity="few">Показывать уведомления запрещено <xliff:g id="COUNT_1">%d</xliff:g> приложениям</item>
+      <item quantity="many">Показывать уведомления запрещено <xliff:g id="COUNT_1">%d</xliff:g> приложениям</item>
+      <item quantity="other">Показывать уведомления запрещено <xliff:g id="COUNT_1">%d</xliff:g> приложения</item>
+    </plurals>
+    <string name="notification_summary_none" msgid="3440195312233351409">"Уведомления разрешены во всех приложениях"</string>
     <string name="apps_summary" msgid="193158055537070092">"Установлено приложений: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Установлено 24 приложения"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Использовано: <xliff:g id="SIZE1">%1$s</xliff:g> из <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
@@ -3080,4 +3082,7 @@
     <string name="special_access" msgid="8275242424094109976">"Специальный доступ"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Удалить пользовательские данные и перейти к шифрованию?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Очистить и перейти"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Сбросить счетчики ограничения скорости для ShortcutManager"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Сбросить счетчики ShortcutManager?"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Сбросить счетчики ограничения скорости для ShortcutManager?"</string>
 </resources>

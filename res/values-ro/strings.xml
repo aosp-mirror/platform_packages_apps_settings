@@ -2000,6 +2000,8 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Acest administrator este activ și permite aplicației <xliff:g id="APP_NAME">%1$s</xliff:g> să execute următoarele:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Activați Administratorul de profil?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"În cazul în care continuați, Utilizatorul va fi gestionat de Administrator, care ar putea să stocheze, pe lângă datele personale, și date asociate.\n\nAdministratorul are posibilitatea de a monitoriza și a gestiona setările, accesul, aplicațiile și datele asociate cu acest Utilizator, inclusiv activitatea în rețea și informațiile despre locația dispozitivului."</string>
+    <string name="admin_disabled_other_options" msgid="4564776259414246934">"Alte opțiuni sunt dezactivate de administrator."</string>
+    <string name="admin_more_details" msgid="7901420667346456102">"Mai multe detalii"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Fără titlu"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Jurnal de notificări"</string>
@@ -2169,8 +2171,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"Dacă restricționați datele mobile de fundal, unele aplicații și servicii nu vor funcționa decât dacă sunteți conectat(ă) la Wi-Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"Dacă limitați transferul de date mobile în fundal, unele aplicații și servicii nu vor funcționa decât dacă sunteți conectat(ă) la o rețea Wi-Fi.\n\nAceastă setare afectează toți utilizatorii acestei tablete."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"Dacă limitați transferul de date mobile în fundal, unele aplicații și servicii nu vor funcționa decât dacă sunteți conectat(ă) la o rețea Wi-Fi.\n\nAceastă setare afectează toți utilizatorii acestui telefon."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"avertisment"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limită"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"avertisment"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limită"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Aplicații eliminate"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Aplicații și utilizatori eliminați"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> primiți, <xliff:g id="SENT">%2$s</xliff:g> trimiși"</string>
@@ -2643,8 +2645,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Împiedicați afișarea de scurtă durată sau într-o fereastră pop-up pe ecran a notificărilor dezactivate prin Nu deranja"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Blocați când ecranul este dezactivat"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Nu permiteți notificărilor dezactivate prin Nu deranja să activeze ecranul sau lumina intermitentă de notificare"</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Nu permiteți notificărilor dezactivate prin Nu deranja să activeze ecranul"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Dezactivat"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Când ecranul este activat"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Când ecranul este dezactivat"</string>
@@ -2713,14 +2714,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Normal"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Blocate"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Dezactivate"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_redacted" msgid="4493588975742803160">"Fără conținut sensibil pe ecranul de blocare"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"Nu pe ecranul de blocare"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"Nu deranja a fost ignorat"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> permisiuni acordate</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> de permisiuni acordate</item>
@@ -2934,7 +2931,11 @@
     <string name="see_less" msgid="1250265310929558370">"Afișați mai puține"</string>
     <string name="disconnected" msgid="5787956818111197212">"Deconectată"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Date folosite: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="few">Trimiterea este blocată pentru <xliff:g id="COUNT_1">%d</xliff:g> aplicații</item>
+      <item quantity="other">Trimiterea este blocată pentru <xliff:g id="COUNT_1">%d</xliff:g> de aplicații</item>
+      <item quantity="one">Trimiterea este blocată pentru <xliff:g id="COUNT_0">%d</xliff:g> aplicație</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"Trimiterea este permisă pentru toate aplicațiile"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> (de) aplicații instalate"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 de aplicații instalate"</string>
@@ -3054,4 +3055,7 @@
     <string name="special_access" msgid="8275242424094109976">"Acces special"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Sigur doriți să ștergeți datele utilizatorului și să faceți conversia la criptarea bazată pe sistemul de fișiere?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Ștergeți și convertiți"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Resetați contoarele de limitare a frecvenței ShortcutManager"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Resetați limitarea frecvenței pentru ShortcutManager?"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Resetați contoarele de limitare a frecvenței ShortcutManager?"</string>
 </resources>

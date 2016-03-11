@@ -1984,6 +1984,8 @@
     <string name="device_admin_status" msgid="4252975713178851910">"આ વ્યવસ્થાપક સક્રિય છે અને એપ્લિકેશન <xliff:g id="APP_NAME">%1$s</xliff:g> ને નીચેના કાર્યો કરવાની મંજૂરી આપે છે:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"પ્રોફાઇલ સંચાલક સક્રિય કરીએ?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"આગળ વધીને, તમારો વપરાશકર્તા તમારા વ્યવસ્થાપક દ્વારા સંચાલિત થશે જે તમારા વ્યક્તિગત ડેટા ઉપરાંત, સંકળાયેલ ડેટા સંગ્રહિત કરવા માટે સક્ષમ હોઈ શકે છે.\n\nતમારા  વ્યવસ્થાપક પાસે નેટવર્ક પ્રવૃત્તિ અને તમારા ઉપકરણની સ્થાન માહિતી સહિત સેટિંગ્સ, ઍક્સેસ, એપ્લિકેશનો અને આ વપરાશકર્તા સાથે સંકળાયેલ ડેટાને  મૉનિટર અને સંચાલિત કરવાની ક્ષમતા છે."</string>
+    <string name="admin_disabled_other_options" msgid="4564776259414246934">"તમારા વ્યવસ્થાપક દ્વારા અન્ય વિકલ્પો અક્ષમ કરવામાં આવેલ છે."</string>
+    <string name="admin_more_details" msgid="7901420667346456102">"વધુ વિગતો"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"અનામાંકિત"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"સામાન્ય"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"સૂચના લૉગ"</string>
@@ -2153,8 +2155,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"જો તમે પૃષ્ઠભૂમિ સેલ્યુલર ડેટાને પ્રતિબંધિત કરો છો, તો તમે જ્યાં સુધી Wi-Fi સાથે જોડાયેલ રહો, ત્યાં સુધી કેટલીક એપ્લિકેશનો અને સેવાઓ કાર્ય કરશે નહીં."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"જો તમે પૃષ્ઠભૂમિ સેલ્યુલર ડેટાને પ્રતિબંધિત કરો છો, તો તમે જ્યાં સુધી Wi-Fi સાથે જોડાયેલ રહો, ત્યાં સુધી કેટલીક એપ્લિકેશનો અને સેવાઓ કાર્ય કરશે નહીં.\n\nઆ સેટિંગ્સ આ ટેબ્લેટના બધા વપરાશકર્તાઓને પ્રભાવિત કરે છે."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"જો તમે પૃષ્ઠભૂમિ સેલ્યુલર ડેટાને પ્રતિબંધિત કરો છો, તો તમે જ્યાં સુધી Wi-Fi નેટવર્ક સાથે જોડાયેલ રહો, ત્યાં સુધી કેટલીક એપ્લિકેશનો અને સેવાઓ કાર્ય કરશે નહીં.\n\nઆ સેટિંગ્સ આ ફોનના બધા વપરાશકર્તાઓને પ્રભાવિત કરે છે."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ચેતવણી"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"મર્યાદા"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ચેતવણી"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"મર્યાદા"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"દૂર કરેલી એપ્લિકેશનો"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"દૂર કરેલી એપ્લિકેશનો અને વપરાશકર્તાઓ"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> પ્રાપ્ત કર્યાં, <xliff:g id="SENT">%2$s</xliff:g> મોકલ્યાં"</string>
@@ -2624,8 +2626,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"ખલેલ પાડશો નહીં દ્વારા શાંત કરવામાં આવેલ સૂચનાઓને સ્ક્રીન પર ઝબકતી અથવા દેખાતી અટકાવો"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"જ્યારે સ્ક્રીન બંધ હોય ત્યારે અવરોધિત કરો"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"ખલેલ પાડશો નહીં દ્વારા શાંત કરવામાં આવેલ સૂચનાઓને સ્ક્રીનને ચાલુ કરવા અથવા સૂચના લાઇટને ધબકતી અટકાવો"</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"ખલેલ પાડશો નહિ દ્વારા શાંત કરવામાં આવેલ સૂચનાઓને સ્ક્રીન ચાલુ કરતાં અટકાવો"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"બંધ"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"જ્યારે સ્ક્રીન ચાલુ હોય"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"જ્યારે સ્ક્રીન બંધ હોય"</string>
@@ -2694,14 +2695,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"સામાન્ય"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"અવરોધિત"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"શાંત કરી"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_redacted" msgid="4493588975742803160">"સંવેદનશીલ સામગ્રી લોક સ્ક્રીન પર નથી"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"લૉક સ્ક્રીન પર નથી"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"ખલેલ પાડશો નહીં ઓવરરાઇડ કર્યું"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> પરવાનગીઓ આપી</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> પરવાનગીઓ આપી</item>
@@ -2909,7 +2906,10 @@
     <string name="see_less" msgid="1250265310929558370">"ઓછું જુઓ"</string>
     <string name="disconnected" msgid="5787956818111197212">"ડિસ્કનેક્ટ કર્યું"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> ડેટા વાપર્યો"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ઍપ્લિકેશન મોકલવાથી અવરોધિત કરી</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ઍપ્લિકેશન મોકલવાથી અવરોધિત કરી</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"બધી ઍપ્લિકેશનોને સૂચનાઓ મોકલવાની મંજૂરી છે"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> ઍપ્લિકેશનો ઇન્સ્ટોલ કરી"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 ઍપ્લિકેશન ઇન્સ્ટોલ કરી"</string>
@@ -3028,4 +3028,7 @@
     <string name="special_access" msgid="8275242424094109976">"વિશિષ્ટ ઍક્સેસ"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"ખરેખર વપરાશકર્તા ડેટાને સાફ કરીને ફાઇલ એન્ક્રિપ્શનમાં રૂપાંતરિત કરીએ?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"સાફ અને રૂપાંતરિત કરો"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"ShortcutManager દરને મર્યાદિત કરતાં ગણકો ફરીથી સેટ કરો"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"ShortcutManager દરને મર્યાદિત કરવાનું ફરીથી સેટ કરીએ?"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"ShortcutManager દરને મર્યાદિત કરતાં ગણકો ફરીથી સેટ કરીએ?"</string>
 </resources>
