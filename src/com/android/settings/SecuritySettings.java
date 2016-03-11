@@ -36,6 +36,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.security.KeyStore;
@@ -1054,7 +1055,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
             return UserManager.get(context).isAdminUser()
                     && UserManager.get(context).isPrimaryUser()
-                    && LockPatternUtils.isDeviceEncryptionEnabled()
+                    && StorageManager.isBlockEncrypted()
                     && !dpm.getDoNotAskCredentialsOnBoot();
         }
 
