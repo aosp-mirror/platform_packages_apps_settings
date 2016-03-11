@@ -24,7 +24,9 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowInsets;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -55,6 +57,16 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
 
         // Hide System Nav Bar.
         SystemBarHelper.hideSystemBars(getWindow());
+        LinearLayout parentView = (LinearLayout) findViewById(R.id.content_parent);
+        parentView.setFitsSystemWindows(false);
+        // Adjust for the Status Bar.
+        parentView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+                @Override
+                public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
+                    parentView.setPadding(0, insets.getSystemWindowInsetTop(), 0, 0);
+                    return insets;
+                }
+            });
 
         // Show SUW Nav Bar.
         NavigationBar navigationBar = (NavigationBar) findViewById(R.id.suw_navigation_bar);
