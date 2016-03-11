@@ -74,7 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD kartani uzish"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB xotirani tozalash"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD-kartani tozalash"</string>
-    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Oldindan ko‘rish oynasi: <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
+    <string name="preview_page_indicator_content_description" msgid="3263162369344886880">"Oldindan ko‘rish oynasi: <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> / <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Ekrandagi matnni kichiklashtiring yoki kattalashtiring."</string>
     <string name="small_font" msgid="2295331917424072635">"Kichik"</string>
     <string name="medium_font" msgid="2068475425515133701">"O‘rtacha"</string>
@@ -1982,6 +1982,10 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Administrator faol va u <xliff:g id="APP_NAME">%1$s</xliff:g> ilovasiga quyidagilarni bajarish uchun ruxsat bergan:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Profil boshqaruvchisi faollashtirilsinmi?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"Davom etish orqali siz administratorga foydalanuvchi profilingizni boshqarish huquqini taqdim etgan bo‘lasiz. U shaxsiy ma’lumotlaringiz bilan birga boshqa aloqador ma’lumotlarni ham o‘zida saqlashi mumkin.\n\nAdministratoringiz ushbu foydalanuvchi bilan bog‘liq sozlamalar, kirish huquqi, ilova va ma’lumotlarni, jumladan tarmoqdagi faollik va qurilmangiz joylashuvi to‘g‘risidagi ma’lumotlarni kuzatishi hamda ularni boshqarishi mumkin."</string>
+    <!-- no translation found for admin_disabled_other_options (4564776259414246934) -->
+    <skip />
+    <!-- no translation found for admin_more_details (7901420667346456102) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"Sarlavhasiz"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Umumiy"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Bildirishnomalar jurnali"</string>
@@ -2151,8 +2155,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"Agar orqa fonda mobil internetdan foydalanishni cheklab qo‘ysangiz, ba’zi ilova va xizmatlar Wi-Fi tarmog‘iga ulanmaguningizcha ishlamaydi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"Agar orqa fonda mobil internetdan foydalanishni cheklab qo‘ysangiz, ba’zi ilova va xizmatlar Wi-Fi tarmog‘iga ulanmaguningizcha ishlamaydi.\n\nUshbu sozlama mazkur planshetdagi barcha foydalanuvchilarga ta’sir qiladi."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"Agar orqa fonda mobil internetdan foydalanishni cheklab qo‘ysangiz, ba’zi ilova va xizmatlar Wi-Fi tarmog‘iga ulanmaguningizcha ishlamaydi.\n\nUshbu sozlama mazkur telefondagi barcha foydalanuvchilarga ta’sir qiladi."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Ogohlantirish"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Cheklov"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Ogohlantirish"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Cheklov"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"O‘chirilgan ilovalar"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"O‘chirib yuborilgan ilovalar va foydalanuvchilar"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> qabul qilindi, <xliff:g id="SENT">%2$s</xliff:g> jo‘natildi"</string>
@@ -2622,8 +2626,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"“Bezovta qilinmasin” rejimi orqali bildirishnomalar o‘chirib qo‘yilganda ular ekranda qalqib chiqmasin"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Ekran o‘chiq bo‘lganda bloklash"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"“Bezovta qilinmasin” rejimi orqali bildirishnomalar o‘chirib qo‘yilganda ekran va bildirishnomalar uchun yoritkichli indikator yoqilmasin"</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"“Bezovta qilinmasin” funksiyasi orqali ovozsiz qilingan bildirishnomalar tomonidan ekranning yoqilishi oldini olish"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"O‘chiq"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Agar ekran yoniq bo‘lsa"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Agar ekran o‘chiq bo‘lsa"</string>
@@ -2692,14 +2695,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Odatiy"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Bloklandi"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Bildirishnoma yuborish o‘chirib qo‘yilgan"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_redacted" msgid="4493588975742803160">"Qulf ekranida maxfiy ma’lumot ko‘rsatilmaydi"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"Qulf ekranida ko‘rsatilmaydi"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"Bezovta qilinmasin rejimi bekor qilingan"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ta ruxsat berildi</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ta ruxsat berildi</item>
@@ -2907,7 +2906,10 @@
     <string name="see_less" msgid="1250265310929558370">"Kamroq"</string>
     <string name="disconnected" msgid="5787956818111197212">"Aloqa uzildi"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Ishlatilgan traffik: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ta ilova bildirishnoma yuborishi taqiqlangan</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ta ilova bildirishnoma yuborishi taqiqlangan</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"Barcha ilovalarga bildirishnoma yuborishga ruxsat berilgan"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> ta ilova o‘rnatilgan"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 ta ilova o‘rnatilgan"</string>
@@ -3026,4 +3028,10 @@
     <string name="special_access" msgid="8275242424094109976">"Maxsus ruxsat"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Foydalanuvchi ma’lumotlari o‘chirib tashlanib, shifrlashga o‘tilsinmi?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"O‘chirib tashlash va o‘girish"</string>
+    <!-- no translation found for reset_shortcut_manager_throttling (4021064939697753381) -->
+    <skip />
+    <!-- no translation found for confirm_reset_shortcut_manager_throttling_title (6504835349094036279) -->
+    <skip />
+    <!-- no translation found for confirm_reset_shortcut_manager_throttling_message (3812874125513775052) -->
+    <skip />
 </resources>

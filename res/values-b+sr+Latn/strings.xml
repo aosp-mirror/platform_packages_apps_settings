@@ -1999,6 +1999,8 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Ovaj administrator je aktivan i omogućava da aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g> obavi sledeće operacije:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Aktivirati Menadžera profila?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"Ako nastavite, korisnikom će upravljati administrator koji će možda takođe moći da čuva povezane podatke pored vaših ličnih podataka.\n\nAdministrator može da nadgleda podešavanja, pristup, aplikacije i podatke povezane sa ovim korisnikom, uključujući mrežnu aktivnost i informacije o lokaciji uređaja, kao i da upravlja njima."</string>
+    <string name="admin_disabled_other_options" msgid="4564776259414246934">"Administrator je onemogućio druge opcije."</string>
+    <string name="admin_more_details" msgid="7901420667346456102">"Još detalja"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Bez naslova"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Opšte"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Evidencija obaveštenja"</string>
@@ -2168,8 +2170,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"Ako ograničite pozadinske podatke za mobilne uređaje, neke aplikacije i usluge neće funkcionisati ako niste povezani sa Wi-Fi-jem."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"Ako ograničite pozadinske podatke za mobilne uređaje, neke aplikacije i usluge neće funkcionisati ako niste povezani sa Wi-Fi-jem.\n\nOvo podešavanje utiče na sve korisnike ovog tableta."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"Ako ograničite pozadinske podatke za mobilne uređaje, neke aplikacije i usluge neće funkcionisati ako niste povezani sa Wi-Fi-jem.\n\nOvo podešavanje utiče na sve korisnike ovog telefona."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"upozorenje:"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"ograničenje:"</font>\n<font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"upozorenje:"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"ograničenje:"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Uklonjene aplikacije"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Uklonjene aplikacije i korisnici"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"Primljenih: <xliff:g id="RECEIVED">%1$s</xliff:g>, poslatih: <xliff:g id="SENT">%2$s</xliff:g>"</string>
@@ -2642,8 +2644,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Sprečava da se obaveštenja koja su isključena režimom Ne uznemiravaj prikazuju ili iskaču na ekranu"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Blokiraj kada je ekran isključen"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Sprečava da obaveštenja koja su isključena režimom Ne uznemiravaj uključe ekran ili izazovu treperenje svetla za obaveštenja"</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Sprečava da obaveštenja koja su isključena režimom Ne uznemiravaj uključe ekran"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Isključeno"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Kada je ekran uključen"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Kada je ekran isključen"</string>
@@ -2712,14 +2713,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Normalno"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Blokirano"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Isključena"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_redacted" msgid="4493588975742803160">"Nema osetljivog sadržaja na zaključanom ekranu"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"Ne na zaključanom ekranu"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"Režim Ne uznemiravaj je zamenjen"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> dozvola je odobrena</item>
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> dozvole su odobrene</item>
@@ -2933,7 +2930,11 @@
     <string name="see_less" msgid="1250265310929558370">"Prikaži manje"</string>
     <string name="disconnected" msgid="5787956818111197212">"Veza je prekinuta"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Koristi se <xliff:g id="AMOUNT">%1$s</xliff:g> podataka"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="one">Sprečeno je slanje <xliff:g id="COUNT_1">%d</xliff:g> aplikacije</item>
+      <item quantity="few">Sprečeno je slanje <xliff:g id="COUNT_1">%d</xliff:g> aplikacije</item>
+      <item quantity="other">Sprečeno je slanje <xliff:g id="COUNT_1">%d</xliff:g> aplikacija</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"Slanje je dozvoljeno za sve aplikacije"</string>
     <string name="apps_summary" msgid="193158055537070092">"Instaliranih aplikacija: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Instalirane su 24 aplikacije"</string>
@@ -3053,4 +3054,7 @@
     <string name="special_access" msgid="8275242424094109976">"Specijalan pristup"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Želite li stvarno da izbrišete podatke korisnika i da konvertujete u šifrovanje datoteka?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Izbriši i konvertuj"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Resetuj brojanje za ograničavanje broja u ShortcutManager-u"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Želite li da resetujete ograničavanje broja u ShortcutManager-u?"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Želite li da resetujete brojanje za ograničavanje broja u ShortcutManager-u?"</string>
 </resources>

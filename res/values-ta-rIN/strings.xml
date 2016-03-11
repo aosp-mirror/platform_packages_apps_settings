@@ -1982,6 +1982,8 @@
     <string name="device_admin_status" msgid="4252975713178851910">"நிர்வாகி செயலில் உள்ளார், மேலும் பின்வரும் செயல்பாடுகளை மேற்கொள்ள <xliff:g id="APP_NAME">%1$s</xliff:g> பயன்பாட்டை அனுமதிக்கிறார்:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"சுயவிவர நிர்வாகியை இயக்கவா?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"தொடர்வதன் மூலம், உங்கள் நிர்வாகியால் பயனர் நிர்வகிக்கப்படுவார், அதனால் உங்கள் தனிப்பட்ட தரவுடன் சேர்த்து, தொடர்புடைய தரவும் சேமிக்கப்படலாம்.\n\nஉங்கள் நிர்வாகியால் நெட்வொர்க் செயல்பாடு, சாதனத்தின் இருப்பிடத் தகவல் உட்பட இவருடன் தொடர்புடைய அமைப்புகள், அணுகல், பயன்பாடுகள் மற்றும் தரவைக் கண்காணிக்கவும் நிர்வகிக்கவும் முடியும்."</string>
+    <string name="admin_disabled_other_options" msgid="4564776259414246934">"உங்கள் நிர்வாகி பிற விருப்பங்களை முடக்கியுள்ளார்."</string>
+    <string name="admin_more_details" msgid="7901420667346456102">"மேலும் விவரங்கள்"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"பெயரிடப்படாதது"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"பொதுவானவை"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"அறிவிப்பு பதிவு"</string>
@@ -2151,8 +2153,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"பின்புல செல்லுலார் தரவைக் கட்டுப்படுத்தினால், வைஃபையுடன் இணைக்கப்படும் வரை சில பயன்பாடுகளும் சேவைகளும் வேலை செய்யாது."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"பின்புல செல்லுலார் தரவைக் கட்டுப்படுத்தினால், வைஃபையுடன் இணைக்கப்படும் வரை சில பயன்பாடுகளும் சேவைகளும் வேலை செய்யாது.\n\nஇந்த அமைப்பு டேப்லெட்டில் உள்ள அனைவரையும் பாதிக்கும்."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"பின்புல செல்லுலார் தரவைக் கட்டுப்படுத்தினால், வைஃபையுடன் இணைக்கப்படும் வரை சில பயன்பாடுகளும் சேவைகளும் வேலை செய்யாது.\n\nஇந்த அமைப்பு மொபைலில் உள்ள அனைவரையும் பாதிக்கும்."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"எச்சரிக்கை"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"வரம்பு"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"எச்சரிக்கை"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"வரம்பு"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"அகற்றப்பட்ட பயன்பாடுகள்"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"அகற்றப்பட்ட பயன்பாடுகள் மற்றும் பயனர்கள்"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> பெறப்பட்டது, <xliff:g id="SENT">%2$s</xliff:g> அனுப்பப்பட்டது"</string>
@@ -2622,8 +2624,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"தொந்தரவு செய்ய வேண்டாம் என்பதன் மூலம் நிசப்தமாக்கப்பட்ட அறிவிப்புகள், திரையில் குறுக்கிடுவதை அல்லது தோன்றுவதைத் தடு"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"திரை முடக்கப்பட்டிருக்கும் போது தடு"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"தொந்தரவு செய்ய வேண்டாம் என்பதன் மூலம் நிசப்தமாக்கப்பட்ட அறிவிப்புகள் வரும் போது, திரையை இயக்குவதை அல்லது அறிவிப்பு ஒளி ஒளிர்வதைத் தடு"</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"தொந்தரவு செய்ய வேண்டாம் என்பதன் மூலம் நிசப்தமாக்கப்பட்ட அறிவிப்புகள் வரும் போது, திரையை இயக்குவதைத் தடுக்கும்"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"முடக்கத்தில்"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"திரை இயக்கப்பட்டிருக்கும் போது"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"திரை முடக்கப்பட்டிருக்கும் போது"</string>
@@ -2692,14 +2693,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"இயல்பு"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"தடுக்கப்பட்டுள்ளன"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"தடுக்கப்பட்டுள்ளன"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_redacted" msgid="4493588975742803160">"பூட்டுத்திரையில் காட்டாத முக்கிய உள்ளடக்கம்"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"பூட்டுத் திரையில் காட்டாத அறிவிப்புகள்"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"தொந்தரவு செய்ய வேண்டாம் என்பதை மீறிய அறிவிப்புகள்"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> அனுமதிகள் வழங்கப்பட்டன</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> அனுமதி வழங்கப்பட்டது</item>
@@ -2907,7 +2904,10 @@
     <string name="see_less" msgid="1250265310929558370">"குறைவாகக் காட்டு"</string>
     <string name="disconnected" msgid="5787956818111197212">"துண்டிக்கப்பட்டது"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> தரவு பயன்படுத்தப்பட்டுள்ளது"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="other">அனுப்புவதிலிருந்து <xliff:g id="COUNT_1">%d</xliff:g> பயன்பாடுகள் தடுக்கப்பட்டன</item>
+      <item quantity="one">அனுப்புவதிலிருந்து <xliff:g id="COUNT_0">%d</xliff:g> பயன்பாடு தடுக்கப்பட்டது</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"அறிவிப்புகளை அனுப்புவதற்கு எல்லா பயன்பாடுகளும் அனுமதிக்கப்பட்டன"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> பயன்பாடுகள் நிறுவப்பட்டுள்ளன"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 பயன்பாடுகள் நிறுவப்பட்டன"</string>
@@ -3026,4 +3026,7 @@
     <string name="special_access" msgid="8275242424094109976">"சிறப்பு அணுகல்"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"பயனர் தரவை அழித்து, கோப்பு முறைமையாக்கத்திற்கு மாற்ற வேண்டுமா?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"அழித்து, மாற்று"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"குறுக்குவழி நிர்வாகியின் மதிப்பீட்டு வரம்புக் கவுன்டர்களை மீட்டமை"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"குறுக்குவழி நிர்வாகியின் மதிப்பீட்டு வரம்பை மீட்டமைக்கவா?"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"குறுக்குவழி நிர்வாகியின் மதிப்பீட்டு வரம்புக் கவுன்டர்களை மீட்டமைக்கவா?"</string>
 </resources>

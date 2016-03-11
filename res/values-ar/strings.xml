@@ -2050,6 +2050,8 @@
     <string name="device_admin_status" msgid="4252975713178851910">"هذا المشرف نشط ويسمح للتطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> بتنفيذ العمليات التالية:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"هل تريد تنشيط مدير الملف الشخصي؟"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"من خلال المتابعة فإن المستخدم ستتم إدارته من خلال المشرف والذي يكون بإمكانه أيضًا تخزين البيانات المرتبطة بالإضافة إلى بياناتك الشخصية.\n\nويكون لدي المشرف القدرة على مراقبة وإدارة الإعدادات وحق الدخول والتطبيقات والبيانات المرتبطة بهذا المستخدم، بما في ذلك نشاط الشبكة ومعلومات موقع أجهزتك."</string>
+    <string name="admin_disabled_other_options" msgid="4564776259414246934">"يتم عرض خيارات أخرى بواسطة المشرف."</string>
+    <string name="admin_more_details" msgid="7901420667346456102">"مزيد من التفاصيل"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"بلا عنوان"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"إعدادات عامة"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"سجل الإشعارات"</string>
@@ -2219,8 +2221,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"‏في حالة تقييد بيانات الجوّال الخلفية، لن تعمل بعض التطبيقات والخدمات ما لم تكن متصلاً بشبكة Wi‑Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"‏في حالة تقييد بيانات الجوّال الخلفية، لن تعمل بعض التطبيقات والخدمات ما لم تكن متصلاً بشبكة Wi‑Fi.‏\n\nويؤثر هذا الإعداد في كل المستخدمين على هذا الجهاز اللوحي."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"‏في حالة تقييد بيانات الجوّال الخلفية، لن تعمل بعض التطبيقات والخدمات ما لم تكن متصلاً بشبكة Wi‑Fi.‏\n\nويؤثر هذا الإعداد في كل المستخدمين على هذا الهاتف."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"تحذير"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"الحد"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"تحذير"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"الحد"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"التطبيقات المزالة"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"التطبيقات والمستخدمون الذين تمت إزالتهم"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"تم استلام <xliff:g id="RECEIVED">%1$s</xliff:g>، تم إرسال <xliff:g id="SENT">%2$s</xliff:g>"</string>
@@ -2702,8 +2704,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"منع الإشعارات التي يتم تجاهلها باستخدام إعداد \"الرجاء عدم الإزعاج\" من الظهور بشكل سريع أو الظهور بالكامل على الشاشة"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"حظر عندما تكون الشاشة في وضع الإيقاف"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"منع الإشعارات التي يتم تجاهلها باستخدام إعداد \"الرجاء عدم الإزعاج\" من تشغيل الشاشة أو إحداث وميض لمصباح الإشعارات"</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"منع الإشعارات التي يتم تجاهلها باستخدام إعداد \"الرجاء عدم الإزعاج\" من تشغيل الشاشة"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"إيقاف"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"عندما تكون الشاشة في وضع التشغيل"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"عندما تكون الشاشة في وضع الإيقاف"</string>
@@ -2772,14 +2773,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"عادية"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"تم الحظر"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"تم كتم الصوت"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_redacted" msgid="4493588975742803160">"المحتوى الحساس ليس على شاشة التأمين"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"ليست على شاشة التأمين"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"تم تجاوز \"الرجاء عدم الإزعاج\""</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="zero">تم منح <xliff:g id="COUNT_1">%d</xliff:g> من الأذونات</item>
       <item quantity="two">تم منح إذنين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
@@ -3011,7 +3008,14 @@
     <string name="see_less" msgid="1250265310929558370">"عرض عناصر أقل"</string>
     <string name="disconnected" msgid="5787956818111197212">"تم قطع الاتصال"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"تم استخدام <xliff:g id="AMOUNT">%1$s</xliff:g> من البيانات"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="zero">تم حظر <xliff:g id="COUNT_1">%d</xliff:g> تطبيق من الإرسال</item>
+      <item quantity="two">تم حظر تطبيقين (<xliff:g id="COUNT_1">%d</xliff:g>) من الإرسال</item>
+      <item quantity="few">تم حظر <xliff:g id="COUNT_1">%d</xliff:g> تطبيقات من الإرسال</item>
+      <item quantity="many">تم حظر <xliff:g id="COUNT_1">%d</xliff:g> تطبيقًا من الإرسال</item>
+      <item quantity="other">تم حظر <xliff:g id="COUNT_1">%d</xliff:g> تطبيق من الإرسال</item>
+      <item quantity="one">تم حظر <xliff:g id="COUNT_0">%d</xliff:g> تطبيق من الإرسال</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"يُسمح لجميع التطبيقات بالإرسال"</string>
     <string name="apps_summary" msgid="193158055537070092">"تم تثبيت <xliff:g id="COUNT">%1$d</xliff:g> تطبيق"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 تطبيقًا مثبَّتًا"</string>
@@ -3134,4 +3138,7 @@
     <string name="special_access" msgid="8275242424094109976">"الوصول الخاص"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"هل تريد بالتأكيد مسح بيانات المستخدم والتحويل إلى تشفير الملفات؟"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"مسح وتحويل"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"‏إعادة تعيين عدادات تقييد المعدل في ShortcutManager"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"‏هل تريد إعادة تعيين تقييد المعدل في ShortcutManager؟"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"‏هل تريد إعادة تعيين عدادات تقييد المعدل في ShortcutManager؟"</string>
 </resources>

@@ -1982,6 +1982,8 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Ứng dụng quản trị này hoạt động và cho phép ứng dụng <xliff:g id="APP_NAME">%1$s</xliff:g> thực hiện các tác vụ sau:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Kích hoạt Trình quản lý hồ sơ?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"Bằng cách tiếp tục, Người dùng của bạn sẽ do Quản trị viên quản lý. Ngoài dữ liệu cá nhân của bạn, Quản trị viên cũng có thể lưu trữ dữ liệu được liên kết.\n\nQuản trị viên của bạn có thể giám sát và quản lý cài đặt, quyền truy cập, ứng dụng và dữ liệu được liên kết với Người dùng này, bao gồm hoạt động mạng và thông tin về vị trí của thiết bị."</string>
+    <string name="admin_disabled_other_options" msgid="4564776259414246934">"Các tùy chọn khác đã bị quản trị viên của bạn tắt."</string>
+    <string name="admin_more_details" msgid="7901420667346456102">"Thông tin chi tiết khác"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Không có tiêu đề"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Chung"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Nhật ký thông báo"</string>
@@ -2151,8 +2153,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"Nếu bạn hạn chế dữ liệu di động nền thì một số ứng dụng và dịch vụ sẽ không hoạt động trừ khi bạn kết nối với Wi-Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"Nếu bạn hạn chế dữ liệu di động nền, một số ứng dụng và dịch vụ sẽ không hoạt động trừ khi bạn kết nối với Wi-Fi.\n\nCài đặt này ảnh hưởng đến tất cả người dùng trên máy tính bảng này."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"Nếu bạn hạn chế dữ liệu di động nền thì một số ứng dụng và dịch vụ sẽ không hoạt động trừ khi bạn kết nối với Wi-Fi.\n\nCài đặt này ảnh hưởng đến tất cả người dùng trên điện thoại này."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"cảnh báo"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"giới hạn"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"cảnh báo"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"giới hạn"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Ứng dụng đã xóa"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Ứng dụng và người dùng bị xóa"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"Đã nhận <xliff:g id="RECEIVED">%1$s</xliff:g>, đã gửi <xliff:g id="SENT">%2$s</xliff:g>"</string>
@@ -2622,8 +2624,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Ngăn chặn thông báo được tắt tiếng bằng tính năng Không làm phiền xem nhanh hoặc bật trên màn hình"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Chặn khi màn hình đang tắt"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Ngăn chặn các thông báo được tắt tiếng bởi tính năng Không làm phiền bật màn hình hoặc phát xung đèn thông báo"</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Ngăn thông báo được tắt tiếng bằng tính năng Không làm phiền bật màn hình"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Tắt"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Khi màn hình đang bật"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Khi màn hình đang tắt"</string>
@@ -2692,14 +2693,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Bình thường"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Bị chặn"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Bị tắt tiếng"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_redacted" msgid="4493588975742803160">"Nội dung nhạy cảm không có trên màn hình khóa"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"Không ở trên màn hình khóa"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"Đã ghi đè Không làm phiền"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> quyền được cấp</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> quyền được cấp</item>
@@ -2721,7 +2718,7 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Đã chặn"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Có URL miền"</string>
     <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Ghi đè không làm phiền"</string>
-    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Ko có n.dung nhạy cảm ở m.hình khóa"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Ko có nội dung nhạy cảm"</string>
     <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Không hiện trên màn hình khóa"</string>
     <string name="filter_notif_silent" msgid="8533960664617048281">"Hiển thị im lặng"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Nâng cao"</string>
@@ -2907,7 +2904,10 @@
     <string name="see_less" msgid="1250265310929558370">"Xem bớt"</string>
     <string name="disconnected" msgid="5787956818111197212">"Đã ngắt kết nối"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Đã sử dụng <xliff:g id="AMOUNT">%1$s</xliff:g> dữ liệu"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ứng dụng bị chặn gửi</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ứng dụng bị chặn gửi</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"Tất cả ứng dụng đều được phép gửi"</string>
     <string name="apps_summary" msgid="193158055537070092">"Đã cài đặt <xliff:g id="COUNT">%1$d</xliff:g> ứng dụng"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Đã cài đặt 24 ứng dụng"</string>
@@ -3026,4 +3026,7 @@
     <string name="special_access" msgid="8275242424094109976">"Quyền truy cập đặc biệt"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Bạn có thực sự muốn xóa dữ liệu người dùng và chuyển đổi sang mã hóa tệp không?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Xóa và chuyển đổi"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Đặt lại bộ đếm giới hạn tốc độ trong ShortcutManage"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Đặt lại giới hạn tốc độ trong ShortcutManager?"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Đặt lại bộ đếm giới hạn tốc độ trong ShortcutManager?"</string>
 </resources>

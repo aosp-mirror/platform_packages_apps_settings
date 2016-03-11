@@ -1986,6 +1986,10 @@
     <string name="device_admin_status" msgid="4252975713178851910">"這個管理員正在作業中，且允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式執行以下作業："</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"啟用設定檔管理員？"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"如果繼續操作，您的使用者將受到您的管理員管理。除了您的個人資料以外，管理員可能還可以儲存其他相關聯的資料。\n\n您的管理員可以監控及管理與這位使用者相關聯的設定、存取權、應用程式和資料，包括網路活動和您的裝置位置資訊。"</string>
+    <!-- no translation found for admin_disabled_other_options (4564776259414246934) -->
+    <skip />
+    <!-- no translation found for admin_more_details (7901420667346456102) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"未命名"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"一般"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"通知紀錄"</string>
@@ -2155,8 +2159,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"如果您禁止背景行動數據傳輸，部分應用程式和服務只有在裝置連上 Wi-Fi 網路時才能運作。"</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"如果您禁止背景行動數據傳輸，部分應用程式和服務只有在平板電腦連上 Wi-Fi 網路時才能運作。\n\n這項設定適用於這台平板電腦的所有使用者。"</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"如果您禁止背景行動數據傳輸，部分應用程式和服務只有在手機連上 Wi-Fi 網路時才能運作。\n\n這項設定適用於這支手機的所有使用者。"</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"警告"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"限制"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"警告"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"限制"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"移除的應用程式"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"已移除的應用程式和使用者"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"已接收 <xliff:g id="RECEIVED">%1$s</xliff:g>，已傳送 <xliff:g id="SENT">%2$s</xliff:g>"</string>
@@ -2626,8 +2630,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"禁止「零打擾」模式設為靜音的通知在螢幕上短暫顯示或彈出"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"螢幕關閉時封鎖"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"禁止「零打擾」模式設為靜音的通知開啟螢幕或使用指示燈號"</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"禁止「零打擾」模式設為靜音的通知開啟螢幕"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"關閉"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"螢幕開啟時"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"螢幕關閉時"</string>
@@ -2696,14 +2699,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"一般"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"已封鎖"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"已設為靜音"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_redacted" msgid="4493588975742803160">"螢幕鎖定時不顯示敏感內容"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"螢幕鎖定時一律不顯示通知"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"已覆寫「零打擾」設定"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">"/"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other">已取得 <xliff:g id="COUNT_1">%d</xliff:g> 項權限</item>
       <item quantity="one">已取得 <xliff:g id="COUNT_0">%d</xliff:g> 項權限</item>
@@ -2911,7 +2910,10 @@
     <string name="see_less" msgid="1250265310929558370">"顯示較少"</string>
     <string name="disconnected" msgid="5787956818111197212">"已中斷連線"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"已使用 <xliff:g id="AMOUNT">%1$s</xliff:g> 的數據用量"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="other">已禁止 <xliff:g id="COUNT_1">%d</xliff:g> 個應用程式傳送通知</item>
+      <item quantity="one">已禁止 <xliff:g id="COUNT_0">%d</xliff:g> 個應用程式傳送通知</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"目前允許所有應用程式傳送通知"</string>
     <string name="apps_summary" msgid="193158055537070092">"已安裝 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"已安裝 24 個應用程式"</string>
@@ -3030,4 +3032,10 @@
     <string name="special_access" msgid="8275242424094109976">"特別存取權"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"確定要清除使用者資料並轉換改用加密檔案嗎？"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"清除並轉換"</string>
+    <!-- no translation found for reset_shortcut_manager_throttling (4021064939697753381) -->
+    <skip />
+    <!-- no translation found for confirm_reset_shortcut_manager_throttling_title (6504835349094036279) -->
+    <skip />
+    <!-- no translation found for confirm_reset_shortcut_manager_throttling_message (3812874125513775052) -->
+    <skip />
 </resources>
