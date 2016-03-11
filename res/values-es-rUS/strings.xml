@@ -1982,6 +1982,8 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Este administrador está activo y permite que la aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> realice las siguientes operaciones:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"¿Activar el Administrador de perfiles?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"Al continuar, el usuario será administrado por el administrador, que también podría almacenar datos asociados, además de los datos personales.\n\nEl administrador puede supervisar y administrar la configuración, el acceso, las aplicaciones y los datos asociados con este usuario, incluida la información acerca de la actividad de la red y la ubicación del dispositivo."</string>
+    <string name="admin_disabled_other_options" msgid="4564776259414246934">"Tu administrador inhabilitó algunas opciones."</string>
+    <string name="admin_more_details" msgid="7901420667346456102">"Más información"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Sin título"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Registro de notificaciones"</string>
@@ -2151,8 +2153,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"Si restringes los datos móviles en segundo plano, algunas aplicaciones y servicios no funcionarán a menos que te conectes a una red Wi-Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"Si restringes los datos móviles en segundo plano, algunas aplicaciones y servicios no funcionarán a menos que te conectes a una red Wi-Fi.\n\nEsta configuración afecta a todos los usuarios de la tablet."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"Si restringes los datos móviles en segundo plano, algunas aplicaciones y servicios no funcionarán a menos que te conectes a una red Wi-Fi.\n\nEsta configuración afecta a todos los usuarios del teléfono."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"advertencia"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"límite"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font><font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"advertencia"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"límite"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Aplicaciones eliminadas"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Aplicaciones y usuarios eliminados"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> recibidos, <xliff:g id="SENT">%2$s</xliff:g> enviados"</string>
@@ -2620,8 +2622,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Impide que las notificaciones silenciadas por \"No molestar\" se visualicen o aparezcan en la pantalla"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Bloquear cuando la pantalla está apagada"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Impide que las notificaciones silenciadas por \"No molestar\" se activen en la pantalla o enciendan la luz de notificación"</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Impide que las notificaciones silenciadas por \"No molestar\" activen la pantalla"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Desactivada"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Cuando la pantalla está encendida"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Cuando la pantalla está apagada"</string>
@@ -2690,14 +2691,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Normal"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Bloqueadas"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Silenciada"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_redacted" msgid="4493588975742803160">"Sin contenido sensible en la pantalla bloqueada"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"No se muestran en la pantalla bloqueada"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"Anulan \"No molestar\""</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> permisos otorgados</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> permiso otorgado</item>
@@ -2905,7 +2902,10 @@
     <string name="see_less" msgid="1250265310929558370">"Ver menos"</string>
     <string name="disconnected" msgid="5787956818111197212">"Desconectado"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> de datos usados"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apps no pueden enviar notificaciones</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app no puede enviar notificaciones</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"Todas las apps pueden enviar contenido"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> apps instaladas"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Apps instaladas: 24"</string>
@@ -3024,4 +3024,7 @@
     <string name="special_access" msgid="8275242424094109976">"Acceso especial"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"¿Estás seguro de que quieres borrar los datos del usuario y convertirlos a encriptación de archivo?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Borrar y convertir"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Restablecer los contadores de limitación de frecuencia de ShortcutManager"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"¿Quieres restablecer la limitación de frecuencia de ShortcutManager?"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"¿Quieres restablecer los contadores de limitación de frecuencia de ShortcutManager?"</string>
 </resources>

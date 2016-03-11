@@ -1982,6 +1982,8 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Administratoren er aktiv og tillater at appen <xliff:g id="APP_NAME">%1$s</xliff:g> utfører følgende handlinger:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Vil du aktivere profiladministratoren?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"Hvis du fortsetter, kommer brukeren din til å styres av administratoren din, som kanskje kan lagre tilknyttede data, i tillegg til de private dataene dine.\n\nAdministratoren din kan overvåke og administrere innstillinger, tilgang, apper og data tilknyttet denne brukeren, herunder nettverksaktivitet og posisjonsinformasjonen for enhetene dine."</string>
+    <string name="admin_disabled_other_options" msgid="4564776259414246934">"Administratoren har slått av de andre alternativene."</string>
+    <string name="admin_more_details" msgid="7901420667346456102">"Mer informasjon"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Uten tittel"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Generelt"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Varsellogg"</string>
@@ -2151,8 +2153,8 @@
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"Hvis du begrenser mobildatabruk i bakgrunnen, er det enkelte apper og tjenester som ikke fungerer med mindre du er tilkoblet Wi-Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"Hvis du begrenser mobildatabruk i bakgrunnen, er det enkelte apper og tjenester som ikke fungerer med mindre du er tilkoblet Wi-Fi.\n\nDenne innstillingen påvirker alle brukerne på dette nettbrettet."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="259958321968870600">"Hvis du begrenser mobildatabruk i bakgrunnen, er det enkelte apper og tjenester som ikke fungerer med mindre du er tilkoblet Wi-Fi.\n\nDenne innstillingen påvirker alle brukerne på denne telefonen."</string>
-    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"advarsel"</font></string>
-    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"grense"</font></string>
+    <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"advarsel"</font></string>
+    <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"grense"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"Fjernede apper"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Fjernede apper og brukere"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> mottatt, <xliff:g id="SENT">%2$s</xliff:g> sendt"</string>
@@ -2622,8 +2624,7 @@
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Unngå at varsler som er lydløse når «Ikke forstyrr»-modusen er slått på, vises på skjermen"</string>
     <string name="zen_mode_screen_off" msgid="5026854939192419879">"Blokkér når skjermen er av"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Unngå at varsler som er lydløse når Ikke forstyrr er aktivert, slår skjermen på eller får varsellyset til å blinke"</string>
-    <!-- no translation found for zen_mode_screen_off_summary_no_led (3758698381956461866) -->
-    <skip />
+    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Unngå at varsler som er dempet når «Ikke forstyrr»-modusen er slått på, vises på skjermen"</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Av"</string>
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Når skjermen er på"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Når skjermen er av"</string>
@@ -2692,14 +2693,10 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Vanlig"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Blokkert"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Lydløs"</string>
-    <!-- no translation found for notifications_redacted (4493588975742803160) -->
-    <skip />
-    <!-- no translation found for notifications_hidden (3619610536038757468) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1066342037602085552) -->
-    <skip />
-    <!-- no translation found for notifications_summary_divider (9013807608804041387) -->
-    <skip />
+    <string name="notifications_redacted" msgid="4493588975742803160">"Sensitivt innhold vises ikke på låseskjermen"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"Vises ikke på låseskjermen"</string>
+    <string name="notifications_priority" msgid="1066342037602085552">"«Ikke forstyrr» er overstyrt"</string>
+    <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> tillatelser er gitt</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> tillatelse er gitt</item>
@@ -2907,7 +2904,10 @@
     <string name="see_less" msgid="1250265310929558370">"Se mindre"</string>
     <string name="disconnected" msgid="5787956818111197212">"Frakoblet"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> av dataen er brukt"</string>
-    <!-- no translation found for notification_summary (4019451362120557382) -->
+    <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apper er blokkert fra å sende</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app er blokkert fra å sende</item>
+    </plurals>
     <string name="notification_summary_none" msgid="3440195312233351409">"Alle apper kan sende"</string>
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> apper er installert"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 apper er installert"</string>
@@ -3026,4 +3026,7 @@
     <string name="special_access" msgid="8275242424094109976">"Spesialtilgang"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Er du sikker på at du vil slette brukerdataene og konvertere til filkryptering?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Slett og konvertér"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Tilbakestill tellerne av frekvensbegrensing for ShortcutManager"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Vil du tilbakestille frekvensbegrensning for ShortcutManager?"</string>
+    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Vil du tilbakestille tellerne av frekvensbegrensning for ShortcutManager?"</string>
 </resources>
