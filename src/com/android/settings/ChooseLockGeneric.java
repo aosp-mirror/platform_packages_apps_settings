@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.security.KeyStore;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -481,7 +482,13 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private void updatePreferenceSummaryIfNeeded() {
-            if (LockPatternUtils.isDeviceEncrypted()) {
+            // On a default block encrypted device with accessibility, add a warning
+            // that your data is not credential encrypted
+            if (!StorageManager.isBlockEncrypted()) {
+                return;
+            }
+
+            if (StorageManager.isNonDefaultBlockEncrypted()) {
                 return;
             }
 
