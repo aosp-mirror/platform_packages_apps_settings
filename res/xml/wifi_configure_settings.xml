@@ -40,13 +40,6 @@
         android:summary="@string/wifi_automatically_connect_summary"
         android:dialogTitle="@string/wifi_select_assistant_dialog_title" />
 
-    <ListPreference
-        android:key="frequency_band"
-        android:title="@string/wifi_setting_frequency_band_title"
-        android:summary="@string/wifi_setting_frequency_band_summary"
-        android:entries="@array/wifi_frequency_band_entries"
-        android:entryValues="@array/wifi_frequency_band_values" />
-
     <Preference
         android:key="mac_address"
         android:title="@string/wifi_advanced_mac_address_title"
