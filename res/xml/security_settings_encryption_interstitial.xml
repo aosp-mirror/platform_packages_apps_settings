@@ -20,10 +20,12 @@
     android:key="lock_settings_picker">
 
     <Preference
+        android:icon="@drawable/ic_lock_list_icon"
         android:key="encrypt_require_password"
         android:persistent="false"/>
 
     <Preference
+        android:icon="@drawable/ic_skip"
         android:key="encrypt_dont_require_password"
         android:persistent="false"/>
 

@@ -79,7 +79,7 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial {
 
             final SetupWizardPreferenceLayout layout = (SetupWizardPreferenceLayout) view;
             layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
-                    R.dimen.suw_items_text_divider_inset));
+                    R.dimen.suw_items_icon_divider_inset));
             layout.setIllustration(R.drawable.setup_illustration_lock_screen,
                     R.drawable.setup_illustration_horizontal_tile);
 
