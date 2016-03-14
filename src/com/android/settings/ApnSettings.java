@@ -60,7 +60,7 @@ import com.android.internal.telephony.uicc.UiccController;
 
 import java.util.ArrayList;
 
-public class ApnSettings extends SettingsPreferenceFragment implements
+public class ApnSettings extends RestrictedSettingsFragment implements
         Preference.OnPreferenceChangeListener {
     static final String TAG = "ApnSettings";
 
@@ -103,8 +103,6 @@ public class ApnSettings extends SettingsPreferenceFragment implements
     private String mMvnoType;
     private String mMvnoMatchData;
 
-    private UserManager mUm;
-
     private String mSelectedKey;
 
     private IntentFilter mMobileStateFilter;
@@ -113,6 +111,10 @@ public class ApnSettings extends SettingsPreferenceFragment implements
 
     private boolean mHideImsApn;
     private boolean mAllowAddingApns;
+
+    public ApnSettings() {
+        super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
+    }
 
     private final BroadcastReceiver mMobileStateReceiver = new BroadcastReceiver() {
         @Override
@@ -154,14 +156,10 @@ public class ApnSettings extends SettingsPreferenceFragment implements
         final int subId = activity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
-        mUm = (UserManager) getSystemService(Context.USER_SERVICE);
-
         mMobileStateFilter = new IntentFilter(
                 TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
 
-        if (!mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
-            setHasOptionsMenu(true);
-        }
+        setIfOnlyAvailableForAdmins(true);
 
         mSubscriptionInfo = SubscriptionManager.from(activity).getActiveSubscriptionInfo(subId);
         mUiccController = UiccController.getInstance();
@@ -177,16 +175,12 @@ public class ApnSettings extends SettingsPreferenceFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TextView empty = (TextView) getView().findViewById(android.R.id.empty);
-        if (empty != null) {
-            empty.setText(R.string.apn_settings_not_available);
-            setEmptyView(empty);
-        }
-
-        if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)
-                || !mUm.isAdminUser()) {
-            mUnavailable = true;
+        getEmptyTextView().setText(R.string.apn_settings_not_available);
+        mUnavailable = isUiRestricted();
+        setHasOptionsMenu(!mUnavailable);
+        if (mUnavailable) {
             setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
+            getPreferenceScreen().removeAll();
             return;
         }
 
