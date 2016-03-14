@@ -236,10 +236,8 @@
     <string name="sdcard_settings_read_only_status" product="default" msgid="4518291824764698112">"已将SD卡装载为只读设备。"</string>
     <string name="skip_label" msgid="47510779345218297">"跳过"</string>
     <string name="next_label" msgid="4693520878012668114">"下一步"</string>
-    <!-- no translation found for language_picker_title (3596315202551687690) -->
-    <skip />
-    <!-- no translation found for pref_title_lang_selection (2014920136978776034) -->
-    <skip />
+    <string name="language_picker_title" msgid="5349877711342869319">"语言"</string>
+    <string name="pref_title_lang_selection" msgid="5696814792962878791">"语言偏好设置"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"移除"</string>
     <string name="add_a_language" msgid="2330538812283783022">"添加语言"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
@@ -267,8 +265,7 @@
     <string name="settings_label_launcher" msgid="8344735489639482340">"设置"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"设置快捷方式"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"飞行模式"</string>
-    <!-- no translation found for radio_controls_title (4753772504463568321) -->
-    <skip />
+    <string name="radio_controls_title" msgid="3447085191369779032">"更多"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"无线和网络"</string>
     <string name="radio_controls_summary" msgid="2837395036275123133">"管理WLAN、蓝牙、飞行模式、移动网络和VPN"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"移动数据网络"</string>
@@ -772,6 +769,9 @@
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"已保存的网络"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"高级WLAN"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"配置 WLAN"</string>
+    <string name="wifi_setting_frequency_band_title" msgid="3655327399028584656">"WLAN频带"</string>
+    <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"指定操作的频率范围"</string>
+    <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"设置频带时出现问题。"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC地址"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP地址"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"已保存的网络"</string>
@@ -1522,13 +1522,11 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"要停止系统服务吗？"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"如果停止此服务，您平板电脑上的某些功能也将随之停止工作，并在您将平板电脑关机然后再重新打开后才能使用。"</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"如果停止此服务，您手机上的某些功能也将随之停止工作，并在您将手机关机然后再重新打开后才能使用。"</string>
-    <!-- no translation found for language_settings (8758655933029560944) -->
-    <skip />
-    <!-- no translation found for language_keyboard_settings_title (3709159207482544398) -->
-    <skip />
+    <string name="language_settings" msgid="5292716747264442359">"语言和输入法"</string>
+    <string name="language_keyboard_settings_title" msgid="243220021717425813">"语言和输入法"</string>
+    <string name="language_settings_category" msgid="2288258489940617043">"语言设置"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"键盘和输入法"</string>
-    <!-- no translation found for phone_language (7116581601133118044) -->
-    <skip />
+    <string name="phone_language" msgid="8870144109924299673">"语言"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"自动替换"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"更正错误输入的字词"</string>
@@ -1644,7 +1642,7 @@
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"大号鼠标指针"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"单声道音频"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"播放音频时合并声道"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"触摸和按住延迟"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"点按并按住的延迟时间"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"颜色反转"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"（实验性功能）可能会影响性能"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"指针停止移动后点击"</string>
@@ -1984,8 +1982,10 @@
     <string name="device_admin_status" msgid="4252975713178851910">"此管理器已激活，允许应用“<xliff:g id="APP_NAME">%1$s</xliff:g>”执行以下操作："</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"要激活个人资料管理器吗？"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"继续操作即表示您同意由您的管理员管理您的用户个人资料（除了存储您的个人数据外，还可以存储相关数据）。\n\n您的管理员能够监控和管理与此用户个人资料相关的设置、权限、应用以及数据（其中包括网络活动和您设备的位置信息）。"</string>
-    <string name="admin_disabled_other_options" msgid="4564776259414246934">"其他选项已被您的管理员停用。"</string>
-    <string name="admin_more_details" msgid="7901420667346456102">"更多详情"</string>
+    <!-- no translation found for admin_disabled_other_options (4564776259414246934) -->
+    <skip />
+    <!-- no translation found for admin_more_details (7901420667346456102) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"未命名"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"常规"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"通知日志"</string>
@@ -2857,7 +2857,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"允许在其他应用的上层显示"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"允许应用在上层显示的权限设置"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"此权限允许应用在您当前使用的其他应用的上层显示，因此可能会干扰您使用其他应用的界面，或者会影响您在其他应用中预期看到的内容。"</string>
-    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr 虚拟现实 监听器 立体 助手服务"</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr 虚拟现实 监听器 立体声 助手服务"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"系统 提醒 窗口 对话框 显示 上层 其他应用"</string>
     <string name="overlay_settings" msgid="222062091489691363">"在其他应用的上层显示"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"已允许 <xliff:g id="COUNT_0">%d</xliff:g> 个应用（共 <xliff:g id="COUNT_1">%d</xliff:g> 个）在其他应用的上层显示"</string>
@@ -3028,7 +3028,10 @@
     <string name="special_access" msgid="8275242424094109976">"特殊访问权限"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"您真的要清除用户数据并转换为文件加密吗？"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"清除并转换"</string>
-    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"重置 ShortcutManager 速率限制计数器"</string>
-    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"要重置 ShortcutManager 速率限制吗？"</string>
-    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"要重置 ShortcutManager 速率限制计数器吗？"</string>
+    <!-- no translation found for reset_shortcut_manager_throttling (4021064939697753381) -->
+    <skip />
+    <!-- no translation found for confirm_reset_shortcut_manager_throttling_title (6504835349094036279) -->
+    <skip />
+    <!-- no translation found for confirm_reset_shortcut_manager_throttling_message (3812874125513775052) -->
+    <skip />
 </resources>

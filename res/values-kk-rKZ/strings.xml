@@ -236,8 +236,8 @@
     <string name="sdcard_settings_read_only_status" product="default" msgid="4518291824764698112">"SD картасы оқу үшін ғана енгізілген."</string>
     <string name="skip_label" msgid="47510779345218297">"Аттап өту"</string>
     <string name="next_label" msgid="4693520878012668114">"Келесі"</string>
-    <string name="language_picker_title" msgid="3596315202551687690">"Тілдер"</string>
-    <string name="pref_title_lang_selection" msgid="2014920136978776034">"Тіл параметрлері"</string>
+    <string name="language_picker_title" msgid="5349877711342869319">"Тіл"</string>
+    <string name="pref_title_lang_selection" msgid="5696814792962878791">"Тіл параметрі"</string>
     <string name="locale_remove_menu" msgid="7651301406723638854">"Жою"</string>
     <string name="add_a_language" msgid="2330538812283783022">"Тілді қосу"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="4276642359346122396">
@@ -265,8 +265,7 @@
     <string name="settings_label_launcher" msgid="8344735489639482340">"Параметрлер"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Параметрлердің төте пернелері"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Ұшақ режимі"</string>
-    <!-- no translation found for radio_controls_title (4753772504463568321) -->
-    <skip />
+    <string name="radio_controls_title" msgid="3447085191369779032">"Басқалары"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Сымсыз желілер"</string>
     <string name="radio_controls_summary" msgid="2837395036275123133">"Wi‑Fi, Bluetooth, ұшақ режимін, ұялы желілерді және VPN басқару"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Ұялы деректер"</string>
@@ -770,6 +769,9 @@
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Сақталған желілер"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Жетілдірілген Wi‑Fi"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wi-Fi желісін конфигурациялау"</string>
+    <string name="wifi_setting_frequency_band_title" msgid="3655327399028584656">"Wi‑Fi жиілік жолағы"</string>
+    <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Жұмыс жиілігінің аумағын анықтау"</string>
+    <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"Жиілік жолағын орнату кезінде мәселе орын алды."</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC мекенжайы"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP мекенжайы"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Сақталған желілер"</string>
@@ -1520,10 +1522,11 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Жүйе қызметі тоқтатылсын ба?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"Бұл қызметті тоқтатсаңыз, оны қайта қосуға дейін планшеттің кейбір фукциялары дұрыс жұмыс істемейді."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"Бұл қызметті тоқтатсаңыз телефонның кейбір функциялары телефонды өшіріп, қайта қосқанша дұрыс жұмыс істемеуі мүмкін."</string>
-    <string name="language_settings" msgid="8758655933029560944">"Тілдер және енгізу"</string>
-    <string name="language_keyboard_settings_title" msgid="3709159207482544398">"Тілдер және енгізу"</string>
+    <string name="language_settings" msgid="5292716747264442359">"Тіл және енгізу"</string>
+    <string name="language_keyboard_settings_title" msgid="243220021717425813">"Тіл және енгізу"</string>
+    <string name="language_settings_category" msgid="2288258489940617043">"Тіл параметрлері"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"Пернетақта және енгізу әдістері"</string>
-    <string name="phone_language" msgid="7116581601133118044">"Тілдер"</string>
+    <string name="phone_language" msgid="8870144109924299673">"Тіл"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Aвто алмастыру"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Қате терілген сөздерді жөндеу"</string>
@@ -1639,7 +1642,7 @@
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Үлкен тінтуір меңзері"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Моно аудио"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Аудионы ойнату кезінде арналарды біріктіру"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Түртіп ұстап тұрғандағы кідіріс"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="4068253727586393334">"Түртіп, ұстап тұру кешігуі"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Түсті кері өзгерту"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Эксперименттік) Өнімділікке әсер етуі мүмкін"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"Меңзер қозғалуын тоқтатқаннан кейін басыңыз"</string>
@@ -1979,8 +1982,10 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Бұл әкімші қосылған және <xliff:g id="APP_NAME">%1$s</xliff:g> қолданбасына келесі әрекеттерді орындауға рұқсат береді:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Профильдер реттегішін белсендіру керек пе?"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"Жалғастырсаңыз, Пайдаланушыңызды Әкімші басқарады, ол сонымен бірге жеке деректеріңізге қоса байланысты деректерді сақтай алуы мүмкін.\n\nӘкімшіде параметрлерді, қатынасты, қолданбаларды және осы Пайдаланушымен байланысты деректерді, соның ішінде, желілік белсенділікті және құрылғыңыздың орны туралы ақпаратты бақылау және басқару мүмкіндігі бар."</string>
-    <string name="admin_disabled_other_options" msgid="4564776259414246934">"Басқа опцияларды әкімші өшірген."</string>
-    <string name="admin_more_details" msgid="7901420667346456102">"Қосымша мәліметтер"</string>
+    <!-- no translation found for admin_disabled_other_options (4564776259414246934) -->
+    <skip />
+    <!-- no translation found for admin_more_details (7901420667346456102) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"Атауысыз"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Жалпы"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Хабарландырулар журналы"</string>
@@ -2532,10 +2537,10 @@
     <string name="no_notification_listeners" msgid="3487091564454192821">"Орнатылған қолданбалардың ешбірі хабарландыруға кіруге рұқсат сұрамады."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> үшін хабарландыруға кіру рұқсатын беру қажет пе?"</string>
     <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> құралы контакт аттары және сіз қабылдайтын хабарлар мәтіні сияқты жеке ақпаратты қамтитын барлық хабарландыруларды оқи алады. Сонымен қатар ол хабарландыруларды жабуы немесе олар қамтитын әрекет түймелерін іске қосуы да мүмкін."</string>
-    <string name="vr_listeners_title" msgid="1318901577754715777">"Виртуалды шынайылық көмекші қызметтері"</string>
-    <string name="no_vr_listeners" msgid="2689382881717507390">"Орнатылған қолданбалар виртуалды шынайылық көмекші қызметтері ретінде іске қосуды сұрамады."</string>
-    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Виртуалды шынайылық қызметінің <xliff:g id="SERVICE">%1$s</xliff:g> қызметіне кіруіне рұқсат ету керек пе?"</string>
-    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> қолданбаларды виртуалды шынайылық режимінде пайдаланып жатқанда іске қосыла алады."</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR көмекші қызметтері"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Орнатылған қолданбалардың ешқайсысы VR көмекші қызметтері ретінде іске қосуды сұрамады."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"VR қызметіне <xliff:g id="SERVICE">%1$s</xliff:g> қызметіне қатынасуға рұқсат етілсін бе?"</string>
+    <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> қолданбаларды виртуалды шындық режимінде пайдаланып жатқанда іске қосыла алады."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Мазаламау режиміне кіру"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Орнатылған қолданбалардың ешбірі Мазаламау режиміне кіруге рұқсат сұрамады"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Қолданбаларды жүктеу…"</string>
@@ -2690,8 +2695,8 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"Қалыпты"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"Бөгелген"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"Үнсіз етілген"</string>
-    <string name="notifications_redacted" msgid="4493588975742803160">"Құлыпталған экранда құпия мазмұн жоқ"</string>
-    <string name="notifications_hidden" msgid="3619610536038757468">"Құлыпталған экранда емес"</string>
+    <string name="notifications_redacted" msgid="4493588975742803160">"Құлыптау экранында құпия мазмұн жоқ"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"Құлыптау экранында емес"</string>
     <string name="notifications_priority" msgid="1066342037602085552">"\"Мазаламау\" режимі қайта анықталды"</string>
     <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
@@ -2788,9 +2793,9 @@
     <string name="additional_permissions" msgid="6463784193877056080">"Қосымша рұқсаттар"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"Тағы <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="share_remote_bugreport_dialog_title" msgid="1124840737776588602">"Қате туралы есепті бөлісу керек пе?"</string>
-    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"АТ әкімшісі осы құрылғы ақауларын жоюға көмектесу үшін қате туралы есепті сұрады. Оған қолданбалар мен деректер көрсетілуі мүмкін."</string>
-    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"АТ әкімшісі осы құрылғы ақауларын жоюға көмектесу үшін қате туралы есепті сұрады. Оған қолданбалар мен деректер көрсетілуі және құрылғының жұмысы уақытша баяулауы мүмкін."</string>
-    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Бұл қате туралы есепті АТ әкімшісі көре алады. Қосымша мәліметтер алу үшін оған хабарласыңыз."</string>
+    <string name="share_remote_bugreport_dialog_message_finished" msgid="4973886976504823801">"АТ әкімшісі осы құрылғы ақауларын жоюға көмектесу үшін қате туралы есепті сұрады. Қолданбалар мен деректерді бөлісуі мүмкін."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="3495929560689435496">"АТ әкімшісі осы құрылғы ақауларын жоюға көмектесу үшін қате туралы есепті сұрады. Қолданбалар мен деректерді бөлісуі және құрылғының жұмысы уақытша баяулауы мүмкін."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Бұл қате туралы есепті АТ әкімшісімен бөлісуде. Қосымша мәліметтер алу үшін оған хабарласыңыз."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"Бөлісу"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Қабылдамау"</string>
     <string name="usb_use_charging_only" msgid="167707234832117768">"Зарядталуда"</string>
@@ -2852,7 +2857,7 @@
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Басқа қолданбалар үстінен ашылуға рұқсат ету"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Қолданбаны үстінен бейнелеу рұқсаты"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Бұл рұқсат қолданбаны сіз пайдаланып жатқан басқа қолданбалардың үстінен көрсетуге рұқсат етеді және басқа қолданбалардағы интерфейсті пайдалануға кедергі келтіруі немесе басқа қолданбалардың интерфейсін өзгертіп көрсетуі мүмкін."</string>
-    <string name="keywords_vr_listener" msgid="7441221822576384680">"виртуалды шынайылық тыңдаушысының стерео көмекші қызметі"</string>
+    <string name="keywords_vr_listener" msgid="7441221822576384680">"vr виртуалды шындық тыңдаушы стерео көмекші қызмет"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"жүйелік ескерту терезесі, тілқатысу терезелерін басқа қолданбалардың үстінен бейнелеу"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Басқа қолданбалар үстінен ашу"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_1">%d</xliff:g> ішінен <xliff:g id="COUNT_0">%d</xliff:g> қолданбаға басқа қолданбалардың үстінен бейнеленуге рұқсат етілген"</string>
@@ -3023,7 +3028,10 @@
     <string name="special_access" msgid="8275242424094109976">"Арнайы қол жеткізу"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Шынымен пайдаланушы деректерін өшіру және файлды шифрлауға түрлендіру керек пе?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Өшіру және түрлендіру"</string>
-    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"ShortcutManager жылдамдықты шектеу есептегіштерін қалпына келтіру керек пе?"</string>
-    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"ShortcutManager жылдамдықты шектеуін қалпына келтіру керек пе?"</string>
-    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"ShortcutManager жылдамдықты шектеу есептегіштерін қалпына келтіру керек пе?"</string>
+    <!-- no translation found for reset_shortcut_manager_throttling (4021064939697753381) -->
+    <skip />
+    <!-- no translation found for confirm_reset_shortcut_manager_throttling_title (6504835349094036279) -->
+    <skip />
+    <!-- no translation found for confirm_reset_shortcut_manager_throttling_message (3812874125513775052) -->
+    <skip />
 </resources>
