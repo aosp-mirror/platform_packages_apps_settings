@@ -95,8 +95,7 @@ public abstract class FingerprintEnrollBase extends InstrumentedActivity
     }
 
     protected void setHeaderText(int resId, boolean force) {
-        TextView layoutTitle = (TextView) getSetupWizardLayout().findViewById(
-                R.id.suw_layout_title);
+        TextView layoutTitle = getSetupWizardLayout().getHeaderTextView();
         CharSequence previousTitle = layoutTitle.getText();
         CharSequence title = getText(resId);
         if (previousTitle != title || force) {
