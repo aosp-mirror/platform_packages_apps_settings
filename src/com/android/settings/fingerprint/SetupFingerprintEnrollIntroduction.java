@@ -28,6 +28,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupChooseLockGeneric;
 import com.android.settings.SetupWizardUtils;
+import com.android.setupwizardlib.SetupWizardRecyclerLayout;
 import com.android.setupwizardlib.view.NavigationBar;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction
@@ -60,6 +61,9 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         Button nextButton = getNavigationBar().getNextButton();
         nextButton.setText(null);
         nextButton.setEnabled(false);
+        SetupWizardRecyclerLayout layout = (SetupWizardRecyclerLayout) getSetupWizardLayout();
+        layout.setDividerInset(getResources().getDimensionPixelSize(
+                R.dimen.suw_items_icon_divider_inset));
     }
 
     @Override

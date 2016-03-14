@@ -41,15 +41,16 @@ import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
-import com.android.setupwizardlib.SetupWizardItemsLayout;
+import com.android.setupwizardlib.SetupWizardRecyclerLayout;
+import com.android.setupwizardlib.items.IItem;
 import com.android.setupwizardlib.items.Item;
-import com.android.setupwizardlib.items.ItemAdapter;
+import com.android.setupwizardlib.items.RecyclerItemAdapter;
 
 /**
  * Onboarding activity for fingerprint enrollment.
  */
 public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
-        implements AdapterView.OnItemClickListener {
+        implements RecyclerItemAdapter.OnItemSelectedListener {
 
     protected static final int CHOOSE_LOCK_GENERIC_REQUEST = 1;
     protected static final int FINGERPRINT_FIND_SENSOR_REQUEST = 2;
@@ -62,14 +63,18 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_introduction);
         setHeaderText(R.string.security_settings_fingerprint_enroll_introduction_title);
-        final SetupWizardItemsLayout layout =
-                (SetupWizardItemsLayout) findViewById(R.id.setup_wizard_layout);
-        layout.getListView().setOnItemClickListener(this);
-        final ItemAdapter adapter = (ItemAdapter) layout.getAdapter();
+        final SetupWizardRecyclerLayout layout =
+                (SetupWizardRecyclerLayout) findViewById(R.id.setup_wizard_layout);
+        final RecyclerItemAdapter adapter = (RecyclerItemAdapter) layout.getAdapter();
+        adapter.setOnItemSelectedListener(this);
         Item item = (Item) adapter.findItemById(R.id.fingerprint_introduction_message);
         item.setTitle(LearnMoreSpan.linkify(
                 getText(R.string.security_settings_fingerprint_enroll_introduction_message),
                 getString(R.string.help_url_fingerprint)));
+        // setupwizard library automatically sets the divider inset to
+        // R.dimen.suw_items_icon_divider_inset. We adjust this back to 0 as we do not want
+        // an inset within settings.
+        layout.setDividerInset(0);
         updatePasswordQuality();
     }
 
@@ -148,9 +153,8 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final Item item = (Item) parent.getItemAtPosition(position);
-        switch (item.getId()) {
+    public void onItemSelected(IItem item) {
+        switch (((Item) item).getId()) {
             case R.id.next_button:
                 onNextButtonClick();
                 break;
