@@ -228,11 +228,6 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
         wifiIpAddressPref.setSelectable(false);
     }
 
-    private void updateFrequencyBandSummary(Preference frequencyBandPref, int index) {
-        String[] summaries = getResources().getStringArray(R.array.wifi_frequency_band_entries);
-        frequencyBandPref.setSummary(summaries[index]);
-    }
-
     private void initWifiAssistantPreference(
             Collection<NetworkScorerAppManager.NetworkScorerAppData> scorers) {
         int count = scorers.size();
