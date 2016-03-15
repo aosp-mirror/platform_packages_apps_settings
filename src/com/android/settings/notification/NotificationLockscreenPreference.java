@@ -61,7 +61,7 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
         super.onDialogCreated(dialog);
         dialog.create();
         CheckBox view = (CheckBox) dialog.findViewById(R.id.lockscreen_remote_input);
-        view.setChecked(mAllowRemoteInput);
+        view.setChecked(!mAllowRemoteInput);
         view.setOnCheckedChangeListener(mListener);
         View panel = dialog.findViewById(com.android.internal.R.id.customPanel);
         panel.setVisibility(checkboxVisibilityForSelectedIndex(mInitialIndex, mShowRemoteInput));
@@ -112,7 +112,7 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            mAllowRemoteInput = isChecked;
+            mAllowRemoteInput = !isChecked;
         }
 
         public void setView(View view) {
