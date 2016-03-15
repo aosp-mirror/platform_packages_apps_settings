@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!-- Copyright (C) 2016 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -21,7 +21,8 @@
     <Preference
         android:key="vision_settings_summary"
         android:title="@string/vision_settings_description"
-        android:layout="@layout/preference_multiline_title" />
+        android:layout="@layout/preference_multiline_title"
+        android:selectable="false" />
 
     <Preference
         android:fragment=
@@ -42,8 +43,9 @@
         android:summary="@string/screen_zoom_short_summary" />
 
     <Preference
-        android:key="talkback_preference"
-        android:title="@string/talkback_title"
+        android:fragment=
+                "com.android.settings.accessibility.ToggleAccessibilityServicePreferenceFragment"
+        android:key="screen_reader_preference"
         android:summary="@string/talkback_summary"
         android:persistent="true" />
 

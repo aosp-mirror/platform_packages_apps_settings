@@ -372,6 +372,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     private boolean mIsShowingDashboard;
     private boolean mIsShortcut;
 
+    private int mMainContentId = R.id.main_content;
     private ViewGroup mContent;
 
     private SearchView mSearchView;
@@ -546,7 +547,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         setContentView(mIsShowingDashboard ?
                 R.layout.settings_main_dashboard : R.layout.settings_main_prefs);
 
-        mContent = (ViewGroup) findViewById(R.id.main_content);
+        mContent = (ViewGroup) findViewById(mMainContentId);
 
         getFragmentManager().addOnBackStackChangedListener(this);
 
@@ -678,6 +679,14 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         if (DEBUG_TIMING) Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
+    }
+
+    /**
+     * Sets the id of the view continaing the main content. Should be called before calling super's
+     * onCreate.
+     */
+    protected void setMainContentId(int contentId) {
+        mMainContentId = contentId;
     }
 
     private void setTitleFromIntent(Intent intent) {
@@ -962,7 +971,7 @@ public class SettingsActivity extends SettingsDrawerActivity
      */
     public void startPreferenceFragment(Fragment fragment, boolean push) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_content, fragment);
+        transaction.replace(mMainContentId, fragment);
         if (push) {
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.addToBackStack(BACK_STACK_PREFS);
@@ -983,7 +992,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
         Fragment f = Fragment.instantiate(this, fragmentName, args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_content, f);
+        transaction.replace(mMainContentId, f);
         if (withTransition) {
             TransitionManager.beginDelayedTransition(mContent);
         }
@@ -1179,7 +1188,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (mSearchResultsFragment != null) {
             return;
         }
-        Fragment current = getFragmentManager().findFragmentById(R.id.main_content);
+        Fragment current = getFragmentManager().findFragmentById(mMainContentId);
         if (current != null && current instanceof SearchResultsSummary) {
             mSearchResultsFragment = (SearchResultsSummary) current;
         } else {
