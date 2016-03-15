@@ -30,6 +30,7 @@
         android:id="@+id/suw_navigation_bar"
         style="@style/SuwNavBarTheme"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/suw_navbar_height" />
+        android:layout_height="@dimen/suw_navbar_height"
+        android:accessibilityTraversalAfter="@id/suw_main_content" />
 
 </LinearLayout>
