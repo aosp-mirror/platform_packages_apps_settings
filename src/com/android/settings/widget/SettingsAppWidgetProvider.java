@@ -454,6 +454,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     return STATE_UNKNOWN;  // On emulator?
                 }
                 sLocalBluetoothAdapter = manager.getBluetoothAdapter();
+                if (sLocalBluetoothAdapter == null) {
+                    return STATE_UNKNOWN;  // On emulator?
+                }
             }
             return bluetoothStateToFiveState(sLocalBluetoothAdapter.getBluetoothState());
         }

@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -96,7 +97,10 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             BluetoothManager btManager = (BluetoothManager)
                     context.getSystemService(Context.BLUETOOTH_SERVICE);
             if (btManager != null) {
-                btManager.getAdapter().factoryReset();
+                BluetoothAdapter btAdapter = btManager.getAdapter();
+                if (btAdapter != null) {
+                    btAdapter.factoryReset();
+                }
             }
 
             ImsManager.factoryReset(context);
