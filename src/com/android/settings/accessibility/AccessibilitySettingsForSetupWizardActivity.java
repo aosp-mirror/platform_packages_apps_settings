@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,10 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -38,16 +40,23 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
 
     @Override
     protected void onCreate(Bundle savedState) {
+        // Main content frame id should be set before calling super as that is where the first
+        // Fragment is inflated.
+        setMainContentId(R.id.suw_main_content);
         super.onCreate(savedState);
+
+        // Finish configuring the content view.
+        FrameLayout parentLayout = (FrameLayout) findViewById(R.id.main_content);
+        LayoutInflater.from(this)
+                .inflate(R.layout.accessibility_settings_for_suw, parentLayout);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setIsDrawerPresent(false);
 
-        // Hide System Nav Bar
+        // Hide System Nav Bar.
         SystemBarHelper.hideSystemBars(getWindow());
 
-        // Show SUW Nav Bar
-        setContentView(R.layout.accessibility_settings_for_suw);
+        // Show SUW Nav Bar.
         NavigationBar navigationBar = (NavigationBar) findViewById(R.id.suw_navigation_bar);
         navigationBar.getNextButton().setVisibility(View.GONE);
         navigationBar.setNavigationBarListener(new NavigationBar.NavigationBarListener() {
@@ -121,25 +130,5 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
             getWindow().getDecorView()
                     .sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
         }
-    }
-
-    /**
-     * Start a new fragment.
-     *
-     * @param fragment The fragment to start
-     * @param push If true, the current fragment will be pushed onto the back stack.  If false,
-     * the current fragment will be replaced.
-     */
-    @Override
-    public void startPreferenceFragment(Fragment fragment, boolean push) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.suw_main_content, fragment);
-        if (push) {
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.addToBackStack(BACK_STACK_PREFS);
-        } else {
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        }
-        transaction.commitAllowingStateLoss();
     }
 }
