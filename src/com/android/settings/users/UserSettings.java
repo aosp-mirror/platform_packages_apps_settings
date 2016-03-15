@@ -247,8 +247,8 @@ public class UserSettings extends SettingsPreferenceFragment
         super.onResume();
 
         if (!mUserCaps.mEnabled) return;
-
         if (mShouldUpdateUserList) {
+            mUserCaps.updateAddUserCapabilities(getActivity());
             loadProfile();
             updateUserList();
         }
@@ -663,6 +663,9 @@ public class UserSettings extends SettingsPreferenceFragment
                     } else {
                         user = createRestrictedProfile();
                     }
+                    if (user == null) {
+                        return;
+                    }
                     synchronized (mUserLock) {
                         mAddingUser = false;
                         if (userType == USER_TYPE_USER) {
@@ -1036,30 +1039,35 @@ public class UserSettings extends SettingsPreferenceFragment
             final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
             caps.mIsGuest = myUserInfo.isGuest();
             caps.mIsAdmin = myUserInfo.isAdmin();
-            caps.mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
-                    UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
-            final boolean hasBaseUserRestriction = RestrictedLockUtils.hasBaseUserRestriction(
-                    context, UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
-            caps.mDisallowAddUserSetByAdmin =
-                    caps.mEnforcedAdmin != null && !hasBaseUserRestriction;
-            caps.mDisallowAddUser =
-                    (caps.mEnforcedAdmin != null || hasBaseUserRestriction);
-            if (!caps.mIsAdmin || UserManager.getMaxSupportedUsers() < 2
-                    || !UserManager.supportsMultipleUsers()
-                    || caps.mDisallowAddUser) {
-                caps.mCanAddUser = false;
-            }
             DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
                     Context.DEVICE_POLICY_SERVICE);
             // No restricted profiles for tablets with a device owner, or phones.
             if (dpm.isDeviceManaged() || Utils.isVoiceCapable(context)) {
                 caps.mCanAddRestrictedProfile = false;
             }
-
-            final boolean canAddUsersWhenLocked = caps.mIsAdmin || Settings.Global.getInt(
-                    context.getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
-            caps.mCanAddGuest = !caps.mIsGuest && !caps.mDisallowAddUser && canAddUsersWhenLocked;
+            caps.updateAddUserCapabilities(context);
             return caps;
+        }
+
+        public void updateAddUserCapabilities(Context context) {
+            mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
+                    UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
+            final boolean hasBaseUserRestriction = RestrictedLockUtils.hasBaseUserRestriction(
+                    context, UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
+            mDisallowAddUserSetByAdmin =
+                    mEnforcedAdmin != null && !hasBaseUserRestriction;
+            mDisallowAddUser =
+                    (mEnforcedAdmin != null || hasBaseUserRestriction);
+            mCanAddUser = true;
+            if (!mIsAdmin || UserManager.getMaxSupportedUsers() < 2
+                    || !UserManager.supportsMultipleUsers()
+                    || mDisallowAddUser) {
+                mCanAddUser = false;
+            }
+
+            final boolean canAddUsersWhenLocked = mIsAdmin || Settings.Global.getInt(
+                    context.getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
+            mCanAddGuest = !mIsGuest && !mDisallowAddUser && canAddUsersWhenLocked;
         }
 
         @Override
