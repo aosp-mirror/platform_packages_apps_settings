@@ -66,7 +66,7 @@ public class ChartDataUsagePreference extends Preference {
 
         int top = getTop();
         chart.clearPaths();
-        chart.configureGraph((int) (mEnd - mStart), top, false, false);
+        chart.configureGraph(toInt(mEnd - mStart), top, false, false);
         calcPoints(chart);
         chart.setBottomLabels(new CharSequence[] {
                 Utils.formatDateRange(getContext(), mStart, mStart),
@@ -96,7 +96,6 @@ public class ChartDataUsagePreference extends Preference {
         SparseIntArray points = new SparseIntArray();
         NetworkStatsHistory.Entry entry = null;
 
-        long lastTime = -1;
         long totalData = 0;
 
         final int start = mNetwork.getIndexAfter(mStart);
@@ -113,21 +112,17 @@ public class ChartDataUsagePreference extends Preference {
             // increment by current bucket total
             totalData += entry.rxBytes + entry.txBytes;
 
-            if (lastTime != startTime) {
-                if (points.size() > 1) {
-                    chart.addPath(points);
-                }
-                points.clear();
-            }
-
-            points.put((int) (startTime - mStart + 1), (int) (totalData / RESOLUTION));
-            points.put((int) (endTime - mStart), (int) (totalData / RESOLUTION));
-
-            lastTime = endTime;
+            points.put(toInt(startTime - mStart + 1), (int) (totalData / RESOLUTION));
+            points.put(toInt(endTime - mStart), (int) (totalData / RESOLUTION));
         }
         if (points.size() > 1) {
             chart.addPath(points);
         }
+    }
+
+    private int toInt(long l) {
+        // Don't need that much resolution on these times.
+        return (int) (l / (1000 * 60));
     }
 
     private void bindNetworkPolicy(UsageView chart, NetworkPolicy policy, int top) {
