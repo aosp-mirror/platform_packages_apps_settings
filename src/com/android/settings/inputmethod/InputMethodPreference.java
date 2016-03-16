@@ -121,7 +121,6 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
                 && mInputMethodSettingValues.isValidSystemNonAuxAsciiCapableIme(imi, context);
         setOnPreferenceClickListener(this);
         setOnPreferenceChangeListener(this);
-        useAdminDisabledSummary(true);
     }
 
     public InputMethodInfo getInputMethodInfo() {
