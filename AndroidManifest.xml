@@ -1689,6 +1689,8 @@
         <activity android:name=".deviceinfo.Status"
                 android:label="@string/device_status_activity_title"
                 android:theme="@style/Theme.SubSettingsDialogWhenLarge"
+                android:taskAffinity="com.android.settings"
+                android:parentActivityName="Settings$DeviceInfoSettingsActivity"
                 android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
