@@ -21,6 +21,8 @@ import android.app.backup.IBackupManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -155,9 +157,11 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         try {
             backupEnabled = mBackupManager.isBackupEnabled();
             String transport = mBackupManager.getCurrentTransport();
-            configIntent = mBackupManager.getConfigurationIntent(transport);
+            configIntent = validatedActivityIntent(
+                    mBackupManager.getConfigurationIntent(transport), "config");
             configSummary = mBackupManager.getDestinationString(transport);
-            manageIntent = mBackupManager.getDataManagementIntent(transport);
+            manageIntent = validatedActivityIntent(
+                    mBackupManager.getDataManagementIntent(transport), "management");
             manageLabel = mBackupManager.getDataManagementLabel(transport);
 
             mBackup.setSummary(backupEnabled
@@ -187,6 +191,19 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
             // Hide the item if data management intent is not supported by transport.
             getPreferenceScreen().removePreference(mManageData);
         }
+    }
+
+    private Intent validatedActivityIntent(Intent intent, String logLabel) {
+        if (intent != null) {
+            PackageManager pm = getPackageManager();
+            List<ResolveInfo> resolved = pm.queryIntentActivities(intent, 0);
+            if (resolved == null || resolved.isEmpty()) {
+                intent = null;
+                Log.e(TAG, "Backup " + logLabel + " intent " + intent
+                        + " fails to resolve; ignoring");
+            }
+        }
+        return intent;
     }
 
     private void setConfigureSummary(String summary) {
