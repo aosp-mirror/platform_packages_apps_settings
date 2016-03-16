@@ -28,13 +28,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.fuelgauge.BatteryActiveView.BatteryActiveProvider;
 import com.android.settingslib.BatteryInfo;
 import com.android.settingslib.graph.UsageView;
 
-public class BatteryHistoryDetail extends InstrumentedFragment {
+public class BatteryHistoryDetail extends SettingsPreferenceFragment {
     public static final String EXTRA_STATS = "stats";
     public static final String EXTRA_BROADCAST = "broadcast";
 
