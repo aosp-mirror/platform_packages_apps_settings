@@ -23,6 +23,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -34,6 +35,7 @@ import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.CarrierConfigManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -78,6 +80,7 @@ public class SimStatus extends InstrumentedPreferenceActivity {
     private static final String KEY_SIGNAL_STRENGTH = "signal_strength";
     private static final String KEY_IMEI = "imei";
     private static final String KEY_IMEI_SV = "imei_sv";
+    private static final String KEY_ICCID = "iccid";
     private static final String COUNTRY_ABBREVIATION_BRAZIL = "br";
 
     static final String CB_AREA_INFO_RECEIVED_ACTION =
@@ -92,11 +95,13 @@ public class SimStatus extends InstrumentedPreferenceActivity {
 
 
     private TelephonyManager mTelephonyManager;
+    private CarrierConfigManager mCarrierConfigManager;
     private Phone mPhone = null;
     private Resources mRes;
     private Preference mSignalStrength;
     private SubscriptionInfo mSir;
     private boolean mShowLatestAreaInfo;
+    private boolean mShowICCID;
 
     // Default summary for items
     private String mDefaultText;
@@ -129,6 +134,7 @@ public class SimStatus extends InstrumentedPreferenceActivity {
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        mCarrierConfigManager = (CarrierConfigManager) getSystemService(CARRIER_CONFIG_SERVICE);
 
         mSelectableSubInfos = SubscriptionManager.from(this).getActiveSubscriptionInfoList();
 
@@ -356,6 +362,10 @@ public class SimStatus extends InstrumentedPreferenceActivity {
                 mShowLatestAreaInfo = true;
             }
         }
+        PersistableBundle carrierConfig = mCarrierConfigManager.getConfig(
+                mSir.getSubscriptionId());
+        mShowICCID = carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL);
 
         String rawNumber = mTelephonyManager.getLine1Number(mSir.getSubscriptionId());
         String formattedNumber = null;
@@ -366,6 +376,14 @@ public class SimStatus extends InstrumentedPreferenceActivity {
         setSummaryText(KEY_PHONE_NUMBER, formattedNumber);
         setSummaryText(KEY_IMEI, mPhone.getImei());
         setSummaryText(KEY_IMEI_SV, mPhone.getDeviceSvn());
+
+        if (!mShowICCID) {
+            removePreferenceFromScreen(KEY_ICCID);
+        } else {
+            // Get ICCID, which is SIM serial number
+            String iccid = mTelephonyManager.getSimSerialNumber(mSir.getSubscriptionId());
+            setSummaryText(KEY_ICCID, iccid);
+        }
 
         if (!mShowLatestAreaInfo) {
             removePreferenceFromScreen(KEY_LATEST_AREA_INFO);
