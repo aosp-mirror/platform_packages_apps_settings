@@ -73,7 +73,7 @@ class InputMethodSettingValuesWrapper {
     // Ensure singleton
     private InputMethodSettingValuesWrapper(Context context) {
         mSettings = new InputMethodSettings(context.getResources(), context.getContentResolver(),
-                mMethodMap, mMethodList, getDefaultCurrentUserId());
+                mMethodMap, mMethodList, getDefaultCurrentUserId(), false /* copyOnWrite */);
         mImm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         refreshAllInputMethodAndSubtypes();
     }
