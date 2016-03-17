@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
 
 class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterface.OnClickListener {
@@ -43,13 +44,11 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterfac
     private View mView;
     private WifiConfigController mController;
     private boolean mHideSubmitButton;
-    private boolean mHideForgetButton;
 
     public WifiDialog(Context context, WifiDialogListener listener, AccessPoint accessPoint,
-            int mode, boolean hideSubmitButton, boolean hideForgetButton) {
+            int mode, boolean hideSubmitButton) {
         this(context, listener, accessPoint, mode);
         mHideSubmitButton = hideSubmitButton;
-        mHideForgetButton = hideForgetButton;
     }
 
     public WifiDialog(Context context, WifiDialogListener listener, AccessPoint accessPoint,
@@ -59,7 +58,6 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterfac
         mListener = listener;
         mAccessPoint = accessPoint;
         mHideSubmitButton = false;
-        mHideForgetButton = false;
     }
 
     @Override
@@ -83,7 +81,7 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterfac
             mController.enableSubmitIfAppropriate();
         }
 
-        if (mHideForgetButton) {
+        if (mAccessPoint == null) {
             mController.hideForgetButton();
         }
     }
@@ -109,6 +107,12 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterfac
                     mListener.onSubmit(this);
                     break;
                 case BUTTON_FORGET:
+                    if (WifiSettings.isEditabilityLockedDown(
+                            getContext(), mAccessPoint.getConfig())) {
+                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
+                                RestrictedLockUtils.getDeviceOwner(getContext()));
+                        return;
+                    }
                     mListener.onForget(this);
                     break;
             }
