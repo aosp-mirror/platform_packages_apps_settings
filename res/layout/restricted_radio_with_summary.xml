@@ -23,7 +23,7 @@
     android:background="?android:attr/selectableItemBackground"
     android:minHeight="?android:attr/listPreferredItemHeightSmall">
 
-    <LinearLayout
+    <com.android.settings.CheckableLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -47,7 +47,7 @@
             android:src="@drawable/ic_info"
             android:layout_marginLeft="@dimen/restricted_icon_padding"
             android:visibility="gone" />
-    </LinearLayout>
+    </com.android.settings.CheckableLinearLayout>
 
 
     <TextView android:id="@android:id/summary"
