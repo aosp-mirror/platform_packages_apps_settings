@@ -21,7 +21,9 @@ import android.security.Credentials;
 import android.security.KeyStore;
 
 /**
- * Utility functions for vpn
+ * Utility functions for vpn.
+ *
+ * Keystore methods should only be called in system user
  */
 public class VpnUtils {
 
@@ -34,5 +36,16 @@ public class VpnUtils {
         KeyStore.getInstance().delete(Credentials.LOCKDOWN_VPN);
         // Always notify ConnectivityManager after keystore update
         context.getSystemService(ConnectivityManager.class).updateLockdownVpn();
+    }
+
+    public static void setLockdownVpn(Context context, String lockdownKey) {
+        KeyStore.getInstance().put(Credentials.LOCKDOWN_VPN, lockdownKey.getBytes(),
+                KeyStore.UID_SELF, /* flags */ 0);
+        // Always notify ConnectivityManager after keystore update
+        context.getSystemService(ConnectivityManager.class).updateLockdownVpn();
+    }
+
+    public static boolean isVpnLockdown(String key) {
+        return key.equals(getLockdownVpn());
     }
 }

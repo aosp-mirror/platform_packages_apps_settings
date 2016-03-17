@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
@@ -29,6 +30,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -45,7 +47,8 @@ import java.net.InetAddress;
  * {@see AppDialog}
  */
 class ConfigDialog extends AlertDialog implements TextWatcher,
-        View.OnClickListener, AdapterView.OnItemSelectedListener {
+        View.OnClickListener, AdapterView.OnItemSelectedListener,
+        CompoundButton.OnCheckedChangeListener {
     private final KeyStore mKeyStore = KeyStore.getInstance();
     private final DialogInterface.OnClickListener mListener;
     private final VpnProfile mProfile;
@@ -72,6 +75,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     private Spinner mIpsecServerCert;
     private CheckBox mSaveLogin;
     private CheckBox mShowOptions;
+    private CheckBox mAlwaysOnVpn;
 
     ConfigDialog(Context context, DialogInterface.OnClickListener listener,
             VpnProfile profile, boolean editing, boolean exists) {
@@ -108,6 +112,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         mIpsecServerCert = (Spinner) mView.findViewById(R.id.ipsec_server_cert);
         mSaveLogin = (CheckBox) mView.findViewById(R.id.save_login);
         mShowOptions = (CheckBox) mView.findViewById(R.id.show_options);
+        mAlwaysOnVpn = (CheckBox) mView.findViewById(R.id.always_on_vpn);
 
         // Second, copy values from the profile.
         mName.setText(mProfile.name);
@@ -124,13 +129,21 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         mL2tpSecret.setText(mProfile.l2tpSecret);
         mIpsecIdentifier.setText(mProfile.ipsecIdentifier);
         mIpsecSecret.setText(mProfile.ipsecSecret);
-        loadCertificates(mIpsecUserCert, Credentials.USER_PRIVATE_KEY,
-                0, mProfile.ipsecUserCert);
+        loadCertificates(mIpsecUserCert, Credentials.USER_PRIVATE_KEY, 0, mProfile.ipsecUserCert);
         loadCertificates(mIpsecCaCert, Credentials.CA_CERTIFICATE,
                 R.string.vpn_no_ca_cert, mProfile.ipsecCaCert);
         loadCertificates(mIpsecServerCert, Credentials.USER_CERTIFICATE,
                 R.string.vpn_no_server_cert, mProfile.ipsecServerCert);
         mSaveLogin.setChecked(mProfile.saveLogin);
+        mAlwaysOnVpn.setChecked(mProfile.key.equals(VpnUtils.getLockdownVpn()));
+        mAlwaysOnVpn.setOnCheckedChangeListener(this);
+        // Update SaveLogin checkbox after Always-on checkbox is updated
+        updateSaveLoginStatus();
+
+        // Hide lockdown VPN on devices that require IMS authentication
+        if (SystemProperties.getBoolean("persist.radio.imsregrequired", false)) {
+            mAlwaysOnVpn.setVisibility(View.GONE);
+        }
 
         // Third, add listeners to required fields.
         mName.addTextChangedListener(this);
@@ -240,6 +253,27 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (compoundButton == mAlwaysOnVpn) {
+            updateSaveLoginStatus();
+        }
+    }
+
+    public boolean isVpnAlwaysOn() {
+        return mAlwaysOnVpn.isChecked();
+    }
+
+    private void updateSaveLoginStatus() {
+        if (mAlwaysOnVpn.isChecked()) {
+            mSaveLogin.setChecked(true);
+            mSaveLogin.setEnabled(false);
+        } else {
+            mSaveLogin.setChecked(mProfile.saveLogin);
+            mSaveLogin.setEnabled(true);
+        }
     }
 
     private void showAdvancedOptions() {

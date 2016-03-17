@@ -80,7 +80,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     private static final int RESCAN_MESSAGE = 0;
     private static final int RESCAN_INTERVAL_MS = 1000;
 
-    private static final String EXTRA_PICK_LOCKDOWN = "android.net.vpn.PICK_LOCKDOWN";
     private static final NetworkRequest VPN_REQUEST = new NetworkRequest.Builder()
             .removeCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
             .removeCapability(NetworkCapabilities.NET_CAPABILITY_NOT_RESTRICTED)
@@ -143,11 +142,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                 menu.getItem(i).setEnabled(!mUnavailable);
             }
         }
-
-        // Hide lockdown VPN on devices that require IMS authentication
-        if (SystemProperties.getBoolean("persist.radio.imsregrequired", false)) {
-            menu.findItem(R.id.vpn_lockdown).setVisible(false);
-        }
     }
 
     @Override
@@ -161,10 +155,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                 }
                 VpnProfile profile = new VpnProfile(Long.toHexString(millis));
                 ConfigDialogFragment.show(this, profile, true /* editing */, false /* exists */);
-                return true;
-            }
-            case R.id.vpn_lockdown: {
-                LockdownConfigFragment.show(this);
                 return true;
             }
         }
@@ -184,12 +174,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             return;
         } else {
             getEmptyTextView().setText(R.string.vpn_no_vpns_added);
-        }
-
-        final boolean pickLockdown = getActivity()
-                .getIntent().getBooleanExtra(EXTRA_PICK_LOCKDOWN, false);
-        if (pickLockdown) {
-            LockdownConfigFragment.show(this);
         }
 
         // Start monitoring
