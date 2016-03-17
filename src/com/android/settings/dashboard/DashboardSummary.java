@@ -58,11 +58,14 @@ public class DashboardSummary extends InstrumentedFragment
 
     private static final String SUGGESTIONS = "suggestions";
 
+    private static final String EXTRA_SCROLL_POSITION = "scroll_position";
+
     private FocusRecyclerView mDashboard;
     private DashboardAdapter mAdapter;
     private SummaryLoader mSummaryLoader;
     private ConditionManager mConditionManager;
     private SuggestionParser mSuggestionParser;
+    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected int getMetricsCategory() {
@@ -134,16 +137,27 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(EXTRA_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle bundle) {
         mDashboard = (FocusRecyclerView) view.findViewById(R.id.dashboard_container);
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        mDashboard.setLayoutManager(llm);
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        if (bundle != null) {
+            int scrollPosition = bundle.getInt(EXTRA_SCROLL_POSITION);
+            mLayoutManager.scrollToPosition(scrollPosition);
+        }
+        mDashboard.setLayoutManager(mLayoutManager);
         mDashboard.setHasFixedSize(true);
         mDashboard.setListener(this);
         mAdapter = new DashboardAdapter(getContext());
         mAdapter.setConditions(mConditionManager.getConditions());
         mAdapter.setSuggestions(mSuggestionParser);
+        mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setAdapter(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
 
@@ -164,7 +178,6 @@ public class DashboardSummary extends InstrumentedFragment
 
         // recheck to see if any suggestions have been changed.
         mAdapter.setSuggestions(mSuggestionParser);
-        mDashboard.setAdapter(mAdapter);
 
         long delta = System.currentTimeMillis() - start;
         Log.d(TAG, "rebuildUI took: " + delta + " ms");

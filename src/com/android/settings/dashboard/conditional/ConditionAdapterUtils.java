@@ -61,8 +61,9 @@ public class ConditionAdapterUtils {
     public static void bindViews(final Condition condition,
             DashboardAdapter.DashboardItemHolder view, boolean isExpanded,
             View.OnClickListener onClickListener, View.OnClickListener onExpandListener) {
-        view.itemView.setTag(condition);
-        view.itemView.setOnClickListener(onClickListener);
+        View card = view.itemView.findViewById(R.id.content);
+        card.setTag(condition);
+        card.setOnClickListener(onClickListener);
         view.icon.setImageIcon(condition.getIcon());
         view.title.setText(condition.getTitle());
         ImageView expand = (ImageView) view.itemView.findViewById(R.id.expand_indicator);
