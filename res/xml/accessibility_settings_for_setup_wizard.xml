@@ -18,7 +18,7 @@
         android:title="@string/vision_settings_title"
         android:persistent="true" >
 
-    <Preference
+    <com.android.settings.accessibility.DividerAllowedBelowPreference
         android:key="vision_settings_summary"
         android:title="@string/vision_settings_description"
         android:layout="@layout/preference_multiline_title"
