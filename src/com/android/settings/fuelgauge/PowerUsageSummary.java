@@ -28,6 +28,7 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -167,9 +168,14 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     private void addNotAvailableMessage() {
-        Preference notAvailable = new Preference(getPrefContext());
-        notAvailable.setTitle(R.string.power_usage_not_available);
-        mAppListGroup.addPreference(notAvailable);
+        final String NOT_AVAILABLE = "not_available";
+        Preference notAvailable = getCachedPreference(NOT_AVAILABLE);
+        if (notAvailable == null) {
+            notAvailable = new Preference(getPrefContext());
+            notAvailable.setKey(NOT_AVAILABLE);
+            notAvailable.setTitle(R.string.power_usage_not_available);
+            mAppListGroup.addPreference(notAvailable);
+        }
     }
 
     private static boolean isSharedGid(int uid) {
@@ -274,7 +280,7 @@ public class PowerUsageSummary extends PowerUsageBase {
         super.refreshStats();
         PowerWhitelistBackend powerWhiteist = PowerWhitelistBackend.getInstance();
         updatePreference(mHistPref);
-        mAppListGroup.removeAll();
+        cacheRemoveAllPrefs(mAppListGroup);
         mAppListGroup.setOrderingAsAdded(false);
         boolean addedSome = false;
 
@@ -336,8 +342,16 @@ public class PowerUsageSummary extends PowerUsageBase {
                         userHandle);
                 final CharSequence contentDescription = mUm.getBadgedLabelForUser(entry.getLabel(),
                         userHandle);
-                final PowerGaugePreference pref = new PowerGaugePreference(getPrefContext(),
-                        badgedIcon, contentDescription, entry);
+                final String key = sipper.drainType == DrainType.APP ? sipper.getPackages() != null
+                        ? TextUtils.concat(sipper.getPackages()).toString()
+                        : String.valueOf(sipper.getUid())
+                        : sipper.drainType.toString();
+                PowerGaugePreference pref = (PowerGaugePreference) getCachedPreference(key);
+                if (pref == null) {
+                    pref = new PowerGaugePreference(getPrefContext(), badgedIcon,
+                            contentDescription, entry);
+                    pref.setKey(key);
+                }
 
                 final double percentOfMax = (sipper.totalPowerMah * 100)
                         / mStatsHelper.getMaxPower();
@@ -368,6 +382,7 @@ public class PowerUsageSummary extends PowerUsageBase {
         if (!addedSome) {
             addNotAvailableMessage();
         }
+        removeCachedPrefs(mAppListGroup);
 
         BatteryEntry.startRequestQueue();
     }
