@@ -79,7 +79,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 getContentResolver(),
                 new HashMap<String, InputMethodInfo>(),
                 new ArrayList<InputMethodInfo>(),
-                USER_SYSTEM);
+                USER_SYSTEM,
+                false /* copyOnWrite */);
         mKeyboardAssistanceCategory = Preconditions.checkNotNull(
                 (PreferenceCategory) findPreference(KEYBOARD_ASSISTANCE_CATEGORY));
         mShowVirtualKeyboardSwitch = Preconditions.checkNotNull(
