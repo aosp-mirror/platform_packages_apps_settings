@@ -137,11 +137,11 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         if (intent != null) {
             CharSequence titleText = intent.getCharSequenceExtra(
                     ConfirmDeviceCredentialBaseFragment.TITLE_TEXT);
-            if (titleText == null || suplementalText == null) {
+            if (titleText == null || supplementalText == null) {
                 return;
             }
             String accessibilityTitle =
-                    new StringBuilder(titleText).append(",").append(suplementalText).toString();
+                    new StringBuilder(titleText).append(",").append(supplementalText).toString();
             getActivity().setTitle(Utils.createAccessibleSequence(titleText, accessibilityTitle));
         }
     }
