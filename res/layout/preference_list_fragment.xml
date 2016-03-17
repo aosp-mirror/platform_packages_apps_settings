@@ -67,10 +67,11 @@
     </FrameLayout>
 
     <TextView android:id="@android:id/empty"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="@*android:dimen/preference_fragment_padding_side"
-        android:gravity="center"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
         android:visibility="gone" />
 
     <include layout="@layout/admin_support_details_empty_view" />
