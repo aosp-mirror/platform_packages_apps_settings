@@ -209,7 +209,6 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
 
     protected TextView initEmptyTextView() {
         TextView emptyView = (TextView) getActivity().findViewById(android.R.id.empty);
-        emptyView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
         return emptyView;
     }
 

@@ -111,20 +111,15 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     }
 
     @Override
-    public void onCreate(Bundle savedState) {
-        super.onCreate(savedState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
-        if (isUiRestricted()) {
-            mUnavailable = true;
-            setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
-            setHasOptionsMenu(false);
-            return;
-        }
-
         mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        setHasOptionsMenu(true);
+        mUnavailable = isUiRestricted();
+        setHasOptionsMenu(!mUnavailable);
+
         addPreferencesFromResource(R.xml.vpn_settings2);
     }
 
@@ -186,6 +181,8 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             }
             getPreferenceScreen().removeAll();
             return;
+        } else {
+            getEmptyTextView().setText(R.string.vpn_no_vpns_added);
         }
 
         final boolean pickLockdown = getActivity()
