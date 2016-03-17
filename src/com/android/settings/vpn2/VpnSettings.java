@@ -222,6 +222,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     public boolean handleMessage(Message message) {
         mUpdater.removeMessages(RESCAN_MESSAGE);
 
+        // Run heavy RPCs before switching to UI thread
         final List<VpnProfile> vpnProfiles = loadVpnProfiles(mKeyStore);
         final List<AppVpnInfo> vpnApps = getVpnApps(getActivity(), /* includeProfiles */ true);
 
@@ -230,10 +231,15 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
         final Set<Integer> readOnlyUsers = getReadOnlyUserProfiles();
 
-        // Refresh the PreferenceGroup which lists VPNs
+        // Refresh list of VPNs
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                // Can't do anything useful if the context has gone away
+                if (!isAdded()) {
+                    return;
+                }
+
                 // Find new VPNs by subtracting existing ones from the full set
                 final Set<Preference> updates = new ArraySet<>();
 
