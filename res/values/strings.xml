@@ -1005,7 +1005,7 @@
     <string name="lock_settings_picker_title">Choose screen lock</string>
 
     <!--  Title for security picker to choose the profile unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
-    <string name="lock_settings_picker_title_profile">Choose profile screen lock</string>
+    <string name="lock_settings_picker_title_profile">Choose work lock</string>
 
     <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="setup_lock_settings_picker_title">Protect your phone</string>
@@ -1029,15 +1029,15 @@
 
     <!--  Profile Security lock settings --><skip />
     <!--  Title for PreferenceScreen to launch picker for security method for the managed profile when there is none [CHAR LIMIT=22] -->
-    <string name="unlock_set_unlock_launch_picker_title_profile">Profile screen lock</string>
+    <string name="unlock_set_unlock_launch_picker_title_profile">Work profile lock</string>
 
     <!--  Title for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_change_title">Change lock screen</string>
 
-    <!--  Summary for PreferenceScreen to changeecurity method: None/Pattern/PIN/Password [CHAR LIMIT=45]  -->
+    <!--  Summary for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=45]  -->
     <string name="unlock_set_unlock_launch_picker_change_summary">Change or disable pattern, PIN, or password security</string>
 
-    <!--  Summary for PreferenceScreen to changeecurity method: None/Pattern/PIN/Password [CHAR LIMIT=45]  -->
+    <!--  Summary for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=45]  -->
     <string name="unlock_set_unlock_launch_picker_enable_summary">Choose a method to lock the screen</string>
 
     <!-- Title for preference that disables unlock security [CHAR LIMIT=22] -->
@@ -3087,15 +3087,15 @@
     <!-- Message to be used to explain the user that he needs to enter his password to continue a
          particular operation. [CHAR LIMIT=70]-->
     <string name="lockpassword_confirm_your_password_generic">Enter your device password to continue.</string>
-    <!-- Message to be used to explain the user that he needs to enter his profile pattern to continue a
+    <!-- Message to be used to explain the user that he needs to enter his work pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_pattern_generic_profile">Use your profile pattern to continue.</string>
-    <!-- Message to be used to explain the user that he needs to enter his profile PIN to continue a
+    <string name="lockpassword_confirm_your_pattern_generic_profile">Use your work pattern to continue.</string>
+    <!-- Message to be used to explain the user that he needs to enter his work PIN to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_pin_generic_profile">Enter your profile PIN to continue.</string>
-    <!-- Message to be used to explain the user that he needs to enter his profile password to continue a
+    <string name="lockpassword_confirm_your_pin_generic_profile">Enter your work PIN to continue.</string>
+    <!-- Message to be used to explain the user that he needs to enter his work password to continue a
          particular operation. [CHAR LIMIT=70]-->
-    <string name="lockpassword_confirm_your_password_generic_profile">Enter your profile password to continue.</string>
+    <string name="lockpassword_confirm_your_password_generic_profile">Enter your work password to continue.</string>
 
     <!-- Security & location settings screen, change security method screen instruction if user
          enters incorrect PIN [CHAR LIMIT=30] -->
@@ -3165,21 +3165,21 @@
 
     <!-- Profile Lock settings -->
     <!-- Security & location settings screen, header for profile specific section -->
-    <string name="lock_settings_profile_title">Work profile</string>
-    <!-- Security & location settings screen, setting option name -->
-    <string name="lock_settings_profile_label">Work profile security</string>
+    <string name="lock_settings_profile_title">Work profile security</string>
     <!-- Security & location settings screen, title when changing or confirming the work profile lock -->
     <string name="lock_settings_profile_screen_lock_title">Work profile screen lock</string>
     <!-- Security & location settings screen, setting option name to unify work and personal locks -->
     <string name="lock_settings_profile_unification_title">Use the same lock</string>
     <!-- Security & location settings screen, setting option explanation to unify work and personal locks -->
-    <string name="lock_settings_profile_unification_summary">Change device screen lock to match work profile?</string>
+    <string name="lock_settings_profile_unification_summary">Change device screen lock to match work profile</string>
     <!-- Security & location settings screen, title of the dialog asking if the user wants to unify work and personal locks -->
-    <string name="lock_settings_profile_unification_dialog_title">Use the same screen lock?</string>
+    <string name="lock_settings_profile_unification_dialog_title">Use the same lock?</string>
     <!-- Security & location settings screen, explanation in the dialog asking if the user wants to unify work and personal locks -->
-    <string name="lock_settings_profile_unification_dialog_body">You can use this lock for your device but it will include all screen lock related policies set by your IT admin on the work profile.\nDo you want to use the same screen lock for your device?</string>
+    <string name="lock_settings_profile_unification_dialog_body">You can use your work profile lock for your device screen lock as well. If you do, any work lock policies will also apply to your device screen lock.</string>
     <!-- Security & location settings screen, explanation in the dialog asking if the user wants to create a new lock for personal and work as the current work lock is not enough for the device. -->
-    <string name="lock_settings_profile_unification_dialog_uncompliant_body">Your work screen lock doesn\'t meet your organization\'s security requirements.\nYou can set a new screen lock for both your device and your work profile, but any work screen lock policies will apply to your device screen lock as well.</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body">Your work profile lock doesn\'t meet your organization\'s security requirements.\n\nYou can set a new screen lock for both your device and your work profile, but any work lock policies will apply to your device screen lock as well.</string>
+    <!-- Security & location settings screen, confirmation button of the dialog asking if the user wants to create a new lock for both personal and work profiles. -->
+    <string name="lock_settings_profile_unification_dialog_confirm">Change device lock</string>
     <!-- Security & location settings screen, confirmation button of the dialog asking if the user wants to create a new lock for both personal and work profiles. -->
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm">Change lock</string>
     <!-- Security & location settings screen, summary of the item that changes your work profile lock when it is unified with the personal lock -->
@@ -5938,18 +5938,18 @@
     <string name="lock_screen_notifications_interstitial_title">Notifications</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications:  all information will be
-         shown in profile notifications shown on a secure lock screen
+         shown in work notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_show_profile">Show all profile notification content</string>
+    <string name="lock_screen_notifications_summary_show_profile">Show all work notification content</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications: sensitive information will be
-         hidden or redacted from profile notifications shown on a secure lock screen
+         hidden or redacted from work notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_hide_profile">Hide sensitive profile notification content</string>
+    <string name="lock_screen_notifications_summary_hide_profile">Hide sensitive work notification content</string>
 
-    <!-- Configure Notifications: Value for lockscreen notifications: profile notifications will not appear on a secure lock screen
+    <!-- Configure Notifications: Value for lockscreen notifications: work notifications will not appear on a secure lock screen
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_disable_profile">Don\u2019t show profile notifications at all</string>
+    <string name="lock_screen_notifications_summary_disable_profile">Don\u2019t show work notifications at all</string>
 
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Message asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=NONE] -->
     <string name="lock_screen_notifications_interstitial_message_profile">When your device is locked, how do you want profile notifications to show?</string>
