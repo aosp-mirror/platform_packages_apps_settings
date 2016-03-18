@@ -18,8 +18,12 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.KeyguardManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.UserInfo;
 import android.net.http.SslCertificate;
 import android.os.AsyncTask;
@@ -50,8 +54,10 @@ import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.ParcelableString;
+import com.android.internal.widget.LockPatternUtils;
 
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
@@ -65,6 +71,7 @@ public class TrustedCredentialsSettings extends InstrumentedFragment {
     private static final String TAG = "TrustedCredentialsSettings";
 
     private UserManager mUserManager;
+    private KeyguardManager mKeyguardManager;
 
     private static final String USER_ACTION = "com.android.settings.TRUSTED_CREDENTIALS_USER";
 
@@ -173,12 +180,42 @@ public class TrustedCredentialsSettings extends InstrumentedFragment {
     private final SparseArray<KeyChainConnection>
             mKeyChainConnectionByProfileId = new SparseArray<KeyChainConnection>();
 
+    private BroadcastReceiver mWorkProfileChangedReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (Intent.ACTION_MANAGED_PROFILE_AVAILABILITY_CHANGED.equals(action) ||
+                    Intent.ACTION_MANAGED_PROFILE_UNLOCKED.equals(action)) {
+                // Reload all alias
+                final ExpandableListView systemView = (ExpandableListView) mTabHost
+                        .findViewById(Tab.SYSTEM.mExpandableList);
+                if (systemView != null) {
+                    ((TrustedCertificateExpandableAdapter) systemView.getExpandableListAdapter())
+                            .load();
+                }
+                final ExpandableListView userView = (ExpandableListView) mTabHost
+                        .findViewById(Tab.USER.mExpandableList);
+                if (userView != null) {
+                    ((TrustedCertificateExpandableAdapter) userView.getExpandableListAdapter())
+                            .load();
+                }
+            }
+        }
+
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        mKeyguardManager = (KeyguardManager) getActivity()
+                .getSystemService(Context.KEYGUARD_SERVICE);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABILITY_CHANGED);
+        filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNLOCKED);
+        getActivity().registerReceiver(mWorkProfileChangedReceiver, filter);
     }
-
 
     @Override public View onCreateView(
             LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -195,6 +232,7 @@ public class TrustedCredentialsSettings extends InstrumentedFragment {
     }
     @Override
     public void onDestroy() {
+        getActivity().unregisterReceiver(mWorkProfileChangedReceiver);
         for (AdapterData.AliasLoader aliasLoader : mAliasLoaders.values()) {
             aliasLoader.cancel(true);
         }
@@ -225,6 +263,29 @@ public class TrustedCredentialsSettings extends InstrumentedFragment {
             final TrustedCertificateExpandableAdapter adapter =
                     new TrustedCertificateExpandableAdapter(tab);
             lv.setAdapter(adapter);
+            lv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+                @Override
+                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition,
+                        long id) {
+                    final UserHandle groupUser = adapter.getGroup(groupPosition);
+                    final int groupUserId = groupUser.getIdentifier();
+                    if (mUserManager.isQuietModeEnabled(groupUser)) {
+                        final Intent intent = UnlaunchableAppActivity.createInQuietModeDialogIntent(
+                                groupUserId);
+                        getActivity().startActivity(intent);
+                        return true;
+                    } else if (!mUserManager.isUserUnlocked(groupUser)) {
+                        final LockPatternUtils lockPatternUtils = new LockPatternUtils(
+                                getActivity());
+                        if (lockPatternUtils.isSeparateProfileChallengeEnabled(groupUserId)) {
+                            startWorkChallenge(groupUserId);
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+            });
             lv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                     @Override
                 public boolean onChildClick(ExpandableListView parent, View v,
@@ -244,6 +305,17 @@ public class TrustedCredentialsSettings extends InstrumentedFragment {
                 }
             });
         }
+    }
+
+    /**
+     * Start work challenge activity. TODO: Move and refactor this method as a util function.
+     */
+    private void startWorkChallenge(int userId) {
+        final Intent newIntent = mKeyguardManager.createConfirmDeviceCredentialIntent(null, null,
+                userId);
+        newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(newIntent);
     }
 
     /**
@@ -418,6 +490,11 @@ public class TrustedCredentialsSettings extends InstrumentedFragment {
                 mAliasLoaders.put(mTab, this);
             }
 
+            private boolean shouldSkipProfile(UserHandle userHandle) {
+                return mUserManager.isQuietModeEnabled(userHandle)
+                        || !mUserManager.isUserUnlocked(userHandle.getIdentifier());
+            }
+
             @Override protected void onPreExecute() {
                 View content = mTabHost.getTabContentView();
                 mProgressBar = (ProgressBar) content.findViewById(mTab.mProgress);
@@ -440,6 +517,9 @@ public class TrustedCredentialsSettings extends InstrumentedFragment {
                     for (int i = 0; i < n; ++i) {
                         UserHandle profile = profiles.get(i);
                         int profileId = profile.getIdentifier();
+                        if (shouldSkipProfile(profile)) {
+                            continue;
+                        }
                         KeyChainConnection keyChainConnection = KeyChain.bindAsUser(mContext,
                                 profile);
                         // Saving the connection for later use on the certificate dialog.
@@ -455,6 +535,10 @@ public class TrustedCredentialsSettings extends InstrumentedFragment {
                     for (int i = 0; i < n; ++i) {
                         UserHandle profile = profiles.get(i);
                         int profileId = profile.getIdentifier();
+                        if (shouldSkipProfile(profile)) {
+                            certHoldersByProfile.put(profileId, new ArrayList<CertHolder>(0));
+                            continue;
+                        }
                         List<ParcelableString> aliases = aliasesByProfileId.get(profileId);
                         if (isCancelled()) {
                             return new SparseArray<List<CertHolder>>();
