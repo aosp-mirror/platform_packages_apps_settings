@@ -566,7 +566,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return;
         }
 
-        if (mDpm.getMaximumTimeToLock(null) > 0) {
+        if (mDpm.getMaximumTimeToLockForUserAndProfiles(UserHandle.myUserId()) > 0) {
             // A DeviceAdmin has specified a maximum time until the device
             // will lock...  in this case we can't allow the user to turn
             // on "stay awake when plugged in" because that would defeat the
