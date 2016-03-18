@@ -193,15 +193,6 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         return root;
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        // This will commit the change SLIGHTLY after the activity has
-        // finished, which could be considered a feature or a bug...
-        commit();
-    }
-
     /**
      * Creates new configuration based on the current position of the SeekBar.
      */
