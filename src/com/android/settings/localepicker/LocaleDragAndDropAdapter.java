@@ -48,6 +48,7 @@ class LocaleDragAndDropAdapter
     private final Context mContext;
     private final List<LocaleStore.LocaleInfo> mFeedItemList;
     private final ItemTouchHelper mItemTouchHelper;
+    private RecyclerView mParentView = null;
     private boolean mRemoveMode = false;
     private boolean mDragEnabled = true;
     private NumberFormat mNumberFormatter = NumberFormat.getNumberInstance();
@@ -132,6 +133,7 @@ class LocaleDragAndDropAdapter
     }
 
     public void setRecyclerView(RecyclerView rv) {
+        mParentView = rv;
         mItemTouchHelper.attachToRecyclerView(rv);
     }
 
@@ -239,17 +241,46 @@ class LocaleDragAndDropAdapter
 
     public void doTheUpdate() {
         int count = mFeedItemList.size();
-        Locale[] newList = new Locale[count];
+        final Locale[] newList = new Locale[count];
 
         for (int i = 0; i < count; i++) {
-            LocaleStore.LocaleInfo li = mFeedItemList.get(i);
+            final LocaleStore.LocaleInfo li = mFeedItemList.get(i);
             newList[i] = li.getLocale();
         }
 
-        LocaleList ll = new LocaleList(newList);
-        LocalePicker.updateLocales(ll);
+        final LocaleList ll = new LocaleList(newList);
+        updateLocalesWhenAnimationStops(ll);
+    }
 
-        mNumberFormatter = NumberFormat.getNumberInstance(Locale.getDefault());
+    private LocaleList mLocalesToSetNext = null;
+    private LocaleList mLocalesSetLast = null;
+
+    public void updateLocalesWhenAnimationStops(final LocaleList localeList) {
+        if (localeList.equals(mLocalesToSetNext)) {
+            return;
+        }
+
+        // This will only update the Settings application to make things feel more responsive,
+        // the system will be updated later, when animation stopped.
+        LocaleList.setDefault(localeList);
+
+        mLocalesToSetNext = localeList;
+        final RecyclerView.ItemAnimator itemAnimator = mParentView.getItemAnimator();
+        itemAnimator.isRunning(new RecyclerView.ItemAnimator.ItemAnimatorFinishedListener() {
+            @Override
+            public void onAnimationsFinished() {
+                if (mLocalesToSetNext == null || mLocalesToSetNext.equals(mLocalesSetLast)) {
+                    // All animations finished, but the locale list did not change
+                    return;
+                }
+
+                LocalePicker.updateLocales(mLocalesToSetNext);
+                mLocalesSetLast = mLocalesToSetNext;
+                mLocalesToSetNext = null;
+
+                mNumberFormatter = NumberFormat.getNumberInstance(Locale.getDefault());
+            }
+        });
     }
 
     private void setDragEnabled(boolean enabled) {
