@@ -30,7 +30,6 @@ import com.android.settings.R;
  * Preference fragment used to control font size.
  */
 public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFragment {
-    private static final String LOG_TAG = "ToggleFontSizePreferenceFragment";
 
     private float[] mValues;
 
