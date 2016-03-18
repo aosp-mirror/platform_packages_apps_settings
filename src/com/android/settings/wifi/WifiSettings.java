@@ -178,6 +178,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setAnimationAllowed(true);
         addPreferencesFromResource(R.xml.wifi_settings);
         mAddPreference = new Preference(getContext());
         mAddPreference.setIcon(R.drawable.ic_menu_add_inset);

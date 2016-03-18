@@ -50,6 +50,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setAnimationAllowed(true);
         setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) getContext().getApplicationContext());
