@@ -16,6 +16,7 @@
 
 package com.android.settings.location;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -474,6 +475,15 @@ class SettingsInjector {
          * preference when the service replies.
          */
         public void startService() {
+            final ActivityManager am = (ActivityManager)
+                    mContext.getSystemService(Context.ACTIVITY_SERVICE);
+            if (!am.isUserRunning(setting.mUserHandle.getIdentifier())) {
+                if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                    Log.v(TAG, "Cannot start service as user "
+                            + setting.mUserHandle.getIdentifier() + " is not running");
+                }
+                return;
+            }
             Handler handler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
