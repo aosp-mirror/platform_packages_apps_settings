@@ -61,6 +61,7 @@ public class CredentialCheckResultTracker extends Fragment {
         if (mListener != null) {
             mListener.onCredentialChecked(mResultMatched, mResultData, mResultTimeoutMs,
                     mResultEffectiveUserId, true /* newResult */);
+            mHasResult = false;
         }
     }
 
