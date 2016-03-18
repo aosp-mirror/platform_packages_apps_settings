@@ -393,7 +393,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         private int upgradeQualityForDPM(int quality) {
             // Compare min allowed password quality
-            int minQuality = mDPM.getPasswordQuality(null);
+            int minQuality = mDPM.getPasswordQuality(null, mUserId);
             if (quality < minQuality) {
                 quality = minQuality;
             }
@@ -422,7 +422,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 boolean hideDisabled) {
             final PreferenceScreen entries = getPreferenceScreen();
 
-            int adminEnforcedQuality = mDPM.getPasswordQuality(null);
+            int adminEnforcedQuality = mDPM.getPasswordQuality(null, mUserId);
             EnforcedAdmin enforcedAdmin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
                     getActivity(), mUserId);
             for (int i = entries.getPreferenceCount() - 1; i >= 0; --i) {
@@ -592,7 +592,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             Intent intent = null;
             final Context context = getActivity();
             if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
-                int minLength = mDPM.getPasswordMinimumLength(null);
+                int minLength = mDPM.getPasswordMinimumLength(null, mUserId);
                 if (minLength < MIN_PASSWORD_LENGTH) {
                     minLength = MIN_PASSWORD_LENGTH;
                 }
