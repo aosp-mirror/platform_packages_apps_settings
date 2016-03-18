@@ -115,7 +115,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int DIALOG_NEED_LOCKSCREEN = 7;
     private static final int DIALOG_CONFIRM_EXIT_GUEST = 8;
     private static final int DIALOG_USER_PROFILE_EDITOR = 9;
-    private static final int DIALOG_EMERGENCY_INFO_CONSENT = 10;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
     private static final int MESSAGE_SETUP_USER = 2;
@@ -609,22 +608,6 @@ public class UserSettings extends SettingsPreferenceFragment
                         android.os.Process.myUserHandle());
                 return dlg;
             }
-            case DIALOG_EMERGENCY_INFO_CONSENT : {
-                Dialog dlg = new AlertDialog.Builder(context)
-                        .setTitle(R.string.emergency_info_title)
-                        .setMessage(R.string.user_emergency_info_consent)
-                        .setPositiveButton(R.string.emergency_info_continue,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO);
-                                        startActivity(intent);
-                                    }
-                                })
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .create();
-                return dlg;
-            }
             default:
                 return null;
         }
@@ -966,7 +949,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 onAddUserClicked(USER_TYPE_USER);
             }
         } else if (pref == mEmergencyInfoPreference) {
-            showDialog(DIALOG_EMERGENCY_INFO_CONSENT);
+            Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO);
+            startActivity(intent);
         }
         return false;
     }
