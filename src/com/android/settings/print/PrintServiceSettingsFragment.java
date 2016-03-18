@@ -341,8 +341,12 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         mServiceEnabled = service.isEnabled();
 
         if (service.getSettingsActivityName() != null) {
-            Intent settingsIntent = new Intent(Intent.ACTION_MAIN).setComponent(
-                    ComponentName.unflattenFromString(service.getSettingsActivityName()));
+            Intent settingsIntent = new Intent(Intent.ACTION_MAIN);
+
+            settingsIntent.setComponent(
+                    new ComponentName(service.getComponentName().getPackageName(),
+                            service.getSettingsActivityName()));
+
             List<ResolveInfo> resolvedActivities = getPackageManager().queryIntentActivities(
                     settingsIntent, 0);
             if (!resolvedActivities.isEmpty()) {
@@ -356,9 +360,12 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
 
         if (service.getAddPrintersActivityName() != null) {
-            Intent addPrintersIntent = new Intent(Intent.ACTION_MAIN)
-                    .setComponent(ComponentName.unflattenFromString(
+            Intent addPrintersIntent = new Intent(Intent.ACTION_MAIN);
+
+            addPrintersIntent.setComponent(
+                    new ComponentName(service.getComponentName().getPackageName(),
                             service.getAddPrintersActivityName()));
+
             List<ResolveInfo> resolvedActivities = getPackageManager().queryIntentActivities(
                     addPrintersIntent, 0);
             if (!resolvedActivities.isEmpty()) {
