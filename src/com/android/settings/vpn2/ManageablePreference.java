@@ -17,35 +17,63 @@
 package com.android.settings.vpn2;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
+import android.content.res.Resources;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.View.OnClickListener;
 
+import com.android.settings.GearPreference;
 import com.android.settings.R;
 
 /**
- * Preference with an additional gear icon. Touching the gear icon triggers an
- * onChange event.
+ * This class sets appropriate enabled state and user admin message when userId is set
  */
-public class ManageablePreference extends Preference {
-    OnClickListener mListener;
-    View mManageView;
+public abstract class ManageablePreference extends GearPreference {
 
-    public ManageablePreference(Context context, AttributeSet attrs, OnClickListener onManage) {
+    public static int STATE_NONE = -1;
+
+    boolean mIsAlwaysOn = false;
+    int mUserId;
+
+    public ManageablePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mListener = onManage;
         setPersistent(false);
         setOrder(0);
-        setWidgetLayoutResource(R.layout.preference_vpn);
+        setUserId(UserHandle.myUserId());
     }
 
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
-        mManageView = view.findViewById(R.id.manage);
-        mManageView.setOnClickListener(mListener);
-        mManageView.setTag(this);
-        super.onBindViewHolder(view);
+    public int getUserId() {
+        return mUserId;
+    }
+
+    public void setUserId(int userId) {
+        mUserId = userId;
+        checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN, userId);
+    }
+
+    public boolean isAlwaysOn() {
+        return mIsAlwaysOn;
+    }
+
+    public void setAlwaysOn(boolean isEnabled) {
+        mIsAlwaysOn = isEnabled;
+    }
+
+    /**
+     * State is not shown for {@code STATE_NONE}
+     *
+     * @return summary string showing current connection state and always-on-vpn state
+     */
+    protected String getSummaryString(int state) {
+        final Resources res = getContext().getResources();
+        final String[] states = res.getStringArray(R.array.vpn_states);
+        String summary = state == STATE_NONE ? "" : states[state];
+        if (mIsAlwaysOn) {
+            final String alwaysOnString = res.getString(R.string.vpn_always_on_active);
+            summary = TextUtils.isEmpty(summary) ? alwaysOnString : res.getString(
+                    R.string.join_two_unrelated_items, summary, alwaysOnString);
+        }
+        return summary;
     }
 }
