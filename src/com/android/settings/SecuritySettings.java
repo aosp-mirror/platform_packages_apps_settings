@@ -97,6 +97,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE = 127;
     private static final int UNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 128;
     private static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
+    private static final int UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 130;
     private static final String TAG_UNIFICATION_DIALOG = "unification_dialog";
 
     // Misc Settings
@@ -247,11 +248,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (mProfileChallengeUserId != UserHandle.USER_NULL
                 && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId)) {
             addPreferencesFromResource(R.xml.security_settings_profile);
+            addPreferencesFromResource(R.xml.security_settings_unification);
             final int profileResid = getResIdForLockUnlockScreen(
                     getActivity(), mLockPatternUtils, mProfileChallengeUserId);
             addPreferencesFromResource(profileResid);
             maybeAddFingerprintPreference(root, mProfileChallengeUserId);
-            addPreferencesFromResource(R.xml.security_settings_unification);
             if (!mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)) {
                 Preference lockPreference = root.findPreference(KEY_UNLOCK_SET_OR_CHANGE_PROFILE);
                 String summary = getContext().getString(
@@ -646,24 +647,28 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             unifyLocks();
             return;
+        } else if (requestCode == UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST
+                && resultCode == Activity.RESULT_OK) {
+            ununifyLocks();
+            return;
         }
         createPreferenceHierarchy();
     }
 
     private void launchConfirmDeviceLockForUnification() {
         final String title = getActivity().getString(
-                R.string.lock_settings_profile_screen_lock_title);
+                R.string.unlock_set_unlock_launch_picker_title);
         final ChooseLockSettingsHelper helper =
                 new ChooseLockSettingsHelper(getActivity(), this);
         if (!helper.launchConfirmationActivity(
-                UNIFY_LOCK_CONFIRM_DEVICE_REQUEST, title, true, UserHandle.myUserId())) {
+                UNIFY_LOCK_CONFIRM_DEVICE_REQUEST, title, true, MY_USER_ID)) {
             launchConfirmProfileLockForUnification();
         }
     }
 
     private void launchConfirmProfileLockForUnification() {
         final String title = getActivity().getString(
-                R.string.lock_settings_profile_screen_lock_title);
+                R.string.unlock_set_unlock_launch_picker_title_profile);
         final ChooseLockSettingsHelper helper =
                 new ChooseLockSettingsHelper(getActivity(), this);
         if (!helper.launchConfirmationActivity(
@@ -681,11 +686,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (profileQuality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
             mLockPatternUtils.saveLockPattern(
                     LockPatternUtils.stringToPattern(mCurrentProfilePassword),
-                    mCurrentDevicePassword, UserHandle.myUserId());
+                    mCurrentDevicePassword, MY_USER_ID);
         } else {
             mLockPatternUtils.saveLockPassword(
                     mCurrentProfilePassword, mCurrentDevicePassword,
-                    profileQuality, UserHandle.myUserId());
+                    profileQuality, MY_USER_ID);
         }
         mCurrentDevicePassword = null;
         mCurrentProfilePassword = null;
@@ -696,6 +701,16 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false);
         startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                 R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
+    }
+
+    private void ununifyLocks() {
+        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, true);
+        Bundle extras = new Bundle();
+        extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
+        startFragment(this,
+                "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+                R.string.lock_settings_picker_title_profile,
+                SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
     }
 
     @Override
@@ -716,13 +731,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         UnificationConfirmationDialog.newIntance(compliantForDevice);
                 dialog.show(getChildFragmentManager(), TAG_UNIFICATION_DIALOG);
             } else {
-                mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, true);
-                Bundle extras = new Bundle();
-                extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
-                startFragment(this,
-                        "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
-                        R.string.lock_settings_picker_title_profile,
-                        SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
+                final String title = getActivity().getString(
+                        R.string.unlock_set_unlock_launch_picker_title);
+                final ChooseLockSettingsHelper helper =
+                        new ChooseLockSettingsHelper(getActivity(), this);
+                if(!helper.launchConfirmationActivity(
+                        UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST, title, true, MY_USER_ID)) {
+                    ununifyLocks();
+                }
             }
         } else if (KEY_SHOW_PASSWORD.equals(key)) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
@@ -1207,7 +1223,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     .setTitle(R.string.lock_settings_profile_unification_dialog_title)
                     .setMessage(compliant ? R.string.lock_settings_profile_unification_dialog_body
                             : R.string.lock_settings_profile_unification_dialog_uncompliant_body)
-                    .setPositiveButton(compliant ? R.string.okay
+                    .setPositiveButton(
+                            compliant ? R.string.lock_settings_profile_unification_dialog_confirm
                             : R.string.lock_settings_profile_unification_dialog_uncompliant_confirm,
                             new DialogInterface.OnClickListener() {
                                 @Override
