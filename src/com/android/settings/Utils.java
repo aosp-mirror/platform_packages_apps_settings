@@ -521,21 +521,32 @@ public final class Utils extends com.android.settingslib.Utils {
     public static void startWithFragmentAsUser(Context context, String fragmentName, Bundle args,
             int titleResId, CharSequence title, boolean isShortcut,
             UserHandle userHandle) {
-        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                null /* titleResPackageName */, titleResId, title, isShortcut);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivityAsUser(intent, userHandle);
+        // workaround to avoid crash in b/17523189
+        if (userHandle.getIdentifier() == UserHandle.myUserId()) {
+            startWithFragment(context, fragmentName, args, null, 0, titleResId, title, isShortcut);
+        } else {
+            Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
+                    null /* titleResPackageName */, titleResId, title, isShortcut);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivityAsUser(intent, userHandle);
+        }
     }
 
     public static void startWithFragmentAsUser(Context context, String fragmentName, Bundle args,
             String titleResPackageName, int titleResId, CharSequence title, boolean isShortcut,
             UserHandle userHandle) {
-        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResPackageName,
-                titleResId, title, isShortcut);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivityAsUser(intent, userHandle);
+        // workaround to avoid crash in b/17523189
+        if (userHandle.getIdentifier() == UserHandle.myUserId()) {
+            startWithFragment(context, fragmentName, args, null, 0, titleResPackageName, titleResId,
+                    title, isShortcut);
+        } else {
+            Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
+                    titleResPackageName, titleResId, title, isShortcut);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivityAsUser(intent, userHandle);
+        }
     }
 
     /**

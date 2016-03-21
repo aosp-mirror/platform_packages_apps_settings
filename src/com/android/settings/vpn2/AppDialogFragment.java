@@ -19,6 +19,7 @@ package com.android.settings.vpn2;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
@@ -45,13 +46,25 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
     private static final String ARG_PACKAGE = "package";
 
     private PackageInfo mPackageInfo;
+    private Listener mListener;
 
     private final IConnectivityManager mService = IConnectivityManager.Stub.asInterface(
             ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
 
-    public static void show(VpnSettings parent, PackageInfo packageInfo, String label,
+    public interface Listener {
+        public void onForget();
+        public void onCancel();
+    }
+
+    public static void show(Fragment parent, PackageInfo packageInfo, String label,
             boolean managing, boolean connected) {
-        if (!parent.isAdded()) return;
+        show(parent, null, packageInfo, label, managing, connected);
+    }
+
+    public static void show(Fragment parent, Listener listener, PackageInfo packageInfo,
+            String label, boolean managing, boolean connected) {
+        if (!parent.isAdded())
+            return;
 
         Bundle args = new Bundle();
         args.putParcelable(ARG_PACKAGE, packageInfo);
@@ -60,6 +73,7 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
         args.putBoolean(ARG_CONNECTED, connected);
 
         final AppDialogFragment frag = new AppDialogFragment();
+        frag.mListener = listener;
         frag.setArguments(args);
         frag.setTargetFragment(parent, 0);
         frag.show(parent.getFragmentManager(), TAG_APP_DIALOG);
@@ -98,6 +112,9 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
     @Override
     public void onCancel(DialogInterface dialog) {
         dismiss();
+        if (mListener != null) {
+            mListener.onCancel();
+        }
         super.onCancel(dialog);
     }
 
@@ -110,6 +127,10 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to forget authorization of " + mPackageInfo.packageName +
                     " for user " + userId, e);
+        }
+
+        if (mListener != null) {
+            mListener.onForget();
         }
     }
 
