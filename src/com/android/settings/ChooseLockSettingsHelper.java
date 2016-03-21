@@ -246,6 +246,7 @@ public final class ChooseLockSettingsHelper {
         // TODO: Remove once that bug is fixed.
         if (intentSender != null || taskId != -1) {
             outIntent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            outIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         }
     }
 }
