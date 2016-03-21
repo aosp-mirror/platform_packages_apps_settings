@@ -22,11 +22,9 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
-import android.view.View.OnClickListener;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
-import com.android.settings.R;
 
 /**
  * {@link android.support.v7.preference.Preference} containing information about a VPN
@@ -39,10 +37,15 @@ public class AppPreference extends ManageablePreference {
     private int mState = STATE_DISCONNECTED;
     private String mPackageName;
     private String mName;
-    private int mUserId = UserHandle.USER_NULL;
 
-    public AppPreference(Context context, OnClickListener onManage) {
-        super(context, null /* attrs */, onManage);
+    public AppPreference(Context context) {
+        super(context, null /* attrs */);
+    }
+
+    @Override
+    public void setUserId(int userId) {
+        super.setUserId(userId);
+        update();
     }
 
     public PackageInfo getPackageInfo() {
@@ -67,15 +70,6 @@ public class AppPreference extends ManageablePreference {
         update();
     }
 
-    public int getUserId() {
-        return mUserId;
-    }
-
-    public void setUserId(int userId) {
-        mUserId = userId;
-        update();
-    }
-
     public int getState() {
         return mState;
     }
@@ -90,8 +84,7 @@ public class AppPreference extends ManageablePreference {
             return;
         }
 
-        final String[] states = getContext().getResources().getStringArray(R.array.vpn_states);
-        setSummary(mState != STATE_DISCONNECTED ? states[mState] : "");
+        setSummary(getSummaryString(mState == STATE_DISCONNECTED ? STATE_NONE : mState));
 
         mName = mPackageName;
         Drawable icon = null;
@@ -140,9 +133,9 @@ public class AppPreference extends ManageablePreference {
                 result = mUserId - another.mUserId;
             }
             return result;
-        } else if (preference instanceof ConfigPreference) {
+        } else if (preference instanceof LegacyVpnPreference) {
             // Use comparator from ConfigPreference
-            ConfigPreference another = (ConfigPreference) preference;
+            LegacyVpnPreference another = (LegacyVpnPreference) preference;
             return -another.compareTo(this);
         } else {
             return super.compareTo(preference);

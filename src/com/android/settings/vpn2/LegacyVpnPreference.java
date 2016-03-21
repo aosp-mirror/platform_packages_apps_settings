@@ -18,28 +18,24 @@ package com.android.settings.vpn2;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.view.View.OnClickListener;
+import android.view.View;
 
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
-
 import static com.android.internal.net.LegacyVpnInfo.STATE_CONNECTED;
 
 /**
- * {@link android.support.v7.preference.Preference} referencing a VPN
- * configuration. Tracks the underlying profile and its connection
- * state.
+ * {@link android.support.v7.preference.Preference} tracks the underlying legacy vpn profile and
+ * its connection state.
  */
-public class ConfigPreference extends ManageablePreference {
-    public static int STATE_NONE = -1;
-
+public class LegacyVpnPreference extends ManageablePreference {
     private VpnProfile mProfile;
 
     /** One of the STATE_* fields from LegacyVpnInfo, or STATE_NONE */
     private int mState = STATE_NONE;
 
-    ConfigPreference(Context context, OnClickListener onManage) {
-        super(context, null /* attrs */, onManage);
+    LegacyVpnPreference(Context context) {
+        super(context, null /* attrs */);
     }
 
     public VpnProfile getProfile() {
@@ -57,12 +53,7 @@ public class ConfigPreference extends ManageablePreference {
     }
 
     private void update() {
-        if (mState == STATE_NONE) {
-            setSummary("");
-        } else {
-            final String[] states = getContext().getResources().getStringArray(R.array.vpn_states);
-            setSummary(states[mState]);
-        }
+        setSummary(getSummaryString(mState));
         if (mProfile != null) {
             setIcon(R.mipmap.ic_launcher_settings);
             setTitle(mProfile.name);
@@ -72,8 +63,8 @@ public class ConfigPreference extends ManageablePreference {
 
     @Override
     public int compareTo(Preference preference) {
-        if (preference instanceof ConfigPreference) {
-            ConfigPreference another = (ConfigPreference) preference;
+        if (preference instanceof LegacyVpnPreference) {
+            LegacyVpnPreference another = (LegacyVpnPreference) preference;
             int result;
             if ((result = another.mState - mState) == 0 &&
                     (result = mProfile.name.compareToIgnoreCase(another.mProfile.name)) == 0 &&
@@ -93,5 +84,14 @@ public class ConfigPreference extends ManageablePreference {
             return super.compareTo(preference);
         }
     }
-}
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.settings_button && isDisabledByAdmin()) {
+            performClick();
+            return;
+        }
+        super.onClick(v);
+    }
+
+}
