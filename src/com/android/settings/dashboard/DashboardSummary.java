@@ -139,6 +139,7 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        if (mLayoutManager == null) return;
         outState.putInt(EXTRA_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
     }
 
