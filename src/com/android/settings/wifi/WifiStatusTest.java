@@ -68,12 +68,10 @@ public class WifiStatusTest extends Activity {
     private TextView mScanList;
 
 
-    private TextView mPingIpAddr;
     private TextView mPingHostname;
     private TextView mHttpClientTest;
     private Button pingTestButton;
 
-    private String mPingIpAddrResult;
     private String mPingHostnameResult;
     private String mHttpClientTestResult;
 
@@ -148,7 +146,7 @@ public class WifiStatusTest extends Activity {
         mScanList = (TextView) findViewById(R.id.scan_list);
 
 
-        mPingHostname = (TextView) findViewById(R.id.pingHostnameV4);
+        mPingHostname = (TextView) findViewById(R.id.pingHostname);
         mHttpClientTest = (TextView) findViewById(R.id.httpClientTest);
 
         pingTestButton = (Button) findViewById(R.id.ping_test);
@@ -306,11 +304,9 @@ public class WifiStatusTest extends Activity {
     private final void updatePingState() {
         final Handler handler = new Handler();
         // Set all to unknown since the threads will take a few secs to update.
-        mPingIpAddrResult = getResources().getString(R.string.radioInfo_unknown);
         mPingHostnameResult = getResources().getString(R.string.radioInfo_unknown);
         mHttpClientTestResult = getResources().getString(R.string.radioInfo_unknown);
 
-        mPingIpAddr.setText(mPingIpAddrResult);
         mPingHostname.setText(mPingHostnameResult);
         mHttpClientTest.setText(mHttpClientTestResult);
 
