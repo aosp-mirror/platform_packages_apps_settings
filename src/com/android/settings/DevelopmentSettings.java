@@ -1836,7 +1836,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                             (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
         } else if (preference == mBtHciSnoopLog) {
             writeBtHciSnoopLogOptions();
-        } else if (preference == mEnableOemUnlock) {
+        } else if (preference == mEnableOemUnlock && mEnableOemUnlock.isEnabled()) {
             if (mEnableOemUnlock.isChecked()) {
                 if (!showKeyguardConfirmation(getResources(), REQUEST_CODE_ENABLE_OEM_UNLOCK)) {
                     confirmEnableOemUnlock();
