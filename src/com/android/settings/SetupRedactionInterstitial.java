@@ -39,27 +39,17 @@ import com.android.setupwizardlib.view.NavigationBar;
  */
 public class SetupRedactionInterstitial extends RedactionInterstitial {
 
-    public static Intent createStartIntent(Context ctx) {
-        Intent startIntent = RedactionInterstitial.createStartIntent(ctx, UserHandle.myUserId());
-        if (startIntent != null) {
-            startIntent.setClass(ctx, SetupRedactionInterstitial.class);
-            startIntent.putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false)
-                    .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, -1);
-        }
-        return startIntent;
-    }
-
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT,
-                SetupEncryptionInterstitialFragment.class.getName());
+                SetupRedactionInterstitialFragment.class.getName());
         return modIntent;
     }
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        return SetupEncryptionInterstitialFragment.class.getName().equals(fragmentName);
+        return SetupRedactionInterstitialFragment.class.getName().equals(fragmentName);
     }
 
     @Override
@@ -68,7 +58,7 @@ public class SetupRedactionInterstitial extends RedactionInterstitial {
         super.onApplyThemeResource(theme, resid, first);
     }
 
-    public static class SetupEncryptionInterstitialFragment extends RedactionInterstitialFragment
+    public static class SetupRedactionInterstitialFragment extends RedactionInterstitialFragment
             implements NavigationBar.NavigationBarListener {
 
         @Override
