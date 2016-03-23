@@ -143,12 +143,8 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
                 }
                 mSelectedAccessPoint = mDlgAccessPoint;
 
-                // Hide forget button if config editing is locked down
-                final boolean hideForgetButton = WifiSettings.isEditabilityLockedDown(getActivity(),
-                        mDlgAccessPoint.getConfig());
                 mDialog = new WifiDialog(getActivity(), this, mDlgAccessPoint,
-                        WifiConfigUiBase.MODE_VIEW, true /* hide the submit button */,
-                        hideForgetButton);
+                        WifiConfigUiBase.MODE_VIEW, true /* hide the submit button */);
                 return mDialog;
 
         }
