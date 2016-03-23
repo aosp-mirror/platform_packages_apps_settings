@@ -17,8 +17,6 @@
 package com.android.settings.wifi;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AppGlobals;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
@@ -27,8 +25,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
@@ -74,6 +70,7 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
@@ -541,26 +538,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (accessPoint != null) {
             WifiConfiguration config = accessPoint.getConfig();
             if (isEditabilityLockedDown(getActivity(), config) && accessPoint.isActive()) {
-                final int userId = UserHandle.getUserId(config.creatorUid);
-                final PackageManager pm = getActivity().getPackageManager();
-                final IPackageManager ipm = AppGlobals.getPackageManager();
-                String appName = pm.getNameForUid(config.creatorUid);
-                try {
-                    final ApplicationInfo appInfo = ipm.getApplicationInfo(appName, /* flags */ 0,
-                            userId);
-                    final CharSequence label = pm.getApplicationLabel(appInfo);
-                    if (label != null) {
-                        appName = label.toString();
-                    }
-                } catch (RemoteException e) {
-                    // leave appName as packageName
-                }
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(accessPoint.getSsid())
-                        .setMessage(getString(R.string.wifi_alert_lockdown_by_device_owner,
-                                appName))
-                        .setPositiveButton(android.R.string.ok, null)
-                        .show();
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
+                        RestrictedLockUtils.getDeviceOwner(getActivity()));
                 return;
             }
         }
@@ -593,11 +572,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
                 // If it's null, fine, it's for Add Network
                 mSelectedAccessPoint = ap;
-                final boolean hideForget = (ap == null || isEditabilityLockedDown(getActivity(),
-                        ap.getConfig()));
                 mDialog = new WifiDialog(getActivity(), this, ap, mDialogMode,
-                        /* no hide submit/connect */ false,
-                        /* hide forget if config locked down */ hideForget);
+                        /* no hide submit/connect */ false);
                 return mDialog;
             case WPS_PBC_DIALOG_ID:
                 return new WpsDialog(getActivity(), WpsInfo.PBC);
