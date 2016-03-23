@@ -684,7 +684,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     /**
-     * Sets the id of the view continaing the main content. Should be called before calling super's
+     * Sets the id of the view containing the main content. Should be called before calling super's
      * onCreate.
      */
     protected void setMainContentId(int contentId) {
@@ -726,7 +726,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         setTitleFromBackStack();
     }
 
-    private int setTitleFromBackStack() {
+    private void setTitleFromBackStack() {
         final int count = getFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
@@ -735,13 +735,11 @@ public class SettingsActivity extends SettingsDrawerActivity
             } else {
                 setTitle(mInitialTitle);
             }
-            return 0;
+            return;
         }
 
         FragmentManager.BackStackEntry bse = getFragmentManager().getBackStackEntryAt(count - 1);
         setTitleFromBackStackEntry(bse);
-
-        return count;
     }
 
     private void setTitleFromBackStackEntry(FragmentManager.BackStackEntry bse) {
