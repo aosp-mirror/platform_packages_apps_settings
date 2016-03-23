@@ -630,10 +630,21 @@
         </activity>
 
         <activity android:name="Settings$KeyboardLayoutPickerActivity"
-                android:label="@string/keyboard_layout_picker_title"
-                android:clearTaskOnLaunch="true">
+            android:label="@string/keyboard_layout_picker_title"
+            android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.inputmethod.KeyboardLayoutPickerFragment2" />
+        </activity>
+
+        <activity android:name="Settings$PhysicalKeyboardActivity"
+            android:label="@string/physical_keyboard_category"
+            android:clearTaskOnLaunch="true">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.KEYBOARD_LAYOUT_SETTINGS" />
+                <action android:name="android.settings.HARD_KEYBOARD_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -641,7 +652,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.inputmethod.KeyboardLayoutPickerFragment2" />
+                android:value="com.android.settings.inputmethod.PhysicalKeyboardFragment" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
