@@ -165,11 +165,9 @@
     <string name="proxy_clear_text" msgid="5555400754952012657">"清除"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"代理服务器端口"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"对以下网址不使用代理"</string>
-    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"恢复默认设置"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"完成"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"代理服务器主机名"</string>
-    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"注意"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"确定"</string>
     <string name="proxy_error_invalid_host" msgid="6865850167802455230">"您键入的主机名无效。"</string>
@@ -420,8 +418,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"保护您的设备"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"使用指纹解锁"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"选择屏幕锁定方式"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8822511284992306796) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"选择工作资料锁屏方式"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"为手机启用保护功能"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"指纹识别的安全性可能不及安全系数高的图案、PIN 码或密码。请设置备用屏幕锁定方式以确保安全。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"启用设备保护功能可防止他人在未经您允许的情况下使用此平板电脑。请选择您要使用的屏幕锁定方式。"</string>
@@ -429,8 +426,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"启用设备保护功能可防止他人在未经您允许的情况下使用此手机。请选择您要使用的屏幕锁定方式。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"选择您的备用屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"屏幕锁定方式"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (124176557311393483) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"工作资料屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"更改屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"更改或关闭图案、PIN码或密码保护"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"选择屏幕锁定方式"</string>
@@ -1305,12 +1301,9 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"请绘制您的设备解锁图案，然后再继续。"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"您需输入设备 PIN 码才能继续。"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"请输入您的设备密码，然后再继续。"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4329516059719846858) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3388971861797229529) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (3558648618643096065) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"请绘制您的工作解锁图案以继续。"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"请输入您的工作 PIN 码以继续。"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"请输入您的工作密码以继续。"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN 码错误"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"密码错误"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"图案错误"</string>
@@ -1341,20 +1334,14 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"如何绘制解锁图案"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"尝试解锁失败次数过多。请在 <xliff:g id="NUMBER">%d</xliff:g> 秒后重试。"</string>
     <string name="activity_not_found" msgid="5551664692991605325">"您的手机上未安装相应应用。"</string>
-    <!-- no translation found for lock_settings_profile_title (2121876391814535295) -->
-    <skip />
+    <string name="lock_settings_profile_title" msgid="2121876391814535295">"工作资料安全"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"工作资料屏幕锁定"</string>
     <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"使用相同的锁屏方式"</string>
-    <!-- no translation found for lock_settings_profile_unification_summary (6173594427521995322) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (8262182734131824214) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (6953193194108608460) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (8903515808297759759) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (4911420150698686398) -->
-    <skip />
+    <string name="lock_settings_profile_unification_summary" msgid="6173594427521995322">"将设备的屏幕锁定方式改成与工作资料一致"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="8262182734131824214">"使用相同的锁屏方式？"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="6953193194108608460">"您也可以将自己的工作资料屏幕锁定方式设为设备的屏幕锁定方式。如果您这样做的话，您设备的屏幕锁定方式也必须遵守所有相关的工作屏幕锁定规范。"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8903515808297759759">"您的工作资料屏幕锁定方式不符合贵单位的安全要求。\n\n您可以为自己的设备和工作资料设置新的屏幕锁定方式。但请注意，您设备的屏幕锁定方式也必须遵守所有相关的工作屏幕锁定规范。"</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="4911420150698686398">"更改设备锁屏方式"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"更改锁屏方式"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"与设备的屏幕锁定方式相同"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理应用"</string>
@@ -1449,6 +1436,8 @@
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"此应用可访问您平板电脑上的以下内容。为了提高性能和减少内存使用量，<xliff:g id="BASE_APP_NAME">%1$s</xliff:g>可获得其中的部分权限，因为它与<xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>运行在同一进程中。"</string>
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"此应用可访问您手机上的以下内容。为了提高性能和减少内存使用量，<xliff:g id="BASE_APP_NAME">%1$s</xliff:g>可获得其中的部分权限，因为它与<xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>运行在同一进程中。"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>和<xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <!-- no translation found for join_two_unrelated_items (1873827777191260824) -->
+    <skip />
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g>和<xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>、<xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>、<xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
@@ -2200,18 +2189,28 @@
     <string name="vpn_done" msgid="8678655203910995914">"关闭"</string>
     <string name="vpn_save" msgid="4233484051644764510">"保存"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"连接"</string>
+    <!-- no translation found for vpn_continue (846894478725673098) -->
+    <skip />
     <string name="vpn_edit" msgid="8647191407179996943">"编辑VPN配置文件"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"取消保存"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"连接到<xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"断开此 VPN 连接。"</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"断开连接"</string>
     <string name="vpn_version" msgid="1939804054179766249">"版本 <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <!-- no translation found for vpn_forget_long (2232239391189465752) -->
+    <skip />
+    <!-- no translation found for vpn_replace_always_on_vpn_title (3010435028275752220) -->
+    <skip />
+    <!-- no translation found for vpn_replace_always_on_vpn_message (4766130211217825628) -->
+    <skip />
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"添加VPN配置文件"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"修改配置文件"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"删除配置文件"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"始终开启的VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"尚未添加任何 VPN。"</string>
+    <!-- no translation found for vpn_always_on_active (2789423425184556882) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"选择要始终保持连接的VPN配置文件。只有在连接到此VPN之后才可以使用网络。"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"无"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"始终开启的VPN需要服务器和DNS的IP地址。"</string>
@@ -2516,12 +2515,9 @@
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不显示通知"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"在设备锁定时，您希望通知如何显示？"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"通知"</string>
-    <!-- no translation found for lock_screen_notifications_summary_show_profile (835870815661120772) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_hide_profile (256116258285695645) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_disable_profile (4080720698960233358) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"显示所有工作通知内容"</string>
+    <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"隐藏敏感工作通知内容"</string>
+    <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"一律不显示工作通知"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"在设备锁定时，您希望个人资料通知如何显示？"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"个人资料通知"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"通知"</string>
@@ -2932,8 +2928,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"备份功能已停用"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="627023216027648534">"不允许执行此操作"</string>
-    <!-- no translation found for default_admin_support_msg (239311515653633217) -->
-    <skip />
+    <string name="default_admin_support_msg" msgid="239311515653633217">"此操作已被禁止执行。请与贵单位的管理员联系以了解详情。"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"更多详情"</string>
     <string name="admin_profile_owner_message" msgid="5834937282929663252">"您的管理员可以监控和管理与您的工作资料相关的应用和数据（其中包括设置、权限、企业权限、网络活动和设备的位置信息）。"</string>
     <string name="admin_profile_owner_user_message" msgid="7153676784012255048">"您的管理员可以监控和管理与此用户相关的应用和数据（其中包括设置、权限、企业权限、网络活动和设备的位置信息）。"</string>

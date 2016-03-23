@@ -165,11 +165,9 @@
     <string name="proxy_clear_text" msgid="5555400754952012657">"消去"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"プロキシポート"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"プロキシを不使用"</string>
-    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"初期設定に戻す"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"終了"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"プロキシのホスト名"</string>
-    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"注意"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="6865850167802455230">"入力したホスト名は無効です。"</string>
@@ -420,8 +418,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"端末の保護"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"指紋でロックを解除する"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"画面ロックを選択"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8822511284992306796) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"仕事用ロックの選択"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"スマートフォンの保護"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"指紋は、複雑なパターン、PIN、パスワードよりも安全面で劣る可能性があります。バックアップのロック画面を設定して安全を確保してください。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"このタブレットが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
@@ -429,8 +426,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"このスマートフォンが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"予備の画面ロック方式を選択してください"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"画面ロック"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (124176557311393483) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"仕事用プロファイルのロック"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"ロック解除方法を変更する"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"パターン、PIN、パスワードセキュリティを変更または無効にする"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"画面をロックする方法を選択する"</string>
@@ -1305,12 +1301,9 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"続行するには端末のパターンを使用してください。"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"続行するには端末のPINを入力してください。"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"続行するには端末のパスワードを入力してください。"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4329516059719846858) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3388971861797229529) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (3558648618643096065) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"続行するには仕事用のパターンを使用してください。"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"続行するには仕事用の PIN を入力してください。"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"続行するには仕事用のパスワードを入力してください。"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PINが正しくありません"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"パスワードが正しくありません"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"パターンが正しくありません"</string>
@@ -1341,20 +1334,14 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"ロック解除パターンの描き方"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"誤った回数が多すぎます。<xliff:g id="NUMBER">%d</xliff:g>秒後にもう一度お試しください。"</string>
     <string name="activity_not_found" msgid="5551664692991605325">"アプリは端末にインストールされていません。"</string>
-    <!-- no translation found for lock_settings_profile_title (2121876391814535295) -->
-    <skip />
+    <string name="lock_settings_profile_title" msgid="2121876391814535295">"仕事用プロファイルのセキュリティ"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"仕事用プロファイルの画面ロック"</string>
     <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"同じロックを使用"</string>
-    <!-- no translation found for lock_settings_profile_unification_summary (6173594427521995322) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (8262182734131824214) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (6953193194108608460) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (8903515808297759759) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (4911420150698686398) -->
-    <skip />
+    <string name="lock_settings_profile_unification_summary" msgid="6173594427521995322">"端末の画面ロックを変更して仕事用プロファイルに一致させる"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="8262182734131824214">"同じロックを使用しますか？"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="6953193194108608460">"仕事用プロファイルのロックは、端末の画面ロックにも使用できます。その場合は、仕事用ロックのすべてのポリシーが端末の画面ロックにも適用されます。"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8903515808297759759">"仕事用プロファイルのロックが、組織のセキュリティ要件を満たしていません。\n\n新しい画面ロックを端末と仕事用プロファイルの両方に設定することは可能ですが、その場合は仕事用ロックのすべてのポリシーが端末の画面ロックにも適用されます。"</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="4911420150698686398">"端末のロックの変更"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"ロックを変更"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"端末の画面ロックと同一にする"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"アプリを管理"</string>
@@ -1449,6 +1436,7 @@
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"このアプリはタブレット上で下記にアクセスすることがあります。パフォーマンスの向上とメモリ使用量の削減のために、これらの権限の一部は<xliff:g id="BASE_APP_NAME">%1$s</xliff:g>で使用しています。これは<xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>と同じプロセスで実行されるためです:"</string>
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"このアプリは携帯端末上で下記にアクセスすることがあります。パフォーマンスの向上とメモリ使用量の削減のために、これらの権限の一部は<xliff:g id="BASE_APP_NAME">%1$s</xliff:g>で使用しています。これは<xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>と同じプロセスで実行されるためです:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>と<xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>、<xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g>、および<xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>、<xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>、<xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
@@ -2204,18 +2192,23 @@
     <string name="vpn_done" msgid="8678655203910995914">"終了"</string>
     <string name="vpn_save" msgid="4233484051644764510">"保存"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"接続"</string>
+    <string name="vpn_continue" msgid="846894478725673098">"続行"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"VPNプロファイルの編集"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"削除"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"<xliff:g id="PROFILE">%s</xliff:g>に接続"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"このVPNの接続を解除します。"</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"接続を解除"</string>
     <string name="vpn_version" msgid="1939804054179766249">"バージョン<xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_forget_long" msgid="2232239391189465752">"VPN を削除"</string>
+    <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"既存の VPN を置き換えますか？"</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"このプロファイルには既に VPN が関連付けられています。別の VPN を関連付けた場合、既存の VPN は置き換えられます。"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"VPNプロファイルの追加"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"プロファイルを編集"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"プロファイルを削除"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"常時接続VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"VPN は追加されていません。"</string>
+    <string name="vpn_always_on_active" msgid="2789423425184556882">"常時接続が有効です"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"常時接続するVPNプロファイルを選択します。このVPNに接続しているときのみネットワークにアクセスできます。"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"なし"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPNへの常時接続にはサーバーとDNSの両方のIPアドレスが必要です。"</string>
@@ -2520,12 +2513,9 @@
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"通知をすべて表示しない"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"端末がロックされている場合、通知をどのように表示しますか？"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"通知"</string>
-    <!-- no translation found for lock_screen_notifications_summary_show_profile (835870815661120772) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_hide_profile (256116258285695645) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_disable_profile (4080720698960233358) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"仕事用通知の内容をすべて表示する"</string>
+    <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"機密性の高い仕事用通知の内容を非表示にする"</string>
+    <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"仕事用通知をすべて表示しない"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"端末がロックされている場合、プロファイル通知をどのように表示しますか？"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"プロファイル通知"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"通知"</string>
@@ -2936,8 +2926,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"バックアップは無効です"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="627023216027648534">"操作が許可されていません"</string>
-    <!-- no translation found for default_admin_support_msg (239311515653633217) -->
-    <skip />
+    <string name="default_admin_support_msg" msgid="239311515653633217">"この操作は無効になっています。詳しくは組織の管理者までお問い合わせください。"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"詳細"</string>
     <string name="admin_profile_owner_message" msgid="5834937282929663252">"管理者は、設定、権限、コーポレート アクセス、ネットワーク アクティビティ、端末の位置情報など、ユーザーの仕事用プロファイルに関連付けられたアプリやデータの監視、管理を行えます。"</string>
     <string name="admin_profile_owner_user_message" msgid="7153676784012255048">"管理者は、設定、権限、コーポレート アクセス、ネットワーク アクティビティ、端末の位置情報など、このユーザーに関連付けられたアプリやデータの監視、管理を行えます。"</string>

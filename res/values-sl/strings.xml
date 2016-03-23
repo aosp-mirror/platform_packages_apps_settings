@@ -167,11 +167,9 @@
     <string name="proxy_clear_text" msgid="5555400754952012657">"Počisti"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Vrata strežnika proxy"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Obidi strežnik proxy za"</string>
-    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com, mycomp.test.com, localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Ponastavi na privzeto"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Končano"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Gostiteljsko ime strežnika proxy"</string>
-    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Pozor"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"V redu"</string>
     <string name="proxy_error_invalid_host" msgid="6865850167802455230">"Ime gostitelja, ki ste ga vtipkali, ni veljavno."</string>
@@ -1460,6 +1458,7 @@
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Aplikacija lahko dostopa do naslednjih elementov v vašem tabličnem računalniku. Da bi izboljšali učinkovitost in zmanjšali porabo pomnilnika, za <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> velja nekaj od teh dovoljenj, saj se izvaja v istem procesu kot <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Aplikacija lahko dostopa do naslednjih elementov v telefonu. Da bi izboljšali učinkovitost in zmanjšali porabo pomnilnika, za <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> velja nekaj od teh dovoljenj, saj se izvaja v istem procesu kot <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> in <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> in <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
@@ -2223,18 +2222,23 @@
     <string name="vpn_done" msgid="8678655203910995914">"Opusti"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Shrani"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Vzpostavi povezavo"</string>
+    <string name="vpn_continue" msgid="846894478725673098">"Naprej"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"Urejanje profila VPN"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"Pozabi"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"Povezovanje z <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"Prekinitev povezave s tem omrežjem VPN."</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"Prekini povezavo"</string>
     <string name="vpn_version" msgid="1939804054179766249">"Različica <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_forget_long" msgid="2232239391189465752">"Pozabi omrežje VPN"</string>
+    <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Želite zamenjati obstoječe omrežje VPN?"</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"S tem profilom je že povezano omrežje VPN. Če ste vzpostavili povezavo z drugim, bo obstoječe omrežje VPN zamenjano."</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Dodajanje profila VPN"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Urejanje profila"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Brisanja profila"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Stalno vklopljen VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"Dodano ni bilo nobeno omrežje VPN."</string>
+    <string name="vpn_always_on_active" msgid="2789423425184556882">"Vedno vklopljeno in aktivno"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Izberite profil za navidezno zasebno omrežje (VPN), s katerim boste vedno povezani. Omrežni promet bo dovoljen samo prek tega omrežja VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Brez"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Za stalno vklopljeno navidezno zasebno omrežje je potreben naslov IP tako za strežnik kot za DNS."</string>

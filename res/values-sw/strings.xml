@@ -167,11 +167,9 @@
     <string name="proxy_clear_text" msgid="5555400754952012657">"Futa"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Poti ya proksi"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Proksi ya Bypass ya"</string>
-    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Rejesha kwa chaguo misingi"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Kwisha"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Jina la mwenyeji wa proksi"</string>
-    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Zingatia"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"Sawa"</string>
     <string name="proxy_error_invalid_host" msgid="6865850167802455230">"Jina la mpangaji uliloandika si sahihi."</string>
@@ -1444,6 +1442,7 @@
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Programu hii inaweza kufikia yafuatayo kwenye kompyuta yako kibao. Ili kuboresha utendaji na kupunguza matumizi ya kumbukumbu, baadhi ya vibali hivi vinapatikana katika <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> kwa sababu vinaendeshwa kwa mchakato sawa na <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Programu hii inaweza kufikia yafuatayo kwenye simu yako. Ili kuboresha utendaji na kupunguza matumizi ya kumbukumbu, baadhi ya vibali hivi vinapatikana katika <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> kwa sababu vinaendeshwa kwa mchakato sawa na <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> na  <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> na <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
@@ -2195,18 +2194,23 @@
     <string name="vpn_done" msgid="8678655203910995914">"Ondoa"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Hifadhi"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Unganisha"</string>
+    <string name="vpn_continue" msgid="846894478725673098">"Endelea"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"Hariri wasifu kuhusu VPN"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"Sahau"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"Unganisha kwa <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"Kata muunganisho huu wa VPN."</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"Kata muungnisho"</string>
     <string name="vpn_version" msgid="1939804054179766249">"Toleo la <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_forget_long" msgid="2232239391189465752">"Ondoa VPN"</string>
+    <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Ungependa kubadilisha VPN iliyopo?"</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"Tayari una VPN iliyounganishwa kwenye wasifu huu. Ukiunganisha VPN hii, ile iliyopo itaondolewa."</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Ongeza wasifu wa VPN"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Badilisha wasifu"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Futa wasifu"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN Iliyowashwa kila mara"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"Hujaongeza VPN zozote."</string>
+    <string name="vpn_always_on_active" msgid="2789423425184556882">"Imewasha kipengee cha Iwe imewashwa"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Chagua wasifu wa VPN ambapo utakuwa umeunganishwa kila mara. Trafiki ya mtandao itaruhusiwa tu unapounganishwa kwenye VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Hamna"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Kila mara VPN iliyowashwa inahitaji anwani ya Itifaki Wavuti za seva na DNS."</string>
