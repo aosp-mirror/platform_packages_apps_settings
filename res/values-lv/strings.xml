@@ -166,11 +166,9 @@
     <string name="proxy_clear_text" msgid="5555400754952012657">"Notīrīt"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Starpniekservera ports"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Apiet starpniekserveri:"</string>
-    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Atjaunot noklusējuma iestatījumus"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Gatavs"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Starpniekservera saimniekdatora nosaukums"</string>
-    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Uzmanību!"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"Labi"</string>
     <string name="proxy_error_invalid_host" msgid="6865850167802455230">"Ierakstītais saimniekdatora nosaukums nav derīgs."</string>
@@ -423,8 +421,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Aizsargājiet savu ierīci"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Ierīces atbloķēšana, izmantojot pirksta nospiedumu"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Izv. ekrāna bloķēš."</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8822511284992306796) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Darba profila bloķēšana"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Aizsargājiet tālruni"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Pirksta nospiedums var būt mazāk drošs nekā sarežģīta kombinācija, PIN kods vai parole. Papildu drošībai iestatiet rezerves bloķēšanas ekrānu."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Aktivizējiet ierīces aizsardzības funkcijas, lai neļautu citiem lietot šo planšetdatoru bez jūsu atļaujas. Izvēlieties bloķēšanas ekrānu, kuru vēlaties izmantot."</string>
@@ -432,8 +429,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Aktivizējiet ierīces aizsardzības funkcijas, lai neļautu citiem lietot šo tālruni bez jūsu atļaujas. Izvēlieties bloķēšanas ekrānu, kuru vēlaties izmantot."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Izvēlieties rezerves ekrāna bloķēšanas metodi"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Ekrāna bloķēšana"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (124176557311393483) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"Darba profila bloķēšana"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Bloķ. ekr. izmaiņas"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Kombinācijas, PIN koda vai paroles drošības maiņa vai atspējošana"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Izvēlieties ekrāna bloķēšanas veidu"</string>
@@ -1315,12 +1311,9 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"Lai turpinātu, ievadiet ierīces kombināciju."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"Lai turpinātu, ievadiet ierīces PIN kodu."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"Lai turpinātu, ievadiet ierīces paroli."</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4329516059719846858) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3388971861797229529) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (3558648618643096065) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"Lai turpinātu, izmantojiet darba profila kombināciju."</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"Lai turpinātu, ievadiet darba profila PIN kodu."</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"Lai turpinātu, ievadiet darba profila paroli."</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Nepareizs PIN kods"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Nepareiza parole"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Nepareiza kombinācija"</string>
@@ -1351,20 +1344,14 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Kā zīmēt atbloķēšanas kombināciju"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"Pārāk daudz neveiksmīgu mēģinājumu. Mēģiniet vēlreiz pēc <xliff:g id="NUMBER">%d</xliff:g> sekundēm."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Lietojumprogramma jūsu tālrunī nav instalēta."</string>
-    <!-- no translation found for lock_settings_profile_title (2121876391814535295) -->
-    <skip />
+    <string name="lock_settings_profile_title" msgid="2121876391814535295">"Darba profila drošība"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Darba profila ekrāna bloķēšanas režīms"</string>
     <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Izmantot to pašu bloķēšanas režīmu"</string>
-    <!-- no translation found for lock_settings_profile_unification_summary (6173594427521995322) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (8262182734131824214) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (6953193194108608460) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (8903515808297759759) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (4911420150698686398) -->
-    <skip />
+    <string name="lock_settings_profile_unification_summary" msgid="6173594427521995322">"Mainiet ierīces ekrāna bloķēšanas iestatījumus, lai tie atbilstu darba profilam."</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="8262182734131824214">"Vai izmantot to pašu bloķēšanas režīmu?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="6953193194108608460">"Varat izmantot darba profila bloķēšanas režīmu arī ierīces ekrāna bloķēšanai. Šādā gadījumā jebkuras darba profila bloķēšanas politikas būs spēkā arī jūsu ierīces ekrāna bloķēšanas režīmam."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8903515808297759759">"Jūsu darba profila bloķēšanas režīms neatbilst jūsu organizācijas drošības prasībām.\n\nVarat iestatīt jaunu ekrāna bloķēšanas režīmu gan ierīcei, gan darba profilam, taču jebkuras darba profila bloķēšanas politikas būs spēkā arī jūsu ierīces ekrāna bloķēšanas režīmam."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="4911420150698686398">"Mainīt ierīces bloķēšanas režīmu"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Mainīt bloķēšanas režīmu"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Tāds pats kā ierīces bloķēšanas režīms"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Pārvaldīt lietotnes"</string>
@@ -1460,6 +1447,7 @@
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Šī lietotne planšetdatorā var piekļūt tālāk minētajai informācijai. Lai uzlabotu darbību un samazinātu atmiņas lietojumu, dažas atļaujas ir pieejamas lietotnei <xliff:g id="BASE_APP_NAME">%1$s</xliff:g>, jo tā tiek darbināta tajā pašā procesā, kurā tiek darbinātas lietotnes <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>."</string>
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Šī lietotne tālrunī var piekļūt tālāk minētajai informācijai. Lai uzlabotu darbību un samazinātu atmiņas lietojumu, dažas atļaujas ir pieejamas lietotnei <xliff:g id="BASE_APP_NAME">%1$s</xliff:g>, jo tā tiek darbināta tajā pašā procesā, kurā tiek darbinātas lietotnes <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>."</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> un <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> un <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
@@ -2217,18 +2205,23 @@
     <string name="vpn_done" msgid="8678655203910995914">"Nerādīt"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Saglabāt"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Savienot"</string>
+    <string name="vpn_continue" msgid="846894478725673098">"Turpināt"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"VPN profila rediģēšana"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"Aizmirst"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"Savienojuma izveide ar <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"Pārtraukt šo VPN savienojumu"</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"Pārtraukt savienojumu"</string>
     <string name="vpn_version" msgid="1939804054179766249">"Versija <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_forget_long" msgid="2232239391189465752">"Aizmirst VPN"</string>
+    <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Vai aizstāt esošo VPN?"</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"Šim profilam jau ir pievienots VPN. Ja izveidosiet savienojumu, esošais VPN tiks aizstāts."</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Pievienot VPN profilu"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Rediģēt profilu"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Dzēst profilu"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Vienmēr ieslēgts VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"Nav pievienots neviens VPN."</string>
+    <string name="vpn_always_on_active" msgid="2789423425184556882">"Režīms “Vienmēr ieslēgts” ir aktīvs"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Izvēlieties VPN profilu, ar kuru izveidot pastāvīgu savienojumu. Tīkla datplūsma tiks atļauta, tikai esot izveidotam savienojumam ar šo VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Nav"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Vienmēr ieslēgtam VPN ir nepieciešama servera un DNS IP adrese."</string>
@@ -2533,12 +2526,9 @@
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Nerādīt paziņojumus vispār"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Kā rādīt ierīcē paziņojumus, kad tā ir bloķēta?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Paziņojumi"</string>
-    <!-- no translation found for lock_screen_notifications_summary_show_profile (835870815661120772) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_hide_profile (256116258285695645) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_disable_profile (4080720698960233358) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Rādīt visu saturu darba profila paziņojumos"</string>
+    <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"Slēpt sensitīvu saturu darba profila paziņojumos"</string>
+    <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"Vispār nerādīt darba profila paziņojumus"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Kā ierīcē rādīt profila paziņojumus, kad tā ir bloķēta?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Profila paziņojumi"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Paziņojumi"</string>
@@ -2959,8 +2949,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Dublēšana atspējota"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="627023216027648534">"Darbība nav atļauta"</string>
-    <!-- no translation found for default_admin_support_msg (239311515653633217) -->
-    <skip />
+    <string name="default_admin_support_msg" msgid="239311515653633217">"Šī darbība ir atspējota. Lai uzzinātu vairāk, sazinieties ar organizācijas administratoru."</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Plašāka informācija"</string>
     <string name="admin_profile_owner_message" msgid="5834937282929663252">"Administrators var pārraudzīt un pārvaldīt ar jūsu darba profilu saistītās lietotnes un datus, tostarp iestatījumus, atļaujas, korporatīvo piekļuvi, tīkla darbības un informāciju par ierīces atrašanās vietu."</string>
     <string name="admin_profile_owner_user_message" msgid="7153676784012255048">"Administrators var pārraudzīt un pārvaldīt ar šo lietotāju saistītās lietotnes un datus, tostarp iestatījumus, atļaujas, korporatīvo piekļuvi, tīkla darbības un informāciju par ierīces atrašanās vietu."</string>

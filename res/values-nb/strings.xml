@@ -165,11 +165,9 @@
     <string name="proxy_clear_text" msgid="5555400754952012657">"Tøm"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Port for proxy-tjener"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Ikke bruk proxy-tjener for"</string>
-    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"eteksempel.no,mycomp.test.com,lokal vert"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Gjenopprett standardinnstillinger"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Ferdig"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Proxy-tjenerens vertsnavn"</string>
-    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.eteksempel.no"</string>
     <string name="proxy_error" msgid="8926675299638611451">"NB"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="6865850167802455230">"Angitt vertsnavn er ikke gyldig."</string>
@@ -420,8 +418,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Beskytt enheten"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Lås opp med fingeravtrykket ditt"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Velg skjermlås"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8822511284992306796) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Velg jobblås"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Beskytt telefonen"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Merk: Fingeravtrykket ditt kan være mindre sikkert enn et sterkt mønster eller en sterk PIN-kode. Konfigurer en låseskjerm som et reservealternativ for å være sikker."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Hindre at andre bruker dette nettbrettet uten din tillatelse, ved å aktivere funksjoner for enhetsbeskyttelse. Velg skjermlåsen du vil bruke."</string>
@@ -429,8 +426,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Hindre at andre bruker denne telefonen uten din tillatelse, ved å aktivere funksjoner for enhetsbeskyttelse. Velg skjermlåsen du vil bruke."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Velg reservemetode for skjermlås"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Skjermlås"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (124176557311393483) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"Lås for jobbprofilen"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Endre skjermlås"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Endre eller deaktiver mønster, personlig kode eller passordsikkerhet"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Velg en metode for å låse skjermen"</string>
@@ -1305,12 +1301,9 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"Bruk enhetsmønsteret ditt for å fortsette."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"Skriv inn enhets-PIN-koden din for å fortsette."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"Skriv inn enhetspassordet ditt for å fortsette."</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4329516059719846858) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3388971861797229529) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (3558648618643096065) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"Bruk jobbmønsteret ditt for å fortsette."</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"Skriv inn jobb-PIN-koden for å fortsette."</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"Skriv inn jobbpassordet ditt for å fortsette."</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Feil PIN-kode"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Feil passord"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Feil mønster"</string>
@@ -1341,20 +1334,14 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Hvordan tegne et opplåsingsmønster"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"For mange ugyldige forsøk. Prøv på nytt om <xliff:g id="NUMBER">%d</xliff:g> sekunder."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Appen er ikke installert på telefonen din."</string>
-    <!-- no translation found for lock_settings_profile_title (2121876391814535295) -->
-    <skip />
+    <string name="lock_settings_profile_title" msgid="2121876391814535295">"Sikkerhet for jobbprofil"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Skjermlås for jobbprofilen"</string>
     <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Bruk den samme låsen"</string>
-    <!-- no translation found for lock_settings_profile_unification_summary (6173594427521995322) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (8262182734131824214) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (6953193194108608460) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (8903515808297759759) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (4911420150698686398) -->
-    <skip />
+    <string name="lock_settings_profile_unification_summary" msgid="6173594427521995322">"Endre skjermlåsen for enheten din sånn at den samsvarer med skjermlåsen for jobbprofilen"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="8262182734131824214">"Vil du bruke den samme låsen?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="6953193194108608460">"Du kan også bruke låsen for jobbprofilen som skjermlåsen på enheten. Hvis du velger å gjøre det, gjelder alle retningslinjene for låser også for skjermlåsen på enheten."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8903515808297759759">"Låsen for jobbprofilen din oppfyller ikke sikkerhetskravene til organisasjonen din.\n\nDu kan konfigurere en ny skjermlås for både enheten og jobbprofilen, men alle retningslinjene for jobblåser gjelder også for skjermlåsen for enheten."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="4911420150698686398">"Endre enhetslåsen"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Endre låsen"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Den samme som enhetslåsen"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Administrer apper"</string>
@@ -1449,6 +1436,7 @@
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Denne appen får tilgang til følgende på nettbrettet ditt. Enkelte av disse tillatelsene er tilgjengelig for <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> for å forbedre ytelsen og redusere minnebruken, ettersom denne appen kjører i samme prosess som <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Denne appen får tilgang til følgende på telefonen din. Enkelte av disse tillatelsene er tilgjengelig for <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> for å forbedre ytelsen og redusere minnebruken, ettersom denne appen kjører i samme prosess som <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> og <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> og <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
@@ -2200,18 +2188,23 @@
     <string name="vpn_done" msgid="8678655203910995914">"Fjern"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Lagre"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Koble til"</string>
+    <string name="vpn_continue" msgid="846894478725673098">"Fortsett"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"Rediger VPN-profil"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"Glem"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"Koble til <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"Koble fra VPN."</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"Koble fra"</string>
     <string name="vpn_version" msgid="1939804054179766249">"Versjon <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_forget_long" msgid="2232239391189465752">"Glem VPN-profilen"</string>
+    <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Vil du erstatte det nåværende VPN-et?"</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"Du har allerede et VPN koblet til denne profilen. Hvis du kobler til et nytt VPN, erstattes tilkoblingen til det nåværende VPN-et."</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Legg til VPN-profil"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Rediger profil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Slett profil"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Alltid på-VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"Ingen VPN er lagt til."</string>
+    <string name="vpn_always_on_active" msgid="2789423425184556882">"Alltid på er aktiv"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Velg en VPN-profil du vil forbli tilkoblet til. Nettverkstrafikk blir bare tillatt når du er tilkoblet denne VPN-en."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Ingen"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Alltid på-VPN krever en IP-adresse for både tjener og DNS."</string>
@@ -2516,12 +2509,9 @@
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Ikke vis varsler i det hele tatt"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Hvordan ønsker du at varsler skal vises når enheten er låst?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Varsler"</string>
-    <!-- no translation found for lock_screen_notifications_summary_show_profile (835870815661120772) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_hide_profile (256116258285695645) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_disable_profile (4080720698960233358) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Vis alt innhold i jobbvarsler"</string>
+    <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"Skjul sensitivt innhold i jobbvarsler"</string>
+    <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"Ikke vis jobbvarsler i det hele tatt"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Hvordan vil du at profilvarsler skal vises når enheten er låst?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Profilvarsler"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Varsler"</string>
@@ -2932,8 +2922,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Sikkerhetskopiering er slått av"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="627023216027648534">"Handlingen er ikke tillatt"</string>
-    <!-- no translation found for default_admin_support_msg (239311515653633217) -->
-    <skip />
+    <string name="default_admin_support_msg" msgid="239311515653633217">"Denne handlingen er slått av. Ta kontakt med organisasjonens administrator for å finne ut mer."</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Mer informasjon"</string>
     <string name="admin_profile_owner_message" msgid="5834937282929663252">"Administratoren kan overvåke og administrere apper og data som er tilknyttet jobbprofilen din, inkludert innstillinger, tillatelser, bedriftstilgang, nettverksaktivitet, og enhetens posisjonsinformasjon."</string>
     <string name="admin_profile_owner_user_message" msgid="7153676784012255048">"Administratoren kan overvåke og administrere apper og data som er tilknyttet denne brukeren, inkludert innstillinger, tillatelser, bedriftstilgang, nettverksaktivitet, og enhetens posisjonsinformasjon."</string>

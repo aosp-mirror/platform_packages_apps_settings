@@ -165,11 +165,9 @@
     <string name="proxy_clear_text" msgid="5555400754952012657">"ਹਟਾਓ"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"ਪ੍ਰੌਕਸੀ ਪੋਰਟ"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"ਇਸ ਲਈ ਬਾਇਪਾਸ ਪ੍ਰੌਕਸੀ"</string>
-    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"ਡਿਫੌਲਟਸ ਰੀਸਟੋਰ ਕਰੋ"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"ਹੋ ਗਿਆ"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"ਪ੍ਰੌਕਸੀ ਹੋਸਟਨਾਮ"</string>
-    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"ਧਿਆਨ ਦਿਓ"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"ਠੀਕ"</string>
     <string name="proxy_error_invalid_host" msgid="6865850167802455230">"ਤੁਹਾਡੇ ਵੱਲੋਂ ਟਾਈਪ ਕੀਤਾ ਹੋਸਟਨਾਮ ਪ੍ਰਮਾਣਿਕ ਨਹੀਂ ਹੈ।"</string>
@@ -1449,6 +1447,7 @@
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"ਇਹ ਐਪ ਤੁਹਾਡੀ ਟੈਬਲੇਟ ਤੇ ਇਹਨਾਂ ਤੱਕ ਪਹੁੰਚ ਸਕਦਾ ਹੈ। ਪਰਫੌਰਮੈਂਸ ਬਿਹਤਰ ਬਣਾਉਣ ਅਤੇ ਮੈਮਰੀ ਵਰਤੋਂ ਘਟਾਉਣ ਲਈ, ਇਹਨਾਂ ਵਿੱਚੋਂ ਕੁਝ ਅਨੁਮਤੀਆਂ <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> ਤੇ ਉਪਲਬਧ ਹਨ ਕਿਉਂਕਿ ਇਹ <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g> ਦੇ ਤੌਰ ਤੇ ਸਮਾਨ ਪ੍ਰਕਿਰਿਆ ਵਿੱਚ ਚੱਲਦੀਆਂ ਹਨ:"</string>
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"ਇਹ ਐਪ ਤੁਹਾਡੇ ਫੋਨ ਤੇ ਇਹਨਾਂ ਤੱਕ ਪਹੁੰਚ ਸਕਦਾ ਹੈ। ਪਰਫੌਰਮੈਂਸ ਬਿਹਤਰ ਬਣਾਉਣ ਅਤੇ ਮੈਮਰੀ ਵਰਤੋਂ ਘਟਾਉਣ ਲਈ, ਇਹਨਾਂ ਵਿੱਚੋਂ ਕੁਝ ਅਨੁਮਤੀਆਂ <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> ਤੇ ਉਪਲਬਧ ਹਨ ਕਿਉਂਕਿ ਇਹ <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g> ਦੇ ਤੌਰ ਤੇ ਸਮਾਨ ਪ੍ਰਕਿਰਿਆ ਵਿੱਚ ਚੱਲਦੀਆਂ ਹਨ:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> ਅਤੇ <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> ਅਤੇ <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
@@ -2200,18 +2199,23 @@
     <string name="vpn_done" msgid="8678655203910995914">"ਬਰਖਾਸਤ ਕਰੋ"</string>
     <string name="vpn_save" msgid="4233484051644764510">"ਸੁਰੱਖਿਅਤ ਕਰੋ"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"ਕਨੈਕਟ ਕਰੋ"</string>
+    <string name="vpn_continue" msgid="846894478725673098">"ਜਾਰੀ ਰੱਖੋ"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"VPN ਪ੍ਰੋਫਾਈਲ ਸੰਪਾਦਿਤ ਕਰੋ"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"ਭੁੱਲ ਜਾਓ"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"<xliff:g id="PROFILE">%s</xliff:g> ਨਾਲ ਕਨੈਕਟ ਕਰੋ"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"ਇਸ VPN ਡਿਸਕਨੈਕਟ ਕਰੋ।"</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"ਡਿਸਕਨੈਕਟ ਕਰੋ"</string>
     <string name="vpn_version" msgid="1939804054179766249">"ਸੰਸਕਰਨ <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_forget_long" msgid="2232239391189465752">"VPN ਨੂੰ ਛੱਡੋ"</string>
+    <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"ਕੀ ਮੌਜੂਦਾ VPN ਨੂੰ ਤਬਦੀਲ ਕਰਨਾ ਹੈ?"</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"ਤੁਹਾਡੇ ਕੋਲ ਪਹਿਲਾਂ ਤੋਂ ਹੀ ਇਸ ਪ੍ਰੋਫਾਈਲ ਨਾਲ ਕਨੈਕਟ ਕੀਤਾ ਹੋਇਆ ਇੱਕ VPN ਹੈ। ਜੇਕਰ ਤੁਸੀਂ ਇੱਕ VPN ਨਾਲ ਕਨੈਕਟ ਹੋ, ਤਾਂ ਤੁਹਾਡੇ ਮੌਜੂਦਾ VPN ਨੂੰ ਤਬਦੀਲ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ।"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"VPN ਪ੍ਰੋਫਾਈਲ ਜੋੜੋ"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"ਪ੍ਰੋਫਾਈਲ ਦਾ ਸੰਪਾਦਨ ਕਰੋ"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"ਪ੍ਰੋਫਾਈਲ ਮਿਟਾਓ"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"ਹਮੇਸ਼ਾਂ-ਚਾਲੂ VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"ਕੋਈ VPNs ਸ਼ਾਮਲ ਨਹੀਂ ਕੀਤੇ ਗਏ।"</string>
+    <string name="vpn_always_on_active" msgid="2789423425184556882">"ਹਮੇਸ਼ਾ-ਚਾਲੂ ਕਿਰਿਆਸ਼ੀਲ"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"ਹਮੇਸ਼ਾਂ ਉਸ ਨਾਲ ਕਨੈਕਟ ਰਹਿਣ ਲਈ ਇੱਕ VPN ਪ੍ਰੋਫਾਈਲ ਚੁਣੋ। ਨੈਟਵਰਕ ਟ੍ਰੈਫਿਕ ਦੀ ਆਗਿਆ ਕੇਵਲ ਇਸ VPN ਨਾਲ ਕਨੈਕਟ ਕੀਤੇ ਜਾਣ ਤੇ ਹੀ ਦਿੱਤੀ ਜਾਏਗੀ।"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"ਕੋਈ ਨਹੀਂ"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"ਸਰਵਰ ਅਤੇ DNS ਦੋਵਾਂ ਲਈ ਹਮੇਸ਼ਾਂ-ਚਾਲੂ VPN ਲਈ ਇੱਕ IP ਪਤਾ ਲੁੜੀਂਦਾ ਹੈ।"</string>

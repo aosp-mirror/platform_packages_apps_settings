@@ -165,11 +165,9 @@
     <string name="proxy_clear_text" msgid="5555400754952012657">"Eliminar"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Puerto proxy"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Saltar proxy para"</string>
-    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Restaurar configuraciones predeterminadas"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Finalizar"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Nombre de host proxy"</string>
-    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Atención"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"Aceptar"</string>
     <string name="proxy_error_invalid_host" msgid="6865850167802455230">"El nombre del host que has escrito no es válido."</string>
@@ -420,8 +418,7 @@
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Protege tu dispositivo"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Desbloquear con tu huella digital"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Bloqueo de pantalla"</string>
-    <!-- no translation found for lock_settings_picker_title_profile (8822511284992306796) -->
-    <skip />
+    <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Elegir bloqueo"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Protege el teléfono"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"La huella digital es menos segura que un patrón, un PIN o una contraseña. Configura una pantalla bloqueada para mayor seguridad."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Activa las funciones de protección del dispositivo para impedir que terceros usen esta tablet sin tu permiso. Elige el bloqueo de pantalla que quieres usar."</string>
@@ -429,8 +426,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activa las funciones de protección del dispositivo para impedir que terceros usen este teléfono sin tu permiso. Elige el bloqueo de pantalla que quieres usar."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Elegir el método secundario de bloqueo de pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Bloqueo de pantalla"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_title_profile (124176557311393483) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"Bloqueo del perfil"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"Cambiar pant. bloqueada"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Cambiar/inhab. patrón/PIN/contraseña"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Elige un método para bloquear la pantalla."</string>
@@ -1305,12 +1301,9 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"Para continuar, usa el patrón del dispositivo."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"Para continuar, ingresa el PIN del dispositivo."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"Para continuar, ingresa la contraseña del dispositivo."</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4329516059719846858) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3388971861797229529) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (3558648618643096065) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"Para continuar, usa el patrón de tu perfil de trabajo."</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"Para continuar, ingresa el PIN de tu perfil de trabajo."</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"Para continuar, ingresa la contraseña de tu perfil de trabajo."</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN incorrecto"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Contraseña incorrecta"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Patrón incorrecto"</string>
@@ -1341,20 +1334,14 @@
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Cómo se debe extraer un patrón de desbloqueo"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"Demasiados intentos incorrectos. Vuelve a intentarlo en <xliff:g id="NUMBER">%d</xliff:g> segundos."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"La aplicación no está instalada en tu dispositivo."</string>
-    <!-- no translation found for lock_settings_profile_title (2121876391814535295) -->
-    <skip />
+    <string name="lock_settings_profile_title" msgid="2121876391814535295">"Seguridad del perfil de trabajo"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Bloqueo de pantalla del perfil de trabajo"</string>
     <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Usar el mismo bloqueo"</string>
-    <!-- no translation found for lock_settings_profile_unification_summary (6173594427521995322) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (8262182734131824214) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (6953193194108608460) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (8903515808297759759) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (4911420150698686398) -->
-    <skip />
+    <string name="lock_settings_profile_unification_summary" msgid="6173594427521995322">"Cambiar el bloqueo de pantalla del dispositivo para que coincida con el del perfil de trabajo"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="8262182734131824214">"¿Deseas usar el mismo bloqueo?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="6953193194108608460">"También puedes usar el bloqueo de tu perfil de trabajo como bloqueo de pantalla de tu dispositivo. Si lo haces, también se aplicarán las políticas de bloqueo del perfil de trabajo."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8903515808297759759">"El bloqueo del perfil de trabajo no cumple con los requisitos de tu organización.\n\nPuedes establecer un nuevo bloqueo de pantalla para tu dispositivo y el perfil de trabajo, pero las políticas de bloqueo del perfil de trabajo también se aplicarán al de tu dispositivo."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="4911420150698686398">"Cambiar el bloqueo del dispositivo"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Cambiar el bloqueo"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Igual al bloqueo de pantalla del dispositivo"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Administrar aplicaciones"</string>
@@ -1449,6 +1436,7 @@
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Esta aplicación puede acceder a la siguiente información de tu tablet. Para mejorar el rendimiento y reducir el uso de la memoria, algunos de estos permisos están disponibles en <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> porque se ejecuta en el mismo proceso que <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Esta aplicación puede acceder a los siguientes elementos de tu dispositivo. Para mejorar el rendimiento y reducir el uso de la memoria, algunos de estos permisos están disponibles en <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> porque se ejecuta en el mismo proceso que <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> y <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> y <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
@@ -1636,7 +1624,7 @@
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Subtítulos"</string>
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Gesto de ampliación"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Presiona tres veces para aplicar el zoom"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258"><b>"Para hacer zoom"</b>", presiona la pantalla rápidamente tres veces.\n"<ul><li>"Arrastra dos o más dedos para desplazarte."</li>\n<li>"Une o separa dos o más dedos para modificar el zoom."</li></ul>\n\n<b>"Para hacer zoom temporalmente,"</b>", presiona tres veces y mantén presionado la última vez.\n"<ul><li>"Arrastra el dedo para moverte en la pantalla."</li>\n<li>"Levanta el dedo para alejar."</li></ul>\n\n" No puedes hacer zoom en el teclado ni en la barra de navegación."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258"><b>"Para hacer zoom"</b>", presiona la pantalla rápidamente tres veces.\n"<ul><li>"Arrastra dos o más dedos para desplazarte."</li>\n<li>"Une o separa dos o más dedos para modificar el zoom."</li></ul>\n\n<b>"Para hacer zoom temporalmente,"</b>", presiona tres veces y mantén presionado la última vez.\n"<ul><li>"Arrastra el dedo para moverte en la pantalla."</li>\n<li>"Levanta el dedo para alejar la imagen."</li></ul>\n\n" No puedes hacer zoom en el teclado ni en la barra de navegación."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Acceso directo a la accesibilidad"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Encendido"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Desactivada"</string>
@@ -2200,18 +2188,23 @@
     <string name="vpn_done" msgid="8678655203910995914">"Ignorar"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Guardar"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Conectar"</string>
+    <string name="vpn_continue" msgid="846894478725673098">"Continuar"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"Editar perfil de VPN"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"Olvidar"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"Conectar a <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"Desconectar esta VPN"</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"Desconectar"</string>
     <string name="vpn_version" msgid="1939804054179766249">"Versión <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_forget_long" msgid="2232239391189465752">"Borrar VPN"</string>
+    <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"¿Reemplazar VPN existente?"</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"Ya tienes una VPN conectada a este perfil. Si te conectas a otra, se reemplazará la VPN actual."</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Agregar perfil VPN"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Modificar perfil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Eliminar perfil"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN siempre activada"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"No se agregaron VPN."</string>
+    <string name="vpn_always_on_active" msgid="2789423425184556882">"La opción Siempre activa está habilitada"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Selecciona el perfil de la VPN con la que deseas establecer una conexión ininterrumpida. El tráfico de red solo se permitirá cuando estés conectado a esta VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Ninguna"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"La VPN siempre activada requiere una dirección IP tanto para el servidor como para el DNS."</string>
@@ -2516,12 +2509,9 @@
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"No mostrar notificaciones"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"¿Cómo deseas ver las notificaciones cuando el dispositivo esté bloqueado?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificaciones"</string>
-    <!-- no translation found for lock_screen_notifications_summary_show_profile (835870815661120772) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_hide_profile (256116258285695645) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_disable_profile (4080720698960233358) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Mostrar el contenido de notificaciones de trabajo"</string>
+    <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"Ocultar contenido confidencial de notificaciones"</string>
+    <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"No mostrar notificaciones del perfil de trabajo"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"¿Cómo deseas ver las notificaciones de perfil cuando el dispositivo esté bloqueado?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Notificaciones de perfil"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Notificaciones"</string>
@@ -2930,8 +2920,7 @@
     <string name="backup_disabled" msgid="485189128759595412">"Copia de seguridad inhabilitada"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="627023216027648534">"Acción no permitida"</string>
-    <!-- no translation found for default_admin_support_msg (239311515653633217) -->
-    <skip />
+    <string name="default_admin_support_msg" msgid="239311515653633217">"Esta acción está inhabilitada. Para obtener más información, comunícate con el administrador de tu organización."</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Más detalles"</string>
     <string name="admin_profile_owner_message" msgid="5834937282929663252">"Tu administrador puede controlar y administrar las apps y los datos asociados con tu perfil de trabajo, incluida la configuración, los permisos, el acceso corporativo, la actividad de la red y la información de la ubicación del dispositivo."</string>
     <string name="admin_profile_owner_user_message" msgid="7153676784012255048">"Tu administrador puede controlar y administrar las apps y los datos asociados con este usuario, incluida la configuración, los permisos, el acceso corporativo, la actividad de la red y la información de la ubicación del dispositivo."</string>

@@ -165,11 +165,9 @@
     <string name="proxy_clear_text" msgid="5555400754952012657">"지우기"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"프록시 포트"</string>
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"프록시 우회 대상"</string>
-    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"기본값 복원"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"완료"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"프록시 호스트 이름"</string>
-    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"주의"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"확인"</string>
     <string name="proxy_error_invalid_host" msgid="6865850167802455230">"입력한 호스트 이름이 잘못되었습니다."</string>
@@ -1438,6 +1436,7 @@
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"이 앱은 내 태블릿에서 다음에 액세스할 수 있습니다.<xliff:g id="BASE_APP_NAME">%1$s</xliff:g>(은)는 <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>(와)과 동일한 프로세스에서 실행되기 때문에 성능을 향상시키고 메모리 사용량을 줄이기 위해서는 이러한 사용 권한 중 일부를 사용할 수 있습니다."</string>
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"이 앱은 내 휴대전화에서 다음에 액세스할 수 있습니다. <xliff:g id="BASE_APP_NAME">%1$s</xliff:g>(은)는 <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>(와)과 동일한 프로세스에서 실행되기 때문에 성능을 향상시키고 메모리 사용량을 줄이기 위해서는 이러한 사용 권한 중 일부를 사용할 수 있습니다."</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
+    <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> 및 <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>, <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
@@ -2189,18 +2188,23 @@
     <string name="vpn_done" msgid="8678655203910995914">"취소"</string>
     <string name="vpn_save" msgid="4233484051644764510">"저장"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"연결"</string>
+    <string name="vpn_continue" msgid="846894478725673098">"계속"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"VPN 프로필 수정"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"저장 안함"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"<xliff:g id="PROFILE">%s</xliff:g>에 연결"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"이 VPN을 연결 해제합니다."</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"연결 해제"</string>
     <string name="vpn_version" msgid="1939804054179766249">"버전 <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_forget_long" msgid="2232239391189465752">"VPN 삭제"</string>
+    <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"기존 VPN을 교체하시겠습니까?"</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"이 프로필에 연결된 VPN을 이미 소유하고 있습니다. 다른 VPN에 연결된 경우, 기존 VPN은 교체됩니다."</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"VPN 프로필 추가"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"프로필 수정"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"프로필 삭제"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"연결 유지 VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"추가된 VPN 없음"</string>
+    <string name="vpn_always_on_active" msgid="2789423425184556882">"항상 사용 활성화"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"VPN 프로필을 선택하여 연결된 상태를 유지하세요. 이 VPN에 연결된 상태에서만 네트워크 트래픽이 허용됩니다."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"없음"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPN을 연결 상태로 유지하려면 서버와 DNS의 IP 주소가 필요합니다."</string>
