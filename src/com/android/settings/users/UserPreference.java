@@ -28,11 +28,10 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 import com.android.settings.R;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.Comparator;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class UserPreference extends RestrictedPreference {
     private static final int ALPHA_ENABLED = 255;
@@ -103,7 +102,8 @@ public class UserPreference extends RestrictedPreference {
             View deleteView = view.findViewById(R.id.trash_user);
             if (deleteView != null) {
                 if (mDeleteClickListener != null
-                        && !um.hasUserRestriction(UserManager.DISALLOW_REMOVE_USER)) {
+                        && !RestrictedLockUtils.hasBaseUserRestriction(getContext(),
+                                UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
                     deleteView.setOnClickListener(mDeleteClickListener);
                     deleteView.setTag(this);
                 } else {
