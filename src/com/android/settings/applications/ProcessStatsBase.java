@@ -23,7 +23,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.android.internal.app.ProcessStats;
+import com.android.internal.app.procstats.ProcessStats;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
