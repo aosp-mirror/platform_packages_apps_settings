@@ -7392,6 +7392,10 @@
     <string name="notification_suggestion_title">Control lock screen notifications</string>
     <!-- Summary of notification suggestion during optional steps of setup. [CHAR_LIMIT=80] -->
     <string name="notification_suggestion_summary">Show or hide notification content</string>
+    <!-- Setting tab title for all setting options. [CHAR LIMIT=20] -->
+    <string name="page_tab_title_summary">All</string>
+    <!-- Setting tab title for support setting options. [CHAR LIMIT=20] -->
+    <string name="page_tab_title_support">Support</string>
 
     <!-- Summary of developer options to set the smallest width of the screen [CHAR LIMIT=60]-->
     <string name="developer_density_summary"><xliff:g name="count" example="320">%d</xliff:g> dp</string>
@@ -7414,4 +7418,34 @@
     <!-- [CHAR LIMIT=60] Name of dev option called demo mode -->
     <string name="demo_mode">Demo mode</string>
 
+    <!-- Activity title for deletion helper. [CHAR LIMIT=25] -->
+    <string name="deletion_helper_title">Remove from Device</string>
+    <!-- Preference group title for the list of apps to uninstall. [CHAR LIMIT=40]-->
+    <string name="deletion_helper_apps_title">Apps</string>
+    <!-- Summary of how much storage an app is using and the number of days since last use. [CHAR LIMIT=NONE]-->
+    <string name="deletion_helper_app_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g>, last used <xliff:g id="days" example="67">%2$d</xliff:g> days ago</string>
+    <!-- Summary of how much storage an app is using when it has never been used before. [CHAR LIMIT=NONE]-->
+    <string name="deletion_helper_app_summary_never_used"><xliff:g id="used" example="1.2GB">%1$s</xliff:g>, never used before</string>
+    <!-- Summary of how much storage an app is using when its last use is unknown. [CHAR LIMIT=NONE]-->
+    <string name="deletion_helper_app_summary_unknown_used"><xliff:g id="used" example="1.2GB">%1$s</xliff:g>, not sure when last used</string>
+    <!-- Button which clears out storage in the deletion helper. [CHAR LIMIT=60]-->
+    <string name="deletion_helper_free_button">Free up <xliff:g id="freeable" example="1.2GB">%1$s</xliff:g></string>
+
+    <!-- Title text for calling or emailing customer support [CHAR LIMIT=80]-->
+    <string name="support_escalation_title">24/7 support</string>
+
+    <!-- Button label for contacting customer support by phone [CHAR LIMIT=20]-->
+    <string name="support_escalation_by_phone">Phone</string>
+
+    <!-- Button label for contacting customer support by email [CHAR LIMIT=20]-->
+    <string name="support_escalation_by_email">Email</string>
+
+    <!-- Button label for visiting help forum [CHAR LIMIT=60]-->
+    <string name="support_forum_title">Help forum</string>
+
+    <!-- Button label for visiting help articles [CHAR LIMIT=60]-->
+    <string name="support_articles_title">Help articles</string>
+
+    <!-- Button label for sending user feedback [CHAR LIMIT=60]-->
+    <string name="support_feedback_title">Send feedback</string>
 </resources>
