@@ -970,7 +970,15 @@ public class UserSettings extends SettingsPreferenceFragment
             int userId = ((UserPreference) v.getTag()).getUserId();
             switch (v.getId()) {
             case UserPreference.DELETE_ID:
-                onRemoveUserClicked(userId);
+                final EnforcedAdmin removeDisallowedAdmin =
+                        RestrictedLockUtils.checkIfRestrictionEnforced(getContext(),
+                                UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
+                if (removeDisallowedAdmin != null) {
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
+                            removeDisallowedAdmin);
+                } else {
+                    onRemoveUserClicked(userId);
+                }
                 break;
             case UserPreference.SETTINGS_ID:
                 onManageUserClicked(userId, false);
