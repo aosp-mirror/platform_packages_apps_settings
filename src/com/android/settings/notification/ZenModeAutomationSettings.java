@@ -311,6 +311,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             ServiceInfo si = mServiceListing.findService(mContext, CONFIG, rule.getOwner());
             ComponentName settingsActivity = getSettingsActivity(si);
             setIntent(getRuleIntent(action, settingsActivity, mId));
+            setSelectable(settingsActivity != null || isSystemRule);
 
             setWidgetLayoutResource(R.layout.zen_rule_widget);
         }
@@ -323,6 +324,8 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
             if (v != null) {
                 v.setOnClickListener(mDeleteListener);
             }
+            view.setDividerAllowedAbove(true);
+            view.setDividerAllowedBelow(true);
         }
 
         private final View.OnClickListener mDeleteListener = new View.OnClickListener() {
