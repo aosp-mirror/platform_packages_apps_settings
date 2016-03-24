@@ -71,6 +71,7 @@ public final class DashboardStatusFragment extends InstrumentedFragment
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setListener(this);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(mAdapter.getItemDecoration());
         ConditionAdapterUtils.addDismiss(mRecyclerView);
         return content;
     }
