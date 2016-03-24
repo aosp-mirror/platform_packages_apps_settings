@@ -16,10 +16,10 @@
 
 package com.android.settings;
 
-import com.android.internal.logging.MetricsLogger;
-
 import android.os.Bundle;
 import android.support.v14.preference.PreferenceFragment;
+
+import com.android.internal.logging.MetricsLogger;
 
 /**
  * Instrumented fragment that logs visibility state.
@@ -27,6 +27,8 @@ import android.support.v14.preference.PreferenceFragment;
 public abstract class InstrumentedFragment extends PreferenceFragment {
     // Declare new temporary categories here, starting after this value.
     public static final int UNDECLARED = 100000;
+
+    public static final int DASHBOARD_CONTAINER = UNDECLARED + 1;
 
     /**
      * Declare the view of this category.
