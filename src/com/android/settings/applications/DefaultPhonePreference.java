@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.telecom.DefaultDialerManager;
+import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -56,11 +57,16 @@ public class DefaultPhonePreference extends AppListPreference implements SelfAva
         for (int i = 0; i < dialerPackages.size(); i++) {
             dialers[i] = dialerPackages.get(i);
         }
-        setPackageNames(dialers, getDefaultPackage());
+        setPackageNames(dialers, getDefaultPackage(), getSystemPackage());
     }
 
     private String getDefaultPackage() {
         return DefaultDialerManager.getDefaultDialerApplication(getContext(), mUserId);
+    }
+
+    private String getSystemPackage() {
+        TelecomManager tm = TelecomManager.from(getContext());
+        return tm.getSystemDialerPackage();
     }
 
     @Override
