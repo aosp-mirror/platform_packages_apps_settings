@@ -17,61 +17,61 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="?attr/side_margin"
-        android:paddingEnd="?attr/side_margin">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="?attr/side_margin"
+    android:paddingEnd="?attr/side_margin">
 
     <TextView
-            android:id="@+id/message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/redaction_vertical_margins"
-            android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
-            android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
-            android:text="@string/lock_screen_notifications_interstitial_message"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/redaction_vertical_margins"
+        android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:text="@string/lock_screen_notifications_interstitial_message"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <RadioGroup
-            android:id="@+id/radio_group"
-            android:layout_width="wrap_content"
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/redaction_vertical_margins"
+        android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:checkedButton="@+id/redact_sensitive">
+
+        <com.android.settings.RestrictedRadioButton
+            android:id="@+id/show_all"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/redaction_vertical_margins"
-            android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
-            android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
-            android:checkedButton="@+id/redact_sensitive">
+            style="@style/RedactionItemAndLabel"
+            android:text="@string/lock_screen_notifications_summary_show" />
 
         <com.android.settings.RestrictedRadioButton
-                android:id="@+id/show_all"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/redaction_vertical_margins"
-                android:text="@string/lock_screen_notifications_summary_show" />
-
-        <com.android.settings.RestrictedRadioButton
-                android:id="@+id/redact_sensitive"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/redaction_vertical_margins"
-                android:text="@string/lock_screen_notifications_summary_hide" />
+            android:id="@+id/redact_sensitive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/RedactionItemAndLabel"
+            android:text="@string/lock_screen_notifications_summary_hide" />
 
         <RadioButton
-                android:id="@+id/hide_all"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/redaction_vertical_margins"
-                android:text="@string/lock_screen_notifications_summary_disable" />
+            android:id="@+id/hide_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/RedactionItemAndLabel"
+            android:text="@string/lock_screen_notifications_summary_disable" />
 
     </RadioGroup>
 
     <CheckBox
-            android:id="@+id/lockscreen_remote_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/redaction_vertical_margins"
-            android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
-            android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
-            android:text="@string/lockscreen_remote_input" />
+        android:id="@+id/lockscreen_remote_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/RedactionItemAndLabel"
+        android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:text="@string/lockscreen_remote_input" />
 
 </LinearLayout>
