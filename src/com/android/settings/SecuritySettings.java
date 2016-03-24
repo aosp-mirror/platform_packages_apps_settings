@@ -692,6 +692,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     mCurrentProfilePassword, mCurrentDevicePassword,
                     profileQuality, MY_USER_ID);
         }
+        final boolean profilePatternVisibility =
+                mLockPatternUtils.isVisiblePatternEnabled(mProfileChallengeUserId);
+        mLockPatternUtils.setVisiblePatternEnabled(profilePatternVisibility, MY_USER_ID);
         mCurrentDevicePassword = null;
         mCurrentProfilePassword = null;
     }
