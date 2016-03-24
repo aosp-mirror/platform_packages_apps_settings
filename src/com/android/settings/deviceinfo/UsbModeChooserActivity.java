@@ -68,7 +68,9 @@ public class UsbModeChooserActivity extends Activity {
             String action = intent.getAction();
             if (UsbManager.ACTION_USB_STATE.equals(action)) {
                 boolean connected = intent.getBooleanExtra(UsbManager.USB_CONNECTED, false);
-                if (!connected) {
+                boolean hostConnected =
+                        intent.getBooleanExtra(UsbManager.USB_HOST_CONNECTED, false);
+                if (!connected && !hostConnected) {
                     mDialog.dismiss();
                 }
             }
