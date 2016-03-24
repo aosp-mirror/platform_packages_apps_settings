@@ -511,6 +511,7 @@
                 android:icon="@drawable/ic_settings_wireless"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
+                <action android:name="android.settings.VPN_SETTINGS" />
                 <action android:name="android.net.vpn.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
