@@ -1198,6 +1198,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (current != null && current instanceof SearchResultsSummary) {
             mSearchResultsFragment = (SearchResultsSummary) current;
         } else {
+            setContentHeaderView(null);
             mSearchResultsFragment = (SearchResultsSummary) switchToFragment(
                     SearchResultsSummary.class.getName(), null, false, true,
                     R.string.search_results_title, null, true);
