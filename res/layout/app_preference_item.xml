@@ -69,4 +69,26 @@
         android:paddingEnd="7dip"
         android:duplicateParentState="true"
         />
+    <TextView
+        android:id="@+id/system_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_gravity="center_vertical"
+        android:text="@string/system_app"
+        android:visibility="gone"
+        android:paddingEnd="7dip"
+        android:duplicateParentState="true"
+        />
+    <TextView
+        android:id="@+id/system_default_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_gravity="center_vertical"
+        android:text="@string/system_default_app"
+        android:visibility="gone"
+        android:paddingEnd="7dip"
+        android:duplicateParentState="true"
+        />
 </LinearLayout>

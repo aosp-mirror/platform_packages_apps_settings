@@ -56,6 +56,7 @@ public class AppListPreference extends CustomListPreference {
     private Drawable[] mEntryDrawables;
     private boolean mShowItemNone = false;
     private CharSequence[] mSummaries;
+    private int mSystemAppIndex = -1;
 
     public class AppArrayAdapter extends ArrayAdapter<CharSequence> {
         private Drawable[] mImageDrawables = null;
@@ -79,8 +80,12 @@ public class AppListPreference extends CustomListPreference {
             View view = inflater.inflate(R.layout.app_preference_item, parent, false);
             TextView textView = (TextView) view.findViewById(android.R.id.title);
             textView.setText(getItem(position));
-            if (position == mSelectedIndex) {
+            if (position == mSelectedIndex && position == mSystemAppIndex) {
+                view.findViewById(R.id.system_default_label).setVisibility(View.VISIBLE);
+            } else if (position == mSelectedIndex) {
                 view.findViewById(R.id.default_label).setVisibility(View.VISIBLE);
+            } else if (position == mSystemAppIndex) {
+                view.findViewById(R.id.system_label).setVisibility(View.VISIBLE);
             }
             ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
             imageView.setImageDrawable(mImageDrawables[position]);
@@ -122,6 +127,11 @@ public class AppListPreference extends CustomListPreference {
     }
 
     public void setPackageNames(CharSequence[] packageNames, CharSequence defaultPackageName) {
+        setPackageNames(packageNames, defaultPackageName, null);
+    }
+
+    public void setPackageNames(CharSequence[] packageNames, CharSequence defaultPackageName,
+            CharSequence systemPackageName) {
         // Look up all package names in PackageManager. Skip ones we can't find.
         PackageManager pm = getContext().getPackageManager();
         final int entryCount = packageNames.length + (mShowItemNone ? 1 : 0);
@@ -129,6 +139,7 @@ public class AppListPreference extends CustomListPreference {
         List<CharSequence> validatedPackageNames = new ArrayList<>(entryCount);
         List<Drawable> entryDrawables = new ArrayList<>(entryCount);
         int selectedIndex = -1;
+        mSystemAppIndex = -1;
         for (int i = 0; i < packageNames.length; i++) {
             try {
                 ApplicationInfo appInfo = pm.getApplicationInfoAsUser(packageNames[i].toString(), 0,
@@ -139,6 +150,10 @@ public class AppListPreference extends CustomListPreference {
                 if (defaultPackageName != null &&
                         appInfo.packageName.contentEquals(defaultPackageName)) {
                     selectedIndex = i;
+                }
+                if (appInfo.packageName != null && systemPackageName != null &&
+                        appInfo.packageName.contentEquals(systemPackageName)) {
+                    mSystemAppIndex = i;
                 }
             } catch (NameNotFoundException e) {
                 // Skip unknown packages.
