@@ -16,8 +16,9 @@
 
 package com.android.settings.display;
 
+import com.android.settingslib.display.DisplayDensityUtils;
+
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.PreferenceGroup;
 import android.util.AttributeSet;
