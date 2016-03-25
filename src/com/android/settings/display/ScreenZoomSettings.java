@@ -28,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.display.DisplayDensityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,7 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
             // density and don't let the user change anything.
             final int densityDpi = getResources().getDisplayMetrics().densityDpi;
             mValues = new int[] { densityDpi };
-            mEntries = new String[] { getString(R.string.screen_zoom_summary_default) };
+            mEntries = new String[] { getString(DisplayDensityUtils.SUMMARY_DEFAULT) };
             mInitialIndex = 0;
             mDefaultDensity = densityDpi;
         } else {
