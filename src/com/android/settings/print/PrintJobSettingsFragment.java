@@ -227,7 +227,7 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
             } break;
         }
 
-        CharSequence status = info.getStatus();
+        CharSequence status = info.getStatus(getPackageManager());
         if (!TextUtils.isEmpty(status)) {
             if (getPreferenceScreen().findPreference(PRINT_JOB_MESSAGE_PREFERENCE) == null) {
                 getPreferenceScreen().addPreference(mMessagePreference);
