@@ -68,8 +68,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
                     getActivity().getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
 
             if (pdbManager != null && !pdbManager.getOemUnlockEnabled() &&
-                    Settings.Global.getInt(getActivity().getContentResolver(),
-                            Settings.Global.DEVICE_PROVISIONED, 0) != 0) {
+                    Utils.isDeviceProvisioned(getActivity())) {
                 // if OEM unlock is enabled, this will be wiped during FR process. If disabled, it
                 // will be wiped here, unless the device is still being provisioned, in which case
                 // the persistent data block will be preserved.
