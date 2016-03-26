@@ -627,7 +627,6 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
-    <string name="wifi_alert_lockdown_by_device_owner" msgid="8459738223049002970">"<xliff:g id="APP_NAME">%1$s</xliff:g> သည် သင့် စက်ပစ္စည်းအား စီမံနေပြီး ဤဝိုင်ဖိုင်ကွန်ယက်အား ပြင်ဆင်ခြင်းနှင့် ဖျက်ပစ်ခြင်းတို့အားလည်း ခွင့်မပြုပါ။ နောက်ထပ် အချက်အလက်များအတွက်၊ သင့် အက်ဒမင်အား ဆက်သွယ်ပါ။"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"တက်ဘလက်နှင့် အခြားစက်ပစ္စည်း ထိလိုက်လျှင် အချက်အလက် ဖလှယ်ရန် ခွင့်ပြုသည်"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"ဖုန်းနှင့် အခြားစက်ပစ္စည်း ထိလိုက်လျှင် အချက်အလက် ဖလှယ်ရန် ခွင့်ပြုသည်"</string>
@@ -771,6 +770,7 @@
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"အိုင်ပီလိပ်စာ"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"သိမ်းထား ကွန်ရက်များ"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP ဆက်တင်များ"</string>
+    <string name="wifi_advanced_not_available" msgid="5823045095444154586">"Wi‑Fi အဆင့်မြှင့်ဆက်တင်များ ဤအသုံးပြုသူအတွက် မရပါ။"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"သိမ်းပါ"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"ထားတော့"</string>
     <string name="wifi_ip_settings_invalid_ip_address" msgid="2513142355364274970">"ခိုင်လုံသော အိုင်ပီလိပ်စာကို ရိုက်ထည့်ပါ"</string>
@@ -1538,10 +1538,10 @@
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"<xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g>အတွက် ဆက်တင်းများဖွင့်ရန် မအောင်မြင်ပါ။"</string>
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"ကီးဘုတ်နှင့် ထည့်သွင်းမှုနည်းလမ်းများ"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"ကီးဘုတ်အတု"</string>
-    <string name="physical_keyboard_category" msgid="7946003168662969622">"ခလုတ်ခုံကီးဘုတ်"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"ရနိုင်သည့် ကီးဘုတ်အတု"</string>
     <string name="add_virtual_keyboard" msgid="2867069766124874859">"ကီးဘုတ်အတုတစ်ခု ထည့်ပါ"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"ကီးဘုတ် အကူ"</string>
+    <string name="physical_keyboard_title" msgid="8285149877925752042">"ကီးဘုတ် ခလုတ်ခုံ"</string>
     <string name="show_ime" msgid="2658582193437188227">"ကီးဘုတ်အတုပြပါ"</string>
     <string name="show_ime_summary" msgid="8164993045923240698">"ခလုတ်ခုံကီးဘုတ်ဖွင့်ထားစဉ်တွင် ၎င်းကိုမျက်နှာပြင်ပေါ်တွင် ဆက်လက်ထားရှိပါ"</string>
     <string name="physical_device_title" msgid="79889057252418427">"<xliff:g id="INPUT_METHOD_SUBTYPE">%1$s</xliff:g> - <xliff:g id="INPUT_METHOD_EDITOR">%2$s</xliff:g>"</string>
@@ -2756,6 +2756,8 @@
     <string name="default_browser_title_none" msgid="2124785489953628553">"ပုံမှန် ဘရောင်ဇာ မရှိပါ"</string>
     <string name="default_phone_title" msgid="282005908059637350">"ဖုန်း app"</string>
     <string name="default_app" msgid="6864503001385843060">"(မူသေ)"</string>
+    <string name="system_app" msgid="9068313769550747372">"(စနစ်)"</string>
+    <string name="system_default_app" msgid="3091113402349739037">"(စနစ်မူလ)"</string>
     <string name="apps_storage" msgid="4353308027210435513">"App များ သိုလှောင်မှု"</string>
     <string name="usage_access" msgid="5479504953931038165">"သုံးစွဲမှုကို ရယူသုံးနိုင်"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"ဝင်ရောက်သုံးစွဲမှုအား ခွင့့်ပြုရန်"</string>
