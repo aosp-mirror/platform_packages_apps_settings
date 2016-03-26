@@ -627,7 +627,6 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
-    <string name="wifi_alert_lockdown_by_device_owner" msgid="8459738223049002970">"<xliff:g id="APP_NAME">%1$s</xliff:g>会对您的设备进行管理，并且不允许修改或删除此 WLAN 网络。要了解详情，请与您的管理员联系。"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"允许平板电脑在接触其他设备时交换数据"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"允许手机在接触其他设备时交换数据"</string>
@@ -771,6 +770,8 @@
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP地址"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"已保存的网络"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP 设置"</string>
+    <!-- no translation found for wifi_advanced_not_available (5823045095444154586) -->
+    <skip />
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"保存"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"取消"</string>
     <string name="wifi_ip_settings_invalid_ip_address" msgid="2513142355364274970">"请输入有效的IP地址。"</string>
@@ -1436,8 +1437,7 @@
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"此应用可访问您平板电脑上的以下内容。为了提高性能和减少内存使用量，<xliff:g id="BASE_APP_NAME">%1$s</xliff:g>可获得其中的部分权限，因为它与<xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>运行在同一进程中。"</string>
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"此应用可访问您手机上的以下内容。为了提高性能和减少内存使用量，<xliff:g id="BASE_APP_NAME">%1$s</xliff:g>可获得其中的部分权限，因为它与<xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>运行在同一进程中。"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>和<xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
-    <!-- no translation found for join_two_unrelated_items (1873827777191260824) -->
-    <skip />
+    <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>、<xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g>和<xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>、<xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>、<xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
@@ -1539,10 +1539,11 @@
     <string name="failed_to_open_app_settings_toast" msgid="1251067459298072462">"无法打开 <xliff:g id="SPELL_APPLICATION_NAME">%1$s</xliff:g> 的设置"</string>
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"键盘和输入法"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"虚拟键盘"</string>
-    <string name="physical_keyboard_category" msgid="7946003168662969622">"实体键盘"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"可用虚拟键盘"</string>
     <string name="add_virtual_keyboard" msgid="2867069766124874859">"添加虚拟键盘"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"键盘辅助功能"</string>
+    <!-- no translation found for physical_keyboard_title (8285149877925752042) -->
+    <skip />
     <string name="show_ime" msgid="2658582193437188227">"显示虚拟键盘"</string>
     <string name="show_ime_summary" msgid="8164993045923240698">"连接到实体键盘时使其在屏幕上保持显示状态"</string>
     <string name="physical_device_title" msgid="79889057252418427">"<xliff:g id="INPUT_METHOD_SUBTYPE">%1$s</xliff:g> - <xliff:g id="INPUT_METHOD_EDITOR">%2$s</xliff:g>"</string>
@@ -2189,28 +2190,23 @@
     <string name="vpn_done" msgid="8678655203910995914">"关闭"</string>
     <string name="vpn_save" msgid="4233484051644764510">"保存"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"连接"</string>
-    <!-- no translation found for vpn_continue (846894478725673098) -->
-    <skip />
+    <string name="vpn_continue" msgid="846894478725673098">"继续"</string>
     <string name="vpn_edit" msgid="8647191407179996943">"编辑VPN配置文件"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"取消保存"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"连接到<xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="2555877026824771115">"断开此 VPN 连接。"</string>
     <string name="vpn_disconnect" msgid="7426570492642111171">"断开连接"</string>
     <string name="vpn_version" msgid="1939804054179766249">"版本 <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <!-- no translation found for vpn_forget_long (2232239391189465752) -->
-    <skip />
-    <!-- no translation found for vpn_replace_always_on_vpn_title (3010435028275752220) -->
-    <skip />
-    <!-- no translation found for vpn_replace_always_on_vpn_message (4766130211217825628) -->
-    <skip />
+    <string name="vpn_forget_long" msgid="2232239391189465752">"取消保存 VPN"</string>
+    <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"替换现有 VPN？"</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"您已有与此个人资料相关联的 VPN。如果您连接到此 VPN，则系统将替换现有 VPN。"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"添加VPN配置文件"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"修改配置文件"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"删除配置文件"</string>
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"始终开启的VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"尚未添加任何 VPN。"</string>
-    <!-- no translation found for vpn_always_on_active (2789423425184556882) -->
-    <skip />
+    <string name="vpn_always_on_active" msgid="2789423425184556882">"始终处于开启状态"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"选择要始终保持连接的VPN配置文件。只有在连接到此VPN之后才可以使用网络。"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"无"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"始终开启的VPN需要服务器和DNS的IP地址。"</string>
@@ -2762,6 +2758,10 @@
     <string name="default_browser_title_none" msgid="2124785489953628553">"没有默认浏览器"</string>
     <string name="default_phone_title" msgid="282005908059637350">"“电话”应用"</string>
     <string name="default_app" msgid="6864503001385843060">"（默认）"</string>
+    <!-- no translation found for system_app (9068313769550747372) -->
+    <skip />
+    <!-- no translation found for system_default_app (3091113402349739037) -->
+    <skip />
     <string name="apps_storage" msgid="4353308027210435513">"应用存储空间"</string>
     <string name="usage_access" msgid="5479504953931038165">"使用记录访问权限"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"允许访问使用记录"</string>
