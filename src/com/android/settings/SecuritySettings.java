@@ -209,14 +209,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return resid;
     }
 
-    @Override
-    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
-        if (!preferenceScreen.isAttached()) {
-            preferenceScreen.setShouldUseGeneratedIds(false);
-        }
-        super.setPreferenceScreen(preferenceScreen);
-    }
-
     /**
      * Important!
      *
