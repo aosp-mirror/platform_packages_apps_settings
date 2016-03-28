@@ -34,6 +34,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.PersistableBundle;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Telephony;
 import android.support.v7.preference.Preference;
@@ -57,6 +58,7 @@ import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.dataconnection.ApnSetting;
 import com.android.internal.telephony.uicc.IccRecords;
 import com.android.internal.telephony.uicc.UiccController;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
 
@@ -95,6 +97,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
 
     private static boolean mRestoreDefaultApnMode;
 
+    private UserManager mUserManager;
     private RestoreApnUiHandler mRestoreApnUiHandler;
     private RestoreApnProcessHandler mRestoreApnProcessHandler;
     private HandlerThread mRestoreDefaultApnThread;
@@ -169,6 +172,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         PersistableBundle b = configManager.getConfig();
         mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
         mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
+        mUserManager = UserManager.get(activity);
     }
 
     @Override
@@ -220,6 +224,17 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         if (mRestoreDefaultApnThread != null) {
             mRestoreDefaultApnThread.quit();
         }
+    }
+
+    @Override
+    public EnforcedAdmin getRestrictionEnforcedAdmin() {
+        final UserHandle user = UserHandle.of(mUserManager.getUserHandle());
+        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS, user)
+                && !mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS,
+                        user)) {
+            return EnforcedAdmin.MULTIPLE_ENFORCED_ADMIN;
+        }
+        return null;
     }
 
     private void fillList() {
