@@ -47,7 +47,7 @@ public class AndroidBeam extends InstrumentedFragment
     private SwitchBar mSwitchBar;
     private CharSequence mOldActivityTitle;
     private boolean mBeamDisallowedByBase;
-    private boolean mBeamDisallowedByAdmin;
+    private boolean mBeamDisallowedByOnlyAdmin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +81,7 @@ public class AndroidBeam extends InstrumentedFragment
             View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
             ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(), view, admin, false);
             view.setVisibility(View.VISIBLE);
-            mBeamDisallowedByAdmin = true;
+            mBeamDisallowedByOnlyAdmin = true;
             return view;
         }
         mView = inflater.inflate(R.layout.android_beam, container, false);
@@ -95,7 +95,7 @@ public class AndroidBeam extends InstrumentedFragment
         SettingsActivity activity = (SettingsActivity) getActivity();
 
         mSwitchBar = activity.getSwitchBar();
-        if (!mBeamDisallowedByBase && mBeamDisallowedByAdmin) {
+        if (mBeamDisallowedByOnlyAdmin) {
             mSwitchBar.hide();
         } else {
             mSwitchBar.setChecked(!mBeamDisallowedByBase && mNfcAdapter.isNdefPushEnabled());
@@ -111,8 +111,10 @@ public class AndroidBeam extends InstrumentedFragment
         if (mOldActivityTitle != null) {
             getActivity().getActionBar().setTitle(mOldActivityTitle);
         }
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
+        if (!mBeamDisallowedByOnlyAdmin) {
+            mSwitchBar.removeOnSwitchChangeListener(this);
+            mSwitchBar.hide();
+        }
     }
 
     @Override
