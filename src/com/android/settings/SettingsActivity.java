@@ -49,6 +49,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.accessibility.AccessibilitySettings;
@@ -67,7 +68,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
-import com.android.settings.dashboard.DashboardSummary;
+import com.android.settings.dashboard.DashboardContainerFragment;
 import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
@@ -610,7 +611,7 @@ public class SettingsActivity extends SettingsDrawerActivity
                 // Show Search affordance
                 mDisplaySearch = true;
                 mInitialTitleResId = R.string.dashboard_title;
-                switchToFragment(DashboardSummary.class.getName(), null, false, false,
+                switchToFragment(DashboardContainerFragment.class.getName(), null, false, false,
                         mInitialTitleResId, mInitialTitle, false);
             }
         }
