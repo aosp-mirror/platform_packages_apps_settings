@@ -28,11 +28,14 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.internal.app.IProcessStats;
 import com.android.internal.app.ProcessMap;
-import com.android.internal.app.ProcessStats;
-import com.android.internal.app.ProcessStats.ProcessDataCollection;
-import com.android.internal.app.ProcessStats.TotalMemoryUseCollection;
+import com.android.internal.app.procstats.DumpUtils;
+import com.android.internal.app.procstats.IProcessStats;
+import com.android.internal.app.procstats.ProcessState;
+import com.android.internal.app.procstats.ProcessStats;
+import com.android.internal.app.procstats.ProcessStats.ProcessDataCollection;
+import com.android.internal.app.procstats.ProcessStats.TotalMemoryUseCollection;
+import com.android.internal.app.procstats.ServiceState;
 import com.android.internal.util.MemInfoReader;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -142,7 +145,7 @@ public class ProcStatsData {
 
         long now = SystemClock.uptimeMillis();
 
-        memTotalTime = ProcessStats.dumpSingleTime(null, null, mStats.mMemFactorDurations,
+        memTotalTime = DumpUtils.dumpSingleTime(null, null, mStats.mMemFactorDurations,
                 mStats.mMemFactor, mStats.mStartTime, now);
 
         ProcessStats.TotalMemoryUseCollection totalMem = new ProcessStats.TotalMemoryUseCollection(
@@ -274,26 +277,26 @@ public class ProcStatsData {
                 for (int iv = 0; iv < vpkgs.size(); iv++) {
                     final ProcessStats.PackageState st = vpkgs.valueAt(iv);
                     for (int iproc = 0; iproc < st.mProcesses.size(); iproc++) {
-                        final ProcessStats.ProcessState pkgProc = st.mProcesses.valueAt(iproc);
-                        final ProcessStats.ProcessState proc = mStats.mProcesses.get(pkgProc.mName,
-                                pkgProc.mUid);
+                        final ProcessState pkgProc = st.mProcesses.valueAt(iproc);
+                        final ProcessState proc = mStats.mProcesses.get(pkgProc.getName(),
+                                pkgProc.getUid());
                         if (proc == null) {
                             Log.w(TAG, "No process found for pkg " + st.mPackageName
-                                    + "/" + st.mUid + " proc name " + pkgProc.mName);
+                                    + "/" + st.mUid + " proc name " + pkgProc.getName());
                             continue;
                         }
-                        ProcStatsEntry ent = entriesMap.get(proc.mName, proc.mUid);
+                        ProcStatsEntry ent = entriesMap.get(proc.getName(), proc.getUid());
                         if (ent == null) {
                             ent = new ProcStatsEntry(proc, st.mPackageName, bgTotals, runTotals,
                                     mUseUss);
                             if (ent.mRunWeight > 0) {
-                                if (DEBUG) Log.d(TAG, "Adding proc " + proc.mName + "/"
-                                            + proc.mUid + ": time="
+                                if (DEBUG) Log.d(TAG, "Adding proc " + proc.getName() + "/"
+                                            + proc.getUid() + ": time="
                                             + ProcessStatsUi.makeDuration(ent.mRunDuration) + " ("
                                             + ((((double) ent.mRunDuration) / memTotalTime) * 100)
                                             + "%)"
                                             + " pss=" + ent.mAvgRunMem);
-                                entriesMap.put(proc.mName, proc.mUid, ent);
+                                entriesMap.put(proc.getName(), proc.getUid(), ent);
                                 procEntries.add(ent);
                             }
                         } else {
@@ -315,18 +318,18 @@ public class ProcStatsData {
                 for (int iv = 0; iv < vpkgs.size(); iv++) {
                     ProcessStats.PackageState ps = vpkgs.valueAt(iv);
                     for (int is = 0, NS = ps.mServices.size(); is < NS; is++) {
-                        ProcessStats.ServiceState ss = ps.mServices.valueAt(is);
-                        if (ss.mProcessName != null) {
-                            ProcStatsEntry ent = entriesMap.get(ss.mProcessName,
+                        ServiceState ss = ps.mServices.valueAt(is);
+                        if (ss.getProcessName() != null) {
+                            ProcStatsEntry ent = entriesMap.get(ss.getProcessName(),
                                     uids.keyAt(iu));
                             if (ent != null) {
                                 if (DEBUG) Log.d(TAG, "Adding service " + ps.mPackageName
-                                            + "/" + ss.mName + "/" + uids.keyAt(iu) + " to proc "
-                                            + ss.mProcessName);
+                                            + "/" + ss.getName() + "/" + uids.keyAt(iu)
+                                            + " to proc " + ss.getProcessName());
                                 ent.addService(ss);
                             } else {
-                                Log.w(TAG, "No process " + ss.mProcessName + "/" + uids.keyAt(iu)
-                                        + " for service " + ss.mName);
+                                Log.w(TAG, "No process " + ss.getProcessName() + "/"
+                                        + uids.keyAt(iu) + " for service " + ss.getName());
                             }
                         }
                     }
