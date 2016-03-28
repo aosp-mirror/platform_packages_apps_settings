@@ -57,7 +57,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  *
  * This is the initial screen.
  */
-public class MasterClear extends InstrumentedFragment {
+public class MasterClear extends OptionsMenuFragment {
     private static final String TAG = "MasterClear";
 
     private static final int KEYGUARD_REQUEST = 55;

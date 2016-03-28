@@ -50,7 +50,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  *
  * This is the confirmation screen.
  */
-public class ResetNetworkConfirm extends InstrumentedFragment {
+public class ResetNetworkConfirm extends OptionsMenuFragment {
 
     private View mContentView;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;

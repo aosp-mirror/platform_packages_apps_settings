@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -46,14 +45,13 @@ import android.widget.TextView;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import java.util.EnumSet;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class UserCredentialsSettings extends InstrumentedFragment implements OnItemClickListener {
+public class UserCredentialsSettings extends OptionsMenuFragment implements OnItemClickListener {
     private static final String TAG = "UserCredentialsSettings";
 
     private View mRootView;
