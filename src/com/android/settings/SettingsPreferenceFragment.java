@@ -99,6 +99,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     private LinearLayoutManager mLayoutManager;
     private HighlightablePreferenceGroupAdapter mAdapter;
     private ArrayMap<String, Preference> mPreferenceCache;
+    private boolean mAnimationAllowed;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -304,6 +305,10 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     @Override
     public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        if (!preferenceScreen.isAttached()) {
+            // Without ids generated, the RecyclerView won't animate changes to the preferences.
+            preferenceScreen.setShouldUseGeneratedIds(mAnimationAllowed);
+        }
         super.setPreferenceScreen(preferenceScreen);
         if (preferenceScreen != null) {
             if (mHeader != null) {
@@ -367,6 +372,10 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
         mAdapter = new HighlightablePreferenceGroupAdapter(preferenceScreen);
         return mAdapter;
+    }
+
+    protected void setAnimationAllowed(boolean animationAllowed) {
+        mAnimationAllowed = animationAllowed;
     }
 
     protected void cacheRemoveAllPrefs(PreferenceGroup group) {
