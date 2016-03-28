@@ -1720,6 +1720,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         DialogInterface.OnDismissListener onDismissListener = new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+                if (getActivity() == null) {
+                    return;
+                }
                 updateAllOptions();
             }
         };

@@ -82,6 +82,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setAnimationAllowed(true);
 
         addPreferencesFromResource(R.xml.power_usage_summary);
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_HISTORY);
