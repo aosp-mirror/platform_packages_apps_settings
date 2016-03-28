@@ -146,6 +146,7 @@ public class ChooseLockPattern extends SettingsActivity {
         private TextView mFooterLeftButton;
         private TextView mFooterRightButton;
         protected List<LockPatternView.Cell> mChosenPattern = null;
+        private boolean mHideDrawer = false;
 
         /**
          * The patten used during the help screen to show how to draw a pattern.
@@ -384,6 +385,7 @@ public class ChooseLockPattern extends SettingsActivity {
                 w.start(mChooseLockSettingsHelper.utils(), required,
                         false, 0, LockPatternUtils.stringToPattern(current), current, mUserId);
             }
+            mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
         }
 
         @Override
@@ -674,6 +676,7 @@ public class ChooseLockPattern extends SettingsActivity {
             if (!wasSecureBefore) {
                 Intent intent = getRedactionInterstitialIntent(getActivity());
                 if (intent != null) {
+                    intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
                     startActivity(intent);
                 }
             }
