@@ -186,6 +186,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final int MSG_SHOW_ERROR = 1;
 
         private int mUserId;
+        private boolean mHideDrawer = false;
 
         private Handler mHandler = new Handler() {
             @Override
@@ -267,6 +268,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     mUserId));
 
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
+            mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
 
             if (intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
@@ -673,6 +675,7 @@ public class ChooseLockPassword extends SettingsActivity {
             if (!wasSecureBefore) {
                 Intent intent = getRedactionInterstitialIntent(getActivity());
                 if (intent != null) {
+                    intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
                     startActivity(intent);
                 }
             }
