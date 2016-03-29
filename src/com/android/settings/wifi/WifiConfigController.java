@@ -682,7 +682,7 @@ public class WifiConfigController implements TextWatcher,
         if (TextUtils.isEmpty(ipAddr)) return R.string.wifi_ip_settings_invalid_ip_address;
 
         Inet4Address inetAddr = getIPv4Address(ipAddr);
-        if (inetAddr == null) {
+        if (inetAddr == null || inetAddr.equals(Inet4Address.ANY)) {
             return R.string.wifi_ip_settings_invalid_ip_address;
         }
 
@@ -697,6 +697,8 @@ public class WifiConfigController implements TextWatcher,
             // Set the hint as default after user types in ip address
             mNetworkPrefixLengthView.setText(mConfigUi.getContext().getString(
                     R.string.wifi_network_prefix_length_hint));
+        } catch (IllegalArgumentException e) {
+            return R.string.wifi_ip_settings_invalid_ip_address;
         }
 
         String gateway = mGatewayView.getText().toString();
@@ -713,6 +715,9 @@ public class WifiConfigController implements TextWatcher,
         } else {
             InetAddress gatewayAddr = getIPv4Address(gateway);
             if (gatewayAddr == null) {
+                return R.string.wifi_ip_settings_invalid_gateway;
+            }
+            if (gatewayAddr.isMulticastAddress()) {
                 return R.string.wifi_ip_settings_invalid_gateway;
             }
             staticIpConfiguration.gateway = gatewayAddr;
