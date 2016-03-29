@@ -305,7 +305,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     @Override
     public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
-        if (!preferenceScreen.isAttached()) {
+        if (preferenceScreen != null && !preferenceScreen.isAttached()) {
             // Without ids generated, the RecyclerView won't animate changes to the preferences.
             preferenceScreen.setShouldUseGeneratedIds(mAnimationAllowed);
         }
