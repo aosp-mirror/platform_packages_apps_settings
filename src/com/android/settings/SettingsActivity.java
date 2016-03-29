@@ -200,6 +200,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting";
 
+    public static final String EXTRA_HIDE_DRAWER = ":settings:hide_drawer";
+
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
         "com.android.settings.FRAGMENT_CLASS";
 
@@ -511,6 +513,9 @@ public class SettingsActivity extends SettingsDrawerActivity
         final Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
+        }
+        if (intent.getBooleanExtra(EXTRA_HIDE_DRAWER, false)) {
+            setIsDrawerPresent(false);
         }
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
