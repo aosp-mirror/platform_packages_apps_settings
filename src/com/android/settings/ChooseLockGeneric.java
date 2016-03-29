@@ -59,6 +59,12 @@ public class ChooseLockGeneric extends SettingsActivity {
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
+
+        String action = modIntent.getAction();
+        if (DevicePolicyManager.ACTION_SET_NEW_PASSWORD.equals(action)
+                || DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(action)) {
+            modIntent.putExtra(EXTRA_HIDE_DRAWER, true);
+        }
         return modIntent;
     }
 
@@ -110,6 +116,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private LockPatternUtils mLockPatternUtils;
         private FingerprintManager mFingerprintManager;
         private int mUserId;
+        private boolean mHideDrawer = false;
         private RemovalCallback mRemovalCallback = new RemovalCallback() {
 
             @Override
@@ -154,6 +161,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (getActivity() instanceof ChooseLockGeneric.InternalActivity) {
                 mPasswordConfirmed = !confirmCredentials;
             }
+            mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
 
             mHasChallenge = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
@@ -263,6 +271,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                         unlockMethodIntent);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
                         mForFingerprint);
+                intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
                 startActivityForResult(intent, ENABLE_ENCRYPTION_REQUEST);
             } else {
                 if (mForChangeCredRequiredForBoot) {
@@ -612,6 +621,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                     intent = getLockPatternIntent(context, mRequirePassword,
                             mUserPassword, mUserId);
                 }
+            }
+            if (intent != null) {
+                intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
             }
             return intent;
         }
