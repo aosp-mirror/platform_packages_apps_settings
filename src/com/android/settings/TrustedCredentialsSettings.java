@@ -66,7 +66,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class TrustedCredentialsSettings extends InstrumentedFragment {
+public class TrustedCredentialsSettings extends OptionsMenuFragment {
 
     private static final String TAG = "TrustedCredentialsSettings";
 

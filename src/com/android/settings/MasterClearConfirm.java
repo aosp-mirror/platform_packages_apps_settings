@@ -47,7 +47,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  *
  * This is the confirmation screen.
  */
-public class MasterClearConfirm extends InstrumentedFragment {
+public class MasterClearConfirm extends OptionsMenuFragment {
 
     private View mContentView;
     private boolean mEraseSdCard;
