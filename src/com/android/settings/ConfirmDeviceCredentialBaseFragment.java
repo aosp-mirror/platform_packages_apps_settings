@@ -50,7 +50,7 @@ import com.android.settings.fingerprint.FingerprintUiHelper;
 /**
  * Base fragment to be shared for PIN/Pattern/Password confirmation fragments.
  */
-public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFragment
+public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFragment
         implements FingerprintUiHelper.Callback {
 
     public static final String PACKAGE = "com.android.settings";

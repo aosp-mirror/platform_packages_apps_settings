@@ -25,7 +25,6 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SeekBarPreference;
 import com.android.settings.widget.SwitchBar;
