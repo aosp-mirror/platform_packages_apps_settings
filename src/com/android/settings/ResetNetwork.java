@@ -50,7 +50,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  *
  * This is the initial screen.
  */
-public class ResetNetwork extends InstrumentedFragment {
+public class ResetNetwork extends OptionsMenuFragment {
     private static final String TAG = "ResetNetwork";
 
     // Arbitrary to avoid conficts

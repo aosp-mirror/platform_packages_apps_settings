@@ -119,7 +119,7 @@ public class DeviceAdminSettings extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        setHasOptionsMenu(true);
         Utils.forceCustomPadding(getListView(), true /* additive padding */);
     }
 
