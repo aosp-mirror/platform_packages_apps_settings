@@ -140,6 +140,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
+    private String mAddingUserName;
     private UserCapabilities mUserCaps;
     private boolean mShouldUpdateUserList = true;
     private final Object mUserLock = new Object();
@@ -402,15 +403,13 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private UserInfo createRestrictedProfile() {
-        UserInfo newUserInfo = mUserManager.createRestrictedProfile(
-                getResources().getString(R.string.user_new_profile_name));
+        UserInfo newUserInfo = mUserManager.createRestrictedProfile(mAddingUserName);
         assignDefaultPhoto(newUserInfo);
         return newUserInfo;
     }
 
     private UserInfo createTrustedUser() {
-        UserInfo newUserInfo = mUserManager.createUser(
-                getResources().getString(R.string.user_new_user_name), 0);
+        UserInfo newUserInfo = mUserManager.createUser(mAddingUserName, 0);
         if (newUserInfo != null) {
             assignDefaultPhoto(newUserInfo);
         }
@@ -418,6 +417,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void onManageUserClicked(int userId, boolean newUser) {
+        mAddingUser = false;
         if (userId == UserPreference.USERID_GUEST_DEFAULTS) {
             Bundle extras = new Bundle();
             extras.putBoolean(UserDetailsSettings.EXTRA_USER_GUEST, true);
@@ -453,6 +453,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void onUserCreated(int userId) {
         mAddedUserId = userId;
+        mAddingUser = false;
         if (mUserManager.getUserInfo(userId).isRestricted()) {
             showDialog(DIALOG_SETUP_PROFILE);
         } else {
@@ -653,6 +654,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private void addUserNow(final int userType) {
         synchronized (mUserLock) {
             mAddingUser = true;
+            mAddingUserName = userType == USER_TYPE_USER ? getString(R.string.user_new_user_name)
+                    : getString(R.string.user_new_profile_name);
             //updateUserList();
             new Thread() {
                 public void run() {
@@ -664,10 +667,10 @@ public class UserSettings extends SettingsPreferenceFragment
                         user = createRestrictedProfile();
                     }
                     if (user == null) {
+                        mAddingUser = false;
                         return;
                     }
                     synchronized (mUserLock) {
-                        mAddingUser = false;
                         if (userType == USER_TYPE_USER) {
                             mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
                             mHandler.sendMessage(mHandler.obtainMessage(
@@ -775,7 +778,7 @@ public class UserSettings extends SettingsPreferenceFragment
             UserPreference pref = new UserPreference(getPrefContext(), null,
                     UserPreference.USERID_UNKNOWN, null, null);
             pref.setEnabled(false);
-            pref.setTitle(R.string.user_new_user_name);
+            pref.setTitle(mAddingUserName);
             pref.setIcon(getEncircledDefaultIcon());
             userPreferences.add(pref);
         }
@@ -830,7 +833,7 @@ public class UserSettings extends SettingsPreferenceFragment
             boolean moreUsers = mUserManager.canAddMoreUsers();
             mAddUser.setOrder(Preference.DEFAULT_ORDER);
             preferenceScreen.addPreference(mAddUser);
-            mAddUser.setEnabled(moreUsers);
+            mAddUser.setEnabled(moreUsers && !mAddingUser);
             if (!moreUsers) {
                 mAddUser.setSummary(getString(R.string.user_add_max_count, getMaxRealUsers()));
             } else {
@@ -991,7 +994,6 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onDismiss(DialogInterface dialog) {
         synchronized (mUserLock) {
-            mAddingUser = false;
             mRemovingUserId = -1;
             updateUserList();
         }
