@@ -44,7 +44,8 @@
         <com.android.settings.applications.DefaultHomePreference
             android:key="default_home"
             android:title="@string/home_app"
-            android:summary="@string/no_default_home" />
+            android:summary="@string/no_default_home"
+            settings:keywords="@string/keywords_home" />
 
         <com.android.settings.applications.DefaultBrowserPreference
             android:key="default_browser"
