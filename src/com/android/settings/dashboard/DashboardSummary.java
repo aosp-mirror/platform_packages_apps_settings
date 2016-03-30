@@ -39,6 +39,7 @@ import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
+import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
 
@@ -114,6 +115,10 @@ public class DashboardSummary extends InstrumentedFragment
         for (Condition c : mConditionManager.getVisibleConditions()) {
             MetricsLogger.visible(getContext(), c.getMetricsConstant());
         }
+        for (Tile suggestion : mSuggestionParser.getSuggestions()) {
+            MetricsLogger.action(getContext(), MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
+                    DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion));
+        }
     }
 
     @Override
@@ -124,6 +129,10 @@ public class DashboardSummary extends InstrumentedFragment
         mSummaryLoader.setListening(false);
         for (Condition c : mConditionManager.getVisibleConditions()) {
             MetricsLogger.hidden(getContext(), c.getMetricsConstant());
+        }
+        for (Tile suggestion : mSuggestionParser.getSuggestions()) {
+            MetricsLogger.action(getContext(), MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
+                    DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion));
         }
     }
 

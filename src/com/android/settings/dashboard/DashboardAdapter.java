@@ -225,6 +225,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_SUGGESTION,
+                                DashboardAdapter.getSuggestionIdentifier(mContext, suggestion));
                         ((SettingsActivity) mContext).startSuggestion(suggestion.intent);
                     }
                 });
@@ -259,6 +261,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
+                        DashboardAdapter.getSuggestionIdentifier(mContext, suggestion));
                 disableSuggestion(suggestion);
                 mSuggestions.remove(suggestion);
                 recountItems();
@@ -376,6 +380,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             }
         }
         return null;
+    }
+
+    public static String getSuggestionIdentifier(Context context, Tile suggestion) {
+        String packageName = suggestion.intent.getComponent().getPackageName();
+        if (packageName.equals(context.getPackageName())) {
+            // Since Settings provides several suggestions, fill in the class instead of the
+            // package for these.
+            packageName = suggestion.intent.getComponent().getClassName();
+        }
+        return packageName;
     }
 
     public static class DashboardItemHolder extends RecyclerView.ViewHolder {
