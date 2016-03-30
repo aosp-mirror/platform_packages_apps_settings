@@ -47,6 +47,10 @@ public class PreviewPagerAdapter extends PagerAdapter {
                                Configuration[] configurations) {
         mPreviewFrames = new TouchBlockingFrameLayout[previewSampleResIds.length];
 
+        // We need to get the copy of the original configuration before we call
+        // createConfigurationContext() as that call changes the current configuration for the App.
+        final Configuration origConfig = context.getResources().getConfiguration();
+
         for (int i = 0; i < previewSampleResIds.length; ++i) {
             mPreviewFrames[i] = (TouchBlockingFrameLayout) LayoutInflater.from(context)
                     .inflate(R.layout.preview_frame_container, null);
@@ -69,6 +73,10 @@ public class PreviewPagerAdapter extends PagerAdapter {
                 mPreviewFrames[i].addView(sampleView);
             }
         }
+
+        // Create a context with the original App configuration since the last configuration passed
+        // to createConfigurationContext() becomes the configuration for any new views inflated.
+        context.createConfigurationContext(origConfig);
     }
 
     @Override
