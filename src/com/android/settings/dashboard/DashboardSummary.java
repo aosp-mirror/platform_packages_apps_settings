@@ -25,12 +25,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
+import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
@@ -109,7 +111,9 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
-        Log.d(TAG, "onResume");
+        for (Condition c : mConditionManager.getVisibleConditions()) {
+            MetricsLogger.visible(getContext(), c.getMetricsConstant());
+        }
     }
 
     @Override
@@ -118,6 +122,9 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsDrawerActivity) getActivity()).remCategoryListener(this);
         mSummaryLoader.setListening(false);
+        for (Condition c : mConditionManager.getVisibleConditions()) {
+            MetricsLogger.hidden(getContext(), c.getMetricsConstant());
+        }
     }
 
     @Override

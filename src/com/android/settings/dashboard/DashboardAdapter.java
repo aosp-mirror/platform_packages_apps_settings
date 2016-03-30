@@ -28,6 +28,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -343,18 +345,26 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public void onClick(View v) {
         if (v.getTag() == mExpandedCondition) {
+            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
+                    mExpandedCondition.getMetricsConstant());
             mExpandedCondition.onPrimaryClick();
         } else {
             mExpandedCondition = (Condition) v.getTag();
+            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND,
+                    mExpandedCondition.getMetricsConstant());
             notifyDataSetChanged();
         }
     }
 
     public void onExpandClick(View v) {
         if (v.getTag() == mExpandedCondition) {
+            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_COLLAPSE,
+                    mExpandedCondition.getMetricsConstant());
             mExpandedCondition = null;
         } else {
             mExpandedCondition = (Condition) v.getTag();
+            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND,
+                    mExpandedCondition.getMetricsConstant());
         }
         notifyDataSetChanged();
     }

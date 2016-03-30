@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 public class DndCondition extends Condition {
@@ -110,6 +111,11 @@ public class DndCondition extends Condition {
         } else {
             throw new IllegalArgumentException("Unexpected index " + index);
         }
+    }
+
+    @Override
+    public int getMetricsConstant() {
+        return MetricsEvent.SETTINGS_CONDITION_DND;
     }
 
     public static class Receiver extends BroadcastReceiver {

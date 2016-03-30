@@ -25,6 +25,8 @@ import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardAdapter;
 
@@ -89,6 +91,9 @@ public class ConditionAdapterUtils {
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            MetricsLogger.action(v.getContext(),
+                                    MetricsEvent.ACTION_SETTINGS_CONDITION_BUTTON,
+                                    condition.getMetricsConstant());
                             condition.onActionClick(index);
                         }
                     });
