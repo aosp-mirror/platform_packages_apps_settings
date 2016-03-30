@@ -13,56 +13,66 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/conversation_background"
-    android:paddingTop="@dimen/conversation_message_list_padding"
-    android:paddingStart="@dimen/conversation_message_list_padding"
-    android:paddingEnd="@dimen/conversation_message_list_padding"
-    android:orientation="vertical"
-    android:importantForAccessibility="noHideDescendants">
+    android:fillViewport="true" >
 
-    <com.android.settings.display.ConversationMessageView
+    <view class="com.android.settings.TouchBlockingFrameLayout"
+        android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:incoming="false"
-        app:messageText="@string/screen_zoom_conversation_message_1"
-        app:timestampText="@string/screen_zoom_conversation_timestamp_1"
-        app:iconText="@string/screen_zoom_conversation_icon_alex"
-        app:iconTextColor="@color/message_icon_text_outgoing"
-        app:iconBackgroundColor="@color/message_icon_background_outgoing" />
+        android:layout_height="wrap_content">
 
-    <com.android.settings.display.ConversationMessageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:incoming="true"
-        app:messageText="@string/screen_zoom_conversation_message_2"
-        app:timestampText="@string/screen_zoom_conversation_timestamp_2"
-        app:iconText="@string/screen_zoom_conversation_icon_pete"
-        app:iconTextColor="@color/message_icon_text_incoming"
-        app:iconBackgroundColor="@color/message_icon_background_incoming" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/conversation_background"
+            android:paddingTop="@dimen/conversation_message_list_padding"
+            android:paddingStart="@dimen/conversation_message_list_padding"
+            android:paddingEnd="@dimen/conversation_message_list_padding"
+            android:orientation="vertical"
+            android:importantForAccessibility="noHideDescendants">
 
-    <com.android.settings.display.ConversationMessageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:incoming="false"
-        app:messageText="@string/screen_zoom_conversation_message_3"
-        app:timestampText="@string/screen_zoom_conversation_timestamp_3"
-        app:iconText="@string/screen_zoom_conversation_icon_alex"
-        app:iconTextColor="@color/message_icon_text_outgoing"
-        app:iconBackgroundColor="@color/message_icon_background_outgoing" />
+            <com.android.settings.display.ConversationMessageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:incoming="false"
+                app:messageText="@string/screen_zoom_conversation_message_1"
+                app:timestampText="@string/screen_zoom_conversation_timestamp_1"
+                app:iconText="@string/screen_zoom_conversation_icon_alex"
+                app:iconTextColor="@color/message_icon_text_outgoing"
+                app:iconBackgroundColor="@color/message_icon_background_outgoing" />
 
-    <com.android.settings.display.ConversationMessageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:incoming="true"
-        app:messageText="@string/screen_zoom_conversation_message_4"
-        app:timestampText="@string/screen_zoom_conversation_timestamp_4"
-        app:iconText="@string/screen_zoom_conversation_icon_pete"
-        app:iconTextColor="@color/message_icon_text_incoming"
-        app:iconBackgroundColor="@color/message_icon_background_incoming" />
+            <com.android.settings.display.ConversationMessageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:incoming="true"
+                app:messageText="@string/screen_zoom_conversation_message_2"
+                app:timestampText="@string/screen_zoom_conversation_timestamp_2"
+                app:iconText="@string/screen_zoom_conversation_icon_pete"
+                app:iconTextColor="@color/message_icon_text_incoming"
+                app:iconBackgroundColor="@color/message_icon_background_incoming" />
 
-</LinearLayout>
+            <com.android.settings.display.ConversationMessageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:incoming="false"
+                app:messageText="@string/screen_zoom_conversation_message_3"
+                app:timestampText="@string/screen_zoom_conversation_timestamp_3"
+                app:iconText="@string/screen_zoom_conversation_icon_alex"
+                app:iconTextColor="@color/message_icon_text_outgoing"
+                app:iconBackgroundColor="@color/message_icon_background_outgoing" />
+
+            <com.android.settings.display.ConversationMessageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:incoming="true"
+                app:messageText="@string/screen_zoom_conversation_message_4"
+                app:timestampText="@string/screen_zoom_conversation_timestamp_4"
+                app:iconText="@string/screen_zoom_conversation_icon_pete"
+                app:iconTextColor="@color/message_icon_text_incoming"
+                app:iconBackgroundColor="@color/message_icon_background_incoming" />
+        </LinearLayout>
+    </view>
+</ScrollView>
