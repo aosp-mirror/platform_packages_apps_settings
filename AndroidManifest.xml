@@ -1041,6 +1041,19 @@
                 android:value="com.android.settings.applications.ProcessStatsSummary" />
         </activity>
 
+        <activity android:name="Settings$AppMemoryUsageActivity"
+                  android:label="@string/app_list_memory_use"
+                  android:icon="@drawable/ic_settings_memory">
+            <intent-filter>
+                <action android:name="android.settings.APP_MEMORY_USAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.device" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.ProcessStatsUi" />
+        </activity>
+
         <activity android:name="Settings$AllApplicationsActivity"
                 android:label="@string/applications_settings"
                 android:taskAffinity="">
