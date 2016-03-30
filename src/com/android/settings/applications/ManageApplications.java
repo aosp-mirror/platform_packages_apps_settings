@@ -644,7 +644,7 @@ public class ManageApplications extends InstrumentedFragment
     }
 
     public void setHasDisabled(boolean hasDisabledApps) {
-        if (mListType == LIST_TYPE_HIGH_POWER) {
+        if (mListType != LIST_TYPE_MAIN) {
             return;
         }
         mFilterAdapter.setFilterEnabled(FILTER_APPS_ENABLED, hasDisabledApps);
