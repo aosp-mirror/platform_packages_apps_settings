@@ -648,8 +648,13 @@ public class ChooseLockGeneric extends SettingsActivity {
                                 mFingerprintManager.setActiveUser(UserHandle.myUserId());
                             }
                         });
+            } else {
+                // The removal callback will call finish, once all fingerprints are removed.
+                // We need to wait for that to occur, otherwise, the UI will still show that
+                // fingerprints exist even though they are (about to) be removed depending on
+                // the race condition.
+                finish();
             }
-            finish();
         }
 
         @Override
