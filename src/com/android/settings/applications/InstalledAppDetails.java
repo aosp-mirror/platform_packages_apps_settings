@@ -134,7 +134,6 @@ public class InstalledAppDetails extends AppInfoBase
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
-    private static final int DLG_FACTORY_RESET = DLG_BASE + 4;
 
     private static final String KEY_HEADER = "header_view";
     private static final String KEY_NOTIFICATION = "notification_settings";
@@ -473,7 +472,7 @@ public class InstalledAppDetails extends AppInfoBase
                 uninstallPkg(mAppEntry.info.packageName, true, false);
                 return true;
             case UNINSTALL_UPDATES:
-                showDialogInner(DLG_FACTORY_RESET, 0);
+                uninstallPkg(mAppEntry.info.packageName, false, false);
                 return true;
         }
         return false;
@@ -667,19 +666,6 @@ public class InstalledAppDetails extends AppInfoBase
                             public void onClick(DialogInterface dialog, int which) {
                                 // Force stop
                                 forceStopPackage(mAppEntry.info.packageName);
-                            }
-                        })
-                        .setNegativeButton(R.string.dlg_cancel, null)
-                        .create();
-            case DLG_FACTORY_RESET:
-                return new AlertDialog.Builder(getActivity())
-                        .setTitle(getActivity().getText(R.string.app_factory_reset_dlg_title))
-                        .setMessage(getActivity().getText(R.string.app_factory_reset_dlg_text))
-                        .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Clear user data here
-                                uninstallPkg(mAppEntry.info.packageName,
-                                        false, false);
                             }
                         })
                         .setNegativeButton(R.string.dlg_cancel, null)
