@@ -50,7 +50,7 @@ class EditPinPreference extends CustomEditTextPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        final EditText editText = getEditText();
+        final EditText editText = (EditText) view.findViewById(android.R.id.edit);
 
         if (editText != null) {
             editText.setInputType(InputType.TYPE_CLASS_NUMBER |

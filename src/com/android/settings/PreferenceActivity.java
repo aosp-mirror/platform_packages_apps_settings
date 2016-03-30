@@ -17,7 +17,6 @@ package com.android.settings;
 
 import android.annotation.Nullable;
 import android.os.Bundle;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -57,7 +56,7 @@ public class PreferenceActivity extends SettingsActivity {
                 || PreferenceActivityFragment.class.getName().equals(fragmentName);
     }
 
-    public static class PreferenceActivityFragment extends PreferenceFragment {
+    public static class PreferenceActivityFragment extends SettingsPreferenceFragment {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             ((PreferenceActivity) getActivity()).mFragment = this;
@@ -69,6 +68,14 @@ public class PreferenceActivity extends SettingsActivity {
                 return true;
             }
             return super.onPreferenceTreeClick(preference);
+        }
+
+        @Override
+        protected int getMetricsCategory() {
+            if (getActivity() instanceof InstrumentedPreferenceActivity) {
+                return ((InstrumentedPreferenceActivity) getActivity()).getMetricsCategory();
+            }
+            return InstrumentedFragment.PREFERENCE_ACTIVITY_FRAGMENT;
         }
     }
 
