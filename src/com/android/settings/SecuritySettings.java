@@ -130,6 +130,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockPatternUtils;
+    private ManagedLockPasswordProvider mManagedPasswordProvider;
 
     private SwitchPreference mVisiblePatternProfile;
     private SwitchPreference mUnifyProfile;
@@ -164,6 +165,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         mLockPatternUtils = new LockPatternUtils(getActivity());
 
+        mManagedPasswordProvider = ManagedLockPasswordProvider.get(getActivity(), MY_USER_ID);
+
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         mUm = UserManager.get(getActivity());
@@ -177,7 +180,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     private static int getResIdForLockUnlockScreen(Context context,
-            LockPatternUtils lockPatternUtils, int userId) {
+            LockPatternUtils lockPatternUtils, ManagedLockPasswordProvider managedPasswordProvider,
+            int userId) {
         final boolean isMyUser = userId == MY_USER_ID;
         int resid = 0;
         if (!lockPatternUtils.isSecure(userId)) {
@@ -205,6 +209,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     resid = isMyUser ? R.xml.security_settings_password
                             : R.xml.security_settings_password_profile;
                     break;
+                case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
+                    resid = managedPasswordProvider.getResIdForLockUnlockScreen(!isMyUser);
+                    break;
             }
         }
         return resid;
@@ -225,7 +232,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         root = getPreferenceScreen();
 
         // Add options for lock/unlock screen
-        final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils, MY_USER_ID);
+        final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils,
+                mManagedPasswordProvider, MY_USER_ID);
         addPreferencesFromResource(resid);
 
         // DO or PO installed in the user may disallow to change password.
@@ -237,7 +245,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             addPreferencesFromResource(R.xml.security_settings_profile);
             addPreferencesFromResource(R.xml.security_settings_unification);
             final int profileResid = getResIdForLockUnlockScreen(
-                    getActivity(), mLockPatternUtils, mProfileChallengeUserId);
+                    getActivity(), mLockPatternUtils, mManagedPasswordProvider,
+                    mProfileChallengeUserId);
             addPreferencesFromResource(profileResid);
             maybeAddFingerprintPreference(root, mProfileChallengeUserId);
             if (!mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)) {
@@ -794,6 +803,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             final List<SearchIndexableResource> index = new ArrayList<SearchIndexableResource>();
 
             final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
+            final ManagedLockPasswordProvider managedPasswordProvider =
+                    ManagedLockPasswordProvider.get(context, MY_USER_ID);
             final DevicePolicyManager dpm = (DevicePolicyManager)
                     context.getSystemService(Context.DEVICE_POLICY_SERVICE);
             final UserManager um = UserManager.get(context);
@@ -807,7 +818,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                             || !isPasswordManaged(profileUserId, context, dpm))) {
                 // Add options for lock/unlock screen
                 final int resId = getResIdForLockUnlockScreen(context, lockPatternUtils,
-                        MY_USER_ID);
+                        managedPasswordProvider, MY_USER_ID);
                 index.add(getSearchResource(context, resId));
             }
 
@@ -815,7 +826,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     && lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)
                     && !isPasswordManaged(profileUserId, context, dpm)) {
                 index.add(getSearchResource(context, getResIdForLockUnlockScreen(context,
-                        lockPatternUtils, profileUserId)));
+                        lockPatternUtils, managedPasswordProvider, profileUserId)));
             }
 
             if (um.isAdminUser()) {
@@ -832,7 +843,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
 
             final SearchIndexableResource sir = getSearchResource(context,
-                    SecuritySubSettings.getResIdForLockUnlockSubScreen(context, lockPatternUtils));
+                    SecuritySubSettings.getResIdForLockUnlockSubScreen(context, lockPatternUtils,
+                            managedPasswordProvider));
             sir.className = SecuritySubSettings.class.getName();
             index.add(sir);
 
@@ -1038,7 +1050,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             root = null;
 
             final int resid = getResIdForLockUnlockSubScreen(getActivity(),
-                    new LockPatternUtils(getContext()));
+                    new LockPatternUtils(getContext()),
+                    ManagedLockPasswordProvider.get(getContext(), MY_USER_ID));
             addPreferencesFromResource(resid);
 
             // lock after preference
@@ -1176,7 +1189,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         private static int getResIdForLockUnlockSubScreen(Context context,
-                LockPatternUtils lockPatternUtils) {
+                LockPatternUtils lockPatternUtils,
+                ManagedLockPasswordProvider managedPasswordProvider) {
             if (lockPatternUtils.isSecure(MY_USER_ID)) {
                 switch (lockPatternUtils.getKeyguardStoredPasswordQuality(MY_USER_ID)) {
                     case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
@@ -1188,6 +1202,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
                     case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
                         return R.xml.security_settings_password_sub;
+                    case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
+                        return managedPasswordProvider.getResIdForLockUnlockSubScreen();
                 }
             } else if (!lockPatternUtils.isLockScreenDisabled(MY_USER_ID)) {
                 return R.xml.security_settings_slide_sub;

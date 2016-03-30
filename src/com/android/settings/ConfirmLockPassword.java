@@ -121,7 +121,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
             mIsAlpha = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == storedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == storedQuality
-                    || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == storedQuality;
+                    || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == storedQuality
+                    || DevicePolicyManager.PASSWORD_QUALITY_MANAGED == storedQuality;
 
             mImm = (InputMethodManager) getActivity().getSystemService(
                     Context.INPUT_METHOD_SERVICE);

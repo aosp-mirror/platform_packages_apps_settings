@@ -150,6 +150,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
             case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
             case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
+            case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
                 return R.string.screen_pinning_unlock_password;
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                 if (mLockPatternUtils.isLockPatternEnabled(UserHandle.myUserId())) {

@@ -92,6 +92,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private static final String KEY_UNLOCK_SET_PIN = "unlock_set_pin";
         private static final String KEY_UNLOCK_SET_PASSWORD = "unlock_set_password";
         private static final String KEY_UNLOCK_SET_PATTERN = "unlock_set_pattern";
+        private static final String KEY_UNLOCK_SET_MANAGED = "unlock_set_managed";
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
@@ -120,6 +121,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private FingerprintManager mFingerprintManager;
         private int mUserId;
         private boolean mHideDrawer = false;
+        private ManagedLockPasswordProvider mManagedPasswordProvider;
 
         protected boolean mForFingerprint = false;
 
@@ -180,6 +182,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else {
                 mUserId = targetUser;
             }
+
+            mManagedPasswordProvider = ManagedLockPasswordProvider.get(getActivity(), mUserId);
 
             if (mPasswordConfirmed) {
                 updatePreferencesOrFinish();
@@ -356,6 +360,13 @@ public class ChooseLockGeneric extends SettingsActivity {
                 Preference password = findPreference(KEY_UNLOCK_SET_PASSWORD);
                 password.setTitle(R.string.fingerprint_unlock_set_unlock_password);
             }
+
+            if (mManagedPasswordProvider.isSettingManagedPasswordSupported()) {
+                Preference managed = findPreference(KEY_UNLOCK_SET_MANAGED);
+                managed.setTitle(mManagedPasswordProvider.getPickerOptionTitle(mForFingerprint));
+            } else {
+                removePreference(KEY_UNLOCK_SET_MANAGED);
+            }
         }
 
         private void updateCurrentPreference() {
@@ -380,7 +391,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                     return KEY_UNLOCK_SET_PIN;
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
                     return KEY_UNLOCK_SET_PASSWORD;
+                case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
+                    return KEY_UNLOCK_SET_MANAGED;
                 case DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED:
                     return KEY_UNLOCK_SET_NONE;
             }
@@ -462,6 +476,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
                         disabledByAdmin = adminEnforcedQuality
                                 > DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
+                    } else if (KEY_UNLOCK_SET_MANAGED.equals(key)) {
+                        enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_MANAGED
+                                && mManagedPasswordProvider.isManagedPasswordChoosable();
+                        disabledByAdmin = adminEnforcedQuality
+                                > DevicePolicyManager.PASSWORD_QUALITY_MANAGED;
                     }
                     if (hideDisabled) {
                         visible = enabled;
@@ -508,11 +527,16 @@ public class ChooseLockGeneric extends SettingsActivity {
                 switch (preference.getKey()) {
                     case KEY_UNLOCK_SET_PATTERN:
                     case KEY_UNLOCK_SET_PIN:
-                    case KEY_UNLOCK_SET_PASSWORD: {
+                    case KEY_UNLOCK_SET_PASSWORD:
+                    case KEY_UNLOCK_SET_MANAGED: {
                         preference.setSummary(summary);
                     } break;
                 }
             }
+        }
+
+        protected Intent getLockManagedPasswordIntent(boolean requirePassword, String password) {
+            return mManagedPasswordProvider.createIntent(requirePassword, password);
         }
 
         protected Intent getLockPasswordIntent(Context context, int quality,
@@ -593,7 +617,9 @@ public class ChooseLockGeneric extends SettingsActivity {
         private Intent getIntentForUnlockMethod(int quality, boolean disabled) {
             Intent intent = null;
             final Context context = getActivity();
-            if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
+            if (quality >= DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
+                intent = getLockManagedPasswordIntent(mRequirePassword, mUserPassword);
+            } else if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
                 int minLength = mDPM.getPasswordMinimumLength(null, mUserId);
                 if (minLength < MIN_PASSWORD_LENGTH) {
                     minLength = MIN_PASSWORD_LENGTH;
@@ -721,6 +747,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
+                case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
                     if (hasFingerprints && isProfile) {
                         return R.string
                                 .unlock_disable_frp_warning_content_password_fingerprint_profile;
@@ -759,6 +786,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else if (KEY_UNLOCK_SET_NONE.equals(unlockMethod)) {
                 updateUnlockMethodAndFinish(
                         DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, false /* disabled */ );
+            } else if (KEY_UNLOCK_SET_MANAGED.equals(unlockMethod)) {
+                maybeEnableEncryption(DevicePolicyManager.PASSWORD_QUALITY_MANAGED, false);
             } else if (KEY_UNLOCK_SET_PATTERN.equals(unlockMethod)) {
                 maybeEnableEncryption(
                         DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false);
