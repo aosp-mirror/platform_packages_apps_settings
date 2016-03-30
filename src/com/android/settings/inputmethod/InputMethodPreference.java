@@ -55,7 +55,7 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
         OnPreferenceChangeListener {
     private static final String TAG = InputMethodPreference.class.getSimpleName();
     private static final String EMPTY_TEXT = "";
-    private static final int SETTINGS_ICON_LAYOUT = R.layout.preference_settings_icon_widget;
+    private static final int NO_WIDGET = 0;
 
     interface OnSavePreferenceListener {
         /**
@@ -99,8 +99,8 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
         mIsAllowedByOrganization = isAllowedByOrganization;
         mOnSaveListener = onSaveListener;
         if (!isImeEnabler) {
-            // Replace switch widget with settings icon.
-            setWidgetLayoutResource(SETTINGS_ICON_LAYOUT);
+            // Remove switch widget.
+            setWidgetLayoutResource(NO_WIDGET);
         }
         // Disable on/off switch texts.
         setSwitchTextOn(EMPTY_TEXT);
@@ -130,7 +130,7 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
     private boolean isImeEnabler() {
         // If this {@link SwitchPreference} doesn't have a widget layout, we explicitly hide the
         // switch widget at constructor.
-        return getWidgetLayoutResource() != SETTINGS_ICON_LAYOUT;
+        return getWidgetLayoutResource() != NO_WIDGET;
     }
 
     @Override
