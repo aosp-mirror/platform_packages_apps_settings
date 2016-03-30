@@ -27,7 +27,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -40,7 +39,6 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.Toast;
-
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
@@ -340,6 +338,7 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
         mPinDialog.setDialogMessage(message);
     }
 
+    @Override
     public void onPinEntered(EditPinPreference preference, boolean positiveResult) {
         if (!positiveResult) {
             resetDialogState();
@@ -384,7 +383,8 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
         }
     }
 
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mPinToggle) {
             // Get the new, preferred state
             mToState = mPinToggle.isChecked();
