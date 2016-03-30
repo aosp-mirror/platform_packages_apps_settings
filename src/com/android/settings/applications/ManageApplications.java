@@ -106,6 +106,7 @@ public class ManageApplications extends InstrumentedFragment
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_SYSTEM = "showSystem";
     private static final String EXTRA_HAS_ENTRIES = "hasEntries";
+    private static final String EXTRA_HAS_BRIDGE = "hasBridge";
 
     // attributes used as keys when passing values to InstalledAppDetails activity
     public static final String APP_CHG = "chg";
@@ -314,6 +315,8 @@ public class ManageApplications extends InstrumentedFragment
             if (savedInstanceState != null) {
                 mApplications.mHasReceivedLoadEntries =
                         savedInstanceState.getBoolean(EXTRA_HAS_ENTRIES, false);
+                mApplications.mHasReceivedBridgeCallback =
+                        savedInstanceState.getBoolean(EXTRA_HAS_BRIDGE, false);
             }
             mListView.setAdapter(mApplications);
             mListView.setRecyclerListener(mApplications);
@@ -447,6 +450,7 @@ public class ManageApplications extends InstrumentedFragment
         outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
+        outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
     }
 
     @Override
@@ -822,7 +826,7 @@ public class ManageApplications extends InstrumentedFragment
                 if (mExtraInfoBridge != null) {
                     mExtraInfoBridge.resume();
                 }
-                rebuild(true);
+                rebuild(false);
             } else {
                 rebuild(sort);
             }
@@ -855,7 +859,7 @@ public class ManageApplications extends InstrumentedFragment
 
         public void rebuild(boolean eraseold) {
             if (!mHasReceivedLoadEntries
-                    && (mExtraInfoBridge == null || mHasReceivedBridgeCallback)) {
+                    || (mExtraInfoBridge != null && !mHasReceivedBridgeCallback)) {
                 // Don't rebuild the list until all the app entries are loaded.
                 return;
             }
