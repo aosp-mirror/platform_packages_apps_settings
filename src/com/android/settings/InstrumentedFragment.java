@@ -29,6 +29,8 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     public static final int UNDECLARED = 100000;
 
     public static final int DASHBOARD_CONTAINER = UNDECLARED + 1;
+    // Used by PreferenceActivity for the dummy fragment it adds, no useful data here.
+    public static final int PREFERENCE_ACTIVITY_FRAGMENT = UNDECLARED + 2;
 
     /**
      * Declare the view of this category.
