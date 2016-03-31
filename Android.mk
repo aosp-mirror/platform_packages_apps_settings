@@ -35,7 +35,6 @@ LOCAL_AAPT_FLAGS := --auto-add-overlay \
 ifneq ($(INCREMENTAL_BUILDS),)
     LOCAL_PROGUARD_ENABLED := disabled
     LOCAL_JACK_ENABLED := incremental
-    LOCAL_DX_FLAGS := --multi-dex
     LOCAL_JACK_FLAGS := --multi-dex native
 endif
 
