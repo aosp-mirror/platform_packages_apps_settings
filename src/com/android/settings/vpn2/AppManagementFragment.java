@@ -15,19 +15,26 @@
  */
 package com.android.settings.vpn2;
 
+import android.annotation.NonNull;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.util.Log;
 
@@ -77,7 +84,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         public void onForget() {
             // Unset always-on-vpn when forgetting the VPN
             if (isVpnAlwaysOn()) {
-                setAlwaysOnVpn(false);
+                setAlwaysOnVpnByUI(false);
             }
             // Also dismiss and go back to VPN list
             finish();
@@ -159,18 +166,19 @@ public class AppManagementFragment extends SettingsPreferenceFragment
             mPreferenceAlwaysOn.setChecked(false);
             ReplaceExistingVpnFragment.show(this);
         } else {
-            setAlwaysOnVpn(isChecked);
+            setAlwaysOnVpnByUI(isChecked);
         }
         return true;
     }
 
-    private void setAlwaysOnVpn(boolean isEnabled) {
+    private void setAlwaysOnVpnByUI(boolean isEnabled) {
         // Only clear legacy lockdown vpn in system user.
         if (mUserId == UserHandle.USER_SYSTEM) {
             VpnUtils.clearLockdownVpn(getContext());
         }
         mConnectivityManager.setAlwaysOnVpnPackageForUser(mUserId, isEnabled ? mPackageName : null);
         updateUI();
+        showCantConnectNotificationIfNeeded(isEnabled);
     }
 
     private void updateUI() {
@@ -238,6 +246,45 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         return getAlwaysOnVpnPackage() != null && !isVpnAlwaysOn();
     }
 
+    private void showCantConnectNotificationIfNeeded(boolean isEnabledExpected) {
+        // Display notification only when user tries to turn on but system fails to turn it on.
+        if (isEnabledExpected && !isVpnAlwaysOn()) {
+            String appDisplayName = mPackageName;
+            try {
+                appDisplayName = VpnConfig.getVpnLabel(getContext(), mPackageName).toString();
+            } catch (NameNotFoundException e) {
+                // Use default package name as app name. Quietly fail.
+            }
+            postCantConnectNotification(getContext(), appDisplayName,
+                    mPackageUid /* notificationId */);
+        }
+    }
+
+    /**
+     * @param notificationId should be unique to the vpn app, e.g. uid, to keep one notification per
+     *                       vpn app per user
+     */
+    private static void postCantConnectNotification(Context context, @NonNull String vpnName,
+            int notificationId) {
+        final Resources res = context.getResources();
+        // Only action is specified to match cross-profile intent filter set by ManagedProfileSetup
+        final Intent intent = new Intent(Settings.ACTION_VPN_SETTINGS);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        final Notification notification = new Notification.Builder(context)
+                .setContentTitle(res.getString(R.string.vpn_cant_connect_notification_title,
+                        vpnName))
+                .setContentText(res.getString(R.string.vpn_tap_for_vpn_settings))
+                .setSmallIcon(R.drawable.ic_settings_wireless)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build();
+
+        NotificationManager nm = context.getSystemService(NotificationManager.class);
+        nm.notify(notificationId, notification);
+    }
+
     public static class ReplaceExistingVpnFragment extends DialogFragment
             implements DialogInterface.OnClickListener {
 
@@ -260,7 +307,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if (getTargetFragment() instanceof AppManagementFragment) {
-                ((AppManagementFragment) getTargetFragment()).setAlwaysOnVpn(true);
+                ((AppManagementFragment) getTargetFragment()).setAlwaysOnVpnByUI(true);
             }
         }
     }
