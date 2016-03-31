@@ -953,7 +953,7 @@ public class UserSettings extends SettingsPreferenceFragment
             }
         } else if (pref == mEmergencyInfoPreference) {
             Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
         return false;
