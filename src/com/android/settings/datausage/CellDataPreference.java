@@ -121,7 +121,7 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
             if (!Utils.showSimCardTile(getContext()) ||
                     (nextSir != null && currentSir != null &&
                             currentSir.getSubscriptionId() == nextSir.getSubscriptionId())) {
-                setMobileDataEnabled(true);
+                setMobileDataEnabled(false);
                 if (nextSir != null && currentSir != null &&
                         currentSir.getSubscriptionId() == nextSir.getSubscriptionId()) {
                     disableDataForOtherSubscriptions(mSubId);
