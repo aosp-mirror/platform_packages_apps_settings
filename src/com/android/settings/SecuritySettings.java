@@ -104,6 +104,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_SIM_LOCK = "sim_lock";
     private static final String KEY_SHOW_PASSWORD = "show_password";
     private static final String KEY_CREDENTIAL_STORAGE_TYPE = "credential_storage_type";
+    private static final String KEY_USER_CREDENTIALS = "user_credentials";
     private static final String KEY_RESET_CREDENTIALS = "credentials_reset";
     private static final String KEY_CREDENTIALS_INSTALL = "credentials_install";
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
@@ -315,6 +316,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         if (!RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
                 UserManager.DISALLOW_CONFIG_CREDENTIALS, MY_USER_ID)) {
+            RestrictedPreference userCredentials = (RestrictedPreference) root.findPreference(
+                    KEY_USER_CREDENTIALS);
+            userCredentials.checkRestrictionAndSetDisabled(
+                    UserManager.DISALLOW_CONFIG_CREDENTIALS);
             RestrictedPreference credentialStorageType = (RestrictedPreference) root.findPreference(
                     KEY_CREDENTIAL_STORAGE_TYPE);
             credentialStorageType.checkRestrictionAndSetDisabled(
@@ -336,6 +341,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             credentialsManager.removePreference(root.findPreference(KEY_RESET_CREDENTIALS));
             credentialsManager.removePreference(root.findPreference(KEY_CREDENTIALS_INSTALL));
             credentialsManager.removePreference(root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE));
+            credentialsManager.removePreference(root.findPreference(KEY_USER_CREDENTIALS));
         }
 
 

@@ -72,7 +72,7 @@
                 android:persistent="false"
                 android:fragment="com.android.settings.TrustedCredentialsSettings"/>
 
-        <Preference android:key="user_credentials"
+        <com.android.settingslib.RestrictedPreference android:key="user_credentials"
                 android:title="@string/user_credentials"
                 android:summary="@string/user_credentials_summary"
                 android:persistent="false"
