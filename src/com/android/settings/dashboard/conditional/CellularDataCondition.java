@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -80,6 +81,11 @@ public class CellularDataCondition extends Condition {
         } else {
             throw new IllegalArgumentException("Unexpected index " + index);
         }
+    }
+
+    @Override
+    public int getMetricsConstant() {
+        return MetricsEvent.SETTINGS_CONDITION_CELLULAR_DATA;
     }
 
     public static class Receiver extends BroadcastReceiver {
