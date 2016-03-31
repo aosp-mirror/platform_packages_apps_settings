@@ -20,6 +20,8 @@ import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.os.PersistableBundle;
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 public abstract class Condition {
 
@@ -77,6 +79,8 @@ public abstract class Condition {
     public void silence() {
         if (!mIsSilenced) {
             mIsSilenced = true;
+            MetricsLogger.action(mManager.getContext(),
+                    MetricsEvent.ACTION_SETTINGS_CONDITION_DISMISS, getMetricsConstant());
             onSilenceChanged(mIsSilenced);
             notifyChanged();
         }
@@ -109,6 +113,8 @@ public abstract class Condition {
 
     // State.
     public abstract void refreshState();
+
+    public abstract int getMetricsConstant();
 
     // UI.
     public abstract Icon getIcon();

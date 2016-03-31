@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settingslib.WirelessUtils;
@@ -74,6 +75,11 @@ public class AirplaneModeCondition extends Condition {
         } else {
             throw new IllegalArgumentException("Unexpected index " + index);
         }
+    }
+
+    @Override
+    public int getMetricsConstant() {
+        return MetricsEvent.SETTINGS_CONDITION_AIRPLANE_MODE;
     }
 
     public static class Receiver extends BroadcastReceiver {
