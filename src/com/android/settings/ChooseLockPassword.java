@@ -135,7 +135,7 @@ public class ChooseLockPassword extends SettingsActivity {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         // TODO: Fix on phones
         // Disable IME on our window since we provide our own keyboard
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
