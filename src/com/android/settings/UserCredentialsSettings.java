@@ -27,6 +27,8 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.security.Credentials;
 import android.security.IKeyChainService;
 import android.security.KeyChain;
@@ -43,6 +45,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.EnumSet;
 import java.util.SortedMap;
@@ -116,19 +120,34 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
                     new Credential[] {item}).getView(0, null, null);
             infoContainer.addView(view);
 
-            return new AlertDialog.Builder(getActivity())
+            UserManager userManager
+                    = (UserManager) getContext().getSystemService(Context.USER_SERVICE);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                     .setView(root)
                     .setTitle(R.string.user_credential_title)
-                    .setPositiveButton(R.string.done, null)
-                    .setNegativeButton(R.string.trusted_credentials_remove_label,
-                            new DialogInterface.OnClickListener() {
-                                @Override public void onClick(DialogInterface dialog, int id) {
-                                    new RemoveCredentialsTask(getContext(), getTargetFragment())
-                                            .execute(item.alias);
-                                    dialog.dismiss();
-                                }
-                            })
-                    .create();
+                    .setPositiveButton(R.string.done, null);
+
+            final String restriction = UserManager.DISALLOW_CONFIG_CREDENTIALS;
+            final int myUserId = UserHandle.myUserId();
+            if (!RestrictedLockUtils.hasBaseUserRestriction(getContext(), restriction, myUserId)) {
+                DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialog, int id) {
+                        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                                getContext(), restriction, myUserId);
+                        if (admin != null) {
+                            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
+                                    admin);
+                        } else {
+                            new RemoveCredentialsTask(getContext(), getTargetFragment())
+                                    .execute(item.alias);
+                        }
+                        dialog.dismiss();
+                    }
+                };
+                builder.setNegativeButton(R.string.trusted_credentials_remove_label, listener);
+            }
+            return builder.create();
         }
 
         private class RemoveCredentialsTask extends AsyncTask<String, Void, Void> {
