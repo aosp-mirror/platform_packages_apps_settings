@@ -16,6 +16,7 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -38,7 +39,7 @@ public class SummaryLoader {
     public static final String SUMMARY_PROVIDER_FACTORY = "SUMMARY_PROVIDER_FACTORY";
 
     private final Activity mActivity;
-    private final ArrayMap<SummaryProvider, Tile> mSummaryMap = new ArrayMap<>();
+    private final ArrayMap<SummaryProvider, ComponentName> mSummaryMap = new ArrayMap<>();
     private final List<Tile> mTiles = new ArrayList<>();
 
     private final Worker mWorker;
@@ -74,10 +75,15 @@ public class SummaryLoader {
     }
 
     public void setSummary(SummaryProvider provider, final CharSequence summary) {
-        final Tile tile = mSummaryMap.get(provider);
+        final ComponentName component= mSummaryMap.get(provider);
         mHandler.post(new Runnable() {
             @Override
             public void run() {
+                // Since tiles are not always cached (like on locale change for instance),
+                // we need to always get the latest one.
+                Tile tile = mAdapter.getTile(component);
+                if (tile == null) return;
+                if (DEBUG) Log.d(TAG, "setSummary " + tile.title + " - " + summary);
                 tile.summary = summary;
                 mAdapter.notifyChanged(tile);
             }
@@ -138,7 +144,7 @@ public class SummaryLoader {
         SummaryProvider provider = getSummaryProvider(tile);
         if (provider != null) {
             if (DEBUG) Log.d(TAG, "Creating " + tile);
-            mSummaryMap.put(provider, tile);
+            mSummaryMap.put(provider, tile.intent.getComponent());
             if (mListening) {
                 // If we are somehow already listening, put the provider in that state.
                 provider.setListening(true);
