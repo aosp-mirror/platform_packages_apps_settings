@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.android.setupwizardlib.SetupWizardLayout;
 import com.android.setupwizardlib.util.SystemBarHelper;
@@ -75,6 +76,13 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
     @Override
     /* package */ Class<? extends Fragment> getFragmentClass() {
         return SetupChooseLockPasswordFragment.class;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
+        layout.setFitsSystemWindows(false);
     }
 
     @Override

@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.android.setupwizardlib.SetupWizardLayout;
 import com.android.setupwizardlib.view.NavigationBar;
@@ -70,6 +71,13 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
     @Override
     /* package */ Class<? extends Fragment> getFragmentClass() {
         return SetupChooseLockPatternFragment.class;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
+        layout.setFitsSystemWindows(false);
     }
 
     @Override
