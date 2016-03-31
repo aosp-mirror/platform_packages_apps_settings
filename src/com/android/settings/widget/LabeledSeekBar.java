@@ -139,6 +139,9 @@ public class LabeledSeekBar extends SeekBar {
 
     private ExploreByTouchHelper mAccessHelper;
 
+    private boolean mOnMeasureCalled;
+    private boolean mOnAttachedWindowCalled;
+
     public LabeledSeekBar(Context context, AttributeSet attrs) {
         this(context, attrs, com.android.internal.R.attr.seekBarStyle);
     }
@@ -205,10 +208,17 @@ public class LabeledSeekBar extends SeekBar {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mOnMeasureCalled = true;
+        tryInitAccessHelper();
+    }
+
+    @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mAccessHelper = new LabeledSeekBarExploreByTouchHelper(this);
-        ViewCompat.setAccessibilityDelegate(this, mAccessHelper);
+        mOnAttachedWindowCalled = true;
+        tryInitAccessHelper();
     }
 
     @Override
@@ -225,6 +235,18 @@ public class LabeledSeekBar extends SeekBar {
         }
 
         return super.dispatchHoverEvent(event);
+    }
+
+    /**
+     * Initialize accessibility delegation only when both onAttachedWindow and onMeasure
+     * has been called.
+     */
+    private void tryInitAccessHelper() {
+        if (mOnAttachedWindowCalled && mOnMeasureCalled) {
+            mAccessHelper = new LabeledSeekBarExploreByTouchHelper(this);
+            ViewCompat.setAccessibilityDelegate(this, mAccessHelper);
+            mOnAttachedWindowCalled = mOnMeasureCalled = false;
+        }
     }
 
     private void sendClickEventForAccessibility(int progress) {
