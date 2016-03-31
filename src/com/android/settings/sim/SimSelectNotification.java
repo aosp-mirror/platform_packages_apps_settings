@@ -32,6 +32,7 @@ import android.util.Log;
 import com.android.internal.telephony.IccCardConstants;
 import com.android.settings.R;
 import com.android.settings.Settings.SimSettingsActivity;
+import com.android.settings.Utils;
 
 import java.util.List;
 
@@ -45,11 +46,9 @@ public class SimSelectNotification extends BroadcastReceiver {
                 context.getSystemService(Context.TELEPHONY_SERVICE);
         final SubscriptionManager subscriptionManager = SubscriptionManager.from(context);
         final int numSlots = telephonyManager.getSimCount();
-        final boolean isInProvisioning = Settings.Global.getInt(context.getContentResolver(),
-                Settings.Global.DEVICE_PROVISIONED, 0) == 0;
 
-        // Do not create notifications on single SIM devices or when provisiong i.e. Setup Wizard.
-        if (numSlots < 2 || isInProvisioning) {
+        // Do not create notifications on single SIM devices or when provisioning i.e. Setup Wizard.
+        if (numSlots < 2 || !Utils.isDeviceProvisioned(context)) {
             return;
         }
 

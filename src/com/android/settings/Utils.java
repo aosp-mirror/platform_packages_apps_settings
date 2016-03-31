@@ -63,6 +63,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
+import android.provider.Settings;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -1099,6 +1100,11 @@ public final class Utils extends com.android.settingslib.Utils {
                 addAll((PreferenceGroup) pref, ret);
             }
         }
+    }
+
+    public static boolean isDeviceProvisioned(Context context) {
+        return Settings.Global.getInt(context.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0) != 0;
     }
 }
 
