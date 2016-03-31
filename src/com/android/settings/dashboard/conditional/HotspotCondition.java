@@ -21,7 +21,7 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.Utils;
@@ -91,6 +91,11 @@ public class HotspotCondition extends Condition {
         } else {
             throw new IllegalArgumentException("Unexpected index " + index);
         }
+    }
+
+    @Override
+    public int getMetricsConstant() {
+        return MetricsEvent.SETTINGS_CONDITION_HOTSPOT;
     }
 
     public static class Receiver extends BroadcastReceiver {
