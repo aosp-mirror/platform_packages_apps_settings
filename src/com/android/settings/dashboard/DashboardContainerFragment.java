@@ -16,8 +16,10 @@
 
 package com.android.settings.dashboard;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -30,13 +32,19 @@ import android.view.ViewGroup;
 import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.widget.SlidingTabLayout;
+import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 /**
  * Container for Dashboard fragments.
  */
 public final class DashboardContainerFragment extends InstrumentedFragment {
 
+    private static final int INDEX_BRIEF_FRAGMENT = 0;
+    private static final int INDEX_SUMMARY_FRAGMENT = 1;
+
     private ViewPager mViewPager;
+    private View mHeaderView;
     private DashboardViewPagerAdapter mPagerAdapter;
 
     @Override
@@ -54,9 +62,20 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View content = inflater.inflate(R.layout.dashboard_container, parent, false);
         mViewPager = (ViewPager) content.findViewById(R.id.pager);
-        mPagerAdapter = new DashboardViewPagerAdapter(getChildFragmentManager());
+        mPagerAdapter = new DashboardViewPagerAdapter(getContext(), getChildFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
+        mHeaderView = inflater.inflate(R.layout.dashboard_container_header, parent, false);
+        ((SlidingTabLayout) mHeaderView).setViewPager(mViewPager);
         return content;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        final Activity activity = getActivity();
+        if (activity instanceof SettingsDrawerActivity) {
+            ((SettingsDrawerActivity) getActivity()).setContentHeaderView(mHeaderView);
+        }
     }
 
     @Override
@@ -69,15 +88,30 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
 
     private static final class DashboardViewPagerAdapter extends FragmentPagerAdapter {
 
+        private final Context mContext;
 
-        public DashboardViewPagerAdapter(FragmentManager fragmentManager) {
+        public DashboardViewPagerAdapter(Context context, FragmentManager fragmentManager) {
             super(fragmentManager);
+            mContext = context;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case INDEX_BRIEF_FRAGMENT:
+                    return mContext.getString(R.string.page_tab_title_status);
+                case INDEX_SUMMARY_FRAGMENT:
+                    return mContext.getString(R.string.page_tab_title_summary);
+            }
+            return super.getPageTitle(position);
         }
 
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 0:
+                case INDEX_BRIEF_FRAGMENT:
+                    return new DashboardStatusFragment();
+                case INDEX_SUMMARY_FRAGMENT:
                     return new DashboardSummary();
                 default:
                     throw new IllegalArgumentException(
@@ -89,7 +123,7 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
 
         @Override
         public int getCount() {
-            return 1;
+            return 2;
         }
     }
 }
