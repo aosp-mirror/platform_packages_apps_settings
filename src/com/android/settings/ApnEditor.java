@@ -453,11 +453,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             return null;
         } else {
             String[] values = mRes.getStringArray(R.array.mvno_type_entries);
-            if (values[mvnoIndex].equals("None")) {
-                mMvnoMatchData.setEnabled(false);
-            } else {
-                mMvnoMatchData.setEnabled(true);
-            }
+            mMvnoMatchData.setEnabled(mvnoIndex != 0);
             if (newValue != null && newValue.equals(oldValue) == false) {
                 if (values[mvnoIndex].equals("SPN")) {
                     mMvnoMatchData.setText(mTelephonyManager.getSimOperatorName());
