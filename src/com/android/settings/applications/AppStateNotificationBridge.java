@@ -70,6 +70,9 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
         @Override
         public boolean filterApp(AppEntry info) {
+            if (info == null || info.extraInfo == null) {
+                return false;
+            }
             if (info.extraInfo instanceof AppRow) {
                 AppRow row = (AppRow) info.extraInfo;
                 return row.banned;
@@ -85,7 +88,7 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
         @Override
         public boolean filterApp(AppEntry info) {
-            if (info == null) {
+            if (info == null || info.extraInfo == null) {
                 return false;
             }
             AppRow row = (AppRow) info.extraInfo;
@@ -101,7 +104,10 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
         @Override
         public boolean filterApp(AppEntry info) {
-            return info.extraInfo != null && ((AppRow) info.extraInfo).appBypassDnd;
+            if (info == null || info.extraInfo == null) {
+                return false;
+            }
+            return ((AppRow) info.extraInfo).appBypassDnd;
         }
     };
 
@@ -112,7 +118,10 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
         @Override
         public boolean filterApp(AppEntry info) {
-            return info.extraInfo != null && ((AppRow) info.extraInfo).lockScreenSecure
+            if (info == null || info.extraInfo == null) {
+                return false;
+            }
+            return ((AppRow) info.extraInfo).lockScreenSecure
                     && ((AppRow) info.extraInfo).appVisOverride == Notification.VISIBILITY_PRIVATE;
         }
     };
@@ -124,7 +133,10 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
 
         @Override
         public boolean filterApp(AppEntry info) {
-            return info.extraInfo != null && ((AppRow) info.extraInfo).lockScreenSecure
+            if (info == null || info.extraInfo == null) {
+                return false;
+            }
+            return ((AppRow) info.extraInfo).lockScreenSecure
                     && ((AppRow) info.extraInfo).appVisOverride == Notification.VISIBILITY_SECRET;
         }
     };
