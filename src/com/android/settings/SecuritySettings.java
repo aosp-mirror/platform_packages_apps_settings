@@ -697,8 +697,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private void unifyLocks() {
         int profileQuality =
                 mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileChallengeUserId);
-        mLockPatternUtils.clearLock(mProfileChallengeUserId);
-        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false);
+        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false,
+                mCurrentProfilePassword);
         if (profileQuality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
             mLockPatternUtils.saveLockPattern(
                     LockPatternUtils.stringToPattern(mCurrentProfilePassword),
@@ -716,14 +716,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     private void unifyUncompliantLocks() {
-        mLockPatternUtils.clearLock(mProfileChallengeUserId);
-        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false);
+        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false,
+                mCurrentProfilePassword);
         startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                 R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
     }
 
     private void ununifyLocks() {
-        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, true);
         Bundle extras = new Bundle();
         extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
         startFragment(this,

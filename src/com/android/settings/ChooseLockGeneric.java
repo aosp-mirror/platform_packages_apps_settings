@@ -206,7 +206,11 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else if (!mWaitingForConfirmation) {
                 ChooseLockSettingsHelper helper =
                         new ChooseLockSettingsHelper(this.getActivity(), this);
-                if (!helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
+                boolean managedProfileWithUnifiedLock = Utils
+                        .isManagedProfile(UserManager.get(getActivity()), mUserId)
+                        && !mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
+                if (managedProfileWithUnifiedLock
+                        || !helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
                         getString(R.string.unlock_set_unlock_launch_picker_title), true, mUserId)) {
                     mPasswordConfirmed = true; // no password set, so no need to confirm
                     updatePreferencesOrFinish();
@@ -592,7 +596,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
 
             if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
-                mLockPatternUtils.setSeparateProfileChallengeEnabled(mUserId, true);
+                mLockPatternUtils.setSeparateProfileChallengeEnabled(mUserId, true, mUserPassword);
                 mChooseLockSettingsHelper.utils().clearLock(mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
                 removeAllFingerprintTemplatesAndFinish();
