@@ -22,9 +22,12 @@ import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 
@@ -42,12 +45,26 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View content = inflater.inflate(R.layout.dashboard_container, parent, false);
         mViewPager = (ViewPager) content.findViewById(R.id.pager);
         mPagerAdapter = new DashboardViewPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
         return content;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        if (getActivity() == null) return;
+        HelpUtils.prepareHelpMenuItem(getActivity(), menu, R.string.help_uri_dashboard,
+                getClass().getName());
     }
 
     private static final class DashboardViewPagerAdapter extends FragmentPagerAdapter {
