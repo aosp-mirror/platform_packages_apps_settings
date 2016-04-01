@@ -75,9 +75,14 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
         mContext = getActivity();
         mProfileChallengeUserId = Utils.getManagedProfileId(
                 UserManager.get(mContext), UserHandle.myUserId());
-        mSecure = new LockPatternUtils(getActivity()).isSecure(UserHandle.myUserId());
+
+        final LockPatternUtils utils = new LockPatternUtils(getActivity());
+        final boolean isUnified =
+                !utils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId);
+
+        mSecure = utils.isSecure(UserHandle.myUserId());
         mSecureProfile = (mProfileChallengeUserId != UserHandle.USER_NULL)
-                && new LockPatternUtils(getActivity()).isSecure(mProfileChallengeUserId);
+                && (utils.isSecure(mProfileChallengeUserId) || (isUnified && mSecure));
 
         addPreferencesFromResource(R.xml.configure_notification_settings);
 
