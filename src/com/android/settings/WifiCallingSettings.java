@@ -168,11 +168,19 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         CarrierConfigManager configManager = (CarrierConfigManager)
                 getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        boolean isWifiOnlySupported = true;
         if (configManager != null) {
             PersistableBundle b = configManager.getConfig();
             if (b != null) {
                 mEditableWfcMode = b.getBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
+                isWifiOnlySupported = b.getBoolean(
+                        CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, true);
             }
+        }
+
+        if (!isWifiOnlySupported) {
+            mButtonWfcMode.setEntries(R.array.wifi_calling_mode_choices_without_wifi_only);
+            mButtonWfcMode.setEntryValues(R.array.wifi_calling_mode_values_without_wifi_only);
         }
     }
 
