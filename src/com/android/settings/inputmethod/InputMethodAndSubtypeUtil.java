@@ -209,7 +209,12 @@ class InputMethodAndSubtypeUtil {
                         needsToResetSelectedSubtype = true;
                         subtypePrefFound = true;
                     }
-                    if (subtypePref.isChecked()) {
+                    // Checking <code>subtypePref.isEnabled()</code> is insufficient to determine
+                    // whether the user manually enabled this subtype or not.  Implicitly-enabled
+                    // subtypes are also checked just as an indicator to users.  We also need to
+                    // check <code>subtypePref.isEnabled()</code> so that only manually enabled
+                    // subtypes can be saved here.
+                    if (subtypePref.isEnabled() && subtypePref.isChecked()) {
                         subtypesSet.add(subtypeHashCodeStr);
                         if (isCurrentInputMethod) {
                             if (selectedInputMethodSubtype == subtype.hashCode()) {

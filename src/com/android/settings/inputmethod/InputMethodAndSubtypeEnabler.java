@@ -121,8 +121,6 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         super.onPause();
-        // Clear all subtypes of all IMEs to make sure
-        updateImplicitlyEnabledSubtypes(null /* targetImiId */, false /* check */);
         InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
                 mInputMethodInfoList, mHaveHardKeyboard);
     }
