@@ -350,6 +350,11 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         protected void addPreferences() {
             addPreferencesFromResource(R.xml.security_settings_picker);
+
+            // Used for testing purposes
+            findPreference(KEY_UNLOCK_SET_NONE).setViewId(R.id.lock_none);
+            findPreference(KEY_UNLOCK_SET_PIN).setViewId(R.id.lock_pin);
+            findPreference(KEY_UNLOCK_SET_PASSWORD).setViewId(R.id.lock_password);
         }
 
         private void updatePreferenceText() {
