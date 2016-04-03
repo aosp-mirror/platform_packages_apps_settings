@@ -90,6 +90,10 @@ public class EncryptionInterstitial extends SettingsActivity {
 
             addPreferencesFromResource(R.xml.security_settings_encryption_interstitial);
 
+            // Used for testing purposes
+            findPreference(KEY_ENCRYPT_DONT_REQUIRE_PASSWORD)
+                    .setViewId(R.id.encrypt_dont_require_password);
+
             mRequirePasswordToDecrypt = findPreference(KEY_ENCRYPT_REQUIRE_PASSWORD);
             mDontRequirePasswordToDecrypt = findPreference(KEY_ENCRYPT_DONT_REQUIRE_PASSWORD);
             boolean forFingerprint = getActivity().getIntent().getBooleanExtra(
