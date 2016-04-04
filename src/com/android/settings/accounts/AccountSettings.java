@@ -575,9 +575,10 @@ public class AccountSettings extends SettingsPreferenceFragment
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.v(TAG, "Received broadcast: " + intent.getAction());
-            if (intent.getAction().equals(Intent.ACTION_MANAGED_PROFILE_REMOVED)
-                    || intent.getAction().equals(Intent.ACTION_MANAGED_PROFILE_ADDED)) {
+            final String action = intent.getAction();
+            Log.v(TAG, "Received broadcast: " + action);
+            if (action.equals(Intent.ACTION_MANAGED_PROFILE_REMOVED)
+                    || action.equals(Intent.ACTION_MANAGED_PROFILE_ADDED)) {
                 // Clean old state
                 stopListeningToAccountUpdates();
                 cleanUpPreferences();
@@ -590,7 +591,8 @@ public class AccountSettings extends SettingsPreferenceFragment
                 return;
             }
 
-            if (intent.getAction().equals(Intent.ACTION_MANAGED_PROFILE_AVAILABILITY_CHANGED)) {
+            if (action.equals(Intent.ACTION_MANAGED_PROFILE_AVAILABLE)
+                    || action.equals(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE)) {
                 // We assume there's only one managed profile, otherwise this needs to change.
                 ProfileData profileData = mProfiles.valueAt(1);
                 if (intent.getIntExtra(Intent.EXTRA_USER_HANDLE,
@@ -608,7 +610,8 @@ public class AccountSettings extends SettingsPreferenceFragment
                 IntentFilter intentFilter = new IntentFilter();
                 intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_REMOVED);
                 intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_ADDED);
-                intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABILITY_CHANGED);
+                intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
+                intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
                 context.registerReceiver(this, intentFilter);
                 listeningToManagedProfileEvents = true;
             }

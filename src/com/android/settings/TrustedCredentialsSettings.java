@@ -185,7 +185,8 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            if (Intent.ACTION_MANAGED_PROFILE_AVAILABILITY_CHANGED.equals(action) ||
+            if (Intent.ACTION_MANAGED_PROFILE_AVAILABLE.equals(action) ||
+                    Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE.equals(action) ||
                     Intent.ACTION_MANAGED_PROFILE_UNLOCKED.equals(action)) {
                 // Reload all alias
                 final ExpandableListView systemView = (ExpandableListView) mTabHost
@@ -212,7 +213,8 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
         mKeyguardManager = (KeyguardManager) getActivity()
                 .getSystemService(Context.KEYGUARD_SERVICE);
         IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABILITY_CHANGED);
+        filter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
+        filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNLOCKED);
         getActivity().registerReceiver(mWorkProfileChangedReceiver, filter);
     }
