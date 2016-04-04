@@ -16,25 +16,21 @@
 
 package com.android.settings.fingerprint;
 
-import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.fingerprint.FingerprintManager;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.Annotation;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
 import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockGeneric;
