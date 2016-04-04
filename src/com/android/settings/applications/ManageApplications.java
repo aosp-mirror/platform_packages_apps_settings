@@ -350,7 +350,7 @@ public class ManageApplications extends InstrumentedFragment
         pinnedHeader.addView(mSpinnerHeader, 0);
 
         mFilterAdapter.enableFilter(getDefaultFilter());
-        if (mListType == LIST_TYPE_MAIN || mListType == LIST_TYPE_NOTIFICATION) {
+        if (mListType == LIST_TYPE_MAIN) {
             if (UserManager.get(getActivity()).getUserProfiles().size() > 1) {
                 mFilterAdapter.enableFilter(FILTER_APPS_PERSONAL);
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
