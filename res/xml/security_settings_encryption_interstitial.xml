@@ -19,7 +19,7 @@
     android:title="@string/lock_settings_picker_title"
     android:key="lock_settings_picker">
 
-    <Preference
+    <com.android.settings.MultiLinePreference
         android:icon="@drawable/ic_lock_list_icon"
         android:key="encrypt_require_password"
         android:persistent="false"/>
