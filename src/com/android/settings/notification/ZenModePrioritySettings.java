@@ -175,7 +175,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
         mEvents.setChecked(isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_EVENTS));
         mRepeatCallers.setChecked(
                 isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_REPEAT_CALLERS));
-        mRepeatCallers.setEnabled(!isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_CALLS)
+        mRepeatCallers.setVisible(!isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_CALLS)
                 || mPolicy.priorityCallSenders != Policy.PRIORITY_SENDERS_ANY);
         mDisableListeners = false;
     }
