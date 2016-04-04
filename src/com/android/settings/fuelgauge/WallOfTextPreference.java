@@ -21,24 +21,12 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.widget.TextView;
+import com.android.settings.DividerPreference;
 
-public class WallOfTextPreference extends Preference {
-
-    public WallOfTextPreference(Context context) {
-        super(context);
-    }
+public class WallOfTextPreference extends DividerPreference {
 
     public WallOfTextPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-    }
-
-    public WallOfTextPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
-
-    public WallOfTextPreference(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @Override
