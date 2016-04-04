@@ -49,8 +49,6 @@ public class RingtonePreference extends Preference {
 
     private static final String TAG = "RingtonePreference";
 
-    private static int sRequestCode = 100;
-
     private int mRingtoneType;
     private boolean mShowDefault;
     private boolean mShowSilent;
@@ -213,24 +211,18 @@ public class RingtonePreference extends Preference {
     }
     protected void onAttachedToHierarchy(PreferenceManager preferenceManager) {
         super.onAttachedToHierarchy(preferenceManager);
-
-        mRequestCode = sRequestCode++;
     }
 
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == mRequestCode) {
-            if (data != null) {
-                Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+        if (data != null) {
+            Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
 
-                if (callChangeListener(uri != null ? uri.toString() : "")) {
-                    onSaveRingtone(uri);
-                }
+            if (callChangeListener(uri != null ? uri.toString() : "")) {
+                onSaveRingtone(uri);
             }
-
-            return true;
         }
 
-        return false;
+        return true;
     }
 
 }

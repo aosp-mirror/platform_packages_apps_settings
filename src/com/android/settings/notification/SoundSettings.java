@@ -48,7 +48,9 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.TwoStatePreference;
+import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
@@ -82,6 +84,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
     private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
+
+    private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
+    private static final int REQUEST_CODE = 200;
 
     private static final String[] RESTRICTED_KEYS = {
         KEY_MEDIA_VOLUME,
@@ -175,6 +180,13 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         initVibrateWhenRinging();
         updateRingerMode();
         updateEffectsSuppressor();
+
+        if (savedInstanceState != null) {
+            String selectedPreference = savedInstanceState.getString(SELECTED_PREFERENCE_KEY, null);
+            if (!TextUtils.isEmpty(selectedPreference)) {
+                mRequestPreference = (RingtonePreference) findPreference(selectedPreference);
+            }
+        }
     }
 
     @Override
@@ -226,7 +238,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         if (preference instanceof RingtonePreference) {
             mRequestPreference = (RingtonePreference) preference;
             mRequestPreference.onPrepareRingtonePickerIntent(mRequestPreference.getIntent());
-            startActivityForResult(preference.getIntent(), mRequestPreference.getRequestCode());
+            startActivityForResult(preference.getIntent(), REQUEST_CODE);
             return true;
         }
         return super.onPreferenceTreeClick(preference);
@@ -237,6 +249,14 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         if (mRequestPreference != null) {
             mRequestPreference.onActivityResult(requestCode, resultCode, data);
             mRequestPreference = null;
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mRequestPreference != null) {
+            outState.putString(SELECTED_PREFERENCE_KEY, mRequestPreference.getKey());
         }
     }
 
