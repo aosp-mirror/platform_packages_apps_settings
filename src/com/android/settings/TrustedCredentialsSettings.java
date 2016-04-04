@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.KeyguardManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -717,6 +718,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(com.android.internal.R.string.ssl_certificate);
 
+        final DevicePolicyManager dpm = getActivity().getSystemService(DevicePolicyManager.class);
         final ArrayList<View> views =  new ArrayList<View>();
         final ArrayList<String> titles = new ArrayList<String>();
         addCertChain(certHolder, views, titles);
@@ -728,16 +730,17 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
         Spinner spinner = new Spinner(getActivity());
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position,
-                        long id) {
-                    for(int i = 0; i < views.size(); i++) {
-                        views.get(i).setVisibility(i == position ? View.VISIBLE : View.GONE);
-                    }
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                for (int i = 0; i < views.size(); i++) {
+                    views.get(i).setVisibility(i == position ? View.VISIBLE : View.GONE);
                 }
-               @Override
-               public void onNothingSelected(AdapterView<?> parent) { }
-            });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         LinearLayout container = new LinearLayout(getActivity());
         container.setOrientation(LinearLayout.VERTICAL);
@@ -750,47 +753,47 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
             container.addView(certificateView);
         }
         builder.setView(container);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        });
-        final Dialog certDialog = builder.create();
 
-        ViewGroup body = (ViewGroup) container.findViewById(com.android.internal.R.id.body);
-        LayoutInflater inflater = LayoutInflater.from(getActivity());
-        Button removeButton = (Button) inflater.inflate(R.layout.trusted_credential_details,
-                                                        body,
-                                                        false);
+        if (certHolder.mTab == Tab.USER &&
+                !dpm.isCaCertApproved(certHolder.mAlias, certHolder.mProfileId)) {
+            builder.setPositiveButton(R.string.trusted_credentials_trust_label,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            dpm.approveCaCert(certHolder.mAlias, certHolder.mProfileId, true);
+                        }
+                    });
+        } else {
+            // The ok button is optional. Display it only when trust button is not displayed.
+            // User can still dismiss the dialog by other means.
+            builder.setPositiveButton(android.R.string.ok, null);
+        }
+
         if (!mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS,
                 new UserHandle(certHolder.mProfileId))) {
-            body.addView(removeButton);
+            builder.setNegativeButton(certHolder.mTab.getButtonLabel(certHolder),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(final DialogInterface parentDialog, int i) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setMessage(certHolder.mTab.getButtonConfirmation(certHolder));
+                            builder.setPositiveButton(android.R.string.yes,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            new AliasOperation(certHolder).execute();
+                                            dialog.dismiss();
+                                            parentDialog.dismiss();
+                                        }
+                                    });
+                            builder.setNegativeButton(android.R.string.no, null);
+                            AlertDialog alert = builder.create();
+                            alert.show();
+                        }
+                    });
         }
-        removeButton.setText(certHolder.mTab.getButtonLabel(certHolder));
-        removeButton.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage(certHolder.mTab.getButtonConfirmation(certHolder));
-                builder.setPositiveButton(
-                        android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface dialog, int id) {
-                        new AliasOperation(certHolder).execute();
-                        dialog.dismiss();
-                        certDialog.dismiss();
-                    }
-                });
-                builder.setNegativeButton(
-                        android.R.string.no, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-        });
 
-        certDialog.show();
+        builder.show();
     }
 
     private void addCertChain(final CertHolder certHolder,
