@@ -31,6 +31,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
@@ -49,6 +50,7 @@ import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,10 +129,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mAutoBrightnessPreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_AUTO_BRIGHTNESS);
-        }
-
-        if (!isWallpaperSettingAllowed(activity)) {
-            grayPreferenceOut(KEY_WALLPAPER);
         }
 
         if (isLiftToWakeAvailable(activity)) {
@@ -224,10 +222,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 com.android.internal.R.bool.config_allowAllRotations);
     }
 
-    private static boolean isWallpaperSettingAllowed(Context context) {
-        return WallpaperManager.getInstance(context).isWallpaperSettingAllowed();
-    }
-
     private static boolean isLiftToWakeAvailable(Context context) {
         SensorManager sensors = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         return sensors != null && sensors.getDefaultSensor(Sensor.TYPE_WAKE_GESTURE) != null;
@@ -308,6 +302,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mScreenTimeoutPreference.removeUnusableTimeouts(maxTimeout, admin);
         }
         updateTimeoutPreferenceDescription(currentTimeout);
+
+        disablePreferenceIfManaged(KEY_WALLPAPER, UserManager.DISALLOW_SET_WALLPAPER);
     }
 
     private void updateState() {
@@ -429,10 +425,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         return R.string.help_uri_display;
     }
 
-    private void grayPreferenceOut(String key) {
-        Preference pref = findPreference(key);
+    private void disablePreferenceIfManaged(String key, String restriction) {
+        final RestrictedPreference pref = (RestrictedPreference) findPreference(key);
         if (pref != null) {
-            pref.setEnabled(false);
+            pref.setDisabledByAdmin(null);
+            if (RestrictedLockUtils.hasBaseUserRestriction(getActivity(), restriction,
+                    UserHandle.myUserId())) {
+                pref.setEnabled(false);
+            } else {
+                pref.checkRestrictionAndSetDisabled(restriction);
+            }
         }
     }
 
