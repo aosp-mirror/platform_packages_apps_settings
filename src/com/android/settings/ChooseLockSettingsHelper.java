@@ -22,6 +22,7 @@ import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.os.UserManager;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -171,7 +172,8 @@ public final class ChooseLockSettingsHelper {
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, boolean hasChallenge,
-            long challenge, int effectiveUserId) {
+            long challenge, int userId) {
+        final int effectiveUserId = UserManager.get(mActivity).getCredentialOwnerProfile(userId);
         boolean launched = false;
 
         switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(effectiveUserId)) {
@@ -180,7 +182,7 @@ public final class ChooseLockSettingsHelper {
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPattern.InternalActivity.class
                                 : ConfirmLockPattern.class, external,
-                                hasChallenge, challenge, effectiveUserId);
+                                hasChallenge, challenge, userId);
                 break;
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
@@ -191,7 +193,7 @@ public final class ChooseLockSettingsHelper {
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPassword.InternalActivity.class
                                 : ConfirmLockPassword.class, external,
-                                hasChallenge, challenge, effectiveUserId);
+                                hasChallenge, challenge, userId);
                 break;
         }
         return launched;
