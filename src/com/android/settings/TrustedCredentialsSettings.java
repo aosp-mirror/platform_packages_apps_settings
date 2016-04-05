@@ -16,13 +16,9 @@
 
 package com.android.settings;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.KeyguardManager;
-import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.UserInfo;
@@ -41,16 +37,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -67,7 +58,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class TrustedCredentialsSettings extends OptionsMenuFragment {
+public class TrustedCredentialsSettings extends OptionsMenuFragment
+        implements TrustedCredentialsDialogBuilder.DelegateInterface {
 
     private static final String TAG = "TrustedCredentialsSettings";
 
@@ -132,30 +124,6 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
                     return !service.containsCaAlias(alias);
                 case USER:
                     return false;
-            }
-            throw new AssertionError();
-        }
-        private int getButtonLabel(CertHolder certHolder) {
-            switch (this) {
-                case SYSTEM:
-                    if (certHolder.mDeleted) {
-                        return R.string.trusted_credentials_enable_label;
-                    }
-                    return R.string.trusted_credentials_disable_label;
-                case USER:
-                    return R.string.trusted_credentials_remove_label;
-            }
-            throw new AssertionError();
-        }
-        private int getButtonConfirmation(CertHolder certHolder) {
-            switch (this) {
-                case SYSTEM:
-                    if (certHolder.mDeleted) {
-                        return R.string.trusted_credentials_enable_confirmation;
-                    }
-                    return R.string.trusted_credentials_disable_confirmation;
-                case USER:
-                    return R.string.trusted_credentials_remove_confirmation;
             }
             throw new AssertionError();
         }
@@ -603,7 +571,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
         }
     }
 
-    private static class CertHolder implements Comparable<CertHolder> {
+    /* package */ static class CertHolder implements Comparable<CertHolder> {
         public int mProfileId;
         private final IKeyChainService mService;
         private final TrustedCertificateAdapterCommons mAdapter;
@@ -679,6 +647,22 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
         @Override public int hashCode() {
             return mAlias.hashCode();
         }
+
+        public int getUserId() {
+            return mProfileId;
+        }
+
+        public String getAlias() {
+            return mAlias;
+        }
+
+        public boolean isSystemCert() {
+            return mTab == Tab.SYSTEM;
+        }
+
+        public boolean isDeleted() {
+            return mDeleted;
+        }
     }
 
     private View getViewForCertificate(CertHolder certHolder, Tab mTab, View convertView,
@@ -717,90 +701,13 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
     }
 
     private void showCertDialog(final CertHolder certHolder) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(com.android.internal.R.string.ssl_certificate);
-
-        final DevicePolicyManager dpm = getActivity().getSystemService(DevicePolicyManager.class);
-        final ArrayList<View> views =  new ArrayList<View>();
-        final ArrayList<String> titles = new ArrayList<String>();
-        addCertChain(certHolder, views, titles);
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item,
-                titles);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = new Spinner(getActivity());
-        spinner.setAdapter(arrayAdapter);
-        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                for (int i = 0; i < views.size(); i++) {
-                    views.get(i).setVisibility(i == position ? View.VISIBLE : View.GONE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        LinearLayout container = new LinearLayout(getActivity());
-        container.setOrientation(LinearLayout.VERTICAL);
-        container.addView(spinner);
-        for (int i = 0; i < views.size(); ++i) {
-            View certificateView = views.get(i);
-            if (i != 0) {
-                certificateView.setVisibility(View.GONE);
-            }
-            container.addView(certificateView);
-        }
-        builder.setView(container);
-
-        if (certHolder.mTab == Tab.USER &&
-                !dpm.isCaCertApproved(certHolder.mAlias, certHolder.mProfileId)) {
-            builder.setPositiveButton(R.string.trusted_credentials_trust_label,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dpm.approveCaCert(certHolder.mAlias, certHolder.mProfileId, true);
-                        }
-                    });
-        } else {
-            // The ok button is optional. Display it only when trust button is not displayed.
-            // User can still dismiss the dialog by other means.
-            builder.setPositiveButton(android.R.string.ok, null);
-        }
-
-        if (!mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS,
-                new UserHandle(certHolder.mProfileId))) {
-            builder.setNegativeButton(certHolder.mTab.getButtonLabel(certHolder),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(final DialogInterface parentDialog, int i) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage(certHolder.mTab.getButtonConfirmation(certHolder));
-                            builder.setPositiveButton(android.R.string.yes,
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            new AliasOperation(certHolder).execute();
-                                            dialog.dismiss();
-                                            parentDialog.dismiss();
-                                        }
-                                    });
-                            builder.setNegativeButton(android.R.string.no, null);
-                            AlertDialog alert = builder.create();
-                            alert.show();
-                        }
-                    });
-        }
-
-        builder.show();
+        new TrustedCredentialsDialogBuilder(getActivity(), this)
+                .setCertHolder(certHolder)
+                .show();
     }
 
-    private void addCertChain(final CertHolder certHolder,
-            final ArrayList<View> views, final ArrayList<String> titles) {
-
+    @Override
+    public List<X509Certificate> getX509CertsFromCertHolder(CertHolder certHolder) {
         List<X509Certificate> certificates = null;
         try {
             KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
@@ -817,18 +724,13 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
         } catch (RemoteException ex) {
             Log.e(TAG, "RemoteException while retrieving certificate chain for root "
                     + certHolder.mAlias, ex);
-            return;
         }
-        for (X509Certificate certificate : certificates) {
-            addCertDetails(certificate, views, titles);
-        }
+        return certificates;
     }
 
-    private void addCertDetails(X509Certificate certificate, final ArrayList<View> views,
-            final ArrayList<String> titles) {
-        SslCertificate sslCert = new SslCertificate(certificate);
-        views.add(sslCert.inflateCertificateView(getActivity()));
-        titles.add(sslCert.getIssuedTo().getCName());
+    @Override
+    public void removeOrInstallCert(CertHolder certHolder) {
+        new AliasOperation(certHolder).execute();
     }
 
     private class AliasOperation extends AsyncTask<Void, Void, Boolean> {
@@ -854,8 +756,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment {
                 }
             } catch (CertificateEncodingException | SecurityException | IllegalStateException
                     | RemoteException e) {
-                Log.w(TAG, "Error while toggling alias " + mCertHolder.mAlias,
-                        e);
+                Log.w(TAG, "Error while toggling alias " + mCertHolder.mAlias, e);
                 return false;
             }
         }
