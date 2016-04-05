@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Ontkoppel SD-kaart"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Vee USB-berging uit"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Vee SD-kaart uit"</string>
+    <string name="preview_pager_content_description" msgid="8926235999291761243">"Voorskou"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Voorskou, bladsy <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> van <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Maak die teks op skerm kleiner of groter."</string>
     <string name="small_font" msgid="2295331917424072635">"Klein"</string>
@@ -242,7 +243,7 @@
       <item quantity="other">Verwyder gekose tale?</item>
       <item quantity="one">Verwyder gekose taal?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Teks sal in \'n ander taal gewys word"</string>
+    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"Teks sal in \'n ander taal gewys word."</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Kan nie alle tale verwyder nie"</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Hou minstens een voorkeurtaal"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"Sal dalk in sommige programme nie beskikbaar wees nie"</string>
@@ -817,10 +818,20 @@
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Verkieslik Wi-Fi"</item>
     <item msgid="5267397515594230396">"Verkieslik sellulêr"</item>
+    <item msgid="3132912693346866895">"Net Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"Verkieslik Wi-Fi"</item>
+    <item msgid="9006785365352731433">"Verkieslik sellulêr"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values_without_wifi_only">
+    <item msgid="2339246858001475047">"2"</item>
+    <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"As Wi-Fi-oproepe aan is, kan jou foon oproepe deur Wi-Fi-netwerke of jou diensverskaffer se netwerk roeteer, afhangend van jou voorkeur en watter sein die sterkste is. Voordat jy hierdie kenmerk aanskakel, vind by jou diensverskaffer oor tariewe en ander besonderhede uit."</string>
     <string name="home_settings" msgid="212375129455718176">"Tuis"</string>
@@ -1298,12 +1309,18 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Wagwoord is gestel"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN is gestel"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Patroon is ingestel"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"Gebruik jou toestelpatroon om voort te gaan."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"Voer jou toestel-PIN in om voort te gaan."</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"Voer jou toestelwagwoord in om voort te gaan."</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"Gebruik jou werkpatroon om voort te gaan."</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"Voer jou werk-PIN in om voort te gaan."</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"Voer jou werkwagwoord in om voort te gaan."</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Verkeerde PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Verkeerde wagwoord"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Verkeerde patroon"</string>
@@ -1427,8 +1444,6 @@
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"Die program is nie in die lys geïnstalleerde programme gevind nie."</string>
     <string name="clear_data_failed" msgid="7214074331627422248">"Kon nie programdata uitvee nie."</string>
-    <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"Deïnstalleer opdaterings?"</string>
-    <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"Alle opdaterings vir hierdie Android-stelselprogram sal gedeïnstalleer word."</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Vee data uit"</string>
     <string name="clear_failed_dlg_text" msgid="5464475937929941008">"Kon nie data vir program uitvee nie."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Hierdie program het toegang tot die volgende op jou tablet:"</string>
@@ -1539,7 +1554,7 @@
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"Sleutelbord en invoermetodes"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"Virtuele sleutelbord"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Beskikbare virtuele sleutelbord"</string>
-    <string name="add_virtual_keyboard" msgid="2867069766124874859">"Voeg \'n virtuele sleutelbord by"</string>
+    <string name="add_virtual_keyboard" msgid="5783399159348480135">"Voeg virtuele sleutelborde by of wysig hulle"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"Sleutelbordbystand"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"Fisiese sleutelbord"</string>
     <string name="show_ime" msgid="2658582193437188227">"Wys virtuele sleutelbord"</string>
@@ -1588,8 +1603,7 @@
     <string name="input_method_settings" msgid="5801295625486269553">"Instellings"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"Instellings"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"Aktiewe invoermetodes"</string>
-    <!-- no translation found for use_system_language_to_select_input_method_subtypes (5747329075020379587) -->
-    <skip />
+    <string name="use_system_language_to_select_input_method_subtypes" msgid="5747329075020379587">"Gebruik stelseltale"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> instellings"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"Kies aktiewe invoermetodes"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Skermsleutelbord-instellings"</string>
@@ -2199,6 +2213,8 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"Vergeet VPN"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Vervang bestaande VPN?"</string>
     <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"Daar is reeds \'n VPN aan hierdie profiel gekoppel. As jy aan een gekoppel het, sal jou bestaande VPN vervang word."</string>
+    <string name="vpn_cant_connect_notification_title" msgid="820999437026146960">"<xliff:g id="VPN_NAME">%1$s</xliff:g> kan nie koppel nie"</string>
+    <string name="vpn_tap_for_vpn_settings" msgid="582017057346927799">"Tik vir VPN-instellings"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Voeg VPN-profiel by"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Redigeer profiel"</string>
@@ -2493,7 +2509,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibreer"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"\'Net prioriteit\' laat toe"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Outomatiese reëls"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Stel Moenie-steur-nie-skedule"</string>
+    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
+    <skip />
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Maak jou toestel sekere tye stil"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Net prioriteit"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Net wekkers"</string>
@@ -2675,7 +2692,7 @@
     <string name="slot_number" msgid="3762676044904653577">"(Gleuf<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"Maak by verstek oop"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> gebruik in <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Maak tans skakels oop"</string>
+    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Oopmaak van skakels"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Maak gesteunde skakels oop"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Maak oop sonder om te vra"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Gesteunde skakels"</string>
@@ -2730,7 +2747,7 @@
     <string name="app_permissions_group_summary" msgid="2721303391744909000">"<xliff:g id="COUNT_0">%d</xliff:g> van <xliff:g id="COUNT_1">%d</xliff:g> programme toegelaat"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Tik om wakker te maak"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Dubbeltik enige plek op die skerm om die toestel wakker te maak"</string>
-    <string name="domain_urls_title" msgid="3132983644568821250">"Maak tans skakels oop"</string>
+    <string name="domain_urls_title" msgid="3132983644568821250">"Oopmaak van skakels"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Moenie gesteunde skakels oopmaak nie"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Maak <xliff:g id="DOMAIN">%s</xliff:g> oop"</string>
     <string name="domain_urls_summary_some" msgid="3950089361819428455">"Maak <xliff:g id="DOMAIN">%s</xliff:g> en ander URL\'e oop"</string>
@@ -2799,17 +2816,17 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Hierdie foutverslag word tans met jou IT-administrateur gedeel. Kontak jou IT-administrateur vir meer besonderhede."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"Deel"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Weier"</string>
-    <string name="usb_use_charging_only" msgid="167707234832117768">"Laai tans"</string>
+    <string name="usb_use_charging_only" msgid="2180443097365214467">"Hierdie toestel te laai"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Laai net hierdie toestel"</string>
-    <string name="usb_use_power_only" msgid="6304554004177083963">"Kragbron"</string>
-    <string name="usb_use_power_only_desc" msgid="708134382305728112">"Laai die ander gekoppelde toestel"</string>
-    <string name="usb_use_file_transfers" msgid="6978904665877785548">"Lêeroordragte"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"Krag te verskaf"</string>
+    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Krag aan die ander gekoppelde toestel te verskaf"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Lêers oor te dra"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Dra lêers na \'n ander toestel oor"</string>
-    <string name="usb_use_photo_transfers" msgid="8276445551694259039">"Foto-oordrag (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Dra foto\'s oor (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Dra foto\'s of lêers oor as MTP nie gesteun word nie (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
-    <string name="usb_use_MIDI_desc" msgid="6895383550910152384">"Gebruik toestel vir MIDI-invoer"</string>
-    <string name="usb_use" msgid="3372728031108932425">"Gebruik USB vir"</string>
+    <string name="usb_use_MIDI" msgid="870922185938298263">"Toestel as MIDI te gebruik"</string>
+    <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Hierdie toestel as MIDI te gebruik"</string>
+    <string name="usb_use" msgid="3256040963685055320">"Gebruik USB om"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Agtergrondkontrolering"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Volle agtergrondtoegang"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Gebruik teks van die skerm af"</string>
@@ -3026,8 +3043,8 @@
     <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Stel ShortcutManager se koersbeperkingtellers terug"</string>
     <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Stel ShortcutManager se koersbeperking terug?"</string>
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Stel ShortcutManager se koersbeperkingtellers terug?"</string>
-    <!-- no translation found for notification_suggestion_title (4506524937307816475) -->
-    <skip />
-    <!-- no translation found for notification_suggestion_summary (8521159741445416875) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="4506524937307816475">"Beheer sluitskermkennisgewings"</string>
+    <string name="notification_suggestion_summary" msgid="8521159741445416875">"Wys of versteek kennisgewinginhoud"</string>
+    <string name="page_tab_title_status" msgid="8002613076689205483">"Status"</string>
+    <string name="page_tab_title_summary" msgid="4070309266374993258">"Alles"</string>
 </resources>
