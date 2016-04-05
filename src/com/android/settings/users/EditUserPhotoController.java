@@ -50,8 +50,10 @@ import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +71,7 @@ public class EditUserPhotoController {
 
     private static final String CROP_PICTURE_FILE_NAME = "CropEditUserPhoto.jpg";
     private static final String TAKE_PICTURE_FILE_NAME = "TakeEditUserPhoto2.jpg";
+    private static final String NEW_USER_PHOTO_FILE_NAME = "NewUserPhoto.png";
 
     private final int mPhotoSize;
 
@@ -329,9 +332,33 @@ public class EditUserPhotoController {
         if (purge) {
             fullPath.delete();
         }
-        final Uri fileUri =
-                FileProvider.getUriForFile(context, RestrictedProfileSettings.FILE_PROVIDER_AUTHORITY, fullPath);
-        return fileUri;
+        return FileProvider.getUriForFile(context,
+                RestrictedProfileSettings.FILE_PROVIDER_AUTHORITY, fullPath);
+    }
+
+    File saveNewUserPhotoBitmap() {
+        if (mNewUserPhotoBitmap == null) {
+            return null;
+        }
+        try {
+            File file = new File(mContext.getCacheDir(), NEW_USER_PHOTO_FILE_NAME);
+            OutputStream os = new FileOutputStream(file);
+            mNewUserPhotoBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
+            os.flush();
+            os.close();
+            return file;
+        } catch (IOException e) {
+            Log.e(TAG, "Cannot create temp file", e);
+        }
+        return null;
+    }
+
+    static Bitmap loadNewUserPhotoBitmap(File file) {
+        return BitmapFactory.decodeFile(file.getAbsolutePath());
+    }
+
+    void removeNewUserPhotoBitmapFile() {
+        new File(mContext.getCacheDir(), NEW_USER_PHOTO_FILE_NAME).delete();
     }
 
     private static final class AdapterItem {
