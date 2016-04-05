@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD කාඩ් පත ගලවන්න"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB ආචයනය මකන්න"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD කාඩ් පත මකන්න"</string>
+    <string name="preview_pager_content_description" msgid="8926235999291761243">"පෙරදසුන"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> හි <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> පිටුව, පෙරදසුන"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"තිරය මත පෙළ වඩාත් කුඩා හෝ විශාල කරන්න."</string>
     <string name="small_font" msgid="2295331917424072635">"කුඩා"</string>
@@ -242,7 +243,7 @@
       <item quantity="one">තෝරා ගත් භාෂා ඉවත් කරන්නද?</item>
       <item quantity="other">තෝරා ගත් භාෂා ඉවත් කරන්නද?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"පෙළ වෙනත් භාෂාවකින් සංදර්ශනය කරනු ඇත"</string>
+    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"පෙළ වෙනත් භාෂාවකින් සංදර්ශනය කරනු ඇත."</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"සියලු භාෂා ඉවත් කළ නොහැකිය"</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"අඩු තරමින් එක් මනාප භාෂාවක් තබා ගන්න"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"සමහර යෙදුම් තුළ ලබා ගත නොහැකි විය හැකිය"</string>
@@ -817,10 +818,20 @@
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wi-Fi වඩා කැමතියි"</item>
     <item msgid="5267397515594230396">"සෙලියුලර් වඩා කැමතියි"</item>
+    <item msgid="3132912693346866895">"Wi-Fi පමණයි"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"Wi-Fi වඩා කැමතියි"</item>
+    <item msgid="9006785365352731433">"සෙලියුලර් වඩා කැමතියි"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values_without_wifi_only">
+    <item msgid="2339246858001475047">"2"</item>
+    <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi ඇමතීම ක්‍රියාත්මකයි, ඔබේ දුරකථනයට ඔබේ මනාපය සහ සංඥා ප්‍රබලතාව අනුව, Wi-Fi ජාල හරහා හෝ ඔබේ වාහකයේ ජාලය හරහා ඇමතුම් ගමන් කරවිය හැකිය. මෙම විශේෂාංගය ක්‍රියාත්මක කිරීමට පෙර, ගාස්තු සහ අනෙකුත් විස්තර පිළිබඳව ඔබේ වාහකය සමගින් පරීක්ෂා කර බලන්න."</string>
     <string name="home_settings" msgid="212375129455718176">"මුල් පිටුව"</string>
@@ -1300,12 +1311,18 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"මුරපදය සකස් කර ඇත."</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN සකස් කර ඇත."</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"රටාව සකස් කරන ලදි."</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"ඉදිරියට යාමට ඔබගේ උපාංග රටාව භාවිතා කරන්න."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"ඉදිරියට යාමට ඔබගේ උපාංග PIN එක ඇතුළු කරන්න."</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"ඉදිරියට යාමට ඔබගේ උපාංග මුරපදය ඇතුළු කරන්න."</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"දිගටම කරගෙන යාමට ඔබේ කාර්යාල රටාව භාවිත කරන්න."</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"දිගටම කරගෙන යාමට ඔබේ කාර්යාල PIN අංකය ඇතුළු කරන්න."</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"දිගටම කරගෙන යාමට ඔබේ කාර්යාල මුරපදය ඇතුළු කරන්න."</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN එක වැරදියි"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"වැරදි මුරපදය"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"වැරදි රටාවකි"</string>
@@ -1429,8 +1446,6 @@
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"මෙම යෙදුම ස්ථාපනය කළ යෙදුම් ලැයිස්තුවෙහි සොයා නොගත්තේය."</string>
     <string name="clear_data_failed" msgid="7214074331627422248">"යෙදුම් දත්ත හිස් කළ නොහැක."</string>
-    <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"යාවත්කාලීන අස්ථාපනය කරන්නද?"</string>
-    <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"මෙම Android පද්ධති යෙදුමේ සියලු යාවත්කාලීන අස්ථාපනය කරනු ඇත."</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"දත්ත හිස් කිරීම"</string>
     <string name="clear_failed_dlg_text" msgid="5464475937929941008">"යෙදුම සඳහා දත්ත ඉවත් කළ නොහැකි විය."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"මෙම යෙදුමට ඔබගේ ටැබ්ලටයේ පහත දේවල් ප්‍රවේශ කළ හැක:"</string>
@@ -1541,7 +1556,7 @@
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"යතුරු පුවරුව සහ ආදාන ක්‍රම"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"අතථ්‍ය යතුරු පුවරුව"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"ලබා ගත හැකි අතථ්‍ය යතුරු පුවරුව"</string>
-    <string name="add_virtual_keyboard" msgid="2867069766124874859">"අතථ්‍ය යතුරු පුවරුවක් එක් කරන්න"</string>
+    <string name="add_virtual_keyboard" msgid="5783399159348480135">"අතථ්‍ය යතුරු පුවරු එක් කරන්න සහ සංස්කරණය කරන්න"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"යතුරු පුවරු සහාය"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"භෞතික යතුරු පුවරුව"</string>
     <string name="show_ime" msgid="2658582193437188227">"අතථ්‍ය යතුරු පුවරුව පෙන්වන්න"</string>
@@ -1590,8 +1605,7 @@
     <string name="input_method_settings" msgid="5801295625486269553">"සැකසීම්"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"සැකසීම්"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"සක්‍රීය ආදායක මාර්ග"</string>
-    <!-- no translation found for use_system_language_to_select_input_method_subtypes (5747329075020379587) -->
-    <skip />
+    <string name="use_system_language_to_select_input_method_subtypes" msgid="5747329075020379587">"පද්ධති භාෂා භාවිත කරන්න"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> සැකසීම්"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"සක්‍රිය ආදාන ක්‍රම තෝරන්න"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"තිරයමත යතුරුපුවරු සැකසුම්"</string>
@@ -2201,6 +2215,8 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"VPN අමතක කරන්න"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"පවතින VPN ප්‍රතිස්ථාපනය කරන්නද?"</string>
     <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"ඔබට දැනටමත් මෙම උපාංගයට සබැඳි කළ VPN පැතිකඩක් ඇත. ඔබ එකකට සබැඳුණහොත්, ඔබේ පවතින VPN ප්‍රතිස්ථාපනය කරනු ඇත."</string>
+    <string name="vpn_cant_connect_notification_title" msgid="820999437026146960">"<xliff:g id="VPN_NAME">%1$s</xliff:g> හට සම්බන්ධ විය නොහැකිය"</string>
+    <string name="vpn_tap_for_vpn_settings" msgid="582017057346927799">"VPN සැකසීම් සඳහා තට්ටු කරන්න"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"VPN පැතිකඩ එක් කරන්න"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"පැතිකඩ සංස්කරණය කරන්න"</string>
@@ -2495,7 +2511,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"කම්පනය වන්න"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"ප්‍රමුඛතා පමණි ඉඩ දෙයි"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"ස්වයංක්‍රීය රීති"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"බාධා නොකරන්න කාල සටහන සැකසීම"</string>
+    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
+    <skip />
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"නිශ්චිත වේලාවලදී ඔබේ උපාංගය නිහඬ කරන්න"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"ප්‍රමුඛතාව පමණයි"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"එලාම පමණයි"</string>
@@ -2801,17 +2818,17 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"මෙම දෝෂ වාර්තාව ඔබේ IT පරිපාලක සමගින් බෙදා ගනිමින් ඇත. වැඩිදුර විස්තර සඳහා ඔවුන් අමතන්න."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"බෙදා ගන්න"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"ප්‍රතික්ෂේප කිරීම"</string>
-    <string name="usb_use_charging_only" msgid="167707234832117768">"ආරෝපණය වෙමින්"</string>
+    <string name="usb_use_charging_only" msgid="2180443097365214467">"මෙම උපාංගය ආරෝපණය කිරීම"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"මෙම උපාංගය දැන් ආරෝපනය කරන්න"</string>
-    <string name="usb_use_power_only" msgid="6304554004177083963">"බල සැපයුම"</string>
-    <string name="usb_use_power_only_desc" msgid="708134382305728112">"වෙනත් සම්බන්ධිත උපාංග ආරෝපනය කරන්න"</string>
-    <string name="usb_use_file_transfers" msgid="6978904665877785548">"ගොනු මාරු"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"බලය සැපයීම"</string>
+    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"අනෙක් සම්බන්ධිත උපාංගවලට බලය සැපයීම"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"ගොනු මාරු කිරීම"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"වෙනත් උපාංගයකට ගොනු මාරු කරන්න"</string>
-    <string name="usb_use_photo_transfers" msgid="8276445551694259039">"ඡායාරූප හුවමාරුව (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"ඡායාරූප හුවමාරුව (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"MTP සහාය නොදක්වන්නේනම් ඡායාරූප හෝ ගොනු මාරු කරන්න (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
-    <string name="usb_use_MIDI_desc" msgid="6895383550910152384">"MIDI ආදානය සඳහා උපාංගය භාවිත කරන්න"</string>
-    <string name="usb_use" msgid="3372728031108932425">"පහත සඳහා USB භාවිතා කරන්න"</string>
+    <string name="usb_use_MIDI" msgid="870922185938298263">"උපාංගය MIDI ලෙස භාවිත කිරීම"</string>
+    <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"මෙම උපාංගය MIDI ලෙස භාවිත කිරිම"</string>
+    <string name="usb_use" msgid="3256040963685055320">"USB භාවිත කරන්න"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"පසුබිම් පරීක්ෂාව"</string>
     <string name="background_check_title" msgid="4534254315824525593">"පූර්ණ පසුබිම ප්‍රවේශය"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"තිරයේ ඇති පෙළ භාවිතා කරන්න"</string>
@@ -3028,8 +3045,6 @@
     <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"ShortcutManager අගය-සීමා කිරීමේ ගණන් කිරීම් යළි සකසන්නද?"</string>
     <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"ShortcutManager අගය-සීමා කිරීම යළි සකසන්නද?"</string>
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"ShortcutManager අගය-සීමා කිරීමේ ගණන් කිරීම් යළි සකසන්නද?"</string>
-    <!-- no translation found for notification_suggestion_title (4506524937307816475) -->
-    <skip />
-    <!-- no translation found for notification_suggestion_summary (8521159741445416875) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="4506524937307816475">"අගුලු තිර දැනුම්දීම් පාලනය කරන්න"</string>
+    <string name="notification_suggestion_summary" msgid="8521159741445416875">"දැනුම්දීම් අන්තර්ගතය පෙන්වන්න නැතහොත් සඟවන්න"</string>
 </resources>

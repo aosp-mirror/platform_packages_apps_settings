@@ -76,6 +76,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Odpojiť SD kartu"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Vymazať ukladací priestor USB"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Vymazať SD kartu"</string>
+    <string name="preview_pager_content_description" msgid="8926235999291761243">"Ukážka"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Zobraziť ukážku stránky <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> z <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Zväčšite alebo zmenšite text na obrazovke."</string>
     <string name="small_font" msgid="2295331917424072635">"Malé"</string>
@@ -246,7 +247,7 @@
       <item quantity="other">Odstrániť vybraté jazyky?</item>
       <item quantity="one">Odstrániť vybratý jazyk?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Text sa zobrazí v inom jazyku"</string>
+    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"Text sa zobrazí v inom jazyku."</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Nie je možné odstrániť všetky jazyky"</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Ponechajte aspoň jeden preferovaný jazyk"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"Nemusí byť k dispozícii v niektorých aplikáciách"</string>
@@ -835,11 +836,17 @@
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Uprednostniť Wi-Fi"</item>
     <item msgid="5267397515594230396">"Uprednostniť mobilné pripojenie"</item>
+    <item msgid="3132912693346866895">"Len Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
   </string-array>
+    <!-- no translation found for wifi_calling_mode_choices_without_wifi_only:0 (5782108782860004851) -->
+    <!-- no translation found for wifi_calling_mode_choices_without_wifi_only:1 (9006785365352731433) -->
+    <!-- no translation found for wifi_calling_mode_values_without_wifi_only:0 (2339246858001475047) -->
+    <!-- no translation found for wifi_calling_mode_values_without_wifi_only:1 (6200207341126893791) -->
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Ak je zapnuté volanie Wi-Fi, váš telefón môže smerovať volania cez siete Wi-Fi alebo cez sieť vášho operátora. Závisí to od vašich nastavení a od toho, ktorý signál je silnejší. Pred zapnutím tejto funkcie kontaktujte svojho operátora a informujte sa o poplatkoch a ďalších podrobnostiach."</string>
     <string name="home_settings" msgid="212375129455718176">"Domovská stránka"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Obrazovka"</string>
@@ -1318,12 +1325,18 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Heslo bolo nastavené"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Bol nastavený kód PIN"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Vzor bol nastavený"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"Ak chcete pokračovať, použite bezpečnostný vzor zariadenia."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"Ak chcete pokračovať, zadajte kód PIN zariadenia."</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"Ak chcete pokračovať, zadajte heslo zariadenia."</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"Ak chcete pokračovať, použite pracovný bezpečnostný vzor."</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"Ak chcete pokračovať, zadajte pracovný kód PIN."</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"Ak chcete pokračovať, zadajte pracovné heslo."</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Nesprávny kód PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Nesprávne heslo"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Nesprávny vzor"</string>
@@ -1449,8 +1462,6 @@
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"Aplikáciu sa nepodarilo nájsť v zozname nainštalovaných aplikácií."</string>
     <string name="clear_data_failed" msgid="7214074331627422248">"Údaje aplikácie sa nepodarilo vymazať."</string>
-    <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"Odinštalovať aktualizácie?"</string>
-    <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"Všetky aktualizácie tejto systémovej aplikácie systému Android budú odinštalované."</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Vymazať dáta"</string>
     <string name="clear_failed_dlg_text" msgid="5464475937929941008">"Údaje aplikácie sa nepodarilo vymazať."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Táto aplikácia môže pristupovať k nasledujúcim funkciám tabletu:"</string>
@@ -1561,7 +1572,7 @@
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"Klávesnica a metódy vstupu"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"Virtuálna klávesnica"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Dostupná virtuálna klávesnica"</string>
-    <string name="add_virtual_keyboard" msgid="2867069766124874859">"Pridať virtuálnu klávesnicu"</string>
+    <string name="add_virtual_keyboard" msgid="5783399159348480135">"Pridať/upraviť virtuálne klávesnice"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"Pomoc pre klávesnicu"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"Fyzická klávesnica"</string>
     <string name="show_ime" msgid="2658582193437188227">"Zobraziť virtuálnu klávesnicu"</string>
@@ -1610,8 +1621,7 @@
     <string name="input_method_settings" msgid="5801295625486269553">"Nastavenia"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"Nastavenia"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"Aktívne metódy vstupu"</string>
-    <!-- no translation found for use_system_language_to_select_input_method_subtypes (5747329075020379587) -->
-    <skip />
+    <string name="use_system_language_to_select_input_method_subtypes" msgid="5747329075020379587">"Použitie jazykov systému"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Nastavenia <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"Zvoliť aktívne metódy vstupu"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Nastavenia klávesnice na obrazovke"</string>
@@ -2233,6 +2243,8 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"Zabudnúť profil VPN"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Nahradiť existujúce VPN?"</string>
     <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"Už máte pripojenie VPN k tomuto profilu. Ak ste sa už v minulosti pripojili, existujúce VPN bude nahradené."</string>
+    <string name="vpn_cant_connect_notification_title" msgid="820999437026146960">"<xliff:g id="VPN_NAME">%1$s</xliff:g> nie je možné pripojiť"</string>
+    <string name="vpn_tap_for_vpn_settings" msgid="582017057346927799">"Klepnutím zobrazíte nastavenia VPN"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Pridať profil siete VPN"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Upraviť profil"</string>
@@ -2527,7 +2539,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrovanie"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Prioritné"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatické pravidlá"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Nastavte rozvrh režimu Nerušiť"</string>
+    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
+    <skip />
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Stíšenie zariadenia v určitom čase"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Iba prioritné"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Iba budíky"</string>
@@ -2849,17 +2862,17 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Toto hlásenie chyby sa zdieľa s vaším správcom IT. Ak potrebujete ďalšie podrobnosti, kontaktujte ho."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"Zdieľať"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Odmietnuť"</string>
-    <string name="usb_use_charging_only" msgid="167707234832117768">"Nabíja sa"</string>
+    <string name="usb_use_charging_only" msgid="2180443097365214467">"Nabiť toto zariadenie"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Iba nabiť toto zariadenie"</string>
-    <string name="usb_use_power_only" msgid="6304554004177083963">"Zdroj napájania"</string>
-    <string name="usb_use_power_only_desc" msgid="708134382305728112">"Nabiť ďalšie pripojené zariadenie"</string>
-    <string name="usb_use_file_transfers" msgid="6978904665877785548">"Prenosy súborov"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"Nabiť iné zariadenie"</string>
+    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Nabite ďalšie pripojené zariadenie"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Použiť na prenos súborov"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Prenos súborov do iného zariadenia"</string>
-    <string name="usb_use_photo_transfers" msgid="8276445551694259039">"Prenos fotiek (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"prenos fotiek (PTP)."</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Prenos fotiek alebo súborov, keď nie je podporovaný protokol MTP (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="5116404702692483166">"pripojenie zariadenia MIDI,"</string>
-    <string name="usb_use_MIDI_desc" msgid="6895383550910152384">"Použiť zariadenie pre vstup MIDI"</string>
-    <string name="usb_use" msgid="3372728031108932425">"Použiť rozhranie USB na"</string>
+    <string name="usb_use_MIDI" msgid="870922185938298263">"Použiť zariadenie ako MIDI"</string>
+    <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Použite toto zariadenie ako MIDI"</string>
+    <string name="usb_use" msgid="3256040963685055320">"Možnosti použitia pripojenia USB"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Kontrola na pozadí"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Úplný prístup na pozadí"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Použiť text z obrazovky"</string>
@@ -3082,8 +3095,6 @@
     <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Resetovať počítadlá na obmedzenie frekvencie žiadostí v službe ShortcutManager"</string>
     <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Resetovať obmedzovanie frekvencie žiadostí v službe ShortcutManager?"</string>
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Resetovať počítadlá na obmedzenie frekvencie žiadostí v službe ShortcutManager?"</string>
-    <!-- no translation found for notification_suggestion_title (4506524937307816475) -->
-    <skip />
-    <!-- no translation found for notification_suggestion_summary (8521159741445416875) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="4506524937307816475">"Ovládajte upozornenia na zamk. obrazovke"</string>
+    <string name="notification_suggestion_summary" msgid="8521159741445416875">"Zobrazujte si obsah upozornení alebo ho skryte"</string>
 </resources>

@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"გამოაერთე SD ბარათი"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB მეხსიერების წაშლა"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD ბარათის გასუფთავება"</string>
+    <string name="preview_pager_content_description" msgid="8926235999291761243">"გადახედვა"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"გადახედვა, გვერდი <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> / <xliff:g id="NUM_PAGES">%2$d</xliff:g>-დან"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"ეკრანზე ტექსტის დაპატარავება ან გადიდება."</string>
     <string name="small_font" msgid="2295331917424072635">"პატარა"</string>
@@ -242,7 +243,7 @@
       <item quantity="other">გსურთ არჩეული ენების ამოშლა?</item>
       <item quantity="one">გსურთ არჩეული ენის ამოშლა?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"ტექსტი სხვა ენაზე იქნება ნაჩვენები"</string>
+    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"ტექსტი სხვა ენაზე იქნება ნაჩვენები."</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"ყველა ენის ამოშლა ვერ მოხერხდება"</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"შეინარჩუნეთ მინიმუმ ერთი სასურველი ენა"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"შეიძლება მიუწვდომელი იყოს ზოგიერთ აპში"</string>
@@ -817,10 +818,20 @@
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"სასურველია Wi-Fi"</item>
     <item msgid="5267397515594230396">"სასურველია ფიჭური ინტერნეტი"</item>
+    <item msgid="3132912693346866895">"მხოლოდ Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"სასურველია Wi-Fi"</item>
+    <item msgid="9006785365352731433">"სასურველია ფიჭური ინტერნეტი"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values_without_wifi_only">
+    <item msgid="2339246858001475047">"2"</item>
+    <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"როდესაც Wi-Fi ზარი ჩართულია, თქვენს ტელეფონს შეუძლია გადაამისამართოს ზარი Wi-Fi ან თქვენს ოპერატორ ქსელზე, თქვენი პრეფერენციებისა და სიგნალის სიძლიერის მიხედვით. ამ ფუნქციის ჩართვამდე, დააზუსტეთ თქვენს ოპერატორთან შესაძლო თანხები და სხვა დეტალები."</string>
     <string name="home_settings" msgid="212375129455718176">"სახლი"</string>
@@ -1298,12 +1309,18 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"პაროლი გაიგზავნა"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-კოდი გაიგზავნა"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"გრაფიკული გასაღები გაიგზავნა"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"გასაგრძელებლად გამოიყენეთ თქვენი მოწყობილობის ნიმუში."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"გასაგრძელებლად შეიყვანეთ თქვენი მოწყობილობის PIN."</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"გასაგრძელებლად შეიყვანეთ თქვენი მოწყობილობის პაროლი."</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"გასაგრძელებლად, გამოიყენეთ თქვენი სამსახურის ნიმუში."</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"გასაგრძელებლად, შეიყვანეთ თქვენი სამსახურის PIN-კოდი."</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"გასაგრძელებლად, შეიყვანეთ თქვენი სამსახურის პაროლი."</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"არასწორი PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"არასწორი პაროლი"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"არასწორი ნიმუში"</string>
@@ -1339,8 +1356,8 @@
     <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"დაბლოკვის იგივე მეთოდის გამოყენება"</string>
     <string name="lock_settings_profile_unification_summary" msgid="6173594427521995322">"მოწყობილობისთვის სამსახურის პროფილის იდენტური ეკრანის დაბლოკვის მეთოდის გამოყენება"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="8262182734131824214">"გსურთ დაბლოკვის იგივე მეთოდის გამოყენება?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="6953193194108608460">"შეგიძლიათ თქვენი მოწყობილობისთვისა და სამსახურის პროფილისთვის ეკრანის დაბლოკვის საერთო მეთოდი გამოიყენოთ, თუმცა ამ შემთხვევაში, სამსახურის ეკრანის დაბლოკვის მეთოდისთვის მოქმედი წესები თქვენი მოწყობილობის ეკრანის დაბლოკვის მეთოდზეც გავრცელდება."</string>
-    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8903515808297759759">"სამსახურის პროფილის დაბლოკვის ამჟამინდელი მეთოდი თქვენი ორგანიზაციის უსაფრთხოების მოთხოვნებს არ პასუხობს.\n\nშეგიძლიათ თქვენი მოწყობილობისთვისა და სამსახურის პროფილისთვის ეკრანის დაბლოკვის საერთო მეთოდი დააყენოთ, თუმცა ამ შემთხვევაში, სამსახურის ეკრანის დაბლოკვის მეთოდისთვის მოქმედი წესები თქვენი მოწყობილობის ეკრანის დაბლოკვის მეთოდზეც გავრცელდება."</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="6953193194108608460">"შეგიძლიათ თქვენი მოწყობილობისთვისა და სამსახურის პროფილისთვის ეკრანის დაბლოკვის ახალი მეთოდი გამოიყენოთ, თუმცა ამ შემთხვევაში, სამსახურის ეკრანის დაბლოკვის მეთოდისთვის მოქმედი წესები თქვენი მოწყობილობის ეკრანის დაბლოკვის მეთოდზეც გავრცელდება."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8903515808297759759">"სამსახურის პროფილის დაბლოკვის ამჟამინდელი მეთოდი თქვენი ორგანიზაციის უსაფრთხოების მოთხოვნებს არ პასუხობს.\n\nშეგიძლიათ თქვენი მოწყობილობისთვისა და სამსახურის პროფილისთვის ეკრანის დაბლოკვის ახალი მეთოდი დააყენოთ, თუმცა ამ შემთხვევაში, სამსახურის ეკრანის დაბლოკვის მეთოდისთვის მოქმედი წესები თქვენი მოწყობილობის ეკრანის დაბლოკვის მეთოდზეც გავრცელდება."</string>
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="4911420150698686398">"მოწყობილობის დაბლოკვის მეთოდის შეცვლა"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"დაბლოკვის მეთოდის შეცვლა"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"მოწყობილობის იდენტური ეკრანის დაბლოკვის მეთოდი"</string>
@@ -1427,8 +1444,6 @@
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"დაყენებული აპების სიაში ეს აპი ვერ მოიძებნა."</string>
     <string name="clear_data_failed" msgid="7214074331627422248">"აპის მონაცემები ვერ წაიშალა."</string>
-    <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"განახლებების ინსტალაციის გაუქმება?"</string>
-    <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"ამ Android სისტემის აპის ყველა განახლების ინსტალაცია გაუქმდება."</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"მონაცემების წაშლა"</string>
     <string name="clear_failed_dlg_text" msgid="5464475937929941008">"მონაცემები ვერ წაიშალა აპიდან."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"ამ აპლიკაციას თქვენს ტაბლეტზე შემდეგ მონაცემებზე წვდომა შეუძლია:"</string>
@@ -1539,7 +1554,7 @@
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"კლავიატურა და შეყვანის მეთოდები"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"ვირტუალური კლავიატურა"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"ხელმისაწვდომი ვირტუალური კლავიატურა"</string>
-    <string name="add_virtual_keyboard" msgid="2867069766124874859">"ვირტუალური კლავიატურის დამატება"</string>
+    <string name="add_virtual_keyboard" msgid="5783399159348480135">"ვირტუალური კლავიატურების დამატება ან რედაქტირება"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"კლავიატურის დახმარება"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"ფიზიკური კლავიატურა"</string>
     <string name="show_ime" msgid="2658582193437188227">"ვირტუალური კლავიატურის ჩვენება"</string>
@@ -1588,8 +1603,7 @@
     <string name="input_method_settings" msgid="5801295625486269553">"პარამეტრები"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"პარამეტრები"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"შეყვანის აქტიური მეთოდები"</string>
-    <!-- no translation found for use_system_language_to_select_input_method_subtypes (5747329075020379587) -->
-    <skip />
+    <string name="use_system_language_to_select_input_method_subtypes" msgid="5747329075020379587">"სისტემის ენების გამოყენება"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g>-ის პარამეტრები"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"შეყვანის აქტიური მეთოდების შერჩევა"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"ეკრანის კლავიატურის პარამეტრები"</string>
@@ -2199,6 +2213,8 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"VPN-ის დავიწყება"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"გსურთ არსებული VPN-ის ჩანაცვლება?"</string>
     <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"ამ პროფილთან VPN უკვე დაკავშირებულია. ახალ VPN-თან დაკავშირების შემთხვევაში, არსებული ჩანაცვლდება."</string>
+    <string name="vpn_cant_connect_notification_title" msgid="820999437026146960">"<xliff:g id="VPN_NAME">%1$s</xliff:g>-მა კავშირი ვერ დაამყარა"</string>
+    <string name="vpn_tap_for_vpn_settings" msgid="582017057346927799">"შეეხეთ VPN-ის პარამეტრების სანახავად"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"VPN პროფილის დამატება"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"პროფილის რედაქტირება"</string>
@@ -2493,7 +2509,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"ვიბრაცია"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"დაუშვას მხოლოდ პრიორიტეტულები"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"ავტომატური წესები"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"„არ შემაწუხოთ“ რეჟიმის განრიგი"</string>
+    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
+    <skip />
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"გარკვეულ დროს მოწყობილობის დადუმება"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"მხოლოდ პრიორიტეტული"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"მხოლოდ მაღვიძარები"</string>
@@ -2799,17 +2816,17 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"ხარვერზის შესახებ ეს ანგარიში თქვენს IT ადმინისტრატორთან ზიარდება. დამატებითი ინფორმაციისთვის დაუკავშირდით მას."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"გაზიარება"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"უარყოფა"</string>
-    <string name="usb_use_charging_only" msgid="167707234832117768">"მიმდინარეობს დატენვა"</string>
+    <string name="usb_use_charging_only" msgid="2180443097365214467">"ამ მოწყობილობის დატენვა"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"უბრალოდ დამუხტეთ ეს მოწყობილობა"</string>
-    <string name="usb_use_power_only" msgid="6304554004177083963">"დენის მიწოდება"</string>
-    <string name="usb_use_power_only_desc" msgid="708134382305728112">"სხვა დაკავშირებული მოწყობილობის დამუხტვა"</string>
-    <string name="usb_use_file_transfers" msgid="6978904665877785548">"ფაილის გადატანა"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"ელკვების მიწოდება"</string>
+    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"ელკვების სხვა დაკავშირებული მოწყობილობისთვის მიწოდება"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"ფაილების გადაცემა"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"ფაილების სხვა მოწყობილობაზე გადაცემა"</string>
-    <string name="usb_use_photo_transfers" msgid="8276445551694259039">"სურათის გადატანა (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"ფოტოების გადაცემისთვის (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"გადაიტანეთ ფოტოები ან ფაილები, თუ MTP არ არის მხარდაჭერილი (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
-    <string name="usb_use_MIDI_desc" msgid="6895383550910152384">"გამოიყენეთ მოწყობილობა MIDI შეყვანისთვის"</string>
-    <string name="usb_use" msgid="3372728031108932425">"USB-ს გამოყენება"</string>
+    <string name="usb_use_MIDI" msgid="870922185938298263">"მოწყობილობის MIDI-ს სახით გამოყენება"</string>
+    <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"ამ მოწყობილობის MIDI-ს სახით გამოყენება"</string>
+    <string name="usb_use" msgid="3256040963685055320">"აირჩიეთ USB-ს გამოყენების მიზანი:"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"ფონურ რეჟიმში შემოწმება"</string>
     <string name="background_check_title" msgid="4534254315824525593">"სრული წვდომა ფონურ რეჟიმში"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"ტექსტის გამოყენება ეკრანიდან"</string>
@@ -3026,8 +3043,6 @@
     <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"ShortcutManager-ის სიხშირის შემზღუდველი მთვლელების გადაყენება"</string>
     <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"გსურთ ShortcutManager-ის სიხშირის შეზღუდვის გადაყენება?"</string>
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"გსურთ ShortcutManager-ის სიხშირის შემზღუდველი მთვლელების გადაყენება?"</string>
-    <!-- no translation found for notification_suggestion_title (4506524937307816475) -->
-    <skip />
-    <!-- no translation found for notification_suggestion_summary (8521159741445416875) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="4506524937307816475">"მართეთ შეტყობინებები ჩაკეტილ ეკრანზე"</string>
+    <string name="notification_suggestion_summary" msgid="8521159741445416875">"შეტყობინების კონტენტის ჩვენება ან დამალვა"</string>
 </resources>
