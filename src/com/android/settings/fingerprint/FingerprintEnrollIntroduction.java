@@ -39,7 +39,7 @@ import android.widget.AdapterView;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
-import com.android.settings.HelpUtils;
+import com.android.settingslib.HelpUtils;
 import com.android.settings.R;
 import com.android.setupwizardlib.SetupWizardRecyclerLayout;
 import com.android.setupwizardlib.items.IItem;
