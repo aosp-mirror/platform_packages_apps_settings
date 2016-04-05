@@ -19,6 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingEnd="?android:attr/dialogPreferredPadding"
     android:orientation="vertical"
     android:background="?android:attr/selectableItemBackground"
     android:minHeight="?android:attr/listPreferredItemHeightSmall">
@@ -31,7 +32,6 @@
         android:textColor="?android:attr/textColorAlertDialogListItem"
         android:gravity="center_vertical"
         android:paddingStart="20dp"
-        android:paddingEnd="?android:attr/dialogPreferredPadding"
         android:drawableStart="?android:attr/listChoiceIndicatorSingle"
         android:ellipsize="marquee" />
 
