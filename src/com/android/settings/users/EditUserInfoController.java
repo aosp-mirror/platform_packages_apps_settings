@@ -40,6 +40,8 @@ import com.android.settings.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
+import java.io.File;
+
 /**
  * This class encapsulates a Dialog for editing the user nickname and photo.
  */
@@ -61,6 +63,7 @@ public class EditUserInfoController {
     }
 
     public void clear() {
+        mEditUserPhotoController.removeNewUserPhotoBitmapFile();
         mEditUserInfoDialog = null;
         mSavedPhoto = null;
     }
@@ -70,19 +73,25 @@ public class EditUserInfoController {
     }
 
     public void onRestoreInstanceState(Bundle icicle) {
-        mSavedPhoto = (Bitmap) icicle.getParcelable(KEY_SAVED_PHOTO);
+        String pendingPhoto = icicle.getString(KEY_SAVED_PHOTO);
+        if (pendingPhoto != null) {
+            mSavedPhoto = EditUserPhotoController.loadNewUserPhotoBitmap(new File(pendingPhoto));
+        }
         mWaitingForActivityResult = icicle.getBoolean(KEY_AWAITING_RESULT, false);
     }
 
     public void onSaveInstanceState(Bundle outState) {
         if (mEditUserInfoDialog != null && mEditUserInfoDialog.isShowing()
                 && mEditUserPhotoController != null) {
-            outState.putParcelable(KEY_SAVED_PHOTO,
-                    mEditUserPhotoController.getNewUserPhotoBitmap());
+            // Bitmap cannot be stored into bundle because it may exceed parcel limit
+            // Store it in a temporary file instead
+            File file = mEditUserPhotoController.saveNewUserPhotoBitmap();
+            if (file != null) {
+                outState.putString(KEY_SAVED_PHOTO, file.getPath());
+            }
         }
         if (mWaitingForActivityResult) {
-            outState.putBoolean(KEY_AWAITING_RESULT,
-                    mWaitingForActivityResult);
+            outState.putBoolean(KEY_AWAITING_RESULT, mWaitingForActivityResult);
         }
     }
 
