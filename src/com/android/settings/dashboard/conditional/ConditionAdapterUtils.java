@@ -106,7 +106,7 @@ public class ConditionAdapterUtils {
 
     private static void animateChange(final View view, final View content,
             final View detailGroup, final boolean visible) {
-        final int beforeBottom = view.getBottom();
+        final int beforeBottom = content.getBottom();
         setHeight(detailGroup, visible ? LayoutParams.WRAP_CONTENT : 0);
         detailGroup.setVisibility(View.VISIBLE);
         view.addOnLayoutChangeListener(new OnLayoutChangeListener() {
@@ -115,7 +115,7 @@ public class ConditionAdapterUtils {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom,
                     int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                final int afterBottom = v.getBottom();
+                final int afterBottom = content.getBottom();
                 v.removeOnLayoutChangeListener(this);
                 final ObjectAnimator animator = ObjectAnimator.ofInt(content, "bottom",
                         beforeBottom, afterBottom);
