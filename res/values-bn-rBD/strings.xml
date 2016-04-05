@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"SD কার্ড আনমাউন্ট করুন"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"USB সঞ্চয়স্থান মুছে ফেলুন"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"SD কার্ড মুছে ফেলুন"</string>
+    <string name="preview_pager_content_description" msgid="8926235999291761243">"পূর্বরূপ দেখুন"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"পূর্বরূপ, <xliff:g id="NUM_PAGES">%2$d</xliff:g>টির মধ্যে <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> নম্বর পৃষ্ঠা"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"স্ক্রীনের পাঠ্য ছোট বা বড় করুন।"</string>
     <string name="small_font" msgid="2295331917424072635">"ক্ষুদ্র"</string>
@@ -242,7 +243,7 @@
       <item quantity="one">টি নির্বাচিত ভাষা সরাবেন?</item>
       <item quantity="other">টি নির্বাচিত ভাষা সরাবেন?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"পাঠ্য অন্য ভাষায় প্রদর্শিত হবে"</string>
+    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"পাঠ্য অন্য ভাষায় প্রদর্শিত হবে৷"</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"সমস্ত ভাষা সরানো যাবে না"</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"অন্তত পক্ষে একটি পছন্দের ভাষা রাখুন"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"কিছু অ্যাপ্লিকেশানের মধ্যে নাও উপলব্ধ হতে পারে"</string>
@@ -817,10 +818,20 @@
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wi-Fi ব্যবহার করুন"</item>
     <item msgid="5267397515594230396">"পছন্দের মোবাইল নেটওয়ার্ক"</item>
+    <item msgid="3132912693346866895">"শুধুমাত্র Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"২"</item>
     <item msgid="1171822231056612021">"১"</item>
+    <item msgid="3194458950573886239">"০"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"Wi-Fi ব্যবহার করুন"</item>
+    <item msgid="9006785365352731433">"মোবাইল নেটওয়ার্ক ব্যবহার করুন"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values_without_wifi_only">
+    <item msgid="2339246858001475047">"২"</item>
+    <item msgid="6200207341126893791">"১"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi কলিং চালু থাকার সময়ে, আপনার পছন্দ এবং কোন সিগন্যাল বেশী শক্তিশালী তার উপর নির্ভর করে আপনার ফোন Wi-Fi নেটওয়ার্ক বা আপনার পরিষেবা প্রদানকারীর নেটওয়ার্কের মাধ্যমে আপনার কলের রুট তৈরি করে। এই বৈশিষ্ট্যটি চালু করার আগে, আপনার পরিষেবা প্রদানকারীর কাছে ফি-গুলি এবং অন্যান্য বিশদ বিবরণ সম্বন্ধে পরীক্ষা করুন।"</string>
     <string name="home_settings" msgid="212375129455718176">"হোম"</string>
@@ -1298,12 +1309,18 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"পাসওয়ার্ড সেট করা হয়েছে"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"পিন সেট করা হয়েছে"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"প্যাটার্ন সেট করা হয়েছে"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"অবিরত করতে আপনার ডিভাইসের প্যাটার্ন ব্যবহার করুন৷"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"অবিরত করতে আপনার ডিভাইসের পিন লিখুন৷"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"অবিরত করতে আপনার ডিভাইসের পাসওয়ার্ড লিখুন৷"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"অবিরত করতে আপনার কর্মস্থলের প্যাটার্ন ব্যবহার করুন।"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"অবিরত করতে আপনার কর্মস্থলের PIN লিখুন।"</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"অবিরত করতে আপনার কর্মস্থলের পাসওয়ার্ড লিখুন।"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"ভুল পিন"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"ভুল পাসওয়ার্ড"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"ভুল প্যাটার্ন"</string>
@@ -1427,8 +1444,6 @@
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"অ্যাপ্লিকেশানটি ইনস্টল থাকা অ্যাপ্লিকেশানগুলির তালিকায় পাওয়া যায়নি।"</string>
     <string name="clear_data_failed" msgid="7214074331627422248">"অ্যাপ্লিকেশান ডেটা সাফ করা যায়নি।"</string>
-    <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"আপডেটগুলি আইনইনস্টল করবেন?"</string>
-    <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"এই Android সিস্টেম অ্যাপ্লিকেশন থেকে সমস্ত আপডেট আনইনস্টল করা হবে।"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"ডেটা সাফ করুন"</string>
     <string name="clear_failed_dlg_text" msgid="5464475937929941008">"অ্যাপ্লিকেশানের জন্য ডেটা সাফ করা হয়নি।"</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"এই অ্যাপ্লিকেশানটি আপনার ট্যাবলেটের নিম্নলিখিত জিনিস অ্যাক্সেস করতে পারবে:"</string>
@@ -1539,7 +1554,7 @@
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"কীবোর্ড এবং ইনপুট পদ্ধতি"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"ভার্চুয়াল কীবোর্ড"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"উপলব্ধ ভার্চুয়াল কীবোর্ড"</string>
-    <string name="add_virtual_keyboard" msgid="2867069766124874859">"একটি ভার্চুয়াল কীবোর্ড যোগ করুন"</string>
+    <string name="add_virtual_keyboard" msgid="5783399159348480135">"ভার্চুয়াল কীবোর্ড যোগ বা সম্পাদনা করুন"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"কীবোর্ড সহায়তা"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"ফিজিক্যাল কীবোর্ড"</string>
     <string name="show_ime" msgid="2658582193437188227">"ভার্চুয়াল কীবোর্ড দেখান"</string>
@@ -1588,8 +1603,7 @@
     <string name="input_method_settings" msgid="5801295625486269553">"সেটিংস"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"সেটিংস"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"সক্রিয় ইনপুট পদ্ধতিগুলি"</string>
-    <!-- no translation found for use_system_language_to_select_input_method_subtypes (5747329075020379587) -->
-    <skip />
+    <string name="use_system_language_to_select_input_method_subtypes" msgid="5747329075020379587">"সিস্টেমের ভাষাগুলি ব্যবহার করুন"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> সেটিংস"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"সক্রিয় ইনপুট পদ্ধতিগুলি নির্বাচন করুন"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"অন-স্ক্রীন কীবোর্ড সেটিংস"</string>
@@ -2199,6 +2213,8 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"VPN সরিয়ে দিন"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"বিদ্যমান VPN প্রতিস্থাপন করতে চান?"</string>
     <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"এই প্রোফাইলে আপনার ইতিমধ্যেই একটি VPN সংযুক্ত রয়েছে৷ যদি আপনি কোনো একটিতে সংযুক্ত করে থাকেন তবে আপনার বিদ্যমান VPN প্রতিস্থাপন করা হবে৷"</string>
+    <string name="vpn_cant_connect_notification_title" msgid="820999437026146960">"<xliff:g id="VPN_NAME">%1$s</xliff:g> সংযোগ করতে পারেনি"</string>
+    <string name="vpn_tap_for_vpn_settings" msgid="582017057346927799">"VPN সেটিংসে যেতে আলতো চাপুন"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"VPN প্রোফাইল যোগ করুন"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"প্রোফাইল সম্পাদনা করুন"</string>
@@ -2493,7 +2509,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"কম্পন"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"শুধুমাত্র অগ্রাধিকারকে অনুমতি দেয়"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"স্বয়ংক্রিয় নিয়মগুলি"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"\'বিরক্ত করবেন না\' এর সময়সূচী সেট করুন"</string>
+    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
+    <skip />
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"নির্দিষ্ট সময়ে আপনার ডিভাইসটিকে নীরব করুন"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"শুধুমাত্র অগ্রাধিকার"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"শুধুমাত্র অ্যালার্মগুলি"</string>
@@ -2799,17 +2816,17 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"এই ত্রুটির প্রতিবেদনটি আপনার আইটি প্রশাসকের সাথে শেয়ার করা হচ্ছে৷ আরো বিস্তারিত জানার জন্য তাদের সাথে যোগাযোগ করুন৷"</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"শেয়ার করুন"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"প্রত্যাখ্যান করুন"</string>
-    <string name="usb_use_charging_only" msgid="167707234832117768">"চার্জ হচ্ছে"</string>
+    <string name="usb_use_charging_only" msgid="2180443097365214467">"এই ডিভাইসটি চার্জ করুন"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"শুধুমাত্র ডিভাইটি চার্জ করুন"</string>
-    <string name="usb_use_power_only" msgid="6304554004177083963">"পাওয়ার উৎস"</string>
-    <string name="usb_use_power_only_desc" msgid="708134382305728112">"অন্যান্য সংযুক্ত ডিভাইস চার্জ করুন"</string>
-    <string name="usb_use_file_transfers" msgid="6978904665877785548">"ফাইল স্থানান্তরণগুলি"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"পাওয়ার সরবরাহ করুন"</string>
+    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"অন্যান্য সংযুক্ত ডিভাইসে পাওয়ার সরবরাহ করুন"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"ফাইলগুলি স্থানান্তর করুন"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"অন্য ডিভাইসে ফাইলগুলিকে স্থানান্তর করুন"</string>
-    <string name="usb_use_photo_transfers" msgid="8276445551694259039">"ফটো স্থানান্তরণ (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"ফটোগুলির স্থানান্তর (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"যদি MTP সমর্থিত না হয় তবে ফটো বা ফাইলগুলি স্থানান্তর করুন (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
-    <string name="usb_use_MIDI_desc" msgid="6895383550910152384">"MIDI ইনপুটের জন্য ডিভাইস ব্যবহার করুন"</string>
-    <string name="usb_use" msgid="3372728031108932425">"এর জন্য USB ব্যবহার করুন"</string>
+    <string name="usb_use_MIDI" msgid="870922185938298263">"MIDI হিসাবে ডিভাইসটি ব্যবহার করুন"</string>
+    <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"MIDI হিসাবে এই ডিভাইসটি ব্যবহার করুন"</string>
+    <string name="usb_use" msgid="3256040963685055320">"এটি করতে USB ব্যবহার করুন"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"পটভূমি পরীক্ষা করুন"</string>
     <string name="background_check_title" msgid="4534254315824525593">"সম্পূর্ণ পটভূমি অ্যাক্সেস করুন"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"স্ক্রীন থেকে পাঠ্য ব্যবহার করুন"</string>
@@ -3026,8 +3043,6 @@
     <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"ShortcutManager রেট-লিমিটিং কাউন্টারগুলিকে পুনরায় সেট করুন"</string>
     <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"ShortcutManager রেট-লিমিটিং পুনরায় সেট করবেন?"</string>
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"ShortcutManager রেট-লিমিটিং কাউন্টারগুলিকে পুনঃসেট করবেন?"</string>
-    <!-- no translation found for notification_suggestion_title (4506524937307816475) -->
-    <skip />
-    <!-- no translation found for notification_suggestion_summary (8521159741445416875) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="4506524937307816475">"লক স্ক্রীন বিজ্ঞপ্তিগুলি নিয়ন্ত্রণ করুন"</string>
+    <string name="notification_suggestion_summary" msgid="8521159741445416875">"বিজ্ঞপ্তির সামগ্রী দেখান বা লুকান"</string>
 </resources>

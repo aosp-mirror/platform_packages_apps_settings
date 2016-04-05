@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Demonter SD-kort"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Slet USB-lager"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Formatér SD-kort"</string>
+    <string name="preview_pager_content_description" msgid="8926235999291761243">"Eksempelvisning"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Eksempelvisning af skærm <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> af <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Gør teksten på skærmen mindre eller større."</string>
     <string name="small_font" msgid="2295331917424072635">"Lille"</string>
@@ -242,7 +243,7 @@
       <item quantity="one">Vil du fjerne det valgte sprog?</item>
       <item quantity="other">Vil du fjerne de valgte sprog?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Tekst vises på et andet sprog"</string>
+    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"Tekst vises på et andet sprog"</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Du kan ikke fjerne alle sprog."</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Behold mindst ét foretrukket sprog"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"Det er muligvis ikke tilgængeligt i alle apps"</string>
@@ -817,10 +818,20 @@
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"WiFi-netværk er foretrukket"</item>
     <item msgid="5267397515594230396">"Mobilnetværk er foretrukket"</item>
+    <item msgid="3132912693346866895">"Kun Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"WiFi-netværk er foretrukket"</item>
+    <item msgid="9006785365352731433">"Mobilnetværk er foretrukket"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values_without_wifi_only">
+    <item msgid="2339246858001475047">"2"</item>
+    <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Når Wi-Fi-opkald er slået til, kan telefonen dirigere opkald via Wi-Fi-netværk eller dit mobilselskabs netværk, afhængigt af hvad du foretrækker, og hvor signalet er stærkest. Inden du slår denne funktion til, skal du kontakte dit mobilselskab angående gebyrer og andre oplysninger."</string>
     <string name="home_settings" msgid="212375129455718176">"Startskærm"</string>
@@ -1298,12 +1309,18 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Adgangskoden er indstillet"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Pinkoden er blevet indstillet"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Mønsteret er blevet indstillet"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"Brug mønsteret til din enhed for at fortsætte."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"Indtast pinkoden til din enhed for at fortsætte."</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"Indtast adgangskoden til din enhed for at fortsætte."</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"Brug mønsteret til dit arbejde for at fortsætte."</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"Indtast pinkoden til dit arbejde for at fortsætte."</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"Indtast adgangskoden til dit arbejde for at fortsætte."</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Forkert pinkode"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Forkert adgangskode"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Forkert mønster"</string>
@@ -1427,8 +1444,6 @@
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"Appen blev ikke fundet på listen over installerede apps."</string>
     <string name="clear_data_failed" msgid="7214074331627422248">"Appdata kunne ikke ryddes."</string>
-    <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"Vil du afinstallere opdateringer?"</string>
-    <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"Alle opdateringer til dette Android-system afinstalleres."</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Ryd data"</string>
     <string name="clear_failed_dlg_text" msgid="5464475937929941008">"Data for appen kunne ikke ryddes."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Denne app har adgang til følgende på din tablet:"</string>
@@ -1539,7 +1554,7 @@
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"Tastatur og indtastningsmetoder"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"Virtuelt tastatur"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Tilgængeligt virtuelt tastatur"</string>
-    <string name="add_virtual_keyboard" msgid="2867069766124874859">"Tilføj et virtuelt tastatur"</string>
+    <string name="add_virtual_keyboard" msgid="5783399159348480135">"Tilføj/rediger virtuelle tastaturer"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"Hjælp til tastaturet"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"Fysisk tastatur"</string>
     <string name="show_ime" msgid="2658582193437188227">"Vis virtuelt tastatur"</string>
@@ -1588,8 +1603,7 @@
     <string name="input_method_settings" msgid="5801295625486269553">"Indstillinger"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"Indstillinger"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"Aktive inputmetoder"</string>
-    <!-- no translation found for use_system_language_to_select_input_method_subtypes (5747329075020379587) -->
-    <skip />
+    <string name="use_system_language_to_select_input_method_subtypes" msgid="5747329075020379587">"Brug systemsprogene"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g>-indstillinger"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"Vælg aktive inputmetoder"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Indstillinger for skærmens tastatur"</string>
@@ -2199,6 +2213,8 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"Glem VPN"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Vil du erstatte det eksisterende VPN?"</string>
     <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"Der er allerede knyttet et VPN til denne profil. Hvis du har oprettet forbindelse til et nyt, erstattes dit eksisterende VPN."</string>
+    <string name="vpn_cant_connect_notification_title" msgid="820999437026146960">"<xliff:g id="VPN_NAME">%1$s</xliff:g> kan ikke oprette forbindelse"</string>
+    <string name="vpn_tap_for_vpn_settings" msgid="582017057346927799">"Tryk for at gå til VPN-indstillingerne"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Tilføj VPN-profil"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Rediger profil"</string>
@@ -2493,7 +2509,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrer"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Prioritet tillader kun"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatiske regler"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Konfigurer Forstyr ikke-plan"</string>
+    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
+    <skip />
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Gør enheden lydløs på bestemte tidspunkter"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Kun prioritet"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Kun alarmer"</string>
@@ -2799,17 +2816,17 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Denne fejlrapport deles med din it-administrator. Kontakt vedkommende for at få flere oplysninger."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"Del"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Afvis"</string>
-    <string name="usb_use_charging_only" msgid="167707234832117768">"Oplader"</string>
+    <string name="usb_use_charging_only" msgid="2180443097365214467">"Oplad denne enhed"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Oplad denne enhed"</string>
-    <string name="usb_use_power_only" msgid="6304554004177083963">"Strømforsyning"</string>
-    <string name="usb_use_power_only_desc" msgid="708134382305728112">"Oplad den anden tilsluttede enhed"</string>
-    <string name="usb_use_file_transfers" msgid="6978904665877785548">"Filoverførsler"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"Strømforsyning"</string>
+    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Strømforsyning til den anden tilsluttede enhed"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Overfør filer"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Overfør filer til en anden enhed"</string>
-    <string name="usb_use_photo_transfers" msgid="8276445551694259039">"Billedoverførsel (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Til at overføre billeder (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Overfør billeder eller filer, hvis MTP ikke understøttes (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="5116404702692483166">"Til MIDI"</string>
-    <string name="usb_use_MIDI_desc" msgid="6895383550910152384">"Brug enheden til MIDI-indgang"</string>
-    <string name="usb_use" msgid="3372728031108932425">"Brug USB"</string>
+    <string name="usb_use_MIDI" msgid="870922185938298263">"Brug enheden som MIDI"</string>
+    <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Brug denne enhed som MIDI"</string>
+    <string name="usb_use" msgid="3256040963685055320">"Brug USB til"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Baggrundstjek"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Fuld baggrundsadgang"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Brug tekst fra skærmen"</string>
@@ -3026,8 +3043,6 @@
     <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Nulstil tællere til antalsbegrænsning i ShortcutManager"</string>
     <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Vil du nulstille antalsbegrænsning i ShortcutManager?"</string>
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Vil du nulstille tællere til antalsbegrænsning i ShortcutManager?"</string>
-    <!-- no translation found for notification_suggestion_title (4506524937307816475) -->
-    <skip />
-    <!-- no translation found for notification_suggestion_summary (8521159741445416875) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="4506524937307816475">"Kontrollér underretninger for låseskærm"</string>
+    <string name="notification_suggestion_summary" msgid="8521159741445416875">"Vis eller skjul indhold i underretninger"</string>
 </resources>
