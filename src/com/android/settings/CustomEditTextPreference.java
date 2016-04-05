@@ -105,6 +105,7 @@ public class CustomEditTextPreference extends EditTextPreference {
 
         @Override
         public void onDialogClosed(boolean positiveResult) {
+            super.onDialogClosed(positiveResult);
             getCustomizablePreference().onDialogClosed(positiveResult);
         }
 
