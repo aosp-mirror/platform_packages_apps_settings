@@ -74,6 +74,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Montera bort SD-kort"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Radera USB-lagring"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Radera SD-kort"</string>
+    <string name="preview_pager_content_description" msgid="8926235999291761243">"Förhandsgranskning"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Förhandsgranskar sida <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> av <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Gör texten på skärmen större eller mindre."</string>
     <string name="small_font" msgid="2295331917424072635">"Liten"</string>
@@ -242,7 +243,7 @@
       <item quantity="other">Vill du ta bort de valda språken?</item>
       <item quantity="one">Vill du ta bort det valda språket?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Text visas på ett annat språk"</string>
+    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"Text visas på ett annat språk."</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Det går inte att ta bort alla språk"</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Minst ett önskat språk måste finnas kvar"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"Kanske inte är tillgängligt i alla appar"</string>
@@ -817,11 +818,17 @@
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wi-Fi i första hand"</item>
     <item msgid="5267397515594230396">"Mobil i första hand"</item>
+    <item msgid="3132912693346866895">"Endast Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
   </string-array>
+    <!-- no translation found for wifi_calling_mode_choices_without_wifi_only:0 (5782108782860004851) -->
+    <!-- no translation found for wifi_calling_mode_choices_without_wifi_only:1 (9006785365352731433) -->
+    <!-- no translation found for wifi_calling_mode_values_without_wifi_only:0 (2339246858001475047) -->
+    <!-- no translation found for wifi_calling_mode_values_without_wifi_only:1 (6200207341126893791) -->
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"När Wi-Fi-samtal har aktiverats kan mobilen dirigera samtal via Wi-Fi-nätverk eller operatörens nätverk, beroende på dina inställningar och vilken signal som är starkast. Innan du aktiverar funktionen frågar du operatören om eventuella avgifter och annan information."</string>
     <string name="home_settings" msgid="212375129455718176">"Startskärm"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skärm"</string>
@@ -1298,12 +1305,18 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Lösenordet angavs"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-koden angavs"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Lösenordet har angetts"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"Fortsätt genom att ange enhetens grafiska lösenord."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"Fortsätt genom att ange enhetens pinkod."</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"Fortsätt genom att ange enhetens lösenord."</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"Använd det grafiska lösenordet för jobbprofilen om du vill fortsätta."</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"Ange pinkoden för jobbprofilen om du vill fortsätta."</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"Ange lösenordet för jobbprofilen om du vill fortsätta."</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Fel pinkod"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Fel lösenord"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Fel grafiskt lösenord"</string>
@@ -1427,8 +1440,6 @@
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"Appen fanns inte i listan över installerade appar."</string>
     <string name="clear_data_failed" msgid="7214074331627422248">"Det gick inte att ta bort appdata."</string>
-    <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"Vill du avinstallera uppdateringarna?"</string>
-    <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"Alla uppdateringar för Android-systemappen kommer att avinstalleras."</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Ta bort data"</string>
     <string name="clear_failed_dlg_text" msgid="5464475937929941008">"Det gick inte att ta bort data för appen."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Appen har åtkomst till följande på surfplattan:"</string>
@@ -1539,7 +1550,7 @@
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"Tangentbord och inmatningsmetoder"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"Virtuellt tangentbord"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Tillgängligt virtuellt tangentbord"</string>
-    <string name="add_virtual_keyboard" msgid="2867069766124874859">"Lägg till ett virtuellt tangentbord"</string>
+    <string name="add_virtual_keyboard" msgid="5783399159348480135">"Lägg till/ändra virt. tangentbord"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"Hjälp med tangentbord"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"Fysiskt tangentbord"</string>
     <string name="show_ime" msgid="2658582193437188227">"Visa virtuellt tangentbord"</string>
@@ -1588,8 +1599,7 @@
     <string name="input_method_settings" msgid="5801295625486269553">"Inställningar"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"Inställningar"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"Aktiva inmatningsmetoder"</string>
-    <!-- no translation found for use_system_language_to_select_input_method_subtypes (5747329075020379587) -->
-    <skip />
+    <string name="use_system_language_to_select_input_method_subtypes" msgid="5747329075020379587">"Använda systemspråk"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g>-inställningar"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"Välj aktiva inmatningsmetoder"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Inställningar för tangentbordet på skärmen"</string>
@@ -2199,6 +2209,8 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"Glöm VPN"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Vill du byta ut befintligt VPN?"</string>
     <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"Du har redan anslutit ett VPN till den här profilen. Om du ansluter till ett annat ersätts ditt befintliga VPN."</string>
+    <string name="vpn_cant_connect_notification_title" msgid="820999437026146960">"<xliff:g id="VPN_NAME">%1$s</xliff:g> kan inte ansluta"</string>
+    <string name="vpn_tap_for_vpn_settings" msgid="582017057346927799">"Tryck här för VPN-inställningar"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Lägg till VPN-profil"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Redigera profil"</string>
@@ -2493,7 +2505,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibration"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Tillåt endast prioriterade"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatiska regler"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Konfigurera schema för Stör ej"</string>
+    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
+    <skip />
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Stäng av ljudet vissa tider"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Bara prioriterade"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Endast alarm"</string>
@@ -2799,17 +2812,17 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Felrapporten delas med IT-administratören. Kontakta administratören om du vill veta mer."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"Dela"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Avvisa"</string>
-    <string name="usb_use_charging_only" msgid="167707234832117768">"Laddar"</string>
+    <string name="usb_use_charging_only" msgid="2180443097365214467">"Ladda enheten"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Ladda bara den här enheten"</string>
-    <string name="usb_use_power_only" msgid="6304554004177083963">"Strömförsörjning"</string>
-    <string name="usb_use_power_only_desc" msgid="708134382305728112">"Ladda den andra anslutna enheten"</string>
-    <string name="usb_use_file_transfers" msgid="6978904665877785548">"Filöverföringar"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"Strömförsörjning"</string>
+    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Förse den andra anslutna enheten med ström"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Överföra filer"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Överför filer till en annan enhet"</string>
-    <string name="usb_use_photo_transfers" msgid="8276445551694259039">"Fotoöverföring (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Överföring av foton (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Överföra foton eller filer om MTP inte stöds (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
-    <string name="usb_use_MIDI_desc" msgid="6895383550910152384">"Använd enheten för MIDI-indata"</string>
-    <string name="usb_use" msgid="3372728031108932425">"Använd USB för"</string>
+    <string name="usb_use_MIDI" msgid="870922185938298263">"Använda enheten som MIDI"</string>
+    <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Använd den här enheten som MIDI"</string>
+    <string name="usb_use" msgid="3256040963685055320">"Välj vad du vill använda USB-anslutningen till"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Bakgrundskontroll"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Fullständig bakgrundsåtkomst"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Använda text från skärmen"</string>
@@ -3026,8 +3039,10 @@
     <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Återställ räknarna för anropsbegränsning i ShortcutManager"</string>
     <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Vill du återställa anropsbegränsning för ShortcutManager?"</string>
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Vill du återställa räknarna för anropsbegränsning i ShortcutManager?"</string>
-    <!-- no translation found for notification_suggestion_title (4506524937307816475) -->
+    <string name="notification_suggestion_title" msgid="4506524937307816475">"Hantera aviseringar på låsskärmen"</string>
+    <string name="notification_suggestion_summary" msgid="8521159741445416875">"Visa eller dölja innehåll i aviseringar"</string>
+    <!-- no translation found for page_tab_title_status (8002613076689205483) -->
     <skip />
-    <!-- no translation found for notification_suggestion_summary (8521159741445416875) -->
+    <!-- no translation found for page_tab_title_summary (4070309266374993258) -->
     <skip />
 </resources>

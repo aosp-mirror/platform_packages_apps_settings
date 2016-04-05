@@ -75,6 +75,7 @@
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Atvienot SD karti"</string>
     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Dzēst USB krātuvi"</string>
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Dzēst SD karti"</string>
+    <string name="preview_pager_content_description" msgid="8926235999291761243">"Priekšskatījums"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Priekšskatījums, <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>. lapa no <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Palieliniet vai samaziniet tekstu ekrānā."</string>
     <string name="small_font" msgid="2295331917424072635">"Mazs"</string>
@@ -244,7 +245,7 @@
       <item quantity="one">Vai noņemt atlasītās valodas?</item>
       <item quantity="other">Vai noņemt atlasītās valodas?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="5690839673639747130">"Teksts tiks rādīts citā valodā"</string>
+    <string name="dlg_remove_locales_message" msgid="1361354927342876114">"Teksts tiks rādīts citā valodā."</string>
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"Nevar noņemt visas valodas"</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"Paturiet vismaz vienu vēlamo valodu"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"Var nebūt pieejama dažās lietotnēs"</string>
@@ -826,10 +827,20 @@
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Vēlams Wi-Fi tīkls"</item>
     <item msgid="5267397515594230396">"Vēlams mobilais tīkls"</item>
+    <item msgid="3132912693346866895">"Tikai Wi-Fi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2."</item>
     <item msgid="1171822231056612021">"1."</item>
+    <item msgid="3194458950573886239">"0."</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <item msgid="5782108782860004851">"Vēlams Wi-Fi tīkls"</item>
+    <item msgid="9006785365352731433">"Vēlams mobilais tīkls"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values_without_wifi_only">
+    <item msgid="2339246858001475047">"2"</item>
+    <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Ja ir ieslēgti Wi-Fi zvani, varat veikt tālruņa zvanus Wi-Fi tīklos vai savā mobilo sakaru operatora tīkla atkarībā no savām preferencēm un no tā, kurš signāls ir spēcīgāks. Pirms ieslēdzat šo funkciju, sazinieties ar savu mobilo sakaru operatoru, lai noskaidrotu tarifus un citu informāciju."</string>
     <string name="home_settings" msgid="212375129455718176">"Sākums"</string>
@@ -1308,12 +1319,18 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Parole ir iestatīta"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN kods ir iestatīts"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Kombinācija ir iestatīta"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7050256155547273836">"Lai turpinātu, ievadiet ierīces kombināciju."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="1072670959803859869">"Lai turpinātu, ievadiet ierīces PIN kodu."</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1022239625083264596">"Lai turpinātu, ievadiet ierīces paroli."</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4329516059719846858">"Lai turpinātu, izmantojiet darba profila kombināciju."</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3388971861797229529">"Lai turpinātu, ievadiet darba profila PIN kodu."</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="3558648618643096065">"Lai turpinātu, ievadiet darba profila paroli."</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Nepareizs PIN kods"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Nepareiza parole"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Nepareiza kombinācija"</string>
@@ -1438,8 +1455,6 @@
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"Šī lietotne netika atrasta instalēto lietotņu sarakstā."</string>
     <string name="clear_data_failed" msgid="7214074331627422248">"Nevarēja notīrīt lietotnes datus."</string>
-    <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"Vai atinstalēt atjauninājumus?"</string>
-    <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"Tiks atinstalēti visi šīs Android sistēmas lietotnes atjauninājumi."</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Notīrīt datus"</string>
     <string name="clear_failed_dlg_text" msgid="5464475937929941008">"Nevarēja notīrīt lietotnes datus."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Šai lietotnei jūsu planšetdatorā ir šādas piekļuves tiesības:"</string>
@@ -1550,7 +1565,7 @@
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"Tastatūra un ievades metodes"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"Virtuālā tastatūra"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Pieejama virtuālā tastatūra"</string>
-    <string name="add_virtual_keyboard" msgid="2867069766124874859">"Pievienot virtuālo tastatūru"</string>
+    <string name="add_virtual_keyboard" msgid="5783399159348480135">"Pievienot vai rediģēt virt. tastat."</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"Palīdzība par tastatūru"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"Fiziskā tastatūra"</string>
     <string name="show_ime" msgid="2658582193437188227">"Virtuālās tastatūras rādīšana"</string>
@@ -1599,8 +1614,7 @@
     <string name="input_method_settings" msgid="5801295625486269553">"Iestatījumi"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"Iestatījumi"</string>
     <string name="active_input_method_subtypes" msgid="3596398805424733238">"Aktīvās ievades metodes"</string>
-    <!-- no translation found for use_system_language_to_select_input_method_subtypes (5747329075020379587) -->
-    <skip />
+    <string name="use_system_language_to_select_input_method_subtypes" msgid="5747329075020379587">"Sistēmas valodu izmantošana"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> iestatījumi"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"Aktivizēto ievades metožu izvēle"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Ekrāntastatūras iestatījumi"</string>
@@ -2216,6 +2230,8 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"Aizmirst VPN"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Vai aizstāt esošo VPN?"</string>
     <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"Šim profilam jau ir pievienots VPN. Ja izveidosiet savienojumu, esošais VPN tiks aizstāts."</string>
+    <string name="vpn_cant_connect_notification_title" msgid="820999437026146960">"<xliff:g id="VPN_NAME">%1$s</xliff:g>: nevar izveidot savienojumu"</string>
+    <string name="vpn_tap_for_vpn_settings" msgid="582017057346927799">"Pieskarieties, lai atvērtu VPN iestatījumus"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Pievienot VPN profilu"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Rediģēt profilu"</string>
@@ -2510,7 +2526,8 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrozvans"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Tikai prioritārie"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Autom. kārtulas"</string>
-    <string name="zen_mode_automation_suggestion_title" msgid="5026815860958316126">"Režīma Netraucēt grafiks"</string>
+    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
+    <skip />
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Iest. skaņas izsl. noteiktā laikā"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Tikai prioritārie pārtraukumi"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Tikai signāli"</string>
@@ -2824,17 +2841,17 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Šis kļūdas pārskats tiek kopīgots ar jūsu IT administratoru. Lai saņemtu plašāku informāciju, sazinieties ar savu IT administratoru."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"Kopīgot"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Noraidīt"</string>
-    <string name="usb_use_charging_only" msgid="167707234832117768">"Uzlāde"</string>
+    <string name="usb_use_charging_only" msgid="2180443097365214467">"Uzlādēt šo ierīci"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Tikai šīs ierīces uzlāde"</string>
-    <string name="usb_use_power_only" msgid="6304554004177083963">"Strāvas padeve"</string>
-    <string name="usb_use_power_only_desc" msgid="708134382305728112">"Otras pievienotās ierīces uzlāde"</string>
-    <string name="usb_use_file_transfers" msgid="6978904665877785548">"Failu pārsūtīšana"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"Nodrošināt barošanu"</string>
+    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Nodrošināt barošanu citai pievienotajai ierīcei"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Pārsūtīt failus"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Pārsūtīt failus uz citu ierīci"</string>
-    <string name="usb_use_photo_transfers" msgid="8276445551694259039">"Fotoattēlu pārsūtīšana (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Fotoattēlu pārsūtīšana (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Fotoattēlu vai failu pārsūtīšana, ja MTP nav pieejams (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
-    <string name="usb_use_MIDI_desc" msgid="6895383550910152384">"Izmantot ierīci MIDI ievadei"</string>
-    <string name="usb_use" msgid="3372728031108932425">"USB savienojuma lietošana"</string>
+    <string name="usb_use_MIDI" msgid="870922185938298263">"Izmantot ierīci MIDI režīmā"</string>
+    <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Izmantot šo ierīci MIDI režīmā"</string>
+    <string name="usb_use" msgid="3256040963685055320">"Izmantot USB, lai:"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Fona pārbaude"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Pilna piekļuve fonam"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Izmantot ekrānā redzamo tekstu"</string>
@@ -3054,8 +3071,8 @@
     <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Atiestatīt ShortcutManager ātruma ierobežošanas skaitītājus"</string>
     <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Vai atiestatīt ShortcutManager ātruma ierobežošanu?"</string>
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Vai atiestatīt ShortcutManager ātruma ierobežošanas skaitītājus?"</string>
-    <!-- no translation found for notification_suggestion_title (4506524937307816475) -->
-    <skip />
-    <!-- no translation found for notification_suggestion_summary (8521159741445416875) -->
-    <skip />
+    <string name="notification_suggestion_title" msgid="4506524937307816475">"Bloķēšanas ekrāna paziņojumu kontrole"</string>
+    <string name="notification_suggestion_summary" msgid="8521159741445416875">"Rādīt vai slēpt paziņojumu saturu"</string>
+    <string name="page_tab_title_status" msgid="8002613076689205483">"Statuss"</string>
+    <string name="page_tab_title_summary" msgid="4070309266374993258">"Visas"</string>
 </resources>
