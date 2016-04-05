@@ -16,9 +16,12 @@
 
 package com.android.settings;
 
+import android.annotation.UiThread;
 import android.app.KeyguardManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.UserInfo;
@@ -61,10 +64,14 @@ import java.util.List;
 public class TrustedCredentialsSettings extends OptionsMenuFragment
         implements TrustedCredentialsDialogBuilder.DelegateInterface {
 
+    public static final String ARG_SHOW_NEW_FOR_USER = "ARG_SHOW_NEW_FOR_USER";
+
     private static final String TAG = "TrustedCredentialsSettings";
 
     private UserManager mUserManager;
     private KeyguardManager mKeyguardManager;
+    private int mTrustAllCaUserId;
+
 
     private static final String USER_ACTION = "com.android.settings.TRUSTED_CREDENTIALS_USER";
 
@@ -181,6 +188,9 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         mKeyguardManager = (KeyguardManager) getActivity()
                 .getSystemService(Context.KEYGUARD_SERVICE);
+        mTrustAllCaUserId = getActivity().getIntent().getIntExtra(ARG_SHOW_NEW_FOR_USER,
+                UserHandle.USER_NULL);
+
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
@@ -558,6 +568,37 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 mList.setVisibility(View.VISIBLE);
                 mProgressBar.setProgress(0);
                 mAliasLoaders.remove(mTab);
+                showTrustAllCaDialogIfNeeded();
+            }
+
+            private boolean isUserTabAndTrustAllCertMode() {
+                return isTrustAllCaCertModeInProgress() && mTab == Tab.USER;
+            }
+
+            @UiThread
+            private void showTrustAllCaDialogIfNeeded() {
+                if (!isUserTabAndTrustAllCertMode()) {
+                    return;
+                }
+                List<CertHolder> certHolders = mCertHoldersByUserId.get(mTrustAllCaUserId);
+                if (certHolders == null) {
+                    return;
+                }
+
+                List<CertHolder> unapprovedUserCertHolders = new ArrayList<>();
+                final DevicePolicyManager dpm = mContext.getSystemService(
+                        DevicePolicyManager.class);
+                for (CertHolder cert : certHolders) {
+                    if (cert != null && !dpm.isCaCertApproved(cert.mAlias, mTrustAllCaUserId)) {
+                        unapprovedUserCertHolders.add(cert);
+                    }
+                }
+
+                if (unapprovedUserCertHolders.size() == 0) {
+                    Log.w(TAG, "no cert is pending approval for user " + mTrustAllCaUserId);
+                    return;
+                }
+                showTrustAllCaDialog(unapprovedUserCertHolders);
             }
         }
 
@@ -698,6 +739,26 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         private TextView mSubjectPrimaryView;
         private TextView mSubjectSecondaryView;
         private Switch mSwitch;
+    }
+
+    private boolean isTrustAllCaCertModeInProgress() {
+        return mTrustAllCaUserId != UserHandle.USER_NULL;
+    }
+
+    private void showTrustAllCaDialog(List<CertHolder> unapprovedCertHolders) {
+        final CertHolder[] arr = unapprovedCertHolders.toArray(
+                new CertHolder[unapprovedCertHolders.size()]);
+        new TrustedCredentialsDialogBuilder(getActivity(), this)
+                .setCertHolders(arr)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        // Avoid starting dialog again after Activity restart.
+                        getActivity().getIntent().removeExtra(ARG_SHOW_NEW_FOR_USER);
+                        mTrustAllCaUserId = UserHandle.USER_NULL;
+                    }
+                })
+                .show();
     }
 
     private void showCertDialog(final CertHolder certHolder) {

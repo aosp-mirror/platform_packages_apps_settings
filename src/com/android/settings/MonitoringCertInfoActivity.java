@@ -26,6 +26,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 
@@ -88,6 +89,8 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
             Intent intent =
                     new Intent(android.provider.Settings.ACTION_TRUSTED_CREDENTIALS_USER);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra(TrustedCredentialsSettings.ARG_SHOW_NEW_FOR_USER,
+                    UserHandle.myUserId());
             startActivity(intent);
             finish();
         }
