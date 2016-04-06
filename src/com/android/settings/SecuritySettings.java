@@ -228,14 +228,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils, MY_USER_ID);
         addPreferencesFromResource(resid);
 
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
-                getActivity(), MY_USER_ID);
-        if (admin != null && mDPM.getPasswordQuality(admin.component) ==
-                DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
-            final GearPreference unlockSetOrChangePref =
-                    (GearPreference) getPreferenceScreen().findPreference(KEY_UNLOCK_SET_OR_CHANGE);
-            unlockSetOrChangePref.setDisabledByAdmin(admin);
-        }
+        // DO or PO installed in the user may disallow to change password.
+        disableIfPasswordQualityManaged(KEY_UNLOCK_SET_OR_CHANGE, MY_USER_ID);
 
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, MY_USER_ID);
         if (mProfileChallengeUserId != UserHandle.USER_NULL
@@ -247,11 +241,20 @@ public class SecuritySettings extends SettingsPreferenceFragment
             addPreferencesFromResource(profileResid);
             maybeAddFingerprintPreference(root, mProfileChallengeUserId);
             if (!mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)) {
-                Preference lockPreference = root.findPreference(KEY_UNLOCK_SET_OR_CHANGE_PROFILE);
-                String summary = getContext().getString(
+                final Preference lockPreference =
+                        root.findPreference(KEY_UNLOCK_SET_OR_CHANGE_PROFILE);
+                final String summary = getContext().getString(
                         R.string.lock_settings_profile_unified_summary);
                 lockPreference.setSummary(summary);
                 lockPreference.setEnabled(false);
+                // PO may disallow to change password for the profile, but screen lock and managed
+                // profile's lock is the same. Disable main "Screen lock" menu.
+                disableIfPasswordQualityManaged(KEY_UNLOCK_SET_OR_CHANGE, mProfileChallengeUserId);
+            } else {
+                // PO may disallow to change profile password, and the profile's password is
+                // separated from screen lock password. Disable profile specific "Screen lock" menu.
+                disableIfPasswordQualityManaged(KEY_UNLOCK_SET_OR_CHANGE_PROFILE,
+                        mProfileChallengeUserId);
             }
         }
 
@@ -391,6 +394,21 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if (pref != null) pref.setOnPreferenceChangeListener(this);
         }
         return root;
+    }
+
+    /*
+     * Sets the preference as disabled by admin if PASSWORD_QUALITY_MANAGED is set.
+     * The preference must be a RestrictedPreference.
+     */
+    private void disableIfPasswordQualityManaged(String preferenceKey, int userId) {
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
+                getActivity(), userId);
+        if (admin != null && mDPM.getPasswordQuality(admin.component, userId) ==
+                DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
+            final RestrictedPreference pref =
+                    (RestrictedPreference) getPreferenceScreen().findPreference(preferenceKey);
+            pref.setDisabledByAdmin(admin);
+        }
     }
 
     private void maybeAddFingerprintPreference(PreferenceGroup securityCategory, int userId) {
@@ -777,23 +795,26 @@ public class SecuritySettings extends SettingsPreferenceFragment
             final List<SearchIndexableResource> index = new ArrayList<SearchIndexableResource>();
 
             final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
-            final EnforcedAdmin admin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
-                    context, MY_USER_ID);
             final DevicePolicyManager dpm = (DevicePolicyManager)
                     context.getSystemService(Context.DEVICE_POLICY_SERVICE);
             final UserManager um = UserManager.get(context);
+            final int profileUserId = Utils.getManagedProfileId(um, MY_USER_ID);
 
-            if (admin == null || dpm.getPasswordQuality(admin.component) !=
-                    DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
+            // To add option for unlock screen, user's password must not be managed and
+            // must not be unified with managed profile, whose password is managed.
+            if (!isPasswordManaged(MY_USER_ID, context, dpm)
+                    && (profileUserId == UserHandle.USER_NULL
+                            || lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)
+                            || !isPasswordManaged(profileUserId, context, dpm))) {
                 // Add options for lock/unlock screen
                 final int resId = getResIdForLockUnlockScreen(context, lockPatternUtils,
                         MY_USER_ID);
                 index.add(getSearchResource(context, resId));
             }
 
-            final int profileUserId = Utils.getManagedProfileId(um, MY_USER_ID);
             if (profileUserId != UserHandle.USER_NULL
-                    && lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)) {
+                    && lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)
+                    && !isPasswordManaged(profileUserId, context, dpm)) {
                 index.add(getSearchResource(context, getResIdForLockUnlockScreen(context,
                         lockPatternUtils, profileUserId)));
             }
@@ -826,6 +847,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
             final SearchIndexableResource sir = new SearchIndexableResource(context);
             sir.xmlResId = xmlResId;
             return sir;
+        }
+
+        private boolean isPasswordManaged(int userId, Context context, DevicePolicyManager dpm) {
+            final EnforcedAdmin admin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
+                    context, userId);
+            return admin != null && dpm.getPasswordQuality(admin.component, userId) ==
+                    DevicePolicyManager.PASSWORD_QUALITY_MANAGED;
         }
 
         @Override
