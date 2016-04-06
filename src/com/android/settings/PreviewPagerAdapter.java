@@ -49,10 +49,6 @@ public class PreviewPagerAdapter extends PagerAdapter {
                                Configuration[] configurations) {
         mPreviewFrames = new FrameLayout[previewSampleResIds.length];
 
-        // We need to get the copy of the original configuration before we call
-        // createConfigurationContext() as that call changes the current configuration for the App.
-        final Configuration origConfig = context.getResources().getConfiguration();
-
         for (int i = 0; i < previewSampleResIds.length; ++i) {
             mPreviewFrames[i] = new FrameLayout(context);
             mPreviewFrames[i].setLayoutParams(new LinearLayout.LayoutParams(
@@ -76,10 +72,6 @@ public class PreviewPagerAdapter extends PagerAdapter {
                 mPreviewFrames[i].addView(sampleView);
             }
         }
-
-        // Create a context with the original App configuration since the last configuration passed
-        // to createConfigurationContext() becomes the configuration for any new views inflated.
-        context.createConfigurationContext(origConfig);
     }
 
     @Override
