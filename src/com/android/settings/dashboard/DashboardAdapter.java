@@ -29,13 +29,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.dashboard.conditional.Condition;
-import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -43,13 +42,11 @@ import com.android.settingslib.drawer.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
-        implements View.OnClickListener {
+public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder> {
     public static final String TAG = "DashboardAdapter";
     private static final int NS_SPACER = 0;
     private static final int NS_SUGGESTION = 1000;
     private static final int NS_ITEMS = 2000;
-    private static final int NS_CONDITION = 3000;
 
     private static int SUGGESTION_MODE_DEFAULT = 0;
     private static int SUGGESTION_MODE_COLLAPSED = 1;
@@ -65,7 +62,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final SuggestionsChecks mSuggestionsChecks;
 
     private List<DashboardCategory> mCategories;
-    private List<Condition> mConditions;
     private List<Tile> mSuggestions;
 
     private boolean mIsShowingAll;
@@ -74,7 +70,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     private int mSuggestionMode = SUGGESTION_MODE_DEFAULT;
 
-    private Condition mExpandedCondition = null;
     private SuggestionParser mSuggestionParser;
 
     public DashboardAdapter(Context context) {
@@ -131,11 +126,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         recountItems();
     }
 
-    public void setConditions(List<Condition> conditions) {
-        mConditions = conditions;
-        recountItems();
-    }
-
     public boolean isShowingAll() {
         return mIsShowingAll;
     }
@@ -151,14 +141,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     private void recountItems() {
         reset();
-        boolean hasConditions = false;
-        for (int i = 0; mConditions != null && i < mConditions.size(); i++) {
-            boolean shouldShow = mConditions.get(i).shouldShow();
-            hasConditions |= shouldShow;
-            countItem(mConditions.get(i), R.layout.condition_card, shouldShow, NS_CONDITION);
-        }
         boolean hasSuggestions = mSuggestions != null && mSuggestions.size() != 0;
-        countItem(null, R.layout.dashboard_spacer, hasConditions && hasSuggestions, NS_SPACER);
         countItem(null, R.layout.suggestion_header, hasSuggestions, NS_SPACER);
         resetCount();
         if (mSuggestions != null) {
@@ -254,16 +237,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             case R.layout.see_all:
                 onBindSeeAll(holder);
                 break;
-            case R.layout.condition_card:
-                ConditionAdapterUtils.bindViews((Condition) mItems.get(position), holder,
-                        mItems.get(position) == mExpandedCondition, this,
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                onExpandClick(v);
-                            }
-                        });
-                break;
         }
     }
 
@@ -357,42 +330,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public int getItemCount() {
         return mIds.size();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getTag() == mExpandedCondition) {
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
-                    mExpandedCondition.getMetricsConstant());
-            mExpandedCondition.onPrimaryClick();
-        } else {
-            mExpandedCondition = (Condition) v.getTag();
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND,
-                    mExpandedCondition.getMetricsConstant());
-            notifyDataSetChanged();
-        }
-    }
-
-    public void onExpandClick(View v) {
-        if (v.getTag() == mExpandedCondition) {
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_COLLAPSE,
-                    mExpandedCondition.getMetricsConstant());
-            mExpandedCondition = null;
-        } else {
-            mExpandedCondition = (Condition) v.getTag();
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND,
-                    mExpandedCondition.getMetricsConstant());
-        }
-        notifyDataSetChanged();
-    }
-
-    public Object getItem(long itemId) {
-        for (int i = 0; i < mIds.size(); i++) {
-            if (mIds.get(i) == itemId) {
-                return mItems.get(i);
-            }
-        }
-        return null;
     }
 
     public static String getSuggestionIdentifier(Context context, Tile suggestion) {

@@ -19,6 +19,7 @@ package com.android.settings.dashboard;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,10 +31,7 @@ import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
-import com.android.settings.dashboard.conditional.Condition;
-import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
-import com.android.settings.dashboard.conditional.ConditionManager;
-import com.android.settings.dashboard.conditional.FocusRecyclerView;
+
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
@@ -42,8 +40,7 @@ import com.android.settingslib.drawer.Tile;
 import java.util.List;
 
 public class DashboardSummary extends InstrumentedFragment
-        implements SettingsDrawerActivity.CategoryListener, ConditionManager.ConditionListener,
-        FocusRecyclerView.FocusListener {
+        implements SettingsDrawerActivity.CategoryListener {
     public static final boolean DEBUG = false;
     private static final boolean DEBUG_TIMING = false;
     private static final String TAG = "DashboardSummary";
@@ -61,10 +58,9 @@ public class DashboardSummary extends InstrumentedFragment
 
     private static final String EXTRA_SCROLL_POSITION = "scroll_position";
 
-    private FocusRecyclerView mDashboard;
+    private RecyclerView mDashboard;
     private DashboardAdapter mAdapter;
     private SummaryLoader mSummaryLoader;
-    private ConditionManager mConditionManager;
     private SuggestionParser mSuggestionParser;
     private LinearLayoutManager mLayoutManager;
 
@@ -84,7 +80,7 @@ public class DashboardSummary extends InstrumentedFragment
         if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
         Context context = getContext();
-        mConditionManager = ConditionManager.get(context);
+
         mSuggestionParser = new SuggestionParser(context,
                 context.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
     }
@@ -101,9 +97,6 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
-        for (Condition c : mConditionManager.getVisibleConditions()) {
-            MetricsLogger.visible(getContext(), c.getMetricsConstant());
-        }
         for (Tile suggestion : mSuggestionParser.getSuggestions()) {
             MetricsLogger.action(getContext(), MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                     DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion));
@@ -116,22 +109,9 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsDrawerActivity) getActivity()).remCategoryListener(this);
         mSummaryLoader.setListening(false);
-        for (Condition c : mConditionManager.getVisibleConditions()) {
-            MetricsLogger.hidden(getContext(), c.getMetricsConstant());
-        }
         for (Tile suggestion : mSuggestionParser.getSuggestions()) {
             MetricsLogger.action(getContext(), MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
                     DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion));
-        }
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-        if (hasWindowFocus) {
-            mConditionManager.addListener(this);
-            mConditionManager.refreshAll();
-        } else {
-            mConditionManager.remListener(this);
         }
     }
 
@@ -150,7 +130,7 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public void onViewCreated(View view, Bundle bundle) {
-        mDashboard = (FocusRecyclerView) view.findViewById(R.id.dashboard_container);
+        mDashboard = (RecyclerView) view.findViewById(R.id.dashboard_container);
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         if (bundle != null) {
@@ -159,13 +139,11 @@ public class DashboardSummary extends InstrumentedFragment
         }
         mDashboard.setLayoutManager(mLayoutManager);
         mDashboard.setHasFixedSize(true);
-        mDashboard.setListener(this);
+
         mAdapter = new DashboardAdapter(getContext());
-        mAdapter.setConditions(mConditionManager.getConditions());
         mAdapter.setSuggestions(mSuggestionParser);
         mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setAdapter(mAdapter);
-        ConditionAdapterUtils.addDismiss(mDashboard);
 
         rebuildUI();
     }
@@ -192,11 +170,5 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onCategoriesChanged() {
         rebuildUI();
-    }
-
-    @Override
-    public void onConditionsChanged() {
-        Log.d(TAG, "onConditionsChanged");
-        mAdapter.setConditions(mConditionManager.getConditions());
     }
 }
