@@ -27,6 +27,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
@@ -49,6 +50,8 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
+
+import java.util.List;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -117,25 +120,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         private FingerprintManager mFingerprintManager;
         private int mUserId;
         private boolean mHideDrawer = false;
-        private RemovalCallback mRemovalCallback = new RemovalCallback() {
-
-            @Override
-            public void onRemovalSucceeded(Fingerprint fingerprint) {
-                Log.v(TAG, "Fingerprint removed: " + fingerprint.getFingerId());
-                if (mFingerprintManager.getEnrolledFingerprints().size() == 0) {
-                    finish();
-                }
-            }
-
-            @Override
-            public void onRemovalError(Fingerprint fp, int errMsgId, CharSequence errString) {
-                Activity activity = getActivity();
-                if (activity != null) {
-                    Toast.makeText(getActivity(), errString, Toast.LENGTH_SHORT);
-                }
-                finish();
-            }
-        };
 
         protected boolean mForFingerprint = false;
 
@@ -599,10 +583,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mLockPatternUtils.setSeparateProfileChallengeEnabled(mUserId, true, mUserPassword);
                 mChooseLockSettingsHelper.utils().clearLock(mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
-                removeAllFingerprintTemplatesAndFinish();
+                removeAllFingerprintForUserAndFinish(mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
             } else {
-                removeAllFingerprintTemplatesAndFinish();
+                removeAllFingerprintForUserAndFinish(mUserId);
             }
         }
 
@@ -637,24 +621,27 @@ public class ChooseLockGeneric extends SettingsActivity {
             return intent;
         }
 
-        private void removeAllFingerprintTemplatesAndFinish() {
+        private void removeAllFingerprintForUserAndFinish(final int userId) {
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()
-                    && mFingerprintManager.hasEnrolledFingerprints(mUserId)) {
-                mFingerprintManager.setActiveUser(mUserId);
+                    && mFingerprintManager.hasEnrolledFingerprints(userId)) {
+                mFingerprintManager.setActiveUser(userId);
                 mFingerprintManager.remove(
-                        new Fingerprint(null, mUserId, 0, 0), mUserId,
+                        new Fingerprint(null, userId, 0, 0), userId,
                         new RemovalCallback() {
                             @Override
                             public void onRemovalError(Fingerprint fp, int errMsgId,
                                     CharSequence errString) {
-                                mRemovalCallback.onRemovalError(fp, errMsgId, errString);
-                                mFingerprintManager.setActiveUser(UserHandle.myUserId());
+                                Log.v(TAG, "Fingerprint removed: " + fp.getFingerId());
+                                if (fp.getFingerId() == 0) {
+                                    removeManagedProfileFingerprintsAndFinishIfNecessary(userId);
+                                }
                             }
 
                             @Override
                             public void onRemovalSucceeded(Fingerprint fingerprint) {
-                                mRemovalCallback.onRemovalSucceeded(fingerprint);
-                                mFingerprintManager.setActiveUser(UserHandle.myUserId());
+                                if (fingerprint.getFingerId() == 0) {
+                                    removeManagedProfileFingerprintsAndFinishIfNecessary(userId);
+                                }
                             }
                         });
             } else {
@@ -662,6 +649,29 @@ public class ChooseLockGeneric extends SettingsActivity {
                 // We need to wait for that to occur, otherwise, the UI will still show that
                 // fingerprints exist even though they are (about to) be removed depending on
                 // the race condition.
+                finish();
+            }
+        }
+
+        private void removeManagedProfileFingerprintsAndFinishIfNecessary(final int parentUserId) {
+            mFingerprintManager.setActiveUser(UserHandle.myUserId());
+            final UserManager um = UserManager.get(getActivity());
+            boolean hasChildProfile = false;
+            if (!um.getUserInfo(parentUserId).isManagedProfile()) {
+                // Current user is primary profile, remove work profile fingerprints if necessary
+                final List<UserInfo> profiles = um.getProfiles(parentUserId);
+                final int profilesSize = profiles.size();
+                for (int i = 0; i < profilesSize; i++) {
+                    final UserInfo userInfo = profiles.get(i);
+                    if (userInfo.isManagedProfile() && !mLockPatternUtils
+                            .isSeparateProfileChallengeEnabled(userInfo.id)) {
+                        removeAllFingerprintForUserAndFinish(userInfo.id);
+                        hasChildProfile = true;
+                        break;
+                    }
+                }
+            }
+            if (!hasChildProfile) {
                 finish();
             }
         }
