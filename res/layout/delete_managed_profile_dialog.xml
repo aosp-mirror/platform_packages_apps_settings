@@ -41,15 +41,15 @@
             android:layout_height="@dimen/mdm_app_info_height"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center_vertical|start"
             android:orientation="horizontal"
             android:paddingBottom="@dimen/mdm_app_info_padding_top_bottom"
             android:paddingTop="@dimen/mdm_app_info_padding_top_bottom" >
 
             <ImageView
                 android:id="@+id/delete_managed_profile_mdm_icon_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/mdm_app_icon_width_height"
+                android:layout_height="@dimen/mdm_app_icon_width_height"
                 android:scaleType="centerInside"
                 android:gravity="center_vertical" />
 
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:paddingLeft="@dimen/mdm_app_name_padding_left"
+                android:paddingStart="@dimen/mdm_app_name_padding_left"
                 style="@style/TextAppearance.RemoveDialogContent" />
         </LinearLayout>
 
