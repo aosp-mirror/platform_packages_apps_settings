@@ -32,6 +32,7 @@ import android.os.UserManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
@@ -83,6 +84,7 @@ public class AddAccountSettings extends Activity {
 
     private static final int CHOOSE_ACCOUNT_REQUEST = 1;
     private static final int ADD_ACCOUNT_REQUEST = 2;
+    private static final int UNLOCK_WORK_PROFILE_REQUEST = 3;
 
     private PendingIntent mPendingIntent;
 
@@ -154,24 +156,27 @@ public class AddAccountSettings extends Activity {
             finish();
             return;
         }
-        final String[] authorities =
-                getIntent().getStringArrayExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY);
-        final String[] accountTypes =
-                getIntent().getStringArrayExtra(AccountPreferenceBase.ACCOUNT_TYPES_FILTER_KEY);
-        final Intent intent = new Intent(this, ChooseAccountActivity.class);
-        if (authorities != null) {
-            intent.putExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY, authorities);
+
+        // If the profile is locked, we must ask the user to unlock it first.
+        ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
+        if (!helper.launchConfirmationActivity(UNLOCK_WORK_PROFILE_REQUEST,
+                getString(R.string.unlock_set_unlock_launch_picker_title),
+                false,
+                mUserHandle.getIdentifier())) {
+            requestChooseAccount();
         }
-        if (accountTypes != null) {
-            intent.putExtra(AccountPreferenceBase.ACCOUNT_TYPES_FILTER_KEY, accountTypes);
-        }
-        intent.putExtra(EXTRA_USER, mUserHandle);
-        startActivityForResult(intent, CHOOSE_ACCOUNT_REQUEST);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+        case UNLOCK_WORK_PROFILE_REQUEST:
+            if (resultCode == Activity.RESULT_OK) {
+                requestChooseAccount();
+            } else {
+                finish();
+            }
+            break;
         case CHOOSE_ACCOUNT_REQUEST:
             if (resultCode == RESULT_CANCELED) {
                 if (data != null) {
@@ -200,6 +205,22 @@ public class AddAccountSettings extends Activity {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_ADD_CALLED, mAddAccountCalled);
         if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "saved");
+    }
+
+    private void requestChooseAccount() {
+        final String[] authorities =
+                getIntent().getStringArrayExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY);
+        final String[] accountTypes =
+                getIntent().getStringArrayExtra(AccountPreferenceBase.ACCOUNT_TYPES_FILTER_KEY);
+        final Intent intent = new Intent(this, ChooseAccountActivity.class);
+        if (authorities != null) {
+            intent.putExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY, authorities);
+        }
+        if (accountTypes != null) {
+            intent.putExtra(AccountPreferenceBase.ACCOUNT_TYPES_FILTER_KEY, accountTypes);
+        }
+        intent.putExtra(EXTRA_USER, mUserHandle);
+        startActivityForResult(intent, CHOOSE_ACCOUNT_REQUEST);
     }
 
     private void addAccount(String accountType) {
