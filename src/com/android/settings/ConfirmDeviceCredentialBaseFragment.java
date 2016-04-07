@@ -70,6 +70,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     protected Button mCancelButton;
     protected ImageView mFingerprintIcon;
     protected int mEffectiveUserId;
+    protected int mUserId;
     protected LockPatternUtils mLockPatternUtils;
     protected TextView mErrorTextView;
     protected final Handler mHandler = new Handler();
@@ -81,7 +82,9 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 ALLOW_FP_AUTHENTICATION, false);
         // Only take this argument into account if it belongs to the current profile.
         Intent intent = getActivity().getIntent();
-        mEffectiveUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+        mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+        final UserManager userManager = UserManager.get(getActivity());
+        mEffectiveUserId = userManager.getCredentialOwnerProfile(mUserId);
         mAllowFpAuthentication = mAllowFpAuthentication && !isFingerprintDisabledByAdmin();
         mLockPatternUtils = new LockPatternUtils(getActivity());
     }

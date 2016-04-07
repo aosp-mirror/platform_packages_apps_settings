@@ -24,6 +24,7 @@ import android.graphics.Typeface;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.text.Annotation;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -52,6 +53,7 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
     protected static final int FINGERPRINT_FIND_SENSOR_REQUEST = 2;
     protected static final int LEARN_MORE_REQUEST = 3;
 
+    private UserManager mUserManager;
     private boolean mHasPassword;
 
     @Override
@@ -61,6 +63,7 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
         setHeaderText(R.string.security_settings_fingerprint_enroll_introduction_title);
         final SetupWizardRecyclerLayout layout =
                 (SetupWizardRecyclerLayout) findViewById(R.id.setup_wizard_layout);
+        mUserManager = UserManager.get(this);
         final RecyclerItemAdapter adapter = (RecyclerItemAdapter) layout.getAdapter();
         adapter.setOnItemSelectedListener(this);
         Item item = (Item) adapter.findItemById(R.id.fingerprint_introduction_message);
@@ -76,7 +79,7 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
 
     private void updatePasswordQuality() {
         final int passwordQuality = new ChooseLockSettingsHelper(this).utils()
-                .getActivePasswordQuality(mUserId);
+                .getActivePasswordQuality(mUserManager.getCredentialOwnerProfile(mUserId));
         mHasPassword = passwordQuality != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
     }
 
