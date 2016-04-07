@@ -344,12 +344,11 @@ public final class CredentialStorage extends Activity {
 
             // Clear all the users credentials could have been installed in for this user.
             final UserManager um = (UserManager) getSystemService(USER_SERVICE);
-            for (UserInfo pi : um.getProfiles(UserHandle.getUserId(Process.myUid()))) {
+            for (int userId : um.getProfileIdsWithDisabled(UserHandle.myUserId())) {
                 for (int uid : SYSTEM_CREDENTIAL_UIDS) {
-                    mKeyStore.clearUid(UserHandle.getUid(pi.id, uid));
+                    mKeyStore.clearUid(UserHandle.getUid(userId, uid));
                 }
             }
-
 
             try {
                 KeyChainConnection keyChainConnection = KeyChain.bind(CredentialStorage.this);
