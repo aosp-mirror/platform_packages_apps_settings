@@ -15,47 +15,64 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?android:attr/listPreferredItemHeight"
-        android:gravity="center_vertical"
-        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:orientation="vertical"
-        android:clickable="false"
-        android:focusable="false" >
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:minHeight="?android:attr/listPreferredItemHeight"
+              android:gravity="center_vertical"
+              android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+              android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+              android:paddingTop="8dp"
+              android:paddingBottom="8dp"
+              android:orientation="vertical"
+              android:clickable="false"
+              android:focusable="false" >
 
-        <FrameLayout
+    <TextView
+            android:id="@android:id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            android:textColor="?android:attr/textColorPrimary"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal" />
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+        <ImageView
+                android:id="@+id/auto_importance"
+                android:src="@drawable/notification_auto_importance"
+                android:layout_gravity="center_vertical|start"
+                android:layout_width="48dp"
+                android:layout_height="48dp" />
+
+        <SeekBar
+                android:id="@*android:id/seekbar"
+                android:layout_marginStart="56dp"
+                android:layout_marginEnd="32dp"
+                android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="48dp"
+                android:focusable="true"
+                android:background="#00ffffff"
+                android:progressBackgroundTint="@color/importance_secondary_slider_color"
+                android:thumbTint="@color/importance_disabled_slider_color"
+                android:progressTint="@color/importance_disabled_slider_color"
+                style="@android:style/Widget.Material.SeekBar.Discrete"
+                android:tickMarkTint="@android:color/black" />
 
-            <ImageView
-                    android:id="@+id/low_importance"
-                    android:src="@*android:drawable/ic_notification_block"
-                    android:layout_gravity="center_vertical|start"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:tint="@color/importance_icon_tint" />
+    </FrameLayout>
 
-            <SeekBar
-                    android:id="@*android:id/seekbar"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginEnd="56dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:focusable="true"
-                    android:background="#00ffffff"
-                    style="@android:style/Widget.Material.SeekBar.Discrete"
-                    android:tickMarkTint="@android:color/black"/>
-
-            <ImageView
-                    android:id="@+id/max_importance"
-                    android:src="@*android:drawable/ic_notification_alert"
-                    android:layout_gravity="center_vertical|end"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:tint="@color/importance_icon_tint" />
-
-        </FrameLayout>
+    <TextView
+            android:id="@android:id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@android:id/title"
+            android:textAlignment="viewStart"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:textColor="?android:attr/textColorSecondary"
+            android:maxLines="10"
+            android:minLines="3" />
 </LinearLayout>
