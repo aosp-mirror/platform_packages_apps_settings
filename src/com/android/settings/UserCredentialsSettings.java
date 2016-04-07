@@ -104,10 +104,12 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
             final Bundle args = new Bundle();
             args.putParcelable(ARG_CREDENTIAL, item);
 
-            final CredentialDialogFragment frag = new CredentialDialogFragment();
-            frag.setTargetFragment(target, /* requestCode */ -1);
-            frag.setArguments(args);
-            frag.show(target.getFragmentManager(), TAG);
+            if (target.getFragmentManager().findFragmentByTag(TAG) == null) {
+                final DialogFragment frag = new CredentialDialogFragment();
+                frag.setTargetFragment(target, /* requestCode */ -1);
+                frag.setArguments(args);
+                frag.show(target.getFragmentManager(), TAG);
+            }
         }
 
         @Override
