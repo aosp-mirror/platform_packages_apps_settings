@@ -18,81 +18,65 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.os.UserHandle;
-import android.view.WindowManager;
-import android.view.WindowManagerGlobal;
+import android.provider.Settings;
 
 /**
  * Activity that shows a dialog explaining that a CA cert is allowing someone to monitor network
- * traffic.
+ * traffic. This activity should be launched for the user into which the CA cert is installed.
  */
-public class MonitoringCertInfoActivity extends Activity implements OnClickListener {
-
-    private boolean hasDeviceOwner = false;
+public class MonitoringCertInfoActivity extends Activity implements OnClickListener,
+        OnDismissListener {
 
     @Override
     protected void onCreate(Bundle savedStates) {
         super.onCreate(savedStates);
 
-        DevicePolicyManager dpm =
-                (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        DevicePolicyManager dpm = getSystemService(DevicePolicyManager.class);
+        final int numberOfCertificates = getIntent().getIntExtra(
+                Settings.EXTRA_NUMBER_OF_CERTIFICATES, 1);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.ssl_ca_cert_dialog_title);
+        builder.setTitle(getResources().getQuantityText(R.plurals.ssl_ca_cert_dialog_title,
+                numberOfCertificates));
         builder.setCancelable(true);
-        // TODO See b/25772443
-        hasDeviceOwner = dpm.getDeviceOwnerComponentOnCallingUser() != null;
-        int buttonLabel;
-        if (hasDeviceOwner) {
-            // Institutional case.  Show informational message.
-            String message = this.getResources().getString(R.string.ssl_ca_cert_info_message,
-                    dpm.getDeviceOwnerNameOnAnyUser());
-            builder.setMessage(message);
-            buttonLabel = R.string.done_button;
-        } else {
+        builder.setPositiveButton(getResources().getQuantityText(
+                R.plurals.ssl_ca_cert_settings_button, numberOfCertificates) , this);
+        builder.setNeutralButton(R.string.cancel, null);
+        builder.setOnDismissListener(this);
+
+        if (dpm.getProfileOwner() != null) {
+            builder.setMessage(getResources().getQuantityString(R.plurals.ssl_ca_cert_info_message,
+                    numberOfCertificates, dpm.getProfileOwnerName()));
+        } else if (dpm.getDeviceOwnerComponentOnCallingUser() != null) {
+            builder.setMessage(getResources().getQuantityString(R.plurals.ssl_ca_cert_info_message,
+                    numberOfCertificates, dpm.getDeviceOwnerNameOnAnyUser()));
+        } else  {
             // Consumer case.  Show scary warning.
             builder.setIcon(android.R.drawable.stat_notify_error);
             builder.setMessage(R.string.ssl_ca_cert_warning_message);
-            buttonLabel = R.string.ssl_ca_cert_settings_button;
         }
 
-        builder.setPositiveButton(buttonLabel, this);
-
-        final Dialog dialog = builder.create();
-        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-        try {
-            WindowManagerGlobal.getWindowManagerService().dismissKeyguard();
-        } catch (RemoteException e) {
-        }
-        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override public void onCancel(DialogInterface dialog) {
-                finish();
-            }
-        });
-
-        dialog.show();
+        builder.show();
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        if (hasDeviceOwner) {
-            finish();
-        } else {
-            Intent intent =
-                    new Intent(android.provider.Settings.ACTION_TRUSTED_CREDENTIALS_USER);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra(TrustedCredentialsSettings.ARG_SHOW_NEW_FOR_USER,
-                    UserHandle.myUserId());
-            startActivity(intent);
-            finish();
-        }
+        Intent intent = new Intent(android.provider.Settings.ACTION_TRUSTED_CREDENTIALS_USER);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(TrustedCredentialsSettings.ARG_SHOW_NEW_FOR_USER, UserHandle.myUserId());
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialogInterface) {
+        finish();
     }
 }
