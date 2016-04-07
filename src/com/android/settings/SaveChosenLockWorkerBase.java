@@ -68,7 +68,6 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
         mHasChallenge = hasChallenge;
         mChallenge = challenge;
         // This will be a no-op for non managed profiles.
-        mUtils.setSeparateProfileChallengeEnabled(mUserId, true);
         mWasSecureBefore = mUtils.isSecure(mUserId);
 
         Context context = getContext();
