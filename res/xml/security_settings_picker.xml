@@ -43,4 +43,8 @@
             android:title="@string/unlock_set_unlock_password_title"
             android:persistent="false"/>
 
+    <com.android.settingslib.RestrictedPreference
+            android:key="unlock_set_managed"
+            android:persistent="false"/>
+
 </PreferenceScreen>

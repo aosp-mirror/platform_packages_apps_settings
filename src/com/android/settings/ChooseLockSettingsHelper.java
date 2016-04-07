@@ -189,6 +189,7 @@ public final class ChooseLockSettingsHelper {
             case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
             case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
+            case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
                 launched = launchConfirmationActivity(request, title, header, description,
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPassword.InternalActivity.class
