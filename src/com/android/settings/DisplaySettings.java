@@ -30,6 +30,7 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
@@ -302,7 +303,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (dpm != null) {
             final EnforcedAdmin admin = RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(
                     getActivity());
-            final long maxTimeout = dpm.getMaximumTimeToLock(null);
+            final long maxTimeout = dpm
+                    .getMaximumTimeToLockForUserAndProfiles(UserHandle.myUserId());
             mScreenTimeoutPreference.removeUnusableTimeouts(maxTimeout, admin);
         }
         updateTimeoutPreferenceDescription(currentTimeout);
