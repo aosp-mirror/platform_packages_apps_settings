@@ -1116,7 +1116,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if (mDPM != null) {
                 final EnforcedAdmin admin = RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(
                         getActivity());
-                final long adminTimeout = mDPM.getMaximumTimeToLock(null);
+                final long adminTimeout = mDPM
+                        .getMaximumTimeToLockForUserAndProfiles(UserHandle.myUserId());
                 final long displayTimeout = Math.max(0,
                         Settings.System.getInt(getContentResolver(), SCREEN_OFF_TIMEOUT, 0));
                 // This setting is a slave to display timeout when a device policy is enforced.
