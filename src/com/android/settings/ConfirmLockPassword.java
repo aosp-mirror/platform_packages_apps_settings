@@ -332,11 +332,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             long challenge = getActivity().getIntent().getLongExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
             final int localEffectiveUserId = mEffectiveUserId;
-            mPendingLockCheck = LockPatternChecker.verifyPassword(
-                    mLockPatternUtils,
-                    pin,
-                    challenge,
-                    localEffectiveUserId,
+            final int localUserId = mUserId;
+            final LockPatternChecker.OnVerifyCallback onVerifyCallback =
                     new LockPatternChecker.OnVerifyCallback() {
                         @Override
                         public void onVerified(byte[] token, int timeoutMs) {
@@ -349,9 +346,15 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                                         token);
                             }
                             mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
-                                    localEffectiveUserId);
+                                    localUserId);
                         }
-                    });
+            };
+            mPendingLockCheck = (localEffectiveUserId == localUserId)
+                    ? LockPatternChecker.verifyPassword(
+                            mLockPatternUtils, pin, challenge, localUserId, onVerifyCallback)
+                    : LockPatternChecker.verifyTiedProfileChallenge(
+                            mLockPatternUtils, pin, false, challenge, localUserId,
+                            onVerifyCallback);
         }
 
         private void startCheckPassword(final String pin, final Intent intent) {
