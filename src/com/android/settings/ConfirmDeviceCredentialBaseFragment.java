@@ -66,6 +66,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
             PACKAGE + ".ConfirmCredentials.showWhenLocked";
 
     private FingerprintUiHelper mFingerprintHelper;
+    private boolean mIsStrongAuthRequired;
     private boolean mAllowFpAuthentication;
     protected Button mCancelButton;
     protected ImageView mFingerprintIcon;
@@ -73,6 +74,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     protected int mUserId;
     protected LockPatternUtils mLockPatternUtils;
     protected TextView mErrorTextView;
+    protected TextView mStrongAuthRequiredTextView;
     protected final Handler mHandler = new Handler();
 
     @Override
@@ -85,7 +87,9 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
         mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
         final UserManager userManager = UserManager.get(getActivity());
         mEffectiveUserId = userManager.getCredentialOwnerProfile(mUserId);
-        mAllowFpAuthentication = mAllowFpAuthentication && !isFingerprintDisabledByAdmin();
+        mIsStrongAuthRequired = isStrongAuthRequired();
+        mAllowFpAuthentication = mAllowFpAuthentication && !isFingerprintDisabledByAdmin()
+                && !mIsStrongAuthRequired;
         mLockPatternUtils = new LockPatternUtils(getActivity());
     }
 
@@ -93,6 +97,11 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mCancelButton = (Button) view.findViewById(R.id.cancelButton);
+        if (mStrongAuthRequiredTextView != null) {
+            // INIVISIBLE instead of GONE because it also acts as a weighted spacer
+            mStrongAuthRequiredTextView.setVisibility(
+                    mIsStrongAuthRequired ? View.VISIBLE : View.INVISIBLE);
+        }
         mFingerprintIcon = (ImageView) view.findViewById(R.id.fingerprintIcon);
         mFingerprintHelper = new FingerprintUiHelper(
                 mFingerprintIcon,
@@ -121,6 +130,10 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 Context.DEVICE_POLICY_SERVICE);
         final int disabledFeatures = dpm.getKeyguardDisabledFeatures(null, mEffectiveUserId);
         return (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) != 0;
+    }
+
+    private boolean isStrongAuthRequired() {
+        return !(UserManager.get(getContext()).isUserUnlocked(mEffectiveUserId));
     }
 
     @Override
