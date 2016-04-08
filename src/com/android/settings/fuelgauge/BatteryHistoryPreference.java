@@ -76,6 +76,7 @@ public class BatteryHistoryPreference extends Preference {
         ((TextView) view.findViewById(R.id.charge)).setText(mBatteryInfo.batteryPercentString);
         ((TextView) view.findViewById(R.id.estimation)).setText(mBatteryInfo.remainingLabel);
         UsageView usageView = (UsageView) view.findViewById(R.id.battery_usage);
+        usageView.findViewById(R.id.label_group).setAlpha(.7f);
         mBatteryInfo.bindHistory(usageView);
     }
 }
