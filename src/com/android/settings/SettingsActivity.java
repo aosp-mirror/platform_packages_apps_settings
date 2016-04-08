@@ -66,6 +66,7 @@ import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.WriteSettingsDetails;
+import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.SearchResultsSummary;
@@ -325,6 +326,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             WriteSettingsDetails.class.getName(),
             AdvancedAppSettings.class.getName(),
             WallpaperTypeSettings.class.getName(),
+            VrListenerSettings.class.getName(),
     };
 
 
