@@ -171,6 +171,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setLayoutManager(mLayoutManager);
         mDashboard.setHasFixedSize(true);
         mDashboard.setListener(this);
+        mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mAdapter = new DashboardAdapter(getContext());
         mAdapter.setConditions(mConditionManager.getConditions());
         mAdapter.setSuggestions(mSuggestionParser);
