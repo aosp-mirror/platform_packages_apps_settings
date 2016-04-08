@@ -146,6 +146,7 @@ public final class KeyboardLayoutPickerFragment2 extends SettingsPreferenceFragm
         for (KeyboardLayout layout : mKeyboardLayouts) {
             Preference pref = new Preference(getPrefContext());
             pref.setTitle(layout.getLabel());
+            pref.setSummary(layout.getCollection());
             root.addPreference(pref);
             mPreferenceMap.put(pref, layout);
         }
