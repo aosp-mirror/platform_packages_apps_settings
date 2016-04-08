@@ -36,6 +36,20 @@ public class DividerPreference extends Preference {
         }
     }
 
+    public DividerPreference(Context context) {
+        this(context, null);
+    }
+
+    public void setDividerAllowedAbove(boolean allowed) {
+        mAllowAbove = allowed;
+        notifyChanged();
+    }
+
+    public void setDividerAllowedBelow(boolean allowed) {
+        mAllowBelow = allowed;
+        notifyChanged();
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
