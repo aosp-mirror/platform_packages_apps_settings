@@ -427,7 +427,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Izberite zaklep zaslona"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Izbira zakl. del. p."</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Zaščita telefona"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Prstni odtis bo morda manj varen kot zapleten vzorec, koda PIN ali geslo. Zaradi varnosti nastavite nadomestno zaklepanje zaslona."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Prstni odtis bo morda manj varen kot zapleten vzorec, koda PIN ali geslo. Zaradi večje varnosti nastavite nadomestno zaklepanje zaslona."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Vklopite zaščitne funkcije naprave, da drugim preprečite uporabo tega tabličnega računalnika brez vašega dovoljenja. Izberite zaklepanje zaslona, ki ga želite uporabljati."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Vklopite zaščitne funkcije naprave, da drugim preprečite njeno uporabo brez vašega dovoljenja. Izberite zaklepanje zaslona, ki ga želite uporabljati."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Vklopite zaščitne funkcije naprave, da drugim preprečite uporabo tega telefona brez vašega dovoljenja. Izberite zaklepanje zaslona, ki ga želite uporabljati."</string>
@@ -1329,18 +1329,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Geslo je nastavljeno"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Koda PIN je nastavljena"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Vzorec je nastavljen"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Če želite nadaljevati, uporabite vzorec za napravo"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Če želite nadaljevati, vnesite kodo PIN za napravo"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Če želite nadaljevati, vnesite geslo za napravo"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Če želite nadaljevati, uporabite vzorec za delovni profil"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Če želite nadaljevati, vnesite kodo PIN za delovni profil"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Če želite nadaljevati, vnesite geslo za delovni profil"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Napačna koda PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Napačno geslo"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Napačen vzorec"</string>
@@ -2266,6 +2260,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"Onemogoči"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"Omogoči"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"Odstrani"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"Zaupaj"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Želite omogočiti sistemsko overjeno potrdilo?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Želite onemogočiti sistemsko overjeno potrdilo?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Želite trajno odstraniti uporabniško overjeno potrdilo?"</string>
@@ -2543,8 +2538,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibriranje"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"»Samo predn.« dovoljuje"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Samodejna pravila"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Nastavitev urnika za »ne moti«"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Utišanje naprave ob določeni uri"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Samo prednostno"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Samo alarmi"</string>
@@ -3103,4 +3097,20 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Prikaz ali skrivanje vsebine obvestil"</string>
     <string name="page_tab_title_status" msgid="8002613076689205483">"Stanje"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Vse"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"Najmanjša širina"</string>
+    <!-- no translation found for status_title_connection (5610863772527346226) -->
+    <skip />
+    <!-- no translation found for status_title_storage (5049585397576643893) -->
+    <skip />
+    <!-- no translation found for status_title_battery (2445096110607215974) -->
+    <skip />
+    <!-- no translation found for status_title_security (665403998838147956) -->
+    <skip />
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>

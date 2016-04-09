@@ -421,7 +421,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Экран бекитүүнү тандоо"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Жумш прф кулпсн тандоо"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Телефонуңузду коргоңуз"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Эскертүү: Түзмөгүңүздү манжа изи менен коргоого караганда графикалык ачкыч, PIN код же сырсөз менен коргоо бир кыйла коопсуз. Коопсуздук үчүн экран кулпусунун камдык көчүрмөсүн жөндөп коюңуз."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Түзмөгүңүздү манжа изи менен коргоого караганда графикалык ачкыч, PIN код же сырсөз менен коргоо бир кыйла коопсуз. Кошумча коопсуздук үчүн, көмөкчү экран кулпусун жөндөп коюңуз."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул планшетти сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул түзмөктү сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Түзмөктү коргоо функциялары жандырылганда, башкалар бул телефонду сиздин уруксатыңызсыз пайдалана албай калышат. Колдонгуңуз келген экран кулпусун тандаңыз."</string>
@@ -1309,18 +1309,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Сырсөз коюлду"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN код коюлду"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Сүрөт үлгүсү коюлду"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Улантуу үчүн түзмөгүңүздүн графикалык ачкычын колдонуңуз"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Улантуу үчүн түзмөгүңүздүн PIN кодун киргизиңиз"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Улантуу үчүн түзмөгүңүздүн сырсөзүн киргизиңиз"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Улантуу үчүн жумуш профилиңиздин графикалык ачкычын колдонуңуз"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Улантуу үчүн жумуш профилиңиздин PIN кодун киргизиңиз"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Улантуу үчүн жумуш профилиңиздин сырсөзүн киргизиңиз"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN код туура эмес"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Сырсөз туура эмес"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Үлгү туура эмес"</string>
@@ -1554,7 +1548,7 @@
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"Баскычтоп жана киргизүү ыкмалары"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"Виртуалдык баскычтоп"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"Жеткиликтүү виртуалдык баскычтоп"</string>
-    <string name="add_virtual_keyboard" msgid="5783399159348480135">"Виртуалдык баскчтп кошңз же түзөтңз"</string>
+    <string name="add_virtual_keyboard" msgid="5783399159348480135">"Виртуалдык тергич кошуу же түзөтүү"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"Баскычтоп боюнча жардам"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"Аппараттык баскычтоп"</string>
     <string name="show_ime" msgid="2658582193437188227">"Виртуалдык баскычтопту көрсөтүү"</string>
@@ -2232,6 +2226,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"Өчүрүү"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"Иштетүү"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"Алып салуу"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"Ишеничтүү"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Тутумдун CA тастыктамасы күйгүзүлсүнбү?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Тутумдун CA тастыктамасы өчүрүлсүнбү?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Колдонуучунун CA тастыктамасы биротоло алынып салынсынбы?"</string>
@@ -2509,8 +2504,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Дирилдөө"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Артыкчылыктууга гана уруксат"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Автоматтык эрежелер"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"\"Тынчымды алба\" режимин коюу"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Түзмөктүн үнүн өчүрүүнү жөндөө"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Артыкчылык гана"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Ойготкучтар гана"</string>
@@ -2818,7 +2812,7 @@
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Четке кагуу"</string>
     <string name="usb_use_charging_only" msgid="2180443097365214467">"Бул түзмөктү кубаттоо"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Жөн гана бул түзмөктү кубаттоо"</string>
-    <string name="usb_use_power_only" msgid="6426550616883919530">"Электр кубатынын өткөрүп берүү"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"Электр кубатын өткөрүп берүү"</string>
     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Туташып турган башка түзмөккө электр кубатын өткөрүп берүү"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"Файлдарды өткөрүү"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Файлдарды башка түзмөккө өткөрүңүз"</string>
@@ -2826,7 +2820,7 @@
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Эгер MTP колдоого алынбаса, сүрөттөрдү же файлдарды өткөрүү (PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"Түзмөктү MIDI катары колдонуу"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Бул түзмөктү MIDI катары колдонуу"</string>
-    <string name="usb_use" msgid="3256040963685055320">"USB туташууну төмөнкү үчүн колдонуу"</string>
+    <string name="usb_use" msgid="3256040963685055320">"USB туташууну төмөнкү максатта колдонуу"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Фондо текшерүү"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Фондук режимде толук мүмкүнчүлүк"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Экрандагы текстти колдонуу"</string>
@@ -3047,4 +3041,20 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Эскертме мазмунун көрсөтүү же жашыруу"</string>
     <string name="page_tab_title_status" msgid="8002613076689205483">"Абалы"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Бардыгы"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"Эң ичке"</string>
+    <!-- no translation found for status_title_connection (5610863772527346226) -->
+    <skip />
+    <!-- no translation found for status_title_storage (5049585397576643893) -->
+    <skip />
+    <!-- no translation found for status_title_battery (2445096110607215974) -->
+    <skip />
+    <!-- no translation found for status_title_security (665403998838147956) -->
+    <skip />
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>
