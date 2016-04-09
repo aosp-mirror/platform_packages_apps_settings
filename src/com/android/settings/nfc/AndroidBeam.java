@@ -30,7 +30,7 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.HelpUtils;
+import com.android.settingslib.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
