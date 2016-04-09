@@ -421,7 +421,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Schermvergrendeling kiezen"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Werkvergr. kiezen"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Bescherm je telefoon"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Je vingerafdruk is mogelijk minder veilig dan een sterk patroon, sterke pincode of sterk wachtwoord. Stel een back-upvergrendelingsscherm zijn voor betere beveiliging."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Je vingerafdruk is mogelijk minder veilig dan een sterk patroon, sterke pincode of sterk wachtwoord. Stel een back-upvergrendelingsscherm in voor betere beveiliging."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen deze tablet zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen dit apparaat zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen deze telefoon zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
@@ -1309,18 +1309,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Wachtwoord is ingesteld"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Pincode is ingesteld"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Patroon is ingesteld"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Gebruik het patroon van je apparaat om door te gaan"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Geef de pincode van je apparaat op om door te gaan"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Geef het wachtwoord van je apparaat op om door te gaan"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Geef het patroon van je werkprofiel op om door te gaan"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Geef de pincode van je werkprofiel op om door te gaan"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Geef het wachtwoord van je werkprofiel op om door te gaan"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Onjuiste pincode"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Onjuist wachtwoord"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Onjuist patroon"</string>
@@ -2232,6 +2226,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"Uitschakelen"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"Inschakelen"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"Verwijderen"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"Vertrouwen"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Het CA-certificaat voor het systeem inschakelen?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Het CA-certificaat voor het systeem uitschakelen?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"CA-certificaat van gebruiker permanent verwijderen?"</string>
@@ -2509,8 +2504,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Trillen"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Als prioriteit toestaan"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatische regels"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Niet storen-planning instellen"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Geluid op bepaalde tijden dempen"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Alleen prioriteit"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Alleen alarmen"</string>
@@ -3047,4 +3041,20 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Content van meldingen weergeven of verbergen"</string>
     <string name="page_tab_title_status" msgid="8002613076689205483">"Status"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alle"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"Kleinste breedte"</string>
+    <!-- no translation found for status_title_connection (5610863772527346226) -->
+    <skip />
+    <!-- no translation found for status_title_storage (5049585397576643893) -->
+    <skip />
+    <!-- no translation found for status_title_battery (2445096110607215974) -->
+    <skip />
+    <!-- no translation found for status_title_security (665403998838147956) -->
+    <skip />
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>

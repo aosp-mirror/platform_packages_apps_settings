@@ -424,7 +424,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Alegeți blocare ecran"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Alegeți blocarea pentru serviciu"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Protejați telefonul"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Este posibil ca amprenta să fie mai puțin sigură decât un model, un cod PIN sau o parolă puternică. Setați un ecran de blocare de rezervă pentru a fi în siguranță."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Este posibil ca amprenta să fie mai puțin sigură decât un model, un cod PIN sau o parolă puternică. Setați o blocare a ecranului de rezervă, pentru mai multă siguranță."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Activați funcțiile de protecție a dispozitivului pentru a împiedica alte persoane să folosească această tabletă fără permisiunea dvs. Alegeți blocarea ecranului pe care doriți să o folosiți."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Activați funcțiile de protecție a dispozitivului pentru a împiedica alte persoane să folosească acest dispozitiv fără permisiunea dvs. Alegeți blocarea ecranului pe care doriți să o folosiți."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Activați funcțiile de protecție a dispozitivului pentru a împiedica alte persoane să folosească acest telefon fără permisiunea dvs. Alegeți blocarea ecranului pe care doriți să o folosiți."</string>
@@ -1319,18 +1319,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Parola a fost setată"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Codul PIN a fost setat"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Modelul a fost setat"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Pentru a continua, folosiți modelul dispozitivului"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Pentru a continua, introduceți codul PIN al dispozitivului"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Pentru a continua, introduceți parola dispozitivului"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Pentru a continua, folosiți modelul de serviciu"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Pentru a continua, introduceți codul PIN de serviciu"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Pentru a continua, introduceți parola de serviciu"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Cod PIN greșit"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Parolă greșită"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Model greșit"</string>
@@ -2250,6 +2244,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"Dezactivați"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"Activați"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"Eliminați"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"De încredere"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Activați certificatul CA de sistem?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Dezactivați certificatul CA de sistem?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Eliminați definitiv certificatul de utilizator CA?"</string>
@@ -2527,8 +2522,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrează"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"„Numai cu prioritate” permite"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Reguli automate"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Setați programul Nu deranja"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Dezactivați sunetul dispozitivului în anumite momente"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Numai cu prioritate"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Numai alarme"</string>
@@ -3076,4 +3070,20 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Afișați sau ascundeți conținutul notificării"</string>
     <string name="page_tab_title_status" msgid="8002613076689205483">"Stare"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Toate"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"Cea mai mică lățime"</string>
+    <!-- no translation found for status_title_connection (5610863772527346226) -->
+    <skip />
+    <!-- no translation found for status_title_storage (5049585397576643893) -->
+    <skip />
+    <!-- no translation found for status_title_battery (2445096110607215974) -->
+    <skip />
+    <!-- no translation found for status_title_security (665403998838147956) -->
+    <skip />
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>

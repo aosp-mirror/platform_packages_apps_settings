@@ -421,7 +421,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Välj skärmlås"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Välj jobblås"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Skydda mobilen"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Fingeravtryck kan vara mindre säkra än ett starkt grafiskt lösenord, en pinkod eller ett starkt lösenord. Konfigurera en låsskärm som reservlösning för säkerhets skull."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Fingeravtryck kan vara mindre säkra än ett starkt grafiskt lösenord, en pinkod eller ett starkt lösenord. Konfigurera en låsskärm som reservlösning för säkerhets skull."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Hindra andra från att använda surfplattan utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Hindra andra från att använda enheten utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Hindra andra från att använda mobilen utan ditt medgivande genom att aktivera funktioner för enhetsskydd. Välj vilket skärmlås du vill använda."</string>
@@ -661,7 +661,7 @@
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installera certifikat"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"I syfte att förbättra platsangivelserna kan systemtjänster och -appar fortfarande söka efter Wi-Fi-nätverk. Du kan ändra detta i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>sökinställningarna<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Visa inte igen"</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Behåll Wi-Fi i viloläge"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Behåll Wi-Fi på i viloläge"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi-Fi på i viloläge"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Ett problem inträffade när inställningen ändrades"</string>
     <string name="wifi_suspend_efficiency_title" msgid="2338325886934703895">"Öka effektiviteten"</string>
@@ -1309,18 +1309,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Lösenordet angavs"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-koden angavs"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Lösenordet har angetts"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Ange det grafiska lösenordet för enheten om du vill fortsätta"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Ange pinkoden för enheten om du vill fortsätta"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Ange lösenordet för enheten om du vill fortsätta"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Ange det grafiska lösenordet för jobbprofilen om du vill fortsätta"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Ange pinkoden för jobbprofilen om du vill fortsätta"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Ange lösenordet för jobbprofilen om du vill fortsätta"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Fel pinkod"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Fel lösenord"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Fel grafiskt lösenord"</string>
@@ -2232,6 +2226,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"Inaktivera"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"Aktivera"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"Ta bort"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"Ange som betrott"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Vill du att systemets CA-certifikat ska aktiveras?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Vill du att systemets CA-certifikat ska inaktiveras?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Vill du att användarens CA-certifikat ska tas bort permanent?"</string>
@@ -2509,8 +2504,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibration"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Tillåt endast prioriterade"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatiska regler"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Konfigurera schema för Stör ej"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Stäng av ljudet vissa tider"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Bara prioriterade"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Endast alarm"</string>
@@ -3047,4 +3041,20 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Visa eller dölja innehåll i aviseringar"</string>
     <string name="page_tab_title_status" msgid="8002613076689205483">"Status"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alla"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"Minsta bredd"</string>
+    <!-- no translation found for status_title_connection (5610863772527346226) -->
+    <skip />
+    <!-- no translation found for status_title_storage (5049585397576643893) -->
+    <skip />
+    <!-- no translation found for status_title_battery (2445096110607215974) -->
+    <skip />
+    <!-- no translation found for status_title_security (665403998838147956) -->
+    <skip />
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>

@@ -421,7 +421,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"স্ক্রীন লক চয়ন করুন"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"কর্মস্থলের লক চয়ন করুন"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"আপনার ফোন রক্ষা করুন"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"আঙ্গুলের ছাপ একটি শক্তিশালী প্যাটার্ন বা পিন এর চাইতে কম নিরাপদ হতে পারে। নিরাপদ রাখতে একটি ব্যাক আপ লক স্ক্রীন সেট আপ করুন৷"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"আপনার আঙ্গুলের ছাপ একটি শক্তিশালী প্যাটার্ন বা পিন এর চাইতে কম নিরাপদ হতে পারে। অতিরিক্ত নিরাপত্তা যোগ করার জন্য একটি ব্যাক আপ স্ক্রীন লক সেট আপ করুন৷"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"ডিভাইস সুরক্ষা বৈশিষ্ট্যগুলি সক্রিয় করার দ্বারা আপনার অনুমতি ছাড়া অন্যদের এই ট্যাবলেটটি ব্যবহার করা থেকে আটকান৷ আপনি ব্যবহার করতে চান এমন স্ক্রীন লক চয়ন করুন৷"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"ডিভাইস সুরক্ষা বৈশিষ্ট্যগুলি সক্রিয় করার দ্বারা আপনার অনুমতি ছাড়া অন্যদের এই ডিভাইসটি ব্যবহার করা থেকে আটকান৷ আপনি ব্যবহার করতে চান এমন স্ক্রীন লক চয়ন করুন৷"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"ডিভাইস সুরক্ষা বৈশিষ্ট্যগুলি সক্রিয় করার দ্বারা আপনার অনুমতি ছাড়া অন্যদের এই ফোনটি ব্যবহার করা থেকে আটকান৷ আপনি ব্যবহার করতে চান এমন স্ক্রীন লক চয়ন করুন৷"</string>
@@ -1309,18 +1309,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"পাসওয়ার্ড সেট করা হয়েছে"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"পিন সেট করা হয়েছে"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"প্যাটার্ন সেট করা হয়েছে"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"চালিয়ে যেতে আপনার ডিভাইসের প্যাটার্ন ব্যবহার করুন"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"চালিয়ে যেতে আপনার ডিভাইসের PIN লিখুন"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"চালিয়ে যেতে আপনার ডিভাইসের পাসওয়ার্ড লিখুন"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"চালিয়ে যেতে আপনার কর্মস্থলের প্যাটার্ন ব্যবহার করুন"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"চালিয়ে যেতে আপনার কর্মস্থলের PIN লিখুন"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"চালিয়ে যেতে আপনার কর্মস্থলের পাসওয়ার্ড লিখুন"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"ভুল পিন"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"ভুল পাসওয়ার্ড"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"ভুল প্যাটার্ন"</string>
@@ -2232,6 +2226,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"অক্ষম করুন"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"সক্ষম করুন"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"সরান"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"বিশ্বাস"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"সিস্টেমের CA শংসাপত্র সক্ষম করবেন?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"সিস্টেমের CA শংসাপত্র অক্ষম করবেন?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"স্থায়ীভাবে ব্যবহারকারী CA শংসাপত্র সরাবেন?"</string>
@@ -2509,8 +2504,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"কম্পন"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"শুধুমাত্র অগ্রাধিকারকে অনুমতি দেয়"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"স্বয়ংক্রিয় নিয়মগুলি"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"\'বিরক্ত করবেন না\' এর সময়সূচী সেট করুন"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"নির্দিষ্ট সময়ে আপনার ডিভাইসটিকে নীরব করুন"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"শুধুমাত্র অগ্রাধিকার"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"শুধুমাত্র অ্যালার্মগুলি"</string>
@@ -3047,4 +3041,20 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"বিজ্ঞপ্তির সামগ্রী দেখান বা লুকান"</string>
     <string name="page_tab_title_status" msgid="8002613076689205483">"স্থিতি"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"সমস্ত"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"সবচেয়ে কম প্রস্থ"</string>
+    <!-- no translation found for status_title_connection (5610863772527346226) -->
+    <skip />
+    <!-- no translation found for status_title_storage (5049585397576643893) -->
+    <skip />
+    <!-- no translation found for status_title_battery (2445096110607215974) -->
+    <skip />
+    <!-- no translation found for status_title_security (665403998838147956) -->
+    <skip />
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>

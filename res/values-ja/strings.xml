@@ -421,7 +421,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"画面ロックを選択"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"仕事用ロックの選択"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"スマートフォンの保護"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"指紋は、複雑なパターン、PIN、パスワードよりも安全面で劣る可能性があります。バックアップのロック画面を設定して安全を確保してください。"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"指紋は、複雑なパターン、PIN、パスワードよりも安全面で劣る可能性があります。セキュリティを強化するには、予備の画面ロック方式を設定してください。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"このタブレットが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"この端末が他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"このスマートフォンが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
@@ -1309,18 +1309,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"パスワードが設定されました"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PINが設定されました"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"パターンが設定されました"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"続行するには端末のパターンを使用してください"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"続行するには端末の PIN を入力してください"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"続行するには端末のパスワードを入力してください"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"続行するには仕事用のパターンを使用してください"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"続行するには仕事用の PIN を入力してください"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"続行するには仕事用のパスワードを入力してください"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PINが正しくありません"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"パスワードが正しくありません"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"パターンが正しくありません"</string>
@@ -2236,6 +2230,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"無効にする"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"有効にする"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"削除"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"信頼する"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"システムのCA証明書を有効にしますか？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"システムのCA証明書を無効にしますか？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"ユーザーのCA証明書を完全に削除しますか？"</string>
@@ -2513,8 +2508,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"バイブレーション"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"優先する通知のみを許可"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自動ルール"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"[通知を非表示] スケジュールの設定"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"所定の時間にマナーモードにする"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"優先する通知のみ"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"アラームのみ"</string>
@@ -3051,4 +3045,20 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"通知内容の表示と非表示を切り替える"</string>
     <string name="page_tab_title_status" msgid="8002613076689205483">"ステータス"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"すべて"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"最小幅"</string>
+    <!-- no translation found for status_title_connection (5610863772527346226) -->
+    <skip />
+    <!-- no translation found for status_title_storage (5049585397576643893) -->
+    <skip />
+    <!-- no translation found for status_title_battery (2445096110607215974) -->
+    <skip />
+    <!-- no translation found for status_title_security (665403998838147956) -->
+    <skip />
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>

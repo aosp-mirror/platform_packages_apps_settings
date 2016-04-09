@@ -421,7 +421,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Vælg skærmlås"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Vælg arbejdslås"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Beskyt din telefon"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Fingeraftryk kan være mindre sikkert end et stærkt mønster eller en stærk pinkode eller adgangskode. Konfigurer en ekstra låseskærm for at være sikker."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Fingeraftryk kan være mindre sikkert end et stærkt mønster eller en stærk pinkode eller adgangskode. Konfigurer en ekstra låseskærm for at være sikker."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Du kan forhindre andre i at bruge denne tablet uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelse. Vælg den skærmlås, du vil bruge."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Du kan forhindre andre i at bruge denne enhed uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelser. Vælg den skærmlås, du vil bruge."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Du kan forhindre andre i at bruge denne telefon uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelse. Vælg den skærmlås, du vil bruge."</string>
@@ -1309,18 +1309,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Adgangskoden er indstillet"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Pinkoden er blevet indstillet"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Mønsteret er blevet indstillet"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Brug mønsteret til din enhed for at fortsætte"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Indtast pinkoden til din enhed for at fortsætte"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Indtast adgangskoden til din enhed for at fortsætte"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Brug mønsteret til din arbejdsprofil for at fortsætte"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Indtast pinkoden til din arbejdsprofil for at fortsætte"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Indtast adgangskoden til din arbejdsprofil for at fortsætte"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Forkert pinkode"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Forkert adgangskode"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Forkert mønster"</string>
@@ -2232,6 +2226,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"Deaktiver"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"Aktivér"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"Fjern"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"Tillid"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Vil du aktivere systemets CA-certifikat?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Vil du deaktivere systemets CA-certifikat?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Vil du fjerne bruger-CA-certifikatet?"</string>
@@ -2509,8 +2504,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrer"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Prioritet tillader kun"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatiske regler"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Konfigurer Forstyr ikke-plan"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Gør enheden lydløs på bestemte tidspunkter"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Kun prioritet"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Kun alarmer"</string>
@@ -3047,4 +3041,20 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Vis eller skjul indhold i underretninger"</string>
     <string name="page_tab_title_status" msgid="8002613076689205483">"Status"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alle"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"Mindste bredde"</string>
+    <!-- no translation found for status_title_connection (5610863772527346226) -->
+    <skip />
+    <!-- no translation found for status_title_storage (5049585397576643893) -->
+    <skip />
+    <!-- no translation found for status_title_battery (2445096110607215974) -->
+    <skip />
+    <!-- no translation found for status_title_security (665403998838147956) -->
+    <skip />
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>
