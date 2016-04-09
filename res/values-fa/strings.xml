@@ -421,7 +421,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"انتخاب قفل صفحه‌نمایش"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"انتخاب قفل کاری"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"از تلفنتان محافظت کنید"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"اثر انگشت ممکن است نسبت به الگو، پین یا گذرواژه‌ای قوی ایمنی کمتری داشته باشد. برای اینکه ایمنی را حفظ کنید قفل صفحه پشتیبانی تنظیم کنید."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"ممکن است اثر انگشت نسبت به الگو، پین یا گذرواژه‌ای قوی ایمنی کمتری داشته باشد. برای ایمنی بیشتر، یک قفل صفحه پشتیبان تنظیم کنید."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این رایانه لوحی استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این دستگاه استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این تلفن استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
@@ -1309,18 +1309,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"گذرواژه تنظیم شد"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"پین تنظیم شد"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"الگو تنظیم شد"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"برای ادامه، از الگوی دستگاهتان استفاده کنید"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"برای ادامه، کد پین دستگاهتان را وارد کنید"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"برای ادامه گذرواژه دستگاهتان را وارد کنید"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"برای ادامه، الگوی کاری‌تان را وارد کنید"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"برای ادامه، پین کاری‌تان را وارد کنید"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"برای ادامه، گذرواژه کاری‌تان را وارد کنید"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"پین اشتباه"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"گذرواژه اشتباه"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"الگوی اشتباه"</string>
@@ -2232,6 +2226,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"غیرفعال کردن"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"فعال کردن"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"حذف کردن"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"اعتماد"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"‏گواهی CA سیستم فعال شود؟"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"‏گواهی CA سیستم غیرفعال شود؟"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"‏گواهی CA کاربر به صورت دائمی حذف شود؟"</string>
@@ -2509,8 +2504,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"لرزش"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"فقط اولویت‌دار مجاز است"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"قوانین خودکار"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"تنظیم زمان‌بندی «مزاحم نشوید»"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"در زمان‌های خاصی دستگاه را بی‌صدا کنید"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"فقط اولویت‌دار"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"فقط هشدارها"</string>
@@ -3045,4 +3039,12 @@
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"‏شمارنده محدودکننده سرعت ShortcutManager بازنشانی شود؟"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"کنترل اعلان‌های صفحه در حالت قفل"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"نمایش یا پنهان کردن محتوای اعلان"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"‏dp ‏<xliff:g id="ID_1">%d</xliff:g>"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"کوچک‌ترین عرض"</string>
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>

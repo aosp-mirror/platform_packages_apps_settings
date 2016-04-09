@@ -336,7 +336,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> fingeravtrykk er registrert</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
-    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Lås opp med avtrykk"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Lås opp med fingeravtrykk"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Du trenger bare å trykke på fingeravtrykkssensoren for å låse opp telefonen din, godkjenne kjøp eller logge på apper. Tenk nøye over hvilke fingeravtrykk du legger til – alle fingeravtrykkene som legges til, kan nemlig utføre disse handlingene.\n\nMerk: Fingeravtrykket ditt er kanskje ikke like sikkert som et sterkt mønster eller en sterk PIN-kode. "<annotation id="url">"Finn ut mer"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Avbryt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Fortsett"</string>
@@ -421,7 +421,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Velg skjermlås"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Velg jobblås"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Beskytt telefonen"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Merk: Fingeravtrykket ditt kan være mindre sikkert enn et sterkt mønster eller en sterk PIN-kode. Konfigurer en låseskjerm som et reservealternativ for å være sikker."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Fingeravtrykket ditt kan være mindre sikkert enn et sterkt mønster eller passord, eller en sterk PIN-kode. Konfigurer en låseskjerm som et reservealternativ for å være sikker."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Hindre at andre bruker dette nettbrettet uten din tillatelse, ved å aktivere funksjoner for enhetsbeskyttelse. Velg skjermlåsen du vil bruke."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Hindre at andre bruker denne enheten uten din tillatelse, ved å aktivere funksjoner for enhetsbeskyttelse. Velg skjermlåsen du vil bruke."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Hindre at andre bruker denne telefonen uten din tillatelse, ved å aktivere funksjoner for enhetsbeskyttelse. Velg skjermlåsen du vil bruke."</string>
@@ -661,7 +661,7 @@
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installer sertifikater"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"For å forbedre posisjonsnøyaktigheten kan systemapper og -tjenester fortsatt oppdage Wi-Fi-nettverk. Du kan endre dette i <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>innstillingene for skanning<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Ikke vis igjen"</string>
-    <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Hold Wi-Fi på i hvilemodus"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Behold Wi-Fi på i hvilemodus"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi-Fi aktivert i hvilemodus"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Det oppstod et problem under endring av innstillingen"</string>
     <string name="wifi_suspend_efficiency_title" msgid="2338325886934703895">"Forbedre effektiviteten"</string>
@@ -1309,18 +1309,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Passordet er angitt"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-kode er angitt"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Mønster er angitt"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Bruk enhetsmønsteret ditt for å fortsette"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Skriv inn enhets-PIN-koden din for å fortsette"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Skriv inn enhetspassordet ditt for å fortsette"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Bruk jobbmønsteret ditt for å fortsette"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Skriv inn jobb-PIN-koden din for å fortsette"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Skriv inn jobbpassordet ditt for å fortsette"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Feil PIN-kode"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Feil passord"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Feil mønster"</string>
@@ -1639,7 +1633,7 @@
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Teksting"</string>
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Forstørrelsesbevegelser"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Trykk tre ganger for å zoome"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258"><b>"For å zoome"</b>", trykk raskt på skjermen tre ganger med én finger.\n"<ul><li>"Dra med to eller flere fingre for å rulle"</li>\n<li>"Klyp sammen to eller flere fingre, eller spre dem fra hverandre, for å justere zoomnivået"</li></ul>\n\n<b>"For å zoome midlertidig"</b>", trykk raskt på skjermen tre ganger og hold inne fingeren på det tredje trykket.\n"<ul><li>"Dra fingeren for å bevege på skjermbildet"</li>\n<li>"Løft fingeren for å zoome ut"</li></ul>\n\n"Du kan ikke zoome inn på tastaturet og navigasjonsraden."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258"><b>"For å zoome"</b>", trykk raskt på skjermen tre ganger med én finger.\n"<ul><li>"Dra med to eller flere fingre for å rulle"</li>\n<li>"Klyp sammen to eller flere fingre, eller spre dem fra hverandre, for å justere zoomnivået"</li></ul>\n\n<b>"For å zoome midlertidig"</b>", trykk raskt på skjermen tre ganger og hold inne fingeren på det tredje trykket.\n"<ul><li>"Dra fingeren for å bevege på skjermbildet"</li>\n<li>"Løft fingeren for å zoome ut"</li></ul>\n\n"Du kan ikke zoome inn på tastaturet eller navigasjonsraden."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Snarvei for tilgjengelighet"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"På"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Av"</string>
@@ -2232,6 +2226,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"Slå av"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"Slå på"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"Fjern"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"Angi som pålitelig"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Vil du slå på systemets CA-sertifikat?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Vil du slå av systemets CA-sertifikat?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Vil du fjerne brukerens CA-sertifikat permanent?"</string>
@@ -2509,8 +2504,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrer"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Prioritet tillater bare"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatiske regler"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Angi timeplan for Ikke forstyrr"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Slå av lyden på enheten til bestemte tider"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Bare prioritet"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Bare alarmer"</string>
@@ -3045,4 +3039,12 @@
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Vil du tilbakestille tellerne av frekvensbegrensning for ShortcutManager?"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Kontrollér låseskjermvarsler"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Vis eller skjul varselinnhold"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"Minst bredde"</string>
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>

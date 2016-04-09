@@ -421,7 +421,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Veldu skjálás"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Veldu vinnulás"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"Auktu öryggi símans"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"Hugsanlegt er að notkun fingrafara sé ekki jafnörugg og mynstur, PIN-númer eða aðgangsorð. Settu upp skjálás til vara til að gæta fyllsta öryggis."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Hugsanlegt er að notkun fingrafara sé ekki jafnörugg og mynstur, PIN-númer eða aðgangsorð. Settu upp skjálás til vara til að gæta fyllsta öryggis."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Komdu í veg fyrir að aðrir noti þessa spjaldtölvu í heimildarleysi með því að virkja varnareiginleika spjaldtölvunnar. Veldu þann skjálás sem þú vilt nota."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Komdu í veg fyrir að aðrir noti þetta tæki í heimildarleysi með því að virkja varnareiginleika tækisins. Veldu þann skjálás sem þú vilt nota."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Komdu í veg fyrir að aðrir noti þennan síma í heimildarleysi með því að virkja varnareiginleika símans. Veldu þann skjálás sem þú vilt nota."</string>
@@ -1309,18 +1309,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Aðgangsorð hefur verið valið"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-númer var valið"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Mynstur hefur verið valið"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Teiknaðu mynstrið þitt fyrir tækið til að halda áfram"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Sláðu inn PIN-númerið þitt fyrir tækið til að halda áfram"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Sláðu inn aðgangsorðið þitt fyrir tækið til að halda áfram"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Notaðu vinnumynstrið þitt til að halda áfram"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Sláðu inn PIN-númerið þitt fyrir vinnuna til að halda áfram"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Sláðu inn vinnuaðgangsorðið þitt til að halda áfram"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Rangt PIN-númer"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Rangt aðgangsorð"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Rangt mynstur"</string>
@@ -2232,6 +2226,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"Gera óvirkt"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"Kveikja"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"Fjarlægja"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"Treysta"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Gera CA-vottorð kerfis virkt?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Gera CA-vottorð kerfis óvirkt?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Fjarlægja CA-vottorð notanda fyrir fullt og allt?"</string>
@@ -2509,8 +2504,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Titringur"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Aðeins forgangsheimildir"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Sjálfvirkar reglur"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Stilla „Ónáðið ekki“ áætlun"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"Taka hljóðið af tækinu á vissum tímum"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Aðeins forgangur"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Aðeins vekjarar"</string>
@@ -3045,4 +3039,12 @@
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Endurstilla ShortcutManager teljara með hraðatakmörkun?"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Stjórna skjálásstilkynningum"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Sýna eða fela efni tilkynninga"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"Minnsta breidd"</string>
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>

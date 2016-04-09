@@ -421,7 +421,7 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"திரைப் பூட்டைத் தேர்வுசெய்யவும்"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"பணிப் பூட்டைத் தேர்வுசெய்க"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"ஃபோனைப் பாதுகாக்கவும்"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"உங்கள் கைரேகையானது வலுவான வடிவம், பின் அல்லது கடவுச்சொல்லை விடப் பாதுகாப்பு குறைவானதாக இருக்கக்கூடும். பாதுகாப்பாக இருக்க, மாற்றுப் பூட்டுத் திரையை அமைக்கவும்."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"உங்கள் கைரேகையானது வலுவான பேட்டர்ன், பின் அல்லது கடவுச்சொல்லை விட குறைந்த பாதுகாப்புடையதாக இருக்கக்கூடும். கூடுதல் பாதுகாப்பிற்கு, மாற்றுப் பூட்டுத் திரையை அமைக்கவும்."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"சாதனப் பாதுகாப்பு அம்சங்களைச் செயல்படுத்தினால், உங்கள் அனுமதியின்றி பிறர் இந்த டேப்லெட்டைப் பயன்படுத்த முடியாது. பயன்படுத்த விரும்பும் திரைப் பூட்டைத் தேர்வுசெய்யவும்."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"சாதனப் பாதுகாப்பு அம்சங்களைச் செயல்படுத்தினால், உங்கள் அனுமதியின்றி பிறர் இந்தச் சாதனத்தைப் பயன்படுத்த முடியாது. பயன்படுத்த விரும்பும் திரைப் பூட்டைத் தேர்வுசெய்யவும்."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"சாதனப் பாதுகாப்பு அம்சங்களைச் செயல்படுத்தினால், உங்கள் அனுமதியின்றி பிறர் உங்கள் ஃபோனைப் பயன்படுத்த முடியாது. பயன்படுத்த விரும்பும் திரைப் பூட்டைத் தேர்வுசெய்யவும்."</string>
@@ -1309,18 +1309,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"கடவுச்சொல் அமைக்கப்பட்டது"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"பின் அமைக்கப்பட்டது"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"வடிவம் அமைக்கப்பட்டது"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"தொடர, சாதனப் பேட்டர்னை வரையவும்"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"தொடர, சாதனப் பின்னை உள்ளிடவும்"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"தொடர, சாதனக் கடவுச்சொல்லை உள்ளிடவும்"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"தொடர, பணிப் பேட்டர்னை வரையவும்"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"தொடர, பணிப் பின்னை உள்ளிடவும்"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"தொடர, பணிக் கடவுச்சொல்லை உள்ளிடவும்"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"தவறான பின்"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"தவறான கடவுச்சொல்"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"தவறான வடிவம்"</string>
@@ -2232,6 +2226,7 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"முடக்கு"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"இயக்கு"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"அகற்று"</string>
+    <string name="trusted_credentials_trust_label" msgid="8003264222650785429">"நம்பகமானது"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"அமைப்பின் CA சான்றிதழை இயக்கவா?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"அமைப்பின் CA சான்றிதழை முடக்கவா?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"பயனரின் CA சான்றிதழை நிரந்தரமாக அகற்றவா?"</string>
@@ -2509,8 +2504,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"அதிர்வு"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"முதன்மை அனுமதிப்பவை:"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"தானியங்கு விதிகள்"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"தொந்தரவு செய்யக்கூடாத நேரம்"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"குறிப்பிட்ட நேரங்களில், சாதனத்தை நிசப்தமாக்கும்"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"முதன்மை மட்டும்"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"அலாரங்கள் மட்டும்"</string>
@@ -3045,4 +3039,12 @@
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"ShortcutManager இன் மதிப்பீட்டு வரம்புக் கவுன்டர்களை மீட்டமைக்கவா?"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"பூட்டு திரை அறிவிப்புகளை கட்டுப்படுத்து"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"அறிவிப்பு உள்ளடக்கத்தைக் காட்டும் அல்லது மறைக்கும்"</string>
+    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="developer_smallest_width" msgid="7516950434587313360">"மிகக் குறைந்த அகலம்"</string>
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>

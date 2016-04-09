@@ -421,7 +421,8 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"选择屏幕锁定方式"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"选择工作资料锁屏方式"</string>
     <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"为手机启用保护功能"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="2431588439043969764">"指纹识别的安全性可能不及安全系数高的图案、PIN 码或密码。请设置备用屏幕锁定方式以确保安全。"</string>
+    <!-- no translation found for setup_lock_settings_picker_fingerprint_message (4384500605121098860) -->
+    <skip />
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"启用设备保护功能可防止他人在未经您允许的情况下使用此平板电脑。请选择您要使用的屏幕锁定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"启用设备保护功能可防止他人在未经您允许的情况下使用此设备。请选择您要使用的屏幕锁定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"启用设备保护功能可防止他人在未经您允许的情况下使用此手机。请选择您要使用的屏幕锁定方式。"</string>
@@ -826,7 +827,7 @@
     <item msgid="3194458950573886239">"0"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_without_wifi_only">
-    <item msgid="5782108782860004851">"首选 WLAN"</item>
+    <item msgid="5782108782860004851">"首选 WLAN 网络"</item>
     <item msgid="9006785365352731433">"首选移动网络"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
@@ -1309,18 +1310,12 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"密码已设置"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"已设置PIN码"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"图案已设置"</string>
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic (2920960858283879113) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic (4062335874438910487) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic (3976394862548354966) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (4435638308193361861) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_generic_profile (3730141667547002246) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_generic_profile (4250642723467019894) -->
-    <skip />
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"请绘制您的设备解锁图案以继续"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"请输入您的设备 PIN 码以继续"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"请输入您的设备密码以继续"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"请绘制您的工作解锁图案以继续"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"请输入您的工作 PIN 码以继续"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"请输入您的工作密码以继续"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN 码错误"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"密码错误"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"图案错误"</string>
@@ -2232,6 +2227,8 @@
     <string name="trusted_credentials_disable_label" msgid="3864493185845818506">"停用"</string>
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"启用"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"删除"</string>
+    <!-- no translation found for trusted_credentials_trust_label (8003264222650785429) -->
+    <skip />
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"要启用该系统CA证书吗？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"要停用该系统CA证书吗？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"要永久移除该用户CA证书吗？"</string>
@@ -2509,8 +2506,7 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"振动"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"仅允许优先打扰内容"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自动规则"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (3373871113435938830) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"设置“请勿打扰”时间安排"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="8554080399360506596">"在特定时间将设备静音"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"仅限优先打扰"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"仅限闹钟"</string>
@@ -3045,4 +3041,14 @@
     <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"要重置 ShortcutManager 调用频率限制计数器吗？"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"控制锁定屏幕通知"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"显示或隐藏通知内容"</string>
+    <!-- no translation found for developer_density_summary (1998244213021456519) -->
+    <skip />
+    <!-- no translation found for developer_smallest_width (7516950434587313360) -->
+    <skip />
+    <!-- no translation found for premium_sms_none (8268105565738040566) -->
+    <skip />
+    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
+    <skip />
+    <!-- no translation found for premium_sms_access (4660047004791638305) -->
+    <skip />
 </resources>
