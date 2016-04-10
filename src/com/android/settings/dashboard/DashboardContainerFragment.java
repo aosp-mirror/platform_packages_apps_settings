@@ -29,10 +29,10 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.widget.SlidingTabLayout;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 /**
