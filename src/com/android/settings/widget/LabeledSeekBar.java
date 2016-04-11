@@ -24,12 +24,10 @@ import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v4.widget.ExploreByTouchHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import java.util.List;
 
@@ -40,9 +38,90 @@ import java.util.List;
  */
 public class LabeledSeekBar extends SeekBar {
 
+    private final ExploreByTouchHelper mAccessHelper;
+
+    /** Seek bar change listener set via public method. */
+    private OnSeekBarChangeListener mOnSeekBarChangeListener;
+
+    /** Labels for discrete progress values. */
+    private String[] mLabels;
+
+    public LabeledSeekBar(Context context, AttributeSet attrs) {
+        this(context, attrs, com.android.internal.R.attr.seekBarStyle);
+    }
+
+    public LabeledSeekBar(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
+    }
+
+    public LabeledSeekBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+
+        mAccessHelper = new LabeledSeekBarExploreByTouchHelper(this);
+        ViewCompat.setAccessibilityDelegate(this, mAccessHelper);
+
+        super.setOnSeekBarChangeListener(mProxySeekBarListener);
+    }
+
+    @Override
+    public synchronized void setProgress(int progress) {
+        // This method gets called from the constructor, so mAccessHelper may
+        // not have been assigned yet.
+        if (mAccessHelper != null) {
+            mAccessHelper.invalidateRoot();
+        }
+
+        super.setProgress(progress);
+    }
+
+    public void setLabels(String[] labels) {
+        mLabels = labels;
+    }
+
+    @Override
+    public void setOnSeekBarChangeListener(OnSeekBarChangeListener l) {
+        // The callback set in the constructor will proxy calls to this
+        // listener.
+        mOnSeekBarChangeListener = l;
+    }
+
+    @Override
+    protected boolean dispatchHoverEvent(MotionEvent event) {
+        return mAccessHelper.dispatchHoverEvent(event) || super.dispatchHoverEvent(event);
+    }
+
+    private void sendClickEventForAccessibility(int progress) {
+        mAccessHelper.invalidateRoot();
+        mAccessHelper.sendEventForVirtualView(progress, AccessibilityEvent.TYPE_VIEW_CLICKED);
+    }
+
+    private final OnSeekBarChangeListener mProxySeekBarListener = new OnSeekBarChangeListener() {
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            if (mOnSeekBarChangeListener != null) {
+                mOnSeekBarChangeListener.onStopTrackingTouch(seekBar);
+            }
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            if (mOnSeekBarChangeListener != null) {
+                mOnSeekBarChangeListener.onStartTrackingTouch(seekBar);
+            }
+        }
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            if (mOnSeekBarChangeListener != null) {
+                mOnSeekBarChangeListener.onProgressChanged(seekBar, progress, fromUser);
+                sendClickEventForAccessibility(progress);
+            }
+        }
+    };
+
     private class LabeledSeekBarExploreByTouchHelper extends ExploreByTouchHelper {
 
-        public LabeledSeekBarExploreByTouchHelper(View forView) {
+        public LabeledSeekBarExploreByTouchHelper(LabeledSeekBar forView) {
             super(forView);
         }
 
@@ -132,127 +211,6 @@ public class LabeledSeekBar extends SeekBar {
             final Rect r = new Rect();
             r.set(left, 0, right, LabeledSeekBar.this.getHeight());
             return r;
-        }
-    }
-
-    private String[] mLabels;
-
-    private ExploreByTouchHelper mAccessHelper;
-
-    private boolean mOnMeasureCalled;
-    private boolean mOnAttachedWindowCalled;
-
-    public LabeledSeekBar(Context context, AttributeSet attrs) {
-        this(context, attrs, com.android.internal.R.attr.seekBarStyle);
-    }
-
-    public LabeledSeekBar(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public LabeledSeekBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        super.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                // Do nothing
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // Do nothing
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                sendClickEventForAccessibility(progress);
-            }
-        });
-    }
-
-    @Override
-    public synchronized void setProgress(int progress) {
-        if (mAccessHelper != null) {
-            mAccessHelper.invalidateRoot();
-        }
-
-        super.setProgress(progress);
-    }
-
-    public void setLabels(String[] labels) {
-        mLabels = labels;
-    }
-
-    @Override
-    public void setOnSeekBarChangeListener(final OnSeekBarChangeListener l) {
-        // Tweak the listener to send accessibility event on progress changed.
-        OnSeekBarChangeListener l2 = new OnSeekBarChangeListener() {
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                l.onStopTrackingTouch(seekBar);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                l.onStartTrackingTouch(seekBar);
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                l.onProgressChanged(seekBar, progress, fromUser);
-                sendClickEventForAccessibility(progress);
-            }
-        };
-
-        super.setOnSeekBarChangeListener(l2);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        mOnMeasureCalled = true;
-        tryInitAccessHelper();
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        mOnAttachedWindowCalled = true;
-        tryInitAccessHelper();
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        ViewCompat.setAccessibilityDelegate(this, null);
-        mAccessHelper = null;
-        super.onDetachedFromWindow();
-    }
-
-    @Override
-    protected boolean dispatchHoverEvent(MotionEvent event) {
-        if (mAccessHelper != null && mAccessHelper.dispatchHoverEvent(event)) {
-            return true;
-        }
-
-        return super.dispatchHoverEvent(event);
-    }
-
-    /**
-     * Initialize accessibility delegation only when both onAttachedWindow and onMeasure
-     * has been called.
-     */
-    private void tryInitAccessHelper() {
-        if (mOnAttachedWindowCalled && mOnMeasureCalled) {
-            mAccessHelper = new LabeledSeekBarExploreByTouchHelper(this);
-            ViewCompat.setAccessibilityDelegate(this, mAccessHelper);
-            mOnAttachedWindowCalled = mOnMeasureCalled = false;
-        }
-    }
-
-    private void sendClickEventForAccessibility(int progress) {
-        if (mAccessHelper != null) {
-            mAccessHelper.invalidateRoot();
-            mAccessHelper.sendEventForVirtualView(progress, AccessibilityEvent.TYPE_VIEW_CLICKED);
         }
     }
 }
