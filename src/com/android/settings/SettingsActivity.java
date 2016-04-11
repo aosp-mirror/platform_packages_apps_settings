@@ -102,6 +102,7 @@ import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.search.DynamicIndexableContentMonitor;
@@ -680,6 +681,9 @@ public class SettingsActivity extends SettingsDrawerActivity
                 }
             }
         }
+
+        // Will remove this line before submitting.
+        FeatureFactory.getFactory(this).createToastController().makeToast(this);
 
         if (DEBUG_TIMING) Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
