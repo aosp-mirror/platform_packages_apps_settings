@@ -25,11 +25,10 @@ import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardStatusAdapter;
+import com.android.settings.dashboard.DashboardAdapter;
 
 public class ConditionAdapterUtils {
 
@@ -50,7 +49,7 @@ public class ConditionAdapterUtils {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                DashboardStatusAdapter adapter = (DashboardStatusAdapter) recyclerView.getAdapter();
+                DashboardAdapter adapter = (DashboardAdapter) recyclerView.getAdapter();
                 Object item = adapter.getItem(viewHolder.getItemId());
                 if (item instanceof Condition) {
                     ((Condition) item).silence();
@@ -62,7 +61,7 @@ public class ConditionAdapterUtils {
     }
 
     public static void bindViews(final Condition condition,
-            DashboardStatusAdapter.ViewHolder view, boolean isExpanded,
+            DashboardAdapter.DashboardItemHolder view, boolean isExpanded,
             View.OnClickListener onClickListener, View.OnClickListener onExpandListener) {
         View card = view.itemView.findViewById(R.id.content);
         card.setTag(condition);

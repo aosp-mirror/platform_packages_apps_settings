@@ -14,14 +14,8 @@
      limitations under the License.
 -->
 
-<com.android.settings.dashboard.conditional.FocusRecyclerView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dashboard_status_recycler_view"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="@dimen/dashboard_padding_start"
-    android:paddingEnd="@dimen/dashboard_padding_end"
-    android:paddingTop="@dimen/dashboard_padding_top"
-    android:paddingBottom="@dimen/dashboard_padding_bottom"
-    android:clipChildren="false"
-    android:clipToPadding="false" />
+    android:layout_height="match_parent"/>
