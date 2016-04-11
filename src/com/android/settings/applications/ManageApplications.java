@@ -80,7 +80,7 @@ import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Locale;
+import java.util.Locale;    
 
 /**
  * Activity to pick an application that will be used to display installation information and

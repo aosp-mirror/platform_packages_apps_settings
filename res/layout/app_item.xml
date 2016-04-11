@@ -60,6 +60,14 @@
         android:textColor="?android:attr/textColorSecondary"
         android:duplicateParentState="true" />
 
+    <Switch
+            android:id="@android:id/switch_widget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:visibility="gone"/>
+
     <FrameLayout
         android:id="@android:id/widget_frame"
         android:layout_width="wrap_content"

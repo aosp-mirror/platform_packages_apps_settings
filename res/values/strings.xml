@@ -2437,6 +2437,8 @@
     <string name="storage_menu_set_up">Set up</string>
     <!-- Storage setting.  Menu option for exploring a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_explore">Explore</string>
+    <!-- Storage setting. Menu option for using the deletion helper. [CHAR LIMIT=30] -->
+    <string name="storage_menu_free">Free up space</string>
 
     <!-- Storage setting.  Title for USB transfer settings [CHAR LIMIT=30]-->
     <string name="storage_title_usb">USB computer connection</string>
@@ -7407,5 +7409,18 @@
 
     <!-- [CHAR LIMIT=60] Name of dev option called demo mode -->
     <string name="demo_mode">Demo mode</string>
+
+    <!-- Activity title for deletion helper. [CHAR LIMIT=25] -->
+    <string name="deletion_helper_title">Remove from Device</string>
+    <!-- Preference group title for the list of apps to uninstall. [CHAR LIMIT=40]-->
+    <string name="deletion_helper_apps_title">Apps</string>
+    <!-- Summary of how much storage an app is using and the number of days since last use. [CHAR LIMIT=NONE]-->
+    <string name="deletion_helper_app_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g>, last used <xliff:g id="days" example="67">%2$d</xliff:g> days ago</string>
+    <!-- Summary of how much storage an app is using when it has never been used before. [CHAR LIMIT=NONE]-->
+    <string name="deletion_helper_app_summary_never_used"><xliff:g id="used" example="1.2GB">%1$s</xliff:g>, never used before</string>
+    <!-- Summary of how much storage an app is using when its last use is unknown. [CHAR LIMIT=NONE]-->
+    <string name="deletion_helper_app_summary_unknown_used"><xliff:g id="used" example="1.2GB">%1$s</xliff:g>, not sure when last used</string>
+    <!-- Button which clears out storage in the deletion helper. [CHAR LIMIT=60]-->
+    <string name="deletion_helper_free_button">Free up <xliff:g id="freeable" example="1.2GB">%1$s</xliff:g></string>
 
 </resources>
