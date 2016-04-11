@@ -478,6 +478,9 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     continue;
                 }
                 final File path = info.getPath();
+                if (path == null) {
+                    continue;
+                }
                 privateUsedBytes += path.getTotalSpace() - path.getFreeSpace();
                 privateTotalBytes += path.getTotalSpace();
             }
