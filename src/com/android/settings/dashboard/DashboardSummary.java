@@ -139,7 +139,7 @@ public class DashboardSummary extends InstrumentedFragment
         }
         mDashboard.setLayoutManager(mLayoutManager);
         mDashboard.setHasFixedSize(true);
-
+        mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mAdapter = new DashboardAdapter(getContext());
         mAdapter.setSuggestions(mSuggestionParser);
         mDashboard.setAdapter(mAdapter);

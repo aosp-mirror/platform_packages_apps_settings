@@ -17,6 +17,7 @@
 
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:key="manage_assist">
 
     <com.android.settings.applications.DefaultAssistPreference
@@ -40,8 +41,9 @@
             android:title="@string/voice_input_settings_title"
             />
 
-    <Preference
+    <com.android.settings.DividerPreference
         android:summary="@string/assist_footer"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:allowDividerAbove="true" />
 
 </PreferenceScreen>
