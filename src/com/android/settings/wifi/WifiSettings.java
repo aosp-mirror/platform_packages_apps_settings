@@ -984,7 +984,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         private CharSequence getSummary() {
             if (!mWifiTracker.enabled) {
-                return mContext.getString(R.string.disabled);
+                return mContext.getString(R.string.wifi_disabled_generic);
             }
             if (!mWifiTracker.connected) {
                 return mContext.getString(R.string.disconnected);

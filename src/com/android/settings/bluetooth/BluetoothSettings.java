@@ -518,7 +518,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         }
 
         private CharSequence getSummary() {
-            return mContext.getString(!mEnabled ? R.string.disabled
+            return mContext.getString(!mEnabled ? R.string.bluetooth_disabled
                     : mConnected ? R.string.bluetooth_connected
                     : R.string.bluetooth_disconnected);
         }
