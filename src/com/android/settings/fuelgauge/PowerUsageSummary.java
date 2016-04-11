@@ -279,7 +279,6 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     protected void refreshStats() {
         super.refreshStats();
-        PowerWhitelistBackend powerWhiteist = PowerWhitelistBackend.getInstance();
         updatePreference(mHistPref);
         cacheRemoveAllPrefs(mAppListGroup);
         mAppListGroup.setOrderingAsAdded(false);
@@ -360,12 +359,6 @@ public class PowerUsageSummary extends PowerUsageBase {
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfMax, percentOfTotal);
-                if (sipper.drainType == DrainType.APP) {
-                    pref.setSummary(powerWhiteist.isWhitelisted(entry.defaultPackageName)
-                            || powerWhiteist.isSysWhitelisted(entry.defaultPackageName)
-                            ? getString(R.string.not_battery_optimizing)
-                            : null);
-                }
                 if (sipper.uidObj != null) {
                     pref.setKey(Integer.toString(sipper.uidObj.getUid()));
                 }
