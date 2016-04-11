@@ -186,8 +186,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final String INACTIVE_APPS_KEY = "inactive_apps";
 
-    private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
-
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
             = "immediately_destroy_activities";
     private static final String APP_PROCESS_LIMIT_KEY = "app_process_limit";
@@ -278,7 +276,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mTransitionAnimationScale;
     private ListPreference mAnimatorDurationScale;
     private ListPreference mOverlayDisplayDevices;
-    private ListPreference mOpenGLTraces;
 
     private SwitchPreference mWebViewMultiprocess;
     private ListPreference mWebViewProvider;
@@ -432,7 +429,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
         mAnimatorDurationScale = addListPreference(ANIMATOR_DURATION_SCALE_KEY);
         mOverlayDisplayDevices = addListPreference(OVERLAY_DISPLAY_DEVICES_KEY);
-        mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
         mUSBAudio = findAndInitSwitchPref(USB_AUDIO_KEY);
         mForceResizable = findAndInitSwitchPref(FORCE_RESIZABLE_KEY);
@@ -680,7 +676,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateDebugLayoutOptions();
         updateAnimationScaleOptions();
         updateOverlayDisplayDevicesOptions();
-        updateOpenGLTracesOptions();
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
@@ -1640,30 +1635,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateOverlayDisplayDevicesOptions();
     }
 
-    private void updateOpenGLTracesOptions() {
-        String value = SystemProperties.get(OPENGL_TRACES_PROPERTY);
-        if (value == null) {
-            value = "";
-        }
-
-        CharSequence[] values = mOpenGLTraces.getEntryValues();
-        for (int i = 0; i < values.length; i++) {
-            if (value.contentEquals(values[i])) {
-                mOpenGLTraces.setValueIndex(i);
-                mOpenGLTraces.setSummary(mOpenGLTraces.getEntries()[i]);
-                return;
-            }
-        }
-        mOpenGLTraces.setValueIndex(0);
-        mOpenGLTraces.setSummary(mOpenGLTraces.getEntries()[0]);
-    }
-
-    private void writeOpenGLTracesOptions(Object newValue) {
-        SystemProperties.set(OPENGL_TRACES_PROPERTY, newValue == null ? "" : newValue.toString());
-        pokeSystemProperties();
-        updateOpenGLTracesOptions();
-    }
-
     private void updateAppProcessLimitOptions() {
         try {
             int limit = ActivityManagerNative.getDefault().getProcessLimit();
@@ -1994,9 +1965,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return true;
         } else if (preference == mOverlayDisplayDevices) {
             writeOverlayDisplayDevicesOptions(newValue);
-            return true;
-        } else if (preference == mOpenGLTraces) {
-            writeOpenGLTracesOptions(newValue);
             return true;
         } else if (preference == mTrackFrameTime) {
             writeTrackFrameTimeOptions(newValue);
