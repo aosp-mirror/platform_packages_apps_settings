@@ -75,6 +75,7 @@ public class BatteryHistoryDetail extends SettingsPreferenceFragment {
         mCpuParser = new BatteryFlagParser(accentColor, false,
                 HistoryItem.STATE_CPU_RUNNING_FLAG);
         mPhoneParser = new BatteryCellParser();
+        setHasOptionsMenu(true);
     }
     
     @Override
