@@ -54,6 +54,7 @@ import libcore.util.Objects;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         implements InputManager.InputDeviceListener {
@@ -64,7 +65,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private static final String IM_SUBTYPE_MODE_KEYBOARD = "keyboard";
 
     @NonNull
-    private final ArrayList<HardKeyboardDeviceInfo> mLastHardKeyboards = new ArrayList<>();
+    private final List<HardKeyboardDeviceInfo> mLastHardKeyboards = new ArrayList<>();
 
     @NonNull
     private final HashSet<Integer> mLoaderIDs = new HashSet<>();
@@ -119,32 +120,42 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         unregisterShowVirtualKeyboardSettingsObserver();
     }
 
-    public void onLoadFinishedInternal(final int loaderId, @NonNull final Keyboards data,
-            @NonNull final PreferenceCategory preferenceCategory) {
+    public void onLoadFinishedInternal(
+            final int loaderId, @NonNull final List<Keyboards> keyboardsList) {
         if (!mLoaderIDs.remove(loaderId)) {
             // Already destroyed loader.  Ignore.
             return;
         }
 
-        final InputDeviceIdentifier deviceId = data.mInputDeviceIdentifier;
-        preferenceCategory.removeAll();
-        for (Keyboards.KeyboardInfo info : data.mKeyboardInfoList) {
-            Preference pref = new Preference(getPrefContext(), null);
-            final InputMethodInfo imi = info.mImi;
-            final InputMethodSubtype imSubtype = info.mImSubtype;
-            if (imi != null && imSubtype != null) {
-                pref.setTitle(getDisplayName(getContext(), imi, imSubtype));
-                KeyboardLayout layout = info.mLayout;
-                if (layout != null) {
-                    pref.setSummary(layout.getLabel());
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        preferenceScreen.removeAll();
+        for (Keyboards keyboards : keyboardsList) {
+            final PreferenceCategory category = new PreferenceCategory(getPrefContext(), null);
+            category.setTitle(keyboards.mDeviceInfo.mDeviceName);
+            category.setOrder(0);
+            preferenceScreen.addPreference(category);
+            for (Keyboards.KeyboardInfo info : keyboards.mKeyboardInfoList) {
+                Preference pref = new Preference(getPrefContext(), null);
+                final InputMethodInfo imi = info.mImi;
+                final InputMethodSubtype imSubtype = info.mImSubtype;
+                if (imi != null && imSubtype != null) {
+                    pref.setTitle(getDisplayName(getContext(), imi, imSubtype));
+                    KeyboardLayout layout = info.mLayout;
+                    if (layout != null) {
+                        pref.setSummary(layout.getLabel());
+                    }
+                    pref.setOnPreferenceClickListener(preference -> {
+                        showKeyboardLayoutScreen(
+                                keyboards.mDeviceInfo.mDeviceIdentifier, imi, imSubtype);
+                        return true;
+                    });
+                    category.addPreference(pref);
                 }
-                pref.setOnPreferenceClickListener(preference -> {
-                    showKeyboardLayoutScreen(deviceId, imi, imSubtype);
-                    return true;
-                });
-                preferenceCategory.addPreference(pref);
             }
         }
+        mKeyboardAssistanceCategory.setOrder(1);
+        preferenceScreen.addPreference(mKeyboardAssistanceCategory);
+        updateShowVirtualKeyboardSwitch();
     }
 
     @Override
@@ -184,27 +195,13 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         final ArrayList<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboards();
         if (!Objects.equal(newHardKeyboards, mLastHardKeyboards)) {
             clearLoader();
-            final PreferenceScreen preferenceScreen = getPreferenceScreen();
-            preferenceScreen.removeAll();
             mLastHardKeyboards.clear();
             mLastHardKeyboards.addAll(newHardKeyboards);
-            final int N = newHardKeyboards.size();
-            for (int i = 0; i < N; ++i) {
-                final HardKeyboardDeviceInfo deviceInfo = newHardKeyboards.get(i);
-                final PreferenceCategory category = new PreferenceCategory(getPrefContext(), null);
-                category.setTitle(deviceInfo.mDeviceName);
-                category.setOrder(0);
-                getLoaderManager().initLoader(mNextLoaderId, null,
-                        new Callbacks(getContext(), this, deviceInfo.mDeviceIdentifier, category));
-                mLoaderIDs.add(mNextLoaderId);
-                ++mNextLoaderId;
-                preferenceScreen.addPreference(category);
-            }
-            mKeyboardAssistanceCategory.setOrder(1);
-            preferenceScreen.addPreference(mKeyboardAssistanceCategory);
-
+            getLoaderManager().initLoader(mNextLoaderId, null,
+                    new Callbacks(getContext(), this, mLastHardKeyboards));
+            mLoaderIDs.add(mNextLoaderId);
+            ++mNextLoaderId;
         }
-        updateShowVirtualKeyboardSwitch();
     }
 
     private void showKeyboardLayoutScreen(
@@ -272,56 +269,49 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 context.getString(R.string.physical_device_title), imSubtypeName, imeName);
     }
 
-    private static final class Callbacks
-            implements LoaderManager.LoaderCallbacks<PhysicalKeyboardFragment.Keyboards> {
+    private static final class Callbacks implements LoaderManager.LoaderCallbacks<List<Keyboards>> {
         @NonNull
         final Context mContext;
         @NonNull
         final PhysicalKeyboardFragment mPhysicalKeyboardFragment;
         @NonNull
-        final InputDeviceIdentifier mInputDeviceIdentifier;
-        @NonNull
-        final PreferenceCategory mPreferenceCategory;
+        final List<HardKeyboardDeviceInfo> mHardKeyboards;
         public Callbacks(
                 @NonNull Context context,
                 @NonNull PhysicalKeyboardFragment physicalKeyboardFragment,
-                @NonNull InputDeviceIdentifier inputDeviceIdentifier,
-                @NonNull PreferenceCategory preferenceCategory) {
+                @NonNull List<HardKeyboardDeviceInfo> hardKeyboards) {
             mContext = context;
             mPhysicalKeyboardFragment = physicalKeyboardFragment;
-            mInputDeviceIdentifier = inputDeviceIdentifier;
-            mPreferenceCategory = preferenceCategory;
+            mHardKeyboards = hardKeyboards;
         }
 
         @Override
-        public Loader<Keyboards> onCreateLoader(int id, Bundle args) {
-            return new KeyboardLayoutLoader(mContext, mInputDeviceIdentifier);
+        public Loader<List<Keyboards>> onCreateLoader(int id, Bundle args) {
+            return new KeyboardLayoutLoader(mContext, mHardKeyboards);
         }
 
         @Override
-        public void onLoadFinished(Loader<Keyboards> loader, Keyboards data) {
-            mPhysicalKeyboardFragment.onLoadFinishedInternal(loader.getId(), data,
-                    mPreferenceCategory);
+        public void onLoadFinished(Loader<List<Keyboards>> loader, List<Keyboards> data) {
+            mPhysicalKeyboardFragment.onLoadFinishedInternal(loader.getId(), data);
         }
 
         @Override
-        public void onLoaderReset(Loader<Keyboards> loader) {
+        public void onLoaderReset(Loader<List<Keyboards>> loader) {
         }
     }
 
-    private static final class KeyboardLayoutLoader extends AsyncTaskLoader<Keyboards> {
+    private static final class KeyboardLayoutLoader extends AsyncTaskLoader<List<Keyboards>> {
         @NonNull
-        private final InputDeviceIdentifier mInputDeviceIdentifier;
+        private final List<HardKeyboardDeviceInfo> mHardKeyboards;
 
         public KeyboardLayoutLoader(
                 @NonNull Context context,
-                @NonNull InputDeviceIdentifier inputDeviceIdentifier) {
+                @NonNull List<HardKeyboardDeviceInfo> hardKeyboards) {
             super(context);
-            mInputDeviceIdentifier = Preconditions.checkNotNull(inputDeviceIdentifier);
+            mHardKeyboards = Preconditions.checkNotNull(hardKeyboards);
         }
 
-        @Override
-        public Keyboards loadInBackground() {
+        private Keyboards loadInBackground(HardKeyboardDeviceInfo deviceInfo) {
             final ArrayList<Keyboards.KeyboardInfo> keyboardInfoList = new ArrayList<>();
             final InputMethodManager imm = getContext().getSystemService(InputMethodManager.class);
             final InputManager im = getContext().getSystemService(InputManager.class);
@@ -333,12 +323,21 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                             continue;
                         }
                         final KeyboardLayout layout = im.getKeyboardLayoutForInputDevice(
-                                mInputDeviceIdentifier, imi, subtype);
+                                deviceInfo.mDeviceIdentifier, imi, subtype);
                         keyboardInfoList.add(new Keyboards.KeyboardInfo(imi, subtype, layout));
                     }
                 }
             }
-            return new Keyboards(mInputDeviceIdentifier, keyboardInfoList);
+            return new Keyboards(deviceInfo, keyboardInfoList);
+        }
+
+        @Override
+        public List<Keyboards> loadInBackground() {
+            List<Keyboards> keyboardsList = new ArrayList<>(mHardKeyboards.size());
+            for (HardKeyboardDeviceInfo deviceInfo : mHardKeyboards) {
+                keyboardsList.add(loadInBackground(deviceInfo));
+            }
+            return keyboardsList;
         }
 
         @Override
@@ -395,14 +394,14 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     public static final class Keyboards {
         @NonNull
-        public final InputDeviceIdentifier mInputDeviceIdentifier;
+        public final HardKeyboardDeviceInfo mDeviceInfo;
         @NonNull
         public final ArrayList<KeyboardInfo> mKeyboardInfoList;
 
         public Keyboards(
-                @NonNull final InputDeviceIdentifier inputDeviceIdentifier,
+                @NonNull final HardKeyboardDeviceInfo deviceInfo,
                 @NonNull final ArrayList<KeyboardInfo> keyboardInfoList) {
-            mInputDeviceIdentifier = inputDeviceIdentifier;
+            mDeviceInfo = deviceInfo;
             mKeyboardInfoList = keyboardInfoList;
         }
 
