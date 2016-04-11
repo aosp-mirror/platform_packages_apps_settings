@@ -33,15 +33,13 @@ import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.widget.SlidingTabLayout;
 import com.android.settingslib.HelpUtils;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 /**
  * Container for Dashboard fragments.
  */
 public final class DashboardContainerFragment extends InstrumentedFragment {
 
-    private static final int INDEX_BRIEF_FRAGMENT = 0;
-    private static final int INDEX_SUMMARY_FRAGMENT = 1;
+    private static final int INDEX_SUMMARY_FRAGMENT = 0;
 
     private ViewPager mViewPager;
     private View mHeaderView;
@@ -73,9 +71,6 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
     public void onResume() {
         super.onResume();
         final Activity activity = getActivity();
-        if (activity instanceof SettingsDrawerActivity) {
-            ((SettingsDrawerActivity) getActivity()).setContentHeaderView(mHeaderView);
-        }
     }
 
     @Override
@@ -98,8 +93,6 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
-                case INDEX_BRIEF_FRAGMENT:
-                    return mContext.getString(R.string.page_tab_title_status);
                 case INDEX_SUMMARY_FRAGMENT:
                     return mContext.getString(R.string.page_tab_title_summary);
             }
@@ -109,8 +102,6 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case INDEX_BRIEF_FRAGMENT:
-                    return new DashboardStatusFragment();
                 case INDEX_SUMMARY_FRAGMENT:
                     return new DashboardSummary();
                 default:
@@ -123,7 +114,7 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
 
         @Override
         public int getCount() {
-            return 2;
+            return 1;
         }
     }
 }
