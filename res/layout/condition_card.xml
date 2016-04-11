@@ -85,11 +85,13 @@
 
             <!-- TODO: Better background -->
             <View
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height=".25dp"
                 android:background="@android:color/white" />
 
             <com.android.internal.widget.ButtonBarLayout
+                android:id="@+id/buttonBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
