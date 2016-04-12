@@ -17,11 +17,8 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.ComponentName;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Message;
+import android.os.*;
+import android.os.Process;
 import android.util.ArrayMap;
 import android.util.Log;
 import com.android.settings.SettingsActivity;
@@ -51,7 +48,7 @@ public class SummaryLoader {
 
     public SummaryLoader(Activity activity, List<DashboardCategory> categories) {
         mHandler = new Handler();
-        mWorkerThread = new HandlerThread("SummaryLoader");
+        mWorkerThread = new HandlerThread("SummaryLoader", Process.THREAD_PRIORITY_BACKGROUND);
         mWorkerThread.start();
         mWorker = new Worker(mWorkerThread.getLooper());
         mActivity = activity;
