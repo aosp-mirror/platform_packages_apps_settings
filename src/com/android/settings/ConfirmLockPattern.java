@@ -118,6 +118,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mDetailsTextView = (TextView) view.findViewById(R.id.detailsText);
+            mStrongAuthRequiredTextView = (TextView) view.findViewById(R.id.strongAuthRequiredText);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
             mLeftSpacerLandscape = view.findViewById(R.id.leftSpacer);
             mRightSpacerLandscape = view.findViewById(R.id.rightSpacer);
@@ -175,6 +176,12 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 getFragmentManager().beginTransaction().add(mCredentialCheckResultTracker,
                         FRAGMENT_TAG_CHECK_LOCK_RESULT).commit();
             }
+
+            // Strong auth is required when the user is locked.
+            // Currently a user does not get locked again until the device restarts. Show the
+            // hint text as "device has just been restarted".
+            mStrongAuthRequiredTextView.setText(
+                    R.string.lockpassword_strong_auth_required_reason_restart_pattern);
 
             return view;
         }
