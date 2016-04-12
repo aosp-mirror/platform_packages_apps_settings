@@ -23,10 +23,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.icu.text.AlphabeticIndex;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.UserHandle;
-import android.os.UserManager;
+import android.os.*;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -1225,6 +1222,7 @@ public class ManageApplications extends InstrumentedFragment
         // TODO: Can probably hack together with less than full app state.
         private final ApplicationsState mAppState;
         private final ApplicationsState.Session mSession;
+        private final Handler mHandler;
 
         private SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
@@ -1232,6 +1230,7 @@ public class ManageApplications extends InstrumentedFragment
             mAppState =
                     ApplicationsState.getInstance((Application) context.getApplicationContext());
             mSession = mAppState.newSession(this);
+            mHandler = new Handler(mAppState.getBackgroundLooper());
         }
 
         @Override
@@ -1248,6 +1247,16 @@ public class ManageApplications extends InstrumentedFragment
             mLoader.setSummary(this, mContext.getString(R.string.apps_summary, apps.size()));
         }
 
+        private void postRebuild() {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    updateSummary(mSession.rebuild(ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
+                            null, false));
+                }
+            });
+        }
+
         @Override
         public void onRebuildComplete(ArrayList<AppEntry> apps) {
             updateSummary(apps);
@@ -1255,20 +1264,17 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onPackageListChanged() {
-            updateSummary(mSession.rebuild(ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
-                    ApplicationsState.ALPHA_COMPARATOR));
+            postRebuild();
         }
 
         @Override
         public void onLauncherInfoChanged() {
-            updateSummary(mSession.rebuild(ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
-                    ApplicationsState.ALPHA_COMPARATOR));
+            postRebuild();
         }
 
         @Override
         public void onLoadEntriesCompleted() {
-            updateSummary(mSession.rebuild(ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
-                    ApplicationsState.ALPHA_COMPARATOR));
+            postRebuild();
         }
 
         @Override

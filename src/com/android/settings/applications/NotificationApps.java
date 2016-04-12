@@ -17,6 +17,7 @@ package com.android.settings.applications;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.dashboard.SummaryLoader;
@@ -44,6 +45,7 @@ public class NotificationApps extends ManageApplications {
         private final ApplicationsState.Session mSession;
         private final NotificationBackend mNotifBackend;
         private final AppStateNotificationBridge mExtraInfoBridge;
+        private final Handler mHandler;
 
         private SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
@@ -54,6 +56,7 @@ public class NotificationApps extends ManageApplications {
             mNotifBackend = new NotificationBackend();
             mExtraInfoBridge = new AppStateNotificationBridge(mContext,
                     mAppState, this, mNotifBackend);
+            mHandler = new Handler(mAppState.getBackgroundLooper());
         }
 
         @Override
@@ -84,9 +87,14 @@ public class NotificationApps extends ManageApplications {
 
         @Override
         public void onExtraInfoUpdated() {
-            updateSummary(mSession.rebuild(
-                    AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,
-                    ApplicationsState.ALPHA_COMPARATOR));
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    updateSummary(mSession.rebuild(
+                            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,
+                            null, false));
+                }
+            });
         }
 
         @Override
