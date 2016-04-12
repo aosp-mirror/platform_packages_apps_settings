@@ -164,10 +164,11 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
         if (sir != null) {
             simPref.setSummary(sir.getDisplayName());
+            simPref.setEnabled(mSelectableSubInfos.size() > 1);
         } else if (sir == null) {
             simPref.setSummary(R.string.sim_selection_required_pref);
+            simPref.setEnabled(mSelectableSubInfos.size() >= 1);
         }
-        simPref.setEnabled(mSelectableSubInfos.size() >= 1);
     }
 
     private void updateCellularDataValues() {
@@ -176,17 +177,18 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         simPref.setTitle(R.string.cellular_data_title);
         if (DBG) log("[updateCellularDataValues] mSubInfoList=" + mSubInfoList);
 
-        if (sir != null) {
-            simPref.setSummary(sir.getDisplayName());
-        } else if (sir == null) {
-            simPref.setSummary(R.string.sim_selection_required_pref);
-        }
-
         boolean callStateIdle = isCallStateIdle();
         final boolean ecbMode = SystemProperties.getBoolean(
                 TelephonyProperties.PROPERTY_INECM_MODE, false);
-        // Enable data preference in msim mode and call state idle
-        simPref.setEnabled((mSelectableSubInfos.size() >= 1) && callStateIdle && !ecbMode);
+        if (sir != null) {
+            simPref.setSummary(sir.getDisplayName());
+            // Enable data preference in msim mode and call state idle
+            simPref.setEnabled((mSelectableSubInfos.size() > 1) && callStateIdle && !ecbMode);
+        } else if (sir == null) {
+            simPref.setSummary(R.string.sim_selection_required_pref);
+            // Enable data preference in msim mode and call state idle
+            simPref.setEnabled((mSelectableSubInfos.size() >= 1) && callStateIdle && !ecbMode);
+        }
     }
 
     private void updateCallValues() {
