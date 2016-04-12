@@ -1282,16 +1282,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
                                 }
                             }
                     )
-                    .setNegativeButton(R.string.cancel,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    parentFragment.updateUnificationPreference();
-                                    dismiss();
-                                }
-                            }
-                    )
+                    .setNegativeButton(R.string.cancel, null)
                     .create();
+        }
+
+        @Override
+        public void onDismiss(DialogInterface dialog) {
+            super.onDismiss(dialog);
+            ((SecuritySettings) getParentFragment()).updateUnificationPreference();
         }
     }
 
