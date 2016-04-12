@@ -124,6 +124,18 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == storedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_MANAGED == storedQuality;
 
+            // Strong auth is required when the user is locked.
+            // Currently a user does not get locked again until the device restarts. Show the
+            // hint text as "device has just been restarted".
+            mStrongAuthRequiredTextView = (TextView) view.findViewById(R.id.strongAuthRequiredText);
+            if (mIsAlpha) {
+                mStrongAuthRequiredTextView.setText(
+                        R.string.lockpassword_strong_auth_required_reason_restart_password);
+            } else {
+                mStrongAuthRequiredTextView.setText(
+                        R.string.lockpassword_strong_auth_required_reason_restart_pin);
+            }
+
             mImm = (InputMethodManager) getActivity().getSystemService(
                     Context.INPUT_METHOD_SERVICE);
 
