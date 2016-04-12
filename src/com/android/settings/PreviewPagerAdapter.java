@@ -60,9 +60,6 @@ public class PreviewPagerAdapter extends PagerAdapter {
             mPreviewFrames[i].setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT));
-            mPreviewFrames[i].setContentDescription(
-                    context.getString(R.string.preview_page_indicator_content_description, i + 1,
-                            previewSampleResIds.length));
 
             for (Configuration configuration : configurations) {
                 // Create a new configuration for the specified value. It won't
