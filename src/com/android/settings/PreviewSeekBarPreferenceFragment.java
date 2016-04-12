@@ -79,7 +79,16 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            commit();
+            if (mPreviewPagerAdapter.isAnimating()) {
+                mPreviewPagerAdapter.setAnimationEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        commit();
+                    }
+                });
+            } else {
+                commit();
+            }
             mSeekByTouch = false;
         }
     }
