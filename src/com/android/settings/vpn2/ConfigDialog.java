@@ -170,6 +170,9 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
             // Show type-specific fields.
             changeType(mProfile.type);
 
+            // Hide 'save login' when we are editing.
+            mSaveLogin.setVisibility(View.GONE);
+
             // Switch to advanced view immediately if any advanced options are on
             if (!mProfile.searchDomains.isEmpty() || !mProfile.dnsServers.isEmpty() ||
                     !mProfile.routes.isEmpty()) {
@@ -187,9 +190,6 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
                     context.getString(R.string.vpn_save), mListener);
         } else {
             setTitle(context.getString(R.string.vpn_connect_to, mProfile.name));
-
-            // Not editing, just show username and password.
-            mView.findViewById(R.id.login).setVisibility(View.VISIBLE);
 
             // Create a button to connect the network.
             setButton(DialogInterface.BUTTON_POSITIVE,
@@ -259,6 +259,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if (compoundButton == mAlwaysOnVpn) {
             updateSaveLoginStatus();
+            getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validate(mEditing));
         }
     }
 
@@ -317,6 +318,9 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     private boolean validate(boolean editing) {
         if (!editing) {
             return mUsername.getText().length() != 0 && mPassword.getText().length() != 0;
+        }
+        if (mAlwaysOnVpn.isChecked() && !getProfile().isValidLockdownProfile()) {
+            return false;
         }
         if (mName.getText().length() == 0 || mServer.getText().length() == 0 ||
                 !validateAddresses(mDnsServers.getText().toString(), false) ||
@@ -441,7 +445,8 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
                 break;
         }
 
-        profile.saveLogin = mSaveLogin.isChecked();
+        final boolean hasLogin = !profile.username.isEmpty() || !profile.password.isEmpty();
+        profile.saveLogin = mSaveLogin.isChecked() || (mEditing && hasLogin);
         return profile;
     }
 }
