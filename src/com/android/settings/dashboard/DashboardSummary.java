@@ -77,19 +77,19 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
 
-        long startTime = System.currentTimeMillis();
         List<DashboardCategory> categories =
                 ((SettingsActivity) getActivity()).getDashboardCategories();
         mSummaryLoader = new SummaryLoader(getActivity(), categories);
         setHasOptionsMenu(true);
-        if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
-                + " ms");
         Context context = getContext();
         mConditionManager = ConditionManager.get(context);
         mSuggestionParser = new SuggestionParser(context,
                 context.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
+        if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
+                + " ms");
     }
 
     @Override
@@ -108,17 +108,22 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public void onResume() {
+        long startTime = System.currentTimeMillis();
         super.onResume();
 
         ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
-        for (Condition c : mConditionManager.getVisibleConditions()) {
-            MetricsLogger.visible(getContext(), c.getMetricsConstant());
+        for (Condition c : mConditionManager.getConditions()) {
+            if (c.shouldShow()) {
+                MetricsLogger.visible(getContext(), c.getMetricsConstant());
+            }
         }
-        for (Tile suggestion : mSuggestionParser.getSuggestions()) {
+        for (Tile suggestion : mAdapter.getSuggestions()) {
             MetricsLogger.action(getContext(), MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                     DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion));
         }
+        if (DEBUG_TIMING) Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime)
+                + " ms");
     }
 
     @Override
@@ -127,10 +132,12 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsDrawerActivity) getActivity()).remCategoryListener(this);
         mSummaryLoader.setListening(false);
-        for (Condition c : mConditionManager.getVisibleConditions()) {
-            MetricsLogger.hidden(getContext(), c.getMetricsConstant());
+        for (Condition c : mConditionManager.getConditions()) {
+            if (c.shouldShow()) {
+                MetricsLogger.hidden(getContext(), c.getMetricsConstant());
+            }
         }
-        for (Tile suggestion : mSuggestionParser.getSuggestions()) {
+        for (Tile suggestion : mAdapter.getSuggestions()) {
             MetricsLogger.action(getContext(), MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
                     DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion));
         }
@@ -138,12 +145,15 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public void onWindowFocusChanged(boolean hasWindowFocus) {
+        long startTime = System.currentTimeMillis();
         if (hasWindowFocus) {
             mConditionManager.addListener(this);
             mConditionManager.refreshAll();
         } else {
             mConditionManager.remListener(this);
         }
+        if (DEBUG_TIMING) Log.d(TAG, "onWindowFocusChanged took "
+                + (System.currentTimeMillis() - startTime) + " ms");
     }
 
     @Override
@@ -161,6 +171,7 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public void onViewCreated(View view, Bundle bundle) {
+        long startTime = System.currentTimeMillis();
         mDashboard = (FocusRecyclerView) view.findViewById(R.id.dashboard_container);
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -174,10 +185,11 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mAdapter = new DashboardAdapter(getContext());
         mAdapter.setConditions(mConditionManager.getConditions());
-        mAdapter.setSuggestions(mSuggestionParser);
         mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setAdapter(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
+        if (DEBUG_TIMING) Log.d(TAG, "onViewCreated took "
+                + (System.currentTimeMillis() - startTime) + " ms");
 
         rebuildUI();
     }
