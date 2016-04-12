@@ -15,6 +15,8 @@
  */
 package com.android.settings;
 
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.support.v4.view.PagerAdapter;
@@ -34,8 +36,6 @@ import android.widget.ScrollView;
  */
 public class PreviewPagerAdapter extends PagerAdapter {
 
-    private FrameLayout[] mPreviewFrames;
-
     /** Duration to use when cross-fading between previews. */
     private static final long CROSS_FADE_DURATION_MS = 400;
 
@@ -44,6 +44,12 @@ public class PreviewPagerAdapter extends PagerAdapter {
 
     /** Interpolator to use when cross-fading between previews. */
     private static final Interpolator FADE_OUT_INTERPOLATOR = new AccelerateInterpolator();
+
+    private final FrameLayout[] mPreviewFrames;
+
+    private Runnable mAnimationEndAction;
+
+    private int mAnimationCounter;
 
     public PreviewPagerAdapter(Context context, int[] previewSampleResIds,
                                Configuration[] configurations) {
@@ -95,6 +101,14 @@ public class PreviewPagerAdapter extends PagerAdapter {
         return (view == object);
     }
 
+    boolean isAnimating() {
+        return mAnimationCounter > 0;
+    }
+
+    void setAnimationEndAction(Runnable action) {
+        mAnimationEndAction = action;
+    }
+
     void setPreviewLayer(int newIndex, int currentIndex, int currentItem, boolean animate) {
         for (FrameLayout previewFrame : mPreviewFrames) {
             if (currentIndex >= 0) {
@@ -104,6 +118,7 @@ public class PreviewPagerAdapter extends PagerAdapter {
                             .alpha(0)
                             .setInterpolator(FADE_OUT_INTERPOLATOR)
                             .setDuration(CROSS_FADE_DURATION_MS)
+                            .setListener(new PreviewFrameAnimatorListener())
                             .withEndAction(new Runnable() {
                                 @Override
                                 public void run() {
@@ -122,6 +137,7 @@ public class PreviewPagerAdapter extends PagerAdapter {
                         .alpha(1)
                         .setInterpolator(FADE_IN_INTERPOLATOR)
                         .setDuration(CROSS_FADE_DURATION_MS)
+                        .setListener(new PreviewFrameAnimatorListener())
                         .withStartAction(new Runnable() {
                             @Override
                             public void run() {
@@ -132,6 +148,36 @@ public class PreviewPagerAdapter extends PagerAdapter {
                 nextLayer.setVisibility(View.VISIBLE);
                 nextLayer.setAlpha(1);
             }
+        }
+    }
+
+    private void runAnimationEndAction() {
+        if (mAnimationEndAction != null && !isAnimating()) {
+            mAnimationEndAction.run();
+            mAnimationEndAction = null;
+        }
+    }
+
+    private class PreviewFrameAnimatorListener implements AnimatorListener {
+        @Override
+        public void onAnimationStart(Animator animation) {
+            mAnimationCounter++;
+        }
+
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            mAnimationCounter--;
+            runAnimationEndAction();
+        }
+
+        @Override
+        public void onAnimationCancel(Animator animation) {
+            // Empty method.
+        }
+
+        @Override
+        public void onAnimationRepeat(Animator animation) {
+            // Empty method.
         }
     }
 }
