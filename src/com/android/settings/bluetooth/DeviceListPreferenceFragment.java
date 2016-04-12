@@ -77,7 +77,6 @@ public abstract class DeviceListPreferenceFragment extends
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setAnimationAllowed(true);
 
         mLocalManager = Utils.getLocalBtManager(getActivity());
         if (mLocalManager == null) {
