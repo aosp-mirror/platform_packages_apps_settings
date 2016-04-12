@@ -15,66 +15,68 @@
      limitations under the License.
 -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:paddingStart="20dp"
-    android:paddingEnd="24dp"
-    android:paddingTop="15dp"
-    >
-
-    <CheckedTextView
-        android:id="@+id/bugreport_option_interactive_title"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:drawableStart="?android:attr/listChoiceIndicatorSingle"
-        android:ellipsize="marquee"
-        android:gravity="center_vertical"
-        android:paddingEnd="?android:attr/dialogPreferredPadding"
-        android:text="@*android:string/bugreport_option_interactive_title"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="?android:attr/textColorAlertDialogListItem" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="15dp"
+        >
 
-    <TextView
-        android:id="@+id/bugreport_option_interactive_summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bugreport_option_interactive_title"
-        android:maxLines="10"
-        android:paddingBottom="10dp"
-        android:paddingStart="32dp"
-        android:paddingEnd="?android:attr/dialogPreferredPadding"
-        android:text="@*android:string/bugreport_option_interactive_summary"
-        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-        android:textColor="?android:attr/textColorSecondary" />
+        <CheckedTextView
+            android:id="@+id/bugreport_option_interactive_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:drawableStart="?android:attr/listChoiceIndicatorSingle"
+            android:ellipsize="marquee"
+            android:gravity="center_vertical"
+            android:paddingEnd="?android:attr/dialogPreferredPadding"
+            android:text="@*android:string/bugreport_option_interactive_title"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="?android:attr/textColorAlertDialogListItem" />
 
-    <CheckedTextView
-        android:id="@+id/bugreport_option_full_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bugreport_option_interactive_summary"
-        android:checked="false"
-        android:drawableStart="?android:attr/listChoiceIndicatorSingle"
-        android:ellipsize="marquee"
-        android:gravity="center_vertical"
-        android:paddingEnd="?android:attr/dialogPreferredPadding"
-        android:text="@*android:string/bugreport_option_full_title"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="?android:attr/textColorAlertDialogListItem" />
+        <TextView
+            android:id="@+id/bugreport_option_interactive_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bugreport_option_interactive_title"
+            android:maxLines="10"
+            android:paddingBottom="10dp"
+            android:paddingStart="32dp"
+            android:paddingEnd="?android:attr/dialogPreferredPadding"
+            android:text="@*android:string/bugreport_option_interactive_summary"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:textColor="?android:attr/textColorSecondary" />
 
-    <TextView
-        android:id="@+id/bugreport_option_full_summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bugreport_option_full_title"
-        android:maxLines="10"
-        android:paddingBottom="10dp"
-        android:paddingStart="32dp"
-        android:paddingEnd="?android:attr/dialogPreferredPadding"
-        android:text="@*android:string/bugreport_option_full_summary"
-        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-        android:textColor="?android:attr/textColorSecondary" />
+        <CheckedTextView
+            android:id="@+id/bugreport_option_full_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bugreport_option_interactive_summary"
+            android:checked="false"
+            android:drawableStart="?android:attr/listChoiceIndicatorSingle"
+            android:ellipsize="marquee"
+            android:gravity="center_vertical"
+            android:paddingEnd="?android:attr/dialogPreferredPadding"
+            android:text="@*android:string/bugreport_option_full_title"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="?android:attr/textColorAlertDialogListItem" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/bugreport_option_full_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bugreport_option_full_title"
+            android:maxLines="10"
+            android:paddingBottom="10dp"
+            android:paddingStart="32dp"
+            android:paddingEnd="?android:attr/dialogPreferredPadding"
+            android:text="@*android:string/bugreport_option_full_summary"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:textColor="?android:attr/textColorSecondary" />
+
+    </RelativeLayout>
+</ScrollView>
