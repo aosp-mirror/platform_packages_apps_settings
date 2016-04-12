@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 Android Open Source Project
+<!--
+     Copyright (C) 2016 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,15 +15,16 @@
      limitations under the License.
 -->
 
-<TextView
+<vector
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="0dp"
-    android:layout_weight="1"
-    android:layout_height="wrap_content"
-    android:ellipsize="end"
-    android:maxLines="1"
-    android:textColor="@android:color/white"
-    android:gravity="center"
-    android:background="?android:attr/selectableItemBackground"
-    android:textAllCaps="true"
-    android:padding="@dimen/pager_tabs_title_padding"/>
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0"
+    android:tint="?android:attr/colorAccent">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M21,6h-2v9H6v2c0,0.55 0.45,1 1,1h11l4,4V7c0,-0.55 -0.45,-1
+         -1,-1zm-4,6V3c0,-0.55 -0.45,-1 -1,-1H3c-0.55,0 -1,0.45 -1,1v14l4,-4h10c0.55,0
+         1,-0.45 1,-1z"/>
+</vector>
