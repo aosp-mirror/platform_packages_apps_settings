@@ -38,10 +38,12 @@ public class ConditionManager {
 
     private static final boolean DEBUG = true;
 
+    private static final String PKG = "com.android.settings.dashboard.conditional.";
+
     private static final String FILE_NAME = "condition_state.xml";
-    private static final String TAG_CONDITIONS = "conditions";
-    private static final String TAG_CONDITION = "condition";
-    private static final String ATTR_CLASS = "class";
+    private static final String TAG_CONDITIONS = "cs";
+    private static final String TAG_CONDITION = "c";
+    private static final String ATTR_CLASS = "cls";
 
     private static ConditionManager sInstance;
 
@@ -80,6 +82,9 @@ public class ConditionManager {
                 if (TAG_CONDITION.equals(parser.getName())) {
                     int depth = parser.getDepth();
                     String clz = parser.getAttributeValue("", ATTR_CLASS);
+                    if (!clz.startsWith(PKG)) {
+                        clz = PKG + clz;
+                    }
                     Condition condition = createCondition(Class.forName(clz));
                     PersistableBundle bundle = PersistableBundle.restoreFromXml(parser);
                     if (DEBUG) Log.d(TAG, "Reading " + clz + " -- " + bundle);
@@ -109,12 +114,14 @@ public class ConditionManager {
 
             final int N = mConditions.size();
             for (int i = 0; i < N; i++) {
-                serializer.startTag("", TAG_CONDITION);
-                serializer.attribute("", ATTR_CLASS, mConditions.get(i).getClass().getName());
                 PersistableBundle bundle = new PersistableBundle();
-                mConditions.get(i).saveState(bundle);
-                bundle.saveToXml(serializer);
-                serializer.endTag("", TAG_CONDITION);
+                if (mConditions.get(i).saveState(bundle)) {
+                    serializer.startTag("", TAG_CONDITION);
+                    final String clz = mConditions.get(i).getClass().getSimpleName();
+                    serializer.attribute("", ATTR_CLASS, clz);
+                    bundle.saveToXml(serializer);
+                    serializer.endTag("", TAG_CONDITION);
+                }
             }
 
             serializer.endTag("", TAG_CONDITIONS);
@@ -133,6 +140,7 @@ public class ConditionManager {
         addIfMissing(CellularDataCondition.class);
         addIfMissing(BackgroundDataCondition.class);
         addIfMissing(WorkModeCondition.class);
+        Collections.sort(mConditions, CONDITION_COMPARATOR);
     }
 
     private void addIfMissing(Class<? extends Condition> clz) {
@@ -187,12 +195,12 @@ public class ConditionManager {
                 conditions.add(mConditions.get(i));
             }
         }
-        Collections.sort(conditions, CONDITION_COMPARATOR);
         return conditions;
     }
 
     public void notifyChanged(Condition condition) {
         saveToXml();
+        Collections.sort(mConditions, CONDITION_COMPARATOR);
         final int N = mListeners.size();
         for (int i = 0; i < N; i++) {
             mListeners.get(i).onConditionsChanged();
@@ -209,7 +217,7 @@ public class ConditionManager {
 
     public static ConditionManager get(Context context) {
         if (sInstance == null) {
-            sInstance = new ConditionManager(context);
+            sInstance = new ConditionManager(context.getApplicationContext());
         }
         return sInstance;
     }

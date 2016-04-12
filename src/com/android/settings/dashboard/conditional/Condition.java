@@ -35,7 +35,8 @@ public abstract class Condition {
     private boolean mIsActive;
     private long mLastStateChange;
 
-    public Condition(ConditionManager manager) {
+    // All conditions must live in this package.
+    Condition(ConditionManager manager) {
         mManager = manager;
     }
 
@@ -45,10 +46,15 @@ public abstract class Condition {
         mLastStateChange = bundle.getLong(KEY_LAST_STATE);
     }
 
-    void saveState(PersistableBundle bundle) {
-        bundle.putBoolean(KEY_SILENCE, mIsSilenced);
-        bundle.putBoolean(KEY_ACTIVE, mIsActive);
-        bundle.putLong(KEY_LAST_STATE, mLastStateChange);
+    boolean saveState(PersistableBundle bundle) {
+        if (mIsSilenced) {
+            bundle.putBoolean(KEY_SILENCE, mIsSilenced);
+        }
+        if (mIsActive) {
+            bundle.putBoolean(KEY_ACTIVE, mIsActive);
+            bundle.putLong(KEY_LAST_STATE, mLastStateChange);
+        }
+        return mIsSilenced || mIsActive;
     }
 
     protected void notifyChanged() {
