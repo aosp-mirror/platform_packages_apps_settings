@@ -706,8 +706,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private void unifyLocks() {
         int profileQuality =
                 mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileChallengeUserId);
-        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false,
-                mCurrentProfilePassword);
         if (profileQuality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
             mLockPatternUtils.saveLockPattern(
                     LockPatternUtils.stringToPattern(mCurrentProfilePassword),
@@ -717,6 +715,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     mCurrentProfilePassword, mCurrentDevicePassword,
                     profileQuality, MY_USER_ID);
         }
+        mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false,
+                mCurrentProfilePassword);
         final boolean profilePatternVisibility =
                 mLockPatternUtils.isVisiblePatternEnabled(mProfileChallengeUserId);
         mLockPatternUtils.setVisiblePatternEnabled(profilePatternVisibility, MY_USER_ID);
