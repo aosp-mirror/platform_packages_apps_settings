@@ -60,8 +60,6 @@ public class ManageAssist extends SettingsPreferenceFragment
         mContextPref.setOnPreferenceChangeListener(this);
 
         mScreenshotPref = (SwitchPreference) findPreference(KEY_SCREENSHOT);
-        mScreenshotPref.setChecked(Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ASSIST_SCREENSHOT_ENABLED, 1) != 0);
         mScreenshotPref.setOnPreferenceChangeListener(this);
 
         mVoiceInputPref = (VoiceInputListPreference) findPreference(KEY_VOICE_INPUT);
@@ -134,9 +132,8 @@ public class ManageAssist extends SettingsPreferenceFragment
         }
 
         mScreenshotPref.setEnabled(mContextPref.isChecked());
-        if (!mContextPref.isChecked()) {
-            mScreenshotPref.setChecked(false);
-        }
+        mScreenshotPref.setChecked(mContextPref.isChecked() && Settings.Secure.getInt(
+                getContentResolver(), Settings.Secure.ASSIST_SCREENSHOT_ENABLED, 1) != 0);
     }
 
     private boolean isCurrentAssistVoiceService() {
