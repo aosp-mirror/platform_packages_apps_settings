@@ -85,6 +85,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         setShowingAll(true);
     }
 
+    public List<Tile> getSuggestions() {
+        return mSuggestions;
+    }
+
     public void setSuggestions(SuggestionParser suggestionParser) {
         mSuggestionParser = suggestionParser;
         mSuggestions = suggestionParser.getSuggestions();
