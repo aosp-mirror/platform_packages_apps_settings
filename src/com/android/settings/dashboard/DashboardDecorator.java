@@ -21,7 +21,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.State;
 import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import com.android.settings.R;
@@ -41,8 +40,6 @@ public class DashboardDecorator extends RecyclerView.ItemDecoration {
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, State state) {
         final int childCount = parent.getChildCount();
-        final int width = parent.getWidth();
-        final int bottom = parent.getBottom();
         for (int i = 1; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             final ViewHolder holder = parent.getChildViewHolder(child);
@@ -56,7 +53,8 @@ public class DashboardDecorator extends RecyclerView.ItemDecoration {
             }
 
             int top = getChildTop(child);
-            mDivider.setBounds(0, top, width, top + mDivider.getIntrinsicHeight());
+            mDivider.setBounds(child.getLeft(), top, child.getRight(),
+                    top + mDivider.getIntrinsicHeight());
             mDivider.draw(c);
         }
     }
