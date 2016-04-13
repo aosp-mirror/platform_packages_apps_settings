@@ -799,6 +799,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         // Asynchronously throw up the IME, since there are issues with requesting it to be shown
         // immediately.
         if (mLockPatternView == null && !mCooldown) {
+            getWindow().setSoftInputMode(
+                                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
             mHandler.postDelayed(new Runnable() {
                 @Override public void run() {
                     imm.showSoftInputUnchecked(0, null);
