@@ -725,11 +725,16 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 public void onClick(DialogInterface dialog, int which) {
                     final PrivateVolumeSettings target = (PrivateVolumeSettings) getTargetFragment();
                     final PackageManager pm = context.getPackageManager();
-                    final List<PackageInfo> infos = pm.getInstalledPackages(0);
-                    final ClearCacheObserver observer = new ClearCacheObserver(
-                            target, infos.size());
-                    for (PackageInfo info : infos) {
-                        pm.deleteApplicationCacheFiles(info.packageName, observer);
+                    final UserManager um = context.getSystemService(UserManager.class);
+
+                    for (int userId : um.getProfileIdsWithDisabled(context.getUserId())) {
+                        final List<PackageInfo> infos = pm.getInstalledPackagesAsUser(0, userId);
+                        final ClearCacheObserver observer = new ClearCacheObserver(
+                                target, infos.size());
+                        for (PackageInfo info : infos) {
+                            pm.deleteApplicationCacheFilesAsUser(info.packageName, userId,
+                                    observer);
+                        }
                     }
                 }
             });
