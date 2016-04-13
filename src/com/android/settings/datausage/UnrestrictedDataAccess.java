@@ -28,6 +28,7 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateBaseBridge;
+import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -215,8 +216,8 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
             mEntry = entry;
             mEntry.ensureLabel(getContext());
             setTitle(entry.label);
-            setChecked(((AppStateDataUsageBridge.DataUsageState) entry.extraInfo)
-                    .isDataSaverWhitelisted);
+            final DataUsageState state = (DataUsageState) entry.extraInfo;
+            setChecked(state != null && state.isDataSaverWhitelisted);
             if (mEntry.icon != null) {
                 setIcon(mEntry.icon);
             }
@@ -224,8 +225,8 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
 
         public void reuse() {
             setTitle(mEntry.label);
-            setChecked(((AppStateDataUsageBridge.DataUsageState) mEntry.extraInfo)
-                    .isDataSaverWhitelisted);
+            final DataUsageState state = (DataUsageState) mEntry.extraInfo;
+            setChecked(state != null && state.isDataSaverWhitelisted);
         }
 
         @Override
