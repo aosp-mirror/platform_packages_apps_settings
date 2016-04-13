@@ -558,7 +558,7 @@ public class DeviceAdminAdd extends Activity {
                     mActionButton.setText(R.string.remove_device_admin);
                 }
             }
-            String supportMessage = mDPM.getLongSupportMessageForUser(
+            CharSequence supportMessage = mDPM.getLongSupportMessageForUser(
                     mDeviceAdmin.getComponent(), UserHandle.myUserId());
             if (!TextUtils.isEmpty(supportMessage)) {
                 mSupportMessage.setText(supportMessage);
