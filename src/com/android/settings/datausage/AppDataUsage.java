@@ -226,7 +226,12 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             mRestrictBackground.setChecked(!getAppRestrictBackground());
         }
         if (mUnrestrictedData != null) {
-            mUnrestrictedData.setChecked(mDataSaverBackend.isWhitelisted(mAppItem.key));
+            if (getAppRestrictBackground()) {
+                mUnrestrictedData.setVisible(false);
+            } else {
+                mUnrestrictedData.setVisible(true);
+                mUnrestrictedData.setChecked(mDataSaverBackend.isWhitelisted(mAppItem.key));
+            }
         }
     }
 
@@ -240,18 +245,21 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     }
 
     private void bindData() {
+        final long backgroundBytes, foregroundBytes;
         if (mChartData == null || mStart == 0) {
-            return;
+            backgroundBytes = foregroundBytes = 0;
+            mCycle.setVisible(false);
+        } else {
+            mCycle.setVisible(true);
+            final long now = System.currentTimeMillis();
+            NetworkStatsHistory.Entry entry = null;
+            entry = mChartData.detailDefault.getValues(mStart, mEnd, now, entry);
+            backgroundBytes = entry.rxBytes + entry.txBytes;
+            entry = mChartData.detailForeground.getValues(mStart, mEnd, now, entry);
+            foregroundBytes = entry.rxBytes + entry.txBytes;
         }
-        final Context context = getContext();
-        final long now = System.currentTimeMillis();
-
-        NetworkStatsHistory.Entry entry = null;
-        entry = mChartData.detailDefault.getValues(mStart, mEnd, now, entry);
-        final long backgroundBytes = entry.rxBytes + entry.txBytes;
-        entry = mChartData.detailForeground.getValues(mStart, mEnd, now, entry);
-        final long foregroundBytes = entry.rxBytes + entry.txBytes;
         final long totalBytes = backgroundBytes + foregroundBytes;
+        final Context context = getContext();
 
         mTotalUsage.setSummary(Formatter.formatFileSize(context, totalBytes));
         mForegroundUsage.setSummary(Formatter.formatFileSize(context, foregroundBytes));
@@ -268,6 +276,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         final int uid = mAppItem.key;
         services.mPolicyManager.setUidPolicy(
                 uid, restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
+        updatePrefs();        // TODO: should have been notified by NPMS instead
     }
 
     @Override
