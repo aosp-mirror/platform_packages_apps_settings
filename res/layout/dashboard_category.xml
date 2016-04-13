@@ -21,7 +21,8 @@
     android:orientation="vertical"
     android:paddingBottom="8dip"
     android:background="@color/card_background"
-    android:importantForAccessibility="noHideDescendants">
+    android:importantForAccessibility="noHideDescendants"
+    android:elevation="@dimen/dashboard_category_elevation" >
 
     <TextView android:id="@android:id/title"
         android:layout_width="match_parent"
