@@ -36,7 +36,7 @@ public class ConditionManager {
 
     private static final String TAG = "ConditionManager";
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private static final String PKG = "com.android.settings.dashboard.conditional.";
 
