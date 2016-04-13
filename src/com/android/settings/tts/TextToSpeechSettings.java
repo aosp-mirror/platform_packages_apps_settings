@@ -93,14 +93,15 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private static final int MAX_SPEECH_RATE = 600;
 
     /**
-     * Maximum speech pitch value. Pitch value varies from 50 to 500, where 100
-     * is the value for normal pitch. The max pitch value is set to 500, based on
-     * feedback from a few accessibility users. The range for pitch is not set in stone,
+     * Speech pitch value.
+     * TTS pitch value varies from 25 to 400, where 100 is the value
+     * for normal pitch. The max pitch value is set to 400, based on feedback from users
+     * and the GoogleTTS pitch variation range. The range for pitch is not set in stone
      * and should be readjusted based on user need.
-     *
      * This value should be kept in sync with the max value set in tts_settings xml.
      */
-    private static final int MAX_SPEECH_PITCH = 500;
+    private static final int MAX_SPEECH_PITCH = 400;
+    private static final int MIN_SPEECH_PITCH = 25;
 
     private PreferenceCategory mEnginePreferenceCategory;
     private SeekBarPreference mDefaultPitchPref;
@@ -264,9 +265,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mDefaultRatePref.setOnPreferenceChangeListener(this);
         mDefaultRatePref.setMax(MAX_SPEECH_RATE);
 
-        mDefaultPitchPref.setProgress(mDefaultPitch);
+        mDefaultPitchPref.setProgress(getPitchSeekBarProgressFromSpeechPitchValue(mDefaultPitch));
         mDefaultPitchPref.setOnPreferenceChangeListener(this);
-        mDefaultPitchPref.setMax(MAX_SPEECH_PITCH);
+        mDefaultPitchPref.setMax(getPitchSeekBarProgressFromSpeechPitchValue(MAX_SPEECH_PITCH));
 
         mCurrentEngine = mTts.getCurrentEngine();
 
@@ -288,6 +289,24 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         }
 
         checkVoiceData(mCurrentEngine);
+    }
+
+    /**
+     * The minimum pitch value should be > 0 but the minimum value of a seekbar in android
+     * is fixed at 0. Therefore, we increment the seekbar progress with MIN_SPEECH_PITCH value
+     * so that the minimum seekbar progress value is MIN_SPEECH_PITCH.
+     *     PITCH_VALUE = MIN_SPEECH_PITCH + PITCH_SEEKBAR_PROGRESS
+     */
+    private int getSpeechPitchValueFromSeekBarProgress(int progress) {
+        return MIN_SPEECH_PITCH + progress;
+    }
+
+    /**
+     * Since we are appending the MIN_SPEECH_PITCH to the pitch seekbar progress, the pitch
+     * seekbar progress should be set to (pitchValue - MIN_SPEECH_PITCH).
+     */
+    private int getPitchSeekBarProgressFromSpeechPitchValue(int pitchValue) {
+        return pitchValue - MIN_SPEECH_PITCH;
     }
 
     /**
@@ -484,9 +503,10 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (KEY_DEFAULT_RATE.equals(preference.getKey())) {
-            updateSpeechRate(((Integer) objValue).intValue());
+            updateSpeechRate((Integer) objValue);
         } else if (KEY_DEFAULT_PITCH.equals(preference.getKey())) {
-            mDefaultPitch = ((Integer) objValue).intValue();
+            int progress = (Integer) objValue;
+            mDefaultPitch = getSpeechPitchValueFromSeekBarProgress(progress);
             try {
                 android.provider.Settings.Secure.putInt(getContentResolver(),
                         TTS_DEFAULT_PITCH, mDefaultPitch);
