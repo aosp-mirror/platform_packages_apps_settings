@@ -625,6 +625,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
             startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                     R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
         } else if (KEY_UNLOCK_SET_OR_CHANGE_PROFILE.equals(key)) {
+            if (Utils.startQuiteModeDialogIfNecessary(this.getActivity(), mUm,
+                    mProfileChallengeUserId)) {
+                return false;
+            }
             Bundle extras = new Bundle();
             extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
             startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
@@ -746,8 +750,16 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final String key = preference.getKey();
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_VISIBLE_PATTERN_PROFILE.equals(key)) {
+            if (Utils.startQuiteModeDialogIfNecessary(this.getActivity(), mUm,
+                    mProfileChallengeUserId)) {
+                return false;
+            }
             lockPatternUtils.setVisiblePatternEnabled((Boolean) value, mProfileChallengeUserId);
         } else if (KEY_UNIFICATION.equals(key)) {
+            if (Utils.startQuiteModeDialogIfNecessary(this.getActivity(), mUm,
+                    mProfileChallengeUserId)) {
+                return false;
+            }
             if ((Boolean) value) {
                 final boolean compliantForDevice =
                         (mLockPatternUtils.getKeyguardStoredPasswordQuality(mProfileChallengeUserId)
