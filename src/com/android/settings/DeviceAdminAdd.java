@@ -82,6 +82,9 @@ public class DeviceAdminAdd extends Activity {
     public static final String EXTRA_DEVICE_ADMIN_PACKAGE_NAME =
             "android.app.extra.DEVICE_ADMIN_PACKAGE_NAME";
 
+    public static final String EXTRA_CALLED_FROM_SUPPORT_DIALOG =
+            "android.app.extra.CALLED_FROM_SUPPORT_DIALOG";
+
     Handler mHandler;
 
     DevicePolicyManager mDPM;
@@ -113,6 +116,8 @@ public class DeviceAdminAdd extends Activity {
     int mCurSysAppOpMode;
     int mCurToastAppOpMode;
 
+    boolean mIsCalledFromSupportDialog = false;
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -129,6 +134,8 @@ public class DeviceAdminAdd extends Activity {
             return;
         }
 
+        mIsCalledFromSupportDialog = getIntent().getBooleanExtra(
+                EXTRA_CALLED_FROM_SUPPORT_DIALOG, false);
 
         String action = getIntent().getAction();
         ComponentName who = (ComponentName)getIntent().getParcelableExtra(
@@ -455,6 +462,18 @@ public class DeviceAdminAdd extends Activity {
         try {
             ActivityManagerNative.getDefault().resumeAppSwitches();
         } catch (RemoteException e) {
+        }
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        // In case this is triggered from support dialog, finish this activity once the user leaves
+        // so that this won't appear as a background next time support dialog is triggered. This
+        // is because the support dialog activity and this belong to the same task and we can't
+        // start this in new activity since we need to know the calling package in this activity.
+        if (mIsCalledFromSupportDialog) {
+            finish();
         }
     }
 

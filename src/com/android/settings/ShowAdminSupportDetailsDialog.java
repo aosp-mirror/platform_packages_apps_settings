@@ -155,6 +155,7 @@ public class ShowAdminSupportDetailsDialog extends Activity
                             intent.setClass(activity, DeviceAdminAdd.class);
                             intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,
                                     enforcedAdmin.component);
+                            intent.putExtra(DeviceAdminAdd.EXTRA_CALLED_FROM_SUPPORT_DIALOG, true);
                             // DeviceAdminAdd class may need to run as managed profile.
                             activity.startActivityAsUser(intent,
                                     new UserHandle(enforcedAdmin.userId));
