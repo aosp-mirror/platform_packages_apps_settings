@@ -42,9 +42,9 @@ import java.util.List;
 public abstract class ManagedServiceSettings extends EmptyTextSettings {
     private final Config mConfig;
 
-    private Context mContext;
+    protected Context mContext;
     private PackageManager mPM;
-    private ServiceListing mServiceListing;
+    protected ServiceListing mServiceListing;
     private TextView mEmpty;
 
     abstract protected Config getConfig();
@@ -111,7 +111,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         }
     }
 
-    private boolean setEnabled(ComponentName service, String title, boolean enable) {
+    protected boolean setEnabled(ComponentName service, String title, boolean enable) {
         if (!enable) {
             // the simple version: disabling
             mServiceListing.setEnabled(service, false);
@@ -173,6 +173,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     public static class Config {
         public String tag;
         public String setting;
+        public String secondarySetting;
         public String intentAction;
         public String permission;
         public String noun;

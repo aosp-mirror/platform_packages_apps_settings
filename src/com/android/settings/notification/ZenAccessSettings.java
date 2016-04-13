@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
@@ -32,6 +33,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
@@ -40,6 +42,8 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.view.View;
+import android.widget.Toast;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
@@ -50,6 +54,7 @@ import java.util.List;
 public class ZenAccessSettings extends EmptyTextSettings {
 
     private final SettingObserver mObserver = new SettingObserver();
+    private static final String ENABLED_SERVICES_SEPARATOR = ":";
 
     private Context mContext;
     private PackageManager mPkgMan;
@@ -83,6 +88,9 @@ public class ZenAccessSettings extends EmptyTextSettings {
         getContentResolver().registerContentObserver(
                 Secure.getUriFor(Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES), false,
                 mObserver);
+        getContentResolver().registerContentObserver(
+                Secure.getUriFor(Secure.ENABLED_NOTIFICATION_LISTENERS), false,
+                mObserver);
     }
 
     @Override
@@ -96,7 +104,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
         screen.removeAll();
         final ArrayList<ApplicationInfo> apps = new ArrayList<>();
         final ArraySet<String> requesting = mNoMan.getPackagesRequestingNotificationPolicyAccess();
-        if (requesting != null && !requesting.isEmpty()) {
+        if (!requesting.isEmpty()) {
             final List<ApplicationInfo> installed = mPkgMan.getInstalledApplications(0);
             if (installed != null) {
                 for (ApplicationInfo app : installed) {
@@ -106,6 +114,8 @@ public class ZenAccessSettings extends EmptyTextSettings {
                 }
             }
         }
+        ArraySet<String> autoApproved = getEnabledNotificationListeners();
+        requesting.addAll(autoApproved);
         Collections.sort(apps, new PackageItemInfo.DisplayNameComparator(mPkgMan));
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;
@@ -115,6 +125,10 @@ public class ZenAccessSettings extends EmptyTextSettings {
             pref.setIcon(app.loadIcon(mPkgMan));
             pref.setTitle(label);
             pref.setChecked(hasAccess(pkg));
+            if (autoApproved.contains(pkg)) {
+                pref.setEnabled(false);
+                pref.setSummary(getString(R.string.zen_access_disabled_package_warning));
+            }
             pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -133,6 +147,22 @@ public class ZenAccessSettings extends EmptyTextSettings {
             });
             screen.addPreference(pref);
         }
+    }
+
+    private ArraySet<String> getEnabledNotificationListeners() {
+        ArraySet<String> packages = new ArraySet<>();
+        String settingValue = Settings.Secure.getString(getContext().getContentResolver(),
+                Settings.Secure.ENABLED_NOTIFICATION_LISTENERS);
+        if (!TextUtils.isEmpty(settingValue)) {
+            String[] restored = settingValue.split(ENABLED_SERVICES_SEPARATOR);
+            for (int i = 0; i < restored.length; i++) {
+                ComponentName value = ComponentName.unflattenFromString(restored[i]);
+                if (null != value) {
+                    packages.add(value.getPackageName());
+                }
+            }
+        }
+        return packages;
     }
 
     private boolean hasAccess(String pkg) {
