@@ -95,6 +95,8 @@ public class ConfirmDeviceCredentialActivity extends Activity {
     private String getTitleFromOrganizationName(int userId) {
         DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
-        return (dpm != null) ? dpm.getOrganizationNameForUser(userId) : null;
+        CharSequence organizationNameForUser = (dpm != null)
+                ? dpm.getOrganizationNameForUser(userId) : null;
+        return organizationNameForUser != null ? organizationNameForUser.toString() : null;
     }
 }
