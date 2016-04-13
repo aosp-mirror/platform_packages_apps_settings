@@ -87,6 +87,8 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TabWidget;
+
+import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.UserIcons;
 
 import java.io.IOException;
@@ -1103,6 +1105,16 @@ public final class Utils extends com.android.settingslib.Utils {
     public static boolean isDeviceProvisioned(Context context) {
         return Settings.Global.getInt(context.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0) != 0;
+    }
+
+    public static boolean startQuiteModeDialogIfNecessary(Context context, UserManager um,
+            int userId) {
+        if (um.isQuietModeEnabled(UserHandle.of(userId))) {
+            final Intent intent = UnlaunchableAppActivity.createInQuietModeDialogIntent(userId);
+            context.startActivity(intent);
+            return true;
+        }
+        return false;
     }
 }
 
