@@ -20,14 +20,12 @@ import android.app.*;
 import android.app.INotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.*;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.NotificationListenerService.Ranking;
@@ -36,7 +34,6 @@ import android.service.notification.StatusBarNotification;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.widget.RecyclerView;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -62,6 +59,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private static final boolean DEBUG = false;
     private static final boolean DUMP_EXTRAS = true;
     private static final boolean DUMP_PARCEL = true;
+    private Handler mHandler;
 
     private static class HistoricalNotificationInfo {
         public String pkg;
@@ -90,31 +88,43 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private final NotificationListenerService mListener = new NotificationListenerService() {
         @Override
         public void onNotificationPosted(StatusBarNotification sbn, RankingMap ranking) {
-            logd("onNotificationPosted: %s", sbn.getNotification());
-            final Handler h = getListView().getHandler();
+            logd("onNotificationPosted: %s, with update for %d", sbn.getNotification(),
+                    ranking == null ? 0 : ranking.getOrderedKeys().length);
             mRanking = ranking;
-            h.removeCallbacks(mRefreshListRunnable);
-            h.postDelayed(mRefreshListRunnable, 100);
+            scheduleRefreshList();
         }
 
         @Override
         public void onNotificationRemoved(StatusBarNotification notification, RankingMap ranking) {
-            final Handler h = getListView().getHandler();
+            logd("onNotificationRankingUpdate with update for %d",
+                    ranking == null ? 0 : ranking.getOrderedKeys().length);
             mRanking = ranking;
-            h.removeCallbacks(mRefreshListRunnable);
-            h.postDelayed(mRefreshListRunnable, 100);
+            scheduleRefreshList();
         }
 
         @Override
         public void onNotificationRankingUpdate(RankingMap ranking) {
+            logd("onNotificationRankingUpdate with update for %d",
+                    ranking == null ? 0 : ranking.getOrderedKeys().length);
             mRanking = ranking;
+            scheduleRefreshList();
         }
 
         @Override
         public void onListenerConnected() {
             mRanking = getCurrentRanking();
+            logd("onListenerConnected with update for %d",
+                    mRanking == null ? 0 : mRanking.getOrderedKeys().length);
+            scheduleRefreshList();
         }
     };
+
+    private void scheduleRefreshList() {
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mRefreshListRunnable);
+            mHandler.postDelayed(mRefreshListRunnable, 100);
+        }
+    }
 
     private Context mContext;
 
@@ -131,10 +141,19 @@ public class NotificationStation extends SettingsPreferenceFragment {
     public void onAttach(Activity activity) {
         logd("onAttach(%s)", activity.getClass().getSimpleName());
         super.onAttach(activity);
+        mHandler = new Handler(activity.getMainLooper());
         mContext = activity;
         mPm = mContext.getPackageManager();
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+    }
+
+    @Override
+    public void onDetach() {
+        logd("onDetach()");
+        mHandler.removeCallbacks(mRefreshListRunnable);
+        mHandler = null;
+        super.onDetach();
     }
 
     @Override
@@ -280,11 +299,11 @@ public class NotificationStation extends SettingsPreferenceFragment {
                             .append(bold(getString(R.string.notification_log_details_icon)))
                             .append(delim)
                             .append(n.getSmallIcon().toString());
-                    if (!TextUtils.isEmpty(n.getGroup())) {
+                    if (sbn.isGroup()) {
                         sb.append("\n")
                                 .append(bold(getString(R.string.notification_log_details_group)))
                                 .append(delim)
-                                .append(n.getGroup());
+                                .append(sbn.getGroupKey());
                         if (n.isGroupSummary()) {
                             sb.append(bold(
                                     getString(R.string.notification_log_details_group_summary)));
@@ -328,18 +347,31 @@ public class NotificationStation extends SettingsPreferenceFragment {
                             .append(bold(getString(R.string.notification_log_details_priority)))
                             .append(delim)
                             .append(Notification.priorityToString(n.priority));
-                    if (mRanking != null && mRanking.getRanking(sbn.getKey(), rank)) {
-                        sb.append("\n")
-                                .append(bold(getString(
-                                        R.string.notification_log_details_importance)))
-                                .append(delim)
-                                .append(Ranking.importanceToString(rank.getImportance()));
-                        if (rank.getImportanceExplanation() != null) {
+                    if (resultset == active) {
+                        // mRanking only applies to active notifications
+                        if (mRanking != null && mRanking.getRanking(sbn.getKey(), rank)) {
                             sb.append("\n")
                                     .append(bold(getString(
-                                            R.string.notification_log_details_explanation)))
+                                            R.string.notification_log_details_importance)))
                                     .append(delim)
-                                    .append(rank.getImportanceExplanation());
+                                    .append(Ranking.importanceToString(rank.getImportance()));
+                            if (rank.getImportanceExplanation() != null) {
+                                sb.append("\n")
+                                        .append(bold(getString(
+                                                R.string.notification_log_details_explanation)))
+                                        .append(delim)
+                                        .append(rank.getImportanceExplanation());
+                            }
+                        } else {
+                            if (mRanking == null) {
+                                sb.append("\n")
+                                        .append(bold(getString(
+                                                R.string.notification_log_details_ranking_null)));
+                            } else {
+                                sb.append("\n")
+                                        .append(bold(getString(
+                                                R.string.notification_log_details_ranking_none)));
+                            }
                         }
                     }
                     if (n.contentIntent != null) {
