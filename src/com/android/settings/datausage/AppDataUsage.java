@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.net.INetworkStatsSession;
 import android.net.NetworkPolicy;
@@ -30,6 +31,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -42,8 +44,10 @@ import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.AppItem;
+import com.android.settingslib.Utils;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
+import com.android.settingslib.net.UidDetailProvider;
 
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
@@ -123,15 +127,6 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 addUid(mAppItem.uids.keyAt(i));
             }
         }
-        if (mPackages.size() != 0) {
-            PackageManager pm = getPackageManager();
-            try {
-                ApplicationInfo info = pm.getApplicationInfo(mPackages.valueAt(0), 0);
-                mIcon = info.loadIcon(pm);
-                mLabel = info.loadLabel(pm);
-            } catch (PackageManager.NameNotFoundException e) {
-            }
-        }
         addPreferencesFromResource(R.xml.app_data_usage);
 
         mTotalUsage = findPreference(KEY_TOTAL_USAGE);
@@ -142,6 +137,15 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         mCycleAdapter = new CycleAdapter(getContext(), mCycle, mCycleListener, false);
 
         if (UserHandle.isApp(mAppItem.key)) {
+            if (mPackages.size() != 0) {
+                PackageManager pm = getPackageManager();
+                try {
+                    ApplicationInfo info = pm.getApplicationInfo(mPackages.valueAt(0), 0);
+                    mIcon = info.loadIcon(pm);
+                    mLabel = info.loadLabel(pm);
+                } catch (PackageManager.NameNotFoundException e) {
+                }
+            }
             mRestrictBackground = (SwitchPreference) findPreference(KEY_RESTRICT_BACKGROUND);
             mRestrictBackground.setOnPreferenceChangeListener(this);
             mUnrestrictedData = (SwitchPreference) findPreference(KEY_UNRESTRICTED_DATA);
@@ -176,6 +180,12 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 removePreference(KEY_APP_LIST);
             }
         } else {
+            final int userId = UidDetailProvider.getUserIdForKey(mAppItem.key);
+            final UserManager um = UserManager.get(getActivity());
+            final UserInfo info = um.getUserInfo(userId);
+            final PackageManager pm = getPackageManager();
+            mIcon = Utils.getUserIcon(getActivity(), um, info);
+            mLabel = Utils.getUserLabel(getActivity(), info);
             removePreference(KEY_UNRESTRICTED_DATA);
             removePreference(KEY_APP_SETTINGS);
             removePreference(KEY_RESTRICT_BACKGROUND);
