@@ -424,7 +424,7 @@ public class InstalledAppDetails extends AppInfoBase
 
     private Intent resolveIntent(Intent i) {
         ResolveInfo result = getContext().getPackageManager().resolveActivity(i, 0);
-        return result != null ? new Intent(Intent.ACTION_APPLICATION_PREFERENCES)
+        return result != null ? new Intent(i.getAction())
                 .setClassName(result.activityInfo.packageName, result.activityInfo.name) : null;
     }
 
@@ -899,6 +899,26 @@ public class InstalledAppDetails extends AppInfoBase
                         return true;
                     }
                 });
+                category.addPreference(pref);
+            }
+        }
+
+        final String installerPackageName =
+                getContext().getPackageManager().getInstallerPackageName(mPackageName);
+        if (installerPackageName != null) {
+            final Intent intent = new Intent(Intent.ACTION_SHOW_APP_INFO)
+                    .setPackage(installerPackageName);
+            final Intent result = resolveIntent(intent);
+            if (result != null) {
+                result.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackageName);
+                PreferenceCategory category = new PreferenceCategory(getPrefContext());
+                category.setTitle(R.string.app_install_details_group_title);
+                screen.addPreference(category);
+                Preference pref = new Preference(getPrefContext());
+                pref.setTitle(R.string.app_install_details_title);
+                pref.setKey("app_info_store");
+                pref.setSummary(getString(R.string.app_install_details_summary, mAppEntry.label));
+                pref.setIntent(result);
                 category.addPreference(pref);
             }
         }
