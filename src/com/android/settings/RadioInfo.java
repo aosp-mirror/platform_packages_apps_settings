@@ -302,7 +302,7 @@ public class RadioInfo extends Activity {
                 case EVENT_SET_PREFERRED_TYPE_DONE:
                     ar= (AsyncResult) msg.obj;
                     if (ar.exception != null) {
-                        log("Set preferred network type success.");
+                        log("Set preferred network type failed.");
                     }
                     break;
                 case EVENT_QUERY_SMSC_DONE:
@@ -404,7 +404,7 @@ public class RadioInfo extends Activity {
             oemInfoButton.setEnabled(false);
         }
 
-        mCellInfoRefreshRateIndex = CELL_INFO_LIST_RATE_DISABLED;
+        mCellInfoRefreshRateIndex = 0; //disabled
         mPreferredNetworkTypeResult = mPreferredNetworkLabels.length - 1; //Unknown
 
         //FIXME: Replace with TelephonyManager call
@@ -438,9 +438,14 @@ public class RadioInfo extends Activity {
         mPingHostnameV6.setText(mPingHostnameResultV6);
         mHttpClientTest.setText(mHttpClientTestResult);
 
-        //move these here so that the initial updates in create don't cause values to reset
         cellInfoRefreshRateSpinner.setOnItemSelectedListener(mCellInfoRefreshRateHandler);
+        //set selection after registering listener to force update
+        cellInfoRefreshRateSpinner.setSelection(mCellInfoRefreshRateIndex);
+
+        //set selection before registering to prevent update
+        preferredNetworkType.setSelection(mPreferredNetworkTypeResult, true);
         preferredNetworkType.setOnItemSelectedListener(mPreferredNetworkHandler);
+
         radioPowerOnSwitch.setOnCheckedChangeListener(mRadioPowerOnChangeListener);
         imsVoLteProvisionedSwitch.setOnCheckedChangeListener(mImsVoLteCheckedChangeListener);
 
@@ -457,6 +462,8 @@ public class RadioInfo extends Activity {
                 | PhoneStateListener.LISTEN_SERVICE_STATE
                 | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
                 | PhoneStateListener.LISTEN_DATA_CONNECTION_REAL_TIME_INFO);
+
+        smsc.clearFocus();
     }
 
     @Override
@@ -466,6 +473,7 @@ public class RadioInfo extends Activity {
         log("onPause: unregister phone & data intents");
 
         mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+        phone.setCellInfoListRate(CELL_INFO_LIST_RATE_DISABLED);
     }
 
     private void restoreFromBundle(Bundle b) {
@@ -485,8 +493,6 @@ public class RadioInfo extends Activity {
                                                mPreferredNetworkLabels.length - 1);
 
         mCellInfoRefreshRateIndex = b.getInt("mCellInfoRefreshRateIndex", 0);
-
-        cellInfoRefreshRateSpinner.setSelection(mCellInfoRefreshRateIndex);
     }
 
     @Override
@@ -496,7 +502,6 @@ public class RadioInfo extends Activity {
         outState.putString("mHttpClientTestResult", mHttpClientTestResult);
 
         outState.putInt("mPreferredNetworkTypeResult", mPreferredNetworkTypeResult);
-
         outState.putInt("mCellInfoRefreshRateIndex", mCellInfoRefreshRateIndex);
 
     }
