@@ -100,6 +100,9 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     @Override
     public void onExtraInfoUpdated() {
+        if (!isAdded()) {
+            return;
+        }
         int count = 0;
         final ArrayList<AppEntry> allApps = mSession.getAllApps();
         final int N = allApps.size();
