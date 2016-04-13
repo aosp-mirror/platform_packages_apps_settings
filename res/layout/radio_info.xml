@@ -19,9 +19,11 @@
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <LinearLayout style="@style/info_layout">
+    <LinearLayout style="@style/info_layout"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
 
         <!-- IMEI -->
         <LinearLayout style="@style/entry_layout">
