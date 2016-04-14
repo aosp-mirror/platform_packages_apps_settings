@@ -186,7 +186,10 @@ public class RedactionInterstitial extends SettingsActivity {
 
         private void updateRemoteInputCheckboxVisibility() {
             boolean visible = mRadioGroup.getCheckedRadioButtonId() == R.id.show_all;
-            mRemoteInputCheckbox.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+            boolean isManagedProfile = Utils.isManagedProfile(UserManager.get(getPrefContext()),
+                    mUserId);
+            mRemoteInputCheckbox
+                    .setVisibility((visible && !isManagedProfile) ? View.VISIBLE : View.INVISIBLE);
         }
     }
 }

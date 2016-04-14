@@ -37,9 +37,14 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
     private int mInitialIndex;
     private Listener mListener;
     private boolean mShowRemoteInput;
+    private boolean mRemoteInputCheckBoxEnabled = true;
 
     public NotificationLockscreenPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    public void setRemoteInputCheckBoxEnabled(boolean enabled) {
+        mRemoteInputCheckBoxEnabled = enabled;
     }
 
     @Override
@@ -85,8 +90,10 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
         return false;
     }
 
-    private static int checkboxVisibilityForSelectedIndex(int selected, boolean showRemoteAtAll) {
-        return selected == 1 && showRemoteAtAll ? View.VISIBLE : View.GONE;
+    private int checkboxVisibilityForSelectedIndex(int selected,
+            boolean showRemoteAtAll) {
+        return selected == 1 && showRemoteAtAll && mRemoteInputCheckBoxEnabled ? View.VISIBLE
+                : View.GONE;
     }
 
     private class Listener implements DialogInterface.OnClickListener,
