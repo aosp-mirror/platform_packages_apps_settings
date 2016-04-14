@@ -30,6 +30,7 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Slog;
 
 import com.android.settings.utils.ManagedServiceSettings.Config;
@@ -46,7 +47,6 @@ public class ServiceListing {
     private final HashSet<ComponentName> mEnabledServices = new HashSet<ComponentName>();
     private final List<ServiceInfo> mServices = new ArrayList<ServiceInfo>();
     private final List<Callback> mCallbacks = new ArrayList<Callback>();
-    private final List<ServiceInfo> mApprovedServices = new ArrayList<ServiceInfo>();
 
     private boolean mListening;
 
@@ -95,18 +95,7 @@ public class ServiceListing {
         return getServices(c, null, pm);
     }
 
-    public ServiceInfo findService(Context context, Config config, final ComponentName cn) {
-        final ServiceListing listing = new ServiceListing(context, config);
-        for (ServiceInfo service : mApprovedServices) {
-            final ComponentName serviceCN = new ComponentName(service.packageName, service.name);
-            if (serviceCN.equals(cn)) {
-                return service;
-            }
-        }
-        return null;
-    }
-
-    private static int getServices(Config c, List<ServiceInfo> list, PackageManager pm) {
+    protected static int getServices(Config c, List<ServiceInfo> list, PackageManager pm) {
         int services = 0;
         if (list != null) {
             list.clear();
@@ -172,26 +161,6 @@ public class ServiceListing {
             callback.onServicesReloaded(mServices);
         }
         return mServices;
-    }
-
-    public void reloadApprovedServices() {
-        mApprovedServices.clear();
-        final String flat = Settings.Secure.getString(mContentResolver, mConfig.setting);
-        if (flat != null && !"".equals(flat)) {
-            final List<String> names = Arrays.asList(flat.split(":"));
-            List<ServiceInfo> services = new ArrayList<>();
-            getServices(mConfig, services, mContext.getPackageManager());
-            for (ServiceInfo service : services) {
-                final ComponentName componentName = service.getComponentName();
-                String flatCn = service.getComponentName().flattenToString();
-                if (names.contains(flatCn) || names.contains(componentName.getPackageName())) {
-                    mApprovedServices.add(service);
-                }
-            }
-            for (Callback callback : mCallbacks) {
-                callback.onServicesReloaded(mApprovedServices);
-            }
-        }
     }
 
     public boolean isEnabled(ComponentName cn) {

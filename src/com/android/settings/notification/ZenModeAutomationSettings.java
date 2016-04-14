@@ -43,11 +43,10 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.utils.ManagedServiceSettings.Config;
-import com.android.settings.utils.ServiceListing;
+import com.android.settings.utils.ZenServiceListing;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 
@@ -56,14 +55,14 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     static final Config CONFIG = getConditionProviderConfig();
 
     private PackageManager mPm;
-    private ServiceListing mServiceListing;
+    private ZenServiceListing mServiceListing;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.zen_mode_automation_settings);
         mPm = mContext.getPackageManager();
-        mServiceListing = new ServiceListing(mContext, CONFIG);
+        mServiceListing = new ZenServiceListing(mContext, CONFIG);
         mServiceListing.reloadApprovedServices();
     }
 
@@ -203,6 +202,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
         final Config c = new Config();
         c.tag = TAG;
         c.setting = Settings.Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES;
+        c.secondarySetting = Settings.Secure.ENABLED_NOTIFICATION_LISTENERS;
         c.intentAction = ConditionProviderService.SERVICE_INTERFACE;
         c.permission = android.Manifest.permission.BIND_CONDITION_PROVIDER_SERVICE;
         c.noun = "condition provider";
@@ -308,7 +308,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
             final String action = isSchedule ? ZenModeScheduleRuleSettings.ACTION
                     : isEvent ? ZenModeEventRuleSettings.ACTION : "";
-            ServiceInfo si = mServiceListing.findService(mContext, CONFIG, rule.getOwner());
+            ServiceInfo si = mServiceListing.findService(rule.getOwner());
             ComponentName settingsActivity = getSettingsActivity(si);
             setIntent(getRuleIntent(action, settingsActivity, mId));
             setSelectable(settingsActivity != null || isSystemRule);
