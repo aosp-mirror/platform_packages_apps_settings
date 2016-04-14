@@ -151,51 +151,21 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
             configurations[i] = createConfig(origConfig, i);
         }
 
-        mPreviewPagerAdapter = new PreviewPagerAdapter(context, mPreviewSampleResIds,
-                configurations);
         mPreviewPager = (ViewPager) content.findViewById(R.id.preview_pager);
-        mPreviewPager.setAdapter(mPreviewPagerAdapter);
-        mPreviewPager.addOnPageChangeListener(new OnPageChangeListener() {
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                // Do nothing.
+        if (mPreviewPager != null) {
+            mPreviewPagerAdapter = new PreviewPagerAdapter(context, mPreviewSampleResIds,
+                    configurations);
+            mPreviewPager.setAdapter(mPreviewPagerAdapter);
+            mPreviewPager.addOnPageChangeListener(mPreviewPageChangeListener);
+
+            mPageIndicator = (DotsPageIndicator) content.findViewById(R.id.page_indicator);
+            if (mPreviewSampleResIds.length > 1) {
+                mPageIndicator.setViewPager(mPreviewPager);
+                mPageIndicator.setVisibility(View.VISIBLE);
+                mPageIndicator.setOnPageChangeListener(mPageIndicatorPageChangeListener);
+            } else {
+                mPageIndicator.setVisibility(View.GONE);
             }
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset,
-                    int positionOffsetPixels) {
-                // Do nothing.
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mPreviewPager.sendAccessibilityEvent(AccessibilityEvent.TYPE_ANNOUNCEMENT);
-            }
-        });
-
-        mPageIndicator = (DotsPageIndicator) content.findViewById(R.id.page_indicator);
-        if (mPreviewSampleResIds.length > 1) {
-            mPageIndicator.setViewPager(mPreviewPager);
-            mPageIndicator.setVisibility(View.VISIBLE);
-            mPageIndicator.setOnPageChangeListener(new OnPageChangeListener() {
-                @Override
-                public void onPageScrollStateChanged(int state) {
-                    // Do nothing.
-                }
-
-                @Override
-                public void onPageScrolled(int position, float positionOffset,
-                        int positionOffsetPixels) {
-                    // Do nothing.
-                }
-
-                @Override
-                public void onPageSelected(int position) {
-                    setPagerIndicatorContentDescription(position);
-                }
-            });
-        } else {
-            mPageIndicator.setVisibility(View.GONE);
         }
 
         setPreviewLayer(mInitialIndex, false);
@@ -207,15 +177,21 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
      */
     protected abstract Configuration createConfig(Configuration origConfig, int index);
 
+    /**
+     * Persists the selected value and sends a configuration change.
+     */
+    protected abstract void commit();
+
     private void setPreviewLayer(int index, boolean animate) {
         mLabel.setText(mEntries[index]);
         mSmaller.setEnabled(index > 0);
         mLarger.setEnabled(index < mEntries.length - 1);
+        if (mPreviewPager != null) {
+            setPagerIndicatorContentDescription(mPreviewPager.getCurrentItem());
+            mPreviewPagerAdapter.setPreviewLayer(index, mCurrentIndex,
+                    mPreviewPager.getCurrentItem(), animate);
+        }
 
-        setPagerIndicatorContentDescription(mPreviewPager.getCurrentItem());
-
-        mPreviewPagerAdapter.setPreviewLayer(index, mCurrentIndex, mPreviewPager.getCurrentItem(),
-                animate);
         mCurrentIndex = index;
     }
 
@@ -225,8 +201,39 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
                         position + 1, mPreviewSampleResIds.length));
     }
 
-    /**
-     * Persists the selected value and sends a configuration change.
-     */
-    protected abstract void commit();
+    private OnPageChangeListener mPreviewPageChangeListener = new OnPageChangeListener() {
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            // Do nothing.
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset,
+                int positionOffsetPixels) {
+            // Do nothing.
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            mPreviewPager.sendAccessibilityEvent(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+        }
+    };
+
+    private OnPageChangeListener mPageIndicatorPageChangeListener = new OnPageChangeListener() {
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            // Do nothing.
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset,
+                int positionOffsetPixels) {
+            // Do nothing.
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            setPagerIndicatorContentDescription(position);
+        }
+    };
 }
