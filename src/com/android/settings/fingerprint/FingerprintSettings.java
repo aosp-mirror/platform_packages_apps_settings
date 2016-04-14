@@ -837,7 +837,7 @@ public class FingerprintSettings extends SubSettings {
             public boolean onPreferenceClick(Preference preference) {
                 final Context context = preference.getContext();
                 final UserManager userManager = UserManager.get(context);
-                if (Utils.startQuiteModeDialogIfNecessary(context, userManager,
+                if (Utils.startQuietModeDialogIfNecessary(context, userManager,
                         userId)) {
                     return false;
                 }
