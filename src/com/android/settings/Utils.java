@@ -1107,7 +1107,7 @@ public final class Utils extends com.android.settingslib.Utils {
                 Settings.Global.DEVICE_PROVISIONED, 0) != 0;
     }
 
-    public static boolean startQuiteModeDialogIfNecessary(Context context, UserManager um,
+    public static boolean startQuietModeDialogIfNecessary(Context context, UserManager um,
             int userId) {
         if (um.isQuietModeEnabled(UserHandle.of(userId))) {
             final Intent intent = UnlaunchableAppActivity.createInQuietModeDialogIntent(userId);
