@@ -16,20 +16,8 @@
 
 package com.android.settings.overlay;
 
-import android.content.Context;
-import android.widget.Toast;
-
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
  */
 public class FeatureFactoryImpl extends FeatureFactory {
-    @Override
-    public ToastController createToastController() {
-        return new ToastController() {
-            @Override
-            public void makeToast(Context context) {
-                Toast.makeText(context, "Here's a piece of AOSP toast", Toast.LENGTH_LONG).show();
-            }
-        };
-    }
 }
