@@ -25,6 +25,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.UserInfo;
+import android.content.res.TypedArray;
+import android.database.DataSetObserver;
+import android.graphics.drawable.Drawable;
 import android.net.http.SslCertificate;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +39,7 @@ import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
 import android.util.Log;
 import android.util.SparseArray;
+import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +47,9 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Switch;
@@ -58,8 +65,8 @@ import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class TrustedCredentialsSettings extends OptionsMenuFragment
         implements TrustedCredentialsDialogBuilder.DelegateInterface {
@@ -82,36 +89,44 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
 
     private enum Tab {
         SYSTEM("system",
-               R.string.trusted_credentials_system_tab,
-               R.id.system_tab,
-               R.id.system_progress,
-               R.id.system_list,
-               R.id.system_expandable_list,
+                R.string.trusted_credentials_system_tab,
+                R.id.system_tab,
+                R.id.system_progress,
+                R.id.system_personal_container,
+                R.id.system_work_container,
+                R.id.system_expandable_list,
+                R.id.system_content,
                true),
         USER("user",
-             R.string.trusted_credentials_user_tab,
-             R.id.user_tab,
-             R.id.user_progress,
-             R.id.user_list,
-             R.id.user_expandable_list,
-             false);
+                R.string.trusted_credentials_user_tab,
+                R.id.user_tab,
+                R.id.user_progress,
+                R.id.user_personal_container,
+                R.id.user_work_container,
+                R.id.user_expandable_list,
+                R.id.user_content,
+                false);
 
         private final String mTag;
         private final int mLabel;
         private final int mView;
         private final int mProgress;
-        private final int mList;
+        private final int mPersonalList;
+        private final int mWorkList;
         private final int mExpandableList;
+        private final int mContentView;
         private final boolean mSwitch;
 
-        private Tab(String tag, int label, int view, int progress, int list, int expandableList,
-                boolean withSwitch) {
+        private Tab(String tag, int label, int view, int progress, int personalList, int workList,
+                int expandableList, int contentView, boolean withSwitch) {
             mTag = tag;
             mLabel = label;
             mView = view;
             mProgress = progress;
-            mList = list;
+            mPersonalList = personalList;
+            mWorkList = workList;
             mExpandableList = expandableList;
+            mContentView = contentView;
             mSwitch = withSwitch;
         }
 
@@ -134,25 +149,12 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             }
             throw new AssertionError();
         }
-        private void postOperationUpdate(boolean ok, CertHolder certHolder) {
-            if (ok) {
-                if (certHolder.mTab.mSwitch) {
-                    certHolder.mDeleted = !certHolder.mDeleted;
-                } else {
-                    certHolder.mAdapter.remove(certHolder);
-                }
-                certHolder.mAdapter.notifyDataSetChanged();
-            } else {
-                // bail, reload to reset to known state
-                certHolder.mAdapter.load();
-            }
-        }
     }
 
     private TabHost mTabHost;
+    private ArrayList<GroupAdapter> mGroupAdapters = new ArrayList<>(2);
     private AliasOperation mAliasOperation;
-    private HashMap<Tab, AdapterData.AliasLoader>
-            mAliasLoaders = new HashMap<Tab, AdapterData.AliasLoader>(2);
+    private Set<AdapterData.AliasLoader> mAliasLoaders = new ArraySet<AdapterData.AliasLoader>(2);
     private final SparseArray<KeyChainConnection>
             mKeyChainConnectionByProfileId = new SparseArray<KeyChainConnection>();
 
@@ -164,18 +166,8 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             if (Intent.ACTION_MANAGED_PROFILE_AVAILABLE.equals(action) ||
                     Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE.equals(action) ||
                     Intent.ACTION_MANAGED_PROFILE_UNLOCKED.equals(action)) {
-                // Reload all alias
-                final ExpandableListView systemView = (ExpandableListView) mTabHost
-                        .findViewById(Tab.SYSTEM.mExpandableList);
-                if (systemView != null) {
-                    ((TrustedCertificateExpandableAdapter) systemView.getExpandableListAdapter())
-                            .load();
-                }
-                final ExpandableListView userView = (ExpandableListView) mTabHost
-                        .findViewById(Tab.USER.mExpandableList);
-                if (userView != null) {
-                    ((TrustedCertificateExpandableAdapter) userView.getExpandableListAdapter())
-                            .load();
+                for (GroupAdapter adapter : mGroupAdapters) {
+                    adapter.load();
                 }
             }
         }
@@ -214,9 +206,11 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     @Override
     public void onDestroy() {
         getActivity().unregisterReceiver(mWorkProfileChangedReceiver);
-        for (AdapterData.AliasLoader aliasLoader : mAliasLoaders.values()) {
+        for (AdapterData.AliasLoader aliasLoader : mAliasLoaders) {
             aliasLoader.cancel(true);
         }
+        mAliasLoaders.clear();
+        mGroupAdapters.clear();
         if (mAliasOperation != null) {
             mAliasOperation.cancel(true);
             mAliasOperation = null;
@@ -239,52 +233,31 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 .setContent(tab.mView);
         mTabHost.addTab(systemSpec);
 
-        if (mUserManager.getUserProfiles().size() > 1) {
-            ExpandableListView lv = (ExpandableListView) mTabHost.findViewById(tab.mExpandableList);
-            final TrustedCertificateExpandableAdapter adapter =
-                    new TrustedCertificateExpandableAdapter(tab);
-            lv.setAdapter(adapter);
-            lv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-                @Override
-                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition,
-                        long id) {
-                    final UserHandle groupUser = adapter.getGroup(groupPosition);
-                    final int groupUserId = groupUser.getIdentifier();
-                    if (mUserManager.isQuietModeEnabled(groupUser)) {
-                        final Intent intent = UnlaunchableAppActivity.createInQuietModeDialogIntent(
-                                groupUserId);
-                        getActivity().startActivity(intent);
-                        return true;
-                    } else if (!mUserManager.isUserUnlocked(groupUser)) {
-                        final LockPatternUtils lockPatternUtils = new LockPatternUtils(
-                                getActivity());
-                        if (lockPatternUtils.isSeparateProfileChallengeEnabled(groupUserId)) {
-                            startWorkChallenge(groupUserId);
-                            return true;
-                        }
-                    }
-                    return false;
-                }
+        final int profilesSize = mUserManager.getUserProfiles().size();
+        final GroupAdapter groupAdapter = new GroupAdapter(tab);
+        mGroupAdapters.add(groupAdapter);
 
-            });
-            lv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-                    @Override
-                public boolean onChildClick(ExpandableListView parent, View v,
-                        int groupPosition, int childPosition, long id) {
-                    showCertDialog(adapter.getChild(groupPosition, childPosition));
-                    return true;
-                }
-            });
-        } else {
-            ListView lv = (ListView) mTabHost.findViewById(tab.mList);
-            final TrustedCertificateAdapter adapter = new TrustedCertificateAdapter(tab);
-            lv.setAdapter(adapter);
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override public void onItemClick(AdapterView<?> parent, View view,
-                        int pos, long id) {
-                    showCertDialog(adapter.getItem(pos));
-                }
-            });
+        if (profilesSize == 1) {
+            final ChildAdapter adapter = groupAdapter.getChildAdapter(0);
+            adapter.setContainerViewId(tab.mPersonalList);
+            adapter.prepare();
+        } else if (profilesSize == 2) {
+            final int workIndex = groupAdapter.getUserInfoByGroup(1).isManagedProfile() ? 1 : 0;
+            final int personalIndex = workIndex == 1 ? 0 : 1;
+
+            final ChildAdapter personalAdapter = groupAdapter.getChildAdapter(personalIndex);
+            personalAdapter.setContainerViewId(tab.mPersonalList);
+            personalAdapter.showHeader(true);
+            personalAdapter.prepare();
+
+            final ChildAdapter workAdapter = groupAdapter.getChildAdapter(workIndex);
+            workAdapter.setContainerViewId(tab.mWorkList);
+            workAdapter.showHeader(true);
+            workAdapter.showDivider(true);
+            workAdapter.prepare();
+        } else if (profilesSize >= 3) {
+            groupAdapter.setExpandableListView(
+                    (ExpandableListView) mTabHost.findViewById(tab.mExpandableList));
         }
     }
 
@@ -300,46 +273,18 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     }
 
     /**
-     * Common interface for adapters of both expandable and non-expandable certificate lists.
-     */
-    private interface TrustedCertificateAdapterCommons {
-        /**
-         * Remove a certificate from the list.
-         * @param certHolder the certificate to be removed.
-         */
-        void remove(CertHolder certHolder);
-        /**
-         * Notify the adapter that the underlying data set has changed.
-         */
-        void notifyDataSetChanged();
-        /**
-         * Load the certificates.
-         */
-        void load();
-        /**
-         * Gets the identifier of the list view the adapter is connected to.
-         * @param tab the tab on which the list view resides.
-         * @return identifier of the list view.
-         */
-        int getListViewId(Tab tab);
-    }
-
-    /**
      * Adapter for expandable list view of certificates. Groups in the view correspond to profiles
      * whereas children correspond to certificates.
      */
-    private class TrustedCertificateExpandableAdapter extends BaseExpandableListAdapter implements
-            TrustedCertificateAdapterCommons {
-        private AdapterData mData;
+    private class GroupAdapter extends BaseExpandableListAdapter implements
+            ExpandableListView.OnGroupClickListener, ExpandableListView.OnChildClickListener {
+        private final AdapterData mData;
 
-        private TrustedCertificateExpandableAdapter(Tab tab) {
+        private GroupAdapter(Tab tab) {
             mData = new AdapterData(tab, this);
             load();
         }
-        @Override
-        public void remove(CertHolder certHolder) {
-            mData.remove(certHolder);
-        }
+
         @Override
         public int getGroupCount() {
             return mData.mCertHoldersByUserId.size();
@@ -358,11 +303,17 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         }
         @Override
         public CertHolder getChild(int groupPosition, int childPosition) {
-            return mData.mCertHoldersByUserId.valueAt(groupPosition).get(childPosition);
+            return mData.mCertHoldersByUserId.get(getUserIdByGroup(groupPosition)).get(childPosition);
         }
         @Override
         public long getGroupId(int groupPosition) {
+            return getUserIdByGroup(groupPosition);
+        }
+        private int getUserIdByGroup(int groupPosition) {
             return mData.mCertHoldersByUserId.keyAt(groupPosition);
+        }
+        public UserInfo getUserInfoByGroup(int groupPosition) {
+            return mUserManager.getUserInfo(getUserIdByGroup(groupPosition));
         }
         @Override
         public long getChildId(int groupPosition, int childPosition) {
@@ -382,9 +333,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             }
 
             final TextView title = (TextView) convertView.findViewById(android.R.id.title);
-            final UserHandle profile = getGroup(groupPosition);
-            final UserInfo userInfo = mUserManager.getUserInfo(profile.getIdentifier());
-            if (userInfo.isManagedProfile()) {
+            if (getUserInfoByGroup(groupPosition).isManagedProfile()) {
                 title.setText(R.string.category_work);
             } else {
                 title.setText(R.string.category_personal);
@@ -403,50 +352,227 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         public boolean isChildSelectable(int groupPosition, int childPosition) {
             return true;
         }
+
         @Override
+        public boolean onChildClick(ExpandableListView expandableListView, View view,
+                int groupPosition, int childPosition, long id) {
+            showCertDialog(getChild(groupPosition, childPosition));
+            return true;
+        }
+
+        @Override
+        public boolean onGroupClick(ExpandableListView expandableListView, View view,
+                int groupPosition, long id) {
+            return !checkGroupExpandableAndStartWarningActivity(groupPosition);
+        }
+
         public void load() {
             mData.new AliasLoader().execute();
         }
-        @Override
-        public int getListViewId(Tab tab) {
-            return tab.mExpandableList;
-        }
-    }
 
-    private class TrustedCertificateAdapter extends BaseAdapter implements
-            TrustedCertificateAdapterCommons {
-        private final AdapterData mData;
-        private TrustedCertificateAdapter(Tab tab) {
-            mData = new AdapterData(tab, this);
-            load();
-        }
-        @Override
         public void remove(CertHolder certHolder) {
             mData.remove(certHolder);
         }
-        @Override
-        public int getListViewId(Tab tab) {
-            return tab.mList;
+
+        public void setExpandableListView(ExpandableListView lv) {
+            lv.setAdapter(this);
+            lv.setOnGroupClickListener(this);
+            lv.setOnChildClickListener(this);
+            lv.setVisibility(View.VISIBLE);
         }
-        @Override
-        public void load() {
-            mData.new AliasLoader().execute();
+
+        public ChildAdapter getChildAdapter(int groupPosition) {
+            return new ChildAdapter(this, groupPosition);
         }
-        @Override public int getCount() {
-            List<CertHolder> certHolders = mData.mCertHoldersByUserId.valueAt(0);
-            if (certHolders != null) {
-                return certHolders.size();
+
+        public boolean checkGroupExpandableAndStartWarningActivity(int groupPosition) {
+            final UserHandle groupUser = getGroup(groupPosition);
+            final int groupUserId = groupUser.getIdentifier();
+            if (mUserManager.isQuietModeEnabled(groupUser)) {
+                final Intent intent = UnlaunchableAppActivity.createInQuietModeDialogIntent(
+                        groupUserId);
+                getActivity().startActivity(intent);
+                return false;
+            } else if (!mUserManager.isUserUnlocked(groupUser)) {
+                final LockPatternUtils lockPatternUtils = new LockPatternUtils(
+                        getActivity());
+                if (lockPatternUtils.isSeparateProfileChallengeEnabled(groupUserId)) {
+                    startWorkChallenge(groupUserId);
+                    return false;
+                }
             }
-            return 0;
+            return true;
+        }
+
+        private View getViewForCertificate(CertHolder certHolder, Tab mTab, View convertView,
+                ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
+                convertView = inflater.inflate(R.layout.trusted_credential, parent, false);
+                holder = new ViewHolder();
+                holder.mSubjectPrimaryView = (TextView)
+                        convertView.findViewById(R.id.trusted_credential_subject_primary);
+                holder.mSubjectSecondaryView = (TextView)
+                        convertView.findViewById(R.id.trusted_credential_subject_secondary);
+                holder.mSwitch = (Switch) convertView.findViewById(
+                        R.id.trusted_credential_status);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            holder.mSubjectPrimaryView.setText(certHolder.mSubjectPrimary);
+            holder.mSubjectSecondaryView.setText(certHolder.mSubjectSecondary);
+            if (mTab.mSwitch) {
+                holder.mSwitch.setChecked(!certHolder.mDeleted);
+                holder.mSwitch.setEnabled(!mUserManager.hasUserRestriction(
+                        UserManager.DISALLOW_CONFIG_CREDENTIALS,
+                        new UserHandle(certHolder.mProfileId)));
+                holder.mSwitch.setVisibility(View.VISIBLE);
+            }
+            return convertView;
+        }
+
+        private class ViewHolder {
+            private TextView mSubjectPrimaryView;
+            private TextView mSubjectSecondaryView;
+            private Switch mSwitch;
+        }
+    }
+
+    private class ChildAdapter extends BaseAdapter implements View.OnClickListener,
+            AdapterView.OnItemClickListener {
+        private final int[] GROUP_EXPANDED_STATE_SET = {com.android.internal.R.attr.state_expanded};
+        private final int[] EMPTY_STATE_SET = {};
+        private final LinearLayout.LayoutParams HIDE_LAYOUT_PARAMS = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        private final LinearLayout.LayoutParams SHOW_LAYOUT_PARAMS = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f);
+        private final GroupAdapter mParent;
+        private final int mGroupPosition;
+        /*
+         * This class doesn't hold the actual data. Events should notify parent.
+         * When notifying DataSet events in this class, events should be forwarded to mParent.
+         * i.e. this.notifyDataSetChanged -> mParent.notifyDataSetChanged -> mObserver.onChanged
+         * -> outsideObservers.onChanged() (e.g. ListView)
+         */
+        private final DataSetObserver mObserver = new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                ChildAdapter.super.notifyDataSetChanged();
+            }
+            @Override
+            public void onInvalidated() {
+                super.onInvalidated();
+                ChildAdapter.super.notifyDataSetInvalidated();
+            }
+        };
+
+        private boolean mIsListExpanded = true;
+        private LinearLayout mContainerView;
+        private ViewGroup mHeaderView;
+        private ListView mListView;
+        private ImageView mIndicatorView;
+
+        private ChildAdapter(GroupAdapter parent, int groupPosition) {
+            mParent = parent;
+            mGroupPosition = groupPosition;
+            mParent.registerDataSetObserver(mObserver);
+        }
+
+        @Override public int getCount() {
+            return mParent.getChildrenCount(mGroupPosition);
         }
         @Override public CertHolder getItem(int position) {
-            return mData.mCertHoldersByUserId.valueAt(0).get(position);
+            return mParent.getChild(mGroupPosition, position);
         }
         @Override public long getItemId(int position) {
-            return position;
+            return mParent.getChildId(mGroupPosition, position);
         }
-        @Override public View getView(int position, View view, ViewGroup parent) {
-            return getViewForCertificate(getItem(position), mData.mTab, view, parent);
+        @Override public View getView(int position, View convertView, ViewGroup parent) {
+            return mParent.getChildView(mGroupPosition, position, false, convertView, parent);
+        }
+        // DataSet events
+        @Override
+        public void notifyDataSetChanged() {
+            // Don't call super as the parent will propagate this event back later in mObserver
+            mParent.notifyDataSetChanged();
+        }
+        @Override
+        public void notifyDataSetInvalidated() {
+            // Don't call super as the parent will propagate this event back later in mObserver
+            mParent.notifyDataSetInvalidated();
+        }
+
+        // View related codes
+        @Override
+        public void onClick(View view) {
+            mIsListExpanded = checkGroupExpandableAndStartWarningActivity() && !mIsListExpanded;
+            refreshViews();
+        }
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+            showCertDialog(getItem(pos));
+        }
+
+        public void setContainerViewId(int viewId) {
+            mContainerView = (LinearLayout) mTabHost.findViewById(viewId);
+            mContainerView.setVisibility(View.VISIBLE);
+
+            mListView = (ListView) mContainerView.findViewById(R.id.cert_list);
+            mListView.setAdapter(this);
+            mListView.setOnItemClickListener(this);
+
+            mHeaderView = (ViewGroup) mContainerView.findViewById(R.id.header_view);
+            mHeaderView.setOnClickListener(this);
+
+            mIndicatorView = (ImageView) mHeaderView.findViewById(R.id.group_indicator);
+            mIndicatorView.setImageDrawable(getGroupIndicator());
+
+            FrameLayout headerContentContainer = (FrameLayout)
+                    mHeaderView.findViewById(R.id.header_content_container);
+            headerContentContainer.addView(
+                    mParent.getGroupView(mGroupPosition, true /* parent ignores it */, null,
+                            headerContentContainer));
+        }
+
+        public void showHeader(boolean showHeader) {
+            mHeaderView.setVisibility(showHeader ? View.VISIBLE : View.GONE);
+        }
+
+        public void showDivider(boolean showDivider) {
+            View dividerView = mHeaderView.findViewById(R.id.header_divider);
+            dividerView.setVisibility(showDivider ? View.VISIBLE : View.GONE );
+        }
+
+        public void prepare() {
+            mIsListExpanded = checkGroupExpandableAndStartWarningActivity();
+            refreshViews();
+        }
+
+        private boolean checkGroupExpandableAndStartWarningActivity() {
+            return mParent.checkGroupExpandableAndStartWarningActivity(mGroupPosition);
+        }
+
+        private void refreshViews() {
+            mIndicatorView.setImageState(mIsListExpanded ? GROUP_EXPANDED_STATE_SET
+                    : EMPTY_STATE_SET, false);
+            mListView.setVisibility(mIsListExpanded ? View.VISIBLE : View.GONE);
+            mContainerView.setLayoutParams(mIsListExpanded ? SHOW_LAYOUT_PARAMS
+                    : HIDE_LAYOUT_PARAMS);
+        }
+
+        // Get group indicator from styles of ExpandableListView
+        private Drawable getGroupIndicator() {
+            final TypedArray a = getActivity().obtainStyledAttributes(null,
+                    com.android.internal.R.styleable.ExpandableListView,
+                    com.android.internal.R.attr.expandableListViewStyle, 0);
+            Drawable groupIndicator = a.getDrawable(
+                    com.android.internal.R.styleable.ExpandableListView_groupIndicator);
+            a.recycle();
+            return groupIndicator;
         }
     }
 
@@ -454,21 +580,25 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         private final SparseArray<List<CertHolder>> mCertHoldersByUserId =
                 new SparseArray<List<CertHolder>>();
         private final Tab mTab;
-        private final TrustedCertificateAdapterCommons mAdapter;
+        private final GroupAdapter mAdapter;
 
-        private AdapterData(Tab tab, TrustedCertificateAdapterCommons adapter) {
+        private AdapterData(Tab tab, GroupAdapter adapter) {
             mAdapter = adapter;
             mTab = tab;
         }
 
         private class AliasLoader extends AsyncTask<Void, Integer, SparseArray<List<CertHolder>>> {
             private ProgressBar mProgressBar;
-            private View mList;
+            private View mContentView;
             private Context mContext;
 
             public AliasLoader() {
                 mContext = getActivity();
-                mAliasLoaders.put(mTab, this);
+                mAliasLoaders.add(this);
+                List<UserHandle> profiles = mUserManager.getUserProfiles();
+                for (UserHandle profile : profiles) {
+                    mCertHoldersByUserId.put(profile.getIdentifier(), new ArrayList<CertHolder>());
+                }
             }
 
             private boolean shouldSkipProfile(UserHandle userHandle) {
@@ -479,9 +609,9 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             @Override protected void onPreExecute() {
                 View content = mTabHost.getTabContentView();
                 mProgressBar = (ProgressBar) content.findViewById(mTab.mProgress);
-                mList = content.findViewById(mAdapter.getListViewId(mTab));
+                mContentView = content.findViewById(mTab.mContentView);
                 mProgressBar.setVisibility(View.VISIBLE);
-                mList.setVisibility(View.GONE);
+                mContentView.setVisibility(View.GONE);
             }
             @Override protected SparseArray<List<CertHolder>> doInBackground(Void... params) {
                 SparseArray<List<CertHolder>> certHoldersByProfile =
@@ -565,9 +695,9 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 }
                 mAdapter.notifyDataSetChanged();
                 mProgressBar.setVisibility(View.GONE);
-                mList.setVisibility(View.VISIBLE);
+                mContentView.setVisibility(View.VISIBLE);
                 mProgressBar.setProgress(0);
-                mAliasLoaders.remove(mTab);
+                mAliasLoaders.remove(this);
                 showTrustAllCaDialogIfNeeded();
             }
 
@@ -615,7 +745,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     /* package */ static class CertHolder implements Comparable<CertHolder> {
         public int mProfileId;
         private final IKeyChainService mService;
-        private final TrustedCertificateAdapterCommons mAdapter;
+        private final GroupAdapter mAdapter;
         private final Tab mTab;
         private final String mAlias;
         private final X509Certificate mX509Cert;
@@ -626,7 +756,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         private boolean mDeleted;
 
         private CertHolder(IKeyChainService service,
-                           TrustedCertificateAdapterCommons adapter,
+                           GroupAdapter adapter,
                            Tab tab,
                            String alias,
                            X509Certificate x509Cert,
@@ -706,40 +836,6 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         }
     }
 
-    private View getViewForCertificate(CertHolder certHolder, Tab mTab, View convertView,
-            ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(getActivity());
-            convertView = inflater.inflate(R.layout.trusted_credential, parent, false);
-            holder = new ViewHolder();
-            holder.mSubjectPrimaryView = (TextView)
-                    convertView.findViewById(R.id.trusted_credential_subject_primary);
-            holder.mSubjectSecondaryView = (TextView)
-                    convertView.findViewById(R.id.trusted_credential_subject_secondary);
-            holder.mSwitch = (Switch) convertView.findViewById(
-                    R.id.trusted_credential_status);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        holder.mSubjectPrimaryView.setText(certHolder.mSubjectPrimary);
-        holder.mSubjectSecondaryView.setText(certHolder.mSubjectSecondary);
-        if (mTab.mSwitch) {
-            holder.mSwitch.setChecked(!certHolder.mDeleted);
-            holder.mSwitch.setEnabled(!mUserManager.hasUserRestriction(
-                    UserManager.DISALLOW_CONFIG_CREDENTIALS,
-                    new UserHandle(certHolder.mProfileId)));
-            holder.mSwitch.setVisibility(View.VISIBLE);
-        }
-        return convertView;
-    }
-
-    private static class ViewHolder {
-        private TextView mSubjectPrimaryView;
-        private TextView mSubjectSecondaryView;
-        private Switch mSwitch;
-    }
 
     private boolean isTrustAllCaCertModeInProgress() {
         return mTrustAllCaUserId != UserHandle.USER_NULL;
@@ -824,7 +920,17 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
 
         @Override
         protected void onPostExecute(Boolean ok) {
-            mCertHolder.mTab.postOperationUpdate(ok, mCertHolder);
+            if (ok) {
+                if (mCertHolder.mTab.mSwitch) {
+                    mCertHolder.mDeleted = !mCertHolder.mDeleted;
+                } else {
+                    mCertHolder.mAdapter.remove(mCertHolder);
+                }
+                mCertHolder.mAdapter.notifyDataSetChanged();
+            } else {
+                // bail, reload to reset to known state
+                mCertHolder.mAdapter.load();
+            }
             mAliasOperation = null;
         }
     }
