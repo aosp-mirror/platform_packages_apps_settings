@@ -241,6 +241,8 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
 
         mLockscreenProfile.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mLockscreenProfile.setEntryValues(values.toArray(new CharSequence[values.size()]));
+        // Work profile does not support this settings as we do not have a policy to enforce it yet
+        mLockscreenProfile.setRemoteInputCheckBoxEnabled(false);
         updateLockscreenNotificationsForProfile();
         if (mLockscreenProfile.getEntries().length > 1) {
             mLockscreenProfile.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
