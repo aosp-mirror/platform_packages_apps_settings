@@ -299,11 +299,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             return true;
         } else if (preference instanceof AppPreference) {
             AppPreference pref = (AppPreference) preference;
-            if (pref.isAlwaysOn()) {
-                // User can't disconnect vpn when always-on is enabled
-                return true;
-            }
-
             boolean connected = (pref.getState() == AppPreference.STATE_CONNECTED);
 
             if (!connected) {

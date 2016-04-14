@@ -137,16 +137,19 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
     private void onDisconnect(final DialogInterface dialog) {
         final int userId = UserHandle.getUserId(mPackageInfo.applicationInfo.uid);
         try {
-            final VpnConfig vpnConfig = mService.getVpnConfig(userId);
-            if (vpnConfig == null || vpnConfig.legacy) {
-                return;
-            }
-            if (mPackageInfo.packageName.equals(vpnConfig.user)) {
+            if (mPackageInfo.packageName.equals(getConnectedPackage(mService, userId))) {
+                mService.setAlwaysOnVpnPackage(userId, null);
                 mService.prepareVpn(mPackageInfo.packageName, VpnConfig.LEGACY_VPN, userId);
             }
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to disconnect package " + mPackageInfo.packageName +
                     " for user " + userId, e);
         }
+    }
+
+    private static String getConnectedPackage(IConnectivityManager service, final int userId)
+            throws RemoteException {
+        final VpnConfig config = service.getVpnConfig(userId);
+        return config != null ? config.user : null;
     }
 }
