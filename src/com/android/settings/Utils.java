@@ -336,24 +336,31 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /* Used by UserSettings as well. Call this on a non-ui thread. */
-    public static boolean copyMeProfilePhoto(Context context, UserInfo user) {
+    public static void copyMeProfilePhoto(Context context, UserInfo user) {
         Uri contactUri = Profile.CONTENT_URI;
+
+        int userId = user != null ? user.id : UserHandle.myUserId();
 
         InputStream avatarDataStream = Contacts.openContactPhotoInputStream(
                     context.getContentResolver(),
                     contactUri, true);
         // If there's no profile photo, assign a default avatar
         if (avatarDataStream == null) {
-            return false;
+            assignDefaultPhoto(context, userId);
+        } else {
+            UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+            Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
+            um.setUserIcon(userId, icon);
         }
-        int userId = user != null ? user.id : UserHandle.myUserId();
-        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
-        um.setUserIcon(userId, icon);
         try {
             avatarDataStream.close();
         } catch (IOException ioe) { }
-        return true;
+    }
+
+    public static void assignDefaultPhoto(Context context, int userId) {
+        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        Bitmap bitmap = getDefaultUserIconAsBitmap(userId);
+        um.setUserIcon(userId, bitmap);
     }
 
     public static String getMeProfileName(Context context, boolean full) {

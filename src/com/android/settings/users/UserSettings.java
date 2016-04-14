@@ -331,7 +331,8 @@ public class UserSettings extends SettingsPreferenceFragment
             protected String doInBackground(Void... values) {
                 UserInfo user = mUserManager.getUserInfo(UserHandle.myUserId());
                 if (user.iconPath == null || user.iconPath.equals("")) {
-                    assignProfilePhoto(user);
+                    // Assign profile photo.
+                    Utils.copyMeProfilePhoto(getActivity(), user);
                 }
                 return user.name;
             }
@@ -404,14 +405,14 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private UserInfo createRestrictedProfile() {
         UserInfo newUserInfo = mUserManager.createRestrictedProfile(mAddingUserName);
-        assignDefaultPhoto(newUserInfo);
+        Utils.assignDefaultPhoto(getActivity(), newUserInfo.id);
         return newUserInfo;
     }
 
     private UserInfo createTrustedUser() {
         UserInfo newUserInfo = mUserManager.createUser(mAddingUserName, 0);
         if (newUserInfo != null) {
-            assignDefaultPhoto(newUserInfo);
+            Utils.assignDefaultPhoto(getActivity(), newUserInfo.id);
         }
         return newUserInfo;
     }
@@ -896,17 +897,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 return null;
             }
         }.execute(missingIcons);
-    }
-
-    private void assignProfilePhoto(final UserInfo user) {
-        if (!Utils.copyMeProfilePhoto(getActivity(), user)) {
-            assignDefaultPhoto(user);
-        }
-    }
-
-    private void assignDefaultPhoto(UserInfo user) {
-        Bitmap bitmap = Utils.getDefaultUserIconAsBitmap(user.id);
-        mUserManager.setUserIcon(user.id, bitmap);
     }
 
     private Drawable getEncircledDefaultIcon() {
