@@ -15,7 +15,8 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:title="@string/security_settings_title">
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="@string/security_settings_title">
 
     <PreferenceCategory android:key="sim_lock"
             android:title="@string/sim_lock_settings_title"
@@ -54,7 +55,8 @@
         <com.android.settingslib.RestrictedSwitchPreference android:key="toggle_install_applications"
                 android:title="@string/install_applications"
                 android:summaryOff="@string/install_unknown_applications"
-                android:summaryOn="@string/install_unknown_applications" />
+                android:summaryOn="@string/install_unknown_applications"
+                settings:useAdditionalSummary="true" />
 
     </PreferenceCategory>
 
