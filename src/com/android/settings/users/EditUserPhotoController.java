@@ -32,6 +32,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract.DisplayPhoto;
 import android.provider.MediaStore;
@@ -40,13 +41,15 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListPopupWindow;
+import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.io.File;
@@ -60,9 +63,6 @@ import java.util.List;
 
 public class EditUserPhotoController {
     private static final String TAG = "EditUserPhotoController";
-
-    private static final int POPUP_LIST_ITEM_ID_CHOOSE_PHOTO = 1;
-    private static final int POPUP_LIST_ITEM_ID_TAKE_PHOTO = 2;
 
     // It seems that this class generates custom request codes and they may
     // collide with ours, these values are very unlikely to have a conflict.
@@ -100,10 +100,6 @@ public class EditUserPhotoController {
                 showUpdatePhotoPopup();
             }
         });
-        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        if (um.hasUserRestriction(UserManager.DISALLOW_SET_USER_ICON)) {
-            mImageView.setEnabled(false);
-        }
         mNewUserPhotoBitmap = bitmap;
         mNewUserPhotoDrawable = drawable;
     }
@@ -142,19 +138,31 @@ public class EditUserPhotoController {
             return;
         }
 
-        Context context = mImageView.getContext();
-        final List<EditUserPhotoController.AdapterItem> items = new ArrayList<EditUserPhotoController.AdapterItem>();
+        final Context context = mImageView.getContext();
+        final List<EditUserPhotoController.RestrictedMenuItem> items = new ArrayList<>();
 
-        if (canTakePhoto()) {
-            String title = mImageView.getContext().getString( R.string.user_image_take_photo);
-            EditUserPhotoController.AdapterItem item = new AdapterItem(title, POPUP_LIST_ITEM_ID_TAKE_PHOTO);
-            items.add(item);
+        if (canTakePhoto) {
+            final String title = context.getString(R.string.user_image_take_photo);
+            final Runnable action = new Runnable() {
+                @Override
+                public void run() {
+                    takePhoto();
+                }
+            };
+            items.add(new RestrictedMenuItem(context, title, UserManager.DISALLOW_SET_USER_ICON,
+                    action));
         }
 
         if (canChoosePhoto) {
-            String title = context.getString(R.string.user_image_choose_photo);
-            EditUserPhotoController.AdapterItem item = new AdapterItem(title, POPUP_LIST_ITEM_ID_CHOOSE_PHOTO);
-            items.add(item);
+            final String title = context.getString(R.string.user_image_choose_photo);
+            final Runnable action = new Runnable() {
+                @Override
+                public void run() {
+                    choosePhoto();
+                }
+            };
+            items.add(new RestrictedMenuItem(context, title, UserManager.DISALLOW_SET_USER_ICON,
+                    action));
         }
 
         final ListPopupWindow listPopupWindow = new ListPopupWindow(context);
@@ -162,10 +170,7 @@ public class EditUserPhotoController {
         listPopupWindow.setAnchorView(mImageView);
         listPopupWindow.setModal(true);
         listPopupWindow.setInputMethodMode(ListPopupWindow.INPUT_METHOD_NOT_NEEDED);
-
-        ListAdapter adapter = new ArrayAdapter<EditUserPhotoController.AdapterItem>(context,
-                R.layout.edit_user_photo_popup_item, items);
-        listPopupWindow.setAdapter(adapter);
+        listPopupWindow.setAdapter(new RestrictedPopupMenuAdapter(context, items));
 
         final int width = Math.max(mImageView.getWidth(), context.getResources()
                 .getDimensionPixelSize(R.dimen.update_user_photo_popup_min_width));
@@ -175,17 +180,10 @@ public class EditUserPhotoController {
         listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                EditUserPhotoController.AdapterItem item = items.get(position);
-                switch (item.id) {
-                    case POPUP_LIST_ITEM_ID_CHOOSE_PHOTO: {
-                        choosePhoto();
-                        listPopupWindow.dismiss();
-                    } break;
-                    case POPUP_LIST_ITEM_ID_TAKE_PHOTO: {
-                        takePhoto();
-                        listPopupWindow.dismiss();
-                    } break;
-                }
+                listPopupWindow.dismiss();
+                final RestrictedMenuItem item =
+                        (RestrictedMenuItem) parent.getAdapter().getItem(position);
+                item.doAction();
             }
         });
 
@@ -363,18 +361,82 @@ public class EditUserPhotoController {
         new File(mContext.getCacheDir(), NEW_USER_PHOTO_FILE_NAME).delete();
     }
 
-    private static final class AdapterItem {
-        final String title;
-        final int id;
+    private static final class RestrictedMenuItem {
+        private final Context mContext;
+        private final String mTitle;
+        private final Runnable mAction;
+        private final RestrictedLockUtils.EnforcedAdmin mAdmin;
+        // Restriction may be set by system or something else via UserManager.setUserRestriction().
+        private final boolean mIsRestrictedByBase;
 
-        public AdapterItem(String title, int id) {
-            this.title = title;
-            this.id = id;
+        /**
+         * The menu item, used for popup menu. Any element of such a menu can be disabled by admin.
+         * @param context A context.
+         * @param title The title of the menu item.
+         * @param restriction The restriction, that if is set, blocks the menu item.
+         * @param action The action on menu item click.
+         */
+        public RestrictedMenuItem(Context context, String title, String restriction,
+                Runnable action) {
+            mContext = context;
+            mTitle = title;
+            mAction = action;
+
+            final int myUserId = UserHandle.myUserId();
+            mAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
+                    restriction, myUserId);
+            mIsRestrictedByBase = RestrictedLockUtils.hasBaseUserRestriction(mContext,
+                    restriction, myUserId);
         }
 
         @Override
         public String toString() {
-            return title;
+            return mTitle;
+        }
+
+        final void doAction() {
+            if (isRestrictedByBase()) {
+                return;
+            }
+
+            if (isRestrictedByAdmin()) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, mAdmin);
+                return;
+            }
+
+            mAction.run();
+        }
+
+        final boolean isRestrictedByAdmin() {
+            return mAdmin != null;
+        }
+
+        final boolean isRestrictedByBase() {
+            return mIsRestrictedByBase;
+        }
+    }
+
+    /**
+     * Provide this adapter to ListPopupWindow.setAdapter() to have a popup window menu, where
+     * any element can be restricted by admin (profile owner or device owner).
+     */
+    private static final class RestrictedPopupMenuAdapter extends ArrayAdapter<RestrictedMenuItem> {
+        public RestrictedPopupMenuAdapter(Context context, List<RestrictedMenuItem> items) {
+            super(context, R.layout.restricted_popup_menu_item, R.id.text, items);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            final View view = super.getView(position, convertView, parent);
+            final RestrictedMenuItem item = getItem(position);
+            final TextView text = (TextView) view.findViewById(R.id.text);
+            final ImageView image = (ImageView) view.findViewById(R.id.restricted_icon);
+
+            text.setEnabled(!item.isRestrictedByAdmin() && !item.isRestrictedByBase());
+            image.setVisibility(item.isRestrictedByAdmin() && !item.isRestrictedByBase() ?
+                    ImageView.VISIBLE : ImageView.GONE);
+
+            return view;
         }
     }
 }
