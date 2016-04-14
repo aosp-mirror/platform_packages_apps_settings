@@ -6031,7 +6031,13 @@
         <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to read all notifications,
         including personal information such as contact names and the text of messages you receive.
         It will also be able to dismiss notifications or trigger action buttons they contain.
+        \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
     </string>
+    <string name="notification_listener_disable_warning_summary">
+        If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Do Not Disturb access may also be turned off.
+    </string>
+    <string name="notification_listener_disable_warning_confirm">Turn off</string>
+    <string name="notification_listener_disable_warning_cancel">Cancel</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -6876,6 +6882,8 @@
 
     <!-- Zen mode access settings - summary for warning dialog when enabling access [CHAR LIMIT=NONE] -->
     <string name="zen_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb and make changes to related settings.</string>
+
+    <string name="zen_access_disabled_package_warning">Must stay turned on because notification access is on</string>
 
     <!-- Zen mode access settings - title for warning dialog when revoking access [CHAR LIMIT=NONE] -->
     <string name="zen_access_revoke_warning_dialog_title">Revoke access to Do Not Disturb for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>

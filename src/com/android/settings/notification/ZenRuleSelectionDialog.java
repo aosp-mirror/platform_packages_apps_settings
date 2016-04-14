@@ -27,6 +27,7 @@ import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.service.notification.ZenModeConfig;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.utils.ServiceListing;
+import com.android.settings.utils.ZenServiceListing;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;
@@ -43,6 +45,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public abstract class ZenRuleSelectionDialog {
     private static final String TAG = "ZenRuleSelectionDialog";
@@ -53,9 +57,9 @@ public abstract class ZenRuleSelectionDialog {
     private NotificationManager mNm;
     private final AlertDialog mDialog;
     private final LinearLayout mRuleContainer;
-    private final ServiceListing mServiceListing;
+    private final ZenServiceListing mServiceListing;
 
-    public ZenRuleSelectionDialog(Context context, ServiceListing serviceListing) {
+    public ZenRuleSelectionDialog(Context context, ZenServiceListing serviceListing) {
         mContext = context;
         mPm = context.getPackageManager();
         mNm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -67,7 +71,7 @@ public abstract class ZenRuleSelectionDialog {
         if (mServiceListing != null) {
             bindType(defaultNewEvent());
             bindType(defaultNewSchedule());
-            mServiceListing.addCallback(mServiceListingCallback);
+            mServiceListing.addZenCallback(mServiceListingCallback);
             mServiceListing.reloadApprovedServices();
         }
         mDialog = new AlertDialog.Builder(context)
@@ -77,7 +81,7 @@ public abstract class ZenRuleSelectionDialog {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
                         if (mServiceListing != null) {
-                            mServiceListing.removeCallback(mServiceListingCallback);
+                            mServiceListing.removeZenCallback(mServiceListingCallback);
                         }
                     }
                 })
@@ -152,24 +156,24 @@ public abstract class ZenRuleSelectionDialog {
         return rt;
     }
 
-    private void bindExternalRules(List<ZenRuleInfo> externalRuleTypes) {
-        Collections.sort(externalRuleTypes, RULE_TYPE_COMPARATOR);
+    private void bindExternalRules(Set<ZenRuleInfo> externalRuleTypes) {
         for (ZenRuleInfo ri : externalRuleTypes) {
             bindType(ri);
         }
     }
 
-    private final ServiceListing.Callback mServiceListingCallback = new ServiceListing.Callback() {
+    private final ZenServiceListing.Callback mServiceListingCallback = new
+            ZenServiceListing.Callback() {
         @Override
-        public void onServicesReloaded(List<ServiceInfo> services) {
+        public void onServicesReloaded(Set<ServiceInfo> services) {
             if (DEBUG) Log.d(TAG, "Services reloaded: count=" + services.size());
-            List<ZenRuleInfo> externalRuleTypes = new ArrayList<>();
-            for (int i = 0; i < services.size(); i++) {
-                final ZenRuleInfo ri = ZenModeAutomationSettings.getRuleInfo(mPm, services.get(i));
+            Set<ZenRuleInfo> externalRuleTypes = new TreeSet<>(RULE_TYPE_COMPARATOR);
+            for (ServiceInfo serviceInfo : services) {
+                final ZenRuleInfo ri = ZenModeAutomationSettings.getRuleInfo(mPm, serviceInfo);
                 if (ri != null && ri.configurationActivity != null
                         && mNm.isNotificationPolicyAccessGrantedForPackage(ri.packageName)
                         && (ri.ruleInstanceLimit <= 0 || ri.ruleInstanceLimit
-                        >= (mNm.getRuleInstanceCount(services.get(i).getComponentName()) + 1))) {
+                        >= (mNm.getRuleInstanceCount(serviceInfo.getComponentName()) + 1))) {
                     externalRuleTypes.add(ri);
                 }
             }
