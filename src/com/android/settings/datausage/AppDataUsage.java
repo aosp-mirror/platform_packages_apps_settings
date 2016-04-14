@@ -39,6 +39,8 @@ import android.text.format.Formatter;
 import android.util.ArraySet;
 import android.view.View;
 import android.widget.AdapterView;
+
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
@@ -78,6 +80,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
 
     private Drawable mIcon;
     private CharSequence mLabel;
+    private String mPackageName;
     private INetworkStatsSession mStatsSession;
     private CycleAdapter mCycleAdapter;
 
@@ -143,6 +146,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                     ApplicationInfo info = pm.getApplicationInfo(mPackages.valueAt(0), 0);
                     mIcon = info.loadIcon(pm);
                     mLabel = info.loadLabel(pm);
+                    mPackageName = info.packageName;
                 } catch (PackageManager.NameNotFoundException e) {
                 }
             }
@@ -186,6 +190,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             final PackageManager pm = getPackageManager();
             mIcon = Utils.getUserIcon(getActivity(), um, info);
             mLabel = Utils.getUserLabel(getActivity(), info);
+            mPackageName = getActivity().getPackageName();
             removePreference(KEY_UNRESTRICTED_DATA);
             removePreference(KEY_APP_SETTINGS);
             removePreference(KEY_RESTRICT_BACKGROUND);
@@ -214,7 +219,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             setAppRestrictBackground(!(Boolean) newValue);
             return true;
         } else if (preference == mUnrestrictedData) {
-            mDataSaverBackend.setIsWhitelisted(mAppItem.key, (Boolean) newValue);
+            mDataSaverBackend.setIsWhitelisted(mAppItem.key, mPackageName, (Boolean) newValue);
             return true;
         }
         return false;
@@ -287,6 +292,10 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         services.mPolicyManager.setUidPolicy(
                 uid, restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
         updatePrefs();        // TODO: should have been notified by NPMS instead
+        if (restrictBackground) {
+            MetricsLogger.action(getContext(),
+                    MetricsEvent.ACTION_DATA_SAVER_BLACKLIST, mPackageName);
+        }
     }
 
     @Override
