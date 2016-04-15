@@ -21,6 +21,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,9 +30,11 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+
 import com.android.settings.widget.DotsPageIndicator;
 import com.android.settings.widget.LabeledSeekBar;
 
+import java.util.Locale;
 
 /**
  * Preference fragment shows a preview and a seek bar to adjust a specific settings.
@@ -146,6 +149,7 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
         final Context context = getPrefContext();
         final Configuration origConfig = context.getResources().getConfiguration();
+        final boolean isLayoutRtl = origConfig.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
         Configuration[] configurations = new Configuration[mEntries.length];
         for (int i = 0; i < mEntries.length; ++i) {
             configurations[i] = createConfig(origConfig, i);
@@ -153,9 +157,10 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
         mPreviewPager = (ViewPager) content.findViewById(R.id.preview_pager);
         if (mPreviewPager != null) {
-            mPreviewPagerAdapter = new PreviewPagerAdapter(context, mPreviewSampleResIds,
-                    configurations);
+            mPreviewPagerAdapter = new PreviewPagerAdapter(context, isLayoutRtl,
+                    mPreviewSampleResIds, configurations);
             mPreviewPager.setAdapter(mPreviewPagerAdapter);
+            mPreviewPager.setCurrentItem(isLayoutRtl ? mPreviewSampleResIds.length - 1 : 0);
             mPreviewPager.addOnPageChangeListener(mPreviewPageChangeListener);
 
             mPageIndicator = (DotsPageIndicator) content.findViewById(R.id.page_indicator);
