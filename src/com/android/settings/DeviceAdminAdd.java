@@ -245,6 +245,12 @@ public class DeviceAdminAdd extends Activity {
         if (DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN.equals(getIntent().getAction())) {
             mRefreshing = false;
             if (mDPM.isAdminActive(who)) {
+                if (mDPM.isRemovingAdmin(who, android.os.Process.myUserHandle().getIdentifier())) {
+                    Log.w(TAG, "Requested admin is already being removed: " + who);
+                    finish();
+                    return;
+                }
+
                 ArrayList<DeviceAdminInfo.PolicyInfo> newPolicies = mDeviceAdmin.getUsedPolicies();
                 for (int i = 0; i < newPolicies.size(); i++) {
                     DeviceAdminInfo.PolicyInfo pi = newPolicies.get(i);
