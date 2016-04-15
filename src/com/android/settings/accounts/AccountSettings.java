@@ -251,7 +251,11 @@ public class AccountSettings extends SettingsPreferenceFragment
             ProfileData profileData = mProfiles.valueAt(i);
             if (preference == profileData.workModeSwitch) {
                 final int userId = profileData.userInfo.id;
-                mUm.setQuietModeEnabled(userId, !((boolean) newValue));
+                if ((boolean) newValue) {
+                    mUm.trySetQuietModeDisabled(userId, null);
+                } else {
+                    mUm.setQuietModeEnabled(userId, true);
+                }
                 return true;
             }
         }

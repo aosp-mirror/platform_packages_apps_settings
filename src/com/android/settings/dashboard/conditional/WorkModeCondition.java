@@ -90,7 +90,7 @@ public class WorkModeCondition extends Condition {
     @Override
     public void onActionClick(int index) {
         if (index == 0) {
-            mUm.setQuietModeEnabled(mUserHandle.getIdentifier(), false);
+            mUm.trySetQuietModeDisabled(mUserHandle.getIdentifier(), null);
             setActive(false);
         } else {
             throw new IllegalArgumentException("Unexpected index " + index);
