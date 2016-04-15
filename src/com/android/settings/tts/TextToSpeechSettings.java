@@ -71,6 +71,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     /** Preference key for the TTS reset speech rate preference. */
     private static final String KEY_RESET_SPEECH_RATE = "reset_speech_rate";
 
+    /** Preference key for the TTS reset speech pitch preference. */
+    private static final String KEY_RESET_SPEECH_PITCH = "reset_speech_pitch";
+
     /** Preference key for the TTS status field. */
     private static final String KEY_STATUS = "tts_status";
 
@@ -107,6 +110,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private SeekBarPreference mDefaultPitchPref;
     private SeekBarPreference mDefaultRatePref;
     private Preference mResetSpeechRate;
+    private Preference mResetSpeechPitch;
     private Preference mPlayExample;
     private Preference mEngineStatus;
 
@@ -189,6 +193,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         mResetSpeechRate = findPreference(KEY_RESET_SPEECH_RATE);
         mResetSpeechRate.setOnPreferenceClickListener(this);
+        mResetSpeechPitch = findPreference(KEY_RESET_SPEECH_PITCH);
+        mResetSpeechPitch.setOnPreferenceClickListener(this);
 
         mEnginePreferenceCategory = (PreferenceCategory) findPreference(
                 KEY_ENGINE_PREFERENCE_SECTION);
@@ -505,18 +511,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         if (KEY_DEFAULT_RATE.equals(preference.getKey())) {
             updateSpeechRate((Integer) objValue);
         } else if (KEY_DEFAULT_PITCH.equals(preference.getKey())) {
-            int progress = (Integer) objValue;
-            mDefaultPitch = getSpeechPitchValueFromSeekBarProgress(progress);
-            try {
-                android.provider.Settings.Secure.putInt(getContentResolver(),
-                        TTS_DEFAULT_PITCH, mDefaultPitch);
-               if (mTts != null) {
-                   mTts.setPitch(mDefaultPitch / 100.0f);
-               }
-               if (DBG) Log.d(TAG, "TTS default pitch changed, now" + mDefaultPitch);
-           } catch (NumberFormatException e) {
-               Log.e(TAG, "could not persist default TTS pitch setting", e);
-           }
+            updateSpeechPitchValue((Integer) objValue);
         }
         return true;
     }
@@ -535,7 +530,14 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
           mDefaultRatePref.setProgress(TextToSpeech.Engine.DEFAULT_RATE);
           updateSpeechRate(TextToSpeech.Engine.DEFAULT_RATE);
           return true;
+        } else if (preference == mResetSpeechPitch) {
+          int pitchSeekbarProgress = getPitchSeekBarProgressFromSpeechPitchValue(
+              TextToSpeech.Engine.DEFAULT_PITCH);
+          mDefaultPitchPref.setProgress(pitchSeekbarProgress);
+          updateSpeechPitchValue(pitchSeekbarProgress);
+          return true;
         }
+
         return false;
     }
 
@@ -550,6 +552,22 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             if (DBG) Log.d(TAG, "TTS default rate changed, now " + mDefaultRate);
         } catch (NumberFormatException e) {
             Log.e(TAG, "could not persist default TTS rate setting", e);
+        }
+        return;
+    }
+
+    private void updateSpeechPitchValue(int speechPitchSeekBarProgress) {
+        mDefaultPitch = getSpeechPitchValueFromSeekBarProgress(
+            speechPitchSeekBarProgress);
+        try {
+            android.provider.Settings.Secure.putInt(getContentResolver(),
+                    TTS_DEFAULT_PITCH, mDefaultPitch);
+            if (mTts != null) {
+                mTts.setPitch(mDefaultPitch / 100.0f);
+            }
+            if (DBG) Log.d(TAG, "TTS default pitch changed, now" + mDefaultPitch);
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "could not persist default TTS pitch setting", e);
         }
         return;
     }
