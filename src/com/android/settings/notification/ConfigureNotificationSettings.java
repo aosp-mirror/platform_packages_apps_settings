@@ -213,7 +213,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
             Log.i(TAG, "Preference not found: " + KEY_LOCK_SCREEN_PROFILE_NOTIFICATIONS);
             return;
         }
-
+        mLockscreenProfile.setUserId(mProfileChallengeUserId);
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
         entries.add(getString(R.string.lock_screen_notifications_summary_disable_profile));
