@@ -24,6 +24,9 @@ import android.os.ServiceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
+
 import java.util.ArrayList;
 
 public class DataSaverBackend {
@@ -67,13 +70,14 @@ public class DataSaverBackend {
 
     public void setDataSaverEnabled(boolean enabled) {
         mPolicyManager.setRestrictBackground(enabled);
+        MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_MODE, enabled ? 1 : 0);
     }
 
     public void refreshWhitelist() {
         loadWhitelist();
     }
 
-    public void setIsWhitelisted(int uid, boolean whitelisted) {
+    public void setIsWhitelisted(int uid, String packageName, boolean whitelisted) {
         mWhitelist.put(uid, whitelisted);
         try {
             if (whitelisted) {
@@ -84,6 +88,7 @@ public class DataSaverBackend {
         } catch (RemoteException e) {
             Log.w(TAG, "Can't reach policy manager", e);
         }
+        MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_WHITELIST, packageName);
     }
 
     public boolean isWhitelisted(int uid) {

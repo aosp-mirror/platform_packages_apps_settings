@@ -200,7 +200,8 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         if (preference instanceof AccessPreference) {
             AccessPreference accessPreference = (AccessPreference) preference;
             boolean whitelisted = newValue == Boolean.TRUE;
-            mDataSaverBackend.setIsWhitelisted(accessPreference.mEntry.info.uid, whitelisted);
+            mDataSaverBackend.setIsWhitelisted(accessPreference.mEntry.info.uid,
+                    accessPreference.mEntry.info.packageName, whitelisted);
             ((AppStateDataUsageBridge.DataUsageState) accessPreference.mEntry.extraInfo)
                     .isDataSaverWhitelisted = whitelisted;
             return true;
