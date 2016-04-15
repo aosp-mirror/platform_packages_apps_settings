@@ -564,12 +564,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             // Run the Index update only if we have some space
             if (!Utils.isLowStorage(this)) {
                 long indexStartTime = System.currentTimeMillis();
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        Index.getInstance(getApplicationContext()).update();
-                    }
-                });
+                Index.getInstance(getApplicationContext()).update();
                 if (DEBUG_TIMING) Log.d(LOG_TAG, "Index.update() took "
                         + (System.currentTimeMillis() - indexStartTime) + " ms");
             } else {
