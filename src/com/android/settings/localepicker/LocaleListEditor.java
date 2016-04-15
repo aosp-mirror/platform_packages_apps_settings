@@ -31,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
@@ -48,12 +49,15 @@ import java.util.Locale;
 public class LocaleListEditor extends SettingsPreferenceFragment
         implements LocalePickerWithRegion.LocaleSelectedListener {
 
+    private static final String CFGKEY_REMOVE_MODE = "localeRemoveMode";
+    private static final String CFGKEY_REMOVE_DIALOG = "showingLocaleRemoveDialog";
     private static final int MENU_ID_REMOVE = Menu.FIRST + 1;
 
     private LocaleDragAndDropAdapter mAdapter;
     private Menu mMenu;
-    private boolean mRemoveMode;
     private View mAddLanguage;
+    private boolean mRemoveMode;
+    private boolean mShowingRemoveDialog;
 
     @Override
     protected int getMetricsCategory() {
@@ -83,14 +87,44 @@ public class LocaleListEditor extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            mRemoveMode = savedInstanceState.getBoolean(CFGKEY_REMOVE_MODE, false);
+            mShowingRemoveDialog = savedInstanceState.getBoolean(CFGKEY_REMOVE_DIALOG, false);
+        }
+        setRemoveMode(mRemoveMode);
+        mAdapter.restoreState(savedInstanceState);
+
+        if (mShowingRemoveDialog) {
+            showRemoveLocaleWarningDialog();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(CFGKEY_REMOVE_MODE, mRemoveMode);
+        outState.putBoolean(CFGKEY_REMOVE_DIALOG, mShowingRemoveDialog);
+        mAdapter.saveState(outState);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == MENU_ID_REMOVE) {
-            if (mRemoveMode) {
-                removeLocaleWarningDialog();
-            } else {
-                setRemoveMode(true);
-            }
-            return true;
+        switch (menuItem.getItemId()) {
+            case MENU_ID_REMOVE:
+                if (mRemoveMode) {
+                    showRemoveLocaleWarningDialog();
+                } else {
+                    setRemoveMode(true);
+                }
+                return true;
+            case android.R.id.home:
+                if (mRemoveMode) {
+                    setRemoveMode(false);
+                    return true;
+                }
+                break;
         }
         return super.onOptionsItemSelected(menuItem);
     }
@@ -98,12 +132,15 @@ public class LocaleListEditor extends SettingsPreferenceFragment
     private void setRemoveMode(boolean mRemoveMode) {
         this.mRemoveMode = mRemoveMode;
         mAdapter.setRemoveMode(mRemoveMode);
-        mMenu.findItem(MENU_ID_REMOVE).setShowAsAction(
-                mRemoveMode ? MenuItem.SHOW_AS_ACTION_ALWAYS : MenuItem.SHOW_AS_ACTION_NEVER);
         mAddLanguage.setVisibility(mRemoveMode ? View.INVISIBLE : View.VISIBLE);
+        updateVisibilityOfRemoveMenu();
     }
 
-    private void removeLocaleWarningDialog() {
+    // Show the appropriate warning when the user tries to remove locales.
+    // Shows no warning if there is no locale checked, shows a warning
+    // about removing all the locales if all of them are checked, and
+    // a "regular" warning otherwise.
+    private void showRemoveLocaleWarningDialog() {
         int checkedCount = mAdapter.getCheckedCount();
 
         // Nothing checked, just exit remove mode without a warning dialog
@@ -114,12 +151,19 @@ public class LocaleListEditor extends SettingsPreferenceFragment
 
         // All locales selected, warning dialog, can't remove them all
         if (checkedCount == mAdapter.getItemCount()) {
+            mShowingRemoveDialog = true;
             new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.dlg_remove_locales_error_title)
                     .setMessage(R.string.dlg_remove_locales_error_message)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            mShowingRemoveDialog = false;
                         }
                     })
                     .create()
@@ -129,21 +173,38 @@ public class LocaleListEditor extends SettingsPreferenceFragment
 
         final String title = getResources().getQuantityString(R.plurals.dlg_remove_locales_title,
                 checkedCount);
+        mShowingRemoveDialog = true;
         new AlertDialog.Builder(getActivity())
                 .setTitle(title)
                 .setMessage(R.string.dlg_remove_locales_message)
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        setRemoveMode(!mRemoveMode);
+                        setRemoveMode(false);
                     }
                 })
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // This is a sensitive area to change.
+                        // removeChecked() triggers a system update and "kills" the frame.
+                        // This means that saveState + restoreState are called before
+                        // setRemoveMode is called.
+                        // So we want that mRemoveMode and dialog status have the right values
+                        // before that save.
+                        // We can't just call setRemoveMode(false) before calling removeCheched
+                        // because that unchecks all items and removeChecked would have nothing
+                        // to remove.
+                        mRemoveMode = false;
+                        mShowingRemoveDialog = false;
                         mAdapter.removeChecked();
-                        setRemoveMode(!mRemoveMode);
-                        updateVisibilityOfRemoveMenu();
+                        setRemoveMode(false);
+                    }
+                })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        mShowingRemoveDialog = false;
                     }
                 })
                 .create()
@@ -208,8 +269,14 @@ public class LocaleListEditor extends SettingsPreferenceFragment
     // Hide the "Remove" menu if there is only one locale in the list, show it otherwise
     // This is called when the menu is first created, and then one add / remove locale
     private void updateVisibilityOfRemoveMenu() {
+        if (mMenu == null) {
+            return;
+        }
+
         final MenuItem menuItemRemove = mMenu.findItem(MENU_ID_REMOVE);
         if (menuItemRemove != null) {
+            menuItemRemove.setShowAsAction(
+                    mRemoveMode ? MenuItem.SHOW_AS_ACTION_ALWAYS : MenuItem.SHOW_AS_ACTION_NEVER);
             menuItemRemove.setVisible(mAdapter.getItemCount() > 1);
         }
     }

@@ -18,6 +18,7 @@ package com.android.settings.localepicker;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -36,6 +37,7 @@ import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -45,6 +47,7 @@ class LocaleDragAndDropAdapter
         extends RecyclerView.Adapter<LocaleDragAndDropAdapter.CustomViewHolder> {
 
     private static final String TAG = "LocaleDragAndDropAdapter";
+    private static final String CFGKEY_SELECTED_LOCALES = "selectedLocales";
     private final Context mContext;
     private final List<LocaleStore.LocaleInfo> mFeedItemList;
     private final ItemTouchHelper mItemTouchHelper;
@@ -105,6 +108,7 @@ class LocaleDragAndDropAdapter
             private static final int SELECTION_LOST = 0;
             private static final int SELECTION_UNCHANGED = -1;
             private int mSelectionStatus = SELECTION_UNCHANGED;
+
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView,
                     RecyclerView.ViewHolder viewHolder, float dX, float dY,
@@ -148,7 +152,6 @@ class LocaleDragAndDropAdapter
     public void onBindViewHolder(final CustomViewHolder holder, int i) {
         final LocaleStore.LocaleInfo feedItem = mFeedItemList.get(i);
         final LocaleDragCell dragCell = holder.getLocaleDragCell();
-
         String label = feedItem.getFullNameNative();
         dragCell.setLabel(label);
         dragCell.setLocalized(feedItem.isTranslated());
@@ -156,7 +159,7 @@ class LocaleDragAndDropAdapter
         dragCell.setShowCheckbox(mRemoveMode);
         dragCell.setShowMiniLabel(!mRemoveMode);
         dragCell.setShowHandle(!mRemoveMode && mDragEnabled);
-        dragCell.setChecked(false);
+        dragCell.setChecked(mRemoveMode ? feedItem.getChecked() : false);
         dragCell.setTag(feedItem);
         dragCell.getCheckbox()
                 .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -285,5 +288,41 @@ class LocaleDragAndDropAdapter
 
     private void setDragEnabled(boolean enabled) {
         mDragEnabled = enabled;
+    }
+
+    /**
+     * Saves the list of checked locales to preserve status when the list is destroyed.
+     * (for instance when the device is rotated)
+     * @param outInstanceState Bundle in which to place the saved state
+     */
+    public void saveState(Bundle outInstanceState) {
+        if (outInstanceState != null) {
+            final ArrayList<String> selectedLocales = new ArrayList<>();
+            for (LocaleStore.LocaleInfo li : mFeedItemList) {
+                if (li.getChecked()) {
+                    selectedLocales.add(li.getId());
+                }
+            }
+            outInstanceState.putStringArrayList(CFGKEY_SELECTED_LOCALES, selectedLocales);
+        }
+    }
+
+    /**
+     * Restores the list of checked locales to preserve status when the list is recreated.
+     * (for instance when the device is rotated)
+     * @param savedInstanceState Bundle with the data saved by {@link #saveState(Bundle)}
+     */
+    public void restoreState(Bundle savedInstanceState) {
+        if (savedInstanceState != null && mRemoveMode) {
+            final ArrayList<String> selectedLocales =
+                    savedInstanceState.getStringArrayList(CFGKEY_SELECTED_LOCALES);
+            if (selectedLocales == null || selectedLocales.isEmpty()) {
+                return;
+            }
+            for (LocaleStore.LocaleInfo li : mFeedItemList) {
+                li.setChecked(selectedLocales.contains(li.getId()));
+            }
+            notifyItemRangeChanged(0, mFeedItemList.size());
+        }
     }
 }
