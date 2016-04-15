@@ -32,30 +32,22 @@
             android:summary="@string/show_silently_summary"
             android:order="3" />
     <!-- Slider -->
-    <com.android.settingslib.RestrictedPreference
-            android:key="importance_title"
-            android:title="@string/notification_importance_title"
-            android:order="4"/>
     <com.android.settings.notification.ImportanceSeekBarPreference
             android:key="importance"
-            android:order="5"/>
-
-    <com.android.settings.applications.LayoutPreference
-            android:key="importance_reset_button"
-            android:layout="@layout/two_buttons_panel"
-            android:order="6" />
+            android:title="@string/notification_importance_title"
+            android:order="4"/>
 
     <!-- Visibility Override -->
     <DropDownPreference
             android:key="visibility_override"
             android:title="@string/app_notification_visibility_override_title"
-            android:order="7" />
+            android:order="5" />
 
     <!-- Bypass DND -->
     <com.android.settingslib.RestrictedSwitchPreference
             android:key="bypass_dnd"
             android:title="@string/app_notification_override_dnd_title"
             android:summary="@string/app_notification_override_dnd_summary"
-            android:order="8" />
+            android:order="6" />
 
 </PreferenceScreen>

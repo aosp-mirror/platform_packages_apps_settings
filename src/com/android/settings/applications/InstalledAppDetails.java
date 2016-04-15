@@ -51,7 +51,9 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
+import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
@@ -143,6 +145,8 @@ public class InstalledAppDetails extends AppInfoBase
     private static final String KEY_LAUNCH = "preferred_settings";
     private static final String KEY_BATTERY = "battery";
     private static final String KEY_MEMORY = "memory";
+
+    private static final String NOTIFICATION_TUNER_SETTING = "show_importance_slider";
 
     private final HashSet<String> mHomePackages = new HashSet<String>();
 
@@ -1016,13 +1020,22 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     public static CharSequence getNotificationSummary(AppRow appRow, Context context) {
+        boolean showSlider = Settings.Secure.getInt(
+                context.getContentResolver(), NOTIFICATION_TUNER_SETTING, 0) == 1;
         List<String> summaryAttributes = new ArrayList<>();
         StringBuffer summary = new StringBuffer();
-        if (appRow.banned) {
-            summaryAttributes.add(context.getString(R.string.notifications_disabled));
-        } else if (appRow.appImportance > NotificationListenerService.Ranking.IMPORTANCE_NONE
-                && appRow.appImportance < NotificationListenerService.Ranking.IMPORTANCE_DEFAULT) {
-            summaryAttributes.add(context.getString(R.string.notifications_silenced));
+        if (showSlider) {
+            if (appRow.appImportance != Ranking.IMPORTANCE_UNSPECIFIED) {
+                summaryAttributes.add(context.getString(
+                        R.string.notification_summary_level, appRow.appImportance));
+            }
+        } else {
+            if (appRow.banned) {
+                summaryAttributes.add(context.getString(R.string.notifications_disabled));
+            } else if (appRow.appImportance > Ranking.IMPORTANCE_NONE
+                    && appRow.appImportance < Ranking.IMPORTANCE_DEFAULT) {
+                summaryAttributes.add(context.getString(R.string.notifications_silenced));
+            }
         }
         final boolean lockscreenSecure = new LockPatternUtils(context).isSecure(
                 UserHandle.myUserId());
