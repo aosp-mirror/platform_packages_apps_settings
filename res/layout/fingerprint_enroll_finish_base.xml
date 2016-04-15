@@ -49,20 +49,25 @@
             android:visibility="gone" />
 
         <View
-            android:layout_height="0dp"
+            android:layout_height="24dp"
             android:layout_width="match_parent"
             android:layout_weight="1"/>
 
         <ImageView
             android:id="@+id/fingerprint_in_app_indicator"
-            android:layout_width="@dimen/fingerprint_in_app_indicator_size"
-            android:layout_height="@dimen/fingerprint_in_app_indicator_size"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="5"
+            android:minHeight="@dimen/fingerprint_in_app_indicator_min_size"
+            android:minWidth="@dimen/fingerprint_in_app_indicator_min_size"
+            android:maxHeight="@dimen/fingerprint_in_app_indicator_max_size"
+            android:maxWidth="@dimen/fingerprint_in_app_indicator_max_size"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@android:string/fingerprint_icon_content_description"
             android:src="@drawable/fp_app_indicator" />
 
         <View
-            android:layout_height="0dp"
+            android:layout_height="24dp"
             android:layout_width="match_parent"
             android:layout_weight="1"/>
 
