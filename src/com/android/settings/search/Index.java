@@ -140,6 +140,7 @@ public class Index {
             IndexColumns.DATA_SUMMARY_OFF_NORMALIZED,
             IndexColumns.DATA_ENTRIES
     };
+    private static final String INDEX = "index";
 
     // Max number of saved search queries (who will be used for proposing suggestions)
     private static long MAX_SAVED_SEARCH_QUERY = 64;
@@ -177,6 +178,7 @@ public class Index {
         public Map<String, List<String>> nonIndexableKeys;
 
         public boolean forceUpdate = false;
+        public boolean fullIndex = true;
 
         public UpdateData() {
             dataToUpdate = new ArrayList<SearchIndexableData>();
@@ -189,6 +191,7 @@ public class Index {
             dataToDelete = new ArrayList<SearchIndexableData>(other.dataToDelete);
             nonIndexableKeys = new HashMap<String, List<String>>(other.nonIndexableKeys);
             forceUpdate = other.forceUpdate;
+            fullIndex = other.fullIndex;
         }
 
         public UpdateData copy() {
@@ -200,6 +203,7 @@ public class Index {
             dataToDelete.clear();
             nonIndexableKeys.clear();
             forceUpdate = false;
+            fullIndex = false;
         }
     }
 
@@ -213,9 +217,7 @@ public class Index {
      */
     public static Index getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new Index(context, BASE_AUTHORITY);
-        } else {
-            sInstance.setContext(context);
+            sInstance = new Index(context.getApplicationContext(), BASE_AUTHORITY);
         }
         return sInstance;
     }
@@ -301,24 +303,30 @@ public class Index {
     }
 
     public void update() {
-        final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
-        List<ResolveInfo> list =
-                mContext.getPackageManager().queryIntentContentProviders(intent, 0);
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
+                List<ResolveInfo> list =
+                        mContext.getPackageManager().queryIntentContentProviders(intent, 0);
 
-        final int size = list.size();
-        for (int n = 0; n < size; n++) {
-            final ResolveInfo info = list.get(n);
-            if (!isWellKnownProvider(info)) {
-                continue;
+                final int size = list.size();
+                for (int n = 0; n < size; n++) {
+                    final ResolveInfo info = list.get(n);
+                    if (!isWellKnownProvider(info)) {
+                        continue;
+                    }
+                    final String authority = info.providerInfo.authority;
+                    final String packageName = info.providerInfo.packageName;
+
+                    addIndexablesFromRemoteProvider(packageName, authority);
+                    addNonIndexablesKeysFromRemoteProvider(packageName, authority);
+                }
+
+                mDataToProcess.fullIndex = true;
+                updateInternal();
             }
-            final String authority = info.providerInfo.authority;
-            final String packageName = info.providerInfo.packageName;
-
-            addIndexablesFromRemoteProvider(packageName, authority);
-            addNonIndexablesKeysFromRemoteProvider(packageName, authority);
-        }
-
-        updateInternal();
+        });
     }
 
     private boolean addIndexablesFromRemoteProvider(String packageName, String authority) {
@@ -472,7 +480,7 @@ public class Index {
      * @param includeInSearchResults true means that you want the bit "enabled" set so that the
      *                               data will be seen included into the search results
      */
-    public void updateFromClassNameResource(String className, boolean rebuild,
+    public void updateFromClassNameResource(String className, final boolean rebuild,
             boolean includeInSearchResults) {
         if (className == null) {
             throw new IllegalArgumentException("class name cannot be null!");
@@ -484,19 +492,29 @@ public class Index {
         }
         res.context = mContext;
         res.enabled = includeInSearchResults;
-        if (rebuild) {
-            deleteIndexableData(res);
-        }
-        addIndexableData(res);
-        mDataToProcess.forceUpdate = true;
-        updateInternal();
-        res.enabled = false;
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                if (rebuild) {
+                    deleteIndexableData(res);
+                }
+                addIndexableData(res);
+                mDataToProcess.forceUpdate = true;
+                updateInternal();
+                res.enabled = false;
+            }
+        });
     }
 
     public void updateFromSearchIndexableData(SearchIndexableData data) {
-        addIndexableData(data);
-        mDataToProcess.forceUpdate = true;
-        updateInternal();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                addIndexableData(data);
+                mDataToProcess.forceUpdate = true;
+                updateInternal();
+            }
+        });
     }
 
     private SQLiteDatabase getReadableDatabase() {
@@ -1182,6 +1200,7 @@ public class Index {
             final Map<String, List<String>> nonIndexableKeys = params[0].nonIndexableKeys;
 
             final boolean forceUpdate = params[0].forceUpdate;
+            final boolean fullIndex = params[0].fullIndex;
 
             final SQLiteDatabase database = getWritableDatabase();
             if (database == null) {
@@ -1202,6 +1221,9 @@ public class Index {
                 database.setTransactionSuccessful();
             } finally {
                 database.endTransaction();
+            }
+            if (fullIndex) {
+                setLocaleIndexed(localeStr);
             }
 
             return null;
@@ -1225,8 +1247,8 @@ public class Index {
                 try {
                     indexOneSearchIndexableData(database, localeStr, data, nonIndexableKeys);
                 } catch (Exception e) {
-                    Log.e(LOG_TAG,
-                            "Cannot index: " + data.className + " for locale: " + localeStr, e);
+                    Log.e(LOG_TAG, "Cannot index: " + (data != null ? data.className : data)
+                                    + " for locale: " + localeStr, e);
                 }
             }
 
@@ -1273,24 +1295,12 @@ public class Index {
             return database.delete(Tables.TABLE_PREFS_INDEX, whereClause, whereArgs);
         }
 
+        private void setLocaleIndexed(String locale) {
+            mContext.getSharedPreferences(INDEX, 0).edit().putBoolean(locale, true).commit();
+        }
+
         private boolean isLocaleAlreadyIndexed(SQLiteDatabase database, String locale) {
-            Cursor cursor = null;
-            boolean result = false;
-            final StringBuilder sb = new StringBuilder(IndexColumns.LOCALE);
-            sb.append(" = ");
-            DatabaseUtils.appendEscapedSQLString(sb, locale);
-            try {
-                // We care only for 1 row
-                cursor = database.query(Tables.TABLE_PREFS_INDEX, null,
-                        sb.toString(), null, null, null, null, "1");
-                final int count = cursor.getCount();
-                result = (count >= 1);
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-            return result;
+            return mContext.getSharedPreferences(INDEX, 0).getBoolean(locale, false);
         }
     }
 
