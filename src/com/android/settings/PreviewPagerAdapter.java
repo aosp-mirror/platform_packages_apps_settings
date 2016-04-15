@@ -45,19 +45,23 @@ public class PreviewPagerAdapter extends PagerAdapter {
     /** Interpolator to use when cross-fading between previews. */
     private static final Interpolator FADE_OUT_INTERPOLATOR = new AccelerateInterpolator();
 
-    private final FrameLayout[] mPreviewFrames;
+    private FrameLayout[] mPreviewFrames;
+
+    private boolean mIsLayoutRtl;
 
     private Runnable mAnimationEndAction;
 
     private int mAnimationCounter;
 
-    public PreviewPagerAdapter(Context context, int[] previewSampleResIds,
-                               Configuration[] configurations) {
+    public PreviewPagerAdapter(Context context, boolean isLayoutRtl,
+            int[] previewSampleResIds, Configuration[] configurations) {
+        mIsLayoutRtl = isLayoutRtl;
         mPreviewFrames = new FrameLayout[previewSampleResIds.length];
 
         for (int i = 0; i < previewSampleResIds.length; ++i) {
-            mPreviewFrames[i] = new FrameLayout(context);
-            mPreviewFrames[i].setLayoutParams(new LinearLayout.LayoutParams(
+            int p = mIsLayoutRtl ? previewSampleResIds.length - 1 - i : i;
+            mPreviewFrames[p] = new FrameLayout(context);
+            mPreviewFrames[p].setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT));
 
@@ -69,10 +73,10 @@ public class PreviewPagerAdapter extends PagerAdapter {
 
                 final LayoutInflater configInflater = LayoutInflater.from(configContext);
                 final View sampleView = configInflater.inflate(previewSampleResIds[i],
-                        mPreviewFrames[i], false);
+                        mPreviewFrames[p], false);
                 sampleView.setAlpha(0);
                 sampleView.setVisibility(View.INVISIBLE);
-                mPreviewFrames[i].addView(sampleView);
+                mPreviewFrames[p].addView(sampleView);
             }
         }
     }
