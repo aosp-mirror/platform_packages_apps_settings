@@ -72,8 +72,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
         addPreferencesFromResource(R.xml.app_notification_settings);
         mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
-        mImportanceReset = (LayoutPreference) findPreference(KEY_IMPORTANCE_RESET);
-        mImportanceTitle = (RestrictedPreference) findPreference(KEY_IMPORTANCE_TITLE);
         mPriority =
                 (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BYPASS_DND);
         mVisibilityOverride =

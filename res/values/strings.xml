@@ -5979,22 +5979,25 @@
     <string name="notification_importance_none">Not set</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: blocked importance level description -->
-    <string name="notification_importance_blocked">Blocked: Never show these notifications</string>
+    <string name="notification_importance_blocked">Never show notifications from this app</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: min importance level description -->
-    <string name="notification_importance_min">Min: Silently show at the bottom of the notification list</string>
+    <string name="notification_importance_min">No full screen interruption, peeking, sound, or vibration. Show at the bottom of the notification list. Hide from lock screen and status bar.</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: low importance level description -->
-    <string name="notification_importance_low">Low: Silently show these notifications</string>
+    <string name="notification_importance_low">No full screen interruption, peeking, sound, or vibration.</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: normal importance level description -->
-    <string name="notification_importance_default">Normal: Allow these notification to make sounds</string>
+    <string name="notification_importance_default">No full screen interruption or peeking.</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: high importance level description -->
-    <string name="notification_importance_high">High: Peek onto the screen and allow sound</string>
+    <string name="notification_importance_high">Always peek. No full screen interruption.</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: max importance level description -->
-    <string name="notification_importance_max">Urgent: Show at the top of the notifications list, peek onto the screen and allow sound</string>
+    <string name="notification_importance_max">Always peek, and allow full screen interruption. Show at the top of the notification list.</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance slider: max importance level description -->
+    <string name="notification_importance_unspecified">App determines importance for each notification</string>
 
     <!-- [CHAR LIMIT=60] Notification importance reset button -->
     <string name="importance_reset">Reset</string>
@@ -6486,6 +6489,8 @@
     <string name="notifications_priority">Do Not Disturb overridden</string>
     <!-- App notification summary divider [CHAR LIMIT=40] -->
     <string name="notifications_summary_divider">\u00A0/\u00A0</string>
+    <!-- App notification summary for advanced controls -->
+    <string name="notification_summary_level">Level %d</string>
 
    <!-- Permissions preference summary [CHAR LIMIT=40] -->
    <plurals name="permissions_summary">
