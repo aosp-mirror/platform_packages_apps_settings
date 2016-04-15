@@ -18,11 +18,14 @@ package com.android.settings.notification;
 
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
+import com.android.settings.Utils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
@@ -38,6 +41,7 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
     private Listener mListener;
     private boolean mShowRemoteInput;
     private boolean mRemoteInputCheckBoxEnabled = true;
+    private int mUserId = UserHandle.myUserId();
 
     public NotificationLockscreenPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -45,6 +49,20 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
 
     public void setRemoteInputCheckBoxEnabled(boolean enabled) {
         mRemoteInputCheckBoxEnabled = enabled;
+    }
+
+    @Override
+    protected void onClick() {
+        final Context context = getContext();
+        if (!Utils.startQuietModeDialogIfNecessary(context, UserManager.get(context), mUserId)) {
+            // Call super to create preference dialog only when work mode is on
+            // startQuietModeDialogIfNecessary will return false if mUserId is not a managed user
+            super.onClick();
+        }
+    }
+
+    public void setUserId(int userId) {
+        mUserId = userId;
     }
 
     @Override
