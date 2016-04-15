@@ -29,6 +29,9 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import java.util.ArrayList;
 
+import static android.net.NetworkPolicyManager.POLICY_NONE;
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
+
 public class DataSaverBackend {
 
     private static final String TAG = "DataSaverBackend";
@@ -40,6 +43,7 @@ public class DataSaverBackend {
     private final INetworkPolicyManager mIPolicyManager;
     private final ArrayList<Listener> mListeners = new ArrayList<>();
     private SparseBooleanArray mWhitelist;
+    private SparseBooleanArray mBlacklist;
 
     // TODO: Staticize into only one.
     public DataSaverBackend(Context context) {
@@ -121,6 +125,35 @@ public class DataSaverBackend {
         }
     }
 
+    public void refreshBlacklist() {
+        loadBlacklist();
+    }
+
+    public void setIsBlacklisted(int uid, String packageName, boolean blacklisted) {
+        mPolicyManager.setUidPolicy(
+                uid, blacklisted ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
+        if (blacklisted) {
+            MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_BLACKLIST, packageName);
+        }
+    }
+
+    public boolean isBlacklisted(int uid) {
+        if (mBlacklist == null) {
+            loadBlacklist();
+        }
+        return mBlacklist.get(uid);
+    }
+
+    private void loadBlacklist() {
+        mBlacklist = new SparseBooleanArray();
+        try {
+            for (int uid : mIPolicyManager.getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND)) {
+                mBlacklist.put(uid, true);
+            }
+        } catch (RemoteException e) {
+        }
+    }
+
     private void handleRestrictBackgroundChanged(boolean isDataSaving) {
         for (int i = 0; i < mListeners.size(); i++) {
             mListeners.get(i).onDataSaverChanged(isDataSaving);
@@ -129,7 +162,8 @@ public class DataSaverBackend {
 
     private final INetworkPolicyListener mPolicyListener = new INetworkPolicyListener.Stub() {
         @Override
-        public void onUidRulesChanged(int i, int i1) throws RemoteException {
+        public void onUidRulesChanged(int uid, int uidRules) throws RemoteException {
+            // TODO: update UI accordingly
         }
 
         @Override
