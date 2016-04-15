@@ -267,6 +267,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 handleAttemptLockout(deadline);
             } else {
                 resetState();
+                mErrorTextView.setText("");
+                if (isProfileChallenge()) {
+                    updateErrorMessage(mLockPatternUtils.getCurrentFailedPasswordAttempts(
+                            mEffectiveUserId));
+                }
             }
             mCredentialCheckResultTracker.setListener(this);
         }
