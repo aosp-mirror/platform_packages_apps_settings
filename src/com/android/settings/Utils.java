@@ -347,11 +347,12 @@ public final class Utils extends com.android.settingslib.Utils {
         // If there's no profile photo, assign a default avatar
         if (avatarDataStream == null) {
             assignDefaultPhoto(context, userId);
-        } else {
-            UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-            Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
-            um.setUserIcon(userId, icon);
+            return;
         }
+
+        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
+        um.setUserIcon(userId, icon);
         try {
             avatarDataStream.close();
         } catch (IOException ioe) { }
