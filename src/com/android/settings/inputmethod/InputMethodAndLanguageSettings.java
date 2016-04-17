@@ -262,7 +262,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             final TextServicesManager tsm = (TextServicesManager) getSystemService(
                     Context.TEXT_SERVICES_MANAGER_SERVICE);
             if (!tsm.isSpellCheckerEnabled()) {
-                spellChecker.setEnabled(false);
                 spellChecker.setSummary(R.string.switch_off_text);
             } else {
                 final SpellCheckerInfo sci = tsm.getCurrentSpellChecker();
