@@ -37,20 +37,24 @@ public class AppStateDataUsageBridge extends AppStateBaseBridge {
         final int N = apps.size();
         for (int i = 0; i < N; i++) {
             AppEntry app = apps.get(i);
-            app.extraInfo = new DataUsageState(mDataSaverBackend.isWhitelisted(app.info.uid));
+            app.extraInfo = new DataUsageState(mDataSaverBackend.isWhitelisted(app.info.uid),
+                    mDataSaverBackend.isBlacklisted(app.info.uid));
         }
     }
 
     @Override
     protected void updateExtraInfo(AppEntry app, String pkg, int uid) {
-        app.extraInfo = new DataUsageState(mDataSaverBackend.isWhitelisted(uid));
+        app.extraInfo = new DataUsageState(mDataSaverBackend.isWhitelisted(uid),
+                mDataSaverBackend.isBlacklisted(uid));
     }
 
     public static class DataUsageState {
         public boolean isDataSaverWhitelisted;
+        public boolean isDataSaverBlacklisted;
 
-        public DataUsageState(boolean isDataSaverWhitelisted) {
+        public DataUsageState(boolean isDataSaverWhitelisted, boolean isDataSaverBlacklisted) {
             this.isDataSaverWhitelisted = isDataSaverWhitelisted;
+            this.isDataSaverBlacklisted = isDataSaverBlacklisted;
         }
     }
 }
