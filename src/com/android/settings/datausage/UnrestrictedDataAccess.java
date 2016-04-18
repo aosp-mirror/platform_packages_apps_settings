@@ -24,10 +24,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.AppHeader;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStateBaseBridge;
+import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -40,6 +45,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
 
     private static final int MENU_SHOW_SYSTEM = Menu.FIRST + 42;
     private static final String EXTRA_SHOW_SYSTEM = "show_system";
+
     private ApplicationsState mApplicationsState;
     private AppStateDataUsageBridge mDataUsageBridge;
     private ApplicationsState.Session mSession;
@@ -144,11 +150,11 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onRebuildComplete(ArrayList<ApplicationsState.AppEntry> apps) {
+    public void onRebuildComplete(ArrayList<AppEntry> apps) {
         cacheRemoveAllPrefs(getPreferenceScreen());
         final int N = apps.size();
         for (int i = 0; i < N; i++) {
-            ApplicationsState.AppEntry entry = apps.get(i);
+            AppEntry entry = apps.get(i);
             String key = entry.info.packageName + "|" + entry.info.uid;
             AccessPreference preference = (AccessPreference) getCachedPreference(key);
             if (preference == null) {
@@ -202,32 +208,60 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
             boolean whitelisted = newValue == Boolean.TRUE;
             mDataSaverBackend.setIsWhitelisted(accessPreference.mEntry.info.uid,
                     accessPreference.mEntry.info.packageName, whitelisted);
-            ((AppStateDataUsageBridge.DataUsageState) accessPreference.mEntry.extraInfo)
-                    .isDataSaverWhitelisted = whitelisted;
+            accessPreference.mState.isDataSaverWhitelisted = whitelisted;
             return true;
         }
         return false;
     }
 
     private class AccessPreference extends SwitchPreference {
-        private final ApplicationsState.AppEntry mEntry;
+        private final AppEntry mEntry;
+        private final DataUsageState mState;
 
-        public AccessPreference(Context context, ApplicationsState.AppEntry entry) {
+        public AccessPreference(final Context context, AppEntry entry) {
             super(context);
             mEntry = entry;
+            mState = (DataUsageState) mEntry.extraInfo;
             mEntry.ensureLabel(getContext());
-            setTitle(entry.label);
-            final DataUsageState state = (DataUsageState) entry.extraInfo;
-            setChecked(state != null && state.isDataSaverWhitelisted);
+            setState();
             if (mEntry.icon != null) {
                 setIcon(mEntry.icon);
+            }
+            setOnPreferenceClickListener( new OnPreferenceClickListener() {
+
+                @Override
+                public boolean onPreferenceClick(Preference pref) {
+                    if (mState.isDataSaverBlacklisted) {
+                        InstalledAppDetails.startAppInfoFragment(AppDataUsage.class,
+                                context.getString(R.string.app_data_usage),
+                                UnrestrictedDataAccess.this,
+                                mEntry);
+                        return false;
+                    }
+                    return true;
+                }});
+        }
+
+        // Sets UI state based on whitelist/blacklist status.
+        private void setState() {
+            setTitle(mEntry.label);
+            // TODO: state is cached, so if blacklist/whitelist changes, it's not updated.
+            // For example, if the initial state is blacklisted, the user taps the preference,
+            // removes the blacklist, and then taps back, the state is not refreshed.
+            // The proper fix for this problem is to implement onUidRulesChanged() on
+            // DataSaverBackend and update the UI accordingly.
+            if (mState != null) {
+                setChecked(mState.isDataSaverWhitelisted);
+                if (mState.isDataSaverBlacklisted) {
+                    setSummary(R.string.restrict_background_blacklisted);
+                }
+                // TODO: might need to reset summary once it listens to onUidRulesChanged()
             }
         }
 
         public void reuse() {
-            setTitle(mEntry.label);
-            final DataUsageState state = (DataUsageState) mEntry.extraInfo;
-            setChecked(state != null && state.isDataSaverWhitelisted);
+            setState();
+            notifyChanged();
         }
 
         @Override
@@ -244,7 +278,10 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
                     }
                 });
             }
+            holder.findViewById(android.R.id.widget_frame)
+                    .setVisibility(mState.isDataSaverBlacklisted ? View.INVISIBLE : View.VISIBLE);
             super.onBindViewHolder(holder);
         }
     }
+
 }
