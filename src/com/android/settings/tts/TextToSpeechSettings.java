@@ -252,15 +252,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private void initSettings() {
         final ContentResolver resolver = getContentResolver();
 
-         // Set up the default rate and pitch.
-        try {
-            mDefaultPitch = android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_PITCH);
-            mDefaultRate = android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_RATE);
-        } catch (SettingNotFoundException e) {
-            // Default rate and pitch setting not found, initialize it.
-            mDefaultPitch = TextToSpeech.Engine.DEFAULT_PITCH;
-            mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
-        }
+        // Set up the default rate and pitch.
+        mDefaultRate = android.provider.Settings.Secure.getInt(
+            resolver, TTS_DEFAULT_RATE, TextToSpeech.Engine.DEFAULT_RATE);
+        mDefaultPitch = android.provider.Settings.Secure.getInt(
+            resolver, TTS_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH);
+
         mDefaultRatePref.setProgress(mDefaultRate);
         mDefaultRatePref.setOnPreferenceChangeListener(this);
         mDefaultRatePref.setMax(MAX_SPEECH_RATE);
@@ -269,7 +266,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mDefaultPitchPref.setOnPreferenceChangeListener(this);
         mDefaultPitchPref.setMax(getPitchSeekBarProgressFromSpeechPitchValue(MAX_SPEECH_PITCH));
 
-        mCurrentEngine = mTts.getCurrentEngine();
+        if (mTts != null) {
+            mCurrentEngine = mTts.getCurrentEngine();
+            mTts.setSpeechRate(mDefaultRate/100.0f);
+            mTts.setPitch(mDefaultPitch/100.0f);
+        }
 
         SettingsActivity activity = null;
         if (getActivity() instanceof SettingsActivity) {
