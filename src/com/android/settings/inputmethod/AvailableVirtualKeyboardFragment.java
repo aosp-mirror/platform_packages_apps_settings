@@ -16,9 +16,15 @@
 
 package com.android.settings.inputmethod;
 
+import android.annotation.DrawableRes;
+import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -39,8 +45,6 @@ import java.util.List;
 
 public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFragment
         implements InputMethodPreference.OnSavePreferenceListener {
-
-    private static final Drawable NO_ICON = new ColorDrawable(Color.TRANSPARENT);
 
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
     private InputMethodSettingValuesWrapper mInputMethodSettingValues;
@@ -85,27 +89,68 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
         return MetricsEvent.ENABLE_VIRTUAL_KEYBOARDS;
     }
 
+    @Nullable
+    private static Drawable loadDrawable(@NonNull final PackageManager packageManager,
+            @NonNull final String packageName, @DrawableRes final int resId,
+            @NonNull final ApplicationInfo applicationInfo) {
+        if (resId == 0) {
+            return null;
+        }
+        try {
+            return packageManager.getDrawable(packageName, resId, applicationInfo);
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    @NonNull
+    private static Drawable getInputMethodIcon(@NonNull final PackageManager packageManager,
+            @NonNull final InputMethodInfo imi) {
+        final ServiceInfo si = imi.getServiceInfo();
+        final ApplicationInfo ai = si.applicationInfo;
+        final String packageName = imi.getPackageName();
+        if (si == null || ai == null || packageName == null) {
+            return new ColorDrawable(Color.TRANSPARENT);
+        }
+        // We do not use ServiceInfo#loadLogo() and ServiceInfo#loadIcon here since those methods
+        // internally have some fallback rules, which we want to do manually.
+        Drawable drawable = loadDrawable(packageManager, packageName, si.logo, ai);
+        if (drawable != null) {
+            return drawable;
+        }
+        drawable = loadDrawable(packageManager, packageName, si.icon, ai);
+        if (drawable != null) {
+            return drawable;
+        }
+        // We do not use ApplicationInfo#loadLogo() and ApplicationInfo#loadIcon here since those
+        // methods internally have some fallback rules, which we want to do manually.
+        drawable = loadDrawable(packageManager, packageName, ai.logo, ai);
+        if (drawable != null) {
+            return drawable;
+        }
+        drawable = loadDrawable(packageManager, packageName, ai.icon, ai);
+        if (drawable != null) {
+            return drawable;
+        }
+        return new ColorDrawable(Color.TRANSPARENT);
+    }
+
     private void updateInputMethodPreferenceViews() {
         mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
         // Clear existing "InputMethodPreference"s
         mInputMethodPreferenceList.clear();
         List<String> permittedList = mDpm.getPermittedInputMethodsForCurrentUser();
         final Context context = getPrefContext();
+        final PackageManager packageManager = getActivity().getPackageManager();
         final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
         final int N = (imis == null ? 0 : imis.size());
         for (int i = 0; i < N; ++i) {
             final InputMethodInfo imi = imis.get(i);
             final boolean isAllowedByOrganization = permittedList == null
                     || permittedList.contains(imi.getPackageName());
-            Drawable icon;
-            try {
-                icon = getActivity().getPackageManager().getApplicationIcon(imi.getPackageName());
-            } catch (Exception e) {
-                icon = NO_ICON;
-            }
             final InputMethodPreference pref = new InputMethodPreference(
                     context, imi, true, isAllowedByOrganization, this);
-            pref.setIcon(icon);
+            pref.setIcon(getInputMethodIcon(packageManager, imi));
             mInputMethodPreferenceList.add(pref);
         }
         final Collator collator = Collator.getInstance();
