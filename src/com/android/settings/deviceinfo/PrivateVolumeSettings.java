@@ -58,6 +58,7 @@ import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
+import com.android.settings.deletionhelper.DeletionHelperFragment;
 import com.android.settings.deviceinfo.StorageSettings.MountTask;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageMeasurement.MeasurementDetails;
@@ -355,6 +356,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         final MenuItem unmount = menu.findItem(R.id.storage_unmount);
         final MenuItem format = menu.findItem(R.id.storage_format);
         final MenuItem migrate = menu.findItem(R.id.storage_migrate);
+        final MenuItem manage = menu.findItem(R.id.storage_free);
 
         // Actions live in menu for non-internal private volumes; they're shown
         // as preference items for public volumes.
@@ -363,11 +365,13 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             mount.setVisible(false);
             unmount.setVisible(false);
             format.setVisible(false);
+            manage.setVisible(true);
         } else {
             rename.setVisible(mVolume.getType() == VolumeInfo.TYPE_PRIVATE);
             mount.setVisible(mVolume.getState() == VolumeInfo.STATE_UNMOUNTED);
             unmount.setVisible(mVolume.isMountedReadable());
             format.setVisible(true);
+            manage.setVisible(false);
         }
 
         format.setTitle(R.string.storage_menu_format_public);
@@ -405,6 +409,10 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 final Intent intent = new Intent(context, StorageWizardMigrateConfirm.class);
                 intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
                 startActivity(intent);
+                return true;
+            case R.id.storage_free:
+                startFragment(this, DeletionHelperFragment.class.getCanonicalName(),
+                        R.string.deletion_helper_title, 0, args);
                 return true;
         }
         return super.onOptionsItemSelected(item);
