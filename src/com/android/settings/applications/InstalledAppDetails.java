@@ -73,6 +73,7 @@ import android.webkit.IWebViewUpdateService;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -81,6 +82,7 @@ import com.android.settings.AppHeader;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settings.datausage.AppDataUsage;
@@ -741,14 +743,19 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void startAppInfoFragment(Class<?> fragment, CharSequence title) {
+        startAppInfoFragment(fragment, title, this, mAppEntry);
+    }
+
+    public static void startAppInfoFragment(Class<?> fragment, CharSequence title,
+            SettingsPreferenceFragment caller, AppEntry appEntry) {
         // start new fragment to display extended information
         Bundle args = new Bundle();
-        args.putString(ARG_PACKAGE_NAME, mAppEntry.info.packageName);
-        args.putInt(ARG_PACKAGE_UID, mAppEntry.info.uid);
+        args.putString(ARG_PACKAGE_NAME, appEntry.info.packageName);
+        args.putInt(ARG_PACKAGE_UID, appEntry.info.uid);
         args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
 
-        SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(fragment.getName(), args, -1, title, this, SUB_INFO_FRAGMENT);
+        SettingsActivity sa = (SettingsActivity) caller.getActivity();
+        sa.startPreferencePanel(fragment.getName(), args, -1, title, caller, SUB_INFO_FRAGMENT);
     }
 
     /*
