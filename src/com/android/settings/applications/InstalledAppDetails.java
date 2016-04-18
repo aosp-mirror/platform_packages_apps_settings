@@ -52,7 +52,6 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerService;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
@@ -929,7 +928,7 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private boolean hasPermission(String permission) {
-        if (mPackageInfo.requestedPermissions == null) {
+        if (mPackageInfo == null || mPackageInfo.requestedPermissions == null) {
             return false;
         }
         for (int i = 0; i < mPackageInfo.requestedPermissions.length; i++) {
