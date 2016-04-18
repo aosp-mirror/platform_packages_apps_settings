@@ -216,7 +216,8 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mRestrictBackground) {
-            setAppRestrictBackground(!(Boolean) newValue);
+            mDataSaverBackend.setIsBlacklisted(mAppItem.key, mPackageName, !(Boolean) newValue);
+            updatePrefs();        // TODO: should have been notified by NPMS instead
             return true;
         } else if (preference == mUnrestrictedData) {
             mDataSaverBackend.setIsWhitelisted(mAppItem.key, mPackageName, (Boolean) newValue);
@@ -285,17 +286,6 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         final int uid = mAppItem.key;
         final int uidPolicy = services.mPolicyManager.getUidPolicy(uid);
         return (uidPolicy & POLICY_REJECT_METERED_BACKGROUND) != 0;
-    }
-
-    private void setAppRestrictBackground(boolean restrictBackground) {
-        final int uid = mAppItem.key;
-        services.mPolicyManager.setUidPolicy(
-                uid, restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
-        updatePrefs();        // TODO: should have been notified by NPMS instead
-        if (restrictBackground) {
-            MetricsLogger.action(getContext(),
-                    MetricsEvent.ACTION_DATA_SAVER_BLACKLIST, mPackageName);
-        }
     }
 
     @Override
