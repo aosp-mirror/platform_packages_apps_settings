@@ -227,19 +227,20 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
             if (mEntry.icon != null) {
                 setIcon(mEntry.icon);
             }
-            setOnPreferenceClickListener( new OnPreferenceClickListener() {
+        }
 
-                @Override
-                public boolean onPreferenceClick(Preference pref) {
-                    if (mState.isDataSaverBlacklisted) {
-                        InstalledAppDetails.startAppInfoFragment(AppDataUsage.class,
-                                context.getString(R.string.app_data_usage),
-                                UnrestrictedDataAccess.this,
-                                mEntry);
-                        return false;
-                    }
-                    return true;
-                }});
+        @Override
+        protected void onClick() {
+            if (mState.isDataSaverBlacklisted) {
+                // app is blacklisted, launch App Data Usage screen
+                InstalledAppDetails.startAppInfoFragment(AppDataUsage.class,
+                        getContext().getString(R.string.app_data_usage),
+                        UnrestrictedDataAccess.this,
+                        mEntry);
+            } else {
+                // app is not blacklisted, let superclass handle toggle switch
+                super.onClick();
+            }
         }
 
         // Sets UI state based on whitelist/blacklist status.
