@@ -41,10 +41,12 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
         DevicePolicyManager dpm = getSystemService(DevicePolicyManager.class);
         final int numberOfCertificates = getIntent().getIntExtra(
                 Settings.EXTRA_NUMBER_OF_CERTIFICATES, 1);
+        final CharSequence title = getResources().getQuantityText(
+                R.plurals.ssl_ca_cert_dialog_title, numberOfCertificates);
+        setTitle(title);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getResources().getQuantityText(R.plurals.ssl_ca_cert_dialog_title,
-                numberOfCertificates));
+        builder.setTitle(title);
         builder.setCancelable(true);
         builder.setPositiveButton(getResources().getQuantityText(
                 R.plurals.ssl_ca_cert_settings_button, numberOfCertificates) , this);
