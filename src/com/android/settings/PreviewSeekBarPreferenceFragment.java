@@ -156,21 +156,19 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         }
 
         mPreviewPager = (ViewPager) content.findViewById(R.id.preview_pager);
-        if (mPreviewPager != null) {
-            mPreviewPagerAdapter = new PreviewPagerAdapter(context, isLayoutRtl,
-                    mPreviewSampleResIds, configurations);
-            mPreviewPager.setAdapter(mPreviewPagerAdapter);
-            mPreviewPager.setCurrentItem(isLayoutRtl ? mPreviewSampleResIds.length - 1 : 0);
-            mPreviewPager.addOnPageChangeListener(mPreviewPageChangeListener);
+        mPreviewPagerAdapter = new PreviewPagerAdapter(context, isLayoutRtl,
+                mPreviewSampleResIds, configurations);
+        mPreviewPager.setAdapter(mPreviewPagerAdapter);
+        mPreviewPager.setCurrentItem(isLayoutRtl ? mPreviewSampleResIds.length - 1 : 0);
+        mPreviewPager.addOnPageChangeListener(mPreviewPageChangeListener);
 
-            mPageIndicator = (DotsPageIndicator) content.findViewById(R.id.page_indicator);
-            if (mPreviewSampleResIds.length > 1) {
-                mPageIndicator.setViewPager(mPreviewPager);
-                mPageIndicator.setVisibility(View.VISIBLE);
-                mPageIndicator.setOnPageChangeListener(mPageIndicatorPageChangeListener);
-            } else {
-                mPageIndicator.setVisibility(View.GONE);
-            }
+        mPageIndicator = (DotsPageIndicator) content.findViewById(R.id.page_indicator);
+        if (mPreviewSampleResIds.length > 1) {
+            mPageIndicator.setViewPager(mPreviewPager);
+            mPageIndicator.setVisibility(View.VISIBLE);
+            mPageIndicator.setOnPageChangeListener(mPageIndicatorPageChangeListener);
+        } else {
+            mPageIndicator.setVisibility(View.GONE);
         }
 
         setPreviewLayer(mInitialIndex, false);
@@ -191,11 +189,9 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         mLabel.setText(mEntries[index]);
         mSmaller.setEnabled(index > 0);
         mLarger.setEnabled(index < mEntries.length - 1);
-        if (mPreviewPager != null) {
-            setPagerIndicatorContentDescription(mPreviewPager.getCurrentItem());
-            mPreviewPagerAdapter.setPreviewLayer(index, mCurrentIndex,
-                    mPreviewPager.getCurrentItem(), animate);
-        }
+        setPagerIndicatorContentDescription(mPreviewPager.getCurrentItem());
+        mPreviewPagerAdapter.setPreviewLayer(index, mCurrentIndex,
+                mPreviewPager.getCurrentItem(), animate);
 
         mCurrentIndex = index;
     }
