@@ -191,6 +191,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+        cleanUpPreferences();
         updateUi();
         mManagedProfileBroadcastReceiver.register(getActivity());
         listenToAccountUpdates();
@@ -201,7 +202,6 @@ public class AccountSettings extends SettingsPreferenceFragment
         super.onPause();
         stopListeningToAccountUpdates();
         mManagedProfileBroadcastReceiver.unregister(getActivity());
-        cleanUpPreferences();
     }
 
     @Override
