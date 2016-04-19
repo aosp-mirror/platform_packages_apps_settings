@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
@@ -24,6 +25,7 @@ import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v4.widget.ExploreByTouchHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -121,8 +123,12 @@ public class LabeledSeekBar extends SeekBar {
 
     private class LabeledSeekBarExploreByTouchHelper extends ExploreByTouchHelper {
 
+        private boolean mIsLayoutRtl;
+
         public LabeledSeekBarExploreByTouchHelper(LabeledSeekBar forView) {
             super(forView);
+            mIsLayoutRtl = forView.getResources().getConfiguration()
+                    .getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
         }
 
         @Override
@@ -192,20 +198,23 @@ public class LabeledSeekBar extends SeekBar {
         }
 
         private int getVirtualViewIdIndexFromX(float x) {
-            final int posBase = Math.max(0,
+            int posBase = Math.max(0,
                     ((int) x - LabeledSeekBar.this.getPaddingStart()) / getHalfVirtualViewWidth());
-            return (posBase + 1) / 2;
+            posBase = (posBase + 1) / 2;
+            return mIsLayoutRtl ? LabeledSeekBar.this.getMax() - posBase : posBase;
         }
 
         private Rect getBoundsInParentFromVirtualViewId(int virtualViewId) {
-            int left = (virtualViewId * 2 - 1) * getHalfVirtualViewWidth()
+            final int updatedVirtualViewId = mIsLayoutRtl
+                    ? LabeledSeekBar.this.getMax() - virtualViewId : virtualViewId;
+            int left = (updatedVirtualViewId * 2 - 1) * getHalfVirtualViewWidth()
                     + LabeledSeekBar.this.getPaddingStart();
-            int right = (virtualViewId * 2 + 1) * getHalfVirtualViewWidth()
+            int right = (updatedVirtualViewId * 2 + 1) * getHalfVirtualViewWidth()
                     + LabeledSeekBar.this.getPaddingStart();
 
             // Edge case
-            left = virtualViewId == 0 ? 0 : left;
-            right = virtualViewId == LabeledSeekBar.this.getMax()
+            left = updatedVirtualViewId == 0 ? 0 : left;
+            right = updatedVirtualViewId == LabeledSeekBar.this.getMax()
                     ? LabeledSeekBar.this.getWidth() : right;
 
             final Rect r = new Rect();
