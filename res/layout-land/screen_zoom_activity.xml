@@ -14,17 +14,33 @@
      limitations under the License.
 -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:orientation="horizontal">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent" >
 
         <include layout="@layout/preview_seek_bar_view_pager" />
+
+        <com.android.settings.widget.DotsPageIndicator
+            android:id="@+id/page_indicator"
+            style="@style/PreviewPagerPageIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="6dp" />
+    </LinearLayout>
+
+    <ScrollView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
         <LinearLayout
             android:orientation="vertical"
@@ -33,14 +49,6 @@
             android:paddingTop="16dp"
             android:paddingStart="?android:attr/listPreferredItemPaddingStart"
             android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
-
-            <com.android.settings.widget.DotsPageIndicator
-                android:id="@+id/page_indicator"
-                style="@style/PreviewPagerPageIndicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="6dp" />
 
             <TextView
                 android:id="@+id/current_label"
@@ -51,50 +59,50 @@
                 android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
                 android:elevation="2dp" />
 
-            <LinearLayout
+            <com.android.settings.widget.LabeledSeekBar
+                android:id="@+id/seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                style="@android:style/Widget.Material.SeekBar.Discrete"/>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingTop="8dp">
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:id="@+id/smaller"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:layout_alignParentStart="true"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_font_size_16dp"
+                    android:src="@drawable/ic_remove_24dp"
                     android:tint="?android:attr/textColorPrimary"
                     android:tintMode="src_in"
                     android:scaleType="center"
                     android:focusable="true"
-                    android:contentDescription="@string/font_size_make_smaller_desc" />
-
-                <com.android.settings.widget.LabeledSeekBar
-                    android:id="@+id/seek_bar"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    style="@android:style/Widget.Material.SeekBar.Discrete"/>
+                    android:contentDescription="@string/screen_zoom_make_smaller_desc" />
 
                 <ImageView
                     android:id="@+id/larger"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_font_size_24dp"
+                    android:src="@drawable/ic_add_24dp"
                     android:tint="?android:attr/textColorPrimary"
                     android:tintMode="src_in"
                     android:scaleType="center"
                     android:focusable="true"
-                    android:contentDescription="@string/font_size_make_larger_desc" />
-            </LinearLayout>
+                    android:contentDescription="@string/screen_zoom_make_larger_desc" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/font_size_summary"
+                android:text="@string/screen_zoom_summary"
                 android:layout_marginBottom="16dp"
                 android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
