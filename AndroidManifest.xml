@@ -1479,8 +1479,7 @@
         <activity android:name=".accessibility.AccessibilitySettingsForSetupWizardActivity"
                 android:label="@string/vision_settings_title"
                 android:theme="@style/SetupWizardAccessibilityTheme"
-                android:taskAffinity="com.android.wizard"
-                android:configChanges="orientation|keyboardHidden|screenSize" >
+                android:taskAffinity="com.android.wizard" >
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
                 <category android:name="android.intent.category.DEFAULT" />
