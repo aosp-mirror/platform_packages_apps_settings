@@ -54,7 +54,8 @@ import com.android.settingslib.net.UidDetailProvider;
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
-public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener {
+public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
+        DataSaverBackend.Listener {
 
     public static final String ARG_APP_ITEM = "app_item";
     public static final String ARG_NETWORK_TEMPLATE = "network_template";
@@ -207,6 +208,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     @Override
     public void onResume() {
         super.onResume();
+        mDataSaverBackend.addListener(this);
         mPolicy = services.mPolicyEditor.getPolicy(mTemplate);
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
                 ChartDataLoader.buildArgs(mTemplate, mAppItem), mChartDataCallbacks);
@@ -214,10 +216,15 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        mDataSaverBackend.remListener(this);
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mRestrictBackground) {
             mDataSaverBackend.setIsBlacklisted(mAppItem.key, mPackageName, !(Boolean) newValue);
-            updatePrefs();        // TODO: should have been notified by NPMS instead
             return true;
         } else if (preference == mUnrestrictedData) {
             mDataSaverBackend.setIsWhitelisted(mAppItem.key, mPackageName, (Boolean) newValue);
@@ -238,15 +245,19 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     }
 
     private void updatePrefs() {
+        updatePrefs(getAppRestrictBackground(), getUnrestrictData());
+    }
+
+    private void updatePrefs(boolean restrictBackground, boolean unrestrictData) {
         if (mRestrictBackground != null) {
-            mRestrictBackground.setChecked(!getAppRestrictBackground());
+            mRestrictBackground.setChecked(!restrictBackground);
         }
         if (mUnrestrictedData != null) {
-            if (getAppRestrictBackground()) {
+            if (restrictBackground) {
                 mUnrestrictedData.setVisible(false);
             } else {
                 mUnrestrictedData.setVisible(true);
-                mUnrestrictedData.setChecked(mDataSaverBackend.isWhitelisted(mAppItem.key));
+                mUnrestrictedData.setChecked(unrestrictData);
             }
         }
     }
@@ -286,6 +297,10 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         final int uid = mAppItem.key;
         final int uidPolicy = services.mPolicyManager.getUidPolicy(uid);
         return (uidPolicy & POLICY_REJECT_METERED_BACKGROUND) != 0;
+    }
+
+    private boolean getUnrestrictData() {
+        return mDataSaverBackend.isWhitelisted(mAppItem.key);
     }
 
     @Override
@@ -366,6 +381,25 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             if (pref != null && mAppList != null) {
                 mAppList.addPreference(pref);
             }
+        }
+    }
+
+    @Override
+    public void onDataSaverChanged(boolean isDataSaving) {
+
+    }
+
+    @Override
+    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+        if (mAppItem.uids.get(uid, false)) {
+            updatePrefs(getAppRestrictBackground(), isWhitelisted);
+        }
+    }
+
+    @Override
+    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+        if (mAppItem.uids.get(uid, false)) {
+            updatePrefs(isBlacklisted, getUnrestrictData());
         }
     }
 }

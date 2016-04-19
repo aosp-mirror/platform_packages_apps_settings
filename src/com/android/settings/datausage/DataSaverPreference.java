@@ -44,4 +44,12 @@ public class DataSaverPreference extends Preference implements DataSaverBackend.
     public void onDataSaverChanged(boolean isDataSaving) {
         setSummary(isDataSaving ? R.string.data_saver_on : R.string.data_saver_off);
     }
+
+    @Override
+    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+    }
+
+    @Override
+    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+    }
 }
