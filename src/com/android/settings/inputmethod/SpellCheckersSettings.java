@@ -113,7 +113,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         mSwitchBar.setChecked(isSpellCheckerEnabled);
 
         final SpellCheckerSubtype currentScs;
-        if (mCurrentSci == null) {
+        if (mCurrentSci != null) {
             currentScs = mTsm.getCurrentSpellCheckerSubtype(
                     false /* allowImplicitlySelectedSubtype */);
         } else {
