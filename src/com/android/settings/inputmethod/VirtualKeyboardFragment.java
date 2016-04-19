@@ -113,7 +113,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment {
             InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
             pref.updatePreferenceViews();
         }
-        mAddVirtualKeyboardScreen.setIcon(R.drawable.ic_add);
+        mAddVirtualKeyboardScreen.setIcon(R.drawable.ic_add_24dp);
         mAddVirtualKeyboardScreen.setOrder(N);
         getPreferenceScreen().addPreference(mAddVirtualKeyboardScreen);
     }
