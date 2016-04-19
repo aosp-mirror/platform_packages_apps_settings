@@ -59,6 +59,8 @@ public abstract class FeatureFactory {
         return sFactory;
     }
 
+    public abstract SupportFeatureProvider getSupportFeatureProvider();
+
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
             super("Unable to create factory. Did you misconfigure Proguard?", throwable);

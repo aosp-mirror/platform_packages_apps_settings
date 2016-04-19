@@ -31,8 +31,11 @@ import android.view.ViewGroup;
 
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.widget.SlidingTabLayout;
 import com.android.settingslib.HelpUtils;
+import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 /**
  * Container for Dashboard fragments.
@@ -40,6 +43,7 @@ import com.android.settingslib.HelpUtils;
 public final class DashboardContainerFragment extends InstrumentedFragment {
 
     private static final int INDEX_SUMMARY_FRAGMENT = 0;
+    private static final int INDEX_SUPPORT_FRAGMENT = 1;
 
     private ViewPager mViewPager;
     private View mHeaderView;
@@ -70,7 +74,12 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
     @Override
     public void onResume() {
         super.onResume();
-        final Activity activity = getActivity();
+        if (mPagerAdapter.getCount() > 1) {
+            final Activity activity = getActivity();
+            if (activity instanceof SettingsDrawerActivity) {
+                ((SettingsDrawerActivity) getActivity()).setContentHeaderView(mHeaderView);
+            }
+        }
     }
 
     @Override
@@ -84,10 +93,13 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
     private static final class DashboardViewPagerAdapter extends FragmentPagerAdapter {
 
         private final Context mContext;
+        private final SupportFeatureProvider mSupportFeatureProvider;
 
         public DashboardViewPagerAdapter(Context context, FragmentManager fragmentManager) {
             super(fragmentManager);
             mContext = context;
+            mSupportFeatureProvider =
+                    FeatureFactory.getFactory(context).getSupportFeatureProvider();
         }
 
         @Override
@@ -95,6 +107,8 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
             switch (position) {
                 case INDEX_SUMMARY_FRAGMENT:
                     return mContext.getString(R.string.page_tab_title_summary);
+                case INDEX_SUPPORT_FRAGMENT:
+                    return mContext.getString(R.string.page_tab_title_support);
             }
             return super.getPageTitle(position);
         }
@@ -104,6 +118,8 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
             switch (position) {
                 case INDEX_SUMMARY_FRAGMENT:
                     return new DashboardSummary();
+                case INDEX_SUPPORT_FRAGMENT:
+                    return new SupportFragment();
                 default:
                     throw new IllegalArgumentException(
                             String.format(
@@ -114,7 +130,7 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
 
         @Override
         public int getCount() {
-            return 1;
+            return mSupportFeatureProvider == null ? 1 : 2;
         }
     }
 }

@@ -103,7 +103,6 @@ import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.search.DynamicIndexableContentMonitor;
