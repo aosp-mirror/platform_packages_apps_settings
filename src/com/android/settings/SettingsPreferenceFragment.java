@@ -187,9 +187,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (!TextUtils.isEmpty(mHelpUri)) {
-            setHasOptionsMenu(true);
-        }
+        setHasOptionsMenu(true);
     }
 
     @Override
