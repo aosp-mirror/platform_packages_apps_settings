@@ -21,10 +21,15 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.os.UserHandle;
+import android.os.UserManager;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.Utils;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.TetherUtil;
 
 public class HotspotCondition extends Condition {
@@ -74,7 +79,12 @@ public class HotspotCondition extends Condition {
 
     @Override
     public CharSequence[] getActions() {
-        return new CharSequence[] { mManager.getContext().getString(R.string.condition_turn_off) };
+        final Context context = mManager.getContext();
+        if (RestrictedLockUtils.hasBaseUserRestriction(context,
+                UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
+            return new CharSequence[0];
+        }
+        return new CharSequence[] { context.getString(R.string.condition_turn_off) };
     }
 
     @Override
@@ -86,8 +96,15 @@ public class HotspotCondition extends Condition {
     @Override
     public void onActionClick(int index) {
         if (index == 0) {
-            TetherUtil.setWifiTethering(false, mManager.getContext());
-            setActive(false);
+            final Context context = mManager.getContext();
+            final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
+                    UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
+            if (admin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context, admin);
+            } else {
+                TetherUtil.setWifiTethering(false, context);
+                setActive(false);
+            }
         } else {
             throw new IllegalArgumentException("Unexpected index " + index);
         }

@@ -74,13 +74,13 @@ public class ConditionAdapterUtils {
         expand.setOnClickListener(onExpandListener);
 
         View detailGroup = view.itemView.findViewById(R.id.detail_group);
+        CharSequence[] actions = condition.getActions();
         if (isExpanded != (detailGroup.getVisibility() == View.VISIBLE)) {
             animateChange(view.itemView, view.itemView.findViewById(R.id.content),
-                    detailGroup, isExpanded);
+                    detailGroup, isExpanded, actions.length > 0);
         }
         if (isExpanded) {
             view.summary.setText(condition.getSummary());
-            CharSequence[] actions = condition.getActions();
             for (int i = 0; i < 2; i++) {
                 Button button = (Button) detailGroup.findViewById(i == 0
                         ? R.id.first_action : R.id.second_action);
@@ -105,7 +105,9 @@ public class ConditionAdapterUtils {
     }
 
     private static void animateChange(final View view, final View content,
-            final View detailGroup, final boolean visible) {
+            final View detailGroup, final boolean visible, final boolean hasButtons) {
+        setViewVisibility(detailGroup, R.id.divider, hasButtons);
+        setViewVisibility(detailGroup, R.id.buttonBar, hasButtons);
         final int beforeBottom = content.getBottom();
         setHeight(detailGroup, visible ? LayoutParams.WRAP_CONTENT : 0);
         detailGroup.setVisibility(View.VISIBLE);
@@ -137,5 +139,12 @@ public class ConditionAdapterUtils {
         final LayoutParams params = detailGroup.getLayoutParams();
         params.height = height;
         detailGroup.setLayoutParams(params);
+    }
+
+    private static void setViewVisibility(View containerView, int viewId, boolean visible) {
+        View view = containerView.findViewById(viewId);
+        if (view != null) {
+            view.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
     }
 }
