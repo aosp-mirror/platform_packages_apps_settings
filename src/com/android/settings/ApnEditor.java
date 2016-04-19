@@ -249,6 +249,21 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     @Override
     public void onResume() {
         super.onResume();
+
+        if (mUri == null && mNewApn) {
+            // The URI could have been deleted when activity is paused,
+            // therefore, it needs to be restored.
+            mUri = getContentResolver().insert(getIntent().getData(), new ContentValues());
+            if (mUri == null) {
+                Log.w(TAG, "Failed to insert new telephony provider into "
+                        + getIntent().getData());
+                finish();
+                return;
+            }
+            mCursor = managedQuery(mUri, sProjection, null, null);
+            mCursor.moveToFirst();
+        }
+
         getPreferenceScreen().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(this);
     }
@@ -596,6 +611,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
         // If it's a new APN and a name or apn haven't been entered, then erase the entry
         if (force && mNewApn && name.length() < 1 && apn.length() < 1) {
             getContentResolver().delete(mUri, null, null);
+            mUri = null;
             return false;
         }
 
