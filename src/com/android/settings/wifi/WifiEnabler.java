@@ -26,6 +26,8 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -35,6 +37,8 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.Index;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.WirelessUtils;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -136,6 +140,9 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
     }
 
     private void handleWifiStateChanged(int state) {
+        // Clear any previous state
+        mSwitchBar.setDisabledByAdmin(null);
+
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLING:
                 mSwitchBar.setEnabled(false);
@@ -157,6 +164,16 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
                 setSwitchBarChecked(false);
                 mSwitchBar.setEnabled(true);
                 updateSearchIndex(false);
+        }
+        if (mayDisableTethering(!mSwitchBar.isChecked())) {
+            if (RestrictedLockUtils.hasBaseUserRestriction(mContext,
+                    UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
+                mSwitchBar.setEnabled(false);
+            } else {
+                final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
+                    UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
+                mSwitchBar.setDisabledByAdmin(admin);
+            }
         }
     }
 
@@ -206,9 +223,7 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
         }
 
         // Disable tethering if enabling Wifi
-        int wifiApState = mWifiManager.getWifiApState();
-        if (isChecked && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
-                (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED))) {
+        if (mayDisableTethering(isChecked)) {
             mWifiManager.setWifiApEnabled(null, false);
         }
         MetricsLogger.action(mContext,
@@ -218,5 +233,11 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
             mSwitchBar.setEnabled(true);
             Toast.makeText(mContext, R.string.wifi_error, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private boolean mayDisableTethering(boolean isChecked) {
+        final int wifiApState = mWifiManager.getWifiApState();
+        return isChecked && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
+            (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED));
     }
 }
