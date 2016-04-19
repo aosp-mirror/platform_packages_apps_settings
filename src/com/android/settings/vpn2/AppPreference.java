@@ -32,9 +32,8 @@ import com.android.internal.net.VpnConfig;
  */
 public class AppPreference extends ManageablePreference {
     public static final int STATE_CONNECTED = LegacyVpnInfo.STATE_CONNECTED;
-    public static final int STATE_DISCONNECTED = LegacyVpnInfo.STATE_DISCONNECTED;
+    public static final int STATE_DISCONNECTED = STATE_NONE;
 
-    private int mState = STATE_DISCONNECTED;
     private String mPackageName;
     private String mName;
 
@@ -70,21 +69,10 @@ public class AppPreference extends ManageablePreference {
         update();
     }
 
-    public int getState() {
-        return mState;
-    }
-
-    public void setState(int state) {
-        mState = state;
-        update();
-    }
-
     private void update() {
         if (mPackageName == null || mUserId == UserHandle.USER_NULL) {
             return;
         }
-
-        setSummary(getSummaryString(mState == STATE_DISCONNECTED ? STATE_NONE : mState));
 
         mName = mPackageName;
         Drawable icon = null;
@@ -113,6 +101,7 @@ public class AppPreference extends ManageablePreference {
         }
         setTitle(mName);
         setIcon(icon);
+        updateSummary();
 
         notifyHierarchyChanged();
     }

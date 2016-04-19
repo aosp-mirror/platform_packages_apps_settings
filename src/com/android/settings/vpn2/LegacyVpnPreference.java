@@ -31,9 +31,6 @@ import static com.android.internal.net.LegacyVpnInfo.STATE_CONNECTED;
 public class LegacyVpnPreference extends ManageablePreference {
     private VpnProfile mProfile;
 
-    /** One of the STATE_* fields from LegacyVpnInfo, or STATE_NONE */
-    private int mState = STATE_NONE;
-
     LegacyVpnPreference(Context context) {
         super(context, null /* attrs */);
     }
@@ -44,16 +41,6 @@ public class LegacyVpnPreference extends ManageablePreference {
 
     public void setProfile(VpnProfile profile) {
         mProfile = profile;
-        update();
-    }
-
-    public void setState(int state) {
-        mState = state;
-        update();
-    }
-
-    private void update() {
-        setSummary(getSummaryString(mState));
         if (mProfile != null) {
             setIcon(R.mipmap.ic_launcher_settings);
             setTitle(mProfile.name);
@@ -93,5 +80,4 @@ public class LegacyVpnPreference extends ManageablePreference {
         }
         super.onClick(v);
     }
-
 }
