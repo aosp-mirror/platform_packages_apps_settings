@@ -19,8 +19,6 @@ package com.android.settings.fingerprint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.UserHandle;
-import android.support.v14.preference.PreferenceFragment;
-import android.view.View;
 import android.widget.Button;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
@@ -29,6 +27,8 @@ import com.android.settings.R;
 import com.android.settings.SetupChooseLockGeneric;
 import com.android.settings.SetupWizardUtils;
 import com.android.setupwizardlib.SetupWizardRecyclerLayout;
+import com.android.setupwizardlib.items.Item;
+import com.android.setupwizardlib.items.RecyclerItemAdapter;
 import com.android.setupwizardlib.view.NavigationBar;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction
@@ -56,12 +56,22 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
 
     @Override
     protected void initViews() {
+        final SetupWizardRecyclerLayout layout =
+                (SetupWizardRecyclerLayout) findViewById(R.id.setup_wizard_layout);
+        final RecyclerItemAdapter adapter = (RecyclerItemAdapter) layout.getAdapter();
+        final Item nextItem = (Item) adapter.findItemById(R.id.next_button);
+        nextItem.setTitle(
+                getText(R.string.security_settings_fingerprint_enroll_introduction_continue_setup));
+
+        final Item cancelItem = (Item) adapter.findItemById(R.id.cancel_button);
+        cancelItem.setTitle(
+                getText(R.string.security_settings_fingerprint_enroll_introduction_cancel_setup));
+
         SetupWizardUtils.setImmersiveMode(this);
         getNavigationBar().setNavigationBarListener(this);
         Button nextButton = getNavigationBar().getNextButton();
         nextButton.setText(null);
         nextButton.setEnabled(false);
-        SetupWizardRecyclerLayout layout = (SetupWizardRecyclerLayout) getSetupWizardLayout();
         layout.setDividerInset(getResources().getDimensionPixelSize(
                 R.dimen.suw_items_icon_divider_inset));
     }
