@@ -96,12 +96,14 @@ public class ConversationMessageView extends FrameLayout {
         updateViewAppearance();
 
         final int horizontalSpace = MeasureSpec.getSize(widthMeasureSpec);
-        final int iconSize = getResources()
-                .getDimensionPixelSize(R.dimen.conversation_message_contact_icon_size);
 
         final int unspecifiedMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
-        final int iconMeasureSpec = MeasureSpec.makeMeasureSpec(iconSize, MeasureSpec.EXACTLY);
+        int iconMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
 
+        mContactIconView.measure(iconMeasureSpec, iconMeasureSpec);
+        iconMeasureSpec = MeasureSpec.makeMeasureSpec(
+                Math.max(mContactIconView.getMeasuredWidth(), mContactIconView.getMeasuredHeight()),
+                MeasureSpec.EXACTLY);
         mContactIconView.measure(iconMeasureSpec, iconMeasureSpec);
 
         final int arrowWidth =
