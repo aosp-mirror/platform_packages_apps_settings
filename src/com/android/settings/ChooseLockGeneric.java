@@ -651,8 +651,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()
                     && mFingerprintManager.hasEnrolledFingerprints(userId)) {
                 mFingerprintManager.setActiveUser(userId);
-                mFingerprintManager.remove(
-                        new Fingerprint(null, userId, 0, 0), userId,
+                // For the purposes of M and N, groupId is the same as userId.
+                final int groupId = userId;
+                Fingerprint finger = new Fingerprint(null, groupId, 0, 0);
+                mFingerprintManager.remove(finger, userId,
                         new RemovalCallback() {
                             @Override
                             public void onRemovalError(Fingerprint fp, int errMsgId,
