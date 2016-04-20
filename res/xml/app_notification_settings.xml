@@ -15,8 +15,10 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/app_notifications_title"
-        android:key="app_notification_settings">
+        android:key="app_notification_settings"
+        settings:keywords="@string/keywords_date_and_time">
 
     <!-- Importance -->
     <!-- Block -->
@@ -24,13 +26,16 @@
             android:key="block"
             android:title="@string/app_notification_block_title"
             android:summary="@string/app_notification_block_summary"
-            android:order="2" />
+            android:order="2"
+            settings:useAdditionalSummary="true"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
     <!-- Silent -->
     <com.android.settingslib.RestrictedSwitchPreference
             android:key="silent"
             android:title="@string/show_silently"
             android:summary="@string/show_silently_summary"
-            android:order="3" />
+            android:order="3"
+            settings:useAdditionalSummary="true" />
     <!-- Slider -->
     <com.android.settings.notification.ImportanceSeekBarPreference
             android:key="importance"
@@ -48,6 +53,7 @@
             android:key="bypass_dnd"
             android:title="@string/app_notification_override_dnd_title"
             android:summary="@string/app_notification_override_dnd_summary"
-            android:order="6" />
+            android:order="6"
+            settings:useAdditionalSummary="true" />
 
 </PreferenceScreen>
