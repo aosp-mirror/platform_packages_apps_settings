@@ -21,13 +21,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settingslib.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -83,7 +81,6 @@ public class DashboardSummary extends InstrumentedFragment
         List<DashboardCategory> categories =
                 ((SettingsActivity) getActivity()).getDashboardCategories();
         mSummaryLoader = new SummaryLoader(getActivity(), categories);
-        setHasOptionsMenu(true);
         Context context = getContext();
         mConditionManager = ConditionManager.get(context);
         mSuggestionParser = new SuggestionParser(context,
@@ -96,14 +93,6 @@ public class DashboardSummary extends InstrumentedFragment
     public void onDestroy() {
         mSummaryLoader.release();
         super.onDestroy();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        if (getActivity() == null) return;
-        HelpUtils.prepareHelpMenuItem(getActivity(), menu, R.string.help_uri_dashboard,
-                getClass().getName());
     }
 
     @Override

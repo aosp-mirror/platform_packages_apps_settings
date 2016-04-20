@@ -19,5 +19,11 @@ package com.android.settings.overlay;
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
  */
-public class FeatureFactoryImpl extends FeatureFactory {
+public final class FeatureFactoryImpl extends FeatureFactory {
+
+    @Override
+    public SupportFeatureProvider getSupportFeatureProvider() {
+        return null;
+    }
+
 }
