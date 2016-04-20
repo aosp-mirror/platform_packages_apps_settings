@@ -17,12 +17,14 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.UiModeManager;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.ComponentName;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.hardware.Sensor;
@@ -87,6 +89,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE
             = "camera_double_tap_power_gesture";
     private static final String KEY_WALLPAPER = "wallpaper";
+    private static final String KEY_VR_DISPLAY_PREF = "vr_display_pref";
 
     private Preference mFontSizePref;
 
@@ -207,6 +210,40 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             removePreference(KEY_AUTO_ROTATE);
         }
 
+        if (isVrDisplayModeAvailable(activity)) {
+            DropDownPreference vrDisplayPref =
+                    (DropDownPreference) findPreference(KEY_VR_DISPLAY_PREF);
+            vrDisplayPref.setEntries(new CharSequence[] {
+                    activity.getString(R.string.display_vr_pref_low_persistence),
+                    activity.getString(R.string.display_vr_pref_off),
+            });
+            vrDisplayPref.setEntryValues(new CharSequence[] { "0", "1" });
+
+            final Context c = activity;
+            int currentUser = ActivityManager.getCurrentUser();
+            int current = Settings.Secure.getIntForUser(c.getContentResolver(),
+                            Settings.Secure.VR_DISPLAY_MODE,
+                            /*default*/Settings.Secure.VR_DISPLAY_MODE_LOW_PERSISTENCE,
+                            currentUser);
+            vrDisplayPref.setValueIndex(current);
+            vrDisplayPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    int i = Integer.parseInt((String) newValue);
+                    int u = ActivityManager.getCurrentUser();
+                    if (!Settings.Secure.putIntForUser(c.getContentResolver(),
+                            Settings.Secure.VR_DISPLAY_MODE,
+                            i, u)) {
+                        Log.e(TAG, "Could not change setting for " +
+                                Settings.Secure.VR_DISPLAY_MODE);
+                    }
+                    return true;
+                }
+            });
+        } else {
+            removePreference(KEY_VR_DISPLAY_PREF);
+        }
+
         mNightModePreference = (ListPreference) findPreference(KEY_NIGHT_MODE);
         if (mNightModePreference != null) {
             final UiModeManager uiManager = (UiModeManager) getSystemService(
@@ -254,6 +291,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static boolean isCameraDoubleTapPowerGestureAvailable(Resources res) {
         return res.getBoolean(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
+    }
+
+    private static boolean isVrDisplayModeAvailable(Context context) {
+        PackageManager pm = context.getPackageManager();
+        return pm.hasSystemFeature(PackageManager.FEATURE_VR_MODE_HIGH_PERFORMANCE);
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -514,6 +556,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     }
                     if (!isCameraDoubleTapPowerGestureAvailable(context.getResources())) {
                         result.add(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
+                    }
+                    if (!isVrDisplayModeAvailable(context)) {
+                        result.add(KEY_VR_DISPLAY_PREF);
                     }
                     return result;
                 }
