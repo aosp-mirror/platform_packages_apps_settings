@@ -84,6 +84,9 @@ import com.android.settings.fuelgauge.InactiveApps;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -232,7 +235,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mEnableTerminal;
     private Preference mBugreport;
     private SwitchPreference mBugreportInPower;
-    private SwitchPreference mKeepScreenOn;
+    private RestrictedSwitchPreference mKeepScreenOn;
     private SwitchPreference mBtHciSnoopLog;
     private SwitchPreference mEnableOemUnlock;
     private SwitchPreference mDebugViewAttributes;
@@ -364,7 +367,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mBugreport = findPreference(BUGREPORT);
         mBugreportInPower = findAndInitSwitchPref(BUGREPORT_IN_POWER_KEY);
-        mKeepScreenOn = findAndInitSwitchPref(KEEP_SCREEN_ON);
+        mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
         mEnableOemUnlock = findAndInitSwitchPref(ENABLE_OEM_UNLOCK);
         if (!showEnableOemUnlockPreference()) {
@@ -562,14 +565,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return;
         }
 
-        if (mDpm.getMaximumTimeToLockForUserAndProfiles(UserHandle.myUserId()) > 0) {
-            // A DeviceAdmin has specified a maximum time until the device
-            // will lock...  in this case we can't allow the user to turn
-            // on "stay awake when plugged in" because that would defeat the
-            // restriction.
-            mDisabledPrefs.add(mKeepScreenOn);
-        } else {
+        // A DeviceAdmin has specified a maximum time until the device
+        // will lock...  in this case we can't allow the user to turn
+        // on "stay awake when plugged in" because that would defeat the
+        // restriction.
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(
+                getActivity());
+        mKeepScreenOn.setDisabledByAdmin(admin);
+        if (admin == null) {
             mDisabledPrefs.remove(mKeepScreenOn);
+        } else {
+            mDisabledPrefs.add(mKeepScreenOn);
         }
 
         final ContentResolver cr = getActivity().getContentResolver();
