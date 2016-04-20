@@ -986,10 +986,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 keys.add(KEY_MANAGE_TRUST_AGENTS);
             }
 
-            if (!SecuritySubSettings.canChangeRequireCredentialBeforeStartup(context)) {
-                keys.add(SecuritySubSettings.KEY_REQUIRE_CRED_BEFORE_STARTUP);
-            }
-
             return keys;
         }
     }
@@ -1001,13 +997,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
         private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
         private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
         private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
-        private static final String KEY_REQUIRE_CRED_BEFORE_STARTUP = "require_cred_before_startup";
-
-        public static final int REQUEST_CHANGE_REQUIRE_CRED_FOR_START = 2;
 
         // These switch preferences need special handling since they're not all stored in Settings.
         private static final String SWITCH_PREFERENCE_KEYS[] = { KEY_LOCK_AFTER_TIMEOUT,
-                KEY_VISIBLE_PATTERN, KEY_POWER_INSTANTLY_LOCKS, KEY_REQUIRE_CRED_BEFORE_STARTUP };
+                KEY_VISIBLE_PATTERN, KEY_POWER_INSTANTLY_LOCKS };
 
         private TimeoutListPreference mLockAfter;
         private SwitchPreference mVisiblePattern;
@@ -1109,27 +1102,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 }
             }
 
-            Preference requireCredForStartup = findPreference(KEY_REQUIRE_CRED_BEFORE_STARTUP);
-            if (requireCredForStartup instanceof SwitchPreference) {
-                ((SwitchPreference) requireCredForStartup).setChecked(
-                        mLockPatternUtils.isCredentialRequiredToDecrypt(false));
-                if (!canChangeRequireCredentialBeforeStartup(getContext())) {
-                    removePreference(KEY_REQUIRE_CRED_BEFORE_STARTUP);
-                }
-            }
-
             for (int i = 0; i < SWITCH_PREFERENCE_KEYS.length; i++) {
                 final Preference pref = findPreference(SWITCH_PREFERENCE_KEYS[i]);
                 if (pref != null) pref.setOnPreferenceChangeListener(this);
             }
-        }
-
-        static boolean canChangeRequireCredentialBeforeStartup(Context context) {
-            DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
-            return UserManager.get(context).isAdminUser()
-                    && UserManager.get(context).isPrimaryUser()
-                    && StorageManager.isBlockEncrypted()
-                    && !dpm.getDoNotAskCredentialsOnBoot();
         }
 
         private void setupLockAfterPreference() {
@@ -1239,15 +1215,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 updateLockAfterPreferenceSummary();
             } else if (KEY_VISIBLE_PATTERN.equals(key)) {
                 mLockPatternUtils.setVisiblePatternEnabled((Boolean) value, MY_USER_ID);
-            } else if (KEY_REQUIRE_CRED_BEFORE_STARTUP.equals(key)) {
-                Bundle extras = new Bundle();
-                extras.putBoolean(
-                        ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, true);
-                startFragment(this,
-                        "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
-                        R.string.lock_settings_picker_title, REQUEST_CHANGE_REQUIRE_CRED_FOR_START,
-                        extras);
-                return false;
             }
             return true;
         }
