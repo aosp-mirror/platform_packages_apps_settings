@@ -248,6 +248,10 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             // Picked a normal volume
             final VolumeInfo vol = mStorageManager.findVolumeById(key);
 
+            if (vol == null) {
+                return false;
+            }
+
             if (vol.getState() == VolumeInfo.STATE_UNMOUNTED) {
                 VolumeUnmountedFragment.show(this, vol.getId());
                 return true;
