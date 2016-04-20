@@ -1,6 +1,16 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
+LOCAL_SRC_FILES := \
+        $(call all-logtags-files-under, src)
+
+LOCAL_MODULE := settings-logtags
+
+include $(BUILD_STATIC_JAVA_LIBRARY)
+
+# Build the Settings APK
+include $(CLEAR_VARS)
+
 LOCAL_JAVA_LIBRARIES := bouncycastle core-oj telephony-common ims-common
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v4 \
@@ -9,13 +19,13 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v7-preference \
     android-support-v7-appcompat \
     android-support-v14-preference \
-    jsr305
+    jsr305 \
+    settings-logtags
 
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_SRC_FILES := \
-        $(call all-java-files-under, src) \
-        src/com/android/settings/EventLogTags.logtags
+        $(call all-java-files-under, src)
 
 LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res \
     frameworks/support/v7/preference/res \
