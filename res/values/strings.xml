@@ -981,8 +981,12 @@
     <!--  Title for security picker to choose the profile unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="lock_settings_picker_title_profile">Choose work lock</string>
 
-    <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
-    <string name="setup_lock_settings_picker_title">Protect your phone</string>
+    <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (tablet) [CHAR LIMIT=22] -->
+    <string name="setup_lock_settings_picker_title" product="tablet">Protect your tablet</string>
+    <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (device) [CHAR LIMIT=22] -->
+    <string name="setup_lock_settings_picker_title" product="device">Protect your device</string>
+    <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (phone) [CHAR LIMIT=22] -->
+    <string name="setup_lock_settings_picker_title" product="default">Protect your phone</string>
 
     <!-- Title for screen in setup wizard, prompting user to choose the their backup screen lock method [CHAR LIMIT=NONE] -->
     <string name="setup_lock_settings_picker_fingerprint_message">Your fingerprint may be less secure than a strong pattern, PIN, or password. For added security, set up a backup screen lock.</string>
