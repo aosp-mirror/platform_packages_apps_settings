@@ -16,10 +16,10 @@
 
 package com.android.settings;
 
-import com.android.internal.logging.MetricsLogger;
-
 import android.os.Bundle;
 import android.support.v14.preference.PreferenceFragment;
+
+import com.android.internal.logging.MetricsLogger;
 
 /**
  * Instrumented fragment that logs visibility state.
@@ -30,6 +30,9 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
 
     // Used by PreferenceActivity for the dummy fragment it adds, no useful data here.
     public static final int PREFERENCE_ACTIVITY_FRAGMENT = UNDECLARED + 1;
+    public static final int DASHBOARD_CONTAINER = UNDECLARED + 2;
+
+    public static final int SUPPORT_FRAGMENT = UNDECLARED + 3;
 
     /**
      * Declare the view of this category.
