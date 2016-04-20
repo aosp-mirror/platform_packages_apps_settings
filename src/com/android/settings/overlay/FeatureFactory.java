@@ -59,13 +59,7 @@ public abstract class FeatureFactory {
         return sFactory;
     }
 
-    /**
-     * Creates stub controller that makes {@link android.widget.Toast}s.
-     * Will be removed before submitting.
-     */
-    public abstract ToastController createToastController();
-
-    public static class FactoryNotFoundException extends RuntimeException {
+    public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
             super("Unable to create factory. Did you misconfigure Proguard?", throwable);
         }
