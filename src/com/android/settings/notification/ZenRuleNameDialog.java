@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -51,6 +52,9 @@ public abstract class ZenRuleNameDialog {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         final String newName = trimmedText();
+                        if (TextUtils.isEmpty(newName)) {
+                            return;
+                        }
                         if (!mIsNew && mOriginalRuleName != null
                                 && mOriginalRuleName.equals(newName)) {
                             return;  // no change to an existing rule, just dismiss
