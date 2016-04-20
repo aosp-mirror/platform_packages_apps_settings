@@ -27,8 +27,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
@@ -67,6 +65,9 @@ public class DateTimeSettings extends SettingsPreferenceFragment
 
     // have we been launched from the setup wizard?
     protected static final String EXTRA_IS_FIRST_RUN = "firstRun";
+
+    // Minimum time is Nov 5, 2007, 0:00.
+    private static final long MIN_DATE = 1194220800000L;
 
     private RestrictedSwitchPreference mAutoTimePref;
     private Preference mTimePref;
@@ -320,7 +321,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, day);
-        long when = c.getTimeInMillis();
+        long when = Math.max(c.getTimeInMillis(), MIN_DATE);
 
         if (when / 1000 < Integer.MAX_VALUE) {
             ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).setTime(when);
@@ -334,7 +335,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         c.set(Calendar.MINUTE, minute);
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
-        long when = c.getTimeInMillis();
+        long when = Math.max(c.getTimeInMillis(), MIN_DATE);
 
         if (when / 1000 < Integer.MAX_VALUE) {
             ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).setTime(when);
