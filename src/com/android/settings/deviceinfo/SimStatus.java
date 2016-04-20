@@ -151,7 +151,7 @@ public class SimStatus extends InstrumentedPreferenceActivity {
             mSir = mSelectableSubInfos.size() > 0 ? mSelectableSubInfos.get(0) : null;
 
             if (mSelectableSubInfos.size() > 1) {
-                setContentView(com.android.internal.R.layout.common_tab_settings);
+                setContentView(R.layout.icc_lock_tabs);
 
                 mTabHost = (TabHost) findViewById(android.R.id.tabhost);
                 mTabWidget = (TabWidget) findViewById(android.R.id.tabs);
