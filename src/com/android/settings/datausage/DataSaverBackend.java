@@ -160,10 +160,46 @@ public class DataSaverBackend {
         }
     }
 
+    private void handleWhitelistChanged(int uid, boolean isWhitelisted) {
+        for (int i = 0; i < mListeners.size(); i++) {
+            mListeners.get(i).onWhitelistStatusChanged(uid, isWhitelisted);
+        }
+    }
+
+    private void handleBlacklistChanged(int uid, boolean isBlacklisted) {
+        for (int i = 0; i < mListeners.size(); i++) {
+            mListeners.get(i).onBlacklistStatusChanged(uid, isBlacklisted);
+        }
+    }
+
     private final INetworkPolicyListener mPolicyListener = new INetworkPolicyListener.Stub() {
         @Override
-        public void onUidRulesChanged(int uid, int uidRules) throws RemoteException {
-            // TODO: update UI accordingly
+        public void onUidRulesChanged(final int uid, int uidRules) throws RemoteException {
+            if (mBlacklist == null) {
+                loadBlacklist();
+            }
+            final boolean isBlacklisted = uidRules == POLICY_REJECT_METERED_BACKGROUND;
+            mBlacklist.put(uid, isBlacklisted);
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    handleBlacklistChanged(uid, isBlacklisted);
+                }
+            });
+        }
+
+        @Override
+        public void onRestrictBackgroundWhitelistChanged(final int uid, final boolean whitelisted) {
+            if (mWhitelist == null) {
+                loadWhitelist();
+            }
+            mWhitelist.put(uid, whitelisted);
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    handleWhitelistChanged(uid, whitelisted);
+                }
+            });
         }
 
         @Override
@@ -183,5 +219,7 @@ public class DataSaverBackend {
 
     public interface Listener {
         void onDataSaverChanged(boolean isDataSaving);
+        void onWhitelistStatusChanged(int uid, boolean isWhitelisted);
+        void onBlacklistStatusChanged(int uid, boolean isBlacklisted);
     }
 }
