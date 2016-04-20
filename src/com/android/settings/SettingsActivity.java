@@ -1095,8 +1095,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             enabled = false;
         }
         int state = pm.getComponentEnabledSetting(component);
-        boolean isEnabled = state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
-                || state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+        boolean isEnabled = state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
         if (isEnabled != enabled) {
             pm.setComponentEnabledSetting(component, enabled
                     ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
