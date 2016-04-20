@@ -28,7 +28,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
@@ -39,15 +38,12 @@ import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.HandlerThread;
 import android.os.Process;
-import android.os.RemoteException;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -58,7 +54,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
@@ -999,9 +994,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
                 filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
                 filter.addAction(WifiManager.RSSI_CHANGED_ACTION);
-                mContext.registerReceiver(this, filter);
-            } else {
-                mContext.unregisterReceiver(this);
+                mSummaryLoader.registerReceiver(this, filter);
             }
         }
 
