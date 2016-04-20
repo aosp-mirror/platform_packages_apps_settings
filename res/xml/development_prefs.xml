@@ -15,6 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/development_settings_title">
     <com.android.settings.BugreportPreference
             android:key="bugreport"
@@ -32,10 +33,11 @@
                 android:targetClass="com.android.settings.SetFullBackupPassword" />
     </PreferenceScreen>
 
-    <SwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="keep_screen_on"
         android:title="@string/keep_screen_on"
-        android:summary="@string/keep_screen_on_summary"/>
+        android:summary="@string/keep_screen_on_summary"
+        settings:useAdditionalSummary="true" />
 
     <ListPreference
         android:key="hdcp_checking"
