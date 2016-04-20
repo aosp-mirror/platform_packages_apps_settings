@@ -16,8 +16,14 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.os.*;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.os.Process;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -45,6 +51,7 @@ public class SummaryLoader {
 
     private DashboardAdapter mAdapter;
     private boolean mListening;
+    private ArrayList<BroadcastReceiver> mReceivers = new ArrayList<>();
 
     public SummaryLoader(Activity activity, List<DashboardCategory> categories) {
         mHandler = new Handler();
@@ -88,6 +95,14 @@ public class SummaryLoader {
     }
 
     public void setListening(boolean listening) {
+        synchronized (mReceivers) {
+            // Unregister listeners immediately.
+            mListening = false;
+            for (int i = 0; i < mReceivers.size(); i++) {
+                mActivity.unregisterReceiver(mReceivers.get(i));
+            }
+            mReceivers.clear();
+        }
         mWorker.obtainMessage(Worker.MSG_SET_LISTENING, listening ? 1 : 0, 0).sendToTarget();
     }
 
@@ -128,13 +143,28 @@ public class SummaryLoader {
         return tile.metaData;
     }
 
+    /**
+     * Registers a receiver and automatically unregisters it when the activity is stopping.
+     * This ensures that the receivers are unregistered immediately, since most summary loader
+     * operations are asynchronous.
+     */
+    public void registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
+        synchronized (mReceivers) {
+            if (!mListening) {
+                return;
+            }
+            mReceivers.add(receiver);
+            mActivity.registerReceiver(receiver, filter);
+        }
+    }
+
     private synchronized void setListeningW(boolean listening) {
         if (mListening == listening) return;
         if (DEBUG) Log.d(TAG, "Listening " + listening);
+        mListening = listening;
         for (SummaryProvider p : mSummaryMap.keySet()) {
             p.setListening(listening);
         }
-        mListening = listening;
     }
 
     private synchronized void makeProviderW(Tile tile) {
