@@ -683,9 +683,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
         }
 
-        // Will remove this line before submitting.
-        FeatureFactory.getFactory(this).createToastController().makeToast(this);
-
         if (DEBUG_TIMING) Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
     }
