@@ -18,6 +18,7 @@ package com.android.settings.vpn2;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.android.internal.net.VpnProfile;
@@ -33,6 +34,7 @@ public class LegacyVpnPreference extends ManageablePreference {
 
     LegacyVpnPreference(Context context) {
         super(context, null /* attrs */);
+        setIcon(R.mipmap.ic_launcher_settings);
     }
 
     public VpnProfile getProfile() {
@@ -40,12 +42,13 @@ public class LegacyVpnPreference extends ManageablePreference {
     }
 
     public void setProfile(VpnProfile profile) {
-        mProfile = profile;
-        if (mProfile != null) {
-            setIcon(R.mipmap.ic_launcher_settings);
-            setTitle(mProfile.name);
+        final String oldLabel = (mProfile != null ? mProfile.name : null);
+        final String newLabel = (profile != null ? profile.name : null);
+        if (!TextUtils.equals(oldLabel, newLabel)) {
+            setTitle(newLabel);
+            notifyHierarchyChanged();
         }
-        notifyHierarchyChanged();
+        mProfile = profile;
     }
 
     @Override

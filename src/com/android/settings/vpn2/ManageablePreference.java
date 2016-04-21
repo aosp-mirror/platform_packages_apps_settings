@@ -62,13 +62,18 @@ public abstract class ManageablePreference extends GearPreference {
     }
 
     public void setState(int state) {
-        mState = state;
-        updateSummary();
+        if (mState != state) {
+            mState = state;
+            updateSummary();
+            notifyHierarchyChanged();
+        }
     }
 
     public void setAlwaysOn(boolean isEnabled) {
-        mIsAlwaysOn = isEnabled;
-        updateSummary();
+        if (mIsAlwaysOn != isEnabled) {
+            mIsAlwaysOn = isEnabled;
+            updateSummary();
+        }
     }
 
     /**
