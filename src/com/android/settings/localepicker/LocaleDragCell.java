@@ -87,9 +87,11 @@ class LocaleDragCell extends RelativeLayout {
         invalidate();
     }
 
-    public void setLabel(String labelText) {
+    public void setLabelAndDescription(String labelText, String description) {
         mLabel.setText(labelText);
         mCheckbox.setText(labelText);
+        mLabel.setContentDescription(description);
+        mCheckbox.setContentDescription(description);
         invalidate();
     }
 
