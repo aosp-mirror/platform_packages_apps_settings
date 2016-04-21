@@ -97,7 +97,6 @@ public class SummaryLoader {
     public void setListening(boolean listening) {
         synchronized (mReceivers) {
             // Unregister listeners immediately.
-            mListening = false;
             for (int i = 0; i < mReceivers.size(); i++) {
                 mActivity.unregisterReceiver(mReceivers.get(i));
             }
@@ -163,7 +162,11 @@ public class SummaryLoader {
         if (DEBUG) Log.d(TAG, "Listening " + listening);
         mListening = listening;
         for (SummaryProvider p : mSummaryMap.keySet()) {
-            p.setListening(listening);
+            try {
+                p.setListening(listening);
+            } catch (Exception e) {
+                Log.d(TAG, "Problem in setListening", e);
+            }
         }
     }
 
