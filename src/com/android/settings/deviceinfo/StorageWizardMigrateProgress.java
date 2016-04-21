@@ -76,9 +76,11 @@ public class StorageWizardMigrateProgress extends StorageWizardBase {
                         finishIntent.addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY);
                         sendBroadcast(finishIntent);
 
-                        final Intent intent = new Intent(context, StorageWizardReady.class);
-                        intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
-                        startActivity(intent);
+                        if (!StorageWizardMigrateProgress.this.isFinishing()) {
+                            final Intent intent = new Intent(context, StorageWizardReady.class);
+                            intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+                            startActivity(intent);
+                        }
                     }
                 } else {
                     Toast.makeText(context, getString(R.string.insufficient_storage),
