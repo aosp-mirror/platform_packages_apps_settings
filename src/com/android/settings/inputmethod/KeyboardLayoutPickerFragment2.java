@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
@@ -45,6 +46,7 @@ public final class KeyboardLayoutPickerFragment2 extends SettingsPreferenceFragm
     private int mInputDeviceId = -1;
     private InputManager mIm;
     private InputMethodInfo mImi;
+    @Nullable
     private InputMethodSubtype mSubtype;
     private KeyboardLayout[] mKeyboardLayouts;
     private Map<Preference, KeyboardLayout> mPreferenceMap = new HashMap<>();
@@ -82,7 +84,7 @@ public final class KeyboardLayoutPickerFragment2 extends SettingsPreferenceFragm
         mImi = activity.getIntent().getParcelableExtra(EXTRA_INPUT_METHOD_INFO);
         mSubtype = activity.getIntent().getParcelableExtra(EXTRA_INPUT_METHOD_SUBTYPE);
 
-        if (mInputDeviceIdentifier == null || mImi == null || mSubtype == null) {
+        if (mInputDeviceIdentifier == null || mImi == null) {
             activity.finish();
         }
 
