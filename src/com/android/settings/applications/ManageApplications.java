@@ -21,6 +21,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.icu.text.AlphabeticIndex;
 import android.os.*;
@@ -138,7 +139,7 @@ public class ManageApplications extends InstrumentedFragment
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[]{
             R.string.high_power_filter_on, // High power whitelist, on
-            R.string.filter_all_apps,      // All apps label, but personal filter (for high power);
+            R.string.filter_all_apps,      // Without disabled until used
             R.string.filter_all_apps,      // All apps
             R.string.filter_enabled_apps,  // Enabled
             R.string.filter_apps_disabled, // Disabled
@@ -159,8 +160,8 @@ public class ManageApplications extends InstrumentedFragment
     public static final AppFilter[] FILTERS = new AppFilter[]{
             new CompoundFilter(AppStatePowerBridge.FILTER_POWER_WHITELISTED,
                     ApplicationsState.FILTER_ALL_ENABLED),     // High power whitelist, on
-            new CompoundFilter(ApplicationsState.FILTER_PERSONAL_WITHOUT_DISABLED_UNTIL_USED,
-                    ApplicationsState.FILTER_ALL_ENABLED),     // All apps label, but personal filter
+            new CompoundFilter(ApplicationsState.FILTER_WITHOUT_DISABLED_UNTIL_USED,
+                    ApplicationsState.FILTER_ALL_ENABLED),     // Without disabled until used
             ApplicationsState.FILTER_EVERYTHING,  // All apps
             ApplicationsState.FILTER_ALL_ENABLED, // Enabled
             ApplicationsState.FILTER_DISABLED,    // Disabled
@@ -901,7 +902,44 @@ public class ManageApplications extends InstrumentedFragment
                 // Don't have new list yet, but can continue using the old one.
                 return;
             }
+            if (mFilterMode == FILTER_APPS_POWER_WHITELIST ||
+                mFilterMode == FILTER_APPS_POWER_WHITELIST_ALL) {
+                entries = removeDuplicateIgnoringUser(entries);
+            }
             onRebuildComplete(entries);
+        }
+
+
+        static private boolean packageNameEquals(PackageItemInfo info1, PackageItemInfo info2) {
+            if (info1 == null || info2 == null) {
+                return false;
+            }
+            if (info1.packageName == null || info2.packageName == null) {
+                return false;
+            }
+            return info1.packageName.equals(info2.packageName);
+        }
+
+        private ArrayList<ApplicationsState.AppEntry> removeDuplicateIgnoringUser(
+                ArrayList<ApplicationsState.AppEntry> entries)
+        {
+            int size = entries.size();
+            // returnList will not have more entries than entries
+            ArrayList<ApplicationsState.AppEntry> returnEntries = new
+                    ArrayList<ApplicationsState.AppEntry>(size);
+
+            // assume appinfo of same package but different users are grouped together
+            PackageItemInfo lastInfo = null;
+            for (int i = 0; i < size; i++) {
+                AppEntry appEntry = entries.get(i);
+                PackageItemInfo info = appEntry.info;
+                if (!packageNameEquals(lastInfo, appEntry.info)) {
+                    returnEntries.add(appEntry);
+                }
+                lastInfo = info;
+            }
+            returnEntries.trimToSize();
+            return returnEntries;
         }
 
         @Override
