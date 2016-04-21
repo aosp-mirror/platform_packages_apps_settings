@@ -913,25 +913,37 @@ public class InstalledAppDetails extends AppInfoBase
             }
         }
 
+        addAppInstallerInfoPref(screen);
+    }
+
+    private void addAppInstallerInfoPref(PreferenceScreen screen) {
         final String installerPackageName =
                 getContext().getPackageManager().getInstallerPackageName(mPackageName);
-        if (installerPackageName != null) {
-            final Intent intent = new Intent(Intent.ACTION_SHOW_APP_INFO)
-                    .setPackage(installerPackageName);
-            final Intent result = resolveIntent(intent);
-            if (result != null) {
-                result.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackageName);
-                PreferenceCategory category = new PreferenceCategory(getPrefContext());
-                category.setTitle(R.string.app_install_details_group_title);
-                screen.addPreference(category);
-                Preference pref = new Preference(getPrefContext());
-                pref.setTitle(R.string.app_install_details_title);
-                pref.setKey("app_info_store");
-                pref.setSummary(getString(R.string.app_install_details_summary, mAppEntry.label));
-                pref.setIntent(result);
-                category.addPreference(pref);
-            }
+        if (installerPackageName == null) {
+            return;
         }
+        final CharSequence installerLabel = Utils.getApplicationLabel(getContext(),
+                installerPackageName);
+        if (installerLabel == null) {
+            return;
+        }
+        PreferenceCategory category = new PreferenceCategory(getPrefContext());
+        category.setTitle(R.string.app_install_details_group_title);
+        screen.addPreference(category);
+        Preference pref = new Preference(getPrefContext());
+        pref.setTitle(R.string.app_install_details_title);
+        pref.setKey("app_info_store");
+        pref.setSummary(getString(R.string.app_install_details_summary, installerLabel));
+        final Intent intent = new Intent(Intent.ACTION_SHOW_APP_INFO)
+                .setPackage(installerPackageName);
+        final Intent result = resolveIntent(intent);
+        if (result != null) {
+            result.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackageName);
+            pref.setIntent(result);
+        } else {
+            pref.setEnabled(false);
+        }
+        category.addPreference(pref);
     }
 
     private boolean hasPermission(String permission) {
