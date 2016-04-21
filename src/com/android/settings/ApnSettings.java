@@ -49,6 +49,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -484,7 +485,11 @@ public class ApnSettings extends RestrictedSettingsFragment implements
     @Override
     public Dialog onCreateDialog(int id) {
         if (id == DIALOG_RESTORE_DEFAULTAPN) {
-            ProgressDialog dialog = new ProgressDialog(getActivity());
+            ProgressDialog dialog = new ProgressDialog(getActivity()) {
+                public boolean onTouchEvent(MotionEvent event) {
+                    return true;
+                }
+            };
             dialog.setMessage(getResources().getString(R.string.restore_default_apn));
             dialog.setCancelable(false);
             return dialog;
