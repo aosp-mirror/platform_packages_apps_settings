@@ -147,7 +147,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 Preference pref = new Preference(getPrefContext(), null);
                 final InputMethodInfo imi = info.mImi;
                 final InputMethodSubtype imSubtype = info.mImSubtype;
-                if (imi != null && imSubtype != null) {
+                if (imi != null) {
                     pref.setTitle(getDisplayName(getContext(), imi, imSubtype));
                     KeyboardLayout layout = info.mLayout;
                     if (layout != null) {
@@ -214,9 +214,9 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     private void showKeyboardLayoutScreen(
-            InputDeviceIdentifier inputDeviceIdentifier,
-            InputMethodInfo imi,
-            InputMethodSubtype imSubtype) {
+            @NonNull InputDeviceIdentifier inputDeviceIdentifier,
+            @NonNull InputMethodInfo imi,
+            @Nullable InputMethodSubtype imSubtype) {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(getActivity(), Settings.KeyboardLayoutPickerActivity.class);
         intent.putExtra(KeyboardLayoutPickerFragment2.EXTRA_INPUT_DEVICE_IDENTIFIER,
@@ -272,12 +272,15 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     };
 
     @NonNull
-    static String getDisplayName(
+    static CharSequence getDisplayName(
             @NonNull Context context, @NonNull InputMethodInfo imi,
-            @NonNull InputMethodSubtype imSubtype) {
+            @Nullable InputMethodSubtype imSubtype) {
+        final CharSequence imeName = imi.loadLabel(context.getPackageManager());
+        if (imSubtype == null) {
+            return imeName;
+        }
         final CharSequence imSubtypeName = imSubtype.getDisplayName(
                 context, imi.getPackageName(), imi.getServiceInfo().applicationInfo);
-        final CharSequence imeName = imi.loadLabel(context.getPackageManager());
         return String.format(
                 context.getString(R.string.physical_device_title), imSubtypeName, imeName);
     }
@@ -330,8 +333,21 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             final InputManager im = getContext().getSystemService(InputManager.class);
             if (imm != null && im != null) {
                 for (InputMethodInfo imi : imm.getEnabledInputMethodList()) {
-                    for (InputMethodSubtype subtype : imm.getEnabledInputMethodSubtypeList(
-                            imi, true /* allowsImplicitlySelectedSubtypes */)) {
+                    final List<InputMethodSubtype> subtypes = imm.getEnabledInputMethodSubtypeList(
+                            imi, true /* allowsImplicitlySelectedSubtypes */);
+                    if (subtypes.isEmpty()) {
+                        // Here we use null to indicate that this IME has no subtype.
+                        final InputMethodSubtype nullSubtype = null;
+                        final KeyboardLayout layout = im.getKeyboardLayoutForInputDevice(
+                                deviceInfo.mDeviceIdentifier, imi, nullSubtype);
+                        keyboardInfoList.add(new Keyboards.KeyboardInfo(imi, nullSubtype, layout));
+                        continue;
+                    }
+
+                    // If the IME supports subtypes, we pick up "keyboard" subtypes only.
+                    final int N = subtypes.size();
+                    for (int i = 0; i < N; ++i) {
+                        final InputMethodSubtype subtype = subtypes.get(i);
                         if (!IM_SUBTYPE_MODE_KEYBOARD.equalsIgnoreCase(subtype.getMode())) {
                             continue;
                         }
@@ -421,14 +437,14 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         public static final class KeyboardInfo {
             @NonNull
             public final InputMethodInfo mImi;
-            @NonNull
+            @Nullable
             public final InputMethodSubtype mImSubtype;
             @NonNull
             public final KeyboardLayout mLayout;
 
             public KeyboardInfo(
                     @NonNull final InputMethodInfo imi,
-                    @NonNull final InputMethodSubtype imSubtype,
+                    @Nullable final InputMethodSubtype imSubtype,
                     @NonNull final KeyboardLayout layout) {
                 mImi = imi;
                 mImSubtype = imSubtype;
