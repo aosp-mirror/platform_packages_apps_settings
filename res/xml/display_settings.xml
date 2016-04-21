@@ -106,4 +106,9 @@
                 settings:keywords="@string/keywords_display_cast_screen"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
 
+        <DropDownPreference
+                android:key="vr_display_pref"
+                android:summary="%s"
+                android:title="@string/display_vr_pref_title" />
+
 </PreferenceScreen>
