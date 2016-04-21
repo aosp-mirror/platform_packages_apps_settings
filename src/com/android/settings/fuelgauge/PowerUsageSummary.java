@@ -368,7 +368,8 @@ public class PowerUsageSummary extends PowerUsageBase {
                 }
                 addedSome = true;
                 mAppListGroup.addPreference(pref);
-                if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST + 1)) {
+                if (mAppListGroup.getPreferenceCount() - getCachedCount()
+                        > (MAX_ITEMS_TO_LIST + 1)) {
                     break;
                 }
             }
@@ -391,8 +392,10 @@ public class PowerUsageSummary extends PowerUsageBase {
             stats.add(new BatterySipper(type, null, use));
             use += 5;
         }
-        stats.add(new BatterySipper(DrainType.APP,
-                new FakeUid(Process.FIRST_APPLICATION_UID), use));
+        for (int i = 0; i < 100; i++) {
+            stats.add(new BatterySipper(DrainType.APP,
+                    new FakeUid(Process.FIRST_APPLICATION_UID + i), use));
+        }
         stats.add(new BatterySipper(DrainType.APP,
                 new FakeUid(0), use));
 
