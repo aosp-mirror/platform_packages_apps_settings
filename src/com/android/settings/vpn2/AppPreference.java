@@ -32,20 +32,45 @@ import com.android.internal.net.VpnConfig;
  */
 public class AppPreference extends ManageablePreference {
     public static final int STATE_CONNECTED = LegacyVpnInfo.STATE_CONNECTED;
-    public static final int STATE_DISCONNECTED = LegacyVpnInfo.STATE_DISCONNECTED;
+    public static final int STATE_DISCONNECTED = STATE_NONE;
 
-    private int mState = STATE_DISCONNECTED;
-    private String mPackageName;
-    private String mName;
+    private final String mPackageName;
+    private final String mName;
 
-    public AppPreference(Context context) {
+    public AppPreference(Context context, int userId, String packageName) {
         super(context, null /* attrs */);
-    }
-
-    @Override
-    public void setUserId(int userId) {
         super.setUserId(userId);
-        update();
+
+        mPackageName = packageName;
+
+        // Fetch icon and VPN label
+        String label = packageName;
+        Drawable icon = null;
+        try {
+            // Make all calls to the package manager as the appropriate user.
+            Context userContext = getUserContext();
+            PackageManager pm = userContext.getPackageManager();
+            // The nested catch block is for the case that the app doesn't exist, so we can fall
+            // back to the default activity icon.
+            try {
+                PackageInfo pkgInfo = pm.getPackageInfo(mPackageName, 0 /* flags */);
+                if (pkgInfo != null) {
+                    icon = pkgInfo.applicationInfo.loadIcon(pm);
+                    label = VpnConfig.getVpnLabel(userContext, mPackageName).toString();
+                }
+            } catch (PackageManager.NameNotFoundException pkgNotFound) {
+                // Use default app label and icon as fallback
+            }
+            if (icon == null) {
+                icon = pm.getDefaultActivityIcon();
+            }
+        } catch (PackageManager.NameNotFoundException userNotFound) {
+            // No user, no useful information to obtain. Quietly fail.
+        }
+        mName = label;
+
+        setTitle(mName);
+        setIcon(icon);
     }
 
     public PackageInfo getPackageInfo() {
@@ -63,58 +88,6 @@ public class AppPreference extends ManageablePreference {
 
     public String getPackageName() {
         return mPackageName;
-    }
-
-    public void setPackageName(String name) {
-        mPackageName = name;
-        update();
-    }
-
-    public int getState() {
-        return mState;
-    }
-
-    public void setState(int state) {
-        mState = state;
-        update();
-    }
-
-    private void update() {
-        if (mPackageName == null || mUserId == UserHandle.USER_NULL) {
-            return;
-        }
-
-        setSummary(getSummaryString(mState == STATE_DISCONNECTED ? STATE_NONE : mState));
-
-        mName = mPackageName;
-        Drawable icon = null;
-
-        try {
-            // Make all calls to the package manager as the appropriate user.
-            Context userContext = getUserContext();
-            PackageManager pm = userContext.getPackageManager();
-            // Fetch icon and VPN label- the nested catch block is for the case that the app doesn't
-            // exist, in which case we can fall back to the default activity icon for an activity in
-            // that user.
-            try {
-                PackageInfo pkgInfo = pm.getPackageInfo(mPackageName, 0 /* flags */);
-                if (pkgInfo != null) {
-                    icon = pkgInfo.applicationInfo.loadIcon(pm);
-                    mName = VpnConfig.getVpnLabel(userContext, mPackageName).toString();
-                }
-            } catch (PackageManager.NameNotFoundException pkgNotFound) {
-                // Use default app label and icon as fallback
-            }
-            if (icon == null) {
-                icon = pm.getDefaultActivityIcon();
-            }
-        } catch (PackageManager.NameNotFoundException userNotFound) {
-            // No user, no useful information to obtain. Quietly fail.
-        }
-        setTitle(mName);
-        setIcon(icon);
-
-        notifyHierarchyChanged();
     }
 
     private Context getUserContext() throws PackageManager.NameNotFoundException {
