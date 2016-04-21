@@ -152,8 +152,9 @@ class LocaleDragAndDropAdapter
     public void onBindViewHolder(final CustomViewHolder holder, int i) {
         final LocaleStore.LocaleInfo feedItem = mFeedItemList.get(i);
         final LocaleDragCell dragCell = holder.getLocaleDragCell();
-        String label = feedItem.getFullNameNative();
-        dragCell.setLabel(label);
+        final String label = feedItem.getFullNameNative();
+        final String description = feedItem.getFullNameInUiLanguage();
+        dragCell.setLabelAndDescription(label, description);
         dragCell.setLocalized(feedItem.isTranslated());
         dragCell.setMiniLabel(mNumberFormatter.format(i + 1));
         dragCell.setShowCheckbox(mRemoveMode);
@@ -166,7 +167,7 @@ class LocaleDragAndDropAdapter
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         LocaleStore.LocaleInfo feedItem =
-                                (LocaleStore.LocaleInfo) holder.getLocaleDragCell().getTag();
+                                (LocaleStore.LocaleInfo) dragCell.getTag();
                         feedItem.setChecked(isChecked);
                     }
                 });
