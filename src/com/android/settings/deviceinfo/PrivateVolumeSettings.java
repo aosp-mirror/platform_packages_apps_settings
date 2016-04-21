@@ -327,6 +327,12 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mDetached = false;
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mDetached = true;
