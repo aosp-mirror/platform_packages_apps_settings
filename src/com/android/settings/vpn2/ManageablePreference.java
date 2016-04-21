@@ -34,6 +34,7 @@ public abstract class ManageablePreference extends GearPreference {
     public static int STATE_NONE = -1;
 
     boolean mIsAlwaysOn = false;
+    int mState = STATE_NONE;
     int mUserId;
 
     public ManageablePreference(Context context, AttributeSet attrs) {
@@ -56,24 +57,40 @@ public abstract class ManageablePreference extends GearPreference {
         return mIsAlwaysOn;
     }
 
+    public int getState() {
+        return mState;
+    }
+
+    public void setState(int state) {
+        if (mState != state) {
+            mState = state;
+            updateSummary();
+            notifyHierarchyChanged();
+        }
+    }
+
     public void setAlwaysOn(boolean isEnabled) {
-        mIsAlwaysOn = isEnabled;
+        if (mIsAlwaysOn != isEnabled) {
+            mIsAlwaysOn = isEnabled;
+            updateSummary();
+        }
     }
 
     /**
-     * State is not shown for {@code STATE_NONE}
+     * Update the preference summary string (see {@see Preference#setSummary}) with a string
+     * reflecting connection status and always-on setting.
      *
-     * @return summary string showing current connection state and always-on-vpn state
+     * State is not shown for {@code STATE_NONE}.
      */
-    protected String getSummaryString(int state) {
+    protected void updateSummary() {
         final Resources res = getContext().getResources();
         final String[] states = res.getStringArray(R.array.vpn_states);
-        String summary = state == STATE_NONE ? "" : states[state];
+        String summary = (mState == STATE_NONE ? "" : states[mState]);
         if (mIsAlwaysOn) {
             final String alwaysOnString = res.getString(R.string.vpn_always_on_active);
             summary = TextUtils.isEmpty(summary) ? alwaysOnString : res.getString(
                     R.string.join_two_unrelated_items, summary, alwaysOnString);
         }
-        return summary;
+        setSummary(summary);
     }
 }
