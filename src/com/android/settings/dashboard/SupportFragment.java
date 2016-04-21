@@ -19,6 +19,7 @@ package com.android.settings.dashboard;
 import android.annotation.DrawableRes;
 import android.annotation.IdRes;
 import android.annotation.StringRes;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,17 +29,29 @@ import android.widget.TextView;
 
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.overlay.SupportFeatureProvider;
 
 /**
  * Fragment for support tab in SettingsGoogle.
  */
-public final class SupportFragment extends InstrumentedFragment {
+public final class SupportFragment extends InstrumentedFragment implements View.OnClickListener {
 
+    private Activity mActivity;
     private View mContent;
+    private SupportFeatureProvider mSupportFeatureProvider;
 
     @Override
     protected int getMetricsCategory() {
         return SUPPORT_FRAGMENT;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActivity = getActivity();
+        mSupportFeatureProvider =
+                FeatureFactory.getFactory(getContext()).getSupportFeatureProvider();
     }
 
     @Override
@@ -67,5 +80,15 @@ public final class SupportFragment extends InstrumentedFragment {
         final View tile = mContent.findViewById(tileId);
         ((ImageView) tile.findViewById(android.R.id.icon)).setImageResource(icon);
         ((TextView) tile.findViewById(android.R.id.title)).setText(title);
+        tile.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.forum_tile:
+                mActivity.startActivity(mSupportFeatureProvider.getForumIntent());
+                break;
+        }
     }
 }
