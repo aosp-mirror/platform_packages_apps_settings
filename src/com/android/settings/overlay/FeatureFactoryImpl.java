@@ -25,5 +25,4 @@ public final class FeatureFactoryImpl extends FeatureFactory {
     public SupportFeatureProvider getSupportFeatureProvider() {
         return null;
     }
-
 }
