@@ -399,6 +399,10 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
     }
 
+    protected int getCachedCount() {
+        return mPreferenceCache.size();
+    }
+
     private void highlightPreference(String key) {
         final int position = canUseListViewForHighLighting(key);
         if (position >= 0) {
