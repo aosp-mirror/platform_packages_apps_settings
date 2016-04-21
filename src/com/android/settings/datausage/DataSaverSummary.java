@@ -100,6 +100,14 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+    }
+
+    @Override
+    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+    }
+
+    @Override
     public void onExtraInfoUpdated() {
         if (!isAdded()) {
             return;
