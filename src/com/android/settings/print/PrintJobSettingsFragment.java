@@ -63,7 +63,6 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     private Preference mMessagePreference;
 
     private PrintJobId mPrintJobId;
-    private PrintJob mPrintJob;
 
     @Override
     protected int getMetricsCategory() {
@@ -134,17 +133,21 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_ITEM_ID_CANCEL: {
-                getPrintJob().cancel();
-                finish();
-                return true;
-            }
+        PrintJob printJob = getPrintJob();
 
-            case MENU_ITEM_ID_RESTART: {
-                getPrintJob().restart();
-                finish();
-                return true;
+        if (printJob != null) {
+            switch (item.getItemId()) {
+                case MENU_ITEM_ID_CANCEL: {
+                    printJob.cancel();
+                    finish();
+                    return true;
+                }
+
+                case MENU_ITEM_ID_RESTART: {
+                    printJob.restart();
+                    finish();
+                    return true;
+                }
             }
         }
 
@@ -161,10 +164,7 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     }
 
     private PrintJob getPrintJob() {
-        if (mPrintJob == null) {
-            mPrintJob = mPrintManager.getPrintJob(mPrintJobId);
-        }
-        return mPrintJob;
+        return mPrintManager.getPrintJob(mPrintJobId);
     }
 
     private void updateUi() {
