@@ -300,7 +300,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
                     .setTitle(R.string.vpn_replace_always_on_vpn_title)
                     .setMessage(getActivity().getString(R.string.vpn_replace_always_on_vpn_message))
                     .setNegativeButton(getActivity().getString(R.string.vpn_cancel), null)
-                    .setPositiveButton(getActivity().getString(R.string.vpn_continue), this)
+                    .setPositiveButton(getActivity().getString(R.string.vpn_replace), this)
                     .create();
         }
 
