@@ -118,7 +118,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mDetailsTextView = (TextView) view.findViewById(R.id.detailsText);
-            mStrongAuthRequiredTextView = (TextView) view.findViewById(R.id.strongAuthRequiredText);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
             mLeftSpacerLandscape = view.findViewById(R.id.leftSpacer);
             mRightSpacerLandscape = view.findViewById(R.id.rightSpacer);
@@ -176,13 +175,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 getFragmentManager().beginTransaction().add(mCredentialCheckResultTracker,
                         FRAGMENT_TAG_CHECK_LOCK_RESULT).commit();
             }
-
-            // Strong auth is required when the user is locked.
-            // Currently a user does not get locked again until the device restarts. Show the
-            // hint text as "device has just been restarted".
-            mStrongAuthRequiredTextView.setText(
-                    R.string.lockpassword_strong_auth_required_reason_restart_pattern);
-
             return view;
         }
 
@@ -237,6 +229,20 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mFingerprintIcon.setAlpha(0f);
         }
 
+        private int getDefaultDetails() {
+            boolean isProfile = Utils.isManagedProfile(
+                    UserManager.get(getActivity()), mEffectiveUserId);
+            if (isProfile) {
+                return mIsStrongAuthRequired
+                        ? R.string.lockpassword_strong_auth_required_reason_restart_work_pattern
+                        : R.string.lockpassword_confirm_your_pattern_generic_profile;
+            } else {
+                return mIsStrongAuthRequired
+                        ? R.string.lockpassword_strong_auth_required_reason_restart_device_pattern
+                        : R.string.lockpassword_confirm_your_pattern_generic;
+            }
+        }
+
         private Object[][] getActiveViews() {
             ArrayList<ArrayList<Object>> result = new ArrayList<>();
             result.add(new ArrayList<Object>(Collections.singletonList(mHeaderTextView)));
@@ -282,13 +288,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     }
                     if (mDetailsText != null) {
                         mDetailsTextView.setText(mDetailsText);
-                    } else if (!Utils.isManagedProfile(
-                            UserManager.get(getActivity()), mEffectiveUserId)) {
-                        mDetailsTextView.setText(
-                                R.string.lockpassword_confirm_your_pattern_generic);
                     } else {
-                        mDetailsTextView.setText(
-                                R.string.lockpassword_confirm_your_pattern_generic_profile);
+                        mDetailsTextView.setText(getDefaultDetails());
                     }
                     mErrorTextView.setText("");
                     if (isProfileChallenge()) {
