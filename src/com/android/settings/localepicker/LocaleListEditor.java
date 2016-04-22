@@ -21,7 +21,6 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.LocaleList;
 import android.view.LayoutInflater;
@@ -30,7 +29,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocalePickerWithRegion;
@@ -76,9 +74,8 @@ public class LocaleListEditor extends SettingsPreferenceFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstState) {
-        View result = super.onCreateView(inflater, container, savedInstState);
-        LinearLayout ll = (LinearLayout) result;
-        View myLayout = inflater.inflate(R.layout.locale_order_list, ll);
+        final View result = super.onCreateView(inflater, container, savedInstState);
+        final View myLayout = inflater.inflate(R.layout.locale_order_list, (ViewGroup) result);
 
         getActivity().setTitle(R.string.pref_title_lang_selection);
 
@@ -236,7 +233,7 @@ public class LocaleListEditor extends SettingsPreferenceFragment
 
     private void configureDragAndDrop(View view) {
         final RecyclerView list = (RecyclerView) view.findViewById(R.id.dragList);
-        final LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
+        final LocaleLinearLayoutManager llm = new LocaleLinearLayoutManager(getContext(), mAdapter);
         llm.setAutoMeasureEnabled(true);
         list.setLayoutManager(llm);
 

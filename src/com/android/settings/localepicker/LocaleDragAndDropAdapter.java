@@ -38,7 +38,6 @@ import com.android.settings.R;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -184,12 +183,14 @@ class LocaleDragAndDropAdapter
         return itemCount;
     }
 
-    private void onItemMove(int fromPosition, int toPosition) {
+    void onItemMove(int fromPosition, int toPosition) {
         if (fromPosition >= 0 && toPosition >= 0) {
-            Collections.swap(mFeedItemList, fromPosition, toPosition);
+            final LocaleStore.LocaleInfo saved = mFeedItemList.get(fromPosition);
+            mFeedItemList.remove(fromPosition);
+            mFeedItemList.add(toPosition, saved);
         } else {
             // TODO: It looks like sometimes the RecycleView tries to swap item -1
-            // Investigate and file a bug.
+            // I did not see it in a while, but if it happens, investigate and file a bug.
             Log.e(TAG, String.format(Locale.US,
                     "Negative position in onItemMove %d -> %d", fromPosition, toPosition));
         }
@@ -205,6 +206,23 @@ class LocaleDragAndDropAdapter
             mFeedItemList.get(i).setChecked(false);
             notifyItemChanged(i);
         }
+    }
+
+    boolean isRemoveMode() {
+        return mRemoveMode;
+    }
+
+    void removeItem(int position) {
+        int itemCount = mFeedItemList.size();
+        if (itemCount <= 1) {
+            return;
+        }
+        if (position < 0 || position >= itemCount) {
+            return;
+        }
+        mFeedItemList.remove(position);
+        notifyDataSetChanged();
+        doTheUpdate();
     }
 
     void removeChecked() {
