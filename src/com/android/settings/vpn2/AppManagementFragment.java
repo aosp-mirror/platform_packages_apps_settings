@@ -177,8 +177,10 @@ public class AppManagementFragment extends SettingsPreferenceFragment
             VpnUtils.clearLockdownVpn(getContext());
         }
         mConnectivityManager.setAlwaysOnVpnPackageForUser(mUserId, isEnabled ? mPackageName : null);
+        if (isEnabled && !isVpnAlwaysOn()) {
+            CannotConnectFragment.show(this, mVpnLabel);
+        }
         updateUI();
-        showCantConnectNotificationIfNeeded(isEnabled);
     }
 
     private void updateUI() {
@@ -246,52 +248,42 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         return getAlwaysOnVpnPackage() != null && !isVpnAlwaysOn();
     }
 
-    private void showCantConnectNotificationIfNeeded(boolean isEnabledExpected) {
-        // Display notification only when user tries to turn on but system fails to turn it on.
-        if (isEnabledExpected && !isVpnAlwaysOn()) {
-            String appDisplayName = mPackageName;
-            try {
-                appDisplayName = VpnConfig.getVpnLabel(getContext(), mPackageName).toString();
-            } catch (NameNotFoundException e) {
-                // Use default package name as app name. Quietly fail.
+    public static class CannotConnectFragment extends DialogFragment {
+        private static final String TAG = "CannotConnect";
+        private static final String ARG_VPN_LABEL = "label";
+
+        public static void show(AppManagementFragment parent, String vpnLabel) {
+            if (parent.getFragmentManager().findFragmentByTag(TAG) == null) {
+                final Bundle args = new Bundle();
+                args.putString(ARG_VPN_LABEL, vpnLabel);
+
+                final DialogFragment frag = new CannotConnectFragment();
+                frag.setArguments(args);
+                frag.show(parent.getFragmentManager(), TAG);
             }
-            postCantConnectNotification(getContext(), appDisplayName,
-                    mPackageUid /* notificationId */);
         }
-    }
 
-    /**
-     * @param notificationId should be unique to the vpn app, e.g. uid, to keep one notification per
-     *                       vpn app per user
-     */
-    private static void postCantConnectNotification(Context context, @NonNull String vpnName,
-            int notificationId) {
-        final Resources res = context.getResources();
-        // Only action is specified to match cross-profile intent filter set by ManagedProfileSetup
-        final Intent intent = new Intent(Settings.ACTION_VPN_SETTINGS);
-        final PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
-                Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        final Notification notification = new Notification.Builder(context)
-                .setContentTitle(res.getString(R.string.vpn_cant_connect_notification_title,
-                        vpnName))
-                .setContentText(res.getString(R.string.vpn_tap_for_vpn_settings))
-                .setSmallIcon(R.drawable.ic_settings_wireless)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .build();
-
-        NotificationManager nm = context.getSystemService(NotificationManager.class);
-        nm.notify(notificationId, notification);
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final String vpnLabel = getArguments().getString(ARG_VPN_LABEL);
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(getActivity().getString(R.string.vpn_cant_connect_title, vpnLabel))
+                    .setMessage(getActivity().getString(R.string.vpn_cant_connect_message))
+                    .setPositiveButton(R.string.okay, null)
+                    .create();
+        }
     }
 
     public static class ReplaceExistingVpnFragment extends DialogFragment
             implements DialogInterface.OnClickListener {
+        private static final String TAG = "ReplaceExistingVpn";
 
         public static void show(AppManagementFragment parent) {
-            final ReplaceExistingVpnFragment frag = new ReplaceExistingVpnFragment();
-            frag.setTargetFragment(parent, 0);
-            frag.show(parent.getFragmentManager(), null);
+            if (parent.getFragmentManager().findFragmentByTag(TAG) == null) {
+                final ReplaceExistingVpnFragment frag = new ReplaceExistingVpnFragment();
+                frag.setTargetFragment(parent, 0);
+                frag.show(parent.getFragmentManager(), TAG);
+            }
         }
 
         @Override
