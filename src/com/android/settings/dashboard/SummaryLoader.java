@@ -94,14 +94,17 @@ public class SummaryLoader {
         });
     }
 
+    /**
+     * Only call from the main thread.
+     */
     public void setListening(boolean listening) {
-        synchronized (mReceivers) {
-            // Unregister listeners immediately.
-            for (int i = 0; i < mReceivers.size(); i++) {
-                mActivity.unregisterReceiver(mReceivers.get(i));
-            }
-            mReceivers.clear();
+        if (mListening == listening) return;
+        mListening = listening;
+        // Unregister listeners immediately.
+        for (int i = 0; i < mReceivers.size(); i++) {
+            mActivity.unregisterReceiver(mReceivers.get(i));
         }
+        mReceivers.clear();
         mWorker.obtainMessage(Worker.MSG_SET_LISTENING, listening ? 1 : 0, 0).sendToTarget();
     }
 
@@ -147,20 +150,21 @@ public class SummaryLoader {
      * This ensures that the receivers are unregistered immediately, since most summary loader
      * operations are asynchronous.
      */
-    public void registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
-        synchronized (mReceivers) {
-            if (!mListening) {
-                return;
+    public void registerReceiver(final BroadcastReceiver receiver, final IntentFilter filter) {
+        mActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (!mListening) {
+                    return;
+                }
+                mReceivers.add(receiver);
+                mActivity.registerReceiver(receiver, filter);
             }
-            mReceivers.add(receiver);
-            mActivity.registerReceiver(receiver, filter);
-        }
+        });
     }
 
     private synchronized void setListeningW(boolean listening) {
-        if (mListening == listening) return;
         if (DEBUG) Log.d(TAG, "Listening " + listening);
-        mListening = listening;
         for (SummaryProvider p : mSummaryMap.keySet()) {
             try {
                 p.setListening(listening);
@@ -175,10 +179,6 @@ public class SummaryLoader {
         if (provider != null) {
             if (DEBUG) Log.d(TAG, "Creating " + tile);
             mSummaryMap.put(provider, tile.intent.getComponent());
-            if (mListening) {
-                // If we are somehow already listening, put the provider in that state.
-                provider.setListening(true);
-            }
         }
     }
 
