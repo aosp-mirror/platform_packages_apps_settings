@@ -23,15 +23,13 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.InstrumentedActivity;
 import com.android.settings.R;
-import com.android.setupwizardlib.SetupWizardLayout;
-import com.android.setupwizardlib.view.NavigationBar;
+import com.android.setupwizardlib.GlifLayout;
 
 /**
  * Base activity for all fingerprint enrollment steps.
@@ -71,38 +69,26 @@ public abstract class FingerprintEnrollBase extends InstrumentedActivity
     }
 
     protected void initViews() {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS |
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN |
-                WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR);
-
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-
         getWindow().setStatusBarColor(Color.TRANSPARENT);
-        getNavigationBar().setVisibility(View.GONE);
         Button nextButton = getNextButton();
         if (nextButton != null) {
             nextButton.setOnClickListener(this);
         }
     }
 
-    protected NavigationBar getNavigationBar() {
-        return (NavigationBar) findViewById(R.id.suw_layout_navigation_bar);
-    }
-
-    protected SetupWizardLayout getSetupWizardLayout() {
-        return (SetupWizardLayout) findViewById(R.id.setup_wizard_layout);
+    protected GlifLayout getLayout() {
+        return (GlifLayout) findViewById(R.id.setup_wizard_layout);
     }
 
     protected void setHeaderText(int resId, boolean force) {
-        TextView layoutTitle = getSetupWizardLayout().getHeaderTextView();
+        TextView layoutTitle = getLayout().getHeaderTextView();
         CharSequence previousTitle = layoutTitle.getText();
         CharSequence title = getText(resId);
         if (previousTitle != title || force) {
             if (!TextUtils.isEmpty(previousTitle)) {
                 layoutTitle.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
             }
-            getSetupWizardLayout().setHeaderText(title);
+            getLayout().setHeaderText(title);
             setTitle(title);
         }
     }

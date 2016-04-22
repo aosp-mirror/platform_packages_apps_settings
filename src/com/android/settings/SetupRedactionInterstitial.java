@@ -16,20 +16,16 @@
 
 package com.android.settings;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.android.settings.notification.RedactionInterstitial;
-import com.android.setupwizardlib.SetupWizardLayout;
-import com.android.setupwizardlib.view.NavigationBar;
 
 /**
  * Setup Wizard's version of RedactionInterstitial screen. It inherits the logic and basic structure
@@ -67,7 +63,7 @@ public class SetupRedactionInterstitial extends RedactionInterstitial {
     }
 
     public static class SetupRedactionInterstitialFragment extends RedactionInterstitialFragment
-            implements NavigationBar.NavigationBarListener {
+            implements View.OnClickListener {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,29 +74,19 @@ public class SetupRedactionInterstitial extends RedactionInterstitial {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            final SetupWizardLayout layout =
-                    (SetupWizardLayout) view.findViewById(R.id.setup_wizard_layout);
-
-            final NavigationBar navigationBar = layout.getNavigationBar();
-            navigationBar.setNavigationBarListener(this);
-            navigationBar.getBackButton().setVisibility(View.GONE);
-            SetupWizardUtils.setImmersiveMode(getActivity());
+            final Button button = (Button) view.findViewById(R.id.redaction_next_button);
+            button.setOnClickListener(this);
         }
 
         @Override
-        public void onNavigateBack() {
-            final Activity activity = getActivity();
-            if (activity != null) {
-                activity.onBackPressed();
-            }
-        }
-
-        @Override
-        public void onNavigateNext() {
-            final SetupRedactionInterstitial activity = (SetupRedactionInterstitial) getActivity();
-            if (activity != null) {
-                activity.setResult(RESULT_OK, activity.getResultIntentData());
-                finish();
+        public void onClick(View v) {
+            if (v.getId() == R.id.redaction_next_button) {
+                final SetupRedactionInterstitial activity =
+                        (SetupRedactionInterstitial) getActivity();
+                if (activity != null) {
+                    activity.setResult(RESULT_OK, activity.getResultIntentData());
+                    finish();
+                }
             }
         }
     }

@@ -32,15 +32,13 @@
         <item name="android:windowBackground">@null</item>
     </style>
 
-    <style name="SetupWizardTheme" parent="SuwThemeMaterial">
+    <style name="SetupWizardTheme" parent="SuwThemeGlif">
         <!-- For all Alert Dialogs -->
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:colorPrimary">@color/suw_color_accent_dark</item>
-        <item name="android:listPreferredItemPaddingEnd">@dimen/suw_layout_margin_sides</item>
-        <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
-        <item name="fingerprint_layout_theme">@style/SetupWizardFingerprintLayoutTheme</item>
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="fingerprint_progress_bar_size">@dimen/setup_fingerprint_progress_bar_size</item>
         <item name="fingerprint_ring_radius">@dimen/setup_fingerprint_ring_radius</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_dark</item>
@@ -59,15 +57,13 @@
         <item name="@*android:errorColor">@color/setup_lock_pattern_view_error_color_dark</item>
     </style>
 
-    <style name="SetupWizardTheme.Light" parent="SuwThemeMaterial.Light">
+    <style name="SetupWizardTheme.Light" parent="SuwThemeGlif.Light">
         <!-- For all Alert Dialogs -->
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:colorPrimary">@color/suw_color_accent_light</item>
-        <item name="android:listPreferredItemPaddingEnd">@dimen/suw_layout_margin_sides</item>
-        <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
-        <item name="fingerprint_layout_theme">@style/SetupWizardFingerprintLayoutTheme</item>
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="fingerprint_progress_bar_size">@dimen/setup_fingerprint_progress_bar_size</item>
         <item name="fingerprint_ring_radius">@dimen/setup_fingerprint_ring_radius</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_light</item>
@@ -78,7 +74,7 @@
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
-        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard.Light</item>
 
         <!-- LockPatternView colors -->
         <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
@@ -108,9 +104,11 @@
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
     </style>
 
-    <style name="PreferenceTheme.SetupWizard">
-        <item name="android:listPreferredItemPaddingEnd">@dimen/suw_layout_margin_sides</item>
-        <item name="android:listPreferredItemPaddingStart">@dimen/suw_layout_margin_sides</item>
+    <style name="PreferenceTheme.SetupWizard" parent="SetupWizardTheme">
+        <item name="preferenceFragmentStyle">@style/SetupWizardPreferenceFragmentStyle</item>
+    </style>
+
+    <style name="PreferenceTheme.SetupWizard.Light" parent="SetupWizardTheme.Light">
         <item name="preferenceFragmentStyle">@style/SetupWizardPreferenceFragmentStyle</item>
     </style>
 

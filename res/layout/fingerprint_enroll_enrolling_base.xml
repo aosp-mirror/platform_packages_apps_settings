@@ -15,7 +15,7 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.SetupWizardLayout
+<com.android.setupwizardlib.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
@@ -70,6 +70,15 @@
             android:accessibilityLiveRegion="polite"
             android:visibility="invisible"/>
 
+        <Button
+            android:id="@+id/skip_button"
+            style="@style/SetupWizardButton.Negative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/skip_label"
+            android:visibility="gone" />
+
     </LinearLayout>
 
-</com.android.setupwizardlib.SetupWizardLayout>
+</com.android.setupwizardlib.GlifLayout>

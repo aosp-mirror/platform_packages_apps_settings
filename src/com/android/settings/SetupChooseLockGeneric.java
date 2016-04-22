@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -25,20 +24,17 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v7.preference.Preference;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.Preference;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.fingerprint.SetupSkipDialog;
-import com.android.setupwizardlib.SetupWizardLayout;
-import com.android.setupwizardlib.SetupWizardPreferenceLayout;
-import com.android.setupwizardlib.view.NavigationBar;
+import com.android.setupwizardlib.GlifPreferenceLayout;
 
 /**
  * Setup Wizard's version of ChooseLockGeneric screen. It inherits the logic and basic structure
@@ -74,8 +70,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         layout.setFitsSystemWindows(false);
     }
 
-    public static class SetupChooseLockGenericFragment extends ChooseLockGenericFragment
-            implements NavigationBar.NavigationBarListener {
+    public static class SetupChooseLockGenericFragment extends ChooseLockGenericFragment {
 
         public static final String EXTRA_PASSWORD_QUALITY = ":settings:password_quality";
 
@@ -83,24 +78,14 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            SetupWizardUtils.setImmersiveMode(getActivity());
-
-            SetupWizardPreferenceLayout layout = (SetupWizardPreferenceLayout) view;
+            GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
             layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
-                    R.dimen.suw_items_text_divider_inset));
-            final NavigationBar navigationBar = layout.getNavigationBar();
-            Button nextButton = navigationBar.getNextButton();
-            nextButton.setText(null);
-            nextButton.setEnabled(false);
-            navigationBar.setNavigationBarListener(this);
+                    R.dimen.suw_items_glif_text_divider_inset));
 
-            layout.setIllustration(R.drawable.setup_illustration_lock_screen,
-                    R.drawable.setup_illustration_horizontal_tile);
-            if (!mForFingerprint) {
-                layout.setHeaderText(R.string.setup_lock_settings_picker_title);
-            } else {
-                layout.setHeaderText(R.string.lock_settings_picker_title);
-            }
+            layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
+            layout.setHeaderText(mForFingerprint ?
+                    R.string.lock_settings_picker_title
+                    : R.string.setup_lock_settings_picker_title);
 
             // Use the dividers in SetupWizardRecyclerLayout. Suppress the dividers in
             // PreferenceFragment.
@@ -143,7 +128,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         @Override
         public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
                 Bundle savedInstanceState) {
-            SetupWizardPreferenceLayout layout = (SetupWizardPreferenceLayout) parent;
+            GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
             return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
         }
 
@@ -250,18 +235,6 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                     required, unlockMethodIntent);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
-        }
-
-        @Override
-        public void onNavigateBack() {
-            Activity activity = getActivity();
-            if (activity != null) {
-                activity.onBackPressed();
-            }
-        }
-
-        @Override
-        public void onNavigateNext() {
         }
     }
 }

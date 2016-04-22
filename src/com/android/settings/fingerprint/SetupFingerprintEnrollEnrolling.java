@@ -31,11 +31,8 @@ import android.widget.Button;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
-import com.android.setupwizardlib.util.SystemBarHelper;
-import com.android.setupwizardlib.view.NavigationBar;
 
-public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
-        implements NavigationBar.NavigationBarListener {
+public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling {
 
     private static final String TAG_DIALOG = "dialog";
 
@@ -54,32 +51,21 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
 
     @Override
     protected void initViews() {
-        SetupWizardUtils.setImmersiveMode(this);
+        super.initViews();
+        final Button skipButton = (Button) findViewById(R.id.skip_button);
+        skipButton.setVisibility(View.VISIBLE);
+        skipButton.setOnClickListener(this);
+    }
 
-        final View buttonBar = findViewById(R.id.button_bar);
-        if (buttonBar != null) {
-            buttonBar.setVisibility(View.GONE);
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.skip_button:
+                new SkipDialog().show(getFragmentManager(), TAG_DIALOG);
+                break;
+            default:
+                super.onClick(v);
         }
-
-        final NavigationBar navigationBar = getNavigationBar();
-        navigationBar.setNavigationBarListener(this);
-        navigationBar.getNextButton().setText(R.string.skip_label);
-        navigationBar.getBackButton().setVisibility(View.GONE);
-    }
-
-    @Override
-    protected Button getNextButton() {
-        return getNavigationBar().getNextButton();
-    }
-
-    @Override
-    public void onNavigateBack() {
-        onBackPressed();
-    }
-
-    @Override
-    public void onNavigateNext() {
-        new SkipDialog().show(getFragmentManager(), TAG_DIALOG);
     }
 
     @Override
@@ -102,7 +88,7 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+            return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.setup_fingerprint_enroll_enrolling_skip_title)
                     .setMessage(R.string.setup_fingerprint_enroll_enrolling_skip_message)
                     .setCancelable(false)
@@ -124,8 +110,6 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling
                                 }
                             })
                     .create();
-            SystemBarHelper.hideSystemBars(dialog);
-            return dialog;
         }
     }
 }
