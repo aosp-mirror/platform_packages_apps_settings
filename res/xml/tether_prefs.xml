@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreference
         android:key="usb_tether_settings"
@@ -33,4 +34,9 @@
         android:key="enable_bluetooth_tethering"
         android:title="@string/bluetooth_tether_checkbox_text" />
 
+    <com.android.settings.DividerPreference
+            android:key="disabled_on_data_saver"
+            android:summary="@string/tether_settings_disabled_on_data_saver"
+            android:selectable="false"
+            settings:allowDividerAbove="true" />
 </PreferenceScreen>
