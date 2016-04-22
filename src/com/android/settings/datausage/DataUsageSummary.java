@@ -25,6 +25,7 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.SystemProperties;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -116,7 +117,9 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.data_usage, menu);
+        if (UserManager.get(getContext()).isAdminUser()) {
+            inflater.inflate(R.menu.data_usage, menu);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
