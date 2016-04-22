@@ -115,12 +115,10 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         getPreferenceScreen().removePreference(mActivePrintJobsCategory);
 
         mPrintJobsController = new PrintJobsController();
-        getActivity().getLoaderManager().initLoader(LOADER_ID_PRINT_JOBS_LOADER, null,
-                mPrintJobsController);
+        getLoaderManager().initLoader(LOADER_ID_PRINT_JOBS_LOADER, null, mPrintJobsController);
 
         mPrintServicesController = new PrintServicesController();
-        getActivity().getLoaderManager().initLoader(LOADER_ID_PRINT_SERVICES, null,
-                mPrintServicesController);
+        getLoaderManager().initLoader(LOADER_ID_PRINT_SERVICES, null, mPrintServicesController);
     }
 
     @Override
@@ -294,7 +292,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         @Override
         public Loader<List<PrintJobInfo>> onCreateLoader(int id, Bundle args) {
             if (id == LOADER_ID_PRINT_JOBS_LOADER) {
-                return new PrintJobsLoader(getActivity());
+                return new PrintJobsLoader(getContext());
             }
             return null;
         }
