@@ -15,54 +15,66 @@
  */
 package com.android.settings.applications;
 
-import android.content.BroadcastReceiver;
+import android.annotation.NonNull;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.pm.permission.RuntimePermissionPresentationInfo;
+import android.content.pm.permission.RuntimePermissionPresenter;
 
-public class PermissionsSummaryHelper {
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    private static final String ACTION_PERM_COUNT_RESPONSE
-            = "com.android.settings.PERM_COUNT_RESPONSE";
-    private static final String ACTION_APP_COUNT_RESPONSE
-            = "com.android.settings.APP_COUNT_RESPONSE";
+public class PermissionsSummaryHelper  {
 
-    public static BroadcastReceiver getPermissionSummary(Context context, String pkg,
-            PermissionsResultCallback callback) {
-        Intent request = new Intent(Intent.ACTION_GET_PERMISSIONS_COUNT);
-        request.putExtra(Intent.EXTRA_PACKAGE_NAME, pkg);
-        return sendPermissionRequest(context, ACTION_PERM_COUNT_RESPONSE, request, callback);
-    }
-
-    public static BroadcastReceiver getAppWithPermissionsCounts(Context context,
-            PermissionsResultCallback callback) {
-        Intent request = new Intent(Intent.ACTION_GET_PERMISSIONS_COUNT);
-        return sendPermissionRequest(context, ACTION_APP_COUNT_RESPONSE, request, callback);
-    }
-
-    private static BroadcastReceiver sendPermissionRequest(Context context, String action,
-            Intent request, final PermissionsResultCallback callback) {
-        BroadcastReceiver receiver = new BroadcastReceiver() {
+    public static void getPermissionSummary(Context context, String pkg,
+            final PermissionsResultCallback callback) {
+        final RuntimePermissionPresenter presenter =
+                RuntimePermissionPresenter.getInstance(context);
+        presenter.getAppPermissions(pkg, new RuntimePermissionPresenter.OnResultCallback() {
             @Override
-            public void onReceive(Context context, Intent intent) {
-                int[] counts = intent.getIntArrayExtra(Intent.EXTRA_GET_PERMISSIONS_COUNT_RESULT);
+            public void onGetAppPermissions(
+                    @NonNull List<RuntimePermissionPresentationInfo> permissions) {
+                final int permissionCount = permissions.size();
 
-                CharSequence[] groups = intent.getCharSequenceArrayExtra(
-                        Intent.EXTRA_GET_PERMISSIONS_GROUP_LIST_RESULT);
+                int grantedStandardCount = 0;
+                int grantedAdditionalCount = 0;
+                int requestedCount = 0;
+                List<CharSequence> grantedStandardLabels = new ArrayList<>();
 
-                callback.onPermissionSummaryResult(counts, groups);
+                for (int i = 0; i < permissionCount; i++) {
+                    RuntimePermissionPresentationInfo permission = permissions.get(i);
+                    requestedCount++;
+                    if (permission.isGranted()) {
+                        if (permission.isStandard()) {
+                            grantedStandardLabels.add(permission.getLabel());
+                            grantedStandardCount++;
+                        } else {
+                            grantedAdditionalCount++;
+                        }
+                    }
+                }
 
-                context.unregisterReceiver(this);
+                Collator collator = Collator.getInstance();
+                collator.setStrength(Collator.PRIMARY);
+                Collections.sort(grantedStandardLabels, collator);
+
+                callback.onPermissionSummaryResult(grantedStandardCount, requestedCount,
+                        grantedAdditionalCount, grantedStandardLabels);
             }
-        };
-        context.registerReceiver(receiver, new IntentFilter(action));
-        request.putExtra(Intent.EXTRA_GET_PERMISSIONS_RESPONSE_INTENT, action);
-        request.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        context.sendBroadcast(request);
-        return receiver;
+        }, null);
     }
 
-    public interface PermissionsResultCallback {
-        void onPermissionSummaryResult(int[] counts, CharSequence[] groupLabels);
+    public static abstract class PermissionsResultCallback {
+        public void onAppWithPermissionsCountsResult(int standardGrantedPermissionAppCount,
+                int standardUsedPermissionAppCount) {
+            /* do nothing - stub */
+        }
+
+        public void onPermissionSummaryResult(int standardGrantedPermissionCount,
+                int requestedPermissionCount, int additionalGrantedPermissionCount,
+                List<CharSequence> grantedGroupLabels) {
+            /* do nothing - stub */
+        }
     }
 }
