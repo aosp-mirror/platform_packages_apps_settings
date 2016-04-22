@@ -123,65 +123,22 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
 
     private final PermissionsResultCallback mPermissionCallback = new PermissionsResultCallback() {
         @Override
-        public void onPermissionSummaryResult(int[] counts, CharSequence[] groupLabels) {
+        public void onAppWithPermissionsCountsResult(int standardGrantedPermissionAppCount,
+                int standardUsedPermissionAppCount) {
             if (getActivity() == null) {
                 return;
             }
             mPermissionReceiver = null;
-            if (counts != null) {
+            if (standardUsedPermissionAppCount != 0) {
                 mAppPermsPreference.setSummary(getContext().getString(
-                        R.string.app_permissions_summary, counts[0], counts[1]));
+                        R.string.app_permissions_summary,
+                        standardGrantedPermissionAppCount,
+                        standardUsedPermissionAppCount));
             } else {
                 mAppPermsPreference.setSummary(null);
             }
         }
     };
-
-    private class CountAppsWithOverlayPermission extends
-            AsyncTask<AppStateOverlayBridge, Void, Integer> {
-        int numOfPackagesRequestedPermission = 0;
-
-        @Override
-        protected Integer doInBackground(AppStateOverlayBridge... params) {
-            AppStateOverlayBridge overlayBridge = params[0];
-            numOfPackagesRequestedPermission = overlayBridge
-                    .getNumberOfPackagesWithPermission();
-            return overlayBridge.getNumberOfPackagesCanDrawOverlay();
-        }
-
-        @Override
-        protected void onPostExecute(Integer result) {
-            // checks if fragment is still there before updating the preference object
-            if (isAdded()) {
-                mSystemAlertWindowPreference.setSummary(getContext().getString(
-                        R.string.system_alert_window_summary, result,
-                        numOfPackagesRequestedPermission));
-            }
-        }
-    }
-
-    private class CountAppsWithWriteSettingsPermission extends
-        AsyncTask<AppStateWriteSettingsBridge, Void, Integer> {
-        int numOfPackagesRequestedPermission = 0;
-
-        @Override
-        protected Integer doInBackground(AppStateWriteSettingsBridge... params) {
-            AppStateWriteSettingsBridge writeSettingsBridge = params[0];
-            numOfPackagesRequestedPermission = writeSettingsBridge
-                .getNumberOfPackagesWithPermission();
-            return writeSettingsBridge.getNumberOfPackagesCanWriteSettings();
-        }
-
-        @Override
-        protected void onPostExecute(Integer result) {
-            // checks if fragment is still there before updating the preference object
-            if (isAdded()) {
-                mWriteSettingsPreference.setSummary(getContext().getString(
-                        R.string.write_settings_summary, result,
-                        numOfPackagesRequestedPermission));
-            }
-        }
-    }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
