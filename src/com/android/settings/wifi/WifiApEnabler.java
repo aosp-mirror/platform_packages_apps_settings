@@ -27,6 +27,7 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.datausage.DataSaverBackend;
 import com.android.settingslib.TetherUtil;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class WifiApEnabler {
     private final Context mContext;
     private final SwitchPreference mSwitch;
     private final CharSequence mOriginalSummary;
+    private final DataSaverBackend mDataSaverBackend;
 
     private WifiManager mWifiManager;
     private final IntentFilter mIntentFilter;
@@ -70,14 +72,16 @@ public class WifiApEnabler {
         }
     };
 
-    public WifiApEnabler(Context context, SwitchPreference switchPreference) {
+    public WifiApEnabler(Context context, DataSaverBackend dataSaverBackend,
+            SwitchPreference switchPreference) {
         mContext = context;
+        mDataSaverBackend = dataSaverBackend;
         mSwitch = switchPreference;
         mOriginalSummary = switchPreference.getSummary();
         switchPreference.setPersistent(false);
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        mCm = (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        mCm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         mWifiRegexs = mCm.getTetherableWifiRegexs();
 
@@ -99,7 +103,7 @@ public class WifiApEnabler {
         boolean isAirplaneMode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
         if(!isAirplaneMode) {
-            mSwitch.setEnabled(true);
+            mSwitch.setEnabled(!mDataSaverBackend.isDataSaverEnabled());
         } else {
             mSwitch.setSummary(mOriginalSummary);
             mSwitch.setEnabled(false);
@@ -162,7 +166,7 @@ public class WifiApEnabler {
                  */
                 mSwitch.setChecked(true);
                 /* Doesnt need the airplane check */
-                mSwitch.setEnabled(true);
+                mSwitch.setEnabled(!mDataSaverBackend.isDataSaverEnabled());
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLING:
                 mSwitch.setSummary(R.string.wifi_tether_stopping);
