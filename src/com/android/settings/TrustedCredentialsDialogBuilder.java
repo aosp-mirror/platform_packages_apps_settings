@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
+import android.content.pm.UserInfo;
 import android.net.http.SslCertificate;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -31,6 +32,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustedCredentialsSettings.CertHolder;
 
 import java.security.cert.X509Certificate;
@@ -184,10 +186,26 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
             updateNegativeButton();
         }
 
+        /**
+         * @return true if current user or parent user is guarded by screenlock
+         */
+        private boolean isUserSecure(int userId) {
+            final LockPatternUtils lockPatternUtils = new LockPatternUtils(mActivity);
+            if (lockPatternUtils.isSecure(userId)) {
+                return true;
+            }
+            UserInfo parentUser = mUserManager.getProfileParent(userId);
+            if (parentUser == null) {
+                return false;
+            }
+            return lockPatternUtils.isSecure(parentUser.id);
+        }
+
         private void updatePositiveButton() {
             final CertHolder certHolder = getCurrentCertInfo();
-            mNeedsApproval = !certHolder.isSystemCert() &&
-                    !mDpm.isCaCertApproved(certHolder.getAlias(), certHolder.getUserId());
+            mNeedsApproval = !certHolder.isSystemCert()
+                    && isUserSecure(certHolder.getUserId())
+                    && !mDpm.isCaCertApproved(certHolder.getAlias(), certHolder.getUserId());
 
             // The ok button is optional. User can still dismiss the dialog by other means.
             // Display it only when trust button is not displayed, because we want users to
