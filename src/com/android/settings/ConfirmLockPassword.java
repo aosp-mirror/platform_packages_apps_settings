@@ -50,6 +50,18 @@ import java.util.ArrayList;
 
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
+    // The index of the array is isStrongAuth << 2 + isProfile << 1 + isAlpha.
+    private static final int[] DETAIL_TEXTS = new int[] {
+        R.string.lockpassword_confirm_your_pin_generic,
+        R.string.lockpassword_confirm_your_password_generic,
+        R.string.lockpassword_confirm_your_pin_generic_profile,
+        R.string.lockpassword_confirm_your_password_generic_profile,
+        R.string.lockpassword_strong_auth_required_reason_restart_device_pin,
+        R.string.lockpassword_strong_auth_required_reason_restart_device_password,
+        R.string.lockpassword_strong_auth_required_reason_restart_work_pin,
+        R.string.lockpassword_strong_auth_required_reason_restart_work_password,
+    };
+
     public static class InternalActivity extends ConfirmLockPassword {
     }
 
@@ -124,18 +136,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == storedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_MANAGED == storedQuality;
 
-            // Strong auth is required when the user is locked.
-            // Currently a user does not get locked again until the device restarts. Show the
-            // hint text as "device has just been restarted".
-            mStrongAuthRequiredTextView = (TextView) view.findViewById(R.id.strongAuthRequiredText);
-            if (mIsAlpha) {
-                mStrongAuthRequiredTextView.setText(
-                        R.string.lockpassword_strong_auth_required_reason_restart_password);
-            } else {
-                mStrongAuthRequiredTextView.setText(
-                        R.string.lockpassword_strong_auth_required_reason_restart_pin);
-            }
-
             mImm = (InputMethodManager) getActivity().getSystemService(
                     Context.INPUT_METHOD_SERVICE);
 
@@ -186,13 +186,10 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private int getDefaultDetails() {
             boolean isProfile = Utils.isManagedProfile(
                     UserManager.get(getActivity()), mEffectiveUserId);
-            if (mIsAlpha) {
-                return isProfile ? R.string.lockpassword_confirm_your_password_generic_profile
-                        : R.string.lockpassword_confirm_your_password_generic;
-            } else {
-                return isProfile ? R.string.lockpassword_confirm_your_pin_generic_profile
-                        : R.string.lockpassword_confirm_your_pin_generic;
-            }
+            // Map boolean flags to an index by isStrongAuth << 2 + isProfile << 1 + isAlpha.
+            int index = ((mIsStrongAuthRequired ? 1 : 0) << 2) + ((isProfile ? 1 : 0 ) << 1)
+                    + (mIsAlpha ? 1 : 0);
+            return DETAIL_TEXTS[index];
         }
 
         private int getErrorMessage() {
