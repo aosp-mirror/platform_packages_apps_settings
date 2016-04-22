@@ -179,8 +179,6 @@ public class InstalledAppDetails extends AppInfoBase
     protected ProcStatsData mStatsManager;
     protected ProcStatsPackageEntry mStats;
 
-    private BroadcastReceiver mPermissionReceiver;
-
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
         // Try to prevent the user from bricking their phone
@@ -356,11 +354,6 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onDestroy() {
         TrafficStats.closeQuietly(mStatsSession);
-        if (mPermissionReceiver != null) {
-            getContext().unregisterReceiver(mPermissionReceiver);
-            mPermissionReceiver = null;
-        }
-
         super.onDestroy();
     }
 
@@ -564,10 +557,8 @@ public class InstalledAppDetails extends AppInfoBase
         // Update the preference summaries.
         Activity context = getActivity();
         mStoragePreference.setSummary(AppStorageSettings.getSummary(mAppEntry, context));
-        if (mPermissionReceiver != null) {
-            getContext().unregisterReceiver(mPermissionReceiver);
-        }
-        mPermissionReceiver = PermissionsSummaryHelper.getPermissionSummary(getContext(),
+
+        PermissionsSummaryHelper.getPermissionSummary(getContext(),
                 mPackageName, mPermissionCallback);
         mLaunchPreference.setSummary(AppUtils.getLaunchByDefaultSummary(mAppEntry, mUsbManager,
                 mPm, context));
@@ -1187,34 +1178,31 @@ public class InstalledAppDetails extends AppInfoBase
     private final PermissionsResultCallback mPermissionCallback
             = new PermissionsResultCallback() {
         @Override
-        public void onPermissionSummaryResult(int[] counts, CharSequence[] groupLabels) {
+        public void onPermissionSummaryResult(int standardGrantedPermissionCount,
+                int requestedPermissionCount, int additionalGrantedPermissionCount,
+                List<CharSequence> grantedGroupLabels) {
             if (getActivity() == null) {
                 return;
             }
-            mPermissionReceiver = null;
             final Resources res = getResources();
             CharSequence summary = null;
-            if (counts != null) {
-                int totalCount = counts[1];
-                int additionalCounts = counts[2];
 
-                if (totalCount == 0) {
+            if (requestedPermissionCount == 0) {
+                summary = res.getString(
+                        R.string.runtime_permissions_summary_no_permissions_requested);
+            } else {
+                final ArrayList<CharSequence> list = new ArrayList<>(grantedGroupLabels);
+                if (additionalGrantedPermissionCount > 0) {
+                    // N additional permissions.
+                    list.add(res.getQuantityString(
+                            R.plurals.runtime_permissions_additional_count,
+                            additionalGrantedPermissionCount, additionalGrantedPermissionCount));
+                }
+                if (list.size() == 0) {
                     summary = res.getString(
-                            R.string.runtime_permissions_summary_no_permissions_requested);
+                            R.string.runtime_permissions_summary_no_permissions_granted);
                 } else {
-                    final ArrayList<CharSequence> list = new ArrayList(Arrays.asList(groupLabels));
-                    if (additionalCounts > 0) {
-                        // N additional permissions.
-                        list.add(res.getQuantityString(
-                                R.plurals.runtime_permissions_additional_count,
-                                additionalCounts, additionalCounts));
-                    }
-                    if (list.size() == 0) {
-                        summary = res.getString(
-                                R.string.runtime_permissions_summary_no_permissions_granted);
-                    } else {
-                        summary = ListFormatter.getInstance().format(list);
-                    }
+                    summary = ListFormatter.getInstance().format(list);
                 }
             }
             mPermissionsPreference.setSummary(summary);
