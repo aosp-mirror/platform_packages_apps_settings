@@ -606,7 +606,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         @Override
         public Loader<List<PrinterInfo>> onCreateLoader(int id, Bundle args) {
             if (id == LOADER_ID_PRINTERS_LOADER) {
-                return new PrintersLoader(getActivity());
+                return new PrintersLoader(getContext());
             }
             return null;
         }
