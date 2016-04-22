@@ -20,7 +20,15 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.net.NetworkRequest;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,12 +46,34 @@ import com.android.settings.overlay.SupportFeatureProvider;
 public final class SupportFragment extends InstrumentedFragment implements View.OnClickListener,
         OnAccountsUpdateListener {
 
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final ConnectivityManager.NetworkCallback mNetworkCallback =
+            new ConnectivityManager.NetworkCallback() {
+
+                @Override
+                public void onCapabilitiesChanged(Network network,
+                        NetworkCapabilities capabilities) {
+                    postConnectivityChanged();
+                }
+
+                @Override
+                public void onAvailable(Network network) {
+                    postConnectivityChanged();
+                }
+
+                @Override
+                public void onLost(Network network) {
+                    postConnectivityChanged();
+                }
+            };
+
     private Activity mActivity;
     private View mContent;
     private RecyclerView mRecyclerView;
     private SupportItemAdapter mSupportItemAdapter;
     private AccountManager mAccountManager;
     private SupportFeatureProvider mSupportFeatureProvider;
+    private ConnectivityManager mConnectivityManager;
 
     @Override
     protected int getMetricsCategory() {
@@ -59,6 +89,8 @@ public final class SupportFragment extends InstrumentedFragment implements View.
                 FeatureFactory.getFactory(mActivity).getSupportFeatureProvider(mActivity);
         mSupportItemAdapter = new SupportItemAdapter(mActivity, mSupportFeatureProvider,
                 this /* itemClickListener */);
+        mConnectivityManager =
+                (ConnectivityManager) mActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
     @Override
@@ -78,6 +110,12 @@ public final class SupportFragment extends InstrumentedFragment implements View.
         // Monitor account change.
         mAccountManager.addOnAccountsUpdatedListener(
                 this /* listener */, null /* handler */, true /* updateImmediately */);
+        // Monitor connectivity
+        mConnectivityManager.registerNetworkCallback(
+                new NetworkRequest.Builder()
+                        .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                        .build(),
+                mNetworkCallback);
     }
 
     @Override
@@ -85,6 +123,8 @@ public final class SupportFragment extends InstrumentedFragment implements View.
         super.onPause();
         // Stop monitor account change.
         mAccountManager.removeOnAccountsUpdatedListener(this /* listener */);
+        // Stop monitor connectivity.
+        mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
     }
 
     @Override
@@ -98,5 +138,21 @@ public final class SupportFragment extends InstrumentedFragment implements View.
         final SupportItemAdapter.ViewHolder vh =
                 (SupportItemAdapter.ViewHolder) mRecyclerView.getChildViewHolder(v);
         mSupportItemAdapter.onItemClicked(vh.getAdapterPosition());
+    }
+
+    private void postConnectivityChanged() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (mSupportItemAdapter != null) {
+                    mSupportItemAdapter.setHasInternet(hasInternet());
+                }
+            }
+        });
+    }
+
+    private boolean hasInternet() {
+        final NetworkInfo activeNetwork = mConnectivityManager.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 }
