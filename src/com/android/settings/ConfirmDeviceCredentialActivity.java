@@ -22,12 +22,11 @@ import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Binder;
 import android.os.Bundle;
-import android.os.Process;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+
+import com.android.internal.widget.LockPatternUtils;
 
 /**
  * Launch this when you want to confirm the user is present by asking them to enter their
@@ -74,14 +73,29 @@ public class ConfirmDeviceCredentialActivity extends Activity {
                 Log.e(TAG, "Invalid intent extra", se);
             }
         }
+        final boolean isManagedProfile = Utils.isManagedProfile(UserManager.get(this), userId);
         // if the client app did not hand in a title and we are about to show the work challenge,
         // check whether there is a policy setting the organization name and use that as title
-        if ((title == null) && Utils.isManagedProfile(UserManager.get(this), userId)) {
+        if ((title == null) && isManagedProfile) {
             title = getTitleFromOrganizationName(userId);
         }
         ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-        if (!helper.launchConfirmationActivity(0 /* request code */, null /* title */, title,
-                details, false /* returnCredentials */, true /* isExternal */, userId)) {
+        final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
+        boolean launched;
+        // If the target is a managed user and user key not unlocked yet, we will force unlock
+        // tied profile so it will enable work mode and unlock managed profile, when personal
+        // challenge is unlocked.
+        if (isManagedProfile && isInternalActivity()
+                && !lockPatternUtils.isSeparateProfileChallengeEnabled(userId)) {
+            // We set the challenge as 0L, so it will force to unlock managed profile when it
+            // unlocks primary profile screen lock, by calling verifyTiedProfileChallenge()
+            launched = helper.launchConfirmationActivity(0 /* request code */, null /* title */,
+                    title, details, 0L, userId);
+        } else {
+            launched = helper.launchConfirmationActivity(0 /* request code */, null /* title */,
+                    title, details, false /* returnCredentials */, true /* isExternal */, userId);
+        }
+        if (!launched) {
             Log.d(TAG, "No pattern, password or PIN set.");
             setResult(Activity.RESULT_OK);
         }
