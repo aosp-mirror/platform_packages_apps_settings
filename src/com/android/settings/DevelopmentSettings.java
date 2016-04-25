@@ -2078,7 +2078,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
     };
 
-    static class SystemPropPoker extends AsyncTask<Void, Void, Void> {
+    public static class SystemPropPoker extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
             String[] services = ServiceManager.listServices();
