@@ -104,6 +104,7 @@ import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.qstile.DevelopmentTiles;
 import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search.Index;
 import com.android.settings.sim.SimSettings;
@@ -1067,12 +1068,14 @@ public class SettingsActivity extends SettingsDrawerActivity
                 pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin, pm);
 
         final boolean showDev = mDevelopmentPreferences.getBoolean(
-                DevelopmentSettings.PREF_SHOW,
-                android.os.Build.TYPE.equals("eng"));
+                    DevelopmentSettings.PREF_SHOW, android.os.Build.TYPE.equals("eng"))
+                && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
         setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsActivity.class.getName()),
-                showDev && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES),
-                isAdmin, pm);
+                showDev, isAdmin, pm);
+
+        // Reveal development-only quick settings tiles
+        DevelopmentTiles.setTilesEnabled(this, showDev);
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
             // When on restricted users, disable all extra categories (but only the settings ones).
