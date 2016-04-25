@@ -2915,5 +2915,27 @@
             </intent-filter>
        </receiver>
 
+        <!-- Quick Settings tiles for Developer Options -->
+        <service
+                android:name=".qstile.DevelopmentTiles$ShowLayout"
+                android:label="@string/debug_layout"
+                android:icon="@drawable/tile_icon_show_layout"
+                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+                android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+                android:name=".qstile.DevelopmentTiles$GPUProfiling"
+                android:label="@string/track_frame_time"
+                android:icon="@drawable/tile_icon_graphics"
+                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+                android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
