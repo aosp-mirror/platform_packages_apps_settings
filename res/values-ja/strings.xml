@@ -36,34 +36,28 @@
     <string name="header_category_personal" msgid="3310195187905720823">"ユーザー設定"</string>
     <string name="header_category_access" msgid="7580499097416970962">"アクセス"</string>
     <string name="header_category_system" msgid="2816866961183068977">"システム"</string>
-    <string name="turn_on_radio" msgid="8706561489788373676">"無線通信をON"</string>
-    <string name="turn_off_radio" msgid="1820294552893884115">"無線通信をOFF"</string>
-    <string name="sms_over_ims_on" msgid="5085290395865632925">"SMS over IMSをONにする"</string>
-    <string name="sms_over_ims_off" msgid="8354792045992793959">"SMS over IMSをOFFにする"</string>
-    <string name="ims_reg_required_on" msgid="3885152087309614653">"IMS登録をONにする必要があります"</string>
-    <string name="ims_reg_required_off" msgid="1720570343422743943">"IMS登録をOFFにする必要があります"</string>
-    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"VoLTEプロビジョンフラグをONにする"</string>
-    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"VoLTEプロビジョンフラグをOFFにする"</string>
-    <string name="lte_ram_dump_on" msgid="8568568019520172177">"LTE RAMダンプをオンにする"</string>
-    <string name="lte_ram_dump_off" msgid="2514507918652378283">"LTE RAMダンプをオフにする"</string>
-    <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"SIMのアドレス帳を表示"</string>
+    <string name="radio_info_data_connection_enable" msgid="8656750679353982712">"データ接続を有効にする"</string>
+    <string name="radio_info_data_connection_disable" msgid="8541302390883231216">"データ接続を無効にする"</string>
+    <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE プロビジョニング"</string>
+    <string name="radio_info_radio_power" msgid="1208229437948820417">"セル無線電力"</string>
+    <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM のアドレス帳を表示"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"発信番号制限を表示"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"サービス電話番号を表示"</string>
-    <string name="radioInfo_menu_getPDP" msgid="560610293888406317">"PDPリストを取得"</string>
-    <string name="radioInfo_service_in" msgid="1915416319177520020">"使用中"</string>
-    <string name="radioInfo_service_out" msgid="5238736759641916278">"休止中または使用不可"</string>
-    <string name="radioInfo_service_emergency" msgid="2485604591272668370">"緊急通報のみ"</string>
-    <string name="radioInfo_service_off" msgid="1434084741785525415">"無線通信をOFF"</string>
+    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"PDP リストを取得"</string>
+    <string name="radioInfo_service_in" msgid="1697703164394784618">"圏内"</string>
+    <string name="radioInfo_service_out" msgid="7999094221728929681">"圏外"</string>
+    <string name="radioInfo_service_emergency" msgid="6274434235469661525">"緊急通報のみ"</string>
+    <string name="radioInfo_service_off" msgid="7536423790014501173">"無線通信 OFF"</string>
     <string name="radioInfo_roaming_in" msgid="9045363884600341051">"ローミング"</string>
-    <string name="radioInfo_roaming_not" msgid="2851853244069662307">"ローミングなし"</string>
+    <string name="radioInfo_roaming_not" msgid="4849214885629672819">"ローミングなし"</string>
     <string name="radioInfo_phone_idle" msgid="7489244938838742820">"非アクティブ"</string>
     <string name="radioInfo_phone_ringing" msgid="4883724645684297895">"着信中"</string>
-    <string name="radioInfo_phone_offhook" msgid="4174402846862780998">"通話中"</string>
+    <string name="radioInfo_phone_offhook" msgid="5873835692449118954">"通話中"</string>
     <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"切断"</string>
     <string name="radioInfo_data_connecting" msgid="8404571440697917823">"接続中"</string>
     <string name="radioInfo_data_connected" msgid="7074301157399238697">"接続"</string>
     <string name="radioInfo_data_suspended" msgid="5315325487890334196">"強制停止"</string>
-    <string name="radioInfo_unknown" msgid="737385314432468266">"不明"</string>
+    <string name="radioInfo_unknown" msgid="1476509178755955088">"不明"</string>
     <string name="radioInfo_display_packets" msgid="8654359809877290639">"pkts"</string>
     <string name="radioInfo_display_bytes" msgid="4018206969492931883">"バイト"</string>
     <string name="radioInfo_display_dbm" msgid="3621221793699882781">"dBm"</string>
@@ -178,41 +172,39 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"入力したポートは無効です。"</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTPプロキシはブラウザで使用されていますが、他のアプリでは使用できません。"</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
-    <string name="radio_info_signal_location_label" msgid="16475158265551708">"ロケーション:"</string>
-    <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"近くのCID:"</string>
-    <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"セル情報:"</string>
-    <string name="radio_info_dcrtinfo_label" msgid="6802395441317448068">"DcRtInfo:"</string>
-    <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"データの試行:"</string>
-    <string name="radio_info_gprs_service_label" msgid="6699616076706524202">"データ テクノロジー:"</string>
+    <string name="radio_info_signal_location_label" msgid="3242990404410530456">"セルの位置情報（サポート終了）:"</string>
+    <string name="radio_info_neighboring_location_label" msgid="5766020323342985397">"隣接セル情報（サポート終了）:"</string>
+    <string name="radio_info_cell_info_refresh_rate" msgid="7062777594049622128">"セル情報の更新間隔:"</string>
+    <string name="radio_info_cellinfo_label" msgid="6213223844927623098">"すべてのセルの測定情報:"</string>
+    <string name="radio_info_dcrtinfo_label" msgid="4062076024399431876">"データ接続のリアルタイム情報:"</string>
+    <string name="radio_info_gprs_service_label" msgid="4209624131644060517">"データサービス:"</string>
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"ローミング:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
-    <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"通話のリダイレクト:"</string>
-    <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"ブート後のPPPリセット回数:"</string>
-    <string name="radio_info_gsm_disconnects_label" msgid="1683069665736339820">"GSM切断:"</string>
-    <string name="radio_info_current_network_label" msgid="3256402602440102610">"現在のネットワーク:"</string>
-    <string name="radio_info_data_successes_label" msgid="4417894113689054945">"データ成功:"</string>
-    <string name="radio_info_ppp_received_label" msgid="3345184342444878849">"PPP受信:"</string>
-    <string name="radio_info_gsm_service_label" msgid="8595694240281347716">"音声テクノロジー:"</string>
-    <string name="radio_info_signal_strength_label" msgid="1931937920896925766">"電波強度:"</string>
-    <string name="radio_info_call_status_label" msgid="4896238900685510883">"通話状況:"</string>
-    <string name="radio_info_ppp_sent_label" msgid="5009102250704375687">"PPP送信:"</string>
-    <string name="radio_info_radio_resets_label" msgid="9211343458143291617">"無線通信のリセット:"</string>
-    <string name="radio_info_message_waiting_label" msgid="6981842420058672207">"メッセージ待機中:"</string>
-    <string name="radio_info_phone_number_label" msgid="7192944627907412169">"電話番号:"</string>
-    <string name="radio_info_band_mode_label" msgid="441469694142042022">"無線バンドを選択"</string>
-    <string name="radio_info_network_type_label" msgid="3706382548257257987">"ネットワークの種類"</string>
-    <string name="radio_info_set_perferred_label" msgid="9039200405863503267">"優先ネットワークを設定"</string>
+    <string name="radio_info_call_redirect_label" msgid="2743797189722106231">"通話のリダイレクト:"</string>
+    <string name="radio_info_ppp_resets_label" msgid="3587319503902576102">"起動後の PPP リセット回数:"</string>
+    <string name="radio_info_current_network_label" msgid="9151285540639134945">"現在のネットワーク:"</string>
+    <string name="radio_info_ppp_received_label" msgid="363579470428151850">"受信データ:"</string>
+    <string name="radio_info_gsm_service_label" msgid="1370863866816125489">"音声サービス:"</string>
+    <string name="radio_info_signal_strength_label" msgid="5155734002519307416">"電波強度:"</string>
+    <string name="radio_info_call_status_label" msgid="2611065018172747413">"音声通話のステータス:"</string>
+    <string name="radio_info_ppp_sent_label" msgid="7748668735880404586">"送信データ:"</string>
+    <string name="radio_info_message_waiting_label" msgid="1037302619943328273">"メッセージ待機中:"</string>
+    <string name="radio_info_phone_number_label" msgid="7942153178953255231">"電話番号:"</string>
+    <string name="radio_info_band_mode_label" msgid="8730871744887454509">"無線バンドを選択"</string>
+    <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"音声ネットワークの種類:"</string>
+    <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"データ ネットワークの種類:"</string>
+    <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"優先ネットワークの種類を設定:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"ホスト名（www.google.com）の ping（IPv4）:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"ホスト名（www.google.com）の ping（IPv6）:"</string>
-    <string name="radio_info_http_client_test" msgid="5733604021077701555">"HTTPクライアントテスト:"</string>
-    <string name="ping_test_label" msgid="7255376471490860631">"pingテストの実行"</string>
+    <string name="radio_info_http_client_test" msgid="2382286093023138339">"HTTP クライアント テスト:"</string>
+    <string name="ping_test_label" msgid="579228584343892613">"ping テストの実行"</string>
     <string name="radio_info_smsc_label" msgid="6399460520126501354">"SMSC:"</string>
     <string name="radio_info_smsc_update_label" msgid="7258686760358791539">"更新"</string>
     <string name="radio_info_smsc_refresh_label" msgid="6902302130315125102">"更新"</string>
-    <string name="radio_info_toggle_dns_check_label" msgid="8292252930563286858">"DNSチェックを切り替え"</string>
+    <string name="radio_info_toggle_dns_check_label" msgid="6625185764803245075">"DNS チェックを切り替え"</string>
     <string name="oem_radio_info_label" msgid="6163141792477958941">"OEM固有の情報/設定"</string>
-    <string name="band_mode_title" msgid="954174198903776205">"GSM/UMTSバンドの設定"</string>
-    <string name="band_mode_loading" msgid="548764766363847336">"バンドリストを読み込み中..."</string>
+    <string name="band_mode_title" msgid="4071411679019296568">"無線バンドモードの設定"</string>
+    <string name="band_mode_loading" msgid="3555063585133586152">"バンドリストを読み込んでいます…"</string>
     <string name="band_mode_set" msgid="5730560180249458484">"設定"</string>
     <string name="band_mode_failed" msgid="1495968863884716379">"失敗"</string>
     <string name="band_mode_succeeded" msgid="2701016190055887575">"成功"</string>
@@ -247,6 +239,16 @@
     <string name="dlg_remove_locales_error_title" msgid="2653242337224911425">"すべての言語を削除することはできません"</string>
     <string name="dlg_remove_locales_error_message" msgid="6697381512654262821">"優先する言語を設定しておく必要があります"</string>
     <string name="locale_not_translated" msgid="516862628177166755">"いくつかのアプリでは利用できないことがあります"</string>
+    <!-- no translation found for action_drag_label_move_up (9052210023727612540) -->
+    <skip />
+    <!-- no translation found for action_drag_label_move_down (7448713844582912157) -->
+    <skip />
+    <!-- no translation found for action_drag_label_move_top (557081389352288310) -->
+    <skip />
+    <!-- no translation found for action_drag_label_move_bottom (2468642142414126482) -->
+    <skip />
+    <!-- no translation found for action_drag_label_remove (2861038147166966206) -->
+    <skip />
     <string name="activity_picker_label" msgid="6295660302548177109">"操作の選択"</string>
     <string name="device_info_label" msgid="6551553813651711205">"端末情報"</string>
     <string name="display_label" msgid="8074070940506840792">"画面"</string>
@@ -340,6 +342,10 @@
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"指紋認証センサーに触れるだけで、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます。こうした操作は、登録したどの指紋でも行えるため、誰の指紋を登録するかについては十分にご注意ください。\n\n注: 指紋は複雑なパターンや PIN よりも安全面で劣る可能性があります。"<annotation id="url">"詳細"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"キャンセル"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"次へ"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_cancel_setup (5021369420474432665) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_continue_setup (8386444182056861429) -->
+    <skip />
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"端末保護機能が有効になりません。このタブレットの紛失、盗難、データ消去時に、他人に使用されるのを阻止することはできません。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"端末保護機能が有効になりません。この端末の紛失、盗難、データ消去時に、他人に使用されるのを阻止することはできません。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"端末保護機能が有効になりません。このスマートフォンの紛失、盗難、データ消去時に、他人に使用されるのを阻止することはできません。"</string>
@@ -420,7 +426,9 @@
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"指紋でロックを解除する"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"画面ロックを選択"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"仕事用ロックの選択"</string>
-    <string name="setup_lock_settings_picker_title" msgid="1572244299605153324">"スマートフォンの保護"</string>
+    <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"タブレットの保護"</string>
+    <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"端末の保護"</string>
+    <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"スマートフォンの保護"</string>
     <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"指紋は、複雑なパターン、PIN、パスワードよりも安全面で劣る可能性があります。セキュリティを強化するには、予備の画面ロック方式を設定してください。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"このタブレットが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"この端末が他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
@@ -906,14 +914,15 @@
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"壁紙の変更"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"画面のカスタマイズ"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"壁紙タイプの選択"</string>
-    <string name="screensaver_settings_title" msgid="3349790120327233241">"スクリーンセーバー"</string>
+    <string name="screensaver_settings_title" msgid="1770575686476851778">"スクリーン セーバー"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"ホルダー装着時またはスリープ/充電時"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"いずれか"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"充電時"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"ホルダー装着時"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"OFF"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"スマートフォンのホルダー装着時やスリープ時の動作を管理するにはスクリーンセーバーをONにします。"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8352267826043957746">"起動のタイミング"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"スマートフォンのホルダー装着時やスリープ時の動作を管理するには、スクリーン セーバーを ON にします。"</string>
+    <!-- no translation found for screensaver_settings_when_to_dream (8644479926302707286) -->
+    <skip />
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"今すぐ起動"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"設定"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"明るさを自動調整"</string>
@@ -1203,6 +1212,8 @@
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetoothテザリング"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"テザリング"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"テザリングとポータブルアクセスポイント"</string>
+    <!-- no translation found for tether_settings_disabled_on_data_saver (1576908608463904152) -->
+    <skip />
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USBテザリング"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB接続済み、テザリングするには選択"</string>
@@ -1315,6 +1326,18 @@
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"続行するには仕事用のパターンを使用してください"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"続行するには仕事用の PIN を入力してください"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"続行するには仕事用のパスワードを入力してください"</string>
+    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pattern (7543530882062244319) -->
+    <skip />
+    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pin (3614677070985172595) -->
+    <skip />
+    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_password (2519605628578997483) -->
+    <skip />
+    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pattern (2719273746602957796) -->
+    <skip />
+    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pin (189125569185446633) -->
+    <skip />
+    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_password (7442334007017777563) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PINが正しくありません"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"パスワードが正しくありません"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"パターンが正しくありません"</string>
@@ -1480,6 +1503,9 @@
     <string name="app_special_disable_dlg_text" msgid="1007112763234313018">"このアプリを無効にすると、他のアプリが意図されたとおりに動作しなくなる可能性があります。データも削除されます。"</string>
     <string name="app_disable_notifications_dlg_title" msgid="7669264654851761857">"通知をOFFにしますか？"</string>
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"このアプリの通知をOFFにすると、重要なアラートや更新を見逃すおそれがあります。"</string>
+    <string name="app_install_details_group_title" msgid="7084623031296083574">"ストア"</string>
+    <string name="app_install_details_title" msgid="6905279702654975207">"アプリの詳細"</string>
+    <string name="app_install_details_summary" msgid="6464796332049327547">"<xliff:g id="APP_STORE">%1$s</xliff:g> からインストールしたアプリ"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"アプリの操作状況"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"実行中"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"（未使用）"</string>
@@ -1548,11 +1574,13 @@
     <string name="keyboard_and_input_methods_category" msgid="212319666432360385">"キーボードと入力方法"</string>
     <string name="virtual_keyboard_category" msgid="1012830752318677119">"仮想キーボード"</string>
     <string name="available_virtual_keyboard_category" msgid="7645766574969139819">"利用可能な仮想キーボード"</string>
-    <string name="add_virtual_keyboard" msgid="5783399159348480135">"仮想キーボードの追加または編集"</string>
+    <string name="add_virtual_keyboard" msgid="3302152381456516928">"キーボードを管理"</string>
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"キーボード アシスタント"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"物理キーボード"</string>
     <string name="show_ime" msgid="2658582193437188227">"仮想キーボードの表示"</string>
     <string name="show_ime_summary" msgid="8164993045923240698">"物理キーボードが有効になっていても画面に表示されます"</string>
+    <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"キーボード ショートカット ヘルパー"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"使用可能なショートカットを表示"</string>
     <string name="physical_device_title" msgid="79889057252418427">"<xliff:g id="INPUT_METHOD_SUBTYPE">%1$s</xliff:g> - <xliff:g id="INPUT_METHOD_EDITOR">%2$s</xliff:g>"</string>
     <string name="pointer_settings_category" msgid="8183819795164034286">"マウス/トラックパッド"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"ポインタの速度"</string>
@@ -2201,7 +2229,8 @@
     <string name="vpn_done" msgid="8678655203910995914">"終了"</string>
     <string name="vpn_save" msgid="4233484051644764510">"保存"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"接続"</string>
-    <string name="vpn_continue" msgid="846894478725673098">"続行"</string>
+    <!-- no translation found for vpn_replace (5442836256121957861) -->
+    <skip />
     <string name="vpn_edit" msgid="8647191407179996943">"VPNプロファイルの編集"</string>
     <string name="vpn_forget" msgid="3684651372749415446">"削除"</string>
     <string name="vpn_connect_to" msgid="5965299358485793260">"<xliff:g id="PROFILE">%s</xliff:g>に接続"</string>
@@ -2210,9 +2239,12 @@
     <string name="vpn_version" msgid="1939804054179766249">"バージョン<xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="2232239391189465752">"VPN を削除"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"既存の VPN を置き換えますか？"</string>
-    <string name="vpn_replace_always_on_vpn_message" msgid="4766130211217825628">"このプロファイルには既に VPN が関連付けられています。別の VPN を関連付けた場合、既存の VPN は置き換えられます。"</string>
-    <string name="vpn_cant_connect_notification_title" msgid="820999437026146960">"「<xliff:g id="VPN_NAME">%1$s</xliff:g>」に接続できません"</string>
-    <string name="vpn_tap_for_vpn_settings" msgid="582017057346927799">"タップして VPN を設定"</string>
+    <!-- no translation found for vpn_replace_always_on_vpn_message (4764679857158814028) -->
+    <skip />
+    <!-- no translation found for vpn_cant_connect_title (4517706987875907511) -->
+    <skip />
+    <!-- no translation found for vpn_cant_connect_message (2593197919352621279) -->
+    <skip />
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"VPNプロファイルの追加"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"プロファイルを編集"</string>
@@ -2251,10 +2283,19 @@
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Enforcing"</string>
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"ネットワークが監視されている可能性があります"</string>
     <string name="done_button" msgid="1991471253042622230">"完了"</string>
-    <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"ネットワーク監視"</string>
-    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"この端末は<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>によって管理されています。\n\n\n管理者はあなたのネットワークアクティビティ（メール、アプリ、保護されたウェブサイトなど）を監視できます。\n\n詳しくは管理者にお問い合わせください。"</string>
+    <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="7145092748045794650">
+      <item quantity="other">証明書の信頼または削除</item>
+      <item quantity="one">証明書の信頼または削除</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> が、あなたの仕事用プロファイルに認証局をインストールしました。これにより、仕事のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が監視される場合があります。これらの証明書を信頼するか削除するかを選択できます。\n\nこれらの証明書の詳細についてはドメインの管理者までお問い合わせください。</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> が、あなたの仕事用プロファイルに認証局をインストールしました。これにより、仕事のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が監視される場合があります。この証明書を信頼するか削除するかを選択できます。\n\nこの証明書の詳細についてはドメインの管理者までお問い合わせください。</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"第三者があなたのネットワークアクティビティ（メール、アプリ、保護されたウェブサイトなど）を監視できます。\n\nこれは、信頼できる認証情報が端末にインストールされているためです。"</string>
-    <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"信頼できる認証情報を確認"</string>
+    <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
+      <item quantity="other">証明書を確認</item>
+      <item quantity="one">証明書を確認</item>
+    </plurals>
     <string name="user_settings_title" msgid="6151874007858148344">"ユーザー"</string>
     <string name="user_list_title" msgid="7937158411137563543">"ユーザーとプロファイル"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"ユーザーまたはプロファイルを追加"</string>
@@ -2533,12 +2574,13 @@
     <string name="app_notifications_title" msgid="139788604658984593">"通知"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"重要度"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"未設定"</string>
-    <string name="notification_importance_blocked" msgid="4764559498517003405">"ブロック: 今後はこの通知を表示しない"</string>
-    <string name="notification_importance_min" msgid="2370444628448134377">"最低: 通知リストの末尾にマナーモードで表示する"</string>
-    <string name="notification_importance_low" msgid="979932751695283877">"低: この通知をマナーモードで表示する"</string>
-    <string name="notification_importance_default" msgid="8789180840561778039">"標準: 通知を音声で知らせる"</string>
-    <string name="notification_importance_high" msgid="5044607814670313040">"高: 画面に数秒間表示し、音も許可する"</string>
-    <string name="notification_importance_max" msgid="6036245535555486319">"緊急: 通知リストの先頭に表示し、画面に数秒間表示し、音声でも知らせる"</string>
+    <string name="notification_importance_blocked" msgid="4348392266695847526">"このアプリからの通知を表示しない"</string>
+    <string name="notification_importance_min" msgid="1859001310034196751">"全画面表示、ポップアップ、音、バイブレーションを使用しない。通知リストの一番下に表示する。ロック画面やステータスバーには表示しない"</string>
+    <string name="notification_importance_low" msgid="1466326143251705794">"全画面表示、ポップアップ、音、バイブレーションを使用しない"</string>
+    <string name="notification_importance_default" msgid="2857618184137114962">"全画面表示やポップアップを使用しない"</string>
+    <string name="notification_importance_high" msgid="495354850199578732">"常にポップアップし、全画面表示はしない"</string>
+    <string name="notification_importance_max" msgid="7538045535631915413">"常にポップアップし、全画面表示も許可する。通知リストの一番上に表示する"</string>
+    <string name="notification_importance_unspecified" msgid="6172151762388245221">"アプリが通知ごとに重要度を識別する"</string>
     <string name="importance_reset" msgid="7458420788555607007">"リセット"</string>
     <string name="show_silently" msgid="2222875799232222056">"マナーモードで表示"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"音やバイブレーションで知らせず、現在の画面に通知を数秒間表示することもしません。"</string>
@@ -2550,11 +2592,17 @@
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"通知へのアクセスをリクエストしたインストール済みアプリはありません。"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g>での通知へのアクセスを許可しますか？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="548925084229440829">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>はすべての通知を読み取ることができます。通知には、連絡先名などの個人情報やユーザーに送信されたメッセージの本文も含まれます。また、通知を非表示にしたり、通知内の操作ボタンをトリガーしたりすることもできます。"</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> はすべての通知を読み取ることができます。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を非表示にしたり、通知内のボタン操作を実行したりすることもできます。\n\nこれにより、アプリが通知の非表示設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
+    <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> の通知アクセスを OFF にすると、[通知を非表示] のアクセスも OFF になります。"</string>
+    <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"OFF にする"</string>
+    <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"キャンセル"</string>
     <string name="vr_listeners_title" msgid="1318901577754715777">"VR ヘルパー サービス"</string>
     <string name="no_vr_listeners" msgid="2689382881717507390">"VR ヘルパー サービスとして実行されるようにリクエストしたインストール済みアプリはありません。"</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"VR サービスから <xliff:g id="SERVICE">%1$s</xliff:g> へのアクセスの許可"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> は、アプリをバーチャル リアリティ モードで使用している場合に実行できるようになります。"</string>
+    <string name="display_vr_pref_title" msgid="7049857952347953979">"端末が VR モードの場合"</string>
+    <string name="display_vr_pref_low_persistence" msgid="6221441245293606681">"手ぶれ補正機能を使用"</string>
+    <string name="display_vr_pref_off" msgid="1244880066079174840">"何もしない"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"[通知を非表示]へのアクセス"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"[通知を非表示]へのアクセスをリクエストしたインストール済みアプリはありません"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"アプリを読み込んでいます..."</string>
@@ -2713,6 +2761,7 @@
     <string name="notifications_hidden" msgid="3619610536038757468">"ロック画面に表示しない"</string>
     <string name="notifications_priority" msgid="1066342037602085552">"[通知を非表示] をオーバーライド"</string>
     <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
+    <string name="notification_summary_level" msgid="2726571692704140826">"レベル %d"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>件の権限を付与</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g>件の権限を付与</item>
@@ -2855,6 +2904,7 @@
     <string name="no_data_usage" msgid="9131454024293628063">"データ通信の使用はありません"</string>
     <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g>の[通知を非表示]へのアクセスを許可しますか？"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"アプリは[通知を非表示]のON/OFFを切り替えたり、関連する設定を変更したりできるようになります。"</string>
+    <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"通知アクセスが ON になっているため ON のままにしておく必要があります"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"「<xliff:g id="APP">%1$s</xliff:g>」の「通知を非表示」に対する権限を取り消しますか？"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"このアプリで作成したすべての「通知を非表示」ルールは削除されます。"</string>
     <string name="ignore_optimizations_on" msgid="6915689518016285116">"最適化しない"</string>
@@ -2908,14 +2958,14 @@
     <string name="screen_zoom_conversation_message_2" msgid="6935424214137738647">"お茶でも飲みながら最近あった話などしませんか？"</string>
     <string name="screen_zoom_conversation_message_3" msgid="5218221201861387402">"いいですね。そう遠くないところにいい店があるんですよ。"</string>
     <string name="screen_zoom_conversation_message_4" msgid="5564676794767555447">"それはいい。"</string>
-    <string name="screen_zoom_conversation_timestamp_1" msgid="7453710416319650556">"火 6:00PM"</string>
-    <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"火 6:01PM"</string>
-    <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"火 6:02PM"</string>
-    <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"火 6:03PM"</string>
+    <string name="screen_zoom_conversation_timestamp_1" msgid="7453710416319650556">"火 午後6:00"</string>
+    <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"火 午後6:01"</string>
+    <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"火 午後6:02"</string>
+    <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"火 午後6:03"</string>
     <string name="see_all" msgid="8883901630052886984">"すべて表示"</string>
     <string name="see_less" msgid="1250265310929558370">"一部を表示"</string>
     <string name="disconnected" msgid="5787956818111197212">"切断されています"</string>
-    <string name="data_usage_summary_format" msgid="7507047900192160585">"データの <xliff:g id="AMOUNT">%1$s</xliff:g> を使用しています"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> のデータを使用しています"</string>
     <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 個のアプリが送信をブロックされています</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個のアプリが送信をブロックされています</item>
@@ -2975,7 +3025,7 @@
     <string name="billing_cycle_summary" msgid="9009106526129293752">"月単位の請求期間の開始日は、毎月 <xliff:g id="ID_1">%1$s</xliff:g>です"</string>
     <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"<xliff:g id="ID_1">%1$s</xliff:g>から月単位"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"ネットワーク制限"</string>
-    <string name="operator_warning" msgid="7206980278353372811">"端末で記録されるデータ使用量と携帯通信会社のデータ使用量は異なる場合があります。"</string>
+    <string name="operator_warning" msgid="1862988028996859195">"端末で記録されるデータ使用量と携帯通信会社のデータ使用量は異なる場合があります"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> 使用"</string>
     <string name="data_warning" msgid="209133958008062117">"データ警告"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"データ上限の設定"</string>
@@ -2986,8 +3036,9 @@
       <item quantity="other">データセーバーが ON のときのデータ無制限使用を <xliff:g id="COUNT">%1$d</xliff:g> 個のアプリに許可しました</item>
       <item quantity="one">データセーバーが ON のときのデータ無制限使用を 1 個のアプリに許可しました</item>
     </plurals>
-    <string name="data_saver_title" msgid="8034286939200289826">"データセーバー"</string>
+    <string name="data_saver_title" msgid="398458827917495765">"データセーバー"</string>
     <string name="unrestricted_data_saver" msgid="7019858887510062789">"データへの無制限アクセス"</string>
+    <string name="restrict_background_blacklisted" msgid="3995443391711013068">"バックグラウンド データは無効になっています"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"ON"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"OFF"</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"データの無制限使用"</string>
@@ -3035,6 +3086,8 @@
     <string name="notification_log_details_vibrate" msgid="6890065466625335940">"バイブレーション"</string>
     <string name="notification_log_details_default" msgid="2345249399796730861">"デフォルト"</string>
     <string name="notification_log_details_none" msgid="184131801230614059">"なし"</string>
+    <string name="notification_log_details_ranking_null" msgid="244660392058720919">"ランキング オブジェクトがありません。"</string>
+    <string name="notification_log_details_ranking_none" msgid="599607025882587844">"ランキング オブジェクトにこのキーが含まれていません。"</string>
     <string name="special_access" msgid="8275242424094109976">"特別なアクセス"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"ファイル暗号化のためにユーザーのデータを消去して変換してもよろしいですか？"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"消去して変換"</string>
@@ -3045,10 +3098,9 @@
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"通知内容の表示と非表示を切り替える"</string>
     <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"最小幅"</string>
-    <!-- no translation found for premium_sms_none (8268105565738040566) -->
-    <skip />
-    <!-- no translation found for premium_sms_warning (9086859595338944882) -->
-    <skip />
-    <!-- no translation found for premium_sms_access (4660047004791638305) -->
-    <skip />
+    <string name="premium_sms_none" msgid="8268105565738040566">"プレミアム SMS へのアクセスをリクエストしたインストール済みアプリはありません"</string>
+    <string name="premium_sms_warning" msgid="9086859595338944882">"プレミアム SMS で料金が発生した場合は、携帯通信会社の請求に加算されます。アプリで権限を有効にすると、そのアプリを使用してプレミアム SMS を送信できるようになります。"</string>
+    <string name="premium_sms_access" msgid="4660047004791638305">"プレミアム SMS へのアクセス"</string>
+    <string name="bluetooth_disabled" msgid="1558295505487648234">"無効"</string>
+    <string name="demo_mode" msgid="2655748420527206870">"デモモード"</string>
 </resources>
