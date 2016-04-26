@@ -63,4 +63,13 @@ public interface SupportFeatureProvider {
      */
     Intent getSupportIntent(Context context, Account account, @SupportType int type);
 
+    /**
+     * Returns an {@link Intent} that opens help and allow user get help on sign in.
+     */
+    Intent getSignInHelpIntent(Context context);
+
+    /**
+     * Returns an intent that will start the add account UI.
+     */
+    Intent getAccountLoginIntent();
 }
