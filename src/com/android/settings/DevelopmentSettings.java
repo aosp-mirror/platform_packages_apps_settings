@@ -205,6 +205,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final String OTA_DISABLE_AUTOMATIC_UPDATE_KEY = "ota_disable_automatic_update";
 
+    private static final String LOCATION_DOGFOOD_TOOLS_KEY = "location_dogfood_tools";
+
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
 
@@ -247,6 +249,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private String mMockLocationApp;
     private Preference mMockLocationAppPref;
+    private Preference mLocationDogfoodTools;
 
     private SwitchPreference mWaitForDebugger;
     private SwitchPreference mVerifyAppsOverUsb;
@@ -393,6 +396,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mMockLocationAppPref = findPreference(MOCK_LOCATION_APP_KEY);
         mAllPrefs.add(mMockLocationAppPref);
+
+        mLocationDogfoodTools = findPreference(LOCATION_DOGFOOD_TOOLS_KEY);
+        mAllPrefs.add(mLocationDogfoodTools);
 
         mVerifyAppsOverUsb = findAndInitSwitchPref(VERIFY_APPS_OVER_USB_KEY);
         if (!showVerifierSetting()) {
