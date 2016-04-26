@@ -197,6 +197,8 @@ class LocaleDragAndDropAdapter
         notifyItemChanged(fromPosition); // to update the numbers
         notifyItemChanged(toPosition);
         notifyItemMoved(fromPosition, toPosition);
+        // We don't call doTheUpdate() here because this method is called for each item swap.
+        // So if we drag something across several positions it will be called several times.
     }
 
     void setRemoveMode(boolean removeMode) {
@@ -222,7 +224,6 @@ class LocaleDragAndDropAdapter
         }
         mFeedItemList.remove(position);
         notifyDataSetChanged();
-        doTheUpdate();
     }
 
     void removeChecked() {
