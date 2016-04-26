@@ -80,21 +80,23 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
         mSilent = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_SILENT);
 
-        mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
+        if (mPkgInfo != null) {
+            mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
 
-        NotificationManager.Policy policy =
-                NotificationManager.from(mContext).getNotificationPolicy();
-        mDndVisualEffectsSuppressed = policy == null ? false : policy.suppressedVisualEffects != 0;
+            NotificationManager.Policy policy =
+                    NotificationManager.from(mContext).getNotificationPolicy();
+            mDndVisualEffectsSuppressed = policy == null ? false : policy.suppressedVisualEffects != 0;
 
-        // load settings intent
-        ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
-        rows.put(mAppRow.pkg, mAppRow);
-        collectConfigActivities(rows);
+            // load settings intent
+            ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
+            rows.put(mAppRow.pkg, mAppRow);
+            collectConfigActivities(rows);
 
-        setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance, mAppRow.banned);
-        setupPriorityPref(mAppRow.appBypassDnd);
-        setupVisOverridePref(mAppRow.appVisOverride);
-        updateDependents(mAppRow.appImportance);
+            setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance, mAppRow.banned);
+            setupPriorityPref(mAppRow.appBypassDnd);
+            setupVisOverridePref(mAppRow.appVisOverride);
+            updateDependents(mAppRow.appImportance);
+        }
     }
 
     @Override
