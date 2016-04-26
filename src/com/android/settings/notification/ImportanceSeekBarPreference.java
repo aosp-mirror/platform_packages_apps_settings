@@ -124,12 +124,13 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
     private void applyAutoUi(ImageView autoButton) {
         mSeekBar.setEnabled(!mAutoOn);
 
-        final ColorStateList tint = mAutoOn ? mInactiveSliderTint : mActiveSliderTint;
+        final ColorStateList sliderTint = mAutoOn ? mInactiveSliderTint : mActiveSliderTint;
+        final ColorStateList starTint = mAutoOn ?  mActiveSliderTint : mInactiveSliderTint;
         Drawable icon = autoButton.getDrawable().mutate();
-        icon.setTintList(tint);
+        icon.setTintList(starTint);
         autoButton.setImageDrawable(icon);
-        mSeekBar.setProgressTintList(tint);
-        mSeekBar.setThumbTintList(tint);
+        mSeekBar.setProgressTintList(sliderTint);
+        mSeekBar.setThumbTintList(sliderTint);
 
         if (mAutoOn) {
             mSummary = getProgressSummary(
