@@ -71,6 +71,8 @@ public class ConditionAdapterUtils {
         ImageView expand = (ImageView) view.itemView.findViewById(R.id.expand_indicator);
         expand.setTag(condition);
         expand.setImageResource(isExpanded ? R.drawable.ic_expand_less : R.drawable.ic_expand_more);
+        expand.setContentDescription(expand.getContext().getString(isExpanded
+                ? R.string.condition_expand_hide : R.string.condition_expand_show));
         expand.setOnClickListener(onExpandListener);
 
         View detailGroup = view.itemView.findViewById(R.id.detail_group);
