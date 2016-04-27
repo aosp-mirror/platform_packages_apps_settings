@@ -22,17 +22,10 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.android.settings.R;
-import com.android.setupwizardlib.util.SystemBarHelper;
 
 public class SetupSkipDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
@@ -52,10 +45,7 @@ public class SetupSkipDialog extends DialogFragment implements DialogInterface.O
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final AlertDialog dialog = onCreateDialogBuilder().create();
-        // hide system status bar.
-        SystemBarHelper.hideSystemBars(dialog);
-        return dialog;
+        return onCreateDialogBuilder().create();
     }
 
     @NonNull

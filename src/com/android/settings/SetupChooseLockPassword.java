@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -27,9 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.android.setupwizardlib.SetupWizardLayout;
-import com.android.setupwizardlib.util.SystemBarHelper;
-import com.android.setupwizardlib.view.NavigationBar;
+import com.android.setupwizardlib.GlifLayout;
 
 /**
  * Setup Wizard's version of ChooseLockPassword screen. It inherits the logic and basic structure
@@ -91,56 +88,27 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         super.onApplyThemeResource(theme, resid, first);
     }
 
-    public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment
-            implements NavigationBar.NavigationBarListener {
+    public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment {
 
-        private SetupWizardLayout mLayout;
-        private NavigationBar mNavigationBar;
+        private GlifLayout mLayout;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            mLayout = (SetupWizardLayout) inflater.inflate(
+            mLayout = (GlifLayout) inflater.inflate(
                     R.layout.setup_choose_lock_password, container, false);
-            mNavigationBar = mLayout.getNavigationBar();
-            mNavigationBar.setNavigationBarListener(this);
             return mLayout;
         }
 
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            SystemBarHelper.setImeInsetView(mLayout);
-            SetupWizardUtils.setImmersiveMode(getActivity());
             mLayout.setHeaderText(getActivity().getTitle());
         }
 
         @Override
         protected Intent getRedactionInterstitialIntent(Context context) {
             return null;
-        }
-
-        @Override
-        protected void setNextEnabled(boolean enabled) {
-            mNavigationBar.getNextButton().setEnabled(enabled);
-        }
-
-        @Override
-        protected void setNextText(int text) {
-            mNavigationBar.getNextButton().setText(text);
-        }
-
-        @Override
-        public void onNavigateBack() {
-            final Activity activity = getActivity();
-            if (activity != null) {
-                activity.onBackPressed();
-            }
-        }
-
-        @Override
-        public void onNavigateNext() {
-            handleNext();
         }
     }
 }

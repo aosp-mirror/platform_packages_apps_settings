@@ -36,9 +36,9 @@ import android.view.View;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
-import com.android.settingslib.HelpUtils;
 import com.android.settings.R;
-import com.android.setupwizardlib.SetupWizardRecyclerLayout;
+import com.android.settingslib.HelpUtils;
+import com.android.setupwizardlib.GlifRecyclerLayout;
 import com.android.setupwizardlib.items.IItem;
 import com.android.setupwizardlib.items.Item;
 import com.android.setupwizardlib.items.RecyclerItemAdapter;
@@ -61,8 +61,7 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_introduction);
         setHeaderText(R.string.security_settings_fingerprint_enroll_introduction_title);
-        final SetupWizardRecyclerLayout layout =
-                (SetupWizardRecyclerLayout) findViewById(R.id.setup_wizard_layout);
+        final GlifRecyclerLayout layout = (GlifRecyclerLayout) getLayout();
         mUserManager = UserManager.get(this);
         final RecyclerItemAdapter adapter = (RecyclerItemAdapter) layout.getAdapter();
         adapter.setOnItemSelectedListener(this);
@@ -125,8 +124,7 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
     }
 
     protected Intent getFindSensorIntent() {
-        Intent intent = new Intent(this, FingerprintEnrollFindSensor.class);
-        return intent;
+        return new Intent(this, FingerprintEnrollFindSensor.class);
     }
 
     @Override

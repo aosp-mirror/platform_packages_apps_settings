@@ -15,10 +15,10 @@
     limitations under the License
 -->
 
-<com.android.setupwizardlib.SetupWizardRecyclerLayout
+<com.android.setupwizardlib.GlifRecyclerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?attr/fingerprint_layout_theme"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:entries="@xml/fingerprint_enroll_introduction_items"
-    style="?attr/fingerprint_layout_theme" />
+    android:entries="@xml/fingerprint_enroll_introduction_items" />

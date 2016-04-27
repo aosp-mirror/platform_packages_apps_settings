@@ -16,15 +16,13 @@
 -->
 
 <!-- Used in phone portrait and tablet, as referenced in alias.xml. -->
-<com.android.setupwizardlib.SetupWizardLayout
+<com.android.setupwizardlib.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    settings:suwBackgroundTile="@drawable/setup_illustration_tile"
-    settings:suwHeaderText="@string/wifi_setup_wizard_title"
-    settings:suwIllustrationHorizontalTile="@drawable/setup_illustration_horizontal_tile"
-    settings:suwIllustrationImage="@drawable/setup_illustration_lock_screen">
+    android:icon="@drawable/ic_lock"
+    settings:suwHeaderText="@string/wifi_setup_wizard_title">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
@@ -49,18 +47,34 @@
                 android:minHeight="50dip"
                 android:textSize="18sp"/>
 
-            <Button android:id="@+id/retryButton"
-                style="@android:style/Widget.Material.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/lockpattern_retry_button_text"/>
-
             <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
                 android:layout_weight="4"
                 android:background="@color/lock_pattern_background"/>
+
+            <!-- Buttons are hidden during setup, and use the buttons in setup navigation bar instead -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <!-- left : cancel, or re-try -->
+                <Button android:id="@+id/footerLeftButton"
+                    style="@style/SetupWizardButton.Negative"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lockpattern_tutorial_cancel_label" />
+
+                <!-- right : confirm or ok -->
+                <Button android:id="@+id/footerRightButton"
+                    style="@style/SetupWizardButton.Positive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lockpattern_tutorial_continue_label" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -72,32 +86,6 @@
             android:textSize="14sp"
             android:visibility="gone"/>
 
-        <!-- Buttons are hidden during setup, and use the buttons in setup navigation bar instead -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            style="@style/SecurityPreferenceButtonContainer">
-
-            <!-- left : cancel, or re-try -->
-            <Button android:id="@+id/footerLeftButton"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/lockpattern_tutorial_cancel_label"
-                style="@style/SecurityPreferenceButton"/>
-
-            <!-- right : confirm or ok -->
-            <Button android:id="@+id/footerRightButton"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/lockpattern_tutorial_continue_label"
-                style="@style/SecurityPreferenceButton"/>
-
-        </LinearLayout>
-
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 
-</com.android.setupwizardlib.SetupWizardLayout>
+</com.android.setupwizardlib.GlifLayout>

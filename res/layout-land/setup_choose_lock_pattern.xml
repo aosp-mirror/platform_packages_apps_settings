@@ -15,15 +15,13 @@
     limitations under the License.
 -->
 
-<com.android.setupwizardlib.SetupWizardLayout
+<com.android.setupwizardlib.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    settings:suwBackgroundTile="@drawable/setup_illustration_tile"
-    settings:suwHeaderText="@string/wifi_setup_wizard_title"
-    settings:suwIllustrationHorizontalTile="@drawable/setup_illustration_horizontal_tile"
-    settings:suwIllustrationImage="@drawable/setup_illustration_lock_screen">
+    android:icon="@drawable/ic_lock"
+    settings:suwHeaderText="@string/lock_settings_picker_title">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
@@ -49,40 +47,30 @@
                 android:gravity="start|bottom"
                 android:textSize="18sp" />
 
-            <Button android:id="@+id/retryButton"
-                style="@android:style/Widget.Material.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="-12dp"
-                android:minWidth="0dp"
-                android:text="@string/lockpattern_retry_button_text" />
-
             <!-- footer can show a message, or confirm / restart buttons -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
-                android:layout_weight="1.0"
-                android:visibility="gone">
+                android:layout_weight="1.0">
 
                 <!-- confirm / restart buttons -->
                 <LinearLayout android:id="@+id/buttonContainer"
-                    style="@style/SecurityPreferenceButtonContainer"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
+                    android:gravity="end"
                     android:orientation="horizontal">
 
                     <!-- left / top button: skip, or re-try -->
                     <Button android:id="@+id/footerLeftButton"
-                        style="@style/SecurityPreferenceButton"
-                        android:layout_width="match_parent"
+                        style="@style/SetupWizardButton.Negative"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/lockpattern_restart_button_text" />
 
                     <!-- right / bottom button: confirm or ok -->
                     <Button android:id="@+id/footerRightButton"
-                        style="@style/SecurityPreferenceButton"
-                        android:layout_width="match_parent"
+                        style="@style/SetupWizardButton.Positive"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/lockpattern_confirm_button_text" />
 
@@ -110,4 +98,4 @@
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 
-</com.android.setupwizardlib.SetupWizardLayout>
+</com.android.setupwizardlib.GlifLayout>

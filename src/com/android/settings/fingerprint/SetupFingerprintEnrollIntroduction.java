@@ -19,20 +19,17 @@ package com.android.settings.fingerprint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.UserHandle;
-import android.widget.Button;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupChooseLockGeneric;
 import com.android.settings.SetupWizardUtils;
-import com.android.setupwizardlib.SetupWizardRecyclerLayout;
+import com.android.setupwizardlib.GlifRecyclerLayout;
 import com.android.setupwizardlib.items.Item;
 import com.android.setupwizardlib.items.RecyclerItemAdapter;
-import com.android.setupwizardlib.view.NavigationBar;
 
-public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction
-        implements NavigationBar.NavigationBarListener {
+public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction {
 
     @Override
     protected Intent getChooseLockIntent() {
@@ -56,8 +53,7 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
 
     @Override
     protected void initViews() {
-        final SetupWizardRecyclerLayout layout =
-                (SetupWizardRecyclerLayout) findViewById(R.id.setup_wizard_layout);
+        GlifRecyclerLayout layout = (GlifRecyclerLayout) getLayout();
         final RecyclerItemAdapter adapter = (RecyclerItemAdapter) layout.getAdapter();
         final Item nextItem = (Item) adapter.findItemById(R.id.next_button);
         nextItem.setTitle(
@@ -67,13 +63,8 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         cancelItem.setTitle(
                 getText(R.string.security_settings_fingerprint_enroll_introduction_cancel_setup));
 
-        SetupWizardUtils.setImmersiveMode(this);
-        getNavigationBar().setNavigationBarListener(this);
-        Button nextButton = getNavigationBar().getNextButton();
-        nextButton.setText(null);
-        nextButton.setEnabled(false);
         layout.setDividerInset(getResources().getDimensionPixelSize(
-                R.dimen.suw_items_icon_divider_inset));
+                R.dimen.suw_items_glif_icon_divider_inset));
     }
 
     @Override
@@ -95,16 +86,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         SetupSkipDialog dialog = SetupSkipDialog.newInstance(
                 getIntent().getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
         dialog.show(getFragmentManager());
-    }
-
-    @Override
-    public void onNavigateBack() {
-        onBackPressed();
-    }
-
-    @Override
-    public void onNavigateNext() {
-        // next is handled via the onNextButtonClick method in FingerprintEnrollIntroduction
     }
 
     @Override
