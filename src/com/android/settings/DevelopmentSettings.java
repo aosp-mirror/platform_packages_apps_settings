@@ -1014,7 +1014,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             flashLockState = mOemUnlockManager.getFlashLockState();
         }
 
-        return flashLockState != PersistentDataBlockManager.FLASH_LOCK_UNLOCKED;
+        return flashLockState != PersistentDataBlockManager.FLASH_LOCK_UNLOCKED
+                && Settings.Global.getInt(getActivity().getContentResolver(),
+                        Settings.Global.OEM_UNLOCK_DISALLOWED, 0) == 0;
     }
 
     private void updateOemUnlockOptions() {
