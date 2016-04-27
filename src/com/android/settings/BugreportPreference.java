@@ -85,18 +85,17 @@ public class BugreportPreference extends CustomDialogPreference {
     protected void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
 
+            final Context context = getContext();
             if (mFullTitle.isChecked()) {
                 Log.v(TAG, "Taking full bugreport right away");
-                MetricsLogger.action(getDialog().getContext(),
-                        MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
+                MetricsLogger.action(context, MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
                 takeBugreport(ActivityManager.BUGREPORT_OPTION_FULL);
             } else {
                 Log.v(TAG, "Taking interactive bugreport in " + BUGREPORT_DELAY_SECONDS + "s");
-                MetricsLogger.action(getDialog().getContext(),
+                MetricsLogger.action(context,
                         MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
                 // Add a little delay before executing, to give the user a chance to close
                 // the Settings activity before it takes a screenshot.
-                final Context context = getContext();
                 final String msg = context.getResources()
                         .getQuantityString(com.android.internal.R.plurals.bugreport_countdown,
                                 BUGREPORT_DELAY_SECONDS, BUGREPORT_DELAY_SECONDS);
