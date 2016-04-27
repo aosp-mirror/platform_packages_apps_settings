@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.service.notification.NotificationListenerService.Ranking;
@@ -101,8 +102,12 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     @Override
     protected void updateDependents(int importance) {
-        final boolean lockscreenSecure = new LockPatternUtils(getActivity()).isSecure(
-                UserHandle.myUserId());
+        LockPatternUtils utils = new LockPatternUtils(getActivity());
+        boolean lockscreenSecure = utils.isSecure(UserHandle.myUserId());
+        UserInfo parentUser = mUm.getProfileParent(UserHandle.myUserId());
+        if (parentUser != null){
+            lockscreenSecure |= utils.isSecure(parentUser.id);
+        }
 
         if (getPreferenceScreen().findPreference(mBlock.getKey()) != null) {
             setVisible(mSilent, checkCanBeVisible(Ranking.IMPORTANCE_MIN, importance));
