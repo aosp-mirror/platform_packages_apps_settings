@@ -99,7 +99,7 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
             super(fragmentManager);
             mContext = context;
             mSupportFeatureProvider =
-                    FeatureFactory.getFactory(context).getSupportFeatureProvider();
+                    FeatureFactory.getFactory(context).getSupportFeatureProvider(context);
         }
 
         @Override

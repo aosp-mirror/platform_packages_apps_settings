@@ -16,16 +16,51 @@
 
 package com.android.settings.overlay;
 
+import android.accounts.Account;
+import android.annotation.IntDef;
+import android.annotation.NonNull;
+import android.content.Context;
 import android.content.Intent;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Feature provider for support tab.
  */
 public interface SupportFeatureProvider {
 
+    @IntDef({SupportType.EMAIL, SupportType.PHONE, SupportType.CHAT})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface SupportType {
+        int EMAIL = 1;
+        int PHONE = 2;
+        int CHAT = 3;
+    }
+
     /**
      * Returns a intent that will open help forum.
      */
     Intent getForumIntent();
+
+    /**
+     * Whether or not a support type is enabled.
+     */
+    boolean isSupportTypeEnabled(Context context, @SupportType int type);
+
+    /**
+     * Returns an {@link Account} that's eligible for support options.
+     */
+    @NonNull
+    Account[] getSupportEligibleAccounts(Context context);
+
+    /**
+     * Returns an {@link Intent} that opens email support for specified account.
+     *
+     * @param context A UI Context
+     * @param account A account returned by {@link #getSupportEligibleAccounts}
+     * @param type The type of support account needs.
+     */
+    Intent getSupportIntent(Context context, Account account, @SupportType int type);
 
 }

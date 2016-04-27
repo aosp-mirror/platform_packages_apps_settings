@@ -16,13 +16,15 @@
 
 package com.android.settings.overlay;
 
+import android.content.Context;
+
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
  */
 public final class FeatureFactoryImpl extends FeatureFactory {
 
     @Override
-    public SupportFeatureProvider getSupportFeatureProvider() {
+    public SupportFeatureProvider getSupportFeatureProvider(Context context) {
         return null;
     }
 }
