@@ -59,7 +59,7 @@ public abstract class FeatureFactory {
         return sFactory;
     }
 
-    public abstract SupportFeatureProvider getSupportFeatureProvider();
+    public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
