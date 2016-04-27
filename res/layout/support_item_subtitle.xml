@@ -15,8 +15,13 @@
      limitations under the License.
 -->
 
-<android.support.v7.widget.RecyclerView
+<TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/support_items"
+    android:id="@android:id/title"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp"
+    android:paddingEnd="8dp"
+    android:paddingStart="8dp"
+    android:paddingTop="8dp"
+    android:textAppearance="@style/TextAppearance.CategoryTitle"/>

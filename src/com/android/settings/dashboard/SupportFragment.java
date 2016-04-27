@@ -16,16 +16,16 @@
 
 package com.android.settings.dashboard;
 
-import android.annotation.DrawableRes;
-import android.annotation.IdRes;
-import android.annotation.StringRes;
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.OnAccountsUpdateListener;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
@@ -35,10 +35,14 @@ import com.android.settings.overlay.SupportFeatureProvider;
 /**
  * Fragment for support tab in SettingsGoogle.
  */
-public final class SupportFragment extends InstrumentedFragment implements View.OnClickListener {
+public final class SupportFragment extends InstrumentedFragment implements View.OnClickListener,
+        OnAccountsUpdateListener {
 
     private Activity mActivity;
     private View mContent;
+    private RecyclerView mRecyclerView;
+    private SupportItemAdapter mSupportItemAdapter;
+    private AccountManager mAccountManager;
     private SupportFeatureProvider mSupportFeatureProvider;
 
     @Override
@@ -50,45 +54,49 @@ public final class SupportFragment extends InstrumentedFragment implements View.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = getActivity();
+        mAccountManager = AccountManager.get(mActivity);
         mSupportFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getSupportFeatureProvider();
+                FeatureFactory.getFactory(mActivity).getSupportFeatureProvider(mActivity);
+        mSupportItemAdapter = new SupportItemAdapter(mActivity, mSupportFeatureProvider,
+                this /* itemClickListener */);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mContent = inflater.inflate(R.layout.support_fragment, container, false);
-        // Update escalation items.
-        updateEscalationCard(R.id.escalation_by_phone, R.string.support_escalation_by_phone);
-        updateEscalationCard(R.id.escalation_by_email, R.string.support_escalation_by_email);
-        // Update other support items.
-        updateSupportTile(R.id.forum_tile, R.drawable.ic_forum_24dp, R.string.support_forum_title);
-        updateSupportTile(R.id.article_tile, R.drawable.ic_help_24dp,
-                R.string.support_articles_title);
-        // Update feedback item.
-        updateSupportTile(R.id.feedback_tile, R.drawable.ic_feedback_24dp,
-                R.string.support_feedback_title);
+        mRecyclerView = (RecyclerView) mContent.findViewById(R.id.support_items);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(
+                getActivity(), LinearLayoutManager.VERTICAL, false /* reverseLayout */));
+        mRecyclerView.setAdapter(mSupportItemAdapter);
         return mContent;
     }
 
-    private void updateEscalationCard(@IdRes int cardId, @StringRes int title) {
-        final View card = mContent.findViewById(cardId);
-        ((TextView) card.findViewById(R.id.title)).setText(title);
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Monitor account change.
+        mAccountManager.addOnAccountsUpdatedListener(
+                this /* listener */, null /* handler */, true /* updateImmediately */);
     }
 
-    private void updateSupportTile(@IdRes int tileId, @DrawableRes int icon, @StringRes int title) {
-        final View tile = mContent.findViewById(tileId);
-        ((ImageView) tile.findViewById(android.R.id.icon)).setImageResource(icon);
-        ((TextView) tile.findViewById(android.R.id.title)).setText(title);
-        tile.setOnClickListener(this);
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Stop monitor account change.
+        mAccountManager.removeOnAccountsUpdatedListener(this /* listener */);
+    }
+
+    @Override
+    public void onAccountsUpdated(Account[] accounts) {
+        // Account changed, update support items.
+        mSupportItemAdapter.refreshData();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.forum_tile:
-                mActivity.startActivity(mSupportFeatureProvider.getForumIntent());
-                break;
-        }
+        final SupportItemAdapter.ViewHolder vh =
+                (SupportItemAdapter.ViewHolder) mRecyclerView.getChildViewHolder(v);
+        mSupportItemAdapter.onItemClicked(vh.getAdapterPosition());
     }
 }
