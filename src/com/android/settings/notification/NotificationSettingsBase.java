@@ -23,6 +23,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import android.app.Notification;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -33,7 +34,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
-import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
@@ -41,6 +41,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static com.android.settings.notification.RestrictedDropDownPreference.RestrictedItem;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 abstract public class NotificationSettingsBase extends SettingsPreferenceFragment {
@@ -65,7 +66,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected PackageInfo mPkgInfo;
     protected ImportanceSeekBarPreference mImportance;
     protected RestrictedSwitchPreference mPriority;
-    protected DropDownPreference mVisibilityOverride;
+    protected RestrictedDropDownPreference mVisibilityOverride;
     protected RestrictedSwitchPreference mBlock;
     protected RestrictedSwitchPreference mSilent;
     protected EnforcedAdmin mSuspendedAppsAdmin;
@@ -148,6 +149,9 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         if (mSilent != null) {
             mSilent.setDisabledByAdmin(mSuspendedAppsAdmin);
         }
+        if (mVisibilityOverride != null) {
+            mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
+        }
     }
 
     protected void setupImportancePrefs(boolean isSystemApp, int importance, boolean banned) {
@@ -216,13 +220,24 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
 
+        mVisibilityOverride.clearRestrictedItems();
         if (getLockscreenNotificationsEnabled() && getLockscreenAllowPrivateNotifications()) {
-            entries.add(getString(R.string.lock_screen_notifications_summary_show));
-            values.add(Integer.toString(Ranking.VISIBILITY_NO_OVERRIDE));
+            final String summaryShowEntry =
+                    getString(R.string.lock_screen_notifications_summary_show);
+            final String summaryShowEntryValue = Integer.toString(Ranking.VISIBILITY_NO_OVERRIDE);
+            entries.add(summaryShowEntry);
+            values.add(summaryShowEntryValue);
+            setRestrictedIfNotificationFeaturesDisabled(summaryShowEntry, summaryShowEntryValue,
+                    DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS
+                            | DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
         }
 
-        entries.add(getString(R.string.lock_screen_notifications_summary_hide));
-        values.add(Integer.toString(Notification.VISIBILITY_PRIVATE));
+        final String summaryHideEntry = getString(R.string.lock_screen_notifications_summary_hide);
+        final String summaryHideEntryValue = Integer.toString(Notification.VISIBILITY_PRIVATE);
+        entries.add(summaryHideEntry);
+        values.add(summaryHideEntryValue);
+        setRestrictedIfNotificationFeaturesDisabled(summaryHideEntry, summaryHideEntryValue,
+                DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         entries.add(getString(R.string.lock_screen_notifications_summary_disable));
         values.add(Integer.toString(Notification.VISIBILITY_SECRET));
         mVisibilityOverride.setEntries(entries.toArray(new CharSequence[entries.size()]));
@@ -246,6 +261,16 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                 return true;
             }
         });
+    }
+
+    private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,
+            CharSequence entryValue, int keyguardNotificationFeatures) {
+        EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+                mContext, keyguardNotificationFeatures, mUserId);
+        if (admin != null) {
+            RestrictedItem item = new RestrictedItem(entry, entryValue, admin);
+            mVisibilityOverride.addRestrictedItem(item);
+        }
     }
 
     private int getGlobalVisibility() {
