@@ -133,6 +133,7 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
         mSeekBar.setThumbTintList(sliderTint);
 
         if (mAutoOn) {
+            setProgress(NotificationListenerService.Ranking.IMPORTANCE_DEFAULT);
             mSummary = getProgressSummary(
                     NotificationListenerService.Ranking.IMPORTANCE_UNSPECIFIED);
         }

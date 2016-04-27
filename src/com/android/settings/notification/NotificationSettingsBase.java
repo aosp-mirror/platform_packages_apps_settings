@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.DropDownPreference;
@@ -54,6 +55,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected static final String KEY_SILENT = "silent";
 
     protected PackageManager mPm;
+    protected UserManager mUm;
     protected final NotificationBackend mBackend = new NotificationBackend();
     protected Context mContext;
     protected boolean mCreated;
@@ -94,6 +96,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
 
         mPm = getPackageManager();
+        mUm = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
 
         mPkg = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_NAME)
                 ? args.getString(AppInfoBase.ARG_PACKAGE_NAME)
