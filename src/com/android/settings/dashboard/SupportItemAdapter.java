@@ -22,6 +22,7 @@ import android.annotation.StringRes;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,8 @@ import static com.android.settings.overlay.SupportFeatureProvider.SupportType.PH
  */
 public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAdapter.ViewHolder> {
 
+    private static final String TAG = "SupportItemAdapter";
+
     private static final int TYPE_TITLE = R.layout.support_item_title;
     private static final int TYPE_SUBTITLE = R.layout.support_item_subtitle;
     private static final int TYPE_ESCALATION_CARD = R.layout.support_escalation_card;
@@ -53,12 +56,16 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     private final View.OnClickListener mItemClickListener;
     private final List<SupportData> mSupportData;
 
+    private boolean mHasInternet;
+
     public SupportItemAdapter(Activity activity, SupportFeatureProvider supportFeatureProvider,
             View.OnClickListener itemClickListener) {
         mActivity = activity;
         mSupportFeatureProvider = supportFeatureProvider;
         mItemClickListener = itemClickListener;
         mSupportData = new ArrayList<>();
+        // Optimistically assume we have Internet access. It will be updated later to correct value.
+        mHasInternet = true;
         setHasStableIds(true);
         refreshData();
     }
@@ -106,6 +113,13 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         }
     }
 
+    public void setHasInternet(boolean hasInternet) {
+        if (mHasInternet != hasInternet) {
+            mHasInternet = hasInternet;
+            refreshData();
+        }
+    }
+
     /**
      * Create data for the adapter. If there is already data in the adapter, they will be
      * destroyed and recreated.
@@ -113,7 +127,9 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     public void refreshData() {
         mSupportData.clear();
         final Account[] accounts = mSupportFeatureProvider.getSupportEligibleAccounts(mActivity);
-        if (accounts.length > 0) {
+        if (accounts.length == 0) {
+            Log.d(TAG, "Account unavailable. Skipping");
+        } else {
             addEscalationCards(accounts[0]);
         }
         addMoreHelpItems();
@@ -121,9 +137,15 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     }
 
     private void addEscalationCards(Account account) {
-        mSupportData.add(new SupportData(TYPE_TITLE, 0 /* icon */,
-                R.string.support_escalation_title, R.string.support_escalation_summary,
-                null /* intent */));
+        if (mHasInternet) {
+            mSupportData.add(new SupportData(TYPE_TITLE, 0 /* icon */,
+                    R.string.support_escalation_title, R.string.support_escalation_summary,
+                    null /* intent */));
+        } else {
+            mSupportData.add(new SupportData(TYPE_TITLE, 0 /* icon */,
+                    R.string.support_offline_title, R.string.support_offline_summary,
+                    null /* intent */));
+        }
         if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE)) {
             mSupportData.add(new SupportData(TYPE_ESCALATION_CARD, R.drawable.ic_call_24dp,
                     R.string.support_escalation_by_phone, 0 /* summary */,
