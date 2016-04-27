@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -26,11 +25,9 @@ import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.android.setupwizardlib.SetupWizardLayout;
-import com.android.setupwizardlib.view.NavigationBar;
+import com.android.setupwizardlib.GlifLayout;
 
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure
@@ -86,87 +83,20 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         super.onApplyThemeResource(theme, resid, first);
     }
 
-    public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment
-            implements NavigationBar.NavigationBarListener {
-
-        private NavigationBar mNavigationBar;
-        private Button mRetryButton;
+    public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final SetupWizardLayout layout = (SetupWizardLayout) inflater.inflate(
+            final GlifLayout layout = (GlifLayout) inflater.inflate(
                     R.layout.setup_choose_lock_pattern, container, false);
-            mNavigationBar = layout.getNavigationBar();
-            mNavigationBar.setNavigationBarListener(this);
             layout.setHeaderText(getActivity().getTitle());
             return layout;
         }
 
         @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            mRetryButton = (Button) view.findViewById(R.id.retryButton);
-            mRetryButton.setOnClickListener(this);
-            super.onViewCreated(view, savedInstanceState);
-            SetupWizardUtils.setImmersiveMode(getActivity());
-        }
-
-        @Override
         protected Intent getRedactionInterstitialIntent(Context context) {
             return null;
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (v == mRetryButton) {
-                handleLeftButton();
-            } else {
-                super.onClick(v);
-            }
-        }
-
-        @Override
-        protected void setRightButtonEnabled(boolean enabled) {
-            mNavigationBar.getNextButton().setEnabled(enabled);
-        }
-
-        @Override
-        protected void setRightButtonText(int text) {
-            mNavigationBar.getNextButton().setText(text);
-        }
-
-        @Override
-        protected void updateStage(Stage stage) {
-            super.updateStage(stage);
-            // Only enable the button for retry
-            mRetryButton.setEnabled(stage == Stage.FirstChoiceValid);
-
-            switch (stage) {
-                case Introduction:
-                case HelpScreen:
-                case ChoiceTooShort:
-                case FirstChoiceValid:
-                    mRetryButton.setVisibility(View.VISIBLE);
-                    break;
-                case NeedToConfirm:
-                case ConfirmWrong:
-                case ChoiceConfirmed:
-                    mRetryButton.setVisibility(View.INVISIBLE);
-                    break;
-            }
-        }
-
-        @Override
-        public void onNavigateBack() {
-            final Activity activity = getActivity();
-            if (activity != null) {
-                activity.onBackPressed();
-            }
-        }
-
-        @Override
-        public void onNavigateNext() {
-            handleRightButton();
         }
     }
 }
