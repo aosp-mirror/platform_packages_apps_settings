@@ -153,6 +153,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         final ArrayList<AppEntry> apps =
                 mSession.rebuild(AppStateUsageStatsBridge.FILTER_USAGE_STATS,
                         ApplicationsState.SIZE_COMPARATOR);
+        if (apps == null) return;
         mAppEntries = apps;
         cacheRemoveAllPrefs(mApps);
         int entryCount = apps.size();
