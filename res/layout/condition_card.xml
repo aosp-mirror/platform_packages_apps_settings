@@ -28,7 +28,8 @@
         android:paddingStart="16dp"
         android:background="?android:attr/colorAccent"
         android:elevation="2dp"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <LinearLayout
             android:id="@+id/collapsed_group"
@@ -59,6 +60,7 @@
                 android:padding="16dp"
                 android:tint="?android:attr/textColorPrimaryInverse"
                 android:clickable="true"
+                android:focusable="true"
                 android:background="?android:attr/selectableItemBackground" />
 
         </LinearLayout>
