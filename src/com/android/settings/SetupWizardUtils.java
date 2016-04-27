@@ -24,14 +24,6 @@ import com.android.setupwizardlib.util.SystemBarHelper;
 import com.android.setupwizardlib.util.WizardManagerHelper;
 
 public class SetupWizardUtils {
-    private static final String TAG = "SetupWizardUtils";
-
-    // From WizardManager (must match constants maintained there)
-    public static final String EXTRA_SCRIPT_URI = "scriptUri";
-
-    public static boolean isUsingWizardManager(Activity activity) {
-        return activity.getIntent().hasExtra(EXTRA_SCRIPT_URI);
-    }
 
     public static int getTheme(Intent intent) {
         if (WizardManagerHelper.isLightTheme(intent, true)) {
