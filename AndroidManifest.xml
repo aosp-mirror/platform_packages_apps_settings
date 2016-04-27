@@ -2719,6 +2719,7 @@
         <activity android:name="Settings$SimSettingsActivity"
                 android:label="@string/sim_settings_title"
                 android:icon="@drawable/ic_settings_sim"
+                android:enabled="false"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.sim.SIM_SUB_INFO_SETTINGS" />
