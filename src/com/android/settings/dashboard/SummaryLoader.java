@@ -51,6 +51,7 @@ public class SummaryLoader {
 
     private DashboardAdapter mAdapter;
     private boolean mListening;
+    private boolean mWorkerListening;
     private ArrayList<BroadcastReceiver> mReceivers = new ArrayList<>();
 
     public SummaryLoader(Activity activity, List<DashboardCategory> categories) {
@@ -105,6 +106,7 @@ public class SummaryLoader {
             mActivity.unregisterReceiver(mReceivers.get(i));
         }
         mReceivers.clear();
+        mWorker.removeMessages(Worker.MSG_SET_LISTENING);
         mWorker.obtainMessage(Worker.MSG_SET_LISTENING, listening ? 1 : 0, 0).sendToTarget();
     }
 
@@ -164,6 +166,8 @@ public class SummaryLoader {
     }
 
     private synchronized void setListeningW(boolean listening) {
+        if (mWorkerListening == listening) return;
+        mWorkerListening = listening;
         if (DEBUG) Log.d(TAG, "Listening " + listening);
         for (SummaryProvider p : mSummaryMap.keySet()) {
             try {
