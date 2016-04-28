@@ -140,7 +140,6 @@ public class Index {
             IndexColumns.DATA_SUMMARY_OFF_NORMALIZED,
             IndexColumns.DATA_ENTRIES
     };
-    private static final String INDEX = "index";
 
     // Max number of saved search queries (who will be used for proposing suggestions)
     private static long MAX_SAVED_SEARCH_QUERY = 64;
@@ -1223,7 +1222,7 @@ public class Index {
                 database.endTransaction();
             }
             if (fullIndex) {
-                setLocaleIndexed(localeStr);
+                IndexDatabaseHelper.setLocaleIndexed(mContext, localeStr);
             }
 
             return null;
@@ -1233,7 +1232,7 @@ public class Index {
                 List<SearchIndexableData> dataToUpdate, Map<String, List<String>> nonIndexableKeys,
                 boolean forceUpdate) {
 
-            if (!forceUpdate && isLocaleAlreadyIndexed(database, localeStr)) {
+            if (!forceUpdate && IndexDatabaseHelper.isLocaleAlreadyIndexed(mContext, localeStr)) {
                 Log.d(LOG_TAG, "Locale '" + localeStr + "' is already indexed");
                 return true;
             }
@@ -1293,14 +1292,6 @@ public class Index {
             final String[] whereArgs = new String[] { value };
 
             return database.delete(Tables.TABLE_PREFS_INDEX, whereClause, whereArgs);
-        }
-
-        private void setLocaleIndexed(String locale) {
-            mContext.getSharedPreferences(INDEX, 0).edit().putBoolean(locale, true).commit();
-        }
-
-        private boolean isLocaleAlreadyIndexed(SQLiteDatabase database, String locale) {
-            return mContext.getSharedPreferences(INDEX, 0).getBoolean(locale, false);
         }
     }
 
