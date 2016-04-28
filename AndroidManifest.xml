@@ -2443,7 +2443,8 @@
         <activity android:name="Settings$PaymentSettingsActivity"
                 android:label="@string/nfc_payment_settings_title"
                 android:icon="@drawable/ic_settings_nfc_payment"
-                android:taskAffinity="">
+                android:taskAffinity=""
+                android:enabled="false">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NFC_PAYMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
