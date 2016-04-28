@@ -1027,6 +1027,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             super.onCreate(icicle);
             mLockPatternUtils = new LockPatternUtils(getContext());
             mDPM = getContext().getSystemService(DevicePolicyManager.class);
+            createPreferenceHierarchy();
         }
 
         @Override
