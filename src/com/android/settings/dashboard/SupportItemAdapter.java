@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.android.settings.overlay.SupportFeatureProvider.SupportType.CHAT;
-import static com.android.settings.overlay.SupportFeatureProvider.SupportType.EMAIL;
 import static com.android.settings.overlay.SupportFeatureProvider.SupportType.PHONE;
 
 /**
@@ -46,12 +45,12 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
     private static final int TYPE_TITLE = R.layout.support_item_title;
     private static final int TYPE_SUBTITLE = R.layout.support_item_subtitle;
-    private static final int TYPE_ESCALATION_CARD = R.layout.support_escalation_card;
+    private static final int TYPE_ESCALATION_OPTIONS = R.layout.support_escalation_options;
     private static final int TYPE_SUPPORT_TILE = R.layout.support_tile;
     private static final int TYPE_SIGN_IN_BUTTON = R.layout.support_sign_in_button;
 
     private final Activity mActivity;
-    private final SignInPromoClickListener mSignInPromoClickListener;
+    private final EscalationClickListener mEscalationClickListener;
     private final SupportFeatureProvider mSupportFeatureProvider;
     private final View.OnClickListener mItemClickListener;
     private final List<SupportData> mSupportData;
@@ -64,7 +63,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         mActivity = activity;
         mSupportFeatureProvider = supportFeatureProvider;
         mItemClickListener = itemClickListener;
-        mSignInPromoClickListener = new SignInPromoClickListener();
+        mEscalationClickListener = new EscalationClickListener();
         mSupportData = new ArrayList<>();
         // Optimistically assume we have Internet access. It will be updated later to correct value.
         mHasInternet = true;
@@ -84,6 +83,9 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         switch (holder.getItemViewType()) {
             case TYPE_SIGN_IN_BUTTON:
                 bindSignInPromoTile(holder, data);
+                break;
+            case TYPE_ESCALATION_OPTIONS:
+                bindEscalationOptions(holder, data);
                 break;
             default:
                 bindSupportTile(holder, data);
@@ -152,21 +154,12 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                     R.string.support_offline_title, R.string.support_offline_summary,
                     null /* intent */));
         }
-        if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE)) {
-            mSupportData.add(new SupportData(TYPE_ESCALATION_CARD, R.drawable.ic_call_24dp,
-                    R.string.support_escalation_by_phone, 0 /* summary */,
-                    mSupportFeatureProvider.getSupportIntent(mActivity, mAccount, PHONE)));
-        }
-        if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, EMAIL)) {
-            mSupportData.add(new SupportData(TYPE_ESCALATION_CARD, R.drawable.ic_mail_24dp,
-                    R.string.support_escalation_by_email, 0 /* summary */,
-                    mSupportFeatureProvider.getSupportIntent(mActivity, mAccount, EMAIL)));
-        }
-        if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, CHAT)) {
-            mSupportData.add(new SupportData(TYPE_ESCALATION_CARD, R.drawable.ic_chat_24dp,
-                    R.string.support_escalation_by_chat, 0 /* summary */,
-                    mSupportFeatureProvider.getSupportIntent(mActivity, mAccount, CHAT)));
-        }
+        final int phoneSupportText = mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE)
+                ? R.string.support_escalation_by_phone : 0;
+        final int chatSupportText = mSupportFeatureProvider.isSupportTypeEnabled(mActivity, CHAT)
+                ? R.string.support_escalation_by_chat : 0;
+        mSupportData.add(new SupportData(TYPE_ESCALATION_OPTIONS, 0 /* icon */,
+                phoneSupportText, chatSupportText, null /* intent */));
     }
 
     private void addSignInPromo() {
@@ -191,11 +184,30 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 R.string.support_feedback_title, 0 /* summary */, null /*intent */));
     }
 
+    private void bindEscalationOptions(ViewHolder holder, SupportData data) {
+        if (data.text1 == 0) {
+            holder.text1View.setVisibility(View.GONE);
+        } else {
+            holder.text1View.setText(data.text1);
+            holder.text1View.setOnClickListener(mEscalationClickListener);
+            holder.text1View.setEnabled(mHasInternet);
+            holder.text1View.setVisibility(View.VISIBLE);
+        }
+        if (data.text2 == 0) {
+            holder.text2View.setVisibility(View.GONE);
+        } else {
+            holder.text2View.setText(data.text2);
+            holder.text2View.setOnClickListener(mEscalationClickListener);
+            holder.text2View.setEnabled(mHasInternet);
+            holder.text2View.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void bindSignInPromoTile(ViewHolder holder, SupportData data) {
         holder.text1View.setText(data.text1);
         holder.text2View.setText(data.text2);
-        holder.text1View.setOnClickListener(mSignInPromoClickListener);
-        holder.text2View.setOnClickListener(mSignInPromoClickListener);
+        holder.text1View.setOnClickListener(mEscalationClickListener);
+        holder.text2View.setOnClickListener(mEscalationClickListener);
     }
 
     private void bindSupportTile(ViewHolder holder, SupportData data) {
@@ -212,21 +224,26 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     }
 
     /**
-     * Click handler for sign-in promo.
+     * Click handler for starting escalation options.
      */
-    private final class SignInPromoClickListener implements View.OnClickListener {
+    private final class EscalationClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case android.R.id.text1:
-                    mActivity.startActivityForResult(
-                            mSupportFeatureProvider.getAccountLoginIntent(), 0 /* requestCode */);
+                case android.R.id.text1: {
+                    final Intent intent = mAccount == null
+                            ? mSupportFeatureProvider.getAccountLoginIntent()
+                            : mSupportFeatureProvider.getSupportIntent(mActivity, mAccount, PHONE);
+                    mActivity.startActivityForResult(intent, 0 /* requestCode */);
                     break;
-                case android.R.id.text2:
-                    mActivity.startActivityForResult(
-                            mSupportFeatureProvider.getSignInHelpIntent(mActivity),
-                            0 /* requestCode */);
+                }
+                case android.R.id.text2: {
+                    final Intent intent = mAccount == null
+                            ? mSupportFeatureProvider.getSignInHelpIntent(mActivity)
+                            : mSupportFeatureProvider.getSupportIntent(mActivity, mAccount, CHAT);
+                    mActivity.startActivityForResult(intent, 0 /* requestCode */);
                     break;
+                }
             }
         }
     }

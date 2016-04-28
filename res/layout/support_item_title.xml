@@ -19,22 +19,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/support_escalation_background"
+    android:paddingTop="32dp"
+    android:paddingBottom="32dp"
+    android:paddingStart="56dp"
+    android:paddingEnd="56dp"
     android:orientation="vertical">
     <TextView
         android:id="@android:id/text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp"
-        android:paddingTop="8dp"
         android:textAppearance="@style/TextAppearance.SupportTitle"/>
     <TextView
         android:id="@android:id/text2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp"
         android:paddingTop="8dp"
-        android:textAppearance="@style/TextAppearance.CategoryTitle"/>
+        android:textAppearance="@style/TextAppearance.Small"
+        android:textColor="?android:attr/textColorSecondary"/>
 </LinearLayout>
