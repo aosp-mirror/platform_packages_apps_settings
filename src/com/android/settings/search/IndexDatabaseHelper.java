@@ -30,6 +30,8 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "search_index.db";
     private static final int DATABASE_VERSION = 115;
 
+    private static final String INDEX = "index";
+
     public interface Tables {
         public static final String TABLE_PREFS_INDEX = "prefs_index";
         public static final String TABLE_META_INDEX = "meta_index";
@@ -63,7 +65,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         public static final String BUILD = "build";
     }
 
-    public interface SavedQueriesColums  {
+    public interface SavedQueriesColums {
         public static final String QUERY = "query";
         public static final String TIME_STAMP = "timestamp";
     }
@@ -133,6 +135,8 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     private static IndexDatabaseHelper sSingleton;
 
+    private final Context mContext;
+
     public static synchronized IndexDatabaseHelper getInstance(Context context) {
         if (sSingleton == null) {
             sSingleton = new IndexDatabaseHelper(context);
@@ -142,6 +146,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     public IndexDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        mContext = context;
     }
 
     @Override
@@ -175,7 +180,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < DATABASE_VERSION) {
-            Log.w(TAG, "Detected schema version '" +  oldVersion + "'. " +
+            Log.w(TAG, "Detected schema version '" + oldVersion + "'. " +
                     "Index needs to be rebuilt for schema version '" + newVersion + "'.");
             // We need to drop the tables and recreate them
             reconstruct(db);
@@ -184,7 +189,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w(TAG, "Detected schema version '" +  oldVersion + "'. " +
+        Log.w(TAG, "Detected schema version '" + oldVersion + "'. " +
                 "Index needs to be rebuilt for schema version '" + newVersion + "'.");
         // We need to drop the tables and recreate them
         reconstruct(db);
@@ -203,11 +208,9 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 version = cursor.getString(0);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "Cannot get build version from Index metadata");
-        }
-        finally {
+        } finally {
             if (cursor != null) {
                 cursor.close();
             }
@@ -215,7 +218,20 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         return version;
     }
 
+    public static void clearLocalesIndexed(Context context) {
+        context.getSharedPreferences(INDEX, 0).edit().clear().commit();
+    }
+
+    public static void setLocaleIndexed(Context context, String locale) {
+        context.getSharedPreferences(INDEX, 0).edit().putBoolean(locale, true).commit();
+    }
+
+    public static boolean isLocaleAlreadyIndexed(Context context, String locale) {
+        return context.getSharedPreferences(INDEX, 0).getBoolean(locale, false);
+    }
+
     private void dropTables(SQLiteDatabase db) {
+        clearLocalesIndexed(mContext);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_META_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_PREFS_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_SAVED_QUERIES);
