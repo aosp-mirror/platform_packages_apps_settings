@@ -29,6 +29,7 @@ import android.net.NetworkTemplate;
 import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -140,7 +141,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         mCycle = (SpinnerPreference) findPreference(KEY_CYCLE);
         mCycleAdapter = new CycleAdapter(getContext(), mCycle, mCycleListener, false);
 
-        if (UserHandle.isApp(mAppItem.key)) {
+        if (UserHandle.isApp(mAppItem.key) || mAppItem.key == Process.SYSTEM_UID) {
             if (mPackages.size() != 0) {
                 PackageManager pm = getPackageManager();
                 try {
