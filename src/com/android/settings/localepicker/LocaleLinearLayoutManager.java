@@ -114,40 +114,46 @@ public class LocaleLinearLayoutManager extends LinearLayoutManager {
 
         final int itemCount = this.getItemCount();
         final int position = this.getPosition(host);
+        boolean result = false;
 
         switch (action) {
             case R.id.action_drag_move_up:
                 if (position > 0) {
                     mAdapter.onItemMove(position, position - 1);
-                    return true;
+                    result = true;
                 }
-                return false;
+                break;
             case R.id.action_drag_move_down:
                 if (position + 1 < itemCount) {
                     mAdapter.onItemMove(position, position + 1);
-                    return true;
+                    result = true;
                 }
-                return false;
+                break;
             case R.id.action_drag_move_top:
                 if (position != 0) {
                     mAdapter.onItemMove(position, 0);
-                    return true;
+                    result = true;
                 }
-                return false;
+                break;
             case R.id.action_drag_move_bottom:
                 if (position != itemCount - 1) {
                     mAdapter.onItemMove(position, itemCount - 1);
-                    return true;
+                    result = true;
                 }
-                return false;
+                break;
             case R.id.action_drag_remove:
                 if (itemCount > 1) {
                     mAdapter.removeItem(position);
-                    return true;
+                    result = true;
                 }
-                return false;
+                break;
             default:
                 return super.performAccessibilityActionForItem(recycler, state, host, action, args);
         }
+
+        if (result) {
+            mAdapter.doTheUpdate();
+        }
+        return result;
     }
 }
