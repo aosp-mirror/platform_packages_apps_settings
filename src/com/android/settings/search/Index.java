@@ -31,6 +31,7 @@ import android.database.DatabaseUtils;
 import android.database.MergeCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.SearchIndexableData;
@@ -1194,35 +1195,39 @@ public class Index {
 
         @Override
         protected Void doInBackground(UpdateData... params) {
-            final List<SearchIndexableData> dataToUpdate = params[0].dataToUpdate;
-            final List<SearchIndexableData> dataToDelete = params[0].dataToDelete;
-            final Map<String, List<String>> nonIndexableKeys = params[0].nonIndexableKeys;
-
-            final boolean forceUpdate = params[0].forceUpdate;
-            final boolean fullIndex = params[0].fullIndex;
-
-            final SQLiteDatabase database = getWritableDatabase();
-            if (database == null) {
-                Log.e(LOG_TAG, "Cannot update Index as I cannot get a writable database");
-                return null;
-            }
-            final String localeStr = Locale.getDefault().toString();
-
             try {
-                database.beginTransaction();
-                if (dataToDelete.size() > 0) {
-                    processDataToDelete(database, localeStr, dataToDelete);
+                final List<SearchIndexableData> dataToUpdate = params[0].dataToUpdate;
+                final List<SearchIndexableData> dataToDelete = params[0].dataToDelete;
+                final Map<String, List<String>> nonIndexableKeys = params[0].nonIndexableKeys;
+
+                final boolean forceUpdate = params[0].forceUpdate;
+                final boolean fullIndex = params[0].fullIndex;
+
+                final SQLiteDatabase database = getWritableDatabase();
+                if (database == null) {
+                    Log.e(LOG_TAG, "Cannot update Index as I cannot get a writable database");
+                    return null;
                 }
-                if (dataToUpdate.size() > 0) {
-                    processDataToUpdate(database, localeStr, dataToUpdate, nonIndexableKeys,
-                            forceUpdate);
+                final String localeStr = Locale.getDefault().toString();
+
+                try {
+                    database.beginTransaction();
+                    if (dataToDelete.size() > 0) {
+                        processDataToDelete(database, localeStr, dataToDelete);
+                    }
+                    if (dataToUpdate.size() > 0) {
+                        processDataToUpdate(database, localeStr, dataToUpdate, nonIndexableKeys,
+                                forceUpdate);
+                    }
+                    database.setTransactionSuccessful();
+                } finally {
+                    database.endTransaction();
                 }
-                database.setTransactionSuccessful();
-            } finally {
-                database.endTransaction();
-            }
-            if (fullIndex) {
-                IndexDatabaseHelper.setLocaleIndexed(mContext, localeStr);
+                if (fullIndex) {
+                    IndexDatabaseHelper.setLocaleIndexed(mContext, localeStr);
+                }
+            } catch (SQLiteFullException e) {
+                Log.e(LOG_TAG, "Unable to index search, out of space", e);
             }
 
             return null;
