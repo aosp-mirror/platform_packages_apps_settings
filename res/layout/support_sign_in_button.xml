@@ -20,21 +20,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <TextView
+    <Button
         android:id="@android:id/text1"
-        android:layout_width="match_parent"
+        style="@style/SupportPrimaryButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp"
-        android:paddingTop="8dp"
-        android:textAppearance="@style/TextAppearance.SupportTitle"/>
-    <TextView
+        android:layout_margin="8dp"/>
+    <Button
         android:id="@android:id/text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp"
-        android:paddingTop="8dp"
-        android:textAppearance="@style/TextAppearance.CategoryTitle"/>
+        style="@style/SupportSecondaryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

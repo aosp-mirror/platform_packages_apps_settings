@@ -22,7 +22,6 @@ import android.annotation.StringRes;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,14 +43,14 @@ import static com.android.settings.overlay.SupportFeatureProvider.SupportType.PH
  */
 public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAdapter.ViewHolder> {
 
-    private static final String TAG = "SupportItemAdapter";
-
     private static final int TYPE_TITLE = R.layout.support_item_title;
     private static final int TYPE_SUBTITLE = R.layout.support_item_subtitle;
     private static final int TYPE_ESCALATION_CARD = R.layout.support_escalation_card;
     private static final int TYPE_SUPPORT_TILE = R.layout.support_tile;
+    private static final int TYPE_SIGN_IN_BUTTON = R.layout.support_sign_in_button;
 
     private final Activity mActivity;
+    private final SignInPromoClickListener mSignInPromoClickListener;
     private final SupportFeatureProvider mSupportFeatureProvider;
     private final View.OnClickListener mItemClickListener;
     private final List<SupportData> mSupportData;
@@ -63,6 +62,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         mActivity = activity;
         mSupportFeatureProvider = supportFeatureProvider;
         mItemClickListener = itemClickListener;
+        mSignInPromoClickListener = new SignInPromoClickListener();
         mSupportData = new ArrayList<>();
         // Optimistically assume we have Internet access. It will be updated later to correct value.
         mHasInternet = true;
@@ -79,16 +79,14 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final SupportData data = mSupportData.get(position);
-        if (holder.iconView != null) {
-            holder.iconView.setImageResource(data.icon);
+        switch (holder.getItemViewType()) {
+            case TYPE_SIGN_IN_BUTTON:
+                bindSignInPromoTile(holder, data);
+                break;
+            default:
+                bindSupportTile(holder, data);
+                break;
         }
-        if (holder.titleView != null) {
-            holder.titleView.setText(data.title);
-        }
-        if (holder.summaryView != null) {
-            holder.summaryView.setText(data.summary);
-        }
-        holder.itemView.setOnClickListener(mItemClickListener);
     }
 
     @Override
@@ -128,7 +126,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         mSupportData.clear();
         final Account[] accounts = mSupportFeatureProvider.getSupportEligibleAccounts(mActivity);
         if (accounts.length == 0) {
-            Log.d(TAG, "Account unavailable. Skipping");
+            addSignInPromo();
         } else {
             addEscalationCards(accounts[0]);
         }
@@ -163,6 +161,16 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         }
     }
 
+    private void addSignInPromo() {
+        mSupportData.add(new SupportData(TYPE_TITLE, 0 /* icon */,
+                R.string.support_sign_in_required_title, R.string.support_sign_in_required_summary,
+                null /* intent */));
+        mSupportData.add(new SupportData(TYPE_SIGN_IN_BUTTON, 0 /* icon */,
+                R.string.support_sign_in_button_text, R.string.support_sign_in_required_help,
+                null /* intent */));
+
+    }
+
     private void addMoreHelpItems() {
         mSupportData.add(new SupportData(TYPE_SUBTITLE, 0 /* icon */,
                 R.string.support_more_help_title, 0 /* summary */, null /* intent */));
@@ -175,20 +183,60 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 R.string.support_feedback_title, 0 /* summary */, null /*intent */));
     }
 
+    private void bindSignInPromoTile(ViewHolder holder, SupportData data) {
+        holder.text1View.setText(data.text1);
+        holder.text2View.setText(data.text2);
+        holder.text1View.setOnClickListener(mSignInPromoClickListener);
+        holder.text2View.setOnClickListener(mSignInPromoClickListener);
+    }
+
+    private void bindSupportTile(ViewHolder holder, SupportData data) {
+        if (holder.iconView != null) {
+            holder.iconView.setImageResource(data.icon);
+        }
+        if (holder.text1View != null) {
+            holder.text1View.setText(data.text1);
+        }
+        if (holder.text2View != null) {
+            holder.text2View.setText(data.text2);
+        }
+        holder.itemView.setOnClickListener(mItemClickListener);
+    }
+
+    /**
+     * Click handler for sign-in promo.
+     */
+    private final class SignInPromoClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case android.R.id.text1:
+                    mActivity.startActivityForResult(
+                            mSupportFeatureProvider.getAccountLoginIntent(), 0 /* requestCode */);
+                    break;
+                case android.R.id.text2:
+                    mActivity.startActivityForResult(
+                            mSupportFeatureProvider.getSignInHelpIntent(mActivity),
+                            0 /* requestCode */);
+                    break;
+            }
+        }
+    }
+
     /**
      * {@link RecyclerView.ViewHolder} for support items.
      */
     static final class ViewHolder extends RecyclerView.ViewHolder {
 
         final ImageView iconView;
-        final TextView titleView;
-        final TextView summaryView;
+        final TextView text1View;
+        final TextView text2View;
 
         ViewHolder(View itemView) {
             super(itemView);
             iconView = (ImageView) itemView.findViewById(android.R.id.icon);
-            titleView = (TextView) itemView.findViewById(android.R.id.title);
-            summaryView = (TextView) itemView.findViewById(android.R.id.summary);
+            text1View = (TextView) itemView.findViewById(android.R.id.text1);
+            text2View = (TextView) itemView.findViewById(android.R.id.text2);
         }
     }
 
@@ -200,15 +248,15 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         final Intent intent;
         @LayoutRes final int type;
         @DrawableRes final int icon;
-        @StringRes final int title;
-        @StringRes final int summary;
+        @StringRes final int text1;
+        @StringRes final int text2;
 
-        SupportData(@LayoutRes int type, @DrawableRes int icon, @StringRes int title,
-                @StringRes int summary, Intent intent) {
+        SupportData(@LayoutRes int type, @DrawableRes int icon, @StringRes int text1,
+                @StringRes int text2, Intent intent) {
             this.type = type;
             this.icon = icon;
-            this.title = title;
-            this.summary = summary;
+            this.text1 = text1;
+            this.text2 = text2;
             this.intent = intent;
         }
     }
