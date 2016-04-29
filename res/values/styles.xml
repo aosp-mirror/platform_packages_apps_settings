@@ -352,6 +352,13 @@
 
     <style name="TextAppearance.SupportSummary" parent="TextAppearance.CategoryTitle"/>
 
+    <style name="SupportPrimaryButton" parent="android:Widget.Material.Button.Colored"/>
+
+    <style name="SupportSecondaryButton"
+           parent="android:Widget.Material.Button.Borderless.Colored">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="FingerprintLayoutTheme">
         <item name="android:icon">@drawable/ic_fingerprint_header</item>
     </style>
