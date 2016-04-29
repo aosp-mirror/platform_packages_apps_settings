@@ -45,12 +45,14 @@ import android.widget.Toast;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -222,8 +224,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             // Only showing primary internal storage, so just shortcut
             final Bundle args = new Bundle();
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
-            startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
-                    -1, 0, args);
+            Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
+                    PrivateVolumeSettings.class.getName(), args, null, R.string.apps_storage, null,
+                    false);
+            intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
+            getActivity().startActivity(intent);
             finish();
         }
     }
