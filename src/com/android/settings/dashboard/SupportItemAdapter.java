@@ -33,6 +33,7 @@ import com.android.settings.overlay.SupportFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.android.settings.overlay.SupportFeatureProvider.SupportType.CHAT;
 import static com.android.settings.overlay.SupportFeatureProvider.SupportType.EMAIL;
@@ -56,6 +57,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     private final List<SupportData> mSupportData;
 
     private boolean mHasInternet;
+    private Account mAccount;
 
     public SupportItemAdapter(Activity activity, SupportFeatureProvider supportFeatureProvider,
             View.OnClickListener itemClickListener) {
@@ -66,6 +68,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         mSupportData = new ArrayList<>();
         // Optimistically assume we have Internet access. It will be updated later to correct value.
         mHasInternet = true;
+        setAccount(mSupportFeatureProvider.getSupportEligibleAccount(mActivity));
         refreshData();
     }
 
@@ -117,23 +120,29 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         }
     }
 
+    public void setAccount(Account account) {
+        if (!Objects.equals(mAccount, account)) {
+            mAccount = account;
+            refreshData();
+        }
+    }
+
     /**
      * Create data for the adapter. If there is already data in the adapter, they will be
      * destroyed and recreated.
      */
-    public void refreshData() {
+    private void refreshData() {
         mSupportData.clear();
-        final Account[] accounts = mSupportFeatureProvider.getSupportEligibleAccounts(mActivity);
-        if (accounts.length == 0) {
+        if (mAccount == null) {
             addSignInPromo();
         } else {
-            addEscalationCards(accounts[0]);
+            addEscalationCards();
         }
         addMoreHelpItems();
         notifyDataSetChanged();
     }
 
-    private void addEscalationCards(Account account) {
+    private void addEscalationCards() {
         if (mHasInternet) {
             mSupportData.add(new SupportData(TYPE_TITLE, 0 /* icon */,
                     R.string.support_escalation_title, R.string.support_escalation_summary,
@@ -146,17 +155,17 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE)) {
             mSupportData.add(new SupportData(TYPE_ESCALATION_CARD, R.drawable.ic_call_24dp,
                     R.string.support_escalation_by_phone, 0 /* summary */,
-                    mSupportFeatureProvider.getSupportIntent(mActivity, account, PHONE)));
+                    mSupportFeatureProvider.getSupportIntent(mActivity, mAccount, PHONE)));
         }
         if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, EMAIL)) {
             mSupportData.add(new SupportData(TYPE_ESCALATION_CARD, R.drawable.ic_mail_24dp,
                     R.string.support_escalation_by_email, 0 /* summary */,
-                    mSupportFeatureProvider.getSupportIntent(mActivity, account, EMAIL)));
+                    mSupportFeatureProvider.getSupportIntent(mActivity, mAccount, EMAIL)));
         }
         if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, CHAT)) {
             mSupportData.add(new SupportData(TYPE_ESCALATION_CARD, R.drawable.ic_chat_24dp,
                     R.string.support_escalation_by_chat, 0 /* summary */,
-                    mSupportFeatureProvider.getSupportIntent(mActivity, account, CHAT)));
+                    mSupportFeatureProvider.getSupportIntent(mActivity, mAccount, CHAT)));
         }
     }
 
@@ -245,10 +254,14 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     private static final class SupportData {
 
         final Intent intent;
-        @LayoutRes final int type;
-        @DrawableRes final int icon;
-        @StringRes final int text1;
-        @StringRes final int text2;
+        @LayoutRes
+        final int type;
+        @DrawableRes
+        final int icon;
+        @StringRes
+        final int text1;
+        @StringRes
+        final int text2;
 
         SupportData(@LayoutRes int type, @DrawableRes int icon, @StringRes int text1,
                 @StringRes int text2, Intent intent) {

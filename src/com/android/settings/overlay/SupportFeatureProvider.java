@@ -18,7 +18,6 @@ package com.android.settings.overlay;
 
 import android.accounts.Account;
 import android.annotation.IntDef;
-import android.annotation.NonNull;
 import android.content.Context;
 import android.content.Intent;
 
@@ -51,8 +50,7 @@ public interface SupportFeatureProvider {
     /**
      * Returns an {@link Account} that's eligible for support options.
      */
-    @NonNull
-    Account[] getSupportEligibleAccounts(Context context);
+    Account getSupportEligibleAccount(Context context);
 
     /**
      * Returns an {@link Intent} that opens email support for specified account.
