@@ -751,6 +751,9 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
                 pref.setTitle(user.name);
             }
+            if (pref == null) {
+                continue;
+            }
             if (!isInitialized(user)) {
                 if (user.isRestricted()) {
                     pref.setSummary(R.string.user_summary_restricted_not_set_up);
