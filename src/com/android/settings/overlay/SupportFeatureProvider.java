@@ -44,6 +44,11 @@ public interface SupportFeatureProvider {
     Intent getForumIntent();
 
     /**
+     * Returns a intent that will open help & feedback.
+     */
+    Intent getHelpIntent(Context context);
+
+    /**
      * Whether or not a support type is enabled.
      */
     boolean isSupportTypeEnabled(Context context, @SupportType int type);
