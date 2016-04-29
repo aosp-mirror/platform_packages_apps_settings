@@ -16,6 +16,7 @@
 package com.android.settings.dashboard.conditional;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.util.Xml;
@@ -49,18 +50,14 @@ public class ConditionManager {
 
     private final Context mContext;
     private final ArrayList<Condition> mConditions;
-    private final File mXmlFile;
+    private File mXmlFile;
 
     private final ArrayList<ConditionListener> mListeners = new ArrayList<>();
 
     private ConditionManager(Context context) {
         mContext = context;
         mConditions = new ArrayList<Condition>();
-        mXmlFile = new File(context.getFilesDir(), FILE_NAME);
-        if (mXmlFile.exists()) {
-            readFromXml();
-        }
-        addMissingConditions();
+        new ConditionLoader().execute();
     }
 
     public void refreshAll() {
@@ -209,10 +206,31 @@ public class ConditionManager {
 
     public void addListener(ConditionListener listener) {
         mListeners.add(listener);
+        listener.onConditionsChanged();
     }
 
     public void remListener(ConditionListener listener) {
         mListeners.remove(listener);
+    }
+
+    private class ConditionLoader extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            mXmlFile = new File(mContext.getFilesDir(), FILE_NAME);
+            if (mXmlFile.exists()) {
+                readFromXml();
+            }
+            addMissingConditions();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            final int N = mListeners.size();
+            for (int i = 0; i < N; i++) {
+                mListeners.get(i).onConditionsChanged();
+            }
+        }
     }
 
     public static ConditionManager get(Context context) {
