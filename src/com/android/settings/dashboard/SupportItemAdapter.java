@@ -66,7 +66,6 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         mSupportData = new ArrayList<>();
         // Optimistically assume we have Internet access. It will be updated later to correct value.
         mHasInternet = true;
-        setHasStableIds(true);
         refreshData();
     }
 
