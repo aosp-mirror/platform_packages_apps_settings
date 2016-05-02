@@ -24,6 +24,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -37,7 +38,6 @@ import android.widget.ListView;
 public class NotificationLockscreenPreference extends RestrictedListPreference {
 
     private boolean mAllowRemoteInput;
-    private int mInitialIndex;
     private Listener mListener;
     private boolean mShowRemoteInput;
     private boolean mRemoteInputCheckBoxEnabled = true;
@@ -69,10 +69,8 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
     protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
             DialogInterface.OnClickListener innerListener) {
 
-        final String selectedValue = getValue();
-        mInitialIndex = (selectedValue == null) ? -1 : findIndexOfValue(selectedValue);
         mListener = new Listener(innerListener);
-        builder.setSingleChoiceItems(createListAdapter(), mInitialIndex, mListener);
+        builder.setSingleChoiceItems(createListAdapter(), getSelectedValuePos(), mListener);
         mShowRemoteInput = getEntryValues().length == 3;
         mAllowRemoteInput = Settings.Secure.getInt(getContext().getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_ALLOW_REMOTE_INPUT, 0) != 0;
@@ -86,8 +84,17 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
         CheckBox view = (CheckBox) dialog.findViewById(R.id.lockscreen_remote_input);
         view.setChecked(!mAllowRemoteInput);
         view.setOnCheckedChangeListener(mListener);
+    }
+
+    @Override
+    protected void onDialogStateRestored(Dialog dialog, Bundle savedInstanceState) {
+        super.onDialogStateRestored(dialog, savedInstanceState);
+        ListView listView = ((AlertDialog) dialog).getListView();
+        int selectedPosition = listView.getCheckedItemPosition();
+
         View panel = dialog.findViewById(com.android.internal.R.id.customPanel);
-        panel.setVisibility(checkboxVisibilityForSelectedIndex(mInitialIndex, mShowRemoteInput));
+        panel.setVisibility(checkboxVisibilityForSelectedIndex(selectedPosition,
+                mShowRemoteInput));
         mListener.setView(panel);
     }
 
