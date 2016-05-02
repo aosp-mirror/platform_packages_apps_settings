@@ -85,7 +85,8 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
 
             if (Objects.equals(mVolume.getFsUuid(), sm.getPrimaryStorageVolume().getUuid())) {
                 final Intent intent = new Intent(this, StorageWizardReady.class);
-                intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
+                intent.putExtra(DiskInfo.EXTRA_DISK_ID,
+                        getIntent().getStringExtra(DiskInfo.EXTRA_DISK_ID));
                 startActivity(intent);
                 finishAffinity();
 
