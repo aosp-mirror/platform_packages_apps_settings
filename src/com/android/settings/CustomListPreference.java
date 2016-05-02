@@ -24,7 +24,6 @@ import android.os.Bundle;
 import android.support.v14.preference.ListPreferenceDialogFragment;
 import android.support.v7.preference.ListPreference;
 import android.util.AttributeSet;
-import android.view.View;
 
 public class CustomListPreference extends ListPreference {
 
@@ -51,7 +50,13 @@ public class CustomListPreference extends ListPreference {
         return true;
     }
 
+    protected void onDialogStateRestored(Dialog dialog, Bundle savedInstanceState) {
+    }
+
     public static class CustomListPreferenceDialogFragment extends ListPreferenceDialogFragment {
+
+        private static final java.lang.String KEY_CLICKED_ENTRY_INDEX
+                = "settings.CustomListPrefDialog.KEY_CLICKED_ENTRY_INDEX";
 
         private int mClickedDialogEntryIndex;
 
@@ -88,8 +93,24 @@ public class CustomListPreference extends ListPreference {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             Dialog dialog = super.onCreateDialog(savedInstanceState);
+            if (savedInstanceState != null) {
+                mClickedDialogEntryIndex = savedInstanceState.getInt(KEY_CLICKED_ENTRY_INDEX,
+                        mClickedDialogEntryIndex);
+            }
             getCustomizablePreference().onDialogCreated(dialog);
             return dialog;
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putInt(KEY_CLICKED_ENTRY_INDEX, mClickedDialogEntryIndex);
+        }
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
+            getCustomizablePreference().onDialogStateRestored(getDialog(), savedInstanceState);
         }
 
         protected DialogInterface.OnClickListener getOnItemClickListener() {
