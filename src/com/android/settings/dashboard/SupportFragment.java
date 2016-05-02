@@ -130,7 +130,8 @@ public final class SupportFragment extends InstrumentedFragment implements View.
     @Override
     public void onAccountsUpdated(Account[] accounts) {
         // Account changed, update support items.
-        mSupportItemAdapter.refreshData();
+        mSupportItemAdapter.setAccount(
+                mSupportFeatureProvider.getSupportEligibleAccount(mActivity));
     }
 
     @Override
