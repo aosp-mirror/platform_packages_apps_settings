@@ -1,5 +1,22 @@
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android.settings.deletionhelper;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -7,31 +24,28 @@ import android.text.format.Formatter;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import com.android.settings.PhotosDeletionPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.applications.AppStateBaseBridge;
-import com.android.settings.deletionhelper.AppStateUsageStatsBridge;
-import com.android.settings.deletionhelper.AppDeletionPreference;
+import com.android.settings.overlay.DeletionHelperFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.ApplicationsState.Session;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 
 /**
  * Settings screen for the deletion helper, which manually removes data which is not recently used.
  */
 public class DeletionHelperFragment extends SettingsPreferenceFragment implements
-        ApplicationsState.Callbacks, AppStateBaseBridge.Callback, Preference.OnPreferenceChangeListener {
+        ApplicationsState.Callbacks, AppStateBaseBridge.Callback,
+        Preference.OnPreferenceChangeListener, DeletionType.FreeableChangedListener {
     private static final String TAG = "DeletionHelperFragment";
 
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
@@ -39,9 +53,11 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
     private static final String EXTRA_CHECKED_SET = "checkedSet";
 
     private static final String KEY_APPS_GROUP = "apps_group";
+    private static final String KEY_PHOTOS_VIDEOS_PREFERENCE = "delete_photos";
 
     private Button mCancel, mFree;
     private PreferenceGroup mApps;
+    private PhotosDeletionPreference mPhotoPreference;
 
     private ApplicationsState mState;
     private Session mSession;
@@ -49,17 +65,26 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
     private AppStateUsageStatsBridge mDataUsageBridge;
     private ArrayList<AppEntry> mAppEntries;
     private boolean mHasReceivedAppEntries, mHasReceivedBridgeCallback, mFinishedLoading;
+    private DeletionHelperFeatureProvider mProvider;
+    private DeletionType mPhotoVideoDeletion;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mState = ApplicationsState.getInstance(getActivity().getApplication());
+        Application app = getActivity().getApplication();
+        mState = ApplicationsState.getInstance(app);
         mSession = mState.newSession(this);
         mUncheckedApplications = new HashSet<>();
         mDataUsageBridge = new AppStateUsageStatsBridge(getActivity(), mState, this);
 
         addPreferencesFromResource(R.xml.deletion_helper_list);
         mApps = (PreferenceGroup) findPreference(KEY_APPS_GROUP);
+        mPhotoPreference = (PhotosDeletionPreference) findPreference(KEY_PHOTOS_VIDEOS_PREFERENCE);
+        mProvider =
+                FeatureFactory.getFactory(app).getDeletionHelperFeatureProvider();
+        if (mProvider != null) {
+            mPhotoVideoDeletion = mProvider.createPhotoVideoDeletionType();
+        }
 
         if (savedInstanceState != null) {
             mHasReceivedAppEntries =
@@ -86,6 +111,13 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         mFree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // This should be fine as long as there is only one extra deletion feature.
+                // In the future, this should be done in an async queue in order to not interfere
+                // with the simultaneous PackageDeletionTask.
+                if (mPhotoPreference != null && mPhotoPreference.isChecked()) {
+                    mPhotoVideoDeletion.clearFreeableData();
+                }
+
                 ArraySet<String> apps = new ArraySet<>();
                 for (AppEntry entry : mAppEntries) {
                     if (!mUncheckedApplications.contains(entry.label)) {
@@ -113,10 +145,21 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         });
     }
 
+    private void initializeDeletionPreferences() {
+        if (mProvider == null) {
+            getPreferenceScreen().removePreference(mPhotoPreference);
+            mPhotoPreference = null;
+        } else {
+            mPhotoPreference.registerFreeableChangedListener(this);
+            mPhotoPreference.registerDeletionService(mPhotoVideoDeletion);
+        }
+    }
+
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         initializeButtons(v);
+        initializeDeletionPreferences();
         setLoading(true, false);
     }
 
@@ -125,6 +168,10 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         super.onResume();
         mSession.resume();
         mDataUsageBridge.resume();
+
+        if (mPhotoVideoDeletion != null) {
+            mPhotoVideoDeletion.onResume();
+        }
     }
 
 
@@ -142,6 +189,10 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         super.onPause();
         mDataUsageBridge.pause();
         mSession.pause();
+
+        if (mPhotoVideoDeletion != null) {
+            mPhotoVideoDeletion.onPause();
+        }
     }
 
     private void rebuild() {
@@ -250,15 +301,26 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         return true;
     }
 
+    @Override
+    public void onFreeableChanged(int numItems, long freeableBytes) {
+        updateFreeButtonText();
+    }
+
     private long getTotalFreeableSpace() {
         long freeableSpace = 0;
-        for (int i = 0; i < mAppEntries.size(); i++) {
-            final AppEntry entry = mAppEntries.get(i);
-            long entrySize = mAppEntries.get(i).size;
-            // If the entrySize is negative, it is either an unknown size or an error occurred.
-            if (!mUncheckedApplications.contains(entry.label) && entrySize > 0) {
-                freeableSpace += entrySize;
+        if (mAppEntries != null) {
+
+            for (int i = 0; i < mAppEntries.size(); i++) {
+                final AppEntry entry = mAppEntries.get(i);
+                long entrySize = mAppEntries.get(i).size;
+                // If the entrySize is negative, it is either an unknown size or an error occurred.
+                if (!mUncheckedApplications.contains(entry.label) && entrySize > 0) {
+                    freeableSpace += entrySize;
+                }
             }
+        }
+        if (mPhotoPreference != null) {
+            freeableSpace += mPhotoPreference.getFreeableBytes();
         }
         return freeableSpace;
     }
