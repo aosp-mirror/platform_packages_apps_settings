@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.setupwizardlib.SetupWizardLayout;
+import com.android.setupwizardlib.view.Illustration;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -119,10 +120,12 @@ public abstract class StorageWizardBase extends Activity {
         scrollView.setVerticalFadingEdgeEnabled(true);
         scrollView.setFadingEdgeLength(scrollView.getVerticalFadingEdgeLength() * 2);
 
-        // Our header assets already have padding baked in
-        final View title = findViewById(R.id.suw_layout_title);
-        title.setPadding(title.getPaddingLeft(), 0, title.getPaddingRight(),
-                title.getPaddingBottom());
+        if (findViewById(R.id.suw_layout_decor) instanceof Illustration) {
+            // Our header illustration already have padding baked in
+            final View title = findViewById(R.id.suw_layout_title);
+            title.setPadding(title.getPaddingLeft(), 0, title.getPaddingRight(),
+                    title.getPaddingBottom());
+        }
     }
 
     @Override
