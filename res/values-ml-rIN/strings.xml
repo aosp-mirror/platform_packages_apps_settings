@@ -1470,6 +1470,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"USB സംഭരണത്തിലേക്ക് നീക്കുക"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"SD കാർഡിലേക്ക് നീക്കുക"</string>
     <string name="moving" msgid="6431016143218876491">"നീക്കുന്നു"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"ആവശ്യമായ സംഭരണ ഇടമില്ല."</string>
     <string name="does_not_exist" msgid="1501243985586067053">"അപ്ലിക്കേഷൻ നിലവിലില്ല."</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"പകർത്തുന്നതിൽ നിന്ന് അപ്ലിക്കേഷനെ പരിരക്ഷിച്ചിരിക്കുന്നു."</string>
@@ -2969,6 +2971,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"ക്രമീകരണവും അനുമതികളും കോർപ്പറേറ്റ് ആക്‌സസും നെറ്റ്‌വർക്ക് ആക്ടിവിറ്റിയും ഉപകരണത്തിന്റെ ലൊക്കേഷൻ വിവരങ്ങളും ഉൾപ്പെടെ, ഈ ഉപകരണവുമായി ബന്ധപ്പെട്ട ആപ്‌സും വിവരങ്ങളും നിരീക്ഷിക്കാനും മാനേജുചെയ്യാനും അഡ്‌മിനിസ്‌ട്രേറ്റർക്ക് കഴിയും."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"ഓഫാക്കുക"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"ഓണാക്കുക"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"കാണിക്കുക"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"മറയ്ക്കുക"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"ഹോട്ട്സ്പോട്ട് ഓണാണ്"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"പോർട്ടബിൾ വൈഫൈ ഹോട്ട്‌സ്പോട്ട് <xliff:g id="ID_1">%1$s</xliff:g> സജീവമാണ്, ഈ ഉപകരണത്തിനായുള്ള വൈഫൈ ഓഫാക്കിയിരിക്കുന്നു."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"വിമാന മോഡ് ഓണാണ്"</string>
@@ -2988,6 +2992,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"കൂടുതൽ തണുത്ത ഡിസ്പ്ലേ വർണ്ണങ്ങൾ ഉപയോഗിക്കുക"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"വർണ്ണ മാറ്റം ബാധകമാക്കാൻ, സ്ക്രീൻ ഓഫാക്കുക"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"സ്വയമേവയുള്ള സിസ്റ്റം അപ്ഡേറ്റുകൾ"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"ലൊക്കേഷൻ ഡോഗ്ഫുഡ് ടൂളുകൾ"</string>
     <string name="usage" msgid="2977875522080448986">"ഉപയോഗം"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"സെല്ലുലാർ ഡാറ്റാ ഉപയോഗം"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"വൈഫൈ ഡാറ്റ ഉപയോഗം"</string>
@@ -3089,10 +3094,22 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, മുമ്പ് ഒരിക്കലും ഉപയോഗിച്ചിട്ടില്ല"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, അവസാനം ഉപയോഗിച്ചത് എപ്പോഴെന്ന് ഓർമ്മയില്ല"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> ഇടം സൃഷ്ടിക്കുക"</string>
-    <string name="support_escalation_title" msgid="5264156567389651356">"24/7 പിന്തുണ"</string>
+    <string name="support_escalation_title" msgid="7129417437049874035">"ദിവസം മുഴുവനും സഹായം ലഭിക്കും"</string>
+    <string name="support_escalation_summary" msgid="2698799592848652706">"ഞങ്ങളെ വിളിക്കുകയോ ഇമെയിൽ അയയ്ക്കുകയോ ചെയ്യുക. ഉടനടി നിങ്ങളുടെ പ്രശ്നം ഞങ്ങൾ പരിഹരിക്കും. കാത്തിരിപ്പും വേണ്ട, വിഷമവും വേണ്ട."</string>
+    <string name="support_offline_title" msgid="482049324795211184">"നിങ്ങൾ ഓഫ്‌ലൈനിലാണ്"</string>
+    <string name="support_offline_summary" msgid="8795134237938994064">"പിന്തുണ ലഭിക്കാൻ ആദ്യം വൈഫൈയോ ഡാറ്റയോ കണക്റ്റുചെയ്യുക."</string>
+    <string name="support_more_help_title" msgid="6923257931625780264">"കൂടുതൽ സഹായം"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"ഫോൺ"</string>
+    <string name="support_escalation_by_phone_offline" msgid="2515493752748803099">"ഫോൺ"</string>
     <string name="support_escalation_by_email" msgid="6645440354764367526">"ഇമെയിൽ"</string>
+    <string name="support_escalation_by_chat" msgid="977019859110763749">"ചാറ്റുചെയ്യുക"</string>
     <string name="support_forum_title" msgid="201753198197433199">"സഹായ ഫോറം"</string>
     <string name="support_articles_title" msgid="2301723375407192757">"സഹായ ലേഖനങ്ങൾ"</string>
     <string name="support_feedback_title" msgid="4960530438310623507">"ഫീഡ്‌ബാക്ക് അയയ്‌ക്കുക"</string>
+    <!-- no translation found for support_sign_in_required_title (2919270490197985164) -->
+    <skip />
+    <!-- no translation found for support_sign_in_button_text (3054769428620671241) -->
+    <skip />
+    <!-- no translation found for support_sign_in_required_help (3930256366697956788) -->
+    <skip />
 </resources>

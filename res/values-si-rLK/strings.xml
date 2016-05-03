@@ -1472,6 +1472,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"USB ආචයනයට ගෙන යන්න"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"SD කාඩ් පතට මාරු කරන්න"</string>
     <string name="moving" msgid="6431016143218876491">"චලනය වෙමින්"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"අවශ්‍යතරම් ආචයන ඉඩ නොමැත."</string>
     <string name="does_not_exist" msgid="1501243985586067053">"යෙදුම නොපවතී."</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"යෙදුම පිටපත්-ආරක්ෂණය කර ඇත."</string>
@@ -2971,6 +2973,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"සැකසීම්, අවසර, සංස්ථාපිත ප්‍රවේශය, ජාල ක්‍රියාකාරකම, සහ උපාංගයේ ස්ථාන තොරතුරු ඇතුළුව, මෙම උපාංගය සමඟ සම්බන්ධිත යෙදුම් සහ දත්ත නිරීක්ෂණය කිරීමට සහ කළමනාකරණය කිරීමට ඔබේ පරිපාලකට හැකිය."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"ක්‍රියා විරහිත කරන්න"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"ක්‍රියාත්මක කරන්න"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"පෙන්වන්න"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"සඟවන්න"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"හොට්ස්පොට් ක්‍රියාත්මකයි"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"අතේ ගෙන යා හැකි Wi-Fi හොට්ස්පොට් <xliff:g id="ID_1">%1$s</xliff:g> සක්‍රියයි. මෙම උපාංගය සඳහා Wi-Fi ක්‍රියාවිරහිත කර ඇත."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"ගුවන් යානා ප්‍රකාරය ක්‍රියාත්මකයි"</string>
@@ -2990,6 +2994,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"වඩා සිසිල් සංදර්ශක වර්ණ භාවිත කිරීම"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"වර්ණ වෙනස් කිරීම යෙදීමට තිරය ක්‍රියාවිරහිත කරන්න"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"ස්වයංක්‍රිය පද්ධති යාවත්කාලීන"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"ස්ථාන ඩොග්ෆුඩ් මෙවලම්"</string>
     <string name="usage" msgid="2977875522080448986">"භාවිතය"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"සෙලියුලර් දත්ත භාවිතය"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi දත්ත භාවිතය"</string>
@@ -3091,10 +3096,22 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, පෙර කිසි විටක භාවිත කර නැහැ"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, අවසන් වරට භාවිත කළේ කවදාද යන්න විශ්වාස නැහැ"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> නිදහස් කර ගන්න"</string>
-    <string name="support_escalation_title" msgid="5264156567389651356">"24/7 සහාය"</string>
+    <string name="support_escalation_title" msgid="7129417437049874035">"දවස පුරා උදවු"</string>
+    <string name="support_escalation_summary" msgid="2698799592848652706">"අපව අමතන්න නැතහොත් ඊ-තැපෑලක් එවන්න, එවිට අපි වහාම ඔබේ ගැටලුව විසඳමු. කරදරයක් නැහැ, කලබලයක් නැහැ."</string>
+    <string name="support_offline_title" msgid="482049324795211184">"ඔබ නොබැඳිය"</string>
+    <string name="support_offline_summary" msgid="8795134237938994064">"සහාය වෙත ළඟා වීමට, පළමුව Wi-Fi හෝ දත්ත වෙත සම්බන්ධ වන්න."</string>
+    <string name="support_more_help_title" msgid="6923257931625780264">"තවත් උදවු"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"දුරකථනය"</string>
+    <string name="support_escalation_by_phone_offline" msgid="2515493752748803099">"දුරකථනය"</string>
     <string name="support_escalation_by_email" msgid="6645440354764367526">"ඊ-තැපෑල"</string>
+    <string name="support_escalation_by_chat" msgid="977019859110763749">"කතාබහ"</string>
     <string name="support_forum_title" msgid="201753198197433199">"උදවු සංසදය"</string>
     <string name="support_articles_title" msgid="2301723375407192757">"උදවු ලිපි"</string>
     <string name="support_feedback_title" msgid="4960530438310623507">"ප්‍රතිපෝෂණය යවන්න"</string>
+    <!-- no translation found for support_sign_in_required_title (2919270490197985164) -->
+    <skip />
+    <!-- no translation found for support_sign_in_button_text (3054769428620671241) -->
+    <skip />
+    <!-- no translation found for support_sign_in_required_help (3930256366697956788) -->
+    <skip />
 </resources>
