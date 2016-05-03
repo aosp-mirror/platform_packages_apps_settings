@@ -26,6 +26,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
 import android.util.ArrayMap;
+import android.util.ArraySet;
 import android.util.Log;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -52,7 +53,7 @@ public class SummaryLoader {
     private DashboardAdapter mAdapter;
     private boolean mListening;
     private boolean mWorkerListening;
-    private ArrayList<BroadcastReceiver> mReceivers = new ArrayList<>();
+    private ArraySet<BroadcastReceiver> mReceivers = new ArraySet<>();
 
     public SummaryLoader(Activity activity, List<DashboardCategory> categories) {
         mHandler = new Handler();
@@ -103,7 +104,7 @@ public class SummaryLoader {
         mListening = listening;
         // Unregister listeners immediately.
         for (int i = 0; i < mReceivers.size(); i++) {
-            mActivity.unregisterReceiver(mReceivers.get(i));
+            mActivity.unregisterReceiver(mReceivers.valueAt(i));
         }
         mReceivers.clear();
         mWorker.removeMessages(Worker.MSG_SET_LISTENING);
