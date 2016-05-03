@@ -1028,8 +1028,8 @@
     <string name="sd_format" product="default" msgid="2576054280507119870">"SDカード内データを消去"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"内部USBストレージ内の全データ（音楽、写真など）の消去"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"SDカード内の全データ（音楽、写真など）の消去"</string>
-    <string name="memory_clear_cache_title" msgid="5423840272171286191">"キャッシュデータを消去しますか？"</string>
-    <string name="memory_clear_cache_message" msgid="4550262490807415948">"すべてのアプリのキャッシュデータが消去されます。"</string>
+    <string name="memory_clear_cache_title" msgid="5423840272171286191">"キャッシュデータを削除しますか？"</string>
+    <string name="memory_clear_cache_message" msgid="4550262490807415948">"すべてのアプリのキャッシュデータが削除されます。"</string>
     <string name="mtp_ptp_mode_summary" msgid="3710436114807789270">"MTPまたはPTP機能が有効です"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="3077285629197874055">"USBストレージマウント解除"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="3634502237262534381">"SDカードのマウントを解除しますか？"</string>
@@ -1317,18 +1317,12 @@
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"続行するには仕事用のパターンを使用してください"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"続行するには仕事用の PIN を入力してください"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"続行するには仕事用のパスワードを入力してください"</string>
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pattern (8548464672947477043) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pin (8048122891934295280) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_password (9007679426540259125) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pattern (7462071286473121099) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pin (809763184419127790) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_password (8923861444535970646) -->
-    <skip />
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pattern" msgid="8548464672947477043">"続行するには端末のパターンを使用してください。端末の再起動後に必要な操作です。"</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pin" msgid="8048122891934295280">"続行するには端末の PIN を入力してください。端末の再起動後に必要な操作です。"</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_password" msgid="9007679426540259125">"続行するには端末のパスワードを入力してください。端末の再起動後に必要な操作です。"</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_pattern" msgid="7462071286473121099">"続行するには仕事用のパターンを使用してください。端末の再起動後に必要な操作です。"</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_pin" msgid="809763184419127790">"続行するには仕事用の PIN を入力してください。端末の再起動後に必要な操作です。"</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_password" msgid="8923861444535970646">"続行するには仕事用のパスワードを入力してください。端末の再起動後に必要な操作です。"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PINが正しくありません"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"パスワードが正しくありません"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"パターンが正しくありません"</string>
@@ -1389,7 +1383,7 @@
     <string name="screen_compatibility_label" msgid="663250687205465394">"画面の互換性"</string>
     <string name="permissions_label" msgid="2605296874922726203">"権限"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"キャッシュ"</string>
-    <string name="clear_cache_btn_text" msgid="5756314834291116325">"キャッシュを消去"</string>
+    <string name="clear_cache_btn_text" msgid="5756314834291116325">"キャッシュを削除"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"キャッシュ"</string>
     <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
       <item quantity="other">%d 件のアイテム</item>
@@ -1475,6 +1469,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"USBストレージに移動"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"SDカードに移動"</string>
     <string name="moving" msgid="6431016143218876491">"移動中"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"十分な空き容量がありません。"</string>
     <string name="does_not_exist" msgid="1501243985586067053">"アプリが存在しません。"</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"このアプリはコピー防止機能付きです。"</string>
@@ -2978,6 +2974,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"管理者は、設定、権限、コーポレート アクセス、ネットワーク アクティビティ、端末の位置情報など、この端末に関連付けられたアプリやデータの監視、管理を行えます。"</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"OFF にする"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"ON にする"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"表示"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"非表示"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"アクセス ポイントが ON"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"ポータブル Wi-Fi アクセス ポイント（<xliff:g id="ID_1">%1$s</xliff:g>）が有効です。この端末では Wi-Fi が OFF になっています。"</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"機内モードが ON"</string>
@@ -2997,6 +2995,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"寒色の表示色を使用します"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"色の変更を適用するには、画面を OFF にしてください"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"自動システム アップデート"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"位置情報用 dogfood ツール"</string>
     <string name="usage" msgid="2977875522080448986">"使用量"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"モバイルデータ使用量"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi データ使用量"</string>

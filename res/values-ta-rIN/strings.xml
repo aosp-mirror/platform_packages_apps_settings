@@ -241,8 +241,8 @@
     <string name="locale_not_translated" msgid="516862628177166755">"சில பயன்பாடுகளில் கிடைக்காமல் இருக்கக்கூடும்"</string>
     <string name="action_drag_label_move_up" msgid="9052210023727612540">"மேலே நகர்த்து"</string>
     <string name="action_drag_label_move_down" msgid="7448713844582912157">"கீழே நகர்த்து"</string>
-    <string name="action_drag_label_move_top" msgid="557081389352288310">"மேலே நகர்த்து"</string>
-    <string name="action_drag_label_move_bottom" msgid="2468642142414126482">"கீழே நகர்த்து"</string>
+    <string name="action_drag_label_move_top" msgid="557081389352288310">"முதலாவதாக நகர்த்து"</string>
+    <string name="action_drag_label_move_bottom" msgid="2468642142414126482">"கடைசிக்கு நகர்த்து"</string>
     <string name="action_drag_label_remove" msgid="2861038147166966206">"மொழியை அகற்று"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"செயல்பாட்டைத் தேர்வுசெய்யவும்"</string>
     <string name="device_info_label" msgid="6551553813651711205">"சாதனத் தகவல்"</string>
@@ -1317,18 +1317,12 @@
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"தொடர, பணிப் பேட்டர்னை வரையவும்"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"தொடர, பணிப் பின்னை உள்ளிடவும்"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"தொடர, பணிக் கடவுச்சொல்லை உள்ளிடவும்"</string>
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pattern (8548464672947477043) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pin (8048122891934295280) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_password (9007679426540259125) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pattern (7462071286473121099) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pin (809763184419127790) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_password (8923861444535970646) -->
-    <skip />
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pattern" msgid="8548464672947477043">"சாதனத்தை மீண்டும் தொடங்கியுள்ளதால், சாதனப் பேட்டர்னை வரைந்து, தொடரவும்."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pin" msgid="8048122891934295280">"சாதனத்தை மீண்டும் தொடங்கியுள்ளதால், சாதனப் பின்னை உள்ளிட்டுத் தொடரவும்."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_password" msgid="9007679426540259125">"சாதனத்தை மீண்டும் தொடங்கியுள்ளதால், சாதனக் கடவுச்சொல்லை உள்ளிட்டுத் தொடரவும்."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_pattern" msgid="7462071286473121099">"சாதனத்தை மீண்டும் தொடங்கியுள்ளதால், பணிப் பேட்டர்னை வரைந்து, தொடரவும்."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_pin" msgid="809763184419127790">"சாதனத்தை மீண்டும் தொடங்கியுள்ளதால், பணிப் பின்னை உள்ளிட்டுத் தொடரவும்."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_password" msgid="8923861444535970646">"சாதனத்தை மீண்டும் தொடங்கியுள்ளதால், பணிக் கடவுச்சொல்லை உள்ளிட்டுத் தொடரவும்."</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"தவறான பின்"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"தவறான கடவுச்சொல்"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"தவறான வடிவம்"</string>
@@ -1475,6 +1469,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"USB சேமிப்பிடத்திற்கு நகர்த்து"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"SD கார்டுக்கு நகர்த்து"</string>
     <string name="moving" msgid="6431016143218876491">"நகர்த்துகிறது"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"போதுமான சேமிப்பிடம் இல்லை."</string>
     <string name="does_not_exist" msgid="1501243985586067053">"பயன்பாடு இல்லை."</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"பயன்பாட்டை நகலெடுக்க முடியாது."</string>
@@ -2974,6 +2970,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"அமைப்புகள், அனுமதிகள், நிறுவன அணுகல், நெட்வொர்க் செயல்பாடு, சாதன இருப்பிடத் தகவல் ஆகியவை உட்பட சாதனத்துடன் தொடர்புடைய பயன்பாடுகள் மற்றும் தரவை உங்கள் நிர்வாகியால் கண்காணிக்கவும் நிர்வகிக்கவும் முடியும்."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"முடக்கு"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"இயக்கு"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"காட்டு"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"மறை"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"வைஃபை ஹாட்ஸ்பாட்: இயக்கத்தில்"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"கையடக்க வைஃபை ஹாட்ஸ்பாட் <xliff:g id="ID_1">%1$s</xliff:g> இயக்கத்தில் உள்ளது, இந்தச் சாதனத்தில் வைஃபை முடக்கப்பட்டுள்ளது."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"விமானப் பயன்முறை: இயக்கத்தில்"</string>
@@ -2993,6 +2991,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"நீல வண்ணங்களைத் திரைக்குப் பயன்படுத்து"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"வண்ண மாற்றத்தைப் பயன்படுத்த, திரையை முடக்கவும்"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"தானியங்கு முறைமை புதுப்பிப்புகள்"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"இருப்பிட Dogfood கருவிகள்"</string>
     <string name="usage" msgid="2977875522080448986">"பயன்பாடு"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"செல்லுலார் தரவுப் பயன்பாடு"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"வைஃபை தரவுப் பயன்பாடு"</string>

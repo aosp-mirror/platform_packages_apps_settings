@@ -1204,7 +1204,7 @@
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Penambatan bluetooth"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Menambatkan"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"Menambatkan &amp; hotspot portabel"</string>
-    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Tidak dapat menambatkan atau menggunakan hotspot portabel saat Penghemat Data aktif"</string>
+    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Tidak dapat tethering atau menggunakan hotspot portabel saat Penghemat Data aktif"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Penambatan USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB tersambung, periksa untuk menambatkan"</string>
@@ -1317,18 +1317,12 @@
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Gunakan pola kerja untuk melanjutkan"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Masukkan PIN kerja untuk melanjutkan"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Masukkan sandi kerja untuk melanjutkan"</string>
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pattern (8548464672947477043) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pin (8048122891934295280) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_password (9007679426540259125) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pattern (7462071286473121099) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pin (809763184419127790) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_password (8923861444535970646) -->
-    <skip />
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pattern" msgid="8548464672947477043">"Gunakan pola perangkat untuk melanjutkan. Diperlukan setelah perangkat dimulai ulang."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pin" msgid="8048122891934295280">"Masukkan PIN perangkat untuk melanjutkan. Diperlukan setelah perangkat dimulai ulang."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_password" msgid="9007679426540259125">"Masukkan sandi perangkat untuk melanjutkan. Diperlukan setelah perangkat dimulai ulang."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_pattern" msgid="7462071286473121099">"Gunakan pola kerja untuk melanjutkan. Diperlukan setelah perangkat dimulai ulang."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_pin" msgid="809763184419127790">"Masukkan PIN kerja untuk melanjutkan. Diperlukan setelah perangkat dimulai ulang."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_password" msgid="8923861444535970646">"Masukkan sandi kerja untuk melanjutkan. Diperlukan setelah perangkat dimulai ulang."</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN Salah"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Sandi salah"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Pola salah"</string>
@@ -1475,6 +1469,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Pindahkan ke penyimpanan USB"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Pindahkan ke kartu SD"</string>
     <string name="moving" msgid="6431016143218876491">"Memindahkan"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"Ruang penyimpanan tidak cukup."</string>
     <string name="does_not_exist" msgid="1501243985586067053">"Apl tidak ada."</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"Apl dilindungi hak cipta."</string>
@@ -2226,7 +2222,7 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"Lupakan VPN"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Ganti VPN yang sudah ada?"</string>
     <string name="vpn_replace_always_on_vpn_message" msgid="4764679857158814028">"Anda sudah terhubung ke VPN. Jika Anda terhubung ke VPN yang berbeda, VPN yang ada akan digantikan."</string>
-    <string name="vpn_cant_connect_title" msgid="4517706987875907511">"<xliff:g id="VPN_NAME">%1$s</xliff:g> tidak dapat menyambung"</string>
+    <string name="vpn_cant_connect_title" msgid="4517706987875907511">"<xliff:g id="VPN_NAME">%1$s</xliff:g> tidak dapat terhubung"</string>
     <string name="vpn_cant_connect_message" msgid="2593197919352621279">"Aplikasi ini tidak mendukung VPN yang selalu aktif."</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Menambahkan profil VPN"</string>
@@ -2974,6 +2970,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"Administrator dapat memantau dan mengelola aplikasi dan data yang terkait dengan perangkat ini, termasuk setelan, izin, akses perusahaan, aktivitas jaringan, dan informasi lokasi perangkat."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Nonaktifkan"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Aktifkan"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"Lihat"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"Sembunyikan"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Hotspot aktif"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"Hotspot Wi-Fi portabel <xliff:g id="ID_1">%1$s</xliff:g> aktif, Wi-Fi untuk perangkat ini dinonaktifkan."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Mode pesawat aktif"</string>
@@ -2993,6 +2991,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Gunakan suhu tampilan yang lebih sejuk"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Untuk menerapkan perubahan warna, nonaktifkan layar"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Pemutakhiran sistem otomatis"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"Alat Dogfood Lokasi"</string>
     <string name="usage" msgid="2977875522080448986">"Penggunaan"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Penggunaan data seluler"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Penggunaan data Wi-Fi"</string>
