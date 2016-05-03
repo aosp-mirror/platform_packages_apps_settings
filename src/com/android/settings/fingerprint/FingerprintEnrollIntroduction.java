@@ -187,6 +187,10 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
         public void onClick(View widget) {
             Context ctx = widget.getContext();
             Intent intent = HelpUtils.getHelpIntent(ctx, getURL(), ctx.getClass().getName());
+            if (intent == null) {
+                Log.w(LearnMoreSpan.TAG, "Null help intent.");
+                return;
+            }
             try {
                 // This needs to be startActivityForResult even though we do not care about the
                 // actual result because the help app needs to know about who invoked it.
