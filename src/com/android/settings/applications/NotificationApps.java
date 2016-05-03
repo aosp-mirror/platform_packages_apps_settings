@@ -42,31 +42,33 @@ public class NotificationApps extends ManageApplications {
         private final SummaryLoader mLoader;
 
         private final ApplicationsState mAppState;
-        private final ApplicationsState.Session mSession;
         private final NotificationBackend mNotifBackend;
-        private final AppStateNotificationBridge mExtraInfoBridge;
         private final Handler mHandler;
+        private AppStateNotificationBridge mExtraInfoBridge;
+        private ApplicationsState.Session mSession;
 
         private SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
             mLoader = loader;
             mAppState =
                     ApplicationsState.getInstance((Application) context.getApplicationContext());
-            mSession = mAppState.newSession(this);
             mNotifBackend = new NotificationBackend();
-            mExtraInfoBridge = new AppStateNotificationBridge(mContext,
-                    mAppState, this, mNotifBackend);
             mHandler = new Handler(mAppState.getBackgroundLooper());
         }
 
         @Override
         public void setListening(boolean listening) {
             if (listening) {
+                mSession = mAppState.newSession(this);
+                mExtraInfoBridge = new AppStateNotificationBridge(mContext,
+                        mAppState, this, mNotifBackend);
                 mSession.resume();
                 mExtraInfoBridge.resume();
             } else {
                 mSession.pause();
                 mExtraInfoBridge.pause();
+                mSession.release();
+                mExtraInfoBridge.release();
             }
         }
 

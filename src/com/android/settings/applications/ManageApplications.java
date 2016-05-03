@@ -1259,24 +1259,25 @@ public class ManageApplications extends InstrumentedFragment
         private final SummaryLoader mLoader;
         // TODO: Can probably hack together with less than full app state.
         private final ApplicationsState mAppState;
-        private final ApplicationsState.Session mSession;
         private final Handler mHandler;
+        private ApplicationsState.Session mSession;
 
         private SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
             mLoader = loader;
             mAppState =
                     ApplicationsState.getInstance((Application) context.getApplicationContext());
-            mSession = mAppState.newSession(this);
             mHandler = new Handler(mAppState.getBackgroundLooper());
         }
 
         @Override
         public void setListening(boolean listening) {
             if (listening) {
+                mSession = mAppState.newSession(this);
                 mSession.resume();
             } else {
                 mSession.pause();
+                mSession.release();
             }
         }
 
