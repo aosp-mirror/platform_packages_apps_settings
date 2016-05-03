@@ -152,6 +152,9 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                     KeyboardLayout layout = info.mLayout;
                     if (layout != null) {
                         pref.setSummary(layout.getLabel());
+                    } else {
+                        pref.setSummary(
+                                getPrefContext().getString(R.string.default_keyboard_layout));
                     }
                     pref.setOnPreferenceClickListener(preference -> {
                         showKeyboardLayoutScreen(
