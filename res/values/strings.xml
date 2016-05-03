@@ -7530,4 +7530,25 @@
     <!-- [CHAR LIMIT=NONE] The preference summary for enabling cross-profile remote contact search -->
     <string name="managed_profile_contact_search_summary">Allow contact searches by your organization to identify callers and contacts</string>
 
+    <!-- Time in hours -->
+    <plurals name="hours">
+        <item quantity="one">1 hour</item>
+        <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> hours</item>
+    </plurals>
+
+    <!-- Time in minutes -->
+    <plurals name="minutes">
+        <item quantity="one">1 minute</item>
+        <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> minutes</item>
+    </plurals>
+
+    <!-- Time in seconds -->
+    <plurals name="seconds">
+        <item quantity="one">1 second</item>
+        <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> seconds</item>
+    </plurals>
+
+    <!-- Estimated wait time range for real time supports -->
+    <string name="support_estimated_wait_time">~<xliff:g id="ESTIMATE" example="2 minutes">%1$s</xliff:g> wait</string>
+
 </resources>
