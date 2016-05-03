@@ -47,7 +47,7 @@ public class SuggestionsChecks {
     private final Context mContext;
 
     public SuggestionsChecks(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
     }
 
     public boolean isSuggestionComplete(Tile suggestion) {
