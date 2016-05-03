@@ -1204,7 +1204,7 @@
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth модем"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Тетеринг"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"Тетеринг және алынбалы хотспот"</string>
-    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Data Saver функциясы қосулы кезде тетеринг жалғау немесе алынбалы хот-спотты пайдалану мүмкін емес"</string>
+    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Data Saver функциясы қосулы кезде, тетерингті немесе тасымалы хот-спотты пайдалану мүмкін емес"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB модем режимі"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB жалғанған, қосылу үшін құсбелгі қойыңыз"</string>
@@ -1317,18 +1317,12 @@
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Жалғастыру үшін жұмыс өрнегін пайдаланыңыз"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Жалғастыру үшін жұмыс PIN кодын енгізіңіз"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Жалғастыру үшін жұмыс құпия сөзін енгізіңіз"</string>
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pattern (8548464672947477043) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pin (8048122891934295280) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_password (9007679426540259125) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pattern (7462071286473121099) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pin (809763184419127790) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_password (8923861444535970646) -->
-    <skip />
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pattern" msgid="8548464672947477043">"Жалғастыру үшін құрылғы өрнегін пайдаланыңыз. Құрылғы қайта іске қосылғаннан кейін пайдалану қажет."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pin" msgid="8048122891934295280">"Жалғастыру үшін құрылғы PIN кодын енгізіңіз. Құрылғы қайта іске қосылғаннан кейін енгізу қажет."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_password" msgid="9007679426540259125">"Жалғастыру үшін құрылғы құпия сөзін енгізіңіз. Құрылғы қайта іске қосылғаннан кейін енгізу қажет."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_pattern" msgid="7462071286473121099">"Жалғастыру үшін жұмыс өрнегін пайдаланыңыз. Құрылғы қайта іске қосылғаннан кейін пайдалану қажет."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_pin" msgid="809763184419127790">"Жалғастыру үшін жұмыс PIN кодын енгізіңіз. Құрылғы қайта іске қосылғаннан кейін енгізу қажет."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_password" msgid="8923861444535970646">"Жалғастыру үшін жұмыс құпия сөзін енгізіңіз. Құрылғы қайта іске қосылғаннан кейін енгізу қажет."</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"Қате PIN"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Қате құпия сөз"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Қате өрнек"</string>
@@ -1475,6 +1469,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"USB жадына жіберу"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"SD картаға жіберу"</string>
     <string name="moving" msgid="6431016143218876491">"Жіберуде"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"Жадта орын жеткіліксіз."</string>
     <string name="does_not_exist" msgid="1501243985586067053">"Қолданба жоқ."</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"Қолданба көшірмеден қорғалған"</string>
@@ -2225,7 +2221,7 @@
     <string name="vpn_version" msgid="1939804054179766249">"Нұсқасы: <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="2232239391189465752">"VPN ұмыту"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Бар VPN қолданбасын ауыстыру керек пе?"</string>
-    <string name="vpn_replace_always_on_vpn_message" msgid="4764679857158814028">"Сіз VPN желісіне қосылдыңыз. Егер басқа желіге қосылсаңыз, қолданыстағы VPN желі алмастырылады."</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4764679857158814028">"Сіз VPN желісіне қосылдыңыз. Егер басқа желіге қосылсаңыз, қолданыстағы VPN желісі алмастырылады."</string>
     <string name="vpn_cant_connect_title" msgid="4517706987875907511">"<xliff:g id="VPN_NAME">%1$s</xliff:g> қосыла алмайды"</string>
     <string name="vpn_cant_connect_message" msgid="2593197919352621279">"Бұл қолданба \"әрқашан қосулы\" VPN желісін қолдамайды."</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN (Виртуалды жеке желі)"</string>
@@ -2974,6 +2970,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"Әкімші қолданбаларды және осы құрылғымен байланысты деректерді, соның ішінде, параметрлерді, рұқсаттарды, қауымдық қатынасты, желілік белсенділікті және құрылғының орны туралы ақпаратты бақылай және басқара алады."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Өшіру"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Қосу"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"Көрсету"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"Жасыру"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Хот-спот қосулы"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"<xliff:g id="ID_1">%1$s</xliff:g> Wi-Fi жылжымалы хот-споты белсенді, осы құрылғы үшін Wi-Fi өшірілген."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Ұшақ режимі қосулы"</string>
@@ -2993,6 +2991,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Суығырақ дисплей түстерін пайдалану"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Түс өзгерісін қолдану үшін экранды өшіріңіз"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Автоматты жүйе жаңартулары"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"\"Орын\" параметрін сынап көру құралдары"</string>
     <string name="usage" msgid="2977875522080448986">"Пайдалану"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Ұялы деректерді пайдалану"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi деректерін пайдалану"</string>

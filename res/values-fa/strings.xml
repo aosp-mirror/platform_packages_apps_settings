@@ -701,7 +701,7 @@
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"‏WPS انجام نشد. لطفاً چند دقیقه دیگر دوباره امتحان کنید."</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"‏تنظیمات امنیتی روتر بیسیم (WEP) پشتیبانی نمی‌شود"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"‏تنظیمات امنیتی روتر بیسیم (TKIP) پشتیبانی نمی‌شود"</string>
-    <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"تأیید اعتبار ناموفق بود. لطفاً دوباره امتحان کنید."</string>
+    <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"احراز هویت ناموفق بود. لطفاً دوباره امتحان کنید."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"‏یک جلسه WPS دیگر شناسایی شد. لطفاً پس از چند دقیقه دوباره امتحان کنید."</string>
     <string name="wifi_ssid" msgid="5519636102673067319">"نام شبکه"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"‏SSID را وارد کنید"</string>
@@ -714,7 +714,7 @@
     <string name="passpoint_label" msgid="6381371313076009926">"ذخیره از طریق"</string>
     <string name="passpoint_content" msgid="8447207162397870483">"اعتبارنامه‌های <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"‏روش EAP"</string>
-    <string name="please_select_phase2" msgid="5231074529772044898">"تأیید اعتبار مرحله 2"</string>
+    <string name="please_select_phase2" msgid="5231074529772044898">"مرحله دوم احراز هویت"</string>
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"‏گواهی CA"</string>
     <string name="wifi_eap_domain" msgid="8471124344218082064">"دامنه"</string>
     <string name="wifi_eap_user_cert" msgid="1291089413368160789">"گواهی کاربر"</string>
@@ -1141,7 +1141,7 @@
     <string name="apn_mms_port" msgid="4074188088199243040">"درگاه فراپیام"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
-    <string name="apn_auth_type" msgid="6167205395676037015">"نوع تأیید اعتبار"</string>
+    <string name="apn_auth_type" msgid="6167205395676037015">"نوع احراز هویت"</string>
     <string name="apn_auth_type_none" msgid="5069592676845549926">"هیچ‌کدام"</string>
     <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
     <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
@@ -1469,6 +1469,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"‏انتقال به حافظهٔ USB"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"‏انتقال به کارت SD"</string>
     <string name="moving" msgid="6431016143218876491">"انتقال دادن"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"حافظه کافی موجود نیست."</string>
     <string name="does_not_exist" msgid="1501243985586067053">"برنامه وجود ندارد."</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"برنامه در برابر رونوشت‌برداری محافظت شده است."</string>
@@ -2968,6 +2970,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"سرپرست سیستم شما می‌تواند بر برنامه‌ها و داده‌های مرتبط با این دستگاه (از جمله تنظیمات، مجوزها، دسترسی شرکتی، فعالیت شبکه و اطلاعات مکان دستگاه) نظارت داشته باشد و آن‌ها را مدیریت کنید."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"خاموش کردن"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"روشن کردن"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"نمایش"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"پنهان کردن"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"نقطه اتصال روشن است"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"‏نقطه اتصال قابل حمل Wi-Fi ‏<xliff:g id="ID_1">%1$s</xliff:g> فعال است، Wi-Fi برای این دستگاه خاموش است."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"حالت هواپیما روشن است"</string>
@@ -2987,6 +2991,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"استفاده از رنگ‌های سردتر نمایشگر"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"برای اعمال تغییر رنگ، صفحه را خاموش کنید"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"به‌روزرسانی‌های خودکار سیستم"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"ابزارهای آزمایشی مکان"</string>
     <string name="usage" msgid="2977875522080448986">"میزان مصرف"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"مصرف داده شبکه تلفن همراه"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"‏میزان مصرف داده Wi-Fi"</string>

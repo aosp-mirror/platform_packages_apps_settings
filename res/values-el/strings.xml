@@ -89,7 +89,7 @@
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Ορατό σε όλες τις κοντινές συσκευές Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Ορατό σε όλες τις κοντινές συσκευές Bluetooth"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Δεν είναι ορατό σε άλλες συσκευές Bluetooth"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Ορατό μόνο σε συζευγμένες συσκευές"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Ορατό μόνο σε συνδεδεμένες συσκευές"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Λήξη χρονικού ορίου προβολής"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Κλείδωμα της λειτουργίας φωνητικών κλήσεων"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Να μην επιτρέπεται η χρήση του προγράμματος κλήσης bluetooth όταν η οθόνη είναι κλειδωμένη"</string>
@@ -734,7 +734,7 @@
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Να μην παρέχεται"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Να μην επικυρώνεται"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Δεν έχει καθοριστεί πιστοποιητικό. Η σύνδεσή σας δεν θα είναι ιδιωτική."</string>
-    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Πρέπει να καθορίσετε έναν τομέα διαδικτύου."</string>
+    <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Πρέπει να καθορίσετε έναν τομέα."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Διαθέσιμο WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Διαθέσιμο WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Εισαγάγετε κωδικό πρόσβασης δικτύου"</string>
@@ -1469,6 +1469,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Μετακ. σε αποθ. χώρο USB"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Μετακίνηση στην κάρτα SD"</string>
     <string name="moving" msgid="6431016143218876491">"Μετακίνηση"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"Δεν υπάρχει επαρκής αποθηκευτικός χώρος."</string>
     <string name="does_not_exist" msgid="1501243985586067053">"Η εφαρμογή δεν υπάρχει."</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"Η εφαρμογή διαθέτει προστασία αντιγραφής."</string>
@@ -2968,6 +2970,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"Ο διαχειριστής σας μπορεί να παρακολουθεί και να διαχειρίζεται τις εφαρμογές και τα δεδομένα που σχετίζονται με αυτήν τη συσκευή, συμπεριλαμβανομένων των ρυθμίσεων, των δικαιωμάτων, της εταιρικής πρόσβασης, της δραστηριότητας δικτύου και των πληροφοριών τοποθεσίας της συσκευής."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Απενεργοποίηση"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Ενεργοποίηση"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"Εμφάνιση"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"Απόκρυψη"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Σημείο πρόσβασης Wi-Fi ενεργό"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"Το φορητό σημείο πρόσβασης Wi-Fi <xliff:g id="ID_1">%1$s</xliff:g> είναι ενεργό. Το Wi-Fi για αυτήν τη συσκευή είναι απενεργοποιημένο."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Λειτουργία πτήσης ενεργή"</string>
@@ -2987,6 +2991,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Χρήση πιο ψυχρών χρωμάτων οθόνης"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Για να εφαρμόσετε μια αλλαγή στο χρώμα, απενεργοποιήστε την οθόνη"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Αυτόματες ενημερώσεις συστήματος"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"Εργαλεία τοποθεσίας εσωτερικών δοκιμών"</string>
     <string name="usage" msgid="2977875522080448986">"Χρήση"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Χρήση δεδομένων κινητής τηλεφωνίας"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Χρήση δεδομένων Wi-Fi"</string>
