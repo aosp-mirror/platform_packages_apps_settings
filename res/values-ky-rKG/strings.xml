@@ -1204,7 +1204,7 @@
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth жалгаштыруу"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Жалгаштыруу"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"Жалгаштыруу жана ташыма чекит"</string>
-    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Дайындарды үнөмдөгүч күйүп турганда Интернет бөлүшүлбөйт жана ташыма кошулуу түйүнү колдонулбайт"</string>
+    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Дайындарды үнөмдөгүч режиминде түзмөктү модем же көчмө туташуу түйүнү катары колдонуу мүмкүн эмес"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB жалгаштыруу"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB туташты, жалгаштыруу үчүн текшериңиз"</string>
@@ -1317,18 +1317,12 @@
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Улантуу үчүн жумуш профилиңиздин графикалык ачкычын колдонуңуз"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Улантуу үчүн жумуш профилиңиздин PIN кодун киргизиңиз"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Улантуу үчүн жумуш профилиңиздин сырсөзүн киргизиңиз"</string>
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pattern (8548464672947477043) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_pin (8048122891934295280) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_device_password (9007679426540259125) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pattern (7462071286473121099) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_pin (809763184419127790) -->
-    <skip />
-    <!-- no translation found for lockpassword_strong_auth_required_reason_restart_work_password (8923861444535970646) -->
-    <skip />
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pattern" msgid="8548464672947477043">"Түзмөктү өчүрүп-күйгүзгөндөн кийин графикалык ачкычын киргизүү талап кылынат."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pin" msgid="8048122891934295280">"Түзмөктү өчүрүп-күйгүзгөндөн кийин PIN кодун киргизүү талап кылынат."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_password" msgid="9007679426540259125">"Түзмөктү өчүрүп-күйгүзгөндөн кийин сырсөзүн киргизүү талап кылынат."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_pattern" msgid="7462071286473121099">"Түзмөктү өчүрүп-күйгүзгөндөн кийин жумуш профилинин графикалык ачкычы талап кылынат."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_pin" msgid="809763184419127790">"Түзмөктү өчүрүп-күйгүзгөндөн кийин жумуш профилинин PIN кодун киргизүү талап кылынат."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_work_password" msgid="8923861444535970646">"Түзмөктү өчүрүп-күйгүзгөндөн кийин жумуш профилинин сырсөзүн киргизүү талап кылынат."</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PIN код туура эмес"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"Сырсөз туура эмес"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"Үлгү туура эмес"</string>
@@ -1475,6 +1469,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"USB сактагычка жылдыруу"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"SD картага жылдыруу"</string>
     <string name="moving" msgid="6431016143218876491">"Жылдырылууда"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"Сактагычта орун жетишсиз."</string>
     <string name="does_not_exist" msgid="1501243985586067053">"Мындай колдонмо жок."</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"Колдонмо көчүрүүдөн корголгон."</string>
@@ -2225,7 +2221,7 @@
     <string name="vpn_version" msgid="1939804054179766249">"<xliff:g id="VERSION">%s</xliff:g> версиясы"</string>
     <string name="vpn_forget_long" msgid="2232239391189465752">"VPN профили унутулсун"</string>
     <string name="vpn_replace_always_on_vpn_title" msgid="3010435028275752220">"Учурдагы VPN алмаштырылсынбы?"</string>
-    <string name="vpn_replace_always_on_vpn_message" msgid="4764679857158814028">"Мурунтан эле VPN кызматына туташкансыз. Эгер башкасына туташсаңыз учурдагы VPN өчүрүлөт."</string>
+    <string name="vpn_replace_always_on_vpn_message" msgid="4764679857158814028">"VPN кызматы туташылган. Эгер башкасына туташсаңыз, учурдагы VPN өчүрүлөт."</string>
     <string name="vpn_cant_connect_title" msgid="4517706987875907511">"<xliff:g id="VPN_NAME">%1$s</xliff:g> туташпай жатат"</string>
     <string name="vpn_cant_connect_message" msgid="2593197919352621279">"Бул колдонмо дайым иштеген VPN кызматына туташпайт."</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
@@ -2974,6 +2970,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"Администраторуңуз бул түзмөккө байланыштуу колдонмолор менен дайындарды, анын ичинде жөндөөлөр, уруксаттар, корпоративдик кирүү мүмкүнчүлүгү, тармактагы аракеттерди жана түзмөктүн жайгашкан жери тууралуу маалыматты көзөмөлдөй алат."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Өчүрүү"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Күйгүзүү"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"Көрсөтүү"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"Жашыруу"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Кошулуу түйүнү күйүк"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"Көчмө Wi-Fi түйүнү <xliff:g id="ID_1">%1$s</xliff:g> иштеп турат, бирок бул түзмөк үчүн Wi-Fi өчүрүлгөн."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Учак режими күйүк"</string>
@@ -2993,6 +2991,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Салкыныраак дисплей түстөрүн колдонуңуз"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Түс өзгөртүүлөрүн күчүнө киргизүү үчүн, экранды өчүрүңүз"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Автоматтык тутум жаңыртуулары"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"Жайгашкан жерди аныктоочу бета программаларды сыноо куралдары"</string>
     <string name="usage" msgid="2977875522080448986">"Колдонулушу"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Мобилдик дайындардын колдонулушу"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi дайындарынын колдонулушу"</string>
@@ -3094,10 +3093,22 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, буга чейин колдонулган эмес"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, акыркы жолу качан колдонулганы белгисиз"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> бошотуу"</string>
-    <string name="support_escalation_title" msgid="5264156567389651356">"Күнү-түнү колдоо көрсөтөт"</string>
+    <string name="support_escalation_title" msgid="7129417437049874035">"Күнү-түнү жардам берүүгө даярбыз"</string>
+    <string name="support_escalation_summary" msgid="2698799592848652706">"Бизге чалып же электрондук кат жөнөтсөңүз, маселеңизди дароо чечип беребиз. Ызы-чуусуз эле."</string>
+    <string name="support_offline_title" msgid="482049324795211184">"Сиз оффлайндасыз"</string>
+    <string name="support_offline_summary" msgid="8795134237938994064">"Колдоо бөлүмүнө байланышуу үчүн, адегенде Wi-Fi же мобилдик Интернетке туташыңыз."</string>
+    <string name="support_more_help_title" msgid="6923257931625780264">"Жардам алуунун башка жолдору"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"Телефон"</string>
+    <string name="support_escalation_by_phone_offline" msgid="2515493752748803099">"Телефон"</string>
     <string name="support_escalation_by_email" msgid="6645440354764367526">"Электрондук почта"</string>
+    <string name="support_escalation_by_chat" msgid="977019859110763749">"Маек"</string>
     <string name="support_forum_title" msgid="201753198197433199">"Жардам форуму"</string>
     <string name="support_articles_title" msgid="2301723375407192757">"Жардам берүүчү макалалар"</string>
     <string name="support_feedback_title" msgid="4960530438310623507">"Жооп пикир жөнөтүү"</string>
+    <!-- no translation found for support_sign_in_required_title (2919270490197985164) -->
+    <skip />
+    <!-- no translation found for support_sign_in_button_text (3054769428620671241) -->
+    <skip />
+    <!-- no translation found for support_sign_in_required_help (3930256366697956788) -->
+    <skip />
 </resources>
