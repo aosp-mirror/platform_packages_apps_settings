@@ -1470,6 +1470,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"ወደUSB ማከማቻ አንቀሳቅስ"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"ወደ SD ካርድ አንቀሳቅስ"</string>
     <string name="moving" msgid="6431016143218876491">"በማንቀሳቀስ ላይ"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"በቂ ማከማቻ ቦታ የለም::"</string>
     <string name="does_not_exist" msgid="1501243985586067053">"መተግበሪያ የለም::"</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"መተግበሪያው ቅጂ-ጥብቅ ነው።"</string>
@@ -2969,6 +2971,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"የእርስዎ አስተዳዳሪ ቅንብሮችን፣ ፈቃዶችን፣ የኮርፖሬት መዳረሻን፣ የአውታረ መረብ እንቅስቃሴን እና የመሣሪያዎ አካባቢያዊ መረጃን ጨምሮ ከዚህ መሣሪያ ጋር የተጎዳኙ መተግበሪያዎችን እና ውሂብን መከታተል እና ማቀናበር ይችላል።"</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"አጥፋ"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"አብራ"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"አሳይ"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"ደብቅ"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"የመገናኛ ነጥብ በርቷል"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"ተንቀሳቃሽ የWi-Fi መገናኛ ነጥብ <xliff:g id="ID_1">%1$s</xliff:g> ገቢር ነው፣ ለዚህ መሣሪያ Wi-Fi ጠፍቷል።"</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"የአውሮፕላን ሁነታ በርቷል"</string>
@@ -2988,6 +2992,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"ቀዝቀዝ ያሉ የማሳያ ቀለሞችን ይጠቀሙ"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"የቀለም ለውጥን ለመተግበር ማያ ገጹን ያጥፉት"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"ራስ-ሰር የስርዓት ዝማኔዎች"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"የአካባቢ የሙከራ መሣሪያዎች"</string>
     <string name="usage" msgid="2977875522080448986">"አጠቃቀም"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"የተንቀሳቃሽ ውሂብ አጠቃቀም"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi ውሂብ አጠቃቀም"</string>
@@ -3089,10 +3094,22 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>፣ በጭራሽ ጥቅም ላይ ውሎ አያውቅም"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>፣ ለመጨረሻ ጊዜ መቼ እንደተጠቀመ እርግጠኛ አይደለሁም"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> ያስለቅቁ"</string>
-    <string name="support_escalation_title" msgid="5264156567389651356">"24/7 ድጋፍ"</string>
+    <string name="support_escalation_title" msgid="7129417437049874035">"የማያቋርጥ እገዛ"</string>
+    <string name="support_escalation_summary" msgid="2698799592848652706">"ለእኛ ይደውሉ ወይም ኢሜይል ይላኩ እና እኛ ችግርዎን ወዲያውኑ እንቀርፍልዎታለን። ምንም ጣጣ የለውም።"</string>
+    <string name="support_offline_title" msgid="482049324795211184">"ከመስመር ውጭ ነዎት"</string>
+    <string name="support_offline_summary" msgid="8795134237938994064">"ድጋፍን ለማግኘት መጀመሪያ ከWi-Fi ወይም ውሂብ ጋር ይገናኙ።"</string>
+    <string name="support_more_help_title" msgid="6923257931625780264">"ተጨማሪ እገዛ"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"ስልክ"</string>
+    <string name="support_escalation_by_phone_offline" msgid="2515493752748803099">"ስልክ"</string>
     <string name="support_escalation_by_email" msgid="6645440354764367526">"ኢሜይል"</string>
+    <string name="support_escalation_by_chat" msgid="977019859110763749">"ውይይት"</string>
     <string name="support_forum_title" msgid="201753198197433199">"የእገዛ መድረክ"</string>
     <string name="support_articles_title" msgid="2301723375407192757">"የእገዛ ጽሑፎች"</string>
     <string name="support_feedback_title" msgid="4960530438310623507">"ግብረመልስ ላክ"</string>
+    <!-- no translation found for support_sign_in_required_title (2919270490197985164) -->
+    <skip />
+    <!-- no translation found for support_sign_in_button_text (3054769428620671241) -->
+    <skip />
+    <!-- no translation found for support_sign_in_required_help (3930256366697956788) -->
+    <skip />
 </resources>

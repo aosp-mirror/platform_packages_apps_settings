@@ -1492,6 +1492,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Premakni na pomnilnik USB"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Premakni na kartico SD"</string>
     <string name="moving" msgid="6431016143218876491">"Premikanje"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"Ni dovolj prostora za shranjevanje."</string>
     <string name="does_not_exist" msgid="1501243985586067053">"Aplikacija ne obstaja."</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"Aplikacija je zaščitena pred kopiranjem."</string>
@@ -2951,17 +2953,17 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Nič"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Če za to aplikacijo izklopite dostop do podatkov o uporabi, lahko vaš skrbnik kljub temu spremlja podatke o uporabi za aplikacije v vašem delovnem profilu."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Št. uporabljenih znakov: <xliff:g id="COUNT_0">%1$d</xliff:g> od <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="draw_overlay_title" msgid="4003905926278954971">"Aplikacije, ki lahko rišejo čez druge aplik."</string>
-    <string name="draw_overlay" msgid="9078696044299199938">"Risanje čez druge aplikacije"</string>
-    <string name="system_alert_window_settings" msgid="1757821151143694951">"Risanje čez druge aplikacije"</string>
+    <string name="draw_overlay_title" msgid="4003905926278954971">"Aplikacije, ki lahko prekrivajo druge aplik."</string>
+    <string name="draw_overlay" msgid="9078696044299199938">"Prekrivanje drugih aplikacij"</string>
+    <string name="system_alert_window_settings" msgid="1757821151143694951">"Prekrivanje drugih aplikacij"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Aplikacije"</string>
-    <string name="system_alert_window_access_title" msgid="8811695381437304132">"Risanje čez druge aplikacije"</string>
+    <string name="system_alert_window_access_title" msgid="8811695381437304132">"Prekrivanje drugih aplikacij"</string>
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Dovoli risanje čez druge aplikacije"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Dovoljenje aplikacije za risanje čez druge"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"To dovoljenje omogoča aplikaciji prikaz čez druge aplikacije, ki jih uporabljate, in lahko vpliva na uporabo vmesnika v drugih aplikacijah ali vas zavede pri prikazu drugih aplikacij."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"nr navidezna resničnost poslušalec stereo storitev za pomoč"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"sistemsko opozorilo pogovorno okno risanje čez druge aplikacije"</string>
-    <string name="overlay_settings" msgid="222062091489691363">"Risanje čez druge aplikacije"</string>
+    <string name="overlay_settings" msgid="222062091489691363">"Prekrivanje drugih aplikacij"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"Toliko aplikacij lahko riše čez druge aplikacije: <xliff:g id="COUNT_0">%d</xliff:g> od <xliff:g id="COUNT_1">%d</xliff:g>"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplikacije z dovoljenjem"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Da"</string>
@@ -3029,6 +3031,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"Skrbnik lahko nadzira in upravlja aplikacije ter podatke, povezane s to napravo, vključno z nastavitvami, dovoljenji, dostopom za podjetje, omrežno dejavnostjo in podatki o lokaciji naprave."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Izklop"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Vklop"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"Prikaz"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"Skrivanje"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Dostopna točka je vklopljena"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"Prenosna dostopna točka Wi-Fi <xliff:g id="ID_1">%1$s</xliff:g> je aktivna, povezava Wi-Fi za to napravo je izklopljena."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Način za letalo je vklopljen"</string>
@@ -3048,6 +3052,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Uporaba hladnejših barv zaslona"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Če želite uveljaviti spremembo barv, izklopite zaslon"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Samodejne sistemske posodobitve"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"Orodja za preskusno interno rabo lokacije"</string>
     <string name="usage" msgid="2977875522080448986">"Uporaba"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Prenesena količina podatkov v mobilnih omrežjih"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Količina prenesenih podatkov v omrežjih Wi-Fi"</string>
@@ -3151,10 +3156,22 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, še ni bilo uporabljeno"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, ni znano, kdaj je bilo nazadnje uporabljeno"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Sprosti <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <string name="support_escalation_title" msgid="5264156567389651356">"Podpora 24 ur na dan vse dni v tednu"</string>
+    <string name="support_escalation_title" msgid="7129417437049874035">"Celodnevna pomoč"</string>
+    <string name="support_escalation_summary" msgid="2698799592848652706">"Pokličite nas ali nam pošljite e-poštno sporočilo in težavo bomo takoj rešili. Hitro in brez zapletov."</string>
+    <string name="support_offline_title" msgid="482049324795211184">"Nimate vzpostavljene povezave."</string>
+    <string name="support_offline_summary" msgid="8795134237938994064">"Če se želite obrniti na podporo, se najprej povežite z omrežjem Wi-Fi ali mobilnim podatkovnim omrežjem."</string>
+    <string name="support_more_help_title" msgid="6923257931625780264">"Dodatna pomoč"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"Telefon"</string>
+    <string name="support_escalation_by_phone_offline" msgid="2515493752748803099">"Telefonski klic"</string>
     <string name="support_escalation_by_email" msgid="6645440354764367526">"E-pošta"</string>
+    <string name="support_escalation_by_chat" msgid="977019859110763749">"Klepet"</string>
     <string name="support_forum_title" msgid="201753198197433199">"Forum s pomočjo"</string>
     <string name="support_articles_title" msgid="2301723375407192757">"Članki s pomočjo"</string>
     <string name="support_feedback_title" msgid="4960530438310623507">"Pošlji povratne informacije"</string>
+    <!-- no translation found for support_sign_in_required_title (2919270490197985164) -->
+    <skip />
+    <!-- no translation found for support_sign_in_button_text (3054769428620671241) -->
+    <skip />
+    <!-- no translation found for support_sign_in_required_help (3930256366697956788) -->
+    <skip />
 </resources>

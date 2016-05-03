@@ -1470,6 +1470,8 @@
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"USBသိုလှောင်မှုသို့ရွေ့ပါ"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"SDကဒ်သို့ရွေ့မည်"</string>
     <string name="moving" msgid="6431016143218876491">"ရွေ့နေသည်"</string>
+    <!-- no translation found for another_migration_already_in_progress (7817354268848365487) -->
+    <skip />
     <string name="insufficient_storage" msgid="481763122991093080">"သိမ်းဆည်းရန်နေရာအလုံအလောက်မရှိပါ"</string>
     <string name="does_not_exist" msgid="1501243985586067053">"အပလီကေးရှင်းမှာ မရှိပါ"</string>
     <string name="app_forward_locked" msgid="6331564656683790866">"အပ်ပလီကေးရှင်းမှာ ကူးမယူနိုင်ရန်ပြုလုပ်ထားသည်။"</string>
@@ -2969,6 +2971,8 @@
     <string name="admin_device_owner_message" msgid="8734500370023898028">"သင့်စီမံခန့်ခွဲသူသည် ဆက်တင်များ၊ ခွင့်ပြုချက်များ၊ ပူးပေါင်းအသုံးပြုမှု၊ ကွန်ယက်လှုပ်ရှားမှုနှင့် စက်ပစ္စည်း၏ တည်နေရာအချက်အလက် အပါအဝင် ဤစက်ပစ္စည်းနှင့်ဆက်စပ်နေသည့် အက်ပ်များနှင့် ဒေတာများကို စောင့်ကြည့်ပြီး စီမံခန့်ခွဲနိုင်ပါသည်။"</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"ပိတ်မည်"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"ဖွင့်ပါ"</string>
+    <string name="condition_expand_show" msgid="608202020023489939">"ပြပါ"</string>
+    <string name="condition_expand_hide" msgid="948507739223760667">"ဝှက်ပါ"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"ဟော့စပေါ့ဖွင့်ထားသည်"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"ပြောင်းရွှေ့လွယ်သော ဝိုင်ဖိုင်ဟော့စပေါ့ <xliff:g id="ID_1">%1$s</xliff:g> ဖွင့်ထားသည်၊ ဤစက်ပစ္စည်းအတွက် ဝိုင်ဖိုင်မှာ ပိတ်ထားသည်။"</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"လေယာဉ်ပျံမုဒ် ဖွင့်ထားသည်"</string>
@@ -2988,6 +2992,7 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"ပိုအေးသည့် မျက်နှာပြင် အရောင်များကိုအသုံးပြုရန်"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"အရောင်ပြောင်းလဲမှု ပြုလုပ်ရန်၊ မျက်နှာပြင်ကိုပိတ်ပါ"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"အလိုအလျောက် စနစ်အပ်ဒိတ်များ"</string>
+    <string name="location_dogfood_tools" msgid="8139860759382544832">"တည်နေရာပြ စမ်းသပ်ပရိုဂရမ် ကိရိယာများ"</string>
     <string name="usage" msgid="2977875522080448986">"အသုံးပြုမှု"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"ဆဲလ်လူလာဒေတာအသုံးပြုမှု"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"ဝိုင်ဖိုင်ဒေတာအသုံးပြုမှု"</string>
@@ -3089,10 +3094,22 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>၊ ယခင်က လုံးဝအသုံးမပြုခဲ့ပါ"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>၊ နောက်ဆုံး မည်သည့်အချိန်က အသုံးပြုခဲ့ကြောင်း မသေချာပါ"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> နေရာလွတ်ပြုလုပ်ပါ"</string>
-    <string name="support_escalation_title" msgid="5264156567389651356">"၂၄ နာရီ ၇ ရက် ပံ့ပိုးမှု"</string>
+    <string name="support_escalation_title" msgid="7129417437049874035">"အချိန်ပြည့် အကူအညီ"</string>
+    <string name="support_escalation_summary" msgid="2698799592848652706">"ကျွန်ုပ်တို့ကို ဖုန်းဆက်ပါ သို့မဟုတ် အီးမေးလ်ပို့ပါ။ သင့်ပြဿနာများကို ကျွန်ုပ်တို့ ချက်ခြင်းဖြေရှင်းပေးပါမည်။ အားလုံးအဆင်ပြေ ချောမွေ့စေရပါမည်။"</string>
+    <string name="support_offline_title" msgid="482049324795211184">"သင်သည် အော့ဖ်လိုင်းဖြစ်နေပါသည်"</string>
+    <string name="support_offline_summary" msgid="8795134237938994064">"ဝန်ဆောင်မှုဌာနကို ဆက်သွယ်ရန် Wi-Fi သို့မဟုတ် ဒေတာသို့ ပထမဦးစွာ ချိတ်ဆက်ရပါမည်။"</string>
+    <string name="support_more_help_title" msgid="6923257931625780264">"နောက်ထပ်အကူအညီ"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"ဖုန်း"</string>
+    <string name="support_escalation_by_phone_offline" msgid="2515493752748803099">"ဖုန်း"</string>
     <string name="support_escalation_by_email" msgid="6645440354764367526">"အီးမေးလ်"</string>
+    <string name="support_escalation_by_chat" msgid="977019859110763749">"ချတ်လုပ်ရန်"</string>
     <string name="support_forum_title" msgid="201753198197433199">"အကူအညီ စကားဝိုင်း"</string>
     <string name="support_articles_title" msgid="2301723375407192757">"အကူအညီ ဆောင်းပါးများ"</string>
     <string name="support_feedback_title" msgid="4960530438310623507">"တုံ့ပြန်မှု ပို့ပါ"</string>
+    <!-- no translation found for support_sign_in_required_title (2919270490197985164) -->
+    <skip />
+    <!-- no translation found for support_sign_in_button_text (3054769428620671241) -->
+    <skip />
+    <!-- no translation found for support_sign_in_required_help (3930256366697956788) -->
+    <skip />
 </resources>
