@@ -35,14 +35,10 @@ import android.widget.Toast;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.RestrictedLockUtils;
 
 import java.io.IOException;
 
 import static android.content.Intent.EXTRA_USER;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 /**
  * Entry point Activity for account setup. Works as follows
  *
@@ -156,14 +152,22 @@ public class AddAccountSettings extends Activity {
             finish();
             return;
         }
-
-        // If the profile is locked, we must ask the user to unlock it first.
-        ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-        if (!helper.launchConfirmationActivity(UNLOCK_WORK_PROFILE_REQUEST,
-                getString(R.string.unlock_set_unlock_launch_picker_title),
-                false,
-                mUserHandle.getIdentifier())) {
+        if (Utils.startQuietModeDialogIfNecessary(this, um, mUserHandle.getIdentifier())) {
+            finish();
+            return;
+        }
+        if (um.isUserUnlocked(mUserHandle)) {
             requestChooseAccount();
+        } else {
+            // If the user is locked by fbe: we couldn't start the authenticator. So we must ask the
+            // user to unlock it first.
+            ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
+            if (!helper.launchConfirmationActivity(UNLOCK_WORK_PROFILE_REQUEST,
+                    getString(R.string.unlock_set_unlock_launch_picker_title),
+                    false,
+                    mUserHandle.getIdentifier())) {
+                requestChooseAccount();
+            }
         }
     }
 
