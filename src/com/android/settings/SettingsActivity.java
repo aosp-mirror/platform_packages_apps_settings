@@ -43,6 +43,7 @@ import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -536,6 +537,8 @@ public class SettingsActivity extends SettingsDrawerActivity
         final ComponentName cn = intent.getComponent();
         final String className = cn.getClassName();
 
+        publishShortcuts();
+
         mIsShowingDashboard = className.equals(Settings.class.getName())
                 || className.equals(Settings.WirelessSettings.class.getName())
                 || className.equals(Settings.DeviceSettings.class.getName())
@@ -1014,6 +1017,18 @@ public class SettingsActivity extends SettingsDrawerActivity
         transaction.commitAllowingStateLoss();
         getFragmentManager().executePendingTransactions();
         return f;
+    }
+
+    private void publishShortcuts() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                if (!getSharedPreferences(ShortcutInfoPublisher.PREF_FILE, Context.MODE_PRIVATE)
+                        .getBoolean(ShortcutInfoPublisher.PREF_KEY, false)) {
+                    ShortcutInfoPublisher.setDynamicShortcuts(SettingsActivity.this, getTileCache());
+                }
+            }
+        });
     }
 
     private void updateTilesList() {

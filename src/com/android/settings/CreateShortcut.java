@@ -59,14 +59,14 @@ public class CreateShortcut extends LauncherActivity {
         ResolveInfo resolveInfo = itemForPosition(position).resolveInfo;
         ActivityInfo activityInfo = resolveInfo.activityInfo;
         if (activityInfo.icon != 0) {
-            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createIcon(activityInfo.icon));
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createIcon(this, activityInfo.icon));
         }
         setResult(RESULT_OK, intent);
         finish();
     }
 
-    private Bitmap createIcon(int resource) {
-        Context context = new ContextThemeWrapper(this, android.R.style.Theme_Material);
+    static Bitmap createIcon(Context ctx, int resource) {
+        Context context = new ContextThemeWrapper(ctx, android.R.style.Theme_Material);
         View view = LayoutInflater.from(context).inflate(R.layout.shortcut_badge, null);
         ((ImageView) view.findViewById(android.R.id.icon)).setImageResource(resource);
 
