@@ -201,7 +201,6 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
                 ComponentName componentName = service.getComponentName();
                 preference.setKey(componentName.flattenToString());
 
-                preference.setOrder(Math.min(ORDER_LAST - 1, componentName.hashCode()));
                 preference.setFragment(PrintServiceSettingsFragment.class.getName());
                 preference.setPersistent(false);
 
