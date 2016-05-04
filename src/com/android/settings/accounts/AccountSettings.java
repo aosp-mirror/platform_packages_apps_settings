@@ -39,9 +39,7 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -55,6 +53,7 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -84,7 +83,7 @@ import static android.provider.Settings.EXTRA_AUTHORITIES;
  */
 public class AccountSettings extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener,
-        OnPreferenceClickListener, OnPreferenceChangeListener, Indexable {
+        OnPreferenceClickListener, Indexable {
     public static final String TAG = "AccountSettings";
 
     private static final String KEY_ACCOUNT = "account";
@@ -117,13 +116,13 @@ public class AccountSettings extends SettingsPreferenceFragment
          */
         public DimmableIconPreference addAccountPreference;
         /**
-         * The preference that displays the button to toggle work profile.
-         */
-        public SwitchPreference workModeSwitch;
-        /**
          * The preference that displays the button to remove the managed profile
          */
         public Preference removeWorkProfilePreference;
+        /**
+         * The preference that displays managed profile settings.
+         */
+        public Preference managedProfilePreference;
         /**
          * The {@link AuthenticatorHelper} that holds accounts data for this profile.
          */
@@ -239,23 +238,12 @@ public class AccountSettings extends SettingsPreferenceFragment
                 ).show();
                 return true;
             }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        // Check the preference
-        final int count = mProfiles.size();
-        for (int i = 0; i < count; i++) {
-            ProfileData profileData = mProfiles.valueAt(i);
-            if (preference == profileData.workModeSwitch) {
-                final int userId = profileData.userInfo.id;
-                if ((boolean) newValue) {
-                    mUm.trySetQuietModeDisabled(userId, null);
-                } else {
-                    mUm.setQuietModeEnabled(userId, true);
-                }
+            if (preference == profileData.managedProfilePreference) {
+                Bundle arguments = new Bundle();
+                arguments.putParcelable(Intent.EXTRA_USER, profileData.userInfo.getUserHandle());
+                ((SettingsActivity) getActivity()).startPreferencePanel(
+                        ManagedProfileSettings.class.getName(), arguments,
+                        R.string.managed_profile_settings_title, null, null, 0);
                 return true;
             }
         }
@@ -314,10 +302,8 @@ public class AccountSettings extends SettingsPreferenceFragment
                 profileData.preferenceGroup.setSummary(workGroupSummary);
                 ((AccessiblePreferenceCategory) profileData.preferenceGroup).setContentDescription(
                         getString(R.string.accessibility_category_work, workGroupSummary));
-                profileData.workModeSwitch = newWorkModeSwitchPreference(context);
-                final UserHandle userHandle = profileData.userInfo.getUserHandle();
-                profileData.workModeSwitch.setChecked(!mUm.isQuietModeEnabled(userHandle));
                 profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference(context);
+                profileData.managedProfilePreference = newManagedProfileSettings();
             } else {
                 profileData.preferenceGroup.setTitle(R.string.category_personal);
                 ((AccessiblePreferenceCategory) profileData.preferenceGroup).setContentDescription(
@@ -351,21 +337,22 @@ public class AccountSettings extends SettingsPreferenceFragment
         return preference;
     }
 
-    private SwitchPreference newWorkModeSwitchPreference(Context context) {
-        SwitchPreference preference = new SwitchPreference(getPrefContext());
-        preference.setTitle(R.string.work_mode_label);
-        preference.setSummary(R.string.work_mode_summary);
-        preference.setOnPreferenceChangeListener(this);
-        preference.setOrder(ORDER_NEXT_TO_LAST);
-        return preference;
-    }
-
     private Preference newRemoveWorkProfilePreference(Context context) {
         Preference preference = new Preference(getPrefContext());
         preference.setTitle(R.string.remove_managed_profile_label);
         preference.setIcon(R.drawable.ic_menu_delete);
         preference.setOnPreferenceClickListener(this);
         preference.setOrder(ORDER_LAST);
+        return preference;
+    }
+
+
+    private Preference newManagedProfileSettings() {
+        Preference preference = new Preference(getPrefContext());
+        preference.setTitle(R.string.managed_profile_settings_title);
+        preference.setIcon(R.drawable.ic_sysbar_quicksettings);
+        preference.setOnPreferenceClickListener(this);
+        preference.setOrder(ORDER_NEXT_TO_LAST);
         return preference;
     }
 
@@ -428,11 +415,11 @@ public class AccountSettings extends SettingsPreferenceFragment
                     R.string.managed_profile_not_available_label);
             profileData.preferenceGroup.addPreference(mProfileNotAvailablePreference);
         }
-        if (profileData.workModeSwitch != null) {
-            profileData.preferenceGroup.addPreference(profileData.workModeSwitch);
-        }
         if (profileData.removeWorkProfilePreference != null) {
             profileData.preferenceGroup.addPreference(profileData.removeWorkProfilePreference);
+        }
+        if (profileData.managedProfilePreference != null) {
+            profileData.preferenceGroup.addPreference(profileData.managedProfilePreference);
         }
     }
 
@@ -594,18 +581,6 @@ public class AccountSettings extends SettingsPreferenceFragment
                 getActivity().invalidateOptionsMenu();
                 return;
             }
-
-            if (action.equals(Intent.ACTION_MANAGED_PROFILE_AVAILABLE)
-                    || action.equals(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE)) {
-                // We assume there's only one managed profile, otherwise this needs to change.
-                ProfileData profileData = mProfiles.valueAt(1);
-                if (intent.getIntExtra(Intent.EXTRA_USER_HANDLE,
-                        UserHandle.USER_NULL) == profileData.userInfo.id) {
-                    profileData.workModeSwitch.setChecked(
-                            !mUm.isQuietModeEnabled(profileData.userInfo.getUserHandle()));
-                }
-                return;
-            }
             Log.w(TAG, "Cannot handle received broadcast: " + intent.getAction());
         }
 
@@ -614,8 +589,6 @@ public class AccountSettings extends SettingsPreferenceFragment
                 IntentFilter intentFilter = new IntentFilter();
                 intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_REMOVED);
                 intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_ADDED);
-                intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
-                intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
                 context.registerReceiver(this, intentFilter);
                 listeningToManagedProfileEvents = true;
             }
@@ -729,17 +702,23 @@ public class AccountSettings extends SettingsPreferenceFragment
                     if (!RestrictedLockUtils.hasBaseUserRestriction(context,
                             DISALLOW_MODIFY_ACCOUNTS, userInfo.id)) {
                         SearchIndexableRaw data = new SearchIndexableRaw(context);
-                        data = new SearchIndexableRaw(context);
                         data.title = res.getString(R.string.add_account_label);
                         data.screenTitle = screenTitle;
                         result.add(data);
                     }
                     if (userInfo.isManagedProfile()) {
-                        SearchIndexableRaw data = new SearchIndexableRaw(context);
-                        data = new SearchIndexableRaw(context);
-                        data.title = res.getString(R.string.remove_managed_profile_label);
-                        data.screenTitle = screenTitle;
-                        result.add(data);
+                        {
+                            SearchIndexableRaw data = new SearchIndexableRaw(context);
+                            data.title = res.getString(R.string.remove_managed_profile_label);
+                            data.screenTitle = screenTitle;
+                            result.add(data);
+                        }
+                        {
+                            SearchIndexableRaw data = new SearchIndexableRaw(context);
+                            data.title = res.getString(R.string.managed_profile_settings_title);
+                            data.screenTitle = screenTitle;
+                            result.add(data);
+                        }
                     }
                 }
             }
