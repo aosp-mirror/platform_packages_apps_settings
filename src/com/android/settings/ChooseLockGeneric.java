@@ -183,6 +183,13 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mUserId = targetUser;
             }
 
+            if (DevicePolicyManager.ACTION_SET_NEW_PASSWORD
+                    .equals(getActivity().getIntent().getAction())
+                    && Utils.isManagedProfile(UserManager.get(getActivity()), mUserId)
+                    && mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
+                getActivity().setTitle(R.string.lock_settings_picker_title_profile);
+            }
+
             mManagedPasswordProvider = ManagedLockPasswordProvider.get(getActivity(), mUserId);
 
             if (mPasswordConfirmed) {
