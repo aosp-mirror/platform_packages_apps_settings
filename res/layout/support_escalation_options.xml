@@ -21,7 +21,9 @@
     android:layout_height="wrap_content"
     android:background="@color/support_escalation_background"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:paddingStart="56dp"
+    android:paddingEnd="56dp">
     <Button
         android:id="@android:id/text1"
         style="@style/SupportPrimaryButton"
@@ -30,7 +32,8 @@
         android:layout_margin="8dp"/>
     <Button
         android:id="@android:id/text2"
-        style="@style/SupportSecondaryButton"
+        style="@style/SupportPrimaryButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"/>
 </LinearLayout>
