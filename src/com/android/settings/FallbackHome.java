@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.util.Log;
 
 import java.util.Objects;
@@ -36,6 +37,14 @@ public class FallbackHome extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Set ourselves totally black before the device is provisioned so that
+        // we don't flash the wallpaper before SUW
+        if (Settings.Global.getInt(getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0) == 0) {
+            setTheme(android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        }
+
         registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_USER_UNLOCKED));
         maybeFinish();
     }
