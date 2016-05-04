@@ -56,6 +56,7 @@ import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.AccountSyncSettings;
+import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.applications.InstalledAppDetails;
@@ -328,6 +329,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             AdvancedAppSettings.class.getName(),
             WallpaperTypeSettings.class.getName(),
             VrListenerSettings.class.getName(),
+            ManagedProfileSettings.class.getName(),
     };
 
 
