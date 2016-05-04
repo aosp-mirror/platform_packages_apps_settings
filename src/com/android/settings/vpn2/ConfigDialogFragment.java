@@ -153,7 +153,8 @@ public class ConfigDialogFragment extends DialogFragment implements
             }
 
             final ConnectivityManager conn = ConnectivityManager.from(getActivity());
-            conn.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null);
+            conn.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null,
+                    /* lockdownEnabled */ false);
             VpnUtils.setLockdownVpn(getContext(), profile.key);
         } else {
             // update only if lockdown vpn has been changed
