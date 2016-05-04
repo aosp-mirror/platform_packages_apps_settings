@@ -33,4 +33,9 @@ public final class FeatureFactoryImpl extends FeatureFactory {
         return null;
     }
 
+    @Override
+    public StorageManagementJobProvider getStorageManagementJobProvider() {
+        return null;
+    }
+
 }
