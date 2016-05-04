@@ -176,7 +176,8 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         if (mUserId == UserHandle.USER_SYSTEM) {
             VpnUtils.clearLockdownVpn(getContext());
         }
-        mConnectivityManager.setAlwaysOnVpnPackageForUser(mUserId, isEnabled ? mPackageName : null);
+        mConnectivityManager.setAlwaysOnVpnPackageForUser(mUserId, isEnabled ? mPackageName : null,
+                /* lockdownEnabled */ false);
         if (isEnabled && !isVpnAlwaysOn()) {
             CannotConnectFragment.show(this, mVpnLabel);
         }
