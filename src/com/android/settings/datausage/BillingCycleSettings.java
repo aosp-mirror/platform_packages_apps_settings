@@ -173,11 +173,13 @@ public class BillingCycleSettings extends DataUsageBase implements
 
 
             final LayoutInflater dialogInflater = LayoutInflater.from(context);
+            final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
             mView = dialogInflater.inflate(R.layout.data_usage_bytes_editor, null, false);
             setupPicker((EditText) mView.findViewById(R.id.bytes),
                     (Spinner) mView.findViewById(R.id.size_spinner));
             return new AlertDialog.Builder(context)
-                    .setTitle(R.string.data_usage_warning_editor_title)
+                    .setTitle(isLimit ? R.string.data_usage_limit_editor_title
+                            : R.string.data_usage_warning_editor_title)
                     .setView(mView)
                     .setPositiveButton(R.string.data_usage_cycle_editor_positive, this)
                     .create();
