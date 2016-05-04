@@ -254,8 +254,10 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         long freeableSpace = 0;
         for (int i = 0; i < mAppEntries.size(); i++) {
             final AppEntry entry = mAppEntries.get(i);
-            if (!mUncheckedApplications.contains(entry.label)) {
-                freeableSpace += mAppEntries.get(i).size;
+            long entrySize = mAppEntries.get(i).size;
+            // If the entrySize is negative, it is either an unknown size or an error occurred.
+            if (!mUncheckedApplications.contains(entry.label) && entrySize > 0) {
+                freeableSpace += entrySize;
             }
         }
         return freeableSpace;
