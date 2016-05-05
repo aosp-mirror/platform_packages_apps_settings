@@ -40,8 +40,6 @@ import android.text.format.Formatter;
 import android.util.ArraySet;
 import android.view.View;
 import android.widget.AdapterView;
-
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
@@ -52,7 +50,6 @@ import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.UidDetailProvider;
 
-import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
@@ -209,7 +206,9 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     @Override
     public void onResume() {
         super.onResume();
-        mDataSaverBackend.addListener(this);
+        if (mDataSaverBackend != null) {
+            mDataSaverBackend.addListener(this);
+        }
         mPolicy = services.mPolicyEditor.getPolicy(mTemplate);
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
                 ChartDataLoader.buildArgs(mTemplate, mAppItem), mChartDataCallbacks);
@@ -219,7 +218,9 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     @Override
     public void onPause() {
         super.onPause();
-        mDataSaverBackend.remListener(this);
+        if (mDataSaverBackend != null) {
+            mDataSaverBackend.remListener(this);
+        }
     }
 
     @Override
