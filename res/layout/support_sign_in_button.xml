@@ -19,7 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/support_escalation_background"
+    android:background="@color/card_background_grey"
     android:gravity="center_horizontal"
     android:orientation="vertical">
     <Button
@@ -32,5 +32,7 @@
         android:id="@android:id/text2"
         style="@style/SupportSecondaryButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:minHeight="48dp"/>
 </LinearLayout>

@@ -19,9 +19,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/support_escalation_background"
+    android:background="@color/card_background_grey"
     android:gravity="center_horizontal"
-    android:paddingBottom="8dp">
+    android:paddingBottom="40dp">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,6 +39,7 @@
             android:id="@+id/summary1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
             android:textAppearance="@style/TextAppearance.Small"
             android:textColor="?android:attr/textColorSecondary"/>
     </LinearLayout>
@@ -59,6 +60,7 @@
             android:id="@+id/summary2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
             android:textAppearance="@style/TextAppearance.Small"
             android:textColor="?android:attr/textColorSecondary"/>
     </LinearLayout>
