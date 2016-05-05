@@ -179,9 +179,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 R.string.support_forum_title, 0 /* summary */,
                 mSupportFeatureProvider.getForumIntent()));
         mSupportData.add(new SupportData(TYPE_SUPPORT_TILE, R.drawable.ic_help_24dp,
-                R.string.support_articles_title, 0 /* summary */, null /*intent */));
-        mSupportData.add(new SupportData(TYPE_SUPPORT_TILE, R.drawable.ic_feedback_24dp,
-                R.string.support_feedback_title, 0 /* summary */, null /*intent */));
+                R.string.help_feedback_label, 0 /* summary */,
+                mSupportFeatureProvider.getHelpIntent(mActivity)));
     }
 
     private void bindEscalationOptions(ViewHolder holder, SupportData data) {
