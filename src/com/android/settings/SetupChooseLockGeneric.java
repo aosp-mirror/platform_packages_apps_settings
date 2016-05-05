@@ -34,6 +34,7 @@ import android.widget.LinearLayout;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.fingerprint.SetupSkipDialog;
+import com.android.settings.utils.SettingsDividerItemDecoration;
 import com.android.setupwizardlib.GlifPreferenceLayout;
 
 /**
@@ -79,6 +80,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             super.onViewCreated(view, savedInstanceState);
 
             GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+            layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
             layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
                     R.dimen.suw_items_glif_text_divider_inset));
 

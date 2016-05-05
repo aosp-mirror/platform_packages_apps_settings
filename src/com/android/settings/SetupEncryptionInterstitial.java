@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.settings.utils.SettingsDividerItemDecoration;
 import com.android.setupwizardlib.GlifPreferenceLayout;
 
 /**
@@ -81,6 +82,7 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial {
             super.onViewCreated(view, savedInstanceState);
 
             final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+            layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
             layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
                     R.dimen.suw_items_glif_icon_divider_inset));
             layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
