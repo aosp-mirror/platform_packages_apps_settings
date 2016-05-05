@@ -49,12 +49,13 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
 
-import libcore.util.Objects;
-
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         implements InputManager.InputDeviceListener {
@@ -67,6 +68,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     @NonNull
     private final List<HardKeyboardDeviceInfo> mLastHardKeyboards = new ArrayList<>();
+    @NonNull
+    private final List<KeyboardInfoPreference> mTempKeyboardInfoList = new ArrayList<>();
 
     @NonNull
     private final HashSet<Integer> mLoaderIDs = new HashSet<>();
@@ -136,6 +139,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             return;
         }
 
+        Collections.sort(keyboardsList);
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
         for (Keyboards keyboards : keyboardsList) {
@@ -144,27 +148,26 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             category.setOrder(0);
             preferenceScreen.addPreference(category);
             for (Keyboards.KeyboardInfo info : keyboards.mKeyboardInfoList) {
-                Preference pref = new Preference(getPrefContext(), null);
+                mTempKeyboardInfoList.clear();
                 final InputMethodInfo imi = info.mImi;
                 final InputMethodSubtype imSubtype = info.mImSubtype;
                 if (imi != null) {
-                    pref.setTitle(getDisplayName(getContext(), imi, imSubtype));
-                    KeyboardLayout layout = info.mLayout;
-                    if (layout != null) {
-                        pref.setSummary(layout.getLabel());
-                    } else {
-                        pref.setSummary(
-                                getPrefContext().getString(R.string.default_keyboard_layout));
-                    }
+                    KeyboardInfoPreference pref =
+                            new KeyboardInfoPreference(getPrefContext(), info);
                     pref.setOnPreferenceClickListener(preference -> {
                         showKeyboardLayoutScreen(
                                 keyboards.mDeviceInfo.mDeviceIdentifier, imi, imSubtype);
                         return true;
                     });
+                    mTempKeyboardInfoList.add(pref);
+                    Collections.sort(mTempKeyboardInfoList);
+                }
+                for (KeyboardInfoPreference pref : mTempKeyboardInfoList) {
                     category.addPreference(pref);
                 }
             }
         }
+        mTempKeyboardInfoList.clear();
         mKeyboardAssistanceCategory.setOrder(1);
         preferenceScreen.addPreference(mKeyboardAssistanceCategory);
         updateShowVirtualKeyboardSwitch();
@@ -205,7 +208,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     private void updateHardKeyboards() {
         final ArrayList<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboards();
-        if (!Objects.equal(newHardKeyboards, mLastHardKeyboards)) {
+        if (!Objects.equals(newHardKeyboards, mLastHardKeyboards)) {
             clearLoader();
             mLastHardKeyboards.clear();
             mLastHardKeyboards.addAll(newHardKeyboards);
@@ -273,20 +276,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             updateShowVirtualKeyboardSwitch();
         }
     };
-
-    @NonNull
-    static CharSequence getDisplayName(
-            @NonNull Context context, @NonNull InputMethodInfo imi,
-            @Nullable InputMethodSubtype imSubtype) {
-        final CharSequence imeName = imi.loadLabel(context.getPackageManager());
-        if (imSubtype == null) {
-            return imeName;
-        }
-        final CharSequence imSubtypeName = imSubtype.getDisplayName(
-                context, imi.getPackageName(), imi.getServiceInfo().applicationInfo);
-        return String.format(
-                context.getString(R.string.physical_device_title), imSubtypeName, imeName);
-    }
 
     private static final class Callbacks implements LoaderManager.LoaderCallbacks<List<Keyboards>> {
         @NonNull
@@ -424,17 +413,24 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
     }
 
-    public static final class Keyboards {
+    public static final class Keyboards implements Comparable<Keyboards> {
         @NonNull
         public final HardKeyboardDeviceInfo mDeviceInfo;
         @NonNull
         public final ArrayList<KeyboardInfo> mKeyboardInfoList;
+        @NonNull
+        public final Collator mCollator = Collator.getInstance();
 
         public Keyboards(
                 @NonNull final HardKeyboardDeviceInfo deviceInfo,
                 @NonNull final ArrayList<KeyboardInfo> keyboardInfoList) {
             mDeviceInfo = deviceInfo;
             mKeyboardInfoList = keyboardInfoList;
+        }
+
+        @Override
+        public int compareTo(@NonNull Keyboards another) {
+            return mCollator.compare(mDeviceInfo.mDeviceName, another.mDeviceInfo.mDeviceName);
         }
 
         public static final class KeyboardInfo {
@@ -452,6 +448,82 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 mImi = imi;
                 mImSubtype = imSubtype;
                 mLayout = layout;
+            }
+        }
+    }
+
+    static final class KeyboardInfoPreference extends Preference {
+
+        @NonNull
+        private final CharSequence mImeName;
+        @Nullable
+        private final CharSequence mImSubtypeName;
+        @NonNull
+        private final Collator collator = Collator.getInstance();
+
+        private KeyboardInfoPreference(
+                @NonNull Context context, @NonNull Keyboards.KeyboardInfo info) {
+            super(context);
+            mImeName = info.mImi.loadLabel(context.getPackageManager());
+            mImSubtypeName = getImSubtypeName(context, info.mImi, info.mImSubtype);
+            setTitle(formatDisplayName(context, mImeName, mImSubtypeName));
+            if (info.mLayout != null) {
+                setSummary(info.mLayout.getLabel());
+            }
+        }
+
+        @NonNull
+        static CharSequence getDisplayName(
+                @NonNull Context context, @NonNull InputMethodInfo imi,
+                @Nullable InputMethodSubtype imSubtype) {
+            final CharSequence imeName = imi.loadLabel(context.getPackageManager());
+            final CharSequence imSubtypeName = getImSubtypeName(context, imi, imSubtype);
+            return formatDisplayName(context, imeName, imSubtypeName);
+        }
+
+        private static CharSequence formatDisplayName(
+                @NonNull Context context,
+                @NonNull CharSequence imeName, @Nullable CharSequence imSubtypeName) {
+            if (imSubtypeName == null) {
+                return imeName;
+            }
+            return String.format(
+                    context.getString(R.string.physical_device_title), imeName, imSubtypeName);
+        }
+
+        @Nullable
+        private static CharSequence getImSubtypeName(
+                @NonNull Context context, @NonNull InputMethodInfo imi,
+                @Nullable InputMethodSubtype imSubtype) {
+            if (imSubtype != null) {
+                return imSubtype.getDisplayName(
+                        context, imi.getPackageName(), imi.getServiceInfo().applicationInfo);
+            }
+            return null;
+        }
+
+        @Override
+        public int compareTo(@NonNull Preference object) {
+            if (!(object instanceof KeyboardInfoPreference)) {
+                return super.compareTo(object);
+            }
+            KeyboardInfoPreference another = (KeyboardInfoPreference) object;
+            int result = compare(mImeName, another.mImeName);
+            if (result == 0) {
+                result = compare(mImSubtypeName, another.mImSubtypeName);
+            }
+            return result;
+        }
+
+        private int compare(@Nullable CharSequence lhs, @Nullable CharSequence rhs) {
+            if (!TextUtils.isEmpty(lhs) && !TextUtils.isEmpty(rhs)) {
+                return collator.compare(lhs.toString(), rhs.toString());
+            } else if (TextUtils.isEmpty(lhs) && TextUtils.isEmpty(rhs)) {
+                return 0;
+            } else if (!TextUtils.isEmpty(lhs)) {
+                return -1;
+            } else {
+                return 1;
             }
         }
     }
