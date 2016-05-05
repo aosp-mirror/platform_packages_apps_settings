@@ -53,6 +53,11 @@ public interface SupportFeatureProvider {
     boolean isSupportTypeEnabled(Context context, @SupportType int type);
 
     /**
+     * Returns a localized string indicating estimated wait time for a support time.
+     */
+    String getEstimatedWaitTime(Context context, @SupportType int type);
+
+    /**
      * Returns an {@link Account} that's eligible for support options.
      */
     Account getSupportEligibleAccount(Context context);
@@ -61,7 +66,7 @@ public interface SupportFeatureProvider {
      * Returns an {@link Intent} that opens email support for specified account.
      *
      * @param context A UI Context
-     * @param account A account returned by {@link #getSupportEligibleAccounts}
+     * @param account A account returned by {@link #getSupportEligibleAccount}
      * @param type The type of support account needs.
      */
     Intent getSupportIntent(Context context, Account account, @SupportType int type);
