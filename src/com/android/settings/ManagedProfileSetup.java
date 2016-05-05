@@ -32,6 +32,7 @@ import java.util.List;
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
 import static android.content.pm.PackageManager.GET_META_DATA;
 import static android.content.pm.PackageManager.GET_RESOLVED_FILTER;
+import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
 
 /**
  * Listens to {@link Intent.ACTION_BOOT_COMPLETED} and {@link Intent.ACTION_PRE_BOOT_COMPLETED}
@@ -63,7 +64,7 @@ public class ManagedProfileSetup extends BroadcastReceiver {
 
         // Resolves activities for the managed profile (which we're running as)
         List<ResolveInfo> resolvedIntents = pm.queryIntentActivities(intent,
-                GET_ACTIVITIES | GET_META_DATA | GET_RESOLVED_FILTER);
+                GET_ACTIVITIES | GET_META_DATA | GET_RESOLVED_FILTER | MATCH_DISABLED_COMPONENTS);
         final int count = resolvedIntents.size();
         for (int i = 0; i < count; i++) {
             ResolveInfo info = resolvedIntents.get(i);
