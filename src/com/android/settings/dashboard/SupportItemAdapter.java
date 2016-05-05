@@ -146,41 +146,53 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
     private void addEscalationCards() {
         if (mHasInternet) {
-            mSupportData.add(new SupportData(TYPE_TITLE, 0 /* icon */,
-                    R.string.support_escalation_title, R.string.support_escalation_summary,
-                    null /* intent */));
+            mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+                    .setText1(R.string.support_escalation_title)
+                    .setText2(R.string.support_escalation_summary)
+                    .build());
         } else {
-            mSupportData.add(new SupportData(TYPE_TITLE, 0 /* icon */,
-                    R.string.support_offline_title, R.string.support_offline_summary,
-                    null /* intent */));
+            mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+                    .setText1(R.string.support_offline_title)
+                    .setText2(R.string.support_offline_summary)
+                    .build());
         }
-        final int phoneSupportText = mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE)
-                ? R.string.support_escalation_by_phone : 0;
-        final int chatSupportText = mSupportFeatureProvider.isSupportTypeEnabled(mActivity, CHAT)
-                ? R.string.support_escalation_by_chat : 0;
-        mSupportData.add(new SupportData(TYPE_ESCALATION_OPTIONS, 0 /* icon */,
-                phoneSupportText, chatSupportText, null /* intent */));
+        final SupportData.Builder builder = new SupportData.Builder(TYPE_ESCALATION_OPTIONS);
+        if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE)) {
+            builder.setText1(R.string.support_escalation_by_phone);
+            builder.setSummary1(mSupportFeatureProvider.getEstimatedWaitTime(mActivity, PHONE));
+        }
+        if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, CHAT)) {
+            builder.setText2(R.string.support_escalation_by_chat);
+            builder.setSummary2(mSupportFeatureProvider.getEstimatedWaitTime(mActivity, CHAT));
+        }
+        mSupportData.add(builder.build());
     }
 
     private void addSignInPromo() {
-        mSupportData.add(new SupportData(TYPE_TITLE, 0 /* icon */,
-                R.string.support_sign_in_required_title, R.string.support_sign_in_required_summary,
-                null /* intent */));
-        mSupportData.add(new SupportData(TYPE_SIGN_IN_BUTTON, 0 /* icon */,
-                R.string.support_sign_in_button_text, R.string.support_sign_in_required_help,
-                null /* intent */));
-
+        mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+                .setText1(R.string.support_sign_in_required_title)
+                .setText2(R.string.support_sign_in_required_summary)
+                .build());
+        mSupportData.add(new SupportData.Builder(TYPE_SIGN_IN_BUTTON)
+                .setText1(R.string.support_sign_in_button_text)
+                .setText2(R.string.support_sign_in_required_help)
+                .build());
     }
 
     private void addMoreHelpItems() {
-        mSupportData.add(new SupportData(TYPE_SUBTITLE, 0 /* icon */,
-                R.string.support_more_help_title, 0 /* summary */, null /* intent */));
-        mSupportData.add(new SupportData(TYPE_SUPPORT_TILE, R.drawable.ic_forum_24dp,
-                R.string.support_forum_title, 0 /* summary */,
-                mSupportFeatureProvider.getForumIntent()));
-        mSupportData.add(new SupportData(TYPE_SUPPORT_TILE, R.drawable.ic_help_24dp,
-                R.string.help_feedback_label, 0 /* summary */,
-                mSupportFeatureProvider.getHelpIntent(mActivity)));
+        mSupportData.add(new SupportData.Builder(TYPE_SUBTITLE)
+                .setText1(R.string.support_more_help_title)
+                .build());
+        mSupportData.add(new SupportData.Builder(TYPE_SUPPORT_TILE)
+                .setIcon(R.drawable.ic_forum_24dp)
+                .setText1(R.string.support_forum_title)
+                .setIntent(mSupportFeatureProvider.getForumIntent())
+                .build());
+        mSupportData.add(new SupportData.Builder(TYPE_SUPPORT_TILE)
+                .setIcon(R.drawable.ic_help_24dp)
+                .setText1(R.string.help_feedback_label)
+                .setIntent(mSupportFeatureProvider.getHelpIntent(mActivity))
+                .build());
     }
 
     private void bindEscalationOptions(ViewHolder holder, SupportData data) {
@@ -199,6 +211,14 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             holder.text2View.setOnClickListener(mEscalationClickListener);
             holder.text2View.setEnabled(mHasInternet);
             holder.text2View.setVisibility(View.VISIBLE);
+        }
+        if (holder.summary1View != null) {
+            holder.summary1View.setText(data.summary1);
+            holder.summary1View.setVisibility(mHasInternet ? View.VISIBLE : View.GONE);
+        }
+        if (holder.summary2View != null) {
+            holder.summary2View.setText(data.summary2);
+            holder.summary2View.setVisibility(mHasInternet ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -255,12 +275,16 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         final ImageView iconView;
         final TextView text1View;
         final TextView text2View;
+        final TextView summary1View;
+        final TextView summary2View;
 
         ViewHolder(View itemView) {
             super(itemView);
             iconView = (ImageView) itemView.findViewById(android.R.id.icon);
             text1View = (TextView) itemView.findViewById(android.R.id.text1);
             text2View = (TextView) itemView.findViewById(android.R.id.text2);
+            summary1View = (TextView) itemView.findViewById(R.id.summary1);
+            summary2View = (TextView) itemView.findViewById(R.id.summary2);
         }
     }
 
@@ -278,14 +302,65 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         final int text1;
         @StringRes
         final int text2;
+        final String summary1;
+        final String summary2;
 
-        SupportData(@LayoutRes int type, @DrawableRes int icon, @StringRes int text1,
-                @StringRes int text2, Intent intent) {
-            this.type = type;
-            this.icon = icon;
-            this.text1 = text1;
-            this.text2 = text2;
-            this.intent = intent;
+        private SupportData(Builder builder) {
+            this.type = builder.mType;
+            this.icon = builder.mIcon;
+            this.text1 = builder.mText1;
+            this.text2 = builder.mText2;
+            this.summary1 = builder.mSummary1;
+            this.summary2 = builder.mSummary2;
+            this.intent = builder.mIntent;
+        }
+
+        static final class Builder {
+            @LayoutRes private final int mType;
+            @DrawableRes private int mIcon;
+            @StringRes private int mText1;
+            @StringRes private int mText2;
+            private String mSummary1;
+            private String mSummary2;
+            private Intent mIntent;
+
+            Builder(@LayoutRes int type) {
+                mType = type;
+            }
+
+            Builder setIcon(@DrawableRes int icon) {
+                mIcon = icon;
+                return this;
+            }
+
+            Builder setText1(@StringRes int text1) {
+                mText1 = text1;
+                return this;
+            }
+
+            Builder setSummary1(String summary1) {
+                mSummary1 = summary1;
+                return this;
+            }
+
+            Builder setText2(@StringRes int text2) {
+                mText2 = text2;
+                return this;
+            }
+
+            Builder setSummary2(String summary2) {
+                mSummary2 = summary2;
+                return this;
+            }
+
+            Builder setIntent(Intent intent) {
+                mIntent = intent;
+                return this;
+            }
+
+            SupportData build() {
+                return new SupportData(this);
+            }
         }
     }
 }
