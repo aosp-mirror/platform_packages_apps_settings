@@ -754,9 +754,11 @@ public class ManageApplications extends InstrumentedFragment
         }
         mOptionsMenu.findItem(R.id.advanced).setVisible(false);
 
-        mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(mListType == LIST_TYPE_STORAGE
+        mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(
+                (mListType == LIST_TYPE_STORAGE || mListType == LIST_TYPE_MAIN)
                 && mSortOrder != R.id.sort_order_alpha);
-        mOptionsMenu.findItem(R.id.sort_order_size).setVisible(mListType == LIST_TYPE_STORAGE
+        mOptionsMenu.findItem(R.id.sort_order_size).setVisible(
+                (mListType == LIST_TYPE_STORAGE || mListType == LIST_TYPE_MAIN)
                 && mSortOrder != R.id.sort_order_size);
 
         mOptionsMenu.findItem(R.id.show_system).setVisible(!mShowSystem
