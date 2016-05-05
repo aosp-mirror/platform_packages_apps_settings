@@ -34,6 +34,7 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.inputmethod.PhysicalKeyboardFragment.KeyboardInfoPreference;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -153,7 +154,7 @@ public final class KeyboardLayoutPickerFragment2 extends SettingsPreferenceFragm
             mPreferenceMap.put(pref, layout);
         }
 
-        root.setTitle(PhysicalKeyboardFragment.getDisplayName(getContext(), mImi, mSubtype));
+        root.setTitle(KeyboardInfoPreference.getDisplayName(getContext(), mImi, mSubtype));
         return root;
     }
 }
