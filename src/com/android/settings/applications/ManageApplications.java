@@ -260,17 +260,14 @@ public class ManageApplications extends InstrumentedFragment
             mSortOrder = R.id.sort_order_size;
         } else if (className.equals(UsageAccessSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_USAGE_ACCESS;
-            getActivity().getActionBar().setTitle(R.string.usage_access_title);
         } else if (className.equals(HighPowerApplicationsActivity.class.getName())) {
             mListType = LIST_TYPE_HIGH_POWER;
             // Default to showing system.
             mShowSystem = true;
         } else if (className.equals(OverlaySettingsActivity.class.getName())) {
             mListType = LIST_TYPE_OVERLAY;
-            getActivity().getActionBar().setTitle(R.string.system_alert_window_access_title);
         } else if (className.equals(WriteSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_WRITE_SETTINGS;
-            getActivity().getActionBar().setTitle(R.string.write_settings_title);
         } else {
             mListType = LIST_TYPE_MAIN;
         }
