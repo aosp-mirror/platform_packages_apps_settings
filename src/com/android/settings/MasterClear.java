@@ -177,6 +177,9 @@ public class MasterClear extends OptionsMenuFragment {
     }
 
     private void getContentDescription(View v, StringBuffer description) {
+       if (v.getVisibility() != View.VISIBLE) {
+           return;
+       }
        if (v instanceof ViewGroup) {
            ViewGroup vGroup = (ViewGroup) v;
            for (int i = 0; i < vGroup.getChildCount(); i++) {
