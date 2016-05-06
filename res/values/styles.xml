@@ -146,6 +146,12 @@
     <style name="SettingsPreferenceHeaderList" parent="@*android:style/PreferenceHeaderList">
     </style>
 
+    <style name="TrustedCredentialsList">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+    </style>
+
     <style name="PreferenceFragmentStyle" parent="@*android:style/PreferenceFragment.Material">
         <item name="android:layout">@layout/preference_list_fragment</item>
     </style>
