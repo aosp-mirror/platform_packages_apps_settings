@@ -114,9 +114,11 @@ public abstract class ToggleFeaturePreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        MenuItem menuItem = menu.add(mSettingsTitle);
-        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        menuItem.setIntent(mSettingsIntent);
+        if (mSettingsTitle != null && mSettingsIntent != null) {
+            MenuItem menuItem = menu.add(mSettingsTitle);
+            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            menuItem.setIntent(mSettingsIntent);
+        }
     }
 
     protected void onInstallSwitchBarToggleSwitch() {
