@@ -29,14 +29,19 @@ import android.provider.Settings;
 
 /**
  * Activity that shows a dialog explaining that a CA cert is allowing someone to monitor network
- * traffic. This activity should be launched for the user into which the CA cert is installed.
+ * traffic. This activity should be launched for the user into which the CA cert is installed
+ * unless Intent.EXTRA_USER_ID is provided.
  */
 public class MonitoringCertInfoActivity extends Activity implements OnClickListener,
         OnDismissListener {
 
+    private int mUserId;
+
     @Override
     protected void onCreate(Bundle savedStates) {
         super.onCreate(savedStates);
+
+        mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
 
         DevicePolicyManager dpm = getSystemService(DevicePolicyManager.class);
         final int numberOfCertificates = getIntent().getIntExtra(
@@ -53,7 +58,7 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
         builder.setNeutralButton(R.string.cancel, null);
         builder.setOnDismissListener(this);
 
-        if (dpm.getProfileOwner() != null) {
+        if (dpm.getProfileOwnerAsUser(mUserId) != null) {
             builder.setMessage(getResources().getQuantityString(R.plurals.ssl_ca_cert_info_message,
                     numberOfCertificates, dpm.getProfileOwnerName()));
         } else if (dpm.getDeviceOwnerComponentOnCallingUser() != null) {
@@ -72,7 +77,7 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
     public void onClick(DialogInterface dialog, int which) {
         Intent intent = new Intent(android.provider.Settings.ACTION_TRUSTED_CREDENTIALS_USER);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra(TrustedCredentialsSettings.ARG_SHOW_NEW_FOR_USER, UserHandle.myUserId());
+        intent.putExtra(TrustedCredentialsSettings.ARG_SHOW_NEW_FOR_USER, mUserId);
         startActivity(intent);
         finish();
     }

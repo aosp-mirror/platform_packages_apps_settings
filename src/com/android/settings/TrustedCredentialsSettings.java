@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.annotation.UiThread;
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
@@ -79,8 +80,10 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     private KeyguardManager mKeyguardManager;
     private int mTrustAllCaUserId;
 
-
+    private static final String SAVED_CONFIRMED_CREDENTIAL_USERS = "ConfirmedCredentialUsers";
+    private static final String SAVED_CONFIRMING_CREDENTIAL_USER = "ConfirmingCredentialUser";
     private static final String USER_ACTION = "com.android.settings.TRUSTED_CREDENTIALS_USER";
+    private static final int REQUEST_CONFIRM_CREDENTIALS = 1;
 
     @Override
     protected int getMetricsCategory() {
@@ -154,6 +157,8 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     private TabHost mTabHost;
     private ArrayList<GroupAdapter> mGroupAdapters = new ArrayList<>(2);
     private AliasOperation mAliasOperation;
+    private ArraySet<Integer> mConfirmedCredentialUsers;
+    private int mConfirmingCredentialUser;
     private Set<AdapterData.AliasLoader> mAliasLoaders = new ArraySet<AdapterData.AliasLoader>(2);
     private final SparseArray<KeyChainConnection>
             mKeyChainConnectionByProfileId = new SparseArray<KeyChainConnection>();
@@ -182,12 +187,31 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 .getSystemService(Context.KEYGUARD_SERVICE);
         mTrustAllCaUserId = getActivity().getIntent().getIntExtra(ARG_SHOW_NEW_FOR_USER,
                 UserHandle.USER_NULL);
+        mConfirmedCredentialUsers = new ArraySet<>(2);
+        mConfirmingCredentialUser = UserHandle.USER_NULL;
+        if (savedInstanceState != null) {
+            mConfirmingCredentialUser = savedInstanceState.getInt(SAVED_CONFIRMING_CREDENTIAL_USER,
+                    UserHandle.USER_NULL);
+            ArrayList<Integer> users = savedInstanceState.getIntegerArrayList(
+                    SAVED_CONFIRMED_CREDENTIAL_USERS);
+            if (users != null) {
+                mConfirmedCredentialUsers.addAll(users);
+            }
+        }
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNLOCKED);
         getActivity().registerReceiver(mWorkProfileChangedReceiver, filter);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntegerArrayList(SAVED_CONFIRMED_CREDENTIAL_USERS, new ArrayList<>(
+                mConfirmedCredentialUsers));
+        outState.putInt(SAVED_CONFIRMING_CREDENTIAL_USER, mConfirmingCredentialUser);
     }
 
     @Override public View onCreateView(
@@ -217,6 +241,16 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         }
         closeKeyChainConnections();
         super.onDestroy();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CONFIRM_CREDENTIALS) {
+            if (resultCode == Activity.RESULT_OK) {
+                mConfirmedCredentialUsers.add(mConfirmingCredentialUser);
+            }
+            mConfirmingCredentialUser = UserHandle.USER_NULL;
+        }
     }
 
     private void closeKeyChainConnections() {
@@ -262,14 +296,18 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     }
 
     /**
-     * Start work challenge activity. TODO: Move and refactor this method as a util function.
+     * Start work challenge activity.
+     * @return true if screenlock exists
      */
-    private void startWorkChallenge(int userId) {
+    private boolean startConfirmCredential(int userId) {
         final Intent newIntent = mKeyguardManager.createConfirmDeviceCredentialIntent(null, null,
                 userId);
-        newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        getActivity().startActivity(newIntent);
+        if (newIntent == null) {
+            return false;
+        }
+        mConfirmingCredentialUser = userId;
+        startActivityForResult(newIntent, REQUEST_CONFIRM_CREDENTIALS);
+        return true;
     }
 
     /**
@@ -303,7 +341,8 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         }
         @Override
         public CertHolder getChild(int groupPosition, int childPosition) {
-            return mData.mCertHoldersByUserId.get(getUserIdByGroup(groupPosition)).get(childPosition);
+            return mData.mCertHoldersByUserId.get(getUserIdByGroup(groupPosition)).get(
+                    childPosition);
         }
         @Override
         public long getGroupId(int groupPosition) {
@@ -386,18 +425,27 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         }
 
         public boolean checkGroupExpandableAndStartWarningActivity(int groupPosition) {
+            return checkGroupExpandableAndStartWarningActivity(groupPosition, true);
+        }
+
+        public boolean checkGroupExpandableAndStartWarningActivity(int groupPosition,
+                boolean startActivity) {
             final UserHandle groupUser = getGroup(groupPosition);
             final int groupUserId = groupUser.getIdentifier();
             if (mUserManager.isQuietModeEnabled(groupUser)) {
                 final Intent intent = UnlaunchableAppActivity.createInQuietModeDialogIntent(
                         groupUserId);
-                getActivity().startActivity(intent);
+                if (startActivity) {
+                    getActivity().startActivity(intent);
+                }
                 return false;
             } else if (!mUserManager.isUserUnlocked(groupUser)) {
                 final LockPatternUtils lockPatternUtils = new LockPatternUtils(
                         getActivity());
                 if (lockPatternUtils.isSeparateProfileChallengeEnabled(groupUserId)) {
-                    startWorkChallenge(groupUserId);
+                    if (startActivity) {
+                        startConfirmCredential(groupUserId);
+                    }
                     return false;
                 }
             }
@@ -548,7 +596,8 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         }
 
         public void prepare() {
-            mIsListExpanded = checkGroupExpandableAndStartWarningActivity();
+            mIsListExpanded = mParent.checkGroupExpandableAndStartWarningActivity(mGroupPosition,
+                    false /* startActivity */);
             refreshViews();
         }
 
@@ -888,6 +937,15 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     @Override
     public void removeOrInstallCert(CertHolder certHolder) {
         new AliasOperation(certHolder).execute();
+    }
+
+    @Override
+    public boolean startConfirmCredentialIfNotConfirmed(int userId) {
+        if (mConfirmedCredentialUsers.contains(userId)) {
+            // Credential has been confirmed. Don't start activity.
+            return false;
+        }
+        return startConfirmCredential(userId);
     }
 
     private class AliasOperation extends AsyncTask<Void, Void, Boolean> {
