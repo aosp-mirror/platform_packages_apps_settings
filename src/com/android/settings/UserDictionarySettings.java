@@ -72,12 +72,6 @@ public class UserDictionarySettings extends ListFragment {
     protected String mLocale;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getActivity().getActionBar().setTitle(R.string.user_dict_settings_title);
-    }
-
-    @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(
@@ -87,6 +81,7 @@ public class UserDictionarySettings extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getActivity().getActionBar().setTitle(R.string.user_dict_settings_title);
 
         final Intent intent = getActivity().getIntent();
         final String localeFromIntent =
