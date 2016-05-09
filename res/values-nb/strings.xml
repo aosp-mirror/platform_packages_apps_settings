@@ -283,7 +283,7 @@
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Dato og tid"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="2391530758339384324">"Angi dato og klokkeslett"</string>
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"Angi dato, klokkeslett, tidssone og formater"</string>
-    <string name="date_time_auto" msgid="7076906458515908345">"Automatisk dato og tid"</string>
+    <string name="date_time_auto" msgid="7076906458515908345">"Automatisk dato og klokkeslett"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Bruk nettverkets eget klokkeslett"</string>
     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Bruk nettverkets eget klokkeslett"</string>
     <string name="zone_auto" msgid="334783869352026648">"Automatisk tidssone"</string>
@@ -2894,14 +2894,14 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Ingen"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Selv om du slår av brukstilgangen for denne appen, forhindrer ikke dette administratoren din fra å spore data på arbeidsprofilen din."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g> av <xliff:g id="COUNT_1">%2$d</xliff:g> tegn er brukt"</string>
-    <string name="draw_overlay_title" msgid="4003905926278954971">"Apper som kan ligge over andre apper"</string>
+    <string name="draw_overlay_title" msgid="4003905926278954971">"Apper som kan brukes i andre apper"</string>
     <string name="draw_overlay" msgid="9078696044299199938">"Legges over andre apper"</string>
     <string name="system_alert_window_settings" msgid="1757821151143694951">"Ligge over andre apper"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Apper"</string>
     <string name="system_alert_window_access_title" msgid="8811695381437304132">"Ligge over andre apper"</string>
-    <string name="permit_draw_overlay" msgid="6606018549732046201">"Tillat å ligge over andre apper"</string>
+    <string name="permit_draw_overlay" msgid="6606018549732046201">"Tillat bruk i andre apper"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Tillatelse til å ligge over andre"</string>
-    <string name="allow_overlay_description" msgid="7895191337585827691">"Med denne tillatelsen kan apper vises over andre apper du bruker, og det kan ha en innvirkning på bruken din av grensesnittet i andre apper, eller endre det du tror du ser i andre apper."</string>
+    <string name="allow_overlay_description" msgid="7895191337585827691">"Hvis du tillater dette, kan apper vises over andre apper. Dette kan påvirke brukergrensesnittet og hva du ser i appene."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr, lyttetjeneste for virtuell virkelighet, stereo, hjelpetjenester"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"systemvarsel vindusdialogboks ligge over andre apper"</string>
     <string name="overlay_settings" msgid="222062091489691363">"Ligge over andre apper"</string>
@@ -3093,32 +3093,41 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g> – aldri brukt før"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g> – usikkert når den ble brukt sist"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Frigjør <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <!-- no translation found for support_escalation_title (2586337625943788579) -->
-    <skip />
-    <!-- no translation found for support_escalation_summary (5284600375153448787) -->
-    <skip />
+    <string name="support_escalation_title" msgid="2586337625943788579">"Hjelp døgnet rundt"</string>
+    <string name="support_escalation_summary" msgid="5284600375153448787">"Du kan be om å bli oppringt av eller chatte med brukerstøtten – vi kontakter deg så fort som mulig"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Du er uten nett"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"For å kontakte brukerstøtten, koble til Wi-Fi eller mobildata."</string>
     <string name="support_more_help_title" msgid="6923257931625780264">"Mer hjelp"</string>
-    <!-- no translation found for support_escalation_by_phone (1862089243763374647) -->
+    <string name="support_escalation_by_phone" msgid="1862089243763374647">"Ring brukerstøtten"</string>
+    <!-- no translation found for support_escalation_by_email (2582004943422798901) -->
     <skip />
-    <!-- no translation found for support_escalation_by_email (4013993789804178506) -->
+    <!-- no translation found for support_escalation_by_chat (3284697227089466497) -->
     <skip />
-    <string name="support_escalation_by_chat" msgid="977019859110763749">"Chat"</string>
     <string name="support_forum_title" msgid="201753198197433199">"Hjelpeforum"</string>
-    <!-- no translation found for support_sign_in_required_title (6782855985258687680) -->
-    <skip />
+    <string name="support_sign_in_required_title" msgid="6782855985258687680">"Logg på for å få hjelp"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Logg på"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Får du ikke tilgang til kontoen din?"</string>
-    <!-- no translation found for managed_profile_settings_title (2729481936758125054) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_title (6034734926815544221) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_summary (5431253552272970512) -->
-    <skip />
-    <!-- no translation found for hours (7020844602875333472) -->
-    <!-- no translation found for minutes (4666832442068789413) -->
-    <!-- no translation found for seconds (3876307354560025025) -->
-    <!-- no translation found for support_estimated_wait_time (6523081420029378051) -->
-    <skip />
+    <string name="managed_profile_settings_title" msgid="2729481936758125054">"Innstillinger for jobbprofilen"</string>
+    <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Kontaktsøk"</string>
+    <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Tillat kontaktsøk for organisasjonen din for å identifisere innringere og kontakter"</string>
+    <plurals name="hours" formatted="false" msgid="7020844602875333472">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> timer</item>
+      <item quantity="one">1 time</item>
+    </plurals>
+    <plurals name="minutes" formatted="false" msgid="4666832442068789413">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> minutter</item>
+      <item quantity="one">1 minutt</item>
+    </plurals>
+    <plurals name="seconds" formatted="false" msgid="3876307354560025025">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> sekunder</item>
+      <item quantity="one">1 sekund</item>
+    </plurals>
+    <string name="support_estimated_wait_time" msgid="6523081420029378051">"Ventetid: ~<xliff:g id="ESTIMATE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_talkback_computer" msgid="4875089335641234463">"Datamaskin"</string>
+    <string name="bluetooth_talkback_headset" msgid="5140152177885220949">"Hodetelefoner"</string>
+    <string name="bluetooth_talkback_phone" msgid="4260255181240622896">"Telefon"</string>
+    <string name="bluetooth_talkback_imaging" msgid="551146170554589119">"Bildefremviser"</string>
+    <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Øretelefoner"</string>
+    <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Inndata fra ytre utstyrsenheter"</string>
+    <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
 </resources>
