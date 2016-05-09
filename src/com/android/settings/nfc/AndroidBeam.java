@@ -52,12 +52,6 @@ public class AndroidBeam extends InstrumentedFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        final ActionBar actionBar = getActivity().getActionBar();
-
-        mOldActivityTitle = actionBar.getTitle();
-        actionBar.setTitle(R.string.android_beam_settings_title);
-
         mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
         setHasOptionsMenu(true);
     }
@@ -93,6 +87,8 @@ public class AndroidBeam extends InstrumentedFragment
         super.onActivityCreated(savedInstanceState);
 
         SettingsActivity activity = (SettingsActivity) getActivity();
+
+        mOldActivityTitle = activity.getActionBar().getTitle();
 
         mSwitchBar = activity.getSwitchBar();
         if (mBeamDisallowedByOnlyAdmin) {
