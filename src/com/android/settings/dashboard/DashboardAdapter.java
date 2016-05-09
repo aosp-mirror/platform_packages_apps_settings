@@ -18,9 +18,12 @@ package com.android.settings.dashboard;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -60,9 +63,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final List<Object> mItems = new ArrayList<>();
     private final List<Integer> mTypes = new ArrayList<>();
     private final List<Integer> mIds = new ArrayList<>();
+    private final IconCache mCache;
 
     private final Context mContext;
-    private final SuggestionsChecks mSuggestionsChecks;
 
     private List<DashboardCategory> mCategories;
     private List<Condition> mConditions;
@@ -79,7 +82,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     public DashboardAdapter(Context context) {
         mContext = context;
-        mSuggestionsChecks = new SuggestionsChecks(mContext);
+        mCache = new IconCache(context);
 
         setHasStableIds(true);
         setShowingAll(true);
@@ -89,15 +92,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return mSuggestions;
     }
 
-    public void setSuggestions(SuggestionParser suggestionParser) {
-        mSuggestionParser = suggestionParser;
-        mSuggestions = suggestionParser.getSuggestions();
-        for (int i = 0; i < mSuggestions.size(); i++) {
-            if (mSuggestionsChecks.isSuggestionComplete(mSuggestions.get(i))) {
-                disableSuggestion(mSuggestions.get(i));
-                mSuggestions.remove(i--);
-            }
-        }
+    public void setSuggestions(List<Tile> suggestions, SuggestionParser parser) {
+        mSuggestions = suggestions;
+        mSuggestionParser = parser;
         recountItems();
     }
 
@@ -226,12 +223,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             case R.layout.dashboard_tile:
                 final Tile tile = (Tile) mItems.get(position);
                 onBindTile(holder, tile);
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ((SettingsActivity) mContext).openTile(tile);
-                    }
-                });
+                holder.itemView.setTag(tile);
+                holder.itemView.setOnClickListener(this);
                 break;
             case R.layout.suggestion_header:
                 onBindSuggestionHeader(holder);
@@ -289,7 +282,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         popup.show();
     }
 
-    private void disableSuggestion(Tile suggestion) {
+    public void disableSuggestion(Tile suggestion) {
         if (mSuggestionParser.dismissSuggestion(suggestion)) {
             mContext.getPackageManager().setComponentEnabledSetting(
                     suggestion.intent.getComponent(),
@@ -323,7 +316,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     private void onBindTile(DashboardItemHolder holder, Tile tile) {
-        holder.icon.setImageIcon(tile.icon);
+        holder.icon.setImageDrawable(mCache.getIcon(tile.icon));
         holder.title.setText(tile.title);
         if (!TextUtils.isEmpty(tile.summary)) {
             holder.summary.setText(tile.summary);
@@ -365,6 +358,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.dashboard_tile) {
+            ((SettingsActivity) mContext).openTile((Tile) v.getTag());
+            return;
+        }
         if (v.getTag() == mExpandedCondition) {
             MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
                     mExpandedCondition.getMetricsConstant());
@@ -407,6 +404,25 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             packageName = suggestion.intent.getComponent().getClassName();
         }
         return packageName;
+    }
+
+    private static class IconCache {
+
+        private final Context mContext;
+        private final ArrayMap<Icon, Drawable> mMap = new ArrayMap<>();
+
+        public IconCache(Context context) {
+            mContext = context;
+        }
+
+        public Drawable getIcon(Icon icon) {
+            Drawable drawable = mMap.get(icon);
+            if (drawable == null) {
+                drawable = icon.loadDrawable(mContext);
+                mMap.put(icon, drawable);
+            }
+            return drawable;
+        }
     }
 
     public static class DashboardItemHolder extends RecyclerView.ViewHolder {
