@@ -17,6 +17,7 @@
 package com.android.settings.dashboard;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -27,7 +28,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settingslib.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -36,6 +36,7 @@ import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
@@ -69,6 +70,7 @@ public class DashboardSummary extends InstrumentedFragment
     private ConditionManager mConditionManager;
     private SuggestionParser mSuggestionParser;
     private LinearLayoutManager mLayoutManager;
+    private SuggestionsChecks mSuggestionsChecks;
 
     @Override
     protected int getMetricsCategory() {
@@ -88,6 +90,7 @@ public class DashboardSummary extends InstrumentedFragment
         mConditionManager = ConditionManager.get(context);
         mSuggestionParser = new SuggestionParser(context,
                 context.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
+        mSuggestionsChecks = new SuggestionsChecks(getContext());
         if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
     }
@@ -118,9 +121,11 @@ public class DashboardSummary extends InstrumentedFragment
                 MetricsLogger.visible(getContext(), c.getMetricsConstant());
             }
         }
-        for (Tile suggestion : mAdapter.getSuggestions()) {
-            MetricsLogger.action(getContext(), MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-                    DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion));
+        if (mAdapter.getSuggestions() != null) {
+            for (Tile suggestion : mAdapter.getSuggestions()) {
+                MetricsLogger.action(getContext(), MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
+                        DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion));
+            }
         }
         if (DEBUG_TIMING) Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime)
                 + " ms");
@@ -200,17 +205,12 @@ public class DashboardSummary extends InstrumentedFragment
             return;
         }
 
-        long start = System.currentTimeMillis();
-        // TODO: Cache summaries from old categories somehow.
         List<DashboardCategory> categories =
                 ((SettingsActivity) getActivity()).getDashboardCategories();
         mAdapter.setCategories(categories);
 
         // recheck to see if any suggestions have been changed.
-        mAdapter.setSuggestions(mSuggestionParser);
-
-        long delta = System.currentTimeMillis() - start;
-        Log.d(TAG, "rebuildUI took: " + delta + " ms");
+        new SuggestionLoader().execute();
     }
 
     @Override
@@ -222,5 +222,25 @@ public class DashboardSummary extends InstrumentedFragment
     public void onConditionsChanged() {
         Log.d(TAG, "onConditionsChanged");
         mAdapter.setConditions(mConditionManager.getConditions());
+    }
+
+    private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
+
+        @Override
+        protected List<Tile> doInBackground(Void... params) {
+            List<Tile> suggestions = mSuggestionParser.getSuggestions();
+            for (int i = 0; i < suggestions.size(); i++) {
+                if (mSuggestionsChecks.isSuggestionComplete(suggestions.get(i))) {
+                    mAdapter.disableSuggestion(suggestions.get(i));
+                    suggestions.remove(i--);
+                }
+            }
+            return suggestions;
+        }
+
+        @Override
+        protected void onPostExecute(List<Tile> tiles) {
+            mAdapter.setSuggestions(tiles, mSuggestionParser);
+        }
     }
 }
