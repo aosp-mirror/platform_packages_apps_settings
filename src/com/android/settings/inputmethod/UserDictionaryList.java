@@ -52,12 +52,12 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getActivity()));
-        getActivity().getActionBar().setTitle(R.string.user_dict_settings_title);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getActivity().getActionBar().setTitle(R.string.user_dict_settings_title);
 
         final Intent intent = getActivity().getIntent();
         final String localeFromIntent =
