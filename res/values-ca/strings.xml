@@ -2899,7 +2899,7 @@
     <string name="system_alert_window_settings" msgid="1757821151143694951">"Dibuixa a sobre d\'altres aplicacions"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Aplicacions"</string>
     <string name="system_alert_window_access_title" msgid="8811695381437304132">"Dibuixa a sobre d\'altres aplicacions"</string>
-    <string name="permit_draw_overlay" msgid="6606018549732046201">"Permet dibuixar sobre altres aplicacions"</string>
+    <string name="permit_draw_overlay" msgid="6606018549732046201">"Permet la superposició d\'aplicacions"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Permís de l\'aplicació per dibuixar a sobre"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Amb aquest permís l\'aplicació es pot mostrar sobre les altres aplicacions que utilitzes i pot interferir amb l\'ús que fas de la interfície en altres aplicacions o canviar el que penses que estàs veient en altres aplicacions."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"RV realitat virtual processador estèreo servei ajuda"</string>
@@ -3093,32 +3093,39 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, l\'emmagatzematge encara no s\'ha utilitzat"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, es desconeix quan s\'ha utilitzat l\'emmagatzematge per última vegada"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Allibera <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <!-- no translation found for support_escalation_title (2586337625943788579) -->
-    <skip />
-    <!-- no translation found for support_escalation_summary (5284600375153448787) -->
-    <skip />
+    <string name="support_escalation_title" msgid="2586337625943788579">"Ajuda les 24 hores"</string>
+    <string name="support_escalation_summary" msgid="5284600375153448787">"Pots sol·licitar un xat o una trucada d\'assistència i contactarem amb tu al més aviat possible"</string>
     <string name="support_offline_title" msgid="482049324795211184">"No tens connexió"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Per contactar amb el servei d\'assistència, primer t\'has de connectar a una xarxa Wi-Fi o fer servir les dades mòbils."</string>
     <string name="support_more_help_title" msgid="6923257931625780264">"Més ajuda"</string>
-    <!-- no translation found for support_escalation_by_phone (1862089243763374647) -->
-    <skip />
-    <!-- no translation found for support_escalation_by_email (4013993789804178506) -->
-    <skip />
-    <string name="support_escalation_by_chat" msgid="977019859110763749">"Xat"</string>
+    <string name="support_escalation_by_phone" msgid="1862089243763374647">"Trucada d\'assistència"</string>
+    <string name="support_escalation_by_email" msgid="2582004943422798901">"Correu d\'assistència"</string>
+    <string name="support_escalation_by_chat" msgid="3284697227089466497">"Xat d\'assistència"</string>
     <string name="support_forum_title" msgid="201753198197433199">"Fòrum d\'ajuda"</string>
-    <!-- no translation found for support_sign_in_required_title (6782855985258687680) -->
-    <skip />
+    <string name="support_sign_in_required_title" msgid="6782855985258687680">"Inicia la sessió per obtenir assistència"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Inicia la sessió"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"No pots accedir al compte?"</string>
-    <!-- no translation found for managed_profile_settings_title (2729481936758125054) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_title (6034734926815544221) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_summary (5431253552272970512) -->
-    <skip />
-    <!-- no translation found for hours (7020844602875333472) -->
-    <!-- no translation found for minutes (4666832442068789413) -->
-    <!-- no translation found for seconds (3876307354560025025) -->
-    <!-- no translation found for support_estimated_wait_time (6523081420029378051) -->
-    <skip />
+    <string name="managed_profile_settings_title" msgid="2729481936758125054">"Configuració del perfil professional"</string>
+    <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Cerca de contactes"</string>
+    <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Permet que la teva organització cerqui contactes per identificar els remitents i els contactes"</string>
+    <plurals name="hours" formatted="false" msgid="7020844602875333472">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> hores</item>
+      <item quantity="one">1 hora</item>
+    </plurals>
+    <plurals name="minutes" formatted="false" msgid="4666832442068789413">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> minuts</item>
+      <item quantity="one">1 minut</item>
+    </plurals>
+    <plurals name="seconds" formatted="false" msgid="3876307354560025025">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> segons</item>
+      <item quantity="one">1 segon</item>
+    </plurals>
+    <string name="support_estimated_wait_time" msgid="6523081420029378051">"<xliff:g id="ESTIMATE">%1$s</xliff:g> d\'espera aproximadament"</string>
+    <string name="bluetooth_talkback_computer" msgid="4875089335641234463">"Ordinador"</string>
+    <string name="bluetooth_talkback_headset" msgid="5140152177885220949">"Auriculars"</string>
+    <string name="bluetooth_talkback_phone" msgid="4260255181240622896">"Telèfon"</string>
+    <string name="bluetooth_talkback_imaging" msgid="551146170554589119">"Imatges"</string>
+    <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Auricular"</string>
+    <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Perifèric d\'entrada"</string>
+    <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
 </resources>

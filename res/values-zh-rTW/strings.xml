@@ -2903,7 +2903,7 @@
     <string name="system_alert_window_settings" msgid="1757821151143694951">"在其他應用程式上層繪製內容"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"應用程式"</string>
     <string name="system_alert_window_access_title" msgid="8811695381437304132">"在其他應用程式上層繪製內容"</string>
-    <string name="permit_draw_overlay" msgid="6606018549732046201">"允許在其他應用程式上層繪製內容"</string>
+    <string name="permit_draw_overlay" msgid="6606018549732046201">"允許覆蓋其他應用程式"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"允許應用程式在上層繪製內容的權限設定"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"這項權限允許應用程式顯示在您目前使用的其他應用程式上層，因此可能會干擾您使用其他應用程式中的介面，或是對您在其他應用程式中看到的內容造成影響。"</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr 虛擬實境 接聽器 音響 小幫手 服務"</string>
@@ -3097,32 +3097,39 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>，未曾使用過"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>，上次使用時間不明"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"釋出 <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <!-- no translation found for support_escalation_title (2586337625943788579) -->
-    <skip />
-    <!-- no translation found for support_escalation_summary (5284600375153448787) -->
-    <skip />
+    <string name="support_escalation_title" msgid="2586337625943788579">"24 小時客服"</string>
+    <string name="support_escalation_summary" msgid="5284600375153448787">"您可以申請電話客服或即時通訊客服，我們會儘快與您聯絡"</string>
     <string name="support_offline_title" msgid="482049324795211184">"您已離線"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"如需聯絡客服人員，請連線到 Wi-Fi 或數據網路。"</string>
     <string name="support_more_help_title" msgid="6923257931625780264">"更多協助方式"</string>
-    <!-- no translation found for support_escalation_by_phone (1862089243763374647) -->
-    <skip />
-    <!-- no translation found for support_escalation_by_email (4013993789804178506) -->
-    <skip />
-    <string name="support_escalation_by_chat" msgid="977019859110763749">"即時通訊"</string>
+    <string name="support_escalation_by_phone" msgid="1862089243763374647">"電話客服"</string>
+    <string name="support_escalation_by_email" msgid="2582004943422798901">"電子郵件客服"</string>
+    <string name="support_escalation_by_chat" msgid="3284697227089466497">"即時通訊客服"</string>
     <string name="support_forum_title" msgid="201753198197433199">"說明論壇"</string>
-    <!-- no translation found for support_sign_in_required_title (6782855985258687680) -->
-    <skip />
+    <string name="support_sign_in_required_title" msgid="6782855985258687680">"請登入以便聯絡客服人員"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登入"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"無法登入帳戶嗎？"</string>
-    <!-- no translation found for managed_profile_settings_title (2729481936758125054) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_title (6034734926815544221) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_summary (5431253552272970512) -->
-    <skip />
-    <!-- no translation found for hours (7020844602875333472) -->
-    <!-- no translation found for minutes (4666832442068789413) -->
-    <!-- no translation found for seconds (3876307354560025025) -->
-    <!-- no translation found for support_estimated_wait_time (6523081420029378051) -->
-    <skip />
+    <string name="managed_profile_settings_title" msgid="2729481936758125054">"Work 設定檔設定"</string>
+    <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"聯絡人搜尋"</string>
+    <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"允許您的機構搜尋聯絡人，以便識別來電者和聯絡人的身分"</string>
+    <plurals name="hours" formatted="false" msgid="7020844602875333472">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> 小時</item>
+      <item quantity="one">1 小時</item>
+    </plurals>
+    <plurals name="minutes" formatted="false" msgid="4666832442068789413">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> 分鐘</item>
+      <item quantity="one">1 分鐘</item>
+    </plurals>
+    <plurals name="seconds" formatted="false" msgid="3876307354560025025">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> 秒</item>
+      <item quantity="one">1 秒</item>
+    </plurals>
+    <string name="support_estimated_wait_time" msgid="6523081420029378051">"大約需等候 <xliff:g id="ESTIMATE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_talkback_computer" msgid="4875089335641234463">"電腦"</string>
+    <string name="bluetooth_talkback_headset" msgid="5140152177885220949">"免持耳機"</string>
+    <string name="bluetooth_talkback_phone" msgid="4260255181240622896">"電話"</string>
+    <string name="bluetooth_talkback_imaging" msgid="551146170554589119">"顯像裝置"</string>
+    <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"頭戴式耳機"</string>
+    <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"周邊輸入裝置"</string>
+    <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"藍牙"</string>
 </resources>
