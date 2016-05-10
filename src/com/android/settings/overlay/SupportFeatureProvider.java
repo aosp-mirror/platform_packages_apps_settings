@@ -80,4 +80,9 @@ public interface SupportFeatureProvider {
      * Returns an intent that will start the add account UI.
      */
     Intent getAccountLoginIntent();
+
+    /**
+     * Returns an intent that will launch the tips and tricks UI.
+     */
+    Intent getTipsAndTricksIntent(Context context);
 }

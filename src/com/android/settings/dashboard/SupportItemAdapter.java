@@ -189,6 +189,11 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 .setIntent(mSupportFeatureProvider.getForumIntent())
                 .build());
         mSupportData.add(new SupportData.Builder(TYPE_SUPPORT_TILE)
+                .setIcon(R.drawable.ic_lightbulb_outline_24)
+                .setText1(R.string.support_tips_and_tricks_title)
+                .setIntent(mSupportFeatureProvider.getTipsAndTricksIntent(mActivity))
+                .build());
+        mSupportData.add(new SupportData.Builder(TYPE_SUPPORT_TILE)
                 .setIcon(R.drawable.ic_help_24dp)
                 .setText1(R.string.help_feedback_label)
                 .setIntent(mSupportFeatureProvider.getHelpIntent(mActivity))
