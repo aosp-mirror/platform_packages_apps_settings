@@ -41,17 +41,16 @@
 
             <TextView android:id="@+id/headerText"
                 android:layout_width="match_parent"
-                android:layout_height="0dip"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:minLines="2"
                 android:gravity="center"
-                android:minHeight="50dip"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
-                android:layout_weight="4"
-                android:background="@color/lock_pattern_background"/>
+                android:layout_weight="4" />
 
             <!-- Buttons are hidden during setup, and use the buttons in setup navigation bar instead -->
             <LinearLayout
