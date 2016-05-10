@@ -104,6 +104,8 @@ public class UserPreference extends RestrictedPreference {
                 if (mDeleteClickListener != null
                         && !RestrictedLockUtils.hasBaseUserRestriction(getContext(),
                                 UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
+                    deleteView.setVisibility(View.VISIBLE);
+                    deleteDividerView.setVisibility(View.VISIBLE);
                     deleteView.setOnClickListener(mDeleteClickListener);
                     deleteView.setTag(this);
                 } else {
@@ -114,11 +116,11 @@ public class UserPreference extends RestrictedPreference {
             ImageView manageView = (ImageView) view.findViewById(R.id.manage_user);
             if (manageView != null) {
                 if (mSettingsClickListener != null) {
+                    manageView.setVisibility(View.VISIBLE);
+                    manageDividerView.setVisibility(mDeleteClickListener == null
+                            ? View.VISIBLE : View.GONE);
                     manageView.setOnClickListener(mSettingsClickListener);
                     manageView.setTag(this);
-                    if (mDeleteClickListener != null) {
-                        manageDividerView.setVisibility(View.GONE);
-                    }
                 } else {
                     manageView.setVisibility(View.GONE);
                     manageDividerView.setVisibility(View.GONE);
