@@ -17,9 +17,11 @@
 package com.android.settings;
 
 import android.app.AlertDialog;
+import android.app.AppGlobals;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -27,6 +29,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.AttributeSet;
@@ -195,15 +198,16 @@ public class AppListPreference extends CustomListPreference {
         int selectedIndex = -1;
         for (int i = 0; i < componentNames.length; i++) {
             try {
-                ApplicationInfo appInfo = pm.getApplicationInfoAsUser(
-                        componentNames[i].getPackageName().toString(), 0, mUserId);
-                applicationNames.add(appInfo.loadLabel(pm));
+                ActivityInfo activityInfo = AppGlobals.getPackageManager().getActivityInfo(
+                        componentNames[i], 0, mUserId);
+                if (activityInfo == null) continue;
+                applicationNames.add(activityInfo.loadLabel(pm));
                 validatedComponentNames.add(componentNames[i].flattenToString());
-                entryDrawables.add(appInfo.loadIcon(pm));
+                entryDrawables.add(activityInfo.loadIcon(pm));
                 if (defaultCN != null && componentNames[i].equals(defaultCN)) {
                     selectedIndex = i;
                 }
-            } catch (NameNotFoundException e) {
+            } catch (RemoteException e) {
                 // Skip unknown packages.
             }
         }
