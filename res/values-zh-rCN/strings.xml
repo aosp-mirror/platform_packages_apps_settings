@@ -2266,6 +2266,7 @@
       <item quantity="other">信任或移除证书</item>
       <item quantity="one">信任或移除证书</item>
     </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> 已为您的工作资料安装多个证书授权中心，这可能会允许证书授权中心监控您的工作网络活动（包括使用电子邮件、应用和安全网站）。您可以选择信任这些证书，也可以选择移除这些证书。\n\n如需详细了解这些证书，请与您的管理员联系。</item>
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> 已为您的工作资料安装一个证书授权中心，这可能会允许证书授权中心监控您的工作网络活动（包括使用电子邮件、应用和安全网站）。您可以选择信任此证书，也可以选择移除此证书。\n\n如需详细了解此证书，请与您的管理员联系。</item>
@@ -3093,47 +3094,39 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>，从未使用过"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>，不确定上次使用时间"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"释放 <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <!-- no translation found for support_escalation_title (2586337625943788579) -->
-    <skip />
-    <!-- no translation found for support_escalation_summary (5284600375153448787) -->
-    <skip />
+    <string name="support_escalation_title" msgid="2586337625943788579">"全天候客户支持服务"</string>
+    <string name="support_escalation_summary" msgid="5284600375153448787">"您可以请求与支持人员通话或聊天，我们会尽快与您联系"</string>
     <string name="support_offline_title" msgid="482049324795211184">"您没有联网"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"要与支持人员联系，请先连接到 WLAN 网络或移动数据网络。"</string>
     <string name="support_more_help_title" msgid="6923257931625780264">"更多帮助"</string>
-    <!-- no translation found for support_escalation_by_phone (1862089243763374647) -->
-    <skip />
-    <!-- no translation found for support_escalation_by_email (2582004943422798901) -->
-    <skip />
-    <!-- no translation found for support_escalation_by_chat (3284697227089466497) -->
-    <skip />
+    <string name="support_escalation_by_phone" msgid="1862089243763374647">"与支持人员通话"</string>
+    <string name="support_escalation_by_email" msgid="2582004943422798901">"给支持人员发电子邮件"</string>
+    <string name="support_escalation_by_chat" msgid="3284697227089466497">"与支持人员聊天"</string>
     <string name="support_forum_title" msgid="201753198197433199">"帮助论坛"</string>
-    <!-- no translation found for support_sign_in_required_title (6782855985258687680) -->
-    <skip />
+    <string name="support_sign_in_required_title" msgid="6782855985258687680">"请登录以获取支持"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登录"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"无法访问您的帐号？"</string>
-    <!-- no translation found for managed_profile_settings_title (2729481936758125054) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_title (6034734926815544221) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_summary (5431253552272970512) -->
-    <skip />
-    <!-- no translation found for hours (7020844602875333472) -->
-    <!-- no translation found for minutes (4666832442068789413) -->
-    <!-- no translation found for seconds (3876307354560025025) -->
-    <!-- no translation found for support_estimated_wait_time (6523081420029378051) -->
-    <skip />
-    <!-- no translation found for bluetooth_talkback_computer (4875089335641234463) -->
-    <skip />
-    <!-- no translation found for bluetooth_talkback_headset (5140152177885220949) -->
-    <skip />
-    <!-- no translation found for bluetooth_talkback_phone (4260255181240622896) -->
-    <skip />
-    <!-- no translation found for bluetooth_talkback_imaging (551146170554589119) -->
-    <skip />
-    <!-- no translation found for bluetooth_talkback_headphone (26580326066627664) -->
-    <skip />
-    <!-- no translation found for bluetooth_talkback_input_peripheral (5165842622743212268) -->
-    <skip />
-    <!-- no translation found for bluetooth_talkback_bluetooth (5615463912185280812) -->
-    <skip />
+    <string name="managed_profile_settings_title" msgid="2729481936758125054">"工作资料设置"</string>
+    <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"联系人搜索"</string>
+    <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"允许您的单位搜索联系人，以便识别来电者和联系人的身份"</string>
+    <plurals name="hours" formatted="false" msgid="7020844602875333472">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> 小时</item>
+      <item quantity="one">1 小时</item>
+    </plurals>
+    <plurals name="minutes" formatted="false" msgid="4666832442068789413">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> 分钟</item>
+      <item quantity="one">1 分钟</item>
+    </plurals>
+    <plurals name="seconds" formatted="false" msgid="3876307354560025025">
+      <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> 秒</item>
+      <item quantity="one">1 秒</item>
+    </plurals>
+    <string name="support_estimated_wait_time" msgid="6523081420029378051">"大约需等待 <xliff:g id="ESTIMATE">%1$s</xliff:g>"</string>
+    <string name="bluetooth_talkback_computer" msgid="4875089335641234463">"计算机"</string>
+    <string name="bluetooth_talkback_headset" msgid="5140152177885220949">"耳麦"</string>
+    <string name="bluetooth_talkback_phone" msgid="4260255181240622896">"手机"</string>
+    <string name="bluetooth_talkback_imaging" msgid="551146170554589119">"成像设备"</string>
+    <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"耳机"</string>
+    <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"外围输入设备"</string>
+    <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"蓝牙"</string>
 </resources>
