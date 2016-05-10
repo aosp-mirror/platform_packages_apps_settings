@@ -80,9 +80,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private Condition mExpandedCondition = null;
     private SuggestionParser mSuggestionParser;
 
-    public DashboardAdapter(Context context) {
+    public DashboardAdapter(Context context, SuggestionParser parser) {
         mContext = context;
         mCache = new IconCache(context);
+        mSuggestionParser = parser;
 
         setHasStableIds(true);
         setShowingAll(true);
@@ -92,9 +93,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return mSuggestions;
     }
 
-    public void setSuggestions(List<Tile> suggestions, SuggestionParser parser) {
+    public void setSuggestions(List<Tile> suggestions) {
         mSuggestions = suggestions;
-        mSuggestionParser = parser;
         recountItems();
     }
 
