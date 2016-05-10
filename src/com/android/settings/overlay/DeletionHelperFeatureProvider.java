@@ -16,21 +16,15 @@
 
 package com.android.settings.overlay;
 
-import android.content.Context;
+import android.support.v7.preference.PreferenceGroup;
+import com.android.settings.deletionhelper.DeletionType;
 
 /**
- * {@link FeatureFactory} implementation for AOSP Settings.
+ * Feature provider for the manual deletion helper Settings page.
  */
-public final class FeatureFactoryImpl extends FeatureFactory {
-
-    @Override
-    public SupportFeatureProvider getSupportFeatureProvider(Context context) {
-        return null;
-    }
-
-    @Override
-    public DeletionHelperFeatureProvider getDeletionHelperFeatureProvider() {
-        return null;
-    }
-
+public interface DeletionHelperFeatureProvider {
+    /**
+     * Creates a {@link DeletionType} for clearing out stored photos and videos on the device.
+     */
+    DeletionType createPhotoVideoDeletionType();
 }

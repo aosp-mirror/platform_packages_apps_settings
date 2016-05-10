@@ -17,6 +17,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   android:title="@string/deletion_helper_title">
 
+    <com.android.settings.PhotosDeletionPreference
+        android:key="delete_photos" />
+
     <PreferenceCategory
             android:key="apps_group"
             android:title="@string/deletion_helper_apps_title" />
