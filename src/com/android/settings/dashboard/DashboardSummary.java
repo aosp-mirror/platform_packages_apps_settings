@@ -178,7 +178,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setHasFixedSize(true);
         mDashboard.setListener(this);
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
-        mAdapter = new DashboardAdapter(getContext());
+        mAdapter = new DashboardAdapter(getContext(), mSuggestionParser);
         mAdapter.setConditions(mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setAdapter(mAdapter);
@@ -230,7 +230,7 @@ public class DashboardSummary extends InstrumentedFragment
 
         @Override
         protected void onPostExecute(List<Tile> tiles) {
-            mAdapter.setSuggestions(tiles, mSuggestionParser);
+            mAdapter.setSuggestions(tiles);
         }
     }
 }
