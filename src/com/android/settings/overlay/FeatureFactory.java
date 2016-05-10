@@ -61,6 +61,11 @@ public abstract class FeatureFactory {
 
     public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
 
+    /**
+     * Return a provider which adds additional deletion services to the Deletion Helper.
+     */
+    public abstract DeletionHelperFeatureProvider getDeletionHelperFeatureProvider();
+
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
             super("Unable to create factory. Did you misconfigure Proguard?", throwable);
