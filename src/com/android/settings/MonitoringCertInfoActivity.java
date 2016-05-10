@@ -57,8 +57,9 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
             builder.setMessage(getResources().getQuantityString(R.plurals.ssl_ca_cert_info_message,
                     numberOfCertificates, dpm.getProfileOwnerName()));
         } else if (dpm.getDeviceOwnerComponentOnCallingUser() != null) {
-            builder.setMessage(getResources().getQuantityString(R.plurals.ssl_ca_cert_info_message,
-                    numberOfCertificates, dpm.getDeviceOwnerNameOnAnyUser()));
+            builder.setMessage(getResources().getQuantityString(
+                    R.plurals.ssl_ca_cert_info_message_device_owner, numberOfCertificates,
+                    dpm.getDeviceOwnerNameOnAnyUser()));
         } else  {
             // Consumer case.  Show scary warning.
             builder.setIcon(android.R.drawable.stat_notify_error);
