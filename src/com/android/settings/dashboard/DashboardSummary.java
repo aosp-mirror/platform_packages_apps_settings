@@ -132,6 +132,9 @@ public class DashboardSummary extends InstrumentedFragment
                 MetricsLogger.hidden(getContext(), c.getMetricsConstant());
             }
         }
+        if (mAdapter.getSuggestions() == null) {
+            return;
+        }
         for (Tile suggestion : mAdapter.getSuggestions()) {
             MetricsLogger.action(getContext(), MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
                     DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion));
