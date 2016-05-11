@@ -24,10 +24,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-public class RunningServices extends Fragment {
+public class RunningServices extends SettingsPreferenceFragment {
 
     private static final int SHOW_RUNNING_SERVICES = 1;
     private static final int SHOW_BACKGROUND_PROCESSES = 2;
@@ -103,6 +105,11 @@ public class RunningServices extends Fragment {
         boolean showingBackground = mRunningProcessesView.mAdapter.getShowBackground();
         mOptionsMenu.findItem(SHOW_RUNNING_SERVICES).setVisible(showingBackground);
         mOptionsMenu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(!showingBackground);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsEvent.RUNNING_SERVICES;
     }
 
     private final Runnable mRunningProcessesAvail = new Runnable() {
