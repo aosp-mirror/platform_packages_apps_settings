@@ -23,9 +23,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
-public class ConfirmConvertToFbe extends Fragment {
+public class ConfirmConvertToFbe extends SettingsPreferenceFragment {
     static final String TAG = "ConfirmConvertToFBE";
 
     @Override
@@ -44,5 +46,10 @@ public class ConfirmConvertToFbe extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsEvent.CONVERT_FBE_CONFIRM;
     }
 }
