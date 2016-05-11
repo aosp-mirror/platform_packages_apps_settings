@@ -19,11 +19,11 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.UiModeManager;
-import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.ComponentName;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -66,7 +66,6 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
@@ -251,6 +250,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             final int currentNightMode = uiManager.getNightMode();
             mNightModePreference.setValue(String.valueOf(currentNightMode));
             mNightModePreference.setOnPreferenceChangeListener(this);
+        }
+
+        // Check if we want to skip the wallpaper options and lead to the wallpaper picker directly.
+        String wallpaperPicker = getResources().getString(R.string.wallpaper_picker);
+        if (!wallpaperPicker.isEmpty()) {
+            final RestrictedPreference pref = (RestrictedPreference) findPreference(KEY_WALLPAPER);
+            final Intent intent = new Intent();
+            intent.setComponent(ComponentName.unflattenFromString(wallpaperPicker));
+            pref.setFragment(null);
+            pref.setIntent(intent);
         }
     }
 
