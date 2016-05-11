@@ -42,6 +42,7 @@ import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -50,7 +51,6 @@ import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
@@ -88,6 +88,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private PreferenceCategory mExternalCategory;
 
     private StorageSummaryPreference mInternalSummary;
+    private static long sTotalInternalStorage;
 
     @Override
     protected int getMetricsCategory() {
@@ -107,6 +108,8 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
         mStorageManager = context.getSystemService(StorageManager.class);
         mStorageManager.registerListener(mStorageListener);
+
+        sTotalInternalStorage = mStorageManager.getPrimaryStorageSize();
 
         addPreferencesFromResource(R.xml.device_info_storage);
 
@@ -162,15 +165,16 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
                 final int color = COLOR_PRIVATE[privateCount++ % COLOR_PRIVATE.length];
                 mInternalCategory.addPreference(
-                        new StorageVolumePreference(context, vol, color));
+                        new StorageVolumePreference(context, vol, color, sTotalInternalStorage));
                 if (vol.isMountedReadable()) {
                     final File path = vol.getPath();
                     privateUsedBytes += path.getTotalSpace() - path.getFreeSpace();
-                    privateTotalBytes += path.getTotalSpace();
+                    privateTotalBytes += sTotalInternalStorage > 0
+                            ? sTotalInternalStorage : path.getTotalSpace();
                 }
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
                 mExternalCategory.addPreference(
-                        new StorageVolumePreference(context, vol, COLOR_PUBLIC));
+                        new StorageVolumePreference(context, vol, COLOR_PUBLIC, 0));
             }
         }
 
@@ -224,6 +228,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             // Only showing primary internal storage, so just shortcut
             final Bundle args = new Bundle();
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
+            PrivateVolumeSettings.setVolumeSize(args, sTotalInternalStorage);
             Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
                     PrivateVolumeSettings.class.getName(), args, null, R.string.apps_storage, null,
                     false);
@@ -268,6 +273,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
                 final Bundle args = new Bundle();
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, vol.getId());
+                PrivateVolumeSettings.setVolumeSize(args, sTotalInternalStorage);
                 startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
                         -1, 0, args);
                 return true;
@@ -491,7 +497,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     continue;
                 }
                 privateUsedBytes += path.getTotalSpace() - path.getFreeSpace();
-                privateTotalBytes += path.getTotalSpace();
+                if (info.getType() == VolumeInfo.TYPE_PRIVATE && sTotalInternalStorage > 0) {
+                    privateTotalBytes = sTotalInternalStorage;
+                } else {
+                    privateTotalBytes += path.getTotalSpace();
+                }
             }
             mLoader.setSummary(this, mContext.getString(R.string.storage_summary,
                     Formatter.formatFileSize(mContext, privateUsedBytes),
