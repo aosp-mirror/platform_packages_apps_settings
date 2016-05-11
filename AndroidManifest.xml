@@ -2890,6 +2890,18 @@
                         android:value="true" />
         </activity>
 
+        <activity android:name=".WebViewImplementation"
+                  android:exported="true"
+                  android:excludeFromRecents="true"
+                  android:theme="@*android:style/Theme.Material.Light.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.settings.WEBVIEW_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
         <service
             android:name=".SettingsDumpService"
             android:exported="true"
