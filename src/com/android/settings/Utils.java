@@ -36,6 +36,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.IntentFilterVerificationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
@@ -87,7 +88,6 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TabWidget;
-
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.UserIcons;
 
@@ -1136,6 +1136,15 @@ public final class Utils extends com.android.settingslib.Utils {
             Log.w(TAG, "Unable to find info for package: " + packageName);
         }
         return null;
+    }
+
+    public static boolean isPackageEnabled(Context context, String packageName) {
+        try {
+            return context.getPackageManager().getApplicationInfo(packageName, 0).enabled;
+        } catch (NameNotFoundException e) {
+            // Thrown by PackageManager.getApplicationInfo if the package does not exist
+        }
+        return false;
     }
 }
 
