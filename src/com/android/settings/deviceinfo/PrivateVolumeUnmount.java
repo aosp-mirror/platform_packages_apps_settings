@@ -29,11 +29,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 
-public class PrivateVolumeUnmount extends InstrumentedFragment {
+public class PrivateVolumeUnmount extends SettingsPreferenceFragment {
     private VolumeInfo mVolume;
     private DiskInfo mDisk;
 
