@@ -141,7 +141,6 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
         SavedState myState = (SavedState) state;
         super.onRestoreInstanceState(myState.getSuperState());
         mOldSpeed = myState.oldSpeed;
-        mSeekBar.setProgress(myState.progress);
         mIm.tryPointerSpeed(myState.progress + InputManager.MIN_POINTER_SPEED);
     }
 
