@@ -92,7 +92,8 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
                 .getUserId(uid)));
         try {
             permissionState.packageInfo = mIPackageManager.getPackageInfo(pkg,
-                    PackageManager.GET_PERMISSIONS, permissionState.userHandle.getIdentifier());
+                    PackageManager.GET_PERMISSIONS | PackageManager.MATCH_UNINSTALLED_PACKAGES,
+                    permissionState.userHandle.getIdentifier());
             // Check static permission state (whatever that is declared in package manifest)
             String[] requestedPermissions = permissionState.packageInfo.requestedPermissions;
             int[] permissionFlags = permissionState.packageInfo.requestedPermissionsFlags;
