@@ -17,8 +17,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/app_notifications_title"
-        android:key="app_notification_settings"
-        settings:keywords="@string/keywords_date_and_time">
+        android:key="app_notification_settings">
 
     <!-- Importance -->
     <!-- Block -->
@@ -43,7 +42,7 @@
             android:order="4"/>
 
     <!-- Visibility Override -->
-    <DropDownPreference
+    <com.android.settings.notification.RestrictedDropDownPreference
             android:key="visibility_override"
             android:title="@string/app_notification_visibility_override_title"
             android:order="5" />

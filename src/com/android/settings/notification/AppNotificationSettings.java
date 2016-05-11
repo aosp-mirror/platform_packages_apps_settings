@@ -26,7 +26,6 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.service.notification.NotificationListenerService.Ranking;
-import android.support.v7.preference.DropDownPreference;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -76,7 +75,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mPriority =
                 (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BYPASS_DND);
         mVisibilityOverride =
-                (DropDownPreference) getPreferenceScreen().findPreference(
+                (RestrictedDropDownPreference) getPreferenceScreen().findPreference(
                         KEY_VISIBILITY_OVERRIDE);
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
         mSilent = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_SILENT);
