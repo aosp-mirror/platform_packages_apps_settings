@@ -43,6 +43,7 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
     public interface DelegateInterface {
         List<X509Certificate> getX509CertsFromCertHolder(CertHolder certHolder);
         void removeOrInstallCert(CertHolder certHolder);
+        boolean startConfirmCredentialIfNotConfirmed(int userId);
     }
 
     private final DialogEventHandler mDialogEventHandler;
@@ -144,8 +145,10 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
 
         private void onClickTrust() {
             CertHolder certHolder = getCurrentCertInfo();
-            mDpm.approveCaCert(certHolder.getAlias(), certHolder.getUserId(), true);
-            nextOrDismiss();
+            if (!mDelegate.startConfirmCredentialIfNotConfirmed(certHolder.getUserId())) {
+                mDpm.approveCaCert(certHolder.getAlias(), certHolder.getUserId(), true);
+                nextOrDismiss();
+            }
         }
 
         private void onClickRemove() {
