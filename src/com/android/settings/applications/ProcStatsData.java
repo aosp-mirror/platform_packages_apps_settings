@@ -160,7 +160,7 @@ public class ProcStatsData {
                 ProcessStats.ALL_SCREEN_ADJ, mMemStates, ProcessStats.NON_CACHED_PROC_STATES);
 
         createPkgMap(getProcs(bgTotals, runTotals), bgTotals, runTotals);
-        if (totalMem.sysMemZRamWeight > 0) {
+        if (totalMem.sysMemZRamWeight > 0 && !totalMem.hasSwappedOutPss) {
             distributeZRam(totalMem.sysMemZRamWeight);
         }
 
@@ -418,8 +418,10 @@ public class ProcStatsData {
             memReader.readMemInfo();
             realTotalRam = memReader.getTotalSize();
             freeWeight = totalMem.sysMemFreeWeight + totalMem.sysMemCachedWeight;
-            usedWeight = totalMem.sysMemKernelWeight + totalMem.sysMemNativeWeight
-                    + totalMem.sysMemZRamWeight;
+            usedWeight = totalMem.sysMemKernelWeight + totalMem.sysMemNativeWeight;
+            if (!totalMem.hasSwappedOutPss) {
+                usedWeight += totalMem.sysMemZRamWeight;
+            }
             for (int i = 0; i < ProcessStats.STATE_COUNT; i++) {
                 if (i == ProcessStats.STATE_SERVICE_RESTARTING) {
                     // These don't really run.
