@@ -749,7 +749,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             ArrayList<String> options = new ArrayList<String>();
             ArrayList<String> values = new ArrayList<String>();
             for(int n = 0; n < providers.length; n++) {
-                if (isPackageEnabled(providers[n].packageName)) {
+                if (Utils.isPackageEnabled(getActivity(), providers[n].packageName)) {
                     options.add(providers[n].description);
                     values.add(providers[n].packageName);
                 }
@@ -1927,15 +1927,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private boolean showKeyguardConfirmation(Resources resources, int requestCode) {
         return new ChooseLockSettingsHelper(getActivity(), this).launchConfirmationActivity(
                 requestCode, resources.getString(R.string.oem_unlock_enable));
-    }
-
-    private boolean isPackageEnabled(String packageName) {
-        try {
-            return getActivity().getPackageManager().getApplicationInfo(packageName, 0).enabled;
-        } catch (NameNotFoundException e) {
-            // Thrown by PackageManager.getApplicationInfo if the package does not exist
-        }
-        return false;
     }
 
     @Override
