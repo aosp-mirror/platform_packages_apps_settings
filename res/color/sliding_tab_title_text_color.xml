@@ -15,15 +15,8 @@
      limitations under the License.
 -->
 
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="0dp"
-    android:layout_weight="1"
-    android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
-    android:ellipsize="end"
-    android:gravity="center"
-    android:maxLines="1"
-    android:padding="@dimen/pager_tabs_title_padding"
-    android:textColor="@color/sliding_tab_title_text_color"
-    android:textAllCaps="true"/>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="false"
+          android:color="#b3ffffff"/>
+    <item android:color="@android:color/white"/>
+</selector>
