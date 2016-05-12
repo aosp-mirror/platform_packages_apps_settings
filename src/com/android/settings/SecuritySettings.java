@@ -1213,6 +1213,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 } catch (NumberFormatException e) {
                     Log.e("SecuritySettings", "could not persist lockAfter timeout setting", e);
                 }
+                setupLockAfterPreference();
                 updateLockAfterPreferenceSummary();
             } else if (KEY_VISIBLE_PATTERN.equals(key)) {
                 mLockPatternUtils.setVisiblePatternEnabled((Boolean) value, MY_USER_ID);
