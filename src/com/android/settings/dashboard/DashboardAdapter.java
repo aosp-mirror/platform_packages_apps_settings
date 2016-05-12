@@ -163,10 +163,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         countItem(null, R.layout.suggestion_header, hasSuggestions, NS_SPACER);
         resetCount();
         if (mSuggestions != null) {
-            int maxSuggestions = mSuggestionMode == SUGGESTION_MODE_DEFAULT
-                    ? Math.min(DEFAULT_SUGGESTION_COUNT, mSuggestions.size())
-                    : mSuggestionMode == SUGGESTION_MODE_EXPANDED ? mSuggestions.size()
-                    : 0;
+            int maxSuggestions = getDisplayableSuggestionCount();
             for (int i = 0; i < mSuggestions.size(); i++) {
                 countItem(mSuggestions.get(i), R.layout.suggestion_tile, i < maxSuggestions,
                         NS_SUGGESTION);
@@ -206,6 +203,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             mIds.add(mId + nameSpace);
         }
         mId++;
+    }
+
+    private int getDisplayableSuggestionCount() {
+        final int suggestionSize = mSuggestions.size();
+        return mSuggestionMode == SUGGESTION_MODE_DEFAULT
+                ? Math.min(DEFAULT_SUGGESTION_COUNT, suggestionSize)
+                : mSuggestionMode == SUGGESTION_MODE_EXPANDED
+                        ? suggestionSize : 0;
     }
 
     @Override
@@ -296,6 +301,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.icon.setImageResource(hasMoreSuggestions() ? R.drawable.ic_expand_more
                 : R.drawable.ic_expand_less);
         holder.title.setText(mContext.getString(R.string.suggestions_title, mSuggestions.size()));
+        final int undisplayedSuggestionCount =
+                mSuggestions.size() - getDisplayableSuggestionCount();
+        if (undisplayedSuggestionCount == 0) {
+            holder.summary.setText(null);
+        } else {
+            holder.summary.setText(
+                    mContext.getString(R.string.suggestions_summary, undisplayedSuggestionCount));
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
