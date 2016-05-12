@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.RestrictedCheckBox;
 import com.android.settings.RestrictedRadioButton;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -81,7 +83,7 @@ public class RedactionInterstitial extends SettingsActivity {
         private RadioGroup mRadioGroup;
         private RestrictedRadioButton mShowAllButton;
         private RestrictedRadioButton mRedactSensitiveButton;
-        private CheckBox mRemoteInputCheckbox;
+        private RestrictedCheckBox mRemoteInputCheckbox;
         private int mUserId;
 
         @Override
@@ -102,7 +104,8 @@ public class RedactionInterstitial extends SettingsActivity {
             mShowAllButton = (RestrictedRadioButton) view.findViewById(R.id.show_all);
             mRedactSensitiveButton =
                     (RestrictedRadioButton) view.findViewById(R.id.redact_sensitive);
-            mRemoteInputCheckbox = (CheckBox) view.findViewById(R.id.lockscreen_remote_input);
+            mRemoteInputCheckbox =
+                    (RestrictedCheckBox) view.findViewById(R.id.lockscreen_remote_input);
             mRemoteInputCheckbox.setOnCheckedChangeListener(this);
 
             mRadioGroup.setOnCheckedChangeListener(this);
@@ -129,6 +132,9 @@ public class RedactionInterstitial extends SettingsActivity {
                     KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
             checkNotificationFeaturesAndSetDisabled(mRedactSensitiveButton,
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
+            mRemoteInputCheckbox.setDisabledByAdmin(
+                    RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(getActivity(),
+                            DevicePolicyManager.KEYGUARD_DISABLE_REMOTE_INPUT, mUserId));
             loadFromSettings();
         }
 

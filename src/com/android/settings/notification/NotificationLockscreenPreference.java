@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
 import com.android.settings.Utils;
+import com.android.settingslib.RestrictedLockUtils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -32,6 +33,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -42,6 +44,7 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
     private boolean mShowRemoteInput;
     private boolean mRemoteInputCheckBoxEnabled = true;
     private int mUserId = UserHandle.myUserId();
+    private RestrictedLockUtils.EnforcedAdmin mAdminRestrictingRemoteInput;
 
     public NotificationLockscreenPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -49,6 +52,10 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
 
     public void setRemoteInputCheckBoxEnabled(boolean enabled) {
         mRemoteInputCheckBoxEnabled = enabled;
+    }
+
+    public void setRemoteInputRestricted(RestrictedLockUtils.EnforcedAdmin admin) {
+        mAdminRestrictingRemoteInput = admin;
     }
 
     @Override
@@ -81,9 +88,19 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
     protected void onDialogCreated(Dialog dialog) {
         super.onDialogCreated(dialog);
         dialog.create();
-        CheckBox view = (CheckBox) dialog.findViewById(R.id.lockscreen_remote_input);
-        view.setChecked(!mAllowRemoteInput);
-        view.setOnCheckedChangeListener(mListener);
+        CheckBox checkbox = (CheckBox) dialog.findViewById(R.id.lockscreen_remote_input);
+        checkbox.setChecked(!mAllowRemoteInput);
+        checkbox.setOnCheckedChangeListener(mListener);
+        checkbox.setEnabled(mAdminRestrictingRemoteInput == null);
+
+        View restricted = dialog.findViewById(R.id.restricted_lock_icon_remote_input);
+        restricted.setVisibility(mAdminRestrictingRemoteInput == null ? View.GONE : View.VISIBLE);
+
+        if (mAdminRestrictingRemoteInput != null) {
+            checkbox.setClickable(false);
+            dialog.findViewById(com.android.internal.R.id.customPanel)
+                    .setOnClickListener(mListener);
+        }
     }
 
     @Override
@@ -122,7 +139,7 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
     }
 
     private class Listener implements DialogInterface.OnClickListener,
-            CompoundButton.OnCheckedChangeListener {
+            CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
         private final DialogInterface.OnClickListener mInner;
         private View mView;
@@ -149,6 +166,14 @@ public class NotificationLockscreenPreference extends RestrictedListPreference {
 
         public void setView(View view) {
             mView = view;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == com.android.internal.R.id.customPanel) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
+                        mAdminRestrictingRemoteInput);
+            }
         }
     }
 }
