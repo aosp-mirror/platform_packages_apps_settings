@@ -36,10 +36,11 @@ import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
 
 /**
  * Listens to {@link Intent.ACTION_BOOT_COMPLETED} and {@link Intent.ACTION_PRE_BOOT_COMPLETED}
- * performs setup steps for a managed profile (disables the launcher icon of the Settings app and
- * adds cross-profile intent filters for the appropriate Settings activities).
+ * performs setup steps for a managed profile (disables the launcher icon of the Settings app,
+ * adds cross-profile intent filters for the appropriate Settings activities), and disables the
+ * webview setting for non-admin users.
  */
-public class ManagedProfileSetup extends BroadcastReceiver {
+public class SettingsInitialize extends BroadcastReceiver {
     private static final String TAG = "Settings";
     private static final String PRIMARY_PROFILE_SETTING =
             "com.android.settings.PRIMARY_PROFILE_CONTROLLED";
@@ -48,12 +49,18 @@ public class ManagedProfileSetup extends BroadcastReceiver {
     public void onReceive(Context context, Intent broadcast) {
         final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
         UserInfo userInfo = um.getUserInfo(UserHandle.myUserId());
+        final PackageManager pm  = context.getPackageManager();
+        managedProfileSetup(context, pm, broadcast, userInfo);
+        webviewSettingSetup(context, pm, userInfo);
+    }
+
+    private void managedProfileSetup(Context context, final PackageManager pm, Intent broadcast,
+            UserInfo userInfo) {
         if (userInfo == null || !userInfo.isManagedProfile()) {
             return;
         }
         Log.i(TAG, "Received broadcast: " + broadcast.getAction()
                 + ". Setting up intent forwarding for managed profile.");
-        final PackageManager pm  = context.getPackageManager();
         // Clear any previous intent forwarding we set up
         pm.clearCrossProfileIntentFilters(userInfo.id);
 
@@ -85,5 +92,19 @@ public class ManagedProfileSetup extends BroadcastReceiver {
         ComponentName settingsComponentName = new ComponentName(context, Settings.class);
         pm.setComponentEnabledSetting(settingsComponentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+    }
+
+    // Disable WebView Setting if the current user is not an admin
+    private void webviewSettingSetup(Context context, PackageManager pm, UserInfo userInfo) {
+        if (userInfo == null) {
+            return;
+        }
+        ComponentName settingsComponentName =
+            new ComponentName(context, WebViewImplementation.class);
+        pm.setComponentEnabledSetting(settingsComponentName,
+                userInfo.isAdmin() ?
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
     }
 }
