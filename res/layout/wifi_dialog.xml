@@ -15,9 +15,10 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:fadeScrollbars="false">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="false"
+        android:scrollIndicators="top|bottom">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -71,7 +72,7 @@
                 <Spinner android:id="@+id/security"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/wifi_item_content"
+                        style="@style/wifi_item_spinner"
                         android:prompt="@string/wifi_security"
                         android:entries="@array/wifi_security" />
             </LinearLayout>
@@ -103,7 +104,7 @@
                     <Spinner android:id="@+id/method"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_spinner"
                             android:prompt="@string/wifi_eap_method"
                             android:entries="@array/wifi_eap_method" />
                 </LinearLayout>
@@ -122,7 +123,7 @@
                     <Spinner android:id="@+id/phase2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_spinner"
                             android:prompt="@string/please_select_phase2"
                             android:entries="@array/wifi_phase2_entries" />
                 </LinearLayout>
@@ -141,7 +142,7 @@
                     <Spinner android:id="@+id/ca_cert"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_spinner"
                             android:prompt="@string/wifi_eap_ca_cert" />
                 </LinearLayout>
 
@@ -201,7 +202,7 @@
                     <Spinner android:id="@+id/user_cert"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_spinner"
                             android:prompt="@string/wifi_eap_user_cert" />
                 </LinearLayout>
 
@@ -285,6 +286,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/wifi_item"
+                android:paddingBottom="4dp"
                 android:visibility="gone">
             <CheckBox android:id="@+id/wifi_advanced_togglebox"
                     android:layout_width="match_parent"
@@ -314,7 +316,7 @@
                 <Spinner android:id="@+id/proxy_settings"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/wifi_item_content"
+                        style="@style/wifi_item_spinner"
                         android:prompt="@string/proxy_settings_title"
                         android:entries="@array/wifi_proxy_settings" />
 
@@ -439,7 +441,7 @@
                 <Spinner android:id="@+id/ip_settings"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/wifi_item_content"
+                        style="@style/wifi_item_spinner"
                         android:prompt="@string/wifi_ip_settings"
                         android:entries="@array/wifi_ip_settings" />
 
