@@ -341,7 +341,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     final private static int sWidgetsToDisable = StatusBarManager.DISABLE_EXPAND
             | StatusBarManager.DISABLE_NOTIFICATION_ICONS
             | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
-            | StatusBarManager.DISABLE_SYSTEM_INFO
             | StatusBarManager.DISABLE_HOME
             | StatusBarManager.DISABLE_SEARCH
             | StatusBarManager.DISABLE_RECENT;
