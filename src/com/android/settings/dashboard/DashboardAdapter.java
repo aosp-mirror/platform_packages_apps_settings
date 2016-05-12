@@ -288,6 +288,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     public void disableSuggestion(Tile suggestion) {
+        if (mSuggestionParser == null) {
+            return;
+        }
         if (mSuggestionParser.dismissSuggestion(suggestion)) {
             mContext.getPackageManager().setComponentEnabledSetting(
                     suggestion.intent.getComponent(),
