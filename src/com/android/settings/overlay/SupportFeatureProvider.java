@@ -18,6 +18,7 @@ package com.android.settings.overlay;
 
 import android.accounts.Account;
 import android.annotation.IntDef;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -58,18 +59,23 @@ public interface SupportFeatureProvider {
     String getEstimatedWaitTime(Context context, @SupportType int type);
 
     /**
+     * Whether or not a disclaimer dialog should be displayed.
+     */
+    boolean shouldShowDisclaimerDialog(Context context);
+
+    /**
      * Returns an {@link Account} that's eligible for support options.
      */
     Account getSupportEligibleAccount(Context context);
 
     /**
-     * Returns an {@link Intent} that opens email support for specified account.
+     * Starts support activity of specified type
      *
-     * @param context A UI Context
+     * @param activity Calling activity
      * @param account A account returned by {@link #getSupportEligibleAccount}
      * @param type The type of support account needs.
      */
-    Intent getSupportIntent(Context context, Account account, @SupportType int type);
+    void startSupport(Activity activity, Account account, @SupportType int type);
 
     /**
      * Returns an {@link Intent} that opens help and allow user get help on sign in.
