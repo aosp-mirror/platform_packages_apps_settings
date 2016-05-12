@@ -16,17 +16,18 @@
 
 package com.android.settings.deletionhelper;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
 import android.text.format.Formatter;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import com.android.settings.deletionhelper.DownloadsDeletionPreference;
+import com.android.settings.CollapsibleCheckboxPreferenceGroup;
 import com.android.settings.PhotosDeletionPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
@@ -65,7 +66,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
     private static final int DOWNLOADS_LOADER_ID = 1;
 
     private Button mCancel, mFree;
-    private PreferenceGroup mApps;
+    private CollapsibleCheckboxPreferenceGroup mApps;
     private PhotosDeletionPreference mPhotoPreference;
     private DownloadsDeletionPreference mDownloadsPreference;
 
@@ -82,6 +83,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setAnimationAllowed(true);
         Application app = getActivity().getApplication();
         mState = ApplicationsState.getInstance(app);
         mSession = mState.newSession(this);
@@ -89,7 +91,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         mDataUsageBridge = new AppStateUsageStatsBridge(getActivity(), mState, this);
 
         addPreferencesFromResource(R.xml.deletion_helper_list);
-        mApps = (PreferenceGroup) findPreference(KEY_APPS_GROUP);
+        mApps = (CollapsibleCheckboxPreferenceGroup) findPreference(KEY_APPS_GROUP);
         mPhotoPreference = (PhotosDeletionPreference) findPreference(KEY_PHOTOS_VIDEOS_PREFERENCE);
         mDownloadsPreference =
                 (DownloadsDeletionPreference) findPreference(KEY_DOWNLOADS_PREFERENCE);
@@ -131,6 +133,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
 
         mDownloadsPreference.registerFreeableChangedListener(this);
         mDownloadsPreference.registerDeletionService(mDownloadsDeletion);
+        mApps.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -191,24 +194,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
                         ApplicationsState.SIZE_COMPARATOR);
         if (apps == null) return;
         mAppEntries = apps;
-        cacheRemoveAllPrefs(mApps);
-        int entryCount = apps.size();
-        for (int i = 0; i < entryCount; i++) {
-            AppEntry entry = apps.get(i);
-            final String packageName = entry.label;
-            AppDeletionPreference preference =
-                    (AppDeletionPreference) getCachedPreference(entry.label);
-            if (preference == null) {
-                preference = new AppDeletionPreference(getActivity(), entry,
-                        mState);
-                preference.setKey(packageName);
-                preference.setChecked(mCheckedApplications.contains(packageName));
-                preference.setOnPreferenceChangeListener(this);
-                mApps.addPreference(preference);
-            }
-            preference.setOrder(i);
-        }
-        removeCachedPrefs(mApps);
+        refreshAppGroup(apps);
 
         // All applications should be filled in if we've received the sizes.
         // setLoading being called multiple times causes flickering, so we only do it once.
@@ -277,11 +263,20 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean checked = (boolean) newValue;
+        if (preference.getKey().equals(mApps.getKey())) {
+            return toggleAllApps(checked);
+        }
+
         String packageName = ((AppDeletionPreference) preference).getPackageName();
         if (checked) {
             mCheckedApplications.add(packageName);
         } else {
             mCheckedApplications.remove(packageName);
+
+            // We remove the preference change listener to avoid toggling every app on and off.
+            mApps.setOnPreferenceChangeListener(null);
+            mApps.setChecked(false);
+            mApps.setOnPreferenceChangeListener(this);
         }
         updateFreeButtonText();
         return true;
@@ -346,17 +341,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
 
     private long getTotalFreeableSpace() {
         long freeableSpace = 0;
-        if (mAppEntries != null) {
-
-            for (int i = 0; i < mAppEntries.size(); i++) {
-                final AppEntry entry = mAppEntries.get(i);
-                long entrySize = mAppEntries.get(i).size;
-                // If the entrySize is negative, it is either an unknown size or an error occurred.
-                if (mCheckedApplications.contains(entry.label) && entrySize > 0) {
-                    freeableSpace += entrySize;
-                }
-            }
-        }
+        freeableSpace += getTotalAppsFreeableSpace(false);
         if (mPhotoPreference != null) {
             freeableSpace += mPhotoPreference.getFreeableBytes();
         }
@@ -364,5 +349,68 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
             freeableSpace += mDownloadsPreference.getFreeableBytes();
         }
         return freeableSpace;
+    }
+
+    private void refreshAppGroup(ArrayList<AppEntry> apps) {
+        int entryCount = apps.size();
+        cacheRemoveAllPrefs(mApps);
+        for (int i = 0; i < entryCount; i++) {
+            AppEntry entry = apps.get(i);
+            final String packageName = entry.label;
+            AppDeletionPreference preference =
+                    (AppDeletionPreference) getCachedPreference(entry.label);
+            if (preference == null) {
+                preference = new AppDeletionPreference(getActivity(), entry, mState);
+                preference.setKey(packageName);
+                preference.setOnPreferenceChangeListener(this);
+                mApps.addPreference(preference);
+            }
+            preference.setChecked(mCheckedApplications.contains(packageName));
+            preference.setOrder(i);
+        }
+        removeCachedPrefs(mApps);
+        updateAppsGroupText();
+    }
+
+    private long getTotalAppsFreeableSpace(boolean countUnchecked) {
+        long freeableSpace = 0;
+        if (mAppEntries != null) {
+            for (int i = 0; i < mAppEntries.size(); i++) {
+                final AppEntry entry = mAppEntries.get(i);
+                long entrySize = mAppEntries.get(i).size;
+                // If the entrySize is negative, it is either an unknown size or an error occurred.
+                if ((countUnchecked ||
+                        mCheckedApplications.contains(entry.label)) && entrySize > 0) {
+                    freeableSpace += entrySize;
+                }
+            }
+        }
+
+        return freeableSpace;
+    }
+
+    private void updateAppsGroupText() {
+        if (mAppEntries != null) {
+            Activity app = getActivity();
+            mApps.setTitle(app.getString(R.string.deletion_helper_apps_group_title,
+                    mAppEntries.size()));
+            mApps.setSummary(app.getString(R.string.deletion_helper_apps_group_summary,
+                    Formatter.formatFileSize(app,
+                            getTotalAppsFreeableSpace(true))));
+        }
+    }
+
+    private boolean toggleAllApps(boolean checked) {
+        for (AppEntry entry : mAppEntries) {
+            final String packageName = entry.label;
+            if (checked) {
+                mCheckedApplications.add(packageName);
+            } else {
+                mCheckedApplications.remove(packageName);
+            }
+        }
+        refreshAppGroup(mAppEntries);
+        updateFreeButtonText();
+        return true;
     }
 }

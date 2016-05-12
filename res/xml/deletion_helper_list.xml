@@ -23,8 +23,8 @@
     <com.android.settings.deletionhelper.DownloadsDeletionPreference
         android:key="delete_downloads" />
 
-    <PreferenceCategory
-        android:key="apps_group"
-        android:title="@string/deletion_helper_apps_title" />
+    <com.android.settings.CollapsibleCheckboxPreferenceGroup
+            android:key="apps_group"
+            android:icon="@drawable/ic_keyboard_arrow_down_black_32"/>
 
 </PreferenceScreen>
