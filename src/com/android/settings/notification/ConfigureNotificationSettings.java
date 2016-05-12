@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -177,6 +178,9 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         }
 
+        mLockscreen.setRemoteInputRestricted(RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+                mContext, DevicePolicyManager.KEYGUARD_DISABLE_REMOTE_INPUT, UserHandle.myUserId()));
+
         mLockscreen.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mLockscreen.setEntryValues(values.toArray(new CharSequence[values.size()]));
         updateLockscreenNotifications();
@@ -238,6 +242,10 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
             setRestrictedIfNotificationFeaturesDisabled(summaryHideEntry, summaryHideEntryValue,
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         }
+
+        mLockscreen.setRemoteInputRestricted(RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+                mContext, DevicePolicyManager.KEYGUARD_DISABLE_REMOTE_INPUT,
+                mProfileChallengeUserId));
 
         mLockscreenProfile.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mLockscreenProfile.setEntryValues(values.toArray(new CharSequence[values.size()]));

@@ -15,14 +15,15 @@
   ~ limitations under the License
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     <CheckBox
             android:id="@+id/lockscreen_remote_input"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginStart="20dp"
             android:paddingStart="20dp"
             android:paddingEnd="?android:attr/dialogPreferredPadding"
@@ -32,4 +33,13 @@
             android:gravity="center_vertical"
             android:text="@string/lockscreen_remote_input"
         />
-</FrameLayout>
+
+    <ImageView
+            android:id="@+id/restricted_lock_icon_remote_input"
+            android:layout_width="@dimen/restricted_icon_size"
+            android:layout_height="@dimen/restricted_icon_size"
+            android:src="@drawable/ic_info"
+            android:layout_marginEnd="?android:attr/dialogPreferredPadding"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerInside" />
+</LinearLayout>
