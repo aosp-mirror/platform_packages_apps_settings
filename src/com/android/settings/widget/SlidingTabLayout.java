@@ -120,9 +120,7 @@ public final class SlidingTabLayout extends FrameLayout implements View.OnClickL
             tabTitleView.setOnClickListener(this);
 
             mTitleView.addView(tabTitleView);
-            if (i == mViewPager.getCurrentItem()) {
-                tabTitleView.setSelected(true);
-            }
+            tabTitleView.setSelected(i == mViewPager.getCurrentItem());
         }
     }
 
@@ -159,9 +157,9 @@ public final class SlidingTabLayout extends FrameLayout implements View.OnClickL
             if (mScrollState == ViewPager.SCROLL_STATE_IDLE) {
                 onViewPagerPageChanged(position, 0f);
             }
-            final int titleCount = getChildCount();
+            final int titleCount = mTitleView.getChildCount();
             for (int i = 0; i < titleCount; i++) {
-                getChildAt(i).setSelected(position == i);
+                mTitleView.getChildAt(i).setSelected(position == i);
             }
         }
     }
