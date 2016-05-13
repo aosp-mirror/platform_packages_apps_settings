@@ -37,6 +37,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserManager;
+import android.security.KeyStore;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -68,6 +69,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     private FingerprintUiHelper mFingerprintHelper;
     protected boolean mIsStrongAuthRequired;
     private boolean mAllowFpAuthentication;
+    protected boolean mReturnCredentials = false;
     protected Button mCancelButton;
     protected ImageView mFingerprintIcon;
     protected int mEffectiveUserId;
@@ -81,15 +83,17 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
         super.onCreate(savedInstanceState);
         mAllowFpAuthentication = getActivity().getIntent().getBooleanExtra(
                 ALLOW_FP_AUTHENTICATION, false);
+        mReturnCredentials = getActivity().getIntent().getBooleanExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false);
         // Only take this argument into account if it belongs to the current profile.
         Intent intent = getActivity().getIntent();
         mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
         final UserManager userManager = UserManager.get(getActivity());
         mEffectiveUserId = userManager.getCredentialOwnerProfile(mUserId);
-        mIsStrongAuthRequired = isStrongAuthRequired();
-        mAllowFpAuthentication = mAllowFpAuthentication && !isFingerprintDisabledByAdmin()
-                && !mIsStrongAuthRequired;
         mLockPatternUtils = new LockPatternUtils(getActivity());
+        mIsStrongAuthRequired = isFingerprintDisallowedByStrongAuth();
+        mAllowFpAuthentication = mAllowFpAuthentication && !isFingerprintDisabledByAdmin()
+                && !mReturnCredentials && !mIsStrongAuthRequired;
     }
 
     @Override
@@ -126,8 +130,13 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
         return (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) != 0;
     }
 
-    private boolean isStrongAuthRequired() {
-        return !(UserManager.get(getContext()).isUserUnlocked(mEffectiveUserId));
+    // User could be locked while Effective user is unlocked even though the effective owns the
+    // credential. Otherwise, fingerprint can't unlock fbe/keystore through
+    // verifyTiedProfileChallenge. In such case, we also wanna show the user message that
+    // fingerprint is disabled due to device restart.
+    private boolean isFingerprintDisallowedByStrongAuth() {
+        return !(mLockPatternUtils.isFingerprintAllowedForUser(mEffectiveUserId)
+                && KeyStore.getInstance().state(mUserId) == KeyStore.State.UNLOCKED);
     }
 
     @Override
@@ -245,6 +254,9 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     protected void reportSuccessfullAttempt() {
         if (isProfileChallenge()) {
             mLockPatternUtils.reportSuccessfulPasswordAttempt(mEffectiveUserId);
+            // Keyguard is responsible to disable StrongAuth for primary user. Disable StrongAuth
+            // for work challenge only here.
+            mLockPatternUtils.userPresent(mEffectiveUserId);
         }
     }
 
