@@ -908,8 +908,13 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void addAppInstallerInfoPref(PreferenceScreen screen) {
-        final String installerPackageName =
-                getContext().getPackageManager().getInstallerPackageName(mPackageName);
+        String installerPackageName = null;
+        try {
+            installerPackageName =
+                    getContext().getPackageManager().getInstallerPackageName(mPackageName);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Exception while retrieving the package installer of " + mPackageName, e);
+        }
         if (installerPackageName == null) {
             return;
         }
