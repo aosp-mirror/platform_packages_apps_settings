@@ -60,7 +60,7 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
 
         if (dpm.getProfileOwnerAsUser(mUserId) != null) {
             builder.setMessage(getResources().getQuantityString(R.plurals.ssl_ca_cert_info_message,
-                    numberOfCertificates, dpm.getProfileOwnerName()));
+                    numberOfCertificates, dpm.getProfileOwnerNameAsUser(mUserId)));
         } else if (dpm.getDeviceOwnerComponentOnCallingUser() != null) {
             builder.setMessage(getResources().getQuantityString(R.plurals.ssl_ca_cert_info_message,
                     numberOfCertificates, dpm.getDeviceOwnerNameOnAnyUser()));
