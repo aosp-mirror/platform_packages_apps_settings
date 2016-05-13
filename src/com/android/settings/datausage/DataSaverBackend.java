@@ -207,10 +207,6 @@ public class DataSaverBackend {
         }
 
         @Override
-        public void onRestrictPowerChanged(boolean restrictPower) {
-        }
-
-        @Override
         public void onRestrictBackgroundChanged(final boolean isDataSaving) throws RemoteException {
             mHandler.post(new Runnable() {
                 @Override
