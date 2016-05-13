@@ -24,16 +24,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.internal.widget.LockPatternUtils;
 
 import java.util.List;
 
@@ -78,6 +75,7 @@ public class EncryptionInterstitial extends SettingsActivity {
         private Preference mDontRequirePasswordToDecrypt;
         private boolean mPasswordRequired;
         private Intent mUnlockMethodIntent;
+        private int mRequestedPasswordQuality;
 
         @Override
         protected int getMetricsCategory() {
@@ -99,12 +97,12 @@ public class EncryptionInterstitial extends SettingsActivity {
             boolean forFingerprint = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             Intent intent = getActivity().getIntent();
-            final int quality = intent.getIntExtra(EXTRA_PASSWORD_QUALITY, 0);
-            mUnlockMethodIntent = (Intent) intent.getParcelableExtra(EXTRA_UNLOCK_METHOD_INTENT);
+            mRequestedPasswordQuality = intent.getIntExtra(EXTRA_PASSWORD_QUALITY, 0);
+            mUnlockMethodIntent = intent.getParcelableExtra(EXTRA_UNLOCK_METHOD_INTENT);
             final int msgId;
             final int enableId;
             final int disableId;
-            switch (quality) {
+            switch (mRequestedPasswordQuality) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     msgId = forFingerprint ?
                             R.string.encryption_interstitial_message_pattern_for_fingerprint :
@@ -188,11 +186,9 @@ public class EncryptionInterstitial extends SettingsActivity {
         public Dialog onCreateDialog(int dialogId) {
             switch(dialogId) {
                 case ACCESSIBILITY_WARNING_DIALOG: {
-                    final int quality = new LockPatternUtils(getActivity())
-                            .getKeyguardStoredPasswordQuality(UserHandle.myUserId());
                     final int titleId;
                     final int messageId;
-                    switch (quality) {
+                    switch (mRequestedPasswordQuality) {
                         case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                             titleId = R.string.encrypt_talkback_dialog_require_pattern;
                             messageId = R.string.encrypt_talkback_dialog_message_pattern;
