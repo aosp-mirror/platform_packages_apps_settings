@@ -61,7 +61,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
 
     private ApplicationsState mState;
     private Session mSession;
-    private HashSet<String> mUncheckedApplications;
+    private HashSet<String> mCheckedApplications;
     private AppStateUsageStatsBridge mDataUsageBridge;
     private ArrayList<AppEntry> mAppEntries;
     private boolean mHasReceivedAppEntries, mHasReceivedBridgeCallback, mFinishedLoading;
@@ -74,7 +74,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         Application app = getActivity().getApplication();
         mState = ApplicationsState.getInstance(app);
         mSession = mState.newSession(this);
-        mUncheckedApplications = new HashSet<>();
+        mCheckedApplications = new HashSet<>();
         mDataUsageBridge = new AppStateUsageStatsBridge(getActivity(), mState, this);
 
         addPreferencesFromResource(R.xml.deletion_helper_list);
@@ -91,7 +91,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
                     savedInstanceState.getBoolean(EXTRA_HAS_SIZES, false);
             mHasReceivedBridgeCallback =
                     savedInstanceState.getBoolean(EXTRA_HAS_BRIDGE, false);
-            mUncheckedApplications =
+            mCheckedApplications =
                     (HashSet<String>) savedInstanceState.getSerializable(EXTRA_CHECKED_SET);
         }
     }
@@ -120,7 +120,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
 
                 ArraySet<String> apps = new ArraySet<>();
                 for (AppEntry entry : mAppEntries) {
-                    if (!mUncheckedApplications.contains(entry.label)) {
+                    if (mCheckedApplications.contains(entry.label)) {
                         synchronized (entry) {
                             apps.add(entry.info.packageName);
                         }
@@ -180,7 +180,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         super.onSaveInstanceState(outState);
         outState.putBoolean(EXTRA_HAS_SIZES, mHasReceivedAppEntries);
         outState.putBoolean(EXTRA_HAS_BRIDGE, mHasReceivedBridgeCallback);
-        outState.putSerializable(EXTRA_CHECKED_SET, mUncheckedApplications);
+        outState.putSerializable(EXTRA_CHECKED_SET, mCheckedApplications);
     }
 
 
@@ -216,7 +216,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
                 preference = new AppDeletionPreference(getActivity(), entry,
                         mState);
                 preference.setKey(packageName);
-                preference.setChecked(!mUncheckedApplications.contains(packageName));
+                preference.setChecked(mCheckedApplications.contains(packageName));
                 preference.setOnPreferenceChangeListener(this);
                 mApps.addPreference(preference);
             }
@@ -293,9 +293,9 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         boolean checked = (boolean) newValue;
         String packageName = ((AppDeletionPreference) preference).getPackageName();
         if (checked) {
-            mUncheckedApplications.remove(packageName);
+            mCheckedApplications.add(packageName);
         } else {
-            mUncheckedApplications.add(packageName);
+            mCheckedApplications.remove(packageName);
         }
         updateFreeButtonText();
         return true;
@@ -314,7 +314,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
                 final AppEntry entry = mAppEntries.get(i);
                 long entrySize = mAppEntries.get(i).size;
                 // If the entrySize is negative, it is either an unknown size or an error occurred.
-                if (!mUncheckedApplications.contains(entry.label) && entrySize > 0) {
+                if (mCheckedApplications.contains(entry.label) && entrySize > 0) {
                     freeableSpace += entrySize;
                 }
             }
