@@ -117,7 +117,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
     private Preference mExplore;
 
-    private boolean mDetached;
+    private boolean mNeedsUpdate;
 
     private boolean isVolumeValid() {
         return (mVolume != null) && (mVolume.getType() == VolumeInfo.TYPE_PRIVATE)
@@ -164,9 +164,13 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         mExplore = buildAction(R.string.storage_menu_explore);
 
-        mDetached = false;
+        mNeedsUpdate = true;
 
         setHasOptionsMenu(true);
+    }
+
+    private void setTitle() {
+        getActivity().setTitle(mStorageManager.getBestVolumeDescription(mVolume));
     }
 
     private void update() {
@@ -175,7 +179,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             return;
         }
 
-        getActivity().setTitle(mStorageManager.getBestVolumeDescription(mVolume));
+        setTitle();
 
         // Valid options may have changed
         getFragmentManager().invalidateOptionsMenu();
@@ -238,6 +242,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mSummary.setPercent((int) ((usedBytes * 100) / totalBytes));
 
         mMeasure.forceMeasure();
+        mNeedsUpdate = false;
     }
 
     private void addPreference(PreferenceGroup group, Preference pref) {
@@ -314,8 +319,10 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         mStorageManager.registerListener(mStorageListener);
 
-        if (!mDetached) {
+        if (mNeedsUpdate) {
             update();
+        } else {
+            setTitle();
         }
     }
 
@@ -326,24 +333,11 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mDetached = false;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mDetached = true;
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         if (mMeasure != null) {
             mMeasure.onDestroy();
         }
-        mDetached = false;
     }
 
     @Override
