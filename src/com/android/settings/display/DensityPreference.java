@@ -19,6 +19,7 @@ import android.content.res.Resources;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Slog;
 import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ import com.android.settings.R;
 import com.android.settingslib.display.DisplayDensityUtils;
 
 public class DensityPreference extends CustomEditTextPreference {
+    private static final String TAG = "DensityPreference";
 
     public DensityPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -62,13 +64,18 @@ public class DensityPreference extends CustomEditTextPreference {
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         if (positiveResult) {
-            final Resources res = getContext().getResources();
-            final DisplayMetrics metrics = res.getDisplayMetrics();
-            final int newSwDp = Math.max(Integer.parseInt(getText()), 320);
-            final int minDimensionPx = Math.min(metrics.widthPixels, metrics.heightPixels);
-            final int newDensity = DisplayMetrics.DENSITY_MEDIUM * minDimensionPx / newSwDp;
-            final int densityDpi = Math.max(newDensity, 120);
-            DisplayDensityUtils.setForcedDisplayDensity(Display.DEFAULT_DISPLAY, densityDpi);
+            try {
+                final Resources res = getContext().getResources();
+                final DisplayMetrics metrics = res.getDisplayMetrics();
+                final int newSwDp = Math.max(Integer.parseInt(getText()), 320);
+                final int minDimensionPx = Math.min(metrics.widthPixels, metrics.heightPixels);
+                final int newDensity = DisplayMetrics.DENSITY_MEDIUM * minDimensionPx / newSwDp;
+                final int densityDpi = Math.max(newDensity, 120);
+                DisplayDensityUtils.setForcedDisplayDensity(Display.DEFAULT_DISPLAY, densityDpi);
+            } catch (Exception e) {
+                // TODO: display a message instead of silently failing.
+                Slog.e(TAG, "Couldn't save density", e);
+            }
         }
     }
 }
