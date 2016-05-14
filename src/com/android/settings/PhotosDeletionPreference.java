@@ -19,107 +19,36 @@ package com.android.settings;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.text.format.Formatter;
-import android.widget.TextView;
-import com.android.settings.deletionhelper.DeletionType;
 
 /**
  * Preference to handle the deletion of photos and videos in the Deletion Helper.
  */
-public class PhotosDeletionPreference extends CheckBoxPreference implements
-        DeletionType.FreeableChangedListener, OnPreferenceChangeListener {
+public class PhotosDeletionPreference extends DeletionPreference {
     // TODO(b/28560570): Remove this dummy value.
     private static final int FAKE_DAYS_TO_KEEP = 30;
-    private DeletionType.FreeableChangedListener mListener;
-    private boolean mChecked;
-    private long mFreeableBytes;
-    private int mFreeableItems;
-    private DeletionType mDeletionService;
 
     public PhotosDeletionPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setIcon(getIcon(context));
-        updatePreferenceText();
-        setOnPreferenceChangeListener(this);
-    }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
-        super.onBindViewHolder(holder);
-        final TextView titleView = (TextView) holder.findViewById(android.R.id.title);
-        if (titleView != null) {
-            titleView.setTextColor(getTintColor(getContext()));
-        }
-    }
-
-    /**
-     * Get the tint color for the preference's icon and text.
-     * @param context UI context to get the theme.
-     * @return The tint color.
-     */
-    public int getTintColor(Context context) {
-        TypedValue value = new TypedValue();
-        context.getTheme().resolveAttribute(android.R.attr.colorAccent, value, true);
-        return context.getColor(value.resourceId);
+        updatePreferenceText(0, 0);
     }
 
     /**
      * Updates the title and summary of the preference with fresh information.
      */
-    public void updatePreferenceText() {
+    public void updatePreferenceText(int items, long bytes) {
         Context context = getContext();
-        setTitle(context.getString(R.string.deletion_helper_photos_title,
-                mFreeableItems));
+        setTitle(context.getString(R.string.deletion_helper_photos_title, items));
         setSummary(context.getString(R.string.deletion_helper_photos_summary,
-                Formatter.formatFileSize(context, mFreeableBytes), FAKE_DAYS_TO_KEEP));
-    }
-
-    /**
-     * Returns the number of bytes which can be cleared by the deletion service.
-     * @return The number of bytes.
-     */
-    public long getFreeableBytes() {
-        return mChecked ? mFreeableBytes : 0;
-    }
-
-    /**
-     * Register a listener to be called back on when the freeable bytes have changed.
-     * @param listener The callback listener.
-     */
-    public void registerFreeableChangedListener(DeletionType.FreeableChangedListener listener) {
-        mListener = listener;
-    }
-
-    /**
-     * Registers a deletion service to update the preference's information.
-     * @param deletionService A photo/video deletion service.
-     */
-    public void registerDeletionService(DeletionType deletionService) {
-        mDeletionService = deletionService;
-        if (mDeletionService != null) {
-            mDeletionService.registerFreeableChangedListener(this);
-        }
+                Formatter.formatFileSize(context, bytes), FAKE_DAYS_TO_KEEP));
     }
 
     @Override
-    public void onFreeableChanged(int numItems, long freeableBytes) {
-        mFreeableItems = numItems;
-        mFreeableBytes = freeableBytes;
-        updatePreferenceText();
-        maybeUpdateListener();
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        mChecked = (boolean) newValue;
-        maybeUpdateListener();
-        return true;
+    public void onFreeableChanged(int items, long bytes) {
+        super.onFreeableChanged(items, bytes);
+        updatePreferenceText(items, bytes);
     }
 
     private Drawable getIcon(Context context) {
@@ -133,11 +62,5 @@ public class PhotosDeletionPreference extends CheckBoxPreference implements
             return null;
         }
         return iconDrawable;
-    }
-
-    private void maybeUpdateListener() {
-        if (mListener != null) {
-            mListener.onFreeableChanged(mFreeableItems, getFreeableBytes());
-        }
     }
 }

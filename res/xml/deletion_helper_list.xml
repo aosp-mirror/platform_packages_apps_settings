@@ -20,8 +20,11 @@
     <com.android.settings.PhotosDeletionPreference
         android:key="delete_photos" />
 
+    <com.android.settings.deletionhelper.DownloadsDeletionPreference
+        android:key="delete_downloads" />
+
     <PreferenceCategory
-            android:key="apps_group"
-            android:title="@string/deletion_helper_apps_title" />
+        android:key="apps_group"
+        android:title="@string/deletion_helper_apps_title" />
 
 </PreferenceScreen>
