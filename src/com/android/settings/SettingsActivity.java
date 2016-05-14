@@ -73,6 +73,7 @@ import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.dashboard.DashboardContainerFragment;
 import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.deletionhelper.DeletionHelperFragment;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
@@ -332,6 +333,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             WallpaperTypeSettings.class.getName(),
             VrListenerSettings.class.getName(),
             ManagedProfileSettings.class.getName(),
+            DeletionHelperFragment.class.getName(),
     };
 
 

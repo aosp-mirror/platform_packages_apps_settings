@@ -2901,6 +2901,17 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name="Settings$DeletionHelperActivity"
+                  android:label="@string/deletion_helper_title"
+                  android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DELETION_HELPER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.deletionhelper.DeletionHelperFragment" />
+        </activity>
+
         <service
             android:name=".SettingsDumpService"
             android:exported="true"
