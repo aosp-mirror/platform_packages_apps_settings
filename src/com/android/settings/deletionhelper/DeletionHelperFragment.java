@@ -25,6 +25,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import com.android.settings.deletionhelper.DownloadsDeletionPreference;
 import com.android.settings.PhotosDeletionPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
@@ -54,10 +55,14 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
 
     private static final String KEY_APPS_GROUP = "apps_group";
     private static final String KEY_PHOTOS_VIDEOS_PREFERENCE = "delete_photos";
+    private static final String KEY_DOWNLOADS_PREFERENCE = "delete_downloads";
+
+    private static final int DOWNLOADS_LOADER_ID = 1;
 
     private Button mCancel, mFree;
     private PreferenceGroup mApps;
     private PhotosDeletionPreference mPhotoPreference;
+    private DownloadsDeletionPreference mDownloadsPreference;
 
     private ApplicationsState mState;
     private Session mSession;
@@ -67,6 +72,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
     private boolean mHasReceivedAppEntries, mHasReceivedBridgeCallback, mFinishedLoading;
     private DeletionHelperFeatureProvider mProvider;
     private DeletionType mPhotoVideoDeletion;
+    private DownloadsDeletionType mDownloadsDeletion;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,11 +86,14 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         addPreferencesFromResource(R.xml.deletion_helper_list);
         mApps = (PreferenceGroup) findPreference(KEY_APPS_GROUP);
         mPhotoPreference = (PhotosDeletionPreference) findPreference(KEY_PHOTOS_VIDEOS_PREFERENCE);
+        mDownloadsPreference =
+                (DownloadsDeletionPreference) findPreference(KEY_DOWNLOADS_PREFERENCE);
         mProvider =
                 FeatureFactory.getFactory(app).getDeletionHelperFeatureProvider();
         if (mProvider != null) {
             mPhotoVideoDeletion = mProvider.createPhotoVideoDeletionType();
         }
+        mDownloadsDeletion = new DownloadsDeletionType(getActivity());
 
         if (savedInstanceState != null) {
             mHasReceivedAppEntries =
@@ -116,6 +125,9 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
                 // with the simultaneous PackageDeletionTask.
                 if (mPhotoPreference != null && mPhotoPreference.isChecked()) {
                     mPhotoVideoDeletion.clearFreeableData();
+                }
+                if (mDownloadsPreference != null && mDownloadsPreference.isChecked()) {
+                    mDownloadsDeletion.clearFreeableData();
                 }
 
                 ArraySet<String> apps = new ArraySet<>();
@@ -153,6 +165,9 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
             mPhotoPreference.registerFreeableChangedListener(this);
             mPhotoPreference.registerDeletionService(mPhotoVideoDeletion);
         }
+
+        mDownloadsPreference.registerFreeableChangedListener(this);
+        mDownloadsPreference.registerDeletionService(mDownloadsDeletion);
     }
 
     @Override
@@ -171,6 +186,10 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
 
         if (mPhotoVideoDeletion != null) {
             mPhotoVideoDeletion.onResume();
+        }
+        if (mDownloadsDeletion != null) {
+            mDownloadsDeletion.onResume();
+            getLoaderManager().initLoader(DOWNLOADS_LOADER_ID, new Bundle(), mDownloadsDeletion);
         }
     }
 
@@ -193,6 +212,9 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         if (mPhotoVideoDeletion != null) {
             mPhotoVideoDeletion.onPause();
         }
+        if (mDownloadsDeletion != null) {
+            mDownloadsDeletion.onPause();
+        }
     }
 
     private void rebuild() {
@@ -211,7 +233,8 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         for (int i = 0; i < entryCount; i++) {
             AppEntry entry = apps.get(i);
             final String packageName = entry.label;
-            AppDeletionPreference preference = (AppDeletionPreference) getCachedPreference(entry.label);
+            AppDeletionPreference preference =
+                    (AppDeletionPreference) getCachedPreference(entry.label);
             if (preference == null) {
                 preference = new AppDeletionPreference(getActivity(), entry,
                         mState);
@@ -321,6 +344,9 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         }
         if (mPhotoPreference != null) {
             freeableSpace += mPhotoPreference.getFreeableBytes();
+        }
+        if (mDownloadsPreference != null) {
+            freeableSpace += mDownloadsPreference.getFreeableBytes();
         }
         return freeableSpace;
     }
