@@ -258,7 +258,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     private void toggleKeyboardShortcutsMenu() {
-        getActivity().requestKeyboardShortcutsHelper();
+        getActivity().requestShowKeyboardShortcuts();
     }
 
     private final OnPreferenceChangeListener mShowVirtualKeyboardSwitchPreferenceChangeListener =
