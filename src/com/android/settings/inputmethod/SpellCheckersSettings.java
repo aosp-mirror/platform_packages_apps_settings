@@ -44,6 +44,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     private static final boolean DBG = false;
 
     private static final String KEY_SPELL_CHECKER_LANGUAGE = "spellchecker_language";
+    private static final String KEY_DEFAULT_SPELL_CHECKER = "default_spellchecker";
     private static final int ITEM_ID_USE_SYSTEM_LANGUAGE = 0;
 
     private SwitchBar mSwitchBar;
@@ -82,6 +83,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         } else {
             pref.setSummary(R.string.spell_checker_not_selected);
         }
+        pref.setKey(KEY_DEFAULT_SPELL_CHECKER);
         pref.setOnPreferenceChangeListener(this);
         getPreferenceScreen().addPreference(pref);
     }
