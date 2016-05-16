@@ -96,11 +96,15 @@ abstract public class ZenModeSettingsBase extends RestrictedSettingsFragment {
     }
 
     protected String addZenRule(AutomaticZenRule rule) {
-        String id = NotificationManager.from(mContext).addAutomaticZenRule(rule);
-        final AutomaticZenRule savedRule =
-                NotificationManager.from(mContext).getAutomaticZenRule(id);
-        maybeRefreshRules(savedRule != null, true);
-        return id;
+        try {
+            String id = NotificationManager.from(mContext).addAutomaticZenRule(rule);
+            final AutomaticZenRule savedRule =
+                    NotificationManager.from(mContext).getAutomaticZenRule(id);
+            maybeRefreshRules(savedRule != null, true);
+            return id;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     protected boolean setZenRule(String id, AutomaticZenRule rule) {
