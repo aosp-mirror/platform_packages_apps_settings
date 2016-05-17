@@ -1430,8 +1430,8 @@
     <string name="show_running_services" msgid="5736278767975544570">"Прикажи покренуте услуге"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Прикажи кеширане процесе"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"Апликација за хитне случајеве"</string>
-    <string name="reset_app_preferences" msgid="1321050641018356925">"Ресетуј подешавања аплик."</string>
-    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Желите да ресетујете подешавања апл.?"</string>
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Ресетуј подешавања апликације"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Желите да ресетујете подешавања апликације?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Овим ћете вратити на почетне вредности сва подешавања за:\n\n "<li>"Онемогућене апликације"</li>\n" "<li>"Обавештења о онемогућеним апликацијама"</li>\n" "<li>"Подразумеване апликације за радње"</li>\n" "<li>"Ограничења за позадинске податке за апликације"</li>\n" "<li>"Било каква ограничења за дозволе"</li>\n\n" Нећете изгубити податке апликација."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Ресетуј апликације"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Управљај простором"</string>
@@ -2284,7 +2284,11 @@
       <item quantity="few">Означите сертификате као поуздане или их уклоните</item>
       <item quantity="other">Означите сертификате као поуздане или их уклоните</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> је инсталирао ауторитете за издавање сертификата на уређају, што може да му омогући да прати активности уређаја на мрежи, укључујући имејлове, апликације и безбедне веб-сајтове. Можете да означите ове сертификате као поуздане или да их уклоните.\n\nКонтактирајте администратора за више информација о овим сертификатима.</item>
+      <item quantity="few"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> је инсталирао ауторитете за издавање сертификата на уређају, што може да му омогући да прати активности уређаја на мрежи, укључујући имејлове, апликације и безбедне веб-сајтове. Можете да означите ове сертификате као поуздане или да их уклоните.\n\nКонтактирајте администратора за више информација о овим сертификатима.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> је инсталирао ауторитете за издавање сертификата на уређају, што може да му омогући да прати активности уређаја на мрежи, укључујући имејлове, апликације и безбедне веб-сајтове. Можете да означите ове сертификате као поуздане или да их уклоните.\n\nКонтактирајте администратора за више информација о овим сертификатима.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> је инсталирао ауторитете за издавање сертификата за ваш профил за Work, што може да им омогућит да прате рад пословне мреже, укључујући имејлове, апликације и безбедне веб-сајтове. Можете да означите ове сертификате као поуздане или да их уклоните.\n\nКонтактирајте администратора да бисте сазнали додатне информације о овим сертификатима.</item>
       <item quantity="few"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> је инсталирао ауторитете за издавање сертификата за ваш профил за Work, што може да им омогућит да прате рад пословне мреже, укључујући имејлове, апликације и безбедне веб-сајтове. Можете да означите ове сертификате као поуздане или да их уклоните.\n\nКонтактирајте администратора да бисте сазнали додатне информације о овим сертификатима.</item>
@@ -3016,7 +3020,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Позадински подаци су доступни само преко Wi-Fi-ја. То може да утиче на неке апликације или услуге када Wi-Fi није доступан."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Профил за Work је искључен"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Апликације, синхронизација у позадини и друге функције повезане са профилом за Work су искључене."</string>
-    <string name="suggestions_title" msgid="8758376306825920705">"Предлози (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestions_title" msgid="7280792342273268377">"Предлози"</string>
+    <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Уклони"</string>
     <string name="color_temperature" msgid="2070126836910615605">"Хладна температура боје"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Користи хладније боје екрана"</string>
@@ -3071,7 +3076,7 @@
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Аутоматски се укључује на %1$s батерије"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Не користи оптимизацију батерије"</string>
     <string name="lockscreen_remote_input" msgid="969871538778211843">"Ако је уређај закључан, спречи унос одговора или другог текста у обавештења"</string>
-    <string name="default_spell_checker" msgid="8506899870026026660">"Подразум. провера правописа"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"Подразумевана провера правописа"</string>
     <string name="choose_spell_checker" msgid="6596539862291699367">"Изаберите проверу правописа"</string>
     <string name="spell_checker_not_selected" msgid="8871083796179200696">"Није изабрано"</string>
     <string name="notification_log_no_title" msgid="5678029849672024215">"(ниједно)"</string>
@@ -3125,7 +3130,7 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, никада није коришћено"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, није сигурно када је последњи пут коришћено"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Ослободите <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <string name="support_escalation_title" msgid="2586337625943788579">"Помоћ која је доступна нон-стоп"</string>
+    <string name="support_escalation_title" msgid="7311759892297590244">"Подршка која је доступна нон-стоп"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"Можете да упутите захтев за позив или ћаскање представнику подршке и јавићемо вам се у најкраћем року"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Офлајн сте"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Да бисте контактирали подршку, прво се повежите са Wi-Fi мрежом или мрежом за пренос података."</string>
@@ -3134,6 +3139,7 @@
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Пошаљи имејл подршци"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Ћаскање са подршком"</string>
     <string name="support_forum_title" msgid="201753198197433199">"Форум за помоћ"</string>
+    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Савети и трикови"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Пријавите се да бисте добили подршку"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Пријави ме"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Не можете да приступите налогу?"</string>
@@ -3163,4 +3169,12 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Слушалице"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Периферни уређај за унос"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
+    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Слике и видео снимци (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
+    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, старије од <xliff:g id="DAYS">%2$d</xliff:g> дана"</string>
+    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
 </resources>
