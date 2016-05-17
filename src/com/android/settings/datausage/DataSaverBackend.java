@@ -175,15 +175,18 @@ public class DataSaverBackend {
     private final INetworkPolicyListener mPolicyListener = new INetworkPolicyListener.Stub() {
         @Override
         public void onUidRulesChanged(final int uid, int uidRules) throws RemoteException {
+        }
+
+        @Override
+        public void onRestrictBackgroundBlacklistChanged(int uid, boolean blacklisted) {
             if (mBlacklist == null) {
                 loadBlacklist();
             }
-            final boolean isBlacklisted = uidRules == POLICY_REJECT_METERED_BACKGROUND;
-            mBlacklist.put(uid, isBlacklisted);
+            mBlacklist.put(uid, blacklisted);
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    handleBlacklistChanged(uid, isBlacklisted);
+                    handleBlacklistChanged(uid, blacklisted);
                 }
             });
         }
