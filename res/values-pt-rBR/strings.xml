@@ -1646,7 +1646,7 @@
     <string name="accessibility_display_title" msgid="7610175687949675162">"Exibição"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Legendas"</string>
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Gesto de ampliação"</string>
-    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Toque três vezes para ampliar"</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Tocar três vezes para ampliar"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258"><b>"Para aplicar zoom"</b>", toque rapidamente na tela três vezes com um dedo.\n"<ul><li>"Arraste dois ou mais dedos para rolar"</li>\n<li>"Faça um gesto de pinça com dois ou mais dedos juntando-os ou separando-os para ajustar o zoom"</li></ul>\n\n<b>"Para aplicar zoom temporariamente"</b>", toque rapidamente na tela três vezes e mantenha o dedo pressionado no terceiro toque.\n"<ul><li>"Arraste o dedo para se mover pela tela"</li>\n<li>"Levante o dedo para diminuir o zoom"</li></ul>\n\n"Não é possível aplicar zoom no teclado e na barra de navegação."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Atalho de acessibilidade"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Ligado"</string>
@@ -2265,7 +2265,10 @@
       <item quantity="one">Confiar ou remover certificados</item>
       <item quantity="other">Confiar ou remover certificados</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificado no seu certificação, o que pode permitir que eles monitorem a atividade de rede do seu dispositivo, incluindo e-mails, apps e websites seguros. É possível optar por confiar nesses certificados ou removê-los.\n\nPara ver mais informações sobre esses certificados, entre em contato com seu admin.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificação no seu dispositivo, o que pode permitir que eles monitorem a atividade de rede do seu dispositivo, incluindo e-mails, apps e websites seguros. É possível optar por confiar nesses certificados ou removê-los.\n\nPara ver mais informações sobre esses certificados, entre em contato com seu admin.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificado para seu perfil de trabalho, o que pode permitir que ele monitore sua atividade profissional na rede, incluindo e-mails, apps e websites seguros. É possível optar por confiar nesses certificados ou removê-los.\n\nPara ver mais informações sobre esses certificados, entre em contato com seu admin.</item>
       <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificado para seu perfil de trabalho, o que pode permitir que ele monitore sua atividade profissional na rede, incluindo e-mails, apps e websites seguros. É possível optar por confiar nesses certificados ou removê-los.\n\nPara ver mais informações sobre esses certificados, entre em contato com seu admin.</item>
@@ -2306,7 +2309,7 @@
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Somente o proprietário do telefone pode gerenciar os usuários."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Perfis restritos não podem adicionar contas"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Excluir <xliff:g id="USER_NAME">%1$s</xliff:g> do dispositivo"</string>
-    <string name="user_lockscreen_settings" msgid="4965661345247084878">"configurações de tela de bloqueio"</string>
+    <string name="user_lockscreen_settings" msgid="4965661345247084878">"Configurações de tela de bloqueio"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2250956835192699766">"Adicionar usuários"</string>
     <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"com o dispositivo bloqueado."</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Novo usuário"</string>
@@ -2761,10 +2764,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Trabalho"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Bloqueados"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Com URLs de domínio"</string>
-    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Substitui \"Não perturbe\""</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Substituem \"Não perturbe\""</string>
     <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Nenhum conteúdo confidencial na tela de bloqueio"</string>
-    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Nunca exibir na tela bloqueio"</string>
-    <string name="filter_notif_silent" msgid="8533960664617048281">"Exibido de forma silenciosa"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Nunca exibidos na tela bloqueio"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Mostrados de forma silenciosa"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avançadas"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Configurar apps"</string>
     <string name="unknown_app" msgid="5275921288718717656">"App desconhecido"</string>
@@ -3038,7 +3041,7 @@
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Nunca ativar automaticamente"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Ativar automaticamente com %1$s%% de bateria"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Otimização de bateria desativada"</string>
-    <string name="lockscreen_remote_input" msgid="969871538778211843">"Se o dispositivo estiver bloqueado, impede a digitação de respostas ou outros textos nas notificações"</string>
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"Se o dispositivo estiver bloqueado, impedir a digitação de respostas ou outros textos nas notificações"</string>
     <string name="default_spell_checker" msgid="8506899870026026660">"Corretor ortográfico padrão"</string>
     <string name="choose_spell_checker" msgid="6596539862291699367">"Escolher corretor ortográfico"</string>
     <string name="spell_checker_not_selected" msgid="8871083796179200696">"Não selecionado"</string>

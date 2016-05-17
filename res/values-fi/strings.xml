@@ -1648,10 +1648,10 @@
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Suurennusele"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Lähennä napauttamalla kolme kertaa."</string>
     <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258"><b>"Lähennä"</b>" koskettamalla näyttöä sormella nopeasti kolme kertaa.\n"<ul><li>"Selaa vetämällä kahta tai useampaa sormea."</li>\n<li>"Säädä zoomia nipistämällä kahta tai useampaa sormea yhteen tai levittämällä niitä erilleen."</li></ul>\n\n<b>"Lähennä väliaikaisesti"</b>" koskettamalla näyttöä nopeasti kolme kertaa ja jatkamalla kosketusta pitkään kolmannella kerralla.\n"<ul><li>"Liiku näytöllä vetämällä sormea."</li>\n<li>"Loitonna nostamalla sormi näytöltä."</li></ul>\n\n"Näyttöön tai navigointipalkkiin lähentäminen ei ole mahdollista."</string>
-    <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Esteettömyystilan pikakuvake"</string>
+    <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Esteettömyystilan oikopolku"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Käytössä"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Pois käytöstä"</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"Kun tämä ominaisuus on käytössä, voit aktivoida käytettävyystoiminnot kahden helpon vaiheen kautta:\n\nVaihe 1: pidä virtapainiketta painettuna, kunnes kuulet äänen tai tunnet värähdyksen.\n\nVaihe 2: kosketa näyttöä kahdella sormella, kunnes kuulet äänimerkin.\n\nJos laitteella on useita käyttäjiä, tämän pikanäppäimen käyttäminen lukitusnäytöllä aktivoi käytettävyystoiminnot siihen asti, että laitteen lukitus avataan."</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"Kun tämä ominaisuus on käytössä, voit aktivoida esteettömyystoiminnot kahden helpon vaiheen kautta:\n\nVaihe 1: pidä virtapainiketta painettuna, kunnes kuulet äänen tai tunnet värähdyksen.\n\nVaihe 2: kosketa näyttöä kahdella sormella, kunnes kuulet äänimerkin.\n\nJos laitteella on useita käyttäjiä, tämän pikanäppäimen käyttäminen lukitusnäytöllä aktivoi esteettömyystoiminnot siihen asti, että laitteen lukitus avataan."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Suurikontrastinen teksti"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Päivitä näytön suurennus automaatt."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Päivitä näytön suurennus sovellussiirtymissä"</string>
@@ -2265,7 +2265,10 @@
       <item quantity="other">Luota varmenteisiin tai poista niitä</item>
       <item quantity="one">Luota varmenteeseen tai poista se</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> on asentanut laitteellesi varmenteen myöntäjiä, mikä mahdollistaa verkkotoimintasi (kuten sähköpostin, sovellusten ja suojattujen verkkosivustojen käytön) seuraamisen. Voit määrittää varmenteet luotettaviksi tai poistaa ne.\n\nSaat lisätietoja varmenteista järjestelmänvalvojaltasi.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> on asentanut laitteellesi varmenteen myöntäjän, mikä mahdollistaa verkkotoimintasi (kuten sähköpostin, sovellusten ja suojattujen verkkosivustojen käytön) seuraamisen. Voit määrittää varmenteen luotettavaksi tai poistaa sen.\n\nSaat lisätietoja varmenteesta järjestelmänvalvojaltasi.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> on asentanut työprofiiliisi varmenteen myöntäjiä, mikä mahdollistaa toimintasi (kuten sähköpostin, sovellusten ja suojattujen verkkosivustojen käytön) seuraamisen työverkossa. Voit määrittää varmenteet luotettaviksi tai poistaa ne.\n\nSaat lisätietoja varmenteista järjestelmänvalvojaltasi.</item>
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> on asentanut työprofiiliisi varmenteen myöntäjän, mikä mahdollistaa toimintasi (kuten sähköpostin, sovellusten ja suojattujen verkkosivustojen käytön) seuraamisen työverkossa. Voit määrittää varmenteen luotettavaksi tai poistaa sen.\n\nSaat lisätietoja varmenteesta järjestelmänvalvojaltasi.</item>

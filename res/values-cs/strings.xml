@@ -1667,7 +1667,7 @@
     <string name="accessibility_system_title" msgid="7187919089874130484">"Systém"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Obrazovka"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Titulky"</string>
-    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Gesto pro přiblížení obrazovky"</string>
+    <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Gesto přiblížení"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Trojitým klepnutím aktivujete přiblížení"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258">"Chcete-li zobrazení "<b>"přiblížit"</b>", rychle na obrazovku klepněte třikrát za sebou jedním prstem.\n"<ul><li>"Přetažením dvěma prsty zobrazení posunete."</li>\n<li>"Úroveň přiblížení upravíte stažením nebo roztažením dvou nebo více prstů."</li></ul>\n\n"Chcete-li zobrazení "<b>"přiblížit dočasně"</b>", rychle na obrazovku klepněte třikrát za sebou a po posledním klepnutí prst přidržte.\n"<ul><li>"Přetažením prstem se můžete pohybovat po obrazovce."</li>\n<li>"Zvednutím prstu vrátíte přiblížení do původního stavu."</li></ul>\n\n"Na klávesnici a navigačním panelu přiblížení není k dispozici."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Zkratka přístupnosti"</string>
@@ -2301,7 +2301,12 @@
       <item quantity="other">Označit certifikáty jako důvěryhodné nebo je odstranit</item>
       <item quantity="one">Označit certifikát jako důvěryhodný nebo jej odstranit</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="few">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> do vašeho zařízení nainstalovala certifikační autority, které umožňují sledování aktivity zařízení na síti, včetně e-mailů, aplikací a zabezpečených webů. Můžete zvolit, zda těmto certifikátům chcete důvěřovat, nebo je chcete odebrat.\n\nDalší informace o těchto certifikátech vám poskytne administrátor.</item>
+      <item quantity="many">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> do vašeho zařízení nainstalovala certifikační autority, které umožňují sledování aktivity zařízení na síti, včetně e-mailů, aplikací a zabezpečených webů. Můžete zvolit, zda těmto certifikátům chcete důvěřovat, nebo je chcete odebrat.\n\nDalší informace o těchto certifikátech vám poskytne administrátor.</item>
+      <item quantity="other">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> do vašeho zařízení nainstalovala certifikační autority, které umožňují sledování aktivity zařízení na síti, včetně e-mailů, aplikací a zabezpečených webů. Můžete zvolit, zda těmto certifikátům chcete důvěřovat, nebo je chcete odebrat.\n\nDalší informace o těchto certifikátech vám poskytne administrátor.</item>
+      <item quantity="one">Doména <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> do vašeho zařízení nainstalovala certifikační autoritu, která umožňuje sledování aktivity zařízení na síti, včetně e-mailů, aplikací a zabezpečených webů. Můžete zvolit, zda tomuto certifikátu chcete důvěřovat, nebo jej chcete odebrat.\n\nDalší informace o tomto certifikátu vám poskytne administrátor.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="few">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> pro váš pracovní profil nainstalovala certifikační autority, které mohou umožnit monitorování aktivity v pracovní síti, včetně odesílání e-mailů, aplikací a zabezpečených webů. Můžete zvolit, zda těmto certifikátům chcete důvěřovat, nebo je chcete odebrat.\n\nDalší informace o těchto certifikátech vám sdělí váš administrátor.</item>
       <item quantity="many">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> pro váš pracovní profil nainstalovala certifikační autority, které mohou umožnit monitorování aktivity v pracovní síti, včetně odesílání e-mailů, aplikací a zabezpečených webů. Můžete zvolit, zda těmto certifikátům chcete důvěřovat, nebo je chcete odebrat.\n\nDalší informace o těchto certifikátech vám sdělí váš administrátor.</item>
@@ -3059,7 +3064,7 @@
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
     <string name="cell_data_template" msgid="3308709914705592281">"Mobilní data: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="wifi_data_template" msgid="501654649753761778">"Data přes Wi-Fi: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> dat přes Wi-Fi"</string>
     <string name="ethernet_data_template" msgid="5775729859383597507">"Data přes ethernet: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Upozornění na data: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Upozornění na data: <xliff:g id="ID_1">%1$s</xliff:g> / limit dat: <xliff:g id="ID_2">%2$s</xliff:g>"</string>

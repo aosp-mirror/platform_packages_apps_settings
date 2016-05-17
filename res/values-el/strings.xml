@@ -326,7 +326,7 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Δακτυλικά αποτυπώματα"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Διαχείριση μον.χαρακτ."</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Χρήση μον.χαρακτ.για"</string>
-    <string name="fingerprint_add_title" msgid="1926752654454033904">"Προσθήκη μοναδικού χαρακτηριστικού"</string>
+    <string name="fingerprint_add_title" msgid="1926752654454033904">"Προσθήκη δακτ. αποτυπώματος"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"κλείδωμα οθόνης"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
       <item quantity="other">Ορίστηκαν <xliff:g id="COUNT_1">%1$d</xliff:g> μοναδικά χαρακτηριστικά</item>
@@ -338,7 +338,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Ακύρωση"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Συνέχεια"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Παράλειψη"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="8386444182056861429">"Προσθήκη μοναδ.χαρακτ."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="8386444182056861429">"Προσθήκη δακτ. αποτυπ."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Οι λειτουργίες προστασίας συσκευής δεν θα ενεργοποιηθούν. Δεν θα μπορείτε να αποτρέψετε άλλους από τη χρήση αυτού του tablet εάν χαθεί, κλαπεί ή υποστεί ολική επαναφορά."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Οι λειτουργίες προστασίας συσκευής δεν θα ενεργοποιηθούν. Δεν θα μπορείτε να αποτρέψετε άλλους από τη χρήση αυτής της συσκευής εάν χαθεί, κλαπεί ή υποστεί ολική επαναφορά."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Οι λειτουργίες προστασίας συσκευής δεν θα ενεργοποιηθούν. Δεν θα μπορείτε να αποτρέψετε άλλους από τη χρήση αυτού του τηλεφώνου εάν χαθεί, κλαπεί ή υποστεί ολική επαναφορά."</string>
@@ -2265,7 +2265,10 @@
       <item quantity="other">Κατάργηση ή ορισμός των πιστοποιητικών ως αξιόπιστων</item>
       <item quantity="one">Κατάργηση ή ορισμός του πιστοποιητικού ως αξιόπιστου</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="other">Ο τομέας διαδικτύου <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> εγκατέστησε αρχές έκδοσης πιστοποιητικού στη συσκευή σας, οι οποίες μπορούν να του επιτρέπει να παρακολουθεί τη δραστηριότητα δικτύου της συσκευής σας, συμπεριλαμβανομένων των μηνυμάτων ηλεκτρονικού ταχυδρομείου, των εφαρμογών και των ασφαλών ιστότοπων. Μπορείτε να ορίσετε αυτά τα πιστοποιητικά ως αξιόπιστα ή να τα καταργήσετε.\n\nΓια περισσότερες πληροφορίες σχετικά με αυτό το πιστοποιητικό, επικοινωνήστε με τον διαχειριστή σας.</item>
+      <item quantity="one">Ο τομέας διαδικτύου <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> εγκατέστησε μια αρχή έκδοσης πιστοποιητικού στη συσκευή σας, η οποία μπορεί να του επιτρέπει να παρακολουθεί τη δραστηριότητα δικτύου της συσκευής σας, συμπεριλαμβανομένων των μηνυμάτων ηλεκτρονικού ταχυδρομείου, των εφαρμογών και των ασφαλών ιστότοπων. Μπορείτε να ορίσετε αυτό το πιστοποιητικό ως αξιόπιστο ή να το καταργήσετε.\n\nΓια περισσότερες πληροφορίες σχετικά με αυτό το πιστοποιητικό, επικοινωνήστε με τον διαχειριστή σας.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other">Ο τομέας <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> εγκατέστησε αρχές έκδοσης πιστοποιητικών για το προφίλ εργασίας σας, οι οποίες μπορούν να του επιτρέψουν να παρακολουθεί τη δραστηριότητα του δικτύου εργασίας σας, συμπεριλαμβανομένων των μηνυμάτων ηλεκτρονικού ταχυδρομείου, των εφαρμογών και των ασφαλών ιστότοπων. Μπορείτε να ορίσετε αυτά τα πιστοποιητικά ως αξιόπιστα ή να τα καταργήσετε.\n\nΓια περισσότερες πληροφορίες σχετικά με αυτά τα πιστοποιητικά, επικοινωνήστε με το διαχειριστή σας.</item>
       <item quantity="one">Ο τομέας <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> εγκατέστησε μια αρχή έκδοσης πιστοποιητικού για το προφίλ εργασίας σας, η οποία μπορεί να του επιτρέψει να παρακολουθεί τη δραστηριότητα του δικτύου εργασίας σας, συμπεριλαμβανομένων των μηνυμάτων ηλεκτρονικού ταχυδρομείου, των εφαρμογών και των ασφαλών ιστότοπων. Μπορείτε να ορίσετε αυτό το πιστοποιητικό ως αξιόπιστο ή να το καταργήσετε.\n\nΓια περισσότερες πληροφορίες σχετικά με αυτό το πιστοποιητικό, επικοινωνήστε με το διαχειριστή σας.</item>
@@ -2329,7 +2332,7 @@
     <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"Όλες οι εφαρμογές και τα δεδομένα αυτής της περιόδου σύνδεσης θα διαγραφούν."</string>
     <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"Κατάργηση"</string>
     <string name="user_enable_calling" msgid="5128605672081602348">"Ενεργοποίηση τηλεφωνικών κλήσεων"</string>
-    <string name="user_enable_calling_sms" msgid="9172507088023097063">"Ενεργοποίηση τηλεφωνικών κλήσεων και SMS"</string>
+    <string name="user_enable_calling_sms" msgid="9172507088023097063">"Ενεργοποίηση κλήσεων και SMS"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Κατάργηση χρήστη"</string>
     <string name="user_enable_calling_confirm_title" msgid="4315789475268695378">"Ενεργοποίηση τηλεφωνικών κλήσεων;"</string>
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Θα γίνει κοινή χρήση του ιστορικού κλήσεων με αυτόν το χρήστη."</string>
@@ -2512,7 +2515,7 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Ήχος κλήσης τηλεφώνου"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Προεπιλεγμένος ήχος ειδοποίησης"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"Προεπιλεγμ. ήχος ειδοποίησης"</string>
-    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Και δόνηση στις κλήσεις"</string>
+    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Δόνηση στις κλήσεις"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Άλλοι ήχοι"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Ήχοι πληκτρολογίου κλήσης"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Ήχοι κλειδώματος οθόνης"</string>

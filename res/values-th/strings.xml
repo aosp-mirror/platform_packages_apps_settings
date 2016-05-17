@@ -913,14 +913,14 @@
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"ขณะที่ชาร์จ"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"ในขณะวางอยู่บนแท่นชาร์จ"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"ปิด"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"หากต้องการควบคุมสิ่งที่เกิดขึ้นขณะที่โทรศัพท์อยู่บนแท่นชาร์จและ/หรือนอนหลับ ให้เปิดโปรแกรมรักษาหน้าจอ"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"หากต้องการควบคุมสิ่งที่เกิดขึ้นขณะที่โทรศัพท์อยู่บนแท่นชาร์จและ/หรืออยู่ในโหมดสลีป ให้เปิดโปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8644479926302707286">"เวลาที่ควรเริ่มโปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"เริ่มเลย"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"การตั้งค่า"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"ปรับความสว่างอัตโนมัติ"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"ยกขึ้นเพื่อเวก"</string>
     <string name="doze_title" msgid="2259176504273878294">"หน้าจอแอมเบียนท์"</string>
-    <string name="doze_summary" msgid="7128970177894383698">"ปลุกหน้าจอเมื่อคุณหยิบอุปกรณ์หรือได้รับการแจ้งเตือน"</string>
+    <string name="doze_summary" msgid="7128970177894383698">"ปลุกหน้าจอเมื่อคุณหยิบใช้อุปกรณ์หรือได้รับการแจ้งเตือน"</string>
     <string name="title_font_size" msgid="4405544325522105222">"ขนาดอักษร"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"ทำให้ข้อความมีขนาดใหญ่ขึ้นหรือเล็กลง"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"การตั้งค่าการล็อกซิมการ์ด"</string>
@@ -2265,7 +2265,10 @@
       <item quantity="other">เชื่อถือหรือนำใบรับรองออก</item>
       <item quantity="one">เชื่อถือหรือนำใบรับรองออก</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ได้ติดตั้งใบรับรองบนอุปกรณ์ของคุณซึ่งอาจช่วยในการตรวจสอบกิจกรรมเครือข่ายของอุปกรณ์ รวมถึงอีเมล แอป และเว็บไซต์ที่ปลอดภัย คุณเลือกที่จะเชื่อถือหรือนำใบรับรองเหล่านี้ออกได้\n\nโปรดติดต่อผู้ดูแลระบบของคุณสำหรับข้อมูลเพิ่มเติมเกี่ยวกับใบรับรองเหล่านี้</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> ได้ติดตั้งใบรับรองบนอุปกรณ์ของคุณซึ่งอาจช่วยในการตรวจสอบกิจกรรมเครือข่ายของอุปกรณ์ รวมถึงอีเมล แอป และเว็บไซต์ที่ปลอดภัย คุณเลือกที่จะเชื่อถือหรือนำใบรับรองนี้ออกได้\n\nโปรดติดต่อผู้ดูแลระบบของคุณสำหรับข้อมูลเพิ่มเติมเกี่ยวกับใบรับรองนี้</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ได้ติดตั้งใบรับรอง CA สำหรับโปรไฟล์งานของคุณ ซึ่งอาจช่วยให้เขาตรวจสอบกิจกรรมในเครือข่ายการทำงานได้ ซึ่งรวมถึงอีเมล แอป และเว็บไซต์ที่ปลอดภัย คุณเลือกที่จะเชื่อถือหรือนำใบรับรองเหล่านี้ออกได้\n\nโปรดติดต่อผู้ดูแลระบบของคุณสำหรับข้อมูลเพิ่มเติมเกี่ยวกับใบรับรองเหล่านี้</item>
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> ได้ติดตั้งใบรับรอง CA สำหรับโปรไฟล์งานของคุณ ซึ่งอาจช่วยให้เขาตรวจสอบกิจกรรมในเครือข่ายการทำงานได้ ซึ่งรวมถึงอีเมล แอป และเว็บไซต์ที่ปลอดภัย คุณเลือกที่จะเชื่อถือหรือนำใบรับรองนี้ออกได้\n\nโปรดติดต่อผู้ดูแลระบบของคุณสำหรับข้อมูลเพิ่มเติมเกี่ยวกับใบรับรองนี้</item>

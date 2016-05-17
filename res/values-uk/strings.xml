@@ -420,9 +420,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Ви ввели правильний пароль, але ваші дані пошкоджено. \n\nЩоб знову користуватися планшетом, відновіть заводські налаштування. Після цього ви зможете відновити на планшеті всі дані, які зберігаються у вашому обліковому записі Google."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Ви ввели правильний пароль, але ваші дані пошкоджено. \n\nЩоб знову користуватися телефоном, відновіть заводські налаштування. Після цього ви зможете відновити на телефоні всі дані, які зберігаються у вашому обліковому записі Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Переключити метод введення"</string>
-    <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Блокуйте екран"</string>
+    <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Блокувати екран"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Захистіть свій пристрій"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Як розблоковувати пристрій відбитком пальця"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Розблоковувати пристрій відбитком пальця"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Блокування екрана"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Вибер. спосіб розблок."</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Захистіть свій планшет"</string>
@@ -509,8 +509,8 @@
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Пароль має складатися з мінімум %d символів"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN-код має складатися принаймні зі стількох цифр: %d"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Продовжити"</string>
-    <string name="lockpassword_password_too_long" msgid="7016906583950201704">"Максимальна кількість символів у паролі: <xliff:g id="NUMBER">%d</xliff:g>."</string>
-    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"Максимальна кількість цифр у PIN-коді: <xliff:g id="NUMBER">%d</xliff:g>."</string>
+    <string name="lockpassword_password_too_long" msgid="7016906583950201704">"Символів у паролі має бути менше <xliff:g id="NUMBER">%d</xliff:g>."</string>
+    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"Цифр у PIN-коді має бути менше <xliff:g id="NUMBER">%d</xliff:g>."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"PIN-код має містити лише цифри 0–9."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Адміністратор пристрою не дозволяє використовувати останній PIN-код."</string>
     <string name="lockpassword_illegal_character" msgid="8742901630116866738">"Пароль містить заборонений символ."</string>
@@ -1250,7 +1250,7 @@
     <string name="network_settings_title" msgid="4871233236744292831">"Мобільні мережі"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Тарифний план"</string>
     <string name="sms_application_title" msgid="4903928270533250448">"Додаток для SMS"</string>
-    <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Змінити програму для SMS?"</string>
+    <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Змінити додаток для SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Використовувати для SMS додаток <xliff:g id="NEW_APP">%1$s</xliff:g> замість <xliff:g id="CURRENT_APP">%2$s</xliff:g>?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Використовувати для SMS додаток <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Змінити Wi‑Fi Assistant?"</string>
@@ -1455,7 +1455,7 @@
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"На карті SD"</string>
     <string name="disabled" msgid="9206776641295849915">"Вимкнено"</string>
     <string name="not_installed" msgid="2797554494953450291">"Не встановлено для цього користувача"</string>
-    <string name="no_applications" msgid="7336588977497084921">"Програм немає."</string>
+    <string name="no_applications" msgid="7336588977497084921">"Додатків немає."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Внутр. пам\'ять"</string>
     <string name="internal_storage_sentence" msgid="889098931914857143">"внутрішня пам’ять"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Носій USB"</string>
@@ -1973,7 +1973,7 @@
     <string name="credentials_title" msgid="4446234003860769883">"Сховище облікових даних"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Установити з носія"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Установити з карти SD"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Установлювати сертифікати з носія"</string>
+    <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Установити сертифікати з носія"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Установлювати сертифікати з карти SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Видалити облікові дані"</string>
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Видалити всі сертифікати"</string>
@@ -2301,7 +2301,12 @@
       <item quantity="many">Зробити сертифікати надійними або вилучити їх</item>
       <item quantity="other">Зробити сертифікати надійними або вилучити їх</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="one">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати активність у мережі, зокрема електронні листи, додатки та безпечні веб-сайти. Ви можете зробити ці сертифікати надійними або вилучити їх.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+      <item quantity="few">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати активність у мережі, зокрема електронні листи, додатки та безпечні веб-сайти. Ви можете зробити ці сертифікати надійними або вилучити їх.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+      <item quantity="many">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати активність у мережі, зокрема електронні листи, додатки та безпечні веб-сайти. Ви можете зробити ці сертифікати надійними або вилучити їх.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+      <item quantity="other">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати активність у мережі, зокрема електронні листи, додатки та безпечні веб-сайти. Ви можете зробити ці сертифікати надійними або вилучити їх.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="one">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати активність у корпоративній мережі, зокрема електронні листи, додатки та безпечні веб-сайти. Ви можете зробити ці сертифікати надійними або вилучити їх.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
       <item quantity="few">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати активність у корпоративній мережі, зокрема електронні листи, додатки та безпечні веб-сайти. Ви можете зробити ці сертифікати надійними або вилучити їх.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
@@ -2773,7 +2778,7 @@
     <string name="storage_type_external" msgid="8928374515368986503">"зовнішньої пам’яті"</string>
     <string name="storage_type_internal" msgid="6042049833565674948">"Внутрішня пам’ять"</string>
     <string name="storage_type_external" msgid="7738894330670001898">"Зовнішня пам’ять"</string>
-    <string name="app_data_usage" msgid="7942375313697452803">"Використання даних додатком"</string>
+    <string name="app_data_usage" msgid="7942375313697452803">"Використ. даних додатком"</string>
     <string name="data_summary_format" msgid="6213211533341068366">"З <xliff:g id="DATE">%2$s</xliff:g> використано <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"Використано пам’яті"</string>
     <string name="change" msgid="6657848623929839991">"Змінити"</string>
@@ -2816,7 +2821,7 @@
     <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Замінює режим \"Не турбувати\""</string>
     <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Без приватних даних на заблок. екрані"</string>
     <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Немає на заблокованому екрані"</string>
-    <string name="filter_notif_silent" msgid="8533960664617048281">"Показуються без звукового сигналу"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Без звуку"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Розширені налаштування"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Налаштування додатків"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Невідомий додаток"</string>
@@ -2899,13 +2904,13 @@
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"Поділитися"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Відхилити"</string>
     <string name="usb_use_charging_only" msgid="2180443097365214467">"Заряджати цей пристрій"</string>
-    <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Лише зарядити пристрій"</string>
+    <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Лише заряджати цей пристрій"</string>
     <string name="usb_use_power_only" msgid="6426550616883919530">"Постачати живлення"</string>
     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Постачати живлення іншим під’єднаним пристроям"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"Переносити файли"</string>
-    <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Передавання файлів на інший пристрій"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Перенесення фотографій (PTP)"</string>
-    <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Перенести фотографії або файли, якщо МТР не підтримується (PTP)"</string>
+    <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Переносити файли на інший пристрій"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Переносити фотографії (PTP)"</string>
+    <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Переносити фотографії або файли, якщо МТР не підтримується (PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"Використовувати пристрій як MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Використовувати цей пристрій як MIDI"</string>
     <string name="usb_use" msgid="3256040963685055320">"Використовувати USB, щоб"</string>
@@ -3081,7 +3086,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> додатка дозволено використовувати необмежений трафік, коли ввімкнено Заощадження трафіку</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Заощадження трафіку"</string>
-    <string name="unrestricted_data_saver" msgid="7019858887510062789">"Необмежений доступ до трафіку"</string>
+    <string name="unrestricted_data_saver" msgid="7019858887510062789">"Повний доступ до трафіку"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Фоновий режим вимкнено"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Увімкнено"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Вимкнено"</string>

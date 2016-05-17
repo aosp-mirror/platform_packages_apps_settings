@@ -2149,7 +2149,7 @@
     <string name="data_usage_background_label" msgid="2722008379947694926">"Background:"</string>
     <string name="data_usage_app_settings" msgid="2279171379771253165">"App settings"</string>
     <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"Background data"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="4669789008211107454">"Enable usage of cellular data in the background"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="4669789008211107454">"Enable usage of mobile data in the background"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"To restrict background data for this app, first set a mobile data limit."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Restrict background data?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"This feature may cause an app that depends on background data to stop working when only mobile networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app."</string>
@@ -2158,7 +2158,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Any changes that you make to your accounts on the web will be automatically copied to your tablet.\n\nSome accounts may also automatically copy any changes that you make on the tablet to the web. A Google Account works this way."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Any changes that you make to your accounts on the web will be automatically copied to your phone.\n\nSome accounts may also automatically copy any changes that you make on the phone to the web. A Google Account works this way."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Turn auto-sync data off?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"This will conserve data and battery usage, but you\'ll need to sync each account manually to collect recent information. And you won\'t receive notifications when updates occur."</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"This will conserve data and battery usage, but you\'ll need to sync each account manually to collect recent information and you won\'t receive notifications when updates occur."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Usage cycle reset date"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Date of each month:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Set"</string>
@@ -2177,8 +2177,8 @@
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Removed apps and users"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> received, <xliff:g id="SENT">%2$s</xliff:g> sent"</string>
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used."</string>
-    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your tablet. Your carrier\'s data usage accounting may differ."</string>
-    <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your phone. Your carrier\'s data usage accounting may differ."</string>
+    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your tablet. Your operator\'s data usage accounting may differ."</string>
+    <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your phone. Your operator\'s data usage accounting may differ."</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"Network restrictions"</string>
     <string name="data_usage_metered_body" msgid="3262343834446126044">"Metered networks are treated like mobile when background data is restricted. Apps may warn before using these networks for large downloads."</string>
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"Mobile networks"</string>
@@ -2265,7 +2265,10 @@
       <item quantity="other">Trust or remove certificates</item>
       <item quantity="one">Trust or remove certificate</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> has installed certificate authorities on your device, which may allow them to monitor your device network activity, including emails, apps and secure websites. You can choose to either trust or remove these certificates.\n\nFor more information about these certificates, contact your admin.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> has installed a certificate authority on your device, which may allow them to monitor your device network activity, including emails, apps and secure websites. You can choose to either trust or remove this certificate.\n\nFor more information about this certificate, contact your admin.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> has installed certificate authorities for your work profile, which may allow them to monitor work network activity, including emails, apps and secure websites. You can choose to either trust or remove these certificates.\n\nFor more information about these certificates, contact your admin.</item>
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> has installed a certificate authority for your work profile, which may allow them to monitor work network activity, including emails, apps and secure websites. You can choose to either trust or remove this certificate.\n\nFor more information about this certificate, contact your admin.</item>
@@ -2960,7 +2963,7 @@
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> is default"</string>
     <string name="location_on_summary" msgid="5127631544018313587">"ON / <xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"OFF"</string>
-    <string name="backup_disabled" msgid="485189128759595412">"Back up disabled"</string>
+    <string name="backup_disabled" msgid="485189128759595412">"Backup disabled"</string>
     <string name="about_summary" msgid="8460677224778433924">"Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="627023216027648534">"Action not allowed"</string>
     <string name="default_admin_support_msg" msgid="239311515653633217">"This action is disabled. Contact your organisation\'s administrator to find out more."</string>
@@ -2993,12 +2996,12 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatic system updates"</string>
     <string name="location_dogfood_tools" msgid="8139860759382544832">"Location Dogfood Tools"</string>
     <string name="usage" msgid="2977875522080448986">"Usage"</string>
-    <string name="cellular_data_usage" msgid="2763710678354680712">"Cellular data usage"</string>
+    <string name="cellular_data_usage" msgid="2763710678354680712">"Mobile data usage"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi data usage"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet data usage"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <string name="cell_data_template" msgid="3308709914705592281">"<xliff:g id="ID_1">%1$s</xliff:g> cellular data"</string>
+    <string name="cell_data_template" msgid="3308709914705592281">"<xliff:g id="ID_1">%1$s</xliff:g> mobile data"</string>
     <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> Wi-Fi data"</string>
     <string name="ethernet_data_template" msgid="5775729859383597507">"<xliff:g id="ID_1">%1$s</xliff:g> Ethernet data"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> Data warning"</string>
@@ -3007,7 +3010,7 @@
     <string name="billing_cycle_summary" msgid="9009106526129293752">"Monthly cycle starts on the <xliff:g id="ID_1">%1$s</xliff:g> of every month"</string>
     <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Monthly starting <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Network restrictions"</string>
-    <string name="operator_warning" msgid="1862988028996859195">"Carrier data accounting may differ from device accounting"</string>
+    <string name="operator_warning" msgid="1862988028996859195">"Operator data accounting may differ from device accounting"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> used"</string>
     <string name="data_warning" msgid="209133958008062117">"Data warning"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Set data limit"</string>
