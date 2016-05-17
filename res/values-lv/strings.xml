@@ -357,7 +357,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"Labi"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Dzēst"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Sāciet!"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Novietojiet pirkstu uz sensora, un paceliet to pēc tam, kad sajūtat vibrāciju."</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Novietojiet pirkstu uz sensora un paceliet to pēc tam, kad sajūtat vibrāciju"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Lieliski, atkārtojiet!"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Nedaudz pakustiniet pirkstu, lai pievienotu dažādas pirksta nospieduma daļas."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Nospiedums pievienots!"</string>
@@ -420,7 +420,7 @@
     <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Ekrāna bloķēšana"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Aizsargājiet savu ierīci"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Ierīces atbloķēšana, izmantojot pirksta nospiedumu"</string>
-    <string name="lock_settings_picker_title" msgid="1095755849152582712">"Izv. ekrāna bloķēš."</string>
+    <string name="lock_settings_picker_title" msgid="1095755849152582712">"Ekrāna bloķēšana"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Darba profila bloķēšana"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Aizsargājiet planšetd."</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Aizsargājiet ierīci"</string>
@@ -553,7 +553,7 @@
     <string name="lock_setup" msgid="3355847066343753943">"Iestatīšana ir pabeigta."</string>
     <string name="device_admin_title" msgid="3562216873644263804">"Ierīces administrācija"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Ierīces administratori"</string>
-    <string name="manage_device_admin_summary" msgid="7672709110988761075">"Skatiet vai deaktivizējiet ierīces administratorus"</string>
+    <string name="manage_device_admin_summary" msgid="7672709110988761075">"Skatīt vai deaktivizēt ierīces administratorus"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Uzticamības pārbaudes programmas"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Lai to izmantotu, vispirms ir jāiestata ekrāna bloķēšana"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Skatīt vai pārvaldīt uzticamības pārbaudes programmas"</string>
@@ -918,7 +918,7 @@
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Fona tapetes izvēle no"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Ekrānsaudzētājs"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Kad tālrunis tiek dokots vai ir miega režīmā un notiek uzlāde"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Vienā no gadījumiem"</string>
+    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Vienmēr"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Uzlādes laikā"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Kamēr tiek dokots"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Izslēgts"</string>
@@ -2284,7 +2284,11 @@
       <item quantity="one">Sertifikātu pieņemšana vai noņemšana</item>
       <item quantity="other">Sertifikātu pieņemšana vai noņemšana</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="zero"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja jūsu ierīcē sertificēšanas iestāžu sertifikātus. Šie sertifikāti atļauj iestādēm pārraudzīt darbības ierīces tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja jūsu ierīcē sertificēšanas iestāžu sertifikātus. Šie sertifikāti atļauj iestādēm pārraudzīt darbības ierīces tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja jūsu ierīcē sertificēšanas iestāžu sertifikātus. Šie sertifikāti atļauj iestādēm pārraudzīt darbības ierīces tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="zero"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti atļauj iestādēm pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Jūs varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar savu administratoru.</item>
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti atļauj iestādēm pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Jūs varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar savu administratoru.</item>
@@ -2786,12 +2790,12 @@
     <string name="filter_enabled_apps" msgid="3318021007093070639">"Iespējotās"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"Privātās"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Darba"</string>
-    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Ar bloķētiem paziņojumiem"</string>
+    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Bloķētie"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Ar domēnu URL"</string>
     <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Ignorē režīmu “Netraucēt”"</string>
-    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Bloķ. ekrānā nav sensitīva satura"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Bez sensitīva satura"</string>
     <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Nav rādāmas bloķēšanas ekrānā"</string>
-    <string name="filter_notif_silent" msgid="8533960664617048281">"Rādāmas bez skaņas signāla"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Bez skaņas"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Papildu"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Lietotņu konfigurēšana"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Nezināma lietotne"</string>
@@ -2877,11 +2881,11 @@
     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Nodrošināt barošanu citai pievienotajai ierīcei"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"Pārsūtīt failus"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Pārsūtīt failus uz citu ierīci"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Fotoattēlu pārsūtīšana (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Pārsūtīt fotoattēlus (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Fotoattēlu vai failu pārsūtīšana, ja MTP nav pieejams (PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"Izmantot ierīci MIDI režīmā"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Izmantot šo ierīci MIDI režīmā"</string>
-    <string name="usb_use" msgid="3256040963685055320">"Izmantot USB, lai:"</string>
+    <string name="usb_use" msgid="3256040963685055320">"Ar USB var"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Fona pārbaude"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Pilna piekļuve fonam"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Izmantot ekrānā redzamo tekstu"</string>
@@ -3016,7 +3020,10 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Fona dati ir pieejami, izmantojot tikai Wi-Fi savienojumu. Tas var ietekmēt dažu lietotņu vai pakalpojumu darbību, kad Wi-Fī tīkls nav pieejams."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Darba profils ir izslēgts"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Lietotnes, sinhronizācija fonā un citas ar jūsu darba profilu saistītās funkcijas ir izslēgtas."</string>
-    <string name="suggestions_title" msgid="8758376306825920705">"Ieteikumi (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <!-- no translation found for suggestions_title (7280792342273268377) -->
+    <skip />
+    <!-- no translation found for suggestions_summary (2509040178581728056) -->
+    <skip />
     <string name="suggestion_remove" msgid="904627293892092439">"Noņemt"</string>
     <string name="color_temperature" msgid="2070126836910615605">"Vēsu krāsu temperatūra"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Izmantot vēsākas krāsas"</string>
@@ -3125,7 +3132,8 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, nekad iepriekš nav izmantota"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, nav zināms, kad pēdējoreiz izmantota"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Atbrīvojiet vietu: <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <string name="support_escalation_title" msgid="2586337625943788579">"Palīdzība jebkurā diennakts laikā"</string>
+    <!-- no translation found for support_escalation_title (7311759892297590244) -->
+    <skip />
     <string name="support_escalation_summary" msgid="5284600375153448787">"Pieprasiet atbalsta zvanu vai tērzēšanas sarunu, un mēs ar jums drīzumā sazināsimies."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Jūs esat bezsaistē."</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Lai saņemtu atbalstu, vispirms izveidojiet Wi-Fi vai datu savienojumu."</string>
@@ -3134,6 +3142,7 @@
     <string name="support_escalation_by_email" msgid="2582004943422798901">"E-pasta ziņojums"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Tērzēšanas saruna"</string>
     <string name="support_forum_title" msgid="201753198197433199">"Palīdzības forums"</string>
+    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Padomi un ieteikumi"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Pierakstieties, lai saņemtu palīdzību"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Pierakstīties"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Vai nevarat piekļūt savam kontam?"</string>
@@ -3163,4 +3172,12 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Austiņas"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Ievades ierīce"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
+    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Fotoattēli un videoklipi (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
+    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, vecāki par <xliff:g id="DAYS">%2$d</xliff:g> dienām"</string>
+    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
 </resources>

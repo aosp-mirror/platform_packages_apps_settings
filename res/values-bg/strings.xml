@@ -1649,7 +1649,7 @@
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Жест за увеличение"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Трикратно докосване за промяна на мащаба"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258"><b>"За да увеличите мащаба"</b>", докоснете бързо екрана три пъти с един пръст.\n"<ul><li>"За да превъртите, плъзнете два или повече пръсти."</li>\n<li>"За да коригирате мащаба, съберете заедно или разгънете два или повече пръсти."</li></ul>\n\n<b>"За да увеличите временно мащаба"</b>", докоснете бързо екрана три пъти и задръжте пръста си при последното докосване.\n"<ul><li>"За да се придвижите по екрана, плъзнете пръста си."</li>\n<li>"За да намалите мащаба, вдигнете пръста си."</li></ul>\n\n"Не можете да променяте мащаба на клавиатурата и лентата за навигация."</string>
-    <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Пряк път към ф-ята за достъпност"</string>
+    <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Пряк път за достъпност"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Включено"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Изкл."</string>
     <string name="accessibility_global_gesture_preference_description" msgid="1605107799571936715">"Когато тази функция е включена, можете в две бързи стъпки да активирате функциите за достъпност:\n\nСтъпка 1: Натиснете бутона за захранване и го задръжте, докато чуете звук или усетите вибриране.\n\nСтъпка 2: Докоснете екрана с два пръста и ги задръжте, докато чуете звуково потвърждение.\n\nАко устройството има няколко потребители, използването на този пряк път на заключения екран временно активира функциите за достъпност, докато устройството не бъде отключено."</string>
@@ -1664,7 +1664,7 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Забавяне при докосване/задържане"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Инвертиране на цветовете"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Експериментално) Може да се отрази на ефективността"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"Кликване, след като курсорът спре да се движи"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"Кликване след спиране на курсора"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Забавяне преди кликване"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Показване в „Бързи настройки“"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Режим на коригиране"</string>
@@ -2266,7 +2266,10 @@
       <item quantity="other">Доверете се на тези сертификати или ги премахнете</item>
       <item quantity="one">Доверете се на този сертификат или го премахнете</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="other">Домейнът <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> е инсталирал сертифициращи органи на устройството ви. Това може да му позволи да следи мрежовата активност на устройството, включително имейли, приложения и защитени уебсайтове. Можете да приемете тези сертификати за надеждни или да ги премахнете.\n\nЗа повече информация относно сертификатите се свържете с администратора си.</item>
+      <item quantity="one">Домейнът <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> е инсталирал сертифициращ орган на устройството ви. Това може да му позволи да следи мрежовата активност на устройството, включително имейли, приложения и защитени уебсайтове. Можете да приемете този сертификат за надежден или да го премахнете.\n\nЗа повече информация относно сертификата се свържете с администратора си.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other">Домейнът <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> е инсталирал сертифициращи органи за служебния ви потребителски профил, което може да му разреши да наблюдава служебната ви активност в мрежата, включително имейли, приложения и защитени уебсайтове. Можете да изберете да се доверите на тези сертификати или да ги премахнете.\n\nЗа повече информация относно сертификатите се свържете с администратора си.</item>
       <item quantity="one">Домейнът <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> е инсталирал сертифициращ орган за служебния ви потребителски профил, което може да му разреши да наблюдава служебната ви активност в мрежата, включително имейли, приложения и защитени уебсайтове. Можете да изберете да се доверите на този сертификат или да го премахнете.\n\nЗа повече информация относно сертификата се свържете с администратора си.</item>
@@ -2279,7 +2282,7 @@
     <string name="user_settings_title" msgid="6151874007858148344">"Потребители"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Потребители и потребителски профили"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Добавяне на потр. или потр. профил"</string>
-    <string name="user_add_user_menu" msgid="1675956975014862382">"Потребител: Добавяне"</string>
+    <string name="user_add_user_menu" msgid="1675956975014862382">"Добавяне на потребител"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Ограничен потребителски профил"</string>
     <string name="user_need_lock_message" msgid="5879715064416886811">"Преди да можете да създадете потребителски профил с ограничена функционалност, трябва да настроите заключения екран, за да защитите приложенията и личните си данни."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Задаване на заключване"</string>
@@ -2330,7 +2333,7 @@
     <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"Всички приложения и данни в тази сесия ще бъдат изтрити."</string>
     <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"Премахване"</string>
     <string name="user_enable_calling" msgid="5128605672081602348">"Включване на телефонните обаждания"</string>
-    <string name="user_enable_calling_sms" msgid="9172507088023097063">"Включване на телефонните обаждания и SMS"</string>
+    <string name="user_enable_calling_sms" msgid="9172507088023097063">"Включване на тел. обаждания и SMS"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Премахване на потребителя"</string>
     <string name="user_enable_calling_confirm_title" msgid="4315789475268695378">"Да се включат ли телефонните обаждания?"</string>
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Историята на обажданията ще се сподели с този потребител."</string>
@@ -2986,7 +2989,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Данните на заден план са налице само през Wi-Fi. Липсата на такава мрежа може да засегне някои приложения или услуги."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Служ. потр. профил е изключен"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Приложенията, синхронизирането на заден план и другите функции, свързани със служебния ви потребителски профил, са изключени."</string>
-    <string name="suggestions_title" msgid="8758376306825920705">"Предложения (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestions_title" msgid="7280792342273268377">"Предложения"</string>
+    <string name="suggestions_summary" msgid="2509040178581728056">"+ <xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Премахване"</string>
     <string name="color_temperature" msgid="2070126836910615605">"Студена цветова гама"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Използване на по-студени цветове за дисплея"</string>
@@ -3000,7 +3004,7 @@
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
     <string name="cell_data_template" msgid="3308709914705592281">"Мобилни данни (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
-    <string name="wifi_data_template" msgid="501654649753761778">"Данни през Wi-Fi (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> данни през Wi-Fi"</string>
     <string name="ethernet_data_template" msgid="5775729859383597507">"Данни през Ethernet (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>/ограничение за данните: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
@@ -3020,7 +3024,7 @@
       <item quantity="one">1 приложение може да използва неограничено количество данни при включена Икономия на данни</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Икономия на данни"</string>
-    <string name="unrestricted_data_saver" msgid="7019858887510062789">"Неограничен достъп до данните"</string>
+    <string name="unrestricted_data_saver" msgid="7019858887510062789">"Неограничен достъп до данни"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Данните на заден план са изключени"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Включено"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Изключено"</string>
@@ -3094,7 +3098,7 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, не е използвано по-рано"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, няма данни за последното използване"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Освобождаване на <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <string name="support_escalation_title" msgid="2586337625943788579">"Денонощна помощ"</string>
+    <string name="support_escalation_title" msgid="7311759892297590244">"Денонощна поддръжка"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"Можете да заявите обаждане или разговор в чата със специалист от екипа за поддръжка и бързо ще се свържем с вас"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Офлайн сте"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"За да се свържете с екипа за поддръжка, първо установете връзка с Wi-Fi или мобилна мрежа за данни."</string>
@@ -3103,6 +3107,7 @@
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Имейл до специалист"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Разг. със специалист"</string>
     <string name="support_forum_title" msgid="201753198197433199">"Помощен форум"</string>
+    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Съвети и похвати"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Влезте в профила си, за да се свържете с екипа за поддръжка"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Вход"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Нямате достъп до профила си?"</string>
@@ -3129,4 +3134,12 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Слушалки"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Периферен вход"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
+    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Снимки и видеоклипове (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
+    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, по-стари от <xliff:g id="DAYS">%2$d</xliff:g> дни"</string>
+    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
 </resources>

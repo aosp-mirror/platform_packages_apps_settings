@@ -2266,7 +2266,10 @@
       <item quantity="other">Sertifikalara güvenin veya sertifikaları kaldırın</item>
       <item quantity="one">Sertifikaya güvenin veya sertifikayı kaldırın</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> yöneticisi, cihazınıza sertifika yetkilileri yükledi. Yönetici, bu sertifikalarla e-postalar, uygulamalar ve güvenli web siteleri de dahil olmak üzere cihazınızın ağ etkinliğini izleyebilir. Bu sertifikalara güvenmeyi veya bu sertifikaları kaldırmayı seçebilirsiniz.\n\nBu sertifikalar hakkında daha fazla bilgi için yöneticinize başvurun.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> yöneticisi, cihazınıza bir sertifika yetkilisi yükledi. Yönetici, bu sertifikayla e-postalar, uygulamalar ve güvenli web siteleri de dahil olmak üzere cihazınızın ağ etkinliğini izleyebilir. Bu sertifikaya güvenmeyi veya sertifikayı kaldırmayı seçebilirsiniz.\n\nBu sertifika hakkında daha fazla bilgi edinmek için yöneticinize başvurun.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> yöneticisi, iş profiliniz için sertifika yetkilileri yükledi. Yönetici, bu sertifikalarla e-postalar, uygulamalar ve güvenli web siteleri de dahil olmak üzere iş ağı etkinliğini izleyebilir. Bu sertifikalara güvenmeyi veya bu sertifikaları kaldırmayı seçebilirsiniz.\n\nBu sertifikalar hakkında daha fazla bilgi için yöneticinize başvurun.</item>
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> yöneticisi, iş profiliniz için bir sertifika yetkilisi yükledi. Yönetici, bu sertifikayla e-postalar, uygulamalar ve güvenli web siteleri de dahil olmak üzere iş ağı etkinliğini izleyebilir. Bu sertifikaya güvenmeyi veya sertifikayı kaldırmayı seçebilirsiniz.\n\nBu sertifika hakkında daha fazla bilgi edinmek için yöneticinize başvurun.</item>
@@ -2986,7 +2989,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Arka plan veriler yalnızca kablosuz bağlantı üzerinden kullanılabilir. Bu durum, kablosuz bağlantı mevcut olmadığında bazı uygulamaları veya hizmetleri etkileyebilir."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"İş profili kapalı"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"İş profilinizle ilgili uygulamalar, arka planda senkronizasyon ve diğer özellikler kapalı."</string>
-    <string name="suggestions_title" msgid="8758376306825920705">"Öneriler (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestions_title" msgid="7280792342273268377">"Öneriler"</string>
+    <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Kaldır"</string>
     <string name="color_temperature" msgid="2070126836910615605">"Soğuk renk sıcaklığı"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Daha soğuk ekran renkleri kullan"</string>
@@ -3094,7 +3098,7 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, daha önce hiç kullanılmadı"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, en son ne zaman kullanıldığı bilinmiyor"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> yer aç"</string>
-    <string name="support_escalation_title" msgid="2586337625943788579">"24 saat yardım"</string>
+    <string name="support_escalation_title" msgid="7311759892297590244">"24 saat destek"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"Destek çağrısı veya sohbeti için istekte bulunabilirsiniz. En kısa zamanda siz dönüş yaparız"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Çevrimdışısınız"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Desteğe ulaşmak için ilk olarak kablosuz ağa veya veri ağına bağlanın."</string>
@@ -3103,6 +3107,7 @@
     <string name="support_escalation_by_email" msgid="2582004943422798901">"E-postayla destek"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Sohbetle destek"</string>
     <string name="support_forum_title" msgid="201753198197433199">"Yardım forumu"</string>
+    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"İpuçları ve püf noktaları"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Destek için oturum açın"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Oturum aç"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Hesabınıza erişemiyor musunuz?"</string>
@@ -3129,4 +3134,12 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Kulaklık"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Giriş Çevre Birimi"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
+    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Fotoğraflar ve Videolar (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
+    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$d</xliff:g> günden daha eski"</string>
+    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
 </resources>

@@ -1205,7 +1205,7 @@
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"블루투스 테더링"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"테더링"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"테더링 및 휴대용 핫스팟"</string>
-    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"데이터 세이버가 켜져 있으면 테더링하거나 휴대용 핫스팟을 사용할 수 없습니다."</string>
+    <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"데이터 절약 모드가 켜져 있으면 테더링하거나 휴대용 핫스팟을 사용할 수 없습니다."</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB 테더링"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB 연결됨, 테더링하려면 선택"</string>
@@ -1661,7 +1661,7 @@
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"대형 마우스 포인터"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"모노 오디오"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"오디오 재생 시 채널 통합"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"길게 누르기 시간"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"길게 눌러 입력하기"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"색상 전도"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(실험실 기능) 성능에 영향을 줄 수 있음"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"포인터 이동이 멈춘 뒤 클릭"</string>
@@ -2266,7 +2266,10 @@
       <item quantity="other">인증서 신뢰 또는 삭제</item>
       <item quantity="one">인증서 신뢰 또는 삭제</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g>에서 내 기기에 인증서를 설치하여 이메일, 앱, 보안 웹사이트를 포함한 내 기기의 네트워크 활동을 모니터링하도록 허용할 수도 있습니다. 이 인증서를 신뢰할지 또는 삭제할지 선택할 수 있습니다.\n\n이 인증서를 자세히 알아보려면 관리자에게 문의하세요.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g>에서 내 기기에 인증서를 설치하여 이메일, 앱, 보안 웹사이트를 포함한 내 기기의 네트워크 활동을 모니터링하도록 허용할 수도 있습니다. 이 인증서를 신뢰할지 또는 삭제할지 선택할 수 있습니다.\n\n이 인증서를 자세히 알아보려면 관리자에게 문의하세요.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g>에서 직장 프로필의 인증기관을 설치했으며 해당 기관에서 이메일, 앱, 보안 웹사이트를 포함한 직장 네트워크 활동을 모니터링하도록 허용됩니다. 이 인증서를 신뢰할지 또는 삭제할지 선택할 수 있습니다.\n\n이 인증서를 자세히 알아보려면 관리자에게 문의하세요.</item>
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g>에서 직장 프로필의 인증기관을 설치했으며 해당 기관에서 이메일, 앱, 보안 웹사이트를 포함한 직장 네트워크 활동을 모니터링하도록 허용됩니다. 이 인증서를 신뢰할지 또는 삭제할지 선택할 수 있습니다.\n\n이 인증서를 자세히 알아보려면 관리자에게 문의하세요.</item>
@@ -2848,7 +2851,7 @@
     <string name="usb_use_power_only" msgid="6426550616883919530">"전원 공급"</string>
     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"연결된 다른 기기에 전원 공급"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"파일 전송"</string>
-    <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"파일을 다른 기기로 이전합니다."</string>
+    <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"파일을 다른 기기로 전송"</string>
     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"사진 전송(PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"MTP가 지원되지 않는 경우 사진 또는 파일 전송(PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"기기를 MIDI로 사용"</string>
@@ -2982,11 +2985,12 @@
     <string name="condition_battery_summary" msgid="4418839236027977450">"성능이 감소됩니다. 위치 서비스와 백그라운드 데이터가 사용 중지되었습니다."</string>
     <string name="condition_cellular_title" msgid="2398754272044917264">"모바일 데이터 사용 중지됨"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"인터넷은 Wi-Fi를 통해서만 사용할 수 있습니다."</string>
-    <string name="condition_bg_data_title" msgid="2483860304802846542">"데이터 세이버 사용"</string>
+    <string name="condition_bg_data_title" msgid="2483860304802846542">"데이터 절약 모드 사용"</string>
     <string name="condition_bg_data_summary" msgid="656957852895282228">"백그라운드 데이터는 Wi-Fi를 통해서만 사용할 수 있습니다. Wi-Fi를 사용할 수 없는 경우 일부 앱이나 서비스에 영향을 미칠 수 있습니다."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"직장 프로필이 사용 중지됨"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"앱, 백그라운드 동기화 및 기타 직장 프로필 관련 기능이 사용 중지되었습니다."</string>
-    <string name="suggestions_title" msgid="8758376306825920705">"추천(<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <string name="suggestions_title" msgid="7280792342273268377">"추천"</string>
+    <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"삭제"</string>
     <string name="color_temperature" msgid="2070126836910615605">"차가운 색상 온도"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"더 차가운 디스플레이 색상 사용"</string>
@@ -3016,16 +3020,16 @@
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_2">%2$s</xliff:g>에 <xliff:g id="ID_1">%1$s</xliff:g> 사용함"</string>
     <string name="configure" msgid="1029654422228677273">"설정"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
-      <item quantity="other">데이터 세이버가 켜져 있을 때 <xliff:g id="COUNT">%1$d</xliff:g>개의 앱이 무제한 데이터를 사용할 수 있도록 허용됨</item>
-      <item quantity="one">데이터 세이버가 켜져 있을 때 1개의 앱이 무제한 데이터를 사용할 수 있도록 허용됨</item>
+      <item quantity="other">데이터 절약 모드가 켜져 있을 때 <xliff:g id="COUNT">%1$d</xliff:g>개의 앱이 무제한 데이터를 사용할 수 있도록 허용됨</item>
+      <item quantity="one">데이터 절약 모드가 켜져 있을 때 1개의 앱이 무제한 데이터를 사용할 수 있도록 허용됨</item>
     </plurals>
-    <string name="data_saver_title" msgid="398458827917495765">"데이터 세이버"</string>
+    <string name="data_saver_title" msgid="398458827917495765">"데이터 절약 모드"</string>
     <string name="unrestricted_data_saver" msgid="7019858887510062789">"무제한 데이터 액세스"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"백그라운드 데이터 사용 중지됨"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"사용"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"사용 안함"</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"무제한 데이터 사용"</string>
-    <string name="unrestricted_app_summary" msgid="6458008993501723912">"데이터 세이버가 켜져 있을 때 무제한 데이터 액세스 허용"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"데이터 절약 모드가 켜져 있을 때 무제한 데이터 액세스 허용"</string>
     <string name="home_app" msgid="4066188520886810030">"홈 앱"</string>
     <string name="no_default_home" msgid="7184117487704520238">"기본 홈 없음"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"안전한 시작"</string>
@@ -3094,7 +3098,7 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, 사용된 적 없음"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, 마지막 사용일이 확실하지 않음"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> 확보"</string>
-    <string name="support_escalation_title" msgid="2586337625943788579">"24시간 지원"</string>
+    <string name="support_escalation_title" msgid="7311759892297590244">"24시간 지원"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"지원 통화 또는 채팅을 신청하시면 연락 드리겠습니다."</string>
     <string name="support_offline_title" msgid="482049324795211184">"오프라인 상태입니다."</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"지원팀에 연락하려면 먼저 Wi-Fi 또는 데이터에 연결하세요."</string>
@@ -3103,6 +3107,7 @@
     <string name="support_escalation_by_email" msgid="2582004943422798901">"지원 이메일"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"지원 채팅"</string>
     <string name="support_forum_title" msgid="201753198197433199">"도움말 포럼"</string>
+    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"도움말 및 유용한 정보"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"로그인하여 지원받기"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"로그인"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"계정에 액세스할 수 없으신가요?"</string>
@@ -3129,4 +3134,12 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"헤드폰"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"입력 주변기기"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"블루투스"</string>
+    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"사진 및 동영상(<xliff:g id="NUM_ITEMS">%1$d</xliff:g>개)"</string>
+    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$d</xliff:g>일 이상 전에 생성됨"</string>
+    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
 </resources>
