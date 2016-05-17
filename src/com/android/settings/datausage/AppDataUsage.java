@@ -302,7 +302,10 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     }
 
     private boolean getUnrestrictData() {
-        return mDataSaverBackend.isWhitelisted(mAppItem.key);
+        if (mDataSaverBackend != null) {
+            return mDataSaverBackend.isWhitelisted(mAppItem.key);
+        }
+        return false;
     }
 
     @Override
