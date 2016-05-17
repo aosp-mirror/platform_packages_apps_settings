@@ -106,7 +106,7 @@ public class TtsEnginePreference extends Preference {
         setKey(mEngineInfo.name);
         setTitle(mEngineInfo.label);
     }
-    
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
@@ -118,6 +118,7 @@ public class TtsEnginePreference extends Preference {
 
         final RadioButton rb = (RadioButton) view.findViewById(R.id.tts_engine_radiobutton);
         rb.setOnCheckedChangeListener(mRadioChangeListener);
+        rb.setText(mEngineInfo.label);
 
         boolean isChecked = getKey().equals(mSharedState.getCurrentKey());
         if (isChecked) {
@@ -129,14 +130,6 @@ public class TtsEnginePreference extends Preference {
         mPreventRadioButtonCallbacks = false;
 
         mRadioButton = rb;
-
-        View textLayout = view.findViewById(R.id.tts_engine_pref_text);
-        textLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onRadioButtonClicked(rb, !rb.isChecked());
-            }
-        });
 
         mSettingsIcon = view.findViewById(R.id.tts_engine_settings);
         // Will be enabled only the engine has passed the voice check, and
