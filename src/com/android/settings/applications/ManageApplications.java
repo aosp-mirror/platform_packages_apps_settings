@@ -28,7 +28,6 @@ import android.os.*;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
 import android.util.ArraySet;
-import android.util.LocaleList;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
