@@ -92,7 +92,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         mProvider =
                 FeatureFactory.getFactory(app).getDeletionHelperFeatureProvider();
         if (mProvider != null) {
-            mPhotoVideoDeletion = mProvider.createPhotoVideoDeletionType();
+            mPhotoVideoDeletion = mProvider.createPhotoVideoDeletionType(getContext());
         }
         mDownloadsDeletion = new DownloadsDeletionType(getActivity());
 
