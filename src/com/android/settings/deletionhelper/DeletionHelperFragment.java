@@ -46,7 +46,8 @@ import java.util.HashSet;
  */
 public class DeletionHelperFragment extends SettingsPreferenceFragment implements
         ApplicationsState.Callbacks, AppStateBaseBridge.Callback,
-        Preference.OnPreferenceChangeListener, DeletionType.FreeableChangedListener {
+        Preference.OnPreferenceChangeListener, DeletionType.FreeableChangedListener,
+        View.OnClickListener {
     private static final String TAG = "DeletionHelperFragment";
 
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
@@ -108,53 +109,11 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
     private void initializeButtons(View v) {
         mCancel = (Button) v.findViewById(R.id.back_button);
         mCancel.setText(R.string.cancel);
-        mCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishFragment();
-            }
-        });
+        mCancel.setOnClickListener(this);
 
         mFree = (Button) v.findViewById(R.id.next_button);
         mFree.setText(R.string.storage_menu_free);
-        mFree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // This should be fine as long as there is only one extra deletion feature.
-                // In the future, this should be done in an async queue in order to not interfere
-                // with the simultaneous PackageDeletionTask.
-                if (mPhotoPreference != null && mPhotoPreference.isChecked()) {
-                    mPhotoVideoDeletion.clearFreeableData();
-                }
-                if (mDownloadsPreference != null && mDownloadsPreference.isChecked()) {
-                    mDownloadsDeletion.clearFreeableData();
-                }
-
-                ArraySet<String> apps = new ArraySet<>();
-                for (AppEntry entry : mAppEntries) {
-                    if (mCheckedApplications.contains(entry.label)) {
-                        synchronized (entry) {
-                            apps.add(entry.info.packageName);
-                        }
-                    }
-                }
-                // TODO: If needed, add an action on the callback.
-                PackageDeletionTask task = new PackageDeletionTask(
-                        getActivity().getPackageManager(), apps,
-                        new PackageDeletionTask.Callback() {
-                            @Override
-                            public void onSuccess() {
-                            }
-
-                            @Override
-                            public void onError() {
-                                Log.e(TAG, "An error occurred while uninstalling packages.");
-                            }
-                        });
-                finishFragment();
-                task.run();
-            }
-        });
+        mFree.setOnClickListener(this);
     }
 
     private void initializeDeletionPreferences() {
@@ -327,6 +286,54 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
     @Override
     public void onFreeableChanged(int numItems, long freeableBytes) {
         updateFreeButtonText();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == mFree.getId()) {
+            ConfirmDeletionDialog dialog =
+                    ConfirmDeletionDialog.newInstance(getTotalFreeableSpace());
+            // The 0 is a placeholder for an optional result code.
+            dialog.setTargetFragment(this, 0);
+            dialog.show(getFragmentManager(), ConfirmDeletionDialog.TAG);
+        } else {
+            finishFragment();
+        }
+    }
+
+    /**
+     * Clears out the selected apps and data from the device and closes the fragment.
+     */
+    protected void clearData() {
+        // This should be fine as long as there is only one extra deletion feature.
+        // In the future, this should be done in an async queue in order to not
+        // interfere with the simultaneous PackageDeletionTask.
+        if (mPhotoPreference != null && mPhotoPreference.isChecked()) {
+            mPhotoVideoDeletion.clearFreeableData();
+        }
+
+        ArraySet<String> apps = new ArraySet<>();
+        for (AppEntry entry : mAppEntries) {
+            if (mCheckedApplications.contains(entry.label)) {
+                synchronized (entry) {
+                    apps.add(entry.info.packageName);
+                }
+            }
+        }
+        // TODO: If needed, add an action on the callback.
+        PackageDeletionTask task = new PackageDeletionTask(getActivity().getPackageManager(), apps,
+                new PackageDeletionTask.Callback() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.e(TAG, "An error occurred while uninstalling packages.");
+                    }
+                });
+        task.run();
+        finishFragment();
     }
 
     private long getTotalFreeableSpace() {
