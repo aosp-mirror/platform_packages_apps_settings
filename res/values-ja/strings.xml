@@ -914,7 +914,7 @@
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"ホルダー装着時"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"OFF"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"スマートフォンのホルダー装着時やスリープ時の動作を管理するには、スクリーン セーバーを ON にします。"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8644479926302707286">"スクリーン セーバーを開始するまでの時間"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="8644479926302707286">"起動するまでの時間"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"今すぐ起動"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"設定"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"明るさを自動調整"</string>
@@ -1637,7 +1637,7 @@
     <string name="usage_time_label" msgid="295954901452833058">"使用時間"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"ユーザー補助"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"ユーザー補助の設定"</string>
-    <string name="vision_settings_title" msgid="4204111425716868288">"視力の設定"</string>
+    <string name="vision_settings_title" msgid="4204111425716868288">"視覚補助"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"この端末を必要に応じてカスタマイズできます。このユーザー補助機能は後から [設定] で変更できます。"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"サービス"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2269,7 +2269,10 @@
       <item quantity="other">証明書の信頼または削除</item>
       <item quantity="one">証明書の信頼または削除</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> はお使いの端末に認証局をインストールしました。それによって、お使いの端末のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）を監視できるようになります。これらの証明書を信頼するか削除するかを選択できます。\n\nこれらの証明書の詳細についてはドメインの管理者までお問い合わせください。</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> はお使いの端末に認証局をインストールしました。それによって、お使いの端末のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）を監視できるようになります。この証明書を信頼するか削除するかを選択できます。\n\nこの証明書の詳細についてはドメインの管理者までお問い合わせください。</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> が、あなたの仕事用プロファイルに認証局をインストールしました。これにより、仕事のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が監視される場合があります。これらの証明書を信頼するか削除するかを選択できます。\n\nこれらの証明書の詳細についてはドメインの管理者までお問い合わせください。</item>
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> が、あなたの仕事用プロファイルに認証局をインストールしました。これにより、仕事のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が監視される場合があります。この証明書を信頼するか削除するかを選択できます。\n\nこの証明書の詳細についてはドメインの管理者までお問い合わせください。</item>
@@ -2766,7 +2769,7 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"ブロック中"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"ドメインURLあり"</string>
     <string name="filter_notif_priority_apps" msgid="5056470299318500609">"[通知を非表示] をオーバーライド"</string>
-    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"ロック画面にプライベートな内容を非表示"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"ロック画面にプライベートな内容を表示しない"</string>
     <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"ロック画面に表示しない"</string>
     <string name="filter_notif_silent" msgid="8533960664617048281">"マナーモードで表示"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"詳細設定"</string>
@@ -2959,9 +2962,9 @@
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE2">%2$s</xliff:g> のうち <xliff:g id="SIZE1">%1$s</xliff:g> を使用しています"</string>
     <string name="display_summary_on" msgid="5628868543070268634">"明るさの自動調節は ON です"</string>
     <string name="display_summary_off" msgid="6399558022426312990">"明るさの自動調節は OFF です"</string>
-    <string name="memory_summary" msgid="8080825904671961872">"平均メモリ使用量: <xliff:g id="USED_MEMORY">%1$s</xliff:g>/<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
-    <string name="user_summary" msgid="1617826998097722499">"ログイン名: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
-    <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g>: デフォルト"</string>
+    <string name="memory_summary" msgid="8080825904671961872">"平均で<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>のうち<xliff:g id="USED_MEMORY">%1$s</xliff:g>を使用しています"</string>
+    <string name="user_summary" msgid="1617826998097722499">"<xliff:g id="USER_NAME">%1$s</xliff:g>としてログインしています"</string>
+    <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g>がデフォルトで設定されています"</string>
     <string name="location_on_summary" msgid="5127631544018313587">"ON / <xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"OFF"</string>
     <string name="backup_disabled" msgid="485189128759595412">"バックアップは無効です"</string>
@@ -3042,7 +3045,7 @@
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"自動で ON にしない"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"電池 %1$s で自動的に ON にする"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"電池の最適化を使用しない"</string>
-    <string name="lockscreen_remote_input" msgid="969871538778211843">"端末がロックされている場合に、通知で返信などのテキストを入力できないようにします"</string>
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"端末がロックされている場合に、通知で返信などのテキストを入力できないようにする"</string>
     <string name="default_spell_checker" msgid="8506899870026026660">"スペル チェッカーのデフォルト"</string>
     <string name="choose_spell_checker" msgid="6596539862291699367">"スペル チェッカーの選択"</string>
     <string name="spell_checker_not_selected" msgid="8871083796179200696">"選択していません"</string>

@@ -2042,7 +2042,7 @@
     <string name="sync_failed" msgid="1696499856374109647">"Sinkronizimi dështoi"</string>
     <string name="sync_active" msgid="8476943765960863040">"Sinkronizimi është aktiv"</string>
     <string name="account_sync_settings_title" msgid="5131314922423053588">"Sinkronizo"</string>
-    <string name="sync_is_failing" msgid="1591561768344128377">"Sinkronizimi ka aktualisht probleme. Do të jetë i disponueshëm së shpejti."</string>
+    <string name="sync_is_failing" msgid="1591561768344128377">"Sinkronizimi ka aktualisht probleme. Do të ofrohet sërish së shpejti."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Shto një llogari"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"Profili i punës nuk ofrohet ende"</string>
     <string name="work_mode_label" msgid="5794470908668593961">"Modaliteti i punës"</string>
@@ -2265,7 +2265,10 @@
       <item quantity="other">Besoji ose hiqi certifikatat</item>
       <item quantity="one">Besoje ose hiqe certifikatën</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ka instaluar autoritete certifikatash në pajisjen tënde, të cilat mund ta lejojë atë të monitorojë aktivitetin e rrjetit të pajisjes, duke përfshirë mail-et, aplikacionet dhe sajtet e sigurta të uebit.. Mund të zgjedhësh t\'i besosh ose t\'i heqësh këto certifikata.\n\nPër më shumë informacione rreth këtyre certifikatave, kontakto me administratorin.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> ka instaluar një autoritet certifikate në pajisjen tënde, i cili mund ta lejojë atë të monitorojë aktivitetin e rrjetit të pajisjes, duke përfshirë mail-et, aplikacionet dhe sajtet e sigurta të uebit. Mund të zgjedhësh ta besosh ose ta heqësh këtë certifikatë.\n\nPër më shumë informacione rreth kësaj certifikate, kontakto me administratorin.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ka instaluar autoritete certifikate për profilin tënd të punës, që mund ta lejojë atë të monitorojë aktivitetin tënd të rrjetit të punës, duke përfshirë mail-et, aplikacionet dhe sajtet e sigurta të uebit. Mund të zgjedhësh t\'i besosh ose t\'i heqësh këto certifikata.\n\nPër më shumë informacion rreth kësaj certifikate, kontakto me administratorin.</item>
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> ka instaluar një autoritet certifikate për profilin tënd të punës, që mund ta lejojë atë të monitorojë aktivitetin tënd të rrjetit të punës, duke përfshirë mail-et, aplikacionet dhe sajtet e sigurta të uebit. Mund të zgjedhësh ta besosh ose ta heqësh këtë certifikatë.\n\nPër më shumë informacion rreth kësaj certifikate, kontakto me administratorin.</item>
@@ -2540,7 +2543,7 @@
     <string name="profile_section_header" msgid="2320848161066912001">"Njoftimet e punës"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Pulso dritën e njoftimeve"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Në ekranin e kyçjes"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Shfaq gjithë përmbajtjen e njoftimit"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Shfaq të gjithë përmbajtjen e njoftimit"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Fshih përmbajtjet delikate të njoftimeve"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Mos shfaq asnjë njoftim"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Kur pajisja jote të jetë e kyçur, si dëshiron të të shfaqen njoftimet?"</string>
@@ -2842,17 +2845,17 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"Ky raport i defektit në kod po ndahet me administratorin tënd të IT-së. Kontaktoje atë për më shumë detaje."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"Shpërnda"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Refuzo"</string>
-    <string name="usb_use_charging_only" msgid="2180443097365214467">"Ngarkoje këtë pajisje"</string>
+    <string name="usb_use_charging_only" msgid="2180443097365214467">"Karikuar këtë pajisje"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Vetëm karikoje këtë pajisje"</string>
-    <string name="usb_use_power_only" msgid="6426550616883919530">"Furnizo me energji elektrike"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"Furnizuar me energji elektrike"</string>
     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Furnizo me energji elektrike pajisjet e tjera të lidhura"</string>
-    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Transfero skedarë"</string>
+    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Transferuar skedarë"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Transfero skedarët te një pajisje tjetër"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Transferimin e fotografive (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Transferuar fotografi (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Transfero foto ose dosje, nëse MTP-ja nuk mbështetet (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="870922185938298263">"Përdor pajisjen si MIDI"</string>
+    <string name="usb_use_MIDI" msgid="870922185938298263">"Përdorur pajisjen si MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Përdore këtë pajisje si MIDI"</string>
-    <string name="usb_use" msgid="3256040963685055320">"Përdor USB-në për"</string>
+    <string name="usb_use" msgid="3256040963685055320">"Përdor USB-në për të"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Kontrolli i sfondit"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Qasje e plotë në sfond"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Përdor tekstin nga ekrani"</string>
@@ -3015,8 +3018,8 @@
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> të përdorura mes datave <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Konfiguro"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplikacione lejohen të përdorin të dhëna të pakufizuara kur Kursyesi i të dhënave është aktiv</item>
-      <item quantity="one">1 aplikacion lejohet të përdorë të dhëna të pakufizuara kur Kursyesi i të dhëanve është aktiv</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplikacione lejohen të përdorin të dhëna të pakufizuara kur \"Kursyesi i të dhënave\" është aktiv</item>
+      <item quantity="one">1 aplikacion lejohet të përdorë të dhëna të pakufizuara kur \"Kursyesi i të dhënave\" është aktiv</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Kursyesi i të dhënave"</string>
     <string name="unrestricted_data_saver" msgid="7019858887510062789">"Qasje e pakufizuar te të dhënat"</string>
@@ -3024,7 +3027,7 @@
     <string name="data_saver_on" msgid="6774217590237934709">"Aktiv"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Joaktiv"</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"Përdorim i pakufizuar i të dhënave"</string>
-    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Lejo qasjen e pakufizuar të të dhënave kur Kursyesi i të dhënave është aktiv"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Lejo qasjen e pakufizuar të të dhënave kur \"Kursyesi i të dhënave\" është aktiv"</string>
     <string name="home_app" msgid="4066188520886810030">"Aplikacioni bazë"</string>
     <string name="no_default_home" msgid="7184117487704520238">"Nuk ka faqe bazë të parazgjedhur"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"Nisje e sigurt"</string>

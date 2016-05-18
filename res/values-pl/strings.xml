@@ -1660,7 +1660,7 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"Ułatwienia dostępu"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Ustawienia ułatwień dostępu"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Ustawienia widoczności"</string>
-    <string name="vision_settings_description" msgid="5679491180156408260">"Możesz dostosować urządzenie do swoich potrzeb. Funkcje ułatwień dostępu możesz zawsze zmienić w Ustawieniach."</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"Możesz dostosować urządzenie do swoich potrzeb. Funkcje ułatwień dostępu możesz zawsze zmienić w Ustawieniach."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Usługi"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"Czytnik ekranu przeznaczony głównie dla osób niewidomych i słabowidzących"</string>
@@ -2301,7 +2301,12 @@
       <item quantity="other">Zaufaj certyfikatom lub je usuń</item>
       <item quantity="one">Zaufaj certyfikatowi lub go usuń</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="few">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała na Twoim urządzeniu certyfikaty urzędów certyfikacji, które mogą zezwolić jej na monitorowanie aktywności urządzenia w sieci, w tym e-maili, aplikacji i bezpiecznych stron internetowych. Możesz zaufać tym certyfikatom lub je usunąć.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się ze swoim administratorem.</item>
+      <item quantity="many">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała na Twoim urządzeniu certyfikaty urzędów certyfikacji, które mogą zezwolić jej na monitorowanie aktywności urządzenia w sieci, w tym e-maili, aplikacji i bezpiecznych witryn internetowych. Możesz zaufać tym certyfikatom lub je usunąć.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się ze swoim administratorem.</item>
+      <item quantity="other">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała na Twoim urządzeniu certyfikaty urzędów certyfikacji, które mogą zezwolić jej na monitorowanie aktywności urządzenia w sieci, w tym e-maili, aplikacji i bezpiecznych witryn internetowych. Możesz zaufać tym certyfikatom lub je usunąć.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się ze swoim administratorem.</item>
+      <item quantity="one">Domena <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> zainstalowała na Twoim urządzeniu certyfikat urząd certyfikacji, który może zezwolić jej na monitorowanie aktywności urządzenia w sieci, w tym e-maili, aplikacji i bezpiecznych stron internetowych. Możesz zaufać temu certyfikatowi lub go usunąć.\n\nAby dowiedzieć się więcej o tym certyfikacie, skontaktuj się ze swoim administratorem.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="few">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała urzędy certyfikacji dla Twojego profilu do pracy, które mogą zezwolić jej na monitorowanie aktywności w sieci firmowej, w tym e-maili, aplikacji i bezpiecznych stron internetowych. Możesz zaufać tym certyfikatom lub je usunąć.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się ze swoim administratorem.</item>
       <item quantity="many">Domena <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> zainstalowała urzędy certyfikacji dla Twojego profilu do pracy, które mogą zezwolić jej na monitorowanie aktywności w sieci firmowej, w tym e-maili, aplikacji i bezpiecznych stron internetowych. Możesz zaufać tym certyfikatom lub je usunąć.\n\nAby dowiedzieć się więcej o tych certyfikatach, skontaktuj się ze swoim administratorem.</item>
@@ -2338,7 +2343,7 @@
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Z tego urządzenia możesz korzystać wraz z innymi osobami, dodając na nim konta użytkowników. Każdy użytkownik ma własne miejsce na swoje aplikacje, tapety i inne dane. Może też zmieniać ustawienia, które wpływają na wszystkich użytkowników urządzenia (np. Wi‑Fi).\n\nGdy dodasz nowego użytkownika, musi on skonfigurować swoje miejsce na dane.\n\nKażdy użytkownik może aktualizować aplikacje w imieniu wszystkich pozostałych użytkowników."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Gdy dodasz nowego użytkownika, musi on skonfigurować swoją przestrzeń.\n\nKażdy użytkownik może aktualizować aplikacje wszystkich innych użytkowników."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Skonfigurować ustawienia dla użytkownika?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Upewnij się, że ta osoba jest w pobliżu i może skonfigurować swój profil."</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Upewnij się, że ta osoba jest w pobliżu i może skonfigurować swój profil."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Skonfigurować teraz profil?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Skonfiguruj"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Nie teraz"</string>
@@ -2807,7 +2812,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"Brak przyznanych uprawnień"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Brak próśb o przyznanie uprawnień"</string>
-    <string name="filter_all_apps" msgid="1988403195820688644">"Pokaż wszystkie aplikacje"</string>
+    <string name="filter_all_apps" msgid="1988403195820688644">"Wszystkie aplikacje"</string>
     <string name="filter_enabled_apps" msgid="3318021007093070639">"Włączone"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"Osobiste"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Do pracy"</string>
@@ -2816,7 +2821,7 @@
     <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Zastępuje Nie przeszkadzać"</string>
     <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Brak poufnych treści"</string>
     <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Nigdy niepokazywane"</string>
-    <string name="filter_notif_silent" msgid="8533960664617048281">"Pokazywane dyskretnie"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Dyskretne"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Zaawansowane"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Skonfiguruj aplikacje"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Nieznana aplikacja"</string>
@@ -2904,7 +2909,7 @@
     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Zasilaj inne podłączone urządzenie"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"Przesłać pliki"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Przesyłaj pliki do innego urządzenia"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Przesyłanie zdjęć (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Przesyłać zdjęcia (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Przesyłanie zdjęć lub plików, jeśli MTP nie jest obsługiwane (PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"Użyć urządzenia jako MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Użyj tego urządzenia jako MIDI"</string>
@@ -3086,7 +3091,7 @@
     <string name="data_saver_on" msgid="6774217590237934709">"Wł."</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Wył."</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"Nieograniczone użycie danych"</string>
-    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Nieogr. dostęp do danych, gdy Oszczędzanie danych wł."</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Włącz nieograniczony dostęp do danych, gdy jest włączone Oszczędzanie danych"</string>
     <string name="home_app" msgid="4066188520886810030">"Aplikacja ekranu głównego"</string>
     <string name="no_default_home" msgid="7184117487704520238">"Brak domyślnego ekranu głównego"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"Bezpieczne uruchamianie"</string>
@@ -3100,7 +3105,7 @@
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Nigdy nie włączaj automatycznie"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Włącz automatycznie przy %1$s baterii"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Nie optymalizuje wykorzystania baterii"</string>
-    <string name="lockscreen_remote_input" msgid="969871538778211843">"Uniemożliwia wpisywanie tekstu w obszarze powiadomień, gdy urządzenie jest zablokowane"</string>
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"Uniemożliwiaj wpisywanie tekstu w obszarze powiadomień, gdy urządzenie jest zablokowane"</string>
     <string name="default_spell_checker" msgid="8506899870026026660">"Domyślne sprawdzanie pisowni"</string>
     <string name="choose_spell_checker" msgid="6596539862291699367">"Wybierz sprawdzanie pisowni"</string>
     <string name="spell_checker_not_selected" msgid="8871083796179200696">"Nie wybrano"</string>

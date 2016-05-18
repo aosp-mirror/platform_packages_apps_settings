@@ -1429,8 +1429,8 @@
     <string name="show_running_services" msgid="5736278767975544570">"Prikaži pokrenute usluge"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Prikaži keširane procese"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"Aplikacija za hitne slučajeve"</string>
-    <string name="reset_app_preferences" msgid="1321050641018356925">"Resetuj podešavanja aplik."</string>
-    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Želite da resetujete podešavanja apl.?"</string>
+    <string name="reset_app_preferences" msgid="1321050641018356925">"Resetuj podešavanja aplikacije"</string>
+    <string name="reset_app_preferences_title" msgid="6093179367325336662">"Želite da resetujete podešavanja aplikacije?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Ovim ćete vratiti na početne vrednosti sva podešavanja za:\n\n "<li>"Onemogućene aplikacije"</li>\n" "<li>"Obaveštenja o onemogućenim aplikacijama"</li>\n" "<li>"Podrazumevane aplikacije za radnje"</li>\n" "<li>"Ograničenja za pozadinske podatke za aplikacije"</li>\n" "<li>"Bilo kakva ograničenja za dozvole"</li>\n\n" Nećete izgubiti podatke aplikacija."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Resetuj aplikacije"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Upravljaj prostorom"</string>
@@ -2283,7 +2283,11 @@
       <item quantity="few">Označite sertifikate kao pouzdane ili ih uklonite</item>
       <item quantity="other">Označite sertifikate kao pouzdane ili ih uklonite</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je instalirao autoritete za izdavanje sertifikata na uređaju, što može da mu omogući da prati aktivnosti uređaja na mreži, uključujući imejlove, aplikacije i bezbedne veb-sajtove. Možete da označite ove sertifikate kao pouzdane ili da ih uklonite.\n\nKontaktirajte administratora za više informacija o ovim sertifikatima.</item>
+      <item quantity="few"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je instalirao autoritete za izdavanje sertifikata na uređaju, što može da mu omogući da prati aktivnosti uređaja na mreži, uključujući imejlove, aplikacije i bezbedne veb-sajtove. Možete da označite ove sertifikate kao pouzdane ili da ih uklonite.\n\nKontaktirajte administratora za više informacija o ovim sertifikatima.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je instalirao autoritete za izdavanje sertifikata na uređaju, što može da mu omogući da prati aktivnosti uređaja na mreži, uključujući imejlove, aplikacije i bezbedne veb-sajtove. Možete da označite ove sertifikate kao pouzdane ili da ih uklonite.\n\nKontaktirajte administratora za više informacija o ovim sertifikatima.</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je instalirao autoritete za izdavanje sertifikata za vaš profil za Work, što može da im omogućit da prate rad poslovne mreže, uključujući imejlove, aplikacije i bezbedne veb-sajtove. Možete da označite ove sertifikate kao pouzdane ili da ih uklonite.\n\nKontaktirajte administratora da biste saznali dodatne informacije o ovim sertifikatima.</item>
       <item quantity="few"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je instalirao autoritete za izdavanje sertifikata za vaš profil za Work, što može da im omogućit da prate rad poslovne mreže, uključujući imejlove, aplikacije i bezbedne veb-sajtove. Možete da označite ove sertifikate kao pouzdane ili da ih uklonite.\n\nKontaktirajte administratora da biste saznali dodatne informacije o ovim sertifikatima.</item>
@@ -3070,7 +3074,7 @@
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Automatski se uključuje na %1$s baterije"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Ne koristi optimizaciju baterije"</string>
     <string name="lockscreen_remote_input" msgid="969871538778211843">"Ako je uređaj zaključan, spreči unos odgovora ili drugog teksta u obaveštenja"</string>
-    <string name="default_spell_checker" msgid="8506899870026026660">"Podrazum. provera pravopisa"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"Podrazumevana provera pravopisa"</string>
     <string name="choose_spell_checker" msgid="6596539862291699367">"Izaberite proveru pravopisa"</string>
     <string name="spell_checker_not_selected" msgid="8871083796179200696">"Nije izabrano"</string>
     <string name="notification_log_no_title" msgid="5678029849672024215">"(nijedno)"</string>
