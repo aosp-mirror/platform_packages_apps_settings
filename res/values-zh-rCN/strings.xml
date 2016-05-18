@@ -2266,7 +2266,10 @@
       <item quantity="other">信任或移除证书</item>
       <item quantity="one">信任或移除证书</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7392268444365783975) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> 已在您的设备上安装多个证书授权中心，它们可用于监控您的设备网络活动（包括使用电子邮件、应用和安全网站）。您可以选择信任这些证书，也可以选择移除这些证书。\n\n如需详细了解这些证书，请与您的管理员联系。</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> 已在您的设备上安装一个证书授权中心，它可用于监控您的设备网络活动（包括使用电子邮件、应用和安全网站）。您可以选择信任此证书，也可以选择移除此证书。\n\n如需详细了解此证书，请与您的管理员联系。</item>
+    </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
       <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> 已为您的工作资料安装多个证书授权中心，这可能会允许证书授权中心监控您的工作网络活动（包括使用电子邮件、应用和安全网站）。您可以选择信任这些证书，也可以选择移除这些证书。\n\n如需详细了解这些证书，请与您的管理员联系。</item>
       <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> 已为您的工作资料安装一个证书授权中心，这可能会允许证书授权中心监控您的工作网络活动（包括使用电子邮件、应用和安全网站）。您可以选择信任此证书，也可以选择移除此证书。\n\n如需详细了解此证书，请与您的管理员联系。</item>
@@ -2540,7 +2543,7 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"高级"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"工作通知"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"收到通知时指示灯闪烁"</string>
-    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"在锁定屏幕上"</string>
+    <string name="lock_screen_notifications_title" msgid="6173076173408887213">"屏幕锁定时"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"显示所有通知内容"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"隐藏敏感通知内容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不显示通知"</string>
@@ -2590,7 +2593,7 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"一律不显示来自此应用的通知"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"覆盖“勿扰”设置"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"当勿扰模式设为“仅限优先打扰”时，允许这类通知继续打扰"</string>
-    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"在锁定屏幕上"</string>
+    <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"屏幕锁定时"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"屏蔽"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"优先"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"敏感"</string>
@@ -2737,8 +2740,8 @@
     <string name="notifications_enabled" msgid="4386196629684749507">"常规"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"已屏蔽"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"不发出提示音"</string>
-    <string name="notifications_redacted" msgid="4493588975742803160">"不在锁定屏幕上显示敏感内容"</string>
-    <string name="notifications_hidden" msgid="3619610536038757468">"不在锁定屏幕上显示"</string>
+    <string name="notifications_redacted" msgid="4493588975742803160">"屏幕锁定时不显示敏感内容"</string>
+    <string name="notifications_hidden" msgid="3619610536038757468">"屏幕锁定时不显示"</string>
     <string name="notifications_priority" msgid="1066342037602085552">"覆盖“勿扰”设置"</string>
     <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
     <string name="notification_summary_level" msgid="2726571692704140826">"%d 级"</string>
@@ -2763,8 +2766,8 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"已屏蔽"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"包含网域网址"</string>
     <string name="filter_notif_priority_apps" msgid="5056470299318500609">"覆盖“勿扰”设置"</string>
-    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"不在锁定屏幕上显示敏感内容"</string>
-    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"在锁定屏幕上一律不显示"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"屏幕锁定时不显示敏感内容"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"屏幕锁定时一律不显示"</string>
     <string name="filter_notif_silent" msgid="8533960664617048281">"显示时不发出提示音"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"高级"</string>
     <string name="configure_apps" msgid="6685680790825882528">"配置应用"</string>
@@ -2986,7 +2989,10 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"您必须连接 WLAN 网络才能使用后台数据。如果无法连接 WLAN 网络，则部分应用或服务可能会受影响。"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"工作资料已关闭"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"与您的工作资料相关的应用、后台同步功能和其他功能均已关闭。"</string>
-    <string name="suggestions_title" msgid="8758376306825920705">"建议 (<xliff:g id="ID_1">%1$d</xliff:g>)"</string>
+    <!-- no translation found for suggestions_title (7280792342273268377) -->
+    <skip />
+    <!-- no translation found for suggestions_summary (2509040178581728056) -->
+    <skip />
     <string name="suggestion_remove" msgid="904627293892092439">"移除"</string>
     <string name="color_temperature" msgid="2070126836910615605">"冷色温"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"使用较冷的显示颜色"</string>
@@ -3016,16 +3022,16 @@
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_2">%2$s</xliff:g>使用了 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"配置"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
-      <item quantity="other">已允许 <xliff:g id="COUNT">%1$d</xliff:g> 个应用在流量节省程序开启时无限量使用数据。</item>
-      <item quantity="one">已允许 1 个应用在流量节省程序开启时无限量使用数据。</item>
+      <item quantity="other">已允许 <xliff:g id="COUNT">%1$d</xliff:g> 个应用在流量节省程序开启时无限量使用数据流量。</item>
+      <item quantity="one">已允许 1 个应用在流量节省程序开启时无限量使用数据流量。</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"流量节省程序"</string>
-    <string name="unrestricted_data_saver" msgid="7019858887510062789">"不受数据用量限制的应用"</string>
+    <string name="unrestricted_data_saver" msgid="7019858887510062789">"不受流量限制的应用"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"后台数据已关闭"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"开启"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"关闭"</string>
-    <string name="unrestricted_app_title" msgid="4465437191723332066">"不受数据用量限制"</string>
-    <string name="unrestricted_app_summary" msgid="6458008993501723912">"允许在流量节省程序开启时无限量使用数据"</string>
+    <string name="unrestricted_app_title" msgid="4465437191723332066">"不限制数据流量"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"允许在流量节省程序开启时无限量使用数据流量"</string>
     <string name="home_app" msgid="4066188520886810030">"主屏幕应用"</string>
     <string name="no_default_home" msgid="7184117487704520238">"没有默认主屏幕"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"安全启动"</string>
@@ -3094,8 +3100,9 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>，从未使用过"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>，不确定上次使用时间"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"释放 <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <string name="support_escalation_title" msgid="2586337625943788579">"全天候客户支持服务"</string>
-    <string name="support_escalation_summary" msgid="5284600375153448787">"您可以请求与支持人员通话或聊天，我们会尽快与您联系"</string>
+    <!-- no translation found for support_escalation_title (7311759892297590244) -->
+    <skip />
+    <string name="support_escalation_summary" msgid="5284600375153448787">"您可以要求与支持人员通话或聊天，我们会尽快与您联系"</string>
     <string name="support_offline_title" msgid="482049324795211184">"您没有联网"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"要与支持人员联系，请先连接到 WLAN 网络或移动数据网络。"</string>
     <string name="support_more_help_title" msgid="6923257931625780264">"更多帮助"</string>
@@ -3103,7 +3110,8 @@
     <string name="support_escalation_by_email" msgid="2582004943422798901">"给支持人员发电子邮件"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"与支持人员聊天"</string>
     <string name="support_forum_title" msgid="201753198197433199">"帮助论坛"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"请登录以获取支持"</string>
+    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"提示与技巧"</string>
+    <string name="support_sign_in_required_title" msgid="6782855985258687680">"请登录以获取支持服务"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登录"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"无法访问您的帐号？"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"工作资料设置"</string>
@@ -3129,4 +3137,12 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"耳机"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"外围输入设备"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"蓝牙"</string>
+    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"照片和视频（<xliff:g id="NUM_ITEMS">%1$d</xliff:g> 项）"</string>
+    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>，超过 <xliff:g id="DAYS">%2$d</xliff:g> 天以前"</string>
+    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
+    <skip />
+    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
 </resources>
