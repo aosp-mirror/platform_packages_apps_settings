@@ -389,6 +389,12 @@ public class SimStatus extends InstrumentedPreferenceActivity {
                 }
 
                 mPhone = phone;
+                // To avoid register multiple listeners when user changes the tab.
+                if (mPhoneStateListener != null && mTelephonyManager != null) {
+                    mTelephonyManager.listen(mPhoneStateListener,
+                            PhoneStateListener.LISTEN_NONE);
+                    mPhoneStateListener = null;
+                }
                 mPhoneStateListener = new PhoneStateListener(mSir.getSubscriptionId()) {
                     @Override
                     public void onDataConnectionStateChanged(int state) {
