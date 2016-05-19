@@ -20,6 +20,9 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.util.Log;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -33,7 +36,9 @@ import java.util.concurrent.TimeUnit;
  * Connects data from the UsageStatsManager to the ApplicationsState.
  */
 public class AppStateUsageStatsBridge extends AppStateBaseBridge {
+    private static final String TAG = "AppStateUsageStatsBridge";
     private UsageStatsManager mUsageStatsManager;
+    private PackageManager mPm;
     public static final long NEVER_USED = -1;
     public static final long UNKNOWN_LAST_USE = -2;
 
@@ -42,6 +47,7 @@ public class AppStateUsageStatsBridge extends AppStateBaseBridge {
         super(appState, callback);
         mUsageStatsManager =
                 (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+        mPm = context.getPackageManager();
     }
 
     @Override
@@ -53,7 +59,8 @@ public class AppStateUsageStatsBridge extends AppStateBaseBridge {
                 System.currentTimeMillis());
         for (AppEntry entry : apps) {
             UsageStats usageStats = map.get(entry.info.packageName);
-            entry.extraInfo = getDaysSinceLastUse(usageStats);
+            entry.extraInfo = new UsageStatsState(getDaysSinceLastUse(usageStats),
+                    getDaysSinceInstalled(entry.info.packageName));
         }
     }
 
@@ -62,7 +69,8 @@ public class AppStateUsageStatsBridge extends AppStateBaseBridge {
         Map<String, UsageStats> map = mUsageStatsManager.queryAndAggregateUsageStats(0,
                 System.currentTimeMillis());
         UsageStats usageStats = map.get(app.info.packageName);
-        app.extraInfo = getDaysSinceLastUse(usageStats);
+        app.extraInfo = new UsageStatsState(getDaysSinceLastUse(usageStats),
+                getDaysSinceInstalled(app.info.packageName));
     }
 
     private long getDaysSinceLastUse(UsageStats stats) {
@@ -75,7 +83,21 @@ public class AppStateUsageStatsBridge extends AppStateBaseBridge {
             return UNKNOWN_LAST_USE;
         }
         return TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - lastUsed);
+    }
 
+    private long getDaysSinceInstalled(String packageName) {
+        PackageInfo pi = null;
+        try {
+            pi = mPm.getPackageInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, packageName + " was not found.");
+        }
+
+        if (pi == null) {
+            return NEVER_USED;
+        }
+
+        return (TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - pi.firstInstallTime));
     }
 
     /**
@@ -92,18 +114,36 @@ public class AppStateUsageStatsBridge extends AppStateBaseBridge {
         @Override
         public boolean filterApp(AppEntry info) {
             if (info == null) return false;
-            boolean isBundled = (info.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
-            return isExtraInfoValid(info.extraInfo) && !isBundled;
+            return isExtraInfoValid(info.extraInfo) && !isBundled(info)
+                    && !isPersistentProcess(info);
         }
 
         private boolean isExtraInfoValid(Object extraInfo) {
-            if (extraInfo == null || !(extraInfo instanceof Long)) {
+            if (extraInfo == null || !(extraInfo instanceof UsageStatsState)) {
                 return false;
             }
 
-            long daysSinceLastUse = (long) extraInfo;
-            return daysSinceLastUse >= UNUSED_DAYS_DELETION_THRESHOLD ||
-                    daysSinceLastUse == NEVER_USED;
+            UsageStatsState state = (UsageStatsState) extraInfo;
+            long mostRecentUse = Math.max(state.daysSinceFirstInstall, state.daysSinceLastUse);
+            return mostRecentUse >= UNUSED_DAYS_DELETION_THRESHOLD || mostRecentUse == NEVER_USED;
+        }
+
+        private boolean isBundled(AppEntry info) {
+            return (info.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+        }
+
+        private boolean isPersistentProcess(AppEntry info) {
+            return (info.info.flags & ApplicationInfo.FLAG_PERSISTENT) != 0;
         }
     };
+
+    private class UsageStatsState {
+        public long daysSinceLastUse;
+        public long daysSinceFirstInstall;
+
+        public UsageStatsState(long daysSinceLastUse, long daysSinceFirstInstall) {
+            this.daysSinceLastUse = daysSinceLastUse;
+            this.daysSinceFirstInstall = daysSinceFirstInstall;
+        }
+    }
 }
