@@ -17,14 +17,18 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.icu.text.AlphabeticIndex;
-import android.os.*;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.LocaleList;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -49,7 +53,6 @@ import android.widget.SectionIndexer;
 import android.widget.Spinner;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
-import com.android.settingslib.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
@@ -71,6 +74,7 @@ import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -80,6 +84,7 @@ import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -1248,84 +1253,48 @@ public class ManageApplications extends InstrumentedFragment
         }
     }
 
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider,
-            ApplicationsState.Callbacks {
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
 
         private final Context mContext;
         private final SummaryLoader mLoader;
-        // TODO: Can probably hack together with less than full app state.
-        private final ApplicationsState mAppState;
-        private final Handler mHandler;
         private ApplicationsState.Session mSession;
 
         private SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
             mLoader = loader;
-            mAppState =
-                    ApplicationsState.getInstance((Application) context.getApplicationContext());
-            mHandler = new Handler(mAppState.getBackgroundLooper());
         }
 
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                mSession = mAppState.newSession(this);
-                mSession.resume();
-            } else {
-                mSession.pause();
-                mSession.release();
+                new AppCounter(mContext) {
+                    @Override
+                    protected void onCountComplete(int num) {
+                        mLoader.setSummary(SummaryProvider.this,
+                                mContext.getString(R.string.apps_summary, num));
+                    }
+
+                    @Override
+                    protected boolean includeInCount(ApplicationInfo info) {
+                        if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                            return true;
+                        } else if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                            return true;
+                        }
+                        Intent launchIntent = new Intent(Intent.ACTION_MAIN, null)
+                                .addCategory(Intent.CATEGORY_LAUNCHER)
+                                .setPackage(info.packageName);
+                        int userId = UserHandle.getUserId(info.uid);
+                        List<ResolveInfo> intents = mPm.queryIntentActivitiesAsUser(
+                                launchIntent,
+                                PackageManager.GET_DISABLED_COMPONENTS
+                                        | PackageManager.MATCH_DIRECT_BOOT_AWARE
+                                        | PackageManager.MATCH_DIRECT_BOOT_UNAWARE,
+                                userId);
+                        return intents != null && intents.size() != 0;
+                    }
+                }.execute();
             }
-        }
-
-        private void updateSummary(ArrayList<AppEntry> apps) {
-            if (apps == null) return;
-            mLoader.setSummary(this, mContext.getString(R.string.apps_summary, apps.size()));
-        }
-
-        private void postRebuild() {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    updateSummary(mSession.rebuild(ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER,
-                            null, false));
-                }
-            });
-        }
-
-        @Override
-        public void onRebuildComplete(ArrayList<AppEntry> apps) {
-            updateSummary(apps);
-        }
-
-        @Override
-        public void onPackageListChanged() {
-            postRebuild();
-        }
-
-        @Override
-        public void onLauncherInfoChanged() {
-            postRebuild();
-        }
-
-        @Override
-        public void onLoadEntriesCompleted() {
-            postRebuild();
-        }
-
-        @Override
-        public void onRunningStateChanged(boolean running) {
-        }
-
-        @Override
-        public void onPackageIconChanged() {
-        }
-
-        @Override
-        public void onPackageSizeChanged(String packageName) {
-        }
-
-        @Override
-        public void onAllSizesComputed() {
         }
     }
 
