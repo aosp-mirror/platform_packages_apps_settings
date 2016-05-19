@@ -17,6 +17,7 @@
 package com.android.settings.deletionhelper;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -48,6 +49,9 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         ApplicationsState.Callbacks, AppStateBaseBridge.Callback,
         Preference.OnPreferenceChangeListener, DeletionType.FreeableChangedListener,
         View.OnClickListener {
+    public static final int CLEAR_DATA_RESULT = 1;
+    public static final String FREED_BYTES_KEY = "freed";
+
     private static final String TAG = "DeletionHelperFragment";
 
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
@@ -332,6 +336,10 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
                         Log.e(TAG, "An error occurred while uninstalling packages.");
                     }
                 });
+        Intent data = new Intent();
+        data.putExtra(FREED_BYTES_KEY, getTotalFreeableSpace());
+        getActivity().setResult(CLEAR_DATA_RESULT, data);
+
         task.run();
         finishFragment();
     }
