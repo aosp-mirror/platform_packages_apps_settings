@@ -16,6 +16,7 @@
 
 package com.android.settings.overlay;
 
+import android.content.Context;
 import android.support.v7.preference.PreferenceGroup;
 import com.android.settings.deletionhelper.DeletionType;
 
@@ -26,5 +27,5 @@ public interface DeletionHelperFeatureProvider {
     /**
      * Creates a {@link DeletionType} for clearing out stored photos and videos on the device.
      */
-    DeletionType createPhotoVideoDeletionType();
+    DeletionType createPhotoVideoDeletionType(Context context);
 }
