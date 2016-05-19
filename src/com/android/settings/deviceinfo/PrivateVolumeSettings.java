@@ -60,6 +60,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.deletionhelper.DeletionHelperFragment;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
+import com.android.settings.deletionhelper.StorageManagerUpsellDialog;
 import com.android.settings.deviceinfo.StorageSettings.MountTask;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageMeasurement.MeasurementDetails;
@@ -104,6 +105,9 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             R.string.storage_detail_system,
             R.string.storage_detail_other,
     };
+
+    private static final int DELETION_HELPER_SETTINGS = 1;
+    private static final int DELETION_HELPER_CLEAR = 1;
 
     private StorageManager mStorageManager;
     private UserManager mUserManager;
@@ -439,7 +443,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 return true;
             case R.id.storage_free:
                 startFragment(this, DeletionHelperFragment.class.getCanonicalName(),
-                        R.string.deletion_helper_title, 0, args);
+                        R.string.deletion_helper_title, DELETION_HELPER_SETTINGS, args);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -531,6 +535,18 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             return true;
         }
         return super.onPreferenceTreeClick(pref);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == DELETION_HELPER_SETTINGS && resultCode == DELETION_HELPER_CLEAR &&
+                StorageManagerUpsellDialog.shouldShow(getActivity())) {
+            long freedBytes = data.getLongExtra(DeletionHelperFragment.FREED_BYTES_KEY, 0);
+            StorageManagerUpsellDialog dialog =
+                    StorageManagerUpsellDialog.newInstance(freedBytes);
+            dialog.show(getFragmentManager(), StorageManagerUpsellDialog.TAG);
+        }
     }
 
     private final MeasurementReceiver mReceiver = new MeasurementReceiver() {
