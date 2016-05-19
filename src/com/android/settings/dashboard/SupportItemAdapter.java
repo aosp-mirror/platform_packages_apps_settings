@@ -20,6 +20,7 @@ import android.annotation.DrawableRes;
 import android.annotation.LayoutRes;
 import android.annotation.StringRes;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.overlay.SupportFeatureProvider;
+import com.android.settings.support.SupportDisclaimerDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -248,25 +250,44 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     }
 
     /**
+     * Show a disclaimer dialog and start support action after disclaimer has been acknowledged.
+     */
+    private void tryStartDisclaimerAndSupport(final @SupportFeatureProvider.SupportType int type) {
+        if (mSupportFeatureProvider.shouldShowDisclaimerDialog(mActivity)) {
+            DialogFragment fragment = SupportDisclaimerDialogFragment.newInstance(mAccount, type);
+            fragment.show(mActivity.getFragmentManager(), SupportDisclaimerDialogFragment.TAG);
+            return;
+        }
+        mSupportFeatureProvider.startSupport(mActivity, mAccount, type);
+    }
+
+    /**
      * Click handler for starting escalation options.
      */
     private final class EscalationClickListener implements View.OnClickListener {
         @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case android.R.id.text1: {
-                    final Intent intent = mAccount == null
-                            ? mSupportFeatureProvider.getAccountLoginIntent()
-                            : mSupportFeatureProvider.getSupportIntent(mActivity, mAccount, PHONE);
-                    mActivity.startActivityForResult(intent, 0 /* requestCode */);
-                    break;
+        public void onClick(final View v) {
+            if (mAccount == null) {
+                switch (v.getId()) {
+                    case android.R.id.text1:
+                        mActivity.startActivityForResult(
+                                mSupportFeatureProvider.getAccountLoginIntent(),
+                                0 /* requestCode */);
+                        break;
+                    case android.R.id.text2:
+                        mActivity.startActivityForResult(
+                                mSupportFeatureProvider.getSignInHelpIntent(mActivity),
+                                0 /* requestCode */);
+                        break;
                 }
-                case android.R.id.text2: {
-                    final Intent intent = mAccount == null
-                            ? mSupportFeatureProvider.getSignInHelpIntent(mActivity)
-                            : mSupportFeatureProvider.getSupportIntent(mActivity, mAccount, CHAT);
-                    mActivity.startActivityForResult(intent, 0 /* requestCode */);
-                    break;
+            } else {
+                switch (v.getId()) {
+                    case android.R.id.text1:
+                        tryStartDisclaimerAndSupport(PHONE);
+                        break;
+                    case android.R.id.text2:
+                        tryStartDisclaimerAndSupport(CHAT);
+                        break;
                 }
             }
         }
@@ -321,10 +342,14 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         }
 
         static final class Builder {
-            @LayoutRes private final int mType;
-            @DrawableRes private int mIcon;
-            @StringRes private int mText1;
-            @StringRes private int mText2;
+            @LayoutRes
+            private final int mType;
+            @DrawableRes
+            private int mIcon;
+            @StringRes
+            private int mText1;
+            @StringRes
+            private int mText2;
             private String mSummary1;
             private String mSummary2;
             private Intent mIntent;
