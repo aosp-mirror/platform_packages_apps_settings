@@ -26,8 +26,7 @@ import android.text.format.Formatter;
  * Preference to handle the deletion of photos and videos in the Deletion Helper.
  */
 public class PhotosDeletionPreference extends DeletionPreference {
-    // TODO(b/28560570): Remove this dummy value.
-    private static final int FAKE_DAYS_TO_KEEP = 30;
+    public static final int DAYS_TO_KEEP = 30;
 
     public PhotosDeletionPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -42,7 +41,7 @@ public class PhotosDeletionPreference extends DeletionPreference {
         Context context = getContext();
         setTitle(context.getString(R.string.deletion_helper_photos_title, items));
         setSummary(context.getString(R.string.deletion_helper_photos_summary,
-                Formatter.formatFileSize(context, bytes), FAKE_DAYS_TO_KEEP));
+                Formatter.formatFileSize(context, bytes), DAYS_TO_KEEP));
     }
 
     @Override
