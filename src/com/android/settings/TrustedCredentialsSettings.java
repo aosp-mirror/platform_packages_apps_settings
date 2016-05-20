@@ -695,16 +695,18 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                     for (int i = 0; i < n; ++i) {
                         UserHandle profile = profiles.get(i);
                         int profileId = profile.getIdentifier();
-                        if (shouldSkipProfile(profile)) {
-                            certHoldersByProfile.put(profileId, new ArrayList<CertHolder>(0));
-                            continue;
-                        }
                         List<ParcelableString> aliases = aliasesByProfileId.get(profileId);
                         if (isCancelled()) {
                             return new SparseArray<List<CertHolder>>();
                         }
-                        IKeyChainService service = mKeyChainConnectionByProfileId.get(profileId)
-                                .getService();
+                        KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
+                                profileId);
+                        if (shouldSkipProfile(profile) || aliases == null
+                                || keyChainConnection == null) {
+                            certHoldersByProfile.put(profileId, new ArrayList<CertHolder>(0));
+                            continue;
+                        }
+                        IKeyChainService service = keyChainConnection.getService();
                         List<CertHolder> certHolders = new ArrayList<CertHolder>(max);
                         final int aliasMax = aliases.size();
                         for (int j = 0; j < aliasMax; ++j) {
