@@ -133,6 +133,11 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         rebuild();
     }
 
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_unrestricted_data_access;
+    }
+
     private void rebuild() {
         ArrayList<AppEntry> apps = mSession.rebuild(mFilter, ApplicationsState.ALPHA_COMPARATOR);
         if (apps != null) {
