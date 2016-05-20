@@ -152,6 +152,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
 
     @Override
     public void onRebuildComplete(ArrayList<AppEntry> apps) {
+        if (getContext() == null) return;
         cacheRemoveAllPrefs(getPreferenceScreen());
         final int N = apps.size();
         for (int i = 0; i < N; i++) {
@@ -159,7 +160,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
             String key = entry.info.packageName + "|" + entry.info.uid;
             AccessPreference preference = (AccessPreference) getCachedPreference(key);
             if (preference == null) {
-                preference = new AccessPreference(getContext(), entry);
+                preference = new AccessPreference(getPrefContext(), entry);
                 preference.setKey(key);
                 preference.setOnPreferenceChangeListener(this);
                 getPreferenceScreen().addPreference(preference);
