@@ -20,8 +20,9 @@
     <com.android.settings.PhotosDeletionPreference
         android:key="delete_photos" />
 
-    <com.android.settings.deletionhelper.DownloadsDeletionPreference
-        android:key="delete_downloads" />
+    <com.android.settings.deletionhelper.DownloadsDeletionPreferenceGroup
+        android:key="delete_downloads"
+        android:icon="@drawable/ic_keyboard_arrow_down_black_32"/>
 
     <com.android.settings.CollapsibleCheckboxPreferenceGroup
             android:key="apps_group"
