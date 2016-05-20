@@ -18,6 +18,7 @@ import android.app.Application;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.widget.Switch;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -92,6 +93,11 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     @Override
     protected int getMetricsCategory() {
         return MetricsEvent.DATA_SAVER_SUMMARY;
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_data_saver;
     }
 
     @Override
