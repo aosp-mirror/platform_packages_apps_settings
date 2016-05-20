@@ -15,19 +15,11 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
-import android.os.Handler;
+import android.content.pm.ApplicationInfo;
 import com.android.settings.R;
-import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.dashboard.SummaryLoader.SummaryProvider;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settingslib.applications.ApplicationsState.Callbacks;
-
-import java.util.ArrayList;
 
 /**
  * Extension of ManageApplications with no changes other than having its own
@@ -35,96 +27,43 @@ import java.util.ArrayList;
  */
 public class NotificationApps extends ManageApplications {
 
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider,
-            Callbacks, Callback {
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
 
         private final Context mContext;
         private final SummaryLoader mLoader;
-
-        private final ApplicationsState mAppState;
-        private final NotificationBackend mNotifBackend;
-        private final Handler mHandler;
-        private AppStateNotificationBridge mExtraInfoBridge;
-        private ApplicationsState.Session mSession;
+        private final NotificationBackend mNotificationBackend;
 
         private SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
             mLoader = loader;
-            mAppState =
-                    ApplicationsState.getInstance((Application) context.getApplicationContext());
-            mNotifBackend = new NotificationBackend();
-            mHandler = new Handler(mAppState.getBackgroundLooper());
+            mNotificationBackend = new NotificationBackend();
         }
 
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                mSession = mAppState.newSession(this);
-                mExtraInfoBridge = new AppStateNotificationBridge(mContext,
-                        mAppState, this, mNotifBackend);
-                mSession.resume();
-                mExtraInfoBridge.resume();
-            } else {
-                mSession.pause();
-                mExtraInfoBridge.pause();
-                mSession.release();
-                mExtraInfoBridge.release();
+                new AppCounter(mContext) {
+                    @Override
+                    protected void onCountComplete(int num) {
+                        updateSummary(num);
+                    }
+
+                    @Override
+                    protected boolean includeInCount(ApplicationInfo info) {
+                        return mNotificationBackend.getNotificationsBanned(info.packageName,
+                                info.uid);
+                    }
+                }.execute();
             }
         }
 
-        private void updateSummary(ArrayList<AppEntry> apps) {
-            if (apps == null) return;
-            if (apps.size() == 0) {
+        private void updateSummary(int count) {
+            if (count == 0) {
                 mLoader.setSummary(this, mContext.getString(R.string.notification_summary_none));
             } else {
                 mLoader.setSummary(this, mContext.getResources().getQuantityString(
-                        R.plurals.notification_summary, apps.size(), apps.size()));
+                        R.plurals.notification_summary, count, count));
             }
-        }
-
-        @Override
-        public void onRebuildComplete(ArrayList<AppEntry> apps) {
-            updateSummary(apps);
-        }
-
-        @Override
-        public void onExtraInfoUpdated() {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    updateSummary(mSession.rebuild(
-                            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,
-                            null, false));
-                }
-            });
-        }
-
-        @Override
-        public void onPackageListChanged() {
-        }
-
-        @Override
-        public void onLauncherInfoChanged() {
-        }
-
-        @Override
-        public void onLoadEntriesCompleted() {
-        }
-
-        @Override
-        public void onRunningStateChanged(boolean running) {
-        }
-
-        @Override
-        public void onPackageIconChanged() {
-        }
-
-        @Override
-        public void onPackageSizeChanged(String packageName) {
-        }
-
-        @Override
-        public void onAllSizesComputed() {
         }
     }
 
