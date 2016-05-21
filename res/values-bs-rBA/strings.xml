@@ -507,7 +507,7 @@
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN mora imati najmanje sljedeći broj cifara: %d"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Nastavi"</string>
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"Lozinka mora imati manje od <xliff:g id="NUMBER">%d</xliff:g> znakova."</string>
-    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN mora imati manje od <xliff:g id="NUMBER">%d</xliff:g> brojki."</string>
+    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN mora imati manje od <xliff:g id="NUMBER">%d</xliff:g> cifara."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"PIN mora sadržavati samo brojeve 0-9."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Administrator uređaja ne dozvoljava korištenje nedavnog PIN-a."</string>
     <string name="lockpassword_illegal_character" msgid="8742901630116866738">"Lozinka sadrži nevažeći znak."</string>
@@ -918,7 +918,7 @@
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Odaberi tapetu među"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Čuvar ekrana"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Kad je u priključnoj stanici ili u stanju mirovanja i puni se"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Bilo koji"</string>
+    <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Bilo koje"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Tokom punjenja"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Dok je u priključnoj stanici"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Isključeno"</string>
@@ -1341,7 +1341,7 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Promijeni PIN za otključavanje"</string>
     <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Nacrtajte uzorak za otključavanje"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Pritisnite Meni za pomoć."</string>
-    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Pustite prst kada završite"</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Podignite prst kada završite"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Povežite tačke (najmanje <xliff:g id="NUMBER">%d</xliff:g>). Pokušajte ponovo."</string>
     <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Uzorak snimljen"</string>
     <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Ponovo nacrtajte uzorak da biste potvrdili"</string>
@@ -1550,8 +1550,8 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Zaustaviti sistemsku uslugu?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"Ako zaustavite ovu uslugu, neke funkcije tableta će možda prestati pravilno funkcionirati sve dok ne isključite i zatim ponovo uključite tablet."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"Ako zaustavite ovu uslugu, neke funkcije telefona će možda prestati pravilno funkcionirati sve dok ne isključite i zatim ponovo uključite tablet."</string>
-    <string name="language_settings" msgid="8758655933029560944">"Jezici &amp; unos"</string>
-    <string name="language_keyboard_settings_title" msgid="3709159207482544398">"Jezici &amp; unos"</string>
+    <string name="language_settings" msgid="8758655933029560944">"Jezici i unos"</string>
+    <string name="language_keyboard_settings_title" msgid="3709159207482544398">"Jezici i unos"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"Tastatura i načini unosa"</string>
     <string name="phone_language" msgid="7116581601133118044">"Jezici"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
@@ -1962,7 +1962,7 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Ukloni sve certifikate"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Pouzdani akreditivi"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Prikaži pouzdane CA certifikate"</string>
-    <string name="user_credentials" msgid="3719013347787187083">"Korisnik akreditivā"</string>
+    <string name="user_credentials" msgid="3719013347787187083">"Korisnički akreditiv"</string>
     <string name="user_credentials_summary" msgid="7271228342106080167">"Pogledaj i promijeni sačuvane akreditive"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Napredno"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Vrsta pohrane"</string>
@@ -2322,7 +2322,7 @@
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Ovaj uređaj s drugim ljudima možete dijeliti stvaranjem dodatnih korisnika. Svaki korisnik ima svoj prostor, koji može prilagoditi aplikacijama, pozadinom, i tako dalje. Korisnici također mogu prilagoditi postavke uređaja kao što su Wi-Fi koje utječu na sve. \n\n Kada dodate novog korisnika, ta osoba treba uspostaviti svoj prostor. \n\n Svaki korisnik može ažurirati aplikacije za sve ostale korisnike."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Kada dodate novog korisnika, ta osoba treba uspostaviti svoj prostor. \n\n Svaki korisnik može ažurirati aplikacije za sve ostale korisnike."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Postaviti korisnika odmah?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Pobrinite se da je osoba dostupna uzeti uređaj i postaviti svoj prostor"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Provjerite može li osoba uzeti uređaj i podesiti svoj prostor"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Podesiti profil odmah?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Podesiti sada"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ne sada"</string>
@@ -2536,7 +2536,7 @@
     <string name="ringtone_title" msgid="5379026328015343686">"Melodija zvona telefona"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Zadana melodija obavještenja"</string>
     <string name="alarm_ringtone_title" msgid="2015124067611102995">"Zadani zvuk alarma"</string>
-    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Također vibriraj za pozive"</string>
+    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibracija i za pozive"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Drugi zvukovi"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tonovi tastature telefona"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Zvuk zaključavanja ekrana"</string>
@@ -2722,7 +2722,7 @@
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Sigurno pokretanje"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Nastavi"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Uređaj možete dodatno zaštiti tako da zahtijevate unošenje PIN-a prije njegovog pokretanja. Prije pokretanja, uređaj ne može primati pozive, poruke ili obavještenja, uključujući i aktiviranje alarma. \n\nNa ovaj način štite se podaci na izgubljenim ili ukradenim uređajima."</string>
-    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"uređaj možete dodatno zaštititi ako zahtijevate unošenje obrasca prije njegovog pokretanja. Prije pokretanja, uređaj ne može primati pozive, poruke i obavještenja, uključujući i aktiviranje alarma. \n\nNa ovaj način štite se podaci na izgubljenim ili ukradenim uređajima."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Uređaj možete dodatno zaštititi ako zahtijevate unošenje obrasca prije njegovog pokretanja. Prije pokretanja, uređaj ne može primati pozive, poruke i obavještenja, uključujući i aktiviranje alarma. \n\nNa ovaj način štite se podaci na izgubljenim ili ukradenim uređajima."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Uređaj možete dodatno zaštiti tako da zahtijevate unošenje lozinke prije njegovog pokretanja. Prije pokretanja, uređaj ne može primati pozive, poruke ili obavještenja, uključujući i aktiviranje alarma. \n\nNa ovaj način štite se podaci na izgubljenim ili ukradenim uređajima."</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Osim korištenja otiska prsta za otključavanje, uređaj možete dodatno zaštititi ako zahtijevate unošenje PIN-a prije njegovog pokretanja. Prije pokretanja, uređaj ne može primati pozive, poruke i obavještenja, uključujući i aktiviranje alarma.\n\nNa ovaj način štite se podaci na izgubljenim ili ukradenim uređajima."</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Osim korištenja otiska prsta za otključavanje, uređaj možete dodatno zaštititi ako zahtijevate unošenje obrasca prije njegovog pokretanja. Prije pokretanja, uređaj ne može primati pozive, poruke i obavještenja, uključujući i aktiviranje alarma.\n\nNa ovaj način štite se podaci na izgubljenim ili ukradenim uređajima."</string>
@@ -2876,15 +2876,15 @@
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Odbij"</string>
     <string name="usb_use_charging_only" msgid="2180443097365214467">"Puni bateriju ovog uređaja"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Samo puni ovaj uređaj"</string>
-    <string name="usb_use_power_only" msgid="6426550616883919530">"Napaja uređaj"</string>
-    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Napaja drugi povezani uređaj"</string>
+    <string name="usb_use_power_only" msgid="6426550616883919530">"Napajanje"</string>
+    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Napajanje drugog povezanog uređaja"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"Prenosi fajlove"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Prebacite fajlove na drugi uređaj"</string>
     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Prenesi fotografije (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Prebacuje slike ili datoteke ukoliko MTP nije podržan (PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"Koristi uređaj za MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Uređaj se koristi za rad u MIDI modu"</string>
-    <string name="usb_use" msgid="3256040963685055320">"Koristi USB da"</string>
+    <string name="usb_use" msgid="3256040963685055320">"Koristi USB za"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Provjera u pozadini"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Pun pristup pozadini"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Koristi tekst sa ekrana"</string>
