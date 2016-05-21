@@ -4,6 +4,7 @@
 package com.android.settings.applications;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
@@ -12,12 +13,12 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
 public class LinearColorBar extends LinearLayout {
-    static final int LEFT_COLOR = 0xff009688;
-    static final int MIDDLE_COLOR = 0xff009688;
+
     static final int RIGHT_COLOR = 0xffced7db;
     static final int GRAY_COLOR = 0xff555555;
     static final int WHITE_COLOR = 0xffffffff;
@@ -26,8 +27,8 @@ public class LinearColorBar extends LinearLayout {
     private float mYellowRatio;
     private float mGreenRatio;
 
-    private int mLeftColor = LEFT_COLOR;
-    private int mMiddleColor = MIDDLE_COLOR;
+    private int mLeftColor;
+    private int mMiddleColor;
     private int mRightColor = RIGHT_COLOR;
 
     private boolean mShowIndicator = true;
@@ -70,7 +71,11 @@ public class LinearColorBar extends LinearLayout {
                 ? 2 : 1;
         mEdgeGradientPaint.setStrokeWidth(mLineWidth);
         mEdgeGradientPaint.setAntiAlias(true);
-        
+
+        Resources.Theme theme = context.getTheme();
+        TypedValue typedValue = new TypedValue();
+        theme.resolveAttribute(android.R.attr.colorAccent, typedValue, true);
+        mLeftColor = mMiddleColor = context.getColor(typedValue.resourceId);
     }
 
     public void setOnRegionTappedListener(OnRegionTappedListener listener) {
