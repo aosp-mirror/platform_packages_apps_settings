@@ -43,7 +43,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.widget.FloatingActionButton;
 import com.android.settingslib.HelpUtils;
 
 import java.util.UUID;
@@ -90,7 +89,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     };
 
     private ViewGroup mPinnedHeaderFrameLayout;
-    private FloatingActionButton mFloatingActionButton;
     private ViewGroup mButtonBar;
 
     private LayoutPreference mHeader;
@@ -128,7 +126,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             Bundle savedInstanceState) {
         final View root = super.onCreateView(inflater, container, savedInstanceState);
         mPinnedHeaderFrameLayout = (ViewGroup) root.findViewById(R.id.pinned_header);
-        mFloatingActionButton = (FloatingActionButton) root.findViewById(R.id.fab);
         mButtonBar = (ViewGroup) root.findViewById(R.id.button_bar);
         return root;
     }
@@ -154,10 +151,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                 checkAvailablePrefs((PreferenceGroup) pref);
             }
         }
-    }
-
-    public FloatingActionButton getFloatingActionButton() {
-        return mFloatingActionButton;
     }
 
     public ViewGroup getButtonBar() {
