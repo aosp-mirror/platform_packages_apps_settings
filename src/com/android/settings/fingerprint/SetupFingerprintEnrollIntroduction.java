@@ -62,9 +62,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         final Item cancelItem = (Item) adapter.findItemById(R.id.cancel_button);
         cancelItem.setTitle(
                 getText(R.string.security_settings_fingerprint_enroll_introduction_cancel_setup));
-
-        layout.setDividerInset(getResources().getDimensionPixelSize(
-                R.dimen.suw_items_glif_icon_divider_inset));
     }
 
     @Override
