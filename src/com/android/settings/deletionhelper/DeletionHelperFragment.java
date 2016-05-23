@@ -25,7 +25,9 @@ import android.text.format.Formatter;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import com.android.settings.deletionhelper.DownloadsDeletionPreference;
 import com.android.settings.CollapsibleCheckboxPreferenceGroup;
 import com.android.settings.PhotosDeletionPreference;
@@ -113,13 +115,17 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
     }
 
     private void initializeButtons(View v) {
-        mCancel = (Button) v.findViewById(R.id.back_button);
+        mCancel = (Button) v.findViewById(R.id.skip_button);
         mCancel.setText(R.string.cancel);
         mCancel.setOnClickListener(this);
+        mCancel.setVisibility(View.VISIBLE);
 
         mFree = (Button) v.findViewById(R.id.next_button);
         mFree.setText(R.string.storage_menu_free);
         mFree.setOnClickListener(this);
+
+        Button back = (Button) v.findViewById(R.id.back_button);
+        back.setVisibility(View.GONE);
     }
 
     private void initializeDeletionPreferences() {
