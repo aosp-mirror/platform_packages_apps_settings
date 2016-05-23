@@ -25,6 +25,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -158,7 +159,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     }
 
     private boolean onForgetVpnClick() {
-        updateRestrictions();
+        updateRestrictedViews();
         if (!mPreferenceForget.isEnabled()) {
             return false;
         }
@@ -178,7 +179,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     }
 
     private boolean setAlwaysOnVpnByUI(boolean isEnabled) {
-        updateRestrictions();
+        updateRestrictedViews();
         if (!mPreferenceAlwaysOn.isEnabled()) {
             return false;
         }
@@ -194,19 +195,38 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         return success;
     }
 
+    private boolean checkTargetVersion() {
+        if (mPackageInfo == null || mPackageInfo.applicationInfo == null) {
+            return true;
+        }
+        final int targetSdk = mPackageInfo.applicationInfo.targetSdkVersion;
+        if (targetSdk >= Build.VERSION_CODES.N) {
+            return true;
+        }
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, "Package " + mPackageName + " targets SDK version " + targetSdk + "; must"
+                    + " target at least " + Build.VERSION_CODES.N + " to use always-on.");
+        }
+        return false;
+    }
+
     private void updateUI() {
         if (isAdded()) {
             mPreferenceAlwaysOn.setChecked(isVpnAlwaysOn());
-            updateRestrictions();
+            updateRestrictedViews();
         }
     }
 
-    private void updateRestrictions() {
+    private void updateRestrictedViews() {
         if (isAdded()) {
             mPreferenceAlwaysOn.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN,
                     mUserId);
             mPreferenceForget.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN,
                     mUserId);
+
+            if (!checkTargetVersion()) {
+                mPreferenceAlwaysOn.setEnabled(false);
+            }
         }
     }
 
