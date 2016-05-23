@@ -89,8 +89,9 @@ public class ConfirmDeviceCredentialActivity extends Activity {
                 && !lockPatternUtils.isSeparateProfileChallengeEnabled(userId)) {
             // We set the challenge as 0L, so it will force to unlock managed profile when it
             // unlocks primary profile screen lock, by calling verifyTiedProfileChallenge()
-            launched = helper.launchConfirmationActivity(0 /* request code */, null /* title */,
-                    title, details, 0L, userId);
+            launched = helper.launchConfirmationActivityWithExternalAndChallenge(
+                    0 /* request code */, null /* title */, title, details, true /* isExternal */,
+                    0L /* challenge */, userId);
         } else {
             launched = helper.launchConfirmationActivity(0 /* request code */, null /* title */,
                     title, details, false /* returnCredentials */, true /* isExternal */, userId);
