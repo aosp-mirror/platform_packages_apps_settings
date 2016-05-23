@@ -92,7 +92,9 @@ public class DataSaverBackend {
         } catch (RemoteException e) {
             Log.w(TAG, "Can't reach policy manager", e);
         }
-        MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_WHITELIST, packageName);
+        if (whitelisted) {
+            MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_WHITELIST, packageName);
+        }
     }
 
     public boolean isWhitelisted(int uid) {
