@@ -362,7 +362,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Начнем!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Приложите палец к сканеру и удерживайте, пока не почувствуете вибрацию."</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Приложите палец снова"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Коснитесь экрана пальцем несколько раз, чтобы получить полный отпечаток."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Немного перемещайте палец, чтобы получить полный отпечаток."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Отпечаток добавлен!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Этот значок сообщает, что вы можете подтверждать покупки и проходить индентификацию с помощью отпечатка пальца."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Чтобы разблокировать устройство, приложите палец к сканеру."</string>
@@ -509,8 +509,8 @@
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Пароль должен содержать не менее %d символов"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN-код должен содержать не менее %d цифр"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Продолжить"</string>
-    <string name="lockpassword_password_too_long" msgid="7016906583950201704">"Пароль должен содержать не более <xliff:g id="NUMBER">%d</xliff:g> симв."</string>
-    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN-код должен содержать не более <xliff:g id="NUMBER">%d</xliff:g> зн."</string>
+    <string name="lockpassword_password_too_long" msgid="7016906583950201704">"Пароль должен содержать менее <xliff:g id="NUMBER">%d</xliff:g> симв."</string>
+    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN-код должен быть короче <xliff:g id="NUMBER">%d</xliff:g> цифр."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"PIN-код должен состоять из цифр от 0 до 9."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Использовать недавний PIN-код запрещено."</string>
     <string name="lockpassword_illegal_character" msgid="8742901630116866738">"Пароль содержит недопустимые символы."</string>
@@ -937,8 +937,8 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Настройки"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Автонастройка"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Активация в вертикальном положении"</string>
-    <string name="doze_title" msgid="2259176504273878294">"Запрет спящего режима"</string>
-    <string name="doze_summary" msgid="7128970177894383698">"Включение дисплея, когда вы берете устройство в руки или получаете уведомление"</string>
+    <string name="doze_title" msgid="2259176504273878294">"Автоматическое включение экрана"</string>
+    <string name="doze_summary" msgid="7128970177894383698">"Включать экран, когда вы берете устройство в руки или получаете уведомление"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Размер шрифта"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Увеличение или уменьшение размера шрифта"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Настройки блокировки SIM-карты"</string>
@@ -1112,8 +1112,12 @@
     <string name="storage_detail_audio" msgid="1197685141676483213">"Аудио"</string>
     <string name="storage_detail_cached" msgid="8547136365247818567">"Данные кеша"</string>
     <string name="storage_detail_other" msgid="8404938385075638238">"Другое"</string>
+    <!-- no translation found for storage_detail_system (4629506366064709687) -->
+    <skip />
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Документы с общим доступом, сохраненные приложениями, контент, скачанный из Интернета или по Bluetooth, служебные файлы Android и т. д.\n\nЧтобы узнать, какие данные есть на устройстве (<xliff:g id="NAME">^1</xliff:g>), нажмите \"Открыть\"."</string>
+    <!-- no translation found for storage_detail_dialog_system (3058775028564971102) -->
+    <skip />
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g>, возможно, хранит на запоминающем устройстве фотографии, музыку, приложения и другие данные общим объемом <xliff:g id="SIZE">^2</xliff:g>. \n\nЧтобы проверить это, войдите в аккаунт пользователя <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Настройте карту \"<xliff:g id="NAME">^1</xliff:g>\""</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Портативный носитель"</string>
@@ -1601,7 +1605,7 @@
     <string name="keyboard_layout_dialog_switch_hint" msgid="3889961090676293795">"Для смены нажмите CTRL + Пробел"</string>
     <string name="keyboard_layout_default_label" msgid="2952672513543482165">"По умолчанию"</string>
     <string name="keyboard_layout_picker_title" msgid="556081931972771610">"Раскладка клавиатуры"</string>
-    <string name="user_dict_settings_title" msgid="3427169369758733521">"Пользовательский словарь"</string>
+    <string name="user_dict_settings_title" msgid="3427169369758733521">"Личный словарь"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Добавить"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Добавление в словарь"</string>
@@ -1944,7 +1948,7 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Настройки голосового ввода и вывода"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Голосовой поиск"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Клавиатура Android"</string>
-    <string name="voice_category" msgid="1430370497125803904">"Голосовой ввод"</string>
+    <string name="voice_category" msgid="1430370497125803904">"Речь"</string>
     <string name="voice_input_settings" msgid="1099937800539324567">"Настройки голосового ввода"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Голосовой ввод"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Голосовой ввод"</string>
@@ -1979,9 +1983,9 @@
     <string name="credentials_reset" msgid="3239382277144980418">"Очистить учетные данные"</string>
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Удалить все сертификаты"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Надежные сертификаты"</string>
-    <string name="trusted_credentials_summary" msgid="6735221351155686632">"Показывать надежные сертификаты ЦС"</string>
+    <string name="trusted_credentials_summary" msgid="6735221351155686632">"Смотреть надежные сертификаты ЦС"</string>
     <string name="user_credentials" msgid="3719013347787187083">"Учетные данные пользователя"</string>
-    <string name="user_credentials_summary" msgid="7271228342106080167">"Просматривать и изменять сохраненные учетные данные."</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Смотреть и изменять сохраненные учетные данные"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Дополнительные настройки"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Тип хранилища"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Аппаратное"</string>
@@ -2343,8 +2347,8 @@
     <string name="user_add_user_title" msgid="2108112641783146007">"Добавить пользователя?"</string>
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Если вашим устройством пользуется кто-то ещё, создайте на нем дополнительные профили. Владелец профиля может настроить его по своему вкусу, в том числе выбрать обои и установить нужные приложения. Кроме того, пользователи могут изменять общие для всех параметры устройства, например включать или отключать Wi‑Fi.\n\nПосле создания профиля его необходимо настроить.\n\nОбновлять приложения для всех аккаунтов может любой пользователь устройства."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"После создания профиля его необходимо настроить.\n\nОбновлять приложения для всех аккаунтов может любой пользователь устройства."</string>
-    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Настроить аккаунт?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Пользователь должен иметь возможность настроить свое личное пространство на устройстве."</string>
+    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Настроить профиль?"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Вам потребуется передать устройство пользователю, чтобы он мог настроить свое личное пространство."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Настроить профиль?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Настроить"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Не сейчас"</string>
@@ -2357,7 +2361,7 @@
     <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"На заблокированном экране"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Новый пользователь"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Новый профиль"</string>
-    <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Удалить ваш аккаунт?"</string>
+    <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Удалить ваш профиль?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Удалить пользователя?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Удалить профиль?"</string>
     <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Удалить рабочий профиль?"</string>
@@ -2374,7 +2378,7 @@
     <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"Удалить аккаунт гостя?"</string>
     <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"Все приложения и данные этого профиля будут удалены."</string>
     <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"Удалить"</string>
-    <string name="user_enable_calling" msgid="5128605672081602348">"Включение звонков"</string>
+    <string name="user_enable_calling" msgid="5128605672081602348">"Включить звонки"</string>
     <string name="user_enable_calling_sms" msgid="9172507088023097063">"Включение звонков и SMS"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Удалить пользователя"</string>
     <string name="user_enable_calling_confirm_title" msgid="4315789475268695378">"Включить звонки?"</string>
@@ -2914,7 +2918,7 @@
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Передача фотографий или файлов, если МТР не поддерживается (PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"Подключение как MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Использование устройства как MIDI"</string>
-    <string name="usb_use" msgid="3256040963685055320">"Использование USB"</string>
+    <string name="usb_use" msgid="3256040963685055320">"Режим работы USB"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Фоновая проверка"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Полный доступ в фоновом режиме"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"Использовать текст с экрана"</string>
@@ -3015,13 +3019,13 @@
       <item quantity="many">Показывать уведомления запрещено <xliff:g id="COUNT_1">%d</xliff:g> приложениям</item>
       <item quantity="other">Показывать уведомления запрещено <xliff:g id="COUNT_1">%d</xliff:g> приложения</item>
     </plurals>
-    <string name="notification_summary_none" msgid="3440195312233351409">"Уведомления разрешены во всех приложениях"</string>
+    <string name="notification_summary_none" msgid="3440195312233351409">"Разрешены уведомления от всех приложений"</string>
     <string name="apps_summary" msgid="193158055537070092">"Установлено приложений: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"Установлено 24 приложения"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Использовано: <xliff:g id="SIZE1">%1$s</xliff:g> из <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
     <string name="display_summary_on" msgid="5628868543070268634">"Адаптивная регулировка включена"</string>
     <string name="display_summary_off" msgid="6399558022426312990">"Адаптивная регулировка отключена"</string>
-    <string name="memory_summary" msgid="8080825904671961872">"Вы использовали в среднем <xliff:g id="USED_MEMORY">%1$s</xliff:g> из <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
+    <string name="memory_summary" msgid="8080825904671961872">"Используется в среднем <xliff:g id="USED_MEMORY">%1$s</xliff:g> из <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="user_summary" msgid="1617826998097722499">"Вы вошли как <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"По умолчанию: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="location_on_summary" msgid="5127631544018313587">"ВКЛ./<xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
@@ -3107,8 +3111,8 @@
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Не включать автоматически"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Включать при уровне заряда %1$s"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Режим экономии заряда отключен"</string>
-    <string name="lockscreen_remote_input" msgid="969871538778211843">"Запретить набор текста в оповещениях, если устройство заблокировано"</string>
-    <string name="default_spell_checker" msgid="8506899870026026660">"По умолчанию"</string>
+    <string name="lockscreen_remote_input" msgid="969871538778211843">"Запретить набор текста в уведомлениях, если устройство заблокировано"</string>
+    <string name="default_spell_checker" msgid="8506899870026026660">"Правописание по умолчанию"</string>
     <string name="choose_spell_checker" msgid="6596539862291699367">"Проверка правописания"</string>
     <string name="spell_checker_not_selected" msgid="8871083796179200696">"Не выбрано"</string>
     <string name="notification_log_no_title" msgid="5678029849672024215">"(нет)"</string>
@@ -3175,6 +3179,10 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Войдите в аккаунт, чтобы связаться со службой поддержки"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Войти"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Не удается войти в аккаунт?"</string>
+    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
+    <skip />
+    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
+    <skip />
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Настройки рабочего профиля"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Поиск контактов"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Разрешить поиск контактов в организации для определения вызывающих абонентов"</string>
@@ -3206,10 +3214,30 @@
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Фото и видео (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, создано более <xliff:g id="DAYS">%2$d</xliff:g> д. назад"</string>
-    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
-    <skip />
-    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
-    <skip />
+    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Скачанные файлы (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
+    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, изменено <xliff:g id="DAYS">%2$s</xliff:g>"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
 </resources>
