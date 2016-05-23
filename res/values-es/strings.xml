@@ -799,17 +799,17 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"¿Quieres cancelar la invitación?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"¿Quieres cancelar la invitación para conectar con <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"¿Olvidar este grupo?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Zona Wi-Fi portátil"</string>
-    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Zona Wi‑Fi"</string>
+    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Crear punto de acceso Wi-Fi"</string>
+    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Punto de acceso Wi-Fi"</string>
     <string name="wifi_hotspot_checkbox_text_summary" msgid="3800646230853724318">"Usar conex. móvil para ofrecer red Wi‑Fi"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Activando zona Wi-Fi…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Desactivando zona Wi-Fi…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Zona Wi-Fi portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> activa"</string>
-    <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"Error de zona Wi-Fi portátil"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Configurar zona Wi-Fi"</string>
-    <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Configuración zona Wi‑Fi"</string>
-    <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Zona Wi-Fi portátil AndroidAP WPA2 PSK"</string>
-    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Zona Wi-Fi portátil: <xliff:g id="NETWORK_SSID">%1$s</xliff:g> (<xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>)"</string>
+    <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"Error del punto de acceso Wi-Fi"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Configurar punto de acceso Wi-Fi"</string>
+    <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Configuración del punto de acceso Wi-Fi"</string>
+    <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Punto de acceso Wi-Fi AndroidAP WPA2 PSK"</string>
+    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Punto de acceso Wi-Fi: <xliff:g id="NETWORK_SSID">%1$s</xliff:g> (<xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>)"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Llamadas Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Activa la Llamada por Wi-Fi"</string>
@@ -2977,7 +2977,7 @@
     <string name="condition_expand_show" msgid="608202020023489939">"Mostrar"</string>
     <string name="condition_expand_hide" msgid="948507739223760667">"Ocultar"</string>
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Zona Wi-Fi activada"</string>
-    <string name="condition_hotspot_summary" msgid="3433182779269409683">"La zona Wi-Fi portátil <xliff:g id="ID_1">%1$s</xliff:g> está activa y la conexión Wi-Fi de este dispositivo está desactivada."</string>
+    <string name="condition_hotspot_summary" msgid="3433182779269409683">"El punto de acceso Wi-Fi <xliff:g id="ID_1">%1$s</xliff:g> está activo y la conexión Wi-Fi de este dispositivo está desactivada."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Modo avión activado"</string>
     <string name="condition_airplane_summary" msgid="2136872325308526329">"La red móvil, la conexión Wi-Fi y el Bluetooth están desactivados. No puedes hacer llamadas ni conectarte a Internet."</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"No molestar activado (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
@@ -3111,6 +3111,10 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Iniciar sesión para obtener asistencia"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Iniciar sesión"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"¿No puedes acceder a tu cuenta?"</string>
+    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
+    <skip />
+    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
+    <skip />
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Ajustes de perfil de trabajo"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Búsqueda de contactos"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Permitir que tu organización busque contactos para identificar llamadas y contactos"</string>
@@ -3136,10 +3140,30 @@
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Fotos y vídeos (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, con más de <xliff:g id="DAYS">%2$d</xliff:g> días"</string>
-    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
-    <skip />
-    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
-    <skip />
+    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Descargas (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
+    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g> (última modificación hace <xliff:g id="DAYS">%2$s</xliff:g> días)"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
 </resources>
