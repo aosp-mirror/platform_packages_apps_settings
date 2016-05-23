@@ -187,7 +187,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             boolean isProfile = Utils.isManagedProfile(
                     UserManager.get(getActivity()), mEffectiveUserId);
             // Map boolean flags to an index by isStrongAuth << 2 + isProfile << 1 + isAlpha.
-            int index = ((mIsStrongAuthRequired ? 1 : 0) << 2) + ((isProfile ? 1 : 0 ) << 1)
+            int index = ((mIsStrongAuthRequired ? 1 : 0) << 2) + ((isProfile ? 1 : 0) << 1)
                     + (mIsAlpha ? 1 : 0);
             return DETAIL_TEXTS[index];
         }
@@ -356,9 +356,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                             boolean matched = false;
                             if (token != null) {
                                 matched = true;
-                                intent.putExtra(
-                                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
-                                        token);
+                                if (mReturnCredentials) {
+                                    intent.putExtra(
+                                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
+                                            token);
+                                }
                             }
                             mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
                                     localUserId);
@@ -382,7 +384,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         @Override
                         public void onChecked(boolean matched, int timeoutMs) {
                             mPendingLockCheck = null;
-                            if (matched && isInternalActivity()) {
+                            if (matched && isInternalActivity() && mReturnCredentials) {
                                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
                                                 mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
                                                          : StorageManager.CRYPT_TYPE_PIN);
