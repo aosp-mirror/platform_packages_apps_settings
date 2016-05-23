@@ -439,9 +439,11 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                             boolean matched = false;
                             if (token != null) {
                                 matched = true;
-                                intent.putExtra(
-                                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
-                                        token);
+                                if (mReturnCredentials) {
+                                    intent.putExtra(
+                                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
+                                            token);
+                                }
                             }
                             mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
                                     localEffectiveUserId);
@@ -472,7 +474,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                             @Override
                             public void onChecked(boolean matched, int timeoutMs) {
                                 mPendingLockCheck = null;
-                                if (matched && isInternalActivity()) {
+                                if (matched && isInternalActivity() && mReturnCredentials) {
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
                                                     StorageManager.CRYPT_TYPE_PATTERN);
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
