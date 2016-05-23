@@ -422,7 +422,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Je tablet beschermen"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Je apparaat beschermen"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Bescherm je telefoon"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Je vingerafdruk is mogelijk minder veilig dan een sterk patroon, sterke pincode of sterk wachtwoord. Stel een back-upvergrendelingsscherm in voor betere beveiliging."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Je vingerafdruk is mogelijk minder veilig dan een sterk patroon, sterke pincode of sterk wachtwoord. Stel een extra schermvergrendeling in voor betere beveiliging."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen deze tablet zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen dit apparaat zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen deze telefoon zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
@@ -899,7 +899,7 @@
     <string name="brightness_title" msgid="5746272622112982836">"Helderheid"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Helderheid van het scherm aanpassen"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Aanpasbare helderheid"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Helderheidsniveau optimaliseren voor beschikbaar licht"</string>
+    <string name="auto_brightness_summary" msgid="1799041158760605375">"Helderheidsniveau optimaliseren voor het beschikbare licht"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Slaapstand"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Scherm wordt uitgeschakeld"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Na <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inactiviteit"</string>
@@ -907,14 +907,14 @@
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"Achtergrond wijzigen"</string>
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Je scherm personaliseren"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Achtergrond kiezen uit"</string>
-    <string name="screensaver_settings_title" msgid="1770575686476851778">"Schermbeveiliging"</string>
+    <string name="screensaver_settings_title" msgid="1770575686476851778">"Screensaver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Wanneer gedockt, in slaapstand of tijdens het opladen"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Tijdens beide"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Tijdens het opladen"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Tijdens het docken"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Uit"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Schakel de schermbeveiliging in om te bepalen wat er gebeurt als de telefoon is gedockt en/of de slaapstand actief is."</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8644479926302707286">"Wanneer schermbeveiliging moet worden gestart"</string>
+    <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Schakel de screensaver in om te bepalen wat er gebeurt als de telefoon is gedockt en/of de slaapstand actief is."</string>
+    <string name="screensaver_settings_when_to_dream" msgid="8644479926302707286">"Wanneer screensaver starten"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Nu beginnen"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Instellingen"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatische helderheid"</string>
@@ -1092,8 +1092,12 @@
     <string name="storage_detail_audio" msgid="1197685141676483213">"Audio"</string>
     <string name="storage_detail_cached" msgid="8547136365247818567">"Gegevens in het cachegeheugen"</string>
     <string name="storage_detail_other" msgid="8404938385075638238">"Overige"</string>
+    <!-- no translation found for storage_detail_system (4629506366064709687) -->
+    <skip />
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> verkennen"</string>
     <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Overig omvat gedeelde bestanden die zijn opgeslagen door apps, bestanden die zijn gedownload via internet of Bluetooth, Android-bestanden en meer. \n\nAls je de volledige inhoud van deze <xliff:g id="NAME">^1</xliff:g> wilt bekijken, tik je op Verkennen."</string>
+    <!-- no translation found for storage_detail_dialog_system (3058775028564971102) -->
+    <skip />
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> kan opgeslagen foto\'s, muziek, films, apps of andere gegevens bevatten die <xliff:g id="SIZE">^2</xliff:g> aan opslagruimte innemen. \n\nAls je details wilt bekijken, schakel je over naar <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Je <xliff:g id="NAME">^1</xliff:g> configureren"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Gebruiken als draagbare opslag"</string>
@@ -1199,7 +1203,7 @@
     <string name="master_clear_progress_title" msgid="5194793778701994634">"Wissen"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"Even geduld..."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Oproepinstellingen"</string>
-    <string name="call_settings_summary" msgid="7291195704801002886">"Voicemail, oproepen doorschakelen, wisselgesprek, beller-id instellen"</string>
+    <string name="call_settings_summary" msgid="7291195704801002886">"Voicemail, oproepen doorschakelen, wisselgesprek, beller-ID instellen"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB-tethering"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Draagbare hotspot"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth-tethering"</string>
@@ -1289,7 +1293,7 @@
     <string name="license_title" msgid="1990487604356037871">"Licentie"</string>
     <string name="terms_title" msgid="7697580845616764642">"Algemene voorwaarden"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Systeemlicentie voor webweergave"</string>
-    <string name="wallpaper_attributions" msgid="3645880512943433928">"Achtergronden"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Achtergrond"</string>
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Providers van satellietbeelden:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"Handleiding"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"Er is een probleem bij het laden van de handleiding."</string>
@@ -1638,11 +1642,11 @@
     <string name="usage_time_label" msgid="295954901452833058">"Gebruikstijd"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Toegankelijkheid"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"Instellingen voor toegankelijkheid"</string>
-    <string name="vision_settings_title" msgid="4204111425716868288">"Instellingen voor zicht"</string>
+    <string name="vision_settings_title" msgid="4204111425716868288">"Optische instellingen"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Je kunt dit apparaat aanpassen aan je behoeften. Deze toegankelijkheidsfuncties kunnen later worden gewijzigd in Instellingen."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Services"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
-    <string name="talkback_summary" msgid="8331244650729024963">"Schermlezer voornamelijk voor slechtziende en blinde mensen"</string>
+    <string name="talkback_summary" msgid="8331244650729024963">"Schermlezer voornamelijk voor blinden en slechtzienden"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Systeem"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Scherm"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Ondertiteling"</string>
@@ -2315,7 +2319,7 @@
     <string name="user_add_on_lockscreen_menu_summary" msgid="133203601188164761">"bij vergrendeld apparaat."</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nieuwe gebruiker"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nieuw profiel"</string>
-    <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Wil je uzelf verwijderen?"</string>
+    <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Wil je jezelf verwijderen?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Deze gebr. verwijderen?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Dit profiel verwijderen?"</string>
     <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Werkprofiel verwijderen?"</string>
@@ -2765,10 +2769,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"Werk"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Geblokkeerd"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Met domein-URL\'s"</string>
-    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Overschrijft \'Niet storen\'"</string>
-    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Geen gevoelige content op vergrendelingsscherm"</string>
-    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Nooit op vergrendelingsscherm"</string>
-    <string name="filter_notif_silent" msgid="8533960664617048281">"Zonder geluid weergegeven"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Zelfs indien \'Niet storen\'"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Zonder gevoelige content indien vergrendeld"</string>
+    <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Geen indien vergrendeld"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Zonder geluid"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Geavanceerd"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Apps configureren"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Onbekende app"</string>
@@ -3029,7 +3033,7 @@
     <string name="data_saver_on" msgid="6774217590237934709">"Aan"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Uit"</string>
     <string name="unrestricted_app_title" msgid="4465437191723332066">"Onbeperkt datagebruik toestaan"</string>
-    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Onbep. datatoegang toestaan indien Databesparing aan"</string>
+    <string name="unrestricted_app_summary" msgid="6458008993501723912">"Onbep. datatoegang toestaan indien databesparing aan"</string>
     <string name="home_app" msgid="4066188520886810030">"Startscherm-app"</string>
     <string name="no_default_home" msgid="7184117487704520238">"Geen standaard startscherm"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"Beveiligd opstarten"</string>
@@ -3111,6 +3115,10 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Log in voor ondersteuning"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Inloggen"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Geen toegang tot je account?"</string>
+    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
+    <skip />
+    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
+    <skip />
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Instellingen voor werkprofiel"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Contacten zoeken"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Contactzoekopdrachten door je organisatie toestaan om bellers en contacten te identificeren"</string>
@@ -3136,10 +3144,30 @@
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Foto\'s en video\'s (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, ouder dan <xliff:g id="DAYS">%2$d</xliff:g> dagen"</string>
-    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
-    <skip />
-    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
-    <skip />
+    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Downloads (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
+    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, laatst gewijzigd <xliff:g id="DAYS">%2$s</xliff:g>"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
 </resources>
