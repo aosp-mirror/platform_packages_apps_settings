@@ -340,7 +340,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"פתח עם טביעת אצבע"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"גע בחיישן טביעת האצבע כדי לבטל את נעילת הטלפון, לאשר רכישות או להיכנס אל אפליקציות. בחר בקפידה את טביעות האצבע שתוסיף. אפילו הבעלים של טביעת אצבע אחת שתוסיף יוכל לבצע את הפעולות האלה.\n\nשים לב: ייתכן ששימוש בטביעת אצבע יעניק פחות אבטחה מקו ביטול נעילה או מקוד גישה חזקים. "<annotation id="url">"למידע נוסף"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"גע בחיישן טביעת האצבע כדי לבטל את נעילת הטלפון, לאשר רכישות או להיכנס אל אפליקציות. היזהר בעת הוספת טביעות אצבע של משתמשים - הבעלים של כל טביעת אצבע שתצורף יוכל לבצע את כל הפעולות האלה.\n\nשים לב: ייתכן ששימוש בטביעת אצבע יספק אבטחה פחות טובה מאשר קו ביטול נעילה חזק או קוד גישה חזק. "<annotation id="url">"למידע נוסף"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"בטל"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"המשך"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"דלג"</string>
@@ -509,8 +509,8 @@
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"‏אורך הסיסמה חייב להיות %d תווים לפחות"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"‏מספר ה-PIN חייב להיות בן %d ספרות לפחות"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"המשך"</string>
-    <string name="lockpassword_password_too_long" msgid="7016906583950201704">"הסיסמה אינה יכולה להכיל יותר מ-<xliff:g id="NUMBER">%d</xliff:g> תווים."</string>
-    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"‏קוד ה-PIN אינו יכול להכיל יותר מ-<xliff:g id="NUMBER">%d</xliff:g> ספרות."</string>
+    <string name="lockpassword_password_too_long" msgid="7016906583950201704">"הסיסמה חייבת להיות קצרה מ-<xliff:g id="NUMBER">%d</xliff:g> תווים."</string>
+    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"‏מספר ה-PIN חייב להיות קצר מ-<xliff:g id="NUMBER">%d</xliff:g> ספרות."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"‏קוד ה-PIN יכול להכיל רק את הספרות 0-9."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"‏מנהל המכשירים אינו מאפשר שימוש ב-PIN שנעשה בו שימוש לאחרונה."</string>
     <string name="lockpassword_illegal_character" msgid="8742901630116866738">"הסיסמה מכילה תו לא חוקי."</string>
@@ -2749,13 +2749,13 @@
     <string name="encryption_interstitial_header" msgid="468015813904595613">"הפעלה מאובטחת"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"המשך"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"‏באפשרותך לחזק את ההגנה על מכשיר זה על-ידי דרישת מספר ה-PIN שלך לפני הפעלתו. עד שהמכשיר יופעל, הוא לא לא יוכל לקבל שיחות, הודעות או התראות. \n\nהדבר יסייע להגן על נתונים במכשירים שאבדו או נגנבו."</string>
-    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"באפשרותך לחזק את ההגנה על מכשיר זה על-ידי דרישת תבנית ביטול הנעילה שלך לפני הפעלתו. עד שהמכשיר יופעל, הוא לא לא יוכל לקבל שיחות, הודעות או התראות. \n\nהדבר יסייע להגן על נתונים במכשירים שאבדו או נגנבו."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"באפשרותך לחזק את ההגנה על מכשיר זה על-ידי דרישה לסמן את קו ביטול הנעילה שלך לפני הפעלתו. עד שהמכשיר יופעל, הוא לא לא יוכל לקבל שיחות, הודעות או התראות. \n\nהדבר יסייע להגן על נתונים במכשירים שאבדו או נגנבו."</string>
     <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"באפשרותך לחזק את ההגנה על מכשיר זה על-ידי דרישת הסיסמה שלך לפני הפעלתו. עד שהמכשיר יופעל, הוא לא יוכל לקבל שיחות, הודעות או התראות. \n\nהדבר יסייע להגן על נתונים במכשירים שאבדו או נגנבו."</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"‏בנוסף לשימוש בטביעת האצבע שלך כדי לבטל את נעילת המכשיר, כאמצעי הגנה נוסף אתה יכול לדרוש את הזנת ה-PIN שלך לפני הפעלת המכשיר. כל עוד המכשיר אינו מופעל, הוא אינו יכול לקבל שיחות, הודעות או תזכורות, כולל התראות.\n\nאפשרות זו עוזרת להגן על נתונים במכשירים שאבדו או נגנבו."</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"בנוסף לשימוש בטביעת האצבע שלך כדי לבטל את נעילת המכשיר, כאמצעי הגנה נוסף אתה יכול לדרוש את הזנת קו ביטול הנעילה שלך לפני הפעלת המכשיר. כל עוד המכשיר אינו מופעל, הוא אינו יכול לקבל שיחות, הודעות או תזכורות, כולל התראות.\n\nאפשרות זו עוזרת להגן על נתונים במכשירים שאבדו או נגנבו."</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"בנוסף לשימוש בטביעת האצבע שלך כדי לבטל את נעילת המכשיר, כאמצעי הגנה נוסף אתה יכול לדרוש את הזנת הסיסמה שלך לפני הפעלת המכשיר. כל עוד המכשיר אינו מופעל, הוא אינו יכול לקבל שיחות, הודעות או תזכורות, כולל התראות.\n\nאפשרות זו עוזרת להגן על נתונים במכשירים שאבדו או נגנבו."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"כדי להפעיל את המכשיר נדרש קוד אימות"</string>
-    <string name="encrypt_require_pattern" msgid="6898479411004015810">"כדי להפעיל את המכשיר נדרש איור"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"דרוש קו ביטול נעילה כדי להפעיל את המכשיר"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"כדי להפעיל את המכשיר נדרשת סיסמה"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"לא, תודה"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"לא, תודה"</string>
@@ -2821,10 +2821,10 @@
     <string name="filter_work_apps" msgid="24519936790795574">"עבודה"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"חסומות"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"‏עם URL של דומיינים"</string>
-    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"מבטל את ההגדרה \'נא לא להפריע\'"</string>
+    <string name="filter_notif_priority_apps" msgid="5056470299318500609">"מתעלמות מהגדרת \'נא לא להפריע\'"</string>
     <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"ללא תוכן רגיש במסך הנעילה"</string>
     <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"לא מוצגות אף פעם במסך הנעילה"</string>
-    <string name="filter_notif_silent" msgid="8533960664617048281">"מוצג ללא צליל"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"מוצגות ללא צליל"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"מתקדם"</string>
     <string name="configure_apps" msgid="6685680790825882528">"הגדרת אפליקציות"</string>
     <string name="unknown_app" msgid="5275921288718717656">"אפליקציה לא מוכרת"</string>
@@ -2912,7 +2912,7 @@
     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"לספק חשמל למכשיר השני שמחובר"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"להעביר קבצים"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"העברת קבצים למכשיר אחר"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"‏העברת תמונות (PTP)"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"‏להעביר תמונות (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"‏העברת תמונות או קבצים אם MTP אינו נתמך (PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"‏להשתמש במכשיר כהתקן MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"‏להשתמש במכשיר זה כהתקן MIDI"</string>
@@ -3177,6 +3177,10 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"כניסה לצורך קבלת תמיכה"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"כניסה"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"לא מצליח לקבל גישה לחשבונך?"</string>
+    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
+    <skip />
+    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
+    <skip />
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"הגדרות של פרופיל עבודה"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"חיפוש אנשי קשר"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"אפשר לחיפושי אנשי קשר שמבצע הארגון לזהות מתקשרים ואנשי קשר"</string>
@@ -3208,10 +3212,30 @@
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"תמונות וסרטונים (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, מלפני <xliff:g id="DAYS">%2$d</xliff:g> ימים"</string>
-    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
-    <skip />
-    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
-    <skip />
+    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"(<xliff:g id="NUMITEMS">%1$d</xliff:g>) הורדות"</string>
+    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, שונה לאחרונה <xliff:g id="DAYS">%2$s</xliff:g>"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
 </resources>

@@ -287,8 +287,8 @@
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"네트워크 시간 사용"</string>
     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"네트워크 시간 사용"</string>
     <string name="zone_auto" msgid="334783869352026648">"시간대 자동설정"</string>
-    <string name="zone_auto_summaryOn" msgid="6142830927278458314">"인터넷 시간대 사용"</string>
-    <string name="zone_auto_summaryOff" msgid="2597745783162041390">"인터넷 시간대 사용"</string>
+    <string name="zone_auto_summaryOn" msgid="6142830927278458314">"네트워크 시간대 사용"</string>
+    <string name="zone_auto_summaryOff" msgid="2597745783162041390">"네트워크 시간대 사용"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"24시간 형식"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"24시간 형식 사용"</string>
     <string name="date_time_set_time_title" msgid="6296795651349047016">"시간"</string>
@@ -489,7 +489,7 @@
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint_profile" msgid="1962204059377724158">"프로필 보호 기능은 화면 잠금 없이 작동하지 않습니다.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>저장된 지문 파일이 이 프로필에서 삭제되며 지문을 이용해 프로필의 잠금을 해제하거나, 구매를 승인하거나, 앱에 로그인할 수 없게 됩니다."</string>
-    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"네, 삭제합니다."</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"삭제"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"잠금해제 패턴 변경"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"잠금해제 PIN 변경"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"잠금해제 비밀번호 변경"</string>
@@ -914,7 +914,7 @@
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"도킹할 때"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"사용 안함"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"휴대전화가 도킹 또는 절전 모드일 때 작동 방식을 조정하려면 화면 보호기를 사용 설정합니다."</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8644479926302707286">"화면 보호기를 시작할 시점"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="8644479926302707286">"화면 보호기 시작 시점"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"시작하기"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"설정"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"자동 밝기"</string>
@@ -3111,6 +3111,10 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"로그인하여 지원받기"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"로그인"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"계정에 액세스할 수 없으신가요?"</string>
+    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
+    <skip />
+    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
+    <skip />
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"직장 프로필 설정"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"연락처 검색"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"조직에서 연락처를 검색하여 발신자 및 연락처를 확인할 수 있도록 허용합니다."</string>
@@ -3136,10 +3140,30 @@
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"블루투스"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"사진 및 동영상(<xliff:g id="NUM_ITEMS">%1$d</xliff:g>개)"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$d</xliff:g>일 이상 전에 생성됨"</string>
-    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
-    <skip />
-    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
-    <skip />
+    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"다운로드(<xliff:g id="NUMITEMS">%1$d</xliff:g>개)"</string>
+    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$s</xliff:g>일 전 마지막으로 수정됨"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
 </resources>

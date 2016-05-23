@@ -3020,10 +3020,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Fona dati ir pieejami, izmantojot tikai Wi-Fi savienojumu. Tas var ietekmēt dažu lietotņu vai pakalpojumu darbību, kad Wi-Fī tīkls nav pieejams."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Darba profils ir izslēgts"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Lietotnes, sinhronizācija fonā un citas ar jūsu darba profilu saistītās funkcijas ir izslēgtas."</string>
-    <!-- no translation found for suggestions_title (7280792342273268377) -->
-    <skip />
-    <!-- no translation found for suggestions_summary (2509040178581728056) -->
-    <skip />
+    <string name="suggestions_title" msgid="7280792342273268377">"Ieteikumi"</string>
+    <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Noņemt"</string>
     <string name="color_temperature" msgid="2070126836910615605">"Vēsu krāsu temperatūra"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Izmantot vēsākas krāsas"</string>
@@ -3037,7 +3035,7 @@
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Tīkls Ethernet"</string>
     <string name="cell_data_template" msgid="3308709914705592281">"Mobilie dati: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="wifi_data_template" msgid="501654649753761778">"Wi-Fi dati: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> Wi-Fi dati"</string>
     <string name="ethernet_data_template" msgid="5775729859383597507">"Ethernet dati: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Datu brīdinājums: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Datu brīdinājums: <xliff:g id="ID_1">%1$s</xliff:g>/ datu ierobežojums: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
@@ -3132,8 +3130,7 @@
     <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, nekad iepriekš nav izmantota"</string>
     <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, nav zināms, kad pēdējoreiz izmantota"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Atbrīvojiet vietu: <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <!-- no translation found for support_escalation_title (7311759892297590244) -->
-    <skip />
+    <string name="support_escalation_title" msgid="7311759892297590244">"Atbalsts jebkurā diennakts laikā"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"Pieprasiet atbalsta zvanu vai tērzēšanas sarunu, un mēs ar jums drīzumā sazināsimies."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Jūs esat bezsaistē."</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Lai saņemtu atbalstu, vispirms izveidojiet Wi-Fi vai datu savienojumu."</string>
@@ -3146,6 +3143,10 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Pierakstieties, lai saņemtu palīdzību"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Pierakstīties"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Vai nevarat piekļūt savam kontam?"</string>
+    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
+    <skip />
+    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
+    <skip />
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Darba profila iestatījumi"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Kontaktpersonu meklēšana"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Atļaut identificēt zvanītājus un kontaktpersonas, kad organizācijā tiek meklētas kontaktpersonas"</string>
@@ -3174,10 +3175,30 @@
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Fotoattēli un videoklipi (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, vecāki par <xliff:g id="DAYS">%2$d</xliff:g> dienām"</string>
-    <!-- no translation found for deletion_helper_downloads_title (6936838436756674541) -->
-    <skip />
-    <!-- no translation found for deletion_helper_downloads_summary (778358216075112162) -->
-    <skip />
+    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Lejupielādes (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
+    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, pēdējoreiz mainīts <xliff:g id="DAYS">%2$s</xliff:g>"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
+    <skip />
+    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
+    <skip />
+    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
+    <skip />
+    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
 </resources>
