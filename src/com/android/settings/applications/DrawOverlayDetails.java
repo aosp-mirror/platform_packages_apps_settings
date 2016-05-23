@@ -88,6 +88,12 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mOverlayBridge.release();
+    }
+
+    @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference == mOverlayPrefs) {
             if (mSettingsIntent != null) {
