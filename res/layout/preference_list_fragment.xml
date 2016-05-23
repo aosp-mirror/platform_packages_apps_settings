@@ -83,6 +83,7 @@
         android:visibility="gone">
 
         <Button android:id="@+id/back_button"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="150dip"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
@@ -97,7 +98,8 @@
             android:layout_alignParentEnd="true">
 
             <Button android:id="@+id/skip_button"
-                android:layout_width="150dip"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
                 android:text="@*android:string/skip_button_label"
@@ -105,7 +107,8 @@
                 />
 
             <Button android:id="@+id/next_button"
-                android:layout_width="150dip"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
                 android:text="@*android:string/next_button_label"
