@@ -68,6 +68,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.IntConsumer;
 
 public class TrustedCredentialsSettings extends OptionsMenuFragment
         implements TrustedCredentialsDialogBuilder.DelegateInterface {
@@ -159,6 +160,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     private AliasOperation mAliasOperation;
     private ArraySet<Integer> mConfirmedCredentialUsers;
     private int mConfirmingCredentialUser;
+    private IntConsumer mConfirmingCredentialListener;
     private Set<AdapterData.AliasLoader> mAliasLoaders = new ArraySet<AdapterData.AliasLoader>(2);
     private final SparseArray<KeyChainConnection>
             mKeyChainConnectionByProfileId = new SparseArray<KeyChainConnection>();
@@ -198,6 +200,8 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 mConfirmedCredentialUsers.addAll(users);
             }
         }
+
+        mConfirmingCredentialListener = null;
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
@@ -246,10 +250,18 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CONFIRM_CREDENTIALS) {
-            if (resultCode == Activity.RESULT_OK) {
-                mConfirmedCredentialUsers.add(mConfirmingCredentialUser);
-            }
+            int userId = mConfirmingCredentialUser;
+            IntConsumer listener = mConfirmingCredentialListener;
+            // reset them before calling the listener because the listener may call back to start
+            // activity again. (though it should never happen.)
             mConfirmingCredentialUser = UserHandle.USER_NULL;
+            mConfirmingCredentialListener = null;
+            if (resultCode == Activity.RESULT_OK) {
+                mConfirmedCredentialUsers.add(userId);
+                if (listener != null) {
+                    listener.accept(userId);
+                }
+            }
         }
     }
 
@@ -942,12 +954,18 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     }
 
     @Override
-    public boolean startConfirmCredentialIfNotConfirmed(int userId) {
+    public boolean startConfirmCredentialIfNotConfirmed(int userId,
+            IntConsumer onCredentialConfirmedListener) {
         if (mConfirmedCredentialUsers.contains(userId)) {
             // Credential has been confirmed. Don't start activity.
             return false;
         }
-        return startConfirmCredential(userId);
+
+        boolean result = startConfirmCredential(userId);
+        if (result) {
+            mConfirmingCredentialListener = onCredentialConfirmedListener;
+        }
+        return result;
     }
 
     private class AliasOperation extends AsyncTask<Void, Void, Boolean> {
