@@ -18,20 +18,12 @@ package com.android.settings.fingerprint;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.text.Annotation;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.TextPaint;
-import android.text.style.URLSpan;
 import android.util.Log;
-import android.view.View;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockGeneric;
@@ -42,12 +34,15 @@ import com.android.setupwizardlib.GlifRecyclerLayout;
 import com.android.setupwizardlib.items.IItem;
 import com.android.setupwizardlib.items.Item;
 import com.android.setupwizardlib.items.RecyclerItemAdapter;
+import com.android.setupwizardlib.span.LinkSpan;
 
 /**
  * Onboarding activity for fingerprint enrollment.
  */
 public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
-        implements RecyclerItemAdapter.OnItemSelectedListener {
+        implements RecyclerItemAdapter.OnItemSelectedListener, LinkSpan.OnClickListener {
+
+    private static final String TAG = "FingerprintIntro";
 
     protected static final int CHOOSE_LOCK_GENERIC_REQUEST = 1;
     protected static final int FINGERPRINT_FIND_SENSOR_REQUEST = 2;
@@ -66,13 +61,7 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
         final RecyclerItemAdapter adapter = (RecyclerItemAdapter) layout.getAdapter();
         adapter.setOnItemSelectedListener(this);
         Item item = (Item) adapter.findItemById(R.id.fingerprint_introduction_message);
-        item.setTitle(LearnMoreSpan.linkify(
-                getText(R.string.security_settings_fingerprint_enroll_introduction_message),
-                getString(R.string.help_url_fingerprint)));
-        // setupwizard library automatically sets the divider inset to
-        // R.dimen.suw_items_icon_divider_inset. We adjust this back to 0 as we do not want
-        // an inset within settings.
-        layout.setDividerInset(0);
+        item.setTitle(getText(R.string.security_settings_fingerprint_enroll_introduction_message));
         updatePasswordQuality();
     }
 
@@ -145,6 +134,8 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
                 launchFindSensor(token);
                 return;
             }
+        } else if (requestCode == LEARN_MORE_REQUEST) {
+            overridePendingTransition(R.anim.suw_slide_back_in, R.anim.suw_slide_back_out);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -170,51 +161,22 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
         finish();
     }
 
-    private static class LearnMoreSpan extends URLSpan {
-        private static final String TAG = "LearnMoreSpan";
-        private static final Typeface TYPEFACE_MEDIUM =
-                Typeface.create("sans-serif-medium", Typeface.NORMAL);
-
-        private LearnMoreSpan(String url) {
-            super(url);
-        }
-
-        @Override
-        public void onClick(View widget) {
-            Context ctx = widget.getContext();
-            Intent intent = HelpUtils.getHelpIntent(ctx, getURL(), ctx.getClass().getName());
+    @Override
+    public void onClick(LinkSpan span) {
+        if ("url".equals(span.getId())) {
+            String url = getString(R.string.help_url_fingerprint);
+            Intent intent = HelpUtils.getHelpIntent(this, url, getClass().getName());
             if (intent == null) {
-                Log.w(LearnMoreSpan.TAG, "Null help intent.");
+                Log.w(TAG, "Null help intent.");
                 return;
             }
             try {
                 // This needs to be startActivityForResult even though we do not care about the
                 // actual result because the help app needs to know about who invoked it.
-                widget.startActivityForResult(intent, LEARN_MORE_REQUEST);
+                startActivityForResult(intent, LEARN_MORE_REQUEST);
             } catch (ActivityNotFoundException e) {
-                Log.w(LearnMoreSpan.TAG,
-                        "Actvity was not found for intent, " + intent.toString());
+                Log.w(TAG, "Activity was not found for intent, " + e);
             }
-        }
-
-        @Override
-        public void updateDrawState(TextPaint ds) {
-            super.updateDrawState(ds);
-            ds.setUnderlineText(false);
-            ds.setTypeface(TYPEFACE_MEDIUM);
-        }
-
-        public static CharSequence linkify(CharSequence rawText, String uri) {
-            SpannableString msg = new SpannableString(rawText);
-            Annotation[] spans = msg.getSpans(0, msg.length(), Annotation.class);
-            SpannableStringBuilder builder = new SpannableStringBuilder(msg);
-            for (Annotation annotation : spans) {
-                int start = msg.getSpanStart(annotation);
-                int end = msg.getSpanEnd(annotation);
-                LearnMoreSpan link = new LearnMoreSpan(uri);
-                builder.setSpan(link, start, end, msg.getSpanFlags(link));
-            }
-            return builder;
         }
     }
 }
