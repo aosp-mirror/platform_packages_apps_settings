@@ -239,7 +239,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mBugreportInPower;
     private RestrictedSwitchPreference mKeepScreenOn;
     private SwitchPreference mBtHciSnoopLog;
-    private SwitchPreference mEnableOemUnlock;
+    private RestrictedSwitchPreference mEnableOemUnlock;
     private SwitchPreference mDebugViewAttributes;
     private SwitchPreference mForceAllowOnExternal;
 
@@ -372,7 +372,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBugreportInPower = findAndInitSwitchPref(BUGREPORT_IN_POWER_KEY);
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
-        mEnableOemUnlock = findAndInitSwitchPref(ENABLE_OEM_UNLOCK);
+        mEnableOemUnlock = (RestrictedSwitchPreference) findAndInitSwitchPref(ENABLE_OEM_UNLOCK);
         if (!showEnableOemUnlockPreference()) {
             removePreference(mEnableOemUnlock);
             mEnableOemUnlock = null;
@@ -1021,7 +1021,21 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void updateOemUnlockOptions() {
         if (mEnableOemUnlock != null) {
+            // Showing mEnableOemUnlock preference as device has persistent data block.
+            mEnableOemUnlock.setDisabledByAdmin(null);
             mEnableOemUnlock.setEnabled(enableOemUnlockPreference());
+            if (mEnableOemUnlock.isEnabled()) {
+                // mEnableOemUnlock is enabled as device's flash lock is unlocked.
+                if (RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+                        UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId())) {
+                    // Set mEnableOemUnlock to disabled as restriction is set, but not by admin.
+                    mEnableOemUnlock.setEnabled(false);
+                } else {
+                    // Check restriction, disable mEnableOemUnlock and apply policy transparency.
+                    mEnableOemUnlock
+                            .checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
+                }
+            }
         }
     }
 
