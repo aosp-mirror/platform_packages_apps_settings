@@ -96,7 +96,7 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="PreferenceTheme" parent="@android:style/Theme.DeviceDefault.Settings">
+    <style name="PreferenceTheme" parent="Theme.SettingsBase">
         <item name="@android:preferenceStyle">@style/Preference</item>
         <item name="@android:editTextPreferenceStyle">@style/EditTextPreference</item>
         <item name="@dropdownPreferenceStyle">@style/Preference.DropDown.Material</item>
@@ -132,7 +132,11 @@
          layouts against a remote context using our local theme colors. Due to the implementation
          details of Theme, we can't reference any local resources and MUST instead use the values
          directly. So use #ff263238 instead of @color/theme_primary and so on. -->
-    <style name="Theme.SettingsBase" parent="@android:style/Theme.Material.Settings" />
+    <style name="Theme.SettingsBase" parent="@android:style/Theme.Material.Settings">
+        <item name="android:colorPrimary">@color/primary_color</item>
+        <item name="android:colorAccent">@color/accent_color</item>
+        <item name="colorSecondary">@color/secondary_color</item>
+    </style>
 
     <style name="Theme.Settings" parent="Theme.SettingsBase">
         <item name="preferenceTheme">@style/PreferenceTheme</item>
@@ -196,15 +200,16 @@
     </style>
 
     <style name="ThemeOverlay.SwitchBar.Settings" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
+        <item name="android:colorAccent">@color/accent_color_lighter</item>
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
-        <item name="switchBarBackgroundColor">@color/switchbar_background_color</item>
+        <item name="switchBarBackgroundColor">?attr/colorSecondary</item>
     </style>
 
     <style name="ThemeOverlay.SwitchBar.SubSettings" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
-        <item name="switchBarBackgroundColor">@color/switchbar_background_color</item>
+        <item name="switchBarBackgroundColor">?attr/colorSecondary</item>
     </style>
 
     <style name="Theme.DialogWhenLarge" parent="@*android:style/Theme.Material.Settings.DialogWhenLarge">
@@ -253,21 +258,14 @@
         <item name="preferenceBackgroundColor">@android:color/transparent</item>
     </style>
 
-    <!-- Used to color the switch bar controls -->
-    <style name="ThemeOverlay.SwitchBar" parent="@android:style/ThemeOverlay">
-        <!-- Used by controls, e.g. CheckBox, ProgressBar, etc. -->
-        <item name="android:colorAccent">@color/switch_accent_color</item>
-        <item name="switchBarBackgroundColor">@color/switchbar_background_color</item>
-    </style>
-
     <style name="Theme.ConfirmDeviceCredentials" parent="Theme.SubSettings">
         <item name="confirmDeviceCredentialsSideMargin">16dp</item>
         <item name="confirmDeviceCredentialsTopMargin">16dp</item>
     </style>
 
     <style name="Theme.ConfirmDeviceCredentialsDark" parent="@android:style/Theme.Material">
-        <item name="android:colorPrimary">@*android:color/material_blue_grey_900</item>
-        <item name="android:colorPrimaryDark">@*android:color/material_blue_grey_950</item>
+        <item name="android:colorPrimary">@color/primary_color</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark_color</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/confirm_device_credential_dark_background</item>
