@@ -45,6 +45,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -203,6 +204,11 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
             KeyStore keyStore = KeyStore.getInstance();
             for (final Credential.Type type : Credential.Type.values()) {
                 for (final String alias : keyStore.list(type.prefix)) {
+                    // Do not show work profile keys in user credentials
+                    if (alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_ENCRYPT) ||
+                            alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_DECRYPT)) {
+                        continue;
+                    }
                     Credential c = credentials.get(alias);
                     if (c == null) {
                         credentials.put(alias, (c = new Credential(alias)));
