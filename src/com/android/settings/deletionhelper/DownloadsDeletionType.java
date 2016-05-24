@@ -22,26 +22,30 @@ import android.content.Loader;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.ArrayMap;
+import android.util.ArraySet;
 import com.android.settings.deletionhelper.FetchDownloadsLoader.DownloadsResult;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * The DownloadsDeletionType provides stale download file information to the
- * {@link DownloadsDeletionPreference}.
+ * {@link DownloadsDeletionPreferenceGroup}.
  */
 public class DownloadsDeletionType implements DeletionType, LoaderCallbacks<DownloadsResult> {
-    private int mItems;
     private long mBytes;
     private long mMostRecent;
     private FreeableChangedListener mListener;
-    private FetchDownloadsLoader mTask;
-    private ArrayList<File> mFiles;
     private Context mContext;
+    private ArrayMap<File, Boolean> mFiles;
 
     public DownloadsDeletionType(Context context) {
         mContext = context;
+        mFiles = new ArrayMap<>();
     }
 
     @Override
@@ -66,8 +70,10 @@ public class DownloadsDeletionType implements DeletionType, LoaderCallbacks<Down
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    for (File file : mFiles) {
-                        file.delete();
+                    for (Map.Entry<File, Boolean> entry : mFiles.entrySet()) {
+                        if (entry.getValue()) {
+                            entry.getKey().delete();
+                        }
                     }
                 }
             });
@@ -83,9 +89,13 @@ public class DownloadsDeletionType implements DeletionType, LoaderCallbacks<Down
     @Override
     public void onLoadFinished(Loader<DownloadsResult> loader, DownloadsResult data) {
         mMostRecent = data.youngestLastModified;
-        mFiles = data.files;
+        for (File file : data.files) {
+            if (mFiles.containsKey(file)) {
+                continue;
+            }
+            mFiles.put(file, false);
+        }
         mBytes = data.totalSize;
-        mItems = mFiles.size();
         maybeUpdateListener();
     }
 
@@ -101,9 +111,39 @@ public class DownloadsDeletionType implements DeletionType, LoaderCallbacks<Down
         return mMostRecent;
     }
 
+    /**
+     * Returns the files in the Downloads folder after the loader task finishes.
+     */
+    public Set<File> getFiles() {
+        if (mFiles == null) {
+            return null;
+        }
+        return mFiles.keySet();
+    }
+
+    /**
+     * Toggle if a file should be deleted when the service is asked to clear files.
+     */
+    public void toggleFile(File file, boolean checked) {
+        mFiles.put(file, checked);
+    }
+
+    /**
+     * Returns the number of bytes that would be cleared if the deletion tasks runs.
+     */
+    public long getFreeableBytes() {
+        long freedBytes = 0;
+        for (Map.Entry<File, Boolean> entry : mFiles.entrySet()) {
+            if (entry.getValue()) {
+                freedBytes += entry.getKey().length();
+            }
+        }
+        return freedBytes;
+    }
+
     private void maybeUpdateListener() {
         if (mListener != null) {
-            mListener.onFreeableChanged(mItems, mBytes);
+            mListener.onFreeableChanged(mFiles.size(), mBytes);
         }
     }
 }

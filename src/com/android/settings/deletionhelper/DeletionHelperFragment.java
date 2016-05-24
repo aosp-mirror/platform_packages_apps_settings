@@ -25,10 +25,7 @@ import android.text.format.Formatter;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import com.android.settings.deletionhelper.DownloadsDeletionPreference;
 import com.android.settings.CollapsibleCheckboxPreferenceGroup;
 import com.android.settings.PhotosDeletionPreference;
 import com.android.settings.SettingsPreferenceFragment;
@@ -70,7 +67,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
     private Button mCancel, mFree;
     private CollapsibleCheckboxPreferenceGroup mApps;
     private PhotosDeletionPreference mPhotoPreference;
-    private DownloadsDeletionPreference mDownloadsPreference;
+    private DownloadsDeletionPreferenceGroup mDownloadsPreference;
 
     private ApplicationsState mState;
     private Session mSession;
@@ -96,7 +93,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         mApps = (CollapsibleCheckboxPreferenceGroup) findPreference(KEY_APPS_GROUP);
         mPhotoPreference = (PhotosDeletionPreference) findPreference(KEY_PHOTOS_VIDEOS_PREFERENCE);
         mDownloadsPreference =
-                (DownloadsDeletionPreference) findPreference(KEY_DOWNLOADS_PREFERENCE);
+                (DownloadsDeletionPreferenceGroup) findPreference(KEY_DOWNLOADS_PREFERENCE);
         mProvider =
                 FeatureFactory.getFactory(app).getDeletionHelperFeatureProvider();
         if (mProvider != null) {
@@ -155,13 +152,11 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         super.onResume();
         mSession.resume();
         mDataUsageBridge.resume();
+        mDownloadsDeletion.onResume();
+        getLoaderManager().initLoader(DOWNLOADS_LOADER_ID, new Bundle(), mDownloadsDeletion);
 
         if (mPhotoVideoDeletion != null) {
             mPhotoVideoDeletion.onResume();
-        }
-        if (mDownloadsDeletion != null) {
-            mDownloadsDeletion.onResume();
-            getLoaderManager().initLoader(DOWNLOADS_LOADER_ID, new Bundle(), mDownloadsDeletion);
         }
     }
 
@@ -180,12 +175,10 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         super.onPause();
         mDataUsageBridge.pause();
         mSession.pause();
+        mDownloadsDeletion.onPause();
 
         if (mPhotoVideoDeletion != null) {
             mPhotoVideoDeletion.onPause();
-        }
-        if (mDownloadsDeletion != null) {
-            mDownloadsDeletion.onPause();
         }
     }
 
@@ -316,6 +309,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         if (mPhotoPreference != null && mPhotoPreference.isChecked()) {
             mPhotoVideoDeletion.clearFreeableData();
         }
+        mDownloadsDeletion.clearFreeableData();
 
         ArraySet<String> apps = new ArraySet<>();
         for (AppEntry entry : mAppEntries) {
@@ -351,9 +345,7 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
         if (mPhotoPreference != null) {
             freeableSpace += mPhotoPreference.getFreeableBytes();
         }
-        if (mDownloadsPreference != null) {
-            freeableSpace += mDownloadsPreference.getFreeableBytes();
-        }
+        freeableSpace += mDownloadsDeletion.getFreeableBytes();
         return freeableSpace;
     }
 
