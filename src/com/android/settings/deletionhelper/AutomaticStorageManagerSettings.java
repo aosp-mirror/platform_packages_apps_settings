@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -38,11 +39,14 @@ import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
  * automatic storage manager.
  */
 public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment implements
-        OnSwitchChangeListener, OnPreferenceChangeListener {
+        OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
     private static final String KEY_DAYS = "days";
+    private static final String KEY_DELETION_HELPER = "deletion_helper";
+    private static final String KEY_STORAGE_MANAGER_SWITCH = "storage_manager_active";
 
-    private SwitchBar mSwitchBar;
     private DropDownPreference mDaysToRetain;
+    private Preference mDeletionHelper;
+    private SwitchPreference mStorageManagerSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,33 +57,34 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Activity activity = getActivity();
-        mSwitchBar = ((SettingsActivity) activity).getSwitchBar();
-        mSwitchBar.show();
-        mSwitchBar.addOnSwitchChangeListener(this);
-        // TODO: Initialize the switch bar position based on if the storage manager is active.
-
         mDaysToRetain = (DropDownPreference) findPreference(KEY_DAYS);
         mDaysToRetain.setOnPreferenceChangeListener(this);
+
+        mDeletionHelper = findPreference(KEY_DELETION_HELPER);
+        mDeletionHelper.setOnPreferenceClickListener(this);
+
+        mStorageManagerSwitch = (SwitchPreference) findPreference(KEY_STORAGE_MANAGER_SWITCH);
+        mStorageManagerSwitch.setOnPreferenceChangeListener(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        // TODO: Initialize the switch bar position based on if the storage manager is active.
-        maybeShowDayDropdown(mSwitchBar.isChecked());
-    }
-
-    @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        // TODO: Flip a setting which controls if the storage manager should run.
-        maybeShowDayDropdown(isChecked);
+        mDaysToRetain.setEnabled(mStorageManagerSwitch.isChecked());
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        // TODO: Configure a setting which controls how many days of data the storage manager
-        // should retain.
+        switch (preference.getKey()) {
+            case KEY_STORAGE_MANAGER_SWITCH:
+                boolean checked = (boolean) newValue;
+                mDaysToRetain.setEnabled(checked);
+                break;
+            case KEY_DAYS:
+                // TODO: Configure a setting which controls how many days of data the storage manager
+                // should retain.
+                break;
+        }
         return true;
     }
 
@@ -88,12 +93,12 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         return MetricsEvent.STORAGE_MANAGER_SETTINGS;
     }
 
-    private void maybeShowDayDropdown(boolean shouldShow) {
-        PreferenceScreen screen = getPreferenceScreen();
-        if (shouldShow) {
-            screen.addPreference(mDaysToRetain);
-        } else {
-            screen.removePreference(mDaysToRetain);
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (KEY_DELETION_HELPER.equals(preference.getKey())) {
+            startFragment(this, DeletionHelperFragment.class.getCanonicalName(),
+                    R.string.deletion_helper_title, 0, null);
         }
+        return true;
     }
 }
