@@ -22,6 +22,7 @@ import android.text.format.Formatter;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
+import com.android.settings.deletionhelper.AppStateUsageStatsBridge.UsageStatsState;
 import com.android.settings.R;
 
 import com.android.settingslib.applications.ApplicationsState;
@@ -72,18 +73,18 @@ public class AppDeletionPreference extends SwitchPreference {
             return;
         }
 
-        long daysSinceLastUse = (long) mEntry.extraInfo;
+        UsageStatsState extraData = (UsageStatsState) mEntry.extraInfo;
         String fileSize = Formatter.formatFileSize(mContext, mEntry.size);
-        if (daysSinceLastUse == AppStateUsageStatsBridge.NEVER_USED) {
+        if (extraData.daysSinceLastUse == AppStateUsageStatsBridge.NEVER_USED) {
             summary.setText(mContext.getString(R.string.deletion_helper_app_summary_never_used,
                     fileSize));
-        } else if (daysSinceLastUse == AppStateUsageStatsBridge.UNKNOWN_LAST_USE) {
+        } else if (extraData.daysSinceLastUse == AppStateUsageStatsBridge.UNKNOWN_LAST_USE) {
             summary.setText(mContext.getString(R.string.deletion_helper_app_summary_unknown_used,
                     fileSize));
         } else {
             summary.setText(mContext.getString(R.string.deletion_helper_app_summary,
                     fileSize,
-                    daysSinceLastUse));
+                    extraData.daysSinceLastUse));
         }
     }
 
