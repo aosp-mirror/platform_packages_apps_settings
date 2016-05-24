@@ -38,12 +38,14 @@ import com.android.settings.TrustedCredentialsSettings.CertHolder;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntConsumer;
 
 class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
     public interface DelegateInterface {
         List<X509Certificate> getX509CertsFromCertHolder(CertHolder certHolder);
         void removeOrInstallCert(CertHolder certHolder);
-        boolean startConfirmCredentialIfNotConfirmed(int userId);
+        boolean startConfirmCredentialIfNotConfirmed(int userId,
+                IntConsumer onCredentialConfirmedListener);
     }
 
     private final DialogEventHandler mDialogEventHandler;
@@ -145,7 +147,8 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
 
         private void onClickTrust() {
             CertHolder certHolder = getCurrentCertInfo();
-            if (!mDelegate.startConfirmCredentialIfNotConfirmed(certHolder.getUserId())) {
+            if (!mDelegate.startConfirmCredentialIfNotConfirmed(certHolder.getUserId(),
+                    this::onCredentialConfirmed)) {
                 mDpm.approveCaCert(certHolder.getAlias(), certHolder.getUserId(), true);
                 nextOrDismiss();
             }
@@ -166,6 +169,14 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
                             })
                     .setNegativeButton(android.R.string.no, null)
                     .show();
+        }
+
+        private void onCredentialConfirmed(int userId) {
+            if (mDialog.isShowing() && mNeedsApproval && getCurrentCertInfo() != null
+                    && getCurrentCertInfo().getUserId() == userId) {
+                // Treat it as user just clicks "trust" for this cert
+                onClickTrust();
+            }
         }
 
         private CertHolder getCurrentCertInfo() {
