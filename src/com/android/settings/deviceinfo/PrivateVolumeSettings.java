@@ -170,7 +170,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         mCurrentUser = mUserManager.getUserInfo(UserHandle.myUserId());
 
         mExplore = buildAction(R.string.storage_menu_explore);
-        mAutomaticStorageManagement = buildAction(R.string.storage_settings);
+        mAutomaticStorageManagement = buildAction(R.string.storage_menu_manage);
 
         mNeedsUpdate = true;
 
@@ -485,7 +485,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             case R.string.storage_menu_explore: {
                 intent = mSharedVolume.buildBrowseIntent();
             } break;
-            case R.string.storage_settings: {
+            case R.string.storage_menu_manage: {
                 startFragment(this, AutomaticStorageManagerSettings.class.getCanonicalName(),
                         R.string.automatic_storage_manager_settings, 0, null);
                 return true;
