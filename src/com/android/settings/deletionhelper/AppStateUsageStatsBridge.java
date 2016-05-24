@@ -137,7 +137,10 @@ public class AppStateUsageStatsBridge extends AppStateBaseBridge {
         }
     };
 
-    private class UsageStatsState {
+    /**
+     * UsageStatsState contains the days since the last use and first install of a given app.
+     */
+    public static class UsageStatsState {
         public long daysSinceLastUse;
         public long daysSinceFirstInstall;
 
