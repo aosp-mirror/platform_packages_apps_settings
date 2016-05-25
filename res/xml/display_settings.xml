@@ -45,8 +45,11 @@
                 android:key="wallpaper"
                 android:title="@string/wallpaper_settings_title"
                 settings:keywords="@string/keywords_display_wallpaper"
-                android:fragment="com.android.settings.WallpaperTypeSettings"
-                settings:useAdminDisabledSummary="true" />
+                settings:useAdminDisabledSummary="true" >
+                <intent
+                        android:targetPackage="@string/config_wallpaper_picker_package"
+                        android:targetClass="@string/config_wallpaper_picker_class" />
+        </com.android.settingslib.RestrictedPreference>
 
         <com.android.settings.TimeoutListPreference
                 android:key="screen_timeout"
