@@ -38,6 +38,7 @@ import android.print.PrintManager;
 import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 import android.provider.UserDictionary;
+import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -53,6 +54,7 @@ import java.util.List;
 public final class DynamicIndexableContentMonitor extends PackageMonitor implements
         InputManager.InputDeviceListener,
         LoaderManager.LoaderCallbacks<List<PrintServiceInfo>> {
+    private static final String TAG = "DynamicIndexableContentMonitor";
 
     private static final long DELAY_PROCESS_PACKAGE_CHANGE = 2000;
 
@@ -183,13 +185,17 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
     @Override
     public void onPackageModified(String packageName) {
         super.onPackageModified(packageName);
-        final int state = mContext.getPackageManager().getApplicationEnabledSetting(
-                packageName);
-        if (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
-                || state ==  PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
-            postMessage(MSG_PACKAGE_AVAILABLE, packageName);
-        } else {
-            postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
+        try {
+            final int state = mContext.getPackageManager().getApplicationEnabledSetting(
+                    packageName);
+            if (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
+                    || state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+                postMessage(MSG_PACKAGE_AVAILABLE, packageName);
+            } else {
+                postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
+            }
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Package does not exist: " + packageName, e);
         }
     }
 
