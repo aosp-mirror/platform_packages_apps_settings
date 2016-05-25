@@ -350,7 +350,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     private Preference newManagedProfileSettings() {
         Preference preference = new Preference(getPrefContext());
         preference.setTitle(R.string.managed_profile_settings_title);
-        preference.setIcon(R.drawable.ic_sysbar_quicksettings);
+        preference.setIcon(R.drawable.ic_settings);
         preference.setOnPreferenceClickListener(this);
         preference.setOrder(ORDER_NEXT_TO_LAST);
         return preference;
