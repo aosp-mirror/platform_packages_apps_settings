@@ -44,6 +44,7 @@ import java.util.Set;
 public class DefaultEmergencyPreference extends AppListPreference
         implements SelfAvailablePreference {
 
+    private static final boolean DEFAULT_EMERGENCY_APP_IS_CONFIGURABLE = false;
     private final ContentResolver mContentResolver;
 
     public static final Intent QUERY_INTENT = new Intent(
@@ -143,7 +144,8 @@ public class DefaultEmergencyPreference extends AppListPreference
     }
 
     public boolean isAvailable(Context context) {
-        return isCapable(context)
+        return DEFAULT_EMERGENCY_APP_IS_CONFIGURABLE
+                && isCapable(context)
                 && context.getPackageManager().resolveActivity(QUERY_INTENT, 0) != null;
     }
 
