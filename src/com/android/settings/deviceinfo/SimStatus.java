@@ -362,7 +362,7 @@ public class SimStatus extends InstrumentedPreferenceActivity {
                 mShowLatestAreaInfo = true;
             }
         }
-        PersistableBundle carrierConfig = mCarrierConfigManager.getConfig(
+        PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(
                 mSir.getSubscriptionId());
         mShowICCID = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL);
