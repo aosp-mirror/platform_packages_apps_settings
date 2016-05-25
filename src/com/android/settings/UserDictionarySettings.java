@@ -160,7 +160,7 @@ public class UserDictionarySettings extends ListFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem actionItem =
                 menu.add(0, OPTIONS_MENU_ADD, 0, R.string.user_dict_settings_add_menu_title)
-                .setIcon(R.drawable.ic_menu_add_dark);
+                .setIcon(R.drawable.ic_menu_add_white);
         actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
