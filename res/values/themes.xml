@@ -269,10 +269,10 @@
 
     <style name="Theme.ConfirmDeviceCredentialsDark" parent="@android:style/Theme.Material">
         <item name="android:colorPrimary">@color/primary_color</item>
-        <item name="android:colorPrimaryDark">@color/primary_dark_color</item>
+        <item name="android:colorAccent">@color/accent_color_lighter</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/confirm_device_credential_dark_background</item>
+        <item name="android:windowBackground">?android:attr/colorPrimary</item>
 
         <item name="confirmDeviceCredentialsSideMargin">32dp</item>
         <item name="confirmDeviceCredentialsTopMargin">32dp</item>
