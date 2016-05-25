@@ -394,7 +394,8 @@ public class DeletionHelperFragment extends SettingsPreferenceFragment implement
                     mAppEntries.size()));
             mApps.setSummary(app.getString(R.string.deletion_helper_apps_group_summary,
                     Formatter.formatFileSize(app,
-                            getTotalAppsFreeableSpace(true))));
+                            getTotalAppsFreeableSpace(true)),
+                    AppStateUsageStatsBridge.UNUSED_DAYS_DELETION_THRESHOLD));
         }
     }
 
