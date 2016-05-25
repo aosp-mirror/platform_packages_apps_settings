@@ -176,6 +176,7 @@ public class ConfigDialogFragment extends DialogFragment implements
         try {
             LegacyVpnInfo connected = mService.getLegacyVpnInfo(UserHandle.myUserId());
             if (connected != null && profile.key.equals(connected.key)) {
+                VpnUtils.clearLockdownVpn(getContext());
                 mService.prepareVpn(VpnConfig.LEGACY_VPN, VpnConfig.LEGACY_VPN,
                         UserHandle.myUserId());
             }
