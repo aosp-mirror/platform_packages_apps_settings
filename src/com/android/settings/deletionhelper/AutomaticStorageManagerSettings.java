@@ -18,6 +18,7 @@ package com.android.settings.deletionhelper;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
@@ -64,6 +65,10 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         mDeletionHelper.setOnPreferenceClickListener(this);
 
         mStorageManagerSwitch = (SwitchPreference) findPreference(KEY_STORAGE_MANAGER_SWITCH);
+        boolean isChecked =
+                Settings.Secure.getInt(getContentResolver(),
+                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
+        mStorageManagerSwitch.setChecked(isChecked);
         mStorageManagerSwitch.setOnPreferenceChangeListener(this);
     }
 
@@ -79,6 +84,8 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
             case KEY_STORAGE_MANAGER_SWITCH:
                 boolean checked = (boolean) newValue;
                 mDaysToRetain.setEnabled(checked);
+                Settings.Secure.putInt(getContentResolver(),
+                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, checked ? 1 : 0);
                 break;
             case KEY_DAYS:
                 // TODO: Configure a setting which controls how many days of data the storage manager
