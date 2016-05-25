@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import android.content.res.Resources;
+import android.util.TypedValue;
 import com.android.settings.R;
 import com.android.settings.SeekBarPreference;
 
@@ -52,8 +54,10 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         setLayoutResource(R.layout.preference_importance_slider);
-        mActiveSliderTint = ColorStateList.valueOf(
-                context.getColor(R.color.importance_slider_color));
+        Resources.Theme theme = context.getTheme();
+        TypedValue typedValue = new TypedValue();
+        theme.resolveAttribute(android.R.attr.colorAccent, typedValue, true);
+        mActiveSliderTint = ColorStateList.valueOf(context.getColor(typedValue.resourceId));
         mInactiveSliderTint = ColorStateList.valueOf(
                 context.getColor(R.color.importance_disabled_slider_color));
         mHandler = new Handler();
