@@ -183,6 +183,16 @@ public class TetherSettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onDestroy() {
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        BluetoothProfile profile = mBluetoothPan.getAndSet(null);
+        if (profile != null && adapter != null) {
+            adapter.closeProfileProxy(BluetoothProfile.PAN, profile);
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putInt(TETHER_CHOICE, mTetherChoice);
         super.onSaveInstanceState(savedInstanceState);
