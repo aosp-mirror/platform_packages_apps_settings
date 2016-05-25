@@ -410,12 +410,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
-        // Override the fragment title for Wallpaper settings
-        CharSequence title = pref.getTitle();
-        if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
-            title = getString(R.string.wallpaper_settings_fragment_title);
-        }
-        startPreferencePanel(pref.getFragment(), pref.getExtras(), -1, title,
+        startPreferencePanel(pref.getFragment(), pref.getExtras(), -1, pref.getTitle(),
                 null, 0);
         return true;
     }
