@@ -56,6 +56,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     private final static String KEY_CARRIER_ENABLED = "carrier_enabled";
     private final static String KEY_BEARER_MULTI = "bearer_multi";
     private final static String KEY_MVNO_TYPE = "mvno_type";
+    private final static String KEY_PASSWORD = "apn_password";
 
     private static final int MENU_DELETE = Menu.FIRST;
     private static final int MENU_SAVE = Menu.FIRST + 1;
@@ -164,30 +165,19 @@ public class ApnEditor extends InstrumentedPreferenceActivity
         mPort = (EditTextPreference) findPreference("apn_http_port");
         mUser = (EditTextPreference) findPreference("apn_user");
         mServer = (EditTextPreference) findPreference("apn_server");
-        mPassword = (EditTextPreference) findPreference("apn_password");
+        mPassword = (EditTextPreference) findPreference(KEY_PASSWORD);
         mMmsProxy = (EditTextPreference) findPreference("apn_mms_proxy");
         mMmsPort = (EditTextPreference) findPreference("apn_mms_port");
         mMmsc = (EditTextPreference) findPreference("apn_mmsc");
         mMcc = (EditTextPreference) findPreference("apn_mcc");
         mMnc = (EditTextPreference) findPreference("apn_mnc");
         mApnType = (EditTextPreference) findPreference("apn_type");
-
         mAuthType = (ListPreference) findPreference(KEY_AUTH_TYPE);
-        mAuthType.setOnPreferenceChangeListener(this);
-
         mProtocol = (ListPreference) findPreference(KEY_PROTOCOL);
-        mProtocol.setOnPreferenceChangeListener(this);
-
         mRoamingProtocol = (ListPreference) findPreference(KEY_ROAMING_PROTOCOL);
-        mRoamingProtocol.setOnPreferenceChangeListener(this);
-
         mCarrierEnabled = (SwitchPreference) findPreference(KEY_CARRIER_ENABLED);
-
         mBearerMulti = (MultiSelectListPreference) findPreference(KEY_BEARER_MULTI);
-        mBearerMulti.setOnPreferenceChangeListener(this);
-
         mMvnoType = (ListPreference) findPreference(KEY_MVNO_TYPE);
-        mMvnoType.setOnPreferenceChangeListener(this);
         mMvnoMatchData = (EditTextPreference) findPreference("mvno_match_data");
 
         mRes = getResources();
@@ -385,8 +375,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             mAuthType.setSummary(sNotSet);
         }
 
-        mProtocol.setSummary(
-                checkNull(protocolDescription(mProtocol.getValue(), mProtocol)));
+        mProtocol.setSummary(checkNull(protocolDescription(mProtocol.getValue(), mProtocol)));
         mRoamingProtocol.setSummary(
                 checkNull(protocolDescription(mRoamingProtocol.getValue(), mRoamingProtocol)));
         mBearerMulti.setSummary(
@@ -528,10 +517,9 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             }
             mMvnoType.setValue((String) newValue);
             mMvnoType.setSummary(mvno);
-        }
-        if (preference.equals(mPassword)) {
-            preference.setSummary(starify(newValue != null ? String.valueOf(newValue) : ""));
-        } else if (preference.equals(mCarrierEnabled) || preference.equals(mBearerMulti)) {
+        } else if (KEY_PASSWORD.equals(key)) {
+            mPassword.setSummary(starify(newValue != null ? String.valueOf(newValue) : ""));
+        } else if (KEY_CARRIER_ENABLED.equals(key)) {
             // do nothing
         } else {
             preference.setSummary(checkNull(newValue != null ? String.valueOf(newValue) : null));
