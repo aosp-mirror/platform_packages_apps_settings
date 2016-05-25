@@ -334,7 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"လက်ဗွေရာသုံး၍ ဖွင့်ပါ"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"သင့်ဖုန်းကိုလော့ခ်ဖွင့်ရန်၊ ဝယ်ယူမှုများကို အတည်ပြုရန်၊ သို့မဟုတ် အက်ပ်မျာသို့ လက်မှတ်ထိုးဝင်ရောက်ရန် လက်ဗွေဖတ်ကိရိယာကိုသာ ထိလိုက်ပါ။ သင်သည် မည်သူ၏လက်ဗွေများအား ထည့်သွင်းမည်ဖြစ်ကြောင်းကို သတိပြုပါ။ တစ်ခုထည့်လိုက်သည်နှင့် ထိုအရာများအားလုံးကို လုပ်ဆောင်နိုင်မည်ဖြစ်သည်။\n\nမှတ်ချက်− သင့်လက်ဗွေသည် ခိုင်မာသည့်ပုံစံ သို့မဟုတ် ပင်နံပါတ် တစ်ခုထက် လုံခြုံမှု ပိုနည်းနိုင်သည်။ "<annotation id="url">"ပိုမိုလေ့လာရန်"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန်၊ ဝယ်ယူမှုများကို အတည်ပြုရန် သို့မဟုတ် အက်ပ်များသို့ လက်မှတ်ထိုးဝင်ရန် လက်ဗွေအာရုံခံစနစ်ကိုသာ ထိလိုက်ပါ။ သင်သည် မည်သူ၏လက်ဗွေများအား ထည့်သွင်းမည်ကို သတိပြုပါ။ \n\nမှတ်ချက် − သင့်လက်ဗွေသည် ခိုင်မာသည့် ပုံစံ သို့မဟုတ် ပင်နံပါတ် တစ်ခုထက် လုံခြုံမှု ပိုအားနည်းနိုင်ပါသည်။"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"ဖျက်သိမ်းရန်"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"ဆက်လုပ်ရန်"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"ကျော်ပါ"</string>
@@ -1056,6 +1056,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"စဖွင့်သတ်မှတ်"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"စူးစမ်းရန်"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"နေရာလွတ် ပြုလုပ်ပါ"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"သိုလှောင်ခန်းကို စီမံခန့်ခွဲပါ"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB ကွန်ပြုတာချိတ်ဆက်မှု"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"အနေဖြင့်ဆက်သွယ်ရန်"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"မီဒီယာစက်ပစ္စည်း (MTP)"</string>
@@ -2348,7 +2349,7 @@
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"ဤအစီအမံသည် ဤတက်ဘလက်မှ သူံးစွဲသူအားလုံးကို အကျိုးသက်ရောက်လိမ့်မည်။"</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"ဤဆက်တင်းသည် ဤဖုန်းမှ သူံးစွဲသူအားလုံးကို အကျိုးသက်ရောက်လိမ့်မည်။"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"ဘာသာစကားပြောင်းရန်"</string>
-    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"တို့ထ‌ိပေးစနစ်"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"တို့ထိပေးစနစ်"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"အဲဒါ အလုပ် လုပ်ပုံ"</string>
     <string name="nfc_payment_no_apps" msgid="5477904979148086424">"စတိုးဆိုင်များတွင် သင်၏ ဖုန်းဖြင့် ငွေပေးချေပါ"</string>
     <string name="nfc_payment_default" msgid="8648420259219150395">"အလိုအလျောက် ငွေချေမှု"</string>
@@ -3111,10 +3112,8 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"အကူအညီရယူရန် လက်မှတ်ထိုးဝင်ပါ"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"လက်မှတ်ထိုး ဝင်ပါ"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"သင့်အကောင့်ကို ဝင်ရန် အခက်အခဲရှိပါသလား။"</string>
-    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
-    <skip />
-    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
-    <skip />
+    <string name="support_disclaimer_title" msgid="4825302018208770031">"စနစ်အချက်အလက်များကို ပို့ပါ"</string>
+    <string name="support_disclaimer_content" msgid="6702447747744624871">"သင့်ပြဿနာကို လျင်မြန်စွာ ဖြေရှင်းပေးနိုင်ရန် စစ်ဆေးမှုများပြုလုပ်ရန်အတွက် အချက်အလက်များ လိုအပ်ပါသည်။"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"အလုပ်ပရိုဖိုင်ဆက်တင်များ"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"အဆက်အသွယ်ကို ရှာဖွေပါ"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"ခေါ်ဆိုသူများနှင့် အဆက်အသွယ်များကို မည်သူမည်ဝါဖြစ်ကြောင်း ခွဲခြားနိုင်ရန်အတွက် သင့်အဖွဲ့အစည်းအမည်ကို အဆက်အသွယ်အား ရှာဖွေခွင့်ပြုပါ"</string>
@@ -3141,29 +3140,23 @@
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"ဓာတ်ပုံနှင့် ဗီဒီယိုများ (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g> သုံးထားပြီး <xliff:g id="DAYS">%2$d</xliff:g> ရက်ထက်ကျော်နေသော မိတ္တူများ"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"ဒေါင်းလုဒ် (<xliff:g id="NUMITEMS">%1$d</xliff:g>) ခု"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>၊ <xliff:g id="DAYS">%2$s</xliff:g> တွင်နောက်ဆုံး မွမ်းမံခဲ့သည်"</string>
+    <string name="deletion_helper_downloads_summary" msgid="7540606601079122951">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$s</xliff:g> တွင်နောက်ဆုံးမွမ်းမံခဲ့သည်"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
-    <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
-    <skip />
-    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
-    <skip />
+    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"သင့်စက်ပစ္စည်းမှ <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> ကိုဖယ်ရှားပါ။"</string>
+    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"ဖယ်ရှားရန်"</string>
+    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"သိုလှောင်ခန်းမန်နေဂျာ"</string>
+    <string name="automatic_storage_manager_text" msgid="4562950476680600604">"သိုလှောင်ခန်း နေရာလွတ်များ ရှိလာစေရန် သိုလှောင်ခန်းမန်နေဂျာသည် သင့်စက်ပစ္စည်းပေါ်ရှိ မိတ္တူကူးယူထားသည့် ဓာတ်ပုံနှင့် ဗီဒီယိုများကို ဖယ်ရှားလိုက်ပါမည်။"</string>
+    <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"ဓာတ်ပုံနှင့် ဗီဒီယိုများကို ဖယ်ရှားပါ"</string>
+    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"ယခု <xliff:g id="USED">%1$s</xliff:g> လွတ်သွားပါပြီ။ သိုလှောင်ခန်းကို အလိုအလျောက် စီမံခန့်ခွဲလိုပါသလား။"</string>
+    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"သင့်စက်ပစ္စည်းအတွင်းရှိ မိတ္တူကူးယူထားသည့် အကြောင်းအရာများကို ဖယ်ရှားခြင်းဖြင့် သိုလှောင်ခန်းမန်နေဂျာအား နေရာလွတ်များ ဖန်တီးစေလိုပါသလား။"</string>
+    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"မလိုပါ"</string>
+    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"ဖွင့်ရန်"</string>
+    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"(<xliff:g id="NUM_ITEMS">%1$d</xliff:g>) အက်ပ်"</string>
     <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"အလိုအလျောက်"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"ကိုယ်တိုင်ထည့်သွင်းခြင်း"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"နေရာလွတ်များဖန်တီးပါ"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"သိုလှောင်ခန်းမန်နေဂျာ"</string>
 </resources>

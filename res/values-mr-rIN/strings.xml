@@ -334,7 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"फिंगरप्रिंटने अनलॉक करा"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"आपला फोन अनलॉक करण्यासाठी, खरेदी अधिकृत किंवा अॅप्समध्ये साइन इन करण्यासाठी फक्त फिंगरप्रिंट सेन्सरला स्पर्श करा. आपण ज्यांचे फिंगरप्रिंट जोडता त्याविषयी सावधगिरी बाळगा. जोडलेला एक प्रिंट देखील यापैकी कोणतीही गोष्ट करू शकतो. \n\n टीप: आपले फिंगरप्रिंट सशक्त नमुना किंवा पिन पेक्षा कमी सुरक्षित असू शकते. "<annotation id="url">"अधिक जाणून घ्या"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"आपला फोन अनलॉक करण्यासाठी, खरेदी अधिकृत किंवा अॅप्समध्ये साइन इन करण्‍यासाठी फक्त फिंगरप्रिंट सेन्सरला स्पर्श करा. आपण ज्यांचे फिंगरप्रिंट जोडता त्याविषयी सावधगिरी बाळगा. जोडलेला एक प्रिंट देखील यापैकी कोणतीही गोष्ट करू शकतो. \n\n टीप: आपले फिंगरप्रिंट मजबूत नमुना किंवा पिन पेक्षा कमी सुरक्षित असू शकतात."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"रद्द करा"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"सुरु ठेवा"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"वगळा"</string>
@@ -1056,6 +1056,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"सेट करा"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"एक्सप्लोर करा"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"जागा मोकळी करा"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"संचय व्यवस्थापित करा"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB संगणक कनेक्शन"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"म्हणून कनेक्ट करा"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"मीडिया डिव्हाइस (MTP)"</string>
@@ -3111,10 +3112,8 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"सहाय्यासाठी साइन इन करा"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"साइन इन करा"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"आपल्या खात्यात प्रवेश करू शकत नाही?"</string>
-    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
-    <skip />
-    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
-    <skip />
+    <string name="support_disclaimer_title" msgid="4825302018208770031">"सिस्टीम माहिती पाठवा"</string>
+    <string name="support_disclaimer_content" msgid="6702447747744624871">"आपल्या समस्येचे द्रुतपणे निराकरण करण्यासाठी, निदानाकरिता आम्हाला सिस्टीम माहितीची आवश्‍यकता असते."</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"कार्य प्रोफाइल सेटिंग्ज"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"संपर्क शोध"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"कॉलर आणि संपर्कांना ओळखण्यासाठी आपल्या संस्थेनुसार संपर्क शोधांची अनुमती द्या"</string>
@@ -3141,29 +3140,23 @@
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"(<xliff:g id="NUM_ITEMS">%1$d</xliff:g>) फोटो आणि व्हिडिओ"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$d</xliff:g> दिवसांपेक्षा जुने"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"डाउनलोड ( <xliff:g id="NUMITEMS">%1$d</xliff:g> )"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g> , <xliff:g id="DAYS">%2$s</xliff:g> रोजी अंतिम सुधारित केले"</string>
+    <string name="deletion_helper_downloads_summary" msgid="7540606601079122951">"<xliff:g id="USED">%1$s</xliff:g> • अखेरचे सुधारित <xliff:g id="DAYS">%2$s</xliff:g>"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
-    <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
-    <skip />
-    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
-    <skip />
+    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"आपल्या डिव्हाइस वरून <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> काढा."</string>
+    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"काढा"</string>
+    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"संचय व्यवस्थापक"</string>
+    <string name="automatic_storage_manager_text" msgid="4562950476680600604">"संचय स्थान मोकळे करण्यात मदत करण्यासाठी, संचय व्यवस्थापक आपल्या डिव्हाइस वरून बॅक अप घेतलेले फोटो आणि व्हिडिओ काढतो."</string>
+    <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"फोटो आणि व्हिडिओ काढा"</string>
+    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"<xliff:g id="USED">%1$s</xliff:g> आता मोकळे आहे. संचय स्वयंचलितपणे व्यवस्थापित करायचे?"</string>
+    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"संचय व्यवस्‍थापकास आपल्या डिव्हाइस वरून बॅक अप घेतलेली सामग्री काढून स्वयंचलितपणे स्थान मोकळे करू द्यायचे?"</string>
+    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"नाही धन्यवाद"</string>
+    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"चालू करा"</string>
+    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"(<xliff:g id="NUM_ITEMS">%1$d</xliff:g>) अॅप्स"</string>
     <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"स्वयंचलित"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"व्यक्तिचलित"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"आता स्थान मोकळे करा"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"संचय व्यवस्थापक"</string>
 </resources>

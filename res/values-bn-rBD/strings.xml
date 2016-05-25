@@ -334,7 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"আঙ্গুলের ছাপ দিয়ে আনলক করুন"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"আপনার ফোন আনলক করতে, কেনাকাটা অনুমোদন, বা অ্যাপ্লিকেশানগুলিতে সাইন ইন করতে শুধু আঙ্গুলের ছাপ নেওয়ার সেন্সরে স্পর্শ করুন৷ আপনি কাদের আঙ্গুলের ছাপ যোগ করছেন সেই বিষয়ে সতর্ক থাকুন৷ এমনকি যাদের আঙ্গুলের ছাপ যোগ করা হবে তারা এই জিনিসগুলি করতে পারবে।\n\nদ্রষ্টব্য: আপনার আঙ্গুলের ছাপ একটি জটিল প্যাটার্ন বা পিন এর চাইতে কম নিরাপদ হতে পারে। "<annotation id="url">"আরো জানুন"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"আপনার ফোন আনলক করতে, কেনাকাটা অনুমোদন, বা অ্যাপ্লিকেশানগুলিতে সাইন ইন করতে শুধু আঙ্গুলের ছাপ নেওয়ার সেন্সরে স্পর্শ করুন৷ আপনি কাদের আঙ্গুলের ছাপ যোগ করছেন সেই বিষয়ে সতর্ক থাকুন৷ এমনকি যাদের আঙ্গুলের ছাপ যোগ করা হবে তারা এই জিনিসগুলি করতে পারবে।\n\nদ্রষ্টব্য: আপনার আঙ্গুলের ছাপ একটি জটিল প্যাটার্ন বা PIN এর চাইতে কম নিরাপদ হতে পারে।"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"বাতিল করুন"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"চালিয়ে যান"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"এড়িয়ে যান"</string>
@@ -1056,6 +1056,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"সেট আপ করুন"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"ঘুরে দেখুন"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"সঞ্চয়স্থান খালি করুন"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"সঞ্চয়স্থান পরিচালনা করুন"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB কম্পিউটার সংযোগ"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"হিসাবে সংযুক্ত করুন"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"মিডিয়া ডিভাইস (MTP)"</string>
@@ -3111,10 +3112,8 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"সহায়তার জন্য সাইন ইন করুন"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"সাইন ইন করুন"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"আপনার অ্যাকাউন্ট অ্যাক্সেস করতে পারছেন না?"</string>
-    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
-    <skip />
-    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
-    <skip />
+    <string name="support_disclaimer_title" msgid="4825302018208770031">"সিস্টেমের তথ্য পাঠান"</string>
+    <string name="support_disclaimer_content" msgid="6702447747744624871">"আপনার সমস্যাকে দ্রুত চিহ্নিত করার কাজে সহায়তা করতে, নির্ণয়ের জন্য আমাদের সিস্টেমের তথ্য চাই৷"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"কর্মস্থলের প্রোফাইলের সেটিংস"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"পরিচিতির অনুসন্ধান"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"কলারদের এবং পরিচিতিগুলিকে চিহ্নিত করতে আপনার প্রতিষ্ঠান দ্বারা পরিচিতি অনুসন্ধানের অনুমতি দিন"</string>
@@ -3141,29 +3140,23 @@
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"(<xliff:g id="NUM_ITEMS">%1$d</xliff:g>টি) ফটো ও ভিডিও"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$d</xliff:g> দিন আগে"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"ডাউনলোডগুলি (<xliff:g id="NUMITEMS">%1$d</xliff:g>টি)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$s</xliff:g> দিন আগে শেষ সংশোধন করা হয়েছে"</string>
+    <string name="deletion_helper_downloads_summary" msgid="7540606601079122951">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$s</xliff:g> দিন আগে শেষ সংশোধন করা হয়েছে"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
-    <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
-    <skip />
-    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
-    <skip />
+    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"আপনার ডিভাইস থেকে <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> সরান৷"</string>
+    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"সরান"</string>
+    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"সঞ্চয়স্থানের পরিচালক"</string>
+    <string name="automatic_storage_manager_text" msgid="4562950476680600604">"সঞ্চয়স্থান খালি করার কাজে সহায়তা করার জন্য, সঞ্চয়স্থানের পরিচালক আপনার ডিভাইস থেকে ব্যাক আপ নেওয়া ফটো এবং ভিডিওগুলিকে সরিয়ে দেয়৷"</string>
+    <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"ফটো এবং ভিডিওগুলিকে সরান"</string>
+    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"এখন <xliff:g id="USED">%1$s</xliff:g> খালি রয়েছে৷ সঞ্চয়স্থানকে স্বয়ংক্রিয়ভাবে পরিচালনা করবেন?"</string>
+    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"সঞ্চয়স্থানের পরিচালককে আপনার ডিভাইস থেকে স্বয়ংক্রিয়ভাবে ব্যাক আপ নেওয়া সামগ্রীকে সরানোর দ্বারা সঞ্চয়স্থান খালি করার অনুমতি দেবেন?"</string>
+    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"না থাক"</string>
+    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"চালু করুন"</string>
+    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"অ্যাপ্লিকেশান (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>টি)"</string>
     <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"স্বয়ংক্রিয়"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"ম্যানুয়াল"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"এখনই সঞ্চয়স্থান খালি করুন"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"সঞ্চয়স্থানের পরিচালক"</string>
 </resources>
