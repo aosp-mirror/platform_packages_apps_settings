@@ -34,10 +34,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.print.PrintManager;
 import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 import android.provider.UserDictionary;
+import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -53,6 +55,7 @@ import java.util.List;
 public final class DynamicIndexableContentMonitor extends PackageMonitor implements
         InputManager.InputDeviceListener,
         LoaderManager.LoaderCallbacks<List<PrintServiceInfo>> {
+    private static final String TAG = "DynamicIndexableContentMonitor";
 
     private static final long DELAY_PROCESS_PACKAGE_CHANGE = 2000;
 
@@ -84,6 +87,7 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
 
     private Context mContext;
     private boolean mHasFeatureIme;
+    private boolean mRegistered;
 
     private static Intent getAccessibilityServiceIntent(String packageName) {
         final Intent intent = new Intent(AccessibilityService.SERVICE_INTERFACE);
@@ -99,6 +103,14 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
 
     public void register(Activity activity, int loaderId) {
         mContext = activity;
+
+        if (!mContext.getSystemService(UserManager.class).isUserUnlocked()) {
+            Log.w(TAG, "Skipping content monitoring because user is locked");
+            mRegistered = false;
+            return;
+        } else {
+            mRegistered = true;
+        }
 
         boolean hasFeaturePrinting = mContext.getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_PRINTING);
@@ -151,7 +163,10 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
         register(activity, Looper.getMainLooper(), UserHandle.CURRENT, false);
     }
 
+    @Override
     public void unregister() {
+        if (!mRegistered) return;
+
         super.unregister();
 
         InputManager inputManager = (InputManager) mContext.getSystemService(
