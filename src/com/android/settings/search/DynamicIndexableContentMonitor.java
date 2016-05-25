@@ -198,13 +198,17 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
     @Override
     public void onPackageModified(String packageName) {
         super.onPackageModified(packageName);
-        final int state = mContext.getPackageManager().getApplicationEnabledSetting(
-                packageName);
-        if (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
-                || state ==  PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
-            postMessage(MSG_PACKAGE_AVAILABLE, packageName);
-        } else {
-            postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
+        try {
+            final int state = mContext.getPackageManager().getApplicationEnabledSetting(
+                    packageName);
+            if (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
+                    || state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+                postMessage(MSG_PACKAGE_AVAILABLE, packageName);
+            } else {
+                postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
+            }
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Package does not exist: " + packageName, e);
         }
     }
 
