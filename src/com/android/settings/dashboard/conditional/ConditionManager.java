@@ -54,10 +54,15 @@ public class ConditionManager {
 
     private final ArrayList<ConditionListener> mListeners = new ArrayList<>();
 
-    private ConditionManager(Context context) {
+    private ConditionManager(Context context, boolean loadConditionsNow) {
         mContext = context;
         mConditions = new ArrayList<>();
-        new ConditionLoader().execute();
+        if (loadConditionsNow) {
+            ConditionLoader loader = new ConditionLoader();
+            loader.onPostExecute(loader.doInBackground());
+        } else {
+            new ConditionLoader().execute();
+        }
     }
 
     public void refreshAll() {
@@ -241,8 +246,12 @@ public class ConditionManager {
     }
 
     public static ConditionManager get(Context context) {
+        return get(context, true);
+    }
+
+    public static ConditionManager get(Context context, boolean loadConditionsNow) {
         if (sInstance == null) {
-            sInstance = new ConditionManager(context.getApplicationContext());
+            sInstance = new ConditionManager(context.getApplicationContext(), loadConditionsNow);
         }
         return sInstance;
     }
