@@ -45,13 +45,11 @@
                 android:text="@string/security_settings_fingerprint_enroll_find_sensor_message"/>
 
             <Button
-                style="@style/Button.FingerprintButton"
+                style="@style/SetupWizardButton.Positive"
                 android:id="@+id/next_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginStart="-12dp"
-                android:gravity="start|center_vertical"
                 android:text="@string/fingerprint_enroll_button_next" />
         </LinearLayout>
 
