@@ -18,19 +18,20 @@ package com.android.settings;
 
 import android.app.Fragment;
 import android.app.KeyguardManager;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.UserManager;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
 
+    private static final String STATE_IS_KEYGUARD_LOCKED = "STATE_IS_KEYGUARD_LOCKED";
+
     private boolean mRestoring;
     private boolean mDark;
     private boolean mEnterAnimationPending;
     private boolean mFirstTimeVisible = true;
+    private boolean mIsKeyguardLocked = false;
 
     @Override
     protected void onCreate(Bundle savedState) {
@@ -44,8 +45,15 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             mDark = true;
         }
         super.onCreate(savedState);
-        boolean deviceLocked = getSystemService(KeyguardManager.class).isKeyguardLocked();
-        if (deviceLocked && getIntent().getBooleanExtra(
+        mIsKeyguardLocked = savedState == null
+                ? getSystemService(KeyguardManager.class).isKeyguardLocked()
+                : savedState.getBoolean(STATE_IS_KEYGUARD_LOCKED, false);
+        // If the activity is launched, not due to config change, when keyguard is locked and the
+        // flag is set, assume it's launched on top of keyguard on purpose.
+        // TODO: Don't abuse SHOW_WHEN_LOCKED and don't check isKeyguardLocked.
+        // Set extra SHOW_WHEN_LOCKED and WindowManager FLAG_SHOW_WHEN_LOCKED only if it's
+        // truly on top of keyguard on purpose
+        if (mIsKeyguardLocked && getIntent().getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.SHOW_WHEN_LOCKED, false)) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         }
@@ -57,6 +65,12 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             getActionBar().setHomeButtonEnabled(true);
         }
         mRestoring = savedState != null;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(STATE_IS_KEYGUARD_LOCKED, mIsKeyguardLocked);
     }
 
     @Override
