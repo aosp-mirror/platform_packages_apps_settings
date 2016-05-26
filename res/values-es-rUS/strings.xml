@@ -334,7 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Usar huella digital"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Toca el sensor de huellas digitales para desbloquear el teléfono, autorizar compras o acceder a las apps. Ten cuidado con las personas que agregas, ya que todas las huellas digitales que agregues al teléfono podrán realizar estas acciones.\n\nNota: Es posible que la huella digital sea menos segura que un PIN o patrón eficaz. "<annotation id="url">"Más información"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Solo toca el sensor de huellas digitales para desbloquear tu teléfono, autorizar compras o acceder a las apps. Ten cuidado con las personas que agregas, ya que todas las huellas digitales que agregues podrán realizar estas acciones.\n\nNota: Tu huella digital puede ser menos segura que un PIN o un patrón eficaz."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Omitir"</string>
@@ -1056,6 +1056,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Configurar"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Explorar"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"Liberar espacio"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"Administrar el almacenamiento"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Conexión con comput. por USB"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Conectarse como"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Dispositivo multimedia (MTP)"</string>
@@ -3002,7 +3003,7 @@
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
     <string name="cell_data_template" msgid="3308709914705592281">"Datos móviles: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="wifi_data_template" msgid="501654649753761778">"Datos de Wi-Fi: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> de datos con Wi-Fi"</string>
     <string name="ethernet_data_template" msgid="5775729859383597507">"Datos de Ethernet: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Advertencia de datos: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Advertencia de datos: <xliff:g id="ID_1">%1$s</xliff:g>/Límite de datos: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
@@ -3109,10 +3110,8 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Accede para obtener ayuda"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Acceder"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"¿No puedes acceder a tu cuenta?"</string>
-    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
-    <skip />
-    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
-    <skip />
+    <string name="support_disclaimer_title" msgid="4825302018208770031">"Enviar información del sistema"</string>
+    <string name="support_disclaimer_content" msgid="6702447747744624871">"Necesitamos la información del sistema para realizar un diagnóstico y resolver tu problema rápidamente."</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Configuración del perfil de trabajo"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Búsqueda de contactos"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Permitir que tu organización busque contactos para identificar a emisores y contactos"</string>
@@ -3139,29 +3138,23 @@
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Fotos y videos (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, hace más de <xliff:g id="DAYS">%2$d</xliff:g> días"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Descargas (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g> (última modificación: hace <xliff:g id="DAYS">%2$s</xliff:g> días)"</string>
+    <string name="deletion_helper_downloads_summary" msgid="7540606601079122951">"<xliff:g id="USED">%1$s</xliff:g> • Última modificación: <xliff:g id="DAYS">%2$s</xliff:g> días atrás"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
-    <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
-    <skip />
-    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
-    <skip />
+    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Se quitarán <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> de tu dispositivo."</string>
+    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"Quitar"</string>
+    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Administrador de almacenamiento"</string>
+    <string name="automatic_storage_manager_text" msgid="4562950476680600604">"El administrador de almacenamiento quita de tu dispositivo las fotos y los videos con copia de seguridad para liberar espacio de almacenamiento."</string>
+    <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Quitar fotos y videos"</string>
+    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"Espacio que se liberó: <xliff:g id="USED">%1$s</xliff:g>. ¿Deseas administrar el almacenamiento de forma automática?"</string>
+    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"¿Deseas permitir que el administrador de almacenamiento quite automáticamente el contenido con copia de seguridad para liberar espacio de tu dispositivo?"</string>
+    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"No, gracias"</string>
+    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Activar"</string>
+    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Apps (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automático"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Libera espacio ahora"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Administrador de almacenamiento"</string>
 </resources>

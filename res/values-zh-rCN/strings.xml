@@ -334,7 +334,8 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"使用指纹解锁"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"只需触摸指纹传感器即可解锁您的手机、对购买交易进行授权或登录应用。请务必谨慎添加指纹，因为添加的任何指纹都能够用来执行上述操作。\n\n请注意：指纹识别的安全性可能不及安全系数高的图案或 PIN 码。"<annotation id="url">"了解详情"</annotation></string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (3508870672887336095) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"继续"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"跳过"</string>
@@ -1056,6 +1057,8 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"设置"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"浏览"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"释放空间"</string>
+    <!-- no translation found for storage_menu_manage (5914482953856430780) -->
+    <skip />
     <string name="storage_title_usb" msgid="679612779321689418">"USB计算机连接"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"连接方式"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"媒体设备(MTP)"</string>
@@ -3111,10 +3114,8 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"请登录以获取支持服务"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登录"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"无法访问您的帐号？"</string>
-    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
-    <skip />
-    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
-    <skip />
+    <string name="support_disclaimer_title" msgid="4825302018208770031">"发送系统信息"</string>
+    <string name="support_disclaimer_content" msgid="6702447747744624871">"为了快速帮您解决问题，我们需要您提供系统信息以进行诊断。"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"工作资料设置"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"联系人搜索"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"允许您的单位搜索联系人，以便识别来电者和联系人的身份"</string>
@@ -3141,29 +3142,28 @@
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"照片和视频（<xliff:g id="NUM_ITEMS">%1$d</xliff:g> 项）"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>，超过 <xliff:g id="DAYS">%2$d</xliff:g> 天以前"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"下载内容（<xliff:g id="NUMITEMS">%1$d</xliff:g> 项）"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>，上次修改时间：<xliff:g id="DAYS">%2$s</xliff:g>"</string>
+    <!-- no translation found for deletion_helper_downloads_summary (7540606601079122951) -->
+    <skip />
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
-    <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
-    <skip />
-    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
-    <skip />
+    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"从您的设备中移除 <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> 的内容。"</string>
+    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"移除"</string>
+    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"存储空间管理器"</string>
+    <string name="automatic_storage_manager_text" msgid="4562950476680600604">"存储空间管理器会从您的设备中移除已备份的照片和视频，从而释放存储空间。"</string>
+    <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"移除照片和视频"</string>
+    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"已释放 <xliff:g id="USED">%1$s</xliff:g>。要让系统自动管理存储空间吗？"</string>
+    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"要让存储空间管理器从您的设备中移除已备份的内容，从而自动释放存储空间吗？"</string>
+    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"不用了"</string>
+    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"开启"</string>
+    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"应用（<xliff:g id="NUM_ITEMS">%1$d</xliff:g> 个）"</string>
     <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
+    <skip />
+    <!-- no translation found for deletion_helper_automatic_title (6605660435498272520) -->
+    <skip />
+    <!-- no translation found for deletion_helper_manual_title (7947432164411214029) -->
+    <skip />
+    <!-- no translation found for deletion_helper_preference_title (7719699175312011449) -->
+    <skip />
+    <!-- no translation found for automatic_storage_manager_preference_title (5753702798151073383) -->
     <skip />
 </resources>

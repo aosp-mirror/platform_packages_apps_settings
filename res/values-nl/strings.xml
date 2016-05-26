@@ -334,7 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Ontgrendelen met vingerafdruk"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Raak de vingerafdruksensor aan om je telefoon te ontgrendelen, aankopen te autoriseren of in te loggen bij apps. Deze dingen kunnen worden gedaan met alle vingerafdrukken die zijn toegevoegd aan je telefoon, dus wees voorzichtig met wie je toevoegt.\n\nOpmerking: Je vingerafdruk is mogelijk minder veilig dan een sterk patroon of sterke pincode. "<annotation id="url">"Meer informatie"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Raak de vingerafdruksensor aan om je telefoon te ontgrendelen, aankopen te autoriseren of in te loggen bij apps. Deze dingen kunnen worden gedaan met alle vingerafdrukken die zijn toegevoegd aan je telefoon, dus wees voorzichtig met wie je toevoegt.\n\nOpmerking: Je vingerafdruk is mogelijk minder veilig dan een sterk patroon of sterke pincode."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Annuleren"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Doorgaan"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Overslaan"</string>
@@ -1056,6 +1056,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Configureren"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Verkennen"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"Ruimte vrijmaken"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"Opslagruimte beheren"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB-computerverbinding"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Verbinding maken als"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Media-apparaat (MTP)"</string>
@@ -3111,10 +3112,8 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Log in voor ondersteuning"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Inloggen"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Geen toegang tot je account?"</string>
-    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
-    <skip />
-    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
-    <skip />
+    <string name="support_disclaimer_title" msgid="4825302018208770031">"Systeeminformatie verzenden"</string>
+    <string name="support_disclaimer_content" msgid="6702447747744624871">"We hebben systeeminformatie nodig om het probleem vast te stellen en je snel te kunnen helpen."</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Instellingen voor werkprofiel"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Contacten zoeken"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Contactzoekopdrachten door je organisatie toestaan om bellers en contacten te identificeren"</string>
@@ -3141,29 +3140,23 @@
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Foto\'s en video\'s (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, ouder dan <xliff:g id="DAYS">%2$d</xliff:g> dagen"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Downloads (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, laatst gewijzigd <xliff:g id="DAYS">%2$s</xliff:g>"</string>
+    <string name="deletion_helper_downloads_summary" msgid="7540606601079122951">"<xliff:g id="USED">%1$s</xliff:g> • laatst gewijzigd <xliff:g id="DAYS">%2$s</xliff:g>"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
-    <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
-    <skip />
-    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
-    <skip />
+    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Maak <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> vrij op je apparaat."</string>
+    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"Verwijderen"</string>
+    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Opslagbeheer"</string>
+    <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Opslagbeheer verwijdert foto\'s en video\'s waarvan een back-up is gemaakt, van je apparaat om opslagruimte vrij te maken."</string>
+    <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Foto\'s en video\'s verwijderen"</string>
+    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"Er is nu <xliff:g id="USED">%1$s</xliff:g> vrij. Wil je opslagruimte automatisch beheren?"</string>
+    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"Opslagbeheer automatisch ruimte laten vrijmaken door content waarvan een back-up is gemaakt, van je apparaat te verwijderen?"</string>
+    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"Nee, bedankt"</string>
+    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Inschakelen"</string>
+    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Apps (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatisch"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Handmatig"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Nu ruimte vrijmaken"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Opslagbeheer"</string>
 </resources>

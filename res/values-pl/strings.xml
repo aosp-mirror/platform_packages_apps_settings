@@ -340,7 +340,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Odblokuj odciskiem palca"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Dotknij czytnika linii papilarnych, by odblokować telefon, autoryzować zakupy lub zalogować się w aplikacjach. Z rozwagą dodawaj odciski palców innych osób, bo każda z nich będzie mogła wykonywać wszystkie te czynności.\n\nUwaga: odcisk palca może być mniej bezpieczny niż trudny wzór czy kod PIN. "<annotation id="url">"Więcej informacji"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Dotknij czytnika linii papilarnych, by odblokować telefon, autoryzować zakupy lub zalogować się w aplikacjach. Z rozwagą dodawaj odciski palców innych osób – każda dodana osoba będzie mogła wykonywać wszystkie powyższe działania.\n\nUwaga: odcisk palca może być mniej bezpieczny niż trudny wzór czy kod PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Anuluj"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Dalej"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Pomiń"</string>
@@ -1076,6 +1076,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Skonfiguruj"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Przeglądaj"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"Zwolnij miejsce"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"Zarządzanie pamięcią"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Połączenie USB z komputerem"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Połącz jako:"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Urządzenie multimedialne (MTP)"</string>
@@ -3175,10 +3176,8 @@
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Zaloguj się, by uzyskać pomoc"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Zaloguj się"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Nie masz dostępu do konta?"</string>
-    <!-- no translation found for support_disclaimer_title (4825302018208770031) -->
-    <skip />
-    <!-- no translation found for support_disclaimer_content (6702447747744624871) -->
-    <skip />
+    <string name="support_disclaimer_title" msgid="4825302018208770031">"Wyślij informacje o systemie"</string>
+    <string name="support_disclaimer_content" msgid="6702447747744624871">"Aby zdiagnozować i szybko rozwiązać problem, potrzebujemy informacji o systemie."</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Ustawienia profilu do pracy"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Wyszukiwanie kontaktów"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Zezwalaj na wyszukiwanie kontaktów do identyfikacji rozmówców i kontaktów przez Twoją organizację"</string>
@@ -3211,29 +3210,23 @@
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Zdjęcia i filmy (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, starsze niż <xliff:g id="DAYS">%2$d</xliff:g> dni"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Pobrane (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, ostatnia modyfikacja: <xliff:g id="DAYS">%2$s</xliff:g>"</string>
+    <string name="deletion_helper_downloads_summary" msgid="7540606601079122951">"<xliff:g id="USED">%1$s</xliff:g> • ostatnia modyfikacja: <xliff:g id="DAYS">%2$s</xliff:g>"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_message (361562282442136229) -->
-    <skip />
-    <!-- no translation found for deletion_helper_clear_dialog_remove (5952502462442133309) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_settings (5179020559757485932) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_text (4562950476680600604) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_days_title (2017913896160914647) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_title (4324208404247329052) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_summary (5688743673563646814) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_cancel (4293035896022918479) -->
-    <skip />
-    <!-- no translation found for deletion_helper_upsell_activate (8154983578762649221) -->
-    <skip />
-    <!-- no translation found for deletion_helper_apps_group_title (6094830959011713757) -->
-    <skip />
+    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Usuń <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> z urządzenia."</string>
+    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"Usuń"</string>
+    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Menedżer miejsca"</string>
+    <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Aby pomóc zwolnić miejsce, menedżer miejsca usuwa z urządzenia kopie zapasowe zdjęć i filmów."</string>
+    <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Usuń zdjęcia i filmy"</string>
+    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"Zwolniono: <xliff:g id="USED">%1$s</xliff:g>. Zarządzać automatycznie miejscem?"</string>
+    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"Czy menedżer miejsca ma automatycznie zwolnić miejsce, usuwając z urządzenia kopie zapasowe treści?"</string>
+    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"Nie, dziękuję"</string>
+    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Włącz"</string>
+    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Aplikacje (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
     <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
     <skip />
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatyczne"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Instrukcja"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Zwolnij miejsce teraz"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Menedżer miejsca"</string>
 </resources>
