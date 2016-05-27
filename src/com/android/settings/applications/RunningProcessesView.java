@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.UserHandle;
@@ -28,6 +29,7 @@ import android.text.BidiFormatter;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -449,8 +451,13 @@ public class RunningProcessesView extends FrameLayout
         mListView.addHeaderView(mHeader, null, false /* set as not selectable */);
         mColorBar = (LinearColorBar)mHeader.findViewById(R.id.color_bar);
         final Context context = getContext();
+
+        Resources.Theme theme = context.getTheme();
+        TypedValue typedValue = new TypedValue();
+        theme.resolveAttribute(android.R.attr.colorAccent, typedValue, true);
+
         mColorBar.setColors(context.getColor(R.color.running_processes_system_ram),
-                context.getColor(R.color.running_processes_apps_ram),
+                context.getColor(typedValue.resourceId),
                 context.getColor(R.color.running_processes_free_ram));
         mBackgroundProcessPrefix = (TextView)mHeader.findViewById(R.id.freeSizePrefix);
         mAppsProcessPrefix = (TextView)mHeader.findViewById(R.id.appsSizePrefix);
