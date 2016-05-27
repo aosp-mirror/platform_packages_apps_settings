@@ -149,10 +149,15 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 } catch (PackageManager.NameNotFoundException e) {
                 }
             }
-            mRestrictBackground = (SwitchPreference) findPreference(KEY_RESTRICT_BACKGROUND);
-            mRestrictBackground.setOnPreferenceChangeListener(this);
-            mUnrestrictedData = (SwitchPreference) findPreference(KEY_UNRESTRICTED_DATA);
-            mUnrestrictedData.setOnPreferenceChangeListener(this);
+            if (mAppItem.key == Process.SYSTEM_UID) {
+                removePreference(KEY_UNRESTRICTED_DATA);
+                removePreference(KEY_RESTRICT_BACKGROUND);
+            } else {
+                mRestrictBackground = (SwitchPreference) findPreference(KEY_RESTRICT_BACKGROUND);
+                mRestrictBackground.setOnPreferenceChangeListener(this);
+                mUnrestrictedData = (SwitchPreference) findPreference(KEY_UNRESTRICTED_DATA);
+                mUnrestrictedData.setOnPreferenceChangeListener(this);
+            }
             mDataSaverBackend = new DataSaverBackend(getContext());
             mAppSettings = findPreference(KEY_APP_SETTINGS);
 
