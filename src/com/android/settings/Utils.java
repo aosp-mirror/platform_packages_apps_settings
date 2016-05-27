@@ -53,6 +53,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.INetworkManagementService;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -1067,18 +1068,15 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     public static List<String> getNonIndexable(int xml, Context context) {
-        HandlerThread thread = new HandlerThread("Index_" + xml);
-        thread.start();
+        if (Looper.myLooper() == null) {
+            // Hack to make sure Preferences can initialize.  Prefs expect a looper, but
+            // don't actually use it for the basic stuff here.
+            Looper.prepare();
+        }
         final List<String> ret = new ArrayList<>();
-        new Handler(thread.getLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                PreferenceManager manager = new PreferenceManager(context);
-                PreferenceScreen screen = manager.inflateFromResource(context, xml, null);
-                checkPrefs(screen, ret);
-            }
-        });
-        thread.quitSafely();
+        PreferenceManager manager = new PreferenceManager(context);
+        PreferenceScreen screen = manager.inflateFromResource(context, xml, null);
+        checkPrefs(screen, ret);
 
         return ret;
     }
