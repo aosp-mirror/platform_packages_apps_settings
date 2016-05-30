@@ -337,8 +337,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Atbloķēšana ar pirksta nospiedumu"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (3508870672887336095) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Pieskarieties pirksta nospieduma sensoram, lai atbloķētu tālruni, autorizētu pirkumus vai pierakstītos lietotnēs. Rūpīgi apsveriet, kuru personu pirkstu nospiedumus pievienojat. Jebkurš pievienotais pirksta nospiedums ļauj paveikt šīs darbības.\n\nPiezīme. Pirksta nospiedums var būt mazāk drošs nekā sarežģīta kombinācija vai PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Atcelt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Turpināt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Izlaist"</string>
@@ -1067,8 +1066,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Iestatīt"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Pārlūkot"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"Atbrīvot vietu"</string>
-    <!-- no translation found for storage_menu_manage (5914482953856430780) -->
-    <skip />
+    <string name="storage_menu_manage" msgid="5914482953856430780">"Pārvaldīt krātuvi"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB savienojums ar datoru"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Izveidot savienojumu kā"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Multivides ierīce (MTP)"</string>
@@ -1661,7 +1659,7 @@
     <string name="accessibility_display_title" msgid="7610175687949675162">"Displejs"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Paraksti"</string>
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"Palielināšanas žests"</string>
-    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Pieskarieties 3 reizes, lai veiktu tālummaiņu."</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Pieskarieties 3 reizes, lai veiktu tālummaiņu"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258"><b>"Lai tuvinātu vai tālinātu"</b>", ātri pieskarieties ekrānam trīs reizes ar vienu pirkstu.\n"<ul><li>"Lai ritinātu, velciet ar diviem vai vairākiem pirkstiem."</li>\n<li>"Lai pielāgotu tālummaiņas līmeni, savelciet vai izpletiet divus vai vairākus pirkstus."</li></ul>\n\n<b>"Lai īslaicīgi tuvinātu,"</b>", ātri pieskarieties ekrānam trīs reizes, trešajā pieskārienā neatlaižot pirkstu no ekrāna.\n"<ul><li>"Lai pārvietotos ekrānā, velciet pirkstu pa ekrānu."</li>\n<li>"Lai atkal tālinātu, atlaidiet pirkstu."</li></ul>\n\n"Tastatūru un navigācijas joslu nevar tuvināt."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Pieejamības saīsne"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Ieslēgts"</string>
@@ -2962,7 +2960,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Kamera, divreiz nospiežot barošanas pogu"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Ērta kameras atvēršana, neatbloķējot ekrānu"</string>
     <string name="screen_zoom_title" msgid="5233515303733473927">"Attēlojuma lielums"</string>
-    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Palieliniet vai samaziniet ekrānā redzamos vienumus."</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Palieliniet vai samaziniet ekrānā redzamos vienumus"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"attēlojums, blīvums, ekrāna tālummaiņa, mērogs, mērogošana"</string>
     <string name="screen_zoom_summary" msgid="6445488991799015407">"Samaziniet vai palieliniet ekrānā redzamos vienumus. Dažas lietotnes ekrānā var mainīt izvietojumu."</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Priekšskatījums"</string>
@@ -3128,10 +3126,9 @@
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Atspējots"</string>
     <string name="demo_mode" msgid="2655748420527206870">"Demonstrācijas režīms"</string>
     <string name="deletion_helper_title" msgid="32626003656187495">"Noņemšana no ierīces"</string>
-    <string name="deletion_helper_apps_title" msgid="2440481733792901667">"Lietotnes"</string>
-    <string name="deletion_helper_app_summary" msgid="726978464986102617">"<xliff:g id="USED">%1$s</xliff:g>, pēdējoreiz izmantota pirms <xliff:g id="DAYS">%2$d</xliff:g> dienām"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, nekad iepriekš nav izmantota"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, nav zināms, kad pēdējoreiz izmantota"</string>
+    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • Pēdējoreiz izmantota pirms <xliff:g id="DAYS">%2$d</xliff:g> dienām"</string>
+    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • Nekad iepriekš nav izmantota"</string>
+    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Nav zināms, kad pēdējoreiz izmantota"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Atbrīvojiet vietu: <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
     <string name="support_escalation_title" msgid="7311759892297590244">"Atbalsts jebkurā diennakts laikā"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"Pieprasiet atbalsta zvanu vai tērzēšanas sarunu, un mēs ar jums drīzumā sazināsimies."</string>
@@ -3175,10 +3172,9 @@
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Ievades ierīce"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Fotoattēli un videoklipi (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, vecāki par <xliff:g id="DAYS">%2$d</xliff:g> dienām"</string>
+    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • Vecāki par <xliff:g id="DAYS">%2$d</xliff:g> dienām"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Lejupielādes (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <!-- no translation found for deletion_helper_downloads_summary (7540606601079122951) -->
-    <skip />
+    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • Pēdējoreiz mainīta (<xliff:g id="DAYS">%2$s</xliff:g>)"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
     <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Noņemiet no savas ierīces saturu (<xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g>)."</string>
@@ -3191,14 +3187,9 @@
     <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"Nē, paldies"</string>
     <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Ieslēgt"</string>
     <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Lietotnes (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
-    <skip />
-    <!-- no translation found for deletion_helper_automatic_title (6605660435498272520) -->
-    <skip />
-    <!-- no translation found for deletion_helper_manual_title (7947432164411214029) -->
-    <skip />
-    <!-- no translation found for deletion_helper_preference_title (7719699175312011449) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_preference_title (5753702798151073383) -->
-    <skip />
+    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • Pēdējoreiz izmantota pirms <xliff:g id="DAYS">%2$d</xliff:g> dienām"</string>
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automātiski"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuāli"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Vietas atbrīvošana tūlīt"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Krātuves pārvaldnieks"</string>
 </resources>

@@ -334,8 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"使用指纹解锁"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (3508870672887336095) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"只需触摸指纹传感器即可解锁您的手机、对购买交易进行授权或登录应用。请务必谨慎添加指纹，因为添加的任何指纹都能够用来执行上述操作。\n\n请注意：指纹识别的安全性可能不及安全系数高的图案或 PIN 码。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"继续"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"跳过"</string>
@@ -1057,8 +1056,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"设置"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"浏览"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"释放空间"</string>
-    <!-- no translation found for storage_menu_manage (5914482953856430780) -->
-    <skip />
+    <string name="storage_menu_manage" msgid="5914482953856430780">"管理存储空间"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB计算机连接"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"连接方式"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"媒体设备(MTP)"</string>
@@ -3096,10 +3094,12 @@
     <string name="bluetooth_disabled" msgid="1558295505487648234">"已停用"</string>
     <string name="demo_mode" msgid="2655748420527206870">"演示模式"</string>
     <string name="deletion_helper_title" msgid="32626003656187495">"从设备中移除"</string>
-    <string name="deletion_helper_apps_title" msgid="2440481733792901667">"应用"</string>
-    <string name="deletion_helper_app_summary" msgid="726978464986102617">"<xliff:g id="USED">%1$s</xliff:g>，<xliff:g id="DAYS">%2$d</xliff:g> 天前使用过"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>，从未使用过"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>，不确定上次使用时间"</string>
+    <!-- no translation found for deletion_helper_app_summary (6240455605247059339) -->
+    <skip />
+    <!-- no translation found for deletion_helper_app_summary_never_used (1113385590219547397) -->
+    <skip />
+    <!-- no translation found for deletion_helper_app_summary_unknown_used (2397045373780264380) -->
+    <skip />
     <string name="deletion_helper_free_button" msgid="667489686914669981">"释放 <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
     <string name="support_escalation_title" msgid="7311759892297590244">"全天候客户支持"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"您可以要求与支持人员通话或聊天，我们会尽快与您联系"</string>
@@ -3140,13 +3140,14 @@
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"外围输入设备"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"蓝牙"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"照片和视频（<xliff:g id="NUM_ITEMS">%1$d</xliff:g> 项）"</string>
-    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>，超过 <xliff:g id="DAYS">%2$d</xliff:g> 天以前"</string>
+    <!-- no translation found for deletion_helper_photos_summary (1468099560244504904) -->
+    <skip />
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"下载内容（<xliff:g id="NUMITEMS">%1$d</xliff:g> 项）"</string>
-    <!-- no translation found for deletion_helper_downloads_summary (7540606601079122951) -->
+    <!-- no translation found for deletion_helper_downloads_summary (5269991070337180914) -->
     <skip />
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
-    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"从您的设备中移除 <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> 的内容。"</string>
+    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"从您的设备中移除 <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> 内容。"</string>
     <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"移除"</string>
     <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"存储空间管理器"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"存储空间管理器会从您的设备中移除已备份的照片和视频，从而释放存储空间。"</string>
@@ -3156,14 +3157,10 @@
     <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"不用了"</string>
     <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"开启"</string>
     <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"应用（<xliff:g id="NUM_ITEMS">%1$d</xliff:g> 个）"</string>
-    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
+    <!-- no translation found for deletion_helper_apps_group_summary (1992952541577075151) -->
     <skip />
-    <!-- no translation found for deletion_helper_automatic_title (6605660435498272520) -->
-    <skip />
-    <!-- no translation found for deletion_helper_manual_title (7947432164411214029) -->
-    <skip />
-    <!-- no translation found for deletion_helper_preference_title (7719699175312011449) -->
-    <skip />
-    <!-- no translation found for automatic_storage_manager_preference_title (5753702798151073383) -->
-    <skip />
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自动"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手动"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"立即释放空间"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"存储空间管理器"</string>
 </resources>
