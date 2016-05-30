@@ -334,8 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Usar huella digital"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (3508870672887336095) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Solo toca el sensor de huellas digitales para desbloquear tu teléfono, autorizar compras o acceder a las apps. Ten cuidado con las personas que agregas, ya que todas las huellas digitales que agregues podrán realizar estas acciones.\n\nNota: Tu huella digital puede ser menos segura que un PIN o un patrón eficaz."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Omitir"</string>
@@ -1057,6 +1056,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Configurar"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Explorar"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"Liberar espacio"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"Administrar el almacenamiento"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Conexión con comput. por USB"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Conectarse como"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Dispositivo multimedia (MTP)"</string>
@@ -2769,7 +2769,7 @@
     <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Anula No molestar"</string>
     <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Sin contenido sensible en pantalla bloqueada"</string>
     <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Nunca en pantalla bloqueada"</string>
-    <string name="filter_notif_silent" msgid="8533960664617048281">"Se muestran de forma silenciosa"</string>
+    <string name="filter_notif_silent" msgid="8533960664617048281">"Silenciadas"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avanzada"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Configurar apps"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Aplicación desconocida"</string>
@@ -3094,10 +3094,9 @@
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Inhabilitado"</string>
     <string name="demo_mode" msgid="2655748420527206870">"Modo demostración"</string>
     <string name="deletion_helper_title" msgid="32626003656187495">"Quitar del dispositivo"</string>
-    <string name="deletion_helper_apps_title" msgid="2440481733792901667">"Apps"</string>
-    <string name="deletion_helper_app_summary" msgid="726978464986102617">"<xliff:g id="USED">%1$s</xliff:g> (último uso: hace <xliff:g id="DAYS">%2$d</xliff:g> días)"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g> (aún no se usó)"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g> (se desconoce el último uso)"</string>
+    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • (último uso: hace <xliff:g id="DAYS">%2$d</xliff:g> días)"</string>
+    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • (aún no se usó)"</string>
+    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • (se desconoce el último uso)"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Liberar <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
     <string name="support_escalation_title" msgid="7311759892297590244">"Asistencia inmediata"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"Puedes solicitar una llamada o un chat de ayuda, y nos comunicaremos contigo cuanto antes"</string>
@@ -3138,9 +3137,9 @@
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Periférico de entrada"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Fotos y videos (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, hace más de <xliff:g id="DAYS">%2$d</xliff:g> días"</string>
+    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • (hace más de <xliff:g id="DAYS">%2$d</xliff:g> días)"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Descargas (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g> (última modificación: hace <xliff:g id="DAYS">%2$s</xliff:g> días)"</string>
+    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • (última modificación: hace <xliff:g id="DAYS">%2$s</xliff:g> días)"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
     <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Se quitarán <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> de tu dispositivo."</string>
@@ -3153,6 +3152,9 @@
     <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"No, gracias"</string>
     <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Activar"</string>
     <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Apps (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
-    <skip />
+    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • (último uso: hace <xliff:g id="DAYS">%2$d</xliff:g> días)"</string>
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automático"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Libera espacio ahora"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Administrador de almacenamiento"</string>
 </resources>
