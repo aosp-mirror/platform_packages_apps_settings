@@ -17,6 +17,9 @@
 package com.android.settings.deletionhelper;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -41,9 +44,13 @@ import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
  */
 public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+    public static final int DEFAULT_DAYS_TO_RETAIN = 90;
+
+    private static final String SHARED_PREFRENCES_NAME = "automatic_storage_manager_settings";
     private static final String KEY_DAYS = "days";
     private static final String KEY_DELETION_HELPER = "deletion_helper";
     private static final String KEY_STORAGE_MANAGER_SWITCH = "storage_manager_active";
+    private static final String KEY_DAYS_TO_RETAIN = "days_to_retain";
 
     private DropDownPreference mDaysToRetain;
     private Preference mDeletionHelper;
@@ -70,6 +77,14 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
                         Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
         mStorageManagerSwitch.setChecked(isChecked);
         mStorageManagerSwitch.setOnPreferenceChangeListener(this);
+
+        SharedPreferences sharedPreferences =
+                getContext().getSharedPreferences(SHARED_PREFRENCES_NAME,
+                        Context.MODE_PRIVATE);
+        int value = sharedPreferences.getInt(KEY_DAYS_TO_RETAIN, DEFAULT_DAYS_TO_RETAIN);
+        String[] stringValues =
+                getResources().getStringArray(R.array.automatic_storage_management_days_values);
+        mDaysToRetain.setValue(stringValues[daysValueToIndex(value, stringValues)]);
     }
 
     @Override
@@ -88,8 +103,11 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
                         Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, checked ? 1 : 0);
                 break;
             case KEY_DAYS:
-                // TODO: Configure a setting which controls how many days of data the storage manager
-                // should retain.
+                SharedPreferences.Editor editor =
+                        getContext().getSharedPreferences(SHARED_PREFRENCES_NAME,
+                                Context.MODE_PRIVATE).edit();
+                editor.putInt(KEY_DAYS_TO_RETAIN, Integer.parseInt((String) newValue));
+                editor.apply();
                 break;
         }
         return true;
@@ -107,5 +125,15 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
                     R.string.deletion_helper_title, 0, null);
         }
         return true;
+    }
+
+    private static int daysValueToIndex(int value, String[] indices) {
+        for (int i = 0; i < indices.length; i++) {
+            int thisValue = Integer.parseInt(indices[i]);
+            if (value == thisValue) {
+                return i;
+            }
+        }
+        return indices.length - 1;
     }
 }
