@@ -255,7 +255,7 @@
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD kartica"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"Postavke proksija"</string>
     <string name="cancel" msgid="6859253417269739139">"Otkaži"</string>
-    <string name="okay" msgid="1997666393121016642">"Potvrdi"</string>
+    <string name="okay" msgid="1997666393121016642">"Uredu"</string>
     <string name="forget" msgid="1400428660472591263">"Zaboravi"</string>
     <string name="save" msgid="879993180139353333">"Sačuvaj"</string>
     <string name="done" msgid="6942539184162713160">"Gotovo"</string>
@@ -337,8 +337,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Otključaj otiskom prsta"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (3508870672887336095) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Samo dodirnite senzor za otisak prsta da otključate telefon, odobrite kupovinu ili da se prijavite u aplikaciju. Pazite čije otiske prsta dodajete. Samo jedan dodani otisak može izvršiti sve navedeno.\n\nNapomena: Vaš otisak prsta može biti manje siguran od jakog uzorka ili PIN kôda."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Otkaži"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Nastavi"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Preskoči"</string>
@@ -1067,6 +1066,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Postavi"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Istraži"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"Oslobodite prostor"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"Upravljaj prostorom za pohranu"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"Veza s računarom preko USB-a"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Poveži kao"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Medijski uređaj (MTP)"</string>
@@ -2323,7 +2323,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Korisnik"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Ograničeni profil"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"Dodati novog korisnika?"</string>
-    <string name="user_add_user_message_long" msgid="8562152293752222985">"Ovaj uređaj s drugim ljudima možete dijeliti stvaranjem dodatnih korisnika. Svaki korisnik ima svoj prostor, koji može prilagoditi aplikacijama, pozadinom, i tako dalje. Korisnici također mogu prilagoditi postavke uređaja kao što su Wi-Fi koje utječu na sve. \n\n Kada dodate novog korisnika, ta osoba treba uspostaviti svoj prostor. \n\n Svaki korisnik može ažurirati aplikacije za sve ostale korisnike."</string>
+    <string name="user_add_user_message_long" msgid="8562152293752222985">"Za dijeljenje ovog uređaja s drugima možete napraviti dodatne korisnike. Svaki korisnik ima svoj prostor, koji može prilagoditi aplikacijama, pozadinom, i tako dalje. Korisnici također mogu prilagoditi postavke uređaja kao što su Wi-Fi koje utiču na sve ostale korisnike. \n\n Kada dodate novog korisnika, ta osoba treba uspostaviti svoj prostor. \n\n Svaki korisnik može ažurirati aplikacije za sve ostale korisnike."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Kada dodate novog korisnika, ta osoba treba uspostaviti svoj prostor. \n\n Svaki korisnik može ažurirati aplikacije za sve ostale korisnike."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Postaviti korisnika odmah?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"Provjerite može li osoba uzeti uređaj i podesiti svoj prostor"</string>
@@ -2796,7 +2796,7 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blokirano"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Sa URL-ovima domena"</string>
     <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Zanemaruje postavku Ne ometaj"</string>
-    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Ništa osjetljivo na zak. ekr."</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Bez osjetljivog sadržaja na zaključanom ekranu"</string>
     <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Bez prikaza na zaključ. ekranu"</string>
     <string name="filter_notif_silent" msgid="8533960664617048281">"Prikazano bez zvuka"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Napredno"</string>
@@ -3128,10 +3128,9 @@
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Onemogućeno"</string>
     <string name="demo_mode" msgid="2655748420527206870">"Način demonstracije"</string>
     <string name="deletion_helper_title" msgid="32626003656187495">"Ukloni sa uređaja"</string>
-    <string name="deletion_helper_apps_title" msgid="2440481733792901667">"Aplikacije"</string>
-    <string name="deletion_helper_app_summary" msgid="726978464986102617">"<xliff:g id="USED">%1$s</xliff:g>, zadnje korištenje prije <xliff:g id="DAYS">%2$d</xliff:g> dana"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, nije korišteno do sada"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, nema podataka o zadnjem korištenju"</string>
+    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • Posljednji put korišteno prije <xliff:g id="DAYS">%2$d</xliff:g> dana"</string>
+    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • Nije ranije korišteno"</string>
+    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Nema podataka o posljednjem korištenju"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Oslobodi <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
     <string name="support_escalation_title" msgid="7311759892297590244">"Podrška dostupna 24 sata"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"Možete zatražiti da vas odjel podrške pozove ili kontaktira e-mailom pa ćemo vam se brzo javiti"</string>
@@ -3175,9 +3174,9 @@
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Ulazni periferni uređaj"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Fotografije &amp; Video snimci (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, starije od <xliff:g id="DAYS">%2$d</xliff:g> dana"</string>
+    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • Starije od <xliff:g id="DAYS">%2$d</xliff:g> dana"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Preuzimanja (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, posljednja izmjena <xliff:g id="DAYS">%2$s</xliff:g>"</string>
+    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • Posljednja izmjena prije <xliff:g id="DAYS">%2$s</xliff:g> dana"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
     <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Ukloni iz uređaja <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g>."</string>
@@ -3190,6 +3189,9 @@
     <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"Ne, hvala"</string>
     <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Uključi"</string>
     <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Aplikacija: (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
-    <skip />
+    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • Posljednji put korišteno prije <xliff:g id="DAYS">%2$d</xliff:g> dana"</string>
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatski"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Ručno"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Odmah oslobodi prostor"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Upravitelj prostora za pohranu"</string>
 </resources>

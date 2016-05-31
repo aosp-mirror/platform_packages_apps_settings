@@ -333,8 +333,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Кулпну манж из менн ач"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (3508870672887336095) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Телефонуңуздун кулпусун ачып, сатып алууларга уруксат берип же колдонмолорго кирүү үчүн жөн гана манжаңызды сенсорго тийгизип коюңуз. Кимдир-бирөөнүн манжа изин кошуп жатканыңызда этият болуңуз. Бир эле манжа изи кошулса да, ушул нерселердин бардыгын аткара алат.\n\nЭскертүү: Манжа изиңиздин коопсуздугу графикалык ачкычка же PIN кодго караганда начарыраак болушу мүмкүн."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Жокко чыгаруу"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Улантуу"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Өткөрүп жиберүү"</string>
@@ -1056,6 +1055,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Жөндөө"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Изилдөө"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"Орун бошотуу"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"Эстутумду көзөмөлдөө"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB аркылуу компүтерге туташуу"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Катары туташуу"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Медиа түзмөк (MTP)"</string>
@@ -3095,10 +3095,9 @@
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Өчүрүлгөн"</string>
     <string name="demo_mode" msgid="2655748420527206870">"Демо режими"</string>
     <string name="deletion_helper_title" msgid="32626003656187495">"Түзмөктөн алып салуу"</string>
-    <string name="deletion_helper_apps_title" msgid="2440481733792901667">"Колдонмолор"</string>
-    <string name="deletion_helper_app_summary" msgid="726978464986102617">"<xliff:g id="USED">%1$s</xliff:g>, акыркы жолу <xliff:g id="DAYS">%2$d</xliff:g> күн мурун колдонулган"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, буга чейин колдонулган эмес"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, акыркы жолу качан колдонулганы белгисиз"</string>
+    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • Акыркы жолу <xliff:g id="DAYS">%2$d</xliff:g> күн мурун колдонулган"</string>
+    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • Буга чейин колдонулган эмес"</string>
+    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Акыркы жолу качан колдонулганы белгисиз"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> бошотуу"</string>
     <string name="support_escalation_title" msgid="7311759892297590244">"Күнү-түнү колдоо көрсөтүүгө даярбыз"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"Колдоо бөлүмүнөн чалууну же маектешүүнү өтүнсөңүз, сизге тез эле байланышабыз"</string>
@@ -3139,21 +3138,24 @@
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Дайындарды киргизүүчү сырткы түзмөк"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Сүрөттөр жана видеолор (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$d</xliff:g> күн мурун"</string>
+    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> күн мурун"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"(<xliff:g id="NUMITEMS">%1$d</xliff:g>) жолу жүктөлүп алынды"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, акыркы жолу <xliff:g id="DAYS">%2$s</xliff:g> күн мурун өзгөртүлгөн"</string>
+    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • Акыркы жолу <xliff:g id="DAYS">%2$s</xliff:g> күн мурун өзгөртүлгөн"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
     <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Түзмөгүңүздөн <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> тазаланат."</string>
     <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"Алып салуу"</string>
-    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Эстутумду көзөмөлдөгүч"</string>
-    <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Сактагычтан орун бошотуу үчүн эстутумду көзөмөлдөгүч сүрөттөрдүн жана видеолордун камдалган көчүрмөлөрүн түзмөгүңүздөн алып салат."</string>
+    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Сактагычты көзөмөлдөгүч"</string>
+    <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Орун бошотуу үчүн сактагычты көзөмөлдөгүч камдык көчүрмөсү сакталган сүрөттөр менен видеолорду жок кылат."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Сүрөттөрдү жана видеолорду алып салуу"</string>
     <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"Эми <xliff:g id="USED">%1$s</xliff:g> бош. Сактагыч автоматтык түрдө көзөмөлдөнсүнбү?"</string>
-    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"Эстутумду көзөмөлдөгүч түзмөгүңүздөн мазмундун камдалган көчүрмөлөрүн автоматтык түрдө алып салып, орун бошотушуна уруксат берилсинби?"</string>
+    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"Сактагычты көзөмөлдөгүчкө камдык көчүрмөсү бар мазмунду түзмөгүңүздөн автоматтык түрдө өчүрүшүнө уруксат берилсинби?"</string>
     <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"Жок, рахмат"</string>
     <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Күйгүзүү"</string>
     <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Колдонмолор (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
-    <skip />
+    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • Акыркы жолу <xliff:g id="DAYS">%2$d</xliff:g> күн мурун колдонулган"</string>
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Автоматтык"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Нускама"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Азыр орун бошотуу"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Эстутумду көзөмөлдөгүч"</string>
 </resources>

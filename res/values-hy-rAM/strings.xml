@@ -70,7 +70,7 @@
     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Ջնջել SD քարտը"</string>
     <string name="preview_pager_content_description" msgid="8926235999291761243">"Նախադիտում"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Նախադիտում, էջ <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>՝ <xliff:g id="NUM_PAGES">%2$d</xliff:g>-ից"</string>
-    <string name="font_size_summary" msgid="1690992332887488183">"Խոշորացնել կամ մանրացնել էկրանի տեքստը:"</string>
+    <string name="font_size_summary" msgid="1690992332887488183">"Փոփոխեք տեքստի չափը։"</string>
     <string name="small_font" msgid="2295331917424072635">"Փոքր"</string>
     <string name="medium_font" msgid="2068475425515133701">"Միջին"</string>
     <string name="large_font" msgid="599055175160971446">"Մեծ"</string>
@@ -334,8 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Մատնահետքով ապակողպում"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (3508870672887336095) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Հեռախոսն ապակողպելու, գնումները թույլատրելու կամ հավելվածներ մուտք գործելու համար պարզապես մատը հպեք մատնահետքի սենսորին: Այդ գործողությունները հնարավոր է անել հեռախոսում ավելացված ցանկացած մատնահետքի միջոցով, այնպես որ մտածված ավելացրեք նոր մարդկանց մատնահետքերը:\n\nՆշում. ապակողպման հուսալի նախշը կամ PIN կոդը կարող է մատնահետքից ավելի ապահով լինել:"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Չեղարկել"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Շարունակել"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Բաց թողնել"</string>
@@ -1057,6 +1056,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Կարգավորել"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Ուսումնասիրել"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"Ազատել տարածք"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"Կառավարել հիշողությունը"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB համակարգչային կապ"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Կապակցել որպես"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Մեդիա սարք (MTP)"</string>
@@ -1664,13 +1664,13 @@
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Մկնիկի խոշոր նշիչ"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Մոնո ձայն"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Ձայնանյութ նվագարկելիս միավորել ալիքները"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Հպել &amp; սեղմած պահել"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Հպելու և սեղմած պահելու հապաղումը"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Գունաշրջում"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Փորձնական) կարող է ազդել աշխատանքի վրա"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"Սեղմել նշորդը կանգ առնելուց հետո"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Հապաղումը սեղմելուց առաջ"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Ցույց տալ Արագ կարգավորումներում"</string>
-    <string name="daltonizer_type" msgid="1124178250809091080">"Շտկման ռեժիմ"</string>
+    <string name="daltonizer_type" msgid="1124178250809091080">"Շտկման տեսակ"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
       <item quantity="one">Չափազանց կարճ հապաղում (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> մվ)</item>
       <item quantity="other">Չափազանց կարճ հապաղում (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> մվ)</item>
@@ -2932,7 +2932,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Խցիկ - սնուցման կոճակի կրկնակի սեղմամբ"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Խցիկի արագ բացում առանց էկրանը ապակողպելու"</string>
     <string name="screen_zoom_title" msgid="5233515303733473927">"Ցուցադրման չափը"</string>
-    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Խոշորացնել կամ մանրացնել էկրանի տարրերը"</string>
+    <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Փոփոխեք տարրերի չափը։"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"ցուցադրման խտություն, էկրանի մասշտաբ, մասշտաբ, մասշտաբավորում"</string>
     <string name="screen_zoom_summary" msgid="6445488991799015407">"Խոշորացնել կամ մանրացնել էկրանի տարրերը: Այս կարգավորումը փոխելուց հետո էկրանի որոշ հավելվածներ կարող են փոխել դիրքը:"</string>
     <string name="screen_zoom_preview_title" msgid="4680671508172336572">"Նախադիտում"</string>
@@ -2962,7 +2962,7 @@
     <string name="storage_summary" msgid="1110250618334248745">"<xliff:g id="SIZE2">%2$s</xliff:g>-ից օգտագործվել է <xliff:g id="SIZE1">%1$s</xliff:g>"</string>
     <string name="display_summary_on" msgid="5628868543070268634">"Հարմարողական պայծառությունը ՄԻԱՑՎԱԾ է"</string>
     <string name="display_summary_off" msgid="6399558022426312990">"Հարմարողական պայծառությունն ԱՆՋԱՏՎԱԾ է"</string>
-    <string name="memory_summary" msgid="8080825904671961872">"Հիշողության <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> ընդհանուր ծավալից օգտագործված է <xliff:g id="USED_MEMORY">%1$s</xliff:g>-ը"</string>
+    <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>-ից օգտագործվել է <xliff:g id="USED_MEMORY">%1$s</xliff:g>"</string>
     <string name="user_summary" msgid="1617826998097722499">"Մուտք եք գործել <xliff:g id="USER_NAME">%1$s</xliff:g> հաշիվ"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g>-ը կանխադրված հավելվածն է"</string>
     <string name="location_on_summary" msgid="5127631544018313587">"ՄԻԱՑՐԱԾ / <xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
@@ -3096,10 +3096,9 @@
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Անջատված է"</string>
     <string name="demo_mode" msgid="2655748420527206870">"Ցուցադրական ռեժիմ"</string>
     <string name="deletion_helper_title" msgid="32626003656187495">"Հեռացնել սարքից"</string>
-    <string name="deletion_helper_apps_title" msgid="2440481733792901667">"Հավելվածներ"</string>
-    <string name="deletion_helper_app_summary" msgid="726978464986102617">"<xliff:g id="USED">%1$s</xliff:g>, վերջին անգամ օգտագործվել է <xliff:g id="DAYS">%2$d</xliff:g> օր առաջ"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, նախկինում չի օգտագործվել"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, հայտնի չէ, թե վերջին անգամ երբ է օգտագործվել"</string>
+    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • Վերջին անգամ օգտագործվել է <xliff:g id="DAYS">%2$d</xliff:g> օր առաջ"</string>
+    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • Նախկինում չի օգտագործվել"</string>
+    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Հայտնի չէ, թե վերջին անգամ երբ է օգտագործվել"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Ազատել <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
     <string name="support_escalation_title" msgid="7311759892297590244">"Շուրջօրյա աջակցում"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"Դուք կարող եք պահանջել աջակցման զանգ կամ զրույց և մենք արագ կարձագանքենք"</string>
@@ -3140,9 +3139,9 @@
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Մուտքի արտաքին սարքեր"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Լուսանկարներ և տեսանյութեր (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$d</xliff:g> օրվանից հին"</string>
+    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> օրվանից հին"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Ներբեռնումներ (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, վերջին փոփոխումը՝ <xliff:g id="DAYS">%2$s</xliff:g>"</string>
+    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • Վերջին փոփոխումը՝ <xliff:g id="DAYS">%2$s</xliff:g>"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
     <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Ձեր սարքից կհեռացվեն <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> ծավալով տվյալներ:"</string>
@@ -3155,6 +3154,9 @@
     <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"Ոչ, շնորհակալություն"</string>
     <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Միացնել"</string>
     <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Հավելվածներ (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
-    <skip />
+    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • Վերջին անգամ օգտագործվել է <xliff:g id="DAYS">%2$d</xliff:g> օր առաջ"</string>
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Ավտոմատ"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Ձեռքով"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Ազատել տարածքը հիմա"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Հիշողության կառավարիչ"</string>
 </resources>

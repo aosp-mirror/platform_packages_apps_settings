@@ -334,8 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"আঙ্গুলের ছাপ দিয়ে আনলক করুন"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (3508870672887336095) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"আপনার ফোন আনলক করতে, কেনাকাটা অনুমোদন, বা অ্যাপ্লিকেশানগুলিতে সাইন ইন করতে শুধু আঙ্গুলের ছাপ নেওয়ার সেন্সরে স্পর্শ করুন৷ আপনি কাদের আঙ্গুলের ছাপ যোগ করছেন সেই বিষয়ে সতর্ক থাকুন৷ এমনকি যাদের আঙ্গুলের ছাপ যোগ করা হবে তারা এই জিনিসগুলি করতে পারবে।\n\nদ্রষ্টব্য: আপনার আঙ্গুলের ছাপ একটি জটিল প্যাটার্ন বা PIN এর চাইতে কম নিরাপদ হতে পারে।"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"বাতিল করুন"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"চালিয়ে যান"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"এড়িয়ে যান"</string>
@@ -1057,6 +1056,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"সেট আপ করুন"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"ঘুরে দেখুন"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"সঞ্চয়স্থান খালি করুন"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"সঞ্চয়স্থান পরিচালনা করুন"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB কম্পিউটার সংযোগ"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"হিসাবে সংযুক্ত করুন"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"মিডিয়া ডিভাইস (MTP)"</string>
@@ -1735,7 +1735,7 @@
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"আপনার কার্যগুলি নিরীক্ষণ করুন"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="6640333613848713883">"আপনি যখন একটি অ্যাপ্লিকেশানের সঙ্গে ইন্টারেক্ট করছেন তখন বিজ্ঞপ্তি পান।"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> থামাবেন?"</string>
-    <string name="disable_service_message" msgid="2247101878627941561">"\'ওকে\' এ আলতো চাপলে <xliff:g id="SERVICE">%1$s</xliff:g> থেমে যাবে।"</string>
+    <string name="disable_service_message" msgid="2247101878627941561">"\'ঠিক আছে\' এ আলতো চাপলে <xliff:g id="SERVICE">%1$s</xliff:g> থেমে যাবে।"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"কোনো পরিষেবা ইনস্টল করা নেই"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"কোনো বিবরণ প্রদান করা নেই।"</string>
     <string name="settings_button" msgid="3006713718908152930">"সেটিংস"</string>
@@ -3096,10 +3096,9 @@
     <string name="bluetooth_disabled" msgid="1558295505487648234">"অক্ষম করা রয়েছে"</string>
     <string name="demo_mode" msgid="2655748420527206870">"ডেমো মোড"</string>
     <string name="deletion_helper_title" msgid="32626003656187495">"ডিভাইস থেকে সরান"</string>
-    <string name="deletion_helper_apps_title" msgid="2440481733792901667">"অ্যাপ্লিকেশানগুলি"</string>
-    <string name="deletion_helper_app_summary" msgid="726978464986102617">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$d</xliff:g> দিন আগে শেষবার ব্যবহার করা হয়েছে"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, এর আগে কখনো ব্যবহার করা হয়নি"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, শেষবার কখন ব্যবহৃৎ হয়েছে তা নিশ্চিত নয়"</string>
+    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> দিন আগে শেষবার ব্যবহার করা হয়েছে"</string>
+    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • এর আগে কখনো ব্যবহার করা হয়নি"</string>
+    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • শেষবার কখন ব্যবহার করা হয়েছে তা নিশ্চিত নয়"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> খালি করুন"</string>
     <string name="support_escalation_title" msgid="7311759892297590244">"সারাদিন সহায়তা পাওয়া যায়"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"আপনি একটি সহায়তা কল বা চ্যাটের অনুরোধ করতে পারেন এবং আমরা দ্রুত আপনার সাথে যোগাযোগ করব"</string>
@@ -3140,9 +3139,9 @@
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"পেরিফেরাল ইনপুট"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"ব্লুটুথ"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"(<xliff:g id="NUM_ITEMS">%1$d</xliff:g>টি) ফটো ও ভিডিও"</string>
-    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$d</xliff:g> দিন আগে"</string>
+    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> দিনের বেশি পুরানো"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"ডাউনলোডগুলি (<xliff:g id="NUMITEMS">%1$d</xliff:g>টি)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, <xliff:g id="DAYS">%2$s</xliff:g> দিন আগে শেষ সংশোধন করা হয়েছে"</string>
+    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$s</xliff:g> দিন আগে শেষ সংশোধন করা হয়েছে"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
     <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"আপনার ডিভাইস থেকে <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> সরান৷"</string>
@@ -3155,6 +3154,9 @@
     <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"না থাক"</string>
     <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"চালু করুন"</string>
     <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"অ্যাপ্লিকেশান (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>টি)"</string>
-    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
-    <skip />
+    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> দিন আগে শেষবার ব্যবহার করা হয়েছে"</string>
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"স্বয়ংক্রিয়"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"ম্যানুয়াল"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"এখনই সঞ্চয়স্থান খালি করুন"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"সঞ্চয়স্থানের পরিচালক"</string>
 </resources>

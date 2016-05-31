@@ -334,8 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Unlock with fingerprint"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (3508870672887336095) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Just touch the fingerprint sensor to unlock your phone, authorise purchases or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things.\n\nNote: Your fingerprint may be less secure than a strong pattern or PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancel"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continue"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Skip"</string>
@@ -1057,6 +1056,7 @@
     <string name="storage_menu_set_up" msgid="4263294929451685366">"Set-up"</string>
     <string name="storage_menu_explore" msgid="4637496051816521560">"Explore"</string>
     <string name="storage_menu_free" msgid="6386070442027135427">"Free up space"</string>
+    <string name="storage_menu_manage" msgid="5914482953856430780">"Manage storage"</string>
     <string name="storage_title_usb" msgid="679612779321689418">"USB computer connection"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Connect as"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Media device (MTP)"</string>
@@ -2159,8 +2159,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"This feature may cause an app that depends on background data to stop working when only mobile networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="1493134803720421674">"Restricting background data is possible only when you\'ve set a mobile data limit."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Turn auto-sync data on?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Any changes that you make to your accounts on the web will be automatically copied to your tablet.\n\nSome accounts may also automatically copy any changes that you make on the tablet to the web. A Google Account works this way."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Any changes that you make to your accounts on the web will be automatically copied to your phone.\n\nSome accounts may also automatically copy any changes that you make on the phone to the web. A Google Account works this way."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Any changes that you make to your accounts on the web will be automatically copied to your tablet.\n\nSome accounts may also automatically copy any changes that you make on the tablet to the web. A Google account works this way."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Any changes that you make to your accounts on the web will be automatically copied to your phone.\n\nSome accounts may also automatically copy any changes that you make on the phone to the web. A Google account works this way."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Turn auto-sync data off?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"This will conserve data and battery usage, but you\'ll need to sync each account manually to collect recent information and you won\'t receive notifications when updates occur."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Usage cycle reset date"</string>
@@ -2181,8 +2181,8 @@
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"Removed apps and users"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> received, <xliff:g id="SENT">%2$s</xliff:g> sent"</string>
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used."</string>
-    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your tablet. Your operator\'s data usage accounting may differ."</string>
-    <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your phone. Your operator\'s data usage accounting may differ."</string>
+    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: About <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your tablet. Your operator\'s data usage accounting may differ."</string>
+    <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: About <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your phone. Your operator\'s data usage accounting may differ."</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"Network restrictions"</string>
     <string name="data_usage_metered_body" msgid="3262343834446126044">"Metered networks are treated like mobile when background data is restricted. Apps may warn before using these networks for large downloads."</string>
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"Mobile networks"</string>
@@ -2550,12 +2550,12 @@
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Show all notification content"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Hide sensitive notification content"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Don\'t show notifications at all"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"When your device is locked, how do you want notifications to show?"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"When your device is locked, how do you want notifications to be displayed?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notifications"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Show all work notification content"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"Hide sensitive work notification content"</string>
     <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"Don’t show work notifications at all"</string>
-    <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"When your device is locked, how do you want profile notifications to show?"</string>
+    <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"When your device is locked, how do you want profile notifications to be displayed?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Profile notifications"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Notifications"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Importance"</string>
@@ -3096,10 +3096,9 @@
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Disabled"</string>
     <string name="demo_mode" msgid="2655748420527206870">"Demo mode"</string>
     <string name="deletion_helper_title" msgid="32626003656187495">"Remove from device"</string>
-    <string name="deletion_helper_apps_title" msgid="2440481733792901667">"Apps"</string>
-    <string name="deletion_helper_app_summary" msgid="726978464986102617">"<xliff:g id="USED">%1$s</xliff:g>, last used <xliff:g id="DAYS">%2$d</xliff:g> days ago"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="7828721793513449862">"<xliff:g id="USED">%1$s</xliff:g>, never used before"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="3400694974842512809">"<xliff:g id="USED">%1$s</xliff:g>, not sure when last used"</string>
+    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • Last used <xliff:g id="DAYS">%2$d</xliff:g> days ago"</string>
+    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • Never used before"</string>
+    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Not sure when last used"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Free up <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
     <string name="support_escalation_title" msgid="7311759892297590244">"Around-the-clock support"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"You can request a support call or chat and we\'ll get back to you quickly"</string>
@@ -3140,9 +3139,9 @@
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Input Peripheral"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Photos &amp; Videos (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1383413274960773275">"<xliff:g id="USED">%1$s</xliff:g>, older than <xliff:g id="DAYS">%2$d</xliff:g> days"</string>
+    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • Older than <xliff:g id="DAYS">%2$d</xliff:g> days"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Downloads (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="778358216075112162">"<xliff:g id="USED">%1$s</xliff:g>, last modified <xliff:g id="DAYS">%2$s</xliff:g>"</string>
+    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • Last modified <xliff:g id="DAYS">%2$s</xliff:g>"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
     <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Remove <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> from your device."</string>
@@ -3155,6 +3154,9 @@
     <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"No, thanks"</string>
     <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Turn on"</string>
     <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Apps (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <!-- no translation found for deletion_helper_apps_group_summary (8110485691224297230) -->
-    <skip />
+    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • Last used <xliff:g id="DAYS">%2$d</xliff:g> days ago"</string>
+    <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatic"</string>
+    <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
+    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Free space now"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Storage manager"</string>
 </resources>
