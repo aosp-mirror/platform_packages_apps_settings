@@ -353,7 +353,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         final LocaleList locales = LocalePicker.getLocales();
         final Locale displayLocale = Locale.getDefault();
         return LocaleHelper.toSentenceCase(
-                LocaleHelper.getDisplayLocaleList(locales, displayLocale), displayLocale);
+                LocaleHelper.getDisplayLocaleList(
+                        locales, displayLocale, 2 /* Show up to two locales from the list */),
+                displayLocale);
     }
 
     private void saveInputMethodSelectorVisibility(String value) {
