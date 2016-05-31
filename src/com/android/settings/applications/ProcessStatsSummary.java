@@ -53,10 +53,6 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
 
         addPreferencesFromResource(R.xml.process_stats_summary);
         mSummaryPref = (SummaryPreference) findPreference(KEY_STATUS_HEADER);
-        int memColor = getContext().getColor(R.color.running_processes_apps_ram);
-        mSummaryPref.setColors(memColor, memColor,
-                getContext().getColor(R.color.running_processes_free_ram));
-
         mPerformance = findPreference(KEY_PERFORMANCE);
         mTotalMemory = findPreference(KEY_TOTAL_MEMORY);
         mAverageUsed = findPreference(KEY_AVERAGY_USED);
