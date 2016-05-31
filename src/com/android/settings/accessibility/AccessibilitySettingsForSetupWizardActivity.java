@@ -42,46 +42,11 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
 
     @Override
     protected void onCreate(Bundle savedState) {
-        // Main content frame id should be set before calling super as that is where the first
-        // Fragment is inflated.
-        setMainContentId(R.id.suw_main_content);
         super.onCreate(savedState);
 
         // Finish configuring the content view.
-        FrameLayout parentLayout = (FrameLayout) findViewById(R.id.main_content);
-        LayoutInflater.from(this)
-                .inflate(R.layout.accessibility_settings_for_suw, parentLayout);
-
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setIsDrawerPresent(false);
-
-        // Hide System Nav Bar.
-        SystemBarHelper.hideSystemBars(getWindow());
-        LinearLayout parentView = (LinearLayout) findViewById(R.id.content_parent);
-        parentView.setFitsSystemWindows(false);
-        // Adjust for the Status Bar.
-        parentView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
-                @Override
-                public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
-                    parentView.setPadding(0, insets.getSystemWindowInsetTop(), 0, 0);
-                    return insets;
-                }
-            });
-
-        // Show SUW Nav Bar.
-        NavigationBar navigationBar = (NavigationBar) findViewById(R.id.suw_navigation_bar);
-        navigationBar.getNextButton().setVisibility(View.GONE);
-        navigationBar.setNavigationBarListener(new NavigationBar.NavigationBarListener() {
-            @Override
-            public void onNavigateBack() {
-                onNavigateUp();
-            }
-
-            @Override
-            public void onNavigateNext() {
-                // Do nothing. We don't show this button.
-            }
-        });
     }
 
     @Override
