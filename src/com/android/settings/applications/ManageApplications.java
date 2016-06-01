@@ -26,6 +26,7 @@ import android.content.pm.ResolveInfo;
 import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.LocaleList;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -745,6 +746,8 @@ public class ManageApplications extends InstrumentedFragment
         private final Context mContext;
         private final ArrayList<View> mActive = new ArrayList<View>();
         private final AppStateBaseBridge mExtraInfoBridge;
+        private final Handler mBgHandler;
+        private final Handler mFgHandler;
         private int mFilterMode;
         private ArrayList<ApplicationsState.AppEntry> mBaseEntries;
         private ArrayList<ApplicationsState.AppEntry> mEntries;
@@ -785,6 +788,8 @@ public class ManageApplications extends InstrumentedFragment
         public ApplicationsAdapter(ApplicationsState state, ManageApplications manageApplications,
                                    int filterMode) {
             mState = state;
+            mFgHandler = new Handler();
+            mBgHandler = new Handler(mState.getBackgroundLooper());
             mSession = state.newSession(this);
             mManageApplications = manageApplications;
             mContext = manageApplications.getActivity();
@@ -897,17 +902,14 @@ public class ManageApplications extends InstrumentedFragment
                     comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
                     break;
             }
-            ArrayList<ApplicationsState.AppEntry> entries
-                    = mSession.rebuild(filterObj, comparatorObj);
-            if (entries == null && !eraseold) {
-                // Don't have new list yet, but can continue using the old one.
-                return;
-            }
-            if (mFilterMode == FILTER_APPS_POWER_WHITELIST ||
-                mFilterMode == FILTER_APPS_POWER_WHITELIST_ALL) {
-                entries = removeDuplicateIgnoringUser(entries);
-            }
-            onRebuildComplete(entries);
+            AppFilter finalFilterObj = filterObj;
+            mBgHandler.post(() -> {
+                final ArrayList<AppEntry> entries = mSession.rebuild(finalFilterObj,
+                        comparatorObj, false);
+                if (entries != null) {
+                    mFgHandler.post(() -> onRebuildComplete(entries));
+                }
+            });
         }
 
 
@@ -945,6 +947,10 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onRebuildComplete(ArrayList<AppEntry> entries) {
+            if (mFilterMode == FILTER_APPS_POWER_WHITELIST ||
+                    mFilterMode == FILTER_APPS_POWER_WHITELIST_ALL) {
+                entries = removeDuplicateIgnoringUser(entries);
+            }
             mBaseEntries = entries;
             if (mBaseEntries != null) {
                 mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
