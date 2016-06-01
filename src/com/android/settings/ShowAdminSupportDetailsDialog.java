@@ -161,6 +161,7 @@ public class ShowAdminSupportDetailsDialog extends Activity
                                     new UserHandle(enforcedAdmin.userId));
                         } else {
                             intent.setClass(activity, Settings.DeviceAdminSettingsActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             // Activity merges both managed profile and parent users
                             // admins so show as same user as this activity.
                             activity.startActivity(intent);
