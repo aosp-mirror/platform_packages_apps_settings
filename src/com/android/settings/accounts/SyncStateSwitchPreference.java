@@ -51,8 +51,13 @@ public class SyncStateSwitchPreference extends SwitchPreference {
 
     public SyncStateSwitchPreference(Context context, Account account, String authority) {
         super(context, null, 0, R.style.SyncSwitchPreference);
+        setup(account, authority);
+    }
+
+    public void setup(Account account, String authority) {
         mAccount = account;
         mAuthority = authority;
+        notifyChanged();
     }
 
     @Override
