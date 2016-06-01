@@ -334,17 +334,17 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Саусақ ізімен құлыпты ашу"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Телефон құлпын ашу, сатып алуларды авторизациялау немесе қолданбаларға кіру үшін жай саусақ ізін оқу сканерін түрнтіңіз. Саусақ іздерін қосқанда сақ болыңыз. Тіпті бір қосылған із осы әрекеттердің кез келгенін орындай алады.\n\nЕскертпе: саусақ ізінің қауіпсіздігі күшті өрнектен немесе PIN кодынан азырақ болуы мүмкін. "<annotation id="url">"Қосымша мәліметтер"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Телефон құлпын ашу, сатып алуларды авторизациялау немесе қолданбаларға кіру үшін саусақ ізін оқу сканерін түртсеңіз болды. Басқа саусақ іздерін қосқанда сақ болыңыз. Олар осы әрекеттердің кез келгенін орындай алады.\n\nЕскертпе: саусақ ізінің қауіпсіздігі күшті өрнектен немесе PIN кодынан азырақ болуы мүмкін. "<annotation id="url">"Толығырақ"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Бас тарту"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Жалғастыру"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Өткізіп жіберу"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="8386444182056861429">"Саусақ ізін қосу"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Құрылғыны қорғау мүмкіндіктері белсендірілмейді. Планшет жоғалса, ұрланса немесе деректері өшірілсе, оны басқалардың пайдалануынан сақтау мүмкін болмайды."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Құрылғыны қорғау мүмкіндіктері белсендірілмейді. Жоғалса, ұрланса немесе деректері өшірілсе, осы құрылғыны басқалардың пайдалануын болдырмау мүмкін болмайды."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Құрылғыны қорғау мүмкіндіктері іске қосылмайды. Жоғалса, ұрланса немесе деректері өшірілсе, бұл телефонды басқалардың пайдалануына жол бере алмайсыз."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Құрылғыны қорғау мүмкіндіктері іске қосылмайды. Жоғалса, ұрланса немесе деректері өшірілсе, бұл телефонды басқалардың пайдалануынан қорғай алмайсыз."</string>
     <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"Құрылғыны қорғау мүмкіндіктері белсендірілмейді. Жоғалса немесе ұрланса, басқалардың осы планшетті пайдалануын болдырмау мүмкін болмайды."</string>
     <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"Құрылғыны қорғау мүмкіндіктері белсендірілмейді. Жоғалса немесе ұрланса, басқалардың осы құрылғыны пайдалануын болдырмау мүмкін болмайды."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Құрылғыны қорғау мүмкіндіктері іске қосылмайды. Жоғалса, ұрланса немесе деректері өшірілсе, бұл телефонды басқалардың пайдалануына жол бере алмайсыз."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Құрылғыны қорғау мүмкіндіктері іске қосылмайды. Жоғалса, ұрланса немесе деректері өшірілсе, бұл телефонды басқалардың пайдалануынан қорғай алмайсыз."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Бәрібір өткізіп жіберу"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Оралу"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Сенсорды табу"</string>
@@ -2703,9 +2703,9 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Құрылғы құлпын ашу үшін саусақ ізін пайдаланумен бірге, іске қосардың алдында PIN кодын талап ету арқылы осы құрылғыны қосымша қорғауға болады. Іске қосылғанша құрылғы қоңырауларды, хабарларды немесе хабарландыруларды, соның ішінде дабылдарды қабылдай алмайды.\n\nБұл — жоғалған немесе ұрланған құрылғылардағы деректерді қорғауға көмектеседі."</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Құрылғы құлпын ашу үшін саусақ ізін пайдаланумен бірге, іске қосардың алдында өрнекті талап ету арқылы осы құрылғыны қосымша қорғауға болады. Іске қосылғанша құрылғы қоңырауларды, хабарларды немесе хабарландыруларды, соның ішінде дабылдарды қабылдай алмайды.\n\nБұл — жоғалған немесе ұрланған құрылғылардағы деректерді қорғауға көмектеседі."</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Құрылғы құлпын ашу үшін саусақ ізін пайдаланумен бірге, іске қосылардың алдында құпия сөзді талап ету арқылы осы құрылғыны қосымша қорғауға болады. Іске қосылғанша құрылғы қоңырауларды, хабарларды немесе хабарландыруларды, соның ішінде дабылдарды қабылдай алмайды.\n\nБұл — жоғалған немесе ұрланған құрылғылардағы деректерді қорғауға көмектеседі."</string>
-    <string name="encrypt_require_pin" msgid="2063945047845243752">"Құрылғыны іске қосу үшін PIN кодын қажет етеді"</string>
-    <string name="encrypt_require_pattern" msgid="6898479411004015810">"Құрылғыны іске қосу үшін өрнекті қажет етеді"</string>
-    <string name="encrypt_require_password" msgid="8770628366276570518">"Құрылғыны іске қосу үшін құпия сөзді қажет етеді"</string>
+    <string name="encrypt_require_pin" msgid="2063945047845243752">"Құрылғыны іске қосу үшін PIN кодын талап ету"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"Құрылғыны іске қосу үшін өрнекті талап ету"</string>
+    <string name="encrypt_require_password" msgid="8770628366276570518">"Құрылғыны іске қосу үшін құпия сөзді талап ету"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Жоқ, рақмет"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Жоқ, рақмет"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Жоқ, рақмет"</string>
