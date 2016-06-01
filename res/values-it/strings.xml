@@ -297,7 +297,7 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Seleziona fuso orario"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Data"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Imposta data"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Ordine alfabetico"</string>
+    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Ordina per nome"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Ordina per fuso orario"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
@@ -366,7 +366,7 @@
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Imposta blocco schermo"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Fine"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ops, questo non è il sensore"</string>
-    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Usa sensore impronte digitali su dispositivo."</string>
+    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Usa il sensore delle impronte sul dispositivo"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"L\'iscrizione non è stata completata"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Timeout iscrizione mediante impronta digitale. Riprova."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Iscrizione mediante impronta digitale non riuscita. Riprova o utilizza un dito diverso."</string>
@@ -835,6 +835,8 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Se le chiamate Wi-Fi sono attive, il tuo telefono può instradare le chiamate tramite reti Wi-Fi o la rete del tuo operatore, in base alle tue preferenze e alla potenza del segnale. Prima di attivare questa funzione, verifica tariffe e ulteriori dettagli con il tuo operatore."</string>
+    <!-- no translation found for emergency_address_title (3571902448699714454) -->
+    <skip />
     <string name="home_settings" msgid="212375129455718176">"Home page"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Audio"</string>
@@ -1375,7 +1377,7 @@
     <string name="install_applications" msgid="4872012136210802181">"Origini sconosciute"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Consenti tutte le fonti di app"</string>
     <string name="install_unknown_applications_title" msgid="663831043139080992">"Consente di installare app da fonti diverse da Google Play"</string>
-    <string name="install_unknown_applications" msgid="176855644862942064">"Consenti l\'installazione di app da fonti sconosciute"</string>
+    <string name="install_unknown_applications" msgid="176855644862942064">"Consenti l\'installazione di app da origini sconosciute"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Il tablet e i dati personali sono più vulnerabili agli attacchi da parte di applicazioni di origini sconosciute. L\'utente accetta di essere il solo responsabile degli eventuali danni al tablet o della perdita di dati che potrebbero derivare dall\'utilizzo di queste applicazioni."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Il telefono e i dati personali sono più vulnerabili agli attacchi da parte di app provenienti da origini sconosciute. L\'utente accetta di essere il solo responsabile degli eventuali danni al telefono o della perdita di dati che potrebbero derivare dall\'utilizzo di queste app."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Impostazioni avanzate"</string>
@@ -3098,7 +3100,7 @@
     <string name="deletion_helper_title" msgid="32626003656187495">"Rimuovi dal dispositivo"</string>
     <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • Ultimo utilizzo: <xliff:g id="DAYS">%2$d</xliff:g> giorni fa"</string>
     <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • Mai utilizzata prima"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Data dell\'ultimo utilizzo incerta"</string>
+    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Data ultimo utilizzo sconosciuta"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"Libera fino a <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
     <string name="support_escalation_title" msgid="7311759892297590244">"Assistenza 24 ore su 24"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"Puoi richiedere una chiamata o una chat con l\'assistenza e verrai ricontattato a breve"</string>
@@ -3159,4 +3161,6 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuali"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Libera spazio ora"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Gestione memoria"</string>
+    <!-- no translation found for automatic_storage_manager_service_label (447065525699452191) -->
+    <skip />
 </resources>

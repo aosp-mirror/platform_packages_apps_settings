@@ -835,6 +835,8 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"开启“WLAN 通话”功能后，您的手机可根据您的偏好设置，通过 WLAN 网络或您的运营商网络通话（具体取决于哪个网络信号较强）。开启此功能之前，请先向您的运营商咨询收费情况及其他详情。"</string>
+    <!-- no translation found for emergency_address_title (3571902448699714454) -->
+    <skip />
     <string name="home_settings" msgid="212375129455718176">"主屏幕"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"显示"</string>
     <string name="sound_settings" msgid="5534671337768745343">"声音"</string>
@@ -2104,7 +2106,7 @@
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g>，共 <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"全选"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"流量使用情况"</string>
-    <string name="data_usage_app_summary_title" msgid="4147258989837459172">"应用数据流量"</string>
+    <string name="data_usage_app_summary_title" msgid="4147258989837459172">"应用的流量使用情况"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"运营商的流量计算方式可能与您设备的计算方式不同。"</string>
     <string name="data_usage_app" msgid="4970478397515423303">"应用使用情况"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"应用信息"</string>
@@ -2734,7 +2736,7 @@
     <string name="storage_type_external" msgid="8928374515368986503">"外部存储"</string>
     <string name="storage_type_internal" msgid="6042049833565674948">"内部存储空间"</string>
     <string name="storage_type_external" msgid="7738894330670001898">"外部存储空间"</string>
-    <string name="app_data_usage" msgid="7942375313697452803">"应用数据流量"</string>
+    <string name="app_data_usage" msgid="7942375313697452803">"应用的流量使用情况"</string>
     <string name="data_summary_format" msgid="6213211533341068366">"自 <xliff:g id="DATE">%2$s</xliff:g>以来已使用 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"已使用的存储空间"</string>
     <string name="change" msgid="6657848623929839991">"更改"</string>
@@ -3096,12 +3098,9 @@
     <string name="bluetooth_disabled" msgid="1558295505487648234">"已停用"</string>
     <string name="demo_mode" msgid="2655748420527206870">"演示模式"</string>
     <string name="deletion_helper_title" msgid="32626003656187495">"从设备中移除"</string>
-    <!-- no translation found for deletion_helper_app_summary (6240455605247059339) -->
-    <skip />
-    <!-- no translation found for deletion_helper_app_summary_never_used (1113385590219547397) -->
-    <skip />
-    <!-- no translation found for deletion_helper_app_summary_unknown_used (2397045373780264380) -->
-    <skip />
+    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> 天前使用过"</string>
+    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • 从未使用过"</string>
+    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • 不确定上次使用时间"</string>
     <string name="deletion_helper_free_button" msgid="667489686914669981">"释放 <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
     <string name="support_escalation_title" msgid="7311759892297590244">"全天候客户支持"</string>
     <string name="support_escalation_summary" msgid="5284600375153448787">"您可以要求与支持人员通话或聊天，我们会尽快与您联系"</string>
@@ -3142,11 +3141,9 @@
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"外围输入设备"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"蓝牙"</string>
     <string name="deletion_helper_photos_title" msgid="8368603334844323794">"照片和视频（<xliff:g id="NUM_ITEMS">%1$d</xliff:g> 项）"</string>
-    <!-- no translation found for deletion_helper_photos_summary (1468099560244504904) -->
-    <skip />
+    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • 超过 <xliff:g id="DAYS">%2$d</xliff:g> 天以前"</string>
     <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"下载内容（<xliff:g id="NUMITEMS">%1$d</xliff:g> 项）"</string>
-    <!-- no translation found for deletion_helper_downloads_summary (5269991070337180914) -->
-    <skip />
+    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • 上次修改时间：<xliff:g id="DAYS">%2$s</xliff:g>"</string>
     <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
     <skip />
     <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"从您的设备中移除 <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> 内容。"</string>
@@ -3159,10 +3156,11 @@
     <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"不用了"</string>
     <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"开启"</string>
     <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"应用（<xliff:g id="NUM_ITEMS">%1$d</xliff:g> 个）"</string>
-    <!-- no translation found for deletion_helper_apps_group_summary (1992952541577075151) -->
-    <skip />
+    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> 天前使用过"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自动"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手动"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"立即释放空间"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"存储空间管理器"</string>
+    <!-- no translation found for automatic_storage_manager_service_label (447065525699452191) -->
+    <skip />
 </resources>
