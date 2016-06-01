@@ -27,6 +27,8 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 
+import com.android.settingslib.RestrictedLockUtils;
+
 /**
  * Activity that shows a dialog explaining that a CA cert is allowing someone to monitor network
  * traffic. This activity should be launched for the user into which the CA cert is installed
@@ -46,8 +48,10 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
         DevicePolicyManager dpm = getSystemService(DevicePolicyManager.class);
         final int numberOfCertificates = getIntent().getIntExtra(
                 Settings.EXTRA_NUMBER_OF_CERTIFICATES, 1);
-        final CharSequence title = getResources().getQuantityText(
-                R.plurals.ssl_ca_cert_dialog_title, numberOfCertificates);
+        final int titleId = RestrictedLockUtils.getProfileOrDeviceOwner(this, mUserId) != null
+                ? R.plurals.ssl_ca_cert_settings_button // Check certificate
+                : R.plurals.ssl_ca_cert_dialog_title; // Trust or remove certificate
+        final CharSequence title = getResources().getQuantityText(titleId, numberOfCertificates);
         setTitle(title);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
