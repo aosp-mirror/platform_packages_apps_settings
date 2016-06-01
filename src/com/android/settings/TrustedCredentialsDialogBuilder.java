@@ -34,6 +34,7 @@ import android.widget.Spinner;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustedCredentialsSettings.CertHolder;
+import com.android.settingslib.RestrictedLockUtils;
 
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -221,10 +222,11 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
                     && isUserSecure(certHolder.getUserId())
                     && !mDpm.isCaCertApproved(certHolder.getAlias(), certHolder.getUserId());
 
-            // The ok button is optional. User can still dismiss the dialog by other means.
-            // Display it only when trust button is not displayed, because we want users to
-            // either remove or trust a CA cert when the cert is installed by DPC app.
-            CharSequence displayText = mActivity.getText(mNeedsApproval
+            final boolean isProfileOrDeviceOwner = RestrictedLockUtils.getProfileOrDeviceOwner(
+                    mActivity, certHolder.getUserId()) != null;
+
+            // Show trust button only when it requires consumer user (non-PO/DO) to approve
+            CharSequence displayText = mActivity.getText(!isProfileOrDeviceOwner && mNeedsApproval
                     ? R.string.trusted_credentials_trust_label
                     : android.R.string.ok);
             mPositiveButton = updateButton(DialogInterface.BUTTON_POSITIVE, displayText);
