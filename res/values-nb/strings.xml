@@ -500,8 +500,8 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Hvis du skriver inn feil passord på dette forsøket, fjernes jobbprofilen og tilknyttede data fra enheten."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"For mange mislykkede forsøk. Jobbprofilen og tilknyttede data fjernes fra enheten."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Avvis"</string>
-    <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Passord må bestå av minst %d tegn"</string>
-    <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN-koden må ha minst %d sifre"</string>
+    <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Passord må inneholde minst %d tegn"</string>
+    <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN-koden må inneholde minst %d sifre"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Fortsett"</string>
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"Passordet må inneholde færre enn <xliff:g id="NUMBER">%d</xliff:g> tegn."</string>
     <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN-koden må inneholde færre enn <xliff:g id="NUMBER">%d</xliff:g> sifre."</string>
@@ -835,6 +835,8 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Når Wi-Fi-ringing er slått på, kan telefonen din dirigere telefonsamtaler via Wi-Fi-nettverk eller operatørens nettverk, avhengig av hva du har angitt i innstillingene og hvilket signal som er sterkest. Før du slår på denne funksjonen, er det viktig å sjekke gebyrer og andre detaljer med med operatøren din."</string>
+    <!-- no translation found for emergency_address_title (3571902448699714454) -->
+    <skip />
     <string name="home_settings" msgid="212375129455718176">"Startside"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skjerm"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Lyd"</string>
@@ -920,7 +922,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk lysstyrke"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Aktiver enheten med løftebevegelser"</string>
     <string name="doze_title" msgid="2259176504273878294">"Omgivelsesskjerm"</string>
-    <string name="doze_summary" msgid="7128970177894383698">"Slå på skjermen igjen når du plukker opp enheten eller mottar varsler"</string>
+    <string name="doze_summary" msgid="7128970177894383698">"Skjermen slås på når du plukker opp enheten eller mottar varsler"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Skriftstørrelse"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Gjør teksten større eller mindre"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Innstillinger for SIM-kort-lås"</string>
@@ -1307,7 +1309,7 @@
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Velg mønster"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Velg PIN-kode"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Bekreft passordet ditt"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Bekreft mønsteret ditt"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Bekreft mønsteret"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Bekreft PIN-koden"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Passordene samsvarer ikke"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN-kodene samsvarer ikke"</string>
@@ -1315,13 +1317,13 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Passordet er angitt"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-kode er angitt"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Mønster er angitt"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Bruk enhetsmønsteret ditt for å fortsette"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Tegn mønsteret ditt for å fortsette"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Skriv inn PIN-koden til enheten din for å fortsette"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Skriv inn enhetspassordet ditt for å fortsette"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="4435638308193361861">"Bruk jobbmønsteret ditt for å fortsette"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="3730141667547002246">"Skriv inn jobb-PIN-koden din for å fortsette"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="4250642723467019894">"Skriv inn jobbpassordet ditt for å fortsette"</string>
-    <string name="lockpassword_strong_auth_required_reason_restart_device_pattern" msgid="8548464672947477043">"Bruk enhetsmønsteret ditt for å fortsette. Dette kreves etter omstart av enheten."</string>
+    <string name="lockpassword_strong_auth_required_reason_restart_device_pattern" msgid="8548464672947477043">"Tegn mønsteret ditt for å fortsette. Dette kreves etter omstart av enheten."</string>
     <string name="lockpassword_strong_auth_required_reason_restart_device_pin" msgid="8048122891934295280">"Skriv inn PIN-koden til enheten din for å fortsette. Dette er nødvendig når enheten startes på nytt."</string>
     <string name="lockpassword_strong_auth_required_reason_restart_device_password" msgid="9007679426540259125">"Skriv inn enhetspassordet ditt for å fortsette. Dette kreves etter omstart av enheten."</string>
     <string name="lockpassword_strong_auth_required_reason_restart_work_pattern" msgid="7462071286473121099">"Bruk jobbmønsteret ditt for å fortsette. Dette kreves etter omstart av enheten."</string>
@@ -1335,7 +1337,7 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Endre PIN-kode for opplåsning"</string>
     <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Tegn et opplåsingsmønster"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Trykk menyknappen for hjelp."</string>
-    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Slipp fingeren når du er ferdig."</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Slipp opp fingeren når du er ferdig."</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Berør minst <xliff:g id="NUMBER">%d</xliff:g> punkter. Prøv på nytt."</string>
     <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Mønsteret er registrert"</string>
     <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Tegn mønsteret på nytt for å bekrefte"</string>
@@ -1377,7 +1379,7 @@
     <string name="install_unknown_applications_title" msgid="663831043139080992">"Lar deg installere apper fra andre kilder enn Google Play"</string>
     <string name="install_unknown_applications" msgid="176855644862942064">"Tillat installasjon av apper fra ukjente kilder"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Nettbrettet og personopplysningene dine er mer sårbare for angrep fra apper fra ukjente kilder. Du godtar at du alene er ansvarlig for enhver skade på nettbrettet eller tap av data som kan oppstå fra bruk av disse appene."</string>
-    <string name="install_all_warning" product="default" msgid="8113734576826384682">"Telefonen og personopplysninger er mer sårbare for angrep fra apper fra ukjente kilder. Du godtar at du selv er ansvarlig for enhver skade på telefonen, eller tap av data som kan skje ved å bruke disse appene."</string>
+    <string name="install_all_warning" product="default" msgid="8113734576826384682">"Telefonen og personopplysningene dine er mer sårbare for angrep hvis du bruker apper fra ukjente kilder. Du godtar at du selv er ansvarlig for skade på telefonen eller tap av data som kan skje ved å bruke disse appene."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Avanserte innstillinger"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Aktiver flere innstillingsalternativer"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Info om appen"</string>
@@ -2188,7 +2190,7 @@
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"Mobilnettverk"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Wi‑Fi-nettverk med datamåling"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Du må slå på Wi-Fi for å velge nettverk med datamåling."</string>
-    <string name="data_usage_disclaimer" msgid="6887858149980673444">"Operatørens metoder for måling av databruk kan være forskjellig fra metodene i enheten."</string>
+    <string name="data_usage_disclaimer" msgid="6887858149980673444">"Operatørens måling av databruk samsvarer ikke nødvendigvis med enhetens måling."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Nødanrop"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Tilbake til anrop"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Navn"</string>
@@ -2686,7 +2688,7 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Av"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Én-appsmodus"</string>
     <string name="screen_pinning_description" msgid="3360904523688769289">"Når denne innstillingen er slått på, kan du bruke én-appsmodus for å holde den nåværende skjermen åpen til du løsner den.\n\nSånn bruker du én-appsmodus:\n\n1. Sørg for at én-appsmodus er slått på.\n\n2. Åpne skjermen du vil feste.\n\n3. Trykk på Oversikt.\n\n4. Sveip oppover, og trykk deretter på festeikonet."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Krev bruk av opplåsningsmønster for å løsne apper"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Krev opplåsingsmønster for å løsne apper"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"PIN-kode for å løsne apper"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Krev passord for å løsne apper"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Lås enheten under løsning av apper"</string>
@@ -2701,9 +2703,9 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-informasjon"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Trygg oppstart"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Fortsett"</string>
-    <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Du kan beskytte denne enheten ved å kreve en PIN-kode ved oppstart. Frem til enheten starter kan den ikke motta oppringninger, meldinger eller varsler, inkludert alarmer. \n\nDette beskytter informasjonen på enheter som er mistet eller stjålet."</string>
-    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Du kan beskytte denne enheten ved å kreve et mønster ved oppstart. Frem til enheten starter kan den ikke motta oppringninger, meldinger eller varsler, inkludert alarmer. \n\nDette beskytter informasjonen på enheter som er mistet eller stjålet."</string>
-    <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Du kan beskytte denne enheten ved å kreve et passord ved oppstart. Frem til enheten starter kan den ikke motta oppringninger, meldinger eller varsler, inkludert alarmer. \n\nDette beskytter informasjonen på enheter som er mistet eller stjålet."</string>
+    <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Du kan beskytte denne enheten ved å kreve en PIN-kode ved oppstart. Frem til enheten starter, kan den ikke motta oppringninger, meldinger eller varsler, inkludert alarmer. \n\nDette beskytter informasjonen på enheter som er mistet eller stjålet."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Du kan beskytte denne enheten ved å kreve et mønster ved oppstart. Frem til enheten starter, kan den ikke motta oppringninger, meldinger eller varsler, inkludert alarmer. \n\nDette beskytter informasjonen på enheter som er mistet eller stjålet."</string>
+    <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Du kan beskytte denne enheten ved å kreve et passord ved oppstart. Frem til enheten starter, kan den ikke motta oppringninger, meldinger eller varsler, inkludert alarmer. \n\nDette beskytter informasjonen på enheter som er mistet eller stjålet."</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"I tillegg til å bruke fingeravtrykket ditt for å låse opp enheten, kan du sikre den enda mer ved å be om PIN-koden din før den låses opp. Inntil enheten er låst opp kan den ikke motta anrop, SMS eller varsler – inkludert alarmer.\n\nDette bidrar til å beskytte data på enheter du har mistet eller som er stjålet."</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"I tillegg til å bruke fingeravtrykket ditt for å låse opp enheten, kan du sikre den enda mer ved å be om mønsteret ditt før den låses opp. Inntil enheten er låst opp kan den ikke motta anrop, SMS eller varsler – inkludert alarmer.\n\nDette bidrar til å beskytte data på mistede eller stjålne enheter."</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"I tillegg til å bruke fingeravtrykket ditt for å låse opp enheten, kan du sikre den enda mer ved å be om passordet ditt før den låses opp. Inntil enheten er låst opp kan den ikke motta anrop, SMS eller varsler – inkludert alarmer.\n\nDette bidrar til å beskytte data på mistede eller stjålne enheter."</string>
@@ -3015,7 +3017,7 @@
     <string name="billing_cycle_summary" msgid="9009106526129293752">"Den månedlige faktureringssyklusen starter den <xliff:g id="ID_1">%1$s</xliff:g>. dagen i måneden"</string>
     <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Månedlig fakturering starter <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Nettverksbegrensninger"</string>
-    <string name="operator_warning" msgid="1862988028996859195">"Operatørens metoder for måling av databruk kan være forskjellige fra enhetens metoder"</string>
+    <string name="operator_warning" msgid="1862988028996859195">"Operatørens måling av databruk samsvarer ikke nødvendigvis med enhetens måling."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> er brukt"</string>
     <string name="data_warning" msgid="209133958008062117">"Advarsel for dataforbruk"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Angi en datagrense"</string>
@@ -3159,4 +3161,6 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuelle innstillinger"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Ledig lagringsplass"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Lagringsadministrator"</string>
+    <!-- no translation found for automatic_storage_manager_service_label (447065525699452191) -->
+    <skip />
 </resources>
