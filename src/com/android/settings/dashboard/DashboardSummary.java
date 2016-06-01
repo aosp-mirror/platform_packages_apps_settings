@@ -110,9 +110,9 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         long startTime = System.currentTimeMillis();
-        super.onResume();
+        super.onStart();
 
         ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
@@ -127,13 +127,13 @@ public class DashboardSummary extends InstrumentedFragment
                         DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion));
             }
         }
-        if (DEBUG_TIMING) Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime)
+        if (DEBUG_TIMING) Log.d(TAG, "onStart took " + (System.currentTimeMillis() - startTime)
                 + " ms");
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
 
         ((SettingsDrawerActivity) getActivity()).remCategoryListener(this);
         mSummaryLoader.setListening(false);
