@@ -426,15 +426,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (mNeedToRevertToInitialFragment) {
-            revertToInitialFragment();
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mDisplaySearch) {
             return false;
@@ -776,8 +767,12 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
+
+        if (mNeedToRevertToInitialFragment) {
+            revertToInitialFragment();
+        }
 
         mDevelopmentPreferencesListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -801,8 +796,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         unregisterReceiver(mBatteryInfoReceiver);
         unregisterReceiver(mUserAddRemoveReceiver);
         mDynamicIndexableContentMonitor.unregister();
