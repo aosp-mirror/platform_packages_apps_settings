@@ -154,6 +154,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         super.onCreate(icicle);
         setPreferenceScreen(null);
         addPreferencesFromResource(R.xml.account_sync_settings);
+        getPreferenceScreen().setOrderingAsAdded(false);
         setAccessibilityTitle();
 
         setHasOptionsMenu(true);
@@ -234,8 +235,13 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     }
 
     private void addSyncStateSwitch(Account account, String authority) {
-        SyncStateSwitchPreference item =
-                new SyncStateSwitchPreference(getPrefContext(), account, authority);
+        SyncStateSwitchPreference item = (SyncStateSwitchPreference) getCachedPreference(authority);
+        if (item == null) {
+            item = new SyncStateSwitchPreference(getPrefContext(), account, authority);
+            getPreferenceScreen().addPreference(item);
+        } else {
+            item.setup(account, authority);
+        }
         item.setPersistent(false);
         final ProviderInfo providerInfo = getPackageManager().resolveContentProviderAsUser(
                 authority, 0, mUserHandle.getIdentifier());
@@ -250,7 +256,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         String title = getString(R.string.sync_item_title, providerLabel);
         item.setTitle(title);
         item.setKey(authority);
-        mSwitches.add(item);
     }
 
     @Override
@@ -529,14 +534,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             }
         }
 
-        for (int i = 0, n = mSwitches.size(); i < n; i++) {
-            getPreferenceScreen().removePreference(mSwitches.get(i));
-        }
-        mSwitches.clear();
-
         if (Log.isLoggable(TAG, Log.VERBOSE)) {
             Log.d(TAG, "looking for sync adapters that match account " + mAccount);
         }
+        cacheRemoveAllPrefs(getPreferenceScreen());
         for (int j = 0, m = authorities.size(); j < m; j++) {
             final String authority = authorities.get(j);
             // We could check services here....
@@ -549,11 +550,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 addSyncStateSwitch(mAccount, authority);
             }
         }
-
-        Collections.sort(mSwitches);
-        for (int i = 0, n = mSwitches.size(); i < n; i++) {
-            getPreferenceScreen().addPreference(mSwitches.get(i));
-        }
+        removeCachedPrefs(getPreferenceScreen());
     }
 
     /**
@@ -562,7 +559,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     protected void onAuthDescriptionsUpdated() {
         super.onAuthDescriptionsUpdated();
-        getPreferenceScreen().removeAll();
         if (mAccount != null) {
             mProviderIcon.setImageDrawable(getDrawableForType(mAccount.type));
             mProviderId.setText(getLabelForType(mAccount.type));
