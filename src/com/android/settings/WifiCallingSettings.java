@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -26,10 +27,12 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -53,6 +56,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
     //String keys for preference lookup
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
+    private static final String PREFERENCE_EMERGENCY_ADDRESS = "emergency_address_key";
+
+    private static final int REQUEST_CHECK_WFC_EMERGENCY_ADDRESS = 1;
 
     //UI objects
     private SwitchBar mSwitchBar;
@@ -88,6 +94,22 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
                         && (state == TelephonyManager.CALL_STATE_IDLE));
             }
         }
+    };
+
+    private final OnPreferenceClickListener mUpdateAddressListener =
+            new OnPreferenceClickListener() {
+                /*
+                 * Launch carrier emergency address managemnent activity
+                 */
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    final Context context = getActivity();
+                    Intent carrierAppIntent = getCarrierActivityIntent(context);
+                    if (carrierAppIntent != null) {
+                        startActivity(carrierAppIntent);
+                    }
+                    return true;
+                }
     };
 
     @Override
@@ -162,6 +184,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         mButtonWfcMode = (ListPreference) findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
+
+        Preference mUpdateAddress = (Preference) findPreference(PREFERENCE_EMERGENCY_ADDRESS);
+        mUpdateAddress.setOnPreferenceClickListener(mUpdateAddressListener);
 
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(ImsManager.ACTION_IMS_REGISTRATION_ERROR);
@@ -239,15 +264,75 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         final Context context = getActivity();
+        Log.d(TAG, "onSwitchChanged(" + isChecked + ")");
 
-        ImsManager.setWfcSetting(context, isChecked);
+        if (!isChecked) {
+            updateWfcMode(context, false);
+            return;
+        }
+
+        // Call address management activity before turning on WFC
+        Intent carrierAppIntent = getCarrierActivityIntent(context);
+        if (carrierAppIntent != null) {
+            startActivityForResult(carrierAppIntent, REQUEST_CHECK_WFC_EMERGENCY_ADDRESS);
+        } else {
+            updateWfcMode(context, true);
+        }
+    }
+
+    /*
+     * Get the Intent to launch carrier emergency address management activity.
+     * Return null when no activity found.
+     */
+    private static Intent getCarrierActivityIntent(Context context) {
+        // Retrive component name from carrirt config
+        CarrierConfigManager configManager = context.getSystemService(CarrierConfigManager.class);
+        if (configManager == null) return null;
+
+        PersistableBundle bundle = configManager.getConfig();
+        if (bundle == null) return null;
+
+        String carrierApp = bundle.getString(
+                CarrierConfigManager.KEY_WFC_EMERGENCY_ADDRESS_CARRIER_APP_STRING);
+        if (TextUtils.isEmpty(carrierApp)) return null;
+
+        ComponentName componentName = ComponentName.unflattenFromString(carrierApp);
+        if (componentName == null) return null;
+
+        // Build and return intent
+        Intent intent = new Intent();
+        intent.setComponent(componentName);
+        return intent;
+    }
+
+    /*
+     * Turn on/off WFC mode with ImsManager and update UI accordingly
+     */
+    private void updateWfcMode(Context context, boolean wfcEnabled) {
+        Log.i(TAG, "updateWfcMode(" + wfcEnabled + ")");
+        ImsManager.setWfcSetting(context, wfcEnabled);
 
         int wfcMode = ImsManager.getWfcMode(context);
-        updateButtonWfcMode(context, isChecked, wfcMode);
-        if (isChecked) {
+        updateButtonWfcMode(context, wfcEnabled, wfcMode);
+        if (wfcEnabled) {
             MetricsLogger.action(getActivity(), getMetricsCategory(), wfcMode);
         } else {
             MetricsLogger.action(getActivity(), getMetricsCategory(), -1);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        final Context context = getActivity();
+
+        if (requestCode == REQUEST_CHECK_WFC_EMERGENCY_ADDRESS) {
+            Log.d(TAG, "WFC emergency address activity result = " + resultCode);
+
+            if (resultCode == Activity.RESULT_OK) {
+                updateWfcMode(context, true);
+            }
         }
     }
 
