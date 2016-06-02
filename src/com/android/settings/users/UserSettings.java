@@ -743,13 +743,13 @@ public class UserSettings extends SettingsPreferenceFragment
                 pref = new UserPreference(getPrefContext(), null, user.id,
                         showSettings ? this : null,
                         showDelete ? this : null);
-                pref.setOnPreferenceClickListener(this);
                 pref.setKey("id=" + user.id);
                 userPreferences.add(pref);
                 if (user.isAdmin()) {
                     pref.setSummary(R.string.user_admin);
                 }
                 pref.setTitle(user.name);
+                pref.setSelectable(false);
             }
             if (pref == null) {
                 continue;
@@ -760,6 +760,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 } else {
                     pref.setSummary(R.string.user_summary_not_set_up);
                 }
+                pref.setOnPreferenceClickListener(this);
+                pref.setSelectable(true);
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);
             }
@@ -800,6 +802,7 @@ public class UserSettings extends SettingsPreferenceFragment
             userPreferences.add(pref);
             pref.setDisabledByAdmin(
                     mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
+            pref.setSelectable(false);
         }
 
         // Sort list of users by serialNum
