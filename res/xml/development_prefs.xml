@@ -99,13 +99,6 @@
         <intent android:action="com.android.settings.action.DEMO_MODE" />
     </PreferenceScreen>
 
-    <!--TODO(b/28251942) Remove before ship -->
-    <PreferenceScreen
-        android:key="location_dogfood_tools"
-        android:title="@string/location_dogfood_tools">
-        <intent android:action="com.android.apps.location_dogfood.MAIN" />
-    </PreferenceScreen>
-
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
 
