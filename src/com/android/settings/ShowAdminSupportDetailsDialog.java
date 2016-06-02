@@ -39,7 +39,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class ShowAdminSupportDetailsDialog extends Activity
         implements DialogInterface.OnDismissListener {
@@ -104,20 +105,26 @@ public class ShowAdminSupportDetailsDialog extends Activity
         return false;
     }
 
-    private void initializeDialogViews(View root, final ComponentName admin, int userId) {
+    private void initializeDialogViews(View root, ComponentName admin, int userId) {
         if (admin != null) {
-            ActivityInfo ai = null;
-            try {
-                ai = AppGlobals.getPackageManager().getReceiverInfo(admin, 0 /* flags */, userId);
-            } catch (RemoteException e) {
-                Log.w(TAG, "Missing reciever info" , e);
-            }
-            if (ai != null) {
-                Drawable icon = ai.loadIcon(getPackageManager());
-                Drawable badgedIcon = getPackageManager().getUserBadgedIcon(
-                        icon, new UserHandle(userId));
-                ((ImageView) root.findViewById(R.id.admin_support_icon)).setImageDrawable(
-                        badgedIcon);
+            if (!RestrictedLockUtils.isAdminInCurrentUserOrProfile(this, admin)
+                    || !RestrictedLockUtils.isCurrentUserOrProfile(this, userId)) {
+                admin = null;
+            } else {
+                ActivityInfo ai = null;
+                try {
+                    ai = AppGlobals.getPackageManager().getReceiverInfo(admin, 0 /* flags */,
+                            userId);
+                } catch (RemoteException e) {
+                    Log.w(TAG, "Missing reciever info", e);
+                }
+                if (ai != null) {
+                    Drawable icon = ai.loadIcon(getPackageManager());
+                    Drawable badgedIcon = getPackageManager().getUserBadgedIcon(
+                            icon, new UserHandle(userId));
+                    ((ImageView) root.findViewById(R.id.admin_support_icon)).setImageDrawable(
+                            badgedIcon);
+                }
             }
         }
 
@@ -129,20 +136,27 @@ public class ShowAdminSupportDetailsDialog extends Activity
         if (enforcedAdmin == null) {
             return;
         }
+
         if (enforcedAdmin.component != null) {
             DevicePolicyManager dpm = (DevicePolicyManager) activity.getSystemService(
                     Context.DEVICE_POLICY_SERVICE);
-            if (enforcedAdmin.userId == UserHandle.USER_NULL) {
-                enforcedAdmin.userId = UserHandle.myUserId();
-            }
-            CharSequence supportMessage = null;
-            if (UserHandle.isSameApp(Process.myUid(), Process.SYSTEM_UID)) {
-                supportMessage = dpm.getShortSupportMessageForUser(
-                        enforcedAdmin.component, enforcedAdmin.userId);
-            }
-            if (supportMessage != null) {
-                TextView textView = (TextView) root.findViewById(R.id.admin_support_msg);
-                textView.setText(supportMessage);
+            if (!RestrictedLockUtils.isAdminInCurrentUserOrProfile(activity,
+                    enforcedAdmin.component) || !RestrictedLockUtils.isCurrentUserOrProfile(
+                    activity, enforcedAdmin.userId)) {
+                enforcedAdmin.component = null;
+            } else {
+                if (enforcedAdmin.userId == UserHandle.USER_NULL) {
+                    enforcedAdmin.userId = UserHandle.myUserId();
+                }
+                CharSequence supportMessage = null;
+                if (UserHandle.isSameApp(Process.myUid(), Process.SYSTEM_UID)) {
+                    supportMessage = dpm.getShortSupportMessageForUser(
+                            enforcedAdmin.component, enforcedAdmin.userId);
+                }
+                if (supportMessage != null) {
+                    TextView textView = (TextView) root.findViewById(R.id.admin_support_msg);
+                    textView.setText(supportMessage);
+                }
             }
         }
 
