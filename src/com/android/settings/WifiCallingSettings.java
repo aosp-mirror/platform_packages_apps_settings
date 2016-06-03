@@ -60,10 +60,16 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
     private static final int REQUEST_CHECK_WFC_EMERGENCY_ADDRESS = 1;
 
+    public static final String EXTRA_LAUNCH_CARRIER_APP = "EXTRA_LAUNCH_CARRIER_APP";
+
+    public static final int LAUCH_APP_ACTIVATE = 0;
+    public static final int LAUCH_APP_UPDATE = 1;
+
     //UI objects
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
     private ListPreference mButtonWfcMode;
+    private Preference mUpdateAddress;
     private TextView mEmptyView;
 
     private boolean mValidListener = false;
@@ -106,6 +112,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
                     final Context context = getActivity();
                     Intent carrierAppIntent = getCarrierActivityIntent(context);
                     if (carrierAppIntent != null) {
+                        carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_UPDATE);
                         startActivity(carrierAppIntent);
                     }
                     return true;
@@ -185,7 +192,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mButtonWfcMode = (ListPreference) findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
-        Preference mUpdateAddress = (Preference) findPreference(PREFERENCE_EMERGENCY_ADDRESS);
+        mUpdateAddress = (Preference) findPreference(PREFERENCE_EMERGENCY_ADDRESS);
         mUpdateAddress.setOnPreferenceClickListener(mUpdateAddressListener);
 
         mIntentFilter = new IntentFilter();
@@ -274,6 +281,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         // Call address management activity before turning on WFC
         Intent carrierAppIntent = getCarrierActivityIntent(context);
         if (carrierAppIntent != null) {
+            carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_ACTIVATE);
             startActivityForResult(carrierAppIntent, REQUEST_CHECK_WFC_EMERGENCY_ADDRESS);
         } else {
             updateWfcMode(context, true);
@@ -343,8 +351,10 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         if (wfcEnabled) {
             preferenceScreen.addPreference(mButtonWfcMode);
+            preferenceScreen.addPreference(mUpdateAddress);
         } else {
             preferenceScreen.removePreference(mButtonWfcMode);
+            preferenceScreen.removePreference(mUpdateAddress);
         }
         preferenceScreen.setEnabled(mEditableWfcMode);
     }
