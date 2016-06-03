@@ -47,8 +47,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  * {@link RestrictionsManager.hasRestrictionsProvider()} returns true, pass in
  * {@link RESTRICT_IF_OVERRIDABLE} to the constructor instead of a restrictions key.
  */
-public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragment
-            implements View.OnClickListener {
+public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragment {
 
     protected static final String RESTRICT_IF_OVERRIDABLE = "restrict_if_overridable";
 
@@ -212,22 +211,6 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
         return emptyView;
     }
 
-    private void updateAdminSupportDetailsView() {
-        final EnforcedAdmin admin = getRestrictionEnforcedAdmin();
-        if (admin != null) {
-            final Activity activity = getActivity();
-            DevicePolicyManager dpm = (DevicePolicyManager) activity.getSystemService(
-                    Context.DEVICE_POLICY_SERVICE);
-            CharSequence supportMessage = dpm.getShortSupportMessageForUser(
-                    admin.component, admin.userId);
-            if (supportMessage != null) {
-                TextView textView = (TextView) activity.findViewById(R.id.admin_support_msg);
-                textView.setText(supportMessage);
-            }
-            activity.findViewById(R.id.admins_policies_list).setOnClickListener(this);
-        }
-    }
-
     public EnforcedAdmin getRestrictionEnforcedAdmin() {
         mEnforcedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
                 mRestrictionKey, UserHandle.myUserId());
@@ -235,24 +218,6 @@ public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragm
             mEnforcedAdmin.userId = UserHandle.myUserId();
         }
         return mEnforcedAdmin;
-    }
-
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent();
-        if (view.getId() == R.id.admins_policies_list && mEnforcedAdmin != null) {
-            if (mEnforcedAdmin.component != null) {
-                intent.setClass(getActivity(), DeviceAdminAdd.class);
-                intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mEnforcedAdmin.component);
-                // DeviceAdminAdd class may need to run as managed profile.
-                getActivity().startActivityAsUser(intent, UserHandle.of(mEnforcedAdmin.userId));
-            } else {
-                intent.setClass(getActivity(), Settings.DeviceAdminSettingsActivity.class);
-                // Activity merges both managed profile and parent users
-                // admins so show as same user as this activity.
-                getActivity().startActivity(intent);
-            }
-        }
     }
 
     public TextView getEmptyTextView() {
