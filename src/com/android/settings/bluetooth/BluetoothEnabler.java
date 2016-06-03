@@ -24,6 +24,7 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -188,7 +189,16 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
         MetricsLogger.action(mContext, MetricsLogger.ACTION_BLUETOOTH_TOGGLE, isChecked);
 
         if (mLocalAdapter != null) {
-            mLocalAdapter.setBluetoothEnabled(isChecked);
+            boolean status = mLocalAdapter.setBluetoothEnabled(isChecked);
+            // If we cannot toggle it ON then reset the UI assets:
+            // a) The switch should be OFF but it should still be togglable (enabled = True)
+            // b) The switch bar should have OFF text.
+            if (isChecked && !status) {
+                switchView.setChecked(false);
+                mSwitch.setEnabled(true);
+                mSwitchBar.setTextViewLabel(false);
+                return;
+            }
         }
         mSwitch.setEnabled(false);
     }
