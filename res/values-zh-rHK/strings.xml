@@ -355,7 +355,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"刪除"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"開始加入指紋！"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"將手指放在感應器上，直至感到震動時放開"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"得好！請再做一次"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"很好！請再做一次"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"輕輕移動您的手指，以加入指紋的所有部分"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"已加入指紋！"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"每當看見這個圖示，即表示您可以使用指紋識別身分或授權購買。"</string>
@@ -457,7 +457,7 @@
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"關閉螢幕鎖定"</string>
     <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"移除裝置保護功能？"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="5507136301904313583">"要移除設定檔保護功能嗎？"</string>
-    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"如沒有設定上鎖圖形，裝置保護功能將無法運作。"</string>
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"如沒有設定解鎖圖形，裝置保護功能將無法運作。"</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"如沒有啟用圖案上鎖功能，裝置保護功能將無法運作。<xliff:g id="EMPTY_LINE">
 
 </xliff:g>您已儲存的指紋會從此裝置中移除，您將無法透過這些功能為手機解鎖、授權購物或登入應用程式。"</string>
@@ -546,7 +546,7 @@
     <string name="manage_device_admin" msgid="5059296715271077278">"裝置管理員"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"查看或停用裝置管理員"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"信任的代理程式"</string>
-    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"如要使用，請先設定螢幕鎖定"</string>
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"如要使用，請先設定上鎖畫面"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"查看或停用信任的代理程式"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"藍芽"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"開啟藍牙功能"</string>
@@ -1306,7 +1306,7 @@
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"確認密碼"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"確認圖形"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"確認 PIN"</string>
-    <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"密碼不符。"</string>
+    <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"密碼不符"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PIN 不符"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"選擇解鎖方式"</string>
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"已設定密碼"</string>
@@ -1334,7 +1334,7 @@
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"按選單鍵可開啟說明。"</string>
     <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"完成時請移開手指"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"圖案至少要連接 <xliff:g id="NUMBER">%d</xliff:g> 點，請再試一次。"</string>
-    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"已記錄圖案"</string>
+    <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"已記錄圖形"</string>
     <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"請再次畫出圖案以確認"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"新解鎖圖形"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"確認"</string>
@@ -1373,8 +1373,8 @@
     <string name="install_applications_title" msgid="4987712352256508946">"允許安裝所有來源的應用程式"</string>
     <string name="install_unknown_applications_title" msgid="663831043139080992">"允許從 Google Play 以外的來源安裝應用程式"</string>
     <string name="install_unknown_applications" msgid="176855644862942064">"允許安裝來源不明的應用程式"</string>
-    <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"來源不明的應用程式可能會損害您的平板電腦及個人資料，如因使用這些應用程式導致平板電腦受損或資料遺失，請自行承擔責任。"</string>
-    <string name="install_all_warning" product="default" msgid="8113734576826384682">"來源不明的應用程式可能會侵害您的手機和個人資料。您同意在使用這類應用程式時所造成的手機損壞或資料遺失承擔全部責任。"</string>
+    <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"來源不明的應用程式可能會侵害您的平板電腦和個人資料。使用這類應用程式時，您同意為所造成的損壞或資料遺失承擔全部責任。"</string>
+    <string name="install_all_warning" product="default" msgid="8113734576826384682">"來源不明的應用程式可能會侵害您的手機和個人資料。使用這類應用程式時，您同意為所造成的損壞或資料遺失承擔全部責任。"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"進階設定"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"啟用更多設定選項"</string>
     <string name="application_info_label" msgid="5736524913065714880">"應用程式資訊"</string>
@@ -1960,7 +1960,7 @@
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"輸入憑證儲存空間的密碼。"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"目前密碼："</string>
-    <string name="credentials_reset_hint" msgid="6297256880896133631">"您要移除所有內容嗎？"</string>
+    <string name="credentials_reset_hint" msgid="6297256880896133631">"要移除所有內容嗎？"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"密碼必須至少包含 8 個字元。"</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"密碼有誤。"</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"密碼不正確。您還有 1 次輸入密碼的機會，如果輸入錯誤，系統就會清除憑證儲存空間。"</string>
@@ -1969,7 +1969,7 @@
     <string name="credentials_not_erased" msgid="7685932772284216097">"無法清除憑證儲存空間。"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"已啟用認證儲存空間。"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"您必須先設定螢幕鎖定 PIN 或密碼，才能使用憑證儲存空間。"</string>
-    <string name="usage_access_title" msgid="332333405495457839">"擁有使用詳情存取權的應用程式"</string>
+    <string name="usage_access_title" msgid="332333405495457839">"可存取使用狀況的應用程式"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急警示音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"設定撥打緊急電話時的運作方式"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"備份和重設"</string>
@@ -2002,7 +2002,7 @@
     <string name="add_device_admin" msgid="1349673618141610506">"啟用此裝置管理員"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"裝置管理員"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"啟用此管理員將允許 <xliff:g id="APP_NAME">%1$s</xliff:g> 應用程式執行以下操作："</string>
-    <string name="device_admin_status" msgid="4252975713178851910">"這個管理員正在作業中，且允許 <xliff:g id="APP_NAME">%1$s</xliff:g> 應用程式執行以下操作："</string>
+    <string name="device_admin_status" msgid="4252975713178851910">"管理員已啟用，並允許 <xliff:g id="APP_NAME">%1$s</xliff:g>執行以下操作："</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"要啟用設定檔管理員嗎？"</string>
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"如果繼續操作，您的使用者將由您的管理員管理。除了您的個人資料外，管理員可能還會儲存其他相關聯的資料。\n\n您的管理員可以監控及管理設定、存取權、應用程式和資料，包括網絡活動和您的裝置位置資料。"</string>
     <string name="admin_disabled_other_options" msgid="4564776259414246934">"您的管理員已停用其他選項。"</string>
@@ -2687,7 +2687,7 @@
     <string name="switch_off_text" msgid="1139356348100829659">"關閉"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"螢幕固定"</string>
     <string name="screen_pinning_description" msgid="3360904523688769289">"開啟這項設定時，您可以使用螢幕固定功能讓目前的畫面持續顯示，直到取消固定為止。\n\n如何使用螢幕固定功能：\n\n1. 確認已開啟螢幕固定功能。\n\n2. 開啟要固定的畫面。\n\n3. 輕按 [概覽]。\n\n4. 向上快速滑動並輕按圖釘圖示。"</string>
-    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"取消固定時必須畫出解鎖圖案"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"取消固定時必須提供解鎖圖形"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"取消固定時必須輸入 PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"取消固定時必須輸入密碼"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"取消固定時鎖定裝置"</string>
@@ -2999,7 +2999,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"使用較冷的顯示器顏色"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"如要套用色溫變更，請先關閉螢幕"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"自動系統更新"</string>
-    <string name="location_dogfood_tools" msgid="8139860759382544832">"位置內部測試工具"</string>
     <string name="usage" msgid="2977875522080448986">"用量"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"流動數據用量"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi 數據用量"</string>
