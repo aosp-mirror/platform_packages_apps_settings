@@ -159,6 +159,12 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     // 32768 is merely a menu marker, 64K is our lowest log buffer size we replace it with.
     private static final String SELECT_LOGD_MINIMUM_SIZE_VALUE = "65536";
     private static final String SELECT_LOGD_OFF_SIZE_MARKER_VALUE = "32768";
+    private static final String SELECT_LOGPERSIST_KEY = "select_logpersist";
+    private static final String SELECT_LOGPERSIST_PROPERTY = "persist.logd.logpersistd";
+    private static final String SELECT_LOGPERSIST_PROPERTY_SERVICE = "logcatd";
+    private static final String SELECT_LOGPERSIST_PROPERTY_CLEAR = "clear";
+    private static final String SELECT_LOGPERSIST_PROPERTY_STOP = "stop";
+    private static final String SELECT_LOGPERSIST_PROPERTY_BUFFER = "persist.logd.logpersistd.buffer";
 
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
     private static final String WIFI_VERBOSE_LOGGING_KEY = "wifi_verbose_logging";
@@ -252,6 +258,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private SwitchPreference mForceRtlLayout;
     private ListPreference mDebugHwOverdraw;
     private ListPreference mLogdSize;
+    private ListPreference mLogpersist;
     private ListPreference mUsbConfiguration;
     private ListPreference mTrackFrameTime;
     private ListPreference mShowNonRectClip;
@@ -287,6 +294,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private Dialog mAdbKeysDialog;
     private boolean mUnavailable;
+
+    private boolean mLogpersistCleared;
+    private Dialog mLogpersistClearDialog;
 
     @Override
     protected int getMetricsCategory() {
@@ -393,6 +403,18 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mLegacyDhcpClient = findAndInitSwitchPref(WIFI_LEGACY_DHCP_CLIENT_KEY);
         mMobileDataAlwaysOn = findAndInitSwitchPref(MOBILE_DATA_ALWAYS_ON);
         mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
+        if ("1".equals(SystemProperties.get("ro.debuggable", "0"))) {
+            mLogpersist = addListPreference(SELECT_LOGPERSIST_KEY);
+        } else {
+            mLogpersist = (ListPreference) findPreference(SELECT_LOGPERSIST_KEY);
+            if (mLogpersist != null) {
+                mLogpersist.setEnabled(false);
+                if (debugDebuggingCategory != null) {
+                    debugDebuggingCategory.removePreference(mLogpersist);
+                }
+            }
+            mLogpersist = null;
+        }
         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
 
@@ -648,6 +670,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateBugreportOptions();
         updateForceRtlOptions();
         updateLogdSizeValues();
+        updateLogpersistValues();
         updateWifiDisplayCertificationOptions();
         updateWifiVerboseLoggingOptions();
         updateWifiAggressiveHandoverOptions();
@@ -672,6 +695,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             }
         }
         resetDebuggerOptions();
+        writeLogpersistOption(null, true);
         writeLogdSizeOption(null);
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
@@ -1331,6 +1355,14 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             String currentValue = SystemProperties.get(SELECT_LOGD_SIZE_PROPERTY);
             if ((currentTag != null) && currentTag.startsWith(SELECT_LOGD_TAG_SILENCE)) {
                 currentValue = SELECT_LOGD_OFF_SIZE_MARKER_VALUE;
+                if (mLogpersist != null) {
+                   writeLogpersistOption(null, true);
+                   mLogpersist.setEnabled(false);
+                }
+            } else {
+                if ((mLogpersist != null) && mLastEnabledState) {
+                   mLogpersist.setEnabled(true);
+                }
             }
             if ((currentValue == null) || (currentValue.length() == 0)) {
                 currentValue = defaultLogdSizeValue();
@@ -1397,6 +1429,103 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         SystemProperties.set("ctl.start", "logd-reinit");
         pokeSystemProperties();
         updateLogdSizeValues();
+    }
+
+    private void updateLogpersistValues() {
+        if (mLogpersist == null) {
+            return;
+        }
+        String currentValue = SystemProperties.get(SELECT_LOGPERSIST_PROPERTY);
+        if (currentValue == null) {
+            currentValue = "";
+        }
+        String currentBuffers = SystemProperties.get(SELECT_LOGPERSIST_PROPERTY_BUFFER);
+        if ((currentBuffers == null) || (currentBuffers.length() == 0)) {
+            currentBuffers = "all";
+        }
+        int index = 0;
+        if (currentValue.equals(SELECT_LOGPERSIST_PROPERTY_SERVICE)) {
+            index = 1;
+            if (!currentBuffers.equals("all") &&
+                    !currentBuffers.contains("radio") &&
+                    currentBuffers.contains("security") &&
+                    currentBuffers.contains("kernel")) {
+                index = 2;
+                if (!currentBuffers.contains("default")) {
+                    String[] contains = { "main", "events", "system", "crash" };
+                    for (int i = 0; i < contains.length; i++) {
+                        if (!currentBuffers.contains(contains[i])) {
+                            index = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        mLogpersist.setValue(getResources().getStringArray(R.array.select_logpersist_values)[index]);
+        mLogpersist.setSummary(getResources().getStringArray(R.array.select_logpersist_summaries)[index]);
+        mLogpersist.setOnPreferenceChangeListener(this);
+        if (index != 0) {
+            mLogpersistCleared = false;
+        } else if (!mLogpersistCleared) {
+            // would File.delete() directly but need to switch uid/gid to access
+            SystemProperties.set(SELECT_LOGPERSIST_PROPERTY, SELECT_LOGPERSIST_PROPERTY_CLEAR);
+            pokeSystemProperties();
+            mLogpersistCleared = true;
+        }
+    }
+
+    private void setLogpersistOff(boolean update) {
+        SystemProperties.set(SELECT_LOGPERSIST_PROPERTY_BUFFER, "");
+        SystemProperties.set(SELECT_LOGPERSIST_PROPERTY,
+            update ? "" : SELECT_LOGPERSIST_PROPERTY_STOP);
+        pokeSystemProperties();
+        if (update) {
+            updateLogpersistValues();
+        }
+    }
+
+    private void writeLogpersistOption(Object newValue, boolean skipWarning) {
+        if (mLogpersist == null) {
+            return;
+        }
+        String currentTag = SystemProperties.get(SELECT_LOGD_TAG_PROPERTY);
+        if ((currentTag != null) && currentTag.startsWith(SELECT_LOGD_TAG_SILENCE)) {
+            newValue = null;
+            skipWarning = true;
+        }
+
+        if ((newValue == null) || newValue.toString().equals("")) {
+            if (skipWarning) {
+                mLogpersistCleared = false;
+            } else if (!mLogpersistCleared) {
+                // if transitioning from on to off, pop up an are you sure?
+                String currentValue = SystemProperties.get(SELECT_LOGPERSIST_PROPERTY);
+                if ((currentValue != null) && (currentValue.length() != 0)) {
+                    if (mLogpersistClearDialog != null) dismissDialogs();
+                    mLogpersistClearDialog = new AlertDialog.Builder(getActivity()).setMessage(
+                            getActivity().getResources().getString(
+                                    R.string.dev_logpersist_clear_warning_message))
+                            .setTitle(R.string.dev_logpersist_clear_warning_title)
+                            .setPositiveButton(android.R.string.yes, this)
+                            .setNegativeButton(android.R.string.no, this)
+                            .show();
+                    mLogpersistClearDialog.setOnDismissListener(this);
+                    return;
+                }
+            }
+            setLogpersistOff(true);
+            return;
+        }
+
+        String currentBuffer = SystemProperties.get(SELECT_LOGPERSIST_PROPERTY_BUFFER);
+        if ((currentBuffer != null) && !currentBuffer.equals(newValue.toString())) {
+            setLogpersistOff(false);
+        }
+        SystemProperties.set(SELECT_LOGPERSIST_PROPERTY_BUFFER, newValue.toString());
+        SystemProperties.set(SELECT_LOGPERSIST_PROPERTY, SELECT_LOGPERSIST_PROPERTY_SERVICE);
+        pokeSystemProperties();
+        updateLogpersistValues();
     }
 
     private void updateUsbConfigurationValues() {
@@ -1831,6 +1960,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         } else if (preference == mLogdSize) {
             writeLogdSizeOption(newValue);
             return true;
+        } else if (preference == mLogpersist) {
+            writeLogpersistOption(newValue, false);
+            return true;
         } else if (preference == mUsbConfiguration) {
             writeUsbConfigurationOption(newValue);
             return true;
@@ -1881,6 +2013,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             mEnableDialog.dismiss();
             mEnableDialog = null;
         }
+        if (mLogpersistClearDialog != null) {
+            mLogpersistClearDialog.dismiss();
+            mLogpersistClearDialog = null;
+        }
     }
 
     public void onClick(DialogInterface dialog, int which) {
@@ -1917,6 +2053,12 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 // Reset the toggle
                 mSwitchBar.setChecked(false);
             }
+        } else if (dialog == mLogpersistClearDialog) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                setLogpersistOff(true);
+            } else {
+                updateLogpersistValues();
+            }
         }
     }
 
@@ -1932,6 +2074,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 mSwitchBar.setChecked(false);
             }
             mEnableDialog = null;
+        } else if (dialog == mLogpersistClearDialog) {
+            mLogpersistClearDialog = null;
         }
     }
 
