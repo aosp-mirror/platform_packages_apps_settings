@@ -326,7 +326,7 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"지문"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"지문 관리"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"지문을 사용할 항목"</string>
-    <string name="fingerprint_add_title" msgid="1926752654454033904">"지문 파일 추가"</string>
+    <string name="fingerprint_add_title" msgid="1926752654454033904">"지문 추가"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"화면 잠금"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
       <item quantity="other">지문 <xliff:g id="COUNT_1">%1$d</xliff:g>개 설정됨</item>
@@ -338,7 +338,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"취소"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"계속"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"건너뛰기"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="8386444182056861429">"지문 파일 추가"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="8386444182056861429">"지문 추가"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"기기 보호 기능이 활성화되지 않습니다. 태블릿을 분실 또는 도난당했거나 삭제된 경우 다른 사람이 이 태블릿을 사용하는 것을 방지할 수 없습니다."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"기기 보호 기능이 활성화되지 않습니다. 기기가 분실, 도난 또는 삭제되는 경우 다른 사람이 이 기기를 사용하는 것을 방지할 수 없습니다."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"기기 보호 기능이 활성화되지 않습니다. 스마트폰이 분실, 도난 또는 삭제되는 경우 다른 사람이 이 스마트폰을 사용하는 것을 방지할 수 없습니다."</string>
@@ -504,7 +504,7 @@
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN은 %d자리 이상이어야 합니다."</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"계속"</string>
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"비밀번호는 <xliff:g id="NUMBER">%d</xliff:g>자 미만이어야 합니다."</string>
-    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN은 <xliff:g id="NUMBER">%d</xliff:g>자 미만이어야 합니다."</string>
+    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN은 <xliff:g id="NUMBER">%d</xliff:g>자리 미만이어야 합니다."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"PIN에는 숫자 0-9만 사용할 수 있습니다."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"기기 관리자가 최근 PIN 사용을 허용하지 않습니다."</string>
     <string name="lockpassword_illegal_character" msgid="8742901630116866738">"비밀번호에 잘못된 글자가 들어 있습니다."</string>
@@ -835,8 +835,7 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi 통화가 켜져 있으면 휴대전화에서 환경설정과 신호 강도에 따라 Wi-Fi 네트워크나 데이터 네트워크를 통해 통화를 연결할 수 있습니다. 이 기능을 사용하기 전에 이동통신사에 문의하여 요금과 기타 세부정보를 알아보세요."</string>
-    <!-- no translation found for emergency_address_title (3571902448699714454) -->
-    <skip />
+    <string name="emergency_address_title" msgid="3571902448699714454">"긴급 주소 업데이트"</string>
     <string name="home_settings" msgid="212375129455718176">"홈"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"디스플레이"</string>
     <string name="sound_settings" msgid="5534671337768745343">"소리"</string>
@@ -1260,12 +1259,12 @@
     <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"GPS, Wi‑Fi, 블루투스 또는 이동통신망을 사용하여 위치를 찾습니다."</string>
     <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"Wi‑Fi, 블루투스 또는 이동통신망을 사용하여 위치를 찾습니다."</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"GPS를 사용하여 위치를 찾습니다."</string>
-    <string name="location_menu_scanning" msgid="8536245838478802959">"검색 중"</string>
-    <string name="location_scanning_screen_title" msgid="4408076862929611554">"검색 중"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi‑Fi 검색 중"</string>
+    <string name="location_menu_scanning" msgid="8536245838478802959">"검색"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"검색"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi‑Fi 검색"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"시스템 앱과 서비스가 Wi‑Fi 네트워크를 항상 감지하도록 허용하여 위치 정확도를 개선합니다."</string>
-    <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"블루투스 검색 중"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"시스템 앱과 서비스에서 블루투스 기기를 항상 감지하도록 허용하여 위치 정확도를 개선합니다."</string>
+    <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"블루투스 검색"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"시스템 앱과 서비스가 블루투스 기기를 항상 감지하도록 허용하여 위치 정확도를 개선합니다."</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi 및 이동통신망 위치"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"사용자의 위치를 빠르게 파악하도록 앱에서 Google의 위치 서비스를 사용합니다. 익명의 위치 정보가 수집되어 Google로 전송됩니다."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi-Fi에서 측정된 위치"</string>
@@ -1424,7 +1423,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"긴급 앱"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"앱 환경설정 초기화"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"앱 환경설정을 초기화하시겠습니까?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"이 작업을 수행하면 다음 환경설정이 초기화됩니다.\n\n "<li>"사용 중지된 앱"</li>\n" "<li>"사용 중지된 앱 알림"</li>\n" "<li>"작업을 수행할 때 사용하는 기본 애플리케이션"</li>\n" "<li>"앱에 대한 백그라운드 데이터 제한"</li>\n" "<li>"그 밖의 권한 제한"</li>\n\n" 앱 데이터는 손실되지 않습니다."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"이 작업을 수행하면 다음 환경설정이 초기화됩니다.\n\n "<li>"사용 중지된 앱"</li>\n" "<li>"사용 중지된 앱 알림"</li>\n" "<li>"작업에 사용하는 기본 애플리케이션"</li>\n" "<li>"앱에 대한 백그라운드 데이터 제한"</li>\n" "<li>"그 밖의 권한 제한"</li>\n\n" 앱 데이터는 손실되지 않습니다."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"앱 초기화"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"공간 관리"</string>
     <string name="filter" msgid="2018011724373033887">"필터"</string>
@@ -1650,7 +1649,7 @@
     <string name="accessibility_display_title" msgid="7610175687949675162">"디스플레이"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"캡션"</string>
     <string name="accessibility_screen_magnification_title" msgid="9002237235486714636">"확대 동작"</string>
-    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"확대하려면 3번 탭하세요."</string>
+    <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"3번 탭하여 확대"</string>
     <string name="accessibility_screen_magnification_summary" msgid="7798920976388197258"><b>"확대/축소하려면"</b>" 한 손가락으로 화면을 빠르게 세 번 탭합니다.\n"<ul><li>"2개 이상의 손가락으로 스크롤합니다."</li>\n<li>"2개 이상의 손가락을 모으거나 벌려 확대/축소를 조정합니다."</li></ul>\n\n<b>"일시적으로 확대/축소하려면"</b>" 화면을 빠르게 세 번 탭하고, 세 번째 탭에서 길게 누릅니다.\n"<ul><li>"손가락으로 드래그하여 화면을 이동합니다."</li>\n<li>"손가락을 떼서 축소합니다."</li></ul>\n\n"키보드 및 탐색 메뉴에서는 확대할 수 없습니다."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"접근성 단축키"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"켜기"</string>
@@ -2999,7 +2998,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"더 차가운 디스플레이 색상 사용"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"색상 변경을 적용하려면 화면을 끄세요."</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"자동 시스템 업데이트"</string>
-    <string name="location_dogfood_tools" msgid="8139860759382544832">"위치 Dogfood 도구"</string>
     <string name="usage" msgid="2977875522080448986">"사용량"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"모바일 데이터 사용량"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi 데이터 사용량"</string>
@@ -3159,6 +3157,5 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"수동"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"현재 여유 공간"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"저장용량 관리자"</string>
-    <!-- no translation found for automatic_storage_manager_service_label (447065525699452191) -->
-    <skip />
+    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"자동 스토리지 관리 서비스"</string>
 </resources>

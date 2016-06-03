@@ -457,8 +457,8 @@
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"ปิดการล็อกหน้าจอ"</string>
     <string name="unlock_disable_frp_warning_title" msgid="264008934468492550">"นำการปกป้องอุปกรณ์ออกใช่ไหม"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="5507136301904313583">"ต้องการนำการปกป้องโปรไฟล์ออกใช่ไหม"</string>
-    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"คุณลักษณะการปกป้องอุปกรณ์จะไม่ทำงานหากไม่มีรูปแบบ"</string>
-    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"คุณลักษณะการปกป้องอุปกรณ์จะไม่ทำงานหากไม่มีรูปแบบ<xliff:g id="EMPTY_LINE">
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="8869767290771023461">"คุณลักษณะการปกป้องอุปกรณ์จะไม่ทำงานหากไม่ป้อนรูปแบบของคุณ"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"คุณลักษณะการปกป้องอุปกรณ์จะไม่ทำงานหากไม่ป้อนรูปแบบของคุณ<xliff:g id="EMPTY_LINE">
 
 </xliff:g>และระบบจะนำลายนิ้วมือที่บันทึกไว้ออกจากอุปกรณ์นี้และคุณจะไม่สามารถปลดล็อกโทรศัพท์ อนุญาตการซื้อ หรือลงชื่อเข้าใช้แอปโดยใช้ลายนิ้วมือดังกล่าว\""</string>
     <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"คุณลักษณะการปกป้องอุปกรณ์จะไม่ทำงานหากไม่มี PIN"</string>
@@ -474,7 +474,7 @@
 
 </xliff:g>และระบบจะนำลายนิ้วมือที่บันทึกไว้ออกจากอุปกรณ์นี้และคุณจะไม่สามารถปลดล็อกโทรศัพท์ อนุญาตการซื้อ หรือลงชื่อเข้าใช้แอปโดยใช้ลายนิ้วมือดังกล่าว\""</string>
     <string name="unlock_disable_frp_warning_content_pattern_profile" msgid="8682200103576359918">"คุณลักษณะการปกป้องโปรไฟล์จะไม่ทำงานหากไม่มี PIN"</string>
-    <string name="unlock_disable_frp_warning_content_pattern_fingerprint_profile" msgid="3675154828957224316">"คุณลักษณะการปกป้องโปรไฟล์จะไม่ทำงานถ้าไม่มีรูปแบบ<xliff:g id="EMPTY_LINE">
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint_profile" msgid="3675154828957224316">"คุณลักษณะการปกป้องโปรไฟล์จะไม่ทำงานหากไม่ป้อนรูปแบบของคุณ<xliff:g id="EMPTY_LINE">
 
 </xliff:g>ระบบจะนำลายนิ้วมือที่บันทึกไว้ออกจากโปรไฟล์นี้ด้วย ซึ่งทำให้คุณปลดล็อกโปรไฟล์ ให้สิทธิ์การซื้อ หรือลงชื่อเข้าใช้แอปโดยใช้ลายนิ้วมือนั้นไม่ได้\""</string>
     <string name="unlock_disable_frp_warning_content_pin_profile" msgid="7790688070593867767">"คุณลักษณะการปกป้องโปรไฟล์จะไม่ทำงานหากไม่มี PIN"</string>
@@ -835,8 +835,7 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"เมื่อเปิดการโทรผ่าน Wi-Fi โทรศัพท์จะสามารถวางเส้นทางสายเรียกผ่านเครือข่าย Wi-Fi หรือเครือข่ายของผู้ให้บริการของคุณได้ ทั้งนี้ขึ้นอยู่กับค่ากำหนดของคุณและสัญญาณฝั่งที่แรงกว่า โปรดสอบถามค่าธรรมเนียมและรายละเอียดอื่นๆ กับผู้ให้บริการก่อนที่จะเปิดคุณลักษณะนี้"</string>
-    <!-- no translation found for emergency_address_title (3571902448699714454) -->
-    <skip />
+    <string name="emergency_address_title" msgid="3571902448699714454">"อัปเดตที่อยู่ฉุกเฉิน"</string>
     <string name="home_settings" msgid="212375129455718176">"หน้าแรก"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"แสดง"</string>
     <string name="sound_settings" msgid="5534671337768745343">"เสียง"</string>
@@ -2999,7 +2998,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"ใช้สีแสดงผลที่เย็นกว่านี้"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"หากต้องการใช้การเปลี่ยนสี ให้ปิดหน้าจอ"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"การอัปเดตระบบอัตโนมัติ"</string>
-    <string name="location_dogfood_tools" msgid="8139860759382544832">"เครื่องมือสำหรับการลองใช้สถานที่"</string>
     <string name="usage" msgid="2977875522080448986">"การใช้งาน"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"ปริมาณการใช้อินเทอร์เน็ต"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"การใช้อินเทอร์เน็ตผ่าน Wi-Fi"</string>
@@ -3159,6 +3157,5 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"คู่มือ"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"เหลือพื้นที่ว่าง"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"ตัวจัดการพื้นที่เก็บข้อมูล"</string>
-    <!-- no translation found for automatic_storage_manager_service_label (447065525699452191) -->
-    <skip />
+    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"บริการจัดการพื้นที่เก็บข้อมูลอัตโนมัติ"</string>
 </resources>

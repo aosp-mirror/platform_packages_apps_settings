@@ -392,7 +392,7 @@
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Шифрование"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Зашифровать данные"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Зашифровать данные"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Зашифровано"</string>
+    <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Данные зашифрованы"</string>
     <string name="crypt_keeper_desc" product="tablet" msgid="503014594435731275">"Вы можете зашифровать свои аккаунты, настройки, скачанные приложения и их данные, а также медиаданные и другие файлы на устройстве. После этого для расшифровки вам будет необходимо при каждом включении устройства разблокировать экран, если настроена его блокировка (графический ключ, PIN-код или пароль). Другой способ расшифровки – это сбросить настройки телефона, в результате чего все данные будут удалены.\n\nОбычно шифрование данных занимает около часа или более. Перед процедурой полностью зарядите батарею и не отключайте зарядное устройство, пока шифрование не завершится. Если прервать процесс, все данные или их часть будет утеряна."</string>
     <string name="crypt_keeper_desc" product="default" msgid="2579929266645543631">"Вы можете зашифровать свои аккаунты, настройки, скачанные приложения и их данные, а также медиаданные и другие файлы на устройстве. После этого для расшифровки вам будет необходимо при каждом включении устройства разблокировать экран, если настроена его блокировка (графический ключ, PIN-код или пароль). Другой способ расшифровки – это сбросить настройки телефона, в результате чего все данные будут удалены.\n\nОбычно шифрование данных занимает около часа или более. Перед процедурой полностью зарядите батарею и не отключайте зарядное устройство, пока шифрование не завершится. Если прервать процесс, все данные или их часть будет утеряна."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Зашифровать данные"</string>
@@ -422,7 +422,7 @@
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Сменить способ ввода"</string>
     <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Блокировка экрана"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Защитите устройство"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Как разблокировать устройство с помощью отпечатка пальца"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Разблокируйте устройство с помощью отпечатка пальца"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Блокировка экрана"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Раб. способ блокировки"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Защитите планшет"</string>
@@ -506,7 +506,7 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Если вы неправильно введете пароль, ваш рабочий профиль и связанные с ним данные будут удалены с устройства."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"У вас больше нет попыток. Рабочий профиль и связанные с ним данные будут удалены с устройства."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Закрыть"</string>
-    <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Пароль должен содержать не менее %d символов"</string>
+    <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Пароль должен содержать не менее %d симв."</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN-код должен содержать не менее %d цифр"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Продолжить"</string>
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"Пароль должен содержать менее <xliff:g id="NUMBER">%d</xliff:g> симв."</string>
@@ -853,8 +853,7 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Когда функция \"Звонки по Wi-Fi\" включена, для исходящих вызовов может использоваться как Wi-Fi, так и мобильная сеть (в зависимости от ваших предпочтений и уровня сигнала). Прежде чем включить эту функцию, свяжитесь со своим оператором и уточните детали."</string>
-    <!-- no translation found for emergency_address_title (3571902448699714454) -->
-    <skip />
+    <string name="emergency_address_title" msgid="3571902448699714454">"Изменение адреса для экстренных случаев"</string>
     <string name="home_settings" msgid="212375129455718176">"Домашний экран"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Экран"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Звук"</string>
@@ -919,7 +918,7 @@
     <string name="brightness_title" msgid="5746272622112982836">"Яркость"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Настроить яркость экрана"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Адаптивная регулировка"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Настройка яркости с учетом уровня освещенности"</string>
+    <string name="auto_brightness_summary" msgid="1799041158760605375">"Менять яркость с учетом уровня освещенности"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Спящий режим"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Отключение экрана"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
@@ -934,8 +933,8 @@
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"В док-станции"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Выкл."</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Чтобы настроить поведение телефона при подключении к док-станции и в спящем режиме, включите заставку."</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8644479926302707286">"Когда включать заставку"</string>
-    <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Включить"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="8644479926302707286">"Когда запускать заставку"</string>
+    <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Запустить"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Настройки"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Автонастройка"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Активация в вертикальном положении"</string>
@@ -1447,7 +1446,7 @@
     <string name="reset_app_preferences" msgid="1321050641018356925">"Сбросить настройки"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Сбросить настройки?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Будут сброшены следующие настройки:\n\n"<li>"Отключенные приложения."</li>\n<li>"Отключенные уведомления приложений."</li>\n<li>"Приложения по умолчанию."</li>\n<li>"Ограничения на передачу данных в фоновом режиме."</li>\n<li>"Все ограничения разрешений."</li>\n\n"Данные приложений удалены не будут."</string>
-    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Да"</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Сбросить"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Управление местом"</string>
     <string name="filter" msgid="2018011724373033887">"Фильтр"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Выберите параметры фильтра"</string>
@@ -1984,7 +1983,7 @@
     <string name="trusted_credentials" msgid="4266945289534242402">"Надежные сертификаты"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Смотреть надежные сертификаты ЦС"</string>
     <string name="user_credentials" msgid="3719013347787187083">"Учетные данные пользователя"</string>
-    <string name="user_credentials_summary" msgid="7271228342106080167">"Смотреть и изменять сохраненные учетные данные"</string>
+    <string name="user_credentials_summary" msgid="7271228342106080167">"Смотреть/изменить сохраненные учетные данные"</string>
     <string name="advanced_security_title" msgid="2434776238010578865">"Дополнительные настройки"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Тип хранилища"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Аппаратное"</string>
@@ -2100,8 +2099,8 @@
     <string name="settings_backup_summary" msgid="7916877705938054035">"Резервная копия настроек."</string>
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Синхронизировать"</string>
     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Отменить синхронизацию"</string>
-    <string name="sync_one_time_sync" msgid="3733796114909082260">"Нажмите, чтобы синхронизировать (<xliff:g id="LAST_SYNC_TIME">
-%1$s</xliff:g>)"</string>
+    <string name="sync_one_time_sync" msgid="3733796114909082260">"Нажмите, чтобы синхронизировать<xliff:g id="LAST_SYNC_TIME">
+%1$s</xliff:g>"</string>
     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
     <string name="sync_calendar" msgid="9056527206714733735">"Календарь"</string>
     <string name="sync_contacts" msgid="9174914394377828043">"Контакты"</string>
@@ -2344,8 +2343,8 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Добавить пользователя"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Профиль с огр. доступом"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"Добавить пользователя?"</string>
-    <string name="user_add_user_message_long" msgid="8562152293752222985">"Если вашим устройством пользуется кто-то ещё, создайте на нем дополнительные профили. Владелец профиля может настроить его по своему вкусу, в том числе выбрать обои и установить нужные приложения. Кроме того, пользователи могут изменять общие для всех параметры устройства, например включать или отключать Wi‑Fi.\n\nПосле создания профиля его необходимо настроить.\n\nОбновлять приложения для всех аккаунтов может любой пользователь устройства."</string>
-    <string name="user_add_user_message_short" msgid="1511354412249044381">"После создания профиля его необходимо настроить.\n\nОбновлять приложения для всех аккаунтов может любой пользователь устройства."</string>
+    <string name="user_add_user_message_long" msgid="8562152293752222985">"Если вашим устройством пользуется кто-то ещё, создайте на нем дополнительные профили. Владелец профиля может настроить его по своему вкусу, в том числе выбрать обои и установить нужные приложения. Кроме того, пользователи могут изменять общие для всех параметры устройства, например включать или отключать Wi‑Fi.\n\nПосле создания профиля его потребуется настроить.\n\nЛюбой пользователь устройства может обновлять приложения для всех аккаунтов."</string>
+    <string name="user_add_user_message_short" msgid="1511354412249044381">"После создания профиля его потребуется настроить.\n\nЛюбой пользователь устройства может обновлять приложения для всех аккаунтов."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Настроить профиль?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"Вам потребуется передать устройство пользователю, чтобы он мог настроить свое личное пространство."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Настроить профиль?"</string>
@@ -2378,7 +2377,7 @@
     <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"Все приложения и данные этого профиля будут удалены."</string>
     <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"Удалить"</string>
     <string name="user_enable_calling" msgid="5128605672081602348">"Включить звонки"</string>
-    <string name="user_enable_calling_sms" msgid="9172507088023097063">"Включение звонков и SMS"</string>
+    <string name="user_enable_calling_sms" msgid="9172507088023097063">"Включить звонки и SMS"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Удалить пользователя"</string>
     <string name="user_enable_calling_confirm_title" msgid="4315789475268695378">"Включить звонки?"</string>
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Этот пользователь получит доступ к журналу звонков."</string>
@@ -2734,7 +2733,7 @@
     <string name="switch_off_text" msgid="1139356348100829659">"ВЫКЛЮЧЕНО"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Блокировка в приложении"</string>
     <string name="screen_pinning_description" msgid="3360904523688769289">"Функция позволяет использовать блокировку, чтобы запретить переключаться между приложениями.\n\nВыполните следующие действия:\n\n1. Включите функцию блокировки в приложении.\n\n2. Откройте нужный экран.\n\n3. Нажмите \"Обзор\".\n\n4. Проведите по экрану вверх и коснитесь значка булавки."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Запрашивать графич. ключ для откл. блокировки в приложении"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Запрашивать графический ключ"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"PIN-код для отключения"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Запрашивать пароль для отключения блокировки в приложении"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Блокировать устройство при откл. блокировки в приложении"</string>
@@ -3061,7 +3060,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Использовать более холодные цвета на экране"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Для изменения цветовых настроек нужно отключить экран"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Автоматические обновления системы"</string>
-    <string name="location_dogfood_tools" msgid="8139860759382544832">"Инструменты тестирования передачи геоданных"</string>
     <string name="usage" msgid="2977875522080448986">"Передача данных"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Передача мобильных данных"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Передача данных Wi-Fi"</string>
@@ -3229,6 +3227,5 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Вручную"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Освободить пространство"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Менеджер хранилища"</string>
-    <!-- no translation found for automatic_storage_manager_service_label (447065525699452191) -->
-    <skip />
+    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Автоматическое управление хранилищем"</string>
 </resources>
