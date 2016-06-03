@@ -334,7 +334,7 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Parmak iziyle kilit açma"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Telefonunuzun kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için parmak izi sensörüne dokunun. Parmak izini ekleyeceğiniz kişiler konusunda dikkatli olun. Parmak izi eklenen tek bir kişi bile bu işlemlerin tümünü yapabilir.\n\nNot: Parmak iziniz, güçlü bir desene veya PIN\'e göre daha az güvenlik sağlayabilir. "<annotation id="url">"Daha fazla bilgi edinin"</annotation></string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6931554430739074640">"Telefonunuzun kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için parmak izi sensörüne dokunun. Kimin parmak izini eklediğinize dikkat etmeniz gerekir. Parmak izi eklenen tek bir kişi bile bu işlemlerin tümünü yapabilir.\n\nNot: Parmak iziniz, güçlü bir desene veya PIN\'e göre daha az güvenlik sağlayabilir. "<annotation id="url">"Daha fazla bilgi edinin"</annotation></string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"İptal"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Devam"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Atla"</string>
@@ -416,7 +416,7 @@
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Giriş yöntemini değiştir"</string>
     <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Ekran kilidi"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Cihazınızı koruyun"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Parmak izinizle kilit açma"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Parmak izinizle kilit açın"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Ekran kilidini seçin"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"İş kilidini seçin"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Tabletinizi koruyun"</string>
@@ -1433,7 +1433,7 @@
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"SD kartta"</string>
     <string name="disabled" msgid="9206776641295849915">"Devre dışı"</string>
     <string name="not_installed" msgid="2797554494953450291">"Bu kullanıcı için yüklü değil"</string>
-    <string name="no_applications" msgid="7336588977497084921">"Uygulama yok"</string>
+    <string name="no_applications" msgid="7336588977497084921">"Uygulama yok."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Dahili Bellek"</string>
     <string name="internal_storage_sentence" msgid="889098931914857143">"dahili depolama"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB bellek"</string>
@@ -2338,7 +2338,7 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Çağrı geçmişi bu kullanıcıyla paylaşılacak."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Telefon çağrıları ve SMS açılsın mı?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Çağrı ve SMS geçmişi bu kullanıcıyla paylaşılacak."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Acil durum bilgisi"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Acil durum bilgileri"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Uygulamalara ve içeriğe izin ver"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Kısıtlamalı uygulamalar"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Uygulama ayarlarını genişlet"</string>
@@ -2994,7 +2994,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Daha soğuk ekran renkleri kullan"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Renk değişikliğini uygulamak için ekranı kapatın"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Otomatik sistem güncellemeleri"</string>
-    <string name="location_dogfood_tools" msgid="8139860759382544832">"Konum Test Sürümü Araçları"</string>
     <string name="usage" msgid="2977875522080448986">"Kullanım"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Hücresel veri kullanımı"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Kablosuz bağlantı verisi kullanımı"</string>
@@ -3010,7 +3009,7 @@
     <string name="billing_cycle_summary" msgid="9009106526129293752">"Aylık döngü, her ayın <xliff:g id="ID_1">%1$s</xliff:g> günü başlar"</string>
     <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Aylık döngü başlangıcı: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Ağ kısıtlamaları"</string>
-    <string name="operator_warning" msgid="1862988028996859195">"Operatörünüzün veri hesabı, cihazdaki hesaplamadan farklı olabilir."</string>
+    <string name="operator_warning" msgid="1862988028996859195">"Operatörünüzün veri kullanımı hesaplaması, cihazdaki hesaplamadan farklı olabilir"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> kullanıldı"</string>
     <string name="data_warning" msgid="209133958008062117">"Veri uyarısı"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Veri sınırı ayarla"</string>
