@@ -23,6 +23,7 @@ import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.XmlRes;
@@ -42,6 +43,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.FloatingActionButton;
 import com.android.settingslib.HelpUtils;
@@ -693,6 +695,27 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
     }
 
+    protected Intent getIntent() {
+        if (getActivity() == null) {
+            return null;
+        }
+        return getActivity().getIntent();
+    }
+
+    protected void setResult(int result, Intent intent) {
+        if (getActivity() == null) {
+            return;
+        }
+        getActivity().setResult(result, intent);
+    }
+
+    protected void setResult(int result) {
+        if (getActivity() == null) {
+            return;
+        }
+        getActivity().setResult(result);
+    }
+
     protected final Context getPrefContext() {
         return getPreferenceManager().getContext();
     }
@@ -702,10 +725,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         final Activity activity = getActivity();
         if (activity instanceof SettingsActivity) {
             SettingsActivity sa = (SettingsActivity) activity;
-            sa.startPreferencePanel(fragmentClass, extras, titleRes, null, caller, requestCode);
-            return true;
-        } else if (activity instanceof PreferenceActivity) {
-            PreferenceActivity sa = (PreferenceActivity) activity;
             sa.startPreferencePanel(fragmentClass, extras, titleRes, null, caller, requestCode);
             return true;
         } else {

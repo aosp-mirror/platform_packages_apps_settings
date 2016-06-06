@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.Utils;
 
 import java.io.IOException;
@@ -216,7 +217,7 @@ public class AddAccountSettings extends Activity {
                 getIntent().getStringArrayExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY);
         final String[] accountTypes =
                 getIntent().getStringArrayExtra(AccountPreferenceBase.ACCOUNT_TYPES_FILTER_KEY);
-        final Intent intent = new Intent(this, ChooseAccountActivity.class);
+        final Intent intent = new Intent(this, Settings.ChooseAccountActivity.class);
         if (authorities != null) {
             intent.putExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY, authorities);
         }

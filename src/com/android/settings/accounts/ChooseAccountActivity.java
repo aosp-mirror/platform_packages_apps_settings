@@ -16,6 +16,10 @@
 
 package com.android.settings.accounts;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+import static android.content.Intent.EXTRA_USER;
+
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.content.ContentResolver;
@@ -32,14 +36,15 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.util.Log;
 
-import com.google.android.collect.Maps;
-
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.CharSequences;
-import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
+import com.google.android.collect.Maps;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,17 +52,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import static android.content.Intent.EXTRA_USER;
-
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 /**
  * Activity asking a user to select an account to be set up.
  *
  * An extra {@link UserHandle} can be specified in the intent as {@link EXTRA_USER}, if the user for
  * which the action needs to be performed is different to the one the Settings App will run in.
  */
-public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
+public class ChooseAccountActivity extends SettingsPreferenceFragment {
 
     private static final String TAG = "ChooseAccountActivity";
     private String[] mAuthorities;
@@ -97,7 +98,7 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
     }
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.add_account_settings);
@@ -112,9 +113,9 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
             }
         }
         mAddAccountGroup = getPreferenceScreen();
-        mUm = UserManager.get(this);
-        mUserHandle = Utils.getSecureTargetUser(getActivityToken(), mUm, null /* arguments */,
-                getIntent().getExtras());
+        mUm = UserManager.get(getContext());
+        mUserHandle = Utils.getSecureTargetUser(getActivity().getActivityToken(), mUm,
+                null /* arguments */, getIntent().getExtras());
         updateAuthDescriptions();
     }
 
@@ -123,7 +124,7 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
      * and update any UI that depends on AuthenticatorDescriptions in onAuthDescriptionsUpdated().
      */
     private void updateAuthDescriptions() {
-        mAuthDescs = AccountManager.get(this).getAuthenticatorTypesAsUser(
+        mAuthDescs = AccountManager.get(getContext()).getAuthenticatorTypesAsUser(
                 mUserHandle.getIdentifier());
         for (int i = 0; i < mAuthDescs.length; i++) {
             mTypeToAuthDescription.put(mAuthDescs[i].type, mAuthDescs[i]);
@@ -233,7 +234,8 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
         if (mTypeToAuthDescription.containsKey(accountType)) {
             try {
                 AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = createPackageContextAsUser(desc.packageName, 0, mUserHandle);
+                Context authContext = getActivity()
+                        .createPackageContextAsUser(desc.packageName, 0, mUserHandle);
                 icon = getPackageManager().getUserBadgedIcon(
                         authContext.getDrawable(desc.iconId), mUserHandle);
             } catch (PackageManager.NameNotFoundException e) {
@@ -259,7 +261,8 @@ public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
         if (mTypeToAuthDescription.containsKey(accountType)) {
             try {
                 AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = createPackageContextAsUser(desc.packageName, 0, mUserHandle);
+                Context authContext = getActivity()
+                        .createPackageContextAsUser(desc.packageName, 0, mUserHandle);
                 label = authContext.getResources().getText(desc.labelId);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "No label name for account type " + accountType);
