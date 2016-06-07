@@ -75,14 +75,14 @@ public class UsageStatsActivity extends Activity implements OnItemSelectedListen
         @Override
         public final int compare(UsageStats a, UsageStats b) {
             // return by descending order
-            return (int)(b.getLastTimeUsed() - a.getLastTimeUsed());
+            return Long.compare(b.getLastTimeUsed(), a.getLastTimeUsed());
         }
     }
 
     public static class UsageTimeComparator implements Comparator<UsageStats> {
         @Override
         public final int compare(UsageStats a, UsageStats b) {
-            return (int)(b.getTotalTimeInForeground() - a.getTotalTimeInForeground());
+            return Long.compare(b.getTotalTimeInForeground(), a.getTotalTimeInForeground());
         }
     }
 
