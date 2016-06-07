@@ -133,7 +133,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
                 @Override
                 public int compare(HistoricalNotificationInfo lhs,
                                    HistoricalNotificationInfo rhs) {
-                    return (int)(rhs.timestamp - lhs.timestamp);
+                    return Long.compare(rhs.timestamp, lhs.timestamp);
                 }
             };
 
