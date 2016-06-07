@@ -170,7 +170,7 @@
     <string name="proxy_error_empty_port" msgid="5539106187558215246">"Je moet het veld voor de poort invullen."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Het poortveld moet leeg zijn als het hostveld leeg is."</string>
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"De poort die je hebt ingevoerd, is ongeldig."</string>
-    <string name="proxy_warning_limited_support" msgid="7229337138062837422">"De HTTP-proxy wordt gebruikt door de browser, maar mag niet worden gebruikt door de andere apps."</string>
+    <string name="proxy_warning_limited_support" msgid="7229337138062837422">"De HTTP-proxy wordt gebruikt door de browser, maar mogelijk niet door de andere apps."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"Mobiele locatiegegevens (beëindigd):"</string>
     <string name="radio_info_neighboring_location_label" msgid="5766020323342985397">"Mobiele gegevens voor locatie in de buurt (beëindigd):"</string>
@@ -353,7 +353,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Naam"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Verwijderen"</string>
-    <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"De eerste stap"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Aan de slag"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Plaats je vinger op de sensor en til deze op nadat je een trilling hebt gevoeld"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Prima! Herhaal dit nu."</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Beweeg je vinger enigszins om alle delen van je vingerafdruk toe te voegen"</string>
@@ -835,8 +835,7 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wanneer bellen via wifi is ingeschakeld, kan je telefoon oproepen doorschakelen via wifi-netwerken of het netwerk van je provider, afhankelijk van je voorkeur en welk signaal sterker is. Voordat je deze functie inschakelt, neem je contact met je provider op over de kosten en andere details."</string>
-    <!-- no translation found for emergency_address_title (3571902448699714454) -->
-    <skip />
+    <string name="emergency_address_title" msgid="3571902448699714454">"Noodadres updaten"</string>
     <string name="home_settings" msgid="212375129455718176">"Startpagina"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Weergave"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Geluid"</string>
@@ -1265,9 +1264,9 @@
     <string name="location_menu_scanning" msgid="8536245838478802959">"Scannen"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Scannen"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wifi-scannen"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Locatie verbeteren door systeem-apps en -services toe te staan altijd wifi-netwerken te detecteren."</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Locatie verbeteren door systeem-apps en services toe te staan altijd wifi-netwerken te detecteren."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetooth-scannen"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"Locatie verbeteren door systeem-apps en -services toe te staan altijd Bluetooth-apparaten te detecteren."</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"Locatie verbeteren door systeem-apps en services toe te staan altijd Bluetooth-apparaten te detecteren."</string>
     <string name="location_network_based" msgid="6010456018401296590">"Locatie via wifi en mob. netw."</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Apps toestaan de locatieservice van Google te gebruiken om je locatie sneller te schatten. Anonieme locatiegegevens worden verzameld en verzonden naar Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Locatie bepaald via wifi"</string>
@@ -1289,7 +1288,8 @@
     <string name="legal_information" msgid="5769301644270604095">"Juridische informatie"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Bijdragers"</string>
     <string name="manual" msgid="3025943393642974445">"Handleiding"</string>
-    <string name="regulatory_information" msgid="5695464367088752150">"Wettelijke informatie"</string>
+    <string name="regulatory_labels" msgid="1293050314122427492">"Regelgevingslabels"</string>
+    <string name="safety_and_regulatory_info" msgid="7089050124905168081">"Info over veiligheid en regelgeving"</string>
     <string name="copyright_title" msgid="865906688917260647">"Auteursrecht"</string>
     <string name="license_title" msgid="1990487604356037871">"Licentie"</string>
     <string name="terms_title" msgid="7697580845616764642">"Algemene voorwaarden"</string>
@@ -1310,7 +1310,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Je pincode kiezen"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Je wachtwoord bevestigen"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Je patroon bevestigen"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"De pincode bevestigen"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Bevestig de pincode"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"Wachtwoorden komen niet overeen"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"Pincodes komen niet overeen"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"Ontgrendelingsmethode selecteren"</string>
@@ -2321,7 +2321,7 @@
     <string name="user_new_user_name" msgid="369856859816028856">"Nieuwe gebruiker"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nieuw profiel"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Wil je jezelf verwijderen?"</string>
-    <string name="user_confirm_remove_title" msgid="1163721647646152032">"Deze gebr. verwijderen?"</string>
+    <string name="user_confirm_remove_title" msgid="1163721647646152032">"Gebruiker verwijderen?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Dit profiel verwijderen?"</string>
     <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Werkprofiel verwijderen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="2391372805233812410">"Je raakt je opslagruimte en gegevens op deze tablet kwijt. Je kunt deze actie niet ongedaan maken."</string>
@@ -2852,7 +2852,7 @@
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"Delen"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Weigeren"</string>
     <string name="usb_use_charging_only" msgid="2180443097365214467">"Dit apparaat opladen"</string>
-    <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Dit apparaat gewoon opladen"</string>
+    <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Alleen het apparaat opladen"</string>
     <string name="usb_use_power_only" msgid="6426550616883919530">"Voeding leveren"</string>
     <string name="usb_use_power_only_desc" msgid="4912352581010190141">"Voeding leveren aan het andere verbonden apparaat"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"Bestanden overzetten"</string>
@@ -3001,7 +3001,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Koelere weergavekleuren gebruiken"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Schakel het scherm uit om de kleurwijziging toe te passen"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatische systeemupdates"</string>
-    <string name="location_dogfood_tools" msgid="8139860759382544832">"Dogfoodtools voor locatie"</string>
     <string name="usage" msgid="2977875522080448986">"Gebruik"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"Mobiele-datagebruik"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wifi-datagebruik"</string>
@@ -3024,6 +3023,7 @@
     <string name="data_limit" msgid="1885406964934590552">"Datalimiet"</string>
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> gebruikt tussen <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"Configureren"</string>
+    <string name="data_usage_other_apps" msgid="3272872663517382050">"Andere apps opgenomen in gebruik"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> apps mogen onbeperkt data gebruiken terwijl Databesparing is ingeschakeld</item>
       <item quantity="one">1 app mag onbeperkt data gebruiken terwijl Databesparing is ingeschakeld</item>
