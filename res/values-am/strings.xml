@@ -835,8 +835,7 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"የWi-Fi ጥሪ ሲበራ የእርስዎ ስልክ በምርጫዎ እና በየትኛው ይበልጥ ጠንካራ እንደሆነ የሚወሰን ሆኖ ጥሪዎችን በWi-Fi አውታረ መረቦች ወይም በአገልግሎት አቅራቢዎ አውታረ መረብ በኩል ሊያዞር ይችላል። ይህን ባህሪ ከማብራትዎ በፊት ክፍያዎችን እና ሌሎች ዝርዝሮችን በተመለከተ አገልግሎት አቅራቢዎን ያነጋግሩ።"</string>
-    <!-- no translation found for emergency_address_title (3571902448699714454) -->
-    <skip />
+    <string name="emergency_address_title" msgid="3571902448699714454">"የአስቸኳይ አደጋ አድራሻን ያዘምኑ"</string>
     <string name="home_settings" msgid="212375129455718176">"መነሻ"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"አሳይ"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ድምፅ"</string>
@@ -1289,7 +1288,8 @@
     <string name="legal_information" msgid="5769301644270604095">"የህግ መረጃ"</string>
     <string name="contributors_title" msgid="5917703088825286504">"አዋጮች"</string>
     <string name="manual" msgid="3025943393642974445">"መመሪያ"</string>
-    <string name="regulatory_information" msgid="5695464367088752150">"የደንብ ክትትል መረጃ"</string>
+    <string name="regulatory_labels" msgid="1293050314122427492">"የመከታተያ መሰየሚያዎች"</string>
+    <string name="safety_and_regulatory_info" msgid="7089050124905168081">"የደህንነት እና ክትትል መረጃ"</string>
     <string name="copyright_title" msgid="865906688917260647">"የቅጂ መብት"</string>
     <string name="license_title" msgid="1990487604356037871">"ፍቃድ"</string>
     <string name="terms_title" msgid="7697580845616764642">"ውሎች እና ደንቦች"</string>
@@ -1616,7 +1616,7 @@
     <string name="configure_input_method" msgid="1317429869771850228">"የግቤት ስልቶችን አዘጋጅ"</string>
     <string name="input_method_settings" msgid="5801295625486269553">"ቅንብሮች"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"ቅንብሮች"</string>
-    <string name="active_input_method_subtypes" msgid="3596398805424733238">"ገባሪ ግቤት ሜተድ"</string>
+    <string name="active_input_method_subtypes" msgid="3596398805424733238">"የገባሪ ግቤት ዘዴ"</string>
     <string name="use_system_language_to_select_input_method_subtypes" msgid="5747329075020379587">"የሥርዓት ቋንቋዎችን ይጠቀሙ"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g>ቅንብሮች"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"ንቁ የሆኑ ግቤት ስልቶች ምረጥ"</string>
@@ -3001,7 +3001,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"ቀዝቀዝ ያሉ የማሳያ ቀለሞችን ይጠቀሙ"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"የቀለም ለውጥን ለመተግበር ማያ ገጹን ያጥፉት"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"ራስ-ሰር የስርዓት ዝማኔዎች"</string>
-    <string name="location_dogfood_tools" msgid="8139860759382544832">"የአካባቢ የሙከራ መሣሪያዎች"</string>
     <string name="usage" msgid="2977875522080448986">"አጠቃቀም"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"የተንቀሳቃሽ ውሂብ አጠቃቀም"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi ውሂብ አጠቃቀም"</string>
@@ -3024,6 +3023,7 @@
     <string name="data_limit" msgid="1885406964934590552">"የውሂብ ገደብ"</string>
     <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> ከ<xliff:g id="ID_2">%2$s</xliff:g> መሃል ጥቅም ላይ ውሏል"</string>
     <string name="configure" msgid="1029654422228677273">"አዋቅር"</string>
+    <string name="data_usage_other_apps" msgid="3272872663517382050">"በአጠቃቀም ውስጥ ሌሎች መተግበሪያዎች ተካትተዋል"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
       <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> መተግበሪያዎች ውሂብ ቆጣቢ በሚበራበት ጊዜ ያልተገደበ ውሂብን እንዲጠቀሙ ተፈቅዶላቸዋል</item>
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> መተግበሪያዎች ውሂብ ቆጣቢ በሚበራበት ጊዜ ያልተገደበ ውሂብን እንዲጠቀሙ ተፈቅዶላቸዋል</item>
@@ -3161,6 +3161,5 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"በራስ"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"አሁን ቦታ አስለቅቅ"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"የማከማቻ አስተዳዳሪ"</string>
-    <!-- no translation found for automatic_storage_manager_service_label (447065525699452191) -->
-    <skip />
+    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"ራስ-ሰር የማከማቻ አስተዳደር አገልግሎት"</string>
 </resources>

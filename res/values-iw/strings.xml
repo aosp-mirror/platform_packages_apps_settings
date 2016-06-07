@@ -853,8 +853,7 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"‏כשהתקשרות Wi-Fi פועלת, הטלפון יכול לנתב שיחות ברשתות Wi-Fi או ברשת של הספק, בהתאם להעדפה שלך ולאות שחזק יותר. לפני הפעלת תכונה זו, בדוק עם הספק פרטים הקשורים לעמלות ופרטים אחרים."</string>
-    <!-- no translation found for emergency_address_title (3571902448699714454) -->
-    <skip />
+    <string name="emergency_address_title" msgid="3571902448699714454">"עדכן כתובת למקרה חירום"</string>
     <string name="home_settings" msgid="212375129455718176">"דף הבית"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"תצוגה"</string>
     <string name="sound_settings" msgid="5534671337768745343">"צלילים"</string>
@@ -940,7 +939,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"בהירות אוטומטית"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"הרם כדי להוציא ממצב שינה"</string>
     <string name="doze_title" msgid="2259176504273878294">"תצוגת אווירה"</string>
-    <string name="doze_summary" msgid="7128970177894383698">"הוצא את המסך ממצב כשאתה מרים את המכשיר או מקבל הודעות"</string>
+    <string name="doze_summary" msgid="7128970177894383698">"הדלק את המסך על-ידי הרמת המכשיר או כאשר נכנסות הודעות"</string>
     <string name="title_font_size" msgid="4405544325522105222">"גודל גופן"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"הגדלה או הקטנה של גודל הטקסט"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"‏הגדרות נעילת כרטיס SIM"</string>
@@ -1309,7 +1308,8 @@
     <string name="legal_information" msgid="5769301644270604095">"מידע משפטי"</string>
     <string name="contributors_title" msgid="5917703088825286504">"תורמים"</string>
     <string name="manual" msgid="3025943393642974445">"ידני"</string>
-    <string name="regulatory_information" msgid="5695464367088752150">"מידע על תקנות"</string>
+    <string name="regulatory_labels" msgid="1293050314122427492">"תוויות תקינה"</string>
+    <string name="safety_and_regulatory_info" msgid="7089050124905168081">"מידע בנושא בטיחות ותקינה"</string>
     <string name="copyright_title" msgid="865906688917260647">"זכויות יוצרים"</string>
     <string name="license_title" msgid="1990487604356037871">"רישיון"</string>
     <string name="terms_title" msgid="7697580845616764642">"תנאים והגבלות"</string>
@@ -2914,13 +2914,13 @@
     <string name="usb_use_charging_only" msgid="2180443097365214467">"לטעון מכשיר זה"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"רק לטעינת המכשיר"</string>
     <string name="usb_use_power_only" msgid="6426550616883919530">"לספק חשמל"</string>
-    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"לספק חשמל למכשיר השני שמחובר"</string>
+    <string name="usb_use_power_only_desc" msgid="4912352581010190141">"אספקת חשמל למכשיר השני שמחובר"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"להעביר קבצים"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"העברת קבצים למכשיר אחר"</string>
     <string name="usb_use_photo_transfers" msgid="7794775645350330454">"‏להעביר תמונות (PTP)"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"‏העברת תמונות או קבצים אם MTP אינו נתמך (PTP)"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"‏להשתמש במכשיר כהתקן MIDI"</string>
-    <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"‏להשתמש במכשיר זה כהתקן MIDI"</string>
+    <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"‏שימוש במכשיר זה כהתקן MIDI"</string>
     <string name="usb_use" msgid="3256040963685055320">"‏השתמש ב-USB כדי"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"בדיקה ברקע"</string>
     <string name="background_check_title" msgid="4534254315824525593">"גישה מלאה ברקע"</string>
@@ -2993,7 +2993,7 @@
     <string name="write_settings_off" msgid="5156104383386336233">"לא"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"סיבוב כפול להפעלת המצלמה"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"פתח את אפליקציית המצלמה על ידי סיבוב כפול של פרק כף היד"</string>
-    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"לחץ על לחצן ההפעלה פעמיים כדי לפתוח את המצלמה"</string>
+    <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"לחיצה כפולה על לחצן ההפעלה"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"הפעל את המצלמה במהירות מבלי לבטל את נעילת הטלפון"</string>
     <string name="screen_zoom_title" msgid="5233515303733473927">"גודל תצוגה"</string>
     <string name="screen_zoom_short_summary" msgid="7291960817349834688">"הגדלה והקטנה של הפריטים המופיעים במסך"</string>
@@ -3065,7 +3065,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"השתמש בצבעי תצוגה קרירים יותר"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"כבה את המסך כדי להחיל שינוי צבע"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"עדכוני מערכת אוטומטיים"</string>
-    <string name="location_dogfood_tools" msgid="8139860759382544832">"‏כלים לניסוי המוצר לפני הפצה (dogfood) ל\'מיקום\'"</string>
     <string name="usage" msgid="2977875522080448986">"שימוש"</string>
     <string name="cellular_data_usage" msgid="2763710678354680712">"שימוש בנתונים סלולריים"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"‏שימוש בנתוני Wi-Fi"</string>
@@ -3088,6 +3087,7 @@
     <string name="data_limit" msgid="1885406964934590552">"מגבלת נתונים"</string>
     <string name="data_usage_template" msgid="392191945602400904">"בתקופה <xliff:g id="ID_2">%2$s</xliff:g> נעשה שימוש ב-<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="configure" msgid="1029654422228677273">"הגדר"</string>
+    <string name="data_usage_other_apps" msgid="3272872663517382050">"אפליקציות אחרות שנכללות בנתוני השימוש"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
       <item quantity="two">‏מותר להשתמש בנתונים בלתי מוגבלים ב-<xliff:g id="COUNT">%1$d</xliff:g> אפליקציות כשחוסך הנתונים (Data Saver) פועל</item>
       <item quantity="many">‏מותר להשתמש בנתונים בלתי מוגבלים ב-<xliff:g id="COUNT">%1$d</xliff:g> אפליקציות כשחוסך הנתונים (Data Saver) פועל</item>
@@ -3233,6 +3233,5 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"ידני"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"פינוי שטח אחסון עכשיו"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"מנהל אחסון"</string>
-    <!-- no translation found for automatic_storage_manager_service_label (447065525699452191) -->
-    <skip />
+    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"שירות ניהול אחסון אוטומטי"</string>
 </resources>
