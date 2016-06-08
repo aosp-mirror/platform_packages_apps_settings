@@ -31,7 +31,9 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
@@ -53,7 +55,7 @@ import com.android.internal.telephony.TelephonyIntents;
  * these operations.
  *
  */
-public class IccLockSettings extends InstrumentedPreferenceActivity
+public class IccLockSettings extends SettingsPreferenceFragment
         implements EditPinPreference.OnPinEnteredListener {
     private static final String TAG = "IccLockSettings";
     private static final boolean DBG = true;
@@ -153,12 +155,8 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Context context = getApplicationContext();
-        final TelephonyManager tm =
-                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        final int numSims = tm.getSimCount();
 
         if (Utils.isMonkeyRunning()) {
             finish();
@@ -198,33 +196,53 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
         // Don't need any changes to be remembered
         getPreferenceScreen().setPersistent(false);
 
-        if (numSims > 1) {
-            setContentView(R.layout.icc_lock_tabs);
+        mRes = getResources();
+    }
 
-            mTabHost = (TabHost) findViewById(android.R.id.tabhost);
-            mTabWidget = (TabWidget) findViewById(android.R.id.tabs);
-            mListView = (ListView) findViewById(android.R.id.list);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+
+        final TelephonyManager tm =
+                (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
+        final int numSims = tm.getSimCount();
+        if (numSims > 1) {
+            View view = inflater.inflate(R.layout.icc_lock_tabs, container, false);
+            final ViewGroup prefs_container = (ViewGroup) view.findViewById(R.id.prefs_container);
+            Utils.prepareCustomPreferencesList(container, view, prefs_container, false);
+            View prefs = super.onCreateView(inflater, prefs_container, savedInstanceState);
+            prefs_container.addView(prefs);
+
+            mTabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+            mTabWidget = (TabWidget) view.findViewById(android.R.id.tabs);
+            mListView = (ListView) view.findViewById(android.R.id.list);
 
             mTabHost.setup();
             mTabHost.setOnTabChangedListener(mTabListener);
             mTabHost.clearAllTabs();
 
-            SubscriptionManager sm = SubscriptionManager.from(this);
+            SubscriptionManager sm = SubscriptionManager.from(getContext());
             for (int i = 0; i < numSims; ++i) {
                 final SubscriptionInfo subInfo = sm.getActiveSubscriptionInfoForSimSlotIndex(i);
                 mTabHost.addTab(buildTabSpec(String.valueOf(i),
                         String.valueOf(subInfo == null
-                            ? context.getString(R.string.sim_editor_title, i + 1)
+                            ? getContext().getString(R.string.sim_editor_title, i + 1)
                             : subInfo.getDisplayName())));
             }
             final SubscriptionInfo sir = sm.getActiveSubscriptionInfoForSimSlotIndex(0);
 
             mPhone = (sir == null) ? null
                 : PhoneFactory.getPhone(SubscriptionManager.getPhoneId(sir.getSubscriptionId()));
+            return view;
         } else {
             mPhone = PhoneFactory.getDefaultPhone();
+            return super.onCreateView(inflater, container, savedInstanceState);
         }
-        mRes = getResources();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         updatePreferences();
     }
 
@@ -243,13 +261,13 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         // ACTION_SIM_STATE_CHANGED is sticky, so we'll receive current state after this call,
         // which will call updatePreferences().
         final IntentFilter filter = new IntentFilter(TelephonyIntents.ACTION_SIM_STATE_CHANGED);
-        registerReceiver(mSimStateReceiver, filter);
+        getContext().registerReceiver(mSimStateReceiver, filter);
 
         if (mDialogState != OFF_MODE) {
             showPinDialog();
@@ -260,13 +278,13 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-        unregisterReceiver(mSimStateReceiver);
+        getContext().unregisterReceiver(mSimStateReceiver);
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle out) {
+    public void onSaveInstanceState(Bundle out) {
         // Need to store this state for slider open/close
         // There is one case where the dialog is popped up by the preference
         // framework. In that case, let the preference framework store the
@@ -412,8 +430,8 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
         if (success) {
             mPinToggle.setChecked(mToState);
         } else {
-            Toast.makeText(this, getPinPasswordErrorMessage(attemptsRemaining), Toast.LENGTH_LONG)
-                    .show();
+            Toast.makeText(getContext(), getPinPasswordErrorMessage(attemptsRemaining),
+                    Toast.LENGTH_LONG).show();
         }
         mPinToggle.setEnabled(true);
         resetDialogState();
@@ -421,11 +439,11 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
 
     private void iccPinChanged(boolean success, int attemptsRemaining) {
         if (!success) {
-            Toast.makeText(this, getPinPasswordErrorMessage(attemptsRemaining),
+            Toast.makeText(getContext(), getPinPasswordErrorMessage(attemptsRemaining),
                     Toast.LENGTH_LONG)
                     .show();
         } else {
-            Toast.makeText(this, mRes.getString(R.string.sim_change_succeeded),
+            Toast.makeText(getContext(), mRes.getString(R.string.sim_change_succeeded),
                     Toast.LENGTH_SHORT)
                     .show();
 
@@ -476,7 +494,7 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
         @Override
         public void onTabChanged(String tabId) {
             final int slotId = Integer.parseInt(tabId);
-            final SubscriptionInfo sir = SubscriptionManager.from(getBaseContext())
+            final SubscriptionInfo sir = SubscriptionManager.from(getActivity().getBaseContext())
                     .getActiveSubscriptionInfoForSimSlotIndex(slotId);
 
             mPhone = (sir == null) ? null
