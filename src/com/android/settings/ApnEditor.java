@@ -16,8 +16,12 @@
 
 package com.android.settings;
 
+import static android.app.Activity.RESULT_OK;
+import static android.content.Context.TELEPHONY_SERVICE;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -31,6 +35,7 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -38,14 +43,18 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnKeyListener;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class ApnEditor extends InstrumentedPreferenceActivity
-        implements Preference.OnPreferenceChangeListener {
+public class ApnEditor extends SettingsPreferenceFragment
+        implements OnPreferenceChangeListener, OnKeyListener {
 
     private final static String TAG = ApnEditor.class.getSimpleName();
 
@@ -60,7 +69,6 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     private static final int MENU_DELETE = Menu.FIRST;
     private static final int MENU_SAVE = Menu.FIRST + 1;
     private static final int MENU_CANCEL = Menu.FIRST + 2;
-    private static final int ERROR_DIALOG_ID = 0;
 
     private static String sNotSet;
     private EditTextPreference mName;
@@ -152,7 +160,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
 
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.apn_editor);
@@ -242,7 +250,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             return;
         }
 
-        mCursor = managedQuery(mUri, sProjection, null, null);
+        mCursor = getActivity().managedQuery(mUri, sProjection, null, null);
         mCursor.moveToFirst();
 
         mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
@@ -526,8 +534,8 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
         // If it's a new APN, then cancel will delete the new entry in onPause
         if (!mNewApn) {
             menu.add(0, MENU_DELETE, 0, R.string.menu_delete)
@@ -537,7 +545,6 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             .setIcon(android.R.drawable.ic_menu_save);
         menu.add(0, MENU_CANCEL, 0, R.string.menu_cancel)
             .setIcon(android.R.drawable.ic_menu_close_clear_cancel);
-        return true;
     }
 
     @Override
@@ -562,7 +569,13 @@ public class ApnEditor extends InstrumentedPreferenceActivity
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        view.setOnKeyListener(this);
+    }
+
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if (event.getAction() != KeyEvent.ACTION_DOWN) return false;
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK: {
                 if (validateAndSave(false)) {
@@ -571,11 +584,11 @@ public class ApnEditor extends InstrumentedPreferenceActivity
                 return true;
             }
         }
-        return super.onKeyDown(keyCode, event);
+        return false;
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle icicle) {
+    public void onSaveInstanceState(Bundle icicle) {
         super.onSaveInstanceState(icicle);
         if (validateAndSave(true)) {
             icicle.putInt(SAVED_POS, mCursor.getInt(ID_INDEX));
@@ -595,7 +608,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
         String mnc = checkNotSet(mMnc.getText());
 
         if (getErrorMsg() != null && !force) {
-            showDialog(ERROR_DIALOG_ID);
+            ErrorDialog.showError(this);
             return false;
         }
 
@@ -703,35 +716,6 @@ public class ApnEditor extends InstrumentedPreferenceActivity
         return errorMsg;
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-
-        if (id == ERROR_DIALOG_ID) {
-            String msg = getErrorMsg();
-
-            return new AlertDialog.Builder(this)
-                    .setTitle(R.string.error_title)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .setMessage(msg)
-                    .create();
-        }
-
-        return super.onCreateDialog(id);
-    }
-
-    @Override
-    protected void onPrepareDialog(int id, Dialog dialog) {
-        super.onPrepareDialog(id, dialog);
-
-        if (id == ERROR_DIALOG_ID) {
-            String msg = getErrorMsg();
-
-            if (msg != null) {
-                ((AlertDialog)dialog).setMessage(msg);
-            }
-        }
-    }
-
     private void deleteApn() {
         getContentResolver().delete(mUri, null, null);
         finish();
@@ -762,6 +746,26 @@ public class ApnEditor extends InstrumentedPreferenceActivity
             return "";
         } else {
             return value;
+        }
+    }
+
+    public static class ErrorDialog extends DialogFragment {
+
+        public static void showError(ApnEditor editor) {
+            ErrorDialog dialog = new ErrorDialog();
+            dialog.setTargetFragment(editor, 0);
+            dialog.show(editor.getFragmentManager(), "error");
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            String msg = ((ApnEditor) getTargetFragment()).getErrorMsg();
+
+            return new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.error_title)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .setMessage(msg)
+                    .create();
         }
     }
 

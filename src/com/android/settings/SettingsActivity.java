@@ -57,6 +57,7 @@ import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.AccountSyncSettings;
+import com.android.settings.accounts.ChooseAccountActivity;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.DrawOverlayDetails;
@@ -74,9 +75,12 @@ import com.android.settings.dashboard.DashboardContainerFragment;
 import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.DeletionHelperFragment;
+import com.android.settings.deviceinfo.ImeiInformation;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
+import com.android.settings.deviceinfo.SimStatus;
+import com.android.settings.deviceinfo.Status;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageDetail;
@@ -119,6 +123,8 @@ import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
+import com.android.settings.wifi.WifiAPITest;
+import com.android.settings.wifi.WifiInfo;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -318,6 +324,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             AppNotificationSettings.class.getName(),
             OtherSoundSettings.class.getName(),
             ApnSettings.class.getName(),
+            ApnEditor.class.getName(),
             WifiCallingSettings.class.getName(),
             ZenModePrioritySettings.class.getName(),
             ZenModeAutomationSettings.class.getName(),
@@ -334,6 +341,14 @@ public class SettingsActivity extends SettingsDrawerActivity
             VrListenerSettings.class.getName(),
             ManagedProfileSettings.class.getName(),
             DeletionHelperFragment.class.getName(),
+            ChooseAccountActivity.class.getName(),
+            IccLockSettings.class.getName(),
+            ImeiInformation.class.getName(),
+            SimStatus.class.getName(),
+            Status.class.getName(),
+            TestingSettings.class.getName(),
+            WifiAPITest.class.getName(),
+            WifiInfo.class.getName(),
     };
 
 
@@ -1068,7 +1083,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             for (DashboardCategory category : categories) {
                 for (Tile tile : category.tiles) {
                     ComponentName component = tile.intent.getComponent();
-                    if (packageName.equals(component)&& !ArrayUtils.contains(
+                    if (packageName.equals(component.getPackageName()) && !ArrayUtils.contains(
                             SETTINGS_FOR_RESTRICTED, component.getClassName())) {
                         setTileEnabled(component, false, isAdmin, pm);
                     }
@@ -1079,18 +1094,11 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private void setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin,
                                 PackageManager pm) {
-        if (UserHandle.MU_ENABLED && !isAdmin
+        if (UserHandle.MU_ENABLED && !isAdmin && getPackageName().equals(component.getPackageName())
                 && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, component.getClassName())) {
             enabled = false;
         }
-        int state = pm.getComponentEnabledSetting(component);
-        boolean isEnabled = state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-        if (isEnabled != enabled) {
-            pm.setComponentEnabledSetting(component, enabled
-                    ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                    : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
-        }
+        setTileEnabled(component, enabled);
     }
 
     private void getMetaData() {

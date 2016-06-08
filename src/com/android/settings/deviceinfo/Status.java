@@ -16,6 +16,9 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.Context.CONNECTIVITY_SERVICE;
+import static android.content.Context.WIFI_SERVICE;
+
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -37,8 +40,8 @@ import android.text.TextUtils;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 import java.lang.ref.WeakReference;
@@ -51,7 +54,7 @@ import java.lang.ref.WeakReference;
  * # XMPP/buzz/tickle status : TODO
  *
  */
-public class Status extends InstrumentedPreferenceActivity {
+public class Status extends SettingsPreferenceFragment {
 
     private static final String KEY_BATTERY_STATUS = "battery_status";
     private static final String KEY_BATTERY_LEVEL = "battery_level";
@@ -152,7 +155,7 @@ public class Status extends InstrumentedPreferenceActivity {
     }
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mHandler = new MyHandler(this);
@@ -202,8 +205,8 @@ public class Status extends InstrumentedPreferenceActivity {
         // Remove SimStatus and Imei for Secondary user as it access Phone b/19165700
         // Also remove on Wi-Fi only devices.
         //TODO: the bug above will surface in split system user mode.
-        if (!UserManager.get(this).isAdminUser()
-                || Utils.isWifiOnly(this)) {
+        if (!UserManager.get(getContext()).isAdminUser()
+                || Utils.isWifiOnly(getContext())) {
             removePreferenceFromScreen(KEY_SIM_STATUS);
             removePreferenceFromScreen(KEY_IMEI_INFO);
         }
@@ -215,11 +218,12 @@ public class Status extends InstrumentedPreferenceActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
-        registerReceiver(mConnectivityReceiver, mConnectivityIntentFilter,
+        getContext().registerReceiver(mConnectivityReceiver, mConnectivityIntentFilter,
                          android.Manifest.permission.CHANGE_NETWORK_STATE, null);
-        registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        getContext().registerReceiver(mBatteryInfoReceiver,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         mHandler.sendEmptyMessage(EVENT_UPDATE_STATS);
     }
 
@@ -227,8 +231,8 @@ public class Status extends InstrumentedPreferenceActivity {
     public void onPause() {
         super.onPause();
 
-        unregisterReceiver(mBatteryInfoReceiver);
-        unregisterReceiver(mConnectivityReceiver);
+        getContext().unregisterReceiver(mBatteryInfoReceiver);
+        getContext().unregisterReceiver(mConnectivityReceiver);
         mHandler.removeMessages(EVENT_UPDATE_STATS);
     }
 
