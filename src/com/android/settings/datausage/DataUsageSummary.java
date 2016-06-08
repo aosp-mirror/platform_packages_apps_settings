@@ -32,6 +32,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -189,8 +190,8 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
         if (mSummaryPreference != null) {
             Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
                     info.usageLevel, Formatter.FLAG_SHORTER);
-            mSummaryPreference.setAmount(usedResult.value);
-            mSummaryPreference.setUnits(getString(mDataUsageTemplate, usedResult.units));
+            mSummaryPreference.setTitle(TextUtils.expandTemplate(getText(mDataUsageTemplate),
+                    usedResult.value, usedResult.units));
             long limit = info.limitLevel;
             if (limit <= 0) {
                 limit = info.warningLevel;
