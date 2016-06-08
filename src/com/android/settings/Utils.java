@@ -90,6 +90,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TabWidget;
 import com.android.internal.app.UnlaunchableAppActivity;
+import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.UserIcons;
 
 import java.io.IOException;
@@ -1024,12 +1025,13 @@ public final class Utils extends com.android.settingslib.Utils {
      * @throws SecurityException if the given userId does not belong to the current user group.
      */
     public static int enforceSameOwner(Context context, int userId) {
-        UserManager um = getUserManager(context);
-        if (!um.getUserProfiles().contains(new UserHandle(userId))) {
-            throw new SecurityException("Given user id " + userId + " does not belong to user "
-                    + UserHandle.myUserId());
+        final UserManager um = getUserManager(context);
+        final int[] profileIds = um.getProfileIdsWithDisabled(UserHandle.myUserId());
+        if (ArrayUtils.contains(profileIds, userId)) {
+            return userId;
         }
-        return userId;
+        throw new SecurityException("Given user id " + userId + " does not belong to user "
+                + UserHandle.myUserId());
     }
 
     /**
