@@ -61,7 +61,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
     private static final String CONFIGURE_ACCOUNT = "configure_account";
     private static final String DATA_MANAGEMENT = "data_management";
     private static final String BACKUP_INACTIVE = "backup_inactive";
-    private static final String NETWORK_RESET = "network_reset";
     private static final String FACTORY_RESET = "factory_reset";
     private static final String TAG = "PrivacySettings";
     private IBackupManager mBackupManager;
@@ -330,10 +329,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         if (RestrictedLockUtils.hasBaseUserRestriction(context,
                 UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId())) {
             nonVisibleKeys.add(FACTORY_RESET);
-        }
-        if (RestrictedLockUtils.hasBaseUserRestriction(context,
-                UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
-            nonVisibleKeys.add(NETWORK_RESET);
         }
     }
 }
