@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
+import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -191,6 +192,16 @@ public class ToggleAccessibilityServicePreferenceFragment
         mSwitchBar.setCheckedInternal(checked);
     }
 
+    /**
+     * Return whether the device is encrypted with legacy full disk encryption. Newer devices
+     * should be using File Based Encryption.
+     *
+     * @return true if device is encrypted
+     */
+    private boolean isFullDiskEncrypted() {
+        return StorageManager.isNonDefaultBlockEncrypted();
+    }
+
     private View createEnableDialogContentView(AccessibilityServiceInfo info) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
@@ -200,7 +211,7 @@ public class ToggleAccessibilityServicePreferenceFragment
 
         TextView encryptionWarningView = (TextView) content.findViewById(
                 R.id.encryption_warning);
-        if (LockPatternUtils.isDeviceEncrypted()) {
+        if (isFullDiskEncrypted()) {
             String text = getString(R.string.enable_service_encryption_warning,
                     info.getResolveInfo().loadLabel(getPackageManager()));
             encryptionWarningView.setText(text);
@@ -273,7 +284,7 @@ public class ToggleAccessibilityServicePreferenceFragment
                 // The user confirmed that they accept weaker encryption when
                 // enabling the accessibility service, so change encryption.
                 // Since we came here asynchronously, check encryption again.
-                if (LockPatternUtils.isDeviceEncrypted()) {
+                if (isFullDiskEncrypted()) {
                     mLockPatternUtils.clearEncryptionPassword();
                     Settings.Global.putInt(getContentResolver(),
                             Settings.Global.REQUIRE_PASSWORD_TO_DECRYPT, 0);
@@ -290,7 +301,7 @@ public class ToggleAccessibilityServicePreferenceFragment
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
                 if (mShownDialogId == DIALOG_ID_ENABLE_WARNING) {
-                    if (LockPatternUtils.isDeviceEncrypted()) {
+                    if (isFullDiskEncrypted()) {
                         String title = createConfirmCredentialReasonMessage();
                         Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
                         startActivityForResult(intent,
