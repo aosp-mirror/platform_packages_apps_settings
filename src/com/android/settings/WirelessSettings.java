@@ -72,6 +72,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
     private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
     private static final String KEY_WFC_SETTINGS = "wifi_calling_settings";
+    private static final String KEY_NETWORK_RESET = "network_reset";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -336,6 +337,12 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             p.setEnabled(!TetherSettings
                     .isProvisioningNeededButUnavailable(getActivity()));
         }
+
+        // Remove network reset if not allowed
+        if (RestrictedLockUtils.hasBaseUserRestriction(activity,
+                UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
+            removePreference(KEY_NETWORK_RESET);
+        }
     }
 
     @Override
@@ -468,6 +475,11 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
                 if (!ImsManager.isWfcEnabledByPlatform(context)) {
                     result.add(KEY_WFC_SETTINGS);
+                }
+
+                if (RestrictedLockUtils.hasBaseUserRestriction(context,
+                        UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
+                    result.add(KEY_NETWORK_RESET);
                 }
 
                 return result;
