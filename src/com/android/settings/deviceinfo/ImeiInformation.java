@@ -27,10 +27,10 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
-import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
-public class ImeiInformation extends InstrumentedPreferenceActivity {
+public class ImeiInformation extends SettingsPreferenceFragment {
 
     private static final String KEY_PRL_VERSION = "prl_version";
     private static final String KEY_MIN_NUMBER = "min_number";
@@ -43,9 +43,9 @@ public class ImeiInformation extends InstrumentedPreferenceActivity {
     private boolean isMultiSIM = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSubscriptionManager = SubscriptionManager.from(this);
+        mSubscriptionManager = SubscriptionManager.from(getContext());
         final TelephonyManager telephonyManager =
             (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         initPreferenceScreen(telephonyManager.getSimCount());
