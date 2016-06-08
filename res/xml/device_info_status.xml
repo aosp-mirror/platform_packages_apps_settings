@@ -33,13 +33,13 @@
         android:title="@string/sim_status_title"
         android:persistent="false">
         <intent android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.deviceinfo.SimStatus" />
+            android:targetClass="com.android.settings.Settings$SimStatusActivity" />
     </PreferenceScreen>
     <PreferenceScreen android:key="imei_info"
         android:title="@string/imei_information_title"
         android:persistent="false">
         <intent android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.deviceinfo.ImeiInformation" />
+            android:targetClass="com.android.settings.Settings$ImeiInformationActivity" />
     </PreferenceScreen>
     <com.android.settings.CopyablePreference android:key="wifi_ip_address"
         android:enabled="false"

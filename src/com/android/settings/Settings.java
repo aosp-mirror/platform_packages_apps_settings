@@ -140,6 +140,16 @@ public class Settings extends SettingsActivity {
     public static class WallpaperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
 
+    public static class ApnEditorActivity extends SettingsActivity { /* empty */ }
+    public static class ChooseAccountActivity extends SettingsActivity { /* empty */ }
+    public static class IccLockSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ImeiInformationActivity extends SettingsActivity { /* empty */ }
+    public static class SimStatusActivity extends SettingsActivity { /* empty */ }
+    public static class StatusActivity extends SettingsActivity { /* empty */ }
+    public static class TestingSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class WifiAPITestActivity extends SettingsActivity { /* empty */ }
+    public static class WifiInfoActivity extends SettingsActivity { /* empty */ }
+
     // Categories.
     public static class WirelessSettings extends SettingsActivity { /* empty */ }
     public static class DeviceSettings extends SettingsActivity { /* empty */ }

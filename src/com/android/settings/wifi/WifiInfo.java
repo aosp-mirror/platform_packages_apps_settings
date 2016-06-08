@@ -18,19 +18,24 @@ package com.android.settings.wifi;
 
 import android.os.Bundle;
 
-import com.android.settings.PreferenceActivity;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
 
 /**
  * Wifi information menu item on the diagnostic screen
  */
-public class WifiInfo extends PreferenceActivity {
+public class WifiInfo extends SettingsPreferenceFragment {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.testing_wifi_settings);
     }
 
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsEvent.TESTING;
+    }
 }
