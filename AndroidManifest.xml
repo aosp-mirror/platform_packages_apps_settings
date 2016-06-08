@@ -328,7 +328,7 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name=".wifi.WifiInfo"
+        <activity android:name=".Settings$WifiInfoActivity"
                 android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$WifiSettingsActivity">
@@ -337,6 +337,8 @@
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.wifi.WifiInfo" />
         </activity>
 
         <activity android:name=".wifi.WifiConfigInfo"
@@ -350,13 +352,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".wifi.WifiAPITest"
+        <activity android:name=".Settings$WifiAPITestActivity"
                 android:theme="@style/Theme.SubSettingsDialogWhenLarge">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.wifi.WifiAPITest" />
         </activity>
 
         <activity android:name=".wifi.WifiStatusTest"
@@ -1445,7 +1449,7 @@
             </intent-filter>
         </activity-alias>
 
-        <activity android:name="IccLockSettings"
+        <activity android:name="Settings$IccLockSettingsActivity"
                 android:label="@string/sim_lock_settings"
                 android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:process="com.android.phone">
@@ -1454,6 +1458,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.IccLockSettings" />
         </activity>
 
         <activity android:name="Settings$AccessibilitySettingsActivity"
@@ -1736,7 +1742,7 @@
         <activity android:name=".EncryptionInterstitial"/>
 
         <!-- Runs in the phone process since it needs access to the Phone object -->
-        <activity android:name=".deviceinfo.Status"
+        <activity android:name=".Settings$StatusActivity"
                 android:label="@string/device_status_activity_title"
                 android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:taskAffinity="com.android.settings"
@@ -1747,10 +1753,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.deviceinfo.Status" />
         </activity>
 
         <!-- Runs in the phone process since it needs access to the Phone object -->
-        <activity android:name=".deviceinfo.SimStatus"
+        <activity android:name=".Settings$SimStatusActivity"
                 android:label="@string/sim_status_title"
                 android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:process="com.android.phone">
@@ -1759,10 +1767,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.deviceinfo.SimStatus" />
         </activity>
 
         <!-- Runs in the phone process since it needs access to the Phone object -->
-        <activity android:name=".deviceinfo.ImeiInformation"
+        <activity android:name=".Settings$ImeiInformationActivity"
                 android:label="@string/imei_information_title"
                 android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:process="com.android.phone">
@@ -1771,6 +1781,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.deviceinfo.ImeiInformation" />
         </activity>
 
         <activity android:name="Settings$StorageSettingsActivity"
@@ -1875,7 +1887,7 @@
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
-        <activity android:name="ApnEditor"
+        <activity android:name="Settings$ApnEditorActivity"
                 android:label="@string/apn_edit">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -1889,6 +1901,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="vnd.android.cursor.dir/telephony-carrier" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.ApnEditor" />
         </activity>
 
         <activity android:name="Settings$DevelopmentSettingsActivity"
@@ -2152,11 +2166,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="TestingSettings" android:label="@string/testing">
+        <activity android:name="Settings$TestingSettingsActivity" android:label="@string/testing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.TestingSettings" />
         </activity>
 
         <receiver android:name="TestingSettingsBroadcastReceiver">
@@ -2317,10 +2333,13 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name="com.android.settings.accounts.ChooseAccountActivity"
+        <activity android:name="Settings$ChooseAccountActivity"
             android:label="@string/header_add_an_account"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/Theme.SubSettingsDialogWhenLarge"/>
+            android:theme="@style/Theme.SubSettingsDialogWhenLarge">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.accounts.ChooseAccountActivity" />
+        </activity>
 
         <activity android:name=".CryptKeeper"
                   androidprv:systemUserOnly="true"

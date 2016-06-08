@@ -6,6 +6,8 @@ import android.content.Intent;
 
 import static com.android.internal.telephony.TelephonyIntents.SECRET_CODE_ACTION;
 
+import com.android.settings.Settings.TestingSettingsActivity;
+
 
 public class TestingSettingsBroadcastReceiver extends BroadcastReceiver {
   
@@ -16,7 +18,7 @@ public class TestingSettingsBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(SECRET_CODE_ACTION)) {
             Intent i = new Intent(Intent.ACTION_MAIN);
-            i.setClass(context, TestingSettings.class);
+            i.setClass(context, TestingSettingsActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
         }
