@@ -281,7 +281,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                 finish();
                 return;
             }
-            mCursor = managedQuery(mUri, sProjection, null, null);
+            mCursor = getActivity().managedQuery(mUri, sProjection, null, null);
             mCursor.moveToFirst();
         }
 
