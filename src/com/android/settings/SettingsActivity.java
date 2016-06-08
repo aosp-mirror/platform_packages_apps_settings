@@ -1080,7 +1080,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             for (DashboardCategory category : categories) {
                 for (Tile tile : category.tiles) {
                     ComponentName component = tile.intent.getComponent();
-                    if (packageName.equals(component)&& !ArrayUtils.contains(
+                    if (packageName.equals(component.getPackageName()) && !ArrayUtils.contains(
                             SETTINGS_FOR_RESTRICTED, component.getClassName())) {
                         setTileEnabled(component, false, isAdmin, pm);
                     }
@@ -1091,18 +1091,11 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private void setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin,
                                 PackageManager pm) {
-        if (UserHandle.MU_ENABLED && !isAdmin
+        if (UserHandle.MU_ENABLED && !isAdmin && getPackageName().equals(component.getPackageName())
                 && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, component.getClassName())) {
             enabled = false;
         }
-        int state = pm.getComponentEnabledSetting(component);
-        boolean isEnabled = state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-        if (isEnabled != enabled) {
-            pm.setComponentEnabledSetting(component, enabled
-                    ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                    : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
-        }
+        setTileEnabled(component, enabled);
     }
 
     private void getMetaData() {
