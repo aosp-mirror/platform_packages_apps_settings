@@ -496,8 +496,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 @NonNull Context context, @NonNull InputMethodInfo imi,
                 @Nullable InputMethodSubtype imSubtype) {
             if (imSubtype != null) {
-                return imSubtype.getDisplayName(
-                        context, imi.getPackageName(), imi.getServiceInfo().applicationInfo);
+                return InputMethodAndSubtypeUtil.getSubtypeLocaleNameAsSentence(
+                        imSubtype, context, imi);
             }
             return null;
         }

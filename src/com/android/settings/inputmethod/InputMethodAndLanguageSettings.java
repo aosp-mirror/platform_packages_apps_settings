@@ -758,22 +758,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             final int inputMethodCount = (inputMethods == null ? 0 : inputMethods.size());
             for (int i = 0; i < inputMethodCount; ++i) {
                 InputMethodInfo inputMethod = inputMethods.get(i);
-
-                StringBuilder builder = new StringBuilder();
                 List<InputMethodSubtype> subtypes = inputMethodManager
                         .getEnabledInputMethodSubtypeList(inputMethod, true);
-                final int subtypeCount = subtypes.size();
-                for (int j = 0; j < subtypeCount; j++) {
-                    InputMethodSubtype subtype = subtypes.get(j);
-                    if (builder.length() > 0) {
-                        builder.append(',');
-                    }
-                    CharSequence subtypeLabel = subtype.getDisplayName(context,
-                            inputMethod.getPackageName(), inputMethod.getServiceInfo()
-                                    .applicationInfo);
-                    builder.append(subtypeLabel);
-                }
-                String summary = builder.toString();
+                String summary = InputMethodAndSubtypeUtil.getSubtypeLocaleNameListAsSentence(
+                        subtypes, context, inputMethod);
 
                 ServiceInfo serviceInfo = inputMethod.getServiceInfo();
                 ComponentName componentName = new ComponentName(serviceInfo.packageName,
