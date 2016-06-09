@@ -32,8 +32,12 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.BidiFormatter;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -183,15 +187,46 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
         updateState();
     }
 
+    private static void verySmallSpanExcept(SpannableString s, CharSequence exception) {
+        final float SIZE = 0.8f * 0.8f;
+        final int FLAGS = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
+        final int exceptionStart = TextUtils.indexOf(s, exception);
+        if (exceptionStart == -1) {
+           s.setSpan(new RelativeSizeSpan(SIZE), 0, s.length(), FLAGS);
+        } else {
+            if (exceptionStart > 0) {
+                s.setSpan(new RelativeSizeSpan(SIZE), 0, exceptionStart, FLAGS);
+            }
+            final int exceptionEnd = exceptionStart + exception.length();
+            if (exceptionEnd < s.length()) {
+                s.setSpan(new RelativeSizeSpan(SIZE), exceptionEnd, s.length(), FLAGS);
+            }
+        }
+    }
+
+    private static CharSequence formatTitle(Context context, String template, long usageLevel) {
+        final SpannableString amountTemplate = new SpannableString(
+                context.getString(com.android.internal.R.string.fileSizeSuffix)
+                .replace("%1$s", "^1").replace("%2$s", "^2"));
+        verySmallSpanExcept(amountTemplate, "^1");
+        final Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
+                usageLevel, Formatter.FLAG_SHORTER);
+        final CharSequence formattedUsage = TextUtils.expandTemplate(amountTemplate,
+                usedResult.value, usedResult.units);
+
+        final SpannableString fullTemplate = new SpannableString(template.replace("%1$s", "^1"));
+        verySmallSpanExcept(fullTemplate, "^1");
+        return TextUtils.expandTemplate(fullTemplate,
+                BidiFormatter.getInstance().unicodeWrap(formattedUsage));
+    }
+
     private void updateState() {
         DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 mDefaultTemplate);
         Context context = getContext();
         if (mSummaryPreference != null) {
-            Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
-                    info.usageLevel, Formatter.FLAG_SHORTER);
-            mSummaryPreference.setTitle(TextUtils.expandTemplate(getText(mDataUsageTemplate),
-                    usedResult.value, usedResult.units));
+            mSummaryPreference.setTitle(
+                    formatTitle(context, getString(mDataUsageTemplate), info.usageLevel));
             long limit = info.limitLevel;
             if (limit <= 0) {
                 limit = info.warningLevel;
