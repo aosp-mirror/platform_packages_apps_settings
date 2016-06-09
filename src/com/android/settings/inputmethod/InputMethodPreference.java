@@ -39,7 +39,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.text.Collator;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -213,17 +212,10 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
     }
 
     private String getSummaryString() {
-        final Context context = getContext();
         final InputMethodManager imm = getInputMethodManager();
         final List<InputMethodSubtype> subtypes = imm.getEnabledInputMethodSubtypeList(mImi, true);
-        final ArrayList<CharSequence> subtypeLabels = new ArrayList<>();
-        for (final InputMethodSubtype subtype : subtypes) {
-            final CharSequence label = subtype.getDisplayName(
-                  context, mImi.getPackageName(), mImi.getServiceInfo().applicationInfo);
-            subtypeLabels.add(label);
-        }
-        // TODO: A delimiter of subtype labels should be localized.
-        return TextUtils.join(", ", subtypeLabels);
+        return InputMethodAndSubtypeUtil.getSubtypeLocaleNameListAsSentence(
+                subtypes, getContext(), mImi);
     }
 
     private void showSecurityWarnDialog(final InputMethodInfo imi) {

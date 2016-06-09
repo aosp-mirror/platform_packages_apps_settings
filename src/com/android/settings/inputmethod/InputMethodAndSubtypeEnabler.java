@@ -189,8 +189,8 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment
             final InputMethodSubtype subtype = imi.getSubtypeAt(index);
             if (subtype.overridesImplicitlyEnabledSubtype()) {
                 if (autoSubtypeLabel == null) {
-                    autoSubtypeLabel = subtype.getDisplayName(
-                            context, imi.getPackageName(), imi.getServiceInfo().applicationInfo);
+                    autoSubtypeLabel = InputMethodAndSubtypeUtil.getSubtypeLocaleNameAsSentence(
+                            subtype, context, imi);
                 }
             } else {
                 final Preference subtypePref = new InputMethodSubtypePreference(
