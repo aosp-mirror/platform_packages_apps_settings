@@ -32,8 +32,12 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.BidiFormatter;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -183,15 +187,35 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
         updateState();
     }
 
+    private static CharSequence formatTitle(Context context, String template, long usageLevel) {
+        final float LARGER_SIZE = 1.25f * 1.25f;  // (1/0.8)^2
+        final float SMALLER_SIZE = 1.0f / LARGER_SIZE;  // 0.8^2
+        final int FLAGS = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
+
+        final Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
+                usageLevel, Formatter.FLAG_SHORTER);
+        final SpannableString enlargedValue = new SpannableString(usedResult.value);
+        enlargedValue.setSpan(new RelativeSizeSpan(LARGER_SIZE), 0, enlargedValue.length(), FLAGS);
+
+        final SpannableString amountTemplate = new SpannableString(
+                context.getString(com.android.internal.R.string.fileSizeSuffix)
+                .replace("%1$s", "^1").replace("%2$s", "^2"));
+        final CharSequence formattedUsage = TextUtils.expandTemplate(amountTemplate,
+                enlargedValue, usedResult.units);
+
+        final SpannableString fullTemplate = new SpannableString(template);
+        fullTemplate.setSpan(new RelativeSizeSpan(SMALLER_SIZE), 0, fullTemplate.length(), FLAGS);
+        return TextUtils.expandTemplate(fullTemplate,
+                BidiFormatter.getInstance().unicodeWrap(formattedUsage));
+    }
+
     private void updateState() {
         DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 mDefaultTemplate);
         Context context = getContext();
         if (mSummaryPreference != null) {
-            Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
-                    info.usageLevel, Formatter.FLAG_SHORTER);
-            mSummaryPreference.setTitle(TextUtils.expandTemplate(getText(mDataUsageTemplate),
-                    usedResult.value, usedResult.units));
+            mSummaryPreference.setTitle(
+                    formatTitle(context, getString(mDataUsageTemplate), info.usageLevel));
             long limit = info.limitLevel;
             if (limit <= 0) {
                 limit = info.warningLevel;
