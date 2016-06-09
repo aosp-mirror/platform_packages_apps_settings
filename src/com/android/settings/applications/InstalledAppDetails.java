@@ -1207,6 +1207,8 @@ public class InstalledAppDetails extends AppInfoBase
             if (requestedPermissionCount == 0) {
                 summary = res.getString(
                         R.string.runtime_permissions_summary_no_permissions_requested);
+                mPermissionsPreference.setOnPreferenceClickListener(null);
+                mPermissionsPreference.setEnabled(false);
             } else {
                 final ArrayList<CharSequence> list = new ArrayList<>(grantedGroupLabels);
                 if (additionalGrantedPermissionCount > 0) {
@@ -1221,6 +1223,8 @@ public class InstalledAppDetails extends AppInfoBase
                 } else {
                     summary = ListFormatter.getInstance().format(list);
                 }
+                mPermissionsPreference.setOnPreferenceClickListener(InstalledAppDetails.this);
+                mPermissionsPreference.setEnabled(true);
             }
             mPermissionsPreference.setSummary(summary);
         }
