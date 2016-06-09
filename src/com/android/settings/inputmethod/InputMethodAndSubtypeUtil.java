@@ -16,8 +16,13 @@
 
 package com.android.settings.inputmethod;
 
+import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.icu.text.ListFormatter;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.support.v7.preference.Preference;
@@ -28,12 +33,14 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
 
+import com.android.internal.app.LocaleHelper;
 import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 // TODO: Consolidate this with {@link InputMethodSettingValuesWrapper}.
@@ -369,5 +376,56 @@ class InputMethodAndSubtypeUtil {
         if (prefs != null && prefs.contains(key)) {
             prefs.edit().remove(key).apply();
         }
+    }
+
+    @NonNull
+    static String getSubtypeLocaleNameAsSentence(@Nullable InputMethodSubtype subtype,
+            @NonNull final Context context, @NonNull final InputMethodInfo inputMethodInfo) {
+        if (subtype == null) {
+            return "";
+        }
+        final Locale locale = getDisplayLocale(context);
+        final CharSequence subtypeName = subtype.getDisplayName(context,
+                inputMethodInfo.getPackageName(), inputMethodInfo.getServiceInfo()
+                        .applicationInfo);
+        return LocaleHelper.toSentenceCase(subtypeName.toString(), locale);
+    }
+
+    @NonNull
+    static String getSubtypeLocaleNameListAsSentence(
+            @NonNull final List<InputMethodSubtype> subtypes, @NonNull final Context context,
+            @NonNull final InputMethodInfo inputMethodInfo) {
+        if (subtypes.isEmpty()) {
+            return "";
+        }
+        final Locale locale = getDisplayLocale(context);
+        final int subtypeCount = subtypes.size();
+        final CharSequence[] subtypeNames = new CharSequence[subtypeCount];
+        for (int i = 0; i < subtypeCount; i++) {
+            subtypeNames[i] = subtypes.get(i).getDisplayName(context,
+                    inputMethodInfo.getPackageName(), inputMethodInfo.getServiceInfo()
+                            .applicationInfo);
+        }
+        return LocaleHelper.toSentenceCase(
+                ListFormatter.getInstance(locale).format(subtypeNames), locale);
+    }
+
+    @NonNull
+    private static Locale getDisplayLocale(@Nullable final Context context) {
+        if (context == null) {
+            return Locale.getDefault();
+        }
+        if (context.getResources() == null) {
+            return Locale.getDefault();
+        }
+        final Configuration configuration = context.getResources().getConfiguration();
+        if (configuration == null) {
+            return Locale.getDefault();
+        }
+        final Locale configurationLocale = configuration.getLocales().get(0);
+        if (configurationLocale == null) {
+            return Locale.getDefault();
+        }
+        return configurationLocale;
     }
 }
