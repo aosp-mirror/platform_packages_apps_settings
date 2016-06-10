@@ -41,8 +41,8 @@ class InputMethodSubtypePreference extends SwitchWithNoTextPreference {
         super(context);
         setPersistent(false);
         setKey(imi.getId() + subtype.hashCode());
-        final CharSequence subtypeLabel = subtype.getDisplayName(context,
-                imi.getPackageName(), imi.getServiceInfo().applicationInfo);
+        final CharSequence subtypeLabel =
+                InputMethodAndSubtypeUtil.getSubtypeLocaleNameAsSentence(subtype, context, imi);
         setTitle(subtypeLabel);
         final String subtypeLocaleString = subtype.getLocale();
         if (TextUtils.isEmpty(subtypeLocaleString)) {
