@@ -18,7 +18,6 @@ package com.android.settings.deletionhelper;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -46,11 +45,9 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
     public static final int DEFAULT_DAYS_TO_RETAIN = 90;
 
-    private static final String SHARED_PREFRENCES_NAME = "automatic_storage_manager_settings";
     private static final String KEY_DAYS = "days";
     private static final String KEY_DELETION_HELPER = "deletion_helper";
     private static final String KEY_STORAGE_MANAGER_SWITCH = "storage_manager_active";
-    private static final String KEY_DAYS_TO_RETAIN = "days_to_retain";
 
     private DropDownPreference mDaysToRetain;
     private Preference mDeletionHelper;
@@ -72,16 +69,11 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         mDeletionHelper.setOnPreferenceClickListener(this);
 
         mStorageManagerSwitch = (SwitchPreference) findPreference(KEY_STORAGE_MANAGER_SWITCH);
-        boolean isChecked =
-                Settings.Secure.getInt(getContentResolver(),
-                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
-        mStorageManagerSwitch.setChecked(isChecked);
         mStorageManagerSwitch.setOnPreferenceChangeListener(this);
 
-        SharedPreferences sharedPreferences =
-                getContext().getSharedPreferences(SHARED_PREFRENCES_NAME,
-                        Context.MODE_PRIVATE);
-        int value = sharedPreferences.getInt(KEY_DAYS_TO_RETAIN, DEFAULT_DAYS_TO_RETAIN);
+        int value = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN_DEFAULT);
         String[] stringValues =
                 getResources().getStringArray(R.array.automatic_storage_management_days_values);
         mDaysToRetain.setValue(stringValues[daysValueToIndex(value, stringValues)]);
@@ -90,7 +82,11 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     @Override
     public void onResume() {
         super.onResume();
-        mDaysToRetain.setEnabled(mStorageManagerSwitch.isChecked());
+        boolean isChecked =
+                Settings.Secure.getInt(getContentResolver(),
+                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
+        mStorageManagerSwitch.setChecked(isChecked);
+        mDaysToRetain.setEnabled(isChecked);
     }
 
     @Override
@@ -103,11 +99,9 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
                         Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, checked ? 1 : 0);
                 break;
             case KEY_DAYS:
-                SharedPreferences.Editor editor =
-                        getContext().getSharedPreferences(SHARED_PREFRENCES_NAME,
-                                Context.MODE_PRIVATE).edit();
-                editor.putInt(KEY_DAYS_TO_RETAIN, Integer.parseInt((String) newValue));
-                editor.apply();
+                Settings.Secure.putInt(getContentResolver(),
+                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
+                        Integer.parseInt((String) newValue));
                 break;
         }
         return true;
