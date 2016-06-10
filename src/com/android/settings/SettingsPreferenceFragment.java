@@ -683,7 +683,10 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     public void finish() {
         Activity activity = getActivity();
-        if (activity != null && !activity.getFragmentManager().popBackStackImmediate()) {
+        if (activity == null) return;
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
             activity.finish();
         }
     }
