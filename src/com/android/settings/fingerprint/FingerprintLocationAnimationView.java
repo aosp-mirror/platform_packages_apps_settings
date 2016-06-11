@@ -19,17 +19,18 @@ package com.android.settings.fingerprint;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.annotation.ColorInt;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 /**
  * View which plays an animation to indicate where the sensor is on the device.
@@ -61,13 +62,11 @@ public class FingerprintLocationAnimationView extends View implements
                 R.fraction.fingerprint_sensor_location_fraction_x, 1, 1);
         mFractionCenterY = getResources().getFraction(
                 R.fraction.fingerprint_sensor_location_fraction_y, 1, 1);
-        TypedValue typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(android.R.attr.colorAccent, typedValue, true);
-        int color = getResources().getColor(typedValue.resourceId, null);
+        @ColorInt int colorAccent = Utils.getColorAccent(context);
         mDotPaint.setAntiAlias(true);
         mPulsePaint.setAntiAlias(true);
-        mDotPaint.setColor(color);
-        mPulsePaint.setColor(color);
+        mDotPaint.setColor(colorAccent);
+        mPulsePaint.setColor(colorAccent);
         mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(context,
                 android.R.interpolator.linear_out_slow_in);
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(context,
