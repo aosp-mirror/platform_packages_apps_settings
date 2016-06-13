@@ -84,6 +84,7 @@ public class Settings extends SettingsActivity {
     public static class AccountSyncSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsInAddAccountActivity extends SettingsActivity { /* empty */ }
+    public static class GestureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CryptKeeperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeviceAdminSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DataUsageSummaryActivity extends SettingsActivity { /* empty */ }
