@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 
 import com.android.internal.net.VpnConfig;
@@ -48,6 +49,7 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
     private PackageInfo mPackageInfo;
     private Listener mListener;
 
+    private UserManager mUserManager;
     private final IConnectivityManager mService = IConnectivityManager.Stub.asInterface(
             ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
 
@@ -80,6 +82,12 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mUserManager = UserManager.get(getContext());
+    }
+
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle args = getArguments();
         final String label = args.getString(ARG_LABEL);
@@ -96,7 +104,7 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
                     .setMessage(getActivity().getString(R.string.vpn_disconnect_confirm))
                     .setNegativeButton(getActivity().getString(R.string.vpn_cancel), null);
 
-            if (connected) {
+            if (connected && !isUiRestricted()) {
                 dlog.setPositiveButton(getActivity().getString(R.string.vpn_disconnect),
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -120,7 +128,10 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
 
     @Override
     public void onForget(final DialogInterface dialog) {
-        final int userId = UserHandle.getUserId(mPackageInfo.applicationInfo.uid);
+        if (isUiRestricted()) {
+            return;
+        }
+        final int userId = getUserId();
         try {
             mService.setVpnPackageAuthorization(mPackageInfo.packageName, userId, false);
             onDisconnect(dialog);
@@ -135,7 +146,10 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
     }
 
     private void onDisconnect(final DialogInterface dialog) {
-        final int userId = UserHandle.getUserId(mPackageInfo.applicationInfo.uid);
+        if (isUiRestricted()) {
+            return;
+        }
+        final int userId = getUserId();
         try {
             if (mPackageInfo.packageName.equals(getConnectedPackage(mService, userId))) {
                 mService.setAlwaysOnVpnPackage(userId, null, /* lockdownEnabled */ false);
@@ -145,6 +159,15 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
             Log.e(TAG, "Failed to disconnect package " + mPackageInfo.packageName +
                     " for user " + userId, e);
         }
+    }
+
+    private boolean isUiRestricted() {
+        final UserHandle userHandle = UserHandle.of(getUserId());
+        return mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN, userHandle);
+    }
+
+    private int getUserId() {
+        return UserHandle.getUserId(mPackageInfo.applicationInfo.uid);
     }
 
     private static String getConnectedPackage(IConnectivityManager service, final int userId)
