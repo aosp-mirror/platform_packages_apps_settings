@@ -199,6 +199,13 @@ public class TetherSettings extends RestrictedSettingsFragment
     @Override
     public void onDestroy() {
         mDataSaverBackend.remListener(this);
+
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        BluetoothProfile profile = mBluetoothPan.getAndSet(null);
+        if (profile != null && adapter != null) {
+            adapter.closeProfileProxy(BluetoothProfile.PAN, profile);
+        }
+
         super.onDestroy();
     }
 
