@@ -59,14 +59,13 @@ public class ShowAdminSupportDetailsDialog extends Activity
         mDpm = getSystemService(DevicePolicyManager.class);
         mEnforcedAdmin = getAdminDetailsFromIntent(getIntent());
 
-        mDialogView = LayoutInflater.from(this).inflate(
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        mDialogView = LayoutInflater.from(builder.getContext()).inflate(
                 R.layout.admin_support_details_dialog, null);
         initializeDialogViews(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId);
-
-        new AlertDialog.Builder(this)
-                .setView(mDialogView)
+        builder.setOnDismissListener(this)
                 .setPositiveButton(R.string.okay, null)
-                .setOnDismissListener(this)
+                .setView(mDialogView)
                 .show();
     }
 
