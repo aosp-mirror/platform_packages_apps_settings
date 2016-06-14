@@ -1274,7 +1274,7 @@
     <string name="use_location_title" msgid="5206937465504979977">"Placering og søgning"</string>
     <string name="use_location_summary" msgid="3978805802386162520">"Lad Google bruge din placering til at forbedre søgeresultater og andre tjenester"</string>
     <string name="location_access_title" msgid="7064108942964081243">"Adgang til min placering"</string>
-    <string name="location_access_summary" msgid="69031404093194341">"Tillad apps, der har bedt om tilladelse, at bruge dine placeringsoplysninger"</string>
+    <string name="location_access_summary" msgid="69031404093194341">"Tillad apps, der har bedt om tilladelse, at bruge dine stedoplysninger"</string>
     <string name="location_sources_heading" msgid="1278732419851088319">"Placeringskilder"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Om din tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Om telefonen"</string>
@@ -1999,7 +1999,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"Hvis denne administrator aktiveres, får appen <xliff:g id="APP_NAME">%1$s</xliff:g> tilladelse til at foretage følgende handlinger:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Denne administrator er aktiv og tillader, at appen <xliff:g id="APP_NAME">%1$s</xliff:g> kan foretage disse handlinger:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Vil du aktivere Profiladministrator?"</string>
-    <string name="adding_profile_owner_warning" msgid="8081841501073689534">"Hvis du fortsætter, vil din bruger blive styret af din administrator, som også kan gemme tilknyttet data ud over dine personlige data.\n\nDin administrator har mulighed for at overvåge og administrere indstillinger, adgang, apps og data, der er knyttet til denne bruger, herunder netværksaktivitet og enhedens placeringsoplysninger."</string>
+    <string name="adding_profile_owner_warning" msgid="8081841501073689534">"Hvis du fortsætter, vil din bruger blive styret af din administrator, som også kan gemme tilknyttet data ud over dine personlige data.\n\nDin administrator har mulighed for at overvåge og administrere indstillinger, adgang, apps og data, der er knyttet til denne bruger, herunder netværksaktivitet og enhedens stedoplysninger."</string>
     <string name="admin_disabled_other_options" msgid="4564776259414246934">"Andre valgmuligheder er deaktiveret af din administrator."</string>
     <string name="admin_more_details" msgid="7901420667346456102">"Flere oplysninger"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Ikke-navngivet"</string>
@@ -2265,14 +2265,8 @@
       <item quantity="one">Tillad eller fjern certifikat</item>
       <item quantity="other">Tillad eller fjern certifikater</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installeret certifikatmyndigheder på din enhed, hvilket giver dem mulighed for at overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites. Du kan vælge at tillade eller fjerne dette certifikat.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.</item>
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installeret certifikatmyndigheder på din enhed, hvilket giver dem mulighed for at overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites. Du kan vælge at tillade eller fjerne disse certifikater.\n\nKontakt din administrator for at få flere oplysninger om disse certifikater.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installeret en certifikatmyndigheder for din arbejdsprofil, hvilket giver dem mulighed for at overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites. Du kan vælge at tillade eller fjerne dette certifikat.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.</item>
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installeret en certifikatmyndigheder for din arbejdsprofil, hvilket giver dem mulighed for at overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites. Du kan vælge at tillade eller fjerne disse certifikater.\n\nKontakt din administrator for at få flere oplysninger om disse certifikater.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"En tredjepart kan overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites.\n\nPålidelige loginoplysninger, der er installeret på din enhed, gør dette muligt."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">Kontrollér certifikat</item>
@@ -2406,7 +2400,7 @@
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Tillad dataudveksling, når tabletten rører en anden enhed"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Tillad dataudveksling, når telefonen rører en anden enhed"</string>
     <string name="restriction_location_enable_title" msgid="5020268888245775164">"Placering"</string>
-    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Tillad, at apps bruger dine placeringsoplysninger"</string>
+    <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Tillad, at apps bruger dine stedoplysninger"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Tilbage"</string>
     <string name="wizard_next" msgid="3606212602795100640">"Næste"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Udfør"</string>
@@ -2968,9 +2962,9 @@
     <string name="disabled_by_policy_title" msgid="627023216027648534">"Handlingen er ikke tilladt"</string>
     <string name="default_admin_support_msg" msgid="239311515653633217">"Denne handling er deaktiveret. Kontakt din organisations administrator for at få flere oplysninger."</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Flere oplysninger"</string>
-    <string name="admin_profile_owner_message" msgid="5834937282929663252">"Your administrator kan overvåge og administrere apps og data, der er knyttet til din arbejdsprofil, heriunder indstillinger, tilladelser, virksomhedsadgang, netværksaktivitet og enhedens placeringsoplysninger."</string>
-    <string name="admin_profile_owner_user_message" msgid="7153676784012255048">"Din administrator kan overvåge og administrere apps og data, der er knyttet til denne bruger, herunder indstillinger, tilladelser, virksomhedsadgang, netværksaktivitet og enhedens placeringsoplysninger."</string>
-    <string name="admin_device_owner_message" msgid="8734500370023898028">"Din administrator kan overvåge og administrere apps og data, der er knyttet til denne enhed, herunder indstillinger, tilladelser, virksomhedsadgang, netværksaktivitet og enhedens placeringsoplysninger."</string>
+    <string name="admin_profile_owner_message" msgid="5834937282929663252">"Your administrator kan overvåge og administrere apps og data, der er knyttet til din arbejdsprofil, heriunder indstillinger, tilladelser, virksomhedsadgang, netværksaktivitet og enhedens stedoplysninger."</string>
+    <string name="admin_profile_owner_user_message" msgid="7153676784012255048">"Din administrator kan overvåge og administrere apps og data, der er knyttet til denne bruger, herunder indstillinger, tilladelser, virksomhedsadgang, netværksaktivitet og enhedens stedoplysninger."</string>
+    <string name="admin_device_owner_message" msgid="8734500370023898028">"Din administrator kan overvåge og administrere apps og data, der er knyttet til denne enhed, herunder indstillinger, tilladelser, virksomhedsadgang, netværksaktivitet og enhedens stedoplysninger."</string>
     <string name="condition_turn_off" msgid="1960945836880080298">"Slå fra"</string>
     <string name="condition_turn_on" msgid="9089876276117874591">"Slå til"</string>
     <string name="condition_expand_show" msgid="608202020023489939">"Vis"</string>
