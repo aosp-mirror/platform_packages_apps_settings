@@ -845,6 +845,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Ja ir ieslēgti Wi-Fi zvani, varat veikt tālruņa zvanus Wi-Fi tīklos vai savā mobilo sakaru operatora tīkla atkarībā no savām preferencēm un no tā, kurš signāls ir spēcīgāks. Pirms ieslēdzat šo funkciju, sazinieties ar savu mobilo sakaru operatoru, lai noskaidrotu tarifus un citu informāciju."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Atjaunināt adresi ārkārtas gadījumiem"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Adrese, ko izmantos ārkārtas palīdzības dienesti kā jūsu atrašanās vietu, ja zvanīsiet uz numuru 911, lietojot Wi-Fi"</string>
     <string name="home_settings" msgid="212375129455718176">"Sākums"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Displejs"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Skaņa"</string>
@@ -2289,16 +2290,8 @@
       <item quantity="one">Sertifikātu pieņemšana vai noņemšana</item>
       <item quantity="other">Sertifikātu pieņemšana vai noņemšana</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="zero"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja jūsu ierīcē sertificēšanas iestāžu sertifikātus. Šie sertifikāti atļauj iestādēm pārraudzīt darbības ierīces tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja jūsu ierīcē sertificēšanas iestāžu sertifikātus. Šie sertifikāti atļauj iestādēm pārraudzīt darbības ierīces tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja jūsu ierīcē sertificēšanas iestāžu sertifikātus. Šie sertifikāti atļauj iestādēm pārraudzīt darbības ierīces tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="zero"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti atļauj iestādēm pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Jūs varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar savu administratoru.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti atļauj iestādēm pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Jūs varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar savu administratoru.</item>
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti atļauj iestādēm pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes. Jūs varat pieņemt vai noņemt šos sertifikātus.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar savu administratoru.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Trešā puse spēj pārraudzīt jūsu darbības tīklā, tostarp e-pastu, lietotnes un drošās vietnes.\n\nŠo pārraudzības iespēju nodrošina jūsu ierīcē instalēts sertifikāts."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="zero">Pārbaudīt sertifikātus</item>
@@ -3038,12 +3031,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet datu lietojums"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Tīkls Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3308709914705592281">"Mobilie dati: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> Wi-Fi dati"</string>
+    <string name="ethernet_data_template" msgid="5775729859383597507">"Ethernet dati: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Datu brīdinājums: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Datu brīdinājums: <xliff:g id="ID_1">%1$s</xliff:g>/ datu ierobežojums: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Norēķinu cikls"</string>
@@ -3200,4 +3190,26 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Vietas atbrīvošana tūlīt"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Krātuves pārvaldnieks"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Autom. krātuves pārvaldības pakalpojums"</string>
+    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
+    <skip />
+    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
+    <skip />
+    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
+    <skip />
+    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
+    <skip />
+    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
+    <skip />
+    <!-- no translation found for ambient_display_title (7369291941168001738) -->
+    <skip />
+    <!-- no translation found for ambient_display_summary (810244127489185677) -->
+    <skip />
+    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
+    <skip />
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
+    <skip />
+    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
+    <skip />
+    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
+    <skip />
 </resources>

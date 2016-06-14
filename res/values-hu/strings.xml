@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Ha be van kapcsolva a Wi-Fi-hívás, akkor a telefon az Ön beállításaitól és a jelerősségtől függően vagy a Wi-Fi-hálózaton, vagy a mobilszolgáltató hálózatán át vezeti a hívásokat. A funkció bekapcsolása előtt tájékozódjon mobilszolgáltatójánál a díjakról és egyéb részletekről."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Segélyhívási cím frissítése"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"A készenléti szervek számára megadott tartózkodási hely Wi-Fi-hálózatról kezdeményezett segélyhívás esetén"</string>
     <string name="home_settings" msgid="212375129455718176">"Főoldal"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Megjelenítés"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Hang"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="other">Tanúsítványok elfogadása megbízhatóként vagy eltávolítása</item>
       <item quantity="one">Tanúsítvány elfogadása megbízhatóként vagy eltávolítása</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> tanúsítványkibocsátót telepített eszközére, ami lehetővég teheti hálózati tevékenységek, beleértve az e-mailek, alkalmazások és biztonságos webhelyek figyelését. Ezeket a tanúsítványokat elfogadhatja megbízhatóként, vagy el is távolíthatja őket.\n\nHa további információt szeretne ezekről a tanúsítványokról, lépjen kapcsolatba a rendszergazdával.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> tanúsítványkibocsátót telepített eszközére, ami lehetővég teheti hálózati tevékenységek, beleértve az e-mailek, alkalmazások és biztonságos webhelyek figyelését. Ezt a tanúsítványt elfogadhatja megbízhatóként, vagy el is távolíthatja.\n\nHa további információt szeretne erről a tanúsítványról, lépjen kapcsolatba a rendszergazdával.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> tanúsítványkibocsátókat telepített az Ön munkaprofiljához, ami lehetővé teheti a hálózati tevékenységek, beleértve az e-mailek, alkalmazások és biztonságos webhelyek figyelését. Ezeket a tanúsítványokat elfogadhatja megbízhatóként, vagy el is távolíthatja őket.\n\nHa további információt szeretne ezekről a tanúsítványokról, lépjen kapcsolatba a rendszergazdával.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> tanúsítványkibocsátót telepített az Ön munkaprofiljához, ami lehetővé teheti a hálózati tevékenységek, beleértve az e-mailek, alkalmazások és biztonságos webhelyek figyelését. Ezt a tanúsítványt elfogadhatja megbízhatóként, vagy el is távolíthatja.\n\nHa további információt szeretne erről a tanúsítványról, lépjen kapcsolatba a rendszergazdával.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Egy harmadik fél képes az Ön hálózati tevékenységének figyelésére, beleértve az e-maileket, az alkalmazásokat és a biztonságos webhelyeket is.\n\nEzt az Ön eszközére telepített megbízható hitelesítési adatok teszik lehetővé."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Tanúsítványok ellenőrzése</item>
@@ -3007,12 +3002,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Adathasználat Ethernet-kapcsolaton"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3308709914705592281">"<xliff:g id="ID_1">%1$s</xliff:g> mobiladat-forgalom"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> adathasználat Wi-Fi-kapcsolaton"</string>
+    <string name="ethernet_data_template" msgid="5775729859383597507">"<xliff:g id="ID_1">%1$s</xliff:g> adathasználat Ethernet-kapcsolaton"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> adatforgalmi figyelmeztetés"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> – adatforgalmi figyelmeztetés / <xliff:g id="ID_2">%2$s</xliff:g> – adatforgalom korlátozása"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Számlázási ciklus"</string>
@@ -3165,4 +3157,26 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Hely felszabadítása most"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Tárhelykezelő"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Automatikus tárhelykezelő szolgáltatás"</string>
+    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
+    <skip />
+    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
+    <skip />
+    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
+    <skip />
+    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
+    <skip />
+    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
+    <skip />
+    <!-- no translation found for ambient_display_title (7369291941168001738) -->
+    <skip />
+    <!-- no translation found for ambient_display_summary (810244127489185677) -->
+    <skip />
+    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
+    <skip />
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
+    <skip />
+    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
+    <skip />
+    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
+    <skip />
 </resources>

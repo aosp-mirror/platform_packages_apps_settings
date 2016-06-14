@@ -854,6 +854,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Ak je zapnuté volanie Wi-Fi, váš telefón môže smerovať volania cez siete Wi-Fi alebo cez sieť vášho operátora. Závisí to od vašich nastavení a od toho, ktorý signál je silnejší. Pred zapnutím tejto funkcie kontaktujte svojho operátora a informujte sa o poplatkoch a ďalších podrobnostiach."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Aktualizácia núdzovej adresy"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Adresa, ktorej polohu použijú tiesňové služby, keď zavoláte linku 112 pomocou Wi-Fi"</string>
     <string name="home_settings" msgid="212375129455718176">"Domovská stránka"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Obrazovka"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Zvuk"</string>
@@ -2307,18 +2308,8 @@
       <item quantity="other">Nastavte certifikáty ako dôveryhodné alebo ich odstráňte</item>
       <item quantity="one">Nastavte certifikát ako dôveryhodný alebo ho odstráňte</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="few">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> nainštalovala na vaše zariadenie certifikačné autority, ktoré jej umožnia monitorovať aktivitu v sieti zariadenia vrátane pošty, aplikácií a zabezpečených webov. Môžete si vybrať, či chcete týmto certifikátom dôverovať alebo ich môžete odstrániť.\n\nĎalšie informácie o týchto certifikátoch získate od svojho správcu.</item>
-      <item quantity="many">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> nainštalovala na vaše zariadenie certifikačné autority, ktoré jej umožnia monitorovať aktivitu v sieti zariadenia vrátane pošty, aplikácií a zabezpečených webov. Môžete si vybrať, či chcete týmto certifikátom dôverovať alebo ich môžete odstrániť.\n\nĎalšie informácie o týchto certifikátoch získate od svojho správcu.</item>
-      <item quantity="other">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> nainštalovala na vaše zariadenie certifikačné autority, ktoré jej umožnia monitorovať aktivitu v sieti zariadenia vrátane pošty, aplikácií a zabezpečených webov. Môžete si vybrať, či chcete týmto certifikátom dôverovať alebo ich môžete odstrániť.\n\nĎalšie informácie o týchto certifikátoch získate od svojho správcu.</item>
-      <item quantity="one">Doména <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> nainštalovala na vaše zariadenie certifikačnú autoritu, ktorá jej umožní monitorovať aktivitu v sieti zariadenia vrátane pošty, aplikácií a zabezpečených webov. Môžete si vybrať, či chcete tomuto certifikátu dôverovať alebo ho môžete odstrániť.\n\nĎalšie informácie o tomto certifikáte získate od svojho správcu</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="few">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> nainštalovala pre váš pracovný profil certifikačné autority, ktoré jej môžu umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov. Môžete si vybrať, či chcete týmto certifikátom dôverovať alebo ich môžete odstrániť.\n\nĎalšie informácie o týchto certifikátoch získate od svojho správcu.</item>
-      <item quantity="many">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g>nainštalovala pre váš pracovný profil certifikačné autority, ktoré jej môžu umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov. Môžete si vybrať, či chcete týmto certifikátom dôverovať alebo ich môžete odstrániť.\n\nĎalšie informácie o týchto certifikátoch získate od svojho správcu.</item>
-      <item quantity="other">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> nainštalovala pre váš pracovný profil certifikačné autority, ktoré jej môžu umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov. Môžete si vybrať, či chcete týmto certifikátom dôverovať alebo ich môžete odstrániť.\n\nĎalšie informácie o týchto certifikátoch získate od svojho správcu.</item>
-      <item quantity="one">Doména <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> nainštalovala pre váš pracovný profil certifikačnú autoritu, ktorá jej môže umožniť monitorovať aktivitu v pracovnej sieti vrátane pošty, aplikácií a zabezpečených webov. Môžete si vybrať, či chcete tomuto certifikátu dôverovať alebo ho môžete odstrániť.\n\nĎalšie informácie o tomto certifikáte získate od svojho správcu.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Vaša aktivita v sieti, vrátane e-mailov, aplikácií a zabezpečených webov môže byť monitorovaná treťou stranou.\n\nUmožňujú to dôveryhodné poverenia nainštalované vo vašom zariadení."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="few">Overiť certifikáty</item>
@@ -3069,12 +3060,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Spotreba dát prostredníctvom ethernetu"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3308709914705592281">"Mobilné dáta: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="wifi_data_template" msgid="501654649753761778">"<xliff:g id="ID_1">%1$s</xliff:g> dát cez Wi-Fi"</string>
+    <string name="ethernet_data_template" msgid="5775729859383597507">"Dáta prostredníctvom ethernetu: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Upozornenie na dáta: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Upozornenie na dáta: <xliff:g id="ID_1">%1$s</xliff:g> / limit dát: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Fakturačný cyklus"</string>
@@ -3235,4 +3223,26 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Uvoľniť miesto"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Správca úložiska"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Služba na automatickú správu úložiska"</string>
+    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
+    <skip />
+    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
+    <skip />
+    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
+    <skip />
+    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
+    <skip />
+    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
+    <skip />
+    <!-- no translation found for ambient_display_title (7369291941168001738) -->
+    <skip />
+    <!-- no translation found for ambient_display_summary (810244127489185677) -->
+    <skip />
+    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
+    <skip />
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
+    <skip />
+    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
+    <skip />
+    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
+    <skip />
 </resources>
