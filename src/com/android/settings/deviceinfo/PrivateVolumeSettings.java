@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageEventListener;
@@ -91,6 +92,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     private static final String EXTRA_VOLUME_SIZE = "volume_size";
 
     private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
+
+    private static final String STORAGE_MANAGER_PROPERTY = "ro.storage_manager.enabled";
 
     private static final int[] ITEMS_NO_SHOW_SHARED = new int[] {
             R.string.storage_detail_apps,
@@ -212,7 +215,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         screen.removeAll();
 
-        if (getResources().getBoolean(R.bool.config_has_storage_manager)) {
+        if (SystemProperties.getBoolean(STORAGE_MANAGER_PROPERTY, false)) {
             addPreference(screen, mAutomaticStorageManagement);
         }
         addPreference(screen, mSummary);
@@ -396,7 +399,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             mount.setVisible(false);
             unmount.setVisible(false);
             format.setVisible(false);
-            manage.setVisible(getResources().getBoolean(R.bool.config_has_storage_manager));
+            manage.setVisible(SystemProperties.getBoolean(STORAGE_MANAGER_PROPERTY, false));
         } else {
             rename.setVisible(mVolume.getType() == VolumeInfo.TYPE_PRIVATE);
             mount.setVisible(mVolume.getState() == VolumeInfo.STATE_UNMOUNTED);
