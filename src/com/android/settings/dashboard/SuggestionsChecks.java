@@ -32,9 +32,9 @@ import com.android.ims.ImsManager;
 import com.android.settings.Settings.FingerprintEnrollSuggestionActivity;
 import com.android.settings.Settings.FingerprintSuggestionActivity;
 import com.android.settings.Settings.ScreenLockSuggestionActivity;
-import com.android.settings.Settings.WallpaperSuggestionActivity;
 import com.android.settings.Settings.WifiCallingSuggestionActivity;
 import com.android.settings.Settings.ZenModeAutomationSuggestionActivity;
+import com.android.settings.WallpaperSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.Collection;
