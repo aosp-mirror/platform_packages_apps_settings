@@ -34,6 +34,9 @@ import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
@@ -77,6 +80,21 @@ public class ToggleAccessibilityServicePreferenceFragment
     @Override
     protected int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_SERVICE;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater infalter) {
+        // Do not call super. We don't want to see the "Help & feedback" option on this page so as
+        // not to confuse users who think they might be able to send feedback about a specific
+        // accessibility service from this page.
+
+        // We still want to show the "Settings" menu.
+        if (mSettingsTitle != null && mSettingsIntent != null) {
+            MenuItem menuItem = menu.add(mSettingsTitle);
+            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            menuItem.setIntent(mSettingsIntent);
+        }
+
     }
 
     @Override
