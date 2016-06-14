@@ -366,7 +366,7 @@
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Заключване на екрана: Настройване"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ами сега! Това не е сензорът"</string>
-    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Ползвайте сензора за отпечатък на у-вото си."</string>
+    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Ползвайте сензора за отпечатък на устр. си."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Регистрирането не бе завършено"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Времевото ограничение за регистриране на отпечатък бе достигнато. Опитайте отново."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Регистрирането на отпечатък не проработи. Опитайте отново или използвайте друг пръст."</string>
@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Когато функцията за обаждания през Wi-Fi е включена, телефонът ви може да маршрутизира обажданията през Wi-Fi мрежи или мрежата на оператора ви в зависимост от предпочитанието ви и от това, кой сигнал е по-силен. Преди да включите тази функция, потърсете от оператора си информация относно таксите и други подробности."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Актуализиране на адреса за спешни случаи"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Адресът, който спешните служби ще използват като ваше местоположение, ако се обадите на 112 посредством Wi-Fi"</string>
     <string name="home_settings" msgid="212375129455718176">"Начало"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Дисплей"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Звук"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="other">Доверете се на тези сертификати или ги премахнете</item>
       <item quantity="one">Доверете се на този сертификат или го премахнете</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other">Домейнът <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> е инсталирал сертифициращи органи на устройството ви. Това може да му позволи да следи мрежовата активност на устройството, включително имейли, приложения и защитени уебсайтове. Можете да приемете тези сертификати за надеждни или да ги премахнете.\n\nЗа повече информация относно сертификатите се свържете с администратора си.</item>
-      <item quantity="one">Домейнът <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> е инсталирал сертифициращ орган на устройството ви. Това може да му позволи да следи мрежовата активност на устройството, включително имейли, приложения и защитени уебсайтове. Можете да приемете този сертификат за надежден или да го премахнете.\n\nЗа повече информация относно сертификата се свържете с администратора си.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other">Домейнът <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> е инсталирал сертифициращи органи за служебния ви потребителски профил, което може да му разреши да наблюдава служебната ви активност в мрежата, включително имейли, приложения и защитени уебсайтове. Можете да изберете да се доверите на тези сертификати или да ги премахнете.\n\nЗа повече информация относно сертификатите се свържете с администратора си.</item>
-      <item quantity="one">Домейнът <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> е инсталирал сертифициращ орган за служебния ви потребителски профил, което може да му разреши да наблюдава служебната ви активност в мрежата, включително имейли, приложения и защитени уебсайтове. Можете да изберете да се доверите на този сертификат или да го премахнете.\n\nЗа повече информация относно сертификата се свържете с администратора си.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Трета страна може да наблюдава активността ви в мрежата, включително имейлите, приложенията и защитените уебсайтове.\n\nТова е възможно благодарение на инсталирани на устройството ви надеждни идентификационни данни."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Проверка на сертификатите</item>
@@ -2833,10 +2828,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"Разходът на батерията се оптимизира"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Няма настройка за оптимизиране на батерията"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Батерията не се оптимизира и може да се изразходва по-бързо."</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> приложения имат разрешение да пренебрегват оптимизирането на батерията</item>
-      <item quantity="one">1 приложение има разрешение да пренебрегва оптимизирането на батерията</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"Да се пренебрегнат ли оптимизациите на батерията?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Искате ли да разрешите на приложението <xliff:g id="APP_NAME">%1$s</xliff:g> да остане свързано на заден план? Разходът на батерията може да е по-голям."</string>
     <string name="battery_summary" msgid="101415762036784289">"Изразходване на <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% от последното пълно зареждане"</string>
@@ -3007,12 +2998,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Пренос на данни през Ethernet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" мобилни данни"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" данни през Wi-Fi"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" данни през Ethernet"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>/ограничение за данните: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Цикъл на таксуване"</string>

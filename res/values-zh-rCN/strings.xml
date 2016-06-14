@@ -836,6 +836,8 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"开启“WLAN 通话”功能后，您的手机可根据您的偏好设置，通过 WLAN 网络或您的运营商网络通话（具体取决于哪个网络信号较强）。开启此功能之前，请先向您的运营商咨询收费情况及其他详情。"</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"更新紧急地址"</string>
+    <!-- no translation found for emergency_address_summary (306028701568728126) -->
+    <skip />
     <string name="home_settings" msgid="212375129455718176">"主屏幕"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"显示"</string>
     <string name="sound_settings" msgid="5534671337768745343">"声音"</string>
@@ -976,8 +978,8 @@
     <string name="device_status" msgid="607405385799807324">"状态信息"</string>
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"电池状态、网络状态和其他信息"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"电话号码、信号等"</string>
-    <string name="storage_settings" msgid="4211799979832404953">"存储空间"</string>
-    <string name="storage_usb_settings" msgid="7293054033137078060">"存储设备"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"存储"</string>
+    <string name="storage_usb_settings" msgid="7293054033137078060">"存储"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"存储设置"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"卸载USB存储设备，查看可用存储设备"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"卸载SD卡，查看可用存储设备"</string>
@@ -2271,14 +2273,8 @@
       <item quantity="other">信任或移除证书</item>
       <item quantity="one">信任或移除证书</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> 已在您的设备上安装多个证书授权中心，它们可用于监控您的设备网络活动（包括使用电子邮件、应用和安全网站）。您可以选择信任这些证书，也可以选择移除这些证书。\n\n如需详细了解这些证书，请与您的管理员联系。</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> 已在您的设备上安装一个证书授权中心，它可用于监控您的设备网络活动（包括使用电子邮件、应用和安全网站）。您可以选择信任此证书，也可以选择移除此证书。\n\n如需详细了解此证书，请与您的管理员联系。</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> 已为您的工作资料安装多个证书授权中心，这可能会允许证书授权中心监控您的工作网络活动（包括使用电子邮件、应用和安全网站）。您可以选择信任这些证书，也可以选择移除这些证书。\n\n如需详细了解这些证书，请与您的管理员联系。</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> 已为您的工作资料安装一个证书授权中心，这可能会允许证书授权中心监控您的工作网络活动（包括使用电子邮件、应用和安全网站）。您可以选择信任此证书，也可以选择移除此证书。\n\n如需详细了解此证书，请与您的管理员联系。</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"第三方可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n出现这种情况的原因是您在设备上安装了信任的凭据。"</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">检查证书</item>
@@ -2833,10 +2829,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"优化电池使用"</string>
     <string name="high_power_system" msgid="7362862974428225301">"没有电池优化设置"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"不应用电池优化设置，但电量的消耗速度可能会更快。"</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other">已允许 <xliff:g id="COUNT">%d</xliff:g> 个应用忽略电池优化</item>
-      <item quantity="one">已允许 1 个应用忽略电池优化</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"要忽略电池优化吗？"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"要让应用“<xliff:g id="APP_NAME">%1$s</xliff:g>”在后台保持连接吗？这可能会消耗更多电量。"</string>
     <string name="battery_summary" msgid="101415762036784289">"自上次充满电后已使用 <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% 的电量"</string>
@@ -3007,12 +2999,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"以太网流量消耗"</string>
     <string name="wifi" msgid="1081550856200013637">"WLAN"</string>
     <string name="ethernet" msgid="6600095783781389720">"以太网"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" 移动数据流量"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" WLAN 流量"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" 以太网流量"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"流量警告：<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"流量警告：<xliff:g id="ID_1">%1$s</xliff:g>/流量上限：<xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"结算周期"</string>

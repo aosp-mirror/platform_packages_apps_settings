@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi bidezko deiak aktibatuta daudenean, telefonoak Wi-Fi sareen bidez edo operadorearen sarearen bidez bidera ditzake deiak, zure hobespenen eta seinalearen sendotasunaren arabera. Eginbide hau aktibatu aurretik, eskatu tarifak eta bestelako informazioa operadoreari."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Eguneratu larrialdietarako helbidea"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Wi-Fi bidez larrialdi-zerbitzuetara deituz gero kokapen gisa erabiliko den helbidea"</string>
     <string name="home_settings" msgid="212375129455718176">"Hasiera"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Bistaratzea"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Soinua"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="other">Jo fidagarritzat edo kendu ziurtagiriak</item>
       <item quantity="one">Jo fidagarritzat edo kendu ziurtagiria</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> domeinuak ziurtagiri-emaile batzuk instalatu dizkizu gailuan. Hortaz, gailuak darabilen sarean egiten duzuna gainbegiratzeko gai izan liteke domeinua; besteak beste, posta elektronikoan, aplikazioetan eta webgune seguruetan egiten duzuna ikus lezake. Ziurtagiriak fidagarritzat jo ditzakezu ala kendu egin ditzakezu.\n\nZiurtagiri horiei buruzko informazio gehiago lortzeko, jarri administratzailearekin harremanetan.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> domeinuak ziurtagiri-emaile bat instalatu dizu gailuan. Hortaz, gailuak darabilen sarean egiten duzuna gainbegiratzeko gai izan liteke domeinua; besteak beste, posta elektronikoan, aplikazioetan eta webgune seguruetan egiten duzuna ikus lezake. Ziurtagiria fidagarritzat jo dezakezu ala kendu egin dezakezu.\n\nZiurtagiri horri buruzko informazio gehiago lortzeko, jarri administratzailearekin harremanetan.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> domeinuak ziurtagiri-emaile batzuk instalatu dizkizu laneko profilean. Hortaz, baliteke domeinuak laneko sarean egiten duzuna gainbegiratu ahal izatea, besteak beste, posta elektronikoan, aplikazioetan eta webgune seguruetan egiten duzuna. Ziurtagiriak fidagarritzat jo ditzakezu ala kendu egin ditzakezu.\n\nZiurtagiri horiei buruzko informazio gehiago lortzeko, jarri administratzailearekin harremanetan.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> domeinuak ziurtagiri-emaile bat instalatu dizu laneko profilean. Hortaz, baliteke domeinuak laneko sarean egiten duzuna gainbegiratu ahal izatea, besteak beste, posta elektronikoan, aplikazioetan eta webgune seguruetan egiten duzuna. Ziurtagiria fidagarritzat jo dezakezu ala kendu egin dezakezu.\n\nZiurtagiri horri buruzko informazio gehiago lortzeko, jarri administratzailearekin harremanetan.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Hirugarren alderdi bat sarean bideratzen dituzun jarduerak kontrola ditzake, mezu elektronikoak, aplikazioak eta webgune seguruak barne.\n\nGailuan instalatu duzun kredentzial fidagarri batek egiten du hori posible."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Ikusi ziurtagiriak</item>
@@ -2833,10 +2828,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"Bateria-optimizazioa aplikatzen da"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Bateria-optimizazioa ez dago erabilgarri"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Ez aplikatu bateria-optimizazioa. Aukera horrekin, bizkorrago agortuko da bateria."</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikaziok dute bateria-optimizazioa ez aplikatzeko baimena</item>
-      <item quantity="one">Aplikazio batek du bateria-optimizazioa ez aplikatzeko baimena</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"Ez ikusi egin nahi diezu bateriaren optimizazioei?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Atzeko planoan konektatuta egotea baimendu nahi diozu <xliff:g id="APP_NAME">%1$s</xliff:g> aplikazioari? Baliteke bateria gehiago erabiltzea."</string>
     <string name="battery_summary" msgid="101415762036784289">"Bateriaren %% <xliff:g id="PERCENTAGE">%1$d</xliff:g> erabili du bateria guztiz kargatu zenetik"</string>
@@ -3007,12 +2998,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet datuen erabilera"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi konexioa"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" datu-konexioan"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Wi-Fi datuetan"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" ethernet datuetan"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"Datuen-erabileraren abisua: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Datuen erabileraren abisua: <xliff:g id="ID_1">%1$s</xliff:g>. Datuen muga: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Fakturazio-zikloa"</string>

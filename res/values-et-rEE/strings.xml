@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Kui WiFi-kõned on sisse lülitatud, saab telefon olenevalt eelistustest ja signaalitugevusest kõnesid marsruutida WiFi-võrkude või teie operaatori võrgu kaudu. Enne selle funktsiooni sisselülitamist uurige operaatorilt tasude ja muude üksikasjade kohta."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Hädaabi aadressi värskendamine"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Aadress, mida hädaabiteenused kasutavad teie asukohana, kui teete WiFi kaudu hädaabikõne"</string>
     <string name="home_settings" msgid="212375129455718176">"Avaekraan"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Ekraan"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Heli"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="other">Sertifikaatide usaldamine või eemaldamine</item>
       <item quantity="one">Sertifikaadi usaldamine või eemaldamine</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other">Domeen <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> installis teie seadmesse sertifikaadi volitused, mis võivad lubada sellel jälgida teie seadme võrgutegevusi (sh meilid, rakendused ja turvalised veebisaidid). Võite sertifikaate usaldada või need eemaldada.\n\nLisateabe saamiseks nende sertifikaatide kohta võtke ühendust administraatoriga.</item>
-      <item quantity="one">Domeen <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> installis teie seadmesse sertifikaadi volituse, mis võib lubada sellel jälgida teie seadme võrgutegevusi (sh meilid, rakendused ja turvalised veebisaidid). Võite sertifikaati usaldada või selle eemaldada.\n\nLisateabe saamiseks selle sertifikaadi kohta võtke ühendust administraatoriga.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other">Domeen <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> installis teie tööprofiilile sertifikaadi volitused, mis võivad lubada sellel jälgida tegevusi töökoha võrgus (sh meilid, rakendused ja turvalised veebisaidid). Võite sertifikaate usaldada või need eemaldada.\n\nLisateabe saamiseks nende sertifikaatide kohta võtke ühendust administraatoriga.</item>
-      <item quantity="one">Domeen <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> installis teie tööprofiilile sertifikaadi volituse, mis võib lubada sellel jälgida tegevusi töökoha võrgus (sh meilid, rakendused ja turvalised veebisaidid). Võite sertifikaati usaldada või selle eemaldada.\n\nLisateabe saamiseks selle sertifikaadi kohta võtke ühendust administraatoriga.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Kolmas osapool saab jälgida teie tegevust võrgus, sh meile, rakendusi ja turvalisi veebisaite.\n\nSeda võimaldab teie seadmesse installitud usaldusväärne mandaat."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Kontrollige sertifikaate</item>
@@ -2833,10 +2828,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"Akukasutuse optimeerimine"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Aku optimeerimine pole saadaval"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Aku optimeerimist ei rakendata. Aku võib kiiremini tühjeneda."</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> rakendusel lubati aku optimeerimist eirata</item>
-      <item quantity="one">1 rakendusel lubati aku optimeerimist eirata</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"Kas soovite aku optimeeringuid eirata?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Kas lubate rakendusel <xliff:g id="APP_NAME">%1$s</xliff:g> säilitada ühendus taustal? See võib kasutada rohkem akut."</string>
     <string name="battery_summary" msgid="101415762036784289">"Kasutus alates viimasest täislaadimisest on <xliff:g id="PERCENTAGE">%1$d</xliff:g>%%"</string>
@@ -3007,12 +2998,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Etherneti andmekasutus"</string>
     <string name="wifi" msgid="1081550856200013637">"WiFi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" mobiilse andmeside andmeid"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" WiFi-andmeid"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Etherneti-andmeid"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> – andmemahu hoiatus"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> – andmemahu hoiatus / <xliff:g id="ID_2">%2$s</xliff:g> – andmemahu piirang"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Arveldustsükkel"</string>

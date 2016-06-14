@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Cando están activadas as chamadas wifi, o teu teléfono pode enviar as túas chamadas a través de redes wifi ou da rede do teu operador, dependendo das túas preferencias e de cal teña o sinal máis forte. Antes de activar esta función, consulta co teu operador as tarifas e outra información."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Actualizar enderezo de emerxencia"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Enderezo que utilizan os servizos de emerxencia como a túa localización se chamas ao 911 a través da wifi"</string>
     <string name="home_settings" msgid="212375129455718176">"Inicio"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Pantalla"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Son"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="other">Confiar nos certificados ou eliminalos</item>
       <item quantity="one">Confiar no certificado ou eliminalo</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificación no teu dispositivo que poden permitirlle supervisar a actividade de rede deste, incluídos os correos electrónicos, as aplicacións e os sitios web seguros. Podes confiar nos certificados ou eliminalos.\n\nPara obter máis información sobre eles, ponte en contacto co administrador.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> instalou unha autoridade de certificación no teu dispositivo que pode permitirlle supervisar a actividade de rede deste, incluídos os correos electrónicos, as aplicacións e os sitios web seguros. Podes confiar no certificado ou eliminalo.\n\nPara obter máis información sobre el, ponte en contacto co administrador.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalou autoridades de certificación para o teu perfil de traballo que poden permitirlle supervisar a actividade da rede de traballo, incluídos os correos electrónicos, as aplicacións e os sitios web seguros. Podes confiar nos certificados ou eliminalos.\n\nPara obter máis información sobre estes, ponte en contacto co administrador.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> instalou unha autoridade de certificación para o teu perfil de traballo que pode permitirlle supervisar a actividade da rede dr traballo, incluídos os correos electrónicos, as aplicacións e os sitios web seguros. Podes confiar no certificado ou eliminalo.\n\nPara obter máis información sobre este, ponte en contacto co administrador.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Un terceiro pode supervisar a túa actividade na rede, incluídos os correos electrónicos, as aplicacións e os sitios web seguros.\n\nUnha credencial de confianza instalada no teu dispositivo fai que isto sexa posible."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Comprobar certificados</item>
@@ -2833,10 +2828,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"Optimizando o uso da batería"</string>
     <string name="high_power_system" msgid="7362862974428225301">"A optimización da batería non está dispoñible"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Non aplicar a optimización da batería, xa que esta pode esgotarse máis rápido."</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplicacións teñen permiso para ignorar a optimización da batería</item>
-      <item quantity="one">1 aplicación ten permiso para ignorar a optimización da batería</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"Queres ignorar as optimizacións de batería?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Queres que a aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> permaneza conectada en segundo plano? É posible que consuma máis batería."</string>
     <string name="battery_summary" msgid="101415762036784289">"Uso do <xliff:g id="PERCENTAGE">%1$d</xliff:g> %% desde a última carga completa"</string>
@@ -3007,12 +2998,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Uso de datos de Ethernet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wifi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"Datos móbiles: <xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small></small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"Datos da wifi: <xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small></small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"Datos de Ethernet: <xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small></small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"Aviso de datos: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Aviso de datos: <xliff:g id="ID_1">%1$s</xliff:g>/Límite de datos: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Ciclo de facturación"</string>

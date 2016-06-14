@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"‏وقتی تماس Wi-Fi روشن است، تلفن شما می‌تواند بنابر تنظیمات ترجیحی‌تان و اینکه چه سیگنالی قدرتمندتر است، تماس‌ها را از طریق شبکه‌های Wi-Fi یا شبکه شرکت مخابراتی‌تان هدایت کند. قبل از روشن کردن این قابلیت، هزینه‌ها و سایر جزئیات را با شرکت مخابراتی‌تان بررسی کنید."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"به‌روزرسانی نشانی اضطراری"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"‏نشانی‌ای که اگر از طریق Wi-Fi با ۹۱۱ تماس بگیرید، توسط خدمات اضطراری به‌عنوان مکان شما استفاده می‌شود"</string>
     <string name="home_settings" msgid="212375129455718176">"صفحه اصلی"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"صفحه‌نمایش"</string>
     <string name="sound_settings" msgid="5534671337768745343">"صدا"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="one">اعتماد یا حذف گواهی</item>
       <item quantity="other">اعتماد یا حذف گواهی‌ها</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> مرجع‌های صدور گواهی در دستگاهتان نصب کرده است که ممکن است به او اجازه دهند فعالیت‌های کاری دستگاه، از جمله رایانامه‌ها، برنامه‌ها و وب‌سایت‌های ایمن را کنترل کند. می‌توانید انتخاب کنید که به این گواهی‌ها اعتماد کنید یا آن‌ها را حذف کنید.\n\nبرای کسب اطلاعات بیشتر درباره این گواهی‌ها، با سرپرستتان تماس بگیرید.</item>
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> مرجع‌های صدور گواهی در دستگاهتان نصب کرده است که ممکن است به او اجازه دهند فعالیت‌های کاری دستگاه، از جمله رایانامه‌ها، برنامه‌ها و وب‌سایت‌های ایمن را کنترل کند. می‌توانید انتخاب کنید که به این گواهی‌ها اعتماد کنید یا آن‌ها را حذف کنید.\n\nبرای کسب اطلاعات بیشتر درباره این گواهی‌ها، با سرپرستتان تماس بگیرید.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> مرجع صدور گواهی‌ای برای نمایه کاری شما نصب کرده است که ممکن است به او اجازه دهد فعالیت‌های کاری شبکه، از جمله رایانامه‌ها، برنامه‌ها و وب‌سایت‌های ایمن را کنترل کند. می‌توانید انتخاب کنید که به این گواهی اعتماد کنید یا آن را حذف کنید.\n\nبرای کسب اطلاعات بیشتر درباره این گواهی، با سرپرستتان تماس بگیرید.</item>
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> مراجع صدور گواهی‌ای برای نمایه کاری شما نصب کرده است که ممکن است به او اجازه دهد فعالیت‌های کاری شبکه، از جمله رایانامه‌ها، برنامه‌ها و وب‌سایت‌های ایمن را کنترل کند. می‌توانید انتخاب کنید که به این گواهی‌ها اعتماد کنید یا آنها را حذف کنید.\n\nبرای کسب اطلاعات بیشتر درباره این گواهی‌ها، با سرپرستتان تماس بگیرید.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"شخص ثالتی می‌تواند روی فعالیت‌های شبکه شما ازجمله رایانامه‌ها، برنامه‌ها و وب‌سایت‌های ایمن نظارت داشته باشد.\n\nاعتبارنامه مطمئن نصب‌شده در دستگاهتان این کار را شدنی می‌کند."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">بررسی گواهی</item>
@@ -2833,10 +2828,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"بهینه‌سازی مصرف باتری"</string>
     <string name="high_power_system" msgid="7362862974428225301">"بهینه‌سازی مصرف باتری در دسترس نیست"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"شامل بهینه‌سازی مصرف باتری نمی‌شود. ممکن است باتری را سریع‌تر خالی کند."</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="one">به <xliff:g id="COUNT">%d</xliff:g> برنامه اجازه داده شد بهینه‌سازی مصرف باتری را نادیده بگیرد</item>
-      <item quantity="other">به <xliff:g id="COUNT">%d</xliff:g> برنامه اجازه داده شد بهینه‌سازی مصرف باتری را نادیده بگیرند</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"بهینه‌سازی‌های مصرف باتری نادیده گرفته شوند؟"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"به برنامه <xliff:g id="APP_NAME">%1$s</xliff:g> اجازه داده شود در پس‌زمینه متصل بماند؟ این کار می‌تواند شارژ باتری بیشتری مصرف کند."</string>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>٪ استفاده از آخرین شارژ کامل"</string>
@@ -3007,12 +2998,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"میزان مصرف داده اترنت"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"اترنت"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" داده شبکه تلفن همراه"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"‏<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" داده Wi-Fi"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" داده اترنت"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> هشدار داده"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> هشدار داده / <xliff:g id="ID_2">%2$s</xliff:g> محدودیت داده"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"چرخه صورت‌حساب"</string>
@@ -3026,7 +3014,7 @@
     <string name="data_limit" msgid="1885406964934590552">"محدودیت داده"</string>
     <string name="data_usage_template" msgid="392191945602400904">"بین <xliff:g id="ID_2">%2$s</xliff:g>، <xliff:g id="ID_1">%1$s</xliff:g> مصرف شده است"</string>
     <string name="configure" msgid="1029654422228677273">"پیکربندی"</string>
-    <string name="data_usage_other_apps" msgid="3272872663517382050">"سایر برنامه‌های موجود در مصرف داده"</string>
+    <string name="data_usage_other_apps" msgid="3272872663517382050">"برنامه‌های دیگری که در استفاده گنجانده شده"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
       <item quantity="one">هنگام روشن بودن «صرفه‌جویی داده»، <xliff:g id="COUNT">%1$d</xliff:g> برنامه می‌توانند بدون محدودیت از داده‌ها استفاده کند</item>
       <item quantity="other">هنگام روشن بودن «صرفه‌جویی داده»، <xliff:g id="COUNT">%1$d</xliff:g> برنامه می‌توانند بدون محدودیت از داده‌ها استفاده کند</item>

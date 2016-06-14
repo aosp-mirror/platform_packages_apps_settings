@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Þegar kveikt er á Wi-Fi símtölum getur síminn beint símtölum um Wi-Fi net eða kerfi símafyrirtækisins, eftir því hvað þú velur og hvor tengingin er betri. Kannaðu verðskrá og aðrar upplýsingar hjá símafyrirtækinu þínu áður en þú kveikir á þessu."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Uppfæra neyðarheimilisfang"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Heimilisfang sem neyðarþjónustur nota sem staðsetningu þína ef þú hringir í neyðarlínuna gegnum Wi-Fi"</string>
     <string name="home_settings" msgid="212375129455718176">"Heim"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skjár"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Hljóð"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="one">Treysta eða fjarlægja vottorð</item>
       <item quantity="other">Treysta eða fjarlægja vottorð</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hefur sett upp CA-vottorð fyrir tækið þitt sem leyfir þeim að fylgjast með netnotkuninni á tækinu, þar á meðal tölvupósti, forritum og öruggum vefsvæðum. Þú getur valið að annaðhvort treysta þessum vottorðum eða fjarlægja þau.\n\nTil að fá frekari upplýsingar um þessi vottorð skaltu hafa samband við kerfisstjórann.</item>
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hefur sett upp CA-vottorð fyrir tækið þitt sem leyfir þeim að fylgjast með netnotkuninni á tækinu, þar á meðal tölvupósti, forritum og öruggum vefsvæðum. Þú getur valið að annaðhvort treysta þessum vottorðum eða fjarlægja þau.\n\nTil að fá frekari upplýsingar um þessi vottorð skaltu hafa samband við kerfisstjórann.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hefur sett upp CA-vottorð fyrir vinnusniðið þitt, sem getur gert þeim kleift að fylgjast með netnotkuninni á vinnusniðinu, þar á meðal tölvupósti, forritum og öruggum vefsvæðum. Þú getur valið að annaðhvort treysta þessum vottorðum eða fjarlægja þau.\n\nTil að fá frekari upplýsingar um þessi vottorð skaltu hafa samband við kerfisstjórann.</item>
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hefur sett upp CA-vottorð fyrir vinnusniðið þitt, sem getur gert þeim kleift að fylgjast með netnotkuninni á vinnusniðinu, þar á meðal tölvupósti, forritum og öruggum vefsvæðum. Þú getur valið að annaðhvort treysta þessum vottorðum eða fjarlægja þau.\n\nTil að fá frekari upplýsingar um þessi vottorð skaltu hafa samband við kerfisstjórann.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Þriðji aðili getur fylgst með netvirkni þinni, þ. á m. tölvupósti, forritum og öruggum vefsvæðum.\n\nTraust vottorð sem uppsett er á tækinu þínu gerir þetta kleift."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">Athuga vottorð</item>
@@ -2833,10 +2828,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"Sparar rafhlöðunotkun"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Rafhlöðusparnaður er ekki í boði"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Ekki nota rafhlöðusparnað. Getur gengið hraðar á hleðslu rafhlöðunnar."</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> forriti leyft að hunsa rafhlöðusparnað</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> forritum leyft að hunsa rafhlöðusparnað</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"Hunsa rafhlöðusparnað?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Viltu leyfa forritinu <xliff:g id="APP_NAME">%1$s</xliff:g> að vera tengt í bakgrunni? Þetta getur gengið hraðar á rafhlöðuna."</string>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% notkun frá síðustu fullu hleðslu"</string>
@@ -3007,12 +2998,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet-gagnanotkun"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" farsímagögn"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Wi-Fi gögn"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" ethernet-gögn"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> gagnaviðvörun"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> gagnaviðvörun / <xliff:g id="ID_2">%2$s</xliff:g> gagnamörk"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Greiðslutímabil"</string>
