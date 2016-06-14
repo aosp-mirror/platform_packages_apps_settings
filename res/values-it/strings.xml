@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Se le chiamate Wi-Fi sono attive, il tuo telefono può instradare le chiamate tramite reti Wi-Fi o la rete del tuo operatore, in base alle tue preferenze e alla potenza del segnale. Prima di attivare questa funzione, verifica tariffe e ulteriori dettagli con il tuo operatore."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"aggiorna indirizzo di emergenza"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Indirizzo utilizzato dai servizi di emergenza per fornire la tua posizione se effettui una chiamata al 911 tramite Wi-Fi."</string>
     <string name="home_settings" msgid="212375129455718176">"Home page"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Audio"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="other">Considera attendibili i certificati o rimuovili</item>
       <item quantity="one">Considera attendibile il certificato o rimuovilo</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ha installato autorità di certificazione sul tuo dispositivo, da cui è possibile monitorare l\'attività di rete del dispositivo, inclusi email, app e siti web sicuri. Puoi scegliere se considerare attendibili i certificati o rimuoverli.\n\nContatta l\'amministratore per avere ulteriori informazioni sui certificati.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> ha installato un\'autorità di certificazione sul tuo dispositivo, da cui è possibile monitorare l\'attività di rete del dispositivo, inclusi email, app e siti web sicuri. Puoi scegliere se considerare attendibile il certificato o rimuoverlo.\n\nContatta l\'amministratore per avere ulteriori informazioni sul certificato.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ha installato autorità di certificazione per il tuo profilo di lavoro. L\'amministratore potrebbe monitorare l\'attività di rete lavorativa, inclusi siti web protetti, email e app. Puoi scegliere se considerare attendibili i certificati o rimuoverli.\n\nContatta l\'amministratore per avere ulteriori informazioni sui certificati.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> ha installato un\'autorità di certificazione per il tuo profilo di lavoro. L\'amministratore potrebbe monitorare l\'attività di rete lavorativa, inclusi siti web protetti, email e app. Puoi scegliere se considerare attendibile il certificato o rimuoverlo.\n\nContatta l\'amministratore per avere ulteriori informazioni sul certificato.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Una terza parte può monitorare la tua attività di rete, inclusi siti web protetti, email e applicazioni.\n\nQuesto è reso possibile da credenziali attendibili installate sul tuo dispositivo."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Controlla i certificati</item>
@@ -2833,10 +2828,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"Uso della batteria ottimizzato"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Ottimizzazione della batteria non disponibile"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Non applicare l\'ottimizzazione della batteria. La batteria potrebbe scaricarsi più rapidamente."</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> app autorizzate a ignorare l\'ottimizzazione della batteria</item>
-      <item quantity="one">1 app autorizzata a ignorare l\'ottimizzazione della batteria</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"Ignorare le ottimizzazioni della batteria?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Consentire all\'app <xliff:g id="APP_NAME">%1$s</xliff:g> di restare connessa in background? Il consumo di batteria potrebbe aumentare."</string>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% di utilizzo dall\'ultima ricarica completa"</string>
@@ -3007,12 +2998,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Utilizzo dei dati Ethernet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" dati cellulare"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" dati Wi-Fi"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" dati ethernet"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"Avviso relativo ai dati: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Avviso relativo ai dati: <xliff:g id="ID_1">%1$s</xliff:g>/Limite dati: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Ciclo di fatturazione"</string>

@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wenn die Option \"Anrufe über WLAN\" aktiviert ist, kann dein Smartphone abhängig von deiner Einstellung und von der Signalstärke Anrufe über WLAN-Netzwerke oder über das Netz deines Mobilfunkanbieters übertragen. Erkundige dich bei deinem Mobilfunkanbieter über die hierfür erhobenen Gebühren und andere Informationen, bevor du diese Funktion aktivierst."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Notfalladresse aktualisieren"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Adresse, die bei einem Notruf über WLAN von Notdiensten als dein Standort verwendet wird"</string>
     <string name="home_settings" msgid="212375129455718176">"Startseite"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Töne"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="other">Zertifikaten vertrauen oder sie entfernen</item>
       <item quantity="one">Zertifikat vertrauen oder entfernen</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hat Zertifizierungsstellen auf deinem Gerät installiert. Damit können die Netzwerkaktivitäten deines Geräts wie E-Mails, Apps und sichere Websites überwacht werden. Du kannst diesen Zertifikaten entweder vertrauen oder sie entfernen.\n\nWeitere Informationen zu diesen Zertifikaten erhältst du von deinem Administrator.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> hat eine Zertifizierungsstelle auf dem Gerät installiert. Damit können die Netzwerkaktivitäten deines Geräts wie E-Mails, Apps und sichere Websites überwacht werden. Du kannst diesem Zertifikat entweder vertrauen oder es entfernen.\n\nWeitere Informationen zu diesem Zertifikat erhältst du von deinem Administrator.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hat eine Zertifizierungsstellen für dein Arbeitsprofil installiert. Damit können deine geschäftlichen Netzwerkaktivitäten überwacht werden, einschließlich E-Mails, Apps und sicherer Websites. Du kannst diesen Zertifikaten entweder vertrauen oder sie entfernen.\n\nWeitere Informationen zu diesem Zertifikat erhältst du von deinem Administrator.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> hat eine Zertifizierungsstelle für dein Arbeitsprofil installiert. Damit können deine geschäftlichen Netzwerkaktivitäten überwacht werden, einschließlich E-Mails, Apps und sicherer Websites. Du kannst diesem Zertifikat entweder vertrauen oder es entfernen.\n\nWeitere Informationen zu diesem Zertifikat erhältst du von deinem Administrator.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Dritte können deine Netzwerkaktivitäten überwachen, einschließlich E-Mails, Apps und sicherer Websites.\n\nDies wird durch vertrauenswürdige Anmeldedaten ermöglicht, die auf deinem Gerät installiert sind."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Zertifikate prüfen</item>
@@ -2833,10 +2828,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"Akkuverbrauch optimiert"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Akku-Leistungsoptimierung nicht verfügbar"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Keine Optimierung bezüglich der Akkuleistung anwenden. Dein Akku entleert sich hierdurch möglicherweise schneller."</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> Apps wurde die Optimierung bezüglich der Akkuleistung gestattet.</item>
-      <item quantity="one">1 App wurde die Optimierung bezüglich der Akkuleistung gestattet.</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"Akkuoptimierungen ignorieren?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Darf die App \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" im Hintergrund verbunden bleiben? Dies erhöht möglicherweise die Akkunutzung."</string>
     <!-- String.format failed for translation -->
@@ -3009,12 +3000,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet-Datennutzung"</string>
     <string name="wifi" msgid="1081550856200013637">"WLAN"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" mobile Datennutzung"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" WLAN-Datennutzung"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Ethernetdatennutzung"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"Warnlimit für mobile Datennutzung: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Warnlimit für mobile Datennutzung: <xliff:g id="ID_1">%1$s</xliff:g>/Datenlimit: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Abrechnungszeitraum"</string>

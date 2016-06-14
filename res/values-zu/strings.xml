@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Uma ukushaya kwe-Wi-Fi kuvuliwe, ifoni yakho ingarutha amakholi ngamanethiwekhi we-Wi-Fi noma kunethiwekhi yenkampani yakho yenethiwekhi, ngokuya ngokuncamelayo nokuthi iyiphi isiginali enamandla. Ngaphambi kokuvula lesi sici, hlola nenkampani yakho yenethiwekhi ngokuphathelene nezinkokhelo neminye imininingwane."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Buyekeza ikheli lesimo esiphuthumayo"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Ikheli elisetshenziswa amasevisi ezimo eziphuthumayo endaweni yakho uma wenza ikholi ye-911 usebenzisa i-WiFi"</string>
     <string name="home_settings" msgid="212375129455718176">"Ikhaya"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Ukubukeka"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Umsindo"</string>
@@ -2272,14 +2273,8 @@
       <item quantity="one">Themba noma susa izitifiketi</item>
       <item quantity="other">Themba noma susa izitifiketi</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ifake ukugunyazwa kwesitifiketi kudivayisi yakho, okungakuvumela ukuthi kuqaphe umsebenzi wenethiwekhi yedivayisi yakho, ofaka ama-imeyili, izinhlelo zokusebenza, namawebhusayithi avikelekile. Ungakhetha ukwethemba noma ususe lesi zitifiketi.\n\nNgolwazi olubanzi mayelana nalezi zitifiketi, xhumana nomlawuli wakho.</item>
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ifake ukugunyazwa kwesitifiketi kudivayisi yakho, okungakuvumela ukuthi kuqaphe umsebenzi wenethiwekhi yedivayisi yakho, ofaka ama-imeyili, izinhlelo zokusebenza, namawebhusayithi avikelekile. Ungakhetha ukwethemba noma ususe lesi zitifiketi.\n\nNgolwazi olubanzi mayelana nalezi zitifiketi, xhumana nomlawuli wakho.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ufake ukugunyaza kwesitifiketi kwephrofayela yakho yomsebenzi, okungakuvumela ukuthi kuhlole umsebenzi wenethiwekhi, kufaka phakathi ama-imeyili, izinhlelo zokusebenza, nokuvikela amawebhusayithi. Ungakhetha ukwethemba noma ususe lesi zitifiketi.\n\nNgolwazi olubanzi mayelana nalezi zitifiketi, xhumana nomlawuli wakho.</item>
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ufake ukugunyaza kwesitifiketi kwephrofayela yakho yomsebenzi, okungakuvumela ukuthi kuhlole umsebenzi wenethiwekhi, kufaka phakathi ama-imeyili, izinhlelo zokusebenza, nokuvikela amawebhusayithi. Ungakhetha ukwethemba noma ususe lesi zitifiketi.\n\nNgolwazi olubanzi mayelana nalezi zitifiketi, xhumana nomlawuli wakho.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Inkampani yangaphandle iyakwazi ukugada umsebenzi wakho wenethiwekhi, ofaka ama-imeyili, izinhlelo zokusebenza, namawebhusayithi aphephile.\n\nUkuqinisekisa okuthenjiwe okufakwe kudivayisi yakho kwenza lokhu kukhoneke."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">Hlola izitifiketi</item>
@@ -2834,10 +2829,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"Ilungiselela ukusetshenziswa kwebhethri"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Ukulungiselelwa kwebhethri akutholakali"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Ungasebenzisi ukulungiselelwa kwebhethri. Kungadonsa ibhethri lakho ngokushesha okukhulu"</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> izinhlelo zokusebenza ezivunyelwe ukuziba ukulungiselelwa kwebhethri</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> izinhlelo zokusebenza ezivunyelwe ukuziba ukulungiselelwa kwebhethri</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"Ziba ukulungiselelwa kwebhethri"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Vumela uhlelo lokusebenza <xliff:g id="APP_NAME">%1$s</xliff:g> ukuthi lihlale lixhumekile ngemuva? Lokhu kungasebenzisa ibhethri eliningi."</string>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% ukusetshenziswa kusukela ekushajweni okugcwele kokugcina"</string>
@@ -3008,12 +2999,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ukusetshenziswa kwedatha kwe-ethernet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"I-Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" idatha yeselula"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" idatha ye-Wi-Fi"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" idatha ye-ethernet"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> Isexwayiso sedatha"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> Isexwayiso sedatha / <xliff:g id="ID_2">%2$s</xliff:g> Umkhawulo wedatha"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Umjikelezo wokukhokha"</string>

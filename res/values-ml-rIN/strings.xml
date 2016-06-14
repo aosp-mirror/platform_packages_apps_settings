@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"വൈഫൈ കോളിംഗ് ഓണായിരിക്കുമ്പോൾ, നിങ്ങളുടെ മുൻഗണനയും ഏത് സിഗ്നലാണ് ശക്തമെന്നതും അടിസ്ഥാനമാക്കി ഫോണിന് വൈഫൈ നെറ്റ്‌വർക്കോ കാരിയർ നെറ്റ്‌വർക്കോ വഴി കോളുകൾ റൂട്ട് ചെയ്യാനാകും. ഈ ഫീച്ചർ ഓണാക്കുന്നതിനുമുമ്പ്, നിരക്കുകളും മറ്റ് വിശദാംശങ്ങളും അറിയുന്നതിന് നിങ്ങളുടെ കാരിയറെ ബന്ധപ്പെടുക."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"അടിയന്തര വിലാസം അപ്ഡേറ്റുചെയ്യുക"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"വൈഫൈ ഉപയോഗിച്ച് നിങ്ങൾ 911-ലേക്ക് വിളിക്കുമ്പോൾ, ലൊക്കേഷൻ പോലുള്ള അടിയന്തര സേവനങ്ങൾ ഉപയോഗിക്കുന്ന വിലാസം"</string>
     <string name="home_settings" msgid="212375129455718176">"ഹോം"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"ഡിസ്പ്ലേ"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ശബ്‌ദം"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="other">സർട്ടിഫിക്കറ്റുകൾ പരിചിതമാക്കുക അല്ലെങ്കിൽ നീക്കംചെയ്യുക</item>
       <item quantity="one">സർട്ടിഫിക്കറ്റ് പരിചിതമാക്കുക അല്ലെങ്കിൽ നീക്കംചെയ്യുക</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other">നിങ്ങളുടെ ഉപകരണത്തിൽ, <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ഡൊമെയ്ൻ സർട്ടിഫിക്കറ്റ് അതോറിറ്റികൾ ഇൻസ്റ്റാൾ ചെയ്തിട്ടുണ്ട്, ഇമെയിലുകളും ആപ്‌സും സുരക്ഷിത വെബ്‌സൈറ്റുകളും ഉൾപ്പെടെ, നിങ്ങളുടെ നെറ്റ്‌വർക്ക് ആക്റ്റിവിറ്റി നിരീക്ഷിക്കുന്നതിന് ഇത് ഡൊമെയ്‌നിനെ അനുവദിച്ചേക്കാം. നിങ്ങൾക്ക് ഈ സർട്ടിഫിക്കറ്റുകളെ പരിചിതമാക്കാനോ നീക്കംചെയ്യാനോ തീരുമാനിക്കാവുന്നതാണ്.\n\nഈ സർട്ടിഫിക്കറ്റുകളെ കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾക്ക്, നിങ്ങളുടെ അഡ്മിനുമായി ബന്ധപ്പെടുക.</item>
-      <item quantity="one">നിങ്ങളുടെ ഉപകരണത്തിൽ, <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> ഡൊമെയ്ൻ ഒരു സർട്ടിഫിക്കറ്റ് അതോറിറ്റി ഇൻസ്റ്റാൾ ചെയ്തിട്ടുണ്ട്, ഇമെയിലുകളും ആപ്‌സും സുരക്ഷിത വെബ്‌സൈറ്റുകളും ഉൾപ്പെടെ, നിങ്ങളുടെ നെറ്റ്‌വർക്ക് ആക്റ്റിവിറ്റി നിരീക്ഷിക്കുന്നതിന് ഇത് ഡൊമെയ്‌നിനെ അനുവദിച്ചേക്കാം. നിങ്ങൾക്ക് ഈ സർട്ടിഫിക്കറ്റ് പരിചിതമാക്കാനോ നീക്കംചെയ്യാനോ തീരുമാനിക്കാവുന്നതാണ്.\n\nഈ സർട്ടിഫിക്കറ്റിനെ കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾക്ക്, നിങ്ങളുടെ അഡ്മിനുമായി ബന്ധപ്പെടുക.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other">നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലിനായി <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> സർട്ടിഫിക്കറ്റ് അതോറിറ്റികൾ ഇൻസ്റ്റാൾ ചെയ്തിട്ടുണ്ട്, ഇമെയിലുകളും ആപ്‌സും സുരക്ഷിത വെബ്‌സൈറ്റുകളും ഉൾപ്പെടെ, ഔദ്യോഗിക നെറ്റ്‌വർക്ക് ആക്റ്റിവിറ്റി മോണിറ്റർ ചെയ്യുന്നതിന് ഇത് അവരെ അനുവദിച്ചേക്കാം. നിങ്ങൾക്ക് ഈ സർട്ടിഫിക്കറ്റുകളെ പരിചിതമാക്കാനോ നീക്കംചെയ്യാനോ തീരുമാനിക്കാവുന്നതാണ്.\n\nഈ സർട്ടിഫിക്കറ്റുകളെ കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾക്ക്, നിങ്ങളുടെ അഡ്മിനുമായി ബന്ധപ്പെടുക.</item>
-      <item quantity="one">നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലിനായി <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> ഒരു സർട്ടിഫിക്കറ്റ് അതോറിറ്റി ഇൻസ്റ്റാൾ ചെയ്തിട്ടുണ്ട്, ഇമെയിലുകളും ആപ്‌സും സുരക്ഷിത വെബ്‌സൈറ്റുകളും ഉൾപ്പെടെ, ഔദ്യോഗിക നെറ്റ്‌വർക്ക് ആക്റ്റിവിറ്റി മോണിറ്റർ ചെയ്യുന്നതിന് ഇത് അവരെ അനുവദിച്ചേക്കാം. നിങ്ങൾക്ക് ഈ സർട്ടിഫിക്കറ്റ് പരിചിതമാക്കാനോ നീക്കംചെയ്യാനോ തീരുമാനിക്കാവുന്നതാണ്.\n\nഈ സർട്ടിഫിക്കറ്റിനെ കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾക്ക്, നിങ്ങളുടെ അഡ്മിനുമായി ബന്ധപ്പെടുക.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"ഇമെയിലുകളും അപ്ലിക്കേഷനുകളും വെബ്‌സൈറ്റുകൾ സുരക്ഷിതമാക്കലും ഉൾപ്പെടെയുള്ള നിങ്ങളുടെ നെറ്റ്‌വർക്ക് പ്രവർത്തനങ്ങൾ നിരീക്ഷിക്കാൻ ഒരു മൂന്നാം കക്ഷിയ്‌ക്ക് കഴിയും.\n\nനിങ്ങളുടെ ഉപകരണത്തിൽ വിശ്വാസ്യയോഗ്യമായ ഒരു ക്രെഡൻഷ്യൽ ഇൻസ്റ്റാളുചെയ്യുന്നത് ഇത് സാധ്യമാക്കുന്നു."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">സർട്ടിഫിക്കറ്റുകൾ പരിശോധിക്കുക</item>
@@ -2833,10 +2828,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"ബാറ്ററി ഉപയോഗം ഓപ്റ്റിമൈസ് ചെയ്യുന്നു"</string>
     <string name="high_power_system" msgid="7362862974428225301">"ബാറ്ററി ഓപ്റ്റിമൈസേഷൻ ലഭ്യമല്ല"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"ബാറ്ററി ഒപ്റ്റിമൈസേഷൻ പ്രയോഗിക്കരുത്. ഇത് ബാറ്ററിയെ വേഗത്തിൽ തീർത്തേക്കാം."</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other">ബാറ്ററി ഓപ്റ്റിമൈസേഷൻ അവഗണിക്കാൻ <xliff:g id="COUNT">%d</xliff:g> ആപ്സിനെ അനുവദിച്ചു</item>
-      <item quantity="one">ബാറ്ററി ഓപ്റ്റിമൈസേഷൻ അവഗണിക്കാൻ 1 ആപ്പിനെ അനുവദിച്ചു</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"ബാറ്ററി ഒപ്റ്റിമൈസേഷനുകൾ അവഗണിക്കണോ?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"പശ്ചാത്തലത്തിൽ കണക്റ്റുചെയ്ത നിലയിൽ തുടരുന്നതിന് <xliff:g id="APP_NAME">%1$s</xliff:g> എന്നതിനെ അനുവദിക്കണോ? (കൂടുതൽ ബാറ്ററി ഉപയോഗിച്ചേക്കാം)."</string>
     <string name="battery_summary" msgid="101415762036784289">"അവസാനമായി പൂർണ്ണ ചാർജ് ആയതിനുശേഷം <xliff:g id="PERCENTAGE">%1$d</xliff:g>%% ഉപയോഗം"</string>
@@ -3007,12 +2998,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"ഇതർനെറ്റ് ഡാറ്റാ ഉപയോഗം"</string>
     <string name="wifi" msgid="1081550856200013637">"വൈഫൈ"</string>
     <string name="ethernet" msgid="6600095783781389720">"ഇതർനെറ്റ്"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" സെല്ലുലാർ ഡാറ്റ"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" വൈഫൈ ഡാറ്റ"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" ഇതർനെറ്റ് ഡാറ്റ"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> ഡാറ്റാ മുന്നറിയിപ്പ്"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> ഡാറ്റാ മുന്നറിയിപ്പ് / <xliff:g id="ID_2">%2$s</xliff:g> ഡാറ്റാ പരിധി"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"ബില്ലിംഗ് സൈക്കിൾ"</string>

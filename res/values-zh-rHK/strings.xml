@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"當開啟 Wi-Fi 通話時，您的手機可根據偏好設定及訊號強弱，選擇使用 Wi-Fi 網絡或流動網絡供應商的網絡安排來電轉接。開啟此功能前，請向您的流動網絡供應商查詢收費及其他詳情。"</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"更新緊急地址"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"當您使用 Wi-Fi 致電 911 時，緊急服務使用的地址將會作為您的地點"</string>
     <string name="home_settings" msgid="212375129455718176">"主畫面"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"顯示"</string>
     <string name="sound_settings" msgid="5534671337768745343">"音效"</string>
@@ -2276,14 +2277,8 @@
       <item quantity="other">信任或移除憑證</item>
       <item quantity="one">信任或移除憑證</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> 已在您的裝置上安裝憑證，這可能允許憑證核發當局監察您裝置的電郵、應用程式和安全網站等網絡活動。您可以選擇信任或移除這些憑證。\n\n如需進一步瞭解這些憑證，請聯絡您的管理員。</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> 已在您的裝置上安裝憑證，這可能允許憑證核發當局監察您裝置的電郵、應用程式和安全網站等網絡活動。您可以選擇信任或移除此憑證。\n\n如需進一步瞭解此憑證，請聯絡您的管理員。</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> 已為您的工作設定檔安裝憑證，這可能允許憑證核發當局監察電郵、應用程式和安全網站等工作網絡活動。您可以選擇信任或移除此憑證。\n\n如需進一步瞭解此憑證，請聯絡您的管理員。</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> 已為您的工作設定檔安裝憑證，這可能允許憑證核發當局監察電郵、應用程式和安全網站等工作網絡活動。您可以選擇信任或移除此憑證。\n\n如需進一步瞭解此憑證，請聯絡您的管理員。</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"第三方可以監察您的網絡活動，包括收發電郵、使用應用程式及瀏覽安全網站。\n\n裝置安裝了信任的憑證後，便可能會出現這種情況。"</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">檢查憑證</item>
@@ -2838,10 +2833,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"正在優化電池使用"</string>
     <string name="high_power_system" msgid="7362862974428225301">"不支援電池優化"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"不使用電池優化，可能會加速耗電。"</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 個應用程式允許忽略電池優化</item>
-      <item quantity="one">1 個應用程式允許忽略電池優化</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"要忽略電池優化嗎？"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"要允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式在背景保持連接嗎？這可能會消耗較多電量。"</string>
     <string name="battery_summary" msgid="101415762036784289">"自上次完全充電後，已使用 <xliff:g id="PERCENTAGE">%1$d</xliff:g>%%"</string>
@@ -3012,12 +3003,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"以太網數據用量"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"以太網"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" 流動數據"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Wi-Fi 數據"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" 以太網數據"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> 數據用量警告"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> 數據用量警告 / <xliff:g id="ID_2">%2$s</xliff:g> 數據上限"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"結算週期"</string>

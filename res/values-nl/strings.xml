@@ -836,6 +836,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wanneer bellen via wifi is ingeschakeld, kan je telefoon oproepen doorschakelen via wifi-netwerken of het netwerk van je provider, afhankelijk van je voorkeur en welk signaal sterker is. Voordat je deze functie inschakelt, neem je contact met je provider op over de kosten en andere details."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Noodadres updaten"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Adres dat door noodhulpdiensten als je locatie wordt gebruikt als je het noodnummer belt via wifi"</string>
     <string name="home_settings" msgid="212375129455718176">"Startpagina"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Weergave"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Geluid"</string>
@@ -2271,14 +2272,8 @@
       <item quantity="other">Certificaten vertrouwen of verwijderen</item>
       <item quantity="one">Certificaat vertrouwen of verwijderen</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="7392268444365783975">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> heeft certificeringsinstanties geïnstalleerd op je apparaat, waardoor dit domein activiteit in het apparaatnetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites. Je kunt ervoor kiezen deze certificaten te vertrouwen of te verwijderen.\n\nNeem contact op met je beheerder voor meer informatie over deze certificaten.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> heeft een certificeringsinstantie geïnstalleerd op je apparaat, waardoor dit domein activiteit in het apparaatnetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites. Je kunt ervoor kiezen dit certificaat te vertrouwen of te verwijderen.\n\nNeem contact op met je beheerder voor meer informatie over dit certificaat.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="9003188435098053227">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> heeft certificeringsinstanties voor je werkprofiel geïnstalleerd, waardoor dit domein activiteit in het werknetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites. Je kunt ervoor kiezen deze certificaten te vertrouwen of te verwijderen.\n\nNeem contact op met je beheerder voor meer informatie over deze certificaten.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> heeft een certificeringsinstantie voor je werkprofiel geïnstalleerd, waardoor dit domein activiteit in het werknetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites. Je kunt ervoor kiezen dit certificaat te vertrouwen of te verwijderen.\n\nNeem contact op met je beheerder voor meer informatie over dit certificaat.</item>
-    </plurals>
+    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
+    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Een derde partij kan je netwerkactiviteit, waaronder e-mails, apps en beveiligde websites, bijhouden.\n\nDit is mogelijk omdat je een vertrouwd certificaat op je apparaat hebt opgeslagen."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Certificaten controleren</item>
@@ -2833,10 +2828,6 @@
     <string name="high_power_off" msgid="3393904131961263278">"Accuverbruik optimaliseren"</string>
     <string name="high_power_system" msgid="7362862974428225301">"Accuoptimalisatie niet beschikbaar"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Accuoptimalisatie niet toepassen. Hierdoor kan je accuverbruik toenemen."</string>
-    <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps mogen accuoptimalisatie negeren</item>
-      <item quantity="one">1 app mag accuoptimalisatie negeren</item>
-    </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"Accuoptimalisaties negeren?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Toestaan dat de app <xliff:g id="APP_NAME">%1$s</xliff:g> op de achtergrond verbonden blijft? Dit kan meer acculading verbruiken."</string>
     <string name="battery_summary" msgid="101415762036784289">"<xliff:g id="PERCENTAGE">%1$d</xliff:g>%% gebruik sinds laatste volledige lading"</string>
@@ -3007,12 +2998,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet-datagebruik"</string>
     <string name="wifi" msgid="1081550856200013637">"Wifi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <!-- no translation found for cell_data_template (3269898985639199370) -->
-    <skip />
-    <!-- no translation found for wifi_data_template (986662116811359772) -->
-    <skip />
-    <!-- no translation found for ethernet_data_template (3354896094040996204) -->
-    <skip />
+    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" mobiele data"</small></small></string>
+    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" wifi-data"</small></small></string>
+    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Ethernet-data"</small></small></string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> datawaarschuwing"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> datawaarschuwing / <xliff:g id="ID_2">%2$s</xliff:g> datalimiet"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Betalingscyclus"</string>
