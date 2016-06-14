@@ -333,6 +333,12 @@
     <style name="TextAppearance.RecentsTitle" parent="TextAppearance.CategoryTitle" />
     <style name="TextAppearance.ResultTitle" parent="TextAppearance.CategoryTitle" />
 
+    <style name="TextAppearance.SuggestionTitle"
+           parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="TextAppearance.FingerprintMessage"
         parent="android:TextAppearance.Material.Subhead">
         <item name="android:lineSpacingExtra">@dimen/suw_description_line_spacing_extra</item>
