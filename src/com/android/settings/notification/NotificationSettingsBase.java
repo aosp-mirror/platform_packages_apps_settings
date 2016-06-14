@@ -175,32 +175,36 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             });
         } else {
             setVisible(mImportance, false);
-            boolean blocked = importance == Ranking.IMPORTANCE_NONE || banned;
-            mBlock.setChecked(blocked);
-            mBlock.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    final boolean blocked = (Boolean) newValue;
-                    final int importance =
-                            blocked ? Ranking.IMPORTANCE_NONE :Ranking.IMPORTANCE_UNSPECIFIED;
-                    mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
-                    updateDependents(importance);
-                    return true;
-                }
-            });
+            if (isSystemApp) {
+                setVisible(mBlock, false);
+            } else {
+                boolean blocked = importance == Ranking.IMPORTANCE_NONE || banned;
+                mBlock.setChecked(blocked);
+                mBlock.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        final boolean blocked = (Boolean) newValue;
+                        final int importance =
+                                blocked ? Ranking.IMPORTANCE_NONE : Ranking.IMPORTANCE_UNSPECIFIED;
+                        mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
+                        updateDependents(importance);
+                        return true;
+                    }
+                });
 
-            mSilent.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    final boolean silenced = (Boolean) newValue;
-                    final int importance =
-                            silenced ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_UNSPECIFIED;
-                    mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
-                    updateDependents(importance);
-                    return true;
-                }
-            });
-            updateDependents(banned ? Ranking.IMPORTANCE_NONE : importance);
+                mSilent.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        final boolean silenced = (Boolean) newValue;
+                        final int importance =
+                                silenced ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_UNSPECIFIED;
+                        mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
+                        updateDependents(importance);
+                        return true;
+                    }
+                });
+                updateDependents(banned ? Ranking.IMPORTANCE_NONE : importance);
+            }
         }
     }
 
