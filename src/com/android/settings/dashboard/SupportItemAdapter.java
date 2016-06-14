@@ -46,7 +46,6 @@ import static com.android.settings.overlay.SupportFeatureProvider.SupportType.PH
 public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAdapter.ViewHolder> {
 
     private static final int TYPE_TITLE = R.layout.support_item_title;
-    private static final int TYPE_SUBTITLE = R.layout.support_item_subtitle;
     private static final int TYPE_ESCALATION_OPTIONS = R.layout.support_escalation_options;
     private static final int TYPE_SUPPORT_TILE = R.layout.support_tile;
     private static final int TYPE_SIGN_IN_BUTTON = R.layout.support_sign_in_button;
@@ -182,9 +181,6 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     }
 
     private void addMoreHelpItems() {
-        mSupportData.add(new SupportData.Builder(TYPE_SUBTITLE)
-                .setText1(R.string.support_more_help_title)
-                .build());
         mSupportData.add(new SupportData.Builder(TYPE_SUPPORT_TILE)
                 .setIcon(R.drawable.ic_forum_24dp)
                 .setText1(R.string.support_forum_title)
