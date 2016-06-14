@@ -151,8 +151,6 @@ public class SimStatus extends SettingsPreferenceFragment {
         mDefaultText = mRes.getString(R.string.device_info_default);
         // Note - missing in zaku build, be careful later...
         mSignalStrength = findPreference(KEY_SIGNAL_STRENGTH);
-
-        updatePhoneInfos();
     }
 
     @Override
@@ -186,6 +184,12 @@ public class SimStatus extends SettingsPreferenceFragment {
             }
         }
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        updatePhoneInfos();
     }
 
     @Override
