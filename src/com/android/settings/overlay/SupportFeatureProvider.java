@@ -39,11 +39,6 @@ public interface SupportFeatureProvider {
     }
 
     /**
-     * Returns a intent that will open help forum.
-     */
-    Intent getForumIntent();
-
-    /**
      * Returns a intent that will open help & feedback.
      */
     Intent getHelpIntent(Context context);
