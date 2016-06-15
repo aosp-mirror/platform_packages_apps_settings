@@ -31,6 +31,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
@@ -57,6 +58,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
@@ -115,8 +117,12 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
         private void updateDeviceName(Context context) {
             if (mLocalAdapter.isEnabled() && mMyDevicePreference != null) {
-                mMyDevicePreference.setSummary(context.getResources().getString(
-                            R.string.bluetooth_is_visible_message, mLocalAdapter.getName()));
+                final Resources res = context.getResources();
+                final Locale locale = res.getConfiguration().getLocales().get(0);
+                final BidiFormatter bidiFormatter = BidiFormatter.getInstance(locale);
+                mMyDevicePreference.setSummary(res.getString(
+                            R.string.bluetooth_is_visible_message,
+                            bidiFormatter.unicodeWrap(mLocalAdapter.getName())));
             }
         }
     };
@@ -345,8 +351,12 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                     startScanning();
                 }
 
-                mMyDevicePreference.setSummary(getResources().getString(
-                            R.string.bluetooth_is_visible_message, mLocalAdapter.getName()));
+                final Resources res = getResources();
+                final Locale locale = res.getConfiguration().getLocales().get(0);
+                final BidiFormatter bidiFormatter = BidiFormatter.getInstance(locale);
+                mMyDevicePreference.setSummary(res.getString(
+                            R.string.bluetooth_is_visible_message,
+                            bidiFormatter.unicodeWrap(mLocalAdapter.getName())));
 
                 getActivity().invalidateOptionsMenu();
 
