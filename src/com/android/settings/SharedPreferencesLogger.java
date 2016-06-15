@@ -95,11 +95,11 @@ public class SharedPreferencesLogger implements SharedPreferences {
     }
 
     private void logValue(String key, String value) {
-        MetricsLogger.histogram(mContext, mTag + "/" + key + "|" + value, 1);
+        MetricsLogger.count(mContext, mTag + "/" + key + "|" + value, 1);
     }
 
     private void logPackageName(String key, String value) {
-        MetricsLogger.histogram(mContext, mTag + "/" + key, 1);
+        MetricsLogger.count(mContext, mTag + "/" + key, 1);
         MetricsLogger.action(mContext, MetricsEvent.ACTION_GENERIC_PACKAGE,
                 mTag + "/" + key + "|" + value);
     }
