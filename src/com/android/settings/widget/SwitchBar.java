@@ -229,11 +229,11 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     @Override
     public void onClick(View v) {
         if (mDisabledByAdmin) {
-            MetricsLogger.histogram(mContext, mMetricsTag + "/switch_bar|restricted", 1);
+            MetricsLogger.count(mContext, mMetricsTag + "/switch_bar|restricted", 1);
             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, mEnforcedAdmin);
         } else {
             final boolean isChecked = !mSwitch.isChecked();
-            MetricsLogger.histogram(mContext, mMetricsTag + "/switch_bar|" + isChecked, 1);
+            MetricsLogger.count(mContext, mMetricsTag + "/switch_bar|" + isChecked, 1);
             setChecked(isChecked);
         }
     }
