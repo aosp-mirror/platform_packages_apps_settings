@@ -26,6 +26,7 @@ import android.os.UserManager;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.util.CharSequences;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
