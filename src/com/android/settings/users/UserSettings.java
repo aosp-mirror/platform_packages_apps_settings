@@ -802,7 +802,9 @@ public class UserSettings extends SettingsPreferenceFragment
             userPreferences.add(pref);
             pref.setDisabledByAdmin(
                     mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
-            pref.setSelectable(false);
+            if (!pref.isDisabledByAdmin()) {
+                pref.setSelectable(false);
+            }
         }
 
         // Sort list of users by serialNum
