@@ -55,9 +55,10 @@
 
                 <!-- confirm / restart buttons -->
                 <LinearLayout android:id="@+id/buttonContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
-                    android:gravity="end"
                     android:orientation="horizontal">
 
                     <!-- left / top button: skip, or re-try -->
@@ -66,6 +67,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/lockpattern_restart_button_text" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
                     <!-- right / bottom button: confirm or ok -->
                     <Button android:id="@+id/footerRightButton"
