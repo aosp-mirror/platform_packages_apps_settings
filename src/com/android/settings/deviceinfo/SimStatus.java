@@ -181,6 +181,7 @@ public class SimStatus extends SettingsPreferenceFragment {
                     mTabHost.addTab(buildTabSpec(String.valueOf(i),
                             String.valueOf(mSelectableSubInfos.get(i).getDisplayName())));
                 }
+                return view;
             }
         }
         return super.onCreateView(inflater, container, savedInstanceState);
@@ -189,6 +190,7 @@ public class SimStatus extends SettingsPreferenceFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         updatePhoneInfos();
     }
 
