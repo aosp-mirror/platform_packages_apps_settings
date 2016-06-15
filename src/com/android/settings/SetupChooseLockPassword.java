@@ -21,12 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
-import com.android.setupwizardlib.GlifLayout;
 
 /**
  * Setup Wizard's version of ChooseLockPassword screen. It inherits the logic and basic structure
@@ -89,22 +84,6 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
     }
 
     public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment {
-
-        private GlifLayout mLayout;
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            mLayout = (GlifLayout) inflater.inflate(
-                    R.layout.setup_choose_lock_password, container, false);
-            return mLayout;
-        }
-
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            mLayout.setHeaderText(getActivity().getTitle());
-        }
 
         @Override
         protected Intent getRedactionInterstitialIntent(Context context) {

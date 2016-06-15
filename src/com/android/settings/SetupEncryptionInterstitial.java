@@ -25,7 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.android.settings.utils.SettingsDividerItemDecoration;
 import com.android.setupwizardlib.GlifPreferenceLayout;
@@ -92,13 +91,6 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial {
             // Use the dividers in SetupWizardRecyclerLayout. Suppress the dividers in
             // PreferenceFragment.
             setDivider(null);
-        }
-
-        @Override
-        protected TextView createHeaderView() {
-            TextView message = (TextView) LayoutInflater.from(getActivity()).inflate(
-                    R.layout.setup_encryption_interstitial_header, null, false);
-            return message;
         }
 
         @Override

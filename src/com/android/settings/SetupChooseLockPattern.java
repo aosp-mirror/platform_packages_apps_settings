@@ -20,14 +20,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.os.UserHandle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-
-import com.android.setupwizardlib.GlifLayout;
 
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure
@@ -71,28 +64,12 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstance) {
-        super.onCreate(savedInstance);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-        layout.setFitsSystemWindows(false);
-    }
-
-    @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
         resid = SetupWizardUtils.getTheme(getIntent());
         super.onApplyThemeResource(theme, resid, first);
     }
 
     public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            final GlifLayout layout = (GlifLayout) inflater.inflate(
-                    R.layout.setup_choose_lock_pattern, container, false);
-            layout.setHeaderText(getActivity().getTitle());
-            return layout;
-        }
 
         @Override
         protected Intent getRedactionInterstitialIntent(Context context) {

@@ -32,7 +32,6 @@ import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback;
 import android.os.Bundle;
-import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
@@ -42,9 +41,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
-import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.Toast;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
