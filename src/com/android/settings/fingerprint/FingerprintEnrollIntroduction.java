@@ -29,11 +29,13 @@ import android.text.Annotation;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.util.CharSequences;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settingslib.HelpUtils;
@@ -205,14 +207,25 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
         public static CharSequence linkify(CharSequence rawText, String uri) {
             SpannableString msg = new SpannableString(rawText);
             Annotation[] spans = msg.getSpans(0, msg.length(), Annotation.class);
-            SpannableStringBuilder builder = new SpannableStringBuilder(msg);
-            for (Annotation annotation : spans) {
-                int start = msg.getSpanStart(annotation);
-                int end = msg.getSpanEnd(annotation);
-                LearnMoreSpan link = new LearnMoreSpan(uri);
-                builder.setSpan(link, start, end, msg.getSpanFlags(link));
+            if (TextUtils.isEmpty(uri)) {
+                CharSequence ret = rawText;
+                for (Annotation annotation : spans) {
+                    int start = msg.getSpanStart(annotation);
+                    int end = msg.getSpanEnd(annotation);
+                    ret = TextUtils.concat(ret.subSequence(0, start),
+                            msg.subSequence(end, msg.length()));
+                }
+                return ret;
+            } else {
+                SpannableStringBuilder builder = new SpannableStringBuilder(msg);
+                for (Annotation annotation : spans) {
+                    int start = msg.getSpanStart(annotation);
+                    int end = msg.getSpanEnd(annotation);
+                    LearnMoreSpan link = new LearnMoreSpan(uri);
+                    builder.setSpan(link, start, end, msg.getSpanFlags(link));
+                }
+                return builder;
             }
-            return builder;
         }
     }
 }
