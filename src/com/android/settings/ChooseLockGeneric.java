@@ -655,30 +655,35 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private void removeAllFingerprintForUserAndFinish(final int userId) {
-            if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()
-                    && mFingerprintManager.hasEnrolledFingerprints(userId)) {
-                mFingerprintManager.setActiveUser(userId);
-                // For the purposes of M and N, groupId is the same as userId.
-                final int groupId = userId;
-                Fingerprint finger = new Fingerprint(null, groupId, 0, 0);
-                mFingerprintManager.remove(finger, userId,
-                        new RemovalCallback() {
-                            @Override
-                            public void onRemovalError(Fingerprint fp, int errMsgId,
-                                    CharSequence errString) {
-                                Log.v(TAG, "Fingerprint removed: " + fp.getFingerId());
-                                if (fp.getFingerId() == 0) {
-                                    removeManagedProfileFingerprintsAndFinishIfNecessary(userId);
+            if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
+                if (mFingerprintManager.hasEnrolledFingerprints(userId)) {
+                    mFingerprintManager.setActiveUser(userId);
+                    // For the purposes of M and N, groupId is the same as userId.
+                    final int groupId = userId;
+                    Fingerprint finger = new Fingerprint(null, groupId, 0, 0);
+                    mFingerprintManager.remove(finger, userId,
+                            new RemovalCallback() {
+                                @Override
+                                public void onRemovalError(Fingerprint fp, int errMsgId,
+                                        CharSequence errString) {
+                                    Log.v(TAG, "Fingerprint removed: " + fp.getFingerId());
+                                    if (fp.getFingerId() == 0) {
+                                        removeManagedProfileFingerprintsAndFinishIfNecessary(userId);
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onRemovalSucceeded(Fingerprint fingerprint) {
-                                if (fingerprint.getFingerId() == 0) {
-                                    removeManagedProfileFingerprintsAndFinishIfNecessary(userId);
+                                @Override
+                                public void onRemovalSucceeded(Fingerprint fingerprint) {
+                                    if (fingerprint.getFingerId() == 0) {
+                                        removeManagedProfileFingerprintsAndFinishIfNecessary(userId);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                } else {
+                    // No fingerprints in this user, we may also want to delete managed profile
+                    // fingerprints
+                    removeManagedProfileFingerprintsAndFinishIfNecessary(userId);
+                }
             } else {
                 // The removal callback will call finish, once all fingerprints are removed.
                 // We need to wait for that to occur, otherwise, the UI will still show that
