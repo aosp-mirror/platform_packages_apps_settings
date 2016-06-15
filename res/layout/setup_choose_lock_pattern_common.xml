@@ -56,7 +56,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end"
                 android:orientation="horizontal">
 
                 <!-- left : cancel, or re-try -->
@@ -65,6 +64,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lockpattern_tutorial_cancel_label" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <!-- right : confirm or ok -->
                 <Button android:id="@+id/footerRightButton"
