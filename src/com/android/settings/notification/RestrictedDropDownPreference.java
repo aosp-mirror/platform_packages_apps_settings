@@ -42,6 +42,7 @@ public class RestrictedDropDownPreference extends DropDownPreference {
     private ReselectionSpinner mSpinner;
     private List<RestrictedItem> mRestrictedItems = new ArrayList<>();
     private boolean mUserClicked = false;
+    private OnPreferenceClickListener mPreClickListener;
 
     public RestrictedDropDownPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -118,6 +119,9 @@ public class RestrictedDropDownPreference extends DropDownPreference {
 
     @Override
     public void performClick() {
+        if (mPreClickListener != null && mPreClickListener.onPreferenceClick(this)) {
+            return;
+        }
         if (!mHelper.performClick()) {
             mUserClicked = true;
             super.performClick();
@@ -137,6 +141,14 @@ public class RestrictedDropDownPreference extends DropDownPreference {
         if (mHelper.setDisabledByAdmin(admin)) {
             notifyChanged();
         }
+    }
+
+    /**
+     * Similar to {@link #setOnPreferenceClickListener(OnPreferenceClickListener)}, but can
+     * preempt {@link #onClick()}.
+     */
+    public void setOnPreClickListener(OnPreferenceClickListener l) {
+        mPreClickListener = l;
     }
 
     public boolean isDisabledByAdmin() {
