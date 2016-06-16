@@ -361,12 +361,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Видалити"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Розпочнімо"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Покладіть палець на датчик і заберіть його, коли відчуєте вібрацію"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Чудово! Повторіть"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Плавно переміщуйте палець, щоб відсканувати відбиток повністю"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Відбиток додано."</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Цей значок означає, що ви можете підтвердити свою особу або покупку за допомогою цифрового відбитка."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Щоб активувати та розблокувати пристрій, просто торкніться датчика відбитків пальців."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Коли з’явиться цей значок, ви можете прикласти палець."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Пропустити налаштування відбитка?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Ви вибрали відбиток пальця як один зі способів розблокування телефона. Якщо пропустити цей крок зараз, потрібно буде налаштувати відбиток пізніше. Це займає близько хвилини."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Налаштувати блокування екрана"</string>
@@ -2308,8 +2310,18 @@
       <item quantity="many">Зробити сертифікати надійними або вилучити їх</item>
       <item quantity="other">Зробити сертифікати надійними або вилучити їх</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="one">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати активність у мережі пристрою, зокрема електронні листи, додатки та безпечні веб-сайти.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+      <item quantity="few">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати активність у мережі пристрою, зокрема електронні листи, додатки та безпечні веб-сайти.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+      <item quantity="many">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати активність у мережі пристрою, зокрема електронні листи, додатки та безпечні веб-сайти.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+      <item quantity="other">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив на вашому пристрої центри сертифікації, за допомогою яких зможе відстежувати активність у мережі пристрою, зокрема електронні листи, додатки та безпечні веб-сайти.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="one">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати активність у корпоративній мережі, зокрема електронні листи, додатки та безпечні веб-сайти.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+      <item quantity="few">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати активність у корпоративній мережі, зокрема електронні листи, додатки та безпечні веб-сайти.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+      <item quantity="many">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати активність у корпоративній мережі, зокрема електронні листи, додатки та безпечні веб-сайти.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+      <item quantity="other">Адміністратор домену <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> установив для вашого робочого профілю центри сертифікації, за допомогою яких зможе відстежувати активність у корпоративній мережі, зокрема електронні листи, додатки та безпечні веб-сайти.\n\nЩоб дізнатися більше про ці сертифікати, зв’яжіться зі своїм адміністратором.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Третя сторона може відстежувати ваші дії в мережі, зокрема електронне листування, роботу в програмах і на захищених веб-сайтах.\n\nЦе робиться за допомогою довірених облікових даних, установлених на вашому пристрої."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">Перевірити сертифікати</item>
@@ -2568,6 +2580,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Без звуку"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Сповіщення"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Вібросигнал"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Не турбувати"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Дозволити лише пріоритетні"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Авторежим"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Вибрати режим \"Не турбувати\""</string>
@@ -3161,11 +3174,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Ви можете надіслати в службу підтримки запит на виклик або чат, і ми якнайшвидше зв’яжемося з вами"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Немає з’єднання з Інтернетом"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Щоб зв’язатися зі службою підтримки, спершу під’єднайтеся до мережі Wi-Fi або мобільного Інтернету"</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Додаткова допомога"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Виклик для підтримки"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Адреса для підтримки"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Чат для підтримки"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Довідковий форум"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Поради та підказки"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Щоб попросити підтримку, увійдіть в обліковий запис"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Увійти"</string>
@@ -3223,26 +3234,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Звільнити місце"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Диспетчер пам’яті"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Служба автоматичного керування пам’яттю"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Жести"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Як перейти до камери"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Щоб швидко відкрити камеру, двічі натисніть кнопку живлення. Працює на будь-якому екрані."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Як змінити камеру"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Щоб переключитися між передньою та задньою камерами, двічі покрутіть пристроєм."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Як швидко перевірити екран"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Щоб перевірити телефон, не виводячи з режиму сну, посуньте його або візьміть у руки."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Як переглянути сповіщення"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Щоб переглянути сповіщення на будь-якому екрані, проведіть пальцем униз на сканері відбитків пальців."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Увімкнено"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Вимкнено"</string>
 </resources>

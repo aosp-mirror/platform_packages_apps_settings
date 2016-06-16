@@ -357,12 +357,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Futa"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Acha tuanze!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Weka kidole chako juu ya kihisi kisha ukiinue baada ya kuhisi mtetemo"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Vizuri! Rudia sasa"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Sogeza kidole chako taratibu ili uongeze sehemu zote za alama za kidole chako"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Kitambulisho kimeongezwa!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Kila unapoona aikoni hii, unaweza kutumia kitambulisho chako kujitambulisha au kuidhinisha ununuzi."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Gusa tu kihisi cha alama za vidole ili uanzishe na kufungua kifaa chako."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Ukiona aikoni hii, unaweza kutumia alama yako ya kidole."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Ungependa kuruka kusanidi kitambulisho?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Umechagua kutumia kitambulisho kama njia ya kufungua simu yako. Ukiruka sasa, utahitajika kusanidi hii baadaye. Usanidi huchukua takriban dakika moja."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Weka mbinu ya kufunga skrini"</string>
@@ -840,7 +842,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wakati kipengele cha upigaji simu kwa Wi-Fi kimewashwa, simu yako inaweza kuelekeza simu kupitia mitandao ya Wi-Fi au mtandao wa mtoa huduma wako, kutegemea na mapendeleo yako na ni mawimbi yapi yaliyo thabiti. Kabla ya kuwasha kipengele hiki, angalia ada na maelezo mengine kwa mtoa huduma wako."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Sasisha Anwani ya Dharura"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"Anwani inayotumiwa na huduma za dharura kama mahali ulipo ikiwa utapiga simu ya 911 ukitumia WiFi"</string>
+    <string name="emergency_address_summary" msgid="306028701568728126">"Anwani inayotumiwa na huduma za dharura kama mahali ulipo ikiwa utapiga simu ya 911 ukitumia Wi-Fi"</string>
     <string name="home_settings" msgid="212375129455718176">"Mwanzo"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skrini"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Sauti"</string>
@@ -2278,8 +2280,14 @@
       <item quantity="other">Tumia au uondoe vyeti</item>
       <item quantity="one">Tumia au uondoe cheti</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> amesakinisha mamlaka ya cheti kwenye kifaa chako, huenda hali hii ikamruhusu kuchunguza shughuli za mtandao wa kifaa chako, ikiwa ni pamoja na barua pepe, programu na tovuti salama.\n\nKwa maelezo zaidi kuhusu vyeti hivi, wasiliana na msimamizi wako.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> amesakinisha mamlaka ya cheti kwenye kifaa chako, huenda hali hii ikamruhusu kuchunguza shughuli za mtandao wa kifaa chako, ikiwa ni pamoja na barua pepe, programu na tovuti salama.\n\nKwa maelezo zaidi kuhusu cheti hiki, wasiliana na msimamizi wako.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> amesakinisha mamlaka ya cheti cha wasifu wako wa kazini, huenda hali hii ikamruhusu kuchunguza shughuli za mtandao wa kazini, ikiwa ni pamoja na barua pepe, programu na tovuti salama.\n\nKwa maelezo zaidi kuhusu vyeti hivi, wasiliana na msimamizi wako.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> amesakinisha mamlaka ya cheti cha wasifu wako wa kazini, huenda hali hii ikamruhusu kuchunguza shughuli za mtandao wa kazini, ikiwa ni pamoja na barua pepe, programu na tovuti salama.\n\nKwa maelezo zaidi kuhusu cheti hiki, wasiliana na msimamizi wako.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Mtu mwingine ana uwezo wa kufuatilia shughuli ya mtandao wako, ikiwa ni pamoja na barua pepe, programu, na tovuti salama. \n\n Kitambulisho cha kuaminika kilichosakinishwa kwenye kifaa chako kinafanikisha hili."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Angalia vyeti</item>
@@ -2536,6 +2544,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Kimya"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Tahadhari"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Tetema"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Usinisumbue"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Ruhusu kipaumbele pekee"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Sheria za otomatiki"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Weka ratiba ya Usinisumbue"</string>
@@ -3107,11 +3116,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Unaweza kuomba usaidizi kupitia simu au gumzo na tutawasiliana nawe haraka"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Uko nje ya mtandao"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Unganisha kwenye Intaneti ili ufikie kituo cha usaidizi."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Pata usaidizi zaidi"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Usaidizi kupitia simu"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Barua pepe ya usaidizi"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Usaidizi kupitia gumzo"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Mijadala ya usaidizi"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Vidokezi na mbinu"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Ingia katika akaunti ili upate usaidizi"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Ingia katika akaunti"</string>
@@ -3163,26 +3170,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Futa ili uongeze nafasi sasa"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Kidhibiti cha hifadhi"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Huduma ya Kudhibiti Hifadhi Kiotomatiki"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Ishara"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Nenda kwenye Kamera"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Ili kufungua kamera haraka, gonga mara mbili kitufe cha nishati. Hutumika katika skrini yoyote."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Geuza kamera"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Ili kubadilisha kati ya kamera ya mbele na ya nyuma, geuza mkono wako."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Ukaguzi wa skrini wa haraka"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"IIli kuangalia simu yako bila kuwasha skrini upya, iguse au uichukue."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Telezesha kidole ili upate arifa"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Ili kuangalia arifa zako katika skrini yoyote, telezesha kidole kwenye kitambua alama ya kidole."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Imewashwa"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Imezimwa"</string>
 </resources>

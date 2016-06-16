@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"حذف"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"شروع می‌کنیم!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"انگشتتان را روی حسگر بگذارید و بعد از احساس لرزش، آن را بردارید"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"عالی است! اکنون تکرار کنید"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"اندکی انگشتتان را حرکت دهید تا همه قسمت‌های متفاوت اثر انگشتتان اضافه شود"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"اثر انگشت اضافه شد."</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"هر زمان این نماد را ببینید، می‌توانید از اثر انگشتتان برای شناسایی یا تأیید خرید استفاده کنید."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"برای روشن کردن و باز کردن قفل دستگاهتان کافیست حسگر اثر انگشت را لمس کنید."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"وقتی این نماد را می‌بینید، می‌توانید از اثر انگشتتان استفاده کنید."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"از تنظیم اثر انگشت رد می‌شوید؟"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"انتخاب کرده‌اید که از اثر انگشتتان به‌عنوان روشی برای باز کردن قفل تلفن استفاده کنید. اگر اکنون این مرحله را رد کنید، باید بعداً آن را تنظیم کنید. تنظیم فقط یک دقیقه یا همین حدود طول می‌کشد."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"تنظیم قفل صفحه"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="one">اعتماد یا حذف گواهی</item>
       <item quantity="other">اعتماد یا حذف گواهی‌ها</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> مرجع‌های صدور گواهی در دستگاهتان نصب کرده است که ممکن است به او اجازه دهند فعالیت‌های کاری دستگاه، از جمله رایانامه‌ها، برنامه‌ها و وب‌سایت‌های ایمن را کنترل کند.\n\nبرای کسب اطلاعات بیشتر درباره این گواهی‌ها، با سرپرستتان تماس بگیرید.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> مرجع‌های صدور گواهی در دستگاهتان نصب کرده است که ممکن است به او اجازه دهند فعالیت‌های کاری دستگاه، از جمله رایانامه‌ها، برنامه‌ها و وب‌سایت‌های ایمن را کنترل کند.\n\nبرای کسب اطلاعات بیشتر درباره این گواهی‌ها، با سرپرستتان تماس بگیرید.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> مرجع صدور گواهی‌ای برای نمایه کاری شما نصب کرده است که ممکن است به او اجازه دهد فعالیت‌های کاری شبکه، از جمله رایانامه‌ها، برنامه‌ها و وب‌سایت‌های ایمن را کنترل کند.\n\nبرای کسب اطلاعات بیشتر درباره این گواهی‌ها، با سرپرستتان تماس بگیرید.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> مرجع صدور گواهی‌ای برای نمایه کاری شما نصب کرده است که ممکن است به او اجازه دهد فعالیت‌های کاری شبکه، از جمله رایانامه‌ها، برنامه‌ها و وب‌سایت‌های ایمن را کنترل کند.\n\nبرای کسب اطلاعات بیشتر درباره این گواهی‌ها، با سرپرستتان تماس بگیرید.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"شخص ثالتی می‌تواند روی فعالیت‌های شبکه شما ازجمله رایانامه‌ها، برنامه‌ها و وب‌سایت‌های ایمن نظارت داشته باشد.\n\nاعتبارنامه مطمئن نصب‌شده در دستگاهتان این کار را شدنی می‌کند."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">بررسی گواهی</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"بی‌صدا"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"هشدار"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"لرزش"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"مزاحم نشوید"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"فقط اولویت‌دار مجاز است"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"قوانین خودکار"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"تنظیم زمان‌بندی «مزاحم نشوید»"</string>
@@ -3101,11 +3110,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"می‌توانید درخواست تماس یا گپ زدن برای پشتیبانی کنید و ما دراسرع وقت با شما تماس می‌گیریم"</string>
     <string name="support_offline_title" msgid="482049324795211184">"شما آفلاین هستید"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"‏برای دسترسی به پشتیبانی، ابتدا به Wi-Fi یا داده‌ها متصل شوید."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"راهنمایی بیشتر"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"پشتیبانی با تماس تلفنی"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"رایانامه پشتیبانی"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"پشتیبانی با گپ زدن"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"انجمن راهنمایی"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"نکات و ترفندها"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"ورود به سیستم برای پشتیبانی"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"ورود به سیستم"</string>
@@ -3157,26 +3164,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"خالی کردن حافظه در این لحظه"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"مدیر فضای ذخیره‌سازی"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"سرویس مدیریت خودکار حافظه"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"اشاره‌ها"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"رفتن به دوربین"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"برای باز کردن سریع دوربین، فقط کافی است روی دکمه روشن/خاموش دو ضربه سریع بزنید. در هر صفحه‌ نمایشی قابل انجام است."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"چرخش دوربین"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"برای جابه‌جایی بین دوربین‌های پشت و جلو، دو بار بچرخانید."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"بررسی سریع صفحه‌ نمایش"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"برای بررسی تلفن بدون بیدار کردن، آن را فشار دهید یا بردارید."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"تند کشیدن انگشت برای اعلان‌ها"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"برای بررسی اعلان‌ها از هر صفحه نمایشی، در حسگر اثر انگشت انگشتتان را تند به پایین بکشید."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"روشن"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"خاموش"</string>
 </resources>

@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Eyða"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Við skulum byrja!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Settu fingurinn á skynjarann og lyftu honum þegar þú finnur titring"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Gott! Gerðu þetta nú aftur"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Færðu fingurinn svolítið til að bæta við mismunandi hlutum fingrafarsins"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Fingrafari bætt við!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Alltaf þegar þú sérð þetta tákn geturðu notað fingrafarið þitt til að auðkenna þig eða til að heimila kaup."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Snertu einfaldlega fingrafaraskynjarann til að taka tækið úr biðstöðu og lás."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Þegar þú sérð þetta tákn geturðu notað fingrafarið."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Viltu sleppa uppsetningu fingrafars?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Þú hefur valið að nota fingrafar þitt sem leið til að opna símann þinn. Ef þú sleppir þessu núna þarftu að setja þetta upp seinna. Uppsetningin tekur einungis um eina mínútu."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Setja upp skjálás"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="one">Treysta eða fjarlægja vottorð</item>
       <item quantity="other">Treysta eða fjarlægja vottorð</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hefur sett upp CA-vottorð fyrir tækið þitt sem geta mögulega fylgst með netnotkuninni á tækinu, þar á meðal tölvupósti, forritum og öruggum vefsvæðum.\n\nTil að fá frekari upplýsingar um þessi vottorð skaltu hafa samband við kerfisstjórann.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hefur sett upp CA-vottorð fyrir tækið þitt sem geta mögulega fylgst með netnotkuninni á tækinu, þar á meðal tölvupósti, forritum og öruggum vefsvæðum.\n\nTil að fá frekari upplýsingar um þessi vottorð skaltu hafa samband við kerfisstjórann.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hefur sett upp CA-vottorð fyrir vinnusniðið þitt sem getur mögulega fylgst með netnotkuninni á vinnusniðinu, þar á meðal tölvupósti, forritum og öruggum vefsvæðum.\n\nTil að fá frekari upplýsingar um þessi vottorð skaltu hafa samband við kerfisstjórann.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hefur sett upp CA-vottorð fyrir vinnusniðið þitt sem geta mögulega fylgst með netnotkuninni á vinnusniðinu, þar á meðal tölvupósti, forritum og öruggum vefsvæðum.\n\nTil að fá frekari upplýsingar um þessi vottorð skaltu hafa samband við kerfisstjórann.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Þriðji aðili getur fylgst með netvirkni þinni, þ. á m. tölvupósti, forritum og öruggum vefsvæðum.\n\nTraust vottorð sem uppsett er á tækinu þínu gerir þetta kleift."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">Athuga vottorð</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Hljóðlaust"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Viðvörun"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Titringur"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Ónáðið ekki"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Aðeins forgangsheimildir"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Sjálfvirkar reglur"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Stilla „Ónáðið ekki“ áætlun"</string>
@@ -3101,11 +3110,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Þú getur beðið um aðstoð með símhringingu eða spjalli og við höfum samband sem allra fyrst"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Þú ert ekki á netinu"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Til að hafa samband við þjónustudeild þarftu fyrst að tengjast Wi-Fi eða farsímaneti."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Frekari aðstoð"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Símaþjónusta"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Aðstoð í tölvupósti"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Aðstoð í spjalli"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Hjálparumræðusvæði"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Hjálp og ábendingar"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Skráðu þig inn til að fá aðstoð"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Innskráning"</string>
@@ -3157,26 +3164,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Búa til laust pláss"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Geymslustjórnun"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Sjálfvirk geymsluumsjónarþjónusta"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Bendingar"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Opna myndavél"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Til að opna myndavélina snögglega skaltu ýta tvisvar á aflrofann. Þetta virkar á hvaða skjá sem er."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Skipt milli myndavéla"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Snúðu úlnliðnum tvisvar til að skipta á milli fremri og aftari myndavélar."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Fljótlegt skjáyfirlit"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Ýttu við símanum eða taktu hann upp til að skoða hann án þess að þurfa að taka hann úr lás."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Strjúktu til að sjá tilkynningar"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Strjúktu fingri yfir fingrafaralesarann niður á við til að skoða tilkynningar á hvaða skjá sem er."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Kveikt"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Slökkt"</string>
 </resources>

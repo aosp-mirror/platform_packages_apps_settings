@@ -361,12 +361,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Izbriši"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Začnimo."</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Položite prst na tipalo in ga dvignite, ko začutite vibriranje"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Odlično! Ponovite to."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Rahlo premaknite prst, da dodate vse različne dele prstnega odtisa"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Prstni odtis dodan."</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Ko vidite to ikono, lahko za preverjanje istovetnosti ali odobritev nakupa uporabite prstni odtis."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Dotaknite se tipala za prstne odtise, da preklopite napravo iz stanja pripravljenosti in jo odklenete."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Ko je prikazana ta ikona, lahko uporabite prstni odtis."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Želite preskočiti nast. prstnega odtisa?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Za odklepanja telefona ste izbrali možnost prstnega odtisa. Če zdaj preskočite, boste to morali nastaviti pozneje. Nastavitev traja samo približno eno minuto."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Nastavi zaklepanje zaslona"</string>
@@ -2308,8 +2310,18 @@
       <item quantity="few">Označevanje potrdil kot zaupanja vrednih ali odstranitev potrdil</item>
       <item quantity="other">Označevanje potrdil kot zaupanja vrednih ali odstranitev potrdil</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="one">Skrbnik domene <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je v napravi namestil overitelje potrdil, s čimer morda lahko spremlja dejavnost naprave v omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.</item>
+      <item quantity="two">Skrbnik domene <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je v napravi namestil overitelje potrdil, s čimer morda lahko spremlja dejavnost naprave v omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.</item>
+      <item quantity="few">Skrbnik domene <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je v napravi namestil overitelje potrdil, s čimer morda lahko spremlja dejavnost naprave v omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.</item>
+      <item quantity="other">Skrbnik domene <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je v napravi namestil overitelje potrdil, s čimer morda lahko spremlja dejavnost naprave v omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="one">Skrbnik domene <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je namestil overitelje potrdil za vaš delovni profil, s čimer morda lahko spremlja dejavnost v službenem omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.</item>
+      <item quantity="two">Skrbnik domene <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je namestil overitelje potrdil za vaš delovni profil, s čimer morda lahko spremlja dejavnost v službenem omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.</item>
+      <item quantity="few">Skrbnik domene <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je namestil overitelje potrdil za vaš delovni profil, s čimer morda lahko spremlja dejavnost v službenem omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.</item>
+      <item quantity="other">Skrbnik domene <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> je namestil overitelje potrdil za vaš delovni profil, s čimer morda lahko spremlja dejavnost v službenem omrežju, vključno z e-pošto, aplikacijami in varnimi spletnimi mesti.\n\nČe želite več informacij o teh potrdilih, se obrnite na skrbnika.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Tretja oseba lahko nadzira vašo omrežno dejavnost, vključno z e-poštnimi sporočili, aplikacijami in varnimi spletnimi mesti.\n\nTo ji omogoča zaupanja vredna poverilnica, ki je nameščena v vaši napravi."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">Preveri potrdila</item>
@@ -2568,6 +2580,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Tiho"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Opozorilo"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibriranje"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Ne moti"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"»Samo predn.« dovoljuje"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Samodejna pravila"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Nastavitev urnika za »ne moti«"</string>
@@ -3161,11 +3174,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Zahtevate lahko klic podpore ali klepet s podporo in hitro se vam bomo posvetili."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Nimate vzpostavljene povezave."</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Če se želite obrniti na podporo, se najprej povežite z omrežjem Wi-Fi ali mobilnim podatkovnim omrežjem."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Dodatna pomoč"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Klic podpore"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Podpora prek e-pošte"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Podpora prek klepeta"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Forum s pomočjo"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Nasveti in zvijače"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Če želite podporo, se prijavite."</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Prijava"</string>
@@ -3223,26 +3234,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Sprostitev prostora"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Upravitelj shrambe"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Upravljanje samodejnega shranjevanja"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Poteze"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Preklop na fotoaparat"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Če želite hitro odpreti fotoaparat, se dvakrat dotaknite gumba za vklop. Deluje na vsakem zaslonu."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Obrat fotoaparata"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Če želite preklopiti med sprednjim in zadnjim fotoaparatom, dvakrat zasukajte."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Hitro preverjanje vsebine zaslonu"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Če želite preveriti vsebino zaslona, ne da bi telefon povsem preklopili iz stanja pripravljenosti, ga dregnite ali dvignite."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Vlečenje za obvestila"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Če si želite ogledati obvestila na katerem koli zaslonu, povlecite navzdol po tipalu prstnih odtisov."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Vklopljeno"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Izklopljeno"</string>
 </resources>
