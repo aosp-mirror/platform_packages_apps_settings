@@ -2124,7 +2124,7 @@
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Avto-sinxronizatsiya"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Avto-sinxronizatsiya (shaxsiy)"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Avto-sinxronizatsiya (ishchi)"</string>
-    <string name="data_usage_change_cycle" msgid="7776556448920114866">"Xalqani o‘zgartirish..."</string>
+    <string name="data_usage_change_cycle" msgid="7776556448920114866">"O‘zgartirish…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Oyning qaysi kunida trafik sarfi davri yangilansin:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Ushbu vaqt oralig‘ida hech qanday ilova trafik sarflamadi."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Faol rejim"</string>
@@ -2174,7 +2174,7 @@
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="12">"Ogohlantirish"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="12">"Cheklov"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"O‘chirilgan ilovalar"</string>
-    <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"O‘chirib yuborilgan ilovalar va foydalanuvchilar"</string>
+    <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"O‘chirib tashlangan ilova va foydalanuvchilar"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> qabul qilindi, <xliff:g id="SENT">%2$s</xliff:g> jo‘natildi"</string>
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: taxminan<xliff:g id="TOTAL">%1$s</xliff:g> trafik sarflandi."</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: planshetingiz hisobi bilan taxminan <xliff:g id="TOTAL">%1$s</xliff:g> trafik sarflandi. Operatoringizning hisoblagan trafik sarfi farqli bo‘lishi mumkin."</string>
@@ -2265,8 +2265,14 @@
       <item quantity="other">Sertifikatlarni ishonchli deb belgilash yoki o‘chirib tashlash</item>
       <item quantity="one">Sertifikatni ishonchli deb belgilash yoki o‘chirib tashlash</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> domeni administratori qurilmangizga xavfsizlik sertifikatlarini o‘rnatdi. Buning yordamida qurilmadagi tarmoq faoliyati, jumladan, e-pochta xatlari, ilovalar va xavfsiz saytlar nazorat qilinishi mumkin.\n\nBu sertifikatlar haqida batafsil ma’lumot olish uchun administratoringiz bilan bog‘laning.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> domeni administratori qurilmangizga xavfsizlik sertifikatini o‘rnatdi. Buning yordamida qurilmadagi tarmoq faoliyati, jumladan, e-pochta xatlari, ilovalar va xavfsiz saytlar nazorat qilinishi mumkin.\n\nBu sertifikat haqida batafsil ma’lumot olish uchun administratoringiz bilan bog‘laning.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> domeni administratori ishchi profilingiz uchun xavfsizlik sertifikatlarini o‘rnatdi. Bularning yordamida korporativ tarmoq faoliyati, jumladan, e-pochta xatlari, ilovalar va xavfsiz saytlar nazorat qilinishi mumkin.\n\nBu sertifikatlar haqida batafsil ma’lumot olish uchun administratoringiz bilan bog‘laning.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> domeni administratori ishchi profilingiz uchun xavfsizlik sertifikatini o‘rnatdi. Buning yordamida korporativ tarmoq faoliyati, jumladan, e-pochta xatlari, ilovalar va xavfsiz saytlar nazorat qilinishi mumkin.\n\nBu sertifikat haqida batafsil ma’lumot olish uchun administratoringiz bilan bog‘laning.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Uchinchi shaxslar tarmoqdagi faoliyatlaringiz, shu jumladan, e-pochtangiz, ilovalaringiz va xavfsiz veb-saytlarni kuzatish imkoniyatiga egalar.\n\nQurilmangizga o‘rnatilgan ishonchli hisob ma‘lumotlari bunga imkon yaratib bermoqda."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Sertifikatlarni tekshirish</item>
@@ -2523,6 +2529,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Ovozsiz"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Signal"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Tebranish"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Bezovta qilmang"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Faqat muhimlari"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Avtomatik qoidalar"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"“Bezovta qilinmasin” rejimi"</string>
