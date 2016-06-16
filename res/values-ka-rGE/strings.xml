@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"წაშლა"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"დავიწყოთ!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"დაადეთ თითი სენსორს და ვიბრაციის შეგრძნების შემდეგ აიღეთ"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"მშვენიერია! ახლა გაიმეორეთ"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"თქვენი თითის ანაბეჭდის სხვადასხვა ნაწილის დასამატებლად თითი ოდნავ გადააადგილეთ"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"ანაბეჭდი დამატებულია!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"როდესად ამ ხატულას დაინახავთ, იდენტიფიცირების ან თქვენი შესყიდვის ავტორიზებისათვის შეგიძლიათ გამოიყენოთ თქვენი თითის ანაბეჭდი."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"უბრალოდ, შეეხეთ თითის ანაბეჭდის სენსორს თქვენი მოწყობილობის გამოსაღვიძებლად და განსაბლოკად."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"როდესაც ამ ხატულას დაინახავთ, შეგიძლიათ გამოიყენოთ თქვენი თითის ანაბეჭდი."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"გსურთ თითის ანაბეჭდის დაყენ. გამოტოვება?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"თქვენ აირჩიეთ თქვენი თითის ანაბეჭდის გამოყენება თქვენი ტელეფონის განბლოკვის ერთ-ერთ მეთოდად. თუ ამას ახლა გამოტოვებთ, მისი დაყენება მოგვიანებით მოგიწევთ. დაყენებას მხოლოდ ერთი წუთი სჭირდება."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"ეკრანის დაბლოკვის დაყენება"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="other">სერტიფიკატების ნდობით აღჭურვა ან ამოშლა</item>
       <item quantity="one">სერტიფიკატის ნდობით აღჭურვა ან ამოშლა</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other">დომენმა <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> თქვენს მოწყობილობაზე სერტიფიცირების ორგანოების ინსტალაცია მოახდინა, რომლის მეშვეობითაც ის თქვენი მოწყობილობის ქსელის აქტივობის (მათ შორის, ელფოსტის, აპებისა და დაცული ვებსაიტების) მონიტორინგს შეძლებს.\n\nამ სერტიფიკატების შესახებ დამატებითი ინფორმაციის მისაღებად, დაუკავშირდით თქვენს ადმინისტრატორს.</item>
+      <item quantity="one">დომენმა <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> თქვენს მოწყობილობაზე სერტიფიცირების ორგანოს ინსტალაცია მოახდინა, რომლის მეშვეობითაც ის თქვენი მოწყობილობის ქსელის აქტივობის (მათ შორის, ელფოსტის, აპებისა და დაცული ვებსაიტების) მონიტორინგს შეძლებს.\n\nამ სერტიფიკატის შესახებ დამატებითი ინფორმაციის მისაღებად, დაუკავშირდით თქვენს ადმინისტრატორს.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other">დომენმა <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> თქვენი სამსახურის პროფილისთვის სერტიფიცირების ორგანოების ინსტალაცია მოახდინა, რომელთა მეშვეობითაც ის თქვენი სამსახურის ქსელის აქტივობის (მათ შორის, ელფოსტის, აპებისა და დაცული ვებსაიტების) მონიტორინგს შეძლებს.\n\nამ სერტიფიკატების შესახებ დამატებითი ინფორმაციის მისაღებად, დაუკავშირდით თქვენს ადმინისტრატორს.</item>
+      <item quantity="one">დომენმა <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> თქვენი სამსახურის პროფილისთვის სერტიფიცირების ორგანოს ინსტალაცია მოახდინა, რომლის მეშვეობითაც ის თქვენი სამსახურის ქსელის აქტივობის (მათ შორის, ელფოსტის, აპებისა და დაცული ვებსაიტების) მონიტორინგს შეძლებს.\n\nამ სერტიფიკატის შესახებ დამატებითი ინფორმაციის მისაღებად, დაუკავშირდით თქვენს ადმინისტრატორს.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"მესამე მხარეს თქვენი ქსელის აქტივობის მონიტორინგი შეუძლია, მათ შორის ელფოსტების, აპების და უსაფრთხო საიტების.\n\nეს შესაძლებელი ხდება თქვენს მოწყობილობაზე დაყენებული სანდო აუთენტიფიკაციის მონაცემების საშუალებით."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">სერტიფიკატების შემოწმება</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"დადუმებული"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"გაფრთხილება"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"ვიბრაცია"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"არ შემაწუხოთ"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"დაუშვას მხოლოდ პრიორიტეტულები"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"ავტომატური წესები"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"„არ შემაწუხოთ“ რეჟიმის განრიგი"</string>
@@ -3101,11 +3110,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"შეგიძლიათ მოითხოვოთ მხარდაჭერის გუნდთან ჩეთი ან ზარი. ჩვენ რაც შეიძლება მალე დაგიკავშირდებით"</string>
     <string name="support_offline_title" msgid="482049324795211184">"თქვენ ხაზგარეშე რეჟიმში იმყოფებით"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"მხარდაჭერის გუნდთან დასაკავშირებლად, პირველ რიგში, დაუკავშირდით Wi-Fi-ს ან მობილურ ინტერნეტს."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"დამატებითი დახმარება"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"მხარდაჭერასთან ზარი"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"მხარდაჭერასთან ელფოსტის გაგზავნა"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"მხარდაჭერასთან ჩეთი"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"დახმარების ფორუმი"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"რჩევები და მითითებები"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"მხარდაჭერის მისაღებად, შედით სისტემაში"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"შესვლა"</string>
@@ -3157,26 +3164,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"სივრცის ახლავე გამოთავისუფლება"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"მეხსიერების მენეჯერი"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"მეხსიერების მართვის ავტომატური სერვისი"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"ჟესტები"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"კამერაზე გადასვლა"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"კამერის სწრაფად გასახსნელად, უბრალოდ შეეხეთ ორმაგად ელკვების ღილაკს. მუშაობს ნებისმიერი ეკრანიდან."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"კამერის გადართვა"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"წინა და უკანა კამერებს შორის გადასართველად, შეასრულეთ ორმაგი მოტრიალება."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"ეკრანის სწრაფი შემოწმება"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"თქვენი ტელეფონის სრულად გამოღვიძების გარეშე, მასზე ნაჩვენები ინფორმაციის ნახვა მისი მსუბუქი ბიძგებით ან ხელში აღებით შეგიძლიათ."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"გადაფურცვლა შეტყობინებების შესამოწმებლად"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"თქვენი შეტყობინებების ნებისმიერი ეკრანიდან შესამოწმებლად, ჩამოუსვით თითი თითის ანაბეჭდის სენსორს."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"ჩართული"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"გამორთული"</string>
 </resources>

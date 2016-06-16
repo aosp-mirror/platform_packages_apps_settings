@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Verwijderen"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Aan de slag"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Plaats je vinger op de sensor en til deze op nadat je een trilling hebt gevoeld"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Prima! Herhaal dit nu."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Beweeg je vinger enigszins om alle delen van je vingerafdruk toe te voegen"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Gelukt!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Wanneer je dit pictogram ziet, kun je je vingerafdruk gebruiken voor identificatie of om een aankoop goed te keuren."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Raak de vingerafdruksensor aan om je apparaat te activeren en te ontgrendelen."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Wanneer dit pictogram wordt weergegeven, kun je je vingerafdruk gebruiken."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Instellen van vingerafdruk overslaan?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Je hebt ervoor gekozen je vingerafdruk te gebruiken als manier om je telefoon te ontgrendelen. Als je dit nu overslaat, moet je het later instellen. Het instellen neemt ongeveer een minuut in beslag."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Schermvergrendeling instellen"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="other">Certificaten vertrouwen of verwijderen</item>
       <item quantity="one">Certificaat vertrouwen of verwijderen</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> heeft certificeringsinstanties geïnstalleerd op je apparaat, waardoor dit domein activiteit in het apparaatnetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie over deze certificaten.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> heeft een certificeringsinstantie geïnstalleerd op je apparaat, waardoor dit domein activiteit in het apparaatnetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie over dit certificaat.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> heeft certificeringsinstanties voor je werkprofiel geïnstalleerd, waardoor dit domein activiteit in het werknetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie over deze certificaten.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> heeft een certificeringsinstantie voor je werkprofiel geïnstalleerd, waardoor dit domein activiteit in het werknetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie over dit certificaat.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Een derde partij kan je netwerkactiviteit, waaronder e-mails, apps en beveiligde websites, bijhouden.\n\nDit is mogelijk omdat je een vertrouwd certificaat op je apparaat hebt opgeslagen."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Certificaten controleren</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Stil"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Waarschuwing"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Trillen"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Niet storen"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Als prioriteit toestaan"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatische regels"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Niet storen-planning instellen"</string>
@@ -3101,11 +3110,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Je kunt ondersteuning aanvragen via een telefoonoproep of chatgesprek. We nemen dan zo snel mogelijk contact met je op."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Je bent offline"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Als je contact wilt opnemen met het ondersteuningsteam, maak je eerst verbinding via een wifi- of datanetwerk"</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Meer hulp"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Ondersteuningsoproep"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Support per e-mail"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Support per chat"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Helpforum"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Tips en trucs"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Log in voor ondersteuning"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Inloggen"</string>
@@ -3157,26 +3164,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Nu ruimte vrijmaken"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Opslagbeheer"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Automatische opslagbeheerservice"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Gebaren"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Naar camera schakelen"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Als je de camera snel wilt openen, dubbeltik je op de aan/uit-knop. Werkt vanuit elk scherm."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Schakelen tussen camera\'s"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Draai snel twee keer vanuit je pols om te schakelen tussen de camera\'s aan de voor- en achterzijde."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Snelle schermcontrole"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Als je je telefoon wilt checken zonder deze volledig te activeren, geef je hem een duwtje of pak je hem op."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Vegen voor meldingen"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Als je vanuit elk gewenst scherm je meldingen wilt controleren, veeg je omlaag over de vingerafdruksensor."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Aan"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Uit"</string>
 </resources>

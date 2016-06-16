@@ -358,12 +358,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Dzēst"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Sāciet!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Novietojiet pirkstu uz sensora un paceliet to pēc tam, kad sajūtat vibrāciju"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Lieliski, atkārtojiet!"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Nedaudz pakustiniet pirkstu, lai pievienotu dažādas pirksta nospieduma daļas."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Nospiedums pievienots!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Kad tiek rādīta šī ikona, varat izmantot pirksta nospiedumu identifikācijai vai pirkuma autorizēšanai."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Pieskarieties pirkstu nospiedumu sensoram, lai aktivizētu un atbloķētu savu ierīci."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Kad redzat šo ikonu, varat izmantot pirkstu nospiedumu."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Izlaist pirksta nospieduma iestatīšanu?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Jūs izvēlējāties pirksta nospiedumu kā vienu no tālruņa atbloķēšanas iespējām. Ja izlaidīsiet šo darbību, iestatīšana būs jāveic vēlāk. Iestatīšanai nepieciešama aptuveni viena minūte."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Iestatīt ekrāna bloķēšanu"</string>
@@ -2290,8 +2292,16 @@
       <item quantity="one">Sertifikātu pieņemšana vai noņemšana</item>
       <item quantity="other">Sertifikātu pieņemšana vai noņemšana</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="zero"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja jūsu ierīcē sertificēšanas iestāžu sertifikātus. Šie sertifikāti atļauj iestādēm pārraudzīt darbības jūsu ierīces tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja jūsu ierīcē sertificēšanas iestāžu sertifikātus. Šie sertifikāti atļauj iestādēm pārraudzīt darbības jūsu ierīces tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja jūsu ierīcē sertificēšanas iestāžu sertifikātus. Šie sertifikāti atļauj iestādēm pārraudzīt darbības jūsu ierīces tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="zero"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti atļauj iestādēm pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti atļauj iestādēm pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> instalēja sertificēšanas iestāžu sertifikātus jūsu darba profilam. Šie sertifikāti atļauj iestādēm pārraudzīt darbības darba tīklā, tostarp e-pasta kontus, lietotnes un drošās vietnes.\n\nLai iegūtu plašāku informāciju par šiem sertifikātiem, sazinieties ar administratoru.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Trešā puse spēj pārraudzīt jūsu darbības tīklā, tostarp e-pastu, lietotnes un drošās vietnes.\n\nŠo pārraudzības iespēju nodrošina jūsu ierīcē instalēts sertifikāts."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="zero">Pārbaudīt sertifikātus</item>
@@ -2549,6 +2559,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Klusums"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Brīdinājums"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrozvans"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Netraucēt"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Tikai prioritārie"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Autom. kārtulas"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Iestatīt “Netraucēt” grafiku"</string>
@@ -3131,11 +3142,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Pieprasiet atbalsta zvanu vai tērzēšanas sarunu, un mēs ar jums drīzumā sazināsimies."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Jūs esat bezsaistē."</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Lai saņemtu atbalstu, vispirms izveidojiet Wi-Fi vai datu savienojumu."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Vairāk palīdzības"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Zvans"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"E-pasta ziņojums"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Tērzēšanas saruna"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Palīdzības forums"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Padomi un ieteikumi"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Pierakstieties, lai saņemtu palīdzību"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Pierakstīties"</string>
@@ -3190,26 +3199,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Vietas atbrīvošana tūlīt"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Krātuves pārvaldnieks"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Autom. krātuves pārvaldības pakalpojums"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Žesti"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Pāriešana uz kameru"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Lai ātri atvērtu kameru, vienkārši veiciet dubultskārienu barošanas pogai. Tas darbojas jebkurā ekrānā."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Apvērst kameru"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Lai pārslēgtos no priekšējās kameras uz aizmugurējo kameru un otrādi, divreiz pagrieziet ierīci."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Ātra ekrāna skatīšana"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Lai pārbaudītu savu tālruni, neaktivizējot to pilnībā, pakustiniet vai paceliet to."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Vilkšana, lai skatītu paziņojumus"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Lai jebkurā ekrānā pārbaudītu paziņojumus, velciet uz leju pirksta nospieduma sensoru."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Ieslēgti"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Izslēgti"</string>
 </resources>

@@ -361,12 +361,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Smazat"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Začínáme!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Umístěte prst na senzor. Až ucítíte vibraci, zvedněte jej."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"OK, nyní to zopakujte"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Lehce pohněte prstem, aby se zaznamenaly všechny části otisku"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Otisk byl přidán!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Kdykoli se zobrazí tato ikona, můžete se identifikovat nebo autorizovat nákup pomocí svého otisku prstu."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Probuďte a odemkněte zařízení klepnutím na senzor otisků prstů."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Když se zobrazí tato ikona, můžete použít otisk prstu."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Přeskočit nastavení otisku prstu?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Jako jeden ze způsobů odemknutí telefonu jste se rozhodli používat otisk prstu. Pokud nastavení přeskočíte, bude třeba jej dokončit později. Nastavení trvá jen chviličku."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Nastavit zámek obrazovky"</string>
@@ -2308,8 +2310,18 @@
       <item quantity="other">Označit certifikáty jako důvěryhodné nebo je odstranit</item>
       <item quantity="one">Označit certifikát jako důvěryhodný nebo jej odstranit</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="few">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> do vašeho zařízení nainstalovala certifikační autority, které umožňují sledování aktivity zařízení na síti, včetně e-mailů, aplikací a zabezpečených webů.\n\nDalší informace o těchto certifikátech vám poskytne administrátor.</item>
+      <item quantity="many">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> do vašeho zařízení nainstalovala certifikační autority, které umožňují sledování aktivity zařízení na síti, včetně e-mailů, aplikací a zabezpečených webů.\n\nDalší informace o těchto certifikátech vám poskytne administrátor.</item>
+      <item quantity="other">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> do vašeho zařízení nainstalovala certifikační autority, které umožňují sledování aktivity zařízení na síti, včetně e-mailů, aplikací a zabezpečených webů.\n\nDalší informace o těchto certifikátech vám poskytne administrátor.</item>
+      <item quantity="one">Doména <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> do vašeho zařízení nainstalovala certifikační autoritu, která umožňuje sledování aktivity zařízení na síti, včetně e-mailů, aplikací a zabezpečených webů.\n\nDalší informace o tomto certifikátu vám poskytne administrátor.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="few">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> pro váš pracovní profil nainstalovala certifikační autority, které mohou umožnit monitorování aktivity v pracovní síti, včetně odesílání e-mailů, aplikací a zabezpečených webů.\n\nDalší informace o těchto certifikátech vám poskytne administrátor.</item>
+      <item quantity="many">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> pro váš pracovní profil nainstalovala certifikační autority, které mohou umožnit monitorování aktivity v pracovní síti, včetně odesílání e-mailů, aplikací a zabezpečených webů.\n\nDalší informace o těchto certifikátech vám poskytne administrátor.</item>
+      <item quantity="other">Doména <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> pro váš pracovní profil nainstalovala certifikační autority, které mohou umožnit monitorování aktivity v pracovní síti, včetně odesílání e-mailů, aplikací a zabezpečených webů.\n\nDalší informace o těchto certifikátech vám poskytne administrátor.</item>
+      <item quantity="one">Doména <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> pro váš pracovní profil nainstalovala certifikační autoritu, která může umožnit monitorování aktivity v pracovní síti, včetně odesílání e-mailů, aplikací a zabezpečených webů.\n\nDalší informace o tomto certifikátu vám poskytne administrátor.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Vaše aktivita v síti, včetně e-mailů, aplikací a zabezpečených webových stránek může být monitorována třetí stranou.\n\nUmožňují to důvěryhodné identifikační údaje nainstalované ve vašem zařízení."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="few">Zkontrolovat certifikáty</item>
@@ -2568,6 +2580,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Tichý režim"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Upozornění"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrace"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Nerušit"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Pouze prioritní"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatická pravidla"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Nastavit plán režimu Nerušit"</string>
@@ -3161,11 +3174,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Požádejte o chat nebo telefonický hovor s podporou a my vás vzápětí kontaktujeme"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Nejste připojeni k internetu"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Chcete-li kontaktovat podporu, připojte se k Wi-Fi nebo k mobilní síti."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Další pomoc"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Volání s podporou"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Podpora – e-mail"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Podpora – chat"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Fórum nápovědy"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Tipy a triky"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Chcete-li kontaktovat podporu, přihlaste se"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Přihlásit se"</string>
@@ -3223,26 +3234,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Uvolnit místo"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Správce úložiště"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Služba automatické správy úložiště"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Gesta"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Spuštění fotoaparátu"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Chcete-li rychle spustit fotoaparát, stačí dvakrát klepnout na vypínač. Funguje to na všech obrazovkách."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Přepnutí fotoaparátu"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Chcete-li přepnout mezi předním a zadním fotoaparátem, dvakrát otočte zařízením."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Rychlá kontrola obrazovky"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Telefon můžete zkontrolovat, aniž byste jej museli úplně probudit. Stačí jím pohnout nebo jej zvednout."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Zobrazení oznámení přejetím prstem"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Oznámení můžete zkontrolovat na libovolné obrazovce. Stačí přejet prstem dolů po snímači otisků prstů."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Zapnuto"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Vypnuto"</string>
 </resources>

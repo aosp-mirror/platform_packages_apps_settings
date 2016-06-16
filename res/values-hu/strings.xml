@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Törlés"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Lássunk neki!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Helyezze az ujját az érzékelőre, és emelje fel a rezgést követően"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Sikerült! Most ismételje meg"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Óvatosan mozgassa ujját a teljes ujjlenyomat levételéhez"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Ujjlenyomat hozzáadva!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Ha ezt az ikont látja, akkor lehetősége van arra, hogy ujjlenyomatával azonosítsa magát, vagy engedélyezze a vásárlást."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Csak érintse meg az ujjlenyomat-érzékelőt az eszköz felébresztéséhez és feloldásához."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Ha ezt az ikont látja, használhatja ujjlenyomatát."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Átugorja az ujjllenyomat-beállítást?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Kiválasztotta, hogy ujjlenyomattal is feloldhassa telefonját. Ha most kihagyja a lépéseket, később kell majd beállítania a funkciót. Ez hozzávetőlegesen 1 percet vesz igénybe."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Képernyőzár beállítása"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="other">Tanúsítványok elfogadása megbízhatóként vagy eltávolítása</item>
       <item quantity="one">Tanúsítvány elfogadása megbízhatóként vagy eltávolítása</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> tanúsítványkibocsátókat telepített az Ön eszközére, ami lehetővé teheti a hálózati tevékenységeinek, beleértve az e-mailek, alkalmazások és biztonságos webhelyek figyelését.\n\nHa további információt szeretne ezekről a tanúsítványokról, lépjen kapcsolatba a rendszergazdával.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> tanúsítványkibocsátót telepített az Ön eszközére, ami lehetővé teheti a hálózati tevékenységeinek, beleértve az e-mailek, alkalmazások és biztonságos webhelyek figyelését.\n\nHa további információt szeretne erről a tanúsítványról, lépjen kapcsolatba a rendszergazdával.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> tanúsítványkibocsátókat telepített az Ön munkaprofiljához, ami lehetővé teheti a munkahelyi hálózati tevékenységek, beleértve az e-mailek, alkalmazások és biztonságos webhelyek figyelését.\n\nHa további információt szeretne ezekről a tanúsítványokról, lépjen kapcsolatba a rendszergazdával.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> tanúsítványkibocsátót telepített az Ön munkaprofiljához, ami lehetővé teheti a munkahelyi hálózati tevékenységek, beleértve az e-mailek, alkalmazások és biztonságos webhelyek figyelését.\n\nHa további információt szeretne erről a tanúsítványról, lépjen kapcsolatba a rendszergazdával.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Egy harmadik fél képes az Ön hálózati tevékenységének figyelésére, beleértve az e-maileket, az alkalmazásokat és a biztonságos webhelyeket is.\n\nEzt az Ön eszközére telepített megbízható hitelesítési adatok teszik lehetővé."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Tanúsítványok ellenőrzése</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Néma"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Figyelmeztetés"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Rezgés"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Ne zavarjanak"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Csak a prioritást élvezők"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatikus szabályok"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"A „Ne zavarjanak” ütemezése"</string>
@@ -3101,11 +3110,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Kérhet ügyféltámogatást telefonhívás vagy csevegés formájában is, mi pedig a lehető leggyorsabban felvesszük Önnel a kapcsolatot."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Nincs internetkapcsolat"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Ha szeretné felvenni a kapcsolatot az ügyféltámogatói csapattal, először csatlakozzon Wi-Fi- vagy adathálózathoz."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"További segítség"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Telefonhívás"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"E-mail"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Csevegés"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Súgófórum"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Tippek és trükkök"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Az ügyfélszolgálati támogatás igényebvételéhez jelentkezzen be."</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Bejelentkezés"</string>
@@ -3157,26 +3164,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Hely felszabadítása most"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Tárhelykezelő"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Automatikus tárhelykezelő szolgáltatás"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Kézmozdulatok"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Kamera megnyitása"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"A kamera gyors megnyitásához koppintson duplán a bekapcsológombra. Bármelyik képernyőn működik."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kameraváltás"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Az elülső és hátulsó kamerák közötti váltáshoz két csuklómozdulattal fordítsa el a telefont."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Gyors pillantás a kijelzőre"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Ha a teljes felébresztés nélkül szeretne rápillantani telefonja kijelzőjére, egyszerűen mozdítsa meg, vagy vegye a kezébe."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Az értesítések megtekintéséhez gyorsan csúsztassa az ujjait"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Bármelyik képernyőn megtekintheti értesítéseit, ha ujját lefelé húzza az ujjlenyomat-érzékelőn."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Bekapcsolva"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Kikapcsolva"</string>
 </resources>

@@ -354,12 +354,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Löschen"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Los geht\'s!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Lege deinen Finger auf den Sensor und hebe ihn an, wenn du eine Vibration spürst."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Super! Noch einmal."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Bewege deinen Finger etwas, um alle unterschiedlichen Teile deines Fingerabdrucks hinzuzufügen."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Abdruck hinzugefügt"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Wenn du dieses Symbol siehst, kannst du deinen Fingerabdruck zur Identifizierung oder zur Autorisierung eines Kaufs verwenden."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Tippe einfach auf den Fingerabdrucksensor, um dein Gerät zu aktivieren und zu entsperren."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Wenn du dieses Symbol siehst, kannst du deinen Fingerabdruck verwenden."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Fingerabdruck-Einrichtung überspringen?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Du hast festgelegt, dass du unter anderem deinen Fingerabdruck zum Entsperren deines Smartphones verwenden möchtest. Wenn du diesen Schritt jetzt überspringst, musst du die Einrichtung zu einem späteren Zeitpunkt vornehmen. Die Einrichtung dauert nur ca. eine Minute."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Displaysperre einrichten"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="other">Zertifikaten vertrauen oder sie entfernen</item>
       <item quantity="one">Zertifikat vertrauen oder entfernen</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hat Zertifizierungsstellen auf deinem Gerät installiert. Damit können die Netzwerkaktivitäten deines Geräts wie E-Mails, Apps und sichere Websites überwacht werden.\n\nWeitere Informationen zu diesen Zertifikaten erhältst du von deinem Administrator.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> hat eine Zertifizierungsstelle auf dem Gerät installiert. Damit können die Netzwerkaktivitäten deines Geräts wie E-Mails, Apps und sichere Websites überwacht werden.\n\nWeitere Informationen zu diesem Zertifikat erhältst du von deinem Administrator.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> hat Zertifizierungsstellen für dein Arbeitsprofil installiert. Damit können deine geschäftlichen Netzwerkaktivitäten überwacht werden, einschließlich E-Mails, Apps und sicherer Websites.\n\nWeitere Informationen zu diesen Zertifikaten erhältst du von deinem Administrator.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> hat eine Zertifizierungsstelle für dein Arbeitsprofil installiert. Damit können deine geschäftlichen Netzwerkaktivitäten überwacht werden, einschließlich E-Mails, Apps und sicherer Websites.\n\nWeitere Informationen zu diesem Zertifikat erhältst du von deinem Administrator.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Dritte können deine Netzwerkaktivitäten überwachen, einschließlich E-Mails, Apps und sicherer Websites.\n\nDies wird durch vertrauenswürdige Anmeldedaten ermöglicht, die auf deinem Gerät installiert sind."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Zertifikate prüfen</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Lautlos"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Warnung"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibration"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Bitte nicht stören"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Nur wichtige Unterbr. zulassen"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatische Regeln"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"\"Nicht stören\" einrichten"</string>
@@ -3103,11 +3112,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Du kannst einen Anruf vom Support oder einen Chat mit dem Support anfordern. Wir werden uns dann schnellstmöglich bei dir melden."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Du bist offline"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Um unseren Kundenservice zu erreichen, stelle zuerst eine WLAN- oder Datenverbindung her."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Weitere Hilfe"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Supportanruf"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"E-Mail an Support"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Mit Support chatten"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Hilfeforum"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Tipps und Tricks"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Für Support anmelden"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Anmelden"</string>
@@ -3159,26 +3166,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Derzeit freier Speicher"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Speichermanager"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Verwaltungsdienst für autom. Speicher"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Bewegungen"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Zur Kamera wechseln"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Starte die Kamera direkt, indem du die Ein-/Aus-Taste zweimal schnell drückst. Dies funktioniert auf jedem Bildschirm."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kamera wechseln"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Wechsle zwischen der Kamera vorne und der Kamera hinten, indem du das Smartphone schnell zweimal drehst."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Kurzer Blick auf das Display"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Sieh dir das Display deines Smartphones an, ohne es ganz einzuschalten, indem du es leicht anstößt oder aufhebst."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Für Benachrichtigungen wischen"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Rufe deine Benachrichtigungen auf beliebigen Bildschirmen auf, indem du über den Fingerabdrucksensor nach unten wischst."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"An"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Aus"</string>
 </resources>
