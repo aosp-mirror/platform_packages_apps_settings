@@ -63,11 +63,6 @@
                 android:title="@string/camera_gesture_title"
                 android:summary="@string/camera_gesture_desc" />
 
-        <SwitchPreference
-                android:key="camera_double_tap_power_gesture"
-                android:title="@string/camera_double_tap_power_gesture_title"
-                android:summary="@string/camera_double_tap_power_gesture_desc" />
-
         <PreferenceScreen
                 android:key="screensaver"
                 android:title="@string/screensaver_settings_title"
@@ -77,10 +72,14 @@
                 android:key="lift_to_wake"
                 android:title="@string/lift_to_wake_title" />
 
-        <SwitchPreference
+        <PreferenceScreen
                 android:key="doze"
                 android:title="@string/doze_title"
-                android:summary="@string/doze_summary" />
+                android:summary="@string/doze_summary"
+                android:fragment="com.android.settings.gestures.GestureSettings" >
+                <extra android:name=":settings:fragment_args_key"
+                       android:value="gesture_pick_up_and_nudge" />
+        </PreferenceScreen>
 
         <SwitchPreference
                 android:key="tap_to_wake"
