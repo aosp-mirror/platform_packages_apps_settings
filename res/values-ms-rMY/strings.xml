@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Padam"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Mari mulakan!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Letakkan jari anda pada penderia, kemudian angkat jari itu selepas anda merasa getaran"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Bagus! Sekarang, ulang"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Gerakkan jari anda sedikit untuk menambahkan bahagian lain cap jari anda"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Cap jari ditambahkan!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Apabila anda melihat ikon ini, anda boleh menggunakan cap jari untuk pengenalan atau membenarkan pembelian."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Sentuh sahaja penderia cap jari untuk membangunkan dan membuka kunci peranti anda."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Anda boleh menggunakan cap jari setiap kali ikon ini kelihatan."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Langkau persediaan cap jari?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Anda telah memilih untuk menggunakan cap jari sebagai satu cara untuk membuka kunci telefon anda. Jika anda melangkaui sekarang, anda perlu menyediakannya kemudian. Persediaan hanya mengambil sedikit masa."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Sediakan kunci skrin"</string>
@@ -836,8 +838,7 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Apabila panggilan Wi-Fi dihidupkan, telefon anda boleh menghalakan panggilan melalui rangkaian Wi-Fi atau rangkaian pembawa anda, bergantung pada pilihan anda dan isyarat yang lebih kuat. Sebelum menghidupkan ciri ini, semak dengan pembawa anda berkenaan bayaran dan butiran lain."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Kemas Kini Alamat Kecemasan"</string>
-    <!-- no translation found for emergency_address_summary (306028701568728126) -->
-    <skip />
+    <string name="emergency_address_summary" msgid="306028701568728126">"Alamat yang digunakan oleh perkhidmatan kecemasan sebagai lokasi anda jika anda membuat panggilan 911 menggunakan Wi-Fi"</string>
     <string name="home_settings" msgid="212375129455718176">"Skrin Utama"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Paparan"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Bunyi"</string>
@@ -2273,8 +2274,14 @@
       <item quantity="other">Percayai atau alih keluar sijil</item>
       <item quantity="one">Percayai atau alih keluar sijil</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> telah memasang sijil kuasa pada peranti anda yang mungkin membenarkan pemantauan aktiviti rangkaian peranti anda, termasuk e-mel, apl dan tapak web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> telah memasang sijil kuasa pada peranti anda yang mungkin membenarkan pemantauan aktiviti rangkaian peranti anda, termasuk e-mel, apl dan tapak web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> telah memasang sijil kuasa untuk profil kerja anda yang mungkin membenarkan pemantauan aktiviti rangkaian kerja, termasuk e-mel, apl dan tapak web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> telah memasang sijil kuasa untuk profil kerja anda yang mungkin membenarkan pemantauan aktiviti rangkaian kerja, termasuk e-mel, apl dan tapak web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Pihak ketiga berkeupayaan untuk memantau aktiviti rangkaian anda, termasuk e-mel, apl dan tapak web selamat.\n\nBukti kelayakan dipercayai yang dipasang pada peranti anda yang membolehkan perkara ini."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Semak sijil</item>
@@ -2531,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Senyap"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Makluman"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Bergetar"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Jangan ganggu"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Benarkan keutamaan sahaja"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Peraturan automatik"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Tetapkan jadual Jangan Ganggu"</string>
@@ -2999,9 +3007,12 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Penggunaan data Ethernet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" data selular"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" data Wi-Fi"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" data ethernet"</small></small></string>
+    <!-- no translation found for cell_data_template (4334891288093891726) -->
+    <skip />
+    <!-- no translation found for wifi_data_template (6265570748799357386) -->
+    <skip />
+    <!-- no translation found for ethernet_data_template (5782476509881033590) -->
+    <skip />
     <string name="cell_warning_only" msgid="763147658209027140">"Amaran data <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Amaran data <xliff:g id="ID_1">%1$s</xliff:g>/Had data <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Kitaran pengebilan"</string>
@@ -3098,11 +3109,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Anda boleh meminta panggilan atau sembang sokongan dan kami akan menghubungi anda dengan pantas"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Anda berada di luar talian"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Untuk menghubungi sokongan, sambungkan ke Wi-Fi atau data terlebih dahulu."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Lagi bantuan"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Panggilan sokongan"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"E-mel sokongan"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Sembang sokongan"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Forum bantuan"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Petua &amp; elat"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Log masuk untuk mendapatkan sokongan"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Log masuk"</string>
@@ -3154,4 +3163,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Kosongkan ruang sekarang"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Pengurus storan"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Perkhidmatan Pengurusan Storan Automatik"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Gerak isyarat"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Langkau ke Kamera"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Untuk membuka kamera dengan pantas, hanya ketik dua kali pada butang kuasa. Berfungsi daripada mana-mana skrin."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Balikkan kamera"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Pusing dua kali untuk beralih antara kamera depan dengan belakang."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Semakan skrin pantas"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Untuk menyemak telefon anda tanpa membangunkan telefon sepenuhnya, sigung atau angkat telefon itu."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Leret untuk mendapatkan pemberitahuan"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Untuk menyemak pemberitahuan anda daripada sebarang skrin, leret ke bawah pada penderia cap jari."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Hidup"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Mati"</string>
 </resources>

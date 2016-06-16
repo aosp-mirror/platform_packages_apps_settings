@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Slett"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"La oss sette i gang!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Plassér fingeren på sensoren, og løft den når du kjenner en vibrasjon"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Flott! En gang til"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Flytt fingeren litt for å registrere de ulike delene av fingeravtrykket ditt"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Fingeravtrykk lagt til!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Når du ser dette ikonet, kan du bruke fingeravtrykket ditt som identifikasjon eller til å godkjenne kjøp."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Bare trykk på fingeravtrykksensoren for å vekke og låse opp enheten din."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Når du ser dette ikonet, kan du bruke fingeravtrykket ditt."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Vil du hoppe over fingeravtrykk-konfig.?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Du har valgt å bruke fingeravtrykket ditt som én måte å låse opp telefonen din på. Hvis du hopper over konfigureringen nå, må du fullføre den senere. Konfigureringen tar bare et par minutter."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Konfigurer skjermlås"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="other">Stol på eller fjern sertifikatene</item>
       <item quantity="one">Stol på eller fjern sertifikatet</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installert sertifiseringsinstanser på enheten din. Dette kan gi instansen tillatelse til å overvåke nettverksaktiviteten på enheten, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om dette sertifikatet.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> har installert en sertifiseringsinstans på enheten din. Dette kan gi instansen tillatelse til å overvåke nettverksaktiviteten på enheten, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om dette sertifikatet.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installert sertifiseringsinstanser for jobbprofilen din. Dette kan gi instansen tillatelse til å overvåke nettverksaktiviteten på jobben, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om dette sertifikatet.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> har installert en sertifiseringsinstans for jobbprofilen din. Dette kan gi instansen tillatelse til å overvåke nettverksaktiviteten på jobben, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om dette sertifikatet.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"En utenforstående kan overvåke nettverksaktiviteten din, inkludert e-poster, apper og sikre nettsteder.\n\nPålitelig legitimasjon, som er installert på enheten din, gjør dette mulig."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Sjekk sertifikatene</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Stille"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Varsel"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrer"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Ikke forstyrr"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Prioritet tillater bare"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatiske regler"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Angi timeplan for Ikke forstyrr"</string>
@@ -2998,9 +3007,12 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet-databruk"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" mobildata"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Wi-Fi-data"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" ethernet-data"</small></small></string>
+    <!-- no translation found for cell_data_template (4334891288093891726) -->
+    <skip />
+    <!-- no translation found for wifi_data_template (6265570748799357386) -->
+    <skip />
+    <!-- no translation found for ethernet_data_template (5782476509881033590) -->
+    <skip />
     <string name="cell_warning_only" msgid="763147658209027140">"Advarsel for databruk: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Advarsel for databruk: <xliff:g id="ID_1">%1$s</xliff:g> / datagrense: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Faktureringssyklus"</string>
@@ -3097,11 +3109,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Du kan be om å bli oppringt av eller chatte med brukerstøtten – vi kontakter deg så fort som mulig"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Du er uten nett"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"For å kontakte brukerstøtten, koble til Wi-Fi eller mobildata."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Mer hjelp"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Ring brukerstøtten"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Send e-post til brukerstøtten"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Chat med brukerstøtten"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Hjelpeforum"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Tips og triks"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Logg på for å få hjelp"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Logg på"</string>
@@ -3153,4 +3163,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Ledig lagringsplass"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Lagringsadministrator"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Tjeneste for auto-lagringsbehandling"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Bevegelser"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Gå til kameraet"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"For raskt å åpne kameraet, bare dobbelttrykk på av/på-knappen. Dette fungerer fra alle skjermbilder."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Vend kameraet"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"For å bytte mellom det fremre og det bakre kameraet, vri to ganger."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Rask skjermsjekk"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"For å sjekke telefonen uten å vekke den fullstendig, dytt borti eller løft den."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Sveip for varsler"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"For å sjekke varslene dine fra et hvilket som helst skjermbilde, sveip ned på fingeravtrykksensoren."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"På"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Av"</string>
 </resources>

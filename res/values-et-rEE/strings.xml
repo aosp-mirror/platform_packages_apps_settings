@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Kustuta"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Alustame!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Asetage oma sõrm andurile ja tõstke see üles, kui tunnete vibratsiooni"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Hästi! Nüüd korrake"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Liigutage veidi oma sõrme, et lisada oma sõrmejälje kõik erinevad osad"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Sõrmejälg lisati."</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Alati kui seda ikooni näete, saate tuvastamiseks või ostu volitamiseks kasutada oma sõrmejälge."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Seadme äratamiseks ja avamiseks puudutage lihtsalt sõrmejäljelugejat."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Kui näete seda ikooni, saate sõrmejälge kasutada."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Kas jätta sõrmejälje seadistus vahele?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Valisite telefoni avamise üheks viisiks sõrmejälje kasutamise. Kui seadistamise praegu vahele jätate, peate seda tegema hiljem. See võtab ainult umbes minuti."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Seadista ekraanilukk"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="other">Sertifikaatide usaldamine või eemaldamine</item>
       <item quantity="one">Sertifikaadi usaldamine või eemaldamine</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other">Domeen <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> installis teie seadmesse sertifikaadi volitused, mis võivad lubada jälgida teie seadme võrgutegevusi (sh meilid, rakendused ja turvalised veebisaidid).\n\nLisateabe saamiseks nende sertifikaatide kohta võtke ühendust administraatoriga.</item>
+      <item quantity="one">Domeen <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> installis teie seadmesse sertifikaadi volituse, mis võib lubada jälgida teie seadme võrgutegevusi (sh meilid, rakendused ja turvalised veebisaidid).\n\nLisateabe saamiseks selle sertifikaadi kohta võtke ühendust administraatoriga.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other">Domeen <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> installis teie tööprofiilile sertifikaadi volitused, mis võivad lubada jälgida töökoha võrgutegevusi (sh meilid, rakendused ja turvalised veebisaidid).\n\nLisateabe saamiseks nende sertifikaatide kohta võtke ühendust administraatoriga.</item>
+      <item quantity="one">Domeen <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> installis teie tööprofiilile sertifikaadi volituse, mis võib lubada jälgida töökoha võrgutegevusi (sh meilid, rakendused ja turvalised veebisaidid).\n\nLisateabe saamiseks selle sertifikaadi kohta võtke ühendust administraatoriga.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Kolmas osapool saab jälgida teie tegevust võrgus, sh meile, rakendusi ja turvalisi veebisaite.\n\nSeda võimaldab teie seadmesse installitud usaldusväärne mandaat."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Kontrollige sertifikaate</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Hääletu"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Märguanne"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibratsioon"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Mitte segada"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Prioriteetne lubab ainult"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automaatsed reeglid"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Ajakava Mitte segada määramine"</string>
@@ -2998,9 +3007,12 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Etherneti andmekasutus"</string>
     <string name="wifi" msgid="1081550856200013637">"WiFi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" mobiilse andmeside andmeid"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" WiFi-andmeid"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Etherneti-andmeid"</small></small></string>
+    <!-- no translation found for cell_data_template (4334891288093891726) -->
+    <skip />
+    <!-- no translation found for wifi_data_template (6265570748799357386) -->
+    <skip />
+    <!-- no translation found for ethernet_data_template (5782476509881033590) -->
+    <skip />
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> – andmemahu hoiatus"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> – andmemahu hoiatus / <xliff:g id="ID_2">%2$s</xliff:g> – andmemahu piirang"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Arveldustsükkel"</string>
@@ -3097,11 +3109,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Saate taotleda kõnet või vestlust toega ja võtame teiega peagi ühendust"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Te pole võrguga ühendatud"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Toega ühenduse võtmiseks looge esmalt WiFi- või andmesideühendus."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Veel abi"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Kõne toega"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Toele meili saatmine"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Vestlemine toega"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Abifoorum"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Nõuanded ja nipid"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Toe saamiseks logige sisse"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Logi sisse"</string>
@@ -3153,4 +3163,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Kohe ruumi vabastamine"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Salvestusruumi haldur"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Automaatne salvestusruumi haldusteenus"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Liigutused"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Ava kaamera"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Kaamera kiireks avamiseks topeltpuudutage toitenuppu. See töötab igal ekraanil."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kaamera vahetamine"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Esi- ja tagakaamera vahel vahetamiseks pöörake kaks korda."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Kiire ekraanikontroll"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Telefoni kontrollimiseks seda täielikult äratamata müksake seda või võtke see kätte."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Pühkimine märguannete kontrollimiseks"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Märguannete kontrollimiseks mis tahes ekraanil pühkige sõrmejäljeanduril alla."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Sees"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Väljas"</string>
 </resources>

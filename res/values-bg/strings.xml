@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Изтриване"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Да започваме!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Поставете пръста си върху сензора и го вдигнете, след като усетите вибриране"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Отлично! Сега повторете"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Движете пръста си леко, за да добавите всички различни части от отпечатъка си"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Отпечатъкът е добавен!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Когато видите тази икона, можете да използвате отпечатъка си за идентификация или за оторизиране на покупка."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Трябва само да докоснете сензора за отпечатъци, за да „събудите“ и отключите устройството си."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Когато видите тази икона, можете да използвате отпечатъка си."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Пропуск. на настройването на отпечатък?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Избрахте да използвате отпечатъка си като един от начините за отключване на телефона си. Ако пропуснете сега, ще трябва да настроите по-късно. Настройването отнема около минута."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Заключване на екрана: Настройване"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="other">Доверете се на тези сертификати или ги премахнете</item>
       <item quantity="one">Доверете се на този сертификат или го премахнете</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other">Домейнът <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> е инсталирал сертифициращи органи на устройството ви. Това може да му позволи да следи мрежовата активност на устройството, включително имейли, приложения и защитени уебсайтове.\n\nЗа повече информация относно тези сертификати се свържете с администратора си.</item>
+      <item quantity="one">Домейнът <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> е инсталирал сертифициращ орган на устройството ви. Това може да му позволи да следи мрежовата активност на устройството, включително имейли, приложения и защитени уебсайтове.\n\nЗа повече информация относно този сертификат се свържете с администратора си.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other">Домейнът <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> е инсталирал сертифициращи органи за служебния ви потребителски профил. Това може да му позволи да следи служебната ви активност в мрежата, включително имейли, приложения и защитени уебсайтове.\n\nЗа повече информация относно тези сертификати се свържете с администратора си.</item>
+      <item quantity="one">Домейнът <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> е инсталирал сертифициращ орган за служебния ви потребителски профил. Това може да му позволи да следи служебната ви активност в мрежата, включително имейли, приложения и защитени уебсайтове.\n\nЗа повече информация относно този сертификат се свържете с администратора си.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Трета страна може да наблюдава активността ви в мрежата, включително имейлите, приложенията и защитените уебсайтове.\n\nТова е възможно благодарение на инсталирани на устройството ви надеждни идентификационни данни."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Проверка на сертификатите</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Тих режим"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Сигнал"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Вибриране"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Не ме безпокойте"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Само приоритетни прекъсвания"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Автомат. правила"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"График за „Не безпокойте“"</string>
@@ -2998,9 +3007,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Пренос на данни през Ethernet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" мобилни данни"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" данни през Wi-Fi"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" данни през Ethernet"</small></small></string>
+    <string name="cell_data_template" msgid="4334891288093891726">"Мобилни данни: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
+    <string name="wifi_data_template" msgid="6265570748799357386">"Данни през Wi-Fi: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
+    <string name="ethernet_data_template" msgid="5782476509881033590">"Данни през Ethernet: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>/ограничение за данните: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Цикъл на таксуване"</string>
@@ -3097,11 +3106,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Можете да заявите обаждане или разговор в чата със специалист от екипа за поддръжка и бързо ще се свържем с вас"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Офлайн сте"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"За да се свържете с екипа за поддръжка, първо установете връзка с Wi-Fi или мобилна мрежа за данни."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Още помощ"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Обажд. до специалист"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Имейл до специалист"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Разг. със специалист"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Помощен форум"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Съвети и похвати"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Влезте в профила си, за да се свържете с екипа за поддръжка"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Вход"</string>
@@ -3153,4 +3160,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Освободете място сега"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Мениджър на хранилището"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Услуга за авт. управление на хранилището"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Жестове"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Бързо отваряне на камерата"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"За да отворите бързо камерата, трябва само да докоснете двукратно бутона за захранване. Функцията работи на всеки екран."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Превключване на камерата със завъртане"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"За да превключите между предната и задната камера, завъртете устройството два пъти."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Бърза проверка на екрана"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Раздвижете или повдигнете телефона си, за да го проверите, без да излизате напълно от спящия режим."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Преглед на известията с прекарване на пръст"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"За да проверите известията си от който и да е екран, прекарайте пръст надолу през сензора за отпечатъци."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Вкл."</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Изкл."</string>
 </resources>

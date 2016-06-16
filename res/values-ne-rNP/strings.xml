@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"मेटाउनुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"सुरु गरौं!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"सेन्सरमा आफ्नो औंला राख्नुहोस्  र तपाईंले भाइब्रेसन महसुस गरेपछि उठाउनुहोस्"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"अति उत्तम! अब दोहोर्‍याउनुहोस्।"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"तपाईंको फिंगरप्रिन्टको सबै फरक भागहरु थप्न आफ्नो औंला बिस्तारै सार्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"फिंगरप्रिन्ट थपियो!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"तपाईँ यस आइकनलाई देख्नुहुने समय तपाईँ पहिचानको लागि वा एक खरिदलाई अधिकार दिनको निम्ति आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ।"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"जगाउन र तपाईँको यन्त्रलाई अनलक गर्न फिंगरप्रिन्ट सेन्सरमा छुनुहोस्।"</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"तपाईँले यो आइकन देखेको बेला तपाईँ आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ।"</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"फिंगरप्रिन्ट सेटअप छोड्न चाहनुहुन्छ?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"तपाईँले आफ्नो फोन अनलक गर्ने एक तरिका रूपमा फिंगरप्रिन्ट छान्‍नुभएको छ। यदि तपाईँले अहिले छोड्नु भएमा पछि पुन: सेटअप गर्न पर्नेछ। सेटअप गर्न मात्र केहि मिनेट लाग्‍नेछ।"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"स्क्रिन लक सेटअप गर्नुहोस्"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="other">प्रमाणपत्रहरूलाई विश्वास गर्नुहोस् वा हटाउनुहोस्</item>
       <item quantity="one">प्रमाणपत्रलाई विश्वास गर्नुहोस् वा हटाउनुहोस्</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ले तपाईँको यन्त्रमा प्रमाणपत्र अख्तियारीहरूलाई स्थापना गरेको छ जसले त्यसलाई इमेल, अनुप्रयोग र सुरक्षित वेबसाइटहरू लगायत तपाईँको यन्त्रको नेटवर्क सम्बन्धी गतिविधिलाई अनुगमन गर्न अनुमति दिन सक्छ।\n\nयी प्रमाणपत्रहरू बारे थप जानकारीका लागि आफ्नो प्रशासकलाई सम्पर्क गर्नुहोस्।</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> ले तपाईँको यन्त्रमा प्रमाणपत्र अख्तियारीलाई स्थापना गरेको छ जसले त्यसलाई इमेल, अनुप्रयोग र सुरक्षित वेबसाइटहरू लगायत तपाईँको यन्त्रको नेटवर्क सम्बन्धी गतिविधिलाई अनुगमन गर्न अनुमति दिन सक्छ।\n\nयस प्रमाणपत्र बारे थप जानकारीका लागि आफ्नो प्रशासकलाई सम्पर्क गर्नुहोस्।</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ले तपाईँको कार्य प्रोफाइलका लागि प्रमाणपत्र अख्तियारीहरूलाई स्थापना गरेको छ जसले त्यसलाई इमेल, अनुप्रयोग र सुरक्षित वेबसाइटहरू लगायत कार्य प्रोफाइलको नेटवर्क सम्बन्धी गतिविधिलाई अनुगमन गर्न अनुमति दिन सक्छ।\n\nयी प्रमाणपत्रहरू बारे थप जानकारीका लागि आफ्नो प्रशासकलाई सम्पर्क गर्नुहोस्।</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> ले तपाईँको कार्य प्रोफाइलका लागि प्रमाणपत्र अख्तियारीलाई स्थापना गरेको छ जसले त्यसलाई इमेल, अनुप्रयोग र सुरक्षित वेबसाइटहरू लगायत कार्य प्रोफाइलको नेटवर्क सम्बन्धी गतिविधिलाई अनुगमन गर्न अनुमति दिन सक्छ।\n\nयस प्रमाणपत्र बारे थप जानकारीका लागि आफ्नो प्रशासकलाई सम्पर्क गर्नुहोस्।</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"तपाईँको सञ्जाल गतिविधिको साथ इमेल, अनुप्रयोग र सुरक्षित वेबसाइटहरू सहितको अनुगमन गर्न तेस्रो पक्ष सक्षम छ। \n \n तपाईँको उपकरणमा स्थापित भएको बिश्वस्त गोप्य डेटाले गर्दा यो सम्भव भएको हो।"</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">प्रमाणपत्रहरूलाई जाँच गर्नुहोस्</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"मौन"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"सतर्कता"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"भाइब्रेट"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"नअल्मल्याउनुहोस्"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"प्राथमिकताले मात्र अनुमति  दिन्छ"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"स्वचालित नियमहरू"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"बाधा नपुर्याउने मोडको कार्यतालिका सेट गर्नु"</string>
@@ -2998,9 +3007,12 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"इथरनेट डेटाको उपयोग"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"इथरनेट"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" सेलुलरको डेटा"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Wi-Fi को डेटा"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" इथरनेटको डेटा"</small></small></string>
+    <!-- no translation found for cell_data_template (4334891288093891726) -->
+    <skip />
+    <!-- no translation found for wifi_data_template (6265570748799357386) -->
+    <skip />
+    <!-- no translation found for ethernet_data_template (5782476509881033590) -->
+    <skip />
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> डेटा चेतावनी"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> डेटा चेतावनी / <xliff:g id="ID_2">%2$s</xliff:g> डेटा सीमा"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"बिलिङ चक्र"</string>
@@ -3099,11 +3111,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"तपाईँ कल वा च्याट मार्फत सहायताका लागि अनुरोध गर्न सक्नुहुन्छ र हामी चाँँडै नै तपाईँलाई सम्पर्क गर्नेछौँँ।"</string>
     <string name="support_offline_title" msgid="482049324795211184">"तपाईँ अफलाइन हुनुहुन्छ"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"सहायता प्राप्त गर्न पहिले Wi-Fi वा डेटामा जडान गर्नुहोस्।"</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"मद्दत सम्बन्धी थप विकल्पहरू"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"कल मार्फत सहायता"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"इमेल मार्फत सहायता"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"कुराकानी मार्फत सहायता"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"मद्दतका लागि फोरम"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"सुझाव र जुक्तिहरू"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"सहायताका लागि साइन इन गर्नुहोस्"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"साइन इन गर्नुहोस्"</string>
@@ -3155,4 +3165,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"अहिले रहेको खाली ठाउँ"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"भण्डारण प्रबन्धक"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"स्वतः भण्डारण व्यवस्थापन सेवा"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"इसाराहरू"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"तुरुन्त क्यामेरा खोल्ने"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"द्रुत रूपमा क्यामेरा खोल्न पावर बटनलाई डबल-ट्याप गरे पुग्छ। जुनसुकै स्क्रिनमा काम गर्दछ।"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"क्यामेरा फ्लिप गर्ने"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"अगाडि र पछाडिको क्यामेरा बीच परिवर्तन गर्न दुई पटक बटार्नुहोस्।"</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"द्रुत रूपमा स्क्रिनको जॉंच गर्ने"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"पूर्णतया नउठाइकन आफ्नो फोनको जॉंच गर्न त्यसलाई बिस्तारै हल्लाउनुहोस् वा उठाउनुहोस्।"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"सूचनाहरूका लागि स्वाइप गर्ने"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"जुनसुकै स्क्रिनबाट आफ्ना सूचनाहरूको जाँच गर्न फिंगरप्रिन्ट सेन्सरमा तलतिर स्वाइप गर्नुहोस्।"</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"सक्रिय"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"निष्क्रिय"</string>
 </resources>
