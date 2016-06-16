@@ -2265,8 +2265,14 @@
       <item quantity="one">Tillad eller fjern certifikat</item>
       <item quantity="other">Tillad eller fjern certifikater</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installeret en certifikatmyndighed på din enhed, hvilket giver dem mulighed for at overvåge netværksaktivitet på din enhed, herunder e-mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installeret certifikatmyndigheder på din enhed, hvilket giver dem mulighed for at overvåge netværksaktivitet på din enhed, herunder e-mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om disse certifikater.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installeret en certifikatmyndighed for din arbejdsprofil, hvilket giver dem mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder e-mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installeret certifikatmyndigheder for din arbejdsprofil, hvilket giver dem mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder e-mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om disse certifikater.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"En tredjepart kan overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites.\n\nPålidelige loginoplysninger, der er installeret på din enhed, gør dette muligt."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">Kontrollér certifikat</item>
@@ -2523,6 +2529,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Lydløs"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Advarsel"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrer"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Forstyr ikke"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Prioritet tillader kun"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatiske regler"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Konfigurer Forstyr ikke-plan"</string>
