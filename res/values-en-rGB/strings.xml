@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Delete"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Let\'s start!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Put your finger on the sensor and lift after you feel a vibration"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Great! Now repeat"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Move your finger slightly to add all the different parts of your fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Fingerprint added!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Whenever you see this icon, you can use your fingerprint for identification or to authorise a purchase."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Just touch the fingerprint sensor to wake and unlock your device."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"When you see this icon, you can use your fingerprint."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Skip fingerprint setup?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"You’ve chosen to use your fingerprint as one way to unlock your phone. If you skip now, you’ll need to set this up later. Setup takes only a minute or so."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Set up screen lock"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="other">Trust or remove certificates</item>
       <item quantity="one">Trust or remove certificate</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> has installed certificate authorities on your device, which may allow them to monitor your device network activity, including emails, apps and secure websites.\n\nFor more information about these certificates, contact your admin.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> has installed a certificate authority on your device, which may allow them to monitor your device network activity, including emails, apps and secure websites.\n\nFor more information about this certificate, contact your admin.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> has installed certificate authorities for your work profile, which may allow them to monitor work network activity, including emails, apps and secure websites.\n\nFor more information about these certificates, contact your admin.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> has installed a certificate authority for your work profile, which may allow them to monitor work network activity, including emails, apps and secure websites.\n\nFor more information about this certificate, contact your admin.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"A third party is capable of monitoring your network activity, including emails, apps and secure websites.\n\nA trusted credential installed on your device is making this possible."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">Check certificates</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Silent"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Alert"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrate"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Do not disturb"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Priority only allows"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatic rules"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"Set Do Not Disturb schedule"</string>
@@ -2998,9 +3007,12 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Ethernet data usage"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" mobile data"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Wi-Fi data"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" ethernet data"</small></small></string>
+    <!-- no translation found for cell_data_template (4334891288093891726) -->
+    <skip />
+    <!-- no translation found for wifi_data_template (6265570748799357386) -->
+    <skip />
+    <!-- no translation found for ethernet_data_template (5782476509881033590) -->
+    <skip />
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> Data warning"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> Data warning / <xliff:g id="ID_2">%2$s</xliff:g> Data limit"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Billing cycle"</string>
@@ -3097,11 +3109,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"You can request a support call or chat and we\'ll get back to you quickly"</string>
     <string name="support_offline_title" msgid="482049324795211184">"You\'re offline"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"To reach support, first connect to Wi-Fi or data."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"More help"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Support call"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Support email"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Support chat"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Help forum"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Tips &amp; tricks"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Sign in for support"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Sign In"</string>
@@ -3153,4 +3163,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Free space now"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Storage manager"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Automatic Storage Management Service"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Gestures"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Jump to Camera"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"To quickly open camera, just double-tap the power button. Works from any screen."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Flip camera"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"To switch between front and back cameras, double-twist."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Quick screen check"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"To check your phone without waking it up fully, nudge or pick it up."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Swipe for notifications"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"To check your notifications from any screen, swipe down on the fingerprint sensor."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"On"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Off"</string>
 </resources>

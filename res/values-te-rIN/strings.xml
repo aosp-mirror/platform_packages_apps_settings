@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"తొలగించు"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"ప్రారంభిద్దాం!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"మీ వేలిని సెన్సార్‌పై ఉంచి, మీకు వైబ్రేషన్ అనుభూతి కలిగిన తర్వాత దాన్ని తీసివేయండి"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"అద్భుతం! ఇప్పుడు మళ్లీ చేయండి"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"మీ వేలిముద్రలోని వివిధ భాగాలన్నింటినీ జోడించడానికి మీ వేలిని కొద్దిగా అటూ ఇటూ జరపండి"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"వేలిముద్ర జోడించబడిం.!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"మీకు ఈ చిహ్నం కనిపించినప్పుడల్లా, మీరు గుర్తింపు కోసం లేదా కొనుగోలు ప్రామాణీకరణ కోసం మీ వేలిముద్రను ఉపయోగించవచ్చు."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"మీ పరికరం సక్రియం చేయడానికి మరియు అన్‌లాక్ చేయడానికి వేలిముద్ర సెన్సార్‌ను తాకితే సరిపోతుంది."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"మీకు ఈ చిహ్నం కనిపించినప్పుడు, మీరు మీ వేలిముద్రను ఉపయోగించవచ్చు."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"వేలిముద్ర సెటప్‌ను దాటవేయాలా?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"మీరు మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మీ వేలిముద్రను ఒక మార్గంగా ఎంచుకున్నారు. ఇప్పుడు దాటవేసినా, దీన్ని తర్వాత సెటప్ చేయాల్సి ఉంటుంది. కేవలం ఒక నిమిషంలో సెటప్‌ను పూర్తి చేయవచ్చు."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"స్క్రీన్ లాక్‌ను సెటప్ చేయి"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="other">ప్రమాణపత్రాలను విశ్వసించండి లేదా తీసివేయండి</item>
       <item quantity="one">ప్రమాణపత్రాన్ని విశ్వసించండి లేదా తీసివేయండి</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> మీ పరికరంలో ప్రమాణపత్ర అధికారాలను ఇన్‌స్టాల్ చేసింది, దీని వల్ల వారు ఇమెయిల్‌లు, అనువర్తనాలు మరియు సురక్షితమైన వెబ్‌సైట్‌లతో సహా మీ పరికర నెట్‌వర్క్ కార్యాచరణను పర్యవేక్షించడానికి అనుమతించబడవచ్చు.\n\nఈ ప్రమాణపత్రాల గురించి మరింత సమాచారం కోసం, మీ నిర్వాహకులను సంప్రదించండి.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> మీ పరికరంలో ప్రమాణపత్ర అధికారాన్ని ఇన్‌స్టాల్ చేసింది, దీని వల్ల వారు ఇమెయిల్‌లు, అనువర్తనాలు మరియు సురక్షితమైన వెబ్‌సైట్‌లతో సహా మీ పరికర నెట్‌వర్క్ కార్యాచరణను పర్యవేక్షించడానికి అనుమతించబడవచ్చు.\n\nఈ ప్రమాణపత్రం గురించి మరింత సమాచారం కోసం, మీ నిర్వాహకులను సంప్రదించండి.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> మీ కార్యాలయ ప్రొఫైల్ కోసం ప్రమాణపత్ర అధికారాలను ఇన్‌స్టాల్ చేసింది, దీని వల్ల వారు ఇమెయిల్‌లు, అనువర్తనాలు మరియు సురక్షితమైన వెబ్‌సైట్‌లతో సహా కార్యాలయ నెట్‌వర్క్ కార్యాచరణను పర్యవేక్షించడానికి అనుమతించబడవచ్చు.\n\nఈ ప్రమాణపత్రాల గురించి మరింత సమాచారం కోసం, మీ నిర్వాహకులను సంప్రదించండి.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> మీ కార్యాలయ ప్రొఫైల్ కోసం ప్రమాణపత్ర అధికారాన్ని ఇన్‌స్టాల్ చేసింది, దీని వల్ల వారు ఇమెయిల్‌లు, అనువర్తనాలు మరియు సురక్షితమైన వెబ్‌సైట్‌లతో సహా కార్యాలయ నెట్‌వర్క్ కార్యాచరణను పర్యవేక్షించడానికి అనుమతించబడవచ్చు.\n\nఈ ప్రమాణపత్రం గురించి మరింత సమాచారం కోసం, మీ నిర్వాహకులను సంప్రదించండి.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"మూడవ పక్షం ఇమెయిల్‌లు, అనువర్తనాలు మరియు సురక్షిత వెబ్‌సైట్‌లతో సహా మీ నెట్‌వర్క్ కార్యాచరణను పర్యవేక్షించగలిగే సామర్థ్యాన్ని కలిగి ఉంటారు.\n\nమీ పరికరంలో ఇన్‌స్టాల్ చేయబడిన విశ్వసనీయ ఆధారాల వలన ఇది సాధ్యపడుతుంది."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">ప్రమాణపత్రాలను తనిఖీ చేయి</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"నిశ్శబ్దం"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"హెచ్చరిక"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"వైబ్రేట్"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"అంతరాయం కలిగించవద్దు"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"కేవలం ప్రాధాన్యమైనవి అనుమతించ."</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"స్వయంచాలక నిబంధనలు"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"అంతరాయం వద్దు షెడ్యూల్ సెటప్"</string>
@@ -2998,9 +3007,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"ఈథర్‌నెట్ డేటా వినియోగం"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"ఈథర్‌నెట్"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" సెల్యులార్ డేటా"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Wi-Fi డేటా"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" ఈథర్‌నెట్ డేటా"</small></small></string>
+    <string name="cell_data_template" msgid="4334891288093891726">"<xliff:g id="AMOUNT">^1</xliff:g> సెల్యులార్ డేటా"</string>
+    <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi డేటా"</string>
+    <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> ఈథర్‌నెట్ డేటా"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> డేటా హెచ్చరిక"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> డేటా హెచ్చరిక / <xliff:g id="ID_2">%2$s</xliff:g> డేటా పరిమితి"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"బిల్లింగ్ సైకిల్"</string>
@@ -3097,11 +3106,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"మీరు మద్దతు కాల్‌ను లేదా చాట్‌ను అభ్యర్థించవచ్చు, మేము వీలైనంత త్వరగా మిమ్మల్ని సంప్రదిస్తాము"</string>
     <string name="support_offline_title" msgid="482049324795211184">"మీరు ఆఫ్‌లైన్‌లో ఉన్నారు"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"మద్దతును సంప్రదించడానికి, ముందుగా Wi-Fi లేదా డేటాకి కనెక్ట్ చేయండి."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"మరింత సహాయం"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"మద్దతు కాల్"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"ఇమెయిల్ ద్వారా సహాయం"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"చాట్ ద్వారా సహాయం"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"సహాయ ఫోరమ్"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"చిట్కాలు &amp; కిటుకులు"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"మద్దతు పొందడానికి సైన్ ఇన్ చేయండి"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"సైన్ ఇన్ చేయి"</string>
@@ -3153,4 +3160,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"ఇప్పుడు ఖాళీగా ఉన్న స్థలం"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"నిల్వ నిర్వాహికి"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"స్వయంచాలక నిల్వ నిర్వహణ సేవ"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"సంజ్ఞలు"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"కెమెరాకు వెళ్లు"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"కెమెరాను శీఘ్రంగా తెరవడానికి, పవర్ బటన్‌ను రెండుసార్లు నొక్కండి. ఏ స్క్రీన్ నుండి అయినా పని చేస్తుంది."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"కెమెరాను ముందు/వెనుకకు మార్చడం"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"ముందు ఉన్న మరియు వెనుక ఉన్న కెమెరాల మధ్య మారడానికి, పట్టుకున్న చేతిని రెండుసార్లు ముందుకు వెనుకకు కదపండి."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"శీఘ్ర స్క్రీన్ తనిఖీ"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"మీ ఫోన్‌ను పూర్తిస్థాయిలో నిద్రావస్థ నుండి మేల్కొలపకుండానే తరచి చూడటానికి, దానిపై అలా ఒకసారి తాకండి లేదా దాన్ని చేతుల్లోకి తీసుకోండి."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"నోటిఫికేషన్‌ల కోసం స్వైప్ చేయడం"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"మీ నోటిఫికేషన్‌ను ఏ స్క్రీన్ నుండి అయినా చూడటానికి, వేలిముద్ర సెన్సార్‌పై క్రిందికి స్వైప్ చేయండి."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"ఆన్"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"ఆఫ్"</string>
 </resources>

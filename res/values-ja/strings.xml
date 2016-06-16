@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"削除"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"登録の開始"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"指をセンサーに当て、振動したら離します。"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"引き続き登録を行います"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"指を少しずつ動かして、指紋全体を登録します。"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"指紋の登録完了"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"このアイコンが表示されているときは、本人確認や購入の承認に指紋認証を使用できます。"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"指紋認証センサーに触れるだけで端末を復帰させてロックを解除できます。"</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"このアイコンが表示されている場合は指紋を利用できます。"</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"指紋の設定をスキップしますか？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"スマートフォンのロック解除方法として指紋を選択しています。スキップした場合は、後でセットアップする必要があります。セットアップの所要時間は1分程度です。"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"画面ロックを設定"</string>
@@ -2276,8 +2278,14 @@
       <item quantity="other">証明書の信頼または削除</item>
       <item quantity="one">証明書の信頼または削除</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> が、お使いの端末に認証局をインストールしました。これにより、お使いの端末のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が監視される場合があります。\n\nこれらの証明書について詳しくはドメインの管理者までお問い合わせください。</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> が、お使いの端末に認証局をインストールしました。これにより、お使いの端末のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が監視される場合があります。\n\nこの証明書について詳しくはドメインの管理者までお問い合わせください。</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> が、あなたの仕事用プロファイルに認証局をインストールしました。これにより、仕事のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が監視される場合があります。\n\nこれらの証明書について詳しくはドメインの管理者までお問い合わせください。</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> が、あなたの仕事用プロファイルに認証局をインストールしました。これにより、仕事のネットワーク アクティビティ（メール、アプリ、保護されたウェブサイトなど）が監視される場合があります。\n\nこの証明書について詳しくはドメインの管理者までお問い合わせください。</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"第三者があなたのネットワークアクティビティ（メール、アプリ、保護されたウェブサイトなど）を監視できます。\n\nこれは、信頼できる認証情報が端末にインストールされているためです。"</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">証明書を確認</item>
@@ -2534,6 +2542,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"マナーモード"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"アラート"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"バイブレーション"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"通知を非表示"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"優先する通知のみを許可"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自動ルール"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"[通知を非表示] スケジュールの設定"</string>
@@ -3002,9 +3011,12 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"イーサネット データ使用量"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"イーサネット"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>"（モバイルデータ）"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>"（Wi-Fi データ）"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>"（イーサネット データ）"</small></small></string>
+    <!-- no translation found for cell_data_template (4334891288093891726) -->
+    <skip />
+    <!-- no translation found for wifi_data_template (6265570748799357386) -->
+    <skip />
+    <!-- no translation found for ethernet_data_template (5782476509881033590) -->
+    <skip />
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> データ警告"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> データ警告 / <xliff:g id="ID_2">%2$s</xliff:g> データ上限"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"請求期間"</string>
@@ -3101,11 +3113,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"電話やチャットによるサポートをリクエストすることができます。担当者ができる限り早急にご連絡いたします"</string>
     <string name="support_offline_title" msgid="482049324795211184">"オフラインです"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"サポートに問い合わせるには、Wi-Fi またはデータ ネットワークに接続してください。"</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"さらにサポートが必要な場合"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"電話サポート"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"メールサポート"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"チャット サポート"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"ヘルプ フォーラム"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"使い方のヒント"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"サポートを利用するにはログイン"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"ログイン"</string>
@@ -3157,4 +3167,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"今すぐ空き容量を増やす"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"ストレージ マネージャ"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"自動ストレージ管理サービス"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"操作"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"カメラの起動"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"カメラをすばやく起動するには、電源ボタンをダブルタップします。どの画面からでも操作できます。"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"カメラの切り替え"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"前面と背面のカメラを切り替えるには、2 回ひねる動作を行います。"</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"画面のクイック チェック"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"スマートフォンの画面を完全に ON にせずに確認するには、スマートフォンに軽く触れるか、スマートフォンを持ち上げます。"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"スワイプで通知確認"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"通知を確認するには、指紋認証センサー部分を下にスワイプします。どの画面からでも操作できます。"</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"ON"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"OFF"</string>
 </resources>

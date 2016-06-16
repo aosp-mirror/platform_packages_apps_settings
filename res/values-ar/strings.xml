@@ -367,12 +367,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"حذف"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"البدء"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"ضع إصبعك على المستشعر وارفعه بعد الشعور بالاهتزاز"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"رائع! كرِّر ذلك الآن"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"حرِّك إصبعك قليلاً لإضافة جميع الأجزاء المختلفة لبصمة إصبعك"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"تمت إضافة بصمة إصبع"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"يمكنك استخدام بصمة إصبعك متى رأيت هذا الرمز لتحديد الهوية أو الإذن بعملية شراء."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"لن يلزمك سوى لمس مستشعر بصمات الإصبع لتنشيط الجهاز وإلغاء قفله."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"عند رؤية هذا الرمز، يمكنك استخدام بصمة الإصبع."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"هل تريد تخطي إعداد بصمة الإصبع؟"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"لقد اخترت استخدام بصمة الإصبع كوسيلة لإلغاء تأمين هاتفك. إذا تخطيت ذلك الآن، فستحتاج إلى إعداده لاحقًا. لن يستغرق منك الإعداد سوى دقيقة تقريبًا."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"إعداد تأمين الشاشة"</string>
@@ -2344,8 +2346,22 @@
       <item quantity="other">الثقة أو إزالة الشهادات</item>
       <item quantity="one">الثقة أو إزالة الشهادة</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="zero">تم بواسطة <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> تثبيت شهادات مرجعية على جهازك، مما يسمح بمراقبة أنشطة الشبكة على جهازك، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يمكنك الاتصال بالمشرف.</item>
+      <item quantity="two">تم بواسطة <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> تثبيت شهادتين مرجعيتين على جهازك، مما يسمح بمراقبة أنشطة الشبكة على جهازك، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يمكنك الاتصال بالمشرف.</item>
+      <item quantity="few">تم بواسطة <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> تثبيت شهادات مرجعية على جهازك، مما يسمح بمراقبة أنشطة الشبكة على جهازك، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يمكنك الاتصال بالمشرف.</item>
+      <item quantity="many">تم بواسطة <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> تثبيت شهادات مرجعية على جهازك، مما يسمح بمراقبة أنشطة الشبكة على جهازك، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يمكنك الاتصال بالمشرف.</item>
+      <item quantity="other">تم بواسطة <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> تثبيت شهادات مرجعية على جهازك، مما يسمح بمراقبة أنشطة الشبكة على جهازك، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يمكنك الاتصال بالمشرف.</item>
+      <item quantity="one">تم بواسطة <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> تثبيت شهادة مرجعية على جهازك، مما يسمح بمراقبة أنشطة الشبكة على جهازك، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادة، يمكنك الاتصال بالمشرف.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="zero">تم بواسطة <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> تثبيت شهادات مرجعية لملفك الشخصي للعمل، وهذا قد يسمح بمراقبة أنشطة شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يمكنك الاتصال بالمشرف.</item>
+      <item quantity="two">تم بواسطة <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> تثبيت شهادتين مرجعيتين لملفك الشخصي للعمل، وهذا قد يسمح بمراقبة أنشطة شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يمكنك الاتصال بالمشرف.</item>
+      <item quantity="few">تم بواسطة <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> تثبيت شهادات مرجعية لملفك الشخصي للعمل، وهذا قد يسمح بمراقبة أنشطة شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يمكنك الاتصال بالمشرف.</item>
+      <item quantity="many">تم بواسطة <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> تثبيت شهادات مرجعية لملفك الشخصي للعمل، وهذا قد يسمح بمراقبة أنشطة شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يمكنك الاتصال بالمشرف.</item>
+      <item quantity="other">تم بواسطة <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> تثبيت شهادات مرجعية لملفك الشخصي للعمل، وهذا قد يسمح بمراقبة أنشطة شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادات، يمكنك الاتصال بالمشرف.</item>
+      <item quantity="one">تم بواسطة <xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> تثبيت شهادة مرجعية لملفك الشخصي للعمل، وهذا قد يسمح بمراقبة أنشطة شبكة العمل، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nللحصول على مزيد من المعلومات حول هذه الشهادة، يمكنك الاتصال بالمشرف.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"يُمكن لأي جهة خارجية مراقبة نشاط الشبكة، بما في ذلك الرسائل الإلكترونية والتطبيقات ومواقع الويب الآمنة.\n\nويُمكن لبيانات اعتماد موثوقة ومثبتة على جهاز الكمبيوتر إتاحة إجراء ذلك."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="zero">الاطلاع على الشهادات</item>
@@ -2606,6 +2622,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"صامت"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"تنبيه"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"اهتزاز"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"الرجاء عدم الإزعاج"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"السماح بذات الأولوية فقط"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"القواعد التلقائية"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"تعيين جدول زمني للرجاء عدم الإزعاج"</string>
@@ -3110,9 +3127,12 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"استخدام بيانات إيثرنت"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"إيثرنت"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" من بيانات شبكة الجوّال"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"‏<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" من بيانات Wi-Fi"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" من بيانات إيثرنت"</small></small></string>
+    <!-- no translation found for cell_data_template (4334891288093891726) -->
+    <skip />
+    <!-- no translation found for wifi_data_template (6265570748799357386) -->
+    <skip />
+    <!-- no translation found for ethernet_data_template (5782476509881033590) -->
+    <skip />
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> تحذير البيانات"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> تحذير البيانات / <xliff:g id="ID_2">%2$s</xliff:g> حد البيانات"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"دورة الفوترة"</string>
@@ -3213,11 +3233,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"يمكنك طلب مكالمة أو دردشة مع فريق الدعم وسيتم الرد عليك في أسرع وقت"</string>
     <string name="support_offline_title" msgid="482049324795211184">"أنت الآن بلا اتصال"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"‏للحصول على الدعم، يمكنك أولاً الاتصال بشبكة Wi-Fi أو شبكة بيانات."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"المزيد من المساعدة"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"الاتصال بفريق الدعم"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"البريد الإلكتروني للدعم"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"الدردشة مع فريق الدعم"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"منتدى المساعدة"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"النصائح والحيل"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"تسجيل الدخول للحصول على الدعم"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"تسجيل الدخول"</string>
@@ -3281,4 +3299,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"المساحة الخالية الآن"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"مدير سعة التخزين"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"خدمة إدارة سعة التخزين تلقائيًا"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"الإيماءات"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"الانتقال سريعًا إلى الكاميرا"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"لفتح الكاميرا سريعًا، لن يلزمك سوى النقر نقرًا مزدوجًا على زر التشغيل. ويعمل ذلك في أي شاشة."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"تقليب الكاميرا"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"للتبديل بين الكاميرا الأمامية والخلفية، يمكنك إجراء لفٍّ مزدوج."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"فحص شاشة سريع"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"للتحقق من هاتفك بدون تنشيطه تمامًا، يمكنك تنبيهه أو حمله."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"التمرير سريعًا للإشعارات"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"للاطلاع على الإشعارات في أي شاشة، مرّّر سريعًا لأسفل على مستشعر بصمات الإصبع."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"تشغيل"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"إيقاف"</string>
 </resources>

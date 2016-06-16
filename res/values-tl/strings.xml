@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"I-delete"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Magsimula na tayo!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Ilagay ang iyong daliri sa sensor at iangat pagkatapos mong makaramdam ng pag-vibrate"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"Mahusay! Ulitin ito"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Bahagyang ilipat ang iyong daliri upang idagdag ang lahat ng iba\'t ibang bahagi ng iyong fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Naidagdag fingerprint!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Kapag nakikita mo ang icon na ito, maaari mong gamitin ang iyong fingerprint para sa pagkakakilanlan o upang pahintulutan ang isang pagbili."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Hawakan lang ang sensor ng fingerprint upang i-wake at i-unlock ang iyong device."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"Kapag nakita mo ang icon na ito, maaari mong gamitin ang iyong fingerprint."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Laktawan ang pag-set up ng fingerprint?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Pinili mong gamitin ang iyong fingerprint bilang isang paraan upang i-unlock ang iyong telepono. Kung lalaktaw ka ngayon, kakailanganin mo itong i-set up sa ibang pagkakataon. Tumatagal lang nang isang minuto o higit pa ang pag-setup."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"I-set up ang screen lock"</string>
@@ -2272,8 +2274,14 @@
       <item quantity="one">Pagkatiwalaan o alisin ang mga certificate</item>
       <item quantity="other">Pagkatiwalaan o alisin ang mga certificate</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="one">Nag-install ang <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ng mga certificate authority sa iyong device, na maaaring magbigay-daan sa mga itong masubaybayan ang aktibidad sa network ng iyong device, kabilang ang mga email, app at secure na website.\nPara sa higit pang impormasyon tungkol sa mga certificate na ito, makipag-ugnayan sa iyong admin.\n</item>
+      <item quantity="other">Nag-install ang <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ng mga certificate authority sa iyong device, na maaaring magbigay-daan sa mga itong masubaybayan ang aktibidad sa network ng iyong device, kabilang ang mga email, app at secure na website.\nPara sa higit pang impormasyon tungkol sa mga certificate na ito, makipag-ugnayan sa iyong admin.\n</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="one">Nag-install ang <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ng mga certificate authority para sa iyong profile sa trabaho, na maaaring magbigay-daan sa mga itong masubaybayan ang aktibidad sa network ng trabaho, kabilang ang mga email, app at secure na website.\nPara sa higit pang impormasyon tungkol sa mga certificate na ito, makipag-ugnayan sa iyong admin.\n</item>
+      <item quantity="other">Nag-install ang <xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ng mga certificate authority para sa iyong profile sa trabaho, na maaaring magbigay-daan sa mga itong masubaybayan ang aktibidad sa network ng trabaho, kabilang ang mga email, app at secure na website.\nPara sa higit pang impormasyon tungkol sa mga certificate na ito, makipag-ugnayan sa iyong admin.\n</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"May kakayahan ang isang third party na subaybayan ang aktibidad ng iyong network, kabilang ang mga email, apps, at mga secure website.\n\nGinagawa itong posible ng isang pinagkakatiwalaang credential na naka-install sa iyong device."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">Tingnan ang mga certificate</item>
@@ -2530,6 +2538,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Naka-silent"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Alerto"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Mag-vibrate"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Huwag istorbohin"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Pinapayagan lang ng priyoridad"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Mga awtomatikong panuntunan"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"I-set, Iskedyul ng Huwag Istorbohin"</string>
@@ -2998,9 +3007,12 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Paggamit ng ethernet data"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"Ethernet"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" na cellular data"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" na Wi-Fi data"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" na ethernet data"</small></small></string>
+    <!-- no translation found for cell_data_template (4334891288093891726) -->
+    <skip />
+    <!-- no translation found for wifi_data_template (6265570748799357386) -->
+    <skip />
+    <!-- no translation found for ethernet_data_template (5782476509881033590) -->
+    <skip />
     <string name="cell_warning_only" msgid="763147658209027140">"Babala kapag umabot sa <xliff:g id="ID_1">%1$s</xliff:g> ang Data"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Babala kapag umabot sa <xliff:g id="ID_1">%1$s</xliff:g> ang Data / Limitasyong <xliff:g id="ID_2">%2$s</xliff:g> na Data"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Yugto ng pagsingil"</string>
@@ -3097,11 +3109,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"Maaari kang humiling ng tawag o chat ng suporta at agad kaming makikipag-ugnayan sa iyo"</string>
     <string name="support_offline_title" msgid="482049324795211184">"Offline ka"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Upang makipag-ugnayan sa suporta, kumonekta mula sa Wi-Fi o data."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"Higit pang tulong"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Tawag ng suporta"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"Email ng suporta"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"Chat ng suporta"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"Forum ng tulong"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Mga tip at trick"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Mag-sign in para sa suporta"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Mag-sign in"</string>
@@ -3153,4 +3163,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Libreng espasyo ngayon"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Storage manager"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Serbisyo sa Pamamahala ng Awtomatikong Pag-iimbak"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Mga Galaw"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Pumunta sa Camera"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Upang mabilis na mabuksan ang iyong camera, i-double tap lang ang power button. Gumagana sa kahit saang screen."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Lumipat ng camera"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Upang magpalipat-lipat sa camera sa likod at harap, mag-double twist."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Mabilis na pagtingin sa screen"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Upang tingnan ang iyong telepono nang hindi ito ganap na binubuksan, i-tap o kunin ito."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Mag-swipe upang makita ang mga notification"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Upang makita ang iyong mga notification mula sa kahit saang screen, mag-swipe pababa sa sensor ng fingerprint."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"I-on"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"I-off"</string>
 </resources>

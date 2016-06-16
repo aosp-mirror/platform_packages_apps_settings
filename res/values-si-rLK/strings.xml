@@ -355,12 +355,14 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"මකන්න"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"පටන් ගනිමු!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"ඔබගේ ඇඟිල්ල සංවේදකය මත තබා කම්පනයක් දැනෙන විට ඔසවන්න"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="4327640138658832625">"හොඳයි! දැන් නැවත කරන්න"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"ඔබගේ ඇඟිලි සලකුණේ වෙනස් කොටස් සියල්ල එක් කිරීම සඳහා ඔබගේ ඇඟිල්ල යන්තමින් වෙනස් කරන්න"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"ඇඟිලි සලකුණ එකතු කරන ලදි."</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"මෙම නිරූපකය ඔබ දුටු විට, ඔබව හඳුනා ගැනීම සඳහා හෝ මිලදි ගැනීමක් සඳහා අනුමැතිය දීමට ඔබගේ ඇඟිලි සලකුණු යොදා ගත හැක."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"ඔබේ උපාංගය අවදි කර අගුලු හැරීමට ඇඟිලි සලකුණු සංවේදකය ස්පර්ශ කරන්න."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7280546429133276374">"ඔබ මෙම අයිකනය දකින විට, ඔබට ඔබේ ඇඟිලි සලකුණ භාවිත කළ හැකිය."</string>
+    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"ඇඟිලි සලකුණ පිහිටුවීම මග හරින්නද?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"ඔබ ඔබේ දුරකථනය අගුලු හැරීමේ එක් ක්‍රමයක් ලෙස ඔබේ ඇඟිලි සලකුණ භාවිත කිරීම තෝරා ඇත. ඔබ දැන් මග හැරියොත්, ඔබට මෙය පසුව පිහිටුවීමට අවශ්‍ය වනු ඇත. පිහිටුවීම මිනිත්තුවක් හෝ කිහිපයක් ගනු ඇත."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"තිර අගුළු දැමීම සකසන්න"</string>
@@ -2274,8 +2276,14 @@
       <item quantity="one">සහතික විශ්වාස කරන්න හෝ ඉවත් කරන්න</item>
       <item quantity="other">සහතික විශ්වාස කරන්න හෝ ඉවත් කරන්න</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ඔබේ උපාංගය මත සහතික අධිකාරි ස්ථාපනය කර ඇත, එය ඔවුන්ට ඊ-තැපැල්, යෙදුම්, සහ ආරක්ෂිත වෙබ් අඩවි ඇතුළු, ඔබේ උපාංග ජාල ක්‍රියාකාරකම් නිරීක්ෂණය කිරීමට ඉඩ දිය හැකිය.\n\nමෙම සහතික ගැන තවත් තොරතුරු සඳහා, ඔබේ පරිපාලක අමතන්න.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ඔබේ උපාංගය මත සහතික අධිකාරියක් ස්ථාපනය කර ඇත, එය ඔවුන්ට ඊ-තැපැල්, යෙදුම්, සහ ආරක්ෂිත වෙබ් අඩවි ඇතුළු, ඔබේ උපාංග ජාල ක්‍රියාකාරකම් නිරීක්ෂණය කිරීමට ඉඩ දිය හැකිය.\n\nමෙම සහතික ගැන තවත් තොරතුරු සඳහා, ඔබේ පරිපාලක අමතන්න.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ඔබේ කාර්යාල පැතිකඩ සඳහා සහතික අධිකාරි ස්ථාපනය කර ඇත, එය ඔවුන්ට ඊ-තැපැල්, යොදුම්, සහ ආරක්ෂිත වෙබ් අඩවි ඇතුළු, කාර්යාල ජාල ක්‍රියාකාරකම් නිරීක්ෂණය කිරීමට ඉඩ දිය හැකිය.\n\nමෙම සහතික ගැන තවත් තොරතුරු සඳහා, ඔබේ පරිපාලක අමතන්න.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> ඔබේ කාර්යාල පැතිකඩ සඳහා සහතික අධිකාරි ස්ථාපනය කර ඇත, එය ඔවුන්ට ඊ-තැපැල්, යොදුම්, සහ ආරක්ෂිත වෙබ් අඩවි ඇතුළු, කාර්යාල ජාල ක්‍රියාකාරකම් නිරීක්ෂණය කිරීමට ඉඩ දිය හැකිය.\n\nමෙම සහතික ගැන තවත් තොරතුරු සඳහා, ඔබේ පරිපාලක අමතන්න.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"ඊ-තැපැල්, යෙදුම්, සහ ආරක්ෂිත වෙබ් අඩවි ඇතුලත්ව ඔබේ ජාල ක්‍රියාකාරකම්, අධීක්ෂණය කිරීමට තෙවන පාර්ශවයට ඇත.\n\nඔබගේ උපාංගයේ ස්ථාපිත විශ්වාසී අක්තපත්‍ර මෙය සිදුවීම කරයි."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">සහතික පරීක්ෂා කරන්න</item>
@@ -2532,6 +2540,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"නිහඬ"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"ඇඟවීම"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"කම්පනය වන්න"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"බාධා කරන්න එපා"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"ප්‍රමුඛතා පමණි ඉඩ දෙයි"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"ස්වයංක්‍රීය රීති"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="3373871113435938830">"බාධා නොකරන්න කාල සටහන සැකසීම"</string>
@@ -3000,9 +3009,9 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"ඊතර්නෙට් දත්ත භාවිතය"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="ethernet" msgid="6600095783781389720">"ඊතර්නෙට්"</string>
-    <string name="cell_data_template" msgid="3269898985639199370">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" සෙලියුලර් දත්ත"</small></small></string>
-    <string name="wifi_data_template" msgid="986662116811359772">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" Wi-Fi දත්ත"</small></small></string>
-    <string name="ethernet_data_template" msgid="3354896094040996204">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small><small><small>" ඊතර්නෙට් දත්ත"</small></small></string>
+    <string name="cell_data_template" msgid="4334891288093891726">"සෙලියුලර් දත්ත <xliff:g id="AMOUNT">^1</xliff:g>"</string>
+    <string name="wifi_data_template" msgid="6265570748799357386">"Wi-Fi දත්ත <xliff:g id="AMOUNT">^1</xliff:g>"</string>
+    <string name="ethernet_data_template" msgid="5782476509881033590">"ඊතර්නෙට් දත්ත <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> දත්ත අනතුරු ඇඟවීම"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> දත්ත අනතුරු ඇඟවීම / <xliff:g id="ID_2">%2$s</xliff:g> දත්ත සීමාව"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"බිල්පත් චක්‍රය"</string>
@@ -3099,11 +3108,9 @@
     <string name="support_escalation_summary" msgid="5284600375153448787">"ඔබට සහාය ඇමතුමක් හෝ කතාබහක් ඉල්ලීමට හැකි අතර එවිට අපි ඉක්මනින් ඔබට ආපසු ඇමතීම කරමු"</string>
     <string name="support_offline_title" msgid="482049324795211184">"ඔබ නොබැඳිය"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"සහාය වෙත ළඟා වීමට, පළමුව Wi-Fi හෝ දත්ත වෙත සම්බන්ධ වන්න."</string>
-    <string name="support_more_help_title" msgid="6923257931625780264">"තවත් උදවු"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"සහාය ඇමතුම"</string>
     <string name="support_escalation_by_email" msgid="2582004943422798901">"සහාය ඊ-තැපැල්"</string>
     <string name="support_escalation_by_chat" msgid="3284697227089466497">"සහාය කතාබහ"</string>
-    <string name="support_forum_title" msgid="201753198197433199">"උදවු සංසදය"</string>
     <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"ඉඟි සහ උපක්‍රම"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"සහාය සඳහා පුරන්න"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"පුරන්න"</string>
@@ -3155,4 +3162,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"දැන් ඉඩ නිදහස් කර ගන්න"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"ගබඩා කළමනාකරු"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"ස්වයංක්‍රිය ගබඞා කළමනාකරණ සේවය"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"ඉංගිත"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"කැමරා වෙත පනින්න"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"ඉක්මනින් කැමරාව විවෘත කිරීමට, හුදෙක් බලය බොත්තම දෙවරක් තට්ටු කරන්න. ඕනෑම තිරයක සිට ක්රියා කරයි."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"ෆ්ලිප් කැමරාව"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"ඉදිරිපස සහ පසුපස කැමරා අතර මාරු වීමට, දෙවරක්-කරකවන්න."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"ඉක්මන් තිර පරීක්ෂාව"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"සම්පූර්ණයෙන් එය අවදි නොකොට ඔබගේ දුරකථනය පරික්ෂා කිරීමට එය සෙමින් අතුල්ලන්න නැතහොත් ඔසවන්න"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"දැනුම්දීම් සඳහා ස්වයිප් කරන්න"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"ඕනෑම තිරයකින් ඔබගේ දැනුම්දීම් පරීක්ෂා කිරීම සඳහා, ඇඟිලි සලකුණු සංවේදකය මත පහළට ස්වයිප් කරන්න."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"ක්‍රියාත්මකයි"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"ක්‍රියාවිරහිතයි"</string>
 </resources>
