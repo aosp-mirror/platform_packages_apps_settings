@@ -147,10 +147,24 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
     private void addEscalationCards() {
         if (mHasInternet) {
-            mSupportData.add(new SupportData.Builder(TYPE_TITLE)
-                    .setText1(R.string.support_escalation_title)
-                    .setText2(R.string.support_escalation_summary)
-                    .build());
+            if (mSupportFeatureProvider.isAlwaysOperating(PHONE)
+                || mSupportFeatureProvider.isAlwaysOperating(CHAT)) {
+                mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+                        .setText1(R.string.support_escalation_24_7_title)
+                        .setText2(R.string.support_escalation_24_7_summary)
+                        .build());
+            } else if (mSupportFeatureProvider.isOperatingNow(PHONE)
+                || mSupportFeatureProvider.isOperatingNow(CHAT)) {
+                mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+                        .setText1(R.string.support_escalation_title)
+                        .setText2(R.string.support_escalation_summary)
+                        .build());
+            } else {
+                mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+                        .setText1(R.string.support_escalation_closed_title)
+                        .setText2(R.string.support_escalation_closed_summary)
+                        .build());
+            }
         } else {
             mSupportData.add(new SupportData.Builder(TYPE_TITLE)
                     .setText1(R.string.support_offline_title)
@@ -161,10 +175,12 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE)) {
             builder.setText1(R.string.support_escalation_by_phone);
             builder.setSummary1(mSupportFeatureProvider.getEstimatedWaitTime(mActivity, PHONE));
+            builder.setEnabled1(mSupportFeatureProvider.isOperatingNow(PHONE));
         }
         if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, CHAT)) {
             builder.setText2(R.string.support_escalation_by_chat);
             builder.setSummary2(mSupportFeatureProvider.getEstimatedWaitTime(mActivity, CHAT));
+            builder.setEnabled2(mSupportFeatureProvider.isOperatingNow(CHAT));
         }
         mSupportData.add(builder.build());
     }
@@ -199,7 +215,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         } else {
             holder.text1View.setText(data.text1);
             holder.text1View.setOnClickListener(mEscalationClickListener);
-            holder.text1View.setEnabled(mHasInternet);
+            holder.text1View.setEnabled(data.enabled1 && mHasInternet);
             holder.text1View.setVisibility(View.VISIBLE);
         }
         if (data.text2 == 0) {
@@ -207,7 +223,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         } else {
             holder.text2View.setText(data.text2);
             holder.text2View.setOnClickListener(mEscalationClickListener);
-            holder.text2View.setEnabled(mHasInternet);
+            holder.text2View.setEnabled(data.enabled2 && mHasInternet);
             holder.text2View.setVisibility(View.VISIBLE);
         }
         if (holder.summary1View != null) {
@@ -319,6 +335,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         final int text1;
         @StringRes
         final int text2;
+        final boolean enabled1;
+        final boolean enabled2;
         final String summary1;
         final String summary2;
 
@@ -329,6 +347,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             this.text2 = builder.mText2;
             this.summary1 = builder.mSummary1;
             this.summary2 = builder.mSummary2;
+            this.enabled1 = builder.mEnabled1;
+            this.enabled2 = builder.mEnabled2;
             this.intent = builder.mIntent;
         }
 
@@ -337,6 +357,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             private final int mType;
             @DrawableRes
             private int mIcon;
+            private boolean mEnabled1;
+            private boolean mEnabled2;
             @StringRes
             private int mText1;
             @StringRes
@@ -354,6 +376,11 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 return this;
             }
 
+            Builder setEnabled1(boolean enabled) {
+                mEnabled1 = enabled;
+                return this;
+            }
+
             Builder setText1(@StringRes int text1) {
                 mText1 = text1;
                 return this;
@@ -361,6 +388,11 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
             Builder setSummary1(String summary1) {
                 mSummary1 = summary1;
+                return this;
+            }
+
+            Builder setEnabled2(boolean enabled) {
+                mEnabled2 = enabled;
                 return this;
             }
 
