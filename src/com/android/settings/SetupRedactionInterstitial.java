@@ -19,11 +19,8 @@ package com.android.settings;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.android.settings.notification.RedactionInterstitial;
 
@@ -55,39 +52,8 @@ public class SetupRedactionInterstitial extends RedactionInterstitial {
         super.onApplyThemeResource(theme, resid, first);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstance) {
-        super.onCreate(savedInstance);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-        layout.setFitsSystemWindows(false);
-    }
+    public static class SetupRedactionInterstitialFragment extends RedactionInterstitialFragment {
 
-    public static class SetupRedactionInterstitialFragment extends RedactionInterstitialFragment
-            implements View.OnClickListener {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.setup_redaction_interstitial, container, false);
-        }
-
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            final Button button = (Button) view.findViewById(R.id.redaction_next_button);
-            button.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (v.getId() == R.id.redaction_next_button) {
-                final SetupRedactionInterstitial activity =
-                        (SetupRedactionInterstitial) getActivity();
-                if (activity != null) {
-                    activity.setResult(RESULT_OK, activity.getResultIntentData());
-                    finish();
-                }
-            }
-        }
+        // Setup wizard specific UI customizations can be done here
     }
 }

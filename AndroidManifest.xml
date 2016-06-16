@@ -1594,7 +1594,8 @@
                        android:resource="@string/notification_suggestion_summary" />
         </activity>
 
-        <activity android:name=".notification.RedactionInterstitial"/>
+        <activity android:name=".notification.RedactionInterstitial"
+            android:theme="@style/SetupWizardTheme.Light" />
 
         <activity android:name=".notification.RedactionSettingsStandalone"
                   android:exported="true">
@@ -1641,7 +1642,7 @@
         <activity android:name=".fingerprint.SetupFingerprintEnrollIntroduction"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
-            android:theme="@style/SetupWizardDisableAppStartingTheme">
+            android:theme="@style/SetupWizardTheme.Light">
             <intent-filter>
                 <action android:name="android.settings.FINGERPRINT_SETUP" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1661,7 +1662,7 @@
 
         <activity android:name="SetupChooseLockGeneric"
             android:taskAffinity="com.android.wizard"
-            android:theme="@style/SetupWizardDisableAppStartingTheme"
+            android:theme="@style/SetupWizardTheme.Light"
             android:label="@string/lock_settings_picker_title">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.SETUP_LOCK_SCREEN" />
@@ -1719,25 +1720,30 @@
         <activity android:name="SetupChooseLockPattern"
             android:exported="false"
             android:taskAffinity="com.android.wizard"
-            android:theme="@style/SetupWizardDisableAppStartingTheme" />
+            android:theme="@style/SetupWizardTheme.Light" />
 
-        <activity android:name="ChooseLockPattern" android:exported="false"/>
+        <activity android:name="ChooseLockPattern"
+            android:exported="false"
+            android:theme="@style/SetupWizardTheme.Light" />
 
         <activity android:name="SetupChooseLockPassword"
             android:exported="false"
             android:taskAffinity="com.android.wizard"
-            android:theme="@style/SetupWizardDisableAppStartingTheme"
+            android:theme="@style/SetupWizardTheme.Light"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
-        <activity android:name="ChooseLockPassword" android:exported="false"
+        <activity android:name="ChooseLockPassword"
+            android:exported="false"
+            android:theme="@style/SetupWizardTheme.Light"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <activity android:name=".SetupEncryptionInterstitial"
             android:label="@string/encryption_interstitial_header"
             android:taskAffinity="com.android.wizard"
-            android:theme="@style/SetupWizardDisableAppStartingTheme"/>
+            android:theme="@style/SetupWizardTheme.Light"/>
 
-        <activity android:name=".EncryptionInterstitial"/>
+        <activity android:name=".EncryptionInterstitial"
+            android:theme="@style/SetupWizardTheme.Light" />
 
         <!-- Runs in the phone process since it needs access to the Phone object -->
         <activity android:name=".Settings$StatusActivity"

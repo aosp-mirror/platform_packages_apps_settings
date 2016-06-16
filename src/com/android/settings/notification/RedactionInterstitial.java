@@ -25,8 +25,9 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -59,6 +60,13 @@ public class RedactionInterstitial extends SettingsActivity {
         return RedactionInterstitialFragment.class.getName().equals(fragmentName);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
+        layout.setFitsSystemWindows(false);
+    }
+
     /**
      * Create an intent for launching RedactionInterstitial.
      * @return An intent to launch the activity is if is available, @null if the activity is not
@@ -66,10 +74,6 @@ public class RedactionInterstitial extends SettingsActivity {
      */
     public static Intent createStartIntent(Context ctx, int userId) {
         return new Intent(ctx, RedactionInterstitial.class)
-                .putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, true)
-                .putExtra(EXTRA_PREFS_SET_BACK_TEXT, (String) null)
-                .putExtra(EXTRA_PREFS_SET_NEXT_TEXT, ctx.getString(
-                        R.string.app_notifications_dialog_done))
                 .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID,
                         Utils.isManagedProfile(UserManager.get(ctx), userId)
                             ? R.string.lock_screen_notifications_interstitial_title_profile
@@ -78,7 +82,8 @@ public class RedactionInterstitial extends SettingsActivity {
     }
 
     public static class RedactionInterstitialFragment extends SettingsPreferenceFragment
-            implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
+            implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener,
+            View.OnClickListener {
 
         private RadioGroup mRadioGroup;
         private RestrictedRadioButton mShowAllButton;
@@ -119,6 +124,20 @@ public class RedactionInterstitial extends SettingsActivity {
                     .setText(R.string.lock_screen_notifications_summary_hide_profile);
                 ((RadioButton) view.findViewById(R.id.hide_all))
                     .setText(R.string.lock_screen_notifications_summary_disable_profile);
+            }
+
+            final Button button = (Button) view.findViewById(R.id.redaction_done_button);
+            button.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.redaction_done_button) {
+                final RedactionInterstitial activity = (RedactionInterstitial) getActivity();
+                if (activity != null) {
+                    activity.setResult(RESULT_OK, activity.getResultIntentData());
+                    finish();
+                }
             }
         }
 

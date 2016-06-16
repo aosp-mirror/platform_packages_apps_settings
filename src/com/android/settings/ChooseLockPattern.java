@@ -21,12 +21,12 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
@@ -37,6 +37,7 @@ import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
 import com.android.settings.notification.RedactionInterstitial;
+import com.android.setupwizardlib.GlifLayout;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
@@ -113,6 +114,8 @@ public class ChooseLockPattern extends SettingsActivity {
         super.onCreate(savedInstanceState);
         CharSequence msg = getText(R.string.lockpassword_choose_your_pattern_header);
         setTitle(msg);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
+        layout.setFitsSystemWindows(false);
     }
 
     @Override
@@ -391,7 +394,10 @@ public class ChooseLockPattern extends SettingsActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.choose_lock_pattern, container, false);
+            final GlifLayout layout = (GlifLayout) inflater.inflate(
+                    R.layout.choose_lock_pattern, container, false);
+            layout.setHeaderText(getActivity().getTitle());
+            return layout;
         }
 
         @Override
