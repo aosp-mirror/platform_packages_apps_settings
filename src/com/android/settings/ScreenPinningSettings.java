@@ -28,6 +28,7 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Switch;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
@@ -65,14 +66,21 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mLockPatternUtils = new LockPatternUtils(activity);
 
-        View emptyView = LayoutInflater.from(activity)
-                .inflate(R.layout.screen_pinning_instructions, null);
-        setEmptyView(emptyView);
 
         mSwitchBar = activity.getSwitchBar();
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
         mSwitchBar.setChecked(isLockToAppEnabled(getActivity()));
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ViewGroup parent = (ViewGroup) view.findViewById(android.R.id.list_container);
+        View emptyView = LayoutInflater.from(getContext())
+                .inflate(R.layout.screen_pinning_instructions, parent, false);
+        parent.addView(emptyView);
+        setEmptyView(emptyView);
     }
 
     @Override
