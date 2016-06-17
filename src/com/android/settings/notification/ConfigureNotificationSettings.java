@@ -57,8 +57,8 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     private Context mContext;
 
     private TwoStatePreference mNotificationPulse;
-    private NotificationLockscreenPreference mLockscreen;
-    private NotificationLockscreenPreference mLockscreenProfile;
+    private RestrictedDropDownPreference mLockscreen;
+    private RestrictedDropDownPreference mLockscreenProfile;
     private boolean mSecure;
     private boolean mSecureProfile;
     private int mLockscreenSelectedValue;
@@ -148,7 +148,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     }
 
     private void initLockscreenNotifications() {
-        mLockscreen = (NotificationLockscreenPreference) getPreferenceScreen().findPreference(
+        mLockscreen = (RestrictedDropDownPreference) getPreferenceScreen().findPreference(
                 KEY_LOCK_SCREEN_NOTIFICATIONS);
         if (mLockscreen == null) {
             Log.i(TAG, "Preference not found: " + KEY_LOCK_SCREEN_NOTIFICATIONS);
@@ -177,9 +177,6 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
             setRestrictedIfNotificationFeaturesDisabled(summaryHideEntry, summaryHideEntryValue,
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         }
-
-        mLockscreen.setRemoteInputRestricted(RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
-                mContext, DevicePolicyManager.KEYGUARD_DISABLE_REMOTE_INPUT, UserHandle.myUserId()));
 
         mLockscreen.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mLockscreen.setEntryValues(values.toArray(new CharSequence[values.size()]));
@@ -211,13 +208,12 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
 
     // === Lockscreen (public / private) notifications ===
     private void initLockscreenNotificationsForProfile() {
-        mLockscreenProfile = (NotificationLockscreenPreference) getPreferenceScreen()
+        mLockscreenProfile = (RestrictedDropDownPreference) getPreferenceScreen()
                 .findPreference(KEY_LOCK_SCREEN_PROFILE_NOTIFICATIONS);
         if (mLockscreenProfile == null) {
             Log.i(TAG, "Preference not found: " + KEY_LOCK_SCREEN_PROFILE_NOTIFICATIONS);
             return;
         }
-        mLockscreenProfile.setUserId(mProfileChallengeUserId);
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
         entries.add(getString(R.string.lock_screen_notifications_summary_disable_profile));
@@ -243,14 +239,14 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         }
 
-        mLockscreen.setRemoteInputRestricted(RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
-                mContext, DevicePolicyManager.KEYGUARD_DISABLE_REMOTE_INPUT,
-                mProfileChallengeUserId));
+        mLockscreenProfile.setOnPreClickListener(
+                (Preference p) -> Utils.startQuietModeDialogIfNecessary(mContext,
+                        UserManager.get(mContext),
+                        mProfileChallengeUserId)
+        );
 
         mLockscreenProfile.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mLockscreenProfile.setEntryValues(values.toArray(new CharSequence[values.size()]));
-        // Work profile does not support this settings as we do not have a policy to enforce it yet
-        mLockscreenProfile.setRemoteInputCheckBoxEnabled(false);
         updateLockscreenNotificationsForProfile();
         if (mLockscreenProfile.getEntries().length > 1) {
             mLockscreenProfile.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -284,15 +280,18 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
             CharSequence entryValue, int keyguardNotificationFeatures) {
         EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
                 mContext, keyguardNotificationFeatures, UserHandle.myUserId());
-        if (admin != null) {
-            RestrictedItem item = new RestrictedItem(entry, entryValue, admin);
+        if (admin != null && mLockscreen != null) {
+            RestrictedDropDownPreference.RestrictedItem item =
+                    new RestrictedDropDownPreference.RestrictedItem(entry, entryValue, admin);
             mLockscreen.addRestrictedItem(item);
         }
         if (mProfileChallengeUserId != UserHandle.USER_NULL) {
             EnforcedAdmin profileAdmin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
                     mContext, keyguardNotificationFeatures, mProfileChallengeUserId);
-            if (profileAdmin != null) {
-                RestrictedItem item = new RestrictedItem(entry, entryValue, profileAdmin);
+            if (profileAdmin != null && mLockscreenProfile != null) {
+                RestrictedDropDownPreference.RestrictedItem item =
+                        new RestrictedDropDownPreference.RestrictedItem(
+                                entry, entryValue, profileAdmin);
                 mLockscreenProfile.addRestrictedItem(item);
             }
         }
