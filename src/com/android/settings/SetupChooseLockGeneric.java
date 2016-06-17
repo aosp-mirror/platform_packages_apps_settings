@@ -85,10 +85,14 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                     R.dimen.suw_items_glif_text_divider_inset));
 
             layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
-            layout.setHeaderText(mForFingerprint ?
-                    R.string.lock_settings_picker_title
-                    : R.string.setup_lock_settings_picker_title);
 
+            int titleResource = mForFingerprint ?
+                    R.string.lock_settings_picker_title : R.string.setup_lock_settings_picker_title;
+            if (getActivity() != null) {
+                getActivity().setTitle(titleResource);
+            }
+
+            layout.setHeaderText(titleResource);
             // Use the dividers in SetupWizardRecyclerLayout. Suppress the dividers in
             // PreferenceFragment.
             setDivider(null);
