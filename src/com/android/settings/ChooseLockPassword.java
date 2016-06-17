@@ -25,7 +25,6 @@ import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.UserHandle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
@@ -40,6 +39,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -50,6 +50,7 @@ import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
 import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.notification.RedactionInterstitial;
+import com.android.setupwizardlib.GlifLayout;
 
 public class ChooseLockPassword extends SettingsActivity {
     public static final String PASSWORD_MIN_KEY = "lockscreen.password_min";
@@ -143,6 +144,8 @@ public class ChooseLockPassword extends SettingsActivity {
         super.onCreate(savedInstanceState);
         CharSequence msg = getText(R.string.lockpassword_choose_your_password_header);
         setTitle(msg);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
+        layout.setFitsSystemWindows(false);
     }
 
     public static class ChooseLockPasswordFragment extends InstrumentedFragment
@@ -287,7 +290,10 @@ public class ChooseLockPassword extends SettingsActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.choose_lock_password, container, false);
+            GlifLayout layout = (GlifLayout) inflater.inflate(
+                    R.layout.choose_lock_password, container, false);
+            layout.setHeaderText(getActivity().getTitle());
+            return layout;
         }
 
         @Override

@@ -23,19 +23,26 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.utils.SettingsDividerItemDecoration;
+import com.android.setupwizardlib.GlifPreferenceLayout;
 
 import java.util.List;
 
 public class EncryptionInterstitial extends SettingsActivity {
-    private final static String TAG = EncryptionInterstitial.class.getSimpleName();
+    private static final String TAG = EncryptionInterstitial.class.getSimpleName();
 
     protected static final String EXTRA_PASSWORD_QUALITY = "extra_password_quality";
     protected static final String EXTRA_UNLOCK_METHOD_INTENT = "extra_unlock_method_intent";
@@ -61,6 +68,13 @@ public class EncryptionInterstitial extends SettingsActivity {
                 .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.encryption_interstitial_header)
                 .putExtra(EXTRA_REQUIRE_PASSWORD, requirePasswordDefault)
                 .putExtra(EXTRA_UNLOCK_METHOD_INTENT, unlockMethodIntent);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
+        layout.setFitsSystemWindows(false);
     }
 
     public static class EncryptionInterstitialFragment extends SettingsPreferenceFragment
@@ -126,7 +140,8 @@ public class EncryptionInterstitial extends SettingsActivity {
                     disableId = R.string.encrypt_dont_require_password;
                     break;
             }
-            TextView message = createHeaderView();
+            TextView message = (TextView) LayoutInflater.from(getActivity()).inflate(
+                    R.layout.encryption_interstitial_header, null, false);
             message.setText(msgId);
             setHeaderView(message);
 
@@ -138,10 +153,25 @@ public class EncryptionInterstitial extends SettingsActivity {
                     EXTRA_REQUIRE_PASSWORD, true));
         }
 
-        protected TextView createHeaderView() {
-            TextView message = (TextView) LayoutInflater.from(getActivity()).inflate(
-                    R.layout.encryption_interstitial_header, null, false);
-            return message;
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+            layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
+
+            layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
+            layout.setHeaderText(getActivity().getTitle());
+
+            // Use the dividers in SetupWizardRecyclerLayout. Suppress the dividers in
+            // PreferenceFragment.
+            setDivider(null);
+        }
+
+        @Override
+        public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
+                Bundle savedInstanceState) {
+            GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
+            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
         }
 
         protected void startLockIntent() {
