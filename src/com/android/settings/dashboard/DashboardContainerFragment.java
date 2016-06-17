@@ -24,17 +24,16 @@ import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.widget.SlidingTabLayout;
-import com.android.settingslib.HelpUtils;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 /**
@@ -51,7 +50,7 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return DASHBOARD_CONTAINER;
+        return MetricsProto.MetricsEvent.DASHBOARD_CONTAINER;
     }
 
     @Override
@@ -63,9 +62,11 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View content = inflater.inflate(R.layout.dashboard_container, parent, false);
+        final Context context = getContext();
         mViewPager = (ViewPager) content.findViewById(R.id.pager);
-        mPagerAdapter = new DashboardViewPagerAdapter(getContext(), getChildFragmentManager());
+        mPagerAdapter = new DashboardViewPagerAdapter(context, getChildFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.addOnPageChangeListener(new TabInstrumentationListener(context));
         mHeaderView = inflater.inflate(R.layout.dashboard_container_header, parent, false);
         ((SlidingTabLayout) mHeaderView).setViewPager(mViewPager);
         return content;
@@ -123,6 +124,39 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
         @Override
         public int getCount() {
             return mSupportFeatureProvider == null ? 1 : 2;
+        }
+    }
+
+    private static final class TabInstrumentationListener
+            implements ViewPager.OnPageChangeListener {
+
+        private final Context mContext;
+
+        public TabInstrumentationListener(Context context) {
+            mContext = context;
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            // Do nothing.
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            // Do nothing
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            switch (position) {
+                case INDEX_SUMMARY_FRAGMENT:
+                    MetricsLogger.action(mContext, MetricsProto.MetricsEvent.ACTION_SELECT_SUMMARY);
+                    break;
+                case INDEX_SUPPORT_FRAGMENT:
+                    MetricsLogger.action(
+                            mContext, MetricsProto.MetricsEvent.ACTION_SELECT_SUPPORT_FRAGMENT);
+                    break;
+            }
         }
     }
 }

@@ -28,11 +28,8 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     // Declare new temporary categories here, starting after this value.
     public static final int UNDECLARED = 100000;
 
-    public static final int DASHBOARD_CONTAINER = UNDECLARED + 1;
     // Used by PreferenceActivity for the dummy fragment it adds, no useful data here.
-    public static final int PREFERENCE_ACTIVITY_FRAGMENT = UNDECLARED + 2;
-
-    public static final int SUPPORT_FRAGMENT = UNDECLARED + 3;
+    public static final int PREFERENCE_ACTIVITY_FRAGMENT = UNDECLARED + 1;
 
     /**
      * Declare the view of this category.
