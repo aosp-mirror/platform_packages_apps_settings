@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings.Global;
 import android.provider.Settings.Secure;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
@@ -80,6 +81,16 @@ public class GestureSettings extends SettingsPreferenceFragment implements
             removePreference(PREF_KEY_PICK_UP_AND_NUDGE);
         }
 
+        // Fingerprint slide for notifications
+        if (isSystemUINavigationAvailable(context)) {
+            GesturePreference preference =
+                    (GesturePreference) findPreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
+            preference.setChecked(isSystemUINavigationEnabled(context));
+            preference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
+        }
+
     }
 
     @Override
@@ -87,10 +98,13 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         boolean enabled = (boolean) newValue;
         String key = preference.getKey();
         if (PREF_KEY_DOUBLE_TAP_POWER.equals(key)) {
-            Secure.putInt(getActivity().getContentResolver(),
+            Secure.putInt(getContentResolver(),
                     Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, enabled ? 0 : 1);
         } else if (PREF_KEY_PICK_UP_AND_NUDGE.equals(key)) {
-            Secure.putInt(getActivity().getContentResolver(), Secure.DOZE_ENABLED, enabled ? 1 : 0);
+            Secure.putInt(getContentResolver(), Secure.DOZE_ENABLED, enabled ? 1 : 0);
+        } else if (PREF_KEY_SWIPE_DOWN_FINGERPRINT.equals(key)) {
+            Global.putInt(getContentResolver(),
+                    Global.SYSTEM_NAVIGATION_KEYS_ENABLED, enabled ? 1 : 0);
         }
         return true;
     }
@@ -112,6 +126,16 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                     com.android.internal.R.string.config_dozeComponent);
         }
         return !TextUtils.isEmpty(name);
+    }
+
+    private static boolean isSystemUINavigationAvailable(Context context) {
+        return context.getResources().getBoolean(
+                com.android.internal.R.bool.config_supportSystemNavigationKeys);
+    }
+
+    private static boolean isSystemUINavigationEnabled(Context context) {
+        return Global.getInt(context.getContentResolver(), Global.SYSTEM_NAVIGATION_KEYS_ENABLED, 0)
+                == 1;
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -137,6 +161,9 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                 }
                 if (!isDozeAvailable(context)) {
                     result.add(PREF_KEY_PICK_UP_AND_NUDGE);
+                }
+                if (!isSystemUINavigationAvailable(context)) {
+                    result.add(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
                 }
                 return result;
             }
