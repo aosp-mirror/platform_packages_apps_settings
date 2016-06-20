@@ -21,8 +21,10 @@ import android.annotation.LayoutRes;
 import android.annotation.StringRes;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -153,30 +155,31 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     private void addEscalationCards() {
         if (mHasInternet) {
             if (mSupportFeatureProvider.isAlwaysOperating(PHONE)
-                || mSupportFeatureProvider.isAlwaysOperating(CHAT)) {
-                mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+                    || mSupportFeatureProvider.isAlwaysOperating(CHAT)) {
+                mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
                         .setText1(R.string.support_escalation_24_7_title)
-                        .setText2(R.string.support_escalation_24_7_summary)
+                        .setText2(mActivity.getString(R.string.support_escalation_24_7_summary))
                         .build());
             } else if (mSupportFeatureProvider.isOperatingNow(PHONE)
-                || mSupportFeatureProvider.isOperatingNow(CHAT)) {
-                mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+                    || mSupportFeatureProvider.isOperatingNow(CHAT)) {
+                mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
                         .setText1(R.string.support_escalation_title)
                         .setText2(R.string.support_escalation_summary)
                         .build());
             } else {
-                mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+                mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
                         .setText1(R.string.support_escalation_closed_title)
-                        .setText2(R.string.support_escalation_closed_summary)
+                        .setText2(mSupportFeatureProvider.getOperationHours(mActivity, PHONE))
                         .build());
             }
         } else {
-            mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+            mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
                     .setText1(R.string.support_offline_title)
                     .setText2(R.string.support_offline_summary)
                     .build());
         }
-        final SupportData.Builder builder = new SupportData.Builder(TYPE_ESCALATION_OPTIONS);
+        final SupportData.Builder builder =
+                new SupportData.Builder(mActivity, TYPE_ESCALATION_OPTIONS);
         if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE)) {
             builder.setText1(R.string.support_escalation_by_phone);
             builder.setSummary1(mSupportFeatureProvider.getEstimatedWaitTime(mActivity, PHONE));
@@ -191,24 +194,24 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     }
 
     private void addSignInPromo() {
-        mSupportData.add(new SupportData.Builder(TYPE_TITLE)
+        mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
                 .setText1(R.string.support_sign_in_required_title)
                 .setText2(R.string.support_sign_in_required_summary)
                 .build());
-        mSupportData.add(new SupportData.Builder(TYPE_SIGN_IN_BUTTON)
+        mSupportData.add(new SupportData.Builder(mActivity, TYPE_SIGN_IN_BUTTON)
                 .setText1(R.string.support_sign_in_button_text)
                 .setText2(R.string.support_sign_in_required_help)
                 .build());
     }
 
     private void addMoreHelpItems() {
-        mSupportData.add(new SupportData.Builder(TYPE_SUPPORT_TILE)
+        mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE)
                 .setIcon(R.drawable.ic_lightbulb_outline_24)
                 .setText1(R.string.support_tips_and_tricks_title)
                 .setIntent(mSupportFeatureProvider.getTipsAndTricksIntent(mActivity))
                 .setMetricsEvent(MetricsProto.MetricsEvent.ACTION_SUPPORT_TIPS_AND_TRICKS)
                 .build());
-        mSupportData.add(new SupportData.Builder(TYPE_SUPPORT_TILE)
+        mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE)
                 .setIcon(R.drawable.ic_help_24dp)
                 .setText1(R.string.help_feedback_label)
                 .setIntent(mSupportFeatureProvider.getHelpIntent(mActivity))
@@ -225,7 +228,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             holder.text1View.setEnabled(data.enabled1 && mHasInternet);
             holder.text1View.setVisibility(View.VISIBLE);
         }
-        if (data.text2 == 0) {
+        if (TextUtils.isEmpty(data.text2)) {
             holder.text2View.setVisibility(View.GONE);
         } else {
             holder.text2View.setText(data.text2);
@@ -347,12 +350,11 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         final int icon;
         @StringRes
         final int text1;
-        @StringRes
-        final int text2;
+        final CharSequence text2;
         final boolean enabled1;
         final boolean enabled2;
-        final String summary1;
-        final String summary2;
+        final CharSequence summary1;
+        final CharSequence summary2;
 
         private SupportData(Builder builder) {
             this.type = builder.mType;
@@ -368,6 +370,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         }
 
         static final class Builder {
+
+            private final Context mContext;
             @LayoutRes
             private final int mType;
             @DrawableRes
@@ -376,14 +380,14 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             private boolean mEnabled2;
             @StringRes
             private int mText1;
-            @StringRes
-            private int mText2;
-            private String mSummary1;
-            private String mSummary2;
+            private CharSequence mText2;
+            private CharSequence mSummary1;
+            private CharSequence mSummary2;
             private Intent mIntent;
             private int mMetricsEvent = -1;
 
-            Builder(@LayoutRes int type) {
+            Builder(Context context, @LayoutRes int type) {
+                mContext = context;
                 mType = type;
             }
 
@@ -402,6 +406,16 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 return this;
             }
 
+            Builder setText2(@StringRes int text2) {
+                mText2 = mContext.getString(text2);
+                return this;
+            }
+
+            Builder setText2(CharSequence text2) {
+                mText2 = text2;
+                return this;
+            }
+
             Builder setSummary1(String summary1) {
                 mSummary1 = summary1;
                 return this;
@@ -409,11 +423,6 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
             Builder setEnabled2(boolean enabled) {
                 mEnabled2 = enabled;
-                return this;
-            }
-
-            Builder setText2(@StringRes int text2) {
-                mText2 = text2;
                 return this;
             }
 
