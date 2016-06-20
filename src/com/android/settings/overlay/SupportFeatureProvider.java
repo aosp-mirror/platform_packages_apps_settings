@@ -59,6 +59,11 @@ public interface SupportFeatureProvider {
     boolean shouldShowDisclaimerDialog(Context context);
 
     /**
+     * Sets whether or not a disclaimer dialog should be displayed.
+     */
+    void setShouldShowDisclaimerDialog(Context context, boolean shouldShow);
+
+    /**
      * Returns an {@link Account} that's eligible for support options.
      */
     Account getSupportEligibleAccount(Context context);
