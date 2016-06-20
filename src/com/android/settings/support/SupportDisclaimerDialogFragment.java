@@ -29,6 +29,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.URLSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -67,15 +68,18 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
         disclaimer.setMovementMethod(LinkMovementMethod.getInstance());
         stripUnderlines((Spannable) disclaimer.getText());
         return builder
-            .setView(content)
-            .create();
+                .setView(content)
+                .create();
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
         final Activity activity = getActivity();
+        final CheckBox doNotShow =
+                (CheckBox) getDialog().findViewById(R.id.support_disclaimer_do_not_show_again);
         final SupportFeatureProvider supportFeatureProvider =
                 FeatureFactory.getFactory(activity).getSupportFeatureProvider(activity);
+        supportFeatureProvider.setShouldShowDisclaimerDialog(getContext(), !doNotShow.isChecked());
         final Bundle bundle = getArguments();
         supportFeatureProvider.startSupport(getActivity(),
                 (Account) bundle.getParcelable(EXTRA_ACCOUNT), bundle.getInt(EXTRA_TYPE));
