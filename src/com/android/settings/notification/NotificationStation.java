@@ -404,14 +404,16 @@ public class NotificationStation extends SettingsPreferenceFragment {
                                     .append(bold(getString(
                                             R.string.notification_log_details_title)))
                                     .append(delim)
-                                    .append(action.title)
-                                    .append("\n    ")
-                                    .append(bold(getString(
-                                            R.string.notification_log_details_content_intent)))
-                                    .append(delim)
-                                    .append(formatPendingIntent(action.actionIntent));
+                                    .append(action.title);
+                            if (action.actionIntent != null) {
+                                sb.append("\n    ")
+                                        .append(bold(getString(
+                                                R.string.notification_log_details_content_intent)))
+                                        .append(delim)
+                                        .append(formatPendingIntent(action.actionIntent));
+                            }
                             if (action.getRemoteInputs() != null) {
-                                sb.append(' ')
+                                sb.append("\n    ")
                                         .append(bold(getString(
                                                 R.string.notification_log_details_remoteinput)))
                                         .append(delim)
