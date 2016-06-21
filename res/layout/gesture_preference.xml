@@ -26,7 +26,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="horizontal"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
@@ -51,16 +50,18 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/gesture_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:background="@color/gestures_setting_backgroud_color"
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:orientation="horizontal">
 
         <FrameLayout
-            android:layout_width="@dimen/gestures_settings_video_width"
-            android:layout_height="@dimen/gestures_settings_video_height">
+            android:id="@+id/gesture_animation_frame"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <TextureView
                 android:id="@+id/gesture_video"
@@ -74,12 +75,21 @@
                 android:layout_height="match_parent"
                 android:visibility="gone"/>
 
+            <ImageView
+                android:id="@+id/gesture_play_button"
+                android:layout_width="@dimen/gestures_play_button_size"
+                android:layout_height="@dimen/gestures_play_button_size"
+                android:src="@drawable/ic_gesture_play_button"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
         </FrameLayout>
 
         <TextView
             android:id="@android:id/summary"
-            android:layout_width="@dimen/gestures_settings_summary_width"
-            android:layout_height="@dimen/gestures_settings_summary_height"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="@dimen/gestures_settings_padding_top_bottom"
             android:paddingStart="?android:attr/listPreferredItemPaddingStart"
