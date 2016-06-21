@@ -29,6 +29,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.support.SupportDisclaimerDialogFragment;
@@ -111,6 +113,9 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         if (position >= 0 && position < mSupportData.size()) {
             final SupportData data = mSupportData.get(position);
             if (data.intent != null) {
+                if (data.metricsEvent >= 0) {
+                    MetricsLogger.action(mActivity, data.metricsEvent);
+                }
                 mActivity.startActivityForResult(data.intent, 0);
             }
         }
@@ -185,11 +190,13 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 .setIcon(R.drawable.ic_lightbulb_outline_24)
                 .setText1(R.string.support_tips_and_tricks_title)
                 .setIntent(mSupportFeatureProvider.getTipsAndTricksIntent(mActivity))
+                .setMetricsEvent(MetricsProto.MetricsEvent.ACTION_SUPPORT_TIPS_AND_TRICKS)
                 .build());
         mSupportData.add(new SupportData.Builder(TYPE_SUPPORT_TILE)
                 .setIcon(R.drawable.ic_help_24dp)
                 .setText1(R.string.help_feedback_label)
                 .setIntent(mSupportFeatureProvider.getHelpIntent(mActivity))
+                .setMetricsEvent(MetricsProto.MetricsEvent.ACTION_SUPPORT_HELP_AND_FEEDBACK)
                 .build());
     }
 
@@ -261,6 +268,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             if (mAccount == null) {
                 switch (v.getId()) {
                     case android.R.id.text1:
+                        MetricsLogger.action(mActivity,
+                                MetricsProto.MetricsEvent.ACTION_SUPPORT_SIGN_IN);
                         mActivity.startActivityForResult(
                                 mSupportFeatureProvider.getAccountLoginIntent(),
                                 0 /* requestCode */);
@@ -274,9 +283,13 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             } else {
                 switch (v.getId()) {
                     case android.R.id.text1:
+                        MetricsLogger.action(mActivity,
+                                MetricsProto.MetricsEvent.ACTION_SUPPORT_PHONE);
                         tryStartDisclaimerAndSupport(PHONE);
                         break;
                     case android.R.id.text2:
+                        MetricsLogger.action(mActivity,
+                                MetricsProto.MetricsEvent.ACTION_SUPPORT_CHAT);
                         tryStartDisclaimerAndSupport(CHAT);
                         break;
                 }
@@ -311,6 +324,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     private static final class SupportData {
 
         final Intent intent;
+        final int metricsEvent;
         @LayoutRes
         final int type;
         @DrawableRes
@@ -330,6 +344,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             this.summary1 = builder.mSummary1;
             this.summary2 = builder.mSummary2;
             this.intent = builder.mIntent;
+            this.metricsEvent = builder.mMetricsEvent;
         }
 
         static final class Builder {
@@ -344,6 +359,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             private String mSummary1;
             private String mSummary2;
             private Intent mIntent;
+            private int mMetricsEvent = -1;
 
             Builder(@LayoutRes int type) {
                 mType = type;
@@ -371,6 +387,11 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
             Builder setSummary2(String summary2) {
                 mSummary2 = summary2;
+                return this;
+            }
+
+            Builder setMetricsEvent(int metricsEvent) {
+                mMetricsEvent = metricsEvent;
                 return this;
             }
 
