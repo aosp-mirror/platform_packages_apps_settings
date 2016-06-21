@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android" >
+    <shortcut
+        android:shortcutId="manifest-shortcut-wifi"
+        android:icon="@drawable/ic_shortcut_wireless"
+        android:shortcutShortLabel="@string/wifi_settings" >
+        <intent android:action="android.settings.WIFI_SETTINGS" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="manifest-shortcut-data-usage"
+        android:icon="@drawable/ic_shortcut_data_usage"
+        android:shortcutShortLabel="@string/data_usage_summary_title">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.Settings$DataUsageSummaryActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="manifest-shortcut-display"
+        android:icon="@drawable/ic_shortcut_display"
+        android:shortcutShortLabel="@string/display_settings">
+        <intent android:action="com.android.settings.DISPLAY_SETTINGS" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="manifest-shortcut-battery"
+        android:icon="@drawable/ic_shortcut_battery"
+        android:shortcutShortLabel="@string/power_usage_summary_title" >
+        <intent android:action="android.intent.action.POWER_USAGE_SUMMARY" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="manifest-shortcut-storage"
+        android:icon="@drawable/ic_shortcut_storage"
+        android:shortcutShortLabel="@string/storage_settings" >
+        <intent android:action="android.settings.INTERNAL_STORAGE_SETTINGS" />
+    </shortcut>
+</shortcuts>
