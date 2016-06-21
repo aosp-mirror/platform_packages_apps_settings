@@ -30,6 +30,7 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.media.AudioManager;
+import android.media.AudioSystem;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -156,6 +157,12 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
                     initVolumePreference(KEY_NOTIFICATION_VOLUME, AudioManager.STREAM_NOTIFICATION,
                             com.android.internal.R.drawable.ic_audio_ring_notif_mute);
             removePreference(KEY_RING_VOLUME);
+        }
+
+        if (AudioSystem.isSingleVolume(mContext)) {
+            removePreference(KEY_RING_VOLUME);
+            removePreference(KEY_NOTIFICATION_VOLUME);
+            removePreference(KEY_ALARM_VOLUME);
         }
 
         // Enable link to CMAS app settings depending on the value in config.xml.
