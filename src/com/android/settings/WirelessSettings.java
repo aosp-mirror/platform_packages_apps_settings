@@ -356,7 +356,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
         // update WFC setting
         final Context context = getActivity();
-        if (ImsManager.isWfcEnabledByPlatform(context)) {
+        if (ImsManager.isWfcEnabledByPlatform(context) &&
+                ImsManager.isWfcProvisionedOnDevice(context)) {
             getPreferenceScreen().addPreference(mButtonWfc);
 
             mButtonWfc.setSummary(WifiCallingSettings.getWfcModeSummary(
@@ -473,7 +474,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                     result.add(KEY_TETHER_SETTINGS);
                 }
 
-                if (!ImsManager.isWfcEnabledByPlatform(context)) {
+                if (!ImsManager.isWfcEnabledByPlatform(context) ||
+                        !ImsManager.isWfcProvisionedOnDevice(context)) {
                     result.add(KEY_WFC_SETTINGS);
                 }
 

@@ -78,7 +78,8 @@ public class SuggestionsChecks {
     }
 
     public boolean isWifiCallingUnavailableOrEnabled() {
-        if (!ImsManager.isWfcEnabledByPlatform(mContext)) {
+        if (!ImsManager.isWfcEnabledByPlatform(mContext) ||
+                !ImsManager.isWfcProvisionedOnDevice(mContext)) {
             return true;
         }
         return ImsManager.isWfcEnabledByUser(mContext)
