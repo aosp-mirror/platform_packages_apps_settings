@@ -358,14 +358,12 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Избриши"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Да почнемо!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Ставите прст на сензор и подигните га када осетите вибрацију"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"Наставите даље"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Мало померите прст да бисте додали различите делове отиска прста"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Отисак прста је додат!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Када год видите ову икону, можете да користите отисак прста ради идентификације или да бисте одобрили куповину."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Само додирните сензор за отисак прста да бисте активирали и откључали уређај."</string>
-    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
-    <skip />
+    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7104778933406207968">"Када видите ову икону, можете и да одобрите куповине или се пријављујете у апликације."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Прескочити подешавање отиска прста?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Изабрали сте да користите отисак прста као један начин за откључавање телефона. Ако сада прескочите, мораћете касније да обавите ово подешавање. За подешавање је потребно само око минут времена."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Подеси закључавање екрана"</string>
@@ -2292,8 +2290,16 @@
       <item quantity="few">Означите сертификате као поуздане или их уклоните</item>
       <item quantity="other">Означите сертификате као поуздане или их уклоните</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> је инсталирао ауторитете за издавање сертификата на уређају, што може да му омогући да прати активности уређаја на мрежи, укључујући имејлове, апликације и безбедне веб-сајтове.\n\nКонтактирајте администратора да бисте добили више информација о овим сертификатима.</item>
+      <item quantity="few"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> су инсталирала ауторитете за издавање сертификата на уређају, што може да им омогући да прате активности уређаја на мрежи, укључујући имејлове, апликације и безбедне веб-сајтове.\n\nКонтактирајте администратора да бисте добили више информација о овим сертификатима.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> су инсталирала ауторитете за издавање сертификата на уређају, што може да им омогући да прате активности уређаја на мрежи, укључујући имејлове, апликације и безбедне веб-сајтове.\n\nКонтактирајте администратора да бисте добили више информација о овим сертификатима.</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> је инсталирао ауторитете за издавање сертификата за профил за Work, што може да му омогући да прати активности на пословној мрежи, укључујући имејлове, апликације и безбедне веб-сајтове.\n\nКонтактирајте администратора да бисте добили више информација о овим сертификатима.</item>
+      <item quantity="few"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> су инсталирала ауторитете за издавање сертификата на уређају, што може да им омогући да прате активности уређаја на мрежи, укључујући имејлове, апликације и безбедне веб-сајтове.\n\nКонтактирајте администратора да бисте добили више информација о овим сертификатима.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> су инсталирала ауторитете за издавање сертификата на уређају, што може да им омогући да прате активности уређаја на мрежи, укључујући имејлове, апликације и безбедне веб-сајтове.\n\nКонтактирајте администратора да бисте добили више информација о овим сертификатима.</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Трећа страна може да прати вашу активност на мрежи, укључујући е-пошту, апликације и безбедне веб-сајтове.\n\nТо омогућава поуздани акредитив који је инсталиран на уређају."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="one">Провери сертификате</item>
@@ -2520,6 +2526,7 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"превлачење за откључавање, лозинка, шаблон, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"work изазов, work, профил"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"профил за Work, профил којим се управља, обједини, обједињавање, Work, профил"</string>
+    <string name="keywords_gesture" msgid="5696040361482126337">"покрет"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Подесите Wi-Fi NFC ознаку"</string>
     <string name="write_tag" msgid="8571858602896222537">"Напиши"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Додирните ознаку да бисте писали..."</string>
@@ -3143,6 +3150,8 @@
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Не можете да приступите налогу?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Пошаљите информације о систему"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"Да би се проблем што пре решио, за дијагностику су нам потребне информације о систему."</string>
+    <!-- no translation found for support_disclaimer_do_not_show (3378367075323727539) -->
+    <skip />
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Подешавања пословног профила"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Претрага контаката"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Дозволите да претраживање контаката од стране ваше организације идентификује позиваоце и контакте."</string>
@@ -3191,26 +3200,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Одмах ослободите простор"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Менаџер меморијског простора"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Услуга аутоматског управљања меморијом"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Покрети"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Прелазак на камеру"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Двапут додирните дугме за напајање да бисте брзо отворили камеру. Ово функционише на сваком екрану."</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Окретање камере"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Заокрените двапут да бисте се пребацивали између предње и задње камере."</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"Брза провера екрана"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Гурните или узмите телефон да бисте га проверили не будећи га потпуно."</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Превлачење прстом за обавештења"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Превуците прстом надоле по сензору за отисак прста да бисте проверили обавештења са било ког екрана."</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"Укључено"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"Искључено"</string>
 </resources>

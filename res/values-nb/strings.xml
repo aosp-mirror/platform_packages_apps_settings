@@ -355,14 +355,12 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Slett"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"La oss sette i gang!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Plassér fingeren på sensoren, og løft den når du kjenner en vibrasjon"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"Fortsett"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Flytt fingeren litt for å registrere de ulike delene av fingeravtrykket ditt"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Fingeravtrykk lagt til!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Når du ser dette ikonet, kan du bruke fingeravtrykket ditt som identifikasjon eller til å godkjenne kjøp."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Bare trykk på fingeravtrykksensoren for å vekke og låse opp enheten din."</string>
-    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
-    <skip />
+    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7104778933406207968">"Når du ser dette ikonet, kan du også autorisere kjøp eller logge på apper."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Vil du hoppe over fingeravtrykk-konfig.?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Du har valgt å bruke fingeravtrykket ditt som én måte å låse opp telefonen din på. Hvis du hopper over konfigureringen nå, må du fullføre den senere. Konfigureringen tar bare et par minutter."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Konfigurer skjermlås"</string>
@@ -2275,12 +2273,12 @@
       <item quantity="one">Stol på eller fjern sertifikatet</item>
     </plurals>
     <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installert sertifiseringsinstanser på enheten din. Dette kan gi instansen tillatelse til å overvåke nettverksaktiviteten på enheten, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om dette sertifikatet.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> har installert en sertifiseringsinstans på enheten din. Dette kan gi instansen tillatelse til å overvåke nettverksaktiviteten på enheten, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om dette sertifikatet.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installert sertifiseringsinstanser på enheten din. Dette kan gi disse instansene tillatelse til å overvåke nettverksaktiviteten på enheten, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om disse sertifikatene.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> har installert en sertifiseringsinstans på enheten din. Dette kan gi denne instansen tillatelse til å overvåke nettverksaktiviteten på enheten, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om dette sertifikatet.</item>
     </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installert sertifiseringsinstanser for jobbprofilen din. Dette kan gi instansen tillatelse til å overvåke nettverksaktiviteten på jobben, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om dette sertifikatet.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> har installert en sertifiseringsinstans for jobbprofilen din. Dette kan gi instansen tillatelse til å overvåke nettverksaktiviteten på jobben, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om dette sertifikatet.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> har installert sertifiseringsinstanser for jobbprofilen din. Dette kan gi disse instansene tillatelse til å overvåke nettverksaktiviteten på jobben, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om disse sertifikatene.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> har installert en sertifiseringsinstans for jobbprofilen din. Dette kan gi denne instansen tillatelse til å overvåke nettverksaktiviteten på jobben, inkludert e-poster, apper og sikre nettsteder.\n\nKontakt administratoren din hvis du vil ha mer informasjon om dette sertifikatet.</item>
     </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"En utenforstående kan overvåke nettverksaktiviteten din, inkludert e-poster, apper og sikre nettsteder.\n\nPålitelig legitimasjon, som er installert på enheten din, gjør dette mulig."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
@@ -2507,6 +2505,7 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"skyv for å låse opp, passord, mønster, PIN-kode"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"jobbutfordring, jobb, profil"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"jobbprofil, administrert profil, forene, forening, jobb, profil"</string>
+    <string name="keywords_gesture" msgid="5696040361482126337">"bevegelse"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Konfigurer NFC-tag for Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Skriv"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Trykk på en brikke for å skrive"</string>
@@ -3119,6 +3118,8 @@
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Får du ikke tilgang til kontoen din?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Send systeminformasjon"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"For å løse problemet ditt raskt trenger vi systeminformasjon for å finne ut hva det er."</string>
+    <!-- no translation found for support_disclaimer_do_not_show (3378367075323727539) -->
+    <skip />
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Innstillinger for jobbprofilen"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Kontaktsøk"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Tillat kontaktsøk for organisasjonen din for å identifisere innringere og kontakter"</string>
@@ -3166,11 +3167,11 @@
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Tjeneste for auto-lagringsbehandling"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Bevegelser"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Gå til kameraet"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"For raskt å åpne kameraet, bare dobbelttrykk på av/på-knappen. Dette fungerer fra alle skjermbilder."</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"For å åpne kameraet raskt, bare dobbelttrykk på av/på-knappen. Dette fungerer fra alle skjermbilder."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Vend kameraet"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"For å bytte mellom det fremre og det bakre kameraet, vri to ganger."</string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Rask skjermsjekk"</string>
-    <string name="ambient_display_summary" msgid="810244127489185677">"For å sjekke telefonen uten å vekke den fullstendig, dytt borti eller løft den."</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"For å sjekke telefonen uten å vekke den helt, dytt borti eller løft den."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Sveip for varsler"</string>
     <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"For å sjekke varslene dine fra et hvilket som helst skjermbilde, sveip ned på fingeravtrykksensoren."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"På"</string>

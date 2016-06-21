@@ -355,14 +355,12 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"حذف کریں"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"آئیے شروع کریں!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"اپنی انگلی سنسر پر رکھیں اور ارتعاش محسوس ہونے کے بعد اٹھا لیں"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"جاری رکھیں"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"اپنے فنگرپرنٹ کے تمام حصوں کو شامل کرنے کیلئے اپنی انگلی کو تھوڑی سی حرکت دیں"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"فنگر پرنٹ شامل ہو گیا!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"آپ کو جب بھی یہ آئیکن دکھائی دیتا ہے تو آپ شناخت کرنے یا خریداری کی توثیق کرنے کیلئے اپنا فنگر پرنٹ استعمال کر سکتے ہیں۔"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"اپنے آلے کو جگانے اور غیر مقفل کرنے کیلئے بس فنگرپرنٹ سنسر کو ٹچ کریں۔"</string>
-    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
-    <skip />
+    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7104778933406207968">"جب آپ اس آئیکن کو دیکھیں، آپ خریداریوں کی اجازت بھی دے سکتے ہیں یا ایپس میں سائن ان ہو سکتے ہیں۔"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"فنگر پرنٹ سیٹ اپ نظر انداز کریں؟"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"آپ نے اپنا فون غیر مقفل کرنے کیلئے ایک طریقہ اپنے فنگرپرنٹ کا استعمال منتخب کیا ہے۔ اگر آپ اب نظر انداز کرتے ہیں تو آپ کو اسے بعد میں سیٹ اپ کرنا ہوگا۔ سیٹ اپ میں کم و بیش ایک منٹ کا وقت لگتا ہے۔"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"اسکرین لاک کو ترتیب دیں"</string>
@@ -2274,8 +2272,14 @@
       <item quantity="other">بھروسہ کریں یا سرٹیفیکیٹس ہٹائیں</item>
       <item quantity="one">بھروسہ کریں یا سرٹیفیکیٹ ہٹائیں</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (1489335297837656666) -->
-    <!-- no translation found for ssl_ca_cert_info_message (30645643499556573) -->
+    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="1489335297837656666">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> نے آپ کے آلہ پر سرٹیفیکیٹ اتھارٹیز انسٹال کی ہیں جو انہیں آپ کے آلہ کی نیٹ ورک کی سرگرمی بشمول ای میلز، ایپس اور محفوظ ویب سائٹس مانیٹر کرنے کی اجازت دے سکتی ہیں۔\n\nان سرٹیفیکیٹس سے متعلق مزید معلومات کیلئے اپنے منتظم سے رابطہ کریں۔</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> نے آپ کے آلہ پر ایک سرٹیفیکیٹ اتھارٹی انسٹال کی ہے جو انہیں آپ کے آلہ کی نیٹ ورک کی سرگرمی بشمول ای میلز، ایپس اور محفوظ ویب سائٹس مانیٹر کرنے کی اجازت دے سکتی ہے۔\n\nاس سرٹیفیکیٹ سے متعلق مزید معلومات کیلئے اپنے منتظم سے رابطہ کریں۔</item>
+    </plurals>
+    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="30645643499556573">
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> نے آپ کے دفتری پروفائل کیلئے سرٹیفیکیٹ اتھارٹیز انسٹال کی ہیں جو انہیں دفتری نیٹ ورک کی سرگرمی بشمول ای میلز، ایپس اور محفوظ ویب سائٹس مانیٹر کرنے کی اجازت دے سکتی ہیں۔\n\nان سرٹیفیکیٹس سے متعلق مزید معلومات کیلئے اپنے منتظم سے رابطہ کریں۔</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> نے آپ کے دفتری پروفائل کیلئے سرٹیفیکیٹ اتھارٹی انسٹال کی ہے جو انہیں دفتری نیٹ ورک کی سرگرمی بشمول ای میلز، ایپس اور محفوظ ویب سائٹس مانیٹر کرنے کی اجازت دے سکتی ہے۔\n\nاس سرٹیفیکیٹ سے متعلق مزید معلومات کیلئے اپنے منتظم سے رابطہ کریں۔</item>
+    </plurals>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"ایک تیسرا فریق آپ کے نیٹ ورک کی سرگرمی، بشمول ای میلز، ایپس اور محفوظ ویب سائٹوں پر نگاہ رکھنے پر قادر ہے۔\n\nآپ کے آلے پر انسٹال شدہ ایک بھروسہ مند استناد کی وجہ سے یہ ممکن ہے۔"</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="2426799352517325228">
       <item quantity="other">سرٹیفکیٹس چیک کریں</item>
@@ -2501,6 +2505,7 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"‏غیر مقفل کرنے کیلئے سلائیڈ کریں، پاس ورڈ، پیٹرن، PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"کام کا چیلنج، کام، پروفائل"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"دفتری پروفائل، منظم پروفائل، یکجا کریں، یکجا کرنا، کام، پروفائل"</string>
+    <string name="keywords_gesture" msgid="5696040361482126337">"اشارہ"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏Wi-Fi NFC ٹیگ ترتیب دیں"</string>
     <string name="write_tag" msgid="8571858602896222537">"تحریر کریں"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"لکھنے کیلئے ایک ٹیگ کو تھپتھپائیں…"</string>
@@ -3113,6 +3118,8 @@
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"اپنے اکاوئنٹ تک رسائی حاصل نہیں ہو رہی؟"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"سسٹم کی معلومات بھیجیں"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"آپ کا مسئلہ فوری طور پر حل کرنے کیلئے، ہمیں تشخیص کیلئے سسٹم کی معلومات درکار ہے۔"</string>
+    <!-- no translation found for support_disclaimer_do_not_show (3378367075323727539) -->
+    <skip />
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"دفتری پروفائل کی ترتیبات"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"رابطہ تلاش"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"کالرز اور رابطوں کی شناخت کیلئے اپنی تنظیم کی جانب سے رابطہ تلاشیوں کی اجازت دیں"</string>
@@ -3158,26 +3165,15 @@
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"اب جگہ خالی کریں"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"اسٹوریج مینیجر"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"خودکار اسٹوریج مینیجمنٹ سروس"</string>
-    <!-- no translation found for gesture_preference_title (5280023307132819052) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_title (2993443929413421363) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (5917828814732238340) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_title (4877834147983530479) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_mode_summary (8415909197795361084) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (7369291941168001738) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (810244127489185677) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_title (2750203868053669600) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (949163829681063130) -->
-    <skip />
-    <!-- no translation found for gesture_setting_on (3455094265233870280) -->
-    <skip />
-    <!-- no translation found for gesture_setting_off (5230169535435881894) -->
-    <skip />
+    <string name="gesture_preference_title" msgid="5280023307132819052">"اشارے"</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"کیمرا پر جائیں"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"کیمرہ کو تیزی سے کھولنے کیلئے بس پاور بٹن کو دو بار تھپتھپائیں۔ یہ کسی بھی اسکرین سے کام کرتا ہے۔"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"کیمرا پلٹیں"</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"سامنے اور پیچھے کے کیمروں کے درمیان سوئچ کرنے کیلئے دو بار مروڑیں۔"</string>
+    <string name="ambient_display_title" msgid="7369291941168001738">"فوری اسکرین چیک"</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"اپنے فون کو پوری طرح فعال کیے بغیر چیک کرنے کیلئے اسے ہلائیں یا اٹھائیں۔"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"اطلاعات کیلئے سوائپ کریں"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"کسی بھی اسکرین سے اپنی اطلاعات چیک کرنے کیلئے فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
+    <string name="gesture_setting_on" msgid="3455094265233870280">"آن"</string>
+    <string name="gesture_setting_off" msgid="5230169535435881894">"آف"</string>
 </resources>
