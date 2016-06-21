@@ -32,6 +32,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
@@ -61,7 +63,7 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.support_disclaimer_title)
                 .setPositiveButton(android.R.string.ok, this)
-                .setNegativeButton(android.R.string.cancel, null);
+                .setNegativeButton(android.R.string.cancel, this);
         final View content = LayoutInflater.from(builder.getContext())
                 .inflate(R.layout.support_disclaimer_content, null);
         final TextView disclaimer = (TextView) content.findViewById(R.id.support_disclaimer_text);
@@ -74,6 +76,11 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
+        if (which == Dialog.BUTTON_NEGATIVE) {
+            MetricsLogger.action(getContext(),
+                    MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_CANCEL);
+            return;
+        }
         final Activity activity = getActivity();
         final CheckBox doNotShow =
                 (CheckBox) getDialog().findViewById(R.id.support_disclaimer_do_not_show_again);
@@ -81,8 +88,16 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
                 FeatureFactory.getFactory(activity).getSupportFeatureProvider(activity);
         supportFeatureProvider.setShouldShowDisclaimerDialog(getContext(), !doNotShow.isChecked());
         final Bundle bundle = getArguments();
+        MetricsLogger.action(activity, MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_OK);
         supportFeatureProvider.startSupport(getActivity(),
                 (Account) bundle.getParcelable(EXTRA_ACCOUNT), bundle.getInt(EXTRA_TYPE));
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        MetricsLogger.action(getContext(),
+                MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_CANCEL);
     }
 
     /**
