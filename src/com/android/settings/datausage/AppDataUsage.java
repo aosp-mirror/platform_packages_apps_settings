@@ -188,13 +188,19 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 removePreference(KEY_APP_LIST);
             }
         } else {
-            final int userId = UidDetailProvider.getUserIdForKey(mAppItem.key);
-            final UserManager um = UserManager.get(getActivity());
-            final UserInfo info = um.getUserInfo(userId);
-            final PackageManager pm = getPackageManager();
-            mIcon = Utils.getUserIcon(getActivity(), um, info);
-            mLabel = Utils.getUserLabel(getActivity(), info);
-            mPackageName = getActivity().getPackageName();
+            if (mAppItem.key == TrafficStats.UID_REMOVED) {
+                mLabel = getContext().getString(R.string.data_usage_uninstalled_apps_users);
+            } else if (mAppItem.key == TrafficStats.UID_TETHERING) {
+                mLabel = getContext().getString(R.string.tether_settings_title_all);
+            } else {
+                final int userId = UidDetailProvider.getUserIdForKey(mAppItem.key);
+                final UserManager um = UserManager.get(getActivity());
+                final UserInfo info = um.getUserInfo(userId);
+                final PackageManager pm = getPackageManager();
+                mIcon = Utils.getUserIcon(getActivity(), um, info);
+                mLabel = Utils.getUserLabel(getActivity(), info);
+                mPackageName = getActivity().getPackageName();
+            }
             removePreference(KEY_UNRESTRICTED_DATA);
             removePreference(KEY_APP_SETTINGS);
             removePreference(KEY_RESTRICT_BACKGROUND);
