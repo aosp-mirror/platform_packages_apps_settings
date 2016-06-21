@@ -316,11 +316,11 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     }
 
     private boolean validate(boolean editing) {
-        if (!editing) {
-            return mUsername.getText().length() != 0 && mPassword.getText().length() != 0;
-        }
         if (mAlwaysOnVpn.isChecked() && !getProfile().isValidLockdownProfile()) {
             return false;
+        }
+        if (!editing) {
+            return mUsername.getText().length() != 0 && mPassword.getText().length() != 0;
         }
         if (mName.getText().length() == 0 || mServer.getText().length() == 0 ||
                 !validateAddresses(mDnsServers.getText().toString(), false) ||
