@@ -38,7 +38,9 @@ public class StorageItemPreference extends Preference {
     }
 
     public void setStorageSize(long size, long total) {
-        setSummary(Formatter.formatFileSize(getContext(), size));
+        setSummary(size == 0
+                ? String.valueOf(0)
+                : Formatter.formatFileSize(getContext(), size));
         if (total == 0) {
             progress = 0;
         } else {
