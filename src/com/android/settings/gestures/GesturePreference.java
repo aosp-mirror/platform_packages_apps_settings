@@ -14,6 +14,7 @@
 
 package com.android.settings.gestures;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -29,6 +30,7 @@ import android.view.View;
 import android.view.Surface;
 import android.view.TextureView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -39,12 +41,14 @@ import com.android.settings.R;
  * This shows the title and description of the gesture along with an animation showing how to do
  * the gesture
  */
-public class GesturePreference extends SwitchPreference {
+public final class GesturePreference extends SwitchPreference {
     private static final String TAG = "GesturePreference";
+    private final Context mContext;
+
     private Uri mVideoPath;
-    private Context mContext;
     private MediaPlayer mMediaPlayer;
     private MediaMetadataRetriever mMediaMetadata;
+    private boolean animationAvailable;
 
     public GesturePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -56,12 +60,15 @@ public class GesturePreference extends SwitchPreference {
                 0, 0);
         try {
             int animation = attributes.getResourceId(R.styleable.GesturePreference_animation, 0);
-            mVideoPath = Uri.parse(
-                "android.resource://" + context.getPackageName() + "/" + animation);
+            mVideoPath = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                    .authority(context.getPackageName())
+                    .appendPath(String.valueOf(animation))
+                    .build();
             mMediaMetadata = new MediaMetadataRetriever();
             mMediaMetadata.setDataSource(mContext, mVideoPath);
+            animationAvailable = true;
         } catch (Exception e) {
-            // resource not available, show blank view
+            Log.w(TAG, "Animation resource not found. Will not show animation.");
         } finally {
             attributes.recycle();
         }
@@ -72,6 +79,21 @@ public class GesturePreference extends SwitchPreference {
         super.onBindViewHolder(holder);
         final TextureView video = (TextureView) holder.findViewById(R.id.gesture_video);
         final ImageView imageView = (ImageView) holder.findViewById(R.id.gesture_image);
+        final ImageView playButton = (ImageView) holder.findViewById(R.id.gesture_play_button);
+        final View detailView = holder.findViewById(R.id.gesture_detail);
+        final View animationFrame = holder.findViewById(R.id.gesture_animation_frame);
+
+        if (!animationAvailable) {
+            animationFrame.setVisibility(View.GONE);
+            return;
+        }
+
+        Bitmap bitmap = mMediaMetadata.getFrameAtTime(0);
+        if (bitmap != null) {
+            imageView.setImageDrawable(new BitmapDrawable(bitmap));
+        }
+        imageView.setVisibility(View.VISIBLE);
+        playButton.setVisibility(View.VISIBLE);
 
         video.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -80,9 +102,10 @@ public class GesturePreference extends SwitchPreference {
                     if (mMediaPlayer != null) {
                         if (mMediaPlayer.isPlaying()) {
                             mMediaPlayer.pause();
+                            playButton.setVisibility(View.VISIBLE);
                         } else {
                             mMediaPlayer.start();
-                            imageView.setVisibility(View.GONE);
+                            playButton.setVisibility(View.GONE);
                         }
                     }
                     return true;
@@ -93,7 +116,9 @@ public class GesturePreference extends SwitchPreference {
 
         video.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
-            public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
+            public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
+                    int height) {
+                animationFrame.setLayoutParams(new LinearLayout.LayoutParams(width, width));
                 mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
                 if (mMediaPlayer != null) {
                     mMediaPlayer.setSurface(new Surface(surfaceTexture));
@@ -107,7 +132,8 @@ public class GesturePreference extends SwitchPreference {
             }
 
             @Override
-            public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture, int width, int height) {
+            public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture, int width,
+                    int height) {
             }
 
             @Override
@@ -123,16 +149,11 @@ public class GesturePreference extends SwitchPreference {
 
             @Override
             public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
+                if (mMediaPlayer.isPlaying() && imageView.getVisibility() == View.VISIBLE) {
+                    imageView.setVisibility(View.GONE);
+                }
             }
         });
-
-        if (mMediaPlayer == null) {
-            Bitmap bitmap = mMediaMetadata.getFrameAtTime(0);
-            if (bitmap != null) {
-                imageView.setImageDrawable(new BitmapDrawable(bitmap));
-            }
-            imageView.setVisibility(View.VISIBLE);
-        }
 
     }
 
