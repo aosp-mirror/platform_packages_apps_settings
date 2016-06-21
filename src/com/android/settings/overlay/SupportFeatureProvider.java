@@ -49,6 +49,16 @@ public interface SupportFeatureProvider {
     boolean isSupportTypeEnabled(Context context, @SupportType int type);
 
     /**
+     * Whether or not a support type is in operation 24/7.
+     */
+    boolean isAlwaysOperating(@SupportType int type);
+
+    /**
+     * Whether or not a support type is operating now.
+     */
+    boolean isOperatingNow(@SupportType int type);
+
+    /**
      * Returns a localized string indicating estimated wait time for a support time.
      */
     String getEstimatedWaitTime(Context context, @SupportType int type);
