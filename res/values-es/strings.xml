@@ -126,7 +126,7 @@
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Una aplicación quiere hacer visible tu teléfono para otros dispositivos Bluetooth. Puedes cambiar esta configuración más tarde en los ajustes de Bluetooth."</string>
     <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> quiere activar las emisiones de Bluetooth para comunicarse con otros dispositivos cercanos. Puedes cambiar esta opción más tarde en los ajustes de Bluetooth."</string>
     <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> quiere activar el Bluetooth y las emisiones de Bluetooth para comunicarse con otros dispositivos cercanos. Puedes cambiar esta opción más tarde en los ajustes de Bluetooth."</string>
-    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Si esta función está activada, el teléfono puede comunicarse con otros dispositivos cercanos.\n\nLas emisiones utilizan señales de Bluetooth de baja energía."</string>
+    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Si esta función está activada, el teléfono puede comunicarse con otros dispositivos cercanos.\n\nLas emisiones utilizan señales de Bluetooth de bajo consumo."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Una aplicación quiere activar el Bluetooth y hacer visible tu tablet para otros dispositivos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Una aplicación quiere activar el Bluetooth y hacer visible tu teléfono para otros dispositivos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Una aplicación quiere activar el Bluetooth y hacer visible tu tablet para otros dispositivos. Puedes cambiar esta configuración más tarde en los ajustes de Bluetooth."</string>
@@ -355,14 +355,12 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Eliminar"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"¡Empecemos!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Pon el dedo en el sensor y levántalo cuando notes una vibración."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (8556556992897619044) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"Continuar"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Mueve el dedo ligeramente para añadir todas las partes de tu huella digital."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Huella digital añadida"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Cuando aparezca este icono, puedes usar tu huella digital para identificarte o autorizar una compra."</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Solo tienes que tocar el sensor de huellas digitales para activar y desbloquear el dispositivo."</string>
-    <!-- no translation found for setup_fingerprint_enroll_finish_message_secondary (7104778933406207968) -->
-    <skip />
+    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7104778933406207968">"Si aparece este icono, significa que también puedes autorizar las compras o iniciar sesión en las aplicaciones."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"¿Saltar la configuración de huella digital?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Has decidido utilizar tu huella digital para desbloquear el teléfono. Si te saltas este paso ahora, tendrás que configurarlo más tarde (este proceso tarda aproximadamente un minuto)."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Configurar bloqueo de pantalla"</string>
@@ -2507,6 +2505,7 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"deslizar para desbloquear, contraseña, patrón, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"reto de trabajo, perfil, trabajo"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"perfil de trabajo, perfil administrado, unificar, unificación, trabajo, perfil"</string>
+    <string name="keywords_gesture" msgid="5696040361482126337">"gesto"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurar etiqueta NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Editar"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Toca una etiqueta para editarla..."</string>
@@ -3119,6 +3118,8 @@
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"¿No puedes acceder a tu cuenta?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Enviar información del sistema"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"Para poder hacer un diagnóstico y ayudarte a solucionar el problema rápidamente, necesitamos información del sistema."</string>
+    <!-- no translation found for support_disclaimer_do_not_show (3378367075323727539) -->
+    <skip />
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Ajustes de perfil de trabajo"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Búsqueda de contactos"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Permitir que tu organización busque contactos para identificar llamadas y contactos"</string>
@@ -3165,12 +3166,12 @@
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Administrador de Almacenamiento"</string>
     <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Serv. Gestión Almacenamiento Automático"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gestos"</string>
-    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Ir a Cámara"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Toca dos veces el botón de encendido para abrir la cámara rápidamente (funciona en todas las pantallas)."</string>
+    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Abrir cámara"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Pulsa dos veces el botón de encendido para abrir la cámara rápidamente. Funciona desde cualquier pantalla."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Cambiar cámara"</string>
-    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Gira el dispositivo dos veces para cambiar de la cámara frontal a la trasera."</string>
+    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"Gira el dispositivo dos veces para cambiar entre la cámara frontal y la trasera."</string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Vistazo rápido"</string>
-    <string name="ambient_display_summary" msgid="810244127489185677">"Mueve o coge el teléfono para verlo sin activarlo completamente."</string>
+    <string name="ambient_display_summary" msgid="810244127489185677">"Mueve o coge el teléfono para comprobar notificaciones sin activarlo completamente."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Deslizar el dedo para ver notificaciones"</string>
     <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Desliza el dedo hacia abajo en el sensor de huellas digitales para ver las notificaciones en cualquier pantalla."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Sí"</string>
