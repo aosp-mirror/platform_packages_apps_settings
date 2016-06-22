@@ -32,6 +32,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract.DisplayPhoto;
@@ -223,7 +224,12 @@ public class EditUserPhotoController {
         appendOutputExtra(intent, mCropPictureUri);
         appendCropExtras(intent);
         if (intent.resolveActivity(mContext.getPackageManager()) != null) {
-            mFragment.startActivityForResult(intent, REQUEST_CODE_CROP_PHOTO);
+            try {
+                StrictMode.disableDeathOnFileUriExposure();
+                mFragment.startActivityForResult(intent, REQUEST_CODE_CROP_PHOTO);
+            } finally {
+                StrictMode.enableDeathOnFileUriExposure();
+            }
         } else {
             onPhotoCropped(pictureUri, false);
         }
