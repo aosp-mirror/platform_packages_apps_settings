@@ -190,6 +190,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/volte_provisioned_switch_string"/>
 
+        <!-- VT provisioned -->
+        <Switch android:id="@+id/vt_provisioned_switch"
+                android:textSize="14sp"
+                android:layout_marginTop="8dip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vt_provisioned_switch_string"/>
+
+        <!-- Wifi Calling provisioned -->
+        <Switch android:id="@+id/wfc_provisioned_switch"
+                android:textSize="14sp"
+                android:layout_marginTop="8dip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wfc_provisioned_switch_string"/>
+
         <!-- SMSC -->
         <RelativeLayout android:layout_width="match_parent"
                         android:layout_height="wrap_content">
