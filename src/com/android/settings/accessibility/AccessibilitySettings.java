@@ -41,7 +41,7 @@ import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.content.PackageMonitor;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
 import com.android.settings.DialogCreatable;

@@ -22,7 +22,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
