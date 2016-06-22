@@ -2921,17 +2921,6 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name="Settings$DeletionHelperActivity"
-                  android:label="@string/deletion_helper_title"
-                  android:taskAffinity="">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.DELETION_HELPER_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.deletionhelper.DeletionHelperFragment" />
-        </activity>
-
         <!-- activity for gesture settings -->
         <activity android:name="Settings$GestureSettingsActivity"
                   android:label="@string/gesture_preference_title"
@@ -3009,21 +2998,6 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-
-        <!-- Automatic storage management tasks. -->
-        <service
-            android:name=".deletionhelper.AutomaticStorageManagementJobService"
-            android:label="@string/automatic_storage_manager_service_label"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:enabled="@bool/enable_automatic_storage_management"
-            android:exported="false"/>
-
-        <receiver android:name=".deletionhelper.AutomaticStorageBroadcastReceiver"
-                  android:enabled="@bool/enable_automatic_storage_management">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
