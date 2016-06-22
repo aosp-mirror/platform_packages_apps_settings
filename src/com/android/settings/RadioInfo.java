@@ -118,6 +118,16 @@ public class RadioInfo extends Activity {
     private static final int CELL_INFO_LIST_RATE_DISABLED = Integer.MAX_VALUE;
     private static final int CELL_INFO_LIST_RATE_MAX = 0;
 
+
+    private static final int IMS_VOLTE_PROVISIONED_CONFIG_ID =
+        ImsConfig.ConfigConstants.VLT_SETTING_ENABLED;
+
+    private static final int IMS_VT_PROVISIONED_CONFIG_ID =
+        ImsConfig.ConfigConstants.LVC_SETTING_ENABLED;
+
+    private static final int IMS_WFC_PROVISIONED_CONFIG_ID =
+        ImsConfig.ConfigConstants.VOICE_OVER_WIFI_SETTING_ENABLED;
+
     //Values in must match mCellInfoRefreshRates
     private static final String[] mCellInfoRefreshRateLabels = {
             "Disabled",
@@ -184,7 +194,9 @@ public class RadioInfo extends Activity {
     private Button updateSmscButton;
     private Button refreshSmscButton;
     private Button oemInfoButton;
-    private Switch imsVoLteProvisionedSwitch;
+    private Switch imsVolteProvisionedSwitch;
+    private Switch imsVtProvisionedSwitch;
+    private Switch imsWfcProvisionedSwitch;
     private Spinner preferredNetworkType;
     private Spinner cellInfoRefreshRateSpinner;
 
@@ -270,7 +282,7 @@ public class RadioInfo extends Activity {
             updateServiceState(serviceState);
             updateRadioPowerState();
             updateNetworkType();
-            updateImsVoLteProvisionedState();
+            updateImsProvisionedState();
         }
     };
 
@@ -382,7 +394,9 @@ public class RadioInfo extends Activity {
         cellInfoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cellInfoRefreshRateSpinner.setAdapter(cellInfoAdapter);
 
-        imsVoLteProvisionedSwitch = (Switch) findViewById(R.id.volte_provisioned_switch);
+        imsVolteProvisionedSwitch = (Switch) findViewById(R.id.volte_provisioned_switch);
+        imsVtProvisionedSwitch = (Switch) findViewById(R.id.vt_provisioned_switch);
+        imsWfcProvisionedSwitch = (Switch) findViewById(R.id.wfc_provisioned_switch);
 
         radioPowerOnSwitch = (Switch) findViewById(R.id.radio_power);
 
@@ -425,7 +439,7 @@ public class RadioInfo extends Activity {
         updateDataState();
         updateDataStats2();
         updateRadioPowerState();
-        updateImsVoLteProvisionedState();
+        updateImsProvisionedState();
         updateProperties();
         updateDnsCheckState();
         updateNetworkType();
@@ -447,7 +461,9 @@ public class RadioInfo extends Activity {
         preferredNetworkType.setOnItemSelectedListener(mPreferredNetworkHandler);
 
         radioPowerOnSwitch.setOnCheckedChangeListener(mRadioPowerOnChangeListener);
-        imsVoLteProvisionedSwitch.setOnCheckedChangeListener(mImsVoLteCheckedChangeListener);
+        imsVolteProvisionedSwitch.setOnCheckedChangeListener(mImsVolteCheckedChangeListener);
+        imsVtProvisionedSwitch.setOnCheckedChangeListener(mImsVtCheckedChangeListener);
+        imsWfcProvisionedSwitch.setOnCheckedChangeListener(mImsWfcCheckedChangeListener);
 
         mTelephonyManager.listen(mPhoneStateListener,
                   PhoneStateListener.LISTEN_CALL_STATE
@@ -1099,6 +1115,37 @@ public class RadioInfo extends Activity {
         radioPowerOnSwitch.setOnCheckedChangeListener(mRadioPowerOnChangeListener);
     }
 
+    void setImsVolteProvisionedState( boolean state ) {
+        Log.d(TAG, "setImsVolteProvisioned state: " + ((state)? "on":"off"));
+        setImsConfigProvisionedState( IMS_VOLTE_PROVISIONED_CONFIG_ID, state );
+    }
+
+    void setImsVtProvisionedState( boolean state ) {
+        Log.d(TAG, "setImsVtProvisioned() state: " + ((state)? "on":"off"));
+        setImsConfigProvisionedState( IMS_VT_PROVISIONED_CONFIG_ID, state );
+    }
+
+    void setImsWfcProvisionedState( boolean state ) {
+        Log.d(TAG, "setImsWfcProvisioned() state: " + ((state)? "on":"off"));
+        setImsConfigProvisionedState( IMS_WFC_PROVISIONED_CONFIG_ID, state );
+    }
+
+    void setImsConfigProvisionedState( int configItem, boolean state ) {
+        if (phone != null && mImsManager != null) {
+            QueuedWork.singleThreadExecutor().submit(new Runnable() {
+                public void run() {
+                    try {
+                        mImsManager.getConfigInterface().setProvisionedValue(
+                                configItem,
+                                state? 1 : 0);
+                    } catch (ImsException e) {
+                        Log.e(TAG, "setImsConfigProvisioned() exception:", e);
+                    }
+                }
+            });
+        }
+    }
+
     OnCheckedChangeListener mRadioPowerOnChangeListener = new OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -1107,25 +1154,7 @@ public class RadioInfo extends Activity {
        }
     };
 
-    void setImsVoLteProvisionedState( boolean state ) {
-        log(String.format("toggle VoLTE provisioned: %s", ((state) ? "on":"off")));
-
-        if (phone != null && mImsManager != null) {
-            QueuedWork.singleThreadExecutor().submit(new Runnable() {
-                public void run() {
-                    try {
-                        mImsManager.getConfigInterface().setProvisionedValue(
-                                ImsConfig.ConfigConstants.VLT_SETTING_ENABLED,
-                                state? 1 : 0);
-                    } catch (ImsException e) {
-                        Log.e(TAG, "setImsVoLteProvisioned() exception:", e);
-                    }
-                }
-            });
-        }
-    }
-
-    private boolean isImsVoLteProvisioned() {
+    private boolean isImsVolteProvisioned() {
         if (phone != null && mImsManager != null) {
             return mImsManager.isVolteEnabledByPlatform(phone.getContext())
                 && mImsManager.isVolteProvisionedOnDevice(phone.getContext());
@@ -1133,20 +1162,58 @@ public class RadioInfo extends Activity {
         return false;
     }
 
-    OnCheckedChangeListener mImsVoLteCheckedChangeListener = new OnCheckedChangeListener() {
+    OnCheckedChangeListener mImsVolteCheckedChangeListener = new OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            setImsVoLteProvisionedState(isChecked);
+            setImsVolteProvisionedState(isChecked);
        }
     };
 
-    private void updateImsVoLteProvisionedState() {
-        log("updateImsVoLteProvisionedState isImsVoLteProvisioned()=" + isImsVoLteProvisioned());
+    private boolean isImsVtProvisioned() {
+        if (phone != null && mImsManager != null) {
+            return mImsManager.isVtEnabledByPlatform(phone.getContext())
+                && mImsManager.isVtProvisionedOnDevice(phone.getContext());
+        }
+        return false;
+    }
+
+    OnCheckedChangeListener mImsVtCheckedChangeListener = new OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            setImsVtProvisionedState(isChecked);
+       }
+    };
+
+    private boolean isImsWfcProvisioned() {
+        if (phone != null && mImsManager != null) {
+            return mImsManager.isWfcEnabledByPlatform(phone.getContext())
+                && mImsManager.isWfcProvisionedOnDevice(phone.getContext());
+        }
+        return false;
+    }
+
+    OnCheckedChangeListener mImsWfcCheckedChangeListener = new OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            setImsWfcProvisionedState(isChecked);
+       }
+    };
+
+    private void updateImsProvisionedState() {
+        log("updateImsProvisionedState isImsVolteProvisioned()=" + isImsVolteProvisioned());
         //delightful hack to prevent on-checked-changed calls from
         //actually forcing the ims provisioning to its transient/current value.
-        imsVoLteProvisionedSwitch.setOnCheckedChangeListener(null);
-        imsVoLteProvisionedSwitch.setChecked(isImsVoLteProvisioned());
-        imsVoLteProvisionedSwitch.setOnCheckedChangeListener(mImsVoLteCheckedChangeListener);
+        imsVolteProvisionedSwitch.setOnCheckedChangeListener(null);
+        imsVolteProvisionedSwitch.setChecked(isImsVolteProvisioned());
+        imsVolteProvisionedSwitch.setOnCheckedChangeListener(mImsVolteCheckedChangeListener);
+
+        imsVtProvisionedSwitch.setOnCheckedChangeListener(null);
+        imsVtProvisionedSwitch.setChecked(isImsVtProvisioned());
+        imsVtProvisionedSwitch.setOnCheckedChangeListener(mImsVtCheckedChangeListener);
+
+        imsWfcProvisionedSwitch.setOnCheckedChangeListener(null);
+        imsWfcProvisionedSwitch.setChecked(isImsWfcProvisioned());
+        imsWfcProvisionedSwitch.setOnCheckedChangeListener(mImsWfcCheckedChangeListener);
     }
 
     OnClickListener mDnsCheckButtonHandler = new OnClickListener() {
