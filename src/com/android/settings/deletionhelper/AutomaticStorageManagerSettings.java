@@ -18,6 +18,7 @@ package com.android.settings.deletionhelper;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -115,8 +116,8 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (KEY_DELETION_HELPER.equals(preference.getKey())) {
-            startFragment(this, DeletionHelperFragment.class.getCanonicalName(),
-                    R.string.deletion_helper_title, 0, null);
+            Intent intent = new Intent(Settings.ACTION_DELETION_HELPER_SETTINGS);
+            getContext().startActivity(intent);
         }
         return true;
     }
