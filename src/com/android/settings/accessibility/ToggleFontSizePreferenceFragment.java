@@ -67,6 +67,7 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
      */
     @Override
     protected void commit() {
+        if (getContext() == null) return;
         final ContentResolver resolver = getContext().getContentResolver();
         Settings.System.putFloat(resolver, Settings.System.FONT_SCALE, mValues[mCurrentIndex]);
     }
