@@ -432,6 +432,9 @@ public class PowerUsageSummary extends PowerUsageBase {
                         final UserHandle userHandle = new UserHandle(userId);
                         pgp.setIcon(mUm.getBadgedIconForUser(entry.getIcon(), userHandle));
                         pgp.setTitle(entry.name);
+                        if (entry.sipper.drainType == DrainType.APP) {
+                            pgp.setContentDescription(entry.name);
+                        }
                     }
                     break;
                 case BatteryEntry.MSG_REPORT_FULLY_DRAWN:
