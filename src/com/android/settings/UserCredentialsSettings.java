@@ -48,7 +48,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;

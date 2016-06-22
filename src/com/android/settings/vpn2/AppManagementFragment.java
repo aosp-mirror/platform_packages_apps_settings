@@ -39,7 +39,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;

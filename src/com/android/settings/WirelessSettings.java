@@ -34,7 +34,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.network.MobileNetworkPreferenceController;
 import com.android.settings.network.MobilePlanPreferenceController;

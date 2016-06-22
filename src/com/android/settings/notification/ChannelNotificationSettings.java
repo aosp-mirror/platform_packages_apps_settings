@@ -27,7 +27,7 @@ import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
 import android.view.View;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;

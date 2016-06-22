@@ -51,7 +51,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;

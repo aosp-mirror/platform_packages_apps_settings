@@ -53,7 +53,7 @@ import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.Spinner;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;

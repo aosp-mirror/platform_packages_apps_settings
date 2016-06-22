@@ -21,7 +21,7 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.util.SparseIntArray;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 

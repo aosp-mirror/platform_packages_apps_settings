@@ -50,7 +50,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;

@@ -47,7 +47,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;

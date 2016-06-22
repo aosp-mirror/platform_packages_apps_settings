@@ -34,7 +34,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.ims.ImsManager;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settingslib.RestrictedLockUtils;
 

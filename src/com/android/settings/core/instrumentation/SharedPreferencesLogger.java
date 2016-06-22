@@ -22,7 +22,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.Map;

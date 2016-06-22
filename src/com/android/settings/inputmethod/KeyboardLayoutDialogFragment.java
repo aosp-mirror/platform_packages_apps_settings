@@ -40,7 +40,7 @@ import android.widget.CheckedTextView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 

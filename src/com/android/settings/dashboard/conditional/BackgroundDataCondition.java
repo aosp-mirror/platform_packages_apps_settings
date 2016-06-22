@@ -18,7 +18,7 @@ package com.android.settings.dashboard.conditional;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.NetworkPolicyManager;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 

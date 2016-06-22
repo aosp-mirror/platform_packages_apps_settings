@@ -20,7 +20,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;

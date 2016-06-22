@@ -37,7 +37,7 @@ import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents;
 import com.android.settings.inputmethod.UserDictionarySettingsUtils;

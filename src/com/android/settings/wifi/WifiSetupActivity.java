@@ -32,7 +32,7 @@ import android.os.Bundle;
 import android.support.v14.preference.PreferenceFragment;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.ButtonBarHandler;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;

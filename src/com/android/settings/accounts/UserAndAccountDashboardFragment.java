@@ -17,7 +17,7 @@ package com.android.settings.accounts;
 
 import android.content.Context;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;

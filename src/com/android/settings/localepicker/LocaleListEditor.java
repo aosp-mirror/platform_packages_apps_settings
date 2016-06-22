@@ -33,7 +33,7 @@ import android.view.ViewGroup;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 

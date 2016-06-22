@@ -17,7 +17,7 @@ package com.android.settings.dashboard.conditional;
 
 import android.content.Context;
 import android.graphics.drawable.Icon;
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;

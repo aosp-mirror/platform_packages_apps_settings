@@ -22,7 +22,7 @@ public interface Instrumentable {
 
     /**
      * Instrumented name for a view as defined in
-     * {@link com.android.internal.logging.MetricsProto.MetricsEvent}.
+     * {@link com.android.internal.logging.nano.MetricsProto.MetricsEvent}.
      */
     int getMetricsCategory();
 }

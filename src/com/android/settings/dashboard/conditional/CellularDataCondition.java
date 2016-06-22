@@ -16,7 +16,7 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.Settings;

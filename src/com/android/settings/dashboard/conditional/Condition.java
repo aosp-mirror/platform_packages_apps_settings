@@ -22,7 +22,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.os.PersistableBundle;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 

@@ -31,7 +31,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settingslib.datetime.ZoneGetter;
