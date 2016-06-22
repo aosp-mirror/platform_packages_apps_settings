@@ -35,7 +35,7 @@ public class PowerGaugePreference extends TintablePreference {
     private final int mIconSize;
 
     private BatteryEntry mInfo;
-    private final CharSequence mContentDescription;
+    private CharSequence mContentDescription;
     private CharSequence mProgress;
 
     public PowerGaugePreference(Context context, Drawable icon, CharSequence contentDescription,
@@ -46,6 +46,11 @@ public class PowerGaugePreference extends TintablePreference {
         mInfo = info;
         mContentDescription = contentDescription;
         mIconSize = context.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
+    }
+
+    public void setContentDescription(String name) {
+        mContentDescription = name;
+        notifyChanged();
     }
 
     public void setPercent(double percentOfMax, double percentOfTotal) {
