@@ -61,7 +61,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
          // Double tap power for camera
         if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
             int cameraDisabled = Secure.getInt(
-                    getContentResolver(), Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 1);
+                    getContentResolver(), Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
             GesturePreference preference =
                     (GesturePreference) findPreference(PREF_KEY_DOUBLE_TAP_POWER);
             preference.setChecked(cameraDisabled == 0);
@@ -74,7 +74,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         if (isDozeAvailable(context)) {
             GesturePreference preference =
                     (GesturePreference) findPreference(PREF_KEY_PICK_UP_AND_NUDGE);
-            int dozeEnabled = Secure.getInt(getContentResolver(), Secure.DOZE_ENABLED, 0);
+            int dozeEnabled = Secure.getInt(getContentResolver(), Secure.DOZE_ENABLED, 1);
             preference.setChecked(dozeEnabled != 0);
             preference.setOnPreferenceChangeListener(this);
         } else {
