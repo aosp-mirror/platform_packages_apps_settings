@@ -22,8 +22,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.android.settings.support.SupportPhone;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 
 /**
  * Feature provider for support tab.
@@ -67,6 +70,22 @@ public interface SupportFeatureProvider {
      * Returns a localized string indicating estimated wait time for a support time.
      */
     String getEstimatedWaitTime(Context context, @SupportType int type);
+
+
+    /**
+     * Returns a list of country codes that have phone support.
+     */
+    List<String> getPhoneSupportCountryCodes();
+
+    /**
+     * Returns a list of countries that have phone support.
+     */
+    List<String> getPhoneSupportCountries();
+
+    /**
+     * Returns a support phone for specified country.
+     */
+    SupportPhone getSupportPhones(String countryCode, boolean isTollfree);
 
     /**
      * Whether or not a disclaimer dialog should be displayed.
