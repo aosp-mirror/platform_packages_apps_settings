@@ -38,6 +38,7 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
 import android.provider.DocumentsContract;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
@@ -59,9 +60,7 @@ import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
-import com.android.settings.deletionhelper.DeletionHelperFragment;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
-import com.android.settings.deletionhelper.StorageManagerUpsellDialog;
 import com.android.settings.deviceinfo.StorageSettings.MountTask;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageMeasurement.MeasurementDetails;
@@ -445,8 +444,9 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 startActivity(intent);
                 return true;
             case R.id.storage_free:
-                startFragment(this, DeletionHelperFragment.class.getCanonicalName(),
-                        R.string.deletion_helper_title, DELETION_HELPER_SETTINGS, args);
+                final Intent deletion_helper_intent =
+                        new Intent(Settings.ACTION_DELETION_HELPER_SETTINGS);
+                startActivity(deletion_helper_intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -538,18 +538,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             return true;
         }
         return super.onPreferenceTreeClick(pref);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == DELETION_HELPER_SETTINGS && resultCode == DELETION_HELPER_CLEAR &&
-                StorageManagerUpsellDialog.shouldShow(getActivity())) {
-            long freedBytes = data.getLongExtra(DeletionHelperFragment.FREED_BYTES_KEY, 0);
-            StorageManagerUpsellDialog dialog =
-                    StorageManagerUpsellDialog.newInstance(freedBytes);
-            dialog.show(getFragmentManager(), StorageManagerUpsellDialog.TAG);
-        }
     }
 
     private final MeasurementReceiver mReceiver = new MeasurementReceiver() {

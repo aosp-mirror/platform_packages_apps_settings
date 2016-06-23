@@ -7493,17 +7493,6 @@
     <!-- [CHAR LIMIT=60] Name of dev option called demo mode -->
     <string name="demo_mode">Demo mode</string>
 
-    <!-- Activity title for deletion helper. [CHAR LIMIT=25] -->
-    <string name="deletion_helper_title">Remove from Device</string>
-    <!-- Summary of how much storage an app is using and the number of days since last use. [CHAR LIMIT=NONE]-->
-    <string name="deletion_helper_app_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> • Last used <xliff:g id="days" example="67">%2$d</xliff:g> days ago</string>
-    <!-- Summary of how much storage an app is using when it has never been used before. [CHAR LIMIT=NONE]-->
-    <string name="deletion_helper_app_summary_never_used"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> • Never used before</string>
-    <!-- Summary of how much storage an app is using when its last use is unknown. [CHAR LIMIT=NONE]-->
-    <string name="deletion_helper_app_summary_unknown_used"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> • Not sure when last used</string>
-    <!-- Button which clears out storage in the deletion helper. [CHAR LIMIT=60]-->
-    <string name="deletion_helper_free_button">Free up <xliff:g id="freeable" example="1.2GB">%1$s</xliff:g></string>
-
     <!-- Title text for connecting to customer support [CHAR LIMIT=80]-->
     <string name="support_escalation_title">We\'re here to help</string>
 
@@ -7610,27 +7599,6 @@
     <!-- Message for telling the user the kind of BT device being displayed in list. -->
     <string name="bluetooth_talkback_bluetooth">Bluetooth</string>
 
-    <!-- Preference group title for the photos and videos deletion service. [CHAR LIMIT=40]-->
-    <string name="deletion_helper_photos_title">Photos &amp; Videos (<xliff:g id="num_items">%1$d</xliff:g>)</string>
-
-    <!-- Summary of how much backed up storage that photos and videos service can clear from the local device. [CHAR LIMIT=NONE]-->
-    <string name="deletion_helper_photos_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> • Older than <xliff:g id="days">%2$d</xliff:g> days</string>
-
-    <!-- Preference title for the downloads deletion service. [CHAR LIMIT=40]-->
-    <string name="deletion_helper_downloads_title">Downloads (<xliff:g id="numItems" example="67">%1$d</xliff:g>)</string>
-
-    <!-- Summary of how much stale data can be cleared from the local download folder. [CHAR LIMIT=NONE]-->
-    <string name="deletion_helper_downloads_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> • Last modified <xliff:g id="days">%2$s</xliff:g></string>
-
-    <!-- Summary for when when there is nothing in the downloads folder to clear. [CHAR LIMIT=NONE]-->
-    <string name="deletion_helper_downloads_summary_empty"><xliff:g id="used" example="1.2GB">%1$s</xliff:g></string>
-
-    <!-- Message to warn the user before clearing space in the deletion helper. [CHAR LIMIT=NONE] -->
-    <string name="deletion_helper_clear_dialog_message">Remove <xliff:g id="clearable_bytes" example="1.2GB">%1$s</xliff:g> from your device.</string>
-
-    <!-- Button label for the dialog prompt for clearing data in deletion helper. [CHAR LIMIT=40] -->
-    <string name="deletion_helper_clear_dialog_remove">Remove</string>
-
     <!-- Used as title on the automatic storage manager settings. [CHAR LIMIT=60] -->
     <string name="automatic_storage_manager_settings">Storage manager</string>
 
@@ -7640,21 +7608,6 @@
     <!-- Dropdown preference title for dropdown describing how many days of data to retain.-->
     <string name="automatic_storage_manager_days_title">Remove photos &amp; videos</string>
 
-    <!-- Title for the dialog to up sell the storage manager. [CHAR LIMIT=NONE] -->
-    <string name="deletion_helper_upsell_title"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> now free. Manage storage automatically?</string>
-    <!-- Summary for the dialog to up sell the storage manager. [CHAR LIMIT=NONE] -->
-    <string name="deletion_helper_upsell_summary">Let Storage manager automatically free up space by removing backed up content from your device?</string>
-    <!-- Button to delay turning on the storage manager on the storage manager upsell. [CHAR LIMIT=20]-->
-    <string name="deletion_helper_upsell_cancel">No thanks</string>
-    <!-- Button to activate the storage manager on the storage manager upsell. [CHAR LIMIT=20]-->
-    <string name="deletion_helper_upsell_activate">Turn on</string>
-
-    <!-- Title for the apps category in the deletion helper, showing how many apps to delete. [CHAR LIMIT=40]-->
-    <string name="deletion_helper_apps_group_title">Apps (<xliff:g id="num_items">%1$d</xliff:g>)</string>
-
-    <!-- Summary for the apps category in the deletion helper, showing how many space to clear. [CHAR LIMIT=NONE]-->
-    <string name="deletion_helper_apps_group_summary"><xliff:g id="used" example="1.2GB">%1$s</xliff:g> • Last used <xliff:g id="days">%2$d</xliff:g> days ago</string>
-
     <!-- Category title for the automatic settings in the storage manager settings. [CHAR LIMIT=40] -->
     <string name="deletion_helper_automatic_title">Automatic</string>
 
@@ -7663,12 +7616,6 @@
 
     <!-- Preference menu title for accessing the deletion helper from the storage manager settings. [CHAR LIMIT=30]-->
     <string name="deletion_helper_preference_title">Free space now</string>
-
-    <!-- Preference title for the automatic storage manager toggle. [CHAR LIMIT=60]-->
-    <string name="automatic_storage_manager_preference_title">Storage manager</string>
-
-    <!-- Automatic storage management service label. [CHAR LIMIT=40]-->
-    <string name="automatic_storage_manager_service_label">Automatic Storage Management Service</string>
 
     <!-- Preference title for gesture settings [CHAR LIMIT=25]-->
     <string name="gesture_preference_title">Gestures</string>
