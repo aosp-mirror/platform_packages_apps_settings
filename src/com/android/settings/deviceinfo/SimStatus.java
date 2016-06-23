@@ -128,7 +128,8 @@ public class SimStatus extends SettingsPreferenceFragment {
                     return;
                 }
                 CellBroadcastMessage cbMessage = (CellBroadcastMessage) extras.get("message");
-                if (cbMessage != null && cbMessage.getServiceCategory() == 50) {
+                if (cbMessage != null && cbMessage.getServiceCategory() == 50
+                        && mSir.getSubscriptionId() == cbMessage.getSubId()) {
                     String latestAreaInfo = cbMessage.getMessageBody();
                     updateAreaInfo(latestAreaInfo);
                 }
