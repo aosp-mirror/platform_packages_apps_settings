@@ -690,7 +690,7 @@ public class ChooseLockPattern extends SettingsActivity {
         }
     }
 
-    private static class SaveAndFinishWorker extends SaveChosenLockWorkerBase {
+    public static class SaveAndFinishWorker extends SaveChosenLockWorkerBase {
 
         private List<LockPatternView.Cell> mChosenPattern;
         private String mCurrentPattern;

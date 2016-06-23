@@ -689,7 +689,7 @@ public class ChooseLockPassword extends SettingsActivity {
         }
     }
 
-    private static class SaveAndFinishWorker extends SaveChosenLockWorkerBase {
+    public static class SaveAndFinishWorker extends SaveChosenLockWorkerBase {
 
         private String mChosenPassword;
         private String mCurrentPassword;
