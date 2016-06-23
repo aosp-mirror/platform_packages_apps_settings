@@ -387,6 +387,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
     }
 
     private void onPair(String value) {
+        Log.i(TAG, "Pairing dialog accepted");
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN:
             case BluetoothDevice.PAIRING_VARIANT_PIN_16_DIGITS:
@@ -422,6 +423,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
     }
 
     private void onCancel() {
+        Log.i(TAG, "Pairing dialog canceled");
         mDevice.cancelPairingUserInput();
     }
 
