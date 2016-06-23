@@ -59,6 +59,11 @@ public interface SupportFeatureProvider {
     boolean isOperatingNow(@SupportType int type);
 
     /**
+     * Returns localized string for operation hours.
+     */
+    CharSequence getOperationHours(Context context, @SupportType int type);
+
+    /**
      * Returns a localized string indicating estimated wait time for a support time.
      */
     String getEstimatedWaitTime(Context context, @SupportType int type);
