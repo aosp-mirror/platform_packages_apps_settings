@@ -228,14 +228,8 @@ public class AccountSettings extends SettingsPreferenceFragment
             }
             if (preference == profileData.removeWorkProfilePreference) {
                 final int userId = profileData.userInfo.id;
-                UserDialogs.createRemoveDialog(getActivity(), userId,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                mUm.removeUser(userId);
-                            }
-                        }
-                ).show();
+                RemoveUserFragment.newInstance(userId).show(getActivity().getFragmentManager(),
+                        "removeUser");
                 return true;
             }
             if (preference == profileData.managedProfilePreference) {
@@ -618,6 +612,32 @@ public class AccountSettings extends SettingsPreferenceFragment
                         mUserHandle);
             }
             return true;
+        }
+    }
+
+    public static class RemoveUserFragment extends DialogFragment {
+        private static final String ARG_USER_ID = "userId";
+
+        static RemoveUserFragment newInstance(int userId) {
+            Bundle args = new Bundle();
+            args.putInt(ARG_USER_ID, userId);
+            RemoveUserFragment fragment = new RemoveUserFragment();
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final int userId = getArguments().getInt(ARG_USER_ID);
+            return UserDialogs.createRemoveDialog(getActivity(), userId,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            UserManager um = (UserManager)
+                                    getActivity().getSystemService(Context.USER_SERVICE);
+                            um.removeUser(userId);
+                        }
+                    });
         }
     }
 
