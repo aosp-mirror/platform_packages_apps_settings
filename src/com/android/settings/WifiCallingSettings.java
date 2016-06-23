@@ -354,6 +354,8 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             preferenceScreen.addPreference(mButtonWfcMode);
             if (updateAddressEnabled) {
                 preferenceScreen.addPreference(mUpdateAddress);
+            } else {
+                preferenceScreen.removePreference(mUpdateAddress);
             }
         } else {
             preferenceScreen.removePreference(mButtonWfcMode);
