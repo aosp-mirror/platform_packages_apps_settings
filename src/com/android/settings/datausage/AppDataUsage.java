@@ -138,7 +138,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         mCycle = (SpinnerPreference) findPreference(KEY_CYCLE);
         mCycleAdapter = new CycleAdapter(getContext(), mCycle, mCycleListener, false);
 
-        if (UserHandle.isApp(mAppItem.key) || mAppItem.key == Process.SYSTEM_UID) {
+        if (mAppItem.key > 0) {
             if (mPackages.size() != 0) {
                 PackageManager pm = getPackageManager();
                 try {
