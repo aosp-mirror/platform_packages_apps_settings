@@ -39,6 +39,10 @@
     <string name="radio_info_data_connection_enable" msgid="8656750679353982712">"Деректер байланысын қосу"</string>
     <string name="radio_info_data_connection_disable" msgid="8541302390883231216">"Деректер байланысын өшіру"</string>
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE қамтамасыз ету"</string>
+    <!-- no translation found for vt_provisioned_switch_string (7876998291744854759) -->
+    <skip />
+    <!-- no translation found for wfc_provisioned_switch_string (3985406545172898078) -->
+    <skip />
     <string name="radio_info_radio_power" msgid="1208229437948820417">"Ұялы радио қуаты"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM мекенжай кітапшасын қарау"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Бекітілген теру нөмірлерін қарау"</string>
@@ -355,7 +359,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Жою"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Бастайық!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Саусақты сенсорға қойып, дірілді сезгеннен кейін көтеріңіз"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"Жалғастыру"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"Тағы бір рет түртіңіз"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Саусақ ізінің әр түрлі бөліктерінің барлығын қосу үшін саусақты азғантай жылжытыңыз"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Саусақ ізі қосылды!"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Осы белгішені көргенде идентификациялау немесе сатып алуды авторизациялау үшін саусақ ізін пайдалануға болады."</string>
@@ -3096,13 +3100,12 @@
     <string name="premium_sms_access" msgid="4660047004791638305">"Premium SMS пайдалану"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Өшірілген"</string>
     <string name="demo_mode" msgid="2655748420527206870">"Демо режимі"</string>
-    <string name="deletion_helper_title" msgid="32626003656187495">"Құрылғыдан жою"</string>
-    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • Соңғы рет <xliff:g id="DAYS">%2$d</xliff:g> күн бұрын пайдаланылды"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • Ешқашан пайдаланылмады"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Соңғы пайдаланылған уақыты белгісіз"</string>
-    <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> босату"</string>
-    <string name="support_escalation_title" msgid="7311759892297590244">"Үздіксіз қолдау көрсету"</string>
-    <string name="support_escalation_summary" msgid="5284600375153448787">"Қолдау көрсету қоңырауына немесе чатына сұраныс жіберуге болады. Біз барынша жылдам жауап береміз."</string>
+    <string name="support_escalation_title" msgid="4111071371281023145">"Көмектесуге әрқашан дайынбыз"</string>
+    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Біз сізге аптасына 7 күн, 24 сағат бойы көмек көрсетуге дайынбыз"</string>
+    <string name="support_escalation_closed_title" msgid="2761088127372645946">"Тікелей қолдау көрсету қызметі жабық"</string>
+    <string name="support_escalation_summary" msgid="8307574973250863647">"Біздің қолдау көрсету ұжымы кез келген мәселені жылдам шешуге тырысады."</string>
+    <string name="support_escalation_24_7_summary" msgid="2737400572126290234">"Біздің қолдау көрсету ұжымы кез келген күні, тәулік бойы қызмет көрсетуге дайын."</string>
+    <string name="support_escalation_closed_summary" msgid="701533382024032467">"Қолдау көрсету қызметі істеп тұрғанда қайта кіріп көріңіз."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Желіден тыс"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Көмек алу үшін, бірінші Wi-Fi немесе деректер желісін қосыңыз."</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Қолдау көрсету қоңырауы"</string>
@@ -3139,28 +3142,13 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Құлақаспап"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Кіріс құралы"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
-    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Суреттер мен бейнелер (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> күннен асты"</string>
-    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Жүктеп алынғандар (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • Соңғы өзгерту: <xliff:g id="DAYS">%2$s</xliff:g>"</string>
-    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
-    <skip />
-    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Құрылғыдан <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> жойыңыз."</string>
-    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"Жою"</string>
     <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Жад реттегіші"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Жад кеңістігін босату үшін жад реттегіші құрылғыдағы сақтық көшірмесі жасалған фотосуреттер мен бейнелерді өшіреді."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Фотосуреттер мен бейнелерді жою"</string>
-    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"<xliff:g id="USED">%1$s</xliff:g> босады. Жадты автоматты түрде басқару керек пе?"</string>
-    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"Жад реттегішіне құрылғыдағы сақтық көшірмесі жасалған мазмұнды жою арқылы автоматты түрде орын босатуға рұқсат беру керек пе?"</string>
-    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"Жоқ, рақмет"</string>
-    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Қосу"</string>
-    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Қолданбалар (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • Соңғы рет <xliff:g id="DAYS">%2$d</xliff:g> күн бұрын пайдаланылды"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Жад реттегіші"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Aвтоматты"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Қолмен"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Орынды қазір босату"</string>
-    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Жад реттегіші"</string>
-    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Жадты автоматты түрде басқару жүйесі"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Қимылдар"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Камераға өту"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Камераны жылдам ашу үшін қуат түймесін екі рет түртіңіз. Кез келген экраннан жұмыс істейді."</string>

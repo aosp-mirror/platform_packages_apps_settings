@@ -39,6 +39,10 @@
     <string name="radio_info_data_connection_enable" msgid="8656750679353982712">"启用数据网络连接"</string>
     <string name="radio_info_data_connection_disable" msgid="8541302390883231216">"停用数据网络连接"</string>
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"已配置 VoLTE"</string>
+    <!-- no translation found for vt_provisioned_switch_string (7876998291744854759) -->
+    <skip />
+    <!-- no translation found for wfc_provisioned_switch_string (3985406545172898078) -->
+    <skip />
     <string name="radio_info_radio_power" msgid="1208229437948820417">"移动无线装置电源"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"查看 SIM 卡通讯录"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"查看固定拨号号码"</string>
@@ -360,7 +364,7 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"指纹已添加！"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"只要您看见此图标，就可以使用指纹进行身份验证或对购买交易进行授权。"</string>
     <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"只需触摸指纹传感器即可唤醒并解锁设备。"</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7104778933406207968">"当您看到此图标后，您也可以对购买交易进行授权或登录应用。"</string>
+    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7104778933406207968">"当您看到此图标时，您还可以对购买交易进行授权或登录应用。"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"要跳过指纹设置？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"您已选择使用指纹作为解锁手机的方式之一。如果您现在跳过这项设置，则以后还需要再进行设置。设置过程只需大约一分钟的时间。"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"设置屏幕锁定"</string>
@@ -3096,13 +3100,12 @@
     <string name="premium_sms_access" msgid="4660047004791638305">"付费短信权限"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"已停用"</string>
     <string name="demo_mode" msgid="2655748420527206870">"演示模式"</string>
-    <string name="deletion_helper_title" msgid="32626003656187495">"从设备中移除"</string>
-    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> 天前使用过"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • 从未使用过"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • 不确定上次使用时间"</string>
-    <string name="deletion_helper_free_button" msgid="667489686914669981">"释放 <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <string name="support_escalation_title" msgid="7311759892297590244">"全天候客户支持"</string>
-    <string name="support_escalation_summary" msgid="5284600375153448787">"您可以要求与支持人员通话或聊天，我们会尽快与您联系"</string>
+    <string name="support_escalation_title" msgid="4111071371281023145">"我们会随时为您提供帮助"</string>
+    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我们可全天候为您提供服务"</string>
+    <string name="support_escalation_closed_title" msgid="2761088127372645946">"目前不是在线支持服务时段"</string>
+    <string name="support_escalation_summary" msgid="8307574973250863647">"我们的支持团队会尽快为您解决任何问题。"</string>
+    <string name="support_escalation_24_7_summary" msgid="2737400572126290234">"我们的支持团队可全天候为您提供服务。"</string>
+    <string name="support_escalation_closed_summary" msgid="701533382024032467">"请在支持服务时段内再回来寻求帮助。"</string>
     <string name="support_offline_title" msgid="482049324795211184">"您没有联网"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"要与支持人员联系，请先连接到 WLAN 网络或移动数据网络。"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"与支持人员通话"</string>
@@ -3139,28 +3142,13 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"耳机"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"外围输入设备"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"蓝牙"</string>
-    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"照片和视频（<xliff:g id="NUM_ITEMS">%1$d</xliff:g> 项）"</string>
-    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • 超过 <xliff:g id="DAYS">%2$d</xliff:g> 天以前"</string>
-    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"下载内容（<xliff:g id="NUMITEMS">%1$d</xliff:g> 项）"</string>
-    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • 上次修改时间：<xliff:g id="DAYS">%2$s</xliff:g>"</string>
-    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
-    <skip />
-    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"从您的设备中移除 <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> 内容。"</string>
-    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"移除"</string>
     <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"存储空间管理器"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"存储空间管理器会从您的设备中移除已备份的照片和视频，从而释放存储空间。"</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"移除照片和视频"</string>
-    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"已释放 <xliff:g id="USED">%1$s</xliff:g>。要让系统自动管理存储空间吗？"</string>
-    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"要让存储空间管理器从您的设备中移除已备份的内容，从而自动释放存储空间吗？"</string>
-    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"不用了"</string>
-    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"开启"</string>
-    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"应用（<xliff:g id="NUM_ITEMS">%1$d</xliff:g> 个）"</string>
-    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> 天前使用过"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"存储空间管理器"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自动"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手动"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"立即释放空间"</string>
-    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"存储空间管理器"</string>
-    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"自动存储空间管理服务"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"手势"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"快速打开相机"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"要快速打开相机，只需按两次电源按钮即可（适用于任何屏幕）。"</string>
