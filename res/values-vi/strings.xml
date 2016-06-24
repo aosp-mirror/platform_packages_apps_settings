@@ -39,6 +39,10 @@
     <string name="radio_info_data_connection_enable" msgid="8656750679353982712">"Bật kết nối dữ liệu"</string>
     <string name="radio_info_data_connection_disable" msgid="8541302390883231216">"Tắt kết nối dữ liệu"</string>
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"Đã cấp phép VoLTE"</string>
+    <!-- no translation found for vt_provisioned_switch_string (7876998291744854759) -->
+    <skip />
+    <!-- no translation found for wfc_provisioned_switch_string (3985406545172898078) -->
+    <skip />
     <string name="radio_info_radio_power" msgid="1208229437948820417">"Cường độ của sóng di động"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Xem sổ địa chỉ trên SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Xem Số quay định sẵn"</string>
@@ -3096,13 +3100,12 @@
     <string name="premium_sms_access" msgid="4660047004791638305">"Quyền truy cập SMS cao cấp"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Đã tắt"</string>
     <string name="demo_mode" msgid="2655748420527206870">"Chế độ trình diễn"</string>
-    <string name="deletion_helper_title" msgid="32626003656187495">"Xóa khỏi thiết bị"</string>
-    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • Được sử dụng gần đây nhất <xliff:g id="DAYS">%2$d</xliff:g> ngày trước"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • Chưa từng được sử dụng trước đây"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Không rõ thời điểm được sử dụng gần đây nhất"</string>
-    <string name="deletion_helper_free_button" msgid="667489686914669981">"Giải phóng <xliff:g id="FREEABLE">%1$s</xliff:g>"</string>
-    <string name="support_escalation_title" msgid="7311759892297590244">"Hỗ trợ 24/7"</string>
-    <string name="support_escalation_summary" msgid="5284600375153448787">"Bạn có thể yêu cầu trò chuyện hoặc gọi điện cho bộ phận hỗ trợ và chúng tôi sẽ nhanh chóng liên hệ lại với bạn"</string>
+    <string name="support_escalation_title" msgid="4111071371281023145">"Chúng tôi sẵn sàng trợ giúp"</string>
+    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Chúng tôi sẵn sàng trợ giúp bạn 24/7"</string>
+    <string name="support_escalation_closed_title" msgid="2761088127372645946">"Đã đóng phiên hỗ trợ trực tiếp"</string>
+    <string name="support_escalation_summary" msgid="8307574973250863647">"Nhóm hỗ trợ của chúng tôi sẵn sàng giải quyết mọi vấn đề ngay khi có thể."</string>
+    <string name="support_escalation_24_7_summary" msgid="2737400572126290234">"Nhóm hỗ trợ của chúng tôi làm việc cả ngày, vào mọi ngày."</string>
+    <string name="support_escalation_closed_summary" msgid="701533382024032467">"Quay trở lại trong thời gian hỗ trợ."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Bạn đang ngoại tuyến"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Để liên hệ dịch vụ hỗ trợ, trước hết hãy kết nối với Wi-Fi hoặc dữ liệu."</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Gọi điện cho bộ phận hỗ trợ"</string>
@@ -3139,28 +3142,13 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Tai nghe"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Thiết bị ngoại vi vào"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
-    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Ảnh và video (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • Cũ hơn <xliff:g id="DAYS">%2$d</xliff:g> ngày"</string>
-    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Tài nguyên đã tải xuống (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • Được sửa đổi gần đây nhất <xliff:g id="DAYS">%2$s</xliff:g>"</string>
-    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
-    <skip />
-    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Xóa <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> khỏi thiết bị của bạn."</string>
-    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"Xóa"</string>
     <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Trình quản lý bộ nhớ"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Để giúp giải phóng dung lượng lưu trữ, trình quản lý bộ nhớ sẽ xóa ảnh và video đã sao lưu khỏi thiết bị của bạn."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Xóa ảnh và video"</string>
-    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"Hiện còn trống <xliff:g id="USED">%1$s</xliff:g>. Tự động quản lý bộ nhớ?"</string>
-    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"Cho phép Trình quản lý bộ nhớ tự động giải phóng dung lượng bằng cách xóa nội dung đã sao lưu khỏi thiết bị của bạn?"</string>
-    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"Không, cảm ơn"</string>
-    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Bật"</string>
-    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Ứng dụng (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • Được sử dụng gần đây nhất <xliff:g id="DAYS">%2$d</xliff:g> ngày trước"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Trình quản lý bộ nhớ"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Tự động"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Hướng dẫn sử dụng"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Giải phóng dung lượng ngay"</string>
-    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Trình quản lý bộ nhớ"</string>
-    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Dịch vụ quản lý bộ nhớ tự động"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Cử chỉ"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Chuyển đến Máy ảnh"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Để mở nhanh máy ảnh, chỉ cần nhấn đúp vào nút nguồn. Hoạt động từ mọi màn hình."</string>
