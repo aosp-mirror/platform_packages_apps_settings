@@ -1058,6 +1058,13 @@ public class SettingsActivity extends SettingsDrawerActivity
                 UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
                 && !Utils.isMonkeyRunning(), isAdmin, pm);
 
+        setTileEnabled(new ComponentName(packageName,
+                        Settings.WirelessSettingsActivity.class.getName()),
+                !UserManager.isDeviceInDemoMode(this), isAdmin, pm);
+
+        setTileEnabled(new ComponentName(packageName,
+                        Settings.DateTimeSettingsActivity.class.getName()),
+                !UserManager.isDeviceInDemoMode(this), isAdmin, pm);
         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
         setTileEnabled(new ComponentName(packageName,
                         Settings.PaymentSettingsActivity.class.getName()),
