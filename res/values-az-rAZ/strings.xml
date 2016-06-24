@@ -39,6 +39,10 @@
     <string name="radio_info_data_connection_enable" msgid="8656750679353982712">"Data Bağlantısını Aktiv Edin"</string>
     <string name="radio_info_data_connection_disable" msgid="8541302390883231216">"Data Bağlantısını Deaktiv Edin"</string>
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE Təmin edildi"</string>
+    <!-- no translation found for vt_provisioned_switch_string (7876998291744854759) -->
+    <skip />
+    <!-- no translation found for wfc_provisioned_switch_string (3985406545172898078) -->
+    <skip />
     <string name="radio_info_radio_power" msgid="1208229437948820417">"Mobil Radio Enerjisi"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM Ünvanları Kitabçasına Baxın"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Stabil Yığım Nömrələrinə Baxın"</string>
@@ -3100,13 +3104,12 @@
     <string name="premium_sms_access" msgid="4660047004791638305">"Premium SMS girişi"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Qeyri-aktiv"</string>
     <string name="demo_mode" msgid="2655748420527206870">"Demo rejimi"</string>
-    <string name="deletion_helper_title" msgid="32626003656187495">"Cihazdan silin"</string>
-    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • Sonuncu dəfə <xliff:g id="DAYS">%2$d</xliff:g> gün əvvəl istifadə olunub"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g>, Əvvəl istifadə olunmayıb"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Son istifadə vaxtı dəqiq deyil"</string>
-    <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> yer boşaldın"</string>
-    <string name="support_escalation_title" msgid="7311759892297590244">"Saat ətrafında dəstək"</string>
-    <string name="support_escalation_summary" msgid="5284600375153448787">"Siz dəstək zəngi və ya söhbəti üçün sorğu göndərə bilərsiniz və biz tezliklə Sizinlə əlaqə saxlayacağıq"</string>
+    <string name="support_escalation_title" msgid="4111071371281023145">"Yardım üçün buradayıq"</string>
+    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Sizin üçün 24/7 buradayıq"</string>
+    <string name="support_escalation_closed_title" msgid="2761088127372645946">"Canlı dəstək bağlandı"</string>
+    <string name="support_escalation_summary" msgid="8307574973250863647">"Dəstək komandamız hər hansı problemi mümkün qədər tez həll etmək üçün buradadır."</string>
+    <string name="support_escalation_24_7_summary" msgid="2737400572126290234">"Dəstək komandamız bütün günü, hər zaman buradadır."</string>
+    <string name="support_escalation_closed_summary" msgid="701533382024032467">"Xidmət saatları müddətində yenidən gəlin."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Oflaynsınız"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Dəstəyi artırmaq üçün, ilk olaraq Wi-Fi və ya dataya qoşulun."</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Dəstək zəngi"</string>
@@ -3143,28 +3146,13 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Qulaqlıq"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Daxiletmə periferiki"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
-    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Fotolar və Videolar (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> gündən daha köhnə"</string>
-    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Endirmələr (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$s</xliff:g> son dəyişiklik olunub"</string>
-    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
-    <skip />
-    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"<xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> cihazınızdan silinsin."</string>
-    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"Silin"</string>
     <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Yaddaş Meneceri"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Yaddaşda boş yer yaratmaq üçün, yaddaş meneceri yedəklənmiş foto və videoları cihazınızdan silir."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Foto və videoları silin"</string>
-    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"<xliff:g id="USED">%1$s</xliff:g> indi pulsuzdur. Yaddaş avtomatik idarə edilsin?"</string>
-    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"Yaddaş menecerinə yedəklənmiş məzmunu cihazınızdan silməklə boş yer yaratmağa icazə verilsin?"</string>
-    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"Xeyr, təşəkkür edirəm"</string>
-    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Aktivləşdirin"</string>
-    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Tətbiqlər (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • Sonuncu dəfə <xliff:g id="DAYS">%2$d</xliff:g> gün əvvəl istifadə olunub"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Yaddaş Meneceri"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Avtomatik"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Təlimat"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Hazırda boş yaddaş"</string>
-    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Yaddaş Meneceri"</string>
-    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Avtomatik Yaddaş İdarəetməsi Xidməti"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Jestlər"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Kameraya keçin"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Kameranı cəld açmaq üçün, enerji düyməsinə iki dəfə klikləyin. Hər ekranda işləyir."</string>
