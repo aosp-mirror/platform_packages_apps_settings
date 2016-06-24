@@ -39,6 +39,10 @@
     <string name="radio_info_data_connection_enable" msgid="8656750679353982712">"Gegevensverbinding inschakelen"</string>
     <string name="radio_info_data_connection_disable" msgid="8541302390883231216">"Gegevensverbinding uitschakelen"</string>
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE-registratie"</string>
+    <!-- no translation found for vt_provisioned_switch_string (7876998291744854759) -->
+    <skip />
+    <!-- no translation found for wfc_provisioned_switch_string (3985406545172898078) -->
+    <skip />
     <string name="radio_info_radio_power" msgid="1208229437948820417">"Energieverbruik door mobiele radio"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Adresboek op simkaart weergeven"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Vaste nummers weergeven"</string>
@@ -2906,12 +2910,12 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Geen"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Als je gebruikstoegang uitschakelt voor deze app, wordt niet voorkomen dat je beheerder gegevensgebruik voor apps in je werkprofiel bijhoudt."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g> van <xliff:g id="COUNT_1">%2$d</xliff:g> tekens gebruikt"</string>
-    <string name="draw_overlay_title" msgid="4003905926278954971">"Apps die over andere apps kunnen tekenen"</string>
+    <string name="draw_overlay_title" msgid="4003905926278954971">"Apps die over andere apps tekenen"</string>
     <string name="draw_overlay" msgid="9078696044299199938">"Over andere apps tekenen"</string>
     <string name="system_alert_window_settings" msgid="1757821151143694951">"Over andere apps tekenen"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Apps"</string>
     <string name="system_alert_window_access_title" msgid="8811695381437304132">"Over andere apps tekenen"</string>
-    <string name="permit_draw_overlay" msgid="6606018549732046201">"Toestaan dat de app over andere apps tekent"</string>
+    <string name="permit_draw_overlay" msgid="6606018549732046201">"Tekenen over andere apps toestaan"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Toestemming voor tekenen op bovenste venster"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Met deze toestemming kan een app op de voorgrond worden weergegeven vóór andere apps die je gebruikt en kan deze je gebruik van de interface in andere apps verstoren, of wijzigen wat je denkt in andere apps te zien."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtual reality listener stereo helperservice"</string>
@@ -3100,13 +3104,12 @@
     <string name="premium_sms_access" msgid="4660047004791638305">"Premium sms-toegang"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Uitgeschakeld"</string>
     <string name="demo_mode" msgid="2655748420527206870">"Demomodus"</string>
-    <string name="deletion_helper_title" msgid="32626003656187495">"Verwijderen van apparaat"</string>
-    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> dagen geleden voor het laatst gebruikt"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • Nog nooit gebruikt"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • Laatste gebruiksdatum onbekend"</string>
-    <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> vrijmaken"</string>
-    <string name="support_escalation_title" msgid="7311759892297590244">"Er is altijd ondersteuning beschikbaar"</string>
-    <string name="support_escalation_summary" msgid="5284600375153448787">"Je kunt ondersteuning aanvragen via een telefoonoproep of chatgesprek. We nemen dan zo snel mogelijk contact met je op."</string>
+    <string name="support_escalation_title" msgid="4111071371281023145">"We zijn er om je te helpen"</string>
+    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"We staan voor je klaar"</string>
+    <string name="support_escalation_closed_title" msgid="2761088127372645946">"Geen live ondersteuning beschikbaar"</string>
+    <string name="support_escalation_summary" msgid="8307574973250863647">"Ons ondersteuningsteam probeert problemen zo snel mogelijk op te lossen."</string>
+    <string name="support_escalation_24_7_summary" msgid="2737400572126290234">"Ons ondersteuningsteam is elke dag, de hele dag beschikbaar."</string>
+    <string name="support_escalation_closed_summary" msgid="701533382024032467">"Kom terug tijdens de openingstijden van de klantenondersteuning."</string>
     <string name="support_offline_title" msgid="482049324795211184">"Je bent offline"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"Als je contact wilt opnemen met het ondersteuningsteam, maak je eerst verbinding via een wifi- of datanetwerk"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"Ondersteuningsoproep"</string>
@@ -3143,28 +3146,13 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Hoofdtelefoon"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Randapparaat voor invoer"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
-    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"Foto\'s en video\'s (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • Ouder dan <xliff:g id="DAYS">%2$d</xliff:g> dagen"</string>
-    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"Downloads (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • Laatst gewijzigd <xliff:g id="DAYS">%2$s</xliff:g>"</string>
-    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
-    <skip />
-    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"Maak <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> vrij op je apparaat."</string>
-    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"Verwijderen"</string>
     <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Opslagbeheer"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Opslagbeheer verwijdert foto\'s en video\'s waarvan een back-up is gemaakt, van je apparaat om opslagruimte vrij te maken."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Foto\'s en video\'s verwijderen"</string>
-    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"Er is nu <xliff:g id="USED">%1$s</xliff:g> vrij. Wil je opslagruimte automatisch beheren?"</string>
-    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"Opslagbeheer automatisch ruimte laten vrijmaken door content waarvan een back-up is gemaakt, van je apparaat te verwijderen?"</string>
-    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"Nee, bedankt"</string>
-    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"Inschakelen"</string>
-    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"Apps (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> dagen geleden voor het laatst gebruikt"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Opslagbeheer"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatisch"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Handmatig"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Nu ruimte vrijmaken"</string>
-    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Opslagbeheer"</string>
-    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"Automatische opslagbeheerservice"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gebaren"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Naar camera schakelen"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Als je de camera snel wilt openen, dubbeltik je op de aan/uit-knop. Werkt vanuit elk scherm."</string>

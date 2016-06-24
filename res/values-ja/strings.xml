@@ -39,6 +39,10 @@
     <string name="radio_info_data_connection_enable" msgid="8656750679353982712">"データ接続を有効にする"</string>
     <string name="radio_info_data_connection_disable" msgid="8541302390883231216">"データ接続を無効にする"</string>
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE プロビジョニング"</string>
+    <!-- no translation found for vt_provisioned_switch_string (7876998291744854759) -->
+    <skip />
+    <!-- no translation found for wfc_provisioned_switch_string (3985406545172898078) -->
+    <skip />
     <string name="radio_info_radio_power" msgid="1208229437948820417">"セル無線電力"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM のアドレス帳を表示"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"発信番号制限を表示"</string>
@@ -2910,7 +2914,7 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"なし"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"このアプリによる使用量へのアクセス許可をOFFにしても、管理者は引き続き仕事用プロファイル内のアプリのデータ使用量をトラッキングできます。"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g>文字使用"</string>
-    <string name="draw_overlay_title" msgid="4003905926278954971">"他のアプリの上に重ねて描画できるアプリ"</string>
+    <string name="draw_overlay_title" msgid="4003905926278954971">"他のアプリ上に重ねられるアプリ"</string>
     <string name="draw_overlay" msgid="9078696044299199938">"他のアプリの上に重ねて描画"</string>
     <string name="system_alert_window_settings" msgid="1757821151143694951">"他のアプリの上に重ねて表示"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"アプリ"</string>
@@ -3104,13 +3108,12 @@
     <string name="premium_sms_access" msgid="4660047004791638305">"プレミアム SMS へのアクセス"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"無効"</string>
     <string name="demo_mode" msgid="2655748420527206870">"デモモード"</string>
-    <string name="deletion_helper_title" msgid="32626003656187495">"端末から削除"</string>
-    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • 最終使用日: <xliff:g id="DAYS">%2$d</xliff:g> 日前"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • 未使用"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • 最終使用日: 不明"</string>
-    <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> を解放"</string>
-    <string name="support_escalation_title" msgid="7311759892297590244">"24 時間対応のカスタマー サポート"</string>
-    <string name="support_escalation_summary" msgid="5284600375153448787">"電話やチャットによるサポートをリクエストすることができます。担当者ができる限り早急にご連絡いたします"</string>
+    <string name="support_escalation_title" msgid="4111071371281023145">"サポートのご案内"</string>
+    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"サポートのご案内（年中無休 24 時間体制）"</string>
+    <string name="support_escalation_closed_title" msgid="2761088127372645946">"ライブサポートの受付終了"</string>
+    <string name="support_escalation_summary" msgid="8307574973250863647">"サポートチームができる限り速やかに対応いたします。"</string>
+    <string name="support_escalation_24_7_summary" msgid="2737400572126290234">"サポートチームが年中無休 24 時間体制で対応いたします。"</string>
+    <string name="support_escalation_closed_summary" msgid="701533382024032467">"恐れ入りますが、サポート対応時間にお問い合わせください。"</string>
     <string name="support_offline_title" msgid="482049324795211184">"オフラインです"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"サポートに問い合わせるには、Wi-Fi またはデータ ネットワークに接続してください。"</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"電話サポート"</string>
@@ -3147,28 +3150,13 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"ヘッドフォン"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"入力用周辺機器"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
-    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"写真と動画（<xliff:g id="NUM_ITEMS">%1$d</xliff:g>）"</string>
-    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> 日前まで"</string>
-    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"ダウンロード（<xliff:g id="NUMITEMS">%1$d</xliff:g> 件）"</string>
-    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • 最終更新日: <xliff:g id="DAYS">%2$s</xliff:g> 日前"</string>
-    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
-    <skip />
-    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"<xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> のデータを端末から削除します。"</string>
-    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"削除"</string>
     <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"ストレージ マネージャ"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"ストレージの空き容量を増やすため、ストレージ マネージャはバックアップした写真や動画をお使いの端末から削除します。"</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"写真と動画を削除"</string>
-    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"<xliff:g id="USED">%1$s</xliff:g> のデータを削除できます。ストレージを自動管理しますか？"</string>
-    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"ストレージ マネージャはお使いの端末からバックアップ コンテンツを削除して空き容量を自動的に増やします。ストレージ マネージャを有効にしますか？"</string>
-    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"今は有効にしない"</string>
-    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"有効にする"</string>
-    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"アプリ（<xliff:g id="NUM_ITEMS">%1$d</xliff:g> 件）"</string>
-    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • 最終使用日: <xliff:g id="DAYS">%2$d</xliff:g> 日前"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"ストレージ マネージャ"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自動"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手動"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"今すぐ空き容量を増やす"</string>
-    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"ストレージ マネージャ"</string>
-    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"自動ストレージ管理サービス"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"操作"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"カメラの起動"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"カメラをすばやく起動するには、電源ボタンをダブルタップします。どの画面からでも操作できます。"</string>

@@ -39,6 +39,10 @@
     <string name="radio_info_data_connection_enable" msgid="8656750679353982712">"डेटा कनेक्शन सक्षम करें"</string>
     <string name="radio_info_data_connection_disable" msgid="8541302390883231216">"डेटा कनेक्शन अक्षम करें"</string>
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"VoLTE प्रावधान किया गया"</string>
+    <!-- no translation found for vt_provisioned_switch_string (7876998291744854759) -->
+    <skip />
+    <!-- no translation found for wfc_provisioned_switch_string (3985406545172898078) -->
+    <skip />
     <string name="radio_info_radio_power" msgid="1208229437948820417">"सेल्युलर रेडियो पावर"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"सिम पता पुस्तिका देखें"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"फ़िक्‍स्‍ड डायलिंग नंबर देखें"</string>
@@ -3100,13 +3104,12 @@
     <string name="premium_sms_access" msgid="4660047004791638305">"प्रीमियम SMS एक्सेस"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"अक्षम किया गया"</string>
     <string name="demo_mode" msgid="2655748420527206870">"डेमो मोड"</string>
-    <string name="deletion_helper_title" msgid="32626003656187495">"डिवाइस से निकालें"</string>
-    <string name="deletion_helper_app_summary" msgid="6240455605247059339">"<xliff:g id="USED">%1$s</xliff:g> • पिछली बार <xliff:g id="DAYS">%2$d</xliff:g> दिन पहले उपयोग किया गया"</string>
-    <string name="deletion_helper_app_summary_never_used" msgid="1113385590219547397">"<xliff:g id="USED">%1$s</xliff:g> • पहले कभी उपयोग नहीं किया गया"</string>
-    <string name="deletion_helper_app_summary_unknown_used" msgid="2397045373780264380">"<xliff:g id="USED">%1$s</xliff:g> • सुनिश्चित नहीं हैं कि पिछली बार कब उपयोग किया गया"</string>
-    <string name="deletion_helper_free_button" msgid="667489686914669981">"<xliff:g id="FREEABLE">%1$s</xliff:g> खाली करें"</string>
-    <string name="support_escalation_title" msgid="7311759892297590244">"चौबीसों घंटे सहायता"</string>
-    <string name="support_escalation_summary" msgid="5284600375153448787">"आप सहायता को कॉल करने या चैट करने का अनुरोध कर सकते हैं और हम आपसे तुरंत संपर्क करेंगे"</string>
+    <string name="support_escalation_title" msgid="4111071371281023145">"सहायता के लिए हम यहां हैं"</string>
+    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"हम आपके लिए पूरे सप्ताह, हर समय यहां उपलब्ध हैं"</string>
+    <string name="support_escalation_closed_title" msgid="2761088127372645946">"लाइव सहायता बंद है"</string>
+    <string name="support_escalation_summary" msgid="8307574973250863647">"किसी भी समस्या का जल्दी से जल्दी समाधान करने के लिए हमारी सहायता टीम यहां उपलब्ध है."</string>
+    <string name="support_escalation_24_7_summary" msgid="2737400572126290234">"हमारी सहायता टीम सप्ताह के सातों दिन, हर समय उपलब्ध है."</string>
+    <string name="support_escalation_closed_summary" msgid="701533382024032467">"सहायता अवधि के दौरान बाद में वापस आएं."</string>
     <string name="support_offline_title" msgid="482049324795211184">"आप ऑफ़लाइन हैं"</string>
     <string name="support_offline_summary" msgid="8795134237938994064">"सहायता प्राप्त करने के लिए, पहले वाई-फ़ाई या डेटा से कनेक्ट करें."</string>
     <string name="support_escalation_by_phone" msgid="1862089243763374647">"सहायता को कॉल करें"</string>
@@ -3143,28 +3146,13 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"हेडफ़ोन"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"इनपुट पेरिफ़ेरल"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"ब्लूटूथ"</string>
-    <string name="deletion_helper_photos_title" msgid="8368603334844323794">"फ़ोटो &amp; वीडियो (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_photos_summary" msgid="1468099560244504904">"<xliff:g id="USED">%1$s</xliff:g> • <xliff:g id="DAYS">%2$d</xliff:g> दिन से अधिक पुराने"</string>
-    <string name="deletion_helper_downloads_title" msgid="6936838436756674541">"डाउनलोड (<xliff:g id="NUMITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_downloads_summary" msgid="5269991070337180914">"<xliff:g id="USED">%1$s</xliff:g> • पिछली बार संशोधित <xliff:g id="DAYS">%2$s</xliff:g>"</string>
-    <!-- no translation found for deletion_helper_downloads_summary_empty (541004764997089214) -->
-    <skip />
-    <string name="deletion_helper_clear_dialog_message" msgid="361562282442136229">"अपने डिवाइस से <xliff:g id="CLEARABLE_BYTES">%1$s</xliff:g> निकालें."</string>
-    <string name="deletion_helper_clear_dialog_remove" msgid="5952502462442133309">"निकालें"</string>
     <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"मेमोरी प्रबंधक"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"मेमोरी स्थान खाली करने में सहायता के लिए, मेमोरी प्रबंधक आपके डिवाइस से बैकअप ली गई फ़ोटो और वीडियो निकाल देता है."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"फ़ोटो और वीडियो निकालें"</string>
-    <string name="deletion_helper_upsell_title" msgid="4324208404247329052">"अब <xliff:g id="USED">%1$s</xliff:g> खाली है. मेमोरी अपने आप प्रबंधित करें?"</string>
-    <string name="deletion_helper_upsell_summary" msgid="5688743673563646814">"आपके डिवाइस से बैक अप ली गई सामग्री निकालकर, मेमोरी प्रबंधक को स्थान खाली करने दें?"</string>
-    <string name="deletion_helper_upsell_cancel" msgid="4293035896022918479">"नहीं, धन्यवाद"</string>
-    <string name="deletion_helper_upsell_activate" msgid="8154983578762649221">"चालू करें"</string>
-    <string name="deletion_helper_apps_group_title" msgid="6094830959011713757">"ऐप्लिकेशन (<xliff:g id="NUM_ITEMS">%1$d</xliff:g>)"</string>
-    <string name="deletion_helper_apps_group_summary" msgid="1992952541577075151">"<xliff:g id="USED">%1$s</xliff:g> • पिछली बार <xliff:g id="DAYS">%2$d</xliff:g> दिन पहले उपयोग किया गया"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"मेमोरी प्रबंधक"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"स्वचालित"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"मैन्युअल"</string>
     <string name="deletion_helper_preference_title" msgid="7719699175312011449">"स्थान अभी खाली करें"</string>
-    <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"मेमोरी प्रबंधक"</string>
-    <string name="automatic_storage_manager_service_label" msgid="447065525699452191">"स्वचालित मेमोरी प्रबंधन सेवा"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"हावभाव"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"सीधे कैमरे पर जाएं"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"कैमरा तुरंत खोलने के लिए, बस पावर बटन पर डबल-टैप करें. ऐसा किसी भी स्क्रीन से किया जा सकता है."</string>
