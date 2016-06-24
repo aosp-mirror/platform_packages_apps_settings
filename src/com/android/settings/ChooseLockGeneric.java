@@ -461,11 +461,16 @@ public class ChooseLockGeneric extends SettingsActivity {
                         disabledByAdmin = adminEnforcedQuality
                                 > DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
-                        if (mUserId != UserHandle.myUserId()) {
-                            // Swipe doesn't make sense for profiles.
+                        if (getResources().getBoolean(R.bool.config_hide_swipe_security_option)) {
+                            enabled = false;
                             visible = false;
+                        } else {
+                            if (mUserId != UserHandle.myUserId()) {
+                                // Swipe doesn't make sense for profiles.
+                                visible = false;
+                            }
+                            enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                         }
-                        enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                         disabledByAdmin = adminEnforcedQuality
                                 > DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
