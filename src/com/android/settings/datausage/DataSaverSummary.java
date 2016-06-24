@@ -46,6 +46,9 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     private AppStateDataUsageBridge mDataUsageBridge;
     private Session mSession;
 
+    // Flag used to avoid infinite loop due if user switch it on/off too quicky.
+    private boolean mSwitching;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -87,7 +90,13 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        mDataSaverBackend.setDataSaverEnabled(isChecked);
+        synchronized(this) {
+            if (mSwitching) {
+                return;
+            }
+            mSwitching = true;
+            mDataSaverBackend.setDataSaverEnabled(isChecked);
+        }
     }
 
     @Override
@@ -102,7 +111,10 @@ public class DataSaverSummary extends SettingsPreferenceFragment
 
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {
-        mSwitchBar.setChecked(isDataSaving);
+        synchronized(this) {
+            mSwitchBar.setChecked(isDataSaving);
+            mSwitching = false;
+        }
     }
 
     @Override
