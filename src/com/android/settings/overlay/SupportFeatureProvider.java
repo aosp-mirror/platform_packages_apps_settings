@@ -52,9 +52,10 @@ public interface SupportFeatureProvider {
     boolean isSupportTypeEnabled(Context context, @SupportType int type);
 
     /**
-     * Whether or not a support type is in operation 24/7.
+     * Whether or not a support type is in operation 24/7. If country is null, use
+     * current country.
      */
-    boolean isAlwaysOperating(@SupportType int type);
+    boolean isAlwaysOperating(@SupportType int type, String countryCode);
 
     /**
      * Whether or not a support type is operating now.
@@ -62,15 +63,15 @@ public interface SupportFeatureProvider {
     boolean isOperatingNow(@SupportType int type);
 
     /**
-     * Returns localized string for operation hours.
+     * Returns localized string for operation hours in specified country. If country is null, use
+     * current country to figure out operation hours.
      */
-    CharSequence getOperationHours(Context context, @SupportType int type);
+    CharSequence getOperationHours(Context context, @SupportType int type, String countryCode);
 
     /**
      * Returns a localized string indicating estimated wait time for a support time.
      */
     String getEstimatedWaitTime(Context context, @SupportType int type);
-
 
     /**
      * Returns a list of country codes that have phone support.
