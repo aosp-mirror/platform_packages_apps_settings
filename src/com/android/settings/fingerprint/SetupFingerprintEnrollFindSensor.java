@@ -29,7 +29,7 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
 
     @Override
     protected int getContentView() {
-        return R.layout.setup_fingerprint_enroll_find_sensor;
+        return R.layout.fingerprint_enroll_find_sensor;
     }
 
     @Override
