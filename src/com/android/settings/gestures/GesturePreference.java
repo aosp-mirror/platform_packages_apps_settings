@@ -18,7 +18,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.PorterDuff;
 import android.graphics.SurfaceTexture;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -77,10 +79,11 @@ public final class GesturePreference extends SwitchPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+        holder.setDividerAllowedAbove(false);
+        holder.setDividerAllowedBelow(false);
         final TextureView video = (TextureView) holder.findViewById(R.id.gesture_video);
         final ImageView imageView = (ImageView) holder.findViewById(R.id.gesture_image);
         final ImageView playButton = (ImageView) holder.findViewById(R.id.gesture_play_button);
-        final View detailView = holder.findViewById(R.id.gesture_detail);
         final View animationFrame = holder.findViewById(R.id.gesture_animation_frame);
 
         if (!animationAvailable) {
@@ -91,6 +94,8 @@ public final class GesturePreference extends SwitchPreference {
         Bitmap bitmap = mMediaMetadata.getFrameAtTime(0);
         if (bitmap != null) {
             imageView.setImageDrawable(new BitmapDrawable(bitmap));
+            imageView.setColorFilter(mContext.getResources().getColor(
+                    R.color.gestures_setting_background_color), PorterDuff.Mode.DARKEN);
         }
         imageView.setVisibility(View.VISIBLE);
         playButton.setVisibility(View.VISIBLE);
@@ -155,6 +160,12 @@ public final class GesturePreference extends SwitchPreference {
             }
         });
 
+    }
+
+    @Override
+    public void onDetached() {
+        mMediaMetadata.release();
+        super.onDetached();
     }
 
 }
