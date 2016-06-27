@@ -169,32 +169,45 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     }
 
     private void addEscalationCards() {
-        if (mSupportFeatureProvider.isAlwaysOperating(PHONE, null /* countryCode */)
+        final boolean hasPhoneOperation =
+                mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE);
+        final boolean hasChatOperation =
+                mSupportFeatureProvider.isSupportTypeEnabled(mActivity, CHAT);
+        if (!hasPhoneOperation && !hasChatOperation) {
+            // No support at all.
+            mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
+                    .setText1(R.string.support_escalation_title)
+                    .setText2(mActivity.getString(R.string.support_escalation_unavailable_summary))
+                    .build());
+        } else if (mSupportFeatureProvider.isAlwaysOperating(PHONE, null /* countryCode */)
                 || mSupportFeatureProvider.isAlwaysOperating(CHAT, null /* countryCode */)) {
+            // Support is available.
             mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
                     .setText1(R.string.support_escalation_24_7_title)
                     .setText2(mActivity.getString(R.string.support_escalation_24_7_summary))
                     .build());
         } else if (mSupportFeatureProvider.isOperatingNow(PHONE)
                 || mSupportFeatureProvider.isOperatingNow(CHAT)) {
+            // Support is available now.
             mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
                     .setText1(R.string.support_escalation_title)
                     .setText2(R.string.support_escalation_summary)
                     .build());
         } else {
+            // Support is not temporarily unavailable.
             mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
-                    .setText1(R.string.support_escalation_closed_title)
+                    .setText1(R.string.support_escalation_title)
                     .setText2(mSupportFeatureProvider.getOperationHours(mActivity, PHONE, null))
                     .build());
         }
         final SupportData.Builder builder =
                 new SupportData.Builder(mActivity, TYPE_ESCALATION_OPTIONS);
-        if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE)) {
+        if (hasPhoneOperation) {
             builder.setText1(R.string.support_escalation_by_phone);
             builder.setSummary1(mSupportFeatureProvider.getEstimatedWaitTime(mActivity, PHONE));
             builder.setEnabled1(mSupportFeatureProvider.isOperatingNow(PHONE));
         }
-        if (mSupportFeatureProvider.isSupportTypeEnabled(mActivity, CHAT)) {
+        if (hasChatOperation) {
             builder.setText2(R.string.support_escalation_by_chat);
             builder.setSummary2(mSupportFeatureProvider.getEstimatedWaitTime(mActivity, CHAT));
             builder.setEnabled2(mSupportFeatureProvider.isOperatingNow(CHAT));
