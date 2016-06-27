@@ -83,6 +83,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         // Optimistically assume we have Internet access. It will be updated later to correct value.
         mHasInternet = true;
         setAccount(mSupportFeatureProvider.getSupportEligibleAccount(mActivity));
+        mSelectedCountry = mSupportFeatureProvider.getCurrentCountryCodeIfHasConfig(PHONE);
         refreshData();
     }
 

@@ -63,6 +63,11 @@ public interface SupportFeatureProvider {
     boolean isOperatingNow(@SupportType int type);
 
     /**
+     * Returns the current country code if it has a operation config, otherwise returns null.
+     */
+    String getCurrentCountryCodeIfHasConfig(@SupportType int type);
+
+    /**
      * Returns localized string for operation hours in specified country. If country is null, use
      * current country to figure out operation hours.
      */
