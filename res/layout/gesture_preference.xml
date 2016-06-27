@@ -30,7 +30,8 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:background="@android:color/white">
 
         <TextView
             android:id="@android:id/title"
@@ -50,10 +51,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/gesture_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gestures_setting_backgroud_color"
+        android:background="@color/gestures_setting_background_color"
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:orientation="horizontal">
 
