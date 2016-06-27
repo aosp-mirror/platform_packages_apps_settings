@@ -224,8 +224,14 @@ public class AppManagementFragment extends SettingsPreferenceFragment
             mPreferenceForget.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN,
                     mUserId);
 
-            if (!checkTargetVersion()) {
+            if (checkTargetVersion()) {
+                // setSummary doesn't override the admin message when user restriction is applied
+                mPreferenceAlwaysOn.setSummary(null);
+                // setEnabled is not required here, as checkRestrictionAndSetDisabled
+                // should have refreshed the enable state.
+            } else {
                 mPreferenceAlwaysOn.setEnabled(false);
+                mPreferenceAlwaysOn.setSummary(R.string.vpn_not_supported_by_this_app);
             }
         }
     }
