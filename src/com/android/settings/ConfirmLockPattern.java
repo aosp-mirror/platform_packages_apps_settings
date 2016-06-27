@@ -498,6 +498,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 checkForPendingIntent();
             } else {
                 if (timeoutMs > 0) {
+                    refreshLockScreen();
                     long deadline = mLockPatternUtils.setLockoutAttemptDeadline(
                             effectiveUserId, timeoutMs);
                     handleAttemptLockout(deadline);
