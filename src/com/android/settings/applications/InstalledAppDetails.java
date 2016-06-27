@@ -102,7 +102,6 @@ import com.android.settingslib.net.ChartDataLoader;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -231,6 +230,11 @@ public class InstalledAppDetails extends AppInfoBase
             enabled = false;
         }
 
+        // Don't allow uninstalling the device provisioning package.
+        if (isDeviceProvisioningPackage(mAppEntry.info.packageName)) {
+            enabled = false;
+        }
+
         // If the uninstall intent is already queued, disable the uninstall button
         if (mDpm.isUninstallInQueue(mPackageName)) {
             enabled = false;
@@ -296,6 +300,16 @@ public class InstalledAppDetails extends AppInfoBase
             }
         }
         return false;
+    }
+
+    /**
+     * Returns {@code true} if the supplied package is the device provisioning app. Otherwise,
+     * returns {@code false}.
+     */
+    private boolean isDeviceProvisioningPackage(String packageName) {
+        String deviceProvisioningPackage = getResources().getString(
+                com.android.internal.R.string.config_deviceProvisioningPackage);
+        return deviceProvisioningPackage != null && deviceProvisioningPackage.equals(packageName);
     }
 
     /** Called when the activity is first created. */
