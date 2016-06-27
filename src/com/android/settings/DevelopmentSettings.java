@@ -64,6 +64,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ThreadedRenderer;
@@ -230,6 +231,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private UserManager mUm;
     private WifiManager mWifiManager;
     private PersistentDataBlockManager mOemUnlockManager;
+    private TelephonyManager mTelephonyManager;
 
     private SwitchBar mSwitchBar;
     private boolean mLastEnabledState;
@@ -342,6 +344,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
         mOemUnlockManager = (PersistentDataBlockManager)getActivity()
                 .getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+        mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
@@ -680,6 +683,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 Settings.Secure.BLUETOOTH_HCI_LOG, 0) != 0);
         if (mEnableOemUnlock != null) {
             updateSwitchPreference(mEnableOemUnlock, Utils.isOemUnlockEnabled(getActivity()));
+            updateOemUnlockSettingDescription();
         }
         updateSwitchPreference(mDebugViewAttributes, Settings.Global.getInt(cr,
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, 0) != 0);
@@ -1027,14 +1031,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private boolean enableOemUnlockPreference() {
-        int flashLockState = PersistentDataBlockManager.FLASH_LOCK_UNKNOWN;
-        if (mOemUnlockManager != null) {
-            flashLockState = mOemUnlockManager.getFlashLockState();
-        }
-
-        return flashLockState != PersistentDataBlockManager.FLASH_LOCK_UNLOCKED
-                && Settings.Global.getInt(getActivity().getContentResolver(),
-                        Settings.Global.OEM_UNLOCK_DISALLOWED, 0) == 0;
+        return !isBootloaderUnlocked() && isOemUnlockAllowed();
     }
 
     private void updateOemUnlockOptions() {
@@ -2324,5 +2321,55 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 .create()
                 .show();
 
+    }
+
+    private void updateOemUnlockSettingDescription() {
+        if (mEnableOemUnlock != null) {
+            int oemUnlockSummary = R.string.oem_unlock_enable_summary;
+            if (isBootloaderUnlocked()) {
+                oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_bootloader_unlocked;
+            } else if (isSimLockedDevice()) {
+                oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_sim_locked_device;
+            } else if (!isOemUnlockAllowed()) {
+                // If the device isn't SIM-locked but OEM unlock is disabled by Global setting, this
+                // means the device hasn't been able to confirm whether SIM-lock or any other
+                // restrictions apply (or hasn't been able to apply such restrictions yet). Ask the
+                // user to connect to the internet in order to retrieve all restrictions.
+                oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_connectivity;
+            }
+            mEnableOemUnlock.setSummary(getString(oemUnlockSummary));
+        }
+    }
+
+    /** Returns {@code true} if the device is SIM-locked. Otherwise, returns {@code false}. */
+    private boolean isSimLockedDevice() {
+        int phoneCount = mTelephonyManager.getPhoneCount();
+        for (int i = 0; i < phoneCount; i++) {
+            if (mTelephonyManager.getAllowedCarriers(i).size() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if the bootloader has been unlocked. Otherwise, returns {code false}.
+     */
+    private boolean isBootloaderUnlocked() {
+        int flashLockState = PersistentDataBlockManager.FLASH_LOCK_UNKNOWN;
+        if (mOemUnlockManager != null) {
+            flashLockState = mOemUnlockManager.getFlashLockState();
+        }
+
+        return flashLockState == PersistentDataBlockManager.FLASH_LOCK_UNLOCKED;
+    }
+
+    /**
+     * Returns {@code true} if OEM unlock is not disabled by Global policy. Otherwise, returns
+     * {@code false}.
+     */
+    private boolean isOemUnlockAllowed() {
+        return Settings.Global.getInt(getActivity().getContentResolver(),
+                Settings.Global.OEM_UNLOCK_DISALLOWED, 0) == 0;
     }
 }
