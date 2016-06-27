@@ -28,7 +28,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
@@ -36,6 +39,7 @@ import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.support.SupportDisclaimerDialogFragment;
+import com.android.settings.support.SupportPhone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,15 +55,19 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
     private static final int TYPE_TITLE = R.layout.support_item_title;
     private static final int TYPE_ESCALATION_OPTIONS = R.layout.support_escalation_options;
+    private static final int TYPE_ESCALATION_OPTIONS_OFFLINE =
+            R.layout.support_offline_escalation_options;
     private static final int TYPE_SUPPORT_TILE = R.layout.support_tile;
     private static final int TYPE_SIGN_IN_BUTTON = R.layout.support_sign_in_button;
 
     private final Activity mActivity;
     private final EscalationClickListener mEscalationClickListener;
+    private final SpinnerItemSelectListener mSpinnerItemSelectListener;
     private final SupportFeatureProvider mSupportFeatureProvider;
     private final View.OnClickListener mItemClickListener;
     private final List<SupportData> mSupportData;
 
+    private String mSelectedCountry;
     private boolean mHasInternet;
     private Account mAccount;
 
@@ -69,6 +77,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         mSupportFeatureProvider = supportFeatureProvider;
         mItemClickListener = itemClickListener;
         mEscalationClickListener = new EscalationClickListener();
+        mSpinnerItemSelectListener = new SpinnerItemSelectListener();
         mSupportData = new ArrayList<>();
         // Optimistically assume we have Internet access. It will be updated later to correct value.
         mHasInternet = true;
@@ -91,6 +100,9 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 break;
             case TYPE_ESCALATION_OPTIONS:
                 bindEscalationOptions(holder, data);
+                break;
+            case TYPE_ESCALATION_OPTIONS_OFFLINE:
+                bindOfflineEscalationOptions(holder, (OfflineSupportData) data);
                 break;
             default:
                 bindSupportTile(holder, data);
@@ -145,37 +157,32 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         mSupportData.clear();
         if (mAccount == null) {
             addSignInPromo();
-        } else {
+        } else if (mHasInternet) {
             addEscalationCards();
+        } else {
+            addOfflineEscalationCards();
         }
         addMoreHelpItems();
         notifyDataSetChanged();
     }
 
     private void addEscalationCards() {
-        if (mHasInternet) {
-            if (mSupportFeatureProvider.isAlwaysOperating(PHONE)
-                    || mSupportFeatureProvider.isAlwaysOperating(CHAT)) {
-                mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
-                        .setText1(R.string.support_escalation_24_7_title)
-                        .setText2(mActivity.getString(R.string.support_escalation_24_7_summary))
-                        .build());
-            } else if (mSupportFeatureProvider.isOperatingNow(PHONE)
-                    || mSupportFeatureProvider.isOperatingNow(CHAT)) {
-                mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
-                        .setText1(R.string.support_escalation_title)
-                        .setText2(R.string.support_escalation_summary)
-                        .build());
-            } else {
-                mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
-                        .setText1(R.string.support_escalation_closed_title)
-                        .setText2(mSupportFeatureProvider.getOperationHours(mActivity, PHONE))
-                        .build());
-            }
+        if (mSupportFeatureProvider.isAlwaysOperating(PHONE)
+                || mSupportFeatureProvider.isAlwaysOperating(CHAT)) {
+            mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
+                    .setText1(R.string.support_escalation_24_7_title)
+                    .setText2(mActivity.getString(R.string.support_escalation_24_7_summary))
+                    .build());
+        } else if (mSupportFeatureProvider.isOperatingNow(PHONE)
+                || mSupportFeatureProvider.isOperatingNow(CHAT)) {
+            mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
+                    .setText1(R.string.support_escalation_title)
+                    .setText2(R.string.support_escalation_summary)
+                    .build());
         } else {
             mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
-                    .setText1(R.string.support_offline_title)
-                    .setText2(R.string.support_offline_summary)
+                    .setText1(R.string.support_escalation_closed_title)
+                    .setText2(mSupportFeatureProvider.getOperationHours(mActivity, PHONE))
                     .build());
         }
         final SupportData.Builder builder =
@@ -190,6 +197,20 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             builder.setSummary2(mSupportFeatureProvider.getEstimatedWaitTime(mActivity, CHAT));
             builder.setEnabled2(mSupportFeatureProvider.isOperatingNow(CHAT));
         }
+        mSupportData.add(builder.build());
+    }
+
+    private void addOfflineEscalationCards() {
+        mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
+                .setText1(R.string.support_offline_title)
+                .setText2(R.string.support_offline_summary)
+                .build());
+        final OfflineSupportData.Builder builder = new OfflineSupportData.Builder(mActivity);
+        builder.setCountries(mSupportFeatureProvider.getPhoneSupportCountries())
+                .setTollFreePhone(mSupportFeatureProvider.getSupportPhones(
+                        mSelectedCountry, true /* isTollFree */))
+                .setTolledPhone(mSupportFeatureProvider.getSupportPhones(
+                        mSelectedCountry, false /* isTollFree */));
         mSupportData.add(builder.build());
     }
 
@@ -246,6 +267,38 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         }
     }
 
+    private void bindOfflineEscalationOptions(ViewHolder holder, OfflineSupportData data) {
+        // Bind spinner
+        final Spinner spinner = (Spinner) holder.itemView.findViewById(R.id.spinner);
+        final ArrayAdapter<String> adapter = new ArrayAdapter(
+                mActivity, android.R.layout.simple_spinner_dropdown_item, data.countries);
+        spinner.setAdapter(adapter);
+        final List<String> countryCodes = mSupportFeatureProvider.getPhoneSupportCountryCodes();
+        for (int i = 0; i < countryCodes.size(); i++) {
+            if (TextUtils.equals(countryCodes.get(i), mSelectedCountry)) {
+                spinner.setSelection(i);
+                break;
+            }
+        }
+        spinner.setOnItemSelectedListener(mSpinnerItemSelectListener);
+        // Bind buttons
+        if (data.tollFreePhone != null) {
+            holder.text1View.setText(data.tollFreePhone.number);
+            holder.text1View.setVisibility(View.VISIBLE);
+            holder.text1View.setOnClickListener(mEscalationClickListener);
+        } else {
+            holder.text1View.setVisibility(View.GONE);
+        }
+        if (data.tolledPhone != null) {
+            holder.text2View.setText(
+                    mActivity.getString(R.string.support_international_phone_title));
+            holder.text2View.setVisibility(View.VISIBLE);
+            holder.text2View.setOnClickListener(mEscalationClickListener);
+        } else {
+            holder.text2View.setVisibility(View.GONE);
+        }
+    }
+
     private void bindSignInPromoTile(ViewHolder holder, SupportData data) {
         holder.text1View.setText(data.text1);
         holder.text2View.setText(data.text2);
@@ -299,7 +352,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                                 0 /* requestCode */);
                         break;
                 }
-            } else {
+            } else if (mHasInternet) {
                 switch (v.getId()) {
                     case android.R.id.text1:
                         MetricsLogger.action(mActivity,
@@ -312,7 +365,37 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                         tryStartDisclaimerAndSupport(CHAT);
                         break;
                 }
+            } else {
+                switch (v.getId()) {
+                    case android.R.id.text1:
+                        final SupportPhone phone = mSupportFeatureProvider
+                                .getSupportPhones(mSelectedCountry, true /* isTollFree */);
+                        if (phone != null) {
+                            mActivity.startActivity(phone.getDialIntent());
+                        }
+                        break;
+                    case android.R.id.text2:
+                        break;
+                }
             }
+        }
+    }
+
+    private final class SpinnerItemSelectListener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            final List<String> countryCodes = mSupportFeatureProvider.getPhoneSupportCountryCodes();
+            final String selectedCountry = countryCodes.get(position);
+            if (!TextUtils.equals(selectedCountry, mSelectedCountry)) {
+                mSelectedCountry = selectedCountry;
+                refreshData();
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            // Do nothing.
         }
     }
 
@@ -340,7 +423,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     /**
      * Data for a single support item.
      */
-    private static final class SupportData {
+    private static class SupportData {
 
         final Intent intent;
         final int metricsEvent;
@@ -369,7 +452,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             this.metricsEvent = builder.mMetricsEvent;
         }
 
-        static final class Builder {
+        static class Builder {
 
             private final Context mContext;
             @LayoutRes
@@ -443,6 +526,53 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
             SupportData build() {
                 return new SupportData(this);
+            }
+        }
+    }
+
+    /**
+     * Support data for offline mode.
+     */
+    private static final class OfflineSupportData extends SupportData {
+
+        final List<String> countries;
+        final SupportPhone tollFreePhone;
+        final SupportPhone tolledPhone;
+
+        private OfflineSupportData(Builder builder) {
+            super(builder);
+            countries = builder.mCountries;
+            tollFreePhone = builder.mTollFreePhone;
+            tolledPhone = builder.mTolledPhone;
+        }
+
+        static final class Builder extends SupportData.Builder {
+
+            private List<String> mCountries;
+            private SupportPhone mTollFreePhone;
+            private SupportPhone mTolledPhone;
+
+            Builder(Context context) {
+                super(context, TYPE_ESCALATION_OPTIONS_OFFLINE);
+            }
+
+            Builder setCountries(List<String> countries) {
+                mCountries = countries;
+                return this;
+            }
+
+            Builder setTollFreePhone(SupportPhone phone) {
+                mTollFreePhone = phone;
+                return this;
+            }
+
+            Builder setTolledPhone(SupportPhone phone) {
+                mTolledPhone = phone;
+                return this;
+            }
+
+            OfflineSupportData build() {
+                return new OfflineSupportData(this);
             }
         }
     }
