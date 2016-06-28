@@ -46,6 +46,7 @@ public class RestrictedListPreference extends CustomListPreference {
 
     public RestrictedListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setWidgetLayoutResource(R.layout.restricted_icon);
         mHelper = new RestrictedPreferenceHelper(context, this, attrs);
     }
 
@@ -59,6 +60,10 @@ public class RestrictedListPreference extends CustomListPreference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         mHelper.onBindViewHolder(holder);
+        final View restrictedIcon = holder.findViewById(R.id.restricted_icon);
+        if (restrictedIcon != null) {
+            restrictedIcon.setVisibility(isDisabledByAdmin() ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
