@@ -41,6 +41,7 @@ import com.android.settings.R;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.support.SupportDisclaimerDialogFragment;
 import com.android.settings.support.SupportPhone;
+import com.android.settings.support.SupportPhoneDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -376,15 +377,23 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 }
             } else {
                 switch (v.getId()) {
-                    case android.R.id.text1:
+                    case android.R.id.text1: {
                         final SupportPhone phone = mSupportFeatureProvider
                                 .getSupportPhones(mSelectedCountry, true /* isTollFree */);
                         if (phone != null) {
                             mActivity.startActivity(phone.getDialIntent());
                         }
                         break;
-                    case android.R.id.text2:
+                    }
+                    case android.R.id.text2: {
+                        final SupportPhone phone = mSupportFeatureProvider
+                                .getSupportPhones(mSelectedCountry, false /* isTollFree */);
+                        final SupportPhoneDialogFragment fragment =
+                                SupportPhoneDialogFragment.newInstance(phone);
+                        fragment.show(mActivity.getFragmentManager(),
+                                SupportPhoneDialogFragment.TAG);
                         break;
+                    }
                 }
             }
         }
