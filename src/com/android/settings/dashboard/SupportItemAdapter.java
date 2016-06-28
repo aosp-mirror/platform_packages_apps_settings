@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -53,6 +54,7 @@ import static com.android.settings.overlay.SupportFeatureProvider.SupportType.PH
  */
 public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAdapter.ViewHolder> {
 
+    private static final String STATE_SELECTED_COUNTRY = "STATE_SELECTED_COUNTRY";
     private static final int TYPE_TITLE = R.layout.support_item_title;
     private static final int TYPE_ESCALATION_OPTIONS = R.layout.support_escalation_options;
     private static final int TYPE_ESCALATION_OPTIONS_OFFLINE =
@@ -71,8 +73,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     private boolean mHasInternet;
     private Account mAccount;
 
-    public SupportItemAdapter(Activity activity, SupportFeatureProvider supportFeatureProvider,
-            View.OnClickListener itemClickListener) {
+    public SupportItemAdapter(Activity activity, Bundle savedInstanceState,
+            SupportFeatureProvider supportFeatureProvider, View.OnClickListener itemClickListener) {
         mActivity = activity;
         mSupportFeatureProvider = supportFeatureProvider;
         mItemClickListener = itemClickListener;
@@ -81,6 +83,9 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         mSupportData = new ArrayList<>();
         // Optimistically assume we have Internet access. It will be updated later to correct value.
         mHasInternet = true;
+        if (savedInstanceState != null) {
+            mSelectedCountry = savedInstanceState.getString(STATE_SELECTED_COUNTRY);
+        }
         setAccount(mSupportFeatureProvider.getSupportEligibleAccount(mActivity));
         refreshData();
     }
@@ -147,6 +152,10 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             mAccount = account;
             refreshData();
         }
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString(STATE_SELECTED_COUNTRY, mSelectedCountry);
     }
 
     /**

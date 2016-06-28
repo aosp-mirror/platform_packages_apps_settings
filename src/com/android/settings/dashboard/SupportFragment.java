@@ -88,8 +88,8 @@ public final class SupportFragment extends InstrumentedFragment implements View.
         mAccountManager = AccountManager.get(mActivity);
         mSupportFeatureProvider =
                 FeatureFactory.getFactory(mActivity).getSupportFeatureProvider(mActivity);
-        mSupportItemAdapter = new SupportItemAdapter(mActivity, mSupportFeatureProvider,
-                this /* itemClickListener */);
+        mSupportItemAdapter = new SupportItemAdapter(mActivity, savedInstanceState,
+                mSupportFeatureProvider, this /* itemClickListener */);
         mConnectivityManager =
                 (ConnectivityManager) mActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
@@ -127,6 +127,12 @@ public final class SupportFragment extends InstrumentedFragment implements View.
         mAccountManager.removeOnAccountsUpdatedListener(this /* listener */);
         // Stop monitor connectivity.
         mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mSupportItemAdapter.onSaveInstanceState(outState);
     }
 
     @Override
