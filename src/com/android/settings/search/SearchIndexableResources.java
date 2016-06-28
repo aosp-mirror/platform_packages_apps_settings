@@ -272,7 +272,7 @@ public final class SearchIndexableResources {
         sResMap.put(DateTimeSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(DateTimeSettings.class.getName()),
-                        R.xml.date_time_prefs,
+                        NO_DATA_RES_ID,
                         DateTimeSettings.class.getName(),
                         R.drawable.ic_settings_date_time));
 
