@@ -57,6 +57,7 @@ import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class WirelessSettings extends SettingsPreferenceFragment implements Indexable {
@@ -410,6 +411,10 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             @Override
             public List<SearchIndexableResource> getXmlResourcesToIndex(
                     Context context, boolean enabled) {
+                // Remove wireless settings from search in demo mode
+                if (UserManager.isDeviceInDemoMode(context)) {
+                    return Collections.emptyList();
+                }
                 SearchIndexableResource sir = new SearchIndexableResource(context);
                 sir.xmlResId = R.xml.wireless_settings;
                 return Arrays.asList(sir);
