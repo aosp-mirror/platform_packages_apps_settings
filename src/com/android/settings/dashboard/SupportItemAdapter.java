@@ -177,8 +177,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     }
 
     private void addEscalationCards() {
-        if (mSupportFeatureProvider.isAlwaysOperating(PHONE)
-                || mSupportFeatureProvider.isAlwaysOperating(CHAT)) {
+        if (mSupportFeatureProvider.isAlwaysOperating(PHONE, null /* countryCode */)
+                || mSupportFeatureProvider.isAlwaysOperating(CHAT, null /* countryCode */)) {
             mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
                     .setText1(R.string.support_escalation_24_7_title)
                     .setText2(mActivity.getString(R.string.support_escalation_24_7_summary))
@@ -192,7 +192,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         } else {
             mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
                     .setText1(R.string.support_escalation_closed_title)
-                    .setText2(mSupportFeatureProvider.getOperationHours(mActivity, PHONE))
+                    .setText2(mSupportFeatureProvider.getOperationHours(mActivity, PHONE, null))
                     .build());
         }
         final SupportData.Builder builder =
@@ -211,9 +211,16 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     }
 
     private void addOfflineEscalationCards() {
+        final CharSequence operatingHours;
+        if (mSupportFeatureProvider.isAlwaysOperating(PHONE, mSelectedCountry)) {
+            operatingHours = mActivity.getString(R.string.support_escalation_24_7_summary);
+        } else {
+            operatingHours = mSupportFeatureProvider.getOperationHours(mActivity,
+                    PHONE, mSelectedCountry);
+        }
         mSupportData.add(new SupportData.Builder(mActivity, TYPE_TITLE)
                 .setText1(R.string.support_offline_title)
-                .setText2(R.string.support_offline_summary)
+                .setText2(operatingHours)
                 .build());
         final OfflineSupportData.Builder builder = new OfflineSupportData.Builder(mActivity);
         builder.setCountries(mSupportFeatureProvider.getPhoneSupportCountries())
