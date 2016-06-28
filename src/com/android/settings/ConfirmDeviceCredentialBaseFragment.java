@@ -142,8 +142,16 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     @Override
     public void onResume() {
         super.onResume();
+        refreshLockScreen();
+    }
+
+    protected void refreshLockScreen() {
         if (mAllowFpAuthentication) {
             mFingerprintHelper.startListening();
+        } else {
+            if (mFingerprintHelper.isListening()) {
+                mFingerprintHelper.stopListening();
+            }
         }
         if (isProfileChallenge()) {
             updateErrorMessage(mLockPatternUtils.getCurrentFailedPasswordAttempts(
@@ -168,7 +176,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     @Override
     public void onPause() {
         super.onPause();
-        if (mAllowFpAuthentication) {
+        if (mFingerprintHelper.isListening()) {
             mFingerprintHelper.stopListening();
         }
     }
