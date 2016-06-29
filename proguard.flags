@@ -1,12 +1,29 @@
+# This is a configuration file for ProGuard.
+# http://proguard.sourceforge.net/index.html#manual/usage.html
+
 # Keep all Fragments in this package, which are used by reflection.
 -keep public class com.android.settings.** extends android.app.Fragment
 
-# Keep click handlers.
+# We want to keep methods in Activity that could be used in the XML attribute onClick.
 -keepclassmembers class * extends android.app.Activity {
    public void *(android.view.View);
+   public void *(android.view.MenuItem);
 }
 
+# Keep setters in Views so that animations can still work.
+-keep public class * extends android.view.View {
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+
+    void set*(***);
+    *** get*();
+}
+
+# Keep classes that may be inflated from XML.
 -keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
