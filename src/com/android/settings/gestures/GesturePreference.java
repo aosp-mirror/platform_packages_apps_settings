@@ -100,22 +100,18 @@ public final class GesturePreference extends SwitchPreference {
         imageView.setVisibility(View.VISIBLE);
         playButton.setVisibility(View.VISIBLE);
 
-        video.setOnTouchListener(new View.OnTouchListener() {
+        video.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (mMediaPlayer != null) {
-                        if (mMediaPlayer.isPlaying()) {
-                            mMediaPlayer.pause();
-                            playButton.setVisibility(View.VISIBLE);
-                        } else {
-                            mMediaPlayer.start();
-                            playButton.setVisibility(View.GONE);
-                        }
+            public void onClick(View v) {
+                if (mMediaPlayer != null) {
+                    if (mMediaPlayer.isPlaying()) {
+                        mMediaPlayer.pause();
+                        playButton.setVisibility(View.VISIBLE);
+                    } else {
+                        mMediaPlayer.start();
+                        playButton.setVisibility(View.GONE);
                     }
-                    return true;
                 }
-                return false;
             }
         });
 
