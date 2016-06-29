@@ -445,7 +445,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 return true;
             case R.id.storage_free:
                 final Intent deletion_helper_intent =
-                        new Intent(Settings.ACTION_DELETION_HELPER_SETTINGS);
+                        new Intent(StorageManager.ACTION_MANAGE_STORAGE);
                 startActivity(deletion_helper_intent);
                 return true;
         }

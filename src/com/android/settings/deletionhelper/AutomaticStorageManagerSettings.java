@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -116,7 +117,7 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (KEY_DELETION_HELPER.equals(preference.getKey())) {
-            Intent intent = new Intent(Settings.ACTION_DELETION_HELPER_SETTINGS);
+            Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
             getContext().startActivity(intent);
         }
         return true;
