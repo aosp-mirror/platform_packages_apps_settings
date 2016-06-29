@@ -19,11 +19,11 @@
     android:id="@+id/dashboard_tile"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:minHeight="@dimen/dashboard_tile_minimum_height"
     android:clickable="true"
-    android:focusable="true"
-    android:background="@drawable/selectable_card">
+    android:focusable="true">
 
     <ImageView
         android:id="@android:id/icon"
