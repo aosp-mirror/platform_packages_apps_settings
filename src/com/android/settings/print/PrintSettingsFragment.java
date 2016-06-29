@@ -43,6 +43,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -104,8 +105,9 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        View root = super.onCreateView(inflater, container, savedInstanceState);
         addPreferencesFromResource(R.xml.print_settings);
 
         mActivePrintJobsCategory = (PreferenceCategory) findPreference(
@@ -119,6 +121,8 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
 
         mPrintServicesController = new PrintServicesController();
         getLoaderManager().initLoader(LOADER_ID_PRINT_SERVICES, null, mPrintServicesController);
+
+        return root;
     }
 
     @Override
