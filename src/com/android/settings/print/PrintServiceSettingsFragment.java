@@ -39,6 +39,7 @@ import android.printservice.PrintServiceInfo;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -132,8 +133,9 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        View root = super.onCreateView(inflater, container, savedInstanceState);
 
         mServiceEnabled = getArguments().getBoolean(PrintSettingsFragment.EXTRA_CHECKED);
 
@@ -141,6 +143,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         if (!TextUtils.isEmpty(title)) {
             getActivity().setTitle(title);
         }
+
+        return root;
     }
 
     @Override
