@@ -110,6 +110,11 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_gestures;
+    }
+
+    @Override
     protected int getMetricsCategory() {
         return MetricsEvent.SETTINGS_GESTURES;
     }
