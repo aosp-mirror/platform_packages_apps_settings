@@ -51,12 +51,13 @@ public final class SupportPhoneDialogFragment extends DialogFragment implements
                 .setTitle(R.string.support_international_phone_title);
         final View content = LayoutInflater.from(builder.getContext())
                 .inflate(R.layout.support_phone_dialog_content, null);
+        final View phoneNumberContainer = content.findViewById(R.id.phone_number_container);
         final TextView phoneView = (TextView) content.findViewById(R.id.phone_number);
         final String formattedPhoneNumber = getContext().getString(
                 R.string.support_phone_international_format,
                 new Locale(phone.language).getDisplayLanguage(), phone.number);
         phoneView.setText(formattedPhoneNumber);
-        phoneView.setOnClickListener(this);
+        phoneNumberContainer.setOnClickListener(this);
         return builder
                 .setView(content)
                 .create();
