@@ -17,12 +17,15 @@
 package com.android.settings.deletionhelper;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
+import android.text.format.DateUtils;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
@@ -49,9 +52,11 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
 
     private static final String KEY_DAYS = "days";
     private static final String KEY_DELETION_HELPER = "deletion_helper";
+    private static final String KEY_FREED = "freed_bytes";
     private static final String KEY_STORAGE_MANAGER_SWITCH = "storage_manager_active";
 
     private DropDownPreference mDaysToRetain;
+    private Preference mFreedBytes;
     private Preference mDeletionHelper;
     private SwitchPreference mStorageManagerSwitch;
 
@@ -67,18 +72,37 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         mDaysToRetain = (DropDownPreference) findPreference(KEY_DAYS);
         mDaysToRetain.setOnPreferenceChangeListener(this);
 
+        mFreedBytes = findPreference(KEY_FREED);
+
         mDeletionHelper = findPreference(KEY_DELETION_HELPER);
         mDeletionHelper.setOnPreferenceClickListener(this);
 
         mStorageManagerSwitch = (SwitchPreference) findPreference(KEY_STORAGE_MANAGER_SWITCH);
         mStorageManagerSwitch.setOnPreferenceChangeListener(this);
 
-        int value = Settings.Secure.getInt(getContentResolver(),
+        ContentResolver cr = getContentResolver();
+        int value = Settings.Secure.getInt(cr,
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN_DEFAULT);
         String[] stringValues =
                 getResources().getStringArray(R.array.automatic_storage_management_days_values);
         mDaysToRetain.setValue(stringValues[daysValueToIndex(value, stringValues)]);
+
+        long freedBytes = Settings.Secure.getLong(cr,
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_BYTES_CLEARED,
+                0);
+        long lastRunMillis = Settings.Secure.getLong(cr,
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_LAST_RUN,
+                0);
+        if (freedBytes == 0 || lastRunMillis == 0) {
+            mFreedBytes.setVisible(false);
+        } else {
+            Activity activity = getActivity();
+            mFreedBytes.setSummary(activity.getString(
+                    R.string.automatic_storage_manager_freed_bytes,
+                    Formatter.formatFileSize(activity, freedBytes),
+                    DateUtils.formatDateTime(activity, lastRunMillis, DateUtils.FORMAT_SHOW_DATE)));
+        }
     }
 
     @Override
