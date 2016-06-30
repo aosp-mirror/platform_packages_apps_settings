@@ -18,20 +18,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
         android:text="@string/support_international_phone_summary"/>
-    <TextView
-        android:id="@+id/phone_number"
+    <LinearLayout
+        android:id="@+id/phone_number_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:drawableLeft="@drawable/ic_call_24dp"
-        android:drawablePadding="16dp"
         android:gravity="center_vertical"
         android:minHeight="48dp"
-        android:textAppearance="@style/TextAppearance.TileTitle"/>
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="32dp"
+            android:src="@drawable/ic_call_24dp"/>
+        <TextView
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textAppearance="@style/TextAppearance.TileTitle"/>
+    </LinearLayout>
 </LinearLayout>

@@ -258,16 +258,16 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
     private void addMoreHelpItems() {
         mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE)
+                .setIcon(R.drawable.ic_help_24dp)
+                .setText1(R.string.support_help_feedback_title)
+                .setIntent(mSupportFeatureProvider.getHelpIntent(mActivity))
+                .setMetricsEvent(MetricsProto.MetricsEvent.ACTION_SUPPORT_HELP_AND_FEEDBACK)
+                .build());
+        mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE)
                 .setIcon(R.drawable.ic_lightbulb_outline_24)
                 .setText1(R.string.support_tips_and_tricks_title)
                 .setIntent(mSupportFeatureProvider.getTipsAndTricksIntent(mActivity))
                 .setMetricsEvent(MetricsProto.MetricsEvent.ACTION_SUPPORT_TIPS_AND_TRICKS)
-                .build());
-        mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE)
-                .setIcon(R.drawable.ic_help_24dp)
-                .setText1(R.string.help_feedback_label)
-                .setIntent(mSupportFeatureProvider.getHelpIntent(mActivity))
-                .setMetricsEvent(MetricsProto.MetricsEvent.ACTION_SUPPORT_HELP_AND_FEEDBACK)
                 .build());
     }
 
