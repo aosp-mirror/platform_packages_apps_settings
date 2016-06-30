@@ -45,6 +45,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.provider.Settings.Global;
 import android.provider.Settings.Secure;
 import android.util.Log;
 import android.util.SparseArray;
@@ -229,6 +230,11 @@ public class UserSettings extends SettingsPreferenceFragment
         filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
         context.registerReceiverAsUser(mUserChangeReceiver, UserHandle.ALL, filter, null,
                 mHandler);
+
+        if (Global.getInt(getContext().getContentResolver(), Global.DEVICE_PROVISIONED, 0) == 0) {
+            getActivity().finish();
+            return;
+        }
     }
 
     @Override
