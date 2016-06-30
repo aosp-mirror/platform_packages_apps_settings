@@ -28,6 +28,7 @@ import android.os.Message;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 
 import java.util.Objects;
 
@@ -42,7 +43,9 @@ public class FallbackHome extends Activity {
         // we don't flash the wallpaper before SUW
         if (Settings.Global.getInt(getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0) == 0) {
-            setTheme(android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+            setTheme(R.style.FallbackHome_SetupWizard);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
 
         registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_USER_UNLOCKED));
