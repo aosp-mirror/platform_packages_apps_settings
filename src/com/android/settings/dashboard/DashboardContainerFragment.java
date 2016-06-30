@@ -31,6 +31,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.widget.SlidingTabLayout;
@@ -62,11 +63,10 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View content = inflater.inflate(R.layout.dashboard_container, parent, false);
-        final Context context = getContext();
         mViewPager = (ViewPager) content.findViewById(R.id.pager);
-        mPagerAdapter = new DashboardViewPagerAdapter(context, getChildFragmentManager());
+        mPagerAdapter = new DashboardViewPagerAdapter(getContext(), getChildFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.addOnPageChangeListener(new TabInstrumentationListener(context));
+        mViewPager.addOnPageChangeListener(new TabChangeListener((SettingsActivity) getActivity()));
         mHeaderView = inflater.inflate(R.layout.dashboard_container_header, parent, false);
         ((SlidingTabLayout) mHeaderView).setViewPager(mViewPager);
         return content;
@@ -127,13 +127,13 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
         }
     }
 
-    private static final class TabInstrumentationListener
+    private static final class TabChangeListener
             implements ViewPager.OnPageChangeListener {
 
-        private final Context mContext;
+        private final SettingsActivity mActivity;
 
-        public TabInstrumentationListener(Context context) {
-            mContext = context;
+        public TabChangeListener(SettingsActivity activity) {
+            mActivity = activity;
         }
 
         @Override
@@ -150,11 +150,14 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
         public void onPageSelected(int position) {
             switch (position) {
                 case INDEX_SUMMARY_FRAGMENT:
-                    MetricsLogger.action(mContext, MetricsProto.MetricsEvent.ACTION_SELECT_SUMMARY);
+                    MetricsLogger.action(
+                            mActivity, MetricsProto.MetricsEvent.ACTION_SELECT_SUMMARY);
+                    mActivity.setDisplaySearchMenu(true);
                     break;
                 case INDEX_SUPPORT_FRAGMENT:
                     MetricsLogger.action(
-                            mContext, MetricsProto.MetricsEvent.ACTION_SELECT_SUPPORT_FRAGMENT);
+                            mActivity, MetricsProto.MetricsEvent.ACTION_SELECT_SUPPORT_FRAGMENT);
+                    mActivity.setDisplaySearchMenu(false);
                     break;
             }
         }
