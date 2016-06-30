@@ -96,11 +96,23 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
             Preference pref = getPreferenceScreen().findPreference(BUTTON_WFC_MODE);
             if (pref != null) {
-                pref.setEnabled(isWfcEnabled
+                pref.setEnabled(isWfcEnabled && getEditableWfcMode(activity)
                         && (state == TelephonyManager.CALL_STATE_IDLE));
             }
         }
     };
+
+    private static boolean getEditableWfcMode(Context context) {
+        CarrierConfigManager configManager = (CarrierConfigManager)
+                context.getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        if (configManager != null) {
+            PersistableBundle b = configManager.getConfig();
+            if (b != null) {
+                return b.getBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
+            }
+        }
+        return true;
+    }
 
     private final OnPreferenceClickListener mUpdateAddressListener =
             new OnPreferenceClickListener() {
@@ -346,7 +358,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
     private void updateButtonWfcMode(Context context, boolean wfcEnabled, int wfcMode) {
         mButtonWfcMode.setSummary(getWfcModeSummary(context, wfcMode));
-        mButtonWfcMode.setEnabled(wfcEnabled);
+        mButtonWfcMode.setEnabled(wfcEnabled && mEditableWfcMode);
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         boolean updateAddressEnabled = (getCarrierActivityIntent(context) != null);
@@ -361,7 +373,6 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             preferenceScreen.removePreference(mButtonWfcMode);
             preferenceScreen.removePreference(mUpdateAddress);
         }
-        preferenceScreen.setEnabled(mEditableWfcMode);
     }
 
     @Override
