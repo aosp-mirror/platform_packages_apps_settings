@@ -86,9 +86,10 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         mHasInternet = true;
         if (savedInstanceState != null) {
             mSelectedCountry = savedInstanceState.getString(STATE_SELECTED_COUNTRY);
+        } else {
+            mSelectedCountry = mSupportFeatureProvider.getCurrentCountryCodeIfHasConfig(PHONE);
         }
         setAccount(mSupportFeatureProvider.getSupportEligibleAccount(mActivity));
-        mSelectedCountry = mSupportFeatureProvider.getCurrentCountryCodeIfHasConfig(PHONE);
         refreshData();
     }
 
