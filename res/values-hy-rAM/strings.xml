@@ -417,7 +417,7 @@
     <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Էկրանի փական"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Պաշտպանեք ձեր սարքը"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Ապակողպել մատնահետքով"</string>
-    <string name="lock_settings_picker_title" msgid="1095755849152582712">"Ընտրել կողպէկրանը"</string>
+    <string name="lock_settings_picker_title" msgid="1095755849152582712">"էկրանի կողպման տեսակը"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Ընտրեք աշխատանքային պրոֆիլի փականը"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Պաշտպանեք ձեր պլանշետը"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Պաշտպանեք ձեր սարքը"</string>
@@ -501,7 +501,7 @@
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Դուք կատարել եք չափից ավելի անհաջող փորձեր: Ձեր աշխատանքային պրոֆիլը և դրա հետ կապակցված տվյալները կհեռացվեն այս սարքից:"</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Փակել"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Գաղտնաբառը պետք է առնվազն %d նիշից բաղկացած լինի"</string>
-    <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN-ը պետք է լինի առնվազն %d թվանշան"</string>
+    <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN-ը պետք է ունենա առնվազն %d թվանշան"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Շարունակել"</string>
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"Գաղտնաբառը պետք է լինի <xliff:g id="NUMBER">%d</xliff:g> գրանշանից քիչ:"</string>
     <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN-ը պետք է լինի <xliff:g id="NUMBER">%d</xliff:g> թվանշանից քիչ:"</string>
@@ -1725,7 +1725,7 @@
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Քանի որ ներածումն արգելափակված է ինչ-որ հավելվածի կողմից, Կարգավորումները չեն կարող հաստատել ձեր պատասխանը:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Եթե ​​միացնեք <xliff:g id="SERVICE">%1$s</xliff:g>-ը, ձեր սարքը չի օգտագործի էկրանի կողպումը՝ տվյալների կոդավորումը լավացնելու համար:"</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Քանի որ միացրել եք մատչելիության ծառայությունը, ձեր սարքը չի օգտագործի էկրանի կողպումը՝ տվյալների կոդավորումը լավացնելու համար:"</string>
-    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Քանի որ <xliff:g id="SERVICE">%1$s</xliff:g> ծառայության միացումն ազդում է տվյալների կոդավորմանը, դուք պետք է հաստատեք ձեր գաղտնանախշը:"</string>
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Քանի որ <xliff:g id="SERVICE">%1$s</xliff:g> ծառայության միացումն ազդում է տվյալների կոդավորմանը, դուք պետք է հաստատեք ձեր ապակողպման նախշը:"</string>
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Քանի որ <xliff:g id="SERVICE">%1$s</xliff:g> ծառայության միացումն ազդում է տվյալների կոդավորմանը, դուք պետք է հաստատեք ձեր PIN-ը:"</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Քանի որ <xliff:g id="SERVICE">%1$s</xliff:g> ծառայության միացումն ազդում է տվյալների կոդավորմանը, դուք պետք է հաստատեք ձեր գաղտնաբառը:"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Տեսնել ձեր գործողությունները"</string>
@@ -2545,9 +2545,9 @@
     <string name="notification_pulse_title" msgid="1247988024534030629">"Ծանուցման լույսի թարթում"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Կողպէկրանին"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Ցուցադրել ծանուցման ողջ բովանդակությունը"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Թաքցնել գաղտնի բովանդակությունը"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Ոչ մի ծանուցում ցույց չտալ"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Ինչպե՞ս եք ուզում ցույց տալ ծանուցումները, երբ սարքը կողպված է:"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Թաքցնել անձնական տեղեկությունները"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Չցուցադրել ծանուցումներ"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Ընտրեք ծանուցումների ցուցադրման ռեժիմը կողպված սարքում։"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Ծանուցումներ"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Ցույց տալ աշխատանքային ծանուցումն ամբողջությամբ"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"Թաքցնել աշխատանքային ծանուցման գաղտնի տվյալները"</string>
@@ -2698,12 +2698,12 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-ի վերաբերյալ տվյալներ"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Ապահով մեկնարկ"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Շարունակել"</string>
-    <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Դուք կարող եք նաև պաշտպանել այս սարքը՝ այն մեկնարկելուց առաջ պահանջելով մուտքագրել PIN-ը: Մինչև մեկնարկը սարքը չի կարող ստանալ զանգեր, հաղորդագրություններ կամ տեղեկացումներ, այդ թվում՝ զարթուցիչներ: \n\n Այս գործառույթն օգնում է պաշտպանել տվյալները՝ կորած կամ գողացված սարքերում:"</string>
-    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Դուք կարող եք նաև պաշտպանել այս սարքը՝ այն մեկնարկելուց առաջ պահանջելով մուտքագրել գաղտնանախշը: Մինչև մեկնարկը սարքը չի կարող ստանալ զանգեր, հաղորդագրություններ կամ տեղեկացումներ, այդ թվում՝ զարթուցիչներ: \n\n Այս գործառույթն օգնում է պաշտպանել տվյալները՝ կորած կամ գողացված սարքերում:"</string>
-    <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Դուք կարող եք նաև պաշտպանել այս սարքը՝ այն մեկնարկելուց առաջ պահանջելով մուտքագրել գաղտնաբառը: Մինչև մեկնարկը սարքը չի կարող ստանալ զանգեր, հաղորդագրություններ կամ տեղեկացումներ, այդ թվում՝ զարթուցիչներ: \n\n Այս գործառույթն օգնում է պաշտպանել տվյալները՝ կորած կամ գողացված սարքերում:"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Բացի մատնահետքի միջոցով սարքը ապակողպելուց, սարքը կարող եք նաև պաշտպանել՝ մեկնարկելուց առաջ ձեր PIN կոդը պահանջելով: Մինչև մեկնարկը սարքը չի կարող ստանալ զանգեր, հաղորդագրություններ կամ ծանուցումներ, այդ թվում նաև զգուշացումներ:\n\nԱյս գործառույթն օգնում է պաշտպանել տվյալները կորած կամ գողացված սարքերում:"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Բացի մատնահետքի միջոցով սարքը ապակողպելուց, սարքը կարող եք նաև պաշտպանել՝ մեկնարկելուց առաջ ձեր նախշը պահանջելով: Մինչև մեկնարկը սարքը չի կարող ստանալ զանգեր, հաղորդագրություններ կամ ծանուցումներ, այդ թվում նաև զգուշացումներ:\n\nԱյս գործառույթն օգնում է պաշտպանել տվյալները կորած կամ գողացված սարքերում:"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Բացի մատնահետքի միջոցով սարքը ապակողպելուց, սարքը կարող եք նաև պաշտպանել՝ մեկնարկելուց առաջ ձեր գաղտնաբառը պահանջելով: Մինչև մեկնարկը սարքը չի կարող ստանալ զանգեր, հաղորդագրություններ կամ ծանուցումներ, այդ թվում նաև զգուշացումներ:\n\nԱյս գործառույթն օգնում է պաշտպանել տվյալները կորած կամ գողացված սարքերում:"</string>
+    <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Դուք կարող եք նաև պաշտպանել այս սարքը՝ այն մեկնարկելուց առաջ պահանջելով մուտքագրել PIN-ը: Մինչև սարքը չապակողպեք, այն չի կարողանա ստանալ զանգեր, հաղորդագրություններ կամ ծանուցումներ, այդ թվում՝ զարթուցիչներ: \n\n Այս գործառույթն օգնում է պաշտպանել կորած կամ գողացած սարքերում եղած տվյալները։"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Դուք կարող եք նաև պաշտպանել այս սարքը՝ այն մեկնարկելուց առաջ պահանջելով մուտքագրել ապակողպման նախշը: Մինչև սարքը չապակողպեք, այն չի կարողանա ստանալ զանգեր, հաղորդագրություններ կամ ծանուցումներ, այդ թվում՝ զարթուցիչներ: \n\n Այս գործառույթն օգնում է պաշտպանել կորած կամ գողացած սարքերում եղած տվյալները։"</string>
+    <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Դուք կարող եք նաև պաշտպանել այս սարքը՝ այն մեկնարկելուց առաջ պահանջելով մուտքագրել գաղտնաբառը: Մինչև սարքը չապակողպեք, այն չի կարողանա ստանալ զանգեր, հաղորդագրություններ կամ ծանուցումներ, այդ թվում՝ զարթուցիչներ: \n\n Այս գործառույթն օգնում է պաշտպանել կորած կամ գողացած սարքերում եղած տվյալները։"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Բացի մատնահետքի միջոցով սարքը ապակողպելուց, սարքը կարող եք նաև պաշտպանել՝ մեկնարկելուց առաջ ձեր PIN կոդը պահանջելով: Մինչև սարքը չապակողպեք, այն չի կարողանա ստանալ զանգեր, հաղորդագրություններ կամ ծանուցումներ, այդ թվում նաև զգուշացումներ:\n\nԱյս գործառույթն օգնում է պաշտպանել տվյալները կորած կամ գողացված սարքերում:"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Բացի մատնահետքի միջոցով սարքը ապակողպելուց, սարքը կարող եք նաև պաշտպանել՝ մեկնարկելուց առաջ ձեր նախշը պահանջելով: Մինչև սարքը չապակողպեք, այն չի կարողանա ստանալ զանգեր, հաղորդագրություններ կամ ծանուցումներ, այդ թվում նաև զգուշացումներ:\n\nԱյս գործառույթն օգնում է պաշտպանել տվյալները կորած կամ գողացված սարքերում:"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Բացի մատնահետքի միջոցով սարքը ապակողպելուց, սարքը կարող եք նաև պաշտպանել՝ մեկնարկելուց առաջ ձեր գաղտնաբառը պահանջելով: Մինչև սարքը չապակողպեք, այն չի կարողանա ստանալ զանգեր, հաղորդագրություններ կամ ծանուցումներ, այդ թվում նաև զգուշացումներ:\n\nԱյս գործառույթն օգնում է պաշտպանել տվյալները կորած կամ գողացված սարքերում:"</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Սարքը միացնելուց պահանջել PIN"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Սարքը միացնելուց պահանջել նախշ"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Սարքը միացնելուց պահանջել գաղտնաբառ"</string>
@@ -2711,7 +2711,7 @@
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Ոչ, շնորհակալություն"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Ոչ, շնորհակալություն"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Պահանջե՞լ PIN-ը:"</string>
-    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Պահանջե՞լ գաղտնանախշը:"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Պահանջե՞լ ապակողպման նախշը:"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Պահանջե՞լ գաղտնաբառը:"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Երբ մուտքագրեք ձեր PIN-ը՝ այս սարքը մեկնարկելու համար, մատչելիության ծառայութունները, ինչպես օրինակ՝ <xliff:g id="SERVICE">%1$s</xliff:g>-ը, դեռևս հասանելի չեն լինի:"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Երբ մուտքագրեք ձեր նախշը՝ այս սարքը մեկնարկելու համար, մատչելիության ծառայութունները, ինչպես օրինակ՝ <xliff:g id="SERVICE">%1$s</xliff:g>-ը, դեռևս հասանելի չեն լինի:"</string>
