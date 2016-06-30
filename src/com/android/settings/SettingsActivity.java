@@ -46,6 +46,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.provider.Settings.Global;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.util.ArrayMap;
@@ -1316,6 +1317,10 @@ public class SettingsActivity extends Activity
     }
 
     private void addExternalTiles(List<DashboardCategory> target) {
+        if (Global.getInt(getContentResolver(), Global.DEVICE_PROVISIONED, 0) == 0) {
+            // Don't add external tiles until device is set up.
+            return;
+        }
         Map<Pair<String, String>, DashboardTile> addedCache =
                 new ArrayMap<Pair<String, String>, DashboardTile>();
         UserManager userManager = UserManager.get(this);
