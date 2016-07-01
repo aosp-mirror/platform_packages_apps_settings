@@ -17,11 +17,25 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SupportEscalationCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/card_background_grey"
-    android:gravity="center_horizontal"
     android:orientation="vertical">
+    <TextView
+        android:id="@+id/tile_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/TextAppearance.SupportTitle"/>
+    <TextView
+        android:id="@+id/tile_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="30dp"
+        android:textAppearance="@style/TextAppearance.Small"
+        android:textColor="?android:attr/textColorSecondary"/>
     <Button
         android:id="@android:id/text1"
         style="@style/SupportPrimaryButton"
