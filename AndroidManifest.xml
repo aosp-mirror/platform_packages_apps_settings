@@ -2937,6 +2937,31 @@
                        android:value="com.android.settings.gestures.GestureSettings" />
         </activity>
 
+        <activity android:name="BackupSettingsActivity"
+                  android:label="@string/privacy_settings_title"
+                  android:icon="@drawable/ic_settings_backup"
+                  android:theme="@android:style/Theme.NoDisplay"
+                  android:taskAffinity="com.android.settings"
+                  android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.PRIVACY_SETTINGS" />
+                <action android:name="android.settings.BACKUP_AND_RESET_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+            <intent-filter android:priority="-2">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.personal" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <service
             android:name=".SettingsDumpService"
             android:exported="true"
