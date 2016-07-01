@@ -131,6 +131,7 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -1104,6 +1105,23 @@ public class SettingsActivity extends SettingsDrawerActivity
                 }
             }
         }
+
+        String backupIntent = getResources().getString(R.string.config_backup_settings_intent);
+        boolean useDefaultBackup = TextUtils.isEmpty(backupIntent);
+        setTileEnabled(new ComponentName(packageName,
+                Settings.PrivacySettingsActivity.class.getName()), useDefaultBackup, isAdmin, pm);
+        boolean hasBackupActivity = false;
+        if (!useDefaultBackup) {
+            try {
+                Intent intent = Intent.parseUri(backupIntent, 0);
+                hasBackupActivity = !getPackageManager().queryIntentActivities(intent, 0).isEmpty();
+            } catch (URISyntaxException e) {
+                Log.e(LOG_TAG, "Invalid backup intent URI!", e);
+            }
+        }
+        setTileEnabled(new ComponentName(packageName,
+                BackupSettingsActivity.class.getName()), hasBackupActivity, isAdmin, pm);
+
     }
 
     private void setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin,
