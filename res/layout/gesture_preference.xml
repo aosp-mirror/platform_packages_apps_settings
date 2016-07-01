@@ -57,7 +57,7 @@
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:orientation="horizontal">
 
-        <FrameLayout
+        <com.android.settings.widget.AspectRatioFrameLayout
             android:id="@+id/gesture_animation_frame"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -73,7 +73,7 @@
                 android:id="@+id/gesture_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"/>
+                android:background="@color/gestures_setting_background_color"/>
 
             <ImageView
                 android:id="@+id/gesture_play_button"
@@ -81,10 +81,9 @@
                 android:layout_height="@dimen/gestures_play_button_size"
                 android:src="@drawable/ic_gesture_play_button"
                 android:gravity="center"
-                android:layout_gravity="center"
-                android:visibility="gone"/>
+                android:layout_gravity="center"/>
 
-        </FrameLayout>
+        </com.android.settings.widget.AspectRatioFrameLayout>
 
         <TextView
             android:id="@android:id/summary"
