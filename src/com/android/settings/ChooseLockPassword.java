@@ -150,10 +150,6 @@ public class ChooseLockPassword extends SettingsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO: Fix on phones
-        // Disable IME on our window since we provide our own keyboard
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
-                //WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         super.onCreate(savedInstanceState);
         CharSequence msg = getText(R.string.lockpassword_choose_your_password_header);
         setTitle(msg);
@@ -200,8 +196,6 @@ public class ChooseLockPassword extends SettingsActivity {
         private TextView mHeaderText;
         private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
-        private KeyboardView mKeyboardView;
-        private PasswordEntryKeyboardHelper mKeyboardHelper;
         private boolean mIsAlphaMode;
         private Button mCancelButton;
         private Button mNextButton;
@@ -313,22 +307,15 @@ public class ChooseLockPassword extends SettingsActivity {
 
             setupPasswordRequirementsView(view);
 
-            mKeyboardView = (PasswordEntryKeyboardView) view.findViewById(R.id.keyboard);
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mPasswordEntry = (EditText) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
             mPasswordEntry.addTextChangedListener(this);
+            mPasswordEntry.requestFocus();
             mPasswordEntryInputDisabler = new TextViewInputDisabler(mPasswordEntry);
 
             final Activity activity = getActivity();
-            mKeyboardHelper = new PasswordEntryKeyboardHelper(activity,
-                    mKeyboardView, mPasswordEntry);
-            mKeyboardHelper.setKeyboardMode(mIsAlphaMode ?
-                    PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
-                    : PasswordEntryKeyboardHelper.KEYBOARD_MODE_NUMERIC);
-
             mHeaderText = (TextView) view.findViewById(R.id.headerText);
-            mKeyboardView.requestFocus();
 
             int currentType = mPasswordEntry.getInputType();
             mPasswordEntry.setInputType(mIsAlphaMode ? currentType
@@ -454,7 +441,7 @@ public class ChooseLockPassword extends SettingsActivity {
             if (mSaveAndFinishWorker != null) {
                 mSaveAndFinishWorker.setListener(this);
             } else {
-                mKeyboardView.requestFocus();
+                mPasswordEntry.requestFocus();
             }
         }
 
