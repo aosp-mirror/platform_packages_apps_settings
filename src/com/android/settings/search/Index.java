@@ -1165,17 +1165,6 @@ public class Index {
         return result.toString();
     }
 
-    private int getResId(Context context, AttributeSet set, int[] attrs, int resId) {
-        final TypedArray sa = context.obtainStyledAttributes(set, attrs);
-        final TypedValue tv = sa.peekValue(resId);
-
-        if (tv != null && tv.type == TypedValue.TYPE_STRING) {
-            return tv.resourceId;
-        } else {
-            return 0;
-        }
-   }
-
     /**
      * A private class for updating the Index database
      */
