@@ -23,6 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
 
 import java.util.Locale;
@@ -66,6 +68,8 @@ public final class SupportPhoneDialogFragment extends DialogFragment implements
     @Override
     public void onClick(View v) {
         final SupportPhone phone = getArguments().getParcelable(EXTRA_PHONE);
+        MetricsLogger.action(getActivity(),
+                MetricsProto.MetricsEvent.ACTION_SUPPORT_DIAL_TOLLED);
         getActivity().startActivity(phone.getDialIntent());
         dismiss();
     }
