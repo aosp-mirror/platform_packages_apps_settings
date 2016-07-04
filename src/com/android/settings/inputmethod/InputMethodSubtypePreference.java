@@ -62,31 +62,28 @@ class InputMethodSubtypePreference extends SwitchWithNoTextPreference {
             return 0;
         }
         if (rhs instanceof InputMethodSubtypePreference) {
-            final InputMethodSubtypePreference pref = (InputMethodSubtypePreference) rhs;
+            final InputMethodSubtypePreference rhsPref = (InputMethodSubtypePreference) rhs;
+            if (mIsSystemLocale && !rhsPref.mIsSystemLocale) {
+                return -1;
+            }
+            if (!mIsSystemLocale && rhsPref.mIsSystemLocale) {
+                return 1;
+            }
+            if (mIsSystemLanguage && !rhsPref.mIsSystemLanguage) {
+                return -1;
+            }
+            if (!mIsSystemLanguage && rhsPref.mIsSystemLanguage) {
+                return 1;
+            }
             final CharSequence t0 = getTitle();
             final CharSequence t1 = rhs.getTitle();
-            if (TextUtils.equals(t0, t1)) {
-                return 0;
+            if (t0 == null && t1 == null) {
+                return Integer.compare(hashCode(), rhs.hashCode());
             }
-            if (mIsSystemLocale) {
-                return -1;
+            if (t0 != null && t1 != null) {
+                return collator.compare(t0.toString(), t1.toString());
             }
-            if (pref.mIsSystemLocale) {
-                return 1;
-            }
-            if (mIsSystemLanguage) {
-                return -1;
-            }
-            if (pref.mIsSystemLanguage) {
-                return 1;
-            }
-            if (TextUtils.isEmpty(t0)) {
-                return 1;
-            }
-            if (TextUtils.isEmpty(t1)) {
-                return -1;
-            }
-            return collator.compare(t0.toString(), t1.toString());
+            return t0 == null ? -1 : 1;
         }
         return super.compareTo(rhs);
     }
