@@ -17,8 +17,13 @@ package com.android.settings.vpn2;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.IConnectivityManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.security.Credentials;
 import android.security.KeyStore;
+
+import com.android.internal.net.VpnConfig;
 
 /**
  * Utility functions for vpn.
@@ -26,7 +31,6 @@ import android.security.KeyStore;
  * Keystore methods should only be called in system user
  */
 public class VpnUtils {
-
     public static String getLockdownVpn() {
         final byte[] value = KeyStore.getInstance().get(Credentials.LOCKDOWN_VPN);
         return value == null ? null : new String(value);
@@ -35,17 +39,42 @@ public class VpnUtils {
     public static void clearLockdownVpn(Context context) {
         KeyStore.getInstance().delete(Credentials.LOCKDOWN_VPN);
         // Always notify ConnectivityManager after keystore update
-        context.getSystemService(ConnectivityManager.class).updateLockdownVpn();
+        getConnectivityManager(context).updateLockdownVpn();
     }
 
     public static void setLockdownVpn(Context context, String lockdownKey) {
         KeyStore.getInstance().put(Credentials.LOCKDOWN_VPN, lockdownKey.getBytes(),
                 KeyStore.UID_SELF, /* flags */ 0);
         // Always notify ConnectivityManager after keystore update
-        context.getSystemService(ConnectivityManager.class).updateLockdownVpn();
+        getConnectivityManager(context).updateLockdownVpn();
     }
 
     public static boolean isVpnLockdown(String key) {
         return key.equals(getLockdownVpn());
+    }
+
+    public static boolean isAlwaysOnOrLegacyLockdownActive(Context context) {
+        final int userId = context.getUserId();
+        return getLockdownVpn() != null
+                || getConnectivityManager(context).getAlwaysOnVpnPackageForUser(userId) != null;
+    }
+
+    public static boolean isVpnActive(Context context) throws RemoteException {
+        return getIConnectivityManager().getVpnConfig(context.getUserId()) != null;
+    }
+
+    public static String getConnectedPackage(IConnectivityManager service, final int userId)
+            throws RemoteException {
+        final VpnConfig config = service.getVpnConfig(userId);
+        return config != null ? config.user : null;
+    }
+
+    private static ConnectivityManager getConnectivityManager(Context context) {
+        return context.getSystemService(ConnectivityManager.class);
+    }
+
+    private static IConnectivityManager getIConnectivityManager() {
+        return IConnectivityManager.Stub.asInterface(
+                ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
     }
 }

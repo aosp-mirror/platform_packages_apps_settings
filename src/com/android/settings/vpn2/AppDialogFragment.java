@@ -158,7 +158,7 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
         }
         final int userId = getUserId();
         try {
-            if (mPackageInfo.packageName.equals(getConnectedPackage(mService, userId))) {
+            if (mPackageInfo.packageName.equals(VpnUtils.getConnectedPackage(mService, userId))) {
                 mService.setAlwaysOnVpnPackage(userId, null, /* lockdownEnabled */ false);
                 mService.prepareVpn(mPackageInfo.packageName, VpnConfig.LEGACY_VPN, userId);
             }
@@ -175,11 +175,5 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
 
     private int getUserId() {
         return UserHandle.getUserId(mPackageInfo.applicationInfo.uid);
-    }
-
-    private static String getConnectedPackage(IConnectivityManager service, final int userId)
-            throws RemoteException {
-        final VpnConfig config = service.getVpnConfig(userId);
-        return config != null ? config.user : null;
     }
 }
