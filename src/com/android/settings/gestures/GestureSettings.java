@@ -18,11 +18,12 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings.Global;
 import android.provider.Settings.Secure;
 import android.support.v7.preference.Preference;
 import android.support.v7.widget.RecyclerView;
@@ -98,6 +99,18 @@ public class GestureSettings extends SettingsPreferenceFragment implements
             removePreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
         }
 
+        // Double twist for camera mode
+        if (isDoubleTwistAvailable(context)) {
+            int doubleTwistEnabled = Secure.getInt(
+                    getContentResolver(), Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
+            GesturePreference preference =
+                    (GesturePreference) findPreference(PREF_KEY_DOUBLE_TWIST);
+            preference.setChecked(doubleTwistEnabled != 0);
+            preference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(PREF_KEY_DOUBLE_TWIST);
+        }
+
         if (savedInstanceState == null) {
             final Bundle args = getArguments();
             if (args != null && args.containsKey(ARG_SCROLL_TO_PREFERENCE)) {
@@ -131,8 +144,11 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         } else if (PREF_KEY_PICK_UP_AND_NUDGE.equals(key)) {
             Secure.putInt(getContentResolver(), Secure.DOZE_ENABLED, enabled ? 1 : 0);
         } else if (PREF_KEY_SWIPE_DOWN_FINGERPRINT.equals(key)) {
-            Global.putInt(getContentResolver(),
-                    Global.SYSTEM_NAVIGATION_KEYS_ENABLED, enabled ? 1 : 0);
+            Secure.putInt(getContentResolver(),
+                    Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, enabled ? 1 : 0);
+        } else if (PREF_KEY_DOUBLE_TWIST.equals(key)) {
+            Secure.putInt(getContentResolver(),
+                    Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled ? 1 : 0);
         }
         return true;
     }
@@ -167,8 +183,24 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     }
 
     private static boolean isSystemUINavigationEnabled(Context context) {
-        return Global.getInt(context.getContentResolver(), Global.SYSTEM_NAVIGATION_KEYS_ENABLED, 1)
+        return Secure.getInt(context.getContentResolver(), Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 1)
                 == 1;
+    }
+
+    private static boolean isDoubleTwistAvailable(Context context) {
+        Resources resources = context.getResources();
+        String name = resources.getString(R.string.gesture_double_twist_sensor_name);
+        String vendor = resources.getString(R.string.gesture_double_twist_sensor_vendor);
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(vendor)) {
+            SensorManager sensorManager =
+                    (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+            for (Sensor s : sensorManager.getSensorList(Sensor.TYPE_ALL)) {
+                if (name.equals(s.getName()) && vendor.equals(s.getVendor())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
