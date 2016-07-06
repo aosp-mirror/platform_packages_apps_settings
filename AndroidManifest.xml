@@ -1746,11 +1746,9 @@
         <activity android:name=".EncryptionInterstitial"
             android:theme="@style/SetupWizardTheme.Light" />
 
-        <!-- Runs in the phone process since it needs access to the Phone object -->
         <activity android:name=".Settings$StatusActivity"
                 android:label="@string/device_status_activity_title"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
-                android:process="com.android.phone">
+                android:theme="@style/Theme.SubSettingsDialogWhenLarge">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
