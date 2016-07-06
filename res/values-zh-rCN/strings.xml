@@ -2239,8 +2239,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"始终开启的 VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"尚未添加任何 VPN。"</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"始终处于开启状态"</string>
-    <!-- no translation found for vpn_not_supported_by_this_app (5002053874215892179) -->
-    <skip />
+    <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"此应用不支持这项功能"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"选择要始终保持连接的VPN配置文件。只有在连接到此VPN之后才可以使用网络。"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"无"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"始终开启的 VPN 需要服务器和 DNS 的 IP 地址。"</string>
@@ -2749,7 +2748,7 @@
     <string name="change" msgid="6657848623929839991">"更改"</string>
     <string name="change_storage" msgid="600475265207060436">"更改存储空间"</string>
     <string name="notifications_label" msgid="2872668710589600731">"通知"</string>
-    <string name="notifications_enabled" msgid="4386196629684749507">"常规"</string>
+    <string name="notifications_enabled" msgid="4386196629684749507">"正常"</string>
     <string name="notifications_disabled" msgid="3200751656741989335">"已屏蔽"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"不发出提示音"</string>
     <string name="notifications_redacted" msgid="4493588975742803160">"屏幕锁定时不显示敏感内容"</string>
@@ -2916,7 +2915,7 @@
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"应用"</string>
     <string name="system_alert_window_access_title" msgid="8811695381437304132">"出现在其他应用上"</string>
     <string name="permit_draw_overlay" msgid="6606018549732046201">"允许出现在其他应用上"</string>
-    <string name="app_overlay_permission_preference" msgid="8355410276571387439">"允许应用在上层显示的权限设置"</string>
+    <string name="app_overlay_permission_preference" msgid="8355410276571387439">"允许应用在最上层显示内容的权限设置"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"此权限允许应用出现在您当前使用的其他应用，因此可能会干扰您使用其他应用的界面，或者会影响您在其他应用中预期看到的内容。"</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr 虚拟现实 监听器 立体 助手服务"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"系统 提醒 窗口 对话框 显示 上层 其他应用"</string>
@@ -3106,27 +3105,19 @@
     <string name="demo_mode" msgid="2655748420527206870">"演示模式"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"我们会随时为您提供帮助"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我们可全天候为您提供服务"</string>
-    <string name="support_escalation_summary" msgid="5026029259244546972">"我们的支持团队会为您解决任何问题"</string>
-    <!-- no translation found for support_escalation_24_7_summary (2802773279262547187) -->
-    <skip />
-    <string name="support_escalation_closed_summary" msgid="8328299251391511841">"请在支持服务时段内（当地时间）给我们打电话&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
-    <!-- no translation found for support_escalation_unavailable_summary (5208552975245211898) -->
-    <skip />
-    <!-- no translation found for support_country_list_title (823853371280534111) -->
-    <skip />
-    <!-- no translation found for support_country_format (4502523713489559595) -->
-    <skip />
-    <!-- no translation found for support_phone_international_format (2143528744844720829) -->
-    <skip />
-    <!-- no translation found for support_offline_title (4469742310112477044) -->
-    <skip />
-    <!-- no translation found for support_international_phone_title (1470189566704940306) -->
-    <skip />
-    <!-- no translation found for support_international_phone_summary (208231793637026927) -->
-    <skip />
+    <string name="support_escalation_summary" msgid="4481910353815635960">"我们的支持团队会协助您解决任何问题"</string>
+    <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"我们的支持团队可全天候为您提供服务"</string>
+    <string name="support_escalation_closed_summary" msgid="8650309845497471757">"电话支持服务时段（当地时间）&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
+    <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"搜索帮助或发现更多提示与技巧"</string>
+    <string name="support_country_list_title" msgid="823853371280534111">"支持的国家/地区："</string>
+    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%s</xliff:g> - <xliff:g id="LANGUAGE">%s</xliff:g>"</string>
+    <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%s</xliff:g> (<xliff:g id="PHONE">%s</xliff:g>)"</string>
+    <string name="support_international_phone_title" msgid="1470189566704940306">"您目前人在国外吗？"</string>
+    <string name="support_international_phone_summary" msgid="208231793637026927">"可能需要支付国际通话费用"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"电话"</string>
     <string name="support_escalation_by_chat" msgid="977019859110763749">"聊天"</string>
-    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"提示与技巧"</string>
+    <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"探索更多提示和技巧"</string>
+    <string name="support_help_feedback_title" msgid="693440287222186718">"搜索帮助与发送反馈"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"请登录以获取支持服务"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登录"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"无法访问您的帐号？"</string>
@@ -3156,13 +3147,15 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"耳机"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"外围输入设备"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"蓝牙"</string>
-    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"存储空间管理器"</string>
+    <!-- no translation found for automatic_storage_manager_settings (7819434542155181607) -->
+    <skip />
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"存储空间管理器会从您的设备中移除已备份的照片和视频，从而释放存储空间。"</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"移除照片和视频"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"存储空间管理器"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自动"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手动"</string>
-    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"立即释放空间"</string>
+    <!-- no translation found for deletion_helper_preference_title (5271510052022285884) -->
+    <skip />
     <string name="gesture_preference_title" msgid="5280023307132819052">"手势"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"快速打开相机"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"要快速打开相机，只需按两次电源按钮即可（适用于任何屏幕）。"</string>
@@ -3174,10 +3167,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"要在任何屏幕上查看通知，请在指纹传感器上向下滑动手指。"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"开启"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"关闭"</string>
-    <!-- no translation found for oem_unlock_enable_disabled_summary_bootloader_unlocked (4265541229765635629) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_connectivity (415954951226204461) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_sim_locked_device (4149387448213399630) -->
+    <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"引导加载程序已解锁"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"请先连接到互联网"</string>
+    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"在与运营商绑定的设备上无法使用"</string>
+    <!-- no translation found for automatic_storage_manager_freed_bytes (7517560170441007788) -->
     <skip />
 </resources>

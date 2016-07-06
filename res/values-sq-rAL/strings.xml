@@ -2239,8 +2239,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Rrjeti VPN gjithmonë aktiv"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"Nuk u shtua asnjë rrjet VPN."</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"Gjithnjë aktiv është aktiv"</string>
-    <!-- no translation found for vpn_not_supported_by_this_app (5002053874215892179) -->
-    <skip />
+    <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Nuk mbështetet nga ky aplikacion"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Zgjidh një profil VPN-je për të qëndruar gjithmonë i lidhur. Trafiku i rrjetit do të lejohet vetëm kur të lidhet me këtë VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Asnjë"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPN-ja gjithnjë e aktivizuar kërkon një adresë IP-je për serverin dhe DNS-në."</string>
@@ -3106,27 +3105,19 @@
     <string name="demo_mode" msgid="2655748420527206870">"Modaliteti i demonstrimit"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Ne jemi këtu për të ndihmuar"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Ne jemi këtu për ty 24 orë në ditë"</string>
-    <string name="support_escalation_summary" msgid="5026029259244546972">"Ekipi ynë i mbështetjes është këtu për t\'iu përgjigjur çdo problemi"</string>
-    <!-- no translation found for support_escalation_24_7_summary (2802773279262547187) -->
-    <skip />
-    <string name="support_escalation_closed_summary" msgid="8328299251391511841">"Na telefono gjatë orarit për mbështetjen (ora lokale)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
-    <!-- no translation found for support_escalation_unavailable_summary (5208552975245211898) -->
-    <skip />
-    <!-- no translation found for support_country_list_title (823853371280534111) -->
-    <skip />
-    <!-- no translation found for support_country_format (4502523713489559595) -->
-    <skip />
-    <!-- no translation found for support_phone_international_format (2143528744844720829) -->
-    <skip />
-    <!-- no translation found for support_offline_title (4469742310112477044) -->
-    <skip />
-    <!-- no translation found for support_international_phone_title (1470189566704940306) -->
-    <skip />
-    <!-- no translation found for support_international_phone_summary (208231793637026927) -->
-    <skip />
+    <string name="support_escalation_summary" msgid="4481910353815635960">"Ekipi ynë i mbështetjes është këtu për t\'iu përgjigjur çdo problemi"</string>
+    <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Ekipi ynë i mbështetjes është i disponueshëm gjatë të gjithë ditës, çdo ditë"</string>
+    <string name="support_escalation_closed_summary" msgid="8650309845497471757">"Orari i mbështetjes së telefonit (local time)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
+    <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"Kërko ndihmë ose kërko te këshillat dhe marifetet"</string>
+    <string name="support_country_list_title" msgid="823853371280534111">"Mbështetje për:"</string>
+    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%s</xliff:g> - <xliff:g id="LANGUAGE">%s</xliff:g>"</string>
+    <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%s</xliff:g> (<xliff:g id="PHONE">%s</xliff:g>)"</string>
+    <string name="support_international_phone_title" msgid="1470189566704940306">"Po udhëton jashtë vendit?"</string>
+    <string name="support_international_phone_summary" msgid="208231793637026927">"Mund të aplikohen tarifa ndërkombëtare"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"Telefoni"</string>
     <string name="support_escalation_by_chat" msgid="977019859110763749">"Biseda"</string>
-    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Këshilla dhe të fshehta"</string>
+    <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"Eksploro këshillat dhe të fshehtat"</string>
+    <string name="support_help_feedback_title" msgid="693440287222186718">"Kërko për ndihmë dhe dërgo komente"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Identifikohu për mbështetje"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Identifikohu"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Nuk mund të qasesh në llogarinë tënde?"</string>
@@ -3156,13 +3147,15 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Kufje"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Hyrje periferike"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth-i"</string>
-    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Menaxheri i hapësirës ruajtëse"</string>
+    <!-- no translation found for automatic_storage_manager_settings (7819434542155181607) -->
+    <skip />
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Për të ndihmuar në lirimin e hapësirës ruajtëse, menaxheri i hapësirës ruajtëse i heq fotografitë dhe videot e rezervuara nga pajisja jote."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Hiq fotografitë dhe videot"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Menaxheri i hapësirës ruajtëse"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatike"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
-    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Hapësirë ​​e lirë tani"</string>
+    <!-- no translation found for deletion_helper_preference_title (5271510052022285884) -->
+    <skip />
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gjestet"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Kalo te kamera"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Për të hapur me shpejtësi kamerën, thjesht trokit dy herë te butoni i energjisë. Funksionon nga çdo ekran."</string>
@@ -3174,10 +3167,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Për të kontrolluar njoftimet nga çdo ekran, rrëshqit shpejt poshtë në sensorin e gjurmës së gishtit."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Aktiv"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Joaktiv"</string>
-    <!-- no translation found for oem_unlock_enable_disabled_summary_bootloader_unlocked (4265541229765635629) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_connectivity (415954951226204461) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_sim_locked_device (4149387448213399630) -->
+    <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Ngarkuesi i sistemit është i shkyçur tashmë"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Lidhu me internetin fillimisht"</string>
+    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Nuk ofrohet në pajisjet e kyçura për një operator celular"</string>
+    <!-- no translation found for automatic_storage_manager_freed_bytes (7517560170441007788) -->
     <skip />
 </resources>

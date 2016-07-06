@@ -2243,8 +2243,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"常時接続VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"VPN は追加されていません。"</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"常時接続が有効です"</string>
-    <!-- no translation found for vpn_not_supported_by_this_app (5002053874215892179) -->
-    <skip />
+    <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"このアプリは対応していません"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"常時接続するVPNプロファイルを選択します。このVPNに接続しているときのみネットワークにアクセスできます。"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"なし"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPNへの常時接続にはサーバーとDNSの両方のIPアドレスが必要です。"</string>
@@ -3110,27 +3109,19 @@
     <string name="demo_mode" msgid="2655748420527206870">"デモモード"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"サポートのご案内"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"サポートのご案内（年中無休 24 時間体制）"</string>
-    <string name="support_escalation_summary" msgid="5026029259244546972">"サポートチームがどんな問題にも対応いたします"</string>
-    <!-- no translation found for support_escalation_24_7_summary (2802773279262547187) -->
-    <skip />
-    <string name="support_escalation_closed_summary" msgid="8328299251391511841">"恐れ入りますが、サポート対応時間（現地時間）にお問い合わせください&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
-    <!-- no translation found for support_escalation_unavailable_summary (5208552975245211898) -->
-    <skip />
-    <!-- no translation found for support_country_list_title (823853371280534111) -->
-    <skip />
-    <!-- no translation found for support_country_format (4502523713489559595) -->
-    <skip />
-    <!-- no translation found for support_phone_international_format (2143528744844720829) -->
-    <skip />
-    <!-- no translation found for support_offline_title (4469742310112477044) -->
-    <skip />
-    <!-- no translation found for support_international_phone_title (1470189566704940306) -->
-    <skip />
-    <!-- no translation found for support_international_phone_summary (208231793637026927) -->
-    <skip />
+    <string name="support_escalation_summary" msgid="4481910353815635960">"サポートチームがどんな問題にも対応いたします"</string>
+    <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"サポートチームが年中無休 24 時間体制で対応いたします"</string>
+    <string name="support_escalation_closed_summary" msgid="8650309845497471757">"電話サポートの対応時間（現地時間）&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
+    <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"ヘルプを検索するか、使い方のヒントをご覧ください"</string>
+    <string name="support_country_list_title" msgid="823853371280534111">"サポート:"</string>
+    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%s</xliff:g> - <xliff:g id="LANGUAGE">%s</xliff:g>"</string>
+    <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%s</xliff:g>（<xliff:g id="PHONE">%s</xliff:g>）"</string>
+    <string name="support_international_phone_title" msgid="1470189566704940306">"海外に滞在している場合"</string>
+    <string name="support_international_phone_summary" msgid="208231793637026927">"国際通話料金が発生する可能性があります"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"電話"</string>
     <string name="support_escalation_by_chat" msgid="977019859110763749">"チャット"</string>
-    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"使い方のヒント"</string>
+    <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"使い方のヒントを検索"</string>
+    <string name="support_help_feedback_title" msgid="693440287222186718">"ヘルプの検索とフィードバックの送信"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"サポートを利用するにはログイン"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"ログイン"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"アカウントにアクセスできない場合"</string>
@@ -3160,13 +3151,15 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"ヘッドフォン"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"入力用周辺機器"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
-    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"ストレージ マネージャ"</string>
+    <!-- no translation found for automatic_storage_manager_settings (7819434542155181607) -->
+    <skip />
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"ストレージの空き容量を増やすため、ストレージ マネージャはバックアップした写真や動画をお使いの端末から削除します。"</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"写真と動画を削除"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"ストレージ マネージャ"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自動"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手動"</string>
-    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"今すぐ空き容量を増やす"</string>
+    <!-- no translation found for deletion_helper_preference_title (5271510052022285884) -->
+    <skip />
     <string name="gesture_preference_title" msgid="5280023307132819052">"操作"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"カメラの起動"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"カメラをすばやく起動するには、電源ボタンをダブルタップします。どの画面からでも操作できます。"</string>
@@ -3178,10 +3171,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"通知を確認するには、指紋認証センサー部分を下にスワイプします。どの画面からでも操作できます。"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"ON"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"OFF"</string>
-    <!-- no translation found for oem_unlock_enable_disabled_summary_bootloader_unlocked (4265541229765635629) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_connectivity (415954951226204461) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_sim_locked_device (4149387448213399630) -->
+    <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"ブートローダーは既にロック解除されています"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"最初にインターネットに接続してください"</string>
+    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"携帯通信会社によってロックされている端末では利用できません"</string>
+    <!-- no translation found for automatic_storage_manager_freed_bytes (7517560170441007788) -->
     <skip />
 </resources>

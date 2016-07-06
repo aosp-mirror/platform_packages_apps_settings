@@ -2156,7 +2156,7 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Datos 4G"</string>
     <string name="data_usage_forground_label" msgid="7654319010655983591">"Primeiro plano"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"Segundo plano"</string>
-    <string name="data_usage_app_settings" msgid="2279171379771253165">"Configuración de aplicacións"</string>
+    <string name="data_usage_app_settings" msgid="2279171379771253165">"Configuración da aplicación"</string>
     <string name="data_usage_app_restrict_background" msgid="7359227831562303223">"Datos en segundo plano"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="4669789008211107454">"Activa o uso de datos móbiles en segundo plano"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"Para restrinxir datos na aplicación, define un límite de datos."</string>
@@ -2239,8 +2239,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN sempre activada"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"Non se engadiron VPN."</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"Opción Sempre activada activa"</string>
-    <!-- no translation found for vpn_not_supported_by_this_app (5002053874215892179) -->
-    <skip />
+    <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Opción non admitida nesta aplicación"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Selecciona un perfil de VPN ao que permanecer sempre conectado. Só se permitirá tráfico de rede cando esteas conectado a esta VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Ningunha"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"As VPN que están sempre activadas requiren un enderezo IP para o servidor e o DNS."</string>
@@ -2848,7 +2847,7 @@
     <string name="high_power_prompt_body" msgid="4072587909486730876">"Queres que a aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> permaneza conectada en segundo plano? É posible que consuma máis batería."</string>
     <string name="battery_summary" msgid="101415762036784289">"Uso do <xliff:g id="PERCENTAGE">%1$d</xliff:g> %% desde a última carga completa"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Non hai uso da batería desde a última carga completa"</string>
-    <string name="app_notification_preferences" msgid="1599319335092722613">"Configuración de aplicacións"</string>
+    <string name="app_notification_preferences" msgid="1599319335092722613">"Configuración da aplicación"</string>
     <string name="system_ui_settings" msgid="579824306467081123">"Mostrar sintonizador da IU do sistema"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"Permisos adicionais"</string>
     <string name="additional_permissions_more" msgid="3538612272673191451">"<xliff:g id="COUNT">%1$d</xliff:g> máis"</string>
@@ -3106,27 +3105,19 @@
     <string name="demo_mode" msgid="2655748420527206870">"Modo de demostración"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Se precisas axuda, conta connosco"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Estamos á túa disposición as 24 horas do día, os 7 días da semana"</string>
-    <string name="support_escalation_summary" msgid="5026029259244546972">"O noso equipo de asistencia está dispoñible para resolver os problemas que xurdan"</string>
-    <!-- no translation found for support_escalation_24_7_summary (2802773279262547187) -->
-    <skip />
-    <string name="support_escalation_closed_summary" msgid="8328299251391511841">"Chámanos durante o horario de asistencia (hora local):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
-    <!-- no translation found for support_escalation_unavailable_summary (5208552975245211898) -->
-    <skip />
-    <!-- no translation found for support_country_list_title (823853371280534111) -->
-    <skip />
-    <!-- no translation found for support_country_format (4502523713489559595) -->
-    <skip />
-    <!-- no translation found for support_phone_international_format (2143528744844720829) -->
-    <skip />
-    <!-- no translation found for support_offline_title (4469742310112477044) -->
-    <skip />
-    <!-- no translation found for support_international_phone_title (1470189566704940306) -->
-    <skip />
-    <!-- no translation found for support_international_phone_summary (208231793637026927) -->
-    <skip />
+    <string name="support_escalation_summary" msgid="4481910353815635960">"O noso equipo de asistencia está dispoñible para resolver os problemas que xurdan"</string>
+    <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"O noso equipo de asistencia está dispoñible as 24 horas do día, os 7 días da semana"</string>
+    <string name="support_escalation_closed_summary" msgid="8650309845497471757">"Horario de asistencia telefónica (hora local)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
+    <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"Busca axuda ou consulta consellos e trucos"</string>
+    <string name="support_country_list_title" msgid="823853371280534111">"Asistencia telefónica para:"</string>
+    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%s</xliff:g> - <xliff:g id="LANGUAGE">%s</xliff:g>"</string>
+    <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%s</xliff:g> (<xliff:g id="PHONE">%s</xliff:g>)"</string>
+    <string name="support_international_phone_title" msgid="1470189566704940306">"Vas viaxar ao estranxeiro?"</string>
+    <string name="support_international_phone_summary" msgid="208231793637026927">"É posible que se apliquen tarifas internacionais"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"Teléfono"</string>
     <string name="support_escalation_by_chat" msgid="977019859110763749">"Chat"</string>
-    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"Consellos e trucos"</string>
+    <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"Consultar consellos e trucos"</string>
+    <string name="support_help_feedback_title" msgid="693440287222186718">"Buscar axuda e enviar comentarios"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Inicia sesión para obter asistencia"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Iniciar sesión"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Non podes acceder á túa conta?"</string>
@@ -3156,13 +3147,15 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Auriculares"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Periférico de entrada"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
-    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Xestor de almacenamento"</string>
+    <!-- no translation found for automatic_storage_manager_settings (7819434542155181607) -->
+    <skip />
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Para axudar a liberar espazo de almacenamento, o xestor de almacenamento elimina as fotos e vídeos con copia de seguranza do teu dispositivo."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Eliminar fotos e vídeos"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Xestor de almacenamento"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automático"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
-    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Espazo libre neste momento"</string>
+    <!-- no translation found for deletion_helper_preference_title (5271510052022285884) -->
+    <skip />
     <string name="gesture_preference_title" msgid="5280023307132819052">"Xestos"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Saltar á cámara"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Para abrir rapidamente a cámara, simplemente toca dúas veces o botón de acendido. Isto funciona en calquera pantalla."</string>
@@ -3174,10 +3167,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Para consultar as túas notificacións desde calquera pantalla, pasa o dedo cara abaixo no sensor de impresión dixital."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activado"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Desactivado"</string>
-    <!-- no translation found for oem_unlock_enable_disabled_summary_bootloader_unlocked (4265541229765635629) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_connectivity (415954951226204461) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_sim_locked_device (4149387448213399630) -->
+    <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"O cargador de inicio xa está desbloqueado"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Conéctate a Internet en primeiro lugar"</string>
+    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Non está dispoñible nos dispositivos bloqueados polo operador"</string>
+    <!-- no translation found for automatic_storage_manager_freed_bytes (7517560170441007788) -->
     <skip />
 </resources>

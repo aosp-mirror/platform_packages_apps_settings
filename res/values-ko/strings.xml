@@ -2239,8 +2239,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"연결 유지 VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"추가된 VPN 없음"</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"항상 사용 활성화"</string>
-    <!-- no translation found for vpn_not_supported_by_this_app (5002053874215892179) -->
-    <skip />
+    <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"이 앱에서 지원되지 않음"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"VPN 프로필을 선택하여 연결된 상태를 유지하세요. 이 VPN에 연결된 상태에서만 네트워크 트래픽이 허용됩니다."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"없음"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPN을 연결 상태로 유지하려면 서버와 DNS의 IP 주소가 필요합니다."</string>
@@ -3106,27 +3105,19 @@
     <string name="demo_mode" msgid="2655748420527206870">"데모 모드"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Google로부터 지원받기"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"하루 24시간 연중무휴 운영"</string>
-    <string name="support_escalation_summary" msgid="5026029259244546972">"Google 지원팀에서 문제해결을 도와드립니다."</string>
-    <!-- no translation found for support_escalation_24_7_summary (2802773279262547187) -->
-    <skip />
-    <string name="support_escalation_closed_summary" msgid="8328299251391511841">"전화 문의는 지원 시간(현지 시간)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt; 중에 이용해 주세요."</string>
-    <!-- no translation found for support_escalation_unavailable_summary (5208552975245211898) -->
-    <skip />
-    <!-- no translation found for support_country_list_title (823853371280534111) -->
-    <skip />
-    <!-- no translation found for support_country_format (4502523713489559595) -->
-    <skip />
-    <!-- no translation found for support_phone_international_format (2143528744844720829) -->
-    <skip />
-    <!-- no translation found for support_offline_title (4469742310112477044) -->
-    <skip />
-    <!-- no translation found for support_international_phone_title (1470189566704940306) -->
-    <skip />
-    <!-- no translation found for support_international_phone_summary (208231793637026927) -->
-    <skip />
+    <string name="support_escalation_summary" msgid="4481910353815635960">"Google 지원팀에서 문제해결을 도와드립니다."</string>
+    <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Google 지원팀은 하루 24시간 연중무휴로 운영됩니다."</string>
+    <string name="support_escalation_closed_summary" msgid="8650309845497471757">"휴대전화 지원 시간(현지 시간)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
+    <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"도움말 검색 또는 도움말 및 유용한 정보 탐색"</string>
+    <string name="support_country_list_title" msgid="823853371280534111">"지원 국가:"</string>
+    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%s</xliff:g> - <xliff:g id="LANGUAGE">%s</xliff:g>"</string>
+    <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%s</xliff:g>(<xliff:g id="PHONE">%s</xliff:g>)"</string>
+    <string name="support_international_phone_title" msgid="1470189566704940306">"해외에 계신가요?"</string>
+    <string name="support_international_phone_summary" msgid="208231793637026927">"국제 요금이 청구될 수 있습니다."</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"전화"</string>
     <string name="support_escalation_by_chat" msgid="977019859110763749">"채팅"</string>
-    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"도움말 및 유용한 정보"</string>
+    <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"도움말 및 유용한 정보 탐색"</string>
+    <string name="support_help_feedback_title" msgid="693440287222186718">"도움말 검색 및 의견 보내기"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"로그인하여 지원받기"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"로그인"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"계정에 액세스할 수 없으신가요?"</string>
@@ -3156,13 +3147,15 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"헤드폰"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"입력 주변기기"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"블루투스"</string>
-    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"저장용량 관리자"</string>
+    <!-- no translation found for automatic_storage_manager_settings (7819434542155181607) -->
+    <skip />
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"저장용량 관리자가 저장 공간을 확보하기 위해 백업된 사진과 동영상을 기기에서 삭제합니다."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"사진 및 동영상 삭제"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"저장용량 관리자"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"자동"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"수동"</string>
-    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"현재 여유 공간"</string>
+    <!-- no translation found for deletion_helper_preference_title (5271510052022285884) -->
+    <skip />
     <string name="gesture_preference_title" msgid="5280023307132819052">"동작"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"카메라로 이동"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"카메라를 빨리 열려면 전원 버튼을 두 번 탭하기만 하면 됩니다. 어느 화면에서나 작동합니다."</string>
@@ -3174,10 +3167,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"어느 화면에서나 알림을 확인하려면 지문 센서에서 아래로 스와이프합니다."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"사용"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"사용 안함"</string>
-    <!-- no translation found for oem_unlock_enable_disabled_summary_bootloader_unlocked (4265541229765635629) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_connectivity (415954951226204461) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_sim_locked_device (4149387448213399630) -->
+    <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"부트로더가 이미 잠금해제되었습니다."</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"먼저 인터넷 연결"</string>
+    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"특정 이동통신사만 사용하도록 잠긴 기기에서 사용할 수 없음"</string>
+    <!-- no translation found for automatic_storage_manager_freed_bytes (7517560170441007788) -->
     <skip />
 </resources>

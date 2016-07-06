@@ -2239,8 +2239,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Her zaman açık VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"VPN eklenmedi."</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"Her zaman açık ayarı etkin"</string>
-    <!-- no translation found for vpn_not_supported_by_this_app (5002053874215892179) -->
-    <skip />
+    <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Bu uygulama tarafından desteklenmiyor"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Her zaman bağlı kalacak bir VPN profili seçin. Ağ trafiğine yalnızca bu VPN\'ye bağlanıldığında izin verilir."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Yok"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Her zaman açık VPN seçeneğinde hem sunucu hem de DNS için bir IP adresi gerekir."</string>
@@ -3106,27 +3105,19 @@
     <string name="demo_mode" msgid="2655748420527206870">"Demo modu"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Yardımcı olmak için buradayız"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Sizin için 7/24 buradayız"</string>
-    <string name="support_escalation_summary" msgid="5026029259244546972">"Destek ekibimiz her tür sorunu çözmek için yanınızda"</string>
-    <!-- no translation found for support_escalation_24_7_summary (2802773279262547187) -->
-    <skip />
-    <string name="support_escalation_closed_summary" msgid="8328299251391511841">"Destek hizmetinin verildiği saatlerde bizi arayın (yerel saat)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
-    <!-- no translation found for support_escalation_unavailable_summary (5208552975245211898) -->
-    <skip />
-    <!-- no translation found for support_country_list_title (823853371280534111) -->
-    <skip />
-    <!-- no translation found for support_country_format (4502523713489559595) -->
-    <skip />
-    <!-- no translation found for support_phone_international_format (2143528744844720829) -->
-    <skip />
-    <!-- no translation found for support_offline_title (4469742310112477044) -->
-    <skip />
-    <!-- no translation found for support_international_phone_title (1470189566704940306) -->
-    <skip />
-    <!-- no translation found for support_international_phone_summary (208231793637026927) -->
-    <skip />
+    <string name="support_escalation_summary" msgid="4481910353815635960">"Destek ekibimiz her tür sorunu çözmenize yardımcı olmak için yanınızdadır"</string>
+    <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Destek ekibimiz her gün, tüm gün boyunca yanınızda"</string>
+    <string name="support_escalation_closed_summary" msgid="8650309845497471757">"Telefonla destek saatleri (yerel saat)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
+    <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"Yardımda arama yapın veya ipuçları ve püf noktalarını keşfedin"</string>
+    <string name="support_country_list_title" msgid="823853371280534111">"Şu ülke için destek:"</string>
+    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%s</xliff:g> - <xliff:g id="LANGUAGE">%s</xliff:g>"</string>
+    <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%s</xliff:g> (<xliff:g id="PHONE">%s</xliff:g>)"</string>
+    <string name="support_international_phone_title" msgid="1470189566704940306">"Yurt dışına mı seyahat ediyorsunuz?"</string>
+    <string name="support_international_phone_summary" msgid="208231793637026927">"Uluslararası kullanım ücretleri alınabilir"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"Telefon"</string>
     <string name="support_escalation_by_chat" msgid="977019859110763749">"Sohbet"</string>
-    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"İpuçları ve püf noktaları"</string>
+    <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"İpuçlarını ve püf noktalarını keşfedin"</string>
+    <string name="support_help_feedback_title" msgid="693440287222186718">"Yardım\'da arama yapın ve geri bildirim gönderin"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"Destek için oturum açın"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Oturum aç"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"Hesabınıza erişemiyor musunuz?"</string>
@@ -3156,13 +3147,15 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Kulaklık"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Giriş Çevre Birimi"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
-    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"Depolama yöneticisi"</string>
+    <!-- no translation found for automatic_storage_manager_settings (7819434542155181607) -->
+    <skip />
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Depolama alanında yer açmaya yardımcı olmak için depolama yöneticisi, yedeklenen fotoğrafları ve videoları cihazınızdan kaldırır."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Fotoğrafları ve videoları kaldır"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Depolama yöneticisi"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Otomatik"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuel"</string>
-    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"Şu anki boş alan"</string>
+    <!-- no translation found for deletion_helper_preference_title (5271510052022285884) -->
+    <skip />
     <string name="gesture_preference_title" msgid="5280023307132819052">"Hareketler"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Kameraya geç"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"Kamerayı hızlıca açmak için güç düğmesine iki kez hafifçe dokunmanız yeterli. Tüm ekranlarda çalışır."</string>
@@ -3174,10 +3167,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"Herhangi bir ekrandan bildirimlerinizi kontrol etmek için parmak izi sensöründe hızlıca aşağı kaydırın."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Açık"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Kapalı"</string>
-    <!-- no translation found for oem_unlock_enable_disabled_summary_bootloader_unlocked (4265541229765635629) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_connectivity (415954951226204461) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_sim_locked_device (4149387448213399630) -->
+    <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Önyükleyici kilidi zaten açık"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Önce İnternet\'e bağlanın"</string>
+    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Operatör tarafından kilitlenmiş cihazlarda kullanılamaz"</string>
+    <!-- no translation found for automatic_storage_manager_freed_bytes (7517560170441007788) -->
     <skip />
 </resources>

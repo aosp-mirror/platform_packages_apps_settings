@@ -2307,8 +2307,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"‏شبكة ظاهرية خاصة (VPN) دائمة التشغيل"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"‏لم تتم إضافة أي شبكة ظاهرية خاصة (VPN)."</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"تنشيط التشغيل دائمًا"</string>
-    <!-- no translation found for vpn_not_supported_by_this_app (5002053874215892179) -->
-    <skip />
+    <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"عدم التوافق مع هذا التطبيق"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"‏حدد ملفًا شخصيًا للشبكة الظاهرية الخاصة (VPN) للاتصال الدائم بها. لن يتم السماح بحركة مرور الشبكة إلا عند الاتصال بهذه الشبكة الظاهرية الخاصة."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"لا شيء"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"‏تتطلب الشبكة الظاهرية الخاصة (VPN) دائمة التشغيل عنوان IP لكل من الخادم ونظام أسماء النطاقات."</string>
@@ -3234,27 +3233,19 @@
     <string name="demo_mode" msgid="2655748420527206870">"الوضع التجريبي"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"نحن هنا لمساعدتك"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"يمكنك التواصل معنا على مدار 24 ساعة طوال أيام الأسبوع."</string>
-    <string name="support_escalation_summary" msgid="5026029259244546972">"يمكنك الاتصال بفريق الدعم من هنا لحل أي مشكلات"</string>
-    <!-- no translation found for support_escalation_24_7_summary (2802773279262547187) -->
-    <skip />
-    <string name="support_escalation_closed_summary" msgid="8328299251391511841">"‏اتصل بنا أثناء ساعات عمل فريق الدعم (بالتوقيت المحلي)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
-    <!-- no translation found for support_escalation_unavailable_summary (5208552975245211898) -->
-    <skip />
-    <!-- no translation found for support_country_list_title (823853371280534111) -->
-    <skip />
-    <!-- no translation found for support_country_format (4502523713489559595) -->
-    <skip />
-    <!-- no translation found for support_phone_international_format (2143528744844720829) -->
-    <skip />
-    <!-- no translation found for support_offline_title (4469742310112477044) -->
-    <skip />
-    <!-- no translation found for support_international_phone_title (1470189566704940306) -->
-    <skip />
-    <!-- no translation found for support_international_phone_summary (208231793637026927) -->
-    <skip />
+    <string name="support_escalation_summary" msgid="4481910353815635960">"يمكنك التواصل هنا مع فريق الدعم لحل أي مشكلات"</string>
+    <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"فريق الدعم متوفر طوال اليوم، وكل يوم"</string>
+    <string name="support_escalation_closed_summary" msgid="8650309845497471757">"‏ساعات عمل فريق الدعم عبر الهاتف (بالتوقيت المحلي)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
+    <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"ابحث عن المساعدة أو استكشف النصائح والحيل"</string>
+    <string name="support_country_list_title" msgid="823853371280534111">"الدعم لبلد:"</string>
+    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%s</xliff:g> - <xliff:g id="LANGUAGE">%s</xliff:g>"</string>
+    <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%s</xliff:g> (<xliff:g id="PHONE">%s</xliff:g>)"</string>
+    <string name="support_international_phone_title" msgid="1470189566704940306">"هل أنت مسافر للخارج؟"</string>
+    <string name="support_international_phone_summary" msgid="208231793637026927">"قد تسري رسومًا للاتصالات الدولية."</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"الهاتف"</string>
     <string name="support_escalation_by_chat" msgid="977019859110763749">"دردشة"</string>
-    <string name="support_tips_and_tricks_title" msgid="1903087888047128159">"النصائح والحيل"</string>
+    <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"استكشاف النصائح والحيل"</string>
+    <string name="support_help_feedback_title" msgid="693440287222186718">"البحث في المساعدة وإرسال تعليقات"</string>
     <string name="support_sign_in_required_title" msgid="6782855985258687680">"تسجيل الدخول للحصول على الدعم"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"تسجيل الدخول"</string>
     <string name="support_sign_in_required_help" msgid="3930256366697956788">"ألا تستطيع الدخول إلى حسابك؟"</string>
@@ -3296,13 +3287,15 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"سماعة أذن"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"جهاز إدخال طرفي"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"بلوتوث"</string>
-    <string name="automatic_storage_manager_settings" msgid="5179020559757485932">"مدير سعة التخزين"</string>
+    <!-- no translation found for automatic_storage_manager_settings (7819434542155181607) -->
+    <skip />
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"للمساعدة في تفريغ مساحة التخزين، يزيل مدير سعة التخزين من جهاز الصور ومقاطع الفيديو التي تم الاحتفاظ بنسخة احتياطية منها."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"إزالة الصور ومقاطع الفيديو"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"مدير سعة التخزين"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"تلقائي"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"يدوي"</string>
-    <string name="deletion_helper_preference_title" msgid="7719699175312011449">"المساحة الخالية الآن"</string>
+    <!-- no translation found for deletion_helper_preference_title (5271510052022285884) -->
+    <skip />
     <string name="gesture_preference_title" msgid="5280023307132819052">"الإيماءات"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"الانتقال سريعًا إلى الكاميرا"</string>
     <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"لفتح الكاميرا سريعًا، لن يلزمك سوى النقر نقرًا مزدوجًا على زر التشغيل. ويعمل ذلك في أي شاشة."</string>
@@ -3314,10 +3307,9 @@
     <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"للاطلاع على الإشعارات في أي شاشة، مرّّر سريعًا لأسفل على مستشعر بصمات الإصبع."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"تشغيل"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"إيقاف"</string>
-    <!-- no translation found for oem_unlock_enable_disabled_summary_bootloader_unlocked (4265541229765635629) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_connectivity (415954951226204461) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_disabled_summary_sim_locked_device (4149387448213399630) -->
+    <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"تم إلغاء قفل برنامج التحميل مسبقاً"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"الاتصال بالإنترنت أولاً"</string>
+    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"عدم التوفر على الأجهزة التي يقفلها مشغل شبكة الجوال"</string>
+    <!-- no translation found for automatic_storage_manager_freed_bytes (7517560170441007788) -->
     <skip />
 </resources>
