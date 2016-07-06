@@ -50,7 +50,8 @@ public final class GesturePreference extends SwitchPreference {
     private Uri mVideoPath;
     private MediaPlayer mMediaPlayer;
     private MediaMetadataRetriever mMediaMetadata;
-    private boolean animationAvailable;
+    private boolean mAnimationAvailable;
+    private boolean mPreviewReady;
 
     public GesturePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -68,7 +69,7 @@ public final class GesturePreference extends SwitchPreference {
                     .build();
             mMediaMetadata = new MediaMetadataRetriever();
             mMediaMetadata.setDataSource(mContext, mVideoPath);
-            animationAvailable = true;
+            mAnimationAvailable = true;
         } catch (Exception e) {
             Log.w(TAG, "Animation resource not found. Will not show animation.");
         } finally {
@@ -86,19 +87,10 @@ public final class GesturePreference extends SwitchPreference {
         final ImageView playButton = (ImageView) holder.findViewById(R.id.gesture_play_button);
         final View animationFrame = holder.findViewById(R.id.gesture_animation_frame);
 
-        if (!animationAvailable) {
+        if (!mAnimationAvailable) {
             animationFrame.setVisibility(View.GONE);
             return;
         }
-
-        Bitmap bitmap = mMediaMetadata.getFrameAtTime(0);
-        if (bitmap != null) {
-            imageView.setImageDrawable(new BitmapDrawable(bitmap));
-            imageView.setColorFilter(mContext.getResources().getColor(
-                    R.color.gestures_setting_background_color), PorterDuff.Mode.DARKEN);
-        }
-        imageView.setVisibility(View.VISIBLE);
-        playButton.setVisibility(View.VISIBLE);
 
         video.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,13 +111,22 @@ public final class GesturePreference extends SwitchPreference {
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
                     int height) {
-                animationFrame.setLayoutParams(new LinearLayout.LayoutParams(width, width));
                 mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
                 if (mMediaPlayer != null) {
                     mMediaPlayer.setSurface(new Surface(surfaceTexture));
+                    mMediaPlayer.setOnSeekCompleteListener(
+                            new MediaPlayer.OnSeekCompleteListener() {
+                                @Override
+                                public void onSeekComplete(MediaPlayer mp) {
+                                    mPreviewReady = true;
+                                    mMediaPlayer.setOnSeekCompleteListener(null);
+                                }
+                            });
+
                     mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
                         public void onPrepared(MediaPlayer mediaPlayer) {
+                            mediaPlayer.seekTo(0);
                             mediaPlayer.setLooping(true);
                         }
                     });
@@ -150,7 +151,7 @@ public final class GesturePreference extends SwitchPreference {
 
             @Override
             public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
-                if (mMediaPlayer.isPlaying() && imageView.getVisibility() == View.VISIBLE) {
+                if (mPreviewReady && imageView.getVisibility() == View.VISIBLE) {
                     imageView.setVisibility(View.GONE);
                 }
             }
