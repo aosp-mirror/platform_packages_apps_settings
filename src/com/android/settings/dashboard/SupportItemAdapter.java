@@ -397,6 +397,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                         final SupportPhone phone = mSupportFeatureProvider
                                 .getSupportPhones(mSelectedCountry, true /* isTollFree */);
                         if (phone != null) {
+                            MetricsLogger.action(mActivity,
+                                    MetricsProto.MetricsEvent.ACTION_SUPPORT_DAIL_TOLLFREE);
                             mActivity.startActivity(phone.getDialIntent());
                         }
                         break;
@@ -406,6 +408,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                                 .getSupportPhones(mSelectedCountry, false /* isTollFree */);
                         final SupportPhoneDialogFragment fragment =
                                 SupportPhoneDialogFragment.newInstance(phone);
+                        MetricsLogger.action(mActivity,
+                                MetricsProto.MetricsEvent.ACTION_SUPPORT_VIEW_TRAVEL_ABROAD_DIALOG);
                         fragment.show(mActivity.getFragmentManager(),
                                 SupportPhoneDialogFragment.TAG);
                         break;
