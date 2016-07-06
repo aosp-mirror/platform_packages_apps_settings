@@ -68,8 +68,8 @@ import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
-import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.applications.VrListenerSettings;
+import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.dashboard.DashboardContainerFragment;
 import com.android.settings.dashboard.SearchResultsSummary;
@@ -109,7 +109,6 @@ import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.qstile.DevelopmentTiles;
@@ -702,6 +701,13 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         if (DEBUG_TIMING) Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
+    }
+
+    public void setDisplaySearchMenu(boolean displaySearch) {
+        if (displaySearch != mDisplaySearch) {
+            mDisplaySearch = displaySearch;
+            invalidateOptionsMenu();
+        }
     }
 
     private void setTitleFromIntent(Intent intent) {
