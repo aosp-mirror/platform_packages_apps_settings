@@ -25,8 +25,12 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings.Global;
 import android.provider.Settings.Secure;
 import android.support.v7.preference.Preference;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -51,6 +55,9 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     private static final String PREF_KEY_PICK_UP_AND_NUDGE = "gesture_pick_up_and_nudge";
     private static final String PREF_KEY_SWIPE_DOWN_FINGERPRINT = "gesture_swipe_down_fingerprint";
     private static final String DEBUG_DOZE_COMPONENT = "debug.doze.component";
+    private static final String ARG_SCROLL_TO_PREFERENCE = "gesture_scroll_to_preference";
+
+    private int mScrollPosition = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,6 +98,27 @@ public class GestureSettings extends SettingsPreferenceFragment implements
             removePreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
         }
 
+        if (savedInstanceState == null) {
+            final Bundle args = getArguments();
+            if (args != null && args.containsKey(ARG_SCROLL_TO_PREFERENCE)) {
+                String prefKey = args.getString(ARG_SCROLL_TO_PREFERENCE);
+                GesturePreference pref = (GesturePreference) findPreference(prefKey);
+                if (pref != null) {
+                    mScrollPosition = pref.getOrder();
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        if (mScrollPosition >= 0) {
+            getListView().scrollToPosition(mScrollPosition);
+        }
+        return view;
     }
 
     @Override
