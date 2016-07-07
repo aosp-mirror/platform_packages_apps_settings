@@ -71,7 +71,8 @@ public interface SupportFeatureProvider {
      * Returns localized string for operation hours in specified country. If country is null, use
      * current country to figure out operation hours.
      */
-    CharSequence getOperationHours(Context context, @SupportType int type, String countryCode);
+    CharSequence getOperationHours(Context context, @SupportType int type, String countryCode,
+            boolean hasInternet);
 
     /**
      * Returns a localized string indicating estimated wait time for a support time.
