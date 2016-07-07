@@ -179,7 +179,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
 
     @Override
     public void onRunningStateChanged(boolean running) {
-        // No op.
+        refreshUi();
     }
 
     @Override
