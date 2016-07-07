@@ -16,9 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static android.content.Context.CARRIER_CONFIG_SERVICE;
-import static android.content.Context.TELEPHONY_SERVICE;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +29,6 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellBroadcastMessage;
-import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
@@ -58,8 +54,12 @@ import com.android.internal.telephony.PhoneFactory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settingslib.DeviceInfoUtils;
 
 import java.util.List;
+
+import static android.content.Context.CARRIER_CONFIG_SERVICE;
+import static android.content.Context.TELEPHONY_SERVICE;
 
 
 /**
@@ -393,13 +393,10 @@ public class SimStatus extends SettingsPreferenceFragment {
         mShowICCID = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL);
 
-        String rawNumber = mTelephonyManager.getLine1Number(mSir.getSubscriptionId());
-        String formattedNumber = null;
-        if (!TextUtils.isEmpty(rawNumber)) {
-            formattedNumber = PhoneNumberUtils.formatNumber(rawNumber);
-        }
+
         // If formattedNumber is null or empty, it'll display as "Unknown".
-        setSummaryText(KEY_PHONE_NUMBER, formattedNumber);
+        setSummaryText(KEY_PHONE_NUMBER,
+                DeviceInfoUtils.getFormattedPhoneNumber(getContext(), mSir));
         setSummaryText(KEY_IMEI, mPhone.getImei());
         setSummaryText(KEY_IMEI_SV, mPhone.getDeviceSvn());
 
