@@ -91,6 +91,12 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
         CredentialDialogFragment.show(this, item);
     }
 
+    protected void announceRemoval(String alias) {
+        if (isAdded()) {
+            mListView.announceForAccessibility(getString(R.string.user_credential_removed, alias));
+        }
+    }
+
     protected void refreshItems() {
         if (isAdded()) {
             new AliasLoader().execute();
@@ -142,8 +148,7 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
                             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
                                     admin);
                         } else {
-                            new RemoveCredentialsTask(getContext(), getTargetFragment())
-                                    .execute(item.alias);
+                            new RemoveCredentialsTask(getTargetFragment()).execute(item.alias);
                         }
                         dialog.dismiss();
                     }
@@ -153,17 +158,15 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
             return builder.create();
         }
 
-        private class RemoveCredentialsTask extends AsyncTask<String, Void, Void> {
-            private Context context;
+        private class RemoveCredentialsTask extends AsyncTask<String, Void, String[]> {
             private Fragment targetFragment;
 
-            public RemoveCredentialsTask(Context context, Fragment targetFragment) {
-                this.context = context;
+            public RemoveCredentialsTask(Fragment targetFragment) {
                 this.targetFragment = targetFragment;
             }
 
             @Override
-            protected Void doInBackground(String... aliases) {
+            protected String[] doInBackground(String... aliases) {
                 try {
                     final KeyChainConnection conn = KeyChain.bind(getContext());
                     try {
@@ -179,13 +182,17 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
                 } catch (InterruptedException e) {
                     Log.w(TAG, "Connecting to keychain", e);
                 }
-                return null;
+                return aliases;
             }
 
             @Override
-            protected void onPostExecute(Void result) {
-                if (targetFragment instanceof UserCredentialsSettings) {
-                    ((UserCredentialsSettings) targetFragment).refreshItems();
+            protected void onPostExecute(String... aliases) {
+                if (targetFragment instanceof UserCredentialsSettings && targetFragment.isAdded()) {
+                    final UserCredentialsSettings target = (UserCredentialsSettings) targetFragment;
+                    for (final String alias : aliases) {
+                        target.announceRemoval(alias);
+                    }
+                    target.refreshItems();
                 }
             }
         }
