@@ -198,10 +198,11 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             builder.setTileTitle(R.string.support_escalation_title)
                     .setTileSummary(R.string.support_escalation_summary);
         } else {
-            // Support is not temporarily unavailable.
+            // Support is now temporarily unavailable.
             builder.setTileTitle(R.string.support_escalation_title)
                     .setTileSummary(
-                            mSupportFeatureProvider.getOperationHours(mActivity, PHONE, null));
+                            mSupportFeatureProvider.getOperationHours(mActivity, PHONE, null,
+                                    true /* hasInternet */));
         }
         if (hasPhoneOperation) {
             builder.setText1(R.string.support_escalation_by_phone)
@@ -222,7 +223,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             operatingHours = mActivity.getString(R.string.support_escalation_24_7_summary);
         } else {
             operatingHours = mSupportFeatureProvider.getOperationHours(mActivity,
-                    PHONE, mSelectedCountry);
+                    PHONE, mSelectedCountry, false /* hasInternet */);
         }
         mSupportData.add(new OfflineEscalationData.Builder(mActivity)
                 .setCountries(mSupportFeatureProvider.getPhoneSupportCountries())
