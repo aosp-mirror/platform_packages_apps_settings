@@ -2133,6 +2133,39 @@
     <!-- Sound & display settings screen, setting option summary to enable adaptive brightness [CHAR LIMIT=100] -->
     <string name="auto_brightness_summary">Optimize brightness level for available light</string>
 
+    <!-- Night display screen, setting option name to enable night display. [CHAR LIMIT=30] -->
+    <string name="night_display_title">Night display</string>
+    <!-- Night display screen, description of night display feature. [CHAR LIMIT=NONE] -->
+    <string name="night_display_text">Night display tints your screen red at night. This makes it easier to look at your screen in dim light and may help you fall asleep more easily.</string>
+    <!-- Night display screen, setting option name to configure whether night display turn on/off automatically. [CHAR LIMIT=30] -->
+    <string name="night_display_auto_mode_title">Turn on automatically</string>
+    <!-- Night display screen, setting option value for night display to *never* turn on/off automatically. [CHAR LIMIT=30] -->
+    <string name="night_display_auto_mode_never">Never</string>
+    <!-- Night display screen, setting option value for night display to turn on/off automatically according to a user defined schedule. [CHAR LIMIT=30] -->
+    <string name="night_display_auto_mode_custom">Custom schedule</string>
+    <!-- Night display screen, setting option value for night display to turn on/off automatically at sunset/sunrise. [CHAR LIMIT=30] -->
+    <string name="night_display_auto_mode_twilight">Sunset to sunrise</string>
+    <!-- Night display screen, setting option name to configure time to automatically turn on night display. [CHAR LIMIT=30] -->
+    <string name="night_display_start_time_title">Start time</string>
+    <!-- Night display screen, setting option name to configure time to automatically turn off night display. [CHAR LIMIT=30] -->
+    <string name="night_display_end_time_title">End time</string>
+    <!-- Display settings screen, summary format of night display when off. [CHAR LIMIT=NONE] -->
+    <string name="night_display_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of night display when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
+    <string name="night_display_summary_off_auto_mode_never">Never turn on automatically</string>
+    <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
+    <string name="night_display_summary_off_auto_mode_custom">Turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of night display when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
+    <string name="night_display_summary_off_auto_mode_twilight">Turn on automatically at sunset</string>
+    <!-- Display settings screen, summary format of night display when on. [CHAR LIMIT=NONE] -->
+    <string name="night_display_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of night display when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
+    <string name="night_display_summary_on_auto_mode_never">Never turn off automatically</string>
+    <!-- Display settings screen, summary format of night display when on and will turn off automatically at a user defined time. [CHAR LIMIT=NONE] -->
+    <string name="night_display_summary_on_auto_mode_custom">Turn off automatically at <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of night display when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
+    <string name="night_display_summary_on_auto_mode_twilight">Turn off automatically at sunrise</string>
+
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Sleep</string>
     <!-- Sound & display settings screen, setting option name to change screen timeout [CHAR LIMIT=30] -->
@@ -5827,6 +5860,7 @@
     <string name="keywords_display">screen, touchscreen</string>
     <string name="keywords_display_brightness_level">dim screen, touchscreen, battery</string>
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery</string>
+    <string name="keywords_display_night_display">dim screen, night, tint</string>
     <string name="keywords_display_wallpaper">background, personalize, customize display</string>
     <string name="keywords_display_font_size">text size</string>
     <string name="keywords_display_cast_screen">project, cast</string>

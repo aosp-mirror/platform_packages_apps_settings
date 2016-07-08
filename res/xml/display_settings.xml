@@ -32,6 +32,12 @@
                 settings:keywords="@string/keywords_display_auto_brightness"
                 android:summary="@string/auto_brightness_summary" />
 
+        <com.android.settings.display.NightDisplayPreference
+                android:key="night_display"
+                android:title="@string/night_display_title"
+                android:fragment="com.android.settings.display.NightDisplaySettings"
+                settings:keywords="@string/keywords_display_night_display" />
+
         <!-- Hide night mode for now
         <ListPreference
             android:key="night_mode"
