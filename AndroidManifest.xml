@@ -2935,6 +2935,8 @@
                        android:value="com.android.settings.category.device" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.gestures.GestureSettings" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/gesture_preference_summary" />
         </activity>
 
         <activity android:name="BackupSettingsActivity"
