@@ -1911,7 +1911,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         } else if (preference == mWebViewMultiprocess) {
             writeWebViewMultiprocessOptions();
         } else if (SHORTCUT_MANAGER_RESET_KEY.equals(preference.getKey())) {
-            confirmResetShortcutManagerThrottling();
+            resetShortcutManagerThrottling();
         } else {
             return super.onPreferenceTreeClick(preference);
         }
@@ -2153,30 +2153,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 }
             };
 
-    private void confirmResetShortcutManagerThrottling() {
+    private void resetShortcutManagerThrottling() {
         final IShortcutService service = IShortcutService.Stub.asInterface(
                 ServiceManager.getService(Context.SHORTCUT_SERVICE));
-
-        DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (which == DialogInterface.BUTTON_POSITIVE) {
-                    try {
-                        service.resetThrottling();
-                    } catch (RemoteException e) {
-                    }
-                }
+        if (service != null) {
+            try {
+                service.resetThrottling();
+                Toast.makeText(getActivity(), R.string.reset_shortcut_manager_throttling_complete,
+                        Toast.LENGTH_SHORT).show();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Failed to reset rate limiting", e);
             }
-        };
-
-        new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.confirm_reset_shortcut_manager_throttling_title)
-                .setMessage(R.string.confirm_reset_shortcut_manager_throttling_message)
-                .setPositiveButton(R.string.okay, onClickListener)
-                .setNegativeButton(android.R.string.cancel, null)
-                .create()
-                .show();
-
+        }
     }
 
     private void updateOemUnlockSettingDescription() {
