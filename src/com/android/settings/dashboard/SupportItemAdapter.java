@@ -60,6 +60,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     private static final int TYPE_ESCALATION_OPTIONS_OFFLINE =
             R.layout.support_offline_escalation_options;
     private static final int TYPE_SUPPORT_TILE = R.layout.support_tile;
+    private static final int TYPE_SUPPORT_TILE_SPACER = R.layout.support_tile_spacer;
     private static final int TYPE_SIGN_IN_BUTTON = R.layout.support_sign_in_button;
 
     private final Activity mActivity;
@@ -110,6 +111,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 break;
             case TYPE_ESCALATION_OPTIONS_OFFLINE:
                 bindOfflineEscalationOptions(holder, (OfflineEscalationData) data);
+                break;
+            case TYPE_SUPPORT_TILE_SPACER:
                 break;
             default:
                 bindSupportTile(holder, data);
@@ -219,7 +222,9 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
     private void addOfflineEscalationCards() {
         final CharSequence operatingHours;
-        if (mSupportFeatureProvider.isAlwaysOperating(PHONE, mSelectedCountry)) {
+        final boolean isPhoneSupportAlwaysOperating =
+                mSupportFeatureProvider.isAlwaysOperating(PHONE, mSelectedCountry);
+        if (isPhoneSupportAlwaysOperating) {
             operatingHours = mActivity.getString(R.string.support_escalation_24_7_summary);
         } else {
             operatingHours = mSupportFeatureProvider.getOperationHours(mActivity,
@@ -231,7 +236,9 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                         mSelectedCountry, true /* isTollFree */))
                 .setTolledPhone(mSupportFeatureProvider.getSupportPhones(
                         mSelectedCountry, false /* isTollFree */))
-                .setTileTitle(R.string.support_escalation_title)
+                .setTileTitle(isPhoneSupportAlwaysOperating
+                        ? R.string.support_escalation_24_7_title
+                        : R.string.support_escalation_title)
                 .setTileSummary(operatingHours)
                 .build());
     }
@@ -246,6 +253,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     }
 
     private void addMoreHelpItems() {
+        mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE_SPACER).build());
         mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE)
                 .setIcon(R.drawable.ic_help_24dp)
                 .setTileTitle(R.string.support_help_feedback_title)
