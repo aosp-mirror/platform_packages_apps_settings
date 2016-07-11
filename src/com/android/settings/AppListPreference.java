@@ -32,6 +32,7 @@ import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -263,6 +264,24 @@ public class AppListPreference extends CustomListPreference {
         } else {
             super.onRestoreInstanceState(state);
         }
+    }
+
+    /**
+     * Sets app label as summary if there is only 1 app applicable to this preference.
+     */
+    protected void setSoleAppLabelAsSummary() {
+        final CharSequence soleLauncherLabel = getSoleAppLabel();
+        if (!TextUtils.isEmpty(soleLauncherLabel)) {
+            setSummary(soleLauncherLabel);
+        }
+    }
+
+    /**
+     * Returns app label if there is only 1 app applicable to this preference.
+     */
+    protected CharSequence getSoleAppLabel() {
+        // Intentionally left empty so subclasses can override with necessary logic.
+        return null;
     }
 
     private static class SavedState implements Parcelable {
