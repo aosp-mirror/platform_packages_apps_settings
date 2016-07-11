@@ -904,6 +904,38 @@
     <string name="brightness_summary" msgid="838917350127550703">"調校螢幕亮度"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"自動調校亮度"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"按環境光線優化亮度"</string>
+    <!-- no translation found for night_display_title (539072363027122793) -->
+    <skip />
+    <!-- no translation found for night_display_text (6855572001545316082) -->
+    <skip />
+    <!-- no translation found for night_display_auto_mode_title (8046314360381608455) -->
+    <skip />
+    <!-- no translation found for night_display_auto_mode_never (6723636142053240947) -->
+    <skip />
+    <!-- no translation found for night_display_auto_mode_custom (6012300346981608242) -->
+    <skip />
+    <!-- no translation found for night_display_auto_mode_twilight (2123345097508167094) -->
+    <skip />
+    <!-- no translation found for night_display_start_time_title (8918016772613689584) -->
+    <skip />
+    <!-- no translation found for night_display_end_time_title (8286061578083519350) -->
+    <skip />
+    <!-- no translation found for night_display_summary_off (1792750041697946539) -->
+    <skip />
+    <!-- no translation found for night_display_summary_off_auto_mode_never (8865054549719499274) -->
+    <skip />
+    <!-- no translation found for night_display_summary_off_auto_mode_custom (4962295097132112885) -->
+    <skip />
+    <!-- no translation found for night_display_summary_off_auto_mode_twilight (5520577516590422267) -->
+    <skip />
+    <!-- no translation found for night_display_summary_on (1355713529996456744) -->
+    <skip />
+    <!-- no translation found for night_display_summary_on_auto_mode_never (44005841579902825) -->
+    <skip />
+    <!-- no translation found for night_display_summary_on_auto_mode_custom (4350556852471560173) -->
+    <skip />
+    <!-- no translation found for night_display_summary_on_auto_mode_twilight (6122152828111119250) -->
+    <skip />
     <string name="screen_timeout" msgid="4351334843529712571">"休眠"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"螢幕關閉時"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
@@ -2481,6 +2513,8 @@
     <string name="keywords_display" msgid="8910345814565493016">"螢幕, 觸控螢幕"</string>
     <string name="keywords_display_brightness_level" msgid="3891383826236015854">"螢幕變暗, 觸控螢幕, 電池"</string>
     <string name="keywords_display_auto_brightness" msgid="3325150824507953765">"螢幕變暗, 觸控螢幕, 電池"</string>
+    <!-- no translation found for keywords_display_night_display (7630169927425425754) -->
+    <skip />
     <string name="keywords_display_wallpaper" msgid="7362076351860131776">"背景, 個人化, 自訂顯示"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"文字大小"</string>
     <string name="keywords_display_cast_screen" msgid="7684618996741933067">"投影, 投放"</string>
@@ -3112,12 +3146,13 @@
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我們隨時為您提供協助"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"我們的支援團隊會協助您解決任何問題"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"我們的支援團隊全天候為您提供服務"</string>
-    <string name="support_escalation_closed_summary" msgid="8650309845497471757">"手機支援時間 (當地時間)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
+    <string name="support_escalation_closed_summary" msgid="2240967274380168303">"搜尋說明，或於支援服務時間 (當地時間) 聯絡我們：&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
+    <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"手機支援時間 (當地時間)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"搜尋說明，或探索提示和技巧"</string>
     <string name="support_country_list_title" msgid="823853371280534111">"支援的國家/地區："</string>
     <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%s</xliff:g> - <xliff:g id="LANGUAGE">%s</xliff:g>"</string>
     <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%s</xliff:g> (<xliff:g id="PHONE">%s</xliff:g>)"</string>
-    <string name="support_international_phone_title" msgid="1470189566704940306">"正在外遊嗎？"</string>
+    <string name="support_international_phone_title" msgid="1308334014138718455">"正在外遊嗎？"</string>
     <string name="support_international_phone_summary" msgid="208231793637026927">"可能需要支付國際通話費用"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"電話"</string>
     <string name="support_escalation_by_chat" msgid="977019859110763749">"即時通訊"</string>
@@ -3152,29 +3187,32 @@
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"耳機"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"輸入周邊設備"</string>
     <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"藍牙"</string>
-    <!-- no translation found for automatic_storage_manager_settings (7819434542155181607) -->
-    <skip />
+    <string name="automatic_storage_manager_settings" msgid="7819434542155181607">"管理儲存空間"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"儲存空間管理員會從您的裝置移除備份相片和影片，以釋放儲存空間。"</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"移除相片和影片"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"存儲空間管理員"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"自動"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手動"</string>
-    <!-- no translation found for deletion_helper_preference_title (5271510052022285884) -->
-    <skip />
+    <string name="deletion_helper_preference_title" msgid="5271510052022285884">"立即釋放空間"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"手勢"</string>
+    <!-- no translation found for gesture_preference_summary (8627850388011956901) -->
+    <skip />
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"啟動相機"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="5917828814732238340">"如要快速啟動相機，只需輕按兩下開關按鈕 (適用於任何畫面)。"</string>
+    <!-- no translation found for double_tap_power_for_camera_summary (6988157149749655988) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"切換相機"</string>
-    <string name="double_twist_for_camera_mode_summary" msgid="8415909197795361084">"如要切換至前置或後置鏡頭，請轉動兩下。"</string>
+    <!-- no translation found for double_twist_for_camera_mode_summary (6650416925533241708) -->
+    <skip />
     <string name="ambient_display_title" msgid="7369291941168001738">"快速查看螢幕"</string>
-    <string name="ambient_display_summary" msgid="810244127489185677">"如要查看手機，但不完全喚醒手機，可輕輕移動或拿起手機。"</string>
+    <!-- no translation found for ambient_display_summary (6951996186492905459) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"快速滑動即可查看通知"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="949163829681063130">"如要在任何畫面上查看通知，請向下快速滑動指紋感應器。"</string>
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (3852781898776332580) -->
+    <skip />
     <string name="gesture_setting_on" msgid="3455094265233870280">"開啟"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"關閉"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"載入器已解鎖"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"請先連線至互聯網"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"無法在已遭流動網絡供應商鎖定的裝置上啟用"</string>
-    <!-- no translation found for automatic_storage_manager_freed_bytes (7517560170441007788) -->
-    <skip />
+    <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"已釋放共 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次執行時間：<xliff:g id="DATE">%2$s</xliff:g>"</string>
 </resources>
