@@ -52,6 +52,11 @@ public interface SupportFeatureProvider {
     boolean isSupportTypeEnabled(Context context, @SupportType int type);
 
     /**
+     * Refreshes all operation rules.
+     */
+    void refreshOperationRules();
+
+    /**
      * Whether or not a support type is in operation 24/7. If country is null, use
      * current country.
      */
