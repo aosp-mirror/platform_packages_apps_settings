@@ -19,15 +19,13 @@ package com.android.settings.fingerprint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.UserHandle;
+import android.widget.Button;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupChooseLockGeneric;
 import com.android.settings.SetupWizardUtils;
-import com.android.setupwizardlib.GlifRecyclerLayout;
-import com.android.setupwizardlib.items.Item;
-import com.android.setupwizardlib.items.RecyclerItemAdapter;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction {
 
@@ -53,15 +51,14 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
 
     @Override
     protected void initViews() {
-        GlifRecyclerLayout layout = (GlifRecyclerLayout) getLayout();
-        final RecyclerItemAdapter adapter = (RecyclerItemAdapter) layout.getAdapter();
-        final Item nextItem = (Item) adapter.findItemById(R.id.next_button);
-        nextItem.setTitle(
-                getText(R.string.security_settings_fingerprint_enroll_introduction_continue_setup));
+        super.initViews();
+        Button nextButton = getNextButton();
+        nextButton.setText(
+                R.string.security_settings_fingerprint_enroll_introduction_continue_setup);
 
-        final Item cancelItem = (Item) adapter.findItemById(R.id.cancel_button);
-        cancelItem.setTitle(
-                getText(R.string.security_settings_fingerprint_enroll_introduction_cancel_setup));
+        final Button cancelButton = (Button) findViewById(R.id.fingerprint_cancel_button);
+        cancelButton.setText(
+                R.string.security_settings_fingerprint_enroll_introduction_cancel_setup);
     }
 
     @Override
