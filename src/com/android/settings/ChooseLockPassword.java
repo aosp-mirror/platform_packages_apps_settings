@@ -290,10 +290,7 @@ public class ChooseLockPassword extends SettingsActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            GlifLayout layout = (GlifLayout) inflater.inflate(
-                    R.layout.choose_lock_password, container, false);
-            layout.setHeaderText(getActivity().getTitle());
-            return layout;
+            return inflater.inflate(R.layout.choose_lock_password, container, false);
         }
 
         @Override
@@ -365,6 +362,7 @@ public class ChooseLockPassword extends SettingsActivity {
                         : R.string.lockpassword_choose_your_pin_header;
                 CharSequence title = getText(id);
                 sa.setTitle(title);
+                ((GlifLayout) view).setHeaderText(title);
             }
         }
 
