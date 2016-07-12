@@ -21,6 +21,7 @@ import android.app.IWallpaperManagerCallback;
 import android.app.KeyguardManager;
 import android.app.NotificationManager;
 import android.app.WallpaperManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
@@ -59,10 +60,11 @@ public class SuggestionsChecks {
         } else if (className.equals(WifiCallingSuggestionActivity.class.getName())) {
             return isWifiCallingUnavailableOrEnabled();
         } else if (className.equals(FingerprintSuggestionActivity.class.getName())) {
-            return isNotSingleFingerprintEnrolled();
-        } else if (className.equals(ScreenLockSuggestionActivity.class.getName())
-                || className.equals(FingerprintEnrollSuggestionActivity.class.getName())) {
+            return isNotSingleFingerprintEnrolled() || !isFingerprintEnabled();
+        } else if (className.equals(ScreenLockSuggestionActivity.class.getName())) {
             return isDeviceSecured();
+        } else if (className.equals(FingerprintEnrollSuggestionActivity.class.getName())) {
+            return isDeviceSecured() || !isFingerprintEnabled();
         }
         return false;
     }
@@ -106,6 +108,14 @@ public class SuggestionsChecks {
         } catch (RemoteException e) {
         }
         return false;
+    }
+
+    private boolean isFingerprintEnabled() {
+        DevicePolicyManager dpManager =
+                (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        final int dpmFlags = dpManager.getKeyguardDisabledFeatures(null, /* admin */
+                mContext.getUserId());
+        return (dpmFlags & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) == 0;
     }
 
     private final IWallpaperManagerCallback mCallback = new IWallpaperManagerCallback.Stub() {
