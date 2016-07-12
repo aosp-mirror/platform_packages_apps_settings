@@ -26,6 +26,7 @@ import android.content.pm.UserInfo;
 import android.os.Build;
 import android.os.UserManager;
 import android.util.AttributeSet;
+
 import com.android.settings.AppListPreference;
 import com.android.settings.R;
 
@@ -36,9 +37,11 @@ public class DefaultHomePreference extends AppListPreference {
 
     private final ArrayList<ComponentName> mAllHomeComponents = new ArrayList<>();
     private final IntentFilter mHomeFilter;
+    private final String mPackageName;
 
     public DefaultHomePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mPackageName = getContext().getPackageName();
         mHomeFilter = new IntentFilter(Intent.ACTION_MAIN);
         mHomeFilter.addCategory(Intent.CATEGORY_HOME);
         mHomeFilter.addCategory(Intent.CATEGORY_DEFAULT);
@@ -59,26 +62,44 @@ public class DefaultHomePreference extends AppListPreference {
                     IntentFilter.MATCH_CATEGORY_EMPTY,
                     mAllHomeComponents.toArray(new ComponentName[0]), component);
             setSummary(getEntry());
+        } else {
+            // If there is only 1 launcher, use its label as summary text.
+            setSoleAppLabelAsSummary();
         }
         return super.persistString(value);
     }
 
+    @Override
+    protected CharSequence getSoleAppLabel() {
+        final PackageManager pm = getContext().getPackageManager();
+        final List<ResolveInfo> homeActivities = new ArrayList<>();
+        final List<CharSequence> appLabels = new ArrayList<>();
+
+        pm.getHomeActivities(homeActivities);
+        for (ResolveInfo candidate : homeActivities) {
+            final ActivityInfo info = candidate.activityInfo;
+            if (info.packageName.equals(mPackageName)) {
+                continue;
+            }
+            appLabels.add(info.loadLabel(pm));
+        }
+        return appLabels.size() == 1 ? appLabels.get(0) : null;
+    }
+
     public void refreshHomeOptions() {
-        final String myPkg = getContext().getPackageName();
-        ArrayList<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
+        ArrayList<ResolveInfo> homeActivities = new ArrayList<>();
         PackageManager pm = getContext().getPackageManager();
-        ComponentName currentDefaultHome  = pm.getHomeActivities(homeActivities);
+        ComponentName currentDefaultHome = pm.getHomeActivities(homeActivities);
         ArrayList<ComponentName> components = new ArrayList<>();
         mAllHomeComponents.clear();
         List<CharSequence> summaries = new ArrayList<>();
 
         boolean mustSupportManagedProfile = hasManagedProfile();
-        for (int i = 0; i < homeActivities.size(); i++) {
-            final ResolveInfo candidate = homeActivities.get(i);
+        for (ResolveInfo candidate : homeActivities) {
             final ActivityInfo info = candidate.activityInfo;
             ComponentName activityName = new ComponentName(info.packageName, info.name);
             mAllHomeComponents.add(activityName);
-            if (info.packageName.equals(myPkg)) {
+            if (info.packageName.equals(mPackageName)) {
                 continue;
             }
             components.add(activityName);
