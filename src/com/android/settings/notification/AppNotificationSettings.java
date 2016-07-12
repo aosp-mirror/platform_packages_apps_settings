@@ -33,10 +33,8 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.RestrictedPreference;
 
 
 import java.util.List;
@@ -113,7 +111,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             mSilent.setChecked(importance == Ranking.IMPORTANCE_LOW);
         }
         setVisible(mPriority, checkCanBeVisible(Ranking.IMPORTANCE_DEFAULT, importance)
-                && !mDndVisualEffectsSuppressed);
+                || (checkCanBeVisible(Ranking.IMPORTANCE_LOW, importance)
+                        && mDndVisualEffectsSuppressed));
         setVisible(mVisibilityOverride,
                 checkCanBeVisible(Ranking.IMPORTANCE_MIN, importance) && lockscreenSecure);
     }
