@@ -32,15 +32,15 @@
         settings:animation="@raw/gesture_twist"/>
 
     <com.android.settings.gestures.GesturePreference
-        android:key="gesture_swipe_down_fingerprint"
-        android:title="@string/fingerprint_swipe_for_notifications_title"
-        android:summary="@string/fingerprint_swipe_for_notifications_summary"
-        settings:animation="@raw/gesture_fingerprint_swipe"/>
-
-    <com.android.settings.gestures.GesturePreference
         android:key="gesture_pick_up_and_nudge"
         android:title="@string/ambient_display_title"
         android:summary="@string/ambient_display_summary"
         settings:animation="@raw/gesture_ambient_tap"/>
+
+    <com.android.settings.gestures.GesturePreference
+        android:key="gesture_swipe_down_fingerprint"
+        android:title="@string/fingerprint_swipe_for_notifications_title"
+        android:summary="@string/fingerprint_swipe_for_notifications_summary"
+        settings:animation="@raw/gesture_fingerprint_swipe"/>
 
 </PreferenceScreen>
