@@ -26,6 +26,7 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.AppListPreference;
 import com.android.settings.R;
@@ -36,12 +37,16 @@ import java.util.List;
 public class DefaultBrowserPreference extends AppListPreference {
 
     private static final String TAG = "DefaultBrowserPref";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final long DELAY_UPDATE_BROWSER_MILLIS = 500;
+    private static final Intent BROWSE_PROBE = new Intent()
+            .setAction(Intent.ACTION_VIEW)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+            .setData(Uri.parse("http:"));
 
     private final Handler mHandler = new Handler();
-
-    final private PackageManager mPm;
+    private final PackageManager mPm;
 
     public DefaultBrowserPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -65,11 +70,7 @@ public class DefaultBrowserPreference extends AppListPreference {
 
     @Override
     protected boolean persistString(String newValue) {
-
-        if (newValue == null) {
-            return false;
-        }
-        final CharSequence packageName = (CharSequence) newValue;
+        final CharSequence packageName = newValue;
         if (TextUtils.isEmpty(packageName)) {
             return false;
         }
@@ -95,13 +96,10 @@ public class DefaultBrowserPreference extends AppListPreference {
         String packageName = pm.getDefaultBrowserPackageNameAsUser(mUserId);
         if (!TextUtils.isEmpty(packageName)) {
             // Check if the default Browser package is still there
-            Intent intent = new Intent();
-            intent.setPackage(packageName);
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.addCategory(Intent.CATEGORY_BROWSABLE);
-            intent.setData(Uri.parse("http:"));
+            final Intent intent = new Intent(BROWSE_PROBE)
+                    .setPackage(packageName);
 
-            ResolveInfo info = mPm.resolveActivityAsUser(intent, 0, mUserId);
+            final ResolveInfo info = mPm.resolveActivityAsUser(intent, 0, mUserId);
             if (info != null) {
                 setValue(packageName);
                 setSummary("%s");
@@ -109,26 +107,20 @@ public class DefaultBrowserPreference extends AppListPreference {
                 setSummary(R.string.default_browser_title_none);
             }
         } else {
-            setSummary(R.string.default_browser_title_none);
-            Log.d(TAG, "Cannot set empty default Browser value!");
+            if (DEBUG) Log.d(TAG, "No default browser app.");
+            setSoleAppLabelAsSummary();
         }
     }
 
     private List<String> resolveBrowserApps() {
         List<String> result = new ArrayList<>();
 
-        // Create an Intent that will match ALL Browser Apps
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-        intent.setData(Uri.parse("http:"));
-
         // Resolve that intent and check that the handleAllWebDataURI boolean is set
-        List<ResolveInfo> list = mPm.queryIntentActivitiesAsUser(intent, PackageManager.MATCH_ALL,
-                mUserId);
+        List<ResolveInfo> list = mPm.queryIntentActivitiesAsUser(BROWSE_PROBE,
+                PackageManager.MATCH_ALL, mUserId);
 
         final int count = list.size();
-        for (int i=0; i<count; i++) {
+        for (int i = 0; i < count; i++) {
             ResolveInfo info = list.get(i);
             if (info.activityInfo == null || result.contains(info.activityInfo.packageName)
                     || !info.handleAllWebDataURI) {
@@ -139,6 +131,17 @@ public class DefaultBrowserPreference extends AppListPreference {
         }
 
         return result;
+    }
+
+    @Override
+    protected CharSequence getSoleAppLabel() {
+        // Resolve that intent and check that the handleAllWebDataURI boolean is set
+        List<ResolveInfo> list = mPm.queryIntentActivitiesAsUser(BROWSE_PROBE,
+                PackageManager.MATCH_ALL, mUserId);
+        if (list.size() == 1) {
+            return list.get(0).loadLabel(mPm);
+        }
+        return null;
     }
 
     private final Runnable mUpdateRunnable = new Runnable() {
