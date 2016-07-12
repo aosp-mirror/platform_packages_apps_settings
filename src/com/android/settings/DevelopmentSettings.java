@@ -1446,7 +1446,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         int index = 0;
         if (currentValue.equals(SELECT_LOGPERSIST_PROPERTY_SERVICE)) {
             index = 1;
-            if (!currentBuffers.equals("all") &&
+            if (currentBuffers.equals("kernel")) {
+                index = 3;
+            } else if (!currentBuffers.equals("all") &&
                     !currentBuffers.contains("radio") &&
                     currentBuffers.contains("security") &&
                     currentBuffers.contains("kernel")) {
