@@ -24,24 +24,21 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.internal.util.CharSequences;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settingslib.HelpUtils;
-import com.android.setupwizardlib.GlifRecyclerLayout;
-import com.android.setupwizardlib.items.IItem;
-import com.android.setupwizardlib.items.Item;
-import com.android.setupwizardlib.items.RecyclerItemAdapter;
 import com.android.setupwizardlib.span.LinkSpan;
 
 /**
  * Onboarding activity for fingerprint enrollment.
  */
 public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
-        implements RecyclerItemAdapter.OnItemSelectedListener, LinkSpan.OnClickListener {
+        implements View.OnClickListener, LinkSpan.OnClickListener {
 
     private static final String TAG = "FingerprintIntro";
 
@@ -57,12 +54,11 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_introduction);
         setHeaderText(R.string.security_settings_fingerprint_enroll_introduction_title);
-        final GlifRecyclerLayout layout = (GlifRecyclerLayout) getLayout();
+
+        final Button cancelButton = (Button) findViewById(R.id.fingerprint_cancel_button);
+        cancelButton.setOnClickListener(this);
+
         mUserManager = UserManager.get(this);
-        final RecyclerItemAdapter adapter = (RecyclerItemAdapter) layout.getAdapter();
-        adapter.setOnItemSelectedListener(this);
-        Item item = (Item) adapter.findItemById(R.id.fingerprint_introduction_message);
-        item.setTitle(getText(R.string.security_settings_fingerprint_enroll_introduction_message));
         updatePasswordQuality();
     }
 
@@ -70,6 +66,11 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
         final int passwordQuality = new ChooseLockSettingsHelper(this).utils()
                 .getActivePasswordQuality(mUserManager.getCredentialOwnerProfile(mUserId));
         mHasPassword = passwordQuality != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+    }
+
+    @Override
+    protected Button getNextButton() {
+        return (Button) findViewById(R.id.fingerprint_next_button);
     }
 
     @Override
@@ -142,14 +143,11 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
     }
 
     @Override
-    public void onItemSelected(IItem item) {
-        switch (((Item) item).getId()) {
-            case R.id.next_button:
-                onNextButtonClick();
-                break;
-            case R.id.cancel_button:
-                onCancelButtonClick();
-                break;
+    public void onClick(View v) {
+        if (v.getId() == R.id.fingerprint_cancel_button) {
+            onCancelButtonClick();
+        } else {
+            super.onClick(v);
         }
     }
 
