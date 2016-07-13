@@ -103,8 +103,9 @@ public class SuggestionsChecks {
         IBinder b = ServiceManager.getService(Context.WALLPAPER_SERVICE);
         IWallpaperManager service = Stub.asInterface(b);
         try {
-            return service.getWallpaper(mCallback, WallpaperManager.FLAG_SYSTEM,
-                    new Bundle(), mContext.getUserId()) != null;
+            return !service.isSetWallpaperAllowed(mContext.getOpPackageName()) ||
+                    service.getWallpaper(mCallback, WallpaperManager.FLAG_SYSTEM,
+                            new Bundle(), mContext.getUserId()) != null;
         } catch (RemoteException e) {
         }
         return false;
