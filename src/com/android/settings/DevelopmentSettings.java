@@ -173,10 +173,13 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String SELECT_LOGD_OFF_SIZE_MARKER_VALUE = "32768";
     private static final String SELECT_LOGPERSIST_KEY = "select_logpersist";
     private static final String SELECT_LOGPERSIST_PROPERTY = "persist.logd.logpersistd";
+    private static final String ACTUAL_LOGPERSIST_PROPERTY = "logd.logpersistd";
     private static final String SELECT_LOGPERSIST_PROPERTY_SERVICE = "logcatd";
     private static final String SELECT_LOGPERSIST_PROPERTY_CLEAR = "clear";
     private static final String SELECT_LOGPERSIST_PROPERTY_STOP = "stop";
     private static final String SELECT_LOGPERSIST_PROPERTY_BUFFER = "persist.logd.logpersistd.buffer";
+    private static final String ACTUAL_LOGPERSIST_PROPERTY_BUFFER = "logd.logpersistd.buffer";
+    private static final String ACTUAL_LOGPERSIST_PROPERTY_ENABLE = "logd.logpersistd.enable";
 
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
     private static final String WIFI_VERBOSE_LOGGING_KEY = "wifi_verbose_logging";
@@ -1474,13 +1477,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             String currentValue = SystemProperties.get(SELECT_LOGD_SIZE_PROPERTY);
             if ((currentTag != null) && currentTag.startsWith(SELECT_LOGD_TAG_SILENCE)) {
                 currentValue = SELECT_LOGD_OFF_SIZE_MARKER_VALUE;
-                if (mLogpersist != null) {
-                   writeLogpersistOption(null, true);
-                   mLogpersist.setEnabled(false);
-                }
-            } else {
-                if ((mLogpersist != null) && mLastEnabledState) {
-                   mLogpersist.setEnabled(true);
+            }
+            if (mLogpersist != null) {
+                String currentLogpersistEnable
+                    = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY_ENABLE);
+                if ((currentLogpersistEnable == null)
+                        || !currentLogpersistEnable.equals("true")
+                        || currentValue.equals(SELECT_LOGD_OFF_SIZE_MARKER_VALUE)) {
+                    writeLogpersistOption(null, true);
+                    mLogpersist.setEnabled(false);
+                } else if (mLastEnabledState) {
+                    mLogpersist.setEnabled(true);
                 }
             }
             if ((currentValue == null) || (currentValue.length() == 0)) {
@@ -1554,11 +1561,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (mLogpersist == null) {
             return;
         }
-        String currentValue = SystemProperties.get(SELECT_LOGPERSIST_PROPERTY);
+        String currentValue = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY);
         if (currentValue == null) {
             currentValue = "";
         }
-        String currentBuffers = SystemProperties.get(SELECT_LOGPERSIST_PROPERTY_BUFFER);
+        String currentBuffers = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY_BUFFER);
         if ((currentBuffers == null) || (currentBuffers.length() == 0)) {
             currentBuffers = "all";
         }
@@ -1590,7 +1597,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mLogpersistCleared = false;
         } else if (!mLogpersistCleared) {
             // would File.delete() directly but need to switch uid/gid to access
-            SystemProperties.set(SELECT_LOGPERSIST_PROPERTY, SELECT_LOGPERSIST_PROPERTY_CLEAR);
+            SystemProperties.set(ACTUAL_LOGPERSIST_PROPERTY, SELECT_LOGPERSIST_PROPERTY_CLEAR);
             pokeSystemProperties();
             mLogpersistCleared = true;
         }
@@ -1598,11 +1605,25 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void setLogpersistOff(boolean update) {
         SystemProperties.set(SELECT_LOGPERSIST_PROPERTY_BUFFER, "");
-        SystemProperties.set(SELECT_LOGPERSIST_PROPERTY,
+        // deal with trampoline of empty properties
+        SystemProperties.set(ACTUAL_LOGPERSIST_PROPERTY_BUFFER, "");
+        SystemProperties.set(SELECT_LOGPERSIST_PROPERTY, "");
+        SystemProperties.set(ACTUAL_LOGPERSIST_PROPERTY,
             update ? "" : SELECT_LOGPERSIST_PROPERTY_STOP);
         pokeSystemProperties();
         if (update) {
             updateLogpersistValues();
+        } else {
+            for (int i = 0; i < 3; i++) {
+                String currentValue = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY);
+                if ((currentValue == null) || currentValue.equals("")) {
+                    break;
+                }
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                }
+            }
         }
     }
 
@@ -1621,8 +1642,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mLogpersistCleared = false;
             } else if (!mLogpersistCleared) {
                 // if transitioning from on to off, pop up an are you sure?
-                String currentValue = SystemProperties.get(SELECT_LOGPERSIST_PROPERTY);
-                if ((currentValue != null) && (currentValue.length() != 0)) {
+                String currentValue = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY);
+                if ((currentValue != null) &&
+                        currentValue.equals(SELECT_LOGPERSIST_PROPERTY_SERVICE)) {
                     if (mLogpersistClearDialog != null) dismissDialogs();
                     mLogpersistClearDialog = new AlertDialog.Builder(getActivity()).setMessage(
                             getActivity().getResources().getString(
@@ -1639,13 +1661,24 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return;
         }
 
-        String currentBuffer = SystemProperties.get(SELECT_LOGPERSIST_PROPERTY_BUFFER);
+        String currentBuffer = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY_BUFFER);
         if ((currentBuffer != null) && !currentBuffer.equals(newValue.toString())) {
             setLogpersistOff(false);
         }
         SystemProperties.set(SELECT_LOGPERSIST_PROPERTY_BUFFER, newValue.toString());
         SystemProperties.set(SELECT_LOGPERSIST_PROPERTY, SELECT_LOGPERSIST_PROPERTY_SERVICE);
         pokeSystemProperties();
+        for (int i = 0; i < 3; i++) {
+            String currentValue = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY);
+            if ((currentValue != null)
+                    && currentValue.equals(SELECT_LOGPERSIST_PROPERTY_SERVICE)) {
+                break;
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+            }
+        }
         updateLogpersistValues();
     }
 
