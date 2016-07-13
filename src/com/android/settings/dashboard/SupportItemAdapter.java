@@ -290,11 +290,13 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         }
         if (holder.summary1View != null) {
             holder.summary1View.setText(data.summary1);
-            holder.summary1View.setVisibility(mHasInternet ? View.VISIBLE : View.GONE);
+            holder.summary1View.setVisibility(mHasInternet && !TextUtils.isEmpty(data.summary1)
+                    ? View.VISIBLE : View.GONE);
         }
         if (holder.summary2View != null) {
             holder.summary2View.setText(data.summary2);
-            holder.summary2View.setVisibility(mHasInternet ? View.VISIBLE : View.GONE);
+            holder.summary2View.setVisibility(mHasInternet && !TextUtils.isEmpty(data.summary2)
+                    ? View.VISIBLE : View.GONE);
         }
     }
 
