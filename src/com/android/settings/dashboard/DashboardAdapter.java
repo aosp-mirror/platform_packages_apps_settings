@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
+import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -45,10 +46,13 @@ import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
         implements View.OnClickListener {
     public static final String TAG = "DashboardAdapter";
+    private static final String STATE_SUGGESTION_LIST = "suggestion_list";
+    private static final String STATE_CATEGORY_LIST = "category_list";
     private static final int NS_SPACER = 0;
     private static final int NS_SUGGESTION = 1000;
     private static final int NS_ITEMS = 2000;
@@ -80,13 +84,20 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private Condition mExpandedCondition = null;
     private SuggestionParser mSuggestionParser;
 
-    public DashboardAdapter(Context context, SuggestionParser parser) {
+    public DashboardAdapter(Context context, SuggestionParser parser, Bundle savedInstanceState,
+                List<Condition> conditions) {
         mContext = context;
         mCache = new IconCache(context);
         mSuggestionParser = parser;
+        mConditions = conditions;
 
         setHasStableIds(true);
         setShowingAll(true);
+
+        if (savedInstanceState != null) {
+            mSuggestions = savedInstanceState.getParcelableArrayList(STATE_SUGGESTION_LIST);
+            mCategories = savedInstanceState.getParcelableArrayList(STATE_CATEGORY_LIST);
+        }
     }
 
     public List<Tile> getSuggestions() {
@@ -94,8 +105,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     public void setSuggestions(List<Tile> suggestions) {
-        mSuggestions = suggestions;
-        recountItems();
+        if (!Objects.equals(mSuggestions, suggestions)) {
+            mSuggestions = suggestions;
+            recountItems();
+        }
     }
 
     public Tile getTile(ComponentName component) {
@@ -111,6 +124,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     public void setCategories(List<DashboardCategory> categories) {
+        if (Objects.equals(mCategories, categories)) {
+            return;
+        }
         mCategories = categories;
 
         // TODO: Better place for tinting?
@@ -133,8 +149,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     public void setConditions(List<Condition> conditions) {
-        mConditions = conditions;
-        recountItems();
+        if (!Objects.equals(mConditions, conditions)) {
+            mConditions = conditions;
+            recountItems();
+        }
     }
 
     public boolean isShowingAll() {
@@ -420,6 +438,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             packageName = suggestion.intent.getComponent().getClassName();
         }
         return packageName;
+    }
+
+    void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(STATE_SUGGESTION_LIST, new ArrayList<Tile>(mSuggestions));
+        outState.putParcelableArrayList(STATE_CATEGORY_LIST,
+                new ArrayList<DashboardCategory>(mCategories));
     }
 
     private static class IconCache {
