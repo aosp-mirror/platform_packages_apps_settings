@@ -1040,16 +1040,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mEnableOemUnlock.setDisabledByAdmin(null);
             mEnableOemUnlock.setEnabled(enableOemUnlockPreference());
             if (mEnableOemUnlock.isEnabled()) {
-                // mEnableOemUnlock is enabled as device's flash lock is unlocked.
-                if (RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
-                        UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId())) {
-                    // Set mEnableOemUnlock to disabled as restriction is set, but not by admin.
-                    mEnableOemUnlock.setEnabled(false);
-                } else {
-                    // Check restriction, disable mEnableOemUnlock and apply policy transparency.
-                    mEnableOemUnlock
-                            .checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
-                }
+                // Check restriction, disable mEnableOemUnlock and apply policy transparency.
+                mEnableOemUnlock.checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
+            }
+            if (mEnableOemUnlock.isEnabled()) {
+                // Check restriction, disable mEnableOemUnlock and apply policy transparency.
+                mEnableOemUnlock.checkRestrictionAndSetDisabled(UserManager.DISALLOW_OEM_UNLOCK);
             }
         }
     }
@@ -2321,8 +2317,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             } else if (isSimLockedDevice()) {
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_sim_locked_device;
             } else if (!isOemUnlockAllowed()) {
-                // If the device isn't SIM-locked but OEM unlock is disabled by Global setting, this
-                // means the device hasn't been able to confirm whether SIM-lock or any other
+                // If the device isn't SIM-locked but OEM unlock is disabled by user restriction,
+                // this means the device hasn't been able to confirm whether SIM-lock or any other
                 // restrictions apply (or hasn't been able to apply such restrictions yet). Ask the
                 // user to connect to the internet in order to retrieve all restrictions.
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_connectivity;
@@ -2355,11 +2351,13 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     /**
-     * Returns {@code true} if OEM unlock is not disabled by Global policy. Otherwise, returns
-     * {@code false}.
+     * Returns {@code true} if OEM unlock is disallowed by user restriction
+     * {@link UserManager#DISALLOW_FACTORY_RESET} or {@link UserManager#DISALLOW_OEM_UNLOCK}.
+     * Otherwise, returns {@code false}.
      */
     private boolean isOemUnlockAllowed() {
-        return Settings.Global.getInt(getActivity().getContentResolver(),
-                Settings.Global.OEM_UNLOCK_DISALLOWED, 0) == 0;
+        UserHandle userHandle = UserHandle.of(UserHandle.myUserId());
+        return !(mUm.hasBaseUserRestriction(UserManager.DISALLOW_OEM_UNLOCK, userHandle)
+                || mUm.hasBaseUserRestriction(UserManager.DISALLOW_FACTORY_RESET, userHandle));
     }
 }
