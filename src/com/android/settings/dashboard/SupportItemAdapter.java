@@ -148,7 +148,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     public void setHasInternet(boolean hasInternet) {
         if (mHasInternet != hasInternet) {
             mHasInternet = hasInternet;
-            refreshData();
+            refreshEscalationCards();
         }
     }
 
@@ -156,7 +156,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         if (!Objects.equals(mAccount, account)) {
             mAccount = account;
             mSupportFeatureProvider.refreshOperationRules();
-            refreshData();
+            refreshEscalationCards();
         }
     }
 
@@ -170,18 +170,42 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
      */
     private void refreshData() {
         mSupportData.clear();
-        if (mAccount == null) {
-            addSignInPromo();
-        } else if (mHasInternet) {
-            addEscalationCards();
-        } else {
-            addOfflineEscalationCards();
-        }
+        addEscalationCards();
         addMoreHelpItems();
         notifyDataSetChanged();
     }
 
+    /**
+     * Adds 1 escalation card. Based on current phone state, the escalation card can display
+     * different content.
+     */
     private void addEscalationCards() {
+        if (mAccount == null) {
+            addSignInPromo();
+        } else if (mHasInternet) {
+            addOnlineEscalationCards();
+        } else {
+            addOfflineEscalationCards();
+        }
+    }
+
+    /**
+     * Finds and refreshes escalation card data.
+     */
+    private void refreshEscalationCards() {
+        if (getItemCount() > 0) {
+            final int itemType = getItemViewType(0 /* position */);
+            if (itemType == TYPE_SIGN_IN_BUTTON
+                    || itemType == TYPE_ESCALATION_OPTIONS
+                    || itemType == TYPE_ESCALATION_OPTIONS_OFFLINE) {
+                mSupportData.remove(0 /* position */);
+                addEscalationCards();
+                notifyItemChanged(0 /* position */);
+            }
+        }
+    }
+
+    private void addOnlineEscalationCards() {
         final boolean hasPhoneOperation =
                 mSupportFeatureProvider.isSupportTypeEnabled(mActivity, PHONE);
         final boolean hasChatOperation =
@@ -218,7 +242,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                     .setSummary2(mSupportFeatureProvider.getEstimatedWaitTime(mActivity, CHAT))
                     .setEnabled2(mSupportFeatureProvider.isOperatingNow(CHAT));
         }
-        mSupportData.add(builder.build());
+        mSupportData.add(0 /* index */, builder.build());
     }
 
     private void addOfflineEscalationCards() {
@@ -231,7 +255,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             operatingHours = mSupportFeatureProvider.getOperationHours(mActivity,
                     PHONE, mSelectedCountry, false /* hasInternet */);
         }
-        mSupportData.add(new OfflineEscalationData.Builder(mActivity)
+        mSupportData.add(0 /* index */, new OfflineEscalationData.Builder(mActivity)
                 .setCountries(mSupportFeatureProvider.getPhoneSupportCountries())
                 .setTollFreePhone(mSupportFeatureProvider.getSupportPhones(
                         mSelectedCountry, true /* isTollFree */))
@@ -245,7 +269,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     }
 
     private void addSignInPromo() {
-        mSupportData.add(new EscalationData.Builder(mActivity, TYPE_SIGN_IN_BUTTON)
+        mSupportData.add(0 /* index */, new EscalationData.Builder(mActivity, TYPE_SIGN_IN_BUTTON)
                 .setText1(R.string.support_sign_in_button_text)
                 .setText2(R.string.support_sign_in_required_help)
                 .setTileTitle(R.string.support_sign_in_required_title)
@@ -439,7 +463,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             final String selectedCountry = countryCodes.get(position);
             if (!TextUtils.equals(selectedCountry, mSelectedCountry)) {
                 mSelectedCountry = selectedCountry;
-                refreshData();
+                refreshEscalationCards();
             }
         }
 
