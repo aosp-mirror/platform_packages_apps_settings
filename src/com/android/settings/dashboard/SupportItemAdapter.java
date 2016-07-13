@@ -89,7 +89,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         } else {
             mSelectedCountry = mSupportFeatureProvider.getCurrentCountryCodeIfHasConfig(PHONE);
         }
-        setAccount(mSupportFeatureProvider.getSupportEligibleAccount(mActivity));
+        mAccount = mSupportFeatureProvider.getSupportEligibleAccount(mActivity);
         refreshData();
     }
 
@@ -155,6 +155,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     public void setAccount(Account account) {
         if (!Objects.equals(mAccount, account)) {
             mAccount = account;
+            mSupportFeatureProvider.refreshOperationRules();
             refreshData();
         }
     }
