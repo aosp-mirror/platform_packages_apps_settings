@@ -35,6 +35,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -120,6 +121,8 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         switch (preference.getKey()) {
             case KEY_STORAGE_MANAGER_SWITCH:
                 boolean checked = (boolean) newValue;
+                MetricsLogger.action(getContext(), MetricsEvent.ACTION_TOGGLE_STORAGE_MANAGER,
+                        checked);
                 mDaysToRetain.setEnabled(checked);
                 Settings.Secure.putInt(getContentResolver(),
                         Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, checked ? 1 : 0);
