@@ -165,6 +165,9 @@ public class DashboardSummary extends InstrumentedFragment
         super.onSaveInstanceState(outState);
         if (mLayoutManager == null) return;
         outState.putInt(EXTRA_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
+        if (mAdapter != null) {
+            mAdapter.onSaveInstanceState(outState);
+        }
     }
 
     @Override
@@ -181,14 +184,13 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setHasFixedSize(true);
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mDashboard.setListener(this);
-        mAdapter = new DashboardAdapter(getContext(), mSuggestionParser);
-        mAdapter.setConditions(mConditionManager.getConditions());
+        mAdapter = new DashboardAdapter(getContext(), mSuggestionParser, bundle,
+                mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setAdapter(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
         if (DEBUG_TIMING) Log.d(TAG, "onViewCreated took "
                 + (System.currentTimeMillis() - startTime) + " ms");
-
         rebuildUI();
     }
 
