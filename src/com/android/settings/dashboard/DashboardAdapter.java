@@ -53,6 +53,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public static final String TAG = "DashboardAdapter";
     private static final String STATE_SUGGESTION_LIST = "suggestion_list";
     private static final String STATE_CATEGORY_LIST = "category_list";
+    private static final String STATE_IS_SHOWING_ALL = "is_showing_all";
+    private static final String STATE_SUGGESTION_MODE = "suggestion_mode";
     private static final int NS_SPACER = 0;
     private static final int NS_SUGGESTION = 1000;
     private static final int NS_ITEMS = 2000;
@@ -92,12 +94,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mConditions = conditions;
 
         setHasStableIds(true);
-        setShowingAll(true);
 
+        boolean showAll = true;
         if (savedInstanceState != null) {
             mSuggestions = savedInstanceState.getParcelableArrayList(STATE_SUGGESTION_LIST);
             mCategories = savedInstanceState.getParcelableArrayList(STATE_CATEGORY_LIST);
+            showAll = savedInstanceState.getBoolean(STATE_IS_SHOWING_ALL, true);
+            mSuggestionMode = savedInstanceState.getInt(
+                    STATE_SUGGESTION_MODE, SUGGESTION_MODE_DEFAULT);
         }
+        setShowingAll(showAll);
     }
 
     public List<Tile> getSuggestions() {
@@ -149,10 +155,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     public void setConditions(List<Condition> conditions) {
-        if (!Objects.equals(mConditions, conditions)) {
-            mConditions = conditions;
-            recountItems();
-        }
+        mConditions = conditions;
+        recountItems();
     }
 
     public boolean isShowingAll() {
@@ -441,9 +445,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(STATE_SUGGESTION_LIST, new ArrayList<Tile>(mSuggestions));
-        outState.putParcelableArrayList(STATE_CATEGORY_LIST,
-                new ArrayList<DashboardCategory>(mCategories));
+        if (mSuggestions != null) {
+            outState.putParcelableArrayList(STATE_SUGGESTION_LIST,
+                    new ArrayList<Tile>(mSuggestions));
+        }
+        if (mCategories != null) {
+            outState.putParcelableArrayList(STATE_CATEGORY_LIST,
+                    new ArrayList<DashboardCategory>(mCategories));
+        }
+        outState.putBoolean(STATE_IS_SHOWING_ALL, mIsShowingAll);
+        outState.putInt(STATE_SUGGESTION_MODE, mSuggestionMode);
     }
 
     private static class IconCache {
