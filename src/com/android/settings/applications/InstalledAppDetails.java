@@ -184,7 +184,7 @@ public class InstalledAppDetails extends AppInfoBase
         // by not allowing disabling of apps signed with the
         // system cert and any launcher app in the system.
         if (mHomePackages.contains(mAppEntry.info.packageName)
-                || Utils.isSystemPackage(mPm, mPackageInfo)) {
+                || Utils.isSystemPackage(getContext().getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
             button.setText(R.string.disable_text);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
@@ -231,7 +231,7 @@ public class InstalledAppDetails extends AppInfoBase
         }
 
         // Don't allow uninstalling the device provisioning package.
-        if (isDeviceProvisioningPackage(mAppEntry.info.packageName)) {
+        if (Utils.isDeviceProvisioningPackage(getResources(), mAppEntry.info.packageName)) {
             enabled = false;
         }
 
@@ -300,16 +300,6 @@ public class InstalledAppDetails extends AppInfoBase
             }
         }
         return false;
-    }
-
-    /**
-     * Returns {@code true} if the supplied package is the device provisioning app. Otherwise,
-     * returns {@code false}.
-     */
-    private boolean isDeviceProvisioningPackage(String packageName) {
-        String deviceProvisioningPackage = getResources().getString(
-                com.android.internal.R.string.config_deviceProvisioningPackage);
-        return deviceProvisioningPackage != null && deviceProvisioningPackage.equals(packageName);
     }
 
     /** Called when the activity is first created. */
