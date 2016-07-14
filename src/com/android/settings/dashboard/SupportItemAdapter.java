@@ -219,6 +219,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 || mSupportFeatureProvider.isAlwaysOperating(CHAT, null /* countryCode */)) {
             // Support is available.
             builder.setTileTitle(R.string.support_escalation_24_7_title)
+                    .setTileTitleDescription(R.string.support_escalation_24_7_content_description)
                     .setTileSummary(mActivity.getString(R.string.support_escalation_24_7_summary));
         } else if (mSupportFeatureProvider.isOperatingNow(PHONE)
                 || mSupportFeatureProvider.isOperatingNow(CHAT)) {
@@ -264,6 +265,9 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 .setTileTitle(isPhoneSupportAlwaysOperating
                         ? R.string.support_escalation_24_7_title
                         : R.string.support_escalation_title)
+                .setTileTitleDescription(isPhoneSupportAlwaysOperating
+                        ? R.string.support_escalation_24_7_content_description
+                        : R.string.support_escalation_title)
                 .setTileSummary(operatingHours)
                 .build());
     }
@@ -295,6 +299,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
     private void bindEscalationOptions(ViewHolder holder, EscalationData data) {
         holder.tileTitleView.setText(data.tileTitle);
+        holder.tileTitleView.setContentDescription(data.tileTitleDescription);
         holder.tileSummaryView.setText(data.tileSummary);
         if (data.text1 == 0) {
             holder.text1View.setVisibility(View.GONE);
@@ -327,6 +332,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     private void bindOfflineEscalationOptions(ViewHolder holder, OfflineEscalationData data) {
         // Bind Title
         holder.tileTitleView.setText(data.tileTitle);
+        holder.tileTitleView.setContentDescription(data.tileTitleDescription);
         holder.tileSummaryView.setText(data.tileSummary);
         // Bind spinner
         final Spinner spinner = (Spinner) holder.itemView.findViewById(R.id.spinner);
@@ -361,6 +367,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
     private void bindSignInPromoTile(ViewHolder holder, EscalationData data) {
         holder.tileTitleView.setText(data.tileTitle);
+        holder.tileTitleView.setContentDescription(data.tileTitleDescription);
         holder.tileSummaryView.setText(data.tileSummary);
         holder.text1View.setText(data.text1);
         holder.text2View.setText(data.text2);
@@ -374,6 +381,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         }
         if (holder.tileTitleView != null) {
             holder.tileTitleView.setText(data.tileTitle);
+            holder.tileTitleView.setContentDescription(data.tileTitleDescription);
         }
         if (holder.tileSummaryView != null) {
             holder.tileSummaryView.setText(data.tileSummary);
@@ -511,6 +519,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
         final int icon;
         @StringRes
         final int tileTitle;
+        final CharSequence tileTitleDescription;
         final CharSequence tileSummary;
 
 
@@ -518,6 +527,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             this.type = builder.mType;
             this.icon = builder.mIcon;
             this.tileTitle = builder.mTileTitle;
+            this.tileTitleDescription = builder.mTileTitleDescription;
             this.tileSummary = builder.mTileSummary;
             this.intent = builder.mIntent;
             this.metricsEvent = builder.mMetricsEvent;
@@ -532,6 +542,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             private int mIcon;
             @StringRes
             private int mTileTitle;
+            private CharSequence mTileTitleDescription;
             private CharSequence mTileSummary;
             private Intent mIntent;
             private int mMetricsEvent = -1;
@@ -548,6 +559,11 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
             Builder setTileTitle(@StringRes int title) {
                 mTileTitle = title;
+                return this;
+            }
+
+            Builder setTileTitleDescription(@StringRes int titleDescription) {
+                mTileTitleDescription = mContext.getString(titleDescription);
                 return this;
             }
 
