@@ -416,8 +416,11 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Сіз енгізген құпия сөз дұрыс, бірақ, өкінішке орай, деректеріңіз бүлінген. \n\nПланшетті әрі қарай пайдалану үшін, зауыттық параметрлерді қалпына келтіруіңіз керек. Қалпына келтіргеннен кейін планшетті реттегенде, сізде Google есептік жазбаңызға сақтық көшірмесі жасалған барлық деректерді қалпына келтіру мүмкіндігі болады."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Сіз енгізген құпия сөз дұрыс, бірақ, өкінішке орай, деректеріңіз бүлінген. \n\nТелефонды әрі қарай пайдалану үшін, зауыттық параметрлерді қалпына келтіруіңіз керек. Қалпына келтіргеннен кейін телефонды реттегенде, сізде Google есептік жазбаңызға сақтық көшірмесі жасалған барлық деректерді қалпына келтіру мүмкіндігі болады."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Енгізу әдістерін ауыстыру"</string>
-    <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Экран құлпы"</string>
+    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
+    <skip />
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Құрылғыны қорғау"</string>
+    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
+    <skip />
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Саусақ ізімен құлыпты ашу"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Экран құлпын таңдау"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Жұмыс құлпын таңдау"</string>
@@ -502,41 +505,31 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Осы жолы жұмыс құпия сөзін дұрыс енгізбесеңіз, жұмыс профиліңіз және байланысты деректер осы құрылғыдан жойылады."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Басқа мүмкіндігіңіз жоқ. Жұмыс профиліңіз және байланысты деректер осы құрылғыдан жойылады."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Жабу"</string>
-    <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Құпия сөз кем дегенде %d таңбадан тұруы тиіс"</string>
+    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
+    <skip />
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN коды кем дегенде  %d бірліктен тұруы тиіс."</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Жалғастыру"</string>
-    <string name="lockpassword_password_too_long" msgid="7016906583950201704">"Кілтсөздің құрамы <xliff:g id="NUMBER">%d</xliff:g> таңбадан кем болуы тиіс."</string>
-    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN құрамы <xliff:g id="NUMBER">%d</xliff:g> бірліктен кем болуы тиіс."</string>
-    <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"PIN код 0-9 аралығындағы бірліктерден ғана тұруы керек."</string>
+    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
+    <skip />
+    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
+    <skip />
+    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
+    <skip />
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Құрылғы әкімшісі соңғы PIN кодты қолдануға рұқсат бермейді."</string>
-    <string name="lockpassword_illegal_character" msgid="8742901630116866738">"Кілтсөзде жарамсыз таңба қолданылған."</string>
-    <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Кілтсөзде кем дегенде бір әріп болуы тиіс."</string>
-    <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Кілсөзде кем дегенде бір бірлік болуы тиіс."</string>
-    <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Кілтсөзде кем дегенде бір таңба болуы тиіс."</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
-      <item quantity="other">Құпия сөзде кемінде %d әріп болуы керек.</item>
-      <item quantity="one">Құпия сөзде кемінде 1 әріп болуы керек.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
-      <item quantity="other">Құпия сөзде кемінде %d кіші әріп болуы керек.</item>
-      <item quantity="one">Құпия сөзде кемінде 1 кіші әріп болуы керек.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
-      <item quantity="other">Құпия сөзде кемінде %d бас әріп болуы тиіс.</item>
-      <item quantity="one">Құпия сөзде кемінде 1 бас әріп болуы тиіс.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
-      <item quantity="other">Құпия сөзде кемінде %d сандық бірлік болуы керек.</item>
-      <item quantity="one">Құпия сөзде кемінде 1 сандық бірлік болуы керек.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
-      <item quantity="other">Құпия сөзде кемінде %d арнайы таңба болуы тиіс.</item>
-      <item quantity="one">Құпия сөзде кемінде 1 арнайы таңба болуы тиіс.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
-      <item quantity="other">Құпия сөзде кемінде %d әріп емес таңба болуы тиіс.</item>
-      <item quantity="one">Құпия сөзде кемінде 1 әріп емес таңба болуы тиіс.</item>
-    </plurals>
+    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
+    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
+    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
+    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
+    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
+    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"Құрылғы әкімшісі жуықтағы кілтсөзді қолдануға рұқсат бермейді."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Артатын, кемитін немесе қайталанатын цифрлар ретіне тыйым салынған"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"Жарайды"</string>
@@ -845,7 +838,8 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Дыбыс қаттылығы"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Mузыка әсерлері"</string>
-    <string name="ring_volume_title" msgid="7938706566797464165">"Шырылдау қаттылығы"</string>
+    <!-- no translation found for ring_volume_title (5592466070832128777) -->
+    <skip />
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Үнсіз кезінде тербеу"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Бастапқы хабар дыбысы"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Қоңырау әуені"</string>
@@ -904,38 +898,24 @@
     <string name="brightness_summary" msgid="838917350127550703">"Экранның жарықтығын реттеу"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Бейімделгіш жарықтық"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Ортадағы жарықтандыруға сәйкес жарықтық деңгейін оңтайландыру"</string>
-    <!-- no translation found for night_display_title (539072363027122793) -->
+    <!-- no translation found for night_display_title (2626451512200357686) -->
     <skip />
-    <!-- no translation found for night_display_text (6855572001545316082) -->
+    <!-- no translation found for night_display_text (8753843222371219454) -->
     <skip />
-    <!-- no translation found for night_display_auto_mode_title (8046314360381608455) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_never (6723636142053240947) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_custom (6012300346981608242) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_twilight (2123345097508167094) -->
-    <skip />
-    <!-- no translation found for night_display_start_time_title (8918016772613689584) -->
-    <skip />
-    <!-- no translation found for night_display_end_time_title (8286061578083519350) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off (1792750041697946539) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_never (8865054549719499274) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_custom (4962295097132112885) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_twilight (5520577516590422267) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on (1355713529996456744) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_never (44005841579902825) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_custom (4350556852471560173) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_twilight (6122152828111119250) -->
-    <skip />
+    <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Автоматты түрде қосу"</string>
+    <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Ешқашан"</string>
+    <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Арнаулы кесте"</string>
+    <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Күн батқаннан күн шыққанға дейін"</string>
+    <string name="night_display_start_time_title" msgid="8918016772613689584">"Басталу уақыты"</string>
+    <string name="night_display_end_time_title" msgid="8286061578083519350">"Аяқталу уақыты"</string>
+    <string name="night_display_summary_off" msgid="1792750041697946539">"Өшірулі / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Ешқашан автоматты түрде қоспау"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"<xliff:g id="ID_1">%1$s</xliff:g> болғанда автоматты түрде қосу"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Күн батқанда автоматты түрде қосу"</string>
+    <string name="night_display_summary_on" msgid="1355713529996456744">"Қосулы / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Ешқашан автоматты түрде өшірмеу"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"<xliff:g id="ID_1">%1$s</xliff:g> болғанда автоматты түрде өшіру"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Күн шыққанда автоматты түрде өшіру"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Ұйқы"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Экран өшеді"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Әрекетсіз <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> тұрған соң"</string>
@@ -956,7 +936,8 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Aвтоматтық жарықтық"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Ояту үшін көтеру"</string>
     <string name="doze_title" msgid="2259176504273878294">"Айналаны көрсету"</string>
-    <string name="doze_summary" msgid="7128970177894383698">"Құрылғыны көтергенде немесе хабарландырулар алғанда экранды ояту"</string>
+    <!-- no translation found for doze_summary (4312399592244939565) -->
+    <skip />
     <string name="title_font_size" msgid="4405544325522105222">"Шрифт өлшемі"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Мәтінді үлкейтеді немесе кішірейтеді"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM картасын бекіту параметрлері"</string>
@@ -1324,7 +1305,8 @@
     <string name="contributors_title" msgid="5917703088825286504">"Үлес қосушылар"</string>
     <string name="manual" msgid="3025943393642974445">"Қолмен"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"Нормативтік белгілер"</string>
-    <string name="safety_and_regulatory_info" msgid="7089050124905168081">"Қауіпсіздік және нормативтік ақпарат"</string>
+    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
+    <skip />
     <string name="copyright_title" msgid="865906688917260647">"Авторлық құқықтар"</string>
     <string name="license_title" msgid="1990487604356037871">"Лицензия"</string>
     <string name="terms_title" msgid="7697580845616764642">"Шарттары"</string>
@@ -1396,13 +1378,20 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Телефоныңызда қолданба орнатылмаған."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Жұмыс профилінің қауіпсіздігі"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Жұмыс профилі экранының құлпы"</string>
-    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Бірдей бекітпені пайдалану"</string>
-    <string name="lock_settings_profile_unification_summary" msgid="6173594427521995322">"Құрылғының экран құлпын жұмыс профиліне сай өзгерту"</string>
-    <string name="lock_settings_profile_unification_dialog_title" msgid="8262182734131824214">"Бірдей құлыпты пайдалану керек пе?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="6953193194108608460">"Жұмыс профилінің құлпын құрылғының экран құлпы ретінде де пайдалануға болады. Солай етсеңіз, барлық жұмыс құлпы саясаттары да құрылғының экран құлпына қолданылады."</string>
-    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8903515808297759759">"Жұмыс профиліңіздің құлпы ұйымның қауіпсіздік талаптарына сай емес.\n\nҚұрылғы үшін де, жұмыс профилі үшін де жаңа экран құлпын орнатуға болады, бірақ барлық жұмыс құлпы саясаттары құрылғының экран құлпына да қолданылады."</string>
-    <string name="lock_settings_profile_unification_dialog_confirm" msgid="4911420150698686398">"Құрылғы құлпын өзгерту"</string>
-    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Бекітпені өзгерту"</string>
+    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
+    <skip />
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Құрылғының экран бекітпесімен бірдей"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Қолданбаларды алу"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Орнатылған қолданбаларды басқару және алу"</string>
@@ -2291,7 +2280,7 @@
     <string name="one_cacrt" msgid="6844397037970164809">"бір CA сертификаты"</string>
     <string name="n_cacrts" msgid="5979300323482053820">"%d CA сертификаттары"</string>
     <string name="user_credential_title" msgid="1329449215749665378">"Тіркелгі деректерінің мәліметтері"</string>
-    <string name="user_credential_removed" msgid="6514189495799401838">"Жойылған тіркелгі дерегі: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
+    <string name="user_credential_removed" msgid="6514189495799401838">"Жойылған тіркелу дерегі: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"Емлені тексеру"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"Толық сақтық кілтсөзін осы жерде теріңіз"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"Толық сақтық көшірмелерін жасау үшін жаңа кілтсөзді осы жерге теріңіз"</string>
@@ -2509,8 +2498,7 @@
     <string name="keywords_display" msgid="8910345814565493016">"экран, сенсорлық экран"</string>
     <string name="keywords_display_brightness_level" msgid="3891383826236015854">"экранды күңгірттеу, сенсорлық экран, батарея"</string>
     <string name="keywords_display_auto_brightness" msgid="3325150824507953765">"экранды күңгірттеу, сенсорлық экран, батарея"</string>
-    <!-- no translation found for keywords_display_night_display (7630169927425425754) -->
-    <skip />
+    <string name="keywords_display_night_display" msgid="7630169927425425754">"экранды күңгірттеу, түн, реңк"</string>
     <string name="keywords_display_wallpaper" msgid="7362076351860131776">"фон, жекелендіру, дисплейді теңшеу"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"мәтін өлшемі"</string>
     <string name="keywords_display_cast_screen" msgid="7684618996741933067">"жоба, трансляциялау"</string>
@@ -2552,8 +2540,10 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Деректерді NFC белгісіне жазу мүмкін болмады. Егер мәселе жалғасса, басқа белгіні қолданып көріңіз"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC белгісіне жазу мүмкін емес. Басқа белгіні пайдаланыңыз."</string>
     <string name="default_sound" msgid="8821684447333687810">"Әдепкі дыбыс"</string>
-    <string name="sound_settings_summary" msgid="3651751880569558828">"Қоңырау дауысының қаттылығы <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="sound_settings_example_summary" msgid="6810096712869633479">"Қоңыраудың дыбысы 80% деңгейінде"</string>
+    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
+    <skip />
+    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
+    <skip />
     <string name="media_volume_option_title" msgid="2811531786073003825">"Meдианың дыбыс деңгейі"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Дабылдың дыбыс деңгейі"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Қоңыраудың дыбыс деңгейі"</string>
@@ -3079,7 +3069,8 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Құрылғыны іске қосу үшін PIN кодын талап ету. Өшірулі кезде бұл құрылғы қоңырауларды, хабарларды, хабарландыруларды немесе дабылдарды қабылдай алмайды."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Құрылғыны іске қосу үшін кілтсөзді талап ету. Өшірулі кезде бұл құрылғы қоңырауларды, хабарларды, хабарландыруларды немесе дабылдарды қабылдай алмайды."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Тағы саусақ ізін қосу"</string>
-    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"Құлыпты басқа саусақ ізімен ашу"</string>
+    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
+    <skip />
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Қосулы / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Өшірулі / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Ешқашан автоматты түрде қоспау"</string>
@@ -3120,9 +3111,10 @@
     <string name="special_access" msgid="8275242424094109976">"Арнайы қол жеткізу"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Шынымен пайдаланушы деректерін өшіру және файлды шифрлауға түрлендіру керек пе?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Өшіру және түрлендіру"</string>
-    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"ShortcutManager жылдамдықты шектеу есептегіштерін бастапқы күйіне қайтару"</string>
-    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"ShortcutManager жылдамдық шектеуін бастапқы күйіне қайтару керек пе?"</string>
-    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"ShortcutManager жылдамдықты шектеу есептегіштерін бастапқы күйіне қайтару керек пе?"</string>
+    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
+    <skip />
+    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
+    <skip />
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Құлыпталған экран хабарландыруларын бақылау"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Хабарландыру мазмұнын көрсету немесе жасыру"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Барлығы"</string>
@@ -3136,9 +3128,11 @@
     <string name="demo_mode" msgid="2655748420527206870">"Демо режимі"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Көмектесуге әрқашан дайынбыз"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Біз сізге аптасына 7 күн 24 сағат бойы көмек көрсетуге дайынбыз"</string>
+    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
+    <skip />
     <string name="support_escalation_summary" msgid="4481910353815635960">"Біздің қолдау көрсету ұжымы кез келген мәселені шешуге дайын"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Біздің қолдау көрсету ұжымы кез келген күні тәулік бойы қызмет көрсетуге дайын"</string>
-    <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Қолдау көрсету уақыты (жергілікті уақыт) барысында анықтама іздеу немесе кері оралу:&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
+    <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Анықтамадан іздеп көріңіз немесе жұмыс уақыты (жергілікті уақыт) кезінде хабарласыңыз:&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"Телефон қоңыраулары қабылданатын кез (жергілікті уақыт)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"Іздеу анықтамасы немесе зерттеу кеңестері және тәсілдері"</string>
     <string name="support_country_list_title" msgid="823853371280534111">"Қолдау:"</string>
@@ -3187,24 +3181,21 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Қолмен"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Орынды қазір босату"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Қимылдар"</string>
-    <!-- no translation found for gesture_preference_summary (8627850388011956901) -->
-    <skip />
+    <string name="gesture_preference_summary" msgid="8627850388011956901">"Телефоныңызды басқаруға арналған жылдам қимылдар"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Камераға өту"</string>
-    <!-- no translation found for double_tap_power_for_camera_summary (6988157149749655988) -->
-    <skip />
+    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Камераны жылдам ашу үшін, қуат түймесін екі рет түртіңіз. Кез келген экраннан жұмыс істейді"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Камераны аудару"</string>
-    <!-- no translation found for double_twist_for_camera_mode_summary (6650416925533241708) -->
-    <skip />
+    <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Экранды жылдам тексеру"</string>
-    <!-- no translation found for ambient_display_summary (6951996186492905459) -->
+    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
     <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Хабарландыруларға қарай сырғыту"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (3852781898776332580) -->
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
     <skip />
     <string name="gesture_setting_on" msgid="3455094265233870280">"Қосулы"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Өшірулі"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Операциялық жүйені жүктеу құралының құлпы ашылған"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Алдымен Интернетке қосылыңыз"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Оператор тарапынан құлыпталған құрылғыларда қолжетімсіз"</string>
-    <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Жалпы қолжетімді орын: <xliff:g id="SIZE">%1$s</xliff:g>\n\n Соңғы іске қосылған күн: <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Жалпы қолжетімді орын: <xliff:g id="SIZE">%1$s</xliff:g>\n\nСоңғы іске қосылған күн: <xliff:g id="DATE">%2$s</xliff:g>"</string>
 </resources>
