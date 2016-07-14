@@ -422,8 +422,11 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Ви ввели правильний пароль, але ваші дані пошкоджено. \n\nЩоб знову користуватися планшетом, відновіть заводські налаштування. Після цього ви зможете відновити на планшеті всі дані, які зберігаються у вашому обліковому записі Google."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Ви ввели правильний пароль, але ваші дані пошкоджено. \n\nЩоб знову користуватися телефоном, відновіть заводські налаштування. Після цього ви зможете відновити на телефоні всі дані, які зберігаються у вашому обліковому записі Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Переключити метод введення"</string>
-    <string name="suggested_lock_settings_title" msgid="5022405858647120434">"Блокувати екран"</string>
+    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
+    <skip />
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Захистіть свій пристрій"</string>
+    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
+    <skip />
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Розблоковувати пристрій відбитком пальця"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Блокування екрана"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Вибер. спосіб розблок."</string>
@@ -508,53 +511,31 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Якщо цього разу ви введете неправильний пароль, ваш робочий профіль і зв’язані з ним дані буде видалено з цього пристрою."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Забагато невдалих спроб. Ваш робочий профіль і зв’язані з ним дані буде видалено з цього пристрою."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Відхилити"</string>
-    <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Пароль має складатися з мінімум %d символів"</string>
+    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
+    <skip />
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN-код має складатися принаймні зі стількох цифр: %d"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Продовжити"</string>
-    <string name="lockpassword_password_too_long" msgid="7016906583950201704">"Символів у паролі має бути менше <xliff:g id="NUMBER">%d</xliff:g>."</string>
-    <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"Цифр у PIN-коді має бути менше <xliff:g id="NUMBER">%d</xliff:g>."</string>
-    <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"PIN-код має містити лише цифри 0–9."</string>
+    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
+    <skip />
+    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
+    <skip />
+    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
+    <skip />
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Адміністратор пристрою не дозволяє використовувати останній PIN-код."</string>
-    <string name="lockpassword_illegal_character" msgid="8742901630116866738">"Пароль містить заборонений символ."</string>
-    <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Пароль має містити принаймні одну букву."</string>
-    <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Пароль має містити принаймні одну цифру."</string>
-    <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Пароль має містити принаймні один символ."</string>
-    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
-      <item quantity="one">Пароль має містити принаймні %d літеру.</item>
-      <item quantity="few">Пароль має містити принаймні %d літери.</item>
-      <item quantity="many">Пароль має містити принаймні %d літер.</item>
-      <item quantity="other">Пароль має містити принаймні %d літери.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
-      <item quantity="one">Пароль має містити принаймні %d малу літеру.</item>
-      <item quantity="few">Пароль має містити принаймні %d малі літери.</item>
-      <item quantity="many">Пароль має містити принаймні %d малих літер.</item>
-      <item quantity="other">Пароль має містити принаймні %d малої літери.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
-      <item quantity="one">Пароль має містити принаймні %d велику літеру.</item>
-      <item quantity="few">Пароль має містити принаймні %d великі літери.</item>
-      <item quantity="many">Пароль має містити принаймні %d великих літер.</item>
-      <item quantity="other">Пароль має містити принаймні %d великої літери.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
-      <item quantity="one">Пароль має містити принаймні %d цифру.</item>
-      <item quantity="few">Пароль має містити принаймні %d цифри.</item>
-      <item quantity="many">Пароль має містити принаймні %d цифр.</item>
-      <item quantity="other">Пароль має містити принаймні %d цифри.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
-      <item quantity="one">Пароль має містити принаймні %d спеціальний символ.</item>
-      <item quantity="few">Пароль має містити принаймні %d спеціальні символи.</item>
-      <item quantity="many">Пароль має містити принаймні %d спеціальних символів.</item>
-      <item quantity="other">Пароль має містити принаймні %d спеціального символу.</item>
-    </plurals>
-    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
-      <item quantity="one">Пароль має містити принаймні %d небуквений символ.</item>
-      <item quantity="few">Пароль має містити принаймні %d небуквені символи.</item>
-      <item quantity="many">Пароль має містити принаймні %d небуквених символів.</item>
-      <item quantity="other">Пароль має містити принаймні %d небуквеного символу.</item>
-    </plurals>
+    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
+    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
+    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
+    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
+    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
+    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"Адміністратор пристрою не дозволяє використовувати останній пароль."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Цифри в порядку зростання чи спадання та повторювані цифри заборонені"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -863,7 +844,8 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Гучність"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Музичні ефекти"</string>
-    <string name="ring_volume_title" msgid="7938706566797464165">"Гучність дзвінка"</string>
+    <!-- no translation found for ring_volume_title (5592466070832128777) -->
+    <skip />
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Вібр. в беззвуч. реж."</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Звук сповіщення за умовчанням"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Мелодія"</string>
@@ -922,38 +904,24 @@
     <string name="brightness_summary" msgid="838917350127550703">"Налаштуйте яскравість екрана"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Регульована яскравість"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Оптимізація рівня яскравості з урахуванням умов освітлення"</string>
-    <!-- no translation found for night_display_title (539072363027122793) -->
+    <!-- no translation found for night_display_title (2626451512200357686) -->
     <skip />
-    <!-- no translation found for night_display_text (6855572001545316082) -->
+    <!-- no translation found for night_display_text (8753843222371219454) -->
     <skip />
-    <!-- no translation found for night_display_auto_mode_title (8046314360381608455) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_never (6723636142053240947) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_custom (6012300346981608242) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_twilight (2123345097508167094) -->
-    <skip />
-    <!-- no translation found for night_display_start_time_title (8918016772613689584) -->
-    <skip />
-    <!-- no translation found for night_display_end_time_title (8286061578083519350) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off (1792750041697946539) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_never (8865054549719499274) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_custom (4962295097132112885) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_twilight (5520577516590422267) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on (1355713529996456744) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_never (44005841579902825) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_custom (4350556852471560173) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_twilight (6122152828111119250) -->
-    <skip />
+    <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Вмикати автоматично"</string>
+    <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Ніколи"</string>
+    <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Користувацький графік"</string>
+    <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Від заходу до сходу сонця"</string>
+    <string name="night_display_start_time_title" msgid="8918016772613689584">"Час початку"</string>
+    <string name="night_display_end_time_title" msgid="8286061578083519350">"Час завершення"</string>
+    <string name="night_display_summary_off" msgid="1792750041697946539">"Вимкнено / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Ніколи не вмикати автоматично"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Вмикати автоматично о <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Вмикати автоматично після заходу сонця"</string>
+    <string name="night_display_summary_on" msgid="1355713529996456744">"Увімкнено / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Ніколи не вимикати автоматично"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Вимикати автоматично о <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Вимикати автоматично на світанку"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Режим сну"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Вимикати екран"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Коли минає <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездіяльності"</string>
@@ -974,7 +942,8 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Автоматична яскравість"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Підняти, щоб активувати"</string>
     <string name="doze_title" msgid="2259176504273878294">"Активація екрана"</string>
-    <string name="doze_summary" msgid="7128970177894383698">"Активувати екран, коли користувач бере пристрій або коли надходять сповіщення"</string>
+    <!-- no translation found for doze_summary (4312399592244939565) -->
+    <skip />
     <string name="title_font_size" msgid="4405544325522105222">"Розмір шрифту"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Збільшуйте або зменшуйте текст"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Налашт. блокув. SIM-карти"</string>
@@ -1344,7 +1313,8 @@
     <string name="contributors_title" msgid="5917703088825286504">"Співавтори"</string>
     <string name="manual" msgid="3025943393642974445">"Посібник"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"Регулятивні мітки"</string>
-    <string name="safety_and_regulatory_info" msgid="7089050124905168081">"Безпекова та нормативна інформація"</string>
+    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
+    <skip />
     <string name="copyright_title" msgid="865906688917260647">"Автор. право"</string>
     <string name="license_title" msgid="1990487604356037871">"Ліцензія"</string>
     <string name="terms_title" msgid="7697580845616764642">"Заг. положення й умови"</string>
@@ -1416,13 +1386,20 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Додаток не встановлено у вашому телефоні."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Безпека робочого профілю"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Блокування екрана робочого профілю"</string>
-    <string name="lock_settings_profile_unification_title" msgid="6888460471428172592">"Використовувати однакове блокування"</string>
-    <string name="lock_settings_profile_unification_summary" msgid="6173594427521995322">"Змінити спосіб блокування екрана пристрою відповідно до робочого профілю"</string>
-    <string name="lock_settings_profile_unification_dialog_title" msgid="8262182734131824214">"Використовувати однакове блокування?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="6953193194108608460">"Для пристрою можна використовувати той самий спосіб блокування, що й для робочого профілю. У такому разі всі правила блокування екрана в робочому профілі також застосовуватимуться до блокування екрана на пристрої."</string>
-    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8903515808297759759">"Спосіб блокування екрана в робочому профілі не відповідає вимогам безпеки вашої організації.\n\nВи можете встановити новий спосіб блокування для робочого профілю та пристрою, але всі правила блокування екрана в робочому профілі також застосовуватимуться до блокування екрана на пристрої."</string>
-    <string name="lock_settings_profile_unification_dialog_confirm" msgid="4911420150698686398">"Змінити спосіб блокування пристрою"</string>
-    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="2372867057465188766">"Змінити спосіб блокування"</string>
+    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
+    <skip />
+    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
+    <skip />
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Те саме блокування, що й на пристрої"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Керувати програмами"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Керувати встановленими програмами та видаляти їх"</string>
@@ -2550,8 +2527,7 @@
     <string name="keywords_display" msgid="8910345814565493016">"екран, сенсорний екран"</string>
     <string name="keywords_display_brightness_level" msgid="3891383826236015854">"затемнений екран, сенсорний екран, акумулятор"</string>
     <string name="keywords_display_auto_brightness" msgid="3325150824507953765">"затемнений екран, сенсорний екран, акумулятор"</string>
-    <!-- no translation found for keywords_display_night_display (7630169927425425754) -->
-    <skip />
+    <string name="keywords_display_night_display" msgid="7630169927425425754">"затемнений екран, ніч, відтінок"</string>
     <string name="keywords_display_wallpaper" msgid="7362076351860131776">"фон, персоналізувати, налаштувати дисплей"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"розмір шрифту"</string>
     <string name="keywords_display_cast_screen" msgid="7684618996741933067">"проектувати, транслювати"</string>
@@ -2593,8 +2569,10 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Не вдалося записати дані в NFC-тег. Якщо проблема не зникне, виберіть інший тег"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"У цей NFC-тег не можна записувати дані. Виберіть інший."</string>
     <string name="default_sound" msgid="8821684447333687810">"Звук за умовчанням"</string>
-    <string name="sound_settings_summary" msgid="3651751880569558828">"Гучність дзвінка: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="sound_settings_example_summary" msgid="6810096712869633479">"Гучність дзвінка: 80%"</string>
+    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
+    <skip />
+    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
+    <skip />
     <string name="media_volume_option_title" msgid="2811531786073003825">"Гучність медіа"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Гучність будильника"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Гучність дзвінка"</string>
@@ -3146,7 +3124,8 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Запитувати PIN-код перед запуском пристрою. Якщо це налаштування вимкнено, пристрій не зможе приймати дзвінки, повідомлення, сповіщення чи сигнали."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Запитувати пароль перед запуском пристрою. Якщо це налаштування вимкнено, пристрій не зможе приймати дзвінки, повідомлення, сповіщення чи сигнали."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Додати ще один відбиток"</string>
-    <string name="suggestion_additional_fingerprints_summary" msgid="2298186278816316599">"Розблоковувати іншим відбитком пальця"</string>
+    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
+    <skip />
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Увімкнено / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Вимкнено / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Ніколи не вмикати автоматично"</string>
@@ -3187,9 +3166,10 @@
     <string name="special_access" msgid="8275242424094109976">"Спеціальний доступ"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Стерти дані користувача та конвертувати в зашифрований файл?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Стерти та конвертувати"</string>
-    <string name="reset_shortcut_manager_throttling" msgid="4021064939697753381">"Скинути лічильники обмеження швидкості в ShortcutManager"</string>
-    <string name="confirm_reset_shortcut_manager_throttling_title" msgid="6504835349094036279">"Скинути обмеження швидкості в ShortcutManager?"</string>
-    <string name="confirm_reset_shortcut_manager_throttling_message" msgid="3812874125513775052">"Скинути лічильники обмеження швидкості в ShortcutManager?"</string>
+    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
+    <skip />
+    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
+    <skip />
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Керуйте сповіщеннями на заблок. екрані"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Показуйте або приховуйте вміст сповіщень"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Усі"</string>
@@ -3203,6 +3183,8 @@
     <string name="demo_mode" msgid="2655748420527206870">"Демонстраційний режим"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Ми готові допомогти"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Ми працюємо цілодобово та без вихідних"</string>
+    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
+    <skip />
     <string name="support_escalation_summary" msgid="4481910353815635960">"Наша служба підтримки допоможе вам вирішити будь-які проблеми"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Наша команда підтримки працює цілодобово та без вихідних"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Скористайтеся довідкою або зв’яжіться з нами в години роботи (за місцевим часом):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3260,19 +3242,16 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Вручну"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Звільнити місце"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Жести"</string>
-    <!-- no translation found for gesture_preference_summary (8627850388011956901) -->
-    <skip />
+    <string name="gesture_preference_summary" msgid="8627850388011956901">"Швидкі жести для керування телефоном"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Як перейти до камери"</string>
-    <!-- no translation found for double_tap_power_for_camera_summary (6988157149749655988) -->
-    <skip />
+    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Щоб швидко відкрити камеру, двічі натисніть кнопку живлення. Працює на будь-якому екрані"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Як змінити камеру"</string>
-    <!-- no translation found for double_twist_for_camera_mode_summary (6650416925533241708) -->
-    <skip />
+    <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Як швидко перевірити екран"</string>
-    <!-- no translation found for ambient_display_summary (6951996186492905459) -->
+    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
     <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Як переглянути сповіщення"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (3852781898776332580) -->
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
     <skip />
     <string name="gesture_setting_on" msgid="3455094265233870280">"Увімкнено"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Вимкнено"</string>
