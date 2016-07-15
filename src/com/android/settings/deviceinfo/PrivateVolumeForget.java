@@ -34,10 +34,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
-public class PrivateVolumeForget extends InstrumentedFragment {
+public class PrivateVolumeForget extends SettingsPreferenceFragment {
     private static final String TAG_FORGET_CONFIRM = "forget_confirm";
 
     private VolumeRecord mRecord;
