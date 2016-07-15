@@ -266,7 +266,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     mSettings.setShowImeWithHardKeyboard((Boolean) newValue);
-                    return false;
+                    return true;
                 }
             };
 
