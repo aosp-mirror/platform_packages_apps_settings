@@ -267,13 +267,16 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
                 getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
-        if (!RestrictedLockUtils.hasBaseUserRestriction(getPrefContext(),
+
+        MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
+                getString(R.string.remove_account_label))
+                .setIcon(R.drawable.ic_menu_delete);
+        removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
+                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        if (RestrictedLockUtils.hasBaseUserRestriction(getPrefContext(),
                 UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle.getIdentifier())) {
-            MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
-                    getString(R.string.remove_account_label))
-                    .setIcon(R.drawable.ic_menu_delete);
-            removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
-                    MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+            removeAccount.setEnabled(false);
+        } else {
             EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
                     getPrefContext(), UserManager.DISALLOW_MODIFY_ACCOUNTS,
                     mUserHandle.getIdentifier());
@@ -284,6 +287,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getPrefContext(),
                     removeAccount, admin);
         }
+
         syncNow.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         syncCancel.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
