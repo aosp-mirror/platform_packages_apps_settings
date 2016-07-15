@@ -316,9 +316,11 @@ public class AccountSettings extends SettingsPreferenceFragment
         if (userInfo.isEnabled()) {
             profileData.authenticatorHelper = new AuthenticatorHelper(context,
                     userInfo.getUserHandle(), this);
-            if (!RestrictedLockUtils.hasBaseUserRestriction(context,
+            profileData.addAccountPreference = newAddAccountPreference(context);
+            if (RestrictedLockUtils.hasBaseUserRestriction(context,
                     UserManager.DISALLOW_MODIFY_ACCOUNTS, userInfo.id)) {
-                profileData.addAccountPreference = newAddAccountPreference(context);
+                profileData.addAccountPreference.setEnabled(false);
+            } else {
                 profileData.addAccountPreference.checkRestrictionAndSetDisabled(
                         DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
             }
