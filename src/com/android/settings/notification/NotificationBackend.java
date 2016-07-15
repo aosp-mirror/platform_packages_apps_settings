@@ -59,7 +59,7 @@ public class NotificationBackend {
 
     public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
-        row.systemApp = Utils.isSystemPackage(pm, app);
+        row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
         return row;
     }
 
