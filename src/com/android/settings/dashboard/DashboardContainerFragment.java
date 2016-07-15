@@ -22,7 +22,6 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +33,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
+import com.android.settings.widget.RtlCompatibleViewPager;
 import com.android.settings.widget.SlidingTabLayout;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
@@ -45,7 +45,7 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
     private static final int INDEX_SUMMARY_FRAGMENT = 0;
     private static final int INDEX_SUPPORT_FRAGMENT = 1;
 
-    private ViewPager mViewPager;
+    private RtlCompatibleViewPager mViewPager;
     private View mHeaderView;
     private DashboardViewPagerAdapter mPagerAdapter;
 
@@ -63,10 +63,13 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         final View content = inflater.inflate(R.layout.dashboard_container, parent, false);
-        mViewPager = (ViewPager) content.findViewById(R.id.pager);
-        mPagerAdapter = new DashboardViewPagerAdapter(getContext(), getChildFragmentManager());
+        mViewPager = (RtlCompatibleViewPager) content.findViewById(R.id.pager);
+        mPagerAdapter = new DashboardViewPagerAdapter(getContext(),
+                getChildFragmentManager(), mViewPager);
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.addOnPageChangeListener(new TabChangeListener((SettingsActivity) getActivity()));
+        mViewPager.addOnPageChangeListener(
+                new TabChangeListener((SettingsActivity) getActivity()));
+        mViewPager.setCurrentItem(INDEX_SUMMARY_FRAGMENT);
         mHeaderView = inflater.inflate(R.layout.dashboard_container_header, parent, false);
         ((SlidingTabLayout) mHeaderView).setViewPager(mViewPager);
         return content;
@@ -87,12 +90,15 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
 
         private final Context mContext;
         private final SupportFeatureProvider mSupportFeatureProvider;
+        private final RtlCompatibleViewPager mViewPager;
 
-        public DashboardViewPagerAdapter(Context context, FragmentManager fragmentManager) {
+        public DashboardViewPagerAdapter(Context context, FragmentManager fragmentManager,
+                RtlCompatibleViewPager viewPager) {
             super(fragmentManager);
             mContext = context;
             mSupportFeatureProvider =
                     FeatureFactory.getFactory(context).getSupportFeatureProvider(context);
+            mViewPager = viewPager;
         }
 
         @Override
@@ -122,13 +128,19 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
         }
 
         @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            return super.instantiateItem(container,
+                    mViewPager.getRtlAwareIndex(position));
+        }
+
+        @Override
         public int getCount() {
             return mSupportFeatureProvider == null ? 1 : 2;
         }
     }
 
     private static final class TabChangeListener
-            implements ViewPager.OnPageChangeListener {
+            implements RtlCompatibleViewPager.OnPageChangeListener {
 
         private final SettingsActivity mActivity;
 
