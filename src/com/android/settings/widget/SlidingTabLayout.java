@@ -18,7 +18,6 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -39,7 +38,7 @@ public final class SlidingTabLayout extends FrameLayout implements View.OnClickL
     private final View mIndicatorView;
     private final LayoutInflater mLayoutInflater;
 
-    private ViewPager mViewPager;
+    private RtlCompatibleViewPager mViewPager;
     private int mSelectedPosition;
     private float mSelectionOffset;
 
@@ -58,7 +57,7 @@ public final class SlidingTabLayout extends FrameLayout implements View.OnClickL
      * Sets the associated view pager. Note that the assumption here is that the pager content
      * (number of tabs and tab titles) does not change after this call has been made.
      */
-    public void setViewPager(ViewPager viewPager) {
+    public void setViewPager(RtlCompatibleViewPager viewPager) {
         mTitleView.removeAllViews();
 
         mViewPager = viewPager;
@@ -87,8 +86,19 @@ public final class SlidingTabLayout extends FrameLayout implements View.OnClickL
             mTitleView.layout(0, 0, mTitleView.getMeasuredWidth(), mTitleView.getMeasuredHeight());
             final int indicatorBottom = getMeasuredHeight();
             final int indicatorHeight = mIndicatorView.getMeasuredHeight();
-            mIndicatorView.layout(0, indicatorBottom - indicatorHeight,
-                    mIndicatorView.getMeasuredWidth(), indicatorBottom);
+            final int indicatorWidth = mIndicatorView.getMeasuredWidth();
+            final int totalWidth = getMeasuredWidth();
+
+            // IndicatorView should start on the right when RTL mode is enabled
+            if (isRtlMode()) {
+                mIndicatorView.layout(totalWidth - indicatorWidth,
+                        indicatorBottom - indicatorHeight, totalWidth,
+                        indicatorBottom);
+            } else {
+
+                mIndicatorView.layout(0, indicatorBottom - indicatorHeight,
+                        indicatorWidth, indicatorBottom);
+            }
         }
     }
 
@@ -106,7 +116,9 @@ public final class SlidingTabLayout extends FrameLayout implements View.OnClickL
     private void onViewPagerPageChanged(int position, float positionOffset) {
         mSelectedPosition = position;
         mSelectionOffset = positionOffset;
-        mIndicatorView.setTranslationX(getIndicatorLeft());
+        // Translation should be reversed in RTL mode
+        final int leftIndicator = isRtlMode() ? -getIndicatorLeft() : getIndicatorLeft();
+        mIndicatorView.setTranslationX(leftIndicator);
     }
 
     private void populateTabStrip() {
@@ -135,7 +147,12 @@ public final class SlidingTabLayout extends FrameLayout implements View.OnClickL
         return left;
     }
 
-    private final class InternalViewPagerListener implements ViewPager.OnPageChangeListener {
+    private boolean isRtlMode() {
+        return getLayoutDirection() == LAYOUT_DIRECTION_RTL;
+    }
+
+    private final class InternalViewPagerListener implements
+            RtlCompatibleViewPager.OnPageChangeListener {
         private int mScrollState;
 
         @Override
@@ -154,7 +171,8 @@ public final class SlidingTabLayout extends FrameLayout implements View.OnClickL
 
         @Override
         public void onPageSelected(int position) {
-            if (mScrollState == ViewPager.SCROLL_STATE_IDLE) {
+            position = mViewPager.getRtlAwareIndex(position);
+            if (mScrollState == RtlCompatibleViewPager.SCROLL_STATE_IDLE) {
                 onViewPagerPageChanged(position, 0f);
             }
             final int titleCount = mTitleView.getChildCount();
