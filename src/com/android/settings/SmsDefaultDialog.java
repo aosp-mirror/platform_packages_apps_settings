@@ -109,11 +109,11 @@ public final class SmsDefaultDialog extends AlertActivity implements
             // Compose dialog; get
             if (oldSmsApplicationData != null) {
                 p.mMessage = getString(R.string.sms_change_default_dialog_text,
-                        mNewSmsApplicationData.mApplicationName,
-                        oldSmsApplicationData.mApplicationName);
+                        mNewSmsApplicationData.getApplicationName(this),
+                        oldSmsApplicationData.getApplicationName(this));
             } else {
                 p.mMessage = getString(R.string.sms_change_default_no_previous_dialog_text,
-                        mNewSmsApplicationData.mApplicationName);
+                        mNewSmsApplicationData.getApplicationName(this));
             }
             p.mPositiveButtonText = getString(R.string.yes);
             p.mNegativeButtonText = getString(R.string.no);
