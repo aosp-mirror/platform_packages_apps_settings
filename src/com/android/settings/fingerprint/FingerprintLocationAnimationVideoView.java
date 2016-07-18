@@ -56,11 +56,20 @@ public class FingerprintLocationAnimationVideoView extends TextureView
     protected void onFinishInflate() {
         super.onFinishInflate();
         setSurfaceTextureListener(new SurfaceTextureListener() {
+            private SurfaceTexture mTextureToDestroy = null;
+
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
                     int height) {
                 setVisibility(View.INVISIBLE);
                 Uri videoUri = resourceEntryToUri(mContext, R.raw.fingerprint_location_animation);
+                if (mMediaPlayer != null) {
+                    mMediaPlayer.release();
+                }
+                if (mTextureToDestroy != null) {
+                    mTextureToDestroy.release();
+                    mTextureToDestroy = null;
+                }
                 mMediaPlayer = MediaPlayer.create(mContext, videoUri);
                 mMediaPlayer.setSurface(new Surface(surfaceTexture));
                 mMediaPlayer.setOnPreparedListener(new OnPreparedListener() {
@@ -91,6 +100,7 @@ public class FingerprintLocationAnimationVideoView extends TextureView
 
             @Override
             public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
+                mTextureToDestroy = surfaceTexture;
                 return false;
             }
 
