@@ -41,7 +41,6 @@ public class FingerprintLocationAnimationVideoView extends TextureView
 
     public FingerprintLocationAnimationVideoView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
     }
 
     @Override
@@ -50,6 +49,10 @@ public class FingerprintLocationAnimationVideoView extends TextureView
         int originalWidth = MeasureSpec.getSize(widthMeasureSpec);
         int height = Math.round(mAspect * originalWidth);
         super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
+    }
+
+    protected Uri getFingerprintLocationAnimation() {
+        return resourceEntryToUri(getContext(), R.raw.fingerprint_location_animation);
     }
 
     @Override
@@ -62,7 +65,7 @@ public class FingerprintLocationAnimationVideoView extends TextureView
             public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
                     int height) {
                 setVisibility(View.INVISIBLE);
-                Uri videoUri = resourceEntryToUri(mContext, R.raw.fingerprint_location_animation);
+                Uri videoUri = getFingerprintLocationAnimation();
                 if (mMediaPlayer != null) {
                     mMediaPlayer.release();
                 }
@@ -110,7 +113,7 @@ public class FingerprintLocationAnimationVideoView extends TextureView
         });
     }
 
-    private static Uri resourceEntryToUri (Context context, int id) {
+    protected static Uri resourceEntryToUri (Context context, int id) {
         Resources res = context.getResources();
         return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
                 res.getResourcePackageName(id) + '/' +
