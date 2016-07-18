@@ -274,4 +274,14 @@ public class FakeUid extends Uid {
     public Timer getBluetoothScanTimer() {
         return null;
     }
+
+    @Override
+    public long getWifiRadioApWakeupCount(int which) {
+        return 0;
+    }
+
+    @Override
+    public long getMobileRadioApWakeupCount(int which) {
+        return 0;
+    }
 }
