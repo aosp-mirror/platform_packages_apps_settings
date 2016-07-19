@@ -39,6 +39,7 @@ import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.gestures.GestureSettings;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
@@ -219,6 +220,13 @@ public final class SearchIndexableResources {
                         NO_DATA_RES_ID,
                         UserSettings.class.getName(),
                         R.drawable.ic_settings_multiuser));
+
+        sResMap.put(GestureSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(GestureSettings.class.getName()),
+                        NO_DATA_RES_ID,
+                        GestureSettings.class.getName(),
+                        R.drawable.ic_settings_gestures));
 
         sResMap.put(LocationSettings.class.getName(),
                 new SearchIndexableResource(
