@@ -513,7 +513,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         // To be able to dismiss dialog at that time, don't check
         // mDialogFragment.isVisible().
         if (mDialogFragment != null && mDialogFragment.getDialogId() == dialogId) {
-            mDialogFragment.dismiss();
+            mDialogFragment.dismissAllowingStateLoss();
         }
         mDialogFragment = null;
     }
