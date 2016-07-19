@@ -93,7 +93,7 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="PreferenceTheme" parent="Theme.SettingsBase">
+    <style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
         <item name="@android:preferenceStyle">@style/Preference</item>
         <item name="@android:editTextPreferenceStyle">@style/EditTextPreference</item>
         <item name="@dropdownPreferenceStyle">@style/Preference.DropDown.Material</item>
