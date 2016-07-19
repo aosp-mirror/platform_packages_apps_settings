@@ -230,6 +230,9 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                 if (!isSystemUINavigationAvailable(context)) {
                     result.add(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
                 }
+                if (!isDoubleTwistAvailable(context)) {
+                    result.add(PREF_KEY_DOUBLE_TWIST);
+                }
                 return result;
             }
         };
