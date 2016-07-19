@@ -272,7 +272,7 @@ public final class CredentialStorage extends Activity {
             }
         }
 
-        int flags = (uid == Process.WIFI_UID) ? KeyStore.FLAG_NONE : KeyStore.FLAG_ENCRYPTED;
+        int flags = KeyStore.FLAG_NONE;
 
         if (bundle.containsKey(Credentials.EXTRA_USER_CERTIFICATE_NAME)) {
             String certName = bundle.getString(Credentials.EXTRA_USER_CERTIFICATE_NAME);
