@@ -44,6 +44,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+import android.provider.Settings.Global;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -241,6 +242,11 @@ public class UserSettings extends SettingsPreferenceFragment
         loadProfile();
         updateUserList();
         mShouldUpdateUserList = false;
+
+        if (Global.getInt(getContext().getContentResolver(), Global.DEVICE_PROVISIONED, 0) == 0) {
+            getActivity().finish();
+            return;
+        }
     }
 
     @Override
