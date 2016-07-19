@@ -905,34 +905,20 @@
     <skip />
     <!-- no translation found for night_display_text (8753843222371219454) -->
     <skip />
-    <!-- no translation found for night_display_auto_mode_title (8046314360381608455) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_never (6723636142053240947) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_custom (6012300346981608242) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_twilight (2123345097508167094) -->
-    <skip />
-    <!-- no translation found for night_display_start_time_title (8918016772613689584) -->
-    <skip />
-    <!-- no translation found for night_display_end_time_title (8286061578083519350) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off (1792750041697946539) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_never (8865054549719499274) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_custom (4962295097132112885) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_twilight (5520577516590422267) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on (1355713529996456744) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_never (44005841579902825) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_custom (4350556852471560173) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_twilight (6122152828111119250) -->
-    <skip />
+    <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Ieslēgt automātiski"</string>
+    <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Nekad"</string>
+    <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Pielāgots grafiks"</string>
+    <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"No saulrieta līdz saullēktam"</string>
+    <string name="night_display_start_time_title" msgid="8918016772613689584">"Sākuma laiks"</string>
+    <string name="night_display_end_time_title" msgid="8286061578083519350">"Beigu laiks"</string>
+    <string name="night_display_summary_off" msgid="1792750041697946539">"Izslēgts/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Nekad neieslēgt automātiski"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Automātiski ieslēgt <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Automātiski ieslēgt saulrietā"</string>
+    <string name="night_display_summary_on" msgid="1355713529996456744">"Ieslēgts/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Nekad automātiski neizslēgt"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Automātiski izslēgt <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Automātiski izslēgt saullēktā"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Miega režīms"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekrāns tiek izslēgts"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Pēc <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neaktivitātes"</string>
@@ -2526,8 +2512,7 @@
     <string name="keywords_display" msgid="8910345814565493016">"ekrāns, skārienekrāns"</string>
     <string name="keywords_display_brightness_level" msgid="3891383826236015854">"tumšs ekrāns, skārienekrāns, akumulators"</string>
     <string name="keywords_display_auto_brightness" msgid="3325150824507953765">"aptumšot ekrānu, skārienekrāns, akumulators"</string>
-    <!-- no translation found for keywords_display_night_display (7630169927425425754) -->
-    <skip />
+    <string name="keywords_display_night_display" msgid="7630169927425425754">"ekrāna aptumšošana, nakts, tonējums"</string>
     <string name="keywords_display_wallpaper" msgid="7362076351860131776">"fons, personalizēt, pielāgot displeju"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"teksta lielums"</string>
     <string name="keywords_display_cast_screen" msgid="7684618996741933067">"projicēt, apraide"</string>
@@ -2784,6 +2769,8 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Kad ievadīsiet PIN kodu, lai sāknētu šo ierīci, pieejamības pakalpojumi, piemēram, <xliff:g id="SERVICE">%1$s</xliff:g>, vēl nebūs pieejami."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Kad ievadīsiet kombināciju, lai sāknētu šo ierīci, pieejamības pakalpojumi, piemēram, <xliff:g id="SERVICE">%1$s</xliff:g>, vēl nebūs pieejami."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Kad ievadīsiet paroli, lai sāknētu šo ierīci, pieejamības pakalpojumi, piemēram, <xliff:g id="SERVICE">%1$s</xliff:g>, vēl nebūs pieejami."</string>
+    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
+    <skip />
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI informācija"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Ar IMEI saistīta informācija"</string>
     <string name="slot_number" msgid="3762676044904653577">"(<xliff:g id="SLOT_NUM">%1$d</xliff:g>. slots)"</string>
@@ -3228,11 +3215,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuāli"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Atbrīvot vietu"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Žesti"</string>
-    <!-- no translation found for gesture_preference_summary (8627850388011956901) -->
-    <skip />
+    <string name="gesture_preference_summary" msgid="8627850388011956901">"Ātri žesti tālruņa pārvaldībai"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Pāriešana uz kameru"</string>
-    <!-- no translation found for double_tap_power_for_camera_summary (6988157149749655988) -->
-    <skip />
+    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Lai ātri atvērtu kameru, veiciet dubultskārienu uz barošanas pogas. Šī funkcija darbojas jebkurā ekrānā."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Apvērst kameru"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Ātra ekrāna skatīšana"</string>
