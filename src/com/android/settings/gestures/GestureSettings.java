@@ -28,7 +28,6 @@ import android.provider.Settings.Secure;
 import android.support.v7.preference.Preference;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,42 +58,35 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     private static final String ARG_SCROLL_TO_PREFERENCE = "gesture_scroll_to_preference";
 
     private int mScrollPosition = -1;
+    private List<GesturePreference> mPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.gesture_settings);
         Context context = getActivity();
+        mPreferences = new ArrayList();
 
          // Double tap power for camera
         if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
             int cameraDisabled = Secure.getInt(
                     getContentResolver(), Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
-            GesturePreference preference =
-                    (GesturePreference) findPreference(PREF_KEY_DOUBLE_TAP_POWER);
-            preference.setChecked(cameraDisabled == 0);
-            preference.setOnPreferenceChangeListener(this);
+            addPreference(PREF_KEY_DOUBLE_TAP_POWER, cameraDisabled == 0);
         } else {
             removePreference(PREF_KEY_DOUBLE_TAP_POWER);
         }
 
         // Ambient Display
         if (isDozeAvailable(context)) {
-            GesturePreference preference =
-                    (GesturePreference) findPreference(PREF_KEY_PICK_UP_AND_NUDGE);
             int dozeEnabled = Secure.getInt(getContentResolver(), Secure.DOZE_ENABLED, 1);
-            preference.setChecked(dozeEnabled != 0);
-            preference.setOnPreferenceChangeListener(this);
+            addPreference(PREF_KEY_PICK_UP_AND_NUDGE, dozeEnabled != 0);
         } else {
             removePreference(PREF_KEY_PICK_UP_AND_NUDGE);
         }
 
         // Fingerprint slide for notifications
         if (isSystemUINavigationAvailable(context)) {
-            GesturePreference preference =
-                    (GesturePreference) findPreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
-            preference.setChecked(isSystemUINavigationEnabled(context));
-            preference.setOnPreferenceChangeListener(this);
+            addPreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT, isSystemUINavigationEnabled(context));
         } else {
             removePreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
         }
@@ -103,10 +95,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         if (isDoubleTwistAvailable(context)) {
             int doubleTwistEnabled = Secure.getInt(
                     getContentResolver(), Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
-            GesturePreference preference =
-                    (GesturePreference) findPreference(PREF_KEY_DOUBLE_TWIST);
-            preference.setChecked(doubleTwistEnabled != 0);
-            preference.setOnPreferenceChangeListener(this);
+            addPreference(PREF_KEY_DOUBLE_TWIST, doubleTwistEnabled != 0);
         } else {
             removePreference(PREF_KEY_DOUBLE_TWIST);
         }
@@ -128,9 +117,28 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
+        RecyclerView listview = getListView();
         if (mScrollPosition >= 0) {
-            getListView().scrollToPosition(mScrollPosition);
+            listview.scrollToPosition(mScrollPosition);
         }
+        listview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    for (GesturePreference pref : mPreferences) {
+                        pref.setScrolling(true);
+                    }
+                } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    for (GesturePreference pref : mPreferences) {
+                        pref.setScrolling(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            }
+        });
         return view;
     }
 
@@ -201,6 +209,13 @@ public class GestureSettings extends SettingsPreferenceFragment implements
             }
         }
         return false;
+    }
+
+    private void addPreference(String key, boolean enabled) {
+        GesturePreference preference = (GesturePreference) findPreference(key);
+        preference.setChecked(enabled);
+        preference.setOnPreferenceChangeListener(this);
+        mPreferences.add(preference);
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
