@@ -17,22 +17,16 @@ package com.android.settings.gestures;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.PorterDuff;
 import android.graphics.SurfaceTexture;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Surface;
 import android.view.TextureView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -52,6 +46,7 @@ public final class GesturePreference extends SwitchPreference {
     private MediaMetadataRetriever mMediaMetadata;
     private boolean mAnimationAvailable;
     private boolean mPreviewReady;
+    private boolean mScrolling;
 
     public GesturePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -69,6 +64,23 @@ public final class GesturePreference extends SwitchPreference {
                     .build();
             mMediaMetadata = new MediaMetadataRetriever();
             mMediaMetadata.setDataSource(mContext, mVideoPath);
+            mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
+            if (mMediaPlayer != null) {
+                mMediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
+                    @Override
+                    public void onSeekComplete(MediaPlayer mp) {
+                        mPreviewReady = true;
+                        mMediaPlayer.setOnSeekCompleteListener(null);
+                    }
+                });
+
+                mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        mediaPlayer.setLooping(true);
+                    }
+                });
+            }
             mAnimationAvailable = true;
         } catch (Exception e) {
             Log.w(TAG, "Animation resource not found. Will not show animation.");
@@ -111,25 +123,9 @@ public final class GesturePreference extends SwitchPreference {
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width,
                     int height) {
-                mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
                 if (mMediaPlayer != null) {
                     mMediaPlayer.setSurface(new Surface(surfaceTexture));
-                    mMediaPlayer.setOnSeekCompleteListener(
-                            new MediaPlayer.OnSeekCompleteListener() {
-                                @Override
-                                public void onSeekComplete(MediaPlayer mp) {
-                                    mPreviewReady = true;
-                                    mMediaPlayer.setOnSeekCompleteListener(null);
-                                }
-                            });
-
-                    mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mediaPlayer) {
-                            mediaPlayer.seekTo(0);
-                            mediaPlayer.setLooping(true);
-                        }
-                    });
+                    mMediaPlayer.seekTo(0);
                 }
             }
 
@@ -140,12 +136,6 @@ public final class GesturePreference extends SwitchPreference {
 
             @Override
             public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
-                imageView.setVisibility(View.VISIBLE);
-                if (mMediaPlayer != null) {
-                    mMediaPlayer.stop();
-                    mMediaPlayer.reset();
-                    mMediaPlayer.release();
-                }
                 return false;
             }
 
@@ -153,6 +143,12 @@ public final class GesturePreference extends SwitchPreference {
             public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
                 if (mPreviewReady && imageView.getVisibility() == View.VISIBLE) {
                     imageView.setVisibility(View.GONE);
+                } else if (mScrolling) {
+                    mScrolling = false;
+                    if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
+                        mMediaPlayer.pause();
+                        playButton.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });
@@ -161,8 +157,19 @@ public final class GesturePreference extends SwitchPreference {
 
     @Override
     public void onDetached() {
-        mMediaMetadata.release();
+        if (mMediaMetadata != null) {
+            mMediaMetadata.release();
+        }
+        if (mMediaPlayer != null) {
+            mMediaPlayer.stop();
+            mMediaPlayer.reset();
+            mMediaPlayer.release();
+        }
         super.onDetached();
+    }
+
+    void setScrolling(boolean scrolling) {
+        mScrolling = scrolling;
     }
 
 }
