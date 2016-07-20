@@ -142,6 +142,7 @@ public class ConditionManager {
         addIfMissing(CellularDataCondition.class, conditions);
         addIfMissing(BackgroundDataCondition.class, conditions);
         addIfMissing(WorkModeCondition.class, conditions);
+        addIfMissing(NightDisplayCondition.class, conditions);
         Collections.sort(conditions, CONDITION_COMPARATOR);
     }
 
@@ -167,6 +168,8 @@ public class ConditionManager {
             return new BackgroundDataCondition(this);
         } else if (WorkModeCondition.class == clz) {
             return new WorkModeCondition(this);
+        } else if (NightDisplayCondition.class == clz) {
+            return new NightDisplayCondition(this);
         }
         throw new RuntimeException("Unexpected Condition " + clz);
     }
