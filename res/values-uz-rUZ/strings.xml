@@ -155,7 +155,7 @@
     <skip />
     <string name="intent_sender_sendbroadcast_text" msgid="1415735148895872715">"<xliff:g id="BROADCAST">broadcast</xliff:g> yuborish"</string>
     <string name="intent_sender_action_label" msgid="616458370005452389">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
-    <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Boshlang‘ich <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
+    <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Boshlash: <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Hisob:"</string>
     <string name="proxy_settings_title" msgid="9049437837600320881">"Proksi-server"</string>
@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Siz kiritgan parol to‘g‘ri, biroq planshetdagi ma’lumotlar shikastlangan.\n\nPlanshetdan foydalanishda davom etish uchun uning zavod sozlamalarini tiklashingiz lozim. Shundan so‘ng, Google hisobingizga zaxiralangan barcha ma’lumotlaringizni qayta tiklab olishingiz mumkin bo‘ladi."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Siz kiritgan parol to‘g‘ri, biroq telefondagi ma’lumotlar shikastlangan.\n\nTelefondan foydalanishda davom etish uchun uning zavod sozlamalarini tiklashingiz lozim. Shundan so‘ng, Google hisobingizga zaxiralangan barcha ma’lumotlaringizni qayta tiklab olishingiz mumkin bo‘ladi."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Yozish usulini o‘zgartirish"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"Ekranni qulfini o‘rnatish"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Qurilmangizni himoyalang"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"Barmoq izidan foydalaning"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Barmoq izingiz bilan oching"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Ekran qulfini tanlang"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Ishchi profil qulfini tanlang"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Agar bu urinishda ishchi profil parolini noto‘g‘ri kiritsangiz, ishchi profilingiz va unga bog‘liq ma’lumotlar mazkur qurilmadan o‘chirib tashlanadi."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Juda ko‘p marta muvaffaqiyatsiz urinishlar amalga oshirildi. Ishchi profilingiz va unga bog‘liq ma’lumotlar bu qurilmadan o‘chirib tashlanadi."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Yopish"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"Parol kamida %d ta belgidan iborat bo‘lishi lozim"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN kod kamida %d ta raqamdan iborat bo‘lishi shart"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Davom etish"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"Parol ko‘pi bilan <xliff:g id="NUMBER">%d</xliff:g> ta belgidan iborat bo‘lishi lozim."</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"PIN kod ko‘pi bilan <xliff:g id="NUMBER">%d</xliff:g> ta raqamdan iborat bo‘lishi lozim."</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"PIN kod faqat 0-9 raqamlaridan iborat bo‘lishi lozim."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Qurilma administratori yaqinda foydalanilgan PIN koddan yana foydalanishga ruxsat bermaydi."</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Parol yaroqsiz belgidan iborat bo‘lmasligi lozim"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Parol kamida bitta harfdan iborat bo‘lishi lozim"</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Parol kamida bitta raqamdan iborat bo‘lishi lozim"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"Parol kamida bitta belgidan iborat bo‘lishi lozim"</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">Parol tarkibida kamida %d ta harf bo‘lishi lozim</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta harf bo‘lishi lozim</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="other">Parol tarkibida kamida %d ta kichik harf bo‘lishi lozim</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta kichik harf bo‘lishi lozim</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="other">Parol tarkibida kamida %d ta bosh harf bo‘lishi lozim</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta bosh harf bo‘lishi lozim</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="other">Parol tarkibida kamida %d ta raqam bo‘lishi lozim</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta raqam bo‘lishi lozim</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="other">Parol tarkibida kamida %d ta maxsus belgi bo‘lishi lozim</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta maxsus belgi bo‘lishi lozim</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="other">Parol tarkibida kamida %d ta harf bo‘lmagan belgi bo‘lishi lozim</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta harf bo‘lmagan belgi bo‘lishi lozim</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"Qurilma administratori yaqinda foydalanilgan paroldan yana foydalanishga ruxsat bermaydi."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"O\'sib boruvchi, pasayib boruvchi yoki qaytarilgan ketma-ketlik raqamlari cheklangan"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Ovoz balandligi"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Musiqa effektlari"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"Qo‘ng‘iroq ovozi"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Ovozsizligida tebranish"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Standart bildirishnoma signali"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Rington"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ekran yorqinligini moslash"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Moslashuvchan yorqinlik"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Yorqinlikni yorug‘lik darajasiga qarab moslashtirish"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"Tungi rejim"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"Tungi rejim kech tushishi bilan ekraningiz tusini qizg‘ish rangga o‘zgartiradi. Bu ekranga xira yorug‘da qarashni osonlashtiradi va osonroq uyquga ketishga yordamlashadi."</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Avtomatik yoqish"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Hech qachon"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Maxsus jadval"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Avtomatik yorqinlik"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Tik holatda faollashtirish"</string>
     <string name="doze_title" msgid="2259176504273878294">"Sezgir ekran"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"Bildirishnoma kelganda yoki ekran ikki marta bosilganda yonadi. Batafsil ma’lumot"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Shrift o‘lchami"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Matnni kattalashtirish yoki kichiklashtirish"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM karta qulfi sozlamalari"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"Hissa qo‘shganlar"</string>
     <string name="manual" msgid="3025943393642974445">"Qo‘llanma"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"Sertifikat yorliqlari"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Xavfsizlik va sertifikat qo‘llanmasi"</string>
     <string name="copyright_title" msgid="865906688917260647">"Mualliflik huquqi"</string>
     <string name="license_title" msgid="1990487604356037871">"Litsenziya"</string>
     <string name="terms_title" msgid="7697580845616764642">"Foydalanish shartlari"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Ilova telefoningizga o‘rnatilmagan."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Ishchi profil xavfsizligi"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Ishchi profil ekran qulfi"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"Bitta qulfdan foydalanish"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"Ishchi profil va qurilma ekrani uchun bitta qulfdan foydalanish"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"Bitta qulfdan foydalanilsinmi?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"Ishchi profil va qurilmaning ekran qulfi bir xil. Har qanday ishchi profil qulfi qoidalari ham qurilma ekrani qulfiga ham qo‘llaniladi."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"Ishchi profilning ekran qulfi sozlamalari tashkilotingiz xavfsizlik qoidalariga mos kelmaydi. Qurilma ekrani va ishchi profil uchun bitta qulfdan foydalanishingiz mumkin. Lekin har qanday ishchi profil qulfi qoidalari qo‘llaniladi."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"Bitta qulfdan foydalanish"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"Bitta qulfdan foydalanish"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Qurilmaning qulflash usulidan foydalanish"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Ilovalar boshqaruvi"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"O‘rnatilgan ilovlarni boshqarish yoki o‘chirish"</string>
@@ -2216,7 +2212,7 @@
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Pulli tarmoqlarni belgilash uchun Wi-Fi aloqasini yoqing."</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"Aloqa operatorining hisob-kitobi qurilmanikidan farq qilishi mumkin."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Favqulotda qo‘ng‘iroq"</string>
-    <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Qo‘ng‘iroqqa qaytish"</string>
+    <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Chaqiruvga qaytish"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Tarmoq nomi"</string>
     <string name="vpn_type" msgid="5435733139514388070">"Turi"</string>
     <string name="vpn_server" msgid="2123096727287421913">"Server manzili"</string>
@@ -2539,10 +2535,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Ma’lumotlarni yozib bo‘lmadi. Agar muammo bartaraf qilinmasa, boshqa NFC yorliqni tanlang."</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Ushbu NFC yorliqqa ma’lumot yozib bo‘lmaydi. Boshqa yorliqni tanlang."</string>
     <string name="default_sound" msgid="8821684447333687810">"Birlamchi ovoz"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"Qo‘ng‘iroq ovozi balandligi: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Qo‘ng‘iroq ovozi balandligi: 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Multimedia ovozi"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Signal ovozi"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Rington"</string>
@@ -2751,8 +2745,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Ushbu qurilmani ishga tushirish uchun PIN-kodni kiritganingizda, “<xliff:g id="SERVICE">%1$s</xliff:g>” kabi maxsus xizmatlar hali yoqilmagan bo‘ladi."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Ushbu qurilmani ishga tushirish uchun chizmali parolni kiritganingizda, “<xliff:g id="SERVICE">%1$s</xliff:g>” kabi maxsus xizmatlar hali yoqilmagan bo‘ladi."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Ushbu qurilmani ishga tushirish uchun parolni kiritganingizda, “<xliff:g id="SERVICE">%1$s</xliff:g>” kabi maxsus xizmatlar hali yoqilmagan bo‘ladi."</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Eslatma: O‘chirib-yoqilgandan so‘ng, bu ilova to telefoningiz qulfdan chiqarilmaguncha ishga tushmaydi"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI kod ma’lumotlari"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI raqamiga aloqador ma’lumotlar"</string>
     <string name="slot_number" msgid="3762676044904653577">"(<xliff:g id="SLOT_NUM">%1$d</xliff:g>-uya)"</string>
@@ -3026,6 +3019,10 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Fondagi internet faqat Wi-Fi orqali ishlaydi. Agar Wi-Fi o‘chiq bo‘lsa, bu bir qancha ilovalar va xizmatlarning ishlashiga ta’sir qilishi mumkin."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Ishchi profil o‘chirilgan"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Ishchi profil bilan bog‘liq ilovalar, fonda sinxronlash va boshqa funksiyalar o‘chirib qo‘yildi."</string>
+    <!-- no translation found for condition_night_display_title (5599814941976856183) -->
+    <skip />
+    <!-- no translation found for condition_night_display_summary (6156601053674688864) -->
+    <skip />
     <string name="suggestions_title" msgid="7280792342273268377">"Tavsiyalar"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Olib tashlash"</string>
@@ -3074,8 +3071,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Qurilmangizni xavfsiz ishga tushirish uchun PIN kod shart. Qurilma o‘chiqligida qo‘ng‘iroqlar, xabarlar, bildirishnomalar va uyg‘otkich signallarini qabul qila olmaydi."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Qurilmangizni xavfsiz ishga tushirish uchun parol shart. Qurilma o‘chiqligida qo‘ng‘iroqlar, xabarlar, bildirishnomalar va uyg‘otkich signallarini qabul qila olmaydi."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Yana bitta barmoq izi qo‘shing"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Boshqa barmoq bilan ochish"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Yoniq / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"O‘chiq / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Hech qachon avtomatik yoqilmasin"</string>
@@ -3116,10 +3112,8 @@
     <string name="special_access" msgid="8275242424094109976">"Maxsus ruxsat"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Foydalanuvchi ma’lumotlari o‘chirib tashlanib, shifrlashga o‘tilsinmi?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"O‘chirib tashlash va o‘girish"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager hisoblagichini qaytadan boshlash"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager hisoblagichi qaytadan boshlandi"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Ekran qulfi bildirishnomalarini boshqaring"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Bildirishnomani ko‘rsatish yoki berkitish"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Hammasi"</string>
@@ -3133,8 +3127,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"Demo rejim"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Sizga yordam berish uchun shu yerdamiz"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Biz kecha-yu kunduz xizmatingizdamiz"</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Biz kecha-yu kunduz xizmatingizdamiz"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"Bizning ko‘mak jamoamiz har qanday masalani hal qilish uchun xizmatingizda"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Ko‘mak markazimiz jamoasi kecha-yu kunduz xizmatingizda"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Muammolar yechimini qidiring yoki ko‘mak xizmati ish soatlarida (mahalliy vaqt bilan) bog‘laning:&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3192,11 +3185,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kamerani almashtirish"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Ekranni tezkor tekshirish"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"Telefoningizni to‘liq yoqmagan holda tekshirish uchun ekranini ikki marta bosing yoki uni qo‘lingizga oling"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Bildirishnomalarni ochish uchun suring"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Bildirishnomalarni ko‘rish uchun telefon orqasida joylashgan barmoq izi skanerida barmog‘ingizni pastga suring"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Yoniq"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"O‘chiq"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"OT yuklagich allaqachon qulfdan chiqarilgan"</string>

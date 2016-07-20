@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Lösenordet du angav är korrekt, men dina data har korrumperats. \n\nOm du vill fortsätta använda surfplattan måste du återställa standardinställningarna. När du har konfigurerat surfplattan efter återställningen har du möjlighet att återställa alla data som har säkerhetskopierats i ditt Google-konto."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Lösenordet du angav är korrekt, men dina data har korrumperats. \n\nOm du vill fortsätta använda mobilen måste du återställa standardinställningarna. När du har konfigurerat mobilen efter återställningen har du möjlighet att återställa alla data som har säkerhetskopierats i ditt Google-konto."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Växla inmatningsmetod"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"Konfigurera skärmlåset"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Skydda enheten"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"Använd ditt fingeravtryck"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Lås upp med ditt fingeravtryck"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Välj skärmlås"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Välj jobblås"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Om du anger fel lösenord under det här försöket kommer jobbprofilen och den data som har kopplats till profilen att tas bort från enheten."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"För många felaktiga försök. Jobbprofilen och data som har kopplats till den tas bort från enheten."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Ignorera"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"Måste innehålla minst %d tecken"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN-koden måste innehålla minst %d siffror"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Fortsätt"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"Måste vara kortare än <xliff:g id="NUMBER">%d</xliff:g> tecken."</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"Får inte innehålla fler än <xliff:g id="NUMBER">%d</xliff:g> siffror."</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"Får endast innehålla siffrorna 0–9."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Enhetsadministratören tillåter inte att en PIN-kod som använts nyligen används igen."</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Får inte innehålla ogiltiga tecken"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Måste innehålla minst en bokstav"</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Måste innehålla minst en siffra"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"Måste innehålla minst en symbol"</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">Måste innehålla minst %d bokstäver</item>
+      <item quantity="one">Måste innehålla minst en bokstav</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="other">Måste innehålla minst %d små bokstäver</item>
+      <item quantity="one">Måste innehålla minst en liten bokstav</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="other">Måste innehålla minst %d stora bokstäver</item>
+      <item quantity="one">Måste innehålla minst en stor bokstav</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="other">Måste innehålla minst %d siffror</item>
+      <item quantity="one">Måste innehålla minst en siffra</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="other">Måste innehålla minst %d specialsymboler</item>
+      <item quantity="one">Måste innehålla minst en specialsymbol</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="other">Måste innehålla minst %d tecken som inte är bokstäver</item>
+      <item quantity="one">Måste innehålla minst ett tecken som inte är en bokstav</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"Enhetsadministratören tillåter inte att ett lösenord som använts nyligen används igen."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"En stigande, sjunkande eller upprepad sekvens av siffror är inte tillåten"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volymer"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Musikeffekter"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"Ringvolym"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrera vid tyst"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Standardljud för meddelanden"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Ringsignal"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ändra skärmens ljusstyrka"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Anpassad ljusstyrka"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimera ljusstyrkan efter det tillgängliga ljuset"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"Nattljus"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"Med nattljus blir skärmen rödtonad på natten. Då ser du bättre i dunkelt ljus och det kan bli lite lättare att somna."</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Aktivera automatiskt"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Aldrig"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Anpassat schema"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk ljusstyrka"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Gå ur viloläget vid lyft"</string>
     <string name="doze_title" msgid="2259176504273878294">"Aktiv låsskärm"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"Aktivera skärmen när du trycker på den snabbt två gånger eller när du får en ny avisering. Visa hur"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Teckenstorlek"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Gör texten större eller mindre."</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Låsinställningar för SIM-kort"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"Medarbetare"</string>
     <string name="manual" msgid="3025943393642974445">"Handbok"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"Föreskriftsetiketter"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Säkerhet och föreskrifter"</string>
     <string name="copyright_title" msgid="865906688917260647">"Upphovsrätt"</string>
     <string name="license_title" msgid="1990487604356037871">"Licens"</string>
     <string name="terms_title" msgid="7697580845616764642">"Användarvillkor"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Appen är inte installerad på mobilen."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Säkerhet i jobbprofilen"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Skärmlås för jobbprofilen"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"Använd ett lås"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"Använd ett lås för både jobbprofilen och enhetens skärm"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"Vill du använda ett lås?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"Både jobbprofilen och enhetens skärm använder samma lås. Alla låspolicyer för jobbprofilen tillämpas även på enhetens skärmlås."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"Låset för jobbprofilen uppfyller inte säkerhetskraven från företaget du är anställd hos. Du kan använda samma lås för både enhetsskärmen och jobbprofilen, men alla policyer för jobbprofilens lås gäller."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"Använd ett lås"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"Använd ett lås"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Samma som skärmlåset för enheten"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Hantera appar"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Hantera och ta bort installerade appar"</string>
@@ -2539,10 +2535,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Det går inte att skriva data till NFC-etiketter. Om problemet kvarstår testar du med en annan etikett"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Du kan inte skriva i NFC-etiketten. Använd en annan etikett."</string>
     <string name="default_sound" msgid="8821684447333687810">"Standardsignal"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"Ringvolym på <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Ringvolym på 80 %"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Medievolym"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Alarmvolym"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Ringvolym"</string>
@@ -2751,8 +2745,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Tillgänglighetstjänster som <xliff:g id="SERVICE">%1$s</xliff:g> kommer inte att vara tillgängliga när du anger pinkoden och startar enheten."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Tillgänglighetstjänster som <xliff:g id="SERVICE">%1$s</xliff:g> kommer inte att vara tillgängliga när du ritar ditt mönster och startar enheten."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Tillgänglighetstjänster som <xliff:g id="SERVICE">%1$s</xliff:g> kommer inte att vara tillgängliga när du anger lösenordet och startar enheten."</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Obs! När du har startat om enheten måste du låsa upp mobilen innan du kan starta den här appen"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Information om IMEI-kod"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Relativ information om IMEI-kod"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Plats <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3026,6 +3019,10 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Bakgrundsdata är endast tillgänglig via Wi-Fi. Det här kan påverka vissa appar eller tjänster när du inte har tillgång till Wi-Fi."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Jobbprofilen är inaktiverad"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Appar, bakgrundssynkronisering och andra funktioner som hör till din jobbprofil är inaktiverade."</string>
+    <!-- no translation found for condition_night_display_title (5599814941976856183) -->
+    <skip />
+    <!-- no translation found for condition_night_display_summary (6156601053674688864) -->
+    <skip />
     <string name="suggestions_title" msgid="7280792342273268377">"Förslag"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Ta bort"</string>
@@ -3074,8 +3071,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Kräv pinkod när enheten startar. Du kan inte ta emot samtal, meddelanden, aviseringar eller ställa alarm om inte enheten är påslagen."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Kräv lösenord när enheten startar. Du kan inte ta emot samtal, meddelanden, aviseringar eller ställa alarm om inte enheten är påslagen."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Lägg till ett fingeravtryck"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Lås upp med ett annat finger"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"På/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Av/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Aktivera aldrig automatiskt"</string>
@@ -3116,10 +3112,8 @@
     <string name="special_access" msgid="8275242424094109976">"Särskild åtkomst"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Vill du ta bort användardata och konvertera till filkryptering?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Rensa och konvertera"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Återställ anropsbegränsning för ShortcutManager"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"Anropsbegränsningen för ShortcutManager har återställts"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Hantera aviseringar på låsskärmen"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Visa eller dölja innehåll i aviseringar"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alla"</string>
@@ -3133,8 +3127,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"Demoläge"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Vi hjälper dig gärna"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Vi hjälper dig dygnet runt."</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Vi hjälper dig dygnet runt"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"Vårt supportteam hjälper dig med eventuella problem"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Vårt supportteam finns här dygnet runt, alla dagar"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Sök i hjälpen eller besök oss igen under supportens öppettider (lokal tid):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3192,11 +3185,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Vänd kameran"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Snabbkolla skärmen"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"Om du vill kolla mobilen utan att aktivera den helt kan du trycka på den snabbt två gånger eller plocka upp den."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Svep för aviseringar"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av mobilen"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"På"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Av"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader har redan låsts upp"</string>

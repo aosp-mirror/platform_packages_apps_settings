@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Sandi yang Anda masukkan benar, namun sayangnya data rusak. \n\nUntuk melanjutkan dengan tablet, Anda perlu mengembalikannya ke setelan pabrik. Saat menyiapkan tablet setelah disetel ulang, akan ada kesempatan untuk memulihkan data apa pun yang telah dicadangkan ke Akun Google."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Sandi yang Anda masukkan benar, namun sayangnya data rusak. \n\nUntuk melanjutkan dengan ponsel, Anda perlu mengembalikannya ke setelan pabrik. Jika Anda menyiapkan ponsel setelah setel ulang, akan ada kesempatan untuk memulihkan data apa pun yang telah dicadangkan ke Akun Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Beralih metode masukan"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"Setel kunci layar"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Lindungi perangkat"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"Gunakan sidik jari"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Membuka kunci dengan sidik jari"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Pilih kunci layar"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Pilih kunci profil kerja"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Jika Anda memasukkan sandi yang salah saat mencoba sekarang, profil kerja dan data terkait akan dihapus dari perangkat ini."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Terlalu sering mencoba dengan salah. Profil kerja dan data terkait akan dihapus dari perangkat ini."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Tutup"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"Minimal berisi %d karakter"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN minimal %d digit"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Lanjutkan"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"Harus kurang dari <xliff:g id="NUMBER">%d</xliff:g> karakter."</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"Harus kurang dari <xliff:g id="NUMBER">%d</xliff:g> digit."</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"Hanya boleh berisi angka 0-9."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Administrator perangkat tidak mengizinkan penggunaan PIN terbaru."</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Tidak boleh berisi karakter yang tidak valid"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Minimal berisi satu huruf"</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Minimal berisi satu digit"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"Minimal berisi satu simbol"</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">Minimal berisi %d huruf</item>
+      <item quantity="one">Minimal berisi 1 huruf</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="other">Minimal berisi %d huruf kecil</item>
+      <item quantity="one">Minimal berisi 1 huruf kecil</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="other">Minimal berisi %d huruf besar</item>
+      <item quantity="one">Minimal berisi 1 huruf besar</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="other">Minimal berisi %d digit angka</item>
+      <item quantity="one">Minimal berisi 1 digit angka</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="other">Minimal berisi %d simbol khusus</item>
+      <item quantity="one">Minimal berisi 1 simbol khusus</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="other">Minimal berisi 1 karakter bukan huruf</item>
+      <item quantity="one">Minimal berisi 1 karakter bukan huruf</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"Administrator perangkat tidak mengizinkan penggunaan sandi terbaru."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Urutan digit naik, turun, atau berulang dilarang"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"Oke"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volume"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Efek musik"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"Volume dering"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Getar saat senyap"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Suara notifikasi default"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Nada dering"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"Sesuaikan kecerahan layar"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Kecerahan adaptif"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Mengoptimalkan tingkat kecerahan untuk cahaya yang tersedia"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"Cahaya Malam"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"Cahaya Malam memberi rona merah pada layar di malam hari. Membuat Anda dapat melihat layar atau membaca dengan lebih mudah saat cahaya redup, serta membantu Anda lebih mudah tidur."</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Aktifkan otomatis"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Jangan pernah"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Jadwal khusus"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Kecerahan otomatis"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Angkat untuk membangunkan"</string>
     <string name="doze_title" msgid="2259176504273878294">"Tampilan ruangan"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"Membangunkan layar ketika Anda mengetuknya dua kali atau mendapatkan notifikasi baru. Lihat caranya"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Ukuran font"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Membuat teks menjadi lebih besar atau lebih kecil"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Setelan kunci kartu SIM"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"Kontributor"</string>
     <string name="manual" msgid="3025943393642974445">"Manual"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"Label peraturan"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Manual keselamatan &amp; peraturan"</string>
     <string name="copyright_title" msgid="865906688917260647">"Hak cipta"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisensi"</string>
     <string name="terms_title" msgid="7697580845616764642">"Persyaratan dan ketentuan"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Aplikasi tidak dipasang pada ponsel Anda."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Keamanan profil kerja"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Kunci layar profil kerja"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"Gunakan satu kunci"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"Gunakan satu kunci untuk profil kerja dan layar perangkat"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"Gunakan satu kunci?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"Profil kerja dan layar perangkat akan menggunakan kunci yang sama. Kebijakan kunci profil kerja apa pun juga akan diterapkan ke layar kunci perangkat."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"Kunci profil kerja tidak memenuhi persyaratan keamanan organisasi. Anda dapat menggunakan kunci yang sama untuk layar perangkat dan profil kerja, namun kebijakan kunci profil kerja apa pun akan berlaku."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"Gunakan satu kunci"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"Gunakan satu kunci"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Sama dengan kunci layar perangkat"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Kelola aplikasi"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Mengelola dan menghapus apl terpasang"</string>
@@ -2539,10 +2535,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Tidak dapat menulis data ke tag NFC. Jika masalah berlanjut, coba tag lain"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Tag NFC tidak dapat ditulisi. Gunakan tag lain."</string>
     <string name="default_sound" msgid="8821684447333687810">"Suara default"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"Volume dering <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Volume dering 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Volume media"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volume alarm"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume dering"</string>
@@ -2751,8 +2745,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Jika Anda memasukkan PIN untuk memulai perangkat ini, layanan aksesibilitas seperti <xliff:g id="SERVICE">%1$s</xliff:g> belum dapat tersedia."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Jika Anda memasukkan pola untuk memulai perangkat ini, layanan aksesibilitas seperti <xliff:g id="SERVICE">%1$s</xliff:g> belum dapat tersedia."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Jika Anda memasukkan sandi untuk memulai perangkat ini, layanan aksesibilitas seperti <xliff:g id="SERVICE">%1$s</xliff:g> belum dapat tersedia."</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Catatan: Setelah boot ulang, aplikasi ini tidak dapat dimulai hingga kunci ponsel dibuka"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Informasi IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Informasi relatif IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slot<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3026,6 +3019,10 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Data latar belakang hanya tersedia melalui Wi-Fi. Hal ini dapat memengaruhi beberapa aplikasi atau layanan saat Wi-Fi tidak tersedia."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Profil kerja nonaktif"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Aplikasi, sinkronisasi latar belakang, dan fitur lainnya yang terkait dengan profil kerja Anda dinonaktifkan."</string>
+    <!-- no translation found for condition_night_display_title (5599814941976856183) -->
+    <skip />
+    <!-- no translation found for condition_night_display_summary (6156601053674688864) -->
+    <skip />
     <string name="suggestions_title" msgid="7280792342273268377">"Saran"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"Lebih dari +<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Hapus"</string>
@@ -3074,8 +3071,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Memerlukan PIN untuk memulai perangkat. Jika nonaktif, perangkat ini tidak dapat menerima panggilan telepon, pesan, notifikasi, atau alarm."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Memerlukan sandi untuk memulai perangkat. Jika nonaktif, perangkat ini tidak dapat menerima panggilan telepon, pesan, notifikasi, atau alarm."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Tambahkan sidik jari lain"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Buka kunci dengan jari lain"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Aktif / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Nonaktif / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Jangan aktifkan otomatis"</string>
@@ -3116,10 +3112,8 @@
     <string name="special_access" msgid="8275242424094109976">"Akses khusus"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Benar-benar hapus data pengguna dan konversikan ke enkripsi file?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Hapus dan konversikan"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Setel ulang pembatasan kecepatan PengelolaPintasan"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"Pembatasan kecepatan PengelolaPintasan telah disetel ulang"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Mengontrol notifikasi layar kunci"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Menampilkan atau menyembunyikan konten notifikasi"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Semua"</string>
@@ -3133,8 +3127,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"Mode demo"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Kami siap membantu"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Kami siap sedia di sini untuk Anda 7 x 24 jam"</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Kami siap membantu Anda 7x24 jam"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"Tim dukungan kami siap membantu mengatasi masalah"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Tim dukungan kami siap sedia sepanjang hari, setiap hari."</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Telusuri bantuan atau coba lagi saat jam kerja tim dukungan (waktu lokal):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3192,11 +3185,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Balikkan kamera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Pemeriksaan layar cepat"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"Untuk memeriksa tanpa sepenuhnya membangunkan ponsel, ketuk dua kali atau angkat ponsel"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Sentuh-geser untuk melihat notifikasi"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Untuk memeriksa notifikasi, gesek ke bawah pada sensor sidik jari di bagian belakang ponsel"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Aktif"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Nonaktif"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader telah dibuka kuncinya"</string>

@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"तपाईँले प्रविष्ट गर्नुभएको पासवर्ड ठीक छ, तर दुर्भाग्यबश तपाईँको डेटा बिग्रिएको छ।\n\n तपाईँको ट्याब्लेट पुन: प्रयोग गर्न फ्याक्ट्री रिसेट गर्न पर्छ। रिसेट गरे पश्चात जब तपाई आफ्नो ट्याब्लेट सेटअप गर्नुहुन्छ तपाईँले Google खातामा ब्याकअप भए सम्मका डेटा पुनर्स्थापना गर्ने अवसर प्राप्त गर्नु हुनेछ।"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"तपाईँले प्रविष्ट गर्नुभएको पासवर्ड ठीक छ, तर दुर्भाग्यबश तपाईँको डेटा बिग्रिएको छ।\n\n तपाईँको फोन पुन: प्रयोग गर्न फ्याक्ट्री रिसेट गर्न पर्छ। रिसेट गरे पश्चात जब तपाईँ आफ्नो फोन सेटअप गर्नुहुन्छ तपाईँले Google खातामा ब्याकअप भए सम्मका डेटा पुनर्स्थापना गर्ने अवसर प्राप्त गर्नु हुनेछ।"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"स्विच इनपुट विधि"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"स्क्रिन लक सेट गर्नुहोस्"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"तपाईँको यन्त्र सुरक्षित गर्नुहोस्"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"फिंगरप्रिन्टको प्रयोग गर्नुहोस्"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"तपाईंको फिंगरप्रिन्ट प्रयोग गरी अनलक गर्नुहोस्"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"स्क्रिन लक छान्नुहोस्"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"कार्यका लागि लक छनोट"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"तपाईंले यो प्रयासमा गलत कार्य पासवर्ड प्रविष्ट गर्नुभयो भने, तपाईंको कार्य प्रोफाइल र सम्बन्धित डेटा यो यन्त्रबाट हटाइनेछ।"</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"धेरै पकट गलत प्रयास गरियो। तपाईंको कार्य प्रोफाइल र सम्बन्धित डेटा यो यन्त्रबाट हटाइनेछ।"</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"खारेज गर्नुहोस्"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"कम्तीमा %d वर्णहरू हुन अनिवार्य छ"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN कम्तीमा %d अंकहरूको हुनुपर्दछ"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"जारी राख्नुहोस्"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"<xliff:g id="NUMBER">%d</xliff:g> भन्दा कम वर्णहरू हुनुपर्दछ।"</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"<xliff:g id="NUMBER">%d</xliff:g> भन्दा थोरै अङ्क हुनुपर्छ।"</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"० देखि ९ सम्मका अङ्कहरू मात्र समावेश गर्नुपर्छ।"</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"उपकरण प्रशासकले हालसालको PIN प्रयोग गर्न अनुमति दिँदैन।"</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"यसमा अमान्य वर्ण समावेश गर्न सकिँदैन"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"कम्तीमा एउटा अक्षर हुन अनिवार्य छ"</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"कम्तीमा एउटा अङ्क हुन अनिवार्य छ"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"कम्तीमा एउटा प्रतीक हुन अनिवार्य छ"</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">कम्तीमा %d अक्षरहरू हुन अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा १ अक्षर हुन अनिवार्य छ</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="other">कम्तीमा %d लोअरकेसका अक्षरहरू हुन अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा १ लोअरकेसको अक्षर हुन अनिवार्य छ</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="other">कम्तीमा %d अपरकेसका अक्षरहरू हुन अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा १ अपरकेसको अक्षर हुन अनिवार्य छ</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="other">कम्तीमा %d संख्यात्मक अङ्कहरू हुन अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा १ संख्यात्मक अङ्क हुन अनिवार्य छ</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="other">कम्तीमा %d विशेष प्रतीकहरू हुन अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा १ विशेष प्रतीक हुन अनिवार्य छ</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="other">कम्तीमा ४ गैर-अक्षर वर्णहरू हुन अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा १ गैर-अक्षर वर्ण हुन अनिवार्य छ</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"उपकरण प्रशासकले हालसालको पासवर्ड प्रयोग गर्न अनुमति दिदैन।"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"बढ्दो, घट्दो वा अंकको बारम्बार अनुक्रम निषेध गरिएको छ"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"ठीक छ"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"भोल्युम"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"संगीत प्रभावहरू"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"घन्टीको भोल्युम"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"मौन भएको बेला भाइब्रेट गर्नुहोस्"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"पूर्वनिर्धारित सूचना आवाज"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"रिङटोन"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"स्क्रिनको उज्यालोपना मिलाउनुहोस्"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"अनुकूलीत चमक"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"उपलब्ध प्रकाशका लागि चमक तह प्रभावकारी बनाउँछ"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"रात्रिको प्रकाश"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"रात्रिको प्रकाशले रातको बेला तपाईँको यन्त्रको स्क्रिनलाई हल्का रातो रङको बनाउँछ। यसले मधुरो प्रकाशमा यन्त्रको स्क्रिन हेर्न र पढ्न सजिलो बनाउँछ र तपाईँलाई अझ सजिलैसँग निदाउन मद्दत गर्न सक्छ।"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"स्वतः सक्रिय पार्नुहोस्"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"कहिले पनि होइन"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"अनुकूलन समय सहितको कार्यतालिका"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"स्वचालित उज्यालोपना"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"चालु गर्न उठाउनुहोस्"</string>
     <string name="doze_title" msgid="2259176504273878294">"परिवेश प्रदर्शन"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"तपाईँले यन्त्रमा डबल ट्याप गर्नुहुँदा वा नयाँ सूचनाहरू प्राप्त हुँदा स्क्रिनलाई सक्रिय गर्नुहोस्। तरिका हेर्नुहोस्"</string>
     <string name="title_font_size" msgid="4405544325522105222">"फन्ट आकार"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"पाठ सन्देश अझ ठूलो वा सानो पार्नुहोस्"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM कार्ड लक सेटिङहरू"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"योगदानकर्ताहरू"</string>
     <string name="manual" msgid="3025943393642974445">"म्यानुअल"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"नियामक सम्बन्धी लेबलहरू"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"सुरक्षा र नियामक सम्बन्धी मार्गदर्शन"</string>
     <string name="copyright_title" msgid="865906688917260647">"प्रतिलिपि अधिकार"</string>
     <string name="license_title" msgid="1990487604356037871">"इजाजतपत्र"</string>
     <string name="terms_title" msgid="7697580845616764642">"सेवा सर्तहरू"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"अनुप्रयोग तपाईँको फोनमा स्थापना गरिएको छैन।"</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"कार्य प्रोफाइलको सुरक्षा"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"कार्य प्रोफाइलको स्क्रिन लक"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"एउटै लकको प्रयोग गर्नुहोस्"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"कार्य प्रोफाइल र यन्त्रको स्क्रिनका लागि एउटै लक प्रयोग गर्नुहोस्"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"एउटै लकको प्रयोग गर्ने हो?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"तपाईँको कार्य प्रोफाइल र यन्त्रको स्क्रिनले एउटै लकको प्रयोग गर्नेछ। कार्य प्रोफाइलको लक सम्बन्धी जुनसुकै नीतिहरू तपाईँको यन्त्रको लक स्क्रिनमा पनि लागू हुनेछन्।"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"तपाईँको कार्य प्रोफाइलको लकले तपाईँको संगठनका सुरक्षा सम्बन्धी आवश्यकताहरूलाई पूरा गर्दैन। तपाईँ आफ्नो यन्त्रको स्क्रिन र आफ्नो कार्य प्रोफाइल दुवैका लागि एउटै लकको प्रयोग गर्न सक्नुहुन्छ, तर कार्य प्रोफाइलको लक सम्बन्धी जुनसुकै नीतिहरू लागू हुनेछन्।"</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"एउटै लकको प्रयोग गर्नुहोस्"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"एउटै लकको प्रयोग गर्नुहोस्"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"यन्त्रको स्क्रिन लक जस्तै"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"अनुप्रयोगहरू व्यवस्थापन गर्नुहोस्"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"स्थापित अनुप्रयोगहरू प्रबन्ध गर्नुहोस् र हटाउनुहोस्"</string>
@@ -2539,10 +2535,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"NFC ट्यागमा डेटा लेख्न असक्षम। यदि समस्या भएमा फरक ट्यागमा प्रयास गर्नुहोस्"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC ट्याग लेख्य छैन। फरक ट्याग प्रयोग गर्नुहोस्।"</string>
     <string name="default_sound" msgid="8821684447333687810">"पूर्वनिर्धारित ध्वनि"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> मा सेट गरिँदा घन्टीको भोल्युम"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"८०% मा सेट गरिँदा घन्टीको भोल्युम"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"मिडिया आवाज मात्रा"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"अलार्म मात्रा"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"घन्टीको मात्रा"</string>
@@ -2751,8 +2745,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"यो उपकरण सुरु गर्न जब तपाईँले आफ्नो PIN प्रविष्टि गर्नुहुन्छ, पहुँच सेवा जस्तै <xliff:g id="SERVICE">%1$s</xliff:g> अझै उपलब्ध हुने छैन।"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"यो उपकरण सुरु गर्न जब तपाईँले आफ्नो ढाँचा प्रविष्टि गर्नुहुन्छ, पहुँच सेवा जस्तै <xliff:g id="SERVICE">%1$s</xliff:g> अझै उपलब्ध हुने छैन।"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"यो उपकरण सुरु गर्न जब तपाईँले आफ्नो पासवर्ड प्रविष्टि गर्नुहुन्छ, पहुँच सेवा <xliff:g id="SERVICE">%1$s</xliff:g> जस्तो अझै उपलब्ध हुने छैन।"</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"टिपोट: पुनःबुट पछि तपाईँले आफ्नो फोनलाई अनलक नगरेसम्म यो अनुप्रयोग सुरु हुन सक्दैन"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI जानकारी"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI सान्दर्भिक जानकारी"</string>
     <string name="slot_number" msgid="3762676044904653577">"(घेरा<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3026,6 +3019,10 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"पृष्ठभूमि डेटा Wi-Fi मार्फत मात्र उपलब्ध छ। Wi-Fi उपलब्ध नहुँदा यसले केही अनुप्रयोग वा सेवाहरूलाई प्रभावित गर्न सक्नेछ।"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"कार्यको प्रोफाइल बन्द छ"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"तपाईँको कार्यको प्रोफाइलसँग सम्बन्धित अनुप्रयोग, पृष्ठभूमि सिंक र अन्य विशेषताहरू निष्क्रिय छन्।"</string>
+    <!-- no translation found for condition_night_display_title (5599814941976856183) -->
+    <skip />
+    <!-- no translation found for condition_night_display_summary (6156601053674688864) -->
+    <skip />
     <string name="suggestions_title" msgid="7280792342273268377">"सुझावहरू"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"हटाउनुहोस्"</string>
@@ -3074,8 +3071,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"तपाईंको यन्त्र सुरूवात गर्न PIN आवश्यक छ। यन्त्र बन्द हुँदा, यसले कल, सन्देश, सूचना, वा अलार्महरू प्राप्त गर्न सक्दैन।"</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"तपाईंको यन्त्र स्टार्ट अप गर्न पासवर्ड आवश्यक छ। यन्त्र बन्द हुँदा, यसले कल, सन्देश, सूचना, वा अलार्महरू प्राप्त गर्न सक्दैन।"</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"अर्को फिंगरप्रिन्ट थप्नुहोस्"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"अर्को औँलाको प्रयोग गरी अनलक गर्नुहोस्"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"सक्रिय / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"निष्क्रय / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"कहिल्यै स्वचालित रुपमा सक्रिय नपार्नुहोस्"</string>
@@ -3118,10 +3114,8 @@
     <string name="special_access" msgid="8275242424094109976">"विशेष पहुँच"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"निश्चित रूपमा प्रयोगकर्ताको डेटालाई वाइप गरेर फाइल इन्क्रिप्सनमा रूपान्तरण गर्ने हो?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"वाइप गरेर रूपान्तरण गर्नुहोस्"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager को दर-सीमित गर्ने सुविधालाई रिसेट गर्नुहोस्"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager को दर-सीमित गर्ने सुविधालाई रिसेट गरियो"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"लक स्क्रिनका सूचनाहरूलाई नियन्त्रण गर्नु"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"सूचना सम्बन्धी सामग्री देखाउनुहोस् वा लुकाउनुहोस्"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"सबै"</string>
@@ -3135,8 +3129,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"डेमो मोड"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"हामी मद्दतका लागि तयार छौँ"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"हामी तपाईँको सहायताका लागि २४/७ उपलब्ध छौँ"</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"हामी तपाईँको सहायताका लागि २४ घन्टा ७ दिन उपलब्ध छौँ"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"हाम्रो समर्थन टोली जुनसुकै समस्याको समाधान गर्नमा मद्दतका लागि तयार छ"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"हाम्रो सहायता टोली पूरा दिन र हरेक दिन तपाईँको सहायताका लागि उपलब्ध छ"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"मद्दत खण्डमा गई खोज्नुहोस् वा सहायताको समयावधिमा फेरि आउनुहोस् (स्थानीय समय):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3194,11 +3187,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"क्यामेरा फ्लिप गर्ने"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"द्रुत रूपमा स्क्रिनको जॉंच गर्ने"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"पूर्णतया नउठाइकन आफ्नो फोनको जॉंच गर्न त्यसलाई डबल-ट्याप गर्नुहोस् वा उठाउनुहोस्।"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"सूचनाहरूका लागि स्वाइप गर्ने"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"अफ्ना सूचनाहरूको जाँच गर्न आफ्नो फोनको पछाडिको भागमा रहेको फिंगरप्रिन्ट सेन्सरमा तलतिर स्वाइप गर्नुहोस्"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"सक्रिय"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"निष्क्रिय"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"बुटलोडर पहिले नै अनलक गरिएको छ"</string>
