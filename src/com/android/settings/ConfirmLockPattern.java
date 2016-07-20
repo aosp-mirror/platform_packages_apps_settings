@@ -461,7 +461,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             private void startCheckPattern(final List<LockPatternView.Cell> pattern,
                     final Intent intent) {
                 if (pattern.size() < LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {
-                    mCredentialCheckResultTracker.setResult(false, intent, 0, mEffectiveUserId);
+                    // Pattern size is less than the minimum, do not count it as an fail attempt.
+                    onPatternChecked(false, intent, 0, mEffectiveUserId, false /* newResult */);
                     return;
                 }
 
