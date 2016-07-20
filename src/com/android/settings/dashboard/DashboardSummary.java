@@ -200,10 +200,6 @@ public class DashboardSummary extends InstrumentedFragment
             return;
         }
 
-        List<DashboardCategory> categories =
-                ((SettingsActivity) getActivity()).getDashboardCategories();
-        mAdapter.setCategories(categories);
-
         // recheck to see if any suggestions have been changed.
         new SuggestionLoader().execute();
     }
@@ -235,7 +231,9 @@ public class DashboardSummary extends InstrumentedFragment
 
         @Override
         protected void onPostExecute(List<Tile> tiles) {
-            mAdapter.setSuggestions(tiles);
+            List<DashboardCategory> categories =
+                    ((SettingsActivity) getActivity()).getDashboardCategories();
+            mAdapter.setCategoriesAndSuggestions(categories, tiles);
         }
     }
 }

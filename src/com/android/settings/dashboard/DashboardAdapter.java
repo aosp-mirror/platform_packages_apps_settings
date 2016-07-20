@@ -110,14 +110,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return mSuggestions;
     }
 
-    public void setSuggestions(List<Tile> suggestions) {
-        if (!Objects.equals(mSuggestions, suggestions)) {
-            mSuggestions = suggestions;
-            recountItems();
-        }
-    }
-
     public Tile getTile(ComponentName component) {
+        if (mCategories == null) {
+            return null;
+        }
         for (int i = 0; i < mCategories.size(); i++) {
             for (int j = 0; j < mCategories.get(i).tiles.size(); j++) {
                 Tile tile = mCategories.get(i).tiles.get(j);
@@ -129,10 +125,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return null;
     }
 
-    public void setCategories(List<DashboardCategory> categories) {
-        if (Objects.equals(mCategories, categories)) {
-            return;
-        }
+    public void setCategoriesAndSuggestions(List<DashboardCategory> categories,
+            List<Tile> suggestions) {
+        mSuggestions = suggestions;
         mCategories = categories;
 
         // TODO: Better place for tinting?
