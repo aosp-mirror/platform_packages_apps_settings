@@ -27,7 +27,11 @@
                 android:key="always_on_vpn"
                 android:title="@string/vpn_menu_lockdown"
                 android:defaultValue="false"
-                settings:userRestriction="no_config_vpn"/>
+                android:summaryOn="@string/vpn_always_on_active"
+                android:summaryOff="@string/vpn_always_on_inactive"
+                settings:userRestriction="no_config_vpn"
+                settings:useAdditionalSummary="true"
+                settings:restrictedSwitchSummary="@string/disabled_by_admin_summary_text" />
 
         <com.android.settings.DimmableIconPreference
                 android:key="forget_vpn"
