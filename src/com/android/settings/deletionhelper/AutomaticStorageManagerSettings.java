@@ -150,6 +150,11 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         return true;
     }
 
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_storage;
+    }
+
     private static int daysValueToIndex(int value, String[] indices) {
         for (int i = 0; i < indices.length; i++) {
             int thisValue = Integer.parseInt(indices[i]);
