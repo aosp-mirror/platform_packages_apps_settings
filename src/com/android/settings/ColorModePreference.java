@@ -24,7 +24,6 @@ import android.os.Looper;
 import android.support.v14.preference.SwitchPreference;
 import android.util.AttributeSet;
 import android.view.Display;
-import android.view.Display.ColorTransform;
 
 import java.util.ArrayList;
 
@@ -34,14 +33,14 @@ public class ColorModePreference extends SwitchPreference implements DisplayList
     private Display mDisplay;
 
     private int mCurrentIndex;
-    private ArrayList<ColorTransformDescription> mDescriptions;
+    private ArrayList<ColorModeDescription> mDescriptions;
 
     public ColorModePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDisplayManager = getContext().getSystemService(DisplayManager.class);
     }
 
-    public int getTransformsCount() {
+    public int getColorModeCount() {
         return mDescriptions.size();
     }
 
@@ -77,43 +76,24 @@ public class ColorModePreference extends SwitchPreference implements DisplayList
         mDescriptions = new ArrayList<>();
 
         Resources resources = getContext().getResources();
-        int[] transforms = resources.getIntArray(
-                com.android.internal.R.array.config_colorTransforms);
+        int[] colorModes = resources.getIntArray(R.array.color_mode_ids);
         String[] titles = resources.getStringArray(R.array.color_mode_names);
         String[] descriptions = resources.getStringArray(R.array.color_mode_descriptions);
-        // Map the resource information describing color transforms.
-        for (int i = 0; i < transforms.length; i++) {
-            if (transforms[i] != -1 && i != 1 /* Skip Natural for now. */) {
-                ColorTransformDescription desc = new ColorTransformDescription();
-                desc.colorTransform = transforms[i];
+        // Map the resource information describing color modes.
+        for (int i = 0; i < colorModes.length; i++) {
+            if (colorModes[i] != -1 && i != 1 /* Skip Natural for now. */) {
+                ColorModeDescription desc = new ColorModeDescription();
+                desc.colorMode = colorModes[i];
                 desc.title = titles[i];
                 desc.summary = descriptions[i];
                 mDescriptions.add(desc);
             }
         }
-        // Match up a ColorTransform to every description.
-        ColorTransform[] supportedColorTransforms = mDisplay.getSupportedColorTransforms();
-        for (int i = 0; i < supportedColorTransforms.length; i++) {
-            for (int j = 0; j < mDescriptions.size(); j++) {
-                if (mDescriptions.get(j).colorTransform
-                        == supportedColorTransforms[i].getColorTransform()
-                        && mDescriptions.get(j).transform == null) {
-                    mDescriptions.get(j).transform = supportedColorTransforms[i];
-                    break;
-                }
-            }
-        }
-        // Remove any extras that don't have a transform for some reason.
-        for (int i = 0; i < mDescriptions.size(); i++) {
-            if (mDescriptions.get(i).transform == null) {
-                mDescriptions.remove(i--);
-            }
-        }
 
-        ColorTransform currentTransform = mDisplay.getColorTransform();
+        int currentColorMode = mDisplay.getColorMode();
         mCurrentIndex = -1;
         for (int i = 0; i < mDescriptions.size(); i++) {
-            if (mDescriptions.get(i).colorTransform == currentTransform.getColorTransform()) {
+            if (mDescriptions.get(i).colorMode == currentColorMode) {
                 mCurrentIndex = i;
                 break;
             }
@@ -125,19 +105,18 @@ public class ColorModePreference extends SwitchPreference implements DisplayList
     protected boolean persistBoolean(boolean value) {
         // Right now this is a switch, so we only support two modes.
         if (mDescriptions.size() == 2) {
-            ColorTransformDescription desc = mDescriptions.get(value ? 1 : 0);
+            ColorModeDescription desc = mDescriptions.get(value ? 1 : 0);
 
-            mDisplay.requestColorTransform(desc.transform);
+            mDisplay.requestColorMode(desc.colorMode);
             mCurrentIndex = mDescriptions.indexOf(desc);
         }
 
         return true;
     }
 
-    private static class ColorTransformDescription {
-        private int colorTransform;
+    private static class ColorModeDescription {
+        private int colorMode;
         private String title;
         private String summary;
-        private ColorTransform transform;
     }
 }
