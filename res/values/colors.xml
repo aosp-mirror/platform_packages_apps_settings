@@ -50,14 +50,16 @@
     <color name="setup_wizard_wifi_color_dark">#89ffffff</color>
     <color name="setup_wizard_wifi_color_light">#89000000</color>
 
+    <color name="system_warning_color">#fff4511e</color><!-- deep orange 600 -->
+
     <color name="lock_pattern_background">#00000000</color>
     <color name="lock_pattern_view_regular_color">#ff37474f</color>
-    <color name="lock_pattern_view_error_color">@*android:color/system_error</color>
+    <color name="lock_pattern_view_error_color">@color/warning</color>
 
     <color name="lock_pattern_view_regular_color_dark">#ffffff</color>
 
     <color name="unlock_pattern_view_regular_color">@android:color/white</color>
-    <color name="unlock_pattern_view_error_color">@*android:color/system_error</color>
+    <color name="unlock_pattern_view_error_color">@color/system_warning_color</color>
 
     <color name="fingerprint_title_area_bg">?android:attr/colorAccent</color>
     <color name="fingerprint_title_color">#ffffffff</color>
@@ -74,6 +76,7 @@
     <color name="wifi_divider">#ffe0e0e0</color>
     <color name="sim_noitification">@*android:color/material_deep_teal_500</color>
 
+    <color name="warning">#ff5621</color>
     <color name="confirm_device_credential_transparent_black">#60000000</color>
     <color name="fab_ripple">#1fffffff</color><!-- 12% white -->
     <color name="fab_shape">?android:attr/colorAccent</color>
@@ -88,7 +91,7 @@
 
     <color name="memory_avg_use">#ff384248</color>
 
-    <color name="zen_rule_name_warning">@*android:color/system_error</color>
+    <color name="zen_rule_name_warning">@color/system_warning_color</color>
 
     <!-- Accent color that matches the settings launcher icon -->
     <color name="icon_accent">#ffabffec</color>
