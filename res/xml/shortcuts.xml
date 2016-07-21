@@ -31,21 +31,9 @@
             android:targetClass="com.android.settings.Settings$DataUsageSummaryActivity" />
     </shortcut>
     <shortcut
-        android:shortcutId="manifest-shortcut-display"
-        android:icon="@drawable/ic_shortcut_display"
-        android:shortcutShortLabel="@string/display_settings">
-        <intent android:action="com.android.settings.DISPLAY_SETTINGS" />
-    </shortcut>
-    <shortcut
         android:shortcutId="manifest-shortcut-battery"
         android:icon="@drawable/ic_shortcut_battery"
         android:shortcutShortLabel="@string/power_usage_summary_title" >
         <intent android:action="android.intent.action.POWER_USAGE_SUMMARY" />
-    </shortcut>
-    <shortcut
-        android:shortcutId="manifest-shortcut-storage"
-        android:icon="@drawable/ic_shortcut_storage"
-        android:shortcutShortLabel="@string/storage_settings" >
-        <intent android:action="android.settings.INTERNAL_STORAGE_SETTINGS" />
     </shortcut>
 </shortcuts>
