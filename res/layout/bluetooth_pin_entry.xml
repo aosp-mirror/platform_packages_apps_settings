@@ -28,32 +28,14 @@
         android:layout_width="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/message_caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
-            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
-            android:layout_marginTop="@dimen/bluetooth_dialog_padding"
-            android:gravity="center_vertical"
-            android:textAppearance="@android:style/TextAppearance.Material.Caption" />
-
-        <TextView
-            android:id="@+id/message_subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
-            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
-            android:layout_marginBottom="@dimen/bluetooth_dialog_padding"
-            android:gravity="center_vertical"
-            android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
-
         <EditText
             android:id="@+id/text"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
-            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:layout_marginStart="@dimen/bluetooth_pairing_edittext_padding"
+            android:layout_marginEnd="@dimen/bluetooth_pairing_padding"
+            android:layout_marginTop="11dp"
+            android:minHeight="48dp"
             android:inputType="textPassword"
             android:singleLine="true" />
 
@@ -62,8 +44,9 @@
             android:text="@string/bluetooth_pin_values_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
-            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:layout_marginStart="@dimen/bluetooth_pairing_padding"
+            android:layout_marginEnd="@dimen/bluetooth_pairing_padding"
+            android:layout_marginBottom="6dp"
             android:gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -72,30 +55,37 @@
             android:text="@string/bluetooth_enable_alphanumeric_pin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
-            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:layout_marginStart="@dimen/bluetooth_pairing_padding"
+            android:layout_marginEnd="@dimen/bluetooth_pairing_padding"
+            android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:paddingStart="@dimen/bluetooth_checkbox_padding"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:textColor="?android:attr/textColorSecondary"/>
 
         <TextView
             android:id="@+id/message_below_pin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
-            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:layout_marginStart="@dimen/bluetooth_pairing_padding"
+            android:layout_marginEnd="@dimen/bluetooth_pairing_padding"
+            android:layout_marginBottom="12dp"
             android:gravity="center_vertical"
             android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-            android:textColor="@*android:color/secondary_text_material_light"/>
+            android:textColor="?android:attr/textColorSecondary"/>
 
         <CheckBox
             android:id="@+id/phonebook_sharing_message_entry_pin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
-            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:layout_marginStart="@dimen/bluetooth_pairing_padding"
+            android:layout_marginEnd="@dimen/bluetooth_pairing_padding"
+            android:layout_marginBottom="12dp"
             android:gravity="center_vertical"
+            android:paddingStart="@dimen/bluetooth_checkbox_padding"
             android:text="@string/bluetooth_pairing_shares_phonebook"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:textColor="?android:attr/textColorSecondary"/>
 
     </LinearLayout>
 
