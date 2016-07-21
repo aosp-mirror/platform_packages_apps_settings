@@ -21,7 +21,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,8 +32,6 @@ import android.widget.TextView;
 
 import com.android.settings.widget.DotsPageIndicator;
 import com.android.settings.widget.LabeledSeekBar;
-
-import java.util.Locale;
 
 /**
  * Preference fragment shows a preview and a seek bar to adjust a specific settings.
@@ -147,7 +144,7 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
             seekBar.setEnabled(false);
         }
 
-        final Context context = getPrefContext();
+        final Context context = getContext();
         final Configuration origConfig = context.getResources().getConfiguration();
         final boolean isLayoutRtl = origConfig.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
         Configuration[] configurations = new Configuration[mEntries.length];
