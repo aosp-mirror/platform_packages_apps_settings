@@ -219,7 +219,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
-        <item name="android:textColor">@color/warning</item>
+        <item name="android:textColor">@*android:color/system_error</item>
     </style>
 
     <style name="wifi_item_content">
@@ -365,7 +365,7 @@
 
     <style name="TextAppearance.FingerprintErrorText"
         parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">@color/warning</item>
+        <item name="android:textColor">@*android:color/system_error</item>
     </style>
 
     <style name="TextAppearance.SupportTitle"
@@ -389,7 +389,7 @@
 
     <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
         parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">@color/warning</item>
+        <item name="android:textColor">@*android:color/system_error</item>
     </style>
 
     <style name="TextAppearance.Small.SwitchBar">
