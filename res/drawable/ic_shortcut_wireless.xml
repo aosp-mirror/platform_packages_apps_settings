@@ -14,20 +14,16 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <bitmap android:src="@drawable/shortcut_base" />
-    </item>
-    <item>
-        <inset android:inset="19.2dp">
-            <vector android:width="24.0dp"
-                    android:height="24.0dp"
-                    android:viewportWidth="24.0"
-                    android:viewportHeight="24.0">
-                <path
-                    android:fillColor="@color/icon_accent"
-                    android:pathData="M9.01,15.99l8.8,-10.96C17.47,4.77 14.08,2.0 9.0,2.0S0.53,4.7 0.19,5.03l8.8,10.96l0.02,0.0z"/>
-            </vector>
-        </inset>
-    </item>
-</layer-list>
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="80dp"
+    android:height="80dp"
+    android:viewportWidth="52.0"
+    android:viewportHeight="52.0" >
+    <path
+        android:fillColor="#FFF5F5F5"
+        android:pathData="M2,26a24,24 0 1,0 48,0a24,24 0 1,0 -48,0"/>
+    <path
+        android:fillColor="@*android:color/accent_device_default_light"
+        android:pathData="M26.01,35.49L37.64,21c-0.45-0.34-4.93-4-11.64-4c-6.72,0-11.19,3.66-11.64,4l11.63,14.49L26,35.5L26.01,35.49z"/>
+</vector>
