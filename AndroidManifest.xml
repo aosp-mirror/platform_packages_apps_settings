@@ -959,6 +959,25 @@
                 android:value="com.android.settings.DisplaySettings" />
         </activity-alias>
 
+        <activity android:name="Settings$NightDisplaySettingsActivity"
+                android:label="@string/night_display_title"
+                android:icon="@drawable/ic_settings_night_display"
+                android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NIGHT_DISPLAY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.display.NightDisplaySettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
         <activity android:name="Settings$DeviceInfoSettingsActivity"
                 android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:label="@string/device_info_settings"
