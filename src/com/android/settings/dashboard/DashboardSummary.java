@@ -16,6 +16,7 @@
 
 package com.android.settings.dashboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -231,8 +232,12 @@ public class DashboardSummary extends InstrumentedFragment
 
         @Override
         protected void onPostExecute(List<Tile> tiles) {
+            final Activity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
             List<DashboardCategory> categories =
-                    ((SettingsActivity) getActivity()).getDashboardCategories();
+                    ((SettingsActivity) activity).getDashboardCategories();
             mAdapter.setCategoriesAndSuggestions(categories, tiles);
         }
     }
