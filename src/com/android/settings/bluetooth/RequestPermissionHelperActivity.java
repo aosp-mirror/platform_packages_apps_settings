@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,106 +25,94 @@ import android.util.Log;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
- * RequestPermissionHelperActivity asks the user whether to enable discovery.
- * This is usually started by RequestPermissionActivity.
+ * RequestPermissionHelperActivity asks the user whether to toggle Bluetooth.
+ *
+ * TODO: This activity isn't needed - this should be folded in RequestPermissionActivity
  */
 public class RequestPermissionHelperActivity extends AlertActivity implements
         DialogInterface.OnClickListener {
     private static final String TAG = "RequestPermissionHelperActivity";
 
     public static final String ACTION_INTERNAL_REQUEST_BT_ON =
-        "com.android.settings.bluetooth.ACTION_INTERNAL_REQUEST_BT_ON";
+            "com.android.settings.bluetooth.ACTION_INTERNAL_REQUEST_BT_ON";
 
-    public static final String ACTION_INTERNAL_REQUEST_BT_ON_AND_DISCOVERABLE =
-        "com.android.settings.bluetooth.ACTION_INTERNAL_REQUEST_BT_ON_AND_DISCOVERABLE";
+    public static final String ACTION_INTERNAL_REQUEST_BT_OFF =
+            "com.android.settings.bluetooth.ACTION_INTERNAL_REQUEST_BT_OFF";
 
     private LocalBluetoothAdapter mLocalAdapter;
 
-    private int mTimeout;
+    private int mTimeout = -1;
 
-    // True if requesting BT to be turned on
-    // False if requesting BT to be turned on + discoverable mode
-    private boolean mEnableOnly;
+    private int mRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setResult(RESULT_CANCELED);
+
         // Note: initializes mLocalAdapter and returns true on error
-        if (parseIntent()) {
+        if (!parseIntent()) {
             finish();
             return;
         }
 
-        createDialog();
-
-        if (getResources().getBoolean(R.bool.auto_confirm_bluetooth_activation_dialog) == true) {
-            // dismiss dialog immediately if settings say so
+        if (getResources().getBoolean(R.bool.auto_confirm_bluetooth_activation_dialog)) {
+            // Don't even show the dialog if configured this way
             onClick(null, BUTTON_POSITIVE);
             dismiss();
         }
+
+        createDialog();
     }
 
     void createDialog() {
         final AlertController.AlertParams p = mAlertParams;
 
-        if (mEnableOnly) {
-            p.mMessage = getString(R.string.bluetooth_ask_enablement);
-        } else {
-            if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
-                p.mMessage = getString(R.string.bluetooth_ask_enablement_and_lasting_discovery);
-            } else {
-                p.mMessage = getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout);
-            }
+        switch (mRequest) {
+            case RequestPermissionActivity.REQUEST_ENABLE: {
+                if (mTimeout < 0) {
+                    p.mMessage = getString(R.string.bluetooth_ask_enablement);
+                } else if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
+                    p.mMessage = getString(
+                            R.string.bluetooth_ask_enablement_and_lasting_discovery);
+                } else {
+                    p.mMessage = getString(
+                            R.string.bluetooth_ask_enablement_and_discovery, mTimeout);
+                }
+            } break;
+
+            case RequestPermissionActivity.REQUEST_DISABLE: {
+                p.mMessage = getString(R.string.bluetooth_ask_disablement);
+            } break;
         }
 
         p.mPositiveButtonText = getString(R.string.allow);
         p.mPositiveButtonListener = this;
         p.mNegativeButtonText = getString(R.string.deny);
-        p.mNegativeButtonListener = this;
 
         setupAlert();
     }
 
     public void onClick(DialogInterface dialog, int which) {
-        int returnCode;
-        // FIXME: fix this ugly switch logic!
-        switch (which) {
-            case BUTTON_POSITIVE:
-                int btState = 0;
+        switch (mRequest) {
+            case RequestPermissionActivity.REQUEST_ENABLE:
+            case RequestPermissionActivity.REQUEST_ENABLE_DISCOVERABLE: {
+                mLocalAdapter.enable();
+                setResult(Activity.RESULT_OK);
+            } break;
 
-                try {
-                    // TODO There's a better way.
-                    int retryCount = 30;
-                    do {
-                        btState = mLocalAdapter.getBluetoothState();
-                        Thread.sleep(100);
-                    } while (btState == BluetoothAdapter.STATE_TURNING_OFF && --retryCount > 0);
-                } catch (InterruptedException ignored) {
-                    // don't care
-                }
-
-                if (btState == BluetoothAdapter.STATE_TURNING_ON
-                        || btState == BluetoothAdapter.STATE_ON
-                        || mLocalAdapter.enable()) {
-                    returnCode = RequestPermissionActivity.RESULT_BT_STARTING_OR_STARTED;
-                } else {
-                    returnCode = RESULT_CANCELED;
-                }
-                break;
-
-            case BUTTON_NEGATIVE:
-                returnCode = RESULT_CANCELED;
-                break;
-            default:
-                return;
+            case RequestPermissionActivity.REQUEST_DISABLE: {
+                mLocalAdapter.disable();
+                setResult(Activity.RESULT_OK);
+            } break;
         }
-        setResult(returnCode);
     }
 
     /**
@@ -132,33 +121,32 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
      */
     private boolean parseIntent() {
         Intent intent = getIntent();
-        if (intent != null && intent.getAction().equals(ACTION_INTERNAL_REQUEST_BT_ON)) {
-            mEnableOnly = true;
-        } else if (intent != null
-                && intent.getAction().equals(ACTION_INTERNAL_REQUEST_BT_ON_AND_DISCOVERABLE)) {
-            mEnableOnly = false;
-            // Value used for display purposes. Not range checking.
-            mTimeout = intent.getIntExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,
-                    BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT);
+        if (intent == null) {
+            return false;
+        }
+
+        String action = intent.getAction();
+        if (ACTION_INTERNAL_REQUEST_BT_ON.equals(action)) {
+            mRequest = RequestPermissionActivity.REQUEST_ENABLE;
+            if (intent.hasExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION)) {
+                // Value used for display purposes. Not range checking.
+                mTimeout = intent.getIntExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,
+                        BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT);
+            }
+        } else if (ACTION_INTERNAL_REQUEST_BT_OFF.equals(action)) {
+            mRequest = RequestPermissionActivity.REQUEST_DISABLE;
         } else {
-            setResult(RESULT_CANCELED);
-            return true;
+            return false;
         }
 
         LocalBluetoothManager manager = Utils.getLocalBtManager(this);
         if (manager == null) {
             Log.e(TAG, "Error: there's a problem starting Bluetooth");
-            setResult(RESULT_CANCELED);
-            return true;
+            return false;
         }
+
         mLocalAdapter = manager.getBluetoothAdapter();
 
-        return false;
-    }
-
-    @Override
-    public void onBackPressed() {
-        setResult(RESULT_CANCELED);
-        super.onBackPressed();
+        return true;
     }
 }
