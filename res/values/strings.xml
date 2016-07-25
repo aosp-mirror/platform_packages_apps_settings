@@ -7513,7 +7513,10 @@
     <!-- Developer option to convert to file encryption - final button -->
     <string name="button_confirm_convert_fbe">Wipe and convert</string>
 
-    <!-- Reset rate-limiting in the system service ShortcutManager. [CHAR_LIMIT=none] -->
+    <!-- Reset rate-limiting in the system service ShortcutManager.  "ShortcutManager" is the name of a system service and not translatable.
+    If the word "rate-limit" is hard to translate, use "Reset ShortcutManager API call limit" as the source text, which means
+    the same thing in this context.
+     [CHAR_LIMIT=none] -->
     <string name="reset_shortcut_manager_throttling">Reset ShortcutManager rate-limiting</string>
 
     <!-- Toast message shown when "Reset ShortcutManager rate-limiting" has been performed. [CHAR_LIMIT=none] -->
