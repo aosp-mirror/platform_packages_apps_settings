@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Daxil etdiyiniz parol düzgündür, lakin datanız zədəlidir. \n\nPlanşeti istifadə etməyə davam etmək üçün zavod sıfırlaması etməlisiniz. Sıfırlanandan sonra Google Hesabınızda yedəklənmiş istənilən datanı bərpa edə bilərsiniz."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Daxil etdiyiniz parol düzgündür, lakin datanız zədəlidir. \n\nTelefonu istifadə etməyə davam etmək üçün zavod sıfırlaması etməlisiniz. Sıfırlanandan sonra Google Hesabınızda yedəklənmiş istənilən datanı bərpa edə bilərsiniz."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Daxiletmə metoduna keç"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"Ekran kilidini quraşdırın"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Cihazınızı qoruyun"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"Barmaq izini istifadə edin"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Barmaq iziniz ilə kilidi açın"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Ekran kilidi seçin"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"İş kilidi seçin"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Bu cəhddə yanlış iş parolu daxil etsəniz, iş profiliniz və əlaqədar data bu cihazdan silinəcək."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Həddindən çox yanlış cəhd. İş profiliniz və əlaqədar data bu cihazdan silinəcək."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Rədd edin"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"Ən azı %d simvoldan ibarət olmalıdır"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PİN kodda ən azı %d rəqəm olmalıdır"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Davam"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"Ən azı <xliff:g id="NUMBER">%d</xliff:g> simvoldan az olmalıdır."</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"<xliff:g id="NUMBER">%d</xliff:g> rəqəmdən daha az olmalıdır."</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"Yalnız 0-9 aralığında olmalıdır."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Cihaz administratoru son PİN kodu istifadə etməyə icazə vermir."</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Yalnış simvol daxil edə bilməzsiniz"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Ən azı bir hərf olmalıdır"</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Ən azı bir rəqəm olmalıdır"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"Ən azı bir simvoldan ibarət olmalıdır"</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">Ən azı %d hərf olmalıdır</item>
+      <item quantity="one">Ən azı 1 hərf olmalıdır</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="other">Ən azı %d kiçik hərf olmalıdır</item>
+      <item quantity="one">Ən azı 1 kiçik hərf olmalıdır</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="other">Ən azı %d böyük hərf olmalıdır</item>
+      <item quantity="one">Ən azı 1 böyük hərf olmalıdır</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="other">Ən azı %d rəqəm olmalıdır</item>
+      <item quantity="one">Ən azı 1 rəqəm olmalıdır</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="other">Ən azı %d xüsusi simvol olmalıdır</item>
+      <item quantity="one">Ən azı 1 xüsusi simvol olmalıdır</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="other">Ən azı %d hərf olmayan simvol olmalıdır</item>
+      <item quantity="one">Ən azı 1 hərf olmayan simvol olmalıdır</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"Cihaz administratoru son vaxtlardakı parolu istifadə etməyə icazə vermir."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Artan, azalan və ya təkrarlanan rəqəmlər ardıcıllığı qadağandır"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Həcmlər"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Musiqi effektləri"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"Zəng həcmi"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Səssiz rejimdə vibrasiya etsin"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Varsayılan bildiriş səsi"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Zəng səsi"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ekran parlaqlığını tənzimləyin"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Adaptiv parlaqlıq"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Hazırkı işıq üçün parlaqlığı optimallaşdırın"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"Gecə işığı"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"Gecə İşığı gecə vaxtı qırmızı rəngdə olur. Bununla da ekrana və ya zəif işıqda qırmızıya baxmaq və yuxuya getmək daha asan olur."</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Avtomatik aktivləşdirin"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Heç vaxt"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Fərdi cədvəl"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Avtomatik parlaqlıq"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Oyatmaq üçün qaldırın"</string>
     <string name="doze_title" msgid="2259176504273878294">"Ətraf mühit displeyi"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"İki dəfə tıkladıqda və ya yeni bildirişlər aldığınız zaman ekran oyansın. Necə edəcəyinizə baxın"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Şrift ölçüsü"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Mətni kiçildin və ya böyüdün"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SİM kart kilidi parametrləri"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"Yazarlar"</string>
     <string name="manual" msgid="3025943393642974445">"Dərslik"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"Tənzimləyici etiketlər"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Təhlükəsizlik və tənzimləyici təlimatı"</string>
     <string name="copyright_title" msgid="865906688917260647">"Müəlliflik hüququ"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisenziya"</string>
     <string name="terms_title" msgid="7697580845616764642">"Şərtlər"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Tətbiq telefonunuzda quraşdırılmayıb."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"İş profili təhlükəsizliyi"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"İş profili ekran kilidi"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"Bir kilid istifadə edin"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"İş profili və cihaz ekranı üçün bir kilid istifadə edin"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"Bir kilid istifadə edilsin?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"İş profili və cihaz ekranınız eyni kilidi istifadə edəcək. Hər bir iş kilidi siyasəti cihazın ekran kilidinə də tətbiq ediləcək."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"İş profili kilidiniz təşkilatınızın təhlükəsizlik tələblərinə cavab vermir. Eyni kilidi cihaz ekranı və iş profiliniz üçün istifadə edə bilərsiniz, lakin hər hansı iş ekran kilidi siyasəti tətbiq ediləcək."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"Bir kilid istifadə edin"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"Bir kilid istifadə edin"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Cihazın ekran kilidi kimi eyni"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Tətbiqləri idarə edin"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Quraşdırılmış tətbiqləri idarə edin və silin"</string>
@@ -2260,6 +2256,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN həmişə aktiv"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"VPN əlavə edilməyib."</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"Həmişə aktivdir"</string>
+    <string name="vpn_always_on_inactive" msgid="3488804214062121892">"Hər zaman-deaktiv"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Bu tətbiq tərəfindən dəstəklənmir"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Həmişə qoşulu qalmaq üçün VPN profili seçin. Yalnız bu VPN\'ə qoşulu olduqda şəbəkə trafikinə icazə veriləcək."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Heç biri"</string>
@@ -2540,10 +2537,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"NFC tag üzərinə data yazmaq olmur. Problem qaldığı halda başqa teqi sınayın"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC teqini yazmaq olmur. Başqa teqi sınayın."</string>
     <string name="default_sound" msgid="8821684447333687810">"Defolt səs"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"Zəng səsi <xliff:g id="PERCENTAGE">%1$s</xliff:g> faizdir"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Zəng səsi 80% faizdir"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Media həcmi"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Siqnal səsi həcmi"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Zəng həcmi"</string>
@@ -2752,8 +2747,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Bu cihazı işə salmaq üçün PIN kodunu daxil etdiyiniz zaman <xliff:g id="SERVICE">%1$s</xliff:g> kimi giriş imkanı xidmətləri hələ əlçatan olmayacaq."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Bu cihazı işə salmaq üçün modelinizi daxil etdiyiniz zaman <xliff:g id="SERVICE">%1$s</xliff:g> kimi giriş imkanı xidmətləri hələ əlçatan olmayacaq."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Bu cihazı işə salmaq üçün parolunuzu daxil etdiyiniz zaman <xliff:g id="SERVICE">%1$s</xliff:g> kimi giriş imkanı xidmətləri hələ əlçatan olmayacaq."</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Qeyd: Yenidən yüklənmədən sonra, bu cihazın kilidini açmamış tətbiq başlaya bilməz"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI məlumat"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI nisbi məlumat"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Slot<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3023,6 +3017,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Arxa fon datası yalnız  Wi-Fi vasitəsilə əlçatandır. Wi-Fi əlçatan olmadıqda, bəzi tətbiq və ya xidmətlərə təsir edə bilər."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"İş profili deaktivdir"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Tətbiq, arxa fon sinxronizasiyası və iş profiliniz ilə bağlı digər xüsusiyyətlər deaktiv edildi."</string>
+    <string name="condition_night_display_title" msgid="5599814941976856183">"Gecə İşığı aktivdir"</string>
+    <string name="condition_night_display_summary" msgid="6156601053674688864">"Ekran qırmızı rəng çalarındandır. Bu, yuxuya getməyinizə kömək edə bilər."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Təkliflər"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Silin"</string>
@@ -3071,8 +3067,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Cihazı başlatmaq üçün PIN kod tələb olunur. Deaktiv olduqda, bu cihaz zəng, mesaj, bildiriş, və ya həyəcan siqnalları qəbul edə bilməz."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Cihazı başlatmaq üçün parol tələb olunur. Deaktiv olduqda, bu cihaz zəng, mesaj, bildiriş, və ya həyəcan siqnalları qəbul edə bilməz."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Başqa barmaq izi əlavə edin"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Fərqli bir barmaq ilə kilidi açın"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"AKTİV / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"DEAKTİV / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Heç vaxt avtomatik aktivləşdirməyin"</string>
@@ -3113,10 +3108,8 @@
     <string name="special_access" msgid="8275242424094109976">"Xüsusi giriş"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"İstifadəçi datası həqiqətən silinsin və fayl şifrələnməsinə çevirilsin?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Silin və çevirin"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager reytinq limitini sıfırlayın"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager reytinq limit sıfırlandı"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Ekran kilidi bildirişlərinə nəzarət edin"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Bildiriş məzmununu göstərin və ya gizlədin"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Bütün"</string>
@@ -3130,8 +3123,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"Demo rejimi"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Yardım üçün buradayıq"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Sizin üçün 24/7 buradayıq"</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Sizin üçün 24 7 buradayıq"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"Dəstək komandamız problemləri həll etmək üçün xidmətinizdədir"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Dəstək komandamız hər gün, hər saat əlçatandır"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Yardım axtarın və ya dəstək saatlarında geri gəlin (yerli vaxt):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3189,11 +3181,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kameranı çevirin"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Cəld ekran yoxlanışı"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"Telefonunuzu tam olaraq oyatmadan yoxlamaq üçün, iki dəfə tıklayın və ya əlinizə götürün"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Bildirişlər üçün sürüşdürün"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Bildirişləri yoxlamaq üçün, barmaq sensorunda aşağı sürüşdürün"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Aktiv"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Deaktiv"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Əməliyyat sistemi yükləyicisi artıq kiliddən çıxarılıb"</string>

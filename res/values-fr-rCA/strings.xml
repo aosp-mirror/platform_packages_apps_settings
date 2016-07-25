@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Le mot de passe entré est correct. Malheureusement, vos données sont corrompues.\n\nPour continuer d\'utiliser votre tablette, vous devez rétablir sa configuration d\'usine. Une fois cette opération terminée, vous pourrez restaurer toutes les données que vous aviez sauvegardées dans votre compte Google lors de la nouvelle configuration de votre tablette."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Le mot de passe entré est correct. Malheureusement, vos données sont corrompues.\n\nPour continuer d\'utiliser votre téléphone, vous devez rétablir sa configuration d\'usine. Une fois cette opération terminée, vous pourrez restaurer toutes les données que vous aviez sauvegardées dans votre compte Google lors de la nouvelle configuration de votre téléphone."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Changer le mode de saisie"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"Configurer le verrouillage de l\'écran"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Protégez votre appareil"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"Utiliser le capteur d\'empreinte digitale"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Déverrouiller avec votre empreinte digitale"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Verrouillage de l\'écran"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Verrouill. profil pro"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Si vous entrez un mot de passe professionnel incorrect lors de cette tentative, votre profil professionnel et les données associées seront supprimés sur cet appareil."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Trop de tentatives incorrectes. Votre profil professionnel et les données associées seront supprimés sur cet appareil."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Fermer"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"Doit contenir au moins %d caractères"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"Le NIP doit comporter au moins %d chiffres."</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continuer"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"Doit contenir moins de <xliff:g id="NUMBER">%d</xliff:g> caractères."</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"Doit contenir moins de <xliff:g id="NUMBER">%d</xliff:g> chiffres."</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"Doit contenir uniquement des chiffres contenus entre 0 et 9."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"L\'administrateur de l\'appareil ne permet pas l\'utilisation d\'un NIP récent."</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Vous ne pouvez pas inclure de caractère non valide"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Doit contenir au moins une lettre"</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Doit contenir au moins un chiffre"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"Doit contenir au moins un symbole"</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="one">Doit contenir au moins %d lettre</item>
+      <item quantity="other">Doit contenir au moins %d lettres</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="one">Doit contenir au moins %d lettre minuscule</item>
+      <item quantity="other">Doit contenir au moins %d lettres minuscules</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="one">Doit contenir au moins %d lettre majuscule</item>
+      <item quantity="other">Doit contenir au moins %d lettres majuscules</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="one">Doit contenir au moins %d chiffre</item>
+      <item quantity="other">Doit contenir au moins %d chiffres</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="one">Doit contenir au moins %d caractère spécial</item>
+      <item quantity="other">Doit contenir au moins %d caractères spéciaux</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="one">Doit contenir au moins %d caractère autre qu\'une lettre</item>
+      <item quantity="other">Doit contenir au moins %d caractères autres qu\'une lettre</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"L\'administrateur de l\'appareil ne permet pas l\'utilisation d\'un mot de passe récent."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Les suites de chiffres croissantes, décroissantes ou répétitives ne sont pas autorisées."</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volume"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Effets musicaux"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"Volume de la sonnerie"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrer en mode silencieux"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Son de notification par défaut"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Sonnerie"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"Régler la luminosité de l\'écran"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Luminosité adaptative"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimise le niveau de luminosité en fonction de l\'éclairage ambiant"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"Éclairage nocturne"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"Le mode Éclairage nocturne donne une teinte de rouge à votre écran pendant la nuit. Cela vous permet de le regarder plus facilement lorsque l\'éclairage est faible et peut vous aider à vous endormir plus facilement."</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Activer automatiquement"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Jamais"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Horaire personnalisé"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Ajuster automatiquement la luminosité"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Soulever pour activer"</string>
     <string name="doze_title" msgid="2259176504273878294">"Affichage en mode Veille"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"Activez l\'écran en le touchant deux fois ou lorsque vous recevez de nouvelles notifications. Découvrez comment."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Taille de police"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Agrandissez ou réduisez le texte"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Paramètres de verrouillage de la carte SIM"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"Contributeurs"</string>
     <string name="manual" msgid="3025943393642974445">"Manuel"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"Étiquettes réglementaires"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Guide relatif à la sécurité et à la réglementation"</string>
     <string name="copyright_title" msgid="865906688917260647">"Droits d\'auteur"</string>
     <string name="license_title" msgid="1990487604356037871">"Licence"</string>
     <string name="terms_title" msgid="7697580845616764642">"Conditions d\'utilisation"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"L\'application n\'est pas installée sur votre téléphone."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Sécurité du profil professionnel"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Verrouillage de l\'écran du profil professionnel"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"Utiliser un seul mode de verrouillage"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"Utiliser un seul mode de verrouillage pour le profil professionnel et l\'écran de l\'appareil"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"Utiliser un seul mode de verrouillage?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"Votre profil professionnel et l\'écran de l\'appareil seront verrouillés à l\'aide du même mode. Les politiques de verrouillage du profil professionnel seront également applicables au verrouillage de l\'écran de l\'appareil."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"Le mode de verrouillage de votre profil professionnel ne correspond pas aux exigences de sécurité de votre organisation. Vous pouvez utiliser le même mode de verrouillage pour l\'écran de votre appareil et votre profil professionnel. Dans ce cas, les politiques de verrouillage du profil professionnel seront applicables."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"Utiliser un seul mode de verrouillage"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"Utiliser un seul mode de verrouillage"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Identique au verrouillage de l\'écran de l\'appareil"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Gérer les applications"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Gérer et supprimer les applications installées"</string>
@@ -2260,6 +2256,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN permanent"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"Aucun RPV ajouté."</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"RPV toujours actif : activé"</string>
+    <string name="vpn_always_on_inactive" msgid="3488804214062121892">"Fonction « Toujours actif » inactive"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Cette fonction n\'est pas prise en charge dans cette application"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Sélectionnez un profil VPN auquel rester connecté en permanence. Le trafic réseau ne sera autorisé que lorsque vous serez connecté à ce VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Aucun"</string>
@@ -2540,10 +2537,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Impossible d\'écrire des données sur la balise NFC. Si le problème persiste, essayez avec une autre balise."</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"La balise NFC n\'est pas accessible en écriture. Veuillez en utiliser un autre."</string>
     <string name="default_sound" msgid="8821684447333687810">"Son par défaut"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"Le volume de la sonnerie est à <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Le volume de la sonnerie est à 80 %"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Volume des médias"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volume de l\'alarme"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume de la sonnerie"</string>
@@ -2752,8 +2747,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Lorsque vous entrez votre NIP pour démarrer cet appareil, les services d\'accessibilité comme <xliff:g id="SERVICE">%1$s</xliff:g> ne seront pas accessibles immédiatement."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Lorsque vous entrez votre schéma pour démarrer cet appareil, les services d\'accessibilité comme <xliff:g id="SERVICE">%1$s</xliff:g> ne seront pas accessibles immédiatement."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Lorsque vous entrez votre mot de passe pour démarrer cet appareil, les services d\'accessibilité comme <xliff:g id="SERVICE">%1$s</xliff:g> ne seront pas accessibles immédiatement."</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Remarque : Après un redémarrage, vous ne pouvez pas lancer cette application tant que vous n\'avez pas déverrouillé votre téléphone."</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Information concernant le code IIEM"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Information concernant le code IIEM"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Fente <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3023,6 +3017,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Les données en arrière-plan ne sont accessibles que par Wi-Fi. Cela peut nuire à certaines applications ou certains services lorsque le Wi-Fi n\'est pas accessible."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Profil professionnel désactivé"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Les applications, la synchronisation en arrière-plan et d\'autres fonctionnalités liées à votre profil professionnel sont désactivées."</string>
+    <string name="condition_night_display_title" msgid="5599814941976856183">"Éclairage nocturne activé"</string>
+    <string name="condition_night_display_summary" msgid="6156601053674688864">"Écran a une teinte rouge. Cela peut vous aider à vous endormir."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Suggestions"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Supprimer"</string>
@@ -3071,8 +3067,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Un NIP est nécessaire pour démarrer l\'appareil. Lorsque celui-ci est éteint, il ne peut pas recevoir d\'appels ni de messages, ni émettre de notifications et d\'alarmes."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Un mot de passe est nécessaire pour démarrer l\'appareil. Lorsque celui-ci est éteint, il ne peut pas recevoir d\'appels ni de messages, ni émettre de notifications et d\'alarmes."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Ajouter une empreinte digitale"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Déverrouiller avec un autre doigt"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Activé : <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Désactivé : <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Ne jamais activer automatiquement"</string>
@@ -3113,10 +3108,8 @@
     <string name="special_access" msgid="8275242424094109976">"Accès spécial"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Voulez-vous vraiment effacer les données des utilisateurs et chiffrer les fichiers?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Effacer et convertir"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Réinitialiser la limitation de fréquence ShortcutManager"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"La limitation de fréquence ShortcutManager a été réinitialisée"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Gérer notifications écran verrouillage"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Afficher ou masquer le contenu des notifications"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Tous"</string>
@@ -3130,8 +3123,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"Mode Démo"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Nous sommes là pour vous aider"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Nous sommes là pour vous aider, 24 heures sur 24, sept jours sur sept"</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Nous sommes là pour vous aider, 24 heures sur 24, sept jours sur sept"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"Notre équipe d\'assistance est là pour répondre à toutes vos questions"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Notre équipe d\'assistance est disponible 24 heures sur 24, sept jours sur sept"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Effectuez une recherche dans l\'aide ou revenez pendant les heures d\'ouverture du service d\'assistance (heure locale) :&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3189,11 +3181,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Changer d\'appareil photo"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Vérification rapide de l\'écran"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"Pour consulter votre téléphone sans le sortir de veille complètement, touchez-le deux fois ou saisissez-le."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Glissez un doigt pour afficher les notifications"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le capteur d\'empreinte digitale à l\'arrière du téléphone."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activé"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Désactivé"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Le programme d\'amorçage est déjà déverrouillé"</string>

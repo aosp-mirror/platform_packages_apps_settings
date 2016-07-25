@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"입력한 비밀번호는 정확하지만 안타깝게도 사용자의 데이터가 손상되었습니다. \n\n태블릿을 다시 사용하려면 초기화해야 합니다. 초기화 후 태블릿을 설정할 때 Google 계정에 백업된 데이터를 복원할 수 있습니다."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"입력한 비밀번호는 정확하지만 안타깝게도 사용자의 데이터가 손상되었습니다. \n\n휴대전화를 다시 사용하려면 초기화해야 합니다. 초기화 후 휴대전화를 설정할 때 Google 계정에 백업된 데이터를 복원할 수 있습니다."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"입력 방법 전환"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"화면 잠금 설정"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"기기 보호"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"지문 사용"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"지문으로 잠금 해제"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"화면 잠금 선택"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"직장 잠금 선택"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"이번 시도에서 잘못된 직장 비밀번호를 입력하는 경우 직장 프로필과 관련 데이터가 이 기기에서 삭제됩니다."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"잘못된 시도 횟수가 너무 많습니다. 직장 프로필과 관련 데이터가 이 기기에서 삭제됩니다."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"닫기"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"문자가 %d개 이상 포함되어야 합니다."</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN은 %d자리 이상이어야 합니다."</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"계속"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"<xliff:g id="NUMBER">%d</xliff:g>자 미만이어야 합니다."</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"<xliff:g id="NUMBER">%d</xliff:g>자리 미만이어야 합니다."</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"숫자 0~9만 포함해야 합니다."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"기기 관리자가 최근 PIN 사용을 허용하지 않습니다."</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"잘못된 문자를 포함할 수 없습니다."</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"문자가 1개 이상 포함되어야 합니다."</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"숫자가 1개 이상 포함되어야 합니다."</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"기호가 1개 이상 포함되어야 합니다."</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">문자가 %d개 이상 포함되어야 함</item>
+      <item quantity="one">문자가 1개 이상 포함되어야 함</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="other">소문자가 %d개 이상 포함되어야 함</item>
+      <item quantity="one">소문자가 1개 이상 포함되어야 함</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="other">대문자가 %d개 이상 포함되어야 함</item>
+      <item quantity="one">대문자가 1개 이상 포함되어야 함</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="other">숫자가 %d개 이상 포함되어야 함</item>
+      <item quantity="one">숫자가 1개 이상 포함되어야 함</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="other">특수 기호가 %d개 이상 포함되어야 함</item>
+      <item quantity="one">특수 기호가 1개 이상 포함되어야 함</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="other">글자가 아닌 문자가 %d개 이상 포함되어야 함</item>
+      <item quantity="one">글자가 아닌 문자가 1개 이상 포함되어야 함</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"기기 관리자가 최근 비밀번호 사용을 허용하지 않습니다."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"오름차순, 내림차순 또는 숫자의 반복된 순서는 금지됨"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"확인"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"볼륨"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"음악 효과"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"벨소리 볼륨"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"무음 시 진동"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"기본 알림 소리"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"벨소리"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"화면 밝기 조정"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"밝기 자동 조절"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"빛의 양에 따라 밝기 수준 최적화"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"야간 조명"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"야간 조명은 밤이 되면 화면에 빨간색 농담 효과를 줍니다. 그러면 어두운 불빛에서 화면이 더 잘 보이며 수면 방해 효과가 줄어듭니다."</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"자동으로 사용 설정"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"안함"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"맞춤 일정"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"자동 밝기"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"기기를 들어 대기 모드 해제"</string>
     <string name="doze_title" msgid="2259176504273878294">"절전 모드 자동 해제"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"두 번 탭하거나 새 알림을 수신하면 절전 모드를 해제합니다. 방법은 다음과 같습니다."</string>
     <string name="title_font_size" msgid="4405544325522105222">"글꼴 크기"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"텍스트를 확대 또는 축소"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 카드 잠금 설정"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"도움을 주신 분들"</string>
     <string name="manual" msgid="3025943393642974445">"수동"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"규정 라벨"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"안전 및 규제 설명서"</string>
     <string name="copyright_title" msgid="865906688917260647">"저작권"</string>
     <string name="license_title" msgid="1990487604356037871">"라이선스"</string>
     <string name="terms_title" msgid="7697580845616764642">"약관"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"휴대전화에 설치되어 있지 않은 애플리케이션입니다."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"직장 프로필 보안"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"직장 프로필 화면 잠금"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"같은 잠금 사용"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"직장 프로필과 기기 화면에 같은 잠금 사용"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"같은 잠금을 사용하시겠습니까?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"직장 프로필과 기기 화면에 같은 잠금을 사용합니다. 모든 직장 잠금 정책이 기기 화면 잠금에도 적용됩니다."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"직장 프로필 잠금이 조직의 보안 요구사항을 충족하지 못합니다. 기기 화면과 직장 프로필에 같은 잠금을 사용할 수 있지만, 모든 직장 잠금 정책이 적용됩니다."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"같은 잠금 사용"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"같은 잠금 사용"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"기기 화면 잠금과 동일"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"앱 관리"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"설치된 앱 관리 및 제거"</string>
@@ -2260,6 +2256,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"연결 유지 VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"추가된 VPN 없음"</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"항상 사용 활성화"</string>
+    <string name="vpn_always_on_inactive" msgid="3488804214062121892">"항상 켜짐 비활성화"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"이 앱에서 지원되지 않음"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"VPN 프로필을 선택하여 연결된 상태를 유지하세요. 이 VPN에 연결된 상태에서만 네트워크 트래픽이 허용됩니다."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"없음"</string>
@@ -2540,10 +2537,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"NFC 태그에 데이터를 작성할 수 없습니다. 문제가 지속되는 경우 다른 태그를 사용해보세요."</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC 태그를 작성할 수 없습니다. 다른 태그를 사용하세요."</string>
     <string name="default_sound" msgid="8821684447333687810">"기본 사운드"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"벨소리 볼륨 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"벨소리 볼륨 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"미디어 볼륨"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"알람 볼륨"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"벨소리 볼륨"</string>
@@ -2752,8 +2747,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"기기를 시작하기 위해 PIN을 입력할 때에는 <xliff:g id="SERVICE">%1$s</xliff:g> 등의 접근성 서비스가 지원되지 않습니다."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"기기를 시작하기 위해 패턴을 입력할 때에는 <xliff:g id="SERVICE">%1$s</xliff:g> 등의 접근성 서비스가 지원되지 않습니다."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"기기를 시작하기 위해 비밀번호를 입력할 때에는 <xliff:g id="SERVICE">%1$s</xliff:g> 등의 접근성 서비스가 지원되지 않습니다."</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"참고: 재부팅한 후 이 앱은 휴대전화를 잠금 해제해야 시작됩니다."</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 정보"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI 상대 정보"</string>
     <string name="slot_number" msgid="3762676044904653577">"(슬롯 <xliff:g id="SLOT_NUM">%1$d</xliff:g>개)"</string>
@@ -3023,6 +3017,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"백그라운드 데이터는 Wi-Fi를 통해서만 사용할 수 있습니다. Wi-Fi를 사용할 수 없는 경우 일부 앱이나 서비스에 영향을 미칠 수 있습니다."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"직장 프로필이 사용 중지됨"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"앱, 백그라운드 동기화 및 기타 직장 프로필 관련 기능이 사용 중지되었습니다."</string>
+    <string name="condition_night_display_title" msgid="5599814941976856183">"야간 조명 켜짐"</string>
+    <string name="condition_night_display_summary" msgid="6156601053674688864">"화면에 붉은 빛이 적용됩니다. 이렇게 하면 취침에 도움이 될 수 있습니다."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"추천"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"삭제"</string>
@@ -3071,8 +3067,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"기기를 시작하려면 PIN을 사용해야 합니다. 기기가 꺼져 있을 때에는 전화, 메시지, 알림 또는 알람을 수신할 수 없습니다."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"기기를 시작하려면 비밀번호를 사용해야 합니다. 기기가 꺼져 있을 때에는 전화, 메시지, 알림 또는 알람을 수신할 수 없습니다."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"다른 지문 추가"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"다른 손가락으로 잠금 해제"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"켬/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"끔/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"자동으로 켜지 않음"</string>
@@ -3113,10 +3108,8 @@
     <string name="special_access" msgid="8275242424094109976">"특별 액세스"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"사용자 데이터를 삭제하고 파일 암호화로 변환하시겠습니까?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"삭제 및 변환"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager 대역 제한 기능 재설정"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager 대역 제한 기능이 재설정되었습니다."</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"잠금 화면 알림 제어"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"알림 내용 표시 또는 숨기기"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"전체"</string>
@@ -3130,8 +3123,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"데모 모드"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Google로부터 지원받기"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"하루 24시간 연중무휴 운영"</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"하루 24시간 연중무휴 운영"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"Google 지원팀에서 문제해결을 도와드립니다."</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Google 지원팀은 하루 24시간 연중무휴로 운영됩니다."</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"도움말을 검색하거나 지원 시간(현지 시간)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt; 중에 문의해 주세요."</string>
@@ -3189,11 +3181,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"카메라 전환"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"빠른 화면 확인"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"대기 모드를 해제하지 않고 휴대전화를 확인하려면 두 번 탭하거나 들어 올립니다."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"스와이프하여 알림 확인"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"알림을 확인하려면 휴대전화 뒷면의 지문 센서에서 아래로 스와이프합니다."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"사용"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"사용 안함"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"부트로더가 이미 잠금해제되었습니다."</string>
