@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Die wagwoord wat jy ingevoer het, is korrek, maar ongelukkig is jou data korrup. \n\nJy moet \'n fabriekterugstelling doen om die tablet weer te kan gebruik. Wanneer jy jou tablet na die terugstelling opstel, sal jy die geleentheid hê om enige data te herwin wat in jou Google-rekening gerugsteun is."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Die wagwoord wat jy ingevoer het, is korrek, maar ongelukkig is jou data korrup. \n\nJy moet \'n fabriekterugstelling doen om die foon weer te kan gebruik. Wanneer jy jou foon na die terugstelling opstel, sal jy die geleentheid hê om enige data te herwin wat in jou Google-rekening gerugsteun is."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Wissel invoermetode"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"Stel skermslot"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Beskerm jou toestel"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"Gebruik vingerafdruk"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Ontsluit met jou vingerafdruk"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Kies skermslot"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Kies werkslot"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"As jy met hierdie poging \'n verkeerde werkwagwoord invoer, sal jou werkprofiel en geassosieerde data van hierdie toestel af verwyder word."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Te veel verkeerde pogings. Jou werkprofiel en geassosieerde data sal van hierdie toestel af verwyder word."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Maak toe"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"Moet minstens %d karakters bevat"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN moet minstens %d syfers wees"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Gaan voort"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"Moet korter as <xliff:g id="NUMBER">%d</xliff:g> karakters wees."</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"Moet korter as <xliff:g id="NUMBER">%d</xliff:g> syfers wees."</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"Mag net syfers 0-9 bevat."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Toesteladministrateur laat nie toe dat jy \'n onlangse PIN gebruik nie."</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Dit mag nie \'n ongeldige karakter insluit nie"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Moet minstens een letter bevat"</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Moet minstens een syfer bevat"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"Moet minstens een simbool bevat"</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">Moet minstens %d letters bevat</item>
+      <item quantity="one">Moet minstens een letter bevat</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="other">Moet minstens %d kleinletters bevat</item>
+      <item quantity="one">Moet minstens 1 kleinletter bevat</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="other">Moet minstens %d hoofletters bevat</item>
+      <item quantity="one">Moet minstens 1 hoofletter bevat</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="other">Moet minstens %d numeriese syfers bevat</item>
+      <item quantity="one">Moet minstens 1 numeriese syfer bevat</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="other">Moet minstens %d spesiale simbole bevat</item>
+      <item quantity="one">Moet minstens 1 spesiale simbool bevat</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="other">Moet minstens %d nieletterkarakters bevat</item>
+      <item quantity="one">Moet minstens 1 nieletterkarakter bevat</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"Toesteladministrateur laat nie toe dat jy \'n onlangse wagwoord gebruik nie."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"\'n Stygende, dalende of herhalende volgorde van syfers is verbode"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volumes"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Musiekeffekte"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"Luivolume"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibreer wanneer stil"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Verstek kennisgewingklank"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Luitoon"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"Verstel die helderheid van die skerm"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Aanpasbare helderheid"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimaliseer helderheidsvlak vir die beskikbare lig"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"Aandbeligting"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"Aandbeligting tint jou skerm snags rooi. Dit maak dit makliker om in dowwe lig na jou skerm te kyk of te lees en sal jou dalk help om makliker weer aan die slaap te raak."</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Skakel outomaties aan"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Nooit"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Gepasmaakte skedule"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Outomatiese helderheid"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Lig op om wakker te maak"</string>
     <string name="doze_title" msgid="2259176504273878294">"Stemmingvertoning"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"Maak skerm wakker wanneer jy dit dubbeltik of nuwe kennisgewings ontvang. Sien hoe"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Lettertipegrootte"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Maak teks groter of kleiner"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM-kaart se sluitinstellings"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"Bydraers"</string>
     <string name="manual" msgid="3025943393642974445">"Handleiding"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"Regulerende etikette"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Veiligheid- en regulatiewe handleiding"</string>
     <string name="copyright_title" msgid="865906688917260647">"Kopiereg"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisensie"</string>
     <string name="terms_title" msgid="7697580845616764642">"Bepalings en voorwaardes"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Die program is nie op jou foon geïnstalleer nie."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Werkprofielsekuriteit"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Werkprofiel se skermslot"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"Gebruik een slot"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"Gebruik een slot vir werkprofiel en toestelskerm"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"Gebruik een slot?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"Jou werkprofiel en toestelskerm sal dieselfde slot gebruik. Alle werkslotbeleide sal ook op jou toestelskermslot van toepassing wees."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"Jou werkprofielslot voldoen nie aan jou organisasie se sekuriteitsvereistes nie. Jy kan dieselfde slot vir jou toestelskerm en jou werkprofiel gebruik, maar alle werkskermslotbeleide sal van toepassing wees."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"Gebruik een slot"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"Gebruik een slot"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Dieselfde as toestelskermslot"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Bestuur programme"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Bestuur en verwyder geïnstalleerde programme"</string>
@@ -2260,6 +2256,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Altydaan-VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"Geen VPN\'e is bygevoeg nie."</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"Altyd-aan is aktief"</string>
+    <string name="vpn_always_on_inactive" msgid="3488804214062121892">"Altyd-aan is onaktief"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Nie gesteun deur hierdie program nie"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Kies \'n VPN-profiel om altyd aan gekoppel te bly. Netwerkverkeer sal net toegelaat word wanneer verbind aan hierdie VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Geen"</string>
@@ -2540,10 +2537,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Kon nie data na NFC-merker skryf nie. As die probleem voortduur, probeer \'n ander merker"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC-merker is nie skryfbaar nie. Gebruik asseblief \'n ander merker."</string>
     <string name="default_sound" msgid="8821684447333687810">"Verstekgeluid"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"Luivolume op <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Luivolume op 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Mediavolume"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Wekkervolume"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Luivolume"</string>
@@ -2752,8 +2747,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Wanneer jy jou PIN invoer om hierdie toestel te begin, sal toeganklikheiddienste soos <xliff:g id="SERVICE">%1$s</xliff:g> nog nie beskikbaar wees nie."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Wanneer jy jou patroon invoer om hierdie toestel te begin, sal toeganklikheiddienste soos <xliff:g id="SERVICE">%1$s</xliff:g> nog nie beskikbaar wees nie."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Wanneer jy jou wagwoord invoer om hierdie toestel te begin, sal toeganklikheiddienste soos <xliff:g id="SERVICE">%1$s</xliff:g> nog nie beskikbaar wees nie."</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Let wel: Ná \'n herselflaai kan hierdie program nie begin voordat jy jou foon ontsluit het nie"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-inligting"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI se relatiewe inligting"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Gleuf<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3023,6 +3017,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Agtergronddata is net deur Wi-Fi beskikbaar. Dit kan sommige programme of dienste beïnvloed wanneer Wi-Fi nie beskikbaar is nie."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Werkprofiel is af"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Programme, agtergrondsinkronisering en ander kenmerke wat met jou werkprofiel verband hou, is afgeskakel."</string>
+    <string name="condition_night_display_title" msgid="5599814941976856183">"Aandbeligting is aan"</string>
+    <string name="condition_night_display_summary" msgid="6156601053674688864">"Skerm is rooi getint. Dit kan jou help om aan die slaap te raak."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Voorstelle"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Verwyder"</string>
@@ -3071,8 +3067,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"PIN word vereis om jou toestel te begin. Terwyl dit af is, kan hierdie toestel nie oproepe, boodskappe, kennisgewings of wekkers ontvang nie."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Wagwoord word vereis om jou toestel te begin. Terwyl dit af is, kan hierdie toestel nie oproepe, boodskappe, kennisgewings of wekkers ontvang nie."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Voeg nog \'n vingerafdruk by"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Ontsluit met \'n ander vinger"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Aan / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Af / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Moet nooit outomaties aanskakel nie"</string>
@@ -3113,10 +3108,8 @@
     <string name="special_access" msgid="8275242424094109976">"Spesiale toegang"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Regtig gebruikerdata skoonmaak en na lêerenkripsie oorskakel?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Maak skoon en skakel om"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Stel ShortcutManager se koersbeperking terug"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager se koersbeperking is teruggestel"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Beheer sluitskermkennisgewings"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Wys of versteek kennisgewinginhoud"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Alles"</string>
@@ -3130,8 +3123,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"Demonstrasiemodus"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Ons is hier om te help"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Ons is dag en nag hier vir jou"</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Ons is dag en nag hier vir jou"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"Ons steundiensspan is hier om enige kwessies te help aanspreek"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Ons steundienste is elke dag heeldag beskikbaar"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Deursoek hulp of kom terug tydens steundiensure (plaaslike tyd):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3189,11 +3181,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Draai kamera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Vinnige skermkontrolering"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"Dubbeltik jou foon of tel dit op om daarna te kyk sonder om dit heeltemal wakker te maak"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Swiep vir kennisgewings"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Swiep na onder op die vingerafdruksensor op die agterkant van jou foon om na jou kennisgewings te kyk"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Aan"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Af"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Selflaaiprogram is reeds ontsluit"</string>

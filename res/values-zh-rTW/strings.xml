@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"您所輸入的密碼正確，但您的資料已毀損。\n\n如要繼續使用平板電腦，請將該裝置重設為原廠設定。重設完成後，當您對平板電腦進行設定時，可以將備份在個人 Google 帳戶中的資料全部還原。"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"您所輸入的密碼正確，但您的資料已毀損。\n\n如要繼續使用手機，請將該裝置重設為原廠設定。重設完成後，當您對手機進行設定時，可以將備份在個人 Google 帳戶中的資料全部還原。"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"切換輸入法"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"設定螢幕鎖定"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"保護您的裝置"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"使用指紋"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"以指紋解鎖"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"選擇螢幕鎖定方式"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"選擇 Work 鎖定方式"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"如果您這次輸入的 Work 密碼錯誤，您的 Work 設定檔和相關資料將會從這個裝置中移除。"</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"輸入錯誤次數過多。您的 Work 設定檔和相關資料將會從這個裝置中移除。"</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"關閉"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"長度至少要有 %d 字元"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"PIN 碼最少要有 %d 位數字"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"繼續"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"長度必須少於 <xliff:g id="NUMBER">%d</xliff:g> 個字元。"</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"長度必須少於 <xliff:g id="NUMBER">%d</xliff:g> 位數。"</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"只能包含數字 0 到 9。"</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"裝置管理員不允許使用最近用過的 PIN。"</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"密碼不得包含無效字元"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"必須包含至少 1 個字母"</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"必須包含至少 1 個數字"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"必須包含至少 1 個符號"</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">必須包含至少 %d 個字母</item>
+      <item quantity="one">必須包含至少 1 個字母</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="other">必須包含至少 %d 個小寫字母</item>
+      <item quantity="one">必須包含至少 1 個小寫字母</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="other">必須包含至少 %d 個大寫字母</item>
+      <item quantity="one">必須包含至少 1 個大寫字母</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="other">必須包含至少 %d 個數字</item>
+      <item quantity="one">必須包含至少 1 個數字</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="other">必須包含至少 %d 個特殊符號</item>
+      <item quantity="one">必須包含至少 1 個特殊符號</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="other">必須包含至少 %d 個非字母的字元</item>
+      <item quantity="one">必須包含至少 1 個非字母的字元</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"裝置管理員不允許使用最近用過的密碼。"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"不得使用依遞增或遞減順序排列、或重複的一串數字"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"確定"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"音量"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"音樂效果"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"鈴聲音量"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"靜音時震動"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"預設通知音效"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"鈴聲"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"調整螢幕亮度"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"自動調整亮度"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"根據環境光源調整最佳亮度"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"夜燈"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"夜燈功能在晚上會將您的螢幕色調改為紅色，讓您更輕鬆地在光線昏暗的環境中查看螢幕，也比較容易入睡。"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"自動開啟"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"永不"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"自訂時間表"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"自動調整亮度"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"舉起即可喚醒"</string>
     <string name="doze_title" msgid="2259176504273878294">"環境顯示"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"輕觸兩下裝置或收到新通知時喚醒螢幕。參閱相關說明"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字型大小"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"縮小或放大文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 卡鎖定設定"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"貢獻者"</string>
     <string name="manual" msgid="3025943393642974445">"說明書"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"法規標籤"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"安全性和法規手冊"</string>
     <string name="copyright_title" msgid="865906688917260647">"版權"</string>
     <string name="license_title" msgid="1990487604356037871">"授權"</string>
     <string name="terms_title" msgid="7697580845616764642">"條款及細則"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"您未在手機上安裝應用程式。"</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Work 設定檔安全性"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Work 設定檔螢幕鎖定"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"使用同一種鎖定方式"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"讓 Work 設定檔和裝置螢幕使用同一種鎖定方式"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"要使用同一種鎖定方式嗎？"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"您的 Work 設定檔和裝置螢幕將採用相同的鎖定方式。裝置的螢幕鎖定同樣須遵守所有相關的 Work 鎖定政策。"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"您的 Work 設定檔鎖定不符合貴機構的安全性標準。您可以設定讓裝置螢幕與 Work 設定檔採用相同的鎖定方式，但是必須遵守所有相關的 Work 鎖定政策。"</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"使用同一種鎖定方式"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"使用同一種鎖定方式"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"與裝置的螢幕鎖定一致"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"管理應用程式"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"管理和移除已安裝的應用程式"</string>
@@ -2264,6 +2260,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"永久連線的 VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"尚未新增任何 VPN。"</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"永久連線模式已啟用"</string>
+    <string name="vpn_always_on_inactive" msgid="3488804214062121892">"一律開啟功能已停用"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"不受這個應用程式支援"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"選取要永久連線的 VPN 設定檔。只有在連線到這個 VPN 後才能使用網路。"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"無"</string>
@@ -2544,10 +2541,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"無法將資料寫入 NFC 標記。如果問題持續發生，請嘗試使用其他標記"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"無法寫入 NFC 標記，請使用其他標記。"</string>
     <string name="default_sound" msgid="8821684447333687810">"預設音效"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"鈴聲音量為 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"鈴聲音量為 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"媒體音量"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"鬧鐘音量"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"鈴聲音量"</string>
@@ -2756,8 +2751,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"輸入您的 PIN 啟動裝置後，您將無法使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等各項協助工具服務。"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"畫出解鎖圖案啟動裝置後，您將無法使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等各項協助工具服務。"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"輸入您的密碼啟動裝置後，您將無法使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等各項協助工具服務。"</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"注意：重新啟動後，您必須將手機解鎖，才能執行這個應用程式"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 資訊"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI 相關資訊"</string>
     <string name="slot_number" msgid="3762676044904653577">"(插槽 <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3027,6 +3021,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"您必須連上 Wi-Fi 才能使用背景資料功能。如果無法連上 Wi-Fi，部分應用程式或服務可能會受到影響。"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Work 設定檔已停用"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"應用程式、背景同步處理以及其他與您的 Work 設定檔相關的功能已停用。"</string>
+    <string name="condition_night_display_title" msgid="5599814941976856183">"夜燈模式已開啟"</string>
+    <string name="condition_night_display_summary" msgid="6156601053674688864">"已將螢幕色調顯示為紅色，讓您比較容易入睡。"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"建議"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"移除"</string>
@@ -3075,8 +3071,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"必須輸入 PIN 碼才能啟動裝置。裝置關閉時無法接收來電、訊息、通知或鬧鐘提醒。"</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"必須輸入密碼才能啟動裝置。裝置關閉時無法接收來電、訊息、通知或鬧鐘提醒。"</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"新增其他指紋"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"使用其他指紋解鎖"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"已開啟/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"已關閉/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"一律不自動開啟"</string>
@@ -3117,10 +3112,8 @@
     <string name="special_access" msgid="8275242424094109976">"特別存取權"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"確定要清除使用者資料並轉換改用加密檔案嗎？"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"清除並轉換"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"重設 ShortcutManager 速率限制"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"已重設 ShortcutManager 速率限制"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"管理螢幕鎖定通知"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"顯示或隱藏通知內容"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"全部"</string>
@@ -3134,8 +3127,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"示範模式"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"我們很樂意為您提供協助"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我們隨時可為您提供服務"</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"我們隨時為您提供服務"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"我們的支援小組會協助您解決任何問題"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"我們的支援小組全年無休，隨時為您提供服務"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"搜尋相關說明或是於支援服務時間 (當地時間) 再次來電：&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3193,11 +3185,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"快速切換鏡頭"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"快速查看畫面"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"只要輕觸兩下或拿起手機，即可在不將手機完全喚醒的情況下查看手機"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"滑動查看通知"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"將手指放在手機背面的指紋感應器上並向下滑動，即可查看通知"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"開啟"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"關閉"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"開機載入器已解除鎖定"</string>

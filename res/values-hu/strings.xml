@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"A megadott jelszó helyes, adatai azonban sajnos sérültek. \n\nA táblagép használatának folytatásához végre kell hajtania a gyári adatok visszaállítását. Amikor ezt követően beállítja a táblagépet, lehetősége nyílik arra, hogy helyreállítsa mindazokat az adatokat, amelyekről másolat található Google-fiókjában."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"A megadott jelszó helyes, adatai azonban sajnos sérültek. \n\nA telefon használatának folytatásához végre kell hajtania a gyári adatok visszaállítását. Amikor ezt követően beállítja a telefont, lehetősége nyílik arra, hogy helyreállítsa mindazokat az adatokat, amelyekről másolat található Google-fiókjában."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Beviteli mód váltása"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"Képernyőzár beállítása"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"Óvja meg eszközét"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"Ujjlenyomat használata"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Feloldás ujjlenyomattal"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Képernyőzár választása"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Munkaprofil – zárolás"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Amennyiben most helytelen jelszót ad meg, a rendszer eltávolítja munkaprofilját és a kapcsolódó adatokat erről az eszközről."</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Túl sok sikertelen próbálkozás. A rendszer eltávolítja munkaprofilját és a kapcsolódó adatokat erről az eszközről."</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Elvetés"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"Legyen legalább %d karakter hosszúságú"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"A PIN-kódnak legalább %d számjegyűnek kell lennie."</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Folytatás"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"Legyen rövidebb <xliff:g id="NUMBER">%d</xliff:g> karakternél."</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"Legyen rövidebb <xliff:g id="NUMBER">%d</xliff:g> számjegynél."</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"Csak számokat tartalmazhat, 0-tól 9-ig."</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"Az eszközkezelő nem engedélyezi a legutóbbi PIN-kódok használatát."</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Ez nem tartalmazhat érvénytelen karaktert"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Tartalmazzon legalább egy betűt"</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Tartalmazzon legalább egy számjegyet"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"Tartalmazzon legalább egy szimbólumot"</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">Tartalmazzon legalább %d betűt</item>
+      <item quantity="one">Tartalmazzon legalább 1 betűt</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="other">Tartalmazzon legalább %d kisbetűt</item>
+      <item quantity="one">Tartalmazzon legalább 1 kisbetűt</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="other">Tartalmazzon legalább %d nagybetűt</item>
+      <item quantity="one">Tartalmazzon legalább 1 nagybetűt</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="other">Tartalmazzon legalább %d számjegyet</item>
+      <item quantity="one">Tartalmazzon legalább 1 számjegyet</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="other">Tartalmazzon legalább %d speciális karaktert</item>
+      <item quantity="one">Tartalmazzon legalább 1 speciális karaktert</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="other">Tartalmazzon legalább %d olyan karaktert, amely nem betű</item>
+      <item quantity="one">Tartalmazzon legalább 1 olyan karaktert, amely nem betű</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"Az eszközkezelő nem engedélyezi a legutóbbi jelszavak használatát."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Növekvő, csökkenő vagy ismétlődő számsor megadása tilos"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Hangerő"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Zenei hatások"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"Csengés hangereje"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Rezgés néma üzemmódban"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Alapértelmezett értesítési hang"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Csengőhang"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"A képernyő fényerejének beállítása"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Alkalmazkodó fényerő"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Fényerőszint optimalizálása a környezeti fény alapján"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"Éjszakai fény"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"Az Éjszakai fény éjszaka vöröses árnyalatúra színezi képernyőjét, hogy gyenge fény mellett se legyen kellemetlen a képernyőre nézni. Emellett a funkció az elalvást is megkönnyítheti."</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Automatikus bekapcsolás"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Soha"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Egyéni ütemezés"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatikus fényerő"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Felébresztéshez emelje meg"</string>
     <string name="doze_title" msgid="2259176504273878294">"Környezeti kijelző"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"Képernyő felébresztése, amikor duplán rákoppint, vagy ha új értesítést kap. Nézze meg, hogyan."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Betűméret"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Szöveg nagyítása és kicsinyítése"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM-kártya lezárási beállításai"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"Közreműködők"</string>
     <string name="manual" msgid="3025943393642974445">"Útmutató"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"Szabályozási címkék"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Biztonsági és az előírásokkal kapcsolatos útmutató"</string>
     <string name="copyright_title" msgid="865906688917260647">"Szerzői jog"</string>
     <string name="license_title" msgid="1990487604356037871">"Licenc"</string>
     <string name="terms_title" msgid="7697580845616764642">"Általános Szerződési Feltételek"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"Az alkalmazás már nincs telepítve a telefonján."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Munkaprofil biztonsága"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Munkaprofil képernyőzára"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"Egy zár használata"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"Egy zár használata a munkaprofilnál és az eszköz képernyőjénél"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"Egy zárat szeretne használni?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"Munkaprofilja és eszközének képernyője ugyanazt a zárat használja. A munkaprofil szabályai az eszköz képernyőzárára is vonatkoznak."</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"A munkaprofil képernyőzára nem felel meg szervezete biztonsági előírásainak. Használhatja ugyanazt a képernyőzárat eszközénél és munkaprofiljánál is, azonban a munkaprofil képernyőzárára vonatkozó irányelvek az eszköz képernyőzárára is vonatkoznak majd."</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"Egy zár használata"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"Egy zár használata"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"Ugyanaz, mint az eszköz képernyőzára"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"Alkalmazások kezelése"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"Telepített alkalmazások kezelése és eltávolítása"</string>
@@ -2260,6 +2256,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Mindig bekapcsolt VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"Nincs VPN megadva."</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"A mindig bekapcsolt VPN aktív"</string>
+    <string name="vpn_always_on_inactive" msgid="3488804214062121892">"A „mindig bekapcsolt” mód inaktív"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Ez az alkalmazás nem támogatja"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Válasszon ki egy VPN-profilt, amelyhez mindig csatlakozni szeretne. A hálózati forgalom csak akkor lesz engedélyezve, ha ehhez a VPN-hez csatlakozik."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Nincs"</string>
@@ -2540,10 +2537,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Nem sikerült írni az NFC-címkére. Ha a probléma továbbra is fennáll, próbálkozzon egy másik címkével"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Az NFC-címke nem írható. Használjon egy másik címkét."</string>
     <string name="default_sound" msgid="8821684447333687810">"Alapértelmezett hang"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"Csörgetési hangerő szintje: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Csörgetés hangereje: 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Média hangereje"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Ébresztés hangereje"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Csengés hangereje"</string>
@@ -2752,8 +2747,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Amikor megadja a PIN-kódot az eszköz indításához, a(z) <xliff:g id="SERVICE">%1$s</xliff:g> funkcióhoz hasonló kisegítő lehetőségek még nem lesznek elérhetők."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Amikor megadja a mintát az eszköz indításához, a(z) <xliff:g id="SERVICE">%1$s</xliff:g> funkcióhoz hasonló kisegítő lehetőségek még nem lesznek elérhetők."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Amikor megadja a jelszót az eszköz indításához, a(z) <xliff:g id="SERVICE">%1$s</xliff:g> funkcióhoz hasonló kisegítő lehetőségek még nem lesznek elérhetők."</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Megjegyzés: Újraindítás után ez az alkalmazás csak a telefon feloldását követően indul el"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-információ"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Relatív IMEI-információ"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Hely: <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3023,6 +3017,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"A háttéradatok kizárólag Wi-Fi-n keresztül állnak rendelkezésre. Ez hatással lehet bizonyos alkalmazásokra és szolgáltatásokra, amikor nincs rendelkezésre álló Wi-Fi-kapcsolat."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"A munkaprofil mód ki van kapcsolva"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Az alkalmazások, a háttérben való szinkronizálás és a munkaprofilhoz kapcsolódó egyéb funkciók kikapcsolva."</string>
+    <string name="condition_night_display_title" msgid="5599814941976856183">"Éjszakai fény be van kapcsolva"</string>
+    <string name="condition_night_display_summary" msgid="6156601053674688864">"A képernyő vöröses árnyalatúra színeződik; ez megkönnyítheti az elalvást."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Javaslatok"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"több mint <xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Eltávolítás"</string>
@@ -3071,8 +3067,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"PIN-kód kérése az eszköz indításához. Kikapcsolt állapotban az eszköz nem tud hívásokat és üzeneteket fogadni, illetve értesítéseket vagy riasztásokat megjeleníteni."</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Jelszó kérése az eszköz elindításához. Kikapcsolt állapotban az eszköz nem tud hívásokat és üzeneteket fogadni, illetve értesítéseket vagy riasztásokat megjeleníteni."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Másik ujjlenyomat megadása"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Feloldás egy másik ujjal"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Be/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Ki/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Soha ne kapcsoljon be automatikusan"</string>
@@ -3113,10 +3108,8 @@
     <string name="special_access" msgid="8275242424094109976">"Speciális hozzáférés"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"Valóban törli a felhasználói adatokat, és átvált fájlalapú titkosításra?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"Törlés és konvertálás"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"Visszaállítja a ShortcutManager gyakoriságkorlátozását"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"A ShortcutManager gyakoriságkorlátozása visszaállítva"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Lezárási képernyő értesítéseinek kezelése"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Értesítéstartalom megjelenítése vagy elrejtése"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Összes"</string>
@@ -3130,8 +3123,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"Demó mód"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Szívesen segítünk"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"A hét minden napján, 24 órában a rendelkezésére állunk"</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"A hét minden napján 24 órában a rendelkezésére állunk"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"Ügyfélszolgálati csapatunk bármilyen problémát orvosol"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Ügyfélszolgálati csapatunk bármikor az Ön rendelkezésére áll"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Keressen a Súgóban, vagy jöjjön vissza az ügyfélfogadási idő alatt (helyi idő):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3189,11 +3181,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kameraváltás"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"A képernyő gyors megtekintése"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"Ha a teljes felébresztés nélkül szeretné megnézni telefonja képernyőjét, egyszerűen koppintson rá duplán, vagy vegye a kezébe."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Az értesítések megtekintéséhez gyorsan csúsztassa az ujjait"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Megtekintheti értesítéseit, ha ujját lefelé húzza a telefonja hátulján található ujjlenyomat-érzékelőn"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Bekapcsolva"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Kikapcsolva"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"A rendszerbetöltő már fel van oldva"</string>

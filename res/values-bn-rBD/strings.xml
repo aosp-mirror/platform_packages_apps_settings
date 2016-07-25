@@ -416,11 +416,9 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"আপনি যে পাসওয়ার্ডটি লিখেছেন সেটি ঠিক আছে, কিন্তু দুর্ভাগ্যবশত আপনার ডেটা বিকৃত হয়েছে। \n\nআবার আপনার ট্যাবলেট ব্যবহার করা পুনরায় শুরু করতে, আপনাকে ফ্যাক্টরি রিসেট করতে হবে। পুনরায় সেট করার পর আপনি যখন আপনার ফোন সেট আপ করবেন তখন আপনার Google অ্যাকাউন্টে ব্যাকআপ করা যে কোনো ডেটা পুনরুদ্ধার করার সুযোগ পাবেন।"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"আপনি যে পাসওয়ার্ডটি লিখেছেন সেটি ঠিক আছে, কিন্তু দুর্ভাগ্যবশত আপনার ডেটা বিকৃত হয়েছে। \n\nআবার আপনার ফোন ব্যবহার করা পুনরায় শুরু করতে, আপনাকে ফ্যাক্টরি রিসেট করতে হবে। পুনরায় সেট করার পর আপনি যখন আপনার ফোন সেট আপ করবেন তখন আপনার Google অ্যাকাউন্টে ব্যাকআপ করা যে কোনো ডেটা পুনরুদ্ধার করার সুযোগ পাবেন।"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"ইনপুট পদ্ধতি পরিবর্তন করুন"</string>
-    <!-- no translation found for suggested_lock_settings_title (8971630898700461034) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8971630898700461034">"স্ক্রীন লক সেট করুন"</string>
     <string name="suggested_lock_settings_summary" msgid="8778462376012231110">"আপনার ডিভাইস সুরক্ষিত করুন"</string>
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (3655973509619012084) -->
-    <skip />
+    <string name="suggested_fingerprint_lock_settings_title" msgid="3655973509619012084">"আঙ্গুলের ছাপ ব্যবহার করুন"</string>
     <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"আপনার আঙ্গুলের ছাপ দিয়ে আনলক করুন"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"স্ক্রীন লক বেছে নিন"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"কর্মস্থলের লক বেছে নিন"</string>
@@ -505,31 +503,41 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"আপনি যদি এই প্রচেষ্টায় কোনো ভুল কাজের পাসওয়ার্ড দেন তাহলে আপনার কর্মস্থলের প্রোফাইল এবং সম্পর্কিত ডেটা এই ডিভাইস থেকে সরানো হবে৷"</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"অনেক বার ভুল প্রচেষ্টা করা হয়েছে৷ আপনার কর্মস্থলের প্রোফাইল এবং সম্পর্কিত ডেটা এই ডিভাইস থেকে সরানো হবে৷"</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"খারিজ করুন"</string>
-    <!-- no translation found for lockpassword_password_too_short (2691590536362441127) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2691590536362441127">"কমপক্ষে %dটি অক্ষর থাকতে হবে"</string>
     <string name="lockpassword_pin_too_short" msgid="1677649103470518953">"পিন কমপক্ষে %dটি সংখ্যার হতে হবে৷"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"চালিয়ে যান"</string>
-    <!-- no translation found for lockpassword_password_too_long (4520363269062591833) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (4010052843684165845) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (5537252833154289817) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="4520363269062591833">"<xliff:g id="NUMBER">%d</xliff:g>টি অক্ষরের থেকে কম হওয়া আবশ্যক।"</string>
+    <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"<xliff:g id="NUMBER">%d</xliff:g>টি সংখ্যার কম হতে হবে।"</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="5537252833154289817">"শুধুমাত্র ০-৯ সংখ্যা থাকতে হবে।"</string>
     <string name="lockpassword_pin_recently_used" msgid="214840704635573454">"ডিভাইস প্রশাসক একটি সাম্প্রতিক পিন ব্যবহার করার অনুমতি দেয় না।"</string>
-    <!-- no translation found for lockpassword_illegal_character (8049611046639943217) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (3036589522150097731) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (5140062925787058765) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (5944350865681510893) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (5415008859853535577) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (1452012183267855761) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (5536275490534483515) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (5132998285340017795) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (2778958281865593579) -->
+    <string name="lockpassword_illegal_character" msgid="8049611046639943217">"এতে কোনো অবৈধ অক্ষর অন্তর্ভুক্ত করা যাবে না"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"কমপক্ষে একটি অক্ষর থাকতে হবে"</string>
+    <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"কমপক্ষে একটি সংখ্যা থাকতে হবে"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"কমপক্ষে একটি চিহ্ন থাকতে হবে"</string>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="one">কমপক্ষে %dটি অক্ষর থাকতে হবে</item>
+      <item quantity="other">কমপক্ষে %dটি অক্ষর থাকতে হবে</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
+      <item quantity="one">কমপক্ষে %dটি ছোটহাতের অক্ষর থাকতে হবে</item>
+      <item quantity="other">কমপক্ষে %dটি ছোটহাতের অক্ষর থাকতে হবে</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="1452012183267855761">
+      <item quantity="one">কমপক্ষে %dটি বড়হাতের অক্ষর থাকতে হবে</item>
+      <item quantity="other">কমপক্ষে %dটি বড়হাতের অক্ষর থাকতে হবে</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="5536275490534483515">
+      <item quantity="one">কমপক্ষে %dটি নিউমেরিক সংখ্যা থাকতে হবে</item>
+      <item quantity="other">কমপক্ষে %dটি নিউমেরিক সংখ্যা থাকতে হবে</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5132998285340017795">
+      <item quantity="one">কমপক্ষে %dটি বিশেষ চিহ্ন থাকতে হবে</item>
+      <item quantity="other">কমপক্ষে %dটি বিশেষ চিহ্ন থাকতে হবে</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="2778958281865593579">
+      <item quantity="one">কমপক্ষে %dটি বর্ণ নয় এমন অক্ষর থাকতে হবে</item>
+      <item quantity="other"> কমপক্ষে %dটি বর্ণ নয় এমন অক্ষর থাকতে হবে</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"ডিভাইস প্রশাসক একটি সাম্প্রতিক পাসওয়ার্ড ব্যবহার করার অনুমতি দেয় না।"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"উর্ধ্বক্রমে, নিম্নক্রমে বা পুনরাবৃত্ত ধারার সংখ্যা নিষিদ্ধ"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"ঠিক আছে"</string>
@@ -838,8 +846,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"ভলিউম"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"সঙ্গীত প্রভাব"</string>
-    <!-- no translation found for ring_volume_title (5592466070832128777) -->
-    <skip />
+    <string name="ring_volume_title" msgid="5592466070832128777">"রিং ভলিউম"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"নিঃশব্দ থাকাকালীন কম্পন"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"ডিফল্ট বিজ্ঞপ্তি শব্দ"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"রিংটোন"</string>
@@ -898,10 +905,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"স্ক্রীনের উজ্জ্বলতা সামঞ্জস্য করুন"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"অভিযোজিত উজ্জ্বলতা"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"উপলব্ধ আলোর পরিপ্রেক্ষিতে উজ্জ্বলতার স্তর মানানসই করুন"</string>
-    <!-- no translation found for night_display_title (2626451512200357686) -->
-    <skip />
-    <!-- no translation found for night_display_text (8753843222371219454) -->
-    <skip />
+    <string name="night_display_title" msgid="2626451512200357686">"নাইট লাইট"</string>
+    <string name="night_display_text" msgid="8753843222371219454">"নাইট লাইট রাতে আপনার স্ক্রীনকে লাল আভা দেয়৷ এটি আপনাকে অস্পষ্ট আলোয় স্ক্রীনের দিকে স্বচ্ছন্দে তাকানোর সুবিধা দেয় এবং খুব সহজে ঘুমিয়ে পড়তে সহায়তা করে৷"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"স্বয়ংক্রিয়ভাবে চালু করুন"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"কখনই নয়"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"কাস্টম সময়সূচী"</string>
@@ -936,8 +941,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"স্বয়ংক্রিয় উজ্জ্বলতা"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"সক্রিয় করতে লিফ্ট করুন"</string>
     <string name="doze_title" msgid="2259176504273878294">"অ্যামবিয়েন্ট প্রদর্শন"</string>
-    <!-- no translation found for doze_summary (4312399592244939565) -->
-    <skip />
+    <string name="doze_summary" msgid="4312399592244939565">"আপনি স্ক্রীনে দুবার আলতো চাপলে বা নতুন বিজ্ঞপ্তিগুলি পেলে এটি জেগে ওঠে। কীভাবে দেখুন"</string>
     <string name="title_font_size" msgid="4405544325522105222">"হরফের আকার"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"পাঠ্য বড় বা ছোট করুন"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"সিম কার্ড লক সেটিংস"</string>
@@ -1305,8 +1309,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"প্রদায়কগণ"</string>
     <string name="manual" msgid="3025943393642974445">"ম্যানুয়াল"</string>
     <string name="regulatory_labels" msgid="1293050314122427492">"রেগুলেটরি লেবেল"</string>
-    <!-- no translation found for safety_and_regulatory_info (5103161279848427185) -->
-    <skip />
+    <string name="safety_and_regulatory_info" msgid="5103161279848427185">"নিরাপত্তা ও নিয়ন্ত্রণ বিধির নির্দেশিকা"</string>
     <string name="copyright_title" msgid="865906688917260647">"কপিরাইট"</string>
     <string name="license_title" msgid="1990487604356037871">"লাইসেন্স"</string>
     <string name="terms_title" msgid="7697580845616764642">"চুক্তি এবং শর্তাবলী"</string>
@@ -1378,20 +1381,13 @@
     <string name="activity_not_found" msgid="5551664692991605325">"আপনার ফোনে অ্যাপ্লিকেশান ইনস্টল করা নেই৷"</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"কর্মস্থলের প্রোফাইলের নিরাপত্তা"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"কর্মস্থলের প্রোফাইলের স্ক্রীন লক"</string>
-    <!-- no translation found for lock_settings_profile_unification_title (4973102698492659123) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_summary (7178299172998641303) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_title (4824620230229285301) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_body (1787427605545808829) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_body (3221303098797469900) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_confirm (8249970828159656518) -->
-    <skip />
-    <!-- no translation found for lock_settings_profile_unification_dialog_uncompliant_confirm (5943758576756482777) -->
-    <skip />
+    <string name="lock_settings_profile_unification_title" msgid="4973102698492659123">"একটি লক ব্যবহার করুন"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="7178299172998641303">"কর্মস্থলের প্রোফাইল এবং ডিভাইসের স্ক্রীনের জন্য একটি লক ব্যবহার করুন"</string>
+    <string name="lock_settings_profile_unification_dialog_title" msgid="4824620230229285301">"একটি লক ব্যবহার করতে চান?"</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1787427605545808829">"আপনার কর্মস্থলের প্রোফাইল এবং ডিভাইসের স্ক্রীন একই লক ব্যবহার করবে। আপনার ডিভাইসের স্ক্রীন লকে যে কোনো কর্মস্থলের লকের নীতিগুলিও প্রযোজ্য হবে।"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="3221303098797469900">"আপনার কর্মস্থলের প্রোফাইলের লক আপনার প্রতিষ্ঠানের সুরক্ষার প্রয়োজনীয়তাগুলি পূরণ করছে না৷ আপনি আপনার ডিভাইস এবং কর্মস্থলের প্রোফাইল উভয়ের জন্যই একই লক ব্যবহার করতে পারেন, কিন্তু তার সাথে কর্মস্থলের স্ক্রীন লকের নীতিগুলিও প্রযোজ্য হবে৷"</string>
+    <string name="lock_settings_profile_unification_dialog_confirm" msgid="8249970828159656518">"একটি লক ব্যবহার করুন"</string>
+    <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="5943758576756482777">"একটি লক ব্যবহার করুন"</string>
     <string name="lock_settings_profile_unified_summary" msgid="9008819078132993492">"ডিভাইসের স্ক্রীন লকের মত একই"</string>
     <string name="manageapplications_settings_title" msgid="7041951105633616745">"অ্যাপ্লিকেশনগুলি পরিচালনা করুন"</string>
     <string name="manageapplications_settings_summary" msgid="1794401500935451259">"ইনস্টল করা অ্যাপ্লিকেশানগুলি পরিচালনা করুন ও সরান"</string>
@@ -2260,6 +2256,7 @@
     <string name="vpn_menu_lockdown" msgid="7863024538064268139">"সর্বদা-চালু VPN"</string>
     <string name="vpn_no_vpns_added" msgid="4308317205962153438">"কোনো VPN যোগ করা হয়নি৷"</string>
     <string name="vpn_always_on_active" msgid="2789423425184556882">"সর্বদা সক্রিয়"</string>
+    <string name="vpn_always_on_inactive" msgid="3488804214062121892">"\'সর্বদা-চালু\' নিষ্ক্রিয় আছে"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"এই অ্যাপ্লিকেশানটি দ্বারা সমর্থিত নয়"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"সর্বদা সংযুক্ত থাকতে একটি VPN প্রোফাইল নির্বাচন করুন। এই VPN এ সংযুক্ত থাকাকালীন শুধুমাত্র নেটওয়ার্ক ট্রাফিকের অনুমতি দেওয়া হবে।"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"কোনো কিছুই নয়"</string>
@@ -2540,10 +2537,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"NFC ট্যাগে ডেটা লিখতে ব্যর্থ হয়েছে৷ যদি সমস্যাটি থেকে যায়, তবে অন্য একটি ট্যাগ দিয়ে চেষ্টা করুন"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC ট্যাগ লিখনযোগ্য নয়৷ দয়া করে একটি আলাদা ট্যাগ ব্যবহার করুন৷"</string>
     <string name="default_sound" msgid="8821684447333687810">"ডিফল্ট শব্দ"</string>
-    <!-- no translation found for sound_settings_summary (4100853606668287965) -->
-    <skip />
-    <!-- no translation found for sound_settings_example_summary (2404914514266523165) -->
-    <skip />
+    <string name="sound_settings_summary" msgid="4100853606668287965">"রিং ভলিউম <xliff:g id="PERCENTAGE">%1$s</xliff:g> তে রয়েছে"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"রিং ভলিউম ৮০% তে রয়েছে"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"মিডিয়া ভলিউম"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"অ্যালার্মের ভলিউম"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"রিং ভলিউম"</string>
@@ -2752,8 +2747,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার পিন লিখবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার প্যাটার্ন আঁকবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার পাসওয়ার্ড লিখবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
-    <!-- no translation found for direct_boot_unaware_dialog_message (7870273558547549125) -->
-    <skip />
+    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"দ্রষ্টব্য: পুনরায় চালু করার পরে, আপনি আপনার ফোন আনলক না করা পর্যন্ত এই অ্যাপটিকে চালু করতে পারবেন না"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI তথ্য"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI আপেক্ষিক তথ্য"</string>
     <string name="slot_number" msgid="3762676044904653577">"(স্লট<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3023,6 +3017,8 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"পশ্চাদপট ডেটা শুধুমাত্র ওয়াই-ফাই এর মাধ্যমে উপলব্ধ হয়৷ ওয়াই-ফাই উপলব্ধ না থাকলে এটি কিছু অ্যাপ্লিকেশান এবং পরিষেবায় প্রভাব ফেলতে পারে৷"</string>
     <string name="condition_work_title" msgid="7293722361184366648">"কর্মস্থলের প্রোফাইল বন্ধ রয়েছে"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"অ্যাপ, পটভূমি সিঙ্ক এবং আপনার কর্মস্থলের প্রোফাইলের সাথে সম্পর্কিত অন্য বৈশিষ্ট্যগুলিকে বন্ধ করা হয়েছে৷"</string>
+    <string name="condition_night_display_title" msgid="5599814941976856183">"নাইট লাইট চালু আছে"</string>
+    <string name="condition_night_display_summary" msgid="6156601053674688864">"স্ক্রীন লাল আভা ধারণ করে৷ এটি আপনাকে ঘুমিয়ে পড়তে সহায়তা করতে পারে৷"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"প্রস্তাবনাগুলি"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>টি"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"সরান"</string>
@@ -3071,8 +3067,7 @@
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"আপনার ডিভাইস চালু করার জন্য পিন এর প্রয়োজন আছে। বন্ধ থাকার সময়ে এই ডিভাইসটি কল, বার্তা, বিজ্ঞপ্তি বা অ্যালার্মগুলি পেতে পারবে না।"</string>
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"আপনার ডিভাইসটিকে চালু করার জন্য পাসওয়ার্ডের প্রয়োজন আছে। বন্ধ থাকার সময়ে, এই ডিভাইসটি কল, বার্তা, বিজ্ঞপ্তি বা অ্যালার্মগুলি পেতে পারবে না।"</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"অন্য একটি আঙ্গুলের ছাপ যোগ করুন"</string>
-    <!-- no translation found for suggestion_additional_fingerprints_summary (5471253233176471245) -->
-    <skip />
+    <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"একটি আলাদা আঙুল দিয়ে আনলক করুন"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"চালু আছে / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"বন্ধ আছে / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"কখনই স্বয়ংক্রিয়ভাবে চালু করবেন না"</string>
@@ -3113,10 +3108,8 @@
     <string name="special_access" msgid="8275242424094109976">"বিশেষ অ্যাক্সেস"</string>
     <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"ব্যবহারকারীর ডেটা মুছতে এবং ফাইল এনক্রিপশানে রূপান্তর করার বিষয়ে নিশ্চিত?"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"মুছুন ও রূপান্তর করুন"</string>
-    <!-- no translation found for reset_shortcut_manager_throttling (6495066467198668994) -->
-    <skip />
-    <!-- no translation found for reset_shortcut_manager_throttling_complete (1826770872063707900) -->
-    <skip />
+    <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager রেট-লিমিটিং পুনরায় সেট করুন"</string>
+    <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager রেট-লিমিটিং পুনরায় সেট করা হয়েছে"</string>
     <string name="notification_suggestion_title" msgid="4506524937307816475">"লক স্ক্রীন বিজ্ঞপ্তিগুলি নিয়ন্ত্রণ করুন"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"বিজ্ঞপ্তির সামগ্রী দেখান বা লুকান"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"সমস্ত"</string>
@@ -3130,8 +3123,7 @@
     <string name="demo_mode" msgid="2655748420527206870">"ডেমো মোড"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"আপনাকে সাহায্য করতে আমরা প্রস্তুত"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"আমরা আপনাকে সহায়তা করার জন্য সপ্তাহে সাত দিন ২৪ ঘন্টা এখানে রয়েছি"</string>
-    <!-- no translation found for support_escalation_24_7_content_description (3772776213036994533) -->
-    <skip />
+    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"আমরা আপনাকে সহায়তা করার জন্য সপ্তাহে সাত দিন ২৪ ঘন্টা এখানে রয়েছি"</string>
     <string name="support_escalation_summary" msgid="4481910353815635960">"যে কোনো সমস্যার সমাধান করার জন্য আমাদের সহায়তা টিম এখানে রয়েছে"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"আমাদের সহায়তা টিম সপ্তাহে সাত দিন ২৪ ঘন্টা এখানে রয়েছে"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"সহায়তা অনুসন্ধান করুন বা সহায়তা প্রদান চালু থাকার সময়ে আমাদের সাথে যোগযোগ করুন (স্থানীয় সময়):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3189,11 +3181,9 @@
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"ক্যামেরা ফ্লিপ করুন"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"দ্রুত স্ক্রীন চেক"</string>
-    <!-- no translation found for ambient_display_summary (3606386731704368561) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="3606386731704368561">"আপনার ফোনকে সম্পূর্ণরূপে না জাগিয়ে এটি চেক করতে, এতে দুবার আলতো চাপুন বা এটিকে হাতে তুলে নিন"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"বিজ্ঞপ্তিগুলির জন্য সোয়াইপ করুন"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5274050434459511239) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"আপনার বিজ্ঞপ্তিগুলি চেক করতে, আপনার ফোনের পিছনে আঙ্গুলের ছাপ নেওয়ার সেন্সরে নীচের দিকে সোয়াইপ করুন"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"চালু আছে"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"বন্ধ আছে"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"বুটলোডার ইতিমধ্যেই আনলক করা হয়েছে"</string>
