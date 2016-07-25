@@ -32,8 +32,6 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.telephony.CarrierConfigManager;
-import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -379,39 +377,17 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
         private final Context mContext;
         private final SummaryLoader mSummaryLoader;
-        private final SubscriptionManager mSubscriptionManager;
-        private final SubscriptionChangeListener mSubscriptionChangeListener;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader) {
             mContext = context;
             mSummaryLoader = summaryLoader;
-            mSubscriptionManager = SubscriptionManager.from(mContext);
-            mSubscriptionChangeListener = new SubscriptionChangeListener();
         }
 
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                updateSummary();
-                mSubscriptionManager.addOnSubscriptionsChangedListener(mSubscriptionChangeListener);
-            } else {
-                mSubscriptionManager.removeOnSubscriptionsChangedListener(
-                        mSubscriptionChangeListener);
-            }
-        }
-
-        private void updateSummary() {
-            final String formattedPhoneNumbers = DeviceInfoUtils.getFormattedPhoneNumbers(
-                    mContext, mSubscriptionManager.getActiveSubscriptionInfoList());
-            mSummaryLoader.setSummary(SummaryProvider.this, formattedPhoneNumbers);
-        }
-
-        private final class SubscriptionChangeListener
-                extends SubscriptionManager.OnSubscriptionsChangedListener {
-
-            @Override
-            public void onSubscriptionsChanged() {
-                updateSummary();
+                mSummaryLoader.setSummary(this, mContext.getString(R.string.about_summary,
+                        Build.VERSION.RELEASE));
             }
         }
     }
