@@ -320,11 +320,10 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                     messageId = R.string.bluetooth_empty_list_user_restricted;
                     break;
                 }
-                if (getPreferenceScreen().getPreferenceCount() == 0) {
-                    getPreferenceScreen().addPreference(mPairedDevicesCategory);
-                    getPreferenceScreen().addPreference(mAvailableDevicesCategory);
-                    getPreferenceScreen().addPreference(mMyDevicePreference);
-                }
+                getPreferenceScreen().removeAll();
+                getPreferenceScreen().addPreference(mPairedDevicesCategory);
+                getPreferenceScreen().addPreference(mAvailableDevicesCategory);
+                getPreferenceScreen().addPreference(mMyDevicePreference);
 
                 // Paired devices category
                 addDeviceCategory(mPairedDevicesCategory,
