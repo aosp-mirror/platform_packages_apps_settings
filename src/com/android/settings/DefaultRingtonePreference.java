@@ -19,36 +19,66 @@ package com.android.settings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.util.Log;
 
 public class DefaultRingtonePreference extends RingtonePreference {
     private static final String TAG = "DefaultRingtonePreference";
-    
+
+    private int mUserId;
+    private Context mUserContext;
+
     public DefaultRingtonePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mUserContext = getContext();
+    }
+
+    public void setUserId(int userId) {
+        mUserId = userId;
+        Context context = getContext();
+        mUserContext = Utils.createPackageContextAsUser(context, mUserId);
+    }
+
+    @Override
+    public void performClick() {
+        if (!Utils.startQuietModeDialogIfNecessary(getContext(), UserManager.get(getContext()),
+                mUserId)) {
+            super.performClick();
+        }
+    }
+
+    public void clearUserId(int userId) {
+        mUserId = UserHandle.USER_CURRENT;
+        mUserContext = getContext();
     }
 
     @Override
     public void onPrepareRingtonePickerIntent(Intent ringtonePickerIntent) {
         super.onPrepareRingtonePickerIntent(ringtonePickerIntent);
-        
+
         /*
          * Since this preference is for choosing the default ringtone, it
          * doesn't make sense to show a 'Default' item.
          */
         ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
+        if (mUserId != UserHandle.USER_CURRENT) {
+            ringtonePickerIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+        }
     }
 
     @Override
     protected void onSaveRingtone(Uri ringtoneUri) {
-        RingtoneManager.setActualDefaultRingtoneUri(getContext(), getRingtoneType(), ringtoneUri);
+        RingtoneManager.setActualDefaultRingtoneUri(mUserContext, getRingtoneType(), ringtoneUri);
     }
 
     @Override
     protected Uri onRestoreRingtone() {
-        return RingtoneManager.getActualDefaultRingtoneUri(getContext(), getRingtoneType());
+        return RingtoneManager.getActualDefaultRingtoneUri(mUserContext, getRingtoneType());
     }
-    
+
 }
