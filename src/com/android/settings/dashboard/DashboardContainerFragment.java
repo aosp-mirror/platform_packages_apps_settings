@@ -22,6 +22,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,10 @@ import com.android.settingslib.drawer.SettingsDrawerActivity;
  */
 public final class DashboardContainerFragment extends InstrumentedFragment {
 
+    public static final String EXTRA_SELECT_SETTINGS_TAB = ":settings:select_settings_tab";
+
+    private static final String ARG_SUPPORT_TAB = "SUPPORT";
+    private static final String ARG_SUMMARY_TAB = "SUMMARY";
     private static final int INDEX_SUMMARY_FRAGMENT = 0;
     private static final int INDEX_SUPPORT_FRAGMENT = 1;
 
@@ -69,7 +74,16 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(
                 new TabChangeListener((SettingsActivity) getActivity()));
-        mViewPager.setCurrentItem(INDEX_SUMMARY_FRAGMENT);
+
+        // check if support tab needs to be selected
+        final String selectedTab = getArguments().
+            getString(EXTRA_SELECT_SETTINGS_TAB, ARG_SUMMARY_TAB);
+        if (TextUtils.equals(selectedTab, ARG_SUPPORT_TAB)) {
+            mViewPager.setCurrentItem(INDEX_SUPPORT_FRAGMENT);
+        } else {
+            mViewPager.setCurrentItem(INDEX_SUMMARY_FRAGMENT);
+        }
+
         mHeaderView = inflater.inflate(R.layout.dashboard_container_header, parent, false);
         ((SlidingTabLayout) mHeaderView).setViewPager(mViewPager);
         return content;
