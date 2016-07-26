@@ -588,7 +588,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             // of starting fresh.
             mSearchMenuItemExpanded = savedState.getBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED);
             mSearchQuery = savedState.getString(SAVE_KEY_SEARCH_QUERY);
-
             setTitleFromIntent(intent);
 
             ArrayList<DashboardCategory> categories =
@@ -601,6 +600,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
             mDisplayHomeAsUpEnabled = savedState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
             mDisplaySearch = savedState.getBoolean(SAVE_KEY_SHOW_SEARCH);
+
         } else {
             if (!mIsShowingDashboard) {
                 mDisplaySearch = false;
@@ -623,7 +623,13 @@ public class SettingsActivity extends SettingsDrawerActivity
                 // Show Search affordance
                 mDisplaySearch = true;
                 mInitialTitleResId = R.string.dashboard_title;
-                switchToFragment(DashboardContainerFragment.class.getName(), null, false, false,
+
+                // add argument to indicate which settings tab should be initially selected
+                final Bundle args = new Bundle();
+                final String extraName = DashboardContainerFragment.EXTRA_SELECT_SETTINGS_TAB;
+                args.putString(extraName, intent.getStringExtra(extraName));
+
+                switchToFragment(DashboardContainerFragment.class.getName(), args, false, false,
                         mInitialTitleResId, mInitialTitle, false);
             }
         }
@@ -1272,5 +1278,4 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 }
