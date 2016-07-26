@@ -3045,6 +3045,12 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".HelpTrampoline"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:permission="android.permission.DUMP"
+            android:enabled="@bool/config_has_help" />
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
