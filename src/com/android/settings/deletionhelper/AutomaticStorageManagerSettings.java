@@ -55,8 +55,10 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     private static final String KEY_DELETION_HELPER = "deletion_helper";
     private static final String KEY_FREED = "freed_bytes";
     private static final String KEY_STORAGE_MANAGER_SWITCH = "storage_manager_active";
+    private static final String KEY_DOWNLOADS_DAYS = "downloads_days";
 
     private DropDownPreference mDaysToRetain;
+    private DropDownPreference mDownloadsDaysToRetain;
     private Preference mFreedBytes;
     private Preference mDeletionHelper;
     private SwitchPreference mStorageManagerSwitch;
@@ -73,6 +75,9 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         mDaysToRetain = (DropDownPreference) findPreference(KEY_DAYS);
         mDaysToRetain.setOnPreferenceChangeListener(this);
 
+        mDownloadsDaysToRetain = (DropDownPreference) findPreference(KEY_DOWNLOADS_DAYS);
+        mDownloadsDaysToRetain.setOnPreferenceChangeListener(this);
+
         mFreedBytes = findPreference(KEY_FREED);
 
         mDeletionHelper = findPreference(KEY_DELETION_HELPER);
@@ -82,12 +87,18 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         mStorageManagerSwitch.setOnPreferenceChangeListener(this);
 
         ContentResolver cr = getContentResolver();
-        int value = Settings.Secure.getInt(cr,
+        int photosDaysToRetain = Settings.Secure.getInt(cr,
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN_DEFAULT);
         String[] stringValues =
                 getResources().getStringArray(R.array.automatic_storage_management_days_values);
-        mDaysToRetain.setValue(stringValues[daysValueToIndex(value, stringValues)]);
+        mDaysToRetain.setValue(stringValues[daysValueToIndex(photosDaysToRetain, stringValues)]);
+
+        int downloadsDaysToRetain = Settings.Secure.getInt(cr,
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DOWNLOADS_DAYS_TO_RETAIN,
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN_DEFAULT);
+        mDownloadsDaysToRetain.setValue(stringValues[daysValueToIndex(downloadsDaysToRetain,
+                stringValues)]);
 
         long freedBytes = Settings.Secure.getLong(cr,
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_BYTES_CLEARED,
@@ -130,6 +141,11 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
             case KEY_DAYS:
                 Settings.Secure.putInt(getContentResolver(),
                         Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
+                        Integer.parseInt((String) newValue));
+                break;
+            case KEY_DOWNLOADS_DAYS:
+                Settings.Secure.putInt(getContentResolver(),
+                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_DOWNLOADS_DAYS_TO_RETAIN,
                         Integer.parseInt((String) newValue));
                 break;
         }

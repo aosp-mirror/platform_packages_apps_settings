@@ -43,6 +43,14 @@
             android:entryValues="@array/automatic_storage_management_days_values"
             settings:allowDividerAbove="true" />
 
+        <DropDownPreference
+            android:key="downloads_days"
+            android:summary="%s"
+            android:title="@string/automatic_storage_manager_downloads_days_title"
+            android:entries="@array/automatic_storage_management_days"
+            android:entryValues="@array/automatic_storage_management_days_values"
+            settings:allowDividerAbove="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
