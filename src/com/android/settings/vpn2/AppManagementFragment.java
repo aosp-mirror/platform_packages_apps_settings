@@ -15,12 +15,14 @@
  */
 package com.android.settings.vpn2;
 
+import android.annotation.NonNull;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -33,12 +35,13 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.net.VpnConfig;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.RestrictedPreference;
 
@@ -57,13 +60,11 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     private static final String KEY_ALWAYS_ON_VPN = "always_on_vpn";
     private static final String KEY_FORGET_VPN = "forget_vpn";
 
-    private AppOpsManager mAppOpsManager;
     private PackageManager mPackageManager;
     private ConnectivityManager mConnectivityManager;
 
     // VPN app info
     private final int mUserId = UserHandle.myUserId();
-    private int mPackageUid;
     private String mPackageName;
     private PackageInfo mPackageInfo;
     private String mVpnLabel;
@@ -105,7 +106,6 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.vpn_app_management);
 
         mPackageManager = getContext().getPackageManager();
-        mAppOpsManager = getContext().getSystemService(AppOpsManager.class);
         mConnectivityManager = getContext().getSystemService(ConnectivityManager.class);
 
         mPreferenceVersion = findPreference(KEY_VERSION);
@@ -199,19 +199,17 @@ public class AppManagementFragment extends SettingsPreferenceFragment
                 isEnabled ? mPackageName : null, /* lockdownEnabled */ false);
     }
 
-    private boolean checkTargetVersion() {
-        if (mPackageInfo == null || mPackageInfo.applicationInfo == null) {
-            return true;
+    @VisibleForTesting
+    static boolean isAlwaysOnSupportedByApp(@NonNull ApplicationInfo appInfo) {
+        final int targetSdk = appInfo.targetSdkVersion;
+        if (targetSdk < Build.VERSION_CODES.N) {
+            if (Log.isLoggable(TAG, Log.DEBUG)) {
+                Log.d(TAG, "Package " + appInfo.packageName + " targets SDK version: " + targetSdk
+                        + "; must target at least " + Build.VERSION_CODES.N + " to use always-on.");
+            }
+            return false;
         }
-        final int targetSdk = mPackageInfo.applicationInfo.targetSdkVersion;
-        if (targetSdk >= Build.VERSION_CODES.N) {
-            return true;
-        }
-        if (Log.isLoggable(TAG, Log.DEBUG)) {
-            Log.d(TAG, "Package " + mPackageName + " targets SDK version " + targetSdk + "; must"
-                    + " target at least " + Build.VERSION_CODES.N + " to use always-on.");
-        }
-        return false;
+        return true;
     }
 
     private void updateUI() {
@@ -228,7 +226,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
             mPreferenceForget.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN,
                     mUserId);
 
-            if (checkTargetVersion()) {
+            if (isAlwaysOnSupportedByApp(mPackageInfo.applicationInfo)) {
                 // setSummary doesn't override the admin message when user restriction is applied
                 mPreferenceAlwaysOn.setSummary(null);
                 // setEnabled is not required here, as checkRestrictionAndSetDisabled
@@ -266,7 +264,6 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         }
 
         try {
-            mPackageUid = mPackageManager.getPackageUid(mPackageName, /* PackageInfoFlags */ 0);
             mPackageInfo = mPackageManager.getPackageInfo(mPackageName, /* PackageInfoFlags */ 0);
             mVpnLabel = VpnConfig.getVpnLabel(getPrefContext(), mPackageName).toString();
         } catch (NameNotFoundException nnfe) {
@@ -274,7 +271,11 @@ public class AppManagementFragment extends SettingsPreferenceFragment
             return false;
         }
 
-        if (!isVpnActivated()) {
+        if (mPackageInfo.applicationInfo == null) {
+            Log.e(TAG, "package does not include an application");
+            return false;
+        }
+        if (!appHasVpnPermission(getContext(), mPackageInfo.applicationInfo)) {
             Log.e(TAG, "package didn't register VPN profile");
             return false;
         }
@@ -282,10 +283,13 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         return true;
     }
 
-    private boolean isVpnActivated() {
-        final List<AppOpsManager.PackageOps> apps = mAppOpsManager.getOpsForPackage(mPackageUid,
-                mPackageName, new int[]{OP_ACTIVATE_VPN});
-        return apps != null && apps.size() > 0 && apps.get(0) != null;
+    @VisibleForTesting
+    static boolean appHasVpnPermission(Context context, @NonNull ApplicationInfo application) {
+        final AppOpsManager service =
+                (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        final List<AppOpsManager.PackageOps> ops = service.getOpsForPackage(application.uid,
+                application.packageName, new int[]{OP_ACTIVATE_VPN});
+        return !ArrayUtils.isEmpty(ops);
     }
 
     private boolean isLegacyVpnLockDownOrAnotherPackageAlwaysOn() {
