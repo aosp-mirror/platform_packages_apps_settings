@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -136,7 +137,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     public void onItemClicked(int position) {
         if (position >= 0 && position < mSupportData.size()) {
             final SupportData data = mSupportData.get(position);
-            if (data.intent != null) {
+            if (data.intent != null &&
+                    mActivity.getPackageManager().resolveActivity(data.intent, 0) != null) {
                 if (data.metricsEvent >= 0) {
                     MetricsLogger.action(mActivity, data.metricsEvent);
                 }
@@ -283,18 +285,25 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
     private void addMoreHelpItems() {
         mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE_SPACER).build());
-        mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE)
-                .setIcon(R.drawable.ic_help_24dp)
-                .setTileTitle(R.string.support_help_feedback_title)
-                .setIntent(mSupportFeatureProvider.getHelpIntent(mActivity))
-                .setMetricsEvent(MetricsProto.MetricsEvent.ACTION_SUPPORT_HELP_AND_FEEDBACK)
-                .build());
-        mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE)
-                .setIcon(R.drawable.ic_lightbulb_outline_24)
-                .setTileTitle(R.string.support_tips_and_tricks_title)
-                .setIntent(mSupportFeatureProvider.getTipsAndTricksIntent(mActivity))
-                .setMetricsEvent(MetricsProto.MetricsEvent.ACTION_SUPPORT_TIPS_AND_TRICKS)
-                .build());
+        PackageManager packageManager = mActivity.getPackageManager();
+        Intent intent = mSupportFeatureProvider.getHelpIntent(mActivity);
+        if (packageManager.resolveActivity(intent, 0) != null) {
+            mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE)
+                    .setIcon(R.drawable.ic_help_24dp)
+                    .setTileTitle(R.string.support_help_feedback_title)
+                    .setIntent(intent)
+                    .setMetricsEvent(MetricsProto.MetricsEvent.ACTION_SUPPORT_HELP_AND_FEEDBACK)
+                    .build());
+        }
+        intent = mSupportFeatureProvider.getTipsAndTricksIntent(mActivity);
+        if (packageManager.resolveActivity(intent, 0) != null) {
+            mSupportData.add(new SupportData.Builder(mActivity, TYPE_SUPPORT_TILE)
+                    .setIcon(R.drawable.ic_lightbulb_outline_24)
+                    .setTileTitle(R.string.support_tips_and_tricks_title)
+                    .setIntent(intent)
+                    .setMetricsEvent(MetricsProto.MetricsEvent.ACTION_SUPPORT_TIPS_AND_TRICKS)
+                    .build());
+        }
     }
 
     private void bindEscalationOptions(ViewHolder holder, EscalationData data) {
