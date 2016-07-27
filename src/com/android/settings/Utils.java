@@ -1150,5 +1150,14 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         return false;
     }
-}
 
+    public static boolean isPackageDirectBootAware(Context context, String packageName) {
+        try {
+            final ApplicationInfo ai = context.getPackageManager().getApplicationInfo(
+                    packageName, 0);
+            return ai.isDirectBootAware() || ai.isPartiallyDirectBootAware();
+        } catch (NameNotFoundException ignored) {
+        }
+        return false;
+    }
+}

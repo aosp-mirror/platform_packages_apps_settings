@@ -22,19 +22,20 @@ import android.os.UserManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
 import com.android.internal.telephony.SmsApplication;
 import com.android.internal.telephony.SmsApplication.SmsApplicationData;
 import com.android.settings.AppListPreference;
+import com.android.settings.R;
 import com.android.settings.SelfAvailablePreference;
+import com.android.settings.Utils;
 
 import java.util.Collection;
 import java.util.Objects;
 
 public class DefaultSmsPreference extends AppListPreference implements SelfAvailablePreference {
-
     public DefaultSmsPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         loadSmsApps();
     }
 
@@ -57,6 +58,12 @@ public class DefaultSmsPreference extends AppListPreference implements SelfAvail
             return appName.getPackageName();
         }
         return null;
+    }
+
+    @Override
+    protected CharSequence getConfirmationMessage(String value) {
+        return Utils.isPackageDirectBootAware(getContext(), value) ? null
+                : getContext().getText(R.string.direct_boot_unaware_dialog_message);
     }
 
     @Override
