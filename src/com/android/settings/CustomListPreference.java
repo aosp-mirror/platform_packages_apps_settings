@@ -18,8 +18,13 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v14.preference.ListPreferenceDialogFragment;
 import android.support.v7.preference.ListPreference;
@@ -48,6 +53,18 @@ public class CustomListPreference extends ListPreference {
 
     protected boolean isAutoClosePreference() {
         return true;
+    }
+
+    /**
+     * Called when a user is about to choose the given value, to determine if we
+     * should show a confirmation dialog.
+     *
+     * @param value the value the user is about to choose
+     * @return the message to show in a confirmation dialog, or {@code null} to
+     *         not request confirmation
+     */
+    protected CharSequence getConfirmationMessage(String value) {
+        return null;
     }
 
     protected void onDialogStateRestored(Dialog dialog, Bundle savedInstanceState) {
@@ -82,9 +99,7 @@ public class CustomListPreference extends ListPreference {
                 builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        CustomListPreferenceDialogFragment.this.onClick(dialog,
-                                DialogInterface.BUTTON_POSITIVE);
-                        dialog.dismiss();
+                        onItemChosen();
                     }
                 });
             }
@@ -115,18 +130,11 @@ public class CustomListPreference extends ListPreference {
 
         protected DialogInterface.OnClickListener getOnItemClickListener() {
             return new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int which) {
                     setClickedDialogEntryIndex(which);
-
-
                     if (getCustomizablePreference().isAutoClosePreference()) {
-                        /*
-                         * Clicking on an item simulates the positive button
-                         * click, and dismisses the dialog.
-                         */
-                        CustomListPreferenceDialogFragment.this.onClick(dialog,
-                                DialogInterface.BUTTON_POSITIVE);
-                        dialog.dismiss();
+                        onItemChosen();
                     }
                 }
             };
@@ -136,17 +144,74 @@ public class CustomListPreference extends ListPreference {
             mClickedDialogEntryIndex = which;
         }
 
+        private String getValue() {
+            final ListPreference preference = getCustomizablePreference();
+            if (mClickedDialogEntryIndex >= 0 && preference.getEntryValues() != null) {
+                return preference.getEntryValues()[mClickedDialogEntryIndex].toString();
+            } else {
+                return null;
+            }
+        }
+
+        /**
+         * Called when user has made a concrete item choice, but we might need
+         * to make a quick detour to confirm that choice with a second dialog.
+         */
+        protected void onItemChosen() {
+            final CharSequence message = getCustomizablePreference()
+                    .getConfirmationMessage(getValue());
+            if (message != null) {
+                final Fragment f = new ConfirmDialogFragment();
+                final Bundle args = new Bundle();
+                args.putCharSequence(Intent.EXTRA_TEXT, message);
+                f.setArguments(args);
+                f.setTargetFragment(CustomListPreferenceDialogFragment.this, 0);
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(f, getTag() + "-Confirm");
+                ft.commitAllowingStateLoss();
+            } else {
+                onItemConfirmed();
+            }
+        }
+
+        /**
+         * Called when user has made a concrete item choice and we've fully
+         * confirmed they want to move forward (if we took a detour above).
+         */
+        protected void onItemConfirmed() {
+            onClick(getDialog(), DialogInterface.BUTTON_POSITIVE);
+            getDialog().dismiss();
+        }
+
         @Override
         public void onDialogClosed(boolean positiveResult) {
             getCustomizablePreference().onDialogClosed(positiveResult);
             final ListPreference preference = getCustomizablePreference();
-            if (positiveResult && mClickedDialogEntryIndex >= 0 &&
-                    preference.getEntryValues() != null) {
-                String value = preference.getEntryValues()[mClickedDialogEntryIndex].toString();
+            final String value = getValue();
+            if (positiveResult && value != null) {
                 if (preference.callChangeListener(value)) {
                     preference.setValue(value);
                 }
             }
+        }
+    }
+
+    public static class ConfirmDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setMessage(getArguments().getCharSequence(Intent.EXTRA_TEXT))
+                    .setPositiveButton(android.R.string.ok, new OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            final Fragment f = getTargetFragment();
+                            if (f != null) {
+                                ((CustomListPreferenceDialogFragment) f).onItemConfirmed();
+                            }
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .create();
         }
     }
 }
