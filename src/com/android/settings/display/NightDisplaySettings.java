@@ -22,15 +22,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
-import android.widget.Switch;
+import android.support.v7.preference.TwoStatePreference;
 import android.widget.TimePicker;
 
 import com.android.internal.app.NightDisplayController;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.widget.SwitchBar;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -39,14 +37,13 @@ import java.util.TimeZone;
 /**
  * Settings screen for Night display.
  */
-public class NightDisplaySettings extends SettingsPreferenceFragment implements
-        NightDisplayController.Callback,
-        Preference.OnPreferenceChangeListener,
-        SwitchBar.OnSwitchChangeListener {
+public class NightDisplaySettings extends SettingsPreferenceFragment
+        implements NightDisplayController.Callback, Preference.OnPreferenceChangeListener {
 
     private static final String KEY_NIGHT_DISPLAY_AUTO_MODE = "night_display_auto_mode";
     private static final String KEY_NIGHT_DISPLAY_START_TIME = "night_display_start_time";
     private static final String KEY_NIGHT_DISPLAY_END_TIME = "night_display_end_time";
+    private static final String KEY_NIGHT_DISPLAY_ACTIVATED = "night_display_activated";
 
     private static final int DIALOG_START_TIME = 0;
     private static final int DIALOG_END_TIME = 1;
@@ -57,8 +54,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment implements
     private DropDownPreference mAutoModePreference;
     private Preference mStartTimePreference;
     private Preference mEndTimePreference;
-
-    private SwitchBar mSwitchBar;
+    private TwoStatePreference mActivatedPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +77,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment implements
         mAutoModePreference = (DropDownPreference) findPreference(KEY_NIGHT_DISPLAY_AUTO_MODE);
         mStartTimePreference = findPreference(KEY_NIGHT_DISPLAY_START_TIME);
         mEndTimePreference = findPreference(KEY_NIGHT_DISPLAY_END_TIME);
+        mActivatedPreference = (TwoStatePreference) findPreference(KEY_NIGHT_DISPLAY_ACTIVATED);
 
         mAutoModePreference.setEntries(new CharSequence[] {
                 getString(R.string.night_display_auto_mode_never),
@@ -93,15 +90,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment implements
                 String.valueOf(NightDisplayController.AUTO_MODE_TWILIGHT)
         });
         mAutoModePreference.setOnPreferenceChangeListener(this);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
-        mSwitchBar.addOnSwitchChangeListener(this);
-        mSwitchBar.show();
+        mActivatedPreference.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -168,7 +157,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment implements
 
     @Override
     public void onActivated(boolean activated) {
-        mSwitchBar.setChecked(activated);
+        mActivatedPreference.setChecked(activated);
     }
 
     @Override
@@ -201,20 +190,11 @@ public class NightDisplaySettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        // Attempt to update the NIGHT_DISPLAY_ACTIVATED setting if necessary.
-        final boolean isActivated = mController.isActivated();
-        if (isActivated != isChecked) {
-            if (mController.setActivated(isChecked)) {
-                switchView.setChecked(isActivated);
-            }
-        }
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mAutoModePreference) {
             return mController.setAutoMode(Integer.parseInt((String) newValue));
+        } else if (preference == mActivatedPreference) {
+            return mController.setActivated((Boolean) newValue);
         }
         return false;
     }
