@@ -122,6 +122,7 @@
     <string name="device_picker" msgid="4978696506172252813">"ဘလူးတုသ် စက်ကိရိယာကို ရွေးပါ"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"ဘလူးတုသ်ခွင့်ပြုချက်တောင်းခံသည်"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"အက်ပ်တစ်ခုက ဒီကိရိယာ အတွက် ဘလူးတုသ်ကို ဖွင့်ပေး လိုသည်။"</string>
+    <string name="bluetooth_ask_disablement" msgid="5889300510508065674">"အက်ပ်တစ်ခုသည် ဤစက်ပစ္စည်းအတွက် ဘလူးတုသ်ကို ပိတ်ပေးလိုပါသည်။"</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"အပလီကေးရှင်းတစ်ခုမှ သင်၏တက်ဘလက်ကို အခြားဘလူးတုသ်ပစ္စည်းများမှ <xliff:g id="TIMEOUT">%1$d</xliff:g> စက္ကန့် မြင်အောင် လုပ်လိုသည်။"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"အပလီကေးရှင်းတစ်ခုမှ သင်၏ ဖုန်းကို အခြားဘလူးတုသ်ပစ္စည်းများမှ <xliff:g id="TIMEOUT">%1$d</xliff:g> စက္ကန့်ကြာစွာ မြင်အောင် လုပ်လိုသည်။"</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"အပလီကေးရှင်းတစ်ခုမှ သင်၏ တက်ဘလက်ကို အခြား ဘလူးတုသ်ပစ္စည်းများမှ မြင်အောင် လုပ်လိုသည်။ သင် နောက်ပိုင်းတွင် ဘလူးတုသ်ဆက်တင်တွင် ပြန်လည် ပြင်ဆင်နိုင်သည်။"</string>
@@ -1978,6 +1979,8 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"ဟာ့ဒ်ဝဲနှင့် ချိတ်ဆက်ထားသော"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"ဆော့ဖ်ဝဲသပ်သပ်"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"ဒီအသုံးပြုသူ အတွက် စိတ်ချရ အချက်များ မရှိ"</string>
+    <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"VPN နှင့် အက်ပ်များအတွက် ထည့်သွင်းထားပါသည်"</string>
+    <string name="credential_for_wifi" msgid="6228425986551591864">"Wi-Fi အတွက် ထည့်သွင်းထားပါသည်"</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"ယုံကြည်စိတ်ချရသောသိုလှောင်ရာနေရာ၏ စကားဝှက်ကို ထည့်ပါ"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"လက်ရှိ စကားဝှက်"</string>
@@ -2272,6 +2275,7 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"စနစ်၏CA လက်မှတ်အား ဖွင့်ထားမလား?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"စနစ်၏CA လက်မှတ်အား ပိတ်ထားမည်"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"အသုံးပြုသူ၏CA လက်မှတ်အား ထာဝရဖယ်ရှားမည်လား?"</string>
+    <string name="credential_contains" msgid="3984922924723974084">"ဤအကြောင်းအရာတွင် ပါဝင်သည်များ −"</string>
     <string name="one_userkey" msgid="6034020579534914349">"အသုံးပြုသူ၏ ကီးတစ်ခု"</string>
     <string name="one_usercrt" msgid="2150319011101639509">"အသုံးပြုသူ၏ လက်မှတ် တစ်ခု"</string>
     <string name="one_cacrt" msgid="6844397037970164809">"CA လက်မှတ်တစ်ခု"</string>
@@ -3190,4 +3194,6 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"အင်တာနက်သို့ ဦးစွာချိတ်ဆက်ပါ"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"ဝန်ဆောင်မှုပေးသူလော့ခ်ချထားသည့် စက်ပစ္စည်းများတွင်မရနိုင်ပါ"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"နေရာလွတ်စုစုပေါင်း <xliff:g id="SIZE">%1$s</xliff:g> ပြုလုပ်ခဲ့ပါသည်\n\n<xliff:g id="DATE">%2$s</xliff:g> တွင် နောက်ဆုံးအကြိမ် ဖွင့်ခဲ့သည်"</string>
+    <!-- no translation found for automatic_storage_manager_downloads_days_title (8899594124034695459) -->
+    <skip />
 </resources>

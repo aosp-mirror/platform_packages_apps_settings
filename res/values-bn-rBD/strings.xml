@@ -122,6 +122,7 @@
     <string name="device_picker" msgid="4978696506172252813">"ব্লুটুথ ডিভাইস বাছুন"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"ব্লুটুথ অনুমতির অনুরোধ"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"একটি অ্যাপ্লিকেশান এই ডিভাইসের জন্য ব্লুটুথ চালু করতে চায়।"</string>
+    <string name="bluetooth_ask_disablement" msgid="5889300510508065674">"একটি অ্যাপ এই ডিভাইসের Bluetooth বন্ধ করতে চায়।"</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"একটি অ্যাপ্লিকেশান আপনার ট্যাবলেটকে অন্যান্য ব্লুটুথ ডিভাইসের কাছে <xliff:g id="TIMEOUT">%1$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"একটি অ্যাপ্লিকেশান আপনার ফোনকে অন্যান্য ব্লুটুথ ডিভাইসের কাছে <xliff:g id="TIMEOUT">%1$d</xliff:g> সেকেন্ডের জন্য দৃশ্যমান করতে চাইছে।"</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"একটি অ্যাপ্লিকেশান অন্য ব্লুটুথ ডিভাইসগুলির কাছে আপনার ট্যাবলেটকে দৃশ্যমান করতে চাইছে। আপনি পরে ব্লুটুথ সেটিংসে এটি পরিবর্তন করতে পারবেন।"</string>
@@ -1978,6 +1979,8 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"হার্ডওয়্যার-ব্যাকড"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"শুধুমাত্র সফ্টওয়্যার"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"এই ব্যবহারকারীর জন্য প্রমাণপ্রত্রাদি উপলব্ধ নয়"</string>
+    <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"VPN এবং অ্যাপ্সের জন্য ইনস্টল করা হয়েছে"</string>
+    <string name="credential_for_wifi" msgid="6228425986551591864">"Wi-Fi এর জন্য ইনস্টল করা হয়েছে"</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"প্রমাণপত্রাদির সঞ্চয়স্থানের জন্য পাসওয়ার্ডটি টাইপ করুন।"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"বর্তমান পাসওয়ার্ড:"</string>
@@ -2272,6 +2275,7 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"সিস্টেমের CA শংসাপত্র সক্ষম করবেন?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"সিস্টেমের CA শংসাপত্র অক্ষম করবেন?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"স্থায়ীভাবে ব্যবহারকারী CA শংসাপত্র সরাবেন?"</string>
+    <string name="credential_contains" msgid="3984922924723974084">"এই এন্ট্রিতে এগুলি রয়েছে:"</string>
     <string name="one_userkey" msgid="6034020579534914349">"একটি ব্যবহারকারী কী"</string>
     <string name="one_usercrt" msgid="2150319011101639509">"একটি ব্যবহারকারী শংসাপত্র"</string>
     <string name="one_cacrt" msgid="6844397037970164809">"একটি CA শংসাপত্র"</string>
@@ -3190,4 +3194,6 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"প্রথমে ইন্টারনেটের সাথে সংযোগ করুন"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"পরিষেবা প্রদানকারীর দ্বারা লক করা ডিভাইসগুলিতে অনুপলব্ধ"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"মোট <xliff:g id="SIZE">%1$s</xliff:g> উপলব্ধ করা হয়েছে\n\n<xliff:g id="DATE">%2$s</xliff:g> তারিখে শেষবার চালানো হয়েছে"</string>
+    <!-- no translation found for automatic_storage_manager_downloads_days_title (8899594124034695459) -->
+    <skip />
 </resources>
