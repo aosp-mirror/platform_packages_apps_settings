@@ -15,7 +15,7 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
+import android.support.v14.preference.SwitchPreference;
 import android.util.AttributeSet;
 
 import com.android.internal.app.NightDisplayController;
@@ -25,7 +25,8 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-public class NightDisplayPreference extends Preference implements NightDisplayController.Callback {
+public class NightDisplayPreference extends SwitchPreference
+        implements NightDisplayController.Callback {
 
     private NightDisplayController mController;
     private DateFormat mTimeFormatter;
