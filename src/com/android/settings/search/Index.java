@@ -177,8 +177,8 @@ public class Index {
         public List<SearchIndexableData> dataToDelete;
         public Map<String, List<String>> nonIndexableKeys;
 
-        public boolean forceUpdate = false;
-        public boolean fullIndex = true;
+        public boolean forceUpdate;
+        public boolean fullIndex;
 
         public UpdateData() {
             dataToUpdate = new ArrayList<SearchIndexableData>();
