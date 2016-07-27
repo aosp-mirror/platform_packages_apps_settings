@@ -31,6 +31,7 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -95,6 +96,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     private Map<String, LegacyVpnPreference> mLegacyVpnPreferences = new ArrayMap<>();
     private Map<AppVpnInfo, AppPreference> mAppPreferences = new ArrayMap<>();
 
+    private HandlerThread mUpdaterThread;
     private Handler mUpdater;
     private LegacyVpnInfo mConnectedLegacyVpn;
 
@@ -180,7 +182,9 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
         // Trigger a refresh
         if (mUpdater == null) {
-            mUpdater = new Handler(this);
+            mUpdaterThread = new HandlerThread("Refresh VPN list in background");
+            mUpdaterThread.start();
+            mUpdater = new Handler(mUpdaterThread.getLooper(), this);
         }
         mUpdater.sendEmptyMessage(RESCAN_MESSAGE);
     }
@@ -197,12 +201,15 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
         if (mUpdater != null) {
             mUpdater.removeCallbacksAndMessages(null);
+            mUpdater = null;
+            mUpdaterThread.quit();
+            mUpdaterThread = null;
         }
 
         super.onPause();
     }
 
-    @Override
+    @Override @WorkerThread
     public boolean handleMessage(Message message) {
         mUpdater.removeMessages(RESCAN_MESSAGE);
 
