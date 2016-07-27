@@ -109,7 +109,9 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         mStorageManager = context.getSystemService(StorageManager.class);
         mStorageManager.registerListener(mStorageListener);
 
-        sTotalInternalStorage = mStorageManager.getPrimaryStorageSize();
+        if (sTotalInternalStorage <= 0) {
+            sTotalInternalStorage = mStorageManager.getPrimaryStorageSize();
+        }
 
         addPreferencesFromResource(R.xml.device_info_storage);
 
@@ -169,8 +171,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 if (vol.isMountedReadable()) {
                     final File path = vol.getPath();
                     privateUsedBytes += path.getTotalSpace() - path.getFreeSpace();
-                    privateTotalBytes += sTotalInternalStorage > 0
-                            ? sTotalInternalStorage : path.getTotalSpace();
+                    if (sTotalInternalStorage > 0) {
+                        privateTotalBytes = sTotalInternalStorage;
+                    } else {
+                        privateTotalBytes += path.getTotalSpace();
+                    }
                 }
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
                 mExternalCategory.addPreference(
@@ -215,7 +220,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 result.value, result.units));
         mInternalSummary.setSummary(getString(R.string.storage_volume_used_total,
                 Formatter.formatFileSize(context, privateTotalBytes)));
-
         if (mInternalCategory.getPreferenceCount() > 0) {
             getPreferenceScreen().addPreference(mInternalCategory);
         }
@@ -483,9 +487,12 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
         private void updateSummary() {
             // TODO: Register listener.
-            StorageManager storageManager = mContext.getSystemService(StorageManager.class);
+            final StorageManager storageManager = mContext.getSystemService(StorageManager.class);
+            if (sTotalInternalStorage <= 0) {
+                sTotalInternalStorage = storageManager.getPrimaryStorageSize();
+            }
             final List<VolumeInfo> volumes = storageManager.getVolumes();
-            long privateUsedBytes = 0;
+            long privateFreeBytes = 0;
             long privateTotalBytes = 0;
             for (VolumeInfo info : volumes) {
                 if (info.getType() != VolumeInfo.TYPE_PUBLIC
@@ -496,13 +503,14 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 if (path == null) {
                     continue;
                 }
-                privateUsedBytes += path.getTotalSpace() - path.getFreeSpace();
                 if (info.getType() == VolumeInfo.TYPE_PRIVATE && sTotalInternalStorage > 0) {
                     privateTotalBytes = sTotalInternalStorage;
                 } else {
                     privateTotalBytes += path.getTotalSpace();
                 }
+                privateFreeBytes += path.getFreeSpace();
             }
+            long privateUsedBytes = privateTotalBytes - privateFreeBytes;
             mLoader.setSummary(this, mContext.getString(R.string.storage_summary,
                     Formatter.formatFileSize(mContext, privateUsedBytes),
                     Formatter.formatFileSize(mContext, privateTotalBytes)));
