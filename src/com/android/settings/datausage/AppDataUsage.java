@@ -38,6 +38,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArraySet;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
@@ -50,10 +51,18 @@ import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.UidDetailProvider;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
+
+    private static final String TAG = "AppDataUsage";
 
     public static final String ARG_APP_ITEM = "app_item";
     public static final String ARG_NETWORK_TEMPLATE = "network_template";
@@ -93,6 +102,12 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private SpinnerPreference mCycle;
     private SwitchPreference mUnrestrictedData;
     private DataSaverBackend mDataSaverBackend;
+
+    // Parameters to construct an efficient ThreadPoolExecutor
+    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
+    private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
+    private static final int KEEP_ALIVE_SECONDS = 30;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -180,9 +195,13 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
 
             if (mPackages.size() > 1) {
                 mAppList = (PreferenceCategory) findPreference(KEY_APP_LIST);
-                for (int i = 1 ; i < mPackages.size(); i++) {
-                    new AppPrefLoader().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-                            mPackages.valueAt(i));
+                final int packageSize = mPackages.size();
+                final BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>(packageSize);
+                final ThreadPoolExecutor executor = new ThreadPoolExecutor(CORE_POOL_SIZE,
+                        MAXIMUM_POOL_SIZE, KEEP_ALIVE_SECONDS, TimeUnit.SECONDS, workQueue);
+                for (int i = 1; i < mPackages.size(); i++) {
+                    final AppPrefLoader loader = new AppPrefLoader();
+                        loader.executeOnExecutor(executor, mPackages.valueAt(i));
                 }
             } else {
                 removePreference(KEY_APP_LIST);
