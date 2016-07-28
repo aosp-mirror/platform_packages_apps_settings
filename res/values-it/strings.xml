@@ -122,6 +122,7 @@
     <string name="device_picker" msgid="4978696506172252813">"Scegli il dispositivo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Richiesta autorizzazione Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Un\'app desidera attivare Bluetooth su questo dispositivo."</string>
+    <string name="bluetooth_ask_disablement" msgid="5889300510508065674">"Un\'app desidera disattivare il Bluetooth su questo dispositivo."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Un\'app chiede di rendere il tablet visualizzabile da altri dispositivi Bluetooth per <xliff:g id="TIMEOUT">%1$d</xliff:g> secondi."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Un\'app chiede di rendere il telefono visualizzabile da altri dispositivi Bluetooth per <xliff:g id="TIMEOUT">%1$d</xliff:g> secondi."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Un\'app chiede di rendere il tablet visualizzabile da altri dispositivi Bluetooth. Puoi modificare questa impostazione in seguito nelle impostazioni Bluetooth."</string>
@@ -1978,6 +1979,8 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Basato sull\'hardware"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Solo software"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Le credenziali non sono disponibili per questo utente"</string>
+    <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"Installata per VPN e app"</string>
+    <string name="credential_for_wifi" msgid="6228425986551591864">"Installata per Wi-Fi"</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Digita la password per l\'archivio credenziali."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Password attuale:"</string>
@@ -2272,6 +2275,7 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Abilitare il certificato CA del sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Disabilitare il certificato CA del sistema?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Rimuovere definitivamente il certificato CA dell\'utente?"</string>
+    <string name="credential_contains" msgid="3984922924723974084">"Questa voce contiene:"</string>
     <string name="one_userkey" msgid="6034020579534914349">"una chiave utente"</string>
     <string name="one_usercrt" msgid="2150319011101639509">"un certificato utente"</string>
     <string name="one_cacrt" msgid="6844397037970164809">"un certificato CA"</string>
@@ -3071,7 +3075,7 @@
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"On/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"Off/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"Non attivare mai automaticamente"</string>
-    <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Attiva automaticamente al %1$s%% di batteria"</string>
+    <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"Attiva automaticamente al %1$s di batteria"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"Ottimizzazione della batteria non in uso"</string>
     <string name="lockscreen_remote_input" msgid="969871538778211843">"Impedisci di digitare risposte o altro testo nelle notifiche quando il dispositivo è bloccato"</string>
     <string name="default_spell_checker" msgid="8506899870026026660">"Controllo ortografico predef."</string>
@@ -3190,4 +3194,6 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Devi prima connetterti a Internet"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Non disponibile sui dispositivi bloccati dall\'operatore"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> disponibili in totale\n\nUltima esecuzione: <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for automatic_storage_manager_downloads_days_title (8899594124034695459) -->
+    <skip />
 </resources>
