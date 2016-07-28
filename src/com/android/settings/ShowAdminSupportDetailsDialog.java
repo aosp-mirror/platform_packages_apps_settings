@@ -17,17 +17,14 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
-import android.app.IActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Process;
@@ -47,8 +44,6 @@ public class ShowAdminSupportDetailsDialog extends Activity
 
     private static final String TAG = "AdminSupportDialog";
 
-    private DevicePolicyManager mDpm;
-
     private EnforcedAdmin mEnforcedAdmin;
     private View mDialogView;
 
@@ -56,7 +51,6 @@ public class ShowAdminSupportDetailsDialog extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDpm = getSystemService(DevicePolicyManager.class);
         mEnforcedAdmin = getAdminDetailsFromIntent(getIntent());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -84,24 +78,9 @@ public class ShowAdminSupportDetailsDialog extends Activity
         if (intent == null) {
             return admin;
         }
-        // Only allow apps with MANAGE_DEVICE_ADMINS permission to specify admin and user.
-        if (checkIfCallerHasPermission(android.Manifest.permission.MANAGE_DEVICE_ADMINS)) {
-            admin.component = intent.getParcelableExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN);
-            admin.userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        }
+        admin.component = intent.getParcelableExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN);
+        admin.userId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         return admin;
-    }
-
-    private boolean checkIfCallerHasPermission(String permission) {
-        IActivityManager am = ActivityManagerNative.getDefault();
-        try {
-            final int uid = am.getLaunchedFromUid(getActivityToken());
-            return AppGlobals.getPackageManager().checkUidPermission(permission, uid)
-                    == PackageManager.PERMISSION_GRANTED;
-        } catch (RemoteException e) {
-            Log.e(TAG, "Could not talk to activity manager.", e);
-        }
-        return false;
     }
 
     private void initializeDialogViews(View root, ComponentName admin, int userId) {
