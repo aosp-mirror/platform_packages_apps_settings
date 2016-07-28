@@ -97,8 +97,6 @@ public final class GesturePreference extends SwitchPreference implements
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        holder.setDividerAllowedAbove(false);
-        holder.setDividerAllowedBelow(false);
         final TextureView video = (TextureView) holder.findViewById(R.id.gesture_video);
         final ImageView imageView = (ImageView) holder.findViewById(R.id.gesture_image);
         final ImageView playButton = (ImageView) holder.findViewById(R.id.gesture_play_button);
