@@ -197,7 +197,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     }
 
     private static boolean isSystemUINavigationEnabled(Context context) {
-        return Secure.getInt(context.getContentResolver(), Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 1)
+        return Secure.getInt(context.getContentResolver(), Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0)
                 == 1;
     }
 
