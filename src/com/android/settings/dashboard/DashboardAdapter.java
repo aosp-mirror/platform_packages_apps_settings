@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.ArrayUtils;
@@ -46,7 +47,6 @@ import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
         implements View.OnClickListener {
@@ -186,7 +186,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                         NS_SUGGESTION);
             }
         }
-        countItem(null, R.layout.dashboard_spacer, true, NS_SPACER);
         resetCount();
         for (int i = 0; mCategories != null && i < mCategories.size(); i++) {
             DashboardCategory category = mCategories.get(i);
