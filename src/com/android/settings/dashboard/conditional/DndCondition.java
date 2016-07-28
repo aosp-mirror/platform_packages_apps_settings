@@ -26,6 +26,7 @@ import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
@@ -142,5 +143,10 @@ public class DndCondition extends Condition {
                         .refreshState();
             }
         }
+    }
+
+    @Override
+    protected boolean shouldAlwaysListenToBroadcast() {
+        return true;
     }
 }
