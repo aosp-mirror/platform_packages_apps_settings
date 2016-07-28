@@ -19,19 +19,32 @@
         xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/night_display_title">
 
-    <DropDownPreference
-            android:key="night_display_auto_mode"
-            android:title="@string/night_display_auto_mode_title"
-            android:persistent="false"
-            android:summary="%s" />
+    <PreferenceCategory
+            android:title="@string/night_display_category_schedule">
 
-    <Preference
-            android:key="night_display_start_time"
-            android:title="@string/night_display_start_time_title" />
+        <DropDownPreference
+                android:key="night_display_auto_mode"
+                android:title="@string/night_display_auto_mode_title"
+                android:summary="%s" />
 
-    <Preference
-            android:key="night_display_end_time"
-            android:title="@string/night_display_end_time_title" />
+        <Preference
+                android:key="night_display_start_time"
+                android:title="@string/night_display_start_time_title" />
+
+        <Preference
+                android:key="night_display_end_time"
+                android:title="@string/night_display_end_time_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="@string/night_display_category_status">
+
+        <com.android.settings.display.NightDisplayPreference
+                android:key="night_display_activated"
+                android:title="@string/night_display_title" />
+
+    </PreferenceCategory>
 
     <com.android.settings.fuelgauge.WallOfTextPreference
             android:summary="@string/night_display_text"
