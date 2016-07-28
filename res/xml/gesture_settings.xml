@@ -20,6 +20,12 @@
     settings:keywords="@string/keywords_gesture">
 
     <com.android.settings.gestures.GesturePreference
+            android:key="gesture_swipe_down_fingerprint"
+            android:title="@string/fingerprint_swipe_for_notifications_title"
+            android:summary="@string/fingerprint_swipe_for_notifications_summary"
+            settings:animation="@raw/gesture_fingerprint_swipe"/>
+
+    <com.android.settings.gestures.GesturePreference
         android:key="gesture_double_tap_power"
         android:title="@string/double_tap_power_for_camera_title"
         android:summary="@string/double_tap_power_for_camera_summary"
@@ -36,11 +42,5 @@
         android:title="@string/ambient_display_title"
         android:summary="@string/ambient_display_summary"
         settings:animation="@raw/gesture_ambient_tap"/>
-
-    <com.android.settings.gestures.GesturePreference
-        android:key="gesture_swipe_down_fingerprint"
-        android:title="@string/fingerprint_swipe_for_notifications_title"
-        android:summary="@string/fingerprint_swipe_for_notifications_summary"
-        settings:animation="@raw/gesture_fingerprint_swipe"/>
 
 </PreferenceScreen>
