@@ -76,7 +76,7 @@ public class ManageAssist extends SettingsPreferenceFragment
         if (preference == mContextPref) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSIST_STRUCTURE_ENABLED,
                     (boolean) newValue ? 1 : 0);
-            postUpdateUi();
+            postGuardScreenshotPref();
             return true;
         }
         if (preference == mScreenshotPref) {
@@ -101,13 +101,21 @@ public class ManageAssist extends SettingsPreferenceFragment
         return false;
     }
 
-    private void postUpdateUi() {
+    private void postGuardScreenshotPref() {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                updateUi();
+                guardScreenshotPref();
             }
         });
+    }
+
+    private void guardScreenshotPref() {
+        boolean isChecked = mContextPref.isChecked();
+        boolean screenshotPrefWasSet = Settings.Secure.getInt(
+                getContentResolver(), Settings.Secure.ASSIST_SCREENSHOT_ENABLED, 1) != 0;
+        mScreenshotPref.setEnabled(isChecked);
+        mScreenshotPref.setChecked(isChecked && screenshotPrefWasSet);
     }
 
     private void updateUi() {
@@ -131,9 +139,7 @@ public class ManageAssist extends SettingsPreferenceFragment
             mVoiceInputPref.setAssistRestrict(currentAssist);
         }
 
-        mScreenshotPref.setEnabled(mContextPref.isChecked());
-        mScreenshotPref.setChecked(mContextPref.isChecked() && Settings.Secure.getInt(
-                getContentResolver(), Settings.Secure.ASSIST_SCREENSHOT_ENABLED, 1) != 0);
+        guardScreenshotPref();
     }
 
     private boolean isCurrentAssistVoiceService() {
