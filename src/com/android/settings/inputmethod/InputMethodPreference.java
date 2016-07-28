@@ -35,7 +35,6 @@ import android.widget.Toast;
 
 import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -149,7 +148,7 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
         if (InputMethodUtils.isSystemIme(mImi)) {
             // Enable a system IME. No need to show a security warning dialog,
             // but we might need to prompt if it's not Direct Boot aware.
-            if (Utils.isPackageDirectBootAware(getContext(), mImi.getPackageName())) {
+            if (mImi.getServiceInfo().directBootAware) {
                 setCheckedInternal(true);
             } else {
                 showDirectBootWarnDialog();
@@ -245,7 +244,7 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
             public void onClick(final DialogInterface dialog, final int which) {
                 // The user confirmed to enable a 3rd party IME, but we might
                 // need to prompt if it's not Direct Boot aware.
-                if (Utils.isPackageDirectBootAware(getContext(), mImi.getPackageName())) {
+                if (mImi.getServiceInfo().directBootAware) {
                     setCheckedInternal(true);
                 } else {
                     showDirectBootWarnDialog();
