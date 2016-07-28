@@ -38,6 +38,12 @@ public abstract class Condition {
     // All conditions must live in this package.
     Condition(ConditionManager manager) {
         mManager = manager;
+        Class<?> receiverClass = getReceiverClass();
+        if (receiverClass != null && shouldAlwaysListenToBroadcast()) {
+            PackageManager pm = mManager.getContext().getPackageManager();
+            pm.setComponentEnabledSetting(new ComponentName(mManager.getContext(), receiverClass),
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0 /* flag */);
+        }
     }
 
     void restoreState(PersistableBundle bundle) {
@@ -93,6 +99,10 @@ public abstract class Condition {
     }
 
     private void onSilenceChanged(boolean silenced) {
+        if (shouldAlwaysListenToBroadcast()) {
+            // Don't try to disable BroadcastReceiver if we want it always on.
+            return;
+        }
         Class<?> clz = getReceiverClass();
         if (clz == null) {
             return;
@@ -107,6 +117,10 @@ public abstract class Condition {
 
     protected Class<?> getReceiverClass() {
         return null;
+    }
+
+    protected boolean shouldAlwaysListenToBroadcast() {
+        return false;
     }
 
     public boolean shouldShow() {
