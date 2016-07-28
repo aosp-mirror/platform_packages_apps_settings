@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -142,18 +143,22 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
         }
         if (isChecked()) {
             // Disable this IME.
-            setChecked(false);
-            mOnSaveListener.onSaveInputMethodPreference(this);
+            setCheckedInternal(false);
             return false;
         }
         if (InputMethodUtils.isSystemIme(mImi)) {
-            // Enable a system IME. No need to show a security warning dialog.
-            setChecked(true);
-            mOnSaveListener.onSaveInputMethodPreference(this);
-            return false;
+            // Enable a system IME. No need to show a security warning dialog,
+            // but we might need to prompt if it's not Direct Boot aware.
+            if (Utils.isPackageDirectBootAware(getContext(), mImi.getPackageName())) {
+                setCheckedInternal(true);
+            } else {
+                showDirectBootWarnDialog();
+            }
+        } else {
+            // Once security is confirmed, we might prompt if the IME isn't
+            // Direct Boot aware.
+            showSecurityWarnDialog();
         }
-        // Enable a 3rd party IME.
-        showSecurityWarnDialog(mImi);
         return false;
     }
 
@@ -218,7 +223,13 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
                 subtypes, getContext(), mImi);
     }
 
-    private void showSecurityWarnDialog(final InputMethodInfo imi) {
+    private void setCheckedInternal(boolean checked) {
+        super.setChecked(checked);
+        mOnSaveListener.onSaveInputMethodPreference(InputMethodPreference.this);
+        notifyChanged();
+    }
+
+    private void showSecurityWarnDialog() {
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
@@ -226,25 +237,50 @@ class InputMethodPreference extends RestrictedSwitchPreference implements OnPref
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(true /* cancelable */);
         builder.setTitle(android.R.string.dialog_alert_title);
-        final CharSequence label = imi.getServiceInfo().applicationInfo.loadLabel(
+        final CharSequence label = mImi.getServiceInfo().applicationInfo.loadLabel(
                 context.getPackageManager());
         builder.setMessage(context.getString(R.string.ime_security_warning, label));
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
-                // The user confirmed to enable a 3rd party IME.
-                setChecked(true);
-                mOnSaveListener.onSaveInputMethodPreference(InputMethodPreference.this);
-                notifyChanged();
+                // The user confirmed to enable a 3rd party IME, but we might
+                // need to prompt if it's not Direct Boot aware.
+                if (Utils.isPackageDirectBootAware(getContext(), mImi.getPackageName())) {
+                    setCheckedInternal(true);
+                } else {
+                    showDirectBootWarnDialog();
+                }
             }
         });
         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 // The user canceled to enable a 3rd party IME.
-                setChecked(false);
-                mOnSaveListener.onSaveInputMethodPreference(InputMethodPreference.this);
-                notifyChanged();
+                setCheckedInternal(false);
+            }
+        });
+        mDialog = builder.create();
+        mDialog.show();
+    }
+
+    private void showDirectBootWarnDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+        final Context context = getContext();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(true /* cancelable */);
+        builder.setMessage(context.getText(R.string.direct_boot_unaware_dialog_message));
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                setCheckedInternal(true);
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                setCheckedInternal(false);
             }
         });
         mDialog = builder.create();
