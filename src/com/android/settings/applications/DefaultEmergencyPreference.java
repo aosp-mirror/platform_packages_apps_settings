@@ -16,7 +16,6 @@
 
 package com.android.settings.applications;
 
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -30,9 +29,11 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.AttributeSet;
-import com.android.internal.telephony.SmsApplication;
+
 import com.android.settings.AppListPreference;
+import com.android.settings.R;
 import com.android.settings.SelfAvailablePreference;
+import com.android.settings.Utils;
 
 import java.util.List;
 import java.util.Objects;
@@ -54,6 +55,12 @@ public class DefaultEmergencyPreference extends AppListPreference
         super(context, attrs);
         mContentResolver = context.getContentResolver();
         load();
+    }
+
+    @Override
+    protected CharSequence getConfirmationMessage(String value) {
+        return Utils.isPackageDirectBootAware(getContext(), value) ? null
+                : getContext().getText(R.string.direct_boot_unaware_dialog_message);
     }
 
     @Override
