@@ -80,15 +80,16 @@ public class ImeiInformation extends SettingsPreferenceFragment {
                 }
 
                 setSummaryText(KEY_PRL_VERSION, phone.getCdmaPrlVersion());
-                removePreferenceFromScreen(KEY_IMEI_SV);
 
                 if (phone.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE) {
                     // Show ICC ID and IMEI for LTE device
                     setSummaryText(KEY_ICC_ID, phone.getIccSerialNumber());
                     setSummaryTextAsDigit(KEY_IMEI, phone.getImei());
+                    setSummaryTextAsDigit(KEY_IMEI_SV, phone.getDeviceSvn());
                 } else {
                     // device is not GSM/UMTS, do not display GSM/UMTS features
                     // check Null in case no specified preference in overlay xml
+                    removePreferenceFromScreen(KEY_IMEI_SV);
                     removePreferenceFromScreen(KEY_IMEI);
                     removePreferenceFromScreen(KEY_ICC_ID);
                 }
