@@ -110,8 +110,10 @@ public class ConfigDialogFragment extends DialogFragment implements
             KeyStore.getInstance().put(Credentials.VPN + profile.key, profile.encode(),
                     KeyStore.UID_SELF, /* flags */ 0);
 
-            // Flush out old version of profile
-            disconnect(profile);
+            // Flush out previous connection, which may be an old version of the profile
+            if (!disconnect(profile)) {
+                Log.w(TAG, "Unable to remove previous connection. Continuing anyway.");
+            }
 
             updateLockdownVpn(dialog.isVpnAlwaysOn(), profile);
 
@@ -125,7 +127,10 @@ public class ConfigDialogFragment extends DialogFragment implements
             }
         } else if (button == DialogInterface.BUTTON_NEUTRAL) {
             // Disable profile if connected
-            disconnect(profile);
+            if (!disconnect(profile)) {
+                Log.e(TAG, "Failed to disconnect VPN. Leaving profile in keystore.");
+                return;
+            }
 
             // Delete from KeyStore
             KeyStore keyStore = KeyStore.getInstance();
@@ -172,16 +177,27 @@ public class ConfigDialogFragment extends DialogFragment implements
         }
     }
 
-    private void disconnect(VpnProfile profile) {
+    /**
+     * Ensure that the VPN profile pointed at by {@param profile} is disconnected.
+     *
+     * @return {@code true} iff this VPN profile is no longer connected. Note that another profile
+     *         may still be active - this function will then do nothing but still return success.
+     */
+    private boolean disconnect(VpnProfile profile) {
         try {
-            LegacyVpnInfo connected = mService.getLegacyVpnInfo(UserHandle.myUserId());
-            if (connected != null && profile.key.equals(connected.key)) {
-                VpnUtils.clearLockdownVpn(getContext());
-                mService.prepareVpn(VpnConfig.LEGACY_VPN, VpnConfig.LEGACY_VPN,
-                        UserHandle.myUserId());
+            if (!isConnected(profile)) {
+                return true;
             }
+            VpnUtils.clearLockdownVpn(getContext());
+            return mService.prepareVpn(null, VpnConfig.LEGACY_VPN, UserHandle.myUserId());
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to disconnect", e);
+            return false;
         }
+    }
+
+    private boolean isConnected(VpnProfile profile) throws RemoteException {
+        LegacyVpnInfo connected = mService.getLegacyVpnInfo(UserHandle.myUserId());
+        return connected != null && profile.key.equals(connected.key);
     }
 }
