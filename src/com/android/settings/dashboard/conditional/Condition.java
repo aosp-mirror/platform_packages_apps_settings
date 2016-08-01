@@ -23,6 +23,8 @@ import android.os.PersistableBundle;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 
+import static android.content.pm.PackageManager.DONT_KILL_APP;
+
 public abstract class Condition {
 
     private static final String KEY_SILENCE = "silence";
@@ -42,7 +44,7 @@ public abstract class Condition {
         if (receiverClass != null && shouldAlwaysListenToBroadcast()) {
             PackageManager pm = mManager.getContext().getPackageManager();
             pm.setComponentEnabledSetting(new ComponentName(mManager.getContext(), receiverClass),
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0 /* flag */);
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED, DONT_KILL_APP);
         }
     }
 
@@ -112,7 +114,7 @@ public abstract class Condition {
         pm.setComponentEnabledSetting(new ComponentName(mManager.getContext(), clz),
                 silenced ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                         : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP);
+                DONT_KILL_APP);
     }
 
     protected Class<?> getReceiverClass() {
