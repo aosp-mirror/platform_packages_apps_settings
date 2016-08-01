@@ -29,6 +29,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -164,6 +165,9 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mMemoryPreference;
 
     private boolean mDisableAfterUninstall;
+    private boolean mListeningToPackageRemove;
+    private boolean mUninstallRequested;
+
     // Used for updating notification preference.
     private final NotificationBackend mBackend = new NotificationBackend();
 
@@ -336,6 +340,7 @@ public class InstalledAppDetails extends AppInfoBase
         if (mFinishing) {
             return;
         }
+        stopListeningToPackageRemove();
         mState.requestSize(mPackageName, mUserId);
         AppItem app = new AppItem(mAppEntry.info.uid);
         app.addUid(mAppEntry.info.uid);
@@ -352,12 +357,16 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onPause() {
         getLoaderManager().destroyLoader(LOADER_CHART_DATA);
+        if (!mFinishing && !mUninstallRequested) {
+            startListeningToPackageRemove();
+        }
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
         TrafficStats.closeQuietly(mStatsSession);
+        stopListeningToPackageRemove();
         super.onDestroy();
     }
 
@@ -483,21 +492,22 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_UNINSTALL) {
-            if (mDisableAfterUninstall) {
-                mDisableAfterUninstall = false;
-                new DisableChanger(this, mAppEntry.info,
-                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
-                        .execute((Object)null);
-            }
-            if (!refreshUi()) {
-                setIntentAndFinish(true, true);
-            }
-        }
-        if (requestCode == REQUEST_REMOVE_DEVICE_ADMIN) {
-            if (!refreshUi()) {
-                setIntentAndFinish(true, true);
-            }
+        switch (requestCode) {
+            case REQUEST_UNINSTALL:
+                if (mDisableAfterUninstall) {
+                    mDisableAfterUninstall = false;
+                    new DisableChanger(this, mAppEntry.info,
+                            PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
+                            .execute((Object)null);
+                }
+                // continue with following operations
+            case REQUEST_REMOVE_DEVICE_ADMIN:
+                if (!refreshUi()) {
+                    setIntentAndFinish(true, true);
+                } else {
+                    mUninstallRequested = false;
+                }
+                break;
         }
     }
 
@@ -675,6 +685,7 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void uninstallPkg(String packageName, boolean allUsers, boolean andDisable) {
+        mUninstallRequested = true;
          // Create new intent to launch Uninstaller activity
         Uri packageURI = Uri.parse("package:"+packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
@@ -764,6 +775,7 @@ public class InstalledAppDetails extends AppInfoBase
         String packageName = mAppEntry.info.packageName;
         if (v == mUninstallButton) {
             if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+                mUninstallRequested = true;
                 Activity activity = getActivity();
                 Intent uninstallDAIntent = new Intent(activity, DeviceAdminAdd.class);
                 uninstallDAIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
@@ -1233,4 +1245,33 @@ public class InstalledAppDetails extends AppInfoBase
             mPermissionsPreference.setSummary(summary);
         }
     };
+
+    private void startListeningToPackageRemove() {
+        if (mListeningToPackageRemove) {
+            return;
+        }
+        mListeningToPackageRemove = true;
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addDataScheme("package");
+        getContext().registerReceiver(mPackageRemovedReceiver, filter);
+    }
+
+    private void stopListeningToPackageRemove() {
+        if (!mListeningToPackageRemove) {
+            return;
+        }
+        mListeningToPackageRemove = false;
+        getContext().unregisterReceiver(mPackageRemovedReceiver);
+    }
+
+    private final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String packageName = intent.getData().getSchemeSpecificPart();
+            if (!mFinishing && mAppEntry.info.packageName.equals(packageName)) {
+                getActivity().finishAndRemoveTask();
+            }
+        }
+    };
+
 }
