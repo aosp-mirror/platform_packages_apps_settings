@@ -41,6 +41,7 @@ import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -99,6 +100,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mTapToWakePreference;
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mCameraGesturePreference;
+    private PreferenceScreen mDozePreference;
 
     @Override
     protected int getMetricsCategory() {
@@ -144,6 +146,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         if (!isDozeAvailable(activity)) {
             removePreference(KEY_DOZE);
+        } else {
+            mDozePreference = (PreferenceScreen) findPreference(KEY_DOZE);
         }
 
         if (isTapToWakeAvailable(getResources())) {
@@ -423,6 +427,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference == mDozePreference) {
+            MetricsLogger.action(getActivity(), MetricsEvent.ACTION_AMBIENT_DISPLAY);
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
