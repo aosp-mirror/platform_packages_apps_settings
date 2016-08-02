@@ -281,7 +281,7 @@
         <item name="suwListItemIconColor">?android:attr/colorAccent</item>
     </style>
 
-    <style name="FallbackHome" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+    <style name="FallbackHome" parent="@android:style/Theme.DeviceDefault.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowShowWallpaper">true</item>
@@ -300,6 +300,10 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">#00000000</item>
         <item name="android:navigationBarColor">#00000000</item>
+    </style>
+
+    <style name="FallbackHomeProgressBar" parent="FallbackHome">
+        <item name="android:colorControlActivated">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="BluetoothPermission" parent="@android:style/Theme.Material.Light.Dialog.Alert">
