@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PasswordMetrics;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.InsetDrawable;
@@ -583,8 +584,8 @@ public class ChooseLockPassword extends SettingsActivity {
                 // The length requirements are fulfilled.
                 if (mRequestedQuality == PASSWORD_QUALITY_NUMERIC_COMPLEX) {
                     // Check for repeated characters or sequences (e.g. '1234', '0000', '2468')
-                    final int sequence = LockPatternUtils.maxLengthSequence(password);
-                    if (sequence > LockPatternUtils.MAX_ALLOWED_SEQUENCE) {
+                    final int sequence = PasswordMetrics.maxLengthSequence(password);
+                    if (sequence > PasswordMetrics.MAX_ALLOWED_SEQUENCE) {
                         errorCode |= CONTAIN_SEQUENTIAL_DIGITS;
                     }
                 }
@@ -594,40 +595,22 @@ public class ChooseLockPassword extends SettingsActivity {
                 }
             }
 
-            // Count different types of character.
-            int letters = 0;
-            int numbers = 0;
-            int lowercase = 0;
-            int symbols = 0;
-            int uppercase = 0;
-            int nonletter = 0;
+            // Allow non-control Latin-1 characters only.
             for (int i = 0; i < password.length(); i++) {
                 char c = password.charAt(i);
-                // allow non control Latin-1 characters only
                 if (c < 32 || c > 127) {
                     errorCode |= CONTAIN_INVALID_CHARACTERS;
-                    continue;
-                }
-                if (c >= '0' && c <= '9') {
-                    numbers++;
-                    nonletter++;
-                } else if (c >= 'A' && c <= 'Z') {
-                    letters++;
-                    uppercase++;
-                } else if (c >= 'a' && c <= 'z') {
-                    letters++;
-                    lowercase++;
-                } else {
-                    symbols++;
-                    nonletter++;
+                    break;
                 }
             }
+
+            final PasswordMetrics metrics = PasswordMetrics.computeForPassword(password);
 
             // Ensure no non-digits if we are requesting numbers. This shouldn't be possible unless
             // user finds some way to bring up soft keyboard.
             if (mRequestedQuality == PASSWORD_QUALITY_NUMERIC
                     || mRequestedQuality == PASSWORD_QUALITY_NUMERIC_COMPLEX) {
-                if (letters > 0 || symbols > 0) {
+                if (metrics.letters > 0 || metrics.symbols > 0) {
                     errorCode |= CONTAIN_NON_DIGITS;
                 }
             }
@@ -637,32 +620,32 @@ public class ChooseLockPassword extends SettingsActivity {
                 int passwordRestriction = mPasswordRequirements[i];
                 switch (passwordRestriction) {
                     case MIN_LETTER_IN_PASSWORD:
-                        if (letters < mPasswordMinLetters) {
+                        if (metrics.letters < mPasswordMinLetters) {
                             errorCode |= NOT_ENOUGH_LETTER;
                         }
                         break;
                     case MIN_UPPER_LETTERS_IN_PASSWORD:
-                        if (uppercase < mPasswordMinUpperCase) {
+                        if (metrics.upperCase < mPasswordMinUpperCase) {
                             errorCode |= NOT_ENOUGH_UPPER_CASE;
                         }
                         break;
                     case MIN_LOWER_LETTERS_IN_PASSWORD:
-                        if (lowercase < mPasswordMinLowerCase) {
+                        if (metrics.lowerCase < mPasswordMinLowerCase) {
                             errorCode |= NOT_ENOUGH_LOWER_CASE;
                         }
                         break;
                     case MIN_SYMBOLS_IN_PASSWORD:
-                        if (symbols < mPasswordMinSymbols) {
+                        if (metrics.symbols < mPasswordMinSymbols) {
                             errorCode |= NOT_ENOUGH_SYMBOLS;
                         }
                         break;
                     case MIN_NUMBER_IN_PASSWORD:
-                        if (numbers < mPasswordMinNumeric) {
+                        if (metrics.numeric < mPasswordMinNumeric) {
                             errorCode |= NOT_ENOUGH_DIGITS;
                         }
                         break;
                     case MIN_NON_LETTER_IN_PASSWORD:
-                        if (nonletter < mPasswordMinNonLetter) {
+                        if (metrics.nonLetter < mPasswordMinNonLetter) {
                             errorCode |= NOT_ENOUGH_NON_LETTER;
                         }
                         break;
