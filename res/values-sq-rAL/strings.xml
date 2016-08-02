@@ -122,8 +122,7 @@
     <string name="device_picker" msgid="4978696506172252813">"Zgjidh pajisjen me Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Kërkesë lejeje për \"Bluetooth\""</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Një aplikacion kërkon të AKTIVIZOJË \"Bluetooth-in\" për këtë pajisje."</string>
-    <!-- no translation found for bluetooth_ask_disablement (5889300510508065674) -->
-    <skip />
+    <string name="bluetooth_ask_disablement" msgid="5889300510508065674">"Një aplikacion kërkon të ÇAKTIVIZOJË \"Bluetooth-in\" për këtë pajisje."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Një aplikacion kërkon ta bëjë tabletin tënd të dukshëm ndaj pajisjeve të tjera me Bluetooth për <xliff:g id="TIMEOUT">%1$d</xliff:g> sekonda."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Një aplikacion kërkon ta bëjë telefonin tënd të dukshëm ndaj pajisjeve të tjera me \"Bluetooth\" për <xliff:g id="TIMEOUT">%1$d</xliff:g> sekonda."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Një aplikacioni kërkon ta bëjë telefonin tënd të dukshëm ndaj pajisjeve të tjera me \"Bluetooth\". Këtë mund ta ndryshosh më vonë te cilësimet e \"Bluetooth-it\"."</string>
@@ -357,7 +356,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Emri"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"Në rregull"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Fshi"</string>
-    <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Fillojmë!"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="951888937749663602">"Fillojmë"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Vendose gishtin mbi sensor dhe ngrije pasi të ndjesh një dridhje"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"Vazhdo"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Lëvize pak gishtin për të shtuar të gjitha pjesët e ndryshme të gishtit tënd"</string>
@@ -427,7 +426,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Mbroje tabletin tënd"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Mbroje pajisjen tënde"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Mbroje telefonin tënd"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Gjurma jote e gishtit mund të jetë më pak e sigurt se një motiv, një kod PIN ose një fjalëkalim i fortë. Për më shumë siguri, konfiguro një kyçje rezervë të ekranit."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"Për më shumë siguri, konfiguro një kyçje rezervë për ekranin."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Parandalo që të tjerët ta përdorin këtë tablet pa lejen tënde duke aktivizuar funksionet e mbrojtjes së pajisjes. Zgjidh kyçjen e ekranit që dëshiron të përdorësh."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Parandalo që të tjerët ta përdorin këtë pajisje pa lejen tënde duke aktivizuar funksionet e mbrojtjes së pajisjes. Zgjidh kyçjen e ekranit që dëshiron të përdorësh."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Parandalo që të tjerët ta përdorin këtë telefon pa lejen tënde duke aktivizuar funksionet e mbrojtjes së pajisjes. Zgjidh kyçjen e ekranit që dëshiron të përdorësh."</string>
@@ -908,7 +907,9 @@
     <string name="auto_brightness_title" msgid="6341042882350279391">"Ndriçimi i përshtatshëm"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimizo nivelin e ndriçimit sipas ambientit"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Drita e natës"</string>
-    <string name="night_display_text" msgid="8753843222371219454">"Drita e natës e ngjyros ekranin në të kuqe gjatë natës. Kjo e bën më të lehtë shikimin e ekranit në dritë të zbehtë dhe mund të të ndihmojë të flesh gjumë më lehtë."</string>
+    <string name="night_display_text" msgid="4535302797673277668">"Drita e natës e ngjyros ekranin në të kuqe. Kjo e bën më të lehtë shikimin e ekranit në dritë të zbehtë dhe mund të të ndihmojë të flesh gjumë më lehtë."</string>
+    <string name="night_display_category_schedule" msgid="2044072617637348966">"Orari"</string>
+    <string name="night_display_category_status" msgid="1952928783124400330">"Statusi"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Aktivizo automatikisht"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Asnjëherë"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Personalizo programin"</string>
@@ -1980,10 +1981,8 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"E mbështetur nga hardueri"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Vetëm ajo e softuerit"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Kredencialet nuk ofrohen për këtë përdorues"</string>
-    <!-- no translation found for credential_for_vpn_and_apps (4168197158768443365) -->
-    <skip />
-    <!-- no translation found for credential_for_wifi (6228425986551591864) -->
-    <skip />
+    <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"Instaluar për VPN dhe aplikacione"</string>
+    <string name="credential_for_wifi" msgid="6228425986551591864">"Instaluar për Wi-Fi"</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Shkruaj fjalëkalimin për hapësirën ruajtjëse të kredencialeve."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Fjalëkalimi aktual:"</string>
@@ -2278,8 +2277,7 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Të aktivizohet certifikata CA e sistemit?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Të çaktivizohet certifikata CA e sistemit?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Të hiqet përgjithmonë certifikata CA e përdoruesit?"</string>
-    <!-- no translation found for credential_contains (3984922924723974084) -->
-    <skip />
+    <string name="credential_contains" msgid="3984922924723974084">"Ky regjistrim përmban:"</string>
     <string name="one_userkey" msgid="6034020579534914349">"çelës për një përdorues"</string>
     <string name="one_usercrt" msgid="2150319011101639509">"certifikatë për një përdorues"</string>
     <string name="one_cacrt" msgid="6844397037970164809">"një certifikatë CA"</string>
@@ -3198,6 +3196,5 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Lidhu me internetin fillimisht"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Nuk ofrohet në pajisjet e kyçura për një operator celular"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> në total të bëra të disponueshme\n\nEkzekutimi i fundit në datën <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <!-- no translation found for automatic_storage_manager_downloads_days_title (8899594124034695459) -->
-    <skip />
+    <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Hiq shkarkimet"</string>
 </resources>

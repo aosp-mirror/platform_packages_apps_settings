@@ -122,8 +122,7 @@
     <string name="device_picker" msgid="4978696506172252813">"Изберете устройство"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Заявка за разрешение на Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Приложение иска да ВКЛЮЧИ Bluetooth за това устройство."</string>
-    <!-- no translation found for bluetooth_ask_disablement (5889300510508065674) -->
-    <skip />
+    <string name="bluetooth_ask_disablement" msgid="5889300510508065674">"Приложение иска да ИЗКЛЮЧИ Bluetooth за това устройство."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Приложение иска да направи таблета ви видим за други устройства с Bluetooth за <xliff:g id="TIMEOUT">%1$d</xliff:g> секунди."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Приложение иска да направи телефона ви видим за други устройства с Bluetooth за <xliff:g id="TIMEOUT">%1$d</xliff:g> секунди."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Приложение иска да направи таблета ви видим за други устройства с Bluetooth. Можете да промените това по-късно от настройките за функцията."</string>
@@ -357,7 +356,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Име"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"ОK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Изтриване"</string>
-    <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"Да започваме!"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="951888937749663602">"Да започваме"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Поставете пръста си върху сензора и го вдигнете, след като усетите вибриране"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"Продължавайте"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Движете пръста си леко, за да добавите всички различни части от отпечатъка си"</string>
@@ -427,7 +426,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Защита на таблета"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Защита на устройството"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Защитете телефона си"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"Отпечатъкът може да е по-малко сигурен в сравнение с надеждна фигура, ПИН код или парола. За допълнителна сигурност настройте резервна опция за заключване на екрана."</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"За допълнителна сигурност настройте резервна опция за заключване на екрана."</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Предотвратете използването на този таблет от други хора без разрешението ви, като активирате функциите за защита на устройството. Изберете опцията за заключване на екрана, която искате да използвате."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Предотвратете използването на това устройство от други хора без разрешението ви, като активирате функциите за защитата му. Изберете опцията за заключване на екрана, която искате да използвате."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Предотвратете използването на този телефон от други хора без разрешението ви, като активирате функциите за защита на устройството. Изберете опцията за заключване на екрана, която искате да използвате."</string>
@@ -908,7 +907,9 @@
     <string name="auto_brightness_title" msgid="6341042882350279391">"Адаптивна яркост"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Оптимизиране на нивото на яркостта спрямо наличната светлина"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Нощно осветление"</string>
-    <string name="night_display_text" msgid="8753843222371219454">"Функцията за нощно осветление придава червен нюанс на екрана ви през нощта. Това подобрява видимостта му или четенето на него при слаба светлина и може да ви помогне да заспите по-лесно."</string>
+    <string name="night_display_text" msgid="4535302797673277668">"Функцията за нощно осветление придава червен нюанс на екрана. Това подобрява видимостта му и четенето на него при слаба светлина и може да ви помогне да заспите по-лесно."</string>
+    <string name="night_display_category_schedule" msgid="2044072617637348966">"Насрочване"</string>
+    <string name="night_display_category_status" msgid="1952928783124400330">"Състояние"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Автоматично включване"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Никога"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Персонализиран график"</string>
@@ -1980,10 +1981,8 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"С хардуерна поддръжка"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Само софтуерно"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Идентификационните данни не са налице за този потребител"</string>
-    <!-- no translation found for credential_for_vpn_and_apps (4168197158768443365) -->
-    <skip />
-    <!-- no translation found for credential_for_wifi (6228425986551591864) -->
-    <skip />
+    <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"Инсталирани за виртуалната частна мрежа (VPN) и приложения"</string>
+    <string name="credential_for_wifi" msgid="6228425986551591864">"Инсталирани за Wi-Fi"</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Въведете паролата за хранилището за идентификационни данни."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Текуща парола:"</string>
@@ -2278,8 +2277,7 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"Да се активира ли сертификатът от сертифициращ орган за системата?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"Да се деактивира ли сертификатът от сертифициращ орган за системата?"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"Да се премахне ли завинаги сертификатът от сертифициращ орган за потребителя?"</string>
-    <!-- no translation found for credential_contains (3984922924723974084) -->
-    <skip />
+    <string name="credential_contains" msgid="3984922924723974084">"Този запис съдържа:"</string>
     <string name="one_userkey" msgid="6034020579534914349">"един потребителски ключ"</string>
     <string name="one_usercrt" msgid="2150319011101639509">"един потребителски сертификат"</string>
     <string name="one_cacrt" msgid="6844397037970164809">"един сертификат от сертифициращ орган"</string>
@@ -3198,6 +3196,5 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Първо, се свържете с интернет"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Не е налице на заключени към оператор устройства"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Освободихте общо <xliff:g id="SIZE">%1$s</xliff:g>\n\nПоследно изпълнение: <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <!-- no translation found for automatic_storage_manager_downloads_days_title (8899594124034695459) -->
-    <skip />
+    <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Премахване на изтегляния"</string>
 </resources>
