@@ -397,6 +397,11 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
+    @Override
+    public void onPackageSizeChanged(String packageName) {
+        refreshUi();
+    }
+
     private void handleHeader() {
         mHeader = (LayoutPreference) findPreference(KEY_HEADER);
 
