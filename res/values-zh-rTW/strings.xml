@@ -122,8 +122,7 @@
     <string name="device_picker" msgid="4978696506172252813">"選擇藍牙裝置"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"藍牙權限要求"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"有一個應用程式要求開啟這個裝置的藍牙功能。"</string>
-    <!-- no translation found for bluetooth_ask_disablement (5889300510508065674) -->
-    <skip />
+    <string name="bluetooth_ask_disablement" msgid="5889300510508065674">"有一個應用程式要求關閉這個裝置的藍牙功能。"</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"應用程式要求開放 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒，讓其他藍牙裝置能搜尋到您的平板電腦。"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"應用程式要求開放 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒，讓其他藍牙裝置能搜尋到您的手機。"</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"應用程式要求讓其他藍牙裝置能搜尋到您的平版電腦。您日後可在 [藍牙] 設定中變更這項設定。"</string>
@@ -357,7 +356,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"名稱"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"確定"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"刪除"</string>
-    <string name="security_settings_fingerprint_enroll_start_title" msgid="9192567284554495805">"開始註冊！"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="951888937749663602">"開始註冊"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"將您的手指放在感應器上，感到震動即可移開"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"繼續輕觸"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"稍微移動您的手指以新增完整的指紋"</string>
@@ -427,7 +426,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"保護您的平板電腦"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"保護您的裝置"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"保護您的手機"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="4384500605121098860">"使用複雜的圖案、PIN 碼或密碼會比感應指紋來得安全。請設定備用的螢幕鎖定方式，進一步提升安全性。"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"請設定備用螢幕鎖定方式，進一步提升安全性。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"只要啟用裝置保護功能，即可防止他人在未獲您授權的情況下使用這台平板電腦。請選擇您要使用的螢幕鎖定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"只要啟用裝置保護功能，即可防止他人在未獲您授權的情況下使用這個裝置。請選擇您要使用的螢幕鎖定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"只要啟用裝置保護功能，即可防止他人在未獲您授權的情況下使用這支手機。請選擇您要使用的螢幕鎖定方式。"</string>
@@ -908,7 +907,9 @@
     <string name="auto_brightness_title" msgid="6341042882350279391">"自動調整亮度"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"根據環境光源調整最佳亮度"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜燈"</string>
-    <string name="night_display_text" msgid="8753843222371219454">"夜燈功能在晚上會將您的螢幕色調改為紅色，讓您更輕鬆地在光線昏暗的環境中查看螢幕，也比較容易入睡。"</string>
+    <string name="night_display_text" msgid="4535302797673277668">"夜燈功能會將您的螢幕色調改為紅色，讓您更輕鬆地在光線昏暗的環境中查看螢幕，也比較容易入睡。"</string>
+    <string name="night_display_category_schedule" msgid="2044072617637348966">"排程"</string>
+    <string name="night_display_category_status" msgid="1952928783124400330">"狀態"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"自動開啟"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"永不"</string>
     <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"自訂時間表"</string>
@@ -1984,10 +1985,8 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"硬體備份"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"僅限軟體"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"這位使用者無法存取憑證"</string>
-    <!-- no translation found for credential_for_vpn_and_apps (4168197158768443365) -->
-    <skip />
-    <!-- no translation found for credential_for_wifi (6228425986551591864) -->
-    <skip />
+    <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"已為 VPN 和應用程式安裝"</string>
+    <string name="credential_for_wifi" msgid="6228425986551591864">"已為 Wi-Fi 安裝"</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"輸入認證儲存空間的密碼。"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"目前的密碼："</string>
@@ -2282,8 +2281,7 @@
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"要啟用這個系統 CA 憑證嗎？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"要停用這個系統 CA 憑證嗎？"</string>
     <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"永久移除使用者 CA 憑證嗎？"</string>
-    <!-- no translation found for credential_contains (3984922924723974084) -->
-    <skip />
+    <string name="credential_contains" msgid="3984922924723974084">"此項目包含："</string>
     <string name="one_userkey" msgid="6034020579534914349">"一個使用者金鑰"</string>
     <string name="one_usercrt" msgid="2150319011101639509">"一個使用者憑證"</string>
     <string name="one_cacrt" msgid="6844397037970164809">"一個 CA 憑證"</string>
@@ -3202,6 +3200,5 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"請先連上網際網路"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"綁定特定行動通訊業者服務的裝置無法使用"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"總共釋出 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次執行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <!-- no translation found for automatic_storage_manager_downloads_days_title (8899594124034695459) -->
-    <skip />
+    <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"移除下載的內容"</string>
 </resources>
