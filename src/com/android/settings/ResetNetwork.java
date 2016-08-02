@@ -172,7 +172,11 @@ public class ResetNetwork extends OptionsMenuFragment {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             mSubscriptionSpinner.setAdapter(adapter);
             mSubscriptionSpinner.setSelection(selectedIndex);
-            mSubscriptionSpinner.setVisibility(View.VISIBLE);
+            if (mSubscriptions.size() > 1) {
+                mSubscriptionSpinner.setVisibility(View.VISIBLE);
+            } else {
+                mSubscriptionSpinner.setVisibility(View.INVISIBLE);
+            }
         } else {
             mSubscriptionSpinner.setVisibility(View.INVISIBLE);
         }
