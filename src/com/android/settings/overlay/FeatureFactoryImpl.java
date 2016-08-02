@@ -17,10 +17,12 @@
 package com.android.settings.overlay;
 
 import android.content.Context;
+import android.support.annotation.Keep;
 
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
  */
+@Keep
 public final class FeatureFactoryImpl extends FeatureFactory {
 
     @Override

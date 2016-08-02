@@ -6,8 +6,8 @@
 
 # We want to keep methods in Activity that could be used in the XML attribute onClick.
 -keepclassmembers class * extends android.app.Activity {
-   public void *(android.view.View);
-   public void *(android.view.MenuItem);
+    public void *(android.view.View);
+    public void *(android.view.MenuItem);
 }
 
 # Keep setters in Views so that animations can still work.
@@ -26,4 +26,16 @@
 }
 -keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+# Keep annotated classes or class members.
+-keep @android.support.annotation.Keep class *
+-keepclassmembers class * {
+    @android.support.annotation.Keep *;
+}
+
+# Keep specific fields used via reflection.
+-keepclassmembers class * {
+    public static ** SEARCH_INDEX_DATA_PROVIDER;
+    public static ** SUMMARY_PROVIDER_FACTORY;
 }
