@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,15 +26,37 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
+import android.view.animation.AnimationUtils;
 
 import java.util.Objects;
 
 public class FallbackHome extends Activity {
     private static final String TAG = "FallbackHome";
+    private static final int PROGRESS_TIMEOUT = 2000;
+
+    private boolean mProvisioned;
+
+    private final Runnable mProgressTimeoutRunnable = () -> {
+        View v = getLayoutInflater().inflate(
+                R.layout.fallback_home_finishing_boot, null /* root */);
+        setContentView(v);
+        v.setAlpha(0f);
+        v.animate()
+                .alpha(1f)
+                .setDuration(500)
+                .setInterpolator(AnimationUtils.loadInterpolator(
+                        this, android.R.interpolator.fast_out_slow_in))
+                .start();
+        getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +64,15 @@ public class FallbackHome extends Activity {
 
         // Set ourselves totally black before the device is provisioned so that
         // we don't flash the wallpaper before SUW
-        if (Settings.Global.getInt(getContentResolver(),
-                Settings.Global.DEVICE_PROVISIONED, 0) == 0) {
+        mProvisioned = Settings.Global.getInt(getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0) != 0;
+        if (!mProvisioned) {
             setTheme(R.style.FallbackHome_SetupWizard);
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        } else {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         }
 
         registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_USER_UNLOCKED));
@@ -53,6 +80,19 @@ public class FallbackHome extends Activity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (mProvisioned) {
+            mHandler.postDelayed(mProgressTimeoutRunnable, PROGRESS_TIMEOUT);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(mProgressTimeoutRunnable);
+    }
+
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
@@ -75,6 +115,8 @@ public class FallbackHome extends Activity {
                 mHandler.sendEmptyMessageDelayed(0, 500);
             } else {
                 Log.d(TAG, "User unlocked and real home found; let's go!");
+                getSystemService(PowerManager.class).userActivity(
+                        SystemClock.uptimeMillis(), false);
                 finish();
             }
         }
