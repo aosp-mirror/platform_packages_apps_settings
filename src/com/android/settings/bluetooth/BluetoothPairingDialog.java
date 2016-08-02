@@ -67,7 +67,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
     private EditText mPairingView;
     private Button mOkButton;
     private LocalBluetoothProfile mPbapClientProfile;
-
+    private boolean mReceiverRegistered;
 
     /**
      * Dismiss the dialog if the bond state changes to bonded or none,
@@ -98,8 +98,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        if (!intent.getAction().equals(BluetoothDevice.ACTION_PAIRING_REQUEST))
-        {
+        if (!intent.getAction().equals(BluetoothDevice.ACTION_PAIRING_REQUEST)) {
             Log.e(TAG, "Error: this activity may be started only with intent " +
                   BluetoothDevice.ACTION_PAIRING_REQUEST);
             finish();
@@ -167,6 +166,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
          */
         registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_PAIRING_CANCEL));
         registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED));
+        mReceiverRegistered = true;
     }
 
     private void createUserEntryDialog() {
@@ -373,7 +373,10 @@ public final class BluetoothPairingDialog extends AlertActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(mReceiver);
+        if (mReceiverRegistered) {
+            mReceiverRegistered = false;
+            unregisterReceiver(mReceiver);
+        }
     }
 
     public void afterTextChanged(Editable s) {
