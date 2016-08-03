@@ -26,14 +26,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="?android:attr/textColorPrimary"
-            android:text="@*android:string/android_upgrading_complete"/>
+            android:text="@*android:string/android_start_title"/>
 
         <ProgressBar
             android:theme="@style/FallbackHomeProgressBar"
