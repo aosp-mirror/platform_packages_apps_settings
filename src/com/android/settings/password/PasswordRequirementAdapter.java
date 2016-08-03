@@ -28,7 +28,7 @@ import static com.android.settings.password.PasswordRequirementAdapter
         .PasswordRequirementViewHolder;
 
 /**
- * Used in {@link com.android.settings.ConfirmLockPassword} to show password requirements.
+ * Used in {@link com.android.settings.ChooseLockPassword} to show password requirements.
  */
 public class PasswordRequirementAdapter extends
         RecyclerView.Adapter<PasswordRequirementViewHolder> {
