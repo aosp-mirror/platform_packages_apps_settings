@@ -35,11 +35,16 @@ import static android.net.ConnectivityManager.TETHER_ERROR_PROVISION_FAILED;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.usage.UsageStatsManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ResolveInfo;
+import android.content.pm.PackageManager;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
@@ -61,10 +66,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class TetherServiceTest extends ServiceTestCase<TetherService> {
 
     private static final String TAG = "TetherServiceTest";
+    private static final String FAKE_PACKAGE_NAME = "com.some.package.name";
+    private static final String ENTITLEMENT_PACKAGE_NAME = "com.some.entitlement.name";
     private static final String TEST_RESPONSE_ACTION = "testProvisioningResponseAction";
     private static final String TEST_NO_UI_ACTION = "testNoUiProvisioningRequestAction";
     private static final int BOGUS_RECEIVER_RESULT = -5;
@@ -75,6 +86,7 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
 
     private TetherService mService;
     private MockResources mResources;
+    private FakeUsageStatsManagerWrapper mUsageStatsManagerWrapper;
     int mLastReceiverResultCode = BOGUS_RECEIVER_RESULT;
     private int mLastTetherRequestType = TETHERING_INVALID;
     private int mProvisionResponse = BOGUS_RECEIVER_RESULT;
@@ -83,6 +95,7 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
 
     @Mock private AlarmManager mAlarmManager;
     @Mock private ConnectivityManager mConnectivityManager;
+    @Mock private PackageManager mPackageManager;
     @Mock private WifiManager mWifiManager;
     @Mock private SharedPreferences mPrefs;
     @Mock private Editor mPrefEditor;
@@ -115,6 +128,27 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         when(mPrefs.edit()).thenReturn(mPrefEditor);
         when(mPrefEditor.putString(eq(CURRENT_TYPES), mStoredTypes.capture())).thenReturn(
                 mPrefEditor);
+        mUsageStatsManagerWrapper = new FakeUsageStatsManagerWrapper(mContext);
+
+        ResolveInfo systemAppResolveInfo = new ResolveInfo();
+        ActivityInfo systemActivityInfo = new ActivityInfo();
+        systemActivityInfo.packageName = ENTITLEMENT_PACKAGE_NAME;
+        ApplicationInfo systemAppInfo = new ApplicationInfo();
+        systemAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
+        systemActivityInfo.applicationInfo = systemAppInfo;
+        systemAppResolveInfo.activityInfo = systemActivityInfo;
+
+        ResolveInfo nonSystemResolveInfo = new ResolveInfo();
+        ActivityInfo nonSystemActivityInfo = new ActivityInfo();
+        nonSystemActivityInfo.packageName = FAKE_PACKAGE_NAME;
+        nonSystemActivityInfo.applicationInfo = new ApplicationInfo();
+        nonSystemResolveInfo.activityInfo = nonSystemActivityInfo;
+
+        List<ResolveInfo> resolvers = new ArrayList();
+        resolvers.add(nonSystemResolveInfo);
+        resolvers.add(systemAppResolveInfo);
+        when(mPackageManager.queryBroadcastReceivers(
+                any(Intent.class), eq(PackageManager.MATCH_ALL))).thenReturn(resolvers);
     }
 
     @Override
@@ -137,6 +171,19 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
 
         assertTrue(waitForProvisionRequest(TETHERING_WIFI));
         assertTrue(waitForProvisionResponse(TETHER_ERROR_NO_ERROR));
+    }
+
+    public void testStartKeepsProvisionAppActive() {
+        setupService();
+        getService().setUsageStatsManagerWrapper(mUsageStatsManagerWrapper);
+
+        runProvisioningForType(TETHERING_WIFI);
+
+        assertTrue(waitForProvisionRequest(TETHERING_WIFI));
+        assertTrue(waitForProvisionResponse(TETHER_ERROR_NO_ERROR));
+        assertFalse(mUsageStatsManagerWrapper.isAppInactive(ENTITLEMENT_PACKAGE_NAME));
+        // Non-system handler of the intent action should stay idle.
+        assertTrue(mUsageStatsManagerWrapper.isAppInactive(FAKE_PACKAGE_NAME));
     }
 
     public void testScheduleRechecks() {
@@ -229,6 +276,19 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         startService(intent);
     }
 
+    private boolean waitForAppInactive(UsageStatsManager usageStatsManager, String packageName) {
+        long startTime = SystemClock.uptimeMillis();
+        while (true) {
+            if (usageStatsManager.isAppInactive(packageName)) {
+                return true;
+            }
+            if ((SystemClock.uptimeMillis() - startTime) > PROVISION_TIMEOUT) {
+                return false;
+            }
+            SystemClock.sleep(SHORT_TIMEOUT);
+        }
+    }
+
     private boolean waitForProvisionRequest(int expectedType) {
         long startTime = SystemClock.uptimeMillis();
         while (true) {
@@ -308,6 +368,11 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         }
 
         @Override
+        public PackageManager getPackageManager() {
+            return mPackageManager;
+        }
+
+        @Override
         public Object getSystemService(String name) {
             if (ALARM_SERVICE.equals(name)) {
                 return mAlarmManager;
@@ -353,6 +418,29 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
             responseIntent.putExtra(TetherService.EXTRA_RESULT, response);
             context.sendBroadcast(
                     responseIntent, android.Manifest.permission.CONNECTIVITY_INTERNAL);
+        }
+    }
+
+    private static class FakeUsageStatsManagerWrapper
+            extends TetherService.UsageStatsManagerWrapper {
+        private final Set<String> mActivePackages;
+
+        FakeUsageStatsManagerWrapper(Context context) {
+            super(context);
+            mActivePackages = new HashSet<>();
+        }
+
+        @Override
+        void setAppInactive(String packageName, boolean isInactive) {
+            if (!isInactive) {
+                mActivePackages.add(packageName);
+            } else {
+                mActivePackages.remove(packageName);
+            }
+        }
+
+        boolean isAppInactive(String packageName) {
+            return !mActivePackages.contains(packageName);
         }
     }
 }
