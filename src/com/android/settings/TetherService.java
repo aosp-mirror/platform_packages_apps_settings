@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.usage.UsageStatsManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
@@ -29,6 +30,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.os.ResultReceiver;
@@ -63,6 +66,7 @@ public class TetherService extends Service {
 
     private int mCurrentTypeIndex;
     private boolean mInProvisionCheck;
+    private UsageStatsManagerWrapper mUsageManagerWrapper;
     private ArrayList<Integer> mCurrentTethers;
     private ArrayMap<Integer, List<ResultReceiver>> mPendingCallbacks;
 
@@ -87,6 +91,9 @@ public class TetherService extends Service {
         mPendingCallbacks.put(ConnectivityManager.TETHERING_USB, new ArrayList<ResultReceiver>());
         mPendingCallbacks.put(
                 ConnectivityManager.TETHERING_BLUETOOTH, new ArrayList<ResultReceiver>());
+        if (mUsageManagerWrapper == null) {
+            mUsageManagerWrapper = new UsageStatsManagerWrapper(this);
+        }
     }
 
     @Override
@@ -228,17 +235,43 @@ public class TetherService extends Service {
 
     private void startProvisioning(int index) {
         if (index < mCurrentTethers.size()) {
-            String provisionAction = getResources().getString(
-                    com.android.internal.R.string.config_mobile_hotspot_provision_app_no_ui);
-            if (DEBUG) Log.d(TAG, "Sending provisioning broadcast: " + provisionAction + " type: "
-                    + mCurrentTethers.get(index));
-            Intent intent = new Intent(provisionAction);
-            int type = mCurrentTethers.get(index);
-            intent.putExtra(TETHER_CHOICE, type);
-            intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+            Intent intent = getProvisionBroadcastIntent(index);
+            setEntitlementAppActive(index);
+
+            if (DEBUG) Log.d(TAG, "Sending provisioning broadcast: " + intent.getAction()
+                    + " type: " + mCurrentTethers.get(index));
 
             sendBroadcast(intent);
             mInProvisionCheck = true;
+        }
+    }
+
+    private Intent getProvisionBroadcastIntent(int index) {
+        String provisionAction = getResources().getString(
+                com.android.internal.R.string.config_mobile_hotspot_provision_app_no_ui);
+        Intent intent = new Intent(provisionAction);
+        int type = mCurrentTethers.get(index);
+        intent.putExtra(TETHER_CHOICE, type);
+        intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+
+        return intent;
+    }
+
+    private void setEntitlementAppActive(int index) {
+        final PackageManager packageManager = getPackageManager();
+        Intent intent = getProvisionBroadcastIntent(index);
+        List<ResolveInfo> resolvers =
+                packageManager.queryBroadcastReceivers(intent, PackageManager.MATCH_ALL);
+        if (resolvers.isEmpty()) {
+            Log.e(TAG, "No found BroadcastReceivers for provision intent.");
+            return;
+        }
+
+        for (ResolveInfo resolver : resolvers) {
+            if (resolver.activityInfo.applicationInfo.isSystemApp()) {
+                String packageName = resolver.activityInfo.packageName;
+                mUsageManagerWrapper.setAppInactive(packageName, false);
+            }
         }
     }
 
@@ -335,4 +368,26 @@ public class TetherService extends Service {
         }
     };
 
+    @VisibleForTesting
+    void setUsageStatsManagerWrapper(UsageStatsManagerWrapper wrapper) {
+        mUsageManagerWrapper = wrapper;
+    }
+
+    /**
+     * A static helper class used for tests. UsageStatsManager cannot be mocked out becasue
+     * it's marked final. This class can be mocked out instead.
+     */
+    @VisibleForTesting
+    public static class UsageStatsManagerWrapper {
+        private final UsageStatsManager mUsageStatsManager;
+
+        UsageStatsManagerWrapper(Context context) {
+            mUsageStatsManager = (UsageStatsManager)
+                    context.getSystemService(Context.USAGE_STATS_SERVICE);
+        }
+
+        void setAppInactive(String packageName, boolean isInactive) {
+            mUsageStatsManager.setAppInactive(packageName, isInactive);
+        }
+    }
 }
