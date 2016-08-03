@@ -22,8 +22,9 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.InsetDrawable;
-import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -39,7 +40,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -49,8 +49,6 @@ import android.widget.TextView.OnEditorActionListener;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
-import com.android.internal.widget.PasswordEntryKeyboardHelper;
-import com.android.internal.widget.PasswordEntryKeyboardView;
 import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.settings.password.PasswordRequirementAdapter;
@@ -179,6 +177,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private int mPasswordMinSymbols = 0;
         private int mPasswordMinNumeric = 0;
         private int mPasswordMinNonLetter = 0;
+        private int mPasswordMinLengthToFulfillAllPolicies = 0;
         private int mUserId;
         private boolean mHideDrawer = false;
         /**
@@ -199,6 +198,8 @@ public class ChooseLockPassword extends SettingsActivity {
         private boolean mIsAlphaMode;
         private Button mCancelButton;
         private Button mNextButton;
+
+        private TextChangedHandler mTextChangedHandler;
 
         private static final int CONFIRM_EXISTING_REQUEST = 58;
         static final int RESULT_FINISHED = RESULT_FIRST_USER;
@@ -284,6 +285,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 w.start(mChooseLockSettingsHelper.utils(), required,
                         false, 0, current, current, mRequestedQuality, mUserId);
             }
+            mTextChangedHandler = new TextChangedHandler();
         }
 
         @Override
@@ -397,10 +399,12 @@ public class ChooseLockPassword extends SettingsActivity {
                         mPasswordMinLowerCase));
             }
             if (mPasswordMinLetters > 0) {
-                passwordRequirements.add(MIN_LETTER_IN_PASSWORD);
-                requirementDescriptions.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_letters, mPasswordMinLetters,
-                        mPasswordMinLetters));
+                if (mPasswordMinLetters > mPasswordMinUpperCase + mPasswordMinLowerCase) {
+                    passwordRequirements.add(MIN_LETTER_IN_PASSWORD);
+                    requirementDescriptions.add(getResources().getQuantityString(
+                            R.plurals.lockpassword_password_requires_letters, mPasswordMinLetters,
+                            mPasswordMinLetters));
+                }
             }
             if (mPasswordMinNumeric > 0) {
                 passwordRequirements.add(MIN_NUMBER_IN_PASSWORD);
@@ -415,10 +419,13 @@ public class ChooseLockPassword extends SettingsActivity {
                         mPasswordMinSymbols));
             }
             if (mPasswordMinNonLetter > 0) {
-                passwordRequirements.add(MIN_NON_LETTER_IN_PASSWORD);
-                requirementDescriptions.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_nonletter, mPasswordMinNonLetter,
-                        mPasswordMinNonLetter));
+                if (mPasswordMinNonLetter > mPasswordMinNumeric + mPasswordMinSymbols) {
+                    passwordRequirements.add(MIN_NON_LETTER_IN_PASSWORD);
+                    requirementDescriptions.add(getResources().getQuantityString(
+                            R.plurals.lockpassword_password_requires_nonletter, mPasswordMinNonLetter,
+
+                            mPasswordMinNonLetter));
+                }
             }
             // Convert list to array.
             mPasswordRequirements = passwordRequirements.stream().mapToInt(i -> i).toArray();
@@ -553,6 +560,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     mPasswordMinSymbols = 0;
                     mPasswordMinNonLetter = 0;
             }
+            mPasswordMinLengthToFulfillAllPolicies = getMinLengthToFulfillAllPolicies();
         }
 
         /**
@@ -565,7 +573,9 @@ public class ChooseLockPassword extends SettingsActivity {
             int errorCode = NO_ERROR;
 
             if (password.length() < mPasswordMinLength) {
-                errorCode |= TOO_SHORT;
+                if (mPasswordMinLength > mPasswordMinLengthToFulfillAllPolicies) {
+                    errorCode |= TOO_SHORT;
+                }
             } else if (password.length() > mPasswordMaxLength) {
                 errorCode |= TOO_LONG;
             } else {
@@ -728,11 +738,6 @@ public class ChooseLockPassword extends SettingsActivity {
             if ((errorCode & CONTAIN_NON_DIGITS) > 0) {
                 messages.add(getString(R.string.lockpassword_pin_contains_non_digits));
             }
-            if ((errorCode & NOT_ENOUGH_LETTER) > 0) {
-                messages.add(getResources().getQuantityString(
-                        R.plurals.lockpassword_password_requires_letters, mPasswordMinLetters,
-                        mPasswordMinLetters));
-            }
             if ((errorCode & NOT_ENOUGH_UPPER_CASE) > 0) {
                 messages.add(getResources().getQuantityString(
                         R.plurals.lockpassword_password_requires_uppercase, mPasswordMinUpperCase,
@@ -742,6 +747,11 @@ public class ChooseLockPassword extends SettingsActivity {
                 messages.add(getResources().getQuantityString(
                         R.plurals.lockpassword_password_requires_lowercase, mPasswordMinLowerCase,
                         mPasswordMinLowerCase));
+            }
+            if ((errorCode & NOT_ENOUGH_LETTER) > 0) {
+                messages.add(getResources().getQuantityString(
+                        R.plurals.lockpassword_password_requires_letters, mPasswordMinLetters,
+                        mPasswordMinLetters));
             }
             if ((errorCode & NOT_ENOUGH_DIGITS) > 0) {
                 messages.add(getResources().getQuantityString(
@@ -776,6 +786,14 @@ public class ChooseLockPassword extends SettingsActivity {
                         : R.string.lockpassword_pin_recently_used));
             }
             return messages.toArray(new String[0]);
+        }
+
+        private int getMinLengthToFulfillAllPolicies() {
+            final int minLengthForLetters = Math.max(mPasswordMinLetters,
+                    mPasswordMinUpperCase + mPasswordMinLowerCase);
+            final int minLengthForNonLetters = Math.max(mPasswordMinNonLetter,
+                    mPasswordMinSymbols + mPasswordMinNumeric);
+            return minLengthForLetters + minLengthForNonLetters;
         }
 
         /**
@@ -818,7 +836,8 @@ public class ChooseLockPassword extends SettingsActivity {
             if (mUiStage == Stage.ConfirmWrong) {
                 mUiStage = Stage.NeedToConfirm;
             }
-            updateUi();
+            // Schedule the UI update.
+            mTextChangedHandler.notifyAfterTextChanged();
         }
 
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -863,6 +882,27 @@ public class ChooseLockPassword extends SettingsActivity {
                 }
             }
             getActivity().finish();
+        }
+
+        class TextChangedHandler extends Handler {
+            private static final int ON_TEXT_CHANGED = 1;
+            private static final int DELAY_IN_MILLISECOND = 100;
+
+            /**
+             * With the introduction of delay, we batch processing the text changed event to reduce
+             * unnecessary UI updates.
+             */
+            private void notifyAfterTextChanged() {
+                removeMessages(ON_TEXT_CHANGED);
+                sendEmptyMessageDelayed(ON_TEXT_CHANGED, DELAY_IN_MILLISECOND);
+            }
+
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == ON_TEXT_CHANGED) {
+                    updateUi();
+                }
+            }
         }
     }
 
