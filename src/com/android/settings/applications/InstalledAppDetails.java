@@ -166,7 +166,6 @@ public class InstalledAppDetails extends AppInfoBase
 
     private boolean mDisableAfterUninstall;
     private boolean mListeningToPackageRemove;
-    private boolean mUninstallRequested;
 
     // Used for updating notification preference.
     private final NotificationBackend mBackend = new NotificationBackend();
@@ -327,6 +326,7 @@ public class InstalledAppDetails extends AppInfoBase
             removePreference(KEY_DATA);
         }
         mBatteryHelper = new BatteryStatsHelper(getActivity(), true);
+        startListeningToPackageRemove();
     }
 
     @Override
@@ -340,7 +340,6 @@ public class InstalledAppDetails extends AppInfoBase
         if (mFinishing) {
             return;
         }
-        stopListeningToPackageRemove();
         mState.requestSize(mPackageName, mUserId);
         AppItem app = new AppItem(mAppEntry.info.uid);
         app.addUid(mAppEntry.info.uid);
@@ -357,9 +356,6 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onPause() {
         getLoaderManager().destroyLoader(LOADER_CHART_DATA);
-        if (!mFinishing && !mUninstallRequested) {
-            startListeningToPackageRemove();
-        }
         super.onPause();
     }
 
@@ -510,7 +506,7 @@ public class InstalledAppDetails extends AppInfoBase
                 if (!refreshUi()) {
                     setIntentAndFinish(true, true);
                 } else {
-                    mUninstallRequested = false;
+                    startListeningToPackageRemove();
                 }
                 break;
         }
@@ -690,7 +686,7 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void uninstallPkg(String packageName, boolean allUsers, boolean andDisable) {
-        mUninstallRequested = true;
+        stopListeningToPackageRemove();
          // Create new intent to launch Uninstaller activity
         Uri packageURI = Uri.parse("package:"+packageName);
         Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
@@ -780,7 +776,7 @@ public class InstalledAppDetails extends AppInfoBase
         String packageName = mAppEntry.info.packageName;
         if (v == mUninstallButton) {
             if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
-                mUninstallRequested = true;
+                stopListeningToPackageRemove();
                 Activity activity = getActivity();
                 Intent uninstallDAIntent = new Intent(activity, DeviceAdminAdd.class);
                 uninstallDAIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
