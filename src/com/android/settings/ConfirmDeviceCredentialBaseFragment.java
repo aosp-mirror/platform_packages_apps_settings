@@ -164,12 +164,16 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
         if (intent != null) {
             CharSequence titleText = intent.getCharSequenceExtra(
                     ConfirmDeviceCredentialBaseFragment.TITLE_TEXT);
-            if (titleText == null || supplementalText == null) {
+            if (supplementalText == null) {
                 return;
             }
-            String accessibilityTitle =
-                    new StringBuilder(titleText).append(",").append(supplementalText).toString();
-            getActivity().setTitle(Utils.createAccessibleSequence(titleText, accessibilityTitle));
+            if (titleText == null) {
+                getActivity().setTitle(supplementalText);
+            } else {
+                String accessibilityTitle =
+                        new StringBuilder(titleText).append(",").append(supplementalText).toString();
+                getActivity().setTitle(Utils.createAccessibleSequence(titleText, accessibilityTitle));
+            }
         }
     }
 
