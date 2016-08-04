@@ -28,8 +28,10 @@ import android.os.Process;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 
 import java.lang.reflect.Field;
@@ -87,9 +89,24 @@ public class SummaryLoader {
             public void run() {
                 // Since tiles are not always cached (like on locale change for instance),
                 // we need to always get the latest one.
-                Tile tile = mAdapter.getTile(component);
-                if (tile == null) return;
-                if (DEBUG) Log.d(TAG, "setSummary " + tile.title + " - " + summary);
+                if (!(mActivity instanceof SettingsDrawerActivity)) {
+                    if (DEBUG) {
+                        Log.d(TAG, "Can't get category list.");
+                    }
+                    return;
+                }
+                final List<DashboardCategory> categories =
+                        ((SettingsDrawerActivity) mActivity).getDashboardCategories();
+                final Tile tile = getTileFromCategory(categories, component);
+                if (tile == null) {
+                    if (DEBUG) {
+                        Log.d(TAG, "Can't find tile for " + component);
+                    }
+                    return;
+                }
+                if (DEBUG) {
+                    Log.d(TAG, "setSummary " + tile.title + " - " + summary);
+                }
                 tile.summary = summary;
                 mAdapter.notifyChanged(tile);
             }
@@ -185,6 +202,27 @@ public class SummaryLoader {
             if (DEBUG) Log.d(TAG, "Creating " + tile);
             mSummaryMap.put(provider, tile.intent.getComponent());
         }
+    }
+
+    private Tile getTileFromCategory(List<DashboardCategory> categories, ComponentName component) {
+        if (categories == null) {
+            if (DEBUG) {
+                Log.d(TAG, "Category is null, can't find tile");
+            }
+            return null;
+        }
+        final int categorySize = categories.size();
+        for (int i = 0; i < categorySize; i++) {
+            final DashboardCategory category = categories.get(i);
+            final int tileCount = category.tiles.size();
+            for (int j = 0; j < tileCount; j++) {
+                final Tile tile = category.tiles.get(j);
+                if (component.equals(tile.intent.getComponent())) {
+                    return tile;
+                }
+            }
+        }
+        return null;
     }
 
     public interface SummaryProvider {
