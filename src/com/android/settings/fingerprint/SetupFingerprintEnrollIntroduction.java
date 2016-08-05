@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.UserHandle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
@@ -52,6 +53,11 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     @Override
     protected void initViews() {
         super.initViews();
+
+        TextView description = (TextView) findViewById(R.id.description_text);
+        description.setText(
+                R.string.security_settings_fingerprint_enroll_introduction_message_setup);
+
         Button nextButton = getNextButton();
         nextButton.setText(
                 R.string.security_settings_fingerprint_enroll_introduction_continue_setup);
