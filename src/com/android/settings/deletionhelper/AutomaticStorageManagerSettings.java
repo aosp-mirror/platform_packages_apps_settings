@@ -55,6 +55,7 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     private static final String KEY_DELETION_HELPER = "deletion_helper";
     private static final String KEY_FREED = "freed_bytes";
     private static final String KEY_STORAGE_MANAGER_SWITCH = "storage_manager_active";
+    private static final String KEY_DOWNLOADS_BACKUP_SWITCH = "downloads_backup_active";
     private static final String KEY_DOWNLOADS_DAYS = "downloads_days";
 
     private DropDownPreference mDaysToRetain;
@@ -62,6 +63,7 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     private Preference mFreedBytes;
     private Preference mDeletionHelper;
     private SwitchPreference mStorageManagerSwitch;
+    private SwitchPreference mDownloadsBackupSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,9 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
 
         mStorageManagerSwitch = (SwitchPreference) findPreference(KEY_STORAGE_MANAGER_SWITCH);
         mStorageManagerSwitch.setOnPreferenceChangeListener(this);
+
+        mDownloadsBackupSwitch = (SwitchPreference) findPreference(KEY_DOWNLOADS_BACKUP_SWITCH);
+        mDownloadsBackupSwitch.setOnPreferenceChangeListener(this);
 
         ContentResolver cr = getContentResolver();
         int photosDaysToRetain = Settings.Secure.getInt(cr,
@@ -120,23 +125,34 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     @Override
     public void onResume() {
         super.onResume();
-        boolean isChecked =
+        boolean isStorageManagerChecked =
                 Settings.Secure.getInt(getContentResolver(),
                         Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
-        mStorageManagerSwitch.setChecked(isChecked);
-        mDaysToRetain.setEnabled(isChecked);
+        mStorageManagerSwitch.setChecked(isStorageManagerChecked);
+        mDaysToRetain.setEnabled(isStorageManagerChecked);
+
+        boolean isDownloadsBackupChecked =
+                Settings.Secure.getInt(getContentResolver(),
+                        Settings.Secure.DOWNLOADS_BACKUP_ENABLED, 0) != 0;
+        mDownloadsBackupSwitch.setChecked(isDownloadsBackupChecked);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         switch (preference.getKey()) {
             case KEY_STORAGE_MANAGER_SWITCH:
-                boolean checked = (boolean) newValue;
+                boolean storageManagerChecked = (boolean) newValue;
                 MetricsLogger.action(getContext(), MetricsEvent.ACTION_TOGGLE_STORAGE_MANAGER,
-                        checked);
-                mDaysToRetain.setEnabled(checked);
+                        storageManagerChecked);
+                mDaysToRetain.setEnabled(storageManagerChecked);
                 Settings.Secure.putInt(getContentResolver(),
-                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, checked ? 1 : 0);
+                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
+                        storageManagerChecked ? 1 : 0);
+                break;
+            case KEY_DOWNLOADS_BACKUP_SWITCH:
+                boolean downloadsBackupChecked = (boolean) newValue;
+                Settings.Secure.putInt(getContentResolver(),
+                        Settings.Secure.DOWNLOADS_BACKUP_ENABLED, downloadsBackupChecked ? 1 : 0);
                 break;
             case KEY_DAYS:
                 Settings.Secure.putInt(getContentResolver(),

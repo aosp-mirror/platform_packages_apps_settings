@@ -27,6 +27,10 @@
             android:title="@string/automatic_storage_manager_preference_title"
             android:summary="@string/automatic_storage_manager_text"/>
 
+        <SwitchPreference
+            android:key="downloads_backup_active"
+            android:title="@string/downloads_backup_preference_title"
+            android:summary="@string/downloads_backup_text"/>
 
         <com.android.settings.fuelgauge.WallOfTextPreference
             android:key="freed_bytes"
