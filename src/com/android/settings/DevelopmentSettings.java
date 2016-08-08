@@ -2350,11 +2350,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             } else if (isSimLockedDevice()) {
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_sim_locked_device;
             } else if (!isOemUnlockAllowed()) {
-                // If the device isn't SIM-locked but OEM unlock is disabled by user restriction,
-                // this means the device hasn't been able to confirm whether SIM-lock or any other
-                // restrictions apply (or hasn't been able to apply such restrictions yet). Ask the
-                // user to connect to the internet in order to retrieve all restrictions.
-                oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_connectivity;
+                // If the device isn't SIM-locked but OEM unlock is disabled by the system via the
+                // user restriction, this means either some other carrier restriction is in place or
+                // the device hasn't been able to confirm which restrictions (SIM-lock or otherwise)
+                // apply.
+                oemUnlockSummary =
+                    R.string.oem_unlock_enable_disabled_summary_connectivity_or_locked;
             }
             mEnableOemUnlock.setSummary(getString(oemUnlockSummary));
         }
