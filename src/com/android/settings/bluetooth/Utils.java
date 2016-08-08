@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import android.app.AlertDialog;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -124,6 +125,15 @@ public final class Utils {
 
     public static LocalBluetoothManager getLocalBtManager(Context context) {
         return LocalBluetoothManager.getInstance(context, mOnInitCallback);
+    }
+
+    public static String createRemoteName(Context context, BluetoothDevice device) {
+        String mRemoteName = device != null ? device.getAliasName() : null;
+
+        if (mRemoteName == null) {
+            mRemoteName = context.getString(R.string.unknown);
+        }
+        return mRemoteName;
     }
 
     private static final ErrorListener mErrorListener = new ErrorListener() {
