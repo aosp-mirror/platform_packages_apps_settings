@@ -182,7 +182,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_ZEN_MODE_AUTOMATION;
     }
 

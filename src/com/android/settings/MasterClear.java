@@ -306,7 +306,7 @@ public class MasterClear extends OptionsMenuFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.MASTER_CLEAR;
     }
 }

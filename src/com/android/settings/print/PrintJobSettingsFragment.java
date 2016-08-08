@@ -67,7 +67,7 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     private PrintJobId mPrintJobId;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PRINT_JOB_SETTINGS;
     }
 

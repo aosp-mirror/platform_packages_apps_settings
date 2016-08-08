@@ -88,7 +88,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     private Account mFirstAccount;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCOUNTS_MANAGE_ACCOUNTS;
     }
 

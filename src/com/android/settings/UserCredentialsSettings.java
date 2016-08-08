@@ -68,7 +68,7 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
     private ListView mListView;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.USER_CREDENTIALS;
     }
 

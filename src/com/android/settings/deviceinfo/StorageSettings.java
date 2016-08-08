@@ -92,7 +92,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private static long sTotalInternalStorage;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_STORAGE;
     }
 

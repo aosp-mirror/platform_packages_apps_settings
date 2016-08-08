@@ -27,7 +27,7 @@ import android.os.UserHandle;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockSettingsHelper;
-import com.android.settings.InstrumentedFragment;
+import com.android.settings.core.InstrumentedFragment;
 
 /**
  * Sidecar fragment to handle the state around fingerprint enrollment.
@@ -154,7 +154,7 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
     };
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.FINGERPRINT_ENROLL_SIDECAR;
     }
 

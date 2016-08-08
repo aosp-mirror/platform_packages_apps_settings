@@ -18,7 +18,6 @@ import android.annotation.Nullable;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -28,7 +27,6 @@ import android.view.View;
 import com.android.internal.logging.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.DividerPreference;
-import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.applications.AppStateSmsPremBridge.SmsState;
@@ -76,7 +74,7 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.PREMIUM_SMS_ACCESS;
     }
 

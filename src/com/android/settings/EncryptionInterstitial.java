@@ -92,7 +92,7 @@ public class EncryptionInterstitial extends SettingsActivity {
         private int mRequestedPasswordQuality;
 
         @Override
-        protected int getMetricsCategory() {
+        public int getMetricsCategory() {
             return MetricsEvent.ENCRYPTION;
         }
 

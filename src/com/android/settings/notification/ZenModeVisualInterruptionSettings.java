@@ -86,7 +86,7 @@ public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_ZEN_MODE_VISUAL_INTERRUPTIONS;
     }
 

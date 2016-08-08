@@ -359,7 +359,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.FUELGAUGE_POWER_USAGE_DETAIL;
     }
 

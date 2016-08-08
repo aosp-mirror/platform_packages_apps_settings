@@ -36,7 +36,7 @@ import java.util.List;
 public class WallpaperTypeSettings extends SettingsPreferenceFragment implements Indexable {
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.WALLPAPER_TYPE;
     }
 

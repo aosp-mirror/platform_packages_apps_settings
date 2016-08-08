@@ -245,7 +245,7 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.HOME;
     }
 

@@ -91,7 +91,7 @@ public class ProcessStatsUi extends ProcessStatsBase {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_PROCESS_STATS_UI;
     }
 

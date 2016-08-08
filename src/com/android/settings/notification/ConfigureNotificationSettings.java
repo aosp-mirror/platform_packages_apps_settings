@@ -66,7 +66,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     private int mProfileChallengeUserId;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.CONFIGURE_NOTIFICATION;
     }
 

@@ -124,7 +124,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     private SearchView mSearchView;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PRINT_SERVICE_SETTINGS;
     }
 

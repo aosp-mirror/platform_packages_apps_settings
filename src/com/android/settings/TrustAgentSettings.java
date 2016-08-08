@@ -70,7 +70,7 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.TRUST_AGENT;
     }
 

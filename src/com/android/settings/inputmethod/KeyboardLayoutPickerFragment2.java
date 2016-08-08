@@ -71,7 +71,7 @@ public final class KeyboardLayoutPickerFragment2 extends SettingsPreferenceFragm
     public static final String EXTRA_INPUT_METHOD_SUBTYPE = "input_method_subtype";
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.INPUTMETHOD_KEYBOARD;
     }
 

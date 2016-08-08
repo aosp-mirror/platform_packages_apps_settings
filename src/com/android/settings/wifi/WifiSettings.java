@@ -351,7 +351,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.WIFI;
     }
 

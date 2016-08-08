@@ -50,6 +50,7 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
 import com.android.internal.widget.TextViewInputDisabler;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.settings.password.PasswordRequirementAdapter;
 import com.android.setupwizardlib.GlifLayout;
@@ -437,7 +438,7 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         @Override
-        protected int getMetricsCategory() {
+        public int getMetricsCategory() {
             return MetricsEvent.CHOOSE_LOCK_PASSWORD;
         }
 

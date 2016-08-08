@@ -90,7 +90,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY;
     }
 

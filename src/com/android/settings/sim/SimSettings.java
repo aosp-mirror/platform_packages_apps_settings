@@ -80,7 +80,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SIM;
     }
 

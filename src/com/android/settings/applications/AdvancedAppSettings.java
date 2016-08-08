@@ -77,7 +77,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_ADVANCED;
     }
 

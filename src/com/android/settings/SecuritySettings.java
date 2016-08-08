@@ -153,7 +153,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private String mCurrentProfilePassword;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SECURITY;
     }
 
@@ -1011,7 +1011,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         private DevicePolicyManager mDPM;
 
         @Override
-        protected int getMetricsCategory() {
+        public int getMetricsCategory() {
             return MetricsEvent.SECURITY;
         }
 

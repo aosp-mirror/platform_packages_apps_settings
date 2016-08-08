@@ -91,7 +91,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     private static final int REQUEST_CONFIRM_CREDENTIALS = 1;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.TRUSTED_CREDENTIALS;
     }
 

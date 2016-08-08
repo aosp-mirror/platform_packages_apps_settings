@@ -326,7 +326,7 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_INSTALLED_APP_DETAILS;
     }
 

@@ -100,7 +100,7 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_TOGGLE_AUTOCLICK;
     }
 

@@ -253,7 +253,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APN_EDITOR;
     }
 

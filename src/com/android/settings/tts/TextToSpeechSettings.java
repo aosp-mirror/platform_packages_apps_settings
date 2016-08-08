@@ -177,7 +177,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     };
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.TTS_TEXT_TO_SPEECH;
     }
 

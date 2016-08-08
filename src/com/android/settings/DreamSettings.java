@@ -76,7 +76,7 @@ public class DreamSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DREAM;
     }
 

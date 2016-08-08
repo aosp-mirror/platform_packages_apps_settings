@@ -23,7 +23,7 @@ public class ScreenZoomPreferenceFragmentForSetupWizard
         extends ScreenZoomSettings {
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SUW_ACCESSIBILITY_DISPLAY_SIZE;
     }
 

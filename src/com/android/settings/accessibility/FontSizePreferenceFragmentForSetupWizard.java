@@ -23,7 +23,7 @@ public class FontSizePreferenceFragmentForSetupWizard
         extends ToggleFontSizePreferenceFragment {
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SUW_ACCESSIBILITY_FONT_SIZE;
     }
 

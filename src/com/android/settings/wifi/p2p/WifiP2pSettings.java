@@ -491,7 +491,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.WIFI_P2P;
     }
 

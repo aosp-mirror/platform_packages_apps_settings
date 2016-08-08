@@ -170,7 +170,7 @@ public class ImeiInformation extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_IMEI_INFORMATION;
     }
 }

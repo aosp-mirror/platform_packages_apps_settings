@@ -74,7 +74,7 @@ public class ManageAssist extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_MANAGE_ASSIST;
     }
 

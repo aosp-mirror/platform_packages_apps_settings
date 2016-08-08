@@ -50,7 +50,7 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
     public static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.INPUTMETHOD_KEYBOARD;
     }
 

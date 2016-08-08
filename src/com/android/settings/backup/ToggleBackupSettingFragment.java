@@ -192,7 +192,7 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PRIVACY;
     }
 

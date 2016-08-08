@@ -39,7 +39,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -180,7 +180,7 @@ public class AppOpsDetails extends InstrumentedFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APP_OPS_DETAILS;
     }
 

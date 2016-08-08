@@ -332,7 +332,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVELOPMENT;
     }
 

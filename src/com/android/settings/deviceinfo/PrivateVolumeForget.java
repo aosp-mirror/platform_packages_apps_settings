@@ -43,7 +43,7 @@ public class PrivateVolumeForget extends SettingsPreferenceFragment {
     private VolumeRecord mRecord;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_STORAGE;
     }
 

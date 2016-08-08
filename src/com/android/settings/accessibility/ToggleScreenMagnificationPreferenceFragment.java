@@ -178,7 +178,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends ToggleFeaturePr
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
     }
 

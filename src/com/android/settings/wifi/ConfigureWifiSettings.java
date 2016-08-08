@@ -242,7 +242,7 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.CONFIGURE_WIFI;
     }
 

@@ -149,7 +149,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APN;
     }
 

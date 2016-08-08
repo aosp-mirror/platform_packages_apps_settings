@@ -89,7 +89,7 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.FINGERPRINT_ENROLL_INTRO_SETUP;
     }
 }

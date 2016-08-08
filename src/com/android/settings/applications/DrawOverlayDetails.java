@@ -157,7 +157,7 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
     }
 

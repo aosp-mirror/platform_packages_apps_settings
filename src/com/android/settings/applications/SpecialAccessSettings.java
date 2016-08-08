@@ -27,7 +27,7 @@ public class SpecialAccessSettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SPECIAL_ACCESS;
     }
 }

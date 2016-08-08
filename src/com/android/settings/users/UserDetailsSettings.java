@@ -67,7 +67,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private Bundle mDefaultGuestRestrictions;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.USER_DETAILS;
     }
 

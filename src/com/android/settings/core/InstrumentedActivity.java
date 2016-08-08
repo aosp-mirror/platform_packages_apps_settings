@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,34 +14,29 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.core;
 
 import android.app.Activity;
 
-import com.android.internal.logging.MetricsLogger;
+import com.android.settings.core.instrumentation.Instrumentable;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 
 /**
  * Instrumented activity that logs visibility state.
  */
-public abstract class InstrumentedActivity extends Activity {
-    /**
-     * Declare the view of this category.
-     *
-     * Categories are defined in {@link com.android.internal.logging.MetricsProto.MetricsEvent}
-     * or if there is no relevant existing category you may define one in
-     * {@link com.android.settings.InstrumentedFragment}.
-     */
-    protected abstract int getMetricsCategory();
+public abstract class InstrumentedActivity extends Activity implements Instrumentable {
+
+    private final VisibilityLoggerMixin mVisibilityLoggerMixin = new VisibilityLoggerMixin(this);
 
     @Override
     public void onResume() {
         super.onResume();
-        MetricsLogger.visible(this, getMetricsCategory());
+        mVisibilityLoggerMixin.onResume(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MetricsLogger.hidden(this, getMetricsCategory());
+        mVisibilityLoggerMixin.onPause(this);
     }
 }

@@ -54,7 +54,7 @@ import android.widget.SectionIndexer;
 import android.widget.Spinner;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
-import com.android.settings.InstrumentedFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
 import com.android.settings.Settings.DomainsURLsAppListActivity;
@@ -409,7 +409,7 @@ public class ManageApplications extends InstrumentedFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         switch (mListType) {
             case LIST_TYPE_MAIN:
                 return MetricsEvent.MANAGE_APPLICATIONS;

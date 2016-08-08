@@ -100,7 +100,7 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.TTS_ENGINE_SETTINGS;
     }
 

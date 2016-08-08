@@ -43,7 +43,7 @@ public class LocationMode extends LocationSettingsBase
     private RadioButtonPreference mSensorsOnly;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.LOCATION_MODE;
     }
 

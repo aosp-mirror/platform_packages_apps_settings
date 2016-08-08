@@ -149,7 +149,7 @@ public class ResetNetworkConfirm extends OptionsMenuFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.RESET_NETWORK_CONFIRM;
     }
 }

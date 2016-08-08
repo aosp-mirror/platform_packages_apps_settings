@@ -42,7 +42,7 @@ public class PaymentSettings extends SettingsPreferenceFragment {
     private PaymentBackend mPaymentBackend;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NFC_PAYMENT;
     }
 

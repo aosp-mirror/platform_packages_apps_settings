@@ -212,7 +212,7 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_APP_LAUNCH;
     }
 }

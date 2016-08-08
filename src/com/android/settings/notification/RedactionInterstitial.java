@@ -90,7 +90,7 @@ public class RedactionInterstitial extends SettingsActivity {
         private int mUserId;
 
         @Override
-        protected int getMetricsCategory() {
+        public int getMetricsCategory() {
             return MetricsEvent.NOTIFICATION_REDACTION;
         }
 

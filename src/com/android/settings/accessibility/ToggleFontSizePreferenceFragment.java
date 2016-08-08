@@ -73,7 +73,7 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_FONT_SIZE;
     }
 

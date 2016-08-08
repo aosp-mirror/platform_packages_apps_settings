@@ -45,7 +45,7 @@ public class ToggleGlobalGesturePreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
     }
 }

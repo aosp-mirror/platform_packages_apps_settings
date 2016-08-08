@@ -30,7 +30,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 
 public class PrivateVolumeFormat extends InstrumentedFragment {
@@ -38,7 +38,7 @@ public class PrivateVolumeFormat extends InstrumentedFragment {
     private DiskInfo mDisk;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_STORAGE;
     }
 

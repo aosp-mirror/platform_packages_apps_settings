@@ -36,6 +36,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.core.InstrumentedFragment;
 
 public class CryptKeeperSettings extends InstrumentedFragment {
     private static final String TAG = "CryptKeeper";
@@ -115,7 +116,7 @@ public class CryptKeeperSettings extends InstrumentedFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.CRYPT_KEEPER;
     }
 

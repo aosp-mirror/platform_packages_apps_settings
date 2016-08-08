@@ -84,7 +84,7 @@ public class ConvertToFbe extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.CONVERT_FBE;
     }
 }

@@ -256,7 +256,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ICC_LOCK;
     }
 

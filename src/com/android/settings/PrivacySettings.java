@@ -71,7 +71,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
     private boolean mEnabled;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PRIVACY;
     }
 

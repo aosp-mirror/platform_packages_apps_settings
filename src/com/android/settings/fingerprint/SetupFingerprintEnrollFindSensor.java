@@ -50,7 +50,7 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.FINGERPRINT_FIND_SENSOR_SETUP;
     }
 }

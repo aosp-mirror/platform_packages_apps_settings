@@ -37,7 +37,7 @@ public class InactiveApps extends SettingsPreferenceFragment implements OnPrefer
     private UsageStatsManager mUsageStats;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.FUELGAUGE_INACTIVE_APPS;
     }
 

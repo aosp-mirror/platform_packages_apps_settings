@@ -118,7 +118,7 @@ public class ManagedProfileSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ACCOUNTS_WORK_PROFILE_SETTINGS;
     }
 

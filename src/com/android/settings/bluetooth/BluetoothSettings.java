@@ -133,7 +133,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.BLUETOOTH;
     }
 

@@ -26,7 +26,7 @@ import android.widget.TextView;
 
 import com.android.internal.app.procstats.ProcessStats;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 
 import static com.android.settings.Utils.prepareCustomPreferencesList;
@@ -86,7 +86,7 @@ public class ProcessStatsMemDetail extends InstrumentedFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_PROCESS_STATS_MEM_DETAIL;
     }
 

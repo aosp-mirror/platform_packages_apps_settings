@@ -35,7 +35,7 @@ public class WifiInfo extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.TESTING;
     }
 }

@@ -153,7 +153,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
     }
 
