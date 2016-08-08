@@ -117,10 +117,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private PrintersAdapter mPrintersAdapter;
 
-    // TODO: Showing sub-sub fragment does not handle the activity title
-    // so we do it but this is wrong. Do a real fix when there is time.
-    private CharSequence mOldActivityTitle;
-
     private int mLastUnfilteredItemCount;
 
     private boolean mServiceEnabled;
@@ -133,16 +129,21 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View root = super.onCreateView(inflater, container, savedInstanceState);
-
-        mServiceEnabled = getArguments().getBoolean(PrintSettingsFragment.EXTRA_CHECKED);
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
 
         String title = getArguments().getString(PrintSettingsFragment.EXTRA_TITLE);
         if (!TextUtils.isEmpty(title)) {
             getActivity().setTitle(title);
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        View root = super.onCreateView(inflater, container, savedInstanceState);
+
+        mServiceEnabled = getArguments().getBoolean(PrintSettingsFragment.EXTRA_CHECKED);
 
         return root;
     }
@@ -177,9 +178,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     @Override
     public void onDestroyView() {
-        if (mOldActivityTitle != null) {
-            getActivity().getActionBar().setTitle(mOldActivityTitle);
-        }
         super.onDestroyView();
         mSwitchBar.removeOnSwitchChangeListener(this);
         mSwitchBar.hide();
