@@ -135,7 +135,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
                         BluetoothDevice.CONNECTION_ACCESS_NO);
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE, mRequestType);
-                String deviceAlias = mDevice != null ? mDevice.getAliasName() : null;
+                String deviceAlias = Utils.createRemoteName(context, mDevice);
                 switch (mRequestType) {
                     case BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS:
                         title = context.getString(R.string.bluetooth_phonebook_request);
