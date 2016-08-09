@@ -48,6 +48,7 @@ public class BillingCycleSettings extends DataUsageBase implements
 
     private static final String TAG = "BillingCycleSettings";
     private static final boolean LOGD = false;
+    private static final long MAX_DATA_LIMIT_BYTES = 50000 * GB_IN_BYTES;
 
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
     private static final String TAG_CYCLE_EDITOR = "cycleEditor";
@@ -228,10 +229,13 @@ public class BillingCycleSettings extends DataUsageBase implements
             }
             final long bytes = (long) (Float.valueOf(bytesString)
                         * (spinner.getSelectedItemPosition() == 0 ? MB_IN_BYTES : GB_IN_BYTES));
+
+            // to fix the overflow problem
+            final long correctedBytes = Math.min(MAX_DATA_LIMIT_BYTES, bytes);
             if (isLimit) {
-                editor.setPolicyLimitBytes(template, bytes);
+                editor.setPolicyLimitBytes(template, correctedBytes);
             } else {
-                editor.setPolicyWarningBytes(template, bytes);
+                editor.setPolicyWarningBytes(template, correctedBytes);
             }
             target.updatePrefs();
         }
