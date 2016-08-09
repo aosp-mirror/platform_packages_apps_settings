@@ -55,6 +55,11 @@
             android:title="@string/dock_audio_media_title"
             android:summary="%s" />
 
+    <!-- Boot sounds -->
+    <SwitchPreference
+            android:key="boot_sounds"
+            android:title="@string/boot_sounds_title" />
+
     <!-- Emergency tone -->
     <DropDownPreference
             android:key="emergency_tone"
