@@ -2793,6 +2793,17 @@
             android:excludeFromRecents="true">
         </activity>
 
+        <activity android:name=".wifi.RequestToggleWiFiActivity"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert"
+            android:excludeFromRecents="true"
+            android:permission="android.permission.CHANGE_WIFI_STATE">
+            <intent-filter>
+                <action android:name="android.net.wifi.action.REQUEST_ENABLE" />
+                <action android:name="android.net.wifi.action.REQUEST_DISABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".wifi.WifiDialogActivity"
             android:label=""
             android:theme="@style/Transparent"
