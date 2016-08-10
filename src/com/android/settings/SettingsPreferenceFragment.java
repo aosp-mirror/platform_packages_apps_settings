@@ -52,7 +52,7 @@ import java.util.UUID;
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
  */
-public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceFragment
+public abstract class SettingsPreferenceFragment extends InstrumentedFragment
         implements DialogCreatable {
 
     /**
@@ -130,10 +130,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         mPinnedHeaderFrameLayout = (ViewGroup) root.findViewById(R.id.pinned_header);
         mButtonBar = (ViewGroup) root.findViewById(R.id.button_bar);
         return root;
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     }
 
     @Override
