@@ -36,6 +36,12 @@
         android:title="@string/assist_access_screenshot_title"
         android:summary="@string/assist_access_screenshot_summary"/>
 
+    <SwitchPreference
+            android:key="flash"
+            android:title="@string/assist_flash_title"
+            android:summary="@string/assist_flash_summary"
+    />
+
     <com.android.settings.voice.VoiceInputListPreference
             android:key="voice_input_settings"
             android:title="@string/voice_input_settings_title"
