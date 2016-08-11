@@ -68,12 +68,13 @@ public class ConditionAdapterUtils {
         card.setOnClickListener(onClickListener);
         view.icon.setImageIcon(condition.getIcon());
         view.title.setText(condition.getTitle());
-        ImageView expand = (ImageView) view.itemView.findViewById(R.id.expand_indicator);
-        expand.setTag(condition);
+        final View collapsedGroup = view.itemView.findViewById(R.id.collapsed_group);
+        collapsedGroup.setTag(condition);
+        final ImageView expand = (ImageView) view.itemView.findViewById(R.id.expand_indicator);
         expand.setImageResource(isExpanded ? R.drawable.ic_expand_less : R.drawable.ic_expand_more);
         expand.setContentDescription(expand.getContext().getString(isExpanded
                 ? R.string.condition_expand_hide : R.string.condition_expand_show));
-        expand.setOnClickListener(onExpandListener);
+        collapsedGroup.setOnClickListener(onExpandListener);
 
         View detailGroup = view.itemView.findViewById(R.id.detail_group);
         CharSequence[] actions = condition.getActions();
