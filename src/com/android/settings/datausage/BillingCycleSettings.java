@@ -198,10 +198,16 @@ public class BillingCycleSettings extends DataUsageBase implements
             final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
 
             if (bytes > 1.5f * GB_IN_BYTES) {
-                bytesPicker.setText(formatText(bytes / (float) GB_IN_BYTES));
+                final String bytesText = formatText(bytes / (float) GB_IN_BYTES);
+                bytesPicker.setText(bytesText);
+                bytesPicker.setSelection(0, bytesText.length());
+
                 type.setSelection(1);
             } else {
-                bytesPicker.setText(formatText(bytes / (float) MB_IN_BYTES));
+                final String bytesText = formatText(bytes / (float) MB_IN_BYTES);
+                bytesPicker.setText(bytesText);
+                bytesPicker.setSelection(0, bytesText.length());
+
                 type.setSelection(0);
             }
         }
