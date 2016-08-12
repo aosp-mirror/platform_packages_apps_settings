@@ -338,8 +338,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Membuka kunci dengan sidik jari"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Cukup sentuh sensor sidik jari untuk membuka kunci perangkat, mengotorisasi pembelian, atau masuk ke aplikasi. Berhati-hatilah dengan sidik jari yang ditambahkan. Sidik jari yang ditambahkan dapat melakukan semua hal ini.\n\nCatatan: Sidik jari mungkin kurang aman dibanding pola atau PIN yang rumit."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (3635924459027832861) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Cukup sentuh sensor sidik jari untuk membuka kunci ponsel, mengotorisasi pembelian, atau masuk ke aplikasi. Berhati-hatilah dengan sidik jari yang ditambahkan. Sidik jari yang ditambahkan dapat melakukan semua hal ini.\n\nCatatan: Sidik jari mungkin kurang aman dibanding pola atau PIN yang rumit."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Batal"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Lanjutkan"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Lewati"</string>
@@ -380,8 +379,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Selain membuka kunci ponsel, Anda juga dapat menggunakan sidik jari untuk mengotorisasi pembelian dan akses aplikasi. "<annotation id="url">"Pelajari lebih lanjut"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Opsi kunci layar dinonaktifkan. Hubungi administrator organisasi untuk mempelajari lebih lanjut. "<annotation id="admin_details">"Detail selengkapnya"</annotation>\n\n"Anda tetap dapat menggunakan sidik jari untuk mengotorisasi pembelian dan akses aplikasi. "<annotation id="url">"Pelajari lebih lanjut"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Angkat jari, lalu sentuh sensor lagi"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Setiap kali melihat ikon ini, Anda dapat menggunakan sidik jari."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Untuk mengubah setelan Anda, buka Setelan &gt; Keamanan &gt; Sidik Jari."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Anda dapat menambahkan maksimal <xliff:g id="COUNT">%d</xliff:g> sidik jari"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Hapus semua sidik jari?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Anda tidak dapat menggunakan sidik jari untuk membuka kunci ponsel, mengotorisasi pembelian, atau masuk ke aplikasi."</string>
@@ -635,6 +632,8 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
+    <string name="wifi_ask_enable" msgid="7119053873957435786">"<xliff:g id="REQUESTER">%s</xliff:g> ingin MENGAKTIFKAN Wi-Fi untuk perangkat ini."</string>
+    <string name="wifi_ask_disable" msgid="5909293877818270354">"<xliff:g id="REQUESTER">%s</xliff:g> ingin MENONAKTIFKAN Wi-Fi untuk perangkat ini."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Memungkinkan pertukaran data saat tablet bersentuhan dengan perangkat lain"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Memungkinkan pertukaran data saat ponsel bersentuhan dengan perangkat lain"</string>
@@ -946,8 +945,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Kecerahan otomatis"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Angkat untuk membangunkan"</string>
     <string name="doze_title" msgid="2259176504273878294">"Tampilan ruangan"</string>
-    <!-- no translation found for doze_summary (3846219936142814032) -->
-    <skip />
+    <string name="doze_summary" msgid="3846219936142814032">"Membangunkan layar saat Anda menerima notifikasi"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Ukuran font"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Membuat teks menjadi lebih besar atau lebih kecil"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Setelan kunci kartu SIM"</string>
@@ -2569,6 +2567,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Senyap"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Lansiran"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Getar"</string>
+    <string name="boot_sounds_title" msgid="567029107382343709">"Aktifkan suara"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Jangan ganggu"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Hanya izinkan prioritas"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Aturan otomatis"</string>
@@ -3133,7 +3132,7 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"Kami siap membantu"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Kami siap sedia di sini untuk Anda 7 x 24 jam"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Kami siap membantu Anda 7x24 jam"</string>
-    <string name="support_escalation_summary" msgid="4481910353815635960">"Tim dukungan kami siap membantu mengatasi masalah"</string>
+    <string name="support_escalation_summary" msgid="8473084168776014405">"Tim dukungan kami siap membantu mengatasi masalah"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Tim dukungan kami siap sedia sepanjang hari, setiap hari."</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Telusuri bantuan atau coba lagi saat jam kerja tim dukungan (waktu lokal):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"Jam dukungan telepon (waktu lokal)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3147,9 +3146,9 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"Chat"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"Jelajahi kiat &amp; trik"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"Telusuri bantuan &amp; kirim masukan"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"Masuk untuk mendapatkan dukungan"</string>
+    <string name="support_sign_in_required_title" msgid="1367187789121480440">"Hubungi tim dukungan"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Masuk"</string>
-    <string name="support_sign_in_required_help" msgid="3930256366697956788">"Tidak dapat mengakses akun Anda?"</string>
+    <string name="support_sign_in_required_help" msgid="5200654782405538114">"Tidak dapat masuk?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Kirim informasi sistem"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"Untuk membantu mengatasi masalah Anda dengan cepat, kami memerlukan informasi sistem untuk melakukan diagnosis."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Jangan tampilkan lagi"</string>
@@ -3186,7 +3185,7 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"Isyarat"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"Isyarat cepat untuk mengontrol ponsel"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Beralih ke Kamera"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Untuk membuka kamera dengan cepat, cukup ketuk dua kali tombol daya. Berfungsi di layar mana pun"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Untuk membuka kamera dengan cepat, tekan tombol daya dua kali. Berfungsi di layar mana pun"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Balikkan kamera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Pemeriksaan layar cepat"</string>
@@ -3197,7 +3196,10 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"Nonaktif"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader telah dibuka kuncinya"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Terlebih dahulu sambungkan ke internet"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Sambungkan ke internet atau hubungi operator"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Tidak tersedia pada perangkat yang dikunci oleh operator"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> total dibuat tersedia\n\nTerakhir dijalankan pada <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Hapus unduhan"</string>
+    <string name="downloads_backup_preference_title" msgid="2312237179341156671">"Cadangan unduhan"</string>
+    <string name="downloads_backup_text" msgid="8351770128253816819"></string>
 </resources>
