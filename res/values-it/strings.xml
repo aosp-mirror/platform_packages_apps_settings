@@ -338,8 +338,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Sblocca con l\'impronta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Tocca il sensore delle impronte digitali per sbloccare il telefono, autorizzare gli acquisti o accedere alle app desiderate. Scegli con attenzione chi aggiungere: le operazioni sopra elencate possono essere svolte con qualsiasi impronta digitale aggiunta.\n\nNota. La tua impronta digitale potrebbe essere meno sicura di una sequenza o un PIN complesso."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (3635924459027832861) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Tocca il sensore delle impronte digitali per sbloccare il telefono, autorizzare gli acquisti o accedere alle app. Scegli con attenzione chi aggiungere: le operazioni sopra elencate possono essere svolte con qualsiasi impronta digitale aggiunta.\n\nNota. La tua impronta digitale potrebbe essere meno sicura di una sequenza o un codice PIN complessi."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Annulla"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continua"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Ignora"</string>
@@ -380,8 +379,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Oltre che per sbloccare il telefono, puoi utilizzare la tua impronta digitale per autorizzare acquisti e accessi alle app. "<annotation id="url">"Ulteriori informazioni"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Opzione Blocco schermo disattivata. Contatta l\'amministratore della tua organizzazione per avere ulteriori informazioni. "<annotation id="admin_details">"Altri dettagli"</annotation>\n\n"Puoi utilizzare ugualmente l\'impronta digitale per autorizzare acquisti e accessi alle app. "<annotation id="url">"Ulteriori informazioni"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Solleva il dito, quindi tocca di nuovo il sensore"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Quando viene visualizzata questa icona, puoi utilizzare la tua impronta digitale."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Per modificare le impostazioni, seleziona Impostazioni &gt; Sicurezza &gt; Impronta digitale."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Puoi aggiungere fino a <xliff:g id="COUNT">%d</xliff:g> impronte digitali"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Rimuovere tutte le impronte digitali?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Non potrai più utilizzare le impronte digitali per sbloccare il telefono, autorizzare gli acquisti o accedere alle app."</string>
@@ -635,6 +632,8 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
+    <string name="wifi_ask_enable" msgid="7119053873957435786">"L\'app <xliff:g id="REQUESTER">%s</xliff:g> desidera attivare il Wi-Fi su questo dispositivo."</string>
+    <string name="wifi_ask_disable" msgid="5909293877818270354">"L\'app <xliff:g id="REQUESTER">%s</xliff:g> desidera disattivare il Wi-Fi su questo dispositivo."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Consenti lo scambio di dati quando il tablet tocca un altro dispositivo"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Consenti lo scambio di dati quando il telefono tocca un altro dispositivo"</string>
@@ -946,8 +945,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Luminosità automatica"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Solleva per riattivare"</string>
     <string name="doze_title" msgid="2259176504273878294">"Display Ambient"</string>
-    <!-- no translation found for doze_summary (3846219936142814032) -->
-    <skip />
+    <string name="doze_summary" msgid="3846219936142814032">"Lo schermo viene riattivato quando ricevi notifiche"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Dimensioni carattere"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Ingrandisci o riduci il testo"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Impostazioni blocco SIM"</string>
@@ -1122,7 +1120,7 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Altro"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistema"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Esplora <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Gli altri sono file condivisi salvati da app, file scaricati da Internet o tramite Bluetooth, file Android e così via. \n\nPer vedere tutti i contenuti di <xliff:g id="NAME">^1</xliff:g>, tocca Esplora."</string>
+    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"In Altro sono inclusi file condivisi salvati dalle app, file scaricati da Internet o tramite Bluetooth, file Android e così via. \n\nPer vedere tutti i contenuti di <xliff:g id="NAME">^1</xliff:g>, tocca Esplora."</string>
     <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Il sistema include file utilizzati internamente dal sistema operativo Android. \n\nQuesti file non possono essere visualizzati singolarmente."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> potrebbe aver salvato foto, musica, film, app o altri dati che occupano <xliff:g id="SIZE">^2</xliff:g> di memoria. \n\nPer i dettagli, passa a <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Configura la tua <xliff:g id="NAME">^1</xliff:g>"</string>
@@ -2569,6 +2567,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Silenzioso"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Avviso acustico"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrazione"</string>
+    <string name="boot_sounds_title" msgid="567029107382343709">"Attiva suoni"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Non disturbare"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"La priorità consente solo"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Regole automatiche"</string>
@@ -3133,7 +3132,7 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"Siamo qui per aiutarti"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Siamo a tua disposizione 24 ore su 24, 7 giorni su 7"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Siamo a tua disposizione 24 ore su 24, 7 giorni su 7"</string>
-    <string name="support_escalation_summary" msgid="4481910353815635960">"Il nostro team di assistenza è a disposizione per risolvere qualsiasi problema"</string>
+    <string name="support_escalation_summary" msgid="8473084168776014405">"Il nostro team di assistenza è a disposizione per risolvere qualsiasi problema"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Il nostro team di assistenza è disponibile tutto il giorno, tutti i giorni"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Cerca nella Guida o chiamaci in orario d\'ufficio (ora locale):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"Orari d\'ufficio per l\'assistenza telefonica (ora locale)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3147,9 +3146,9 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"Chat"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"Leggi i suggerimenti"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"Cerca nella guida e invia feedback"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"Accedi per ricevere assistenza"</string>
+    <string name="support_sign_in_required_title" msgid="1367187789121480440">"Contatta l\'assistenza"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Accedi"</string>
-    <string name="support_sign_in_required_help" msgid="3930256366697956788">"Non riesci ad accedere al tuo account?"</string>
+    <string name="support_sign_in_required_help" msgid="5200654782405538114">"Non riesci ad accedere?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Invia informazioni sul sistema"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"Per risolvere il problema il più rapidamente possibile, devi fornire informazioni sul sistema."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Non mostrare più"</string>
@@ -3186,7 +3185,7 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gesti"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"Gesti rapidi per controllare il telefono"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Apri la fotocamera"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Per aprire velocemente la fotocamera, premi due volte il tasto di accensione. Funziona da qualsiasi schermata"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Per aprire velocemente la fotocamera, premi due volte il tasto di accensione da qualsiasi schermata"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Cambia fotocamera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Controllo rapido dello schermo"</string>
@@ -3197,7 +3196,10 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"Disattivati"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Il bootloader è già sbloccato"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Devi prima connetterti a Internet"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Connettiti a Internet o contatta il tuo operatore"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Non disponibile sui dispositivi bloccati dall\'operatore"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> disponibili in totale\n\nUltima esecuzione: <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Rimuovi download"</string>
+    <string name="downloads_backup_preference_title" msgid="2312237179341156671">"Copia di backup dei download"</string>
+    <string name="downloads_backup_text" msgid="8351770128253816819"></string>
 </resources>

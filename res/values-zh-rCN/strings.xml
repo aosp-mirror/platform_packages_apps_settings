@@ -338,8 +338,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"使用指纹解锁"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"只需触摸指纹传感器即可解锁您的手机、对购买交易进行授权或登录应用。请务必谨慎添加指纹，因为添加的任何指纹都能够用来执行上述操作。\n\n请注意：指纹识别的安全性可能不及安全系数高的图案或 PIN 码。"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (3635924459027832861) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"只需触摸指纹传感器即可解锁您的手机、对购买交易进行授权或登录应用。请务必谨慎添加指纹，因为添加的任何指纹都能够用来执行上述操作。\n\n请注意：指纹识别的安全性可能不及安全系数高的图案或 PIN 码。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"继续"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"跳过"</string>
@@ -380,8 +379,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"除了将手机解锁，您还可以在购买物品时和登录应用时使用自己的指纹来验证身份。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"屏幕锁定选项已被禁用。请与贵单位的管理员联系以了解详情。"<annotation id="admin_details">"更多详情"</annotation>\n\n"您仍然可以使用指纹对购买交易进行授权以及登录应用。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"移开手指，然后再次触摸传感器"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"只要您看见此图标，就可以使用指纹。"</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"要更改您的设置，请依次转到“设置”&gt;“安全”&gt;“指纹”。"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"您最多可以添加 <xliff:g id="COUNT">%d</xliff:g> 个指纹"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"要移除所有指纹吗？"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"您将无法使用指纹来解锁手机、授权购买交易或登录应用。"</string>
@@ -635,6 +632,10 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
+    <!-- no translation found for wifi_ask_enable (7119053873957435786) -->
+    <skip />
+    <!-- no translation found for wifi_ask_disable (5909293877818270354) -->
+    <skip />
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"允许平板电脑在接触其他设备时交换数据"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"允许手机在接触其他设备时交换数据"</string>
@@ -946,8 +947,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"自动调整亮度"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"拿起设备时唤醒"</string>
     <string name="doze_title" msgid="2259176504273878294">"主动显示"</string>
-    <!-- no translation found for doze_summary (3846219936142814032) -->
-    <skip />
+    <string name="doze_summary" msgid="3846219936142814032">"收到通知时唤醒屏幕"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字体大小"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"放大或缩小文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM卡锁定设置"</string>
@@ -2569,6 +2569,8 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"静音"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"警示音"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"振动"</string>
+    <!-- no translation found for boot_sounds_title (567029107382343709) -->
+    <skip />
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"勿扰"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"仅允许优先打扰内容"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自动规则"</string>
@@ -3133,7 +3135,8 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"我们会随时为您提供帮助"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我们可全天候为您提供服务"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"我们可全天候为您提供服务"</string>
-    <string name="support_escalation_summary" msgid="4481910353815635960">"我们的支持团队会协助您解决任何问题"</string>
+    <!-- no translation found for support_escalation_summary (8473084168776014405) -->
+    <skip />
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"我们的支持团队可全天候为您提供服务"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"请搜索相关帮助内容或在支持服务时段内（当地时间）再次联系我们：&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"电话支持服务时段（当地时间）&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3147,9 +3150,11 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"聊天"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"探索更多提示和技巧"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"搜索帮助与发送反馈"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"请登录以获取支持服务"</string>
+    <!-- no translation found for support_sign_in_required_title (1367187789121480440) -->
+    <skip />
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登录"</string>
-    <string name="support_sign_in_required_help" msgid="3930256366697956788">"无法访问您的帐号？"</string>
+    <!-- no translation found for support_sign_in_required_help (5200654782405538114) -->
+    <skip />
     <string name="support_disclaimer_title" msgid="4825302018208770031">"发送系统信息"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"为了快速帮您解决问题，我们需要您提供系统信息以进行诊断。"</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"不再显示"</string>
@@ -3186,7 +3191,8 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"手势"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"通过简单手势控制手机"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"快速打开相机"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"要快速打开相机，只需按两次电源按钮即可（适用于任何屏幕）"</string>
+    <!-- no translation found for double_tap_power_for_camera_summary (6005086458928518432) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"切换相机模式"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"快速查看屏幕内容"</string>
@@ -3197,7 +3203,11 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"关闭"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"引导加载程序已解锁"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"请先连接到互联网"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"请连接到互联网或与您的运营商联系"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"在与运营商绑定的设备上无法使用"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"已释放共 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次运行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"移除下载内容"</string>
+    <!-- no translation found for downloads_backup_preference_title (2312237179341156671) -->
+    <skip />
+    <string name="downloads_backup_text" msgid="8351770128253816819"></string>
 </resources>

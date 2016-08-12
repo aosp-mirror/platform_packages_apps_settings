@@ -338,8 +338,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbloqueo con huella"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Solo tienes que tocar el sensor de huellas digitales para desbloquear el teléfono, autorizar compras o iniciar sesión en aplicaciones. Cualquier huella digital que añadas podrá realizar estas acciones, por lo que debes tener cuidado con las huellas que incluyes.\n\nNota: Es posible que tu huella digital sea menos segura que un buen patrón o PIN."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (3635924459027832861) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Solo tienes que tocar el sensor de huellas digitales para desbloquear el teléfono, autorizar compras o iniciar sesión en aplicaciones. Cualquier huella digital que añadas podrá realizar estas acciones, por lo que debes tener cuidado con las huellas que incluyes.\n\nNota: Es posible que tu huella digital sea menos segura que un buen patrón o PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Saltar"</string>
@@ -380,8 +379,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Además de desbloquear el teléfono, también puedes utilizar tu huella digital para autorizar acceso a aplicaciones y compras. "<annotation id="url">"Más información"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Se ha inhabilitado la opción de bloqueo de pantalla. Ponte en contacto con el administrador de tu organización para obtener más información. "<annotation id="admin_details">"Más información"</annotation>\n\n"Puedes seguir utilizando tu huella digital para acceder a aplicaciones y autorizar compras. "<annotation id="url">"Más información"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Levanta el dedo y vuelve a tocar el sensor"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Cuando aparezca este icono, puedes usar tu huella digital."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Para cambiar la configuración, accede a Ajustes &gt; Seguridad &gt; Huella digital."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Puedes añadir hasta <xliff:g id="COUNT">%d</xliff:g> huellas digitales"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"¿Quitar todas las huellas?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"No podrás utilizar tus huellas digitales para desbloquear el teléfono, autorizar compras o iniciar sesión en las aplicaciones."</string>
@@ -633,6 +630,8 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
+    <string name="wifi_ask_enable" msgid="7119053873957435786">"<xliff:g id="REQUESTER">%s</xliff:g> quiere ACTIVAR la conexión Wi-Fi en este dispositivo."</string>
+    <string name="wifi_ask_disable" msgid="5909293877818270354">"<xliff:g id="REQUESTER">%s</xliff:g> quiere DESACTIVAR la conexión Wi-Fi en este dispositivo."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Permitir intercambio de datos cuando el tablet toque otro dispositivo"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Permitir el intercambio de datos cuando el teléfono toque otro dispositivo"</string>
@@ -944,8 +943,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar el dispositivo para activarlo"</string>
     <string name="doze_title" msgid="2259176504273878294">"Pantalla ambiente"</string>
-    <!-- no translation found for doze_summary (3846219936142814032) -->
-    <skip />
+    <string name="doze_summary" msgid="3846219936142814032">"Activar la pantalla al recibir notificaciones"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño de la fuente"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Aumenta o disminuye el tamaño del texto"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Ajustes de bloqueo tarjeta SIM"</string>
@@ -1121,7 +1119,7 @@
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistema"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Explorar <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="5343550781234524040">"En Otros se incluyen archivos compartidos almacenados por aplicaciones, archivos descargados de Internet o por Bluetooth, archivos de Android y mucho más. \n\nPara ver todo el contenido de este <xliff:g id="NAME">^1</xliff:g>, toca Explorar."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"El sistema incluye archivos utilizados por el sistema operativo Android de forma interna. \n\nEstos archivos no se pueden ver por separado."</string>
+    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"\"Sistema\" incluye archivos utilizados por el sistema operativo Android de forma interna. \n\nEstos archivos no se pueden ver por separado."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> puede tener aplicaciones, películas, música, fotos y otros datos guardados que ocupan un espacio de <xliff:g id="SIZE">^2</xliff:g>. \n\nPara ver información detallada, cambia a <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Configurar tu <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Utilizar como almacenamiento portátil"</string>
@@ -1640,7 +1638,7 @@
     <string name="configure_input_method" msgid="1317429869771850228">"Configurar métodos de entrada"</string>
     <string name="input_method_settings" msgid="5801295625486269553">"Ajustes"</string>
     <string name="input_method_settings_button" msgid="6778344383871619368">"Ajustes"</string>
-    <string name="active_input_method_subtypes" msgid="3596398805424733238">"Métodos de entrada activos"</string>
+    <string name="active_input_method_subtypes" msgid="3596398805424733238">"Métodos de introducción activos"</string>
     <string name="use_system_language_to_select_input_method_subtypes" msgid="5747329075020379587">"Usar idiomas del sistema"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Ajustes de <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4421813273170250462">"Elegir métodos entrada activos"</string>
@@ -2567,6 +2565,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Silencio"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Alerta"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrar"</string>
+    <string name="boot_sounds_title" msgid="567029107382343709">"Sonidos de encendido"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"No molestar"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Permitir solo con prioridad"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Reglas automáticas"</string>
@@ -3131,7 +3130,7 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"Queremos ayudarte"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Estamos disponibles las 24 horas del día, 7 días a la semana"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Estamos disponibles las 24 horas del día, 7 días a la semana"</string>
-    <string name="support_escalation_summary" msgid="4481910353815635960">"Nuestro equipo de asistencia está a tu disposición para ayudarte con cualquier problema"</string>
+    <string name="support_escalation_summary" msgid="8473084168776014405">"Nuestro equipo de asistencia está a tu disposición para ayudarte a solucionar cualquier problema"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Nuestro equipo de asistencia está disponible siempre que lo necesites"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Busca en la ayuda o vuelve durante nuestro horario de asistencia (hora local):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"Horario del servicio de asistencia telefónica (hora local)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3145,9 +3144,9 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"Chat"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"Consulta la sección Consejos y sugerencias"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"Buscar en la ayuda y enviar sugerencias"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"Iniciar sesión para obtener asistencia"</string>
+    <string name="support_sign_in_required_title" msgid="1367187789121480440">"Ponte en contacto con el servicio de asistencia"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Iniciar sesión"</string>
-    <string name="support_sign_in_required_help" msgid="3930256366697956788">"¿No puedes acceder a tu cuenta?"</string>
+    <string name="support_sign_in_required_help" msgid="5200654782405538114">"¿No puedes iniciar sesión?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Enviar información del sistema"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"Para poder hacer un diagnóstico y ayudarte a solucionar el problema rápidamente, necesitamos información del sistema."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"No volver a mostrar"</string>
@@ -3184,7 +3183,7 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gestos"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"Gestos rápidos para controlar el teléfono"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Abrir cámara"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Pulsa dos veces el botón de encendido para abrir la cámara rápidamente. Funciona desde cualquier pantalla"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Pulsa dos veces el botón de encendido para abrir la cámara rápidamente. Funciona desde cualquier pantalla."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Cambiar cámara"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Vistazo rápido"</string>
@@ -3195,7 +3194,10 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"No"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"El gestor de arranque ya está desbloqueado"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Conectarse a Internet primero"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Conéctate a Internet o ponte en contacto con el operador"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"No disponible en dispositivos bloqueados por operadores"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Se ha liberado un total de <xliff:g id="SIZE">%1$s</xliff:g>\n\nÚltima ejecución: <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Vaciar descargas"</string>
+    <string name="downloads_backup_preference_title" msgid="2312237179341156671">"Copia de seguridad de las descargas"</string>
+    <string name="downloads_backup_text" msgid="8351770128253816819"></string>
 </resources>
