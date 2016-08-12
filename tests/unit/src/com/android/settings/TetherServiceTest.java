@@ -239,7 +239,7 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         assertTrue(waitForProvisionRequest(TETHERING_WIFI));
         assertTrue(waitForProvisionResponse(TETHER_ERROR_PROVISION_FAILED));
 
-        verify(mWifiManager).setWifiApEnabled(isNull(WifiConfiguration.class), eq(false));
+        verify(mConnectivityManager).stopTethering(ConnectivityManager.TETHERING_WIFI);
     }
 
     public void testFailureStopsTethering_Usb() {
