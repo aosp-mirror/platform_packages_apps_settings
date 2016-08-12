@@ -515,7 +515,7 @@ public final class Utils extends com.android.settingslib.Utils {
         if (resultTo == null) {
             context.startActivity(intent);
         } else {
-            resultTo.startActivityForResult(intent, resultRequestCode);
+            resultTo.getActivity().startActivityForResult(intent, resultRequestCode);
         }
     }
 
