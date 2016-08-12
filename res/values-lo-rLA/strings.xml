@@ -337,8 +337,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"ປົດລັອກດ້ວຍລາຍນີ້ວມື"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"ພຽງແຕ່ເຊັນເຊີລາຍນິ້ວມືເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ.\n\nໝາຍເຫດ: ລາຍນິ້ວມືອາດມີຄວາມປອດໄພໜ້ອຍກວ່າຮູບແບບປົດລັອກ ຫຼື ລະຫັດ PIN."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (3635924459027832861) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"ພຽງແຕະເຊັນເຊີລາຍນິ້ວມືເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານ.\n\nໝາຍເຫດ: ລາຍນິ້ວມືອາດມີຄວາມປອດໄພໜ້ອຍກວ່າຮູບແບບປົດລັອກ ຫຼື ລະຫັດ PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"​ຍົກ​ເລີກ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"​ສືບ​ຕໍ່"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"ຂ້າມ"</string>
@@ -2562,6 +2561,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"ປິດສຽງ"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"​ແຈ້ງ​ເຕ​ືອນ"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"ສັ່ນເຕືອນ"</string>
+    <string name="boot_sounds_title" msgid="567029107382343709">"ສຽງຕອນເປີດເຄື່ອງ"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"ຫ້າມລົບກວນ"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"ບຸ​ລິ​ມະ​ສິດ​ເທົ່າ​ນັ້ນ​ທີ່​ອະ​ນຸ​ຍາດ"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"ກົດ​ລະ​ບຽບ​ອັດ​ຕະ​ໂນ​ມັດ"</string>
@@ -3130,7 +3130,7 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"ພວກເຮົາຢູ່ນີ້ເພື່ອຊ່ວຍເຫຼືອ"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"ພວກເຮົາພ້ອມຊ່ວຍເຫຼືອທ່ານຕະຫຼອດ 24 ຊົ່ວໂມງ"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"ພວກເຮົາພ້ອມຊ່ວຍເຫຼືອທ່ານຕະຫຼອດ 24 ຊົ່ວໂມງ"</string>
-    <string name="support_escalation_summary" msgid="4481910353815635960">"ທີມງານຂອງພວກເຮົາຢູ່ນີ້ເພື່ອແກ້ໄຂທຸກບັນຫາ"</string>
+    <string name="support_escalation_summary" msgid="8473084168776014405">"ທີມງານຂອງພວກເຮົາຢູ່ນີ້ເພື່ອແກ້ໄຂທຸກບັນຫາ"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"ທີມງານຊ່ວຍເຫຼືອຂອງພວກເຮົາຈະຢູ່ບ່ອນນີ້ຕະຫຼອດເວລາທຸກໆມື້"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"ຊອກຫາຄວາມຊ່ວຍເຫຼືອ ຫຼື ກັບມາໃນຕອນທີ່ເປີດເຮັດວຽກ (ເວລາທ້ອງຖິ່ນ):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"ເວລາຊ່ວຍເຫຼືອທາງໂທລະສັບ (ເວລາທ້ອງຖິ່ນ)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3144,9 +3144,9 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"ການສົນທະນາ"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"ສຳຫຼວດເຄັດລັບ ແລະ ເທັກນິກຕ່າງໆ"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"ຊອກຫາການຊ່ວຍເຫຼືອ ແລະ ສົ່ງຄຳຕິຊົມ"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"ເຂົ້າສູ່ລະບົບເພື່ອຂໍຄວາມຊ່ວຍເຫຼືອ"</string>
+    <string name="support_sign_in_required_title" msgid="1367187789121480440">"ຕິດຕໍ່ທີມງານຊ່ວຍເຫຼືອ"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"ເຂົ້າສູ່ລະບົບ"</string>
-    <string name="support_sign_in_required_help" msgid="3930256366697956788">"ບໍ່ສາມາດເຂົ້າເຖິງບັນຊີຂອງທ່ານບໍ?"</string>
+    <string name="support_sign_in_required_help" msgid="5200654782405538114">"ບໍ່ສາມາດເຂົ້າສູ່ລະບົບບໍ?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"ສົ່ງຂໍ້ມູນລະບົບ"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"ເພື່ອຊ່ວຍແກ້ໄຂບັນຫາຂອງທ່ານໃຫ້ໄວຂຶ້ນ, ພວກເຮົາຕ້ອງການຂໍ້ມູນລະບົບເພື່ອການວິເຄາະ."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"ບໍ່ຕ້ອງສະແດງອີກ"</string>
@@ -3194,6 +3194,7 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"ປິດ"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader ຖືກປົດລັອກຢູ່ກ່ອນແລ້ວ"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"ເຊື່ອມຕໍ່ຫາອິນເຕີເນັດກ່ອນ"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"ເຊື່ອມຕໍ່ຫາອິນເຕີເນັດ ຫຼື ຜູ້ໃຫ້ບໍລິການຂອງທ່ານ"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"ບໍ່ສາມາດໃຊ້ໄດ້ໃນອຸປະກອນທີ່ຜູ້ໃຫ້ບໍລິການລັອກໄວ້"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"ສ້າງພື້ນທີ່ຫວ່າງເພີ່ມຂຶ້ນ <xliff:g id="SIZE">%1$s</xliff:g>\n\nເຮັດວຽກເທື່ອສຸດທ້າຍເມື່ອ <xliff:g id="DATE">%2$s</xliff:g>"</string>
 </resources>

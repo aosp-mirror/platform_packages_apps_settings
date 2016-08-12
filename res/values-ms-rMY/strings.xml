@@ -337,8 +337,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Buka kunci dengan cap jari"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Hanya sentuh penderia cap jari untuk membuka kunci telefon anda, membenarkan pembelian atau mengelog masuk ke apl. Berhati-hati tentang cap jari yang anda tambahkan. Satu cap jari yang ditambahkan dapat melakukan mana-mana perkara ini.\n\nPerhatian: Cap jari anda mungkin kurang selamat berbading corak atau PIN yang kukuh."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (3635924459027832861) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Hanya sentuh penderia cap jari untuk membuka kunci telefon anda, membenarkan pembelian atau mengelog masuk ke apl. Berhati-hati tentang cap jari yang anda tambahkan. Satu cap jari yang ditambahkan dapat melakukan mana-mana perkara ini.\n\nPerhatian: Cap jari anda mungkin kurang selamat berbading corak atau PIN yang kukuh."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Batal"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Teruskan"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Langkau"</string>
@@ -2562,6 +2561,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Senyap"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Makluman"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Bergetar"</string>
+    <string name="boot_sounds_title" msgid="567029107382343709">"Bunyi semasa kuasa dihidupkan"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Jangan ganggu"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Benarkan keutamaan sahaja"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Peraturan automatik"</string>
@@ -3130,7 +3130,7 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"Kami bersedia membantu anda"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Kami sedia membantu anda 24 jam sehari, 7 hari seminggu"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Kami sedia membantu anda 24 jam sehari, 7 hari seminggu"</string>
-    <string name="support_escalation_summary" msgid="4481910353815635960">"Pasukan sokongan kami bersedia untuk membantu anda dalam mengendalikan sebarang masalah"</string>
+    <string name="support_escalation_summary" msgid="8473084168776014405">"Pasukan sokongan kami sedia membantu anda menangani sebarang masalah"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Pasukan sokongan kami boleh dihubungi sepanjang hari, setiap hari"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Cari dalam bantuan atau kembali semula dalam waktu operasi sokongan (waktu tempatan):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"Waktu operasi sokongan telefon (waktu tempatan)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3144,9 +3144,9 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"Sembang"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"Teroka petua &amp; kiat"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"Cari bantuan &amp; hantar maklum balas"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"Log masuk untuk mendapatkan sokongan"</string>
+    <string name="support_sign_in_required_title" msgid="1367187789121480440">"Hubungi sokongan"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Log masuk"</string>
-    <string name="support_sign_in_required_help" msgid="3930256366697956788">"Tidak dapat mengakses akaun anda?"</string>
+    <string name="support_sign_in_required_help" msgid="5200654782405538114">"Tidak dapat log masuk?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Hantar maklumat sistem"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"Untuk membantu menangani masalah anda dengan cepat, kami memerlukan maklumat sistem untuk membuat diagnosis."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Jangan tunjukkan lagi"</string>
@@ -3194,6 +3194,7 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"Mati"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Pemuat but sudah dibuka"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Sambung ke Internet dahulu"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Sambung ke Internet atau hubungi pembawa anda"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Tidak tersedia pada peranti yang dikunci pembawa"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Sejumlah <xliff:g id="SIZE">%1$s</xliff:g> disediakan\n\nKali terakhir dijalankan pada <xliff:g id="DATE">%2$s</xliff:g>"</string>
 </resources>

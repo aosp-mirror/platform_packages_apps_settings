@@ -337,8 +337,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"指紋解鎖"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"輕觸指紋感應器即可解鎖手機、授權購物或登入應用程式。任何指紋加入手機後均可執行這些操作，因此請審慎決定要加入的指紋。\n\n請注意：相對於複雜的上鎖圖案或 PIN，指紋識別的安全性較低。"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (3635924459027832861) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"輕觸指紋感應器即可解鎖手機、授權購物或登入應用程式。任何指紋加入手機後均可執行這些操作，因此請審慎決定要加入的指紋。\n\n請注意：相對於複雜的上鎖圖案或 PIN，指紋識別的安全性較低。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"繼續"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"略過"</string>
@@ -2567,6 +2566,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"靜音"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"警示"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"震動"</string>
+    <string name="boot_sounds_title" msgid="567029107382343709">"開機聲音"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"請勿干擾"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"優先設定只允許："</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自動規則"</string>
@@ -3135,7 +3135,7 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"我們樂意為您提供協助"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我們隨時為您提供協助"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"我們隨時為您提供協助"</string>
-    <string name="support_escalation_summary" msgid="4481910353815635960">"我們的支援團隊會協助您解決任何問題"</string>
+    <string name="support_escalation_summary" msgid="8473084168776014405">"我們的支援團隊會協助您解決任何問題"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"我們的支援團隊全天候為您提供服務"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"搜尋說明，或於支援服務時間 (當地時間) 聯絡我們：&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"手機支援時間 (當地時間)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3149,9 +3149,9 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"即時通訊"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"探索提示和技巧"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"搜尋說明和傳送意見反映"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"登入以取得支援"</string>
+    <string name="support_sign_in_required_title" msgid="1367187789121480440">"聯絡支援團隊"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登入"</string>
-    <string name="support_sign_in_required_help" msgid="3930256366697956788">"無法存取帳戶嗎？"</string>
+    <string name="support_sign_in_required_help" msgid="5200654782405538114">"無法登入嗎？"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"傳送系統資料"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"為協助您迅速解決問題，我們需要系統資料以作診斷。"</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"不要再顯示"</string>
@@ -3199,6 +3199,7 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"關閉"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"載入器已解鎖"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"請先連線至互聯網"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"連線至互聯網或聯絡您的流動網絡供應商"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"無法在已遭流動網絡供應商鎖定的裝置上啟用"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"已釋放共 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次執行時間：<xliff:g id="DATE">%2$s</xliff:g>"</string>
 </resources>
