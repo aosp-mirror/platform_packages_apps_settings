@@ -337,8 +337,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Ontsluit met vingerafdruk"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Raak eenvoudig die vingerafdruksensor om jou foon te ontsluit, aankope te magtig en by programme aan te meld. Wees versigtig wie se vingerafdrukke jy byvoeg. Selfs net een vingerafdruk wat bygevoeg is, kan enige van hierdie dinge doen.\n\nLet wel: Jou vingerafdruk sal dalk minder veilig as \'n sterk patroon of PIN wees."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (3635924459027832861) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Raak eenvoudig die vingerafdruksensor om jou foon te ontsluit, aankope te magtig of by programme aan te meld. Wees versigtig wie se vingerafdrukke jy byvoeg. Selfs net een vingerafdruk wat bygevoeg is, kan enige van hierdie dinge doen.\n\nLet wel: Jou vingerafdruk sal dalk minder veilig as \'n sterk patroon of PIN wees."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Kanselleer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Gaan voort"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Slaan oor"</string>
@@ -2562,6 +2561,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Stil"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Alarmsein"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibreer"</string>
+    <string name="boot_sounds_title" msgid="567029107382343709">"Aanskakel-klanke"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Moenie steur nie"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"\'Net prioriteit\' laat toe"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Outomatiese reëls"</string>
@@ -3130,7 +3130,7 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"Ons is hier om te help"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Ons is dag en nag hier vir jou"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Ons is dag en nag hier vir jou"</string>
-    <string name="support_escalation_summary" msgid="4481910353815635960">"Ons steundiensspan is hier om enige kwessies te help aanspreek"</string>
+    <string name="support_escalation_summary" msgid="8473084168776014405">"Ons steundiensspan is hier om enige kwessie te help aanspreek"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Ons steundienste is elke dag heeldag beskikbaar"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Deursoek hulp of kom terug tydens steundiensure (plaaslike tyd):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"Foon-steundiensure (plaaslike tyd)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3144,9 +3144,9 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"Klets"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"Verken wenke en truuks"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"Deursoek hulp en stuur terugvoer"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"Meld aan vir ondersteuning"</string>
+    <string name="support_sign_in_required_title" msgid="1367187789121480440">"Kontak steundienste"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Meld aan"</string>
-    <string name="support_sign_in_required_help" msgid="3930256366697956788">"Kan jy nie by jou rekening ingaan nie?"</string>
+    <string name="support_sign_in_required_help" msgid="5200654782405538114">"Kan jy nie aanmeld nie?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Stuur stelselinligting"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"Om te help om vinnig aan jou kwessie aandag te gee, moet ons stelselinligting vir \'n diagnose hê."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Moenie weer wys nie"</string>
@@ -3194,6 +3194,7 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"Af"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Selflaaiprogram is reeds ontsluit"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Koppel eers aan die internet"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Koppel aan die internet of kontak jou diensverskaffer"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Onbeskikbaar op toestelle wat deur diensverskaffer gesluit is"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Altesame <xliff:g id="SIZE">%1$s</xliff:g> is beskikbaar gemaak\n\nLaas op <xliff:g id="DATE">%2$s</xliff:g> laat loop"</string>
 </resources>

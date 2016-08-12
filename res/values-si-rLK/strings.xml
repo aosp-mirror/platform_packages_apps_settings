@@ -337,8 +337,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"ඇඟිලි සලකුණ සමගින් අගුලු හරින්න"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"ඔබේ දුරකථනය අවදි කිරීමට සහ අගුලු හැරීමට, මිලදී ගැනීම් අනුමත කිරීමට, හෝ යෙදුම් වෙත පිරීමට ඇඟිලි සලකුණු සංවේදකය ස්පර්ශ කරන්න. ඔබ කාගේ ඇඟිලි සලකුණු එක් කරන්නේද යන්න ගැන සැලකිලිමත් වන්න. එක් කළ එක් සලකුණකට පවා මෙම දේවල්වලින් ඕනෑම එකක් කළ හැකිය.\n\nසටහන: ඔබේ ඇඟිලි සලකුණ ප්‍රබල රටාවකට හෝ PIN අංකයකට වඩා ආරක්ෂාකාරී බව අඩු විය හැකිය."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (3635924459027832861) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"ඔබේ දුරකථනය අවදි කිරීමට සහ අගුලු හැරීමට, මිලදී ගැනීම් අනුමත කිරීමට, හෝ යෙදුම් වෙත පිරීමට ඇඟිලි සලකුණු සංවේදකය ස්පර්ශ කරන්න. ඔබ කාගේ ඇඟිලි සලකුණු එක් කරන්නේද යන්න ගැන සැලකිලිමත් වන්න. එක් කළ එක් සලකුණකට පවා මෙම දේවල්වලින් ඕනෑම එකක් කළ හැකිය.\n\nසටහන: ඔබේ ඇඟිලි සලකුණ ප්‍රබල රටාවකට හෝ PIN අංකයකට වඩා ආරක්ෂාකාරී බව අඩු විය හැකිය."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"අවලංගු කරන්න"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"දිගටම කර ගෙන යන්න"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"මඟ හරින්න"</string>
@@ -2564,6 +2563,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"නිහඬ"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"ඇඟවීම"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"කම්පනය වන්න"</string>
+    <string name="boot_sounds_title" msgid="567029107382343709">"ශබ්ද බල ගන්වන්න"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"බාධා කරන්න එපා"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"ප්‍රමුඛතා පමණි ඉඩ දෙයි"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"ස්වයංක්‍රීය රීති"</string>
@@ -3132,7 +3132,7 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"උදවු කිරීමට අප මෙතැනය"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"අප දින 7 පැය 24 පුරා ඔබ වෙනුවෙන් මෙතැනය"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"අප දින 7 පැය 24 පුරා ඔබ වෙනුවෙන් මෙතැනය"</string>
-    <string name="support_escalation_summary" msgid="4481910353815635960">"අපගේ සහාය කණ්ඩායම කිනම් හෝ ගැටලු විසඳීමට මෙතැනය"</string>
+    <string name="support_escalation_summary" msgid="8473084168776014405">"ඕනෑම ගැටලුවක් විසඳීමට උදවු කිරීම සඳහා අපේ සහාය කණ්ඩායම මෙතන සිටී"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"අපගේ සහාය කණ්ඩායම සෑම දිනකම, දවස පුරා මෙහි සිටියි"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"උදවු සොයන්න නැතහොත් සහාය තිබෙන පැය තුළ ආපසු පැමිණෙන්න (දේශීය වේලාවෙන්):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"දුරකථන සහාය ඇති පැය (දේශීය වේලාව)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3146,9 +3146,9 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"කතාබහ"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"ඉඟි සහ උපක්‍රම ගවේෂණය කරන්න"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"උදවු සොයන්න සහ ප්‍රතිපෝෂණ යවන්න"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"සහාය සඳහා පුරන්න"</string>
+    <string name="support_sign_in_required_title" msgid="1367187789121480440">"සහාය අැමතීම"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"පුරන්න"</string>
-    <string name="support_sign_in_required_help" msgid="3930256366697956788">"ඔබගේ ගිණුමට පිවිසීමට නොහැකිද?"</string>
+    <string name="support_sign_in_required_help" msgid="5200654782405538114">"පිරිය නොහැකිද?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"පද්ධති තොරතුරු යවන්න"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"ඔබගේ ගැටලුව ගැන ඉක්මනින් කටයුතු කිරීමට උදවු කිරීම සඳහා, අපට දෝෂ නිර්ණයට පද්ධති තොරතුරු අවශ්‍යයි."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"නැවත පෙන්වන්න එපා"</string>
@@ -3196,6 +3196,7 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"ක්‍රියාවිරහිතයි"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader දැනටමත් අගුලු හැර ඇත"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"පළමුව අන්තර්ජාලයට සම්බන්ධ වන්න"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"අන්තර්ජාලයට සම්බන්ධ වන්න නැතහොත් ඔබේ වාහක අමතන්න"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"වාහක-අගුලු දැමූ සමහර උපාංග මත ලබා ගත නොහැකිය"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> මුළු තරම ලබා ගත හැකිය\n\nඅවසන් වරට ධාවනය කළේ <xliff:g id="DATE">%2$s</xliff:g>"</string>
 </resources>

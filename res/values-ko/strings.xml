@@ -337,8 +337,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"지문으로 잠금 해제"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"지문 센서를 터치하기만 하면 휴대전화를 잠금 해제하거나 구매를 승인하거나 앱에 로그인할 수 있습니다. 휴대전화에 지문이 추가된 사용자 누구나 이러한 작업을 수행할 수 있으므로 누구의 지문을 추가할지 신중하게 선택하세요.\n\n참고: 지문은 강력한 패턴 또는 PIN보다 보안이 취약합니다."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (3635924459027832861) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"지문 센서를 터치하기만 하면 휴대전화를 잠금 해제하거나 구매를 승인하거나 앱에 로그인할 수 있습니다. 휴대전화에 지문이 추가된 사용자 누구나 이러한 작업을 수행할 수 있으므로 누구의 지문을 추가할지 신중하게 선택하세요.\n\n참고: 지문은 강력한 패턴 또는 PIN보다 보안이 취약합니다."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"취소"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"계속"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"건너뛰기"</string>
@@ -2562,6 +2561,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"무음"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"알림"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"진동"</string>
+    <string name="boot_sounds_title" msgid="567029107382343709">"부팅 소리"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"알림 일시중지"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"중요 알림만 허용"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"자동 규칙"</string>
@@ -3130,7 +3130,7 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"Google로부터 지원받기"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"하루 24시간 연중무휴 운영"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"하루 24시간 연중무휴 운영"</string>
-    <string name="support_escalation_summary" msgid="4481910353815635960">"Google 지원팀에서 문제해결을 도와드립니다."</string>
+    <string name="support_escalation_summary" msgid="8473084168776014405">"Google 지원팀에서 문제해결을 도와드립니다."</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Google 지원팀은 하루 24시간 연중무휴로 운영됩니다."</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"도움말을 검색하거나 지원 시간(현지 시간)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt; 중에 문의해 주세요."</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"전화 지원 시간(현지 시간)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3144,9 +3144,9 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"채팅"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"도움말 및 유용한 정보 탐색"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"도움말 검색 및 의견 보내기"</string>
-    <string name="support_sign_in_required_title" msgid="6782855985258687680">"로그인하여 지원받기"</string>
+    <string name="support_sign_in_required_title" msgid="1367187789121480440">"지원팀에 문의"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"로그인"</string>
-    <string name="support_sign_in_required_help" msgid="3930256366697956788">"계정에 액세스할 수 없으신가요?"</string>
+    <string name="support_sign_in_required_help" msgid="5200654782405538114">"로그인할 수 없나요?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"시스템 정보 보내기"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"문제를 신속하게 해결하기 위해 진단용 시스템 정보가 필요합니다."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"다시 표시 안 함"</string>
@@ -3194,6 +3194,7 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"사용 안함"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"부트로더가 이미 잠금해제되었습니다."</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"먼저 인터넷 연결"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"인터넷에 연결하거나 이동통신사에 문의하세요."</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"특정 이동통신사만 사용하도록 잠긴 기기에서 사용할 수 없음"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"사용 가능한 전체 크기: <xliff:g id="SIZE">%1$s</xliff:g>\n\n마지막 실행일: <xliff:g id="DATE">%2$s</xliff:g>"</string>
 </resources>
