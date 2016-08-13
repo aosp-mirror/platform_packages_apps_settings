@@ -24,6 +24,8 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
+
+import com.android.internal.app.AssistUtils;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -39,10 +41,12 @@ public class ManageAssist extends SettingsPreferenceFragment
     private static final String KEY_CONTEXT = "context";
     private static final String KEY_SCREENSHOT = "screenshot";
     private static final String KEY_VOICE_INPUT = "voice_input_settings";
+    private static final String KEY_FLASH = "flash";
 
     private DefaultAssistPreference mDefaultAssitPref;
     private SwitchPreference mContextPref;
     private SwitchPreference mScreenshotPref;
+    private SwitchPreference mFlashPref;
     private VoiceInputListPreference mVoiceInputPref;
     private Handler mHandler = new Handler();
 
@@ -62,6 +66,9 @@ public class ManageAssist extends SettingsPreferenceFragment
         mScreenshotPref = (SwitchPreference) findPreference(KEY_SCREENSHOT);
         mScreenshotPref.setOnPreferenceChangeListener(this);
 
+        mFlashPref = (SwitchPreference) findPreference(KEY_FLASH);
+        mFlashPref.setOnPreferenceChangeListener(this);
+
         mVoiceInputPref = (VoiceInputListPreference) findPreference(KEY_VOICE_INPUT);
         updateUi();
     }
@@ -76,11 +83,19 @@ public class ManageAssist extends SettingsPreferenceFragment
         if (preference == mContextPref) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSIST_STRUCTURE_ENABLED,
                     (boolean) newValue ? 1 : 0);
-            postGuardScreenshotPref();
+            mHandler.post(() -> {
+                guardScreenshotPref();
+                guardFlashPref();
+            });
             return true;
         }
         if (preference == mScreenshotPref) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSIST_SCREENSHOT_ENABLED,
+                    (boolean) newValue ? 1 : 0);
+            return true;
+        }
+        if (preference == mFlashPref) {
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSIST_DISCLOSURE_ENABLED,
                     (boolean) newValue ? 1 : 0);
             return true;
         }
@@ -101,21 +116,23 @@ public class ManageAssist extends SettingsPreferenceFragment
         return false;
     }
 
-    private void postGuardScreenshotPref() {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                guardScreenshotPref();
-            }
-        });
-    }
-
     private void guardScreenshotPref() {
         boolean isChecked = mContextPref.isChecked();
         boolean screenshotPrefWasSet = Settings.Secure.getInt(
                 getContentResolver(), Settings.Secure.ASSIST_SCREENSHOT_ENABLED, 1) != 0;
         mScreenshotPref.setEnabled(isChecked);
         mScreenshotPref.setChecked(isChecked && screenshotPrefWasSet);
+    }
+
+    private void guardFlashPref() {
+        ComponentName assistant = mDefaultAssitPref.getCurrentAssist();
+
+        boolean isContextChecked = mContextPref.isChecked();
+        boolean willShowFlash = AssistUtils.shouldDisclose(getContext(), assistant);
+        boolean isSystemAssistant = AssistUtils.isPreinstalledAssistant(getContext(), assistant);
+
+        mFlashPref.setEnabled(isContextChecked && isSystemAssistant);
+        mFlashPref.setChecked(willShowFlash);
     }
 
     private void updateUi() {
@@ -130,6 +147,13 @@ public class ManageAssist extends SettingsPreferenceFragment
         } else {
             getPreferenceScreen().removePreference(mContextPref);
             getPreferenceScreen().removePreference(mScreenshotPref);
+            getPreferenceScreen().removePreference(mFlashPref);
+        }
+
+        if (hasAssistant && AssistUtils.allowDisablingAssistDisclosure(getContext())) {
+            getPreferenceScreen().addPreference(mFlashPref);
+        } else {
+            getPreferenceScreen().removePreference(mFlashPref);
         }
 
         if (isCurrentAssistVoiceService()) {
@@ -140,6 +164,7 @@ public class ManageAssist extends SettingsPreferenceFragment
         }
 
         guardScreenshotPref();
+        guardFlashPref();
     }
 
     private boolean isCurrentAssistVoiceService() {
