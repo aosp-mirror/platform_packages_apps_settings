@@ -14,72 +14,73 @@
      limitations under the License.
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/user_dict_settings_add_dialog_top"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+        android:id="@+id/user_dict_settings_add_dialog_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
   <LinearLayout android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
     <com.android.internal.widget.DialogTitle
-          style="?android:attr/windowTitleStyle"
-          android:singleLine="true"
-          android:ellipsize="end"
-          android:layout_width="match_parent"
-          android:layout_height="64dip"
-          android:layout_marginStart="16dip"
-          android:layout_marginEnd="16dip"
-          android:gravity="center_vertical|start"
-          android:text="@string/user_dict_settings_add_dialog_title" />
-    <View android:layout_width="match_parent"
-          android:layout_height="2dip"
-          android:background="@android:color/holo_blue_light" />
+            style="?android:attr/windowTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dip"
+            android:layout_marginEnd="24dip"
+            android:layout_marginTop="24dip"
+            android:layout_marginBottom="0dip"
+            android:ellipsize="end"
+            android:gravity="center_vertical|start"
+            android:singleLine="true"
+            android:text="@string/user_dict_settings_add_dialog_title" />
   </LinearLayout>
 
   <EditText android:id="@+id/user_dictionary_add_word_text"
-            android:maxLength="@integer/maximum_user_dictionary_word_length"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_gravity="fill_horizontal|center_vertical"
-            android:layout_marginStart="8dip"
-            android:layout_marginBottom="8dip"
-            android:layout_marginTop="8dip"
-            android:hint="@string/user_dict_settings_add_word_hint"
-            android:inputType="textNoSuggestions"
-            android:imeOptions="flagNoFullscreen">
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_gravity="fill_horizontal|center_vertical"
+          android:layout_marginStart="24dip"
+          android:layout_marginEnd="24dip"
+          android:layout_marginTop="20dip"
+          android:layout_marginBottom="24dip"
+          android:hint="@string/user_dict_settings_add_word_hint"
+          android:imeOptions="flagNoFullscreen"
+          android:inputType="textNoSuggestions"
+          android:maxLength="@integer/maximum_user_dictionary_word_length">
     <requestFocus />
   </EditText>
 
   <LinearLayout android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:divider="?android:attr/dividerHorizontal"
-                android:showDividers="beginning"
-                android:dividerPadding="0dip">
+          android:layout_height="wrap_content"
+          android:divider="?android:attr/dividerHorizontal"
+          android:dividerPadding="0dip"
+          android:orientation="vertical"
+          android:showDividers="beginning">
     <LinearLayout style="?android:attr/buttonBarStyle"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:measureWithLargestChild="true">
-      <Button android:layout_width="0dip"
-              android:layout_gravity="start"
-              android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
+      <Button style="?android:attr/buttonBarButtonStyle"
+              android:layout_width="wrap_content"
+              android:layout_height="36dip"
+              android:layout_marginTop="8dip"
+              android:layout_marginBottom="8dip"
+              android:layout_marginLeft="8dip"
+              android:layout_marginRight="0dip"
               android:maxLines="2"
-              style="?android:attr/buttonBarButtonStyle"
+              android:onClick="onClickCancel"
               android:textSize="14sp"
-              android:text="@string/cancel"
-              android:layout_height="wrap_content"
-              android:onClick="onClickCancel" />
-      <Button android:layout_width="0dip"
-              android:layout_gravity="end"
-              android:layout_weight="1"
+              android:text="@string/cancel" />
+      <Button style="?android:attr/buttonBarButtonStyle"
+              android:layout_width="wrap_content"
+              android:layout_height="36dip"
+              android:layout_margin="8dip"
               android:maxLines="2"
-              style="?android:attr/buttonBarButtonStyle"
+              android:onClick="onClickConfirm"
               android:textSize="14sp"
-              android:text="@string/user_dict_settings_add_dialog_confirm"
-              android:layout_height="wrap_content"
-              android:onClick="onClickConfirm" />
+              android:text="@string/user_dict_settings_add_dialog_confirm" />
     </LinearLayout>
   </LinearLayout>
 </LinearLayout>
