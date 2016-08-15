@@ -15,9 +15,11 @@
  */
 package com.android.settings.support;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,9 +70,16 @@ public final class SupportPhoneDialogFragment extends DialogFragment implements
     @Override
     public void onClick(View v) {
         final SupportPhone phone = getArguments().getParcelable(EXTRA_PHONE);
-        MetricsLogger.action(getActivity(),
-                MetricsProto.MetricsEvent.ACTION_SUPPORT_DIAL_TOLLED);
-        getActivity().startActivity(phone.getDialIntent());
+        final Activity activity = getActivity();
+        final Intent intent = phone.getDialIntent();
+        final boolean canDial = !activity.getPackageManager()
+                .queryIntentActivities(intent, 0)
+                .isEmpty();
+        if (canDial) {
+            MetricsLogger.action(getActivity(),
+                    MetricsProto.MetricsEvent.ACTION_SUPPORT_DIAL_TOLLED);
+            getActivity().startActivity(intent);
+        }
         dismiss();
     }
 }
