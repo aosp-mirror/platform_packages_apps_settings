@@ -458,9 +458,15 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                         final SupportPhone phone = mSupportFeatureProvider
                                 .getSupportPhones(mSelectedCountry, true /* isTollFree */);
                         if (phone != null) {
-                            MetricsLogger.action(mActivity,
-                                    MetricsProto.MetricsEvent.ACTION_SUPPORT_DAIL_TOLLFREE);
-                            mActivity.startActivity(phone.getDialIntent());
+                            final Intent intent = phone.getDialIntent();
+                            final boolean canDial = !mActivity.getPackageManager()
+                                    .queryIntentActivities(intent, 0)
+                                    .isEmpty();
+                            if (canDial) {
+                                MetricsLogger.action(mActivity,
+                                        MetricsProto.MetricsEvent.ACTION_SUPPORT_DAIL_TOLLFREE);
+                                mActivity.startActivity(intent);
+                            }
                         }
                         break;
                     }
