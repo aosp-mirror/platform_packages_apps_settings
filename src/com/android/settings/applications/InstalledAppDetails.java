@@ -29,7 +29,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -165,8 +164,6 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mMemoryPreference;
 
     private boolean mDisableAfterUninstall;
-    private boolean mListeningToPackageRemove;
-
     // Used for updating notification preference.
     private final NotificationBackend mBackend = new NotificationBackend();
 
@@ -326,7 +323,6 @@ public class InstalledAppDetails extends AppInfoBase
             removePreference(KEY_DATA);
         }
         mBatteryHelper = new BatteryStatsHelper(getActivity(), true);
-        startListeningToPackageRemove();
     }
 
     @Override
@@ -362,7 +358,6 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onDestroy() {
         TrafficStats.closeQuietly(mStatsSession);
-        stopListeningToPackageRemove();
         super.onDestroy();
     }
 
@@ -742,7 +737,7 @@ public class InstalledAppDetails extends AppInfoBase
         intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mAppEntry.info.packageName);
         intent.putExtra(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
         try {
-            startActivity(intent);
+            getActivity().startActivityForResult(intent, SUB_INFO_FRAGMENT);
         } catch (ActivityNotFoundException e) {
             Log.w(LOG_TAG, "No app can handle android.intent.action.MANAGE_APP_PERMISSIONS");
         }
@@ -1090,6 +1085,12 @@ public class InstalledAppDetails extends AppInfoBase
         return summary.toString();
     }
 
+    @Override
+    protected void onPackageRemoved() {
+        getActivity().finishActivity(SUB_INFO_FRAGMENT);
+        super.onPackageRemoved();
+    }
+
     private class MemoryUpdater extends AsyncTask<Void, Void, ProcStatsPackageEntry> {
 
         @Override
@@ -1246,33 +1247,4 @@ public class InstalledAppDetails extends AppInfoBase
             mPermissionsPreference.setSummary(summary);
         }
     };
-
-    private void startListeningToPackageRemove() {
-        if (mListeningToPackageRemove) {
-            return;
-        }
-        mListeningToPackageRemove = true;
-        final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_REMOVED);
-        filter.addDataScheme("package");
-        getContext().registerReceiver(mPackageRemovedReceiver, filter);
-    }
-
-    private void stopListeningToPackageRemove() {
-        if (!mListeningToPackageRemove) {
-            return;
-        }
-        mListeningToPackageRemove = false;
-        getContext().unregisterReceiver(mPackageRemovedReceiver);
-    }
-
-    private final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String packageName = intent.getData().getSchemeSpecificPart();
-            if (!mFinishing && mAppEntry.info.packageName.equals(packageName)) {
-                getActivity().finishAndRemoveTask();
-            }
-        }
-    };
-
 }
