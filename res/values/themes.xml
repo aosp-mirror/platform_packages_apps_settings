@@ -36,7 +36,7 @@
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:colorPrimary">@color/suw_color_accent_dark</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
-        <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="fingerprint_progress_bar_size">@dimen/setup_fingerprint_progress_bar_size</item>
         <item name="fingerprint_ring_radius">@dimen/setup_fingerprint_ring_radius</item>
@@ -50,9 +50,9 @@
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <!-- LockPatternView colors -->
-        <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_dark</item>
-        <item name="@*android:successColor">@color/setup_lock_pattern_view_success_color_dark</item>
-        <item name="@*android:errorColor">@color/setup_lock_pattern_view_error_color_dark</item>
+        <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_dark</item>
+        <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_dark</item>
+        <item name="*android:errorColor">@color/setup_lock_pattern_view_error_color_dark</item>
     </style>
 
     <style name="SetupWizardTheme.Light" parent="SuwThemeGlif.Light">
@@ -60,7 +60,7 @@
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
         <item name="android:colorPrimary">@color/suw_color_accent_light</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
-        <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="fingerprint_progress_bar_size">@dimen/setup_fingerprint_progress_bar_size</item>
         <item name="fingerprint_ring_radius">@dimen/setup_fingerprint_ring_radius</item>
@@ -74,9 +74,9 @@
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard.Light</item>
 
         <!-- LockPatternView colors -->
-        <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
-        <item name="@*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
-        <item name="@*android:errorColor">@color/setup_lock_pattern_view_error_color_light</item>
+        <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
+        <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
+        <item name="*android:errorColor">@color/setup_lock_pattern_view_error_color_light</item>
     </style>
 
     <style name="SetupWizardTheme.Transparent" parent="SetupWizardTheme">
@@ -94,10 +94,10 @@
     </style>
 
     <style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
-        <item name="@android:preferenceStyle">@style/Preference</item>
-        <item name="@android:editTextPreferenceStyle">@style/EditTextPreference</item>
-        <item name="@dropdownPreferenceStyle">@style/Preference.DropDown.Material</item>
-        <item name="@android:preferenceFragmentStyle">@style/PreferenceFragmentStyle</item>
+        <item name="android:preferenceStyle">@style/Preference</item>
+        <item name="android:editTextPreferenceStyle">@style/EditTextPreference</item>
+        <item name="dropdownPreferenceStyle">@style/Preference.DropDown.Material</item>
+        <item name="android:preferenceFragmentStyle">@style/PreferenceFragmentStyle</item>
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
     </style>
 
@@ -133,11 +133,11 @@
 
     <style name="Theme.Settings" parent="Theme.SettingsBase">
         <item name="preferenceTheme">@style/PreferenceTheme</item>
-        <item name="@*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
-        <item name="@*android:preferencePanelStyle">@style/PreferencePanelSinglePane</item>
-        <item name="@*android:preferenceListStyle">@style/PreferenceHeaderListSinglePane</item>
-        <item name="@*android:preferenceFragmentListStyle">@style/PreferenceFragmentListSinglePane</item>
-        <item name="@*android:preferenceFragmentPaddingSide">@dimen/settings_side_margin</item>
+        <item name="*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
+        <item name="*android:preferencePanelStyle">@style/PreferencePanelSinglePane</item>
+        <item name="*android:preferenceListStyle">@style/PreferenceHeaderListSinglePane</item>
+        <item name="*android:preferenceFragmentListStyle">@style/PreferenceFragmentListSinglePane</item>
+        <item name="*android:preferenceFragmentPaddingSide">@dimen/settings_side_margin</item>
 
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="fingerprint_progress_bar_size">@dimen/fingerprint_progress_bar_size</item>
@@ -151,7 +151,7 @@
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
-        <item name="@*android:actionBarSize">@dimen/actionbar_size</item>
+        <item name="*android:actionBarSize">@dimen/actionbar_size</item>
 
         <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
 
@@ -161,9 +161,9 @@
         <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
 
         <!-- LockPatternView colors -->
-        <item name="@*android:regularColor">@color/lock_pattern_view_regular_color</item>
-        <item name="@*android:successColor">@color/lock_pattern_view_success_color</item>
-        <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
+        <item name="*android:regularColor">@color/lock_pattern_view_regular_color</item>
+        <item name="*android:successColor">@color/lock_pattern_view_success_color</item>
+        <item name="*android:errorColor">@color/lock_pattern_view_error_color</item>
     </style>
 
     <style name="Theme.SubSettings" parent="Theme.Settings">
@@ -217,9 +217,9 @@
         <item name="android:background">@android:color/black</item>
 
         <!-- LockPatternView colors -->
-        <item name="@*android:regularColor">@color/unlock_pattern_view_regular_color</item>
-        <item name="@*android:successColor">@color/unlock_pattern_view_success_color</item>
-        <item name="@*android:errorColor">@color/unlock_pattern_view_error_color</item>
+        <item name="*android:regularColor">@color/unlock_pattern_view_regular_color</item>
+        <item name="*android:successColor">@color/unlock_pattern_view_success_color</item>
+        <item name="*android:errorColor">@color/unlock_pattern_view_error_color</item>
     </style>
 
     <style name="Theme.SubSettingsDialogWhenLarge" parent="Theme.DialogWhenLarge">
@@ -244,7 +244,7 @@
     <style name="Theme.NotificationStation" parent="@style/Theme.Settings">
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
-        <item name="@*android:actionBarSize">@dimen/actionbar_size</item>
+        <item name="*android:actionBarSize">@dimen/actionbar_size</item>
 
         <item name="preferenceBackgroundColor">@android:color/transparent</item>
     </style>
@@ -263,14 +263,14 @@
         <item name="confirmDeviceCredentialsTopMargin">32dp</item>
 
         <!-- LockPatternView colors -->
-        <item name="@*android:regularColor">@color/lock_pattern_view_regular_color_dark</item>
-        <item name="@*android:successColor">@color/lock_pattern_view_regular_color_dark</item>
-        <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
+        <item name="*android:regularColor">@color/lock_pattern_view_regular_color_dark</item>
+        <item name="*android:successColor">@color/lock_pattern_view_regular_color_dark</item>
+        <item name="*android:errorColor">@color/lock_pattern_view_error_color</item>
 
         <item name="android:windowAnimationStyle">@style/ConfirmDeviceCredentialsAnimationStyle</item>
     </style>
     <style name="Theme.ConfirmDeviceCredentialsWork" parent="Theme.ConfirmDeviceCredentialsDark">
-        <item name="@*android:regularColor">@*android:color/white</item>
+        <item name="*android:regularColor">@*android:color/white</item>
         <item name="android:colorAccent">@*android:color/white</item>
     </style>
 
