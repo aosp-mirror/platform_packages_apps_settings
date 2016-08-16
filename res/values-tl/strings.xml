@@ -338,7 +338,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"I-unlock ng fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Pindutin lang ang sensor ng fingerprint upang i-unlock ang iyong telepono, pahintulutan ang mga pagbili, o mag-sign in sa mga app. Huwag basta-basta magdagdag ng mga fingerprint ng ibang tao. Kahit isang fingerprint lang ang idagdag, magagawa ang alinman sa mga bagay na ito.\n\nTandaan: Maaaring mas hindi ligtas ang iyong fingerprint kaysa sa isang mahirap hulaang pattern o PIN."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Pindutin lang ang sensor para sa fingerprint upang i-unlock ang iyong telepono, pahintulutan ang mga pagbili, o mag-sign in sa mga app. Huwag basta-basta magdagdag ng mga fingerprint ng ibang tao. Magagawa ang alinman sa mga bagay na ito kahit isang fingerprint lang ang idagdag mo.\n\nTandaan: Maaaring mas hindi ligtas ang iyong fingerprint kaysa sa isang mahirap hulaang pattern o PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Pindutin lang ang sensor para sa fingerprint upang i-unlock ang iyong telepono, pahintulutan ang mga pagbili, o mag-sign in sa mga app. Huwag basta-basta magdagdag ng mga fingerprint ng ibang tao. Magagawa ng alinmang idinagdag na mga fingerprint ang mga bagay na ito.\n\nTandaan: Maaaring mas hindi ligtas ang iyong fingerprint kaysa sa isang mahirap hulaang pattern o PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Kanselahin"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Magpatuloy"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Laktawan"</string>
@@ -632,13 +632,13 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
-    <!-- no translation found for wifi_ask_enable (7119053873957435786) -->
-    <skip />
-    <!-- no translation found for wifi_ask_disable (5909293877818270354) -->
-    <skip />
+    <string name="wifi_ask_enable" msgid="7119053873957435786">"Gusto ng <xliff:g id="REQUESTER">%s</xliff:g> na I-ON ang WiFi para sa device na ito."</string>
+    <string name="wifi_ask_disable" msgid="5909293877818270354">"Gusto ng <xliff:g id="REQUESTER">%s</xliff:g> na I-OFF ang WiFi para sa device na ito."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Payagan ang palitan ng data kapag dumikit ang tablet sa isa pang device"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Payagan ang pagpapalitan ng data kapag nadikit ang telepono sa isa pang device"</string>
+    <string name="nfc_disclaimer_title" msgid="4364003873202264039">"I-on ang NFC"</string>
+    <string name="nfc_disclaimer_content" msgid="5566907911915158075">"Nakikipagpalitan ang NFC ng data sa pagitan ng device na ito at iba pang mga kalapit na device o target, tulad ng mga terminal sa pagbabayad, access reader at mga interactive na ad o tag."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Handa nang maglipat ng content ng app sa pamamagitan ng NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"I-off"</string>
@@ -2901,6 +2901,8 @@
     <string name="assist_access_context_summary" msgid="1991421283142279560">"Payagan ang assist app na ma-access ang mga content ng screen bilang text"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Gamitin ang screenshot"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Payagan ang assist app na ma-access ang isang larawan ng screen"</string>
+    <string name="assist_flash_title" msgid="506661221230034891">"I-flash ang screen"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"I-flash ang mga gilid ng screen kapag ina-access ng assist app ang text mula sa screen o screenshot"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Matutulungan ka ng mga assist app batay sa impormasyon sa screen na tinitingnan mo. Sinusuportahan ng ilang app ang mga serbisyo ng launcher at input ng boses upang magbigay sa iyo ng pinagsama-samang tulong."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Average na paggamit ng memory"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maximum na paggamit ng memory"</string>
@@ -3187,8 +3189,7 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"Mga Galaw"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"Mga mabilisang galaw upang makontrol ang iyong telepono"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Pumunta sa Camera"</string>
-    <!-- no translation found for double_tap_power_for_camera_summary (6005086458928518432) -->
-    <skip />
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Upang mabilis na mabuksan ang camera, pindutin nang dalawang beses ang power button. Gagana sa kahit anong screen"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Lumipat ng camera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Mabilis na pagtingin sa screen"</string>

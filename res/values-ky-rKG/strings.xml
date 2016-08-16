@@ -631,13 +631,13 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 ГГц"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 ГГц"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Мгб"</string>
-    <!-- no translation found for wifi_ask_enable (7119053873957435786) -->
-    <skip />
-    <!-- no translation found for wifi_ask_disable (5909293877818270354) -->
-    <skip />
+    <string name="wifi_ask_enable" msgid="7119053873957435786">"<xliff:g id="REQUESTER">%s</xliff:g> бул түзмөктө WiFi\'ды КҮЙГҮЗГӨНҮ жатат."</string>
+    <string name="wifi_ask_disable" msgid="5909293877818270354">"<xliff:g id="REQUESTER">%s</xliff:g> бул түзмөктө WiFi\'ды ӨЧҮРГӨНҮ жатат."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Планшет башка түзмөккө тийгенде берилиштердин алмашуусуна уруксат берүү"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Телефон башка түзмөккө тийгенде, берилиштер алмашуусуна уруксат берилсин"</string>
+    <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC\'ни күйгүзүү"</string>
+    <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC ушул жана башка жакын арадагы түзмөктөрдүн ортосунда маалыматты алмаштырат, мисалы, төлөм терминалдары, кабыл алуучу түзмөктөр жана интерактивдүү жарнамалар менен тегдер."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Колдонмо мазмунун NFC аркылуу өткөргөнгө даяр"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Өчүк"</string>
@@ -2568,7 +2568,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Үнсүз"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Айгай"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Дирилдөө"</string>
-    <string name="boot_sounds_title" msgid="567029107382343709">"Добуштардын катуулугу"</string>
+    <string name="boot_sounds_title" msgid="567029107382343709">"Түзмөк күйгүзүлгөндөгү үндөр"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Тынчымды алба"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Артыкчылыктууга гана уруксат"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Автоматтык эрежелер"</string>
@@ -2900,6 +2900,8 @@
     <string name="assist_access_context_summary" msgid="1991421283142279560">"Көмөкчү колдонмого экрандагы текстти колдонууга уруксат бериңиз"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Скриншот колдонуу"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Көмөкчү колдонмого экрандагы сүрөттү колдонууга уруксат бериңиз"</string>
+    <string name="assist_flash_title" msgid="506661221230034891">"Экран жаркылдасын"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"Экрандан же скриншоттон көмөкчү колдонмого кирүү мүмкүнчүлүгү ишке ашканын билдирген текст пайда болгондо, экрандын чети жаркылдасын"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Көмөкчү колдонмо сиз көрүп жаткан экрандын маалыматынын негизинде жардам бере алат. Айрым колдонмолордо үн буйруктары жана жүргүзгүч тактасынан киргизүү мүмкүнчүлүктөрү иштейт."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Эстутумдун орточо керектелиши"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Эстутумдун эң көп керектелиши"</string>
@@ -3186,8 +3188,7 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"Жаңсоолор"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"Телефонуңузду көзөмөлдөй турган ыкчам жаңсоолор"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Камерага өтүү"</string>
-    <!-- no translation found for double_tap_power_for_camera_summary (6005086458928518432) -->
-    <skip />
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Камераны тез ачуу үчүн кубат баскычын эки жолу таптап коюңуз. Бардык экрандарда иштейт"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Камераларды ыкчам которуштуруу"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Экранды ыкчам текшерүү"</string>

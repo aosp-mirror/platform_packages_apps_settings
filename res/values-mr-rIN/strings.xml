@@ -338,7 +338,7 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"फिंगरप्रिंटने अनलॉक करा"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"आपला फोन अनलॉक करण्यासाठी, खरेदी अधिकृत किंवा अॅप्समध्ये साइन इन करण्‍यासाठी फक्त फिंगरप्रिंट सेन्सरला स्पर्श करा. आपण ज्यांचे फिंगरप्रिंट जोडता त्याविषयी सावधगिरी बाळगा. जोडलेला एक प्रिंट देखील यापैकी कोणतीही गोष्ट करू शकतो. \n\n टीप: आपले फिंगरप्रिंट मजबूत नमुना किंवा पिन पेक्षा कमी सुरक्षित असू शकतात."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"आपला फोन अनलॉक करण्यासाठी, खरेदी अधिकृत किंवा अॅप्समध्ये साइन इन करण्‍यासाठी फक्त फिंगरप्रिंट सेन्सरला स्पर्श करा. आपण ज्यांचे फिंगरप्रिंट जोडता त्याविषयी सावधगिरी बाळगा. जोडलेला एक प्रिंट देखील यापैकी कोणतीही गोष्ट करू शकतो.\n\nटीप: आपले फिंगरप्रिंट मजबूत नमुना किंवा पिन पेक्षा कमी सुरक्षित असू शकते."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"आपला फोन अनलॉक करण्यासाठी, खरेदी अधिकृत करण्यासाठी किंवा अॅप्समध्ये साइन इन करण्‍यासाठी फक्त फिंगरप्रिंट सेन्सरला स्पर्श करा. आपण ज्यांचे फिंगरप्रिंट जोडता त्याविषयी सावधगिरी बाळगा. जोडलेला एक प्रिंट देखील यापैकी कोणतीही गोष्ट करू शकतो.\n\nटीप: आपले फिंगरप्रिंट मजबूत नमुना किंवा पिन पेक्षा कमी सुरक्षित असू शकते."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"रद्द करा"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"सुरु ठेवा"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"वगळा"</string>
@@ -632,13 +632,13 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
-    <!-- no translation found for wifi_ask_enable (7119053873957435786) -->
-    <skip />
-    <!-- no translation found for wifi_ask_disable (5909293877818270354) -->
-    <skip />
+    <string name="wifi_ask_enable" msgid="7119053873957435786">"<xliff:g id="REQUESTER">%s</xliff:g> या डिव्हाइससाठी वायफाय चालू करू इच्छित आहे."</string>
+    <string name="wifi_ask_disable" msgid="5909293877818270354">"<xliff:g id="REQUESTER">%s</xliff:g> या डिव्हाइससाठी वायफाय बंद करू इच्छित आहे."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"टॅबलेट दुसर्‍या डिव्हाइसला स्पर्श करतो तेव्हा डेटा अदलाबदलीस अनुमती द्या"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"फोन दुसर्‍या डिव्हाइसला स्पर्श करतो तेव्हा डेटा अदलाबदलीस अनुमती द्या"</string>
+    <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC चालू करा"</string>
+    <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC हे डिव्हाइस आणि अन्य जवळपासचे डिव्हाइसेस किंवा देयक टर्मिनल, प्रवेश वाचक आणि परस्परसंवादी जाहिराती किंवा टॅग यासारख्या लक्ष्यांमधील डेटाची अदलाबदल करते."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android बीम"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"NFC द्वारे अॅप सामग्री प्रक्षेपित करण्यास तयार"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"बंद"</string>
@@ -2901,6 +2901,8 @@
     <string name="assist_access_context_summary" msgid="1991421283142279560">"स्क्रीन सामग्रींमध्ये मजकूर म्हणून प्रवेश करण्यासाठी सहाय्यक अॅपला अनुमती द्या"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"स्क्रीनशॉट वापरा"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"स्क्रीनच्या प्रतिमेमध्ये प्रवेश करण्यासाठी सहाय्यक अॅपला अनुमती द्या"</string>
+    <string name="assist_flash_title" msgid="506661221230034891">"स्क्रीन फ्लॅश करा"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"सहाय्य अॅप स्क्रीन किंवा स्क्रीनशॉट मधून मजकुरात प्रवेश करतो तेव्हा स्क्रीनच्या किनारी फ्लॅश करा"</string>
     <string name="assist_footer" msgid="1982791172085896864">"सहाय्यक अॅप्स आपण पाहत असलेल्या स्क्रीनवरील माहितीच्या आधारावर आपल्याला मदत करू शकतात. काही अॅप्स आपल्याला एकत्रित सहाय्य देण्यासाठी लॉन्चर आणि व्हॉइस इनपुट सेवा दोघांना समर्थन देतात."</string>
     <string name="average_memory_use" msgid="829566450150198512">"सरासरी मेमरी वापर"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"कमाल मेमरी वापर"</string>
@@ -3187,8 +3189,7 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"जेश्चर"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"आपला फोन नियंत्रित करण्यासाठी जलद जेश्चर"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"कॅमेर्‍यावर जा"</string>
-    <!-- no translation found for double_tap_power_for_camera_summary (6005086458928518432) -->
-    <skip />
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"कॅमेरा द्रुतपणे उघडण्यासाठी, पॉवर बटण दोनदा दाबा. कोणत्याही स्क्रीन वरून कार्य करते"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"कॅमेरा फ्लिप करा"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"द्रुत स्क्रीन तपासणी"</string>

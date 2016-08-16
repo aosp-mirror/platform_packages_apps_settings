@@ -632,13 +632,13 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
-    <!-- no translation found for wifi_ask_enable (7119053873957435786) -->
-    <skip />
-    <!-- no translation found for wifi_ask_disable (5909293877818270354) -->
-    <skip />
+    <string name="wifi_ask_enable" msgid="7119053873957435786">"<xliff:g id="REQUESTER">%s</xliff:g>ට මෙම උපාංගය සඳහා WiFi ක්‍රියාත්මක කිරීමට අවශ්‍යය."</string>
+    <string name="wifi_ask_disable" msgid="5909293877818270354">"<xliff:g id="REQUESTER">%s</xliff:g>ට මෙම උපාංගය සඳහා WiFi ක්‍රියාවිරහිත කිරීමට අවශ්‍යය."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"ටැබ්ලටය වෙනත් උපාංගයක් ස්පර්ශ කළ විට දත්ත හුවමාරුවට අවසර දෙන්න"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"දුරකථනය වෙනත් උපාංගයක් ස්පර්ශ කරන විට දත්ත හුවමාරුවට අවසර දෙන්න"</string>
+    <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC ක්‍රියාත්මක කරන්න"</string>
+    <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC මෙම උපාංගය සහ වෙනත් අවට උපාංග හෝ ගෙවීම් පර්යන්ත, ප්‍රවේශ කියවීම්, සහ අන්තර්ක්‍රියාකාරී වෙළඳ දැන්වීම් හෝ ටැග වැනි ඉලක්ක අතර දත්ත හුවමාරු කරයි."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android බීම්"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"NFC හරහා යෙදුමේ අන්තර්ගතය සම්ප්‍රේෂණය කිරීමට සුදානම්"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"අක්‍රියයි"</string>
@@ -2903,6 +2903,8 @@
     <string name="assist_access_context_summary" msgid="1991421283142279560">"සහාය යෙදුමට තිර අන්තර්ගත පෙළ ලෙස ලබා ගැනීමට ඉඩ දෙන්න"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"තිර රුවක් භාවිත කරන්න"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"සහාය යෙදුමට තිරයේ පින්තූරයක් ලබා ගැනීමට ඉඩ දෙන්න"</string>
+    <string name="assist_flash_title" msgid="506661221230034891">"සැණෙළි තිරය"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"සහායක යෙදුම තිරය හෝ තිර රුව වෙතින් පෙළවලට ප්‍රවේශ වන විට තිරයේ දාර සැණෙළි කරන්න"</string>
     <string name="assist_footer" msgid="1982791172085896864">"සහාය යෙදුම් මඟින් ඔබ බලන තිරයේ ඇති තොරතුරු පදනම් කරගෙන ඔබට උදව් කළ හැක. සමහර යෙදුම් ඔබට සංකලිත සහාය ලබා දීමට දියත් කරන සහ හඬ ආදාන සේවා දෙකටම සහාය දක්වයි."</string>
     <string name="average_memory_use" msgid="829566450150198512">"සාමාන්‍ය මතකය භාවිතය"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"උපරිම මතක භාවිතය"</string>
@@ -3189,8 +3191,7 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"ඉංගිත"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"ඔබගේ දුරකථනය පාලනය කිරීමට ඉක්මන් ඉංගිත"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"කැමරා වෙත පනින්න"</string>
-    <!-- no translation found for double_tap_power_for_camera_summary (6005086458928518432) -->
-    <skip />
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"ඉක්මනින් කැමරාව විවෘත කිරීමට, බල බොත්තම දෙවරක් ඔබන්න. ඕනෑම තිරයක සිට ක්‍රියා කරයි"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"ෆ්ලිප් කැමරාව"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"ඉක්මන් තිර පරීක්ෂාව"</string>

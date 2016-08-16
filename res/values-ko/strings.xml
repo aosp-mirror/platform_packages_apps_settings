@@ -632,13 +632,13 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$dMbps"</string>
-    <!-- no translation found for wifi_ask_enable (7119053873957435786) -->
-    <skip />
-    <!-- no translation found for wifi_ask_disable (5909293877818270354) -->
-    <skip />
+    <string name="wifi_ask_enable" msgid="7119053873957435786">"<xliff:g id="REQUESTER">%s</xliff:g>에서 이 기기의 WiFi를 사용 설정하려고 합니다."</string>
+    <string name="wifi_ask_disable" msgid="5909293877818270354">"<xliff:g id="REQUESTER">%s</xliff:g>에서 이 기기의 WiFi를 사용 중지하려고 합니다."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"태블릿이 다른 기기와 접촉하면 데이터 교환 허용"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"휴대전화가 다른 기기와 접촉하면 데이터 교환 허용"</string>
+    <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC 사용"</string>
+    <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC는 이 기기와 결제 단말기, 액세스 리더, 양방향 광고나 태그 등 기타 주변 기기 또는 타겟 사이의 데이터를 교환합니다."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"앱 콘텐츠를 NFC를 통해 전송할 준비 완료"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"사용 안함"</string>
@@ -2406,7 +2406,7 @@
     <string name="restriction_menu_reset" msgid="2067644523489568173">"제한사항 삭제"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PIN 변경"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"알림 표시"</string>
-    <string name="help_label" msgid="6886837949306318591">"도움말 및 의견"</string>
+    <string name="help_label" msgid="6886837949306318591">"고객센터"</string>
     <string name="user_account_title" msgid="1127193807312271167">"콘텐츠용 계정"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"사진 ID"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"극단적 위협"</string>
@@ -2901,6 +2901,8 @@
     <string name="assist_access_context_summary" msgid="1991421283142279560">"지원 앱이 화면의 텍스트 콘텐츠에 액세스하도록 허용합니다."</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"스크린샷 사용"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"지원 앱이 화면의 이미지에 액세스하도록 허용합니다."</string>
+    <string name="assist_flash_title" msgid="506661221230034891">"플래시 화면"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"지원 앱이 화면이나 스크린샷에서 텍스트에 액세스할 때 화면 가장자리 플래시 표시"</string>
     <string name="assist_footer" msgid="1982791172085896864">"지원 앱은 화면에 표시된 정보에 맞게 도움을 줄 수 있습니다. 일부 앱은 통합된 지원을 제공하기 위해 런처와 음성 입력 서비스를 모두 지원합니다."</string>
     <string name="average_memory_use" msgid="829566450150198512">"평균 메모리 사용"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"최대 메모리 사용"</string>
@@ -3187,8 +3189,7 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"동작"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"빠른 동작으로 휴대전화 제어"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"카메라로 이동"</string>
-    <!-- no translation found for double_tap_power_for_camera_summary (6005086458928518432) -->
-    <skip />
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"카메라를 빨리 열려면 전원 버튼을 두 번 누릅니다. 어느 화면에서나 작동합니다."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"카메라 전환"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"빠른 화면 확인"</string>
