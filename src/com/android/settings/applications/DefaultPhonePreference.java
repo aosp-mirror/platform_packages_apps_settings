@@ -82,9 +82,13 @@ public class DefaultPhonePreference extends AppListPreference implements SelfAva
             return false;
         }
 
-        final UserManager um =
-                (UserManager) context.getSystemService(Context.USER_SERVICE);
-        return !um.hasUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS);
+        final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        final boolean hasUserRestriction =
+                um.hasUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS);
+        final CharSequence[] entries = getEntries();
+        return !hasUserRestriction
+                && entries != null
+                && entries.length > 0;
     }
 
     public static boolean hasPhonePreference(String pkg, Context context) {
