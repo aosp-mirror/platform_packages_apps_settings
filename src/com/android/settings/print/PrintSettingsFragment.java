@@ -51,13 +51,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.DialogCreatable;
 import com.android.settings.R;
-import com.android.settings.utils.ProfileSettingsPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.utils.ProfileSettingsPreferenceFragment;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ import java.util.List;
  * Fragment with the top level print settings.
  */
 public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
-        implements DialogCreatable, Indexable, OnClickListener {
+        implements Indexable, OnClickListener {
     public static final String TAG = "PrintSettingsFragment";
     private static final int LOADER_ID_PRINT_JOBS_LOADER = 1;
     private static final int LOADER_ID_PRINT_SERVICES = 2;
