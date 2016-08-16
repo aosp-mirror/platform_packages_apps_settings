@@ -18,8 +18,6 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -28,7 +26,6 @@ import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -38,7 +35,7 @@ import java.util.List;
  * Activity with the accessibility settings specific to Setup Wizard.
  */
 public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragment
-        implements DialogCreatable, Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = AccessibilitySettingsForSetupWizard.class.getSimpleName();
 
