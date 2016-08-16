@@ -636,6 +636,8 @@
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"允许平板电脑在接触其他设备时交换数据"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"允许手机在接触其他设备时交换数据"</string>
+    <string name="nfc_disclaimer_title" msgid="4364003873202264039">"开启 NFC"</string>
+    <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC 可让此设备和附近的其他设备或目标（例如付款终端、门禁读卡器和互动式广告或标签）交换数据。"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"已准备好通过NFC传输应用内容"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"关闭"</string>
@@ -1119,7 +1121,7 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"其他"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"系统"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"浏览<xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"其他文件包括应用所保存的共享文件，通过互联网或蓝牙下载的文件，Android 文件等。\n\n要查看此<xliff:g id="NAME">^1</xliff:g>中的全部内容，请点按“浏览”。"</string>
+    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"“其他”包括应用所保存的共享文件、通过互联网或蓝牙下载的文件、Android 文件等。\n\n要查看此<xliff:g id="NAME">^1</xliff:g>中的全部内容，请点按“浏览”。"</string>
     <string name="storage_detail_dialog_system" msgid="3058775028564971102">"“系统”中包含 Android 操作系统内部使用的文件。\n\n您无法逐个查看这些文件。"</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g>所保存的照片、音乐、电影、应用或其他数据可能占用了 <xliff:g id="SIZE">^2</xliff:g> 的存储空间。\n\n要查看详细信息，请切换到<xliff:g id="USER_1">^1</xliff:g>。"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"设置您的<xliff:g id="NAME">^1</xliff:g>"</string>
@@ -1806,8 +1808,8 @@
     <string name="battery_stats_duration" msgid="7464501326709469282">"拔下电源后已过 <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"充电"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"屏幕开启"</string>
-    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS开启"</string>
-    <string name="battery_stats_camera_on_label" msgid="4935637383628414968">"相机已开启"</string>
+    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS 开启"</string>
+    <string name="battery_stats_camera_on_label" msgid="4935637383628414968">"相机开启"</string>
     <string name="battery_stats_flashlight_on_label" msgid="4319637669889411307">"手电筒已开启"</string>
     <string name="battery_stats_wifi_running_label" msgid="1845839195549226252">"WLAN"</string>
     <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"唤醒"</string>
@@ -2561,8 +2563,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"静音"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"警示音"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"振动"</string>
-    <!-- no translation found for boot_sounds_title (567029107382343709) -->
-    <skip />
+    <string name="boot_sounds_title" msgid="567029107382343709">"开机音效"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"勿扰"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"仅允许优先打扰内容"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自动规则"</string>
@@ -2898,6 +2899,8 @@
     <string name="assist_access_context_summary" msgid="1991421283142279560">"允许辅助应用使用屏幕上的文字内容"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"使用屏幕截图"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"允许辅助应用使用屏幕截图"</string>
+    <string name="assist_flash_title" msgid="506661221230034891">"闪烁屏幕"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"当辅助应用访问屏幕/屏幕截图上的文字时，让屏幕边缘闪烁"</string>
     <string name="assist_footer" msgid="1982791172085896864">"辅助应用可根据您当前所查看屏幕上的内容来为您提供帮助。某些应用同时支持启动器和语音输入服务，可为您提供更全面的协助。"</string>
     <string name="average_memory_use" msgid="829566450150198512">"平均内存使用量"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"最高内存使用量"</string>
@@ -3131,8 +3134,7 @@
     <string name="support_escalation_title" msgid="4111071371281023145">"我们会随时为您提供帮助"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我们可全天候为您提供服务"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"我们可全天候为您提供服务"</string>
-    <!-- no translation found for support_escalation_summary (8473084168776014405) -->
-    <skip />
+    <string name="support_escalation_summary" msgid="8473084168776014405">"我们的支持团队会协助您解决任何问题"</string>
     <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"我们的支持团队可全天候为您提供服务"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"请搜索相关帮助内容或在支持服务时段内（当地时间）再次联系我们：&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"电话支持服务时段（当地时间）&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
@@ -3146,11 +3148,9 @@
     <string name="support_escalation_by_chat" msgid="977019859110763749">"聊天"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"探索更多提示和技巧"</string>
     <string name="support_help_feedback_title" msgid="693440287222186718">"搜索帮助与发送反馈"</string>
-    <!-- no translation found for support_sign_in_required_title (1367187789121480440) -->
-    <skip />
+    <string name="support_sign_in_required_title" msgid="1367187789121480440">"与支持人员联系"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登录"</string>
-    <!-- no translation found for support_sign_in_required_help (5200654782405538114) -->
-    <skip />
+    <string name="support_sign_in_required_help" msgid="5200654782405538114">"无法登录？"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"发送系统信息"</string>
     <string name="support_disclaimer_content" msgid="6702447747744624871">"为了快速帮您解决问题，我们需要您提供系统信息以进行诊断。"</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"不再显示"</string>
