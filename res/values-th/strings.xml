@@ -632,13 +632,13 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
-    <!-- no translation found for wifi_ask_enable (7119053873957435786) -->
-    <skip />
-    <!-- no translation found for wifi_ask_disable (5909293877818270354) -->
-    <skip />
+    <string name="wifi_ask_enable" msgid="7119053873957435786">"<xliff:g id="REQUESTER">%s</xliff:g> ต้องการเปิด Wi-Fi สำหรับอุปกรณ์เครื่องนี้"</string>
+    <string name="wifi_ask_disable" msgid="5909293877818270354">"<xliff:g id="REQUESTER">%s</xliff:g> ต้องการปิด Wi-Fi สำหรับอุปกรณ์เครื่องนี้"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"อนุญาตให้มีการแลกเปลี่ยนข้อมูล เมื่อแตะแท็บเล็ตกับอุปกรณ์อื่น"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"อนุญาตให้มีการแลกเปลี่ยนข้อมูล เมื่อแตะโทรศัพท์กับอุปกรณ์อื่น"</string>
+    <string name="nfc_disclaimer_title" msgid="4364003873202264039">"เปิดใช้ NFC"</string>
+    <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC จะแลกเปลี่ยนข้อมูลระหว่างอุปกรณ์นี้และอุปกรณ์อื่นที่อยู่ใกล้ๆ หรืออุปกรณ์เป้าหมาย เช่น เครื่องชำระเงิน เข้าถึง Reader และโฆษณาเชิงโต้ตอบหรือแท็ก"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"พร้อมที่จะส่งเนื้อหาแอปพลิเคชันผ่านทาง NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"ปิด"</string>
@@ -2684,7 +2684,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"จากรายชื่อติดต่อที่ติดดาวเท่านั้น"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"ไม่มี"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"การปลุก"</string>
-    <string name="zen_mode_reminders" msgid="5458502056440485730">"การเตือนความจำ"</string>
+    <string name="zen_mode_reminders" msgid="5458502056440485730">"การช่วยเตือน"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"กิจกรรม"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"ผู้โทรทั้งหมด"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"ผู้โทรที่เลือกไว้"</string>
@@ -2901,6 +2901,8 @@
     <string name="assist_access_context_summary" msgid="1991421283142279560">"อนุญาตให้แอปผู้ช่วยสามารถเข้าถึงเนื้อหาบนหน้าจอเป็นข้อความ"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"ใช้ภาพหน้าจอ"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"อนุญาตให้แอปผู้ช่วยสามารถเข้าถึงรูปภาพของหน้าจอ"</string>
+    <string name="assist_flash_title" msgid="506661221230034891">"หน้าจอ Flash"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"แสดงขอบของหน้าจอเมื่อแอปผู้ช่วยเข้าถึงข้อความจากหน้าจอหรือภาพหน้าจอ"</string>
     <string name="assist_footer" msgid="1982791172085896864">"แอปผู้ช่วยสามารถช่วยเหลือคุณโดยใช้ข้อมูลจากหน้าจอที่คุณกำลังดูอยู่ แอปบางแอปจะสนับสนุนทั้ง Launcher และบริการป้อนข้อมูลด้วยเสียงเพื่อให้ความช่วยเหลือแบบบูรณาการแก่คุณ"</string>
     <string name="average_memory_use" msgid="829566450150198512">"การใช้หน่วยความจำโดยเฉลี่ย"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"การใช้หน่วยความจำสูงสุด"</string>
@@ -3135,7 +3137,7 @@
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"เราพร้อมให้การสนับสนุนทุกวันตลอด 24 ชั่วโมง"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"เราพร้อมให้การสนับสนุนทุกวันตลอด 24 ชั่วโมง"</string>
     <string name="support_escalation_summary" msgid="8473084168776014405">"ทีมสนับสนุนของเราพร้อมช่วยคุณแก้ทุกปัญหา"</string>
-    <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"ทีมสนับสนุนของเราพร้อมช่วยคุณตลอดเวลาในทุกๆ วัน"</string>
+    <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"ทีมสนับสนุนของเราพร้อมช่วยคุณทุกวันตลอดเวลา"</string>
     <string name="support_escalation_closed_summary" msgid="2240967274380168303">"ค้นหาความช่วยเหลือ หรือกลับมาอีกครั้งในช่วงเวลาทำการของการสนับสนุนลูกค้า (เวลาท้องถิ่น):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"เวลาการสนับสนุนทางโทรศัพท์ (เวลาท้องถิ่น)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"การค้นหาความช่วยเหลือหรือสำรวจกลเม็ดเคล็ดลับ"</string>
@@ -3187,8 +3189,7 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"ท่าทางสัมผัส"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"ท่าทางสัมผัสด่วนสำหรับการควบคุมโทรศัพท์"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"ข้ามไปที่กล้อง"</string>
-    <!-- no translation found for double_tap_power_for_camera_summary (6005086458928518432) -->
-    <skip />
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"หากต้องการเปิดกล้องอย่างรวดเร็ว ให้กดปุ่มเปิดปิด 2 ครั้ง ใช้ได้กับหน้าจอทุกรุ่น"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"พลิกกล้อง"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"ตรวจสอบหน้าจออย่างรวดเร็ว"</string>

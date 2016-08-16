@@ -632,13 +632,13 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
-    <!-- no translation found for wifi_ask_enable (7119053873957435786) -->
-    <skip />
-    <!-- no translation found for wifi_ask_disable (5909293877818270354) -->
-    <skip />
+    <string name="wifi_ask_enable" msgid="7119053873957435786">"<xliff:g id="REQUESTER">%s</xliff:g> ønsker å slå på Wi-Fi for denne enheten."</string>
+    <string name="wifi_ask_disable" msgid="5909293877818270354">"<xliff:g id="REQUESTER">%s</xliff:g> ønsker å slå av Wi-Fi for denne enheten."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Tillat datautveksling når nettbrettet berører en annen enhet"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Tillat utveksling av data når telefonen berører en annen enhet"</string>
+    <string name="nfc_disclaimer_title" msgid="4364003873202264039">"Slå på NFC"</string>
+    <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC utveksler data mellom denne enheten og andre enheter eller mål i nærheten, for eksempel betalingsterminaler, adgangslesere og interaktive annonser eller etiketter."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"Klar til å overføre appinnhold via NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Av"</string>
@@ -2901,6 +2901,8 @@
     <string name="assist_access_context_summary" msgid="1991421283142279560">"Gi assistentappen tilgang til skjerminnholdet som tekst"</string>
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Bruk skjermdumpen"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Gi assistentappen tilgang til et bilde av skjermen"</string>
+    <string name="assist_flash_title" msgid="506661221230034891">"Uthev skjermen"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"Uthev kantene av skjermen når assistentappen bruker tekst fra skjermen eller skjermbildet"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Assistentapper kan hjelpe deg basert på informasjon fra skjermen du bruker. Noen apper støtter tjenester for både Appoversikt og taleinndata for å gi deg integrert hjelp."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Gjennomsnittlig minnebruk"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maks. minnebruk"</string>
@@ -3187,8 +3189,7 @@
     <string name="gesture_preference_title" msgid="5280023307132819052">"Bevegelser"</string>
     <string name="gesture_preference_summary" msgid="8627850388011956901">"Hurtigbevegelser for å kontrollere telefonen din"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Gå til kameraet"</string>
-    <!-- no translation found for double_tap_power_for_camera_summary (6005086458928518432) -->
-    <skip />
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"For å åpne kameraet raskt, trykk på av/på-knappen to ganger. Dette fungerer fra alle skjermbilder"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Vend kameraet"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Rask skjermsjekk"</string>
