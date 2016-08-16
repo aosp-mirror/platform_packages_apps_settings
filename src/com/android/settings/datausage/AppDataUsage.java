@@ -215,9 +215,12 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 final int userId = UidDetailProvider.getUserIdForKey(mAppItem.key);
                 final UserManager um = UserManager.get(getActivity());
                 final UserInfo info = um.getUserInfo(userId);
-                final PackageManager pm = getPackageManager();
-                mIcon = Utils.getUserIcon(getActivity(), um, info);
-                mLabel = Utils.getUserLabel(getActivity(), info);
+                if (info != null) {
+                    mIcon = Utils.getUserIcon(getActivity(), um, info);
+                    mLabel = Utils.getUserLabel(getActivity(), info);
+                } else {
+                    mLabel = getContext().getString(R.string.data_usage_uninstalled_apps_users);
+                }
                 mPackageName = getActivity().getPackageName();
             }
             removePreference(KEY_UNRESTRICTED_DATA);
