@@ -2736,7 +2736,6 @@
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"ใช้มุมมองแนวตั้ง"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"ใช้มุมมองแนวนอน"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"ใช้การวางแนวเดิม"</string>
-    <string name="imei_information_title" msgid="8499085421609752290">"ข้อมูล IMEI"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"รักษาความปลอดภัยเมื่อเปิดขึ้น"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"ต่อไป"</string>
     <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"นอกจากนี้คุณยังสามารถปกป้องอุปกรณ์เครื่องนี้เพิ่มเติมโดยกำหนดให้ต้องป้อน PIN ก่อนที่อุปกรณ์จะเริ่มต้นขึ้น อุปกรณ์จะไม่สามารถรับสาย ข้อความ หรือการแจ้งเตือน รวมถึงเสียงเตือนได้จนกว่าอุปกรณ์จะเริ่มต้นขึ้น \n\nซึ่งจะช่วยปกป้องข้อมูลในอุปกรณ์ที่สูญหายหรือถูกขโมย"</string>
@@ -2762,15 +2761,12 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"ข้อมูลที่เกี่ยวข้องกับ IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(ช่อง<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"เปิดโดยค่าเริ่มต้น"</string>
-    <string name="storage_summary_format" msgid="5419902362347539755">"ใช้ไป <xliff:g id="SIZE">%1$s</xliff:g> ใน <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="app_launch_domain_links_title" msgid="1160925981363706090">"ลิงก์สำหรับเปิด"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"เปิดลิงก์ที่สนับสนุน"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"เปิดโดยไม่ต้องถาม"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"ลิงก์ที่สนับสนุน"</string>
     <string name="app_launch_other_defaults_title" msgid="2516812499807835178">"ค่าเริ่มต้นอื่นๆ"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"ใช้ไป <xliff:g id="SIZE">%1$s</xliff:g> ใน <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="410824961149037234">"หน่วยความจำภายใน"</string>
-    <string name="storage_type_external" msgid="8928374515368986503">"หน่วยความจำภายนอก"</string>
     <string name="storage_type_internal" msgid="6042049833565674948">"ที่จัดเก็บข้อมูลภายใน"</string>
     <string name="storage_type_external" msgid="7738894330670001898">"ที่จัดเก็บข้อมูลภายนอก"</string>
     <string name="app_data_usage" msgid="7942375313697452803">"การใช้อินเทอร์เน็ตของแอป"</string>
@@ -2815,8 +2811,8 @@
     <string name="configure_apps" msgid="6685680790825882528">"กำหนดค่าแอป"</string>
     <string name="unknown_app" msgid="5275921288718717656">"แอปที่ไม่รู้จัก"</string>
     <string name="app_permissions" msgid="4148222031991883874">"สิทธิ์ของแอป"</string>
-    <string name="app_permissions_summary" msgid="2098173899436407221">"อนุญาตการเข้าถึงเพิ่มเติมให้แอป <xliff:g id="COUNT_0">%d</xliff:g> จาก <xliff:g id="COUNT_1">%d</xliff:g> แอปแล้ว"</string>
-    <string name="app_permissions_group_summary" msgid="2721303391744909000">"อนุญาต <xliff:g id="COUNT_0">%d</xliff:g> จาก <xliff:g id="COUNT_1">%d</xliff:g> แอปแล้ว"</string>
+    <string name="app_permissions_summary" msgid="2098173899436407221">"อนุญาตการเข้าถึงเพิ่มเติมให้แอป <xliff:g id="COUNT_0">%1$d</xliff:g> จาก <xliff:g id="COUNT_1">%2$d</xliff:g> แอปแล้ว"</string>
+    <string name="app_permissions_group_summary" msgid="2721303391744909000">"อนุญาต <xliff:g id="COUNT_0">%1$d</xliff:g> จาก <xliff:g id="COUNT_1">%2$d</xliff:g> แอปแล้ว"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"แตะเพื่อปลุก"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"แตะที่ใดก็ได้บนหน้าจอ 2 ครั้งเพื่อปลุกอุปกรณ์"</string>
     <string name="domain_urls_title" msgid="3132983644568821250">"ลิงก์สำหรับเปิด"</string>
@@ -2949,13 +2945,13 @@
     <string name="keywords_vr_listener" msgid="7441221822576384680">"ความเป็นจริงเสมือน Listener ความเป็นจริงเสมือน บริการตัวช่วยสเตอริโอ"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"วาดหน้าต่างแจ้งเตือนของระบบทับแอปอื่นๆ"</string>
     <string name="overlay_settings" msgid="222062091489691363">"วาดทับแอปอื่นๆ"</string>
-    <string name="system_alert_window_summary" msgid="4268867238063922290">"อนุญาตแอป <xliff:g id="COUNT_0">%d</xliff:g> จาก <xliff:g id="COUNT_1">%d</xliff:g> แอปให้วาดทับแอปอื่นๆ"</string>
+    <string name="system_alert_window_summary" msgid="4268867238063922290">"อนุญาตแอป <xliff:g id="COUNT_0">%1$d</xliff:g> จาก <xliff:g id="COUNT_1">%2$d</xliff:g> แอปให้วาดทับแอปอื่นๆ"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"แอปที่มีสิทธิ์"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"ใช่"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"ไม่"</string>
     <string name="write_settings" msgid="4797457275727195681">"แก้ไขการตั้งค่าระบบ"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"เขียน แก้ไข ระบบ การตั้งค่า"</string>
-    <string name="write_settings_summary" msgid="4302268998611412696">"แอป <xliff:g id="COUNT_0">%d</xliff:g> จาก <xliff:g id="COUNT_1">%d</xliff:g> แอปได้รับอนุญาตให้แก้ไขการตั้งค่าระบบ"</string>
+    <string name="write_settings_summary" msgid="4302268998611412696">"แอป <xliff:g id="COUNT_0">%1$d</xliff:g> จาก <xliff:g id="COUNT_1">%2$d</xliff:g> แอปได้รับอนุญาตให้แก้ไขการตั้งค่าระบบ"</string>
     <string name="filter_write_settings_apps" msgid="2914615026197322551">"สามารถแก้ไขการตั้งค่าระบบได้"</string>
     <string name="write_settings_title" msgid="4232152481902542284">"สามารถแก้ไขการตั้งค่าระบบได้"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"แก้ไขการตั้งค่าระบบ"</string>
@@ -3142,8 +3138,8 @@
     <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"เวลาการสนับสนุนทางโทรศัพท์ (เวลาท้องถิ่น)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
     <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"การค้นหาความช่วยเหลือหรือสำรวจกลเม็ดเคล็ดลับ"</string>
     <string name="support_country_list_title" msgid="823853371280534111">"ประเทศที่สนับสนุน:"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%s</xliff:g> - <xliff:g id="LANGUAGE">%s</xliff:g>"</string>
-    <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%s</xliff:g> (<xliff:g id="PHONE">%s</xliff:g>)"</string>
+    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
+    <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%1$s</xliff:g> (<xliff:g id="PHONE">%2$s</xliff:g>)"</string>
     <string name="support_international_phone_title" msgid="1308334014138718455">"หากกำลังเดินทางไปต่างประเทศ"</string>
     <string name="support_international_phone_summary" msgid="208231793637026927">"อาจมีการเรียกเก็บเงินค่าโทรระหว่างประเทศ"</string>
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"โทรศัพท์"</string>

@@ -6507,10 +6507,6 @@
     <!-- [CHAR LIMIT=70] Don't rotate when screen is turned option -->
     <string name="display_auto_rotate_stay_in_current">Stay in current orientation</string>
 
-    <!-- Title and summary for SIM Status -->
-    <!-- Title for IMEI preference [CHAR LIMIT=30] -->
-    <string name="imei_information_title">IMEI information</string>
-
     <!-- Encryption interstitial title. This screen asks the user whether the device will ask for a PIN / pattern / password before the device starts up. [CHAR LIMIT=30] -->
     <string name="encryption_interstitial_header">Secure start-up</string>
 
@@ -6584,9 +6580,6 @@
    <!-- Preference label for app default launch settings [CHAR LIMIT=35]-->
    <string name="launch_by_default">Open by default</string>
 
-   <!-- Summary for app storage preference [CHAR LIMIT=15] -->
-   <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal storage">%2$s</xliff:g></string>
-
    <!-- Category name for App Launch -->
    <string name="app_launch_domain_links_title">Opening links</string>
    <string name="app_launch_open_domain_urls_title">Open supported links</string>
@@ -6596,11 +6589,6 @@
 
    <!-- Summary for app storage preference -->
    <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal memory">%2$s</xliff:g></string>
-   <!-- Internal storage label -->
-   <string name="storage_type_internal">internal memory</string>
-   <!-- External storage label -->
-   <string name="storage_type_external">external memory</string>
-
    <!-- Summary describing internal storage for applications [CHAR LIMIT=25] -->
    <string name="storage_type_internal">Internal storage</string>
    <!-- Summary describing external storage for applications [CHAR LIMIT=25] -->
@@ -6696,10 +6684,10 @@
    <!-- Label for list that shows all permissions -->
    <string name="app_permissions">App permissions</string>
    <!-- Summary of permissions currently granted to apps [CHAR LIMIT=45] -->
-   <string name="app_permissions_summary"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> apps allowed additional access</string>
+   <string name="app_permissions_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed additional access</string>
    <!-- Summary of number of apps currently granted a single permission [CHAR
         LIMIT=45] -->
-   <string name="app_permissions_group_summary"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> apps allowed</string>
+   <string name="app_permissions_group_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed</string>
 
    <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
    <string name="tap_to_wake">Tap to wake</string>
@@ -7092,7 +7080,7 @@
     <string name="overlay_settings">Draw over other apps</string>
 
     <!-- Summary of number of apps currently can draw overlays [CHAR LIMIT=60] -->
-    <string name="system_alert_window_summary"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> apps allowed to draw on top of other apps</string>
+    <string name="system_alert_window_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed to draw on top of other apps</string>
 
     <!-- Label for showing apps that can draw overlays [CHAR LIMIT=45] -->
     <string name="filter_overlay_apps">Apps with permission</string>
@@ -7108,7 +7096,7 @@
     <!-- Keyword for WRITE_SETTINGS -->
     <string name="keywords_write_settings">write modify system settings</string>
     <!-- Summary of number of apps currently can draw overlays [CHAR LIMIT=60] -->
-    <string name="write_settings_summary"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> apps allowed to modify system settings</string>
+    <string name="write_settings_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed to modify system settings</string>
 
     <!-- Label for showing apps that can write system settings [CHAR LIMIT=45] -->
     <string name="filter_write_settings_apps">Can modify system settings</string>
@@ -7607,18 +7595,18 @@
 
     <!-- Template for formatting support hours eg Mon - Fri, 8:00 AM - 19:30 PM. [CHAR LIMIT=NONE]-->
     <string name="support_hour_format" translatable="false">
-        <xliff:g id="start_day">%s</xliff:g> - <xliff:g id="end_day">%s</xliff:g>, <xliff:g id="start_time">%s</xliff:g> - <xliff:g id="end_time">%s</xliff:g>&lt;br&gt;
+        <xliff:g id="start_day">%1$s</xliff:g> - <xliff:g id="end_day">%2$s</xliff:g>, <xliff:g id="start_time">%3$s</xliff:g> - <xliff:g id="end_time">%4$s</xliff:g>&lt;br&gt;
     </string>
 
     <!-- Button label for choosing country for phone support. [CHAR LIMIT=40]-->
     <string name="support_country_list_title">Support for:</string>
 
     <!-- Template for formatting country and language. eg Canada - French [CHAR LIMIT=NONE]-->
-    <string name="support_country_format"><xliff:g id="country" example="Canada">%s</xliff:g> - <xliff:g id="language" example="French">%s</xliff:g></string>
+    <string name="support_country_format"><xliff:g id="country" example="Canada">%1$s</xliff:g> - <xliff:g id="language" example="French">%2$s</xliff:g></string>
 
     <!-- Template for formatting phone number and language. eg English (800-000-0000) [CHAR LIMIT=NONE]-->
     <string name ="support_phone_international_format">
-        <xliff:g id="language" example="English">%s</xliff:g> (<xliff:g id="phone" example="800-000-0000">%s</xliff:g>)
+        <xliff:g id="language" example="English">%1$s</xliff:g> (<xliff:g id="phone" example="800-000-0000">%2$s</xliff:g>)
     </string>
 
     <!-- Title text for a list of international support phone numbers. [CHAR LIMIT=60]-->
