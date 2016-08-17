@@ -44,8 +44,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 
-import static com.android.settings.notification.ZenModeScheduleDaysSelection.DAYS;
-
 public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_DAYS = "days";
     private static final String KEY_START_TIME = "start_time";
@@ -158,8 +156,9 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         if (days != null && days.length > 0) {
             final StringBuilder sb = new StringBuilder();
             final Calendar c = Calendar.getInstance();
-            for (int i = 0; i < DAYS.length; i++) {
-                final int day = DAYS[i];
+            int[] daysOfWeek = ZenModeScheduleDaysSelection.getDaysOfWeekForLocale(c);
+            for (int i = 0; i < daysOfWeek.length; i++) {
+                final int day = daysOfWeek[i];
                 for (int j = 0; j < days.length; j++) {
                     if (day == days[j]) {
                         c.set(Calendar.DAY_OF_WEEK, day);
