@@ -32,16 +32,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 public class ZenModeScheduleDaysSelection extends ScrollView {
-    public static final int[] DAYS = {
-        Calendar.SUNDAY,
-        Calendar.MONDAY,
-        Calendar.TUESDAY,
-        Calendar.WEDNESDAY,
-        Calendar.THURSDAY,
-        Calendar.FRIDAY,
-        Calendar.SATURDAY,
-    };
-
     // per-instance to ensure we're always using the current locale
     private final SimpleDateFormat mDayFormat = new SimpleDateFormat("EEEE");
     private final SparseBooleanArray mDays = new SparseBooleanArray();
@@ -61,9 +51,10 @@ public class ZenModeScheduleDaysSelection extends ScrollView {
         }
         mLayout.setOrientation(LinearLayout.VERTICAL);
         final Calendar c = Calendar.getInstance();
+        int[] daysOfWeek = getDaysOfWeekForLocale(c);
         final LayoutInflater inflater = LayoutInflater.from(context);
-        for (int i = 0; i < DAYS.length; i++) {
-            final int day = DAYS[i];
+        for (int i = 0; i < daysOfWeek.length; i++) {
+            final int day = daysOfWeek[i];
             final CheckBox checkBox = (CheckBox) inflater.inflate(R.layout.zen_schedule_rule_day,
                     this, false);
             c.set(Calendar.DAY_OF_WEEK, day);
@@ -93,6 +84,17 @@ public class ZenModeScheduleDaysSelection extends ScrollView {
         }
         Arrays.sort(rta);
         return rta;
+    }
+
+    protected static int[] getDaysOfWeekForLocale(Calendar c) {
+        int[] daysOfWeek = new int[7];
+        int currentDay = c.getFirstDayOfWeek();
+        for (int i = 0; i < daysOfWeek.length; i++) {
+            if (currentDay > 7) currentDay = 1;
+            daysOfWeek[i] = currentDay;
+            currentDay++;
+        }
+        return daysOfWeek;
     }
 
     protected void onChanged(int[] days) {
