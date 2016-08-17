@@ -92,8 +92,10 @@ public class BillingCycleSettings extends DataUsageBase implements
         NetworkPolicy policy = services.mPolicyEditor.getPolicy(mNetworkTemplate);
         mBillingCycle.setSummary(getString(R.string.billing_cycle_summary, policy != null ?
                 policy.cycleDay : 1));
-        mDataWarning.setSummary(Formatter.formatFileSize(getContext(), policy != null
-                ? policy.warningBytes : DataUsageController.DEFAULT_WARNING_LEVEL));
+        mDataWarning.setSummary(Formatter.formatFileSize(getContext(),
+                policy != null
+                        ? policy.warningBytes
+                        : mDataUsageController.getDefaultWarningLevel()));
         if (policy != null && policy.limitBytes != LIMIT_DISABLED) {
             mDataLimit.setSummary(Formatter.formatFileSize(getContext(), policy.limitBytes));
             mDataLimit.setEnabled(true);
