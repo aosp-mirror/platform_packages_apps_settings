@@ -21,9 +21,9 @@ import android.content.Context;
 import com.android.internal.logging.MetricsLogger;
 
 /**
- * Pass-through Metrics logger for {@link MetricsLogger}.
+ * {@link LogWriter} that writes data to eventlog.
  */
-public class EventLogWriter {
+public class EventLogWriter implements LogWriter {
 
     public void visible(Context context, int category) {
         MetricsLogger.visible(context, category);

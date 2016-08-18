@@ -16,11 +16,13 @@
 
 package com.android.settings.core.instrumentation;
 
+import android.support.annotation.VisibleForTesting;
+
 public class MetricsFactory {
 
     private static MetricsFactory sInstance;
 
-    private EventLogWriter mLogger;
+    private LogWriter mLogger;
 
     public static MetricsFactory get() {
         if (sInstance == null) {
@@ -29,10 +31,15 @@ public class MetricsFactory {
         return sInstance;
     }
 
-    public EventLogWriter getLogger() {
+    public LogWriter getLogger() {
         if (mLogger == null) {
             mLogger = new EventLogWriter();
         }
         return mLogger;
+    }
+
+    @VisibleForTesting
+    void setLogger(LogWriter logger) {
+        mLogger = logger;
     }
 }

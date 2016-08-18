@@ -24,22 +24,22 @@ import android.content.Context;
 public class VisibilityLoggerMixin {
 
     private final Instrumentable mInstrumentable;
-    private final EventLogWriter mEventLogWriter;
+    private final LogWriter mLogWriter;
 
     public VisibilityLoggerMixin(Instrumentable instrumentable) {
         this(instrumentable, MetricsFactory.get().getLogger());
     }
 
-    public VisibilityLoggerMixin(Instrumentable instrumentable, EventLogWriter eventLogWriter) {
+    public VisibilityLoggerMixin(Instrumentable instrumentable, LogWriter logWriter) {
         mInstrumentable = instrumentable;
-        mEventLogWriter = eventLogWriter;
+        mLogWriter = logWriter;
     }
 
     public void onResume(Context context) {
-        mEventLogWriter.visible(context, mInstrumentable.getMetricsCategory());
+        mLogWriter.visible(context, mInstrumentable.getMetricsCategory());
     }
 
     public void onPause(Context context) {
-        mEventLogWriter.hidden(context, mInstrumentable.getMetricsCategory());
+        mLogWriter.hidden(context, mInstrumentable.getMetricsCategory());
     }
 }
