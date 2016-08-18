@@ -60,6 +60,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
+import static android.content.pm.ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA;
+import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
+
 public class AppStorageSettings extends AppInfoWithHeader
         implements OnClickListener, Callbacks, DialogInterface.OnClickListener {
     private static final String TAG = AppStorageSettings.class.getSimpleName();
@@ -354,19 +357,27 @@ public class AppStorageSettings extends AppInfoWithHeader
     }
 
     private void initDataButtons() {
-        // If the app doesn't have its own space management UI
-        // And it's a system app that doesn't allow clearing user data or is an active admin
-        // Then disable the Clear Data button.
-        if (mAppEntry.info.manageSpaceActivityName == null
-                && ((mAppEntry.info.flags&(ApplicationInfo.FLAG_SYSTEM
-                        | ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA))
-                        == ApplicationInfo.FLAG_SYSTEM
-                        || mDpm.packageHasActiveAdmins(mPackageName))) {
+        final boolean appHasSpaceManagementUI = mAppEntry.info.manageSpaceActivityName != null;
+        final boolean appHasActiveAdmins = mDpm.packageHasActiveAdmins(mPackageName);
+        // Check that SYSTEM_APP flag is set, and ALLOW_CLEAR_USER_DATA is not set.
+        final boolean isNonClearableSystemApp =
+                (mAppEntry.info.flags & (FLAG_SYSTEM | FLAG_ALLOW_CLEAR_USER_DATA)) == FLAG_SYSTEM;
+        final boolean appRestrictsClearingData = isNonClearableSystemApp || appHasActiveAdmins;
+
+        final Intent intent = new Intent(Intent.ACTION_DEFAULT);
+        if (appHasSpaceManagementUI) {
+            intent.setClassName(mAppEntry.info.packageName, mAppEntry.info.manageSpaceActivityName);
+        }
+        final boolean isManageSpaceActivityAvailable =
+                getPackageManager().resolveActivity(intent, 0) != null;
+
+        if ((!appHasSpaceManagementUI && appRestrictsClearingData)
+                || !isManageSpaceActivityAvailable) {
             mClearDataButton.setText(R.string.clear_user_data_text);
             mClearDataButton.setEnabled(false);
             mCanClearData = false;
         } else {
-            if (mAppEntry.info.manageSpaceActivityName != null) {
+            if (appHasSpaceManagementUI) {
                 mClearDataButton.setText(R.string.manage_space_text);
             } else {
                 mClearDataButton.setText(R.string.clear_user_data_text);
