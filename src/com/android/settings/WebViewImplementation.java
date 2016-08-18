@@ -28,6 +28,7 @@ import android.util.Log;
 import android.webkit.IWebViewUpdateService;
 import android.webkit.WebViewProviderInfo;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.core.InstrumentedActivity;
 
 import java.util.ArrayList;
 
@@ -97,7 +98,7 @@ public class WebViewImplementation extends InstrumentedActivity implements
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.WEBVIEW_IMPLEMENTATION;
     }
 

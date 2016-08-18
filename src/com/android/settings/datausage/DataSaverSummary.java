@@ -100,7 +100,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DATA_SAVER_SUMMARY;
     }
 

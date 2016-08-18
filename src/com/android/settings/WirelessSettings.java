@@ -207,7 +207,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.WIRELESS;
     }
 

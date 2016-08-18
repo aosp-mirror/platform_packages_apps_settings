@@ -86,7 +86,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private boolean mDebuggingFeaturesDisallowedBySystem;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO;
     }
 

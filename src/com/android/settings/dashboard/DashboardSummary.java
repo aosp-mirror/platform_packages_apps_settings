@@ -28,7 +28,7 @@ import android.view.ViewGroup;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
@@ -36,7 +36,6 @@ import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
-import com.android.settingslib.HelpUtils;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
@@ -78,7 +77,7 @@ public class DashboardSummary extends InstrumentedFragment
     private HashSet<String> mSuggestionsHiddenLogged;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DASHBOARD_SUMMARY;
     }
 

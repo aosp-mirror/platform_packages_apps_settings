@@ -242,7 +242,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.USERS_APP_RESTRICTIONS;
     }
 

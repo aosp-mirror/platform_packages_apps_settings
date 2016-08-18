@@ -29,7 +29,7 @@ import android.view.ViewGroup;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto;
-import com.android.settings.InstrumentedFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
@@ -55,7 +55,7 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
     private DashboardViewPagerAdapter mPagerAdapter;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DASHBOARD_CONTAINER;
     }
 

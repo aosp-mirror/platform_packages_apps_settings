@@ -85,7 +85,7 @@ public class WifiAPITest extends SettingsPreferenceFragment implements
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.TESTING;
     }
 

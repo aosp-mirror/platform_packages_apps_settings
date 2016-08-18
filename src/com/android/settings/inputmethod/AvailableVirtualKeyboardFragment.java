@@ -85,7 +85,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ENABLE_VIRTUAL_KEYBOARDS;
     }
 

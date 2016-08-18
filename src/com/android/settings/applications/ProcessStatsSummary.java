@@ -98,7 +98,7 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PROCESS_STATS_SUMMARY;
     }
 

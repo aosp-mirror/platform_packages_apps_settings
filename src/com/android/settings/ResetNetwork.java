@@ -207,7 +207,7 @@ public class ResetNetwork extends OptionsMenuFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.RESET_NETWORK;
     }
 }

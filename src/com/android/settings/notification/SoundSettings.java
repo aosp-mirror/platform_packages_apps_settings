@@ -123,7 +123,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private RingtonePreference mRequestPreference;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SOUND;
     }
 

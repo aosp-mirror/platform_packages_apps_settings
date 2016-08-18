@@ -198,7 +198,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private DevicePolicyManager mDpm;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY;
     }
 

@@ -196,7 +196,7 @@ public class SimStatus extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_SIM_STATUS;
     }
 

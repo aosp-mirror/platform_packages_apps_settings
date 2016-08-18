@@ -76,7 +76,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_STORAGE;
     }
 

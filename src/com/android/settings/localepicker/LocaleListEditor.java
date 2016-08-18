@@ -58,7 +58,7 @@ public class LocaleListEditor extends SettingsPreferenceFragment
     private boolean mShowingRemoveDialog;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.USER_LOCALE_LIST;
     }
 

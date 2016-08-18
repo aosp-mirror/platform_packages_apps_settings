@@ -274,7 +274,7 @@ public class FingerprintSettings extends SubSettings {
         }
 
         @Override
-        protected int getMetricsCategory() {
+        public int getMetricsCategory() {
             return MetricsEvent.FINGERPRINT;
         }
 

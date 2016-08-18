@@ -357,7 +357,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APP_DATA_USAGE;
     }
 

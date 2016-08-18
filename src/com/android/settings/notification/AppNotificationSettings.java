@@ -60,7 +60,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_APP_NOTIFICATION;
     }
 

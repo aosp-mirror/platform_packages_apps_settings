@@ -60,7 +60,7 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_ACCESS;
     }
 

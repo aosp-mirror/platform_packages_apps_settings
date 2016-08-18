@@ -44,7 +44,7 @@ public class ApplicationSettings extends SettingsPreferenceFragment {
     private ListPreference mInstallLocation;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATION;
     }
 

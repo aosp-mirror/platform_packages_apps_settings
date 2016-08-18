@@ -37,8 +37,6 @@ import java.util.List;
 public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = AccessibilitySettingsForSetupWizard.class.getSimpleName();
-
     // Preferences.
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE =
             "screen_magnification_preference";
@@ -50,7 +48,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     private Preference mScreenReaderPreference;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SUW_ACCESSIBILITY;
     }
 

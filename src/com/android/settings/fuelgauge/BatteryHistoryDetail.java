@@ -119,7 +119,7 @@ public class BatteryHistoryDetail extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.FUELGAUGE_BATTERY_HISTORY_DETAIL;
     }
 }

@@ -139,7 +139,7 @@ public class BillingCycleSettings extends DataUsageBase implements
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.BILLING_CYCLE;
     }
 

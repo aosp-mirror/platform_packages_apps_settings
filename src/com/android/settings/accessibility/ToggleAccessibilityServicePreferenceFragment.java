@@ -78,7 +78,7 @@ public class ToggleAccessibilityServicePreferenceFragment
     private int mShownDialogId;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_SERVICE;
     }
 

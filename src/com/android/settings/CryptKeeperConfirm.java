@@ -35,6 +35,7 @@ import android.widget.Button;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.InstrumentedFragment;
 
 import java.util.Locale;
 
@@ -43,7 +44,7 @@ public class CryptKeeperConfirm extends InstrumentedFragment {
     private static final String TAG = "CryptKeeperConfirm";
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.CRYPT_KEEPER_CONFIRM;
     }
 

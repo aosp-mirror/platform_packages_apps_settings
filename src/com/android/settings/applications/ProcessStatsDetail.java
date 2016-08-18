@@ -125,7 +125,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_PROCESS_STATS_DETAIL;
     }
 

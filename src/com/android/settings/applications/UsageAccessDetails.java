@@ -162,7 +162,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_USAGE_ACCESS_DETAIL;
     }
 

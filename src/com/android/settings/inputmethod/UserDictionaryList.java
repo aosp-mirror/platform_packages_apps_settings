@@ -44,7 +44,7 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
     private String mLocale;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.INPUTMETHOD_USER_DICTIONARY;
     }
 

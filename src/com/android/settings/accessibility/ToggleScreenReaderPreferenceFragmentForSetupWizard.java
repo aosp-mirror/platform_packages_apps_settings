@@ -33,7 +33,7 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER;
     }
 

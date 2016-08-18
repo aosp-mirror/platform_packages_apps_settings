@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.ListFragment;
 import android.app.admin.DeviceAdminInfo;
@@ -31,7 +30,6 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -50,6 +48,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsProto;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settings.core.instrumentation.Instrumentable;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -58,12 +60,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class DeviceAdminSettings extends ListFragment {
+public class DeviceAdminSettings extends ListFragment implements Instrumentable {
     static final String TAG = "DeviceAdminSettings";
 
+    private final VisibilityLoggerMixin mVisibilityLoggerMixin =
+            new VisibilityLoggerMixin(this);
     private DevicePolicyManager mDPM;
     private UserManager mUm;
-
 
     private static class DeviceAdminListItem implements Comparable<DeviceAdminListItem> {
         public DeviceAdminInfo info;
@@ -104,6 +107,11 @@ public class DeviceAdminSettings extends ListFragment {
     };
 
     @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DEVICE_ADMIN_SETTINGS;
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
     }
@@ -126,9 +134,11 @@ public class DeviceAdminSettings extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
+        final Activity activity = getActivity();
+        mVisibilityLoggerMixin.onResume(activity);
         IntentFilter filter = new IntentFilter();
         filter.addAction(DevicePolicyManager.ACTION_DEVICE_POLICY_MANAGER_STATE_CHANGED);
-        getActivity().registerReceiverAsUser(
+        activity.registerReceiverAsUser(
                 mBroadcastReceiver, UserHandle.ALL, filter, null, null);
 
         final ComponentName deviceOwnerComponent = mDPM.getDeviceOwnerComponentOnAnyUser();
@@ -146,7 +156,9 @@ public class DeviceAdminSettings extends ListFragment {
 
     @Override
     public void onPause() {
-        getActivity().unregisterReceiver(mBroadcastReceiver);
+        final Activity activity = getActivity();
+        activity.unregisterReceiver(mBroadcastReceiver);
+        mVisibilityLoggerMixin.onPause(activity);
         super.onPause();
     }
 

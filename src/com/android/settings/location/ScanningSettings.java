@@ -33,7 +33,7 @@ public class ScanningSettings extends SettingsPreferenceFragment {
     private static final String KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE = "bluetooth_always_scanning";
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.LOCATION_SCANNING;
     }
 

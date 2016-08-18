@@ -59,7 +59,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.WIFI_SAVED_ACCESS_POINTS;
     }
 

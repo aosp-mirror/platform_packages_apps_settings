@@ -113,7 +113,7 @@ public class LocationSettings extends LocationSettingsBase
     private UserManager mUm;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.LOCATION;
     }
 

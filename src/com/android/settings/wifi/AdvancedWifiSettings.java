@@ -48,7 +48,7 @@ public class AdvancedWifiSettings extends RestrictedSettingsFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.WIFI_ADVANCED;
     }
 

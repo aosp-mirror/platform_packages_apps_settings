@@ -145,7 +145,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCOUNTS_ACCOUNT_SYNC;
     }
 

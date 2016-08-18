@@ -37,7 +37,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     private ListPreference mType;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_TOGGLE_DALTONIZER;
     }
 

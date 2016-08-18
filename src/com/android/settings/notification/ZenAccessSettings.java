@@ -61,7 +61,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
     private NotificationManager mNoMan;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_ZEN_MODE_ACCESS;
     }
 

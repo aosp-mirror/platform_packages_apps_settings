@@ -65,7 +65,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
     private PowerManager mPowerManager;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.FUELGAUGE_BATTERY_SAVER;
     }
 

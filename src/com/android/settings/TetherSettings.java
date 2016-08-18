@@ -119,7 +119,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     private Preference mDataSaverFooter;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.TETHER;
     }
 

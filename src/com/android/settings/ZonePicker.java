@@ -31,6 +31,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.android.internal.logging.MetricsProto;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settingslib.datetime.ZoneGetter;
 
 import java.util.Collections;
@@ -46,8 +49,7 @@ import java.util.TimeZone;
  * the time zone. Pressing Back without choosing from the list will not
  * result in a change in the time zone setting.
  */
-public class ZonePicker extends ListFragment {
-    private static final String TAG = "ZonePicker";
+public class ZonePicker extends ListFragment implements Instrumentable {
 
     public interface ZoneSelectionListener {
         // You can add any argument if you really need it...
@@ -56,6 +58,7 @@ public class ZonePicker extends ListFragment {
 
     private static final int MENU_TIMEZONE = Menu.FIRST+1;
     private static final int MENU_ALPHABETICAL = Menu.FIRST;
+    private final VisibilityLoggerMixin mVisibilityLoggerMixin = new VisibilityLoggerMixin(this);
 
     private boolean mSortedByTimezone;
 
@@ -133,6 +136,11 @@ public class ZonePicker extends ListFragment {
     }
 
     @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.ZONE_PICKER;
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -172,6 +180,12 @@ public class ZonePicker extends ListFragment {
             menu.findItem(MENU_TIMEZONE).setVisible(true);
             menu.findItem(MENU_ALPHABETICAL).setVisible(false);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mVisibilityLoggerMixin.onResume(getActivity());
     }
 
     @Override
@@ -223,6 +237,12 @@ public class ZonePicker extends ListFragment {
         } else {
             getActivity().onBackPressed();
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mVisibilityLoggerMixin.onPause(getActivity());
     }
 
     private static class MyComparator implements Comparator<Map<?, ?>> {

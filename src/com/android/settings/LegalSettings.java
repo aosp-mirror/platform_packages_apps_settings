@@ -59,7 +59,7 @@ public class LegalSettings extends SettingsPreferenceFragment implements Indexab
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ABOUT_LEGAL_SETTINGS;
     }
 

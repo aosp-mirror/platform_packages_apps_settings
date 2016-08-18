@@ -97,7 +97,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     private boolean mShowingCustom;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_CAPTION_PROPERTIES;
     }
 

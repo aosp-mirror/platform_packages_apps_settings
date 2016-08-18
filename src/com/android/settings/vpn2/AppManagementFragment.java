@@ -154,7 +154,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.VPN;
     }
 

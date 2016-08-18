@@ -257,7 +257,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DATA_USAGE_SUMMARY;
     }
 

@@ -38,7 +38,7 @@ public class PrivateVolumeUnmount extends SettingsPreferenceFragment {
     private DiskInfo mDisk;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_STORAGE;
     }
 

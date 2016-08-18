@@ -169,7 +169,7 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.STORAGE_MANAGER_SETTINGS;
     }
 

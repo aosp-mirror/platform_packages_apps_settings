@@ -54,7 +54,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment
     private Collator mCollator;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.INPUTMETHOD_SUBTYPE_ENABLER;
     }
 

@@ -93,7 +93,7 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCOUNTS_CHOOSE_ACCOUNT_ACTIVITY;
     }
 

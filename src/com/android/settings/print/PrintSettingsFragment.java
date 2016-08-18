@@ -94,7 +94,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
     private Button mAddNewServiceButton;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PRINT_SETTINGS;
     }
 

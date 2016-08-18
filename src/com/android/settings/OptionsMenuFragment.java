@@ -17,6 +17,8 @@ package com.android.settings;
 
 import android.os.Bundle;
 
+import com.android.settings.core.InstrumentedFragment;
+
 /**
  * Base class for a fragment that has the options menu.
  * SettingsPreferenceFragment automatically sets this, but some activities do not use

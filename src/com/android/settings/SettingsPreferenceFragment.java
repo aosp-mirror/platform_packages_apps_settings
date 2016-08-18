@@ -45,6 +45,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settingslib.HelpUtils;
 
 import java.util.UUID;

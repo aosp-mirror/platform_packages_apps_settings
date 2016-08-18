@@ -109,7 +109,7 @@ public class DataUsageList extends DataUsageBase {
     private View mHeader;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DATA_USAGE_LIST;
     }
 

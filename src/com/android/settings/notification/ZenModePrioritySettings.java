@@ -181,7 +181,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_ZEN_MODE_PRIORITY;
     }
 

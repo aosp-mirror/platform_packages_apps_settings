@@ -55,7 +55,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     private LockPatternUtils mLockPatternUtils;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SCREEN_PINNING;
     }
 

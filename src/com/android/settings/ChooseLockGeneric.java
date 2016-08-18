@@ -123,7 +123,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected boolean mForFingerprint = false;
 
         @Override
-        protected int getMetricsCategory() {
+        public int getMetricsCategory() {
             return MetricsEvent.CHOOSE_LOCK_GENERIC;
         }
 

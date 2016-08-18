@@ -189,7 +189,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PHYSICAL_KEYBOARDS;
     }
 

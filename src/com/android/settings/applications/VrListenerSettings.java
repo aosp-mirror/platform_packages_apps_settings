@@ -45,7 +45,7 @@ public class VrListenerSettings extends ManagedServiceSettings {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.VR_MANAGE_LISTENERS;
     }
 }

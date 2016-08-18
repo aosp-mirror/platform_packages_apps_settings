@@ -160,7 +160,7 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_ZEN_MODE_EVENT_RULE;
     }
 

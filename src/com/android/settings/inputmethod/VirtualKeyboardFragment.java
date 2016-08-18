@@ -66,7 +66,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.VIRTUAL_KEYBOARDS;
     }
 

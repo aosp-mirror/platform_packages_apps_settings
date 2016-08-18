@@ -61,7 +61,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
     private Preference mWifiDisabled;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NET_DATA_USAGE_METERED;
     }
 

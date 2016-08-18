@@ -115,7 +115,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.WFD_WIFI_DISPLAY;
     }
 

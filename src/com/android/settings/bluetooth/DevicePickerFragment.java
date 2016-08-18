@@ -85,7 +85,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.BLUETOOTH_DEVICE_PICKER;
     }
 

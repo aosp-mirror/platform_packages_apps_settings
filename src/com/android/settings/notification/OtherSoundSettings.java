@@ -188,7 +188,7 @@ public class OtherSoundSettings extends SettingsPreferenceFragment implements In
     private Context mContext;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_OTHER_SOUND;
     }
 

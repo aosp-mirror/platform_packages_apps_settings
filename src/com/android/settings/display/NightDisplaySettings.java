@@ -200,7 +200,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NIGHT_DISPLAY_SETTINGS;
     }
 }

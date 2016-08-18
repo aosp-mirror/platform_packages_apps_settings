@@ -204,7 +204,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DATA_USAGE_UNRESTRICTED_ACCESS;
     }
 

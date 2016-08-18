@@ -108,7 +108,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private DevicePolicyManager mDpm;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.INPUTMETHOD_LANGUAGE;
     }
 

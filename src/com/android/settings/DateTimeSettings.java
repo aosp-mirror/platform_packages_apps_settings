@@ -83,7 +83,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     private Preference mDatePref;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DATE_TIME;
     }
 

@@ -604,7 +604,7 @@ public class AppStorageSettings extends AppInfoWithHeader
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_APP_STORAGE;
     }
 

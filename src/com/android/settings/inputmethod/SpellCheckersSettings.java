@@ -55,7 +55,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     private TextServicesManager mTsm;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.INPUTMETHOD_SPELL_CHECKERS;
     }
 
