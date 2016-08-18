@@ -363,7 +363,12 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         boolean updateAddressEnabled = (getCarrierActivityIntent(context) != null);
         if (wfcEnabled) {
-            preferenceScreen.addPreference(mButtonWfcMode);
+            if (mEditableWfcMode) {
+                preferenceScreen.addPreference(mButtonWfcMode);
+            } else {
+                // Don't show WFC mode preference if it's not editable.
+                preferenceScreen.removePreference(mButtonWfcMode);
+            }
             if (updateAddressEnabled) {
                 preferenceScreen.addPreference(mUpdateAddress);
             } else {
