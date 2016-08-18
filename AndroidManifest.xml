@@ -156,7 +156,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="SettingsInitialize">
+        <receiver android:name=".SettingsInitialize">
             <intent-filter>
                 <action android:name="android.intent.action.USER_INITIALIZE"/>
                 <action android:name="android.intent.action.PRE_BOOT_COMPLETED"/>
@@ -2200,7 +2200,7 @@
                 android:value="com.android.settings.TestingSettings" />
         </activity>
 
-        <receiver android:name="TestingSettingsBroadcastReceiver">
+        <receiver android:name=".TestingSettingsBroadcastReceiver">
             <intent-filter>
                  <action android:name="android.provider.Telephony.SECRET_CODE" />
                  <data android:scheme="android_secret_code" android:host="4636" />
