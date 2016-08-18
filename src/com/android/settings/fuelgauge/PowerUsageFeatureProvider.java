@@ -14,26 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.settings.overlay;
-
-import android.content.Context;
-import android.support.annotation.Keep;
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+package com.android.settings.fuelgauge;
 
 /**
- * {@link FeatureFactory} implementation for AOSP Settings.
+ * Feature Provider used in power usage
  */
-@Keep
-public final class FeatureFactoryImpl extends FeatureFactory {
-
-    @Override
-    public SupportFeatureProvider getSupportFeatureProvider(Context context) {
-        return null;
-    }
-
-    @Override
-    public PowerUsageFeatureProvider getPowerUsageFeatureProvider() {
-        return null;
-    }
-
+public interface PowerUsageFeatureProvider {
+  /**
+   * Check whether location setting is enabled
+   */
+  boolean isLocationSettingEnabled(String[] packages);
 }

@@ -57,6 +57,7 @@ import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiSettings;
 
 import java.io.PrintWriter;
@@ -328,6 +329,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     private long mStartTime;
     private BatterySipper.DrainType mDrainType;
     private double mNoCoverage; // Percentage of time that there was no coverage
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     private PreferenceCategory mDetailsParent;
     private PreferenceCategory mControlsParent;
@@ -354,6 +356,9 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         mControlsParent = (PreferenceCategory) findPreference(KEY_CONTROLS_PARENT);
         mMessagesParent = (PreferenceCategory) findPreference(KEY_MESSAGES_PARENT);
         mPackagesParent = (PreferenceCategory) findPreference(KEY_PACKAGES_PARENT);
+
+        mPowerUsageFeatureProvider =
+                FeatureFactory.getFactory(getActivity()).getPowerUsageFeatureProvider();
 
         createDetails();
     }
@@ -604,9 +609,11 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                     // If the application has a settings screen, jump to  that
                     // TODO:
                 }
+
                 // If power usage detail page is launched from location page, suppress "Location"
                 // button to prevent circular loops.
-                if (mUsesGps && mShowLocationButton) {
+                if (mUsesGps && mShowLocationButton
+                        && mPowerUsageFeatureProvider.isLocationSettingEnabled(packages)) {
                     addControl(R.string.location_settings_title,
                             R.string.battery_sugg_apps_gps, ACTION_LOCATION_SETTINGS);
                     removeHeader = false;
