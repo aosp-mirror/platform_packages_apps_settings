@@ -267,7 +267,7 @@ public class RequestPermissionActivity extends Activity implements
 
             Log.d(TAG, "Setting Bluetooth Discoverable Timeout = " + mTimeout);
 
-            if (mTimeout < 0 || mTimeout > MAX_DISCOVERABLE_TIMEOUT) {
+            if (mTimeout < 1 || mTimeout > MAX_DISCOVERABLE_TIMEOUT) {
                 mTimeout = BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT;
             }
         } else {
