@@ -105,6 +105,10 @@
         <item name="android:dialogLayout">@layout/preference_dialog_edittext</item>
     </style>
 
+    <style name="PreferenceTheme" parent="@*android:style/PreferenceTheme">
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
     <style name="PreferenceHeaderPanelSinglePane">
         <item name="android:layout_marginStart">0dp</item>
         <item name="android:layout_marginEnd">0dp</item>
