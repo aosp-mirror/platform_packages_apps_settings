@@ -16,21 +16,30 @@
 
 package com.android.settings.notification;
 
+import android.annotation.UserIdInt;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ServiceInfo;
+import android.content.pm.UserInfo;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.media.AudioManager;
 import android.media.AudioSystem;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -47,7 +56,9 @@ import android.provider.OpenableColumns;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.TwoStatePreference;
 import android.text.TextUtils;
 import android.util.Log;
@@ -55,6 +66,7 @@ import android.util.Log;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
+import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
@@ -69,9 +81,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static android.content.ContentProvider.getUriWithoutUserId;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-public class SoundSettings extends SettingsPreferenceFragment implements Indexable {
+public class SoundSettings extends SettingsPreferenceFragment
+        implements Indexable, OnPreferenceChangeListener {
     private static final String TAG = "SoundSettings";
 
     private static final String KEY_MEDIA_VOLUME = "media_volume";
@@ -85,6 +99,12 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
     private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
+
+    private static final String KEY_WORK_CATEGORY = "sound_work_settings_section";
+    private static final String KEY_WORK_USE_PERSONAL_SOUNDS = "work_use_personal_sounds";
+    private static final String KEY_WORK_PHONE_RINGTONE = "work_ringtone";
+    private static final String KEY_WORK_NOTIFICATION_RINGTONE = "work_notification_ringtone";
+    private static final String KEY_WORK_ALARM_RINGTONE = "work_alarm_ringtone";
 
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
     private static final int REQUEST_CODE = 200;
@@ -118,9 +138,17 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private ComponentName mSuppressor;
     private int mRingerMode = -1;
 
+    private PreferenceGroup mWorkPreferenceCategory;
+    private TwoStatePreference mWorkUsePersonalSounds;
+    private DefaultRingtonePreference mWorkPhoneRingtonePreference;
+    private DefaultRingtonePreference mWorkNotificationRingtonePreference;
+    private DefaultRingtonePreference mWorkAlarmRingtonePreference;
+
     private PackageManager mPm;
     private UserManager mUserManager;
     private RingtonePreference mRequestPreference;
+
+    private @UserIdInt int mManagedProfileId;
 
     @Override
     public int getMetricsCategory() {
@@ -227,6 +255,20 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
             broadcastSettingsPref.checkRestrictionAndSetDisabled(
                     UserManager.DISALLOW_CONFIG_CELL_BROADCASTS);
         }
+
+        mManagedProfileId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
+        if (hasManagedProfile()) {
+            if ((mWorkPreferenceCategory == null)) {
+                // Work preferences not yet set
+                addPreferencesFromResource(R.xml.sound_work_settings);
+                initWorkPreferences();
+            }
+            if (!mWorkUsePersonalSounds.isChecked()) {
+                updateWorkRingtoneSummaries();
+            }
+        } else {
+            maybeRemoveWorkPreferences();
+        }
     }
 
     @Override
@@ -265,6 +307,34 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         if (mRequestPreference != null) {
             outState.putString(SELECTED_PREFERENCE_KEY, mRequestPreference.getKey());
         }
+    }
+
+    /**
+     * Updates the summary of work preferences
+     *
+     * This fragment only listens to changes on the work ringtone preferences, identified by keys
+     * "work_ringtone", "work_notification_ringtone" and "work_alarm_ringtone".
+     *
+     * Note: Changes to the personal ringtones aren't listened to this way because they were already
+     * handled using a {@link #SettingsObserver} ContentObserver. This wouldn't be appropriate for
+     * work settings since the Settings app runs on the personal user.
+     */
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        int ringtoneType;
+        if (KEY_WORK_PHONE_RINGTONE.equals(preference.getKey())) {
+            ringtoneType = RingtoneManager.TYPE_RINGTONE;
+        } else if (KEY_WORK_NOTIFICATION_RINGTONE.equals(preference.getKey())) {
+            ringtoneType = RingtoneManager.TYPE_NOTIFICATION;
+        } else if (KEY_WORK_ALARM_RINGTONE.equals(preference.getKey())) {
+            ringtoneType = RingtoneManager.TYPE_ALARM;
+        } else {
+            return true;
+        }
+
+        Context managedProfileContext = Utils.createPackageContextAsUser(mContext, mManagedProfileId);
+        preference.setSummary(updateRingtoneName(managedProfileContext, ringtoneType));
+        return true;
     }
 
     // === Volumes ===
@@ -415,7 +485,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
         } else {
             Cursor cursor = null;
             try {
-                if (MediaStore.AUTHORITY.equals(ringtoneUri.getAuthority())) {
+                if (MediaStore.AUTHORITY.equals(getUriWithoutUserId(ringtoneUri).getAuthority())) {
                     // Fetch the ringtone title from the media provider
                     cursor = context.getContentResolver().query(ringtoneUri,
                             new String[] { MediaStore.Audio.Media.TITLE }, null, null, null);
@@ -663,4 +733,152 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
             return rt;
         }
     };
+
+    // === Work Sound Settings ===
+
+    private boolean hasManagedProfile() {
+        return mManagedProfileId != UserHandle.USER_NULL;
+    }
+
+    private void initWorkPreferences() {
+        mWorkPreferenceCategory =
+                (PreferenceGroup) getPreferenceScreen().findPreference(KEY_WORK_CATEGORY);
+        mWorkUsePersonalSounds = (TwoStatePreference) getPreferenceScreen()
+                .findPreference(KEY_WORK_USE_PERSONAL_SOUNDS);
+        mWorkPhoneRingtonePreference = (DefaultRingtonePreference) getPreferenceScreen()
+                .findPreference(KEY_WORK_PHONE_RINGTONE);
+        mWorkNotificationRingtonePreference = (DefaultRingtonePreference) getPreferenceScreen()
+                .findPreference(KEY_WORK_NOTIFICATION_RINGTONE);
+        mWorkAlarmRingtonePreference = (DefaultRingtonePreference) getPreferenceScreen()
+                .findPreference(KEY_WORK_ALARM_RINGTONE);
+
+        // Required so that RingtonePickerActivity lists the work profile ringtones
+        mWorkPhoneRingtonePreference.setUserId(mManagedProfileId);
+        mWorkNotificationRingtonePreference.setUserId(mManagedProfileId);
+        mWorkAlarmRingtonePreference.setUserId(mManagedProfileId);
+
+        mWorkPhoneRingtonePreference.setOnPreferenceChangeListener(this);
+        mWorkNotificationRingtonePreference.setOnPreferenceChangeListener(this);
+        mWorkAlarmRingtonePreference.setOnPreferenceChangeListener(this);
+
+        Context managedProfileContext = Utils.createPackageContextAsUser(mContext, mManagedProfileId);
+        if (Settings.Secure.getIntForUser(managedProfileContext.getContentResolver(),
+                Settings.Secure.SYNC_PARENT_SOUNDS, 0, mManagedProfileId) == 1) {
+            enableWorkSyncSettings();
+        } else {
+            disableWorkSyncSettings();
+        }
+
+        mWorkUsePersonalSounds.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if ((boolean) newValue) {
+                    UnifyWorkDialogFragment.show(SoundSettings.this);
+                    return false;
+                } else {
+                    disableWorkSync();
+                    return true;
+                }
+            }
+        });
+    }
+
+    private void enableWorkSync() {
+        if(hasManagedProfile()) {
+            Context managedProfileContext = Utils.createPackageContextAsUser(mContext, mManagedProfileId);
+            RingtoneManager.enableSyncFromParent(managedProfileContext);
+            enableWorkSyncSettings();
+        }
+    }
+
+    private void enableWorkSyncSettings() {
+        mWorkUsePersonalSounds.setChecked(true);
+
+        mWorkPhoneRingtonePreference.setSummary(R.string.work_sound_same_as_personal);
+        mWorkNotificationRingtonePreference.setSummary(R.string.work_sound_same_as_personal);
+        mWorkAlarmRingtonePreference.setSummary(R.string.work_sound_same_as_personal);
+    }
+
+    private void disableWorkSync() {
+        if(hasManagedProfile()) {
+            Context managedProfileContext = Utils.createPackageContextAsUser(mContext, mManagedProfileId);
+            RingtoneManager.disableSyncFromParent(managedProfileContext);
+            disableWorkSyncSettings();
+        }
+    }
+
+    private void disableWorkSyncSettings() {
+        mWorkPhoneRingtonePreference.setEnabled(true);
+        mWorkNotificationRingtonePreference.setEnabled(true);
+        mWorkAlarmRingtonePreference.setEnabled(true);
+
+        updateWorkRingtoneSummaries();
+    }
+
+    private void updateWorkRingtoneSummaries() {
+        Context managedProfileContext = Utils.createPackageContextAsUser(mContext, mManagedProfileId);
+
+        mWorkPhoneRingtonePreference.setSummary(
+                updateRingtoneName(managedProfileContext, RingtoneManager.TYPE_RINGTONE));
+        mWorkNotificationRingtonePreference.setSummary(
+                updateRingtoneName(managedProfileContext, RingtoneManager.TYPE_NOTIFICATION));
+        mWorkAlarmRingtonePreference.setSummary(
+                updateRingtoneName(managedProfileContext, RingtoneManager.TYPE_ALARM));
+    }
+
+    private Context createPackageContextAsUser(int userId) {
+        try {
+            return mContext.createPackageContextAsUser(
+                    mContext.getPackageName(), 0 /* flags */, UserHandle.of(userId));
+        } catch (PackageManager.NameNotFoundException e) {
+            // Should never happen
+            Log.e(TAG, "Failed to create managed user context", e);
+        }
+        return null;
+    }
+
+    private void maybeRemoveWorkPreferences() {
+        if (mWorkPreferenceCategory == null) {
+            // No work preferences to remove
+            return;
+        }
+        getPreferenceScreen().removePreference(mWorkPreferenceCategory);
+        mWorkPreferenceCategory = null;
+        mWorkPhoneRingtonePreference = null;
+        mWorkNotificationRingtonePreference = null;
+        mWorkAlarmRingtonePreference = null;
+    }
+
+    public static class UnifyWorkDialogFragment extends DialogFragment
+            implements DialogInterface.OnClickListener {
+        private static final String TAG = "UnifyWorkDialogFragment";
+        private static final int REQUEST_CODE = 200;
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.work_sync_dialog_title)
+                    .setMessage(R.string.work_sync_dialog_message)
+                    .setPositiveButton(R.string.work_sync_dialog_yes, UnifyWorkDialogFragment.this)
+                    .setNegativeButton(android.R.string.no, null)
+                    .create();
+        }
+
+        public static void show(SoundSettings parent) {
+            FragmentManager fm = parent.getFragmentManager();
+            if (fm.findFragmentByTag(TAG) == null) {
+                UnifyWorkDialogFragment fragment = new UnifyWorkDialogFragment();
+                fragment.setTargetFragment(parent, REQUEST_CODE);
+                fragment.show(fm, TAG);
+            }
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            SoundSettings soundSettings = (SoundSettings) getTargetFragment();
+            if (soundSettings.isAdded()) {
+                soundSettings.enableWorkSync();
+            }
+        }
+    }
 }

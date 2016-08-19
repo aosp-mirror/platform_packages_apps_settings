@@ -1160,4 +1160,17 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         return false;
     }
+
+    /**
+     * Returns a context created from the given context for the given user, or null if it fails
+     */
+    public static Context createPackageContextAsUser(Context context, int userId) {
+        try {
+            return context.createPackageContextAsUser(
+                    context.getPackageName(), 0 /* flags */, UserHandle.of(userId));
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Failed to create user context", e);
+        }
+        return null;
+    }
 }
