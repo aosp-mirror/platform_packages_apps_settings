@@ -15,16 +15,17 @@
  */
 package com.android.settings.core.instrumentation;
 
-import android.support.test.filters.SmallTest;
-import android.support.test.runner.AndroidJUnit4;
+import com.android.settings.TestConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertTrue;
 
-@RunWith(AndroidJUnit4.class)
-@SmallTest
+@RunWith(RobolectricTestRunner.class)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class MetricsFactoryTest {
 
     @Test
@@ -37,8 +38,8 @@ public class MetricsFactoryTest {
     @Test
     public void factoryShouldCacheLogger() {
         MetricsFactory factory = MetricsFactory.get();
-        EventLogWriter logger1 = factory.getLogger();
-        EventLogWriter logger2 = factory.getLogger();
+        LogWriter logger1 = factory.getLogger();
+        LogWriter logger2 = factory.getLogger();
         assertTrue(logger1 == logger2);
     }
 }

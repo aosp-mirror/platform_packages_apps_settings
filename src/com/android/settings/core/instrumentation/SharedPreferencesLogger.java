@@ -12,9 +12,7 @@
  * permissions and limitations under the License.
  */
 
-package com.android.settings;
-
-import com.android.internal.logging.MetricsLogger;
+package com.android.settings.core.instrumentation;
 
 import android.annotation.Nullable;
 import android.content.ComponentName;
@@ -23,7 +21,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.util.Log;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import java.util.Map;
@@ -33,10 +31,12 @@ public class SharedPreferencesLogger implements SharedPreferences {
 
     private final String mTag;
     private final Context mContext;
+    private final LogWriter mLogWriter;
 
     public SharedPreferencesLogger(Context context, String tag) {
         mContext = context;
         mTag = tag;
+        mLogWriter = MetricsFactory.get().getLogger();
     }
 
     @Override
@@ -95,12 +95,12 @@ public class SharedPreferencesLogger implements SharedPreferences {
     }
 
     private void logValue(String key, String value) {
-        MetricsLogger.count(mContext, mTag + "/" + key + "|" + value, 1);
+        mLogWriter.count(mContext, mTag + "/" + key + "|" + value, 1);
     }
 
     private void logPackageName(String key, String value) {
-        MetricsLogger.count(mContext, mTag + "/" + key, 1);
-        MetricsLogger.action(mContext, MetricsEvent.ACTION_GENERIC_PACKAGE,
+        mLogWriter.count(mContext, mTag + "/" + key, 1);
+        mLogWriter.action(mContext, MetricsEvent.ACTION_GENERIC_PACKAGE,
                 mTag + "/" + key + "|" + value);
     }
 
