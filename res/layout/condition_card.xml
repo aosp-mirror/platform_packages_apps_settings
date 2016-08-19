@@ -103,18 +103,22 @@
 
                 <Button
                     android:id="@+id/first_action"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:paddingStart="0dp"
                     android:alpha=".8"
+                    android:textAlignment="viewStart"
                     android:textColor="?android:attr/textColorPrimaryInverse"
                     style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/second_action"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:alpha=".8"
+                    android:textAlignment="viewStart"
                     android:textColor="?android:attr/textColorPrimaryInverse"
                     style="?android:attr/buttonBarButtonStyle" />
 
