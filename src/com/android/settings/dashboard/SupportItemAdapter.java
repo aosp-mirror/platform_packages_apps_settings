@@ -20,6 +20,7 @@ import android.annotation.DrawableRes;
 import android.annotation.LayoutRes;
 import android.annotation.StringRes;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -371,6 +372,13 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             holder.text2View.setOnClickListener(mEscalationClickListener);
         } else {
             holder.text2View.setVisibility(View.GONE);
+        }
+
+        if (ActivityManager.isUserAMonkey()) {
+            holder.text1View.setVisibility(View.GONE);
+            holder.text2View.setVisibility(View.GONE);
+            spinner.setVisibility(View.GONE);
+            holder.itemView.findViewById(R.id.support_text).setVisibility(View.GONE);
         }
     }
 
