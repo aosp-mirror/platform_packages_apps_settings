@@ -44,19 +44,19 @@ public class VisibilityLoggerMixinTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        mMixin = new VisibilityLoggerMixin(new TestInstrumentable(), mLogger);
+        mMixin = new VisibilityLoggerMixin(TestInstrumentable.TEST_METRIC, mLogger);
     }
 
     @Test
     public void shouldLogVisibleOnResume() {
-        mMixin.onResume(null);
+        mMixin.onResume();
         verify(mLogger, times(1))
                 .visible(any(Context.class), eq(TestInstrumentable.TEST_METRIC));
     }
 
     @Test
     public void shouldLogHideOnPause() {
-        mMixin.onPause(null);
+        mMixin.onPause();
         verify(mLogger, times(1))
                 .hidden(any(Context.class), eq(TestInstrumentable.TEST_METRIC));
     }

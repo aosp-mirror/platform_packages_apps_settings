@@ -16,30 +16,34 @@
 
 package com.android.settings.core.instrumentation;
 
-import android.content.Context;
+import com.android.settings.core.lifecycle.LifecycleObserver;
+import com.android.settings.core.lifecycle.events.OnPause;
+import com.android.settings.core.lifecycle.events.OnResume;
 
 /**
  * Logs visibility change of a fragment.
  */
-public class VisibilityLoggerMixin {
+public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPause {
 
-    private final Instrumentable mInstrumentable;
+    private final int mMetricsCategory;
     private final LogWriter mLogWriter;
 
-    public VisibilityLoggerMixin(Instrumentable instrumentable) {
-        this(instrumentable, MetricsFactory.get().getLogger());
+    public VisibilityLoggerMixin(int metricsCategory) {
+        this(metricsCategory, MetricsFactory.get().getLogger());
     }
 
-    public VisibilityLoggerMixin(Instrumentable instrumentable, LogWriter logWriter) {
-        mInstrumentable = instrumentable;
+    public VisibilityLoggerMixin(int metricsCategory, LogWriter logWriter) {
+        mMetricsCategory = metricsCategory;
         mLogWriter = logWriter;
     }
 
-    public void onResume(Context context) {
-        mLogWriter.visible(context, mInstrumentable.getMetricsCategory());
+    @Override
+    public void onResume() {
+        mLogWriter.visible(null /* context */, mMetricsCategory);
     }
 
-    public void onPause(Context context) {
-        mLogWriter.hidden(context, mInstrumentable.getMetricsCategory());
+    @Override
+    public void onPause() {
+        mLogWriter.hidden(null /* context */, mMetricsCategory);
     }
 }

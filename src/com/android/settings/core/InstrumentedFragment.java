@@ -17,31 +17,23 @@
 package com.android.settings.core;
 
 import android.os.Bundle;
-import android.support.v14.preference.PreferenceFragment;
 
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.core.instrumentation.Instrumentable;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settings.core.lifecycle.ObservablePreferenceFragment;
 
 /**
  * Instrumented fragment that logs visibility state.
  */
-public abstract class InstrumentedFragment extends PreferenceFragment implements Instrumentable {
+public abstract class InstrumentedFragment extends ObservablePreferenceFragment
+        implements Instrumentable {
 
-    private final VisibilityLoggerMixin mVisibilityLoggerMixin = new VisibilityLoggerMixin(this);
+    public InstrumentedFragment() {
+        // Mixin that logs visibility change for activity.
+        getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
+    }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mVisibilityLoggerMixin.onResume(getActivity());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mVisibilityLoggerMixin.onPause(getActivity());
     }
 }
