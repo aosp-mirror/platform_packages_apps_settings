@@ -20,12 +20,13 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.internal.app.procstats.ProcessStats;
 import com.android.internal.app.procstats.ProcessState;
+import com.android.internal.app.procstats.ProcessStats;
 import com.android.internal.app.procstats.ServiceState;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public final class ProcStatsEntry implements Parcelable {
+
     private static final String TAG = "ProcStatsEntry";
     private static boolean DEBUG = ProcessStatsUi.DEBUG;
 
@@ -40,7 +42,7 @@ public final class ProcStatsEntry implements Parcelable {
     final int mUid;
     final String mName;
     public CharSequence mLabel;
-    final ArrayList<String> mPackages = new ArrayList<String>();
+    final ArrayList<String> mPackages = new ArrayList<>();
     final long mBgDuration;
     final long mAvgBgMem;
     final long mMaxBgMem;
@@ -52,7 +54,7 @@ public final class ProcStatsEntry implements Parcelable {
 
     String mBestTargetPackage;
 
-    ArrayMap<String, ArrayList<Service>> mServices = new ArrayMap<String, ArrayList<Service>>(1);
+    ArrayMap<String, ArrayList<Service>> mServices = new ArrayMap<>(1);
 
     public ProcStatsEntry(ProcessState proc, String packageName,
             ProcessStats.ProcessDataCollection tmpBgTotals,
@@ -248,6 +250,10 @@ public final class ProcStatsEntry implements Parcelable {
                             + subProc.mPackage + " run time " + thisRunTime
                             + " not as good as last " + bestRunTime);
                 }
+            }
+            // Final fallback, just pick the first subProc.
+            if (TextUtils.isEmpty(mBestTargetPackage)) {
+                mBestTargetPackage = subProcs.get(0).mPackage;
             }
         } else if (subProcs.size() == 1) {
             mBestTargetPackage = subProcs.get(0).mPackage;
