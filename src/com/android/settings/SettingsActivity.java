@@ -478,6 +478,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
 
         mSearchMenuItem.setOnActionExpandListener(this);
+        mSearchView.setMaxWidth(Integer.MAX_VALUE);
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setOnCloseListener(this);
 
