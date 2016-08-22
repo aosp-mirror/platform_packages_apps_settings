@@ -18,9 +18,6 @@ LOCAL_JAVA_LIBRARIES := \
 LOCAL_APK_LIBRARIES = Settings
 LOCAL_MODULE := SettingsRoboTests
 
-# TODO: Remove when this target builds with checkbuild
-LOCAL_DONT_CHECK_MODULE := true
-
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_STATIC_JAVA_LIBRARY)
@@ -31,9 +28,6 @@ include $(BUILD_STATIC_JAVA_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := RunSettingsRoboTests
-
-# TODO: Remove when this target builds with checkbuild
-LOCAL_DONT_CHECK_MODULE := true
 
 LOCAL_SDK_VERSION := current
 
