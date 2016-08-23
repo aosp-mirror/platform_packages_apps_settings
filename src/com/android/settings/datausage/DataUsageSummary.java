@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.INetworkStatsSession;
-import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.net.TrafficStats;
 import android.os.Bundle;
@@ -71,6 +70,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
 
     private DataUsageController mDataUsageController;
+    private DataUsageInfoController mDataInfoControler;
     private SummaryPreference mSummaryPreference;
     private Preference mLimitPreference;
     private NetworkTemplate mDefaultTemplate;
@@ -82,6 +82,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
 
         boolean hasMobileData = hasMobileData(getContext());
         mDataUsageController = new DataUsageController(getContext());
+        mDataInfoControler = new DataUsageInfoController();
         addPreferencesFromResource(R.xml.data_usage);
 
         int defaultSubId = getDefaultSubscriptionId(getContext());
@@ -225,18 +226,14 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 mDefaultTemplate);
         Context context = getContext();
-        NetworkPolicy policy = services.mPolicyEditor.getPolicy(mDefaultTemplate);
-        info.warningLevel = policy.warningBytes;
+
+        mDataInfoControler.updateDataLimit(info,
+                services.mPolicyEditor.getPolicy(mDefaultTemplate));
+
         if (mSummaryPreference != null) {
             mSummaryPreference.setTitle(
                     formatTitle(context, getString(mDataUsageTemplate), info.usageLevel));
-            long limit = info.limitLevel;
-            if (limit <= 0) {
-                limit = info.warningLevel;
-            }
-            if (info.usageLevel > limit) {
-                limit = info.usageLevel;
-            }
+            long limit = mDataInfoControler.getSummaryLimit(info);
             mSummaryPreference.setSummary(info.period);
             mSummaryPreference.setLabels(Formatter.formatFileSize(context, 0),
                     Formatter.formatFileSize(context, limit));
