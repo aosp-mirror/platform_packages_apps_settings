@@ -23,6 +23,8 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
+import android.view.ViewStub.OnInflateListener;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -53,10 +55,13 @@ public class PreviewPagerAdapter extends PagerAdapter {
 
     private int mAnimationCounter;
 
+    private boolean[][] mViewStubInflated;
+
     public PreviewPagerAdapter(Context context, boolean isLayoutRtl,
             int[] previewSampleResIds, Configuration[] configurations) {
         mIsLayoutRtl = isLayoutRtl;
         mPreviewFrames = new FrameLayout[previewSampleResIds.length];
+        mViewStubInflated = new boolean[previewSampleResIds.length][configurations.length];
 
         for (int i = 0; i < previewSampleResIds.length; ++i) {
             int p = mIsLayoutRtl ? previewSampleResIds.length - 1 - i : i;
@@ -65,18 +70,25 @@ public class PreviewPagerAdapter extends PagerAdapter {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT));
 
-            for (Configuration configuration : configurations) {
+            for (int j = 0; j < configurations.length; ++j) {
                 // Create a new configuration for the specified value. It won't
                 // have any theme set, so manually apply the current theme.
-                final Context configContext = context.createConfigurationContext(configuration);
+                final Context configContext = context.createConfigurationContext(configurations[j]);
                 configContext.setTheme(context.getThemeResId());
 
                 final LayoutInflater configInflater = LayoutInflater.from(configContext);
-                final View sampleView = configInflater.inflate(previewSampleResIds[i],
-                        mPreviewFrames[p], false);
-                sampleView.setAlpha(0);
-                sampleView.setVisibility(View.INVISIBLE);
-                mPreviewFrames[p].addView(sampleView);
+                final ViewStub sampleViewStub = new ViewStub(configContext);
+                sampleViewStub.setLayoutResource(previewSampleResIds[i]);
+                final int fi = i, fj = j;
+                sampleViewStub.setOnInflateListener(new OnInflateListener() {
+                    @Override
+                    public void onInflate(ViewStub stub, View inflated) {
+                        inflated.setVisibility(stub.getVisibility());
+                        mViewStubInflated[fi][fj] = true;
+                    }
+                });
+
+                mPreviewFrames[p].addView(sampleViewStub);
             }
         }
     }
@@ -110,44 +122,71 @@ public class PreviewPagerAdapter extends PagerAdapter {
         mAnimationEndAction = action;
     }
 
-    void setPreviewLayer(int newIndex, int currentIndex, int currentItem, boolean animate) {
+    void setPreviewLayer(int newLayerIndex, int currentLayerIndex, int currentFrameIndex,
+            final boolean animate) {
         for (FrameLayout previewFrame : mPreviewFrames) {
-            if (currentIndex >= 0) {
-                final View lastLayer = previewFrame.getChildAt(currentIndex);
-                if (animate && previewFrame == mPreviewFrames[currentItem]) {
-                    lastLayer.animate()
-                            .alpha(0)
-                            .setInterpolator(FADE_OUT_INTERPOLATOR)
-                            .setDuration(CROSS_FADE_DURATION_MS)
-                            .setListener(new PreviewFrameAnimatorListener())
-                            .withEndAction(new Runnable() {
-                                @Override
-                                public void run() {
-                                    lastLayer.setVisibility(View.INVISIBLE);
-                                }
-                            });
-                } else {
-                    lastLayer.setAlpha(0);
-                    lastLayer.setVisibility(View.INVISIBLE);
+            if (currentLayerIndex >= 0) {
+                final View lastLayer = previewFrame.getChildAt(currentLayerIndex);
+                if (mViewStubInflated[currentFrameIndex][currentLayerIndex]) {
+                    // Explicitly set to INVISIBLE only when the stub has
+                    // already been inflated.
+                    if (previewFrame == mPreviewFrames[currentFrameIndex]) {
+                        setVisibility(lastLayer, View.INVISIBLE, animate);
+                    } else {
+                        setVisibility(lastLayer, View.INVISIBLE, false);
+                    }
                 }
             }
 
-            final View nextLayer = previewFrame.getChildAt(newIndex);
-            if (animate && previewFrame == mPreviewFrames[currentItem]) {
-                nextLayer.animate()
-                        .alpha(1)
-                        .setInterpolator(FADE_IN_INTERPOLATOR)
-                        .setDuration(CROSS_FADE_DURATION_MS)
-                        .setListener(new PreviewFrameAnimatorListener())
-                        .withStartAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                nextLayer.setVisibility(View.VISIBLE);
-                            }
-                        });
+            // Set next layer visible, as well as inflate necessary views.
+            View nextLayer = previewFrame.getChildAt(newLayerIndex);
+            if (previewFrame == mPreviewFrames[currentFrameIndex]) {
+                // Inflate immediately if the stub has not yet been inflated.
+                if (!mViewStubInflated[currentFrameIndex][newLayerIndex]) {
+                    nextLayer = ((ViewStub) nextLayer).inflate();
+                    nextLayer.setAlpha(0.0f);
+                }
+                setVisibility(nextLayer, View.VISIBLE, animate);
             } else {
-                nextLayer.setVisibility(View.VISIBLE);
-                nextLayer.setAlpha(1);
+                setVisibility(nextLayer, View.VISIBLE, false);
+            }
+        }
+    }
+
+    private void setVisibility(final View view, final int visibility, boolean animate) {
+        final float alpha = (visibility == View.VISIBLE ? 1.0f : 0.0f);
+        if (!animate) {
+            view.setAlpha(alpha);
+            view.setVisibility(visibility);
+        } else {
+            final Interpolator interpolator = (visibility == View.VISIBLE ? FADE_IN_INTERPOLATOR
+                    : FADE_OUT_INTERPOLATOR);
+            if (visibility == View.VISIBLE) {
+                // Fade in animation.
+                view.animate()
+                .alpha(alpha)
+                .setInterpolator(FADE_IN_INTERPOLATOR)
+                .setDuration(CROSS_FADE_DURATION_MS)
+                .setListener(new PreviewFrameAnimatorListener())
+                .withStartAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.setVisibility(visibility);
+                    }
+                });
+            } else {
+                // Fade out animation.
+                view.animate()
+                .alpha(alpha)
+                .setInterpolator(FADE_OUT_INTERPOLATOR)
+                .setDuration(CROSS_FADE_DURATION_MS)
+                .setListener(new PreviewFrameAnimatorListener())
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.setVisibility(visibility);
+                    }
+                });
             }
         }
     }
