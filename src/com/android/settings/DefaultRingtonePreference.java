@@ -31,7 +31,7 @@ public class DefaultRingtonePreference extends RingtonePreference {
     private static final String TAG = "DefaultRingtonePreference";
 
     private int mUserId;
-    private Context mUserContext;
+    protected Context mUserContext;
 
     public DefaultRingtonePreference(Context context, AttributeSet attrs) {
         super(context, attrs);

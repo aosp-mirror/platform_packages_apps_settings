@@ -17,11 +17,13 @@ package com.android.settings.notification;
 
 import android.app.INotificationManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -141,6 +143,35 @@ public class NotificationBackend {
         }
     }
 
+    public NotificationChannel getChannel(String pkg, int uid, String channelId) {
+        if (channelId == null) {
+            return null;
+        }
+        try {
+            return sINM.getNotificationChannelForPackage(pkg, uid, channelId);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return null;
+        }
+    }
+
+    public ParceledListSlice<NotificationChannel> getChannels(String pkg, int uid) {
+        try {
+            return sINM.getNotificationChannelsForPackage(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return ParceledListSlice.emptyList();
+        }
+    }
+
+    public void updateChannel(String pkg, int uid, NotificationChannel channel) {
+        try {
+            sINM.updateNotificationChannelForPackage(pkg, uid, channel);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
     static class Row {
         public String section;
     }
@@ -158,5 +189,9 @@ public class NotificationBackend {
         public boolean appBypassDnd;
         public int appVisOverride;
         public boolean lockScreenSecure;
+    }
+
+    public static class ChannelRow extends AppRow {
+        public NotificationChannel channel;
     }
 }
