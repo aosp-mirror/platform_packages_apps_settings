@@ -20,6 +20,7 @@
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout="@layout/suw_glif_blank_template"
     style="?attr/fingerprint_layout_theme">
 
     <LinearLayout
@@ -33,39 +34,62 @@
 
         <!-- Both texts are kept as separate text views so it doesn't jump around in portrait.
              See layouts/fingerprint_enroll_enrolling_base.xml. -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_marginStart="?attr/suwMarginSides"
+            android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/suw_layout_icon"
+                style="@style/SuwGlifIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:src="@drawable/ic_lock" />
 
             <TextView
-                style="@style/TextAppearance.FingerprintMessage"
-                android:id="@+id/start_message"
+                android:id="@+id/suw_layout_title"
+                style="@style/SuwGlifHeaderTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="@string/security_settings_fingerprint_enroll_start_message"/>
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp" />
 
-            <TextView
-                style="@style/TextAppearance.FingerprintMessage"
-                android:id="@+id/repeat_message"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:text="@string/security_settings_fingerprint_enroll_repeat_message"
-                android:visibility="invisible"/>
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/TextAppearance.FingerprintMessage"
+                    android:id="@+id/start_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/security_settings_fingerprint_enroll_start_message"/>
+
+                <TextView
+                    style="@style/TextAppearance.FingerprintMessage"
+                    android:id="@+id/repeat_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/security_settings_fingerprint_enroll_repeat_message"
+                    android:visibility="invisible"/>
+
+            </FrameLayout>
 
             <Button
                 android:id="@+id/skip_button"
                 style="@style/SetupWizardButton.Negative"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/skip_label"
                 android:visibility="gone" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <FrameLayout
             android:layout_width="0dp"
@@ -84,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_gravity="center_horizontal|bottom"
+                android:accessibilityLiveRegion="polite"
                 android:visibility="invisible"/>
 
         </FrameLayout>
