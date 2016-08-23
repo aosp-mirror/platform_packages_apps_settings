@@ -29,6 +29,7 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import java.util.ArrayList;
 
+import static android.net.NetworkPolicyManager.POLICY_ALLOW_METERED_BACKGROUND;
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
@@ -83,15 +84,8 @@ public class DataSaverBackend {
 
     public void setIsWhitelisted(int uid, String packageName, boolean whitelisted) {
         mWhitelist.put(uid, whitelisted);
-        try {
-            if (whitelisted) {
-                mIPolicyManager.addRestrictBackgroundWhitelistedUid(uid);
-            } else {
-                mIPolicyManager.removeRestrictBackgroundWhitelistedUid(uid);
-            }
-        } catch (RemoteException e) {
-            Log.w(TAG, "Can't reach policy manager", e);
-        }
+        mPolicyManager.setUidPolicy(uid,
+                whitelisted ? POLICY_ALLOW_METERED_BACKGROUND : POLICY_NONE);
         if (whitelisted) {
             MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_WHITELIST, packageName);
         }
@@ -119,11 +113,8 @@ public class DataSaverBackend {
 
     private void loadWhitelist() {
         mWhitelist = new SparseBooleanArray();
-        try {
-            for (int uid : mIPolicyManager.getRestrictBackgroundWhitelistedUids()) {
-                mWhitelist.put(uid, true);
-            }
-        } catch (RemoteException e) {
+        for (int uid : mPolicyManager.getUidsWithPolicy(POLICY_ALLOW_METERED_BACKGROUND)) {
+            mWhitelist.put(uid, true);
         }
     }
 
