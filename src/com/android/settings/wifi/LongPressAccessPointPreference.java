@@ -17,21 +17,8 @@ package com.android.settings.wifi;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
-import android.net.wifi.WifiConfiguration;
-import android.os.Looper;
-import android.os.UserHandle;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.SparseArray;
-import android.view.View;
-import android.widget.TextView;
-
-import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 
@@ -48,6 +35,12 @@ public class LongPressAccessPointPreference extends AccessPointPreference {
     public LongPressAccessPointPreference(AccessPoint accessPoint, Context context,
             UserBadgeCache cache, boolean forSavedNetworks, Fragment fragment) {
         super(accessPoint, context, cache, forSavedNetworks);
+        mFragment = fragment;
+    }
+
+    public LongPressAccessPointPreference(AccessPoint accessPoint, Context context,
+            UserBadgeCache cache, boolean forSavedNetworks, int iconResId, Fragment fragment) {
+        super(accessPoint, context, cache, iconResId, forSavedNetworks);
         mFragment = fragment;
     }
 
