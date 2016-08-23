@@ -22,8 +22,10 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -74,6 +76,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     protected static final int DLG_BASE = 0;
 
     protected boolean mFinishing;
+    protected boolean mListeningToPackageRemove;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         mUsbManager = IUsbManager.Stub.asInterface(b);
 
         retrieveAppEntry();
+        startListeningToPackageRemove();
     }
 
     @Override
@@ -114,6 +118,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
 
     @Override
     public void onDestroy() {
+        stopListeningToPackageRemove();
         mSession.release();
         super.onDestroy();
     }
@@ -246,4 +251,37 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
             return dialogFragment;
         }
     }
+
+    protected void startListeningToPackageRemove() {
+        if (mListeningToPackageRemove) {
+            return;
+        }
+        mListeningToPackageRemove = true;
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addDataScheme("package");
+        getContext().registerReceiver(mPackageRemovedReceiver, filter);
+    }
+
+    protected void stopListeningToPackageRemove() {
+        if (!mListeningToPackageRemove) {
+            return;
+        }
+        mListeningToPackageRemove = false;
+        getContext().unregisterReceiver(mPackageRemovedReceiver);
+    }
+
+    protected void onPackageRemoved() {
+        getActivity().finishAndRemoveTask();
+    }
+
+    protected final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String packageName = intent.getData().getSchemeSpecificPart();
+            if (!mFinishing && mAppEntry.info.packageName.equals(packageName)) {
+                onPackageRemoved();
+            }
+        }
+    };
+
 }
