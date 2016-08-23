@@ -587,6 +587,8 @@ public class ApnEditor extends SettingsPreferenceFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.setOnKeyListener(this);
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
     }
 
     public boolean onKey(View v, int keyCode, KeyEvent event) {
