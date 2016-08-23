@@ -189,7 +189,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 (TrustManager) getActivity().getSystemService(Context.TRUST_SERVICE);
             trustManager.setDeviceLockedForUser(mEffectiveUserId, false);
             authenticationSucceeded();
-            authenticationSucceeded();
             checkForPendingIntent();
         }
     }
