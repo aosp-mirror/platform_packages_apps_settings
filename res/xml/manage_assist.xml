@@ -33,6 +33,7 @@
 
     <SwitchPreference
         android:key="screenshot"
+        android:dependency="context"
         android:title="@string/assist_access_screenshot_title"
         android:summary="@string/assist_access_screenshot_summary"/>
 
