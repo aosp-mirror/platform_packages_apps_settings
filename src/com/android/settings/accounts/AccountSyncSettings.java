@@ -28,9 +28,12 @@ import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.content.pm.UserInfo;
 import android.os.Binder;
@@ -58,7 +61,6 @@ import com.android.settingslib.RestrictedLockUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -73,6 +75,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private static final int REALLY_REMOVE_DIALOG = 100;
     private static final int FAILED_REMOVAL_DIALOG = 101;
     private static final int CANT_DO_ONETIME_SYNC_DIALOG = 102;
+
     private TextView mUserId;
     private TextView mProviderId;
     private ImageView mProviderIcon;
@@ -234,13 +237,15 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         mAuthenticatorHelper.stopListeningToAccountUpdates();
     }
 
-    private void addSyncStateSwitch(Account account, String authority) {
+    private void addSyncStateSwitch(Account account, String authority,
+            String packageName, int uid) {
         SyncStateSwitchPreference item = (SyncStateSwitchPreference) getCachedPreference(authority);
         if (item == null) {
-            item = new SyncStateSwitchPreference(getPrefContext(), account, authority);
+            item = new SyncStateSwitchPreference(getPrefContext(), account, authority,
+                    packageName, uid);
             getPreferenceScreen().addPreference(item);
         } else {
-            item.setup(account, authority);
+            item.setup(account, authority, packageName, uid);
         }
         item.setPersistent(false);
         final ProviderInfo providerInfo = getPackageManager().resolveContentProviderAsUser(
@@ -323,20 +328,56 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            final int uid = requestCode;
+            final int count = getPreferenceScreen().getPreferenceCount();
+            for (int i = 0; i < count; i++) {
+                Preference preference = getPreferenceScreen().getPreference(i);
+                if (preference instanceof SyncStateSwitchPreference) {
+                    SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) preference;
+                    if (syncPref.getUid() == uid) {
+                        onPreferenceTreeClick(syncPref);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (getActivity() == null) {
+            return false;
+        }
         if (preference instanceof SyncStateSwitchPreference) {
             SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) preference;
             String authority = syncPref.getAuthority();
             Account account = syncPref.getAccount();
             final int userId = mUserHandle.getIdentifier();
+            String packageName = syncPref.getPackageName();
+
             boolean syncAutomatically = ContentResolver.getSyncAutomaticallyAsUser(account,
                     authority, userId);
             if (syncPref.isOneTimeSyncMode()) {
+                // If the sync adapter doesn't have access to the account we either
+                // request access by starting an activity if possible or kick off the
+                // sync which will end up posting an access request notification.
+                if (requestAccountAccessIfNeeded(packageName)) {
+                    return true;
+                }
                 requestOrCancelSync(account, authority, true);
             } else {
                 boolean syncOn = syncPref.isChecked();
                 boolean oldSyncState = syncAutomatically;
                 if (syncOn != oldSyncState) {
+                    // Toggling this switch triggers sync but we may need a user approval.
+                    // If the sync adapter doesn't have access to the account we either
+                    // request access by starting an activity if possible or kick off the
+                    // sync which will end up posting an access request notification.
+                    if (syncOn && requestAccountAccessIfNeeded(packageName)) {
+                        return true;
+                    }
                     // if we're enabling sync, this will request a sync as well
                     ContentResolver.setSyncAutomaticallyAsUser(account, authority, syncOn, userId);
                     // if the master sync switch is off, the request above will
@@ -351,6 +392,36 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         } else {
             return super.onPreferenceTreeClick(preference);
         }
+    }
+
+    private boolean requestAccountAccessIfNeeded(String packageName) {
+        if (packageName == null) {
+            return false;
+        }
+
+        final int uid;
+        try {
+            uid = getContext().getPackageManager().getPackageUidAsUser(
+                    packageName, mUserHandle.getIdentifier());
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Invalid sync ", e);
+            return false;
+        }
+
+        AccountManager accountManager = getContext().getSystemService(AccountManager.class);
+        if (!accountManager.hasAccountAccess(mAccount, packageName, mUserHandle)) {
+            IntentSender intent = accountManager.createRequestAccountAccessIntentSenderAsUser(
+                    mAccount, packageName, mUserHandle);
+            if (intent != null) {
+                try {
+                    startIntentSenderForResult(intent, uid, null, 0, 0, 0, null);
+                    return true;
+                } catch (IntentSender.SendIntentException e) {
+                    Log.e(TAG, "Error requesting account access", e);
+                }
+            }
+        }
+        return false;
     }
 
     private void startSyncForEnabledProviders() {
@@ -520,7 +591,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
         SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(
                 mUserHandle.getIdentifier());
-        ArrayList<String> authorities = new ArrayList<String>();
+        ArrayList<SyncAdapterType> authorities = new ArrayList<>();
         for (int i = 0, n = syncAdapters.length; i < n; i++) {
             final SyncAdapterType sa = syncAdapters[i];
             // Only keep track of sync adapters for this account
@@ -530,7 +601,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                     Log.d(TAG, "updateAccountSwitches: added authority " + sa.authority
                             + " to accountType " + sa.accountType);
                 }
-                authorities.add(sa.authority);
+                authorities.add(sa);
             } else {
                 // keep track of invisible sync adapters, so sync now forces
                 // them to sync as well.
@@ -543,15 +614,23 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         }
         cacheRemoveAllPrefs(getPreferenceScreen());
         for (int j = 0, m = authorities.size(); j < m; j++) {
-            final String authority = authorities.get(j);
+            final SyncAdapterType syncAdapter = authorities.get(j);
             // We could check services here....
-            int syncState = ContentResolver.getIsSyncableAsUser(mAccount, authority,
+            int syncState = ContentResolver.getIsSyncableAsUser(mAccount, syncAdapter.authority,
                     mUserHandle.getIdentifier());
             if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                Log.d(TAG, "  found authority " + authority + " " + syncState);
+                Log.d(TAG, "  found authority " + syncAdapter.authority + " " + syncState);
             }
             if (syncState > 0) {
-                addSyncStateSwitch(mAccount, authority);
+                final int uid;
+                try {
+                    uid = getContext().getPackageManager().getPackageUidAsUser(
+                            syncAdapter.getPackageName(), mUserHandle.getIdentifier());
+                    addSyncStateSwitch(mAccount, syncAdapter.authority,
+                            syncAdapter.getPackageName(), uid);
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.e(TAG, "No uid for package" + syncAdapter.getPackageName(), e);
+                }
             }
         }
         removeCachedPrefs(getPreferenceScreen());
