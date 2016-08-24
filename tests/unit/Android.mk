@@ -9,7 +9,7 @@ LOCAL_JAVA_LIBRARIES := android.test.runner
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-test \
-    mockito-target \
+    mockito-target-minus-junit4 \
     espresso-core
 
 # Include all test java files.
