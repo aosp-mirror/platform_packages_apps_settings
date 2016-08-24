@@ -41,7 +41,7 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardSummary extends InstrumentedFragment
@@ -73,8 +73,8 @@ public class DashboardSummary extends InstrumentedFragment
     private SuggestionParser mSuggestionParser;
     private LinearLayoutManager mLayoutManager;
     private SuggestionsChecks mSuggestionsChecks;
-    private HashSet<String> mSuggestionsShownLogged;
-    private HashSet<String> mSuggestionsHiddenLogged;
+    private ArrayList<String> mSuggestionsShownLogged;
+    private ArrayList<String> mSuggestionsHiddenLogged;
 
     @Override
     public int getMetricsCategory() {
@@ -95,13 +95,13 @@ public class DashboardSummary extends InstrumentedFragment
                 context.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
         mSuggestionsChecks = new SuggestionsChecks(getContext());
         if (savedInstanceState == null) {
-            mSuggestionsShownLogged = new HashSet();
-            mSuggestionsHiddenLogged = new HashSet();
+            mSuggestionsShownLogged = new ArrayList<>();
+            mSuggestionsHiddenLogged = new ArrayList<>();
         } else {
             mSuggestionsShownLogged =
-                    (HashSet) savedInstanceState.getSerializable(EXTRA_SUGGESTION_SHOWN_LOGGED);
+                    savedInstanceState.getStringArrayList(EXTRA_SUGGESTION_SHOWN_LOGGED);
             mSuggestionsHiddenLogged =
-                    (HashSet) savedInstanceState.getSerializable(EXTRA_SUGGESTION_HIDDEN_LOGGED);
+                    savedInstanceState.getStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED);
         }
         if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                 + " ms");
@@ -182,8 +182,8 @@ public class DashboardSummary extends InstrumentedFragment
         if (mAdapter != null) {
             mAdapter.onSaveInstanceState(outState);
         }
-        outState.putSerializable(EXTRA_SUGGESTION_HIDDEN_LOGGED, mSuggestionsHiddenLogged);
-        outState.putSerializable(EXTRA_SUGGESTION_SHOWN_LOGGED, mSuggestionsShownLogged);
+        outState.putStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED, mSuggestionsHiddenLogged);
+        outState.putStringArrayList(EXTRA_SUGGESTION_SHOWN_LOGGED, mSuggestionsShownLogged);
     }
 
     @Override
