@@ -224,6 +224,7 @@ public class UserSettings extends SettingsPreferenceFragment
             mMePreference.setSummary(R.string.user_admin);
         }
         mAddUser = (DimmableIconPreference) findPreference(KEY_ADD_USER);
+        mAddUser.useAdminDisabledSummary(false);
         // Determine if add user/profile button should be visible
         if (mUserCaps.mCanAddUser && Utils.isDeviceProvisioned(getActivity())) {
             mAddUser.setOnPreferenceClickListener(this);
