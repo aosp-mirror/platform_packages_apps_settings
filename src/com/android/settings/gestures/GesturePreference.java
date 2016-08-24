@@ -185,6 +185,12 @@ public final class GesturePreference extends SwitchPreference implements
         Loader<Bitmap> loader = manager.initLoader(id, Bundle.EMPTY, this);
     }
 
+    void onViewVisible() {
+        if (mVideoReady && mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
+            mMediaPlayer.seekTo(0);
+        }
+    }
+
     private static final class PreviewRetriever extends AsyncLoader<Bitmap> {
         private Uri mVideoPath;
 
