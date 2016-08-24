@@ -1035,7 +1035,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void updateOemUnlockOptions() {
         if (mEnableOemUnlock != null) {
-            updateSwitchPreference(mEnableOemUnlock, isBootloaderUnlocked());
+            updateSwitchPreference(mEnableOemUnlock, Utils.isOemUnlockEnabled(getActivity()));
             updateOemUnlockSettingDescription();
             // Showing mEnableOemUnlock preference as device has persistent data block.
             mEnableOemUnlock.setDisabledByAdmin(null);
