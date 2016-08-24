@@ -58,7 +58,8 @@ public class ZonePicker extends ListFragment implements Instrumentable {
 
     private static final int MENU_TIMEZONE = Menu.FIRST+1;
     private static final int MENU_ALPHABETICAL = Menu.FIRST;
-    private final VisibilityLoggerMixin mVisibilityLoggerMixin = new VisibilityLoggerMixin(this);
+    private final VisibilityLoggerMixin mVisibilityLoggerMixin =
+            new VisibilityLoggerMixin(getMetricsCategory());
 
     private boolean mSortedByTimezone;
 
@@ -185,7 +186,7 @@ public class ZonePicker extends ListFragment implements Instrumentable {
     @Override
     public void onResume() {
         super.onResume();
-        mVisibilityLoggerMixin.onResume(getActivity());
+        mVisibilityLoggerMixin.onResume();
     }
 
     @Override
@@ -242,7 +243,7 @@ public class ZonePicker extends ListFragment implements Instrumentable {
     @Override
     public void onPause() {
         super.onPause();
-        mVisibilityLoggerMixin.onPause(getActivity());
+        mVisibilityLoggerMixin.onPause();
     }
 
     private static class MyComparator implements Comparator<Map<?, ?>> {

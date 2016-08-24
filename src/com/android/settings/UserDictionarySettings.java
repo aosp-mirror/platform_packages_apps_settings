@@ -70,7 +70,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
     private static final int OPTIONS_MENU_ADD = Menu.FIRST;
 
     private final VisibilityLoggerMixin mVisibilityLoggerMixin =
-            new VisibilityLoggerMixin(this);
+            new VisibilityLoggerMixin(getMetricsCategory());
 
     private Cursor mCursor;
     protected String mLocale;
@@ -128,7 +128,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
     @Override
     public void onResume() {
         super.onResume();
-        mVisibilityLoggerMixin.onResume(getActivity());
+        mVisibilityLoggerMixin.onResume();
     }
 
     private Cursor createCursor(final String locale) {
@@ -192,7 +192,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
     @Override
     public void onPause() {
         super.onPause();
-        mVisibilityLoggerMixin.onPause(getActivity());
+        mVisibilityLoggerMixin.onPause();
     }
 
     /**

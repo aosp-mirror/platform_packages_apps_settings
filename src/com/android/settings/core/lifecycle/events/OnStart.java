@@ -13,21 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.android.settings.core.lifecycle.events;
 
-package com.android.settings.core;
+public interface OnStart {
 
-import com.android.settings.core.instrumentation.Instrumentable;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settings.core.lifecycle.ObservableActivity;
-
-/**
- * Instrumented activity that logs visibility state.
- */
-public abstract class InstrumentedActivity extends ObservableActivity implements Instrumentable {
-
-    public InstrumentedActivity() {
-        // Mixin that logs visibility change for activity.
-        getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
-    }
-
+    void onStart();
 }

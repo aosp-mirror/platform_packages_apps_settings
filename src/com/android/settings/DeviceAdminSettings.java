@@ -64,7 +64,7 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
     static final String TAG = "DeviceAdminSettings";
 
     private final VisibilityLoggerMixin mVisibilityLoggerMixin =
-            new VisibilityLoggerMixin(this);
+            new VisibilityLoggerMixin(getMetricsCategory());
     private DevicePolicyManager mDPM;
     private UserManager mUm;
 
@@ -135,7 +135,7 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
     public void onResume() {
         super.onResume();
         final Activity activity = getActivity();
-        mVisibilityLoggerMixin.onResume(activity);
+        mVisibilityLoggerMixin.onResume();
         IntentFilter filter = new IntentFilter();
         filter.addAction(DevicePolicyManager.ACTION_DEVICE_POLICY_MANAGER_STATE_CHANGED);
         activity.registerReceiverAsUser(
@@ -158,7 +158,7 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
     public void onPause() {
         final Activity activity = getActivity();
         activity.unregisterReceiver(mBroadcastReceiver);
-        mVisibilityLoggerMixin.onPause(activity);
+        mVisibilityLoggerMixin.onPause();
         super.onPause();
     }
 
