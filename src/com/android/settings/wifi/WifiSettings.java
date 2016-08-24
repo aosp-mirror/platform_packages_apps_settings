@@ -42,6 +42,7 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Spannable;
+import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -54,6 +55,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
@@ -612,7 +614,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                 // AccessPoints are automatically sorted with TreeSet.
                 final Collection<AccessPoint> accessPoints =
                         mWifiTracker.getAccessPoints();
-                getPreferenceScreen().removeAll();
 
                 boolean hasAvailableAccessPoints = false;
                 int index = 0;
@@ -621,6 +622,9 @@ public class WifiSettings extends RestrictedSettingsFragment
                     // Ignore access points that are out of range.
                     if (accessPoint.getLevel() != -1) {
                         String key = accessPoint.getBssid();
+                        if (TextUtils.isEmpty(key)) {
+                            key = accessPoint.getSsidStr();
+                        }
                         hasAvailableAccessPoints = true;
                         LongPressAccessPointPreference pref = (LongPressAccessPointPreference)
                                 getCachedPreference(key);
