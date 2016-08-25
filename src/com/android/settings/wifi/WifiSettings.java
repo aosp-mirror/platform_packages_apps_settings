@@ -56,6 +56,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
@@ -73,6 +74,7 @@ import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiStatusTracker;
 import com.android.settingslib.wifi.WifiTracker;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
