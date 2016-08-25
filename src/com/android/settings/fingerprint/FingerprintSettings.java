@@ -357,6 +357,7 @@ public class FingerprintSettings extends SubSettings {
                 pref.setTitle(item.getName());
                 pref.setFingerprint(item);
                 pref.setPersistent(false);
+                pref.setIcon(R.drawable.ic_fingerprint_24dp);
                 root.addPreference(pref);
                 pref.setOnPreferenceChangeListener(this);
             }
@@ -717,15 +718,15 @@ public class FingerprintSettings extends SubSettings {
             super(context, attrs, defStyleAttr, defStyleRes);
         }
         public FingerprintPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-            this(context, attrs, defStyleAttr, 0);
+            super(context, attrs, defStyleAttr);
         }
 
         public FingerprintPreference(Context context, AttributeSet attrs) {
-            this(context, attrs, com.android.internal.R.attr.preferenceStyle);
+            super(context, attrs);
         }
 
         public FingerprintPreference(Context context) {
-            this(context, null);
+            super(context);
         }
 
         public View getView() { return mView; }
