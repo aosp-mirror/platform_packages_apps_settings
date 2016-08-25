@@ -899,6 +899,9 @@ public class ChooseLockPassword extends SettingsActivity {
 
             @Override
             public void handleMessage(Message msg) {
+                if (getActivity() == null) {
+                    return;
+                }
                 if (msg.what == ON_TEXT_CHANGED) {
                     updateUi();
                 }
