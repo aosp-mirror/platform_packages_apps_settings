@@ -18,7 +18,6 @@ package com.android.settings.support;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,14 +27,15 @@ import android.widget.TextView;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.util.Locale;
 
 /**
  * A dialog fragment that displays support phone numbers.
  */
-public final class SupportPhoneDialogFragment extends DialogFragment implements
-        View.OnClickListener {
+public final class SupportPhoneDialogFragment extends InstrumentedDialogFragment
+        implements View.OnClickListener {
 
     public static final String TAG = "SupportPhoneDialog";
     private static final String EXTRA_PHONE = "extra_phone";
@@ -81,5 +81,10 @@ public final class SupportPhoneDialogFragment extends DialogFragment implements
             getActivity().startActivity(intent);
         }
         dismiss();
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_SUPPORT_PHONE;
     }
 }

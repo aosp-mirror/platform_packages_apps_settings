@@ -20,7 +20,6 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.admin.DevicePolicyManager;
@@ -45,6 +44,7 @@ import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
@@ -833,7 +833,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             dialog.show(getChildFragmentManager(), TAG_FRP_WARNING_DIALOG);
         }
 
-        public static class FactoryResetProtectionWarningDialog extends DialogFragment {
+        public static class FactoryResetProtectionWarningDialog extends InstrumentedDialogFragment {
 
             private static final String ARG_TITLE_RES = "titleRes";
             private static final String ARG_MESSAGE_RES = "messageRes";
@@ -885,6 +885,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                                 }
                         )
                         .create();
+            }
+
+            @Override
+            public int getMetricsCategory() {
+                return MetricsEvent.DIALOG_FRP;
             }
         }
     }

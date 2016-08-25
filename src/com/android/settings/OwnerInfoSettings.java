@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -29,9 +28,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
-public class OwnerInfoSettings extends DialogFragment implements OnClickListener {
+public class OwnerInfoSettings extends InstrumentedDialogFragment implements OnClickListener {
 
     private static final String TAG_OWNER_INFO = "ownerInfo";
 
@@ -87,5 +88,10 @@ public class OwnerInfoSettings extends DialogFragment implements OnClickListener
         final OwnerInfoSettings dialog = new OwnerInfoSettings();
         dialog.setTargetFragment(parent, 0);
         dialog.show(parent.getFragmentManager(), TAG_OWNER_INFO);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_OWNER_INFO_SETTINGS;
     }
 }
