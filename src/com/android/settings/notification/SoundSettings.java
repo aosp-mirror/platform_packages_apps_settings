@@ -478,37 +478,8 @@ public class SoundSettings extends SettingsPreferenceFragment
             return null;
         }
         Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(context, type);
-        CharSequence summary = context.getString(com.android.internal.R.string.ringtone_unknown);
-        // Is it a silent ringtone?
-        if (ringtoneUri == null) {
-            summary = context.getString(com.android.internal.R.string.ringtone_silent);
-        } else {
-            Cursor cursor = null;
-            try {
-                if (MediaStore.AUTHORITY.equals(getUriWithoutUserId(ringtoneUri).getAuthority())) {
-                    // Fetch the ringtone title from the media provider
-                    cursor = context.getContentResolver().query(ringtoneUri,
-                            new String[] { MediaStore.Audio.Media.TITLE }, null, null, null);
-                } else if (ContentResolver.SCHEME_CONTENT.equals(ringtoneUri.getScheme())) {
-                    cursor = context.getContentResolver().query(ringtoneUri,
-                            new String[] { OpenableColumns.DISPLAY_NAME }, null, null, null);
-                }
-                if (cursor != null) {
-                    if (cursor.moveToFirst()) {
-                        summary = cursor.getString(0);
-                    }
-                }
-            } catch (SQLiteException sqle) {
-                // Unknown title for the ringtone
-            } catch (IllegalArgumentException iae) {
-                // Some other error retrieving the column from the provider
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-        }
-        return summary;
+        return Ringtone.getTitle(context, ringtoneUri, false /* followSettingsUri */,
+                true /* allowRemote */);
     }
 
     // === Vibrate when ringing ===
