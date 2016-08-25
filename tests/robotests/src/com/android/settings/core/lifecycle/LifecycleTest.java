@@ -40,13 +40,23 @@ import static org.junit.Assert.assertTrue;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LifecycleTest {
 
+    public static class TestDialogFragment extends ObservableDialogFragment {
+
+        final TestObserver mFragObserver;
+
+        public TestDialogFragment() {
+            mFragObserver = new TestObserver();
+            mLifecycle.addObserver(mFragObserver);
+        }
+    }
+
     public static class TestActivity extends ObservableActivity {
 
-        final Fragment mFragment;
+        final TestDialogFragment mFragment;
         final TestObserver mActObserver;
 
         public TestActivity() {
-            mFragment = new Fragment();
+            mFragment = new TestDialogFragment();
             mActObserver = new TestObserver();
             getLifecycle().addObserver(mActObserver);
         }
@@ -102,14 +112,19 @@ public class LifecycleTest {
         TestActivity activity = ac.get();
 
         ac.create().start();
+        assertTrue(activity.mFragment.mFragObserver.mOnStartObserved);
         assertTrue(activity.mActObserver.mOnStartObserved);
         ac.resume();
+        assertTrue(activity.mFragment.mFragObserver.mOnResumeObserved);
         assertTrue(activity.mActObserver.mOnResumeObserved);
         ac.pause();
+        assertTrue(activity.mFragment.mFragObserver.mOnPauseObserved);
         assertTrue(activity.mActObserver.mOnPauseObserved);
         ac.stop();
+        assertTrue(activity.mFragment.mFragObserver.mOnStopObserved);
         assertTrue(activity.mActObserver.mOnStopObserved);
         ac.destroy();
+        assertTrue(activity.mFragment.mFragObserver.mOnDestroyObserved);
         assertTrue(activity.mActObserver.mOnDestroyObserved);
     }
 }
