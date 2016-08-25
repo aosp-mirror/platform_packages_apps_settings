@@ -35,14 +35,15 @@ import android.widget.TextView;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 
 /**
  * {@link DialogFragment} for support disclaimer.
  */
-public final class SupportDisclaimerDialogFragment extends DialogFragment implements
-        DialogInterface.OnClickListener {
+public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFragment
+        implements DialogInterface.OnClickListener {
 
     public static final String TAG = "SupportDisclaimerDialog";
     private static final String EXTRA_TYPE = "extra_type";
@@ -90,7 +91,7 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
         final Bundle bundle = getArguments();
         MetricsLogger.action(activity, MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_OK);
         supportFeatureProvider.startSupport(getActivity(),
-                (Account) bundle.getParcelable(EXTRA_ACCOUNT), bundle.getInt(EXTRA_TYPE));
+                bundle.getParcelable(EXTRA_ACCOUNT), bundle.getInt(EXTRA_TYPE));
     }
 
     @Override
@@ -113,6 +114,11 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
             input.setSpan(new NoUnderlineUrlSpan(span.getURL()), start, end,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_SUPPORT_DISCLAIMER;
     }
 
     /**
