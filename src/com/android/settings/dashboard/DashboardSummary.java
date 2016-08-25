@@ -236,17 +236,18 @@ public class DashboardSummary extends InstrumentedFragment
 
         @Override
         protected List<Tile> doInBackground(Void... params) {
+            final Context context = getContext();
             List<Tile> suggestions = mSuggestionParser.getSuggestions();
             for (int i = 0; i < suggestions.size(); i++) {
                 Tile suggestion = suggestions.get(i);
                 if (mSuggestionsChecks.isSuggestionComplete(suggestion)) {
                     mAdapter.disableSuggestion(suggestion);
                     suggestions.remove(i--);
-                } else {
-                    String id = DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion);
+                } else if (context != null) {
+                    String id = DashboardAdapter.getSuggestionIdentifier(context, suggestion);
                     if (!mSuggestionsShownLogged.contains(id)) {
                         mSuggestionsShownLogged.add(id);
-                        MetricsLogger.action(getContext(),
+                        MetricsLogger.action(context,
                                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, id);
                     }
                 }
