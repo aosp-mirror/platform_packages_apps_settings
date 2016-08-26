@@ -178,13 +178,13 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED, mSuggestionsHiddenLogged);
+        outState.putStringArrayList(EXTRA_SUGGESTION_SHOWN_LOGGED, mSuggestionsShownLogged);
         if (mLayoutManager == null) return;
         outState.putInt(EXTRA_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
         if (mAdapter != null) {
             mAdapter.onSaveInstanceState(outState);
         }
-        outState.putStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED, mSuggestionsHiddenLogged);
-        outState.putStringArrayList(EXTRA_SUGGESTION_SHOWN_LOGGED, mSuggestionsShownLogged);
     }
 
     @Override
