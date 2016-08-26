@@ -79,10 +79,19 @@
                 android:key="lift_to_wake"
                 android:title="@string/lift_to_wake_title" />
 
-        <SwitchPreference
+        <PreferenceScreen
                 android:key="doze"
-                android:title="@string/doze_title"
-                android:summary="@string/doze_summary" />
+                android:title="@string/ambient_display_title"
+                android:summary="@string/doze_summary" >
+                <intent
+                    android:targetPackage="com.android.settings"
+                    android:targetClass="com.android.settings.Settings$GestureSettingsActivity" >
+                    <extra android:name="show_drawer_menu"
+                           android:value="true" />
+                    <extra android:name="gesture_scroll_to_preference"
+                           android:value="gesture_pick_up_and_nudge" />
+                </intent>
+        </PreferenceScreen>
 
         <SwitchPreference
                 android:key="tap_to_wake"
