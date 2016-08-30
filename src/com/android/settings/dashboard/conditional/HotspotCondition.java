@@ -19,6 +19,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
+import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.UserHandle;
@@ -102,7 +103,9 @@ public class HotspotCondition extends Condition {
             if (admin != null) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context, admin);
             } else {
-                TetherUtil.setWifiTethering(false, context);
+                ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
+                        Context.CONNECTIVITY_SERVICE);
+                cm.stopTethering(ConnectivityManager.TETHERING_WIFI);
                 setActive(false);
             }
         } else {
