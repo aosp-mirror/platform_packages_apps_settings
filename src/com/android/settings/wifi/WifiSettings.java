@@ -114,6 +114,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
     private static final String SAVED_WIFI_NFC_DIALOG_STATE = "wifi_nfc_dlg_state";
 
+    private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
+
     protected WifiManager mWifiManager;
     private WifiManager.ActionListener mConnectListener;
     private WifiManager.ActionListener mSaveListener;
@@ -662,6 +664,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     pref.setSelectable(false);
                     pref.setSummary(R.string.wifi_empty_list_wifi_on);
                     pref.setOrder(0);
+                    pref.setKey(PREF_KEY_EMPTY_WIFI_LIST);
                     getPreferenceScreen().addPreference(pref);
                     mAddPreference.setOrder(1);
                     getPreferenceScreen().addPreference(mAddPreference);
