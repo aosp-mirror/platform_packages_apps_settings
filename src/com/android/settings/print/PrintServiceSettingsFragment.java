@@ -173,6 +173,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         super.onViewCreated(view, savedInstanceState);
         initComponents();
         updateUiForArguments();
+        getListView().setVisibility(View.GONE);
         getBackupListView().setVisibility(View.VISIBLE);
     }
 
