@@ -509,6 +509,9 @@ public class TetherSettings extends RestrictedSettingsFragment
     private static boolean isIntentAvailable(Context context) {
         String[] provisionApp = context.getResources().getStringArray(
                 com.android.internal.R.array.config_mobile_hotspot_provision_app);
+        if (provisionApp.length < 2) {
+            return false;
+        }
         final PackageManager packageManager = context.getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClassName(provisionApp[0], provisionApp[1]);
