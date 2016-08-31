@@ -30,10 +30,7 @@
         <PreferenceScreen
             android:key="domain_urls"
             android:title="@string/domain_urls_title"
-            android:fragment="com.android.settings.applications.ManageApplications">
-            <extra
-                android:name="classname"
-                android:value="com.android.settings.Settings$DomainsURLsAppListActivity" />
+            android:fragment="com.android.settings.applications.ManageDomainUrls">
         </PreferenceScreen>
 
         <Preference
