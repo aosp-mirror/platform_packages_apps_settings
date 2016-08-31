@@ -300,9 +300,15 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     }
 
     private void addItem(PreferenceGroup group, int titleRes, CharSequence title, int userId) {
-        if (titleRes == R.string.storage_detail_system && mSystemSize <= 0) {
-            Log.w(TAG, "Skipping System storage because its size is " + mSystemSize);
-            return;
+        if (titleRes == R.string.storage_detail_system) {
+            if (mSystemSize <= 0) {
+                Log.w(TAG, "Skipping System storage because its size is " + mSystemSize);
+                return;
+            }
+            if (userId != UserHandle.myUserId()) {
+                // Only display system on current user.
+                return;
+            }
         }
         StorageItemPreference item;
         if (mItemPoolIndex < mItemPreferencePool.size()) {
