@@ -341,6 +341,14 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         return Switch.class.getName();
     }
 
+    @Override
+    public boolean onRequestSendAccessibilityEvent(View child, AccessibilityEvent event) {
+        // Since the children are marked as not important for accessibility, re-dispatch all
+        // of their events as if they came from this view
+        event.setSource(this);
+        return true;
+    }
+
     /** @hide */
     @Override
     public void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo info) {
