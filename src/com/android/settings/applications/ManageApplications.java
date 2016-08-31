@@ -57,7 +57,6 @@ import com.android.settings.AppHeader;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
-import com.android.settings.Settings.DomainsURLsAppListActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.Settings.NotificationAppListActivity;
 import com.android.settings.Settings.OverlaySettingsActivity;
@@ -136,7 +135,6 @@ public class ManageApplications extends InstrumentedFragment
     public static final int FILTER_APPS_PRIORITY = 9;
     public static final int FILTER_APPS_PERSONAL = 10;
     public static final int FILTER_APPS_WORK = 11;
-    public static final int FILTER_APPS_WITH_DOMAIN_URLS = 12;
     public static final int FILTER_APPS_USAGE_ACCESS = 13;
     public static final int FILTER_APPS_WITH_OVERLAY = 14;
     public static final int FILTER_APPS_WRITE_SETTINGS = 15;
@@ -217,7 +215,6 @@ public class ManageApplications extends InstrumentedFragment
 
     public static final int LIST_TYPE_MAIN = 0;
     public static final int LIST_TYPE_NOTIFICATION = 1;
-    public static final int LIST_TYPE_DOMAINS_URLS = 2;
     public static final int LIST_TYPE_STORAGE = 3;
     public static final int LIST_TYPE_USAGE_ACCESS = 4;
     public static final int LIST_TYPE_HIGH_POWER = 5;
@@ -251,8 +248,6 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(NotificationAppListActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mNotifBackend = new NotificationBackend();
-        } else if (className.equals(DomainsURLsAppListActivity.class.getName())) {
-            mListType = LIST_TYPE_DOMAINS_URLS;
         } else if (className.equals(StorageUseActivity.class.getName())) {
             if (args != null && args.containsKey(EXTRA_VOLUME_UUID)) {
                 mVolumeUuid = args.getString(EXTRA_VOLUME_UUID);
@@ -382,8 +377,6 @@ public class ManageApplications extends InstrumentedFragment
 
     private int getDefaultFilter() {
         switch (mListType) {
-            case LIST_TYPE_DOMAINS_URLS:
-                return FILTER_APPS_WITH_DOMAIN_URLS;
             case LIST_TYPE_USAGE_ACCESS:
                 return FILTER_APPS_USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
@@ -415,8 +408,6 @@ public class ManageApplications extends InstrumentedFragment
                 return MetricsEvent.MANAGE_APPLICATIONS;
             case LIST_TYPE_NOTIFICATION:
                 return MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS;
-            case LIST_TYPE_DOMAINS_URLS:
-                return MetricsEvent.MANAGE_DOMAIN_URLS;
             case LIST_TYPE_STORAGE:
                 return MetricsEvent.APPLICATIONS_STORAGE_APPS;
             case LIST_TYPE_USAGE_ACCESS:
@@ -502,9 +493,6 @@ public class ManageApplications extends InstrumentedFragment
                 startAppInfoFragment(AppNotificationSettings.class,
                         R.string.app_notifications_title);
                 break;
-            case LIST_TYPE_DOMAINS_URLS:
-                startAppInfoFragment(AppLaunchSettings.class, R.string.auto_launch_label);
-                break;
             case LIST_TYPE_USAGE_ACCESS:
                 startAppInfoFragment(UsageAccessDetails.class, R.string.usage_access);
                 break;
@@ -537,9 +525,6 @@ public class ManageApplications extends InstrumentedFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (mListType == LIST_TYPE_DOMAINS_URLS) {
-            return;
-        }
         HelpUtils.prepareHelpMenuItem(getActivity(), menu, mListType == LIST_TYPE_MAIN
                 ? R.string.help_uri_apps : R.string.help_uri_notifications, getClass().getName());
         mOptionsMenu = menu;
@@ -760,7 +745,7 @@ public class ManageApplications extends InstrumentedFragment
         private boolean mHasReceivedLoadEntries;
         private boolean mHasReceivedBridgeCallback;
 
-        private AlphabeticIndex.ImmutableIndex mIndex;
+        private AlphabeticIndex.ImmutableIndex<Locale> mIndex;
         private SectionInfo[] mSections = EMPTY_SECTIONS;
         private int[] mPositionToSectionIndex;
 
@@ -984,7 +969,7 @@ public class ManageApplications extends InstrumentedFragment
                     if (locales.size() == 0) {
                         locales = new LocaleList(Locale.ENGLISH);
                     }
-                    AlphabeticIndex index = new AlphabeticIndex<>(locales.get(0));
+                    AlphabeticIndex<Locale> index = new AlphabeticIndex<>(locales.get(0));
                     int localeCount = locales.size();
                     for (int i = 1; i < localeCount; i++) {
                         index.addLabels(locales.get(i));
@@ -1181,10 +1166,6 @@ public class ManageApplications extends InstrumentedFragment
                     }
                     break;
 
-                case LIST_TYPE_DOMAINS_URLS:
-                    holder.summary.setText(getDomainsSummary(holder.entry.info.packageName));
-                    break;
-
                 case LIST_TYPE_USAGE_ACCESS:
                     if (holder.entry.extraInfo != null) {
                         holder.summary.setText((new UsageState((PermissionState) holder.entry
@@ -1222,25 +1203,6 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public void onMovedToScrapHeap(View view) {
             mActive.remove(view);
-        }
-
-        private CharSequence getDomainsSummary(String packageName) {
-            // If the user has explicitly said "no" for this package, that's the
-            // string we should show.
-            int domainStatus = mPm.getIntentVerificationStatusAsUser(packageName, UserHandle.myUserId());
-            if (domainStatus == PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER) {
-                return mContext.getString(R.string.domain_urls_summary_none);
-            }
-            // Otherwise, ask package manager for the domains for this package,
-            // and show the first one (or none if there aren't any).
-            ArraySet<String> result = Utils.getHandledDomains(mPm, packageName);
-            if (result.size() == 0) {
-                return mContext.getString(R.string.domain_urls_summary_none);
-            } else if (result.size() == 1) {
-                return mContext.getString(R.string.domain_urls_summary_one, result.valueAt(0));
-            } else {
-                return mContext.getString(R.string.domain_urls_summary_some, result.valueAt(0));
-            }
         }
 
         @Override
