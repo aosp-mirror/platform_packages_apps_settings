@@ -87,7 +87,7 @@ public class UserDictionaryAddWordContents {
         mMode = MODE_EDIT;
         mOldWord = oldInstanceToBeEdited.mSavedWord;
         mOldShortcut = oldInstanceToBeEdited.mSavedShortcut;
-        updateLocale(mLocale);
+        updateLocale(oldInstanceToBeEdited.getCurrentUserDictionaryLocale());
     }
 
     // locale may be null, this means default locale
