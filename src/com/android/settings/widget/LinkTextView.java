@@ -18,12 +18,14 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v13.view.ViewCompat;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.TextView;
+import com.android.setupwizardlib.util.LinkAccessibilityHelper;
 
 /**
  * Copied from setup wizard.
@@ -39,7 +41,7 @@ public class LinkTextView extends TextView {
     public LinkTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mAccessibilityHelper = new LinkAccessibilityHelper(this);
-        setAccessibilityDelegate(mAccessibilityHelper);
+        ViewCompat.setAccessibilityDelegate(this, mAccessibilityHelper);
     }
 
     @Override
