@@ -947,7 +947,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar para acender"</string>
     <string name="doze_title" msgid="2259176504273878294">"Pantalla ambiente"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Activa a pantalla cando recibes notificacións"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Activar a pantalla ao tocala dúas veces ou recibir novas notificacións. Máis información"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño do tipo de letra"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Reduce ou amplía o texto"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Configuración de bloqueo da tarxeta SIM"</string>
@@ -1672,7 +1672,7 @@
     <string name="vision_settings_title" msgid="4204111425716868288">"Configuración de visualización"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Podes personalizar este dispositivo segundo as túas necesidades. Podes cambiar estas funcións de accesibilidade máis tarde en Configuración."</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"Servizos"</string>
-    <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
+    <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"O lector de pantalla está destinado principalmente a persoas cegas e con pouca visión"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Pantalla"</string>
@@ -3160,7 +3160,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Iniciar sesión"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Non podes iniciar sesión?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Enviar información do sistema"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Para axudar a resolver o problema rapidamente, necesitamos a información do sistema co fin de realizar o diagnóstico."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Para axudar a resolver o problema rapidamente, necesitamos a información do sistema co fin de realizar o diagnóstico."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Non mostrar de novo"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Configuración do perfil de traballo"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Busca de contactos"</string>
@@ -3193,7 +3193,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Liberar espazo agora"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Xestos"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Xestos rápidos para controlar o teléfono"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Xestos rápidos para controlar o teléfono"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Xestos rápidos para controlar a tableta"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Xestos rápidos para controlar o dispositivo"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Saltar á cámara"</string>
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Para abrir rapidamente a cámara, preme dúas veces o botón de acendido. Isto funciona en calquera pantalla"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Voltear a cámara"</string>
@@ -3201,7 +3203,9 @@
     <string name="ambient_display_title" msgid="7369291941168001738">"Consulta rápida da pantalla"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Colle o teléfono ou tócao dúas veces para consultalo sen necesidade de activalo por completo"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Pasar o dedo para consultar as notificacións"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Para consultar as notificacións, pasa o dedo cara abaixo sobre o sensor de impresión dixital situado na parte traseira do teléfono"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Para consultar as notificacións, pasa o dedo cara abaixo sobre o sensor de impresión dixital situado na parte traseira do teléfono"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Para consultar as notificacións, pasa o dedo cara abaixo sobre o sensor de impresión dixital situado na parte traseira da tableta"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Para consultar as notificacións, pasa o dedo cara abaixo sobre o sensor de impresión dixital situado na parte traseira do dispositivo"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activado"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Desactivado"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"O cargador de inicio xa está desbloqueado"</string>
@@ -3212,4 +3216,12 @@
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Eliminar descargas"</string>
     <string name="downloads_backup_preference_title" msgid="2312237179341156671">"Copia de seguranza das descargas"</string>
     <string name="downloads_backup_text" msgid="8351770128253816819"></string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

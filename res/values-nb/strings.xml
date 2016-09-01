@@ -947,7 +947,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk lysstyrke"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Aktiver enheten med løftebevegelser"</string>
     <string name="doze_title" msgid="2259176504273878294">"Omgivelsesskjerm"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Skjermen slås på når du mottar varsler"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Skjermen slås på når du dobbelttrykker på den eller får nye varslinger. Finn ut hvordan"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Skriftstørrelse"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Gjør teksten større eller mindre"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Innstillinger for SIM-kort-lås"</string>
@@ -2580,26 +2580,16 @@
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Total stillhet"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokkér visuelle forstyrrelser"</string>
-    <!-- no translation found for sound_work_settings (6774324553228566442) -->
-    <skip />
-    <!-- no translation found for work_use_personal_sounds_title (1148331221338458874) -->
-    <skip />
-    <!-- no translation found for work_use_personal_sounds_summary (2940241783139859361) -->
-    <skip />
-    <!-- no translation found for work_ringtone_title (5806657896300235315) -->
-    <skip />
-    <!-- no translation found for work_notification_ringtone_title (2108983018726925833) -->
-    <skip />
-    <!-- no translation found for work_alarm_ringtone_title (3670497923540424871) -->
-    <skip />
-    <!-- no translation found for work_sound_same_as_personal (3123383644475266478) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_title (4235493986362911084) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_yes (7243884940551635717) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_message (1655410601622810837) -->
-    <skip />
+    <string name="sound_work_settings" msgid="6774324553228566442">"Lyder i jobbprofilen"</string>
+    <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Bruk personlig profil-lyder"</string>
+    <string name="work_use_personal_sounds_summary" msgid="2940241783139859361">"Lydene for jobbprofilen er de samme som for personlig profil"</string>
+    <string name="work_ringtone_title" msgid="5806657896300235315">"Telefonringelyd for jobb"</string>
+    <string name="work_notification_ringtone_title" msgid="2108983018726925833">"Standard varsellyd for jobb"</string>
+    <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"Standard alarmlyd for jobb"</string>
+    <string name="work_sound_same_as_personal" msgid="3123383644475266478">"Samme som den personlige profilen"</string>
+    <string name="work_sync_dialog_title" msgid="4235493986362911084">"Bytte lyder for jobbprofilen?"</string>
+    <string name="work_sync_dialog_yes" msgid="7243884940551635717">"Erstatt"</string>
+    <string name="work_sync_dialog_message" msgid="1655410601622810837">"De nåværende lydene for jobbprofilen din blir byttet ut med lydene for den personlige profilen din"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Konfigurer varsler"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avansert"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Jobbvarsler"</string>
@@ -3170,7 +3160,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Logg på"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Har du problemer med påloggingen?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Send systeminformasjon"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"For å løse problemet ditt raskt trenger vi systeminformasjon for å finne ut hva det er."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"For å løse problemet ditt raskt trenger vi systeminformasjon for å finne ut hva det er."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Ikke vis dette igjen"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Innstillinger for jobbprofilen"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Kontaktsøk"</string>
@@ -3203,7 +3193,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuelle innstillinger"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Frigjør lagringsplass nå"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Bevegelser"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Hurtigbevegelser for å kontrollere telefonen din"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Hurtigbevegelser for å kontrollere telefonen din"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Hurtigbevegelser for å kontrollere nettbrettet ditt"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Hurtigbevegelser for å kontrollere enheten din"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Gå til kameraet"</string>
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"For å åpne kameraet raskt, trykk på av/på-knappen to ganger. Dette fungerer fra alle skjermbilder"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Vend kameraet"</string>
@@ -3211,7 +3203,9 @@
     <string name="ambient_display_title" msgid="7369291941168001738">"Rask skjermsjekk"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"For å sjekke telefonen uten å vekke den helt, dobbeltrykk på skjermen eller løft den"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Sveip for varsler"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"For å sjekke varslene dine, sveip ned på fingeravtrykksensoren på baksiden av telefonen"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"For å sjekke varslene dine, sveip ned på fingeravtrykksensoren på baksiden av telefonen"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"For å sjekke varslene dine, sveip ned på fingeravtrykksensoren på baksiden av nettbrettet"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"For å sjekke varslene dine, sveip ned på fingeravtrykksensoren på baksiden av enheten"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"På"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Av"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Oppstartsinnlasteren er allerede låst opp"</string>
@@ -3222,4 +3216,12 @@
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Fjern nedlastinger"</string>
     <string name="downloads_backup_preference_title" msgid="2312237179341156671">"Sikkerhetskopiering av nedlastinger"</string>
     <string name="downloads_backup_text" msgid="8351770128253816819"></string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

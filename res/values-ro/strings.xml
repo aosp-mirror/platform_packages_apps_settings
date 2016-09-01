@@ -956,7 +956,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Luminozitate automată"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Ridicați pentru a reactiva"</string>
     <string name="doze_title" msgid="2259176504273878294">"Afișare Ambient"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Activează ecranul când primiți notificări"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Activează ecranul când îl atingeți de două ori sau când primiți notificări. Aflați cum"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Dimensiunea fontului"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Măriți sau micșorați textul"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Setări de blocare a cardului SIM"</string>
@@ -2601,26 +2601,16 @@
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Niciun sunet"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blocați întreruperile vizuale"</string>
-    <!-- no translation found for sound_work_settings (6774324553228566442) -->
-    <skip />
-    <!-- no translation found for work_use_personal_sounds_title (1148331221338458874) -->
-    <skip />
-    <!-- no translation found for work_use_personal_sounds_summary (2940241783139859361) -->
-    <skip />
-    <!-- no translation found for work_ringtone_title (5806657896300235315) -->
-    <skip />
-    <!-- no translation found for work_notification_ringtone_title (2108983018726925833) -->
-    <skip />
-    <!-- no translation found for work_alarm_ringtone_title (3670497923540424871) -->
-    <skip />
-    <!-- no translation found for work_sound_same_as_personal (3123383644475266478) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_title (4235493986362911084) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_yes (7243884940551635717) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_message (1655410601622810837) -->
-    <skip />
+    <string name="sound_work_settings" msgid="6774324553228566442">"Sunetele profilului de serviciu"</string>
+    <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Folosiți sunetele profilului personal"</string>
+    <string name="work_use_personal_sounds_summary" msgid="2940241783139859361">"Sunetele profilului de serviciu sunt aceleași ca la profilul personal"</string>
+    <string name="work_ringtone_title" msgid="5806657896300235315">"Ton de sonerie telefon serviciu"</string>
+    <string name="work_notification_ringtone_title" msgid="2108983018726925833">"Ton prestabilit notificări serviciu"</string>
+    <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"Ton prestabilit alarmă serviciu"</string>
+    <string name="work_sound_same_as_personal" msgid="3123383644475266478">"Aceleași ca la profilul personal"</string>
+    <string name="work_sync_dialog_title" msgid="4235493986362911084">"Înlocuiți sunetele profilului de serviciu?"</string>
+    <string name="work_sync_dialog_yes" msgid="7243884940551635717">"Înlocuiți"</string>
+    <string name="work_sync_dialog_message" msgid="1655410601622810837">"Sunetele actuale ale profilului de serviciu vor fi înlocuite cu cele ale profilului personal"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Configurați notificările"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Avansate"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notificări profil de serviciu"</string>
@@ -3201,7 +3191,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Conectați-vă"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Nu vă puteți conecta?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Trimiteți informațiile despre sistem"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Pentru a remedia problema rapid, avem nevoie de informații despre sistem pentru diagnosticare."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Pentru a remedia problema rapid, avem nevoie de informații despre sistem pentru diagnosticare."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Nu mai afișa"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Setările profilului de serviciu"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Căutarea persoanelor de contact"</string>
@@ -3237,7 +3227,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuale"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Eliberați spațiu acum"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gesturi"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Gesturi rapide pentru a controla telefonul"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gesturi rapide pentru a controla telefonul"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gesturi rapide pentru controlul tabletei"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gesturi rapide pentru controlul dispozitivului"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Accesați camera foto"</string>
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Pentru a deschide rapid camera foto, apăsați de două ori butonul de pornire. Funcționează din orice ecran."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Comutați camera foto"</string>
@@ -3245,7 +3237,9 @@
     <string name="ambient_display_title" msgid="7369291941168001738">"Verificare rapidă a ecranului"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Pentru a verifica telefonul fără să îl activați complet, atingeți-l de două ori sau ridicați-l"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Glisați pentru notificări"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Pentru a verifica notificările, glisați în jos pe senzorul de amprentă de pe partea din spate a telefonului"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Pentru a verifica notificările, glisați în jos pe senzorul de amprentă de pe partea din spate a telefonului"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Pentru a verifica notificările, glisați în jos pe senzorul de amprentă de pe spatele tabletei"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Pentru a verifica notificările, glisați în jos pe senzorul de amprentă de pe spatele dispozitivului"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activat"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Dezactivat"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloaderul este deja deblocat"</string>
@@ -3256,4 +3250,12 @@
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Eliminați descărcările"</string>
     <string name="downloads_backup_preference_title" msgid="2312237179341156671">"Backupul descărcărilor"</string>
     <string name="downloads_backup_text" msgid="8351770128253816819"></string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

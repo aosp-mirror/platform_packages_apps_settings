@@ -956,7 +956,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatsko osvjetljenje"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Podignite za buđenje"</string>
     <string name="doze_title" msgid="2259176504273878294">"Ambijentalni prikaz"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Ekran se aktivira kada primite obavještenja"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Pokrenite ekran iz stanja mirovanja nakon dvostrukog dodira ili primite nova obavještenja. Pogledajte kako"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Veličina fonta"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Povećavanje ili umanjivanje teksta"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Postavke zaključavanja SIM kartice"</string>
@@ -2601,26 +2601,16 @@
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Potpuna tišina"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blokiranje vizualnih prekida"</string>
-    <!-- no translation found for sound_work_settings (6774324553228566442) -->
-    <skip />
-    <!-- no translation found for work_use_personal_sounds_title (1148331221338458874) -->
-    <skip />
-    <!-- no translation found for work_use_personal_sounds_summary (2940241783139859361) -->
-    <skip />
-    <!-- no translation found for work_ringtone_title (5806657896300235315) -->
-    <skip />
-    <!-- no translation found for work_notification_ringtone_title (2108983018726925833) -->
-    <skip />
-    <!-- no translation found for work_alarm_ringtone_title (3670497923540424871) -->
-    <skip />
-    <!-- no translation found for work_sound_same_as_personal (3123383644475266478) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_title (4235493986362911084) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_yes (7243884940551635717) -->
-    <skip />
-    <!-- no translation found for work_sync_dialog_message (1655410601622810837) -->
-    <skip />
+    <string name="sound_work_settings" msgid="6774324553228566442">"Zvuci radnog profila"</string>
+    <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Koristite zvuke ličnog profila"</string>
+    <string name="work_use_personal_sounds_summary" msgid="2940241783139859361">"Zvuci radnog profila su isti kao i kod ličnog"</string>
+    <string name="work_ringtone_title" msgid="5806657896300235315">"Melodija zvona radnog telefona"</string>
+    <string name="work_notification_ringtone_title" msgid="2108983018726925833">"Zadani ton radnih obavještenja"</string>
+    <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"Zadana melodija radnog alarma"</string>
+    <string name="work_sound_same_as_personal" msgid="3123383644475266478">"Isto kao kod ličnog profila"</string>
+    <string name="work_sync_dialog_title" msgid="4235493986362911084">"Želite li zamijeniti zvuke radnog profila?"</string>
+    <string name="work_sync_dialog_yes" msgid="7243884940551635717">"Zamijeni"</string>
+    <string name="work_sync_dialog_message" msgid="1655410601622810837">"Postojeći zvuci vašeg radnog profila će se zamijeniti zvucima vašeg ličnog profila"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"Konfiguriraj obavještenja"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Napredno"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Obavještenja za posao"</string>
@@ -3201,7 +3191,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Prijavite se"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Ne možete se prijaviti?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Pošalji informacije o sistemu"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Za lakše rješavanje problema, potrebne su nam informacije o sistemu za dijagnozu."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Za lakše rješavanje problema, potrebne su nam informacije o sistemu za dijagnozu."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Ne prikazuj ponovo"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Postavke radnog profila"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Pretraživanje kontakata"</string>
@@ -3237,7 +3227,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Ručno"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Oslobodite prostor odmah"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Pokreti"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Brzi pokreti za kontrolu nad telefonom"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Brzi pokreti za kontrolu nad telefonom"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Brzi pokreti za kontrolu nad tableta"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Brzi pokreti za kontrolu uređaja"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Idi na Kameru"</string>
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Za brzo otvaranje kamere, dva puta dodirnite dugme za uključivanje. Funkcionira na svakom ekranu"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Prebaci kameru"</string>
@@ -3245,7 +3237,9 @@
     <string name="ambient_display_title" msgid="7369291941168001738">"Brzi pregled ekrana"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Da provjerite telefon bez potpunog pokretanja iz stanja mirovanja, dvaput ga dodirnite ili ga podignite"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Prevucite za obavještenja"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Da provjerite obavještenja, prevucite prema dolje na senzoru otiska prsta na poleđini telefona"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Da provjerite obavještenja, prevucite prema dolje na senzoru otiska prsta na poleđini telefona"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Da provjerite obavještenja, prevucite prema dolje na senzoru otiska prsta na poleđini tableta"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Da provjerite obavještenja, prevucite prema dolje na senzoru otiska prsta na poleđini uređaja"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Uključeno"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Isključeno"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Program za učitavanje operativnog sistema je već otključan"</string>
@@ -3256,4 +3250,12 @@
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Ukloniti preuzimanja"</string>
     <string name="downloads_backup_preference_title" msgid="2312237179341156671">"Preuzimanje rezervne kopije"</string>
     <string name="downloads_backup_text" msgid="8351770128253816819"></string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

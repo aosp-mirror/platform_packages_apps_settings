@@ -947,7 +947,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"自動調整亮度"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"舉起即可喚醒"</string>
     <string name="doze_title" msgid="2259176504273878294">"環境顯示"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"收到通知時喚醒螢幕"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"輕按裝置兩下或收到新通知時，喚醒螢幕。查看方法"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字型大小"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"放大或縮小文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 卡鎖定設定"</string>
@@ -2585,16 +2585,16 @@
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"完全靜音"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"封鎖視覺干擾"</string>
-    <string name="sound_work_settings" msgid="6774324553228566442">"Work 設定檔音效"</string>
-    <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"使用個人設定檔音效"</string>
-    <string name="work_use_personal_sounds_summary" msgid="2940241783139859361">"Work 設定檔音效與個人設定檔音效相同"</string>
-    <string name="work_ringtone_title" msgid="5806657896300235315">"Work 手機鈴聲"</string>
-    <string name="work_notification_ringtone_title" msgid="2108983018726925833">"預設 Work 通知音效"</string>
-    <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"預設 Work 鬧鐘鈴聲"</string>
+    <string name="sound_work_settings" msgid="6774324553228566442">"工作設定檔聲音"</string>
+    <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"使用個人設定檔聲音"</string>
+    <string name="work_use_personal_sounds_summary" msgid="2940241783139859361">"工作設定檔聲音與個人設定檔相同"</string>
+    <string name="work_ringtone_title" msgid="5806657896300235315">"工作手機鈴聲"</string>
+    <string name="work_notification_ringtone_title" msgid="2108983018726925833">"預設工作通知音"</string>
+    <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"預設工作鬧鐘鈴聲"</string>
     <string name="work_sound_same_as_personal" msgid="3123383644475266478">"與個人設定檔相同"</string>
-    <string name="work_sync_dialog_title" msgid="4235493986362911084">"要取代 Work 設定檔音效嗎？"</string>
+    <string name="work_sync_dialog_title" msgid="4235493986362911084">"要取代工作設定檔聲音嗎？"</string>
     <string name="work_sync_dialog_yes" msgid="7243884940551635717">"取代"</string>
-    <string name="work_sync_dialog_message" msgid="1655410601622810837">"你的個人設定檔音效將取代目前的 Work 設定檔音效"</string>
+    <string name="work_sync_dialog_message" msgid="1655410601622810837">"目前的工作設定檔聲音會以個人設定檔聲音取代"</string>
     <string name="configure_notification_settings" msgid="3558846607192693233">"設定通知"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"進階"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"工作通知"</string>
@@ -3165,7 +3165,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登入"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"無法登入嗎？"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"傳送系統資料"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"為協助您迅速解決問題，我們需要系統資料以作診斷。"</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"為協助您迅速解決問題，我們需要系統資料以作診斷。"</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"不要再顯示"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"工作設定檔設定"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"聯絡人搜尋"</string>
@@ -3198,7 +3198,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"手動"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"立即釋放空間"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"手勢"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"快速手勢讓您控制手機"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"快速手勢讓您控制手機"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"快速手勢讓您控制平板電腦"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"快速手勢讓您控制裝置"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"啟動相機"</string>
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"如要快速啟動相機，只需按開關按鈕兩下 (適用於任何畫面)。"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"切換相機"</string>
@@ -3206,7 +3208,9 @@
     <string name="ambient_display_title" msgid="7369291941168001738">"快速查看螢幕"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"如要查看手機，但不完全喚醒手機，可輕按兩下或拿起手機"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"快速滑動即可查看通知"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"如要查看通知，可向下快速滑動位於手機背面的指紋感應器"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"如要查看通知，可向下快速滑動位於手機背面的指紋感應器"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"如要查看通知，可向下快速滑動位於平板電腦背面的指紋感應器"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"如要查看通知，可向下快速滑動位於裝置背面的指紋感應器"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"開啟"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"關閉"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"載入器已解鎖"</string>
@@ -3217,4 +3221,12 @@
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"移除下載項目"</string>
     <string name="downloads_backup_preference_title" msgid="2312237179341156671">"下載檔案備份"</string>
     <string name="downloads_backup_text" msgid="8351770128253816819"></string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

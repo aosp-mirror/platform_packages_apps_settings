@@ -947,7 +947,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"ปรับความสว่างอัตโนมัติ"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"ยกขึ้นเพื่อเวก"</string>
     <string name="doze_title" msgid="2259176504273878294">"หน้าจอแบบแอมเบียนท์"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"เปิดหน้าจอเมื่อได้รับการแจ้งเตือน"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"ปลุกหน้าจอเมื่อคุณแตะหน้าจอ 2 ครั้งหรือรับการแจ้งเตือนใหม่ ดูวิธีการ"</string>
     <string name="title_font_size" msgid="4405544325522105222">"ขนาดอักษร"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"ทำให้ข้อความมีขนาดใหญ่ขึ้นหรือเล็กลง"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"การตั้งค่าการล็อกซิมการ์ด"</string>
@@ -3160,7 +3160,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"ลงชื่อเข้าใช้"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"หากไม่สามารถลงชื่อเข้าใช้"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"ส่งข้อมูลของระบบ"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"ในการแก้ไขปัญหาของคุณได้อย่างรวดเร็ว เราต้องการข้อมูลของระบบเพื่อการวินิจฉัย"</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"ในการแก้ไขปัญหาของคุณได้อย่างรวดเร็ว เราต้องการข้อมูลของระบบเพื่อการวินิจฉัย"</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"ไม่ต้องแสดงอีก"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"การตั้งค่าโปรไฟล์งาน"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"ค้นหารายชื่อติดต่อ"</string>
@@ -3193,7 +3193,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"คู่มือ"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"เพิ่มพื้นที่ว่างเลย"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"ท่าทางสัมผัส"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"ท่าทางสัมผัสด่วนสำหรับการควบคุมโทรศัพท์"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"ท่าทางสัมผัสด่วนสำหรับการควบคุมโทรศัพท์"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"ท่าทางสัมผัสด่วนสำหรับการควบคุมแท็บเล็ต"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"ท่าทางสัมผัสด่วนสำหรับการควบคุมอุปกรณ์"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"ข้ามไปที่กล้อง"</string>
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"หากต้องการเปิดกล้องอย่างรวดเร็ว ให้กดปุ่มเปิดปิด 2 ครั้ง ใช้ได้กับหน้าจอทุกรุ่น"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"พลิกกล้อง"</string>
@@ -3201,7 +3203,9 @@
     <string name="ambient_display_title" msgid="7369291941168001738">"ตรวจสอบหน้าจออย่างรวดเร็ว"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"หากต้องการตรวจสอบโทรศัพท์โดยไม่ต้องให้เครื่องทำงานอย่างเต็มที่ โปรดแตะ 2 ครั้งหรือหยิบขึ้นมา"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"เลื่อนเพื่อดูการแจ้งเตือน"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"ในการตรวจสอบการแจ้งเตือน ให้เลื่อนลงบนเซ็นเซอร์ลายนิ้วมือที่ด้านหลังโทรศัพท์"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"ในการตรวจสอบการแจ้งเตือน ให้เลื่อนลงบนเซ็นเซอร์ลายนิ้วมือที่ด้านหลังโทรศัพท์"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"ในการตรวจสอบการแจ้งเตือน ให้เลื่อนลงบนเซ็นเซอร์ลายนิ้วมือที่ด้านหลังแท็บเล็ต"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"ในการตรวจสอบการแจ้งเตือน ให้เลื่อนลงบนเซ็นเซอร์ลายนิ้วมือที่ด้านหลังอุปกรณ์"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"เปิด"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"ปิด"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"ปลดล็อก Bootloader แล้ว"</string>
@@ -3212,4 +3216,12 @@
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"นำการดาวน์โหลดออก"</string>
     <string name="downloads_backup_preference_title" msgid="2312237179341156671">"ดาวน์โหลดข้อมูลสำรอง"</string>
     <string name="downloads_backup_text" msgid="8351770128253816819"></string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>
