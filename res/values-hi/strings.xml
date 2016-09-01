@@ -947,7 +947,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"अपनेआप स्क्रीन की रोशनी"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"सक्रिय करने के लिए उठाएं"</string>
     <string name="doze_title" msgid="2259176504273878294">"परिवेशी प्रदर्शन"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"आपको नोटिफ़िकेशन मिलने पर स्‍क्रीन सक्रिय करें"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"स्क्रीन पर डबल टैप करने पर या नए नोटिफ़िकेशन प्राप्‍त होने पर स्‍क्रीन को सक्रिय करें. तरीका देखें"</string>
     <string name="title_font_size" msgid="4405544325522105222">"अक्षरों का आकार"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"लेख को छोटा या बड़ा करें"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"सिम कार्ड लॉक सेटिंग"</string>
@@ -3160,7 +3160,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"प्रवेश करें"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"प्रवेश नहीं कर पा रहे हैं?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"सिस्टम जानकारी भेजें"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"आपकी समस्या तुरंत सुलझाने में सहायता हेतु, हमें निदान के लिए सिस्टम जानकारी की आवश्यकता होगी."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"आपकी समस्या तुरंत सुलझाने में सहायता हेतु, हमें निदान के लिए सिस्टम जानकारी की आवश्यकता होगी."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"दोबारा ना दिखाएं"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"कार्य प्रोफ़ाइल सेटिंग"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"संपर्क खोज"</string>
@@ -3193,7 +3193,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"मैन्युअल"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"अभी स्पेस खाली करें"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"हावभाव"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"अपना फ़ोन नियंत्रित करने के लिए त्वरित हावभाव"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"अपना फ़ोन नियंत्रित करने के लिए त्वरित हावभाव"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"अपना टैबलेट नियंत्रित करने के लिए त्वरित हावभाव"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"अपना डिवाइस नियंत्रित करने के लिए त्वरित हावभाव"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"सीधे कैमरे पर जाएं"</string>
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"कैमरा तुरंत खोलने के लिए, पावर बटन को दो बार दबाएं. ऐसा किसी भी स्क्रीन से किया जा सकता है"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"कैमरा फ़्लिप करें"</string>
@@ -3201,7 +3203,9 @@
     <string name="ambient_display_title" msgid="7369291941168001738">"स्क्रीन की त्वरित जांच"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"अपने फ़ोन को पूरी तरह सक्रिय किए बिना देखने के लिए, उस पर डबल टैप करें या उठाएं"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"नोटिफ़िकेशन के लिए स्वाइप करें."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"अपने नोटिफ़िकेशन देखने के लिए, अपने फ़ोन के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"अपने नोटिफ़िकेशन देखने के लिए, अपने फ़ोन के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"अपने नोटिफ़िकेशन देखने के लिए, अपने टैबलेट के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"अपने नोटिफ़िकेशन देखने के लिए, अपने डिवाइस के पीछे फ़िंगरप्रिंट सेंसर पर नीचे स्वाइप करें"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"चालू"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"बंद"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"बूटलोडर पहले से ही अनलाॅक किया हुआ है"</string>
@@ -3212,4 +3216,12 @@
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"डाउनलोड निकालें"</string>
     <string name="downloads_backup_preference_title" msgid="2312237179341156671">"डाउनलोड का बैकअप"</string>
     <string name="downloads_backup_text" msgid="8351770128253816819"></string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

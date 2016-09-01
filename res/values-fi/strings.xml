@@ -947,7 +947,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automaattinen kirkkaus"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Herätä nostamalla"</string>
     <string name="doze_title" msgid="2259176504273878294">"Ambient-näyttö"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Aktivoi näyttö, kun saat ilmoituksia."</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Näyttö käynnistyy, kun kaksoisnapautat sitä tai saat ilmoituksen. Lisätietoja"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Kirjasimen koko"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Suurenna tai pienennä tekstiä."</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM-kortin lukitusasetukset"</string>
@@ -3160,7 +3160,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Kirjaudu sisään"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Eikö sisäänkirjautuminen onnistu?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Lähetä järjestelmätiedot"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Tarvitsemme järjestelmätietoja, jotka nopeuttavat vianetsintää ja ongelman selvittämistä."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Tarvitsemme järjestelmätietoja, jotka nopeuttavat vianetsintää ja ongelman selvittämistä."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Älä näytä uudelleen"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Työprofiilin asetukset"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Yhteystietohaku"</string>
@@ -3193,7 +3193,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuaalinen"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Vapauta tilaa"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Eleet"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Puhelin ohjaamisen pikaeleet"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Puhelin ohjaamisen pikaeleet"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Tabletin ohjaamisen pikaeleet"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Laitten ohjaamisen pikaeleet"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Kameraan siirtyminen"</string>
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Avaa kamera nopeasti painamalla virtapainiketta kahdesti. Tämä toimii miltä tahansa näytöltä."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kameran vaihtaminen"</string>
@@ -3201,7 +3203,9 @@
     <string name="ambient_display_title" msgid="7369291941168001738">"Näytön pikatarkistus"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Jos haluat katsoa puhelimesi näyttöä palauttamatta sitä virransäästötilasta, kaksoisnapauta näyttöä tai ota puhelin käteesi."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Ilmoitukset pyyhkäisemällä"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Voit katsoa ilmoitukset pyyhkäisemällä puhelimen takaosassa olevasta sormenjälkitunnistimesta alaspäin."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Voit katsoa ilmoitukset pyyhkäisemällä puhelimen takaosassa olevasta sormenjälkitunnistimesta alaspäin."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Voit katsoa ilmoitukset pyyhkäisemällä tabletin takaosassa olevasta sormenjälkitunnistimesta alaspäin."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Voit katsoa ilmoitukset pyyhkäisemällä laitteen takaosassa olevasta sormenjälkitunnistimesta alaspäin."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Käytössä"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Ei käytössä"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Käynnistysohjelman lukitus on jo avattu."</string>
@@ -3212,4 +3216,12 @@
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Poista lataukset"</string>
     <string name="downloads_backup_preference_title" msgid="2312237179341156671">"Latausten varmuuskopiointi"</string>
     <string name="downloads_backup_text" msgid="8351770128253816819"></string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>
