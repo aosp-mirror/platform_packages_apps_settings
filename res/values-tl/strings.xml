@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Bukod pa sa pag-a-unlock ng iyong telepono, maaari mo ring gamitin ang iyong fingerprint upang pahintulutan ang mga pagbili at pag-access sa app. "<annotation id="url">"Matuto nang higit pa"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Na-disable ang opsyon sa screen lock. Makipag-ugnayan sa administrator ng iyong organisasyon upang matuto nang higit pa. "<annotation id="admin_details">"Higit pang mga detalye"</annotation>\n\n"Maaari mo pa ring gamitin ang iyong fingerprint upang pahintulutan ang mga pagbili at pag-access sa app. "<annotation id="url">"Matuto nang higit pa"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Iangat ang daliri, pagkatapos ay muling pindutin ang sensor"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Sa tuwing makikita mo ang icon na ito, maaari mong gamitin ang iyong fingerprint."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Upang baguhin ang iyong mga setting, pumunta sa Mga Setting &gt; Seguridad &gt; Fingerprint."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Maaari kang magdagdag ng hanggang <xliff:g id="COUNT">%d</xliff:g> (na) fingerprint"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Alisin ang lahat ng fingerprint?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Hindi mo magagamit ang iyong mga fingerprint upang i-unlock ang iyong telepono, pahintulutan ang mga pagbili o mag-sign in sa mga app gamit ang mga iyon."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Awtomatikong pagliwanag"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Angatin upang paganahin"</string>
     <string name="doze_title" msgid="2259176504273878294">"Ambient na display"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Paganahin ang screen kapag nakatanggap ka ng mga notification"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Paganahin ang screen kapag na-double tap mo ito o kapag nakatanggap ka ng mga bagong notification. Alamin kung paano"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Laki ng font"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Palakihin o paliitin ang text"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Setting ng lock ng SIM card"</string>
@@ -3152,7 +3150,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Mag-sign in"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Hindi ka ba makapag-sign in?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Magpadala ng impormasyon ng system"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Upang tumulong na matugunan nang mabilis ang iyong isyu, kailangan namin ng impormasyon ng system para sa diagnosis."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Upang tumulong na matugunan nang mabilis ang iyong isyu, kailangan namin ng impormasyon ng system para sa diagnosis."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Huwag nang ipakitang muli"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Mga setting ng profile sa trabaho"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Paghahanap ng contact"</string>
@@ -3185,15 +3183,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manu-mano"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Magbakante ng espasyo ngayon"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Mga Galaw"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Mga mabilisang galaw upang makontrol ang iyong telepono"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Mga mabilisang galaw upang makontrol ang iyong telepono"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Mga mabilisang galaw upang kontrolin ang iyong tablet"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Mga mabilisang galaw upang kontrolin ang iyong device"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Pumunta sa Camera"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Upang mabilis na mabuksan ang camera, i-double tap lang ang power button. Gumagana sa kahit saang screen"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Upang mabilis na mabuksan ang camera, pindutin nang dalawang beses ang power button. Gagana sa kahit anong screen"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Lumipat ng camera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Mabilis na pagtingin sa screen"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Upang tingnan ang iyong telepono nang hindi ito ganap na binubuksan, i-double tap ito o kunin ito"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Mag-swipe upang makita ang mga notification"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Upang makita ang iyong mga notification, mag-swipe pababa sa sensor para sa fingerprint sa likod ng iyong telepono"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Upang makita ang iyong mga notification, mag-swipe pababa sa sensor para sa fingerprint sa likod ng iyong telepono"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Upang makita ang iyong mga notification, mag-swipe pababa sa sensor para sa fingerprint sa likod ng iyong tablet"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Upang makita ang iyong mga notification, mag-swipe pababa sa sensor para sa fingerprint sa likod ng iyong device"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"I-on"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"I-off"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Naka-unlock na ang bootloader"</string>
@@ -3201,4 +3203,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Kumonekta sa Internet o makipag-ugnayan sa iyong carrier"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Hindi available sa mga naka-lock sa carrier na device"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> sa kabuuan ang naging available\n\nHuling pinagana noong <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

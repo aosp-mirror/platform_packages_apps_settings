@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Förutom att låsa upp mobilen kan du använda fingeravtrycket för att godkänna köp och åtkomst för appar. "<annotation id="url">"Läs mer"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Skärmlåset har inaktiverats. Kontakta organisationens administratör om du vill veta mer. "<annotation id="admin_details">"Mer information"</annotation>\n\n"Du kan fortsätta att auktorisera köp och åtkomst till appar med fingeravtryck. "<annotation id="url">"Läs mer"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Lyft fingret och tryck sedan på sensorn igen"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"När du ser den här ikonen kan du använda ditt fingeravtryck."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Om du vill ändra inställningarna väljer du Inställningar &gt; Säkerhet &gt; Fingeravtryck."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Du kan lägga till upp till <xliff:g id="COUNT">%d</xliff:g> fingeravtryck"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Vill du ta bort alla fingeravtryck?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Du kommer inte längre att kunna låsa upp mobilen, godkänna köp eller logga in i appar med hjälp av fingeravtryck."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk ljusstyrka"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Gå ur viloläget vid lyft"</string>
     <string name="doze_title" msgid="2259176504273878294">"Aktiv låsskärm"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Aktivera skärmen när du får aviseringar"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Aktivera skärmen när du trycker på den snabbt två gånger eller när du får en ny avisering. Visa hur"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Teckenstorlek"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Gör texten större eller mindre."</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Låsinställningar för SIM-kort"</string>
@@ -3152,7 +3150,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Logga in"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Går det inte att logga in?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Skicka systeminformation"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Vi kan hjälpa dig snabbare om vi får systeminformation för diagnosen."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Vi kan hjälpa dig snabbare om vi får systeminformation för diagnosen."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Visa inte igen"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Inställningar för jobbprofilen"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Kontaktsökning"</string>
@@ -3185,15 +3183,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuellt"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Frigör utrymme nu"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Rörelser"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Styr mobilen med snabba rörelser"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr mobilen med snabba rörelser"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr surfplattan med snabba rörelser"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr enheten med snabba rörelser"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Hoppa till kameran"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Om du vill öppna kameran snabbt trycker du snabbt två gånger på strömknappen. Detta fungerar på alla skärmar."</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Om du vill öppna kameran snabbt trycker du snabbt två gånger på strömbrytaren. Det här fungerar oavsett vilken skärm som är öppen."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Vänd kameran"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Snabbkolla skärmen"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Om du vill kolla mobilen utan att aktivera den helt kan du trycka på den snabbt två gånger eller plocka upp den."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Svep för aviseringar"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av mobilen"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av mobilen"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på surfplattans baksida"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på enhetens baksida"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"På"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Av"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader har redan låsts upp"</string>
@@ -3201,4 +3203,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Anslut till internet eller kontakta operatören"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Ej tillgängligt på operatörslåsta enheter."</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> blev tillgängligt totalt\n\nKördes senast den <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

@@ -384,8 +384,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Naudodami kontrolinį kodą galite atrakinti telefoną, be to, galite įgalioti pirkimo veiksmus ir programų prieigą. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Ekrano užrakto parinktis išjungta. Kad sužinotumėte daugiau, susisiekite su organizacijos administratoriumi. "<annotation id="admin_details">"Daugiau išsamios informacijos"</annotation>\n\n"Vis tiek galite naudoti kontrolinį kodą pirkiniams ir prieigai prie programų įgalioti. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Patraukite pirštą, tada vėl palieskite jutiklį"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Kai rodoma ši piktograma, galite naudoti piršto atspaudą."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Jei norite keisti nustatymus, eikite į „Nustatymai“ &gt; „Sauga“ &gt; „Piršto atspaudas“."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Galite pridėti iki <xliff:g id="COUNT">%d</xliff:g> kontrol. kod."</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Pašalinti visus kontrolinius kodus?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Negalėsite naudoti kontrolinių kodų norėdami atrakinti telefoną, įgalioti pirkimo procesus ar prisijungti prie programų."</string>
@@ -964,7 +962,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatinis šviesumas"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Pakelti ir pažadinti"</string>
     <string name="doze_title" msgid="2259176504273878294">"Aplinkos vaizdas"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Pažadinti ekraną, kai gaunamas pranešimas"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Pažadinti ekraną, kai jis dukart paliečiamas arba gaunama naujų pranešimų. Žr., kaip tai padaryti"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Šrifto dydis"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Padidinkite arba sumažinkite tekstą"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM kortelės užrakto nustatymai"</string>
@@ -3218,7 +3216,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Prisijungti"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Negalite prisijungti?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Siųsti sistemos informaciją"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Kad galėtume padėti greitai išspręsti problemą, mums reikalinga sistemos informacija diagnozei atlikti."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Kad galėtume padėti greitai išspręsti problemą, mums reikalinga sistemos informacija diagnozei atlikti."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Daugiau nerodyti"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Darbo profilio nustatymai"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Kontaktų paieška"</string>
@@ -3257,15 +3255,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Neautomatiniai"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Atlaisvinkite vietos dabar"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gestai"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Spartieji gestai, skirti valdyti telefoną"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Spartieji gestai, skirti valdyti telefoną"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Spartieji gestai, skirti valdyti planšetinį kompiuterį"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Spartieji gestai, skirti valdyti įrenginį"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Fotoaparato įjungimas"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Jei norite greitai atidaryti fotoaparatą, tiesiog dukart palieskite maitinimo mygtuką. Veiksmą galima atlikti iš bet kurio ekrano"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Kad greitai atidarytumėte fotoaparatą, dukart paspauskite maitinimo mygtuką. Veikia bet kuriame ekrane"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Fotoaparato perjungimas"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Sparti ekrano patikra"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Kad galėtumėte patikrinti telefoną jo visiškai nepažadinę, dukart jį palieskite arba pakelkite"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Perbraukimas norint patikrinti pranešimus"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Kad galėtumėte patikrinti pranešimus, perbraukite žemyn kontrolinio kodo jutikliu telefono užpakalinėje dalyje"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Kad galėtumėte patikrinti pranešimus, perbraukite žemyn kontrolinio kodo jutikliu telefono užpakalinėje dalyje"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Kad galėtumėte patikrinti pranešimus, perbraukite žemyn kontrolinio kodo jutikliu planšetinio kompiuterio užpakalinėje dalyje"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Kad galėtumėte patikrinti pranešimus, perbraukite žemyn kontrolinio kodo jutikliu įrenginio užpakalinėje dalyje"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Įjungta"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Išjungta"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Paleidyklė jau atrakinta"</string>
@@ -3273,4 +3275,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Prisijunkite prie interneto arba susisiekite su operatoriumi"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Nepasiekiamas įrenginiuose, kuriuose taik. operat. pasirink. ribojimas"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Iš viso pasiekiama: <xliff:g id="SIZE">%1$s</xliff:g>\n\nPaskutinį kartą vykdyta <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

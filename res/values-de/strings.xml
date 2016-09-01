@@ -377,8 +377,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Mit deinem Fingerabdruck kannst du nicht nur dein Smartphone entsperren, sondern auch Käufe und App-Zugriffe autorisieren. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Die Displaysperre ist deaktiviert. Bitte wende dich für weitere Informationen an den Administrator deiner Organisation. "<annotation id="admin_details">"Weitere Informationen"</annotation>\n\n"Du kannst weiterhin Käufe und App-Zugriffe mit deinem Fingerabdruck autorisieren. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Hebe den Finger und tippe dann erneut auf den Sensor."</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Wenn du dieses Symbol siehst, kannst du deinen Fingerabdruck verwenden."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Die Einstellungen kannst du unter \"Einstellungen\" &gt; \"Sicherheit\" &gt; \"Fingerabdruck\" ändern."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Du kannst bis zu <xliff:g id="COUNT">%d</xliff:g> Fingerabdrücke hinzufügen."</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Alle Fingerabdrücke entfernen?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Du kannst dann deine Fingerabdrücke nicht verwenden, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatische Helligkeit"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Zum Aktivieren anheben"</string>
     <string name="doze_title" msgid="2259176504273878294">"Inaktivitätsdisplay"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Bei Benachrichtigungen Bildschirm aktivieren"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Der Bildschirm wird durch Doppeltippen oder bei Erhalt einer neuen Benachrichtigung aktiviert. Weitere Informationen"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Schriftgröße"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Text vergrößern oder verkleinern"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Einstellungen für SIM-Sperre"</string>
@@ -3154,7 +3152,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Anmelden"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Anmeldung nicht möglich?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Systeminformationen senden"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Um dein Problem schnell beheben zu können, benötigen wir für die Diagnose Systeminformationen."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Um dein Problem schnell beheben zu können, benötigen wir für die Diagnose Systeminformationen."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Nicht noch einmal anzeigen"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Einstellungen für Arbeitsprofil"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Suche nach Kontakten"</string>
@@ -3187,15 +3185,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuell"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Jetzt Speicherplatz freigeben"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Bewegungen"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Schnelle Gesten zum Steuern deines Smartphones"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Schnelle Gesten zum Steuern deines Smartphones"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Schnelle Gesten zum Steuern deines Tablets"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Schnelle Gesten zum Steuern deines Geräts"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Zur Kamera wechseln"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Starte die Kamera direkt, indem du die Ein-/Aus-Taste zweimal schnell drückst. Dies funktioniert auf jedem Bildschirm"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Starte die Kamera direkt, indem du die Ein-/Aus-Taste zweimal drückst. Dies funktioniert auf jedem Bildschirm"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kamera wechseln"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Kurzer Blick auf das Display"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Um dein Smartphone zu checken, ohne es vollständig zu aktivieren, doppeltippe darauf oder nimm es in die Hand"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Für Benachrichtigungen wischen"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Um deine Benachrichtigungen zu lesen, wische auf der Rückseite deines Smartphones nach unten über den Fingerabdrucksensor"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Um deine Benachrichtigungen zu lesen, wische auf der Rückseite deines Smartphones nach unten über den Fingerabdrucksensor"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Du kannst deine Benachrichtigungen lesen, indem du auf der Rückseite deines Tablets über den Fingerabdrucksensor nach unten wischst"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Du kannst deine Benachrichtigungen lesen, indem du auf der Rückseite deines Geräts über den Fingerabdrucksensor nach unten wischst"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"An"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Aus"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader ist bereits entsperrt"</string>
@@ -3203,4 +3205,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Stelle eine Internetverbindung her oder kontaktiere deinen Mobilfunkanbieter"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Auf vom Mobilfunkanbieter gesperrten Geräten nicht verfügbar"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Insgesamt <xliff:g id="SIZE">%1$s</xliff:g> freigegeben\n\nZuletzt ausgeführt am <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

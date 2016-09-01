@@ -377,8 +377,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Телефонуңуздун кулпусун ачуу, ар кандай нерселерди сатып алуу жана колдонмолорду ачуу үчүн, манжа изиңизди кошуп коюңуз. "<annotation id="url">"Көбүрөөк билүү"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Экранды кулпулоо параметри өчүрүлгөн. Көбүрөөк билүү үчүн ишканаңыздын администраторуна кайрылыңыз. "<annotation id="admin_details">"Кошумча маалымат"</annotation>\n\n"Сатып алууга уруксат берүү жана колдонмолорго кирүү үчүн манжа изиңизди колдоно берсеңиз болот. "<annotation id="url">"Көбүрөөк билүү"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Манжаңызды көтөрүп, сенсорго кайра тийип коюңуз"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Бул сөлөкөттү көргөн сайын манжа изиңизди колдонсоңуз болот."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Жөндөөлөрүңүздү өзгөртүү үчүн, Жөндөөлөр &gt; Коопсуздук &gt; Манжа изине өтүңүз."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"<xliff:g id="COUNT">%d</xliff:g> чейин манжа изин кошсоңуз болот"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Бардык манжа издери алынып салнснб?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Манжа издериңиз менен телефонуңуздун кулпусун ачып, сатып алууга уруксат берип же каттоо эсебине кире албай каласыз."</string>
@@ -945,7 +943,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Автоматтык жарыктык"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Ойготуу үчүн көтөрүү"</string>
     <string name="doze_title" msgid="2259176504273878294">"Градиент дисплейи"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Эскертмелерди алганыңызда экран күйөт"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Эки жолу таптаганыңызда же жаңы эскертмелерди алганыңызда экран күйөт. Көрүп алыңыз"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Арип өлчөмү"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Текстти чоңойтуп же кичирейтиңиз"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM карта кулпусунун жөндөөлөрү"</string>
@@ -3151,7 +3149,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Кирүү"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Кире албай жатасызбы?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Тутум маалыматын жөнөтүү"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Көйгөйүңүздү тез чечип берүү үчүн мүчүлүштүктөрдү аныктоо максатында бизге тутум маалыматы керек."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Көйгөйүңүздү тез чечип берүү үчүн мүчүлүштүктөрдү аныктоо максатында бизге тутум маалыматы керек."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Экинчи көрсөтүлбөсүн"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Жумуш профилинин жөндөөлөрү"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Байланыштарды издөө"</string>
@@ -3184,15 +3182,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Нускама"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Орун бошотуу"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Жаңсоолор"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Телефонуңузду көзөмөлдөй турган ыкчам жаңсоолор"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Телефонуңузду көзөмөлдөй турган ыкчам жаңсоолор"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Планшетиңизди көзөмөлдөй турган ыкчам жаңсоолор"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Түзмөгүңүздү көзөмөлдөй турган ыкчам жаңсоолор"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Камерага өтүү"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Камераны тез ачуу үчүн кубат баскычын эки жолу таптап коюңуз. Бардык экрандарда иштейт"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Камераны тез ачуу үчүн кубат баскычын эки жолу таптап коюңуз. Бардык экрандарда иштейт"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Камераларды ыкчам которуштуруу"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Экранды ыкчам текшерүү"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Телефонуңуздун кулпусун ачпастан эле текшерүү үчүн экранды эки жолу таптаңыз же аны колго алыңыз"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Эскертмелерди көрүү үчүн экранды серпип коюңуз"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Эскертмелериңизди текшерүү үчүн телефонуңуздун арткы бетиндеги манжа изинин сенсорун төмөн карай серпип коюңуз"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Эскертмелериңизди текшерүү үчүн телефонуңуздун арткы бетиндеги манжа изинин сенсорун төмөн карай серпип коюңуз"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Эскертмелериңизди текшерүү үчүн планшетиңиздин арткы бетиндеги манжа изинин сенсорун төмөн карай серпип коюңуз"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Эскертмелериңизди текшерүү үчүн түзмөгүңүздүн арткы бетиндеги манжа изинин сенсорун төмөн карай серпип коюңуз"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Күйүк"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Өчүк"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Иш тутумун жүктөгүчтүн кулпусу мурунтан эле ачылган"</string>
@@ -3200,4 +3202,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Интернетке туташыңыз же операторуңуз менен байланышыңыз"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Байланыш оператору кулпулаган түзмөктөрдө жеткиликтүү эмес"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Жалпысынан <xliff:g id="SIZE">%1$s</xliff:g> бошотулду\n\nАкыркы жолу <xliff:g id="DATE">%2$s</xliff:g> күнү иштетилген"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

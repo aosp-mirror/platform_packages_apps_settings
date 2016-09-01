@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Además de desbloquear el teléfono, también puedes utilizar tu huella digital para autorizar compras y el acceso a aplicaciones. "<annotation id="url">"Más información"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"La opción de bloqueo de pantalla está inhabilitada. Comunícate con el administrador de tu organización para obtener más información. "<annotation id="admin_details">"Más detalles"</annotation>\n\n"Todavía puedes usar tu huella digital para autorizar compras y el acceso a las apps. "<annotation id="url">"Más información"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Levanta el dedo y vuelve a tocar el sensor"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Cuando veas este ícono, podrás utilizar tu huella digital."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Para cambiar la configuración, ve a Configuración, Seguridad, Huella digital."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Puedes agregar hasta <xliff:g id="COUNT">%d</xliff:g> huellas digitales"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"¿Quitar las huellas digitales?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"No podrás utilizar las huellas digitales para desbloquear el teléfono, autorizar compras ni acceder a las aplicaciones con ellas."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar el dispositivo para activarlo"</string>
     <string name="doze_title" msgid="2259176504273878294">"Pantalla ambiente"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Activar la pantalla al recibir notificaciones"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Permite activar la pantalla cuando la presionas dos veces o recibes notificaciones nuevas. Obtén más información."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño de fuente"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Aumenta o reduce el tamaño del texto en pantalla"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Bloqueo de la tarjeta SIM"</string>
@@ -3150,7 +3148,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Acceder"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"¿No puedes acceder?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Enviar información del sistema"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Necesitamos la información del sistema para realizar un diagnóstico y resolver tu problema rápidamente."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Necesitamos la información del sistema para realizar un diagnóstico y resolver tu problema rápidamente."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"No volver a mostrar"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Configuración del perfil de trabajo"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Búsqueda de contactos"</string>
@@ -3183,15 +3181,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Liberar espacio ahora"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gestos"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Gestos rápidos para controlar tu teléfono"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gestos rápidos para controlar tu teléfono"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gestos rápidos para controlar tu tablet"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gestos rápidos para controlar tu dispositivo"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Ir a la cámara"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Para abrir la cámara rápidamente, presiona dos veces el botón de encendido (funciona desde cualquier pantalla)"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Para abrir la cámara rápidamente, presiona dos veces el botón de encendido (funciona desde cualquier pantalla)"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Alternar cámara"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Verificación rápida de pantalla"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Para revisar tu teléfono sin activarlo por completo, presiona dos veces o levántalo"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Desliza el dedo para ver las notificaciones"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales que está en la parte posterior de tu teléfono"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales que está en la parte posterior de tu teléfono"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales que está en la parte posterior de tu tablet"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales que está en la parte posterior de tu dispositivo"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activado"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Desactivado"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"El cargador de inicio está desbloqueado"</string>
@@ -3199,4 +3201,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Conéctate a Internet o comunícate con tu proveedor"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"No disponible en dispositivos bloqueados por el proveedor"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Espacio que se liberó: <xliff:g id="SIZE">%1$s</xliff:g>\n\nÚltima vez que se ejecutó: <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>
