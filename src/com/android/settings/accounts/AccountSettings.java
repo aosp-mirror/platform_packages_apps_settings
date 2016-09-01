@@ -554,6 +554,14 @@ public class AccountSettings extends SettingsPreferenceFragment
         @Override
         public boolean onPreferenceClick(Preference preference) {
             if (mFragment != null) {
+                UserHandle user = mFragmentArguments.getParcelable(EXTRA_USER);
+                if (user != null && Utils.startQuietModeDialogIfNecessary(getContext(), mUm,
+                        user.getIdentifier())) {
+                    return true;
+                } else if (user != null && Utils.unlockWorkProfileIfNecessary(getContext(),
+                        user.getIdentifier())) {
+                    return true;
+                }
                 Utils.startWithFragment(getContext(), mFragment, mFragmentArguments,
                         null /* resultTo */, 0 /* resultRequestCode */, mTitleResPackageName,
                         mTitleResId, null /* title */);
