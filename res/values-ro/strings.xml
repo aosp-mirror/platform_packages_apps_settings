@@ -381,8 +381,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Pe lângă deblocarea telefonului, vă puteți folosi amprenta pentru a autoriza achizițiile și accesul aplicațiilor. "<annotation id="url">"Aflați mai multe"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Opțiunea pentru blocarea ecranului este dezactivată. Contactați administratorul organizației pentru a afla mai multe. "<annotation id="admin_details">"Mai multe detalii"</annotation>\n\n"Puteți să folosiți în continuare amprenta pentru a autoriza achizițiile și accesul aplicațiilor. "<annotation id="url">"Aflați mai multe"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Ridicați degetul, apoi atingeți senzorul din nou"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Când vedeți această pictogramă, vă puteți folosi amprenta."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Pentru a schimba setările, accesați Setări &gt; Securitate &gt; Amprentă."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Puteți să adăugați până la <xliff:g id="COUNT">%d</xliff:g>   amprente"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Eliminați toate amprentele?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Nu veți putea folosi amprentele ca să deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații."</string>
@@ -955,7 +953,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Luminozitate automată"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Ridicați pentru a reactiva"</string>
     <string name="doze_title" msgid="2259176504273878294">"Afișare Ambient"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Activează ecranul când primiți notificări"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Activează ecranul când îl atingeți de două ori sau când primiți notificări. Aflați cum"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Dimensiunea fontului"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Măriți sau micșorați textul"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Setări de blocare a cardului SIM"</string>
@@ -3184,7 +3182,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Conectați-vă"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Nu vă puteți conecta?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Trimiteți informațiile despre sistem"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Pentru a remedia problema rapid, avem nevoie de informații despre sistem pentru diagnosticare."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Pentru a remedia problema rapid, avem nevoie de informații despre sistem pentru diagnosticare."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Nu mai afișa"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Setările profilului de serviciu"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Căutarea persoanelor de contact"</string>
@@ -3220,15 +3218,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuale"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Eliberați spațiu acum"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gesturi"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Gesturi rapide pentru a controla telefonul"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gesturi rapide pentru a controla telefonul"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gesturi rapide pentru controlul tabletei"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gesturi rapide pentru controlul dispozitivului"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Accesați camera foto"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Pentru a deschide rapid camera foto, atingeți de două ori butonul de pornire. Funcționează din orice ecran."</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Pentru a deschide rapid camera foto, apăsați de două ori butonul de pornire. Funcționează din orice ecran."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Comutați camera foto"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Verificare rapidă a ecranului"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Pentru a verifica telefonul fără să îl activați complet, atingeți-l de două ori sau ridicați-l"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Glisați pentru notificări"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Pentru a verifica notificările, glisați în jos pe senzorul de amprentă de pe partea din spate a telefonului"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Pentru a verifica notificările, glisați în jos pe senzorul de amprentă de pe partea din spate a telefonului"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Pentru a verifica notificările, glisați în jos pe senzorul de amprentă de pe spatele tabletei"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Pentru a verifica notificările, glisați în jos pe senzorul de amprentă de pe spatele dispozitivului"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activat"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Dezactivat"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloaderul este deja deblocat"</string>
@@ -3236,4 +3238,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Conectați-vă la internet sau contactați-vă operatorul"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Nu este disponibilă pe dispozitivele blocate de operator"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Un spațiu total disponibil de <xliff:g id="SIZE">%1$s</xliff:g>\n\nData ultimei rulări: <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

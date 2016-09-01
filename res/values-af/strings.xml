@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Jy kan jou vingerafdruk nie net gebruik om jou foon te ontsluit nie, maar ook om aankope en programtoegang te magtig. "<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Skermslotopsie is gedeaktiveer. Kontak jou organisasie se administrateur om meer uit te vind. "<annotation id="admin_details">"Meer besonderhede"</annotation>\n\n"Jy kan steeds jou vingerafdruk gebruik om aankope en programtoegang te magtig. "<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Lig vinger op en raak sensor dan weer"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Elke keer as jy hierdie ikoon sien, kan jy jou vingerafdruk gebruik."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Gaan na Instellings &gt; Sekuriteit &gt; Vingerafdruk om jou instellings te verander."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Jy kan tot <xliff:g id="COUNT">%d</xliff:g> vingerafdrukke byvoeg"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Verwyder alle vingerafdrukke?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Jy sal nie jou vingerafdrukke kan gebruik om jou foon te ontsluit, aankope te magtig of daarmee by programme aan te meld nie."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Outomatiese helderheid"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Lig op om wakker te maak"</string>
     <string name="doze_title" msgid="2259176504273878294">"Stemmingvertoning"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Maak skerm wakker wanneer jy kennisgewings ontvang"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Maak skerm wakker wanneer jy dit dubbeltik of nuwe kennisgewings ontvang. Sien hoe"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Lettertipegrootte"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Maak teks groter of kleiner"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM-kaart se sluitinstellings"</string>
@@ -3152,7 +3150,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Meld aan"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Kan jy nie aanmeld nie?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Stuur stelselinligting"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Om te help om vinnig aan jou kwessie aandag te gee, moet ons stelselinligting vir \'n diagnose hê."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Om te help om vinnig aan jou kwessie aandag te gee, moet ons stelselinligting vir \'n diagnose hê."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Moenie weer wys nie"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Werkprofielinstellings"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Kontaksoektog"</string>
@@ -3185,15 +3183,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Handmatig"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Maak nou spasie beskikbaar"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gebare"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Vinnige gebare om jou foon te beheer"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Vinnige gebare om jou foon te beheer"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Vinnige gebare om jou tablet te beheer"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Vinnige gebare om jou toestel te beheer"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Spring na kamera"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Dubbeltik eenvoudig die aan/af-skakelaar om die kamera vinnig oop te maak. Dit werk op enige skerm"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Druk die aan/af-skakelaar twee keer om die kamera vinnig oop te maak. Dit werk op enige skerm"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Draai kamera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Vinnige skermkontrolering"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Dubbeltik jou foon of tel dit op om daarna te kyk sonder om dit heeltemal wakker te maak"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Swiep vir kennisgewings"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Swiep na onder op die vingerafdruksensor op die agterkant van jou foon om na jou kennisgewings te kyk"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Swiep na onder op die vingerafdruksensor op die agterkant van jou foon om na jou kennisgewings te kyk"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Swiep na onder op die vingerafdruksensor op die agterkant van jou tablet om na jou kennisgewings te kyk"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Swiep na onder op die vingerafdruksensor op die agterkant van jou toestel om na jou kennisgewings te kyk"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Aan"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Af"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Selflaaiprogram is reeds ontsluit"</string>
@@ -3201,4 +3203,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Koppel aan die internet of kontak jou diensverskaffer"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Onbeskikbaar op toestelle wat deur diensverskaffer gesluit is"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Altesame <xliff:g id="SIZE">%1$s</xliff:g> is beskikbaar gemaak\n\nLaas op <xliff:g id="DATE">%2$s</xliff:g> laat loop"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

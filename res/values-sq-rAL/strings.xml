@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Përveç shkyçjes së telefonit, gjurmën e gishtit mund ta përdorësh edhe për të autorizuar blerjet dhe qasjen në aplikacione. "<annotation id="url">"Mëso më shumë"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Opsioni i kyçjes së ekranit është çaktivizuar. Kontakto me administratorin e organizatës tënde për të mësuar më shumë. "<annotation id="admin_details">"Më shumë detaje"</annotation>\n\n"Mund të vazhdosh të përdorësh gjurmën e gishtit për të autorizuar blerjet dhe për qasje në aplikacion. "<annotation id="url">"Mëso më shumë"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Ngrije gishtin dhe më pas preke përsëri sensorin"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Kurdo që ta shohësh këtë ikonë, mund të përdorësh gjurmën e gishtave."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Për të ndryshuar cilësimet, shko te Cilësimet, Siguria dhe Gjurma e Gishtave."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Mund të shtosh deri në <xliff:g id="COUNT">%d</xliff:g> gjurma të gishtave"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Të hiqen të gjitha gjurmët e gishtave?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Nuk do të jesh në gjendje të përdorësh gjurmët e gishtave për të shkyçur telefonin, për të autorizuar blerjet ose për t\'u identifikuar në aplikacione me to."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Ndriçimi automatik"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Ngrije për ta zgjuar"</string>
     <string name="doze_title" msgid="2259176504273878294">"Shfaqja e ambientit"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Zgjoje ekranin kur të merren njoftime"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Zgjoje ekranin kur troket dy herë ose merr njoftime të reja. Shiko se si"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Madhësa e shkrimit"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Bëje tekstin më të madh ose më të vogël"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Kyçja e kartës SIM"</string>
@@ -3152,7 +3150,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Identifikohu"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Nuk mund të identifikohesh?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Dërgo informacionet e sistemit"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Për të të ndihmuar në trajtimin e shpejtë të problemit tënd, na nevojiten informacione të sistemit për diagnostikim."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Për të të ndihmuar në trajtimin e shpejtë të problemit tënd, na nevojiten informacione të sistemit për diagnostikim."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Mos e shfaq përsëri"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Cilësimet e profilit të punës"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Kërkimi i kontakteve"</string>
@@ -3185,15 +3183,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Liro hapësirën tani"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gjestet"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Gjeste të shpejta për të kontrolluar telefonin"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gjeste të shpejta për të kontrolluar telefonin"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gjestet e shpejta për të kontrolluar tabletin"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gjestet e shpejta për të kontrolluar pajisjen"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Kalo te kamera"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Për të hapur me shpejtësi kamerën, thjesht trokit dy herë te butoni i energjisë. Funksionon nga çdo ekran"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Për të hapur me shpejtësi kamerën, shtyp dy herë te butoni. Funksionon nga çdo ekran"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Rrotulloje kamerën"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Kontrolli i shpejtë i ekranit"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Për ta kontrolluar telefonin pa e zgjuar plotësisht, trokit dy herë ose merre në duar."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Rrëshqit shpejt për njoftimet"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Për të kontrolluar njoftimet, rrëshqit poshtë në sensorin e gjurmës së gishtit në pjesën e pasme të telefonit."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Për të kontrolluar njoftimet, rrëshqit poshtë në sensorin e gjurmës së gishtit në pjesën e pasme të telefonit."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Për të kontrolluar njoftimet, rrëshqit poshtë në sensorin e gjurmës së gishtit në pjesën e pasme të tabletit"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Për të kontrolluar njoftimet, rrëshqit poshtë në sensorin e gjurmës së gishtit në pjesën e pasme të pajisjes"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Aktiv"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Joaktiv"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Ngarkuesi i sistemit është i shkyçur tashmë"</string>
@@ -3201,4 +3203,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Lidhu me internetin ose kontakto me operatorin celular"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Nuk ofrohet në pajisjet e kyçura për një operator celular"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> në total të bëra të disponueshme\n\nEkzekutimi i fundit në datën <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

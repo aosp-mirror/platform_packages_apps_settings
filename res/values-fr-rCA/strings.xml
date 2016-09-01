@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Votre empreinte digitale vous permet non seulement de déverrouiller votre téléphone, mais également d\'autoriser des achats et l\'accès à l\'application. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"L\'option de verrouillage de l\'écran est désactivée. Communiquez avec l\'administrateur de votre organisation pour en savoir plus. "<annotation id="admin_details">"Plus de détails"</annotation>\n\n"Vous pouvez toujours utiliser votre empreinte digitale pour autoriser les achats et l\'accès aux applications. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Relevez le doigt, puis touchez le capteur à nouveau"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Lorsque cette icône s\'affiche, vous pouvez utiliser votre empreinte digitale."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Pour modifier les paramètres, sélectionnez Paramètres &gt; Sécurité &gt; Empreinte digitale."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> empreintes digitales"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Supprimer toutes les empreintes digitales?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Vous ne pourrez pas utiliser vos empreintes digitales pour déverrouiller votre téléphone, autoriser vos achats ni vous connecter à des applications."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Ajuster automatiquement la luminosité"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Soulever pour activer"</string>
     <string name="doze_title" msgid="2259176504273878294">"Affichage en mode Veille"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Activer l\'écran lorsque vous recevez des notifications"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Activez l\'écran en le touchant deux fois ou lorsque vous recevez de nouvelles notifications. Découvrez comment."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Taille de police"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Agrandissez ou réduisez le texte"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Paramètres de verrouillage de la carte SIM"</string>
@@ -3152,7 +3150,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Connexion"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Vous n\'arrivez pas à vous connecter?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Envoyer les données système"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Pour vous aider à résoudre rapidement la situation, nous avons besoin de certaines données système afin d\'effectuer un diagnostic."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Pour vous aider à résoudre rapidement la situation, nous avons besoin de certaines données système afin d\'effectuer un diagnostic."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Ne plus afficher"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Paramètres du profil professionnel"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Recherche de contacts"</string>
@@ -3185,15 +3183,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuel"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Libérer de l\'espace maintenant"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gestes"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Gestes rapides pour contrôler votre téléphone"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gestes rapides pour contrôler votre téléphone"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gestes rapides pour contrôler votre tablette"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gestes rapides pour contrôler votre appareil"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Passer à l\'appareil photo"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Pour ouvrir rapidement l\'appareil photo, il vous suffit de toucher deux fois l\'interrupteur. Cela fonctionne à partir de n\'importe quel écran."</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Pour ouvrir rapidement l\'appareil photo, il vous suffit d\'appuyer deux fois sur l\'interrupteur. Cela fonctionne à partir de n\'importe quel écran."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Changer d\'appareil photo"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Vérification rapide de l\'écran"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Pour consulter votre téléphone sans le sortir de veille complètement, touchez-le deux fois ou saisissez-le."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Glisser un doigt pour afficher les notifications"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le capteur d\'empreinte digitale à l\'arrière du téléphone."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le capteur d\'empreinte digitale à l\'arrière du téléphone."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le capteur d\'empreinte digitale à l\'arrière de la tablette"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le capteur d\'empreinte digitale à l\'arrière de l\'appareil"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activé"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Désactivé"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Le programme d\'amorçage est déjà déverrouillé"</string>
@@ -3201,4 +3203,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Connect. à Internet ou contactez votre fournisseur de services"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Non disp. sur les appareils verrouillés par un f. de services"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> libéré(s) au total\n\n Dernière exécution : <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Εκτός από τη δυνατότητα ξεκλειδώματος του τηλεφώνου σας, μπορείτε επίσης να χρησιμοποιήσετε το μοναδικό χαρακτηριστικό σας, για να εξουσιοδοτήσετε αγορές και πρόσβαση σε εφαρμογές. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Το κλείδωμα οθόνης είναι απενεργοποιημένο. Επικοινωνήστε με το διαχειριστή του οργανισμού σας για να μάθετε περισσότερα. "<annotation id="admin_details">"Περισσότερες λεπτομέρειες"</annotation>\n\n"Μπορείτε ακόμα να χρησιμοποιείτε τα δακτυλικά σας αποτυπώματα για να εξουσιοδοτείτε αγορές και να έχετε πρόσβαση σε εφαρμογές. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Σηκώστε το δάχτυλο και, στη συνέχεια, αγγίξτε ξανά τον αισθητήρα"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Όποτε βλέπετε αυτό το εικονίδιο, μπορείτε να χρησιμοποιείτε το μοναδικό χαρακτηριστικό σας."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Για να αλλάξετε τις ρυθμίσεις σας, μεταβείτε στις Ρυθμίσεις &gt; Ασφάλεια &gt; Μοναδικό χαρακτηριστικό."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Μπορείτε να προσθέσετε έως <xliff:g id="COUNT">%d</xliff:g> μοναδικά χαρακτηριστικά"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Κατάργηση όλων των δακτυλικών αποτυπωμάτων;"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Δεν θα μπορείτε να χρησιμοποιήσετε τα δακτυλικά σας αποτυπώματα για να ξεκλειδώσετε το τηλέφωνό σας, να εξουσιοδοτείτε αγορές ή να συνδέεστε μαζί τους σε εφαρμογές."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Αυτόματη φωτεινότητα"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Σηκώστε για ενεργοποίηση"</string>
     <string name="doze_title" msgid="2259176504273878294">"Οθόνη ambient"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Αφύπνιση οθόνης κατά τη λήψη ειδοποιήσεων"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Η οθόνη ενεργοποιείται όταν πατάτε δύο φορές σε αυτήν ή όταν λαμβάνετε νέες ειδοποιήσεις. Δείτε πώς"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Μέγεθος γραμματοσειράς"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Κάντε το κείμενο μεγαλύτερο ή μικρότερο"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Ρυθμίσεις κλειδ/τος SIM"</string>
@@ -3152,7 +3150,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Σύνδεση"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Δεν μπορείτε να συνδεθείτε;"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Αποστολή πληροφοριών συστήματος"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Χρειαζόμαστε πληροφορίες συστήματος για διαγνωστικούς σκοπούς, για να σας βοηθήσουμε να αντιμετωπίσετε γρήγορα το πρόβλημα που παρουσιάστηκε."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Χρειαζόμαστε πληροφορίες συστήματος για διαγνωστικούς σκοπούς, για να σας βοηθήσουμε να αντιμετωπίσετε γρήγορα το πρόβλημα που παρουσιάστηκε."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Να μην εμφανιστεί ξανά"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Ρυθμίσεις προφίλ εργασίας"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Αναζήτηση επαφών"</string>
@@ -3185,15 +3183,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Εγχειρίδιο χρήσης"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Ελευθερώστε χώρο τώρα"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Κινήσεις"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Γρήγορες κινήσεις για τον έλεγχο του τηλεφώνου σας"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Γρήγορες κινήσεις για τον έλεγχο του τηλεφώνου σας"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Γρήγορες κινήσεις για τον έλεγχο του tablet σας"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Γρήγορες κινήσεις για τον έλεγχο της συσκευής σας"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Μετάβαση στην κάμερα"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Για να ανοίξετε γρήγορα την κάμερα, απλώς πατήστε δύο φορές το κουμπί λειτουργίας. Λειτουργεί για όλες τις οθόνες"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Για γρήγορο άνοιγμα της κάμερας, πατήστε δύο φορές το κουμπί λειτουργίας. Αυτή η ενέργεια μπορεί να πραγματοποιηθεί από οποιαδήποτε οθόνη"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Αναστροφή κάμερας"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Γρήγορος έλεγχος οθόνης"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Για να ελέγξετε το τηλέφωνό σας χωρίς να το ενεργοποιήσετε πλήρως, πατήστε δύο φορές ή σηκώστε το"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Σύρετε για ειδοποιήσεις"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Για να ελέγξετε τις ειδοποιήσεις σας, σύρετε προς τα κάτω στον αισθητήρα δαχτυλικών αποτυπωμάτων στο πίσω μέρος του τηλεφώνου σας"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Για να ελέγξετε τις ειδοποιήσεις σας, σύρετε προς τα κάτω στον αισθητήρα δαχτυλικών αποτυπωμάτων στο πίσω μέρος του τηλεφώνου σας"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Για να ελέγξετε τις ειδοποιήσεις σας, σύρετε προς τα κάτω στον αισθητήρα δακτυλικών αποτυπωμάτων στο πίσω μέρος του tablet σας"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Για να ελέγξετε τις ειδοποιήσεις σας, σύρετε προς τα κάτω στον αισθητήρα δακτυλικών αποτυπωμάτων στο πίσω μέρος της συσκευής σας"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Ενεργό"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Ανενεργό"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Το bootloader είναι ήδη ξεκλείδωτο"</string>
@@ -3201,4 +3203,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Συνδ. στο διαδίκτυο ή επικ. με την εταιρεία κιν. τηλεφ. σας"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Δεν διατίθεται σε συσκευές που έχουν κλειδωθεί από εταιρεία κινητής τηλεφωνίας"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> έγιναν συνολικά διαθέσιμα\n\nΤελευταία εκτέλεση στις <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Освен за отключване на телефона си можете да използвате отпечатъка си и за упълномощаване на покупки и достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Опцията за заключване на екрана е деактивирана. Свържете се с администратора на организацията си, за да научите повече. "<annotation id="admin_details">"Допълнителни подробности"</annotation>\n\n"Пак можете да използвате отпечатъка си за оторизиране на покупки и за достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Вдигнете пръста, след което докоснете сензора отново"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Когато видите тази икона, можете да използвате отпечатъка си."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"За да промените настройките си, отворете „Настройки“ &gt; „Сигурност“ &gt; „Отпечатък“."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Можете да добавите до <xliff:g id="COUNT">%d</xliff:g> отпечатъка"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Да се премахнат ли вс. отпечатъци?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Няма да можете да използвате отпечатъците си, за да отключвате телефона си, да оторизирате покупки или да влизате в приложения."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Автоматична яркост"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Събуждане при повдигане"</string>
     <string name="doze_title" msgid="2259176504273878294">"Дисплей, открояващ важни неща"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Включване на екрана при получаване на известия"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Излезте от спящия режим, когато докоснете екрана два пъти или получите нови известия. Вижте как"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Размер на шрифта"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Уголемяване или намаляване на текст"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Заключване на SIM картата"</string>
@@ -3152,7 +3150,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Вход"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Не можете да влезете в профила си?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Изпращане на системна информация"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"За да ви помогнем да решите бързо проблема си, се нуждаем от системна информация за диагностика."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"За да ви помогнем да решите бързо проблема си, се нуждаем от системна информация за диагностика."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Да не се показва отново"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Настройки за служебния потребителски профил"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Търсене на контакт"</string>
@@ -3185,15 +3183,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Ръчни"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Освободете място сега"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Жестове"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Бързи жестове за контролиране на телефона ви"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Бързи жестове за контролиране на телефона ви"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Бързи жестове за контролиране на таблета ви"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Бързи жестове за контролиране на устройството ви"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Бързо отваряне на камерата"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"За да отворите бързо камерата, трябва само да докоснете двукратно бутона за захранване. Функцията работи на всеки екран"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"За да отворите бързо камерата, натиснете два пъти бутона за захранване – това работи от всеки екран"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Превключване на камерата със завъртане"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Бърза проверка на екрана"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Докоснете двукратно или повдигнете телефона си, за да го проверите, без да излизате напълно от спящия режим"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Преглед на известията с прекарване на пръст"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на телефона си"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на телефона си"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на таблета си"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на устройството си"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Вкл."</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Изкл."</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Програмата за зареждане на опер. с-ма вече е отключена"</string>
@@ -3201,4 +3203,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Свържете се с интернет или се обърнете към оператора си"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Не е налице на заключени към оператор устройства"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Освободихте общо <xliff:g id="SIZE">%1$s</xliff:g>\n\nПоследно изпълнение: <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

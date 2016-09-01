@@ -384,8 +384,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"За допомогою цифрового відбитка можна не лише розблоковувати телефон, а й підтверджувати покупки та входити в додатки. "<annotation id="url">"Докладніше"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Блокування екрана вимкнено. Зв’яжіться з адміністратором своєї організації, щоб дізнатися більше. "<annotation id="admin_details">"Докладніше"</annotation>\n\n"Ви можете робити покупки та входити в додатки за допомогою відбитка пальця. "<annotation id="url">"Докладніше"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Підніміть палець і знову торкніться датчика"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Цей значок означає, що приймається відбиток пальця."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Щоб змінити параметри, виберіть \"Налаштування\" &gt; \"Безпека\" &gt; \"Відбиток пальця\"."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Можна додати максимум стільки відбитків: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Видалити всі відбитки пальців?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Ви не зможете розблоковувати телефон, дозволяти покупки чи входити в додатки за допомогою відбитків пальців."</string>
@@ -964,7 +962,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Автоматична яскравість"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Підняти, щоб активувати"</string>
     <string name="doze_title" msgid="2259176504273878294">"Активація екрана"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Активувати екран, коли надходять сповіщення"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Телефон активується, коли ви двічі торкаєтеся його екрана чи коли вам надходять сповіщення. Докладніше"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Розмір шрифту"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Збільшуйте або зменшуйте текст"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Налашт. блокув. SIM-карти"</string>
@@ -3216,7 +3214,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Увійти"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Не можете ввійти?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Надіслати інформацію про систему"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Щоб швидко вирішити вашу проблему, нам потрібна інформація про систему для діагностики."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Щоб швидко вирішити вашу проблему, нам потрібна інформація про систему для діагностики."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Більше не показувати"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Налаштування робочого профілю"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Пошук контактів"</string>
@@ -3255,15 +3253,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Вручну"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Звільнити місце"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Жести"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Швидкі жести для керування телефоном"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Швидкі жести для керування телефоном"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Швидкі жести для керування планшетом"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Швидкі жести для керування пристроєм"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Як перейти до камери"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Щоб швидко відкрити камеру, двічі натисніть кнопку живлення. Працює на будь-якому екрані"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Щоб швидко відкрити камеру, двічі натисніть кнопку живлення. Працює на будь-якому екрані"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Як змінити камеру"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Як швидко перевірити екран"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Щоб перевірити телефон, не виводячи його з режиму сну, двічі торкніться екрана чи підніміть пристрій"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Як переглянути сповіщення"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Щоб переглянути сповіщення, проведіть пальцем униз на сканері відбитків пальців на задній панелі телефона"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Щоб переглянути сповіщення, проведіть пальцем униз на сканері відбитків пальців на задній панелі телефона"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Щоб переглянути сповіщення, проведіть пальцем униз по сканеру відбитків пальців на задній панелі планшета"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Щоб переглянути сповіщення, проведіть пальцем униз по сканеру відбитків пальців на задній панелі пристрою"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Увімкнено"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Вимкнено"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Завантажувач уже розблоковано"</string>
@@ -3271,4 +3273,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Під’єднайтеся до Інтернету або зв’яжіться з оператором"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Недоступно на пристроях, які заблокував оператор"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Усього звільнено <xliff:g id="SIZE">%1$s</xliff:g>\n\nДата останнього запуску: <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

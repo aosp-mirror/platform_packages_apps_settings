@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"In addition to unlocking your phone, you can also use your fingerprint to authorise purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Screen lock option disabled. Contact your organisation\'s administrator to Find out more. "<annotation id="admin_details">"More details"</annotation>\n\n"You can still use your fingerprint to authorise purchases and app access. "<annotation id="url">"Find out more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Lift finger, then touch sensor again"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Whenever you see this icon, you can use your fingerprint."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"To change your settings, go to Settings &gt; Security &gt; Fingerprint."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"You can add up to <xliff:g id="COUNT">%d</xliff:g> fingerprints"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Remove all fingerprints?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"You won\'t be able to use your fingerprints to unlock your phone, authorise purchases or sign in to apps with them."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatic brightness"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Lift to wake"</string>
     <string name="doze_title" msgid="2259176504273878294">"Ambient display"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"Wake screen when you receive notifications"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"Wake screen when you double-tap it or get new notifications. See how"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Font size"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Make text larger or smaller"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM card lock settings"</string>
@@ -3152,7 +3150,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Sign In"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Can\'t sign in?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Send system information"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"To help address your issue quickly, we need system information for diagnosis."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"To help address your issue quickly, we need system information for diagnosis."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Do not show this again"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Work profile settings"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Contact search"</string>
@@ -3185,15 +3183,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Free up space now"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gestures"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Quick gestures to control your phone"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Quick gestures to control your phone"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Quick gestures to control your tablet"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Quick gestures to control your device"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Jump to Camera"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"To quickly open camera, just double-tap the power button. Works from any screen"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"To quickly open camera, press the power button twice. Works from any screen"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Flip camera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Quick screen check"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"To check your phone without waking it up fully, double-tap it or pick it up"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Swipe for notifications"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"To check your notifications, swipe down on the fingerprint sensor on the back of your phone"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"To check your notifications, swipe down on the fingerprint sensor on the back of your phone"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"To check your notifications, swipe down on the fingerprint sensor on the back of your tablet"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"To check your notifications, swipe down on the fingerprint sensor on the back of your device"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"On"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Off"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader is already unlocked"</string>
@@ -3201,4 +3203,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Connect to the Internet or contact your carrier"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Unavailable on mobile-locked devices"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> total made available\n\nLast ran on <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

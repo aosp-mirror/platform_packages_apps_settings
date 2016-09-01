@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"اپنے فون کو غیر مقفل کرنے کے علاوہ، آپ خریداریوں کی توثیق کرنے اور ایپ تک رسائی حاصل کرنے کیلئے اپنے فنگر پرنٹ کا بھی استعمال کر سکتے ہیں۔ "<annotation id="url">"مزید جانیں"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"اسکرین مقفل کا اختیار غیر فعال ہو گیا۔ مزید جاننے کیلئے اپنے ادارے کے منتظم سے رابطہ کریں۔ "<annotation id="admin_details">"مزید تفصیلات"</annotation>\n\n"آپ اب بھی خریداریوں کی اجازت دینے اور ایپ کی رسائی کیلئے فنگر پرنٹ استعمال کر سکتے ہیں۔ "<annotation id="url">"مزید جانیں"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"انگلی اٹھائیں اور سنسر کو دوبارہ ٹچ کریں"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"آپ کو جب بھی یہ آئیکن دکھائی دیتا ہے تو آپ اپنی فنگر پرنٹ استعمال کر سکتے ہیں۔"</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"‏اپنی ترتیبات تبدیل کرنے کیلئے، ترتیبات ‎&lt;‎ سیکیورٹی ‎&lt;‎ فنگر پرنٹ پر جائیں۔"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"آپ <xliff:g id="COUNT">%d</xliff:g> تک فنگر پرنٹس کا اضافہ کر سکتے ہیں"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"تمام فنگر پرنٹس ہٹائیں؟"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"آپ اپنے فون کیلئے کو غیر مقفل کرنے، خریداریوں کی اجازت دینے، ایپس میں سائن ان ہونے کیلئے اپنے فنگر پرنٹس استعمال نہیں کر پائیں گے۔"</string>
@@ -936,7 +934,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"خود کار چمک"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"جگانے کیلئے اٹھائیں"</string>
     <string name="doze_title" msgid="2259176504273878294">"ایمبی اینٹ ڈسپلے"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"اطلاعات موصول ہونے پر اسکرین کو جگائیں"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"دو بار تھپتھپانے یا نئی اطلاعات موصول کرنے پر اسکرین جگائیں۔ دیکھیں کیسے"</string>
     <string name="title_font_size" msgid="4405544325522105222">"فونٹ سائز"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"متن کو چھوٹا یا بڑا کریں"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"‏SIM کارڈ لاک کی ترتیبات"</string>
@@ -3142,7 +3140,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"سائن ان کریں"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"سائن ان نہیں کر سکتے؟"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"سسٹم کی معلومات بھیجیں"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"آپ کا مسئلہ فوری طور پر حل کرنے کیلئے، ہمیں تشخیص کیلئے سسٹم کی معلومات درکار ہے۔"</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"آپ کا مسئلہ فوری طور پر حل کرنے کیلئے، ہمیں تشخیص کیلئے سسٹم کی معلومات درکار ہے۔"</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"دوبارہ مت دکھائیں"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"دفتری پروفائل کی ترتیبات"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"رابطہ تلاش"</string>
@@ -3175,15 +3173,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"مینوئل"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"اب جگہ خالی کریں"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"اشارے"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"آپ کے فون کو کنٹرول کرنے کیلئے تیز اشارے"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"آپ کے فون کو کنٹرول کرنے کیلئے تیز اشارے"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"آپ کے ٹیبلیٹ کو کنٹرول کرنے کیلئے تیز اشارے"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"آپ کے آلہ کو کنٹرول کرنے کیلئے تیز اشارے"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"کیمرا پر جائیں"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"کیمرا کو تیزی سے کھولنے کیلئے بس پاور بٹن کو دو بار تھپتھپائیں۔ یہ کسی بھی اسکرین سے کام کرتا ہے"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"کیمرہ کو تیزی سے کھولنے کیلئے، پاور بٹن کو دوبار دبائیں۔ کسی بھی اسکرین سے ہو جاتا ہے"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"کیمرا پلٹیں"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"فوری اسکرین چیک"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"اپنے فون کو پوری طرح فعال کیے بغیر چیک کرنے کیلئے اسے دو بار تھپتھپائیں یا اٹھائیں"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"اطلاعات کیلئے سوائپ کریں"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"اپنی اطلاعات چیک کرنے کیلئے اپنے فون کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"اپنی اطلاعات چیک کرنے کیلئے اپنے فون کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"اپنی اطلاعات چیک کرنے کیلئے اپنے ٹیبلیٹ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"اپنی اطلاعات چیک کرنے کیلئے اپنے آلہ کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"آن"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"آف"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"بوٹ لوڈر پہلے سے غیر مقفل ہے"</string>
@@ -3191,4 +3193,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"انٹرنیٹ سے منسلک ہوں یا اپنے کیرئیر سے رابطہ کریں"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"کیریئر کے ذریعہ مقفل آلات پر غیر دستیاب ہے"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"کل <xliff:g id="SIZE">%1$s</xliff:g> دستیاب ہو گئے\n\nآخری بار <xliff:g id="DATE">%2$s</xliff:g> پر چلا"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>

@@ -378,8 +378,6 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"A més de fer servir l\'empremta digital per desbloquejar el telèfon, també la pots fer servir per autoritzar compres i permetre l\'accés a determinades aplicacions. "<annotation id="url">"Més informació"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"El bloqueig de pantalla està desactivat. Contacta amb l\'administrador de la teva organització per obtenir-ne més informació. "<annotation id="admin_details">"Més detalls"</annotation>\n\n"Pots continuar utilitzant l\'empremta digital per autoritzar les compres i l\'accés a aplicacions. "<annotation id="url">"Més informació"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Aixeca el dit i, a continuació, torna a tocar el sensor"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="4132164775128798343">"Quan vegis aquesta icona, pots fer servir la teva empremta digital."</string>
-    <string name="setup_fingerprint_enroll_finish_secondary_message" msgid="3734962461534384882">"Per canviar la configuració, vés a Configuració &gt; Seguretat &gt; Empremta digital."</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Pots afegir un màxim de <xliff:g id="COUNT">%d</xliff:g> empremtes digitals"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Suprimir les empremtes digitals?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"No podràs fer servir les empremtes digitals per desbloquejar el telèfon, autoritzar compres ni iniciar la sessió en aplicacions."</string>
@@ -946,7 +944,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillantor automàtica"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Aixeca\'l per reactivar-lo"</string>
     <string name="doze_title" msgid="2259176504273878294">"Pantalla Ambient"</string>
-    <string name="doze_summary" msgid="3846219936142814032">"La pantalla s\'activa quan arriben notificacions"</string>
+    <string name="doze_summary" msgid="4312399592244939565">"La pantalla es reactiva en fer-hi doble toc o en rebre notificacions. Descobreix-ho"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Mida de la lletra"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Amplia o redueix el text"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Config. de bloqueig de SIM"</string>
@@ -3152,7 +3150,7 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Inicia la sessió"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"No pots iniciar la sessió?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Envia informació del sistema"</string>
-    <string name="support_disclaimer_content" msgid="6702447747744624871">"Per solucionar el problema ràpidament, necessitem informació del sistema per fer-ne un diagnòstic."</string>
+    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Per solucionar el problema ràpidament, necessitem informació del sistema per fer-ne un diagnòstic."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"No ho tornis a mostrar"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Configuració del perfil professional"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Cerca de contactes"</string>
@@ -3185,15 +3183,19 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manual"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Allibera espai ara"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Gestos"</string>
-    <string name="gesture_preference_summary" msgid="8627850388011956901">"Gestos ràpids per controlar el telèfon"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gestos ràpids per controlar el telèfon"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gestos ràpids per controlar la tauleta"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gestos ràpids per controlar el dispositiu"</string>
     <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Accés ràpid a la càmera"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6988157149749655988">"Per obrir la càmera ràpidament, fes doble toc sobre el botó d\'engegada. Funciona des de qualsevol pantalla."</string>
+    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Per obrir ràpidament la càmera, prem el botó d\'engegada dues vegades. Funciona des de qualsevol pantalla."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Gira la càmera"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" msgid="7369291941168001738">"Comprovació ràpida de la pantalla"</string>
     <string name="ambient_display_summary" msgid="3606386731704368561">"Per donar una ullada al telèfon sense activar-lo del tot, fes-hi doble toc o agafa\'l"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Llisca el dit per veure les notificacions"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" msgid="5274050434459511239">"Per consultar les notificacions, llisca el dit cap avall al sensor d\'empremtes digitals de la part posterior del telèfon"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Per consultar les notificacions, llisca el dit cap avall al sensor d\'empremtes digitals de la part posterior del telèfon"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Per consultar les notificacions, llisca el dit cap avall al sensor d\'empremtes digitals de la part posterior de la tauleta"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Per consultar les notificacions, llisca el dit cap avall al sensor d\'empremtes digitals de la part posterior del dispositiu"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activat"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Desactivat"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"El bootloader ja està desbloquejat"</string>
@@ -3201,4 +3203,12 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Connecta\'t a Internet o contacta amb l\'operador de telefonia"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"No disponible en dispositius bloquejats per l\'operador"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> d\'emmagatzematge total disponible\n\nExecutat per últim cop el dia <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
+    <skip />
+    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
+    <skip />
+    <!-- no translation found for web_action_section_title (806405168097593614) -->
+    <skip />
+    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
+    <skip />
 </resources>
