@@ -876,8 +876,19 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    public void onAccessPointChanged(AccessPoint accessPoint) {
-        ((LongPressAccessPointPreference) accessPoint.getTag()).refresh();
+    public void onAccessPointChanged(final AccessPoint accessPoint) {
+        View view = getView();
+        if (view != null) {
+            view.post(new Runnable() {
+                @Override
+                public void run() {
+                    Object tag = accessPoint.getTag();
+                    if (tag != null) {
+                        ((LongPressAccessPointPreference) tag).refresh();
+                    }
+                }
+            });
+        }
     }
 
     @Override
