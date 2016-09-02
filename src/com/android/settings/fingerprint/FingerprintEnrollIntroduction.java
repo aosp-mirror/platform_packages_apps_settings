@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.provider.Settings.Global;
 import android.view.View;
 
 import com.android.internal.logging.MetricsLogger;
@@ -40,7 +41,11 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
         setContentView(R.layout.fingerprint_enroll_introduction);
         setHeaderText(R.string.security_settings_fingerprint_enroll_introduction_title);
         findViewById(R.id.cancel_button).setOnClickListener(this);
-        findViewById(R.id.learn_more_button).setOnClickListener(this);
+        final View learnMoreButton = findViewById(R.id.learn_more_button);
+        learnMoreButton.setOnClickListener(this);
+        if (Global.getInt(getContentResolver(), Global.DEVICE_PROVISIONED, 0) == 0) {
+            learnMoreButton.setVisibility(View.GONE);
+        }
         final int passwordQuality = new ChooseLockSettingsHelper(this).utils()
                 .getActivePasswordQuality(UserHandle.myUserId());
         mHasPassword = passwordQuality != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
@@ -91,7 +96,9 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase {
     private void launchFingerprintHelp() {
         Intent helpIntent = HelpUtils.getHelpIntent(this,
                 getString(R.string.help_url_fingerprint), getClass().getName());
-        startActivity(helpIntent);
+        if (helpIntent != null) {
+            startActivity(helpIntent);
+        }
     }
 
     @Override
