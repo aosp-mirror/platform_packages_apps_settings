@@ -3,23 +3,24 @@ package com.android.settings.datausage;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import com.android.settings.TestConfig;
-import junit.framework.Assert;
+import com.android.settingslib.net.DataUsageController.DataUsageInfo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import static com.android.settingslib.net.DataUsageController.*;
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.fail;
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DataUsageInfoControllerTest {
     private DataUsageInfoController mInfoController;
-    private  DataUsageInfo info;
+    private DataUsageInfo info;
+    private static final int NEGATIVE = -1;
+    private static final int ZERO = 0;
+    private static final int POSITIVE_SMALL = 1;
+    private static final int POSITIVE_LARGE = 5;
 
     @Before
     public void setUp()  {
@@ -27,52 +28,53 @@ public class DataUsageInfoControllerTest {
         info = new DataUsageInfo();
     }
 
+
     @Test
     public void testLowUsageLowWarning_LimitUsed() {
-        info.warningLevel = 5;
-        info.limitLevel = 10;
-        info.usageLevel = 5;
-        assertEquals(mInfoController.getSummaryLimit(info), info.limitLevel);
+        info.warningLevel = POSITIVE_SMALL;
+        info.limitLevel = POSITIVE_LARGE;
+        info.usageLevel = POSITIVE_SMALL;
+        assertThat(mInfoController.getSummaryLimit(info)).isEqualTo(info.limitLevel);
     }
 
     @Test
     public void testLowUsageEqualWarning_LimitUsed() {
-        info.warningLevel = 10;
-        info.limitLevel = 10;
-        info.usageLevel = 5;
-        assertEquals(mInfoController.getSummaryLimit(info), info.limitLevel);
+        info.warningLevel = POSITIVE_LARGE;
+        info.limitLevel = POSITIVE_LARGE;
+        info.usageLevel = POSITIVE_SMALL;
+        assertThat(mInfoController.getSummaryLimit(info)).isEqualTo(info.limitLevel);
     }
 
     @Test
     public void testNoLimitNoUsage_WarningUsed() {
-        info.warningLevel = 10;
-        info.limitLevel = 0;
-        info.usageLevel = 0;
-        assertEquals(mInfoController.getSummaryLimit(info), info.warningLevel);
+        info.warningLevel = POSITIVE_LARGE;
+        info.limitLevel = ZERO;
+        info.usageLevel = ZERO;
+        assertThat(mInfoController.getSummaryLimit(info)).isEqualTo(info.warningLevel);
     }
 
     @Test
     public void testNoLimitLowUsage_WarningUsed() {
-        info.warningLevel = 10;
-        info.limitLevel = 0;
-        info.usageLevel = 5;
-        assertEquals(mInfoController.getSummaryLimit(info), info.warningLevel);
+        info.warningLevel = POSITIVE_LARGE;
+        info.limitLevel = ZERO;
+        info.usageLevel = POSITIVE_SMALL;
+        assertThat(mInfoController.getSummaryLimit(info)).isEqualTo(info.warningLevel);
     }
 
     @Test
     public void testLowWarningNoLimit_UsageUsed() {
-        info.warningLevel = 5;
-        info.limitLevel = 0;
-        info.usageLevel = 10;
-        assertEquals(mInfoController.getSummaryLimit(info), info.usageLevel);
+        info.warningLevel = POSITIVE_SMALL;
+        info.limitLevel = ZERO;
+        info.usageLevel = POSITIVE_LARGE;
+        assertThat(mInfoController.getSummaryLimit(info)).isEqualTo(info.usageLevel);
     }
 
     @Test
     public void testLowWarningLowLimit_UsageUsed() {
-        info.warningLevel = 5;
-        info.limitLevel = 5;
-        info.usageLevel = 10;
-        assertEquals(mInfoController.getSummaryLimit(info), info.usageLevel);
+        info.warningLevel = POSITIVE_SMALL;
+        info.limitLevel = POSITIVE_SMALL;
+        info.usageLevel = POSITIVE_LARGE;
+        assertThat(mInfoController.getSummaryLimit(info)).isEqualTo(info.usageLevel);
     }
 
     private NetworkPolicy getDefaultNetworkPolicy() {
@@ -87,60 +89,56 @@ public class DataUsageInfoControllerTest {
 
     @Test
     public void testNullArguments_NoError() {
-        try {
-            mInfoController.updateDataLimit(null, null);
-            mInfoController.updateDataLimit(info, null);
-            mInfoController.updateDataLimit(null, getDefaultNetworkPolicy());
-        } catch (Exception e) {
-            fail("Update Data Limit should drop calls with null arguments");
-        }
+        mInfoController.updateDataLimit(null, null);
+        mInfoController.updateDataLimit(info, null);
+        mInfoController.updateDataLimit(null, getDefaultNetworkPolicy());
     }
 
     @Test
     public void testNegativeWarning_UpdatedToZero() {
         NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.warningBytes = -5;
+        policy.warningBytes = NEGATIVE;
         mInfoController.updateDataLimit(info, policy);
-        Assert.assertEquals(0, info.warningLevel);
+        assertThat(info.warningLevel).isEqualTo(ZERO);
     }
 
     @Test
     public void testWarningZero_UpdatedToZero() {
         NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.warningBytes = 0;
+        policy.warningBytes = ZERO;
         mInfoController.updateDataLimit(info, policy);
-        Assert.assertEquals(0, info.warningLevel);
+        assertThat(info.warningLevel).isEqualTo(ZERO);
     }
 
     @Test
     public void testWarningPositive_UpdatedToWarning() {
         NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.warningBytes = 5;
+        policy.warningBytes = POSITIVE_SMALL;
         mInfoController.updateDataLimit(info, policy);
-        Assert.assertEquals(policy.warningBytes, info.warningLevel);
+        assertThat(info.warningLevel).isEqualTo(policy.warningBytes);
     }
 
     @Test
     public void testLimitNegative_UpdatedToZero() {
         NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.limitBytes = -5;
+        policy.limitBytes = NEGATIVE;
         mInfoController.updateDataLimit(info, policy);
-        Assert.assertEquals(0, info.limitLevel);
+        assertThat(info.limitLevel).isEqualTo(ZERO);
     }
 
     @Test
     public void testLimitZero_UpdatedToZero() {
         NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.limitBytes = 0;
+        policy.limitBytes = ZERO;
         mInfoController.updateDataLimit(info, policy);
-        Assert.assertEquals(0, info.limitLevel);
+        assertThat(info.limitLevel).isEqualTo(ZERO);
     }
 
     @Test
     public void testLimitPositive_UpdatedToLimit() {
         NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.limitBytes = 5;
+        policy.limitBytes = POSITIVE_SMALL;
         mInfoController.updateDataLimit(info, policy);
-        Assert.assertEquals(policy.limitBytes, info.limitLevel);
+        assertThat(info.limitLevel).isEqualTo(policy.limitBytes);
     }
 }
