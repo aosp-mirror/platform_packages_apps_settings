@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 
 /**
  * Abstract class for creating feature controllers. Allows OEM implementations to define their own
@@ -60,6 +61,8 @@ public abstract class FeatureFactory {
     }
 
     public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
+
+    public abstract PowerUsageFeatureProvider getPowerUsageFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
