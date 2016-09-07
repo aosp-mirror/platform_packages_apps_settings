@@ -594,10 +594,21 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String percent =  NumberFormat.getPercentInstance().format(
-                    (double) mAudioManager.getStreamVolume(AudioManager.STREAM_RING) / maxVolume);
-            mSummaryLoader.setSummary(this,
-                    mContext.getString(R.string.sound_settings_summary, percent));
+            final int ringerMode = mAudioManager.getRingerMode();
+            int resId;
+            String percent = "";
+            if (ringerMode == mAudioManager.RINGER_MODE_SILENT) {
+                resId = R.string.sound_settings_summary_silent;
+            } else if (ringerMode == mAudioManager.RINGER_MODE_VIBRATE){
+                resId = R.string.sound_settings_summary_vibrate;
+            }
+            else {
+                percent =  NumberFormat.getPercentInstance().format(
+                        (double) mAudioManager.getStreamVolume(
+                                AudioManager.STREAM_RING) / maxVolume);
+                resId = R.string.sound_settings_summary;
+            }
+            mSummaryLoader.setSummary(this, mContext.getString(resId, percent));
         }
     }
 
