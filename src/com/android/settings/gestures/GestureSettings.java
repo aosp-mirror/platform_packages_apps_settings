@@ -52,16 +52,16 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "GestureSettings";
     private static final String PREF_KEY_DOUBLE_TAP_POWER = "gesture_double_tap_power";
     private static final String PREF_KEY_DOUBLE_TWIST = "gesture_double_twist";
-    private static final String PREF_KEY_PICK_UP_AND_NUDGE = "gesture_pick_up_and_nudge";
+    private static final String PREF_KEY_PICK_UP = "gesture_pick_up";
     private static final String PREF_KEY_SWIPE_DOWN_FINGERPRINT = "gesture_swipe_down_fingerprint";
+    private static final String PREF_KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
     private static final String DEBUG_DOZE_COMPONENT = "debug.doze.component";
-    private static final String ARG_SCROLL_TO_PREFERENCE = "gesture_scroll_to_preference";
     private static final int PREF_ID_DOUBLE_TAP_POWER = 0;
     private static final int PREF_ID_DOUBLE_TWIST = 1;
-    private static final int PREF_ID_PICK_UP_AND_NUDG = 2;
+    private static final int PREF_ID_PICK_UP = 2;
     private static final int PREF_ID_SWIPE_DOWN_FINGERPRINT = 3;
+    private static final int PREF_ID_DOUBLE_TAP_SCREEN = 4;
 
-    private int mScrollPosition = -1;
     private List<GesturePreference> mPreferences;
 
     @Override
@@ -82,16 +82,19 @@ public class GestureSettings extends SettingsPreferenceFragment implements
 
         // Ambient Display
         if (isDozeAvailable(context)) {
-            int dozeEnabled = Secure.getInt(getContentResolver(), Secure.DOZE_ENABLED, 1);
-            addPreference(PREF_KEY_PICK_UP_AND_NUDGE, dozeEnabled != 0, PREF_ID_DOUBLE_TWIST);
+            int pickup = Secure.getInt(getContentResolver(), Secure.DOZE_PULSE_ON_PICK_UP, 1);
+            addPreference(PREF_KEY_PICK_UP, pickup != 0, PREF_ID_PICK_UP);
+            int doubleTap = Secure.getInt(getContentResolver(), Secure.DOZE_PULSE_ON_DOUBLE_TAP, 1);
+            addPreference(PREF_KEY_DOUBLE_TAP_SCREEN, doubleTap != 0, PREF_ID_DOUBLE_TAP_SCREEN);
         } else {
-            removePreference(PREF_KEY_PICK_UP_AND_NUDGE);
+            removePreference(PREF_KEY_PICK_UP);
+            removePreference(PREF_KEY_DOUBLE_TAP_SCREEN);
         }
 
         // Fingerprint slide for notifications
         if (isSystemUINavigationAvailable(context)) {
             addPreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT, isSystemUINavigationEnabled(context),
-                    PREF_ID_PICK_UP_AND_NUDG);
+                    PREF_ID_SWIPE_DOWN_FINGERPRINT);
         } else {
             removePreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
         }
@@ -100,21 +103,9 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         if (isDoubleTwistAvailable(context)) {
             int doubleTwistEnabled = Secure.getInt(
                     getContentResolver(), Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
-            addPreference(PREF_KEY_DOUBLE_TWIST, doubleTwistEnabled != 0,
-                    PREF_ID_SWIPE_DOWN_FINGERPRINT);
+            addPreference(PREF_KEY_DOUBLE_TWIST, doubleTwistEnabled != 0, PREF_ID_DOUBLE_TWIST);
         } else {
             removePreference(PREF_KEY_DOUBLE_TWIST);
-        }
-
-        if (savedInstanceState == null) {
-            final Bundle args = getArguments();
-            if (args != null && args.containsKey(ARG_SCROLL_TO_PREFERENCE)) {
-                String prefKey = args.getString(ARG_SCROLL_TO_PREFERENCE);
-                GesturePreference pref = (GesturePreference) findPreference(prefKey);
-                if (pref != null) {
-                    mScrollPosition = pref.getOrder();
-                }
-            }
         }
 
     }
@@ -124,9 +115,6 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                              Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         RecyclerView listview = getListView();
-        if (mScrollPosition >= 0) {
-            listview.scrollToPosition(mScrollPosition);
-        }
         listview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -163,8 +151,10 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         if (PREF_KEY_DOUBLE_TAP_POWER.equals(key)) {
             Secure.putInt(getContentResolver(),
                     Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, enabled ? 0 : 1);
-        } else if (PREF_KEY_PICK_UP_AND_NUDGE.equals(key)) {
-            Secure.putInt(getContentResolver(), Secure.DOZE_ENABLED, enabled ? 1 : 0);
+        } else if (PREF_KEY_PICK_UP.equals(key)) {
+            Secure.putInt(getContentResolver(), Secure.DOZE_PULSE_ON_PICK_UP, enabled ? 1 : 0);
+        } else if (PREF_KEY_DOUBLE_TAP_SCREEN.equals(key)) {
+            Secure.putInt(getContentResolver(), Secure.DOZE_PULSE_ON_DOUBLE_TAP, enabled ? 1 : 0);
         } else if (PREF_KEY_SWIPE_DOWN_FINGERPRINT.equals(key)) {
             Secure.putInt(getContentResolver(),
                     Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, enabled ? 1 : 0);
@@ -255,7 +245,8 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                     result.add(PREF_KEY_DOUBLE_TAP_POWER);
                 }
                 if (!isDozeAvailable(context)) {
-                    result.add(PREF_KEY_PICK_UP_AND_NUDGE);
+                    result.add(PREF_KEY_PICK_UP);
+                    result.add(PREF_KEY_DOUBLE_TAP_SCREEN);
                 }
                 if (!isSystemUINavigationAvailable(context)) {
                     result.add(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
