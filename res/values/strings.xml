@@ -5927,9 +5927,15 @@
 
 
     <!-- Sounds and Notification -->
-    <!-- Sound: Dashboard summary indicating the volume of ringtong. example: Ring volume at 20%.
+    <!-- Sound: Dashboard summary indicating the volume of ringtone. example: Ring volume at 20%.
     [CHAR LIMIT=100] -->
     <string name="sound_settings_summary">Ring volume at <xliff:g id="percentage" example="2%">%1$s</xliff:g></string>
+
+    <!-- Sound: Dashboard summary indicating the volume of ringtone when at 0% with vibrate enabled. [CHAR LIMIT=100] -->
+    <string name="sound_settings_summary_vibrate">Ringer set to vibrate</string>
+
+    <!-- Sound: Dashboard summary indicating the volume of ringtone when at 0% with vibrate disabled [CHAR LIMIT=100] -->
+    <string name="sound_settings_summary_silent">Ringer set to silent</string>
 
     <!-- Sound: Dashboard summary example used in Setup Wizard preview screen. [CHAR LIMIT=100] -->
     <string name="sound_settings_example_summary">Ring volume at 80%</string>
