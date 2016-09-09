@@ -1044,6 +1044,20 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name="Settings$ManageDomainUrlsActivity"
+                  android:taskAffinity="com.android.settings"
+                  android:label="@string/domain_urls_title"
+                  android:icon="@drawable/ic_settings_memory">
+            <intent-filter>
+                <action android:name="android.settings.MANAGE_DOMAIN_URLS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.device" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.ManageDomainUrls" />
+        </activity>
+
         <activity android:name="Settings$MemorySettingsActivity"
                 android:label="@string/memory_settings_title"
                 android:icon="@drawable/ic_settings_memory"
