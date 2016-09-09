@@ -355,14 +355,18 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         private void updatePreferenceText() {
             if (mForFingerprint) {
-                Preference pattern = findPreference(KEY_UNLOCK_SET_PATTERN);
-                pattern.setTitle(R.string.fingerprint_unlock_set_unlock_pattern);
-
-                Preference pin = findPreference(KEY_UNLOCK_SET_PIN);
-                pin.setTitle(R.string.fingerprint_unlock_set_unlock_pin);
-
-                Preference password = findPreference(KEY_UNLOCK_SET_PASSWORD);
-                password.setTitle(R.string.fingerprint_unlock_set_unlock_password);
+                final String key[] = { KEY_UNLOCK_SET_PATTERN,
+                        KEY_UNLOCK_SET_PIN,
+                        KEY_UNLOCK_SET_PASSWORD };
+                final int res[] = { R.string.fingerprint_unlock_set_unlock_pattern,
+                        R.string.fingerprint_unlock_set_unlock_pin,
+                        R.string.fingerprint_unlock_set_unlock_password };
+                for (int i = 0; i < key.length; i++) {
+                    Preference pref = findPreference(key[i]);
+                    if (pref != null) { // can be removed by device admin
+                        pref.setTitle(res[i]);
+                    }
+                }
             }
 
             if (mManagedPasswordProvider.isSettingManagedPasswordSupported()) {
