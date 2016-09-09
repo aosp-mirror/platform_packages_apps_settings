@@ -64,6 +64,7 @@ import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ManageAssist;
+import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
@@ -354,6 +355,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             WifiInfo.class.getName(),
             MasterClear.class.getName(),
             NightDisplaySettings.class.getName(),
+            ManageDomainUrls.class.getName(),
     };
 
 
