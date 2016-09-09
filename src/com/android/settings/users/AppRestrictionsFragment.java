@@ -560,8 +560,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     }
                 }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     private void removeRestrictionsForApp(AppRestrictionsPreference preference) {
