@@ -15,11 +15,6 @@
  */
 package com.android.settings.core.lifecycle;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.Bundle;
-
 import com.android.settings.TestConfig;
 import com.android.settings.core.lifecycle.events.OnDestroy;
 import com.android.settings.core.lifecycle.events.OnPause;
@@ -33,6 +28,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
+import org.robolectric.util.FragmentController;
 
 import static org.junit.Assert.assertTrue;
 
@@ -52,23 +48,13 @@ public class LifecycleTest {
 
     public static class TestActivity extends ObservableActivity {
 
-        final TestDialogFragment mFragment;
         final TestObserver mActObserver;
 
         public TestActivity() {
-            mFragment = new TestDialogFragment();
             mActObserver = new TestObserver();
             getLifecycle().addObserver(mActObserver);
         }
 
-        @Override
-        public void onCreate(Bundle b) {
-            super.onCreate(b);
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(mFragment, "tag");
-            fragmentTransaction.commit();
-        }
     }
 
     public static class TestObserver implements LifecycleObserver, OnStart, OnResume,
@@ -107,24 +93,34 @@ public class LifecycleTest {
     }
 
     @Test
-    public void runThroughLifecycles_shouldObserveEverything() {
+    public void runThroughActivityLifecycles_shouldObserveEverything() {
         ActivityController<TestActivity> ac = Robolectric.buildActivity(TestActivity.class);
         TestActivity activity = ac.get();
 
-        ac.create().start();
-        assertTrue(activity.mFragment.mFragObserver.mOnStartObserved);
+        ac.start();
         assertTrue(activity.mActObserver.mOnStartObserved);
         ac.resume();
-        assertTrue(activity.mFragment.mFragObserver.mOnResumeObserved);
         assertTrue(activity.mActObserver.mOnResumeObserved);
         ac.pause();
-        assertTrue(activity.mFragment.mFragObserver.mOnPauseObserved);
         assertTrue(activity.mActObserver.mOnPauseObserved);
         ac.stop();
-        assertTrue(activity.mFragment.mFragObserver.mOnStopObserved);
         assertTrue(activity.mActObserver.mOnStopObserved);
         ac.destroy();
-        assertTrue(activity.mFragment.mFragObserver.mOnDestroyObserved);
         assertTrue(activity.mActObserver.mOnDestroyObserved);
+    }
+
+    @Test
+    public void runThroughFragmentLifecycles_shouldObserveEverything() {
+        FragmentController<TestDialogFragment> fragmentController =
+                Robolectric.buildFragment(TestDialogFragment.class);
+        TestDialogFragment fragment = fragmentController.get();
+
+        fragmentController.create().start().resume().pause().stop().destroy();
+
+        assertTrue(fragment.mFragObserver.mOnStartObserved);
+        assertTrue(fragment.mFragObserver.mOnResumeObserved);
+        assertTrue(fragment.mFragObserver.mOnPauseObserved);
+        assertTrue(fragment.mFragObserver.mOnStopObserved);
+        assertTrue(fragment.mFragObserver.mOnDestroyObserved);
     }
 }
