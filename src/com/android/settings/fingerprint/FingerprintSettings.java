@@ -643,7 +643,7 @@ public class FingerprintSettings extends SubSettings {
                 FingerprintSettingsFragment parent
                         = (FingerprintSettingsFragment) getTargetFragment();
                 final boolean isProfileChallengeUser =
-                        Utils.isManagedProfile(UserManager.get(getContext()), parent.mUserId);
+                        UserManager.get(getContext()).isManagedProfile(parent.mUserId);
                 if (parent.mFingerprintManager.getEnrolledFingerprints(parent.mUserId).size() > 1) {
                     parent.deleteFingerPrint(mFp);
                 } else {

@@ -182,7 +182,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             if (DevicePolicyManager.ACTION_SET_NEW_PASSWORD
                     .equals(getActivity().getIntent().getAction())
-                    && Utils.isManagedProfile(UserManager.get(getActivity()), mUserId)
+                    && UserManager.get(getActivity()).isManagedProfile(mUserId)
                     && mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
                 getActivity().setTitle(R.string.lock_settings_picker_title_profile);
             }
@@ -198,8 +198,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else if (!mWaitingForConfirmation) {
                 ChooseLockSettingsHelper helper =
                         new ChooseLockSettingsHelper(this.getActivity(), this);
-                boolean managedProfileWithUnifiedLock = Utils
-                        .isManagedProfile(UserManager.get(getActivity()), mUserId)
+                boolean managedProfileWithUnifiedLock =
+                        UserManager.get(getActivity()).isManagedProfile(mUserId)
                         && !mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
                 if (managedProfileWithUnifiedLock
                         || !helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
@@ -733,14 +733,14 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private int getResIdForFactoryResetProtectionWarningTitle() {
-            boolean isProfile = Utils.isManagedProfile(UserManager.get(getActivity()), mUserId);
+            boolean isProfile = UserManager.get(getActivity()).isManagedProfile(mUserId);
             return isProfile ? R.string.unlock_disable_frp_warning_title_profile
                     : R.string.unlock_disable_frp_warning_title;
         }
 
         private int getResIdForFactoryResetProtectionWarningMessage() {
             boolean hasFingerprints = mFingerprintManager.hasEnrolledFingerprints(mUserId);
-            boolean isProfile = Utils.isManagedProfile(UserManager.get(getActivity()), mUserId);
+            boolean isProfile = UserManager.get(getActivity()).isManagedProfile(mUserId);
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     if (hasFingerprints && isProfile) {

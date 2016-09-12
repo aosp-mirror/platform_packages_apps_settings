@@ -73,7 +73,7 @@ public class ConfirmDeviceCredentialActivity extends Activity {
                 Log.e(TAG, "Invalid intent extra", se);
             }
         }
-        final boolean isManagedProfile = Utils.isManagedProfile(UserManager.get(this), userId);
+        final boolean isManagedProfile = UserManager.get(this).isManagedProfile(userId);
         // if the client app did not hand in a title and we are about to show the work challenge,
         // check whether there is a policy setting the organization name and use that as title
         if ((title == null) && isManagedProfile) {

@@ -248,7 +248,7 @@ public class AccountSettings extends SettingsPreferenceFragment
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.account_settings);
 
-        if (Utils.isManagedProfile(mUm)) {
+        if (mUm.isManagedProfile()) {
             // This should not happen
             Log.e(TAG, "We should not be showing settings for a managed profile");
             finish();

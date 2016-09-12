@@ -184,8 +184,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private int getDefaultDetails() {
-            boolean isProfile = Utils.isManagedProfile(
-                    UserManager.get(getActivity()), mEffectiveUserId);
+            boolean isProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
             // Map boolean flags to an index by isStrongAuth << 2 + isProfile << 1 + isAlpha.
             int index = ((mIsStrongAuthRequired ? 1 : 0) << 2) + ((isProfile ? 1 : 0) << 1)
                     + (mIsAlpha ? 1 : 0);

@@ -118,7 +118,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 Utils.getUserIdFromBundle(
                         getActivity(),
                         getActivity().getIntent().getExtras()));
-        if (Utils.isManagedProfile(UserManager.get(getActivity()), credentialOwnerUserId)) {
+        if (UserManager.get(getActivity()).isManagedProfile(credentialOwnerUserId)) {
             setWorkChallengeBackground(view, credentialOwnerUserId);
         }
     }
@@ -259,7 +259,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     }
 
     protected boolean isProfileChallenge() {
-        return Utils.isManagedProfile(UserManager.get(getContext()), mEffectiveUserId);
+        return UserManager.get(getContext()).isManagedProfile(mEffectiveUserId);
     }
 
     protected void reportSuccessfullAttempt() {

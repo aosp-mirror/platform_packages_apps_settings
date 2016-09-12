@@ -37,7 +37,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     protected void onCreate(Bundle savedState) {
         int credentialOwnerUserId = Utils.getCredentialOwnerUserId(this,
                 Utils.getUserIdFromBundle(this, getIntent().getExtras()));
-        if (Utils.isManagedProfile(UserManager.get(this), credentialOwnerUserId)) {
+        if (UserManager.get(this).isManagedProfile(credentialOwnerUserId)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsWork);
         } else if (getIntent().getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false)) {
