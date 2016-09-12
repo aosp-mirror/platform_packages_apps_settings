@@ -246,16 +246,24 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
                     formatTitle(context, getString(mDataUsageTemplate), info.usageLevel));
             long limit = mDataInfoController.getSummaryLimit(info);
             mSummaryPreference.setSummary(info.period);
-            mSummaryPreference.setLabels(Formatter.formatFileSize(context, 0),
-                    Formatter.formatFileSize(context, limit));
-            mSummaryPreference.setRatios(info.usageLevel / (float) limit, 0,
-                    (limit - info.usageLevel) / (float) limit);
+
+            if (limit <= 0) {
+                mSummaryPreference.setChartEnabled(false);
+            } else {
+                mSummaryPreference.setChartEnabled(true);
+                mSummaryPreference.setLabels(Formatter.formatFileSize(context, 0),
+                        Formatter.formatFileSize(context, limit));
+                mSummaryPreference.setRatios(info.usageLevel / (float) limit, 0,
+                        (limit - info.usageLevel) / (float) limit);
+            }
         }
-        if (mLimitPreference != null) {
+        if (mLimitPreference != null && (info.warningLevel > 0 || info.limitLevel > 0)) {
             String warning = Formatter.formatFileSize(context, info.warningLevel);
             String limit = Formatter.formatFileSize(context, info.limitLevel);
             mLimitPreference.setSummary(getString(info.limitLevel <= 0 ? R.string.cell_warning_only
                     : R.string.cell_warning_and_limit, warning, limit));
+        } else if (mLimitPreference != null) {
+            mLimitPreference.setSummary(null);
         }
 
         PreferenceScreen screen = getPreferenceScreen();
