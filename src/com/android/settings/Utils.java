@@ -613,15 +613,6 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Returns true if the current profile is a managed one.
-     *
-     * @throws IllegalArgumentException if userManager is null.
-     */
-    public static boolean isManagedProfile(@NonNull UserManager userManager) {
-        return isManagedProfile(userManager, UserHandle.myUserId());
-    }
-
-    /**
      * Retrieves the id for the given user's managed profile.
      *
      * @return the managed profile id or UserHandle.USER_NULL if there is none.
@@ -634,19 +625,6 @@ public final class Utils extends com.android.settingslib.Utils {
             }
         }
         return UserHandle.USER_NULL;
-    }
-
-    /**
-     * Returns true if the userId passed in is a managed profile.
-     *
-     * @throws IllegalArgumentException if userManager is null.
-     */
-    public static boolean isManagedProfile(@NonNull UserManager userManager, int userId) {
-        if (userManager == null) {
-            throw new IllegalArgumentException("userManager must not be null");
-        }
-        UserInfo userInfo = userManager.getUserInfo(userId);
-        return (userInfo != null) ? userInfo.isManagedProfile() : false;
     }
 
     /**

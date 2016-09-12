@@ -75,7 +75,7 @@ public class RedactionInterstitial extends SettingsActivity {
     public static Intent createStartIntent(Context ctx, int userId) {
         return new Intent(ctx, RedactionInterstitial.class)
                 .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID,
-                        Utils.isManagedProfile(UserManager.get(ctx), userId)
+                        UserManager.get(ctx).isManagedProfile(userId)
                             ? R.string.lock_screen_notifications_interstitial_title_profile
                             : R.string.lock_screen_notifications_interstitial_title)
                 .putExtra(Intent.EXTRA_USER_ID, userId);
@@ -111,7 +111,7 @@ public class RedactionInterstitial extends SettingsActivity {
             mRadioGroup.setOnCheckedChangeListener(this);
             mUserId = Utils.getUserIdFromBundle(
                     getContext(), getActivity().getIntent().getExtras());
-            if (Utils.isManagedProfile(UserManager.get(getContext()), mUserId)) {
+            if (UserManager.get(getContext()).isManagedProfile(mUserId)) {
                 ((TextView) view.findViewById(R.id.message))
                     .setText(R.string.lock_screen_notifications_interstitial_message_profile);
                 mShowAllButton.setText(R.string.lock_screen_notifications_summary_show_profile);

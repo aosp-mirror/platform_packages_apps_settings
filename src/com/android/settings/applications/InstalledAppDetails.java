@@ -850,7 +850,7 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void addDynamicPrefs() {
-        if (Utils.isManagedProfile(UserManager.get(getContext()))) {
+        if (UserManager.get(getContext()).isManagedProfile()) {
             return;
         }
         final PreferenceScreen screen = getPreferenceScreen();

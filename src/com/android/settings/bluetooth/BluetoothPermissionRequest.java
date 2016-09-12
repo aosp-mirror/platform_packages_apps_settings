@@ -62,7 +62,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
         if (action.equals(BluetoothDevice.ACTION_CONNECTION_ACCESS_REQUEST)) {
             UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
             // skip the notification for managed profiles.
-            if (com.android.settings.Utils.isManagedProfile(um)) {
+            if (um.isManagedProfile()) {
                 if (DEBUG) Log.d(TAG, "Blocking notification for managed profile.");
                 return;
             }
