@@ -48,6 +48,7 @@ import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ import java.util.List;
 import static android.net.ConnectivityManager.TYPE_ETHERNET;
 import static android.net.ConnectivityManager.TYPE_WIFI;
 
-public class DataUsageSummary extends DataUsageBase implements Indexable {
+public class DataUsageSummary extends DataUsageBase implements Indexable, DataUsageEditController {
 
     private static final String TAG = "DataUsageSummary";
     static final boolean LOGD = false;
@@ -69,6 +70,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
     private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
 
     private DataUsageController mDataUsageController;
+    private DataUsageInfoController mDataInfoController;
     private SummaryPreference mSummaryPreference;
     private Preference mLimitPreference;
     private NetworkTemplate mDefaultTemplate;
@@ -80,6 +82,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
 
         boolean hasMobileData = hasMobileData(getContext());
         mDataUsageController = new DataUsageController(getContext());
+        mDataInfoController = new DataUsageInfoController();
         addPreferencesFromResource(R.xml.data_usage);
 
         int defaultSubId = getDefaultSubscriptionId(getContext());
@@ -87,15 +90,13 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
             hasMobileData = false;
         }
         mDefaultTemplate = getDefaultTemplate(getContext(), defaultSubId);
-        if (hasMobileData) {
-            mLimitPreference = findPreference(KEY_LIMIT_SUMMARY);
-        } else {
-            removePreference(KEY_LIMIT_SUMMARY);
-        }
+        mSummaryPreference = (SummaryPreference) findPreference(KEY_STATUS_HEADER);
+
         if (!hasMobileData || !isAdmin()) {
             removePreference(KEY_RESTRICT_BACKGROUND);
         }
         if (hasMobileData) {
+            mLimitPreference = findPreference(KEY_LIMIT_SUMMARY);
             List<SubscriptionInfo> subscriptions =
                     services.mSubscriptionManager.getActiveSubscriptionInfoList();
             if (subscriptions == null || subscriptions.size() == 0) {
@@ -104,6 +105,10 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
             for (int i = 0; subscriptions != null && i < subscriptions.size(); i++) {
                 addMobileSection(subscriptions.get(i).getSubscriptionId());
             }
+            mSummaryPreference.setSelectable(true);
+        } else {
+            removePreference(KEY_LIMIT_SUMMARY);
+            mSummaryPreference.setSelectable(false);
         }
         boolean hasWifiRadio = hasWifiRadio(getContext());
         if (hasWifiRadio) {
@@ -116,7 +121,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
                 : hasWifiRadio ? R.string.wifi_data_template
                 : R.string.ethernet_data_template;
 
-        mSummaryPreference = (SummaryPreference) findPreference(KEY_STATUS_HEADER);
         setHasOptionsMenu(true);
     }
 
@@ -140,6 +144,15 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference == findPreference(KEY_STATUS_HEADER)) {
+            BillingCycleSettings.BytesEditorFragment.show(this, false);
+            return false;
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     private void addMobileSection(int subId) {
@@ -224,16 +237,14 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
         DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 mDefaultTemplate);
         Context context = getContext();
+
+        mDataInfoController.updateDataLimit(info,
+                services.mPolicyEditor.getPolicy(mDefaultTemplate));
+
         if (mSummaryPreference != null) {
             mSummaryPreference.setTitle(
                     formatTitle(context, getString(mDataUsageTemplate), info.usageLevel));
-            long limit = info.limitLevel;
-            if (limit <= 0) {
-                limit = info.warningLevel;
-            }
-            if (info.usageLevel > limit) {
-                limit = info.usageLevel;
-            }
+            long limit = mDataInfoController.getSummaryLimit(info);
             mSummaryPreference.setSummary(info.period);
             mSummaryPreference.setLabels(Formatter.formatFileSize(context, 0),
                     Formatter.formatFileSize(context, limit));
@@ -256,6 +267,21 @@ public class DataUsageSummary extends DataUsageBase implements Indexable {
     @Override
     protected int getMetricsCategory() {
         return MetricsEvent.DATA_USAGE_SUMMARY;
+    }
+
+    @Override
+    public NetworkPolicyEditor getNetworkPolicyEditor() {
+        return services.mPolicyEditor;
+    }
+
+    @Override
+    public NetworkTemplate getNetworkTemplate() {
+        return mDefaultTemplate;
+    }
+
+    @Override
+    public void updateDataUsage() {
+        updateState();
     }
 
     /**
