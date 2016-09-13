@@ -958,6 +958,7 @@
 
         <activity android:name="Settings$NightDisplaySettingsActivity"
                 android:label="@string/night_display_title"
+                android:enabled="@*android:bool/config_nightDisplayAvailable"
                 android:icon="@drawable/ic_settings_night_display"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
