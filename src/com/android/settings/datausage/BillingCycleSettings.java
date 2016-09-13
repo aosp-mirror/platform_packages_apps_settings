@@ -17,6 +17,7 @@ package com.android.settings.datausage;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -44,7 +45,7 @@ import static android.net.TrafficStats.GB_IN_BYTES;
 import static android.net.TrafficStats.MB_IN_BYTES;
 
 public class BillingCycleSettings extends DataUsageBase implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, DataUsageEditController {
 
     private static final String TAG = "BillingCycleSettings";
     private static final boolean LOGD = false;
@@ -147,33 +148,52 @@ public class BillingCycleSettings extends DataUsageBase implements
         updatePrefs();
     }
 
+    @Override
+    public NetworkPolicyEditor getNetworkPolicyEditor() {
+        return services.mPolicyEditor;
+    }
+
+    @Override
+    public NetworkTemplate getNetworkTemplate() {
+        return mNetworkTemplate;
+    }
+
+    @Override
+    public void updateDataUsage() {
+        updatePrefs();
+    }
+
     /**
      * Dialog to edit {@link NetworkPolicy#warningBytes}.
      */
     public static class BytesEditorFragment extends DialogFragment
-            implements DialogInterface.OnClickListener{
+            implements DialogInterface.OnClickListener {
         private static final String EXTRA_TEMPLATE = "template";
         private static final String EXTRA_LIMIT = "limit";
         private View mView;
 
-        public static void show(BillingCycleSettings parent, boolean isLimit) {
-            if (!parent.isAdded()) return;
+        public static void show(DataUsageEditController parent, boolean isLimit) {
+            if (!(parent instanceof Fragment)) {
+                return;
+            }
+            Fragment targetFragment = (Fragment) parent;
+            if (!targetFragment.isAdded()) {
+                return;
+            }
 
             final Bundle args = new Bundle();
-            args.putParcelable(EXTRA_TEMPLATE, parent.mNetworkTemplate);
+            args.putParcelable(EXTRA_TEMPLATE, parent.getNetworkTemplate());
             args.putBoolean(EXTRA_LIMIT, isLimit);
 
             final BytesEditorFragment dialog = new BytesEditorFragment();
             dialog.setArguments(args);
-            dialog.setTargetFragment(parent, 0);
-            dialog.show(parent.getFragmentManager(), TAG_WARNING_EDITOR);
+            dialog.setTargetFragment(targetFragment, 0);
+            dialog.show(targetFragment.getFragmentManager(), TAG_WARNING_EDITOR);
         }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
-
-
             final LayoutInflater dialogInflater = LayoutInflater.from(context);
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
             mView = dialogInflater.inflate(R.layout.data_usage_bytes_editor, null, false);
@@ -188,8 +208,8 @@ public class BillingCycleSettings extends DataUsageBase implements
         }
 
         private void setupPicker(EditText bytesPicker, Spinner type) {
-            final BillingCycleSettings target = (BillingCycleSettings) getTargetFragment();
-            final NetworkPolicyEditor editor = target.services.mPolicyEditor;
+            final DataUsageEditController target = (DataUsageEditController) getTargetFragment();
+            final NetworkPolicyEditor editor = target.getNetworkPolicyEditor();
 
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
@@ -222,8 +242,8 @@ public class BillingCycleSettings extends DataUsageBase implements
             if (which != DialogInterface.BUTTON_POSITIVE) {
                 return;
             }
-            final BillingCycleSettings target = (BillingCycleSettings) getTargetFragment();
-            final NetworkPolicyEditor editor = target.services.mPolicyEditor;
+            final DataUsageEditController target = (DataUsageEditController) getTargetFragment();
+            final NetworkPolicyEditor editor = target.getNetworkPolicyEditor();
 
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
@@ -241,7 +261,7 @@ public class BillingCycleSettings extends DataUsageBase implements
             } else {
                 editor.setPolicyWarningBytes(template, bytes);
             }
-            target.updatePrefs();
+            target.updateDataUsage();
         }
     }
 
@@ -249,7 +269,7 @@ public class BillingCycleSettings extends DataUsageBase implements
      * Dialog to edit {@link NetworkPolicy#cycleDay}.
      */
     public static class CycleEditorFragment extends DialogFragment implements
-            DialogInterface.OnClickListener{
+            DialogInterface.OnClickListener {
         private static final String EXTRA_TEMPLATE = "template";
         private NumberPicker mCycleDayPicker;
 
@@ -268,8 +288,8 @@ public class BillingCycleSettings extends DataUsageBase implements
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
-            final BillingCycleSettings target = (BillingCycleSettings) getTargetFragment();
-            final NetworkPolicyEditor editor = target.services.mPolicyEditor;
+            final DataUsageEditController target = (DataUsageEditController) getTargetFragment();
+            final NetworkPolicyEditor editor = target.getNetworkPolicyEditor();
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
             final LayoutInflater dialogInflater = LayoutInflater.from(builder.getContext());
@@ -294,8 +314,8 @@ public class BillingCycleSettings extends DataUsageBase implements
         @Override
         public void onClick(DialogInterface dialog, int which) {
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
-            final BillingCycleSettings target = (BillingCycleSettings) getTargetFragment();
-            final NetworkPolicyEditor editor = target.services.mPolicyEditor;
+            final DataUsageEditController target = (DataUsageEditController) getTargetFragment();
+            final NetworkPolicyEditor editor = target.getNetworkPolicyEditor();
 
             // clear focus to finish pending text edits
             mCycleDayPicker.clearFocus();
@@ -303,7 +323,7 @@ public class BillingCycleSettings extends DataUsageBase implements
             final int cycleDay = mCycleDayPicker.getValue();
             final String cycleTimezone = new Time().timezone;
             editor.setPolicyCycleDay(template, cycleDay, cycleTimezone);
-            target.updatePrefs();
+            target.updateDataUsage();
         }
     }
 
@@ -312,7 +332,7 @@ public class BillingCycleSettings extends DataUsageBase implements
      * {@link NetworkPolicy#limitBytes}.
      */
     public static class ConfirmLimitFragment extends DialogFragment implements
-            DialogInterface.OnClickListener{
+            DialogInterface.OnClickListener {
         private static final String EXTRA_MESSAGE = "message";
         private static final String EXTRA_LIMIT_BYTES = "limitBytes";
         public static final float FLOAT = 1.2f;
