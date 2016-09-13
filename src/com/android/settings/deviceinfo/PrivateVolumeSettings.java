@@ -72,8 +72,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 /**
  * Panel showing summary and actions for a {@link VolumeInfo#TYPE_PRIVATE}
  * storage volume.
@@ -81,6 +79,9 @@ import static com.android.settings.deviceinfo.StorageSettings.TAG;
 public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     // TODO: disable unmount when providing over MTP/PTP
     // TODO: warn when mounted read-only
+
+    private static final String TAG = "PrivateVolumeSettings";
+    private static final boolean LOGV = false;
 
     private static final String TAG_RENAME = "rename";
     private static final String TAG_OTHER_INFO = "otherInfo";
@@ -164,6 +165,9 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         final long sharedDataSize = mVolume.getPath().getTotalSpace();
         mTotalSize = getArguments().getLong(EXTRA_VOLUME_SIZE, 0);
         mSystemSize = mTotalSize - sharedDataSize;
+        if (LOGV) Log.v(TAG,
+                "onCreate() mTotalSize: " + mTotalSize + " sharedDataSize: " + sharedDataSize);
+
         if (mTotalSize <= 0) {
             mTotalSize = sharedDataSize;
             mSystemSize = 0;
@@ -259,6 +263,8 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
         final long freeBytes = mVolume.getPath().getFreeSpace();
         final long usedBytes = mTotalSize - freeBytes;
+
+        if (LOGV) Log.v(TAG, "update() freeBytes: " + freeBytes + " usedBytes: " + usedBytes);
 
         final BytesResult result = Formatter.formatBytes(getResources(), usedBytes, 0);
         mSummary.setTitle(TextUtils.expandTemplate(getText(R.string.storage_size_large),
@@ -554,6 +560,11 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     };
 
     private void updateDetails(MeasurementDetails details) {
+        StorageItemPreference otherItem = null;
+        long accountedSize = 0;
+        long totalMiscSize = 0;
+        long totalDownloadsSize = 0;
+
         for (int i = 0; i < mItemPoolIndex; ++i) {
             StorageItemPreference item = mItemPreferencePool.get(i);
             final int userId = item.userHandle;
@@ -566,20 +577,31 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             switch (itemTitleId) {
                 case R.string.storage_detail_system: {
                     updatePreference(item, mSystemSize);
+                    accountedSize += mSystemSize;
+                    if (LOGV) Log.v(TAG, "mSystemSize: " + mSystemSize
+                            + " accountedSize: " + accountedSize);
                 } break;
                 case R.string.storage_detail_apps: {
                     updatePreference(item, details.appsSize.get(userId));
+                    accountedSize += details.appsSize.get(userId);
+                    if (LOGV) Log.v(TAG, "appsSize: " + details.appsSize.get(userId)
+                            + " accountedSize: " + accountedSize);
                 } break;
                 case R.string.storage_detail_images: {
                     final long imagesSize = totalValues(details, userId,
-                            Environment.DIRECTORY_DCIM, Environment.DIRECTORY_MOVIES,
-                            Environment.DIRECTORY_PICTURES);
+                            Environment.DIRECTORY_DCIM, Environment.DIRECTORY_PICTURES);
                     updatePreference(item, imagesSize);
+                    accountedSize += imagesSize;
+                    if (LOGV) Log.v(TAG, "imagesSize: " + imagesSize
+                            + " accountedSize: " + accountedSize);
                 } break;
                 case R.string.storage_detail_videos: {
                     final long videosSize = totalValues(details, userId,
                             Environment.DIRECTORY_MOVIES);
                     updatePreference(item, videosSize);
+                    accountedSize += videosSize;
+                    if (LOGV) Log.v(TAG, "videosSize: " + videosSize
+                            + " accountedSize: " + accountedSize);
                 } break;
                 case R.string.storage_detail_audio: {
                     final long audioSize = totalValues(details, userId,
@@ -587,18 +609,53 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                             Environment.DIRECTORY_ALARMS, Environment.DIRECTORY_NOTIFICATIONS,
                             Environment.DIRECTORY_RINGTONES, Environment.DIRECTORY_PODCASTS);
                     updatePreference(item, audioSize);
+                    accountedSize += audioSize;
+                    if (LOGV) Log.v(TAG, "audioSize: " + audioSize
+                            + " accountedSize: " + accountedSize);
                 } break;
                 case R.string.storage_detail_other: {
-                    updatePreference(item, details.miscSize.get(userId));
+                    final long downloadsSize = totalValues(details, userId,
+                            Environment.DIRECTORY_DOWNLOADS);
+                    final long miscSize = details.miscSize.get(userId);
+                    totalDownloadsSize += downloadsSize;
+                    totalMiscSize += miscSize;
+                    accountedSize += miscSize + downloadsSize;
+
+                    if (LOGV)
+                        Log.v(TAG, "miscSize for " + userId + ": " + miscSize + "(total: "
+                                + totalMiscSize + ") \ndownloadsSize: " + downloadsSize + "(total: "
+                                + totalDownloadsSize + ") accountedSize: " + accountedSize);
+
+                    // Cannot display 'Other' until all known items are accounted for.
+                    otherItem = item;
                 } break;
                 case R.string.storage_detail_cached: {
                     updatePreference(item, details.cacheSize);
+                    accountedSize += details.cacheSize;
+                    if (LOGV)
+                        Log.v(TAG, "cacheSize: " + details.cacheSize + " accountedSize: "
+                                + accountedSize);
                 } break;
                 case 0: {
                     final long userSize = details.usersSize.get(userId);
                     updatePreference(item, userSize);
+                    accountedSize += userSize;
+                    if (LOGV) Log.v(TAG, "userSize: " + userSize
+                            + " accountedSize: " + accountedSize);
                 } break;
             }
+        }
+        if (otherItem != null) {
+            final long usedSize = mTotalSize - details.availSize;
+            final long unaccountedSize = usedSize - accountedSize;
+            final long otherSize = totalMiscSize + totalDownloadsSize + unaccountedSize;
+            if (LOGV)
+                Log.v(TAG, "Other items: \n\tmTotalSize: " + mTotalSize + " availSize: "
+                        + details.availSize + " usedSize: " + usedSize + "\n\taccountedSize: "
+                        + accountedSize + " unaccountedSize size: " + unaccountedSize
+                        + "\n\ttotalMiscSize: " + totalMiscSize + " totalDownloadsSize: "
+                        + totalDownloadsSize + "\n\tdetails: " + details);
+            updatePreference(otherItem, otherSize);
         }
     }
 
