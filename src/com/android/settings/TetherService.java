@@ -199,9 +199,7 @@ public class TetherService extends Service {
     }
 
     private void disableWifiTethering() {
-        ConnectivityManager cm =
-                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        cm.stopTethering(ConnectivityManager.TETHERING_WIFI);
+        TetherUtil.setWifiTethering(false, this);
     }
 
     private void disableUsbTethering() {
