@@ -26,12 +26,14 @@ import android.os.UserManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settingslib.HelpUtils;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.setupwizardlib.span.LinkSpan;
 
 /**
@@ -48,12 +50,21 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
 
     private UserManager mUserManager;
     private boolean mHasPassword;
+    private boolean mFingerprintUnlockDisabledByAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFingerprintUnlockDisabledByAdmin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+                this, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId) != null;
+
         setContentView(R.layout.fingerprint_enroll_introduction);
-        setHeaderText(R.string.security_settings_fingerprint_enroll_introduction_title);
+        if (mFingerprintUnlockDisabledByAdmin) {
+            setHeaderText(R.string
+                    .security_settings_fingerprint_enroll_introduction_title_unlock_disabled);
+        } else {
+            setHeaderText(R.string.security_settings_fingerprint_enroll_introduction_title);
+        }
 
         final Button cancelButton = (Button) findViewById(R.id.fingerprint_cancel_button);
         cancelButton.setOnClickListener(this);
@@ -158,6 +169,17 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
 
     protected void onCancelButtonClick() {
         finish();
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+
+        TextView description = (TextView) findViewById(R.id.description_text);
+        if (mFingerprintUnlockDisabledByAdmin) {
+            description.setText(R.string
+                    .security_settings_fingerprint_enroll_introduction_message_unlock_disabled);
+        }
     }
 
     @Override
