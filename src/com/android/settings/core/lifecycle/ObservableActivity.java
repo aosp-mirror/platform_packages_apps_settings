@@ -15,7 +15,10 @@
  */
 package com.android.settings.core.lifecycle;
 
+import android.annotation.Nullable;
 import android.app.Activity;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 
 /**
  * {@link Activity} that has hooks to observe activity lifecycle events.
@@ -26,6 +29,19 @@ public class ObservableActivity extends Activity {
 
     protected Lifecycle getLifecycle() {
         return mLifecycle;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mLifecycle.onAttach(this);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState,
+            @Nullable PersistableBundle persistentState) {
+        mLifecycle.onAttach(this);
+        super.onCreate(savedInstanceState, persistentState);
     }
 
     @Override

@@ -38,26 +38,27 @@ import static org.mockito.Mockito.verify;
 public class VisibilityLoggerMixinTest {
 
     @Mock
-    private EventLogWriter mLogger;
+    private MetricsFeatureProvider mMetricsFeature;
+
     private VisibilityLoggerMixin mMixin;
 
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        mMixin = new VisibilityLoggerMixin(TestInstrumentable.TEST_METRIC, mLogger);
+        mMixin = new VisibilityLoggerMixin(TestInstrumentable.TEST_METRIC, mMetricsFeature);
     }
 
     @Test
     public void shouldLogVisibleOnResume() {
         mMixin.onResume();
-        verify(mLogger, times(1))
+        verify(mMetricsFeature, times(1))
                 .visible(any(Context.class), eq(TestInstrumentable.TEST_METRIC));
     }
 
     @Test
     public void shouldLogHideOnPause() {
         mMixin.onPause();
-        verify(mLogger, times(1))
+        verify(mMetricsFeature, times(1))
                 .hidden(any(Context.class), eq(TestInstrumentable.TEST_METRIC));
     }
 

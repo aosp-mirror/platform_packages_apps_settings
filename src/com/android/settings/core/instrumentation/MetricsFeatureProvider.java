@@ -13,33 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.settings.core.instrumentation;
 
-import android.support.annotation.VisibleForTesting;
-
-public class MetricsFactory {
-
-    private static MetricsFactory sInstance;
-
-    private LogWriter mLogger;
-
-    public static MetricsFactory get() {
-        if (sInstance == null) {
-            sInstance = new MetricsFactory();
-        }
-        return sInstance;
-    }
-
-    public LogWriter getLogger() {
-        if (mLogger == null) {
-            mLogger = new EventLogWriter();
-        }
-        return mLogger;
-    }
-
-    @VisibleForTesting
-    void setLogger(LogWriter logger) {
-        mLogger = logger;
-    }
+/**
+ * FeatureProvider for metrics.
+ */
+public interface MetricsFeatureProvider extends LogWriter {
 }

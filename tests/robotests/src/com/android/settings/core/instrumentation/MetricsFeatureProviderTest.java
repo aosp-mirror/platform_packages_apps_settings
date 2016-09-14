@@ -15,31 +15,46 @@
  */
 package com.android.settings.core.instrumentation;
 
-import com.android.settings.TestConfig;
+import android.content.Context;
 
+import com.android.settings.TestConfig;
+import com.android.settings.overlay.FeatureFactory;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
 import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class MetricsFactoryTest {
+public class MetricsFeatureProviderTest {
 
-    @Test
-    public void factoryShouldReuseCachedInstance() {
-        MetricsFactory factory1 = MetricsFactory.get();
-        MetricsFactory factory2 = MetricsFactory.get();
-        assertTrue(factory1 == factory2);
+    private ShadowApplication mApplication;
+    private Context mContext;
+
+    @Mock
+    private LogWriter mLogWriter;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        mApplication = ShadowApplication.getInstance();
+        mContext = mApplication.getApplicationContext();
     }
 
     @Test
-    public void factoryShouldCacheLogger() {
-        MetricsFactory factory = MetricsFactory.get();
-        LogWriter logger1 = factory.getLogger();
-        LogWriter logger2 = factory.getLogger();
-        assertTrue(logger1 == logger2);
+    public void getFactory_shouldReuseCachedInstance() {
+        MetricsFeatureProvider feature1 =
+                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+        MetricsFeatureProvider feature2 =
+                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+
+        assertTrue(feature1 == feature2);
     }
 }

@@ -18,6 +18,7 @@ package com.android.settings.core.instrumentation;
 import android.content.Context;
 
 import com.android.settings.TestConfig;
+import com.android.settings.overlay.FeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,7 @@ import org.robolectric.shadows.ShadowApplication;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
@@ -43,6 +45,7 @@ public class SharedPreferenceLoggerTest {
     @Mock
     private LogWriter mLogWriter;
 
+    private MetricsFeatureProvider mMetricsFeature;
     private ShadowApplication mApplication;
     private SharedPreferencesLogger mSharedPrefLogger;
 
@@ -50,7 +53,10 @@ public class SharedPreferenceLoggerTest {
     public void init() {
         MockitoAnnotations.initMocks(this);
         mApplication = ShadowApplication.getInstance();
-        MetricsFactory.get().setLogger(mLogWriter);
+        Context context = mApplication.getApplicationContext();
+        mMetricsFeature = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        ((MetricsFeatureProviderImpl) mMetricsFeature).addLogWriter(mLogWriter);
+
         mSharedPrefLogger = new SharedPreferencesLogger(
                 mApplication.getApplicationContext(), TEST_TAG);
     }

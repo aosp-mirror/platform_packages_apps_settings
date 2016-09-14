@@ -23,6 +23,7 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.Map;
 import java.util.Set;
@@ -31,12 +32,12 @@ public class SharedPreferencesLogger implements SharedPreferences {
 
     private final String mTag;
     private final Context mContext;
-    private final LogWriter mLogWriter;
+    private final MetricsFeatureProvider mMetricsFeature;
 
     public SharedPreferencesLogger(Context context, String tag) {
         mContext = context;
         mTag = tag;
-        mLogWriter = MetricsFactory.get().getLogger();
+        mMetricsFeature = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -95,12 +96,12 @@ public class SharedPreferencesLogger implements SharedPreferences {
     }
 
     private void logValue(String key, String value) {
-        mLogWriter.count(mContext, mTag + "/" + key + "|" + value, 1);
+        mMetricsFeature.count(mContext, mTag + "/" + key + "|" + value, 1);
     }
 
     private void logPackageName(String key, String value) {
-        mLogWriter.count(mContext, mTag + "/" + key, 1);
-        mLogWriter.action(mContext, MetricsEvent.ACTION_GENERIC_PACKAGE,
+        mMetricsFeature.count(mContext, mTag + "/" + key, 1);
+        mMetricsFeature.action(mContext, MetricsEvent.ACTION_GENERIC_PACKAGE,
                 mTag + "/" + key + "|" + value);
     }
 

@@ -17,6 +17,7 @@ package com.android.settings.core.lifecycle;
 
 
 import android.annotation.CallSuper;
+import android.content.Context;
 import android.support.v14.preference.PreferenceFragment;
 
 /**
@@ -28,6 +29,13 @@ public abstract class ObservablePreferenceFragment extends PreferenceFragment {
 
     protected Lifecycle getLifecycle() {
         return mLifecycle;
+    }
+
+    @CallSuper
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mLifecycle.onAttach(context);
     }
 
     @CallSuper

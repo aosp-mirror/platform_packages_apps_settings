@@ -16,6 +16,7 @@
 package com.android.settings.core.lifecycle;
 
 import android.app.DialogFragment;
+import android.content.Context;
 
 /**
  * {@link DialogFragment} that has hooks to observe fragment lifecycle events.
@@ -23,6 +24,12 @@ import android.app.DialogFragment;
 public class ObservableDialogFragment extends DialogFragment {
 
     protected final Lifecycle mLifecycle = new Lifecycle();
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mLifecycle.onAttach(context);
+    }
 
     @Override
     public void onStart() {
