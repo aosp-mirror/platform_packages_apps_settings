@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.INetworkStatsSession;
+import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.net.TrafficStats;
 import android.os.Bundle;
@@ -226,7 +227,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 mDefaultTemplate);
         Context context = getContext();
-
         mDataInfoControler.updateDataLimit(info,
                 services.mPolicyEditor.getPolicy(mDefaultTemplate));
 

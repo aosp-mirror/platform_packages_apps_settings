@@ -174,11 +174,13 @@ public class BillingCycleSettings extends DataUsageBase implements
         private View mView;
 
         public static void show(DataUsageEditController parent, boolean isLimit) {
-            if (! (parent instanceof Fragment)) {
+            if (!(parent instanceof Fragment)) {
                 return;
             }
             Fragment targetFragment = (Fragment) parent;
-            if (!targetFragment.isAdded()) return;
+            if (!targetFragment.isAdded()) {
+                return;
+            }
 
             final Bundle args = new Bundle();
             args.putParcelable(EXTRA_TEMPLATE, parent.getNetworkTemplate());
