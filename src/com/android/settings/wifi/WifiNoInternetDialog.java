@@ -26,6 +26,7 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,8 @@ import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 
+import static android.net.ConnectivityManager.ACTION_PROMPT_LOST_VALIDATION;
+import static android.net.ConnectivityManager.ACTION_PROMPT_UNVALIDATED;
 import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 
 public final class WifiNoInternetDialog extends AlertActivity implements
@@ -46,19 +49,25 @@ public final class WifiNoInternetDialog extends AlertActivity implements
     private String mNetworkName;
     private ConnectivityManager.NetworkCallback mNetworkCallback;
     private CheckBox mAlwaysAllow;
+    private String mAction;
+
+    private boolean isKnownAction(Intent intent) {
+        return intent.getAction().equals(ACTION_PROMPT_UNVALIDATED) ||
+                intent.getAction().equals(ACTION_PROMPT_LOST_VALIDATION);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final Intent intent = getIntent();
-        if (intent == null ||
-                !intent.getAction().equals(ConnectivityManager.ACTION_PROMPT_UNVALIDATED) ||
-                !"netId".equals(intent.getScheme())) {
+        if (intent == null || !isKnownAction(intent) || !"netId".equals(intent.getScheme())) {
             Log.e(TAG, "Unexpected intent " + intent + ", exiting");
             finish();
             return;
         }
+
+        mAction = intent.getAction();
 
         try {
             mNetwork = new Network(Integer.parseInt(intent.getData().getSchemeSpecificPart()));
@@ -115,20 +124,29 @@ public final class WifiNoInternetDialog extends AlertActivity implements
         mAlert.setIcon(R.drawable.ic_settings_wireless);
 
         final AlertController.AlertParams ap = mAlertParams;
-        ap.mTitle = mNetworkName;
-        ap.mMessage = getString(R.string.no_internet_access_text);
-        ap.mPositiveButtonText = getString(R.string.yes);
-        ap.mNegativeButtonText = getString(R.string.no);
+        if (ACTION_PROMPT_UNVALIDATED.equals(mAction)) {
+            ap.mTitle = mNetworkName;
+            ap.mMessage = getString(R.string.no_internet_access_text);
+            ap.mPositiveButtonText = getString(R.string.yes);
+            ap.mNegativeButtonText = getString(R.string.no);
+        } else {
+            ap.mTitle = getString(R.string.lost_internet_access_title);
+            ap.mMessage = getString(R.string.lost_internet_access_text);
+            ap.mPositiveButtonText = getString(R.string.lost_internet_access_switch);
+            ap.mNegativeButtonText = getString(R.string.lost_internet_access_cancel);
+        }
         ap.mPositiveButtonListener = this;
         ap.mNegativeButtonListener = this;
 
-        final LayoutInflater inflater = LayoutInflater.from(ap.mContext);
-        final View checkbox = inflater.inflate(
-                com.android.internal.R.layout.always_use_checkbox, null);
-        ap.mView = checkbox;
+        if (ACTION_PROMPT_UNVALIDATED.equals(mAction)) {
+            final LayoutInflater inflater = LayoutInflater.from(ap.mContext);
+            final View checkbox = inflater.inflate(
+                    com.android.internal.R.layout.always_use_checkbox, null);
+            ap.mView = checkbox;
 
-        mAlwaysAllow = (CheckBox) checkbox.findViewById(com.android.internal.R.id.alwaysUse);
-        mAlwaysAllow.setText(getString(R.string.no_internet_access_remember));
+            mAlwaysAllow = (CheckBox) checkbox.findViewById(com.android.internal.R.id.alwaysUse);
+            mAlwaysAllow.setText(getString(R.string.no_internet_access_remember));
+        }
 
         setupAlert();
     }
@@ -143,18 +161,20 @@ public final class WifiNoInternetDialog extends AlertActivity implements
     }
 
     public void onClick(DialogInterface dialog, int which) {
+        if (which != BUTTON_NEGATIVE && which != BUTTON_POSITIVE) return;
         final boolean accept = (which == BUTTON_POSITIVE);
-        final String action = (accept ? "Connect" : "Ignore");
-        final boolean always = mAlwaysAllow.isChecked();
 
-        switch (which) {
-            case BUTTON_POSITIVE:
-            case BUTTON_NEGATIVE:
-                mCM.setAcceptUnvalidated(mNetwork, accept, always);
-                Log.d(TAG, action +  " network=" + mNetwork + (always ? " and remember" : ""));
-                break;
-            default:
-                break;
+        if (ACTION_PROMPT_UNVALIDATED.equals(mAction)) {
+            final String action = (accept ? "Connect" : "Ignore");
+            final boolean always = mAlwaysAllow.isChecked();
+            mCM.setAcceptUnvalidated(mNetwork, accept, always);
+            Log.d(TAG, "NO_INTERNET: " + action +  " network=" + mNetwork +
+                    (always ? " and remember" : ""));
+        } else {
+            final String action = (accept ? "Switch" : "Cancel");
+            Log.d(TAG, "LOST_INTERNET: " + action);
+            Settings.Global.putInt(mAlertParams.mContext.getContentResolver(),
+                    Settings.Global.NETWORK_AVOID_BAD_WIFI, accept ? 1 : 0);
         }
     }
 }
