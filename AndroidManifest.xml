@@ -382,6 +382,10 @@
                 <action android:name="android.net.conn.PROMPT_UNVALIDATED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.PROMPT_LOST_VALIDATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
