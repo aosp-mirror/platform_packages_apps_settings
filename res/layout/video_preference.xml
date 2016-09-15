@@ -24,13 +24,15 @@
         android:layout_height="wrap_content"
         android:src="@drawable/accessibility_screen_magnification_background"
         android:scaleType="fitXY"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:importantForAccessibility="noHideDescendants" />
 
     <VideoView
         android:id="@+id/video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/video_background"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:importantForAccessibility="noHideDescendants" />
 
 </RelativeLayout>
