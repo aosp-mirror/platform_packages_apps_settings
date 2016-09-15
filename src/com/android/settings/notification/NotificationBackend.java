@@ -60,6 +60,16 @@ public class NotificationBackend {
     public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
         row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
+        final String[] nonBlockablePkgs = context.getResources().getStringArray(
+                    com.android.internal.R.array.config_nonBlockableNotificationPackages);
+        if (nonBlockablePkgs != null) {
+            int N = nonBlockablePkgs.length;
+            for (int i = 0; i < N; i++) {
+                if (app.packageName.equals(nonBlockablePkgs[i])) {
+                    row.systemApp = true;
+                }
+            }
+        }
         return row;
     }
 

@@ -154,13 +154,13 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
     }
 
-    protected void setupImportancePrefs(boolean isSystemApp, int importance, boolean banned) {
+    protected void setupImportancePrefs(boolean notBlockable, int importance, boolean banned) {
         if (mShowSlider) {
             setVisible(mBlock, false);
             setVisible(mSilent, false);
             mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
             mImportance.setMinimumProgress(
-                    isSystemApp ? Ranking.IMPORTANCE_MIN : Ranking.IMPORTANCE_NONE);
+                    notBlockable ? Ranking.IMPORTANCE_MIN : Ranking.IMPORTANCE_NONE);
             mImportance.setMax(Ranking.IMPORTANCE_MAX);
             mImportance.setProgress(importance);
             mImportance.setAutoOn(importance == Ranking.IMPORTANCE_UNSPECIFIED);
@@ -175,7 +175,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             });
         } else {
             setVisible(mImportance, false);
-            if (isSystemApp) {
+            if (notBlockable) {
                 setVisible(mBlock, false);
             } else {
                 boolean blocked = importance == Ranking.IMPORTANCE_NONE || banned;
@@ -191,20 +191,20 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                         return true;
                     }
                 });
-
-                mSilent.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                    @Override
-                    public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        final boolean silenced = (Boolean) newValue;
-                        final int importance =
-                                silenced ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_UNSPECIFIED;
-                        mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
-                        updateDependents(importance);
-                        return true;
-                    }
-                });
-                updateDependents(banned ? Ranking.IMPORTANCE_NONE : importance);
             }
+            mSilent.setChecked(importance == Ranking.IMPORTANCE_LOW);
+            mSilent.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final boolean silenced = (Boolean) newValue;
+                    final int importance =
+                            silenced ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_UNSPECIFIED;
+                    mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
+                    updateDependents(importance);
+                    return true;
+                }
+            });
+            updateDependents(banned ? Ranking.IMPORTANCE_NONE : importance);
         }
     }
 
