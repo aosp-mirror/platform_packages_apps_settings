@@ -18,6 +18,9 @@ package com.android.settings.overlay;
 
 import android.content.Context;
 import android.support.annotation.Keep;
+
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 
 /**
@@ -26,9 +29,19 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 @Keep
 public final class FeatureFactoryImpl extends FeatureFactory {
 
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
         return null;
+    }
+
+    @Override
+    public MetricsFeatureProvider getMetricsFeatureProvider() {
+        if (mMetricsFeatureProvider == null) {
+            mMetricsFeatureProvider = new MetricsFeatureProviderImpl();
+        }
+        return mMetricsFeatureProvider;
     }
 
     @Override

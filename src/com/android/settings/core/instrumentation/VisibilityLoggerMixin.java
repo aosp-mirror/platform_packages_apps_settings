@@ -16,34 +16,45 @@
 
 package com.android.settings.core.instrumentation;
 
+import android.content.Context;
+
 import com.android.settings.core.lifecycle.LifecycleObserver;
+import com.android.settings.core.lifecycle.events.OnAttach;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Logs visibility change of a fragment.
  */
-public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPause {
+public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPause, OnAttach {
 
     private final int mMetricsCategory;
-    private final LogWriter mLogWriter;
+
+    private MetricsFeatureProvider mMetricsFeature;
 
     public VisibilityLoggerMixin(int metricsCategory) {
-        this(metricsCategory, MetricsFactory.get().getLogger());
+        // MetricsFeature will be set during onAttach.
+        this(metricsCategory, null /* metricsFeature */);
     }
 
-    public VisibilityLoggerMixin(int metricsCategory, LogWriter logWriter) {
+    public VisibilityLoggerMixin(int metricsCategory, MetricsFeatureProvider metricsFeature) {
         mMetricsCategory = metricsCategory;
-        mLogWriter = logWriter;
+        mMetricsFeature = metricsFeature;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        mMetricsFeature = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
     public void onResume() {
-        mLogWriter.visible(null /* context */, mMetricsCategory);
+        mMetricsFeature.visible(null /* context */, mMetricsCategory);
     }
 
     @Override
     public void onPause() {
-        mLogWriter.hidden(null /* context */, mMetricsCategory);
+        mMetricsFeature.hidden(null /* context */, mMetricsCategory);
     }
 }

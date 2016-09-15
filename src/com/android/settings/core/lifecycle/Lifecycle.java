@@ -16,7 +16,9 @@
 package com.android.settings.core.lifecycle;
 
 import android.annotation.UiThread;
+import android.content.Context;
 
+import com.android.settings.core.lifecycle.events.OnAttach;
 import com.android.settings.core.lifecycle.events.OnDestroy;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
@@ -42,6 +44,14 @@ public class Lifecycle {
         ThreadUtils.ensureMainThread();
         mObservers.add(observer);
         return observer;
+    }
+
+    public void onAttach(Context context) {
+        for (LifecycleObserver observer : mObservers) {
+            if (observer instanceof OnAttach) {
+                ((OnAttach) observer).onAttach(context);
+            }
+        }
     }
 
     public void onStart() {

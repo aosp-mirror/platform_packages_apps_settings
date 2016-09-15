@@ -15,7 +15,10 @@
  */
 package com.android.settings.core.lifecycle;
 
+import android.content.Context;
+
 import com.android.settings.TestConfig;
+import com.android.settings.core.lifecycle.events.OnAttach;
 import com.android.settings.core.lifecycle.events.OnDestroy;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
@@ -57,14 +60,22 @@ public class LifecycleTest {
 
     }
 
-    public static class TestObserver implements LifecycleObserver, OnStart, OnResume,
+    public static class TestObserver implements LifecycleObserver, OnAttach, OnStart, OnResume,
             OnPause, OnStop, OnDestroy {
 
+        boolean mOnAttachObserved;
+        boolean mOnAttachHasContext;
         boolean mOnStartObserved;
         boolean mOnResumeObserved;
         boolean mOnPauseObserved;
         boolean mOnStopObserved;
         boolean mOnDestroyObserved;
+
+        @Override
+        public void onAttach(Context context) {
+            mOnAttachObserved = true;
+            mOnAttachHasContext = context != null;
+        }
 
         @Override
         public void onStart() {
@@ -115,8 +126,10 @@ public class LifecycleTest {
                 Robolectric.buildFragment(TestDialogFragment.class);
         TestDialogFragment fragment = fragmentController.get();
 
-        fragmentController.create().start().resume().pause().stop().destroy();
+        fragmentController.attach().create().start().resume().pause().stop().destroy();
 
+        assertTrue(fragment.mFragObserver.mOnAttachObserved);
+        assertTrue(fragment.mFragObserver.mOnAttachHasContext);
         assertTrue(fragment.mFragObserver.mOnStartObserved);
         assertTrue(fragment.mFragObserver.mOnResumeObserved);
         assertTrue(fragment.mFragObserver.mOnPauseObserved);
