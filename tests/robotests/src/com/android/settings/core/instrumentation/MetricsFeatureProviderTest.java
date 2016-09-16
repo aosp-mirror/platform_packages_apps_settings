@@ -29,7 +29,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-import static org.junit.Assert.assertTrue;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -55,6 +55,6 @@ public class MetricsFeatureProviderTest {
         MetricsFeatureProvider feature2 =
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
 
-        assertTrue(feature1 == feature2);
+        assertThat(feature1 == feature2).isTrue();
     }
 }
