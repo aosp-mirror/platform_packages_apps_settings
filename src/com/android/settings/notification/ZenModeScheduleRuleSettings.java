@@ -39,6 +39,7 @@ import android.widget.TimePicker;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -275,9 +276,14 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
             setSummary(time);
         }
 
-        public static class TimePickerFragment extends DialogFragment implements
+        public static class TimePickerFragment extends InstrumentedDialogFragment implements
                 TimePickerDialog.OnTimeSetListener {
             public TimePickerPreference pref;
+
+            @Override
+            public int getMetricsCategory() {
+                return MetricsEvent.DIALOG_ZEN_TIMEPICKER;
+            }
 
             @Override
             public Dialog onCreateDialog(Bundle savedInstanceState) {

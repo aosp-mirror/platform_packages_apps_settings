@@ -46,6 +46,7 @@ import android.widget.Toast;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -203,9 +204,14 @@ public class ZenAccessSettings extends EmptyTextSettings {
     /**
      * Warning dialog when allowing zen access warning about the privileges being granted.
      */
-    public static class ScaryWarningDialogFragment extends DialogFragment {
+    public static class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
         static final String KEY_PKG = "p";
         static final String KEY_LABEL = "l";
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_ZEN_ACCESS_GRANT;
+        }
 
         public ScaryWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
             Bundle args = new Bundle();
@@ -249,9 +255,15 @@ public class ZenAccessSettings extends EmptyTextSettings {
     /**
      * Warning dialog when revoking zen access warning that zen rule instances will be deleted.
      */
-    public static class FriendlyWarningDialogFragment extends DialogFragment {
+    public static class FriendlyWarningDialogFragment extends InstrumentedDialogFragment {
         static final String KEY_PKG = "p";
         static final String KEY_LABEL = "l";
+
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_ZEN_ACCESS_REVOKE;
+        }
 
         public FriendlyWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
             Bundle args = new Bundle();

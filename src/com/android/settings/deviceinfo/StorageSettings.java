@@ -47,6 +47,7 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -382,7 +383,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
-    public static class VolumeUnmountedFragment extends DialogFragment {
+    public static class VolumeUnmountedFragment extends InstrumentedDialogFragment {
         public static void show(Fragment parent, String volumeId) {
             final Bundle args = new Bundle();
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, volumeId);
@@ -391,6 +392,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             dialog.setArguments(args);
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_VOLUME_UNMOUNTED);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_VOLUME_UNMOUNT;
         }
 
         @Override
@@ -428,7 +434,12 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
-    public static class DiskInitFragment extends DialogFragment {
+    public static class DiskInitFragment extends InstrumentedDialogFragment {
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_VOLUME_INIT;
+        }
+
         public static void show(Fragment parent, int resId, String diskId) {
             final Bundle args = new Bundle();
             args.putInt(Intent.EXTRA_TEXT, resId);

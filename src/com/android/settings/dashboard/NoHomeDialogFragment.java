@@ -22,9 +22,11 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
-public class NoHomeDialogFragment extends DialogFragment {
+public class NoHomeDialogFragment extends InstrumentedDialogFragment {
     public static void show(Activity parent) {
         final NoHomeDialogFragment dialog = new NoHomeDialogFragment();
         dialog.show(parent.getFragmentManager(), null);
@@ -36,5 +38,10 @@ public class NoHomeDialogFragment extends DialogFragment {
                 .setMessage(R.string.only_one_home_message)
                 .setPositiveButton(android.R.string.ok, null)
                 .create();
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_NO_HOME;
     }
 }

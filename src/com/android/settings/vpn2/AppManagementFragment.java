@@ -42,6 +42,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.RestrictedPreference;
 
@@ -303,9 +304,14 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         return getAlwaysOnVpnPackage() != null && !isVpnAlwaysOn();
     }
 
-    public static class CannotConnectFragment extends DialogFragment {
+    public static class CannotConnectFragment extends InstrumentedDialogFragment {
         private static final String TAG = "CannotConnect";
         private static final String ARG_VPN_LABEL = "label";
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_VPN_CANNOT_CONNECT;
+        }
 
         public static void show(AppManagementFragment parent, String vpnLabel) {
             if (parent.getFragmentManager().findFragmentByTag(TAG) == null) {
@@ -329,9 +335,14 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         }
     }
 
-    public static class ReplaceExistingVpnFragment extends DialogFragment
+    public static class ReplaceExistingVpnFragment extends InstrumentedDialogFragment
             implements DialogInterface.OnClickListener {
         private static final String TAG = "ReplaceExistingVpn";
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_VPN_REPLACE_EXISTING;
+        }
 
         public static void show(AppManagementFragment parent) {
             if (parent.getFragmentManager().findFragmentByTag(TAG) == null) {

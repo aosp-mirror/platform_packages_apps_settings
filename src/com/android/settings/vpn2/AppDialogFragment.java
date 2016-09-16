@@ -31,13 +31,15 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.internal.net.VpnConfig;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
  * Fragment wrapper around an {@link AppDialog}.
  */
-public class AppDialogFragment extends DialogFragment implements AppDialog.Listener {
+public class AppDialogFragment extends InstrumentedDialogFragment implements AppDialog.Listener {
     private static final String TAG_APP_DIALOG = "vpnappdialog";
     private static final String TAG = "AppDialogFragment";
 
@@ -53,9 +55,14 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
     private final IConnectivityManager mService = IConnectivityManager.Stub.asInterface(
             ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
 
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_VPN_APP_CONFIG;
+    }
+
     public interface Listener {
-        public void onForget();
-        public void onCancel();
+        void onForget();
+        void onCancel();
     }
 
     public static void show(Fragment parent, PackageInfo packageInfo, String label,

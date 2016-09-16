@@ -31,6 +31,7 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 
 public class AdvancedWifiSettings extends RestrictedSettingsFragment {
@@ -117,7 +118,7 @@ public class AdvancedWifiSettings extends RestrictedSettingsFragment {
     }
 
     /* Wrapper class for the WPS dialog to properly handle life cycle events like rotation. */
-    public static class WpsFragment extends DialogFragment {
+    public static class WpsFragment extends InstrumentedDialogFragment {
         private static int mWpsSetup;
 
         // Public default constructor is required for rotation.
@@ -128,6 +129,11 @@ public class AdvancedWifiSettings extends RestrictedSettingsFragment {
         public WpsFragment(int wpsSetup) {
             super();
             mWpsSetup = wpsSetup;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_WPS_SETUP;
         }
 
         @Override

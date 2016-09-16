@@ -25,9 +25,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
-public class SetupSkipDialog extends DialogFragment implements DialogInterface.OnClickListener {
+public class SetupSkipDialog extends InstrumentedDialogFragment
+        implements DialogInterface.OnClickListener {
 
     public static final String EXTRA_FRP_SUPPORTED = ":settings:frp_supported";
 
@@ -41,6 +44,11 @@ public class SetupSkipDialog extends DialogFragment implements DialogInterface.O
         args.putBoolean(ARG_FRP_SUPPORTED, isFrpSupported);
         dialog.setArguments(args);
         return dialog;
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_FINGERPRINT_SKIP_SETUP;
     }
 
     @Override

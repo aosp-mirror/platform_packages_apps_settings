@@ -32,9 +32,11 @@ import android.os.Bundle;
 import android.support.v14.preference.PreferenceFragment;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.ButtonBarHandler;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.setupwizardlib.view.NavigationBar;
 
 public class WifiSetupActivity extends WifiPickerActivity
@@ -240,7 +242,7 @@ public class WifiSetupActivity extends WifiPickerActivity
         return info != null && info.isConnected();
     }
 
-    public static class WifiSkipDialog extends DialogFragment {
+    public static class WifiSkipDialog extends InstrumentedDialogFragment {
         public static WifiSkipDialog newInstance(int messageRes) {
             final Bundle args = new Bundle();
             args.putInt("messageRes", messageRes);
@@ -251,6 +253,11 @@ public class WifiSetupActivity extends WifiPickerActivity
 
         public WifiSkipDialog() {
             // no-arg constructor for fragment
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsProto.MetricsEvent.DIALOG_WIFI_SKIP;
         }
 
         @Override

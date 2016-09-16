@@ -64,6 +64,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -562,7 +563,7 @@ public class FingerprintSettings extends SubSettings {
             }
         };
 
-        public static class RenameDeleteDialog extends DialogFragment {
+        public static class RenameDeleteDialog extends InstrumentedDialogFragment {
 
             private Fingerprint mFp;
             private EditText mDialogTextField;
@@ -669,11 +670,21 @@ public class FingerprintSettings extends SubSettings {
                     outState.putInt("endSelection", mDialogTextField.getSelectionEnd());
                 }
             }
+
+            @Override
+            public int getMetricsCategory() {
+                return MetricsEvent.DIALOG_FINGERPINT_EDIT;
+            }
         }
 
-        public static class ConfirmLastDeleteDialog extends DialogFragment {
+        public static class ConfirmLastDeleteDialog extends InstrumentedDialogFragment {
 
             private Fingerprint mFp;
+
+            @Override
+            public int getMetricsCategory() {
+                return MetricsEvent.DIALOG_FINGERPINT_DELETE_LAST;
+            }
 
             @Override
             public Dialog onCreateDialog(Bundle savedInstanceState) {

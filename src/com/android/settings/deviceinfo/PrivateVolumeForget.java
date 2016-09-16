@@ -36,6 +36,7 @@ import android.widget.TextView;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class PrivateVolumeForget extends SettingsPreferenceFragment {
     private static final String TAG_FORGET_CONFIRM = "forget_confirm";
@@ -72,7 +73,13 @@ public class PrivateVolumeForget extends SettingsPreferenceFragment {
         }
     };
 
-    public static class ForgetConfirmFragment extends DialogFragment {
+    public static class ForgetConfirmFragment extends InstrumentedDialogFragment {
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_VOLUME_FORGET;
+        }
+
         public static void show(Fragment parent, String fsUuid) {
             final Bundle args = new Bundle();
             args.putString(VolumeRecord.EXTRA_FS_UUID, fsUuid);

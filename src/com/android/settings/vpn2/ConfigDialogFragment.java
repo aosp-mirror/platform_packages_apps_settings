@@ -16,8 +16,6 @@
 
 package com.android.settings.vpn2;
 
-import java.util.Arrays;
-
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -33,16 +31,18 @@ import android.security.KeyStore;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
  * Fragment wrapper around a {@link ConfigDialog}.
  */
-public class ConfigDialogFragment extends DialogFragment implements
-        DialogInterface.OnClickListener {
+public class ConfigDialogFragment extends InstrumentedDialogFragment
+        implements DialogInterface.OnClickListener {
     private static final String TAG_CONFIG_DIALOG = "vpnconfigdialog";
     private static final String TAG = "ConfigDialogFragment";
 
@@ -54,6 +54,12 @@ public class ConfigDialogFragment extends DialogFragment implements
             ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
 
     private boolean mUnlocking = false;
+
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_LEGACY_VPN_CONFIG;
+    }
 
     public static void show(VpnSettings parent, VpnProfile profile, boolean edit, boolean exists) {
         if (!parent.isAdded()) return;

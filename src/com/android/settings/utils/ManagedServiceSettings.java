@@ -35,7 +35,9 @@ import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.notification.EmptyTextSettings;
 
 import java.util.Collections;
@@ -130,9 +132,14 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         }
     }
 
-    public static class ScaryWarningDialogFragment extends DialogFragment {
+    public static class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
         static final String KEY_COMPONENT = "c";
         static final String KEY_LABEL = "l";
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsProto.MetricsEvent.DIALOG_SERVICE_ACCESS_WARNING;
+        }
 
         public ScaryWarningDialogFragment setServiceInfo(ComponentName cn, String label,
                 Fragment target) {
