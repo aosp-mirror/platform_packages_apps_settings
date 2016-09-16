@@ -57,7 +57,7 @@
     <string name="radioInfo_phone_idle" msgid="7489244938838742820">"Не работает"</string>
     <string name="radioInfo_phone_ringing" msgid="4883724645684297895">"Звонок"</string>
     <string name="radioInfo_phone_offhook" msgid="5873835692449118954">"Вызов"</string>
-    <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"Отключено"</string>
+    <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"Нет подключения"</string>
     <string name="radioInfo_data_connecting" msgid="8404571440697917823">"Подключение"</string>
     <string name="radioInfo_data_connected" msgid="7074301157399238697">"Подключено"</string>
     <string name="radioInfo_data_suspended" msgid="5315325487890334196">"Приостановлено"</string>
@@ -122,20 +122,26 @@
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"Нажмите, чтобы установить соединение с устройством \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Полученные файлы"</string>
     <string name="device_picker" msgid="4978696506172252813">"Выбрать устройство Bluetooth"</string>
-    <string name="bluetooth_permission_request" msgid="1523129741266262748">"Запрос разрешения на включение Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Приложению требуется включить Bluetooth на устройстве."</string>
-    <string name="bluetooth_ask_disablement" msgid="5889300510508065674">"Приложению требуется отключить Bluetooth на устройстве."</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Одному из приложений требуется, чтобы ваш планшетный ПК был доступен для поиска через Bluetooth на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
-    <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Одному из приложений требуется, чтобы ваш телефон был доступен для поиска через Bluetooth на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Одному из приложений требуется сделать ваш планшетный ПК доступным для поиска через Bluetooth на других устройствах. Позже эти настройки можно будет изменить."</string>
-    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Одному из приложений требуется сделать ваш телефон доступным для поиска через Bluetooth на других устройствах. Позже эти настройки можно будет изменить."</string>
-    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> собирается включить Bluetooth, чтобы установить соединение с другими устройствами. Эту функцию можно в любой момент отключить в настройках Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> собирается включить Bluetooth, чтобы установить соединение с другими устройствами. Эту функцию можно в любой момент отключить в настройках Bluetooth."</string>
-    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Ваш телефон сможет устанавливать соединение с другими устройствами поблизости.\n\nПри передаче данных используется сигнал Bluetooth с низким энергопотреблением."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Одному из приложений требуется включить Bluetooth и сделать ваш планшетный ПК доступным для поиска на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Одному из приложений требуется включить Bluetooth и сделать ваш телефон доступным для поиска на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Одному из приложений требуется включить Bluetooth и сделать ваш планшетный ПК доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Одному из приложений требуется включить Bluetooth и сделать ваш телефон доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
+    <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется включить Bluetooth"</string>
+    <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется отключить Bluetooth"</string>
+    <string name="bluetooth_ask_enablement_no_name" msgid="1644353686104482763">"Приложению требуется включить Bluetooth"</string>
+    <string name="bluetooth_ask_disablement_no_name" msgid="9218830122674868548">"Приложению требуется отключить Bluetooth"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="4791779658660357386">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется, чтобы ваш планшет был доступен для поиска через Bluetooth на других устройствах в течение <xliff:g id="TIMEOUT">%2$d</xliff:g> сек."</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="1308225382575535366">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется, чтобы ваш телефон был доступен для поиска через Bluetooth на других устройствах в течение <xliff:g id="TIMEOUT">%2$d</xliff:g> сек."</string>
+    <string name="bluetooth_ask_discovery_no_name" product="tablet" msgid="225715443477752935">"Приложению требуется, чтобы ваш планшет был доступен для поиска через Bluetooth на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
+    <string name="bluetooth_ask_discovery_no_name" product="default" msgid="4949152735544109994">"Приложению требуется, чтобы ваш телефон был доступен для поиска через Bluetooth на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8528329166577187961">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется сделать ваш планшет доступным для поиска через Bluetooth на других устройствах. Позже эти настройки можно будет изменить."</string>
+    <string name="bluetooth_ask_lasting_discovery" product="default" msgid="4398738575307583138">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется сделать ваш телефон доступным для поиска через Bluetooth на других устройствах. Позже эти настройки можно будет изменить."</string>
+    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet" msgid="1702590641426207062">"Приложению требуется сделать ваш планшет доступным для поиска через Bluetooth на других устройствах. Позже эти настройки можно будет изменить."</string>
+    <string name="bluetooth_ask_lasting_discovery_no_name" product="default" msgid="8549952177383992238">"Приложению требуется сделать ваш телефон доступным для поиска через Bluetooth на других устройствах. Позже эти настройки можно будет изменить."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="1141843490422565755">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется включить Bluetooth и сделать ваш планшет доступным для поиска на других устройствах в течение <xliff:g id="TIMEOUT">%2$d</xliff:g> сек."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="5195836980079191473">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется включить Bluetooth и сделать ваш телефон доступным для поиска на других устройствах в течение <xliff:g id="TIMEOUT">%2$d</xliff:g> сек."</string>
+    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet" msgid="7009338445281693765">"Приложению требуется включить Bluetooth и сделать ваш планшет доступным для поиска на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
+    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default" msgid="8386904242279878734">"Приложению требуется включить Bluetooth и сделать ваш телефон доступным для поиска на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="2279471426575892686">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется включить Bluetooth и сделать ваш планшет доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6961969825475461450">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется включить Bluetooth и сделать ваш телефон доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet" msgid="692477613671555006">"Приложению требуется включить Bluetooth и сделать ваш планшет доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default" msgid="6374480121751597648">"Приложению требуется включить Bluetooth и сделать ваш телефон доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Включение Bluetooth..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Отключение Bluetooth..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Автоматическое подключение"</string>
@@ -343,7 +349,11 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Сканер отпечатков пальцев"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_title_unlock_disabled (7066417934622827305) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Чтобы разблокировать телефон, подтвердить покупку или войти в приложение, приложите палец к сканеру отпечатков. Сохраните на устройстве отпечатки тех, кому вы доверяете, и они тоже смогут это делать.\n\nУчтите, что распознавание отпечатков защищает не так надежно, как графический ключ или PIN-код."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_unlock_disabled (4193477159493347679) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Чтобы разблокировать телефон, подтвердить покупку или войти в приложение, приложите палец к сканеру отпечатков. Сохраните на устройстве отпечатки тех, кому вы доверяете, и они тоже смогут это делать.\n\nУчтите, что распознавание отпечатков защищает не так надежно, как графический ключ или PIN-код."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Отмена"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Продолжить"</string>
@@ -650,8 +660,8 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 ГГц"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 ГГц"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Мбит/с"</string>
-    <string name="wifi_ask_enable" msgid="7119053873957435786">"Приложению \"<xliff:g id="REQUESTER">%s</xliff:g>\" требуется включить Wi-Fi на устройстве."</string>
-    <string name="wifi_ask_disable" msgid="5909293877818270354">"Приложению \"<xliff:g id="REQUESTER">%s</xliff:g>\" требуется отключить Wi-Fi на устройстве."</string>
+    <string name="wifi_ask_enable" msgid="2795469717302060104">"Приложению \"<xliff:g id="REQUESTER">%s</xliff:g>\" требуется включить Wi-Fi"</string>
+    <string name="wifi_ask_disable" msgid="728366570145493573">"Приложению \"<xliff:g id="REQUESTER">%s</xliff:g>\" требуется отключить Wi-Fi"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Разрешить обмен данными при совмещении планшета с другим устройством"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Разрешить обмен данными при совмещении телефона с другим устройством"</string>
@@ -772,6 +782,14 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ПОДКЛЮЧИТЬСЯ"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Сеть не подключена к Интернету. Использовать ее?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Больше не спрашивать для этой сети"</string>
+    <!-- no translation found for lost_internet_access_title (2782009158012212777) -->
+    <skip />
+    <!-- no translation found for lost_internet_access_text (1495142182934624433) -->
+    <skip />
+    <!-- no translation found for lost_internet_access_switch (1157476782808342810) -->
+    <skip />
+    <!-- no translation found for lost_internet_access_cancel (8438722278965609900) -->
+    <skip />
     <string name="wifi_connect" msgid="1076622875777072845">"Подключить"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Не удалось подключиться к сети."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Удалить"</string>
@@ -865,7 +883,8 @@
     <string name="home_settings" msgid="212375129455718176">"Домашний экран"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Экран"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Звук"</string>
-    <string name="ringtone_summary" msgid="2630023412632683493"></string>
+    <!-- no translation found for ringtone_summary (1688079785311826667) -->
+    <skip />
     <string name="all_volume_title" msgid="4296957391257836961">"Громкость"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Звуковые эффекты"</string>
     <string name="ring_volume_title" msgid="5592466070832128777">"Громкость звонка"</string>
@@ -937,14 +956,22 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"От заката до рассвета"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Время включения"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Время отключения"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Отключен/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Не включать автоматически"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Включать автоматически в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Включать автоматически на закате"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Включен/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Не отключать автоматически"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Отключать автоматически в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Отключать автоматически на рассвете"</string>
+    <!-- no translation found for night_display_summary_off (7009821232380000786) -->
+    <skip />
+    <!-- no translation found for night_display_summary_off_auto_mode_never (2305501561697289620) -->
+    <skip />
+    <!-- no translation found for night_display_summary_off_auto_mode_custom (1548073080728058384) -->
+    <skip />
+    <!-- no translation found for night_display_summary_off_auto_mode_twilight (2737328390752018845) -->
+    <skip />
+    <!-- no translation found for night_display_summary_on (6626224414971753417) -->
+    <skip />
+    <!-- no translation found for night_display_summary_on_auto_mode_never (5217396859715040056) -->
+    <skip />
+    <!-- no translation found for night_display_summary_on_auto_mode_custom (887702685252504739) -->
+    <skip />
+    <!-- no translation found for night_display_summary_on_auto_mode_twilight (8574989770628425398) -->
+    <skip />
     <string name="screen_timeout" msgid="4351334843529712571">"Спящий режим"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Отключение экрана"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
@@ -1011,7 +1038,8 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Версия Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Последнее обновление системы безопасности"</string>
-    <string name="model_number" msgid="3765737700545384794">"Модель"</string>
+    <!-- no translation found for model_info (1952009518045740889) -->
+    <skip />
     <string name="fcc_equipment_id" msgid="149114368246356737">"Идентификатор оборудования"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Прошивка модуля связи"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Версия ядра"</string>
@@ -1142,8 +1170,10 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Другое"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Система"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Документы с общим доступом, сохраненные приложениями, контент, скачанный из Интернета или по Bluetooth, служебные файлы Android и т. д.\n\nЧтобы узнать, какие данные есть на устройстве (<xliff:g id="NAME">^1</xliff:g>), нажмите \"Открыть\"."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Система включает файлы, используемые операционной системой Android.\n\nОни недоступны для просмотра."</string>
+    <!-- no translation found for storage_detail_dialog_other (8907101974576694793) -->
+    <skip />
+    <!-- no translation found for storage_detail_dialog_system (3417679651116003900) -->
+    <skip />
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g>, возможно, хранит на запоминающем устройстве фотографии, музыку, приложения и другие данные общим объемом <xliff:g id="SIZE">^2</xliff:g>. \n\nЧтобы проверить это, войдите в аккаунт пользователя <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Настройте карту \"<xliff:g id="NAME">^1</xliff:g>\""</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Портативный носитель"</string>
@@ -2589,6 +2619,8 @@
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Нельзя записать данные на эту NFC-метку. Выберите другую."</string>
     <string name="default_sound" msgid="8821684447333687810">"Мелодия по умолчанию"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Громкость звонка: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"Включен вибросигнал"</string>
+    <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Включен режим без звука"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Громкость звонка: 80%"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Музыка, видео, игры и другие медиафайлы"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Будильник"</string>
@@ -3051,7 +3083,7 @@
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Вт, 18:03"</string>
     <string name="see_all" msgid="8883901630052886984">"Показать все"</string>
     <string name="see_less" msgid="1250265310929558370">"Скрыть"</string>
-    <string name="disconnected" msgid="5787956818111197212">"Отключено"</string>
+    <string name="disconnected" msgid="5787956818111197212">"Нет подключения"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Использовано трафика: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
     <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
       <item quantity="one">Показывать уведомления запрещено <xliff:g id="COUNT_1">%d</xliff:g> приложению</item>
@@ -3121,6 +3153,8 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Ограничения трафика"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Статистика оператора связи может отличаться от статистики устройства"</string>
     <string name="data_used_template" msgid="3245919669966296505">"Передано: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <!-- no translation found for set_data_warning (6115364758236594593) -->
+    <skip />
     <string name="data_warning" msgid="209133958008062117">"Предупреждения"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Установить лимит трафика"</string>
     <string name="data_limit" msgid="1885406964934590552">"Установить лимит трафика"</string>
@@ -3284,12 +3318,8 @@
     <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"Удалять скачанные файлы"</string>
     <string name="downloads_backup_preference_title" msgid="2312237179341156671">"Резервное копирование скачанных файлов"</string>
     <string name="downloads_backup_text" msgid="8351770128253816819"></string>
-    <!-- no translation found for web_action_enable_title (8502552575492048305) -->
-    <skip />
-    <!-- no translation found for web_action_enable_summary (4679844581193646863) -->
-    <skip />
-    <!-- no translation found for web_action_section_title (806405168097593614) -->
-    <skip />
-    <!-- no translation found for domain_url_section_title (7046835219056428883) -->
-    <skip />
+    <string name="web_action_enable_title" msgid="8502552575492048305">"Открывать ссылки в приложениях"</string>
+    <string name="web_action_enable_summary" msgid="4679844581193646863">"Открывать ссылки в поддерживаемых приложениях, даже если они не установлены на устройстве"</string>
+    <string name="web_action_section_title" msgid="806405168097593614">"Приложения не установлены"</string>
+    <string name="domain_url_section_title" msgid="7046835219056428883">"Установленные приложения"</string>
 </resources>
