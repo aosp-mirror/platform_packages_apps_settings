@@ -41,6 +41,11 @@
         android:summary="@string/wifi_automatically_connect_summary"
         android:dialogTitle="@string/wifi_select_assistant_dialog_title" />
 
+    <SwitchPreference
+        android:key="wifi_cellular_data_fallback"
+        android:title="@string/wifi_cellular_data_fallback_title"
+        android:summary="@string/wifi_cellular_data_fallback_summary"/>
+
     <com.android.settings.DividerPreference
         android:key="mac_address"
         android:title="@string/wifi_advanced_mac_address_title"
