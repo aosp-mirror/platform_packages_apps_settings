@@ -173,8 +173,12 @@ public final class WifiNoInternetDialog extends AlertActivity implements
         } else {
             final String action = (accept ? "Switch" : "Cancel");
             Log.d(TAG, "LOST_INTERNET: " + action);
-            Settings.Global.putInt(mAlertParams.mContext.getContentResolver(),
-                    Settings.Global.NETWORK_AVOID_BAD_WIFI, accept ? 1 : 0);
+            // Only ever set the setting to 1. The values understood by ConnectivityService are null
+            // (use carrier default) or 1 (avoid bad networks regardless of carrier).
+            if (accept) {
+                Settings.Global.putInt(mAlertParams.mContext.getContentResolver(),
+                        Settings.Global.NETWORK_AVOID_BAD_WIFI, 1);
+            }
         }
     }
 }

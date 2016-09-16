@@ -19,6 +19,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppManager;
 import android.net.wifi.WifiConfiguration;
@@ -51,6 +52,7 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_CURRENT_IP_ADDRESS = "current_ip_address";
     private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
+    private static final String KEY_CELLULAR_FALLBACK = "wifi_cellular_data_fallback";
     private static final String KEY_WIFI_ASSISTANT = "wifi_assistant";
 
     private WifiManager mWifiManager;
@@ -103,6 +105,20 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
         notifyOpenNetworks.setEnabled(mWifiManager.isWifiEnabled());
 
         final Context context = getActivity();
+        if (avoidBadWifiConfig()) {
+            // Hide preference toggle, always avoid bad wifi networks.
+            removePreference(KEY_CELLULAR_FALLBACK);
+        } else {
+            // Show preference toggle, initialized based on current settings value.
+            boolean currentSetting = avoidBadWifiCurrentSettings();
+            SwitchPreference pref = (SwitchPreference) findPreference(KEY_CELLULAR_FALLBACK);
+            // TODO: can this ever be null? The return value of avoidBadWifiConfig() can only
+            // change if the resources change, but if that happens the activity will be recreated...
+            if (pref != null) {
+                pref.setChecked(currentSetting);
+            }
+        }
+
         mWifiAssistantPreference = (AppListSwitchPreference) findPreference(KEY_WIFI_ASSISTANT);
         Collection<NetworkScorerAppManager.NetworkScorerAppData> scorers =
                 NetworkScorerAppManager.getAllValidScorers(context);
@@ -148,6 +164,16 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
         Log.e(TAG, "Invalid sleep policy value: " + value);
     }
 
+    private boolean avoidBadWifiConfig() {
+        return getActivity().getResources().getInteger(
+                com.android.internal.R.integer.config_networkAvoidBadWifi) == 1;
+    }
+
+    private boolean avoidBadWifiCurrentSettings() {
+        return Settings.Global.getInt(getContentResolver(),
+                Settings.Global.NETWORK_AVOID_BAD_WIFI, 0) == 1;
+    }
+
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         String key = preference.getKey();
@@ -156,6 +182,18 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
             Settings.Global.putInt(getContentResolver(),
                     Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
                     ((SwitchPreference) preference).isChecked() ? 1 : 0);
+        } else if (KEY_CELLULAR_FALLBACK.equals(key)) {
+            String settingName = Settings.Global.NETWORK_AVOID_BAD_WIFI;
+            if (((SwitchPreference) preference).isChecked()) {
+                // The user wants to avoid bad wifi networks. Remember the choice.
+                Settings.Global.putInt(getContentResolver(), settingName, 1);
+            } else {
+                // Unset the setting. ConnectivityService interprets null to mean "use the carrier
+                // default". We don't set the setting to 0 because if we do, and the user switches
+                // to a carrier that does not restrict cellular fallback, then there is no way to
+                // set it to 1 again because on such a carrier the toggle is never shown.
+                Settings.Global.putString(getContentResolver(), settingName, null);
+            }
         } else {
             return super.onPreferenceTreeClick(preference);
         }
