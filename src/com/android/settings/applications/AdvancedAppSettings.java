@@ -29,16 +29,13 @@ import com.android.settings.Utils;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settingslib.applications.ApplicationsState.Session;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class AdvancedAppSettings extends SettingsPreferenceFragment implements
-        ApplicationsState.Callbacks, Indexable {
+        Indexable {
 
     static final String TAG = "AdvancedAppSettings";
 
@@ -48,7 +45,6 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SYSTEM_ALERT_WINDOW = "system_alert_window";
     private static final String KEY_WRITE_SETTINGS_APPS = "write_settings_apps";
 
-    private Session mSession;
     private Preference mAppPermsPreference;
     private Preference mAppDomainURLsPreference;
     private Preference mHighPowerPreference;
@@ -65,10 +61,6 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
         Preference permissions = getPreferenceScreen().findPreference(KEY_APP_PERM);
         permissions.setIntent(new Intent(Intent.ACTION_MANAGE_PERMISSIONS));
 
-        ApplicationsState applicationsState = ApplicationsState.getInstance(
-                getActivity().getApplication());
-        mSession = applicationsState.newSession(this);
-
         mAppPermsPreference = findPreference(KEY_APP_PERM);
         mAppDomainURLsPreference = findPreference(KEY_APP_DOMAIN_URLS);
         mHighPowerPreference = findPreference(KEY_HIGH_POWER_APPS);
@@ -79,46 +71,6 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements
     @Override
     protected int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_ADVANCED;
-    }
-
-    @Override
-    public void onRunningStateChanged(boolean running) {
-        // No-op.
-    }
-
-    @Override
-    public void onPackageListChanged() {
-        // No-op.
-    }
-
-    @Override
-    public void onRebuildComplete(ArrayList<AppEntry> apps) {
-        // No-op.
-    }
-
-    @Override
-    public void onPackageIconChanged() {
-        // No-op.
-    }
-
-    @Override
-    public void onPackageSizeChanged(String packageName) {
-        // No-op.
-    }
-
-    @Override
-    public void onAllSizesComputed() {
-        // No-op.
-    }
-
-    @Override
-    public void onLauncherInfoChanged() {
-        // No-op.
-    }
-
-    @Override
-    public void onLoadEntriesCompleted() {
-        // No-op.
     }
 
     private final PermissionsResultCallback mPermissionCallback = new PermissionsResultCallback() {
