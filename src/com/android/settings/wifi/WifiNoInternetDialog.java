@@ -138,14 +138,16 @@ public final class WifiNoInternetDialog extends AlertActivity implements
         ap.mPositiveButtonListener = this;
         ap.mNegativeButtonListener = this;
 
-        if (ACTION_PROMPT_UNVALIDATED.equals(mAction)) {
-            final LayoutInflater inflater = LayoutInflater.from(ap.mContext);
-            final View checkbox = inflater.inflate(
-                    com.android.internal.R.layout.always_use_checkbox, null);
-            ap.mView = checkbox;
+        final LayoutInflater inflater = LayoutInflater.from(ap.mContext);
+        final View checkbox = inflater.inflate(
+                com.android.internal.R.layout.always_use_checkbox, null);
+        ap.mView = checkbox;
+        mAlwaysAllow = (CheckBox) checkbox.findViewById(com.android.internal.R.id.alwaysUse);
 
-            mAlwaysAllow = (CheckBox) checkbox.findViewById(com.android.internal.R.id.alwaysUse);
+        if (ACTION_PROMPT_UNVALIDATED.equals(mAction)) {
             mAlwaysAllow.setText(getString(R.string.no_internet_access_remember));
+        } else {
+            mAlwaysAllow.setText(getString(R.string.lost_internet_access_persist));
         }
 
         setupAlert();
@@ -175,6 +177,7 @@ public final class WifiNoInternetDialog extends AlertActivity implements
             Log.d(TAG, "LOST_INTERNET: " + action);
             // Only ever set the setting to 1. The values understood by ConnectivityService are null
             // (use carrier default) or 1 (avoid bad networks regardless of carrier).
+            // TODO: Use a value other than 1 here to indicate a persisted "yes" or "no" given mAlwaysAllow.
             if (accept) {
                 Settings.Global.putInt(mAlertParams.mContext.getContentResolver(),
                         Settings.Global.NETWORK_AVOID_BAD_WIFI, 1);
