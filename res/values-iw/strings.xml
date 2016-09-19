@@ -655,7 +655,7 @@
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"אפשר חילופי מידע כאשר הטאבלט נוגע במכשיר אחר"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"אפשר החלפת נתונים כאשר הטלפון נוגע במכשיר אחר"</string>
     <string name="nfc_disclaimer_title" msgid="4364003873202264039">"‏הפעלת NFC"</string>
-    <string name="nfc_disclaimer_content" msgid="5566907911915158075">"‏NFC מחליף נתונים בין המכשיר הזה לבין מכשירים או יעדים אחרים בקרבת מקום, כמו למשל מסופי תשלום, שעוני נוכחות ומודעות או תגים אינטראקטיביים."</string>
+    <string name="nfc_disclaimer_content" msgid="5566907911915158075">"‏מתקיימת תקשורת נתונים ב-NFC בין המכשיר הזה לבין מכשירים או יעדים אחרים בקרבת מקום, כמו למשל מסופי תשלום, מתקנים לזיהוי גישה, ומודעות או תגים אינטראקטיביים."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="3618057099355636830">"‏מוכן לשדר תוכן אפליקציה באמצעות NFC"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"כבוי"</string>
@@ -694,6 +694,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"‏צמצם את השימוש בסוללה כאשר Wi-Fi פועל"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"‏הגבל את השימוש של Wi‑Fi בסוללה"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"‏עבור לרשת סלולרית אם ה-Wi‑Fi יתנתק מהאינטרנט."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"הוסף רשת"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"‏רשתות Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"‏לחצן WPS"</string>
@@ -771,6 +775,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"חבר"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"אין לרשת הזו חיבור לאינטרנט. האם להישאר מחובר?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"אל תשאל שוב בשביל הרשת הזו"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"‏Wi-Fi אינו מחובר לאינטרנט"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"‏אתה יכול לעבור לרשת הסלולר בכל פעם שחיבור ה-Wi-Fi לא תקין. שימוש ברשת הסלולרית עשוי להיות מלווה בחיובים."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"עבור לסלולר"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"אל תציג שוב"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"התחבר"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"נכשל הניסיון להתחבר לרשת"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"שכח"</string>
@@ -1009,7 +1019,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"עדכוני מערכת"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"‏גרסת Android"</string>
-    <string name="security_patch" msgid="8438384045870296634">"‏רמה תיקון האבטחה ב-Android"</string>
+    <string name="security_patch" msgid="8438384045870296634">"‏רמת תיקון האבטחה ב-Android"</string>
     <string name="model_number" msgid="3765737700545384794">"מספר דגם"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"זיהוי ציוד"</string>
     <string name="baseband_version" msgid="1848990160763524801">"גרסת פס בסיס"</string>
@@ -2960,7 +2970,7 @@
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"שימוש בצילום מסך"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"התר לאפליקציית האסיסטנט לגשת אל צילום של המסך"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"הבהוב מסך"</string>
-    <string name="assist_flash_summary" msgid="9160668468824099262">"קצות המסך יהבהבו כאשר אפליקציית אסיסטנט תיגש לטקסט מהמסך או מצילום מסך"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"שולי המסך יהבהבו כאשר אפליקציית אסיסטנט תיגש לטקסט מהמסך או מצילום מסך"</string>
     <string name="assist_footer" msgid="1982791172085896864">"אפליקציות אסיסטנט יכולות לעזור לך בהתבסס על מידע המופיע במסך שאתה מציג. כדי לספק סיוע משולב, אפליקציות מסוימות תומכות בשירותי מפעיל אפליקציות ובקלט קולי."</string>
     <string name="average_memory_use" msgid="829566450150198512">"שימוש ממוצע בזיכרון"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"שימוש מקסימלי בזיכרון"</string>

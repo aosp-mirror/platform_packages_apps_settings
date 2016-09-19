@@ -666,8 +666,8 @@
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"حذف"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"تم"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"الاسم"</string>
-    <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 غيغاهرتز"</string>
-    <string name="wifi_band_5ghz" msgid="6433822023268515117">"۵ غيغاهرتز"</string>
+    <string name="wifi_band_24ghz" msgid="852929254171856911">"٢٫٤ غيغاهرتز"</string>
+    <string name="wifi_band_5ghz" msgid="6433822023268515117">"٥ غيغاهرتز"</string>
     <string name="link_speed" msgid="8896664974117585555">"‏%1$d ميغابت في الثانية"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"السماح بتبادل البيانات عندما يلمس الجهاز اللوحي جهازًا آخر"</string>
@@ -691,7 +691,7 @@
     <string name="wifi_starting" msgid="6732377932749942954">"‏جارٍ تشغيل Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"‏إيقاف Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"خطأ"</string>
-    <string name="wifi_sap_no_channel_error" msgid="3108445199311817111">"لا يتوفر التردد ۵ غيغاهرتز في هذا البلد"</string>
+    <string name="wifi_sap_no_channel_error" msgid="3108445199311817111">"لا يتوفر التردد ٥ غيغاهرتز في هذا البلد"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"في وضع الطائرة"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"رسالة تنبيه بالشبكات"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"إرسال إشعارات عند توفر شبكة عامة"</string>
@@ -712,6 +712,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"‏تقليل استخدام البطارية إلى الحد الأدنى عند تشغيل Wi-Fi"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"‏تقييد طاقة البطارية لاتصال Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"‏التبديل إلى بيانات الجوّال في حالة انقطاع اتصال شبكة Wi‑Fi بالإنترنت."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"استخدام بيانات شبكة الجوّال كاتصال إنترنت احتياطي"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"‏يمكنك استخدام بيانات شبكة الجوّال عندما ينقطع اتصال شبكة Wi‑Fi بالإنترنت؛ ويمكن أن يتم تطبيق رسوم إضافية مقابل ذلك."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"إضافة شبكة"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"‏شبكات Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"‏زر دفع WPS"</string>
@@ -765,8 +767,8 @@
     <string name="wifi_password" msgid="5948219759936151048">"كلمة المرور"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"إظهار كلمة المرور"</string>
     <string name="wifi_ap_band_config" msgid="1611826705989117930">"‏تحديد نطاق AP"</string>
-    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"نطاق بتردد ٢.٤ غيغاهرتز"</string>
-    <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"نطاق بتردد ۵ غيغاهرتز"</string>
+    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"نطاق بتردد ٢٫٤ غيغاهرتز"</string>
+    <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"نطاق بتردد ٥ غيغاهرتز"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"‏إعدادات IP"</string>
     <string name="wifi_shared" msgid="844142443226926070">"المشاركة مع مستخدمي الجهاز الآخرين"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(لم يتم التغيير)"</string>
@@ -789,6 +791,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"اتصال"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"لا تتضمن هذه الشبكة اتصالاً بالإنترنت. هل تريد البقاء متصلاً؟"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"عدم السؤال مرة أخرى لهذه الشبكة"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"‏شبكة Wi‑Fi غير متصلة بالإنترنت"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"‏يمكنك التبديل إلى الشبكة الخلوية حين يكون الاتصال بشبكة Wi‑Fi سيئًا. وقد تنطبق رسوم استخدام البيانات."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"تبديل إلى الشبكة الخلوية"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"‏الإبقاء على الاتصال بشبكة Wi‑Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"عدم الإظهار مجددًا"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"اتصال"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"أخفق التوصيل بالشبكة"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"حذف"</string>
@@ -2055,7 +2062,7 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"اكتب كلمة المرور لوحدة تخزين بيانات الاعتماد."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"كلمة المرور الحالية:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"هل تريد إزالة جميع المحتويات؟"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"يجب أن تتألف كلمة المرور من ٨ أحرف على الأقل."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"كلمة مرور غير صحيحة."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"كلمة مرور غير صحيحة. بقي لديك محاولة واحدة أخرى قبل مسح تخزين بيانات الاعتماد."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"كلمة مرور غير صحيحة. بقي لديك <xliff:g id="NUMBER">%1$d</xliff:g> من المحاولات قبل مسح تخزين بيانات الاعتماد."</string>

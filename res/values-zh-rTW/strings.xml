@@ -676,6 +676,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"開啟 Wi-Fi 時儘可能節約電池用量"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"限制 Wi-Fi 用電量"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi-Fi 網路無法連線時，切換到行動數據。"</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"新增網路"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi 網路"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS 按鈕"</string>
@@ -753,6 +757,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"連線"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"這個網路沒有網際網路連線。要繼續保持連線嗎？"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"不要再詢問我是否使用這個網路"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi 無法連上網際網路"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"當 Wi-Fi 網路連線狀況不佳時，你可以切換到行動網路 (可能需要支付數據傳輸費用)。"</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"切換到行動網路"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"不要再顯示"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"連線"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"無法連線至網路"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"清除"</string>
@@ -910,11 +920,11 @@
     <string name="auto_brightness_summary" msgid="1799041158760605375">"根據環境光源調整最佳亮度"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜燈"</string>
     <string name="night_display_text" msgid="4535302797673277668">"夜燈功能會將您的螢幕色調改為紅色，讓您更輕鬆地在光線昏暗的環境中查看螢幕，也比較容易入睡。"</string>
-    <string name="night_display_category_schedule" msgid="2044072617637348966">"排程"</string>
+    <string name="night_display_category_schedule" msgid="2044072617637348966">"設定時間"</string>
     <string name="night_display_category_status" msgid="1952928783124400330">"狀態"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"自動開啟"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"永不"</string>
-    <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"自訂時間表"</string>
+    <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"自訂時間"</string>
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"日落到日出"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"開始時間"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"結束時間"</string>
@@ -1122,7 +1132,7 @@
     <string name="storage_detail_system" msgid="4629506366064709687">"系統"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"探索「<xliff:g id="NAME">^1</xliff:g>」"</string>
     <string name="storage_detail_dialog_other" msgid="5343550781234524040">"其他檔案包括應用程式所儲存的共用檔案、透過網際網路或藍牙下載的檔案以及 Android 檔案等。\n\n如要查看這個「<xliff:g id="NAME">^1</xliff:g>」的完整內容，請輕觸 [探索]。"</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"系統包括 Android 作業系統內部使用的檔案。\n\n您無法個別查看這些檔案。"</string>
+    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"系統包括 Android 作業系統內部使用的檔案。\n\n使用者無法個別查看這些檔案。"</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"「<xliff:g id="USER_0">^1</xliff:g>」所儲存的相片、音樂、電影、應用程式或其他資料使用了 <xliff:g id="SIZE">^2</xliff:g> 的儲存空間。\n\n如要查看詳細資料，請切換為「<xliff:g id="USER_1">^1</xliff:g>」。"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"設定您的「<xliff:g id="NAME">^1</xliff:g>」"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"使用可攜式儲存空間"</string>
@@ -1404,7 +1414,7 @@
     <string name="install_unknown_applications_title" msgid="663831043139080992">"允許從 Google Play 以外的來源安裝應用程式"</string>
     <string name="install_unknown_applications" msgid="176855644862942064">"允許安裝來源不明的應用程式"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"來歷不明的應用程式可能會損害您的平板電腦及個人資料，如因使用這些應用程式導致平板電腦受損或資料遺失，請自行負責。"</string>
-    <string name="install_all_warning" product="default" msgid="8113734576826384682">"來歷不明的應用程式可能會損害您的手機及個人資料。如因使用這些應用程式導致手機受損或資料遺失，請自行負責。"</string>
+    <string name="install_all_warning" product="default" msgid="8113734576826384682">"來歷不明的應用程式可能會損害手機及個人資料。如因使用這些應用程式導致手機受損或資料遺失，請自行負責。"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"進階設定"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"啟用更多設定選項"</string>
     <string name="application_info_label" msgid="5736524913065714880">"應用程式資訊"</string>
@@ -2110,7 +2120,7 @@
     <string name="remove_account_label" msgid="5921986026504804119">"移除帳戶"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"新增帳戶"</string>
     <string name="finish_button_label" msgid="481587707657751116">"完成"</string>
-    <string name="really_remove_account_title" msgid="8800653398717172460">"您要移除帳戶嗎？"</string>
+    <string name="really_remove_account_title" msgid="8800653398717172460">"確定要移除帳戶？"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"移除帳戶後，平板電腦上所有的訊息、聯絡人和其他資料將全部遭到刪除！"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"移除帳戶後，手機上所有的郵件、聯絡人和其他資料將全部遭到刪除！"</string>
     <string name="remove_account_failed" msgid="6980737964448187854">"您的管理員不允許這項變更"</string>

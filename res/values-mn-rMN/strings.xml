@@ -676,6 +676,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi-Fi асаалттай үед зайны цэнэг зарцуулалтыг багасгах"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Wi‑Fi-д ашиглагдах батерейг хязгаарлах"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi-Fi интернет холболтгүй болсон тохиолдолд үүрэн холбооны датад шилжүүлээрэй."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Мобайл дата руу шилжүүлэлт"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Wi-Fi Интернэтээс салсан үед мобайл датаг ашиглана уу. Нэмэлт төлбөр гарч болзошгүй."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Сүлжээ нэмэх"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi‑Fi сүлжээ"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS Товчлуур"</string>
@@ -753,6 +755,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ХОЛБОХ"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Энэ сүлжээ нь интернетэд холбогдоогүй байна. Цааш үргэлжлүүлэн ашиглах уу?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Энэ сүлжээнд дахин бүү асуу"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi интернэтэд холбогдоогүй байна"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Wi‑Fi холболт муу байгаа үед та үүрэн сүлжээнд шилжих боломжтой. Датаны хураамж гарч болзошгүй."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Үүрэн холбоо руу шилжих"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Wi-Fi-д хэвээр байх"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Дахиад үзүүлэхгүй байх"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Холбогдох"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Сүлжээнд холбогдож чадсангүй"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Мартах"</string>
@@ -849,7 +856,7 @@
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Дууны хэмжээ"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Хөгжмийн эффект"</string>
-    <string name="ring_volume_title" msgid="5592466070832128777">"Хонх дуугаргах төвшин"</string>
+    <string name="ring_volume_title" msgid="5592466070832128777">"Хонх дуугаргах түвшин"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Дуугүй үед чичрэх"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Мэдэгдлийн хонхны үндсэн ая"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Хонхны ая"</string>
@@ -2540,8 +2547,8 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Датаг NFC тагь руу бичих боломжгүй. Асуудал хэвээр байвал өөр тагь ашиглаж үзнэ үү"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC тагь дээр бичих боломжгүй. Өөр тагь ашиглана уу."</string>
     <string name="default_sound" msgid="8821684447333687810">"Үндсэн дуу"</string>
-    <string name="sound_settings_summary" msgid="4100853606668287965">"Хонх дуугаргах төвшин <xliff:g id="PERCENTAGE">%1$s</xliff:g>-д"</string>
-    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Хонх дуугаргах төвшин 80%-д"</string>
+    <string name="sound_settings_summary" msgid="4100853606668287965">"Хонх дуугаргах түвшин <xliff:g id="PERCENTAGE">%1$s</xliff:g>-д"</string>
+    <string name="sound_settings_example_summary" msgid="2404914514266523165">"Хонх дуугаргах түвшин 80%-д"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Медиа дууны хэмжээ"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Сэрүүлгийн дууны хэмжээ"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Хонхны дууны хэмжээ"</string>
@@ -2778,7 +2785,7 @@
     <string name="notifications_hidden" msgid="3619610536038757468">"Түгжигдсэн дэлгэцэд байхгүй"</string>
     <string name="notifications_priority" msgid="1066342037602085552">"Бүү Саад Бол тохиргоог хүчингүй болгосон"</string>
     <string name="notifications_summary_divider" msgid="9013807608804041387">" / "</string>
-    <string name="notification_summary_level" msgid="2726571692704140826">"%d-р төвшин"</string>
+    <string name="notification_summary_level" msgid="2726571692704140826">"%d-р түвшин"</string>
     <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> зөвшөөрөл олгогдсон </item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> зөвшөөрөл олгогдсон </item>
