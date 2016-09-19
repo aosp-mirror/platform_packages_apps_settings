@@ -342,7 +342,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Odklepanje s prstnim odtisom"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Uporaba prstnega odtisa"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Dotaknite se tipala prstnih odtisov, če želite odkleniti telefon, odobriti nakupe ali se prijaviti v aplikacije. Pazite, čigave prstne odtise boste dodali. Ta dejanja bo mogoče izvesti že z enim dodanim prstnim odtisom.\n\nOpomba: prstni odtis bo morda manj varen kot zapleten vzorec ali koda PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Odobrite nakupe ali se prijavite v aplikacije samo z dotikom tipala prstnih odtisov. Pazite, čigave prstne odtise boste dodali, saj ta dejanja lahko izvaja že en sam dodan prstni odtis.\n\nOpomba: prstnega odtisa ne morete uporabiti za odklepanje naprave. Za več informacij se obrnite na skrbnika v organizaciji."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Dotaknite se tipala prstnih odtisov, če želite odkleniti telefon, odobriti nakupe ali se prijaviti v aplikacije. Ta dejanja bo mogoče izvesti že z enim dodanim prstnim odtisom, zato pazite, čigave prstne odtise boste dodali.\n\nOpomba: prstni odtis bo morda manj varen kot zapleten vzorec ali koda PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Prekliči"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Naprej"</string>
@@ -692,6 +694,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Zmanjšanje porabe energije akumulatorja, ko je vklopljen Wi-Fi"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Omejitev porabe akum. za Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Preklop na prenos podatkov v mobilnem omrežju, če povezava Wi‑Fi nima več internetnega dostopa"</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Dodaj omrežje"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Omrežja Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Gumb za WPS"</string>
@@ -769,6 +775,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"POVEŽI"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"To omrežje nima dostopa do interneta. Ali želite ostati povezani?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Ne sprašuj več za to omrežje"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Dostop do interneta prek omrežja Wi-Fi ni na voljo"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Kadar je povezava Wi-Fi nezanesljiva, lahko preklopite na mobilno omrežje. Pri tem bodo morda nastali stroški prenosa podatkov v mobilnih omrežjih."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Preklop na mobilno omrežje"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Tega ne prikaži nikoli več"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Vzpostavi povezavo"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Vzpostavljanje povezave z omrežjem ni uspelo"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Pozabi"</string>
@@ -934,14 +946,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Od sončnega zahoda do vzhoda"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Začetni čas"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Končni čas"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Izklopljeno/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Brez samodejnega vklopa"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Samodejni vklop ob <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Samodejni vklop ob sončnem zahodu"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Vklopljeno/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Brez samodejnega izklopa"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Samodejni izklop ob <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Samodejni izklop ob sončnem vzhodu"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Izklopljeno. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Brez samodejnega vklopa."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Samodejni vklop ob <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Samodejni vklop ob sončnem zahodu."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Vklopljeno. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Brez samodejnega izklopa."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Samodejni izklop ob <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Samodejni izklop ob sončnem vzhodu."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Stanje pripravljenosti"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Zaslon se izklopi"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Po toliko nedejavnosti: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1008,7 +1020,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Različica sistema Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Raven popravkov za varnost v Androidu"</string>
-    <string name="model_number" msgid="3765737700545384794">"Številka modela"</string>
+    <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID opreme"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Različica radijske programske opreme"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Različica jedra"</string>
@@ -1139,8 +1151,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Drugo"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistem"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Razišči: <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Med drugimi datotekami so datoteke, ki jih shranijo aplikacije, datoteke, ki jih prenesete iz interneta ali prek Bluetootha, datoteke sistema Android in druge. \n\nČe si želite ogledati celotno vsebino te naprave za shranjevanje <xliff:g id="NAME">^1</xliff:g>, se dotaknite »Razišči«."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Sistem vključuje datoteke, ki jih interno uporablja operacijski sistem Android. \n\nTeh datotek si ne morete posamično ogledati."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Med druge datoteke spadajo datoteke v skupni rabi, ki jih shranijo aplikacije, datoteke, ki jih prenesete iz interneta ali prek Bluetootha, datoteke sistema Android in druge. \n\nČe si želite ogledati vidno vsebino te naprave za shranjevanje <xliff:g id="NAME">^1</xliff:g>, se dotaknite »Razišči«."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Sistem vključuje datoteke, ki jih Android ne more prikazati posamezno."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"Uporabnik <xliff:g id="USER_0">^1</xliff:g> je morda shranil fotografije, glasbo, filme, aplikacije ali druge podatke, ki zasedajo <xliff:g id="SIZE">^2</xliff:g> shrambe. \n\nČe si želite ogledati podrobnosti, preklopite na uporabnika <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Nastavitev imena za: <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Uporaba kot prenosna shramba"</string>
@@ -3115,6 +3127,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Omejitve omrežja"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Operaterjeve meritve prenosa podatkov so morda drugačne kot v napravi"</string>
     <string name="data_used_template" msgid="3245919669966296505">"Uporabljeno: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Nastavi opozorilo o uporabi podatkov"</string>
     <string name="data_warning" msgid="209133958008062117">"Opozorilo za prenos podatkov"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Nastavitev omej. prenosa pod."</string>
     <string name="data_limit" msgid="1885406964934590552">"Omejitev prenosa podatkov"</string>

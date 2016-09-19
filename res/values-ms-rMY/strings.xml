@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Buka kunci dengan cap jari"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Gunakan cap jari anda"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Hanya sentuh penderia cap jari untuk membuka kunci telefon anda, membenarkan pembelian atau mengelog masuk ke apl. Berhati-hati tentang cap jari yang anda tambahkan. Satu cap jari yang ditambahkan dapat melakukan mana-mana perkara ini.\n\nPerhatian: Cap jari anda mungkin kurang selamat berbading corak atau PIN yang kukuh."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Hanya sentuh penderia cap jari untuk membenarkan pembelian atau log masuk ke apl. Berhati-hati tentang cap jari yang anda tambahkan. Satu cap jari yang ditambahkan akan dapat melakukan mana-mana perkara ini.\n\nPerhatian: Anda tidak boleh menggunakan cap jari untuk membuka kunci peranti ini. Untuk mengetahui maklumat lanjut, hubungi pentadbir organisasi anda."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Hanya sentuh penderia cap jari untuk membuka kunci telefon anda, membenarkan pembelian atau mengelog masuk ke apl. Berhati-hati tentang cap jari yang anda tambahkan. Satu cap jari yang ditambahkan dapat melakukan mana-mana perkara ini.\n\nPerhatian: Cap jari anda mungkin kurang selamat berbading corak atau PIN yang kukuh."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Batal"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Teruskan"</string>
@@ -674,6 +676,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimumkan penggunaan bateri apabila Wi-Fi dihidupkan"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Had bateri yg digunakan Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Beralih ke data selular jika Wi-Fi kehilangan akses Internet."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Alternatif data selular"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Gunakan data selular apabila Wi-Fi kehilangan akses Internet. Caj tambahan boleh dikenakan."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Tambah rangkaian"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Rangkaian Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Butang Tekan WPS"</string>
@@ -751,6 +755,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"SAMBUNG"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Rangkaian ini tiada akses Internet. Kekal bersambung?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Jangan minta rangkaian ini lagi"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi tidak disambungkan ke Internet"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Anda boleh beralih kepada rangkaian selular apabila sambungan Wi-Fi tidak lancar. Caj penggunaan data mungkin dikenakan."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Beralih ke selular"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Gunakan Wi-Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Jangan sekali-kali tunjukkannya lagi"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Sambung"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Gagal menyambung ke rangkaian."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Lupakan"</string>
@@ -916,14 +925,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Matahari trbenam hingga terbit"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Masa mula"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Masa tamat"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Mati / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Jangan sekali-kali hidupkan secara automatik"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Hidupkan secara automatik pada <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Hidupkan secara automatik pada waktu matahari terbenam"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Hidup / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Jangan sekali-kali matikan secara automatik"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Matikan secara automatik pada <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Matikan secara automatik pada waktu matahari terbit"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Mati. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Tidak akan dihidupkan secara automatik."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Akan dihidupkan secara automatik pada <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Akan dihidupkan secara automatik pada waktu matahari terbenam."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Hidup. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Tidak akan dimatikan secara automatik."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Akan dimatikan secara automatik pada <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Akan dimatikan secara automatik pada waktu matahari terbit."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Tidur"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Skrin dimatikan"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Selepas <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> tanpa aktiviti"</string>
@@ -988,7 +997,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Versi Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Tahap tampung keselamatan Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Nombor model"</string>
+    <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID Peralatan"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Versi jalur asas"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versi inti"</string>
@@ -1119,8 +1128,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Lain-lain"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistem"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Teroka <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Lain-lain termasuk fail kongsi yang disimpan oleh apl, fail yang dimuat turun daripada Internet atau Bluetooth, fail Android dan seterusnya. \n\nUntuk melihat keseluruhan kandungan <xliff:g id="NAME">^1</xliff:g> ini, ketik Teroka."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Sistem termasuk fail yang digunakan secara dalaman oleh sistem pengendalian Android. \n\nFail ini tidak boleh dilihat satu persatu."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Fail lain termasuk fail kongsi yang disimpan oleh apl, fail yang dimuat turun dari Internet atau Bluetooth, fail Android dan sebagainya. \n\nUntuk melihat kandungan <xliff:g id="NAME">^1</xliff:g> yang kelihatan, ketik Jelajah."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Sistem termasuk fail yang tidak dapat dipaparkan oleh Android secara individu."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> mungkin telah menyimpan foto, muzik, filem, apl atau data lain yang menggunakan ruang storan sebesar <xliff:g id="SIZE">^2</xliff:g>. \n\nUntuk melihat butirannya, beralih kepada <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Sediakan <xliff:g id="NAME">^1</xliff:g> anda"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Gunakan sebagai storan mudah bawa"</string>
@@ -3053,6 +3062,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Sekatan rangkaian"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Cara pengiraan data pembawa mungkin berbeza daripada pengiraan peranti"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> digunakan"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Tetapkan amaran data"</string>
     <string name="data_warning" msgid="209133958008062117">"Amaran data"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Tetapkan had data"</string>
     <string name="data_limit" msgid="1885406964934590552">"Had data"</string>

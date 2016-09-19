@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"వేలిముద్రతో అన్‌లాక్ చేయండి"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"మీ వేలిముద్రను ఉపయోగించండి"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి, కొనుగోళ్లను ప్రామాణీకరించడానికి లేదా అనువర్తనాలకు సైన్ ఇన్ చేయడానికి వేలిముద్ర సెన్సార్‌ను తాకండి. మీరు ఎవరి వేలిముద్రలు జోడిస్తున్నారనే విషయంలో జాగ్రత్త వహించండి. వేలిముద్ర జోడించబడిన ఎవరైనా వీటిని చేయగలరు.\n\nగమనిక: మీ వేలిముద్ర శక్తివంతమైన నమూనా లేదా PIN కంటే తక్కువ సురక్షితం కావచ్చు."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"కొనుగోళ్లను ఆమోదించడానికి లేదా అనువర్తనాలకు సైన్ ఇన్ చేయడానికి వేలిముద్ర సెన్సార్‌ను తాకండి. మీరు ఎవరి వేలిముద్రలు జోడిస్తున్నారనే విషయంలో జాగ్రత్త వహించండి. వేలిముద్రలు జోడించబడిన ఎవరైనా వీటిలో ఏదైనా చేయగలరు.\n\nగమనిక: ఈ పరికరాన్ని అన్‌లాక్ చేయడానికి మీరు మీ వేలిముద్రను ఉపయోగించలేరు. మరింత సమాచారం కోసం, మీ సంస్థ నిర్వాహకులను సంప్రదించండి."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి, కొనుగోళ్లకు అధికారం ఇవ్వడానికి లేదా అనువర్తనాలకు సైన్ ఇన్ చేయడానికి వేలిముద్ర సెన్సార్‌ను తాకండి. మీరు ఎవరి వేలిముద్రలు జోడిస్తున్నారనే విషయంలో జాగ్రత్త వహించండి. వేలిముద్ర జోడించబడిన ఎవరైనా వీటిని చేయగలరు.\n\nగమనిక: మీ వేలిముద్ర శక్తివంతమైన నమూనా లేదా PIN కంటే తక్కువ సురక్షితం కావచ్చు."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"రద్దు చేయి"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"కొనసాగించు"</string>
@@ -674,6 +676,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi‑Fi ఆన్‌లో ఉన్నప్పుడు బ్యాటరీ వినియోగాన్ని కనిష్టీకరించు"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Wi‑Fi విని. బ్యాటరీ పరి. చేయి"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi‑Fi ఇంటర్నెట్ ప్రాప్యతను కోల్పోతే సెల్యులార్ డేటాకు మార్చండి."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"తిరిగి సెల్యులార్ డేటాకు మార్చు"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Wi‑Fi ఇంటర్నెట్ ప్రాప్యతను కోల్పోయినప్పుడు సెల్యులార్ డేటాను ఉపయోగిస్తుంది. అదనపు ఛార్జీలు వర్తించవచ్చు."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"నెట్‌వర్క్‌ను జోడించండి"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi‑Fi నెట్‌వర్క్‌లు"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS పుష్ బటన్"</string>
@@ -751,6 +755,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"కనెక్ట్ చేయి"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"ఈ నెట్‌వర్క్‌కు ఇంటర్నెట్ ప్రాప్యత లేదు. కనెక్ట్ చేసి ఉంచాలా?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"ఈ నెట్‌వర్క్ కోసం మళ్లీ అడగవద్దు"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi ఇంటర్నెట్‌కు కనెక్ట్ కాలేదు"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Wi‑Fi కనెక్షన్ బలహీనంగా ఉన్నప్పుడు మీరు సెల్యులార్ నెట్‌వర్క్‌కు మారవచ్చు. డేటా వినియోగం వర్తించవచ్చు."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"సెల్యులార్‌కు మార్చు"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"అలాగే Wi‑Fiలో ఉంచు"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"మళ్లీ ఎప్పటికి చూపవద్దు"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"కనెక్ట్ చేయి"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"నెట్‌వర్క్‌కు కనెక్ట్ చేయడం విఫలమైంది"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"విస్మరించు"</string>
@@ -916,14 +925,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"సూర్యాస్తమయం నుండి సూర్యోదయం వరకు"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"ప్రారంభ సమయం"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"ముగింపు సమయం"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"ఆఫ్‌లో ఉంది / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"ఎప్పటికీ స్వయంచాలకంగా ఆన్ చేయదు"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"<xliff:g id="ID_1">%1$s</xliff:g>కి స్వయంచాలకంగా ఆన్ చేస్తుంది"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"సూర్యాస్తమయానికి స్వయంచాలకంగా ఆన్ చేస్తుంది"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"ఆన్‌లో ఉంది / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"ఎప్పటికీ స్వయంచాలకంగా ఆఫ్ చేయదు"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"<xliff:g id="ID_1">%1$s</xliff:g>కి స్వయంచాలకంగా ఆఫ్ చేస్తుంది"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"సూర్యోదయానికి స్వయంచాలకంగా ఆఫ్ చేస్తుంది"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"ఆఫ్‌లో ఉంది. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"ఎప్పటికీ స్వయంచాలకంగా ఆన్ కాదు."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g>కి స్వయంచాలకంగా ఆన్ అవుతుంది."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"సూర్యాస్తమయ సమయానికి స్వయంచాలకంగా ఆన్ అవుతుంది."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"ఆన్‌లో ఉంది. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"ఎప్పటికీ స్వయంచాలకంగా ఆఫ్ కాదు."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"<xliff:g id="ID_1">%1$s</xliff:g>కి స్వయంచాలకంగా ఆఫ్ అవుతుంది."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"సూర్యోదయ సమయానికి స్వయంచాలకంగా ఆఫ్ అవుతుంది."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"నిద్రావస్థ"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"స్క్రీన్‌ను ఆఫ్ చేయాల్సిన సమయం"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"నిష్క్రియంగా ఉన్న <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> తర్వాత"</string>
@@ -988,7 +997,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android సంస్కరణ"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android భద్రతా అతికింపు స్థాయి"</string>
-    <string name="model_number" msgid="3765737700545384794">"మోడల్ సంఖ్య"</string>
+    <string name="model_info" msgid="1952009518045740889">"మోడల్"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ఉపకరణం ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"బేస్‌బ్యాండ్ సంస్కరణ"</string>
     <string name="kernel_version" msgid="9192574954196167602">"కెర్నల్ సంస్కరణ"</string>
@@ -1119,8 +1128,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"ఇతరం"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"సిస్టమ్"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g>ని అన్వేషించండి"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"ఇతరంలో అనువర్తనాల ద్వారా సేవ్ చేయబడిన భాగస్వామ్య ఫైల్‌లు, ఇంటర్నెట్ లేదా బ్లూటూత్ నుండి డౌన్‌లోడ్ చేసిన ఫైల్‌లు, Android ఫైల్‌లు మొదలైనవి ఉంటాయి. \n\nఈ <xliff:g id="NAME">^1</xliff:g> మొత్తం కంటెంట్‌లను చూడటానికి, విశ్లేషించు నొక్కండి."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"సిస్టమ్‌లో Android ఆపరేటింగ్ సిస్టమ్ అంతర్గతంగా ఉపయోగించిన ఫైల్‌లు ఉన్నాయి. \n\nఈ ఫైల్‌లను ఒక్కొక్కటిగా వీక్షించలేరు."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"ఇతరంలో అనువర్తనాల ద్వారా సేవ్ చేయబడిన భాగస్వామ్య ఫైల్‌లు, ఇంటర్నెట్ లేదా బ్లూటూత్ నుండి డౌన్‌లోడ్ చేసిన ఫైల్‌లు, Android ఫైల్‌లు మొదలైనవి ఉంటాయి. \n\nఈ <xliff:g id="NAME">^1</xliff:g> మొత్తం కంటెంట్‌లను చూడటానికి, విశ్లేషించు నొక్కండి."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"సిస్టమ్‌లో Android విడిగా ప్రదర్శించలేని ఫైల్‌లు కూడా ఉంటాయి."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> నిల్వలో <xliff:g id="SIZE">^2</xliff:g> పరిమాణాన్ని ఉపయోగిస్తున్నటువంటి సేవ్ చేయబడిన ఫోటోలు, సంగీతం, చలన చిత్రాలు, అనువర్తనాలు లేదా ఇతర డేటాను కలిగి ఉండవచ్చు. \n\nవివరాలను వీక్షించడానికి, <xliff:g id="USER_1">^1</xliff:g>కి మారండి."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"మీ <xliff:g id="NAME">^1</xliff:g> సెటప్ చేయండి"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"పోర్టబుల్ నిల్వగా ఉపయోగించు"</string>
@@ -3053,6 +3062,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"నెట్‌వర్క్ పరిమితులు"</string>
     <string name="operator_warning" msgid="1862988028996859195">"క్యారియర్ డేటా గణన మరియు పరికర డేటా గణన మధ్య తేడా ఉండవచ్చు"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> వినియోగించబడింది"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"డేటా హెచ్చరికను సెట్ చేయండి"</string>
     <string name="data_warning" msgid="209133958008062117">"డేటా హెచ్చరిక"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"డేటా పరిమితిని సెట్ చేయి"</string>
     <string name="data_limit" msgid="1885406964934590552">"డేటా పరిమితి"</string>

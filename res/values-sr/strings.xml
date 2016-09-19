@@ -339,7 +339,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Откључајте отиском прста"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Користите отисак прста"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Само додирните сензор за отисак прста да бисте откључали телефон, овластили куповине или се пријавили на апликације Ово ће бити могуће помоћу свих отисака прстију које додате, па будите опрезни кога додајете.\n\nНапомена: Отисак прста може да буде мање безбедан од јаког шаблона или PIN-а."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Само додирните сензор отиска прста да бисте одобрили куповину или се пријавили на апликације. Пажљиво бирајте чије отиске прстију додајете. Чак и само један додати отисак може да уради било шта од горенаведеног.\n\nНапомена: Не можете да користите отисак прста за откључавање овог уређаја. За више информација обратите се администратору организације."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Само додирните сензор за отисак прста да бисте откључали телефон, дали овлашћење за куповине или да бисте се пријавили у апликације. Ово ће бити могуће помоћу свих отисака прстију које додате, па будите опрезни чије отиске додајете.\n\nНапомена: Отисак прста може да буде мање безбедан од јаког шаблона или PIN-а."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Откажи"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Настави"</string>
@@ -683,6 +685,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Смањи коришћење батерије када је Wi-Fi укључен"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Огран. бат. коју користи Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Пређи на податке за мобилне уређаје ако Wi‑Fi изгуби приступ интернету."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Додај мрежу"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi мреже"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS дугме"</string>
@@ -760,6 +766,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ПОВЕЖИ СЕ"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Ова мрежа нема приступ интернету. Желите ли да останете повезани?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Не питај поново за ову мрежу"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi мрежа није повезана са интернетом"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Можете да пређете на мобилну мрежу кад год је Wi‑Fi веза лоша. Може да вам буде наплаћен пренос података."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Пређи на мобилну мрежу"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Не приказуј никада више"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Повежи"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Повезивање са мрежом није успело"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Заборави"</string>
@@ -925,14 +937,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Од заласка до изласка сунца"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Време почетка"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Време завршетка"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Искључено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Никада се не укључује аутоматски"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Укључује се аутоматски у <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Укључује се аутоматски када сунце зађе"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Укључено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Никада се не искључује аутоматски"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Искључује се аутоматски у <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Искључује се аутоматски када сунце изађе"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Искључено. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Никада се не укључује аутоматски."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Укључује се аутоматски у <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Укључује се аутоматски када сунце зађе."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Укључено. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Никада се не искључује аутоматски."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Искључује се аутоматски у <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Искључује се аутоматски када сунце изађе."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Спавање"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Екран се искључује"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивности"</string>
@@ -998,7 +1010,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android верзија"</string>
     <string name="security_patch" msgid="8438384045870296634">"Ниво безбедносне закрпе за Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Број модела"</string>
+    <string name="model_info" msgid="1952009518045740889">"Модел"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ИД опреме"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Верзија основног пропусног опсега"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Верзија језгра"</string>
@@ -1129,8 +1141,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Друго"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Систем"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Истражи уређај <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Одељак Друго обухвата дељене датотеке које чувају апликације, датотеке преузете са интернета или помоћу Bluetooth-а, Android датотеке и слично. \n\nДа бисте видели целокупан садржај уређаја <xliff:g id="NAME">^1</xliff:g>, додирните Истражите."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Систем обухвата датотеке које оперативни систем Android користи интерно. \n\nОве датотеке не могу да се прегледају засебно."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Остало обухвата дељене датотеке које су сачувале апликације, датотеке преузете са Интернета или Bluetooth-а, Android датотеке и тако даље. \n\nДа бисте видели видљиви садржај на уређају <xliff:g id="NAME">^1</xliff:g>, додирните Истражи."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Систем обухвата датотеке које Android не може да прикаже засебно."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> је можда сачувао/ла слике, музику, филмове, апликације или друге податке који заузимају <xliff:g id="SIZE">^2</xliff:g> меморије. \n\nДа бисте прегледали детаље, пребаците на корисника <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Подесите уређај <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Користи као преносиву меморију"</string>
@@ -1604,7 +1616,7 @@
     <string name="keyboard_assistance_category" msgid="5843634175231134014">"Помоћ за тастатуру"</string>
     <string name="physical_keyboard_title" msgid="8285149877925752042">"Физичка тастатура"</string>
     <string name="show_ime" msgid="2658582193437188227">"Прикажи виртуелну тастатуру"</string>
-    <string name="show_ime_summary" msgid="8164993045923240698">"Задржи га на екрану док је физичка тастатура активна"</string>
+    <string name="show_ime_summary" msgid="8164993045923240698">"Задржи је на екрану док је физичка тастатура активна"</string>
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"Помоћ за тастерске пречице"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Приказ доступних пречица"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"Подразумевано"</string>
@@ -3084,6 +3096,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Мрежна ограничења"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Обрачун података код мобилног оператера се можда разликује од обрачуна уређаја."</string>
     <string name="data_used_template" msgid="3245919669966296505">"Потрошили сте <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Подешавање упозорења о подацима"</string>
     <string name="data_warning" msgid="209133958008062117">"Упозорење за потрошњу података"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Подеси ограничење за податке"</string>
     <string name="data_limit" msgid="1885406964934590552">"Ограничење за потрошњу података"</string>

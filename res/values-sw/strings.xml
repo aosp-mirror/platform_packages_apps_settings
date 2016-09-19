@@ -338,7 +338,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Fungua kwa kitambulisho"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Tumia alama yako ya kidole"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Gusa tu kitambua alama ya kidole ili ufungue simu yako, uthibitishe ununuzi au uingie katika akaunti za programu. Kuwa makini unapoongeza alama za vidole. Alama yoyote kidole unayoongeza inaweza kufanya shughuli hizi.\n\nKumbuka: Huenda PIN au mchoro thabiti ukawa salama zaidi kuliko alama ya kidole."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Ili kuidhinisha ununuzi, gusa kitambua alama ya kidole au uingie katika akaunti za programu. Kuwa mwangalifu unapoongeza alama za vidole. Alama moja ya kidole unayoongeza inaweza kufanya mambo haya.\n\nKumbuka: Huwezi kutumia alama yako ya kidole kufungua kifaa hiki. Wasiliana na msimamizi wa shirika lako kwa maelezo zaidi."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Gusa tu kitambua alama ya kidole ili ufungue simu yako, uthibitishe ununuzi au uingie katika programu. Kuwa makini unapoongeza alama ya kidole . Alama yoyote ya kidole unayoongeza inaweza kufanya shughuli hizi. \n\nKumbuka: Huenda PIN au mchoro thabiti ukawa salama zaidi kuliko alama ya kidole."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Ghairi"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Endelea"</string>
@@ -678,6 +680,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Punguza matumizi ya betri wakati Wi-Fi imewashwa"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Dhibiti betri inayotumiwa na Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Badili utumie data ya simu Wi-Fi ikipoteza ufikiaji kwa Intaneti."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Kutumia data ya simu za mkononi"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Tumia data ya simu za mkononi Wi-Fi ikipoteza muunganisho wa Intaneti. Huenda ukatozwa ada ya ziada ya kutumia data."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Ongeza mtandao"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Mitandao ya Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Kitufe cha kusukuma cha WSP"</string>
@@ -755,6 +759,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"UNGANISHA"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Mtandao huu hauna Intaneti. Ungetaka kuunganishwa?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Usiulizie mtandao huu tena"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi haijaunganishwa kwenye Intaneti"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Unaweza kubadili utumie data ya mtandao wa simu wakati wowote Wi-Fi inapokuwa na muunganisho mbaya. Huenda ukatozwa ada ya kutumia data."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Badili utumie data ya mtandao wa simu"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Endelea kutumia Wi-Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Usionyeshe tena"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Unganisha"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Imeshindwa kuunganisha kwa mtandao"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Sahau"</string>
@@ -920,14 +929,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Mapambazuko hadi machweo"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Litawashwa"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Litazimwa"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Limezimwa / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Halitawahi kuwashwa kiotomatiki"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Litawashwa kiotomatiki saa <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Litawashwa kiotomatiki jua linapotua"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Limewashwa / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Halitawahi kuzimwa kiotomatiki"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Litazimwa kiotomatiki saa <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Litazimwa kiotomatiki kunapopambazuka"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Imezimwa. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Haitawahi kuwashwa kiotomatiki."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Itawashwa kiotomatiki saa <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Itawashwa kiotomatiki jua litakapotua."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Imewashwa. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Haitawahi kuzimwa kiotomatiki."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Itazimwa kiotomatiki saa <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Itazima kiotomatiki kutakapopambazuka."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Zima skrini"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Skrini huzima"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Baada ya <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> za kutokuwa na shughuli"</string>
@@ -992,7 +1001,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Toleo la Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Kiwango cha kuzuia athari za usalama kwenye Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Nambari ya mtindo"</string>
+    <string name="model_info" msgid="1952009518045740889">"Muundo"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Kitambulisho cha Kifaa"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Toleo la Baseband"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Toleo la kiini"</string>
@@ -1123,8 +1132,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Nyingine"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Mfumo"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Gundua <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Zingine ni pamoja na faili zinazoshirikiwa ambazo zimehifadhiwa na programu, faili zinazopakuliwa kutoka Intaneti au Bluetooth, faili za Android na zinginezo. \n\n Gonga Gundua ili uweze kuona maudhui yote ya <xliff:g id="NAME">^1</xliff:g> hii."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Mfumo unajumuisha faili zilizotumika ndani na mfumo wa uendeshaji wa Android. \n\nFaili hizi haziwezi kuangaliwa moja moja."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Faili nyingine zilizopo ni kama vile faili zilizohifadhiwa na programu, faili zilizopakuliwa kutoka Intaneti au Bluetooth, faili za Android, na kadhalika.\n\nIli kuona maudhui ya <xliff:g id="NAME">^1</xliff:g> yanayoweza kuonekana, gonga Gundua."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Mfumo unajumuisha faili ambazo Android haiwezi kuonyesha moja moja."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"Huenda <xliff:g id="USER_0">^1</xliff:g> amehifadhi picha, muziki, filamu, programu, au data nyingine inayotumia nafasi ya <xliff:g id="SIZE">^2</xliff:g> ya hifadhi. \n\n Ili uweze kutazama maelezo, badilisha hadi <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Sanidi <xliff:g id="NAME">^1</xliff:g> yako"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Tumia kama hifadhi inayohamishika"</string>
@@ -3059,6 +3068,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Vizuizi vya mtandao"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Huenda hesabu ya data ya mtoa huduma ikawa tofauti na ya kifaa chako."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> zimetumika"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Weka onyo la matumizi ya data"</string>
     <string name="data_warning" msgid="209133958008062117">"Onyo kuhusu data"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Weka kikomo cha data"</string>
     <string name="data_limit" msgid="1885406964934590552">"Kikomo cha data"</string>

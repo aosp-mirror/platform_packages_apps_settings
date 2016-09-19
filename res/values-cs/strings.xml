@@ -342,7 +342,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Odemknutí otiskem prstu"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Použití otisku prstu"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací pouhým klepnutím na senzor otisků prstů. Dobře zvažte, čí otisky do zařízení přidáte. Uvedené akce bude možné provádět pomocí každého z přidaných otisků.\n\nPoznámka: Otisk prstu může být méně bezpečný než silné gesto nebo PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Autorizujte nákupy a přihlašujte se do aplikací pouhým klepnutím na senzor otisků prstů. Dobře zvažte, čí otisky do zařízení přidáte. Uvedené akce bude možné provádět pomocí každého z přidaných otisků.\n\nPoznámka: Otisk prstu nelze použít k odemykání tohoto zařízení. Další informace vám poskytne administrátor vaší organizace."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací pouhým klepnutím na senzor otisků prstů. Dobře zvažte, čí otisky do zařízení přidáte. Uvedené akce bude možné provádět pomocí každého z přidaných otisků.\n\nPoznámka: Otisk prstu může být méně bezpečný než silné gesto nebo PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Zrušit"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Pokračovat"</string>
@@ -692,6 +694,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimalizovat využívání baterie při zapnuté síti Wi-Fi"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Omezit využití baterie sítí Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Pokud síť Wi‑Fi ztratí přístup k internetu, přepnout na mobilní data"</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Přepnutí na mobilní data"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Když síť Wi‑Fi ztratí přístup k internetu, přepnout na mobilní data. Mohou být účtovány dodatečné poplatky."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Přidat síť"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Sítě Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Tlačítko WPS"</string>
@@ -769,6 +773,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"PŘIPOJIT"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Tato síť nemá přístup k internetu. Chcete zůstat připojeni?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"U této sítě se již nedotazovat"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Síť Wi‑Fi nemá přístup k internetu"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Při špatném připojení Wi‑Fi můžete přepnout na mobilní síť. Mohou být účtovány poplatky za data."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Přepnout na mobilní data"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Zůstat na Wi‑Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Již nikdy nezobrazovat"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Připojit"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Připojení k síti se nezdařilo."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Odstranit"</string>
@@ -934,14 +943,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Od soumraku do úsvitu"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Čas zahájení"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Čas ukončení"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Vypnuto / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Nikdy automaticky nezapínat"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Zapnout automaticky v <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Zapnout automaticky za soumraku"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Zapnuto / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Nikdy automaticky nevypínat"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Vypnout automaticky v <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Vypnout automaticky za úsvitu"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Vypnuto. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Nikdy se automaticky nezapne."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Zapne se automaticky v <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Zapne se automaticky za soumraku."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Zapnuto. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Nikdy se automaticky nevypne."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Vypne se automaticky v <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Vypne se automaticky za úsvitu."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Režim spánku"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Vypnutí obrazovky"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Doba nečinnosti: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1008,7 +1017,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Verze systému Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Úroveň opravy zabezpečení Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Označení modelu"</string>
+    <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID zařízení"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Verze základního pásma"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Verze jádra"</string>
@@ -1139,8 +1148,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Jiné"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Systém"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Prozkoumat úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Mezi ostatní soubory patří sdílené soubory uložené aplikacemi, soubory stažené z internetu nebo přes Bluetooth, soubory systému Android apod. \n\nChcete-li zobrazit veškerý obsah s názvem <xliff:g id="NAME">^1</xliff:g>, klepněte na Prozkoumat."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Systém zahrnuje soubory, které interně používá operační systém Android. \n\nTyto soubory nelze jednotlivě zobrazit."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Mezi ostatní soubory patří sdílené soubory uložené aplikacemi, soubory stažené z internetu nebo přes Bluetooth, soubory systému Android apod. \n\nChcete-li zobrazit viditelný obsah tohoto úložiště typu <xliff:g id="NAME">^1</xliff:g>, klepněte na Prozkoumat."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Systém zahrnuje soubory, které Android nedokáže zobrazit samostatně."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> může mít uložené fotky, hudbu, filmy, aplikace a další data, která v úložišti zabírají <xliff:g id="SIZE">^2</xliff:g>. \n\nChcete-li zobrazit podrobnosti, přepněte na účet uživatele <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Nastavte úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Použít jako přenosné úložiště"</string>
@@ -3115,6 +3124,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Omezení sítě"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Operátor může data počítat jinak než zařízení"</string>
     <string name="data_used_template" msgid="3245919669966296505">"Využito <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Nastavit upozornění na data"</string>
     <string name="data_warning" msgid="209133958008062117">"Upozornění na data"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Nastavit limit dat"</string>
     <string name="data_limit" msgid="1885406964934590552">"Limit dat"</string>

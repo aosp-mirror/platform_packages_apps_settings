@@ -342,7 +342,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Разблакірав. адбіткам пальца"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Выкарыстоўв. адбітак пальца"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Проста дакранайцеся да датчыка адбіткаў пальцаў, каб разблакіраваць свой тэлефон, аўтарызаваць куплі або ўваходзіць у праграмы. Уважліва сачыце за тым, чые адбіткі пальцаў вы дадаяце. Любое з гэтых дзеянняў будзе даступнае для ўладальніка нават аднаго з адбіткаў пальцаў.\n\nЗаўвага. Выкарыстанне адбітка пальца можа быць менш бяспечным, чым складаны ўзор або PIN-код."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Проста дакранайцеся да датчыка адбіткаў пальцаў, каб аўтарызаваць куплі або ўваходзіць у праграмы. Уважліва сачыце за тым, чые адбіткі пальцаў вы дадаяце. Любое з гэтых дзеянняў будзе даступнае для ўладальніка нават аднаго з адбіткаў пальцаў.\n\nЗаўвага. Вы не можаце выкарыстоўваць адбітак пальца для разблакіроўкі гэтай прылады. Для атрымання дадатковай інфармацыі звяжыцеся з адміністратарам арганізацыі."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Проста дакранайцеся да датчыка адбіткаў пальцаў, каб разблакіраваць свой тэлефон, аўтарызаваць куплі або ўваходзіць у праграмы. Уважліва сачыце за тым, чые адбіткі пальцаў вы дадаяце. Любое з гэтых дзеянняў будзе даступнае для ўладальніка нават аднаго з адбіткаў пальцаў.\n\nЗаўвага. Выкарыстанне адбітка пальца можа быць менш бяспечным, чым складаны ўзор або PIN-код."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Скасаваць"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Далей"</string>
@@ -692,6 +694,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Зменшыць выкарыстанне батарэi, калi ўключана Wi-Fi"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Абмеж. выкарыст. энергіі Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Пераключыцца на даныя мабільнай сувязі, калі па Wi-Fi не будзе доступу ў Інтэрнэт."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Альтэрнатыўны пераход на сотавую перадачу даных"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Выкарыстоўваць сотавую перадачу даных, калі сетка Wi-Fi страчвае доступ у інтэрнэт. Можа спаганяцца дадатковая плата."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Дадаць сетку"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Сеткi Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Кнопка WPS"</string>
@@ -769,6 +773,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ПАДЛУЧЫЦЦА"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"У гэтай сеткі няма падлучэння да Інтэрнэту. Захоўваць падлучэнне?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Больш не пытацца для гэтай сеткі"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi не падключаны да інтэрнэту"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Пры дрэнным падключэнні Wi-Fi вы можаце пераключацца на сотавую сетку. Можа спаганяцца плата за выкарыстанне даных."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Пераключацца на сотавую сувязь"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Заставацца ў сетцы Wi-Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Больш не паказваць"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Падлучыцца"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Не атрымалася падключыцца да сеткі"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Забыць"</string>
@@ -934,14 +943,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Ад світання да захаду сонца"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Час пачатку"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Час заканчэння"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Выкл. / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Ніколі не ўключаць аўтаматычна"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Уключаць аўтаматычна ў <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Уключаць аўтаматычна на захадзе сонца"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Укл. / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Ніколі не выключаць аўтаматычна"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Выключаць аўтаматычна ў <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Выключаць аўтаматычна на світанні"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Выкл. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Ніколі не ўключыцца аўтаматычна."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Уключыцца аўтаматычна ў <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Уключыцца аўтаматычна на захадзе сонца."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Укл. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Ніколі не выключыцца аўтаматычна."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Выключыцца аўтаматычна ў <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Выключыцца аўтаматычна на світанні."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Рэжым сну"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Экран выключаецца"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Пасля бяздзейнасці: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1008,7 +1017,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Версія Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Узровень патчу бяспекі Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Нумар мадэлі"</string>
+    <string name="model_info" msgid="1952009518045740889">"Мадэль"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Iдэнтыфiкатар абсталявання"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Версія baseband"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Вэрсія ядра"</string>
@@ -1139,8 +1148,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Іншае"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Сістэмныя файлы"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Праглядзець <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Раздзел Іншае уключае абагуленыя файлы, захаваныя праграмамі, файлы, спампаваныя з інтэрнэту або па Bluetooth, файлы Android і іншыя. \n\nКаб праглядзець усё змесціва <xliff:g id="NAME">^1</xliff:g>, краніце Азнаёміцца."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Сістэмныя файлы ўключаюць у сябе файлы для ўнутранага карыстання аперацыйнай сістэмы Android. \n\nГэтыя файлы нельга праглядзець у індывідуальным парадку."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Раздзел \"Іншае\" ўключае абагуленыя файлы, захаваныя праграмамі, файлы, спампаваныя з інтэрнэту або па Bluetooth, файлы Android і іншае. \n\nКаб праглядзець усё бачнае змесціва ў наступным сховішчы: <xliff:g id="NAME">^1</xliff:g>, дакраніцеся да \"Азнаёміцца\"."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Сістэмныя файлы ўключаюць у сябе файлы, якія Android не можа адлюстроўваць асобна."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> можа захоўваць фатаграфіі, музыку, фільмы, дадаткі або іншыя даныя, якія займаюць <xliff:g id="SIZE">^2</xliff:g> месца ў памяці. \n\nДля прагляду падрабязнай інфармацыі пераключыцеся на <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Наладжванне сховішча <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Выкарыстоўваць у якасці партатыўнага сховішча"</string>
@@ -3115,6 +3124,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Сеткавыя абмежаванні"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Улік даных аператара можа адрознівацца ад уліку прылады"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> выкарыстана"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Папярэджваць аб выкар. даных"</string>
     <string name="data_warning" msgid="209133958008062117">"Папярэджанне пра трафік"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Задаць ліміт трафіку"</string>
     <string name="data_limit" msgid="1885406964934590552">"Ліміт трафіку"</string>

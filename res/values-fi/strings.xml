@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Avaa sormenjäljellä"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Sormenjäljen käyttäminen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Avaa puhelimen lukitus, hyväksy ostoksia tai kirjaudu sovelluksiin koskettamalla sormenjälkitunnistinta. Ole varovainen lisätessäsi sormenjälkiä – edellä mainitut toiminnot onnistuvat vain yhdellä laitteeseen lisätyllä sormenjäljellä.\n\nHuom. Sormenjälki ei välttämättä ole yhtä turvallinen kuin vahva kuvio tai PIN-koodi."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Hyväksy ostoksia tai kirjaudu sovelluksiin koskettamalla sormenjälkianturia. Ole varovainen lisätessäsi sormenjälkiä – edellä mainitut toiminnot onnistuvat kaikilla laitteeseen lisätyillä sormenjäljillä.\n\nHuom. Tämän laitteen lukitusta ei voi avata sormenjäljellä. Saat lisätietoja organisaatiosi järjestelmänvalvojalta."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Avaa puhelimen lukitus, hyväksy ostoksia tai kirjaudu sovelluksiin koskettamalla sormenjälkitunnistinta. Ole varovainen lisätessäsi sormenjälkiä – nämä toiminnot onnistuvat vain yhdellä laitteeseen lisätyllä sormenjäljellä.\n\nHuom. Sormenjälki ei välttämättä ole yhtä turvallinen kuin vahva kuvio tai PIN-koodi."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Peruuta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Jatka"</string>
@@ -674,6 +676,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Vähennä akun kulutusta, kun Wi-Fi on käytössä"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Rajoita Wi‑Fin akun käyttöä"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Vaihda mobiilidataan, jos Wi-Fi-verkon internetyhteys katkeaa."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Lisää verkko"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi-verkot"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS-painike"</string>
@@ -751,6 +757,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"YHDISTÄ"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Tässä verkossa ei ole internetyhteyttä. Säilytetäänkö yhteys?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Älä kysy uudelleen tässä verkossa"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi-yhteyttä ei voi muodostaa"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Jos Wi-Fi-signaali on heikko, voit käyttää mobiilidataa. Datasiirtomaksuja saatetaan veloittaa."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Vaihda mobiilidataan"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Älä näytä uudelleen"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Yhdistä"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Yhteyden muodostaminen verkkoon epäonnistui."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Unohda"</string>
@@ -916,14 +928,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Auringonlaskusta sen nousuun"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Alkamisaika"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Päättymisaika"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Pois päältä / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Älä koskaan käynnistä automaattisesti"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Käynnistä automaattisesti kello <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Käynnistä automaattisesti, kun aurinko nousee"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Päällä / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Älä koskaan sammuta automaattisesti"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Sammuta automaattisesti kello <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Sammuta automaattisesti, kun aurinko nousee"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Pois päältä: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Älä koskaan käynnistä automaattisesti"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Käynnistä automaattisesti kello <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Käynnistä automaattisesti, kun aurinko laskee"</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Päällä: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Älä koskaan sammuta automaattisesti"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Sammuta automaattisesti kello <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Sammuta automaattisesti, kun aurinko nousee"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Siirtyminen virransäästöön"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Näyttö sammuu"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Laitteen oltua käyttämättä: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -988,7 +1000,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android-versio"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android-tietoturvakorjauksen taso"</string>
-    <string name="model_number" msgid="3765737700545384794">"Mallinumero"</string>
+    <string name="model_info" msgid="1952009518045740889">"Malli"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Varustetunnus"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Baseband-versio"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernel-versio"</string>
@@ -1119,8 +1131,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Muu"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Järjestelmä"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Tutki: <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Muihin tiedostoihin sisältyvät esimerkiksi sovellusten tallentamat tiedostot, internetistä ja Bluetoothin kautta ladatut tiedostot ja Android-tiedostot. \n\nAvaa <xliff:g id="NAME">^1</xliff:g> selattavaksi valitsemalla Tutki."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Järjestelmätiedostot ovat Android-käyttöjärjestelmän sisäisessä käytössä. \n\nNiitä ei voi näyttää yksittäin."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Muut-luokkaan kuulu esim. sovellusten tallentamia jaettuja tiedostoja, verkosta ladattuja tiedostoja, Bluetooth- tai Android-tiedostoja.\n\nKatso kohteen <xliff:g id="NAME">^1</xliff:g> näkyvä sisältö valitsemalla Tutki."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Android ei voi näyttää kaikkia järjestelmätiedostoja yksitellen."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> voi sisältää tallennettuja valokuvia, musiikkia, elokuvia, sovelluksia tai muita tietoja, jotka vievät <xliff:g id="SIZE">^2</xliff:g> tallennustilaa. \n\nJos haluat nähdä tarkemmat tiedot, valitse <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Määritä <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Käytä kannettavana tallennustilana"</string>
@@ -3053,6 +3065,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Verkkorajoitukset"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Operaattorin mittaama datan määrä voi erota laitteen mittaustuloksesta."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> käytetty"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Aseta datankäyttövaroitus"</string>
     <string name="data_warning" msgid="209133958008062117">"Datavaroitus"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Aseta tiedonsiirtoraja"</string>
     <string name="data_limit" msgid="1885406964934590552">"Datankäyttöraja"</string>

@@ -342,7 +342,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Розблокування відбитком"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Відбиток пальця"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Щоб розблокувати телефон, дозволити покупку або ввійти в додаток, просто торкніться сканера відбитків пальців. Будьте обачні, оскільки приймається будь-який відбиток, доданий на телефон.\n\nПримітка. Відбиток пальця може бути менш надійним, ніж ключ або PIN-код."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Щоб підтвердити покупку або ввійти в додаток, просто торкніться сканера відбитків пальців. Це можна зробити за допомогою будь-якого відбитка, доданого на телефон. Тож будьте обачні.\n\nПримітка. Відбитком пальця не можна розблоковувати пристрій. Щоб отримати докладнішу інформацію, зв’яжіться з адміністратором своєї організації."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Щоб розблокувати телефон, дозволити покупку або ввійти в додаток, просто торкніться сканера відбитків пальців. Будьте обачні, оскільки приймається будь-який відбиток, доданий на телефон.\n\nПримітка. Відбиток пальця може бути менш надійним, ніж ключ або PIN-код."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Скасувати"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Далі"</string>
@@ -692,6 +694,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Мінімізувати використання акумулятора, коли ввімкнено Wi‑Fi"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Обмежити викорис. заряду Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Переходити на мобільний Інтернет, якщо мережа Wi-Fi утрачає доступ до Інтернету."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Мобільний трафік за умовчанням"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Використовувати мобільний трафік, якщо зникає з’єднання Wi-Fi з Інтернетом. Може стягуватися додаткова плата."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Додати мережу"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Мережі Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Кнопка WPS"</string>
@@ -769,6 +773,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ПІД’ЄДНАТИСЯ"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Ця мережа не має доступу до Інтернету. Не від’єднувати пристрій?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Не запитувати знову для цієї мережі"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi не під’єднано до Інтернету"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Коли у вас погане з’єднання Wi-Fi, ви можете перейти на мобільну мережу. Може стягуватися плата за використання трафіку."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Перейти на мобільну мережу"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Використовувати Wi-Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Більше не показувати"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Підключ."</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Помилка під’єднання до мережі."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Видалити"</string>
@@ -934,14 +943,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Від заходу до сходу сонця"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Час початку"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Час завершення"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Вимкнено / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Ніколи не вмикати автоматично"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Вмикати автоматично о <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Вмикати автоматично після заходу сонця"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Увімкнено / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Ніколи не вимикати автоматично"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Вимикати автоматично о <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Вимикати автоматично на світанку"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Вимкнено. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Ніколи не вмикатиметься автоматично."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Вмикатиметься автоматично о <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Вмикатиметься автоматично після заходу сонця."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Увімкнено. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Ніколи не вимикатиметься автоматично."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Вимикатиметься автоматично о <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Вимикатиметься автоматично на світанку."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Режим сну"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Вимикати екран"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Коли минає <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездіяльності"</string>
@@ -1008,7 +1017,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Версія Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Рівень виправлень системи безпеки Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Номер моделі"</string>
+    <string name="model_info" msgid="1952009518045740889">"Модель"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Ідентифікатор обладнання"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Версія модуля зв’язку"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Версія ядра"</string>
@@ -1139,8 +1148,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Інше"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Система"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Переглянути файли, які містить <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Інше – це файли, збережені додатками чи завантажені з Інтернету, файли Bluetooth, Android тощо. \n\nЩоб побачити всі файли, які містить <xliff:g id="NAME">^1</xliff:g>, торкніться опції \"Переглянути\"."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Система містить файли, які внутрішньо використовує ОС Android. \n\nЦі файли не можна переглядати окремо."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Інше – це файли, збережені додатками чи завантажені через Інтернет або Bluetooth, файли Android тощо. \n\nЩоб побачити видимий вміст, які містить <xliff:g id="NAME">^1</xliff:g>, торкніться опції \"Переглянути\"."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Система містить файли, які Android не може відобразити окремо."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"Можливо, <xliff:g id="USER_0">^1</xliff:g> зберігає фотографії, музику, фільми, додатки або інші дані, які займають <xliff:g id="SIZE">^2</xliff:g> пам’яті. \n\nЩоб переглянути деталі, увійдіть як <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Налаштуйте пристрій пам’яті <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Використовувати як портативний пристрій пам’яті"</string>
@@ -3115,6 +3124,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Обмеження мережі"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Оператор може по-іншому вимірювати статистику використання трафіку"</string>
     <string name="data_used_template" msgid="3245919669966296505">"Використано <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Сповіщення щодо трафіку"</string>
     <string name="data_warning" msgid="209133958008062117">"Застереження про трафік"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Установити ліміт трафіку"</string>
     <string name="data_limit" msgid="1885406964934590552">"Ліміт трафіку"</string>

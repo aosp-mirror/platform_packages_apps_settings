@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Mở khóa bằng vân tay"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Sử dụng vân tay của bạn"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Chỉ cần chạm vào cảm biến vân tay để mở khóa điện thoại của bạn, ủy quyền mua hàng hoặc đăng nhập vào ứng dụng. Hãy cẩn trọng với vân tay mà bạn thêm. Thậm chí một vân tay được thêm cũng có thể làm tất cả những việc này.\n\nLưu ý: Vân tay của bạn có thể kém an toàn hơn so với hình mở khóa hoặc mã PIN mạnh."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Chỉ cần chạm vào cảm biến vân tay để ủy quyền mua hàng hoặc đăng nhập vào ứng dụng. Hãy cẩn trọng với vân tay mà bạn thêm. Thậm chí một vân tay được thêm có thể làm tất cả những việc này.\n\nLưu ý: Bạn không thể sử dụng vân tay của mình để mở khóa thiết bị này. Để biết thêm thông tin, hãy liên hệ với quản trị viên của tổ chức."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Chỉ cần chạm vào cảm biến vân tay để mở khóa điện thoại của bạn, ủy quyền mua hàng hoặc đăng nhập vào ứng dụng. Hãy cẩn trọng với vân tay mà bạn thêm. Ngay cả một vân tay được thêm cũng có thể làm tất cả những việc này.\n\nLưu ý: Vân tay của bạn có thể kém an toàn hơn so với hình mở khóa hoặc mã PIN mạnh."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Hủy"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Tiếp tục"</string>
@@ -674,6 +676,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Giảm thiểu sử dụng pin khi Wi‑Fi bật"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"G.hạn pin được Wi‑Fi sử dụng"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Chuyển sang dữ liệu mạng di động nếu Wi‑Fi mất quyền truy cập Internet."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Dự phòng dữ liệu di động"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Sử dụng dữ liệu di động khi Wi-Fi mất quyền truy cập Internet. Có thể áp dụng phí bổ sung."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Thêm mạng"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Mạng Wi‑Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Nút Đẩy WPS"</string>
@@ -751,6 +755,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"KẾT NỐI"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Mạng này không có quyền truy cập Internet. Giữ kết nối?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Không hỏi lại cho mạng này"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi không kết nối với Internet"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Bạn có thể chuyển sang mạng di động bất cứ khi nào kết nối Wi-Fi kém. Có thể áp dụng phí sử dụng dữ liệu."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Chuyển sang mạng di động"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Luôn sử dụng Wi-Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Không bao giờ hiển thị lại"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Kết nối"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Không thể kết nối với mạng"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Quên"</string>
@@ -916,14 +925,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Tối đến sáng"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Thời gian bắt đầu"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Thời gian kết thúc"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Tắt / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Không bao giờ tự động bật"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Tự động bật lúc <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Tự động bật lúc hoàng hôn"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Bật / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Không bao giờ tự động tắt"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Tự động tắt lúc <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Tự động tắt lúc bình minh"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Tắt. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Sẽ không bao giờ tự động bật."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Sẽ tự động bật lúc <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Sẽ tự động bật lúc hoàng hôn."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Bật. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Sẽ không bao giờ tự động tắt."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Sẽ tự động tắt lúc <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Sẽ tự động tắt lúc bình minh."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Thời gian chờ"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Màn hình tắt"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Sau khi không hoạt động <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -988,7 +997,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Phiên bản Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Mức bản vá bảo mật của Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Số kiểu máy"</string>
+    <string name="model_info" msgid="1952009518045740889">"Kiểu"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID thiết bị"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Phiên bản dải tần cơ sở"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Phiên bản Kernel"</string>
@@ -1119,8 +1128,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Dữ liệu khác"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Hệ thống"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Khám phá <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Tệp khác bao gồm tệp chia sẻ được ứng dụng lưu, tệp đã tải xuống từ Internet hoặc Bluetooth, tệp Android, v.v. \n\nĐể xem toàn bộ nội dung của <xliff:g id="NAME">^1</xliff:g> này, hãy nhấn vào Khám phá."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Hệ thống bao gồm các tệp mà hệ điều hành Android sử dụng nội bộ. \n\nKhông thể xem các tệp này riêng lẻ."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Các tệp khác bao gồm tệp được chia sẻ mà ứng dụng lưu, tệp được tải xuống từ Internet hoặc Bluetooth, tệp Android, v.v. \n\nĐể xem nội dung hiển thị của <xliff:g id="NAME">^1</xliff:g> này, hãy nhấn Khám phá."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Hệ thống bao gồm các tệp mà Android không thể hiển thị riêng."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> có thể đã lưu ứng dụng, phim, nhạc, ảnh hoặc dữ liệu khác chiếm <xliff:g id="SIZE">^2</xliff:g> bộ nhớ. \n\nĐể xem chi tiết, hãy chuyển sang <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Thiết lập <xliff:g id="NAME">^1</xliff:g> của bạn"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Sử dụng làm bộ nhớ di động"</string>
@@ -3053,6 +3062,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Hạn chế của mạng"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Việc tính toán dữ liệu của nhà cung cấp dịch vụ có thể khác với thiết bị của bạn."</string>
     <string name="data_used_template" msgid="3245919669966296505">"Đã sử dụng <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Đặt cảnh báo dữ liệu"</string>
     <string name="data_warning" msgid="209133958008062117">"Cảnh báo dữ liệu"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Đặt giới hạn dữ liệu"</string>
     <string name="data_limit" msgid="1885406964934590552">"Giới hạn dữ liệu"</string>
