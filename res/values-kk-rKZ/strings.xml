@@ -343,11 +343,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Саусақ ізімен құлыпты ашу"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_title_unlock_disabled (7066417934622827305) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Саусақ ізін пайдалану"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Телефон құлпын ашу, сатып алуларды авторизациялау немесе қолданбаларға кіру үшін саусақ ізін оқу сканерін түртсеңіз болды. Басқа саусақ іздерін қосқанда сақ болыңыз. Олар осы әрекеттердің кез келгенін орындай алады.\n\nЕскертпе: саусақ ізінің қауіпсіздігі күшті өрнектен немесе PIN кодынан азырақ болуы мүмкін."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_unlock_disabled (4193477159493347679) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Сатып алуларды авторизациялау немесе қолданбаларға кіру үшін саусақ ізін оқу сканерін түртсеңіз болды. Басқа саусақ іздерін қосқанда сақ болыңыз. Бір рет қосылса болғаны, олар осы әрекеттердің кез келгенін орындай алады.\n\nЕскертпе: бұл құрылғының құлпын ашу үшін саусақ ізін пайдалана алмайсыз. Қосымша ақпарат алу үшін ұйым әкімшісіне хабарласыңыз."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Телефон құлпын ашу, сатып алғандарды авторизациялау немесе қолданбаларға кіру үшін жай ғана саусақ ізін оқу сканерін түртіңіз. Басқа саусақ іздерін қосарда сақ болыңыз. Өйткені бір саусақ ізі қосылған болса да, оның иесі бұл әрекеттердің барлығын орындай алады.\n\nЕскертпе: саусақ ізінің қауіпсіздік деңгейі күрделі өрнектен немесе PIN кодынан төмен болуы мүмкін."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Бас тарту"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Жалғастыру"</string>
@@ -687,6 +685,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi‑Fi қосылғанда батарея қолданысын азайту"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Wi‑Fi пайдаланатын батареяны шектеу"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi-Fi интернеттен ажыратылса, ұялы деректерге ауысу."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Желі қосу"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi‑Fi желілері"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS Push түймесі"</string>
@@ -764,14 +766,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ҚОСЫЛУ"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Бұл желіде интернет байланысы жоқ. Байланыста қалу қажет пе?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Осы желі үшін енді сұралмасын"</string>
-    <!-- no translation found for lost_internet_access_title (2782009158012212777) -->
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi интернетке жалғанбаған"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Wi‑Fi сапасы нашар болған жағдайда ұялы байланысқа ауысуға болады. Деректер ақысы алынуы мүмкін."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Ұялы байланысқа ауысу"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
     <skip />
-    <!-- no translation found for lost_internet_access_text (1495142182934624433) -->
-    <skip />
-    <!-- no translation found for lost_internet_access_switch (1157476782808342810) -->
-    <skip />
-    <!-- no translation found for lost_internet_access_cancel (8438722278965609900) -->
-    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Қайта көрсетілмесін"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Жалғау"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Желіге қосылу орындалмады"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Ұмыту"</string>
@@ -865,8 +865,7 @@
     <string name="home_settings" msgid="212375129455718176">"Негізгі"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Дисплей"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Дыбыс"</string>
-    <!-- no translation found for ringtone_summary (1688079785311826667) -->
-    <skip />
+    <string name="ringtone_summary" msgid="1688079785311826667">" "</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Дыбыс қаттылығы"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Mузыка әсерлері"</string>
     <string name="ring_volume_title" msgid="5592466070832128777">"Қоңыраудың дыбыс деңгейі"</string>
@@ -938,22 +937,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Күн батқаннан күн шыққанға дейін"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Басталу уақыты"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Аяқталу уақыты"</string>
-    <!-- no translation found for night_display_summary_off (7009821232380000786) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_never (2305501561697289620) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_custom (1548073080728058384) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_twilight (2737328390752018845) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on (6626224414971753417) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_never (5217396859715040056) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_custom (887702685252504739) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_twilight (8574989770628425398) -->
-    <skip />
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Өшірулі. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Автоматты қосылмайды."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Автоматты қосылады: <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Күн батқанда автоматты түрде қосылады."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Қосулы. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Ешқашан автоматты өшпейді."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Автоматты өшеді: <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Күн шыққанда автоматты өшеді"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Ұйқы"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Экран өшеді"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Әрекетсіз <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> тұрған соң"</string>
@@ -1018,8 +1009,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android нұсқасы"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android қауіпсіздік түзетуінің деңгейі"</string>
-    <!-- no translation found for model_info (1952009518045740889) -->
-    <skip />
+    <string name="model_info" msgid="1952009518045740889">"Үлгісі"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Жабдық ЖА"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Радиомодуль нұсқасы"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Ядро нұсқасы"</string>
@@ -1150,10 +1140,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Басқа"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Жүйе"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> ашу"</string>
-    <!-- no translation found for storage_detail_dialog_other (8907101974576694793) -->
-    <skip />
-    <!-- no translation found for storage_detail_dialog_system (3417679651116003900) -->
-    <skip />
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Басқаларында қолданбалар сақтаған файлдар, интернет немесе Bluetooth арқылы жүктелген файлдар, Android файлдары, т.б. қамтылады. \n\n\"Зерттеу\" түймесін басып, осы <xliff:g id="NAME">^1</xliff:g> құрылғысындағы мазмұндарды көріңіз."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Жүйеде Android жеке көрсете алмайтын файлдар бар."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> ішінде сақталған фотосуреттер, музыка, фильмдер, қолданбалар немесе жадтың <xliff:g id="SIZE">^2</xliff:g> көлемін алып тұрған басқа деректер болуы мүмкін. \n\nМәліметтерін көру үшін, <xliff:g id="USER_1">^1</xliff:g> пайдаланушысына ауысыңыз."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"<xliff:g id="NAME">^1</xliff:g> орнату"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Портативті жад ретінде пайдалану"</string>
@@ -2672,8 +2660,14 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Мазаламау режиміне кіру"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Орнатылған қолданбалардың ешбірі Мазаламау режиміне кіруге рұқсат сұрамады"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Қолданбаларды жүктеу…"</string>
+    <!-- no translation found for notification_channels (8681423709659818791) -->
+    <skip />
     <string name="app_notification_block_title" msgid="4069351066849087649">"Барлығына тыйым салу"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Осы қолданбадан келген хабарландыруларды ешқашан көрсетпеу"</string>
+    <!-- no translation found for channel_notification_block_title (1570538726036580979) -->
+    <skip />
+    <!-- no translation found for channel_notification_block_summary (3024773079420038146) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"\"Мазаламау\" режимін қайта анықтау"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"\"Мазаламау\" режимі \"Тек маңызды\" күйіне орнатылған кезде, осы хабарландыруларға рұқсат беру"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Құлып экранында"</string>
@@ -2682,6 +2676,10 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Құпия"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Дайын"</string>
     <string name="app_notification_importance_title" msgid="8002263131149345584">"Маңыздылық"</string>
+    <!-- no translation found for notification_show_lights_title (7301956309661349031) -->
+    <skip />
+    <!-- no translation found for notification_vibrate_title (4942317478973441720) -->
+    <skip />
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Ереже атауы"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Ереже атауын енгізіңіз"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Ереже атауы бұрыннан пайдаланылуда"</string>
@@ -3093,8 +3091,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Желілік шектеулер"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Оператордың деректер есебі құрылғының есебінен өзгеше болуы мүмкін."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> пайдаланылған"</string>
-    <!-- no translation found for set_data_warning (6115364758236594593) -->
-    <skip />
+    <string name="set_data_warning" msgid="6115364758236594593">"Деректердің пайдаланылуы туралы ескерту"</string>
     <string name="data_warning" msgid="209133958008062117">"Деректер туралы ескерту"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Деректер шегін орнату"</string>
     <string name="data_limit" msgid="1885406964934590552">"Деректер шегі"</string>

@@ -349,11 +349,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Odemknutí otiskem prstu"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_title_unlock_disabled (7066417934622827305) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Použití otisku prstu"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací pouhým klepnutím na senzor otisků prstů. Dobře zvažte, čí otisky do zařízení přidáte. Uvedené akce bude možné provádět pomocí každého z přidaných otisků.\n\nPoznámka: Otisk prstu může být méně bezpečný než silné gesto nebo PIN."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_unlock_disabled (4193477159493347679) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Autorizujte nákupy a přihlašujte se do aplikací pouhým klepnutím na senzor otisků prstů. Dobře zvažte, čí otisky do zařízení přidáte. Uvedené akce bude možné provádět pomocí každého z přidaných otisků.\n\nPoznámka: Otisk prstu nelze použít k odemykání tohoto zařízení. Další informace vám poskytne administrátor vaší organizace."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací pouhým klepnutím na senzor otisků prstů. Dobře zvažte, čí otisky do zařízení přidáte. Uvedené akce bude možné provádět pomocí každého z přidaných otisků.\n\nPoznámka: Otisk prstu může být méně bezpečný než silné gesto nebo PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Zrušit"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Pokračovat"</string>
@@ -705,6 +703,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimalizovat využívání baterie při zapnuté síti Wi-Fi"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Omezit využití baterie sítí Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Pokud síť Wi‑Fi ztratí přístup k internetu, přepnout na mobilní data"</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Přepnutí na mobilní data"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Když síť Wi‑Fi ztratí přístup k internetu, přepnout na mobilní data. Mohou být účtovány dodatečné poplatky."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Přidat síť"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Sítě Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Tlačítko WPS"</string>
@@ -782,14 +782,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"PŘIPOJIT"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Tato síť nemá přístup k internetu. Chcete zůstat připojeni?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"U této sítě se již nedotazovat"</string>
-    <!-- no translation found for lost_internet_access_title (2782009158012212777) -->
-    <skip />
-    <!-- no translation found for lost_internet_access_text (1495142182934624433) -->
-    <skip />
-    <!-- no translation found for lost_internet_access_switch (1157476782808342810) -->
-    <skip />
-    <!-- no translation found for lost_internet_access_cancel (8438722278965609900) -->
-    <skip />
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Síť Wi‑Fi nemá přístup k internetu"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Při špatném připojení Wi‑Fi můžete přepnout na mobilní síť. Mohou být účtovány poplatky za data."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Přepnout na mobilní data"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Zůstat na Wi‑Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Již nikdy nezobrazovat"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Připojit"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Připojení k síti se nezdařilo."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Odstranit"</string>
@@ -883,8 +880,7 @@
     <string name="home_settings" msgid="212375129455718176">"Plocha"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Obrazovka"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Zvuk"</string>
-    <!-- no translation found for ringtone_summary (1688079785311826667) -->
-    <skip />
+    <string name="ringtone_summary" msgid="1688079785311826667">" "</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Hlasitost"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Hudební efekty"</string>
     <string name="ring_volume_title" msgid="5592466070832128777">"Hlasitost vyzvánění"</string>
@@ -956,22 +952,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Od soumraku do úsvitu"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Čas zahájení"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Čas ukončení"</string>
-    <!-- no translation found for night_display_summary_off (7009821232380000786) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_never (2305501561697289620) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_custom (1548073080728058384) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_twilight (2737328390752018845) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on (6626224414971753417) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_never (5217396859715040056) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_custom (887702685252504739) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_twilight (8574989770628425398) -->
-    <skip />
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Vypnuto. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Nikdy se automaticky nezapne."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Zapne se automaticky v <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Zapne se automaticky za soumraku."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Zapnuto. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Nikdy se automaticky nevypne."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Vypne se automaticky v <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Vypne se automaticky za úsvitu."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Režim spánku"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Vypnutí obrazovky"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Doba nečinnosti: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1038,8 +1026,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Verze systému Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Úroveň opravy zabezpečení Android"</string>
-    <!-- no translation found for model_info (1952009518045740889) -->
-    <skip />
+    <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID zařízení"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Verze základního pásma"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Verze jádra"</string>
@@ -1170,10 +1157,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Jiné"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Systém"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Prozkoumat úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
-    <!-- no translation found for storage_detail_dialog_other (8907101974576694793) -->
-    <skip />
-    <!-- no translation found for storage_detail_dialog_system (3417679651116003900) -->
-    <skip />
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Mezi ostatní soubory patří sdílené soubory uložené aplikacemi, soubory stažené z internetu nebo přes Bluetooth, soubory systému Android apod. \n\nChcete-li zobrazit viditelný obsah tohoto úložiště typu <xliff:g id="NAME">^1</xliff:g>, klepněte na Prozkoumat."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Systém zahrnuje soubory, které Android nedokáže zobrazit samostatně."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> může mít uložené fotky, hudbu, filmy, aplikace a další data, která v úložišti zabírají <xliff:g id="SIZE">^2</xliff:g>. \n\nChcete-li zobrazit podrobnosti, přepněte na účet uživatele <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Nastavte úložiště <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Použít jako přenosné úložiště"</string>
@@ -2716,8 +2701,11 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Přístup při nastavení Nerušit"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"O přístup při nastavení Nerušit nepožádaly žádné nainstalované aplikace"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Načítání aplikací..."</string>
+    <string name="notification_channels" msgid="8681423709659818791">"Kanály"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokovat vše"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nikdy nezobrazovat oznámení z této aplikace"</string>
+    <string name="channel_notification_block_title" msgid="1570538726036580979">"Blokovat vše"</string>
+    <string name="channel_notification_block_summary" msgid="3024773079420038146">"Oznámení z tohoto kanálu nikdy nezobrazovat"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Přepsat nastavení Nerušit"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Umožnit těmto oznámením vyrušit mě, pokud je v nastavení Nerušit vybrána možnost Pouze prioritní"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Na obrazovce uzamčení"</string>
@@ -2726,6 +2714,8 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Důvěrné"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Hotovo"</string>
     <string name="app_notification_importance_title" msgid="8002263131149345584">"Důležitost"</string>
+    <string name="notification_show_lights_title" msgid="7301956309661349031">"Vždy blikat kontrolkou oznámení"</string>
+    <string name="notification_vibrate_title" msgid="4942317478973441720">"Vždy vibrovat"</string>
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Název pravidla"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Zadejte název pravidla"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Název pravidla je již používán."</string>
@@ -3153,8 +3143,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Omezení sítě"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Operátor může data počítat jinak než zařízení"</string>
     <string name="data_used_template" msgid="3245919669966296505">"Využito <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <!-- no translation found for set_data_warning (6115364758236594593) -->
-    <skip />
+    <string name="set_data_warning" msgid="6115364758236594593">"Nastavit upozornění na data"</string>
     <string name="data_warning" msgid="209133958008062117">"Upozornění na data"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Nastavit limit dat"</string>
     <string name="data_limit" msgid="1885406964934590552">"Limit dat"</string>

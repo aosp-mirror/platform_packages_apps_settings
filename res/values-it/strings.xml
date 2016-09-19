@@ -343,11 +343,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Sblocca con l\'impronta"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_title_unlock_disabled (7066417934622827305) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Usa la tua impronta digitale"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Tocca il sensore delle impronte digitali per sbloccare il telefono, autorizzare gli acquisti o accedere alle app desiderate. Scegli con attenzione chi aggiungere: le operazioni sopra elencate possono essere svolte con qualsiasi impronta digitale aggiunta.\n\nNota. La tua impronta digitale potrebbe essere meno sicura di una sequenza o un PIN complesso."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_unlock_disabled (4193477159493347679) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Tocca il sensore di impronte digitali per autorizzare gli acquisti o per accedere alle app. Scegli con attenzione chi aggiungere: le operazioni sopra elencate possono essere svolte con qualsiasi impronta digitale aggiunta.\n\nNota. Non puoi utilizzare la tua impronta per sbloccare il dispositivo. Per ulteriori informazioni, contatta l\'amministratore dell\'organizzazione."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Tocca il sensore delle impronte digitali per sbloccare il telefono, autorizzare gli acquisti o accedere alle app. Scegli con attenzione chi aggiungere: le operazioni sopra elencate possono essere svolte con qualsiasi impronta digitale aggiunta.\n\nNota. La tua impronta digitale potrebbe essere meno sicura di una sequenza o un codice PIN complessi."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Annulla"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continua"</string>
@@ -687,6 +685,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Riduci al minimo l\'utilizzo della batteria quando Wi‑Fi è attivo"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Limita batteria usata da Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Passa a rete dati se il Wi-Fi perde l\'accesso a Internet"</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Passaggio a dati cellulari, se necessario"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Utilizza i dati cellulari quando la rete Wi-Fi perde l\'accesso a Internet. Ciò può comportare costi aggiuntivi."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Aggiungi rete"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Reti Wi‑Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Pulsante di comando WPS"</string>
@@ -764,14 +764,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"CONNETTI"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Questa rete non ha accesso a Internet. Desideri restare connesso?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Non chiedermelo più per questa rete"</string>
-    <!-- no translation found for lost_internet_access_title (2782009158012212777) -->
-    <skip />
-    <!-- no translation found for lost_internet_access_text (1495142182934624433) -->
-    <skip />
-    <!-- no translation found for lost_internet_access_switch (1157476782808342810) -->
-    <skip />
-    <!-- no translation found for lost_internet_access_cancel (8438722278965609900) -->
-    <skip />
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi non connesso a Internet"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Puoi passare alla rete cellulare in caso di problemi con la connessione Wi-Fi. Potrebbero essere applicati costi per l\'utilizzo dei dati."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Passa alla rete cellulare"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Resta sulla rete Wi‑Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Non mostrare più"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Connetti"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Impossibile connettersi alla rete"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Elimina"</string>
@@ -865,8 +862,7 @@
     <string name="home_settings" msgid="212375129455718176">"Home page"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Audio"</string>
-    <!-- no translation found for ringtone_summary (1688079785311826667) -->
-    <skip />
+    <string name="ringtone_summary" msgid="1688079785311826667">" "</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volumi"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Effetti musicali"</string>
     <string name="ring_volume_title" msgid="5592466070832128777">"Volume suoneria"</string>
@@ -938,22 +934,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Dal tramonto all\'alba"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Ora inizio"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Ora fine"</string>
-    <!-- no translation found for night_display_summary_off (7009821232380000786) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_never (2305501561697289620) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_custom (1548073080728058384) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_twilight (2737328390752018845) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on (6626224414971753417) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_never (5217396859715040056) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_custom (887702685252504739) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_twilight (8574989770628425398) -->
-    <skip />
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Disattivata. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Non verrà mai attivata automaticamente."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Verrà attivata automaticamente alle ore <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Verrà attivata automaticamente al tramonto."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Attiva. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Non verrà mai disattivata automaticamente."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Verrà disattivata automaticamente alle ore <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Verrà disattivata automaticamente al tramonto."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Sospensione"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Lo schermo si spegne"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Dopo <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> di inattività"</string>
@@ -1018,8 +1006,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Versione di Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Livello patch di sicurezza Android"</string>
-    <!-- no translation found for model_info (1952009518045740889) -->
-    <skip />
+    <string name="model_info" msgid="1952009518045740889">"Modello"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID attrezzatura"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Versione banda di base"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versione kernel"</string>
@@ -1150,10 +1137,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Altro"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistema"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Esplora <xliff:g id="NAME">^1</xliff:g>"</string>
-    <!-- no translation found for storage_detail_dialog_other (8907101974576694793) -->
-    <skip />
-    <!-- no translation found for storage_detail_dialog_system (3417679651116003900) -->
-    <skip />
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"In Altro sono inclusi file condivisi salvati dalle app, file scaricati da Internet o tramite Bluetooth, file Android e così via. \n\nPer vedere i contenuti visibili di <xliff:g id="NAME">^1</xliff:g>, tocca Esplora."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Il sistema include file che non è possibile visualizzare singolarmente su Android."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> potrebbe aver salvato foto, musica, film, app o altri dati che occupano <xliff:g id="SIZE">^2</xliff:g> di memoria. \n\nPer i dettagli, passa a <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Configura la tua <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Utilizza come memoria portatile"</string>
@@ -2672,8 +2657,11 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Accesso Non disturbare"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Nessuna delle app installate ha richiesto l\'accesso Non disturbare"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Caricamento app..."</string>
+    <string name="notification_channels" msgid="8681423709659818791">"Canali"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blocca tutto"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Non mostrare mai notifiche di questa app"</string>
+    <string name="channel_notification_block_title" msgid="1570538726036580979">"Blocca tutto"</string>
+    <string name="channel_notification_block_summary" msgid="3024773079420038146">"Non mostrare mai le notifiche di questo canale"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Ignora Non disturbare"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Consenti interruzione per queste notifiche quando l\'opzione Non disturbare è impostata su Solo con priorità"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Nella schermata di blocco"</string>
@@ -2682,6 +2670,8 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Riservate"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Fine"</string>
     <string name="app_notification_importance_title" msgid="8002263131149345584">"Importanza"</string>
+    <string name="notification_show_lights_title" msgid="7301956309661349031">"Luce intermittente sempre attiva"</string>
+    <string name="notification_vibrate_title" msgid="4942317478973441720">"Vibrazione sempre attiva"</string>
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Nome regola"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Inserisci il nome della regola"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Nome regola già in uso"</string>
@@ -3093,8 +3083,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Limitazioni di rete"</string>
     <string name="operator_warning" msgid="1862988028996859195">"I dati dell\'operatore potrebbero differire da quelli del dispositivo"</string>
     <string name="data_used_template" msgid="3245919669966296505">"Dati utilizzati: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <!-- no translation found for set_data_warning (6115364758236594593) -->
-    <skip />
+    <string name="set_data_warning" msgid="6115364758236594593">"Imposta avviso sui dati"</string>
     <string name="data_warning" msgid="209133958008062117">"Avviso relativo ai dati"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Imposta limite dati"</string>
     <string name="data_limit" msgid="1885406964934590552">"Limite dati"</string>
