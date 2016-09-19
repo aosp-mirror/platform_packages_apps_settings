@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Membuka kunci dengan sidik jari"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Menggunakan sidik jari"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Cukup sentuh sensor sidik jari untuk membuka kunci perangkat, mengotorisasi pembelian, atau masuk ke aplikasi. Berhati-hatilah dengan sidik jari yang ditambahkan. Sidik jari yang ditambahkan dapat melakukan semua hal ini.\n\nCatatan: Sidik jari mungkin kurang aman dibanding pola atau PIN yang rumit."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Cukup sentuh sensor sidik jari untuk mengotorisasi pembelian, atau masuk ke aplikasi. Berhati-hatilah dengan sidik jari yang ditambahkan. Sidik jari yang ditambahkan dapat melakukan semua hal ini.\n\nCatatan: Anda tidak dapat menggunakan sidik jari untuk membuka kunci perangkat ini. Untuk informasi selengkapnya, hubungi admin organisasi."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Cukup sentuh sensor sidik jari untuk membuka kunci ponsel, mengotorisasi pembelian, atau masuk ke aplikasi. Berhati-hatilah dengan sidik jari yang ditambahkan. Sidik jari yang ditambahkan dapat melakukan semua hal ini.\n\nCatatan: Sidik jari mungkin kurang aman dibanding pola atau PIN yang rumit."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Batal"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Lanjutkan"</string>
@@ -674,6 +676,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimalkan penggunaan baterai saat Wi-Fi aktif"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Batasi penggunaan baterai oleh Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Beralih ke data seluler jika Wi-Fi kehilangan akses internet."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Tambahkan jaringan"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Jaringan Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Tombol Tekan WPS"</string>
@@ -751,6 +757,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"SAMBUNGKAN"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Jaringan ini tidak memiliki akses internet. Tetap sambungkan?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Jangan tanya lagi untuk jaringan ini"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi tidak tersambung ke Internet"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Anda dapat beralih ke jaringan seluler ketika sambungan Wi-Fi buruk. Penggunaan data mungkin berlaku."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Beralih ke seluler"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Jangan tampilkan lagi"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Sambungkan"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Gagal menyambung ke jaringan"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Lupakan"</string>
@@ -916,14 +928,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Matahari terbenam s.d. terbit"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Waktu mulai"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Waktu selesai"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Nonaktif / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Jangan aktifkan otomatis"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Aktifkan otomatis pukul <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Aktifkan otomatis saat matahari terbenam"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Aktif / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Jangan nonaktifkan otomatis"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Nonaktifkan otomatis pukul <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Nonaktifkan otomatis saat matahari terbit"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Nonaktif. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Tidak akan aktif otomatis."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Akan aktif otomatis pukul <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Akan aktif otomatis saat matahari terbenam."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Aktif. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Tidak akan nonaktif otomatis."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Akan nonaktif otomatis pukul <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Akan nonaktif otomatis saat matahari terbit."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Tidur"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Layar mati"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Setelah tidak aktif selama <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -988,7 +1000,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Versi Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Tingkat patch keamanan Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Nomor model"</string>
+    <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID Peralatan"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Versi pita basis"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versi kernel"</string>
@@ -1119,8 +1131,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Lainnya"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistem"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Jelajahi <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Lainnya mencakup file bersama yang disimpan oleh aplikasi, file yang diunduh dari internet atau Bluetooth, file Android, dan sebagainya. \n\nUntuk melihat seluruh konten <xliff:g id="NAME">^1</xliff:g> ini, ketuk Jelajahi."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Sistem mencakup file yang digunakan secara internal oleh sistem operasi Android. \n\nFile ini tidak dapat dilihat satu persatu."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Lainnya meliputi file bersama yang disimpan oleh aplikasi, file yang diunduh dari internet atau Bluetooth, file Android, dan sebagainya. \n\nUntuk melihat konten yang terlihat dari <xliff:g id="NAME">^1</xliff:g> ini, tap Jelajahi."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Sistem meliputi file yang tidak dapat ditampilkan Android satu per satu."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> mungkin telah menyimpan foto, musik, film, aplikasi atau data lain yang menghabiskan <xliff:g id="SIZE">^2</xliff:g> penyimpanan. \n\nUntuk melihat detailnya, beralihlah ke <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Siapkan <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Gunakan sebagai penyimpanan portabel"</string>
@@ -3053,6 +3065,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Batasan jaringan"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Penghitungan data operator dapat berbeda dengan penghitungan perangkat"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> digunakan"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Setel peringatan data"</string>
     <string name="data_warning" msgid="209133958008062117">"Peringatan data"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Setel batas data"</string>
     <string name="data_limit" msgid="1885406964934590552">"Batas data"</string>

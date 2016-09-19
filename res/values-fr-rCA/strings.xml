@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Déverrouillage avec empreinte"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Utilisez empreinte digitale"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Il vous suffit de toucher le lecteur d\'empreintes digitales pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications. Toutes les personnes dont les empreintes digitales sont ajoutées sur votre téléphone peuvent effectuer ces opérations. Sélectionnez donc ces personnes avec soin.\n\nRemarque : Vos empreintes digitales peuvent être moins sécurisées qu\'un schéma ou un code fiables."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Il suffit de toucher le capteur d\'empreintes digitales pour autoriser les achats ou vous connecter à des applications. Soyez prudent d\'ajouter uniquement les empreintes digitales de personnes en qui vous avez confiance. Même une seule empreinte ajoutée peut effectuer toutes ces actions.\n\nRemarque : Vous ne pouvez pas utiliser vos empreintes digitales pour déverrouiller cet appareil. Pour obtenir plus d\'information, communiquez avec l\'administrateur de votre organisation."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Il vous suffit de toucher le lecteur d\'empreintes digitales pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications. Toutes les personnes dont les empreintes digitales sont ajoutées sur votre téléphone peuvent effectuer ces opérations. Sélectionnez donc ces personnes avec soin.\n\nRemarque : Vos empreintes digitales peuvent être moins sécurisées qu\'un schéma ou un NIP fiables."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Annuler"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuer"</string>
@@ -674,6 +676,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimiser la consommation de la batterie lorsque le Wi-Fi est activé"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Limiter énergie util. par Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Utiliser les données cellulaires si vous n\'avez plus accès à Internet par réseau Wi‑Fi."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Ajouter un réseau"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Réseaux Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Bouton commande WPS"</string>
@@ -751,6 +757,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"CONNEXION"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Ce réseau ne dispose d\'aucun accès à Internet. Voulez-vous quand même l\'utiliser?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Ne plus me demander pour ce réseau"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Le réseau Wi‑Fi n\'est pas connecté à Internet"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Vous pouvez passer au réseau cellulaire lorsque la connexion Wi‑Fi est faible. Des frais de données peuvent s\'appliquer."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Passer au réseau cellulaire"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Ne plus afficher"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Connexion"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Échec de la connexion au réseau."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Supprimer"</string>
@@ -916,14 +928,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Du coucher au lever du soleil"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Heure de début"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Heure de fin"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Désactivé : <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Ne jamais activer automatiquement"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Activer automatiquement à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Activer automatiquement au coucher du soleil"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Activé : <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Ne jamais désactiver automatiquement"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Désactiver automatiquement à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Désactiver automatiquement au lever du soleil"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Désactivé. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Ne s\'activera jamais automatiquement"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Activer automatiquement à <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"S\'active automatiquement au coucher du soleil."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Activé. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Ne se désactivera jamais automatiquement"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Désactiver automatiquement à <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Se désactivera automatiquement au lever du soleil"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Veille"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"L\'écran s\'éteint"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Après <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivité"</string>
@@ -988,7 +1000,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Version d\'Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Niveau du correctif de sécurité Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Numéro du modèle"</string>
+    <string name="model_info" msgid="1952009518045740889">"Modèle"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Equipment ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Version de bande de base"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Version du noyau"</string>
@@ -1119,8 +1131,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Autre"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Système"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Explorer « <xliff:g id="NAME">^1</xliff:g> »"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"L’étiquette « Autre » fait référence aux fichiers partagés enregistrés par les applications, aux fichiers téléchargés sur Internet ou par Bluetooth, aux fichiers Android, etc. \n\nPour voir l\'intégralité du contenu de la mémoire de stockage « <xliff:g id="NAME">^1</xliff:g> », touchez « Explorer »."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Le système comprend des fichiers utilisés sur l\'appareil par le système d\'exploitation Android.\n\nCes fichiers ne peuvent pas être affichés individuellement."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Les autres fichiers comprennent les fichiers partagés enregistrés par les applications, les fichiers téléchargés d\'Internet ou par Bluetooth, les fichiers systèmes d\'Android et ainsi de suite.\n\nPour voir le contenu visible de cet appareil « <xliff:g id="NAME">^1</xliff:g> », touchez Explorer."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Le système comprend des fichiers qu\'Android ne peut pas afficher individuellement."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"L\'utilisateur « <xliff:g id="USER_0">^1</xliff:g> » a peut-être enregistré des photos, de la musique, des films, des applications et d\'autres données qui occupent <xliff:g id="SIZE">^2</xliff:g> d\'espace. \n\nPour afficher des informations détaillées, utilisez le compte d\'utilisateur « <xliff:g id="USER_1">^1</xliff:g> »."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Configurer votre « <xliff:g id="NAME">^1</xliff:g> »"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Utiliser en tant que mémoire de stockage externe"</string>
@@ -2577,7 +2589,7 @@
     <string name="configure_notification_settings" msgid="3558846607192693233">"Configurer les notifications"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Paramètres avancés"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notifications professionnelles"</string>
-    <string name="notification_pulse_title" msgid="1247988024534030629">"Faire clignoter le voyant de notification"</string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"Voyant de notification"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"À l\'écran de verrouillage"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Afficher l\'intégralité du contenu des notifications"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Masquer le contenu sensible des notifications"</string>
@@ -3053,6 +3065,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Restrictions réseau"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Le suivi de consommation de données du fournisseur de services peut différer de celui de l\'appareil."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> utilisés"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Définir avertiss. util. données"</string>
     <string name="data_warning" msgid="209133958008062117">"Avertissement consomm. données"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Définir limite consomm. données"</string>
     <string name="data_limit" msgid="1885406964934590552">"Limite de données"</string>

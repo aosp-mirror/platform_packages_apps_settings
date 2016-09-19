@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"በጣት አሻራ ይክፈቱ"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"ጣት አሻራዎን ይጠቀሙ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"ስልክዎን ለመክፈት፣ ግዢዎችን ለመፍቀድ ወይም ወደ መተግበሪያዎች ለመግባት በቀላሉ የጣት አሻራ ዳሳሹን ይንኩ። የማን ጣት አሻራዎችን እንደሚያክሉ ላይ ይጠንቀቁ። አንዲት የታከለ አሻራ ራሱ እነዚህን ሊያደርግ ይችላል።\n\nማስታወሻ፦ የጣት አሻራዎ ደህንነት ከጠንካራ ስርዓተ ጥለት ወይም ፒን ያነሰ ሊሆን ይችላል።"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"ግዢዎችን ለማጽደቅ ወይም በመለያ ወደ መተግበሪያዎች ለመግባት በቀላሉ የጣት አሻራ ዳሳሹን ይንኩት። የማን ጣት አሻራዎች እንደሚያክሉ ላይ ይጠንቀቁ። አንዲት የታከለ ጣት አሻራ እንኳ ከእነዚህ ውስጥ ማንኛቸውም ማድረግ ይችላል።\n\nማስታወሻ፦ ይህን መሣሪያ ለመክፈት የጣት አሻራዎን መጠቀም አይችሉም። ተጨማሪ መረጃ ለማግኘት የድርጅትዎን አስተዳዳሪ ያነጋግሩ።"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"ስልክዎን ለመክፈት፣ ግዢዎችን ለመፍቀድ ወይም ወደ መተግበሪያዎች ለመግባት በቀላሉ የጣት አሻራ ዳሳሹን ይንኩ። የማን ጣት አሻራዎችን እንደሚያክሉ ላይ ይጠንቀቁ። አንዲት የታከለ አሻራ ራሱ እነዚህን ሊያደርግ ይችላል።\n\nማስታወሻ፦ የጣት አሻራዎ ደህንነት ከጠንካራ ስርዓተ ጥለት ወይም ፒን ያነሰ ሊሆን ይችላል።"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"ይቅር"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"ቀጥል"</string>
@@ -674,6 +676,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi-Fi ሲበራ የባትሪ አጠቃቀም ቀንስ"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Wi‑Fi የሚጠቀመውን ባትሪ ገድብ"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi-Fi የበይነመረብ መድረሻን ካጣ ወደ ባለገመድ ውሂብ ለውጥ።"</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"አውታረ መረብ አክል"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"የWi-Fi አውታረ መረቦች"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS ግፊት አዘራር"</string>
@@ -751,6 +757,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"አገናኝ"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"ይህ አውታረ መረብ ምንም የበይነመረብ ግንኙነት የለውም። እንደተገናኙ ይቆዩ?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"ለዚህ አውታረመረብ ዳግመኛ አትጠይቅ"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi ከበይነመረብ ጋር አልተገናኘም"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Wi‑Fi መጥፎ ግንኙነት በሚኖረው ጊዜ ሁሉ ወደ ሴሉላር አውታረመረብ መቀየር ይችላሉ። የውሂብ አጠቃቀም ተፈጻሚ ሊሆን ይችላል።"</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"ወደ የተንቀሳቃሽ ስልክ ቀይር"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"በፍፁም ዳግመኛ አታሳይ"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"አያይዝ"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"ከአውታረ መረቡ ጋር መገናኘት አልተሳካም"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"እርሳ"</string>
@@ -916,14 +928,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"ጸሐይ ከወጣችበት ጊዜ ጀምሮ እስክትጠልቅ ድረስ"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"የመጀመሪያ ሰዓት"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"የመጨረሻ ሰዓት"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"ጠፍቷል / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"በጭራሽ በራስ-ሰር አታብራ"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"<xliff:g id="ID_1">%1$s</xliff:g> ላይ በራስ-ሰር አብራ"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"ጸሐይ ስትጠልቅ በራስ-ሰር አብራ"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"በርቷል / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"በጭራሽ በራስ-ሰር አታጥፋ"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"<xliff:g id="ID_1">%1$s</xliff:g> ላይ በራስ-ሰር አጥፋ"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"ጸሐት ስትወጣ በራስ-ሰር አጥፋ"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"ጠፍቷል። <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"በጭራሽ በራስ-ሰር አይበራም።"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g> ላይ በራስ-ሰር ይበራል።"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"ጸሐይ ስትጠልቅ በራስ-ሰር ይበራል"</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"በርቷል። <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"በጭራሽ በራስ-ሰር አይጠፋም"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"<xliff:g id="ID_1">%1$s</xliff:g> ላይ በራስ-ሰር ይጠፋል።"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"ጸሐት ስትወጣ በራስ-ሰር ይጠፋል"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"አንቀላፋ"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"ማያ ገጽ የሚጠፋው"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"ከ <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> የእንቅስቃሴ አለመኖር በኋላ"</string>
@@ -988,7 +1000,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android ሥሪት"</string>
     <string name="security_patch" msgid="8438384045870296634">"የAndroid ደህነንት መጠገኛ ደረጃ"</string>
-    <string name="model_number" msgid="3765737700545384794">"የሞዴል ቁጥር"</string>
+    <string name="model_info" msgid="1952009518045740889">"ሞዴል"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"የመሣሪያ መታወቂያ"</string>
     <string name="baseband_version" msgid="1848990160763524801">"የቤዝባንድ ሥሪት"</string>
     <string name="kernel_version" msgid="9192574954196167602">"የከርነል ሥሪት"</string>
@@ -1119,8 +1131,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"ሌላ"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"ሥርዓት"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> ይመርምሩ"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"ሌላ በመተግበሪያዎች፣ ከበይነመረቡ ወይም ብሉቱዝ የወረዱ ፋይሎች፣ የAndroid ፋይሎች እና የመሳሰሉትን ያካትታል። \n\nመላውን የዚህ <xliff:g id="NAME">^1</xliff:g> ይዘቶችን ለማየት አስስን ነካ ያድርጉ።"</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"ሥርዓት በAndroid ሥርዓተ ክወና በውስጣዊ መንገድ ጥቅም ላይ የዋሉ ፋይሎችን ያካትታል። \n\nእነዚህ ፋይሎች በተናጠል ሊታዩ አይችሉም።"</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"ሌላ በመተግበሪያዎች የተቀመጡ ፋይሎች፣ ከበይነመረቡ ወይም ብሉቱዝ የወረዱ ፋይሎች፣ የAndroid ፋይሎች እና የመሳሰሉትን ያካትታል። \n\nየዚህን <xliff:g id="NAME">^1</xliff:g> ይዘቶች ለማየት አስስን መታ ያድርጉ።"</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"ስርዓት Android በተናጠል ሊያሳያቸው የማይችላቸው ፋይሎችን ያካትታል።"</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> ፎቶዎች፣ ሙዚቃ፣ ፊልሞች፣ ወይም ሌላ ውሂብ <xliff:g id="SIZE">^2</xliff:g> ማከማቻ የያዘ አስቀምጦ ይሆናል። \n\nዝርዝሮች ለመመልከት ወደ ይቀይሩ<xliff:g id="USER_1">^1</xliff:g>።"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"የእርስዎን <xliff:g id="NAME">^1</xliff:g> ያዘጋጁ"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"እንደ ተንቀሳቃሽ ማከማቻ ይጠቀሙ"</string>
@@ -3053,6 +3065,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"የአውታረ መረብ ገደቦች"</string>
     <string name="operator_warning" msgid="1862988028996859195">"የአገልግሎት አቅራቢ ውሂብ የሂሳብ አከፋፈል ከመሳስሪያ የሂሳብ አከፋፈል የተለየ ሊሆን ይችላል"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> ጥቅም ላይ ውሏል"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"የውሂብ ማስጠንቀቂያ አዘጋጅ"</string>
     <string name="data_warning" msgid="209133958008062117">"የውሂብ ማስጠንቀቂያ"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"የውሂብ ገደብ ያዘጋጁ"</string>
     <string name="data_limit" msgid="1885406964934590552">"የውሂብ ገደብ"</string>

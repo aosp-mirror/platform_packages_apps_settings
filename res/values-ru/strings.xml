@@ -342,7 +342,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Сканер отпечатков пальцев"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Сканер отпечатков пальцев"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Чтобы разблокировать телефон, подтвердить покупку или войти в приложение, приложите палец к сканеру отпечатков. Сохраните на устройстве отпечатки тех, кому вы доверяете, и они тоже смогут это делать.\n\nУчтите, что распознавание отпечатков защищает не так надежно, как графический ключ или PIN-код."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Чтобы подтвердить покупку или войти в приложение, приложите палец к сканеру. Сохраните на устройстве отпечатки пользователей, которым доверяете, и они тоже смогут это делать.\n\nПомните, что сканер нельзя использовать для разблокировки этого устройства. За подробной информацией обратитесь к системному администратору."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Чтобы разблокировать телефон, подтвердить покупку или войти в приложение, приложите палец к сканеру отпечатков. Сохраните на устройстве отпечатки тех, кому вы доверяете, и они тоже смогут это делать.\n\nУчтите, что распознавание отпечатков защищает не так надежно, как графический ключ или PIN-код."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Отмена"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Продолжить"</string>
@@ -692,6 +694,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Экономить заряд батареи, когда используется Wi-Fi"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Лимит расхода батареи (Wi‑Fi)"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Подключаться к моб. сети, если нет Интернета через Wi-Fi"</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Добавить сеть"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Сети Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Кнопка WPS"</string>
@@ -769,6 +775,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ПОДКЛЮЧИТЬСЯ"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Сеть не подключена к Интернету. Использовать ее?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Больше не спрашивать для этой сети"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"В этой сети Wi-Fi нет доступа к Интернету"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Вы можете переключаться на мобильную сеть при слабом сигнале Wi‑Fi. Может взиматься плата за передачу данных."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Переключиться на мобильную сеть"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Больше не показывать"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Подключить"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Не удалось подключиться к сети."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Удалить"</string>
@@ -934,14 +946,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"От заката до рассвета"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Время включения"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Время отключения"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Отключен/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Не включать автоматически"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Включать автоматически в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Включать автоматически на закате"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Включен/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Не отключать автоматически"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Отключать автоматически в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Отключать автоматически на рассвете"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Отключено (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Не включать автоматически"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Включать автоматически в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Включать автоматически на закате"</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Включено (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Не отключать автоматически"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Отключать автоматически в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Отключать автоматически на рассвете"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Спящий режим"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Отключение экрана"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
@@ -1008,7 +1020,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Версия Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Последнее обновление системы безопасности"</string>
-    <string name="model_number" msgid="3765737700545384794">"Модель"</string>
+    <string name="model_info" msgid="1952009518045740889">"Модель"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Идентификатор оборудования"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Прошивка модуля связи"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Версия ядра"</string>
@@ -1139,8 +1151,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Другое"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Система"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Документы с общим доступом, сохраненные приложениями, контент, скачанный из Интернета или по Bluetooth, служебные файлы Android и т. д.\n\nЧтобы узнать, какие данные есть на устройстве (<xliff:g id="NAME">^1</xliff:g>), нажмите \"Открыть\"."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Система включает файлы, используемые операционной системой Android.\n\nОни недоступны для просмотра."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"В разделе \"Другое\" находятся файлы с общим доступом, сохраненные приложениями, контент, скачанный из Интернета или по Bluetooth, файлы Android и т. д.\n\nЧтобы узнать, какие данные есть на этом устройстве (<xliff:g id="NAME">^1</xliff:g>), нажмите \"Обзор\"."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"В разделе \"Система\" находятся файлы, которые Android не может показать отдельно."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g>, возможно, хранит на запоминающем устройстве фотографии, музыку, приложения и другие данные общим объемом <xliff:g id="SIZE">^2</xliff:g>. \n\nЧтобы проверить это, войдите в аккаунт пользователя <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Настройте карту \"<xliff:g id="NAME">^1</xliff:g>\""</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Портативный носитель"</string>
@@ -3115,6 +3127,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Ограничения трафика"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Статистика оператора связи может отличаться от статистики устройства"</string>
     <string name="data_used_template" msgid="3245919669966296505">"Передано: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Настройка предупреждения"</string>
     <string name="data_warning" msgid="209133958008062117">"Предупреждения"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Установить лимит трафика"</string>
     <string name="data_limit" msgid="1885406964934590552">"Установить лимит трафика"</string>

@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbloqueig amb empremta"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Utilitzar l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Només cal que toquis el sensor d\'empremtes digitals per desbloquejar el telèfon, autoritzar compres o iniciar la sessió en aplicacions. Vés amb compte amb les empremtes digitals d\'altres persones que hi afegeixis, perquè totes podran dur a terme aquestes accions.\n\nNota: fer servir l\'empremta digital pot ser menys segur que utilitzar un patró o un PIN complets."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Només cal que toquis el sensor d\'empremtes digitals per autoritzar una compra o iniciar la sessió en una aplicació. Vés amb compte a l\'hora d\'afegir-hi empremtes digitals; tingues present que totes les que hi afegeixis podran dur a terme totes aquestes accions.\n\nNota: no pots fer servir l\'empremta digital per desbloquejar el dispositiu. Per obtenir més informació, contacta amb l\'administrador de l\'organització."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Només cal que toquis el sensor d\'empremtes digitals per desbloquejar el telèfon, autoritzar compres o iniciar la sessió en aplicacions. Vés amb compte amb les empremtes digitals d\'altres persones que hi afegeixis, perquè totes podran dur a terme aquestes accions.\n\nNota: fer servir l\'empremta digital pot ser menys segur que utilitzar un patró o un PIN complets."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancel·la"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continua"</string>
@@ -674,6 +676,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimitza l\'ús de la bateria amb Wi-Fi activada"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Límit bateria usada per Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Utilitza les dades mòbils si la Wi-Fi perd l\'accés a Internet"</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Afegeix una xarxa"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Xarxes Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Botó de WPS"</string>
@@ -751,6 +757,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"CONNECTA"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Aquesta xarxa no té accés a Internet. Vols mantenir-hi la connexió?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"No ho tornis a preguntar en aquesta xarxa"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"La Wi-Fi no està connectada a Internet"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Pots canviar a la xarxa mòbil si la connexió a la xarxa Wi-Fi no és prou bona. Es poden aplicar càrrecs per l\'ús de dades."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Canvia a la xarxa mòbil"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"No ho mostris mai més"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Connecta"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"No s\'ha pogut connectar a la xarxa"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Esborra"</string>
@@ -916,14 +928,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"De la posta de sol a l\'alba"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Hora d’inici"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Hora de finalització"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Desactivada / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"No l\'activis mai automàticament"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Activa automàticament a les <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Activa automàticament a la posta de sol"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Activada / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"No la desactivis mai automàticament"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Desactiva automàticament a les <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Desactiva automàticament a l\'alba"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Desactivat. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"No s\'activarà mai automàticament."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"S\'activarà automàticament a les <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"S\'activarà automàticament quan es pongui el sol."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Activat. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"No es desactivarà mai automàticament."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Es desactivarà automàticament a les <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Es desactivarà automàticament quan surti el sol."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Repòs"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"La pantalla s\'apaga"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivitat"</string>
@@ -988,7 +1000,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Versió d\'Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Nivell de pedaç de seguretat d\'Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Número de model"</string>
+    <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Id. de l\'equip"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Versió de banda base"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versió del kernel"</string>
@@ -1119,8 +1131,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Altres"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistema"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Explora <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"A l\'apartat Altres s\'inclouen fitxers compartits desats per les aplicacions, fitxers baixats d\'Internet o per Bluetooth i fitxers d\'Android, entre d\'altres \n\nPer veure tot el contingut de <xliff:g id="NAME">^1</xliff:g>, toca Explora."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"El sistema inclou fitxers que el sistema operatiu Android utilitza internament. \n\nAquests fitxers no es poden veure per separat."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"A la secció Altres s\'inclouen fitxers compartits que han desat les aplicacions, fitxers que s\'han baixat d\'Internet o mitjançant Bluetooth, i fitxers d\'Android, entre d\'altres. \n\nPer veure el contingut visible d\'aquest dispositiu <xliff:g id="NAME">^1</xliff:g>, toca Explora."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"El sistema inclou fitxers que Android no pot mostrar de manera individual."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"És possible que <xliff:g id="USER_0">^1</xliff:g> hagi desat fotos, música, pel·lícules, aplicacions o altres dades que ocupen <xliff:g id="SIZE">^2</xliff:g> d\'emmagatzematge. \n\nPer veure\'n detalls, canvia a <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Configurar <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Utilitza com a emmagatzematge portàtil"</string>
@@ -3053,6 +3065,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Restriccions de xarxa"</string>
     <string name="operator_warning" msgid="1862988028996859195">"El recompte de dades de l\'operador de telefonia mòbil pot ser diferent del calculat pel dispositiu"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> utilitzats"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Estableix l\'avís de dades"</string>
     <string name="data_warning" msgid="209133958008062117">"Advertiment sobre ús de dades"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Defineix un límit de dades"</string>
     <string name="data_limit" msgid="1885406964934590552">"Límit de dades"</string>

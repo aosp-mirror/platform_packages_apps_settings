@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"फिंगरप्रिंटने अनलॉक करा"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"आपले फिंगरप्रिंट वापरा"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"आपला फोन अनलॉक करण्यासाठी, खरेदी अधिकृत किंवा अॅप्समध्ये साइन इन करण्‍यासाठी फक्त फिंगरप्रिंट सेन्सरला स्पर्श करा. आपण ज्यांचे फिंगरप्रिंट जोडता त्याविषयी सावधगिरी बाळगा. जोडलेला एक प्रिंट देखील यापैकी कोणतीही गोष्ट करू शकतो. \n\n टीप: आपले फिंगरप्रिंट मजबूत नमुना किंवा पिन पेक्षा कमी सुरक्षित असू शकतात."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"खरेदी अधिकृत करण्यासाठी किंवा अ‍ॅप्समध्ये साइन इन करण्यासाठी फक्त फिंगरप्रिंट सेन्सरला स्पर्श करा. आपण ज्यांचे फिंगरप्रिंट जोडता त्याविषयी सावधगिरी बाळगा. एक जोडलेले मुद्रण देखील यापैकी काहीही करू शकते.\n\nटीप: हे डिव्हाइस अनलॉक करण्यासाठी आपण आपले फिंगरप्रिंट वापरू शकत नाही. अधिक माहितीसाठी, आपल्या संस्थेच्या प्रशासकाशी संपर्क साधा."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"आपला फोन अनलॉक करण्यासाठी, खरेदी अधिकृत करण्यासाठी किंवा अॅप्समध्ये साइन इन करण्‍यासाठी फक्त फिंगरप्रिंट सेन्सरला स्पर्श करा. आपण ज्यांचे फिंगरप्रिंट जोडता त्याविषयी सावधगिरी बाळगा. जोडलेला एक प्रिंट देखील यापैकी कोणतीही गोष्ट करू शकतो.\n\nटीप: आपले फिंगरप्रिंट मजबूत नमुना किंवा पिन पेक्षा कमी सुरक्षित असू शकते."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"रद्द करा"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"सुरु ठेवा"</string>
@@ -674,6 +676,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"वाय-फाय चालू असताना बॅटरी वापर कमी करा"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"वाय-फाय द्वारे वापरलेल्या बॅटरीवर मर्यादा घाला"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"वाय-फाय ने इंटरनेट कनेक्‍शन गमावल्यास सेल्युलर डेटावर स्विच करा."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"मोबाइल डेटा फॉलबॅक"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"वाय-फाय इंटरनेट प्रवेश गमावते तेव्हा मोबाइल डेटा वापरा. अतिरिक्त शुल्क लागू होऊ शकतात."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"नेटवर्क जोडा"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"वाय-फाय नेटवर्क"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS पुश बटण"</string>
@@ -751,6 +755,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"कनेक्ट करा"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"या नेटवर्कवर इंटरनेट प्रवेश नाही. कनेक्‍ट केलेले राहायचे?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"या नेटर्वकसाठी पुन्हा विचारू नका"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"वाय-फाय इंटरनेटशी कनेक्ट केलेले नाही"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"वाय-फाय कनेक्शन खराब असताना आपण मोबाइल नेटवर्कवर स्विच करू शकता. डेटा वापर लागू होऊ शकतो."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"मोबाइलवर स्विच करा"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"वाय‑फाय वर सुरु ठेवा"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"पुन्हा कधीही दर्शवू नका"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"कनेक्ट करा"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"नेटवर्कशी कनेक्‍ट करण्‍यात अयशस्वी"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"विसरा"</string>
@@ -916,14 +925,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"सूर्यास्त ते सूर्योदय"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"प्रारंभ वेळ"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"समाप्ती वेळ"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"बंद / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"कधीही स्वयंचलितपणे चालू करू नका"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"<xliff:g id="ID_1">%1$s</xliff:g> वाजता स्वयंचलितपणे चालू करा"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"सूर्यास्ताच्या वेळी स्वयंचलितपणे चालू करा"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"चालू / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"कधीही स्वयंचलितपणे बंद करू नका"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"<xliff:g id="ID_1">%1$s</xliff:g> वाजता स्वयंचलितपणे बंद करा"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"सूर्योदयाच्या वेळी स्वयंचलितपणे बंद करा"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"बंद. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"कधीही स्वयंचलितपणे चालू होणार नाही."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g> वाजता स्वयंचलितपणे चालू होईल."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"सूर्यास्ताच्या वेळी स्वयंचलितपणे चालू होईल."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"चालू. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"कधीही स्वयंचलितपणे बंद होणार नाही."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"<xliff:g id="ID_1">%1$s</xliff:g> वाजता स्वयंचलितपणे बंद होईल."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"सूर्योदयाच्या वेळी स्वयंचलितपणे बंद होईल."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"निष्क्रिय"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"स्क्रीन बंद होते"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"निष्क्रियतेच्या <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> नंतर"</string>
@@ -988,7 +997,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android आवृत्ती"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android सुरक्षितता पॅच दर्जा"</string>
-    <string name="model_number" msgid="3765737700545384794">"मॉडेल नंबर"</string>
+    <string name="model_info" msgid="1952009518045740889">"मॉडेल"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"उपकरण ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"बेसबँड आवृत्ती"</string>
     <string name="kernel_version" msgid="9192574954196167602">"कर्नेल आवृत्ती"</string>
@@ -1119,8 +1128,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"इतर"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"सिस्टीम"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> एक्सप्लोर करा"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"अन्यमध्ये अॅप्सनी जतन केलेल्या सामायिक फायली, इंटरनेट किंवा ब्लूटुथ वरून डाउनलोड केलेल्या फायली, Android फायली आणि इत्यादीचा समावेश होतो. \n\n या <xliff:g id="NAME">^1</xliff:g> मधील संपूर्ण सामग्री पाहण्यासाठी एक्सप्लोर करा टॅप करा."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"सिस्टीममध्ये Android ऑपरेटिंग सिस्टीमने अंतर्गतरित्या वापरलेल्या फायली समाविष्‍ट असतात. \n\nया फायली वैयक्तिकरित्या पाहिल्या जाऊ शकत नाहीत."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"अन्यमध्ये अ‍ॅप्सद्वारे जतन केलेल्या शेअर केलेल्या फायली, इंटरनेट किंवा Bluetooth वरून डाउनलोड केलेल्या फायली, Android फायली आणि इत्यादीचा समावेश होतो. \n\nया <xliff:g id="NAME">^1</xliff:g> ची दृश्यमान सामग्री पाहण्यासाठी, एक्सप्लोर करा टॅप करा."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"सिस्टममध्ये अशा फायलींचा समावेश आहेत ज्या Android वैयक्तिकरित्या प्रदर्शित करू शकत नाही."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="SIZE">^2</xliff:g> संचयन घेत असलेले फोटो, संगीत, चित्रपट, अ‍ॅप्स किंवा अन्य डेटा <xliff:g id="USER_0">^1</xliff:g> नी जतन केला असू शकतो. \n\nतपशील पाहण्‍यासाठी, <xliff:g id="USER_1">^1</xliff:g> वर स्विच करा."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"आपले <xliff:g id="NAME">^1</xliff:g> सेट करा"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"पोर्टेबल संचयन म्हणून वापरा"</string>
@@ -3053,6 +3062,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"नेटवर्क प्रतिबंध"</string>
     <string name="operator_warning" msgid="1862988028996859195">"वाहक डेटा लेखा हा डिव्हाइसच्या लेखापेक्षा वेगळा असू शकतो"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> वापरला"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"डेटा चेतावणी सेट करा"</string>
     <string name="data_warning" msgid="209133958008062117">"डेटा चेतावणी"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"डेटा मर्यादा सेट करा"</string>
     <string name="data_limit" msgid="1885406964934590552">"डेटा मर्यादा"</string>

@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Parmak iziyle kilit açma"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Parmak izinizi kullanma"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Telefonunuzun kilidini açmak, satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için parmak izi sensörüne dokunmanız yeterli. Kimin parmak izini eklediğinize dikkat etmeniz gerekir. Eklenen tek bir parmak iziyle bile bu işlemlerin tümü yapılabilir.\n\nNot: Parmak iziniz, güçlü bir desenden veya PIN\'den daha az güvenli olabilir."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Satın alma işlemlerini yetkilendirmek veya uygulamalarda oturum açmak için parmak izi sensörüne dokunmanız yeterli. Kimlerin parmak izini eklediğinize dikkat edin. Eklenen tek parmak izi bile bunların tümünü yapabilir.\n\nNot: Bu cihazın kilidini açmak için parmak izinizi kullanamazsınız. Daha fazla bilgi edinmek için kuruluşunuzun yöneticisiyle iletişim kurun."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Telefonunuzun kilidini açmak, satın alma işlemlerini onaylamak veya uygulamalarda oturum açmak için parmak izi sensörüne dokunmanız yeterli. Parmak izlerini ekleyeceğiniz kişiler konusunda dikkatli olun. Eklenen tek bir parmak iziyle bile bu işlemlerin tümü yapılabilir.\n\nNot: Parmak iziniz, güçlü bir desenden veya PIN\'den daha az güvenli olabilir."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"İptal"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Devam"</string>
@@ -674,6 +676,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Kablosuz açıkken pil kullanımını en aza indir"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Kablosuz\'un kullandığı pili sınırlandırın"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Kablosuz bağlantının İnternet erişimi kesilirse hücresel veriye geç."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Ağ ekle"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Kablosuz ağlar"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS Düğmesi"</string>
@@ -751,6 +757,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"BAĞLAN"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Bu ağda İnternet erişimi yok. Bağlı kalınsın mı?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Bu ağ için bir daha sorma"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Kablosuz ağ, İnternet\'e bağlı değil"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Kablosuz ağın İnternet bağlantısı sorunlu olduğunda hücresel ağa geçiş yapabilirsiniz. Veri kullanımı söz konusu olabilir."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Hücresel ağa geçin"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Bir daha gösterme"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Bağlan"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Ağa bağlanılamadı"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Unut"</string>
@@ -916,14 +928,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Güneşin batışından doğuşuna"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Başlangıç zamanı"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Bitiş zamanı"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Kapalı / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Hiçbir zaman otomatik olarak açma"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Şu saatte otomatik olarak aç: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Güneş battığında otomatik olarak aç"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Açık / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Hiçbir zaman otomatik olarak kapatma"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Şu saatte otomatik olarak kapat: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Güneş doğduğunda otomatik olarak kapat"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Kapalı. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Hiçbir zaman otomatik olarak açılmayacak."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Şu saatte otomatik olarak açılacak: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Güneş battığında otomatik olarak açılacak."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Açık. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Hiçbir zaman otomatik olarak kapatılmayacak."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Şu saatte otomatik olarak kapatılacak: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Güneş doğduğunda otomatik olarak kapatılacak."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Uyku"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekran kapanır"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> işlem yapılmadığında"</string>
@@ -988,7 +1000,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android sürümü"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android güvenlik yaması düzeyi"</string>
-    <string name="model_number" msgid="3765737700545384794">"Model numarası"</string>
+    <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Cihaz Kimliği"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Ana bant sürümü"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Çekirdek sürümü"</string>
@@ -1119,8 +1131,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Diğer"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistem"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> birimini keşfet"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Diğer seçeneği, uygulamalar tarafından kaydedilmiş paylaşılan dosyaları, İnternet\'ten veya Bluetooth\'tan indirilen dosyaları, Android dosyalarını vb. içerir. \n\nBu <xliff:g id="NAME">^1</xliff:g> içeriğinin tamamını görmek için Keşfet\'e hafifçe dokunun."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Sistem, Android işletim sistemi tarafından dahili olarak kullanılan dosyaları içerir. \n\nBu dosyalar ayrı ayrı görüntülenemez."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Diğerleri arasında, uygulamalar tarafından kaydedilmiş paylaşılan dosyalar, İnternet\'ten veya Bluetooth üzerinden indirilen dosyalar, Android dosyaları vb. bulunur.\n\nBu <xliff:g id="NAME">^1</xliff:g> depolama cihazındaki görünebilir içeriği görmek için Keşfet\'e dokunun."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Sistem, Android\'in ayrı olarak görüntüleyemeyeceği dosyalar içeriyor."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g>, en fazla <xliff:g id="SIZE">^2</xliff:g> depolama alanı kaplayan kaydedilmiş fotoğraflar, müzik, film, uygulama veya diğer verileri içerebilir. \n\nAyrıntıları görmek için <xliff:g id="USER_1">^1</xliff:g> kullanıcısına geçiş yapın."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"<xliff:g id="NAME">^1</xliff:g> cihazınızı kurun"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Taşınabilir bir depolama birimi kullanın"</string>
@@ -3053,6 +3065,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Ağ kısıtlamaları"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Operatörünüzün veri kullanımı hesaplaması, cihazdaki hesaplamadan farklı olabilir"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> kullanıldı"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Veri uyarısı oluşturun"</string>
     <string name="data_warning" msgid="209133958008062117">"Veri uyarısı"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Veri sınırı ayarla"</string>
     <string name="data_limit" msgid="1885406964934590552">"Veri sınırı"</string>

@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"फिंगरप्रिन्टमार्फत अनलक"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"आफ्नो फिंगरप्रिन्टको प्रयोग गर्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"आफ्नो फोन अनलक गर्न, खरिदहरूका लागि अनुमति दिन वा अनुप्रयोगहरूमा साइन इन गर्न फिंगरप्रिन्ट सेन्सरलाई केवल छुनुहोस्। तपाईँ कसका फिंगरप्रिन्टहरू थप्दै हुनुहुन्छ भन्ने कुरामा सावधान रहनुहोस्। थपिएको एउटै फिंगरप्रिन्टले यी मध्ये कुनै कुरा गर्न सक्छ।\n\nतपाईँको फिंगरप्रिन्ट कुनै बलियो ढाँचा वा PIN भन्दा कम सुरक्षित हुन सक्छ।"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"खरिदहरूका लागि अनुमति दिन वा अनुप्रयोगहरूमा साइन इन गर्न फिंगरप्रिन्ट सेन्सरलाई केवल छुनुहोस्। तपाईँ कसका फिंगरप्रिन्टहरू थप्दै हुनुहुन्छ भन्ने कुरामा सावधान रहनुहोस्। थपिएको एउटै फिंगरप्रिन्टले यी मध्ये कुनै कुरा गर्न सक्छ।\n\nटिपोट: तपाईँ यो यन्त्र अनलक गर्न आफ्नो फिंगरप्रिन्टको प्रयोग गर्न सक्नुहुन्न। थप जानकारीका लागि आफ्नो संगठनको प्रशासकलाई सम्पर्क गर्नुहोस्।"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"आफ्नो फोन अनलक गर्न, खरिदहरूका लागि अनुमति दिन वा अनुप्रयोगहरूमा साइन इन गर्न फिंगरप्रिन्ट सेन्सरलाई केवल छुनुहोस्। तपाईँ कसका फिंगरप्रिन्टहरू थप्दै हुनुहुन्छ भन्ने कुरामा सावधान रहनुहोस्। थपिएको एउटै फिंगरप्रिन्टले यी मध्ये कुनै कुरा गर्न सक्छ।\n\nटिपोट: तपाईँको फिंगरप्रिन्ट कुनै बलियो ढाँचा वा PIN भन्दा कम सुरक्षित हुन सक्छ।"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"रद्द गर्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"जारी राख्नुहोस्"</string>
@@ -674,6 +676,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi-Fi चालेको बेला ब्याट्रिको प्रयोग कम गर्नुहोस्"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"वाइफाइले सीमित ब्याट्री प्रयोग"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi-Fi इन्टरनेट अनुपलब्ध भए सेलुलर डेटामा स्विच गर्नुहोस्।"</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"सेलुलर डेटामा फर्किने"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Wi‑Fi ले इन्टरनेट माथिको पहुँच गुमाउँदा सेलुलर डेटाको प्रयोग गर्नुहोस्। थप शुल्कहरू लागू हुन सक्छन्।"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"नेटवर्क जोड्नुहोस्"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi नेटवर्कहरू"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS थिच्ने बटन"</string>
@@ -751,6 +755,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"CONNECT"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"यो नेटवर्क इन्टरनेटमा पहुँच छैन। सम्पर्क कायम राख्न चाहनुहुन्छ?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"यस नेटवर्कको लागि फेरि नसोध्नुहोस्"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi को इन्टरनेटमा जडान भएको छैन"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Wi‑Fi को जडानमा समस्या आउँदा तपाईं सेलुलर नेटवर्क प्रयोग गर्न सक्नुहुन्छ। डेटा प्रयोग गर्दा शुल्कहरू लाग्न सक्छन्।"</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"सेलुलर नेटवर्क प्रयोग गर्नुहोस्"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Wi‑Fi मा कायम रहनुहोस्"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"फेरि कहिल्यै नदेखाउनुहोस्"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"जडान गर्नुहोस्"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"सञ्जालमा जडान गर्न विफल"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"बिर्सनुहोस्"</string>
@@ -916,14 +925,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"सूर्यास्तदेखि सूर्योदयसम्म"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"सुरु समय"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"समय समाप्ति"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"निष्क्रिय / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"कहिल्यै स्वतः सक्रिय नपार्नुहोस्"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"<xliff:g id="ID_1">%1$s</xliff:g> मा स्वतः सक्रिय पार्नुहोस्"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"सूर्यास्तको बेला स्वतः सक्रिय पार्नुहोस्"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"सक्रिय / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"कहिल्यै स्वतः निष्क्रिय नपार्नुहोस्"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"<xliff:g id="ID_1">%1$s</xliff:g> मा स्वतः निष्क्रिय पार्नुहोस्"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"सूर्योदयको बेला स्वतः निष्क्रिय पार्नुहोस्"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"निष्क्रिय। <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"कहिल्यै पनि स्वतः सक्रिय हुनेछैन।"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g> मा स्वतः सक्रिय हुनेछ।"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"सूर्यास्तको बेला स्वतः सक्रिय हुनेछ।"</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"सक्रिय। <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"कहिल्यै पनि स्वतः निष्क्रिय हुने छैन।"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"<xliff:g id="ID_1">%1$s</xliff:g> मा स्वतः निष्क्रिय हुनेछ।"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"सूर्योदयको बेला स्वतः निष्क्रिय हुनेछ।"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"निष्क्रिय"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"स्क्रिन बन्द हुन्छ"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> निष्क्रियता पछि"</string>
@@ -988,7 +997,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"एन्ड्रोइड संस्करण"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android सुरक्षा प्याच चरण"</string>
-    <string name="model_number" msgid="3765737700545384794">"मोडल नम्बर"</string>
+    <string name="model_info" msgid="1952009518045740889">"मोडेल"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"उपकरण ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"बेसब्यान्ड संस्करण"</string>
     <string name="kernel_version" msgid="9192574954196167602">"कर्नेल संस्करण"</string>
@@ -1119,8 +1128,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"अन्य"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"प्रणाली"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> अन्वेषण गर्नुहोस्"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"अन्यमा साझेदारी गरिएका फाइलहरू, अनुप्रयोगहरूद्वारा साझेदारी गरिएका फाइलहरू, इन्टरनेट वा Bluetooth बाट डाउनलोड गरिएका फाइलहरू, Android फाइलहरू र धेरै समावेश छन्। \n\n यो सम्पूर्ण सामग्रीहरू हेर्न <xliff:g id="NAME">^1</xliff:g> अन्वेषणमा ट्याप गर्नुहोस्।"</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"प्रणालीमा Android अपरेटिङ सिस्टमद्वारा आन्तरिक रूपमा प्रयोग गरिएका फाइलहरू समावेश छन्।\n\nयी फाइलहरूलाई एक-एक गरेर हेर्न सकिँदैन।"</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"अन्यमा अनुप्रयोगहरूद्वारा सुरक्षित गरिएका साझा फाइल, इन्टरनेट वा ब्लुटुथबाट डाउनलोड गरिएका फाइल, Android का फाइलहरू र यस्तै थप कुराहरू पर्छन्। \n\nयो <xliff:g id="NAME">^1</xliff:g> का देख्न सकिने सामग्रीहरू हेर्न अन्वेषण गर्नुहोस् मा ट्याप गर्नुहोस्।"</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"प्रणालीमा Android ले एक-एक गरी प्रदर्शन गर्न नसक्ने फाइलहरू पर्छन्।"</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> ले तस्बिर, सँगीत, चलचित्र, अनुप्रयोग, वा अन्य डेटा सुरक्षित गरेको हुनसक्छ जसले <xliff:g id="SIZE">^2</xliff:g> को भण्डारण ओगटिरहेको छ।\n\nविवरणहरू हेर्न <xliff:g id="USER_1">^1</xliff:g>मा स्विच गर्नुहोस्।"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"तपाईँको <xliff:g id="NAME">^1</xliff:g> सेट गर्नुहोस्"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"पोर्टेबल भण्डारणको रूपमा प्रयोग गर्नुहोस्"</string>
@@ -3053,6 +3062,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"नेटवर्कका सीमाहरू"</string>
     <string name="operator_warning" msgid="1862988028996859195">"वाहकको डेटाको हिसाब-किताब राख्ने कार्य तपाईँको यन्त्रको हिसाब-किताब राख्ने कार्य भन्दा फरक हुन सक्छ"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> प्रयोग गरियो"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"डेटा बारे चेतावनी सेट गर्नुहोस्"</string>
     <string name="data_warning" msgid="209133958008062117">"डेटा चेतावनी"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"डेटाको सीमा सेट गर्नुहोस्"</string>
     <string name="data_limit" msgid="1885406964934590552">"डेटाको सीमा"</string>

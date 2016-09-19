@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Ontsluit met vingerafdruk"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Gebruik jou vingerafdruk"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Raak eenvoudig die vingerafdruksensor om jou foon te ontsluit, aankope te magtig en by programme aan te meld. Wees versigtig wie se vingerafdrukke jy byvoeg. Selfs net een vingerafdruk wat bygevoeg is, kan enige van hierdie dinge doen.\n\nLet wel: Jou vingerafdruk sal dalk minder veilig as \'n sterk patroon of PIN wees."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Raak bloot die vingerafdruksensor om aankope te magtig of by programme aan te meld. Wees versigtig wie se vingerafdrukke jy byvoeg. Selfs een bygevoegde vingerafdruk kan enige van hierdie goed doen.\n\nLet wel: Jy kan nie jou vingerafdruk gebruik om hierdie toestel te ontsluit nie. Kontak jou organisasie se administateur vir meer inligting."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Raak eenvoudig die vingerafdruksensor om jou foon te ontsluit, aankope te magtig of by programme aan te meld. Wees versigtig wie se vingerafdrukke jy byvoeg. Selfs net een vingerafdruk wat bygevoeg is, kan enige van hierdie dinge doen.\n\nLet wel: Jou vingerafdruk sal dalk minder veilig as \'n sterk patroon of PIN wees."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Kanselleer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Gaan voort"</string>
@@ -674,6 +676,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimaliseer batterygebruik wanneer Wi-Fi aan is"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Beperk Wi-Fi-batterygebruik"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Skakel na sellulêre data oor as Wi‑Fi internettoegang verloor."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Terugvalopsie van sellulêre data"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Gebruik sellulêre data wanneer Wi‑Fi internettoegang verloor. Bykomende heffings kan geld."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Voeg netwerk by"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi-netwerke"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS-drukknoppie"</string>
@@ -751,6 +755,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"KOPPEL"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Hierdie netwerk het nie internettoegang nie. Bly gekoppel?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Moenie weer vir hierdie netwerk vra nie"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi is nie aan die internet gekoppel nie"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Jy kan na die selfoonnetwerk oorskakel wanneer Wi-Fi \'n swak verbinding het. Datagebruikkoste kan geld."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Skakel oor na sellulêr"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Bly op Wi‑Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Moet nooit weer wys nie"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Koppel"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Netwerkverbinding het misluk"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Vergeet"</string>
@@ -916,14 +925,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Sonsondergang tot sonsopkoms"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Begintyd"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Eindtyd"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Af / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Moet nooit outomaties aanskakel nie"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Skakel outomaties aan om <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Skakel outomaties aan met sonsondergang"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Aan / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Moet nooit outomaties afskakel nie"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Skakel outomaties af om <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Skakel outomaties af met sonsopkoms"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Af. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Sal nooit outomaties aanskakel nie."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Sal outomaties aanskakel om <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Sal outomaties aanskakel met sonsondergang."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Aan. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Sal nooit outomaties afskakel nie."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Sal outomaties afskakel om <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Sal outomaties afskakel met sonsopkoms."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Slaap"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Skerm skakel af"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Na <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> se onaktiwiteit"</string>
@@ -988,7 +997,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android-weergawe"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android-sekuriteitregstelling-vlak"</string>
-    <string name="model_number" msgid="3765737700545384794">"Modelnommer"</string>
+    <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Toerusting-ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Basisbandweergawe"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernweergawe"</string>
@@ -1119,8 +1128,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Ander"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Stelsel"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Verken <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Ander sluit in gedeelde lêers wat deur programme gestoor is, lêers wat van die internet of Bluetooth af afgelaai is, Android-lêers en so meer. \n\nTik op Verken om al die inhoud van hierdie <xliff:g id="NAME">^1</xliff:g> te sien."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Stelsel sluit lêers in wat die Android-bedryfstelsel intern gebruik. \n\nHierdie lêers kan nie individueel bekyk word nie."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Ander sluit in gedeelde lêers wat deur programme gestoor is, lêers wat van die internet of Bluetooth afgelaai is, Android-lêers en so aan. \n\nTik op Verken om die sigbare inhoud van hierdie <xliff:g id="NAME">^1</xliff:g> te sien."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Stelsel sluit lêers in wat Android nie individueel kan vertoon nie."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> het dalk foto\'s, musiek, flieks, programme of ander data gestoor wat <xliff:g id="SIZE">^2</xliff:g> van die berging opneem. \n\nSkakel oor na <xliff:g id="USER_1">^1</xliff:g> om besonderhede te sien."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Stel jou <xliff:g id="NAME">^1</xliff:g> op"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Gebruik as draagbare berging"</string>
@@ -3053,6 +3062,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Netwerkbeperkinge"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Diensverskaffer se datarekening kan van toestel se rekening verskil"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> gebruik"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Stel datawaarskuwing"</string>
     <string name="data_warning" msgid="209133958008062117">"Datawaarskuwing"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Stel datalimiet"</string>
     <string name="data_limit" msgid="1885406964934590552">"Datalimiet"</string>

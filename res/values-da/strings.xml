@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Lås op med fingeraftryk"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Brug dit fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Du sætter blot fingeren på fingeraftrykslæseren for at låse telefonen op, godkende køb eller logge ind i apps. Vær forsigtig med, hvem du tilføjer. Selv ét fingeraftryk, der føjes til din telefon, kan gøre disse ting.\n\nBemærk! Dit fingeraftryk kan være mindre sikkert end et stærkt mønster eller en stærk pinkode."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Du trykker blot på fingeraftrykslæseren for at godkende køb eller logge ind på apps. Vær forsigtig med, hvis fingeraftryk du tilføjer. Hvis du føjer en persons fingeraftryk til din telefon, kan denne person med blot ét fingeraftryk også gøre disse ting.\n\nBemærk! Du kan ikke bruge dit fingeraftryk til at låse enheden op. Kontakt din organisations administrator for at få flere oplysninger."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Du sætter blot fingeren på fingeraftrykslæseren for at låse telefonen op, godkende køb eller logge ind i apps. Vær forsigtig med, hvem du tilføjer. Hvis du føjer en persons fingeraftryk til din telefon, kan denne person med blot ét fingeraftryk også gøre disse ting.\n\nBemærk! Adgang via fingeraftryk kan være mindre sikkert end adgang via et stærkt mønster eller en stærk pinkode."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Annuller"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Fortsæt"</string>
@@ -674,6 +676,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimer batteribrug, når Wi-Fi er aktiveret"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Begræns batteri brugt af Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Skift til mobildata, hvis Wi-Fi mister adgangen til internettet."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Tilføj netværk"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi-netværk"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS-trykknap"</string>
@@ -751,6 +757,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"OPRET FORBINDELSE"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Dette netværk har ingen internetadgang. Vil du bruge netværket alligevel?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Spørg ikke igen for dette netværk"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi-netværket har ingen internetforbindelse"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Du kan skifte til mobilnetværket, når Wi-Fi-forbindelsen er dårlig. Der opkræves muligvis betaling for dataforbrug."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Skift til mobilnetværket"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Vis aldrig igen"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Forbind"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Der kunne ikke oprettes forbindelse til netværket"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Glem"</string>
@@ -916,14 +928,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Fra solnedgang til solopgang"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Starttidspunkt"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Sluttidspunkt"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Fra/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Aktivér aldrig automatisk"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Aktivér automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Aktivér automatisk ved solnedgang"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Til/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Deaktiver aldrig automatisk"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Deaktiver automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Deaktiver automatisk ved solopgang"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Fra. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Aktiveres aldrig automatisk."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Aktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Aktiveres automatisk ved solnedgang."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Til. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Deaktiveres aldrig automatisk."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Deaktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Deaktiveres automatisk ved solopgang."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Dvale"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Skærmen slukker"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> med inaktivitet"</string>
@@ -988,7 +1000,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android-version"</string>
     <string name="security_patch" msgid="8438384045870296634">"Niveau for sikkerhedsrettelse på Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Modelnavn"</string>
+    <string name="model_info" msgid="1952009518045740889">"Model"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Udstyrs-id"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Basebandversion"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernesystem"</string>
@@ -1119,8 +1131,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Andet"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"System"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Åbn <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Andre filer omfatter delte filer, som er gemt af apps, filer, som er downloadet fra internettet eller via Bluetooth, Android-filer osv. \n\nTryk på Åbn for at se alt indhold på dette <xliff:g id="NAME">^1</xliff:g>."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"System indeholder filer, der anvendes internt af Androids operativsystem. \n\nDu kan ikke se disse filer hver for sig."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Andre omfatter bl.a. delte filer, der er gemt af apps, filer, som er downloadet fra internettet eller via Bluetooth, og Android-filer. \n\nDu kan se synligt indhold på dette <xliff:g id="NAME">^1</xliff:g> ved at trykke på Udforsk."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Systemet omfatter filer, som Android ikke kan vise hver for sig."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> kan have gemt billeder, musik, film, apps og andre data, som bruger <xliff:g id="SIZE">^2</xliff:g> af lagerpladsen. \n\nFå flere oplysninger ved at skifte til <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Konfigurer dit <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Brug som ekstern lagerplads"</string>
@@ -3053,6 +3065,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Netværksbegrænsninger"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Mobilselskabets dataopgørelse kan variere fra enhedens opgørelse."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> anvendt"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Angiv en dataadvarsel"</string>
     <string name="data_warning" msgid="209133958008062117">"Dataadvarsel"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Angiv datagrænse"</string>
     <string name="data_limit" msgid="1885406964934590552">"Datagrænse"</string>

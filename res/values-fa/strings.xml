@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"بازکردن قفل با اثر انگشت"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"استفاده از اثرانگشت"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"برای باز کردن قفل تلفن، تأیید خریدها یا ورود به سیستم برنامه‌ها، کافی است حسگر اثر انگشت را لمس کنید. مراقب باشید اثر انگشت چه کسی را اضافه می‌کنید. حتی یک اثر انگشت اضافه‌شده می‌تواند همه این کارها را انجام دهد.\n\nتوجه: ممکن است اثر انگشت از الگو یا پین قدرتمند امنیت کمتری داشته باشد."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"برای تأیید خریدها یا ثبت ورود در برنامه‌ها، کافی است حسگر اثرانگشت را لمس کنید. مراقب باشید اثرانگشت چه کسی را اضافه می‌کنید. حتی یک اثرانگشت اضافه‌شده می‌تواند همه این کارها را انجام دهد.\n\nتوجه: نمی‌توانید از اثرانگشتتان برای باز کردن قفل این دستگاه استفاده کنید. برای اطلاعات بیشتر، با سرپرست سازمانتان تماس بگیرید."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"برای باز کردن قفل تلفن، تأیید خریدها یا ورود به سیستم برنامه‌ها، کافی است حسگر اثر انگشت را لمس کنید. مراقب باشید اثر انگشت چه کسی را اضافه می‌کنید. حتی یک اثر انگشت اضافه‌شده می‌تواند همه این کارها را انجام دهد.\n\nتوجه: ممکن است امنیت اثر انگشت از الگو یا کد پین قوی کمتر باشد."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"لغو"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"ادامه"</string>
@@ -674,6 +676,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"‏به حداقل رساندن مصرف باتری زمانی که Wi-Fi روشن است"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"‏محدود کردن مصرف باتری توسط Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"‏اگر دسترسی به اینترنت Wi‑Fi قطع شد، از داده تلفن همراه استفاده شود."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"افزودن شبکه"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"‏شبکه‌های Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"‏دکمه ارسال WPS"</string>
@@ -751,6 +757,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"اتصال"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"این شبکه به اینترنت دسترسی ندارد. به شبکه متصل بماند؟"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"دیگر درباره این شبکه سؤال نشود"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"‏Wi-Fi به اینترنت متصل نیست"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"‏وقتی اتصال Wi-Fi خوب نیست می‌توانید به شبکه تلفن همراه جابه‌جا شوید. هزینه استفاده از داده ممکن است اعمال شود."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"جابه‌جایی به شبکه تلفن همراه"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"هرگز دوباره نشان داده نشود"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"اتصال"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"اتصال به شبکه برقرار نشد"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"فراموش کردن"</string>
@@ -916,14 +928,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"غروب تا طلوع"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"زمان شروع"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"زمان پایان"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"خاموش / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"هرگز به‌طور خودکار روشن نشود"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"در <xliff:g id="ID_1">%1$s</xliff:g> به‌طور خودکار روشن شود"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"در غروب به‌طور خودکار روشن شود"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"روشن / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"هرگز به‌طور خودکار خاموش نشود"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"در <xliff:g id="ID_1">%1$s</xliff:g> به‌طور خودکار خاموش شود"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"در غروب به‌طور خودکار خاموش شود"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"خاموش. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"هرگز به‌طور خودکار روشن نمی‌شود."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g> به‌طور خودکار روشن می‌شود."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"در غروب به‌طور خودکار روشن می‌شود."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"روشن. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"هرگز به‌طور خودکار خاموش نمی‌شود."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"<xliff:g id="ID_1">%1$s</xliff:g> به‌طور خودکار خاموش می‌شود."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"به‌طور خودکار در طلوع خاموش می‌شود."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"حالت خواب"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"صفحه نمایش خاموش می‌شود"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> پس از غیرفعال بودن"</string>
@@ -988,7 +1000,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"‏نسخهٔ Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"‏سطح وصله امنیتی Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"شمارهٔ مدل"</string>
+    <string name="model_info" msgid="1952009518045740889">"مدل"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"شناسه دستگاه"</string>
     <string name="baseband_version" msgid="1848990160763524801">"نسخهٔ باند پایه"</string>
     <string name="kernel_version" msgid="9192574954196167602">"نسخهٔ اصلی"</string>
@@ -1119,8 +1131,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"موارد دیگر"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"سیستم"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"کاوش <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"‏موارد دیگر شامل فایل‌های به‌اشتراک گذاشته شده‌ای که برنامه‌ها ذخیره کرده‌اند، فایل‌های دانلودشده از اینترنت یا بلوتوث، فایل‌های Android وغیره است. \n\nبرای دیدن کل محتوای این <xliff:g id="NAME">^1</xliff:g>، روی کاوش ضربه بزنید."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"‏سیستم شامل فایل‌هایی است که مورد استفاده داخلی سیستم عامل Android قرار می‌گیرد. \n\nاین فایل را نمی‌توان به‌صورت جداگانه مشاهده کرد."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"‏موارد دیگر شامل فایل‌های اشتراک‌گذاری‌شده که برنامه‌ها ذخیره کرده‌اند، فایل‌های بارگیری‌شده از اینترنت یا بلوتوث، فایل‌های Android و غیره است. \n\nبرای دیدن محتوای قابل‌مشاهده این <xliff:g id="NAME">^1</xliff:g>، روی «کاوش» ضربه بزنید."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"‏سیستم حاوی فایل‌هایی است که Android نمی‌تواند به‌صورت جداگانه آن‌ها را نمایش دهد."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> ممکن است عکس، موسیقی، فیلم، برنامه یا داده‌های دیگری داشته باشد که <xliff:g id="SIZE">^2</xliff:g> از حافظه را اشغال کرده است. \n\nبرای مشاهده جزئیات، به <xliff:g id="USER_1">^1</xliff:g> جابه‌جا شوید."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"<xliff:g id="NAME">^1</xliff:g> خود را راه‌اندازی کنید"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"استفاده به عنوان فضای ذخیره‌سازی قابل حمل"</string>
@@ -1985,7 +1997,7 @@
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"گذرواژه حافظه اطلاعات کاربری را تایپ کنید."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"گذرواژه فعلی:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"همه محتوا حذف شود؟"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"گذرواژه باید حداقل 8 نویسه داشته باشد."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"گذرواژه باید حداقل ۸ نویسه داشته باشد."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"گذرواژه نادرست است."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"گذرواژه نادرست است. قبل از پاک کردن حافظه اطلاعات کاربری، یک بار دیگر می‌توانید امتحان کنید."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"گذرواژه نادرست است. قبل از پاک شدن حافظه اطلاعات کاربری، <xliff:g id="NUMBER">%1$d</xliff:g> بار دیگر می‌توانید امتحان کنید."</string>
@@ -3053,6 +3065,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"محدودیت‌های شبکه"</string>
     <string name="operator_warning" msgid="1862988028996859195">"روش شرکت مخابراتی برای اندازه‌گیری مصرف داده ممکن است با روش دستگاهتان متفاوت باشد."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> مصرف شده"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"تنظیم هشدار داده"</string>
     <string name="data_warning" msgid="209133958008062117">"هشدار داده"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"تنظیم محدودیت داده"</string>
     <string name="data_limit" msgid="1885406964934590552">"محدودیت داده"</string>

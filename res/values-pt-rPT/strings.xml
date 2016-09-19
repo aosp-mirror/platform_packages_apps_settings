@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbloq. c/ impressão digital"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Utilizar a impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Basta tocar no sensor de impressões digitais para desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações. Quaisquer impressões digitais adicionadas ao telemóvel podem executar estas ações, pelo que deve ter cuidado com quem adiciona.\n\nNota: a impressão digital pode ser menos segura do que um padrão ou um PIN fortes."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Basta tocar no sensor de impressões digitais para autorizar compras ou iniciar sessão em aplicações. Quaisquer impressões digitais adicionadas podem executar estas ações, pelo que deve ter cuidado com quem adiciona.\n\nNota: não é possível utilizar a sua impressão digital para desbloquear este dispositivo. Para mais informações, contacte o administrador da sua entidade."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Basta tocar no sensor de impressões digitais para desbloquear o telemóvel, autorizar compras ou iniciar sessão em aplicações. Quaisquer impressões digitais adicionadas ao telemóvel podem executar estas ações, pelo que deve ter cuidado com quem adiciona.\n\nNota: a impressão digital pode ser menos segura do que um padrão ou um PIN fortes."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continuar"</string>
@@ -674,6 +676,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimizar a utilização da bateria quando o Wi-Fi está ligado"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Limitar bat. utiliz. por Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Mudar para dados móveis se o Wi‑Fi perder o acesso à Internet."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Alternativa de dados móveis"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Utilizar os dados móveis quando o Wi‑Fi perder o acesso à Internet. Podem aplicar-se custos adicionais."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Adicionar rede"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Redes Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Botão WPS"</string>
@@ -751,6 +755,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"LIGAR"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Esta rede não tem acesso à Internet. Pretende manter a ligação?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Não perguntar novamente para esta rede"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"A rede Wi‑Fi não tem ligação à Internet"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Pode mudar para dados móveis sempre que a ligação Wi-Fi for fraca. Podem aplicar-se despesas de utilização de dados."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Mudar para dados móveis"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Permanecer em Wi-Fi"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Não mostrar novamente"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Ligar"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Não foi possível estabelecer ligação à rede"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Esquecer"</string>
@@ -916,14 +925,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Do pôr do sol ao nascer do sol"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Hora de início"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Hora de fim"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"Desativada/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"Nunca ativar automaticamente"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"Ativar automaticamente às <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"Ativar automaticamente ao pôr do sol"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"Ativada/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"Nunca desativar automaticamente"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"Desativar automaticamente às <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"Desativar automaticamente ao nascer do sol"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Desativada. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Nunca ativar automaticamente."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Ativar automaticamente às <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Ativar automaticamente ao pôr do sol."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"Ativada. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Nunca desativar automaticamente."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Desativar automaticamente às <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Desativar automaticamente ao nascer do sol."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Suspensão"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"O ecrã desliga-se"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Depois de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inatividade"</string>
@@ -988,7 +997,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Versão do Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Nível do patch de segurança do Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"Modelo"</string>
+    <string name="model_info" msgid="1952009518045740889">"Modelo"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID do Equipamento"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Versão de banda base"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versão do kernel"</string>
@@ -1119,8 +1128,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Outros"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistema"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Explorar <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"Os outros ficheiros incluem ficheiros partilhados que foram guardados por aplicações, ficheiros transferidos da Internet ou através do Bluetooth, ficheiros Android, etc. \n\nPara ver todos os conteúdos deste <xliff:g id="NAME">^1</xliff:g>, toque em Explorar."</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"O sistema inclui ficheiros utilizados internamente pelo sistema operativo Android. \n\nNão é possível visualizar estes ficheiros individualmente."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Os outros ficheiros incluem ficheiros guardados por aplicações, ficheiros transferidos da Internet ou por Bluetooth, ficheiros Android files, entre outros. \n\nPara ver os conteúdos visíveis deste <xliff:g id="NAME">^1</xliff:g>, toque em Explorar."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"O sistema inclui ficheiros que o Android não consegue apresentar individualmente."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> pode ter fotos, música, filmes, aplicações ou outros dados guardados que estejam a utilizar <xliff:g id="SIZE">^2</xliff:g> de armazenamento. \n\nPara ver detalhes, mude para <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Configurar o <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Utilizar como armazenamento portátil"</string>
@@ -3053,6 +3062,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Restrições de rede"</string>
     <string name="operator_warning" msgid="1862988028996859195">"A contagem de dados do operador pode ser diferente da contagem do dispositivo"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> utilizado(s)"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Definir aviso de dados"</string>
     <string name="data_warning" msgid="209133958008062117">"Aviso de dados"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Definir limite de dados"</string>
     <string name="data_limit" msgid="1885406964934590552">"Limite de dados"</string>

@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"ปลดล็อกด้วยลายนิ้วมือ"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"การใช้ลายนิ้วมือ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"เพียงแตะเซ็นเซอร์ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์ อนุมัติการซื้อ หรือลงชื่อเข้าใช้แอป โปรดใช้ความระมัดระวังในการเพิ่มลายนิ้วมือคนอื่น ลายนิ้วมือที่เพิ่มแม้เพียงลายเดียวก็สามารถทำสิ่งต่างๆ เหล่านี้ได้\n\nหมายเหตุ: ลายนิ้วมือของคุณอาจไม่ปลอดภัยเท่ารูปแบบหรือ PIN ที่เดายาก"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"เพียงแตะเซ็นเซอร์ลายนิ้วมือก็อนุมัติการซื้อหรือลงชื่อเข้าใช้แอปได้แล้ว โปรดตรวจสอบลายนิ้วมือที่เพิ่มให้ดี เพราะแค่เพิ่มลายนิ้วมือเพียงนิ้วเดียวก็ทำสิ่งเหล่านี้ได้ทั้งหมด\n\nหมายเหตุ: คุณไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์นี้ โปรดติดต่อผู้ดูแลระบบขององค์กรสำหรับข้อมูลเพิ่มเติม"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"เพียงแตะเซ็นเซอร์ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์ อนุมัติการซื้อ หรือลงชื่อเข้าใช้แอป โปรดดูให้ดีว่าคุณเพิ่มลายนิ้วมือของใคร ลายนิ้วมือที่เพิ่มแม้เพียงลายเดียวก็สามารถทำสิ่งต่างๆ เหล่านี้ได้\n\nหมายเหตุ: ลายนิ้วมือของคุณอาจไม่ปลอดภัยเท่ารูปแบบหรือ PIN ที่เดายาก"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"ยกเลิก"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"ต่อไป"</string>
@@ -674,6 +676,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"ลดการใช้แบตเตอรี่เมื่อ WiFi เปิดอยู่"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"จำกัดแบตเตอรี่ที่ใช้โดย Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"สลับไปใช้ข้อมูลมือถือหาก Wi-Fi ไม่สามารถเข้าถึงอินเทอร์เน็ตได้"</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"เพิ่มเครือข่าย"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"เครือข่าย WiFi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"ปุ่มกด WPS"</string>
@@ -751,6 +757,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"เชื่อมต่อ"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"เครือข่ายนี้ไม่มีการเข้าถึงอินเทอร์เน็ต ต้องการเชื่อมต่ออยู่ไหม"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"ไม่ต้องถามอีกสำหรับเครือข่ายนี้"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi ไม่ได้เชื่อมต่ออินเทอร์เน็ต"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"คุณสามารถสลับไปยังเครือข่ายมือถือเมื่อใดก็ตามที่ Wi-Fi มีการเชื่อมต่อแย่ อาจมีค่าบริการตามปริมาณการใช้อินเทอร์เน็ต"</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"สลับไปยังเครือข่ายมือถือ"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
+    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"ไม่ต้องแสดงอีก"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"เชื่อมต่อ"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"ไม่สามารถเชื่อมต่อกับเครือข่าย"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"ไม่จำ"</string>
@@ -916,14 +928,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"พระอาทิตย์ตกถึงพระอาทิตย์ขึ้น"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"เวลาเริ่มต้น"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"เวลาสิ้นสุด"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"ปิด / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"ไม่ต้องเปิดโดยอัตโนมัติ"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"เปิดโดยอัตโนมัติเมื่อเวลา <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"เปิดโดยอัตโนมัติเมื่อพระอาทิตย์ตก"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"เปิด / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"ไม่ปิดโดยอัตโนมัติ"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"ปิดโดยอัตโนมัติเมื่อเวลา <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"ปิดโดยอัตโนมัติเมื่อพระอาทิตย์ขึ้น"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"ปิด <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"จะไม่เปิดโดยอัตโนมัติ"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"จะเปิดโดยอัตโนมัติในเวลา <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"จะเปิดโดยอัตโนมัติเมื่อพระอาทิตย์ตก"</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"เปิด <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"จะไม่ปิดโดยอัตโนมัติ"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"จะปิดโดยอัตโนมัติในเวลา <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"จะปิดโดยอัตโนมัติเมื่อพระอาทิตย์ขึ้น"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"สลีป"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"หน้าจอปิด"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"หลังจากไม่ได้ทำงานเป็นเวลา <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -988,7 +1000,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"เวอร์ชันของ Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"ระดับแพตช์ความปลอดภัยของ Android"</string>
-    <string name="model_number" msgid="3765737700545384794">"หมายเลขรุ่น"</string>
+    <string name="model_info" msgid="1952009518045740889">"โมเดล"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"รหัสอุปกรณ์"</string>
     <string name="baseband_version" msgid="1848990160763524801">"เวอร์ชันเบสแบนด์"</string>
     <string name="kernel_version" msgid="9192574954196167602">"เวอร์ชันเคอร์เนล"</string>
@@ -1119,8 +1131,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"อื่นๆ"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"ระบบ"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"สำรวจ <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"ข้อมูลอื่นรวมถึงไฟล์ที่แชร์ซึ่งแอปบันทึกไว้, ไฟล์ที่ดาวน์โหลดจากอินเทอร์เน็ตหรือบลูทูธ, ไฟล์ Android และอื่นๆ \n\nหากต้องการดูเนื้อหาทั้งหมดของ <xliff:g id="NAME">^1</xliff:g> นี้ ให้แตะสำรวจ"</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"ระบบจะรวมไฟล์ที่ใช้ภายในโดยระบบปฏิบัติการ Android \n\nไม่สามารถดูไฟล์เหล่านี้ทีละไฟล์"</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"ไฟล์อื่นๆ ได้แก่ ไฟล์ที่แชร์ซึ่งแอปบันทึกไว้, ไฟล์ที่ดาวน์โหลดจากอินเทอร์เน็ตหรือบลูทูธ, ไฟล์ Android และอื่นๆ \n\nหากต้องการดูเนื้อหาที่มองเห็นได้ของ <xliff:g id="NAME">^1</xliff:g> นี้ ให้แตะ \"สำรวจ\""</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"ระบบจะรวมไฟล์ที่ Android แสดงแยกกันไม่ได้"</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> อาจบันทึกรูปภาพ เพลง ภาพยนตร์ แอป หรือข้อมูลอื่นๆ ที่ใช้พื้นที่เก็บข้อมูล <xliff:g id="SIZE">^2</xliff:g> \n\nหากต้องการดูรายละเอียด ให้สลับไปยัง <xliff:g id="USER_1">^1</xliff:g>"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"ตั้งค่า <xliff:g id="NAME">^1</xliff:g> ของคุณ"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"ใช้เป็นที่จัดเก็บข้อมูลแบบพกพา"</string>
@@ -3053,6 +3065,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"ข้อจำกัดของเครือข่าย"</string>
     <string name="operator_warning" msgid="1862988028996859195">"การบันทึกบัญชีข้อมูลของผู้ให้บริการอาจแตกต่างจากการบันทึกบัญชีของอุปกรณ์"</string>
     <string name="data_used_template" msgid="3245919669966296505">"ใช้ไป <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"ตั้งค่าเตือนการใช้อินเทอร์เน็ต"</string>
     <string name="data_warning" msgid="209133958008062117">"คำเตือนอินเทอร์เน็ต"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"ตั้งค่าขีดจำกัดอินเทอร์เน็ต"</string>
     <string name="data_limit" msgid="1885406964934590552">"ขีดจำกัดอินเทอร์เน็ต"</string>

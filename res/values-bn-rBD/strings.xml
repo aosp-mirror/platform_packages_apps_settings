@@ -336,7 +336,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"আঙ্গুলের ছাপ দিয়ে আনলক করুন"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"আঙ্গুলের ছাপ ব্যবহার করুন"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"আপনার ফোন আনলক করতে, কেনাকাটা অনুমোদন, বা অ্যাপ্লিকেশানগুলিতে প্রবেশ করুন করতে শুধু আঙ্গুলের ছাপ নেওয়ার সেন্সরে স্পর্শ করুন৷ আপনি কাদের আঙ্গুলের ছাপ যোগ করছেন সেই বিষয়ে সতর্ক থাকুন৷ এমনকি যাদের আঙ্গুলের ছাপ যোগ করা হবে তারা এই জিনিসগুলি করতে পারবে।\n\nদ্রষ্টব্য: আপনার আঙ্গুলের ছাপ একটি জটিল প্যাটার্ন বা PIN এর চাইতে কম নিরাপদ হতে পারে।"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"কেনাকাটার অনুমোদন দিতে বা অ্যাপ্সে সাইন ইন করতে শুধু আঙ্গুলের ছাপ নেওয়ার সেন্সরে স্পর্শ করুন৷ আপনি কাদের আঙ্গুলের ছাপ যোগ করছেন সেই বিষয়ে সতর্ক থাকুন৷ এমনকি যাদের আঙ্গুলের ছাপ যোগ করা হবে তারা এই জিনিসগুলি করতে পারবেন।\n\nদ্রষ্টব্য: এই ডিভাইসটিকে আনলক করতে আপনি আপনার আঙ্গুলের ছাপ ব্যবহার করতে পারবেন না৷ আরো তথ্যের জন্য আপনার প্রতিষ্ঠানের প্রশাসকের সাথে যোগাযোগ করুন৷"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"আপনার ফোন আনলক, কেনাকাটায় অনুমোদন, বা অ্যাপ্সে সাইন ইন করতে শুধু আঙ্গুলের ছাপ নেওয়ার সেন্সরে স্পর্শ করুন৷ আপনি কাদের আঙ্গুলের ছাপ যোগ করছেন সেই বিষয়ে সতর্ক থাকুন৷ এমনকি যাদের আঙ্গুলের ছাপ যোগ করা হবে তারা এই জিনিসগুলি করতে পারবেন।\n\nদ্রষ্টব্য: আপনার আঙ্গুলের ছাপ একটি জটিল প্যাটার্ন বা PIN এর চাইতে কম নিরাপদ হতে পারে।"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"বাতিল করুন"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"চালিয়ে যান"</string>
@@ -674,6 +676,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"ওয়াই-ফাই চালু থাকাকালীন ব্যাটারি ব্যবহার কমান"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"ওয়াই-ফাই দ্বারা ব্যাটারি ব্যবহার সীমিত করুন"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"ওয়াই-ফাই ইন্টারনেটের অ্যাক্সেস হারালে সেলুলার ডেটাতে পাল্টান।"</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"স্বয়ংক্রিয়ভাবে সেলুলার ডেটায় পাল্টানো"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Wi‑Fi ইন্টারনেটের অ্যাক্সেস হারালে সেলুলার ডেটা ব্যবহার করুন৷ অতিরিক্ত চার্জ লাগতে পারে৷"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"নেটওয়ার্ক যোগ করুন"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"ওয়াই-ফাই নেটওয়ার্কগুলি"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS পুশ বোতাম"</string>
@@ -751,6 +755,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"সংযুক্ত করুন"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"এই নেটওয়ার্কে কোন ইন্টারনেট অ্যাক্সেস নেই৷ এতে সংযুক্ত থাকতে চান?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"এই নেটওয়ার্কের জন্য আবার জিজ্ঞাসা করবেন না"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi ইন্টারনেটের সাথে সংযুক্ত নেই"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"যখনই Wi‑Fi সংযোগটি খারাপ বলে মনে হবে তখন আপনি মোবাইল নেটওয়ার্কে পাল্টাতে পারবেন৷ ডেটা ব্যবহারের খরচ লাগতে পারে।"</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"মোবাইল নেটওয়ার্কে পাল্টান"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Wi-Fi এ থাকুন"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"আর কখনও দেখাবেন না"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"সংযুক্ত করুন"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"নেটওয়ার্কের সাথে সংযোগ করতে ব্যর্থ হয়েছে"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"ভুলে যান"</string>
@@ -916,14 +925,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"সূর্যাস্ত থেকে সূর্যোদয়"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"শুরুর সময়"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"সমাপ্তি সময়"</string>
-    <string name="night_display_summary_off" msgid="1792750041697946539">"বন্ধ আছে / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="8865054549719499274">"কখনই স্বয়ংক্রিয়ভাবে চালু করবেন না"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="4962295097132112885">"<xliff:g id="ID_1">%1$s</xliff:g> এ স্বয়ংক্রিয়ভাবে চালু করুন"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="5520577516590422267">"সূর্যাস্তের পর স্বয়ংক্রিয়ভাবে চালু করুন"</string>
-    <string name="night_display_summary_on" msgid="1355713529996456744">"চালু আছে / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="44005841579902825">"কখনই স্বয়ংক্রিয়ভাবে বন্ধ করবেন না"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="4350556852471560173">"<xliff:g id="ID_1">%1$s</xliff:g> এ স্বয়ংক্রিয়ভাবে বন্ধ করুন"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="6122152828111119250">"সুর্যোদয়ের পর স্বয়ংক্রিয়ভাবে বন্ধ করুন"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"বন্ধ আছে৷ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"কখনই স্বয়ংক্রিয়ভাবে চালু হবে না৷"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"<xliff:g id="ID_1">%1$s</xliff:g>টায় স্বয়ংক্রিয়ভাবে চালু হবে৷"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"সূর্যাস্তকালে স্বয়ংক্রিয়ভাবে চালু হবে৷"</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"চালু রয়েছে৷ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"কখনই স্বয়ংক্রিয়ভাবে বন্ধ হবে না৷"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"<xliff:g id="ID_1">%1$s</xliff:g>টায় স্বয়ংক্রিয়ভাবে বন্ধ হবে৷"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"সূর্যোদয়কালে স্বয়ংক্রিয়ভাবে বন্ধ হবে৷"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"নিষ্ক্রিয় রয়েছে"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"স্ক্রীন বন্ধ হয়"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ধরে নিষ্ক্রিয়তার পরে"</string>
@@ -988,7 +997,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android সংস্করণ"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android সুরক্ষার প্যাচ লেবেল"</string>
-    <string name="model_number" msgid="3765737700545384794">"মডেল নম্বর"</string>
+    <string name="model_info" msgid="1952009518045740889">"মডেল"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"সরঞ্জাম ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"বেসব্যান্ড সংস্করণ"</string>
     <string name="kernel_version" msgid="9192574954196167602">"কার্নেল সংস্করণ"</string>
@@ -1119,8 +1128,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"অন্যান্য"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"সিস্টেম"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> এক্সপ্লোর করুন"</string>
-    <string name="storage_detail_dialog_other" msgid="5343550781234524040">"অন্যগুলির মধ্যে অন্তর্ভুক্ত রয়েছে, অ্যাপ্লিকেশানগুলির দ্বারা সংরক্ষিত ভাগ করা ফাইল, ইন্টারনেট বা ব্লুটুথ থেকে ডাউনলোড করা ফাইল, Android ফাইল এবং এই ধরণের আরো অনেক কিছু৷ \n\n<xliff:g id="NAME">^1</xliff:g> এর সমস্ত সামগ্রী দেখতে, \'ঘুরে দেখুন\' এ আলতো চাপুন৷"</string>
-    <string name="storage_detail_dialog_system" msgid="3058775028564971102">"Android অপারেটিং সিস্টেম দ্বারা অভ্যন্তরীণভাবে ব্যবহৃত ফাইলগুলি সিস্টেমে অন্তর্ভুক্ত রয়েছে৷ \n\nএই ফাইলগুলিকে পৃথকভাবে দেখা যাবে না৷"</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"অন্যগুলির মধ্যে, অ্যাপগুলির দ্বারা সংরক্ষিত শেয়ার করা ফাইল, ইন্টারনেট বা Bluetooth থেকে ডাউনলোড করা ফাইল, Android ফাইল এবং এই ধরণের আরো অনেক কিছু অন্তর্ভুক্ত রয়েছে৷\n\n<xliff:g id="NAME">^1</xliff:g> এর দৃশ্যমান সামগ্রী দেখতে, \'ঘুরে দেখুন\' এ আলতো চাপুন৷"</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Android পৃথকভাবে প্রদর্শন করতে পারে না এমন ফাইলগুলি সিস্টেমে অন্তর্ভুক্ত রয়েছে৷"</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> এর হয়তো সংরক্ষিত ফটো, সঙ্গীত, চলচ্চিত্র, অ্যাপ্লিকেশান বা অন্যান্য ডেটা যা <xliff:g id="SIZE">^2</xliff:g> সঞ্চয়স্থান নিয়েছে। \n\nবিশদ বিবরণ দেখতে, <xliff:g id="USER_1">^1</xliff:g> -এ পাল্টান।"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"আপনার <xliff:g id="NAME">^1</xliff:g> সেট আপ করুন"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"পোর্টেবল সঞ্চয়স্থান হিসাবে ব্যবহার করুন"</string>
@@ -3053,6 +3062,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"নেটওয়ার্ক সীমাবদ্ধতা"</string>
     <string name="operator_warning" msgid="1862988028996859195">"পরিষেবা প্রদানকারী ডেটার হিসাব, ডিভাইসের হিসাব থেকে ভিন্ন হতে পারে"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> ব্যবহৃত হয়েছে"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"ডেটা সতর্কতা সেট করুন"</string>
     <string name="data_warning" msgid="209133958008062117">"ডেটা সতর্কতা"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"ডেটা সীমা সেট করুন"</string>
     <string name="data_limit" msgid="1885406964934590552">"ডেটা সীমা"</string>
