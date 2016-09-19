@@ -343,11 +343,9 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Lås upp med fingeravtryck"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_title_unlock_disabled (7066417934622827305) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Använda ditt fingeravtryck"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Tryck bara på fingeravtryckssensorn när du vill låsa upp mobilen, auktorisera köp eller logga in i appar. Tänk efter innan du lägger till någons fingeravtryck, eftersom alla som du lägger till kan utföra alla dessa åtgärder.\n\nObs! Fingeravtryck kan vara mindre säkra än ett säkert grafiskt lösenord eller en pinkod."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_unlock_disabled (4193477159493347679) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Tryck på fingeravtryckssensorn för att godkänna köp eller logga in i appar. Var försiktig med vems fingeravtryck du lägger till eftersom även den personen kan göra detta.\n\nObs! Det går inte att låsa upp den här enheten med ett fingeravtryck. Kontakta administratören för din organisation om du vill veta mer."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Tryck bara på fingeravtryckssensorn när du vill låsa upp mobilen, auktorisera köp eller logga in i appar. Tänk efter innan du lägger till någons fingeravtryck, eftersom alla som du lägger till kan utföra alla dessa åtgärder.\n\nObs! Fingeravtryck kan vara mindre säkra än ett säkert grafiskt lösenord eller en pinkod."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Avbryt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Fortsätt"</string>
@@ -687,6 +685,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimera batterianvändningen när Wi-Fi är aktiverat"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Batterianvänd.gräns för Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Byt till mobildata om jag förlorar internetåtkomsten via Wi-Fi."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Lägg till nätverk"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi-nätverk"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS-tryckknapp"</string>
@@ -764,14 +766,12 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ANSLUT"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Nätverket är inte anslutet till internet. Vill du fortsätta använda nätverket?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Fråga inte igen för det här nätverket"</string>
-    <!-- no translation found for lost_internet_access_title (2782009158012212777) -->
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Detta Wi‑Fi är inte anslutet till internet."</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Du kan växla till mobilnätet när det är dålig anslutning via Wi‑Fi. Dataförbrukningsavgifter kan förekomma."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Byt till mobilnät"</string>
+    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
     <skip />
-    <!-- no translation found for lost_internet_access_text (1495142182934624433) -->
-    <skip />
-    <!-- no translation found for lost_internet_access_switch (1157476782808342810) -->
-    <skip />
-    <!-- no translation found for lost_internet_access_cancel (8438722278965609900) -->
-    <skip />
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Visa aldrig igen"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Anslut"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Det gick inte att ansluta till nätverket."</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Glöm"</string>
@@ -865,8 +865,7 @@
     <string name="home_settings" msgid="212375129455718176">"Startskärm"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skärm"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Ljud"</string>
-    <!-- no translation found for ringtone_summary (1688079785311826667) -->
-    <skip />
+    <string name="ringtone_summary" msgid="1688079785311826667">" "</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volymer"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Musikeffekter"</string>
     <string name="ring_volume_title" msgid="5592466070832128777">"Ringvolym"</string>
@@ -938,22 +937,14 @@
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"Soluppgång till solnedgång"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Starttid"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Sluttid"</string>
-    <!-- no translation found for night_display_summary_off (7009821232380000786) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_never (2305501561697289620) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_custom (1548073080728058384) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_twilight (2737328390752018845) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on (6626224414971753417) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_never (5217396859715040056) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_custom (887702685252504739) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_twilight (8574989770628425398) -->
-    <skip />
+    <string name="night_display_summary_off" msgid="7009821232380000786">"Av. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Aktiveras aldrig automatiskt."</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Aktiveras automatiskt kl. <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Aktiveras automatiskt när solen går ned."</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"På. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Inaktiveras aldrig automatiskt."</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Inaktiveras automatiskt kl. <xliff:g id="ID_1">%1$s</xliff:g>."</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Inaktiveras automatiskt när solen går upp."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Viloläge"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Skärmen stängs av"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Efter att ha varit inaktiv i <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1018,8 +1009,7 @@
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android-version"</string>
     <string name="security_patch" msgid="8438384045870296634">"Nivå av säkerhetskorrigering för Android"</string>
-    <!-- no translation found for model_info (1952009518045740889) -->
-    <skip />
+    <string name="model_info" msgid="1952009518045740889">"Modell"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"Utrustnings-ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Basbandsversion"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernel-version"</string>
@@ -1150,10 +1140,8 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Övrigt"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"System"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Utforska <xliff:g id="NAME">^1</xliff:g>"</string>
-    <!-- no translation found for storage_detail_dialog_other (8907101974576694793) -->
-    <skip />
-    <!-- no translation found for storage_detail_dialog_system (3417679651116003900) -->
-    <skip />
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Övriga filer omfattar exempelvis delade filer som har sparats via appar, filer som har laddats ned från internet eller via Bluetooth och Android-filer. \n\nTryck på Utforska om du vill visa <xliff:g id="NAME">^1</xliff:g> synliga innehåll."</string>
+    <string name="storage_detail_dialog_system" msgid="3417679651116003900">"I systemet finns filer som Android-enheter inte kan visa en och en."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> kan ha sparade foton, musik, filmer, appar eller annan data som tar upp <xliff:g id="SIZE">^2</xliff:g> av lagringsutrymmet. \n\nByt till <xliff:g id="USER_1">^1</xliff:g> för mer information."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Konfigurera ditt <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"Använd som bärbar lagringsenhet"</string>
@@ -2672,8 +2660,14 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Stör ej-åtkomst"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Inga installerade appar har begärt Stör ej-åtkomst"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Läser in appar ..."</string>
+    <!-- no translation found for notification_channels (8681423709659818791) -->
+    <skip />
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blockera alla"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Visa aldrig aviseringar från den här appen"</string>
+    <!-- no translation found for channel_notification_block_title (1570538726036580979) -->
+    <skip />
+    <!-- no translation found for channel_notification_block_summary (3024773079420038146) -->
+    <skip />
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Åsidosätt Stör ej"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Fortsätt att få dessa aviseringar när Endast prioriterade har angetts för Stör ej"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"På låsskärmen"</string>
@@ -2682,6 +2676,10 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Känsligt"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Klart"</string>
     <string name="app_notification_importance_title" msgid="8002263131149345584">"Relevans"</string>
+    <!-- no translation found for notification_show_lights_title (7301956309661349031) -->
+    <skip />
+    <!-- no translation found for notification_vibrate_title (4942317478973441720) -->
+    <skip />
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Regelnamn"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Ange namn på regel"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Regelnamnet används redan"</string>
@@ -3093,8 +3091,7 @@
     <string name="network_restrictions" msgid="8234695294536675380">"Nätverksbegränsningar"</string>
     <string name="operator_warning" msgid="1862988028996859195">"Operatörens dataredovisning kan skilja sig från enhetens dataredovisning."</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> har använts"</string>
-    <!-- no translation found for set_data_warning (6115364758236594593) -->
-    <skip />
+    <string name="set_data_warning" msgid="6115364758236594593">"Konfigurera en datavarning"</string>
     <string name="data_warning" msgid="209133958008062117">"Datavarning"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Ange datagräns"</string>
     <string name="data_limit" msgid="1885406964934590552">"Datagräns"</string>
