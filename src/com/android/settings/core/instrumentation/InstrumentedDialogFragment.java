@@ -15,12 +15,25 @@
  */
 package com.android.settings.core.instrumentation;
 
+import com.android.settings.DialogCreatable;
 import com.android.settings.core.lifecycle.ObservableDialogFragment;
 
 public abstract class InstrumentedDialogFragment extends ObservableDialogFragment
         implements Instrumentable {
 
+    protected final DialogCreatable mDialogCreatable;
+    protected int mDialogId;
+
     public InstrumentedDialogFragment() {
+        this(null /* parentFragment */, 0 /* dialogId */);
+    }
+
+    /**
+     * Use this if the dialog is created via {@code DialogCreatable}
+     */
+    public InstrumentedDialogFragment(DialogCreatable dialogCreatable, int dialogId) {
+        mDialogCreatable = dialogCreatable;
+        mDialogId = dialogId;
         mLifecycle.addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
     }
 

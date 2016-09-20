@@ -496,6 +496,21 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case DIALOG_DISCONNECT:
+                return MetricsEvent.DIALOG_WIFI_P2P_DISCONNECT;
+            case DIALOG_CANCEL_CONNECT:
+                return MetricsEvent.DIALOG_WIFI_P2P_CANCEL_CONNECT;
+            case DIALOG_RENAME:
+                return MetricsEvent.DIALOG_WIFI_P2P_RENAME;
+            case DIALOG_DELETE_GROUP:
+                return MetricsEvent.DIALOG_WIFI_P2P_DELETE_GROUP;
+        }
+        return 0;
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         if (mSelectedWifiPeer != null) {
             outState.putParcelable(SAVE_DIALOG_PEER, mSelectedWifiPeer.device);

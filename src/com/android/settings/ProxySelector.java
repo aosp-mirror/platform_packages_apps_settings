@@ -108,6 +108,11 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
         return null;
     }
 
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        return MetricsEvent.DIALOG_PROXY_SELECTOR_ERROR;
+    }
+
     private void showDialog(int dialogId) {
         if (mDialogFragment != null) {
             Log.e(TAG, "Old dialog fragment not null!");

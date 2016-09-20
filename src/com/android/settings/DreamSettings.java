@@ -183,6 +183,14 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         return super.onCreateDialog(dialogId);
     }
 
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        if (dialogId == DIALOG_WHEN_TO_DREAM) {
+            return MetricsEvent.DIALOG_DREAM_START_DELAY;
+        }
+        return 0;
+    }
+
     private Dialog createWhenToDreamDialog() {
         final CharSequence[] items = {
                 mContext.getString(R.string.screensaver_settings_summary_dock),

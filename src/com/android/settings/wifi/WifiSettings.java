@@ -597,6 +597,22 @@ public class WifiSettings extends RestrictedSettingsFragment
         return super.onCreateDialog(dialogId);
     }
 
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case WIFI_DIALOG_ID:
+                return MetricsEvent.DIALOG_WIFI_AP_EDIT;
+            case WPS_PBC_DIALOG_ID:
+                return MetricsEvent.DIALOG_WIFI_PBC;
+            case WPS_PIN_DIALOG_ID:
+                return MetricsEvent.DIALOG_WIFI_PIN;
+            case WRITE_NFC_DIALOG_ID:
+                return MetricsEvent.DIALOG_WIFI_WRITE_NFC;
+            default:
+                return 0;
+        }
+    }
+
     /**
      * Shows the latest access points available with supplemental information like
      * the strength of network and the security for it.

@@ -622,6 +622,32 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case DIALOG_CONFIRM_REMOVE:
+                return MetricsEvent.DIALOG_USER_REMOVE;
+            case DIALOG_USER_CANNOT_MANAGE:
+                return MetricsEvent.DIALOG_USER_CANNOT_MANAGE;
+            case DIALOG_ADD_USER:
+                return MetricsEvent.DIALOG_USER_ADD;
+            case DIALOG_SETUP_USER:
+                return MetricsEvent.DIALOG_USER_SETUP;
+            case DIALOG_SETUP_PROFILE:
+                return MetricsEvent.DIALOG_USER_SETUP_PROFILE;
+            case DIALOG_CHOOSE_USER_TYPE:
+                return MetricsEvent.DIALOG_USER_CHOOSE_TYPE;
+            case DIALOG_NEED_LOCKSCREEN:
+                return MetricsEvent.DIALOG_USER_NEED_LOCKSCREEN;
+            case DIALOG_CONFIRM_EXIT_GUEST:
+                return MetricsEvent.DIALOG_USER_CONFIRM_EXIT_GUEST;
+            case DIALOG_USER_PROFILE_EDITOR:
+                return MetricsEvent.DIALOG_USER_EDIT_PROFILE;
+            default:
+                return 0;
+        }
+    }
+
     private static boolean emergencyInfoActivityPresent(Context context) {
         Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO).setPackage("com.android.emergency");
         List<ResolveInfo> infos = context.getPackageManager().queryIntentActivities(intent, 0);

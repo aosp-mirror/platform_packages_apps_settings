@@ -259,6 +259,14 @@ public class TetherSettings extends RestrictedSettingsFragment
         return null;
     }
 
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        if (dialogId == DIALOG_AP_SETTINGS) {
+            return MetricsEvent.DIALOG_AP_SETTINGS;
+        }
+        return 0;
+    }
+
     private class TetherChangeReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context content, Intent intent) {
