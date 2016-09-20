@@ -164,24 +164,26 @@ public final class WifiNoInternetDialog extends AlertActivity implements
 
     public void onClick(DialogInterface dialog, int which) {
         if (which != BUTTON_NEGATIVE && which != BUTTON_POSITIVE) return;
-        final boolean accept = (which == BUTTON_POSITIVE);
+        final boolean always = mAlwaysAllow.isChecked();
+        final String what, action;
 
         if (ACTION_PROMPT_UNVALIDATED.equals(mAction)) {
-            final String action = (accept ? "Connect" : "Ignore");
-            final boolean always = mAlwaysAllow.isChecked();
+            what = "NO_INTERNET";
+            final boolean accept = (which == BUTTON_POSITIVE);
+            action = (accept ? "Connect" : "Ignore");
             mCM.setAcceptUnvalidated(mNetwork, accept, always);
-            Log.d(TAG, "NO_INTERNET: " + action +  " network=" + mNetwork +
-                    (always ? " and remember" : ""));
         } else {
-            final String action = (accept ? "Switch" : "Cancel");
-            Log.d(TAG, "LOST_INTERNET: " + action);
-            // Only ever set the setting to 1. The values understood by ConnectivityService are null
-            // (use carrier default) or 1 (avoid bad networks regardless of carrier).
-            // TODO: Use a value other than 1 here to indicate a persisted "yes" or "no" given mAlwaysAllow.
-            if (accept) {
-                Settings.Global.putInt(mAlertParams.mContext.getContentResolver(),
-                        Settings.Global.NETWORK_AVOID_BAD_WIFI, 1);
+            what = "LOST_INTERNET";
+            final boolean avoid = (which == BUTTON_POSITIVE);
+            action = (avoid ? "Switch away" : "Get stuck");
+            if (always) {
+                Settings.Global.putString(mAlertParams.mContext.getContentResolver(),
+                        Settings.Global.NETWORK_AVOID_BAD_WIFI, avoid ? "1" : "0");
+            } else if (avoid) {
+                mCM.setAvoidUnvalidated(mNetwork);
             }
         }
+        Log.d(TAG, what + ": " + action +  " network=" + mNetwork +
+                (always ? " and remember" : ""));
     }
 }
