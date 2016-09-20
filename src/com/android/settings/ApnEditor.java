@@ -113,6 +113,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     private String mMvnoTypeStr;
     private String mMvnoMatchDataStr;
     private String[] mReadOnlyApnTypes;
+    private String[] mReadOnlyApnFields;
     private boolean mReadOnlyApn;
 
     /**
@@ -219,6 +220,7 @@ public class ApnEditor extends SettingsPreferenceFragment
         mFirstTime = icicle == null;
         mReadOnlyApn = false;
         mReadOnlyApnTypes = null;
+        mReadOnlyApnFields = null;
 
         if (action.equals(Intent.ACTION_EDIT)) {
             Uri uri = intent.getData();
@@ -234,6 +236,8 @@ public class ApnEditor extends SettingsPreferenceFragment
                 if (b != null) {
                     mReadOnlyApnTypes = b.getStringArray(
                             CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
+                    mReadOnlyApnFields = b.getStringArray(
+                            CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY);
                 }
             }
             mUri = uri;
@@ -284,9 +288,9 @@ public class ApnEditor extends SettingsPreferenceFragment
             Log.d(TAG, "onCreate: apnTypesMatch; read-only APN");
             mReadOnlyApn = true;
             disableAllFields();
-        } /* else (if specific fields are read-only) {
-            disable specific fields
-        } */
+        } else if (!ArrayUtils.isEmpty(mReadOnlyApnFields)) {
+            disableFields(mReadOnlyApnFields);
+        }
 
         for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
             getPreferenceScreen().getPreference(i).setOnPreferenceChangeListener(this);
@@ -348,6 +352,72 @@ public class ApnEditor extends SettingsPreferenceFragment
 
         Log.d(TAG, "apnTypesMatch: false");
         return false;
+    }
+
+    /**
+     * Function to get Preference obj corresponding to an apnField
+     * @param apnField apn field name for which pref is needed
+     * @return Preference obj corresponding to passed in apnField
+     */
+    private Preference getPreferenceFromFieldName(String apnField) {
+        switch (apnField) {
+            case Telephony.Carriers.NAME:
+                return mName;
+            case Telephony.Carriers.APN:
+                return mApn;
+            case Telephony.Carriers.PROXY:
+                return mProxy;
+            case Telephony.Carriers.PORT:
+                return mPort;
+            case Telephony.Carriers.USER:
+                return mUser;
+            case Telephony.Carriers.SERVER:
+                return mServer;
+            case Telephony.Carriers.PASSWORD:
+                return mPassword;
+            case Telephony.Carriers.MMSPROXY:
+                return mMmsProxy;
+            case Telephony.Carriers.MMSPORT:
+                return mMmsPort;
+            case Telephony.Carriers.MMSC:
+                return mMmsc;
+            case Telephony.Carriers.MCC:
+                return mMcc;
+            case Telephony.Carriers.MNC:
+                return mMnc;
+            case Telephony.Carriers.TYPE:
+                return mApnType;
+            case Telephony.Carriers.AUTH_TYPE:
+                return mAuthType;
+            case Telephony.Carriers.PROTOCOL:
+                return mProtocol;
+            case Telephony.Carriers.ROAMING_PROTOCOL:
+                return mRoamingProtocol;
+            case Telephony.Carriers.CARRIER_ENABLED:
+                return mCarrierEnabled;
+            case Telephony.Carriers.BEARER:
+            case Telephony.Carriers.BEARER_BITMASK:
+                return mBearerMulti;
+            case Telephony.Carriers.MVNO_TYPE:
+                return mMvnoType;
+            case Telephony.Carriers.MVNO_MATCH_DATA:
+                return mMvnoMatchData;
+        }
+        return null;
+    }
+
+    /**
+     * Disables given fields so that user cannot modify them
+     *
+     * @param apnFields fields to be disabled
+     */
+    private void disableFields(String[] apnFields) {
+        for (String apnField : apnFields) {
+            Preference preference = getPreferenceFromFieldName(apnField);
+            if (preference != null) {
+                preference.setEnabled(false);
+            }
+        }
     }
 
     /**
