@@ -49,8 +49,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.core.instrumentation.Instrumentable;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -84,6 +84,13 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
             return this.name.compareTo(other.name);
         }
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mVisibilityLoggerMixin.onAttach(context);
+    }
+
     /**
      * Internal collection of device admin info objects for all profiles associated with the current
      * user.

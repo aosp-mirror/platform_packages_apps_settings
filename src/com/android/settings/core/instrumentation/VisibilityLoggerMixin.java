@@ -50,11 +50,15 @@ public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPau
 
     @Override
     public void onResume() {
-        mMetricsFeature.visible(null /* context */, mMetricsCategory);
+        if (mMetricsFeature != null) {
+            mMetricsFeature.visible(null /* context */, mMetricsCategory);
+        }
     }
 
     @Override
     public void onPause() {
-        mMetricsFeature.hidden(null /* context */, mMetricsCategory);
+        if (mMetricsFeature != null) {
+            mMetricsFeature.hidden(null /* context */, mMetricsCategory);
+        }
     }
 }

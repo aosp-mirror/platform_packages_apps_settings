@@ -137,6 +137,12 @@ public class ZonePicker extends ListFragment implements Instrumentable {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mVisibilityLoggerMixin.onAttach(context);
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ZONE_PICKER;
     }
