@@ -28,7 +28,9 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -51,6 +53,7 @@ public class VisibilityLoggerMixinTest {
     @Test
     public void shouldLogVisibleOnResume() {
         mMixin.onResume();
+
         verify(mMetricsFeature, times(1))
                 .visible(any(Context.class), eq(TestInstrumentable.TEST_METRIC));
     }
@@ -58,8 +61,19 @@ public class VisibilityLoggerMixinTest {
     @Test
     public void shouldLogHideOnPause() {
         mMixin.onPause();
+
         verify(mMetricsFeature, times(1))
                 .hidden(any(Context.class), eq(TestInstrumentable.TEST_METRIC));
+    }
+
+    @Test
+    public void shouldNotLogIfMetricsFeatureIsNull() {
+        mMixin = new VisibilityLoggerMixin(TestInstrumentable.TEST_METRIC);
+        mMixin.onResume();
+        mMixin.onPause();
+
+        verify(mMetricsFeature, never())
+                .hidden(any(Context.class), anyInt());
     }
 
     private final class TestInstrumentable implements Instrumentable {
