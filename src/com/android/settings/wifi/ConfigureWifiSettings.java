@@ -170,8 +170,8 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
     }
 
     private boolean avoidBadWifiCurrentSettings() {
-        return Settings.Global.getInt(getContentResolver(),
-                Settings.Global.NETWORK_AVOID_BAD_WIFI, 0) == 1;
+        return "1".equals(Settings.Global.getString(getContentResolver(),
+                Settings.Global.NETWORK_AVOID_BAD_WIFI));
     }
 
     @Override
@@ -183,17 +183,10 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
                     Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
                     ((SwitchPreference) preference).isChecked() ? 1 : 0);
         } else if (KEY_CELLULAR_FALLBACK.equals(key)) {
+            // On: avoid bad wifi. Off: prompt.
             String settingName = Settings.Global.NETWORK_AVOID_BAD_WIFI;
-            if (((SwitchPreference) preference).isChecked()) {
-                // The user wants to avoid bad wifi networks. Remember the choice.
-                Settings.Global.putInt(getContentResolver(), settingName, 1);
-            } else {
-                // Unset the setting. ConnectivityService interprets null to mean "use the carrier
-                // default". We don't set the setting to 0 because if we do, and the user switches
-                // to a carrier that does not restrict cellular fallback, then there is no way to
-                // set it to 1 again because on such a carrier the toggle is never shown.
-                Settings.Global.putString(getContentResolver(), settingName, null);
-            }
+            Settings.Global.putString(getContentResolver(), settingName,
+                    ((SwitchPreference) preference).isChecked() ? "1" : null);
         } else {
             return super.onPreferenceTreeClick(preference);
         }
