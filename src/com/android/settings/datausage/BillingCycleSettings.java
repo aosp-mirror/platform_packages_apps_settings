@@ -37,6 +37,7 @@ import android.widget.Spinner;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
 
@@ -191,7 +192,7 @@ public class BillingCycleSettings extends DataUsageBase implements
     /**
      * Dialog to edit {@link NetworkPolicy#warningBytes}.
      */
-    public static class BytesEditorFragment extends DialogFragment
+    public static class BytesEditorFragment extends InstrumentedDialogFragment
             implements DialogInterface.OnClickListener {
         private static final String EXTRA_TEMPLATE = "template";
         private static final String EXTRA_LIMIT = "limit";
@@ -291,12 +292,17 @@ public class BillingCycleSettings extends DataUsageBase implements
             }
             target.updateDataUsage();
         }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_BILLING_BYTE_LIMIT;
+        }
     }
 
     /**
      * Dialog to edit {@link NetworkPolicy#cycleDay}.
      */
-    public static class CycleEditorFragment extends DialogFragment implements
+    public static class CycleEditorFragment extends InstrumentedDialogFragment implements
             DialogInterface.OnClickListener {
         private static final String EXTRA_TEMPLATE = "template";
         private NumberPicker mCycleDayPicker;
@@ -311,6 +317,11 @@ public class BillingCycleSettings extends DataUsageBase implements
             dialog.setArguments(args);
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CYCLE_EDITOR);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_BILLING_CYCLE;
         }
 
         @Override
@@ -359,7 +370,7 @@ public class BillingCycleSettings extends DataUsageBase implements
      * Dialog to request user confirmation before setting
      * {@link NetworkPolicy#limitBytes}.
      */
-    public static class ConfirmLimitFragment extends DialogFragment implements
+    public static class ConfirmLimitFragment extends InstrumentedDialogFragment implements
             DialogInterface.OnClickListener {
         private static final String EXTRA_MESSAGE = "message";
         private static final String EXTRA_LIMIT_BYTES = "limitBytes";
@@ -389,6 +400,11 @@ public class BillingCycleSettings extends DataUsageBase implements
             dialog.setArguments(args);
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_LIMIT);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_BILLING_CONFIRM_LIMIT;
         }
 
         @Override

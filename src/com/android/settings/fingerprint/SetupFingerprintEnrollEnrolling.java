@@ -31,6 +31,7 @@ import android.widget.Button;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling {
 
@@ -73,7 +74,7 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling 
         return MetricsEvent.FINGERPRINT_ENROLLING_SETUP;
     }
 
-    public static class SkipDialog extends DialogFragment {
+    public static class SkipDialog extends InstrumentedDialogFragment {
 
         @Override
         public void show(FragmentManager manager, String tag) {
@@ -110,6 +111,11 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling 
                                 }
                             })
                     .create();
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_FINGERPRINT_CANCEL_SETUP;
         }
     }
 }

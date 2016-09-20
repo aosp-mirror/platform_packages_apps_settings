@@ -24,8 +24,6 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.EditTextPreference;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,7 +35,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -47,9 +47,7 @@ import com.android.settingslib.bluetooth.MapProfile;
 import com.android.settingslib.bluetooth.PanProfile;
 import com.android.settingslib.bluetooth.PbapServerProfile;
 
-import java.util.HashMap;
-
-public final class DeviceProfilesSettings extends DialogFragment implements
+public final class DeviceProfilesSettings extends InstrumentedDialogFragment implements
         CachedBluetoothDevice.Callback, DialogInterface.OnClickListener, OnClickListener {
     private static final String TAG = "DeviceProfilesSettings";
 
@@ -65,15 +63,16 @@ public final class DeviceProfilesSettings extends DialogFragment implements
 
     private ViewGroup mProfileContainer;
     private TextView mProfileLabel;
-    private EditTextPreference mDeviceNamePref;
-
-    private final HashMap<LocalBluetoothProfile, CheckBoxPreference> mAutoConnectPrefs
-            = new HashMap<LocalBluetoothProfile, CheckBoxPreference>();
 
     private AlertDialog mDisconnectDialog;
     private boolean mProfileGroupIsRemoved;
 
     private View mRootView;
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_BLUETOOTH_PAIRED_DEVICE_PROFILE;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

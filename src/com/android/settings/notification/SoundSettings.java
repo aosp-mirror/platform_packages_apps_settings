@@ -66,6 +66,7 @@ import com.android.settings.RingtonePreference;
 import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -826,10 +827,15 @@ public class SoundSettings extends SettingsPreferenceFragment
         mWorkAlarmRingtonePreference = null;
     }
 
-    public static class UnifyWorkDialogFragment extends DialogFragment
+    public static class UnifyWorkDialogFragment extends InstrumentedDialogFragment
             implements DialogInterface.OnClickListener {
         private static final String TAG = "UnifyWorkDialogFragment";
         private static final int REQUEST_CODE = 200;
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_UNIFY_SOUND_SETTINGS;
+        }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {

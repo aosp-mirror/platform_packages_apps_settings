@@ -37,9 +37,11 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -229,11 +231,18 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
                 new UserHandle(UserHandle.getUserId(uid)));
     }
 
-    public static class MyAlertDialogFragment extends DialogFragment {
+    public static class MyAlertDialogFragment extends InstrumentedDialogFragment {
+
+        private static final String ARG_ID = "id";
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsProto.MetricsEvent.DIALOG_APP_INFO_ACTION;
+        }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            int id = getArguments().getInt("id");
+            int id = getArguments().getInt(ARG_ID);
             int errorCode = getArguments().getInt("moveError");
             Dialog dialog = ((AppInfoBase) getTargetFragment()).createDialog(id, errorCode);
             if (dialog == null) {
@@ -245,7 +254,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         public static MyAlertDialogFragment newInstance(int id, int errorCode) {
             MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment();
             Bundle args = new Bundle();
-            args.putInt("id", id);
+            args.putInt(ARG_ID, id);
             args.putInt("moveError", errorCode);
             dialogFragment.setArguments(args);
             return dialogFragment;

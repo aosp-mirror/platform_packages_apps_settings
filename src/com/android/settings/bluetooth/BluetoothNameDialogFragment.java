@@ -40,14 +40,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * Dialog fragment for renaming the local Bluetooth device.
  */
-public final class BluetoothNameDialogFragment extends DialogFragment implements TextWatcher {
+public final class BluetoothNameDialogFragment extends InstrumentedDialogFragment
+        implements TextWatcher {
     private static final int BLUETOOTH_NAME_MAX_LENGTH_BYTES = 248;
 
     private AlertDialog mAlertDialog;
@@ -85,6 +88,11 @@ public final class BluetoothNameDialogFragment extends DialogFragment implements
     public BluetoothNameDialogFragment() {
         LocalBluetoothManager localManager = Utils.getLocalBtManager(getActivity());
         mLocalAdapter = localManager.getBluetoothAdapter();
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_BLUETOOTH_RENAME;
     }
 
     @Override

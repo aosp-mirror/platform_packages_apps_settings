@@ -44,6 +44,7 @@ import android.widget.TextView;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
@@ -427,7 +428,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         return MetricsEvent.FINGERPRINT_ENROLLING;
     }
 
-    public static class IconTouchDialog extends DialogFragment {
+    public static class IconTouchDialog extends InstrumentedDialogFragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -443,9 +444,14 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                             });
             return builder.create();
         }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_FINGERPRINT_ICON_TOUCH;
+        }
     }
 
-    public static class ErrorDialog extends DialogFragment {
+    public static class ErrorDialog extends InstrumentedDialogFragment {
 
         /**
          * Create a new instance of ErrorDialog.
@@ -487,6 +493,11 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             AlertDialog dialog = builder.create();
             dialog.setCanceledOnTouchOutside(false);
             return dialog;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_FINGERPINT_ERROR;
         }
     }
 }

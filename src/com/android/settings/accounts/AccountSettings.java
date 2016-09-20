@@ -56,6 +56,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
@@ -625,7 +626,7 @@ public class AccountSettings extends SettingsPreferenceFragment
         }
     }
 
-    public static class RemoveUserFragment extends DialogFragment {
+    public static class RemoveUserFragment extends InstrumentedDialogFragment {
         private static final String ARG_USER_ID = "userId";
 
         static RemoveUserFragment newInstance(int userId) {
@@ -649,12 +650,17 @@ public class AccountSettings extends SettingsPreferenceFragment
                         }
                     });
         }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_REMOVE_USER;
+        }
     }
 
     /**
      * Dialog to inform user about changing auto-sync setting
      */
-    public static class ConfirmAutoSyncChangeFragment extends DialogFragment {
+    public static class ConfirmAutoSyncChangeFragment extends InstrumentedDialogFragment {
         private static final String SAVE_ENABLING = "enabling";
         private static final String SAVE_USER_HANDLE = "userHandle";
         private boolean mEnabling;
@@ -704,6 +710,11 @@ public class AccountSettings extends SettingsPreferenceFragment
             super.onSaveInstanceState(outState);
             outState.putBoolean(SAVE_ENABLING, mEnabling);
             outState.putParcelable(SAVE_USER_HANDLE, mUserHandle);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_CONFIRM_AUTO_SYNC_CHANGE;
         }
     }
 

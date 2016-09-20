@@ -50,6 +50,7 @@ import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -108,7 +109,7 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
         }
     }
 
-    public static class CredentialDialogFragment extends DialogFragment {
+    public static class CredentialDialogFragment extends InstrumentedDialogFragment {
         private static final String TAG = "CredentialDialogFragment";
         private static final String ARG_CREDENTIAL = "credential";
 
@@ -164,6 +165,11 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
                 }
             }
             return builder.create();
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_USER_CREDENTIAL;
         }
 
         /**

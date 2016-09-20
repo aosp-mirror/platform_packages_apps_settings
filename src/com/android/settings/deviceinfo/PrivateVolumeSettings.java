@@ -59,6 +59,7 @@ import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.deviceinfo.StorageSettings.MountTask;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
@@ -703,7 +704,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     /**
      * Dialog that allows editing of volume nickname.
      */
-    public static class RenameFragment extends DialogFragment {
+    public static class RenameFragment extends InstrumentedDialogFragment {
         public static void show(PrivateVolumeSettings parent, VolumeInfo vol) {
             if (!parent.isAdded()) return;
 
@@ -713,6 +714,11 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             args.putString(VolumeRecord.EXTRA_FS_UUID, vol.getFsUuid());
             dialog.setArguments(args);
             dialog.show(parent.getFragmentManager(), TAG_RENAME);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_VOLUME_RENAME;
         }
 
         @Override
@@ -749,13 +755,18 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         }
     }
 
-    public static class SystemInfoFragment extends DialogFragment {
+    public static class SystemInfoFragment extends InstrumentedDialogFragment {
         public static void show(Fragment parent) {
             if (!parent.isAdded()) return;
 
             final SystemInfoFragment dialog = new SystemInfoFragment();
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_SYSTEM_INFO);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_STORAGE_SYSTEM_INFO;
         }
 
         @Override
@@ -767,7 +778,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         }
     }
 
-    public static class OtherInfoFragment extends DialogFragment {
+    public static class OtherInfoFragment extends InstrumentedDialogFragment {
         public static void show(Fragment parent, String title, VolumeInfo sharedVol) {
             if (!parent.isAdded()) return;
 
@@ -778,6 +789,11 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             args.putParcelable(Intent.EXTRA_INTENT, sharedVol.buildBrowseIntent());
             dialog.setArguments(args);
             dialog.show(parent.getFragmentManager(), TAG_OTHER_INFO);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_STORAGE_OTHER_INFO;
         }
 
         @Override
@@ -804,7 +820,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         }
     }
 
-    public static class UserInfoFragment extends DialogFragment {
+    public static class UserInfoFragment extends InstrumentedDialogFragment {
         public static void show(Fragment parent, CharSequence userLabel, CharSequence userSize) {
             if (!parent.isAdded()) return;
 
@@ -815,6 +831,11 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             args.putCharSequence(Intent.EXTRA_SUBJECT, userSize);
             dialog.setArguments(args);
             dialog.show(parent.getFragmentManager(), TAG_USER_INFO);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_STORAGE_USER_INFO;
         }
 
         @Override
@@ -837,13 +858,18 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     /**
      * Dialog to request user confirmation before clearing all cache data.
      */
-    public static class ConfirmClearCacheFragment extends DialogFragment {
+    public static class ConfirmClearCacheFragment extends InstrumentedDialogFragment {
         public static void show(Fragment parent) {
             if (!parent.isAdded()) return;
 
             final ConfirmClearCacheFragment dialog = new ConfirmClearCacheFragment();
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_CONFIRM_CLEAR_CACHE);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_STORAGE_CLEAR_CACHE;
         }
 
         @Override

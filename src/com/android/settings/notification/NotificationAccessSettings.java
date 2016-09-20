@@ -31,6 +31,7 @@ import android.service.notification.NotificationListenerService;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ServiceListing;
 
@@ -102,7 +103,7 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
         });
     }
 
-    public class FriendlyWarningDialogFragment extends DialogFragment {
+    public class FriendlyWarningDialogFragment extends InstrumentedDialogFragment {
         static final String KEY_COMPONENT = "c";
         static final String KEY_LABEL = "l";
 
@@ -112,6 +113,11 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
             args.putString(KEY_LABEL, label);
             setArguments(args);
             return this;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_DISABLE_NOTIFICATION_ACCESS;
         }
 
         @Override

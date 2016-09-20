@@ -30,11 +30,13 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
-public class HighPowerDetail extends DialogFragment implements OnClickListener,
+public class HighPowerDetail extends InstrumentedDialogFragment implements OnClickListener,
         View.OnClickListener {
 
     private static final String ARG_DEFAULT_ON = "default_on";
@@ -47,6 +49,11 @@ public class HighPowerDetail extends DialogFragment implements OnClickListener,
     private boolean mIsEnabled;
     private Checkable mOptionOn;
     private Checkable mOptionOff;
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_HIGH_POWER_DETAILS;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -55,6 +55,7 @@ import android.util.Log;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
@@ -1222,7 +1223,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
     }
 
-    public static class UnificationConfirmationDialog extends DialogFragment {
+    public static class UnificationConfirmationDialog extends InstrumentedDialogFragment {
         private static final String EXTRA_COMPLIANT = "compliant";
 
         public static UnificationConfirmationDialog newIntance(boolean compliant) {
@@ -1271,6 +1272,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         public void onDismiss(DialogInterface dialog) {
             super.onDismiss(dialog);
             ((SecuritySettings) getParentFragment()).updateUnificationPreference();
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_UNIFICATION_CONFIRMATION;
         }
     }
 

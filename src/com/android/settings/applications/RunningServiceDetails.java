@@ -36,6 +36,7 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -554,15 +555,15 @@ public class RunningServiceDetails extends InstrumentedFragment
         }
         return null;
     }
-    
+
     private void showConfirmStopDialog(ComponentName comp) {
         DialogFragment newFragment = MyAlertDialogFragment.newConfirmStop(
                 DIALOG_CONFIRM_STOP, comp);
         newFragment.setTargetFragment(this, 0);
         newFragment.show(getFragmentManager(), "confirmstop");
     }
-    
-    public static class MyAlertDialogFragment extends DialogFragment {
+
+    public static class MyAlertDialogFragment extends InstrumentedDialogFragment {
 
         public static MyAlertDialogFragment newConfirmStop(int id, ComponentName comp) {
             MyAlertDialogFragment frag = new MyAlertDialogFragment();
@@ -604,6 +605,11 @@ public class RunningServiceDetails extends InstrumentedFragment
                 }
             }
             throw new IllegalArgumentException("unknown id " + id);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_RUNNIGN_SERVICE;
         }
     }
 
