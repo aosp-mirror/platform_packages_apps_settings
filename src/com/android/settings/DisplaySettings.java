@@ -289,29 +289,34 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
         TimeoutListPreference preference = mScreenTimeoutPreference;
+        final CharSequence[] entries = preference.getEntries();
+        final CharSequence[] values = preference.getEntryValues();
         String summary;
         if (preference.isDisabledByAdmin()) {
             summary = getString(R.string.disabled_by_policy_title);
-        } else if (currentTimeout < 0) {
-            // Unsupported value
-            summary = "";
         } else {
-            final CharSequence[] entries = preference.getEntries();
-            final CharSequence[] values = preference.getEntryValues();
-            if (entries == null || entries.length == 0) {
-                summary = "";
-            } else {
-                int best = 0;
-                for (int i = 0; i < values.length; i++) {
-                    long timeout = Long.parseLong(values[i].toString());
-                    if (currentTimeout >= timeout) {
-                        best = i;
-                    }
-                }
-                summary = getString(R.string.screen_timeout_summary, entries[best]);
-            }
+            CharSequence timeoutDescription = getTimeoutDescription(
+                    currentTimeout, entries, values);
+            summary = timeoutDescription == null ? ""
+                    : getString(R.string.screen_timeout_summary, timeoutDescription);
         }
         preference.setSummary(summary);
+    }
+
+    private static CharSequence getTimeoutDescription(
+        long currentTimeout, CharSequence[] entries, CharSequence[] values) {
+        if (currentTimeout < 0 || entries == null || values == null
+                || values.length != entries.length) {
+            return null;
+        }
+
+        for (int i = 0; i < values.length; i++) {
+            long timeout = Long.parseLong(values[i].toString());
+            if (currentTimeout == timeout) {
+                return entries[i];
+            }
+        }
+        return null;
     }
 
     @Override
@@ -472,11 +477,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
 
         private void updateSummary() {
-            boolean auto = Settings.System.getInt(mContext.getContentResolver(),
-                    SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_AUTOMATIC)
-                    == SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
-            mLoader.setSummary(this, mContext.getString(auto ? R.string.display_summary_on
-                    : R.string.display_summary_off));
+            final long currentTimeout = Settings.System.getLong(mContext.getContentResolver(),
+                    SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
+            final CharSequence[] entries =
+                    mContext.getResources().getTextArray(R.array.screen_timeout_entries);
+            final CharSequence[] values =
+                    mContext.getResources().getTextArray(R.array.screen_timeout_values);
+            final CharSequence timeoutDescription = getTimeoutDescription(
+                    currentTimeout, entries, values);
+            final String summary = timeoutDescription == null ? ""
+                    : mContext.getString(R.string.display_summary, timeoutDescription);
+            mLoader.setSummary(this, summary);
         }
     }
 
