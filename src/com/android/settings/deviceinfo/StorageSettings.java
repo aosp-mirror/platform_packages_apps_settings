@@ -35,6 +35,7 @@ import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
+import android.support.annotation.NonNull;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.TextUtils;
@@ -413,18 +414,37 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
             builder.setPositiveButton(R.string.storage_menu_mount,
                     new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+                /**
+                 * Check if an {@link RestrictedLockUtils#sendShowAdminSupportDetailsIntent admin
+                 * details intent} should be shown for the restriction and show it.
+                 *
+                 * @param restriction The restriction to check
+                 * @return {@code true} iff a intent was shown.
+                 */
+                private boolean wasAdminSupportIntentShown(@NonNull String restriction) {
                     EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                            getActivity(), UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA,
-                            UserHandle.myUserId());
+                            getActivity(), restriction, UserHandle.myUserId());
                     boolean hasBaseUserRestriction = RestrictedLockUtils.hasBaseUserRestriction(
-                            getActivity(), UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA,
-                            UserHandle.myUserId());
+                            getActivity(), restriction, UserHandle.myUserId());
                     if (admin != null && !hasBaseUserRestriction) {
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(), admin);
+                        return true;
+                    }
+
+                    return false;
+                }
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (wasAdminSupportIntentShown(UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA)) {
                         return;
                     }
+
+                    if (vol.disk != null && vol.disk.isUsb() &&
+                            wasAdminSupportIntentShown(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
+                        return;
+                    }
+
                     new MountTask(context, vol).execute();
                 }
             });
