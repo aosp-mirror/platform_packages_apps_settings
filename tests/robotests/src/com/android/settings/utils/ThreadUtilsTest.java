@@ -23,9 +23,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -33,10 +32,10 @@ public class ThreadUtilsTest {
 
     @Test
     public void testMainThread() throws InterruptedException {
-        assertTrue(ThreadUtils.isMainThread());
+        assertThat(ThreadUtils.isMainThread()).isTrue();
         Thread background = new Thread(new Runnable() {
             public void run() {
-                assertFalse(ThreadUtils.isMainThread());
+                assertThat(ThreadUtils.isMainThread()).isFalse();
             }
         });
         background.start();

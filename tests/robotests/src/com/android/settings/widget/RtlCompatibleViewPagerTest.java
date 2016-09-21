@@ -29,7 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 import java.util.Locale;
 
@@ -64,19 +64,19 @@ public class RtlCompatibleViewPagerTest {
     private void testRtlCompatibleInner(int currentItem) {
         // Set up the environment
         Locale.setDefault(mLocaleEn);
-        assertEquals(View.LAYOUT_DIRECTION_LTR,
-                TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()));
+        assertThat(TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()))
+                .isEqualTo(View.LAYOUT_DIRECTION_LTR);
         mTestViewPager.setCurrentItem(currentItem);
-        assertEquals(currentItem, mTestViewPager.getCurrentItem());
+        assertThat(mTestViewPager.getCurrentItem()).isEqualTo(currentItem);
 
         // Simulate to change the language to RTL
         Parcelable savedInstance = mTestViewPager.onSaveInstanceState();
         Locale.setDefault(mLocaleHe);
-        assertEquals(View.LAYOUT_DIRECTION_RTL,
-                TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()));
+        assertThat(TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()))
+                .isEqualTo(View.LAYOUT_DIRECTION_RTL);
         mTestViewPager.onRestoreInstanceState(savedInstance);
 
-        assertEquals(currentItem, mTestViewPager.getCurrentItem());
+        assertThat(mTestViewPager.getCurrentItem()).isEqualTo(currentItem);
     }
 
 

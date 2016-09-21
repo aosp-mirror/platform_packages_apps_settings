@@ -33,7 +33,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 import org.robolectric.util.FragmentController;
 
-import static org.junit.Assert.assertTrue;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -109,15 +109,15 @@ public class LifecycleTest {
         TestActivity activity = ac.get();
 
         ac.start();
-        assertTrue(activity.mActObserver.mOnStartObserved);
+        assertThat(activity.mActObserver.mOnStartObserved).isTrue();
         ac.resume();
-        assertTrue(activity.mActObserver.mOnResumeObserved);
+        assertThat(activity.mActObserver.mOnResumeObserved).isTrue();
         ac.pause();
-        assertTrue(activity.mActObserver.mOnPauseObserved);
+        assertThat(activity.mActObserver.mOnPauseObserved).isTrue();
         ac.stop();
-        assertTrue(activity.mActObserver.mOnStopObserved);
+        assertThat(activity.mActObserver.mOnStopObserved).isTrue();
         ac.destroy();
-        assertTrue(activity.mActObserver.mOnDestroyObserved);
+        assertThat(activity.mActObserver.mOnDestroyObserved).isTrue();
     }
 
     @Test
@@ -128,12 +128,12 @@ public class LifecycleTest {
 
         fragmentController.attach().create().start().resume().pause().stop().destroy();
 
-        assertTrue(fragment.mFragObserver.mOnAttachObserved);
-        assertTrue(fragment.mFragObserver.mOnAttachHasContext);
-        assertTrue(fragment.mFragObserver.mOnStartObserved);
-        assertTrue(fragment.mFragObserver.mOnResumeObserved);
-        assertTrue(fragment.mFragObserver.mOnPauseObserved);
-        assertTrue(fragment.mFragObserver.mOnStopObserved);
-        assertTrue(fragment.mFragObserver.mOnDestroyObserved);
+        assertThat(fragment.mFragObserver.mOnAttachObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnAttachHasContext).isTrue();
+        assertThat(fragment.mFragObserver.mOnStartObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnResumeObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnPauseObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnStopObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnDestroyObserved).isTrue();
     }
 }

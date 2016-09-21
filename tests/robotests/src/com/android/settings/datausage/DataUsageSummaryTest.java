@@ -28,7 +28,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-import static junit.framework.Assert.assertTrue;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -55,6 +55,6 @@ public class DataUsageSummaryTest {
     @Test
     public void testMobileDataStatus() {
         boolean hasMobileData = DataUsageSummary.hasMobileData(mContext);
-        assertTrue(hasMobileData);
+        assertThat(hasMobileData).isTrue();
     }
 }
