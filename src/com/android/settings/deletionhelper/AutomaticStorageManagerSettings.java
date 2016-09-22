@@ -18,30 +18,20 @@ package com.android.settings.deletionhelper;
 
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
-import android.text.format.DateUtils;
-import android.text.format.Formatter;
-import android.util.Log;
-import android.view.View;
-import android.widget.Switch;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceScreen;
+import android.text.format.DateUtils;
+import android.text.format.Formatter;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.SettingsActivity;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
+import com.android.settings.SettingsPreferenceFragment;
 
 /**
  * AutomaticStorageManagerSettings is the Settings screen for configuration and management of the
@@ -142,8 +132,8 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
         switch (preference.getKey()) {
             case KEY_STORAGE_MANAGER_SWITCH:
                 boolean storageManagerChecked = (boolean) newValue;
-                MetricsLogger.action(getContext(), MetricsEvent.ACTION_TOGGLE_STORAGE_MANAGER,
-                        storageManagerChecked);
+                mMetricsFeatureProvider.action(getContext(),
+                        MetricsEvent.ACTION_TOGGLE_STORAGE_MANAGER, storageManagerChecked);
                 mDaysToRetain.setEnabled(storageManagerChecked);
                 Settings.Secure.putInt(getContentResolver(),
                         Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,

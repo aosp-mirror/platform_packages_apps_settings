@@ -16,11 +16,14 @@
 
 package com.android.settings.core;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.android.settings.core.instrumentation.Instrumentable;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.core.lifecycle.ObservablePreferenceFragment;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Instrumented fragment that logs visibility state.
@@ -28,9 +31,17 @@ import com.android.settings.core.lifecycle.ObservablePreferenceFragment;
 public abstract class InstrumentedFragment extends ObservablePreferenceFragment
         implements Instrumentable {
 
+    protected MetricsFeatureProvider mMetricsFeatureProvider;
+
     public InstrumentedFragment() {
         // Mixin that logs visibility change for activity.
         getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
