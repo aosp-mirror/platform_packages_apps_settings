@@ -37,9 +37,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.support.SupportDisclaimerDialogFragment;
 import com.android.settings.support.SupportPhone;
@@ -69,6 +69,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     private final EscalationClickListener mEscalationClickListener;
     private final SpinnerItemSelectListener mSpinnerItemSelectListener;
     private final SupportFeatureProvider mSupportFeatureProvider;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final View.OnClickListener mItemClickListener;
     private final List<SupportData> mSupportData;
 
@@ -77,9 +78,12 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     private Account mAccount;
 
     public SupportItemAdapter(Activity activity, Bundle savedInstanceState,
-            SupportFeatureProvider supportFeatureProvider, View.OnClickListener itemClickListener) {
+            SupportFeatureProvider supportFeatureProvider,
+            MetricsFeatureProvider metricsFeatureProvider,
+            View.OnClickListener itemClickListener) {
         mActivity = activity;
         mSupportFeatureProvider = supportFeatureProvider;
+        mMetricsFeatureProvider = metricsFeatureProvider;
         mItemClickListener = itemClickListener;
         mEscalationClickListener = new EscalationClickListener();
         mSpinnerItemSelectListener = new SpinnerItemSelectListener();
@@ -141,7 +145,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             if (data.intent != null &&
                     mActivity.getPackageManager().resolveActivity(data.intent, 0) != null) {
                 if (data.metricsEvent >= 0) {
-                    MetricsLogger.action(mActivity, data.metricsEvent);
+                    mMetricsFeatureProvider.action(mActivity, data.metricsEvent);
                 }
                 mActivity.startActivityForResult(data.intent, 0);
             }
@@ -427,7 +431,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             if (mAccount == null) {
                 switch (v.getId()) {
                     case android.R.id.text1:
-                        MetricsLogger.action(mActivity,
+                        mMetricsFeatureProvider.action(mActivity,
                                 MetricsProto.MetricsEvent.ACTION_SUPPORT_SIGN_IN);
                         mActivity.startActivityForResult(
                                 mSupportFeatureProvider.getAccountLoginIntent(),
@@ -442,12 +446,12 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
             } else if (mHasInternet) {
                 switch (v.getId()) {
                     case android.R.id.text1:
-                        MetricsLogger.action(mActivity,
+                        mMetricsFeatureProvider.action(mActivity,
                                 MetricsProto.MetricsEvent.ACTION_SUPPORT_PHONE);
                         tryStartDisclaimerAndSupport(PHONE);
                         break;
                     case android.R.id.text2:
-                        MetricsLogger.action(mActivity,
+                        mMetricsFeatureProvider.action(mActivity,
                                 MetricsProto.MetricsEvent.ACTION_SUPPORT_CHAT);
                         tryStartDisclaimerAndSupport(CHAT);
                         break;
@@ -463,7 +467,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                                     .queryIntentActivities(intent, 0)
                                     .isEmpty();
                             if (canDial) {
-                                MetricsLogger.action(mActivity,
+                                mMetricsFeatureProvider.action(mActivity,
                                         MetricsProto.MetricsEvent.ACTION_SUPPORT_DAIL_TOLLFREE);
                                 mActivity.startActivity(intent);
                             }
@@ -475,7 +479,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                                 .getSupportPhones(mSelectedCountry, false /* isTollFree */);
                         final SupportPhoneDialogFragment fragment =
                                 SupportPhoneDialogFragment.newInstance(phone);
-                        MetricsLogger.action(mActivity,
+                        mMetricsFeatureProvider.action(mActivity,
                                 MetricsProto.MetricsEvent.ACTION_SUPPORT_VIEW_TRAVEL_ABROAD_DIALOG);
                         fragment.show(mActivity.getFragmentManager(),
                                 SupportPhoneDialogFragment.TAG);

@@ -36,8 +36,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.internal.logging.MetricsProto;
-import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 
@@ -89,7 +89,7 @@ public final class SupportFragment extends InstrumentedFragment implements View.
         mSupportFeatureProvider =
                 FeatureFactory.getFactory(mActivity).getSupportFeatureProvider(mActivity);
         mSupportItemAdapter = new SupportItemAdapter(mActivity, savedInstanceState,
-                mSupportFeatureProvider, this /* itemClickListener */);
+                mSupportFeatureProvider, mMetricsFeatureProvider, this /* itemClickListener */);
         mConnectivityManager =
                 (ConnectivityManager) mActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
     }

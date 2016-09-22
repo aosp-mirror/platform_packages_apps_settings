@@ -33,11 +33,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settingslib.SuggestionParser;
@@ -71,6 +71,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final IconCache mCache;
 
     private final Context mContext;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private List<DashboardCategory> mCategories;
     private List<Condition> mConditions;
@@ -85,9 +86,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private Condition mExpandedCondition = null;
     private SuggestionParser mSuggestionParser;
 
-    public DashboardAdapter(Context context, SuggestionParser parser, Bundle savedInstanceState,
-                List<Condition> conditions) {
+    public DashboardAdapter(Context context, SuggestionParser parser,
+            MetricsFeatureProvider metricsFeatureProvider, Bundle savedInstanceState,
+            List<Condition> conditions) {
         mContext = context;
+        mMetricsFeatureProvider = metricsFeatureProvider;
         mCache = new IconCache(context);
         mSuggestionParser = parser;
         mConditions = conditions;
@@ -240,7 +243,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_SUGGESTION,
+                        mMetricsFeatureProvider.action(mContext,
+                                MetricsEvent.ACTION_SETTINGS_SUGGESTION,
                                 DashboardAdapter.getSuggestionIdentifier(mContext, suggestion));
                         ((SettingsActivity) mContext).startSuggestion(suggestion.intent);
                     }
@@ -276,7 +280,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
+                mMetricsFeatureProvider.action(
+                        mContext, MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
                         DashboardAdapter.getSuggestionIdentifier(mContext, suggestion));
                 disableSuggestion(suggestion);
                 mSuggestions.remove(suggestion);
@@ -379,12 +384,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             return;
         }
         if (v.getTag() == mExpandedCondition) {
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
+            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
                     mExpandedCondition.getMetricsConstant());
             mExpandedCondition.onPrimaryClick();
         } else {
             mExpandedCondition = (Condition) v.getTag();
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND,
+            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND,
                     mExpandedCondition.getMetricsConstant());
             notifyDataSetChanged();
         }
@@ -392,12 +397,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     public void onExpandClick(View v) {
         if (v.getTag() == mExpandedCondition) {
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_COLLAPSE,
+            mMetricsFeatureProvider.action(mContext,
+                    MetricsEvent.ACTION_SETTINGS_CONDITION_COLLAPSE,
                     mExpandedCondition.getMetricsConstant());
             mExpandedCondition = null;
         } else {
             mExpandedCondition = (Condition) v.getTag();
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND,
+            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND,
                     mExpandedCondition.getMetricsConstant());
         }
         notifyDataSetChanged();
