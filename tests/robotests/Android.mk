@@ -14,9 +14,9 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 LOCAL_JAVA_LIBRARIES := \
     junit4-target \
     platform-robolectric-prebuilt \
-    sdk_v23
+    sdk_vcurrent
 
-LOCAL_APK_LIBRARIES = Settings
+LOCAL_INSTRUMENTATION_FOR := Settings
 LOCAL_MODULE := SettingsRoboTests
 
 LOCAL_MODULE_TAGS := optional
