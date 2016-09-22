@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.provider.Settings.Global;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -56,9 +57,6 @@ import java.util.ArrayList;
  */
 public class ManageDomainUrls extends SettingsPreferenceFragment
         implements ApplicationsState.Callbacks, OnPreferenceChangeListener {
-
-    // STOPSHIP; b/30256615
-    private static final boolean DISABLE_WEB_ACTIONS = !Build.IS_DEBUGGABLE;
 
     private ApplicationsState mApplicationsState;
     private ApplicationsState.Session mSession;
@@ -114,7 +112,9 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
             return;
         }
 
-        if (DISABLE_WEB_ACTIONS) {
+        final boolean disableWebActions = Global.getInt(getContext().getContentResolver(),
+                Global.ENABLE_EPHEMERAL_FEATURE, 1) == 0;
+        if (disableWebActions) {
             mDomainAppList = getPreferenceScreen();
         } else {
             final PreferenceGroup preferenceScreen = getPreferenceScreen();
