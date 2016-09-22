@@ -38,7 +38,6 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 public class BugreportPreference extends CustomDialogPreference {
 
     private static final String TAG = "BugreportPreference";
-    private static final int BUGREPORT_DELAY_SECONDS = 3;
 
     private CheckedTextView mInteractiveTitle;
     private TextView mInteractiveSummary;
@@ -91,22 +90,10 @@ public class BugreportPreference extends CustomDialogPreference {
                 MetricsLogger.action(context, MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
                 takeBugreport(ActivityManager.BUGREPORT_OPTION_FULL);
             } else {
-                Log.v(TAG, "Taking interactive bugreport in " + BUGREPORT_DELAY_SECONDS + "s");
+                Log.v(TAG, "Taking interactive bugreport right away");
                 MetricsLogger.action(context,
                         MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
-                // Add a little delay before executing, to give the user a chance to close
-                // the Settings activity before it takes a screenshot.
-                final String msg = context.getResources()
-                        .getQuantityString(com.android.internal.R.plurals.bugreport_countdown,
-                                BUGREPORT_DELAY_SECONDS, BUGREPORT_DELAY_SECONDS);
-                Log.v(TAG, msg);
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        takeBugreport(ActivityManager.BUGREPORT_OPTION_INTERACTIVE);
-                    }
-                }, BUGREPORT_DELAY_SECONDS * DateUtils.SECOND_IN_MILLIS);
+                takeBugreport(ActivityManager.BUGREPORT_OPTION_INTERACTIVE);
             }
         }
     }
