@@ -17,11 +17,14 @@
 package com.android.settings.dashboard.conditional;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.os.PersistableBundle;
-import com.android.internal.logging.MetricsLogger;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 import static android.content.pm.PackageManager.DONT_KILL_APP;
 
@@ -32,6 +35,7 @@ public abstract class Condition {
     private static final String KEY_LAST_STATE = "last_state";
 
     protected final ConditionManager mManager;
+    protected final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private boolean mIsSilenced;
     private boolean mIsActive;
@@ -39,7 +43,12 @@ public abstract class Condition {
 
     // All conditions must live in this package.
     Condition(ConditionManager manager) {
+       this(manager, FeatureFactory.getFactory(manager.getContext()).getMetricsFeatureProvider());
+    }
+
+    Condition(ConditionManager manager, MetricsFeatureProvider metricsFeatureProvider) {
         mManager = manager;
+        mMetricsFeatureProvider = metricsFeatureProvider;
         Class<?> receiverClass = getReceiverClass();
         if (receiverClass != null && shouldAlwaysListenToBroadcast()) {
             PackageManager pm = mManager.getContext().getPackageManager();
@@ -93,8 +102,9 @@ public abstract class Condition {
     public void silence() {
         if (!mIsSilenced) {
             mIsSilenced = true;
-            MetricsLogger.action(mManager.getContext(),
-                    MetricsEvent.ACTION_SETTINGS_CONDITION_DISMISS, getMetricsConstant());
+            Context context = mManager.getContext();
+            mMetricsFeatureProvider.action(context, MetricsEvent.ACTION_SETTINGS_CONDITION_DISMISS,
+                    getMetricsConstant());
             onSilenceChanged(mIsSilenced);
             notifyChanged();
         }

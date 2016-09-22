@@ -18,6 +18,7 @@ package com.android.settings.dashboard.conditional;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
@@ -25,10 +26,11 @@ import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
-import com.android.internal.logging.MetricsLogger;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardAdapter;
+import com.android.settings.overlay.FeatureFactory;
 
 public class ConditionAdapterUtils {
 
@@ -94,9 +96,10 @@ public class ConditionAdapterUtils {
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            MetricsLogger.action(v.getContext(),
-                                    MetricsEvent.ACTION_SETTINGS_CONDITION_BUTTON,
-                                    condition.getMetricsConstant());
+                            Context context = v.getContext();
+                            FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                                    .action(context, MetricsEvent.ACTION_SETTINGS_CONDITION_BUTTON,
+                                            condition.getMetricsConstant());
                             condition.onActionClick(index);
                         }
                     });

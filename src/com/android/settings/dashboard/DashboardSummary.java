@@ -26,16 +26,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
@@ -122,7 +123,7 @@ public class DashboardSummary extends InstrumentedFragment
         mSummaryLoader.setListening(true);
         for (Condition c : mConditionManager.getConditions()) {
             if (c.shouldShow()) {
-                MetricsLogger.visible(getContext(), c.getMetricsConstant());
+                mMetricsFeatureProvider.visible(getContext(), c.getMetricsConstant());
             }
         }
         if (DEBUG_TIMING) Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime)
@@ -137,7 +138,7 @@ public class DashboardSummary extends InstrumentedFragment
         mSummaryLoader.setListening(false);
         for (Condition c : mConditionManager.getConditions()) {
             if (c.shouldShow()) {
-                MetricsLogger.hidden(getContext(), c.getMetricsConstant());
+                mMetricsFeatureProvider.hidden(getContext(), c.getMetricsConstant());
             }
         }
         if (mAdapter.getSuggestions() == null) {
@@ -148,7 +149,7 @@ public class DashboardSummary extends InstrumentedFragment
                 String id = DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion);
                 if (!mSuggestionsHiddenLogged.contains(id)) {
                     mSuggestionsHiddenLogged.add(id);
-                    MetricsLogger.action(getContext(),
+                    mMetricsFeatureProvider.action(getContext(),
                             MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION, id);
                 }
             }
@@ -200,8 +201,8 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setHasFixedSize(true);
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mDashboard.setListener(this);
-        mAdapter = new DashboardAdapter(getContext(), mSuggestionParser, bundle,
-                mConditionManager.getConditions());
+        mAdapter = new DashboardAdapter(getContext(), mSuggestionParser, mMetricsFeatureProvider,
+                bundle, mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setAdapter(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
@@ -246,7 +247,7 @@ public class DashboardSummary extends InstrumentedFragment
                     String id = DashboardAdapter.getSuggestionIdentifier(context, suggestion);
                     if (!mSuggestionsShownLogged.contains(id)) {
                         mSuggestionsShownLogged.add(id);
-                        MetricsLogger.action(context,
+                        mMetricsFeatureProvider.action(context,
                                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, id);
                     }
                 }

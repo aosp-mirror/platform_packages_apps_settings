@@ -37,12 +37,11 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.search.Index;
 
 import java.util.HashMap;
@@ -85,8 +84,8 @@ public class SearchResultsSummary extends InstrumentedFragment {
         @Override
         protected void onPostExecute(Cursor cursor) {
             if (!isCancelled()) {
-                MetricsLogger.action(getContext(), MetricsEvent.ACTION_SEARCH_RESULTS,
-                        cursor.getCount());
+                mMetricsFeatureProvider.action(getContext(),
+                        MetricsEvent.ACTION_SEARCH_RESULTS, cursor.getCount());
                 setResultsCursor(cursor);
                 setResultsVisibility(cursor.getCount() > 0);
             } else if (cursor != null) {
