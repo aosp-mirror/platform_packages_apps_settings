@@ -225,9 +225,9 @@ public class RequestToggleWiFiActivity extends AlertActivity
 
         switch (mState) {
             case STATE_ENABLE: {
-                mAlertParams.mPositiveButtonText = getString(android.R.string.ok);
+                mAlertParams.mPositiveButtonText = getString(R.string.allow);
                 mAlertParams.mPositiveButtonListener = this;
-                mAlertParams.mNegativeButtonText = getString(android.R.string.no);
+                mAlertParams.mNegativeButtonText = getString(R.string.deny);
                 mAlertParams.mNegativeButtonListener = this;
                 mAlertParams.mMessage = getString(R.string.wifi_ask_enable, mAppLabel);
             } break;
@@ -245,9 +245,9 @@ public class RequestToggleWiFiActivity extends AlertActivity
             } break;
 
             case STATE_DISABLE: {
-                mAlertParams.mPositiveButtonText = getString(android.R.string.ok);
+                mAlertParams.mPositiveButtonText = getString(R.string.allow);
                 mAlertParams.mPositiveButtonListener = this;
-                mAlertParams.mNegativeButtonText = getString(android.R.string.no);
+                mAlertParams.mNegativeButtonText = getString(R.string.deny);
                 mAlertParams.mNegativeButtonListener = this;
                 mAlertParams.mMessage = getString(R.string.wifi_ask_disable, mAppLabel);
             } break;
