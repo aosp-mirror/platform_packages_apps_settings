@@ -338,7 +338,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Саусақ ізімен құлыпты ашу"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Саусақ ізін пайдалану"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Телефон құлпын ашу, сатып алуларды авторизациялау немесе қолданбаларға кіру үшін саусақ ізін оқу сканерін түртсеңіз болды. Басқа саусақ іздерін қосқанда сақ болыңыз. Олар осы әрекеттердің кез келгенін орындай алады.\n\nЕскертпе: саусақ ізінің қауіпсіздігі күшті өрнектен немесе PIN кодынан азырақ болуы мүмкін."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Сатып алуларды авторизациялау немесе қолданбаларға кіру үшін саусақ ізін оқу сканерін түртсеңіз болды. Басқа саусақ іздерін қосқанда сақ болыңыз. Бір рет қосылса болғаны, олар осы әрекеттердің кез келгенін орындай алады.\n\nЕскертпе: бұл құрылғының құлпын ашу үшін саусақ ізін пайдалана алмайсыз. Қосымша ақпарат алу үшін ұйым әкімшісіне хабарласыңыз."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Сатып алу әрекеттерін авторизациялау немесе қолданбаларға кіру үшін саусақ ізін оқу сканерін түртсеңіз болды. Басқа саусақ іздерін қосқанда сақ болыңыз. Бір рет қосылса болғаны, олар осы әрекеттердің кез келгенін орындай алады.\n\nЕскертпе: бұл құрылғының құлпын ашу үшін саусақ ізін пайдалана алмайсыз. Қосымша ақпарат алу үшін ұйым әкімшісіне хабарласыңыз."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Телефон құлпын ашу, сатып алғандарды авторизациялау немесе қолданбаларға кіру үшін жай ғана саусақ ізін оқу сканерін түртіңіз. Басқа саусақ іздерін қосарда сақ болыңыз. Өйткені бір саусақ ізі қосылған болса да, оның иесі бұл әрекеттердің барлығын орындай алады.\n\nЕскертпе: саусақ ізінің қауіпсіздік деңгейі күрделі өрнектен немесе PIN кодынан төмен болуы мүмкін."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Бас тарту"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Жалғастыру"</string>
@@ -676,10 +676,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi‑Fi қосылғанда батарея қолданысын азайту"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Wi‑Fi пайдаланатын батареяны шектеу"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi-Fi интернеттен ажыратылса, ұялы деректерге ауысу."</string>
-    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
-    <skip />
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Ұялы деректер резерв түрінде пайдаланылады"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Wi-Fi интернеттен ажыратылса, ұялы деректерді пайдалану. Қосымша ақы алынуы мүмкін."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Желі қосу"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi‑Fi желілері"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS Push түймесі"</string>
@@ -757,11 +755,10 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ҚОСЫЛУ"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Бұл желіде интернет байланысы жоқ. Байланыста қалу қажет пе?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Осы желі үшін енді сұралмасын"</string>
-    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi интернетке жалғанбаған"</string>
-    <string name="lost_internet_access_text" msgid="1676124057345106398">"Wi‑Fi сапасы нашар болған жағдайда ұялы байланысқа ауысуға болады. Деректер ақысы алынуы мүмкін."</string>
-    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Ұялы байланысқа ауысу"</string>
-    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
-    <skip />
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi желісі интернетке жалғанбаған"</string>
+    <string name="lost_internet_access_text" msgid="1676124057345106398">"Wi‑Fi байланысы нашар болған кезде ұялы желіге ауыса аласыз. Деректер ақысы алынуы мүмкін."</string>
+    <string name="lost_internet_access_switch" msgid="1980357004205108781">"Ұялы желіге ауысу"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Wi-Fi желісінде қалу"</string>
     <string name="lost_internet_access_persist" msgid="7634876061262676255">"Қайта көрсетілмесін"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Жалғау"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Желіге қосылу орындалмады"</string>
@@ -935,7 +932,7 @@
     <string name="night_display_summary_on" msgid="6626224414971753417">"Қосулы. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Ешқашан автоматты өшпейді."</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Автоматты өшеді: <xliff:g id="ID_1">%1$s</xliff:g>."</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Күн шыққанда автоматты өшеді"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Күн шыққанда автоматты өшеді."</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Ұйқы"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Экран өшеді"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Әрекетсіз <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> тұрған соң"</string>
