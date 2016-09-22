@@ -46,9 +46,11 @@ import android.widget.Button;
 
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.HelpUtils;
 
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
@@ -501,8 +503,14 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
         mDialogFragment.show(getChildFragmentManager(), Integer.toString(dialogId));
     }
 
+    @Override
     public Dialog onCreateDialog(int dialogId) {
         return null;
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        return 0;
     }
 
     protected void removeDialog(int dialogId) {
@@ -569,11 +577,9 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
         onDialogShowing();
     }
 
-    public static class SettingsDialogFragment extends DialogFragment {
+    public static class SettingsDialogFragment extends InstrumentedDialogFragment {
         private static final String KEY_DIALOG_ID = "key_dialog_id";
         private static final String KEY_PARENT_FRAGMENT_ID = "key_parent_fragment_id";
-
-        private int mDialogId;
 
         private Fragment mParentFragment;
 
@@ -585,12 +591,22 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
         }
 
         public SettingsDialogFragment(DialogCreatable fragment, int dialogId) {
-            mDialogId = dialogId;
+            super(fragment, dialogId);
             if (!(fragment instanceof Fragment)) {
                 throw new IllegalArgumentException("fragment argument must be an instance of "
                         + Fragment.class.getName());
             }
             mParentFragment = (Fragment) fragment;
+        }
+
+
+        @Override
+        public int getMetricsCategory() {
+            final int metricsCategory = mDialogCreatable.getDialogMetricsCategory(mDialogId);
+            if (metricsCategory <= 0) {
+                throw new IllegalStateException("Dialog must provide a metrics category");
+            }
+            return metricsCategory;
         }
 
         @Override

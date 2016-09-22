@@ -25,6 +25,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsProto;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -149,6 +150,16 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
         }
         return super.onCreateDialog(dialogId);
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case WifiSettings.WIFI_DIALOG_ID:
+                return MetricsProto.MetricsEvent.DIALOG_WIFI_SAVED_AP_EDIT;
+            default:
+                return 0;
+        }
     }
 
     @Override

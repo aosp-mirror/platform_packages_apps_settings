@@ -507,4 +507,12 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         }
         return null;
     }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        if (dialogId == DIALOG_RESTORE_DEFAULTAPN) {
+            return MetricsEvent.DIALOG_APN_RESTORE_DEFAULT;
+        }
+        return 0;
+    }
 }

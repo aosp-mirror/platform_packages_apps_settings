@@ -52,12 +52,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.collect.Lists;
-
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
+
+import com.google.android.collect.Lists;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -150,6 +150,20 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.ACCOUNTS_ACCOUNT_SYNC;
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case REALLY_REMOVE_DIALOG:
+                return MetricsEvent.DIALOG_ACCOUNT_SYNC_REMOVE;
+            case FAILED_REMOVAL_DIALOG:
+                return MetricsEvent.DIALOG_ACCOUNT_SYNC_FAILED_REMOVAL;
+            case CANT_DO_ONETIME_SYNC_DIALOG:
+                return MetricsEvent.DIALOG_ACCOUNT_SYNC_CANNOT_ONETIME_SYNC;
+            default:
+                return 0;
+        }
     }
 
     @Override

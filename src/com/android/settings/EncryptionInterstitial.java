@@ -259,6 +259,14 @@ public class EncryptionInterstitial extends SettingsActivity {
             }
         }
 
+        @Override
+        public int getDialogMetricsCategory(int dialogId) {
+            if (dialogId == ACCESSIBILITY_WARNING_DIALOG) {
+                return MetricsEvent.DIALOG_ENCRYPTION_INTERSTITIAL_ACCESSIBILITY;
+            }
+            return 0;
+        }
+
         private void setRequirePasswordState(boolean required) {
             mPasswordRequired = required;
         }

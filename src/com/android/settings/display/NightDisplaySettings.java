@@ -156,6 +156,17 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case DIALOG_START_TIME:
+                return MetricsEvent.DIALOG_NIGHT_DISPLAY_SET_START_TIME;
+            case DIALOG_END_TIME:
+                return MetricsEvent.DIALOG_NIGHT_DISPLAY_SET_END_TIME;
+            default:
+                return 0;
+        }
+    }
+    @Override
     public void onActivated(boolean activated) {
         mActivatedPreference.setChecked(activated);
     }

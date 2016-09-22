@@ -202,6 +202,15 @@ public class ToggleAccessibilityServicePreferenceFragment
         }
     }
 
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        if (dialogId == DIALOG_ID_ENABLE_WARNING) {
+            return MetricsEvent.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
+        } else {
+            return MetricsEvent.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
+        }
+    }
+
     private void updateSwitchBarToggleSwitch() {
         final boolean checked = AccessibilityUtils.getEnabledServicesFromSettings(getActivity())
                 .contains(mComponentName);
