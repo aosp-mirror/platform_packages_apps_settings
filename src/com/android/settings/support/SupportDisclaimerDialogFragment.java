@@ -32,7 +32,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -78,7 +77,7 @@ public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFra
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if (which == Dialog.BUTTON_NEGATIVE) {
-            MetricsLogger.action(getContext(),
+            mMetricsFeatureProvider.action(getContext(),
                     MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_CANCEL);
             return;
         }
@@ -89,7 +88,8 @@ public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFra
                 FeatureFactory.getFactory(activity).getSupportFeatureProvider(activity);
         supportFeatureProvider.setShouldShowDisclaimerDialog(getContext(), !doNotShow.isChecked());
         final Bundle bundle = getArguments();
-        MetricsLogger.action(activity, MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_OK);
+        mMetricsFeatureProvider.action(activity,
+                MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_OK);
         supportFeatureProvider.startSupport(getActivity(),
                 bundle.getParcelable(EXTRA_ACCOUNT), bundle.getInt(EXTRA_TYPE));
     }
@@ -97,7 +97,7 @@ public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFra
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
-        MetricsLogger.action(getContext(),
+        mMetricsFeatureProvider.action(getContext(),
                 MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_CANCEL);
     }
 

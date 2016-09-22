@@ -57,7 +57,6 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
@@ -308,7 +307,7 @@ public class WifiSettings extends RestrictedSettingsFragment
      */
     /* package */ WifiEnabler createWifiEnabler() {
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        return new WifiEnabler(activity, activity.getSwitchBar());
+        return new WifiEnabler(activity, activity.getSwitchBar(), mMetricsFeatureProvider);
     }
 
     @Override
@@ -411,7 +410,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 showDialog(WPS_PIN_DIALOG_ID);
                 return true;
             case MENU_ID_SCAN:
-                MetricsLogger.action(getActivity(), MetricsEvent.ACTION_WIFI_FORCE_SCAN);
+                mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_FORCE_SCAN);
                 mWifiTracker.forceScan();
                 return true;
             case MENU_ID_ADVANCED:
@@ -847,7 +846,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     /* package */ void forget() {
-        MetricsLogger.action(getActivity(), MetricsEvent.ACTION_WIFI_FORGET);
+        mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_FORGET);
         if (!mSelectedAccessPoint.isSaved()) {
             if (mSelectedAccessPoint.getNetworkInfo() != null &&
                     mSelectedAccessPoint.getNetworkInfo().getState() != State.DISCONNECTED) {
@@ -870,12 +869,12 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     protected void connect(final WifiConfiguration config) {
-        MetricsLogger.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT);
+        mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT);
         mWifiManager.connect(config, mConnectListener);
     }
 
     protected void connect(final int networkId) {
-        MetricsLogger.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT);
+        mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT);
         mWifiManager.connect(networkId, mConnectListener);
     }
 
@@ -883,7 +882,7 @@ public class WifiSettings extends RestrictedSettingsFragment
      * Called when "add network" button is pressed.
      */
     /* package */ void onAddNetworkPressed() {
-        MetricsLogger.action(getActivity(), MetricsEvent.ACTION_WIFI_ADD_NETWORK);
+        mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_ADD_NETWORK);
         // No exact access point is selected.
         mSelectedAccessPoint = null;
         showDialog(null, WifiConfigUiBase.MODE_CONNECT);

@@ -27,11 +27,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.widget.RtlCompatibleViewPager;
@@ -73,7 +73,7 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
                 getChildFragmentManager(), mViewPager);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(
-                new TabChangeListener((SettingsActivity) getActivity()));
+                new TabChangeListener((SettingsActivity) getActivity(), mMetricsFeatureProvider));
 
         // check if support tab needs to be selected
         final String selectedTab = getArguments().
@@ -157,9 +157,12 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
             implements RtlCompatibleViewPager.OnPageChangeListener {
 
         private final SettingsActivity mActivity;
+        private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-        public TabChangeListener(SettingsActivity activity) {
+        public TabChangeListener(SettingsActivity activity,
+                MetricsFeatureProvider metricsFeatureProvider) {
             mActivity = activity;
+            mMetricsFeatureProvider = metricsFeatureProvider;
         }
 
         @Override
@@ -176,12 +179,12 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
         public void onPageSelected(int position) {
             switch (position) {
                 case INDEX_SUMMARY_FRAGMENT:
-                    MetricsLogger.action(
+                    mMetricsFeatureProvider.action(
                             mActivity, MetricsProto.MetricsEvent.ACTION_SELECT_SUMMARY);
                     mActivity.setDisplaySearchMenu(true);
                     break;
                 case INDEX_SUPPORT_FRAGMENT:
-                    MetricsLogger.action(
+                    mMetricsFeatureProvider.action(
                             mActivity, MetricsProto.MetricsEvent.ACTION_SELECT_SUPPORT_FRAGMENT);
                     mActivity.setDisplaySearchMenu(false);
                     break;

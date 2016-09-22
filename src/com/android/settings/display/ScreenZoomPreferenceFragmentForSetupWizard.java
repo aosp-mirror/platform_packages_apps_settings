@@ -16,7 +16,6 @@
 
 package com.android.settings.display;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 public class ScreenZoomPreferenceFragmentForSetupWizard
@@ -31,8 +30,8 @@ public class ScreenZoomPreferenceFragmentForSetupWizard
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
         if (mCurrentIndex != mInitialIndex) {
-            MetricsLogger.action(getContext(), MetricsEvent.SUW_ACCESSIBILITY_DISPLAY_SIZE,
-                    mCurrentIndex);
+            mMetricsFeatureProvider.action(
+                    getContext(), MetricsEvent.SUW_ACCESSIBILITY_DISPLAY_SIZE, mCurrentIndex);
         }
 
         super.onStop();

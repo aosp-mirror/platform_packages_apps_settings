@@ -33,11 +33,12 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Checkable;
-import com.android.internal.logging.MetricsLogger;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.CustomDialogPreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
 
@@ -110,7 +111,9 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
 
     @Override
     protected void performClick(View view) {
-        MetricsLogger.action(getContext(), MetricsEvent.ACTION_CELL_DATA_TOGGLE, !mChecked);
+        final Context context = getContext();
+        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                .action(context, MetricsEvent.ACTION_CELL_DATA_TOGGLE, !mChecked);
         if (mChecked) {
             final SubscriptionInfo currentSir = mSubscriptionManager.getActiveSubscriptionInfo(
                     mSubId);

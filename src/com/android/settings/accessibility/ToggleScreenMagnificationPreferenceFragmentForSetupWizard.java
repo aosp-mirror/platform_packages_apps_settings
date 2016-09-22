@@ -41,7 +41,7 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
         if (mToggleSwitch.isChecked() != mToggleSwitchWasInitiallyChecked) {
-            MetricsLogger.action(getContext(),
+            mMetricsFeatureProvider.action(getContext(),
                     MetricsEvent.SUW_ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION,
                     mToggleSwitch.isChecked());
         }

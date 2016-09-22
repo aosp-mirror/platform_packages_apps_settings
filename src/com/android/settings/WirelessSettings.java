@@ -234,7 +234,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         RestrictedPreference androidBeam = (RestrictedPreference) findPreference(
                 KEY_ANDROID_BEAM_SETTINGS);
 
-        mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
+        mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference,
+                mMetricsFeatureProvider);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
 
         mButtonWfc = (PreferenceScreen) findPreference(KEY_WFC_SETTINGS);

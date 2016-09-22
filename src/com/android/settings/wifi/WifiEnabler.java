@@ -32,9 +32,9 @@ import android.provider.Settings;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.search.Index;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
@@ -44,12 +44,16 @@ import com.android.settingslib.WirelessUtils;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
+
+    private final SwitchBar mSwitchBar;
+    private final WifiManager mWifiManager;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+
     private Context mContext;
-    private SwitchBar mSwitchBar;
     private boolean mListeningToOnSwitchChange = false;
     private AtomicBoolean mConnected = new AtomicBoolean(false);
 
-    private final WifiManager mWifiManager;
+
     private boolean mStateMachineEvent;
     private final IntentFilter mIntentFilter;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -89,10 +93,11 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
         }
     };
 
-    public WifiEnabler(Context context, SwitchBar switchBar) {
+    public WifiEnabler(Context context, SwitchBar switchBar,
+            MetricsFeatureProvider metricsFeatureProvider) {
         mContext = context;
         mSwitchBar = switchBar;
-
+        mMetricsFeatureProvider = metricsFeatureProvider;
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
         mIntentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
@@ -226,7 +231,7 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
         if (mayDisableTethering(isChecked)) {
             mWifiManager.setWifiApEnabled(null, false);
         }
-        MetricsLogger.action(mContext,
+        mMetricsFeatureProvider.action(mContext,
                 isChecked ? MetricsEvent.ACTION_WIFI_ON : MetricsEvent.ACTION_WIFI_OFF);
         if (!mWifiManager.setWifiEnabled(isChecked)) {
             // Error

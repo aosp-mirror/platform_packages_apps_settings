@@ -39,7 +39,6 @@ import android.widget.TextView;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.settings.widget.SwitchBar;
@@ -335,9 +334,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         int wfcMode = ImsManager.getWfcMode(context);
         updateButtonWfcMode(context, wfcEnabled, wfcMode);
         if (wfcEnabled) {
-            MetricsLogger.action(getActivity(), getMetricsCategory(), wfcMode);
+            mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), wfcMode);
         } else {
-            MetricsLogger.action(getActivity(), getMetricsCategory(), -1);
+            mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), -1);
         }
     }
 
@@ -390,7 +389,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             if (buttonMode != currentMode) {
                 ImsManager.setWfcMode(context, buttonMode);
                 mButtonWfcMode.setSummary(getWfcModeSummary(context, buttonMode));
-                MetricsLogger.action(getActivity(), getMetricsCategory(), buttonMode);
+                mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
             }
         }
         return true;

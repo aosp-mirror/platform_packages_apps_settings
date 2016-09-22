@@ -21,7 +21,6 @@ import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -40,8 +39,8 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -60,16 +59,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settingslib.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
@@ -594,7 +592,7 @@ public class FingerprintSettings extends SubSettings {
                                             if (DEBUG) {
                                                 Log.v(TAG, "rename " + name + " to " + newName);
                                             }
-                                            MetricsLogger.action(getContext(),
+                                            mMetricsFeatureProvider.action(getContext(),
                                                     MetricsEvent.ACTION_FINGERPRINT_RENAME,
                                                     mFp.getFingerId());
                                             FingerprintSettingsFragment parent
@@ -639,7 +637,7 @@ public class FingerprintSettings extends SubSettings {
 
             private void onDeleteClick(DialogInterface dialog) {
                 if (DEBUG) Log.v(TAG, "Removing fpId=" + mFp.getFingerId());
-                MetricsLogger.action(getContext(), MetricsEvent.ACTION_FINGERPRINT_DELETE,
+                mMetricsFeatureProvider.action(getContext(), MetricsEvent.ACTION_FINGERPRINT_DELETE,
                         mFp.getFingerId());
                 FingerprintSettingsFragment parent
                         = (FingerprintSettingsFragment) getTargetFragment();

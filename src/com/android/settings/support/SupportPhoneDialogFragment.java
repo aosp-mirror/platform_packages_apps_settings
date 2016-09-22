@@ -24,7 +24,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -76,7 +75,7 @@ public final class SupportPhoneDialogFragment extends InstrumentedDialogFragment
                 .queryIntentActivities(intent, 0)
                 .isEmpty();
         if (canDial) {
-            MetricsLogger.action(getActivity(),
+            mMetricsFeatureProvider.action(getActivity(),
                     MetricsProto.MetricsEvent.ACTION_SUPPORT_DIAL_TOLLED);
             getActivity().startActivity(intent);
         }

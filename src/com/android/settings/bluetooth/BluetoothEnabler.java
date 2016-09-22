@@ -24,13 +24,12 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.util.Log;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.search.Index;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.WirelessUtils;
@@ -43,9 +42,10 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
  * preference reflects the current state.
  */
 public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener {
+    private final Switch mSwitch;
+    private final SwitchBar mSwitchBar;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private Context mContext;
-    private Switch mSwitch;
-    private SwitchBar mSwitchBar;
     private boolean mValidListener;
     private final LocalBluetoothAdapter mLocalAdapter;
     private final IntentFilter mIntentFilter;
@@ -76,8 +76,10 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
         }
     };
 
-    public BluetoothEnabler(Context context, SwitchBar switchBar) {
+    public BluetoothEnabler(Context context, SwitchBar switchBar,
+            MetricsFeatureProvider metricsFeatureProvider) {
         mContext = context;
+        mMetricsFeatureProvider = metricsFeatureProvider;
         mSwitchBar = switchBar;
         mSwitch = switchBar.getSwitch();
         mValidListener = false;
@@ -187,7 +189,7 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
             switchView.setChecked(false);
         }
 
-        MetricsLogger.action(mContext, MetricsEvent.ACTION_BLUETOOTH_TOGGLE, isChecked);
+        mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_BLUETOOTH_TOGGLE, isChecked);
 
         if (mLocalAdapter != null) {
             boolean status = mLocalAdapter.setBluetoothEnabled(isChecked);

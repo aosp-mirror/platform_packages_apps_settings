@@ -34,13 +34,14 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import java.util.ArrayList;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener,
         View.OnClickListener {
@@ -55,6 +56,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         void onSwitchChanged(Switch switchView, boolean isChecked);
     }
 
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private final TextAppearanceSpan mSummarySpan;
 
     private ToggleSwitch mSwitch;
@@ -130,6 +132,8 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
 
         // Default is hide
         setVisibility(View.GONE);
+
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     public void setMetricsTag(String tag) {
@@ -230,7 +234,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     @Override
     public void onClick(View v) {
         if (mDisabledByAdmin) {
-            MetricsLogger.count(mContext, mMetricsTag + "/switch_bar|restricted", 1);
+            mMetricsFeatureProvider.count(mContext, mMetricsTag + "/switch_bar|restricted", 1);
             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, mEnforcedAdmin);
         } else {
             final boolean isChecked = !mSwitch.isChecked();
@@ -248,7 +252,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (mLoggingIntialized) {
-            MetricsLogger.count(mContext, mMetricsTag + "/switch_bar|" + isChecked, 1);
+            mMetricsFeatureProvider.count(mContext, mMetricsTag + "/switch_bar|" + isChecked, 1);
         }
         mLoggingIntialized = true;
         propagateChecked(isChecked);

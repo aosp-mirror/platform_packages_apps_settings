@@ -21,19 +21,15 @@ import android.app.ActivityManagerNative;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Handler;
 import android.os.RemoteException;
-import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckedTextView;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.overlay.FeatureFactory;
 
 public class BugreportPreference extends CustomDialogPreference {
 
@@ -87,11 +83,12 @@ public class BugreportPreference extends CustomDialogPreference {
             final Context context = getContext();
             if (mFullTitle.isChecked()) {
                 Log.v(TAG, "Taking full bugreport right away");
-                MetricsLogger.action(context, MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
+                        MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
                 takeBugreport(ActivityManager.BUGREPORT_OPTION_FULL);
             } else {
                 Log.v(TAG, "Taking interactive bugreport right away");
-                MetricsLogger.action(context,
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
                         MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
                 takeBugreport(ActivityManager.BUGREPORT_OPTION_INTERACTIVE);
             }

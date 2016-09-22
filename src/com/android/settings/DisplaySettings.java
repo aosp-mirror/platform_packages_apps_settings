@@ -19,11 +19,9 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.UiModeManager;
-import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -46,7 +44,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.app.NightDisplayController;
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.accessibility.ToggleFontSizePreferenceFragment;
@@ -61,13 +58,11 @@ import java.util.List;
 
 import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
-import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
@@ -194,7 +189,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     final boolean locked = Integer.parseInt((String) newValue) != 0;
-                    MetricsLogger.action(getActivity(), MetricsEvent.ACTION_ROTATION_LOCK,
+                    mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_ROTATION_LOCK,
                             locked);
                     RotationPolicy.setRotationLock(activity, locked);
                     return true;
@@ -437,7 +432,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mDozePreference) {
-            MetricsLogger.action(getActivity(), MetricsEvent.ACTION_AMBIENT_DISPLAY);
+            mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_AMBIENT_DISPLAY);
         }
         return super.onPreferenceTreeClick(preference);
     }

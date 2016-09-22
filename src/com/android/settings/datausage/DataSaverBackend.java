@@ -19,12 +19,11 @@ import android.net.INetworkPolicyListener;
 import android.net.NetworkPolicyManager;
 import android.os.Handler;
 import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.util.Log;
 import android.util.SparseIntArray;
 
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 
@@ -37,6 +36,7 @@ public class DataSaverBackend {
     private static final String TAG = "DataSaverBackend";
 
     private final Context mContext;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private final Handler mHandler = new Handler();
     private final NetworkPolicyManager mPolicyManager;
@@ -48,6 +48,7 @@ public class DataSaverBackend {
     // TODO: Staticize into only one.
     public DataSaverBackend(Context context) {
         mContext = context;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPolicyManager = NetworkPolicyManager.from(context);
     }
 
@@ -72,7 +73,8 @@ public class DataSaverBackend {
 
     public void setDataSaverEnabled(boolean enabled) {
         mPolicyManager.setRestrictBackground(enabled);
-        MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_MODE, enabled ? 1 : 0);
+        mMetricsFeatureProvider.action(
+                mContext, MetricsEvent.ACTION_DATA_SAVER_MODE, enabled ? 1 : 0);
     }
 
     public void refreshWhitelist() {
@@ -84,7 +86,8 @@ public class DataSaverBackend {
         mPolicyManager.setUidPolicy(uid, policy);
         mUidPolicies.put(uid, policy);
         if (whitelisted) {
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_WHITELIST, packageName);
+            mMetricsFeatureProvider.action(
+                    mContext, MetricsEvent.ACTION_DATA_SAVER_WHITELIST, packageName);
         }
     }
 
@@ -122,7 +125,8 @@ public class DataSaverBackend {
         mPolicyManager.setUidPolicy(uid, policy);
         mUidPolicies.put(uid, policy);
         if (blacklisted) {
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_BLACKLIST, packageName);
+            mMetricsFeatureProvider.action(
+                    mContext, MetricsEvent.ACTION_DATA_SAVER_BLACKLIST, packageName);
         }
     }
 

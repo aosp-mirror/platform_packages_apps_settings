@@ -40,7 +40,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import com.android.internal.logging.MetricsLogger;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
@@ -146,7 +146,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
 
-        mBluetoothEnabler = new BluetoothEnabler(activity, mSwitchBar);
+        mBluetoothEnabler = new BluetoothEnabler(activity, mSwitchBar, mMetricsFeatureProvider);
         mBluetoothEnabler.setupSwitchBar();
     }
 
@@ -248,19 +248,22 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         switch (item.getItemId()) {
             case MENU_ID_SCAN:
                 if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON) {
-                    MetricsLogger.action(getActivity(), MetricsEvent.ACTION_BLUETOOTH_SCAN);
+                    mMetricsFeatureProvider.action(getActivity(),
+                            MetricsEvent.ACTION_BLUETOOTH_SCAN);
                     startScanning();
                 }
                 return true;
 
             case MENU_ID_RENAME_DEVICE:
-                MetricsLogger.action(getActivity(), MetricsEvent.ACTION_BLUETOOTH_RENAME);
+                mMetricsFeatureProvider.action(getActivity(),
+                        MetricsEvent.ACTION_BLUETOOTH_RENAME);
                 new BluetoothNameDialogFragment().show(
                         getFragmentManager(), "rename device");
                 return true;
 
             case MENU_ID_SHOW_RECEIVED:
-                MetricsLogger.action(getActivity(), MetricsEvent.ACTION_BLUETOOTH_FILES);
+                mMetricsFeatureProvider.action(getActivity(),
+                        MetricsEvent.ACTION_BLUETOOTH_FILES);
                 Intent intent = new Intent(BTOPP_ACTION_OPEN_RECEIVED_FILES);
                 getActivity().sendBroadcast(intent);
                 return true;
