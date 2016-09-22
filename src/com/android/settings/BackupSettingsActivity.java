@@ -17,8 +17,13 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.backup.BackupManager;
+import android.app.backup.IBackupManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -43,6 +48,17 @@ public class BackupSettingsActivity extends Activity {
                 Intent intent = Intent.parseUri(backup, 0);
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     // use startActivityForResult to let the activity check the caller signature
+                    IBackupManager bmgr = IBackupManager.Stub.asInterface(
+                            ServiceManager.getService(Context.BACKUP_SERVICE));
+                    boolean backupOkay;
+                    try {
+                        backupOkay = bmgr.isBackupServiceActive(UserHandle.myUserId());
+                    } catch (Exception e) {
+                        // things go wrong talking to the backup system => ignore and
+                        // pass the default 'false' as the "backup is a thing?" state.
+                        backupOkay = false;
+                    }
+                    intent.putExtra(BackupManager.EXTRA_BACKUP_SERVICES_AVAILABLE, backupOkay);
                     startActivityForResult(intent, -1);
                 } else {
                     Log.e(TAG, "Backup component not found!");
