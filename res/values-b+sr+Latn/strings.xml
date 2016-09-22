@@ -694,10 +694,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Smanji korišćenje baterije kada je Wi-Fi uključen"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Ogran. bat. koju koristi Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Pređi na podatke za mobilne uređaje ako Wi‑Fi izgubi pristup internetu."</string>
-    <!-- no translation found for wifi_cellular_data_fallback_title (341508634673327078) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (1960608487363658949) -->
-    <skip />
+    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Prelazak na mobilne podatke"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Koristite mobilne podatke kada Wi‑Fi izgubi pristup internetu. Mogu da se naplaćuju dodatne naknade."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Dodaj mrežu"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi mreže"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS dugme"</string>
@@ -775,12 +773,11 @@
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"POVEŽI SE"</string>
     <string name="no_internet_access_text" msgid="7133561752896706392">"Ova mreža nema pristup internetu. Želite li da ostanete povezani?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Ne pitaj ponovo za ovu mrežu"</string>
-    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi-Fi mreža nije povezana sa internetom"</string>
+    <string name="lost_internet_access_title" msgid="6228530645663584505">"Wi‑Fi mreža nije povezana sa internetom"</string>
     <string name="lost_internet_access_text" msgid="1676124057345106398">"Možete da pređete na mobilnu mrežu kad god je Wi‑Fi veza loša. Može da vam bude naplaćen prenos podataka."</string>
     <string name="lost_internet_access_switch" msgid="1980357004205108781">"Pređi na mobilnu mrežu"</string>
-    <!-- no translation found for lost_internet_access_cancel (338273139419871110) -->
-    <skip />
-    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Ne prikazuj nikada više"</string>
+    <string name="lost_internet_access_cancel" msgid="338273139419871110">"Ostani na Wi‑Fi-ju"</string>
+    <string name="lost_internet_access_persist" msgid="7634876061262676255">"Ne prikazuj ponovo"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Poveži"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"Povezivanje sa mrežom nije uspelo"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Zaboravi"</string>
@@ -2040,7 +2037,7 @@
     <string name="privacy_settings_title" msgid="4856282165773594890">"Rezervne kopije i resetovanje"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Rezervna kopija i resetovanje"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Lični podaci"</string>
-    <string name="backup_data_title" msgid="1239105919852668016">"Pravljenje rezervnih kopija mojih podataka"</string>
+    <string name="backup_data_title" msgid="1239105919852668016">"Pravljenje rezervnih kopija podataka"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Pravi rezervne kopije podataka o aplikacijama, Wi-Fi lozinki i drugih podešavanja na Google serverima"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Rezervna kopija naloga"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Uvrštavanje podataka aplikacija"</string>
@@ -2682,14 +2679,11 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Pristup opciji Ne uznemiravaj"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Nijedna instalirana aplikacija nije zahtevala pristup opciji Ne uznemiravaj"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Učitavaju se aplikacije..."</string>
-    <!-- no translation found for notification_channels (8681423709659818791) -->
-    <skip />
+    <string name="notification_channels" msgid="8681423709659818791">"Kanali"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Blokiraj sve"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Nikada ne prikazuj obaveštenja iz ove aplikacije"</string>
-    <!-- no translation found for channel_notification_block_title (1570538726036580979) -->
-    <skip />
-    <!-- no translation found for channel_notification_block_summary (3024773079420038146) -->
-    <skip />
+    <string name="channel_notification_block_title" msgid="1570538726036580979">"Blokiraj sve"</string>
+    <string name="channel_notification_block_summary" msgid="3024773079420038146">"Nikada ne prikazuj obaveštenja sa ovog kanala"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Zameni režim Ne uznemiravaj"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Omogućava da ova obaveštenja nastave da se prikazuju kada je režim Ne uznemiravaj podešen na opciju Samo prioritetni prekidi"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Na zaključanom ekranu"</string>
@@ -2698,10 +2692,8 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Osetljivo"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Gotovo"</string>
     <string name="app_notification_importance_title" msgid="8002263131149345584">"Važnost"</string>
-    <!-- no translation found for notification_show_lights_title (7301956309661349031) -->
-    <skip />
-    <!-- no translation found for notification_vibrate_title (4942317478973441720) -->
-    <skip />
+    <string name="notification_show_lights_title" msgid="7301956309661349031">"Uvek aktiviraj pulsirajuću lampicu za obaveštenja"</string>
+    <string name="notification_vibrate_title" msgid="4942317478973441720">"Uvek vibriraj"</string>
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Naziv pravila"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Unesite naziv pravila"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Naziv pravila se već koristi"</string>
