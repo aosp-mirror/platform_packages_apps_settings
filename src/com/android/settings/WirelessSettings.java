@@ -202,6 +202,14 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         return super.onCreateDialog(dialogId);
     }
 
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        if (MANAGE_MOBILE_PLAN_DIALOG_ID == dialogId) {
+            return MetricsEvent.DIALOG_MANAGE_MOBILE_PLAN;
+        }
+        return 0;
+    }
+
     private void log(String s) {
         Log.d(TAG, s);
     }
