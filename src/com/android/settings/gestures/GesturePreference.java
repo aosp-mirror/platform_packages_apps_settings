@@ -58,7 +58,6 @@ public final class GesturePreference extends SwitchPreference implements
     public GesturePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-        setLayoutResource(R.layout.gesture_preference);
         TypedArray attributes = context.getTheme().obtainStyledAttributes(
                 attrs,
                 R.styleable.GesturePreference,
@@ -70,7 +69,8 @@ public final class GesturePreference extends SwitchPreference implements
                     .appendPath(String.valueOf(animation))
                     .build();
             mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
-            if (mMediaPlayer != null) {
+            if (mMediaPlayer != null && mMediaPlayer.getDuration() > 0) {
+                setLayoutResource(R.layout.gesture_preference);
                 mMediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
                     @Override
                     public void onSeekComplete(MediaPlayer mp) {
@@ -84,9 +84,8 @@ public final class GesturePreference extends SwitchPreference implements
                         mediaPlayer.setLooping(true);
                     }
                 });
+                mAnimationAvailable = true;
             }
-            mAnimationAvailable = true;
-
         } catch (Exception e) {
             Log.w(TAG, "Animation resource not found. Will not show animation.");
         } finally {
@@ -97,15 +96,14 @@ public final class GesturePreference extends SwitchPreference implements
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+
+        if (!mAnimationAvailable) {
+            return;
+        }
+
         final TextureView video = (TextureView) holder.findViewById(R.id.gesture_video);
         final ImageView imageView = (ImageView) holder.findViewById(R.id.gesture_image);
         final ImageView playButton = (ImageView) holder.findViewById(R.id.gesture_play_button);
-        final View animationFrame = holder.findViewById(R.id.gesture_animation_frame);
-
-        if (!mAnimationAvailable) {
-            animationFrame.setVisibility(View.GONE);
-            return;
-        }
 
         video.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,7 +180,9 @@ public final class GesturePreference extends SwitchPreference implements
     }
 
     void loadPreview(LoaderManager manager, int id) {
-        Loader<Bitmap> loader = manager.initLoader(id, Bundle.EMPTY, this);
+        if (mAnimationAvailable) {
+            Loader<Bitmap> loader = manager.initLoader(id, Bundle.EMPTY, this);
+        }
     }
 
     void onViewVisible() {
