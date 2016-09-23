@@ -20,8 +20,11 @@ import android.annotation.UserIdInt;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioSystem;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -46,11 +49,11 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
+import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
 
-
 public class WorkSoundPreferenceController extends PreferenceController implements
-    OnPreferenceChangeListener, LifecycleObserver, OnResume {
+    OnPreferenceChangeListener, LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG = "WorkSoundPrefController";
     private static final String KEY_WORK_CATEGORY = "sound_work_settings_section";
@@ -97,18 +100,18 @@ public class WorkSoundPreferenceController extends PreferenceController implemen
 
     @Override
     public void onResume() {
-        if (isAvailable()) {
-            if ((mWorkPreferenceCategory == null)) {
-                // Work preferences not yet set
-                mParent.addPreferencesFromResource(R.xml.sound_work_settings);
-                initWorkPreferences();
-            }
-            if (!mWorkUsePersonalSounds.isChecked()) {
-                updateWorkRingtoneSummaries();
-            }
-        } else {
-            maybeRemoveWorkPreferences();
-        }
+        IntentFilter managedProfileFilter = new IntentFilter();
+        managedProfileFilter.addAction(Intent.ACTION_MANAGED_PROFILE_ADDED);
+        managedProfileFilter.addAction(Intent.ACTION_MANAGED_PROFILE_REMOVED);
+        mContext.registerReceiver(mManagedProfileReceiver, managedProfileFilter);
+
+        mManagedProfileId = mHelper.getManagedProfileId(mUserManager);
+        initWorkPreferences();
+    }
+
+    @Override
+    public void onPause() {
+        mContext.unregisterReceiver(mManagedProfileReceiver);
     }
 
     @Override
@@ -118,8 +121,8 @@ public class WorkSoundPreferenceController extends PreferenceController implemen
 
     @Override
     public boolean isAvailable() {
-        mManagedProfileId = mHelper.getManagedProfileId(mUserManager);
-        return mManagedProfileId != UserHandle.USER_NULL && shouldShowRingtoneSettings();
+        return mHelper.getManagedProfileId(mUserManager) != UserHandle.USER_NULL
+                && shouldShowRingtoneSettings();
     }
 
     @Override
@@ -184,17 +187,37 @@ public class WorkSoundPreferenceController extends PreferenceController implemen
     }
 
     private void initWorkPreferences() {
-        mWorkPreferenceCategory = (PreferenceGroup) mParent.getPreferenceScreen()
-            .findPreference(KEY_WORK_CATEGORY);
-        mWorkUsePersonalSounds = (TwoStatePreference) mParent.getPreferenceScreen()
-            .findPreference(KEY_WORK_USE_PERSONAL_SOUNDS);
-        mWorkPhoneRingtonePreference = initWorkPreference(KEY_WORK_PHONE_RINGTONE);
-        mWorkNotificationRingtonePreference = initWorkPreference(KEY_WORK_NOTIFICATION_RINGTONE);
-        mWorkAlarmRingtonePreference = initWorkPreference(KEY_WORK_ALARM_RINGTONE);
+        if (mManagedProfileId == UserHandle.USER_NULL || !isAvailable()) {
+            maybeRemoveWorkPreferences();
+            return;
+        }
 
-        if (!mVoiceCapable) {
-            mWorkPreferenceCategory.removePreference(mWorkPhoneRingtonePreference);
-            mWorkPhoneRingtonePreference = null;
+        if (mWorkPreferenceCategory == null) {
+            mParent.addPreferencesFromResource(R.xml.sound_work_settings);
+            final PreferenceScreen screen = mParent.getPreferenceScreen();
+
+            mWorkPreferenceCategory = (PreferenceGroup) screen.findPreference(KEY_WORK_CATEGORY);
+            mWorkUsePersonalSounds = (TwoStatePreference)
+                    screen.findPreference(KEY_WORK_USE_PERSONAL_SOUNDS);
+            mWorkPhoneRingtonePreference = initWorkPreference(KEY_WORK_PHONE_RINGTONE);
+            mWorkNotificationRingtonePreference = initWorkPreference(
+                    KEY_WORK_NOTIFICATION_RINGTONE);
+            mWorkAlarmRingtonePreference = initWorkPreference(KEY_WORK_ALARM_RINGTONE);
+
+            mWorkUsePersonalSounds.setOnPreferenceChangeListener((Preference p, Object value) -> {
+                if ((boolean) value) {
+                    UnifyWorkDialogFragment.show(mParent);
+                    return false;
+                } else {
+                    disableWorkSync();
+                    return true;
+                }
+            });
+
+            if (!mVoiceCapable) {
+                mWorkPreferenceCategory.removePreference(mWorkPhoneRingtonePreference);
+                mWorkPhoneRingtonePreference = null;
+            }
         }
 
         Context managedProfileContext = getManagedProfileContext();
@@ -204,19 +227,6 @@ public class WorkSoundPreferenceController extends PreferenceController implemen
         } else {
             disableWorkSyncSettings();
         }
-
-        mWorkUsePersonalSounds.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if ((boolean) newValue) {
-                    UnifyWorkDialogFragment.show(mParent);
-                    return false;
-                } else {
-                    disableWorkSync();
-                    return true;
-                }
-            }
-        });
     }
 
     void enableWorkSync() {
@@ -267,7 +277,6 @@ public class WorkSoundPreferenceController extends PreferenceController implemen
 
     private void maybeRemoveWorkPreferences() {
         if (mWorkPreferenceCategory == null) {
-            // No work preferences to remove
             return;
         }
         mParent.getPreferenceScreen().removePreference(mWorkPreferenceCategory);
@@ -276,6 +285,37 @@ public class WorkSoundPreferenceController extends PreferenceController implemen
         mWorkNotificationRingtonePreference = null;
         mWorkAlarmRingtonePreference = null;
     }
+
+    public void onManagedProfileAdded(@UserIdInt int profileId) {
+        if (mManagedProfileId == UserHandle.USER_NULL) {
+            mManagedProfileId = profileId;
+            initWorkPreferences();
+        }
+    }
+
+    public void onManagedProfileRemoved(@UserIdInt int profileId) {
+        if (mManagedProfileId == profileId) {
+            mManagedProfileId = mHelper.getManagedProfileId(mUserManager);
+            initWorkPreferences();
+        }
+    }
+
+    private final BroadcastReceiver mManagedProfileReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final int userId = ((UserHandle) intent.getExtra(Intent.EXTRA_USER)).getIdentifier();
+            switch (intent.getAction()) {
+                case Intent.ACTION_MANAGED_PROFILE_ADDED: {
+                    onManagedProfileAdded(userId);
+                    return;
+                }
+                case Intent.ACTION_MANAGED_PROFILE_REMOVED: {
+                    onManagedProfileRemoved(userId);
+                    return;
+                }
+            }
+        }
+    };
 
     public static class UnifyWorkDialogFragment extends InstrumentedDialogFragment
         implements DialogInterface.OnClickListener {
