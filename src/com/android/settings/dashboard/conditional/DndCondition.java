@@ -139,8 +139,11 @@ public class DndCondition extends Condition {
         public void onReceive(Context context, Intent intent) {
             if (NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED_INTERNAL
                     .equals(intent.getAction())) {
-                ConditionManager.get(context).getCondition(DndCondition.class)
-                        .refreshState();
+                final Condition condition =
+                        ConditionManager.get(context).getCondition(DndCondition.class);
+                if (condition != null) {
+                    condition.refreshState();
+                }
             }
         }
     }
