@@ -2253,7 +2253,7 @@
     <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the ambient display feature is enabled. -->
     <string name="doze_title">Ambient display</string>
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the ambient display feature. -->
-    <string name="doze_summary">Wake screen when you double-tap it or get new notifications. See how</string>
+    <string name="doze_summary">Wake screen when you receive notifications</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
     <string name="title_font_size">Font size</string>
     <!-- Summary for Font size. Lets the user know that this will make text larger or smaller. Appears in the accessibility portion of setup wizard. [CHAR LIMIT=NONE] -->
@@ -7820,11 +7820,25 @@
     <!-- Summary text for double twist for camera mode  [CHAR LIMIT=160]-->
     <string name="double_twist_for_camera_mode_summary"></string>
 
-    <!-- Title text for ambient display [CHAR LIMIT=60]-->
-    <string name="ambient_display_title">Quick screen check</string>
+    <!-- Title text for ambient display double tap [CHAR LIMIT=60]-->
+    <string name="ambient_display_title">Quick screen check - Double Tap</string>
 
-    <!-- Summary text for ambient display [CHAR LIMIT=160]-->
-    <string name="ambient_display_summary">To check your phone without waking it up fully, double-tap it or pick it up</string>
+    <!-- Summary text for ambient display double tap (phone) [CHAR LIMIT=160]-->
+    <string name="ambient_display_summary" product="default">To check your phone without waking it up fully, double-tap it</string>
+    <!-- Summary text for ambient display double tap (tablet) [CHAR LIMIT=160]-->
+    <string name="ambient_display_summary" product="tablet">To check your tablet without waking it up fully, double-tap it</string>
+    <!-- Summary text for ambient display double tap (device) [CHAR LIMIT=160]-->
+    <string name="ambient_display_summary" product="device">To check your device without waking it up fully, double-tap it</string>
+
+    <!-- Title text for ambient display pick up [CHAR LIMIT=60]-->
+    <string name="ambient_display_pickup_title">Quick screen check - Pickup notifications</string>
+
+    <!-- Summary text for ambient display (phone) [CHAR LIMIT=160]-->
+    <string name="ambient_display_pickup_summary" product="default">To check your phone without waking it up fully, pick it up</string>
+    <!-- Summary text for ambient display (tablet) [CHAR LIMIT=160]-->
+    <string name="ambient_display_pickup_summary" product="tablet">To check your tablet without waking it up fully, pick it up</string>
+    <!-- Summary text for ambient display (device) [CHAR LIMIT=160]-->
+    <string name="ambient_display_pickup_summary" product="device">To check your device without waking it up fully, pick it up</string>
 
     <!-- Title text for fingerprint swipe for notifications [CHAR LIMIT=60]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe for notifications</string>

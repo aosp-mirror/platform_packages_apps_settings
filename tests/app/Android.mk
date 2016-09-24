@@ -7,15 +7,13 @@ LOCAL_CERTIFICATE := platform
 
 LOCAL_JAVA_LIBRARIES := android.test.runner bouncycastle
 
-LOCAL_STATIC_ANDROID_LIBRARIES := \
-    android-support-v4
-
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-test \
     mockito-target \
     espresso-core \
-    espresso-contrib \
-    espresso-intents
+    espresso-contrib-nodep \
+    espresso-intents-nodep \
+    ub-uiautomator
 
 # Include all test java files.
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
