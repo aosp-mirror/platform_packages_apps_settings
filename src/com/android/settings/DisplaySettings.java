@@ -57,6 +57,7 @@ import java.util.List;
 
 import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
+import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
