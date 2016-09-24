@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.ArraySet;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;
@@ -33,11 +34,13 @@ public class SharedPreferencesLogger implements SharedPreferences {
     private final String mTag;
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeature;
+    private final Set<String> mPreferenceKeySet;
 
     public SharedPreferencesLogger(Context context, String tag) {
         mContext = context;
         mTag = tag;
         mMetricsFeature = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mPreferenceKeySet = new ArraySet<>();
     }
 
     @Override
@@ -96,7 +99,15 @@ public class SharedPreferencesLogger implements SharedPreferences {
     }
 
     private void logValue(String key, String value) {
-        mMetricsFeature.count(mContext, mTag + "/" + key + "|" + value, 1);
+        final String prefKey = mTag + "/" + key;
+        if (!mPreferenceKeySet.contains(prefKey)) {
+            // Pref key doesn't exist in set, this is initial display so we skip metrics but
+            // keeps track of this key.
+            mPreferenceKeySet.add(prefKey);
+            return;
+        }
+        // Pref key exists in set, log it's change in metrics.
+        mMetricsFeature.count(mContext, prefKey + "|" + value, 1);
     }
 
     private void logPackageName(String key, String value) {
