@@ -3013,6 +3013,18 @@
                        android:value="true" />
         </activity>
 
+        <activity android:name="Settings$AutomaticStorageManagerSettingsActivity"
+                  android:exported="@bool/config_has_storage_manager"
+                  android:label="@string/automatic_storage_manager_settings"
+                  android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.STORAGE_MANAGER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.deletionhelper.AutomaticStorageManagerSettings" />
+        </activity>
+
         <service
             android:name=".SettingsDumpService"
             android:exported="true"
