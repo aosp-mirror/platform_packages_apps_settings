@@ -318,7 +318,8 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
      * whereas children correspond to certificates.
      */
     private class GroupAdapter extends BaseExpandableListAdapter implements
-            ExpandableListView.OnGroupClickListener, ExpandableListView.OnChildClickListener {
+            ExpandableListView.OnGroupClickListener, ExpandableListView.OnChildClickListener,
+            View.OnClickListener {
         private final AdapterData mData;
 
         private GroupAdapter(Tab tab) {
@@ -402,6 +403,16 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             return true;
         }
 
+        /**
+         * Called when the switch on a system certificate is clicked. This will toggle whether it
+         * is trusted as a credential.
+         */
+        @Override
+        public void onClick(View view) {
+            CertHolder holder = (CertHolder) view.getTag();
+            removeOrInstallCert(holder);
+        }
+
         @Override
         public boolean onGroupClick(ExpandableListView expandableListView, View view,
                 int groupPosition, long id) {
@@ -459,16 +470,17 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
+                holder = new ViewHolder();
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
                 convertView = inflater.inflate(R.layout.trusted_credential, parent, false);
-                holder = new ViewHolder();
+                convertView.setTag(holder);
                 holder.mSubjectPrimaryView = (TextView)
                         convertView.findViewById(R.id.trusted_credential_subject_primary);
                 holder.mSubjectSecondaryView = (TextView)
                         convertView.findViewById(R.id.trusted_credential_subject_secondary);
                 holder.mSwitch = (Switch) convertView.findViewById(
                         R.id.trusted_credential_status);
-                convertView.setTag(holder);
+                holder.mSwitch.setOnClickListener(this);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
@@ -480,6 +492,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                         UserManager.DISALLOW_CONFIG_CREDENTIALS,
                         new UserHandle(certHolder.mProfileId)));
                 holder.mSwitch.setVisibility(View.VISIBLE);
+                holder.mSwitch.setTag(certHolder);
             }
             return convertView;
         }
@@ -576,6 +589,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             mListView = (ListView) mContainerView.findViewById(R.id.cert_list);
             mListView.setAdapter(this);
             mListView.setOnItemClickListener(this);
+            mListView.setItemsCanFocus(true);
 
             mHeaderView = (ViewGroup) mContainerView.findViewById(R.id.header_view);
             mHeaderView.setOnClickListener(this);

@@ -138,7 +138,7 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
                     onClickOk();
                 }
             } else if (view == mNegativeButton) {
-                onClickRemove();
+                onClickEnableOrDisable();
             }
         }
 
@@ -155,21 +155,26 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
             }
         }
 
-        private void onClickRemove() {
+        private void onClickEnableOrDisable() {
             final CertHolder certHolder = getCurrentCertInfo();
-            new AlertDialog.Builder(mActivity)
-                    .setMessage(getButtonConfirmation(certHolder))
-                    .setPositiveButton(android.R.string.yes,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int id) {
-                                    mDelegate.removeOrInstallCert(certHolder);
-                                    dialog.dismiss();
-                                    nextOrDismiss();
-                                }
-                            })
-                    .setNegativeButton(android.R.string.no, null)
-                    .show();
+            DialogInterface.OnClickListener onConfirm = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    mDelegate.removeOrInstallCert(certHolder);
+                    nextOrDismiss();
+                }
+            };
+            if (certHolder.isSystemCert()) {
+                // Removing system certs is reversible, so skip confirmation.
+                onConfirm.onClick(null, -1);
+            } else {
+                new AlertDialog.Builder(mActivity)
+                        .setMessage(R.string.trusted_credentials_remove_confirmation)
+                        .setPositiveButton(android.R.string.yes, onConfirm)
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
+
+            }
         }
 
         private void onCredentialConfirmed(int userId) {
@@ -312,13 +317,6 @@ class TrustedCredentialsDialogBuilder extends AlertDialog.Builder {
             }
 
             return certLayout;
-        }
-
-        private static int getButtonConfirmation(CertHolder certHolder) {
-            return certHolder.isSystemCert() ? ( certHolder.isDeleted()
-                        ? R.string.trusted_credentials_enable_confirmation
-                        : R.string.trusted_credentials_disable_confirmation )
-                    : R.string.trusted_credentials_remove_confirmation;
         }
 
         private static int getButtonLabel(CertHolder certHolder) {
