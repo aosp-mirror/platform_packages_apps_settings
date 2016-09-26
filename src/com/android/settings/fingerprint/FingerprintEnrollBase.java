@@ -36,7 +36,7 @@ import com.android.setupwizardlib.GlifLayout;
  */
 public abstract class FingerprintEnrollBase extends InstrumentedActivity
         implements View.OnClickListener {
-    static final int RESULT_FINISHED = FingerprintSettings.RESULT_FINISHED;
+    public static final int RESULT_FINISHED = FingerprintSettings.RESULT_FINISHED;
     static final int RESULT_SKIP = FingerprintSettings.RESULT_SKIP;
     static final int RESULT_TIMEOUT = FingerprintSettings.RESULT_TIMEOUT;
 
