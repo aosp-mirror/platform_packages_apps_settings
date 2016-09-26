@@ -287,11 +287,14 @@
                 android:layout_height="wrap_content"
                 style="@style/wifi_item"
                 android:paddingBottom="4dp"
+                android:importantForAccessibility="yes"
+                android:contentDescription="@string/wifi_advanced_toggle_description_collapsed"
                 android:visibility="gone">
             <CheckBox android:id="@+id/wifi_advanced_togglebox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/wifi_advanced_toggle"
+                    android:importantForAccessibility="noHideDescendants"
                     android:text="@string/wifi_show_advanced" />
         </LinearLayout>
 
