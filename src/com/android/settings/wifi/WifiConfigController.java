@@ -54,6 +54,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -262,13 +263,13 @@ public class WifiConfigController implements TextWatcher,
                 showSecurityFields();
                 showIpConfigFields();
                 showProxyFields();
+                final CheckBox advancedTogglebox =
+                        (CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox);
                 mView.findViewById(R.id.wifi_advanced_toggle).setVisibility(View.VISIBLE);
-                ((CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox))
-                        .setOnCheckedChangeListener(this);
-                if (showAdvancedFields) {
-                    ((CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox)).setChecked(true);
-                    mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.VISIBLE);
-                }
+                advancedTogglebox.setOnCheckedChangeListener(this);
+                advancedTogglebox.setChecked(showAdvancedFields);
+                mView.findViewById(R.id.wifi_advanced_fields)
+                        .setVisibility(showAdvancedFields ? View.VISIBLE : View.GONE);
             }
 
             if (mMode == WifiConfigUiBase.MODE_MODIFY) {
@@ -1210,11 +1211,18 @@ public class WifiConfigController implements TextWatcher,
                 ((EditText) mPasswordView).setSelection(pos);
             }
         } else if (view.getId() == R.id.wifi_advanced_togglebox) {
+            final View advancedToggle = mView.findViewById(R.id.wifi_advanced_toggle);
+            final int toggleVisibility;
+            final int stringID;
             if (isChecked) {
-                mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.VISIBLE);
+                toggleVisibility = View.VISIBLE;
+                stringID = R.string.wifi_advanced_toggle_description_expanded;
             } else {
-                mView.findViewById(R.id.wifi_advanced_fields).setVisibility(View.GONE);
+                toggleVisibility = View.GONE;
+                stringID = R.string.wifi_advanced_toggle_description_collapsed;
             }
+            mView.findViewById(R.id.wifi_advanced_fields).setVisibility(toggleVisibility);
+            advancedToggle.setContentDescription(mContext.getString(stringID));
         }
     }
 
