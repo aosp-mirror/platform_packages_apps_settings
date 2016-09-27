@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.FragmentTestUtil;
+import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -58,7 +58,7 @@ public class InstrumentedDialogFragmentTest {
         // Precondition: no metrics feature
         assertThat(fragment.getMetricsFeatureProvider()).isNull();
 
-        FragmentTestUtil.startFragment(fragment);
+        fragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
 
         // Verify: has metrics feature
         assertThat(fragment.getMetricsFeatureProvider()).isNotNull();

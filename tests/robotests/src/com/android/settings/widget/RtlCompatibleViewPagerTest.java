@@ -16,47 +16,46 @@
 
 package com.android.settings.widget;
 
-import android.annotation.Nullable;
-import android.app.Activity;
-import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.view.PagerAdapter;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.settings.TestConfig;
 import com.android.settings.shadow.ShadowTextUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static com.google.common.truth.Truth.assertThat;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Locale;
 
-import android.support.v4.view.PagerAdapter;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-import org.robolectric.Robolectric;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RtlCompatibleViewPagerTest {
-    private ViewPagerTestActivity mTestActivity;
-    private RtlCompatibleViewPager mTestViewPager;
+
     private Locale mLocaleEn;
     private Locale mLocaleHe;
+    private RtlCompatibleViewPager mViewPager;
 
     @Before
     public void setUp() {
-        mTestActivity = Robolectric.setupActivity(ViewPagerTestActivity.class);
-        mTestViewPager = mTestActivity.getViewPager();
+        mViewPager = new RtlCompatibleViewPager(
+                ShadowApplication.getInstance().getApplicationContext());
+        mViewPager.setAdapter(new ViewPagerAdapter());
         mLocaleEn = new Locale("en");
         mLocaleHe = new Locale("he");
     }
 
     @Test
     @Config(shadows = {ShadowTextUtils.class})
-    public void testRtlCompatible() {
+    public void testGetCurrentItem_shouldMaintainIndexDuringLocaleChange() {
         testRtlCompatibleInner(0);
         testRtlCompatibleInner(1);
     }
@@ -64,41 +63,20 @@ public class RtlCompatibleViewPagerTest {
     private void testRtlCompatibleInner(int currentItem) {
         // Set up the environment
         Locale.setDefault(mLocaleEn);
+        mViewPager.setCurrentItem(currentItem);
+
         assertThat(TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()))
                 .isEqualTo(View.LAYOUT_DIRECTION_LTR);
-        mTestViewPager.setCurrentItem(currentItem);
-        assertThat(mTestViewPager.getCurrentItem()).isEqualTo(currentItem);
+        assertThat(mViewPager.getCurrentItem()).isEqualTo(currentItem);
 
         // Simulate to change the language to RTL
-        Parcelable savedInstance = mTestViewPager.onSaveInstanceState();
+        Parcelable savedInstance = mViewPager.onSaveInstanceState();
         Locale.setDefault(mLocaleHe);
+        mViewPager.onRestoreInstanceState(savedInstance);
+
         assertThat(TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()))
                 .isEqualTo(View.LAYOUT_DIRECTION_RTL);
-        mTestViewPager.onRestoreInstanceState(savedInstance);
-
-        assertThat(mTestViewPager.getCurrentItem()).isEqualTo(currentItem);
-    }
-
-
-    /**
-     * Test activity that contains RTL viewpager
-     */
-    private static class ViewPagerTestActivity extends Activity {
-        private RtlCompatibleViewPager mViewPager;
-
-        @Override
-        protected void onCreate(@Nullable Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-            mViewPager = new RtlCompatibleViewPager(ViewPagerTestActivity.this);
-            mViewPager.setAdapter(new ViewPagerAdapter());
-
-            setContentView(mViewPager);
-        }
-
-        public RtlCompatibleViewPager getViewPager() {
-            return mViewPager;
-        }
+        assertThat(mViewPager.getCurrentItem()).isEqualTo(currentItem);
     }
 
     /**
@@ -119,11 +97,6 @@ public class RtlCompatibleViewPagerTest {
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup collection, int position, Object view) {
-            collection.removeView((View) view);
         }
 
         @Override
