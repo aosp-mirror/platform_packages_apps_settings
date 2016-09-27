@@ -29,7 +29,6 @@ import android.os.AsyncResult;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemProperties;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoCdma;
 import android.telephony.CellInfoGsm;
@@ -343,6 +342,11 @@ public class RadioInfo extends Activity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        if (!android.os.Process.myUserHandle().isSystem()) {
+            Log.e(TAG, "Not run from system user, don't do anything.");
+            finish();
+            return;
+        }
 
         setContentView(R.layout.radio_info);
 
