@@ -16,6 +16,7 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.android.settings.TestConfig;
 import com.android.settings.overlay.FeatureFactory;
@@ -32,7 +33,7 @@ import org.robolectric.shadows.ShadowApplication;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
@@ -62,27 +63,53 @@ public class SharedPreferenceLoggerTest {
     }
 
     @Test
-    public void putInt_shouldLogCount() {
-        mSharedPrefLogger.edit().putInt(TEST_KEY, 1);
-        verify(mLogWriter).count(any(Context.class), anyString(), anyInt());
+    public void putInt_shouldNotLogInitialPut() {
+        final SharedPreferences.Editor editor = mSharedPrefLogger.edit();
+        editor.putInt(TEST_KEY, 1);
+        editor.putInt(TEST_KEY, 1);
+        editor.putInt(TEST_KEY, 1);
+        editor.putInt(TEST_KEY, 2);
+        editor.putInt(TEST_KEY, 2);
+        editor.putInt(TEST_KEY, 2);
+        editor.putInt(TEST_KEY, 2);
+
+        verify(mLogWriter, times(6)).count(any(Context.class), anyString(), anyInt());
     }
 
     @Test
-    public void putBoolean_shouldLogCount() {
-        mSharedPrefLogger.edit().putBoolean(TEST_KEY, true);
-        verify(mLogWriter).count(any(Context.class), anyString(), anyInt());
+    public void putBoolean_shouldNotLogInitialPut() {
+        final SharedPreferences.Editor editor = mSharedPrefLogger.edit();
+        editor.putBoolean(TEST_KEY, true);
+        editor.putBoolean(TEST_KEY, true);
+        editor.putBoolean(TEST_KEY, false);
+        editor.putBoolean(TEST_KEY, false);
+        editor.putBoolean(TEST_KEY, false);
+
+        verify(mLogWriter, times(4)).count(any(Context.class), anyString(), anyInt());
     }
 
     @Test
-    public void putLong_shouldLogCount() {
-        mSharedPrefLogger.edit().putLong(TEST_KEY, 1);
-        verify(mLogWriter).count(any(Context.class), anyString(), anyInt());
+    public void putLong_shouldNotLogInitialPut() {
+        final SharedPreferences.Editor editor = mSharedPrefLogger.edit();
+        editor.putLong(TEST_KEY, 1);
+        editor.putLong(TEST_KEY, 1);
+        editor.putLong(TEST_KEY, 1);
+        editor.putLong(TEST_KEY, 1);
+        editor.putLong(TEST_KEY, 2);
+
+        verify(mLogWriter, times(4)).count(any(Context.class), anyString(), anyInt());
     }
 
     @Test
-    public void putFloat_shouldLogCount() {
-        mSharedPrefLogger.edit().putInt(TEST_KEY, 1);
-        verify(mLogWriter).count(any(Context.class), anyString(), anyInt());
+    public void putFloat_shouldNotLogInitialPut() {
+        final SharedPreferences.Editor editor = mSharedPrefLogger.edit();
+        editor.putFloat(TEST_KEY, 1);
+        editor.putFloat(TEST_KEY, 1);
+        editor.putFloat(TEST_KEY, 1);
+        editor.putFloat(TEST_KEY, 1);
+        editor.putFloat(TEST_KEY, 2);
+
+        verify(mLogWriter, times(4)).count(any(Context.class), anyString(), anyInt());
     }
 
 }
