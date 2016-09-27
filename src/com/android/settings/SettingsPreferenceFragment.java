@@ -86,11 +86,36 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
     private boolean mIsDataSetObserverRegistered = false;
     private RecyclerView.AdapterDataObserver mDataSetObserver =
             new RecyclerView.AdapterDataObserver() {
-        @Override
-        public void onChanged() {
-            onDataSetChanged();
-        }
-    };
+                @Override
+                public void onChanged() {
+                    onDataSetChanged();
+                }
+
+                @Override
+                public void onItemRangeChanged(int positionStart, int itemCount) {
+                    onDataSetChanged();
+                }
+
+                @Override
+                public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
+                    onDataSetChanged();
+                }
+
+                @Override
+                public void onItemRangeInserted(int positionStart, int itemCount) {
+                    onDataSetChanged();
+                }
+
+                @Override
+                public void onItemRangeRemoved(int positionStart, int itemCount) {
+                    onDataSetChanged();
+                }
+
+                @Override
+                public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+                    onDataSetChanged();
+                }
+            };
 
     private ViewGroup mPinnedHeaderFrameLayout;
     private ViewGroup mButtonBar;
