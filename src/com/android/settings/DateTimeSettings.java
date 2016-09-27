@@ -168,7 +168,8 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         Date dummyDate = mDummyDate.getTime();
         mDatePref.setSummary(DateFormat.getLongDateFormat(context).format(now.getTime()));
         mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
-        mTimeZone.setSummary(ZoneGetter.getTimeZoneOffsetAndName(now.getTimeZone(), now.getTime()));
+        mTimeZone.setSummary(ZoneGetter.getTimeZoneOffsetAndName(context,
+                now.getTimeZone(), now.getTime()));
         mTime24Pref.setSummary(DateFormat.getTimeFormat(getActivity()).format(dummyDate));
     }
 
@@ -385,7 +386,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         public void setListening(boolean listening) {
             if (listening) {
                 final Calendar now = Calendar.getInstance();
-                mSummaryLoader.setSummary(this, ZoneGetter.getTimeZoneOffsetAndName(
+                mSummaryLoader.setSummary(this, ZoneGetter.getTimeZoneOffsetAndName(mContext,
                         now.getTimeZone(), now.getTime()));
             }
         }
