@@ -21,6 +21,8 @@ import android.support.annotation.Keep;
 
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
+import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 
 /**
@@ -30,6 +32,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 public final class FeatureFactoryImpl extends FeatureFactory {
 
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    private DashboardFeatureProviderImpl mDashboardFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -47,6 +50,14 @@ public final class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public PowerUsageFeatureProvider getPowerUsageFeatureProvider() {
         return null;
+    }
+
+    @Override
+    public DashboardFeatureProvider getDashboardFeatureProvider() {
+        if (mDashboardFeatureProvider == null) {
+            mDashboardFeatureProvider = new DashboardFeatureProviderImpl();
+        }
+        return mDashboardFeatureProvider;
     }
 
 }
