@@ -3006,7 +3006,7 @@
         </activity>
 
         <activity android:name="Settings$AutomaticStorageManagerSettingsActivity"
-                  android:exported="@bool/config_has_storage_manager"
+                  android:exported="@bool/config_storage_manager_settings_enabled"
                   android:label="@string/automatic_storage_manager_settings"
                   android:taskAffinity="">
             <intent-filter android:priority="1">
