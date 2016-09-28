@@ -35,6 +35,7 @@ import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
@@ -50,7 +51,7 @@ public class DashboardSummary extends InstrumentedFragment
     private static final boolean DEBUG_TIMING = false;
     private static final String TAG = "DashboardSummary";
 
-    public static final String[] INITIAL_ITEMS = new String[] {
+    public static final String[] INITIAL_ITEMS = new String[]{
             Settings.WifiSettingsActivity.class.getName(),
             Settings.BluetoothSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
@@ -74,6 +75,7 @@ public class DashboardSummary extends InstrumentedFragment
     private SuggestionsChecks mSuggestionsChecks;
     private ArrayList<String> mSuggestionsShownLogged;
     private ArrayList<String> mSuggestionsHiddenLogged;
+    private DashboardFeatureProvider mDashboardFeatureProvider;
 
     @Override
     public int getMetricsCategory() {
@@ -84,10 +86,18 @@ public class DashboardSummary extends InstrumentedFragment
     public void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
+        final Activity activity = getActivity();
+        mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
+                .getDashboardFeatureProvider(activity);
 
-        List<DashboardCategory> categories =
-                ((SettingsActivity) getActivity()).getDashboardCategories();
-        mSummaryLoader = new SummaryLoader(getActivity(), categories);
+        if (mDashboardFeatureProvider.isEnabled()) {
+            mSummaryLoader = new SummaryLoader(activity,
+                    mDashboardFeatureProvider.getTilesForHomepage());
+        } else {
+            mSummaryLoader = new SummaryLoader(activity,
+                    ((SettingsActivity) getActivity()).getDashboardCategories());
+        }
+
         Context context = getContext();
         mConditionManager = ConditionManager.get(context, false);
         mSuggestionParser = new SuggestionParser(context,
@@ -102,8 +112,10 @@ public class DashboardSummary extends InstrumentedFragment
             mSuggestionsHiddenLogged =
                     savedInstanceState.getStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED);
         }
-        if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
-                + " ms");
+        if (DEBUG_TIMING) {
+            Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
+                    + " ms");
+        }
     }
 
     @Override
@@ -124,8 +136,10 @@ public class DashboardSummary extends InstrumentedFragment
                 mMetricsFeatureProvider.visible(getContext(), c.getMetricsConstant());
             }
         }
-        if (DEBUG_TIMING) Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime)
-                + " ms");
+        if (DEBUG_TIMING) {
+            Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime)
+                    + " ms");
+        }
     }
 
     @Override
@@ -163,13 +177,15 @@ public class DashboardSummary extends InstrumentedFragment
         } else {
             mConditionManager.remListener(this);
         }
-        if (DEBUG_TIMING) Log.d(TAG, "onWindowFocusChanged took "
-                + (System.currentTimeMillis() - startTime) + " ms");
+        if (DEBUG_TIMING) {
+            Log.d(TAG, "onWindowFocusChanged took "
+                    + (System.currentTimeMillis() - startTime) + " ms");
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         return inflater.inflate(R.layout.dashboard, container, false);
     }
 
@@ -204,8 +220,10 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setAdapter(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
-        if (DEBUG_TIMING) Log.d(TAG, "onViewCreated took "
-                + (System.currentTimeMillis() - startTime) + " ms");
+        if (DEBUG_TIMING) {
+            Log.d(TAG, "onViewCreated took "
+                    + (System.currentTimeMillis() - startTime) + " ms");
+        }
         rebuildUI();
     }
 
@@ -259,9 +277,18 @@ public class DashboardSummary extends InstrumentedFragment
             if (activity == null) {
                 return;
             }
-            List<DashboardCategory> categories =
-                    ((SettingsActivity) activity).getDashboardCategories();
-            mAdapter.setCategoriesAndSuggestions(categories, tiles);
+
+            if (mDashboardFeatureProvider.isEnabled()) {
+                // Temporary hack to wrap homepage category into a list. Soon we will create adapter
+                // API that takes a single category.
+                List<DashboardCategory> categories = new ArrayList<>();
+                categories.add(mDashboardFeatureProvider.getTilesForHomepage());
+                mAdapter.setCategoriesAndSuggestions(categories, tiles);
+            } else {
+                mAdapter.setCategoriesAndSuggestions(
+                        ((SettingsActivity) activity).getDashboardCategories(), tiles);
+            }
+
         }
     }
 }

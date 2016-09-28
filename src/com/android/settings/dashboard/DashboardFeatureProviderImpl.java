@@ -18,14 +18,38 @@ package com.android.settings.dashboard;
 
 import android.content.Context;
 
+import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.CategoryManager;
+import com.android.settingslib.drawer.DashboardCategory;
+
+import java.util.List;
+
 /**
  * Impl for {@code DashboardFeatureProvider}.
  */
 public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
+    protected final Context mContext;
+
+    private final CategoryManager mCategoryManager;
+
+    public DashboardFeatureProviderImpl(Context context) {
+        mContext = context;
+        mCategoryManager = CategoryManager.get();
+    }
+
     @Override
-    public boolean shouldUseNewIALayout(Context context) {
+    public boolean isEnabled() {
         return false;
     }
 
+    @Override
+    public DashboardCategory getTilesForHomepage() {
+        return mCategoryManager.getTilesByCategory(mContext, CategoryKey.CATEGORY_HOMEPAGE);
+    }
+
+    @Override
+    public List<DashboardCategory> getAllCategories() {
+        return mCategoryManager.getCategories(mContext);
+    }
 }

@@ -30,6 +30,7 @@ import android.util.ArraySet;
 import android.util.Log;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
@@ -72,6 +73,19 @@ public class SummaryLoader {
         }
     }
 
+    public SummaryLoader(Activity activity, DashboardCategory categories) {
+        mHandler = new Handler();
+        mWorkerThread = new HandlerThread("SummaryLoader", Process.THREAD_PRIORITY_BACKGROUND);
+        mWorkerThread.start();
+        mWorker = new Worker(mWorkerThread.getLooper());
+        mActivity = activity;
+        List<Tile> tiles = categories.tiles;
+        for (int j = 0; j < tiles.size(); j++) {
+            Tile tile = tiles.get(j);
+            mWorker.obtainMessage(Worker.MSG_GET_PROVIDER, tile).sendToTarget();
+        }
+    }
+
     public void release() {
         mWorkerThread.quitSafely();
         // Make sure we aren't listening.
@@ -83,7 +97,7 @@ public class SummaryLoader {
     }
 
     public void setSummary(SummaryProvider provider, final CharSequence summary) {
-        final ComponentName component= mSummaryMap.get(provider);
+        final ComponentName component = mSummaryMap.get(provider);
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -95,9 +109,18 @@ public class SummaryLoader {
                     }
                     return;
                 }
-                final List<DashboardCategory> categories =
-                        ((SettingsDrawerActivity) mActivity).getDashboardCategories();
-                final Tile tile = getTileFromCategory(categories, component);
+                final Tile tile;
+                final DashboardFeatureProvider dashboardFeatureProvider =
+                        FeatureFactory.getFactory(mActivity).getDashboardFeatureProvider(mActivity);
+                if (dashboardFeatureProvider.isEnabled()) {
+                    tile = getTileFromCategory(dashboardFeatureProvider.getTilesForHomepage(),
+                            component);
+                } else {
+                    tile = getTileFromCategory(
+                            ((SettingsDrawerActivity) mActivity).getDashboardCategories(),
+                            component);
+                }
+
                 if (tile == null) {
                     if (DEBUG) {
                         Log.d(TAG, "Can't find tile for " + component);
@@ -214,12 +237,20 @@ public class SummaryLoader {
         final int categorySize = categories.size();
         for (int i = 0; i < categorySize; i++) {
             final DashboardCategory category = categories.get(i);
-            final int tileCount = category.tiles.size();
-            for (int j = 0; j < tileCount; j++) {
-                final Tile tile = category.tiles.get(j);
-                if (component.equals(tile.intent.getComponent())) {
-                    return tile;
-                }
+            final Tile tile = getTileFromCategory(category, component);
+            if (tile != null) {
+                return tile;
+            }
+        }
+        return null;
+    }
+
+    private Tile getTileFromCategory(DashboardCategory category, ComponentName component) {
+        final int tileCount = category.tiles.size();
+        for (int j = 0; j < tileCount; j++) {
+            final Tile tile = category.tiles.get(j);
+            if (component.equals(tile.intent.getComponent())) {
+                return tile;
             }
         }
         return null;
