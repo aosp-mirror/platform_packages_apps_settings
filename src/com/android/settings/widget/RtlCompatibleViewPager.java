@@ -97,8 +97,8 @@ public final class RtlCompatibleViewPager extends ViewPager {
             super(superState);
         }
 
-        private RtlSavedState(Parcel in) {
-            super(in);
+        private RtlSavedState(Parcel in, ClassLoader loader) {
+            super(in, loader);
             position = in.readInt();
         }
 
@@ -108,11 +108,17 @@ public final class RtlCompatibleViewPager extends ViewPager {
             out.writeInt(position);
         }
 
-        public static final Parcelable.Creator<RtlSavedState> CREATOR
-                = new Parcelable.Creator<RtlSavedState>() {
+        public static final Parcelable.ClassLoaderCreator<RtlSavedState> CREATOR
+                = new Parcelable.ClassLoaderCreator<RtlSavedState>() {
+            @Override
+            public RtlSavedState createFromParcel(Parcel source,
+                    ClassLoader loader) {
+                return new RtlSavedState(source, loader);
+            }
+
             @Override
             public RtlSavedState createFromParcel(Parcel in) {
-                return new RtlSavedState(in);
+                return new RtlSavedState(in, null);
             }
 
             @Override
