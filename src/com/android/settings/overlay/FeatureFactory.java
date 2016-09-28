@@ -22,6 +22,7 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 
 /**
@@ -66,6 +67,8 @@ public abstract class FeatureFactory {
     public abstract MetricsFeatureProvider getMetricsFeatureProvider();
 
     public abstract PowerUsageFeatureProvider getPowerUsageFeatureProvider();
+
+    public abstract DashboardFeatureProvider getDashboardFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
