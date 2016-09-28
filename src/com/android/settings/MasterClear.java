@@ -37,6 +37,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -265,10 +266,9 @@ public class MasterClear extends OptionsMenuFragment {
                     icon = context.getPackageManager().getDefaultActivityIcon();
                 }
 
-                TextView child = (TextView)inflater.inflate(R.layout.master_clear_account,
-                        contents, false);
-                child.setText(account.name);
-                child.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+                View child = inflater.inflate(R.layout.master_clear_account, contents, false);
+                ((ImageView) child.findViewById(android.R.id.icon)).setImageDrawable(icon);
+                ((TextView) child.findViewById(android.R.id.title)).setText(account.name);
                 contents.addView(child);
             }
         }
