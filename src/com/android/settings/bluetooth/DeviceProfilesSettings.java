@@ -115,7 +115,7 @@ public final class DeviceProfilesSettings extends InstrumentedDialogFragment imp
                 EditText deviceName = (EditText) mRootView.findViewById(R.id.name);
                 mCachedDevice.setName(deviceName.getText().toString());
                 break;
-            case DialogInterface.BUTTON_NEGATIVE:
+            case DialogInterface.BUTTON_NEUTRAL:
                 mCachedDevice.unpair();
                 com.android.settings.bluetooth.Utils.updateSearchIndex(getContext(),
                         BluetoothSettings.class.getName(), mCachedDevice.getName(),
