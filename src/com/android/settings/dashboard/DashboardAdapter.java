@@ -301,11 +301,22 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     private void onBindSuggestionHeader(final DashboardItemHolder holder) {
-        holder.icon.setImageResource(hasMoreSuggestions() ? R.drawable.ic_expand_more
-                : R.drawable.ic_expand_less);
-        holder.title.setText(mContext.getString(R.string.suggestions_title, mSuggestions.size()));
+        final boolean moreSuggestions = hasMoreSuggestions();
         final int undisplayedSuggestionCount =
                 mSuggestions.size() - getDisplayableSuggestionCount();
+        holder.icon.setImageResource(moreSuggestions ? R.drawable.ic_expand_more
+                : R.drawable.ic_expand_less);
+        holder.title.setText(mContext.getString(R.string.suggestions_title, mSuggestions.size()));
+        String summaryContentDescription;
+        if (moreSuggestions) {
+            summaryContentDescription = mContext.getResources().getQuantityString(
+                    R.plurals.settings_suggestion_header_summary_hidden_items,
+                    undisplayedSuggestionCount, undisplayedSuggestionCount);
+        } else {
+            summaryContentDescription = mContext.getString(R.string.condition_expand_hide);
+        }
+        holder.summary.setContentDescription(summaryContentDescription);
+
         if (undisplayedSuggestionCount == 0) {
             holder.summary.setText(null);
         } else {
