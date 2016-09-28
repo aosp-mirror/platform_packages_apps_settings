@@ -17,11 +17,13 @@
 package com.android.settings.deletionhelper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.text.format.DateUtils;
@@ -55,6 +57,8 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
     private static final String KEY_DELETION_HELPER = "deletion_helper";
     private static final String KEY_FREED = "freed_bytes";
     private static final String KEY_STORAGE_MANAGER_SWITCH = "storage_manager_active";
+    private static final String STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY =
+            "ro.storage_manager.enabled";
 
     private DropDownPreference mDaysToRetain;
     private Preference mFreedBytes;
@@ -126,6 +130,10 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
                 mDaysToRetain.setEnabled(checked);
                 Settings.Secure.putInt(getContentResolver(),
                         Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, checked ? 1 : 0);
+                // Only show a warning if enabling.
+                if (checked) {
+                    maybeShowWarning();
+                }
                 break;
             case KEY_DAYS:
                 Settings.Secure.putInt(getContentResolver(),
@@ -163,5 +171,16 @@ public class AutomaticStorageManagerSettings extends SettingsPreferenceFragment 
             }
         }
         return indices.length - 1;
+    }
+
+    private void maybeShowWarning() {
+        // If the storage manager is on by default, we can use the normal message.
+        boolean warningUnneeded = SystemProperties.getBoolean(
+                STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY, false);
+        if (warningUnneeded) {
+            return;
+        }
+        ActivationWarningFragment fragment = ActivationWarningFragment.newInstance();
+        fragment.show(getFragmentManager(), ActivationWarningFragment.TAG);
     }
 }
