@@ -16,6 +16,11 @@
 
 package com.android.settings;
 
+import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
+import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
+import static com.android.settings.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -42,15 +47,16 @@ import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.fingerprint.FingerprintEnrollBase;
+import com.android.settings.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class ChooseLockGeneric extends SettingsActivity {
     public static final String CONFIRM_CREDENTIALS = "confirm_credentials";
@@ -61,8 +67,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
 
         String action = modIntent.getAction();
-        if (DevicePolicyManager.ACTION_SET_NEW_PASSWORD.equals(action)
-                || DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(action)) {
+        if (ACTION_SET_NEW_PASSWORD.equals(action)
+                || ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(action)) {
             modIntent.putExtra(EXTRA_HIDE_DRAWER, true);
         }
         return modIntent;
@@ -90,6 +96,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private static final String KEY_UNLOCK_SET_PASSWORD = "unlock_set_password";
         private static final String KEY_UNLOCK_SET_PATTERN = "unlock_set_pattern";
         private static final String KEY_UNLOCK_SET_MANAGED = "unlock_set_managed";
+        private static final String KEY_SKIP_FINGERPRINT = "unlock_skip_fingerprint";
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
@@ -101,6 +108,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         private static final int CONFIRM_EXISTING_REQUEST = 100;
         private static final int ENABLE_ENCRYPTION_REQUEST = 101;
         private static final int CHOOSE_LOCK_REQUEST = 102;
+        private static final int CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST = 103;
+        private static final int SKIP_FINGERPRINT_REQUEST = 104;
 
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private DevicePolicyManager mDPM;
@@ -119,6 +128,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private int mUserId;
         private boolean mHideDrawer = false;
         private ManagedLockPasswordProvider mManagedPasswordProvider;
+        private boolean mIsSetNewPassword = false;
 
         protected boolean mForFingerprint = false;
 
@@ -131,12 +141,15 @@ public class ChooseLockGeneric extends SettingsActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
+            String chooseLockAction = getActivity().getIntent().getAction();
             mFingerprintManager =
                 (FingerprintManager) getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
             mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
             mKeyStore = KeyStore.getInstance();
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this.getActivity());
             mLockPatternUtils = new LockPatternUtils(getActivity());
+            mIsSetNewPassword = ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
+                    || ACTION_SET_NEW_PASSWORD.equals(chooseLockAction);
 
             // Defaults to needing to confirm credentials
             final boolean confirmCredentials = getActivity().getIntent()
@@ -154,6 +167,16 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             mForChangeCredRequiredForBoot = getArguments() != null && getArguments().getBoolean(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT);
+            if (mIsSetNewPassword) {
+                // In ACTION_SET_NEW_PARENT_PROFILE_PASSWORD or ACTION_SET_NEW_PASSWORD, the user
+                // will be asked to confirm the password if one has been set.
+                // On fingerprint supported device, fingerprint options are represented in the
+                // options. If the user chooses to skip fingerprint setup, ChooseLockGeneric is
+                // relaunched to only show options without fingerprint. In this case, we shouldn't
+                // ask the user to confirm the password again.
+                mPasswordConfirmed = getActivity().getIntent().getBooleanExtra(
+                        PASSWORD_CONFIRMED, false);
+            }
 
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
@@ -168,9 +191,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     UserManager.get(getActivity()),
                     null,
                     getActivity().getIntent().getExtras()).getIdentifier();
-            if (DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(
-                    getActivity().getIntent().getAction()) ||
-                    !mLockPatternUtils.isSeparateProfileChallengeAllowed(targetUser)) {
+            if (ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
+                    || !mLockPatternUtils.isSeparateProfileChallengeAllowed(targetUser)) {
                 // Always use parent if explicitely requested or if profile challenge is not
                 // supported
                 Bundle arguments = getArguments();
@@ -180,8 +202,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mUserId = targetUser;
             }
 
-            if (DevicePolicyManager.ACTION_SET_NEW_PASSWORD
-                    .equals(getActivity().getIntent().getAction())
+            if (ACTION_SET_NEW_PASSWORD.equals(chooseLockAction)
                     && Utils.isManagedProfile(UserManager.get(getActivity()), mUserId)
                     && mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
                 getActivity().setTitle(R.string.lock_settings_picker_title_profile);
@@ -216,6 +237,10 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected void addHeaderView() {
             if (mForFingerprint) {
                 setHeaderView(R.layout.choose_lock_generic_fingerprint_header);
+                if (mIsSetNewPassword) {
+                    ((TextView) getHeaderView().findViewById(R.id.fingerprint_header_description))
+                            .setText(R.string.fingerprint_unlock_title);
+                }
             }
         }
 
@@ -227,6 +252,12 @@ public class ChooseLockGeneric extends SettingsActivity {
                 // Show the disabling FRP warning only when the user is switching from a secure
                 // unlock method to an insecure one
                 showFactoryResetProtectionWarningDialog(key);
+                return true;
+            } else if (KEY_SKIP_FINGERPRINT.equals(key)) {
+                Intent chooseLockGenericIntent = new Intent(getActivity(), ChooseLockGeneric.class);
+                chooseLockGenericIntent.setAction(getIntent().getAction());
+                chooseLockGenericIntent.putExtra(PASSWORD_CONFIRMED, mPasswordConfirmed);
+                startActivityForResult(chooseLockGenericIntent, SKIP_FINGERPRINT_REQUEST);
                 return true;
             } else {
                 return setUnlockMethod(key);
@@ -302,6 +333,20 @@ public class ChooseLockGeneric extends SettingsActivity {
                     getActivity().setResult(resultCode, data);
                     finish();
                 }
+            } else if (requestCode == CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
+                    && resultCode == FingerprintEnrollBase.RESULT_FINISHED) {
+                Intent intent = new Intent(getActivity(), FingerprintEnrollFindSensor.class);
+                if (data != null) {
+                    intent.putExtras(data.getExtras());
+                }
+                startActivity(intent);
+                finish();
+            } else if (requestCode == SKIP_FINGERPRINT_REQUEST) {
+                if (resultCode != RESULT_CANCELED) {
+                    getActivity().setResult(
+                            resultCode == RESULT_FINISHED ? RESULT_OK : resultCode, data);
+                    finish();
+                }
             } else {
                 getActivity().setResult(Activity.RESULT_CANCELED);
                 finish();
@@ -374,6 +419,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 managed.setTitle(mManagedPasswordProvider.getPickerOptionTitle(mForFingerprint));
             } else {
                 removePreference(KEY_UNLOCK_SET_MANAGED);
+            }
+
+            if (!(mForFingerprint && mIsSetNewPassword)) {
+                removePreference(KEY_SKIP_FINGERPRINT);
             }
         }
 
@@ -607,7 +656,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             quality = upgradeQuality(quality);
             Intent intent = getIntentForUnlockMethod(quality, disabled);
             if (intent != null) {
-                startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
+                startActivityForResult(intent,
+                        mIsSetNewPassword && mHasChallenge
+                                ? CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
+                                : CHOOSE_LOCK_REQUEST);
                 return;
             }
 
@@ -615,8 +667,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mLockPatternUtils.setSeparateProfileChallengeEnabled(mUserId, true, mUserPassword);
                 mChooseLockSettingsHelper.utils().clearLock(mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
-                removeAllFingerprintForUserAndFinish(mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
+                removeAllFingerprintForUserAndFinish(mUserId);
             } else {
                 removeAllFingerprintForUserAndFinish(mUserId);
             }
