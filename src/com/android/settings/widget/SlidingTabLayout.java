@@ -83,19 +83,21 @@ public final class SlidingTabLayout extends FrameLayout implements View.OnClickL
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         if (mTitleView.getChildCount() > 0) {
-            mTitleView.layout(0, 0, mTitleView.getMeasuredWidth(), mTitleView.getMeasuredHeight());
             final int indicatorBottom = getMeasuredHeight();
             final int indicatorHeight = mIndicatorView.getMeasuredHeight();
             final int indicatorWidth = mIndicatorView.getMeasuredWidth();
             final int totalWidth = getMeasuredWidth();
+            final int leftPadding = getPaddingLeft();
+            final int rightPadding = getPaddingRight();
 
+            mTitleView.layout(leftPadding, 0, mTitleView.getMeasuredWidth() + rightPadding,
+                    mTitleView.getMeasuredHeight());
             // IndicatorView should start on the right when RTL mode is enabled
             if (isRtlMode()) {
                 mIndicatorView.layout(totalWidth - indicatorWidth,
                         indicatorBottom - indicatorHeight, totalWidth,
                         indicatorBottom);
             } else {
-
                 mIndicatorView.layout(0, indicatorBottom - indicatorHeight,
                         indicatorWidth, indicatorBottom);
             }
