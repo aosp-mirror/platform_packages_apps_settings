@@ -16,6 +16,7 @@
 package com.android.settings.dashboard;
 
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
 
@@ -35,7 +36,19 @@ public interface DashboardFeatureProvider {
     DashboardCategory getTilesForHomepage();
 
     /**
+     * Get tiles (wrapped in {@link DashboardCategory}) for system category.
+     */
+    DashboardCategory getTilesForSystemCategory();
+
+    /**
      * Get all tiles, grouped by category.
      */
     List<DashboardCategory> getAllCategories();
+
+    /**
+     * Returns a priority group for tile. priority level is grouped into hundreds. tiles with
+     * priority 100 - 199 belongs to priority level 100, tiles with priority 200 - 299 is in
+     * group 200, and so on.
+     */
+    int getPriorityGroup(Tile tile);
 }

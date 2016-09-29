@@ -2275,8 +2275,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.device" />
-            <meta-data android:name="com.android.settings.iacategory"
-                       android:value="com.android.settings.category.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
         </activity>
@@ -3033,20 +3031,116 @@
         </activity>
 
         <!-- Information architecture host activities -->
-        <activity
-            android:name=".Settings$SupportActivity"
-            android:label="@string/page_tab_title_support"
-            android:icon="@drawable/ic_help_24dp">
-            <intent-filter android:priority="-1">
-                <action android:name="com.android.settings.action.SETTINGS" />
+
+        <!-- Alias for battery settings in new IA. Remove and merge metadata into TargetActivity -->
+        <activity-alias android:name="BatteryDashboardAlias"
+                        android:targetActivity="Settings$PowerUsageSummaryActivity">
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
-            <meta-data android:name="com.android.settings.iacategory"
-                       android:value="com.android.settings.category.homepage" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.fuelgauge.PowerUsageSummary"/>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage"/>
+        </activity-alias>
+
+        <activity android:name=".Settings$SystemDashboardActivity"
+                  android:label="@string/header_category_system"
+                  android:icon="@drawable/ic_settings_about">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage"/>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.system.SystemDashboardFragment"/>
+        </activity>
+
+        <activity android:name=".Settings$SupportDashboardActivity"
+                  android:label="@string/page_tab_title_support"
+                  android:icon="@drawable/ic_help_24dp">
+            <intent-filter android:priority="0">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.dashboard.SupportFragment"/>
             <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/help_label" />
+                       android:resource="@string/help_label"/>
         </activity>
+
+        <!-- Alias for IME & Language in new IA. Should merge into TargetActivity when launch -->
+        <activity-alias android:name="LanguageAndInputDashboardAlias"
+            android:targetActivity="Settings$InputMethodAndLanguageSettingsActivity">
+            <intent-filter android:priority="250">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.inputmethod.InputMethodAndLanguageSettings" />
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
+        <!-- Alias for Date & Time in new IA. Should merge into TargetActivity when launch -->
+        <activity-alias android:name="DateTimeDashboardAlias"
+                        android:targetActivity="Settings$DateTimeSettingsActivity">
+            <intent-filter android:priority="240">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.DateTimeSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
+        <activity-alias android:name="AccessibilityDashboardAlias"
+                    android:targetActivity="Settings$AccessibilitySettingsActivity">
+            <intent-filter android:priority="150">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.accessibility.AccessibilitySettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
+        <!-- Alias for developer setting in new IA. Should merge into TargetActivity when launch -->
+        <activity-alias android:name="DevelopmentSettingsDashboardAlias"
+                        android:targetActivity="Settings$DevelopmentSettingsActivity"
+                        android:label="@string/development_settings_title"
+                        android:icon="@drawable/ic_settings_development">
+            <intent-filter android:priority="50">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.DevelopmentSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
+        <activity-alias android:name="AboutDeviceDashboardAlias"
+                        android:targetActivity="Settings$DeviceInfoSettingsActivity">
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.DeviceInfoSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
+        <!-- End of information architecture host activities -->
 
         <service
             android:name=".SettingsDumpService"

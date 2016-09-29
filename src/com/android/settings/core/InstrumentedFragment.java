@@ -33,6 +33,10 @@ public abstract class InstrumentedFragment extends ObservablePreferenceFragment
 
     protected MetricsFeatureProvider mMetricsFeatureProvider;
 
+    // metrics placeholder value. Only use this for development.
+    protected final int PLACEHOLDER_METRIC = 10000;
+    protected final int SYSTEM_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 1;
+
     public InstrumentedFragment() {
         // Mixin that logs visibility change for activity.
         getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory()));

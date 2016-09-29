@@ -68,7 +68,10 @@ public class Settings extends SettingsActivity {
     }
     public static class BackgroundCheckSummaryActivity extends SettingsActivity { /* empty */ }
     public static class StorageUseActivity extends SettingsActivity { /* empty */ }
-    public static class DevelopmentSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class DevelopmentSettingsActivity extends SettingsActivity {
+        public static final String DASHBOARD_ALIAS =
+                "com.android.settings.DevelopmentSettingsDashboardAlias";
+    }
     public static class AccessibilitySettingsActivity extends SettingsActivity { /* empty */ }
     public static class CaptioningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityInversionSettingsActivity extends SettingsActivity { /* empty */ }
@@ -161,6 +164,7 @@ public class Settings extends SettingsActivity {
     public static class SystemSettings extends SettingsActivity { /* empty */ }
 
     // Top level categories for new IA
-    public static class SupportActivity extends SettingsActivity {}
+    public static class SystemDashboardActivity extends SettingsActivity {}
+    public static class SupportDashboardActivity extends SettingsActivity {}
 
 }

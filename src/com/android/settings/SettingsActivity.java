@@ -124,6 +124,7 @@ import com.android.settings.qstile.DevelopmentTiles;
 import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search.Index;
 import com.android.settings.sim.SimSettings;
+import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
@@ -264,6 +265,18 @@ public class SettingsActivity extends SettingsDrawerActivity
             Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.PrintSettingsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
+
+            // New IA
+            // Home page
+            "com.android.settings.Settings.BatteryDashboardAlias",
+            Settings.SystemDashboardActivity.class.getName(),
+            Settings.SupportDashboardActivity.class.getName(),
+            // Home page > System
+            "com.android.settings.Settings.LanguageAndInputDashboardAlias",
+            "com.android.settings.Settings.DateTimeDashboardAlias",
+            "com.android.settings.Settings.AccessibilityDashboardAlias",
+            "com.android.settings.Settings.AboutDeviceDashboardAlias",
+
     };
 
     private static final String[] ENTRY_FRAGMENTS = {
@@ -363,7 +376,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             NightDisplaySettings.class.getName(),
             ManageDomainUrls.class.getName(),
             AutomaticStorageManagerSettings.class.getName(),
-            SupportFragment.class.getName()
+            SupportFragment.class.getName(),
+            SystemDashboardFragment.class.getName(),
     };
 
 
@@ -1119,6 +1133,9 @@ public class SettingsActivity extends SettingsDrawerActivity
                 && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
         setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsActivity.class.getName()),
+                showDev, isAdmin, pm);
+        setTileEnabled(new ComponentName(packageName,
+                        Settings.DevelopmentSettingsActivity.DASHBOARD_ALIAS),
                 showDev, isAdmin, pm);
 
         // Reveal development-only quick settings tiles

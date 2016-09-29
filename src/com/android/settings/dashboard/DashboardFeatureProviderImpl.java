@@ -21,6 +21,7 @@ import android.content.Context;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
 
@@ -49,7 +50,17 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
+    public DashboardCategory getTilesForSystemCategory() {
+        return mCategoryManager.getTilesByCategory(mContext, CategoryKey.CATEGORY_SYSTEM);
+    }
+
+    @Override
     public List<DashboardCategory> getAllCategories() {
         return mCategoryManager.getCategories(mContext);
+    }
+
+    @Override
+    public int getPriorityGroup(Tile tile) {
+        return tile.priority / 100;
     }
 }
