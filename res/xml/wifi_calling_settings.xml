@@ -26,10 +26,17 @@
             android:entryValues="@array/wifi_calling_mode_values"
             android:dialogTitle="@string/wifi_calling_mode_dialog_title" />
 
+    <ListPreference
+            android:key="wifi_calling_roaming_mode"
+            android:title="@string/wifi_calling_roaming_mode_title"
+            android:summary="@string/wifi_calling_roaming_mode_summary"
+            android:entries="@array/wifi_calling_mode_choices_v2"
+            android:entryValues="@array/wifi_calling_mode_values"
+            android:dialogTitle="@string/wifi_calling_roaming_mode_dialog_title" />
+
     <Preference
-        android:key="emergency_address_key"
-        android:title="@string/emergency_address_title"
-        android:summary="@string/emergency_address_summary">
-    </Preference>
+            android:key="emergency_address_key"
+            android:title="@string/emergency_address_title"
+            android:summary="@string/emergency_address_summary" />
 
 </PreferenceScreen>
