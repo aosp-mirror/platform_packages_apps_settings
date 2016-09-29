@@ -55,6 +55,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
     //String keys for preference lookup
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
+    private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
     private static final String PREFERENCE_EMERGENCY_ADDRESS = "emergency_address_key";
 
     private static final int REQUEST_CHECK_WFC_EMERGENCY_ADDRESS = 1;
@@ -68,11 +69,13 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
     private ListPreference mButtonWfcMode;
+    private ListPreference mButtonWfcRoamingMode;
     private Preference mUpdateAddress;
     private TextView mEmptyView;
 
     private boolean mValidListener = false;
     private boolean mEditableWfcMode = true;
+    private boolean mEditableWfcRoamingMode = true;
 
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         /*
@@ -93,25 +96,32 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             switchBar.setEnabled((state == TelephonyManager.CALL_STATE_IDLE)
                     && isNonTtyOrTtyOnVolteEnabled);
 
+            boolean isWfcModeEditable = true;
+            boolean isWfcRoamingModeEditable = false;
+            final CarrierConfigManager configManager = (CarrierConfigManager)
+                    activity.getSystemService(Context.CARRIER_CONFIG_SERVICE);
+            if (configManager != null) {
+                PersistableBundle b = configManager.getConfig();
+                if (b != null) {
+                    isWfcModeEditable = b.getBoolean(
+                            CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
+                    isWfcRoamingModeEditable = b.getBoolean(
+                            CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
+                }
+            }
+
             Preference pref = getPreferenceScreen().findPreference(BUTTON_WFC_MODE);
             if (pref != null) {
-                pref.setEnabled(isWfcEnabled && getEditableWfcMode(activity)
+                pref.setEnabled(isWfcEnabled && isWfcModeEditable
+                        && (state == TelephonyManager.CALL_STATE_IDLE));
+            }
+            Preference pref_roam = getPreferenceScreen().findPreference(BUTTON_WFC_ROAMING_MODE);
+            if (pref_roam != null) {
+                pref_roam.setEnabled(isWfcEnabled && isWfcRoamingModeEditable
                         && (state == TelephonyManager.CALL_STATE_IDLE));
             }
         }
     };
-
-    private static boolean getEditableWfcMode(Context context) {
-        CarrierConfigManager configManager = (CarrierConfigManager)
-                context.getSystemService(Context.CARRIER_CONFIG_SERVICE);
-        if (configManager != null) {
-            PersistableBundle b = configManager.getConfig();
-            if (b != null) {
-                return b.getBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
-            }
-        }
-        return true;
-    }
 
     private final OnPreferenceClickListener mUpdateAddressListener =
             new OnPreferenceClickListener() {
@@ -203,6 +213,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mButtonWfcMode = (ListPreference) findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
+        mButtonWfcRoamingMode = (ListPreference) findPreference(BUTTON_WFC_ROAMING_MODE);
+        mButtonWfcRoamingMode.setOnPreferenceChangeListener(this);
+
         mUpdateAddress = (Preference) findPreference(PREFERENCE_EMERGENCY_ADDRESS);
         mUpdateAddress.setOnPreferenceClickListener(mUpdateAddressListener);
 
@@ -216,6 +229,8 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             PersistableBundle b = configManager.getConfig();
             if (b != null) {
                 mEditableWfcMode = b.getBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
+                mEditableWfcRoamingMode = b.getBoolean(
+                        CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
                 isWifiOnlySupported = b.getBoolean(
                         CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, true);
             }
@@ -224,6 +239,10 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         if (!isWifiOnlySupported) {
             mButtonWfcMode.setEntries(R.array.wifi_calling_mode_choices_without_wifi_only);
             mButtonWfcMode.setEntryValues(R.array.wifi_calling_mode_values_without_wifi_only);
+            mButtonWfcRoamingMode.setEntries(
+                    R.array.wifi_calling_mode_choices_v2_without_wifi_only);
+            mButtonWfcRoamingMode.setEntryValues(
+                    R.array.wifi_calling_mode_values_without_wifi_only);
         }
     }
 
@@ -246,9 +265,11 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         boolean wfcEnabled = ImsManager.isWfcEnabledByUser(context)
                 && ImsManager.isNonTtyOrTtyOnVolteEnabled(context);
         mSwitch.setChecked(wfcEnabled);
-        int wfcMode = ImsManager.getWfcMode(context);
+        int wfcMode = ImsManager.getWfcMode(context, false);
+        int wfcRoamingMode = ImsManager.getWfcMode(context, true);
         mButtonWfcMode.setValue(Integer.toString(wfcMode));
-        updateButtonWfcMode(context, wfcEnabled, wfcMode);
+        mButtonWfcRoamingMode.setValue(Integer.toString(wfcRoamingMode));
+        updateButtonWfcMode(context, wfcEnabled, wfcMode, wfcRoamingMode);
 
         context.registerReceiver(mIntentReceiver, mIntentFilter);
 
@@ -331,8 +352,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         Log.i(TAG, "updateWfcMode(" + wfcEnabled + ")");
         ImsManager.setWfcSetting(context, wfcEnabled);
 
-        int wfcMode = ImsManager.getWfcMode(context);
-        updateButtonWfcMode(context, wfcEnabled, wfcMode);
+        int wfcMode = ImsManager.getWfcMode(context, false);
+        int wfcRoamingMode = ImsManager.getWfcMode(context, true);
+        updateButtonWfcMode(context, wfcEnabled, wfcMode, wfcRoamingMode);
         if (wfcEnabled) {
             mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), wfcMode);
         } else {
@@ -355,9 +377,12 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void updateButtonWfcMode(Context context, boolean wfcEnabled, int wfcMode) {
+    private void updateButtonWfcMode(Context context, boolean wfcEnabled,
+                                     int wfcMode, int wfcRoamingMode) {
         mButtonWfcMode.setSummary(getWfcModeSummary(context, wfcMode));
         mButtonWfcMode.setEnabled(wfcEnabled && mEditableWfcMode);
+        // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected value.
+        mButtonWfcRoamingMode.setEnabled(wfcEnabled && mEditableWfcRoamingMode);
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         boolean updateAddressEnabled = (getCarrierActivityIntent(context) != null);
@@ -365,8 +390,14 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             if (mEditableWfcMode) {
                 preferenceScreen.addPreference(mButtonWfcMode);
             } else {
-                // Don't show WFC mode preference if it's not editable.
+                // Don't show WFC (home) preference if it's not editable.
                 preferenceScreen.removePreference(mButtonWfcMode);
+            }
+            if (mEditableWfcRoamingMode) {
+                preferenceScreen.addPreference(mButtonWfcRoamingMode);
+            } else {
+                // Don't show WFC roaming preference if it's not editable.
+                preferenceScreen.removePreference(mButtonWfcRoamingMode);
             }
             if (updateAddressEnabled) {
                 preferenceScreen.addPreference(mUpdateAddress);
@@ -375,6 +406,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             }
         } else {
             preferenceScreen.removePreference(mButtonWfcMode);
+            preferenceScreen.removePreference(mButtonWfcRoamingMode);
             preferenceScreen.removePreference(mUpdateAddress);
         }
     }
@@ -385,11 +417,27 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         if (preference == mButtonWfcMode) {
             mButtonWfcMode.setValue((String) newValue);
             int buttonMode = Integer.valueOf((String) newValue);
-            int currentMode = ImsManager.getWfcMode(context);
-            if (buttonMode != currentMode) {
-                ImsManager.setWfcMode(context, buttonMode);
+            int currentWfcMode = ImsManager.getWfcMode(context, false);
+            if (buttonMode != currentWfcMode) {
+                ImsManager.setWfcMode(context, buttonMode, false);
                 mButtonWfcMode.setSummary(getWfcModeSummary(context, buttonMode));
                 mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
+            }
+            if (!mEditableWfcRoamingMode) {
+                int currentWfcRoamingMode = ImsManager.getWfcMode(context, true);
+                if (buttonMode != currentWfcRoamingMode) {
+                    ImsManager.setWfcMode(context, buttonMode, true);
+                    // mButtonWfcRoamingMode.setSummary is not needed; summary is selected value
+                }
+            }
+        } else if (preference == mButtonWfcRoamingMode) {
+            mButtonWfcRoamingMode.setValue((String) newValue);
+            int buttonMode = Integer.valueOf((String) newValue);
+            int currentMode = ImsManager.getWfcMode(context, true);
+            if (buttonMode != currentMode) {
+                ImsManager.setWfcMode(context, buttonMode, true);
+                // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected value.
+                MetricsLogger.action(getActivity(), getMetricsCategory(), buttonMode);
             }
         }
         return true;

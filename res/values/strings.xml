@@ -2017,13 +2017,24 @@
     <string name="wifi_calling_suggestion_title">Turn on Wi-Fi Calling</string>
     <!-- Summary of suggestion to turn on wifi calling [CHAR LIMIT=60] -->
     <string name="wifi_calling_suggestion_summary">Use Wi-Fi instead of mobile network</string>
-    <!-- WFC mode [CHAR LIMIT=30] -->
+    <!-- Title of WFC preference item [CHAR LIMIT=30] -->
     <string name="wifi_calling_mode_title">Calling preference</string>
-    <!-- WFC mode dialog [CHAR LIMIT=30] -->
+    <!-- Title of WFC preference selection dialog [CHAR LIMIT=30] -->
     <string name="wifi_calling_mode_dialog_title">Wi-Fi calling mode</string>
+    <!-- Title of WFC roaming preference item [CHAR LIMIT=45] -->
+    <string name="wifi_calling_roaming_mode_title">Roaming preference</string>
+    <!-- Summary of WFC roaming preference item [CHAR LIMIT=NONE]-->
+    <string name="wifi_calling_roaming_mode_summary"><xliff:g id="wfc_roaming_preference" example="Wi-Fi">%1$s</xliff:g></string>
+    <!-- WFC mode dialog [CHAR LIMIT=45] -->
+    <string name="wifi_calling_roaming_mode_dialog_title">Roaming preference</string>
     <string-array name="wifi_calling_mode_choices">
         <item>Wi-Fi preferred</item>
         <item>Cellular preferred</item>
+        <item>Wi-Fi only</item>
+    </string-array>
+    <string-array name="wifi_calling_mode_choices_v2">
+        <item>Wi-Fi</item>
+        <item>Cellular</item>
         <item>Wi-Fi only</item>
     </string-array>
     <string-array name="wifi_calling_mode_values">
@@ -2035,13 +2046,19 @@
         <item>Wi-Fi preferred</item>
         <item>Cellular preferred</item>
     </string-array>
+    <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+        <item>Wi-Fi</item>
+        <item>Cellular</item>
+    </string-array>
     <string-array name="wifi_calling_mode_values_without_wifi_only">
         <item>"2"</item>
         <item>"1"</item>
     </string-array>
     <!-- Wi-Fi Calling settings. Text displayed when Wi-Fi Calling is off -->
     <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\u2019s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.</string>
+    <!-- Title of a preference for updating emergency address [CHAR LIMIT=40] -->
     <string name="emergency_address_title">Update Emergency Address</string>
+    <!-- Summary of Update Emergency Address preference, explaining usage of emergency address [CHAR LIMIT=NONE] -->
     <string name="emergency_address_summary">Address used by emergency services as your location if you make a 911 call using WiFi</string>
 
 
