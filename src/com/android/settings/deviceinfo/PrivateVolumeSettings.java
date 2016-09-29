@@ -467,7 +467,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         // TODO: launch better intents for specific volume
 
         final int userId = (pref instanceof StorageItemPreference ?
-                ((StorageItemPreference)pref).userHandle : -1);
+                ((StorageItemPreference) pref).userHandle : -1);
         int itemTitleId;
         try {
             itemTitleId = Integer.parseInt(pref.getKey());
@@ -512,7 +512,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             }
             case R.string.storage_detail_other: {
                 OtherInfoFragment.show(this, mStorageManager.getBestVolumeDescription(mVolume),
-                        mSharedVolume);
+                        mSharedVolume, userId);
                 return true;
 
             }
@@ -536,15 +536,9 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         }
 
         if (intent != null) {
-            try {
-                if (userId == -1) {
-                    startActivity(intent);
-                } else {
-                    getActivity().startActivityAsUser(intent, new UserHandle(userId));
-                }
-            } catch (ActivityNotFoundException e) {
-                Log.w(TAG, "No activity found for " + intent);
-            }
+            intent.putExtra(Intent.EXTRA_USER_ID, userId);
+
+            launchIntent(this, intent);
             return true;
         }
         return super.onPreferenceTreeClick(pref);
@@ -682,6 +676,20 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         return total;
     }
 
+    private static void launchIntent(Fragment fragment, Intent intent) {
+        try {
+            final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, -1);
+
+            if (userId == -1) {
+                fragment.startActivity(intent);
+            } else {
+                fragment.getActivity().startActivityAsUser(intent, new UserHandle(userId));
+            }
+        } catch (ActivityNotFoundException e) {
+            Log.w(TAG, "No activity found for " + intent);
+        }
+    }
+
     private final StorageEventListener mStorageListener = new StorageEventListener() {
         @Override
         public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
@@ -768,14 +776,17 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
     }
 
     public static class OtherInfoFragment extends DialogFragment {
-        public static void show(Fragment parent, String title, VolumeInfo sharedVol) {
+        public static void show(Fragment parent, String title, VolumeInfo sharedVol, int userId) {
             if (!parent.isAdded()) return;
 
             final OtherInfoFragment dialog = new OtherInfoFragment();
             dialog.setTargetFragment(parent, 0);
             final Bundle args = new Bundle();
             args.putString(Intent.EXTRA_TITLE, title);
-            args.putParcelable(Intent.EXTRA_INTENT, sharedVol.buildBrowseIntent());
+
+            final Intent intent = sharedVol.buildBrowseIntent();
+            intent.putExtra(Intent.EXTRA_USER_ID, userId);
+            args.putParcelable(Intent.EXTRA_INTENT, intent);
             dialog.setArguments(args);
             dialog.show(parent.getFragmentManager(), TAG_OTHER_INFO);
         }
@@ -795,7 +806,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity(intent);
+                            launchIntent(OtherInfoFragment.this, intent);
                         }
                     });
             builder.setNegativeButton(android.R.string.cancel, null);
