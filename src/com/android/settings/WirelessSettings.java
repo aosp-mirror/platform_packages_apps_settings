@@ -362,7 +362,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             getPreferenceScreen().addPreference(mButtonWfc);
 
             mButtonWfc.setSummary(WifiCallingSettings.getWfcModeSummary(
-                    context, ImsManager.getWfcMode(context)));
+                    context, ImsManager.getWfcMode(context, mTm.isNetworkRoaming())));
         } else {
             removePreference(KEY_WFC_SETTINGS);
         }
