@@ -437,7 +437,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             if (buttonMode != currentMode) {
                 ImsManager.setWfcMode(context, buttonMode, true);
                 // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected value.
-                MetricsLogger.action(getActivity(), getMetricsCategory(), buttonMode);
+                mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
             }
         }
         return true;
