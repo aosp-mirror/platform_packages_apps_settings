@@ -451,6 +451,10 @@
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"指紋 + パターン"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"指紋 + PIN"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"指紋 + パスワード"</string>
+    <!-- no translation found for fingerprint_unlock_skip_fingerprint (1441077909803666681) -->
+    <skip />
+    <!-- no translation found for fingerprint_unlock_title (2826226740306003991) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"管理者、暗号化ポリシー、または認証情報により無効"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"なし"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"スワイプ"</string>
@@ -699,6 +703,8 @@
     <string name="wifi_more" msgid="3195296805089107950">"その他"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"自動設定（WPS）"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"詳細設定項目"</string>
+    <string name="wifi_advanced_toggle_description_expanded" msgid="2380600578544493084">"詳細オプションのプルダウン リストです。折りたたむにはダブルタップします。"</string>
+    <string name="wifi_advanced_toggle_description_collapsed" msgid="1463812308429197263">"詳細オプションのプルダウン リストです。展開するにはダブルタップします。"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi-Fi保護設定"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPSを開始しています…"</string>
     <string name="wifi_wps_onstart_pbc" msgid="817003360936932340">"ルーターのWi-Fi Protected Setupボタンを押します。「WPS」と表記されている場合や、次のような記号が表示されている場合もあります。"</string>
@@ -916,8 +922,7 @@
     <string name="auto_brightness_title" msgid="6341042882350279391">"明るさの自動調節"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"周囲に合わせて明るさを最適化する"</string>
     <string name="night_display_title" msgid="2626451512200357686">"読書灯"</string>
-    <!-- no translation found for night_display_text (1837277457033025056) -->
-    <skip />
+    <string name="night_display_text" msgid="1837277457033025056">"読書灯を利用すると画面が黄味がかった色になります。薄明かりの下でも画面を見やすくなり、寝付きを良くする効果も期待できます。"</string>
     <string name="night_display_category_schedule" msgid="2044072617637348966">"スケジュール"</string>
     <string name="night_display_category_status" msgid="1952928783124400330">"ステータス"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"自動的に ON"</string>
@@ -2632,9 +2637,9 @@
     <string name="no_vr_listeners" msgid="2689382881717507390">"VR ヘルパー サービスとして実行されるようにリクエストしたインストール済みアプリはありません。"</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"VR サービスから <xliff:g id="SERVICE">%1$s</xliff:g> へのアクセスの許可"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> は、アプリをバーチャル リアリティ モードで使用している場合に実行できるようになります。"</string>
-    <string name="display_vr_pref_title" msgid="7049857952347953979">"端末が VR モードの場合"</string>
-    <string name="display_vr_pref_low_persistence" msgid="6221441245293606681">"手ぶれ補正機能を使用"</string>
-    <string name="display_vr_pref_off" msgid="1244880066079174840">"何もしない"</string>
+    <string name="display_vr_pref_title" msgid="8104485269504335481">"端末が VR モードの場合"</string>
+    <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"手ぶれ補正を弱くする（推奨）"</string>
+    <string name="display_vr_pref_off" msgid="2190091757123260989">"ちらつきを減らす"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"[通知を非表示]へのアクセス"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"[通知を非表示]へのアクセスをリクエストしたインストール済みアプリはありません"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"アプリを読み込んでいます..."</string>
@@ -3042,8 +3047,7 @@
     <string name="condition_work_title" msgid="7293722361184366648">"仕事用プロファイルが OFF"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"仕事用プロファイルに関連するアプリ、バックグラウンド同期などの機能が OFF になっています。"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"読書灯 ON"</string>
-    <!-- no translation found for condition_night_display_summary (5443722724310650381) -->
-    <skip />
+    <string name="condition_night_display_summary" msgid="5443722724310650381">"画面が黄味がかった色になります。寝付きを良くする効果も期待できます。"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"候補"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"他 <xliff:g id="ID_1">%1$d</xliff:g> 件"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"削除"</string>
@@ -3208,22 +3212,16 @@
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"カメラをすばやく起動するには、電源ボタンを 2 回押します。どの画面からでも操作できます"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"カメラの切り替え"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
-    <!-- no translation found for ambient_display_title (8625911219915452189) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (9215930616689492402) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (6300028720440464711) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (6361258387910585434) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_title (8267012980310630317) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (8398563557634390810) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (4331662705062807264) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (8934465403404002786) -->
-    <skip />
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"スマートフォンの画面をダブルタップして通知をチェック"</string>
+    <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"タブレットの画面をダブルタップして通知をチェック"</string>
+    <string name="ambient_display_title" product="device" msgid="3423781975742145894">"端末の画面をダブルタップして通知をチェック"</string>
+    <string name="ambient_display_summary" msgid="5817384104520817202">"通知をすばやく確認するには、画面をダブルタップします"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"スマートフォンを持ち上げて通知をチェック"</string>
+    <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"タブレットを持ち上げて通知をチェック"</string>
+    <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"端末を持ち上げて通知をチェック"</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="7887685543895952417">"通知をすばやく確認するには、スマートフォンを持ち上げます"</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="4703466494089486840">"通知をすばやく確認するには、タブレットを持ち上げます"</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="3557276829636914807">"通知をすばやく確認するには、端末を持ち上げます"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"スワイプで通知確認"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"通知を確認するには、スマートフォンの背面にある指紋認証センサーを下にスワイプします。"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"通知を確認するには、タブレットの背面にある指紋認証センサーを下にスワイプします"</string>
@@ -3239,4 +3237,6 @@
     <string name="web_action_enable_summary" msgid="4679844581193646863">"端末にアプリがインストールされていない場合でも、対応アプリからリンクを開けるようになります"</string>
     <string name="web_action_section_title" msgid="806405168097593614">"アプリがインストールされていません"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"インストール済みアプリ"</string>
+    <!-- no translation found for automatic_storage_manager_activation_warning (6353100011690933254) -->
+    <skip />
 </resources>
