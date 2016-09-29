@@ -53,9 +53,9 @@ public final class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public DashboardFeatureProvider getDashboardFeatureProvider() {
+    public DashboardFeatureProvider getDashboardFeatureProvider(Context context) {
         if (mDashboardFeatureProvider == null) {
-            mDashboardFeatureProvider = new DashboardFeatureProviderImpl();
+            mDashboardFeatureProvider = new DashboardFeatureProviderImpl(context);
         }
         return mDashboardFeatureProvider;
     }

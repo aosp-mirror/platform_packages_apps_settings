@@ -55,6 +55,7 @@ import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
+import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
 import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountActivity;
@@ -74,7 +75,10 @@ import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardContainerFragment;
+import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.SearchResultsSummary;
+import com.android.settings.dashboard.SupportFragment;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.deviceinfo.ImeiInformation;
@@ -113,6 +117,7 @@ import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.qstile.DevelopmentTiles;
@@ -294,7 +299,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             AccessibilitySettings.class.getName(),
             AccessibilitySettingsForSetupWizard.class.getName(),
             CaptionPropertiesFragment.class.getName(),
-            com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment.class.getName(),
+            ToggleDaltonizerPreferenceFragment.class.getName(),
             TextToSpeechSettings.class.getName(),
             StorageSettings.class.getName(),
             PrivateVolumeForget.class.getName(),
@@ -357,7 +362,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             MasterClear.class.getName(),
             NightDisplaySettings.class.getName(),
             ManageDomainUrls.class.getName(),
-            AutomaticStorageManagerSettings.class.getName()
+            AutomaticStorageManagerSettings.class.getName(),
+            SupportFragment.class.getName()
     };
 
 
@@ -424,6 +430,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private boolean mNeedToRevertToInitialFragment = false;
 
+    private DashboardFeatureProvider mDashboardFeatureProvider;
     private Intent mResultIntentData;
     private ComponentName mCurrentSuggestion;
 
@@ -533,7 +540,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         long startTime = System.currentTimeMillis();
-
+        mDashboardFeatureProvider =
+                FeatureFactory.getFactory(this).getDashboardFeatureProvider(this);
         // Should happen before any call to getIntent()
         getMetaData();
 
@@ -643,9 +651,13 @@ public class SettingsActivity extends SettingsDrawerActivity
                 final Bundle args = new Bundle();
                 final String extraName = DashboardContainerFragment.EXTRA_SELECT_SETTINGS_TAB;
                 args.putString(extraName, intent.getStringExtra(extraName));
-
-                switchToFragment(DashboardContainerFragment.class.getName(), args, false, false,
-                        mInitialTitleResId, mInitialTitle, false);
+                if (isDashboardFeatureEnabled()) {
+                    switchToFragment(DashboardSummary.class.getName(), args, false, false,
+                            mInitialTitleResId, mInitialTitle, false);
+                } else {
+                    switchToFragment(DashboardContainerFragment.class.getName(), args, false, false,
+                            mInitialTitleResId, mInitialTitle, false);
+                }
             }
         }
 
@@ -1114,7 +1126,13 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
             // When on restricted users, disable all extra categories (but only the settings ones).
-            List<DashboardCategory> categories = getDashboardCategories();
+            List<DashboardCategory> categories;
+            if (isDashboardFeatureEnabled()) {
+                categories = mDashboardFeatureProvider.getAllCategories();
+            } else {
+                categories = getDashboardCategories();
+            }
+
             for (DashboardCategory category : categories) {
                 for (Tile tile : category.tiles) {
                     ComponentName component = tile.intent.getComponent();
@@ -1163,6 +1181,15 @@ public class SettingsActivity extends SettingsDrawerActivity
             // No recovery
             Log.d(LOG_TAG, "Cannot get Metadata for: " + getComponentName().toString());
         }
+    }
+
+    @Override
+    protected boolean isDashboardFeatureEnabled() {
+        if (mDashboardFeatureProvider == null) {
+            mDashboardFeatureProvider =
+                    FeatureFactory.getFactory(this).getDashboardFeatureProvider(this);
+        }
+        return mDashboardFeatureProvider.isEnabled();
     }
 
     // give subclasses access to the Next button

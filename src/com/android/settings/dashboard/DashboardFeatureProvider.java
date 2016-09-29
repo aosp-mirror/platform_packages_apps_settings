@@ -15,12 +15,27 @@
  */
 package com.android.settings.dashboard;
 
-import android.content.Context;
+import com.android.settingslib.drawer.DashboardCategory;
+
+import java.util.List;
 
 /**
  * FeatureProvider for dashboard (aka settings homepage).
  */
 public interface DashboardFeatureProvider {
 
-    boolean shouldUseNewIALayout(Context context);
+    /**
+     * Whether or not this feature is enabled.
+     */
+    boolean isEnabled();
+
+    /**
+     * Get tiles (wrapped in {@link DashboardCategory}) for homepage.
+     */
+    DashboardCategory getTilesForHomepage();
+
+    /**
+     * Get all tiles, grouped by category.
+     */
+    List<DashboardCategory> getAllCategories();
 }

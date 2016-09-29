@@ -68,7 +68,7 @@ public abstract class FeatureFactory {
 
     public abstract PowerUsageFeatureProvider getPowerUsageFeatureProvider();
 
-    public abstract DashboardFeatureProvider getDashboardFeatureProvider();
+    public abstract DashboardFeatureProvider getDashboardFeatureProvider(Context context);
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
