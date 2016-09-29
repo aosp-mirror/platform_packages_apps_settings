@@ -142,8 +142,9 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         // you can't ask a user for a permission you didn't even declare!
         mSwitchPref.setEnabled(mWriteSettingsState.permissionDeclared);
         mWriteSettingsPrefs.setEnabled(canWrite);
-        getPreferenceScreen().removePreference(mWriteSettingsPrefs);
-
+        if (getPreferenceScreen().findPreference(KEY_APP_OPS_SETTINGS_PREFS) != null) {
+            getPreferenceScreen().removePreference(mWriteSettingsPrefs);
+        }
         return true;
     }
 
