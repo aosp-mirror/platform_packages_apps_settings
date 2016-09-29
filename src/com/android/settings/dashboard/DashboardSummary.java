@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ public class DashboardSummary extends InstrumentedFragment
         FocusRecyclerView.FocusListener {
     public static final boolean DEBUG = false;
     private static final boolean DEBUG_TIMING = false;
+    private static final int MAX_WAIT_MILLIS = 700;
     private static final String TAG = "DashboardSummary";
 
     public static final String[] INITIAL_ITEMS = new String[] {
@@ -64,6 +66,8 @@ public class DashboardSummary extends InstrumentedFragment
     private static final String EXTRA_SCROLL_POSITION = "scroll_position";
     private static final String EXTRA_SUGGESTION_SHOWN_LOGGED = "suggestions_shown_logged";
     private static final String EXTRA_SUGGESTION_HIDDEN_LOGGED = "suggestions_hidden_logged";
+
+    private final Handler mHandler = new Handler();
 
     private FocusRecyclerView mDashboard;
     private DashboardAdapter mAdapter;
@@ -217,6 +221,14 @@ public class DashboardSummary extends InstrumentedFragment
 
         // recheck to see if any suggestions have been changed.
         new SuggestionLoader().execute();
+        // Set categories on their own if loading suggestions takes too long.
+        mHandler.postDelayed(() -> {
+            final Activity activity = getActivity();
+            if (activity != null) {
+                mAdapter.setCategoriesAndSuggestions(
+                        ((SettingsActivity) activity).getDashboardCategories(), null);
+            }
+        }, MAX_WAIT_MILLIS);
     }
 
     @Override
@@ -255,6 +267,9 @@ public class DashboardSummary extends InstrumentedFragment
 
         @Override
         protected void onPostExecute(List<Tile> tiles) {
+            // tell handler that suggestions were loaded quickly enough
+            mHandler.removeCallbacksAndMessages(null);
+
             final Activity activity = getActivity();
             if (activity == null) {
                 return;
