@@ -137,4 +137,9 @@ public interface SupportFeatureProvider {
      * Returns an intent that will launch the tips and tricks UI.
      */
     Intent getTipsAndTricksIntent(Context context);
+
+    /**
+     * Returns the string for the disclaimer in the Support dialog
+     */
+    String getDisclaimerString();
 }
