@@ -68,6 +68,10 @@ public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFra
                 .inflate(R.layout.support_disclaimer_content, null);
         final TextView disclaimer = (TextView) content.findViewById(R.id.support_disclaimer_text);
         disclaimer.setMovementMethod(LinkMovementMethod.getInstance());
+        final Activity activity = getActivity();
+        final SupportFeatureProvider supportFeatureProvider =
+                FeatureFactory.getFactory(activity).getSupportFeatureProvider(activity);
+        disclaimer.setText(supportFeatureProvider.getDisclaimerString());
         stripUnderlines((Spannable) disclaimer.getText());
         return builder
                 .setView(content)
