@@ -39,7 +39,6 @@ import android.widget.TextView;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
-import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.settings.widget.SwitchBar;
@@ -438,7 +437,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             if (buttonMode != currentMode) {
                 ImsManager.setWfcMode(context, buttonMode, true);
                 // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected value.
-                MetricsLogger.action(getActivity(), getMetricsCategory(), buttonMode);
+                mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
             }
         }
         return true;
