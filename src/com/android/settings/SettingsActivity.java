@@ -1320,7 +1320,14 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     public void startSuggestion(Intent intent) {
-        mCurrentSuggestion = intent.getComponent();
+        if (intent == null) {
+            return;
+        }
+        final ComponentName componentName = intent.getComponent();
+        if (componentName.equals(mCurrentSuggestion)) {
+            return;
+        }
+        mCurrentSuggestion = componentName;
         startActivityForResult(intent, REQUEST_SUGGESTION);
     }
 
