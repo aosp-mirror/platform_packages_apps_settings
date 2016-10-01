@@ -461,10 +461,8 @@
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Otisak prsta i uzorak"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Otisak prsta i PIN"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Otisak prsta i lozinka"</string>
-    <!-- no translation found for fingerprint_unlock_skip_fingerprint (1441077909803666681) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (2826226740306003991) -->
-    <skip />
+    <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Nastavi bez postavljanja otiska prsta"</string>
+    <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Možete otključati telefon pomoću otiska prsta. Iz sigurnosnih razloga, ova opcija zahtijeva rezervni način zaključavanja ekrana."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Onemogućio admin, pravilo šifr. ili pohrana akred."</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nema"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Prevucite"</string>
@@ -698,8 +696,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Korištenje baterije se svodi na minimum kada je Wi-Fi uključen"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Limit za bateriju za Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Prebaci se na prijenos mobilnih podataka kada Wi-Fi izgubi pristup Internetu."</string>
-    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Rezerva mobilnih podataka"</string>
-    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Koristite mobilne podatke kada Wi-Fi mreža izgubi pristup Internetu. Može doći do naplate dodatnih troškova."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (8741291033791891668) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (5103827852382611436) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Dodaj mrežu"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi mreže"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Pritisni WPS dugme"</string>
@@ -721,10 +721,8 @@
     <string name="wifi_more" msgid="3195296805089107950">"Još"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Autom. postavljanje (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Napredne opcije"</string>
-    <!-- no translation found for wifi_advanced_toggle_description_expanded (2380600578544493084) -->
-    <skip />
-    <!-- no translation found for wifi_advanced_toggle_description_collapsed (1463812308429197263) -->
-    <skip />
+    <string name="wifi_advanced_toggle_description_expanded" msgid="2380600578544493084">"Padajući spisak Naprednih opcija. Dvaput kliknite za skupljanje spiska."</string>
+    <string name="wifi_advanced_toggle_description_collapsed" msgid="1463812308429197263">"Padajući spisak Naprednih opcija. Dvaput kliknite za proširenje."</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Zaštićeno postavljanje Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Pokretanje WPS-a…"</string>
     <string name="wifi_wps_onstart_pbc" msgid="817003360936932340">"Pritisnite tipku Wi-Fi Protected Setup na svom ruteru. To se može zvati i \"WPS\" ili biti označeno ovim simbolom:"</string>
@@ -855,11 +853,20 @@
     <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Koristite Wi-Fi umjesto mobilne mreže"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Postavke za pozive"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Način pozivanja preko Wi-Fi"</string>
+    <!-- no translation found for wifi_calling_roaming_mode_title (1565039047187685115) -->
+    <skip />
+    <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
+    <skip />
+    <!-- no translation found for wifi_calling_roaming_mode_dialog_title (7800926602662078576) -->
+    <skip />
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wi-Fi se preferira"</item>
     <item msgid="5267397515594230396">"Prednost ima mobilna mreža"</item>
     <item msgid="3132912693346866895">"Samo Wi-Fi"</item>
   </string-array>
+    <!-- no translation found for wifi_calling_mode_choices_v2:0 (742988808283756263) -->
+    <!-- no translation found for wifi_calling_mode_choices_v2:1 (122823150092396518) -->
+    <!-- no translation found for wifi_calling_mode_choices_v2:2 (2838022395783120596) -->
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
@@ -869,6 +876,8 @@
     <item msgid="5782108782860004851">"Prednost ima Wi-Fi"</item>
     <item msgid="9006785365352731433">"Prednost ima mobilna mreža"</item>
   </string-array>
+    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:0 (6132150507201243768) -->
+    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (2749029835484916851) -->
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -942,8 +951,7 @@
     <string name="auto_brightness_title" msgid="6341042882350279391">"Prilagodljiva osvijetljenost"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimiziraj nivo osvjetljenja za dostupno svjetlo"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Noćno svjetlo"</string>
-    <!-- no translation found for night_display_text (1837277457033025056) -->
-    <skip />
+    <string name="night_display_text" msgid="1837277457033025056">"Noćno svjetlo oboji ekran u žutosmeđe. Tako je lakše gledati u ekran ili čitati pod prigušenim svjetlom, a može vam pomoći da lakše zaspite."</string>
     <string name="night_display_category_schedule" msgid="2044072617637348966">"Raspored"</string>
     <string name="night_display_category_status" msgid="1952928783124400330">"Status"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Automatski uključi"</string>
@@ -1105,7 +1113,7 @@
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Deaktiviranje"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Deaktiviranje u toku"</string>
     <string name="storage_low_title" msgid="1388569749716225155">"Prostor za pohranu ponestaje"</string>
-    <string name="storage_low_summary" msgid="7737465774892563129">"Neke funkcije sistema, kao što je sinhronizacija, možda neće raditi ispravno. Pokušajte osloboditi prostor brisanjem ili deaktiviranjem stavki kao što su aplikacije ili medijski sadržaji."</string>
+    <string name="storage_low_summary" msgid="7737465774892563129">"Neke funkcije sistema, kao što je sinhronizacija, možda neće raditi ispravno. Pokušajte osloboditi prostor brisanjem ili deaktiviranjem stavki kao što su aplikacije ili medijski sadržaj."</string>
     <string name="storage_menu_rename" msgid="7141058657592615390">"Preimenuj"</string>
     <string name="storage_menu_mount" msgid="1014683672493425425">"Montiraj"</string>
     <string name="storage_menu_unmount" msgid="681485356885955898">"Izbaci"</string>
@@ -2536,6 +2544,7 @@
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"Pitaj svaki put"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Potreban odabir"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Postavke"</string>
+    <!-- no translation found for settings_suggestion_header_summary_hidden_items (5597356221942118048) -->
     <string name="search_results_title" msgid="1796252422574886932">"Postavke"</string>
     <string name="search_menu" msgid="6283419262313758339">"Postavke pretraživanja"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Postavke pretraživanja"</string>
@@ -2682,12 +2691,9 @@
     <string name="no_vr_listeners" msgid="2689382881717507390">"Nijedna instalirana aplikacija nije zatražila da bude pokrenuta kao VR usluge pomogača."</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Želite li dozvoliti pristup usluge VR za uslugu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> će moći raditi kada aplikacije budete koristili u načinu rada virtualne stvarnosti."</string>
-    <!-- no translation found for display_vr_pref_title (8104485269504335481) -->
-    <skip />
-    <!-- no translation found for display_vr_pref_low_persistence (5707494209944718537) -->
-    <skip />
-    <!-- no translation found for display_vr_pref_off (2190091757123260989) -->
-    <skip />
+    <string name="display_vr_pref_title" msgid="8104485269504335481">"Kada je uređaj u VR načinu rada"</string>
+    <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Smanjenje zamućenosti (preporučeno)"</string>
+    <string name="display_vr_pref_off" msgid="2190091757123260989">"Smanjenje treperenja"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Pristup Ne smetaj"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Nijedna instalirana aplikacija nije zatražila pristup za Ne ometaj"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Učitavaju se aplikacije..."</string>
@@ -3067,10 +3073,8 @@
     <string name="apps_summary" msgid="193158055537070092">"Broj instaliranih aplikacija: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 aplikacije instalirane"</string>
     <string name="storage_summary" msgid="1110250618334248745">"iskorišteno <xliff:g id="SIZE1">%1$s</xliff:g> od ukupno <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
-    <!-- no translation found for display_summary (6737806235882127328) -->
-    <skip />
-    <!-- no translation found for display_summary_example (9102633726811090523) -->
-    <skip />
+    <string name="display_summary" msgid="6737806235882127328">"Pokreni stanje mirovanja nakon <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neaktivnosti"</string>
+    <string name="display_summary_example" msgid="9102633726811090523">"Pokreni stanje mirovanja nakon 10 minuta neaktivnosti"</string>
     <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="USED_MEMORY">%1$s</xliff:g> prosječno od ukupno <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> iskorištene memorije"</string>
     <string name="user_summary" msgid="1617826998097722499">"Prijavljeni ste kao korisnik <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> aplikacija je standardna"</string>
@@ -3102,8 +3106,7 @@
     <string name="condition_work_title" msgid="7293722361184366648">"Radni profil je isključen"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Isključene su aplikacije, pozadinska sinhronizacija i ostale funkcije povezane s vašim radnim profilom."</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Noćno svjetlo je uključeno"</string>
-    <!-- no translation found for condition_night_display_summary (5443722724310650381) -->
-    <skip />
+    <string name="condition_night_display_summary" msgid="5443722724310650381">"Ekran je obojen u žutosmeđu nijansu. To vam može pomoći da zaspite."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Prijedlozi"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"još <xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Ukloni"</string>
@@ -3229,7 +3232,6 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Prijavite se"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Ne možete se prijaviti?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Pošalji informacije o sistemu"</string>
-    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"Za lakše rješavanje problema, potrebne su nam informacije o sistemu za dijagnozu."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Ne prikazuj ponovo"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Postavke radnog profila"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Pretraživanje kontakata"</string>
@@ -3272,26 +3274,16 @@
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Za brzo otvaranje kamere, dva puta dodirnite dugme za uključivanje. Funkcionira na svakom ekranu"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Prebaci kameru"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
-    <!-- no translation found for ambient_display_title (5144814600610448504) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (8688795028609563837) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (3423781975742145894) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (5817384104520817202) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_title (818688002837687268) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_title (4455864282995698097) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_title (5380534405773531175) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (7887685543895952417) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (4703466494089486840) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (3557276829636914807) -->
-    <skip />
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Dvaput kliknite za provjeru telefona"</string>
+    <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Dvaput kliknite za provjeru tableta"</string>
+    <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Dvaput kliknite za provjeru uređaja"</string>
+    <string name="ambient_display_summary" msgid="5817384104520817202">"Da nabrzinu provjerite obavještenja, dvaput dodirnite ekran"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Podignite za provjeru telefona"</string>
+    <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Podignite za provjeru tableta"</string>
+    <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Podignite za provjeru uređaja"</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="7887685543895952417">"Da nabrzinu provjerite obavještenja, podignite telefon"</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="4703466494089486840">"Da nabrzinu provjerite obavještenja, podignite tablet"</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="3557276829636914807">"Da nabrzinu provjerite obavještenja, podignite uređaj"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Prevucite za obavještenja"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Da provjerite obavještenja, prevucite prema dolje na senzoru otiska prsta na poleđini telefona"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Da provjerite obavještenja, prevucite prema dolje na senzoru otiska prsta na poleđini tableta"</string>
@@ -3310,4 +3302,5 @@
     <string name="web_action_enable_summary" msgid="4679844581193646863">"Otvorite veze u podržanim aplikacijama, čak i ako aplikacije nisu instalirane na vašem uređaju"</string>
     <string name="web_action_section_title" msgid="806405168097593614">"Neinstalirane aplikacije"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Instalirane aplikacije"</string>
+    <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Vašom pohranom sada upravlja upravitelj pohrane"</string>
 </resources>

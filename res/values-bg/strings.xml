@@ -458,10 +458,8 @@
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"Отпечатък + фигура"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"Отпечатък + ПИН код"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Отпечатък + парола"</string>
-    <!-- no translation found for fingerprint_unlock_skip_fingerprint (1441077909803666681) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (2826226740306003991) -->
-    <skip />
+    <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Продължаване без отпечатък"</string>
+    <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Можете да отключвате телефона си посредством отпечатъка си. От съображения за сигурност трябва да зададете резервна опция за заключване на екрана."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Деакт. от админ., правила за шифроване или хранил. за идент. данни"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Няма"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Прекарване на пръст"</string>
@@ -689,8 +687,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Намаляване на използването на батерията, когато Wi‑Fi е включен"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Разход на бат. от Wi‑Fi: Лимит"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Превключете към клетъчни данни, ако Wi‑Fi мрежата изгуби достъп до интернет."</string>
-    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"Автоматично преминаване към мобилни данни"</string>
-    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Използване на мобилни данни, когато Wi‑Fi мрежата загуби достъп до интернет. Възможно е да бъдете таксувани допълнително."</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (8741291033791891668) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (5103827852382611436) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"Добавяне на мрежа"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi‑Fi мрежи"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Бутон за WPS"</string>
@@ -712,10 +712,8 @@
     <string name="wifi_more" msgid="3195296805089107950">"Още"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Авт. настройка (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Разширени опции"</string>
-    <!-- no translation found for wifi_advanced_toggle_description_expanded (2380600578544493084) -->
-    <skip />
-    <!-- no translation found for wifi_advanced_toggle_description_collapsed (1463812308429197263) -->
-    <skip />
+    <string name="wifi_advanced_toggle_description_expanded" msgid="2380600578544493084">"Падащ списък с разширени опции. Докоснете двукратно за свиване."</string>
+    <string name="wifi_advanced_toggle_description_collapsed" msgid="1463812308429197263">"Падащ списък с разширени опции. Докоснете двукратно за разгъване."</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Защитена настройка на Wi‑Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS се стартира…"</string>
     <string name="wifi_wps_onstart_pbc" msgid="817003360936932340">"Натиснете бутона за Wi-Fi Protected Setup на маршрутизатора си. Той може да е с името „WPS“ или да е означен с този символ:"</string>
@@ -846,11 +844,20 @@
     <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Използване на Wi-Fi вместо мобилна мрежа"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Предпочитание за обаждания"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Режим на обаждания през Wi-Fi"</string>
+    <!-- no translation found for wifi_calling_roaming_mode_title (1565039047187685115) -->
+    <skip />
+    <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
+    <skip />
+    <!-- no translation found for wifi_calling_roaming_mode_dialog_title (7800926602662078576) -->
+    <skip />
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Предпочита се Wi-Fi"</item>
     <item msgid="5267397515594230396">"Предпочита се клетъчна мрежа"</item>
     <item msgid="3132912693346866895">"Само Wi-Fi"</item>
   </string-array>
+    <!-- no translation found for wifi_calling_mode_choices_v2:0 (742988808283756263) -->
+    <!-- no translation found for wifi_calling_mode_choices_v2:1 (122823150092396518) -->
+    <!-- no translation found for wifi_calling_mode_choices_v2:2 (2838022395783120596) -->
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
@@ -860,6 +867,8 @@
     <item msgid="5782108782860004851">"Предпочита се Wi-Fi"</item>
     <item msgid="9006785365352731433">"Предпочита се клетъчна мрежа"</item>
   </string-array>
+    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:0 (6132150507201243768) -->
+    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (2749029835484916851) -->
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -933,8 +942,7 @@
     <string name="auto_brightness_title" msgid="6341042882350279391">"Адаптивна яркост"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Оптимизиране на нивото на яркостта спрямо наличната светлина"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Нощно осветление"</string>
-    <!-- no translation found for night_display_text (1837277457033025056) -->
-    <skip />
+    <string name="night_display_text" msgid="1837277457033025056">"Функцията „Нощно осветление“ придава кехлибареножълт нюанс на екрана. Това подобрява видимостта му и четенето на него при слаба светлина и може да ви помогне да заспите по-лесно."</string>
     <string name="night_display_category_schedule" msgid="2044072617637348966">"Насрочване"</string>
     <string name="night_display_category_status" msgid="1952928783124400330">"Състояние"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Автоматично включване"</string>
@@ -2515,6 +2523,7 @@
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"Извеждане на запитване всеки път"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Изборът е задължителен"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Настройки"</string>
+    <!-- no translation found for settings_suggestion_header_summary_hidden_items (5597356221942118048) -->
     <string name="search_results_title" msgid="1796252422574886932">"Настройки"</string>
     <string name="search_menu" msgid="6283419262313758339">"Търсете в настройките"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Настройки за търсене"</string>
@@ -2660,12 +2669,9 @@
     <string name="no_vr_listeners" msgid="2689382881717507390">"Никое инсталирано приложение не е заявило да се изпълнява като помощна услуга за виртуална реалност."</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Искате ли <xliff:g id="SERVICE">%1$s</xliff:g> да има достъп като услуга за виртуална реалност?"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> ще може да се изпълнява, когато използвате приложения в режим на виртуална реалност."</string>
-    <!-- no translation found for display_vr_pref_title (8104485269504335481) -->
-    <skip />
-    <!-- no translation found for display_vr_pref_low_persistence (5707494209944718537) -->
-    <skip />
-    <!-- no translation found for display_vr_pref_off (2190091757123260989) -->
-    <skip />
+    <string name="display_vr_pref_title" msgid="8104485269504335481">"Когато устройството е в режим за виртуална реалност"</string>
+    <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Намаляване на замъгляването (препоръчително)"</string>
+    <string name="display_vr_pref_off" msgid="2190091757123260989">"Намаляване на трептенето"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Достъп до „Не безпокойте“"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Никое инсталирано приложение не е заявило достъп до „Не безпокойте“"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Приложенията се зареждат..."</string>
@@ -3037,10 +3043,8 @@
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> приложения са инсталирани"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 инсталирани приложения"</string>
     <string name="storage_summary" msgid="1110250618334248745">"Използвали сте <xliff:g id="SIZE1">%1$s</xliff:g> от <xliff:g id="SIZE2">%2$s</xliff:g>"</string>
-    <!-- no translation found for display_summary (6737806235882127328) -->
-    <skip />
-    <!-- no translation found for display_summary_example (9102633726811090523) -->
-    <skip />
+    <string name="display_summary" msgid="6737806235882127328">"Преминаване в спящ режим след неактивност в продължение на <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="display_summary_example" msgid="9102633726811090523">"Преминаване в спящ режим след 10-минутна неактивност"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Използвана памет: Средно <xliff:g id="USED_MEMORY">%1$s</xliff:g> от <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="user_summary" msgid="1617826998097722499">"Влезли сте като <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> е стандартното приложение"</string>
@@ -3072,8 +3076,7 @@
     <string name="condition_work_title" msgid="7293722361184366648">"Служ. потр. профил е изключен"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Приложенията, синхронизирането на заден план и другите функции, свързани със служебния ви потребителски профил, са изключени."</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Нощно осветление: Включено"</string>
-    <!-- no translation found for condition_night_display_summary (5443722724310650381) -->
-    <skip />
+    <string name="condition_night_display_summary" msgid="5443722724310650381">"Екранът е с кехлибареножълт нюанс. Това може да ви помогне да заспите."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Предложения"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+ <xliff:g id="ID_1">%1$d</xliff:g>"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"Премахване"</string>
@@ -3198,7 +3201,6 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"Вход"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Не можете да влезете в профила си?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Изпращане на системна информация"</string>
-    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"За да ви помогнем да решите бързо проблема си, се нуждаем от системна информация за диагностика."</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Да не се показва отново"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Настройки за служебния потребителски профил"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Търсене на контакт"</string>
@@ -3238,26 +3240,16 @@
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"За да отворите бързо камерата, натиснете два пъти бутона за захранване – това работи от всеки екран"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Превключване на камерата със завъртане"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
-    <!-- no translation found for ambient_display_title (5144814600610448504) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (8688795028609563837) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (3423781975742145894) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (5817384104520817202) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_title (818688002837687268) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_title (4455864282995698097) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_title (5380534405773531175) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (7887685543895952417) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (4703466494089486840) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (3557276829636914807) -->
-    <skip />
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Двукратно докосване за проверка на телефона"</string>
+    <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Двукратно докосване за проверка на таблета"</string>
+    <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Двукратно докосване за проверка на устройството"</string>
+    <string name="ambient_display_summary" msgid="5817384104520817202">"За да проверите бързо известията си, докоснете двукратно екрана"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Повдигане за проверка на телефона"</string>
+    <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Повдигане за проверка на таблета"</string>
+    <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Повдигане за проверка на устройството"</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="7887685543895952417">"За да проверите бързо известията си, повдигнете телефона си"</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="4703466494089486840">"За да проверите бързо известията си, повдигнете таблета си"</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="3557276829636914807">"За да проверите бързо известията си, повдигнете устройството си"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Преглед на известията с прекарване на пръст"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на телефона си"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"За да проверите известията си, прекарайте пръст надолу през сензора за отпечатъци на гърба на таблета си"</string>
@@ -3276,4 +3268,5 @@
     <string name="web_action_enable_summary" msgid="4679844581193646863">"Отваряйте връзките в поддържани приложения дори ако те не са инсталирани на устройството ви"</string>
     <string name="web_action_section_title" msgid="806405168097593614">"Приложения, които не са инсталирани"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Инсталирани приложения"</string>
+    <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Хранилището ви вече се управлява от съответния мениджър"</string>
 </resources>
