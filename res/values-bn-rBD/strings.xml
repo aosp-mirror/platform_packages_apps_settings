@@ -451,10 +451,8 @@
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="4939057588092120368">"আঙ্গুলের ছাপ + প্যাটার্ন"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="8010746824051056986">"আঙ্গুলের ছাপ + পিন"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"আঙ্গুলের ছাপ + পাসওয়ার্ড"</string>
-    <!-- no translation found for fingerprint_unlock_skip_fingerprint (1441077909803666681) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (2826226740306003991) -->
-    <skip />
+    <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"আঙ্গুলের ছাপ ছাড়াই চালিয়ে যান"</string>
+    <string name="fingerprint_unlock_title" msgid="2826226740306003991">"আপনি আপনার আঙ্গুলের ছাপ ব্যবহার করে আপনার ফোন আনলক করতে পারবেন। নিরাপত্তার জন্য, এই বিকল্পটির একটি ব্যাক আপ স্ক্রীন লকের প্রয়োজন।"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"প্রশাসক, এনক্রিপশান নীতি, অথবা শংসাপত্র সঞ্চয়স্থান দ্বারা অক্ষম"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"কোনো কিছুই নয়"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"সোয়াইপ করুন"</string>
@@ -680,8 +678,10 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"ওয়াই-ফাই চালু থাকাকালীন ব্যাটারি ব্যবহার কমান"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"ওয়াই-ফাই দ্বারা ব্যাটারি ব্যবহার সীমিত করুন"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"ওয়াই-ফাই ইন্টারনেটের অ্যাক্সেস হারালে সেলুলার ডেটাতে পাল্টান।"</string>
-    <string name="wifi_cellular_data_fallback_title" msgid="341508634673327078">"স্বয়ংক্রিয়ভাবে সেলুলার ডেটায় পাল্টানো"</string>
-    <string name="wifi_cellular_data_fallback_summary" msgid="1960608487363658949">"Wi‑Fi ইন্টারনেটের অ্যাক্সেস হারালে সেলুলার ডেটা ব্যবহার করুন৷ অতিরিক্ত চার্জ লাগতে পারে৷"</string>
+    <!-- no translation found for wifi_cellular_data_fallback_title (8741291033791891668) -->
+    <skip />
+    <!-- no translation found for wifi_cellular_data_fallback_summary (5103827852382611436) -->
+    <skip />
     <string name="wifi_add_network" msgid="6234851776910938957">"নেটওয়ার্ক যোগ করুন"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"ওয়াই-ফাই নেটওয়ার্কগুলি"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS পুশ বোতাম"</string>
@@ -703,10 +703,8 @@
     <string name="wifi_more" msgid="3195296805089107950">"আরো"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"স্বয়ংক্রিয় সেটআপ (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"উন্নত সেটিংগুলি"</string>
-    <!-- no translation found for wifi_advanced_toggle_description_expanded (2380600578544493084) -->
-    <skip />
-    <!-- no translation found for wifi_advanced_toggle_description_collapsed (1463812308429197263) -->
-    <skip />
+    <string name="wifi_advanced_toggle_description_expanded" msgid="2380600578544493084">"উন্নত বিকল্পগুলির ড্রপ-ডাউন তালিকা৷ সঙ্কুচিত করতে দুবার আলতো চাপুন৷"</string>
+    <string name="wifi_advanced_toggle_description_collapsed" msgid="1463812308429197263">"উন্নত বিকল্পগুলির ড্রপ-ডাউন তালিকা৷ প্রসারিত করতে দুবার আলতো চাপুন৷"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"ওয়াই-ফাই সুরক্ষিত সেটআপ"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS আরম্ভ হচ্ছে…"</string>
     <string name="wifi_wps_onstart_pbc" msgid="817003360936932340">"আপনার রাউটারে ওয়াই-ফাই সুরক্ষিত সেটআপ বোতাম টিপুন। এটিকে \"WPS\" বলা হতে পারে বা এই চিহ্ন দ্বারা চিহ্নিত থাকতে পারে:"</string>
@@ -837,11 +835,20 @@
     <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"মোবাইল নেটওয়ার্কের পরিবর্তে ওয়াই-ফাই ব্যবহার করুন"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"কলিং পছন্দ"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"ওয়াই-ফাই কলিং মোড"</string>
+    <!-- no translation found for wifi_calling_roaming_mode_title (1565039047187685115) -->
+    <skip />
+    <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
+    <skip />
+    <!-- no translation found for wifi_calling_roaming_mode_dialog_title (7800926602662078576) -->
+    <skip />
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"ওয়াই-ফাই ব্যবহার করুন"</item>
     <item msgid="5267397515594230396">"পছন্দের মোবাইল নেটওয়ার্ক"</item>
     <item msgid="3132912693346866895">"শুধুমাত্র ওয়াই-ফাই"</item>
   </string-array>
+    <!-- no translation found for wifi_calling_mode_choices_v2:0 (742988808283756263) -->
+    <!-- no translation found for wifi_calling_mode_choices_v2:1 (122823150092396518) -->
+    <!-- no translation found for wifi_calling_mode_choices_v2:2 (2838022395783120596) -->
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"২"</item>
     <item msgid="1171822231056612021">"১"</item>
@@ -851,6 +858,8 @@
     <item msgid="5782108782860004851">"ওয়াই-ফাই ব্যবহার করুন"</item>
     <item msgid="9006785365352731433">"মোবাইল নেটওয়ার্ক ব্যবহার করুন"</item>
   </string-array>
+    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:0 (6132150507201243768) -->
+    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (2749029835484916851) -->
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"২"</item>
     <item msgid="6200207341126893791">"১"</item>
@@ -924,8 +933,7 @@
     <string name="auto_brightness_title" msgid="6341042882350279391">"অভিযোজিত উজ্জ্বলতা"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"উপলব্ধ আলোর পরিপ্রেক্ষিতে উজ্জ্বলতার স্তর মানানসই করুন"</string>
     <string name="night_display_title" msgid="2626451512200357686">"নাইট লাইট"</string>
-    <!-- no translation found for night_display_text (1837277457033025056) -->
-    <skip />
+    <string name="night_display_text" msgid="1837277457033025056">"নাইট লাইট আপনার স্ক্রীনকে হলুদাভ বাদামি দেয়৷ এটি আপনাকে অস্পষ্ট আলোয় স্ক্রীনের দিকে স্বচ্ছন্দে তাকানোর সুবিধা দেয় এবং খুব সহজে ঘুমিয়ে পড়তে সহায়তা করে৷"</string>
     <string name="night_display_category_schedule" msgid="2044072617637348966">"সময়সূচী"</string>
     <string name="night_display_category_status" msgid="1952928783124400330">"স্থিতি"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"স্বয়ংক্রিয়ভাবে চালু করুন"</string>
@@ -2501,6 +2509,7 @@
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"প্রতিবার জিজ্ঞাসা করুন"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"নির্বাচন করার প্রয়োজন"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"সেটিংস"</string>
+    <!-- no translation found for settings_suggestion_header_summary_hidden_items (5597356221942118048) -->
     <string name="search_results_title" msgid="1796252422574886932">"সেটিংস"</string>
     <string name="search_menu" msgid="6283419262313758339">"অনুসন্ধান সেটিংস"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"অনুসন্ধান সেটিংস"</string>
@@ -2636,12 +2645,9 @@
     <string name="no_vr_listeners" msgid="2689382881717507390">"vr সহায়তাকারী পরিষেবা হিসাবে চলার জন্য কোনো অ্যাপ্লিকেশান ইনস্টল করা নেই৷"</string>
     <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"<xliff:g id="SERVICE">%1$s</xliff:g> এর জন্য VR পরিষেবার অ্যাক্সেসের অনুমতি দেবেন?"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"ভার্চুয়াল রিয়েলিটি মোডে আপনি যখন অ্যাপ্লিকেশানগুলি ব্যবহার করবেন তখন <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> চালাতে পারবেন৷"</string>
-    <!-- no translation found for display_vr_pref_title (8104485269504335481) -->
-    <skip />
-    <!-- no translation found for display_vr_pref_low_persistence (5707494209944718537) -->
-    <skip />
-    <!-- no translation found for display_vr_pref_off (2190091757123260989) -->
-    <skip />
+    <string name="display_vr_pref_title" msgid="8104485269504335481">"যখন ডিভাইসটি VR মোডে থাকে"</string>
+    <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"অস্পষ্ট কমান (প্রস্তাবিত)"</string>
+    <string name="display_vr_pref_off" msgid="2190091757123260989">"ফ্লিকার কমান"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"বিরক্ত করবেন না অ্যাক্সেস করুন"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"ইনস্টল করা নেই এমন অ্যাপগুলি বিরক্ত করবেন না অ্যাক্সেস করুন এর অনুরোধ জানিয়েছে"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"অ্যাপ্লিকেশানগুলি লোড করা হচ্ছে..."</string>
@@ -3049,8 +3055,7 @@
     <string name="condition_work_title" msgid="7293722361184366648">"কর্মস্থলের প্রোফাইল বন্ধ রয়েছে"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"অ্যাপ, পটভূমি সিঙ্ক এবং আপনার কর্মস্থলের প্রোফাইলের সাথে সম্পর্কিত অন্য বৈশিষ্ট্যগুলিকে বন্ধ করা হয়েছে৷"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"নাইট লাইট চালু আছে"</string>
-    <!-- no translation found for condition_night_display_summary (5443722724310650381) -->
-    <skip />
+    <string name="condition_night_display_summary" msgid="5443722724310650381">"স্ক্রীন হলুদাভ বাদামি আভা ধারণ করে৷ এটি আপনাকে ঘুমিয়ে পড়তে সহায়তা করতে পারে৷"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"প্রস্তাবনাগুলি"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>টি"</string>
     <string name="suggestion_remove" msgid="904627293892092439">"সরান"</string>
@@ -3175,7 +3180,6 @@
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"প্রবেশ করুন"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"সাইন ইন করতে পারছেন না?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"সিস্টেমের তথ্য পাঠান"</string>
-    <string name="support_disclaimer_content" product="default" msgid="6702447747744624871">"আপনার সমস্যাকে দ্রুত চিহ্নিত করার কাজে সহায়তা করতে, নির্ণয়ের জন্য আমাদের সিস্টেমের তথ্য চাই৷"</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"আর দেখাবেন না"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"কর্মস্থলের প্রোফাইলের সেটিংস"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"পরিচিতির অনুসন্ধান"</string>
@@ -3215,26 +3219,16 @@
     <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"ক্যামেরা দ্রুত খুলতে, পাওয়ার বোতামে দুবার আলতো চাপ দিন৷ যে কোনো স্ক্রীন থেকে কাজ করে"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"ক্যামেরা ফ্লিপ করুন"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
-    <!-- no translation found for ambient_display_title (5144814600610448504) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (8688795028609563837) -->
-    <skip />
-    <!-- no translation found for ambient_display_title (3423781975742145894) -->
-    <skip />
-    <!-- no translation found for ambient_display_summary (5817384104520817202) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_title (818688002837687268) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_title (4455864282995698097) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_title (5380534405773531175) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (7887685543895952417) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (4703466494089486840) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (3557276829636914807) -->
-    <skip />
+    <string name="ambient_display_title" product="default" msgid="5144814600610448504">"ফোন চেক করতে দুবার আলতো চাপুন"</string>
+    <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"ট্যাবলেট চেক করতে দুবার আলতো চাপুন"</string>
+    <string name="ambient_display_title" product="device" msgid="3423781975742145894">"ডিভাইস চেক করতে দুবার আলতো চাপুন"</string>
+    <string name="ambient_display_summary" msgid="5817384104520817202">"আপনার বিজ্ঞপ্তিগুলিকে দ্রুত চেক করতে আপনার স্ক্রীনে দুবার আলতো চাপুন"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"চেক করতে ফোনটিকে হাতে নিন"</string>
+    <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"চেক করতে ট্যাবলেটটিকে হাতে নিন"</string>
+    <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"চেক করতে ডিভাইসটিকে হাতে নিন"</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="7887685543895952417">"আপনার বিজ্ঞপ্তিগুলিকে দ্রুত চেক করতে আপনার ফোনটিকে হাতে তুলে নিন"</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="4703466494089486840">"আপনার বিজ্ঞপ্তিগুলিকে দ্রুত চেক করতে আপনার ট্যাবলেটটিকে হাতে তুলে নিন"</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="3557276829636914807">"আপনার বিজ্ঞপ্তিগুলিকে দ্রুত চেক করতে আপনার ডিভাইসটিকে হাতে তুলে নিন"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"বিজ্ঞপ্তিগুলির জন্য সোয়াইপ করুন"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"আপনার বিজ্ঞপ্তিগুলি চেক করতে, আপনার ফোনের পিছনে আঙ্গুলের ছাপ নেওয়ার সেন্সরে নীচের দিকে সোয়াইপ করুন"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"আপনার বিজ্ঞপ্তিগুলি চেক করতে, আপনার ট্যাবলেটের পিছনে আঙ্গুলের ছাপ নেওয়ার সেন্সরে নীচের দিকে সোয়াইপ করুন"</string>
@@ -3250,6 +3244,5 @@
     <string name="web_action_enable_summary" msgid="4679844581193646863">"সমর্থিত অ্যাপ্সে লিঙ্কগুলি খুলুন, এমনকি অ্যাপ্স যদি আপনার ডিভাইসে ইনস্টল না থাকে তাহলেও"</string>
     <string name="web_action_section_title" msgid="806405168097593614">"অ্যাপ্স ইনস্টল করা হয়নি"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"ইনস্টল করা অ্যাপ্স"</string>
-    <!-- no translation found for automatic_storage_manager_activation_warning (6353100011690933254) -->
-    <skip />
+    <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"আপনার সঞ্চয়স্থান এখন সঞ্চয়স্থান পরিচালকের দ্বারা পরিচালিত হচ্ছে"</string>
 </resources>
