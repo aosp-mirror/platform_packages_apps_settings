@@ -17,6 +17,7 @@ package com.android.settings.system;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -24,16 +25,17 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardTilePreference;
+import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
 
-public class SystemDashboardFragment extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceClickListener {
+public class SystemDashboardFragment extends SettingsPreferenceFragment {
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
+    private SystemUpdatePreferenceController mSystemUpdatePreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -45,19 +47,23 @@ public class SystemDashboardFragment extends SettingsPreferenceFragment implemen
         super.onAttach(context);
         mDashboardFeatureProvider =
                 FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
+        mSystemUpdatePreferenceController =
+                new SystemUpdatePreferenceController(context, UserManager.get(context));
     }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
         addPreferencesFromResource(R.xml.system_dashboard_fragment);
+        mSystemUpdatePreferenceController.displayPreference(getPreferenceScreen());
         addDashboardCategoryAsPreference();
     }
 
     @Override
-    public boolean onPreferenceClick(Preference preference) {
-        // Needed to enable preference click ripple
-        return false;
+    public boolean onPreferenceTreeClick(Preference preference) {
+        final boolean handled =
+                mSystemUpdatePreferenceController.handlePreferenceTreeClick(preference);
+        return handled || super.onPreferenceTreeClick(preference);
     }
 
     /**
