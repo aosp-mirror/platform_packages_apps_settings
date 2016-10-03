@@ -46,6 +46,7 @@ import android.widget.Button;
 
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.HelpUtils;
 
@@ -626,6 +627,9 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
 
         @Override
         public int getMetricsCategory() {
+            if (mDialogCreatable == null) {
+                return Instrumentable.METRICS_CATEGORY_UNKNOWN;
+            }
             final int metricsCategory = mDialogCreatable.getDialogMetricsCategory(mDialogId);
             if (metricsCategory <= 0) {
                 throw new IllegalStateException("Dialog must provide a metrics category");
