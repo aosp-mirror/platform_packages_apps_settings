@@ -24,6 +24,8 @@ import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.overlay.FeatureFactory;
 
+import static com.android.settings.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN;
+
 /**
  * Logs visibility change of a fragment.
  */
@@ -50,14 +52,14 @@ public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPau
 
     @Override
     public void onResume() {
-        if (mMetricsFeature != null) {
+        if (mMetricsFeature != null && mMetricsCategory != METRICS_CATEGORY_UNKNOWN) {
             mMetricsFeature.visible(null /* context */, mMetricsCategory);
         }
     }
 
     @Override
     public void onPause() {
-        if (mMetricsFeature != null) {
+        if (mMetricsFeature != null && mMetricsCategory != METRICS_CATEGORY_UNKNOWN) {
             mMetricsFeature.hidden(null /* context */, mMetricsCategory);
         }
     }

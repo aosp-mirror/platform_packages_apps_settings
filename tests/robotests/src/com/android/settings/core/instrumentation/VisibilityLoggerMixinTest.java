@@ -27,6 +27,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import static com.android.settings.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -69,6 +70,17 @@ public class VisibilityLoggerMixinTest {
     @Test
     public void shouldNotLogIfMetricsFeatureIsNull() {
         mMixin = new VisibilityLoggerMixin(TestInstrumentable.TEST_METRIC);
+        mMixin.onResume();
+        mMixin.onPause();
+
+        verify(mMetricsFeature, never())
+                .hidden(any(Context.class), anyInt());
+    }
+
+    @Test
+    public void shouldNotLogIfMetricsCategoryIsUnknown() {
+        mMixin = new VisibilityLoggerMixin(METRICS_CATEGORY_UNKNOWN, mMetricsFeature);
+
         mMixin.onResume();
         mMixin.onPause();
 

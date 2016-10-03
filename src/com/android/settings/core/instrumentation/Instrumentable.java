@@ -18,6 +18,8 @@ package com.android.settings.core.instrumentation;
 
 public interface Instrumentable {
 
+    int METRICS_CATEGORY_UNKNOWN = 0;
+
     /**
      * Instrumented name for a view as defined in
      * {@link com.android.internal.logging.MetricsProto.MetricsEvent}.
