@@ -16,10 +16,11 @@
 
 package com.android.settings;
 
-import android.app.ActionBar;
+import android.app.ActivityManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -1269,7 +1270,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     }
 
     public void startSuggestion(Intent intent) {
-        if (intent == null) {
+        if (intent == null || ActivityManager.isUserAMonkey()) {
             return;
         }
         final ComponentName componentName = intent.getComponent();
