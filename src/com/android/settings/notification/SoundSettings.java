@@ -19,6 +19,8 @@ package com.android.settings.notification;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -40,7 +42,6 @@ import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
-
 import com.android.settingslib.drawer.CategoryKey;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -251,7 +252,15 @@ public class SoundSettings extends DashboardFragment {
                                 AudioManager.STREAM_RING) / maxVolume);
                 resId = R.string.sound_settings_summary;
             }
-            mSummaryLoader.setSummary(this, mContext.getString(resId, percent));
+
+            final ComponentName suppressor = NotificationManager.from(mContext)
+                    .getEffectsSuppressor();
+            if (suppressor != null) {
+                String suppressText = SuppressorHelper.getSuppressionText(mContext, suppressor);
+                mSummaryLoader.setSummary(this, suppressText);
+            } else {
+                mSummaryLoader.setSummary(this, mContext.getString(resId, percent));
+            }
         }
     }
 
