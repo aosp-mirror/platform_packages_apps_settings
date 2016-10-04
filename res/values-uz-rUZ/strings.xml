@@ -20,7 +20,7 @@
     <string name="no" msgid="6731231425810196216">"Yo‘q"</string>
     <string name="create" msgid="3578857613172647409">"Yaratish"</string>
     <string name="allow" msgid="3349662621170855910">"Ruxsat berish"</string>
-    <string name="deny" msgid="6947806159746484865">"Rad qilish"</string>
+    <string name="deny" msgid="6947806159746484865">"Rad etish"</string>
     <string name="dlg_close" msgid="7471087791340790015">"Yopish"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"Almashtirish"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Noma’lum"</string>
@@ -687,10 +687,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi‑Fi yoqilganda batareya sarfini kamaytirish"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Quvvat sarfini cheklash (Wi-Fi)"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Agar Wi-Fi tarmog‘ida internet uzilib qolsa, mobil internetga ulansin."</string>
-    <!-- no translation found for wifi_cellular_data_fallback_title (8741291033791891668) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (5103827852382611436) -->
-    <skip />
+    <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"Mobil internetga avtomatik ravishda o‘tish"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="5103827852382611436">"Agar Wi-Fi tarmog‘ida internet uzilib qolsa, mobil internetdan foydalaning. Trafik uchun to‘lov olinishi mumkin."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Tarmoq qo‘shish"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi‑Fi tarmoqlari"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS tugmasi"</string>
@@ -764,7 +762,7 @@
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Joylashuv aniqligini yana ham yaxshilash va boshqa maqsadlar uchun, Wi-Fi o‘chirilgan bo‘lsada <xliff:g id="APP_NAME">%1$s</xliff:g> tarmoqlarni skanlash vazifasini yoqmoqchi.\n\nBu ruxsat tarmoqlarni skanlashni istagan barcha ilovalarga berilsinmi?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Uni o‘chirish uchun menyudan “Qo‘shimcha” bandiga o‘ting."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Ruxsat berish"</string>
-    <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Rad qilish"</string>
+    <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Rad etish"</string>
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Tizimga kirib, ulansinmi?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"Tarmoqqa ulanish u-n “<xliff:g id="APP_NAME">%1$s</xliff:g>” tizimga kirishni talab qiladi"</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"ULANISH"</string>
@@ -844,20 +842,20 @@
     <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Mobil aloqa o‘rniga Wi-Fi tarmog‘idan foydalaning"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Qo‘ng‘iroqlar sozlamalari"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi qo‘ng‘iroq rejimi"</string>
-    <!-- no translation found for wifi_calling_roaming_mode_title (1565039047187685115) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Rouming sozlamalari"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
-    <!-- no translation found for wifi_calling_roaming_mode_dialog_title (7800926602662078576) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Rouming sozlamalari"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wi-Fi afzal ko‘rilsin"</item>
     <item msgid="5267397515594230396">"Mobil tarmoq afzal ko‘rilsin"</item>
     <item msgid="3132912693346866895">"Faqat Wi-Fi"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2:0 (742988808283756263) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (122823150092396518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:2 (2838022395783120596) -->
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"Wi-Fi"</item>
+    <item msgid="122823150092396518">"Mobil"</item>
+    <item msgid="2838022395783120596">"Faqat Wi-Fi"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
@@ -867,8 +865,10 @@
     <item msgid="5782108782860004851">"Wi-Fi afzal ko‘rilsin"</item>
     <item msgid="9006785365352731433">"Mobil internet afzal ko‘rilsin"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:0 (6132150507201243768) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (2749029835484916851) -->
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"Wi-Fi"</item>
+    <item msgid="2749029835484916851">"Mobil"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -2523,7 +2523,10 @@
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"Har safar so‘ralsin"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Tanlash zarur"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Sozlamalar"</string>
-    <!-- no translation found for settings_suggestion_header_summary_hidden_items (5597356221942118048) -->
+    <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
+      <item quantity="other">%d ta yashirin elementni ko‘rsatish</item>
+      <item quantity="one">%d ta yashirin elementni ko‘rsatish</item>
+    </plurals>
     <string name="search_results_title" msgid="1796252422574886932">"Sozlamalar"</string>
     <string name="search_menu" msgid="6283419262313758339">"Qidiruv sozlamalari"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Qidiruv sozlamalari"</string>
@@ -3031,7 +3034,7 @@
     <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"Seshanba, 18:01"</string>
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Seshanba, 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Seshanba, 18:03"</string>
-    <string name="see_all" msgid="8883901630052886984">"Barchasini ko‘rsatish"</string>
+    <string name="see_all" msgid="8883901630052886984">"Hammasini ko‘rsatish"</string>
     <string name="see_less" msgid="1250265310929558370">"Kamroq"</string>
     <string name="disconnected" msgid="5787956818111197212">"Aloqa uzildi"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"Sarflangan trafik: <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>

@@ -687,10 +687,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"ওয়াই-ফাই চালু থাকাকালীন ব্যাটারি ব্যবহার কমান"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"ওয়াই-ফাই দ্বারা ব্যাটারি ব্যবহার সীমিত করুন"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"ওয়াই-ফাই ইন্টারনেটের অ্যাক্সেস হারালে সেলুলার ডেটাতে পাল্টান।"</string>
-    <!-- no translation found for wifi_cellular_data_fallback_title (8741291033791891668) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (5103827852382611436) -->
-    <skip />
+    <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"স্বয়ংক্রিয়ভাবে সেলুলার ডেটাতে পাল্টান"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="5103827852382611436">"Wi‑Fi ইন্টারনেটের অ্যাক্সেস হারালে সেলুলার ডেটা ব্যবহার করুন৷ ডেটা ব্যবহারের চার্জ লাগতে পারে৷"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"নেটওয়ার্ক যোগ করুন"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"ওয়াই-ফাই নেটওয়ার্কগুলি"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS পুশ বোতাম"</string>
@@ -844,20 +842,20 @@
     <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"মোবাইল নেটওয়ার্কের পরিবর্তে ওয়াই-ফাই ব্যবহার করুন"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"কলিং পছন্দ"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"ওয়াই-ফাই কলিং মোড"</string>
-    <!-- no translation found for wifi_calling_roaming_mode_title (1565039047187685115) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"পছন্দের রোমিং"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
-    <!-- no translation found for wifi_calling_roaming_mode_dialog_title (7800926602662078576) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"পছন্দের রোমিং"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"ওয়াই-ফাই ব্যবহার করুন"</item>
     <item msgid="5267397515594230396">"পছন্দের মোবাইল নেটওয়ার্ক"</item>
     <item msgid="3132912693346866895">"শুধুমাত্র ওয়াই-ফাই"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2:0 (742988808283756263) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (122823150092396518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:2 (2838022395783120596) -->
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"Wi-Fi"</item>
+    <item msgid="122823150092396518">"সেলুলার"</item>
+    <item msgid="2838022395783120596">"শুধুমাত্র Wi-Fi"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"২"</item>
     <item msgid="1171822231056612021">"১"</item>
@@ -867,8 +865,10 @@
     <item msgid="5782108782860004851">"ওয়াই-ফাই ব্যবহার করুন"</item>
     <item msgid="9006785365352731433">"মোবাইল নেটওয়ার্ক ব্যবহার করুন"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:0 (6132150507201243768) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (2749029835484916851) -->
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"Wi-Fi"</item>
+    <item msgid="2749029835484916851">"সেলুলার"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"২"</item>
     <item msgid="6200207341126893791">"১"</item>
@@ -2523,7 +2523,10 @@
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"প্রতিবার জিজ্ঞাসা করুন"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"নির্বাচন করার প্রয়োজন"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"সেটিংস"</string>
-    <!-- no translation found for settings_suggestion_header_summary_hidden_items (5597356221942118048) -->
+    <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
+      <item quantity="one">%dটি লুকানো আইটেম দেখান</item>
+      <item quantity="other">%dটি লুকানো আইটেম দেখান</item>
+    </plurals>
     <string name="search_results_title" msgid="1796252422574886932">"সেটিংস"</string>
     <string name="search_menu" msgid="6283419262313758339">"অনুসন্ধান সেটিংস"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"অনুসন্ধান সেটিংস"</string>

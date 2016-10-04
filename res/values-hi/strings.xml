@@ -687,10 +687,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"वाई-फ़ाई  के चालू रहने पर बैटरी उपयोग को न्यूनतम करें"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"वाई-फ़ाई का बैटरी उपयोग कम करें"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"यदि वाई-फ़ाई, इंटरनेट ऐक्सेस खो देता है, तो सेल्युलर डेटा में स्विच करें."</string>
-    <!-- no translation found for wifi_cellular_data_fallback_title (8741291033791891668) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (5103827852382611436) -->
-    <skip />
+    <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"सेल्युलर डेटा पर अपने आप जाएं"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="5103827852382611436">"वाई-फ़ाई का इंटरनेट एक्सेस खो जाने पर सेल्युलर डेटा का उपयोग करें. डेटा उपयोग लागू हो सकता है."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"नेटवर्क जोड़ें"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"वाई-फ़ाई  नेटवर्क"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS पुश बटन"</string>
@@ -844,20 +842,20 @@
     <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"मोबाइल नेटवर्क के बजाय वाई-फ़ाई का उपयोग करें"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"कॉल को प्राथमिकता"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"वाई-फ़ाई कॉलिंग मोड"</string>
-    <!-- no translation found for wifi_calling_roaming_mode_title (1565039047187685115) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"रोमिंग की प्राथमिकताएं"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
-    <!-- no translation found for wifi_calling_roaming_mode_dialog_title (7800926602662078576) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"रोमिंग की प्राथमिकताएं"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"वाई-फ़ाई को प्राथमिकता"</item>
     <item msgid="5267397515594230396">"सेल्‍युलर को प्राथमिकता"</item>
     <item msgid="3132912693346866895">"केवल वाई-फ़ाई"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2:0 (742988808283756263) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (122823150092396518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:2 (2838022395783120596) -->
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"वाई-फ़ाई"</item>
+    <item msgid="122823150092396518">"सेल्युलर"</item>
+    <item msgid="2838022395783120596">"केवल वाई-फ़ाई"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
@@ -867,8 +865,10 @@
     <item msgid="5782108782860004851">"वाई-फ़ाई को प्राथमिकता"</item>
     <item msgid="9006785365352731433">"सेल्युलर को प्राथमिकता"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:0 (6132150507201243768) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (2749029835484916851) -->
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"वाई-फ़ाई"</item>
+    <item msgid="2749029835484916851">"सेल्युलर"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -942,7 +942,7 @@
     <string name="auto_brightness_title" msgid="6341042882350279391">"स्क्रीन की रोशनी ठीक करें"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"अपने हिसाब से स्क्रीन की रोशनी ठीक करें"</string>
     <string name="night_display_title" msgid="2626451512200357686">"नाइट लाइट"</string>
-    <string name="night_display_text" msgid="1837277457033025056">"नाइट लाइट आपकी स्क्रीन को हल्की एम्बर कर देती है. इससे मंद रोशनी में अपनी स्क्रीन देखना या पढ़ना आसान हो जाता है और आपको आसानी से नींद आने में सहायता मिल सकती है."</string>
+    <string name="night_display_text" msgid="1837277457033025056">"नाइट लाइट आपकी स्क्रीन को हल्का एम्बर कर देती है. इससे मंद रोशनी में अपनी स्क्रीन देखना या पढ़ना आसान हो जाता है और आपको आसानी से नींद आने में सहायता मिल सकती है."</string>
     <string name="night_display_category_schedule" msgid="2044072617637348966">"शेड्यूल करें"</string>
     <string name="night_display_category_status" msgid="1952928783124400330">"स्थिति"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"अपने आप चालू करें"</string>
@@ -2523,7 +2523,10 @@
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"हर बार पूछें"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"चयन आवश्यक है"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"सेटिंग"</string>
-    <!-- no translation found for settings_suggestion_header_summary_hidden_items (5597356221942118048) -->
+    <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
+      <item quantity="one">छिपे हुए %d आइटम दिखाएं</item>
+      <item quantity="other">छिपे हुए %d आइटम दिखाएं</item>
+    </plurals>
     <string name="search_results_title" msgid="1796252422574886932">"सेटिंग"</string>
     <string name="search_menu" msgid="6283419262313758339">"खोज सेटिंग"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"खोज सेटिंग"</string>
