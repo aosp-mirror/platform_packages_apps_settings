@@ -15,11 +15,14 @@
  */
 package com.android.settings.system;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -27,12 +30,17 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardTilePreference;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.Indexable;
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
 
-public class SystemDashboardFragment extends SettingsPreferenceFragment {
+public class SystemDashboardFragment extends SettingsPreferenceFragment
+        implements SettingsDrawerActivity.CategoryListener, Indexable {
+
+    private static final String TAG = "SystemDashboardFrag";
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SystemUpdatePreferenceController mSystemUpdatePreferenceController;
@@ -52,11 +60,18 @@ public class SystemDashboardFragment extends SettingsPreferenceFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        final Activity activity = getActivity();
+        if (activity instanceof SettingsDrawerActivity) {
+            ((SettingsDrawerActivity) activity).addCategoryListener(this);
+        }
+    }
+
+    @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        addPreferencesFromResource(R.xml.system_dashboard_fragment);
-        mSystemUpdatePreferenceController.displayPreference(getPreferenceScreen());
-        addDashboardCategoryAsPreference();
+        refreshAllPreferences();
     }
 
     @Override
@@ -66,17 +81,46 @@ public class SystemDashboardFragment extends SettingsPreferenceFragment {
         return handled || super.onPreferenceTreeClick(preference);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        final Activity activity = getActivity();
+        if (activity instanceof SettingsDrawerActivity) {
+            ((SettingsDrawerActivity) activity).remCategoryListener(this);
+        }
+    }
+
+    @Override
+    public void onCategoriesChanged() {
+        refreshAllPreferences();
+    }
+
     /**
-     * Adds dynamic tiles for system category onto PreferenceScreen.
+     * Refresh preference items using system category dashboard items.
      */
-    private void addDashboardCategoryAsPreference() {
+    private void refreshAllPreferences() {
+        PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            screen.removeAll();
+        }
+
         final Context context = getContext();
-        final PreferenceScreen screen = getPreferenceScreen();
         final DashboardCategory category = mDashboardFeatureProvider.getTilesForSystemCategory();
         final List<Tile> tiles = category.tiles;
+
+        addPreferencesFromResource(R.xml.system_dashboard_fragment);
+        screen = getPreferenceScreen();
+        mSystemUpdatePreferenceController.displayPreference(getPreferenceScreen());
+
         for (Tile tile : tiles) {
-            final DashboardTilePreference pref = new DashboardTilePreference(context);
+            final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
+            if (TextUtils.isEmpty(key)) {
+                Log.d(TAG, "tile does not contain a key, skipping " + tile);
+                continue;
+            }
+            final Preference pref = new DashboardTilePreference(context);
             pref.setTitle(tile.title);
+            pref.setKey(key);
             pref.setSummary(tile.summary);
             if (tile.icon != null) {
                 pref.setIcon(tile.icon.loadDrawable(context));
@@ -91,5 +135,4 @@ public class SystemDashboardFragment extends SettingsPreferenceFragment {
             screen.addPreference(pref);
         }
     }
-
 }

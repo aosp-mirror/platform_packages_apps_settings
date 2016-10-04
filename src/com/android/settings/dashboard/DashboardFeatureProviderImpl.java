@@ -16,6 +16,7 @@
 
 package com.android.settings.dashboard;
 
+import android.content.ComponentName;
 import android.content.Context;
 
 import com.android.settingslib.drawer.CategoryKey;
@@ -29,6 +30,8 @@ import java.util.List;
  * Impl for {@code DashboardFeatureProvider}.
  */
 public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
+
+    private static final String DASHBOARD_TILE_PREF_KEY_PREFIX = "dashboard_tile_pref_";
 
     protected final Context mContext;
 
@@ -62,5 +65,16 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public int getPriorityGroup(Tile tile) {
         return tile.priority / 100;
+    }
+
+    @Override
+    public String getDashboardKeyForTile(Tile tile) {
+        if (tile == null || tile.intent == null) {
+            return null;
+        }
+        final StringBuilder sb = new StringBuilder(DASHBOARD_TILE_PREF_KEY_PREFIX);
+        final ComponentName component = tile.intent.getComponent();
+        sb.append(component.getClassName());
+        return sb.toString();
     }
 }

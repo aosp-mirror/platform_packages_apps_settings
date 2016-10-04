@@ -51,4 +51,9 @@ public interface DashboardFeatureProvider {
      * group 200, and so on.
      */
     int getPriorityGroup(Tile tile);
+
+    /**
+     * Returns an unique string key for the tile.
+     */
+    String getDashboardKeyForTile(Tile tile);
 }
