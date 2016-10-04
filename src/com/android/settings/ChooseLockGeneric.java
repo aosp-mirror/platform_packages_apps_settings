@@ -394,6 +394,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             // Used for testing purposes
             findPreference(KEY_UNLOCK_SET_NONE).setViewId(R.id.lock_none);
+            findPreference(KEY_SKIP_FINGERPRINT).setViewId(R.id.lock_none);
             findPreference(KEY_UNLOCK_SET_PIN).setViewId(R.id.lock_pin);
             findPreference(KEY_UNLOCK_SET_PASSWORD).setViewId(R.id.lock_password);
         }
