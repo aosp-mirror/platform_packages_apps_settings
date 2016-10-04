@@ -39,7 +39,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     public DashboardFeatureProviderImpl(Context context) {
         mContext = context;
-        mCategoryManager = CategoryManager.get();
+        mCategoryManager = CategoryManager.get(context);
     }
 
     @Override
