@@ -27,29 +27,27 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.PreferenceController;
 
 import java.util.List;
 
 import static android.content.Context.CARRIER_CONFIG_SERVICE;
 
-public class SystemUpdatePreferenceController {
+public class SystemUpdatePreferenceController extends PreferenceController {
 
     private static final String TAG = "SysUpdatePrefContr";
 
     static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
 
-    private final Context mContext;
     private final UserManager mUm;
 
     public SystemUpdatePreferenceController(Context context, UserManager um) {
-        mContext = context;
+        super(context);
         mUm = um;
     }
 
-    /**
-     * Displays preference in this controller.
-     */
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         if (isAvailable(mContext, KEY_SYSTEM_UPDATE_SETTINGS)) {
             Utils.updatePreferenceToSpecificActivityOrRemove(mContext, screen,
@@ -79,12 +77,7 @@ public class SystemUpdatePreferenceController {
         }
     }
 
-    /**
-     * Handles preference tree click
-     *
-     * @param preference the preference being clicked
-     * @return true if click is handled
-     */
+    @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_SYSTEM_UPDATE_SETTINGS.equals(preference.getKey())) {
             CarrierConfigManager configManager =
@@ -110,16 +103,6 @@ public class SystemUpdatePreferenceController {
                         R.bool.config_additional_system_update_setting_enable);
             default:
                 return false;
-        }
-    }
-
-    /**
-     * Removes preference from screen.
-     */
-    private void removePreference(PreferenceScreen screen, String key) {
-        Preference pref = screen.findPreference(key);
-        if (pref != null) {
-            screen.removePreference(pref);
         }
     }
 

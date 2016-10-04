@@ -36,6 +36,11 @@ public interface DashboardFeatureProvider {
     DashboardCategory getTilesForHomepage();
 
     /**
+     * Get tiles (wrapped in {@link DashboardCategory}) for storage category.
+     */
+    DashboardCategory getTilesForStorageCategory();
+
+    /**
      * Get tiles (wrapped in {@link DashboardCategory}) for system category.
      */
     DashboardCategory getTilesForSystemCategory();
