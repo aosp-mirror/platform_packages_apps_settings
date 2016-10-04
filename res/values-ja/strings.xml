@@ -678,10 +678,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Wi-FiがONのときに電池使用を節約する"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Wi-Fiの電池使用量を制限する"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi-Fiがインターネットにアクセスできない場合にモバイルデータに切り替える"</string>
-    <!-- no translation found for wifi_cellular_data_fallback_title (8741291033791891668) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (5103827852382611436) -->
-    <skip />
+    <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"モバイルデータに自動的に切り替え"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="5103827852382611436">"Wi-Fi でインターネットにアクセスできない場合にモバイルデータを使用します。データ通信料金がかかる場合があります。"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"ネットワークを追加"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fiネットワーク"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPSプッシュボタン"</string>
@@ -835,20 +833,20 @@
     <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"モバイル ネットワークの代わりに Wi-Fi を使用できます"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"発信の設定"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi通話モード"</string>
-    <!-- no translation found for wifi_calling_roaming_mode_title (1565039047187685115) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"ローミング設定"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
-    <!-- no translation found for wifi_calling_roaming_mode_dialog_title (7800926602662078576) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"ローミング設定"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wi-Fi優先"</item>
     <item msgid="5267397515594230396">"モバイル優先"</item>
     <item msgid="3132912693346866895">"Wi-Fiのみ"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2:0 (742988808283756263) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (122823150092396518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:2 (2838022395783120596) -->
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"Wi-Fi"</item>
+    <item msgid="122823150092396518">"モバイル"</item>
+    <item msgid="2838022395783120596">"Wi-Fi のみ"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
@@ -858,8 +856,10 @@
     <item msgid="5782108782860004851">"Wi-Fi 優先"</item>
     <item msgid="9006785365352731433">"モバイル優先"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:0 (6132150507201243768) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (2749029835484916851) -->
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"Wi-Fi"</item>
+    <item msgid="2749029835484916851">"モバイル"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -2513,7 +2513,10 @@
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"その都度確認"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"選択してください"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"設定"</string>
-    <!-- no translation found for settings_suggestion_header_summary_hidden_items (5597356221942118048) -->
+    <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
+      <item quantity="other">%d 件の非表示のアイテムを表示</item>
+      <item quantity="one">%d 件の非表示のアイテムを表示</item>
+    </plurals>
     <string name="search_results_title" msgid="1796252422574886932">"設定"</string>
     <string name="search_menu" msgid="6283419262313758339">"検索設定"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"検索設定"</string>

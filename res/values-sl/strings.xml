@@ -696,10 +696,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Zmanjšanje porabe energije akumulatorja, ko je vklopljen Wi-Fi"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Omejitev porabe akum. za Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Preklop na prenos podatkov v mobilnem omrežju, če povezava Wi‑Fi nima več internetnega dostopa"</string>
-    <!-- no translation found for wifi_cellular_data_fallback_title (8741291033791891668) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (5103827852382611436) -->
-    <skip />
+    <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"Samodejno preklopi na prenos podatkov v mobilnem omrežju"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="5103827852382611436">"Uporaba prenosa podatkov v mobilnem omrežju, ko povezava Wi‑Fi izgubi dostop do interneta. Pri tem bodo morda nastali stroški prenosa podatkov v mobilnih omrežjih."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Dodaj omrežje"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Omrežja Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Gumb za WPS"</string>
@@ -853,20 +851,20 @@
     <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"Uporaba Wi-Fi-ja namesto mobilnega omrežja"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Nastavitev klicanja"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Način klicanja prek Wi-Fi-ja"</string>
-    <!-- no translation found for wifi_calling_roaming_mode_title (1565039047187685115) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Prednostna izbira za gostovanje"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
-    <!-- no translation found for wifi_calling_roaming_mode_dialog_title (7800926602662078576) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"Prednostna izbira za gostovanje"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Prednostno – Wi-Fi"</item>
     <item msgid="5267397515594230396">"Prednostno – mobilno omrežje"</item>
     <item msgid="3132912693346866895">"Samo Wi-Fi"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2:0 (742988808283756263) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (122823150092396518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:2 (2838022395783120596) -->
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"Wi-Fi"</item>
+    <item msgid="122823150092396518">"Mobilno omrežje"</item>
+    <item msgid="2838022395783120596">"Samo Wi-Fi"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
@@ -876,8 +874,10 @@
     <item msgid="5782108782860004851">"Prednostno – Wi-Fi"</item>
     <item msgid="9006785365352731433">"Prednostno – mobilno omrežje"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:0 (6132150507201243768) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (2749029835484916851) -->
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"Wi-Fi"</item>
+    <item msgid="2749029835484916851">"Mobilno omrežje"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -2551,7 +2551,12 @@
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"Vedno vprašaj"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Zahtevana je izbira"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Nastavitve"</string>
-    <!-- no translation found for settings_suggestion_header_summary_hidden_items (5597356221942118048) -->
+    <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
+      <item quantity="one">Pokaži %d skrit element</item>
+      <item quantity="two">Pokaži %d skrita elementa</item>
+      <item quantity="few">Pokaži %d skrite elemente</item>
+      <item quantity="other">Pokaži %d skritih elementov</item>
+    </plurals>
     <string name="search_results_title" msgid="1796252422574886932">"Nastavitve"</string>
     <string name="search_menu" msgid="6283419262313758339">"Nastavitve iskanja"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Nastavitve iskanja"</string>
