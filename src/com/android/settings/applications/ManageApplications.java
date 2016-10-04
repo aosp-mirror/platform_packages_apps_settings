@@ -887,6 +887,8 @@ public class ManageApplications extends InstrumentedFragment
                     comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
                     break;
             }
+            filterObj = new CompoundFilter(filterObj, ApplicationsState.FILTER_NOT_HIDE);
+
             AppFilter finalFilterObj = filterObj;
             mBgHandler.post(() -> {
                 final ArrayList<AppEntry> entries = mSession.rebuild(finalFilterObj,
