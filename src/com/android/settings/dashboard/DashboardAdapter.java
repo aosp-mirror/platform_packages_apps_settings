@@ -176,7 +176,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         resetCount();
         for (int i = 0; mCategories != null && i < mCategories.size(); i++) {
             DashboardCategory category = mCategories.get(i);
-            countItem(category, R.layout.dashboard_category, mIsShowingAll, NS_ITEMS);
+            countItem(category, R.layout.dashboard_category, mIsShowingAll
+                    && !TextUtils.isEmpty(category.title), NS_ITEMS);
             for (int j = 0; j < category.tiles.size(); j++) {
                 Tile tile = category.tiles.get(j);
                 countItem(tile, R.layout.dashboard_tile, mIsShowingAll

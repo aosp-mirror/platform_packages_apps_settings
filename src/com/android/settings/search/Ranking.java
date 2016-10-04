@@ -51,6 +51,7 @@ import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
+import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
@@ -184,6 +185,8 @@ public final class Ranking {
         // Device infos
         sRankMap.put(DeviceInfoSettings.class.getName(), RANK_DEVICE_INFO);
         sRankMap.put(LegalSettings.class.getName(), RANK_DEVICE_INFO);
+
+        sRankMap.put(SystemDashboardFragment.class.getName(), RANK_DEVICE_INFO);
 
         sBaseRankMap.put("com.android.settings", 0);
     }

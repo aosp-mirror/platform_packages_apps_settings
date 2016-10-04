@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -30,11 +31,14 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardTilePreference;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SystemDashboardFragment extends SettingsPreferenceFragment
@@ -135,4 +139,35 @@ public class SystemDashboardFragment extends SettingsPreferenceFragment
             screen.addPreference(pref);
         }
     }
+
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.system_dashboard_fragment;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SystemUpdatePreferenceController systemUpdatePreferenceController =
+                            new SystemUpdatePreferenceController(context, UserManager.get(context));
+                    final List<String> keys = new ArrayList<>();
+                    systemUpdatePreferenceController.updateNonIndexableKeys(keys);
+                    return keys;
+                }
+            };
 }
