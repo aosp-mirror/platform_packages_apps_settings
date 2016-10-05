@@ -3035,13 +3035,41 @@
         <!-- Alias for battery settings in new IA. Remove and merge metadata into TargetActivity -->
         <activity-alias android:name="BatteryDashboardAlias"
                         android:targetActivity="Settings$PowerUsageSummaryActivity">
-            <intent-filter android:priority="10">
+            <intent-filter android:priority="7">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.fuelgauge.PowerUsageSummary"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
+        </activity-alias>
+
+        <activity android:name=".Settings$StorageDashboardActivity"
+                  android:label="@string/storage_settings"
+                  android:icon="@drawable/ic_settings_storage">
+            <intent-filter android:priority="5">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.deviceinfo.StorageDashboardFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity-alias android:name="InternalStorageDashboardAlias"
+                        android:targetActivity="Settings$StorageSettingsActivity"
+                        android:label="@string/storage_internal_title">
+            <intent-filter android:priority="5">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.storage" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.deviceinfo.StorageSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity-alias>
 
         <activity android:name=".Settings$SystemDashboardActivity"

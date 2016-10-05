@@ -164,6 +164,7 @@ public class Settings extends SettingsActivity {
     public static class SystemSettings extends SettingsActivity { /* empty */ }
 
     // Top level categories for new IA
+    public static class StorageDashboardActivity extends SettingsActivity {}
     public static class SystemDashboardActivity extends SettingsActivity {}
     public static class SupportDashboardActivity extends SettingsActivity {}
 

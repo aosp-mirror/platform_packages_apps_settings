@@ -87,6 +87,7 @@ import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
 import com.android.settings.deviceinfo.SimStatus;
 import com.android.settings.deviceinfo.Status;
+import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
@@ -377,6 +378,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             ManageDomainUrls.class.getName(),
             AutomaticStorageManagerSettings.class.getName(),
             SupportFragment.class.getName(),
+            StorageDashboardFragment.class.getName(),
             SystemDashboardFragment.class.getName(),
     };
 

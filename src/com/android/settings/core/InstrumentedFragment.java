@@ -36,6 +36,7 @@ public abstract class InstrumentedFragment extends ObservablePreferenceFragment
     // metrics placeholder value. Only use this for development.
     protected final int PLACEHOLDER_METRIC = 10000;
     protected final int SYSTEM_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 1;
+    protected final int STORAGE_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 2;
 
     public InstrumentedFragment() {
         // Mixin that logs visibility change for activity.
