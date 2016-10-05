@@ -23,7 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.settings.TestConfig;
-import com.android.settings.shadow.ShadowTextUtils;
+import com.android.settings.testutils.shadow.ShadowTextUtils;
 
 import org.junit.Before;
 import org.junit.Test;

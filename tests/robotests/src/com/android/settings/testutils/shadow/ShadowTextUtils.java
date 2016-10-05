@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.shadow;
+package com.android.settings.testutils.shadow;
 
 import android.icu.util.ULocale;
 import android.os.SystemProperties;
