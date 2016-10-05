@@ -22,6 +22,8 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 
+import java.util.List;
+
 public class ManageStoragePreferenceController extends PreferenceController {
 
     public static final String KEY_MANAGE_STORAGE = "pref_manage_storage";
@@ -34,6 +36,13 @@ public class ManageStoragePreferenceController extends PreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         if (!isAvailable()) {
             removePreference(screen, KEY_MANAGE_STORAGE);
+        }
+    }
+
+    @Override
+    public void updateNonIndexableKeys(List<String> keys) {
+        if (!isAvailable()) {
+            keys.add(KEY_MANAGE_STORAGE);
         }
     }
 

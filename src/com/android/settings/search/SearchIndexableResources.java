@@ -35,6 +35,7 @@ import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
@@ -334,6 +335,12 @@ public final class SearchIndexableResources {
                         NO_DATA_RES_ID,
                         SystemDashboardFragment.class.getName(),
                         R.drawable.ic_settings_about));
+        sResMap.put(StorageDashboardFragment.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(StorageDashboardFragment.class.getName()),
+                        NO_DATA_RES_ID,
+                        StorageDashboardFragment.class.getName(),
+                        R.drawable.ic_settings_storage));
     }
 
     private SearchIndexableResources() {

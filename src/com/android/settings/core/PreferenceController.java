@@ -19,6 +19,8 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import java.util.List;
+
 /**
  * A controller that manages event for preference.
  */
@@ -43,6 +45,12 @@ public abstract class PreferenceController {
      */
     public abstract boolean handlePreferenceTreeClick(Preference preference);
 
+    /**
+     * Updates non-indexable keys for search provider.
+     *
+     * Called by SearchIndexProvider#getNonIndexableKeys
+     */
+    public abstract void updateNonIndexableKeys(List<String> keys);
 
     /**
      * Removes preference from screen.
