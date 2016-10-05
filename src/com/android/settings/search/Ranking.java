@@ -34,6 +34,7 @@ import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
@@ -186,6 +187,7 @@ public final class Ranking {
         sRankMap.put(DeviceInfoSettings.class.getName(), RANK_DEVICE_INFO);
         sRankMap.put(LegalSettings.class.getName(), RANK_DEVICE_INFO);
 
+        sRankMap.put(StorageDashboardFragment.class.getName(), RANK_STORAGE);
         sRankMap.put(SystemDashboardFragment.class.getName(), RANK_DEVICE_INFO);
 
         sBaseRankMap.put("com.android.settings", 0);

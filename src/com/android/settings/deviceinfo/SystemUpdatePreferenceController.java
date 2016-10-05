@@ -62,11 +62,7 @@ public class SystemUpdatePreferenceController extends PreferenceController {
         }
     }
 
-    /**
-     * Updates non-indexable keys for search provider.
-     *
-     * Called by SearchIndexProvider#getNonIndexableKeys
-     */
+    @Override
     public void updateNonIndexableKeys(List<String> keys) {
         // TODO: system update needs to be fixed for non-owner user b/22760654
         if (!isAvailable(mContext, KEY_SYSTEM_UPDATE_SETTINGS)) {
