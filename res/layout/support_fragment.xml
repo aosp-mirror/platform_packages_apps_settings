@@ -15,13 +15,18 @@
      limitations under the License.
 -->
 
-<android.support.v7.widget.RecyclerView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/support_items"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
     android:focusable="false"
     android:paddingStart="@dimen/dashboard_padding_start"
-    android:paddingEnd="@dimen/dashboard_padding_end"/>
+    android:paddingEnd="@dimen/dashboard_padding_end">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/support_items"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="@color/card_background"/>
+</FrameLayout>
