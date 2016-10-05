@@ -320,11 +320,15 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return;
             }
 
-            mPasswordEntryInputDisabler.setInputEnabled(false);
-
             final String pin = mPasswordEntry.getText().toString();
+            if (TextUtils.isEmpty(pin)) {
+                return;
+            }
+
+            mPasswordEntryInputDisabler.setInputEnabled(false);
             final boolean verifyChallenge = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+
             Intent intent = new Intent();
             if (verifyChallenge)  {
                 if (isInternalActivity()) {
