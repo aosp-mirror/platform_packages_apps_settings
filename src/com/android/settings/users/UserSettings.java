@@ -610,7 +610,7 @@ public class UserSettings extends SettingsPreferenceFragment
             case DIALOG_USER_PROFILE_EDITOR: {
                 Dialog dlg = mEditUserInfoController.createDialog(
                         this,
-                        mMePreference.getIcon(),
+                        null,
                         mMePreference.getTitle(),
                         R.string.profile_info_settings_title,
                         this /* callback */,
