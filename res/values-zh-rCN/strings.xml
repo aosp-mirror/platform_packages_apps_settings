@@ -438,7 +438,7 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"启用设备保护功能可防止他人在未经您允许的情况下使用此设备。请选择您要使用的屏幕锁定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"启用设备保护功能可防止他人在未经您允许的情况下使用此手机。请选择您要使用的屏幕锁定方式。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"选择您的备用屏幕锁定方式"</string>
-    <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"屏幕锁定方式"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"屏幕锁定"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="124176557311393483">"工作资料屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"更改屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"更改或关闭图案、PIN码或密码保护"</string>
@@ -687,10 +687,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"开启WLAN时尽可能节约电池用量"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"限制WLAN耗电量"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"在 WLAN 网络无法连接到互联网时改用移动数据网络。"</string>
-    <!-- no translation found for wifi_cellular_data_fallback_title (8741291033791891668) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (5103827852382611436) -->
-    <skip />
+    <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"自动切换到移动数据网络"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="5103827852382611436">"在 WLAN 无法连接到互联网时改用移动数据网络（可能会消耗移动数据流量）。"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"添加网络"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"WLAN网络"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS按钮"</string>
@@ -844,20 +842,20 @@
     <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"使用 WLAN 网络（而非移动网络）"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"通话偏好设置"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"WLAN 通话模式"</string>
-    <!-- no translation found for wifi_calling_roaming_mode_title (1565039047187685115) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"漫游偏好设置"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
-    <!-- no translation found for wifi_calling_roaming_mode_dialog_title (7800926602662078576) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"漫游偏好设置"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"首选 WLAN"</item>
     <item msgid="5267397515594230396">"首选移动网络"</item>
     <item msgid="3132912693346866895">"仅限 WLAN"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2:0 (742988808283756263) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (122823150092396518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:2 (2838022395783120596) -->
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"WLAN"</item>
+    <item msgid="122823150092396518">"移动网络"</item>
+    <item msgid="2838022395783120596">"仅限 WLAN"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
@@ -867,8 +865,10 @@
     <item msgid="5782108782860004851">"首选 WLAN 网络"</item>
     <item msgid="9006785365352731433">"首选移动网络"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:0 (6132150507201243768) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (2749029835484916851) -->
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"WLAN"</item>
+    <item msgid="2749029835484916851">"移动网络"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -2523,7 +2523,10 @@
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"每次都询问"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"必须选择"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"设置"</string>
-    <!-- no translation found for settings_suggestion_header_summary_hidden_items (5597356221942118048) -->
+    <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
+      <item quantity="other">显示 %d 项隐藏内容</item>
+      <item quantity="one">显示 %d 项隐藏内容</item>
+    </plurals>
     <string name="search_results_title" msgid="1796252422574886932">"设置"</string>
     <string name="search_menu" msgid="6283419262313758339">"搜索设置"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"搜索设置"</string>
