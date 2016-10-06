@@ -1,0 +1,69 @@
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+package com.android.settings.display;
+
+import android.content.Context;
+import android.os.UserHandle;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+
+import com.android.settings.core.PreferenceController;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
+
+import static android.os.UserManager.DISALLOW_SET_WALLPAPER;
+
+public class WallpaperPreferenceController extends PreferenceController {
+
+    private static final String KEY_WALLPAPER = "wallpaper";
+
+    public WallpaperPreferenceController(Context context) {
+        super(context);
+    }
+
+    @Override
+    protected boolean isAvailable() {
+        return true;
+    }
+
+    @Override
+    protected String getPreferenceKey() {
+        return KEY_WALLPAPER;
+    }
+
+    @Override
+    public void updateState(PreferenceScreen screen) {
+        disablePreferenceIfManaged(screen);
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        return false;
+    }
+
+    private void disablePreferenceIfManaged(PreferenceScreen screen) {
+        final RestrictedPreference pref =
+                (RestrictedPreference) screen.findPreference(KEY_WALLPAPER);
+        final String restriction = DISALLOW_SET_WALLPAPER;
+        if (pref != null) {
+            pref.setDisabledByAdmin(null);
+            if (RestrictedLockUtils.hasBaseUserRestriction(mContext,
+                    restriction, UserHandle.myUserId())) {
+                pref.setEnabled(false);
+            } else {
+                pref.checkRestrictionAndSetDisabled(restriction);
+            }
+        }
+    }
+}

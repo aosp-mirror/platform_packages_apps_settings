@@ -29,8 +29,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.List;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -39,7 +37,6 @@ import static org.mockito.Mockito.when;
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PreferenceControllerTest {
-    private static final String KEY_PREF = "test_pref";
 
     @Mock
     private Context mContext;
@@ -58,29 +55,45 @@ public class PreferenceControllerTest {
 
     @Test
     public void removeExistingPref_shouldBeRemoved() {
-        when(mScreen.findPreference(KEY_PREF)).thenReturn(mPreference);
+        when(mScreen.findPreference(TestPrefController.KEY_PREF)).thenReturn(mPreference);
 
-        mTestPrefController.removePreference(mScreen, KEY_PREF);
+        mTestPrefController.removePreference(mScreen, TestPrefController.KEY_PREF);
 
         verify(mScreen).removePreference(mPreference);
     }
 
     @Test
     public void removeNonExistingPref_shouldNotRemoveAnything() {
-        mTestPrefController.removePreference(mScreen, KEY_PREF);
+        mTestPrefController.removePreference(mScreen, TestPrefController.KEY_PREF);
 
         verify(mScreen, never()).removePreference(any(Preference.class));
     }
 
+    @Test
+    public void displayPref_ifAvailable() {
+        mTestPrefController.isAvailable = true;
+
+        mTestPrefController.displayPreference(mScreen);
+
+        verify(mScreen, never()).removePreference(any(Preference.class));
+    }
+
+    @Test
+    public void doNotDisplayPref_ifNotAvailable() {
+        when(mScreen.findPreference(TestPrefController.KEY_PREF)).thenReturn(mPreference);
+        mTestPrefController.isAvailable = false;
+
+        mTestPrefController.displayPreference(mScreen);
+
+        verify(mScreen).removePreference(any(Preference.class));
+    }
+
     private class TestPrefController extends PreferenceController {
+        private static final String KEY_PREF = "test_pref";
+        public boolean isAvailable;
 
         public TestPrefController(Context context) {
             super(context);
-        }
-
-        @Override
-        public void displayPreference(PreferenceScreen screen) {
-
         }
 
         @Override
@@ -89,8 +102,13 @@ public class PreferenceControllerTest {
         }
 
         @Override
-        public void updateNonIndexableKeys(List<String> keys) {
+        protected boolean isAvailable() {
+            return isAvailable;
+        }
 
+        @Override
+        protected String getPreferenceKey() {
+            return KEY_PREF;
         }
     }
 

@@ -20,7 +20,9 @@ import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -47,23 +49,21 @@ public class SystemDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        addPreferenceController(
-                new SystemUpdatePreferenceController(context, UserManager.get(context)));
-    }
-
-    @Override
-    protected void displayResourceTiles() {
-        addPreferencesFromResource(R.xml.system_dashboard_fragment);
-
-        getPreferenceController(SystemUpdatePreferenceController.class)
-                .displayPreference(getPreferenceScreen());
+    protected int getPreferenceScreenResId() {
+        return R.xml.system_dashboard_fragment;
     }
 
     @Override
     protected String getCategoryKey() {
         return CategoryKey.CATEGORY_SYSTEM;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new SystemUpdatePreferenceController(context, UserManager.get(context)));
+        controllers.add(new AdditionalSystemUpdatePreferenceController(context));
+        return controllers;
     }
 
     /**
@@ -89,10 +89,11 @@ public class SystemDashboardFragment extends DashboardFragment {
                             .isEnabled()) {
                         return null;
                     }
-                    final SystemUpdatePreferenceController systemUpdatePreferenceController =
-                            new SystemUpdatePreferenceController(context, UserManager.get(context));
                     final List<String> keys = new ArrayList<>();
-                    systemUpdatePreferenceController.updateNonIndexableKeys(keys);
+                    new SystemUpdatePreferenceController(context, UserManager.get(context))
+                            .updateNonIndexableKeys(keys);
+                    new AdditionalSystemUpdatePreferenceController(context)
+                            .updateNonIndexableKeys(keys);
                     return keys;
                 }
             };

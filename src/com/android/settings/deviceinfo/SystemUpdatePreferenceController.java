@@ -25,7 +25,6 @@ import android.telephony.CarrierConfigManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 
@@ -37,8 +36,7 @@ public class SystemUpdatePreferenceController extends PreferenceController {
 
     private static final String TAG = "SysUpdatePrefContr";
 
-    static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
-    static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
+    private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
 
     private final UserManager mUm;
 
@@ -48,28 +46,31 @@ public class SystemUpdatePreferenceController extends PreferenceController {
     }
 
     @Override
+    protected boolean isAvailable() {
+        return mUm.isAdminUser();
+    }
+
+    @Override
+    protected String getPreferenceKey() {
+        return KEY_SYSTEM_UPDATE_SETTINGS;
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
-        if (isAvailable(mContext, KEY_SYSTEM_UPDATE_SETTINGS)) {
+        if (isAvailable()) {
             Utils.updatePreferenceToSpecificActivityOrRemove(mContext, screen,
                     KEY_SYSTEM_UPDATE_SETTINGS,
                     Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         } else {
             removePreference(screen, KEY_SYSTEM_UPDATE_SETTINGS);
         }
-
-        if (!isAvailable(mContext, KEY_UPDATE_SETTING)) {
-            removePreference(screen, KEY_UPDATE_SETTING);
-        }
     }
 
     @Override
     public void updateNonIndexableKeys(List<String> keys) {
         // TODO: system update needs to be fixed for non-owner user b/22760654
-        if (!isAvailable(mContext, KEY_SYSTEM_UPDATE_SETTINGS)) {
+        if (!isAvailable()) {
             keys.add(KEY_SYSTEM_UPDATE_SETTINGS);
-        }
-        if (!isAvailable(mContext, KEY_UPDATE_SETTING)) {
-            keys.add(KEY_UPDATE_SETTING);
         }
     }
 
@@ -85,21 +86,6 @@ public class SystemUpdatePreferenceController extends PreferenceController {
         }
         // always return false here because this handler does not want to block other handlers.
         return false;
-    }
-
-    /**
-     * Whether a preference should be available on screen.
-     */
-    private boolean isAvailable(Context context, String key) {
-        switch (key) {
-            case KEY_SYSTEM_UPDATE_SETTINGS:
-                return mUm.isAdminUser();
-            case KEY_UPDATE_SETTING:
-                return context.getResources().getBoolean(
-                        R.bool.config_additional_system_update_setting_enable);
-            default:
-                return false;
-        }
     }
 
     /**

@@ -86,7 +86,13 @@ public class SummaryLoader {
         mWorker = new Worker(mWorkerThread.getLooper());
         mActivity = activity;
 
-        List<Tile> tiles = mDashboardFeatureProvider.getTilesForCategory(categoryKey).tiles;
+        final DashboardCategory category =
+                mDashboardFeatureProvider.getTilesForCategory(categoryKey);
+        if (category == null || category.tiles == null) {
+            return;
+        }
+
+        List<Tile> tiles = category.tiles;
         for (Tile tile : tiles) {
             mWorker.obtainMessage(Worker.MSG_GET_PROVIDER, tile).sendToTarget();
         }
@@ -258,6 +264,9 @@ public class SummaryLoader {
     }
 
     private Tile getTileFromCategory(DashboardCategory category, ComponentName component) {
+        if (category == null || category.tiles == null) {
+            return null;
+        }
         final int tileCount = category.tiles.size();
         for (int j = 0; j < tileCount; j++) {
             final Tile tile = category.tiles.get(j);

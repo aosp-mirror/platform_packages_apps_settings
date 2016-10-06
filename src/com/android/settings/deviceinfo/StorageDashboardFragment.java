@@ -20,6 +20,7 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -45,22 +46,20 @@ public class StorageDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        addPreferenceController(new ManageStoragePreferenceController(context));
-    }
-
-    @Override
     protected String getCategoryKey() {
         return CategoryKey.CATEGORY_STORAGE;
     }
 
     @Override
-    protected void displayResourceTiles() {
-        addPreferencesFromResource(R.xml.storage_dashboard_fragment);
+    protected int getPreferenceScreenResId() {
+        return R.xml.storage_dashboard_fragment;
+    }
 
-        getPreferenceController(ManageStoragePreferenceController.class)
-                .displayPreference(getPreferenceScreen());
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ManageStoragePreferenceController(context));
+        return controllers;
     }
 
     /**

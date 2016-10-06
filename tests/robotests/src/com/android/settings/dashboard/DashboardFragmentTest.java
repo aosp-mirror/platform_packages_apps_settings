@@ -116,13 +116,18 @@ public class DashboardFragmentTest {
         }
 
         @Override
-        public void displayPreference(PreferenceScreen screen) {
-
+        public boolean handlePreferenceTreeClick(Preference preference) {
+            return false;
         }
 
         @Override
-        public boolean handlePreferenceTreeClick(Preference preference) {
+        protected boolean isAvailable() {
             return false;
+        }
+
+        @Override
+        protected String getPreferenceKey() {
+            return null;
         }
 
         @Override
@@ -158,10 +163,6 @@ public class DashboardFragmentTest {
         }
 
         @Override
-        protected void displayResourceTiles() {
-        }
-
-        @Override
         public PreferenceScreen getPreferenceScreen() {
             return mScreen;
         }
@@ -169,6 +170,16 @@ public class DashboardFragmentTest {
         @Override
         protected String getLogTag() {
             return "TEST_FRAG";
+        }
+
+        @Override
+        protected int getPreferenceScreenResId() {
+            return 0;
+        }
+
+        @Override
+        protected List<PreferenceController> getPreferenceControllers(Context context) {
+            return null;
         }
     }
 

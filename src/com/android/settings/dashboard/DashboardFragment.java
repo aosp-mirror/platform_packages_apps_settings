@@ -55,6 +55,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         super.onAttach(context);
         mDashboardFeatureProvider =
                 FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
+
+        final List<PreferenceController> controllers = getPreferenceControllers(context);
+        if (controllers == null) {
+            return;
+        }
+        for (PreferenceController controller : controllers) {
+            addPreferenceController(controller);
+        }
     }
 
     @Override
@@ -81,7 +89,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         if (category == null) {
             return;
         }
-        mSummaryLoader.setListening(true);
+        if (mSummaryLoader != null) {
+            // SummaryLoader can be null when there is no dynamic tiles.
+            mSummaryLoader.setListening(true);
+        }
         final Activity activity = getActivity();
         if (activity instanceof SettingsDrawerActivity) {
             mListeningToCategoryChange = true;
@@ -103,6 +114,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        updatePreferenceStates();
+    }
+
+    @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         Collection<PreferenceController> controllers = mPreferenceControllers.values();
         // Give all controllers a chance to handle click.
@@ -117,7 +134,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onStop() {
         super.onStop();
-        mSummaryLoader.setListening(false);
+        if (mSummaryLoader != null) {
+            // SummaryLoader can be null when there is no dynamic tiles.
+            mSummaryLoader.setListening(false);
+        }
         if (mListeningToCategoryChange) {
             final Activity activity = getActivity();
             if (activity instanceof SettingsDrawerActivity) {
@@ -142,11 +162,35 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     protected abstract String getCategoryKey();
 
     /**
+     * Get the tag string for logging.
+     */
+    protected abstract String getLogTag();
+
+    /**
+     * Get the res id for static preference xml for this fragment.
+     */
+    protected abstract int getPreferenceScreenResId();
+
+    /**
+     * Get a list of {@link PreferenceController} for this fragment.
+     */
+    protected abstract List<PreferenceController> getPreferenceControllers(Context context);
+
+    /**
      * Displays resource based tiles.
      */
-    protected abstract void displayResourceTiles();
-
-    protected abstract String getLogTag();
+    private void displayResourceTiles() {
+        final int resId = getPreferenceScreenResId();
+        if (resId <= 0) {
+            return;
+        }
+        addPreferencesFromResource(resId);
+        final PreferenceScreen screen = getPreferenceScreen();
+        Collection<PreferenceController> controllers = mPreferenceControllers.values();
+        for (PreferenceController controller : controllers) {
+            controller.displayPreference(screen);
+        }
+    }
 
     /**
      * Displays dashboard tiles as preference.
@@ -196,6 +240,17 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     /**
+     * Update state of each preference managed by PreferenceController.
+     */
+    private void updatePreferenceStates() {
+        Collection<PreferenceController> controllers = mPreferenceControllers.values();
+        final PreferenceScreen screen = getPreferenceScreen();
+        for (PreferenceController controller : controllers) {
+            controller.updateState(screen);
+        }
+    }
+
+    /**
      * Refresh preference items using system category dashboard items.
      */
     private void refreshAllPreferences(final String TAG) {
@@ -206,6 +261,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
         // Add resource based tiles.
         displayResourceTiles();
+
         // Add dashboard tiles.
         displayDashboardTiles(TAG, getPreferenceScreen());
     }

@@ -17,24 +17,15 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 
-import java.util.List;
+public class AdditionalSystemUpdatePreferenceController extends PreferenceController {
 
-public class ManageStoragePreferenceController extends PreferenceController {
+    private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
 
-    public static final String KEY_MANAGE_STORAGE = "pref_manage_storage";
-
-    public ManageStoragePreferenceController(Context context) {
+    public AdditionalSystemUpdatePreferenceController(Context context) {
         super(context);
-    }
-
-    @Override
-    protected String getPreferenceKey() {
-        return KEY_MANAGE_STORAGE;
     }
 
     @Override
@@ -44,7 +35,12 @@ public class ManageStoragePreferenceController extends PreferenceController {
 
     @Override
     protected boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_storage_manager_settings_enabled);
+        return mContext.getResources().getBoolean(
+                com.android.settings.R.bool.config_additional_system_update_setting_enable);
+    }
+
+    @Override
+    protected String getPreferenceKey() {
+        return KEY_UPDATE_SETTING;
     }
 }
-

@@ -35,10 +35,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
@@ -77,7 +76,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     int mDevHitCountdown;
     Toast mDevHitToast;
     private SystemUpdatePreferenceController mSystemUpdatePreferenceController;
-    private DashboardFeatureProvider mDashboardFeatureProvider;
+    private AdditionalSystemUpdatePreferenceController mAdditionalSystemUpdatePreferenceController;
 
     private UserManager mUm;
 
@@ -102,8 +101,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         final Activity activity = getActivity();
         mUm = UserManager.get(activity);
         mSystemUpdatePreferenceController = new SystemUpdatePreferenceController(activity, mUm);
-        mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
-                .getDashboardFeatureProvider(activity);
+        mAdditionalSystemUpdatePreferenceController =
+                new AdditionalSystemUpdatePreferenceController(activity);
 
         addPreferencesFromResource(R.xml.device_info_settings);
 
@@ -159,6 +158,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
          * info.
          */
         mSystemUpdatePreferenceController.displayPreference(getPreferenceScreen());
+        mAdditionalSystemUpdatePreferenceController.displayPreference(getPreferenceScreen());
 
         // Remove manual entry if none present.
         removePreferenceIfBoolFalse(KEY_MANUAL, R.bool.config_show_manual);
@@ -397,6 +397,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                     keys.add(KEY_DEVICE_FEEDBACK);
                 }
                 new SystemUpdatePreferenceController(context, UserManager.get(context))
+                        .updateNonIndexableKeys(keys);
+                new AdditionalSystemUpdatePreferenceController(context)
                         .updateNonIndexableKeys(keys);
                 return keys;
             }

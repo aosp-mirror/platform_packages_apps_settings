@@ -35,7 +35,34 @@ public abstract class PreferenceController {
     /**
      * Displays preference in this controller.
      */
-    public abstract void displayPreference(PreferenceScreen screen);
+    public void displayPreference(PreferenceScreen screen) {
+        if (isAvailable()) {
+            if (this instanceof Preference.OnPreferenceChangeListener) {
+                final Preference preference = screen.findPreference(getPreferenceKey());
+                preference.setOnPreferenceChangeListener(
+                        (Preference.OnPreferenceChangeListener) this);
+            }
+        } else {
+            removePreference(screen, getPreferenceKey());
+        }
+    }
+
+    /**
+     * Updates the current status of preference (summary, switch state, etc)
+     */
+    public void updateState(PreferenceScreen screen) {
+    }
+
+    /**
+     * Updates non-indexable keys for search provider.
+     *
+     * Called by SearchIndexProvider#getNonIndexableKeys
+     */
+    public void updateNonIndexableKeys(List<String> keys) {
+        if (!isAvailable()) {
+            keys.add(getPreferenceKey());
+        }
+    }
 
     /**
      * Handles preference tree click
@@ -46,13 +73,6 @@ public abstract class PreferenceController {
     public abstract boolean handlePreferenceTreeClick(Preference preference);
 
     /**
-     * Updates non-indexable keys for search provider.
-     *
-     * Called by SearchIndexProvider#getNonIndexableKeys
-     */
-    public abstract void updateNonIndexableKeys(List<String> keys);
-
-    /**
      * Removes preference from screen.
      */
     protected final void removePreference(PreferenceScreen screen, String key) {
@@ -61,5 +81,15 @@ public abstract class PreferenceController {
             screen.removePreference(pref);
         }
     }
+
+    /**
+     * Returns true if preference is available (should be displayed)
+     */
+    protected abstract boolean isAvailable();
+
+    /**
+     * Returns the key for this preference.
+     */
+    protected abstract String getPreferenceKey();
 
 }

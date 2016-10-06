@@ -271,6 +271,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             // New IA
             // Home page
             "com.android.settings.Settings.BatteryDashboardAlias",
+            "com.android.settings.Settings.DisplayDashboardAlias",
             Settings.SystemDashboardActivity.class.getName(),
             Settings.SupportDashboardActivity.class.getName(),
             // Home page > System
