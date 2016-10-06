@@ -86,7 +86,6 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
 
         private volatile int mProgress = 20;
 
-        private volatile long mInternalBench;
         private volatile long mPrivateBench;
 
         @Override
@@ -98,11 +97,9 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                     storage.partitionPrivate(activity.mDisk.getId());
                     publishProgress(40);
 
-                    mInternalBench = storage.benchmark(null);
-                    publishProgress(60);
-
                     final VolumeInfo privateVol = activity.findFirstVolume(VolumeInfo.TYPE_PRIVATE);
                     mPrivateBench = storage.benchmark(privateVol.getId());
+                    mPrivateBench /= 1000000;
 
                     // If we just adopted the device that had been providing
                     // physical storage, then automatically move storage to the
@@ -150,13 +147,39 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
             }
 
             if (activity.mFormatPrivate) {
-                final float pct = (float) mInternalBench / (float) mPrivateBench;
-                Log.d(TAG, "New volume is " + pct + "x the speed of internal");
+                // When the adoptable storage feature originally launched, we
+                // benchmarked both internal storage and the newly adopted
+                // storage and we warned if the adopted device was less than
+                // 0.25x the speed of internal. (The goal was to help set user
+                // expectations and encourage use of devices comparable to
+                // internal storage performance.)
 
-                // To help set user expectations around device performance, we
-                // warn if the adopted media is 0.25x the speed of internal
-                // storage or slower.
-                if (Float.isNaN(pct) || pct < 0.25) {
+                // However, since then, internal storage has started moving from
+                // eMMC to UFS, which can significantly outperform adopted
+                // devices, causing the speed warning to always trigger. To
+                // mitigate this, we've switched to using a static threshold.
+
+                // The static threshold was derived by running the benchmark on
+                // a wide selection of SD cards from several vendors; here are
+                // some 50th percentile results from 20+ runs of each card:
+
+                // 8GB C4 40MB/s+: 3282ms
+                // 16GB C10 40MB/s+: 1881ms
+                // 32GB C10 40MB/s+: 2897ms
+                // 32GB U3 80MB/s+: 1595ms
+                // 32GB C10 80MB/s+: 1680ms
+                // 128GB U1 80MB/s+: 1532ms
+
+                // Thus a 2000ms static threshold strikes a reasonable balance
+                // to help us identify slower cards. Users can still proceed
+                // with these slower cards; we're just showing a warning.
+
+                // The above analysis was done using the "r1572:w1001:s285"
+                // benchmark, and it should be redone any time the benchmark
+                // changes.
+
+                Log.d(TAG, "New volume took " + mPrivateBench + "ms to run benchmark");
+                if (mPrivateBench > 2000) {
                     final SlowWarningFragment dialog = new SlowWarningFragment();
                     dialog.showAllowingStateLoss(activity.getFragmentManager(), TAG_SLOW_WARNING);
                 } else {
