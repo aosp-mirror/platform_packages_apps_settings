@@ -29,7 +29,10 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputFilter.LengthFilter;
 import android.text.InputType;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.style.TtsSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -298,16 +301,17 @@ public final class BluetoothPairingDialog extends AlertActivity implements
             }
         });
 
-        String messageCaption = null;
-        String pairingContent = null;
+        SpannableString pairingContent = null;
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY:
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN:
                 messagePairing.setVisibility(View.VISIBLE);
-            case BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION:
-                pairingContent = mPairingKey;
+            case BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION: {
+                pairingContent = new SpannableString(mPairingKey);
+                pairingContent.setSpan(new TtsSpan.DigitsBuilder(mPairingKey).build(),
+                        0, mPairingKey.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
                 break;
-
+            }
             case BluetoothDevice.PAIRING_VARIANT_CONSENT:
                 messagePairing.setVisibility(view.GONE);
                 break;
