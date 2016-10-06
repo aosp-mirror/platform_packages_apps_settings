@@ -96,6 +96,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             DashboardCategory category) {
         final Context context = getContext();
         List<Tile> tiles = category.tiles;
+        if (tiles == null) {
+            Log.d(TAG, "tile list is empty, skipping category " + category.title);
+            return;
+        }
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (TextUtils.isEmpty(key)) {

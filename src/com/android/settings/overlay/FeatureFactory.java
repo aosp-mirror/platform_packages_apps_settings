@@ -35,7 +35,7 @@ public abstract class FeatureFactory {
     private static final String LOG_TAG = "FeatureFactory";
     private static final boolean DEBUG = false;
 
-    private static FeatureFactory sFactory;
+    protected static FeatureFactory sFactory;
 
     /**
      * Returns a factory for creating feature controllers. Creates the factory if it does not
