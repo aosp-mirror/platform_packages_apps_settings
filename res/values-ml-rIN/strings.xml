@@ -678,10 +678,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"വൈഫൈ ഓണായിരിക്കുമ്പോൾ ബാറ്ററി ഉപഭോഗം കുറയ്‌ക്കുക"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"വൈഫൈ യുടെ ബാറ്ററി ഉപഭോഗം പരിമിതമാണ്"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi‑Fi-ക്ക് ഇന്റർനെറ്റ് ആക്സസ് നഷ്ടപ്പെട്ടാൽ, സെല്ലുലാർ ഡാറ്റയിലേക്ക് മാറുക."</string>
-    <!-- no translation found for wifi_cellular_data_fallback_title (8741291033791891668) -->
-    <skip />
-    <!-- no translation found for wifi_cellular_data_fallback_summary (5103827852382611436) -->
-    <skip />
+    <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"സെല്ലുലാർ ഡാറ്റയിലേക്ക് സ്വയമേവ മാറുക"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="2641527693037426430">"വൈഫൈയിൽ നിന്നുള്ള ഇന്റർനെറ്റ് ഇല്ലാത്തപ്പോൾ സെല്ലുലാർ ഡാറ്റ ഉപയോഗിക്കുക. ഡാറ്റാ ഉപയോഗ നിരക്ക് ബാധകമായേക്കാം."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"നെറ്റ്‌വർക്ക് ചേർക്കുക"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"വൈഫൈ നെറ്റ്‌വർക്കുകൾ"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS പുഷ് ബട്ടൺ"</string>
@@ -835,20 +833,20 @@
     <string name="wifi_calling_suggestion_summary" msgid="3765923249566552233">"മൊബൈൽ നെറ്റ്‌വർക്കിന് പകരം വൈഫൈ ഉപയോഗിക്കുക"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"കോളിംഗ് മുൻഗണന"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"വൈഫൈ കോളിംഗ് മോഡ്"</string>
-    <!-- no translation found for wifi_calling_roaming_mode_title (1565039047187685115) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"റോമിംഗ് മുൻഗണന"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (8642014873060687717) -->
     <skip />
-    <!-- no translation found for wifi_calling_roaming_mode_dialog_title (7800926602662078576) -->
-    <skip />
+    <string name="wifi_calling_roaming_mode_dialog_title" msgid="7800926602662078576">"റോമിംഗ് മുൻഗണന"</string>
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"വൈഫൈ തിരഞ്ഞെടുത്തിരിക്കുന്നു"</item>
     <item msgid="5267397515594230396">"സെല്ലുലാർ തിരഞ്ഞെടുത്തിരിക്കുന്നു"</item>
     <item msgid="3132912693346866895">"വൈഫൈ മാത്രം"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2:0 (742988808283756263) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:1 (122823150092396518) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2:2 (2838022395783120596) -->
+  <string-array name="wifi_calling_mode_choices_v2">
+    <item msgid="742988808283756263">"വൈ-ഫൈ"</item>
+    <item msgid="122823150092396518">"സെല്ലുലാർ"</item>
+    <item msgid="2838022395783120596">"വൈ-ഫൈ മാത്രം"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
     <item msgid="1171822231056612021">"1"</item>
@@ -858,8 +856,10 @@
     <item msgid="5782108782860004851">"Wi-Fi തിരഞ്ഞെടുത്തിരിക്കുന്നു"</item>
     <item msgid="9006785365352731433">"സെല്ലുലാർ തിരഞ്ഞെടുത്തിരിക്കുന്നു"</item>
   </string-array>
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:0 (6132150507201243768) -->
-    <!-- no translation found for wifi_calling_mode_choices_v2_without_wifi_only:1 (2749029835484916851) -->
+  <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
+    <item msgid="6132150507201243768">"വൈ-ഫൈ"</item>
+    <item msgid="2749029835484916851">"സെല്ലുലാർ"</item>
+  </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
@@ -2509,7 +2509,10 @@
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"എപ്പോഴും ചോദിക്കുക"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"തിരഞ്ഞെടുക്കൽ ആവശ്യമാണ്"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"ക്രമീകരണം"</string>
-    <!-- no translation found for settings_suggestion_header_summary_hidden_items (5597356221942118048) -->
+    <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
+      <item quantity="other">മറച്ച %d ഇനങ്ങൾ കാണിക്കുക</item>
+      <item quantity="one">മറച്ച %d ഇനം കാണിക്കുക</item>
+    </plurals>
     <string name="search_results_title" msgid="1796252422574886932">"ക്രമീകരണം"</string>
     <string name="search_menu" msgid="6283419262313758339">"തിരയൽ ക്രമീകരണം"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"തിരയൽ ക്രമീകരണങ്ങൾ"</string>
