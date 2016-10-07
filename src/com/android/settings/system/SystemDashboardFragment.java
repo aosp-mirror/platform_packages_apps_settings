@@ -16,10 +16,8 @@
 package com.android.settings.system;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -27,21 +25,25 @@ import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
+import com.android.settingslib.drawer.DashboardCategory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class SystemDashboardFragment extends DashboardFragment
-        implements SettingsDrawerActivity.CategoryListener, Indexable {
+public class SystemDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "SystemDashboardFrag";
 
     @Override
     public int getMetricsCategory() {
         return SYSTEM_CATEGORY_FRAGMENT;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
@@ -52,32 +54,16 @@ public class SystemDashboardFragment extends DashboardFragment
     }
 
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
-        refreshAllPreferences();
-    }
-
-    @Override
-    public void onCategoriesChanged() {
-        refreshAllPreferences();
-    }
-
-    /**
-     * Refresh preference items using system category dashboard items.
-     */
-    private void refreshAllPreferences() {
-        PreferenceScreen screen = getPreferenceScreen();
-        if (screen != null) {
-            screen.removeAll();
-        }
-
+    protected void displayResourceTiles() {
         addPreferencesFromResource(R.xml.system_dashboard_fragment);
 
         getPreferenceController(SystemUpdatePreferenceController.class)
                 .displayPreference(getPreferenceScreen());
+    }
 
-        displayTilesAsPreference(TAG, getPreferenceScreen(),
-                mDashboardFeatureProvider.getTilesForSystemCategory());
+    @Override
+    protected DashboardCategory getDashboardTiles() {
+        return mDashboardFeatureProvider.getTilesForSystemCategory();
     }
 
     /**

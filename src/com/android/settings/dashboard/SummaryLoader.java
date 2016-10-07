@@ -80,8 +80,7 @@ public class SummaryLoader {
         mWorker = new Worker(mWorkerThread.getLooper());
         mActivity = activity;
         List<Tile> tiles = categories.tiles;
-        for (int j = 0; j < tiles.size(); j++) {
-            Tile tile = tiles.get(j);
+        for (Tile tile :tiles) {
             mWorker.obtainMessage(Worker.MSG_GET_PROVIDER, tile).sendToTarget();
         }
     }

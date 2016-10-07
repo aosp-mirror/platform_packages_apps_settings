@@ -17,6 +17,7 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -45,6 +46,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             new ArrayMap<>();
 
     protected DashboardFeatureProvider mDashboardFeatureProvider;
+    private boolean mListeningToCategoryChange;
 
     @Override
     public void onAttach(Context context) {
@@ -54,10 +56,31 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onCategoriesChanged() {
+        final DashboardCategory category = getDashboardTiles();
+        if (category == null) {
+            return;
+        }
+        refreshAllPreferences(getLogTag());
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+        refreshAllPreferences(getLogTag());
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
+        final DashboardCategory category = getDashboardTiles();
+        if (category == null) {
+            return;
+        }
+
         final Activity activity = getActivity();
         if (activity instanceof SettingsDrawerActivity) {
+            mListeningToCategoryChange = true;
             ((SettingsDrawerActivity) activity).addCategoryListener(this);
         }
     }
@@ -77,9 +100,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onStop() {
         super.onStop();
-        final Activity activity = getActivity();
-        if (activity instanceof SettingsDrawerActivity) {
-            ((SettingsDrawerActivity) activity).remCategoryListener(this);
+        if (mListeningToCategoryChange) {
+            final Activity activity = getActivity();
+            if (activity instanceof SettingsDrawerActivity) {
+                ((SettingsDrawerActivity) activity).remCategoryListener(this);
+            }
+            mListeningToCategoryChange = false;
         }
     }
 
@@ -92,9 +118,28 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mPreferenceControllers.put(controller.getClass(), controller);
     }
 
-    protected final void displayTilesAsPreference(String TAG, PreferenceScreen screen,
-            DashboardCategory category) {
+    /**
+     * Returns {@link DashboardCategory} for this fragment.
+     */
+    protected abstract DashboardCategory getDashboardTiles();
+
+    /**
+     * Displays resource based tiles.
+     */
+    protected abstract void displayResourceTiles();
+
+    protected abstract String getLogTag();
+
+    /**
+     * Displays dashboard tiles as preference.
+     */
+    private final void displayDashboardTiles(final String TAG, PreferenceScreen screen) {
         final Context context = getContext();
+        final DashboardCategory category = getDashboardTiles();
+        if (category == null) {
+            Log.d(TAG, "NO dynamic tiles for " + TAG);
+            return;
+        }
         List<Tile> tiles = category.tiles;
         if (tiles == null) {
             Log.d(TAG, "tile list is empty, skipping category " + category.title);
@@ -122,5 +167,20 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             pref.setOrder(-tile.priority);
             screen.addPreference(pref);
         }
+    }
+
+    /**
+     * Refresh preference items using system category dashboard items.
+     */
+    private void refreshAllPreferences(final String TAG) {
+        // First remove old preferences.
+        PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            screen.removeAll();
+        }
+        // Add resource based tiles.
+        displayResourceTiles();
+        // Add dashboard tiles.
+        displayDashboardTiles(TAG, getPreferenceScreen());
     }
 }
