@@ -16,9 +16,7 @@ package com.android.settings.applications;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -26,28 +24,19 @@ import android.provider.Settings.Global;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.ArraySet;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.AppHeader;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.AppStateBaseBridge;
-import com.android.settings.applications.InstalledAppDetails;
-import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
 import java.util.ArrayList;
 
@@ -56,7 +45,11 @@ import java.util.ArrayList;
  * handling as well as system handling for Web Actions.
  */
 public class ManageDomainUrls extends SettingsPreferenceFragment
-        implements ApplicationsState.Callbacks, OnPreferenceChangeListener {
+        implements ApplicationsState.Callbacks, OnPreferenceChangeListener,
+        OnPreferenceClickListener {
+
+    // constant value that can be used to check return code from sub activity.
+    private static final int INSTALLED_APP_DETAILS = 1;
 
     private ApplicationsState mApplicationsState;
     private ApplicationsState.Session mSession;
@@ -77,7 +70,6 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setLoading(true, false);
     }
 
     @Override
@@ -141,7 +133,6 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
             }
         }
         rebuildAppList(mDomainAppList, apps);
-        setLoading(false, true);
     }
 
     @Override
@@ -173,6 +164,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
             if (preference == null) {
                 preference = new DomainAppPreference(getPrefContext(), entry);
                 preference.setKey(key);
+                preference.setOnPreferenceClickListener(this);
                 group.addPreference(preference);
             } else {
                 preference.reuse();
@@ -206,6 +198,18 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.MANAGE_DOMAIN_URLS;
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (preference.getClass() == DomainAppPreference.class) {
+            ApplicationsState.AppEntry entry = ((DomainAppPreference) preference).mEntry;
+            AppInfoBase.startAppInfoFragment(AppLaunchSettings.class, R.string.auto_launch_label,
+                    entry.info.packageName, entry.info.uid, this,
+                    INSTALLED_APP_DETAILS);
+            return true;
+        }
+        return false;
     }
 
     private class DomainAppPreference extends Preference {
