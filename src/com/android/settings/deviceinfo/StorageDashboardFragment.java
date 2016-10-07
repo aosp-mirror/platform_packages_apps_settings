@@ -17,16 +17,14 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.drawer.DashboardCategory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,34 +40,27 @@ public class StorageDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         addPreferenceController(new ManageStoragePreferenceController(context));
     }
 
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
-        refreshAllPreferences();
+    protected DashboardCategory getDashboardTiles() {
+        return mDashboardFeatureProvider.getTilesForStorageCategory();
     }
 
     @Override
-    public void onCategoriesChanged() {
-        refreshAllPreferences();
-    }
-
-    private void refreshAllPreferences() {
-        PreferenceScreen screen = getPreferenceScreen();
-        if (screen != null) {
-            screen.removeAll();
-        }
+    protected void displayResourceTiles() {
         addPreferencesFromResource(R.xml.storage_dashboard_fragment);
 
         getPreferenceController(ManageStoragePreferenceController.class)
                 .displayPreference(getPreferenceScreen());
-
-        displayTilesAsPreference(TAG, getPreferenceScreen(),
-                mDashboardFeatureProvider.getTilesForStorageCategory());
     }
 
     /**
