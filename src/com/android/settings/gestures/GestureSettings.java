@@ -71,7 +71,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         Context context = getActivity();
         mPreferences = new ArrayList();
 
-         // Double tap power for camera
+        // Double tap power for camera
         if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
             int cameraDisabled = Secure.getInt(
                     getContentResolver(), Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
@@ -81,13 +81,17 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         }
 
         // Ambient Display
-        if (isDozeAvailable(context)) {
+        boolean dozeEnabled = isDozeAvailable(context);
+        if (dozeEnabled) {
             int pickup = Secure.getInt(getContentResolver(), Secure.DOZE_PULSE_ON_PICK_UP, 1);
             addPreference(PREF_KEY_PICK_UP, pickup != 0, PREF_ID_PICK_UP);
+        } else {
+            removePreference(PREF_KEY_PICK_UP);
+        }
+        if (dozeEnabled && isDoubleTapAvailable(context)) {
             int doubleTap = Secure.getInt(getContentResolver(), Secure.DOZE_PULSE_ON_DOUBLE_TAP, 1);
             addPreference(PREF_KEY_DOUBLE_TAP_SCREEN, doubleTap != 0, PREF_ID_DOUBLE_TAP_SCREEN);
         } else {
-            removePreference(PREF_KEY_PICK_UP);
             removePreference(PREF_KEY_DOUBLE_TAP_SCREEN);
         }
 
@@ -215,6 +219,11 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         return false;
     }
 
+    private static boolean isDoubleTapAvailable(Context context) {
+        return context.getResources().getBoolean(
+                R.bool.config_gesture_double_tap_settings_enabled);
+    }
+
     private void addPreference(String key, boolean enabled, int id) {
         GesturePreference preference = (GesturePreference) findPreference(key);
         preference.setChecked(enabled);
@@ -246,6 +255,8 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                 }
                 if (!isDozeAvailable(context)) {
                     result.add(PREF_KEY_PICK_UP);
+                    result.add(PREF_KEY_DOUBLE_TAP_SCREEN);
+                } else if (!isDoubleTapAvailable(context)) {
                     result.add(PREF_KEY_DOUBLE_TAP_SCREEN);
                 }
                 if (!isSystemUINavigationAvailable(context)) {
