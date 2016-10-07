@@ -48,7 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
-        implements View.OnClickListener {
+        implements View.OnClickListener, SummaryLoader.SummaryConsumer {
     public static final String TAG = "DashboardAdapter";
     private static final String STATE_SUGGESTION_LIST = "suggestion_list";
     private static final String STATE_CATEGORY_LIST = "category_list";
@@ -141,11 +141,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         recountItems();
     }
 
-    public boolean isShowingAll() {
-        return mIsShowingAll;
-    }
-
-    public void notifyChanged(Tile tile) {
+    @Override
+    public void notifySummaryChanged(Tile tile) {
         notifyDataSetChanged();
     }
 

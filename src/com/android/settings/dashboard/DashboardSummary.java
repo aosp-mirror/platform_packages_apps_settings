@@ -38,6 +38,7 @@ import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SuggestionParser;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
@@ -95,8 +96,7 @@ public class DashboardSummary extends InstrumentedFragment
                 .getDashboardFeatureProvider(activity);
 
         if (mDashboardFeatureProvider.isEnabled()) {
-            mSummaryLoader = new SummaryLoader(activity,
-                    mDashboardFeatureProvider.getTilesForHomepage());
+            mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
         } else {
             mSummaryLoader = new SummaryLoader(activity,
                     ((SettingsActivity) getActivity()).getDashboardCategories());
@@ -222,7 +222,7 @@ public class DashboardSummary extends InstrumentedFragment
         mAdapter = new DashboardAdapter(getContext(), mSuggestionParser, mMetricsFeatureProvider,
                 bundle, mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);
-        mSummaryLoader.setAdapter(mAdapter);
+        mSummaryLoader.setSummaryConsumer(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
         if (DEBUG_TIMING) {
             Log.d(TAG, "onViewCreated took "
@@ -297,13 +297,13 @@ public class DashboardSummary extends InstrumentedFragment
                 // Temporary hack to wrap homepage category into a list. Soon we will create adapter
                 // API that takes a single category.
                 List<DashboardCategory> categories = new ArrayList<>();
-                categories.add(mDashboardFeatureProvider.getTilesForHomepage());
+                categories.add(mDashboardFeatureProvider.getTilesForCategory(
+                        CategoryKey.CATEGORY_HOMEPAGE));
                 mAdapter.setCategoriesAndSuggestions(categories, tiles);
             } else {
                 mAdapter.setCategoriesAndSuggestions(
                         ((SettingsActivity) activity).getDashboardCategories(), tiles);
             }
-
         }
     }
 }

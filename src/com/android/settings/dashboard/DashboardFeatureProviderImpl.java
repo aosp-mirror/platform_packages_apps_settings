@@ -48,18 +48,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public DashboardCategory getTilesForHomepage() {
-        return mCategoryManager.getTilesByCategory(mContext, CategoryKey.CATEGORY_HOMEPAGE);
-    }
-
-    @Override
-    public DashboardCategory getTilesForStorageCategory() {
-        return mCategoryManager.getTilesByCategory(mContext, CategoryKey.CATEGORY_STORAGE);
-    }
-
-    @Override
-    public DashboardCategory getTilesForSystemCategory() {
-        return mCategoryManager.getTilesByCategory(mContext, CategoryKey.CATEGORY_SYSTEM);
+    public DashboardCategory getTilesForCategory(String key) {
+        return mCategoryManager.getTilesByCategory(mContext, key);
     }
 
     @Override
