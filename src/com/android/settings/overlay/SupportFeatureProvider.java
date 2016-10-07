@@ -18,6 +18,7 @@ package com.android.settings.overlay;
 
 import android.accounts.Account;
 import android.annotation.IntDef;
+import android.annotation.StringRes;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -141,5 +142,6 @@ public interface SupportFeatureProvider {
     /**
      * Returns the string for the disclaimer in the Support dialog
      */
-    String getDisclaimerString();
+    @StringRes
+    int getDisclaimerStringResId();
 }

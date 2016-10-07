@@ -25,7 +25,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
 import android.text.style.URLSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,11 +66,10 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
         final View content = LayoutInflater.from(builder.getContext())
                 .inflate(R.layout.support_disclaimer_content, null);
         final TextView disclaimer = (TextView) content.findViewById(R.id.support_disclaimer_text);
-        disclaimer.setMovementMethod(LinkMovementMethod.getInstance());
         final Activity activity = getActivity();
         final SupportFeatureProvider supportFeatureProvider =
                 FeatureFactory.getFactory(activity).getSupportFeatureProvider(activity);
-        disclaimer.setText(supportFeatureProvider.getDisclaimerString());
+        disclaimer.setText(supportFeatureProvider.getDisclaimerStringResId());
         stripUnderlines((Spannable) disclaimer.getText());
         return builder
                 .setView(content)
