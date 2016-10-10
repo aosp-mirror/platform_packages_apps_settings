@@ -74,9 +74,6 @@
     <string name="preview_pager_content_description" msgid="8926235999291761243">"Previzualizare"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"Previzualizare, pagina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> din <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"Măriți sau micșorați textul de pe ecran."</string>
-    <string name="small_font" msgid="2295331917424072635">"Mică"</string>
-    <string name="medium_font" msgid="2068475425515133701">"Medie"</string>
-    <string name="large_font" msgid="599055175160971446">"Mare"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"Micșorați"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"Măriți"</string>
     <!-- no translation found for font_size_preview_text (4818424565068376732) -->
@@ -157,8 +154,6 @@
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> dorește să acceseze cardul SIM. Dacă acordați accesul la cardul SIM, conexiunea de date de pe dispozitiv va fi dezactivată pe durata conectării. Acordați accesul pentru <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data și ora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Selectați fusul orar"</string>
-    <string name="display_preview_label" msgid="1127597250917274792">"Previzualizare:"</string>
-    <string name="display_font_size_label" msgid="8941851418397475389">"Dimensiunea fontului:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text" msgid="1415735148895872715">"Trimiteți <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
@@ -337,7 +332,7 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Amprentă"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Gestionați amprentele"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Folosiți amprenta la"</string>
-    <string name="fingerprint_add_title" msgid="1926752654454033904">"Adăugați amprenta"</string>
+    <string name="fingerprint_add_title" msgid="1926752654454033904">"Adăugați o amprentă"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"blocarea ecranului"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
       <item quantity="few"><xliff:g id="COUNT_1">%1$d</xliff:g> amprente configurate</item>
@@ -697,7 +692,7 @@
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Limit. baterie util. de Wi-Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Comutați la datele mobile dacă rețeaua Wi-Fi pierde accesul la internet."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"Comutați automat la datele mobile"</string>
-    <string name="wifi_cellular_data_fallback_summary" msgid="5103827852382611436">"Folosiți datele mobile când rețeaua Wi-Fi pierde accesul la internet. Este posibil să se aplice taxe pentru utilizarea datelor."</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="2641527693037426430">"Folosiți datele mobile când rețeaua Wi-Fi nu are acces la internet. Este posibil să se contorizeze utilizarea datelor."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Adăugați o rețea"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Rețele Wi-Fi"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"Buton WPS"</string>
@@ -2017,7 +2012,7 @@
     <string name="gadget_brightness_state_half" msgid="3696671957608774204">"pe jumătate"</string>
     <string name="gadget_brightness_state_off" msgid="946382262872753084">"dezactivată"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
-    <string name="credentials_title" msgid="4446234003860769883">"Stocarea acreditărilor"</string>
+    <string name="credentials_title" msgid="4446234003860769883">"Stocarea certificatelor"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Instalați de pe stocare"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Instalați de pe cardul SD"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalați certificate de pe stocare"</string>
@@ -2656,8 +2651,8 @@
     <string name="notification_pulse_title" msgid="1247988024534030629">"Indicator luminos intermitent"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Pe ecranul de blocare"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Afișați integral conținutul notificărilor"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ascundeți conținutul sensibil din notificări"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Nu afișați nicio notificare"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ascunde conținutul sensibil din notificări"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Nu afișa nicio notificare"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Când dispozitivul este blocat, cum doriți să se afișeze notificările?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notificări"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Afișați tot conținutul notificărilor de serviciu"</string>
