@@ -25,7 +25,7 @@ import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,8 +62,8 @@ public class SystemDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected DashboardCategory getDashboardTiles() {
-        return mDashboardFeatureProvider.getTilesForSystemCategory();
+    protected String getCategoryKey() {
+        return CategoryKey.CATEGORY_SYSTEM;
     }
 
     /**

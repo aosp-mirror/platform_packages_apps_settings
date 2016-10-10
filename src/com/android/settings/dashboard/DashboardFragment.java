@@ -40,13 +40,15 @@ import java.util.Map;
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
  */
 public abstract class DashboardFragment extends SettingsPreferenceFragment
-        implements SettingsDrawerActivity.CategoryListener, Indexable {
+        implements SettingsDrawerActivity.CategoryListener, Indexable,
+        SummaryLoader.SummaryConsumer {
 
     private final Map<Class, PreferenceController> mPreferenceControllers =
             new ArrayMap<>();
 
     protected DashboardFeatureProvider mDashboardFeatureProvider;
     private boolean mListeningToCategoryChange;
+    private SummaryLoader mSummaryLoader;
 
     @Override
     public void onAttach(Context context) {
@@ -57,7 +59,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public void onCategoriesChanged() {
-        final DashboardCategory category = getDashboardTiles();
+        final DashboardCategory category =
+                mDashboardFeatureProvider.getTilesForCategory(getCategoryKey());
         if (category == null) {
             return;
         }
@@ -73,16 +76,30 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onStart() {
         super.onStart();
-        final DashboardCategory category = getDashboardTiles();
+        final DashboardCategory category =
+                mDashboardFeatureProvider.getTilesForCategory(getCategoryKey());
         if (category == null) {
             return;
         }
-
+        mSummaryLoader.setListening(true);
         final Activity activity = getActivity();
         if (activity instanceof SettingsDrawerActivity) {
             mListeningToCategoryChange = true;
             ((SettingsDrawerActivity) activity).addCategoryListener(this);
         }
+    }
+
+    @Override
+    public void notifySummaryChanged(Tile tile) {
+        final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
+        final Preference pref = findPreference(key);
+        if (pref == null) {
+            Log.d(getLogTag(),
+                    String.format("Can't find pref by key %s, skipping update summary %s/%s",
+                            key, tile.title, tile.summary));
+            return;
+        }
+        pref.setSummary(tile.summary);
     }
 
     @Override
@@ -100,6 +117,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onStop() {
         super.onStop();
+        mSummaryLoader.setListening(false);
         if (mListeningToCategoryChange) {
             final Activity activity = getActivity();
             if (activity instanceof SettingsDrawerActivity) {
@@ -119,9 +137,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     /**
-     * Returns {@link DashboardCategory} for this fragment.
+     * Returns the CategoryKey for loading {@link DashboardCategory} for this fragment.
      */
-    protected abstract DashboardCategory getDashboardTiles();
+    protected abstract String getCategoryKey();
 
     /**
      * Displays resource based tiles.
@@ -135,7 +153,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
      */
     private final void displayDashboardTiles(final String TAG, PreferenceScreen screen) {
         final Context context = getContext();
-        final DashboardCategory category = getDashboardTiles();
+        final DashboardCategory category =
+                mDashboardFeatureProvider.getTilesForCategory(getCategoryKey());
         if (category == null) {
             Log.d(TAG, "NO dynamic tiles for " + TAG);
             return;
@@ -145,6 +164,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             Log.d(TAG, "tile list is empty, skipping category " + category.title);
             return;
         }
+        // There are dashboard tiles, so we need to install SummaryLoader.
+        if (mSummaryLoader != null) {
+            mSummaryLoader.release();
+        }
+        mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
+        mSummaryLoader.setSummaryConsumer(this);
+        // Install dashboard tiles.
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (TextUtils.isEmpty(key)) {

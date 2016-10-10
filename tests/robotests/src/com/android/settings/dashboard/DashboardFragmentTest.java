@@ -24,6 +24,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -42,6 +43,7 @@ import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -68,7 +70,8 @@ public class DashboardFragmentTest {
         mDashboardCategory.tiles.add(new Tile());
         mTestFragment = new TestFragment(ShadowApplication.getInstance().getApplicationContext());
         mTestFragment.onAttach(mContext);
-        mTestFragment.mCategory = mDashboardCategory;
+        when(mFakeFeatureFactory.dashboardFeatureProvider.getTilesForCategory(anyString()))
+                .thenReturn(mDashboardCategory);
     }
 
     @Test
@@ -100,7 +103,7 @@ public class DashboardFragmentTest {
 
     @Test
     public void displayTilesAsPreference_withEmptyCategory_shouldNotAddTiles() {
-        mTestFragment.mCategory.tiles = null;
+        mDashboardCategory.tiles = null;
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
         verify(mTestFragment.mScreen, never()).addPreference(any(DashboardTilePreference.class));
@@ -133,8 +136,6 @@ public class DashboardFragmentTest {
         private final Context mContext;
         @Mock
         public PreferenceScreen mScreen;
-        public DashboardCategory mCategory;
-
 
         public TestFragment(Context context) {
             mContext = context;
@@ -152,8 +153,8 @@ public class DashboardFragmentTest {
         }
 
         @Override
-        protected DashboardCategory getDashboardTiles() {
-            return mCategory;
+        protected String getCategoryKey() {
+            return CategoryKey.CATEGORY_HOMEPAGE;
         }
 
         @Override

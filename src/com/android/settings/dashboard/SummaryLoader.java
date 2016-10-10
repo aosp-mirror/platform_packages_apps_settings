@@ -36,7 +36,6 @@ import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SummaryLoader {
@@ -47,18 +46,22 @@ public class SummaryLoader {
 
     private final Activity mActivity;
     private final ArrayMap<SummaryProvider, ComponentName> mSummaryMap = new ArrayMap<>();
-    private final List<Tile> mTiles = new ArrayList<>();
+    private final DashboardFeatureProvider mDashboardFeatureProvider;
+    private final String mCategoryKey;
 
     private final Worker mWorker;
     private final Handler mHandler;
     private final HandlerThread mWorkerThread;
 
-    private DashboardAdapter mAdapter;
+    private SummaryConsumer mSummaryConsumer;
     private boolean mListening;
     private boolean mWorkerListening;
     private ArraySet<BroadcastReceiver> mReceivers = new ArraySet<>();
 
     public SummaryLoader(Activity activity, List<DashboardCategory> categories) {
+        mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
+                .getDashboardFeatureProvider(activity);
+        mCategoryKey = null;
         mHandler = new Handler();
         mWorkerThread = new HandlerThread("SummaryLoader", Process.THREAD_PRIORITY_BACKGROUND);
         mWorkerThread.start();
@@ -73,14 +76,18 @@ public class SummaryLoader {
         }
     }
 
-    public SummaryLoader(Activity activity, DashboardCategory categories) {
+    public SummaryLoader(Activity activity, String categoryKey) {
+        mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
+                .getDashboardFeatureProvider(activity);
+        mCategoryKey = categoryKey;
         mHandler = new Handler();
         mWorkerThread = new HandlerThread("SummaryLoader", Process.THREAD_PRIORITY_BACKGROUND);
         mWorkerThread.start();
         mWorker = new Worker(mWorkerThread.getLooper());
         mActivity = activity;
-        List<Tile> tiles = categories.tiles;
-        for (Tile tile :tiles) {
+
+        List<Tile> tiles = mDashboardFeatureProvider.getTilesForCategory(categoryKey).tiles;
+        for (Tile tile : tiles) {
             mWorker.obtainMessage(Worker.MSG_GET_PROVIDER, tile).sendToTarget();
         }
     }
@@ -91,8 +98,8 @@ public class SummaryLoader {
         setListeningW(false);
     }
 
-    public void setAdapter(DashboardAdapter adapter) {
-        mAdapter = adapter;
+    public void setSummaryConsumer(SummaryConsumer summaryConsumer) {
+        mSummaryConsumer = summaryConsumer;
     }
 
     public void setSummary(SummaryProvider provider, final CharSequence summary) {
@@ -100,21 +107,20 @@ public class SummaryLoader {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                // Since tiles are not always cached (like on locale change for instance),
-                // we need to always get the latest one.
-                if (!(mActivity instanceof SettingsDrawerActivity)) {
-                    if (DEBUG) {
-                        Log.d(TAG, "Can't get category list.");
-                    }
-                    return;
-                }
+
                 final Tile tile;
-                final DashboardFeatureProvider dashboardFeatureProvider =
-                        FeatureFactory.getFactory(mActivity).getDashboardFeatureProvider(mActivity);
-                if (dashboardFeatureProvider.isEnabled()) {
-                    tile = getTileFromCategory(dashboardFeatureProvider.getTilesForHomepage(),
-                            component);
+                if (mDashboardFeatureProvider.isEnabled()) {
+                    tile = getTileFromCategory(
+                            mDashboardFeatureProvider.getTilesForCategory(mCategoryKey), component);
                 } else {
+                    // Since tiles are not always cached (like on locale change for instance),
+                    // we need to always get the latest one.
+                    if (!(mActivity instanceof SettingsDrawerActivity)) {
+                        if (DEBUG) {
+                            Log.d(TAG, "Can't get category list.");
+                        }
+                        return;
+                    }
                     tile = getTileFromCategory(
                             ((SettingsDrawerActivity) mActivity).getDashboardCategories(),
                             component);
@@ -130,7 +136,14 @@ public class SummaryLoader {
                     Log.d(TAG, "setSummary " + tile.title + " - " + summary);
                 }
                 tile.summary = summary;
-                mAdapter.notifyChanged(tile);
+                if (mSummaryConsumer != null) {
+                    mSummaryConsumer.notifySummaryChanged(tile);
+                } else {
+                    if (DEBUG) {
+                        Log.d(TAG, "SummaryConsumer is null, skipping summary update for "
+                                + tile.title);
+                    }
+                }
             }
         });
     }
@@ -257,6 +270,10 @@ public class SummaryLoader {
 
     public interface SummaryProvider {
         void setListening(boolean listening);
+    }
+
+    public interface SummaryConsumer {
+        void notifySummaryChanged(Tile tile);
     }
 
     public interface SummaryProviderFactory {

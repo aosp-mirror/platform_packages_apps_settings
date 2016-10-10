@@ -24,7 +24,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,8 +51,8 @@ public class StorageDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected DashboardCategory getDashboardTiles() {
-        return mDashboardFeatureProvider.getTilesForStorageCategory();
+    protected String getCategoryKey() {
+        return CategoryKey.CATEGORY_STORAGE;
     }
 
     @Override

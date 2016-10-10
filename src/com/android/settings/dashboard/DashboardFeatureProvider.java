@@ -31,19 +31,9 @@ public interface DashboardFeatureProvider {
     boolean isEnabled();
 
     /**
-     * Get tiles (wrapped in {@link DashboardCategory}) for homepage.
+     * Get tiles (wrapped in {@link DashboardCategory}) for key defined in CategoryKey.
      */
-    DashboardCategory getTilesForHomepage();
-
-    /**
-     * Get tiles (wrapped in {@link DashboardCategory}) for storage category.
-     */
-    DashboardCategory getTilesForStorageCategory();
-
-    /**
-     * Get tiles (wrapped in {@link DashboardCategory}) for system category.
-     */
-    DashboardCategory getTilesForSystemCategory();
+    DashboardCategory getTilesForCategory(String key);
 
     /**
      * Get all tiles, grouped by category.
