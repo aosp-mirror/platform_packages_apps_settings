@@ -3219,6 +3219,51 @@
                        android:value="true" />
         </activity-alias>
 
+        <activity android:name=".Settings$ConnectedDeviceDashboardActivity"
+                  android:label="@string/connected_devices_dashboard_title"
+                  android:icon="@drawable/ic_bt_laptop">
+            <intent-filter android:priority="9">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"/>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage"/>
+        </activity>
+
+        <activity-alias android:name="BluetoothDashboardAlias"
+                        android:targetActivity="Settings$BluetoothSettingsActivity">
+            <intent-filter android:priority="7">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.bluetooth.BluetoothSettings" />
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.device" />
+        </activity-alias>
+
+        <activity-alias android:name="CastDashboardAlias"
+                        android:targetActivity="Settings$WifiDisplaySettingsActivity">
+            <intent-filter android:priority="6">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.wfd.WifiDisplaySettings" />
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.device" />
+        </activity-alias>
+
+        <activity-alias android:name="PrintDashboardAlias"
+                        android:targetActivity="Settings$PrintSettingsActivity">
+            <intent-filter android:priority="2">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.print.PrintSettingsFragment" />
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.device" />
+        </activity-alias>
+
         <!-- End of information architecture host activities -->
 
         <service
