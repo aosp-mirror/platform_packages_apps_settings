@@ -142,8 +142,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             super.onCreate(savedInstanceState);
 
             String chooseLockAction = getActivity().getIntent().getAction();
-            mFingerprintManager =
-                (FingerprintManager) getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
+            mFingerprintManager = Utils.getFingerprintManagerOrNull(getActivity());
             mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
             mKeyStore = KeyStore.getInstance();
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this.getActivity());

@@ -35,6 +35,7 @@ import com.android.settings.Settings.FingerprintSuggestionActivity;
 import com.android.settings.Settings.ScreenLockSuggestionActivity;
 import com.android.settings.Settings.WifiCallingSuggestionActivity;
 import com.android.settings.Settings.ZenModeAutomationSuggestionActivity;
+import com.android.settings.Utils;
 import com.android.settings.WallpaperSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 
@@ -75,7 +76,7 @@ public class SuggestionsChecks {
     }
 
     private boolean isNotSingleFingerprintEnrolled() {
-        FingerprintManager manager = mContext.getSystemService(FingerprintManager.class);
+        FingerprintManager manager = Utils.getFingerprintManagerOrNull(mContext);
         return manager == null || manager.getEnrolledFingerprints().size() != 1;
     }
 

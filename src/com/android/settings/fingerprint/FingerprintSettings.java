@@ -26,6 +26,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.Fingerprint;
@@ -290,8 +291,7 @@ public class FingerprintSettings extends SubSettings {
                     Intent.EXTRA_USER_ID, UserHandle.myUserId());
 
             Activity activity = getActivity();
-            mFingerprintManager = (FingerprintManager) activity.getSystemService(
-                    Context.FINGERPRINT_SERVICE);
+            mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
 
             // Need to authenticate a session token if none
             if (mToken == null && mLaunchedConfirm == false) {
@@ -820,8 +820,7 @@ public class FingerprintSettings extends SubSettings {
     }
 
     public static Preference getFingerprintPreferenceForUser(Context context, final int userId) {
-        FingerprintManager fpm = (FingerprintManager) context.getSystemService(
-                Context.FINGERPRINT_SERVICE);
+        final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(context);
         if (fpm == null || !fpm.isHardwareDetected()) {
             Log.v(TAG, "No fingerprint hardware detected!!");
             return null;

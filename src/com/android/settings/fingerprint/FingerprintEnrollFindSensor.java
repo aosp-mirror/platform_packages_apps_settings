@@ -24,6 +24,7 @@ import android.os.UserHandle;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.fingerprint.FingerprintEnrollSidecar.Listener;
 
 /**
@@ -155,7 +156,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
                 setResult(RESULT_TIMEOUT);
                 finish();
             } else {
-                FingerprintManager fpm = getSystemService(FingerprintManager.class);
+                FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
                 int enrolled = fpm.getEnrolledFingerprints().size();
                 int max = getResources().getInteger(
                         com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
@@ -172,7 +173,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     }
 
     private void launchConfirmLock() {
-        long challenge = getSystemService(FingerprintManager.class).preEnroll();
+        long challenge = Utils.getFingerprintManagerOrNull(this).preEnroll();
         ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
         boolean launchedConfirmationActivity = false;
         if (mUserId == UserHandle.USER_NULL) {
