@@ -22,6 +22,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -44,6 +45,8 @@ import java.util.HashMap;
 public class BatteryEntry {
     public static final int MSG_UPDATE_NAME_ICON = 1;
     public static final int MSG_REPORT_FULLY_DRAWN = 2;
+
+    private static final String TAG = "BatteryEntry";
 
     static final HashMap<String,UidToDetail> sUidCache = new HashMap<String,UidToDetail>();
 
@@ -160,7 +163,23 @@ public class BatteryEntry {
                 iconId = R.drawable.ic_settings_display;
                 break;
             case APP:
-                name = sipper.packageWithHighestDrain;
+                PackageManager pm = context.getPackageManager();
+                sipper.mPackages = pm.getPackagesForUid(sipper.uidObj.getUid());
+                // Apps should only have one package
+                if (sipper.mPackages == null || sipper.mPackages.length != 1) {
+                    name = sipper.packageWithHighestDrain;
+                } else {
+                    defaultPackageName = pm.getPackagesForUid(sipper.uidObj.getUid())[0];
+                    try {
+                        ApplicationInfo appInfo =
+                            pm.getApplicationInfo(defaultPackageName, 0 /* no flags */);
+                        name = pm.getApplicationLabel(appInfo).toString();
+                    } catch (NameNotFoundException e) {
+                        Log.d(TAG, "PackageManager failed to retrieve ApplicationInfo for: "
+                            + defaultPackageName);
+                        name = defaultPackageName;
+                    }
+                }
                 break;
             case USER: {
                 UserInfo info = um.getUserInfo(sipper.userId);
@@ -246,7 +265,9 @@ public class BatteryEntry {
 
         PackageManager pm = context.getPackageManager();
         final int uid = sipper.uidObj.getUid();
-        sipper.mPackages = pm.getPackagesForUid(uid);
+        if (sipper.mPackages == null) {
+            sipper.mPackages = pm.getPackagesForUid(uid);
+        }
         if (sipper.mPackages != null) {
             String[] packageLabels = new String[sipper.mPackages.length];
             System.arraycopy(sipper.mPackages, 0, packageLabels, 0, sipper.mPackages.length);
@@ -259,7 +280,7 @@ public class BatteryEntry {
                     final ApplicationInfo ai = ipm.getApplicationInfo(packageLabels[i],
                             0 /* no flags */, userId);
                     if (ai == null) {
-                        Log.d(PowerUsageSummary.TAG, "Retrieving null app info for package "
+                        Log.d(TAG, "Retrieving null app info for package "
                                 + packageLabels[i] + ", user " + userId);
                         continue;
                     }
@@ -273,7 +294,7 @@ public class BatteryEntry {
                         break;
                     }
                 } catch (RemoteException e) {
-                    Log.d(PowerUsageSummary.TAG, "Error while retrieving app info for package "
+                    Log.d(TAG, "Error while retrieving app info for package "
                             + packageLabels[i] + ", user " + userId, e);
                 }
             }
@@ -286,7 +307,7 @@ public class BatteryEntry {
                     try {
                         final PackageInfo pi = ipm.getPackageInfo(pkgName, 0 /* no flags */, userId);
                         if (pi == null) {
-                            Log.d(PowerUsageSummary.TAG, "Retrieving null package info for package "
+                            Log.d(TAG, "Retrieving null package info for package "
                                     + pkgName + ", user " + userId);
                             continue;
                         }
@@ -303,7 +324,7 @@ public class BatteryEntry {
                             }
                         }
                     } catch (RemoteException e) {
-                        Log.d(PowerUsageSummary.TAG, "Error while retrieving package info for package "
+                        Log.d(TAG, "Error while retrieving package info for package "
                                 + pkgName + ", user " + userId, e);
                     }
                 }
