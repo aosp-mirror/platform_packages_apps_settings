@@ -30,6 +30,7 @@ import android.os.UserHandle;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
+import com.android.settings.Utils;
 
 /**
  * Business logic for {@link SetNewPasswordActivity}.
@@ -54,7 +55,7 @@ final class SetNewPasswordController {
     public SetNewPasswordController(Context context, Ui ui) {
         this(context.getUserId(),
                 context.getPackageManager(),
-                (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE),
+                Utils.getFingerprintManagerOrNull(context),
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE),
                 ui);
     }

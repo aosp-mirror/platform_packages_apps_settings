@@ -32,6 +32,7 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.setupwizardlib.span.LinkSpan;
@@ -97,7 +98,7 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
 
     private void launchChooseLock() {
         Intent intent = getChooseLockIntent();
-        long challenge = getSystemService(FingerprintManager.class).preEnroll();
+        long challenge = Utils.getFingerprintManagerOrNull(this).preEnroll();
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                 DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);

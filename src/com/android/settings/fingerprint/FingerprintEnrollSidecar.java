@@ -27,6 +27,7 @@ import android.os.UserHandle;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockSettingsHelper;
+import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 
 /**
@@ -54,7 +55,7 @@ public class FingerprintEnrollSidecar extends InstrumentedFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mFingerprintManager = activity.getSystemService(FingerprintManager.class);
+        mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
         mToken = activity.getIntent().getByteArrayExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
         mUserId = activity.getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.USER_NULL);

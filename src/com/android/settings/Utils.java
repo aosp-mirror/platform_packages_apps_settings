@@ -44,6 +44,7 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Uri;
@@ -1174,5 +1175,13 @@ public final class Utils extends com.android.settingslib.Utils {
             Log.e(TAG, "Failed to create user context", e);
         }
         return null;
+    }
+
+    public static FingerprintManager getFingerprintManagerOrNull(Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+            return context.getSystemService(FingerprintManager.class);
+        } else {
+            return null;
+        }
     }
 }
