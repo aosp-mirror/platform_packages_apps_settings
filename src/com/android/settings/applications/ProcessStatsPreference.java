@@ -22,9 +22,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 
+import android.util.Log;
 import com.android.settings.AppProgressPreference;
 
 public class ProcessStatsPreference extends AppProgressPreference {
+    static final String TAG = "ProcessStatsPreference";
 
     private ProcStatsPackageEntry mEntry;
 
@@ -35,11 +37,15 @@ public class ProcessStatsPreference extends AppProgressPreference {
     public void init(ProcStatsPackageEntry entry, PackageManager pm, double maxMemory,
             double weightToRam, double totalScale, boolean avg) {
         mEntry = entry;
-        setTitle(TextUtils.isEmpty(entry.mUiLabel) ? entry.mPackage : entry.mUiLabel);
+        String title = TextUtils.isEmpty(entry.mUiLabel) ? entry.mPackage : entry.mUiLabel;
+        setTitle(title);
+        if (TextUtils.isEmpty(title)) {
+            Log.d(TAG, "PackageEntry contained no package name or uiLabel");
+        }
         if (entry.mUiTargetApp != null) {
             setIcon(entry.mUiTargetApp.loadIcon(pm));
         } else {
-            setIcon(new ColorDrawable(0));
+            setIcon(pm.getDefaultActivityIcon());
         }
         boolean statsForeground = entry.mRunWeight > entry.mBgWeight;
         double amount = avg ? (statsForeground ? entry.mRunWeight : entry.mBgWeight) * weightToRam
