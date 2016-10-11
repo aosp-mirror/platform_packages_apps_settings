@@ -73,9 +73,6 @@
     <string name="preview_pager_content_description" msgid="8926235999291761243">"មើលជាមុន"</string>
     <string name="preview_page_indicator_content_description" msgid="4821343428913401264">"មើលជាមុន, ទំព័រ <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> នៃ <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="font_size_summary" msgid="1690992332887488183">"ធ្វើឲ្យអត្ថបទនៅលើអេក្រង់តូចជាងមុន ឬធំជាងមុន។"</string>
-    <string name="small_font" msgid="2295331917424072635">"តូច"</string>
-    <string name="medium_font" msgid="2068475425515133701">"ឧបករណ៍​ផ្ទុក"</string>
-    <string name="large_font" msgid="599055175160971446">"ធំ"</string>
     <string name="font_size_make_smaller_desc" msgid="7919995133365371569">"កំណត់ឲ្យតូចជាងមុន"</string>
     <string name="font_size_make_larger_desc" msgid="4316986572233686061">"កំណត់ឲ្យធំជាងមុន"</string>
     <!-- no translation found for font_size_preview_text (4818424565068376732) -->
@@ -156,8 +153,6 @@
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ចង់ចូលដំណើរការស៊ីមកាតរបស់អ្នក។ ការផ្តល់ការអនុញ្ញាតចូលដំណើរការស៊ីមកាតនឹងបិទដំណើរការតភ្ជាប់ទិន្នន័យនៅលើឧបករណ៍របស់អ្នកក្នុងអំឡុងពេលធ្វើការតភ្ជាប់។ អនុញ្ញាតឲ្យចូលដំណើរការ <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
     <string name="date_and_time" msgid="9062980487860757694">"កាលបរិច្ឆេទ &amp; ម៉ោង"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"ជ្រើស​តំបន់​ពេល​វេលា"</string>
-    <string name="display_preview_label" msgid="1127597250917274792">"មើល​ជាមុន៖"</string>
-    <string name="display_font_size_label" msgid="8941851418397475389">"ទំហំ​ពុម្ពអក្សរ៖"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text" msgid="1415735148895872715">"ផ្ញើ <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
@@ -687,8 +682,8 @@
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"បង្រួម​ការ​ប្រើ​ថ្ម​អប្បបរមា​ពេល​បើក​វ៉ាយហ្វាយ"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"កំណត់ថ្មដែលបានប្រើតាមវ៉ាយហ្វាយ"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"ប្តូរទៅទិន្នន័យចល័ត ប្រសិនបើបាត់បង់សេវា Wi‑Fi។"</string>
-    <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"ប្តូរទៅទិន្នន័យចល័តដោយស្វ័យប្រវត្តិ"</string>
-    <string name="wifi_cellular_data_fallback_summary" msgid="5103827852382611436">"ប្រើទិន្នន័យចល័តនៅពេលដែល Wi‑Fi លែងមានអ៊ីនធឺណិត។ ការប្រើប្រាស់ទិន្នន័យអាចត្រូវបានអនុវត្ត។"</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"ប្តូរទៅទិន្នន័យទូរសព្ទ​ចល័តដោយស្វ័យប្រវត្តិ"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="2641527693037426430">"ប្រើទិន្នន័យចល័តនៅពេលដែល Wi‑Fi លែងមានអ៊ីនធឺណិត។ ការប្រើប្រាស់ទិន្នន័យអាចត្រូវបានអនុវត្ត។"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"បន្ថែម​បណ្ដាញ"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"បណ្ដាញ​វ៉ាយហ្វាយ"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"ប៊ូតុង​ចុច WPS"</string>
@@ -853,7 +848,7 @@
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wi-Fi"</item>
-    <item msgid="122823150092396518">"សេវាទូរសព្ទចល័ត"</item>
+    <item msgid="122823150092396518">"ទូរសព្ទចល័ត"</item>
     <item msgid="2838022395783120596">"Wi-Fi តែប៉ុណ្ណោះ"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
@@ -867,7 +862,7 @@
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
     <item msgid="6132150507201243768">"Wi-Fi"</item>
-    <item msgid="2749029835484916851">"សេវាទូរសព្ទចល័ត"</item>
+    <item msgid="2749029835484916851">"ទូរសព្ទចល័ត"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values_without_wifi_only">
     <item msgid="2339246858001475047">"2"</item>
