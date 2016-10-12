@@ -49,7 +49,6 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     protected Context mContext;
     private PackageManager mPM;
     protected ServiceListing mServiceListing;
-    private TextView mEmpty;
 
     abstract protected Config getConfig();
 
@@ -153,7 +152,6 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
             final Bundle args = getArguments();
             final String label = args.getString(KEY_LABEL);
             final ComponentName cn = ComponentName.unflattenFromString(args
