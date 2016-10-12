@@ -82,7 +82,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
 
         // Ambient Display
         boolean dozeEnabled = isDozeAvailable(context);
-        if (dozeEnabled) {
+        if (dozeEnabled && isPickupAvailable(context)) {
             int pickup = Secure.getInt(getContentResolver(), Secure.DOZE_PULSE_ON_PICK_UP, 1);
             addPreference(PREF_KEY_PICK_UP, pickup != 0, PREF_ID_PICK_UP);
         } else {
@@ -204,9 +204,19 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     }
 
     private static boolean isDoubleTwistAvailable(Context context) {
+        return hasSensor(context, R.string.gesture_double_twist_sensor_name,
+                R.string.gesture_double_twist_sensor_vendor);
+    }
+
+    private static boolean isPickupAvailable(Context context) {
+        return hasSensor(context, R.string.gesture_pickup_sensor_name,
+                R.string.gesture_pickup_sensor_vendor);
+    }
+
+    private static boolean hasSensor(Context context, int nameResId, int vendorResId) {
         Resources resources = context.getResources();
-        String name = resources.getString(R.string.gesture_double_twist_sensor_name);
-        String vendor = resources.getString(R.string.gesture_double_twist_sensor_vendor);
+        String name = resources.getString(nameResId);
+        String vendor = resources.getString(vendorResId);
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(vendor)) {
             SensorManager sensorManager =
                     (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -253,10 +263,10 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                 if (!isCameraDoubleTapPowerGestureAvailable(context.getResources())) {
                     result.add(PREF_KEY_DOUBLE_TAP_POWER);
                 }
-                if (!isDozeAvailable(context)) {
+                if (!isDozeAvailable(context) || !isPickupAvailable(context)) {
                     result.add(PREF_KEY_PICK_UP);
-                    result.add(PREF_KEY_DOUBLE_TAP_SCREEN);
-                } else if (!isDoubleTapAvailable(context)) {
+                }
+                if (!isDozeAvailable(context) || !isDoubleTapAvailable(context)) {
                     result.add(PREF_KEY_DOUBLE_TAP_SCREEN);
                 }
                 if (!isSystemUINavigationAvailable(context)) {
