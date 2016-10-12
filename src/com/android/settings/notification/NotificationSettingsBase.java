@@ -154,8 +154,9 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
     }
 
-    protected void setupImportancePrefs(boolean notBlockable, int importance, boolean banned) {
-        if (mShowSlider) {
+    protected void setupImportancePrefs(boolean notBlockable, boolean notSilenceable,
+                                        int importance, boolean banned) {
+        if (mShowSlider && !notSilenceable) {
             setVisible(mBlock, false);
             setVisible(mSilent, false);
             mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
@@ -192,18 +193,22 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                     }
                 });
             }
-            mSilent.setChecked(importance == Ranking.IMPORTANCE_LOW);
-            mSilent.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    final boolean silenced = (Boolean) newValue;
-                    final int importance =
-                            silenced ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_UNSPECIFIED;
-                    mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
-                    updateDependents(importance);
-                    return true;
-                }
-            });
+            if (notSilenceable) {
+                setVisible(mSilent, false);
+            } else {
+                mSilent.setChecked(importance == Ranking.IMPORTANCE_LOW);
+                mSilent.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        final boolean silenced = (Boolean) newValue;
+                        final int importance =
+                                silenced ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_UNSPECIFIED;
+                        mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
+                        updateDependents(importance);
+                        return true;
+                    }
+                });
+            }
             updateDependents(banned ? Ranking.IMPORTANCE_NONE : importance);
         }
     }

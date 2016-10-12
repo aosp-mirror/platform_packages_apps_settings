@@ -59,14 +59,14 @@ public class NotificationBackend {
 
     public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
-        row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
+        row.cantBlock = Utils.isSystemPackage(context.getResources(), pm, app);
         final String[] nonBlockablePkgs = context.getResources().getStringArray(
                     com.android.internal.R.array.config_nonBlockableNotificationPackages);
         if (nonBlockablePkgs != null) {
             int N = nonBlockablePkgs.length;
             for (int i = 0; i < N; i++) {
                 if (app.packageName.equals(nonBlockablePkgs[i])) {
-                    row.systemApp = true;
+                    row.cantBlock = row.cantSilence = true;
                 }
             }
         }
@@ -153,7 +153,8 @@ public class NotificationBackend {
         public Intent settingsIntent;
         public boolean banned;
         public boolean first;  // first app in section
-        public boolean systemApp;
+        public boolean cantBlock;
+        public boolean cantSilence;
         public int appImportance;
         public boolean appBypassDnd;
         public int appVisOverride;
