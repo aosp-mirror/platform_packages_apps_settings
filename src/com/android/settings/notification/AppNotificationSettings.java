@@ -90,7 +90,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             rows.put(mAppRow.pkg, mAppRow);
             collectConfigActivities(rows);
 
-            setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance, mAppRow.banned);
+            setupImportancePrefs(mAppRow.cantBlock, mAppRow.cantSilence,
+                    mAppRow.appImportance, mAppRow.banned);
             setupPriorityPref(mAppRow.appBypassDnd);
             setupVisOverridePref(mAppRow.appVisOverride);
             updateDependents(mAppRow.appImportance);
