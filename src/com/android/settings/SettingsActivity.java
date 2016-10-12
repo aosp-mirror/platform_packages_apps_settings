@@ -104,6 +104,7 @@ import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.AppNotificationSettings;
@@ -270,10 +271,14 @@ public class SettingsActivity extends SettingsDrawerActivity
 
             // New IA
             // Home page
+            Settings.NetworkDashboardActivity.class.getName(),
             "com.android.settings.Settings.BatteryDashboardAlias",
             "com.android.settings.Settings.DisplayDashboardAlias",
             Settings.SystemDashboardActivity.class.getName(),
             Settings.SupportDashboardActivity.class.getName(),
+            // Home page > Network & Internet
+            "com.android.settings.Settings.WifiDashboardAlias",
+            "com.android.settings.Settings.DataUsageDashboardAlias",
             // Home page > System
             "com.android.settings.Settings.LanguageAndInputDashboardAlias",
             "com.android.settings.Settings.DateTimeDashboardAlias",
@@ -382,6 +387,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             SupportFragment.class.getName(),
             StorageDashboardFragment.class.getName(),
             SystemDashboardFragment.class.getName(),
+            NetworkDashboardFragment.class.getName(),
     };
 
 

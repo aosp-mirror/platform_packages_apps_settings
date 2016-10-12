@@ -3033,6 +3033,44 @@
         <!-- Information architecture host activities -->
 
         <!-- Alias for battery settings in new IA. Remove and merge metadata into TargetActivity -->
+        <activity android:name=".Settings$NetworkDashboardActivity"
+                  android:taskAffinity=""
+                  android:label="@string/network_dashboard_title"
+                  android:icon="@drawable/ic_settings_wireless">
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage"/>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.network.NetworkDashboardFragment"/>
+        </activity>
+
+        <activity-alias android:name="WifiDashboardAlias"
+                        android:targetActivity="Settings$WifiSettingsActivity"
+                        android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="20">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.wireless" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.wifi.WifiSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
+        <activity-alias android:name="DataUsageDashboardAlias"
+                        android:targetActivity="Settings$DataUsageSummaryActivity">
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.wireless"/>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.datausage.DataUsageSummary"/>
+        </activity-alias>
+
         <activity-alias android:name="BatteryDashboardAlias"
                         android:targetActivity="Settings$PowerUsageSummaryActivity">
             <intent-filter android:priority="7">
