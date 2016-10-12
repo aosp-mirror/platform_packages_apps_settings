@@ -25,7 +25,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -33,7 +32,6 @@ import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
@@ -48,7 +46,10 @@ import android.util.Log;
 import com.android.ims.ImsManager;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.TelephonyIntents;
-import com.android.internal.telephony.TelephonyProperties;
+import com.android.settings.network.AirplaneModePreferenceController;
+import com.android.settings.network.MobileNetworkPreferenceController;
+import com.android.settings.network.TetherPreferenceController;
+import com.android.settings.network.VpnPreferenceController;
 import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -63,35 +64,30 @@ import java.util.List;
 public class WirelessSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "WirelessSettings";
 
-    private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
     private static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private static final String KEY_WIMAX_SETTINGS = "wimax_settings";
     private static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
-    private static final String KEY_VPN_SETTINGS = "vpn_settings";
-    private static final String KEY_TETHER_SETTINGS = "tether_settings";
+
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
-    private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
+
     private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
     private static final String KEY_WFC_SETTINGS = "wifi_calling_settings";
     private static final String KEY_NETWORK_RESET = "network_reset";
-
-    public static final String EXIT_ECM_RESULT = "exit_ecm_result";
-    public static final int REQUEST_CODE_EXIT_ECM = 1;
-
-    private AirplaneModeEnabler mAirplaneModeEnabler;
-    private SwitchPreference mAirplaneModePreference;
     private NfcEnabler mNfcEnabler;
     private NfcAdapter mNfcAdapter;
 
     private ConnectivityManager mCm;
     private TelephonyManager mTm;
-    private PackageManager mPm;
     private UserManager mUm;
 
     private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
 
     private PreferenceScreen mButtonWfc;
+    private AirplaneModePreferenceController mAirplaneModePreferenceController;
+    private TetherPreferenceController mTetherPreferenceController;
+    private MobileNetworkPreferenceController mMobileNetworkPreferenceController;
+    private VpnPreferenceController mVpnPreferenceController;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -101,14 +97,10 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         log("onPreferenceTreeClick: preference=" + preference);
-        if (preference == mAirplaneModePreference && Boolean.parseBoolean(
-                SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
-            // In ECM mode launch ECM app dialog
-            startActivityForResult(
-                new Intent(TelephonyIntents.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
-                REQUEST_CODE_EXIT_ECM);
+        if (mAirplaneModePreferenceController.handlePreferenceTreeClick(preference)) {
             return true;
-        } else if (preference == findPreference(KEY_MANAGE_MOBILE_PLAN)) {
+        }
+        if (preference == findPreference(KEY_MANAGE_MOBILE_PLAN)) {
             onManageMobilePlanClick();
         }
         // Let the intents be launched by the Preference manager
@@ -222,6 +214,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (savedInstanceState != null) {
             mManageMobilePlanMessage = savedInstanceState.getString(SAVED_MANAGE_MOBILE_PLAN_MSG);
         }
@@ -229,7 +222,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
         mCm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         mTm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        mPm = getPackageManager();
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
         addPreferencesFromResource(R.xml.wireless_settings);
@@ -237,13 +229,22 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         final boolean isAdmin = mUm.isAdminUser();
 
         final Activity activity = getActivity();
-        mAirplaneModePreference = (SwitchPreference) findPreference(KEY_TOGGLE_AIRPLANE);
+
+        final PreferenceScreen screen = getPreferenceScreen();
+        mAirplaneModePreferenceController = new AirplaneModePreferenceController(activity, this);
+        mTetherPreferenceController = new TetherPreferenceController(activity);
+        mMobileNetworkPreferenceController = new MobileNetworkPreferenceController(activity);
+        mVpnPreferenceController = new VpnPreferenceController(activity);
+
+        mAirplaneModePreferenceController.displayPreference(screen);
+        mTetherPreferenceController.displayPreference(screen);
+        mMobileNetworkPreferenceController.displayPreference(screen);
+        mVpnPreferenceController.displayPreference(screen);
+
         SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
         RestrictedPreference androidBeam = (RestrictedPreference) findPreference(
                 KEY_ANDROID_BEAM_SETTINGS);
 
-        mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference,
-                mMetricsFeatureProvider);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
 
         mButtonWfc = (PreferenceScreen) findPreference(KEY_WFC_SETTINGS);
@@ -263,30 +264,16 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIMAX )
                     && isWimaxEnabled) {
                 Preference ps = findPreference(KEY_WIMAX_SETTINGS);
-                ps.setDependency(KEY_TOGGLE_AIRPLANE);
+                ps.setDependency(AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
             }
-        }
-
-        // Manually set dependencies for Wifi when not toggleable.
-        if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIFI)) {
-            findPreference(KEY_VPN_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
-        }
-        // Disable VPN.
-        // TODO: http://b/23693383
-        if (!isAdmin || RestrictedLockUtils.hasBaseUserRestriction(activity,
-                UserManager.DISALLOW_CONFIG_VPN, UserHandle.myUserId())) {
-            removePreference(KEY_VPN_SETTINGS);
-        }
-
-        // Manually set dependencies for Bluetooth when not toggleable.
-        if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_BLUETOOTH)) {
-            // No bluetooth-dependent items in the list. Code kept in case one is added later.
         }
 
         // Manually set dependencies for NFC when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_NFC)) {
-            findPreference(KEY_TOGGLE_NFC).setDependency(KEY_TOGGLE_AIRPLANE);
-            findPreference(KEY_ANDROID_BEAM_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
+            findPreference(KEY_TOGGLE_NFC).setDependency(
+                    AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
+            findPreference(KEY_ANDROID_BEAM_SETTINGS).setDependency(
+                    AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
         }
 
         // Remove NFC if not available
@@ -302,7 +289,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         if (!isAdmin || Utils.isWifiOnly(getActivity()) ||
                 RestrictedLockUtils.hasBaseUserRestriction(activity,
                         UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS, UserHandle.myUserId())) {
-            removePreference(KEY_MOBILE_NETWORK_SETTINGS);
             removePreference(KEY_MANAGE_MOBILE_PLAN);
         }
         // Remove Mobile Network Settings and Manage Mobile Plan
@@ -316,11 +302,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             }
         }
 
-        // Remove Airplane Mode settings if it's a stationary device such as a TV.
-        if (mPm.hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
-            removePreference(KEY_TOGGLE_AIRPLANE);
-        }
-
         // Enable Proxy selector settings if allowed.
         Preference mGlobalProxy = findPreference(KEY_PROXY_SETTINGS);
         final DevicePolicyManager mDPM = (DevicePolicyManager)
@@ -328,25 +309,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         // proxy UI disabled until we have better app support
         getPreferenceScreen().removePreference(mGlobalProxy);
         mGlobalProxy.setEnabled(mDPM.getGlobalProxyAdmin() == null);
-
-        // Disable Tethering if it's not allowed or if it's a wifi-only device
-        final ConnectivityManager cm =
-                (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        final boolean adminDisallowedTetherConfig = RestrictedLockUtils.checkIfRestrictionEnforced(
-                activity, UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId()) != null;
-        if ((!cm.isTetheringSupported() && !adminDisallowedTetherConfig) ||
-                RestrictedLockUtils.hasBaseUserRestriction(activity,
-                        UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
-            getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
-        } else if (!adminDisallowedTetherConfig) {
-            Preference p = findPreference(KEY_TETHER_SETTINGS);
-            p.setTitle(com.android.settingslib.Utils.getTetheringLabel(cm));
-
-            // Grey out if provisioning is not available.
-            p.setEnabled(!TetherSettings
-                    .isProvisioningNeededButUnavailable(getActivity()));
-        }
 
         // Remove network reset if not allowed
         if (RestrictedLockUtils.hasBaseUserRestriction(activity,
@@ -359,7 +321,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     public void onResume() {
         super.onResume();
 
-        mAirplaneModeEnabler.resume();
+        mAirplaneModePreferenceController.onResume();
         if (mNfcEnabler != null) {
             mNfcEnabler.resume();
         }
@@ -389,8 +351,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     @Override
     public void onPause() {
         super.onPause();
-
-        mAirplaneModeEnabler.pause();
+        mAirplaneModePreferenceController.onPause();
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
         }
@@ -398,12 +359,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_EXIT_ECM) {
-            Boolean isChoiceYes = data.getBooleanExtra(EXIT_ECM_RESULT, false);
-            // Set Airplane mode based on the return value and checkbox state
-            mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
-                    mAirplaneModePreference.isChecked());
-        }
+        mAirplaneModePreferenceController.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -442,9 +398,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                     result.add(KEY_WIMAX_SETTINGS);
                 }
 
-                if (isSecondaryUser) { // Disable VPN
-                    result.add(KEY_VPN_SETTINGS);
-                }
+                new VpnPreferenceController(context).updateNonIndexableKeys(result);
 
                 // Remove NFC if not available
                 final NfcManager manager = (NfcManager)
@@ -459,9 +413,9 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
                 // Remove Mobile Network Settings and Manage Mobile Plan if it's a wifi-only device.
                 if (isSecondaryUser || Utils.isWifiOnly(context)) {
-                    result.add(KEY_MOBILE_NETWORK_SETTINGS);
                     result.add(KEY_MANAGE_MOBILE_PLAN);
                 }
+                new MobileNetworkPreferenceController(context).updateNonIndexableKeys(result);
 
                 // Remove Mobile Network Settings and Manage Mobile Plan
                 // if config_show_mobile_plan sets false.
@@ -470,23 +424,15 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                 if (!isMobilePlanEnabled) {
                     result.add(KEY_MANAGE_MOBILE_PLAN);
                 }
-
-                final PackageManager pm = context.getPackageManager();
-
                 // Remove Airplane Mode settings if it's a stationary device such as a TV.
-                if (pm.hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
-                    result.add(KEY_TOGGLE_AIRPLANE);
-                }
+                new AirplaneModePreferenceController(context, null /* fragment */)
+                        .updateNonIndexableKeys(result);
 
                 // proxy UI disabled until we have better app support
                 result.add(KEY_PROXY_SETTINGS);
 
-                // Disable Tethering if it's not allowed or if it's a wifi-only device
-                ConnectivityManager cm = (ConnectivityManager)
-                        context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                if (isSecondaryUser || !cm.isTetheringSupported()) {
-                    result.add(KEY_TETHER_SETTINGS);
-                }
+                new TetherPreferenceController(context)
+                        .updateNonIndexableKeys(result);
 
                 if (!ImsManager.isWfcEnabledByPlatform(context) ||
                         !ImsManager.isWfcProvisionedOnDevice(context)) {
