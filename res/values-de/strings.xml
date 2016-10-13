@@ -114,9 +114,9 @@
     <string name="bluetooth_device" msgid="5291950341750186887">"Unbenanntes Bluetooth-Gerät"</string>
     <string name="progress_scanning" msgid="192587958424295789">"Suche läuft"</string>
     <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"Kein Bluetooth-Gerät in der Nähe gefunden"</string>
-    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Bluetooth-Pairing-Anfrage"</string>
-    <string name="bluetooth_notif_title" msgid="2485175521845371514">"Pairing-Anfrage"</string>
-    <string name="bluetooth_notif_message" msgid="5057417127600942904">"Für Pairing mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> tippen."</string>
+    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Anfrage zur Bluetooth-Kopplung"</string>
+    <string name="bluetooth_notif_title" msgid="2485175521845371514">"Kopplungsanfrage"</string>
+    <string name="bluetooth_notif_message" msgid="5057417127600942904">"Für Kopplung mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> tippen."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Empfangene Dateien anzeigen"</string>
     <string name="device_picker" msgid="4978696506172252813">"Bluetooth-Gerät auswählen"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-Berechtigungsanfrage"</string>
@@ -556,18 +556,18 @@
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Verbindungen, Gerätenamen und Erkennbarkeit verwalten"</string>
-    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"Pairing mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> durchführen?"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Bluetooth-Pairing-Code"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Gib den Pairing-Code ein und tippe dann auf die Eingabetaste."</string>
+    <string name="bluetooth_pairing_request" msgid="2605098826364694673">"Mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> koppeln?"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="418124944140102021">"Bluetooth-Kopplungscode"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Gib den Kopplungscode ein und tippe dann auf die Eingabetaste."</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Die PIN enthält Buchstaben oder Symbole."</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"In der Regel 0000 oder 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="7849359451584101077">"Muss aus 16 Ziffern bestehen"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Möglicherweise musst du diese PIN auch auf dem anderen Gerät eingeben."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Möglicherweise musst du diesen Zugangscode auch auf dem anderen Gerät eingeben."</string>
-    <!-- syntax error in translation for bluetooth_confirm_passkey_msg (3708312912841950052) org.xmlpull.v1.XmlPullParserException: name expected (position:START_TAG <null>@1:239 in     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Zum Pairing mit:&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vergewissere dich, dass folgender Zugangscode angezeigt wird:<&lt;br&gt;&lt;b&gt;P<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;."</string>
+    <!-- syntax error in translation for bluetooth_confirm_passkey_msg (3708312912841950052) org.xmlpull.v1.XmlPullParserException: name expected (position:START_TAG <null>@1:240 in     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Zur Kopplung mit:&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vergewissere dich, dass folgender Zugangscode angezeigt wird:<&lt;br&gt;&lt;b&gt;P<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;."</string>
 )  -->
-    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Von:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Pairing mit diesem Gerät durchführen?"</string>
-    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Gib zum Pairing mit <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> ein und drücke anschließend die Eingabetaste."</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Von:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt; Mit diesem Gerät koppeln?"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Gib zur Kopplung mit <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> ein und drücke anschließend die Eingabetaste."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Zulassen, dass <xliff:g id="DEVICE_NAME">%1$s</xliff:g> auf deine Kontakte und deine Anrufliste zugreifen kann"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Keine Verbindung zu <xliff:g id="DEVICE_NAME">%1$s</xliff:g> möglich"</string>
@@ -575,23 +575,23 @@
     <string name="bluetooth_search_for_devices" msgid="2754007356491461674">"Aktualisieren"</string>
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"Suche läuft..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Geräteeinstellungen"</string>
-    <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"Pairing-Gerät"</string>
+    <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"Gekoppeltes Gerät"</string>
     <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"Name"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"Internetverbindung"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"Tastatur"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"Kontakte und Anrufliste"</string>
-    <string name="bluetooth_pairing_dialog_title" msgid="1417255032435317301">"Pairing mit diesem Gerät durchführen?"</string>
+    <string name="bluetooth_pairing_dialog_title" msgid="1417255032435317301">"Mit diesem Gerät koppeln?"</string>
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"Telefonbuch teilen?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> fordert Zugriff auf deine Kontakte und deine Anrufliste an."</string>
-    <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> möchte ein Bluetooth-Pairing durchführen und hat dann Zugriff auf deine Kontakte und deine Anrufliste."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Pairing-Geräte"</string>
+    <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> möchte eine Kopplung über Bluetooth herstellen und hat dann Zugriff auf deine Kontakte und deine Anrufliste."</string>
+    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Gekoppelte Geräte"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Verfügbar"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Keine Geräte verfügbar"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Verbinden"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Verbindung trennen"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Pairing durchführen und verbinden"</string>
-    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Pairing aufheben"</string>
-    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Verbindung trennen und Pairing aufheben"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Kopplung durchführen und verbinden"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Entkoppeln"</string>
+    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Verbindung trennen und entkoppeln"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Optionen..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Erweitert"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth - Erweitert"</string>
@@ -604,7 +604,7 @@
     <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"Der Internetzugriff über <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wird deaktiviert."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="1262792320446274407">"Die Freigabe der Internetverbindung dieses Tablets wird für <xliff:g id="DEVICE_NAME">%1$s</xliff:g> deaktiviert."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5700332050175684571">"Die Freigabe der Internetverbindung dieses Telefons wird für <xliff:g id="DEVICE_NAME">%1$s</xliff:g> deaktiviert."</string>
-    <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Bluetooth-Gerät mit aktivem Pairing"</string>
+    <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Gekoppeltes Bluetooth-Gerät"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Verbinden"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Mit Bluetooth-Gerät verbinden"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="102745381968579605">"Nutzen für"</string>
