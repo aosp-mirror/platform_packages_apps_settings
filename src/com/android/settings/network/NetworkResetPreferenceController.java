@@ -16,27 +16,19 @@
 package com.android.settings.network;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
+import com.android.settingslib.RestrictedLockUtils;
 
-import static android.os.UserHandle.myUserId;
-import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
-import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
+public class NetworkResetPreferenceController extends PreferenceController {
 
-public class MobileNetworkPreferenceController extends PreferenceController {
+    private static final String KEY_NETWORK_RESET = "network_reset";
 
-    private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
-
-    private final UserManager mUserManager;
-    private final boolean mIsSecondaryUser;
-
-    public MobileNetworkPreferenceController(Context context) {
+    public NetworkResetPreferenceController(Context context) {
         super(context);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mIsSecondaryUser = !mUserManager.isAdminUser();
     }
 
     @Override
@@ -46,13 +38,12 @@ public class MobileNetworkPreferenceController extends PreferenceController {
 
     @Override
     protected boolean isAvailable() {
-        return !mIsSecondaryUser
-                && !Utils.isWifiOnly(mContext)
-                && !hasBaseUserRestriction(mContext, DISALLOW_CONFIG_MOBILE_NETWORKS, myUserId());
+        return !RestrictedLockUtils.hasBaseUserRestriction(mContext,
+                UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
     }
 
     @Override
     protected String getPreferenceKey() {
-        return KEY_MOBILE_NETWORK_SETTINGS;
+        return KEY_NETWORK_RESET;
     }
 }

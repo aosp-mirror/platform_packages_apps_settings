@@ -16,27 +16,22 @@
 package com.android.settings.network;
 
 import android.content.Context;
-import android.os.UserManager;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+import android.telephony.TelephonyManager;
 
-import com.android.settings.Utils;
+import com.android.ims.ImsManager;
+import com.android.settings.WifiCallingSettings;
 import com.android.settings.core.PreferenceController;
 
-import static android.os.UserHandle.myUserId;
-import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
-import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
+public class WifiCallingPreferenceController extends PreferenceController {
 
-public class MobileNetworkPreferenceController extends PreferenceController {
+    private static final String KEY_WFC_SETTINGS = "wifi_calling_settings";
+    private TelephonyManager mTm;
 
-    private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
-
-    private final UserManager mUserManager;
-    private final boolean mIsSecondaryUser;
-
-    public MobileNetworkPreferenceController(Context context) {
+    public WifiCallingPreferenceController(Context context) {
         super(context);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mIsSecondaryUser = !mUserManager.isAdminUser();
+        mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
     }
 
     @Override
@@ -45,14 +40,23 @@ public class MobileNetworkPreferenceController extends PreferenceController {
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final Preference pref = screen.findPreference(KEY_WFC_SETTINGS);
+        if (pref != null) {
+            pref.setSummary(WifiCallingSettings.getWfcModeSummary(
+                    mContext, ImsManager.getWfcMode(mContext, mTm.isNetworkRoaming())));
+        }
+    }
+
+    @Override
     protected boolean isAvailable() {
-        return !mIsSecondaryUser
-                && !Utils.isWifiOnly(mContext)
-                && !hasBaseUserRestriction(mContext, DISALLOW_CONFIG_MOBILE_NETWORKS, myUserId());
+        return ImsManager.isWfcEnabledByPlatform(mContext)
+                && ImsManager.isWfcProvisionedOnDevice(mContext);
     }
 
     @Override
     protected String getPreferenceKey() {
-        return KEY_MOBILE_NETWORK_SETTINGS;
+        return KEY_WFC_SETTINGS;
     }
 }
