@@ -22,6 +22,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.ArraySet;
 import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
@@ -35,6 +36,7 @@ import com.android.settingslib.drawer.Tile;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
@@ -45,6 +47,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     private final Map<Class, PreferenceController> mPreferenceControllers =
             new ArrayMap<>();
+    private final Set<String> mDashboardTilePrefKeys = new ArraySet<>();
 
     protected DashboardFeatureProvider mDashboardFeatureProvider;
     private boolean mListeningToCategoryChange;
@@ -72,7 +75,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         if (category == null) {
             return;
         }
-        refreshAllPreferences(getLogTag());
+        refreshDashboardTiles(getLogTag());
     }
 
     @Override
@@ -221,6 +224,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 Log.d(TAG, "tile does not contain a key, skipping " + tile);
                 continue;
             }
+            mDashboardTilePrefKeys.add(key);
             final Preference pref = new DashboardTilePreference(context);
             pref.setTitle(tile.title);
             pref.setKey(key);
@@ -251,18 +255,36 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     /**
-     * Refresh preference items using system category dashboard items.
+     * Refresh all preference items, including both static prefs from xml, and dynamic items from
+     * DashboardCategory.
      */
     private void refreshAllPreferences(final String TAG) {
         // First remove old preferences.
-        PreferenceScreen screen = getPreferenceScreen();
+        final PreferenceScreen screen = getPreferenceScreen();
         if (screen != null) {
             screen.removeAll();
         }
+
+
         // Add resource based tiles.
         displayResourceTiles();
 
-        // Add dashboard tiles.
+        refreshDashboardTiles(TAG);
+    }
+
+    /**
+     * Refresh preference items backed by DashboardCategory.
+     */
+    private void refreshDashboardTiles(final String TAG) {
+        final PreferenceScreen screen = getPreferenceScreen();
+        for (String key : mDashboardTilePrefKeys) {
+            final Preference pref = screen.findPreference(key);
+            if (pref != null) {
+                screen.removePreference(pref);
+            }
+        }
+        mDashboardTilePrefKeys.clear();
         displayDashboardTiles(TAG, getPreferenceScreen());
     }
+
 }

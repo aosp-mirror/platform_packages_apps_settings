@@ -22,6 +22,7 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.drawer.CategoryKey;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NetworkDashboardFragment extends DashboardFragment {
@@ -50,6 +51,15 @@ public class NetworkDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        return null;
+        final AirplaneModePreferenceController airplaneModePreferenceController =
+                new AirplaneModePreferenceController(context, this /* fragment */);
+        getLifecycle().addObserver(airplaneModePreferenceController);
+
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(airplaneModePreferenceController);
+        controllers.add(new TetherPreferenceController(context));
+        controllers.add(new MobileNetworkPreferenceController(context));
+        controllers.add(new VpnPreferenceController(context));
+        return controllers;
     }
 }
