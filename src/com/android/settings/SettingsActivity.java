@@ -16,11 +16,11 @@
 
 package com.android.settings;
 
+import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -166,7 +166,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     private static final String SAVE_KEY_SEARCH_QUERY = ":settings:search_query";
     private static final String SAVE_KEY_SHOW_HOME_AS_UP = ":settings:show_home_as_up";
     private static final String SAVE_KEY_SHOW_SEARCH = ":settings:show_search";
-    private static final String SAVE_KEY_HOME_ACTIVITIES_COUNT = ":settings:home_activities_count";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra

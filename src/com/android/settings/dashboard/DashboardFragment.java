@@ -17,6 +17,7 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -25,6 +26,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -232,8 +234,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             if (tile.icon != null) {
                 pref.setIcon(tile.icon.loadDrawable(context));
             }
-            if (tile.intent != null) {
-                pref.setIntent(tile.intent);
+            final Intent intent = new Intent(tile.intent);
+            if (intent != null) {
+                pref.setOnPreferenceClickListener(preference -> {
+                    intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, true);
+                    getActivity().startActivityForResult(intent, 0);
+                    return true;
+                });
             }
             // Use negated priority for order, because tile priority is based on intent-filter
             // (larger value has higher priority). However pref order defines smaller value has
