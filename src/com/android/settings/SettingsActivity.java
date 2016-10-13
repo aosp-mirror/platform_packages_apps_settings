@@ -74,6 +74,7 @@ import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardContainerFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
@@ -279,6 +280,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             // Home page > Network & Internet
             "com.android.settings.Settings.WifiDashboardAlias",
             "com.android.settings.Settings.DataUsageDashboardAlias",
+            // Home page > Connected devices
+            Settings.ConnectedDeviceDashboardActivity.class.getName(),
             // Home page > System
             "com.android.settings.Settings.LanguageAndInputDashboardAlias",
             "com.android.settings.Settings.DateTimeDashboardAlias",
@@ -388,6 +391,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             StorageDashboardFragment.class.getName(),
             SystemDashboardFragment.class.getName(),
             NetworkDashboardFragment.class.getName(),
+            ConnectedDeviceDashboardFragment.class.getName(),
     };
 
 
