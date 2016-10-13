@@ -47,7 +47,9 @@ import android.graphics.BitmapFactory;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
+import android.net.Network;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -235,10 +237,15 @@ public final class Utils extends com.android.settingslib.Utils {
      * @return the formatted and newline-separated IP addresses, or null if none.
      */
     public static String getWifiIpAddresses(Context context) {
-        ConnectivityManager cm = (ConnectivityManager)
+        WifiManager wifiManager = context.getSystemService(WifiManager.class);
+        Network currentNetwork = wifiManager.getCurrentNetwork();
+        if (currentNetwork != null) {
+            ConnectivityManager cm = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        LinkProperties prop = cm.getLinkProperties(ConnectivityManager.TYPE_WIFI);
-        return formatIpAddresses(prop);
+            LinkProperties prop = cm.getLinkProperties(currentNetwork);
+            return formatIpAddresses(prop);
+        }
+        return null;
     }
 
     /**
