@@ -792,14 +792,16 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
             super.onBindViewHolder(holder, position);
             if (position == mHighlightPosition) {
                 View v = holder.itemView;
-                if (v.getBackground() != null) {
-                    final int centerX = v.getWidth() / 2;
-                    final int centerY = v.getHeight() / 2;
-                    v.getBackground().setHotspot(centerX, centerY);
-                }
-                v.setPressed(true);
-                v.setPressed(false);
-                mHighlightPosition = -1;
+                v.post(() -> {
+                    if (v.getBackground() != null) {
+                        final int centerX = v.getWidth() / 2;
+                        final int centerY = v.getHeight() / 2;
+                        v.getBackground().setHotspot(centerX, centerY);
+                    }
+                    v.setPressed(true);
+                    v.setPressed(false);
+                    mHighlightPosition = -1;
+                });
             }
         }
     }
