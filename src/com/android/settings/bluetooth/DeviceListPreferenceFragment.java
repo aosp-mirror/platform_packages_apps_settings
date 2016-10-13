@@ -98,8 +98,8 @@ public abstract class DeviceListPreferenceFragment extends
     abstract void addPreferencesForActivity();
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         if (mLocalManager == null || isUiRestricted()) return;
 
         mLocalManager.setForegroundActivity(getActivity());
@@ -109,8 +109,8 @@ public abstract class DeviceListPreferenceFragment extends
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         if (mLocalManager == null || isUiRestricted()) {
             return;
         }

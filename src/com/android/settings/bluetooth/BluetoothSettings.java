@@ -180,13 +180,13 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     }
 
     @Override
-    public void onResume() {
-        // resume BluetoothEnabler before calling super.onResume() so we don't get
+    public void onStart() {
+        // resume BluetoothEnabler before calling super.onStart() so we don't get
         // any onDeviceAdded() callbacks before setting up view in updateContent()
         if (mBluetoothEnabler != null) {
             mBluetoothEnabler.resume(getActivity());
         }
-        super.onResume();
+        super.onStart();
 
         mInitiateDiscoverable = true;
 
@@ -206,8 +206,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         if (mBluetoothEnabler != null) {
             mBluetoothEnabler.pause();
         }
