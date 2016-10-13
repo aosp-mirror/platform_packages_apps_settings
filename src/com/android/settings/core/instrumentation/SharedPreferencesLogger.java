@@ -21,13 +21,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.util.ArraySet;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 public class SharedPreferencesLogger implements SharedPreferences {
 
@@ -40,7 +40,7 @@ public class SharedPreferencesLogger implements SharedPreferences {
         mContext = context;
         mTag = tag;
         mMetricsFeature = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        mPreferenceKeySet = new ArraySet<>();
+        mPreferenceKeySet = new ConcurrentSkipListSet<>();
     }
 
     @Override
@@ -99,8 +99,12 @@ public class SharedPreferencesLogger implements SharedPreferences {
     }
 
     private void logValue(String key, String value) {
+        logValue(key, value, false /* forceLog */);
+    }
+
+    private void logValue(String key, String value, boolean forceLog) {
         final String prefKey = mTag + "/" + key;
-        if (!mPreferenceKeySet.contains(prefKey)) {
+        if (!forceLog && !mPreferenceKeySet.contains(prefKey)) {
             // Pref key doesn't exist in set, this is initial display so we skip metrics but
             // keeps track of this key.
             mPreferenceKeySet.add(prefKey);
@@ -138,8 +142,9 @@ public class SharedPreferencesLogger implements SharedPreferences {
                 pm.getPackageInfo(value, PackageManager.MATCH_UNINSTALLED_PACKAGES);
                 logPackageName(key, value);
             } catch (PackageManager.NameNotFoundException e) {
-                // Clearly not a package, lets log it.
-                logValue(key, value);
+                // Clearly not a package, and it's unlikely this preference is in prefSet, so
+                // lets force log it.
+                logValue(key, value, true /* forceLog */);
             }
             return null;
         }
