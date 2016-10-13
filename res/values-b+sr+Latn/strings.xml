@@ -378,8 +378,8 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ups, to nije senzor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Koristite senzor za otisak prsta na uređaju."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Registracija nije završena"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Vremensko ograničenje za registraciju otiska prsta je isteklo. Pokušajte ponovo."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Registracija otiska prsta nije uspela. Pokušajte ponovo ili koristite drugi prst."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Vremensko ograničenje za registraciju otiska prsta je isteklo. Probajte ponovo."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Registracija otiska prsta nije uspela. Probajte ponovo ili koristite drugi prst."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Dodajte još jedan"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Dalje"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Osim za otključavanje telefona, otisak prsta možete da koristite i da biste dali ovlašćenje za kupovine i pristup aplikacijama. "<annotation id="url">"Saznajte više"</annotation></string>
@@ -504,7 +504,7 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Promena šablona za otključavanje"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Promena PIN-a za otključavanje"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Promena lozinke za otključavanje"</string>
-    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"Pokušajte ponovo. <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g>. pokušaj od <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
+    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"Probajte ponovo. <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g>. pokušaj od <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_profile_wipe_warning_title" msgid="2961600792367265036">"Poslednji pokušaj"</string>
     <string name="lock_profile_wipe_warning_content_pattern" msgid="8978031996247660921">"Ako u ovom pokušaju unesete netačan šablon za Work, sa ovog uređaja ćemo ukloniti profil za Work i povezane podatke."</string>
     <string name="lock_profile_wipe_warning_content_pin" msgid="7697973618542377880">"Ako u ovom pokušaju unesete netačan PIN za Work, sa ovog uređaja ćemo ukloniti profil za Work i povezane podatke."</string>
@@ -723,11 +723,11 @@
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS je uspeo. Povezivanje na mrežu..."</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Uspostavljena je veza sa Wi-Fi mrežom <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_wps_in_progress" msgid="3372311348221357944">"WPS je već pokrenut i biće dovršen za najviše dva minuta"</string>
-    <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"WPS nije uspeo. Pokušajte ponovo za nekoliko minuta."</string>
+    <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"WPS nije uspeo. Probajte ponovo za nekoliko minuta."</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"Bezbednosno podešavanje bežičnog rutera (WEP) nije podržano"</string>
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Bezbednosno podešavanje bežičnog rutera (TKIP) nije podržano"</string>
-    <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Potvrda autentičnosti nije uspela. Pokušajte ponovo."</string>
-    <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Otkrivena je druga WPS sesija. Pokušajte ponovo za nekoliko minuta."</string>
+    <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Potvrda autentičnosti nije uspela. Probajte ponovo."</string>
+    <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Otkrivena je druga WPS sesija. Probajte ponovo za nekoliko minuta."</string>
     <string name="wifi_ssid" msgid="5519636102673067319">"Ime mreže"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Unesite SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Bezbednost"</string>
@@ -1101,8 +1101,8 @@
     <string name="dlg_confirm_unmount_text" product="default" msgid="6998379994779187692">"Ako izvadite SD karticu, neke aplikacije koje koristite će se zaustaviti i možda neće biti dostupne sve dok ponovo ne stavite SD karticu."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="4642742385125426529"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="4642742385125426529"></string>
-    <string name="dlg_error_unmount_text" product="nosdcard" msgid="9191518889746166147">"Nije moguće isključiti USB memoriju. Pokušajte ponovo kasnije."</string>
-    <string name="dlg_error_unmount_text" product="default" msgid="3500976899159848422">"Nije moguće isključiti SD karticu. Pokušajte ponovo kasnije."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="9191518889746166147">"Nije moguće isključiti USB memoriju. Probajte ponovo kasnije."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="3500976899159848422">"Nije moguće isključiti SD karticu. Probajte ponovo kasnije."</string>
     <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"USB memorija će biti isključena."</string>
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"SD kartica će biti isključena."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Oslobađanje"</string>
@@ -1401,7 +1401,7 @@
     <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Nacrtajte šablon za otključavanje"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Pritisnite „Meni“ da biste dobili pomoć."</string>
     <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Podignite prst kada završite"</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Povežite najmanje <xliff:g id="NUMBER">%d</xliff:g> tačke. Pokušajte ponovo."</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Povežite najmanje <xliff:g id="NUMBER">%d</xliff:g> tačke. Probajte ponovo."</string>
     <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Šablon je snimljen"</string>
     <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Ponovo nacrtajte šablon da biste potvrdili"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="8455614172231880211">"Novi šablon za otključavanje"</string>
@@ -1420,7 +1420,7 @@
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Podešavanje šablona za otključavanje"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Promeni šablon za otključavanje"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Kako nacrtati šablon za otključavanje"</string>
-    <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"Previše netačnih pokušaja. Pokušajte ponovo za <xliff:g id="NUMBER">%d</xliff:g> sek."</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="6909161623701848863">"Previše netačnih pokušaja. Probajte ponovo za <xliff:g id="NUMBER">%d</xliff:g> sek."</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Aplikacija nije instalirana na telefonu."</string>
     <string name="lock_settings_profile_title" msgid="2121876391814535295">"Bezbednost profila za Work"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3334747927367115256">"Zaključavanje ekrana za profil za Work"</string>
@@ -2313,7 +2313,7 @@
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Izaberite VPN profil sa kojim ćete uvek biti povezani. Mrežni sadržaj će biti dozvoljen samo kada ste povezani sa ovim VPN-om."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Nijedan"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Stalno uključeni VPN zahteva IP adresu za server i DNS."</string>
-    <string name="vpn_no_network" msgid="3050233675132726155">"Nije uspostavljena mrežna veza. Pokušajte ponovo kasnije."</string>
+    <string name="vpn_no_network" msgid="3050233675132726155">"Nije uspostavljena mrežna veza. Probajte ponovo kasnije."</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"Nedostaje sertifikat. Izmenite profil."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"Sistem"</string>
     <string name="trusted_credentials_user_tab" msgid="2244732111398939475">"Korisnik"</string>
@@ -2544,6 +2544,9 @@
       <item quantity="few">Prikaži %d skrivene stavke</item>
       <item quantity="other">Prikaži %d skrivenih stavki</item>
     </plurals>
+    <string name="network_dashboard_title" msgid="4771589228992391573">"Mreža i internet"</string>
+    <!-- no translation found for connected_devices_dashboard_title (2355264951438890709) -->
+    <skip />
     <string name="search_results_title" msgid="1796252422574886932">"Podešavanja"</string>
     <string name="search_menu" msgid="6283419262313758339">"Pretražite podešavanja"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Podešavanja pretrage"</string>
@@ -2594,7 +2597,7 @@
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Podesite Wi-Fi NFC oznaku"</string>
     <string name="write_tag" msgid="8571858602896222537">"Napiši"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Dodirnite oznaku da biste pisali..."</string>
-    <string name="status_invalid_password" msgid="2575271864572897406">"Lozinka je nevažeća. Pokušajte ponovo."</string>
+    <string name="status_invalid_password" msgid="2575271864572897406">"Lozinka je nevažeća. Probajte ponovo."</string>
     <string name="status_write_success" msgid="5228419086308251169">"Uspeli ste!"</string>
     <string name="status_failed_to_write" msgid="8072752734686294718">"Nije moguće pisanje podataka u NFC oznaku. Ako se problem i dalje javlja, pokušajte sa drugom oznakom"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC oznaka ne podržava pisanje. Koristite drugu oznaku."</string>
