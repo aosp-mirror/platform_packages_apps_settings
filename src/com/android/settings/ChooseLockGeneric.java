@@ -752,7 +752,9 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private void removeManagedProfileFingerprintsAndFinishIfNecessary(final int parentUserId) {
-            mFingerprintManager.setActiveUser(UserHandle.myUserId());
+            if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
+                mFingerprintManager.setActiveUser(UserHandle.myUserId());
+            }
             final UserManager um = UserManager.get(getActivity());
             boolean hasChildProfile = false;
             if (!um.getUserInfo(parentUserId).isManagedProfile()) {
@@ -791,7 +793,12 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private int getResIdForFactoryResetProtectionWarningMessage() {
-            boolean hasFingerprints = mFingerprintManager.hasEnrolledFingerprints(mUserId);
+            final boolean hasFingerprints;
+            if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
+                hasFingerprints = mFingerprintManager.hasEnrolledFingerprints(mUserId);
+            } else {
+                hasFingerprints = false;
+            }
             boolean isProfile = UserManager.get(getActivity()).isManagedProfile(mUserId);
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
