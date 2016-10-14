@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.localepicker.LocaleFeatureProvider;
 
 /**
  * Abstract class for creating feature controllers. Allows OEM implementations to define their own
@@ -69,6 +70,9 @@ public abstract class FeatureFactory {
     public abstract PowerUsageFeatureProvider getPowerUsageFeatureProvider();
 
     public abstract DashboardFeatureProvider getDashboardFeatureProvider(Context context);
+
+    public abstract LocaleFeatureProvider getLocaleFeatureProvider();
+
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

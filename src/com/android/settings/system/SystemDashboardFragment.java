@@ -22,8 +22,10 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
+import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -65,6 +67,34 @@ public class SystemDashboardFragment extends DashboardFragment {
         controllers.add(new AdditionalSystemUpdatePreferenceController(context));
         return controllers;
     }
+
+    /**
+     * For Summary
+     */
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+        private final LocaleFeatureProvider mLocaleFeatureProvider;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+            mLocaleFeatureProvider = FeatureFactory.getFactory(context).getLocaleFeatureProvider();
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                final String language = mContext.getString(
+                        R.string.system_dashboard_summary, mLocaleFeatureProvider.getLocaleNames());
+                mSummaryLoader.setSummary(this, language);
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
+            (context, summaryLoader) -> new SummaryProvider(context, summaryLoader);
 
     /**
      * For Search.

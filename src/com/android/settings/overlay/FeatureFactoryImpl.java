@@ -24,6 +24,8 @@ import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.localepicker.LocaleFeatureProvider;
+import com.android.settings.localepicker.LocaleFeatureProviderImpl;
 
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
@@ -33,6 +35,7 @@ public final class FeatureFactoryImpl extends FeatureFactory {
 
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private DashboardFeatureProviderImpl mDashboardFeatureProvider;
+    private LocaleFeatureProvider mLocaleFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -60,4 +63,11 @@ public final class FeatureFactoryImpl extends FeatureFactory {
         return mDashboardFeatureProvider;
     }
 
+    @Override
+    public LocaleFeatureProvider getLocaleFeatureProvider() {
+        if (mLocaleFeatureProvider == null) {
+            mLocaleFeatureProvider = new LocaleFeatureProviderImpl();
+        }
+        return mLocaleFeatureProvider;
+    }
 }

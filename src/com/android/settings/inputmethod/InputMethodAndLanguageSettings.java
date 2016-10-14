@@ -32,7 +32,6 @@ import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.LocaleList;
 import android.provider.Settings;
 import android.provider.Settings.System;
 import android.speech.tts.TtsEngines;
@@ -51,8 +50,6 @@ import android.view.inputmethod.InputMethodSubtype;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.TextServicesManager;
 
-import com.android.internal.app.LocaleHelper;
-import com.android.internal.app.LocalePicker;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings.KeyboardLayoutPickerActivity;
@@ -63,6 +60,8 @@ import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
 import com.android.settings.VoiceInputOutputSettings;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.localepicker.LocaleFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -74,7 +73,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.TreeSet;
 
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
@@ -275,7 +273,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         if (!mShowsOnlyFullImeAndKeyboardList) {
             if (mLanguagePref != null) {
-                String localeNames = getLocaleNames(getActivity());
+                final String localeNames = FeatureFactory.getFactory(getContext())
+                        .getLocaleFeatureProvider().getLocaleNames();
                 mLanguagePref.setSummary(localeNames);
             }
 
@@ -349,14 +348,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         return super.onPreferenceTreeClick(preference);
     }
 
-    private static String getLocaleNames(Context context) {
-        final LocaleList locales = LocalePicker.getLocales();
-        final Locale displayLocale = Locale.getDefault();
-        return LocaleHelper.toSentenceCase(
-                LocaleHelper.getDisplayLocaleList(
-                        locales, displayLocale, 2 /* Show up to two locales from the list */),
-                displayLocale);
-    }
+
 
     private void saveInputMethodSelectorVisibility(String value) {
         try {
@@ -667,16 +659,18 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         private final Context mContext;
         private final SummaryLoader mSummaryLoader;
+        private LocaleFeatureProvider mLocaleFeatureProvider;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader) {
             mContext = context;
             mSummaryLoader = summaryLoader;
+            mLocaleFeatureProvider = FeatureFactory.getFactory(context).getLocaleFeatureProvider();
         }
 
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                String localeNames = getLocaleNames(mContext);
+                String localeNames = mLocaleFeatureProvider.getLocaleNames();
                 mSummaryLoader.setSummary(this, localeNames);
             }
         }
@@ -701,7 +695,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
             // Locale picker.
             if (context.getAssets().getLocales().length > 1) {
-                String localeNames = getLocaleNames(context);
+                String localeNames = FeatureFactory.getFactory(context).getLocaleFeatureProvider()
+                        .getLocaleNames();
                 SearchIndexableRaw indexable = new SearchIndexableRaw(context);
                 indexable.key = KEY_PHONE_LANGUAGE;
                 indexable.title = context.getString(R.string.phone_language);
