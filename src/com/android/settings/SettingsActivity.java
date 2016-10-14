@@ -274,6 +274,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             Settings.NetworkDashboardActivity.class.getName(),
             "com.android.settings.Settings.BatteryDashboardAlias",
             "com.android.settings.Settings.DisplayDashboardAlias",
+            "com.android.settings.Settings.SecurityDashboardAlias",
             Settings.SystemDashboardActivity.class.getName(),
             Settings.SupportDashboardActivity.class.getName(),
             // Home page > Network & Internet
