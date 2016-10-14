@@ -20,8 +20,10 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settingslib.drawer.CategoryKey;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
@@ -50,7 +52,12 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        return null;
+        final NfcPreferenceController nfcPreferenceController =
+                new NfcPreferenceController(context);
+        getLifecycle().addObserver(nfcPreferenceController);
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(nfcPreferenceController);
+        return controllers;
     }
 
 }
