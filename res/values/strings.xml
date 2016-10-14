@@ -5335,9 +5335,19 @@
     <!-- Button label to forget a VPN profile [CHAR LIMIT=40] -->
     <string name="vpn_forget_long">Forget VPN</string>
     <!-- Dialog message title to set another VPN app to be always-on [CHAR LIMIT=40] -->
-    <string name="vpn_replace_always_on_vpn_title">Replace existing VPN?</string>
+    <string name="vpn_replace_vpn_title">Replace existing VPN?</string>
+    <!-- Dialog message title to set always-on VPN when another app was not already set. -->
+    <string name="vpn_set_vpn_title">Set always-on VPN?</string>
+    <!-- Dialog message body to explain that always-on VPN will disable network traffic while the VPN is connecting. -->
+    <string name="vpn_first_always_on_vpn_message">By turning on this setting, you won\'t have an Internet connection until the VPN successfully connects</string>
+    <!-- Dialog message body to explain that always-on VPN will disable network traffic while the VPN is connecting, and that this will replace the current VPN. -->
+    <string name="vpn_replace_always_on_vpn_enable_message">Your existing VPN will be replaced, and you won\'t have an Internet connection until the VPN successfully connects</string>
+    <!-- Dialog message body to connect a VPN app, replacing another VPN app that is already always-on [CHAR LIMIT=NONE] -->
+    <string name="vpn_replace_always_on_vpn_disable_message">You\'re already connected to an always-on VPN. If you connect to a different one, your existing VPN will be replaced, and always-on mode will turn off.</string>
     <!-- Dialog message body to set another VPN app to be always-on [CHAR LIMIT=NONE] -->
-    <string name="vpn_replace_always_on_vpn_message">You\'re already connected to a VPN. If you connect to a different one, your existing VPN will be replaced.</string>
+    <string name="vpn_replace_vpn_message">You\'re already connected to a VPN. If you connect to a different one, your existing VPN will be replaced.</string>
+    <!-- Dialog action button to turn on a VPN. -->
+    <string name="vpn_turn_on">Turn on</string>
     <!-- Dialog mesage title when the user can't connect an always-on vpn [CHAR LIMIT=NONE] -->
     <string name="vpn_cant_connect_title"><xliff:g id="vpn_name" example="OpenVPN">%1$s</xliff:g> can\'t connect</string>
     <!-- Dialog message subtitle when the user can't connect an always-on vpn [CHAR LIMIT=NONE] -->

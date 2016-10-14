@@ -21,18 +21,21 @@ import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
+import android.net.IConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -51,7 +54,8 @@ import java.util.List;
 import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 
 public class AppManagementFragment extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+        implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
+        ConfirmLockdownFragment.ConfirmLockdownListener {
 
     private static final String TAG = "AppManagementFragment";
 
@@ -63,6 +67,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
     private PackageManager mPackageManager;
     private ConnectivityManager mConnectivityManager;
+    private IConnectivityManager mConnectivityService;
 
     // VPN app info
     private final int mUserId = UserHandle.myUserId();
@@ -108,6 +113,8 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
         mPackageManager = getContext().getPackageManager();
         mConnectivityManager = getContext().getSystemService(ConnectivityManager.class);
+        mConnectivityService = IConnectivityManager.Stub
+                .asInterface(ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
 
         mPreferenceVersion = findPreference(KEY_VERSION);
         mPreferenceAlwaysOn = (RestrictedSwitchPreference) findPreference(KEY_ALWAYS_ON_VPN);
@@ -169,13 +176,23 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         return true;
     }
 
-    private boolean onAlwaysOnVpnClick(final boolean isChecked) {
-        if (isChecked && isLegacyVpnLockDownOrAnotherPackageAlwaysOn()) {
-            // Show dialog if user replace always-on-vpn package and show not checked first
-            ReplaceExistingVpnFragment.show(this);
+    private boolean onAlwaysOnVpnClick(final boolean alwaysOnSetting) {
+        final boolean replacing = isAnotherVpnActive();
+        final boolean wasAlwaysOn = VpnUtils.isAlwaysOnOrLegacyLockdownActive(getActivity());
+        if (ConfirmLockdownFragment.shouldShow(replacing, wasAlwaysOn, alwaysOnSetting)) {
+            // Place a dialog to confirm that traffic should be locked down.
+            final Bundle options = null;
+            ConfirmLockdownFragment.show(this, replacing, wasAlwaysOn, alwaysOnSetting, options);
             return false;
-        } else {
-            return setAlwaysOnVpnByUI(isChecked);
+        }
+        // No need to show the dialog. Change the setting straight away.
+        return setAlwaysOnVpnByUI(alwaysOnSetting);
+    }
+
+    @Override
+    public void onConfirmLockdown(Bundle options, boolean isEnabled) {
+        if (setAlwaysOnVpnByUI(isEnabled)) {
+            updateUI();
         }
     }
 
@@ -197,7 +214,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
     private boolean setAlwaysOnVpn(boolean isEnabled) {
          return mConnectivityManager.setAlwaysOnVpnPackageForUser(mUserId,
-                isEnabled ? mPackageName : null, /* lockdownEnabled */ false);
+                isEnabled ? mPackageName : null, /* lockdownEnabled */ true);
     }
 
     @VisibleForTesting
@@ -293,15 +310,17 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         return !ArrayUtils.isEmpty(ops);
     }
 
-    private boolean isLegacyVpnLockDownOrAnotherPackageAlwaysOn() {
-        if (mUserId == UserHandle.USER_SYSTEM) {
-            String lockdownKey = VpnUtils.getLockdownVpn();
-            if (lockdownKey != null) {
-                return true;
-            }
+    /**
+     * @return {@code true} if another VPN (VpnService or legacy) is connected or set as always-on.
+     */
+    private boolean isAnotherVpnActive() {
+        try {
+            final VpnConfig config = mConnectivityService.getVpnConfig(mUserId);
+            return config != null && !TextUtils.equals(config.user, mPackageName);
+        } catch (RemoteException e) {
+            Log.w(TAG, "Failure to look up active VPN", e);
+            return false;
         }
-
-        return getAlwaysOnVpnPackage() != null && !isVpnAlwaysOn();
     }
 
     public static class CannotConnectFragment extends InstrumentedDialogFragment {
@@ -332,44 +351,6 @@ public class AppManagementFragment extends SettingsPreferenceFragment
                     .setMessage(getActivity().getString(R.string.vpn_cant_connect_message))
                     .setPositiveButton(R.string.okay, null)
                     .create();
-        }
-    }
-
-    public static class ReplaceExistingVpnFragment extends InstrumentedDialogFragment
-            implements DialogInterface.OnClickListener {
-        private static final String TAG = "ReplaceExistingVpn";
-
-        @Override
-        public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_VPN_REPLACE_EXISTING;
-        }
-
-        public static void show(AppManagementFragment parent) {
-            if (parent.getFragmentManager().findFragmentByTag(TAG) == null) {
-                final ReplaceExistingVpnFragment frag = new ReplaceExistingVpnFragment();
-                frag.setTargetFragment(parent, 0);
-                frag.show(parent.getFragmentManager(), TAG);
-            }
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return new AlertDialog.Builder(getActivity())
-                    .setTitle(R.string.vpn_replace_always_on_vpn_title)
-                    .setMessage(getActivity().getString(R.string.vpn_replace_always_on_vpn_message))
-                    .setNegativeButton(getActivity().getString(R.string.vpn_cancel), null)
-                    .setPositiveButton(getActivity().getString(R.string.vpn_replace), this)
-                    .create();
-        }
-
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            if (getTargetFragment() instanceof AppManagementFragment) {
-                final AppManagementFragment target = (AppManagementFragment) getTargetFragment();
-                if (target.setAlwaysOnVpnByUI(true)) {
-                    target.updateUI();
-                }
-            }
         }
     }
 }
