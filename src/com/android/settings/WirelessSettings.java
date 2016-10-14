@@ -24,14 +24,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.nfc.NfcAdapter;
-import android.nfc.NfcManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
@@ -46,7 +43,7 @@ import com.android.settings.network.ProxyPreferenceController;
 import com.android.settings.network.TetherPreferenceController;
 import com.android.settings.network.VpnPreferenceController;
 import com.android.settings.network.WifiCallingPreferenceController;
-import com.android.settings.nfc.NfcEnabler;
+import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtils;
@@ -64,12 +61,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         MobilePlanPreferenceController.MobilePlanPreferenceHost {
     private static final String TAG = "WirelessSettings";
 
-    private static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private static final String KEY_WIMAX_SETTINGS = "wimax_settings";
-    private static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
 
-    private NfcEnabler mNfcEnabler;
-    private NfcAdapter mNfcAdapter;
     private UserManager mUm;
 
     private AirplaneModePreferenceController mAirplaneModePreferenceController;
@@ -80,6 +73,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     private WifiCallingPreferenceController mWifiCallingPreferenceController;
     private ProxyPreferenceController mProxyPreferenceController;
     private MobilePlanPreferenceController mMobilePlanPreferenceController;
+    private NfcPreferenceController mNfcPreferenceController;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -159,6 +153,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         mNetworkResetPreferenceController = new NetworkResetPreferenceController(activity);
         mProxyPreferenceController = new ProxyPreferenceController(activity);
         mMobilePlanPreferenceController = new MobilePlanPreferenceController(activity, this);
+        mNfcPreferenceController = new NfcPreferenceController(activity);
 
         mMobilePlanPreferenceController.onCreate(savedInstanceState);
 
@@ -170,12 +165,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         mNetworkResetPreferenceController.displayPreference(screen);
         mProxyPreferenceController.displayPreference(screen);
         mMobilePlanPreferenceController.displayPreference(screen);
-
-        SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
-        RestrictedPreference androidBeam = (RestrictedPreference) findPreference(
-                KEY_ANDROID_BEAM_SETTINGS);
-
-        mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
+        mNfcPreferenceController.displayPreference(screen);
 
         String toggleable = Settings.Global.getString(activity.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
@@ -195,22 +185,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                 ps.setDependency(AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
             }
         }
-
-        // Manually set dependencies for NFC when not toggleable.
-        if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_NFC)) {
-            findPreference(KEY_TOGGLE_NFC).setDependency(
-                    AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
-            findPreference(KEY_ANDROID_BEAM_SETTINGS).setDependency(
-                    AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
-        }
-
-        // Remove NFC if not available
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(activity);
-        if (mNfcAdapter == null) {
-            getPreferenceScreen().removePreference(nfc);
-            getPreferenceScreen().removePreference(androidBeam);
-            mNfcEnabler = null;
-        }
     }
 
     @Override
@@ -218,9 +192,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         super.onResume();
 
         mAirplaneModePreferenceController.onResume();
-        if (mNfcEnabler != null) {
-            mNfcEnabler.resume();
-        }
+        mNfcPreferenceController.onResume();
     }
 
     @Override
@@ -233,9 +205,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     public void onPause() {
         super.onPause();
         mAirplaneModePreferenceController.onPause();
-        if (mNfcEnabler != null) {
-            mNfcEnabler.pause();
-        }
+        mNfcPreferenceController.onPause();
     }
 
     @Override
@@ -287,16 +257,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
                     new VpnPreferenceController(context).updateNonIndexableKeys(result);
 
-                    // Remove NFC if not available
-                    final NfcManager manager = (NfcManager)
-                            context.getSystemService(Context.NFC_SERVICE);
-                    if (manager != null) {
-                        NfcAdapter adapter = manager.getDefaultAdapter();
-                        if (adapter == null) {
-                            result.add(KEY_TOGGLE_NFC);
-                            result.add(KEY_ANDROID_BEAM_SETTINGS);
-                        }
-                    }
+                    new NfcPreferenceController(context).updateNonIndexableKeys(result);
                     new MobilePlanPreferenceController(context, null /* MobilePlanClickHandler */)
                             .updateNonIndexableKeys(result);
                     new MobileNetworkPreferenceController(context).updateNonIndexableKeys(result);
