@@ -443,7 +443,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         return true;
     }
 
-    static int getWfcModeSummary(Context context, int wfcMode) {
+    public static int getWfcModeSummary(Context context, int wfcMode) {
         int resId = com.android.internal.R.string.wifi_calling_off_summary;
         if (ImsManager.isWfcEnabledByUser(context)) {
             switch (wfcMode) {

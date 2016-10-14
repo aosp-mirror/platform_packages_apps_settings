@@ -17,11 +17,14 @@ package com.android.settings.core.lifecycle;
 
 import android.annotation.UiThread;
 import android.content.Context;
+import android.os.Bundle;
 
 import com.android.settings.core.lifecycle.events.OnAttach;
+import com.android.settings.core.lifecycle.events.OnCreate;
 import com.android.settings.core.lifecycle.events.OnDestroy;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settings.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settings.core.lifecycle.events.OnStart;
 import com.android.settings.core.lifecycle.events.OnStop;
 import com.android.settings.utils.ThreadUtils;
@@ -54,6 +57,14 @@ public class Lifecycle {
         }
     }
 
+    public void onCreate(Bundle savedInstanceState) {
+        for (LifecycleObserver observer : mObservers) {
+            if (observer instanceof OnCreate) {
+                ((OnCreate) observer).onCreate(savedInstanceState);
+            }
+        }
+    }
+
     public void onStart() {
         for (LifecycleObserver observer : mObservers) {
             if (observer instanceof OnStart) {
@@ -74,6 +85,14 @@ public class Lifecycle {
         for (LifecycleObserver observer : mObservers) {
             if (observer instanceof OnPause) {
                 ((OnPause) observer).onPause();
+            }
+        }
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        for (LifecycleObserver observer : mObservers) {
+            if (observer instanceof OnSaveInstanceState) {
+                ((OnSaveInstanceState) observer).onSaveInstanceState(outState);
             }
         }
     }

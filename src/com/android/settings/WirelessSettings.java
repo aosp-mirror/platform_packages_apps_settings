@@ -20,15 +20,10 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.admin.DevicePolicyManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.Bundle;
@@ -40,16 +35,17 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.ims.ImsManager;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.network.MobileNetworkPreferenceController;
+import com.android.settings.network.MobilePlanPreferenceController;
+import com.android.settings.network.NetworkResetPreferenceController;
+import com.android.settings.network.ProxyPreferenceController;
 import com.android.settings.network.TetherPreferenceController;
 import com.android.settings.network.VpnPreferenceController;
+import com.android.settings.network.WifiCallingPreferenceController;
 import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -61,33 +57,29 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class WirelessSettings extends SettingsPreferenceFragment implements Indexable {
+import static com.android.settings.network.MobilePlanPreferenceController
+        .MANAGE_MOBILE_PLAN_DIALOG_ID;
+
+public class WirelessSettings extends SettingsPreferenceFragment implements Indexable,
+        MobilePlanPreferenceController.MobilePlanPreferenceHost {
     private static final String TAG = "WirelessSettings";
 
     private static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private static final String KEY_WIMAX_SETTINGS = "wimax_settings";
     private static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
 
-    private static final String KEY_PROXY_SETTINGS = "proxy_settings";
-
-    private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
-    private static final String KEY_WFC_SETTINGS = "wifi_calling_settings";
-    private static final String KEY_NETWORK_RESET = "network_reset";
     private NfcEnabler mNfcEnabler;
     private NfcAdapter mNfcAdapter;
-
-    private ConnectivityManager mCm;
-    private TelephonyManager mTm;
     private UserManager mUm;
 
-    private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
-    private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
-
-    private PreferenceScreen mButtonWfc;
     private AirplaneModePreferenceController mAirplaneModePreferenceController;
     private TetherPreferenceController mTetherPreferenceController;
     private MobileNetworkPreferenceController mMobileNetworkPreferenceController;
     private VpnPreferenceController mVpnPreferenceController;
+    private NetworkResetPreferenceController mNetworkResetPreferenceController;
+    private WifiCallingPreferenceController mWifiCallingPreferenceController;
+    private ProxyPreferenceController mProxyPreferenceController;
+    private MobilePlanPreferenceController mMobilePlanPreferenceController;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -100,77 +92,11 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         if (mAirplaneModePreferenceController.handlePreferenceTreeClick(preference)) {
             return true;
         }
-        if (preference == findPreference(KEY_MANAGE_MOBILE_PLAN)) {
-            onManageMobilePlanClick();
+        if (mMobilePlanPreferenceController.handlePreferenceTreeClick(preference)) {
+            return true;
         }
         // Let the intents be launched by the Preference manager
         return super.onPreferenceTreeClick(preference);
-    }
-
-    private String mManageMobilePlanMessage;
-    public void onManageMobilePlanClick() {
-        log("onManageMobilePlanClick:");
-        mManageMobilePlanMessage = null;
-        Resources resources = getActivity().getResources();
-
-        NetworkInfo ni = mCm.getActiveNetworkInfo();
-        if (mTm.hasIccCard() && (ni != null)) {
-            // Check for carrier apps that can handle provisioning first
-            Intent provisioningIntent = new Intent(TelephonyIntents.ACTION_CARRIER_SETUP);
-            List<String> carrierPackages =
-                    mTm.getCarrierPackageNamesForIntent(provisioningIntent);
-            if (carrierPackages != null && !carrierPackages.isEmpty()) {
-                if (carrierPackages.size() != 1) {
-                    Log.w(TAG, "Multiple matching carrier apps found, launching the first.");
-                }
-                provisioningIntent.setPackage(carrierPackages.get(0));
-                startActivity(provisioningIntent);
-                return;
-            }
-
-            // Get provisioning URL
-            String url = mCm.getMobileProvisioningUrl();
-            if (!TextUtils.isEmpty(url)) {
-                Intent intent = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN,
-                        Intent.CATEGORY_APP_BROWSER);
-                intent.setData(Uri.parse(url));
-                intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT |
-                        Intent.FLAG_ACTIVITY_NEW_TASK);
-                try {
-                    startActivity(intent);
-                } catch (ActivityNotFoundException e) {
-                    Log.w(TAG, "onManageMobilePlanClick: startActivity failed" + e);
-                }
-            } else {
-                // No provisioning URL
-                String operatorName = mTm.getSimOperatorName();
-                if (TextUtils.isEmpty(operatorName)) {
-                    // Use NetworkOperatorName as second choice in case there is no
-                    // SPN (Service Provider Name on the SIM). Such as with T-mobile.
-                    operatorName = mTm.getNetworkOperatorName();
-                    if (TextUtils.isEmpty(operatorName)) {
-                        mManageMobilePlanMessage = resources.getString(
-                                R.string.mobile_unknown_sim_operator);
-                    } else {
-                        mManageMobilePlanMessage = resources.getString(
-                                R.string.mobile_no_provisioning_url, operatorName);
-                    }
-                } else {
-                    mManageMobilePlanMessage = resources.getString(
-                            R.string.mobile_no_provisioning_url, operatorName);
-                }
-            }
-        } else if (mTm.hasIccCard() == false) {
-            // No sim card
-            mManageMobilePlanMessage = resources.getString(R.string.mobile_insert_sim_card);
-        } else {
-            // NetworkInfo is null, there is no connection
-            mManageMobilePlanMessage = resources.getString(R.string.mobile_connect_to_internet);
-        }
-        if (!TextUtils.isEmpty(mManageMobilePlanMessage)) {
-            log("onManageMobilePlanClick: message=" + mManageMobilePlanMessage);
-            showDialog(MANAGE_MOBILE_PLAN_DIALOG_ID);
-        }
     }
 
     @Override
@@ -179,17 +105,18 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         switch (dialogId) {
             case MANAGE_MOBILE_PLAN_DIALOG_ID:
                 return new AlertDialog.Builder(getActivity())
-                            .setMessage(mManageMobilePlanMessage)
-                            .setCancelable(false)
-                            .setPositiveButton(com.android.internal.R.string.ok,
-                                    new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int id) {
-                                    log("MANAGE_MOBILE_PLAN_DIALOG.onClickListener id=" + id);
-                                    mManageMobilePlanMessage = null;
-                                }
-                            })
-                            .create();
+                        .setMessage(mMobilePlanPreferenceController.getMobilePlanDialogMessage())
+                        .setCancelable(false)
+                        .setPositiveButton(com.android.internal.R.string.ok,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        log("MANAGE_MOBILE_PLAN_DIALOG.onClickListener id=" + id);
+                                        mMobilePlanPreferenceController
+                                                .setMobilePlanDialogMessage(null);
+                                    }
+                                })
+                        .create();
         }
         return super.onCreateDialog(dialogId);
     }
@@ -215,13 +142,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            mManageMobilePlanMessage = savedInstanceState.getString(SAVED_MANAGE_MOBILE_PLAN_MSG);
-        }
-        log("onCreate: mManageMobilePlanMessage=" + mManageMobilePlanMessage);
-
-        mCm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        mTm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
         addPreferencesFromResource(R.xml.wireless_settings);
@@ -235,19 +155,27 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         mTetherPreferenceController = new TetherPreferenceController(activity);
         mMobileNetworkPreferenceController = new MobileNetworkPreferenceController(activity);
         mVpnPreferenceController = new VpnPreferenceController(activity);
+        mWifiCallingPreferenceController = new WifiCallingPreferenceController(activity);
+        mNetworkResetPreferenceController = new NetworkResetPreferenceController(activity);
+        mProxyPreferenceController = new ProxyPreferenceController(activity);
+        mMobilePlanPreferenceController = new MobilePlanPreferenceController(activity, this);
+
+        mMobilePlanPreferenceController.onCreate(savedInstanceState);
 
         mAirplaneModePreferenceController.displayPreference(screen);
         mTetherPreferenceController.displayPreference(screen);
         mMobileNetworkPreferenceController.displayPreference(screen);
         mVpnPreferenceController.displayPreference(screen);
+        mWifiCallingPreferenceController.displayPreference(screen);
+        mNetworkResetPreferenceController.displayPreference(screen);
+        mProxyPreferenceController.displayPreference(screen);
+        mMobilePlanPreferenceController.displayPreference(screen);
 
         SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
         RestrictedPreference androidBeam = (RestrictedPreference) findPreference(
                 KEY_ANDROID_BEAM_SETTINGS);
 
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
-
-        mButtonWfc = (PreferenceScreen) findPreference(KEY_WFC_SETTINGS);
 
         String toggleable = Settings.Global.getString(activity.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
@@ -261,7 +189,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             Preference ps = findPreference(KEY_WIMAX_SETTINGS);
             if (ps != null) root.removePreference(ps);
         } else {
-            if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIMAX )
+            if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIMAX)
                     && isWimaxEnabled) {
                 Preference ps = findPreference(KEY_WIMAX_SETTINGS);
                 ps.setDependency(AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
@@ -283,38 +211,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             getPreferenceScreen().removePreference(androidBeam);
             mNfcEnabler = null;
         }
-
-        // Remove Mobile Network Settings and Manage Mobile Plan for secondary users,
-        // if it's a wifi-only device.
-        if (!isAdmin || Utils.isWifiOnly(getActivity()) ||
-                RestrictedLockUtils.hasBaseUserRestriction(activity,
-                        UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS, UserHandle.myUserId())) {
-            removePreference(KEY_MANAGE_MOBILE_PLAN);
-        }
-        // Remove Mobile Network Settings and Manage Mobile Plan
-        // if config_show_mobile_plan sets false.
-        final boolean isMobilePlanEnabled = this.getResources().getBoolean(
-                R.bool.config_show_mobile_plan);
-        if (!isMobilePlanEnabled) {
-            Preference pref = findPreference(KEY_MANAGE_MOBILE_PLAN);
-            if (pref != null) {
-                removePreference(KEY_MANAGE_MOBILE_PLAN);
-            }
-        }
-
-        // Enable Proxy selector settings if allowed.
-        Preference mGlobalProxy = findPreference(KEY_PROXY_SETTINGS);
-        final DevicePolicyManager mDPM = (DevicePolicyManager)
-                activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        // proxy UI disabled until we have better app support
-        getPreferenceScreen().removePreference(mGlobalProxy);
-        mGlobalProxy.setEnabled(mDPM.getGlobalProxyAdmin() == null);
-
-        // Remove network reset if not allowed
-        if (RestrictedLockUtils.hasBaseUserRestriction(activity,
-                UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
-            removePreference(KEY_NETWORK_RESET);
-        }
     }
 
     @Override
@@ -325,27 +221,12 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         if (mNfcEnabler != null) {
             mNfcEnabler.resume();
         }
-
-        // update WFC setting
-        final Context context = getActivity();
-        if (ImsManager.isWfcEnabledByPlatform(context) &&
-                ImsManager.isWfcProvisionedOnDevice(context)) {
-            getPreferenceScreen().addPreference(mButtonWfc);
-
-            mButtonWfc.setSummary(WifiCallingSettings.getWfcModeSummary(
-                    context, ImsManager.getWfcMode(context, mTm.isNetworkRoaming())));
-        } else {
-            removePreference(KEY_WFC_SETTINGS);
-        }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        if (!TextUtils.isEmpty(mManageMobilePlanMessage)) {
-            outState.putString(SAVED_MANAGE_MOBILE_PLAN_MSG, mManageMobilePlanMessage);
-        }
+        mMobilePlanPreferenceController.onSaveInstanceState(outState);
     }
 
     @Override
@@ -364,6 +245,11 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     }
 
     @Override
+    public void showMobilePlanMessageDialog() {
+        showDialog(MANAGE_MOBILE_PLAN_DIALOG_ID);
+    }
+
+    @Override
     protected int getHelpResource() {
         return R.string.help_url_more_networks;
     }
@@ -372,79 +258,60 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
      * For Search.
      */
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(
-                    Context context, boolean enabled) {
-                // Remove wireless settings from search in demo mode
-                if (UserManager.isDeviceInDemoMode(context)) {
-                    return Collections.emptyList();
-                }
-                SearchIndexableResource sir = new SearchIndexableResource(context);
-                sir.xmlResId = R.xml.wireless_settings;
-                return Arrays.asList(sir);
-            }
-
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                final ArrayList<String> result = new ArrayList<String>();
-
-                final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-                final boolean isSecondaryUser = !um.isAdminUser();
-                final boolean isWimaxEnabled = !isSecondaryUser
-                        && context.getResources().getBoolean(
-                        com.android.internal.R.bool.config_wimaxEnabled);
-                if (!isWimaxEnabled) {
-                    result.add(KEY_WIMAX_SETTINGS);
-                }
-
-                new VpnPreferenceController(context).updateNonIndexableKeys(result);
-
-                // Remove NFC if not available
-                final NfcManager manager = (NfcManager)
-                        context.getSystemService(Context.NFC_SERVICE);
-                if (manager != null) {
-                    NfcAdapter adapter = manager.getDefaultAdapter();
-                    if (adapter == null) {
-                        result.add(KEY_TOGGLE_NFC);
-                        result.add(KEY_ANDROID_BEAM_SETTINGS);
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    // Remove wireless settings from search in demo mode
+                    if (UserManager.isDeviceInDemoMode(context)) {
+                        return Collections.emptyList();
                     }
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.wireless_settings;
+                    return Arrays.asList(sir);
                 }
 
-                // Remove Mobile Network Settings and Manage Mobile Plan if it's a wifi-only device.
-                if (isSecondaryUser || Utils.isWifiOnly(context)) {
-                    result.add(KEY_MANAGE_MOBILE_PLAN);
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final ArrayList<String> result = new ArrayList<String>();
+
+                    final UserManager um = (UserManager) context.getSystemService(
+                            Context.USER_SERVICE);
+                    final boolean isSecondaryUser = !um.isAdminUser();
+                    final boolean isWimaxEnabled = !isSecondaryUser
+                            && context.getResources().getBoolean(
+                            com.android.internal.R.bool.config_wimaxEnabled);
+                    if (!isWimaxEnabled) {
+                        result.add(KEY_WIMAX_SETTINGS);
+                    }
+
+                    new VpnPreferenceController(context).updateNonIndexableKeys(result);
+
+                    // Remove NFC if not available
+                    final NfcManager manager = (NfcManager)
+                            context.getSystemService(Context.NFC_SERVICE);
+                    if (manager != null) {
+                        NfcAdapter adapter = manager.getDefaultAdapter();
+                        if (adapter == null) {
+                            result.add(KEY_TOGGLE_NFC);
+                            result.add(KEY_ANDROID_BEAM_SETTINGS);
+                        }
+                    }
+                    new MobilePlanPreferenceController(context, null /* MobilePlanClickHandler */)
+                            .updateNonIndexableKeys(result);
+                    new MobileNetworkPreferenceController(context).updateNonIndexableKeys(result);
+
+                    // Remove Airplane Mode settings if it's a stationary device such as a TV.
+                    new AirplaneModePreferenceController(context, null /* fragment */)
+                            .updateNonIndexableKeys(result);
+
+                    new ProxyPreferenceController(context).updateNonIndexableKeys(result);
+
+                    new TetherPreferenceController(context).updateNonIndexableKeys(result);
+                    new WifiCallingPreferenceController(context).updateNonIndexableKeys(result);
+                    new NetworkResetPreferenceController(context).updateNonIndexableKeys(result);
+
+                    return result;
                 }
-                new MobileNetworkPreferenceController(context).updateNonIndexableKeys(result);
-
-                // Remove Mobile Network Settings and Manage Mobile Plan
-                // if config_show_mobile_plan sets false.
-                final boolean isMobilePlanEnabled = context.getResources().getBoolean(
-                        R.bool.config_show_mobile_plan);
-                if (!isMobilePlanEnabled) {
-                    result.add(KEY_MANAGE_MOBILE_PLAN);
-                }
-                // Remove Airplane Mode settings if it's a stationary device such as a TV.
-                new AirplaneModePreferenceController(context, null /* fragment */)
-                        .updateNonIndexableKeys(result);
-
-                // proxy UI disabled until we have better app support
-                result.add(KEY_PROXY_SETTINGS);
-
-                new TetherPreferenceController(context)
-                        .updateNonIndexableKeys(result);
-
-                if (!ImsManager.isWfcEnabledByPlatform(context) ||
-                        !ImsManager.isWfcProvisionedOnDevice(context)) {
-                    result.add(KEY_WFC_SETTINGS);
-                }
-
-                if (RestrictedLockUtils.hasBaseUserRestriction(context,
-                        UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
-                    result.add(KEY_NETWORK_RESET);
-                }
-
-                return result;
-            }
-        };
+            };
 }

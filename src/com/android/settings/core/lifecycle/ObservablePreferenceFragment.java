@@ -18,6 +18,7 @@ package com.android.settings.core.lifecycle;
 
 import android.annotation.CallSuper;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v14.preference.PreferenceFragment;
 
 /**
@@ -36,6 +37,20 @@ public abstract class ObservablePreferenceFragment extends PreferenceFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mLifecycle.onAttach(context);
+    }
+
+    @CallSuper
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mLifecycle.onCreate(savedInstanceState);
+    }
+
+    @CallSuper
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mLifecycle.onSaveInstanceState(outState);
     }
 
     @CallSuper

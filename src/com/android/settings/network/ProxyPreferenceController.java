@@ -15,28 +15,19 @@
  */
 package com.android.settings.network;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.os.UserManager;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 
-import static android.os.UserHandle.myUserId;
-import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
-import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
+public class ProxyPreferenceController extends PreferenceController {
 
-public class MobileNetworkPreferenceController extends PreferenceController {
+    private static final String KEY_PROXY_SETTINGS = "proxy_settings";
 
-    private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
-
-    private final UserManager mUserManager;
-    private final boolean mIsSecondaryUser;
-
-    public MobileNetworkPreferenceController(Context context) {
+    public ProxyPreferenceController(Context context) {
         super(context);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mIsSecondaryUser = !mUserManager.isAdminUser();
     }
 
     @Override
@@ -46,13 +37,24 @@ public class MobileNetworkPreferenceController extends PreferenceController {
 
     @Override
     protected boolean isAvailable() {
-        return !mIsSecondaryUser
-                && !Utils.isWifiOnly(mContext)
-                && !hasBaseUserRestriction(mContext, DISALLOW_CONFIG_MOBILE_NETWORKS, myUserId());
+        // proxy UI disabled until we have better app support
+        return false;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        // Enable Proxy selector settings if allowed.
+        final Preference pref = screen.findPreference(KEY_PROXY_SETTINGS);
+        if (pref != null) {
+            final DevicePolicyManager dpm = (DevicePolicyManager)
+                    mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+            pref.setEnabled(dpm.getGlobalProxyAdmin() == null);
+        }
     }
 
     @Override
     protected String getPreferenceKey() {
-        return KEY_MOBILE_NETWORK_SETTINGS;
+        return KEY_PROXY_SETTINGS;
     }
 }
