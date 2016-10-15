@@ -54,7 +54,7 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
         final Resources res = getContext().getResources();
         final ContentResolver resolver = getContext().getContentResolver();
         // Mark the appropriate item in the preferences list.
-        mEntries = res.getStringArray(R.array.entries_font_size);
+        mEntries = res.getStringArray(R.array.entries_font_size_percent);
         final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
         final float currentScale =
                 Settings.System.getFloat(resolver, Settings.System.FONT_SCALE, 1.0f);

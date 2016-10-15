@@ -43,7 +43,7 @@ public class FontSizePreferenceControllerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mController = new FontSizePreferenceController(mContext, TEST_KEY);
-        mFontSizeArray = mContext.getResources().getStringArray(R.array.entries_font_size);
+        mFontSizeArray = mContext.getResources().getStringArray(R.array.entries_font_size_percent);
     }
 
     @Test
