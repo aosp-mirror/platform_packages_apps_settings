@@ -110,7 +110,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
      * Whether to show the development settings to the user.  Default is false.
      */
     public static final String PREF_SHOW = "show";
-
+    private static final String ADVANCED_REBOOT = "advanced_reboot";
     private static final String ENABLE_ADB = "enable_adb";
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
     private static final String ENABLE_TERMINAL = "enable_terminal";
@@ -238,7 +238,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private boolean mLastEnabledState;
     private boolean mHaveDebugSettings;
     private boolean mDontPokeProperties;
-
+                    
+    private SwitchPreference mAdvancedReboot;
     private SwitchPreference mEnableAdb;
     private Preference mClearAdbKeys;
     private SwitchPreference mEnableTerminal;
@@ -265,7 +266,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mMobileDataAlwaysOn;
     private SwitchPreference mBluetoothDisableAbsVolume;
     private SwitchPreference mOtaDisableAutomaticUpdate;
-
+    
     private SwitchPreference mWifiAllowScansWithTraffic;
     private SwitchPreference mStrictMode;
     private SwitchPreference mPointerLocation;
@@ -279,6 +280,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mShowHwLayersUpdates;
     private SwitchPreference mDebugLayout;
     private SwitchPreference mForceRtlLayout;
+    
     private ListPreference mDebugHwOverdraw;
     private ListPreference mLogdSize;
     private ListPreference mLogpersist;
@@ -387,7 +389,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             removePreference(mEnableOemUnlock);
             mEnableOemUnlock = null;
         }
-
+        mAdvancedReboot = findAndInitSwitchPref(ADVANCED_REBOOT);
         mDebugViewAttributes = findAndInitSwitchPref(DEBUG_VIEW_ATTRIBUTES);
         mForceAllowOnExternal = findAndInitSwitchPref(FORCE_ALLOW_ON_EXTERNAL_KEY);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
@@ -398,6 +400,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             disableForUser(mClearAdbKeys);
             disableForUser(mEnableTerminal);
             disableForUser(mPassword);
+            disableForUser(mAdvancedReboot);
         }
 
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
@@ -670,6 +673,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mHaveDebugSettings = false;
         updateSwitchPreference(mEnableAdb, Settings.Global.getInt(cr,
                 Settings.Global.ADB_ENABLED, 0) != 0);
+        updateSwitchPreference(mAdvancedReboot, Settings.Secure.getInt(cr, Settings.Secure.ADVANCED_REBOOT, 0) != 0);
         if (mEnableTerminal != null) {
             updateSwitchPreference(mEnableTerminal,
                     context.getPackageManager().getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)
@@ -1966,6 +1970,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             pm.setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
                     mEnableTerminal.isChecked() ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                             : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);
+        } else if (preference == mAdvancedReboot){
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.ADVANCED_REBOOT,
+                    mAdvancedReboot.isChecked() ? 1 : 0);
         } else if (preference == mBugreportInPower) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Global.BUGREPORT_IN_POWER_MENU,
