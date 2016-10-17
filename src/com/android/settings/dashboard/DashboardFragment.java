@@ -18,6 +18,9 @@ package com.android.settings.dashboard;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -25,6 +28,9 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -50,6 +56,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private final Map<Class, PreferenceController> mPreferenceControllers =
             new ArrayMap<>();
     private final Set<String> mDashboardTilePrefKeys = new ArraySet<>();
+    private DashboardDividerDecoration mDividerDecoration;
 
     protected DashboardFeatureProvider mDashboardFeatureProvider;
     private boolean mListeningToCategoryChange;
@@ -83,6 +90,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
+        mDividerDecoration = new DashboardDividerDecoration(getContext());
         refreshAllPreferences(getLogTag());
     }
 
@@ -250,6 +258,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        getListView().addItemDecoration(mDividerDecoration);
+        return view;
+    }
+
     /**
      * Update state of each preference managed by PreferenceController.
      */
@@ -259,6 +275,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         for (PreferenceController controller : controllers) {
             controller.updateState(screen);
         }
+    }
+
+    @Override
+    public void setDivider(Drawable divider) {
+        // Intercept divider and set it transparent so system divider decoration is disabled.
+        // We will use our decoration to draw divider more intelligently.
+        mDividerDecoration.setDivider(divider);
+        super.setDivider(new ColorDrawable(Color.TRANSPARENT));
     }
 
     /**
@@ -271,7 +295,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         if (screen != null) {
             screen.removeAll();
         }
-
 
         // Add resource based tiles.
         displayResourceTiles();
@@ -293,5 +316,4 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mDashboardTilePrefKeys.clear();
         displayDashboardTiles(TAG, getPreferenceScreen());
     }
-
 }

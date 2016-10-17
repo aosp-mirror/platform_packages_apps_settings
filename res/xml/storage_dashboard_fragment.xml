@@ -17,9 +17,9 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/storage_settings">
-    <com.android.settings.dashboard.DashboardTilePreference
+    <Preference
         android:key="pref_manage_storage"
         android:title="@string/storage_menu_manage"
         android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings">
-    </com.android.settings.dashboard.DashboardTilePreference>
+    </Preference>
 </PreferenceScreen>

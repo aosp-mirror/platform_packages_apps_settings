@@ -19,12 +19,12 @@
         android:title="@string/display_settings"
         settings:keywords="@string/keywords_display">
 
-        <PreferenceScreen
+        <Preference
                 android:key="brightness"
                 android:title="@string/brightness"
                 settings:keywords="@string/keywords_display_brightness_level">
             <intent android:action="android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
-        </PreferenceScreen>
+        </Preference>
 
         <com.android.settingslib.RestrictedPreference
             android:key="wallpaper"
