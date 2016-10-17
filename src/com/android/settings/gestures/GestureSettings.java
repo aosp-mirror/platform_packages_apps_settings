@@ -56,11 +56,6 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     private static final String PREF_KEY_SWIPE_DOWN_FINGERPRINT = "gesture_swipe_down_fingerprint";
     private static final String PREF_KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
     private static final String DEBUG_DOZE_COMPONENT = "debug.doze.component";
-    private static final int PREF_ID_DOUBLE_TAP_POWER = 0;
-    private static final int PREF_ID_DOUBLE_TWIST = 1;
-    private static final int PREF_ID_PICK_UP = 2;
-    private static final int PREF_ID_SWIPE_DOWN_FINGERPRINT = 3;
-    private static final int PREF_ID_DOUBLE_TAP_SCREEN = 4;
 
     private List<GesturePreference> mPreferences;
 
@@ -75,7 +70,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
             int cameraDisabled = Secure.getInt(
                     getContentResolver(), Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
-            addPreference(PREF_KEY_DOUBLE_TAP_POWER, cameraDisabled == 0, PREF_ID_DOUBLE_TAP_POWER);
+            addPreference(PREF_KEY_DOUBLE_TAP_POWER, cameraDisabled == 0);
         } else {
             removePreference(PREF_KEY_DOUBLE_TAP_POWER);
         }
@@ -84,21 +79,20 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         boolean dozeEnabled = isDozeAvailable(context);
         if (dozeEnabled && isPickupAvailable(context)) {
             int pickup = Secure.getInt(getContentResolver(), Secure.DOZE_PULSE_ON_PICK_UP, 1);
-            addPreference(PREF_KEY_PICK_UP, pickup != 0, PREF_ID_PICK_UP);
+            addPreference(PREF_KEY_PICK_UP, pickup != 0);
         } else {
             removePreference(PREF_KEY_PICK_UP);
         }
         if (dozeEnabled && isDoubleTapAvailable(context)) {
             int doubleTap = Secure.getInt(getContentResolver(), Secure.DOZE_PULSE_ON_DOUBLE_TAP, 1);
-            addPreference(PREF_KEY_DOUBLE_TAP_SCREEN, doubleTap != 0, PREF_ID_DOUBLE_TAP_SCREEN);
+            addPreference(PREF_KEY_DOUBLE_TAP_SCREEN, doubleTap != 0);
         } else {
             removePreference(PREF_KEY_DOUBLE_TAP_SCREEN);
         }
 
         // Fingerprint slide for notifications
         if (isSystemUINavigationAvailable(context)) {
-            addPreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT, isSystemUINavigationEnabled(context),
-                    PREF_ID_SWIPE_DOWN_FINGERPRINT);
+            addPreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT, isSystemUINavigationEnabled(context));
         } else {
             removePreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
         }
@@ -107,7 +101,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         if (isDoubleTwistAvailable(context)) {
             int doubleTwistEnabled = Secure.getInt(
                     getContentResolver(), Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
-            addPreference(PREF_KEY_DOUBLE_TWIST, doubleTwistEnabled != 0, PREF_ID_DOUBLE_TWIST);
+            addPreference(PREF_KEY_DOUBLE_TWIST, doubleTwistEnabled != 0);
         } else {
             removePreference(PREF_KEY_DOUBLE_TWIST);
         }
@@ -234,11 +228,10 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                 R.bool.config_gesture_double_tap_settings_enabled);
     }
 
-    private void addPreference(String key, boolean enabled, int id) {
+    private void addPreference(String key, boolean enabled) {
         GesturePreference preference = (GesturePreference) findPreference(key);
         preference.setChecked(enabled);
         preference.setOnPreferenceChangeListener(this);
-        preference.loadPreview(getLoaderManager(), id);
         mPreferences.add(preference);
     }
 
