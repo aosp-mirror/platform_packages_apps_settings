@@ -111,11 +111,10 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
     @Override
     protected void performClick(View view) {
         MetricsLogger.action(getContext(), MetricsEvent.ACTION_CELL_DATA_TOGGLE, !mChecked);
+        final SubscriptionInfo currentSir = mSubscriptionManager.getActiveSubscriptionInfo(
+                mSubId);
+        final SubscriptionInfo nextSir = mSubscriptionManager.getDefaultDataSubscriptionInfo();
         if (mChecked) {
-            final SubscriptionInfo currentSir = mSubscriptionManager.getActiveSubscriptionInfo(
-                    mSubId);
-            final SubscriptionInfo nextSir = mSubscriptionManager.getDefaultDataSubscriptionInfo();
-
             // If the device is single SIM or is enabling data on the active data SIM then forgo
             // the pop-up.
             if (!Utils.showSimCardTile(getContext()) ||
@@ -136,6 +135,12 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
             // If we are showing the Sim Card tile then we are a Multi-Sim device.
             if (Utils.showSimCardTile(getContext())) {
                 mMultiSimDialog = true;
+                if (nextSir != null && currentSir != null &&
+                        currentSir.getSubscriptionId() == nextSir.getSubscriptionId()) {
+                    setMobileDataEnabled(true);
+                    disableDataForOtherSubscriptions(mSubId);
+                    return;
+                }
                 super.performClick(view);
             } else {
                 setMobileDataEnabled(true);
