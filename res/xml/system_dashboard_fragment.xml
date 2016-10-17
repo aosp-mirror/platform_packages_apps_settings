@@ -19,21 +19,21 @@
     android:title="@string/header_category_system">
 
     <!-- System updates -->
-    <com.android.settings.dashboard.DashboardTilePreference
+    <Preference
         android:key="system_update_settings"
         android:title="@string/system_update_settings_list_item_title"
         android:summary="@string/system_update_settings_list_item_summary"
         android:order="-30">
         <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS"/>
-    </com.android.settings.dashboard.DashboardTilePreference>
+    </Preference>
 
-    <com.android.settings.dashboard.DashboardTilePreference
+    <Preference
         android:key="additional_system_update_settings"
         android:title="@string/additional_system_update_settings_list_item_title"
         android:order="-31">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="@string/additional_system_update"
                 android:targetClass="@string/additional_system_update_menu"/>
-    </com.android.settings.dashboard.DashboardTilePreference>
+    </Preference>
 
 </PreferenceScreen>

@@ -15,6 +15,8 @@
  */
 package com.android.settings.dashboard;
 
+import android.support.v7.preference.Preference;
+
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -45,7 +47,7 @@ public interface DashboardFeatureProvider {
      * priority 100 - 199 belongs to priority level 100, tiles with priority 200 - 299 is in
      * group 200, and so on.
      */
-    int getPriorityGroup(Tile tile);
+    int getPriorityGroup(Preference preference);
 
     /**
      * Returns an unique string key for the tile.

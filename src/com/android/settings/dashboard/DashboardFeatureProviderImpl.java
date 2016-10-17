@@ -18,8 +18,8 @@ package com.android.settings.dashboard;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.support.v7.preference.Preference;
 
-import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -58,8 +58,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public int getPriorityGroup(Tile tile) {
-        return tile.priority / 100;
+    public int getPriorityGroup(Preference preference) {
+        return preference.getOrder() / 100;
     }
 
     @Override
