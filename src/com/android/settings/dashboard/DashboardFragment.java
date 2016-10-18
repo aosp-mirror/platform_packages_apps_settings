@@ -267,7 +267,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
-        getListView().addItemDecoration(mDividerDecoration);
+        if (mDashboardFeatureProvider.isEnabled()) {
+            getListView().addItemDecoration(mDividerDecoration);
+        }
         return view;
     }
 
@@ -284,10 +286,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public void setDivider(Drawable divider) {
-        // Intercept divider and set it transparent so system divider decoration is disabled.
-        // We will use our decoration to draw divider more intelligently.
-        mDividerDecoration.setDivider(divider);
-        super.setDivider(new ColorDrawable(Color.TRANSPARENT));
+        if (mDashboardFeatureProvider.isEnabled()) {
+            // Intercept divider and set it transparent so system divider decoration is disabled.
+            // We will use our decoration to draw divider more intelligently.
+            mDividerDecoration.setDivider(divider);
+            super.setDivider(new ColorDrawable(Color.TRANSPARENT));
+        } else {
+            super.setDivider(divider);
+        }
     }
 
     /**
