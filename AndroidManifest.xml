@@ -3095,10 +3095,23 @@
                        android:value="true" />
         </activity-alias>
 
+        <activity-alias android:name="SoundDashboardAlias"
+                        android:targetActivity="Settings$SoundSettingsActivity">
+            <intent-filter android:priority="5">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.SoundSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
         <activity android:name=".Settings$StorageDashboardActivity"
                   android:label="@string/storage_settings"
                   android:icon="@drawable/ic_settings_storage">
-            <intent-filter android:priority="5">
+            <intent-filter android:priority="4">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
