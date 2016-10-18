@@ -20,9 +20,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings.Secure;
 import android.support.v7.preference.Preference;
@@ -32,6 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -59,6 +59,8 @@ public class GestureSettings extends SettingsPreferenceFragment implements
 
     private List<GesturePreference> mPreferences;
 
+    private AmbientDisplayConfiguration mAmbientConfig;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,16 +78,16 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         }
 
         // Ambient Display
-        boolean dozeEnabled = isDozeAvailable(context);
-        if (dozeEnabled && isPickupAvailable(context)) {
-            int pickup = Secure.getInt(getContentResolver(), Secure.DOZE_PULSE_ON_PICK_UP, 1);
-            addPreference(PREF_KEY_PICK_UP, pickup != 0);
+        mAmbientConfig = new AmbientDisplayConfiguration(context);
+        if (mAmbientConfig.pulseOnPickupAvailable()) {
+            boolean pickup = mAmbientConfig.pulseOnPickupEnabled(UserHandle.myUserId());
+            addPreference(PREF_KEY_PICK_UP, pickup);
         } else {
             removePreference(PREF_KEY_PICK_UP);
         }
-        if (dozeEnabled && isDoubleTapAvailable(context)) {
-            int doubleTap = Secure.getInt(getContentResolver(), Secure.DOZE_PULSE_ON_DOUBLE_TAP, 1);
-            addPreference(PREF_KEY_DOUBLE_TAP_SCREEN, doubleTap != 0);
+        if (mAmbientConfig.pulseOnDoubleTapAvailable()) {
+            boolean doubleTap = mAmbientConfig.pulseOnDoubleTapEnabled(UserHandle.myUserId());
+            addPreference(PREF_KEY_DOUBLE_TAP_SCREEN, doubleTap);
         } else {
             removePreference(PREF_KEY_DOUBLE_TAP_SCREEN);
         }
@@ -178,15 +180,6 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
     }
 
-    private static boolean isDozeAvailable(Context context) {
-        String name = Build.IS_DEBUGGABLE ? SystemProperties.get(DEBUG_DOZE_COMPONENT) : null;
-        if (TextUtils.isEmpty(name)) {
-            name = context.getResources().getString(
-                    com.android.internal.R.string.config_dozeComponent);
-        }
-        return !TextUtils.isEmpty(name);
-    }
-
     private static boolean isSystemUINavigationAvailable(Context context) {
         return context.getResources().getBoolean(
                 com.android.internal.R.bool.config_supportSystemNavigationKeys);
@@ -200,11 +193,6 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     private static boolean isDoubleTwistAvailable(Context context) {
         return hasSensor(context, R.string.gesture_double_twist_sensor_name,
                 R.string.gesture_double_twist_sensor_vendor);
-    }
-
-    private static boolean isPickupAvailable(Context context) {
-        return hasSensor(context, R.string.gesture_pickup_sensor_name,
-                R.string.gesture_pickup_sensor_vendor);
     }
 
     private static boolean hasSensor(Context context, int nameResId, int vendorResId) {
@@ -221,11 +209,6 @@ public class GestureSettings extends SettingsPreferenceFragment implements
             }
         }
         return false;
-    }
-
-    private static boolean isDoubleTapAvailable(Context context) {
-        return context.getResources().getBoolean(
-                R.bool.config_gesture_double_tap_settings_enabled);
     }
 
     private void addPreference(String key, boolean enabled) {
@@ -253,13 +236,15 @@ public class GestureSettings extends SettingsPreferenceFragment implements
             @Override
             public List<String> getNonIndexableKeys(Context context) {
                 ArrayList<String> result = new ArrayList<String>();
+                AmbientDisplayConfiguration ambientConfig
+                        = new AmbientDisplayConfiguration(context);
                 if (!isCameraDoubleTapPowerGestureAvailable(context.getResources())) {
                     result.add(PREF_KEY_DOUBLE_TAP_POWER);
                 }
-                if (!isDozeAvailable(context) || !isPickupAvailable(context)) {
+                if (!ambientConfig.pulseOnPickupAvailable()) {
                     result.add(PREF_KEY_PICK_UP);
                 }
-                if (!isDozeAvailable(context) || !isDoubleTapAvailable(context)) {
+                if (!ambientConfig.pulseOnDoubleTapAvailable()) {
                     result.add(PREF_KEY_DOUBLE_TAP_SCREEN);
                 }
                 if (!isSystemUINavigationAvailable(context)) {
