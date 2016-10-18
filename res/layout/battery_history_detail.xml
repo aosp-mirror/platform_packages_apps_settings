@@ -14,54 +14,56 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/charge"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="36sp"
-            android:textColor="?android:attr/colorAccent" />
+            android:focusable="true"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/estimation"
+            <TextView
+                android:id="@+id/charge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="36sp"
+                android:textColor="?android:attr/colorAccent"/>
+
+            <TextView
+                android:id="@+id/estimation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorSecondary"/>
+
+            <com.android.settingslib.graph.UsageView
+                android:id="@+id/battery_usage"
+                android:layout_width="match_parent"
+                android:layout_height="141dp"
+                settings:sideLabels="@array/battery_labels"
+                android:colorAccent="?android:attr/colorAccent"
+                android:gravity="end"
+                settings:textColor="?android:attr/textColorSecondary"/>
+        </LinearLayout>
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="?android:attr/textColorSecondary" />
-
-        <com.android.settingslib.graph.UsageView
-            android:id="@+id/battery_usage"
-            android:layout_width="match_parent"
-            android:layout_height="141dp"
-            settings:sideLabels="@array/battery_labels"
-            android:colorAccent="?android:attr/colorAccent"
-            android:gravity="end"
-            settings:textColor="?android:attr/textColorSecondary" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="2dp"
-        android:background="?android:attr/listDivider" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="?android:attr/listDivider"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,6 +96,6 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
