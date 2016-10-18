@@ -51,7 +51,7 @@ public class SystemUpdatePreferenceController extends PreferenceController {
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_SYSTEM_UPDATE_SETTINGS;
     }
 

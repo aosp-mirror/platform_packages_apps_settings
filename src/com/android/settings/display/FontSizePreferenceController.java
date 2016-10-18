@@ -17,7 +17,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.ToggleFontSizePreferenceFragment;
@@ -37,16 +36,12 @@ public class FontSizePreferenceController extends PreferenceController {
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_FONT_SIZE;
     }
 
     @Override
-    public void updateState(PreferenceScreen screen) {
-        final Preference preference = screen.findPreference(KEY_FONT_SIZE);
-        if (preference == null) {
-            return;
-        }
+    public void updateState(Preference preference) {
         final float currentScale = Settings.System.getFloat(mContext.getContentResolver(),
                 Settings.System.FONT_SCALE, 1.0f);
         final Resources res = mContext.getResources();

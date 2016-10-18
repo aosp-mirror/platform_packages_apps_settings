@@ -43,7 +43,7 @@ public class NetworkResetPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_NETWORK_RESET;
     }
 }

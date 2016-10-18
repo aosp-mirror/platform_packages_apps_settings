@@ -56,7 +56,7 @@ public class WifiCallingPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_WFC_SETTINGS;
     }
 }

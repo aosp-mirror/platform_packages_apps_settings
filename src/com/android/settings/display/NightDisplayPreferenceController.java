@@ -38,7 +38,7 @@ public class NightDisplayPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_NIGHT_DISPLAY;
     }
 }

@@ -106,7 +106,7 @@ public class NfcPreferenceController extends PreferenceController
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return null;
     }
 
