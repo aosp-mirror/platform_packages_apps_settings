@@ -22,7 +22,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -41,6 +43,7 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +72,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         super.onAttach(context);
         mDashboardFeatureProvider =
                 FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
-        mProgressiveDisclosureMixin = new ProgressiveDisclosureMixin(context, this);
+        mProgressiveDisclosureMixin = mDashboardFeatureProvider
+                .getProgressiveDisclosureMixin(context, this);
         getLifecycle().addObserver(mProgressiveDisclosureMixin);
 
         final List<PreferenceController> controllers = getPreferenceControllers(context);
@@ -79,6 +83,24 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         for (PreferenceController controller : controllers) {
             addPreferenceController(controller);
         }
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        // Set ComparisonCallback so we get better animation when list changes.
+        getPreferenceManager().setPreferenceComparisonCallback(
+                new PreferenceManager.SimplePreferenceComparisonCallback());
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        if (mDashboardFeatureProvider.isEnabled()) {
+            getListView().addItemDecoration(mDividerDecoration);
+        }
+        return view;
     }
 
     @Override
@@ -96,6 +118,18 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         super.onCreatePreferences(savedInstanceState, rootKey);
         mDividerDecoration = new DashboardDividerDecoration(getContext());
         refreshAllPreferences(getLogTag());
+    }
+
+    @Override
+    public void setDivider(Drawable divider) {
+        if (mDashboardFeatureProvider.isEnabled()) {
+            // Intercept divider and set it transparent so system divider decoration is disabled.
+            // We will use our decoration to draw divider more intelligently.
+            mDividerDecoration.setDivider(divider);
+            super.setDivider(new ColorDrawable(Color.TRANSPARENT));
+        } else {
+            super.setDivider(divider);
+        }
     }
 
     @Override
@@ -210,16 +244,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        final View view = super.onCreateView(inflater, container, savedInstanceState);
-        if (mDashboardFeatureProvider.isEnabled()) {
-            getListView().addItemDecoration(mDividerDecoration);
-        }
-        return view;
-    }
-
     /**
      * Update state of each preference managed by PreferenceController.
      */
@@ -235,18 +259,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 continue;
             }
             controller.updateState(preference);
-        }
-    }
-
-    @Override
-    public void setDivider(Drawable divider) {
-        if (mDashboardFeatureProvider.isEnabled()) {
-            // Intercept divider and set it transparent so system divider decoration is disabled.
-            // We will use our decoration to draw divider more intelligently.
-            mDividerDecoration.setDivider(divider);
-            super.setDivider(new ColorDrawable(Color.TRANSPARENT));
-        } else {
-            super.setDivider(divider);
         }
     }
 
@@ -275,18 +287,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Refresh preference items backed by DashboardCategory.
      */
-    private void refreshDashboardTiles(final String TAG) {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    void refreshDashboardTiles(final String TAG) {
         final PreferenceScreen screen = getPreferenceScreen();
-        for (String key : mDashboardTilePrefKeys) {
-            // Remove tiles from screen
-            mProgressiveDisclosureMixin.removePreference(screen, key);
-        }
-        mDashboardTilePrefKeys.clear();
+
         final Context context = getContext();
         final DashboardCategory category =
                 mDashboardFeatureProvider.getTilesForCategory(getCategoryKey());
         if (category == null) {
-            Log.d(TAG, "NO dynamic tiles for " + TAG);
+            Log.d(TAG, "NO dashboard tiles for " + TAG);
             return;
         }
         List<Tile> tiles = category.tiles;
@@ -294,6 +303,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             Log.d(TAG, "tile list is empty, skipping category " + category.title);
             return;
         }
+        // Create a list to track which tiles are to be removed.
+        final List<String> remove = new ArrayList<>(mDashboardTilePrefKeys);
+
         // There are dashboard tiles, so we need to install SummaryLoader.
         if (mSummaryLoader != null) {
             mSummaryLoader.release();
@@ -307,32 +319,51 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 Log.d(TAG, "tile does not contain a key, skipping " + tile);
                 continue;
             }
-            mDashboardTilePrefKeys.add(key);
-            final Preference pref = new DashboardTilePreference(context);
-            pref.setTitle(tile.title);
-            pref.setKey(key);
-            pref.setSummary(tile.summary);
-            if (tile.icon != null) {
-                pref.setIcon(tile.icon.loadDrawable(context));
+            if (mDashboardTilePrefKeys.contains(key)) {
+                // Have the key already, will rebind.
+                final Preference preference = mProgressiveDisclosureMixin.findPreference(
+                        screen, key);
+                bindPreferenceToTile(context, preference, tile, key);
+            } else {
+                // Don't have this key, add it.
+                final Preference pref = new DashboardTilePreference(context);
+                bindPreferenceToTile(context, pref, tile, key);
+                mProgressiveDisclosureMixin.addPreference(screen, pref);
+                mDashboardTilePrefKeys.add(key);
             }
-            final Bundle metadata = tile.metaData;
-            if (metadata != null) {
-                String clsName = metadata.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
-                if (!TextUtils.isEmpty(clsName)) {
-                    pref.setFragment(clsName);
-                }
-            } else if (tile.intent != null) {
-                final Intent intent = new Intent(tile.intent);
-                pref.setOnPreferenceClickListener(preference -> {
-                    getActivity().startActivityForResult(intent, 0);
-                    return true;
-                });
-            }
-            // Use negated priority for order, because tile priority is based on intent-filter
-            // (larger value has higher priority). However pref order defines smaller value has
-            // higher priority.
-            pref.setOrder(-tile.priority);
-            mProgressiveDisclosureMixin.addPreference(screen, pref);
+            remove.remove(key);
         }
+        // Finally remove tiles that are gone.
+        for (String key : remove) {
+            mDashboardTilePrefKeys.remove(key);
+            mProgressiveDisclosureMixin.removePreference(screen, key);
+        }
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    void bindPreferenceToTile(Context context, Preference pref, Tile tile, String key) {
+        pref.setTitle(tile.title);
+        pref.setKey(key);
+        pref.setSummary(tile.summary);
+        if (tile.icon != null) {
+            pref.setIcon(tile.icon.loadDrawable(context));
+        }
+        final Bundle metadata = tile.metaData;
+        if (metadata != null) {
+            String clsName = metadata.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
+            if (!TextUtils.isEmpty(clsName)) {
+                pref.setFragment(clsName);
+            }
+        } else if (tile.intent != null) {
+            final Intent intent = new Intent(tile.intent);
+            pref.setOnPreferenceClickListener(preference -> {
+                getActivity().startActivityForResult(intent, 0);
+                return true;
+            });
+        }
+        // Use negated priority for order, because tile priority is based on intent-filter
+        // (larger value has higher priority). However pref order defines smaller value has
+        // higher priority.
+        pref.setOrder(-tile.priority);
     }
 }

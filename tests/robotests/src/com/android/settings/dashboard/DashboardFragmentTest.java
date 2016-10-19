@@ -16,10 +16,13 @@
 package com.android.settings.dashboard;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -44,6 +47,7 @@ import java.util.List;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -59,6 +63,8 @@ public class DashboardFragmentTest {
     private DashboardCategory mDashboardCategory;
     @Mock
     private FakeFeatureFactory mFakeFeatureFactory;
+    @Mock
+    private ProgressiveDisclosureMixin mDisclosureMixin;
     private TestFragment mTestFragment;
 
     @Before
@@ -69,9 +75,12 @@ public class DashboardFragmentTest {
         mDashboardCategory.tiles = new ArrayList<>();
         mDashboardCategory.tiles.add(new Tile());
         mTestFragment = new TestFragment(ShadowApplication.getInstance().getApplicationContext());
-        mTestFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getProgressiveDisclosureMixin(any(Context.class), eq(mTestFragment)))
+                .thenReturn(mDisclosureMixin);
         when(mFakeFeatureFactory.dashboardFeatureProvider.getTilesForCategory(anyString()))
                 .thenReturn(mDashboardCategory);
+        mTestFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
     }
 
     @Test
@@ -87,11 +96,14 @@ public class DashboardFragmentTest {
 
     @Test
     public void displayTilesAsPreference_shouldAddTilesWithIntent() {
+        when(mFakeFeatureFactory.dashboardFeatureProvider.getTilesForCategory(anyString()))
+                .thenReturn(mDashboardCategory);
         when(mFakeFeatureFactory.dashboardFeatureProvider.getDashboardKeyForTile(any(Tile.class)))
                 .thenReturn("test_key");
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
-        verify(mTestFragment.mScreen).addPreference(any(DashboardTilePreference.class));
+        verify(mDisclosureMixin).addPreference(any(PreferenceScreen.class),
+                any(DashboardTilePreference.class));
     }
 
     @Test
@@ -107,6 +119,27 @@ public class DashboardFragmentTest {
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
         verify(mTestFragment.mScreen, never()).addPreference(any(DashboardTilePreference.class));
+    }
+
+    @Test
+    public void bindPreference_shouldBindAllData() {
+        final Preference preference = new Preference(
+                ShadowApplication.getInstance().getApplicationContext());
+        final Tile tile = new Tile();
+        tile.title = "title";
+        tile.summary = "summary";
+        tile.icon = Icon.createWithBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565));
+        tile.metaData = new Bundle();
+        tile.metaData.putString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS, "HI");
+        tile.priority = 10;
+        mTestFragment.bindPreferenceToTile(mContext, preference, tile, "123");
+
+        assertThat(preference.getTitle()).isEqualTo(tile.title);
+        assertThat(preference.getSummary()).isEqualTo(tile.summary);
+        assertThat(preference.getIcon()).isNotNull();
+        assertThat(preference.getFragment())
+                .isEqualTo(tile.metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS));
+        assertThat(preference.getOrder()).isEqualTo(-tile.priority);
     }
 
     public static class TestPreferenceController extends PreferenceController {
@@ -139,7 +172,6 @@ public class DashboardFragmentTest {
     public static class TestFragment extends DashboardFragment {
 
         private final Context mContext;
-        @Mock
         public PreferenceScreen mScreen;
 
         public TestFragment(Context context) {

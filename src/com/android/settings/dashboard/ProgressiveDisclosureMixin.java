@@ -28,9 +28,9 @@ import android.util.Log;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnCreate;
 import com.android.settings.core.lifecycle.events.OnSaveInstanceState;
-import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickListener,
@@ -43,18 +43,19 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     private int mTileLimit = DEFAULT_TILE_LIMIT;
 
     private final DashboardFeatureProvider mDashboardFeatureProvider;
-    private final List<Preference> collapsedPrefs = new ArrayList<>();
+    // Collapsed preference sorted by order.
+    private final List<Preference> mCollapsedPrefs = new ArrayList<>();
     private final ExpandPreference mExpandButton;
     private final PreferenceFragment mFragment;
 
     private boolean mUserExpanded;
 
-    public ProgressiveDisclosureMixin(Context context, PreferenceFragment fragment) {
+    public ProgressiveDisclosureMixin(Context context,
+            DashboardFeatureProvider dashboardFeatureProvider, PreferenceFragment fragment) {
         mFragment = fragment;
         mExpandButton = new ExpandPreference(context);
         mExpandButton.setOnPreferenceClickListener(this);
-        mDashboardFeatureProvider = FeatureFactory.getFactory(context)
-                .getDashboardFeatureProvider(context);
+        mDashboardFeatureProvider = dashboardFeatureProvider;
     }
 
     @Override
@@ -75,10 +76,10 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
             final PreferenceScreen screen = mFragment.getPreferenceScreen();
             if (screen != null) {
                 screen.removePreference(preference);
-                for (Preference pref : collapsedPrefs) {
+                for (Preference pref : mCollapsedPrefs) {
                     screen.addPreference(pref);
                 }
-                collapsedPrefs.clear();
+                mCollapsedPrefs.clear();
                 mUserExpanded = true;
             }
         }
@@ -96,7 +97,7 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
      * Whether the controller is in collapsed state.
      */
     public boolean isCollapsed() {
-        return !collapsedPrefs.isEmpty();
+        return !mCollapsedPrefs.isEmpty();
     }
 
     /**
@@ -115,7 +116,7 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
         if (!shouldCollapse(screen)) {
             return;
         }
-        if (!collapsedPrefs.isEmpty()) {
+        if (!mCollapsedPrefs.isEmpty()) {
             Log.w(TAG, "collapsed list should ALWAYS BE EMPTY before collapsing!");
         }
 
@@ -134,12 +135,27 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     public void addPreference(PreferenceScreen screen, Preference pref) {
         // Either add to screen, or to collapsed list.
         if (isCollapsed()) {
-            // Already collapsed, add to collapsed list.
-            addToCollapsedList(pref);
+            // insert the preference to right position.
+            final int lastPreferenceIndex = screen.getPreferenceCount() - 2;
+            if (lastPreferenceIndex >= 0) {
+                final Preference lastPreference = screen.getPreference(lastPreferenceIndex);
+                if (lastPreference.getOrder() > pref.getOrder()) {
+                    // insert to screen and move the last pref to collapsed list.
+                    screen.removePreference(lastPreference);
+                    screen.addPreference(pref);
+                    addToCollapsedList(lastPreference);
+                } else {
+                    // Insert to collapsed list.
+                    addToCollapsedList(pref);
+                }
+            } else {
+                // Couldn't find last preference on screen, just add to collapsed list.
+                addToCollapsedList(pref);
+            }
         } else if (shouldCollapse(screen)) {
             // About to have too many tiles on scree, collapse and add pref to collapsed list.
+            screen.addPreference(pref);
             collapse(screen);
-            addToCollapsedList(pref);
         } else {
             // No need to collapse, add to screen directly.
             screen.addPreference(pref);
@@ -158,11 +174,11 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
             return;
         }
         // Didn't find on screen, try removing from collapsed list.
-        for (int i = 0; i < collapsedPrefs.size(); i++) {
-            final Preference pref = collapsedPrefs.get(i);
+        for (int i = 0; i < mCollapsedPrefs.size(); i++) {
+            final Preference pref = mCollapsedPrefs.get(i);
             if (TextUtils.equals(key, pref.getKey())) {
-                collapsedPrefs.remove(pref);
-                if (collapsedPrefs.isEmpty()) {
+                mCollapsedPrefs.remove(pref);
+                if (mCollapsedPrefs.isEmpty()) {
                     // Removed last element, remove expand button too.
                     screen.removePreference(mExpandButton);
                 }
@@ -179,8 +195,8 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
         if (preference != null) {
             return preference;
         }
-        for (int i = 0; i < collapsedPrefs.size(); i++) {
-            final Preference pref = collapsedPrefs.get(i);
+        for (int i = 0; i < mCollapsedPrefs.size(); i++) {
+            final Preference pref = mCollapsedPrefs.get(i);
             if (TextUtils.equals(key, pref.getKey())) {
                 return pref;
             }
@@ -192,9 +208,18 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     /**
      * Add preference to collapsed list.
      */
-    @VisibleForTesting
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     void addToCollapsedList(Preference preference) {
-        collapsedPrefs.add(preference);
+        // Insert preference based on it's order.
+        int insertionIndex = Collections.binarySearch(mCollapsedPrefs, preference);
+        if (insertionIndex < 0) {
+            insertionIndex = insertionIndex * -1 - 1;
+        }
+        mCollapsedPrefs.add(insertionIndex, preference);
     }
 
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    List<Preference> getCollapsedPrefs() {
+        return mCollapsedPrefs;
+    }
 }

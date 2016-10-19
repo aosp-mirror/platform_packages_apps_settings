@@ -35,6 +35,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.List;
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -67,7 +69,8 @@ public class ProgressiveDisclosureTest {
         mScreen = mPreferenceFragment.getPreferenceScreen();
         mAppContext = ShadowApplication.getInstance().getApplicationContext();
         mFakeFeatureFactory = (FakeFeatureFactory) FeatureFactory.getFactory(mContext);
-        mMixin = new ProgressiveDisclosureMixin(mAppContext, mPreferenceFragment);
+        mMixin = new ProgressiveDisclosureMixin(mAppContext,
+                mFakeFeatureFactory.dashboardFeatureProvider, mPreferenceFragment);
         mPreference = new Preference(mAppContext);
         mPreference.setKey("test");
         when(mFakeFeatureFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
@@ -180,4 +183,77 @@ public class ProgressiveDisclosureTest {
         verify(screen, times(3)).removePreference(any(Preference.class));
     }
 
+    @Test
+    public void addToCollapsedList_shouldAddInOrder() {
+        final Preference pref1 = new Preference(mAppContext);
+        final Preference pref2 = new Preference(mAppContext);
+        pref1.setOrder(10);
+        pref2.setOrder(20);
+
+        // Pref1 has lower order than pref2, but add pref2 first. The collapsed list should maintain
+        // items in increasing order.
+        mMixin.addToCollapsedList(pref2);
+        mMixin.addToCollapsedList(pref1);
+
+        List<Preference> collapsedList = mMixin.getCollapsedPrefs();
+        assertThat(collapsedList.get(0)).isSameAs(pref1);
+        assertThat(collapsedList.get(1)).isSameAs(pref2);
+    }
+
+    @Test
+    public void addPreferenceWhenCollapsed_noPrefOnScreen_shouldAddToList() {
+        // Add something to collapsed list so we are in collapsed state.
+        mMixin.addToCollapsedList(new Preference(mAppContext));
+        assertThat(mMixin.getCollapsedPrefs().size()).isEqualTo(1);
+
+        // Just 1 preference on screen: the more button
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        final Preference toBeAdded = new Preference(mAppContext);
+        toBeAdded.setOrder(100);
+        mMixin.addPreference(mScreen, toBeAdded);
+
+        // Should have 2 prefs in collapsed list now
+        assertThat(mMixin.getCollapsedPrefs().size()).isEqualTo(2);
+        assertThat(mMixin.getCollapsedPrefs().get(0)).isSameAs(toBeAdded);
+    }
+
+    @Test
+    public void addPreferenceWhenCollapsed_prefOrderLessThanLastOnScreen_shouldAddToScreen() {
+        final Preference lastPref = new Preference(mAppContext);
+        lastPref.setOrder(100);
+        // Add something to collapsed list so we are in collapsed state.
+        mMixin.addToCollapsedList(new Preference(mAppContext));
+        assertThat(mMixin.getCollapsedPrefs().size()).isEqualTo(1);
+        // 3 prefs on screen, 2 are real and the last one is more button.
+        when(mScreen.getPreferenceCount()).thenReturn(3);
+        when(mScreen.getPreference(1)).thenReturn(lastPref);
+
+        final Preference toBeAdded = new Preference(mAppContext);
+        toBeAdded.setOrder(50);
+        mMixin.addPreference(mScreen, toBeAdded);
+
+        verify(mScreen).removePreference(lastPref);
+        verify(mScreen).addPreference(toBeAdded);
+        assertThat(mMixin.getCollapsedPrefs().get(0)).isSameAs(lastPref);
+    }
+
+    @Test
+    public void addPreferenceWhenCollapsed_prefOrderMoreThanLastOnScreen_shouldAddToList() {
+        final Preference lastPref = new Preference(mAppContext);
+        lastPref.setOrder(100);
+        // Add something to collapsed list so we are in collapsed state.
+        mMixin.addToCollapsedList(new Preference(mAppContext));
+        assertThat(mMixin.getCollapsedPrefs().size()).isEqualTo(1);
+        // 3 prefs on screen, 2 are real and the last one is more button.
+        when(mScreen.getPreferenceCount()).thenReturn(3);
+        when(mScreen.getPreference(1)).thenReturn(lastPref);
+
+        final Preference toBeAdded = new Preference(mAppContext);
+        toBeAdded.setOrder(200);
+        mMixin.addPreference(mScreen, toBeAdded);
+
+        verify(mScreen, never()).removePreference(any(Preference.class));
+        verify(mScreen, never()).addPreference(any(Preference.class));
+        assertThat(mMixin.getCollapsedPrefs().get(0)).isSameAs(toBeAdded);
+    }
 }

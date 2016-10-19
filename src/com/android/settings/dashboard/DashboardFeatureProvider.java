@@ -15,6 +15,7 @@
  */
 package com.android.settings.dashboard;
 
+import android.content.Context;
 import android.support.v7.preference.Preference;
 
 import com.android.settingslib.drawer.DashboardCategory;
@@ -53,4 +54,10 @@ public interface DashboardFeatureProvider {
      * Returns an unique string key for the tile.
      */
     String getDashboardKeyForTile(Tile tile);
+
+    /**
+     * Returns a {@link ProgressiveDisclosureMixin} for specified fragment.
+     */
+    ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
+            DashboardFragment fragment);
 }
