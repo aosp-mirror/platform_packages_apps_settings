@@ -2031,10 +2031,8 @@
         <!-- Bluetooth stuff -->
 
         <activity android:name=".bluetooth.BluetoothPairingDialog"
-                  android:label="@string/bluetooth_pairing_request"
                   android:excludeFromRecents="true"
-                  android:windowSoftInputMode="stateVisible|adjustResize"
-                  android:theme="@*android:style/Theme.DeviceDefault.Light.Dialog.Alert">
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar">
             <intent-filter android:priority="1">
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
