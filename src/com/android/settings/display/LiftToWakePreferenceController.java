@@ -19,7 +19,6 @@ import android.hardware.SensorManager;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
 
@@ -41,7 +40,7 @@ public class LiftToWakePreferenceController extends PreferenceController impleme
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_LIFT_TO_WAKE;
     }
 
@@ -58,13 +57,8 @@ public class LiftToWakePreferenceController extends PreferenceController impleme
     }
 
     @Override
-    public void updateState(PreferenceScreen screen) {
-        final SwitchPreference pref = (SwitchPreference) screen.findPreference(KEY_LIFT_TO_WAKE);
-        // Update lift-to-wake if it is available.
-        if (pref != null) {
-            int value =
-                    Settings.Secure.getInt(mContext.getContentResolver(), WAKE_GESTURE_ENABLED, 0);
-            pref.setChecked(value != 0);
-        }
+    public void updateState(Preference preference) {
+        int value = Settings.Secure.getInt(mContext.getContentResolver(), WAKE_GESTURE_ENABLED, 0);
+        ((SwitchPreference) preference).setChecked(value != 0);
     }
 }

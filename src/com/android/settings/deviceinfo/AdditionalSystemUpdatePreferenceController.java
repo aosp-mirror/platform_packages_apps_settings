@@ -40,7 +40,7 @@ public class AdditionalSystemUpdatePreferenceController extends PreferenceContro
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_UPDATE_SETTING;
     }
 }

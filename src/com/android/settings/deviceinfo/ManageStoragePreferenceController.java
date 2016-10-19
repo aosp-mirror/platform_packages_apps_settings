@@ -33,7 +33,7 @@ public class ManageStoragePreferenceController extends PreferenceController {
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_MANAGE_STORAGE;
     }
 

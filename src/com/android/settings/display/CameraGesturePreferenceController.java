@@ -18,7 +18,6 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
 
@@ -34,7 +33,7 @@ public class CameraGesturePreferenceController extends PreferenceController impl
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_CAMERA_GESTURE;
     }
 
@@ -44,14 +43,10 @@ public class CameraGesturePreferenceController extends PreferenceController impl
     }
 
     @Override
-    public void updateState(PreferenceScreen screen) {
-        final SwitchPreference preference =
-                (SwitchPreference) screen.findPreference(KEY_CAMERA_GESTURE);
-        if (preference != null) {
-            int value = Settings.Secure.getInt(mContext.getContentResolver(),
-                    CAMERA_GESTURE_DISABLED, 0);
-            preference.setChecked(value == 0);
-        }
+    public void updateState(Preference preference) {
+        int value = Settings.Secure.getInt(mContext.getContentResolver(),
+                CAMERA_GESTURE_DISABLED, 0);
+        ((SwitchPreference) preference).setChecked(value == 0);
     }
 
     @Override

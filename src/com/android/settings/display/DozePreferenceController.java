@@ -19,7 +19,6 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceController;
@@ -42,7 +41,7 @@ public class DozePreferenceController extends PreferenceController implements
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_DOZE;
     }
 
@@ -55,13 +54,9 @@ public class DozePreferenceController extends PreferenceController implements
     }
 
     @Override
-    public void updateState(PreferenceScreen screen) {
-        final SwitchPreference preference = (SwitchPreference) screen.findPreference(KEY_DOZE);
-        // Update doze if it is available.
-        if (preference != null) {
-            int value = Settings.Secure.getInt(mContext.getContentResolver(), DOZE_ENABLED, 1);
-            preference.setChecked(value != 0);
-        }
+    public void updateState(Preference preference) {
+        int value = Settings.Secure.getInt(mContext.getContentResolver(), DOZE_ENABLED, 1);
+        ((SwitchPreference) preference).setChecked(value != 0);
     }
 
     @Override

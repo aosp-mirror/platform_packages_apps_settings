@@ -50,7 +50,8 @@ public abstract class PreferenceController {
     /**
      * Updates the current status of preference (summary, switch state, etc)
      */
-    public void updateState(PreferenceScreen screen) {
+    public void updateState(Preference preference) {
+
     }
 
     /**
@@ -73,6 +74,11 @@ public abstract class PreferenceController {
     public abstract boolean handlePreferenceTreeClick(Preference preference);
 
     /**
+     * Returns the key for this preference.
+     */
+    public abstract String getPreferenceKey();
+
+    /**
      * Removes preference from screen.
      */
     protected final void removePreference(PreferenceScreen screen, String key) {
@@ -86,10 +92,4 @@ public abstract class PreferenceController {
      * Returns true if preference is available (should be displayed)
      */
     protected abstract boolean isAvailable();
-
-    /**
-     * Returns the key for this preference.
-     */
-    protected abstract String getPreferenceKey();
-
 }

@@ -17,7 +17,6 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
 
@@ -31,7 +30,7 @@ public class TapToWakePreferenceController extends PreferenceController implemen
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_TAP_TO_WAKE;
     }
 
@@ -47,14 +46,10 @@ public class TapToWakePreferenceController extends PreferenceController implemen
     }
 
     @Override
-    public void updateState(PreferenceScreen screen) {
-        final SwitchPreference preference =
-                (SwitchPreference) screen.findPreference(KEY_TAP_TO_WAKE);
-        if (preference != null) {
-            int value = Settings.Secure.getInt(
-                    mContext.getContentResolver(), Settings.Secure.DOUBLE_TAP_TO_WAKE, 0);
-            preference.setChecked(value != 0);
-        }
+    public void updateState(Preference preference) {
+        int value = Settings.Secure.getInt(
+                mContext.getContentResolver(), Settings.Secure.DOUBLE_TAP_TO_WAKE, 0);
+        ((SwitchPreference) preference).setChecked(value != 0);
     }
 
     @Override

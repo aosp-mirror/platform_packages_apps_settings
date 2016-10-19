@@ -17,7 +17,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsProto;
 import com.android.internal.view.RotationPolicy;
@@ -38,14 +37,13 @@ public class AutoRotatePreferenceController extends PreferenceController impleme
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_AUTO_ROTATE;
     }
 
     @Override
-    public void updateState(PreferenceScreen screen) {
-        final DropDownPreference rotatePreference =
-                (DropDownPreference) screen.findPreference(KEY_AUTO_ROTATE);
+    public void updateState(Preference preference) {
+        final DropDownPreference rotatePreference = (DropDownPreference) preference;
         final int rotateLockedResourceId;
         // The following block sets the string used when rotation is locked.
         // If the device locks specifically to portrait or landscape (rather than current
@@ -68,7 +66,6 @@ public class AutoRotatePreferenceController extends PreferenceController impleme
         rotatePreference.setValueIndex(RotationPolicy.isRotationLocked(mContext) ?
                 1 : 0);
     }
-
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {

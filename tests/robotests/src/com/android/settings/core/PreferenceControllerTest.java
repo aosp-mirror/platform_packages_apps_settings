@@ -107,7 +107,7 @@ public class PreferenceControllerTest {
         }
 
         @Override
-        protected String getPreferenceKey() {
+        public String getPreferenceKey() {
             return KEY_PREF;
         }
     }

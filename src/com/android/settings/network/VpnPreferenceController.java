@@ -65,7 +65,7 @@ public class VpnPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_VPN_SETTINGS;
     }
 }

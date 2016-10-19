@@ -120,7 +120,7 @@ public class MobilePlanPreferenceController extends PreferenceController impleme
         return isPrefAllowedForUser && isPrefAllowedOnDevice;
     }
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_MANAGE_MOBILE_PLAN;
     }
 

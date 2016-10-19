@@ -16,7 +16,6 @@ package com.android.settings.display;
 import android.content.Context;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
@@ -38,13 +37,13 @@ public class WallpaperPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_WALLPAPER;
     }
 
     @Override
-    public void updateState(PreferenceScreen screen) {
-        disablePreferenceIfManaged(screen);
+    public void updateState(Preference preference) {
+        disablePreferenceIfManaged((RestrictedPreference) preference);
     }
 
     @Override
@@ -52,9 +51,7 @@ public class WallpaperPreferenceController extends PreferenceController {
         return false;
     }
 
-    private void disablePreferenceIfManaged(PreferenceScreen screen) {
-        final RestrictedPreference pref =
-                (RestrictedPreference) screen.findPreference(KEY_WALLPAPER);
+    private void disablePreferenceIfManaged(RestrictedPreference pref) {
         final String restriction = DISALLOW_SET_WALLPAPER;
         if (pref != null) {
             pref.setDisabledByAdmin(null);

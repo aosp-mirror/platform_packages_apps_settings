@@ -42,8 +42,8 @@ public abstract class ObservablePreferenceFragment extends PreferenceFragment {
     @CallSuper
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mLifecycle.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
     }
 
     @CallSuper

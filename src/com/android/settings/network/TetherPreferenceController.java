@@ -83,7 +83,7 @@ public class TetherPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_TETHER_SETTINGS;
     }
 }

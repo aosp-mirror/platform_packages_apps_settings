@@ -18,7 +18,6 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -48,7 +47,7 @@ public class TimeoutPreferenceController extends PreferenceController implements
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_SCREEN_TIMEOUT;
     }
 
@@ -58,15 +57,11 @@ public class TimeoutPreferenceController extends PreferenceController implements
     }
 
     @Override
-    public void updateState(PreferenceScreen screen) {
-        final TimeoutListPreference preference =
-                (TimeoutListPreference) screen.findPreference(KEY_SCREEN_TIMEOUT);
-        if (preference == null) {
-            return;
-        }
+    public void updateState(Preference preference) {
+        final TimeoutListPreference timeoutListPreference = (TimeoutListPreference) preference;
         final long currentTimeout = Settings.System.getLong(mContext.getContentResolver(),
                 SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
-        preference.setValue(String.valueOf(currentTimeout));
+        timeoutListPreference.setValue(String.valueOf(currentTimeout));
         final DevicePolicyManager dpm = (DevicePolicyManager) mContext.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
         if (dpm != null) {
@@ -74,9 +69,9 @@ public class TimeoutPreferenceController extends PreferenceController implements
                     RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(mContext);
             final long maxTimeout =
                     dpm.getMaximumTimeToLockForUserAndProfiles(UserHandle.myUserId());
-            preference.removeUnusableTimeouts(maxTimeout, admin);
+            timeoutListPreference.removeUnusableTimeouts(maxTimeout, admin);
         }
-        updateTimeoutPreferenceDescription(preference, currentTimeout);
+        updateTimeoutPreferenceDescription(timeoutListPreference, currentTimeout);
     }
 
     @Override

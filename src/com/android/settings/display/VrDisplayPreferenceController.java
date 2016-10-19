@@ -19,7 +19,6 @@ import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -42,18 +41,13 @@ public class VrDisplayPreferenceController extends PreferenceController implemen
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_VR_DISPLAY_PREF;
     }
 
     @Override
-    public void updateState(PreferenceScreen screen) {
-        final DropDownPreference pref =
-                (DropDownPreference) screen.findPreference(KEY_VR_DISPLAY_PREF);
-        if (pref == null) {
-            Log.d(TAG, "Could not find VR display preference.");
-            return;
-        }
+    public void updateState(Preference preference) {
+        final DropDownPreference pref = (DropDownPreference) preference;
         pref.setEntries(new CharSequence[]{
                 mContext.getString(R.string.display_vr_pref_low_persistence),
                 mContext.getString(R.string.display_vr_pref_off),

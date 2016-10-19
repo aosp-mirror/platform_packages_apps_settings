@@ -92,7 +92,7 @@ public class AirplaneModePreferenceController extends PreferenceController
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_TOGGLE_AIRPLANE;
     }
 

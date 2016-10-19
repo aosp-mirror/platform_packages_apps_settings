@@ -15,7 +15,6 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.DreamSettings;
 import com.android.settings.core.PreferenceController;
@@ -35,7 +34,7 @@ public class ScreenSaverPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected String getPreferenceKey() {
+    public String getPreferenceKey() {
         return KEY_SCREEN_SAVER;
     }
 
@@ -45,11 +44,7 @@ public class ScreenSaverPreferenceController extends PreferenceController {
     }
 
     @Override
-    public void updateState(PreferenceScreen screen) {
-        final Preference preference = screen.findPreference(KEY_SCREEN_SAVER);
-        if (preference != null) {
-            preference.setSummary(
-                    DreamSettings.getSummaryTextWithDreamName(mContext));
-        }
+    public void updateState(Preference preference) {
+        preference.setSummary(DreamSettings.getSummaryTextWithDreamName(mContext));
     }
 }

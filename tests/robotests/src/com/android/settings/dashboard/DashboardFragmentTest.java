@@ -69,7 +69,7 @@ public class DashboardFragmentTest {
         mDashboardCategory.tiles = new ArrayList<>();
         mDashboardCategory.tiles.add(new Tile());
         mTestFragment = new TestFragment(ShadowApplication.getInstance().getApplicationContext());
-        mTestFragment.onAttach(mContext);
+        mTestFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
         when(mFakeFeatureFactory.dashboardFeatureProvider.getTilesForCategory(anyString()))
                 .thenReturn(mDashboardCategory);
     }
@@ -126,7 +126,7 @@ public class DashboardFragmentTest {
         }
 
         @Override
-        protected String getPreferenceKey() {
+        public String getPreferenceKey() {
             return null;
         }
 
