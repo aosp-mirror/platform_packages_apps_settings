@@ -55,8 +55,9 @@
         </FrameLayout>
 
         <include layout="@layout/fingerprint_enroll_enrolling_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/fingerprint_progress_bar_max_size"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/fingerprint_enrolling_content_margin_top"/>
 

@@ -17,23 +17,27 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape
-            android:innerRadius="?attr/fingerprint_ring_radius"
+            android:innerRadiusRatio="2.2"
             android:shape="ring"
-            android:thickness="@dimen/fingerprint_ring_thickness"
-            android:useLevel="false">
-            <solid android:color="@color/fingerprint_progress_ring_bg" />
+            android:thickness="@dimen/ring_progress_bar_thickness"
+            android:useLevel="false"
+            android:tint="?android:colorControlNormal">
+            <solid android:color="@color/white_disabled" />
         </shape>
     </item>
     <item android:id="@android:id/progress">
-        <shape
-            android:innerRadius="?attr/fingerprint_ring_radius"
-            android:shape="ring"
-            android:thickness="@dimen/fingerprint_ring_thickness">
-            <gradient
-                android:startColor="@color/fingerprint_progress_ring"
-                android:endColor="@color/fingerprint_progress_ring"
-                android:angle="0"
-            />
-        </shape>
+        <rotate
+            android:fromDegrees="270"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:toDegrees="270">
+            <shape
+                android:innerRadiusRatio="2.2"
+                android:shape="ring"
+                android:thickness="@dimen/ring_progress_bar_thickness"
+                android:tint="?android:attr/colorControlActivated">
+                <solid android:color="@android:color/white" />
+            </shape>
+        </rotate>
     </item>
 </layer-list>

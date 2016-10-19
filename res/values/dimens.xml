@@ -67,6 +67,7 @@
 
     <dimen name="captioning_preview_height">200dp</dimen>
 
+    <dimen name="ring_progress_bar_thickness">4dp</dimen>
     <dimen name="settings_side_margin">0dip</dimen>
 
     <!-- Weight of the left pane in a multi-pane preference layout. -->
@@ -221,8 +222,6 @@
     <dimen name="redaction_vertical_margins">8dp</dimen>
 
     <!-- Fingerprint -->
-    <dimen name="fingerprint_ring_radius">92dip</dimen>
-    <dimen name="fingerprint_ring_thickness">4dip</dimen>
     <dimen name="fingerprint_dot_radius">8dp</dimen>
     <dimen name="fingerprint_pulse_radius">50dp</dimen>
     <item name="fingerprint_sensor_location_fraction_x" type="fraction">50%</item>
@@ -233,14 +232,12 @@
     <dimen name="fingerprint_error_text_appear_distance">16dp</dimen>
     <dimen name="fingerprint_error_text_disappear_distance">-8dp</dimen>
     <dimen name="fingerprint_animation_size">88dp</dimen>
-    <dimen name="fingerprint_progress_bar_size">192dp</dimen>
+    <dimen name="fingerprint_progress_bar_max_size">220dp</dimen>
+    <dimen name="fingerprint_progress_bar_min_size">120dp</dimen>
     <dimen name="fingerprint_enrolling_content_margin_top">36dp</dimen>
     <dimen name="fingerprint_in_app_indicator_size">124dp</dimen>
     <dimen name="fingerprint_in_app_indicator_min_size">124dp</dimen>
     <dimen name="fingerprint_in_app_indicator_max_size">264dp</dimen>
-
-    <dimen name="setup_fingerprint_ring_radius">80dip</dimen>
-    <dimen name="setup_fingerprint_progress_bar_size">168dp</dimen>
 
     <dimen name="confirm_credentials_security_method_margin">48dp</dimen>
     <dimen name="confirm_credentials_layout_width">@dimen/match_parent</dimen>

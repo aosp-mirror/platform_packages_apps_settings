@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="0dp"
-                android:src="@drawable/ic_lock" />
+                android:src="@drawable/ic_fingerprint_header" />
 
             <TextView
                 android:id="@+id/suw_layout_title"
@@ -97,8 +97,8 @@
             android:layout_height="match_parent">
 
             <include layout="@layout/fingerprint_enroll_enrolling_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"/>
 
             <TextView

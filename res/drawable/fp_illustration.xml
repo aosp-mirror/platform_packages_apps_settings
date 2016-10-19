@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2015 The Android Open Source Project
+  ~ Copyright (C) 2016 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,11 +15,14 @@
   ~ limitations under the License
   -->
 
-<com.android.settings.widget.RingProgressBar
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fingerprint_progress_bar"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/fp_illustration"
-    android:minHeight="@dimen/fingerprint_progress_bar_min_size"
-    android:progress="0" />
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fingerprint_background"
+        android:drawable="@drawable/fp_illustration_enrollment" />
+
+    <item
+        android:id="@+id/fingerprint_animation"
+        android:drawable="@drawable/enrollment_fingerprint_isolated_animation" />
+
+</layer-list>

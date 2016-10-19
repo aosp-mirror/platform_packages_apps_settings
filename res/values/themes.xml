@@ -16,8 +16,6 @@
 
 <resources>
     <attr name="fingerprint_layout_theme" format="reference" />
-    <attr name="fingerprint_progress_bar_size" format="reference|dimension" />
-    <attr name="fingerprint_ring_radius" format="reference|dimension" />
     <attr name="ic_menu_moreoverflow" format="reference" />
     <attr name="ic_wps" format="reference" />
     <attr name="setup_divider_color" format="reference" />
@@ -38,8 +36,6 @@
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
-        <item name="fingerprint_progress_bar_size">@dimen/setup_fingerprint_progress_bar_size</item>
-        <item name="fingerprint_ring_radius">@dimen/setup_fingerprint_ring_radius</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="setup_divider_color">@color/setup_divider_color_dark</item>
@@ -62,8 +58,6 @@
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
-        <item name="fingerprint_progress_bar_size">@dimen/setup_fingerprint_progress_bar_size</item>
-        <item name="fingerprint_ring_radius">@dimen/setup_fingerprint_ring_radius</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_light</item>
         <item name="setup_divider_color">@color/setup_divider_color_light</item>
@@ -141,8 +135,6 @@
         <item name="*android:preferenceFragmentPaddingSide">@dimen/settings_side_margin</item>
 
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
-        <item name="fingerprint_progress_bar_size">@dimen/fingerprint_progress_bar_size</item>
-        <item name="fingerprint_ring_radius">@dimen/fingerprint_ring_radius</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_dark</item>
         <item name="ic_wps">@drawable/ic_wps_light</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
