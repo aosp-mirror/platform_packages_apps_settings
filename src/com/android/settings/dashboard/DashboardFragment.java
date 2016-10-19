@@ -120,7 +120,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void notifySummaryChanged(Tile tile) {
         final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
-        final Preference pref = findPreference(key);
+        final Preference pref = mProgressiveDisclosureMixin.findPreference(
+                getPreferenceScreen(), key);
         if (pref == null) {
             Log.d(getLogTag(),
                     String.format("Can't find pref by key %s, skipping update summary %s/%s",
@@ -162,18 +163,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
             mListeningToCategoryChange = false;
         }
-    }
-
-    @Override
-    public Preference findPreference(CharSequence key) {
-        Preference preference = super.findPreference(key);
-        if (preference == null && mProgressiveDisclosureMixin != null) {
-            preference = mProgressiveDisclosureMixin.findPreference(key);
-        }
-        if (preference == null) {
-            Log.d(TAG, "Cannot find preference with key " + key);
-        }
-        return preference;
     }
 
     protected <T extends PreferenceController> T getPreferenceController(Class<T> clazz) {
@@ -221,10 +210,78 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        if (mDashboardFeatureProvider.isEnabled()) {
+            getListView().addItemDecoration(mDividerDecoration);
+        }
+        return view;
+    }
+
     /**
-     * Displays dashboard tiles as preference.
+     * Update state of each preference managed by PreferenceController.
      */
-    private final void displayDashboardTiles(final String TAG, PreferenceScreen screen) {
+    private void updatePreferenceStates() {
+        Collection<PreferenceController> controllers = mPreferenceControllers.values();
+        final PreferenceScreen screen = getPreferenceScreen();
+        for (PreferenceController controller : controllers) {
+            final String key = controller.getPreferenceKey();
+
+            final Preference preference = mProgressiveDisclosureMixin.findPreference(screen, key);
+            if (preference == null) {
+                Log.d(TAG, "Cannot find preference with key " + key);
+                continue;
+            }
+            controller.updateState(preference);
+        }
+    }
+
+    @Override
+    public void setDivider(Drawable divider) {
+        if (mDashboardFeatureProvider.isEnabled()) {
+            // Intercept divider and set it transparent so system divider decoration is disabled.
+            // We will use our decoration to draw divider more intelligently.
+            mDividerDecoration.setDivider(divider);
+            super.setDivider(new ColorDrawable(Color.TRANSPARENT));
+        } else {
+            super.setDivider(divider);
+        }
+    }
+
+    /**
+     * Refresh all preference items, including both static prefs from xml, and dynamic items from
+     * DashboardCategory.
+     */
+    private void refreshAllPreferences(final String TAG) {
+        // First remove old preferences.
+        if (getPreferenceScreen() != null) {
+            // Intentionally do not cache PreferenceScreen because it will be recreated later.
+            getPreferenceScreen().removeAll();
+        }
+
+        // Add resource based tiles.
+        displayResourceTiles();
+
+        refreshDashboardTiles(TAG);
+
+        if (!mProgressiveDisclosureMixin.isCollapsed()
+                && mProgressiveDisclosureMixin.shouldCollapse(getPreferenceScreen())) {
+            mProgressiveDisclosureMixin.collapse(getPreferenceScreen());
+        }
+    }
+
+    /**
+     * Refresh preference items backed by DashboardCategory.
+     */
+    private void refreshDashboardTiles(final String TAG) {
+        final PreferenceScreen screen = getPreferenceScreen();
+        for (String key : mDashboardTilePrefKeys) {
+            // Remove tiles from screen
+            mProgressiveDisclosureMixin.removePreference(screen, key);
+        }
+        mDashboardTilePrefKeys.clear();
         final Context context = getContext();
         final DashboardCategory category =
                 mDashboardFeatureProvider.getTilesForCategory(getCategoryKey());
@@ -275,98 +332,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             // (larger value has higher priority). However pref order defines smaller value has
             // higher priority.
             pref.setOrder(-tile.priority);
-
-            // Either add to screen, or to collapsed list.
-            if (mProgressiveDisclosureMixin.isCollapsed()) {
-                // Already collapsed, add to collapsed list.
-                mProgressiveDisclosureMixin.addToCollapsedList(pref);
-            } else if (mProgressiveDisclosureMixin.shouldCollapse(screen)) {
-                // About to have too many tiles on scree, collapse and add pref to collapsed list.
-                mProgressiveDisclosureMixin.collapse(screen);
-                mProgressiveDisclosureMixin.addToCollapsedList(pref);
-            } else {
-                // No need to collapse, add to screen directly.
-                screen.addPreference(pref);
-            }
+            mProgressiveDisclosureMixin.addPreference(screen, pref);
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        final View view = super.onCreateView(inflater, container, savedInstanceState);
-        if (mDashboardFeatureProvider.isEnabled()) {
-            getListView().addItemDecoration(mDividerDecoration);
-        }
-        return view;
-    }
-
-    /**
-     * Update state of each preference managed by PreferenceController.
-     */
-    private void updatePreferenceStates() {
-        Collection<PreferenceController> controllers = mPreferenceControllers.values();
-        for (PreferenceController controller : controllers) {
-            final String key = controller.getPreferenceKey();
-
-            final Preference preference = findPreference(key);
-            if (preference == null) {
-                Log.d(TAG, "Cannot find preference with key " + key);
-                continue;
-            }
-            controller.updateState(preference);
-        }
-    }
-
-    @Override
-    public void setDivider(Drawable divider) {
-        if (mDashboardFeatureProvider.isEnabled()) {
-            // Intercept divider and set it transparent so system divider decoration is disabled.
-            // We will use our decoration to draw divider more intelligently.
-            mDividerDecoration.setDivider(divider);
-            super.setDivider(new ColorDrawable(Color.TRANSPARENT));
-        } else {
-            super.setDivider(divider);
-        }
-    }
-
-    /**
-     * Refresh all preference items, including both static prefs from xml, and dynamic items from
-     * DashboardCategory.
-     */
-    private void refreshAllPreferences(final String TAG) {
-        // First remove old preferences.
-        if (getPreferenceScreen() != null) {
-            // Intentionally do not cache PreferenceScreen because it will be recreated later.
-            getPreferenceScreen().removeAll();
-        }
-
-        // Add resource based tiles.
-        displayResourceTiles();
-
-        refreshDashboardTiles(TAG);
-
-        if (!mProgressiveDisclosureMixin.isCollapsed()
-                && mProgressiveDisclosureMixin.shouldCollapse(getPreferenceScreen())) {
-            mProgressiveDisclosureMixin.collapse(getPreferenceScreen());
-        }
-    }
-
-    /**
-     * Refresh preference items backed by DashboardCategory.
-     */
-    private void refreshDashboardTiles(final String TAG) {
-        final PreferenceScreen screen = getPreferenceScreen();
-        for (String key : mDashboardTilePrefKeys) {
-            // Remove tiles from screen
-            final Preference pref = screen.findPreference(key);
-            if (pref != null) {
-                screen.removePreference(pref);
-            }
-            // Also remove tile from collapsed set
-            mProgressiveDisclosureMixin.removePreference(screen, key);
-        }
-        mDashboardTilePrefKeys.clear();
-        displayDashboardTiles(TAG, getPreferenceScreen());
     }
 }

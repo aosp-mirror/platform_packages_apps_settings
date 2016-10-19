@@ -18,6 +18,7 @@ package com.android.settings.dashboard;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -77,6 +78,7 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
                 for (Preference pref : collapsedPrefs) {
                     screen.addPreference(pref);
                 }
+                collapsedPrefs.clear();
                 mUserExpanded = true;
             }
         }
@@ -126,19 +128,36 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     }
 
     /**
-     * Add preference to collapsed list.
+     * Adds preference to screen. If there are too many preference on screen, adds it to
+     * collapsed list instead.
      */
-    public void addToCollapsedList(Preference preference) {
-        collapsedPrefs.add(preference);
+    public void addPreference(PreferenceScreen screen, Preference pref) {
+        // Either add to screen, or to collapsed list.
+        if (isCollapsed()) {
+            // Already collapsed, add to collapsed list.
+            addToCollapsedList(pref);
+        } else if (shouldCollapse(screen)) {
+            // About to have too many tiles on scree, collapse and add pref to collapsed list.
+            collapse(screen);
+            addToCollapsedList(pref);
+        } else {
+            // No need to collapse, add to screen directly.
+            screen.addPreference(pref);
+        }
     }
 
     /**
-     * Remove preference from collapsed list. If the preference is not in list, do nothing.
+     * Removes preference. If the preference is on screen, remove it from screen. If the
+     * preference is in collapsed list, remove it from list.
      */
     public void removePreference(PreferenceScreen screen, String key) {
-        if (!isCollapsed()) {
+        // Try removing from screen.
+        final Preference preference = screen.findPreference(key);
+        if (preference != null) {
+            screen.removePreference(preference);
             return;
         }
+        // Didn't find on screen, try removing from collapsed list.
         for (int i = 0; i < collapsedPrefs.size(); i++) {
             final Preference pref = collapsedPrefs.get(i);
             if (TextUtils.equals(key, pref.getKey())) {
@@ -153,16 +172,29 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     }
 
     /**
-     * Find whether a preference is in collapsed list.
+     * Finds preference by key, either from screen or from collapsed list.
      */
-    public Preference findPreference(CharSequence key) {
+    public Preference findPreference(PreferenceScreen screen, CharSequence key) {
+        Preference preference = screen.findPreference(key);
+        if (preference != null) {
+            return preference;
+        }
         for (int i = 0; i < collapsedPrefs.size(); i++) {
             final Preference pref = collapsedPrefs.get(i);
             if (TextUtils.equals(key, pref.getKey())) {
                 return pref;
             }
         }
+        Log.d(TAG, "Cannot find preference with key " + key);
         return null;
+    }
+
+    /**
+     * Add preference to collapsed list.
+     */
+    @VisibleForTesting
+    void addToCollapsedList(Preference preference) {
+        collapsedPrefs.add(preference);
     }
 
 }

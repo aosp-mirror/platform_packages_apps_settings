@@ -38,6 +38,7 @@ import org.robolectric.shadows.ShadowApplication;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -53,6 +54,7 @@ public class ProgressiveDisclosureTest {
     private FakeFeatureFactory mFakeFeatureFactory;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceFragment mPreferenceFragment;
+    private PreferenceScreen mScreen;
     private Context mAppContext;
     private Preference mPreference;
 
@@ -62,6 +64,7 @@ public class ProgressiveDisclosureTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
+        mScreen = mPreferenceFragment.getPreferenceScreen();
         mAppContext = ShadowApplication.getInstance().getApplicationContext();
         mFakeFeatureFactory = (FakeFeatureFactory) FeatureFactory.getFactory(mContext);
         mMixin = new ProgressiveDisclosureMixin(mAppContext, mPreferenceFragment);
@@ -72,57 +75,81 @@ public class ProgressiveDisclosureTest {
 
     @Test
     public void shouldNotCollapse_lessPreferenceThanLimit() {
-        when(mPreferenceFragment.getPreferenceScreen().getPreferenceCount()).thenReturn(5);
+        when(mScreen.getPreferenceCount()).thenReturn(5);
 
         mMixin.setTileLimit(10);
 
-        assertThat(mMixin.shouldCollapse(mPreferenceFragment.getPreferenceScreen())).isFalse();
+        assertThat(mMixin.shouldCollapse(mScreen)).isFalse();
     }
 
     @Test
     public void shouldCollapse_morePreferenceThanLimit() {
         when(mFakeFeatureFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
-        when(mPreferenceFragment.getPreferenceScreen().getPreferenceCount()).thenReturn(5);
+        when(mScreen.getPreferenceCount()).thenReturn(5);
 
-        assertThat(mMixin.shouldCollapse(mPreferenceFragment.getPreferenceScreen())).isTrue();
+        assertThat(mMixin.shouldCollapse(mScreen)).isTrue();
     }
 
     @Test
     public void findPreference_prefInCollapsedList_shouldFindIt() {
+        when(mScreen.findPreference(anyString())).thenReturn(null);
         mMixin.addToCollapsedList(mPreference);
 
-        Preference pref = mMixin.findPreference(mPreference.getKey());
+        Preference pref = mMixin.findPreference(mScreen, mPreference.getKey());
 
         assertThat(pref).isNotNull();
         assertThat(pref).isSameAs(mPreference);
     }
 
     @Test
-    public void findPreference_prefNotInCollapsedList_shouldNotFindIt() {
-        Preference pref = mMixin.findPreference(mPreference.getKey());
+    public void findPreference_prefOnScreen_shouldFindIt() {
+        when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
+
+        Preference pref = mMixin.findPreference(mScreen, mPreference.getKey());
+
+        assertThat(pref).isNotNull();
+        assertThat(pref).isSameAs(mPreference);
+    }
+
+    @Test
+    public void findPreference_prefNotInCollapsedListOrScreen_shouldNotFindIt() {
+        when(mScreen.findPreference(anyString())).thenReturn(null);
+        Preference pref = mMixin.findPreference(mScreen, mPreference.getKey());
 
         assertThat(pref).isNull();
     }
 
     @Test
     public void findPreference_prefRemovedFromCollapsedList_shouldNotFindIt() {
+        when(mScreen.findPreference(anyString())).thenReturn(null);
         mMixin.addToCollapsedList(mPreference);
         mMixin.removePreference(mPreferenceFragment.getPreferenceScreen(), mPreference.getKey());
-        Preference pref = mMixin.findPreference(mPreference.getKey());
+
+        Preference pref = mMixin.findPreference(mScreen, mPreference.getKey());
 
         assertThat(pref).isNull();
     }
 
     @Test
+    public void removePreference_shouldRemoveOnScreenPreference() {
+        when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
+
+        mMixin.removePreference(mScreen, mPreference.getKey());
+
+        verify(mScreen).removePreference(mPreference);
+    }
+
+    @Test
     public void removeLastPreference_shouldRemoveExpandButtonToo() {
+        when(mScreen.findPreference(anyString())).thenReturn(null);
         mMixin.addToCollapsedList(mPreference);
         // Collapsed
         assertThat(mMixin.isCollapsed()).isTrue();
 
-        mMixin.removePreference(mPreferenceFragment.getPreferenceScreen(), mPreference.getKey());
+        mMixin.removePreference(mScreen, mPreference.getKey());
 
         // Removing expand button
-        verify(mPreferenceFragment.getPreferenceScreen()).removePreference(any(Preference.class));
+        verify(mScreen).removePreference(any(Preference.class));
         // No longer collapsed
         assertThat(mMixin.isCollapsed()).isFalse();
     }
