@@ -77,6 +77,11 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     private int mDataUsageTemplate;
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_data_usage;
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
