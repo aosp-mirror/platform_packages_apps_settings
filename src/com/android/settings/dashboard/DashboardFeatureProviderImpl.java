@@ -72,4 +72,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         sb.append(component.getClassName());
         return sb.toString();
     }
+
+    @Override
+    public ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
+            DashboardFragment fragment) {
+        return new ProgressiveDisclosureMixin(context, this, fragment);
+    }
 }
