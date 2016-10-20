@@ -39,6 +39,7 @@ public abstract class InstrumentedFragment extends ObservablePreferenceFragment
     protected final int STORAGE_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 2;
     protected final int NETWORK_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 3;
     protected final int CONNECTED_DEVICE_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 4;
+    protected final int APP_AND_NOTIFICATION_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 5;
 
     public InstrumentedFragment() {
         // Mixin that logs visibility change for activity.

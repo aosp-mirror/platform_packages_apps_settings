@@ -61,6 +61,7 @@ import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountActivity;
 import com.android.settings.accounts.ManagedProfileSettings;
+import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.applications.InstalledAppDetails;
@@ -272,6 +273,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             // New IA
             // Home page
             Settings.NetworkDashboardActivity.class.getName(),
+            Settings.ConnectedDeviceDashboardActivity.class.getName(),
+            Settings.AppAndNotificationDashboardActivity.class.getName(),
             "com.android.settings.Settings.BatteryDashboardAlias",
             "com.android.settings.Settings.DisplayDashboardAlias",
             "com.android.settings.Settings.SoundDashboardAlias",
@@ -281,8 +284,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             // Home page > Network & Internet
             "com.android.settings.Settings.WifiDashboardAlias",
             "com.android.settings.Settings.DataUsageDashboardAlias",
-            // Home page > Connected devices
-            Settings.ConnectedDeviceDashboardActivity.class.getName(),
             // Home page > System
             "com.android.settings.Settings.LanguageAndInputDashboardAlias",
             "com.android.settings.Settings.DateTimeDashboardAlias",
@@ -393,6 +394,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             SystemDashboardFragment.class.getName(),
             NetworkDashboardFragment.class.getName(),
             ConnectedDeviceDashboardFragment.class.getName(),
+            AppAndNotificationDashboardFragment.class.getName(),
     };
 
 
