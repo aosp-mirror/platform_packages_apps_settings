@@ -150,6 +150,10 @@ public final class GesturePreference extends SwitchPreference {
                         playButton.setVisibility(View.VISIBLE);
                     }
                 }
+                if (mMediaPlayer != null && !mMediaPlayer.isPlaying() &&
+                        playButton.getVisibility() != View.VISIBLE) {
+                    playButton.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -172,6 +176,12 @@ public final class GesturePreference extends SwitchPreference {
     void onViewVisible() {
         if (mVideoReady && mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
             mMediaPlayer.seekTo(0);
+        }
+    }
+
+    void onViewInvisible() {
+        if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
+            mMediaPlayer.pause();
         }
     }
 
