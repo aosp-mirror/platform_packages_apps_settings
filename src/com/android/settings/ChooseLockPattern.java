@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
@@ -152,6 +153,9 @@ public class ChooseLockPattern extends SettingsActivity {
         protected List<LockPatternView.Cell> mChosenPattern = null;
         private boolean mHideDrawer = false;
 
+        // ScrollView that contains title and header, only exist in land mode
+        private ScrollView mTitleHeaderScrollView;
+
         /**
          * The patten used during the help screen to show how to draw a pattern.
          */
@@ -237,6 +241,15 @@ public class ChooseLockPattern extends SettingsActivity {
                     mFooterText.setText("");
                     mFooterLeftButton.setEnabled(false);
                     mFooterRightButton.setEnabled(false);
+
+                    if (mTitleHeaderScrollView != null) {
+                        mTitleHeaderScrollView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mTitleHeaderScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                            }
+                        });
+                    }
                 }
          };
 
@@ -414,6 +427,9 @@ public class ChooseLockPattern extends SettingsActivity {
 
             mFooterLeftButton = (TextView) view.findViewById(R.id.footerLeftButton);
             mFooterRightButton = (TextView) view.findViewById(R.id.footerRightButton);
+
+            mTitleHeaderScrollView = (ScrollView) view.findViewById(R.id
+                    .scroll_layout_title_header);
 
             mFooterLeftButton.setOnClickListener(this);
             mFooterRightButton.setOnClickListener(this);
