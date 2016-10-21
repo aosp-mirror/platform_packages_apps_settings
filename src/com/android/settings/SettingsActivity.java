@@ -62,8 +62,8 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountActivity;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
-import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
+import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
@@ -285,6 +285,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             Settings.SupportDashboardActivity.class.getName(),
             // Home page > Apps & Notifications
             "com.android.settings.Settings.ManageApplicationsDashboardAlias",
+            "com.android.settings.Settings.PaymentSettingsDashboardAlias",
             // Home page > Network & Internet
             "com.android.settings.Settings.WifiDashboardAlias",
             "com.android.settings.Settings.DataUsageDashboardAlias",

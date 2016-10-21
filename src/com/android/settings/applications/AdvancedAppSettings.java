@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,10 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +43,7 @@ public class AdvancedAppSettings extends DashboardFragment {
 
     @Override
     protected String getCategoryKey() {
-        return "";
+        return CategoryKey.CATEGORY_APPS_DEFAULT;
     }
 
     @Override
@@ -51,7 +53,9 @@ public class AdvancedAppSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.advanced_apps;
+        return mDashboardFeatureProvider.isEnabled()
+                ? R.xml.app_default_settings
+                : R.xml.advanced_apps;
     }
 
     @Override
@@ -69,8 +73,11 @@ public class AdvancedAppSettings extends DashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.advanced_apps;
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = FeatureFactory.getFactory(context)
+                            .getDashboardFeatureProvider(context).isEnabled()
+                            ? R.xml.app_default_settings
+                            : R.xml.advanced_apps;
                     return Arrays.asList(sir);
                 }
 

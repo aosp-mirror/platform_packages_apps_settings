@@ -245,7 +245,8 @@ public class ManageApplications extends InstrumentedFragment
         }
         if (className.equals(AllApplicationsActivity.class.getName())) {
             mShowSystem = true;
-        } else if (className.equals(NotificationAppListActivity.class.getName())) {
+        } else if (className.equals(NotificationAppListActivity.class.getName())
+                || this instanceof NotificationApps) {
             mListType = LIST_TYPE_NOTIFICATION;
             mNotifBackend = new NotificationBackend();
         } else if (className.equals(StorageUseActivity.class.getName())) {

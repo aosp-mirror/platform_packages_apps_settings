@@ -3387,6 +3387,34 @@
                        android:value="com.android.settings.category.ia.accounts" />
         </activity-alias>
 
+        <activity-alias android:name="AppDefaultDashboardAlias"
+                        android:targetActivity="Settings$AdvancedAppsActivity"
+                        android:label="@string/app_default_dashboard_title"
+                        android:icon="@drawable/ic_settings_applications">
+            <intent-filter android:priority="130">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.apps"/>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.AdvancedAppSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
+        <activity-alias android:name="PaymentSettingsDashboardAlias"
+                        android:targetActivity="Settings$PaymentSettingsActivity">
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.apps.default"/>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.nfc.PaymentSettings"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true"/>
+        </activity-alias>
+
         <!-- End of information architecture host activities -->
 
         <service
