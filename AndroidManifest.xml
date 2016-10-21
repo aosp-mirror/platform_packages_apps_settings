@@ -3069,6 +3069,18 @@
                        android:value="com.android.settings.datausage.DataUsageSummary"/>
         </activity-alias>
 
+        <activity android:name=".Settings$AppAndNotificationDashboardActivity"
+                  android:label="@string/app_and_notification_dashboard_title"
+                  android:icon="@drawable/ic_settings_applications">
+            <intent-filter android:priority="8">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.AppAndNotificationDashboardFragment"/>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage"/>
+        </activity>
+
         <activity-alias android:name="BatteryDashboardAlias"
                         android:targetActivity="Settings$PowerUsageSummaryActivity">
             <intent-filter android:priority="7">
