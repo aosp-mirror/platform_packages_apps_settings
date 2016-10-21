@@ -277,11 +277,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         displayResourceTiles();
 
         refreshDashboardTiles(TAG);
-
-        if (!mProgressiveDisclosureMixin.isCollapsed()
-                && mProgressiveDisclosureMixin.shouldCollapse(getPreferenceScreen())) {
-            mProgressiveDisclosureMixin.collapse(getPreferenceScreen());
-        }
     }
 
     /**

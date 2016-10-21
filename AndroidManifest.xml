@@ -3327,6 +3327,43 @@
                        android:value="com.android.settings.category.ia.device" />
         </activity-alias>
 
+        <activity-alias android:name="ManageApplicationsDashboardAlias"
+                        android:targetActivity="Settings$ManageApplicationsActivity">
+            <intent-filter android:priority="200">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.apps" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.ManageApplications" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
+        <activity-alias android:name="AppNotificationDashboardAlias"
+                        android:targetActivity="Settings$NotificationAppListActivity">
+            <intent-filter android:priority="150">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.apps"/>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.NotificationApps"/>
+        </activity-alias>
+
+        <activity-alias android:name="ConfigureNotificationDashboardAlias"
+                  android:targetActivity="Settings$ConfigureNotificationSettingsActivity">
+            <intent-filter android:priority="120">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.apps"/>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.ConfigureNotificationSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
         <!-- End of information architecture host activities -->
 
         <service
