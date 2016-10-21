@@ -145,6 +145,14 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        for (GesturePreference preference : mPreferences) {
+            preference.onViewInvisible();
+        }
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean enabled = (boolean) newValue;
         String key = preference.getKey();
