@@ -281,6 +281,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             "com.android.settings.Settings.SecurityDashboardAlias",
             Settings.SystemDashboardActivity.class.getName(),
             Settings.SupportDashboardActivity.class.getName(),
+            // Home page > Apps & Notifications
+            "com.android.settings.Settings.ManageApplicationsDashboardAlias",
             // Home page > Network & Internet
             "com.android.settings.Settings.WifiDashboardAlias",
             "com.android.settings.Settings.DataUsageDashboardAlias",
@@ -289,7 +291,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             "com.android.settings.Settings.DateTimeDashboardAlias",
             "com.android.settings.Settings.AccessibilityDashboardAlias",
             "com.android.settings.Settings.AboutDeviceDashboardAlias",
-
     };
 
     private static final String[] ENTRY_FRAGMENTS = {

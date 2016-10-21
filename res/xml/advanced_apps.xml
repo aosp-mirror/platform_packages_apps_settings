@@ -19,10 +19,12 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="applications_settings">
 
-    <PreferenceScreen
+    <Preference
         android:key="manage_perms"
         android:title="@string/app_permissions"
-        settings:keywords="@string/keywords_app_permissions" />
+        settings:keywords="@string/keywords_app_permissions">
+        <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
+    </Preference>
 
     <PreferenceCategory
         android:title="@string/default_apps_title">

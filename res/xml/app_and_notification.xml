@@ -15,6 +15,16 @@
   limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <Preference
+        android:key="manage_perms"
+        android:title="@string/app_permissions"
+        android:order="-130"
+        settings:keywords="@string/keywords_app_permissions">
+        <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
+    </Preference>
 
 </PreferenceScreen>
