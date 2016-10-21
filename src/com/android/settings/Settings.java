@@ -168,6 +168,7 @@ public class Settings extends SettingsActivity {
     public static class ConnectedDeviceDashboardActivity extends SettingsActivity {}
     public static class AppAndNotificationDashboardActivity extends SettingsActivity {}
     public static class StorageDashboardActivity extends SettingsActivity {}
+    public static class UserAndAccountDashboardActivity extends SettingsActivity {}
     public static class SystemDashboardActivity extends SettingsActivity {}
     public static class SupportDashboardActivity extends SettingsActivity {}
 
