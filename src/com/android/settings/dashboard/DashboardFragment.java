@@ -344,11 +344,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             pref.setIcon(tile.icon.loadDrawable(context));
         }
         final Bundle metadata = tile.metaData;
+        String clsName = null;
         if (metadata != null) {
-            String clsName = metadata.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
-            if (!TextUtils.isEmpty(clsName)) {
-                pref.setFragment(clsName);
-            }
+            clsName = metadata.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
+        }
+        if (!TextUtils.isEmpty(clsName)) {
+            pref.setFragment(clsName);
         } else if (tile.intent != null) {
             final Intent intent = new Intent(tile.intent);
             pref.setOnPreferenceClickListener(preference -> {

@@ -61,6 +61,7 @@ import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountActivity;
 import com.android.settings.accounts.ManagedProfileSettings;
+import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.DrawOverlayDetails;
@@ -279,6 +280,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             "com.android.settings.Settings.DisplayDashboardAlias",
             "com.android.settings.Settings.SoundDashboardAlias",
             "com.android.settings.Settings.SecurityDashboardAlias",
+            Settings.UserAndAccountDashboardActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
             Settings.SupportDashboardActivity.class.getName(),
             // Home page > Apps & Notifications
@@ -396,6 +398,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             NetworkDashboardFragment.class.getName(),
             ConnectedDeviceDashboardFragment.class.getName(),
             AppAndNotificationDashboardFragment.class.getName(),
+            UserAndAccountDashboardFragment.class.getName(),
     };
 
 

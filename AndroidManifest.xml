@@ -3364,6 +3364,29 @@
                        android:value="true" />
         </activity-alias>
 
+        <activity android:name=".Settings$UserAndAccountDashboardActivity"
+                  android:label="@string/account_dashboard_title"
+                  android:icon="@drawable/ic_settings_accounts">
+            <intent-filter android:priority="2">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.accounts.UserAndAccountDashboardFragment"/>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage"/>
+        </activity>
+
+        <activity-alias android:name="UserDashboardAlias"
+                        android:targetActivity="Settings$UserSettingsActivity">
+            <intent-filter android:priority="8">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.users.UserSettings" />
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.accounts" />
+        </activity-alias>
+
         <!-- End of information architecture host activities -->
 
         <service

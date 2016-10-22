@@ -16,6 +16,7 @@
 package com.android.settings.dashboard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -139,6 +140,21 @@ public class DashboardFragmentTest {
         assertThat(preference.getIcon()).isNotNull();
         assertThat(preference.getFragment())
                 .isEqualTo(tile.metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS));
+        assertThat(preference.getOrder()).isEqualTo(-tile.priority);
+    }
+
+    @Test
+    public void bindPreference_noFragmentMetadata_shouldBindIntent() {
+        final Preference preference = new Preference(
+                ShadowApplication.getInstance().getApplicationContext());
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.priority = 10;
+        tile.intent = new Intent();
+        mTestFragment.bindPreferenceToTile(mContext, preference, tile, "123");
+
+        assertThat(preference.getFragment()).isNull();
+        assertThat(preference.getIntent()).isNotNull();
         assertThat(preference.getOrder()).isEqualTo(-tile.priority);
     }
 
