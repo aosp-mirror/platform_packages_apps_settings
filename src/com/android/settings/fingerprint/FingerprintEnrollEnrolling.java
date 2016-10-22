@@ -23,13 +23,12 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -37,7 +36,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -75,7 +73,6 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     private static final int ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN = 3;
 
     private ProgressBar mProgressBar;
-    private ImageView mFingerprintAnimator;
     private ObjectAnimator mProgressAnim;
     private TextView mStartMessage;
     private TextView mRepeatMessage;
@@ -87,6 +84,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     private FingerprintEnrollSidecar mSidecar;
     private boolean mAnimationCancelled;
     private AnimatedVectorDrawable mIconAnimationDrawable;
+    private Drawable mIconBackgroundDrawable;
     private int mIndicatorBackgroundRestingColor;
     private int mIndicatorBackgroundActivatedColor;
     private boolean mRestoring;
@@ -100,8 +98,11 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         mRepeatMessage = (TextView) findViewById(R.id.repeat_message);
         mErrorText = (TextView) findViewById(R.id.error_text);
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
-        mFingerprintAnimator = (ImageView) findViewById(R.id.fingerprint_animator);
-        mIconAnimationDrawable = (AnimatedVectorDrawable) mFingerprintAnimator.getDrawable();
+        final LayerDrawable fingerprintDrawable = (LayerDrawable) mProgressBar.getBackground();
+        mIconAnimationDrawable = (AnimatedVectorDrawable)
+                fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_animation);
+        mIconBackgroundDrawable =
+                fingerprintDrawable.findDrawableByLayerId(R.id.fingerprint_background);
         mIconAnimationDrawable.registerAnimationCallback(mIconAnimationCallback);
         mFastOutSlowInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_slow_in);
@@ -109,7 +110,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                 this, android.R.interpolator.linear_out_slow_in);
         mFastOutLinearInInterpolator = AnimationUtils.loadInterpolator(
                 this, android.R.interpolator.fast_out_linear_in);
-        mFingerprintAnimator.setOnTouchListener(new View.OnTouchListener() {
+        mProgressBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
@@ -117,12 +118,12 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                     if (mIconTouchCount == ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN) {
                         showIconTouchDialog();
                     } else {
-                        mFingerprintAnimator.postDelayed(mShowDialogRunnable,
+                        mProgressBar.postDelayed(mShowDialogRunnable,
                                 ICON_TOUCH_DURATION_UNTIL_DIALOG_SHOWN);
                     }
                 } else if (event.getActionMasked() == MotionEvent.ACTION_CANCEL
                         || event.getActionMasked() == MotionEvent.ACTION_UP) {
-                    mFingerprintAnimator.removeCallbacks(mShowDialogRunnable);
+                    mProgressBar.removeCallbacks(mShowDialogRunnable);
                 }
                 return true;
             }
@@ -131,6 +132,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                 = getColor(R.color.fingerprint_indicator_background_resting);
         mIndicatorBackgroundActivatedColor
                 = getColor(R.color.fingerprint_indicator_background_activated);
+        mIconBackgroundDrawable.setTint(mIndicatorBackgroundRestingColor);
         mRestoring = savedInstanceState != null;
     }
 
@@ -213,8 +215,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                 new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                mFingerprintAnimator.setBackgroundTintList(ColorStateList.valueOf(
-                        (Integer) animation.getAnimatedValue()));
+                mIconBackgroundDrawable.setTint((Integer) animation.getAnimatedValue());
             }
         };
         anim.addUpdateListener(listener);
@@ -400,7 +401,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             }
 
             // Start animation after it has ended.
-            mFingerprintAnimator.post(new Runnable() {
+            mProgressBar.post(new Runnable() {
                 @Override
                 public void run() {
                     startIconAnimation();

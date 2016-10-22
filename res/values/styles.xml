@@ -445,4 +445,11 @@
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
+    <style name="RingProgressBarStyle" parent="android:style/Widget.Material.ProgressBar.Horizontal">
+        <item name="android:indeterminate">false</item>
+        <item name="android:max">10000</item>
+        <item name="android:mirrorForRtl">false</item>
+        <item name="android:progressDrawable">@drawable/ring_progress</item>
+    </style>
+
 </resources>
