@@ -154,7 +154,7 @@ public class DashboardFragmentTest {
         mTestFragment.bindPreferenceToTile(mContext, preference, tile, "123");
 
         assertThat(preference.getFragment()).isNull();
-        assertThat(preference.getIntent()).isNotNull();
+        assertThat(preference.getOnPreferenceClickListener()).isNotNull();
         assertThat(preference.getOrder()).isEqualTo(-tile.priority);
     }
 

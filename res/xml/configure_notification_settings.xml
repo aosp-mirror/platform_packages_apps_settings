@@ -30,4 +30,15 @@
             android:title="@string/lock_screen_notifications_title"
             android:summary="%s" />
 
+    <PreferenceCategory
+        android:key="lock_screen_notifications_profile_header"
+        android:title="@string/profile_section_header" >
+
+        <com.android.settings.notification.RestrictedDropDownPreference
+            android:key="lock_screen_notifications_profile"
+            android:title="@string/lock_screen_notifications_title"
+            android:summary="%s" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
