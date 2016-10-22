@@ -599,7 +599,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Options…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Options avancées"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Paramètres Bluetooth avancés"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Si Bluetooth activé, appareil peut communiquer avec autres appareils Bluetooth à proximité."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Si la fonctionnalité Bluetooth est activée, l\'appareil peut communiquer avec les autres appareils Bluetooth à proximité"</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Pour améliorer la précision de la localisation, les applications et les services système peuvent toujours détecter les appareils Bluetooth. Vous pouvez modifier ce paramètre dans les <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>paramètres de recherche<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Se connecter à…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sera déconnecté de l\'audio du support."</string>
@@ -2280,20 +2280,13 @@
     <string name="vpn_disconnect" msgid="7426570492642111171">"Déconnecter"</string>
     <string name="vpn_version" msgid="1939804054179766249">"Version <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="2232239391189465752">"Oublier le profil RPV"</string>
-    <!-- no translation found for vpn_replace_vpn_title (2963898301277610248) -->
-    <skip />
-    <!-- no translation found for vpn_set_vpn_title (4009987321156037267) -->
-    <skip />
-    <!-- no translation found for vpn_first_always_on_vpn_message (3025322109743675467) -->
-    <skip />
-    <!-- no translation found for vpn_replace_always_on_vpn_enable_message (2577928591361606641) -->
-    <skip />
-    <!-- no translation found for vpn_replace_always_on_vpn_disable_message (3011818750025879902) -->
-    <skip />
-    <!-- no translation found for vpn_replace_vpn_message (5611635724578812860) -->
-    <skip />
-    <!-- no translation found for vpn_turn_on (2363136869284273872) -->
-    <skip />
+    <string name="vpn_replace_vpn_title" msgid="2963898301277610248">"Remplacer le RPV existant?"</string>
+    <string name="vpn_set_vpn_title" msgid="4009987321156037267">"Configurer le RPV permanent?"</string>
+    <string name="vpn_first_always_on_vpn_message" msgid="3025322109743675467">"Si vous activez ce paramètre, vous ne disposerez d\'aucune connexion Internet jusqu\'à ce que le RPV parvienne à se connecter"</string>
+    <string name="vpn_replace_always_on_vpn_enable_message" msgid="2577928591361606641">"Votre RPV existant sera remplacé, et vous ne disposerez d\'aucune connexion Internet jusqu\'à ce que le RPV parvienne à se connecter"</string>
+    <string name="vpn_replace_always_on_vpn_disable_message" msgid="3011818750025879902">"Vous êtes déjà connecté à un RPV permanent. Si vous vous connectez à un autre RPV, le RPV actuel sera remplacé et le mode permanent sera désactivé."</string>
+    <string name="vpn_replace_vpn_message" msgid="5611635724578812860">"Vous êtes déjà connecté à un RPV. Si vous vous connectez à un RPV différent, votre RPV actuel sera remplacé."</string>
+    <string name="vpn_turn_on" msgid="2363136869284273872">"Activer"</string>
     <string name="vpn_cant_connect_title" msgid="4517706987875907511">"<xliff:g id="VPN_NAME">%1$s</xliff:g> n\'est pas en mesure de se connecter"</string>
     <string name="vpn_cant_connect_message" msgid="2593197919352621279">"Cette application ne prend pas en charge le RPV permanent."</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
@@ -2536,8 +2529,9 @@
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Réseau et Internet"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Appareils connectés"</string>
-    <!-- no translation found for system_dashboard_summary (6112602136713843779) -->
+    <!-- no translation found for app_and_notification_dashboard_title (7838365599185397539) -->
     <skip />
+    <string name="system_dashboard_summary" msgid="6112602136713843779">"Langue : <xliff:g id="LANGUAGE">%1$s</xliff:g>"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Paramètres"</string>
     <string name="search_menu" msgid="6283419262313758339">"Paramètres de recherche"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Paramètres de recherche"</string>
@@ -3045,8 +3039,6 @@
     <string name="screen_zoom_conversation_timestamp_2" msgid="7107225702890747588">"Mardi à 18 h 01"</string>
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"Mardi à 18 h 02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"Mardi à 18 h 03"</string>
-    <string name="see_all" msgid="8883901630052886984">"Tout afficher"</string>
-    <string name="see_less" msgid="1250265310929558370">"En voir moins"</string>
     <string name="disconnected" msgid="5787956818111197212">"Déconnecté"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> de données utilisées"</string>
     <plurals name="notification_summary" formatted="false" msgid="4019451362120557382">
