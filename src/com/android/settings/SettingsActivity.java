@@ -138,6 +138,8 @@ import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.qstile.DevelopmentTiles;
 import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search.Index;
+import com.android.settings.search2.SearchFeatureProvider;
+import com.android.settings.search2.SearchFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TextToSpeechSettings;
@@ -479,6 +481,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     private SearchResultsSummary mSearchResultsFragment;
     private String mSearchQuery;
 
+    private SearchFeatureProvider mSearchFeatureProvider;
+
     // Categories
     private ArrayList<DashboardCategory> mCategories = new ArrayList<DashboardCategory>();
 
@@ -528,9 +532,14 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
 
         MenuInflater inflater = getMenuInflater();
+        if (mSearchFeatureProvider.isEnabled()) {
+            mSearchFeatureProvider.setUpSearchMenu(menu, this);
+            return true;
+        }
         inflater.inflate(R.menu.options_menu, menu);
 
-        // Cache the search query (can be overriden by the OnQueryTextListener)
+
+        // Cache the search query (can be overridden by the OnQueryTextListener)
         final String query = mSearchQuery;
 
         mSearchMenuItem = menu.findItem(R.id.search);
@@ -553,7 +562,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             mSearchMenuItem.expandActionView();
         }
         mSearchView.setQuery(query, true /* submit */);
-
         return true;
     }
 
@@ -596,8 +604,12 @@ public class SettingsActivity extends SettingsDrawerActivity
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         long startTime = System.currentTimeMillis();
-        mDashboardFeatureProvider =
-                FeatureFactory.getFactory(this).getDashboardFeatureProvider(this);
+
+        final FeatureFactory factory = FeatureFactory.getFactory(this);
+
+        mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
+        mSearchFeatureProvider = factory.getSearchFeatureProvider(this);
+
         // Should happen before any call to getIntent()
         getMetaData();
 
@@ -1274,19 +1286,24 @@ public class SettingsActivity extends SettingsDrawerActivity
         return super.shouldUpRecreateTask(new Intent(this, SettingsActivity.class));
     }
 
+    @Deprecated
     @Override
     public boolean onQueryTextSubmit(String query) {
-        switchToSearchResultsFragmentIfNeeded();
+        if (mSearchFeatureProvider.isEnabled()) {
+            return false;
+        }
         mSearchQuery = query;
+        switchToSearchResultsFragmentIfNeeded();
         return mSearchResultsFragment.onQueryTextSubmit(query);
     }
 
+    @Deprecated
     @Override
     public boolean onQueryTextChange(String newText) {
-        mSearchQuery = newText;
-        if (mSearchResultsFragment == null) {
+        if (mSearchFeatureProvider.isEnabled() || mSearchResultsFragment == null) {
             return false;
         }
+        mSearchQuery = newText;
         return mSearchResultsFragment.onQueryTextChange(newText);
     }
 
@@ -1330,6 +1347,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
     }
 
+    @Deprecated
     private void switchToSearchResultsFragmentIfNeeded() {
         if (mSearchResultsFragment != null) {
             return;
@@ -1347,10 +1365,12 @@ public class SettingsActivity extends SettingsDrawerActivity
         mSearchMenuItemExpanded = true;
     }
 
+    @Deprecated
     public void needToRevertToInitialFragment() {
         mNeedToRevertToInitialFragment = true;
     }
 
+    @Deprecated
     private void revertToInitialFragment() {
         mNeedToRevertToInitialFragment = false;
         mSearchResultsFragment = null;

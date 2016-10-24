@@ -27,6 +27,7 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
+import com.android.settings.search2.SearchFeatureProvider;
 
 /**
  * Abstract class for creating feature controllers. Allows OEM implementations to define their own
@@ -79,6 +80,8 @@ public abstract class FeatureFactory {
 
     public abstract EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(
             Context context);
+
+    public abstract SearchFeatureProvider getSearchFeatureProvider(Context context);
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

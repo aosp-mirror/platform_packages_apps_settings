@@ -25,6 +25,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
+import com.android.settings.search2.SearchFeatureProvider;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -43,6 +44,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final LocaleFeatureProvider localeFeatureProvider;
     public final ApplicationFeatureProvider applicationFeatureProvider;
     public final EnterprisePrivacyFeatureProvider enterprisePrivacyFeatureProvider;
+    public final SearchFeatureProvider searchFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -72,6 +74,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         localeFeatureProvider = mock(LocaleFeatureProvider.class);
         applicationFeatureProvider = mock(ApplicationFeatureProvider.class);
         enterprisePrivacyFeatureProvider = mock(EnterprisePrivacyFeatureProvider.class);
+        searchFeatureProvider = mock(SearchFeatureProvider.class);
     }
 
     @Override
@@ -107,5 +110,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(Context context) {
         return enterprisePrivacyFeatureProvider;
+    }
+
+    @Override
+    public SearchFeatureProvider getSearchFeatureProvider(Context context) {
+        return searchFeatureProvider;
     }
 }

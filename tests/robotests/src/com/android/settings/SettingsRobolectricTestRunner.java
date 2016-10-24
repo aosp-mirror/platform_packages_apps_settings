@@ -64,6 +64,10 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
                         getPackageName(),
                         Fs.fileFromPath("./frameworks/base/packages/SettingsLib/res"),
                         null));
+                paths.add(new ResourcePath(
+                        getPackageName(),
+                        Fs.fileFromPath("./frameworks/base/core/res/res"),
+                        null));
                 return paths;
             }
         };
