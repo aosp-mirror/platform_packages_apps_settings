@@ -34,9 +34,9 @@ import android.view.ViewGroup;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +53,11 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     private static final String PREF_KEY_DOUBLE_TAP_POWER = "gesture_double_tap_power";
     private static final String PREF_KEY_DOUBLE_TWIST = "gesture_double_twist";
     private static final String PREF_KEY_PICK_UP = "gesture_pick_up";
-    private static final String PREF_KEY_SWIPE_DOWN_FINGERPRINT = "gesture_swipe_down_fingerprint";
     private static final String PREF_KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
     private static final String DEBUG_DOZE_COMPONENT = "debug.doze.component";
 
     private List<GesturePreference> mPreferences;
+    private SwipeToNotificationPreferenceController mSwipeToNotificationPreferenceController;
 
     private AmbientDisplayConfiguration mAmbientConfig;
 
@@ -66,6 +66,8 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.gesture_settings);
         Context context = getActivity();
+        mSwipeToNotificationPreferenceController =
+                new SwipeToNotificationPreferenceController(context);
         mPreferences = new ArrayList();
 
         // Double tap power for camera
@@ -93,11 +95,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         }
 
         // Fingerprint slide for notifications
-        if (isSystemUINavigationAvailable(context)) {
-            addPreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT, isSystemUINavigationEnabled(context));
-        } else {
-            removePreference(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
-        }
+        mSwipeToNotificationPreferenceController.displayPreference(getPreferenceScreen());
 
         // Double twist for camera mode
         if (isDoubleTwistAvailable(context)) {
@@ -112,7 +110,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         RecyclerView listview = getListView();
         listview.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -134,6 +132,13 @@ public class GestureSettings extends SettingsPreferenceFragment implements
             }
         });
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSwipeToNotificationPreferenceController.updateState(
+                findPreference(mSwipeToNotificationPreferenceController.getPreferenceKey()));
     }
 
     @Override
@@ -163,9 +168,6 @@ public class GestureSettings extends SettingsPreferenceFragment implements
             Secure.putInt(getContentResolver(), Secure.DOZE_PULSE_ON_PICK_UP, enabled ? 1 : 0);
         } else if (PREF_KEY_DOUBLE_TAP_SCREEN.equals(key)) {
             Secure.putInt(getContentResolver(), Secure.DOZE_PULSE_ON_DOUBLE_TAP, enabled ? 1 : 0);
-        } else if (PREF_KEY_SWIPE_DOWN_FINGERPRINT.equals(key)) {
-            Secure.putInt(getContentResolver(),
-                    Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, enabled ? 1 : 0);
         } else if (PREF_KEY_DOUBLE_TWIST.equals(key)) {
             Secure.putInt(getContentResolver(),
                     Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled ? 1 : 0);
@@ -186,16 +188,6 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     private static boolean isCameraDoubleTapPowerGestureAvailable(Resources res) {
         return res.getBoolean(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
-    }
-
-    private static boolean isSystemUINavigationAvailable(Context context) {
-        return context.getResources().getBoolean(
-                com.android.internal.R.bool.config_supportSystemNavigationKeys);
-    }
-
-    private static boolean isSystemUINavigationEnabled(Context context) {
-        return Secure.getInt(context.getContentResolver(), Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0)
-                == 1;
     }
 
     private static boolean isDoubleTwistAvailable(Context context) {
@@ -227,42 +219,41 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                     boolean enabled) {
-                ArrayList<SearchIndexableResource> result =
-                        new ArrayList<SearchIndexableResource>();
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
 
-                SearchIndexableResource sir = new SearchIndexableResource(context);
-                sir.xmlResId = R.xml.gesture_settings;
-                result.add(sir);
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.gesture_settings;
+                    result.add(sir);
 
-                return result;
-            }
+                    return result;
+                }
 
-            @Override
-            public List<String> getNonIndexableKeys(Context context) {
-                ArrayList<String> result = new ArrayList<String>();
-                AmbientDisplayConfiguration ambientConfig
-                        = new AmbientDisplayConfiguration(context);
-                if (!isCameraDoubleTapPowerGestureAvailable(context.getResources())) {
-                    result.add(PREF_KEY_DOUBLE_TAP_POWER);
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    ArrayList<String> result = new ArrayList<String>();
+                    AmbientDisplayConfiguration ambientConfig
+                            = new AmbientDisplayConfiguration(context);
+                    if (!isCameraDoubleTapPowerGestureAvailable(context.getResources())) {
+                        result.add(PREF_KEY_DOUBLE_TAP_POWER);
+                    }
+                    if (!ambientConfig.pulseOnPickupAvailable()) {
+                        result.add(PREF_KEY_PICK_UP);
+                    }
+                    if (!ambientConfig.pulseOnDoubleTapAvailable()) {
+                        result.add(PREF_KEY_DOUBLE_TAP_SCREEN);
+                    }
+                    new SwipeToNotificationPreferenceController(context)
+                            .updateNonIndexableKeys(result);
+                    if (!isDoubleTwistAvailable(context)) {
+                        result.add(PREF_KEY_DOUBLE_TWIST);
+                    }
+                    return result;
                 }
-                if (!ambientConfig.pulseOnPickupAvailable()) {
-                    result.add(PREF_KEY_PICK_UP);
-                }
-                if (!ambientConfig.pulseOnDoubleTapAvailable()) {
-                    result.add(PREF_KEY_DOUBLE_TAP_SCREEN);
-                }
-                if (!isSystemUINavigationAvailable(context)) {
-                    result.add(PREF_KEY_SWIPE_DOWN_FINGERPRINT);
-                }
-                if (!isDoubleTwistAvailable(context)) {
-                    result.add(PREF_KEY_DOUBLE_TWIST);
-                }
-                return result;
-            }
-        };
+            };
 
 }
