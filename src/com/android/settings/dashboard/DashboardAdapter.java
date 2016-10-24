@@ -64,8 +64,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         @Override
         public void onClick(View v) {
             //TODO: get rid of setTag/getTag
-            final Tile tile = (Tile) mDashboardData.getItemEntityByPosition((int) v.getTag());
-            ((SettingsActivity) mContext).openTile(tile);
+            ((SettingsActivity) mContext).openTile((Tile) v.getTag());
         }
     };
 
@@ -205,7 +204,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             case R.layout.dashboard_tile:
                 final Tile tile = (Tile) mDashboardData.getItemEntityByPosition(position);
                 onBindTile(holder, tile);
-                holder.itemView.setTag(position);
+                holder.itemView.setTag(tile);
                 holder.itemView.setOnClickListener(mTileClickListener);
                 break;
             case R.layout.suggestion_header:
