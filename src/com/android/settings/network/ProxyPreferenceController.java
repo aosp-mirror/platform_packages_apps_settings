@@ -36,7 +36,7 @@ public class ProxyPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         // proxy UI disabled until we have better app support
         return false;
     }

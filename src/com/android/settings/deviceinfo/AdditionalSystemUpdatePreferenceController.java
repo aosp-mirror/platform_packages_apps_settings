@@ -34,7 +34,7 @@ public class AdditionalSystemUpdatePreferenceController extends PreferenceContro
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return mContext.getResources().getBoolean(
                 com.android.settings.R.bool.config_additional_system_update_setting_enable);
     }

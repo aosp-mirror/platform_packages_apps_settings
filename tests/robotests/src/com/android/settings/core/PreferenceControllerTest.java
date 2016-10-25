@@ -102,7 +102,7 @@ public class PreferenceControllerTest {
         }
 
         @Override
-        protected boolean isAvailable() {
+        public boolean isAvailable() {
             return isAvailable;
         }
 

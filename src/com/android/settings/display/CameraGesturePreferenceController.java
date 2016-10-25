@@ -50,7 +50,7 @@ public class CameraGesturePreferenceController extends PreferenceController impl
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         boolean configSet = mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_cameraLaunchGestureSensorType) != -1;
         return configSet

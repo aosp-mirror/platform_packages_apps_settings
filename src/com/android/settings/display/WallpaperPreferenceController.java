@@ -32,7 +32,7 @@ public class WallpaperPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return true;
     }
 

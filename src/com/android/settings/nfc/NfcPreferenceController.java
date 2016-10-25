@@ -101,7 +101,7 @@ public class NfcPreferenceController extends PreferenceController
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return mNfcAdapter != null;
     }
 

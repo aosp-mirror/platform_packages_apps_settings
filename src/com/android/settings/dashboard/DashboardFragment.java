@@ -251,11 +251,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         Collection<PreferenceController> controllers = mPreferenceControllers.values();
         final PreferenceScreen screen = getPreferenceScreen();
         for (PreferenceController controller : controllers) {
+            if (!controller.isAvailable()) {
+                continue;
+            }
             final String key = controller.getPreferenceKey();
 
             final Preference preference = mProgressiveDisclosureMixin.findPreference(screen, key);
             if (preference == null) {
-                Log.d(TAG, "Cannot find preference with key " + key);
+                Log.d(TAG, String.format("Cannot find preference with key %s in Controller %s",
+                        key, controller.getClass().getSimpleName()));
                 continue;
             }
             controller.updateState(preference);

@@ -45,7 +45,7 @@ public class MobileNetworkPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return !mIsSecondaryUser
                 && !Utils.isWifiOnly(mContext)
                 && !hasBaseUserRestriction(mContext, DISALLOW_CONFIG_MOBILE_NETWORKS, myUserId());

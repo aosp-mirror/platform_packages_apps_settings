@@ -33,7 +33,7 @@ public class NightDisplayPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return NightDisplayController.isAvailable(mContext);
     }
 

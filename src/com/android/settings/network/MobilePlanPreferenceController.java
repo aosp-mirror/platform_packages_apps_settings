@@ -111,7 +111,7 @@ public class MobilePlanPreferenceController extends PreferenceController impleme
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         final boolean isPrefAllowedOnDevice = mContext.getResources().getBoolean(
                 com.android.settings.R.bool.config_show_mobile_plan);
         final boolean isPrefAllowedForUser = !mIsSecondaryUser

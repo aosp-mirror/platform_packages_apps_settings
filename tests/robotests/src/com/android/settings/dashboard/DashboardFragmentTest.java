@@ -158,6 +158,21 @@ public class DashboardFragmentTest {
         assertThat(preference.getOrder()).isEqualTo(-tile.priority);
     }
 
+    @Test
+    public void updateState_skipUnavailablePrefs() {
+        List<PreferenceController> preferenceControllers = mTestFragment.mControllers;
+        preferenceControllers.add(mock(PreferenceController.class));
+        preferenceControllers.add(mock(PreferenceController.class));
+        when(preferenceControllers.get(0).isAvailable()).thenReturn(false);
+        when(preferenceControllers.get(1).isAvailable()).thenReturn(true);
+
+        mTestFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
+        mTestFragment.onResume();
+
+        verify(mTestFragment.mControllers.get(0), never()).getPreferenceKey();
+        verify(mTestFragment.mControllers.get(1)).getPreferenceKey();
+    }
+
     public static class TestPreferenceController extends PreferenceController {
 
         public TestPreferenceController(Context context) {
@@ -170,7 +185,7 @@ public class DashboardFragmentTest {
         }
 
         @Override
-        protected boolean isAvailable() {
+        public boolean isAvailable() {
             return false;
         }
 
@@ -189,10 +204,12 @@ public class DashboardFragmentTest {
 
         private final Context mContext;
         public PreferenceScreen mScreen;
+        private List<PreferenceController> mControllers;
 
         public TestFragment(Context context) {
             mContext = context;
             mScreen = mock(PreferenceScreen.class);
+            mControllers = new ArrayList<>();
         }
 
         @Override
@@ -227,7 +244,7 @@ public class DashboardFragmentTest {
 
         @Override
         protected List<PreferenceController> getPreferenceControllers(Context context) {
-            return null;
+            return mControllers;
         }
     }
 

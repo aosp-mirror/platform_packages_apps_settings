@@ -87,7 +87,7 @@ public class AirplaneModePreferenceController extends PreferenceController
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return !mPackageManager.hasSystemFeature(PackageManager.FEATURE_TELEVISION);
     }
 

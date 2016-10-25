@@ -28,7 +28,7 @@ public class ScreenSaverPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsSupported);
     }

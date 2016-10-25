@@ -58,7 +58,7 @@ public class VpnPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         // TODO: http://b/23693383
         return mIsSecondaryUser || RestrictedLockUtils.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_CONFIG_VPN, UserHandle.myUserId());
