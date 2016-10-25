@@ -53,6 +53,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
@@ -460,6 +461,8 @@ public class InstalledAppDetails extends AppInfoBase
         } else if (UserHandle.myUserId() != 0) {
             showIt = false;
         } else if (mUserManager.getUsers().size() < 2) {
+            showIt = false;
+        } else if (PackageUtil.countPackageInUsers(mPm, mUserManager, mPackageName) < 2) {
             showIt = false;
         }
         menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(showIt);
@@ -1161,6 +1164,37 @@ public class InstalledAppDetails extends AppInfoBase
                 return;
             }
             refreshUi();
+        }
+    }
+
+    /**
+     * Elicit this class for testing. Test cannot be done in robolectric because it
+     * invokes the new API.
+     */
+    @VisibleForTesting
+    public static class PackageUtil {
+        /**
+         * Count how many users in device have installed package {@paramref packageName}
+         */
+        public static int countPackageInUsers(PackageManager packageManager, UserManager
+                userManager, String packageName) {
+            final List<UserInfo> userInfos = userManager.getUsers(true);
+            int count = 0;
+
+            for (final UserInfo userInfo : userInfos) {
+                try {
+                    // Use this API to check whether user has this package
+                    final ApplicationInfo info = packageManager.getApplicationInfoAsUser(
+                            packageName, PackageManager.GET_META_DATA, userInfo.id);
+                    if ((info.flags & ApplicationInfo.FLAG_INSTALLED) != 0) {
+                        count++;
+                    }
+                } catch(NameNotFoundException e) {
+                    Log.e(TAG, "Package: " + packageName + " not found for user: " + userInfo.id);
+                }
+            }
+
+            return count;
         }
     }
 
