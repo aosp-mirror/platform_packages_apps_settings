@@ -16,7 +16,7 @@
 package com.android.settings.core.lifecycle;
 
 import android.content.Context;
-
+import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.lifecycle.events.OnAttach;
 import com.android.settings.core.lifecycle.events.OnDestroy;
@@ -24,18 +24,16 @@ import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.core.lifecycle.events.OnStart;
 import com.android.settings.core.lifecycle.events.OnStop;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 import org.robolectric.util.FragmentController;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LifecycleTest {
 
