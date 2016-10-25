@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import com.android.settings.R;
 import com.android.settings.SeekBarPreference;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -119,12 +120,10 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
     private void applyAuto(ImageView autoButton) {
         mAutoOn = !mAutoOn;
         if (!mAutoOn) {
-            setProgress(NotificationListenerService.Ranking.IMPORTANCE_DEFAULT);
-            mCallback.onImportanceChanged(
-                    NotificationListenerService.Ranking.IMPORTANCE_DEFAULT, true);
+            setProgress(NotificationManager.IMPORTANCE_DEFAULT);
+            mCallback.onImportanceChanged(NotificationManager.IMPORTANCE_DEFAULT, true);
         } else {
-            mCallback.onImportanceChanged(
-                    NotificationListenerService.Ranking.IMPORTANCE_UNSPECIFIED, true);
+            mCallback.onImportanceChanged(NotificationManager.IMPORTANCE_UNSPECIFIED, true);
         }
         applyAutoUi(autoButton);
     }
@@ -140,9 +139,8 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
         mSeekBar.setAlpha(alpha);
 
         if (mAutoOn) {
-            setProgress(NotificationListenerService.Ranking.IMPORTANCE_DEFAULT);
-            mSummary = getProgressSummary(
-                    NotificationListenerService.Ranking.IMPORTANCE_UNSPECIFIED);
+            setProgress(NotificationManager.IMPORTANCE_DEFAULT);
+            mSummary = getProgressSummary(NotificationManager.IMPORTANCE_UNSPECIFIED);
         }
         mSummaryTextView.setText(mSummary);
     }
@@ -168,18 +166,17 @@ public class ImportanceSeekBarPreference extends SeekBarPreference implements
 
     private String getProgressSummary(int progress) {
         switch (progress) {
-            case NotificationListenerService.Ranking.IMPORTANCE_NONE:
+            case NotificationManager.IMPORTANCE_NONE:
                 return getContext().getString(R.string.notification_importance_blocked);
-            case NotificationListenerService.Ranking.IMPORTANCE_MIN:
+            case NotificationManager.IMPORTANCE_MIN:
                 return getContext().getString(R.string.notification_importance_min);
-            case NotificationListenerService.Ranking.IMPORTANCE_LOW:
+            case NotificationManager.IMPORTANCE_LOW:
                 return getContext().getString(R.string.notification_importance_low);
-            case NotificationListenerService.Ranking.IMPORTANCE_DEFAULT:
+            case NotificationManager.IMPORTANCE_DEFAULT:
                 return getContext().getString(R.string.notification_importance_default);
-            case NotificationListenerService.Ranking.IMPORTANCE_HIGH:
+            case NotificationManager.IMPORTANCE_HIGH:
+            case NotificationManager.IMPORTANCE_MAX:
                 return getContext().getString(R.string.notification_importance_high);
-            case NotificationListenerService.Ranking.IMPORTANCE_MAX:
-                return getContext().getString(R.string.notification_importance_max);
             default:
                 return getContext().getString(R.string.notification_importance_unspecified);
         }

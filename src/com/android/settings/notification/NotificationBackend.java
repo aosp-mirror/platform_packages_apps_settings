@@ -18,6 +18,7 @@ package com.android.settings.notification;
 import android.app.INotificationManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -139,7 +140,7 @@ public class NotificationBackend {
             return sINM.getImportance(pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return NotificationListenerService.Ranking.IMPORTANCE_UNSPECIFIED;
+            return NotificationManager.IMPORTANCE_UNSPECIFIED;
         }
     }
 

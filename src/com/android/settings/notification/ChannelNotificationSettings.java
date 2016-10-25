@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
+import android.view.View;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
@@ -94,7 +96,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             setupVibrate();
             setupRingtone();
             mMaxImportance = mAppRow.appImportance == NotificationManager.IMPORTANCE_UNSPECIFIED
-                    ? NotificationManager.IMPORTANCE_MAX : mAppRow.appImportance;
+                    ? NotificationManager.IMPORTANCE_HIGH : mAppRow.appImportance;
             setupImportancePrefs(false, mChannel.getImportance(),
                     mChannel.getImportance() == NotificationManager.IMPORTANCE_NONE,
                     mMaxImportance);
@@ -141,6 +143,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean lights = (Boolean) newValue;
                 mChannel.setLights(lights);
+                mChannel.lockFields(NotificationChannel.USER_LOCKED_LIGHTS);
                 mBackend.updateChannel(mPkg, mUid, mChannel);
                 return true;
             }
@@ -155,6 +158,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean vibrate = (Boolean) newValue;
                 mChannel.setVibration(vibrate);
+                mChannel.lockFields(NotificationChannel.USER_LOCKED_VIBRATION);
                 mBackend.updateChannel(mPkg, mUid, mChannel);
                 return true;
             }
@@ -162,13 +166,14 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     }
 
     private void setupRingtone() {
-        mRingtone.setRingtone(mChannel.getDefaultRingtone());
+        mRingtone.setRingtone(mChannel.getRingtone());
         mRingtone.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 Uri ringtone = Uri.parse((String) newValue);
                 mRingtone.setRingtone(ringtone);
-                mChannel.setDefaultRingtone(ringtone);
+                mChannel.setRingtone(ringtone);
+                mChannel.lockFields(NotificationChannel.USER_LOCKED_RINGTONE);
                 mBackend.updateChannel(mPkg, mUid, mChannel);
                 return false;
             }

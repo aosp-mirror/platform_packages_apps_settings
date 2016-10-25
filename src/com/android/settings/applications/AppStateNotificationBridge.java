@@ -16,6 +16,7 @@
 package com.android.settings.applications;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
@@ -92,8 +93,8 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
                 return false;
             }
             AppRow row = (AppRow) info.extraInfo;
-            return row.appImportance > NotificationListenerService.Ranking.IMPORTANCE_NONE
-                    && row.appImportance < NotificationListenerService.Ranking.IMPORTANCE_DEFAULT;
+            return row.appImportance > NotificationManager.IMPORTANCE_NONE
+                    && row.appImportance < NotificationManager.IMPORTANCE_DEFAULT;
         }
     };
 

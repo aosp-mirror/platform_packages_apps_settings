@@ -22,6 +22,7 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -1099,15 +1100,15 @@ public class InstalledAppDetails extends AppInfoBase
         List<String> summaryAttributes = new ArrayList<>();
         StringBuffer summary = new StringBuffer();
         if (showSlider) {
-            if (appRow.appImportance != Ranking.IMPORTANCE_UNSPECIFIED) {
+            if (appRow.appImportance != NotificationManager.IMPORTANCE_UNSPECIFIED) {
                 summaryAttributes.add(context.getString(
                         R.string.notification_summary_level, appRow.appImportance));
             }
         } else {
             if (appRow.banned) {
                 summaryAttributes.add(context.getString(R.string.notifications_disabled));
-            } else if (appRow.appImportance > Ranking.IMPORTANCE_NONE
-                    && appRow.appImportance < Ranking.IMPORTANCE_DEFAULT) {
+            } else if (appRow.appImportance > NotificationManager.IMPORTANCE_NONE
+                    && appRow.appImportance < NotificationManager.IMPORTANCE_DEFAULT) {
                 summaryAttributes.add(context.getString(R.string.notifications_silenced));
             }
         }
