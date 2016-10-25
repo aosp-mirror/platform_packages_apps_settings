@@ -299,7 +299,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
                         mForFingerprint);
                 intent.putExtra(EXTRA_HIDE_DRAWER, mHideDrawer);
-                startActivityForResult(intent, ENABLE_ENCRYPTION_REQUEST);
+                startActivityForResult(
+                        intent,
+                        mIsSetNewPassword && mHasChallenge
+                                ? CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
+                                : ENABLE_ENCRYPTION_REQUEST);
             } else {
                 if (mForChangeCredRequiredForBoot) {
                     // Welp, couldn't change it. Oh well.
