@@ -74,6 +74,7 @@ import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -547,8 +548,13 @@ public class ManageApplications extends InstrumentedFragment
         if (mOptionsMenu == null) {
             return;
         }
-        mOptionsMenu.findItem(R.id.advanced).setVisible(
-                mListType == LIST_TYPE_MAIN || mListType == LIST_TYPE_NOTIFICATION);
+        final Context context = getActivity();
+        if (FeatureFactory.getFactory(context).getDashboardFeatureProvider(context).isEnabled()) {
+            mOptionsMenu.findItem(R.id.advanced).setVisible(false);
+        } else {
+            mOptionsMenu.findItem(R.id.advanced).setVisible(
+                    mListType == LIST_TYPE_MAIN || mListType == LIST_TYPE_NOTIFICATION);
+        }
 
         mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(mListType == LIST_TYPE_STORAGE
                 && mSortOrder != R.id.sort_order_alpha);
