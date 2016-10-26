@@ -32,14 +32,13 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
+import com.android.settings.deviceinfo.BuildNumberPreferenceController;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.RestrictedLockUtils;
@@ -59,7 +58,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     private static final String PROPERTY_SELINUX_STATUS = "ro.build.selinux";
     private static final String KEY_KERNEL_VERSION = "kernel_version";
-    private static final String KEY_BUILD_NUMBER = "build_number";
     private static final String KEY_DEVICE_MODEL = "device_model";
     private static final String KEY_SELINUX_STATUS = "selinux_status";
     private static final String KEY_BASEBAND_VERSION = "baseband_version";
@@ -70,20 +68,16 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
     private static final String KEY_SAFETY_LEGAL = "safetylegal";
 
-    static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
     long[] mHits = new long[3];
-    int mDevHitCountdown;
-    Toast mDevHitToast;
     private SystemUpdatePreferenceController mSystemUpdatePreferenceController;
     private AdditionalSystemUpdatePreferenceController mAdditionalSystemUpdatePreferenceController;
+    private BuildNumberPreferenceController mBuildNumberPreferenceController;
 
     private UserManager mUm;
 
     private EnforcedAdmin mFunDisallowedAdmin;
     private boolean mFunDisallowedBySystem;
-    private EnforcedAdmin mDebuggingFeaturesDisallowedAdmin;
-    private boolean mDebuggingFeaturesDisallowedBySystem;
 
     @Override
     public int getMetricsCategory() {
@@ -96,6 +90,14 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (mBuildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         final Activity activity = getActivity();
@@ -103,7 +105,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         mSystemUpdatePreferenceController = new SystemUpdatePreferenceController(activity, mUm);
         mAdditionalSystemUpdatePreferenceController =
                 new AdditionalSystemUpdatePreferenceController(activity);
-
+        mBuildNumberPreferenceController =
+                new BuildNumberPreferenceController(activity, activity, this /* fragment */);
+        getLifecycle().addObserver(mBuildNumberPreferenceController);
         addPreferencesFromResource(R.xml.device_info_settings);
 
         setStringSummary(KEY_FIRMWARE_VERSION, Build.VERSION.RELEASE);
@@ -119,8 +123,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");
         setStringSummary(KEY_DEVICE_MODEL, Build.MODEL + DeviceInfoUtils.getMsvSuffix());
         setValueSummary(KEY_EQUIPMENT_ID, PROPERTY_EQUIPMENT_ID);
-        setStringSummary(KEY_BUILD_NUMBER, Build.DISPLAY);
-        findPreference(KEY_BUILD_NUMBER).setEnabled(true);
+        mBuildNumberPreferenceController.displayPreference(getPreferenceScreen());
         findPreference(KEY_KERNEL_VERSION).setSummary(DeviceInfoUtils.getFormattedKernelVersion());
 
         if (!SELinux.isSELinuxEnabled()) {
@@ -174,26 +177,21 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     @Override
     public void onResume() {
         super.onResume();
-        mDevHitCountdown = getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
-                Context.MODE_PRIVATE).getBoolean(DevelopmentSettings.PREF_SHOW,
-                        android.os.Build.TYPE.equals("eng")) ? -1 : TAPS_TO_BE_A_DEVELOPER;
-        mDevHitToast = null;
         mFunDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(
                 getActivity(), UserManager.DISALLOW_FUN, UserHandle.myUserId());
         mFunDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(
                 getActivity(), UserManager.DISALLOW_FUN, UserHandle.myUserId());
-        mDebuggingFeaturesDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                getActivity(), UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
-        mDebuggingFeaturesDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(
-                getActivity(), UserManager.DISALLOW_DEBUGGING_FEATURES, UserHandle.myUserId());
     }
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (mBuildNumberPreferenceController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
         if (preference.getKey().equals(KEY_FIRMWARE_VERSION)) {
-            System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
-            mHits[mHits.length-1] = SystemClock.uptimeMillis();
-            if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
+            System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+            mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+            if (mHits[0] >= (SystemClock.uptimeMillis() - 500)) {
                 if (mUm.hasUserRestriction(UserManager.DISALLOW_FUN)) {
                     if (mFunDisallowedAdmin != null && !mFunDisallowedBySystem) {
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
@@ -212,59 +210,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                     Log.e(LOG_TAG, "Unable to start activity " + intent.toString());
                 }
             }
-        } else if (preference.getKey().equals(KEY_BUILD_NUMBER)) {
-            // Don't enable developer options for secondary users.
-            if (!mUm.isAdminUser()) return true;
-
-            // Don't enable developer options until device has been provisioned
-            if (!Utils.isDeviceProvisioned(getActivity())) {
-                return true;
-            }
-
-            if (mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
-                if (mDebuggingFeaturesDisallowedAdmin != null &&
-                        !mDebuggingFeaturesDisallowedBySystem) {
-                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
-                            mDebuggingFeaturesDisallowedAdmin);
-                }
-                return true;
-            }
-
-            if (mDevHitCountdown > 0) {
-                mDevHitCountdown--;
-                if (mDevHitCountdown == 0) {
-                    getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
-                            Context.MODE_PRIVATE).edit().putBoolean(
-                                    DevelopmentSettings.PREF_SHOW, true).apply();
-                    if (mDevHitToast != null) {
-                        mDevHitToast.cancel();
-                    }
-                    mDevHitToast = Toast.makeText(getActivity(), R.string.show_dev_on,
-                            Toast.LENGTH_LONG);
-                    mDevHitToast.show();
-                    // This is good time to index the Developer Options
-                    Index.getInstance(
-                            getActivity().getApplicationContext()).updateFromClassNameResource(
-                                    DevelopmentSettings.class.getName(), true, true);
-
-                } else if (mDevHitCountdown > 0
-                        && mDevHitCountdown < (TAPS_TO_BE_A_DEVELOPER-2)) {
-                    if (mDevHitToast != null) {
-                        mDevHitToast.cancel();
-                    }
-                    mDevHitToast = Toast.makeText(getActivity(), getResources().getQuantityString(
-                            R.plurals.show_dev_countdown, mDevHitCountdown, mDevHitCountdown),
-                            Toast.LENGTH_SHORT);
-                    mDevHitToast.show();
-                }
-            } else if (mDevHitCountdown < 0) {
-                if (mDevHitToast != null) {
-                    mDevHitToast.cancel();
-                }
-                mDevHitToast = Toast.makeText(getActivity(), R.string.show_dev_already,
-                        Toast.LENGTH_LONG);
-                mDevHitToast.show();
-            }
         } else if (preference.getKey().equals(KEY_SECURITY_PATCH)) {
             if (getPackageManager().queryIntentActivities(preference.getIntent(), 0).isEmpty()) {
                 // Don't send out the intent to stop crash
@@ -278,7 +223,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         mSystemUpdatePreferenceController.handlePreferenceTreeClick(preference);
         return super.onPreferenceTreeClick(preference);
     }
-
 
     private void removePreferenceIfPropertyMissing(PreferenceGroup preferenceGroup,
             String preference, String property ) {
