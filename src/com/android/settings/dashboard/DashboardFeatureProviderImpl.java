@@ -38,8 +38,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private final CategoryManager mCategoryManager;
 
     public DashboardFeatureProviderImpl(Context context) {
-        mContext = context;
-        mCategoryManager = CategoryManager.get(context);
+        mContext = context.getApplicationContext();
+        mCategoryManager = CategoryManager.get(mContext);
     }
 
     @Override

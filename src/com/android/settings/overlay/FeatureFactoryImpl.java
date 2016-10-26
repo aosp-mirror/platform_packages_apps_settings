@@ -19,6 +19,8 @@ package com.android.settings.overlay;
 import android.content.Context;
 import android.support.annotation.Keep;
 
+import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.applications.ApplicationFeatureProviderImpl;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
@@ -33,6 +35,7 @@ import com.android.settings.localepicker.LocaleFeatureProviderImpl;
 @Keep
 public final class FeatureFactoryImpl extends FeatureFactory {
 
+    private ApplicationFeatureProvider mApplicationFeatureProvider;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private DashboardFeatureProviderImpl mDashboardFeatureProvider;
     private LocaleFeatureProvider mLocaleFeatureProvider;
@@ -61,6 +64,14 @@ public final class FeatureFactoryImpl extends FeatureFactory {
             mDashboardFeatureProvider = new DashboardFeatureProviderImpl(context);
         }
         return mDashboardFeatureProvider;
+    }
+
+    @Override
+    public ApplicationFeatureProvider getApplicationFeatureProvider(Context context) {
+        if (mApplicationFeatureProvider == null) {
+            mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(context);
+        }
+        return mApplicationFeatureProvider;
     }
 
     @Override

@@ -16,6 +16,8 @@
 package com.android.settings.testutils;
 
 import android.content.Context;
+
+import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
@@ -38,6 +40,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final PowerUsageFeatureProvider powerUsageFeatureProvider;
     public final DashboardFeatureProvider dashboardFeatureProvider;
     public final LocaleFeatureProvider localeFeatureProvider;
+    public final ApplicationFeatureProvider applicationFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -65,6 +68,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         powerUsageFeatureProvider = mock(PowerUsageFeatureProvider.class);
         dashboardFeatureProvider = mock(DashboardFeatureProvider.class);
         localeFeatureProvider = mock(LocaleFeatureProvider.class);
+        applicationFeatureProvider = mock(ApplicationFeatureProvider.class);
     }
 
     @Override
@@ -85,6 +89,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public DashboardFeatureProvider getDashboardFeatureProvider(Context context) {
         return dashboardFeatureProvider;
+    }
+
+    @Override
+    public ApplicationFeatureProvider getApplicationFeatureProvider(Context context) {
+        return applicationFeatureProvider;
     }
 
     @Override
