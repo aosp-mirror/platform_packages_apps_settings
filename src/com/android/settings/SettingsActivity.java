@@ -289,6 +289,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             // Home page > Network & Internet
             "com.android.settings.Settings.WifiDashboardAlias",
             "com.android.settings.Settings.DataUsageDashboardAlias",
+            // Home page > Security
+            "com.android.settings.Settings.LocationDashboardAlias",
             // Home page > System
             "com.android.settings.Settings.LanguageAndInputDashboardAlias",
             "com.android.settings.Settings.DateTimeDashboardAlias",

@@ -15,6 +15,7 @@
  */
 package com.android.settings.dashboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
@@ -54,6 +55,16 @@ public interface DashboardFeatureProvider {
      * Returns an unique string key for the tile.
      */
     String getDashboardKeyForTile(Tile tile);
+
+    /**
+     * Binds preference to data provided by tile.
+     *
+     * @param activity If tile contains intent to launch, it will be launched from this activity
+     * @param pref The preference to bind data
+     * @param tile The binding data
+     * @param key They key for preference. If null, we will generate one from tile data
+     */
+    void bindPreferenceToTile(Activity activity, Preference pref, Tile tile, String key);
 
     /**
      * Returns a {@link ProgressiveDisclosureMixin} for specified fragment.

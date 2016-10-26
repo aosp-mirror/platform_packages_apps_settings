@@ -20,7 +20,6 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -35,7 +34,6 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.security.KeyStore;
@@ -52,11 +50,14 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.fingerprint.FingerprintSettings;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
@@ -64,6 +65,9 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +83,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         GearPreference.OnGearClickListener {
 
     private static final String TAG = "SecuritySettings";
+
     private static final String TRUST_AGENT_CLICK_INTENT = "trust_agent_click_intent";
     private static final Intent TRUST_AGENT_INTENT =
             new Intent(TrustAgentService.SERVICE_INTERFACE);
@@ -125,6 +130,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
+    private DashboardFeatureProvider mDashboardFeatureProvider;
     private DevicePolicyManager mDPM;
     private SubscriptionManager mSubscriptionManager;
     private UserManager mUm;
@@ -162,17 +168,22 @@ public class SecuritySettings extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mSubscriptionManager = SubscriptionManager.from(getActivity());
+        final Activity activity = getActivity();
 
-        mLockPatternUtils = new LockPatternUtils(getActivity());
+        mSubscriptionManager = SubscriptionManager.from(activity);
 
-        mManagedPasswordProvider = ManagedLockPasswordProvider.get(getActivity(), MY_USER_ID);
+        mLockPatternUtils = new LockPatternUtils(activity);
+
+        mManagedPasswordProvider = ManagedLockPasswordProvider.get(activity, MY_USER_ID);
 
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        mUm = UserManager.get(getActivity());
+        mUm = UserManager.get(activity);
 
-        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
+        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(activity);
+
+        mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
+                .getDashboardFeatureProvider(activity);
 
         if (savedInstanceState != null
                 && savedInstanceState.containsKey(TRUST_AGENT_CLICK_INTENT)) {
@@ -398,6 +409,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // smarter in the future.
         Index.getInstance(getActivity())
                 .updateFromClassNameResource(SecuritySettings.class.getName(), true, true);
+
+        final List<Preference> tilePrefs = getDynamicTilesForSecurity();
+        if (tilePrefs != null && !tilePrefs.isEmpty()) {
+            for (Preference preference : tilePrefs) {
+                root.addPreference(preference);
+            }
+        }
 
         for (int i = 0; i < SWITCH_PREFERENCE_KEYS.length; i++) {
             final Preference pref = findPreference(SWITCH_PREFERENCE_KEYS[i]);
@@ -745,6 +763,31 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
     }
 
+    private List<Preference> getDynamicTilesForSecurity() {
+        if (!mDashboardFeatureProvider.isEnabled()) {
+            return null;
+        }
+        final DashboardCategory category =
+                mDashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY);
+        if (category == null) {
+            Log.d(TAG, "NO dashboard tiles for " + TAG);
+            return null;
+        }
+        final List<Tile> tiles = category.tiles;
+        if (tiles == null) {
+            Log.d(TAG, "tile list is empty, skipping category " + category.title);
+            return null;
+        }
+        final List<Preference> preferences = new ArrayList<>();
+        for (Tile tile : tiles) {
+            final Preference pref = new Preference(getPrefContext());
+            mDashboardFeatureProvider
+                    .bindPreferenceToTile(getActivity(), pref, tile, null /* key */);
+            preferences.add(pref);
+        }
+        return preferences;
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
         boolean result = true;
@@ -1053,7 +1096,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if (root != null) {
                 root.removeAll();
             }
-            root = null;
 
             final int resid = getResIdForLockUnlockSubScreen(getActivity(),
                     new LockPatternUtils(getContext()),

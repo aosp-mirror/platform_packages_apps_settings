@@ -16,10 +16,15 @@
 
 package com.android.settings.dashboard;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 
+import com.android.settings.SettingsActivity;
 import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -71,6 +76,40 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         final ComponentName component = tile.intent.getComponent();
         sb.append(component.getClassName());
         return sb.toString();
+    }
+
+    @Override
+    public void bindPreferenceToTile(Activity activity, Preference pref, Tile tile, String key) {
+        pref.setTitle(tile.title);
+        if (!TextUtils.isEmpty(key)) {
+            pref.setKey(key);
+        } else {
+            pref.setKey(getDashboardKeyForTile(tile));
+        }
+        pref.setSummary(tile.summary);
+        if (tile.icon != null) {
+            pref.setIcon(tile.icon.loadDrawable(activity));
+        }
+        final Bundle metadata = tile.metaData;
+        String clsName = null;
+        if (metadata != null) {
+            clsName = metadata.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
+        }
+        if (!TextUtils.isEmpty(clsName)) {
+            pref.setFragment(clsName);
+        } else if (tile.intent != null) {
+            final Intent intent = new Intent(tile.intent);
+            pref.setOnPreferenceClickListener(preference -> {
+                activity.startActivityForResult(intent, 0);
+                return true;
+            });
+        }
+        // Use negated priority for order, because tile priority is based on intent-filter
+        // (larger value has higher priority). However pref order defines smaller value has
+        // higher priority.
+        if (tile.priority != 0) {
+            pref.setOrder(-tile.priority);
+        }
     }
 
     @Override

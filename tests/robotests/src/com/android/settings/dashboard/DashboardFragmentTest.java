@@ -120,42 +120,6 @@ public class DashboardFragmentTest {
     }
 
     @Test
-    public void bindPreference_shouldBindAllData() {
-        final Preference preference = new Preference(
-                ShadowApplication.getInstance().getApplicationContext());
-        final Tile tile = new Tile();
-        tile.title = "title";
-        tile.summary = "summary";
-        tile.icon = Icon.createWithBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565));
-        tile.metaData = new Bundle();
-        tile.metaData.putString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS, "HI");
-        tile.priority = 10;
-        mTestFragment.bindPreferenceToTile(mContext, preference, tile, "123");
-
-        assertThat(preference.getTitle()).isEqualTo(tile.title);
-        assertThat(preference.getSummary()).isEqualTo(tile.summary);
-        assertThat(preference.getIcon()).isNotNull();
-        assertThat(preference.getFragment())
-                .isEqualTo(tile.metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS));
-        assertThat(preference.getOrder()).isEqualTo(-tile.priority);
-    }
-
-    @Test
-    public void bindPreference_noFragmentMetadata_shouldBindIntent() {
-        final Preference preference = new Preference(
-                ShadowApplication.getInstance().getApplicationContext());
-        final Tile tile = new Tile();
-        tile.metaData = new Bundle();
-        tile.priority = 10;
-        tile.intent = new Intent();
-        mTestFragment.bindPreferenceToTile(mContext, preference, tile, "123");
-
-        assertThat(preference.getFragment()).isNull();
-        assertThat(preference.getOnPreferenceClickListener()).isNotNull();
-        assertThat(preference.getOrder()).isEqualTo(-tile.priority);
-    }
-
-    @Test
     public void updateState_skipUnavailablePrefs() {
         List<PreferenceController> preferenceControllers = mTestFragment.mControllers;
         preferenceControllers.add(mock(PreferenceController.class));

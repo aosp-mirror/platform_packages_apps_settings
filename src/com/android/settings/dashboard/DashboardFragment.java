@@ -17,7 +17,6 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -34,7 +33,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -322,11 +320,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 // Have the key already, will rebind.
                 final Preference preference = mProgressiveDisclosureMixin.findPreference(
                         screen, key);
-                bindPreferenceToTile(context, preference, tile, key);
+                mDashboardFeatureProvider.bindPreferenceToTile(
+                        getActivity(), preference, tile, key);
             } else {
                 // Don't have this key, add it.
                 final Preference pref = new DashboardTilePreference(context);
-                bindPreferenceToTile(context, pref, tile, key);
+                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), pref, tile, key);
                 mProgressiveDisclosureMixin.addPreference(screen, pref);
                 mDashboardTilePrefKeys.add(key);
             }
@@ -337,33 +336,5 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             mDashboardTilePrefKeys.remove(key);
             mProgressiveDisclosureMixin.removePreference(screen, key);
         }
-    }
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    void bindPreferenceToTile(Context context, Preference pref, Tile tile, String key) {
-        pref.setTitle(tile.title);
-        pref.setKey(key);
-        pref.setSummary(tile.summary);
-        if (tile.icon != null) {
-            pref.setIcon(tile.icon.loadDrawable(context));
-        }
-        final Bundle metadata = tile.metaData;
-        String clsName = null;
-        if (metadata != null) {
-            clsName = metadata.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
-        }
-        if (!TextUtils.isEmpty(clsName)) {
-            pref.setFragment(clsName);
-        } else if (tile.intent != null) {
-            final Intent intent = new Intent(tile.intent);
-            pref.setOnPreferenceClickListener(preference -> {
-                getActivity().startActivityForResult(intent, 0);
-                return true;
-            });
-        }
-        // Use negated priority for order, because tile priority is based on intent-filter
-        // (larger value has higher priority). However pref order defines smaller value has
-        // higher priority.
-        pref.setOrder(-tile.priority);
     }
 }
