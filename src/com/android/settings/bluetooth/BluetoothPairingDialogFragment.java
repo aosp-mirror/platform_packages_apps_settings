@@ -45,10 +45,9 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     private static final String TAG = "BTPairingDialogFragment";
 
     private AlertDialog.Builder mBuilder;
-    private BluetoothPairingController mPairingController;
     private AlertDialog mDialog;
+    private BluetoothPairingController mPairingController;
     private EditText mPairingView;
-
     /**
      * The interface we expect a listener to implement. Typically this should be done by
      * the controller.
@@ -106,11 +105,25 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     }
 
     /**
+     * Used in testing to get a reference to the dialog.
+     * @return - The fragments current dialog
+     */
+    protected AlertDialog getmDialog() {
+        return mDialog;
+    }
+
+    /**
      * Sets the controller that the fragment should use. this method MUST be called
      * before you try to show the dialog or an error will be thrown. An implementation
-     * of a pairing controller can be found at {@link BluetoothPairingController}.
+     * of a pairing controller can be found at {@link BluetoothPairingController}. A
+     * controller may not be substituted once it is assigned. Forcibly switching a
+     * controller for a new one will lead to undefined behavior.
      */
     public void setPairingController(BluetoothPairingController pairingController) {
+        if (mPairingController != null) {
+            throw new IllegalStateException("The controller can only be set once. "
+                    + "Forcibly replacing it will lead to undefined behavior");
+        }
         mPairingController = pairingController;
     }
 
@@ -146,7 +159,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         mBuilder.setPositiveButton(getString(android.R.string.ok), this);
         mBuilder.setNegativeButton(getString(android.R.string.cancel), this);
         AlertDialog dialog = mBuilder.create();
-        dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
+        dialog.setOnShowListener(d -> mDialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false));
         return dialog;
     }
 
@@ -171,6 +184,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
 
         mPairingView = pairingView;
 
+        pairingView.setInputType(InputType.TYPE_CLASS_NUMBER);
         pairingView.addTextChangedListener(this);
         alphanumericPin.setOnCheckedChangeListener((buttonView, isChecked) -> {
             // change input type for soft keyboard to numeric or alphanumeric
@@ -181,15 +195,21 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
             }
         });
 
-        int messageId = mPairingController.getDeviceVariantMessageID();
-        int messageIdHint = mPairingController.getDeviceVariantMessageHint();
+        int messageId = mPairingController.getDeviceVariantMessageId();
+        int messageIdHint = mPairingController.getDeviceVariantMessageHintId();
         int maxLength = mPairingController.getDeviceMaxPasskeyLength();
         alphanumericPin.setVisibility(mPairingController.pairingCodeIsAlphanumeric()
                 ? View.VISIBLE : View.GONE);
-
-        messageViewCaptionHint.setText(messageIdHint);
-        messageView2.setText(messageId);
-        pairingView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        if (messageId != BluetoothPairingController.INVALID_DIALOG_TYPE) {
+            messageView2.setText(messageId);
+        } else {
+            messageView2.setVisibility(View.GONE);
+        }
+        if (messageIdHint != BluetoothPairingController.INVALID_DIALOG_TYPE) {
+            messageViewCaptionHint.setText(messageIdHint);
+        } else {
+            messageViewCaptionHint.setVisibility(View.GONE);
+        }
         pairingView.setFilters(new InputFilter[]{
                 new LengthFilter(maxLength)});
 
@@ -203,10 +223,8 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         mBuilder.setTitle(getString(R.string.bluetooth_pairing_request,
                 mPairingController.getDeviceName()));
         mBuilder.setView(createView());
-        mBuilder.setPositiveButton(getString(R.string.bluetooth_pairing_accept),
-                this);
-        mBuilder.setNegativeButton(getString(R.string.bluetooth_pairing_decline),
-                this);
+        mBuilder.setPositiveButton(getString(R.string.bluetooth_pairing_accept), this);
+        mBuilder.setNegativeButton(getString(R.string.bluetooth_pairing_decline), this);
         AlertDialog dialog = mBuilder.create();
         return dialog;
     }

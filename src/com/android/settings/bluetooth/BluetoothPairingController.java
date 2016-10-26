@@ -188,7 +188,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      *
      * @return - The message ID to show the user.
      */
-    public int getDeviceVariantMessageID() {
+    public int getDeviceVariantMessageId() {
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN_16_DIGITS:
             case BluetoothDevice.PAIRING_VARIANT_PIN:
@@ -198,7 +198,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
                 return R.string.bluetooth_enter_passkey_other_device;
 
             default:
-                return -1;
+                return INVALID_DIALOG_TYPE;
         }
     }
 
@@ -208,7 +208,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      *
      * @return - The message ID to show the user.
      */
-    public int getDeviceVariantMessageHint() {
+    public int getDeviceVariantMessageHintId() {
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN_16_DIGITS:
                 return R.string.bluetooth_pin_values_hint_16_digits;
@@ -218,7 +218,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
                 return R.string.bluetooth_pin_values_hint;
 
             default:
-                return -1;
+                return INVALID_DIALOG_TYPE;
         }
     }
 
