@@ -81,9 +81,17 @@ public class ConditionAdapterUtils {
         View detailGroup = view.itemView.findViewById(R.id.detail_group);
         CharSequence[] actions = condition.getActions();
         if (isExpanded != (detailGroup.getVisibility() == View.VISIBLE)) {
-            animateChange(view.itemView, view.itemView.findViewById(R.id.content),
-                    detailGroup, isExpanded, actions.length > 0);
+            if (isExpanded) {
+                final boolean hasButtons = actions.length > 0;
+                setViewVisibility(detailGroup, R.id.divider, hasButtons);
+                setViewVisibility(detailGroup, R.id.buttonBar, hasButtons);
+
+                detailGroup.setVisibility(View.VISIBLE);
+            } else {
+                detailGroup.setVisibility(View.GONE);
+            }
         }
+
         if (isExpanded) {
             view.summary.setText(condition.getSummary());
             for (int i = 0; i < 2; i++) {
@@ -108,37 +116,6 @@ public class ConditionAdapterUtils {
                 }
             }
         }
-    }
-
-    private static void animateChange(final View view, final View content,
-            final View detailGroup, final boolean visible, final boolean hasButtons) {
-        setViewVisibility(detailGroup, R.id.divider, hasButtons);
-        setViewVisibility(detailGroup, R.id.buttonBar, hasButtons);
-        final int beforeBottom = content.getBottom();
-        setHeight(detailGroup, visible ? LayoutParams.WRAP_CONTENT : 0);
-        detailGroup.setVisibility(View.VISIBLE);
-        view.addOnLayoutChangeListener(new OnLayoutChangeListener() {
-            public static final long DURATION = 250;
-
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom,
-                    int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                final int afterBottom = content.getBottom();
-                v.removeOnLayoutChangeListener(this);
-                final ObjectAnimator animator = ObjectAnimator.ofInt(content, "bottom",
-                        beforeBottom, afterBottom);
-                animator.setDuration(DURATION);
-                animator.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        if (!visible) {
-                            detailGroup.setVisibility(View.GONE);
-                        }
-                    }
-                });
-                animator.start();
-            }
-        });
     }
 
     private static void setHeight(View detailGroup, int height) {
