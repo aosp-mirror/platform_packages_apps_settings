@@ -17,17 +17,15 @@ package com.android.settings.dashboard.conditional;
 
 import android.content.Context;
 import android.graphics.drawable.Icon;
-
 import com.android.internal.logging.MetricsProto;
+import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -35,7 +33,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConditionTest {
 

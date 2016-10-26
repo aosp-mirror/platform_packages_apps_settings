@@ -1,9 +1,5 @@
 package com.android.settings;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
@@ -16,11 +12,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(RobolectricTestRunner.class)
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UtilsTest {
 

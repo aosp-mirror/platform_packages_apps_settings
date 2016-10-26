@@ -2,17 +2,17 @@ package com.android.settings.datausage;
 
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
+import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.net.DataUsageController.DataUsageInfo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DataUsageInfoControllerTest {
     private DataUsageInfoController mInfoController;

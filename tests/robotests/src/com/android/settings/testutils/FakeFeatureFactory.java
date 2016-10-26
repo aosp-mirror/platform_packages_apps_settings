@@ -16,7 +16,6 @@
 package com.android.settings.testutils;
 
 import android.content.Context;
-
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;

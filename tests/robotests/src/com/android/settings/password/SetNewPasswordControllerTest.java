@@ -16,6 +16,22 @@
 
 package com.android.settings.password;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.fingerprint.FingerprintManager;
+import android.os.Bundle;
+import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.TestConfig;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.annotation.Config;
+
 import static android.content.pm.PackageManager.FEATURE_FINGERPRINT;
 import static com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS;
 import static com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY;
@@ -29,28 +45,10 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.hardware.fingerprint.FingerprintManager;
-import android.os.Bundle;
-
-import com.android.settings.TestConfig;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-
 /**
  * Tests for {@link SetNewPasswordController}.
  */
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class SetNewPasswordControllerTest {
     private static final int CURRENT_UID = 101;

@@ -18,16 +18,13 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.provider.Settings.System;
-
 import com.android.settings.dashboard.SummaryLoader;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
@@ -36,7 +33,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DisplaySettingsTest {
 

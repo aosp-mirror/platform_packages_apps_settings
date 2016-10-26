@@ -21,22 +21,19 @@ import android.support.v4.view.PagerAdapter;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-
+import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowTextUtils;
-
+import java.util.Locale;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-import java.util.Locale;
-
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RtlCompatibleViewPagerTest {
 
