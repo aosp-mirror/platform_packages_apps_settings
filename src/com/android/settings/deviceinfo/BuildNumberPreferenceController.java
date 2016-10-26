@@ -83,7 +83,7 @@ public class BuildNumberPreferenceController extends PreferenceController
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return true;
     }
 
