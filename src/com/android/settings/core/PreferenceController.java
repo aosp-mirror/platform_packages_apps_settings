@@ -66,6 +66,11 @@ public abstract class PreferenceController {
     }
 
     /**
+     * Returns true if preference is available (should be displayed)
+     */
+    public abstract boolean isAvailable();
+
+    /**
      * Handles preference tree click
      *
      * @param preference the preference being clicked
@@ -87,9 +92,4 @@ public abstract class PreferenceController {
             screen.removePreference(pref);
         }
     }
-
-    /**
-     * Returns true if preference is available (should be displayed)
-     */
-    protected abstract boolean isAvailable();
 }

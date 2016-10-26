@@ -73,7 +73,7 @@ public class AutoRotatePreferenceController extends PreferenceController impleme
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return RotationPolicy.isRotationLockToggleVisible(mContext);
     }
 

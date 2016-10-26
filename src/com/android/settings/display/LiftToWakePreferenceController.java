@@ -34,7 +34,7 @@ public class LiftToWakePreferenceController extends PreferenceController impleme
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         SensorManager sensors = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         return sensors != null && sensors.getDefaultSensor(Sensor.TYPE_WAKE_GESTURE) != null;
     }

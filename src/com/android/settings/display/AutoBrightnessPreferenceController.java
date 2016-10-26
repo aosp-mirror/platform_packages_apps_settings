@@ -35,7 +35,7 @@ public class AutoBrightnessPreferenceController extends PreferenceController imp
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_automatic_brightness_available);
     }

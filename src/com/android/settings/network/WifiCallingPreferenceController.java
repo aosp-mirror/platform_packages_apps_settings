@@ -50,7 +50,7 @@ public class WifiCallingPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return ImsManager.isWfcEnabledByPlatform(mContext)
                 && ImsManager.isWfcProvisionedOnDevice(mContext);
     }

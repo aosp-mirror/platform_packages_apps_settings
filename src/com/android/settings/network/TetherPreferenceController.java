@@ -67,7 +67,7 @@ public class TetherPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         final boolean isBlocked =
                 (!mConnectivityManager.isTetheringSupported() && !mAdminDisallowedTetherConfig)
                         || hasBaseUserRestriction(mContext, DISALLOW_CONFIG_TETHERING,

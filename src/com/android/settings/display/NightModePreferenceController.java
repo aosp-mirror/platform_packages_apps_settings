@@ -35,7 +35,7 @@ public class NightModePreferenceController extends PreferenceController
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return false;
     }
 

@@ -190,7 +190,7 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return false;
     }
 

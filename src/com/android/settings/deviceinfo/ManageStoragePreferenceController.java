@@ -17,12 +17,9 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
-
-import java.util.List;
 
 public class ManageStoragePreferenceController extends PreferenceController {
 
@@ -43,7 +40,7 @@ public class ManageStoragePreferenceController extends PreferenceController {
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return mContext.getResources().getBoolean(R.bool.config_storage_manager_settings_enabled);
     }
 }

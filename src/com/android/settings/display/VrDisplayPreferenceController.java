@@ -35,7 +35,7 @@ public class VrDisplayPreferenceController extends PreferenceController implemen
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         final PackageManager pm = mContext.getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_VR_MODE_HIGH_PERFORMANCE);
     }

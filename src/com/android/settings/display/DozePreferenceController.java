@@ -67,7 +67,7 @@ public class DozePreferenceController extends PreferenceController implements
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         String name = Build.IS_DEBUGGABLE ? SystemProperties.get("debug.doze.component") : null;
         if (TextUtils.isEmpty(name)) {
             name = mContext.getResources().getString(

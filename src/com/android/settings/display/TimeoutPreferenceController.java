@@ -42,7 +42,7 @@ public class TimeoutPreferenceController extends PreferenceController implements
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return true;
     }
 

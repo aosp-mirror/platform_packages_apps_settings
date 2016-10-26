@@ -37,7 +37,7 @@ public class NetworkResetPreferenceController extends PreferenceController {
     }
 
     @Override
-    protected boolean isAvailable() {
+    public boolean isAvailable() {
         return !RestrictedLockUtils.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
     }
