@@ -452,4 +452,22 @@
         <item name="android:progressDrawable">@drawable/ring_progress</item>
     </style>
 
+    <style name="AppHeader">
+        <item name="android:background">@color/card_background_grey</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="TextAppearance.AppHeaderTitle"
+           parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="AppHeaderLinkButton" parent="android:Widget.Material.Button.Borderless"/>
+
+    <style name="AppActionPrimaryButton" parent="android:Widget.Material.Button.Colored"/>
+
 </resources>

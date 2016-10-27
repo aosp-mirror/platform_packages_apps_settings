@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
@@ -70,6 +71,8 @@ public abstract class FeatureFactory {
     public abstract PowerUsageFeatureProvider getPowerUsageFeatureProvider();
 
     public abstract DashboardFeatureProvider getDashboardFeatureProvider(Context context);
+
+    public abstract ApplicationFeatureProvider getApplicationFeatureProvider(Context context);
 
     public abstract LocaleFeatureProvider getLocaleFeatureProvider();
 

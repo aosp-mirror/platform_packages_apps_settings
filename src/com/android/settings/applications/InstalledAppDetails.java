@@ -84,6 +84,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
+import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
@@ -92,6 +93,7 @@ import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
@@ -138,6 +140,7 @@ public class InstalledAppDetails extends AppInfoBase
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
 
     private static final String KEY_HEADER = "header_view";
+    private static final String KEY_FOOTER = "header_footer";
     private static final String KEY_NOTIFICATION = "notification_settings";
     private static final String KEY_STORAGE = "storage_settings";
     private static final String KEY_PERMISSION = "permission_settings";
@@ -148,11 +151,15 @@ public class InstalledAppDetails extends AppInfoBase
 
     private static final String NOTIFICATION_TUNER_SETTING = "show_importance_slider";
 
-    private final HashSet<String> mHomePackages = new HashSet<String>();
+    private final HashSet<String> mHomePackages = new HashSet<>();
+
+    private DashboardFeatureProvider mDashboardFeatureProvider;
+    private AppHeaderController mAppHeaderController;
 
     private boolean mInitialized;
     private boolean mShowUninstalled;
     private LayoutPreference mHeader;
+    private LayoutPreference mFooter;
     private Button mUninstallButton;
     private boolean mUpdatedSysApp = false;
     private Button mForceStopButton;
@@ -164,6 +171,7 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mMemoryPreference;
 
     private boolean mDisableAfterUninstall;
+
     // Used for updating notification preference.
     private final NotificationBackend mBackend = new NotificationBackend();
 
@@ -306,9 +314,16 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        final Activity activity = getActivity();
+        mDashboardFeatureProvider =
+                FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
+        mAppHeaderController = FeatureFactory.getFactory(activity)
+                .getApplicationFeatureProvider(activity).getAppHeaderController();
 
         setHasOptionsMenu(true);
-        addPreferencesFromResource(R.xml.installed_app_details);
+        addPreferencesFromResource(mDashboardFeatureProvider.isEnabled()
+                ? R.xml.installed_app_details_ia
+                : R.xml.installed_app_details);
         addDynamicPrefs();
 
         if (Utils.isBandwidthControlEnabled()) {
@@ -366,7 +381,18 @@ public class InstalledAppDetails extends AppInfoBase
         if (mFinishing) {
             return;
         }
-        handleHeader();
+        if (!mDashboardFeatureProvider.isEnabled()) {
+            handleHeader();
+        } else {
+            mHeader = (LayoutPreference) findPreference(KEY_HEADER);
+            mAppHeaderController.bindAppHeaderButtons(
+                    this,
+                    mHeader.findViewById(R.id.app_detail_links),
+                    mPackageName,
+                    AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
+                    AppHeaderController.ActionType.ACTION_APP_PREFERENCE);
+            prepareUninstallAndStop();
+        }
 
         mNotificationPreference = findPreference(KEY_NOTIFICATION);
         mNotificationPreference.setOnPreferenceClickListener(this);
@@ -404,7 +430,6 @@ public class InstalledAppDetails extends AppInfoBase
 
     private void handleHeader() {
         mHeader = (LayoutPreference) findPreference(KEY_HEADER);
-
         // Get Control button panel
         View btnPanel = mHeader.findViewById(R.id.control_buttons_panel);
         mForceStopButton = (Button) btnPanel.findViewById(R.id.right_button);
@@ -427,6 +452,13 @@ public class InstalledAppDetails extends AppInfoBase
         } else {
             gear.setVisibility(View.GONE);
         }
+    }
+
+    private void prepareUninstallAndStop() {
+        mForceStopButton = (Button) mFooter.findViewById(R.id.right_button);
+        mForceStopButton.setText(R.string.force_stop);
+        mUninstallButton = (Button) mFooter.findViewById(R.id.left_button);
+        mForceStopButton.setEnabled(false);
     }
 
     private Intent resolveIntent(Intent i) {
@@ -511,8 +543,12 @@ public class InstalledAppDetails extends AppInfoBase
     private void setAppLabelAndIcon(PackageInfo pkgInfo) {
         final View appSnippet = mHeader.findViewById(R.id.app_snippet);
         mState.ensureIcon(mAppEntry);
-        setupAppSnippet(appSnippet, mAppEntry.label, mAppEntry.icon,
-                pkgInfo != null ? pkgInfo.versionName : null);
+        if (mDashboardFeatureProvider.isEnabled()) {
+            mAppHeaderController.bindAppHeader(appSnippet, pkgInfo, mAppEntry);
+        } else {
+            setupAppSnippet(appSnippet, mAppEntry.label, mAppEntry.icon,
+                    pkgInfo != null ? pkgInfo.versionName : null);
+        }
     }
 
     private boolean signaturesMatch(String pkg1, String pkg2) {
@@ -917,6 +953,12 @@ public class InstalledAppDetails extends AppInfoBase
         }
 
         addAppInstallerInfoPref(screen);
+        if (mDashboardFeatureProvider.isEnabled()) {
+            mFooter = new LayoutPreference(screen.getContext(), R.layout.app_action_buttons);
+            mFooter.setOrder(10000);
+            mFooter.setKey(KEY_FOOTER);
+            screen.addPreference(mFooter);
+        }
     }
 
     private void addAppInstallerInfoPref(PreferenceScreen screen) {
