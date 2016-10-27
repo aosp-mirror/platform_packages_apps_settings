@@ -18,6 +18,7 @@ package com.android.settings.core;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.List;
 
@@ -63,6 +64,14 @@ public abstract class PreferenceController {
         if (!isAvailable()) {
             keys.add(getPreferenceKey());
         }
+    }
+
+    /**
+     * Updates raw data for search provider.
+     *
+     * Called by SearchIndexProvider#getRawDataToIndex
+     */
+    public void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
     }
 
     /**

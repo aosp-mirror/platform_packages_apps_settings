@@ -23,6 +23,7 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.drawer.CategoryKey;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAndAccountDashboardFragment extends DashboardFragment {
@@ -46,12 +47,18 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.account_settings;
+        return R.xml.user_and_accounts_settings;
     }
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        return null;
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new EmergencyInfoPreferenceController(context));
+        AddUserWhenLockedPreferenceController addUserWhenLockedPrefController =
+                new AddUserWhenLockedPreferenceController(context);
+        controllers.add(addUserWhenLockedPrefController);
+        getLifecycle().addObserver(addUserWhenLockedPrefController);
+        return controllers;
     }
 
 }
