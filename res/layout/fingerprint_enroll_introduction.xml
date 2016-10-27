@@ -35,6 +35,12 @@
             android:layout_height="wrap_content"
             android:text="@string/security_settings_fingerprint_enroll_introduction_message" />
 
+        <com.android.setupwizardlib.view.RichTextView
+            android:id="@+id/error_text"
+            style="@style/SuwDescription.Glif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

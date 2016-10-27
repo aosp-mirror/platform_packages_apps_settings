@@ -52,6 +52,7 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
     private UserManager mUserManager;
     private boolean mHasPassword;
     private boolean mFingerprintUnlockDisabledByAdmin;
+    private TextView mErrorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +68,39 @@ public class FingerprintEnrollIntroduction extends FingerprintEnrollBase
             setHeaderText(R.string.security_settings_fingerprint_enroll_introduction_title);
         }
 
-        final Button cancelButton = (Button) findViewById(R.id.fingerprint_cancel_button);
+        Button cancelButton = (Button) findViewById(R.id.fingerprint_cancel_button);
         cancelButton.setOnClickListener(this);
+
+        mErrorText = (TextView) findViewById(R.id.error_text);
 
         mUserManager = UserManager.get(this);
         updatePasswordQuality();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        final FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(this);
+        int errorMsg = 0;
+        if (fingerprintManager != null) {
+            final int max = getResources().getInteger(
+                    com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
+            final int numEnrolledFingerprints =
+                    fingerprintManager.getEnrolledFingerprints(mUserId).size();
+            if (numEnrolledFingerprints >= max) {
+                errorMsg = R.string.fingerprint_intro_error_max;
+            }
+        } else {
+            errorMsg = R.string.fingerprint_intro_error_unknown;
+        }
+        if (errorMsg == 0) {
+            mErrorText.setText(null);
+            getNextButton().setVisibility(View.VISIBLE);
+        } else {
+            mErrorText.setText(errorMsg);
+            getNextButton().setVisibility(View.GONE);
+        }
     }
 
     private void updatePasswordQuality() {
