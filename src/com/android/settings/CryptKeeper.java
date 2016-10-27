@@ -293,11 +293,11 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             try {
                 Log.d(TAG, "Validating encryption state.");
                 state = service.getEncryptionState();
-                if (state == IMountService.ENCRYPTION_STATE_NONE) {
+                if (state == StorageManager.ENCRYPTION_STATE_NONE) {
                     Log.w(TAG, "Unexpectedly in CryptKeeper even though there is no encryption.");
                     return true; // Unexpected, but fine, I guess...
                 }
-                return state == IMountService.ENCRYPTION_STATE_OK;
+                return state == StorageManager.ENCRYPTION_STATE_OK;
             } catch (RemoteException e) {
                 Log.w(TAG, "Unable to get encryption state properly");
                 return true;
@@ -310,7 +310,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             if (Boolean.FALSE.equals(result)) {
                 Log.w(TAG, "Incomplete, or corrupted encryption detected. Prompting user to wipe.");
                 mEncryptionGoneBad = true;
-                mCorrupt = state == IMountService.ENCRYPTION_STATE_ERROR_CORRUPT;
+                mCorrupt = state == StorageManager.ENCRYPTION_STATE_ERROR_CORRUPT;
             } else {
                 Log.d(TAG, "Encryption state validated. Proceeding to configure UI");
             }
