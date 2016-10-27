@@ -16,8 +16,14 @@
 
 package com.android.settings.applications;
 
+import android.app.Fragment;
+import android.view.View;
+
 public interface ApplicationFeatureProvider {
 
-    AppHeaderController getAppHeaderController();
+    /**
+     * Returns a new {@link AppHeaderController} instance to customize app header.
+     */
+    AppHeaderController newAppHeaderController(Fragment fragment, View appHeader);
 }
 

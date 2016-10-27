@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -24,19 +25,24 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.view.View;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.LayoutPreference;
+import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
-
 
 import java.util.List;
 
@@ -50,15 +56,20 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES);
 
     private static final String KEY_CHANNELS = "channels";
+
+    private DashboardFeatureProvider mDashboardFeatureProvider;
     private PreferenceCategory mChannels;
-    List<NotificationChannel> mChannelList;
+    private List<NotificationChannel> mChannelList;
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (mAppRow == null) return;
-        AppHeader.createAppHeader(this, mAppRow.icon, mAppRow.label, mAppRow.pkg, mAppRow.uid,
-                mAppRow.settingsIntent);
+        if (!mDashboardFeatureProvider.isEnabled()) {
+            AppHeader.createAppHeader(this, mAppRow.icon, mAppRow.label, mAppRow.pkg, mAppRow.uid,
+                    mAppRow.settingsIntent);
+        }
     }
 
     @Override
@@ -69,8 +80,12 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Activity activity = getActivity();
+        mDashboardFeatureProvider =
+                FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
 
         addPreferencesFromResource(R.xml.app_notification_settings);
+
         mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
         mPriority =
                 (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BYPASS_DND);
@@ -117,6 +132,22 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 }
             }
             updateDependents(mAppRow.appImportance);
+        }
+        if (mDashboardFeatureProvider.isEnabled()) {
+            final AppHeaderController appHeaderController = FeatureFactory.getFactory(activity)
+                    .getApplicationFeatureProvider(activity)
+                    .newAppHeaderController(this /* fragment */, null /* appHeader */);
+            final View appHeader = appHeaderController.setIcon(mAppRow.icon)
+                    .setLabel(mAppRow.label)
+                    .setPackageName(mAppRow.pkg)
+                    .setUid(mAppRow.uid)
+                    .setAppNotifPrefIntent(mAppRow.settingsIntent)
+                    .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                            AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
+                    .done();
+            final Preference appHeaderPref = new LayoutPreference(getPrefContext(), appHeader);
+            appHeaderPref.setOrder(0);
+            getPreferenceScreen().addPreference(appHeaderPref);
         }
     }
 

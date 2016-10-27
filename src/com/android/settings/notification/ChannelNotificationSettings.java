@@ -20,9 +20,14 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
+import com.android.settings.applications.AppHeaderController;
+import com.android.settings.applications.LayoutPreference;
+import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.net.Uri;
@@ -30,6 +35,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
+import android.view.View;
 
 public class ChannelNotificationSettings extends NotificationSettingsBase {
     protected static final String KEY_LIGHTS = "lights";
@@ -39,14 +45,18 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     protected RestrictedSwitchPreference mLights;
     protected RestrictedSwitchPreference mVibrate;
     protected DefaultNotificationTonePreference mRingtone;
+
+    private DashboardFeatureProvider mDashboardFeatureProvider;
     private int mMaxImportance;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (mAppRow == null || mChannel == null) return;
-        AppHeader.createAppHeader(
-                this, mAppRow.icon, mChannel.getName(), mAppRow.pkg, mAppRow.uid);
+        if (!mDashboardFeatureProvider.isEnabled()) {
+            AppHeader.createAppHeader(
+                    this, mAppRow.icon, mChannel.getName(), mAppRow.pkg, mAppRow.uid);
+        }
     }
 
     @Override
@@ -57,6 +67,9 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Activity activity = getActivity();
+        mDashboardFeatureProvider =
+                FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
         addPreferencesFromResource(R.xml.channel_notification_settings);
 
         mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
@@ -87,6 +100,22 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             setupImportancePrefs(false, mChannel.getImportance(),
                     mChannel.getImportance() == NotificationManager.IMPORTANCE_NONE,
                     mMaxImportance);
+        }
+        if (mDashboardFeatureProvider.isEnabled()) {
+            final AppHeaderController appHeaderController = FeatureFactory.getFactory(activity)
+                    .getApplicationFeatureProvider(activity)
+                    .newAppHeaderController(this /* fragment */, null /* appHeader */);
+            final View appHeader = appHeaderController.setIcon(mAppRow.icon)
+                    .setLabel(mAppRow.label)
+                    .setSummary(mChannel.getName())
+                    .setPackageName(mAppRow.pkg)
+                    .setUid(mAppRow.uid)
+                    .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                            AppHeaderController.ActionType.ACTION_NONE)
+                    .done();
+            final Preference appHeaderPref = new LayoutPreference(getPrefContext(), appHeader);
+            appHeaderPref.setOrder(0);
+            getPreferenceScreen().addPreference(appHeaderPref);
         }
     }
 
