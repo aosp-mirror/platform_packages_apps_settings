@@ -17,6 +17,8 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.QueuedWork;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -160,7 +162,7 @@ public class RadioInfo extends Activity {
     private static final int MENU_ITEM_VIEW_ADN     = 1;
     private static final int MENU_ITEM_VIEW_FDN     = 2;
     private static final int MENU_ITEM_VIEW_SDN     = 3;
-    private static final int MENU_ITEM_GET_PDP_LIST = 4;
+    private static final int MENU_ITEM_GET_IMS_STATUS = 4;
     private static final int MENU_ITEM_TOGGLE_DATA  = 5;
 
     private TextView mDeviceId; //DeviceId is the IMEI in GSM and the MEID in CDMA
@@ -497,7 +499,7 @@ public class RadioInfo extends Activity {
     }
 
     private void restoreFromBundle(Bundle b) {
-        if( b == null) {
+        if(b == null) {
             return;
         }
 
@@ -537,8 +539,8 @@ public class RadioInfo extends Activity {
                 R.string.radioInfo_menu_viewFDN).setOnMenuItemClickListener(mViewFDNCallback);
         menu.add(1, MENU_ITEM_VIEW_SDN, 0,
                 R.string.radioInfo_menu_viewSDN).setOnMenuItemClickListener(mViewSDNCallback);
-        menu.add(1, MENU_ITEM_GET_PDP_LIST,
-                0, R.string.radioInfo_menu_getPDP).setOnMenuItemClickListener(mGetPdpList);
+        menu.add(1, MENU_ITEM_GET_IMS_STATUS,
+                0, R.string.radioInfo_menu_getIMS).setOnMenuItemClickListener(mGetImsStatus);
         menu.add(1, MENU_ITEM_TOGGLE_DATA,
                 0, R.string.radio_info_data_connection_disable).setOnMenuItemClickListener(mToggleData);
         return true;
@@ -632,7 +634,7 @@ public class RadioInfo extends Activity {
         StringBuilder sb = new StringBuilder();
 
         if (cids != null) {
-            if ( cids.isEmpty() ) {
+            if (cids.isEmpty()) {
                 sb.append("no neighboring cells");
             } else {
                 for (NeighboringCellInfo cell : cids) {
@@ -860,7 +862,7 @@ public class RadioInfo extends Activity {
     }
 
     private final void updateNetworkType() {
-        if( phone != null ) {
+        if(phone != null) {
             ServiceState ss = phone.getServiceState();
             dataNetwork.setText(ServiceState.rilRadioTechnologyToString(
                     phone.getServiceState().getRilDataRadioTechnology()));
@@ -1069,10 +1071,36 @@ public class RadioInfo extends Activity {
         }
     };
 
-    private MenuItem.OnMenuItemClickListener mGetPdpList = new MenuItem.OnMenuItemClickListener() {
+    private MenuItem.OnMenuItemClickListener mGetImsStatus = new MenuItem.OnMenuItemClickListener() {
         public boolean onMenuItemClick(MenuItem item) {
-            //FIXME: Replace with a TelephonyManager call
-            phone.getDataCallList(null);
+            boolean isImsRegistered = phone.isImsRegistered();
+            boolean availableVolte = phone.isVolteEnabled();
+            boolean availableWfc = phone.isWifiCallingEnabled();
+            boolean availableVt = phone.isVideoEnabled();
+            boolean availableUt = phone.isUtEnabled();
+
+            final String imsRegString = isImsRegistered ?
+                getString(R.string.radio_info_ims_reg_status_registered) :
+                getString(R.string.radio_info_ims_reg_status_not_registered);
+
+            final String available = getString(R.string.radio_info_ims_feature_status_available);
+            final String unavailable = getString(
+                    R.string.radio_info_ims_feature_status_unavailable);
+
+            String imsStatus = getString(R.string.radio_info_ims_reg_status,
+                    imsRegString,
+                    availableVolte ? available : unavailable,
+                    availableWfc ? available : unavailable,
+                    availableVt ? available : unavailable,
+                    availableUt ? available : unavailable);
+
+            AlertDialog imsDialog = new AlertDialog.Builder(RadioInfo.this)
+                .setMessage(imsStatus)
+                .setTitle(getString(R.string.radio_info_ims_reg_status_title))
+                .create();
+
+            imsDialog.show();
+
             return true;
         }
     };
@@ -1119,22 +1147,22 @@ public class RadioInfo extends Activity {
         radioPowerOnSwitch.setOnCheckedChangeListener(mRadioPowerOnChangeListener);
     }
 
-    void setImsVolteProvisionedState( boolean state ) {
+    void setImsVolteProvisionedState(boolean state) {
         Log.d(TAG, "setImsVolteProvisioned state: " + ((state)? "on":"off"));
-        setImsConfigProvisionedState( IMS_VOLTE_PROVISIONED_CONFIG_ID, state );
+        setImsConfigProvisionedState(IMS_VOLTE_PROVISIONED_CONFIG_ID, state);
     }
 
-    void setImsVtProvisionedState( boolean state ) {
+    void setImsVtProvisionedState(boolean state) {
         Log.d(TAG, "setImsVtProvisioned() state: " + ((state)? "on":"off"));
-        setImsConfigProvisionedState( IMS_VT_PROVISIONED_CONFIG_ID, state );
+        setImsConfigProvisionedState(IMS_VT_PROVISIONED_CONFIG_ID, state);
     }
 
-    void setImsWfcProvisionedState( boolean state ) {
+    void setImsWfcProvisionedState(boolean state) {
         Log.d(TAG, "setImsWfcProvisioned() state: " + ((state)? "on":"off"));
-        setImsConfigProvisionedState( IMS_WFC_PROVISIONED_CONFIG_ID, state );
+        setImsConfigProvisionedState(IMS_WFC_PROVISIONED_CONFIG_ID, state);
     }
 
-    void setImsConfigProvisionedState( int configItem, boolean state ) {
+    void setImsConfigProvisionedState(int configItem, boolean state) {
         if (phone != null && mImsManager != null) {
             QueuedWork.singleThreadExecutor().submit(new Runnable() {
                 public void run() {
@@ -1170,7 +1198,7 @@ public class RadioInfo extends Activity {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             setImsVolteProvisionedState(isChecked);
-       }
+        }
     };
 
     private boolean isImsVtProvisioned() {
@@ -1185,7 +1213,7 @@ public class RadioInfo extends Activity {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             setImsVtProvisionedState(isChecked);
-       }
+        }
     };
 
     private boolean isImsWfcProvisioned() {
@@ -1200,7 +1228,7 @@ public class RadioInfo extends Activity {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             setImsWfcProvisionedState(isChecked);
-       }
+        }
     };
 
     private void updateImsProvisionedState() {
