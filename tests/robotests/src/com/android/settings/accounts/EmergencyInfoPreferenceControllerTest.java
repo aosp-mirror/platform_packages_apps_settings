@@ -110,12 +110,13 @@ public class EmergencyInfoPreferenceControllerTest {
 
         verify(mScreen, never()).removePreference(any(Preference.class));
     }
-/*
+
     @Test
     public void handlePreferenceTreeClick_shouldStartActivity() {
-        final Preference preference = mock(Preference.class);
         final ShadowApplication application = ShadowApplication.getInstance();
         final Context context = application.getApplicationContext();
+        final Preference preference = new Preference(context);
+        preference.setKey("emergency_info");
         mController = new EmergencyInfoPreferenceController(context);
 
         mController.handlePreferenceTreeClick(preference);
@@ -123,5 +124,4 @@ public class EmergencyInfoPreferenceControllerTest {
         assertThat(application.getNextStartedActivity().getAction())
                 .isEqualTo("android.settings.EDIT_EMERGENGY_INFO");
     }
-*/
 }
