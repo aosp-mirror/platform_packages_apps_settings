@@ -16,23 +16,19 @@
 
 package com.android.settings.applications;
 
+import android.app.Fragment;
 import android.content.Context;
+import android.view.View;
 
 public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvider {
 
     private final Context mContext;
 
-    private AppHeaderController mAppHeaderController;
-
     public ApplicationFeatureProviderImpl(Context context) {
         mContext = context.getApplicationContext();
     }
 
-    @Override
-    public AppHeaderController getAppHeaderController() {
-        if (mAppHeaderController == null) {
-            mAppHeaderController = new AppHeaderController(mContext);
-        }
-        return mAppHeaderController;
+    public AppHeaderController newAppHeaderController(Fragment fragment, View appHeader) {
+        return new AppHeaderController(mContext, fragment, appHeader);
     }
 }

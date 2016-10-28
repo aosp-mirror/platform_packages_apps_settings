@@ -17,12 +17,14 @@
 package com.android.settings.applications;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
+import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -44,6 +46,7 @@ import org.robolectric.shadows.ShadowApplication;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -57,6 +60,8 @@ public class AppHeaderControllerTest {
     private ApplicationsState.AppEntry mAppEntry;
     @Mock
     private Fragment mFragment;
+    @Mock
+    private View mAppHeader;
 
     private Context mShadowContext;
     private LayoutInflater mLayoutInflater;
@@ -71,7 +76,23 @@ public class AppHeaderControllerTest {
         mLayoutInflater = LayoutInflater.from(mShadowContext);
         mInfo = new PackageInfo();
         mInfo.versionName = "1234";
-        mController = new AppHeaderController(mContext);
+    }
+
+    @Test
+    public void testBuildView_constructedWithoutView_shouldCreateNewView() {
+        mController = new AppHeaderController(mShadowContext, mFragment, null);
+        View view = mController.done();
+
+        assertThat(view).isNotNull();
+    }
+
+    @Test
+    public void testBuildView_constructedWithView_shouldReturnSameView() {
+        View inputView = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
+        mController = new AppHeaderController(mShadowContext, mFragment, inputView);
+        View view = mController.done();
+
+        assertThat(view).isSameAs(inputView);
     }
 
     @Test
@@ -80,14 +101,15 @@ public class AppHeaderControllerTest {
         final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
         final TextView label = (TextView) appHeader.findViewById(android.R.id.title);
         final TextView version = (TextView) appHeader.findViewById(android.R.id.summary);
-        label.setText(testString);
-        label.setText(testString);
 
-        mController.bindAppHeader(appHeader, mInfo, mAppEntry);
+        mController = new AppHeaderController(mShadowContext, mFragment, appHeader);
+        mController.setLabel(testString);
+        mController.setSummary(testString);
+        mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
+        mController.done();
 
-        assertThat(label.getText()).isNotEqualTo(testString);
-        assertThat(version.getText())
-                .isEqualTo(mShadowContext.getString(R.string.version_text, mInfo.versionName));
+        assertThat(label.getText()).isEqualTo(testString);
+        assertThat(version.getText()).isEqualTo(testString);
     }
 
     @Test
@@ -100,14 +122,17 @@ public class AppHeaderControllerTest {
                 .inflate(R.layout.app_details, null /* root */);
         when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(info);
-        mController.bindAppHeaderButtons(mFragment, appLinks,
-                mShadowContext.getPackageName(),
+
+        mController = new AppHeaderController(mContext, mFragment, appLinks);
+        mController.setButtonActions(
                 AppHeaderController.ActionType.ACTION_APP_PREFERENCE,
-                AppHeaderController.ActionType.ACTION_APP_PREFERENCE);
+                AppHeaderController.ActionType.ACTION_NONE);
+        mController.done();
+
         assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
                 .isEqualTo(View.VISIBLE);
         assertThat(appLinks.findViewById(R.id.right_button).getVisibility())
-                .isEqualTo(View.VISIBLE);
+                .isEqualTo(View.GONE);
         try {
             appLinks.findViewById(R.id.left_button).performClick();
         } catch (Exception e) {
@@ -122,10 +147,13 @@ public class AppHeaderControllerTest {
                 .inflate(R.layout.app_details, null /* root */);
         when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(null);
-        mController.bindAppHeaderButtons(mFragment, appLinks,
-                mShadowContext.getPackageName(),
+
+        mController = new AppHeaderController(mContext, mFragment, appLinks);
+        mController.setButtonActions(
                 AppHeaderController.ActionType.ACTION_APP_PREFERENCE,
-                AppHeaderController.ActionType.ACTION_APP_PREFERENCE);
+                AppHeaderController.ActionType.ACTION_NONE);
+        mController.done();
+
         assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
                 .isEqualTo(View.GONE);
         assertThat(appLinks.findViewById(R.id.right_button).getVisibility())
@@ -138,12 +166,71 @@ public class AppHeaderControllerTest {
                 .inflate(R.layout.app_details, null /* root */);
         when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(null);
-        mController.bindAppHeaderButtons(mFragment, appLinks,
-                mShadowContext.getPackageName(),
+
+        mController = new AppHeaderController(mContext, mFragment, appLinks);
+        mController.setButtonActions(
                 AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
-                AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK);
+                AppHeaderController.ActionType.ACTION_NONE);
+        mController.done();
+
         assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
                 .isEqualTo(View.GONE);
+        assertThat(appLinks.findViewById(R.id.right_button).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void bindButton_noAppInfo_shouldNotShowButton() {
+        final View appLinks = mLayoutInflater
+                .inflate(R.layout.app_details, null /* root */);
+
+        mController = new AppHeaderController(mContext, mFragment, appLinks);
+        mController.setPackageName(null)
+                .setButtonActions(
+                        AppHeaderController.ActionType.ACTION_APP_INFO,
+                        AppHeaderController.ActionType.ACTION_NONE);
+        mController.done();
+
+        assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(appLinks.findViewById(R.id.right_button).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void bindButton_hasAppInfo_shouldShowButton() {
+        final View appLinks = mLayoutInflater
+                .inflate(R.layout.app_details, null /* root */);
+        when(mFragment.getActivity()).thenReturn(mock(Activity.class));
+
+        mController = new AppHeaderController(mContext, mFragment, appLinks);
+        mController.setPackageName("123")
+                .setUid(UserHandle.USER_SYSTEM)
+                .setButtonActions(
+                        AppHeaderController.ActionType.ACTION_APP_INFO,
+                        AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE);
+        mController.done();
+
+        assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
+                .isEqualTo(View.VISIBLE);
+        assertThat(appLinks.findViewById(R.id.right_button).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void bindButton_hasAppNotifIntent_shouldShowButton() {
+        final View appLinks = mLayoutInflater
+                .inflate(R.layout.app_details, null /* root */);
+
+        mController = new AppHeaderController(mContext, mFragment, appLinks);
+        mController.setAppNotifPrefIntent(new Intent())
+                .setButtonActions(
+                        AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
+                        AppHeaderController.ActionType.ACTION_NONE);
+        mController.done();
+
+        assertThat(appLinks.findViewById(R.id.left_button).getVisibility())
+                .isEqualTo(View.VISIBLE);
         assertThat(appLinks.findViewById(R.id.right_button).getVisibility())
                 .isEqualTo(View.GONE);
     }

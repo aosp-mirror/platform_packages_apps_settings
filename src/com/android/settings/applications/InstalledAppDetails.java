@@ -154,7 +154,6 @@ public class InstalledAppDetails extends AppInfoBase
     private final HashSet<String> mHomePackages = new HashSet<>();
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
-    private AppHeaderController mAppHeaderController;
 
     private boolean mInitialized;
     private boolean mShowUninstalled;
@@ -317,8 +316,6 @@ public class InstalledAppDetails extends AppInfoBase
         final Activity activity = getActivity();
         mDashboardFeatureProvider =
                 FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
-        mAppHeaderController = FeatureFactory.getFactory(activity)
-                .getApplicationFeatureProvider(activity).getAppHeaderController();
 
         setHasOptionsMenu(true);
         addPreferencesFromResource(mDashboardFeatureProvider.isEnabled()
@@ -384,13 +381,15 @@ public class InstalledAppDetails extends AppInfoBase
         if (!mDashboardFeatureProvider.isEnabled()) {
             handleHeader();
         } else {
+            final Activity activity = getActivity();
             mHeader = (LayoutPreference) findPreference(KEY_HEADER);
-            mAppHeaderController.bindAppHeaderButtons(
-                    this,
-                    mHeader.findViewById(R.id.app_detail_links),
-                    mPackageName,
-                    AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
-                    AppHeaderController.ActionType.ACTION_APP_PREFERENCE);
+            FeatureFactory.getFactory(activity)
+                    .getApplicationFeatureProvider(activity)
+                    .newAppHeaderController(this, mHeader.findViewById(R.id.app_snippet))
+                    .setPackageName(mPackageName)
+                    .setButtonActions(AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
+                            AppHeaderController.ActionType.ACTION_APP_PREFERENCE)
+                    .bindAppHeaderButtons();
             prepareUninstallAndStop();
         }
 
@@ -544,7 +543,14 @@ public class InstalledAppDetails extends AppInfoBase
         final View appSnippet = mHeader.findViewById(R.id.app_snippet);
         mState.ensureIcon(mAppEntry);
         if (mDashboardFeatureProvider.isEnabled()) {
-            mAppHeaderController.bindAppHeader(appSnippet, pkgInfo, mAppEntry);
+            final Activity activity = getActivity();
+            FeatureFactory.getFactory(activity)
+                    .getApplicationFeatureProvider(activity)
+                    .newAppHeaderController(this, appSnippet)
+                    .setLabel(mAppEntry)
+                    .setIcon(mAppEntry)
+                    .setSummary(pkgInfo)
+                    .done(false /* rebindActions */);
         } else {
             setupAppSnippet(appSnippet, mAppEntry.label, mAppEntry.icon,
                     pkgInfo != null ? pkgInfo.versionName : null);
