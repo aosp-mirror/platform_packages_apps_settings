@@ -133,7 +133,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
                             : new ColorDrawable(0),
                     mApp.mUiLabel, mApp.mPackage, mApp.mUiTargetApp.uid);
         } else {
-            final View appHeader = FeatureFactory.getFactory(activity)
+            final Preference pref = FeatureFactory.getFactory(activity)
                     .getApplicationFeatureProvider(activity)
                     .newAppHeaderController(this, null /* appHeader */)
                     .setIcon(mApp.mUiTargetApp != null
@@ -145,11 +145,8 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
                             ? mApp.mUiTargetApp.uid
                             : UserHandle.USER_NULL)
                     .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
-                    .done();
-            final Preference appHeaderPref = new LayoutPreference(getPrefContext(), appHeader);
-            // Makes sure it's the first preference onscreen.
-            appHeaderPref.setOrder(-1000);
-            getPreferenceScreen().addPreference(appHeaderPref);
+                    .done(getPrefContext());
+            getPreferenceScreen().addPreference(pref);
         }
     }
 

@@ -16,17 +16,6 @@
 
 package com.android.settings.notification;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.AppHeader;
-import com.android.settings.R;
-import com.android.settings.RingtonePreference;
-import com.android.settings.applications.AppHeaderController;
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.dashboard.DashboardFeatureProvider;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedSwitchPreference;
-
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -35,7 +24,16 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
-import android.view.View;
+
+import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.AppHeader;
+import com.android.settings.R;
+import com.android.settings.RingtonePreference;
+import com.android.settings.applications.AppHeaderController;
+import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 public class ChannelNotificationSettings extends NotificationSettingsBase {
     protected static final String KEY_LIGHTS = "lights";
@@ -102,20 +100,18 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                     mMaxImportance);
         }
         if (mDashboardFeatureProvider.isEnabled()) {
-            final AppHeaderController appHeaderController = FeatureFactory.getFactory(activity)
+            final Preference pref = FeatureFactory.getFactory(activity)
                     .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this /* fragment */, null /* appHeader */);
-            final View appHeader = appHeaderController.setIcon(mAppRow.icon)
+                    .newAppHeaderController(this /* fragment */, null /* appHeader */)
+                    .setIcon(mAppRow.icon)
                     .setLabel(mAppRow.label)
                     .setSummary(mChannel.getName())
                     .setPackageName(mAppRow.pkg)
                     .setUid(mAppRow.uid)
                     .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
                             AppHeaderController.ActionType.ACTION_NONE)
-                    .done();
-            final Preference appHeaderPref = new LayoutPreference(getPrefContext(), appHeader);
-            appHeaderPref.setOrder(0);
-            getPreferenceScreen().addPreference(appHeaderPref);
+                    .done(getPrefContext());
+            getPreferenceScreen().addPreference(pref);
         }
     }
 

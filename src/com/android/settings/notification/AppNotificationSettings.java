@@ -29,7 +29,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.view.View;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
@@ -37,7 +36,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.overlay.FeatureFactory;
@@ -134,20 +132,18 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             updateDependents(mAppRow.appImportance);
         }
         if (mDashboardFeatureProvider.isEnabled()) {
-            final AppHeaderController appHeaderController = FeatureFactory.getFactory(activity)
+            final Preference pref = FeatureFactory.getFactory(activity)
                     .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this /* fragment */, null /* appHeader */);
-            final View appHeader = appHeaderController.setIcon(mAppRow.icon)
+                    .newAppHeaderController(this /* fragment */, null /* appHeader */)
+                    .setIcon(mAppRow.icon)
                     .setLabel(mAppRow.label)
                     .setPackageName(mAppRow.pkg)
                     .setUid(mAppRow.uid)
                     .setAppNotifPrefIntent(mAppRow.settingsIntent)
                     .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
                             AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
-                    .done();
-            final Preference appHeaderPref = new LayoutPreference(getPrefContext(), appHeader);
-            appHeaderPref.setOrder(0);
-            getPreferenceScreen().addPreference(appHeaderPref);
+                    .done(getPrefContext());
+            getPreferenceScreen().addPreference(pref);
         }
     }
 

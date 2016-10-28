@@ -31,8 +31,8 @@ import android.os.LocaleList;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
+import android.support.v7.preference.Preference;
 import android.text.TextUtils;
-import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,9 +52,9 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.Spinner;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
-import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
@@ -67,6 +67,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.fuelgauge.PowerWhitelistBackend;
@@ -338,7 +339,7 @@ public class ManageApplications extends InstrumentedFragment
     private void createHeader() {
         Activity activity = getActivity();
         FrameLayout pinnedHeader = (FrameLayout) mRootView.findViewById(R.id.pinned_header);
-        mSpinnerHeader = (ViewGroup) activity.getLayoutInflater()
+        mSpinnerHeader = activity.getLayoutInflater()
                 .inflate(R.layout.apps_filter_spinner, pinnedHeader, false);
         mFilterSpinner = (Spinner) mSpinnerHeader.findViewById(R.id.filter_spinner);
         mFilterAdapter = new FilterSpinnerAdapter(this);
@@ -371,9 +372,23 @@ public class ManageApplications extends InstrumentedFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         if (mListType == LIST_TYPE_STORAGE) {
-            FrameLayout pinnedHeader = (FrameLayout) mRootView.findViewById(R.id.pinned_header);
-            AppHeader.createAppHeader(getActivity(), null, mVolumeName, null, -1, pinnedHeader);
+            final Activity activity = getActivity();
+            final boolean isNewIAEnabled = FeatureFactory.getFactory(activity)
+                    .getDashboardFeatureProvider(activity)
+                    .isEnabled();
+            if (!isNewIAEnabled) {
+                FrameLayout pinnedHeader = (FrameLayout) mRootView.findViewById(R.id.pinned_header);
+                AppHeader.createAppHeader(getActivity(), null, mVolumeName, null, -1, pinnedHeader);
+            } else {
+                final View appHeader = FeatureFactory.getFactory(activity)
+                        .getApplicationFeatureProvider(activity)
+                        .newAppHeaderController(this, null /* appHeaderView */)
+                        .setLabel(mVolumeName)
+                        .done();
+                mListView.addHeaderView(appHeader);
+            }
         }
     }
 

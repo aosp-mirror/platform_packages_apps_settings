@@ -14,6 +14,7 @@
 
 package com.android.settings.datausage;
 
+import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +30,6 @@ import android.net.NetworkTemplate;
 import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -38,13 +38,15 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArraySet;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
+import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.Utils;
 import com.android.settingslib.net.ChartData;
@@ -53,7 +55,6 @@ import com.android.settingslib.net.UidDetailProvider;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -345,15 +346,32 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        View header = setPinnedHeaderView(R.layout.app_header);
         String pkg = mPackages.size() != 0 ? mPackages.valueAt(0) : null;
         int uid = 0;
         try {
             uid = pkg != null ? getPackageManager().getPackageUid(pkg, 0) : 0;
         } catch (PackageManager.NameNotFoundException e) {
         }
-        AppHeader.setupHeaderView(getActivity(), mIcon, mLabel,
-                pkg, uid, AppHeader.includeAppInfo(this), 0, header, null);
+
+        final Activity activity = getActivity();
+        if (!FeatureFactory.getFactory(activity)
+                .getDashboardFeatureProvider(activity).isEnabled()) {
+            View header = setPinnedHeaderView(R.layout.app_header);
+            AppHeader.setupHeaderView(getActivity(), mIcon, mLabel,
+                    pkg, uid, AppHeader.includeAppInfo(this), 0, header, null);
+        } else {
+            final Preference pref = FeatureFactory.getFactory(activity)
+                    .getApplicationFeatureProvider(activity)
+                    .newAppHeaderController(this, null /* appHeader */)
+                    .setIcon(mIcon)
+                    .setLabel(mLabel)
+                    .setPackageName(pkg)
+                    .setUid(uid)
+                    .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                            AppHeaderController.ActionType.ACTION_NONE)
+                    .done(getPrefContext());
+            getPreferenceScreen().addPreference(pref);
+        }
     }
 
     @Override
