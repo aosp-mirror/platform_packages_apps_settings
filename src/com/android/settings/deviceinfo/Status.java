@@ -280,7 +280,8 @@ public class Status extends SettingsPreferenceFragment {
 
     private void setWifiStatus() {
         WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
-        String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
+        boolean hasMacAddress = wifiInfo != null && wifiInfo.hasRealMacAddress();
+        String macAddress = hasMacAddress ? wifiInfo.getMacAddress() : null;
         mWifiMacAddress.setSummary(!TextUtils.isEmpty(macAddress) ? macAddress : mUnavailable);
     }
 
