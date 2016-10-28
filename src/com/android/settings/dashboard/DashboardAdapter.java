@@ -163,13 +163,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void notifySummaryChanged(Tile tile) {
         final int position = mDashboardData.getPositionByTile(tile);
         if (position != DashboardData.POSITION_NOT_FOUND) {
-            final Tile targetTile = (Tile) mDashboardData.getItemEntityByPosition(position);
-            if (!TextUtils.equals(tile.summary, targetTile.summary)) {
-
-                // Since usually tile in parameter and tile in mCategories are same instance,
-                // which is hard to be detected by DiffUtil, so we notifyItemChanged directly.
-                notifyItemChanged(position);
-            }
+            // Since usually tile in parameter and tile in mCategories are same instance,
+            // which is hard to be detected by DiffUtil, so we notifyItemChanged directly.
+            notifyItemChanged(position);
         }
     }
 
