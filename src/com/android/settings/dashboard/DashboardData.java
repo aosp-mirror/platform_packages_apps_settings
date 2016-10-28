@@ -16,6 +16,7 @@
 package com.android.settings.dashboard;
 
 import android.annotation.IntDef;
+import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 import android.text.TextUtils;
 import com.android.settings.dashboard.conditional.Condition;
@@ -350,6 +351,15 @@ public class DashboardData {
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
             return mOldItems.get(oldItemPosition).equals(mNewItems.get(newItemPosition));
         }
+
+        @Nullable
+        @Override
+        public Object getChangePayload(int oldItemPosition, int newItemPosition) {
+            if (mOldItems.get(oldItemPosition).type == Item.TYPE_CONDITION_CARD) {
+                return "condition"; // return anything but null to mark the payload
+            }
+            return null;
+         }
     }
 
     /**

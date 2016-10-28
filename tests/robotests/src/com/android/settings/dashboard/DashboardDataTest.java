@@ -196,6 +196,31 @@ public class DashboardDataTest {
         testDiffUtil(mDashboardDataWithOneConditions, mDashboardDataWithNoItems, testResultData);
     }
 
+    @Test
+    public void testPayload_ItemConditionCard_returnNotNull() {
+        final DashboardData.ItemsDataDiffCallback callback = new DashboardData
+                .ItemsDataDiffCallback(
+                mDashboardDataWithOneConditions.getItemList(),
+                mDashboardDataWithOneConditions.getItemList());
+
+        // Item in position 0 is condition card, which payload should not be null
+        assertThat(callback.getChangePayload(0, 0)).isNotEqualTo(null);
+    }
+
+    @Test
+    public void testPayload_ItemNotConditionCard_returnNull() {
+        final DashboardData.ItemsDataDiffCallback callback = new DashboardData
+                .ItemsDataDiffCallback(
+                mDashboardDataWithOneConditions.getItemList(),
+                mDashboardDataWithOneConditions.getItemList());
+
+        // Only item in position 0 is condition card, so others' payload should be null
+        for (int i = 1; i < mDashboardDataWithOneConditions.getItemList().size(); i++) {
+            assertThat(callback.getChangePayload(i, i)).isEqualTo(null);
+        }
+
+    }
+
     /**
      * Test when using the
      * {@link com.android.settings.dashboard.DashboardData.ItemsDataDiffCallback}
