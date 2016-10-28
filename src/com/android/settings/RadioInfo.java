@@ -1210,14 +1210,20 @@ public class RadioInfo extends Activity {
         imsVolteProvisionedSwitch.setOnCheckedChangeListener(null);
         imsVolteProvisionedSwitch.setChecked(isImsVolteProvisioned());
         imsVolteProvisionedSwitch.setOnCheckedChangeListener(mImsVolteCheckedChangeListener);
+        imsVolteProvisionedSwitch.setEnabled(
+                mImsManager.isVolteEnabledByPlatform(phone.getContext()));
 
         imsVtProvisionedSwitch.setOnCheckedChangeListener(null);
         imsVtProvisionedSwitch.setChecked(isImsVtProvisioned());
         imsVtProvisionedSwitch.setOnCheckedChangeListener(mImsVtCheckedChangeListener);
+        imsVtProvisionedSwitch.setEnabled(
+            mImsManager.isVtEnabledByPlatform(phone.getContext()));
 
         imsWfcProvisionedSwitch.setOnCheckedChangeListener(null);
         imsWfcProvisionedSwitch.setChecked(isImsWfcProvisioned());
         imsWfcProvisionedSwitch.setOnCheckedChangeListener(mImsWfcCheckedChangeListener);
+        imsWfcProvisionedSwitch.setEnabled(
+            mImsManager.isWfcEnabledByPlatform(phone.getContext()));
     }
 
     OnClickListener mDnsCheckButtonHandler = new OnClickListener() {
