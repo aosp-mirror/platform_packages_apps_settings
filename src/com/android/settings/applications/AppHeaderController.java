@@ -27,7 +27,6 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.support.annotation.IntDef;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,7 +34,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -59,6 +57,7 @@ public class AppHeaderController {
         int ACTION_APP_PREFERENCE = 3;
         int ACTION_NOTIF_PREFERENCE = 4;
     }
+
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
 
     private static final String TAG = "AppDetailFeature";
