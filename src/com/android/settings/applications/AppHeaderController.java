@@ -27,6 +27,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.support.annotation.IntDef;
+import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +59,7 @@ public class AppHeaderController {
         int ACTION_APP_PREFERENCE = 3;
         int ACTION_NOTIF_PREFERENCE = 4;
     }
+    public static final String PREF_KEY_APP_HEADER = "pref_app_header";
 
     private static final String TAG = "AppDetailFeature";
 
@@ -173,6 +175,17 @@ public class AppHeaderController {
         } else {
             appVersion.setVisibility(View.INVISIBLE);
         }
+    }
+
+    /**
+     * Done mutating appheader, rebinds everything and return a new {@link LayoutPreference}.
+     */
+    public LayoutPreference done(Context context) {
+        final LayoutPreference pref = new LayoutPreference(context, done());
+        // Makes sure it's the first preference onscreen.
+        pref.setOrder(-1000);
+        pref.setKey(PREF_KEY_APP_HEADER);
+        return pref;
     }
 
     /**

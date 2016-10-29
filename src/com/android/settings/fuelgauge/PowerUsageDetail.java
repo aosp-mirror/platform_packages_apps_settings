@@ -37,6 +37,7 @@ import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -53,6 +54,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.WirelessSettings;
+import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -462,13 +464,14 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     }
 
     private void setupHeader() {
+        final Activity activity = getActivity();
         final Bundle args = getArguments();
-        String title = args.getString(EXTRA_TITLE);
+        final String title = args.getString(EXTRA_TITLE);
+        final int iconId = args.getInt(EXTRA_ICON_ID, 0);
         String pkg = args.getString(EXTRA_ICON_PACKAGE);
-        int iconId = args.getInt(EXTRA_ICON_ID, 0);
         Drawable appIcon = null;
         int uid = -1;
-        final PackageManager pm = getActivity().getPackageManager();
+        final PackageManager pm = activity.getPackageManager();
 
         if (!TextUtils.isEmpty(pkg)) {
             try {
@@ -481,17 +484,38 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                 // Use default icon
             }
         } else if (iconId != 0) {
-            appIcon = getActivity().getDrawable(iconId);
+            appIcon = activity.getDrawable(iconId);
         }
         if (appIcon == null) {
-            appIcon = getActivity().getPackageManager().getDefaultActivityIcon();
+            appIcon = activity.getPackageManager().getDefaultActivityIcon();
         }
 
         if (pkg == null && mPackages != null) {
             pkg = mPackages[0];
         }
-        AppHeader.createAppHeader(this, appIcon, title, pkg, uid,
-                mDrainType != DrainType.APP ? android.R.color.white : 0);
+        if (!FeatureFactory.getFactory(activity)
+                .getDashboardFeatureProvider(activity).isEnabled()) {
+            AppHeader.createAppHeader(this, appIcon, title, pkg, uid,
+                    mDrainType != DrainType.APP ? android.R.color.white : 0);
+        } else {
+            final PreferenceScreen screen = getPreferenceScreen();
+            final Preference appHeaderPref =
+                    findPreference(AppHeaderController.PREF_KEY_APP_HEADER);
+            if (appHeaderPref != null) {
+                return;
+            }
+            final Preference pref = FeatureFactory.getFactory(activity)
+                    .getApplicationFeatureProvider(activity)
+                    .newAppHeaderController(this, null /* appHeader */)
+                    .setIcon(appIcon)
+                    .setLabel(title)
+                    .setPackageName(pkg)
+                    .setUid(uid)
+                    .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                            AppHeaderController.ActionType.ACTION_NONE)
+                    .done(getPrefContext());
+            screen.addPreference(pref);
+        }
     }
 
     public void onClick(View v) {

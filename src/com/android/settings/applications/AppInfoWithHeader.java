@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.util.Log;
-import android.view.View;
 
 import com.android.settings.AppHeader;
 import com.android.settings.overlay.FeatureFactory;
@@ -47,7 +46,7 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
                     mPackageInfo.applicationInfo.loadLabel(mPm), mPackageName,
                     mPackageInfo.applicationInfo.uid, 0);
         } else {
-            final View appHeader = FeatureFactory.getFactory(activity)
+            final Preference pref = FeatureFactory.getFactory(activity)
                     .getApplicationFeatureProvider(activity)
                     .newAppHeaderController(this, null /* appHeader */)
                     .setIcon(mPackageInfo.applicationInfo.loadIcon(mPm))
@@ -56,11 +55,8 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
                     .setPackageName(mPackageName)
                     .setUid(mPackageInfo.applicationInfo.uid)
                     .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
-                    .done();
-            final Preference appHeaderPref = new LayoutPreference(getPrefContext(), appHeader);
-            // Makes sure it's the first preference onscreen.
-            appHeaderPref.setOrder(-1000);
-            getPreferenceScreen().addPreference(appHeaderPref);
+                    .done(getPrefContext());
+            getPreferenceScreen().addPreference(pref);
         }
     }
 }

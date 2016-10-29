@@ -25,6 +25,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
+import android.support.v7.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -84,6 +85,14 @@ public class AppHeaderControllerTest {
         View view = mController.done();
 
         assertThat(view).isNotNull();
+    }
+
+    @Test
+    public void testBuildView_withContext_shouldBuildPreference() {
+        mController = new AppHeaderController(mShadowContext, mFragment, null);
+        Preference preference = mController.done(mShadowContext);
+
+        assertThat(preference instanceof LayoutPreference).isTrue();
     }
 
     @Test
