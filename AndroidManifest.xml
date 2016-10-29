@@ -560,15 +560,6 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name="DateTimeSettingsSetupWizard"
-                  android:label="@string/date_and_time"
-                  android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar"
-                  android:screenOrientation="behind">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Settings$LocalePickerActivity"
                 android:label="@string/language_picker_title"
                 android:icon="@drawable/ic_settings_language"
