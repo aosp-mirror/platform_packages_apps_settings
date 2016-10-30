@@ -18,19 +18,23 @@ package com.android.settings;
 
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
-
 import com.android.settingslib.DeviceInfoUtils;
+import org.junit.runner.RunWith;
+import org.junit.Test;
+import org.robolectric.annotation.Config;
 
+@RunWith(SettingsRobolectricTestRunner.class)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DeviceInfoSettingsTest extends AndroidTestCase {
 
-    @SmallTest
+    @Test
     public void testGetFormattedKernelVersion() throws Exception {
         if ("Unavailable".equals(DeviceInfoUtils.getFormattedKernelVersion())) {
             fail("formatKernelVersion can't cope with this device's /proc/version");
         }
     }
 
-    @SmallTest
+    @Test
     public void testFormatKernelVersion() throws Exception {
         assertEquals("Unavailable", DeviceInfoUtils.formatKernelVersion(""));
         assertEquals("2.6.38.8-gg784\n" +
@@ -53,5 +57,12 @@ public class DeviceInfoSettingsTest extends AndroidTestCase {
                 DeviceInfoUtils.formatKernelVersion("Linux version " +
                         "2.6.38.8-a-b-jellybean+ (x@y) " +
                         "(gcc version 4.4.3 (GCC) ) #1 PREEMPT Tue Aug 28 22:10:46 CDT 2012"));
+        assertEquals("3.18.31-g3ce5faa-dirty\n" +
+                        "x@y #5\n" +
+                        "Fri Oct 28 14:38:13 PDT 2016",
+                DeviceInfoUtils.formatKernelVersion("Linux version " +
+                        "3.18.31-g3ce5faa-dirty (x@y) (Android clang " +
+                        "version 3.8.275480 (based on LLVM 3.8.275480)) " +
+                        "#5 SMP PREEMPT Fri Oct 28 14:38:13 PDT 2016"));
     }
 }
