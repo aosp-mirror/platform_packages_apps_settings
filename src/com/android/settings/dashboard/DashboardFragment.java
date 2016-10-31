@@ -288,7 +288,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     void refreshDashboardTiles(final String TAG) {
         final PreferenceScreen screen = getPreferenceScreen();
 
-        final Context context = getContext();
         final DashboardCategory category =
                 mDashboardFeatureProvider.getTilesForCategory(getCategoryKey());
         if (category == null) {
@@ -324,7 +323,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                         getActivity(), preference, tile, key);
             } else {
                 // Don't have this key, add it.
-                final Preference pref = new DashboardTilePreference(context);
+                final Preference pref = new Preference(getPrefContext());
                 mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), pref, tile, key);
                 mProgressiveDisclosureMixin.addPreference(screen, pref);
                 mDashboardTilePrefKeys.add(key);

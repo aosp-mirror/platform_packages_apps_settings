@@ -18,6 +18,7 @@ package com.android.settings.dashboard;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -37,6 +38,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,14 +104,14 @@ public class DashboardFragmentTest {
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
         verify(mDisclosureMixin).addPreference(any(PreferenceScreen.class),
-                any(DashboardTilePreference.class));
+                any(Preference.class));
     }
 
     @Test
     public void displayTilesAsPreference_shouldNotAddTilesWithoutIntent() {
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
-        verify(mTestFragment.mScreen, never()).addPreference(any(DashboardTilePreference.class));
+        verify(mTestFragment.mScreen, never()).addPreference(any(Preference.class));
     }
 
     @Test
@@ -115,7 +119,7 @@ public class DashboardFragmentTest {
         mDashboardCategory.tiles = null;
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
-        verify(mTestFragment.mScreen, never()).addPreference(any(DashboardTilePreference.class));
+        verify(mTestFragment.mScreen, never()).addPreference(any(Preference.class));
     }
 
     @Test
@@ -162,14 +166,19 @@ public class DashboardFragmentTest {
 
     public static class TestFragment extends DashboardFragment {
 
+        private final PreferenceManager mPreferenceManager;
         private final Context mContext;
-        public PreferenceScreen mScreen;
-        private List<PreferenceController> mControllers;
+        private final List<PreferenceController> mControllers;
+
+        public final PreferenceScreen mScreen;
 
         public TestFragment(Context context) {
             mContext = context;
+            mPreferenceManager = mock(PreferenceManager.class);
             mScreen = mock(PreferenceScreen.class);
             mControllers = new ArrayList<>();
+
+            when(mPreferenceManager.getContext()).thenReturn(mContext);
         }
 
         @Override
@@ -205,6 +214,11 @@ public class DashboardFragmentTest {
         @Override
         protected List<PreferenceController> getPreferenceControllers(Context context) {
             return mControllers;
+        }
+
+        @Override
+        public PreferenceManager getPreferenceManager() {
+            return mPreferenceManager;
         }
     }
 
