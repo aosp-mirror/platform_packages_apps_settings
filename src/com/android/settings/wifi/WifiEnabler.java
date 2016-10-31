@@ -231,8 +231,13 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
         if (mayDisableTethering(isChecked)) {
             mWifiManager.setWifiApEnabled(null, false);
         }
-        mMetricsFeatureProvider.action(mContext,
-                isChecked ? MetricsEvent.ACTION_WIFI_ON : MetricsEvent.ACTION_WIFI_OFF);
+        if (isChecked) {
+            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_WIFI_ON);
+        } else {
+            // Log if user was connected at the time of switching off.
+            mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_WIFI_OFF,
+                    mConnected.get());
+        }
         if (!mWifiManager.setWifiEnabled(isChecked)) {
             // Error
             mSwitchBar.setEnabled(true);
