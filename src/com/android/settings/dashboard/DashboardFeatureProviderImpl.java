@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.ProfileSelectDialog;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
@@ -97,6 +98,12 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         if (!TextUtils.isEmpty(clsName)) {
             pref.setFragment(clsName);
+        } else if (tile.userHandle != null && tile.userHandle.size() > 1) {
+            pref.setOnPreferenceClickListener(preference -> {
+                ProfileSelectDialog.updateUserHandlesIfNeeded(activity, tile);
+                ProfileSelectDialog.show(activity.getFragmentManager(), tile);
+                return true;
+            });
         } else if (tile.intent != null) {
             final Intent intent = new Intent(tile.intent);
             pref.setOnPreferenceClickListener(preference -> {
