@@ -16,13 +16,11 @@
 package com.android.settings.dashboard;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
-import com.android.settings.SettingsActivity;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
@@ -31,8 +29,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +38,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -101,14 +101,14 @@ public class DashboardFragmentTest {
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
         verify(mDisclosureMixin).addPreference(any(PreferenceScreen.class),
-                any(DashboardTilePreference.class));
+                any(Preference.class));
     }
 
     @Test
     public void displayTilesAsPreference_shouldNotAddTilesWithoutIntent() {
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
-        verify(mTestFragment.mScreen, never()).addPreference(any(DashboardTilePreference.class));
+        verify(mTestFragment.mScreen, never()).addPreference(any(Preference.class));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class DashboardFragmentTest {
         mDashboardCategory.tiles = null;
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
-        verify(mTestFragment.mScreen, never()).addPreference(any(DashboardTilePreference.class));
+        verify(mTestFragment.mScreen, never()).addPreference(any(Preference.class));
     }
 
     @Test
@@ -163,14 +163,19 @@ public class DashboardFragmentTest {
 
     public static class TestFragment extends DashboardFragment {
 
+        private final PreferenceManager mPreferenceManager;
         private final Context mContext;
-        public PreferenceScreen mScreen;
-        private List<PreferenceController> mControllers;
+        private final List<PreferenceController> mControllers;
+
+        public final PreferenceScreen mScreen;
 
         public TestFragment(Context context) {
             mContext = context;
+            mPreferenceManager = mock(PreferenceManager.class);
             mScreen = mock(PreferenceScreen.class);
             mControllers = new ArrayList<>();
+
+            when(mPreferenceManager.getContext()).thenReturn(mContext);
         }
 
         @Override
@@ -206,6 +211,11 @@ public class DashboardFragmentTest {
         @Override
         protected List<PreferenceController> getPreferenceControllers(Context context) {
             return mControllers;
+        }
+
+        @Override
+        public PreferenceManager getPreferenceManager() {
+            return mPreferenceManager;
         }
     }
 
