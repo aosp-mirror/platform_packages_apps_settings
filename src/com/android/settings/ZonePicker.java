@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
@@ -86,10 +87,15 @@ public class ZonePicker extends ListFragment implements Instrumentable {
      */
     public static SimpleAdapter constructTimezoneAdapter(Context context,
             boolean sortedByName, int layoutId) {
-        final String[] from = new String[] {ZoneGetter.KEY_DISPLAYNAME, ZoneGetter.KEY_GMT};
+        final String[] from = new String[] {
+                ZoneGetter.KEY_DISPLAY_LABEL,
+                ZoneGetter.KEY_OFFSET_LABEL
+        };
         final int[] to = new int[] {android.R.id.text1, android.R.id.text2};
 
-        final String sortKey = (sortedByName ? ZoneGetter.KEY_DISPLAYNAME : ZoneGetter.KEY_OFFSET);
+        final String sortKey = (sortedByName
+                ? ZoneGetter.KEY_DISPLAY_LABEL
+                : ZoneGetter.KEY_OFFSET);
         final MyComparator comparator = new MyComparator(sortKey);
         final List<Map<String, Object>> sortedList = ZoneGetter.getZonesList(context);
         Collections.sort(sortedList, comparator);
@@ -98,8 +104,23 @@ public class ZonePicker extends ListFragment implements Instrumentable {
                 layoutId,
                 from,
                 to);
-
+        adapter.setViewBinder(new TimeZoneViewBinder());
         return adapter;
+    }
+
+    private static class TimeZoneViewBinder implements SimpleAdapter.ViewBinder {
+
+        /**
+         * Set the text to the given {@link CharSequence} as is, instead of calling toString, so
+         * that additional information stored in the CharSequence is, like spans added to a
+         * {@link android.text.SpannableString} are preserved.
+         */
+        @Override
+        public boolean setViewValue(View view, Object data, String textRepresentation) {
+            TextView textView = (TextView) view;
+            textView.setText((CharSequence) data);
+            return true;
+        }
     }
 
     /**
