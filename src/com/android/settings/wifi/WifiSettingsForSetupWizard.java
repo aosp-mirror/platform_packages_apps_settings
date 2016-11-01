@@ -130,17 +130,17 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     }
 
     @Override
-    protected void connect(final WifiConfiguration config) {
+    protected void connect(final WifiConfiguration config, boolean isSavedNetwork) {
         WifiSetupActivity activity = (WifiSetupActivity) getActivity();
         activity.networkSelected();
-        super.connect(config);
+        super.connect(config, isSavedNetwork);
     }
 
     @Override
-    protected void connect(final int networkId) {
+    protected void connect(final int networkId, boolean isSavedNetwork) {
         WifiSetupActivity activity = (WifiSetupActivity) getActivity();
         activity.networkSelected();
-        super.connect(networkId);
+        super.connect(networkId, isSavedNetwork);
     }
 
     @Override

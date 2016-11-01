@@ -483,12 +483,13 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         switch (item.getItemId()) {
             case MENU_ID_CONNECT: {
-                if (mSelectedAccessPoint.isSaved()) {
-                    connect(mSelectedAccessPoint.getConfig());
+                boolean isSavedNetwork = mSelectedAccessPoint.isSaved();
+                if (isSavedNetwork) {
+                    connect(mSelectedAccessPoint.getConfig(), isSavedNetwork);
                 } else if (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) {
                     /** Bypass dialog for unsecured networks */
                     mSelectedAccessPoint.generateOpenNetworkConfig();
-                    connect(mSelectedAccessPoint.getConfig());
+                    connect(mSelectedAccessPoint.getConfig(), isSavedNetwork);
                 } else {
                     showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
                 }
@@ -521,7 +522,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE &&
                     !mSelectedAccessPoint.isSaved() && !mSelectedAccessPoint.isActive()) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
-                connect(mSelectedAccessPoint.getConfig());
+                connect(mSelectedAccessPoint.getConfig(), false /* isSavedNetwork */);
             } else if (mSelectedAccessPoint.isSaved()) {
                 showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_VIEW);
             } else {
@@ -831,14 +832,14 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (config == null) {
             if (mSelectedAccessPoint != null
                     && mSelectedAccessPoint.isSaved()) {
-                connect(mSelectedAccessPoint.getConfig());
+                connect(mSelectedAccessPoint.getConfig(), true /* isSavedNetwork */);
             }
         } else if (configController.getMode() == WifiConfigUiBase.MODE_MODIFY) {
             mWifiManager.save(config, mSaveListener);
         } else {
             mWifiManager.save(config, mSaveListener);
             if (mSelectedAccessPoint != null) { // Not an "Add network"
-                connect(config);
+                connect(config, false /* isSavedNetwork */);
             }
         }
 
@@ -868,13 +869,17 @@ public class WifiSettings extends RestrictedSettingsFragment
         changeNextButtonState(false);
     }
 
-    protected void connect(final WifiConfiguration config) {
-        mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT);
+    protected void connect(final WifiConfiguration config, boolean isSavedNetwork) {
+        // Log subtype if configuration is a saved network.
+        mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT,
+                isSavedNetwork);
         mWifiManager.connect(config, mConnectListener);
     }
 
-    protected void connect(final int networkId) {
-        mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT);
+    protected void connect(final int networkId, boolean isSavedNetwork) {
+        // Log subtype if configuration is a saved network.
+        mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT,
+                isSavedNetwork);
         mWifiManager.connect(networkId, mConnectListener);
     }
 
