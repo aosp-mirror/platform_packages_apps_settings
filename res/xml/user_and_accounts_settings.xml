@@ -32,12 +32,24 @@
             android:key="account_configuration_header"
             android:title="@string/configure_section_header">
 
-        <com.android.settingslib.RestrictedSwitchPreference
-                android:key="add_users_when_locked"
-                android:title="@string/user_add_on_lockscreen_menu"
-                android:summary="@string/user_add_on_lockscreen_menu_summary"
-                settings:useAdditionalSummary="true" />
-
     </PreferenceCategory>
+
+    <SwitchPreference
+            android:key="auto_sync_account_data"
+            android:title="@string/auto_sync_account_title" />
+
+    <SwitchPreference
+            android:key="auto_sync_work_account_data"
+            android:title="@string/account_settings_menu_auto_sync_work" />
+
+    <SwitchPreference
+            android:key="auto_sync_personal_account_data"
+            android:title="@string/account_settings_menu_auto_sync_personal" />
+
+    <com.android.settingslib.RestrictedSwitchPreference
+            android:key="add_users_when_locked"
+            android:title="@string/user_add_on_lockscreen_menu"
+            android:summary="@string/user_add_on_lockscreen_menu_summary"
+            settings:useAdditionalSummary="true" />
 
 </PreferenceScreen>

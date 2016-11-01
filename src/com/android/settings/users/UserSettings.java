@@ -63,6 +63,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.accounts.AddUserWhenLockedPreferenceController;
+import com.android.settings.accounts.EmergencyInfoPreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -88,7 +90,6 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  */
 public class UserSettings extends SettingsPreferenceFragment
         implements OnPreferenceClickListener, OnClickListener, DialogInterface.OnDismissListener,
-        Preference.OnPreferenceChangeListener,
         EditUserInfoController.OnContentChangedCallback, Indexable {
 
     private static final String TAG = "UserSettings";
@@ -136,7 +137,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private UserPreference mMePreference;
     private DimmableIconPreference mAddUser;
     private PreferenceGroup mLockScreenSettings;
-    private RestrictedSwitchPreference mAddUserWhenLocked;
     private Preference mEmergencyInfoPreference;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
@@ -150,6 +150,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private EditUserInfoController mEditUserInfoController =
             new EditUserInfoController();
+    private EmergencyInfoPreferenceController mEnergencyInfoController;
+    private AddUserWhenLockedPreferenceController mAddUserWhenLockedController;
 
     // A place to cache the generated default avatar
     private Drawable mDefaultIconDrawable;
@@ -234,8 +236,9 @@ public class UserSettings extends SettingsPreferenceFragment
             }
         }
         mLockScreenSettings = (PreferenceGroup) findPreference("lock_screen_settings");
-        mAddUserWhenLocked = (RestrictedSwitchPreference) findPreference("add_users_when_locked");
         mEmergencyInfoPreference = findPreference(KEY_EMERGENCY_INFO);
+        mEnergencyInfoController = new EmergencyInfoPreferenceController(context);
+        mAddUserWhenLockedController = new AddUserWhenLockedPreferenceController(context);
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
         filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
@@ -887,15 +890,10 @@ public class UserSettings extends SettingsPreferenceFragment
                         mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
             }
         }
-        if (mUserCaps.mIsAdmin &&
-                (!mUserCaps.mDisallowAddUser || mUserCaps.mDisallowAddUserSetByAdmin)) {
+
+        if (mAddUserWhenLockedController.isAvailable()) {
             mLockScreenSettings.setOrder(Preference.DEFAULT_ORDER);
             preferenceScreen.addPreference(mLockScreenSettings);
-            mAddUserWhenLocked.setChecked(Settings.Global.getInt(getContentResolver(),
-                    Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1);
-            mAddUserWhenLocked.setOnPreferenceChangeListener(this);
-            mAddUserWhenLocked.setDisabledByAdmin(
-                    mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
         }
 
         if (emergencyInfoActivityPresent(getContext())) {
@@ -983,10 +981,8 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 onAddUserClicked(USER_TYPE_USER);
             }
-        } else if (pref == mEmergencyInfoPreference) {
-            Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+        } else {
+            mEnergencyInfoController.handlePreferenceTreeClick(pref);
         }
         return false;
     }
@@ -1029,18 +1025,6 @@ public class UserSettings extends SettingsPreferenceFragment
             mRemovingUserId = -1;
             updateUserList();
         }
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mAddUserWhenLocked) {
-            Boolean value = (Boolean) newValue;
-            Settings.Global.putInt(getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED,
-                    value != null && value ? 1 : 0);
-            return true;
-        }
-
-        return false;
     }
 
     @Override
