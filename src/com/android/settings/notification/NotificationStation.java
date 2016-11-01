@@ -502,7 +502,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private CharSequence loadPackageName(String pkg) {
         try {
             ApplicationInfo info = mPm.getApplicationInfo(pkg,
-                    PackageManager.GET_UNINSTALLED_PACKAGES);
+                    PackageManager.MATCH_ANY_USER);
             if (info != null) return mPm.getApplicationLabel(info);
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Cannot load package name", e);

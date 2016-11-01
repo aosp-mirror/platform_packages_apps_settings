@@ -141,8 +141,8 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
             // Get application info again to refresh changed properties of application
             try {
                 mPackageInfo = mPm.getPackageInfo(mAppEntry.info.packageName,
-                        PackageManager.GET_DISABLED_COMPONENTS |
-                        PackageManager.GET_UNINSTALLED_PACKAGES |
+                        PackageManager.MATCH_DISABLED_COMPONENTS |
+                        PackageManager.MATCH_ANY_USER |
                         PackageManager.GET_SIGNATURES |
                         PackageManager.GET_PERMISSIONS);
             } catch (NameNotFoundException e) {

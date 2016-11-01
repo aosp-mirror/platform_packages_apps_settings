@@ -420,7 +420,7 @@ public class RunningState {
             
             try {
                 ApplicationInfo ai = pm.getApplicationInfo(mProcessName,
-                        PackageManager.GET_UNINSTALLED_PACKAGES);
+                        PackageManager.MATCH_ANY_USER);
                 if (ai.uid == mUid) {
                     mDisplayLabel = ai.loadLabel(pm);
                     mLabel = mDisplayLabel.toString();
@@ -438,7 +438,7 @@ public class RunningState {
             if (pkgs.length == 1) {
                 try {
                     ApplicationInfo ai = pm.getApplicationInfo(pkgs[0],
-                            PackageManager.GET_UNINSTALLED_PACKAGES);
+                            PackageManager.MATCH_ANY_USER);
                     mDisplayLabel = ai.loadLabel(pm);
                     mLabel = mDisplayLabel.toString();
                     mPackageInfo = ai;
@@ -480,7 +480,7 @@ public class RunningState {
             // Finally... whatever, just pick the first package's name.
             try {
                 ApplicationInfo ai = pm.getApplicationInfo(pkgs[0],
-                        PackageManager.GET_UNINSTALLED_PACKAGES);
+                        PackageManager.MATCH_ANY_USER);
                 mDisplayLabel = ai.loadLabel(pm);
                 mLabel = mDisplayLabel.toString();
                 mPackageInfo = ai;
@@ -500,7 +500,7 @@ public class RunningState {
                 si.mRunningService = service;
                 try {
                     si.mServiceInfo = ActivityThread.getPackageManager().getServiceInfo(
-                            service.service, PackageManager.GET_UNINSTALLED_PACKAGES,
+                            service.service, PackageManager.MATCH_UNINSTALLED_PACKAGES,
                             UserHandle.getUserId(service.uid));
 
                     if (si.mServiceInfo == null) {
