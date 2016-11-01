@@ -20,9 +20,7 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -107,7 +105,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     /**
      * Holds data related to the accounts belonging to one profile.
      */
-    private static class ProfileData {
+    public static class ProfileData {
         /**
          * The preference that displays the accounts.
          */
@@ -619,8 +617,8 @@ public class AccountSettings extends SettingsPreferenceFragment
             if (ActivityManager.isUserAMonkey()) {
                 Log.d(TAG, "ignoring monkey's attempt to flip sync state");
             } else {
-                ConfirmAutoSyncChangeFragment.show(AccountSettings.this, !item.isChecked(),
-                        mUserHandle);
+                AutoSyncDataPreferenceController.ConfirmAutoSyncChangeFragment.show(
+                        AccountSettings.this, !item.isChecked(), mUserHandle, /*preference*/null);
             }
             return true;
         }
@@ -654,67 +652,6 @@ public class AccountSettings extends SettingsPreferenceFragment
         @Override
         public int getMetricsCategory() {
             return MetricsEvent.DIALOG_REMOVE_USER;
-        }
-    }
-
-    /**
-     * Dialog to inform user about changing auto-sync setting
-     */
-    public static class ConfirmAutoSyncChangeFragment extends InstrumentedDialogFragment {
-        private static final String SAVE_ENABLING = "enabling";
-        private static final String SAVE_USER_HANDLE = "userHandle";
-        private boolean mEnabling;
-        private UserHandle mUserHandle;
-
-        public static void show(AccountSettings parent, boolean enabling, UserHandle userHandle) {
-            if (!parent.isAdded()) return;
-
-            final ConfirmAutoSyncChangeFragment dialog = new ConfirmAutoSyncChangeFragment();
-            dialog.mEnabling = enabling;
-            dialog.mUserHandle = userHandle;
-            dialog.setTargetFragment(parent, 0);
-            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_AUTO_SYNC_CHANGE);
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Context context = getActivity();
-            if (savedInstanceState != null) {
-                mEnabling = savedInstanceState.getBoolean(SAVE_ENABLING);
-                mUserHandle = (UserHandle) savedInstanceState.getParcelable(SAVE_USER_HANDLE);
-            }
-
-            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            if (!mEnabling) {
-                builder.setTitle(R.string.data_usage_auto_sync_off_dialog_title);
-                builder.setMessage(R.string.data_usage_auto_sync_off_dialog);
-            } else {
-                builder.setTitle(R.string.data_usage_auto_sync_on_dialog_title);
-                builder.setMessage(R.string.data_usage_auto_sync_on_dialog);
-            }
-
-            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    ContentResolver.setMasterSyncAutomaticallyAsUser(mEnabling,
-                            mUserHandle.getIdentifier());
-                }
-            });
-            builder.setNegativeButton(android.R.string.cancel, null);
-
-            return builder.create();
-        }
-
-        @Override
-        public void onSaveInstanceState(Bundle outState) {
-            super.onSaveInstanceState(outState);
-            outState.putBoolean(SAVE_ENABLING, mEnabling);
-            outState.putParcelable(SAVE_USER_HANDLE, mUserHandle);
-        }
-
-        @Override
-        public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_CONFIRM_AUTO_SYNC_CHANGE;
         }
     }
 

@@ -58,6 +58,9 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
                 new AddUserWhenLockedPreferenceController(context);
         controllers.add(addUserWhenLockedPrefController);
         getLifecycle().addObserver(addUserWhenLockedPrefController);
+        controllers.add(new AutoSyncDataPreferenceController(context, this));
+        controllers.add(new AutoSyncPersonalDataPreferenceController(context, this));
+        controllers.add(new AutoSyncWorkDataPreferenceController(context, this));
         return controllers;
     }
 
