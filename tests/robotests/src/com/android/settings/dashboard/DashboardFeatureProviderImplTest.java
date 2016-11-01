@@ -112,7 +112,9 @@ public class DashboardFeatureProviderImplTest {
         tile.userHandle.add(mock(UserHandle.class));
         tile.userHandle.add(mock(UserHandle.class));
         tile.intent = new Intent();
-        when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+
+        when(mActivity.getApplicationContext().getSystemService(Context.USER_SERVICE))
+                .thenReturn(mUserManager);
 
         mImpl.bindPreferenceToTile(mActivity, preference, tile, "123");
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
