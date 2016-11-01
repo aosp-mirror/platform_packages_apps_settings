@@ -96,6 +96,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mReceiverRegistered = false;
 
         Intent intent = getIntent();
         if (!intent.getAction().equals(BluetoothDevice.ACTION_PAIRING_REQUEST)) {
@@ -129,6 +130,8 @@ public final class BluetoothPairingDialog extends AlertActivity implements
                     intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY, BluetoothDevice.ERROR);
                 if (passkey == BluetoothDevice.ERROR) {
                     Log.e(TAG, "Invalid Confirmation Passkey received, not showing any dialog");
+                    mDevice.setPairingConfirmation(false);
+                    finish();
                     return;
                 }
                 mPairingKey = String.format(Locale.US, "%06d", passkey);
@@ -146,6 +149,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
                     intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY, BluetoothDevice.ERROR);
                 if (pairingKey == BluetoothDevice.ERROR) {
                     Log.e(TAG, "Invalid Confirmation Passkey or PIN received, not showing any dialog");
+                    finish();
                     return;
                 }
                 if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
@@ -158,6 +162,8 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
             default:
                 Log.e(TAG, "Incorrect pairing type received, not showing any dialog");
+                finish();
+                return;
         }
 
         /*
