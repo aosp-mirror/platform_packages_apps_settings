@@ -18,10 +18,13 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsActivity;
@@ -38,7 +41,12 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.ArrayList;
+
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -46,6 +54,9 @@ public class DashboardFeatureProviderImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
+
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private UserManager mUserManager;
 
     private DashboardFeatureProviderImpl mImpl;
 
@@ -89,6 +100,24 @@ public class DashboardFeatureProviderImplTest {
         assertThat(preference.getFragment()).isNull();
         assertThat(preference.getOnPreferenceClickListener()).isNotNull();
         assertThat(preference.getOrder()).isEqualTo(-tile.priority);
+    }
+
+    @Test
+    public void bindPreference_noFragmentMetadata_shouldBindToProfileSelector() {
+        final Preference preference = new Preference(
+                ShadowApplication.getInstance().getApplicationContext());
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.userHandle = new ArrayList<>();
+        tile.userHandle.add(mock(UserHandle.class));
+        tile.userHandle.add(mock(UserHandle.class));
+        tile.intent = new Intent();
+        when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+
+        mImpl.bindPreferenceToTile(mActivity, preference, tile, "123");
+        preference.getOnPreferenceClickListener().onPreferenceClick(null);
+
+        verify(mActivity).getFragmentManager();
     }
 
     @Test
