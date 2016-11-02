@@ -3244,6 +3244,19 @@
                        android:resource="@string/gesture_preference_summary"/>
         </activity-alias>
 
+        <activity-alias android:name="PrivacyDashboardAlias"
+            android:targetActivity="Settings$PrivacySettingsActivity">
+            <intent-filter android:priority="60">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.PrivacySettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
         <activity-alias android:name="BackupResetDashboardAlias"
                         android:targetActivity="Settings$PrivacySettingsActivity">
             <intent-filter android:priority="60">
