@@ -322,6 +322,7 @@ public class SearchResultsSummary extends InstrumentedFragment {
             mUpdateSuggestionsTask = null;
         }
         setSuggestionsCursor(null);
+        setSuggestionsVisibility(false);
     }
 
     private void setSuggestionsCursor(Cursor cursor) {
@@ -340,6 +341,7 @@ public class SearchResultsSummary extends InstrumentedFragment {
             mUpdateSearchResultsTask = null;
         }
         setResultsCursor(null);
+        setResultsVisibility(false);
     }
 
     private void setResultsCursor(Cursor cursor) {
