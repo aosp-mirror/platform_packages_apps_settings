@@ -102,7 +102,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             mChannelList = mBackend.getChannels(mPkg, mUid).getList();
 
             setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance, mAppRow.banned,
-                    NotificationManager.IMPORTANCE_MAX);
+                    NotificationManager.IMPORTANCE_HIGH);
             setupPriorityPref(mAppRow.appBypassDnd);
             setupVisOverridePref(mAppRow.appVisOverride);
 

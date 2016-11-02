@@ -178,16 +178,18 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             setVisible(mSilent, false);
             mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
             mImportance.setMinimumProgress(
-                    notBlockable ? Ranking.IMPORTANCE_MIN : Ranking.IMPORTANCE_NONE);
+                    notBlockable ? NotificationManager.IMPORTANCE_MIN
+                            : NotificationManager.IMPORTANCE_NONE);
             mImportance.setMax(maxImportance);
             mImportance.setProgress(Math.min(importance, maxImportance));
-            mImportance.setAutoOn(importance == Ranking.IMPORTANCE_UNSPECIFIED);
+            mImportance.setAutoOn(importance == NotificationManager.IMPORTANCE_UNSPECIFIED);
             mImportance.setCallback(new ImportanceSeekBarPreference.Callback() {
                 @Override
                 public void onImportanceChanged(int progress, boolean fromUser) {
                     if (fromUser) {
                         if (mChannel != null) {
                             mChannel.setImportance(progress);
+                            mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
                             mBackend.updateChannel(mPkg, mUid, mChannel);
                         } else {
                             mBackend.setImportance(mPkg, mUid, progress);
@@ -209,10 +211,11 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                                     Object newValue) {
                                 final boolean blocked = (Boolean) newValue;
                                 final int importance = blocked
-                                        ? Ranking.IMPORTANCE_NONE
-                                        : Ranking.IMPORTANCE_UNSPECIFIED;
+                                        ? NotificationManager.IMPORTANCE_NONE
+                                        : NotificationManager.IMPORTANCE_UNSPECIFIED;
                                 if (mChannel != null) {
                                     mChannel.setImportance(importance);
+                                    mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
                                     mBackend.updateChannel(mPkg, mUid, mChannel);
                                 } else {
                                     mBackend.setImportance(mPkgInfo.packageName, mUid,
@@ -226,9 +229,10 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             // app silenced; cannot un-silence a channel
             if (maxImportance == NotificationManager.IMPORTANCE_LOW) {
                 setVisible(mSilent, false);
-                updateDependents(banned ? Ranking.IMPORTANCE_NONE : Ranking.IMPORTANCE_LOW);
+                updateDependents(banned ? NotificationManager.IMPORTANCE_NONE
+                        : NotificationManager.IMPORTANCE_LOW);
             } else {
-                mSilent.setChecked(importance == Ranking.IMPORTANCE_LOW);
+                mSilent.setChecked(importance == NotificationManager.IMPORTANCE_LOW);
                 mSilent.setOnPreferenceChangeListener(
                         new Preference.OnPreferenceChangeListener() {
                             @Override
@@ -236,10 +240,11 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                                     Object newValue) {
                                 final boolean silenced = (Boolean) newValue;
                                 final int importance = silenced
-                                        ? Ranking.IMPORTANCE_LOW
-                                        : Ranking.IMPORTANCE_UNSPECIFIED;
+                                        ? NotificationManager.IMPORTANCE_LOW
+                                        : NotificationManager.IMPORTANCE_UNSPECIFIED;
                                 if (mChannel != null) {
                                     mChannel.setImportance(importance);
+                                    mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
                                     mBackend.updateChannel(mPkg, mUid, mChannel);
                                 } else {
                                     mBackend.setImportance(mPkgInfo.packageName, mUid,
@@ -249,7 +254,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                                 return true;
                             }
                         });
-                updateDependents(banned ? Ranking.IMPORTANCE_NONE : importance);
+                updateDependents(banned ? NotificationManager.IMPORTANCE_NONE : importance);
             }
         }
     }
@@ -263,6 +268,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                 final boolean bypassZenMode = (Boolean) newValue;
                 if (mChannel != null) {
                     mChannel.setBypassDnd(bypassZenMode);
+                    mChannel.lockFields(NotificationChannel.USER_LOCKED_PRIORITY);
                     mBackend.updateChannel(mPkg, mUid, mChannel);
                     return true;
                 } else {
@@ -280,7 +286,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         if (getLockscreenNotificationsEnabled() && getLockscreenAllowPrivateNotifications()) {
             final String summaryShowEntry =
                     getString(R.string.lock_screen_notifications_summary_show);
-            final String summaryShowEntryValue = Integer.toString(Ranking.VISIBILITY_NO_OVERRIDE);
+            final String summaryShowEntryValue =
+                    Integer.toString(NotificationManager.VISIBILITY_NO_OVERRIDE);
             entries.add(summaryShowEntry);
             values.add(summaryShowEntryValue);
             setRestrictedIfNotificationFeaturesDisabled(summaryShowEntry, summaryShowEntryValue,
@@ -306,7 +313,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
         mVisibilityOverride.setSummary("%s");
 
-        mVisibilityOverride.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        mVisibilityOverride.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 int sensitive = Integer.parseInt((String) newValue);
@@ -315,6 +323,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                 }
                 if (mChannel != null) {
                     mChannel.setLockscreenVisibility(sensitive);
+                    mChannel.lockFields(NotificationChannel.USER_LOCKED_VISIBILITY);
                     mBackend.updateChannel(mPkg, mUid, mChannel);
                 } else {
                     mBackend.setVisibilityOverride(mPkgInfo.packageName, mUid, sensitive);
@@ -367,14 +376,15 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
 
     protected void updateDependents(int importance) {
         if (getPreferenceScreen().findPreference(mBlock.getKey()) != null) {
-            setVisible(mSilent, checkCanBeVisible(Ranking.IMPORTANCE_MIN, importance));
-            mSilent.setChecked(importance == Ranking.IMPORTANCE_LOW);
+            setVisible(mSilent, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN, importance));
+            mSilent.setChecked(importance == NotificationManager.IMPORTANCE_LOW);
         }
-        setVisible(mPriority, checkCanBeVisible(Ranking.IMPORTANCE_DEFAULT, importance)
-                || (checkCanBeVisible(Ranking.IMPORTANCE_LOW, importance)
+        setVisible(mPriority, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT, importance)
+                || (checkCanBeVisible(NotificationManager.IMPORTANCE_LOW, importance)
                 && mDndVisualEffectsSuppressed));
         setVisible(mVisibilityOverride,
-                checkCanBeVisible(Ranking.IMPORTANCE_MIN, importance) && isLockScreenSecure());
+                checkCanBeVisible(NotificationManager.IMPORTANCE_MIN, importance)
+                        && isLockScreenSecure());
     }
 
     protected void setVisible(Preference p, boolean visible) {
@@ -388,7 +398,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     }
 
     protected boolean checkCanBeVisible(int minImportanceVisible, int importance) {
-        if (importance == Ranking.IMPORTANCE_UNSPECIFIED) {
+        if (importance == NotificationManager.IMPORTANCE_UNSPECIFIED) {
             return true;
         }
         return importance >= minImportanceVisible;
