@@ -77,7 +77,7 @@ public class FallbackHome extends Activity {
                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         }
 
-        registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_USER_PRESENT));
+        registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_USER_UNLOCKED));
         maybeFinish();
     }
 
