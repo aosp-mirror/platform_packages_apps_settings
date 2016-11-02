@@ -1189,6 +1189,10 @@ public class SettingsActivity extends SettingsDrawerActivity
         boolean useDefaultBackup = TextUtils.isEmpty(backupIntent);
         setTileEnabled(new ComponentName(packageName,
                 Settings.PrivacySettingsActivity.class.getName()), useDefaultBackup, isAdmin, pm);
+        setTileEnabled(new ComponentName(packageName,
+                        "com.android.settings.PrivacyDashboardAlias"),
+                useDefaultBackup, isAdmin, pm);
+
         boolean hasBackupActivity = false;
         if (!useDefaultBackup) {
             try {
