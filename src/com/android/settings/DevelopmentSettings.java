@@ -81,6 +81,7 @@ import android.widget.Toast;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.applications.BackgroundCheckSummary;
+import com.android.settings.applications.ProcessStatsPreferenceController;
 import com.android.settings.fuelgauge.InactiveApps;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -307,6 +308,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mForceResizable;
 
     private SwitchPreference mColorTemperaturePreference;
+    private ProcessStatsPreferenceController mProcessStatsPreferenceController;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
 
@@ -360,8 +362,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
             return;
         }
+        mProcessStatsPreferenceController = new ProcessStatsPreferenceController(getActivity());
 
         addPreferencesFromResource(R.xml.development_prefs);
+
+        mProcessStatsPreferenceController.displayPreference(getPreferenceScreen());
 
         final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
                 findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);

@@ -63,6 +63,12 @@
         android:summary="@string/runningservices_settings_summary"
         android:fragment="com.android.settings.applications.RunningServices" />
 
+    <Preference
+        android:key="process_stats"
+        android:title="@string/memory_settings_title"
+        android:icon="@drawable/ic_settings_memory"
+        android:fragment="com.android.settings.applications.ProcessStatsSummary"/>
+
     <PreferenceScreen
         android:key="convert_to_file_encryption"
         android:title="@string/convert_to_file_encryption"
