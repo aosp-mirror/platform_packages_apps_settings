@@ -98,16 +98,17 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         if (!TextUtils.isEmpty(clsName)) {
             pref.setFragment(clsName);
-        } else if (tile.userHandle != null && tile.userHandle.size() > 1) {
-            pref.setOnPreferenceClickListener(preference -> {
-                ProfileSelectDialog.updateUserHandlesIfNeeded(activity, tile);
-                ProfileSelectDialog.show(activity.getFragmentManager(), tile);
-                return true;
-            });
         } else if (tile.intent != null) {
             final Intent intent = new Intent(tile.intent);
             pref.setOnPreferenceClickListener(preference -> {
-                activity.startActivityForResult(intent, 0);
+                ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
+                if (tile.userHandle == null) {
+                    activity.startActivityForResult(intent, 0);
+                } else if (tile.userHandle.size() == 1) {
+                    activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
+                } else {
+                    ProfileSelectDialog.show(activity.getFragmentManager(), tile);
+                }
                 return true;
             });
         }
