@@ -27,11 +27,11 @@
     <!-- Spell checker preference title, summary and fragment will be set programmatically. -->
     <!-- Note: Mark this as persistent="false" to remove unnecessarily saved shared preference.
          See: InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference. -->
-    <PreferenceScreen
-            android:key="spellcheckers_settings"
-            android:title="@string/spellcheckers_settings_title"
-            android:persistent="false"
-            />
+    <Preference
+        android:key="spellcheckers_settings"
+        android:title="@string/spellcheckers_settings_title"
+        android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
+        android:persistent="false"/>
 
     <!-- User dictionary preference title and fragment will be set programmatically. -->
     <PreferenceScreen

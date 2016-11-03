@@ -17,7 +17,6 @@
 package com.android.settings.inputmethod;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -25,52 +24,38 @@ import android.content.pm.ServiceInfo;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
-import android.os.Bundle;
-import android.provider.Settings;
-import android.provider.Settings.System;
 import android.speech.tts.TtsEngines;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
-import android.support.v7.preference.PreferenceCategory;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
-import android.view.textservice.SpellCheckerInfo;
-import android.view.textservice.TextServicesManager;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings.KeyboardLayoutPickerActivity;
-import com.android.settings.SettingsActivity;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.SubSettings;
-import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
-import com.android.settings.VoiceInputOutputSettings;
+import com.android.settings.core.PreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.language.PhoneLanguagePreferenceController;
+import com.android.settings.language.TtsPreferenceController;
+import com.android.settings.language.UserDictionaryPreferenceController;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 
-public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
-        implements InputManager.InputDeviceListener,
-        KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable {
+public class InputMethodAndLanguageSettings extends DashboardFragment
+        implements KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable {
 
-    private static final String KEY_SPELL_CHECKERS = "spellcheckers_settings";
-    private static final String KEY_PHONE_LANGUAGE = "phone_language";
-    private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
+    private static final String TAG = "IMEAndLanguageSetting";
 
-    private PreferenceCategory mGameControllerCategory;
-    private Preference mLanguagePref;
-    private InputManager mIm;
     private Intent mIntentWaitingForResult;
 
     @Override
@@ -79,137 +64,33 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        addPreferencesFromResource(R.xml.language_settings);
-
-        final Activity activity = getActivity();
-
-        if (activity.getAssets().getLocales().length == 1) {
-            // No "Select language" pref if there's only one system locale available.
-            getPreferenceScreen().removePreference(findPreference(KEY_PHONE_LANGUAGE));
-        } else {
-            mLanguagePref = findPreference(KEY_PHONE_LANGUAGE);
-        }
-
-        new VoiceInputOutputSettings(this).onCreate();
-
-        mGameControllerCategory = (PreferenceCategory)findPreference(
-                "game_controller_settings_category");
-
-        // Build hard keyboard and game controller preference categories.
-        mIm = (InputManager)activity.getSystemService(Context.INPUT_SERVICE);
-        updateInputDevices();
-
-        // Spell Checker
-        final Preference spellChecker = findPreference(KEY_SPELL_CHECKERS);
-        if (spellChecker != null) {
-            // Note: KEY_SPELL_CHECKERS preference is marked as persistent="false" in XML.
-            InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(spellChecker);
-            final Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setClass(activity, SubSettings.class);
-            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT,
-                    SpellCheckersSettings.class.getName());
-            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID,
-                    R.string.spellcheckers_settings_title);
-            spellChecker.setIntent(intent);
-        }
-    }
-
-    private void updateUserDictionaryPreference(Preference userDictionaryPreference) {
-        final Activity activity = getActivity();
-        final TreeSet<String> localeSet = UserDictionaryList.getUserDictionaryLocalesSet(activity);
-        if (null == localeSet) {
-            // The locale list is null if and only if the user dictionary service is
-            // not present or disabled. In this case we need to remove the preference.
-            getPreferenceScreen().removePreference(userDictionaryPreference);
-        } else {
-            userDictionaryPreference.setOnPreferenceClickListener(
-                    new OnPreferenceClickListener() {
-                        @Override
-                        public boolean onPreferenceClick(Preference arg0) {
-                            // Redirect to UserDictionarySettings if the user needs only one
-                            // language.
-                            final Bundle extras = new Bundle();
-                            final Class<? extends Fragment> targetFragment;
-                            if (localeSet.size() <= 1) {
-                                if (!localeSet.isEmpty()) {
-                                    // If the size of localeList is 0, we don't set the locale
-                                    // parameter in the extras. This will be interpreted by the
-                                    // UserDictionarySettings class as meaning
-                                    // "the current locale". Note that with the current code for
-                                    // UserDictionaryList#getUserDictionaryLocalesSet()
-                                    // the locale list always has at least one element, since it
-                                    // always includes the current locale explicitly.
-                                    // @see UserDictionaryList.getUserDictionaryLocalesSet().
-                                    extras.putString("locale", localeSet.first());
-                                }
-                                targetFragment = UserDictionarySettings.class;
-                            } else {
-                                targetFragment = UserDictionaryList.class;
-                            }
-                            startFragment(InputMethodAndLanguageSettings.this,
-                                    targetFragment.getCanonicalName(), -1, -1, extras);
-                            return true;
-                        }
-                    });
-        }
+    protected String getCategoryKey() {
+        return CategoryKey.CATEGORY_SYSTEM_LANGUAGE;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        mIm.registerInputDeviceListener(this, null);
-
-        final Preference spellChecker = findPreference(KEY_SPELL_CHECKERS);
-        if (spellChecker != null) {
-            final TextServicesManager tsm = (TextServicesManager) getSystemService(
-                    Context.TEXT_SERVICES_MANAGER_SERVICE);
-            if (!tsm.isSpellCheckerEnabled()) {
-                spellChecker.setSummary(R.string.switch_off_text);
-            } else {
-                final SpellCheckerInfo sci = tsm.getCurrentSpellChecker();
-                if (sci != null) {
-                    spellChecker.setSummary(sci.loadLabel(getPackageManager()));
-                } else {
-                    spellChecker.setSummary(R.string.spell_checker_not_selected);
-                }
-            }
-        }
-
-        if (mLanguagePref != null) {
-            final String localeNames = FeatureFactory.getFactory(getContext())
-                    .getLocaleFeatureProvider().getLocaleNames();
-            mLanguagePref.setSummary(localeNames);
-        }
-
-        updateUserDictionaryPreference(findPreference(KEY_USER_DICTIONARY_SETTINGS));
-
-        updateInputDevices();
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-
-        mIm.unregisterInputDeviceListener(this);
+    protected int getPreferenceScreenResId() {
+        return R.xml.language_settings;
     }
 
     @Override
-    public void onInputDeviceAdded(int deviceId) {
-        updateInputDevices();
-    }
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final GameControllerPreferenceController gameControllerPreferenceController =
+                new GameControllerPreferenceController(context);
+        getLifecycle().addObserver(gameControllerPreferenceController);
 
-    @Override
-    public void onInputDeviceChanged(int deviceId) {
-        updateInputDevices();
-    }
-
-    @Override
-    public void onInputDeviceRemoved(int deviceId) {
-        updateInputDevices();
+        final List<PreferenceController> list = new ArrayList<>();
+        list.add(gameControllerPreferenceController);
+        list.add(new PhoneLanguagePreferenceController(context));
+        list.add(new SpellCheckerPreferenceController(context));
+        list.add(new UserDictionaryPreferenceController(context));
+        list.add(new TtsPreferenceController(context, new TtsEngines(context)));
+        return list;
     }
 
     @Override
@@ -218,19 +99,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (Utils.isMonkeyRunning()) {
             return false;
         }
-        if (preference instanceof SwitchPreference) {
-            final SwitchPreference pref = (SwitchPreference) preference;
-            if (pref == mGameControllerCategory.findPreference("vibrate_input_devices")) {
-                System.putInt(getContentResolver(), Settings.System.VIBRATE_INPUT_DEVICES,
-                        pref.isChecked() ? 1 : 0);
-                return true;
-            }
-        }
         return super.onPreferenceTreeClick(preference);
-    }
-
-    private void updateInputDevices() {
-        updateGameControllers();
     }
 
     private void showKeyboardLayoutDialog(InputDeviceIdentifier inputDeviceIdentifier) {
@@ -265,38 +134,12 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void updateGameControllers() {
-        if (haveInputDeviceWithVibrator()) {
-            getPreferenceScreen().addPreference(mGameControllerCategory);
-
-            SwitchPreference pref = (SwitchPreference)
-                    mGameControllerCategory.findPreference("vibrate_input_devices");
-            pref.setChecked(System.getInt(getContentResolver(),
-                    Settings.System.VIBRATE_INPUT_DEVICES, 1) > 0);
-        } else {
-            getPreferenceScreen().removePreference(mGameControllerCategory);
-        }
-    }
-
-    private static boolean haveInputDeviceWithVibrator() {
-        final int[] devices = InputDevice.getDeviceIds();
-        for (int i = 0; i < devices.length; i++) {
-            InputDevice device = InputDevice.getDevice(devices[i]);
-            if (device != null && !device.isVirtual() && device.getVibrator().hasVibrator()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
 
-        private final Context mContext;
         private final SummaryLoader mSummaryLoader;
         private LocaleFeatureProvider mLocaleFeatureProvider;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
             mSummaryLoader = summaryLoader;
             mLocaleFeatureProvider = FeatureFactory.getFactory(context).getLocaleFeatureProvider();
         }
@@ -328,11 +171,13 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             final String screenTitle = context.getString(R.string.language_keyboard_settings_title);
 
             // Locale picker.
-            if (context.getAssets().getLocales().length > 1) {
+            final PhoneLanguagePreferenceController mLanguagePrefController =
+                    new PhoneLanguagePreferenceController(context);
+            if (mLanguagePrefController.isAvailable()) {
                 String localeNames = FeatureFactory.getFactory(context).getLocaleFeatureProvider()
                         .getLocaleNames();
                 SearchIndexableRaw indexable = new SearchIndexableRaw(context);
-                indexable.key = KEY_PHONE_LANGUAGE;
+                indexable.key = mLanguagePrefController.getPreferenceKey();
                 indexable.title = context.getString(R.string.phone_language);
                 indexable.summaryOn = localeNames;
                 indexable.summaryOff = localeNames;
@@ -342,7 +187,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
             // Spell checker.
             SearchIndexableRaw indexable = new SearchIndexableRaw(context);
-            indexable.key = KEY_SPELL_CHECKERS;
+            indexable.key = SpellCheckerPreferenceController.KEY_SPELL_CHECKERS;
             indexable.title = context.getString(R.string.spellcheckers_settings_title);
             indexable.screenTitle = screenTitle;
             indexable.keywords = context.getString(R.string.keywords_spell_checker);
@@ -465,9 +310,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             indexables.add(indexable);
 
             // Game controllers.
-            if (haveInputDeviceWithVibrator()) {
+            if (!new GameControllerPreferenceController(context).isAvailable()) {
                 indexable = new SearchIndexableRaw(context);
-                indexable.key = "vibrate_input_devices";
+                indexable.key = GameControllerPreferenceController.PREF_KEY;
                 indexable.title = context.getString(R.string.vibrate_input_devices);
                 indexable.summaryOn = context.getString(R.string.vibrate_input_devices_summary);
                 indexable.summaryOff = context.getString(R.string.vibrate_input_devices_summary);
