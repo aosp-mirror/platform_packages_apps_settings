@@ -36,7 +36,6 @@ import android.provider.Settings;
 import android.provider.Settings.System;
 import android.speech.tts.TtsEngines;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
@@ -76,20 +75,15 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener, InputManager.InputDeviceListener,
+        implements InputManager.InputDeviceListener,
         KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable,
         InputMethodPreference.OnSavePreferenceListener {
     private static final String KEY_SPELL_CHECKERS = "spellcheckers_settings";
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
-    private static final String KEY_INPUT_METHOD_SELECTOR = "input_method_selector";
     private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
     private static final String KEY_PREVIOUSLY_ENABLED_SUBTYPES = "previously_enabled_subtypes";
-    // false: on ICS or later
-    private static final boolean SHOW_INPUT_METHOD_SWITCHER_SETTINGS = false;
 
-    private int mDefaultInputMethodSelectorVisibility = 0;
-    private ListPreference mShowInputMethodSelectorPref;
     private PreferenceCategory mKeyboardSettingsCategory;
     private PreferenceCategory mHardKeyboardCategory;
     private PreferenceCategory mGameControllerCategory;
@@ -120,24 +114,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mInputMethodSettingValues = InputMethodSettingValuesWrapper.getInstance(activity);
 
-        try {
-            mDefaultInputMethodSelectorVisibility = Integer.valueOf(
-                    getString(R.string.input_method_selector_visibility_default_value));
-        } catch (NumberFormatException e) {
-        }
-
         if (activity.getAssets().getLocales().length == 1) {
             // No "Select language" pref if there's only one system locale available.
             getPreferenceScreen().removePreference(findPreference(KEY_PHONE_LANGUAGE));
         } else {
             mLanguagePref = findPreference(KEY_PHONE_LANGUAGE);
-        }
-        if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
-            mShowInputMethodSelectorPref = (ListPreference)findPreference(
-                    KEY_INPUT_METHOD_SELECTOR);
-            mShowInputMethodSelectorPref.setOnPreferenceChangeListener(this);
-            // TODO: Update current input method name on summary
-            updateInputMethodSelectorSummary(loadInputMethodSelectorVisibility());
         }
 
         new VoiceInputOutputSettings(this).onCreate();
@@ -157,9 +138,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             getPreferenceScreen().removeAll();
             if (mHardKeyboardCategory != null) {
                 getPreferenceScreen().addPreference(mHardKeyboardCategory);
-            }
-            if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
-                getPreferenceScreen().addPreference(mShowInputMethodSelectorPref);
             }
             if (mKeyboardSettingsCategory != null) {
                 mKeyboardSettingsCategory.removeAll();
@@ -196,15 +174,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 startingIntent.getParcelableExtra(Settings.EXTRA_INPUT_DEVICE_IDENTIFIER);
         if (mShowsOnlyFullImeAndKeyboardList && identifier != null) {
             showKeyboardLayoutDialog(identifier);
-        }
-    }
-
-    private void updateInputMethodSelectorSummary(int value) {
-        String[] inputMethodSelectorTitles = getResources().getStringArray(
-                R.array.input_method_selector_titles);
-        if (inputMethodSelectorTitles.length > value) {
-            mShowInputMethodSelectorPref.setSummary(inputMethodSelectorTitles[value]);
-            mShowInputMethodSelectorPref.setValue(String.valueOf(value));
         }
     }
 
@@ -279,9 +248,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
 
             updateUserDictionaryPreference(findPreference(KEY_USER_DICTIONARY_SETTINGS));
-            if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
-                mShowInputMethodSelectorPref.setOnPreferenceChangeListener(this);
-            }
         }
 
         updateInputDevices();
@@ -299,9 +265,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         mIm.unregisterInputDeviceListener(this);
         mSettingsObserver.pause();
 
-        if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
-            mShowInputMethodSelectorPref.setOnPreferenceChangeListener(null);
-        }
         // TODO: Consolidate the logic to InputMethodSettingsWrapper
         InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(
                 this, getContentResolver(), mInputMethodSettingValues.getInputMethodList(),
@@ -346,36 +309,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
         }
         return super.onPreferenceTreeClick(preference);
-    }
-
-
-
-    private void saveInputMethodSelectorVisibility(String value) {
-        try {
-            int intValue = Integer.valueOf(value);
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.INPUT_METHOD_SELECTOR_VISIBILITY, intValue);
-            updateInputMethodSelectorSummary(intValue);
-        } catch(NumberFormatException e) {
-        }
-    }
-
-    private int loadInputMethodSelectorVisibility() {
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.INPUT_METHOD_SELECTOR_VISIBILITY,
-                mDefaultInputMethodSelectorVisibility);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object value) {
-        if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
-            if (preference == mShowInputMethodSelectorPref) {
-                if (value instanceof String) {
-                    saveInputMethodSelectorVisibility((String)value);
-                }
-            }
-        }
-        return false;
     }
 
     private void updateInputMethodPreferenceViews() {
