@@ -33,6 +33,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.fingerprint.SetupSkipDialog;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 import com.android.setupwizardlib.GlifPreferenceLayout;
@@ -239,6 +240,13 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                 boolean required, Intent unlockMethodIntent) {
             Intent intent = SetupEncryptionInterstitial.createStartIntent(context, quality,
                     required, unlockMethodIntent);
+            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
+            return intent;
+        }
+
+        @Override
+        protected Intent getFindSensorIntent(Context context) {
+            final Intent intent = new Intent(context, SetupFingerprintEnrollFindSensor.class);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }

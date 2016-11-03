@@ -338,7 +338,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             } else if (requestCode == CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST
                     && resultCode == FingerprintEnrollBase.RESULT_FINISHED) {
-                Intent intent = new Intent(getActivity(), FingerprintEnrollFindSensor.class);
+                Intent intent = getFindSensorIntent(getActivity());
                 if (data != null) {
                     intent.putExtras(data.getExtras());
                 }
@@ -357,6 +357,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (requestCode == Activity.RESULT_CANCELED && mForChangeCredRequiredForBoot) {
                 finish();
             }
+        }
+
+        protected Intent getFindSensorIntent(Context context) {
+            return new Intent(context, FingerprintEnrollFindSensor.class);
         }
 
         @Override
