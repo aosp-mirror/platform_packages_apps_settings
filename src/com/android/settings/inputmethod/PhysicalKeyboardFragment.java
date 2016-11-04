@@ -225,10 +225,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             @Nullable InputMethodSubtype imSubtype) {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(getActivity(), Settings.KeyboardLayoutPickerActivity.class);
-        intent.putExtra(KeyboardLayoutPickerFragment2.EXTRA_INPUT_DEVICE_IDENTIFIER,
+        intent.putExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER,
                 inputDeviceIdentifier);
-        intent.putExtra(KeyboardLayoutPickerFragment2.EXTRA_INPUT_METHOD_INFO, imi);
-        intent.putExtra(KeyboardLayoutPickerFragment2.EXTRA_INPUT_METHOD_SUBTYPE, imSubtype);
+        intent.putExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_METHOD_INFO, imi);
+        intent.putExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_METHOD_SUBTYPE, imSubtype);
         startActivity(intent);
     }
 
