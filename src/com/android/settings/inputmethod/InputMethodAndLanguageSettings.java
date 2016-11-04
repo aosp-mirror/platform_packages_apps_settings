@@ -72,7 +72,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private Preference mLanguagePref;
     private InputManager mIm;
     private Intent mIntentWaitingForResult;
-    private InputMethodSettingValuesWrapper mInputMethodSettingValues;
 
     @Override
     public int getMetricsCategory() {
@@ -86,7 +85,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.language_settings);
 
         final Activity activity = getActivity();
-        mInputMethodSettingValues = InputMethodSettingValuesWrapper.getInstance(activity);
 
         if (activity.getAssets().getLocales().length == 1) {
             // No "Select language" pref if there's only one system locale available.
@@ -190,10 +188,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         updateUserDictionaryPreference(findPreference(KEY_USER_DICTIONARY_SETTINGS));
 
         updateInputDevices();
-
-        // Refresh internal states in mInputMethodSettingValues to keep the latest
-        // "InputMethodInfo"s and "InputMethodSubtype"s
-        mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
     }
 
     @Override
@@ -201,11 +195,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         super.onPause();
 
         mIm.unregisterInputDeviceListener(this);
-
-        // TODO: Consolidate the logic to InputMethodSettingsWrapper
-        InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(
-                this, getContentResolver(), mInputMethodSettingValues.getInputMethodList(),
-                false /* hasHardKeyboard */);
     }
 
     @Override
