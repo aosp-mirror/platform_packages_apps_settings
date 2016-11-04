@@ -15,9 +15,8 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:key="language_keyboard_settings"
-        android:title="@string/language_keyboard_settings_title">
+                  android:key="language_keyboard_settings"
+                  android:title="@string/language_keyboard_settings_title">
 
     <PreferenceScreen
             android:key="phone_language"
@@ -49,26 +48,6 @@
             android:title="@string/physical_keyboard_title"
             android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment" />
     </PreferenceCategory>
-
-    <!-- Temporarily disabled: -->
-    <!--<PreferenceCategory-->
-            <!--android:key="keyboard_settings_category"-->
-            <!--android:title="@string/keyboard_settings_category">-->
-
-        <!--<PreferenceScreen-->
-                <!--android:key="current_input_method"-->
-                <!--android:title="@string/current_input_method"-->
-                <!--/>-->
-        <!--&lt;!&ndash; Enabled input method list will be populated programmatically here. &ndash;&gt;-->
-    <!--</PreferenceCategory>-->
-
-    <!--<PreferenceCategory-->
-            <!--android:key="hard_keyboard"-->
-            <!--android:title="@string/builtin_keyboard_settings_title"-->
-            <!--android:persistent="false">-->
-        <!--&lt;!&ndash; Additional preference screens are inserted here programmatically-->
-             <!--with low order values to set the key map of each attached keyboard. &ndash;&gt;-->
-    <!--</PreferenceCategory>-->
 
     <PreferenceCategory
             android:key="voice_category"
