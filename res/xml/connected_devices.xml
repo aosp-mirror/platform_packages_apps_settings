@@ -16,16 +16,25 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <SwitchPreference
-    android:key="toggle_nfc"
-    android:title="@string/nfc_quick_toggle_title"
-    android:summary="@string/nfc_quick_toggle_summary"
-    android:order="-5" />
+    <SwitchPreference
+        android:key="toggle_nfc"
+        android:title="@string/nfc_quick_toggle_title"
+        android:summary="@string/nfc_quick_toggle_summary"
+        android:order="-5" />
 
-  <com.android.settingslib.RestrictedPreference
-    android:fragment="com.android.settings.nfc.AndroidBeam"
-    android:key="android_beam_settings"
-    android:title="@string/android_beam_settings_title"
-    android:order="-4" />
+    <com.android.settingslib.RestrictedPreference
+        android:fragment="com.android.settings.nfc.AndroidBeam"
+        android:key="android_beam_settings"
+        android:title="@string/android_beam_settings_title"
+        android:order="-4" />
+
+    <Preference
+        android:key="usb_mode"
+        android:title="@string/usb_pref"
+        android:order="-3" >
+        <intent android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.deviceinfo.UsbModeChooserActivity"/>
+    </Preference>
 
 </PreferenceScreen>
