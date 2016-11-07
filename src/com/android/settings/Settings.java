@@ -41,12 +41,14 @@ public class Settings extends SettingsActivity {
     public static class WifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }
     public static class InputMethodAndLanguageSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class InputAndGestureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
     public static class PhysicalKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class InputMethodAndSubtypeEnablerActivity extends SettingsActivity { /* empty */ }
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
+    public static class LanguageAndRegionSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
     public static class HomeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }

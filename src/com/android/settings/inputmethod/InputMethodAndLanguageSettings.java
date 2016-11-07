@@ -51,6 +51,11 @@ import com.android.settingslib.drawer.CategoryKey;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @deprecated New features should use {@code InputAndGestureSettings} and
+ * {@code LanguageAndRegionSettings} instead.
+ */
+@Deprecated
 public class InputMethodAndLanguageSettings extends DashboardFragment
         implements KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable {
 
