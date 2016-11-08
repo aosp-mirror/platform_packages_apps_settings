@@ -65,7 +65,7 @@
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal</item>
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
-        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard.Light</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <!-- LockPatternView colors -->
         <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
@@ -95,11 +95,7 @@
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
     </style>
 
-    <style name="PreferenceTheme.SetupWizard" parent="SetupWizardTheme">
-        <item name="preferenceFragmentStyle">@style/SetupWizardPreferenceFragmentStyle</item>
-    </style>
-
-    <style name="PreferenceTheme.SetupWizard.Light" parent="SetupWizardTheme.Light">
+    <style name="PreferenceTheme.SetupWizard" parent="PreferenceTheme">
         <item name="preferenceFragmentStyle">@style/SetupWizardPreferenceFragmentStyle</item>
     </style>
 
