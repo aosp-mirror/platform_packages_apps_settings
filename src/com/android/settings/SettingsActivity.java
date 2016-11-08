@@ -97,7 +97,12 @@ import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.gestures.DoubleTapPowerSettings;
+import com.android.settings.gestures.DoubleTapScreenPreferenceController;
+import com.android.settings.gestures.DoubleTapScreenSettings;
+import com.android.settings.gestures.DoubleTwistGestureSettings;
 import com.android.settings.gestures.GestureSettings;
+import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.InputAndGestureSettings;
@@ -350,6 +355,10 @@ public class SettingsActivity extends SettingsDrawerActivity
             AccountSettings.class.getName(),
             GestureSettings.class.getName(),
             SwipeToNotificationSettings.class.getName(),
+            DoubleTapPowerSettings.class.getName(),
+            DoubleTapScreenSettings.class.getName(),
+            PickupGestureSettings.class.getName(),
+            DoubleTwistGestureSettings.class.getName(),
             CryptKeeperSettings.class.getName(),
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),

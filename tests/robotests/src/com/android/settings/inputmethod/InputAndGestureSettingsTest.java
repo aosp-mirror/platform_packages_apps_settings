@@ -19,6 +19,7 @@ package com.android.settings.inputmethod;
 import android.content.Context;
 import android.hardware.input.InputManager;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -76,6 +77,9 @@ public class InputAndGestureSettingsTest {
                 .addObserver(any(LifecycleObserver.class));
     }
 
+    /**
+     * Test fragment to expose lifecycle and context so we can verify behavior for observables.
+     */
     public static class TestFragment extends InputAndGestureSettings {
 
         private Lifecycle mLifecycle;
@@ -84,6 +88,7 @@ public class InputAndGestureSettingsTest {
         public TestFragment(Context context) {
             mContext = context;
             mLifecycle = mock(Lifecycle.class);
+            setAmbientDisplayConfig(mock(AmbientDisplayConfiguration.class));
         }
 
         @Override
