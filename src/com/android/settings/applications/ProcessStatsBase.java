@@ -103,7 +103,8 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         super.onViewCreated(view, savedInstanceState);
         mSpinnerHeader = (ViewGroup) setPinnedHeaderView(R.layout.apps_filter_spinner);
         mFilterSpinner = (Spinner) mSpinnerHeader.findViewById(R.id.filter_spinner);
-        mFilterAdapter = new ArrayAdapter<String>(getActivity(), R.layout.filter_spinner_item);
+        mFilterAdapter = new ArrayAdapter<String>(mFilterSpinner.getContext(),
+                R.layout.filter_spinner_item);
         mFilterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         for (int i = 0; i < NUM_DURATIONS; i++) {
             mFilterAdapter.add(getString(sDurationLabels[i]));
