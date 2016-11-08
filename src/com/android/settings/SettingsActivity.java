@@ -99,11 +99,13 @@ import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.GestureSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
+import com.android.settings.inputmethod.InputAndGestureSettings;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
+import com.android.settings.language.LanguageAndRegionSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.network.NetworkDashboardFragment;
@@ -291,7 +293,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             // Home page > Security
             "com.android.settings.Settings.LocationDashboardAlias",
             // Home page > System
-            "com.android.settings.Settings.LanguageAndInputDashboardAlias",
+            Settings.LanguageAndRegionSettingsActivity.class.getName(),
+            Settings.InputAndGestureSettingsActivity.class.getName(),
             "com.android.settings.Settings.DateTimeDashboardAlias",
             "com.android.settings.Settings.AccessibilityDashboardAlias",
             "com.android.settings.Settings.AboutDeviceDashboardAlias",
@@ -311,6 +314,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             LocaleListEditor.class.getName(),
             InputMethodAndLanguageSettings.class.getName(),
             AvailableVirtualKeyboardFragment.class.getName(),
+            InputAndGestureSettings.class.getName(),
+            LanguageAndRegionSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),

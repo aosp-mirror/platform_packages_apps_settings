@@ -3190,18 +3190,35 @@
         </activity>
 
         <!-- Alias for IME & Language in new IA. Should merge into TargetActivity when launch -->
-        <activity-alias android:name="LanguageAndInputDashboardAlias"
-            android:targetActivity="Settings$InputMethodAndLanguageSettingsActivity">
-            <intent-filter android:priority="250">
+        <activity android:name=".Settings$LanguageAndRegionSettingsActivity"
+                  android:label="@string/language_and_region_settings_title"
+                  android:icon="@drawable/ic_settings_language">
+            <intent-filter android:priority="260">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.system"/>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.language.LanguageAndRegionSettings"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true"/>
+            <!-- Inherit intent-filter from LanguageSettingsActivity -->
+        </activity>
+
+        <activity android:name=".Settings$InputAndGestureSettingsActivity"
+                  android:label="@string/input_gesture_settings_title"
+                  android:icon="@drawable/ic_settings_language">
+            <intent-filter android:priority="255">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.inputmethod.InputMethodAndLanguageSettings" />
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.inputmethod.InputAndGestureSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
-        </activity-alias>
+            <!-- Inherit intent-filter from LanguageSettingsActivity -->
+        </activity>
 
         <!-- Alias for Date & Time in new IA. Should merge into TargetActivity when launch -->
         <activity-alias android:name="DateTimeDashboardAlias"
