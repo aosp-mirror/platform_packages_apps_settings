@@ -28,6 +28,33 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="gesture_settings_category"
+        android:title="@string/gesture_preference_title">
+
+        <Preference
+            android:key="gesture_swipe_down_fingerprint"
+            android:title="@string/fingerprint_swipe_for_notifications_title"
+            android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"/>
+
+        <Preference
+            android:key="gesture_double_tap_power"
+            android:title="@string/double_tap_power_for_camera_title"/>
+
+        <Preference
+            android:key="gesture_double_twist"
+            android:title="@string/double_twist_for_camera_mode_title"/>
+
+        <Preference
+            android:key="gesture_double_tap_screen"
+            android:title="@string/ambient_display_title"/>
+
+        <Preference
+            android:key="gesture_pick_up"
+            android:title="@string/ambient_display_pickup_title"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="pointer_settings_category"
         android:title="@string/pointer_settings_category">
 

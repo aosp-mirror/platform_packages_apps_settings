@@ -22,6 +22,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -83,26 +84,49 @@ public class SwipeToNotificationPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceSetCheckedWhenSettingIsOn() {
+        // Mock a TwoStatePreference
         final TwoStatePreference preference = mock(TwoStatePreference.class);
+        // Set the setting to be enabled.
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 1);
 
+        // Run through updateState
         mController = new SwipeToNotificationPreferenceController(context);
         mController.updateState(preference);
 
+        // Verify pref is checked (as setting is enabled).
         verify(preference).setChecked(true);
     }
 
     @Test
     public void updateState_preferenceSetUncheckedWhenSettingIsOff() {
+        // Mock a TwoStatePreference
         final TwoStatePreference preference = mock(TwoStatePreference.class);
+        // Set the setting to be disabled.
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
 
+        // Run through updateState
         mController = new SwipeToNotificationPreferenceController(context);
         mController.updateState(preference);
 
+        // Verify pref is unchecked (as setting is disabled).
         verify(preference).setChecked(false);
     }
 
+    @Test
+    public void updateState_notTwoStatePreference_setSummary() {
+        // Mock a regular preference
+        final Preference preference = mock(Preference.class);
+        // Set the setting to be disabled.
+        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
+
+        // Run through updateState
+        mController = new SwipeToNotificationPreferenceController(context);
+        mController.updateState(preference);
+
+        // Verify summary is set to off (as setting is disabled).
+        verify(preference).setSummary(R.string.gesture_setting_off);
+    }
 }
