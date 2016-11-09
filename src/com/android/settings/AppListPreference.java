@@ -201,14 +201,21 @@ public class AppListPreference extends CustomListPreference {
             try {
                 ActivityInfo activityInfo = AppGlobals.getPackageManager().getActivityInfo(
                         componentNames[i], 0, mUserId);
-                if (activityInfo == null) continue;
-                applicationNames.add(activityInfo.loadLabel(pm));
-                validatedComponentNames.add(componentNames[i].flattenToString());
-                entryDrawables.add(activityInfo.loadIcon(pm));
+                if (activityInfo != null) {
+                    applicationNames.add(activityInfo.loadLabel(pm));
+                    validatedComponentNames.add(componentNames[i].flattenToString());
+                    entryDrawables.add(activityInfo.loadIcon(pm));
+                } else {
+                    ApplicationInfo appInfo = pm.getApplicationInfoAsUser(
+                            componentNames[i].getPackageName().toString(), 0, mUserId);
+                    applicationNames.add(appInfo.loadLabel(pm));
+                    validatedComponentNames.add(componentNames[i].flattenToString());
+                    entryDrawables.add(appInfo.loadIcon(pm));
+                }
                 if (defaultCN != null && componentNames[i].equals(defaultCN)) {
                     selectedIndex = i;
                 }
-            } catch (RemoteException e) {
+            } catch (RemoteException|NameNotFoundException e) {
                 // Skip unknown packages.
             }
         }

@@ -66,6 +66,10 @@
             android:title="@string/sms_application_title"
             settings:keywords="@string/keywords_more_default_sms_app" />
 
+        <com.android.settings.applications.DefaultNotificationAssistantPreference
+            android:key="default_notification_asst_app"
+            android:title="@string/default_notification_assistant" />
+
     </PreferenceCategory>
 
     <com.android.settings.WorkOnlyCategory
