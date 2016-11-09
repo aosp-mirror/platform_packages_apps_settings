@@ -52,7 +52,7 @@ public class DoubleTwistGestureSettings extends DashboardFragment {
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DoubleTwistPreferenceController(context));
+        controllers.add(new DoubleTwistPreferenceController(context, getLifecycle()));
         return controllers;
     }
 }

@@ -17,12 +17,8 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.TwoStatePreference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -34,11 +30,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import static org.mockito.Matchers.any;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -47,8 +40,6 @@ public class PIckupGesturePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private PreferenceScreen mScreen;
     @Mock
     private AmbientDisplayConfiguration mAmbientDisplayConfiguration;
 
@@ -58,69 +49,37 @@ public class PIckupGesturePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new PickupGesturePreferenceController(
-                mContext, mAmbientDisplayConfiguration, 0);
+                mContext, null, mAmbientDisplayConfiguration, 0);
     }
 
     @Test
-    public void display_configIsTrue_shouldDisplay() {
+    public void isAvailable_configIsTrue_shouldReturnTrue() {
         when(mAmbientDisplayConfiguration.pulseOnPickupAvailable()).thenReturn(true);
 
-        mController.displayPreference(mScreen);
-
-        verify(mScreen, never()).removePreference(any(Preference.class));
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void display_configIsFalse_shouldNotDisplay() {
+    public void isAvailable_configIsFalse_shouldReturnFalse() {
         when(mAmbientDisplayConfiguration.pulseOnPickupAvailable()).thenReturn(false);
-        when(mScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn(mock(Preference.class));
 
-        mController.displayPreference(mScreen);
-
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void updateState_preferenceSetCheckedWhenSettingIsOn() {
-        // Mock a TwoStatePreference
-        final TwoStatePreference preference = mock(TwoStatePreference.class);
+    public void testSwitchEnabled_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
         when(mAmbientDisplayConfiguration.pulseOnPickupEnabled(anyInt())).thenReturn(true);
 
-        // Run through updateState
-        mController.updateState(preference);
-
-        // Verify pref is checked (as setting is enabled).
-        verify(preference).setChecked(true);
+        assertThat(mController.isSwitchPrefEnabled()).isTrue();
     }
 
     @Test
-    public void updateState_preferenceSetUncheckedWhenSettingIsOff() {
-        // Mock a TwoStatePreference
-        final TwoStatePreference preference = mock(TwoStatePreference.class);
+    public void testSwitchEnabled_configIsNotSet_shouldReturnFalse() {
         // Set the setting to be disabled.
         when(mAmbientDisplayConfiguration.pulseOnPickupEnabled(anyInt())).thenReturn(false);
 
-        // Run through updateState
-        mController.updateState(preference);
-
-        // Verify pref is unchecked (as setting is disabled).
-        verify(preference).setChecked(false);
-    }
-
-    @Test
-    public void updateState_notTwoStatePreference_setSummary() {
-        // Mock a regular preference
-        final Preference preference = mock(Preference.class);
-        // Set the setting to be disabled.
-        when(mAmbientDisplayConfiguration.pulseOnPickupEnabled(anyInt())).thenReturn(false);
-
-        // Run through updateState
-        mController.updateState(preference);
-
-        // Verify summary is set to off (as setting is disabled).
-        verify(preference).setSummary(R.string.gesture_setting_off);
+        assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }
 
 }

@@ -54,8 +54,8 @@ public class PickupGestureSettings extends DashboardFragment {
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new PickupGesturePreferenceController(
-                context, new AmbientDisplayConfiguration(context), UserHandle.myUserId()));
+        controllers.add(new PickupGesturePreferenceController(context, getLifecycle(),
+                new AmbientDisplayConfiguration(context), UserHandle.myUserId()));
         return controllers;
     }
 }

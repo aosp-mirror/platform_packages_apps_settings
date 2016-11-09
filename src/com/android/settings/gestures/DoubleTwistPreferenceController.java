@@ -22,19 +22,18 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 
-public class DoubleTwistPreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class DoubleTwistPreferenceController extends GesturePreferenceController {
 
+    private static final String PREF_KEY_VIDEO = "gesture_double_twist_video";
     private static final String PREF_KEY_DOUBLE_TWIST = "gesture_double_twist";
 
-    public DoubleTwistPreferenceController(Context context) {
-        super(context);
+    public DoubleTwistPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
     }
 
     @Override
@@ -44,22 +43,8 @@ public class DoubleTwistPreferenceController extends PreferenceController
     }
 
     @Override
-    public void updateState(Preference preference) {
-        final boolean isEnabled = isDoubleTwistEnabled();
-        if (preference != null) {
-            if (preference instanceof TwoStatePreference) {
-                ((TwoStatePreference) preference).setChecked(isEnabled);
-            } else {
-                preference.setSummary(isEnabled
-                        ? com.android.settings.R.string.gesture_setting_on
-                        : com.android.settings.R.string.gesture_setting_off);
-            }
-        }
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
+    protected String getVideoPrefKey() {
+        return PREF_KEY_VIDEO;
     }
 
     @Override
@@ -67,7 +52,16 @@ public class DoubleTwistPreferenceController extends PreferenceController
         return PREF_KEY_DOUBLE_TWIST;
     }
 
-    private boolean isDoubleTwistEnabled() {
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final boolean enabled = (boolean) newValue;
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled ? 1 : 0);
+        return true;
+    }
+
+    @Override
+    protected boolean isSwitchPrefEnabled() {
         final int doubleTwistEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
         return doubleTwistEnabled != 0;
@@ -87,13 +81,5 @@ public class DoubleTwistPreferenceController extends PreferenceController
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean enabled = (boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled ? 1 : 0);
-        return true;
     }
 }

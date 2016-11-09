@@ -62,6 +62,13 @@ public abstract class ObservablePreferenceFragment extends PreferenceFragment {
 
     @CallSuper
     @Override
+    public void onStop() {
+        mLifecycle.onStop();
+        super.onStop();
+    }
+
+    @CallSuper
+    @Override
     public void onResume() {
         mLifecycle.onResume();
         super.onResume();

@@ -62,7 +62,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         mLockScreenNotificationController = new LockScreenNotificationPreferenceController(context);
         getLifecycle().addObserver(pulseController);
         getLifecycle().addObserver(mLockScreenNotificationController);
-        controllers.add(new SwipeToNotificationPreferenceController(context));
+        controllers.add(new SwipeToNotificationPreferenceController(context, getLifecycle()));
         controllers.add(pulseController);
         controllers.add(mLockScreenNotificationController);
         return controllers;

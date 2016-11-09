@@ -20,23 +20,22 @@ import android.annotation.UserIdInt;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 
-public class PickupGesturePreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class PickupGesturePreferenceController extends GesturePreferenceController {
 
+    private static final String PREF_VIDEO_KEY = "gesture_pick_up_video";
     private static final String PREF_KEY_PICK_UP = "gesture_pick_up";
 
     private final AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt
     private final int mUserId;
 
-    public PickupGesturePreferenceController(Context context, AmbientDisplayConfiguration config,
-            @UserIdInt int userId) {
-        super(context);
+    public PickupGesturePreferenceController(Context context, Lifecycle lifecycle,
+            AmbientDisplayConfiguration config, @UserIdInt int userId) {
+        super(context, lifecycle);
         mAmbientConfig = config;
         mUserId = userId;
     }
@@ -47,27 +46,18 @@ public class PickupGesturePreferenceController extends PreferenceController
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
+    protected String getVideoPrefKey() {
+        return PREF_VIDEO_KEY;
+    }
+
+    @Override
+    protected boolean isSwitchPrefEnabled() {
+        return mAmbientConfig.pulseOnPickupEnabled(mUserId);
     }
 
     @Override
     public String getPreferenceKey() {
         return PREF_KEY_PICK_UP;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        final boolean isEnabled = mAmbientConfig.pulseOnPickupEnabled(mUserId);
-        if (preference != null) {
-            if (preference instanceof TwoStatePreference) {
-                ((TwoStatePreference) preference).setChecked(isEnabled);
-            } else {
-                preference.setSummary(isEnabled
-                        ? com.android.settings.R.string.gesture_setting_on
-                        : com.android.settings.R.string.gesture_setting_off);
-            }
-        }
     }
 
     @Override

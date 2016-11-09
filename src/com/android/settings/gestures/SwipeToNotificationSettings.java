@@ -52,7 +52,7 @@ public class SwipeToNotificationSettings extends DashboardFragment {
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SwipeToNotificationPreferenceController(context));
+        controllers.add(new SwipeToNotificationPreferenceController(context, getLifecycle()));
         return controllers;
     }
 }

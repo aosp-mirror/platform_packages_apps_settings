@@ -54,8 +54,8 @@ public class DoubleTapScreenSettings extends DashboardFragment {
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DoubleTapScreenPreferenceController(
-                context, new AmbientDisplayConfiguration(context), UserHandle.myUserId()));
+        controllers.add(new DoubleTapScreenPreferenceController(context, getLifecycle(),
+                new AmbientDisplayConfiguration(context), UserHandle.myUserId()));
         return controllers;
     }
 }

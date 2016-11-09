@@ -23,6 +23,7 @@ import android.support.annotation.VisibleForTesting;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
@@ -62,6 +63,7 @@ public class InputAndGestureSettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final Lifecycle lifecycle = getLifecycle();
         final GameControllerPreferenceController gameControllerPreferenceController
                 = new GameControllerPreferenceController(context);
         getLifecycle().addObserver(gameControllerPreferenceController);
@@ -72,13 +74,14 @@ public class InputAndGestureSettings extends DashboardFragment {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(gameControllerPreferenceController);
         // Gestures
-        controllers.add(new SwipeToNotificationPreferenceController(context));
-        controllers.add(new DoubleTwistPreferenceController(context));
-        controllers.add(new DoubleTapPowerPreferenceController(context));
+
+        controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle));
+        controllers.add(new DoubleTwistPreferenceController(context, lifecycle));
+        controllers.add(new DoubleTapPowerPreferenceController(context, lifecycle));
         controllers.add(new PickupGesturePreferenceController(
-                context, mAmbientDisplayConfig, UserHandle.myUserId()));
+                context, lifecycle, mAmbientDisplayConfig, UserHandle.myUserId()));
         controllers.add(new DoubleTapScreenPreferenceController(
-                context, mAmbientDisplayConfig, UserHandle.myUserId()));
+                context, lifecycle, mAmbientDisplayConfig, UserHandle.myUserId()));
         return controllers;
     }
 

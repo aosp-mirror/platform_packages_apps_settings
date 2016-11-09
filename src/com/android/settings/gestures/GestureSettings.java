@@ -30,6 +30,7 @@ import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -56,13 +57,14 @@ public class GestureSettings extends DashboardFragment {
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final AmbientDisplayConfiguration ambientConfig = new AmbientDisplayConfiguration(context);
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SwipeToNotificationPreferenceController(context));
-        controllers.add(new DoubleTapPowerPreferenceController(context));
-        controllers.add(new DoubleTwistPreferenceController(context));
+        final Lifecycle lifecycle = getLifecycle();
+        controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle));
+        controllers.add(new DoubleTapPowerPreferenceController(context, lifecycle));
+        controllers.add(new DoubleTwistPreferenceController(context, lifecycle));
         controllers.add(new PickupGesturePreferenceController(
-                context, ambientConfig, UserHandle.myUserId()));
+                context, lifecycle, ambientConfig, UserHandle.myUserId()));
         controllers.add(new DoubleTapScreenPreferenceController(
-                context, ambientConfig, UserHandle.myUserId()));
+                context, lifecycle, ambientConfig, UserHandle.myUserId()));
         return controllers;
     }
 
@@ -167,17 +169,17 @@ public class GestureSettings extends DashboardFragment {
                     ArrayList<String> result = new ArrayList<String>();
                     AmbientDisplayConfiguration ambientConfig
                             = new AmbientDisplayConfiguration(context);
-                    new DoubleTapPowerPreferenceController(context)
+                    new DoubleTapPowerPreferenceController(context, null /* lifecycle */)
                             .updateNonIndexableKeys(result);
                     new PickupGesturePreferenceController(
-                            context, ambientConfig, UserHandle.myUserId())
+                            context, null /* lifecycle */, ambientConfig, UserHandle.myUserId())
                             .updateNonIndexableKeys(result);
                     new DoubleTapScreenPreferenceController(
-                            context, ambientConfig, UserHandle.myUserId())
+                            context, null /* lifecycle */, ambientConfig, UserHandle.myUserId())
                             .updateNonIndexableKeys(result);
-                    new SwipeToNotificationPreferenceController(context)
+                    new SwipeToNotificationPreferenceController(context, null /* lifecycle */)
                             .updateNonIndexableKeys(result);
-                    new DoubleTwistPreferenceController(context)
+                    new DoubleTwistPreferenceController(context, null /* lifecycle */)
                             .updateNonIndexableKeys(result);
                     return result;
                 }

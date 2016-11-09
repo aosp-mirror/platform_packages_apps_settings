@@ -52,7 +52,7 @@ public class DoubleTapPowerSettings extends DashboardFragment {
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DoubleTapPowerPreferenceController(context));
+        controllers.add(new DoubleTapPowerPreferenceController(context, getLifecycle()));
         return controllers;
     }
 }

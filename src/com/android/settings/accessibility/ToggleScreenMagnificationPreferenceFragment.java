@@ -120,7 +120,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends ToggleFeaturePr
         mVideoPreference = new VideoPreference(getPrefContext());
         mVideoPreference.setSelectable(false);
         mVideoPreference.setPersistent(false);
-        mVideoPreference.setLayoutResource(R.layout.video_preference);
+        mVideoPreference.setLayoutResource(R.layout.magnification_video_preference);
 
         final PreferenceScreen preferenceScreen = getPreferenceManager().getPreferenceScreen();
         preferenceScreen.setOrderingAsAdded(false);

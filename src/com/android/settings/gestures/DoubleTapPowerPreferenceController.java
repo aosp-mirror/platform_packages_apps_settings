@@ -19,17 +19,16 @@ package com.android.settings.gestures;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 
-public class DoubleTapPowerPreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class DoubleTapPowerPreferenceController extends GesturePreferenceController {
 
+    private static final String PREF_KEY_VIDEO = "gesture_double_tap_power_video";
     private static final String PREF_KEY_DOUBLE_TAP_POWER = "gesture_double_tap_power";
 
-    public DoubleTapPowerPreferenceController(Context context) {
-        super(context);
+    public DoubleTapPowerPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
     }
 
     @Override
@@ -39,27 +38,13 @@ public class DoubleTapPowerPreferenceController extends PreferenceController
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
+    protected String getVideoPrefKey() {
+        return PREF_KEY_VIDEO;
     }
 
     @Override
     public String getPreferenceKey() {
         return PREF_KEY_DOUBLE_TAP_POWER;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        final boolean isEnabled = isDoubleTapEnabled();
-        if (preference != null) {
-            if (preference instanceof TwoStatePreference) {
-                ((TwoStatePreference) preference).setChecked(isEnabled);
-            } else {
-                preference.setSummary(isEnabled
-                        ? com.android.settings.R.string.gesture_setting_on
-                        : com.android.settings.R.string.gesture_setting_off);
-            }
-        }
     }
 
     @Override
@@ -70,7 +55,8 @@ public class DoubleTapPowerPreferenceController extends PreferenceController
         return true;
     }
 
-    private boolean isDoubleTapEnabled() {
+    @Override
+    protected boolean isSwitchPrefEnabled() {
         final int cameraDisabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
         return cameraDisabled == 0;

@@ -19,18 +19,16 @@ package com.android.settings.gestures;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
 
-import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 
-public class SwipeToNotificationPreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class SwipeToNotificationPreferenceController extends GesturePreferenceController {
 
+    private static final String PREF_KEY_VIDEO = "gesture_swipe_down_fingerprint_video";
     private static final String PREF_KEY_SWIPE_DOWN_FINGERPRINT = "gesture_swipe_down_fingerprint";
 
-    public SwipeToNotificationPreferenceController(Context context) {
-        super(context);
+    public SwipeToNotificationPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
     }
 
     @Override
@@ -44,18 +42,8 @@ public class SwipeToNotificationPreferenceController extends PreferenceControlle
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        final boolean isEnabled = isSystemUINavigationEnabled();
-        if (preference != null) {
-            if (preference instanceof TwoStatePreference) {
-                ((TwoStatePreference) preference).setChecked(isEnabled);
-            } else {
-                preference.setSummary(isEnabled
-                        ? R.string.gesture_setting_on
-                        : R.string.gesture_setting_off);
-            }
-        }
+    protected String getVideoPrefKey() {
+        return PREF_KEY_VIDEO;
     }
 
     @Override
@@ -64,16 +52,17 @@ public class SwipeToNotificationPreferenceController extends PreferenceControlle
                 com.android.internal.R.bool.config_supportSystemNavigationKeys);
     }
 
-    private boolean isSystemUINavigationEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0)
-                == 1;
-    }
-
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, (boolean) newValue ? 1 : 0);
         return true;
+    }
+
+    @Override
+    protected boolean isSwitchPrefEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0)
+                == 1;
     }
 }
