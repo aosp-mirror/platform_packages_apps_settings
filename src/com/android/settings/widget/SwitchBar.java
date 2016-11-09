@@ -117,7 +117,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         lp = (MarginLayoutParams) mSwitch.getLayoutParams();
         lp.setMarginEnd(switchBarMarginEnd);
         setBackgroundColor(switchBarBackgroundColor);
-        mSwitch.setBackgroundColor(switchBarBackgroundColor);
 
         addOnSwitchChangeListener(new OnSwitchChangeListener() {
             @Override
