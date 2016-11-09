@@ -35,7 +35,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.os.storage.IMountService;
+import android.os.storage.IStorageManager;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.telecom.TelecomManager;
@@ -182,7 +182,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         @Override
         protected Integer doInBackground(String... params) {
-            final IMountService service = getMountService();
+            final IStorageManager service = getStorageManager();
             try {
                 return service.decryptStorage(params[0]);
             } catch (Exception e) {
@@ -253,7 +253,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             } else {
                 int passwordType = StorageManager.CRYPT_TYPE_PASSWORD;
                 try {
-                    final IMountService service = getMountService();
+                    final IStorageManager service = getStorageManager();
                     passwordType = service.getPasswordType();
                 } catch (Exception e) {
                     Log.e(TAG, "Error calling mount service " + e);
@@ -289,7 +289,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            final IMountService service = getMountService();
+            final IStorageManager service = getStorageManager();
             try {
                 Log.d(TAG, "Validating encryption state.");
                 state = service.getEncryptionState();
@@ -483,7 +483,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 @Override
                 public Void doInBackground(Void... v) {
                     try {
-                        final IMountService service = getMountService();
+                        final IStorageManager service = getStorageManager();
                         passwordType = service.getPasswordType();
                         owner_info = service.getField(StorageManager.OWNER_INFO_KEY);
                         pattern_visible = !("0".equals(service.getField(StorageManager.PATTERN_VISIBLE_KEY)));
@@ -865,10 +865,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 || imm.getEnabledInputMethodSubtypeList(null, false).size() > 1;
     }
 
-    private IMountService getMountService() {
+    private IStorageManager getStorageManager() {
         final IBinder service = ServiceManager.getService("mount");
         if (service != null) {
-            return IMountService.Stub.asInterface(service);
+            return IStorageManager.Stub.asInterface(service);
         }
         return null;
     }
