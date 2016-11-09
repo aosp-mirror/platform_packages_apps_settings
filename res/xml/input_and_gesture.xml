@@ -38,19 +38,23 @@
 
         <Preference
             android:key="gesture_double_tap_power"
-            android:title="@string/double_tap_power_for_camera_title"/>
+            android:title="@string/double_tap_power_for_camera_title"
+            android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"/>
 
         <Preference
             android:key="gesture_double_twist"
-            android:title="@string/double_twist_for_camera_mode_title"/>
+            android:title="@string/double_twist_for_camera_mode_title"
+            android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings"/>
 
         <Preference
             android:key="gesture_double_tap_screen"
-            android:title="@string/ambient_display_title"/>
+            android:title="@string/ambient_display_title"
+            android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"/>
 
         <Preference
             android:key="gesture_pick_up"
-            android:title="@string/ambient_display_pickup_title"/>
+            android:title="@string/ambient_display_pickup_title"
+            android:fragment="com.android.settings.gestures.PickupGestureSettings"/>
 
     </PreferenceCategory>
 

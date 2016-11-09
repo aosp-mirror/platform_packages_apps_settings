@@ -17,10 +17,17 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
+import android.os.UserHandle;
+import android.support.annotation.VisibleForTesting;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.gestures.DoubleTapPowerPreferenceController;
+import com.android.settings.gestures.DoubleTapScreenPreferenceController;
+import com.android.settings.gestures.DoubleTwistPreferenceController;
+import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settingslib.drawer.CategoryKey;
 
@@ -30,6 +37,8 @@ import java.util.List;
 public class InputAndGestureSettings extends DashboardFragment {
 
     private static final String TAG = "InputAndGestureSettings";
+
+    private AmbientDisplayConfiguration mAmbientDisplayConfig;
 
     @Override
     public int getMetricsCategory() {
@@ -57,10 +66,24 @@ public class InputAndGestureSettings extends DashboardFragment {
                 = new GameControllerPreferenceController(context);
         getLifecycle().addObserver(gameControllerPreferenceController);
 
+        if (mAmbientDisplayConfig == null) {
+            mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
+        }
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(gameControllerPreferenceController);
+        // Gestures
         controllers.add(new SwipeToNotificationPreferenceController(context));
-
+        controllers.add(new DoubleTwistPreferenceController(context));
+        controllers.add(new DoubleTapPowerPreferenceController(context));
+        controllers.add(new PickupGesturePreferenceController(
+                context, mAmbientDisplayConfig, UserHandle.myUserId()));
+        controllers.add(new DoubleTapScreenPreferenceController(
+                context, mAmbientDisplayConfig, UserHandle.myUserId()));
         return controllers;
+    }
+
+    @VisibleForTesting
+    void setAmbientDisplayConfig(AmbientDisplayConfiguration ambientConfig) {
+        mAmbientDisplayConfig = ambientConfig;
     }
 }

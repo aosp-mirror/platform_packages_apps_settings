@@ -17,16 +17,11 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings.Secure;
 import android.support.v7.preference.Preference;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +29,8 @@ import android.view.ViewGroup;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.PreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -46,66 +42,39 @@ import java.util.List;
  * This will create individual switch preference for each gesture and handle updates when each
  * preference is updated
  */
-public class GestureSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, Indexable {
+public class GestureSettings extends DashboardFragment {
 
     private static final String TAG = "GestureSettings";
-    private static final String PREF_KEY_DOUBLE_TAP_POWER = "gesture_double_tap_power";
-    private static final String PREF_KEY_DOUBLE_TWIST = "gesture_double_twist";
-    private static final String PREF_KEY_PICK_UP = "gesture_pick_up";
-    private static final String PREF_KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
-    private static final String DEBUG_DOZE_COMPONENT = "debug.doze.component";
-
     private List<GesturePreference> mPreferences;
-    private SwipeToNotificationPreferenceController mSwipeToNotificationPreferenceController;
-
-    private AmbientDisplayConfiguration mAmbientConfig;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.gesture_settings);
-        Context context = getActivity();
-        mSwipeToNotificationPreferenceController =
-                new SwipeToNotificationPreferenceController(context);
+    protected int getPreferenceScreenResId() {
+        return R.xml.gesture_settings;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final AmbientDisplayConfiguration ambientConfig = new AmbientDisplayConfiguration(context);
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new SwipeToNotificationPreferenceController(context));
+        controllers.add(new DoubleTapPowerPreferenceController(context));
+        controllers.add(new DoubleTwistPreferenceController(context));
+        controllers.add(new PickupGesturePreferenceController(
+                context, ambientConfig, UserHandle.myUserId()));
+        controllers.add(new DoubleTapScreenPreferenceController(
+                context, ambientConfig, UserHandle.myUserId()));
+        return controllers;
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         mPreferences = new ArrayList();
-
-        // Double tap power for camera
-        if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
-            int cameraDisabled = Secure.getInt(
-                    getContentResolver(), Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
-            addPreference(PREF_KEY_DOUBLE_TAP_POWER, cameraDisabled == 0);
-        } else {
-            removePreference(PREF_KEY_DOUBLE_TAP_POWER);
-        }
-
-        // Ambient Display
-        mAmbientConfig = new AmbientDisplayConfiguration(context);
-        if (mAmbientConfig.pulseOnPickupAvailable()) {
-            boolean pickup = mAmbientConfig.pulseOnPickupEnabled(UserHandle.myUserId());
-            addPreference(PREF_KEY_PICK_UP, pickup);
-        } else {
-            removePreference(PREF_KEY_PICK_UP);
-        }
-        if (mAmbientConfig.pulseOnDoubleTapAvailable()) {
-            boolean doubleTap = mAmbientConfig.pulseOnDoubleTapEnabled(UserHandle.myUserId());
-            addPreference(PREF_KEY_DOUBLE_TAP_SCREEN, doubleTap);
-        } else {
-            removePreference(PREF_KEY_DOUBLE_TAP_SCREEN);
-        }
-
-        // Fingerprint slide for notifications
-        mSwipeToNotificationPreferenceController.displayPreference(getPreferenceScreen());
-
-        // Double twist for camera mode
-        if (isDoubleTwistAvailable(context)) {
-            int doubleTwistEnabled = Secure.getInt(
-                    getContentResolver(), Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
-            addPreference(PREF_KEY_DOUBLE_TWIST, doubleTwistEnabled != 0);
-        } else {
-            removePreference(PREF_KEY_DOUBLE_TWIST);
-        }
-
+        addPreferenceToTrackingList(SwipeToNotificationPreferenceController.class);
+        addPreferenceToTrackingList(DoubleTapScreenPreferenceController.class);
+        addPreferenceToTrackingList(DoubleTwistPreferenceController.class);
+        addPreferenceToTrackingList(PickupGesturePreferenceController.class);
+        addPreferenceToTrackingList(DoubleTapPowerPreferenceController.class);
     }
 
     @Override
@@ -135,13 +104,6 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mSwipeToNotificationPreferenceController.updateState(
-                findPreference(mSwipeToNotificationPreferenceController.getPreferenceKey()));
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         for (GesturePreference preference : mPreferences) {
@@ -158,21 +120,13 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean enabled = (boolean) newValue;
-        String key = preference.getKey();
-        if (PREF_KEY_DOUBLE_TAP_POWER.equals(key)) {
-            Secure.putInt(getContentResolver(),
-                    Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, enabled ? 0 : 1);
-        } else if (PREF_KEY_PICK_UP.equals(key)) {
-            Secure.putInt(getContentResolver(), Secure.DOZE_PULSE_ON_PICK_UP, enabled ? 1 : 0);
-        } else if (PREF_KEY_DOUBLE_TAP_SCREEN.equals(key)) {
-            Secure.putInt(getContentResolver(), Secure.DOZE_PULSE_ON_DOUBLE_TAP, enabled ? 1 : 0);
-        } else if (PREF_KEY_DOUBLE_TWIST.equals(key)) {
-            Secure.putInt(getContentResolver(),
-                    Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled ? 1 : 0);
-        }
-        return true;
+    protected String getCategoryKey() {
+        return null;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
@@ -185,37 +139,12 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         return MetricsEvent.SETTINGS_GESTURES;
     }
 
-    private static boolean isCameraDoubleTapPowerGestureAvailable(Resources res) {
-        return res.getBoolean(
-                com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
-    }
-
-    private static boolean isDoubleTwistAvailable(Context context) {
-        return hasSensor(context, R.string.gesture_double_twist_sensor_name,
-                R.string.gesture_double_twist_sensor_vendor);
-    }
-
-    private static boolean hasSensor(Context context, int nameResId, int vendorResId) {
-        Resources resources = context.getResources();
-        String name = resources.getString(nameResId);
-        String vendor = resources.getString(vendorResId);
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(vendor)) {
-            SensorManager sensorManager =
-                    (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-            for (Sensor s : sensorManager.getSensorList(Sensor.TYPE_ALL)) {
-                if (name.equals(s.getName()) && vendor.equals(s.getVendor())) {
-                    return true;
-                }
-            }
+    private <T extends PreferenceController> void addPreferenceToTrackingList(Class<T> clazz) {
+        final PreferenceController controller = getPreferenceController(clazz);
+        final Preference preference = findPreference(controller.getPreferenceKey());
+        if (preference != null && preference instanceof GesturePreference) {
+            mPreferences.add((GesturePreference) preference);
         }
-        return false;
-    }
-
-    private void addPreference(String key, boolean enabled) {
-        GesturePreference preference = (GesturePreference) findPreference(key);
-        preference.setChecked(enabled);
-        preference.setOnPreferenceChangeListener(this);
-        mPreferences.add(preference);
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -238,22 +167,19 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                     ArrayList<String> result = new ArrayList<String>();
                     AmbientDisplayConfiguration ambientConfig
                             = new AmbientDisplayConfiguration(context);
-                    if (!isCameraDoubleTapPowerGestureAvailable(context.getResources())) {
-                        result.add(PREF_KEY_DOUBLE_TAP_POWER);
-                    }
-                    if (!ambientConfig.pulseOnPickupAvailable()) {
-                        result.add(PREF_KEY_PICK_UP);
-                    }
-                    if (!ambientConfig.pulseOnDoubleTapAvailable()) {
-                        result.add(PREF_KEY_DOUBLE_TAP_SCREEN);
-                    }
+                    new DoubleTapPowerPreferenceController(context)
+                            .updateNonIndexableKeys(result);
+                    new PickupGesturePreferenceController(
+                            context, ambientConfig, UserHandle.myUserId())
+                            .updateNonIndexableKeys(result);
+                    new DoubleTapScreenPreferenceController(
+                            context, ambientConfig, UserHandle.myUserId())
+                            .updateNonIndexableKeys(result);
                     new SwipeToNotificationPreferenceController(context)
                             .updateNonIndexableKeys(result);
-                    if (!isDoubleTwistAvailable(context)) {
-                        result.add(PREF_KEY_DOUBLE_TWIST);
-                    }
+                    new DoubleTwistPreferenceController(context)
+                            .updateNonIndexableKeys(result);
                     return result;
                 }
             };
-
 }
