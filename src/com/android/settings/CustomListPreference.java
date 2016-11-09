@@ -29,7 +29,7 @@ import android.support.v14.preference.ListPreferenceDialogFragment;
 import android.support.v7.preference.ListPreference;
 import android.util.AttributeSet;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class CustomListPreference extends ListPreference {

@@ -33,7 +33,7 @@ import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;

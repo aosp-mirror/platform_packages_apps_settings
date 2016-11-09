@@ -37,7 +37,7 @@ import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.VideoView;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;

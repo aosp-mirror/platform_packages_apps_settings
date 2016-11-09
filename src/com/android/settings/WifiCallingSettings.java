@@ -39,7 +39,7 @@ import android.widget.TextView;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.settings.widget.SwitchBar;
 

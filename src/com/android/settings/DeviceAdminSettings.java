@@ -48,7 +48,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 

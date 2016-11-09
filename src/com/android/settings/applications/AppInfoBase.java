@@ -37,7 +37,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;

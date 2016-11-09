@@ -31,7 +31,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.net.VpnConfig;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;

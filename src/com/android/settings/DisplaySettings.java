@@ -21,7 +21,7 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;

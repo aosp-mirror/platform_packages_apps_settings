@@ -28,7 +28,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 

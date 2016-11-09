@@ -26,7 +26,7 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 
 import static android.provider.Settings.Secure.DOZE_ENABLED;
-import static com.android.internal.logging.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
 
 public class DozePreferenceController extends PreferenceController implements
         Preference.OnPreferenceChangeListener {

@@ -30,7 +30,7 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;

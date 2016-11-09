@@ -28,7 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
