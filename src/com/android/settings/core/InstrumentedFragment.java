@@ -42,6 +42,7 @@ public abstract class InstrumentedFragment extends ObservablePreferenceFragment
     protected final int APP_AND_NOTIFICATION_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 5;
     protected final int INPUT_AND_GESTURE_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 6;
     protected final int LANGUAGE_AND_REGION_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 7;
+    protected final int GESTURE_SWIPE_TO_NOTIFICATION = PLACEHOLDER_METRIC + 8;
 
     public InstrumentedFragment() {
         // Mixin that logs visibility change for activity.

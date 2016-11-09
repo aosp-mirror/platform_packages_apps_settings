@@ -98,6 +98,7 @@ import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.GestureSettings;
+import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.InputAndGestureSettings;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
@@ -348,6 +349,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             AccountSyncSettings.class.getName(),
             AccountSettings.class.getName(),
             GestureSettings.class.getName(),
+            SwipeToNotificationSettings.class.getName(),
             CryptKeeperSettings.class.getName(),
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),

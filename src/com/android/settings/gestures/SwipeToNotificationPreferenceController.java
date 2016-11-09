@@ -21,6 +21,7 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.TwoStatePreference;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 
 public class SwipeToNotificationPreferenceController extends PreferenceController
@@ -45,8 +46,15 @@ public class SwipeToNotificationPreferenceController extends PreferenceControlle
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (preference != null && preference instanceof TwoStatePreference) {
-            ((TwoStatePreference) preference).setChecked(isSystemUINavigationEnabled());
+        final boolean isEnabled = isSystemUINavigationEnabled();
+        if (preference != null) {
+            if (preference instanceof TwoStatePreference) {
+                ((TwoStatePreference) preference).setChecked(isEnabled);
+            } else {
+                preference.setSummary(isEnabled
+                        ? R.string.gesture_setting_on
+                        : R.string.gesture_setting_off);
+            }
         }
     }
 
