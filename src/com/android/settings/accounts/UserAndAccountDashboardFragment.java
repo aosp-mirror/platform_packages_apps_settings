@@ -26,6 +26,8 @@ import com.android.settingslib.drawer.CategoryKey;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.provider.Settings.EXTRA_AUTHORITIES;
+
 public class UserAndAccountDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "UserAndAccountDashboard";
@@ -61,6 +63,11 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
         controllers.add(new AutoSyncDataPreferenceController(context, this));
         controllers.add(new AutoSyncPersonalDataPreferenceController(context, this));
         controllers.add(new AutoSyncWorkDataPreferenceController(context, this));
+        String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
+        final AccountPreferenceController accountPrefController =
+            new AccountPreferenceController(context, this, authorities);
+        getLifecycle().addObserver(accountPrefController);
+        controllers.add(accountPrefController);
         return controllers;
     }
 

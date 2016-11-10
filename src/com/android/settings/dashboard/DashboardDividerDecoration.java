@@ -76,6 +76,9 @@ public class DashboardDividerDecoration extends RecyclerView.ItemDecoration {
         }
         final PreferenceGroupAdapter prefAdapter = (PreferenceGroupAdapter) adapter;
         final int adapterPosition = parent.getChildAdapterPosition(view);
+        if (adapterPosition == RecyclerView.NO_POSITION) {
+            return false;
+        }
         final Preference pref = prefAdapter.getItem(adapterPosition);
         final Preference nextPref = prefAdapter.getItem(adapterPosition + 1);
         if (nextPref == null) {
