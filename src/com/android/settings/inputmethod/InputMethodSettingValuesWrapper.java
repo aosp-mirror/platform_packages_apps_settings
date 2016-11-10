@@ -16,7 +16,7 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.ActivityManagerNative;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.os.RemoteException;
 import android.util.Log;
@@ -63,7 +63,7 @@ class InputMethodSettingValuesWrapper {
 
     private static int getDefaultCurrentUserId() {
         try {
-            return ActivityManagerNative.getDefault().getCurrentUser().id;
+            return ActivityManager.getService().getCurrentUser().id;
         } catch (RemoteException e) {
             Slog.w(TAG, "Couldn't get current user ID; guessing it's 0", e);
         }

@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 
 import android.annotation.NonNull;
 import android.app.Activity;
-import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;

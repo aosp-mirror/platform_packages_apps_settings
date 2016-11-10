@@ -418,7 +418,7 @@ public final class CredentialStorage extends Activity {
 
         final int launchedFromUserId;
         try {
-            int launchedFromUid = android.app.ActivityManagerNative.getDefault()
+            int launchedFromUid = android.app.ActivityManager.getService()
                     .getLaunchedFromUid(getActivityToken());
             if (launchedFromUid == -1) {
                 Log.e(TAG, ACTION_INSTALL + " must be started with startActivityForResult");

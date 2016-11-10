@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import android.app.ActivityManager;
-import android.app.ActivityManagerNative;
 import android.app.ActivityThread;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -1320,7 +1319,7 @@ public class RunningState {
             for (int i=0; i<numProc; i++) {
                 pids[i] = mAllProcessItems.get(i).mPid;
             }
-            long[] pss = ActivityManagerNative.getDefault()
+            long[] pss = ActivityManager.getService()
                     .getProcessPss(pids);
             int bgIndex = 0;
             for (int i=0; i<pids.length; i++) {

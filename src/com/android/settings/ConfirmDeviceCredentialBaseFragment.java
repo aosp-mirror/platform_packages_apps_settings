@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;
-import android.app.ActivityManagerNative;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.IActivityManager;
@@ -213,7 +212,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
         int taskId = getActivity().getIntent().getIntExtra(Intent.EXTRA_TASK_ID, -1);
         if (taskId != -1) {
             try {
-                IActivityManager activityManager = ActivityManagerNative.getDefault();
+                IActivityManager activityManager = ActivityManager.getService();
                 final ActivityOptions options = ActivityOptions.makeBasic();
                 options.setLaunchStackId(ActivityManager.StackId.INVALID_STACK_ID);
                 activityManager.startActivityFromRecents(taskId, options.toBundle());

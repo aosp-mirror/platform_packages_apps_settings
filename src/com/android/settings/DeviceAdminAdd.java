@@ -17,7 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.ActivityManagerNative;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
@@ -367,7 +367,7 @@ public class DeviceAdminAdd extends Activity {
                     try {
                         // Don't allow the admin to put a dialog up in front
                         // of us while we interact with the user.
-                        ActivityManagerNative.getDefault().stopAppSwitches();
+                        ActivityManager.getService().stopAppSwitches();
                     } catch (RemoteException e) {
                     }
                     mWaitingForRemoveMsg = true;
@@ -426,7 +426,7 @@ public class DeviceAdminAdd extends Activity {
         mWaitingForRemoveMsg = false;
         if (msg == null) {
             try {
-                ActivityManagerNative.getDefault().resumeAppSwitches();
+                ActivityManager.getService().resumeAppSwitches();
             } catch (RemoteException e) {
             }
             mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
@@ -434,7 +434,7 @@ public class DeviceAdminAdd extends Activity {
         } else {
             try {
                 // Continue preventing anything from coming in front.
-                ActivityManagerNative.getDefault().stopAppSwitches();
+                ActivityManager.getService().stopAppSwitches();
             } catch (RemoteException e) {
             }
             Bundle args = new Bundle();
@@ -466,7 +466,7 @@ public class DeviceAdminAdd extends Activity {
         mAppOps.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg, mCurSysAppOpMode);
         mAppOps.setMode(AppOpsManager.OP_TOAST_WINDOW, uid, pkg, mCurToastAppOpMode);
         try {
-            ActivityManagerNative.getDefault().resumeAppSwitches();
+            ActivityManager.getService().resumeAppSwitches();
         } catch (RemoteException e) {
         }
     }
@@ -494,7 +494,7 @@ public class DeviceAdminAdd extends Activity {
                         new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            ActivityManagerNative.getDefault().resumeAppSwitches();
+                            ActivityManager.getService().resumeAppSwitches();
                         } catch (RemoteException e) {
                         }
                         mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());

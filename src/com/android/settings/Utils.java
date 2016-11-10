@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;
-import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.Dialog;
@@ -648,7 +647,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static UserHandle getSecureTargetUser(IBinder activityToken,
            UserManager um, @Nullable Bundle arguments, @Nullable Bundle intentExtras) {
         UserHandle currentUser = new UserHandle(UserHandle.myUserId());
-        IActivityManager am = ActivityManagerNative.getDefault();
+        IActivityManager am = ActivityManager.getService();
         try {
             String launchedFromPackage = am.getLaunchedFromPackage(activityToken);
             boolean launchedFromSettingsApp = SETTINGS_PACKAGE_NAME.equals(launchedFromPackage);
@@ -698,7 +697,7 @@ public final class Utils extends com.android.settingslib.Utils {
    public static UserHandle getInsecureTargetUser(IBinder activityToken, @Nullable Bundle arguments,
            @Nullable Bundle intentExtras) {
        UserHandle currentUser = new UserHandle(UserHandle.myUserId());
-       IActivityManager am = ActivityManagerNative.getDefault();
+       IActivityManager am = ActivityManager.getService();
        try {
            UserHandle launchedFromUser = new UserHandle(UserHandle.getUserId(
                    am.getLaunchedFromUid(activityToken)));
@@ -1117,7 +1116,7 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static boolean unlockWorkProfileIfNecessary(Context context, int userId) {
         try {
-            if (!ActivityManagerNative.getDefault().isUserRunning(userId,
+            if (!ActivityManager.getService().isUserRunning(userId,
                     ActivityManager.FLAG_AND_LOCKED)) {
                 return false;
             }
