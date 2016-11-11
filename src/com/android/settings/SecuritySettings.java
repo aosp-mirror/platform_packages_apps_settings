@@ -781,8 +781,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final List<Preference> preferences = new ArrayList<>();
         for (Tile tile : tiles) {
             final Preference pref = new Preference(getPrefContext());
-            mDashboardFeatureProvider
-                    .bindPreferenceToTile(getActivity(), pref, tile, null /* key */);
+            mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), pref, tile,
+                    null /* key */, Preference.DEFAULT_ORDER/* baseOrder */);
             preferences.add(pref);
         }
         return preferences;

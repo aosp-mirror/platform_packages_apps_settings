@@ -80,7 +80,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public void bindPreferenceToTile(Activity activity, Preference pref, Tile tile, String key) {
+    public void bindPreferenceToTile(Activity activity, Preference pref, Tile tile, String key,
+            int baseOrder) {
         pref.setTitle(tile.title);
         if (!TextUtils.isEmpty(key)) {
             pref.setKey(key);
@@ -112,11 +113,21 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 return true;
             });
         }
+        final String skipOffsetPackageName = activity.getPackageName();
         // Use negated priority for order, because tile priority is based on intent-filter
         // (larger value has higher priority). However pref order defines smaller value has
         // higher priority.
         if (tile.priority != 0) {
-            pref.setOrder(-tile.priority);
+            boolean shouldSkipBaseOrderOffset = false;
+            if (tile.intent != null) {
+                shouldSkipBaseOrderOffset = TextUtils.equals(
+                        skipOffsetPackageName, tile.intent.getComponent().getPackageName());
+            }
+            if (shouldSkipBaseOrderOffset || baseOrder == Preference.DEFAULT_ORDER) {
+                pref.setOrder(-tile.priority);
+            } else {
+                pref.setOrder(-tile.priority + baseOrder);
+            }
         }
     }
 

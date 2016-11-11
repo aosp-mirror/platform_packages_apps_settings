@@ -63,12 +63,16 @@ public interface DashboardFeatureProvider {
      * @param pref The preference to bind data
      * @param tile The binding data
      * @param key They key for preference. If null, we will generate one from tile data
+     * @param baseOrder The order offset value. When binding, pref's order is determined by
+     * both this value and tile's own priority.
      */
-    void bindPreferenceToTile(Activity activity, Preference pref, Tile tile, String key);
+    void bindPreferenceToTile(Activity activity, Preference pref, Tile tile, String key,
+            int baseOrder);
 
     /**
      * Returns a {@link ProgressiveDisclosureMixin} for specified fragment.
      */
     ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
             DashboardFragment fragment);
+
 }
