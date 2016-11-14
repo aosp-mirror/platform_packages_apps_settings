@@ -667,7 +667,7 @@ public class ManageApplications extends InstrumentedFragment
         private final ArrayList<Integer> mFilterOptions = new ArrayList<>();
 
         public FilterSpinnerAdapter(ManageApplications manageApplications) {
-            super(manageApplications.getActivity(), R.layout.filter_spinner_item);
+            super(manageApplications.mFilterSpinner.getContext(), R.layout.filter_spinner_item);
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             mManageApplications = manageApplications;
         }

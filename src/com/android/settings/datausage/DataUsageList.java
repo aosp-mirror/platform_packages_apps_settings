@@ -147,7 +147,8 @@ public class DataUsageList extends DataUsageBase {
 
         mHeader = setPinnedHeaderView(R.layout.apps_filter_spinner);
         mCycleSpinner = (Spinner) mHeader.findViewById(R.id.filter_spinner);
-        mCycleAdapter = new CycleAdapter(getContext(), new CycleAdapter.SpinnerInterface() {
+        mCycleAdapter = new CycleAdapter(mCycleSpinner.getContext(),
+                new CycleAdapter.SpinnerInterface() {
             @Override
             public void setAdapter(CycleAdapter cycleAdapter) {
                 mCycleSpinner.setAdapter(cycleAdapter);
