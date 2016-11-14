@@ -19,6 +19,7 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.annotation.UserIdInt;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -61,6 +62,7 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import java.util.ArrayList;
@@ -71,6 +73,7 @@ import java.util.List;
 
 import static android.content.Intent.EXTRA_USER;
 import static android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS;
+import static android.os.UserManager.DISALLOW_REMOVE_USER;
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
 /**
@@ -117,7 +120,7 @@ public class AccountSettings extends SettingsPreferenceFragment
         /**
          * The preference that displays the button to remove the managed profile
          */
-        public Preference removeWorkProfilePreference;
+        public RestrictedPreference removeWorkProfilePreference;
         /**
          * The preference that displays managed profile settings.
          */
@@ -296,6 +299,8 @@ public class AccountSettings extends SettingsPreferenceFragment
                 ((AccessiblePreferenceCategory) profileData.preferenceGroup).setContentDescription(
                         getString(R.string.accessibility_category_work, workGroupSummary));
                 profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference(context);
+                enforceRestrictionOnPreference(profileData.removeWorkProfilePreference,
+                        DISALLOW_REMOVE_USER, UserHandle.myUserId());
                 profileData.managedProfilePreference = newManagedProfileSettings();
             } else {
                 profileData.preferenceGroup.setTitle(R.string.category_personal);
@@ -310,17 +315,27 @@ public class AccountSettings extends SettingsPreferenceFragment
             profileData.authenticatorHelper = new AuthenticatorHelper(context,
                     userInfo.getUserHandle(), this);
             profileData.addAccountPreference = newAddAccountPreference(context);
-            if (RestrictedLockUtils.hasBaseUserRestriction(context,
-                    UserManager.DISALLOW_MODIFY_ACCOUNTS, userInfo.id)) {
-                profileData.addAccountPreference.setEnabled(false);
-            } else {
-                profileData.addAccountPreference.checkRestrictionAndSetDisabled(
-                        DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
-            }
+            enforceRestrictionOnPreference(profileData.addAccountPreference,
+                    DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
         }
         mProfiles.put(userInfo.id, profileData);
         Index.getInstance(getActivity()).updateFromClassNameResource(
                 AccountSettings.class.getName(), true, true);
+    }
+
+    /**
+     * Configure the UI of the preference by checking user restriction.
+     * @param preference The preference we are configuring.
+     * @param userRestriction The user restriction related to the preference.
+     * @param userId The user that we retrieve user restriction of.
+     */
+    private void enforceRestrictionOnPreference(RestrictedPreference preference,
+            String userRestriction, @UserIdInt int userId) {
+        if (RestrictedLockUtils.hasBaseUserRestriction(getActivity(), userRestriction, userId)) {
+            preference.setEnabled(false);
+        } else {
+            preference.checkRestrictionAndSetDisabled(userRestriction, userId);
+        }
     }
 
     private DimmableIconPreference newAddAccountPreference(Context context) {
@@ -332,15 +347,14 @@ public class AccountSettings extends SettingsPreferenceFragment
         return preference;
     }
 
-    private Preference newRemoveWorkProfilePreference(Context context) {
-        Preference preference = new Preference(getPrefContext());
+    private RestrictedPreference newRemoveWorkProfilePreference(Context context) {
+        RestrictedPreference preference = new RestrictedPreference(getPrefContext());
         preference.setTitle(R.string.remove_managed_profile_label);
         preference.setIcon(R.drawable.ic_menu_delete);
         preference.setOnPreferenceClickListener(this);
         preference.setOrder(ORDER_LAST);
         return preference;
     }
-
 
     private Preference newManagedProfileSettings() {
         Preference preference = new Preference(getPrefContext());
@@ -685,7 +699,8 @@ public class AccountSettings extends SettingsPreferenceFragment
                         result.add(data);
                     }
                     if (userInfo.isManagedProfile()) {
-                        {
+                        if (!RestrictedLockUtils.hasBaseUserRestriction(context,
+                                DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
                             SearchIndexableRaw data = new SearchIndexableRaw(context);
                             data.title = res.getString(R.string.remove_managed_profile_label);
                             data.screenTitle = screenTitle;
