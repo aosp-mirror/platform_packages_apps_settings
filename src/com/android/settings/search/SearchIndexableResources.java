@@ -38,6 +38,7 @@ import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
+import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.GestureSettings;
@@ -335,12 +336,20 @@ public final class SearchIndexableResources {
                         NO_DATA_RES_ID,
                         SystemDashboardFragment.class.getName(),
                         R.drawable.ic_settings_about));
+
         sResMap.put(StorageDashboardFragment.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(StorageDashboardFragment.class.getName()),
                         NO_DATA_RES_ID,
                         StorageDashboardFragment.class.getName(),
                         R.drawable.ic_settings_storage));
+
+        sResMap.put(EnterprisePrivacySettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(EnterprisePrivacySettings.class.getName()),
+                        NO_DATA_RES_ID,
+                        EnterprisePrivacySettings.class.getName(),
+                        R.drawable.ic_settings_about));
     }
 
     private SearchIndexableResources() {

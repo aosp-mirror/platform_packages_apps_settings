@@ -37,6 +37,7 @@ import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
+import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.GestureSettings;
@@ -170,6 +171,7 @@ public final class Ranking {
 
         // Privacy
         sRankMap.put(PrivacySettings.class.getName(), RANK_PRIVACY);
+        sRankMap.put(EnterprisePrivacySettings.class.getName(), RANK_PRIVACY);
 
         // Date / Time
         sRankMap.put(DateTimeSettings.class.getName(), RANK_DATE_TIME);

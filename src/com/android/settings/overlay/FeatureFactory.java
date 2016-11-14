@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 
@@ -76,6 +77,8 @@ public abstract class FeatureFactory {
 
     public abstract LocaleFeatureProvider getLocaleFeatureProvider();
 
+    public abstract EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(
+            Context context);
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
