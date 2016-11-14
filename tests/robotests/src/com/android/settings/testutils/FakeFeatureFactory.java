@@ -20,6 +20,7 @@ import android.content.Context;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -41,6 +42,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final DashboardFeatureProvider dashboardFeatureProvider;
     public final LocaleFeatureProvider localeFeatureProvider;
     public final ApplicationFeatureProvider applicationFeatureProvider;
+    public final EnterprisePrivacyFeatureProvider enterprisePrivacyFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -69,6 +71,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         dashboardFeatureProvider = mock(DashboardFeatureProvider.class);
         localeFeatureProvider = mock(LocaleFeatureProvider.class);
         applicationFeatureProvider = mock(ApplicationFeatureProvider.class);
+        enterprisePrivacyFeatureProvider = mock(EnterprisePrivacyFeatureProvider.class);
     }
 
     @Override
@@ -99,5 +102,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public LocaleFeatureProvider getLocaleFeatureProvider() {
         return localeFeatureProvider;
+    }
+
+    @Override
+    public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(Context context) {
+        return enterprisePrivacyFeatureProvider;
     }
 }

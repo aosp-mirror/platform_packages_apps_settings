@@ -94,6 +94,8 @@ import com.android.settings.deviceinfo.Status;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.NightDisplaySettings;
+import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
+import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -277,6 +279,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.PrintSettingsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
+            Settings.EnterprisePrivacySettingsActivity.class.getName(),
 
             // New IA
             // Home page
@@ -416,6 +419,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             ConnectedDeviceDashboardFragment.class.getName(),
             AppAndNotificationDashboardFragment.class.getName(),
             UserAndAccountDashboardFragment.class.getName(),
+            EnterprisePrivacySettings.class.getName(),
     };
 
 
@@ -1218,6 +1222,11 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
         setTileEnabled(new ComponentName(packageName,
                 BackupSettingsActivity.class.getName()), hasBackupActivity, isAdmin, pm);
+
+        setTileEnabled(new ComponentName(packageName,
+                Settings.EnterprisePrivacySettingsActivity.class.getName()),
+                FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
+                        .hasDeviceOwner(), isAdmin, pm);
 
     }
 

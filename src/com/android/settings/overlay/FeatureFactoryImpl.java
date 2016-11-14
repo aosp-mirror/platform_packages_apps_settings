@@ -16,6 +16,7 @@
 
 package com.android.settings.overlay;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.support.annotation.Keep;
 
@@ -25,6 +26,9 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
+import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
+import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
+import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
@@ -39,6 +43,7 @@ public final class FeatureFactoryImpl extends FeatureFactory {
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private DashboardFeatureProviderImpl mDashboardFeatureProvider;
     private LocaleFeatureProvider mLocaleFeatureProvider;
+    private EnterprisePrivacyFeatureProvider mEnterprisePrivacyFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -80,5 +85,15 @@ public final class FeatureFactoryImpl extends FeatureFactory {
             mLocaleFeatureProvider = new LocaleFeatureProviderImpl();
         }
         return mLocaleFeatureProvider;
+    }
+
+    @Override
+    public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(Context context) {
+        if (mEnterprisePrivacyFeatureProvider == null) {
+            mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(context,
+                    new DevicePolicyManagerWrapperImpl((DevicePolicyManager)context
+                            .getSystemService(Context.DEVICE_POLICY_SERVICE)));
+        }
+        return mEnterprisePrivacyFeatureProvider;
     }
 }
