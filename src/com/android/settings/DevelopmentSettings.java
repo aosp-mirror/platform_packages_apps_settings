@@ -54,7 +54,7 @@ import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.os.storage.IMountService;
+import android.os.storage.IStorageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.persistentdata.PersistentDataBlockManager;
@@ -489,8 +489,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         try {
             IBinder service = ServiceManager.getService("mount");
-            IMountService mountService = IMountService.Stub.asInterface(service);
-            if (!mountService.isConvertibleToFBE()) {
+            IStorageManager storageManager = IStorageManager.Stub.asInterface(service);
+            if (!storageManager.isConvertibleToFBE()) {
                 removePreference(KEY_CONVERT_FBE);
             } else if ("file".equals(SystemProperties.get("ro.crypto.type", "none"))) {
                 convertFbePreference.setEnabled(false);

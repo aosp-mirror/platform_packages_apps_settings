@@ -25,7 +25,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.os.storage.IMountService;
+import android.os.storage.IStorageManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -83,10 +83,10 @@ public class CryptKeeperConfirm extends InstrumentedFragment {
                         return;
                     }
 
-                    IMountService mountService = IMountService.Stub.asInterface(service);
+                    IStorageManager storageManager = IStorageManager.Stub.asInterface(service);
                     try {
                         Bundle args = getIntent().getExtras();
-                        mountService.encryptStorage(args.getInt("type", -1), args.getString("password"));
+                        storageManager.encryptStorage(args.getInt("type", -1), args.getString("password"));
                     } catch (Exception e) {
                         Log.e("CryptKeeper", "Error while encrypting...", e);
                     }
@@ -140,8 +140,8 @@ public class CryptKeeperConfirm extends InstrumentedFragment {
             // 2. The system locale.
             try {
                 IBinder service = ServiceManager.getService("mount");
-                IMountService mountService = IMountService.Stub.asInterface(service);
-                mountService.setField("SystemLocale", Locale.getDefault().toLanguageTag());
+                IStorageManager storageManager = IStorageManager.Stub.asInterface(service);
+                storageManager.setField("SystemLocale", Locale.getDefault().toLanguageTag());
             } catch (Exception e) {
                 Log.e(TAG, "Error storing locale for decryption UI", e);
             }

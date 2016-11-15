@@ -77,7 +77,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
     public void onNavigateNext() {
         int moveId;
 
-        // We only expect exceptions from MountService#setPrimaryStorageUuid
+        // We only expect exceptions from StorageManagerService#setPrimaryStorageUuid
         try {
             moveId = getPackageManager().movePrimaryStorage(mVolume);
         } catch (IllegalArgumentException e) {
