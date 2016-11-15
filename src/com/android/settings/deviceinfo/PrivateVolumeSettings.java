@@ -269,7 +269,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 result.value, result.units));
         mSummary.setSummary(getString(R.string.storage_volume_used,
                 Formatter.formatFileSize(context, mTotalSize)));
-        mSummary.setPercent((int) ((usedBytes * 100) / mTotalSize));
+        mSummary.setPercent(usedBytes, mTotalSize);
 
         mMeasure.forceMeasure();
         mNeedsUpdate = false;
