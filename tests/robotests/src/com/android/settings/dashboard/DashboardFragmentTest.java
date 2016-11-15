@@ -42,9 +42,6 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -123,18 +120,28 @@ public class DashboardFragmentTest {
     }
 
     @Test
+    public void onAttach_shouldCreatePlaceholderPreferenceController() {
+        final PreferenceController controller = mTestFragment.getPreferenceController(
+                DashboardTilePlaceholderPreferenceController.class);
+
+        assertThat(controller).isNotNull();
+    }
+
+    @Test
     public void updateState_skipUnavailablePrefs() {
-        List<PreferenceController> preferenceControllers = mTestFragment.mControllers;
-        preferenceControllers.add(mock(PreferenceController.class));
-        preferenceControllers.add(mock(PreferenceController.class));
-        when(preferenceControllers.get(0).isAvailable()).thenReturn(false);
-        when(preferenceControllers.get(1).isAvailable()).thenReturn(true);
+        final List<PreferenceController> preferenceControllers = mTestFragment.mControllers;
+        final PreferenceController mockController1 = mock(PreferenceController.class);
+        final PreferenceController mockController2 = mock(PreferenceController.class);
+        preferenceControllers.add(mockController1);
+        preferenceControllers.add(mockController2);
+        when(mockController1.isAvailable()).thenReturn(false);
+        when(mockController2.isAvailable()).thenReturn(true);
 
         mTestFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
         mTestFragment.onResume();
 
-        verify(mTestFragment.mControllers.get(0), never()).getPreferenceKey();
-        verify(mTestFragment.mControllers.get(1)).getPreferenceKey();
+        verify(mockController1, never()).getPreferenceKey();
+        verify(mockController2).getPreferenceKey();
     }
 
     public static class TestPreferenceController extends PreferenceController {

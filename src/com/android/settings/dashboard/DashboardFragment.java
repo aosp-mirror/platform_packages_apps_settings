@@ -62,6 +62,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     protected ProgressiveDisclosureMixin mProgressiveDisclosureMixin;
     protected DashboardFeatureProvider mDashboardFeatureProvider;
+    private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
     private SummaryLoader mSummaryLoader;
 
@@ -74,10 +75,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 .getProgressiveDisclosureMixin(context, this);
         getLifecycle().addObserver(mProgressiveDisclosureMixin);
 
-        final List<PreferenceController> controllers = getPreferenceControllers(context);
+        List<PreferenceController> controllers = getPreferenceControllers(context);
         if (controllers == null) {
-            return;
+            controllers = new ArrayList<>();
         }
+        mPlaceholderPreferenceController =
+                new DashboardTilePlaceholderPreferenceController(context);
+        controllers.add(mPlaceholderPreferenceController);
         for (PreferenceController controller : controllers) {
             addPreferenceController(controller);
         }
@@ -319,12 +323,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 // Have the key already, will rebind.
                 final Preference preference = mProgressiveDisclosureMixin.findPreference(
                         screen, key);
-                mDashboardFeatureProvider.bindPreferenceToTile(
-                        getActivity(), preference, tile, key);
+                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), preference, tile, key,
+                        mPlaceholderPreferenceController.getOrder());
             } else {
                 // Don't have this key, add it.
                 final Preference pref = new Preference(getPrefContext());
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), pref, tile, key);
+                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), pref, tile, key,
+                        mPlaceholderPreferenceController.getOrder());
                 mProgressiveDisclosureMixin.addPreference(screen, pref);
                 mDashboardTilePrefKeys.add(key);
             }

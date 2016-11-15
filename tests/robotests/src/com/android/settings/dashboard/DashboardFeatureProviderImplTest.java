@@ -77,7 +77,7 @@ public class DashboardFeatureProviderImplTest {
         tile.metaData = new Bundle();
         tile.metaData.putString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS, "HI");
         tile.priority = 10;
-        mImpl.bindPreferenceToTile(mActivity, preference, tile, "123");
+        mImpl.bindPreferenceToTile(mActivity, preference, tile, "123", Preference.DEFAULT_ORDER);
 
         assertThat(preference.getTitle()).isEqualTo(tile.title);
         assertThat(preference.getSummary()).isEqualTo(tile.summary);
@@ -95,7 +95,9 @@ public class DashboardFeatureProviderImplTest {
         tile.metaData = new Bundle();
         tile.priority = 10;
         tile.intent = new Intent();
-        mImpl.bindPreferenceToTile(mActivity, preference, tile, "123");
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+
+        mImpl.bindPreferenceToTile(mActivity, preference, tile, "123", Preference.DEFAULT_ORDER);
 
         assertThat(preference.getFragment()).isNull();
         assertThat(preference.getOnPreferenceClickListener()).isNotNull();
@@ -112,11 +114,12 @@ public class DashboardFeatureProviderImplTest {
         tile.userHandle.add(mock(UserHandle.class));
         tile.userHandle.add(mock(UserHandle.class));
         tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
 
         when(mActivity.getApplicationContext().getSystemService(Context.USER_SERVICE))
                 .thenReturn(mUserManager);
 
-        mImpl.bindPreferenceToTile(mActivity, preference, tile, "123");
+        mImpl.bindPreferenceToTile(mActivity, preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
 
         verify(mActivity).getFragmentManager();
@@ -129,9 +132,23 @@ public class DashboardFeatureProviderImplTest {
         final Tile tile = new Tile();
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
-        mImpl.bindPreferenceToTile(mActivity, preference, tile, null /* key */);
+        mImpl.bindPreferenceToTile(mActivity, preference, tile, null /* key */
+                , Preference.DEFAULT_ORDER);
 
         assertThat(preference.getKey()).isNotNull();
         assertThat(preference.getOrder()).isEqualTo(Preference.DEFAULT_ORDER);
+    }
+
+    @Test
+    public void bindPreference_withBaseOrder_shouldOffsetPriority() {
+        final int baseOrder = 100;
+        final Preference preference = new Preference(
+                ShadowApplication.getInstance().getApplicationContext());
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.priority = 10;
+        mImpl.bindPreferenceToTile(mActivity, preference, tile, "123", baseOrder);
+
+        assertThat(preference.getOrder()).isEqualTo(-tile.priority + baseOrder);
     }
 }
