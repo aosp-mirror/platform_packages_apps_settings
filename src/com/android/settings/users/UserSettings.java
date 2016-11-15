@@ -17,7 +17,7 @@
 package com.android.settings.users;
 
 import android.app.Activity;
-import android.app.ActivityManagerNative;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -681,7 +681,7 @@ public class UserSettings extends SettingsPreferenceFragment
             return;
         }
         try {
-            ActivityManagerNative.getDefault().switchUser(UserHandle.USER_SYSTEM);
+            ActivityManager.getService().switchUser(UserHandle.USER_SYSTEM);
             getContext().getSystemService(UserManager.class).removeUser(UserHandle.myUserId());
         } catch (RemoteException re) {
             Log.e(TAG, "Unable to remove self user");
@@ -724,7 +724,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void switchUserNow(int userId) {
         try {
-            ActivityManagerNative.getDefault().switchUser(userId);
+            ActivityManager.getService().switchUser(userId);
         } catch (RemoteException re) {
             // Nothing to do
         }

@@ -18,7 +18,7 @@ package com.android.settings;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.ActivityManagerNative;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.AppOpsManager.PackageOps;
@@ -807,7 +807,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         try {
             String wv_package = mWebViewUpdateService.getCurrentWebViewPackageName();
-            ActivityManagerNative.getDefault().killPackageDependents(
+            ActivityManager.getService().killPackageDependents(
                     wv_package, UserHandle.USER_ALL);
         } catch(RemoteException e) {
         }
@@ -865,7 +865,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeDebuggerOptions() {
         try {
-            ActivityManagerNative.getDefault().setDebugApp(
+            ActivityManager.getService().setDebugApp(
                 mDebugApp, mWaitForDebugger.isChecked(), true);
         } catch (RemoteException ex) {
         }
@@ -908,7 +908,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static void resetDebuggerOptions() {
         try {
-            ActivityManagerNative.getDefault().setDebugApp(
+            ActivityManager.getService().setDebugApp(
                     null, false, true);
         } catch (RemoteException ex) {
         }
@@ -1721,7 +1721,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeImmediatelyDestroyActivitiesOptions() {
         try {
-            ActivityManagerNative.getDefault().setAlwaysFinish(
+            ActivityManager.getService().setAlwaysFinish(
                     mImmediatelyDestroyActivities.isChecked());
         } catch (RemoteException ex) {
         }
@@ -1795,7 +1795,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void updateAppProcessLimitOptions() {
         try {
-            int limit = ActivityManagerNative.getDefault().getProcessLimit();
+            int limit = ActivityManager.getService().getProcessLimit();
             CharSequence[] values = mAppProcessLimit.getEntryValues();
             for (int i=0; i<values.length; i++) {
                 int val = Integer.parseInt(values[i].toString());
@@ -1817,7 +1817,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeAppProcessLimitOptions(Object newValue) {
         try {
             int limit = newValue != null ? Integer.parseInt(newValue.toString()) : -1;
-            ActivityManagerNative.getDefault().setProcessLimit(limit);
+            ActivityManager.getService().setProcessLimit(limit);
             updateAppProcessLimitOptions();
         } catch (RemoteException e) {
         }

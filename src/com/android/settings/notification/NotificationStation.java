@@ -243,7 +243,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         sb.append("Intent(pkg=").append(is.getCreatorPackage());
         try {
             final boolean isActivity =
-                    ActivityManagerNative.getDefault().isIntentSenderAnActivity(is.getTarget());
+                    ActivityManager.getService().isIntentSenderAnActivity(is.getTarget());
             if (isActivity) sb.append(" (activity)");
         } catch (RemoteException ex) {}
         sb.append(")");

@@ -15,7 +15,7 @@
  */
 package com.android.settings.tests;
 
-import android.app.ActivityManagerNative;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -47,12 +47,12 @@ public class SettingsRestoreAfterCloseTest {
                 .ALWAYS_FINISH_ACTIVITIES, 0)
                 != 0;
 
-        ActivityManagerNative.getDefault().setAlwaysFinish(true);
+        ActivityManager.getService().setAlwaysFinish(true);
     }
 
     @After
     public void tearDown() throws Exception {
-        ActivityManagerNative.getDefault().setAlwaysFinish(mAlwaysFinish);
+        ActivityManager.getService().setAlwaysFinish(mAlwaysFinish);
     }
 
     @Test

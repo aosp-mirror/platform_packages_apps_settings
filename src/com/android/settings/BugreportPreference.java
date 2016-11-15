@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.ActivityManager;
-import android.app.ActivityManagerNative;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -97,7 +96,7 @@ public class BugreportPreference extends CustomDialogPreference {
 
     private void takeBugreport(int bugreportType) {
         try {
-            ActivityManagerNative.getDefault().requestBugReport(bugreportType);
+            ActivityManager.getService().requestBugReport(bugreportType);
         } catch (RemoteException e) {
             Log.e(TAG, "error taking bugreport (bugreportType=" + bugreportType + ")", e);
         }
