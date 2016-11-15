@@ -152,7 +152,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
-    private void refresh() {
+    private synchronized void refresh() {
         final Context context = getPrefContext();
 
         getPreferenceScreen().removeAll();
