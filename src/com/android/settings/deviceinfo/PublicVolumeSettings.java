@@ -166,7 +166,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
                     result.value, result.units));
             mSummary.setSummary(getString(R.string.storage_volume_used,
                     Formatter.formatFileSize(context, totalBytes)));
-            mSummary.setPercent((int) ((usedBytes * 100) / totalBytes));
+            mSummary.setPercent(usedBytes, totalBytes);
         }
 
         if (mVolume.getState() == VolumeInfo.STATE_UNMOUNTED) {
