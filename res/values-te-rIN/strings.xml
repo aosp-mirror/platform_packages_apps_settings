@@ -45,20 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM చిరునామా పుస్తకాన్ని వీక్షించండి"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"ఫిక్స్‌డ్ డయలింగ్ నంబర్‌లను వీక్షించండి"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"సర్వీస్ డయలింగ్ నంబర్‌లను వీక్షించండి"</string>
-    <!-- no translation found for radioInfo_menu_getIMS (185171476413967831) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_reg_status_title (16971785902696970) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_reg_status_registered (5614116179751126247) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_reg_status_not_registered (4438054067642750717) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_feature_status_available (3687807290327566879) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_feature_status_unavailable (4606182208970114368) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_reg_status (7534612158445529715) -->
-    <skip />
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"IMS సేవ స్థితి"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS స్థితి"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"నమోదు చేయబడింది"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"నమోదు కాలేదు"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"అందుబాటులో ఉంది"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"అందుబాటులో లేదు"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS నమోదు: <xliff:g id="STATUS">%1$s</xliff:g>\nవాయిస్ ఓవర్ LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nవాయిస్ ఓవర్ WiFi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nవీడియో కాలింగ్: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT ఇంటర్‌ఫేస్: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"సేవ అందుబాటులో ఉంది"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"సేవ అందుబాటులో లేదు"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"అత్యవసర కాల్‌లు మాత్రమే"</string>
@@ -1613,10 +1606,8 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"మీరు ఈ సేవను ఆపివేస్తే, మీ ఫోన్‌ను పవర్ ఆఫ్ చేసి, మళ్లీ ఆన్ చేసే వరకు అందులోని కొన్ని లక్షణాలు సరిగ్గా పని చేయకపోవచ్చు."</string>
     <string name="language_settings" msgid="8758655933029560944">"భాషలు &amp; ఇన్‌పుట్"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"భాషలు &amp; ఇన్‌పుట్"</string>
-    <!-- no translation found for language_and_region_settings_title (117593114157670585) -->
-    <skip />
-    <!-- no translation found for input_gesture_settings_title (2201979773768106872) -->
-    <skip />
+    <string name="language_and_region_settings_title" msgid="117593114157670585">"భాషలు &amp; ప్రాంతం"</string>
+    <string name="input_gesture_settings_title" msgid="2201979773768106872">"ఇన్‌పుట్ &amp; సంజ్ఞలు"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"కీబోర్డ్ &amp; ఇన్‌పుట్ పద్ధతులు"</string>
     <string name="phone_language" msgid="7116581601133118044">"భాషలు"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
@@ -3263,24 +3254,33 @@
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"మీ ఫోన్‌ను నియంత్రించడానికి త్వరిత సంజ్ఞలు"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"మీ టాబ్లెట్‌ను నియంత్రించడానికి త్వరిత సంజ్ఞలు"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"మీ పరికరాన్ని నియంత్రించడానికి త్వరిత సంజ్ఞలు"</string>
-    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"కెమెరాకు వెళ్లు"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"కెమెరాను త్వరగా తెరవడానికి, పవర్ బటన్‌ను రెండుసార్లు నొక్కండి. ఏ స్క్రీన్‌పై ఉన్నా పని చేస్తుంది"</string>
+    <!-- no translation found for double_tap_power_for_camera_title (64716226816032800) -->
+    <skip />
+    <!-- no translation found for double_tap_power_for_camera_summary (242037150983277829) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"కెమెరాను ముందు/వెనుకకు మార్చడం"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"ఫోన్‌ను తరచి చూడటానికి రెండుసార్లు నొక్కండి"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"టాబ్లెట్‌ను తరచి చూడటానికి రెండుసార్లు నొక్కండి"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"పరికరాన్ని తరచి చూడటానికి రెండుసార్లు నొక్కండి"</string>
-    <string name="ambient_display_summary" msgid="5817384104520817202">"మీ నోటిఫికేషన్‌లను శీఘ్రంగా చూడటానికి, మీ స్క్రీన్‌పై రెండుసార్లు నొక్కండి"</string>
+    <!-- no translation found for ambient_display_summary (2521630136233865893) -->
+    <skip />
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"ఫోన్‌ను తరచి చూడటానికి పైకి ఎత్తండి"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"టాబ్లెట్‌ను తరచి చూడటానికి పైకి ఎత్తండి"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"పరికరాన్ని తరచి చూడటానికి పైకి ఎత్తండి"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="7887685543895952417">"మీ నోటిఫికేషన్‌లను శీఘ్రంగా చూడటానికి, మీ ఫోన్‌ను చేతుల్లోకి తీసుకోండి"</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="4703466494089486840">"మీ నోటిఫికేషన్‌లను శీఘ్రంగా చూడటానికి, మీ టాబ్లెట్‌ను చేతుల్లోకి తీసుకోండి"</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="3557276829636914807">"మీ నోటిఫికేషన్‌లను శీఘ్రంగా చూడటానికి, మీ పరికరాన్ని చేతుల్లోకి తీసుకోండి"</string>
+    <!-- no translation found for ambient_display_pickup_summary (8696432220086951466) -->
+    <skip />
+    <!-- no translation found for ambient_display_pickup_summary (2442551819015699120) -->
+    <skip />
+    <!-- no translation found for ambient_display_pickup_summary (2369325441608811599) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"నోటిఫికేషన్‌ల కోసం స్వైప్ చేయడం"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"మీ నోటిఫికేషన్‌లను తనిఖీ చేయడానికి, మీ ఫోన్ వెనుకవైపు ఉన్న వేలిముద్ర సెన్సార్‌లో క్రిందికి స్వైప్ చేయండి"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"మీ నోటిఫికేషన్‌లను తనిఖీ చేయడానికి, మీ టాబ్లెట్ వెనుకవైపు ఉన్న వేలిముద్ర సెన్సార్‌పై క్రిందికి స్వైప్ చేయండి"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"మీ నోటిఫికేషన్‌లను తనిఖీ చేయడానికి, మీ పరికరం వెనుకవైపు ఉన్న వేలిముద్ర సెన్సార్‌పై క్రిందికి స్వైప్ చేయండి"</string>
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (1770661868393713922) -->
+    <skip />
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (902719947767712895) -->
+    <skip />
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5372926094116306647) -->
+    <skip />
     <string name="gesture_setting_on" msgid="3455094265233870280">"ఆన్"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"ఆఫ్"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"బూట్‌లోడర్ ఇప్పటికే అన్‌లాక్ చేయబడింది"</string>
@@ -3301,4 +3301,10 @@
     <string name="auto_sync_account_title" msgid="7647106425106072285">"ఖాతా డేటా స్వీయ సమకాలీకరణ"</string>
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"వ్యక్తిగత ఖాతా డేటా స్వీయ సమకాలీకరణ"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"కార్యాలయ ఖాతా డేటా స్వీయ సమకాలీకరణ"</string>
+    <!-- no translation found for enterprise_privacy_settings (6419290515657989967) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_settings_title (3816716633813721131) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_header (5605095630252702716) -->
+    <skip />
 </resources>

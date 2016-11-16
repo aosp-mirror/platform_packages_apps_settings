@@ -45,20 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Ver libreta de direcciones de SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Ver números fijos"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Ver números del servicio técnico"</string>
-    <!-- no translation found for radioInfo_menu_getIMS (185171476413967831) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_reg_status_title (16971785902696970) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_reg_status_registered (5614116179751126247) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_reg_status_not_registered (4438054067642750717) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_feature_status_available (3687807290327566879) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_feature_status_unavailable (4606182208970114368) -->
-    <skip />
-    <!-- no translation found for radio_info_ims_reg_status (7534612158445529715) -->
-    <skip />
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"Estado del servicio de IMS"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"Estado de IMS"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"Registrado"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"No registrado"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Disponible"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"No disponible"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"Registro de IMS: <xliff:g id="STATUS">%1$s</xliff:g>\nVoz mediante LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nVoz por Wi-Fi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideollamada: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nInterfaz de UT: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"En servicio"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Fuera de servicio"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Solo emergencia"</string>
@@ -1613,10 +1606,8 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"Si detienes este servicio, algunas funciones del dispositivo podrían dejar de ejecutarse correctamente hasta que lo apagues y enciendas nuevamente."</string>
     <string name="language_settings" msgid="8758655933029560944">"Idiomas y entradas"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"Idiomas y entradas"</string>
-    <!-- no translation found for language_and_region_settings_title (117593114157670585) -->
-    <skip />
-    <!-- no translation found for input_gesture_settings_title (2201979773768106872) -->
-    <skip />
+    <string name="language_and_region_settings_title" msgid="117593114157670585">"Idiomas y región"</string>
+    <string name="input_gesture_settings_title" msgid="2201979773768106872">"Entrada y gestos"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"Teclado y métodos de entrada"</string>
     <string name="phone_language" msgid="7116581601133118044">"Idiomas"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
@@ -3261,24 +3252,33 @@
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Gestos rápidos para controlar tu teléfono"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Gestos rápidos para controlar tu tablet"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Gestos rápidos para controlar tu dispositivo"</string>
-    <string name="double_tap_power_for_camera_title" msgid="2993443929413421363">"Ir a la cámara"</string>
-    <string name="double_tap_power_for_camera_summary" msgid="6005086458928518432">"Para abrir la cámara rápidamente, presiona dos veces el botón de encendido (funciona desde cualquier pantalla)"</string>
+    <!-- no translation found for double_tap_power_for_camera_title (64716226816032800) -->
+    <skip />
+    <!-- no translation found for double_tap_power_for_camera_summary (242037150983277829) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Alternar cámara"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Presiona dos veces el teléfono para revisarlo"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Presiona dos veces la tablet para revisarla"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Presiona dos veces el dispositivo para revisarlo"</string>
-    <string name="ambient_display_summary" msgid="5817384104520817202">"Para revisar tus notificaciones rápidamente, presiona dos veces tu pantalla"</string>
+    <!-- no translation found for ambient_display_summary (2521630136233865893) -->
+    <skip />
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Levanta el teléfono para revisarlo"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Levanta la tablet para revisarla"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Levanta el dispositivo para revisarlo"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="7887685543895952417">"Para revisar tus notificaciones rápidamente, agarra tu teléfono"</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="4703466494089486840">"Para revisar tus notificaciones rápidamente, agarra tu tablet"</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="3557276829636914807">"Para revisar tus notificaciones rápidamente, agarra tu dispositivo"</string>
+    <!-- no translation found for ambient_display_pickup_summary (8696432220086951466) -->
+    <skip />
+    <!-- no translation found for ambient_display_pickup_summary (2442551819015699120) -->
+    <skip />
+    <!-- no translation found for ambient_display_pickup_summary (2369325441608811599) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Desliza el dedo para ver las notificaciones"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="5274050434459511239">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales que está en la parte posterior de tu teléfono"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="7557602481555096698">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales que está en la parte posterior de tu tablet"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5635310946298433769">"Para ver tus notificaciones, desliza el dedo hacia abajo en el sensor de huellas digitales que está en la parte posterior de tu dispositivo"</string>
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (1770661868393713922) -->
+    <skip />
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (902719947767712895) -->
+    <skip />
+    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5372926094116306647) -->
+    <skip />
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activado"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Desactivado"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"El cargador de inicio está desbloqueado"</string>
@@ -3299,4 +3299,10 @@
     <string name="auto_sync_account_title" msgid="7647106425106072285">"Sincronizar datos de la cuenta automáticamente"</string>
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"Sincronizar datos de la cuenta personal automáticamente"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"Sincronizar datos de la cuenta de trabajo automáticamente"</string>
+    <!-- no translation found for enterprise_privacy_settings (6419290515657989967) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_settings_title (3816716633813721131) -->
+    <skip />
+    <!-- no translation found for enterprise_privacy_header (5605095630252702716) -->
+    <skip />
 </resources>
