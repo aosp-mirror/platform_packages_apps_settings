@@ -94,13 +94,11 @@ import com.android.settings.deviceinfo.Status;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.NightDisplaySettings;
-import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.DoubleTapPowerSettings;
-import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
 import com.android.settings.gestures.GestureSettings;
@@ -1220,18 +1218,25 @@ public class SettingsActivity extends SettingsDrawerActivity
                 Log.e(LOG_TAG, "Invalid backup intent URI!", e);
             }
         }
+
+        // Enable/disble BackupSettingsActivity and its alias.
         setTileEnabled(new ComponentName(packageName,
                 BackupSettingsActivity.class.getName()), hasBackupActivity, isAdmin, pm);
+        setTileEnabled(new ComponentName(packageName,
+                "com.android.settings.BackupResetDashboardAlias"), hasBackupActivity, isAdmin, pm);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.EnterprisePrivacySettingsActivity.class.getName()),
                 FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
                         .hasDeviceOwner(), isAdmin, pm);
-
+        setTileEnabled(new ComponentName(packageName,
+                        "com.android.settings.EnterprisePrivacyDashboardAlias"),
+                FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
+                        .hasDeviceOwner(), isAdmin, pm);
     }
 
     private void setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin,
-                                PackageManager pm) {
+            PackageManager pm) {
         if (UserHandle.MU_ENABLED && !isAdmin && getPackageName().equals(component.getPackageName())
                 && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, component.getClassName())) {
             enabled = false;
