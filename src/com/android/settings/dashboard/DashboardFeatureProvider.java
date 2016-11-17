@@ -40,6 +40,19 @@ public interface DashboardFeatureProvider {
     DashboardCategory getTilesForCategory(String key);
 
     /**
+     * Get tiles (wrapped as a list of Preference) for key defined in CategoryKey.
+     *
+     * @param activity Activity hosting the preference
+     * @param context UI context to inflate preference
+     * @param key Value from CategoryKey
+     * @deprecated Pages implementing {@code DashboardFragment} should use
+     * {@link #getTilesForCategory(String)} instead. Using this method will not get the benefit
+     * of auto-ordering, progressive disclosure, auto-refreshing summary text etc.
+     */
+    @Deprecated
+    List<Preference> getPreferencesForCategory(Activity activity, Context context, String key);
+
+    /**
      * Get all tiles, grouped by category.
      */
     List<DashboardCategory> getAllCategories();
@@ -74,5 +87,6 @@ public interface DashboardFeatureProvider {
      */
     ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
             DashboardFragment fragment);
+
 
 }

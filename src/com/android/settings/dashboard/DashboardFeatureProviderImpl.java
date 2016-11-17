@@ -21,8 +21,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.drawer.CategoryManager;
@@ -30,12 +32,15 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProfileSelectDialog;
 import com.android.settingslib.drawer.Tile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Impl for {@code DashboardFeatureProvider}.
  */
 public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
+
+    private static final String TAG = "DashboardFeatureImpl";
 
     private static final String DASHBOARD_TILE_PREF_KEY_PREFIX = "dashboard_tile_pref_";
 
@@ -44,8 +49,13 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private final CategoryManager mCategoryManager;
 
     public DashboardFeatureProviderImpl(Context context) {
-        mContext = context.getApplicationContext();
-        mCategoryManager = CategoryManager.get(mContext);
+        this(context.getApplicationContext(), CategoryManager.get(context));
+    }
+
+    @VisibleForTesting
+    DashboardFeatureProviderImpl(Context context, CategoryManager categoryManager) {
+        mContext = context;
+        mCategoryManager = categoryManager;
     }
 
     @Override
@@ -56,6 +66,32 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public DashboardCategory getTilesForCategory(String key) {
         return mCategoryManager.getTilesByCategory(mContext, key);
+    }
+
+    @Override
+    public List<Preference> getPreferencesForCategory(Activity activity, Context context,
+            String key) {
+        if (!isEnabled()) {
+            return null;
+        }
+        final DashboardCategory category = getTilesForCategory(key);
+        if (category == null) {
+            Log.d(TAG, "NO dashboard tiles for " + TAG);
+            return null;
+        }
+        final List<Tile> tiles = category.tiles;
+        if (tiles == null || tiles.isEmpty()) {
+            Log.d(TAG, "tile list is empty, skipping category " + category.title);
+            return null;
+        }
+        final List<Preference> preferences = new ArrayList<>();
+        for (Tile tile : tiles) {
+            final Preference pref = new Preference(context);
+            bindPreferenceToTile(activity, pref, tile, null /* key */,
+                    Preference.DEFAULT_ORDER /* baseOrder */);
+            preferences.add(pref);
+        }
+        return preferences;
     }
 
     @Override

@@ -66,8 +66,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.drawer.CategoryKey;
-import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -410,7 +408,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         Index.getInstance(getActivity())
                 .updateFromClassNameResource(SecuritySettings.class.getName(), true, true);
 
-        final List<Preference> tilePrefs = getDynamicTilesForSecurity();
+        final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
+                getActivity(), getPrefContext(), CategoryKey.CATEGORY_SECURITY);
         if (tilePrefs != null && !tilePrefs.isEmpty()) {
             for (Preference preference : tilePrefs) {
                 root.addPreference(preference);
@@ -761,31 +760,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                 R.string.lock_settings_picker_title_profile,
                 SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
-    }
-
-    private List<Preference> getDynamicTilesForSecurity() {
-        if (!mDashboardFeatureProvider.isEnabled()) {
-            return null;
-        }
-        final DashboardCategory category =
-                mDashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY);
-        if (category == null) {
-            Log.d(TAG, "NO dashboard tiles for " + TAG);
-            return null;
-        }
-        final List<Tile> tiles = category.tiles;
-        if (tiles == null) {
-            Log.d(TAG, "tile list is empty, skipping category " + category.title);
-            return null;
-        }
-        final List<Preference> preferences = new ArrayList<>();
-        for (Tile tile : tiles) {
-            final Preference pref = new Preference(getPrefContext());
-            mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), pref, tile,
-                    null /* key */, Preference.DEFAULT_ORDER/* baseOrder */);
-            preferences.add(pref);
-        }
-        return preferences;
     }
 
     @Override
