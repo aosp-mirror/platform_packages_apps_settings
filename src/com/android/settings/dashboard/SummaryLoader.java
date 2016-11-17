@@ -25,6 +25,8 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
+import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
@@ -141,17 +143,29 @@ public class SummaryLoader {
                 if (DEBUG) {
                     Log.d(TAG, "setSummary " + tile.title + " - " + summary);
                 }
-                tile.summary = summary;
-                if (mSummaryConsumer != null) {
-                    mSummaryConsumer.notifySummaryChanged(tile);
-                } else {
-                    if (DEBUG) {
-                        Log.d(TAG, "SummaryConsumer is null, skipping summary update for "
-                                + tile.title);
-                    }
-                }
+
+                updateSummaryIfNeeded(tile, summary);
             }
         });
+    }
+
+    @VisibleForTesting
+    void updateSummaryIfNeeded(Tile tile, CharSequence summary) {
+        if (TextUtils.equals(tile.summary, summary)) {
+            if (DEBUG) {
+                Log.d(TAG, "Summary doesn't change, skipping summary update for " + tile.title);
+            }
+            return;
+        }
+        tile.summary = summary;
+        if (mSummaryConsumer != null) {
+            mSummaryConsumer.notifySummaryChanged(tile);
+        } else {
+            if (DEBUG) {
+                Log.d(TAG, "SummaryConsumer is null, skipping summary update for "
+                        + tile.title);
+            }
+        }
     }
 
     /**
