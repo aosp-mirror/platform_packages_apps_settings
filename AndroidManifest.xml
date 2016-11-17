@@ -3316,6 +3316,17 @@
                        android:value="true" />
         </activity-alias>
 
+        <activity-alias android:name="MemorySettingsDashboardAlias"
+                        android:targetActivity=".Settings$MemorySettingsActivity">
+            <intent-filter>
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.development" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.ProcessStatsSummary" />
+        </activity-alias>
+
         <activity android:name=".Settings$ConnectedDeviceDashboardActivity"
                   android:label="@string/connected_devices_dashboard_title"
                   android:icon="@drawable/ic_bt_laptop">
