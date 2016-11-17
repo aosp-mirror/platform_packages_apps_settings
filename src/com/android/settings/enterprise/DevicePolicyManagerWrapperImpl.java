@@ -26,6 +26,7 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
         mDpm = dpm;
     }
 
+    @Override
     public ComponentName getDeviceOwnerComponentOnAnyUser() {
         return mDpm.getDeviceOwnerComponentOnAnyUser();
     }

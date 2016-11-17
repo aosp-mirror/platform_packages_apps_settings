@@ -36,6 +36,11 @@ public class PackageManagerWrapperImpl implements PackageManagerWrapper {
     }
 
     @Override
+    public boolean hasSystemFeature(String name) {
+        return mPm.hasSystemFeature(name);
+    }
+
+    @Override
     public List<ResolveInfo> queryIntentActivitiesAsUser(Intent intent, int flags, int userId) {
         return mPm.queryIntentActivitiesAsUser(intent, flags, userId);
     }

@@ -25,5 +25,17 @@ public interface ApplicationFeatureProvider {
      * Returns a new {@link AppHeaderController} instance to customize app header.
      */
     AppHeaderController newAppHeaderController(Fragment fragment, View appHeader);
-}
 
+    /**
+     * Asynchronously calculates the total number of apps installed on the device, across all users
+     * and managed profiles.
+     */
+    void calculateNumberOfInstalledApps(NumberOfInstalledAppsCallback callback);
+
+    /**
+     * Callback that receives the total number of packages installed on the device.
+     */
+    public interface NumberOfInstalledAppsCallback {
+        void onNumberOfInstalledAppsResult(int num);
+    }
+}

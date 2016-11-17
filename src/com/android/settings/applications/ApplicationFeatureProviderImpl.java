@@ -18,17 +18,50 @@ package com.android.settings.applications;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.pm.UserInfo;
+import android.os.UserManager;
 import android.view.View;
+
+import java.util.List;
 
 public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvider {
 
     private final Context mContext;
+    private final PackageManagerWrapper mPm;
+    private final UserManager mUm;
 
-    public ApplicationFeatureProviderImpl(Context context) {
+    public ApplicationFeatureProviderImpl(Context context, PackageManagerWrapper pm) {
         mContext = context.getApplicationContext();
+        mPm = pm;
+        mUm = UserManager.get(mContext);
     }
 
+    @Override
     public AppHeaderController newAppHeaderController(Fragment fragment, View appHeader) {
         return new AppHeaderController(mContext, fragment, appHeader);
+    }
+
+    @Override
+    public void calculateNumberOfInstalledApps(NumberOfInstalledAppsCallback callback) {
+        new AllUserInstalledAppCounter(callback).execute();
+    }
+
+    private class AllUserInstalledAppCounter extends InstalledAppCounter {
+        private NumberOfInstalledAppsCallback mCallback;
+
+        AllUserInstalledAppCounter(NumberOfInstalledAppsCallback callback) {
+            super(mContext, ApplicationFeatureProviderImpl.this.mPm);
+            mCallback = callback;
+        }
+
+        @Override
+        protected void onCountComplete(int num) {
+            mCallback.onNumberOfInstalledAppsResult(num);
+        }
+
+        @Override
+        protected List<UserInfo> getUsersToCount() {
+            return mUm.getUsers(true /* excludeDying */);
+        }
     }
 }

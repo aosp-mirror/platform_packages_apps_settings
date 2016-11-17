@@ -17,21 +17,23 @@
 package com.android.settings.enterprise;
 
 import android.content.pm.PackageManager;
-import android.content.Context;
+
+import com.android.settings.applications.PackageManagerWrapper;
 
 public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFeatureProvider {
 
-    private final Context mContext;
     private final DevicePolicyManagerWrapper mDpm;
+    private final PackageManagerWrapper mPm;
 
-    public EnterprisePrivacyFeatureProviderImpl(Context context, DevicePolicyManagerWrapper dpm) {
-        mContext = context.getApplicationContext();
+    public EnterprisePrivacyFeatureProviderImpl(DevicePolicyManagerWrapper dpm,
+            PackageManagerWrapper pm) {
         mDpm = dpm;
+        mPm = pm;
     }
 
     @Override
     public boolean hasDeviceOwner() {
-        if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN)) {
+        if (!mPm.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN)) {
             return false;
         }
         return mDpm.getDeviceOwnerComponentOnAnyUser() != null;

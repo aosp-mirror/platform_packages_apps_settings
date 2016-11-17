@@ -37,6 +37,13 @@ public interface PackageManagerWrapper {
     List<ApplicationInfo> getInstalledApplicationsAsUser(int flags, int userId);
 
     /**
+     * Calls {@code PackageManager.hasSystemFeature()}.
+     *
+     * @see android.content.pm.PackageManager.PackageManager#hasSystemFeature
+     */
+    boolean hasSystemFeature(String name);
+
+    /**
      * Calls {@code PackageManager.queryIntentActivitiesAsUser()}.
      *
      * @see android.content.pm.PackageManager.PackageManager#queryIntentActivitiesAsUser

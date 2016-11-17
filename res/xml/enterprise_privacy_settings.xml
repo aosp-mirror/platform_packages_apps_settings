@@ -23,4 +23,29 @@
     <Preference android:key="enterprise_privacy_header"
             android:summary="@string/enterprise_privacy_header"
             android:selectable="false"/>
+
+    <PreferenceCategory android:title="@string/exposure_category">
+        <com.android.settings.DividerPreference
+                android:key="enterprise_data"
+                android:layout_height="wrap_content"
+                android:title="@string/enterprise_data"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="number_installed_packages"
+                android:title="@string/number_installed_packages_default"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="usage_stats"
+                android:title="@string/usage_stats"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/exposure_changes_category">
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/device_access_category">
+    </PreferenceCategory>
 </PreferenceScreen>

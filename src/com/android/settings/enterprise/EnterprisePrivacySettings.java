@@ -17,7 +17,6 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
@@ -25,7 +24,9 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable.SearchIndexProvider;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,7 +56,9 @@ public class EnterprisePrivacySettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        return null;
+        final List controllers = new ArrayList<PreferenceController>();
+        controllers.add(new InstalledPackagesPreferenceController(context));
+        return controllers;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

@@ -18,10 +18,17 @@ package com.android.settings.enterprise;
 
 import android.content.ComponentName;
 
-// This interface replicates a subset of the android.app.admin.DevicePolicyManager (DPM). The
-// interface exists so that we can use a thin wrapper around the DPM in production code and a mock
-// in tests. We cannot directly mock or shadow the DPM, because some of the methods we rely on are
-// newer than the API version supported by Robolectric.
+/**
+ * This interface replicates a subset of the android.app.admin.DevicePolicyManager (DPM). The
+ * interface exists so that we can use a thin wrapper around the DPM in production code and a mock
+ * in tests. We cannot directly mock or shadow the DPM, because some of the methods we rely on are
+ * newer than the API version supported by Robolectric.
+ */
 public interface DevicePolicyManagerWrapper {
-    public ComponentName getDeviceOwnerComponentOnAnyUser();
+    /**
+     * Calls {@code DevicePolicyManager.getDeviceOwnerComponentOnAnyUser()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getDeviceOwnerComponentOnAnyUser
+     */
+    ComponentName getDeviceOwnerComponentOnAnyUser();
 }

@@ -22,6 +22,7 @@ import android.support.annotation.Keep;
 
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
@@ -77,7 +78,8 @@ public final class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public ApplicationFeatureProvider getApplicationFeatureProvider(Context context) {
         if (mApplicationFeatureProvider == null) {
-            mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(context);
+            mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(context,
+                    new PackageManagerWrapperImpl(context.getPackageManager()));
         }
         return mApplicationFeatureProvider;
     }
@@ -93,9 +95,10 @@ public final class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(Context context) {
         if (mEnterprisePrivacyFeatureProvider == null) {
-            mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(context,
+            mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(
                     new DevicePolicyManagerWrapperImpl((DevicePolicyManager) context
-                            .getSystemService(Context.DEVICE_POLICY_SERVICE)));
+                            .getSystemService(Context.DEVICE_POLICY_SERVICE)),
+                    new PackageManagerWrapperImpl(context.getPackageManager()));
         }
         return mEnterprisePrivacyFeatureProvider;
     }

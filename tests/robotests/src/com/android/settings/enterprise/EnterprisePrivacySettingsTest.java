@@ -20,6 +20,8 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.PreferenceController;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +29,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import java.util.List;
 
 /**
  * Tests for {@link EnterprisePrivacySettings}.
@@ -66,7 +70,10 @@ public final class EnterprisePrivacySettingsTest {
 
     @Test
     public void getPreferenceControllers() {
-        assertThat(mSettings.getPreferenceControllers(
-                ShadowApplication.getInstance().getApplicationContext())).isNull();
+        final List<PreferenceController> controllers = mSettings.getPreferenceControllers(
+                ShadowApplication.getInstance().getApplicationContext());
+        assertThat(controllers).isNotNull();
+        assertThat(controllers.size()).isEqualTo(1);
+        assertThat(controllers.get(0)).isInstanceOf(InstalledPackagesPreferenceController.class);
     }
 }

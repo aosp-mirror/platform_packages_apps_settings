@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.applications.PackageManagerWrapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,9 +42,8 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
     private final ComponentName DEVICE_OWNER = new ComponentName("dummy", "component");
 
-    private @Mock PackageManager mPackageManager;
-    private @Mock Context mContext;
     private @Mock DevicePolicyManagerWrapper mDevicePolicyManager;
+    private @Mock PackageManagerWrapper mPackageManager;
 
     private EnterprisePrivacyFeatureProvider mProvider;
 
@@ -51,12 +51,10 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        when(mContext.getApplicationContext()).thenReturn(mContext);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN))
                 .thenReturn(true);
 
-        mProvider = new EnterprisePrivacyFeatureProviderImpl(mContext, mDevicePolicyManager);
+        mProvider = new EnterprisePrivacyFeatureProviderImpl(mDevicePolicyManager, mPackageManager);
     }
 
     @Test
