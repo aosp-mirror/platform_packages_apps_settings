@@ -41,6 +41,8 @@ import android.widget.TimePicker;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.datetime.TimeFormatPreferenceController;
+import com.android.settings.datetime.UpdateTimeAndDateCallback;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtils;
@@ -49,20 +51,13 @@ import com.android.settingslib.datetime.ZoneGetter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class DateTimeSettings extends SettingsPreferenceFragment
-        implements OnTimeSetListener, OnDateSetListener, OnPreferenceChangeListener, Indexable {
-
-    private static final String HOURS_12 = "12";
-    private static final String HOURS_24 = "24";
-
-    // Used for showing the current date format, which looks like "12/31/2010", "2010/12/13", etc.
-    // The date value is dummy (independent of actual date).
-    private Calendar mDummyDate;
+        implements UpdateTimeAndDateCallback, OnTimeSetListener, OnDateSetListener,
+        OnPreferenceChangeListener, Indexable {
 
     private static final String KEY_AUTO_TIME = "auto_time";
     private static final String KEY_AUTO_TIME_ZONE = "auto_zone";
@@ -71,14 +66,14 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     private static final int DIALOG_TIMEPICKER = 1;
 
     // have we been launched from the setup wizard?
-    protected static final String EXTRA_IS_FIRST_RUN = "firstRun";
+    protected static final String EXTRA_IS_FROM_SUW = "firstRun";
 
     // Minimum time is Nov 5, 2007, 0:00.
     private static final long MIN_DATE = 1194220800000L;
 
+    private TimeFormatPreferenceController mTimeFormatPreferenceController;
     private RestrictedSwitchPreference mAutoTimePref;
     private Preference mTimePref;
-    private Preference mTime24Pref;
     private SwitchPreference mAutoTimeZonePref;
     private Preference mTimeZone;
     private Preference mDatePref;
@@ -98,18 +93,20 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     }
 
     private void initUI() {
+        final Activity activity = getActivity();
+        final Intent intent = activity.getIntent();
+        final boolean isFromSUW = intent.getBooleanExtra(EXTRA_IS_FROM_SUW, false);
         boolean autoTimeEnabled = getAutoState(Settings.Global.AUTO_TIME);
         boolean autoTimeZoneEnabled = getAutoState(Settings.Global.AUTO_TIME_ZONE);
 
+        mTimeFormatPreferenceController = new TimeFormatPreferenceController(
+                activity, this /* UpdateTimeAndDateCallback */, isFromSUW);
+        mTimeFormatPreferenceController.displayPreference(getPreferenceScreen());
+
         mAutoTimePref = (RestrictedSwitchPreference) findPreference(KEY_AUTO_TIME);
         mAutoTimePref.setOnPreferenceChangeListener(this);
-        EnforcedAdmin admin = RestrictedLockUtils.checkIfAutoTimeRequired(getActivity());
+        EnforcedAdmin admin = RestrictedLockUtils.checkIfAutoTimeRequired(activity);
         mAutoTimePref.setDisabledByAdmin(admin);
-
-        Intent intent = getActivity().getIntent();
-        boolean isFirstRun = intent.getBooleanExtra(EXTRA_IS_FIRST_RUN, false);
-
-        mDummyDate = Calendar.getInstance();
 
         // If device admin requires auto time device policy manager will set
         // Settings.Global.AUTO_TIME to true. Note that this app listens to that change.
@@ -118,19 +115,15 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         mAutoTimeZonePref.setOnPreferenceChangeListener(this);
         // Override auto-timezone if it's a wifi-only device or if we're still in setup wizard.
         // TODO: Remove the wifiOnly test when auto-timezone is implemented based on wifi-location.
-        if (Utils.isWifiOnly(getActivity()) || isFirstRun) {
+        if (Utils.isWifiOnly(activity) || isFromSUW) {
             getPreferenceScreen().removePreference(mAutoTimeZonePref);
             autoTimeZoneEnabled = false;
         }
         mAutoTimeZonePref.setChecked(autoTimeZoneEnabled);
 
         mTimePref = findPreference("time");
-        mTime24Pref = findPreference("24 hour");
         mTimeZone = findPreference("timezone");
         mDatePref = findPreference("date");
-        if (isFirstRun) {
-            getPreferenceScreen().removePreference(mTime24Pref);
-        }
 
         mTimePref.setEnabled(!autoTimeEnabled);
         mDatePref.setEnabled(!autoTimeEnabled);
@@ -140,9 +133,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-
-        ((SwitchPreference)mTime24Pref).setChecked(is24Hour());
-
         // Register for time ticks and other reasons for time change
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_TIME_TICK);
@@ -159,18 +149,15 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         getActivity().unregisterReceiver(mIntentReceiver);
     }
 
+    @Override
     public void updateTimeAndDateDisplay(Context context) {
         final Calendar now = Calendar.getInstance();
-        mDummyDate.setTimeZone(now.getTimeZone());
-        // We use December 31st because it's unambiguous when demonstrating the date format.
-        // We use 13:00 so we can demonstrate the 12/24 hour options.
-        mDummyDate.set(now.get(Calendar.YEAR), 11, 31, 13, 0, 0);
-        Date dummyDate = mDummyDate.getTime();
         mDatePref.setSummary(DateFormat.getLongDateFormat(context).format(now.getTime()));
         mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
         mTimeZone.setSummary(ZoneGetter.getTimeZoneOffsetAndName(context,
                 now.getTimeZone(), now.getTime()));
-        mTime24Pref.setSummary(DateFormat.getTimeFormat(getActivity()).format(dummyDate));
+        mTimeFormatPreferenceController.updateState(findPreference(
+                mTimeFormatPreferenceController.getPreferenceKey()));
     }
 
     @Override
@@ -216,24 +203,24 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     public Dialog onCreateDialog(int id) {
         final Calendar calendar = Calendar.getInstance();
         switch (id) {
-        case DIALOG_DATEPICKER:
-            DatePickerDialog d = new DatePickerDialog(
-                    getActivity(),
-                    this,
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH));
-            configureDatePicker(d.getDatePicker());
-            return d;
-        case DIALOG_TIMEPICKER:
-            return new TimePickerDialog(
-                    getActivity(),
-                    this,
-                    calendar.get(Calendar.HOUR_OF_DAY),
-                    calendar.get(Calendar.MINUTE),
-                    DateFormat.is24HourFormat(getActivity()));
-        default:
-            throw new IllegalArgumentException();
+            case DIALOG_DATEPICKER:
+                DatePickerDialog d = new DatePickerDialog(
+                        getActivity(),
+                        this,
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH));
+                configureDatePicker(d.getDatePicker());
+                return d;
+            case DIALOG_TIMEPICKER:
+                return new TimePickerDialog(
+                        getActivity(),
+                        this,
+                        calendar.get(Calendar.HOUR_OF_DAY),
+                        calendar.get(Calendar.MINUTE),
+                        DateFormat.is24HourFormat(getActivity()));
+            default:
+                throw new IllegalArgumentException();
         }
     }
 
@@ -288,17 +275,15 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     */
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (mTimeFormatPreferenceController.handlePreferenceTreeClick(preference)) {
+            return super.onPreferenceTreeClick(preference);
+        }
         if (preference == mDatePref) {
             showDialog(DIALOG_DATEPICKER);
         } else if (preference == mTimePref) {
             // The 24-hour mode may have changed, so recreate the dialog
             removeDialog(DIALOG_TIMEPICKER);
             showDialog(DIALOG_TIMEPICKER);
-        } else if (preference == mTime24Pref) {
-            final boolean is24Hour = ((SwitchPreference)mTime24Pref).isChecked();
-            set24Hour(is24Hour);
-            updateTimeAndDateDisplay(getActivity());
-            timeUpdated(is24Hour);
         }
         return super.onPreferenceTreeClick(preference);
     }
@@ -309,24 +294,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         updateTimeAndDateDisplay(getActivity());
     }
 
-    private void timeUpdated(boolean is24Hour) {
-        Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
-        timeChanged.putExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT, is24Hour);
-        getActivity().sendBroadcast(timeChanged);
-    }
-
-    /*  Get & Set values from the system settings  */
-
-    private boolean is24Hour() {
-        return DateFormat.is24HourFormat(getActivity());
-    }
-
-    private void set24Hour(boolean is24Hour) {
-        Settings.System.putString(getContentResolver(),
-                Settings.System.TIME_12_24,
-                is24Hour? HOURS_24 : HOURS_12);
-    }
-
     private boolean getAutoState(String name) {
         try {
             return Settings.Global.getInt(getContentResolver(), name) > 0;
@@ -335,7 +302,8 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         }
     }
 
-    /* package */ static void setDate(Context context, int year, int month, int day) {
+    /* package */
+    static void setDate(Context context, int year, int month, int day) {
         Calendar c = Calendar.getInstance();
 
         c.set(Calendar.YEAR, year);
@@ -348,7 +316,8 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         }
     }
 
-    /* package */ static void setTime(Context context, int hourOfDay, int minute) {
+    /* package */
+    static void setTime(Context context, int hourOfDay, int minute) {
         Calendar c = Calendar.getInstance();
 
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
@@ -396,7 +365,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             = new SummaryLoader.SummaryProviderFactory() {
         @Override
         public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
+                SummaryLoader summaryLoader) {
             return new SummaryProvider(activity, summaryLoader);
         }
     };
