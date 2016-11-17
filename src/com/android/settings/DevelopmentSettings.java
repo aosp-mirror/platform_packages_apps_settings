@@ -58,6 +58,7 @@ import android.os.storage.IStorageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.persistentdata.PersistentDataBlockManager;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
@@ -81,14 +82,16 @@ import android.widget.Toast;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.applications.BackgroundCheckSummary;
-import com.android.settings.applications.ProcessStatsPreferenceController;
+import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.fuelgauge.InactiveApps;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -100,7 +103,7 @@ import java.util.List;
  */
 public class DevelopmentSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
-                OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener, Indexable {
+        OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener, Indexable {
     private static final String TAG = "DevelopmentSettings";
 
     /**
@@ -136,7 +139,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
     private static final String MOCK_LOCATION_APP_KEY = "mock_location_app";
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
-    private static final String DEBUG_VIEW_ATTRIBUTES =  "debug_view_attributes";
+    private static final String DEBUG_VIEW_ATTRIBUTES = "debug_view_attributes";
     private static final String FORCE_ALLOW_ON_EXTERNAL_KEY = "force_allow_on_external";
     private static final String STRICT_MODE_KEY = "strict_mode";
     private static final String POINTER_LOCATION_KEY = "pointer_location";
@@ -178,7 +181,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String SELECT_LOGPERSIST_PROPERTY_SERVICE = "logcatd";
     private static final String SELECT_LOGPERSIST_PROPERTY_CLEAR = "clear";
     private static final String SELECT_LOGPERSIST_PROPERTY_STOP = "stop";
-    private static final String SELECT_LOGPERSIST_PROPERTY_BUFFER = "persist.logd.logpersistd.buffer";
+    private static final String SELECT_LOGPERSIST_PROPERTY_BUFFER =
+            "persist.logd.logpersistd.buffer";
     private static final String ACTUAL_LOGPERSIST_PROPERTY_BUFFER = "logd.logpersistd.buffer";
     private static final String ACTUAL_LOGPERSIST_PROPERTY_ENABLE = "logd.logpersistd.enable";
 
@@ -193,9 +197,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String COLOR_TEMPERATURE_KEY = "color_temperature";
 
     private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY =
-                                    "bluetooth_disable_absolute_volume";
+            "bluetooth_disable_absolute_volume";
     private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY =
-                                    "persist.bluetooth.disableabsvol";
+            "persist.bluetooth.disableabsvol";
 
     private static final String INACTIVE_APPS_KEY = "inactive_apps";
 
@@ -225,7 +229,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final int REQUEST_CODE_ENABLE_OEM_UNLOCK = 0;
 
-    private static final int[] MOCK_LOCATION_APP_OPS = new int[] {AppOpsManager.OP_MOCK_LOCATION};
+    private static final int[] MOCK_LOCATION_APP_OPS = new int[]{AppOpsManager.OP_MOCK_LOCATION};
 
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
@@ -308,7 +312,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mForceResizable;
 
     private SwitchPreference mColorTemperaturePreference;
-    private ProcessStatsPreferenceController mProcessStatsPreferenceController;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
 
@@ -326,6 +329,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private boolean mLogpersistCleared;
     private Dialog mLogpersistClearDialog;
+    private DashboardFeatureProvider mDashboardFeatureProvider;
 
     public DevelopmentSettings() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
@@ -337,19 +341,26 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mDashboardFeatureProvider = FeatureFactory.getFactory(context)
+                .getDashboardFeatureProvider(context);
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
-        mWebViewUpdateService  =
-            IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
-        mOemUnlockManager = (PersistentDataBlockManager)getActivity()
+        mWebViewUpdateService =
+                IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
+        mOemUnlockManager = (PersistentDataBlockManager) getActivity()
                 .getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
         mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
-        mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mDpm = (DevicePolicyManager) getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -362,11 +373,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
             return;
         }
-        mProcessStatsPreferenceController = new ProcessStatsPreferenceController(getActivity());
 
         addPreferencesFromResource(R.xml.development_prefs);
-
-        mProcessStatsPreferenceController.displayPreference(getPreferenceScreen());
 
         final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
                 findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
@@ -485,7 +493,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
 
         PreferenceScreen convertFbePreference =
-            (PreferenceScreen) findPreference(KEY_CONVERT_FBE);
+                (PreferenceScreen) findPreference(KEY_CONVERT_FBE);
 
         try {
             IBinder service = ServiceManager.getService("mount");
@@ -495,9 +503,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             } else if ("file".equals(SystemProperties.get("ro.crypto.type", "none"))) {
                 convertFbePreference.setEnabled(false);
                 convertFbePreference.setSummary(getResources()
-                                   .getString(R.string.convert_to_file_encryption_done));
+                        .getString(R.string.convert_to_file_encryption_done));
             }
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             removePreference(KEY_CONVERT_FBE);
         }
 
@@ -518,6 +526,20 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         } else {
             removePreference(COLOR_TEMPERATURE_KEY);
             mColorTemperaturePreference = null;
+        }
+
+        addDashboardCategoryPreferences();
+    }
+
+    @VisibleForTesting
+    void addDashboardCategoryPreferences() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
+                getActivity(), getPrefContext(), CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
+        if (tilePrefs != null) {
+            for (Preference preference : tilePrefs) {
+                screen.addPreference(preference);
+            }
         }
     }
 
@@ -552,7 +574,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mSwitchBar = activity.getSwitchBar();
-       if (mUnavailable) {
+        if (mUnavailable) {
             mSwitchBar.setEnabled(false);
             return;
         }
@@ -736,7 +758,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void resetDangerousOptions() {
         mDontPokeProperties = true;
-        for (int i=0; i< mResetSwitchPrefs.size(); i++) {
+        for (int i = 0; i < mResetSwitchPrefs.size(); i++) {
             SwitchPreference cb = mResetSwitchPrefs.get(i);
             if (cb.isChecked()) {
                 cb.setChecked(false);
@@ -770,7 +792,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             }
             ArrayList<String> options = new ArrayList<String>();
             ArrayList<String> values = new ArrayList<String>();
-            for(int n = 0; n < providers.length; n++) {
+            for (int n = 0; n < providers.length; n++) {
                 if (Utils.isPackageEnabled(getActivity(), providers[n].packageName)) {
                     options.add(providers[n].description);
                     values.add(providers[n].packageName);
@@ -790,7 +812,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     return;
                 }
             }
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
         }
     }
 
@@ -809,7 +831,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             String wv_package = mWebViewUpdateService.getCurrentWebViewPackageName();
             ActivityManager.getService().killPackageDependents(
                     wv_package, UserHandle.USER_ALL);
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
         }
     }
 
@@ -858,7 +880,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     newValue == null ? "" : newValue.toString());
             updateWebViewProviderOptions();
             return newValue != null && newValue.equals(updatedProvider);
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
         }
         return false;
     }
@@ -866,7 +888,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeDebuggerOptions() {
         try {
             ActivityManager.getService().setDebugApp(
-                mDebugApp, mWaitForDebugger.isChecked(), true);
+                    mDebugApp, mWaitForDebugger.isChecked(), true);
         } catch (RemoteException ex) {
         }
     }
@@ -972,8 +994,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void updateVerifyAppsOverUsbOptions() {
-        updateSwitchPreference(mVerifyAppsOverUsb, Settings.Global.getInt(getActivity().getContentResolver(),
-                Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1) != 0);
+        updateSwitchPreference(mVerifyAppsOverUsb,
+                Settings.Global.getInt(getActivity().getContentResolver(),
+                        Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1) != 0);
         mVerifyAppsOverUsb.setEnabled(enableVerifierSetting());
     }
 
@@ -1328,7 +1351,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     /**
      * @return <code>true</code> if the color space preference is currently
-     *         controlled by development settings
+     * controlled by development settings
      */
     private boolean usingDevelopmentColorSpace() {
         final ContentResolver cr = getContentResolver();
@@ -1488,7 +1511,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             }
             if (mLogpersist != null) {
                 String currentLogpersistEnable
-                    = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY_ENABLE);
+                        = SystemProperties.get(ACTUAL_LOGPERSIST_PROPERTY_ENABLE);
                 if ((currentLogpersistEnable == null)
                         || !currentLogpersistEnable.equals("true")
                         || currentValue.equals(SELECT_LOGD_OFF_SIZE_MARKER_VALUE)) {
@@ -1525,7 +1548,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeLogdSizeOption(Object newValue) {
         boolean disable = (newValue != null) &&
-            (newValue.toString().equals(SELECT_LOGD_OFF_SIZE_MARKER_VALUE));
+                (newValue.toString().equals(SELECT_LOGD_OFF_SIZE_MARKER_VALUE));
         String currentTag = SystemProperties.get(SELECT_LOGD_TAG_PROPERTY);
         if (currentTag == null) {
             currentTag = "";
@@ -1558,7 +1581,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
         String defaultValue = defaultLogdSizeValue();
         final String size = ((newValue != null) && (newValue.toString().length() != 0)) ?
-            newValue.toString() : defaultValue;
+                newValue.toString() : defaultValue;
         SystemProperties.set(SELECT_LOGD_SIZE_PROPERTY, defaultValue.equals(size) ? "" : size);
         SystemProperties.set("ctl.start", "logd-reinit");
         pokeSystemProperties();
@@ -1588,7 +1611,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     currentBuffers.contains("kernel")) {
                 index = 2;
                 if (!currentBuffers.contains("default")) {
-                    String[] contains = { "main", "events", "system", "crash" };
+                    String[] contains = {"main", "events", "system", "crash"};
                     for (int i = 0; i < contains.length; i++) {
                         if (!currentBuffers.contains(contains[i])) {
                             index = 1;
@@ -1598,8 +1621,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 }
             }
         }
-        mLogpersist.setValue(getResources().getStringArray(R.array.select_logpersist_values)[index]);
-        mLogpersist.setSummary(getResources().getStringArray(R.array.select_logpersist_summaries)[index]);
+        mLogpersist.setValue(
+                getResources().getStringArray(R.array.select_logpersist_values)[index]);
+        mLogpersist.setSummary(
+                getResources().getStringArray(R.array.select_logpersist_summaries)[index]);
         mLogpersist.setOnPreferenceChangeListener(this);
         if (index != 0) {
             mLogpersistCleared = false;
@@ -1617,7 +1642,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         SystemProperties.set(ACTUAL_LOGPERSIST_PROPERTY_BUFFER, "");
         SystemProperties.set(SELECT_LOGPERSIST_PROPERTY, "");
         SystemProperties.set(ACTUAL_LOGPERSIST_PROPERTY,
-            update ? "" : SELECT_LOGPERSIST_PROPERTY_STOP);
+                update ? "" : SELECT_LOGPERSIST_PROPERTY_STOP);
         pokeSystemProperties();
         if (update) {
             updateLogpersistValues();
@@ -1710,7 +1735,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void writeUsbConfigurationOption(Object newValue) {
-        UsbManager manager = (UsbManager)getActivity().getSystemService(Context.USB_SERVICE);
+        UsbManager manager = (UsbManager) getActivity().getSystemService(Context.USB_SERVICE);
         String function = newValue.toString();
         if (function.equals("none")) {
             manager.setCurrentFunction(function, false);
@@ -1729,7 +1754,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void updateImmediatelyDestroyActivitiesOptions() {
         updateSwitchPreference(mImmediatelyDestroyActivities, Settings.Global.getInt(
-                getActivity().getContentResolver(), Settings.Global.ALWAYS_FINISH_ACTIVITIES, 0) != 0);
+                getActivity().getContentResolver(), Settings.Global.ALWAYS_FINISH_ACTIVITIES, 0)
+                != 0);
     }
 
     private void updateAnimationScaleValue(int which, ListPreference pref) {
@@ -1739,7 +1765,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mHaveDebugSettings = true;
             }
             CharSequence[] values = pref.getEntryValues();
-            for (int i=0; i<values.length; i++) {
+            for (int i = 0; i < values.length; i++) {
                 float val = Float.parseFloat(values[i].toString());
                 if (scale <= val) {
                     pref.setValueIndex(i);
@@ -1747,7 +1773,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     return;
                 }
             }
-            pref.setValueIndex(values.length-1);
+            pref.setValueIndex(values.length - 1);
             pref.setSummary(pref.getEntries()[0]);
         } catch (RemoteException e) {
         }
@@ -1797,7 +1823,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         try {
             int limit = ActivityManager.getService().getProcessLimit();
             CharSequence[] values = mAppProcessLimit.getEntryValues();
-            for (int i=0; i<values.length; i++) {
+            for (int i = 0; i < values.length; i++) {
                 int val = Integer.parseInt(values[i].toString());
                 if (val >= limit) {
                     if (i != 0) {
@@ -1844,15 +1870,16 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             }
         };
 
-        DialogInterface.OnDismissListener onDismissListener = new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                if (getActivity() == null) {
-                    return;
-                }
-                updateAllOptions();
-            }
-        };
+        DialogInterface.OnDismissListener onDismissListener =
+                new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        if (getActivity() == null) {
+                            return;
+                        }
+                        updateAllOptions();
+                    }
+                };
 
         new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.confirm_enable_oem_unlock_title)
@@ -1945,10 +1972,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         } else if (preference == mClearAdbKeys) {
             if (mAdbKeysDialog != null) dismissDialogs();
             mAdbKeysDialog = new AlertDialog.Builder(getActivity())
-                        .setMessage(R.string.adb_keys_warning_message)
-                        .setPositiveButton(android.R.string.ok, this)
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .show();
+                    .setMessage(R.string.adb_keys_warning_message)
+                    .setPositiveButton(android.R.string.ok, this)
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
         } else if (preference == mEnableTerminal) {
             final PackageManager pm = getActivity().getPackageManager();
             pm.setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
@@ -2275,8 +2302,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 private boolean isShowingDeveloperOptions(Context context) {
                     return context.getSharedPreferences(DevelopmentSettings.PREF_FILE,
                             Context.MODE_PRIVATE).getBoolean(
-                                    DevelopmentSettings.PREF_SHOW,
-                                    android.os.Build.TYPE.equals("eng"));
+                            DevelopmentSettings.PREF_SHOW,
+                            android.os.Build.TYPE.equals("eng"));
                 }
 
                 @Override
@@ -2333,7 +2360,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 // the device hasn't been able to confirm which restrictions (SIM-lock or otherwise)
                 // apply.
                 oemUnlockSummary =
-                    R.string.oem_unlock_enable_disabled_summary_connectivity_or_locked;
+                        R.string.oem_unlock_enable_disabled_summary_connectivity_or_locked;
             }
             mEnableOemUnlock.setSummary(getString(oemUnlockSummary));
         }
