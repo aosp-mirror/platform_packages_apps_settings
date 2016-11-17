@@ -17,9 +17,16 @@ package com.android.settings.applications;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.notification.NotificationBackend;
+
+import java.util.List;
 
 /**
  * Extension of ManageApplications with no changes other than having its own
@@ -42,10 +49,16 @@ public class NotificationApps extends ManageApplications {
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                new AppCounter(mContext) {
+                new AppCounter(mContext,
+                        new PackageManagerWrapperImpl(mContext.getPackageManager())) {
                     @Override
                     protected void onCountComplete(int num) {
                         updateSummary(num);
+                    }
+
+                    @Override
+                    protected List<UserInfo> getUsersToCount() {
+                         return mUm.getProfiles(UserHandle.myUserId());
                     }
 
                     @Override
