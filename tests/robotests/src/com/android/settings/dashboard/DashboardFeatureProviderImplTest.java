@@ -30,6 +30,9 @@ import android.support.v7.preference.Preference;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.CategoryManager;
+import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
@@ -45,6 +48,7 @@ import java.util.ArrayList;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -54,9 +58,10 @@ public class DashboardFeatureProviderImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
-
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
+    @Mock
+    private CategoryManager mCategoryManager;
 
     private DashboardFeatureProviderImpl mImpl;
 
@@ -150,5 +155,54 @@ public class DashboardFeatureProviderImplTest {
         mImpl.bindPreferenceToTile(mActivity, preference, tile, "123", baseOrder);
 
         assertThat(preference.getOrder()).isEqualTo(-tile.priority + baseOrder);
+    }
+
+    @Test
+    public void getPreferences_notEnabled_shouldReturnNull() {
+        final DashboardFeatureProviderImpl mSpy = spy(mImpl);
+        when(mSpy.isEnabled()).thenReturn(false);
+
+        assertThat(mSpy.getPreferencesForCategory(null, null, CategoryKey.CATEGORY_HOMEPAGE))
+                .isNull();
+    }
+
+    @Test
+    public void getPreferences_noCategory_shouldReturnNull() {
+        mImpl = new DashboardFeatureProviderImpl(mActivity, mCategoryManager);
+        final DashboardFeatureProviderImpl mSpy = spy(mImpl);
+        when(mSpy.isEnabled()).thenReturn(true);
+        when(mCategoryManager.getTilesByCategory(mActivity, CategoryKey.CATEGORY_HOMEPAGE))
+                .thenReturn(null);
+
+        assertThat(mSpy.getPreferencesForCategory(null, null, CategoryKey.CATEGORY_HOMEPAGE))
+                .isNull();
+    }
+
+    @Test
+    public void getPreferences_noTileForCategory_shouldReturnNull() {
+        mImpl = new DashboardFeatureProviderImpl(mActivity, mCategoryManager);
+        final DashboardFeatureProviderImpl mSpy = spy(mImpl);
+        when(mSpy.isEnabled()).thenReturn(true);
+        when(mCategoryManager.getTilesByCategory(mActivity, CategoryKey.CATEGORY_HOMEPAGE))
+                .thenReturn(new DashboardCategory());
+
+        assertThat(mSpy.getPreferencesForCategory(null, null, CategoryKey.CATEGORY_HOMEPAGE))
+                .isNull();
+    }
+
+    @Test
+    public void getPreferences_hasTileForCategory_shouldReturnPrefList() {
+        mImpl = new DashboardFeatureProviderImpl(mActivity, mCategoryManager);
+        final DashboardFeatureProviderImpl mSpy = spy(mImpl);
+        when(mSpy.isEnabled()).thenReturn(true);
+        final DashboardCategory category = new DashboardCategory();
+        category.tiles.add(new Tile());
+        when(mCategoryManager.getTilesByCategory(mActivity, CategoryKey.CATEGORY_HOMEPAGE))
+                .thenReturn(category);
+
+        assertThat(mSpy.getPreferencesForCategory(mActivity,
+                ShadowApplication.getInstance().getApplicationContext(),
+                CategoryKey.CATEGORY_HOMEPAGE).isEmpty())
+                .isFalse();
     }
 }
