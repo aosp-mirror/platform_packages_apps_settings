@@ -21,9 +21,11 @@ import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.StringRes;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 
+import android.os.Bundle;
 import com.android.settings.support.SupportPhone;
 
 import java.lang.annotation.Retention;
@@ -142,8 +144,13 @@ public interface SupportFeatureProvider {
     Intent getTipsAndTricksIntent(Context context);
 
     /**
-     * Returns the string for the disclaimer in the Support dialog
+     * Returns the string for the disclaimer in the Support dialog.
      */
     @StringRes
     int getDisclaimerStringResId();
+
+    /**
+     * launches the fragment that displays the system information being sent to support agents.
+     */
+    void launchSystemInfoFragment(Bundle args, FragmentManager manager);
 }

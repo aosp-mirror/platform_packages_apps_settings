@@ -23,14 +23,18 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Annotation;
 import android.text.Spannable;
+import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.style.URLSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -44,8 +48,8 @@ public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFra
         implements DialogInterface.OnClickListener {
 
     public static final String TAG = "SupportDisclaimerDialog";
-    private static final String EXTRA_TYPE = "extra_type";
-    private static final String EXTRA_ACCOUNT = "extra_account";
+    public static final String EXTRA_TYPE = "extra_type";
+    public static final String EXTRA_ACCOUNT = "extra_account";
 
     public static SupportDisclaimerDialogFragment newInstance(Account account,
             @SupportFeatureProvider.SupportType int type) {
@@ -69,8 +73,13 @@ public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFra
         final Activity activity = getActivity();
         final SupportFeatureProvider supportFeatureProvider =
                 FeatureFactory.getFactory(activity).getSupportFeatureProvider(activity);
+
+        // sets the two links that go to privacy policy and terms of service
         disclaimer.setText(supportFeatureProvider.getDisclaimerStringResId());
-        stripUnderlines((Spannable) disclaimer.getText());
+        Spannable viewText = (Spannable) disclaimer.getText();
+        stripUnderlines(viewText);
+        SystemInformationSpan.linkify(viewText, this);
+        // sets the link that launches a dialog to expose the signals we are sending
         return builder
                 .setView(content)
                 .create();
@@ -112,9 +121,11 @@ public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFra
         for (URLSpan span : urls) {
             final int start = input.getSpanStart(span);
             final int end = input.getSpanEnd(span);
-            input.removeSpan(span);
-            input.setSpan(new NoUnderlineUrlSpan(span.getURL()), start, end,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if (!TextUtils.isEmpty(span.getURL())) {
+                input.removeSpan(span);
+                input.setSpan(new NoUnderlineUrlSpan(span.getURL()), start, end,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
         }
     }
 
@@ -136,6 +147,71 @@ public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFra
         public void updateDrawState(TextPaint ds) {
             super.updateDrawState(ds);
             ds.setUnderlineText(false);
+        }
+    }
+
+    /**
+     * A {@link URLSpan} that opens a dialog when clicked
+     */
+    public static class SystemInformationSpan extends URLSpan {
+
+        private static final String ANNOTATION_URL = "url";
+        private final DialogFragment mDialog;
+        private SupportFeatureProvider mSupport;
+
+        public SystemInformationSpan(DialogFragment parent) {
+            // sets the url to empty string so we can prevent the NoUnderlineUrlSpan from stripping
+            // this one
+            super("");
+            mSupport  = FeatureFactory.getFactory(parent.getContext())
+                    .getSupportFeatureProvider(parent.getContext());
+            mDialog = parent;
+        }
+
+        @Override
+        public void onClick(View widget) {
+            Activity activity =  mDialog.getActivity();
+            if (mSupport != null && activity != null) {
+                // launch the system info fragment
+                mSupport.launchSystemInfoFragment(mDialog.getArguments(),
+                        activity.getFragmentManager());
+
+                // dismiss this fragment
+                mDialog.dismiss();
+            }
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            super.updateDrawState(ds);
+            // remove underline
+            ds.setUnderlineText(false);
+        }
+
+        /**
+         * This method takes a string and turns it into a url span that will launch a
+         * SupportSystemInformationDialogFragment
+         * @param msg The text to turn into a link
+         * @param parent The dialog the text is in
+         * @return A CharSequence containing the original text content as a url
+         */
+        public static CharSequence linkify(Spannable msg, DialogFragment parent) {
+            Annotation[] spans = msg.getSpans(0, msg.length(), Annotation.class);
+            for (Annotation annotation : spans) {
+                int start = msg.getSpanStart(annotation);
+                int end = msg.getSpanEnd(annotation);
+                if (ANNOTATION_URL.equals(annotation.getValue())) {
+                    SystemInformationSpan link = new SystemInformationSpan(parent);
+                    msg.removeSpan(annotation);
+                    msg.setSpan(link, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+            return msg;
+        }
+
+        @VisibleForTesting
+        public void setSupportProvider(SupportFeatureProvider prov) {
+            mSupport = prov;
         }
     }
 }
