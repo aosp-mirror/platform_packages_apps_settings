@@ -40,7 +40,7 @@ import com.android.settings.search2.SearchFeatureProviderImpl;
  * {@link FeatureFactory} implementation for AOSP Settings.
  */
 @Keep
-public final class FeatureFactoryImpl extends FeatureFactory {
+public class FeatureFactoryImpl extends FeatureFactory {
 
     private ApplicationFeatureProvider mApplicationFeatureProvider;
     private MetricsFeatureProvider mMetricsFeatureProvider;
