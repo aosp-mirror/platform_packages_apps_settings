@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
-import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
@@ -166,14 +165,14 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     }
 
     private void setupRingtone() {
-        mRingtone.setRingtone(mChannel.getRingtone());
+        mRingtone.setRingtone(mChannel.getSound());
         mRingtone.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 Uri ringtone = Uri.parse((String) newValue);
                 mRingtone.setRingtone(ringtone);
-                mChannel.setRingtone(ringtone);
-                mChannel.lockFields(NotificationChannel.USER_LOCKED_RINGTONE);
+                mChannel.setSound(ringtone);
+                mChannel.lockFields(NotificationChannel.USER_LOCKED_SOUND);
                 mBackend.updateChannel(mPkg, mUid, mChannel);
                 return false;
             }
