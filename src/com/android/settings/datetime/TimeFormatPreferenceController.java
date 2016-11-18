@@ -96,7 +96,10 @@ public class TimeFormatPreferenceController extends PreferenceController {
 
     private void timeUpdated(boolean is24Hour) {
         Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
-        timeChanged.putExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT, is24Hour);
+        int timeFormatPreference =
+                is24Hour ? Intent.EXTRA_TIME_PREF_VALUE_USE_24_HOUR
+                        : Intent.EXTRA_TIME_PREF_VALUE_USE_12_HOUR;
+        timeChanged.putExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT, timeFormatPreference);
         mContext.sendBroadcast(timeChanged);
     }
 
