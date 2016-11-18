@@ -38,11 +38,6 @@ public class EmergencyInfoPreferenceController extends PreferenceController {
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-    }
-
-    @Override
     public void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
         if (isAvailable()) {
             SearchIndexableRaw data = new SearchIndexableRaw(mContext);
