@@ -249,7 +249,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Update state of each preference managed by PreferenceController.
      */
-    private void updatePreferenceStates() {
+    protected void updatePreferenceStates() {
         Collection<PreferenceController> controllers = mPreferenceControllers.values();
         final PreferenceScreen screen = getPreferenceScreen();
         for (PreferenceController controller : controllers) {

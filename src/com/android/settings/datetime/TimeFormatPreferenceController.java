@@ -58,8 +58,7 @@ public class TimeFormatPreferenceController extends PreferenceController {
 
     @Override
     public void updateState(Preference preference) {
-        if (!(preference instanceof TwoStatePreference)
-                || !TextUtils.equals(KEY_TIME_FORMAT, preference.getKey())) {
+        if (!(preference instanceof TwoStatePreference)) {
             return;
         }
         ((TwoStatePreference) preference).setChecked(is24Hour());

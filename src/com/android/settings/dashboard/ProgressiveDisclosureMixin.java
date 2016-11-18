@@ -38,7 +38,7 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
 
     private static final String TAG = "ProgressiveDisclosure";
     private static final String STATE_USER_EXPANDED = "state_user_expanded";
-    private static final int DEFAULT_TILE_LIMIT = 3;
+    private static final int DEFAULT_TILE_LIMIT = 300;
 
     private int mTileLimit = DEFAULT_TILE_LIMIT;
 

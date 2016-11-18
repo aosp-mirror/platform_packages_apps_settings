@@ -17,66 +17,38 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.app.TimePickerDialog.OnTimeSetListener;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.text.format.DateFormat;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.PreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.datetime.AutoTimePreferenceController;
+import com.android.settings.datetime.AutoTimeZonePreferenceController;
+import com.android.settings.datetime.DatePreferenceController;
+import com.android.settings.datetime.TimeChangeListenerMixin;
 import com.android.settings.datetime.TimeFormatPreferenceController;
-import com.android.settings.datetime.UpdateTimeAndDateCallback;
+import com.android.settings.datetime.TimePreferenceController;
+import com.android.settings.datetime.TimeZonePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.datetime.ZoneGetter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+public class DateTimeSettings extends DashboardFragment implements
+        TimePreferenceController.TimePreferenceHost, DatePreferenceController.DatePreferenceHost {
 
-public class DateTimeSettings extends SettingsPreferenceFragment
-        implements UpdateTimeAndDateCallback, OnTimeSetListener, OnDateSetListener,
-        OnPreferenceChangeListener, Indexable {
-
-    private static final String KEY_AUTO_TIME = "auto_time";
-    private static final String KEY_AUTO_TIME_ZONE = "auto_zone";
-
-    private static final int DIALOG_DATEPICKER = 0;
-    private static final int DIALOG_TIMEPICKER = 1;
+    private static final String TAG = "DateTimeSettings";
 
     // have we been launched from the setup wizard?
     protected static final String EXTRA_IS_FROM_SUW = "firstRun";
-
-    // Minimum time is Nov 5, 2007, 0:00.
-    private static final long MIN_DATE = 1194220800000L;
-
-    private TimeFormatPreferenceController mTimeFormatPreferenceController;
-    private RestrictedSwitchPreference mAutoTimePref;
-    private Preference mTimePref;
-    private SwitchPreference mAutoTimeZonePref;
-    private Preference mTimeZone;
-    private Preference mDatePref;
 
     @Override
     public int getMetricsCategory() {
@@ -84,141 +56,67 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        addPreferencesFromResource(R.xml.date_time_prefs);
-
-        initUI();
+    protected String getCategoryKey() {
+        return null;
     }
 
-    private void initUI() {
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.date_time_prefs;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        getLifecycle().addObserver(new TimeChangeListenerMixin(context, this));
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final List<PreferenceController> controllers = new ArrayList<>();
         final Activity activity = getActivity();
         final Intent intent = activity.getIntent();
         final boolean isFromSUW = intent.getBooleanExtra(EXTRA_IS_FROM_SUW, false);
-        boolean autoTimeEnabled = getAutoState(Settings.Global.AUTO_TIME);
-        boolean autoTimeZoneEnabled = getAutoState(Settings.Global.AUTO_TIME_ZONE);
 
-        mTimeFormatPreferenceController = new TimeFormatPreferenceController(
-                activity, this /* UpdateTimeAndDateCallback */, isFromSUW);
-        mTimeFormatPreferenceController.displayPreference(getPreferenceScreen());
+        final AutoTimeZonePreferenceController autoTimeZonePreferenceController =
+                new AutoTimeZonePreferenceController(
+                        activity, this /* UpdateTimeAndDateCallback */, isFromSUW);
+        final AutoTimePreferenceController autoTimePreferenceController =
+                new AutoTimePreferenceController(
+                        activity, this /* UpdateTimeAndDateCallback */);
+        controllers.add(autoTimeZonePreferenceController);
+        controllers.add(autoTimePreferenceController);
 
-        mAutoTimePref = (RestrictedSwitchPreference) findPreference(KEY_AUTO_TIME);
-        mAutoTimePref.setOnPreferenceChangeListener(this);
-        EnforcedAdmin admin = RestrictedLockUtils.checkIfAutoTimeRequired(activity);
-        mAutoTimePref.setDisabledByAdmin(admin);
-
-        // If device admin requires auto time device policy manager will set
-        // Settings.Global.AUTO_TIME to true. Note that this app listens to that change.
-        mAutoTimePref.setChecked(autoTimeEnabled);
-        mAutoTimeZonePref = (SwitchPreference) findPreference(KEY_AUTO_TIME_ZONE);
-        mAutoTimeZonePref.setOnPreferenceChangeListener(this);
-        // Override auto-timezone if it's a wifi-only device or if we're still in setup wizard.
-        // TODO: Remove the wifiOnly test when auto-timezone is implemented based on wifi-location.
-        if (Utils.isWifiOnly(activity) || isFromSUW) {
-            getPreferenceScreen().removePreference(mAutoTimeZonePref);
-            autoTimeZoneEnabled = false;
-        }
-        mAutoTimeZonePref.setChecked(autoTimeZoneEnabled);
-
-        mTimePref = findPreference("time");
-        mTimeZone = findPreference("timezone");
-        mDatePref = findPreference("date");
-
-        mTimePref.setEnabled(!autoTimeEnabled);
-        mDatePref.setEnabled(!autoTimeEnabled);
-        mTimeZone.setEnabled(!autoTimeZoneEnabled);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        // Register for time ticks and other reasons for time change
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_TIME_TICK);
-        filter.addAction(Intent.ACTION_TIME_CHANGED);
-        filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-        getActivity().registerReceiver(mIntentReceiver, filter, null, null);
-
-        updateTimeAndDateDisplay(getActivity());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        getActivity().unregisterReceiver(mIntentReceiver);
+        controllers.add(new TimeFormatPreferenceController(
+                activity, this /* UpdateTimeAndDateCallback */, isFromSUW));
+        controllers.add(new TimeZonePreferenceController(
+                activity, autoTimeZonePreferenceController));
+        controllers.add(new TimePreferenceController(
+                activity, this /* UpdateTimeAndDateCallback */, autoTimePreferenceController));
+        controllers.add(new DatePreferenceController(
+                activity, this /* UpdateTimeAndDateCallback */, autoTimePreferenceController));
+        return controllers;
     }
 
     @Override
     public void updateTimeAndDateDisplay(Context context) {
-        final Calendar now = Calendar.getInstance();
-        mDatePref.setSummary(DateFormat.getLongDateFormat(context).format(now.getTime()));
-        mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
-        mTimeZone.setSummary(ZoneGetter.getTimeZoneOffsetAndName(context,
-                now.getTimeZone(), now.getTime()));
-        mTimeFormatPreferenceController.updateState(findPreference(
-                mTimeFormatPreferenceController.getPreferenceKey()));
-    }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int day) {
-        final Activity activity = getActivity();
-        if (activity != null) {
-            setDate(activity, year, month, day);
-            updateTimeAndDateDisplay(activity);
-        }
-    }
-
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        final Activity activity = getActivity();
-        if (activity != null) {
-            setTime(activity, hourOfDay, minute);
-            updateTimeAndDateDisplay(activity);
-        }
-
-        // We don't need to call timeUpdated() here because the TIME_CHANGED
-        // broadcast is sent by the AlarmManager as a side effect of setting the
-        // SystemClock time.
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference.getKey().equals(KEY_AUTO_TIME)) {
-            boolean autoEnabled = (Boolean) newValue;
-            Settings.Global.putInt(getContentResolver(), Settings.Global.AUTO_TIME,
-                    autoEnabled ? 1 : 0);
-            mTimePref.setEnabled(!autoEnabled);
-            mDatePref.setEnabled(!autoEnabled);
-        } else if (preference.getKey().equals(KEY_AUTO_TIME_ZONE)) {
-            boolean autoZoneEnabled = (Boolean) newValue;
-            Settings.Global.putInt(
-                    getContentResolver(), Settings.Global.AUTO_TIME_ZONE, autoZoneEnabled ? 1 : 0);
-            mTimeZone.setEnabled(!autoZoneEnabled);
-        }
-        return true;
+        updatePreferenceStates();
     }
 
     @Override
     public Dialog onCreateDialog(int id) {
-        final Calendar calendar = Calendar.getInstance();
         switch (id) {
-            case DIALOG_DATEPICKER:
-                DatePickerDialog d = new DatePickerDialog(
-                        getActivity(),
-                        this,
-                        calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH));
-                configureDatePicker(d.getDatePicker());
-                return d;
-            case DIALOG_TIMEPICKER:
-                return new TimePickerDialog(
-                        getActivity(),
-                        this,
-                        calendar.get(Calendar.HOUR_OF_DAY),
-                        calendar.get(Calendar.MINUTE),
-                        DateFormat.is24HourFormat(getActivity()));
+            case DatePreferenceController.DIALOG_DATEPICKER:
+                return getPreferenceController(DatePreferenceController.class)
+                        .buildDatePicker(getActivity());
+            case TimePreferenceController.DIALOG_TIMEPICKER:
+                return getPreferenceController(TimePreferenceController.class)
+                        .buildTimePicker(getActivity());
             default:
                 throw new IllegalArgumentException();
         }
@@ -227,119 +125,25 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
-            case DIALOG_DATEPICKER:
+            case DatePreferenceController.DIALOG_DATEPICKER:
                 return MetricsEvent.DIALOG_DATE_PICKER;
-            case DIALOG_TIMEPICKER:
+            case TimePreferenceController.DIALOG_TIMEPICKER:
                 return MetricsEvent.DIALOG_TIME_PICKER;
             default:
                 return 0;
         }
     }
 
-    static void configureDatePicker(DatePicker datePicker) {
-        // The system clock can't represent dates outside this range.
-        Calendar t = Calendar.getInstance();
-        t.clear();
-        t.set(1970, Calendar.JANUARY, 1);
-        datePicker.setMinDate(t.getTimeInMillis());
-        t.clear();
-        t.set(2037, Calendar.DECEMBER, 31);
-        datePicker.setMaxDate(t.getTimeInMillis());
-    }
-
-    /*
     @Override
-    public void onPrepareDialog(int id, Dialog d) {
-        switch (id) {
-        case DIALOG_DATEPICKER: {
-            DatePickerDialog datePicker = (DatePickerDialog)d;
-            final Calendar calendar = Calendar.getInstance();
-            datePicker.updateDate(
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH));
-            break;
-        }
-        case DIALOG_TIMEPICKER: {
-            TimePickerDialog timePicker = (TimePickerDialog)d;
-            final Calendar calendar = Calendar.getInstance();
-            timePicker.updateTime(
-                    calendar.get(Calendar.HOUR_OF_DAY),
-                    calendar.get(Calendar.MINUTE));
-            break;
-        }
-        default:
-            break;
-        }
-    }
-    */
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (mTimeFormatPreferenceController.handlePreferenceTreeClick(preference)) {
-            return super.onPreferenceTreeClick(preference);
-        }
-        if (preference == mDatePref) {
-            showDialog(DIALOG_DATEPICKER);
-        } else if (preference == mTimePref) {
-            // The 24-hour mode may have changed, so recreate the dialog
-            removeDialog(DIALOG_TIMEPICKER);
-            showDialog(DIALOG_TIMEPICKER);
-        }
-        return super.onPreferenceTreeClick(preference);
+    public void showTimePicker() {
+        removeDialog(TimePreferenceController.DIALOG_TIMEPICKER);
+        showDialog(TimePreferenceController.DIALOG_TIMEPICKER);
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode,
-            Intent data) {
-        updateTimeAndDateDisplay(getActivity());
+    public void showDatePicker() {
+        showDialog(DatePreferenceController.DIALOG_DATEPICKER);
     }
-
-    private boolean getAutoState(String name) {
-        try {
-            return Settings.Global.getInt(getContentResolver(), name) > 0;
-        } catch (SettingNotFoundException snfe) {
-            return false;
-        }
-    }
-
-    /* package */
-    static void setDate(Context context, int year, int month, int day) {
-        Calendar c = Calendar.getInstance();
-
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, day);
-        long when = Math.max(c.getTimeInMillis(), MIN_DATE);
-
-        if (when / 1000 < Integer.MAX_VALUE) {
-            ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).setTime(when);
-        }
-    }
-
-    /* package */
-    static void setTime(Context context, int hourOfDay, int minute) {
-        Calendar c = Calendar.getInstance();
-
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        c.set(Calendar.MINUTE, minute);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-        long when = Math.max(c.getTimeInMillis(), MIN_DATE);
-
-        if (when / 1000 < Integer.MAX_VALUE) {
-            ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).setTime(when);
-        }
-    }
-
-    private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final Activity activity = getActivity();
-            if (activity != null) {
-                updateTimeAndDateDisplay(activity);
-            }
-        }
-    };
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
 
@@ -369,6 +173,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             return new SummaryProvider(activity, summaryLoader);
         }
     };
+
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new DateTimeSearchIndexProvider();
