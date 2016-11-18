@@ -32,6 +32,8 @@ import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
+import com.android.settings.search2.SearchFeatureProvider;
+import com.android.settings.search2.SearchFeatureProviderImpl;
 
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
@@ -44,6 +46,7 @@ public final class FeatureFactoryImpl extends FeatureFactory {
     private DashboardFeatureProviderImpl mDashboardFeatureProvider;
     private LocaleFeatureProvider mLocaleFeatureProvider;
     private EnterprisePrivacyFeatureProvider mEnterprisePrivacyFeatureProvider;
+    private SearchFeatureProvider mSearchFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -91,9 +94,17 @@ public final class FeatureFactoryImpl extends FeatureFactory {
     public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(Context context) {
         if (mEnterprisePrivacyFeatureProvider == null) {
             mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(context,
-                    new DevicePolicyManagerWrapperImpl((DevicePolicyManager)context
+                    new DevicePolicyManagerWrapperImpl((DevicePolicyManager) context
                             .getSystemService(Context.DEVICE_POLICY_SERVICE)));
         }
         return mEnterprisePrivacyFeatureProvider;
+    }
+
+    @Override
+    public SearchFeatureProvider getSearchFeatureProvider(Context context) {
+        if (mSearchFeatureProvider == null) {
+            mSearchFeatureProvider = new SearchFeatureProviderImpl(context);
+        }
+        return mSearchFeatureProvider;
     }
 }
