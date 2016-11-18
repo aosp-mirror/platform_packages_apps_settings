@@ -22,7 +22,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
 import android.os.Environment;
@@ -1259,7 +1259,8 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                new AppCounter(mContext) {
+                new InstalledAppCounter(mContext,
+                        new PackageManagerWrapperImpl(mContext.getPackageManager())) {
                     @Override
                     protected void onCountComplete(int num) {
                         mLoader.setSummary(SummaryProvider.this,
@@ -1267,23 +1268,8 @@ public class ManageApplications extends InstrumentedFragment
                     }
 
                     @Override
-                    protected boolean includeInCount(ApplicationInfo info) {
-                        if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
-                            return true;
-                        } else if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-                            return true;
-                        }
-                        Intent launchIntent = new Intent(Intent.ACTION_MAIN, null)
-                                .addCategory(Intent.CATEGORY_LAUNCHER)
-                                .setPackage(info.packageName);
-                        int userId = UserHandle.getUserId(info.uid);
-                        List<ResolveInfo> intents = mPm.queryIntentActivitiesAsUser(
-                                launchIntent,
-                                PackageManager.GET_DISABLED_COMPONENTS
-                                        | PackageManager.MATCH_DIRECT_BOOT_AWARE
-                                        | PackageManager.MATCH_DIRECT_BOOT_UNAWARE,
-                                userId);
-                        return intents != null && intents.size() != 0;
+                    protected List<UserInfo> getUsersToCount() {
+                         return mUm.getProfiles(UserHandle.myUserId());
                     }
                 }.execute();
             }
