@@ -47,8 +47,8 @@
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"ਸੇਵਾ ਡਾਇਲਿੰਗ ਨੰਬਰ ਦੇਖੋ"</string>
     <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"IMS ਸੇਵਾ ਅਵਸਥਾ"</string>
     <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS ਅਵਸਥਾ"</string>
-    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"ਪੰਜੀਕਰਨ ਕੀਤਾ ਗਿਆ"</string>
-    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"ਪੰਜੀਕਰਨ ਨਹੀਂ ਕੀਤਾ ਗਿਆ"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"ਪੰਜੀਕਿਰਤ"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"ਅਣ-ਪੰਜੀਕਿਰਤ"</string>
     <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"ਉਪਲਬਧ"</string>
     <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"ਅਣਉਪਲਬਧ"</string>
     <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS ਪੰਜੀਕਰਨ: <xliff:g id="STATUS">%1$s</xliff:g>\nLTE \'ਤੇ ਵੌਇਸ: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nWiFi \'ਤੇ ਵੌਇਸ: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nਵੀਡੀਓ ਕਾਲਿੰਗ: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT ਇੰਟਰਫੇਸ: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
@@ -1357,7 +1357,8 @@
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"ਸੈਟੇਲਾਈਟ ਇਮੇਜਰੀ ਪ੍ਰਦਾਤਾ:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"ਮੈਨੁਅਲ"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"ਮੈਨੁਅਲ ਲੋਡ ਕਰਨ ਵਿੱਚ ਇੱਕ ਸਮੱਸਿਆ ਹੋਈ ਸੀ।"</string>
-    <string name="settings_license_activity_title" msgid="7553683406244228650">"ਖੁੱਲ੍ਹਾ ਸਰੋਤ ਲਾਇਸੰਸ"</string>
+    <!-- no translation found for settings_license_activity_title (8525014571806471216) -->
+    <skip />
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"ਲਾਇਸੰਸ ਲੋਡ ਕਰਨ ਵਿੱਚ ਇੱਕ ਸਮੱਸਿਆ ਹੋਈ ਸੀ।"</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"ਲੋਡ ਕਰ ਰਿਹਾ ਹੈ…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"ਸੁਰੱਖਿਆ ਜਾਣਕਾਰੀ"</string>
@@ -2605,8 +2606,10 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"ਰਿੰਗ ਵੌਲਿਊਮ"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"ਸੂਚਨਾ ਵੌਲਿਊਮ"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"ਫੋਨ ਰਿੰਗਟੋਨ"</string>
-    <string name="notification_ringtone_title" msgid="3361201340352664272">"ਡਿਫੌਲਟ ਸੂਚਨਾ ਰਿੰਗਟੋਨ"</string>
-    <string name="alarm_ringtone_title" msgid="2015124067611102995">"ਪੂਰਵ-ਨਿਰਧਾਰਤ ਅਲਾਰਮ ਰਿੰਗਟੋਨ"</string>
+    <!-- no translation found for notification_ringtone_title (4468722874617061231) -->
+    <skip />
+    <!-- no translation found for alarm_ringtone_title (6344025478514311386) -->
+    <skip />
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"ਕਾਲਾਂ ਲਈ ਥਰਥਰਾਹਟ ਵੀ ਕਰੋ"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"ਹੋਰ ਅਵਾਜ਼ਾਂ"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ਡਾਇਲ ਪੈਡ ਟੋਨਾਂ"</string>
@@ -3254,33 +3257,24 @@
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"ਤੁਹਾਡੇ ਫ਼ੋਨ ਨੂੰ ਕੰਟਰੋਲ ਕਰਨ ਲਈ ਤੁਰੰਤ ਸੰਕੇਤ"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"ਤੁਹਾਡੇ ਟੈਬਲੈੱਟ ਨੂੰ ਕੰਟਰੋਲ ਕਰਨ ਲਈ ਤੁਰੰਤ ਸੰਕੇਤ"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"ਤੁਹਾਡੀ ਡੀਵਾਈਸ ਨੂੰ ਕੰਟਰੋਲ ਕਰਨ ਲਈ ਤੁਰੰਤ ਸੰਕੇਤ"</string>
-    <!-- no translation found for double_tap_power_for_camera_title (64716226816032800) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (242037150983277829) -->
-    <skip />
+    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"ਕੈਮਰੇ \'ਤੇ ਜਾਓ"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"ਕੈਮਰੇ ਨੂੰ ਤੁਰੰਤ ਖੋਲ੍ਹਣ ਲਈ, ਪਾਵਰ ਬਟਨ ਨੂੰ ਦੋ ਵਾਰ ਦਬਾਓ। ਇਹ ਕਿਸੇ ਵੀ ਸਕ੍ਰੀਨ ਤੋਂ ਕੰਮ ਕਰਦਾ ਹੈ।"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"ਕੈਮਰਾ ਫਲਿੱਪ ਕਰੋ"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ ਫ਼ੋਨ \'ਤੇ ਡਬਲ-ਟੈਪ ਕਰੋ"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ ਟੈਬਲੈੱਟ \'ਤੇ ਡਬਲ-ਟੈਪ ਕਰੋ"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ ਡੀਵਾਈਸ \'ਤੇ ਡਬਲ-ਟੈਪ ਕਰੋ"</string>
-    <!-- no translation found for ambient_display_summary (2521630136233865893) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="2521630136233865893">"ਤੇਜ਼ੀ ਨਾਲ ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਵੇਖਣ ਲਈ, ਆਪਣੀ ਸਕ੍ਰੀਨ \'ਤੇ ਡਬਲ-ਟੈਪ ਕਰੋ।"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ ਫ਼ੋਨ ਨੂੰ ਚੁੱਕੋ"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ ਟੈਬਲੈੱਟ ਨੂੰ ਚੁੱਕੋ"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ ਡੀਵਾਈਸ ਨੂੰ ਚੁੱਕੋ"</string>
-    <!-- no translation found for ambient_display_pickup_summary (8696432220086951466) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (2442551819015699120) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (2369325441608811599) -->
-    <skip />
+    <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"ਤੇਜ਼ੀ ਨਾਲ ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਵੇਖਣ ਲਈ, ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਚੁੱਕੋ।"</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"ਤੇਜ਼ੀ ਨਾਲ ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਵੇਖਣ ਲਈ, ਆਪਣੇ ਟੈਬਲੈੱਟ ਨੂੰ ਚੁੱਕੋ।"</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"ਤੇਜ਼ੀ ਨਾਲ ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਵੇਖਣ ਲਈ, ਆਪਣੀ ਡੀਵਾਈਸ ਨੂੰ ਚੁੱਕੋ।"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"ਸੂਚਨਾਵਾਂ ਲਈ ਸਵਾਈਪ ਕਰੋ"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (1770661868393713922) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (902719947767712895) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5372926094116306647) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ, ਆਪਣੇ ਫ਼ੋਨ ਦੇ ਪਿਛਲੇ ਪਾਸੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ \'ਤੇ ਹੇਠਾਂ ਨੂੰ ਸਵਾਈਪ ਕਰੋ।"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ, ਆਪਣੇ ਟੈਬਲੈੱਟ ਦੇ ਪਿਛਲੇ ਪਾਸੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ \'ਤੇ ਹੇਠਾਂ ਨੂੰ ਸਵਾਈਪ ਕਰੋ।"</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਵੇਖਣ ਲਈ, ਆਪਣੀ ਡੀਵਾਈਸ ਦੇ ਪਿਛਲੇ ਪਾਸੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ \'ਤੇ ਹੇਠਾਂ ਨੂੰ ਸਵਾਈਪ ਕਰੋ।"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"ਚਾਲੂ"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"ਬੰਦ"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"ਬੂਟਲੋਡਰ ਪਹਿਲਾਂ ਹੀ ਅਨਲੌਕ ਕੀਤਾ ਹੋਇਆ ਹੈ"</string>
@@ -3301,10 +3295,20 @@
     <string name="auto_sync_account_title" msgid="7647106425106072285">"ਖਾਤਾ ਡੈਟਾ ਸਵੈ-ਸਮਕਾਲੀਕਿਰਤ ਕਰੋ"</string>
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"ਵਿਅਕਤੀਗਤ ਖਾਤਾ ਡੈਟਾ ਸਵੈ-ਸਮਕਾਲੀਕਿਰਤ ਕਰੋ"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"ਕਾਰਜ ਖਾਤਾ ਡੈਟਾ ਸਵੈ-ਸਮਕਾਲੀਕਿਰਤ ਕਰੋ"</string>
-    <!-- no translation found for enterprise_privacy_settings (6419290515657989967) -->
+    <string name="enterprise_privacy_settings" msgid="6419290515657989967">"ਪਰਦੇਦਾਰੀ"</string>
+    <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"ਪਰਦੇਦਾਰੀ"</string>
+    <string name="enterprise_privacy_header" msgid="5605095630252702716">"ਤੁਹਾਡੇ ਕੰਮ ਦੇ ਡੈਟੇ ਤੱਕ ਪਹੁੰਚ ਮੁਹੱਈਆ ਕਰਾਉਣ ਲਈ, ਤੁਹਾਡਾ ਸੰਗਠਨ ਤੁਹਾਡੀ ਡੀਵਾਈਸ \'ਤੇ ਸੈਟਿੰਗਾਂ ਨੂੰ ਤਬਦੀਲ ਅਤੇ ਸਾਫਟਵੇਅਰ ਸਥਾਪਤ ਕਰ ਸਕਦਾ ਹੈ, ਜਿਹੜਾ ਕਿ ਤੁਹਾਡੀ ਕੁਝ ਨਿੱਜੀ ਸਮੱਗਰੀ ਨੂੰ ਤੁਹਾਡੇ ਪ੍ਰਸ਼ਾਸਕ ਲਈ ਉਪਲਬਧ ਹੋਣ ਦਾ ਕਾਰਨ ਬਣ ਸਕਦਾ ਹੈ। ਹੋਰ ਵੇਰਵਿਆਂ ਲਈ ਆਪਣੇ ਸੰਗਠਨ ਦੇ ਪ੍ਰਸ਼ਾਸਕ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"</string>
+    <!-- no translation found for exposure_category (2810157871578456078) -->
     <skip />
-    <!-- no translation found for enterprise_privacy_settings_title (3816716633813721131) -->
+    <!-- no translation found for exposure_changes_category (7152065122917822315) -->
     <skip />
-    <!-- no translation found for enterprise_privacy_header (5605095630252702716) -->
+    <!-- no translation found for device_access_category (2561130537681794647) -->
+    <skip />
+    <!-- no translation found for enterprise_data (5354458531314976417) -->
+    <skip />
+    <!-- no translation found for number_installed_packages_default (7185923293655904313) -->
+    <skip />
+    <!-- no translation found for number_installed_packages (1918926807170936355) -->
+    <!-- no translation found for usage_stats (5623497078526133035) -->
     <skip />
 </resources>

@@ -51,7 +51,7 @@
     <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"Ro‘yxatdan o‘tmagan"</string>
     <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Mavjud"</string>
     <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"Mavjud emas"</string>
-    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS’da ro‘yxatdan o‘tish: <xliff:g id="STATUS">%1$s</xliff:g>\nLTE orqali: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nWi-Fi orqali: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideo qo‘ng‘iroq: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT interfeysi: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS registratsiyasi: <xliff:g id="STATUS">%1$s</xliff:g>\nLTE orqali: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nWi-Fi orqali: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideoqo‘ng‘iroq: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT interfeysi: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"Xizmat doirasida"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Xizmat doirasidan tashqarida"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Faqat favqulodda qo‘ng‘iroqlar"</string>
@@ -1357,7 +1357,8 @@
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Sun’iy yo‘ldoshdan olingan rasmlar:\n© CNES 2014/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"Qo‘llanma"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"Qo‘llanmani yuklashda muammo yuz berdi."</string>
-    <string name="settings_license_activity_title" msgid="7553683406244228650">"Ochiq kodli DT litsenziyalari"</string>
+    <!-- no translation found for settings_license_activity_title (8525014571806471216) -->
+    <skip />
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Litsenziyalarni yuklashda muammo yuz berdi."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Yuklanmoqda…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Xavfsizlik qoidalari"</string>
@@ -2605,8 +2606,10 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Rington"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Bildirishnomalar ovozi"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Telefon ringtoni"</string>
-    <string name="notification_ringtone_title" msgid="3361201340352664272">"Bildirishnomalar ringtoni"</string>
-    <string name="alarm_ringtone_title" msgid="2015124067611102995">"Standart signal ringtoni"</string>
+    <!-- no translation found for notification_ringtone_title (4468722874617061231) -->
+    <skip />
+    <!-- no translation found for alarm_ringtone_title (6344025478514311386) -->
+    <skip />
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Chaqiruv vaqtida tebranish"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Boshqa ovozlar"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Raqam terilgandagi ovoz"</string>
@@ -3254,33 +3257,24 @@
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Telefonni boshqarish uchun tezkor imo-ishoralar"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Planshetni boshqarish uchun tezkor imo-ishoralar"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Qurilmani boshqarish uchun tezkor imo-ishoralar"</string>
-    <!-- no translation found for double_tap_power_for_camera_title (64716226816032800) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_summary (242037150983277829) -->
-    <skip />
+    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Kameraga o‘tish"</string>
+    <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Kamerani tez ochish uchun quvvat tugmasini ikki marta bosing. Har qanday ekranda ishlaydi."</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Kamerani almashtirish"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Telefonni tekshirish uchun ekranni ikki marta bosing"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Planshetni tekshirish uchun ekranni ikki marta bosing"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Qurilmani tekshirish uchun ekranni ikki marta bosing"</string>
-    <!-- no translation found for ambient_display_summary (2521630136233865893) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="2521630136233865893">"Bildirishnomalarni tezkor tekshirish uchun ekranni ikki marta bosing."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Tekshirish uchun telefonni yuqoriga ko‘taring"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Tekshirish uchun planshetni yuqoriga ko‘taring"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Tekshirish uchun qurilmani yuqoriga ko‘taring"</string>
-    <!-- no translation found for ambient_display_pickup_summary (8696432220086951466) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (2442551819015699120) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (2369325441608811599) -->
-    <skip />
+    <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"Bildirishnomalarni tezkor tekshirish uchun telefonni qo‘lingizga oling."</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"Bildirishnomalarni tezkor tekshirish uchun planshetni qo‘lingizga oling."</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"Bildirishnomalarni tezkor tekshirish uchun qurilmani qo‘lingizga oling."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2750203868053669600">"Bildirishnomalarni ochish uchun suring"</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (1770661868393713922) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (902719947767712895) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_summary (5372926094116306647) -->
-    <skip />
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Bildirishnomalarni ko‘rish uchun telefon orqasida joylashgan barmoq izi skanerida barmog‘ingizni pastga suring."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Bildirishnomalarni ko‘rish uchun planshet orqasida joylashgan barmoq izi skanerida barmog‘ingizni pastga suring."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Bildirishnomalarni ko‘rish uchun qurilma orqasida joylashgan barmoq izi skanerida barmog‘ingizni pastga suring."</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Yoniq"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"O‘chiq"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"OT yuklagich allaqachon qulfdan chiqarilgan"</string>
@@ -3301,10 +3295,20 @@
     <string name="auto_sync_account_title" msgid="7647106425106072285">"Avto-sinxronizatsiya (hisob)"</string>
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"Avto-sinxronizatsiya (shaxsiy)"</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"Avto-sinxronizatsiya (ishchi)"</string>
-    <!-- no translation found for enterprise_privacy_settings (6419290515657989967) -->
+    <string name="enterprise_privacy_settings" msgid="6419290515657989967">"Maxfiylik"</string>
+    <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"Maxfiylik"</string>
+    <string name="enterprise_privacy_header" msgid="5605095630252702716">"Tashkilotingiz administratori qurilmangizda ish uchun zarur sozlamalarni o‘zgartirganda yoki ilovalar o‘rnatganda ba’zi shaxsiy ma’lumotlaringiz unga ko‘rishini mumkin. Qo‘shimcha ma’lumot olish uchun administratorga murojaat qiling."</string>
+    <!-- no translation found for exposure_category (2810157871578456078) -->
     <skip />
-    <!-- no translation found for enterprise_privacy_settings_title (3816716633813721131) -->
+    <!-- no translation found for exposure_changes_category (7152065122917822315) -->
     <skip />
-    <!-- no translation found for enterprise_privacy_header (5605095630252702716) -->
+    <!-- no translation found for device_access_category (2561130537681794647) -->
+    <skip />
+    <!-- no translation found for enterprise_data (5354458531314976417) -->
+    <skip />
+    <!-- no translation found for number_installed_packages_default (7185923293655904313) -->
+    <skip />
+    <!-- no translation found for number_installed_packages (1918926807170936355) -->
+    <!-- no translation found for usage_stats (5623497078526133035) -->
     <skip />
 </resources>
