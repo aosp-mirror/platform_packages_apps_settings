@@ -319,7 +319,7 @@
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:parentActivityName="Settings$WifiSettingsActivity">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.WIFI_IF_SETTINGS" />
+                <action android:name="android.settings.WIFI_SAVED_NETWORK_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -327,7 +327,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.wifi.SavedAccessPointsSettings" />
+                android:value="com.android.settings.wifi.SavedAccessPointsWifiSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
