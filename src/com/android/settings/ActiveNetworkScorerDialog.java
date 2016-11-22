@@ -75,13 +75,14 @@ public final class ActiveNetworkScorerDialog extends AlertActivity implements
             Log.i(TAG, "Can only set scorer for owner/system user.");
             return false;
         }
-        NetworkScorerAppData newScorer = NetworkScorerAppManager.getScorer(this, mNewPackageName);
+        NetworkScorerAppManager networkScorerAppManager = new NetworkScorerAppManager(this);
+        NetworkScorerAppData newScorer = networkScorerAppManager.getScorer(mNewPackageName);
         if (newScorer == null) {
             Log.e(TAG, "New package " + mNewPackageName + " is not a valid scorer.");
             return false;
         }
 
-        NetworkScorerAppData oldScorer = NetworkScorerAppManager.getActiveScorer(this);
+        NetworkScorerAppData oldScorer = networkScorerAppManager.getActiveScorer();
         if (oldScorer != null && TextUtils.equals(oldScorer.mPackageName, mNewPackageName)) {
             Log.i(TAG, "New package " + mNewPackageName + " is already the active scorer.");
             // Set RESULT_OK to indicate to the caller that the "switch" was successful.
