@@ -26,7 +26,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.users.UserDialogs;
 
-class RemoveUserFragment extends InstrumentedDialogFragment {
+public class RemoveUserFragment extends InstrumentedDialogFragment {
     private static final String ARG_USER_ID = "userId";
 
     static RemoveUserFragment newInstance(int userId) {
