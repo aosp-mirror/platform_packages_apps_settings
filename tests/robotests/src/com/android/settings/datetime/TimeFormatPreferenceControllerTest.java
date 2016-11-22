@@ -18,12 +18,15 @@ package com.android.settings.datetime;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +38,7 @@ import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -45,6 +49,7 @@ public class TimeFormatPreferenceControllerTest {
     @Mock
     private UpdateTimeAndDateCallback mCallback;
 
+    private ShadowApplication mApplication;
     private Context mContext;
     private SwitchPreference mPreference;
     private TimeFormatPreferenceController mController;
@@ -52,7 +57,8 @@ public class TimeFormatPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = ShadowApplication.getInstance().getApplicationContext();
+        mApplication = ShadowApplication.getInstance();
+        mContext = mApplication.getApplicationContext();
     }
 
     @Test
@@ -93,5 +99,43 @@ public class TimeFormatPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void updatePreference_12HourSet_shouldSendIntent() {
+        mController = new TimeFormatPreferenceController(mContext, mCallback, false);
+        mPreference = new SwitchPreference(mContext);
+        mPreference.setKey(mController.getPreferenceKey());
+        mPreference.setChecked(false);
+
+        boolean result = mController.handlePreferenceTreeClick(mPreference);
+
+        assertThat(result).isTrue();
+
+        List<Intent> intentsFired = mApplication.getBroadcastIntents();
+        assertThat(intentsFired.size()).isEqualTo(1);
+        Intent intentFired = intentsFired.get(0);
+        assertThat(intentFired.getAction()).isEqualTo(Intent.ACTION_TIME_CHANGED);
+        assertThat(intentFired.getIntExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT, -1))
+                .isEqualTo(Intent.EXTRA_TIME_PREF_VALUE_USE_12_HOUR);
+    }
+
+    @Test
+    public void updatePreference_24HourSet_shouldSendIntent() {
+        mController = new TimeFormatPreferenceController(mContext, mCallback, false);
+        mPreference = new SwitchPreference(mContext);
+        mPreference.setKey(mController.getPreferenceKey());
+        mPreference.setChecked(true);
+
+        boolean result = mController.handlePreferenceTreeClick(mPreference);
+
+        assertThat(result).isTrue();
+
+        List<Intent> intentsFired = mApplication.getBroadcastIntents();
+        assertThat(intentsFired.size()).isEqualTo(1);
+        Intent intentFired = intentsFired.get(0);
+        assertThat(intentFired.getAction()).isEqualTo(Intent.ACTION_TIME_CHANGED);
+        assertThat(intentFired.getIntExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT, -1))
+                .isEqualTo(Intent.EXTRA_TIME_PREF_VALUE_USE_24_HOUR);
     }
 }
