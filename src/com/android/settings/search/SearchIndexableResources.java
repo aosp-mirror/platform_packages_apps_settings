@@ -17,6 +17,9 @@
 package com.android.settings.search;
 
 import android.provider.SearchIndexableResource;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.VisibleForTesting;
+import android.support.annotation.XmlRes;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
@@ -64,292 +67,71 @@ import java.util.HashMap;
 
 public final class SearchIndexableResources {
 
-    public static int NO_DATA_RES_ID = 0;
+    @XmlRes
+    public static final int NO_DATA_RES_ID = 0;
 
-    private static HashMap<String, SearchIndexableResource> sResMap =
-            new HashMap<String, SearchIndexableResource>();
+    private static final HashMap<String, SearchIndexableResource> sResMap = new HashMap<>();
+
+    @VisibleForTesting
+    static void addIndex(Class<?> indexClass, @XmlRes int xmlResId,
+            @DrawableRes int iconResId) {
+        String className = indexClass.getName();
+        int rank = Ranking.getRankForClassName(className);
+        sResMap.put(className, new SearchIndexableResource(rank, xmlResId, className, iconResId));
+    }
 
     static {
-        sResMap.put(WifiSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(WifiSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        WifiSettings.class.getName(),
-                        R.drawable.ic_settings_wireless));
-
-        sResMap.put(AdvancedWifiSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(AdvancedWifiSettings.class.getName()),
-                        R.xml.wifi_advanced_settings,
-                        AdvancedWifiSettings.class.getName(),
-                        R.drawable.ic_settings_wireless));
-
-        sResMap.put(SavedAccessPointsWifiSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(SavedAccessPointsWifiSettings.class.getName()),
-                        R.xml.wifi_display_saved_access_points,
-                        SavedAccessPointsWifiSettings.class.getName(),
-                        R.drawable.ic_settings_wireless));
-
-        sResMap.put(BluetoothSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(BluetoothSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        BluetoothSettings.class.getName(),
-                        R.drawable.ic_settings_bluetooth));
-
-        sResMap.put(SimSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(SimSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        SimSettings.class.getName(),
-                        R.drawable.ic_sim_sd));
-
-        sResMap.put(DataUsageSummary.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(DataUsageSummary.class.getName()),
-                        NO_DATA_RES_ID,
-                        DataUsageSummary.class.getName(),
-                        R.drawable.ic_settings_data_usage));
-
-        sResMap.put(DataUsageMeteredSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(DataUsageMeteredSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        DataUsageMeteredSettings.class.getName(),
-                        R.drawable.ic_settings_data_usage));
-
-        sResMap.put(WirelessSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(WirelessSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        WirelessSettings.class.getName(),
-                        R.drawable.ic_settings_more));
-
-        sResMap.put(ScreenZoomSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(ScreenZoomSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        ScreenZoomSettings.class.getName(),
-                        R.drawable.ic_settings_display));
-
-        sResMap.put(DisplaySettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(DisplaySettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        DisplaySettings.class.getName(),
-                        R.drawable.ic_settings_display));
-
-        sResMap.put(WallpaperTypeSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(WallpaperTypeSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        WallpaperTypeSettings.class.getName(),
-                        R.drawable.ic_settings_display));
-
-        sResMap.put(ConfigureNotificationSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(ConfigureNotificationSettings.class.getName()),
-                        R.xml.configure_notification_settings,
-                        ConfigureNotificationSettings.class.getName(),
-                        R.drawable.ic_settings_notifications));
-
-        sResMap.put(SoundSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(SoundSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        SoundSettings.class.getName(),
-                        R.drawable.ic_settings_sound));
-
-        sResMap.put(OtherSoundSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(OtherSoundSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        OtherSoundSettings.class.getName(),
-                        R.drawable.ic_settings_sound));
-
-        sResMap.put(ZenModeSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(ZenModeSettings.class.getName()),
-                        R.xml.zen_mode_settings,
-                        ZenModeSettings.class.getName(),
-                        R.drawable.ic_settings_notifications));
-
-        sResMap.put(ZenModePrioritySettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(ZenModePrioritySettings.class.getName()),
-                        R.xml.zen_mode_priority_settings,
-                        ZenModePrioritySettings.class.getName(),
-                        R.drawable.ic_settings_notifications));
-
-        sResMap.put(StorageSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(StorageSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        StorageSettings.class.getName(),
-                        R.drawable.ic_settings_storage));
-
-        sResMap.put(PowerUsageSummary.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(PowerUsageSummary.class.getName()),
-                        R.xml.power_usage_summary,
-                        PowerUsageSummary.class.getName(),
-                        R.drawable.ic_settings_battery));
-
-        sResMap.put(BatterySaverSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(BatterySaverSettings.class.getName()),
-                        R.xml.battery_saver_settings,
-                        BatterySaverSettings.class.getName(),
-                        R.drawable.ic_settings_battery));
-
-        sResMap.put(AdvancedAppSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(AdvancedAppSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        AdvancedAppSettings.class.getName(),
-                        R.drawable.ic_settings_applications));
-
-        sResMap.put(SpecialAccessSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(SpecialAccessSettings.class.getName()),
-                        R.xml.special_access,
-                        SpecialAccessSettings.class.getName(),
-                        R.drawable.ic_settings_applications));
-
-        sResMap.put(UserSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(UserSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        UserSettings.class.getName(),
-                        R.drawable.ic_settings_multiuser));
-
-        sResMap.put(GestureSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(GestureSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        GestureSettings.class.getName(),
-                        R.drawable.ic_settings_gestures));
-
-        sResMap.put(LocationSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(LocationSettings.class.getName()),
-                        R.xml.location_settings,
-                        LocationSettings.class.getName(),
-                        R.drawable.ic_settings_location));
-
-        sResMap.put(ScanningSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(ScanningSettings.class.getName()),
-                        R.xml.location_scanning,
-                        ScanningSettings.class.getName(),
-                        R.drawable.ic_settings_location));
-
-        sResMap.put(SecuritySettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(SecuritySettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        SecuritySettings.class.getName(),
-                        R.drawable.ic_settings_security));
-
-        sResMap.put(ScreenPinningSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(ScreenPinningSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        ScreenPinningSettings.class.getName(),
-                        R.drawable.ic_settings_security));
-
-        sResMap.put(AccountSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(AccountSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        AccountSettings.class.getName(),
-                        R.drawable.ic_settings_accounts));
-
-        sResMap.put(InputMethodAndLanguageSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(InputMethodAndLanguageSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        InputMethodAndLanguageSettings.class.getName(),
-                        R.drawable.ic_settings_language));
-
-        sResMap.put(PrivacySettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(PrivacySettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        PrivacySettings.class.getName(),
-                        R.drawable.ic_settings_backup));
-
-        sResMap.put(DateTimeSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(DateTimeSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        DateTimeSettings.class.getName(),
-                        R.drawable.ic_settings_date_time));
-
-        sResMap.put(AccessibilitySettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(AccessibilitySettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        AccessibilitySettings.class.getName(),
-                        R.drawable.ic_settings_accessibility));
-
-        sResMap.put(PrintSettingsFragment.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(PrintSettingsFragment.class.getName()),
-                        NO_DATA_RES_ID,
-                        PrintSettingsFragment.class.getName(),
-                        R.drawable.ic_settings_print));
-
-        sResMap.put(DevelopmentSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(DevelopmentSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        DevelopmentSettings.class.getName(),
-                        R.drawable.ic_settings_development));
-
-        sResMap.put(DeviceInfoSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(DeviceInfoSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        DeviceInfoSettings.class.getName(),
-                        R.drawable.ic_settings_about));
-
-        sResMap.put(LegalSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(LegalSettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        LegalSettings.class.getName(),
-                        R.drawable.ic_settings_about));
-
-        sResMap.put(ZenModeVisualInterruptionSettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(
-                                ZenModeVisualInterruptionSettings.class.getName()),
-                        R.xml.zen_mode_visual_interruptions_settings,
-                        ZenModeVisualInterruptionSettings.class.getName(),
-                        R.drawable.ic_settings_notifications));
-
-        sResMap.put(SystemDashboardFragment.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(SystemDashboardFragment.class.getName()),
-                        NO_DATA_RES_ID,
-                        SystemDashboardFragment.class.getName(),
-                        R.drawable.ic_settings_about));
-
-        sResMap.put(StorageDashboardFragment.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(StorageDashboardFragment.class.getName()),
-                        NO_DATA_RES_ID,
-                        StorageDashboardFragment.class.getName(),
-                        R.drawable.ic_settings_storage));
-
-        sResMap.put(EnterprisePrivacySettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(EnterprisePrivacySettings.class.getName()),
-                        NO_DATA_RES_ID,
-                        EnterprisePrivacySettings.class.getName(),
-                        R.drawable.ic_settings_about));
+        addIndex(WifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
+        addIndex(AdvancedWifiSettings.class,
+                 R.xml.wifi_advanced_settings, R.drawable.ic_settings_wireless);
+        addIndex(SavedAccessPointsWifiSettings.class,
+                 R.xml.wifi_display_saved_access_points, R.drawable.ic_settings_wireless);
+        addIndex(BluetoothSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_bluetooth);
+        addIndex(SimSettings.class, NO_DATA_RES_ID, R.drawable.ic_sim_sd);
+        addIndex(DataUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
+        addIndex(DataUsageMeteredSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
+        addIndex(WirelessSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_more);
+        addIndex(ScreenZoomSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
+        addIndex(DisplaySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
+        addIndex(WallpaperTypeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
+        addIndex(ConfigureNotificationSettings.class,
+                 R.xml.configure_notification_settings, R.drawable.ic_settings_notifications);
+        addIndex(SoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
+        addIndex(OtherSoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
+        addIndex(ZenModeSettings.class,
+                 R.xml.zen_mode_settings, R.drawable.ic_settings_notifications);
+        addIndex(ZenModePrioritySettings.class,
+                 R.xml.zen_mode_priority_settings, R.drawable.ic_settings_notifications);
+        addIndex(StorageSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
+        addIndex(PowerUsageSummary.class,
+                 R.xml.power_usage_summary, R.drawable.ic_settings_battery);
+        addIndex(BatterySaverSettings.class,
+                 R.xml.battery_saver_settings, R.drawable.ic_settings_battery);
+        addIndex(AdvancedAppSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
+        addIndex(SpecialAccessSettings.class,
+                 R.xml.special_access, R.drawable.ic_settings_applications);
+        addIndex(UserSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_multiuser);
+        addIndex(GestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
+        addIndex(LocationSettings.class, R.xml.location_settings, R.drawable.ic_settings_location);
+        addIndex(ScanningSettings.class, R.xml.location_scanning, R.drawable.ic_settings_location);
+        addIndex(SecuritySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
+        addIndex(ScreenPinningSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
+        addIndex(AccountSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accounts);
+        addIndex(InputMethodAndLanguageSettings.class,
+                 NO_DATA_RES_ID, R.drawable.ic_settings_language);
+        addIndex(PrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_backup);
+        addIndex(DateTimeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_date_time);
+        addIndex(AccessibilitySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accessibility);
+        addIndex(PrintSettingsFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_print);
+        addIndex(DevelopmentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_development);
+        addIndex(DeviceInfoSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
+        addIndex(LegalSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
+        addIndex(ZenModeVisualInterruptionSettings.class,
+                 R.xml.zen_mode_visual_interruptions_settings,
+                 R.drawable.ic_settings_notifications);
+        addIndex(SystemDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
+        addIndex(StorageDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
+        addIndex(EnterprisePrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
     }
 
     private SearchIndexableResources() {
