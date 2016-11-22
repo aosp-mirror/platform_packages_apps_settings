@@ -20,11 +20,12 @@ import android.content.Context;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
-import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -86,6 +89,7 @@ public class ProgressiveDisclosureTest {
     public void shouldCollapse_morePreferenceThanLimit() {
         when(mFakeFeatureFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
         when(mScreen.getPreferenceCount()).thenReturn(5);
+        mMixin.setTileLimit(3);
 
         assertThat(mMixin.shouldCollapse(mScreen)).isTrue();
     }
