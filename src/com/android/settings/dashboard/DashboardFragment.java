@@ -231,6 +231,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     protected abstract List<PreferenceController> getPreferenceControllers(Context context);
 
     /**
+     * Returns true if this tile should be displayed
+     */
+    protected boolean displayTile(Tile tile) {
+        return true;
+    }
+
+    /**
      * Displays resource based tiles.
      */
     private void displayResourceTiles() {
@@ -317,6 +324,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (TextUtils.isEmpty(key)) {
                 Log.d(TAG, "tile does not contain a key, skipping " + tile);
+                continue;
+            }
+            if (!displayTile(tile)) {
                 continue;
             }
             if (mDashboardTilePrefKeys.contains(key)) {

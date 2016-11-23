@@ -21,6 +21,7 @@ import android.accounts.AuthenticatorDescription;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
+import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -28,6 +29,7 @@ import android.support.v14.preference.PreferenceFragment;
 import android.util.SparseArray;
 
 import com.android.settings.AccessiblePreferenceCategory;
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchIndexableRaw;
@@ -263,6 +265,39 @@ public class AccountPreferenceControllerTest {
         mController.updateRawDataToIndex(data);
 
         assertThat(data.size()).isEqualTo(2);
+    }
+
+    @Test
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    public void onResume_twoAccountsOfSameType_shouldAddThreePreferences() {
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(1, "user 1", 0));
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
+        Account[] accounts = {new Account("Account1", "com.acct1")};
+        when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(accounts);
+
+        Account[] accountType1 = new Account[2];
+        accountType1[0] = new Account("Account11", "com.acct1");
+        accountType1[1] = new Account("Account12", "com.acct1");
+        when(mAccountManager.getAccountsByTypeAsUser(eq("com.acct1"), any(UserHandle.class)))
+            .thenReturn(accountType1);
+
+        AuthenticatorDescription[] authDescs = {
+            new AuthenticatorDescription("com.acct1", "com.android.settings",
+                R.string.account_settings_title, 0, 0, 0, false)
+        };
+        when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(authDescs);
+
+        AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
+        when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
+            preferenceGroup);
+
+        mController.onResume();
+
+        // should add 2 individual account and the Add account preference
+        verify(preferenceGroup, times(3)).addPreference(any(Preference.class));
     }
 
 }

@@ -31,16 +31,19 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class UserAndAccountDashboardFragmentTest {
+public class AccountDetailDashboardFragmentTest {
 
     private static final String METADATA_CATEGORY = "com.android.settings.category";
     private static final String METADATA_ACCOUNT_TYPE = "com.android.settings.ia.account";
 
-    private UserAndAccountDashboardFragment mFragment;
+    private AccountDetailDashboardFragment mFragment;
 
     @Before
     public void setUp() {
-        mFragment = new UserAndAccountDashboardFragment();
+        mFragment = new AccountDetailDashboardFragment();
+        final Bundle args = new Bundle();
+        args.putString(METADATA_ACCOUNT_TYPE, "com.abc");
+        mFragment.mAccountType = "com.abc";
     }
 
     @Test
@@ -49,23 +52,35 @@ public class UserAndAccountDashboardFragmentTest {
     }
 
     @Test
-    public void refreshDashboardTiles_HasAccountType_shouldNotDisplay() {
+    public void refreshDashboardTiles_HasAccountType_shouldDisplay() {
         final Tile tile = new Tile();
         final Bundle metaData = new Bundle();
         metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
         metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
         tile.metaData = metaData;
 
-        assertThat(mFragment.displayTile(tile)).isFalse();
+        assertThat(mFragment.displayTile(tile)).isTrue();
     }
 
     @Test
-    public void refreshDashboardTiles_NoAccountType_shouldDisplay() {
+    public void refreshDashboardTiles_NoAccountType_shouldNotDisplay() {
         final Tile tile = new Tile();
         final Bundle metaData = new Bundle();
         metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
         tile.metaData = metaData;
 
-        assertThat(mFragment.displayTile(tile)).isTrue();
+        assertThat(mFragment.displayTile(tile)).isFalse();
     }
+
+    @Test
+    public void refreshDashboardTiles_OtherAccountType_shouldNotDisplay() {
+        final Tile tile = new Tile();
+        final Bundle metaData = new Bundle();
+        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
+        metaData.putString(METADATA_ACCOUNT_TYPE, "com.other");
+        tile.metaData = metaData;
+
+        assertThat(mFragment.displayTile(tile)).isFalse();
+    }
+
 }

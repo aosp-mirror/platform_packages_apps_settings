@@ -373,18 +373,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
             if (mAccountType != null && !account.type.equals(mAccountType)) continue;
             final ArrayList<String> auths = getAuthoritiesForAccountType(account.type);
 
-            boolean showAccount = true;
-            if (mAuthorities != null && auths != null) {
-                showAccount = false;
-                for (String requestedAuthority : mAuthorities) {
-                    if (auths.contains(requestedAuthority)) {
-                        showAccount = true;
-                        break;
-                    }
-                }
-            }
-
-            if (showAccount) {
+            if (AccountRestrictionHelper.showAccount(mAuthorities, auths)) {
                 final Drawable icon = getDrawableForType(account.type);
                 final AccountPreference preference =
                         new AccountPreference(getPrefContext(), account, icon, auths, false);

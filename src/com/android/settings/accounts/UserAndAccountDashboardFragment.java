@@ -17,13 +17,18 @@ package com.android.settings.accounts;
 
 import android.content.Context;
 
+import android.os.Bundle;
+import android.support.v7.preference.Preference;
+import android.util.ArraySet;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.drawer.CategoryKey;
 
+import com.android.settingslib.drawer.Tile;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static android.provider.Settings.EXTRA_AUTHORITIES;
@@ -31,6 +36,8 @@ import static android.provider.Settings.EXTRA_AUTHORITIES;
 public class UserAndAccountDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "UserAndAccountDashboard";
+    private static final String METADATA_IA_ACCOUNT = "com.android.settings.ia.account";
+    private HashMap<String, ArraySet<Preference>> mAccountTiles = new HashMap<>();
 
     @Override
     public int getMetricsCategory() {
@@ -69,6 +76,15 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
         getLifecycle().addObserver(accountPrefController);
         controllers.add(accountPrefController);
         return controllers;
+    }
+
+    @Override
+    protected boolean displayTile(Tile tile) {
+        final Bundle metadata = tile.metaData;
+        if (metadata != null) {
+            return metadata.getString(METADATA_IA_ACCOUNT) == null;
+        }
+        return true;
     }
 
 }
