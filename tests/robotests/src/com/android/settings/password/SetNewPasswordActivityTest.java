@@ -18,6 +18,7 @@ package com.android.settings.password;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.os.Bundle;
 import android.provider.Settings;
 
 import com.android.settings.ChooseLockGeneric;
@@ -59,7 +60,9 @@ public class SetNewPasswordActivityTest {
     public void testChooseLockGeneric() {
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
-        SetNewPasswordActivity activity = Robolectric.setupActivity(SetNewPasswordActivity.class);
+        SetNewPasswordActivity activity =
+                Robolectric.buildActivity(SetNewPasswordActivity.class).get();
+        activity.launchChooseLock(new Bundle());
         ShadowActivity shadowActivity = shadowOf(activity);
         Intent intent = shadowActivity.getNextStartedActivityForResult().intent;
 
@@ -71,7 +74,9 @@ public class SetNewPasswordActivityTest {
     public void testSetupChooseLockGeneric() {
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0);
-        SetNewPasswordActivity activity = Robolectric.setupActivity(SetNewPasswordActivity.class);
+        SetNewPasswordActivity activity =
+                Robolectric.buildActivity(SetNewPasswordActivity.class).get();
+        activity.launchChooseLock(new Bundle());
         ShadowActivity shadowActivity = shadowOf(activity);
         Intent intent = shadowActivity.getNextStartedActivityForResult().intent;
 

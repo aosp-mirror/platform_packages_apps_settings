@@ -20,10 +20,11 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +39,7 @@ import static com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment.M
 import static com.android.settings.ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE;
 import static com.android.settings.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
 import static com.android.settings.ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE;
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
@@ -45,17 +47,18 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+
 /**
  * Tests for {@link SetNewPasswordController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class SetNewPasswordControllerTest {
-    private static final int CURRENT_UID = 101;
+    private static final int CURRENT_USER_ID = 101;
     private static final long FINGERPRINT_CHALLENGE = -9876512313131L;
 
     @Mock PackageManager mPackageManager;
-    @Mock FingerprintManager mFingerprintManager;
+    @Mock IFingerprintManager mFingerprintManager;
     @Mock DevicePolicyManager mDevicePolicyManager;
 
     @Mock private SetNewPasswordController.Ui mUi;
@@ -64,9 +67,8 @@ public final class SetNewPasswordControllerTest {
     @Before
     public void setUp()  {
         MockitoAnnotations.initMocks(this);
-
         mSetNewPasswordController = new SetNewPasswordController(
-                CURRENT_UID, mPackageManager, mFingerprintManager, mDevicePolicyManager, mUi);
+                CURRENT_USER_ID, mPackageManager, mFingerprintManager, mDevicePolicyManager, mUi);
 
         when(mFingerprintManager.preEnroll()).thenReturn(FINGERPRINT_CHALLENGE);
         when(mPackageManager.hasSystemFeature(eq(FEATURE_FINGERPRINT))).thenReturn(true);
@@ -77,7 +79,7 @@ public final class SetNewPasswordControllerTest {
         // GIVEN the device supports fingerprint.
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // GIVEN there are no enrolled fingerprints.
-        when(mFingerprintManager.hasEnrolledFingerprints()).thenReturn(false);
+        when(mFingerprintManager.hasEnrolledFingerprints(CURRENT_USER_ID)).thenReturn(false);
         // GIVEN DPC does not disallow fingerprint for keyguard usage.
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(ComponentName.class)))
                 .thenReturn(0);
@@ -101,7 +103,9 @@ public final class SetNewPasswordControllerTest {
         mSetNewPasswordController.dispatchSetNewPasswordIntent();
 
         // THEN the choose lock activity is launched without fingerprint extras.
-        verify(mUi).launchChooseLock(null);
+        ArgumentCaptor<Bundle> bundleArgumentCaptor = ArgumentCaptor.forClass(Bundle.class);
+        verify(mUi).launchChooseLock(bundleArgumentCaptor.capture());
+        assertBundleContainsUserIdOnly(bundleArgumentCaptor.getValue());
     }
 
     @Test
@@ -109,7 +113,7 @@ public final class SetNewPasswordControllerTest {
         // GIVEN the device does NOT support fingerprint.
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         // GIVEN there are no enrolled fingerprints.
-        when(mFingerprintManager.hasEnrolledFingerprints()).thenReturn(false);
+        when(mFingerprintManager.hasEnrolledFingerprints(CURRENT_USER_ID)).thenReturn(false);
         // GIVEN DPC does not disallow fingerprint for keyguard usage.
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(ComponentName.class)))
                 .thenReturn(0);
@@ -117,8 +121,10 @@ public final class SetNewPasswordControllerTest {
         // WHEN the controller dispatches a set new password intent.
         mSetNewPasswordController.dispatchSetNewPasswordIntent();
 
-        // THEN the choose lock activity is launched without fingerprint extras.
-        verify(mUi).launchChooseLock(null);
+        // THEN the choose lock activity is launched without a bundle contains user id only.
+        ArgumentCaptor<Bundle> bundleArgumentCaptor = ArgumentCaptor.forClass(Bundle.class);
+        verify(mUi).launchChooseLock(bundleArgumentCaptor.capture());
+        assertBundleContainsUserIdOnly(bundleArgumentCaptor.getValue());
     }
 
     @Test
@@ -126,7 +132,7 @@ public final class SetNewPasswordControllerTest {
         // GIVEN the device supports fingerprint.
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // GIVEN there are no enrolled fingerprints.
-        when(mFingerprintManager.hasEnrolledFingerprints()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(CURRENT_USER_ID)).thenReturn(true);
         // GIVEN DPC does not disallow fingerprint for keyguard usage.
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(ComponentName.class)))
                 .thenReturn(0);
@@ -134,8 +140,10 @@ public final class SetNewPasswordControllerTest {
         // WHEN the controller dispatches a set new password intent.
         mSetNewPasswordController.dispatchSetNewPasswordIntent();
 
-        // THEN the choose lock activity is launched without fingerprint extras.
-        verify(mUi).launchChooseLock(null);
+        // THEN the choose lock activity is launched without a bundle contains user id only.
+        ArgumentCaptor<Bundle> bundleArgumentCaptor = ArgumentCaptor.forClass(Bundle.class);
+        verify(mUi).launchChooseLock(bundleArgumentCaptor.capture());
+        assertBundleContainsUserIdOnly(bundleArgumentCaptor.getValue());
     }
 
     @Test
@@ -143,7 +151,7 @@ public final class SetNewPasswordControllerTest {
         // GIVEN the device supports fingerprint.
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // GIVEN there is an enrolled fingerprint.
-        when(mFingerprintManager.hasEnrolledFingerprints()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(CURRENT_USER_ID)).thenReturn(true);
         // GIVEN DPC disallows fingerprint for keyguard usage.
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(ComponentName.class)))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
@@ -151,8 +159,10 @@ public final class SetNewPasswordControllerTest {
         // WHEN the controller dispatches a set new password intent.
         mSetNewPasswordController.dispatchSetNewPasswordIntent();
 
-        // THEN the choose lock activity is launched without fingerprint extras.
-        verify(mUi).launchChooseLock(null);
+        // THEN the choose lock activity is launched without a bundle contains user id only.
+        ArgumentCaptor<Bundle> bundleArgumentCaptor = ArgumentCaptor.forClass(Bundle.class);
+        verify(mUi).launchChooseLock(bundleArgumentCaptor.capture());
+        assertBundleContainsUserIdOnly(bundleArgumentCaptor.getValue());
     }
 
     private void compareFingerprintExtras(Bundle actualBundle) {
@@ -175,7 +185,12 @@ public final class SetNewPasswordControllerTest {
                 actualBundle.getBoolean(EXTRA_KEY_FOR_FINGERPRINT));
         assertEquals(
                 "User id must be equaled to the input one.",
-                CURRENT_UID,
+                CURRENT_USER_ID,
                 actualBundle.getInt(Intent.EXTRA_USER_ID));
+    }
+
+    private void assertBundleContainsUserIdOnly(Bundle actualBundle) {
+        assertThat(actualBundle.size()).isEqualTo(1);
+        assertThat(actualBundle.getInt(Intent.EXTRA_USER_ID)).isEqualTo(CURRENT_USER_ID);
     }
 }
