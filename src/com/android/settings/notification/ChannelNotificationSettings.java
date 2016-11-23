@@ -156,7 +156,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean vibrate = (Boolean) newValue;
-                mChannel.setVibration(vibrate);
+                mChannel.enableVibration(vibrate);
                 mChannel.lockFields(NotificationChannel.USER_LOCKED_VIBRATION);
                 mBackend.updateChannel(mPkg, mUid, mChannel);
                 return true;
