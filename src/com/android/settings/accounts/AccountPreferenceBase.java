@@ -33,10 +33,10 @@ import android.os.UserManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.utils.LocalClassLoaderContextThemeWrapper;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import java.util.ArrayList;
@@ -156,7 +156,8 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
                             desc.packageName, 0, mUserHandle);
                     final Theme baseTheme = getResources().newTheme();
                     baseTheme.applyStyle(com.android.settings.R.style.Theme_SettingsBase, true);
-                    final Context themedCtx = new ContextThemeWrapper(targetCtx, 0);
+                    final Context themedCtx =
+                            new LocalClassLoaderContextThemeWrapper(getClass(), targetCtx, 0);
                     themedCtx.getTheme().setTo(baseTheme);
                     prefs = getPreferenceManager().inflateFromResource(themedCtx,
                             desc.accountPreferencesId, parent);
