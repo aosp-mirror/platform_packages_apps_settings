@@ -20,6 +20,8 @@ import android.content.pm.PackageManager;
 
 import com.android.settings.applications.PackageManagerWrapper;
 
+import java.util.Date;
+
 public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFeatureProvider {
 
     private final DevicePolicyManagerWrapper mDpm;
@@ -37,5 +39,21 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
             return false;
         }
         return mDpm.getDeviceOwnerComponentOnAnyUser() != null;
+    }
+
+    @Override
+    public Date getLastSecurityLogRetrievalTime() {
+        final long timestamp = mDpm.getLastSecurityLogRetrievalTime();
+        return timestamp < 0 ? null : new Date(timestamp);
+    }
+
+    public Date getLastBugReportRequestTime() {
+        final long timestamp = mDpm.getLastBugReportRequestTime();
+        return timestamp < 0 ? null : new Date(timestamp);
+    }
+
+    public Date getLastNetworkLogRetrievalTime() {
+        final long timestamp = mDpm.getLastNetworkLogRetrievalTime();
+        return timestamp < 0 ? null : new Date(timestamp);
     }
 }

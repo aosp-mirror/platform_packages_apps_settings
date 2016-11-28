@@ -23,12 +23,15 @@ import android.content.pm.PackageManager;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+
+import java.util.Date;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
@@ -41,6 +44,7 @@ import static org.mockito.Mockito.when;
 public final class EnterprisePrivacyFeatureProviderImplTest {
 
     private final ComponentName DEVICE_OWNER = new ComponentName("dummy", "component");
+    private final Date TIMESTAMP = new Date(2011, 11, 11);
 
     private @Mock DevicePolicyManagerWrapper mDevicePolicyManager;
     private @Mock PackageManagerWrapper mPackageManager;
@@ -64,5 +68,33 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_OWNER);
         assertThat(mProvider.hasDeviceOwner()).isTrue();
+    }
+
+    @Test
+    public void testGetLastSecurityLogRetrievalTime() {
+        when(mDevicePolicyManager.getLastSecurityLogRetrievalTime()).thenReturn(-1L);
+        assertThat(mProvider.getLastSecurityLogRetrievalTime()).isNull();
+
+        when(mDevicePolicyManager.getLastSecurityLogRetrievalTime())
+                .thenReturn(TIMESTAMP.getTime());
+        assertThat(mProvider.getLastSecurityLogRetrievalTime()).isEqualTo(TIMESTAMP);
+    }
+
+    @Test
+    public void testGetLastBugReportRequestTime() {
+        when(mDevicePolicyManager.getLastBugReportRequestTime()).thenReturn(-1L);
+        assertThat(mProvider.getLastBugReportRequestTime()).isNull();
+
+        when(mDevicePolicyManager.getLastBugReportRequestTime()).thenReturn(TIMESTAMP.getTime());
+        assertThat(mProvider.getLastBugReportRequestTime()).isEqualTo(TIMESTAMP);
+    }
+
+    @Test
+    public void testGetLastNetworkLogRetrievalTime() {
+        when(mDevicePolicyManager.getLastNetworkLogRetrievalTime()).thenReturn(-1L);
+        assertThat(mProvider.getLastNetworkLogRetrievalTime()).isNull();
+
+        when(mDevicePolicyManager.getLastNetworkLogRetrievalTime()).thenReturn(TIMESTAMP.getTime());
+        assertThat(mProvider.getLastNetworkLogRetrievalTime()).isEqualTo(TIMESTAMP);
     }
 }

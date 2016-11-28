@@ -58,6 +58,9 @@ public class EnterprisePrivacySettings extends DashboardFragment {
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List controllers = new ArrayList<PreferenceController>();
         controllers.add(new InstalledPackagesPreferenceController(context));
+        controllers.add(new NetworkLogsPreferenceController(context));
+        controllers.add(new BugReportsPreferenceController(context));
+        controllers.add(new SecurityLogsPreferenceController(context));
         return controllers;
     }
 

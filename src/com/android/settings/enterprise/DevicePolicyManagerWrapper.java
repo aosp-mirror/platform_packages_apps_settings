@@ -31,4 +31,25 @@ public interface DevicePolicyManagerWrapper {
      * @see android.app.admin.DevicePolicyManager#getDeviceOwnerComponentOnAnyUser
      */
     ComponentName getDeviceOwnerComponentOnAnyUser();
+
+    /**
+     * Calls {@code DevicePolicyManager.getLastSecurityLogRetrievalTime()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getLastSecurityLogRetrievalTime
+     */
+    public long getLastSecurityLogRetrievalTime();
+
+    /**
+     * Calls {@code DevicePolicyManager.getLastBugReportRequestTime()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getLastBugReportRequestTime
+     */
+    public long getLastBugReportRequestTime();
+
+    /**
+     * Calls {@code DevicePolicyManager.getLastNetworkLogRetrievalTime()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getLastNetworkLogRetrievalTime
+     */
+    public long getLastNetworkLogRetrievalTime();
 }

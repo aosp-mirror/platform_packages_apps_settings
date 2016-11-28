@@ -16,6 +16,30 @@
 
 package com.android.settings.enterprise;
 
+import java.util.Date;
+
 public interface EnterprisePrivacyFeatureProvider {
+
+    /**
+     * Returns whether the device is managed by a Device Owner app.
+     */
     boolean hasDeviceOwner();
+
+    /**
+     * Returns the time at which the Device Owner last retrieved security logs, or {@code null} if
+     * logs were never retrieved by the Device Owner on this device.
+     */
+    Date getLastSecurityLogRetrievalTime();
+
+    /**
+     * Returns the time at which the Device Owner last requested a bug report, or {@code null} if no
+     * bug report was ever requested by the Device Owner on this device.
+     */
+    Date getLastBugReportRequestTime();
+
+    /**
+     * Returns the time at which the Device Owner last retrieved network logs, or {@code null} if
+     * logs were never retrieved by the Device Owner on this device.
+     */
+    Date getLastNetworkLogRetrievalTime();
 }

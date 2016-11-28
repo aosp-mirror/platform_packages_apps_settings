@@ -7983,20 +7983,28 @@
     <!-- Enterprise Privacy settings activity header, summarizing the powers that the admin has. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_header">To provide access to your work data, your organization may change settings and install software on your device, which could cause some of your personal content to be visible to your admin. Contact your organization\'s admin for more details.</string>
     <!-- Title for the 'What types of information can your organization see?' preference category. [CHAR LIMIT=60] -->
-    <string name="exposure_category">What types of information can your organization see?</string>
+    <string name="enterprise_privacy_exposure_category">What types of information can your organization see?</string>
     <!-- Title for the 'What changes affect what your organization can see?' preference category. [CHAR LIMIT=60] -->
-    <string name="exposure_changes_category">What changes affect what your organization can see?</string>
+    <string name="enterprise_privacy_exposure_changes_category">What changes affect what your organization can see?</string>
     <!-- Title for the 'What actions may impact your access to this device?' preference category. [CHAR LIMIT=60] -->
-    <string name="device_access_category">What actions may impact your access to this device?</string>
+    <string name="enterprise_privacy_device_access_category">What actions may impact your access to this device?</string>
     <!-- Label explaining that the admin can see data associated with his/her work account. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_data">Data associated with your work account, such as email and calendar</string>
+    <string name="enterprise_privacy_enterprise_data">Data associated with your work account, such as email and calendar</string>
     <!-- Label explaining that the admin can see all apps installed on the device. [CHAR LIMIT=NONE] -->
-    <string name="number_installed_packages_default">List of all apps on your device</string>
+    <string name="enterprise_privacy_number_installed_packages_default">List of all apps on your device</string>
     <!-- Label explaining that the admin can see all apps installed on the device. [CHAR LIMIT=NONE] -->
-    <plurals name="number_installed_packages">
+    <plurals name="enterprise_privacy_number_installed_packages">
         <item quantity="one">List of all <xliff:g id="count">%d</xliff:g> app on your device</item>
         <item quantity="other">List of all <xliff:g id="count">%d</xliff:g> apps on your device</item>
     </plurals>
     <!-- Label explaining that the admin can see app usage statistics. [CHAR LIMIT=NONE] -->
-    <string name="usage_stats">Usage (time spent and amount of data used) of each app on your device</string>
+    <string name="enterprise_privacy_usage_stats">Usage (time spent and amount of data used) of each app on your device</string>
+    <!-- Label explaining that the admin can retrieve network logs on the device. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_network_logs">Traffic logs on your device</string>
+    <!-- Label explaining that the admin can request bug reports on the device. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_bug_reports">Your most recent bug report</string>
+    <!-- Label explaining that the admin can retrieve security on from the device. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_security_logs">Your most recent security log</string>
+    <!-- Label indicating that the date at which the admin last took a particular action was "never" (i.e. the admin never took the action so far). -->
+    <string name="enterprise_privacy_never">Never</string>
 </resources>

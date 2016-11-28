@@ -30,4 +30,19 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     public ComponentName getDeviceOwnerComponentOnAnyUser() {
         return mDpm.getDeviceOwnerComponentOnAnyUser();
     }
+
+    @Override
+    public long getLastSecurityLogRetrievalTime() {
+        return mDpm.getLastSecurityLogRetrievalTime();
+    }
+
+    @Override
+    public long getLastBugReportRequestTime() {
+        return mDpm.getLastBugReportRequestTime();
+    }
+
+    @Override
+    public long getLastNetworkLogRetrievalTime() {
+        return mDpm.getLastNetworkLogRetrievalTime();
+    }
 }

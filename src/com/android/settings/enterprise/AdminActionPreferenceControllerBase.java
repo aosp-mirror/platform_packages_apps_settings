@@ -14,35 +14,36 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.preference.Preference;
+import android.text.format.DateUtils;
 
 import com.android.settings.R;
-import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
-public class InstalledPackagesPreferenceController extends PreferenceController {
+import java.util.Date;
 
-    private static final String KEY_NUMBER_INSTALLED_PACKAGES = "number_installed_packages";
-    private final ApplicationFeatureProvider mFeatureProvider;
+public abstract class AdminActionPreferenceControllerBase extends PreferenceController {
 
-    public InstalledPackagesPreferenceController(Context context) {
+    private final Context mContext;
+    protected final EnterprisePrivacyFeatureProvider mFeatureProvider;
+
+    public AdminActionPreferenceControllerBase(Context context) {
         super(context);
+        mContext = context;
         mFeatureProvider = FeatureFactory.getFactory(context)
-                .getApplicationFeatureProvider(context);
+                .getEnterprisePrivacyFeatureProvider(context);
     }
+
+    protected abstract Date getAdminActionTimestamp();
 
     @Override
     public void updateState(Preference preference) {
-        mFeatureProvider.calculateNumberOfInstalledApps(
-                new ApplicationFeatureProvider.NumberOfInstalledAppsCallback() {
-                    @Override
-                    public void onNumberOfInstalledAppsResult(int num) {
-                        preference.setTitle(mContext.getResources().getQuantityString(
-                                R.plurals.enterprise_privacy_number_installed_packages, num, num));
-                    }
-                });
+        final Date timestamp = getAdminActionTimestamp();
+        preference.setSummary(timestamp == null ?
+                mContext.getString(R.string.enterprise_privacy_never) :
+                DateUtils.formatDateTime(mContext, timestamp.getTime(),
+                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE));
     }
 
     @Override
@@ -53,10 +54,5 @@ public class InstalledPackagesPreferenceController extends PreferenceController 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         return false;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_NUMBER_INSTALLED_PACKAGES;
     }
 }

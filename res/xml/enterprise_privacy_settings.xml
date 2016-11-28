@@ -24,28 +24,43 @@
             android:summary="@string/enterprise_privacy_header"
             android:selectable="false"/>
 
-    <PreferenceCategory android:title="@string/exposure_category">
+    <PreferenceCategory android:title="@string/enterprise_privacy_exposure_category">
         <com.android.settings.DividerPreference
                 android:key="enterprise_data"
                 android:layout_height="wrap_content"
-                android:title="@string/enterprise_data"
+                android:title="@string/enterprise_privacy_enterprise_data"
                 settings:allowDividerBelow="true"
                 settings:multiLine="true"/>
         <com.android.settings.DividerPreference
                 android:key="number_installed_packages"
-                android:title="@string/number_installed_packages_default"
+                android:title="@string/enterprise_privacy_number_installed_packages_default"
                 settings:allowDividerBelow="true"
                 settings:multiLine="true"/>
         <com.android.settings.DividerPreference
                 android:key="usage_stats"
-                android:title="@string/usage_stats"
+                android:title="@string/enterprise_privacy_usage_stats"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="network_logs"
+                android:title="@string/enterprise_privacy_network_logs"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="bug_reports"
+                android:title="@string/enterprise_privacy_bug_reports"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="security_logs"
+                android:title="@string/enterprise_privacy_security_logs"
                 settings:allowDividerBelow="true"
                 settings:multiLine="true"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/exposure_changes_category">
+    <PreferenceCategory android:title="@string/enterprise_privacy_exposure_changes_category">
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/device_access_category">
+    <PreferenceCategory android:title="@string/enterprise_privacy_device_access_category">
     </PreferenceCategory>
 </PreferenceScreen>

@@ -17,67 +17,61 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.text.format.DateUtils;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.robolectric.annotation.Config;
+
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.anyObject;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests for {@link InstalledPackagesPreferenceController}.
+ * Common base for testing subclasses of {@link AdminActionPreferenceControllerBase}.
  */
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class InstalledPackagesPreferenceControllerTest {
+public abstract class AdminActionPreferenceControllerTestBase {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-    private FakeFeatureFactory mFeatureFactory;
+    protected Context mContext;
+    protected FakeFeatureFactory mFeatureFactory;
 
-    private InstalledPackagesPreferenceController mController;
+    protected AdminActionPreferenceControllerBase mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new InstalledPackagesPreferenceController(mContext);
     }
+
+    protected abstract void setDate(Date date);
 
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        doAnswer(new Answer() {
-            public Object answer(InvocationOnMock invocation) {
-                ((ApplicationFeatureProvider.NumberOfInstalledAppsCallback)
-                        invocation.getArguments()[0]).onNumberOfInstalledAppsResult(20);
-                return null;
-            }}).when(mFeatureFactory.applicationFeatureProvider)
-                    .calculateNumberOfInstalledApps(anyObject());
-        when(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_installed_packages, 20, 20))
-                .thenReturn("20 packages");
+        when(mContext.getString(R.string.enterprise_privacy_never)).thenReturn("Never");
+        Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24, "24");
+
+        setDate(null);
         mController.updateState(preference);
-        assertThat(preference.getTitle()).isEqualTo("20 packages");
+        assertThat(preference.getSummary()).isEqualTo("Never");
+
+        final Date date = new GregorianCalendar(2011 /* year */, 10 /* month */, 9 /* dayOfMonth */,
+                8 /* hourOfDay */, 7 /* minute */, 6 /* second */).getTime();
+        setDate(date);
+        mController.updateState(preference);
+        assertThat(preference.getSummary()).isEqualTo(DateUtils.formatDateTime(
+                mContext, date.getTime(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE));
     }
 
     @Test
@@ -91,8 +85,10 @@ public final class InstalledPackagesPreferenceControllerTest {
                 .isFalse();
     }
 
+    public abstract String getPreferenceKey();
+
     @Test
     public void testGetPreferenceKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("number_installed_packages");
+        assertThat(mController.getPreferenceKey()).isEqualTo(getPreferenceKey());
     }
 }
