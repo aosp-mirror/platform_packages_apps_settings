@@ -16,20 +16,24 @@
 package com.android.settings.bluetooth;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.FragmentTestUtil;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -328,6 +332,14 @@ public class BluetoothPairingDialogTest {
         assertThat(hint.getVisibility()).isEqualTo(View.GONE);
         TextView message = (TextView) frag.getmDialog().findViewById(R.id.message_below_pin);
         assertThat(message.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void pairingStringIsFormattedCorrectly() {
+        final String device = "test_device";
+        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        assertThat(context.getString(R.string.bluetooth_pb_acceptance_dialog_text, device, device))
+                .contains(device);
     }
 
     private BluetoothPairingDialogFragment makeFragment() {
