@@ -344,7 +344,9 @@
     <string name="bluetooth_phonebook_request">"Phone book access request"</string>
 
     <!-- Bluetooth phone book permission Alert Activity text [CHAR LIMIT=none] -->
-    <string name="bluetooth_pb_acceptance_dialog_text">%1$s wants to access your contacts and call history. Give access to %2$s?</string>
+    <string name="bluetooth_pb_acceptance_dialog_text">
+        <xliff:g id="device_name">%1$s</xliff:g> wants to access your contacts and call history. Give access to <xliff:g id="device_name">%2$s</xliff:g>?
+    </string>
 
     <!-- Bluetooth phone book permission Alert Activity checkbox text [CHAR LIMIT=none] -->
     <string name="bluetooth_remember_choice">Don\u2019t ask again</string>
@@ -3032,7 +3034,7 @@
     <string name="mobile_unknown_sim_operator" translatable="true">Unknown SIM operator</string>
 
     <!-- There is no mobile provisiong website for the operator which is the firat parameter [CHAR_ LIMIT=50]-->
-    <string name="mobile_no_provisioning_url" translatable="true">%1$s has no known provisioning website</string>
+    <string name="mobile_no_provisioning_url"><xliff:g id="operator">%1$s</xliff:g> has no known provisioning website</string>
 
     <!-- Ask user to insert a SIM card [CHAR_ LIMIT=50]-->
     <string name="mobile_insert_sim_card" translatable="true">Please insert SIM card and restart</string>
@@ -4515,7 +4517,7 @@
     <string name="battery_saver_turn_on_automatically_never">Never</string>
 
     <!-- [CHAR_LIMIT=40] Battery saver: Value for automatic entry option: pct% battery -->
-    <string name="battery_saver_turn_on_automatically_pct">at %1$s battery</string>
+    <string name="battery_saver_turn_on_automatically_pct">at <xliff:g id="percent">%1$s</xliff:g>battery</string>
 
     <!-- Process Stats strings -->
     <skip />
