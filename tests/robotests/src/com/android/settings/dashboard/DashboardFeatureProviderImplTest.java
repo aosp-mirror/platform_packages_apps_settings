@@ -145,6 +145,20 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
+    public void bindPreference_withNullKeyTileKey_shouldUseTileKey() {
+        final Preference preference = new Preference(
+                ShadowApplication.getInstance().getApplicationContext());
+        final Tile tile = new Tile();
+        tile.key = "key";
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+        mImpl.bindPreferenceToTile(mActivity, preference, tile, null /* key */
+                , Preference.DEFAULT_ORDER);
+
+        assertThat(preference.getKey()).isEqualTo(tile.key);
+    }
+
+    @Test
     public void bindPreference_withBaseOrder_shouldOffsetPriority() {
         final int baseOrder = 100;
         final Preference preference = new Preference(

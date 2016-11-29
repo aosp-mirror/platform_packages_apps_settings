@@ -109,6 +109,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         if (tile == null || tile.intent == null) {
             return null;
         }
+        if (!TextUtils.isEmpty(tile.key)) {
+            return tile.key;
+        }
         final StringBuilder sb = new StringBuilder(DASHBOARD_TILE_PREF_KEY_PREFIX);
         final ComponentName component = tile.intent.getComponent();
         sb.append(component.getClassName());
