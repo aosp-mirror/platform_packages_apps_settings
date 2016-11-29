@@ -59,9 +59,11 @@ public class ConditionManager {
         mContext = context;
         mConditions = new ArrayList<>();
         if (loadConditionsNow) {
+            Log.d(TAG, "conditions loading synchronously");
             ConditionLoader loader = new ConditionLoader();
             loader.onPostExecute(loader.doInBackground());
         } else {
+            Log.d(TAG, "conditions loading asychronously");
             new ConditionLoader().execute();
         }
     }
@@ -229,6 +231,7 @@ public class ConditionManager {
     private class ConditionLoader extends AsyncTask<Void, Void, ArrayList<Condition>> {
         @Override
         protected ArrayList<Condition> doInBackground(Void... params) {
+            Log.d(TAG, "loading conditions from xml");
             ArrayList<Condition> conditions = new ArrayList<>();
             mXmlFile = new File(mContext.getFilesDir(), FILE_NAME);
             if (mXmlFile.exists()) {
@@ -240,6 +243,7 @@ public class ConditionManager {
 
         @Override
         protected void onPostExecute(ArrayList<Condition> conditions) {
+            Log.d(TAG, "conditions loaded from xml, refreshing conditions");
             mConditions.clear();
             mConditions.addAll(conditions);
             refreshAll();

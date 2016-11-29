@@ -177,9 +177,12 @@ public class DashboardSummary extends InstrumentedFragment
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         long startTime = System.currentTimeMillis();
         if (hasWindowFocus) {
+            Log.d(TAG, "Listening for condition changes");
             mConditionManager.addListener(this);
+            Log.d(TAG, "conditions refreshed");
             mConditionManager.refreshAll();
         } else {
+            Log.d(TAG, "Stopped listening for condition changes");
             mConditionManager.remListener(this);
         }
         if (DEBUG_TIMING) {
@@ -220,6 +223,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setHasFixedSize(true);
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mDashboard.setListener(this);
+        Log.d(TAG, "adapter created");
         mAdapter = new DashboardAdapter(getContext(), mSuggestionParser, mMetricsFeatureProvider,
                 bundle, mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);

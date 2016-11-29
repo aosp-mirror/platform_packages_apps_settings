@@ -25,6 +25,7 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -153,6 +154,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     public void setConditions(List<Condition> conditions) {
         final DashboardData prevData = mDashboardData;
+        Log.d(TAG, "adapter setConditions called");
         mDashboardData = new DashboardData.Builder(prevData)
                 .setConditions(conditions)
                 .build();
