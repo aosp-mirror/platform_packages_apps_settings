@@ -55,6 +55,7 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
 
     private final IConnectivityManager mService = IConnectivityManager.Stub.asInterface(
             ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
+    private Context mContext;
 
     private boolean mUnlocking = false;
 
@@ -79,6 +80,12 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
     }
 
     @Override
+    public void onAttach(final Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -86,7 +93,7 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
         if (!KeyStore.getInstance().isUnlocked()) {
             if (!mUnlocking) {
                 // Let us unlock KeyStore. See you later!
-                Credentials.getInstance().unlock(getActivity());
+                Credentials.getInstance().unlock(mContext);
             } else {
                 // We already tried, but it is still not working!
                 dismiss();
@@ -142,9 +149,9 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
             // Possibly throw up a dialog to explain lockdown VPN.
             final boolean shouldLockdown = dialog.isVpnAlwaysOn();
             final boolean shouldConnect = shouldLockdown || !dialog.isEditing();
-            final boolean wasAlwaysOn = VpnUtils.isAlwaysOnOrLegacyLockdownActive(getContext());
+            final boolean wasAlwaysOn = VpnUtils.isAlwaysOnOrLegacyLockdownActive(mContext);
             try {
-                final boolean replace = VpnUtils.isVpnActive(getContext());
+                final boolean replace = VpnUtils.isVpnActive(mContext);
                 if (shouldConnect && !isConnected(profile) &&
                         ConfirmLockdownFragment.shouldShow(replace, wasAlwaysOn, shouldLockdown)) {
                     final Bundle opts = new Bundle();
@@ -185,19 +192,19 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
         if (isVpnAlwaysOn) {
             // Show toast if vpn profile is not valid
             if (!profile.isValidLockdownProfile()) {
-                Toast.makeText(getContext(), R.string.vpn_lockdown_config_error,
+                Toast.makeText(mContext, R.string.vpn_lockdown_config_error,
                         Toast.LENGTH_LONG).show();
                 return;
             }
 
-            final ConnectivityManager conn = ConnectivityManager.from(getActivity());
+            final ConnectivityManager conn = ConnectivityManager.from(mContext);
             conn.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null,
                     /* lockdownEnabled */ false);
-            VpnUtils.setLockdownVpn(getContext(), profile.key);
+            VpnUtils.setLockdownVpn(mContext, profile.key);
         } else {
             // update only if lockdown vpn has been changed
             if (VpnUtils.isVpnLockdown(profile.key)) {
-                VpnUtils.clearLockdownVpn(getContext());
+                VpnUtils.clearLockdownVpn(mContext);
             }
         }
     }
@@ -219,11 +226,11 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
         // Now try to start the VPN - this is not necessary if the profile is set as lockdown,
         // because just saving the profile in this mode will start a connection.
         if (!VpnUtils.isVpnLockdown(profile.key)) {
-            VpnUtils.clearLockdownVpn(getContext());
+            VpnUtils.clearLockdownVpn(mContext);
             try {
                 mService.startLegacyVpn(profile);
             } catch (IllegalStateException e) {
-                Toast.makeText(getActivity(), R.string.vpn_no_network, Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, R.string.vpn_no_network, Toast.LENGTH_LONG).show();
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed to connect", e);
             }
@@ -241,7 +248,7 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
             if (!isConnected(profile)) {
                 return true;
             }
-            VpnUtils.clearLockdownVpn(getContext());
+            VpnUtils.clearLockdownVpn(mContext);
             return mService.prepareVpn(null, VpnConfig.LEGACY_VPN, UserHandle.myUserId());
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to disconnect", e);

@@ -49,6 +49,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.internal.annotations.GuardedBy;
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
@@ -62,6 +64,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -96,8 +99,9 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     private Map<String, LegacyVpnPreference> mLegacyVpnPreferences = new ArrayMap<>();
     private Map<AppVpnInfo, AppPreference> mAppPreferences = new ArrayMap<>();
 
-    private HandlerThread mUpdaterThread;
+    @GuardedBy("this")
     private Handler mUpdater;
+    private HandlerThread mUpdaterThread;
     private LegacyVpnInfo mConnectedLegacyVpn;
 
     private boolean mUnavailable;
@@ -181,11 +185,9 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         mConnectivityManager.registerNetworkCallback(VPN_REQUEST, mNetworkCallback);
 
         // Trigger a refresh
-        if (mUpdater == null) {
-            mUpdaterThread = new HandlerThread("Refresh VPN list in background");
-            mUpdaterThread.start();
-            mUpdater = new Handler(mUpdaterThread.getLooper(), this);
-        }
+        mUpdaterThread = new HandlerThread("Refresh VPN list in background");
+        mUpdaterThread.start();
+        mUpdater = new Handler(mUpdaterThread.getLooper(), this);
         mUpdater.sendEmptyMessage(RESCAN_MESSAGE);
     }
 
@@ -199,7 +201,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         // Stop monitoring
         mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
 
-        if (mUpdater != null) {
+        synchronized (this) {
             mUpdater.removeCallbacksAndMessages(null);
             mUpdater = null;
             mUpdaterThread.quit();
@@ -211,8 +213,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
     @Override @WorkerThread
     public boolean handleMessage(Message message) {
-        mUpdater.removeMessages(RESCAN_MESSAGE);
-
         // Run heavy RPCs before switching to UI thread
         final List<VpnProfile> vpnProfiles = loadVpnProfiles(mKeyStore);
         final List<AppVpnInfo> vpnApps = getVpnApps(getActivity(), /* includeProfiles */ true);
@@ -224,61 +224,126 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         final String lockdownVpnKey = VpnUtils.getLockdownVpn();
 
         // Refresh list of VPNs
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // Can't do anything useful if the context has gone away
-                if (!isAdded()) {
-                    return;
-                }
+        getActivity().runOnUiThread(new UpdatePreferences(this)
+                .legacyVpns(vpnProfiles, connectedLegacyVpns, lockdownVpnKey)
+                .appVpns(vpnApps, connectedAppVpns, alwaysOnAppVpnInfos));
 
-                // Find new VPNs by subtracting existing ones from the full set
-                final Set<Preference> updates = new ArraySet<>();
-
-                for (VpnProfile profile : vpnProfiles) {
-                    LegacyVpnPreference p = findOrCreatePreference(profile);
-                    if (connectedLegacyVpns.containsKey(profile.key)) {
-                        p.setState(connectedLegacyVpns.get(profile.key).state);
-                    } else {
-                        p.setState(LegacyVpnPreference.STATE_NONE);
-                    }
-                    p.setAlwaysOn(lockdownVpnKey != null && lockdownVpnKey.equals(profile.key));
-                    updates.add(p);
-                }
-                for (AppVpnInfo app : vpnApps) {
-                    AppPreference p = findOrCreatePreference(app);
-                    if (connectedAppVpns.contains(app)) {
-                        p.setState(AppPreference.STATE_CONNECTED);
-                    } else {
-                        p.setState(AppPreference.STATE_DISCONNECTED);
-                    }
-                    p.setAlwaysOn(alwaysOnAppVpnInfos.contains(app));
-                    updates.add(p);
-                }
-
-                // Trim out deleted VPN preferences
-                mLegacyVpnPreferences.values().retainAll(updates);
-                mAppPreferences.values().retainAll(updates);
-
-                final PreferenceGroup vpnGroup = getPreferenceScreen();
-                for (int i = vpnGroup.getPreferenceCount() - 1; i >= 0; i--) {
-                    Preference p = vpnGroup.getPreference(i);
-                    if (updates.contains(p)) {
-                        updates.remove(p);
-                    } else {
-                        vpnGroup.removePreference(p);
-                    }
-                }
-
-                // Show any new preferences on the screen
-                for (Preference pref : updates) {
-                    vpnGroup.addPreference(pref);
-                }
+        synchronized (this) {
+            if (mUpdater != null) {
+                mUpdater.removeMessages(RESCAN_MESSAGE);
+                mUpdater.sendEmptyMessageDelayed(RESCAN_MESSAGE, RESCAN_INTERVAL_MS);
             }
-        });
-
-        mUpdater.sendEmptyMessageDelayed(RESCAN_MESSAGE, RESCAN_INTERVAL_MS);
+        }
         return true;
+    }
+
+    @VisibleForTesting
+    static class UpdatePreferences implements Runnable {
+        private List<VpnProfile> vpnProfiles = Collections.<VpnProfile>emptyList();
+        private List<AppVpnInfo> vpnApps = Collections.<AppVpnInfo>emptyList();
+
+        private Map<String, LegacyVpnInfo> connectedLegacyVpns =
+                Collections.<String, LegacyVpnInfo>emptyMap();
+        private Set<AppVpnInfo> connectedAppVpns = Collections.<AppVpnInfo>emptySet();
+
+        private Set<AppVpnInfo> alwaysOnAppVpnInfos = Collections.<AppVpnInfo>emptySet();
+        private String lockdownVpnKey = null;
+
+        private final VpnSettings mSettings;
+
+        public UpdatePreferences(VpnSettings settings) {
+            mSettings = settings;
+        }
+
+        public final UpdatePreferences legacyVpns(List<VpnProfile> vpnProfiles,
+                Map<String, LegacyVpnInfo> connectedLegacyVpns, String lockdownVpnKey) {
+            this.vpnProfiles = vpnProfiles;
+            this.connectedLegacyVpns = connectedLegacyVpns;
+            this.lockdownVpnKey = lockdownVpnKey;
+            return this;
+        }
+
+        public final UpdatePreferences appVpns(List<AppVpnInfo> vpnApps,
+                Set<AppVpnInfo> connectedAppVpns, Set<AppVpnInfo> alwaysOnAppVpnInfos) {
+            this.vpnApps = vpnApps;
+            this.connectedAppVpns = connectedAppVpns;
+            this.alwaysOnAppVpnInfos = alwaysOnAppVpnInfos;
+            return this;
+        }
+
+        @Override @UiThread
+        public void run() {
+            if (!mSettings.canAddPreferences()) {
+                return;
+            }
+
+            // Find new VPNs by subtracting existing ones from the full set
+            final Set<Preference> updates = new ArraySet<>();
+
+            // Add legacy VPNs
+            for (VpnProfile profile : vpnProfiles) {
+                LegacyVpnPreference p = mSettings.findOrCreatePreference(profile, true);
+                if (connectedLegacyVpns.containsKey(profile.key)) {
+                    p.setState(connectedLegacyVpns.get(profile.key).state);
+                } else {
+                    p.setState(LegacyVpnPreference.STATE_NONE);
+                }
+                p.setAlwaysOn(lockdownVpnKey != null && lockdownVpnKey.equals(profile.key));
+                updates.add(p);
+            }
+
+            // Show connected VPNs even if the original entry in keystore is gone
+            for (LegacyVpnInfo vpn : connectedLegacyVpns.values()) {
+                final VpnProfile stubProfile = new VpnProfile(vpn.key);
+                LegacyVpnPreference p = mSettings.findOrCreatePreference(stubProfile, false);
+                p.setState(vpn.state);
+                p.setAlwaysOn(lockdownVpnKey != null && lockdownVpnKey.equals(vpn.key));
+                updates.add(p);
+            }
+
+            // Add VpnService VPNs
+            for (AppVpnInfo app : vpnApps) {
+                AppPreference p = mSettings.findOrCreatePreference(app);
+                if (connectedAppVpns.contains(app)) {
+                    p.setState(AppPreference.STATE_CONNECTED);
+                } else {
+                    p.setState(AppPreference.STATE_DISCONNECTED);
+                }
+                p.setAlwaysOn(alwaysOnAppVpnInfos.contains(app));
+                updates.add(p);
+            }
+
+            // Trim out deleted VPN preferences
+            mSettings.setShownPreferences(updates);
+        }
+    }
+
+    @VisibleForTesting
+    public boolean canAddPreferences() {
+        return isAdded();
+    }
+
+    @VisibleForTesting @UiThread
+    public void setShownPreferences(final Collection<Preference> updates) {
+        mLegacyVpnPreferences.values().retainAll(updates);
+        mAppPreferences.values().retainAll(updates);
+
+        // Change {@param updates} in-place to only contain new preferences that were not already
+        // added to the preference screen.
+        final PreferenceGroup vpnGroup = getPreferenceScreen();
+        for (int i = vpnGroup.getPreferenceCount() - 1; i >= 0; i--) {
+            Preference p = vpnGroup.getPreference(i);
+            if (updates.contains(p)) {
+                updates.remove(p);
+            } else {
+                vpnGroup.removePreference(p);
+            }
+        }
+
+        // Show any new preferences on the screen
+        for (Preference pref : updates) {
+            vpnGroup.addPreference(pref);
+        }
     }
 
     @Override
@@ -360,22 +425,26 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         }
     };
 
-    @UiThread
-    private LegacyVpnPreference findOrCreatePreference(VpnProfile profile) {
+    @VisibleForTesting @UiThread
+    public LegacyVpnPreference findOrCreatePreference(VpnProfile profile, boolean update) {
         LegacyVpnPreference pref = mLegacyVpnPreferences.get(profile.key);
-        if (pref == null) {
+        boolean created = false;
+        if (pref == null ) {
             pref = new LegacyVpnPreference(getPrefContext());
             pref.setOnGearClickListener(mGearListener);
             pref.setOnPreferenceClickListener(this);
             mLegacyVpnPreferences.put(profile.key, pref);
+            created = true;
         }
-        // This may change as the profile can update and keep the same key.
-        pref.setProfile(profile);
+        if (created || update) {
+            // This can change call-to-call because the profile can update and keep the same key.
+            pref.setProfile(profile);
+        }
         return pref;
     }
 
-    @UiThread
-    private AppPreference findOrCreatePreference(AppVpnInfo app) {
+    @VisibleForTesting @UiThread
+    public AppPreference findOrCreatePreference(AppVpnInfo app) {
         AppPreference pref = mAppPreferences.get(app);
         if (pref == null) {
             pref = new AppPreference(getPrefContext(), app.userId, app.packageName);
