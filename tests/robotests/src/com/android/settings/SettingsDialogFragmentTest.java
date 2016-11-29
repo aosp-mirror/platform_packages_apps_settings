@@ -17,6 +17,7 @@ package com.android.settings;
 
 import android.app.Dialog;
 import android.app.Fragment;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
