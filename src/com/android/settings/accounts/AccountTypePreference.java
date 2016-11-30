@@ -29,7 +29,7 @@ import com.android.settings.Utils;
 
 import static android.content.Intent.EXTRA_USER;
 
-public class AccountPreference extends Preference implements OnPreferenceClickListener {
+public class AccountTypePreference extends Preference implements OnPreferenceClickListener {
     /**
      * Title of the tile that is shown to the user.
      * @attr ref android.R.styleable#PreferenceHeader_title
@@ -48,6 +48,11 @@ public class AccountPreference extends Preference implements OnPreferenceClickLi
     private final int mTitleResId;
 
     /**
+     * Summary of the tile that is shown to the user.
+     */
+    private final CharSequence mSummary;
+
+    /**
      * Full class name of the fragment to display when this tile is
      * selected.
      * @attr ref android.R.styleable#PreferenceHeader_fragment
@@ -60,17 +65,26 @@ public class AccountPreference extends Preference implements OnPreferenceClickLi
      */
     private final Bundle mFragmentArguments;
 
-    public AccountPreference(Context context, CharSequence title, String titleResPackageName,
+    public AccountTypePreference(Context context, CharSequence title, String titleResPackageName,
         int titleResId, String fragment, Bundle fragmentArguments, Drawable icon) {
+        this(context, title, titleResPackageName, titleResId, null, fragment, fragmentArguments,
+            icon);
+    }
+
+    public AccountTypePreference(Context context, CharSequence title, String titleResPackageName,
+        int titleResId, CharSequence summary, String fragment, Bundle fragmentArguments,
+        Drawable icon) {
         super(context);
         mTitle = title;
         mTitleResPackageName = titleResPackageName;
         mTitleResId = titleResId;
+        mSummary = summary;
         mFragment = fragment;
         mFragmentArguments = fragmentArguments;
         setWidgetLayoutResource(R.layout.account_type_preference);
 
         setTitle(title);
+        setSummary(summary);
         setIcon(icon);
 
         setOnPreferenceClickListener(this);
@@ -97,8 +111,12 @@ public class AccountPreference extends Preference implements OnPreferenceClickLi
         return false;
     }
 
-    public CharSequence getitle() {
+    public CharSequence getTitle() {
         return mTitle;
+    }
+
+    public CharSequence getSummary() {
+        return mSummary;
     }
 
 }

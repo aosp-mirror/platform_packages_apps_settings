@@ -20,6 +20,7 @@ import android.content.Context;
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
+import java.util.ArrayList;
 
 public class AccountRestrictionHelper {
 
@@ -55,4 +56,22 @@ public class AccountRestrictionHelper {
         return new AccessiblePreferenceCategory(context);
     }
 
+    /**
+     * Checks if the account should be shown based on the required authorities for the account type
+     * @param authorities given authority that is passed as activity extra
+     * @param auths list of authorities for particular account type
+     * @return true if the activity has the required authority to show the account
+     */
+    public static boolean showAccount(String[] authorities, ArrayList<String> auths) {
+        boolean showAccount = true;
+        if (authorities != null && auths != null) {
+            showAccount = false;
+            for (String requestedAuthority : authorities) {
+                if (auths.contains(requestedAuthority)) {
+                    return true;
+                }
+            }
+        }
+        return showAccount;
+    }
 }
