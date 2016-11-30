@@ -150,7 +150,7 @@
     <string name="bluetooth_connection_notif_message" msgid="3603316575471431846">"\"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" gailura konektatzeko, sakatu hau."</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"\"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" gailura konektatu nahi duzu?"</string>
     <string name="bluetooth_phonebook_request" msgid="3951420080540915279">"Agendarako sarbide-eskaera"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s gailuak zure kontaktuak eta deien historia atzitu nahi ditu. %2$s gailurako sarbidea eman?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="8930347091018455505">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> gailuak zure kontaktuak eta deien historia atzitu nahi ditu. Sarbidea eman nahi diozu <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> gailuari?"</string>
     <string name="bluetooth_remember_choice" msgid="6919682671787049800">"Ez galdetu berriro"</string>
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Ez galdetu berriro"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Mezuetarako sarbide-eskaera"</string>
@@ -1301,7 +1301,7 @@
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Sareko konexioak kudeatzeko <xliff:g id="NEW_APP">%1$s</xliff:g> erabili nahi duzu, <xliff:g id="CURRENT_APP">%2$s</xliff:g> erabili beharrean?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"<xliff:g id="NEW_APP">%s</xliff:g> erabili nahi duzu sareko konexioak kudeatzeko?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"SIM operadore ezezaguna"</string>
-    <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s operadoreak ez du hornikuntza-webgune ezagunik."</string>
+    <string name="mobile_no_provisioning_url" msgid="9053814051811634125">"<xliff:g id="OPERATOR">%1$s</xliff:g> operadoreak ez du hornikuntza-webgune ezagunik"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Sartu SIM txartela eta berrabiarazi"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Konektatu Internetera"</string>
     <string name="location_title" msgid="1029961368397484576">"Nire kokapena"</string>
@@ -1357,8 +1357,7 @@
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Satelite-irudien hornitzaileak:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"Eskuliburua"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"Arazo bat izan da eskuliburua kargatzean."</string>
-    <!-- no translation found for settings_license_activity_title (8525014571806471216) -->
-    <skip />
+    <string name="settings_license_activity_title" msgid="8525014571806471216">"Hirugarrenen lizentziak"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Arazo bat izan da lizentziak kargatzean."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Kargatzen…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Segurtasun-informazioa"</string>
@@ -1932,7 +1931,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Bateria aurrezlea"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Aktibatu automatikoki"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Inoiz ez"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"Bateria: %1$s"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="8581827859893688822">"bateriaren maila <xliff:g id="PERCENT">%1$s</xliff:g> denean"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Prozesu-estatistikak"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Exekutatzen ari diren prozesuei buruzko estatistika zehatzak"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Memoriaren erabilera"</string>
@@ -2606,10 +2605,8 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Tonuaren bolumena"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Jakinarazpenen bolumena"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Telefonoaren tonu-jotzailea"</string>
-    <!-- no translation found for notification_ringtone_title (4468722874617061231) -->
-    <skip />
-    <!-- no translation found for alarm_ringtone_title (6344025478514311386) -->
-    <skip />
+    <string name="notification_ringtone_title" msgid="4468722874617061231">"Jakinarazpen-soinu lehenetsia"</string>
+    <string name="alarm_ringtone_title" msgid="6344025478514311386">"Alarmaren soinu lehenetsia"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Egin dar-dar deietan ere"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Beste soinu batzuk"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Markagailuaren tonuak"</string>
@@ -3298,17 +3295,18 @@
     <string name="enterprise_privacy_settings" msgid="6419290515657989967">"Pribatutasuna"</string>
     <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"Pribatutasuna"</string>
     <string name="enterprise_privacy_header" msgid="5605095630252702716">"Laneko datuetarako sarbidea emateko, ezarpenak alda eta softwarea instala diezazuke erakundeak gailuan eta, horrela, zure eduki pertsonala ikusteko gai izan liteke administratzailea. Xehetasun gehiago izan nahi badituzu, jarri erakundeko administratzailearekin harremanetan."</string>
-    <!-- no translation found for exposure_category (2810157871578456078) -->
-    <skip />
-    <!-- no translation found for exposure_changes_category (7152065122917822315) -->
-    <skip />
-    <!-- no translation found for device_access_category (2561130537681794647) -->
-    <skip />
-    <!-- no translation found for enterprise_data (5354458531314976417) -->
-    <skip />
-    <!-- no translation found for number_installed_packages_default (7185923293655904313) -->
-    <skip />
-    <!-- no translation found for number_installed_packages (1918926807170936355) -->
-    <!-- no translation found for usage_stats (5623497078526133035) -->
-    <skip />
+    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"Zer motatako informazioa ikus dezake erakundeak?"</string>
+    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"Zer aldaketek dute eragina erakundeak ikus dezakeenarengan?"</string>
+    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"Zer ekintzek dute eragina gailurako nire sarbidearengan?"</string>
+    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"Laneko kontuarekin erlazionatutako datuak, adibidez, posta elektronikoa eta egutegia"</string>
+    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"Gailuan dituzun aplikazio guztien zerrenda"</string>
+    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
+      <item quantity="other">Gailuan dituzun <xliff:g id="COUNT_1">%d</xliff:g> aplikazioen zerrenda</item>
+      <item quantity="one">Gailuan duzun <xliff:g id="COUNT_0">%d</xliff:g> aplikazioa</item>
+    </plurals>
+    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"Gailuko aplikazio bakoitzaren erabilera (erabiltzen igarotako denbora eta erabilitako datu kopurua)"</string>
+    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"Gailuko trafikoaren erregistroak"</string>
+    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"Azken akatsen txostena"</string>
+    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"Azken segurtasun-erregistroa"</string>
+    <string name="enterprise_privacy_never" msgid="1304035596746436921">"Inoiz ez"</string>
 </resources>

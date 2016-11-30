@@ -150,7 +150,7 @@
     <string name="bluetooth_connection_notif_message" msgid="3603316575471431846">"Tap to connect to \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Do you want to connect to \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"?"</string>
     <string name="bluetooth_phonebook_request" msgid="3951420080540915279">"Phone book access request"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s wants to access your contacts and call history. Give access to %2$s?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="8930347091018455505">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> wants to access your contacts and call history. Give access to <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>?"</string>
     <string name="bluetooth_remember_choice" msgid="6919682671787049800">"Don\'t ask again"</string>
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Don\'t ask again"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Message access request"</string>
@@ -1301,7 +1301,7 @@
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Use <xliff:g id="NEW_APP">%1$s</xliff:g> instead of <xliff:g id="CURRENT_APP">%2$s</xliff:g> to manage your network connections?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Use <xliff:g id="NEW_APP">%s</xliff:g> to manage your network connections?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Unknown SIM operator"</string>
-    <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s has no known provisioning website"</string>
+    <string name="mobile_no_provisioning_url" msgid="9053814051811634125">"<xliff:g id="OPERATOR">%1$s</xliff:g> has no known provisioning website"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Please insert SIM card and restart"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Please connect to the internet"</string>
     <string name="location_title" msgid="1029961368397484576">"My Location"</string>
@@ -1357,8 +1357,7 @@
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Satellite imagery providers:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"Manual"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"There is a problem loading the manual."</string>
-    <!-- no translation found for settings_license_activity_title (8525014571806471216) -->
-    <skip />
+    <string name="settings_license_activity_title" msgid="8525014571806471216">"Third-party licences"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"There is a problem loading the licences."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Loading…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Safety information"</string>
@@ -1932,7 +1931,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Battery saver"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Turn on automatically"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Never"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"at %1$s battery"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="8581827859893688822">"at <xliff:g id="PERCENT">%1$s</xliff:g>battery"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Process Stats"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Geeky stats about running processes"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Memory use"</string>
@@ -2606,10 +2605,8 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Ring volume"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Notification volume"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Phone ringtone"</string>
-    <!-- no translation found for notification_ringtone_title (4468722874617061231) -->
-    <skip />
-    <!-- no translation found for alarm_ringtone_title (6344025478514311386) -->
-    <skip />
+    <string name="notification_ringtone_title" msgid="4468722874617061231">"Default notification sound"</string>
+    <string name="alarm_ringtone_title" msgid="6344025478514311386">"Default alarm sound"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Also vibrate for calls"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Other sounds"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Dial pad tones"</string>
@@ -3298,17 +3295,18 @@
     <string name="enterprise_privacy_settings" msgid="6419290515657989967">"Privacy"</string>
     <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"Privacy"</string>
     <string name="enterprise_privacy_header" msgid="5605095630252702716">"To provide access to your work data, your organisation may change settings and install software on your device, which could cause some of your personal content to be visible to your admin. Contact your organisation\'s admin for more details."</string>
-    <!-- no translation found for exposure_category (2810157871578456078) -->
-    <skip />
-    <!-- no translation found for exposure_changes_category (7152065122917822315) -->
-    <skip />
-    <!-- no translation found for device_access_category (2561130537681794647) -->
-    <skip />
-    <!-- no translation found for enterprise_data (5354458531314976417) -->
-    <skip />
-    <!-- no translation found for number_installed_packages_default (7185923293655904313) -->
-    <skip />
-    <!-- no translation found for number_installed_packages (1918926807170936355) -->
-    <!-- no translation found for usage_stats (5623497078526133035) -->
-    <skip />
+    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"What types of information can your organisation see?"</string>
+    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"What changes affect what your organisation can see?"</string>
+    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"What actions may impact your access to this device?"</string>
+    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"Data associated with your work account, such as email and calendar"</string>
+    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"List of all apps on your device"</string>
+    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
+      <item quantity="other">List of all <xliff:g id="COUNT_1">%d</xliff:g> apps on your device</item>
+      <item quantity="one">List of all <xliff:g id="COUNT_0">%d</xliff:g> app on your device</item>
+    </plurals>
+    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"Usage (time spent and amount of data used) of each app on your device"</string>
+    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"Traffic logs on your device"</string>
+    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"Your most recent bug report"</string>
+    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"Your most recent security log"</string>
+    <string name="enterprise_privacy_never" msgid="1304035596746436921">"Never"</string>
 </resources>

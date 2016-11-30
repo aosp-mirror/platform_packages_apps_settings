@@ -150,7 +150,7 @@
     <string name="bluetooth_connection_notif_message" msgid="3603316575471431846">"Tocca per connetterti a \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Vuoi connetterti a \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"?"</string>
     <string name="bluetooth_phonebook_request" msgid="3951420080540915279">"Richiesta di accesso alla rubrica"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s desidera accedere ai tuoi contatti e alla tua cronologia chiamate. Consentire l\'accesso a %2$s?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="8930347091018455505">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> desidera accedere ai tuoi contatti e alla tua cronologia chiamate. Consentire l\'accesso al dispositivo <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>?"</string>
     <string name="bluetooth_remember_choice" msgid="6919682671787049800">"Non chiedermelo più"</string>
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Non chiedermelo più"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Richiesta di accesso ai messaggi"</string>
@@ -1301,7 +1301,7 @@
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Utilizzare <xliff:g id="NEW_APP">%1$s</xliff:g> invece di <xliff:g id="CURRENT_APP">%2$s</xliff:g> per gestire le connessioni di rete?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Utilizzare <xliff:g id="NEW_APP">%s</xliff:g> per gestire le connessioni di rete?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Operatore SIM sconosciuto"</string>
-    <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"Nessun sito web di provisioning per %1$s"</string>
+    <string name="mobile_no_provisioning_url" msgid="9053814051811634125">"Nessun sito web di provisioning per <xliff:g id="OPERATOR">%1$s</xliff:g>"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Inserisci la scheda SIM e riavvia"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Connettiti a Internet"</string>
     <string name="location_title" msgid="1029961368397484576">"La mia posizione"</string>
@@ -1357,8 +1357,7 @@
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Fornitori di immagini satellitari:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"Manuale"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"Si è verificato un problema durante il caricamento del manuale."</string>
-    <!-- no translation found for settings_license_activity_title (8525014571806471216) -->
-    <skip />
+    <string name="settings_license_activity_title" msgid="8525014571806471216">"Licenze di terze parti"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Errore durante il caricamento delle licenze."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Caricamento..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Informazioni sulla sicurezza"</string>
@@ -1932,7 +1931,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Risparmio energetico"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Attiva automaticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Mai"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"al %1$s di batteria"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="8581827859893688822">"al seguente livello di carica: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistiche sui processi"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistiche tecniche sui processi in esecuzione"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Memoria usata"</string>
@@ -2606,10 +2605,8 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume suoneria"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volume notifiche"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Suoneria telefono"</string>
-    <!-- no translation found for notification_ringtone_title (4468722874617061231) -->
-    <skip />
-    <!-- no translation found for alarm_ringtone_title (6344025478514311386) -->
-    <skip />
+    <string name="notification_ringtone_title" msgid="4468722874617061231">"Suono di notifica predefinito"</string>
+    <string name="alarm_ringtone_title" msgid="6344025478514311386">"Suono sveglia predefinito"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrazione per le chiamate"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Altri suoni"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Toni tastierino"</string>
@@ -3298,17 +3295,18 @@
     <string name="enterprise_privacy_settings" msgid="6419290515657989967">"Privacy"</string>
     <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"Privacy"</string>
     <string name="enterprise_privacy_header" msgid="5605095630252702716">"Per fornire l\'accesso ai tuoi dati di lavoro, la tua organizzazione può modificare le impostazioni e installare un programma software sul tuo dispositivo. In questo modo alcuni dei tuoi contenuti personali potrebbero essere visibili all\'amministratore. Contatta l\'amministratore dell\'organizzazione per ulteriori dettagli."</string>
-    <!-- no translation found for exposure_category (2810157871578456078) -->
-    <skip />
-    <!-- no translation found for exposure_changes_category (7152065122917822315) -->
-    <skip />
-    <!-- no translation found for device_access_category (2561130537681794647) -->
-    <skip />
-    <!-- no translation found for enterprise_data (5354458531314976417) -->
-    <skip />
-    <!-- no translation found for number_installed_packages_default (7185923293655904313) -->
-    <skip />
-    <!-- no translation found for number_installed_packages (1918926807170936355) -->
-    <!-- no translation found for usage_stats (5623497078526133035) -->
-    <skip />
+    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"Quali tipi di dati sono visibili alla tua organizzazione?"</string>
+    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"Quali modifiche influiscono su ciò che può vedere la tua organizzazione?"</string>
+    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"Quali azioni influsicono sull\'accesso a questo dispositivo?"</string>
+    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"Dati associati al tuo account di lavoro, ad esempio email e calendario."</string>
+    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"Elenco di tutte le app sul tuo dispositivo"</string>
+    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
+      <item quantity="other">Elenco di tutte le app sul dispositivo (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="one">Elenco di tutte le app sul dispositivo (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"Utilizzo (tempo di utilizzo e quantità di dati consumati) per ciascuna app sul tuo dispositivo"</string>
+    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"Log relativi al traffico sul tuo dispositivo"</string>
+    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"La tua segnalazione di bug più recente"</string>
+    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"Il tuo log di sicurezza più recente"</string>
+    <string name="enterprise_privacy_never" msgid="1304035596746436921">"Mai"</string>
 </resources>

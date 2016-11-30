@@ -150,7 +150,7 @@
     <string name="bluetooth_connection_notif_message" msgid="3603316575471431846">"\"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" सँग जडान गर्न ट्याप गर्नुहोस्।"</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"\"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" सँग जडित हुन चाहनु हुन्छ?"</string>
     <string name="bluetooth_phonebook_request" msgid="3951420080540915279">"फोन पुस्तिका पहुँच अनुरोध"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s तपाईँका सबै सम्पर्कहरू र कल इतिहासहरूमा पहुँच गर्न चाहन्छ। %2$s को लागि पहुँच दिने हो?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="8930347091018455505">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> तपाईंका सम्पर्कहरू र कलको इतिहासमाथि पहुँच गर्न चाहनुहुन्छ। <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> माथि पहुँच गर्न दिने हो?"</string>
     <string name="bluetooth_remember_choice" msgid="6919682671787049800">"फेरि नसोध्नुहोस्"</string>
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"फेरि नसोध्नुहोस्"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"सन्देश पहुँच अनुरोध"</string>
@@ -1301,7 +1301,7 @@
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"तपाईँको सञ्जाल जडानहरू व्यवस्थापन गर्न <xliff:g id="CURRENT_APP">%2$s</xliff:g> सट्टामा <xliff:g id="NEW_APP">%1$s</xliff:g> प्रयोग गर्ने?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"तपाईँको सञ्जाल जडानहरू व्यवस्थापन गर्न <xliff:g id="NEW_APP">%s</xliff:g> प्रयोग गर्ने?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"अज्ञात SIM सञ्चालक"</string>
-    <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s को कुनै ज्ञात प्रावधानीकरण वेबसाइट छैन"</string>
+    <string name="mobile_no_provisioning_url" msgid="9053814051811634125">"<xliff:g id="OPERATOR">%1$s</xliff:g> को प्रावधानीकरणको कुनै ज्ञात वेबसाइट छैन"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"कृपया SIM कार्ड भित्र राखेर पुनः स्टार्ट गर्नुहोस्"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"कृपया इन्टरनेटसँग जोड्नुहोस्"</string>
     <string name="location_title" msgid="1029961368397484576">"मेरो स्थान"</string>
@@ -1357,8 +1357,7 @@
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"स्याटलाइट कल्पना प्रदायकहरू:\n©२०१४ CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"म्यानुअल"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"म्यानुअल लोड गर्दा एउटा समस्या आएको छ।"</string>
-    <!-- no translation found for settings_license_activity_title (8525014571806471216) -->
-    <skip />
+    <string name="settings_license_activity_title" msgid="8525014571806471216">"तेस्रो-पक्षका इजाजतपत्रहरू"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"लाइसेन्स लोड गर्न समस्या आएको छ।"</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"लोड हुँदै..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"सुरक्षित जानकारी"</string>
@@ -1932,7 +1931,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"ब्याट्री सेभर"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"स्वतः खोल्नुहोस्"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"कहिले पनि होइन"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"%1$s ब्याट्रीमा"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="8581827859893688822">"ब्याट्री<xliff:g id="PERCENT">%1$s</xliff:g>मा"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"प्रक्रिया तथ्याङ्क"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"चालु रहने प्रक्रियाहरूको बारेको geeky तथ्याङ्क"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"मेमोरी प्रयोग"</string>
@@ -2606,10 +2605,8 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"घन्टीको मात्रा"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"ध्वनी सूचना"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"फोन रिङटोन"</string>
-    <!-- no translation found for notification_ringtone_title (4468722874617061231) -->
-    <skip />
-    <!-- no translation found for alarm_ringtone_title (6344025478514311386) -->
-    <skip />
+    <string name="notification_ringtone_title" msgid="4468722874617061231">"सूचना सम्बन्धी पूर्वनिर्धारित ध्वनि"</string>
+    <string name="alarm_ringtone_title" msgid="6344025478514311386">"अलार्मको पूर्वनिर्धारित ध्वनि"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"कलका लागि भाइब्रेट पनि"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"अन्य ध्वनिहरू"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"प्याड टोनहरू डायल गर्नुहोस्"</string>
@@ -3300,17 +3297,18 @@
     <string name="enterprise_privacy_settings" msgid="6419290515657989967">"गोपनीयता"</string>
     <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"गोपनीयता"</string>
     <string name="enterprise_privacy_header" msgid="5605095630252702716">"तपाईंको कार्यको डेटामाथि पहुँच प्रदान गर्न, तपाईंको संगठनले सेटिङहरू परिवर्तन गर्न र तपाईंको यन्त्रमा सफ्टवेयर स्थापना गर्न सक्ने भएकाले तपाईंका कतिपय व्यक्तिगत सामग्रीहरू तपाईंका प्रशासकले देख्न सक्ने हुन सक्छन्। थप विवरणका लागि आफ्नो संगठनका प्रशासकसँग सम्पर्क गर्नुहोस्।"</string>
-    <!-- no translation found for exposure_category (2810157871578456078) -->
-    <skip />
-    <!-- no translation found for exposure_changes_category (7152065122917822315) -->
-    <skip />
-    <!-- no translation found for device_access_category (2561130537681794647) -->
-    <skip />
-    <!-- no translation found for enterprise_data (5354458531314976417) -->
-    <skip />
-    <!-- no translation found for number_installed_packages_default (7185923293655904313) -->
-    <skip />
-    <!-- no translation found for number_installed_packages (1918926807170936355) -->
-    <!-- no translation found for usage_stats (5623497078526133035) -->
-    <skip />
+    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"तपाईंको संस्थाले कस्ता प्रकारका जानकारीहरू हेर्न सक्छ?"</string>
+    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"तपाईंको संस्थाले हेर्न सक्ने कुरालाई कस्तो परिवर्तनले प्रभाव पार्दछ?"</string>
+    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"तपाईंको यस यन्त्रमाथिको पहुँचमा कुन कुन कारबाहीहरूले प्रभाव पार्न सक्छन्?"</string>
+    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"इमेल र पात्रो जस्ता तपाईंका काम सम्बन्धी खातासँग सम्बन्धित डेटा"</string>
+    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"तपाईंको यन्त्रमा भएका सबै अनुप्रयोगहरूको सूची"</string>
+    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
+      <item quantity="other">तपाईंको यन्त्रका सबै <xliff:g id="COUNT_1">%d</xliff:g> वटा अनुप्रयोगहरूको सूची </item>
+      <item quantity="one"> तपाईंको यन्त्रका सबै <xliff:g id="COUNT_0">%d</xliff:g> वटा अनुप्रयोगको सूची</item>
+    </plurals>
+    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"तपाईंको यन्त्रमा भएका प्रत्येक अनुप्रयोगको प्रयोग (खर्च गरिएको समय र प्रयोग गरिएको डेटाको मात्रा)"</string>
+    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"तपाईंको यन्त्रका ट्राफिक सम्बन्धी लगहरू"</string>
+    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"तपाईंको सबैभन्दा पछिल्लो बग रिपोर्ट"</string>
+    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"तपाईंको सबैभन्दा पछिको सुरक्षा लग"</string>
+    <string name="enterprise_privacy_never" msgid="1304035596746436921">"कहिल्यै पनि होइन"</string>
 </resources>
