@@ -35,23 +35,37 @@ import static com.google.common.truth.Truth.assertWithMessage;
 public class SearchIndexProviderCodeInspector extends CodeInspector {
     private static final String TAG = "SearchCodeInspector";
 
-    private final List<String> notImplementingIndexableWhitelist;
-    private final List<String> notImplementingIndexProviderWhitelist;
+    private static final String NOT_IMPLEMENTING_INDEXABLE_ERROR =
+            "SettingsPreferenceFragment should implement Indexable, but these are not:\n";
+    private static final String NOT_CONTAINING_PROVIDER_OBJECT_ERROR =
+            "Indexable should have public field " + Index.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
+                    + " but these are not:\n";
+    private static final String NOT_IN_INDEXABLE_PROVIDER_REGISTRY =
+            "Class containing " + Index.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + " must be added to "
+                    + SearchIndexableResources.class.getName() + " but these are not: \n";
+
+    private final List<String> notImplementingIndexableGrandfatherList;
+    private final List<String> notImplementingIndexProviderGrandfatherList;
+    private final List<String> notInSearchIndexableRegistryGrandfatherList;
 
     public SearchIndexProviderCodeInspector(List<Class<?>> classes) {
         super(classes);
-        notImplementingIndexableWhitelist = new ArrayList<>();
-        notImplementingIndexProviderWhitelist = new ArrayList<>();
-        initializeGrandfatherList(notImplementingIndexableWhitelist,
+        notImplementingIndexableGrandfatherList = new ArrayList<>();
+        notImplementingIndexProviderGrandfatherList = new ArrayList<>();
+        notInSearchIndexableRegistryGrandfatherList = new ArrayList<>();
+        initializeGrandfatherList(notImplementingIndexableGrandfatherList,
                 "grandfather_not_implementing_indexable");
-        initializeGrandfatherList(notImplementingIndexProviderWhitelist,
+        initializeGrandfatherList(notImplementingIndexProviderGrandfatherList,
                 "grandfather_not_implementing_index_provider");
+        initializeGrandfatherList(notInSearchIndexableRegistryGrandfatherList,
+                "grandfather_not_in_search_index_provider_registry");
     }
 
     @Override
     public void run() {
         final Set<String> notImplementingIndexable = new ArraySet<>();
         final Set<String> notImplementingIndexProvider = new ArraySet<>();
+        final Set<String> notInSearchProviderRegistry = new ArraySet<>();
 
         for (Class clazz : mClasses) {
             if (!isConcreteSettingsClass(clazz)) {
@@ -64,44 +78,59 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             }
             // If it's a SettingsPreferenceFragment, it must also be Indexable.
             final boolean implementsIndexable = Indexable.class.isAssignableFrom(clazz);
-            if (!implementsIndexable && !notImplementingIndexableWhitelist.contains(className)) {
+            if (!implementsIndexable
+                    && !notImplementingIndexableGrandfatherList.contains(className)) {
                 notImplementingIndexable.add(className);
             }
+            final boolean hasSearchIndexProvider = hasSearchIndexProvider(clazz);
             // If it implements Indexable, it must also implement the index provider field.
-            if (implementsIndexable && !hasSearchIndexProvider(clazz)
-                    && !notImplementingIndexProviderWhitelist.contains(className)) {
+            if (implementsIndexable && !hasSearchIndexProvider
+                    && !notImplementingIndexProviderGrandfatherList.contains(className)) {
                 notImplementingIndexProvider.add(className);
+            }
+            if (hasSearchIndexProvider
+                    && SearchIndexableResources.getResourceByName(className) == null
+                    && !notInSearchIndexableRegistryGrandfatherList.contains(className)) {
+                notInSearchProviderRegistry.add(className);
             }
         }
 
         // Build error messages
-        final StringBuilder indexableError = new StringBuilder(
-                "SettingsPreferenceFragment should implement Indexable, but these are not:\n");
-        for (String c : notImplementingIndexable) {
-            indexableError.append(c).append("\n");
-        }
-        final StringBuilder indexProviderError = new StringBuilder(
-                "Indexable should have public field " + Index.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
-                        + " but these are not:\n");
-        for (String c : notImplementingIndexProvider) {
-            indexProviderError.append(c).append("\n");
-        }
-
-        assertWithMessage(indexableError.toString())
-                .that(notImplementingIndexable.isEmpty())
-                .isTrue();
+        final String indexableError = buildErrorMessage(NOT_IMPLEMENTING_INDEXABLE_ERROR,
+                notImplementingIndexable);
+        final String indexProviderError = buildErrorMessage(NOT_CONTAINING_PROVIDER_OBJECT_ERROR,
+                notImplementingIndexProvider);
+        final String notInProviderRegistryError =
+                buildErrorMessage(NOT_IN_INDEXABLE_PROVIDER_REGISTRY, notInSearchProviderRegistry);
+        assertWithMessage(indexableError)
+                .that(notImplementingIndexable)
+                .isEmpty();
         assertWithMessage(indexProviderError.toString())
-                .that(notImplementingIndexProvider.isEmpty())
-                .isTrue();
+                .that(notImplementingIndexProvider)
+                .isEmpty();
+        assertWithMessage(notInProviderRegistryError.toString())
+                .that(notInSearchProviderRegistry)
+                .isEmpty();
     }
 
     private boolean hasSearchIndexProvider(Class clazz) {
         try {
             final Field f = clazz.getField(Index.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
             return f != null;
+        } catch (NoClassDefFoundError e) {
+            // Cannot find class def, ignore
+            return true;
         } catch (NoSuchFieldException e) {
             Log.e(TAG, "error fetching search provider from class " + clazz.getName());
             return false;
         }
+    }
+
+    private String buildErrorMessage(String errorSummary, Set<String> errorClasses) {
+        final StringBuilder error = new StringBuilder(errorSummary);
+        for (String c : errorClasses) {
+            error.append(c).append("\n");
+        }
+        return error.toString();
     }
 }

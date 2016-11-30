@@ -16,7 +16,6 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,10 +90,5 @@ public class MetricsFeatureProviderImpl implements MetricsFeatureProvider {
         for (LogWriter writer : mLoggerWriters) {
             writer.histogram(context, name, bucket);
         }
-    }
-
-    @VisibleForTesting
-    public void addLogWriter(LogWriter logWriter) {
-        mLoggerWriters.add(logWriter);
     }
 }
