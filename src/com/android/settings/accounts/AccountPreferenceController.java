@@ -60,6 +60,7 @@ import java.util.List;
 
 import static android.content.Intent.EXTRA_USER;
 import static android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS;
+import static android.os.UserManager.DISALLOW_REMOVE_MANAGED_PROFILE;
 import static android.os.UserManager.DISALLOW_REMOVE_USER;
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
@@ -172,7 +173,7 @@ public class AccountPreferenceController extends PreferenceController
                     rawData.add(data);
                 }
                 if (userInfo.isManagedProfile()) {
-                    if (!mHelper.hasBaseUserRestriction(DISALLOW_REMOVE_USER,
+                    if (!mHelper.hasBaseUserRestriction(DISALLOW_REMOVE_MANAGED_PROFILE,
                         UserHandle.myUserId())) {
                         SearchIndexableRaw data = new SearchIndexableRaw(mContext);
                         data.title = res.getString(R.string.remove_managed_profile_label);
@@ -306,7 +307,7 @@ public class AccountPreferenceController extends PreferenceController
                 mContext.getString(R.string.accessibility_category_work, workGroupSummary));
             profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference(context);
             mHelper.enforceRestrictionOnPreference(profileData.removeWorkProfilePreference,
-                DISALLOW_REMOVE_USER, UserHandle.myUserId());
+                DISALLOW_REMOVE_MANAGED_PROFILE, UserHandle.myUserId());
             profileData.managedProfilePreference = newManagedProfileSettings();
         } else {
             preferenceGroup.setTitle(R.string.category_personal);

@@ -242,7 +242,8 @@ public class AccountPreferenceControllerTest {
         infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_MANAGED_PROFILE));
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
-        when(mAccountHelper.hasBaseUserRestriction(eq(UserManager.DISALLOW_REMOVE_USER), anyInt()))
+        when(mAccountHelper.hasBaseUserRestriction(
+                eq(UserManager.DISALLOW_REMOVE_MANAGED_PROFILE), anyInt()))
             .thenReturn(true);
 
         mController.updateRawDataToIndex(data);
