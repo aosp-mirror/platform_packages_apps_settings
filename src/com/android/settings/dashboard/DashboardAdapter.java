@@ -165,7 +165,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         if (position != DashboardData.POSITION_NOT_FOUND) {
             // Since usually tile in parameter and tile in mCategories are same instance,
             // which is hard to be detected by DiffUtil, so we notifyItemChanged directly.
-            notifyItemChanged(position);
+            notifyItemChanged(position, mDashboardData.getItemTypeByPosition(position));
         }
     }
 
