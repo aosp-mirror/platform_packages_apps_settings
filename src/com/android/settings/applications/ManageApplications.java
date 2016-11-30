@@ -767,6 +767,12 @@ public class ManageApplications extends InstrumentedFragment
         private boolean mHasReceivedLoadEntries;
         private boolean mHasReceivedBridgeCallback;
 
+        // These two variables are used to remember and restore the last scroll position when this
+        // fragment is paused. We need this special handling because app entries are added gradually
+        // when we rebuild the list after the user made some changes, like uninstalling an app.
+        private int mLastIndex = -1;
+        private int mLastTop;
+
         private AlphabeticIndex.ImmutableIndex<Locale> mIndex;
         private SectionInfo[] mSections = EMPTY_SECTIONS;
         private int[] mPositionToSectionIndex;
@@ -851,6 +857,10 @@ public class ManageApplications extends InstrumentedFragment
                     mExtraInfoBridge.pause();
                 }
             }
+            // Record the current scroll position before pausing.
+            mLastIndex = mManageApplications.mListView.getFirstVisiblePosition();
+            View v = mManageApplications.mListView.getChildAt(0);
+            mLastTop = (v == null) ? 0 : (v.getTop() - mManageApplications.mListView.getPaddingTop());
         }
 
         public void release() {
@@ -971,6 +981,12 @@ public class ManageApplications extends InstrumentedFragment
             }
 
             notifyDataSetChanged();
+            // Restore the last scroll position if the number of entries added so far is bigger than
+            // it.
+            if (mLastIndex != -1 && getCount() > mLastIndex) {
+                mManageApplications.mListView.setSelectionFromTop(mLastIndex, mLastTop);
+                mLastIndex = -1;
+            }
 
             if (mSession.getAllApps().size() != 0
                     && mManageApplications.mListContainer.getVisibility() != View.VISIBLE) {
