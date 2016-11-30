@@ -15,13 +15,14 @@
  */
 package com.android.settings;
 
-import java.util.List;
 import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.manifest.AndroidManifest;
 import org.robolectric.res.Fs;
 import org.robolectric.res.ResourcePath;
+
+import java.util.List;
 
 /**
  * Custom test runner for the testing of BluetoothPairingDialogs. This is needed because the
@@ -47,7 +48,7 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
         final String appRoot = "packages/apps/Settings";
         final String manifestPath = appRoot + "/AndroidManifest.xml";
         final String resDir = appRoot + "/res";
-        final String assetsDir = appRoot + "/assets";
+        final String assetsDir = appRoot + config.assetDir();
 
         // By adding any resources from libraries we need to the AndroidManifest, we can access
         // them from within the parallel universe's resource loader.

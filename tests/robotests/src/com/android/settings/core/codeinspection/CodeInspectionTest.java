@@ -19,6 +19,7 @@ package com.android.settings.core.codeinspection;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.InstrumentableFragmentCodeInspector;
+import com.android.settings.search.SearchIndexProviderCodeInspector;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,8 @@ import java.util.List;
  * for conformance.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        assetDir = "/tests/robotests/assets")
 public class CodeInspectionTest {
 
     private List<Class<?>> mClasses;
@@ -45,5 +47,6 @@ public class CodeInspectionTest {
     @Test
     public void runCodeInspections() {
         new InstrumentableFragmentCodeInspector(mClasses).run();
+        new SearchIndexProviderCodeInspector(mClasses).run();
     }
 }

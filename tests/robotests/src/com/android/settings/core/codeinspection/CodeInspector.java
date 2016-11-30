@@ -16,6 +16,15 @@
 
 package com.android.settings.core.codeinspection;
 
+import com.google.common.truth.Truth;
+
+import org.junit.Assert;
+import org.robolectric.shadows.ShadowApplication;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Modifier;
 import java.util.List;
 
 /**
@@ -24,7 +33,10 @@ import java.util.List;
  */
 public abstract class CodeInspector {
 
-    public static final String PACKAGE_NAME = "com.android.settings";
+    protected static final String PACKAGE_NAME = "com.android.settings";
+
+    protected static final String TEST_CLASS_SUFFIX = "Test";
+    private static final String TEST_INNER_CLASS_SIGNATURE = "Test$";
 
     protected final List<Class<?>> mClasses;
 
@@ -36,4 +48,41 @@ public abstract class CodeInspector {
      * Code inspection runner method.
      */
     public abstract void run();
+
+    protected boolean isConcreteSettingsClass(Class clazz) {
+        // Abstract classes
+        if (Modifier.isAbstract(clazz.getModifiers())) {
+            return false;
+        }
+        final String packageName = clazz.getPackage().getName();
+        // Classes that are not in Settings
+        if (!packageName.contains(PACKAGE_NAME + ".")) {
+            return false;
+        }
+        final String className = clazz.getName();
+        // Classes from tests
+        if (className.endsWith(TEST_CLASS_SUFFIX)) {
+            return false;
+        }
+        if (className.contains(TEST_INNER_CLASS_SIGNATURE)) {
+            return false;
+        }
+        return true;
+    }
+
+    protected void initializeGrandfatherList(List<String> grandfather, String filename) {
+        try {
+            final InputStream in = ShadowApplication.getInstance().getApplicationContext()
+                    .getAssets()
+                    .open(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                grandfather.add(line);
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error initializing grandfather " + filename, e);
+        }
+
+    }
 }
