@@ -15,14 +15,22 @@
  */
 package com.android.settings;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.content.Intent;
 import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.manifest.AndroidManifest;
 import org.robolectric.res.Fs;
 import org.robolectric.res.ResourcePath;
+import org.robolectric.util.ActivityController;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
+
+import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
+import static org.robolectric.Robolectric.getShadowsAdapter;
 
 /**
  * Custom test runner for the testing of BluetoothPairingDialogs. This is needed because the
@@ -76,5 +84,16 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
         // Set the package name to the renamed one
         manifest.setPackageName("com.android.settings");
         return manifest;
+    }
+
+    // A simple utility class to start a Settings fragment with an intent. The code here is almost
+    // the same as FragmentTestUtil.startFragment except that it starts an activity with an intent.
+    public static void startSettingsFragment(
+            Fragment fragment, Class<? extends SettingsActivity> activityClass) {
+        Intent intent = new Intent().putExtra(EXTRA_SHOW_FRAGMENT, fragment.getClass().getName());
+        SettingsActivity activity = ActivityController.of(
+                getShadowsAdapter(), ReflectionHelpers.callConstructor(activityClass), intent)
+                .setup().get();
+        activity.getFragmentManager().beginTransaction().add(fragment, null).commit();
     }
 }
