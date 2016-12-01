@@ -76,7 +76,7 @@ public final class ApplicationFeatureProviderImplTest {
 
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
                 | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                | PackageManager.GET_UNINSTALLED_PACKAGES,
+                | PackageManager.MATCH_ANY_USER,
                 MAIN_USER_ID)).thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(MAIN_USER_ID, "app1", 0 /* flags */)));
 

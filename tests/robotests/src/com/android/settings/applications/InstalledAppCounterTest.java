@@ -99,7 +99,7 @@ public final class InstalledAppCounterTest {
         // * app4 is a system app that provides no launcher icon. It should not be counted.
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
                 | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                | PackageManager.GET_UNINSTALLED_PACKAGES,
+                | PackageManager.MATCH_ANY_USER,
                 MAIN_USER_ID)).thenReturn(Arrays.asList(
                         buildInfo(MAIN_USER_ID, "app1", ApplicationInfo.FLAG_UPDATED_SYSTEM_APP),
                         buildInfo(MAIN_USER_ID, "app2", 0 /* flags */),
