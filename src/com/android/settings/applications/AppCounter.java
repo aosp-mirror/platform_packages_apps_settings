@@ -41,7 +41,7 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
             final List<ApplicationInfo> list =
                     mPm.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
                             | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                            | (user.isAdmin() ? PackageManager.GET_UNINSTALLED_PACKAGES : 0),
+                            | (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0),
                             user.id);
             for (ApplicationInfo info : list) {
                 if (includeInCount(info)) {

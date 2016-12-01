@@ -80,8 +80,8 @@ public class AppOpsDetails extends InstrumentedFragment {
         }
         try {
             mPackageInfo = mPm.getPackageInfo(packageName,
-                    PackageManager.GET_DISABLED_COMPONENTS |
-                    PackageManager.GET_UNINSTALLED_PACKAGES);
+                    PackageManager.MATCH_DISABLED_COMPONENTS |
+                    PackageManager.MATCH_ANY_USER);
         } catch (NameNotFoundException e) {
             Log.e(TAG, "Exception when retrieving package:" + packageName, e);
             mPackageInfo = null;

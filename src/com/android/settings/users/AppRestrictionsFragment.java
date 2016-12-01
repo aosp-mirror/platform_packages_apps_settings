@@ -371,7 +371,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             PackageInfo pi = null;
             try {
                 pi = ipm.getPackageInfo(packageName,
-                        PackageManager.MATCH_UNINSTALLED_PACKAGES
+                        PackageManager.MATCH_ANY_USER
                         | PackageManager.GET_SIGNATURES, userId);
             } catch (RemoteException e) {
                 // Ignore

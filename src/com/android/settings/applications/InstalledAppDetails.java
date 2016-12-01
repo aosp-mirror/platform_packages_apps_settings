@@ -635,8 +635,9 @@ public class InstalledAppDetails extends AppInfoBase
             // to go away.
             try {
                 ApplicationInfo ainfo = context.getPackageManager().getApplicationInfo(
-                        mAppEntry.info.packageName, PackageManager.GET_UNINSTALLED_PACKAGES
-                        | PackageManager.GET_DISABLED_COMPONENTS);
+                        mAppEntry.info.packageName,
+                        PackageManager.MATCH_DISABLED_COMPONENTS
+                        | PackageManager.MATCH_ANY_USER);
                 if (!mShowUninstalled) {
                     // If we did not start out with the app uninstalled, then
                     // it transitioning to the uninstalled state for the current
