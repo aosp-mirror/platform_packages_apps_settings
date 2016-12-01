@@ -150,7 +150,7 @@
     <string name="bluetooth_connection_notif_message" msgid="3603316575471431846">"შეეხეთ „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“-თან დასაკავშირებლად."</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"გსურთ „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“-თან დაკავშირება?"</string>
     <string name="bluetooth_phonebook_request" msgid="3951420080540915279">"ტელეფონების წიგნზე წვდომის მოთხოვნა"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s სურს თქვენს კონტაქტებსა და ზარების ჟურნალთან დაკავშირება. ვუზრუნველყოთ %2$s წვდომით?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="8930347091018455505">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> თქვენს კონტაქტებსა და საუბრის ისტორიაზე წვდომას ითხოვს. გსურთ, მისცეთ წვდომა <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>-ს?"</string>
     <string name="bluetooth_remember_choice" msgid="6919682671787049800">"აღარ მკითხო"</string>
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"აღარ მკითხო"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"შეტყობინებებზე წვდომის მოთხოვნა"</string>
@@ -1301,7 +1301,7 @@
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"გსურთ ქსელის სამართავად <xliff:g id="CURRENT_APP">%2$s</xliff:g>-ის ნაცვლად <xliff:g id="NEW_APP">%1$s</xliff:g> გამოიყენოთ?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"გსურთ ქსელის კავშირების სამართავად <xliff:g id="NEW_APP">%s</xliff:g>-ის გამოყენება?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"უცნობი SIM-ოპერატორი"</string>
-    <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s-ს განთავსების ნაცნობი საიტი არ გააჩნია"</string>
+    <string name="mobile_no_provisioning_url" msgid="9053814051811634125">"<xliff:g id="OPERATOR">%1$s</xliff:g>-ს უზრუნველყოფის ნაცნობი ვებსაიტი არ გააჩნია"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"გთხოვთ, ჩადოთ SIM ბარათი და გადატვირთოთ"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"გთხოვთ, დააკავშიროთ ინტერნეტთან"</string>
     <string name="location_title" msgid="1029961368397484576">"ჩემი მდებარეობა"</string>
@@ -1357,8 +1357,7 @@
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"სატელიტური სურათების პროვაიდერები:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"სახელმძღვანელო"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"სახელმძღვანელოს ჩატვირთვისას წარმოიქმნა პრობლემა."</string>
-    <!-- no translation found for settings_license_activity_title (8525014571806471216) -->
-    <skip />
+    <string name="settings_license_activity_title" msgid="8525014571806471216">"მესამე მხარის ლიცენზიები"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"ლიცენზიის ჩამოტვირთვასთან პრობლემაა."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"ჩატვირთვა…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"ინფორმაცია უსაფრთხოების შესახებ"</string>
@@ -1932,7 +1931,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"ბატარეის მზოგი"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"ავტომატურად გამორთვა"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"არასოდეს"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"ბატარეის %1$s-ზე"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="8581827859893688822">"ბატარეის <xliff:g id="PERCENT">%1$s</xliff:g>-ზე"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"პროცესის სტატისტიკა"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"მიმდინარე პროცესების შემაჯამებელი სტატისტიკა"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"გამოყენებული მეხსიერება"</string>
@@ -2606,10 +2605,8 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"ზარის სიმძლავრე"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"შეტყობინების ხმა"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"ტელეფონის ზარი"</string>
-    <!-- no translation found for notification_ringtone_title (4468722874617061231) -->
-    <skip />
-    <!-- no translation found for alarm_ringtone_title (6344025478514311386) -->
-    <skip />
+    <string name="notification_ringtone_title" msgid="4468722874617061231">"შეტყობინებების ნაგულისხმევი ხმა"</string>
+    <string name="alarm_ringtone_title" msgid="6344025478514311386">"მაღვიძარას ნაგულისხმევი ხმა"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"ზარებზე ასევე ვიბრირება"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"სხვა ხმები"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ციფერბლატის ტონური რეჟიმი"</string>
@@ -3298,17 +3295,18 @@
     <string name="enterprise_privacy_settings" msgid="6419290515657989967">"კონფიდენციალურობა"</string>
     <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"კონფიდენციალურობა"</string>
     <string name="enterprise_privacy_header" msgid="5605095630252702716">"თქვენი სამსახურის მონაცემებზე წვდომის უზრუნველსაყოფად, თქვენმა ორგანიზაციამ შეიძლება შეცვალოს თქვენი მოწყობილობის პარამეტრები და მასზე პროგრამული უზრუნველყოფის ინსტალაცია მოახდინოს, რის შემდეგაც თქვენი პერსონალური კონტენტის ნაწილი შეიძლება თქვენი ადმინისტრატორისთვის ხილული გახდეს. დეტალური ინფორმაციისთვის დაუკავშირდით თქვენი ორგანიზაციის ადმინისტრატორს."</string>
-    <!-- no translation found for exposure_category (2810157871578456078) -->
-    <skip />
-    <!-- no translation found for exposure_changes_category (7152065122917822315) -->
-    <skip />
-    <!-- no translation found for device_access_category (2561130537681794647) -->
-    <skip />
-    <!-- no translation found for enterprise_data (5354458531314976417) -->
-    <skip />
-    <!-- no translation found for number_installed_packages_default (7185923293655904313) -->
-    <skip />
-    <!-- no translation found for number_installed_packages (1918926807170936355) -->
-    <!-- no translation found for usage_stats (5623497078526133035) -->
-    <skip />
+    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"რა ტიპის ინფორმაციაა ხილული თქვენი ორგანიზაციისთვის?"</string>
+    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"რას ექნება გავლენა თქვენი ორგანიზაციისთვის ხილულ კონტენტზე?"</string>
+    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"რომელ ქმედებებს შეუძლია ამ მოწყობილობაზე წვდომაზე გავლენა?"</string>
+    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"თქვენს სამსახურის ანგარიშთან დაკავშირებული მონაცემები, როგორიცაა ელფოსტა და კალენდარი"</string>
+    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"თქვენს მოწყობილობაზე არსებული ყველა აპის სია"</string>
+    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
+      <item quantity="other">თქვენს მოწყობილობაზე არსებული <xliff:g id="COUNT_1">%d</xliff:g>-ვე აპის სია</item>
+      <item quantity="one">თქვენს მოწყობილობაზე არსებული <xliff:g id="COUNT_0">%d</xliff:g>-ვე აპის სია</item>
+    </plurals>
+    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"თქვენს მოწყობილობაზე არსებული თითოეული აპის გამოყენება (დახარჯული დრო და გამოყენებული მონაცემები)"</string>
+    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"თქვენი მოწყობილობის ტრაფიკის ჟურნალები"</string>
+    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"ხარვეზის შესახებ ყველაზე ბოლო ანგარიში"</string>
+    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"უსაფრთხოების ყველაზე ბოლო ჟურნალი"</string>
+    <string name="enterprise_privacy_never" msgid="1304035596746436921">"არასოდეს"</string>
 </resources>

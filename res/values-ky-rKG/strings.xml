@@ -149,7 +149,7 @@
     <string name="bluetooth_connection_notif_message" msgid="3603316575471431846">"\"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" менен туташуу үчүн таптап коюңуз."</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"\"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" түзмөгүнө туташкыңыз келеби?"</string>
     <string name="bluetooth_phonebook_request" msgid="3951420080540915279">"Байланыштарга жетки алуу сурамы"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s сиздин байланыштарыңызга жана чалуулар тизмеңизге жетки алгысы келет. %2$s уруксат берилсинби?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="8930347091018455505">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> байланыштарыңыз менен чалуу таржымалыңызды пайдалануу мүмкүнчүлүгүн суранып жатат. Ага <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> түзмөгүн пайдалануу мүмкүнчүлүгү берилсинби?"</string>
     <string name="bluetooth_remember_choice" msgid="6919682671787049800">"Кайра сураба"</string>
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Кайра сураба"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Билдирүүлөрдү көрүү талабы"</string>
@@ -268,7 +268,7 @@
     <string name="done" msgid="6942539184162713160">"Даяр"</string>
     <string name="settings_label" msgid="1626402585530130914">"Жөндөөлөр"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Жөндөөлөр"</string>
-    <string name="settings_shortcut" msgid="3936651951364030415">"Тууралоолордун тез чакырмасы"</string>
+    <string name="settings_shortcut" msgid="3936651951364030415">"Жөндөөлөр"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Учак режими"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"Дагы"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Зымсыз тармактар"</string>
@@ -1300,7 +1300,7 @@
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Тармактык туташууларыңызды башкаруу үчүн, <xliff:g id="CURRENT_APP">%2$s</xliff:g> ордуна <xliff:g id="NEW_APP">%1$s</xliff:g> колдоносузбу?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Тармактык туташууларыңызды башкаруу үчүн <xliff:g id="NEW_APP">%s</xliff:g> колдоносузбу?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Белгисиз SIM оператору"</string>
-    <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s операторунда белгилүү камсыздоочу вебсайт жок"</string>
+    <string name="mobile_no_provisioning_url" msgid="9053814051811634125">"<xliff:g id="OPERATOR">%1$s</xliff:g> операторунда белгилүү камсыздоочу вебсайт жок"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"SIM-картаны салып, кайра иштетиңиз"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Интернетке кошулуңуз"</string>
     <string name="location_title" msgid="1029961368397484576">"Жайгашкан жерим"</string>
@@ -1356,8 +1356,7 @@
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Спутник сүрөттөрүн камсыздагычтар:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"Нускама"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"Нускаманы жүктөөдө көйгөй чыкты."</string>
-    <!-- no translation found for settings_license_activity_title (8525014571806471216) -->
-    <skip />
+    <string name="settings_license_activity_title" msgid="8525014571806471216">"Үчүнчү тараптын уруксаттамалары"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Уруксаттамалар жүктөлүп жатканда көйгөй келип чыкты."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Жүктөлүүдө…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Коопсуздук маалыматы"</string>
@@ -1931,7 +1930,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Батареяны үнөмдөгүч"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Автоматтык түрдө күйгүзүү"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Эч качан"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"батареянын кубаты %1$s болгондо"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="8581827859893688822">"<xliff:g id="PERCENT">%1$s</xliff:g>батарея менен"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Процесстин статистикасы"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Иштеп жаткан процесстердин өзгөчө статистикасы"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Эс тутумдун пайдаланылышы"</string>
@@ -2605,10 +2604,8 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Шыңгырдын катуулугу"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Эскертме үнүнүн катуулугу"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Телефондун рингтону"</string>
-    <!-- no translation found for notification_ringtone_title (4468722874617061231) -->
-    <skip />
-    <!-- no translation found for alarm_ringtone_title (6344025478514311386) -->
-    <skip />
+    <string name="notification_ringtone_title" msgid="4468722874617061231">"Демейки эскертменин добушу"</string>
+    <string name="alarm_ringtone_title" msgid="6344025478514311386">"Демейки ойготкуч добушу"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Дирилдеп чалынсын"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Башка үндөр"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Тергич үндөрү"</string>
@@ -3297,17 +3294,18 @@
     <string name="enterprise_privacy_settings" msgid="6419290515657989967">"Купуялуулук"</string>
     <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"Купуялуулук"</string>
     <string name="enterprise_privacy_header" msgid="5605095630252702716">"Жумушка керектүү жөндөөлөрдү өзгөртүп же түзмөгүңүзгө программа орнотуп жатканда, айрым жеке дайындарыңыз администраторуңузга көрүнүп калышы мүмкүн. Көбүрөөк маалымат үчүн ишканаңыздын администраторуна кайрылыңыз."</string>
-    <!-- no translation found for exposure_category (2810157871578456078) -->
-    <skip />
-    <!-- no translation found for exposure_changes_category (7152065122917822315) -->
-    <skip />
-    <!-- no translation found for device_access_category (2561130537681794647) -->
-    <skip />
-    <!-- no translation found for enterprise_data (5354458531314976417) -->
-    <skip />
-    <!-- no translation found for number_installed_packages_default (7185923293655904313) -->
-    <skip />
-    <!-- no translation found for number_installed_packages (1918926807170936355) -->
-    <!-- no translation found for usage_stats (5623497078526133035) -->
-    <skip />
+    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"Уюмуңуз маалыматтын кандай түрлөрүн көрө алат?"</string>
+    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"Уюмуңуз кайсы маалыматты көрө аларына кандай өзгөрүүлөр таасирин тийгизет?"</string>
+    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"Сиздин бул түзмөккө кирүүңүзгө кандай аракеттер таасирин тийгизиши мүмкүн?"</string>
+    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"Электрондук почта жана Жылнаама сыяктуу жумуш каттоо эсебиңиз менен байланышкан дайындар"</string>
+    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"Түзмөгүңүздөгү бардык колдонмолордун тизмеси"</string>
+    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
+      <item quantity="other">Түзмөгүңүздөгү <xliff:g id="COUNT_1">%d</xliff:g> колдонмодон турган тизме</item>
+      <item quantity="one">Түзмөгүңүздөгү <xliff:g id="COUNT_0">%d</xliff:g> колдонмодон турган тизме</item>
+    </plurals>
+    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"Түзмөгүңүздөгү ар бир колдонмонун колдонулушу (сарпталган убакыт жана колдонулган дайындардын суммасы)"</string>
+    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"Түзмөгүңүздөгү трафиктин таржымалы"</string>
+    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"Мүчүлүштүк тууралуу акыркы кабарлооңуз"</string>
+    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"Түзмөгүңүздүн эң акыркы коопсуздук таржымалы"</string>
+    <string name="enterprise_privacy_never" msgid="1304035596746436921">"Эч качан"</string>
 </resources>

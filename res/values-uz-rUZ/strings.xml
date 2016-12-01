@@ -150,7 +150,7 @@
     <string name="bluetooth_connection_notif_message" msgid="3603316575471431846">"“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>” qurilmasiga ulanish uchun bosing."</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"\"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" qurilmasiga ulanmoqchimisiz?"</string>
     <string name="bluetooth_phonebook_request" msgid="3951420080540915279">"Telefon daftarchasiga kirish so‘rovi"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s aloqalaringiz ro‘yxati va qo‘ng‘iroqlaringiz jurnaliga kirmoqchi. %2$s‘ga kirish ruxsati berilsinmi?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="8930347091018455505">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> kontaktlar va chaqiruvlar tarixidan foydalanmoqchi <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> qurilmasiga ruxsat berilsinmi?"</string>
     <string name="bluetooth_remember_choice" msgid="6919682671787049800">"Boshqa so‘rama"</string>
     <string name="bluetooth_pb_remember_choice" msgid="3622898084442402071">"Boshqa so‘ralmasin"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Xabarga kirish so‘rovi"</string>
@@ -1301,7 +1301,7 @@
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Tarmoq ulanishlarini boshqarish uchun “<xliff:g id="CURRENT_APP">%2$s</xliff:g>” o‘rniga “<xliff:g id="NEW_APP">%1$s</xliff:g>” ilovasidan foydalanilsinmi?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Tarmoq ulanishlarini boshqarish uchun “<xliff:g id="NEW_APP">%s</xliff:g>” ilovasidan foydalanilsinmi?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Noma’lum uyali aloqa operatori"</string>
-    <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s hech qanday ma‘lum veb-saytga ega emas"</string>
+    <string name="mobile_no_provisioning_url" msgid="9053814051811634125">"<xliff:g id="OPERATOR">%1$s</xliff:g> operatorida sinxronlash uchun sayti yo‘q"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Iltimos, SIM kartani joylashtirib, qurilmani ochirib-yoqing"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Iltimos, Internetga ulaning"</string>
     <string name="location_title" msgid="1029961368397484576">"Mening joylashuvim"</string>
@@ -1357,8 +1357,7 @@
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Sun’iy yo‘ldoshdan olingan rasmlar:\n© CNES 2014/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="8133150693616006051">"Qo‘llanma"</string>
     <string name="settings_manual_activity_unavailable" msgid="4752403782883814898">"Qo‘llanmani yuklashda muammo yuz berdi."</string>
-    <!-- no translation found for settings_license_activity_title (8525014571806471216) -->
-    <skip />
+    <string name="settings_license_activity_title" msgid="8525014571806471216">"Uchinchi tomon litsenziyalari"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Litsenziyalarni yuklashda muammo yuz berdi."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Yuklanmoqda…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Xavfsizlik qoidalari"</string>
@@ -1932,7 +1931,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Quvvat tejash rejimi"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Avtomatik yoqish"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Hech qachon"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"batareya quvvati %1$s qolganda"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="8581827859893688822">"batareya quvvati: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Jarayonlar statistikasi"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Ish jarayonlari haqidagi g‘alati statistikalar"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Band xotira"</string>
@@ -2606,10 +2605,8 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Rington"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Bildirishnomalar ovozi"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Telefon ringtoni"</string>
-    <!-- no translation found for notification_ringtone_title (4468722874617061231) -->
-    <skip />
-    <!-- no translation found for alarm_ringtone_title (6344025478514311386) -->
-    <skip />
+    <string name="notification_ringtone_title" msgid="4468722874617061231">"Standart bildirishnoma signali"</string>
+    <string name="alarm_ringtone_title" msgid="6344025478514311386">"Standart signal"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Chaqiruv vaqtida tebranish"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Boshqa ovozlar"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Raqam terilgandagi ovoz"</string>
@@ -3298,17 +3295,18 @@
     <string name="enterprise_privacy_settings" msgid="6419290515657989967">"Maxfiylik"</string>
     <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"Maxfiylik"</string>
     <string name="enterprise_privacy_header" msgid="5605095630252702716">"Tashkilotingiz administratori qurilmangizda ish uchun zarur sozlamalarni o‘zgartirganda yoki ilovalar o‘rnatganda ba’zi shaxsiy ma’lumotlaringiz unga ko‘rishini mumkin. Qo‘shimcha ma’lumot olish uchun administratorga murojaat qiling."</string>
-    <!-- no translation found for exposure_category (2810157871578456078) -->
-    <skip />
-    <!-- no translation found for exposure_changes_category (7152065122917822315) -->
-    <skip />
-    <!-- no translation found for device_access_category (2561130537681794647) -->
-    <skip />
-    <!-- no translation found for enterprise_data (5354458531314976417) -->
-    <skip />
-    <!-- no translation found for number_installed_packages_default (7185923293655904313) -->
-    <skip />
-    <!-- no translation found for number_installed_packages (1918926807170936355) -->
-    <!-- no translation found for usage_stats (5623497078526133035) -->
-    <skip />
+    <string name="enterprise_privacy_exposure_category" msgid="7436466628559650202">"Tashkilotingiz qaysi turdagi ma’lumotlarni ko‘ra oladi?"</string>
+    <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"Tashkilotingizga ko‘rinadiganlarga qanday o‘zgarishlar ta’sir qiladi?"</string>
+    <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"Bu qurilmadan foydalanishga qaysi amallar ta’sir qilishi mumkin?"</string>
+    <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"E-pochta va taqvim kabi ishchi hisob bilan bog‘liq ma’lumotlar"</string>
+    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"Qurilmangizdagi barcha ilovalar ro‘yxati"</string>
+    <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
+      <item quantity="other">Qurilmadagi barcha <xliff:g id="COUNT_1">%d</xliff:g> ta ilova ro‘yxati</item>
+      <item quantity="one">Qurilmadagi barcha <xliff:g id="COUNT_0">%d</xliff:g> ta ilova ro‘yxati</item>
+    </plurals>
+    <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"Qurilmadagi har bir ilovadan foydalanish statistikasi (sarflangan vaqt va trafik)"</string>
+    <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"Qurilmangizdagi trafik jurnallari"</string>
+    <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"Eng oxirgi xatoliklar hisoboti"</string>
+    <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"Eng oxirgi xavfsizlik jurnali"</string>
+    <string name="enterprise_privacy_never" msgid="1304035596746436921">"Hech qachon"</string>
 </resources>
