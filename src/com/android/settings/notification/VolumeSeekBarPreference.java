@@ -146,7 +146,9 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
         super.onProgressChanged(seekBar, progress, fromTouch);
-        mCallback.onStreamValueChanged(mStream, progress);
+        if (mCallback != null) {
+            mCallback.onStreamValueChanged(mStream, progress);
+        }
     }
 
     private void updateIconView() {
