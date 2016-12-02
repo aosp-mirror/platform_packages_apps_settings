@@ -22,6 +22,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -222,6 +223,7 @@ public class DashboardSummary extends InstrumentedFragment
         mAdapter = new DashboardAdapter(getContext(), mSuggestionParser, mMetricsFeatureProvider,
                 bundle, mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);
+        mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
         if (DEBUG_TIMING) {
