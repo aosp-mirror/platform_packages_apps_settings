@@ -17,16 +17,18 @@ package com.android.settings.core.instrumentation;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.testutils.FakeFeatureFactory;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -41,23 +43,21 @@ public class SharedPreferenceLoggerTest {
     private static final String TEST_TAG = "tag";
     private static final String TEST_KEY = "key";
 
-    @Mock
-    private LogWriter mLogWriter;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mContext;
 
+    private FakeFeatureFactory mFactory;
     private MetricsFeatureProvider mMetricsFeature;
-    private ShadowApplication mApplication;
     private SharedPreferencesLogger mSharedPrefLogger;
 
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        mApplication = ShadowApplication.getInstance();
-        Context context = mApplication.getApplicationContext();
-        mMetricsFeature = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        ((MetricsFeatureProviderImpl) mMetricsFeature).addLogWriter(mLogWriter);
+        FakeFeatureFactory.setupForTest(mContext);
+        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mMetricsFeature = mFactory.metricsFeatureProvider;
 
-        mSharedPrefLogger = new SharedPreferencesLogger(
-                mApplication.getApplicationContext(), TEST_TAG);
+        mSharedPrefLogger = new SharedPreferencesLogger(mContext, TEST_TAG);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class SharedPreferenceLoggerTest {
         editor.putInt(TEST_KEY, 2);
         editor.putInt(TEST_KEY, 2);
 
-        verify(mLogWriter, times(6)).count(any(Context.class), anyString(), anyInt());
+        verify(mMetricsFeature, times(6)).count(any(Context.class), anyString(), anyInt());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class SharedPreferenceLoggerTest {
         editor.putBoolean(TEST_KEY, false);
         editor.putBoolean(TEST_KEY, false);
 
-        verify(mLogWriter, times(4)).count(any(Context.class), anyString(), anyInt());
+        verify(mMetricsFeature, times(4)).count(any(Context.class), anyString(), anyInt());
     }
 
     @Test
@@ -95,7 +95,7 @@ public class SharedPreferenceLoggerTest {
         editor.putLong(TEST_KEY, 1);
         editor.putLong(TEST_KEY, 2);
 
-        verify(mLogWriter, times(4)).count(any(Context.class), anyString(), anyInt());
+        verify(mMetricsFeature, times(4)).count(any(Context.class), anyString(), anyInt());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class SharedPreferenceLoggerTest {
         editor.putFloat(TEST_KEY, 1);
         editor.putFloat(TEST_KEY, 2);
 
-        verify(mLogWriter, times(4)).count(any(Context.class), anyString(), anyInt());
+        verify(mMetricsFeature, times(4)).count(any(Context.class), anyString(), anyInt());
     }
 
 }

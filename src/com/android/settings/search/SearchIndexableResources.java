@@ -20,6 +20,7 @@ import android.provider.SearchIndexableResource;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
+
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
@@ -36,6 +37,7 @@ import com.android.settings.accounts.AccountSettings;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
@@ -83,9 +85,9 @@ public final class SearchIndexableResources {
     static {
         addIndex(WifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
         addIndex(AdvancedWifiSettings.class,
-                 R.xml.wifi_advanced_settings, R.drawable.ic_settings_wireless);
+                R.xml.wifi_advanced_settings, R.drawable.ic_settings_wireless);
         addIndex(SavedAccessPointsWifiSettings.class,
-                 R.xml.wifi_display_saved_access_points, R.drawable.ic_settings_wireless);
+                R.xml.wifi_display_saved_access_points, R.drawable.ic_settings_wireless);
         addIndex(BluetoothSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_bluetooth);
         addIndex(SimSettings.class, NO_DATA_RES_ID, R.drawable.ic_sim_sd);
         addIndex(DataUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
@@ -95,21 +97,21 @@ public final class SearchIndexableResources {
         addIndex(DisplaySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(WallpaperTypeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(ConfigureNotificationSettings.class,
-                 R.xml.configure_notification_settings, R.drawable.ic_settings_notifications);
+                R.xml.configure_notification_settings, R.drawable.ic_settings_notifications);
         addIndex(SoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
         addIndex(OtherSoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
         addIndex(ZenModeSettings.class,
-                 R.xml.zen_mode_settings, R.drawable.ic_settings_notifications);
+                R.xml.zen_mode_settings, R.drawable.ic_settings_notifications);
         addIndex(ZenModePrioritySettings.class,
-                 R.xml.zen_mode_priority_settings, R.drawable.ic_settings_notifications);
+                R.xml.zen_mode_priority_settings, R.drawable.ic_settings_notifications);
         addIndex(StorageSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
         addIndex(PowerUsageSummary.class,
-                 R.xml.power_usage_summary, R.drawable.ic_settings_battery);
+                R.xml.power_usage_summary, R.drawable.ic_settings_battery);
         addIndex(BatterySaverSettings.class,
-                 R.xml.battery_saver_settings, R.drawable.ic_settings_battery);
+                R.xml.battery_saver_settings, R.drawable.ic_settings_battery);
         addIndex(AdvancedAppSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
         addIndex(SpecialAccessSettings.class,
-                 R.xml.special_access, R.drawable.ic_settings_applications);
+                R.xml.special_access, R.drawable.ic_settings_applications);
         addIndex(UserSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_multiuser);
         addIndex(GestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(LocationSettings.class, R.xml.location_settings, R.drawable.ic_settings_location);
@@ -118,7 +120,7 @@ public final class SearchIndexableResources {
         addIndex(ScreenPinningSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
         addIndex(AccountSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accounts);
         addIndex(InputMethodAndLanguageSettings.class,
-                 NO_DATA_RES_ID, R.drawable.ic_settings_language);
+                NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(PrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_backup);
         addIndex(DateTimeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_date_time);
         addIndex(AccessibilitySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accessibility);
@@ -127,10 +129,11 @@ public final class SearchIndexableResources {
         addIndex(DeviceInfoSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(LegalSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(ZenModeVisualInterruptionSettings.class,
-                 R.xml.zen_mode_visual_interruptions_settings,
-                 R.drawable.ic_settings_notifications);
+                R.xml.zen_mode_visual_interruptions_settings,
+                R.drawable.ic_settings_notifications);
         addIndex(SystemDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(StorageDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
+        addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_bt_laptop);
         addIndex(EnterprisePrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
     }
 

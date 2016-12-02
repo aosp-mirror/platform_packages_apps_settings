@@ -32,12 +32,12 @@ import static com.google.common.truth.Truth.assertWithMessage;
  */
 public class InstrumentableFragmentCodeInspector extends CodeInspector {
 
-    private final List<String> grandfather_notImplmentingInstrumentable;
+    private final List<String> grandfather_notImplementingInstrumentable;
 
     public InstrumentableFragmentCodeInspector(List<Class<?>> classes) {
         super(classes);
-        grandfather_notImplmentingInstrumentable = new ArrayList<>();
-        initializeGrandfatherList(grandfather_notImplmentingInstrumentable,
+        grandfather_notImplementingInstrumentable = new ArrayList<>();
+        initializeGrandfatherList(grandfather_notImplementingInstrumentable,
                 "grandfather_not_implementing_instrumentable");
     }
 
@@ -53,7 +53,7 @@ public class InstrumentableFragmentCodeInspector extends CodeInspector {
             // If it's a fragment, it must also be instrumentable.
             if (Fragment.class.isAssignableFrom(clazz)
                     && !Instrumentable.class.isAssignableFrom(clazz)
-                    && !grandfather_notImplmentingInstrumentable.contains(className)) {
+                    && !grandfather_notImplementingInstrumentable.contains(className)) {
                 broken.add(className);
             }
         }

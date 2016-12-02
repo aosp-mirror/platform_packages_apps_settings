@@ -32,6 +32,7 @@ import com.android.settings.accounts.AccountSettings;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
@@ -108,6 +109,7 @@ public final class Ranking {
 
         // BT
         sRankMap.put(BluetoothSettings.class.getName(), RANK_BT);
+        sRankMap.put(ConnectedDeviceDashboardFragment.class.getName(), RANK_BT);
 
         // SIM Cards
         sRankMap.put(SimSettings.class.getName(), RANK_SIM);
