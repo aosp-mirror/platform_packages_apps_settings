@@ -20,21 +20,16 @@ import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.database.ContentObserver;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteException;
 import android.media.AudioManager;
 import android.media.AudioSystem;
 import android.media.Ringtone;
@@ -47,10 +42,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.os.Vibrator;
 import android.preference.SeekBarVolumizer;
-import android.provider.MediaStore;
-import android.provider.OpenableColumns;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
@@ -64,38 +56,30 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.DefaultRingtonePreference;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
+import com.android.settingslib.drawer.CategoryKey;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-import static android.content.ContentProvider.getUriWithoutUserId;
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
-public class SoundSettings extends SettingsPreferenceFragment
-        implements Indexable, OnPreferenceChangeListener {
+public class SoundSettings extends DashboardFragment
+        implements OnPreferenceChangeListener {
     private static final String TAG = "SoundSettings";
 
-    private static final String KEY_MEDIA_VOLUME = "media_volume";
-    private static final String KEY_ALARM_VOLUME = "alarm_volume";
-    private static final String KEY_RING_VOLUME = "ring_volume";
-    private static final String KEY_NOTIFICATION_VOLUME = "notification_volume";
     private static final String KEY_PHONE_RINGTONE = "ringtone";
     private static final String KEY_NOTIFICATION_RINGTONE = "notification_ringtone";
     private static final String KEY_ALARM_RINGTONE = "alarm_ringtone";
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
-    private static final String KEY_WIFI_DISPLAY = "wifi_display";
-    private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
 
     private static final String KEY_WORK_CATEGORY = "sound_work_settings_section";
@@ -107,34 +91,19 @@ public class SoundSettings extends SettingsPreferenceFragment
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
     private static final int REQUEST_CODE = 200;
 
-    private static final String[] RESTRICTED_KEYS = {
-        KEY_MEDIA_VOLUME,
-        KEY_ALARM_VOLUME,
-        KEY_RING_VOLUME,
-        KEY_NOTIFICATION_VOLUME,
-        KEY_ZEN_MODE,
-    };
-
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
     private final VolumePreferenceCallback mVolumeCallback = new VolumePreferenceCallback();
     private final H mHandler = new H();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
-    private final Receiver mReceiver = new Receiver();
-    private final ArrayList<VolumeSeekBarPreference> mVolumePrefs = new ArrayList<>();
 
     private Context mContext;
     private boolean mVoiceCapable;
-    private Vibrator mVibrator;
-    private AudioManager mAudioManager;
-    private VolumeSeekBarPreference mRingOrNotificationPreference;
 
     private Preference mPhoneRingtonePreference;
     private Preference mNotificationRingtonePreference;
     private Preference mAlarmRingtonePreference;
     private TwoStatePreference mVibrateWhenRinging;
-    private ComponentName mSuppressor;
-    private int mRingerMode = -1;
 
     private PreferenceGroup mWorkPreferenceCategory;
     private TwoStatePreference mWorkUsePersonalSounds;
@@ -161,36 +130,6 @@ public class SoundSettings extends SettingsPreferenceFragment
         mUserManager = UserManager.get(getContext());
         mVoiceCapable = Utils.isVoiceCapable(mContext);
 
-        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-        mVibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-        if (mVibrator != null && !mVibrator.hasVibrator()) {
-            mVibrator = null;
-        }
-
-        addPreferencesFromResource(R.xml.sound_settings);
-
-        initVolumePreference(KEY_MEDIA_VOLUME, AudioManager.STREAM_MUSIC,
-                com.android.internal.R.drawable.ic_audio_media_mute);
-        initVolumePreference(KEY_ALARM_VOLUME, AudioManager.STREAM_ALARM,
-                com.android.internal.R.drawable.ic_audio_alarm_mute);
-        if (mVoiceCapable) {
-            mRingOrNotificationPreference =
-                    initVolumePreference(KEY_RING_VOLUME, AudioManager.STREAM_RING,
-                            com.android.internal.R.drawable.ic_audio_ring_notif_mute);
-            removePreference(KEY_NOTIFICATION_VOLUME);
-        } else {
-            mRingOrNotificationPreference =
-                    initVolumePreference(KEY_NOTIFICATION_VOLUME, AudioManager.STREAM_NOTIFICATION,
-                            com.android.internal.R.drawable.ic_audio_ring_notif_mute);
-            removePreference(KEY_RING_VOLUME);
-        }
-
-        if (!shouldShowRingtoneSettings()) {
-            removePreference(KEY_RING_VOLUME);
-            removePreference(KEY_NOTIFICATION_VOLUME);
-            removePreference(KEY_ALARM_VOLUME);
-        }
-
         // Enable link to CMAS app settings depending on the value in config.xml.
         boolean isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
                 com.android.internal.R.bool.config_cellBroadcastAppLinks);
@@ -211,8 +150,6 @@ public class SoundSettings extends SettingsPreferenceFragment
         }
         initRingtones();
         initVibrateWhenRinging();
-        updateRingerMode();
-        updateEffectsSuppressor();
 
         if (savedInstanceState != null) {
             String selectedPreference = savedInstanceState.getString(SELECTED_PREFERENCE_KEY, null);
@@ -227,26 +164,7 @@ public class SoundSettings extends SettingsPreferenceFragment
         super.onResume();
         lookupRingtoneNames();
         mSettingsObserver.register(true);
-        mReceiver.register(true);
-        updateRingOrNotificationPreference();
-        updateEffectsSuppressor();
-        for (VolumeSeekBarPreference volumePref : mVolumePrefs) {
-            volumePref.onActivityResume();
-        }
 
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
-                UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId());
-        final boolean hasBaseRestriction = RestrictedLockUtils.hasBaseUserRestriction(mContext,
-                UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId());
-        for (String key : RESTRICTED_KEYS) {
-            Preference pref = findPreference(key);
-            if (pref != null) {
-                pref.setEnabled(!hasBaseRestriction);
-            }
-            if (pref instanceof RestrictedPreference && !hasBaseRestriction) {
-                ((RestrictedPreference) pref).setDisabledByAdmin(admin);
-            }
-        }
         RestrictedPreference broadcastSettingsPref = (RestrictedPreference) findPreference(
                 KEY_CELL_BROADCAST_SETTINGS);
         if (broadcastSettingsPref != null) {
@@ -272,12 +190,8 @@ public class SoundSettings extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         super.onPause();
-        for (VolumeSeekBarPreference volumePref : mVolumePrefs) {
-            volumePref.onActivityPause();
-        }
         mVolumeCallback.stopSample();
         mSettingsObserver.register(false);
-        mReceiver.register(false);
     }
 
     @Override
@@ -289,6 +203,36 @@ public class SoundSettings extends SettingsPreferenceFragment
             return true;
         }
         return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    protected String getCategoryKey() {
+        return CategoryKey.CATEGORY_SOUND;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.sound_settings;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        Lifecycle lifecycle = getLifecycle();
+        controllers.add(new CastPreferenceController(context));
+        controllers.add(new ZenModePreferenceController(context));
+        // === Volumes ===
+        controllers.add(new AlarmVolumePreferenceController(context, mVolumeCallback, lifecycle));
+        controllers.add(new MediaVolumePreferenceController(context, mVolumeCallback, lifecycle));
+        controllers.add(
+            new NotificationVolumePreferenceController(context, mVolumeCallback, lifecycle));
+        controllers.add(new RingVolumePreferenceController(context, mVolumeCallback, lifecycle));
+        return controllers;
     }
 
     @Override
@@ -336,68 +280,7 @@ public class SoundSettings extends SettingsPreferenceFragment
 
     // === Volumes ===
 
-    private VolumeSeekBarPreference initVolumePreference(String key, int stream, int muteIcon) {
-        final VolumeSeekBarPreference volumePref = (VolumeSeekBarPreference) findPreference(key);
-        volumePref.setCallback(mVolumeCallback);
-        volumePref.setStream(stream);
-        mVolumePrefs.add(volumePref);
-        volumePref.setMuteIcon(muteIcon);
-        return volumePref;
-    }
-
-    private void updateRingOrNotificationPreference() {
-        mRingOrNotificationPreference.showIcon(mSuppressor != null
-                ? com.android.internal.R.drawable.ic_audio_ring_notif_mute
-                : mRingerMode == AudioManager.RINGER_MODE_VIBRATE || wasRingerModeVibrate()
-                ? com.android.internal.R.drawable.ic_audio_ring_notif_vibrate
-                : com.android.internal.R.drawable.ic_audio_ring_notif);
-    }
-
-    private boolean wasRingerModeVibrate() {
-        return mVibrator != null && mRingerMode == AudioManager.RINGER_MODE_SILENT
-                && mAudioManager.getLastAudibleStreamVolume(AudioManager.STREAM_RING) == 0;
-    }
-
-    private void updateRingerMode() {
-        final int ringerMode = mAudioManager.getRingerModeInternal();
-        if (mRingerMode == ringerMode) return;
-        mRingerMode = ringerMode;
-        updateRingOrNotificationPreference();
-    }
-
-    private void updateEffectsSuppressor() {
-        final ComponentName suppressor = NotificationManager.from(mContext).getEffectsSuppressor();
-        if (Objects.equals(suppressor, mSuppressor)) return;
-        mSuppressor = suppressor;
-        if (mRingOrNotificationPreference != null) {
-            final String text = suppressor != null ?
-                    mContext.getString(com.android.internal.R.string.muted_by,
-                            getSuppressorCaption(suppressor)) : null;
-            mRingOrNotificationPreference.setSuppressionText(text);
-        }
-        updateRingOrNotificationPreference();
-    }
-
-    private String getSuppressorCaption(ComponentName suppressor) {
-        final PackageManager pm = mContext.getPackageManager();
-        try {
-            final ServiceInfo info = pm.getServiceInfo(suppressor, 0);
-            if (info != null) {
-                final CharSequence seq = info.loadLabel(pm);
-                if (seq != null) {
-                    final String str = seq.toString().trim();
-                    if (str.length() > 0) {
-                        return str;
-                    }
-                }
-            }
-        } catch (Throwable e) {
-            Log.w(TAG, "Error loading suppressor caption", e);
-        }
-        return suppressor.getPackageName();
-    }
-
-    private final class VolumePreferenceCallback implements VolumeSeekBarPreference.Callback {
+    final class VolumePreferenceCallback implements VolumeSeekBarPreference.Callback {
         private SeekBarVolumizer mCurrent;
 
         @Override
@@ -568,42 +451,9 @@ public class SoundSettings extends SettingsPreferenceFragment
                 case STOP_SAMPLE:
                     mVolumeCallback.stopSample();
                     break;
-                case UPDATE_EFFECTS_SUPPRESSOR:
-                    updateEffectsSuppressor();
-                    break;
-                case UPDATE_RINGER_MODE:
-                    updateRingerMode();
-                    break;
                 case UPDATE_ALARM_RINGTONE:
                     mAlarmRingtonePreference.setSummary((CharSequence) msg.obj);
                     break;
-            }
-        }
-    }
-
-    private class Receiver extends BroadcastReceiver {
-        private boolean mRegistered;
-
-        public void register(boolean register) {
-            if (mRegistered == register) return;
-            if (register) {
-                final IntentFilter filter = new IntentFilter();
-                filter.addAction(NotificationManager.ACTION_EFFECTS_SUPPRESSOR_CHANGED);
-                filter.addAction(AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION);
-                mContext.registerReceiver(this, filter);
-            } else {
-                mContext.unregisterReceiver(this);
-            }
-            mRegistered = register;
-        }
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (NotificationManager.ACTION_EFFECTS_SUPPRESSOR_CHANGED.equals(action)) {
-                mHandler.sendEmptyMessage(H.UPDATE_EFFECTS_SUPPRESSOR);
-            } else if (AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION.equals(action)) {
-                mHandler.sendEmptyMessage(H.UPDATE_RINGER_MODE);
             }
         }
     }
@@ -684,12 +534,13 @@ public class SoundSettings extends SettingsPreferenceFragment
 
         public List<String> getNonIndexableKeys(Context context) {
             final ArrayList<String> rt = new ArrayList<String>();
-            if (Utils.isVoiceCapable(context)) {
-                rt.add(KEY_NOTIFICATION_VOLUME);
-            } else {
-                rt.add(KEY_RING_VOLUME);
+            new NotificationVolumePreferenceController(
+                context, null /* Callback */, null /* Lifecycle */).updateNonIndexableKeys(rt);
+            new RingVolumePreferenceController(
+                context, null /* Callback */, null /* Lifecycle */).updateNonIndexableKeys(rt);
+            new CastPreferenceController(context).updateNonIndexableKeys(rt);
+            if (!Utils.isVoiceCapable(context)) {
                 rt.add(KEY_PHONE_RINGTONE);
-                rt.add(KEY_WIFI_DISPLAY);
                 rt.add(KEY_VIBRATE_WHEN_RINGING);
             }
 
