@@ -15,19 +15,29 @@
  */
 package com.android.settings.accounts;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
+
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -36,10 +46,17 @@ public class UserAndAccountDashboardFragmentTest {
     private static final String METADATA_CATEGORY = "com.android.settings.category";
     private static final String METADATA_ACCOUNT_TYPE = "com.android.settings.ia.account";
 
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mContext;
     private UserAndAccountDashboardFragment mFragment;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mContext);
+        final FakeFeatureFactory factory =
+                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        when(factory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
         mFragment = new UserAndAccountDashboardFragment();
     }
 
@@ -67,5 +84,16 @@ public class UserAndAccountDashboardFragmentTest {
         tile.metaData = metaData;
 
         assertThat(mFragment.displayTile(tile)).isTrue();
+    }
+
+    @Test
+    public void testSearchIndexProvider_shouldIndexResource() {
+        final List<SearchIndexableResource> indexRes =
+                UserAndAccountDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                        ShadowApplication.getInstance().getApplicationContext(),
+                        true /* enabled */);
+
+        assertThat(indexRes).isNotNull();
+        assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
     }
 }

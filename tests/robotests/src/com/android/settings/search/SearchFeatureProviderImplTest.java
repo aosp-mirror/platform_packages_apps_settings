@@ -19,16 +19,16 @@ package com.android.settings.search;
 
 import android.app.Activity;
 import android.view.Menu;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search2.SearchFeatureProviderImpl;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
-
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
@@ -50,19 +50,18 @@ public class SearchFeatureProviderImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mActivity = Robolectric.buildActivity(Activity.class).create().visible().get();
-        mProvider = (SearchFeatureProviderImpl) FeatureFactory.getFactory(mActivity)
-                .getSearchFeatureProvider(mActivity);
+        mProvider = new SearchFeatureProviderImpl(mActivity);
     }
 
     @Test
     public void testPassNull_NoError() {
-        mProvider.setUpSearchMenu(null,null);
+        mProvider.setUpSearchMenu(null, null);
     }
 
     @Test
     public void testSetUpMenu_HasItemAdded() {
         mProvider.setUpSearchMenu(menu, mActivity);
 
-        verify(menu).add(anyInt(),anyInt(), anyInt(), anyString());
+        verify(menu).add(anyInt(), anyInt(), anyInt(), anyString());
     }
 }

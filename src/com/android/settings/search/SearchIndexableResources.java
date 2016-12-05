@@ -34,7 +34,9 @@ import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accounts.AccountSettings;
+import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
+import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -55,6 +57,7 @@ import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
+import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.SoundSettings;
@@ -89,6 +92,7 @@ public final class SearchIndexableResources {
 
     static {
         addIndex(WifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
+        addIndex(NetworkDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
         addIndex(AdvancedWifiSettings.class,
                 R.xml.wifi_advanced_settings, R.drawable.ic_settings_wireless);
         addIndex(SavedAccessPointsWifiSettings.class,
@@ -103,6 +107,8 @@ public final class SearchIndexableResources {
         addIndex(WallpaperTypeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(ConfigureNotificationSettings.class,
                 R.xml.configure_notification_settings, R.drawable.ic_settings_notifications);
+        addIndex(AppAndNotificationDashboardFragment.class, NO_DATA_RES_ID,
+                R.drawable.ic_settings_applications);
         addIndex(SoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
         addIndex(OtherSoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
         addIndex(ZenModeSettings.class,
@@ -130,6 +136,8 @@ public final class SearchIndexableResources {
         addIndex(SecuritySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
         addIndex(ScreenPinningSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
         addIndex(AccountSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accounts);
+        addIndex(UserAndAccountDashboardFragment.class, NO_DATA_RES_ID,
+                R.drawable.ic_settings_accounts);
         addIndex(InputMethodAndLanguageSettings.class,
                 NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(PrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_backup);
