@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.content.Context;
+import android.media.RingtoneManager;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -32,22 +33,21 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class ZenModePreferenceControllerTest {
+public class NotificationRingtonePreferenceControllerTest {
 
     @Mock
     private Context mContext;
-
-    private ZenModePreferenceController mController;
+    private NotificationRingtonePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new ZenModePreferenceController(mContext);
+        mController = new NotificationRingtonePreferenceController(mContext);
     }
 
     @Test
-    public void isAlwaysAvailable() {
-        assertThat(mController.isAvailable()).isTrue();
+    public void getRingtoneType_shouldReturnNotification() {
+        assertThat(mController.getRingtoneType()).isEqualTo(RingtoneManager.TYPE_NOTIFICATION);
     }
 
 }

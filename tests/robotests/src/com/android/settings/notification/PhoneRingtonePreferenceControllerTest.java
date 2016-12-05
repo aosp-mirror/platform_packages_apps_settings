@@ -17,6 +17,8 @@
 package com.android.settings.notification;
 
 import android.content.Context;
+import android.media.RingtoneManager;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -27,27 +29,47 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class ZenModePreferenceControllerTest {
+public class PhoneRingtonePreferenceControllerTest {
 
     @Mock
-    private Context mContext;
+    private TelephonyManager mTelephonyManager;
 
-    private ZenModePreferenceController mController;
+    private Context mContext;
+    private PhoneRingtonePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new ZenModePreferenceController(mContext);
+        ShadowApplication shadowContext = ShadowApplication.getInstance();
+        shadowContext.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
+        mContext = shadowContext.getApplicationContext();
+        mController = new PhoneRingtonePreferenceController(mContext);
     }
 
     @Test
-    public void isAlwaysAvailable() {
+    public void isAvailable_notVoiceCapable_shouldReturnFalse() {
+        when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_VoiceCapable_shouldReturnTrue() {
+        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
+
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void getRingtoneType_shouldReturnRingtone() {
+        assertThat(mController.getRingtoneType()).isEqualTo(RingtoneManager.TYPE_RINGTONE);
     }
 
 }
