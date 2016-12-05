@@ -17,12 +17,16 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DoubleTapPowerSettings extends DashboardFragment {
@@ -55,4 +59,19 @@ public class DoubleTapPowerSettings extends DashboardFragment {
         controllers.add(new DoubleTapPowerPreferenceController(context, getLifecycle()));
         return controllers;
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.double_tap_power_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }

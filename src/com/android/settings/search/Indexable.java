@@ -33,7 +33,7 @@ import java.util.List;
  */
 public interface Indexable {
 
-    public interface SearchIndexProvider {
+    interface SearchIndexProvider {
         /**
          * Return a list of references for indexing.
          *
