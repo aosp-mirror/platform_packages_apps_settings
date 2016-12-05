@@ -41,7 +41,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
@@ -51,6 +53,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -169,6 +172,26 @@ public class DashboardFeatureProviderImplTest {
         mImpl.bindPreferenceToTile(mActivity, preference, tile, "123", baseOrder);
 
         assertThat(preference.getOrder()).isEqualTo(-tile.priority + baseOrder);
+    }
+
+    @Test
+    public void bindPreference_withIntentActionMetatdata_shouldSetLaunchAction() {
+        Activity activity = Robolectric.buildActivity(Activity.class).get();
+        final ShadowApplication application = ShadowApplication.getInstance();
+        final Preference preference = new Preference(application.getApplicationContext());
+        final Tile tile = new Tile();
+        tile.key = "key";
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+        tile.metaData = new Bundle();
+        tile.metaData.putString("com.android.settings.intent.action", "TestAction");
+        tile.userHandle = null;
+        mImpl.bindPreferenceToTile(activity, preference, tile, "123", Preference.DEFAULT_ORDER);
+        preference.performClick();
+        ShadowActivity shadowActivity = shadowOf(activity);
+
+        assertThat(shadowActivity.getNextStartedActivityForResult().intent.getAction())
+            .isEqualTo("TestAction");
     }
 
     @Test
