@@ -24,6 +24,9 @@ import android.view.Menu;
 
 import android.view.MenuItem;
 import com.android.settings.R;
+import com.android.settings.utils.AsyncLoader;
+
+import java.util.List;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -59,5 +62,10 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
             });
 
         menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+    }
+
+    @Override
+    public DatabaseResultLoader getDatabaseSearchLoader(Context context, String query) {
+        return new DatabaseResultLoader(context, query);
     }
 }
