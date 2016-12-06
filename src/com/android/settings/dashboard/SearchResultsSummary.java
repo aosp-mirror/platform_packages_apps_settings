@@ -41,12 +41,12 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.search.Index;
 
 import java.util.HashMap;
 
-public class SearchResultsSummary extends InstrumentedFragment {
+public class SearchResultsSummary extends InstrumentedPreferenceFragment {
 
     private static final String LOG_TAG = "SearchResultsSummary";
 

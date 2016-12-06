@@ -39,14 +39,14 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 
 import java.util.List;
 
-public class AppOpsDetails extends InstrumentedFragment {
+public class AppOpsDetails extends InstrumentedPreferenceFragment {
     static final String TAG = "AppOpsDetails";
 
     public static final String ARG_PACKAGE_NAME = "package";

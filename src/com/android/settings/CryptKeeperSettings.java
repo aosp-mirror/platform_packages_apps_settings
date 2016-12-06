@@ -36,9 +36,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 
-public class CryptKeeperSettings extends InstrumentedFragment {
+public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
     private static final String TAG = "CryptKeeper";
     private static final String TYPE = "type";
     private static final String PASSWORD = "password";

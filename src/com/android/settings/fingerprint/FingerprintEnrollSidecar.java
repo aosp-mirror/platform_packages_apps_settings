@@ -28,12 +28,12 @@ import android.os.UserHandle;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 
 /**
  * Sidecar fragment to handle the state around fingerprint enrollment.
  */
-public class FingerprintEnrollSidecar extends InstrumentedFragment {
+public class FingerprintEnrollSidecar extends InstrumentedPreferenceFragment {
 
     private int mEnrollmentSteps = -1;
     private int mEnrollmentRemaining = 0;

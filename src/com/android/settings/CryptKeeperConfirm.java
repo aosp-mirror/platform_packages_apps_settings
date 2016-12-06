@@ -35,11 +35,11 @@ import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 
 import java.util.Locale;
 
-public class CryptKeeperConfirm extends InstrumentedFragment {
+public class CryptKeeperConfirm extends InstrumentedPreferenceFragment {
 
     private static final String TAG = "CryptKeeperConfirm";
 

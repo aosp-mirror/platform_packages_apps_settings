@@ -37,7 +37,7 @@ import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.setupwizardlib.GlifLayout;
 import com.google.android.collect.Lists;
@@ -127,7 +127,7 @@ public class ChooseLockPattern extends SettingsActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public static class ChooseLockPatternFragment extends InstrumentedFragment
+    public static class ChooseLockPatternFragment extends InstrumentedPreferenceFragment
             implements View.OnClickListener, SaveAndFinishWorker.Listener {
 
         public static final int CONFIRM_EXISTING_REQUEST = 55;

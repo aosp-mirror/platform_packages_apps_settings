@@ -32,7 +32,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
@@ -47,7 +47,7 @@ import com.android.settingslib.drawer.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardSummary extends InstrumentedFragment
+public class DashboardSummary extends InstrumentedPreferenceFragment
         implements SettingsDrawerActivity.CategoryListener, ConditionManager.ConditionListener,
         FocusRecyclerView.FocusListener {
     public static final boolean DEBUG = false;
