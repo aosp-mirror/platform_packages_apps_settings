@@ -129,8 +129,7 @@ public class LockAfterTimeoutPreferenceControllerTest {
         when(mPreference.getEntryValues()).thenReturn(new CharSequence[] {"10000"} );
 
         Settings.System.putInt(mContext.getContentResolver(), SCREEN_OFF_TIMEOUT, displayTimeout);
-        ShadowDevicePolicyManagerWrapper
-                .setMaximumTimeToLockForUserAndProfiles(userId, adminTimeout);
+        ShadowDevicePolicyManagerWrapper.setMaximumTimeToLock(userId, adminTimeout);
 
         mController.updateState((Preference) mPreference);
 

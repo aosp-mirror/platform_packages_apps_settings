@@ -47,7 +47,7 @@ public class ShadowDevicePolicyManagerWrapper {
     }
 
     @Implementation
-    public long getMaximumTimeToLockForUserAndProfiles(@UserIdInt int userHandle) {
+    public long getMaximumTimeToLock(ComponentName admin, @UserIdInt int userHandle) {
         return profileTimeouts.getOrDefault(userHandle, 0L);
     }
 
@@ -59,8 +59,7 @@ public class ShadowDevicePolicyManagerWrapper {
         ShadowDevicePolicyManagerWrapper.deviceOwnerUserId = deviceOwnerUserId;
     }
 
-    public static void setMaximumTimeToLockForUserAndProfiles(
-            @UserIdInt int userHandle, Long timeout) {
+    public static void setMaximumTimeToLock(@UserIdInt int userHandle, Long timeout) {
         profileTimeouts.put(userHandle, timeout);
     }
 }

@@ -65,7 +65,7 @@ public class TimeoutPreferenceController extends AbstractPreferenceController im
             final RestrictedLockUtils.EnforcedAdmin admin =
                     RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(mContext);
             final long maxTimeout =
-                    dpm.getMaximumTimeToLockForUserAndProfiles(UserHandle.myUserId());
+                    dpm.getMaximumTimeToLock(null /* admin */, UserHandle.myUserId());
             timeoutListPreference.removeUnusableTimeouts(maxTimeout, admin);
         }
         updateTimeoutPreferenceDescription(timeoutListPreference, currentTimeout);

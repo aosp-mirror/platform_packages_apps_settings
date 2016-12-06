@@ -88,8 +88,7 @@ public class TimeoutPreferenceControllerTest {
         final int profileUserId = UserHandle.myUserId();
         final long timeout = 10000;
         when(mUserManager.getProfiles(profileUserId)).thenReturn(Collections.emptyList());
-        ShadowDevicePolicyManagerWrapper
-                .setMaximumTimeToLockForUserAndProfiles(profileUserId, timeout);
+        ShadowDevicePolicyManagerWrapper.setMaximumTimeToLock(profileUserId, timeout);
 
         mController.updateState(mPreference);
         verify(mPreference).removeUnusableTimeouts(timeout, null);
