@@ -17,36 +17,16 @@
 package com.android.settings.core;
 
 import android.content.Context;
-import android.os.Bundle;
 
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settings.core.lifecycle.ObservablePreferenceFragment;
+import com.android.settings.core.lifecycle.ObservableFragment;
 import com.android.settings.overlay.FeatureFactory;
 
-/**
- * Instrumented fragment that logs visibility state.
- */
-public abstract class InstrumentedFragment extends ObservablePreferenceFragment
-        implements Instrumentable {
+public abstract class InstrumentedFragment extends ObservableFragment implements Instrumentable {
 
     protected MetricsFeatureProvider mMetricsFeatureProvider;
-
-    // metrics placeholder value. Only use this for development.
-    protected final int PLACEHOLDER_METRIC = 10000;
-    protected final int SYSTEM_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 1;
-    protected final int STORAGE_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 2;
-    protected final int NETWORK_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 3;
-    protected final int CONNECTED_DEVICE_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 4;
-    protected final int APP_AND_NOTIFICATION_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 5;
-    protected final int INPUT_AND_GESTURE_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 6;
-    protected final int LANGUAGE_AND_REGION_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 7;
-    protected final int GESTURE_SWIPE_TO_NOTIFICATION = PLACEHOLDER_METRIC + 8;
-    protected final int GESTURE_DOUBLE_TAP_POWER = PLACEHOLDER_METRIC + 9;
-    protected final int GESTURE_PICKUP = PLACEHOLDER_METRIC + 10;
-    protected final int GESTURE_DOUBLE_TAP_SCREEN = PLACEHOLDER_METRIC + 11;
-    protected final int GESTURE_DOUBLE_TWIST = PLACEHOLDER_METRIC + 12;
 
     public InstrumentedFragment() {
         // Mixin that logs visibility change for activity.
@@ -57,9 +37,5 @@ public abstract class InstrumentedFragment extends ObservablePreferenceFragment
     public void onAttach(Context context) {
         super.onAttach(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     }
 }

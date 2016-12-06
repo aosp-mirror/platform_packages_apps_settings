@@ -45,7 +45,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.HelpUtils;
@@ -55,7 +55,7 @@ import java.util.UUID;
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
  */
-public abstract class SettingsPreferenceFragment extends InstrumentedFragment
+public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceFragment
         implements DialogCreatable {
 
     /**

@@ -41,9 +41,9 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 
-public class ProxySelector extends InstrumentedFragment implements DialogCreatable {
+public class ProxySelector extends InstrumentedPreferenceFragment implements DialogCreatable {
     private static final String TAG = "ProxySelector";
 
     EditText    mHostnameField;

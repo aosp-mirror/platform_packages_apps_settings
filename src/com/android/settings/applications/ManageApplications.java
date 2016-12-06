@@ -67,7 +67,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.fuelgauge.PowerWhitelistBackend;
@@ -95,7 +95,7 @@ import java.util.Locale;
  * can be launched through Settings or via the ACTION_MANAGE_PACKAGE_STORAGE
  * intent.
  */
-public class ManageApplications extends InstrumentedFragment
+public class ManageApplications extends InstrumentedPreferenceFragment
         implements OnItemClickListener, OnItemSelectedListener {
 
     static final String TAG = "ManageApplications";

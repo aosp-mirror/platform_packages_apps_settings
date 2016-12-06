@@ -27,7 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
@@ -41,7 +41,7 @@ import java.util.Locale;
  * As opposed to the UserDictionaryActivity, this is only invoked within Settings
  * from the UserDictionarySettings.
  */
-public class UserDictionaryAddWordFragment extends InstrumentedFragment
+public class UserDictionaryAddWordFragment extends InstrumentedPreferenceFragment
         implements AdapterView.OnItemSelectedListener,
         com.android.internal.app.LocalePicker.LocaleSelectionListener {
 

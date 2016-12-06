@@ -30,10 +30,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 
-public class PrivateVolumeFormat extends InstrumentedFragment {
+public class PrivateVolumeFormat extends InstrumentedPreferenceFragment {
     private VolumeInfo mVolume;
     private DiskInfo mDisk;
 

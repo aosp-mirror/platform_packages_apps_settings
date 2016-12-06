@@ -16,6 +16,7 @@
 package com.android.settings.core.lifecycle;
 
 import android.content.Context;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.lifecycle.events.OnAttach;
@@ -24,6 +25,7 @@ import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.core.lifecycle.events.OnStart;
 import com.android.settings.core.lifecycle.events.OnStop;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -44,6 +46,16 @@ public class LifecycleTest {
         public TestDialogFragment() {
             mFragObserver = new TestObserver();
             mLifecycle.addObserver(mFragObserver);
+        }
+    }
+
+    public static class TestFragment extends ObservableFragment {
+
+        final TestObserver mFragObserver;
+
+        public TestFragment() {
+            mFragObserver = new TestObserver();
+            getLifecycle().addObserver(mFragObserver);
         }
     }
 
@@ -119,10 +131,27 @@ public class LifecycleTest {
     }
 
     @Test
-    public void runThroughFragmentLifecycles_shouldObserveEverything() {
+    public void runThroughDialogFragmentLifecycles_shouldObserveEverything() {
         FragmentController<TestDialogFragment> fragmentController =
                 Robolectric.buildFragment(TestDialogFragment.class);
         TestDialogFragment fragment = fragmentController.get();
+
+        fragmentController.attach().create().start().resume().pause().stop().destroy();
+
+        assertThat(fragment.mFragObserver.mOnAttachObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnAttachHasContext).isTrue();
+        assertThat(fragment.mFragObserver.mOnStartObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnResumeObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnPauseObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnStopObserved).isTrue();
+        assertThat(fragment.mFragObserver.mOnDestroyObserved).isTrue();
+    }
+
+    @Test
+    public void runThroughFragmentLifecycles_shouldObserveEverything() {
+        FragmentController<TestFragment> fragmentController =
+                Robolectric.buildFragment(TestFragment.class);
+        TestFragment fragment = fragmentController.get();
 
         fragmentController.attach().create().start().resume().pause().stop().destroy();
 
