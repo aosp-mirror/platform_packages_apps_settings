@@ -20,12 +20,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
+import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settingslib.WirelessUtils;
 
 public class AirplaneModeCondition extends Condition {
+    public static String TAG = "APM_Condition";
 
     public AirplaneModeCondition(ConditionManager conditionManager) {
         super(conditionManager);
@@ -33,6 +35,7 @@ public class AirplaneModeCondition extends Condition {
 
     @Override
     public void refreshState() {
+        Log.d(TAG, "APM condition refreshed");
         setActive(WirelessUtils.isAirplaneModeOn(mManager.getContext()));
     }
 
@@ -44,6 +47,12 @@ public class AirplaneModeCondition extends Condition {
     @Override
     public Icon getIcon() {
         return Icon.createWithResource(mManager.getContext(), R.drawable.ic_airplane);
+    }
+
+    @Override
+    protected void setActive(boolean active) {
+        super.setActive(active);
+        Log.d(TAG, "setActive was called with " + active);
     }
 
     @Override

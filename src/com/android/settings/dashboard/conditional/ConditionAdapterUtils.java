@@ -21,6 +21,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup.LayoutParams;
@@ -31,8 +32,10 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.WirelessUtils;
 
 public class ConditionAdapterUtils {
+    private static final String TAG = "ConditionAdapterUtils";
 
     public static void addDismiss(final RecyclerView recyclerView) {
         ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0,
@@ -65,6 +68,11 @@ public class ConditionAdapterUtils {
     public static void bindViews(final Condition condition,
             DashboardAdapter.DashboardItemHolder view, boolean isExpanded,
             View.OnClickListener onClickListener, View.OnClickListener onExpandListener) {
+        if (condition instanceof AirplaneModeCondition) {
+            Log.d(TAG, "Airplane mode condition has been bound with "
+                    + "isActive=" + condition.isActive() + ". Airplane mode is currently " +
+                    WirelessUtils.isAirplaneModeOn(condition.mManager.getContext()));
+        }
         View card = view.itemView.findViewById(R.id.content);
         card.setTag(condition);
         card.setOnClickListener(onClickListener);
