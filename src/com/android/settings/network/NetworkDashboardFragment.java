@@ -18,15 +18,19 @@ package com.android.settings.network;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.android.settings.network.MobilePlanPreferenceController
@@ -107,4 +111,19 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         }
         return 0;
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.network_and_internet;
+                    return Arrays.asList(sir);
+                }
+            };
 }
