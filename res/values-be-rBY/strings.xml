@@ -1965,7 +1965,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Эканомія зараду акумулятара"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Уключаць аўтаматычна"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Ніколі"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="8581827859893688822">"пры ўзроўні зараду акумулятара <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"пры ўзроўні зараду акумулятара <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Статыстыка працэсаў"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Падрабязная статыстыка запушчаных працэсаў"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Аб\'ём выкарыстання памяці"</string>
@@ -3284,6 +3284,8 @@
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"Не можаце ўвайсці ў сістэму?"</string>
     <string name="support_disclaimer_title" msgid="4825302018208770031">"Адправіць інфармацыю пра сістэму"</string>
     <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Больш не паказваць"</string>
+    <string name="support_account_request_prefix" msgid="6387847874661861650">"Запыт ад"</string>
+    <string name="support_account_picker_add_account" msgid="5076277544846506214">"Дадаць уліковы запіс"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Налады працоўнага профілю"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Пошук кантактаў"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Дазволіць вашай арганізацыі пошук кантактаў, каб вызначаць абанентаў і кантакты"</string>
@@ -3362,6 +3364,7 @@
     <string name="auto_sync_account_title" msgid="7647106425106072285">"Аўтасiнхр. даных улік. запісу"</string>
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"Аўтасінхр. дан. асаб. ул. зап."</string>
     <string name="auto_sync_work_account_title" msgid="3073278154593727844">"Аўтасінхр. дан. прац. ул. зап."</string>
+    <string name="account_sync_title" msgid="7214747784136106491">"Сінхранізацыя ўліковага запісу"</string>
     <string name="enterprise_privacy_settings" msgid="6419290515657989967">"Прыватнасць"</string>
     <string name="enterprise_privacy_settings_title" msgid="3816716633813721131">"Прыватнасць"</string>
     <string name="enterprise_privacy_header" msgid="5605095630252702716">"Для забеспячэння доступу да вашых працоўных даных ваша арганізацыя можа змяніць налады і ўсталяваць пэўнае праграмнае забеспячэнне на вашу прыладу. У выніку гэтага некаторае асабістае змесціва зможа ўбачыць ваш адміністратар. Для атрымання дадатковай інфармацыі звярніцеся да адміністратара сваёй арганізацыі."</string>
@@ -3369,12 +3372,12 @@
     <string name="enterprise_privacy_exposure_changes_category" msgid="8756743868307785139">"Якія змены ўплыв. на тое, што ваша арганізацыя можа бачыць?"</string>
     <string name="enterprise_privacy_device_access_category" msgid="8690195503463047205">"Якія дзеянні могуць паўплыв. на ваш доступ да гэтай прылады?"</string>
     <string name="enterprise_privacy_enterprise_data" msgid="2773968662865848413">"Даныя, звязаныя з вашым працоўным уліковым запісам, такія як электронная пошта і каляндар"</string>
-    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"Спіс з усіх праграм на вашай прыладзе"</string>
+    <string name="enterprise_privacy_number_installed_packages_default" msgid="2737776397514027098">"Спіс усіх праграм на вашай прыладзе"</string>
     <plurals name="enterprise_privacy_number_installed_packages" formatted="false" msgid="4190341451643144601">
-      <item quantity="one">Спіс з усёй <xliff:g id="COUNT_1">%d</xliff:g> праграмы на вашай прыладзе</item>
+      <item quantity="one">Спіс з <xliff:g id="COUNT_1">%d</xliff:g> праграмы на вашай прыладзе</item>
       <item quantity="few">Спіс з усіх <xliff:g id="COUNT_1">%d</xliff:g> праграм на вашай прыладзе</item>
       <item quantity="many">Спіс з усіх <xliff:g id="COUNT_1">%d</xliff:g> праграм на вашай прыладзе</item>
-      <item quantity="other">Спіс з усіх <xliff:g id="COUNT_1">%d</xliff:g> праграмы на вашай прыладзе</item>
+      <item quantity="other">Спіс з <xliff:g id="COUNT_1">%d</xliff:g> праграмы на вашай прыладзе</item>
     </plurals>
     <string name="enterprise_privacy_usage_stats" msgid="1368019140634184050">"Выкарыстанне (патрачаны час і аб\'ём выкарыстаных даных) кожнай праграмы на вашай прыладзе"</string>
     <string name="enterprise_privacy_network_logs" msgid="3432813134253944075">"Журналы трафіку на вашай прыладзе"</string>
