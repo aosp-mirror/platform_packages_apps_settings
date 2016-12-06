@@ -19,10 +19,8 @@ package com.android.settings.gestures;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -41,11 +39,12 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class SwipeToNotificationSettingsTest {
+public class DoubleTapScreenSettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    private SwipeToNotificationSettings mFragment;
+
+    private DoubleTapScreenSettings mSettings;
 
     @Before
     public void setUp() {
@@ -54,30 +53,17 @@ public class SwipeToNotificationSettingsTest {
         final FakeFeatureFactory factory =
                 (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         when(factory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
-        mFragment = new SwipeToNotificationSettings();
-    }
-
-    @Test
-    public void testGetPreferenceScreenResId() {
-        assertThat(mFragment.getPreferenceScreenResId())
-                .isEqualTo(R.xml.swipe_to_notification_settings);
-    }
-
-    @Test
-    public void testGetPreferenceControllers_shouldAllBeCreated() {
-        final List<PreferenceController> controllers = mFragment.getPreferenceControllers(mContext);
-
-        assertThat(controllers.isEmpty()).isFalse();
+        mSettings = new DoubleTapScreenSettings();
     }
 
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-                SwipeToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                DoubleTapScreenSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
                         ShadowApplication.getInstance().getApplicationContext(),
                         true /* enabled */);
 
         assertThat(indexRes).isNotNull();
-        assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
+        assertThat(indexRes.get(0).xmlResId).isEqualTo(mSettings.getPreferenceScreenResId());
     }
 }
