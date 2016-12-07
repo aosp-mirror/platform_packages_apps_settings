@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import java.util.List;
@@ -29,24 +30,30 @@ import java.util.List;
  * the API version supported by Robolectric.
  */
 public interface PackageManagerWrapper {
+
+    /**
+     * Returns the real {@code PackageManager} object.
+     */
+    PackageManager getPackageManager();
+
     /**
      * Calls {@code PackageManager.getInstalledApplicationsAsUser()}.
      *
-     * @see android.content.pm.PackageManager.PackageManager#getInstalledApplicationsAsUser
+     * @see android.content.pm.PackageManager#getInstalledApplicationsAsUser
      */
     List<ApplicationInfo> getInstalledApplicationsAsUser(int flags, int userId);
 
     /**
      * Calls {@code PackageManager.hasSystemFeature()}.
      *
-     * @see android.content.pm.PackageManager.PackageManager#hasSystemFeature
+     * @see android.content.pm.PackageManager#hasSystemFeature
      */
     boolean hasSystemFeature(String name);
 
     /**
      * Calls {@code PackageManager.queryIntentActivitiesAsUser()}.
      *
-     * @see android.content.pm.PackageManager.PackageManager#queryIntentActivitiesAsUser
+     * @see android.content.pm.PackageManager#queryIntentActivitiesAsUser
      */
     List<ResolveInfo> queryIntentActivitiesAsUser(Intent intent, int flags, int userId);
 }

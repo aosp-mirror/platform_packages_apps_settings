@@ -15,6 +15,7 @@
  */
 package com.android.settings.search2;
 
+import android.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -29,5 +30,5 @@ public abstract class SearchViewHolder extends RecyclerView.ViewHolder {
         super(view);
     }
 
-    public abstract void onBind(SearchResult result);
+    public abstract void onBind(Fragment fragment, SearchResult result);
 }

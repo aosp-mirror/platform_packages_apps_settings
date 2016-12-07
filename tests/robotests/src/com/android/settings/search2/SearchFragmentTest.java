@@ -47,6 +47,8 @@ public class SearchFragmentTest {
     private Context mContext;
     @Mock
     private DatabaseResultLoader mDatabaseResultLoader;
+    @Mock
+    private InstalledAppResultLoader mInstalledAppResultLoader;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
@@ -54,14 +56,16 @@ public class SearchFragmentTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        when(mFeatureFactory.searchFeatureProvider
+                .getDatabaseSearchLoader(any(Context.class), anyString()))
+                .thenReturn(mDatabaseResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getInstalledAppSearchLoader(any(Context.class), anyString()))
+                .thenReturn(mInstalledAppResultLoader);
     }
 
     @Test
     public void screenRotate_shouldPersistQuery() {
-        when(mFeatureFactory.searchFeatureProvider
-                .getDatabaseSearchLoader(any(Context.class), anyString()))
-                .thenReturn(mDatabaseResultLoader);
-
         final Bundle bundle = new Bundle();
         final String testQuery = "test";
         ActivityController<SearchActivity> activityController =
@@ -79,14 +83,12 @@ public class SearchFragmentTest {
 
         verify(mFeatureFactory.searchFeatureProvider)
                 .getDatabaseSearchLoader(any(Context.class), anyString());
+        verify(mFeatureFactory.searchFeatureProvider)
+                .getInstalledAppSearchLoader(any(Context.class), anyString());
     }
 
     @Test
     public void queryTextChange_shouldTriggerLoader() {
-        when(mFeatureFactory.searchFeatureProvider
-                .getDatabaseSearchLoader(any(Context.class), anyString()))
-                .thenReturn(mDatabaseResultLoader);
-
         final String testQuery = "test";
         ActivityController<SearchActivity> activityController =
                 Robolectric.buildActivity(SearchActivity.class);
@@ -98,5 +100,7 @@ public class SearchFragmentTest {
 
         verify(mFeatureFactory.searchFeatureProvider)
                 .getDatabaseSearchLoader(any(Context.class), anyString());
+        verify(mFeatureFactory.searchFeatureProvider)
+                .getInstalledAppSearchLoader(any(Context.class), anyString());
     }
 }

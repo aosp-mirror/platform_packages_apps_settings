@@ -24,10 +24,16 @@ import android.content.pm.ResolveInfo;
 import java.util.List;
 
 public class PackageManagerWrapperImpl implements PackageManagerWrapper {
+
     private final PackageManager mPm;
 
     public PackageManagerWrapperImpl(PackageManager pm) {
         mPm = pm;
+    }
+
+    @Override
+    public PackageManager getPackageManager() {
+        return mPm;
     }
 
     @Override

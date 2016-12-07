@@ -19,22 +19,22 @@ package com.android.settings.search;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.ResultPayload;
 import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
-import com.android.settings.R;
-
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.ArrayList;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -100,44 +100,10 @@ public class SearchResultBuilderTest {
     }
 
     @Test
-    public void testNoSummary_BuildSearchResultException() {
-        mBuilder.addTitle(mTitle)
-                .addRank(mRank)
-                .addBreadcrumbs(mBreadcrumbs)
-                .addIcon(mIcon)
-                .addPayload(mResultPayload);
-
-        SearchResult result = null;
-        try {
-            result = mBuilder.build();
-        } catch (IllegalArgumentException e) {
-            // passes.
-        }
-        assertThat(result).isNull();
-    }
-
-    @Test
     public void testNoRank_BuildSearchResultException() {
         mBuilder.addTitle(mTitle)
                 .addSummary(mSummary)
                 .addBreadcrumbs(mBreadcrumbs)
-                .addIcon(mIcon)
-                .addPayload(mResultPayload);
-
-        SearchResult result = null;
-        try {
-            result = mBuilder.build();
-        } catch (IllegalArgumentException e) {
-            // passes.
-        }
-        assertThat(result).isNull();
-    }
-
-    @Test
-    public void testNoBreadcrumbs_BuildSearchResultException() {
-        mBuilder.addTitle(mTitle)
-                .addSummary(mSummary)
-                .addRank(mRank)
                 .addIcon(mIcon)
                 .addPayload(mResultPayload);
 

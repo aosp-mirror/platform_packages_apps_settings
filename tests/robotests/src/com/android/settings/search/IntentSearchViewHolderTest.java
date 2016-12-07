@@ -17,40 +17,50 @@
 
 package com.android.settings.search;
 
+import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
+
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.IntentSearchViewHolder;
-import com.android.settings.search2.SearchResult.Builder;
 import com.android.settings.search2.SearchResult;
+import com.android.settings.search2.SearchResult.Builder;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class IntentSearchViewHolderTest {
-    private IntentSearchViewHolder mHolder;
-    private static Drawable mIcon;
 
     private static final String TITLE = "title";
     private static final String SUMMARY = "summary";
 
+    @Mock
+    private Fragment mFragment;
+    private IntentSearchViewHolder mHolder;
+    private Drawable mIcon;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         View view = LayoutInflater.from(context).inflate(R.layout.search_intent_item, null);
         mHolder = new IntentSearchViewHolder(view);
@@ -68,11 +78,13 @@ public class IntentSearchViewHolderTest {
     @Test
     public void testBindViewElements_AllUpdated() {
         SearchResult result = getSearchResult();
-        mHolder.onBind(result);
+        mHolder.onBind(mFragment, result);
+        mHolder.itemView.performClick();
 
         assertThat(mHolder.titleView.getText()).isEqualTo(TITLE);
         assertThat(mHolder.summaryView.getText()).isEqualTo(SUMMARY);
         assertThat(mHolder.iconView.getDrawable()).isEqualTo(mIcon);
+        verify(mFragment).startActivity(any(Intent.class));
     }
 
     private SearchResult getSearchResult() {
@@ -81,7 +93,7 @@ public class IntentSearchViewHolderTest {
                 .addSummary(SUMMARY)
                 .addRank(1)
                 .addPayload(new IntentPayload(null))
-                .addBreadcrumbs(new ArrayList<String>())
+                .addBreadcrumbs(new ArrayList<>())
                 .addIcon(mIcon);
 
         return builder.build();

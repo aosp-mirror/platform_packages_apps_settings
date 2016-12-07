@@ -33,40 +33,19 @@ import java.util.Map;
 public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
     private final List<SearchResult> mSearchResults;
     private final Map<String, List<SearchResult>> mResultsMap;
+    private final SearchFragment mFragment;
 
-    public SearchResultsAdapter() {
+    public SearchResultsAdapter(SearchFragment fragment) {
+        mFragment = fragment;
         mSearchResults = new ArrayList<>();
         mResultsMap = new HashMap<>();
 
         setHasStableIds(true);
     }
 
-    public void mergeResults(List<SearchResult> freshResults, String loaderClassName) {
-        if (freshResults == null) {
-            return;
-        }
-        mResultsMap.put(loaderClassName, freshResults);
-        mSearchResults.addAll(mergeMappedResults());
-        notifyDataSetChanged();
-    }
-
-    public void clearResults() {
-        mSearchResults.clear();
-        mResultsMap.clear();
-        notifyDataSetChanged();
-    }
-
-    private ArrayList<SearchResult> mergeMappedResults() {
-        ArrayList<SearchResult> mergedResults = new ArrayList<>();
-        for (String key : mResultsMap.keySet()) {
-            mergedResults.addAll(mResultsMap.get(key));
-        }
-        return mergedResults;
-    }
-
     @Override
     public SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch (viewType) {
             case PayloadType.INTENT:
                 View view = inflater.inflate(R.layout.search_intent_item, parent, false);
@@ -82,13 +61,12 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
 
     @Override
     public void onBindViewHolder(SearchViewHolder holder, int position) {
-        SearchResult result = mSearchResults.get(position);
-        holder.onBind(result);
+        holder.onBind(mFragment, mSearchResults.get(position));
     }
 
     @Override
     public long getItemId(int position) {
-        return super.getItemId(position);
+        return mSearchResults.get(position).stableId;
     }
 
     @Override
@@ -99,6 +77,23 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
     @Override
     public int getItemCount() {
         return mSearchResults.size();
+    }
+
+    public void mergeResults(List<SearchResult> freshResults, String loaderClassName) {
+        if (freshResults == null) {
+            return;
+        }
+        mResultsMap.put(loaderClassName, freshResults);
+        final int oldSize = mSearchResults.size();
+        mSearchResults.addAll(freshResults);
+        final int newSize = mSearchResults.size();
+        notifyItemRangeInserted(oldSize, newSize - oldSize);
+    }
+
+    public void clearResults() {
+        mSearchResults.clear();
+        mResultsMap.clear();
+        notifyDataSetChanged();
     }
 
     @VisibleForTesting
