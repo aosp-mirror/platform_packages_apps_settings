@@ -20,20 +20,25 @@ package com.android.settings.search;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.*;
+import com.android.settings.search2.DatabaseResultLoader;
+import com.android.settings.search2.IntentPayload;
+import com.android.settings.search2.ResultPayload;
+import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
-import com.android.settings.R;
-
-import java.util.ArrayList;
+import com.android.settings.search2.SearchResultsAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import org.robolectric.annotation.Config;
 import org.robolectric.Robolectric;
+import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -78,7 +83,7 @@ public class SearchAdapterTest {
 
     @Test
     public void testNoResultsAdded_EmptyListReturned() {
-        ArrayList<SearchResult> updatedResults = mAdapter.getSearchResults();
+        List<SearchResult> updatedResults = mAdapter.getSearchResults();
         assertThat(updatedResults).isEmpty();
     }
 
@@ -88,7 +93,7 @@ public class SearchAdapterTest {
         ArrayList<SearchResult> intentResults = getIntentSampleResults();
         mAdapter.mergeResults(intentResults, mLoaderClassName);
 
-        ArrayList<SearchResult> updatedResults = mAdapter.getSearchResults();
+        List<SearchResult> updatedResults = mAdapter.getSearchResults();
         assertThat(updatedResults).containsAllIn(intentResults);
     }
 
@@ -98,7 +103,7 @@ public class SearchAdapterTest {
         mAdapter.mergeResults(intentResults, mLoaderClassName);
         mAdapter.mergeResults(intentResults, mLoaderClassName);
 
-        ArrayList<SearchResult> updatedResults = mAdapter.getSearchResults();
+        List<SearchResult> updatedResults = mAdapter.getSearchResults();
         assertThat(updatedResults).containsAllIn(intentResults);
     }
 }

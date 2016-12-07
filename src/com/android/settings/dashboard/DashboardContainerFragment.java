@@ -28,9 +28,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
@@ -77,7 +77,7 @@ public final class DashboardContainerFragment extends InstrumentedFragment {
 
         // check if support tab needs to be selected
         final String selectedTab = getArguments().
-            getString(EXTRA_SELECT_SETTINGS_TAB, ARG_SUMMARY_TAB);
+                getString(EXTRA_SELECT_SETTINGS_TAB, ARG_SUMMARY_TAB);
         if (TextUtils.equals(selectedTab, ARG_SUPPORT_TAB)) {
             mViewPager.setCurrentItem(INDEX_SUPPORT_FRAGMENT);
         } else {

@@ -16,7 +16,7 @@
 package com.android.settings.search2;
 
 import android.app.Activity;
-import android.widget.SearchView;
+import android.content.Context;
 import android.view.Menu;
 
 /**
@@ -31,8 +31,14 @@ public interface SearchFeatureProvider {
 
     /**
      * Inserts the Menu items into Settings activity.
+     *
      * @param menu Items will be inserted into this menu.
      * @param activity The activity that precedes SearchActivity.
      */
     void setUpSearchMenu(Menu menu, Activity activity);
+
+    /**
+     * Returns a new loader to search in index database.
+     */
+    DatabaseResultLoader getDatabaseSearchLoader(Context context, String query);
 }
