@@ -31,11 +31,6 @@ public class ProxyPreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean isAvailable() {
         // proxy UI disabled until we have better app support
         return false;

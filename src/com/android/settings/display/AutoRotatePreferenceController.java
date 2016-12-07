@@ -68,11 +68,6 @@ public class AutoRotatePreferenceController extends PreferenceController impleme
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean isAvailable() {
         return RotationPolicy.isRotationLockToggleVisible(mContext);
     }

@@ -74,9 +74,4 @@ public class VrDisplayPreferenceController extends PreferenceController implemen
         }
         return true;
     }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
 }

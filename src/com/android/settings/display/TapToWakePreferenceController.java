@@ -41,11 +41,6 @@ public class TapToWakePreferenceController extends PreferenceController implemen
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void updateState(Preference preference) {
         int value = Settings.Secure.getInt(
                 mContext.getContentResolver(), Settings.Secure.DOUBLE_TAP_TO_WAKE, 0);

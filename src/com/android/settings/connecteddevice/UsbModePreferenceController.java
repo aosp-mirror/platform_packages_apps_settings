@@ -58,11 +58,6 @@ public class UsbModePreferenceController extends PreferenceController
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean isAvailable() {
         return true;
     }

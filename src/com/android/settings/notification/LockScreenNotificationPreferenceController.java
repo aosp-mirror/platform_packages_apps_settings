@@ -76,11 +76,6 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mLockscreen =

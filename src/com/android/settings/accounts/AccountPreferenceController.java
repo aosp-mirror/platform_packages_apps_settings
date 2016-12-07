@@ -147,11 +147,6 @@ public class AccountPreferenceController extends PreferenceController
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return null;
     }

@@ -36,11 +36,6 @@ public class PhoneLanguagePreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void updateState(Preference preference) {
         if (preference == null) {
             return;

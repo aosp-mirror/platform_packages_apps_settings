@@ -52,11 +52,6 @@ public class TimeoutPreferenceController extends PreferenceController implements
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void updateState(Preference preference) {
         final TimeoutListPreference timeoutListPreference = (TimeoutListPreference) preference;
         final long currentTimeout = Settings.System.getLong(mContext.getContentResolver(),

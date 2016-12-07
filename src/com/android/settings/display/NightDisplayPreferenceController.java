@@ -28,11 +28,6 @@ public class NightDisplayPreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean isAvailable() {
         return NightDisplayController.isAvailable(mContext);
     }

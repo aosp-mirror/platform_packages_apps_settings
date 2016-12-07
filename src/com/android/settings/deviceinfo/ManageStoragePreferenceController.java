@@ -35,11 +35,6 @@ public class ManageStoragePreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean isAvailable() {
         return mContext.getResources().getBoolean(R.bool.config_storage_manager_settings_enabled);
     }

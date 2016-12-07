@@ -65,11 +65,6 @@ public abstract class GesturePreferenceController extends PreferenceController
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void onStop() {
         if (mVideoPreference != null) {
             mVideoPreference.onViewInvisible();

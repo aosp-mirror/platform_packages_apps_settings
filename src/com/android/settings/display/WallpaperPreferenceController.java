@@ -46,11 +46,6 @@ public class WallpaperPreferenceController extends PreferenceController {
         disablePreferenceIfManaged((RestrictedPreference) preference);
     }
 
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
     private void disablePreferenceIfManaged(RestrictedPreference pref) {
         final String restriction = DISALLOW_SET_WALLPAPER;
         if (pref != null) {

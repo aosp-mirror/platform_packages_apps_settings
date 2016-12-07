@@ -45,11 +45,6 @@ public class LiftToWakePreferenceController extends PreferenceController impleme
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean value = (Boolean) newValue;
         Settings.Secure.putInt(mContext.getContentResolver(), WAKE_GESTURE_ENABLED, value ? 1 : 0);

@@ -51,11 +51,6 @@ public class InstalledPackagesPreferenceController extends PreferenceController 
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return KEY_NUMBER_INSTALLED_PACKAGES;
     }

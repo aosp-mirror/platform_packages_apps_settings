@@ -49,11 +49,6 @@ public class TimeZonePreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return KEY_TIMEZONE;
     }

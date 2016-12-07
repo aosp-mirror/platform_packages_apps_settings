@@ -32,11 +32,6 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return PREF_KEY_SWIPE_DOWN_FINGERPRINT;
     }

@@ -49,11 +49,6 @@ public class TtsPreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return KEY_TTS_SETTINGS;
     }

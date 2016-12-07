@@ -29,11 +29,6 @@ public class AdditionalSystemUpdatePreferenceController extends PreferenceContro
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean isAvailable() {
         return mContext.getResources().getBoolean(
                 com.android.settings.R.bool.config_additional_system_update_setting_enable);

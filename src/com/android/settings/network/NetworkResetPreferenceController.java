@@ -32,11 +32,6 @@ public class NetworkResetPreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean isAvailable() {
         return !RestrictedLockUtils.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
