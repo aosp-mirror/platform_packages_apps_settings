@@ -19,11 +19,73 @@ package com.android.settings.search2;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
- * Dataclass as an interface for all Search Results.
+ * Data class as an interface for all Search Results.
  */
 public class SearchResult implements Comparable<SearchResult> {
+
+    /**
+     * The title of the result and main text displayed.
+     * Intent Results: Displays as the primary
+     */
+    public final CharSequence title;
+
+    /**
+     * Summary / subtitle text
+     * Intent Results: Displays the text underneath the title
+     */
+    final public CharSequence summary;
+
+    /**
+     * An ordered list of the information hierarchy.
+     * Intent Results: Displayed a hierarchy of selections to reach the setting from the home screen
+     */
+    public final ArrayList<String> breadcrumbs;
+
+    /**
+     * A suggestion for the ranking of the result.
+     * Based on Settings Rank:
+     * 1 is a near perfect match
+     * 9 is the weakest match
+     * TODO subject to change
+     */
+    public final int rank;
+
+    /**
+     * Identifier for the recycler view adapter.
+     */
+    @ResultPayload.PayloadType
+    public final int viewType;
+
+    /**
+     * Metadata for the specific result types.
+     */
+    public final ResultPayload payload;
+
+    /**
+     * Result's icon.
+     */
+    public final Drawable icon;
+
+    /**
+     * Stable id for this object.
+     */
+    public final long stableId;
+
+    private SearchResult(Builder builder) {
+        title = builder.mTitle;
+        summary = builder.mSummary;
+        breadcrumbs = builder.mBreadcrumbs;
+        rank = builder.mRank;
+        icon = builder.mIcon;
+        payload = builder.mResultPayload;
+        viewType = payload.getType();
+        stableId = Objects.hash(title, summary, breadcrumbs, rank, icon, payload, viewType);
+
+    }
+
     @Override
     public int compareTo(SearchResult searchResult) {
         if (searchResult == null) {
@@ -33,19 +95,19 @@ public class SearchResult implements Comparable<SearchResult> {
     }
 
     public static class Builder {
-        protected String mTitle;
-        protected String mSummary;
+        protected CharSequence mTitle;
+        protected CharSequence mSummary;
         protected ArrayList<String> mBreadcrumbs;
         protected int mRank = -1;
         protected ResultPayload mResultPayload;
         protected Drawable mIcon;
 
-        public Builder addTitle(String title) {
+        public Builder addTitle(CharSequence title) {
             mTitle = title;
             return this;
         }
 
-        public Builder addSummary(String summary) {
+        public Builder addSummary(CharSequence summary) {
             mSummary = summary;
             return this;
         }
@@ -77,10 +139,6 @@ public class SearchResult implements Comparable<SearchResult> {
             // Check that all of the mandatory fields are set.
             if (mTitle == null) {
                 throw new IllegalArgumentException("SearchResult missing title argument");
-            } else if (mSummary == null ) {
-                throw new IllegalArgumentException("SearchResult missing summary argument");
-            } else if (mBreadcrumbs == null){
-                throw new IllegalArgumentException("SearchResult missing breadcrumbs argument");
             } else if (mRank == -1) {
                 throw new IllegalArgumentException("SearchResult missing rank argument");
             } else if (mIcon == null) {
@@ -90,57 +148,5 @@ public class SearchResult implements Comparable<SearchResult> {
             }
             return new SearchResult(this);
         }
-    }
-
-    /**
-     * The title of the result and main text displayed.
-     * Intent Results: Displays as the primary
-     */
-    public final String title;
-
-    /**
-     * Summary / subtitle text
-     * Intent Results: Displays the text underneath the title
-     */
-    final public String summary;
-
-    /**
-     * An ordered list of the information hierarchy.
-     * Intent Results: Displayed a hierarchy of selections to reach the setting from the home screen
-     */
-    public final ArrayList<String> breadcrumbs;
-
-    /**
-     * A suggestion for the ranking of the result.
-     * Based on Settings Rank:
-     * 1 is a near perfect match
-     * 9 is the weakest match
-     * TODO subject to change
-     */
-    public final int rank;
-
-    /**
-     * Identifier for the recycler view adapter.
-     */
-    @ResultPayload.PayloadType public final int viewType;
-
-    /**
-     * Metadata for the specific result types.
-     */
-    public final ResultPayload payload;
-
-    /**
-     * Result's icon.
-     */
-    public final Drawable icon;
-
-    private SearchResult(Builder builder) {
-        title = builder.mTitle;
-        summary = builder.mSummary;
-        breadcrumbs = builder.mBreadcrumbs;
-        rank = builder.mRank;
-        icon = builder.mIcon;
-        payload = builder.mResultPayload;
-        viewType = payload.getType();
     }
 }

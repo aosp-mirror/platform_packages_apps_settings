@@ -46,13 +46,13 @@ public class SearchFragment extends InstrumentedFragment implements
     static final String STATE_QUERY = "query";
 
     // Loader IDs
-    private static final int DATABASE_LOADER_ID = 0;
+    private static final int LOADER_ID_DATABASE = 0;
+    private static final int LOADER_ID_INSTALLED_APPS = 1;
 
     @VisibleForTesting
     String mQuery;
 
     private SearchFeatureProvider mSearchFeatureProvider;
-    private DatabaseResultLoader mSearchLoader;
 
     private SearchResultsAdapter mSearchAdapter;
     private RecyclerView mResultsRecyclerView;
@@ -73,10 +73,12 @@ public class SearchFragment extends InstrumentedFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mSearchAdapter = new SearchResultsAdapter();
+        mSearchAdapter = new SearchResultsAdapter(this);
         if (savedInstanceState != null) {
             mQuery = savedInstanceState.getString(STATE_QUERY);
-            getLoaderManager().initLoader(DATABASE_LOADER_ID, null, this);
+            final LoaderManager loaderManager = getLoaderManager();
+            loaderManager.initLoader(LOADER_ID_DATABASE, null, this);
+            loaderManager.initLoader(LOADER_ID_INSTALLED_APPS, null, this);
         }
         final ActionBar actionBar = getActivity().getActionBar();
         actionBar.setCustomView(makeSearchView(actionBar, mQuery));
@@ -109,7 +111,7 @@ public class SearchFragment extends InstrumentedFragment implements
         mSearchAdapter.clearResults();
 
         if (TextUtils.isEmpty(mQuery)) {
-            getLoaderManager().destroyLoader(DATABASE_LOADER_ID);
+            getLoaderManager().destroyLoader(LOADER_ID_DATABASE);
         } else {
             restartLoaders();
         }
@@ -127,9 +129,10 @@ public class SearchFragment extends InstrumentedFragment implements
         final Activity activity = getActivity();
 
         switch (id) {
-            case DATABASE_LOADER_ID:
-                mSearchLoader = mSearchFeatureProvider.getDatabaseSearchLoader(activity, mQuery);
-                return mSearchLoader;
+            case LOADER_ID_DATABASE:
+                return mSearchFeatureProvider.getDatabaseSearchLoader(activity, mQuery);
+            case LOADER_ID_INSTALLED_APPS:
+                return mSearchFeatureProvider.getInstalledAppSearchLoader(activity, mQuery);
             default:
                 return null;
         }
@@ -137,10 +140,6 @@ public class SearchFragment extends InstrumentedFragment implements
 
     @Override
     public void onLoadFinished(Loader<List<SearchResult>> loader, List<SearchResult> data) {
-        if (data == null) {
-            return;
-        }
-
         mSearchAdapter.mergeResults(data, loader.getClass().getName());
     }
 
@@ -150,7 +149,8 @@ public class SearchFragment extends InstrumentedFragment implements
 
     private void restartLoaders() {
         final LoaderManager loaderManager = getLoaderManager();
-        loaderManager.restartLoader(DATABASE_LOADER_ID, null /* args */, this /* callback */);
+        loaderManager.restartLoader(LOADER_ID_DATABASE, null /* args */, this /* callback */);
+        loaderManager.restartLoader(LOADER_ID_INSTALLED_APPS, null /* args */, this /* callback */);
     }
 
     private SearchView makeSearchView(ActionBar actionBar, String query) {

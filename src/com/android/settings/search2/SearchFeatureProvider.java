@@ -41,4 +41,9 @@ public interface SearchFeatureProvider {
      * Returns a new loader to search in index database.
      */
     DatabaseResultLoader getDatabaseSearchLoader(Context context, String query);
+
+    /**
+     * Returns a new loader to search installed apps.
+     */
+    InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query);
 }

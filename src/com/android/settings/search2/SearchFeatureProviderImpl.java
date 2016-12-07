@@ -19,14 +19,11 @@ package com.android.settings.search2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.SearchView;
 import android.view.Menu;
-
 import android.view.MenuItem;
-import com.android.settings.R;
-import com.android.settings.utils.AsyncLoader;
 
-import java.util.List;
+import com.android.settings.R;
+import com.android.settings.applications.PackageManagerWrapperImpl;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -51,15 +48,15 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         }
         String menuTitle = mContext.getString(R.string.search_menu);
         MenuItem menuItem = menu.add(Menu.NONE, Menu.NONE, Menu.NONE, menuTitle)
-            .setIcon(R.drawable.abc_ic_search_api_material)
-            .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    Intent intent = new Intent(activity, SearchActivity.class);
-                    activity.startActivity(intent);
-                    return true;
-                }
-            });
+                .setIcon(R.drawable.abc_ic_search_api_material)
+                .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Intent intent = new Intent(activity, SearchActivity.class);
+                        activity.startActivity(intent);
+                        return true;
+                    }
+                });
 
         menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
     }
@@ -67,5 +64,11 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     @Override
     public DatabaseResultLoader getDatabaseSearchLoader(Context context, String query) {
         return new DatabaseResultLoader(context, query);
+    }
+
+    @Override
+    public InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query) {
+        return new InstalledAppResultLoader(
+                context, new PackageManagerWrapperImpl(context.getPackageManager()), query);
     }
 }

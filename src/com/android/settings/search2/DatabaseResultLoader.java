@@ -23,10 +23,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
+
+import com.android.settings.R;
 import com.android.settings.search.Index;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.utils.AsyncLoader;
-import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -106,7 +107,6 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
             } catch (Resources.NotFoundException nfe) {
                 icon = mContext.getDrawable(R.drawable.ic_search_history);
             }
-
 
             SearchResult.Builder builder = new SearchResult.Builder();
             builder.addTitle(title)

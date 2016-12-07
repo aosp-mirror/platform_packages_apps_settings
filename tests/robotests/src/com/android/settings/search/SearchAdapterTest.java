@@ -27,6 +27,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.search2.DatabaseResultLoader;
 import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.ResultPayload;
+import com.android.settings.search2.SearchFragment;
 import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
 import com.android.settings.search2.SearchResultsAdapter;
@@ -34,6 +35,8 @@ import com.android.settings.search2.SearchResultsAdapter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
@@ -46,14 +49,17 @@ import static com.google.common.truth.Truth.assertThat;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchAdapterTest {
 
+    @Mock
+    private SearchFragment mFragment;
     private SearchResultsAdapter mAdapter;
     private Context mContext;
     private String mLoaderClassName;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = Robolectric.buildActivity(Activity.class).get();
-        mAdapter = new SearchResultsAdapter();
+        mAdapter = new SearchResultsAdapter(mFragment);
         mLoaderClassName = DatabaseResultLoader.class.getName();
     }
 
@@ -62,8 +68,7 @@ public class SearchAdapterTest {
         ArrayList<String> breadcrumbs = new ArrayList<>();
         final Drawable icon = mContext.getDrawable(R.drawable.ic_search_history);
         final ResultPayload payload = new IntentPayload(null);
-
-        SearchResult.Builder builder = new Builder();
+        final SearchResult.Builder builder = new Builder();
         builder.addTitle("title")
                 .addSummary("summary")
                 .addRank(1)
