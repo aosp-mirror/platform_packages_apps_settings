@@ -110,4 +110,9 @@ public class FeatureFactoryImpl extends FeatureFactory {
         }
         return mSearchFeatureProvider;
     }
+
+    @Override
+    public SurveyFeatureProvider getSurveyFeatureProvider(Context context) {
+        return null;
+    }
 }
