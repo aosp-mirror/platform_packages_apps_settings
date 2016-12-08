@@ -85,6 +85,11 @@ public class CreateShortcut extends LauncherActivity {
         return false;
     }
 
+    @Override
+    protected void onSetContentView() {
+        setContentView(R.layout.activity_list);
+    }
+
     /**
      * Perform query on package manager for list items.  The default
      * implementation queries for activities.
