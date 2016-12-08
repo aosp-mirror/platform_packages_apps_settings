@@ -34,9 +34,11 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -47,7 +49,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.AccountPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -56,8 +57,8 @@ import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static android.content.Intent.EXTRA_USER;
 
@@ -74,7 +75,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
             "com.android.settings.accounts.LAUNCHING_LOCATION_SETTINGS";
 
     private static final int MENU_SYNC_NOW_ID = Menu.FIRST;
-    private static final int MENU_SYNC_CANCEL_ID    = Menu.FIRST + 1;
+    private static final int MENU_SYNC_CANCEL_ID = Menu.FIRST + 1;
 
     private static final int REQUEST_SHOW_SYNC_SETTINGS = 1;
 
@@ -86,6 +87,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     // Temporary hack, to deal with backward compatibility 
     // mFirstAccount is used for the injected preferences
     private Account mFirstAccount;
+
+    protected Set<String> mUserFacingSyncAuthorities;
 
     @Override
     public int getMetricsCategory() {
@@ -131,7 +134,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         final Activity activity = getActivity();
         final View view = getView();
 
-        mErrorInfoView = (TextView)view.findViewById(R.id.sync_settings_error_info);
+        mErrorInfoView = (TextView) view.findViewById(R.id.sync_settings_error_info);
         mErrorInfoView.setVisibility(View.GONE);
 
         mAuthorities = activity.getIntent().getStringArrayExtra(AUTHORITIES_FILTER_KEY);
@@ -188,8 +191,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        boolean syncActive = !ContentResolver.getCurrentSyncsAsUser(
-                mUserHandle.getIdentifier()).isEmpty();
+        boolean syncActive = !getCurrentSyncs(mUserHandle.getIdentifier()).isEmpty();
         menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive);
         menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive);
     }
@@ -197,12 +199,12 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case MENU_SYNC_NOW_ID:
-            requestOrCancelSyncForAccounts(true);
-            return true;
-        case MENU_SYNC_CANCEL_ID:
-            requestOrCancelSyncForAccounts(false);
-            return true;
+            case MENU_SYNC_NOW_ID:
+                requestOrCancelSyncForAccounts(true);
+                return true;
+            case MENU_SYNC_CANCEL_ID:
+                requestOrCancelSyncForAccounts(false);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -223,7 +225,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                     SyncAdapterType sa = syncAdapters[j];
                     if (syncAdapters[j].accountType.equals(mAccountType)
                             && ContentResolver.getSyncAutomaticallyAsUser(account, sa.authority,
-                                    userId)) {
+                            userId)) {
                         if (sync) {
                             ContentResolver.requestSyncAsUser(account, sa.authority, userId,
                                     extras);
@@ -238,47 +240,58 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     @Override
     protected void onSyncStateUpdated() {
-        showSyncState();
-        // Catch any delayed delivery of update messages
         final Activity activity = getActivity();
-        if (activity != null) {
-            activity.invalidateOptionsMenu();
+        // Catch any delayed delivery of update messages
+        if (activity == null || activity.isFinishing()) {
+            return;
+        }
+        showSyncState();
+        activity.invalidateOptionsMenu();
+    }
+
+    private void tryInitUserFacingSyncAuthorities(int userId) {
+        if (mUserFacingSyncAuthorities != null) {
+            return;
+        }
+        mUserFacingSyncAuthorities = new ArraySet<>();
+
+        // only track userfacing sync adapters when deciding if account is synced or not
+        final SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(userId);
+        for (int k = 0, n = syncAdapters.length; k < n; k++) {
+            final SyncAdapterType sa = syncAdapters[k];
+            if (sa.isUserVisible()) {
+                mUserFacingSyncAuthorities.add(sa.authority);
+            }
         }
     }
 
     /**
      * Shows the sync state of the accounts. Note: it must be called after the accounts have been
-     * loaded, @see #showAccountsIfNeeded().
+     * loaded.
+     *
+     * @see {@link #showAccountsIfNeeded()}.
      */
-    private void showSyncState() {
-        // Catch any delayed delivery of update messages
-        if (getActivity() == null || getActivity().isFinishing()) return;
-
+    @VisibleForTesting
+    void showSyncState() {
         final int userId = mUserHandle.getIdentifier();
+        tryInitUserFacingSyncAuthorities(userId);
 
         // iterate over all the preferences, setting the state properly for each
-        List<SyncInfo> currentSyncs = ContentResolver.getCurrentSyncsAsUser(userId);
+        final List<SyncInfo> currentSyncs = getCurrentSyncs(userId);
 
         boolean anySyncFailed = false; // true if sync on any account failed
         Date date = new Date();
 
-        // only track userfacing sync adapters when deciding if account is synced or not
-        final SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(userId);
-        HashSet<String> userFacing = new HashSet<String>();
-        for (int k = 0, n = syncAdapters.length; k < n; k++) {
-            final SyncAdapterType sa = syncAdapters[k];
-            if (sa.isUserVisible()) {
-                userFacing.add(sa.authority);
-            }
-        }
-        for (int i = 0, count = getPreferenceScreen().getPreferenceCount(); i < count; i++) {
-            Preference pref = getPreferenceScreen().getPreference(i);
-            if (! (pref instanceof AccountPreference)) {
+        final PreferenceScreen screen = getPreferenceScreen();
+        final int prefCount = screen.getPreferenceCount();
+        for (int i = 0; i < prefCount; i++) {
+            Preference pref = screen.getPreference(i);
+            if (!(pref instanceof AccountPreference)) {
                 continue;
             }
 
-            AccountPreference accountPref = (AccountPreference) pref;
-            Account account = accountPref.getAccount();
+            final AccountPreference accountPref = (AccountPreference) pref;
+            final Account account = accountPref.getAccount();
             int syncCount = 0;
             long lastSuccessTime = 0;
             boolean syncIsFailing = false;
@@ -286,28 +299,33 @@ public class ManageAccountsSettings extends AccountPreferenceBase
             boolean syncingNow = false;
             if (authorities != null) {
                 for (String authority : authorities) {
-                    SyncStatusInfo status = ContentResolver.getSyncStatusAsUser(account, authority,
-                            userId);
+                    SyncStatusInfo status = getSyncStatusInfo(account, authority, userId);
                     boolean syncEnabled = isSyncEnabled(userId, account, authority);
-                    boolean authorityIsPending = ContentResolver.isSyncPending(account, authority);
                     boolean activelySyncing = isSyncing(currentSyncs, account, authority);
                     boolean lastSyncFailed = status != null
                             && syncEnabled
                             && status.lastFailureTime != 0
                             && status.getLastFailureMesgAsInt(0)
-                               != ContentResolver.SYNC_ERROR_SYNC_ALREADY_IN_PROGRESS;
-                    if (lastSyncFailed && !activelySyncing && !authorityIsPending) {
+                            != ContentResolver.SYNC_ERROR_SYNC_ALREADY_IN_PROGRESS;
+                    if (lastSyncFailed && !activelySyncing
+                            && !ContentResolver.isSyncPending(account, authority)) {
                         syncIsFailing = true;
                         anySyncFailed = true;
+                        break;
                     }
-                    syncingNow |= activelySyncing;
+
                     if (status != null && lastSuccessTime < status.lastSuccessTime) {
                         lastSuccessTime = status.lastSuccessTime;
                     }
-                    syncCount += syncEnabled && userFacing.contains(authority) ? 1 : 0;
+                    syncCount += syncEnabled && mUserFacingSyncAuthorities.contains(authority)
+                            ? 1 : 0;
+                    syncingNow |= activelySyncing;
+                    if (syncingNow) {
+                        break;
+                    }
                 }
             } else {
-                if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                if (VERBOSE) {
                     Log.v(TAG, "no syncadapters found for " + account);
                 }
             }
@@ -332,14 +350,14 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 accountPref.setSyncStatus(AccountPreference.SYNC_DISABLED, true);
             }
         }
-
-        mErrorInfoView.setVisibility(anySyncFailed ? View.VISIBLE : View.GONE);
+        if (mErrorInfoView != null) {
+            mErrorInfoView.setVisibility(anySyncFailed ? View.VISIBLE : View.GONE);
+        }
     }
-
 
     private boolean isSyncing(List<SyncInfo> currentSyncs, Account account, String authority) {
         final int count = currentSyncs.size();
-        for (int i = 0; i < count;  i++) {
+        for (int i = 0; i < count; i++) {
             SyncInfo syncInfo = currentSyncs.get(i);
             if (syncInfo.account.equals(account) && syncInfo.authority.equals(authority)) {
                 return true;
@@ -348,7 +366,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         return false;
     }
 
-    private boolean isSyncEnabled(int userId, Account account, String authority) {
+    @VisibleForTesting
+    protected boolean isSyncEnabled(int userId, Account account, String authority) {
         return ContentResolver.getSyncAutomaticallyAsUser(account, authority, userId)
                 && ContentResolver.getMasterSyncAutomaticallyAsUser(userId)
                 && (ContentResolver.getIsSyncableAsUser(account, authority, userId) > 0);
@@ -436,7 +455,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
      */
     private void updatePreferenceIntents(PreferenceScreen prefs) {
         final PackageManager pm = getActivity().getPackageManager();
-        for (int i = 0; i < prefs.getPreferenceCount();) {
+        for (int i = 0; i < prefs.getPreferenceCount(); ) {
             Preference pref = prefs.getPreference(i);
             Intent intent = pref.getIntent();
             if (intent != null) {
@@ -486,8 +505,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                                 } else {
                                     Log.e(TAG,
                                             "Refusing to launch authenticator intent because"
-                                            + "it exploits Settings permissions: "
-                                            + prefIntent);
+                                                    + "it exploits Settings permissions: "
+                                                    + prefIntent);
                                 }
                                 return true;
                             }
@@ -535,5 +554,15 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 accPref.setSummary(getLabelForType(accPref.getAccount().type));
             }
         }
+    }
+
+    @VisibleForTesting
+    protected List<SyncInfo> getCurrentSyncs(int userId) {
+        return ContentResolver.getCurrentSyncsAsUser(userId);
+    }
+
+    @VisibleForTesting
+    protected SyncStatusInfo getSyncStatusInfo(Account account, String authority, int userId) {
+        return ContentResolver.getSyncStatusAsUser(account, authority, userId);
     }
 }
