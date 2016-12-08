@@ -83,7 +83,6 @@ public class SearchResult implements Comparable<SearchResult> {
         payload = builder.mResultPayload;
         viewType = payload.getType();
         stableId = Objects.hash(title, summary, breadcrumbs, rank, icon, payload, viewType);
-
     }
 
     @Override
@@ -98,7 +97,7 @@ public class SearchResult implements Comparable<SearchResult> {
         protected CharSequence mTitle;
         protected CharSequence mSummary;
         protected ArrayList<String> mBreadcrumbs;
-        protected int mRank = -1;
+        protected int mRank = 42;
         protected ResultPayload mResultPayload;
         protected Drawable mIcon;
 
@@ -118,10 +117,9 @@ public class SearchResult implements Comparable<SearchResult> {
         }
 
         public Builder addRank(int rank) {
-            if (rank < 0 || rank > 9) {
-                rank = 42;
+            if (rank >= 0 && rank <= 9) {
+                mRank = rank;
             }
-            mRank = rank;
             return this;
         }
 
@@ -139,10 +137,6 @@ public class SearchResult implements Comparable<SearchResult> {
             // Check that all of the mandatory fields are set.
             if (mTitle == null) {
                 throw new IllegalArgumentException("SearchResult missing title argument");
-            } else if (mRank == -1) {
-                throw new IllegalArgumentException("SearchResult missing rank argument");
-            } else if (mIcon == null) {
-                throw new IllegalArgumentException("SearchResult missing icon argument");
             } else if (mResultPayload == null) {
                 throw new IllegalArgumentException("SearchResult missing Payload argument");
             }

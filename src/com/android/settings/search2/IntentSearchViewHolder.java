@@ -44,6 +44,9 @@ public class IntentSearchViewHolder extends SearchViewHolder {
         titleView.setText(result.title);
         summaryView.setText(result.summary);
         iconView.setImageDrawable(result.icon);
+        if (result.icon == null) {
+            iconView.setBackgroundResource(R.drawable.empty_icon);
+        }
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
