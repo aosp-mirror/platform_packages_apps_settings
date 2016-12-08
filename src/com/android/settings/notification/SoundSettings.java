@@ -23,19 +23,15 @@ import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.media.AudioSystem;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -63,8 +59,6 @@ import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedPreference;
 
 import com.android.settingslib.drawer.CategoryKey;
 import java.text.NumberFormat;
@@ -75,12 +69,6 @@ import java.util.List;
 public class SoundSettings extends DashboardFragment
         implements OnPreferenceChangeListener {
     private static final String TAG = "SoundSettings";
-
-    private static final String KEY_PHONE_RINGTONE = "ringtone";
-    private static final String KEY_NOTIFICATION_RINGTONE = "notification_ringtone";
-    private static final String KEY_ALARM_RINGTONE = "alarm_ringtone";
-    private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
-    private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
 
     private static final String KEY_WORK_CATEGORY = "sound_work_settings_section";
     private static final String KEY_WORK_USE_PERSONAL_SOUNDS = "work_use_personal_sounds";
@@ -95,15 +83,9 @@ public class SoundSettings extends DashboardFragment
 
     private final VolumePreferenceCallback mVolumeCallback = new VolumePreferenceCallback();
     private final H mHandler = new H();
-    private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
     private Context mContext;
     private boolean mVoiceCapable;
-
-    private Preference mPhoneRingtonePreference;
-    private Preference mNotificationRingtonePreference;
-    private Preference mAlarmRingtonePreference;
-    private TwoStatePreference mVibrateWhenRinging;
 
     private PreferenceGroup mWorkPreferenceCategory;
     private TwoStatePreference mWorkUsePersonalSounds;
@@ -111,7 +93,6 @@ public class SoundSettings extends DashboardFragment
     private Preference mWorkNotificationRingtonePreference;
     private Preference mWorkAlarmRingtonePreference;
 
-    private PackageManager mPm;
     private UserManager mUserManager;
     private RingtonePreference mRequestPreference;
 
@@ -126,30 +107,8 @@ public class SoundSettings extends DashboardFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
-        mPm = getPackageManager();
         mUserManager = UserManager.get(getContext());
         mVoiceCapable = Utils.isVoiceCapable(mContext);
-
-        // Enable link to CMAS app settings depending on the value in config.xml.
-        boolean isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
-                com.android.internal.R.bool.config_cellBroadcastAppLinks);
-        try {
-            if (isCellBroadcastAppLinkEnabled) {
-                if (mPm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
-                        == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
-                    isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
-                }
-            }
-        } catch (IllegalArgumentException ignored) {
-            isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
-        }
-        if (!mUserManager.isAdminUser() || !isCellBroadcastAppLinkEnabled ||
-                RestrictedLockUtils.hasBaseUserRestriction(mContext,
-                        UserManager.DISALLOW_CONFIG_CELL_BROADCASTS, UserHandle.myUserId())) {
-            removePreference(KEY_CELL_BROADCAST_SETTINGS);
-        }
-        initRingtones();
-        initVibrateWhenRinging();
 
         if (savedInstanceState != null) {
             String selectedPreference = savedInstanceState.getString(SELECTED_PREFERENCE_KEY, null);
@@ -162,15 +121,6 @@ public class SoundSettings extends DashboardFragment
     @Override
     public void onResume() {
         super.onResume();
-        lookupRingtoneNames();
-        mSettingsObserver.register(true);
-
-        RestrictedPreference broadcastSettingsPref = (RestrictedPreference) findPreference(
-                KEY_CELL_BROADCAST_SETTINGS);
-        if (broadcastSettingsPref != null) {
-            broadcastSettingsPref.checkRestrictionAndSetDisabled(
-                    UserManager.DISALLOW_CONFIG_CELL_BROADCASTS);
-        }
 
         mManagedProfileId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
         if (mManagedProfileId != UserHandle.USER_NULL && shouldShowRingtoneSettings()) {
@@ -191,7 +141,6 @@ public class SoundSettings extends DashboardFragment
     public void onPause() {
         super.onPause();
         mVolumeCallback.stopSample();
-        mSettingsObserver.register(false);
     }
 
     @Override
@@ -226,12 +175,21 @@ public class SoundSettings extends DashboardFragment
         Lifecycle lifecycle = getLifecycle();
         controllers.add(new CastPreferenceController(context));
         controllers.add(new ZenModePreferenceController(context));
+        controllers.add(new EmergencyBroadcastPreferenceController(context));
+        controllers.add(new VibrateWhenRingPreferenceController(context));
+
         // === Volumes ===
         controllers.add(new AlarmVolumePreferenceController(context, mVolumeCallback, lifecycle));
         controllers.add(new MediaVolumePreferenceController(context, mVolumeCallback, lifecycle));
         controllers.add(
             new NotificationVolumePreferenceController(context, mVolumeCallback, lifecycle));
         controllers.add(new RingVolumePreferenceController(context, mVolumeCallback, lifecycle));
+
+        // === Phone & notification ringtone ===
+        controllers.add(new PhoneRingtonePreferenceController(context));
+        controllers.add(new AlarmRingtonePreferenceController(context));
+        controllers.add(new NotificationRingtonePreferenceController(context));
+
         return controllers;
     }
 
@@ -314,48 +272,6 @@ public class SoundSettings extends DashboardFragment
         return !AudioSystem.isSingleVolume(mContext);
     }
 
-    private void initRingtones() {
-        mPhoneRingtonePreference = getPreferenceScreen().findPreference(KEY_PHONE_RINGTONE);
-        if (mPhoneRingtonePreference != null && !mVoiceCapable) {
-            getPreferenceScreen().removePreference(mPhoneRingtonePreference);
-            mPhoneRingtonePreference = null;
-        }
-        mNotificationRingtonePreference =
-                getPreferenceScreen().findPreference(KEY_NOTIFICATION_RINGTONE);
-        mAlarmRingtonePreference = getPreferenceScreen().findPreference(KEY_ALARM_RINGTONE);
-    }
-
-    private void lookupRingtoneNames() {
-        AsyncTask.execute(mLookupRingtoneNames);
-    }
-
-    private final Runnable mLookupRingtoneNames = new Runnable() {
-        @Override
-        public void run() {
-            if (mPhoneRingtonePreference != null) {
-                final CharSequence summary = updateRingtoneName(
-                        mContext, RingtoneManager.TYPE_RINGTONE);
-                if (summary != null) {
-                    mHandler.obtainMessage(H.UPDATE_PHONE_RINGTONE, summary).sendToTarget();
-                }
-            }
-            if (mNotificationRingtonePreference != null) {
-                final CharSequence summary = updateRingtoneName(
-                        mContext, RingtoneManager.TYPE_NOTIFICATION);
-                if (summary != null) {
-                    mHandler.obtainMessage(H.UPDATE_NOTIFICATION_RINGTONE, summary).sendToTarget();
-                }
-            }
-            if (mAlarmRingtonePreference != null) {
-                final CharSequence summary =
-                        updateRingtoneName(mContext, RingtoneManager.TYPE_ALARM);
-                if (summary != null) {
-                    mHandler.obtainMessage(H.UPDATE_ALARM_RINGTONE, summary).sendToTarget();
-                }
-            }
-        }
-    };
-
     private static CharSequence updateRingtoneName(Context context, int type) {
         if (context == null) {
             Log.e(TAG, "Unable to update ringtone name, no context provided");
@@ -366,74 +282,11 @@ public class SoundSettings extends DashboardFragment
                 true /* allowRemote */);
     }
 
-    // === Vibrate when ringing ===
-
-    private void initVibrateWhenRinging() {
-        mVibrateWhenRinging =
-                (TwoStatePreference) getPreferenceScreen().findPreference(KEY_VIBRATE_WHEN_RINGING);
-        if (mVibrateWhenRinging == null) {
-            Log.i(TAG, "Preference not found: " + KEY_VIBRATE_WHEN_RINGING);
-            return;
-        }
-        if (!mVoiceCapable) {
-            getPreferenceScreen().removePreference(mVibrateWhenRinging);
-            mVibrateWhenRinging = null;
-            return;
-        }
-        mVibrateWhenRinging.setPersistent(false);
-        updateVibrateWhenRinging();
-        mVibrateWhenRinging.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean val = (Boolean) newValue;
-                return Settings.System.putInt(getContentResolver(),
-                        Settings.System.VIBRATE_WHEN_RINGING,
-                        val ? 1 : 0);
-            }
-        });
-    }
-
-    private void updateVibrateWhenRinging() {
-        if (mVibrateWhenRinging == null) return;
-        mVibrateWhenRinging.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.VIBRATE_WHEN_RINGING, 0) != 0);
-    }
-
     // === Callbacks ===
 
-    private final class SettingsObserver extends ContentObserver {
-        private final Uri VIBRATE_WHEN_RINGING_URI =
-                Settings.System.getUriFor(Settings.System.VIBRATE_WHEN_RINGING);
-
-        public SettingsObserver() {
-            super(mHandler);
-        }
-
-        public void register(boolean register) {
-            final ContentResolver cr = getContentResolver();
-            if (register) {
-                cr.registerContentObserver(VIBRATE_WHEN_RINGING_URI, false, this);
-            } else {
-                cr.unregisterContentObserver(this);
-            }
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            super.onChange(selfChange, uri);
-            if (VIBRATE_WHEN_RINGING_URI.equals(uri)) {
-                updateVibrateWhenRinging();
-            }
-        }
-    }
 
     private final class H extends Handler {
-        private static final int UPDATE_PHONE_RINGTONE = 1;
-        private static final int UPDATE_NOTIFICATION_RINGTONE = 2;
-        private static final int STOP_SAMPLE = 3;
-        private static final int UPDATE_EFFECTS_SUPPRESSOR = 4;
-        private static final int UPDATE_RINGER_MODE = 5;
-        private static final int UPDATE_ALARM_RINGTONE = 6;
+        private static final int STOP_SAMPLE = 1;
 
         private H() {
             super(Looper.getMainLooper());
@@ -442,17 +295,8 @@ public class SoundSettings extends DashboardFragment
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case UPDATE_PHONE_RINGTONE:
-                    mPhoneRingtonePreference.setSummary((CharSequence) msg.obj);
-                    break;
-                case UPDATE_NOTIFICATION_RINGTONE:
-                    mNotificationRingtonePreference.setSummary((CharSequence) msg.obj);
-                    break;
                 case STOP_SAMPLE:
                     mVolumeCallback.stopSample();
-                    break;
-                case UPDATE_ALARM_RINGTONE:
-                    mAlarmRingtonePreference.setSummary((CharSequence) msg.obj);
                     break;
             }
         }
@@ -539,30 +383,9 @@ public class SoundSettings extends DashboardFragment
             new RingVolumePreferenceController(
                 context, null /* Callback */, null /* Lifecycle */).updateNonIndexableKeys(rt);
             new CastPreferenceController(context).updateNonIndexableKeys(rt);
-            if (!Utils.isVoiceCapable(context)) {
-                rt.add(KEY_PHONE_RINGTONE);
-                rt.add(KEY_VIBRATE_WHEN_RINGING);
-            }
-
-            final PackageManager pm = context.getPackageManager();
-            final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-
-            // Enable link to CMAS app settings depending on the value in config.xml.
-            boolean isCellBroadcastAppLinkEnabled = context.getResources().getBoolean(
-                    com.android.internal.R.bool.config_cellBroadcastAppLinks);
-            try {
-                if (isCellBroadcastAppLinkEnabled) {
-                    if (pm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
-                            == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
-                        isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
-                    }
-                }
-            } catch (IllegalArgumentException ignored) {
-                isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
-            }
-            if (!um.isAdminUser() || !isCellBroadcastAppLinkEnabled) {
-                rt.add(KEY_CELL_BROADCAST_SETTINGS);
-            }
+            new PhoneRingtonePreferenceController(context).updateNonIndexableKeys(rt);
+            new VibrateWhenRingPreferenceController(context).updateNonIndexableKeys(rt);
+            new EmergencyBroadcastPreferenceController(context).updateNonIndexableKeys(rt);
 
             return rt;
         }
