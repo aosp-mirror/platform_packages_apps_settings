@@ -23,6 +23,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.R;
+import com.android.settings.search.Index;
+
 import com.android.settings.applications.PackageManagerWrapperImpl;
 
 /**
@@ -31,6 +33,7 @@ import com.android.settings.applications.PackageManagerWrapperImpl;
 public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     protected Context mContext;
 
+    private DatabaseIndexingManager mDatabaseIndexingManager;
 
     public SearchFeatureProviderImpl(Context context) {
         mContext = context;
@@ -70,5 +73,23 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     public InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query) {
         return new InstalledAppResultLoader(
                 context, new PackageManagerWrapperImpl(context.getPackageManager()), query);
+    }
+
+    @Override
+    public DatabaseIndexingManager getIndexingManager(Context context) {
+        if (mDatabaseIndexingManager == null) {
+            mDatabaseIndexingManager = new DatabaseIndexingManager(context.getApplicationContext(),
+                    context.getPackageName());
+        }
+        return mDatabaseIndexingManager;
+    }
+
+    @Override
+    public void updateIndex(Context context) {
+        if (isEnabled()) {
+            getIndexingManager(context).update();
+        } else {
+            Index.getInstance(context).update();
+        }
     }
 }
