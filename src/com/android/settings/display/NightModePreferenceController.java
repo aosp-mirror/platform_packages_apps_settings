@@ -62,11 +62,6 @@ public class NightModePreferenceController extends PreferenceController
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         try {
             final int value = Integer.parseInt((String) newValue);

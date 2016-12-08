@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
 public class ZenModePreferenceController extends AdjustVolumeRestrictedPreferenceController {
 
@@ -25,11 +24,6 @@ public class ZenModePreferenceController extends AdjustVolumeRestrictedPreferenc
 
     public ZenModePreferenceController(Context context) {
         super(context);
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
     }
 
     @Override

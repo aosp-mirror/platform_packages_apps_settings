@@ -41,11 +41,6 @@ public class VpnPreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         // Manually set dependencies for Wifi when not toggleable.

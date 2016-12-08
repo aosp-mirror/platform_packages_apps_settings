@@ -17,8 +17,6 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.lifecycle.Lifecycle;
@@ -31,13 +29,13 @@ import com.android.settings.notification.VolumeSeekBarPreference.Callback;
  * Base class for preference controller that handles VolumeSeekBarPreference
  */
 public abstract class VolumeSeekBarPreferenceController extends
-    AdjustVolumeRestrictedPreferenceController implements LifecycleObserver, OnResume, OnPause {
+        AdjustVolumeRestrictedPreferenceController implements LifecycleObserver, OnResume, OnPause {
 
     protected VolumeSeekBarPreference mPreference;
     protected VolumeSeekBarPreference.Callback mVolumePreferenceCallback;
 
     public VolumeSeekBarPreferenceController(Context context, Callback callback,
-        Lifecycle lifecycle) {
+            Lifecycle lifecycle) {
         super(context);
         mVolumePreferenceCallback = callback;
         if (lifecycle != null) {
@@ -68,11 +66,6 @@ public abstract class VolumeSeekBarPreferenceController extends
         if (mPreference != null) {
             mPreference.onActivityPause();
         }
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
     }
 
     protected abstract int getAudioStream();

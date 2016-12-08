@@ -39,11 +39,6 @@ public class ScreenSaverPreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void updateState(Preference preference) {
         preference.setSummary(DreamSettings.getSummaryTextWithDreamName(mContext));
     }

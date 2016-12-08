@@ -71,11 +71,6 @@ public class AddUserWhenLockedPreferenceController extends PreferenceController
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean isAvailable() {
         return mUserCaps.isAdmin() &&
                 (!mUserCaps.disallowAddUser() || mUserCaps.disallowAddUserSetByAdmin());

@@ -51,9 +51,4 @@ public class FontSizePreferenceController extends PreferenceController {
                 strEntryValues);
         preference.setSummary(entries[index]);
     }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
 }

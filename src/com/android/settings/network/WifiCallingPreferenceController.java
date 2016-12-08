@@ -35,11 +35,6 @@ public class WifiCallingPreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Preference pref = screen.findPreference(KEY_WFC_SETTINGS);

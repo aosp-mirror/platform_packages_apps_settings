@@ -38,11 +38,6 @@ public class CameraGesturePreferenceController extends PreferenceController impl
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void updateState(Preference preference) {
         int value = Settings.Secure.getInt(mContext.getContentResolver(),
                 CAMERA_GESTURE_DISABLED, 0);

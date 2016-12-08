@@ -50,9 +50,4 @@ public abstract class AdminActionPreferenceControllerBase extends PreferenceCont
     public boolean isAvailable() {
         return true;
     }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
 }

@@ -96,11 +96,6 @@ public class NfcPreferenceController extends PreferenceController
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public boolean isAvailable() {
         return mNfcAdapter != null;
     }

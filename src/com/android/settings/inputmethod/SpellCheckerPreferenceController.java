@@ -52,11 +52,6 @@ public class SpellCheckerPreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public String getPreferenceKey() {
         return KEY_SPELL_CHECKERS;
     }

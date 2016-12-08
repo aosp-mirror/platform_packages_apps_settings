@@ -46,11 +46,6 @@ public class AutoBrightnessPreferenceController extends PreferenceController imp
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void updateState(Preference preference) {
         int brightnessMode = Settings.System.getInt(mContext.getContentResolver(),
                 SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_MANUAL);

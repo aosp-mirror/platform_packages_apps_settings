@@ -49,11 +49,6 @@ public class TetherPreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(KEY_TETHER_SETTINGS);
