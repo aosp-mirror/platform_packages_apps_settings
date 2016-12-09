@@ -32,6 +32,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.format.DateFormat;
+import android.text.format.DateUtils;
 import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
@@ -46,6 +47,7 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener {
 
     protected static final String TAG = "AccountSettings";
+    protected static final boolean VERBOSE = Log.isLoggable(TAG, Log.VERBOSE);
 
     public static final String AUTHORITIES_FILTER_KEY = "authorities";
     public static final String ACCOUNT_TYPES_FILTER_KEY = "account_types";

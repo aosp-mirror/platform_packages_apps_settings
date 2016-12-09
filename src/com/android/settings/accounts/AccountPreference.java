@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.content.Context;
@@ -23,6 +23,8 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.Log;
 import android.widget.ImageView;
+
+import com.android.settings.R;
 
 import java.util.ArrayList;
 
@@ -78,6 +80,10 @@ public class AccountPreference extends Preference {
     }
 
     public void setSyncStatus(int status, boolean updateSummary) {
+        if (mStatus == status) {
+            Log.d(TAG, "Status is the same, not changing anything");
+            return;
+        }
         mStatus = status;
         if (!mShowTypeIcon && mSyncStatusIcon != null) {
             mSyncStatusIcon.setImageResource(getSyncStatusIcon(status));
