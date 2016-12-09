@@ -254,7 +254,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mDebugViewAttributes;
     private SwitchPreference mForceAllowOnExternal;
 
-    private PreferenceScreen mPassword;
+    private Preference mPassword;
     private String mDebugApp;
     private Preference mDebugAppPref;
 
@@ -408,7 +408,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mDebugViewAttributes = findAndInitSwitchPref(DEBUG_VIEW_ATTRIBUTES);
         mForceAllowOnExternal = findAndInitSwitchPref(FORCE_ALLOW_ON_EXTERNAL_KEY);
-        mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
+        mPassword = findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
 
         if (!mUm.isAdminUser()) {
@@ -496,8 +496,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             removePreferenceForProduction(hdcpChecking);
         }
 
-        PreferenceScreen convertFbePreference =
-                (PreferenceScreen) findPreference(KEY_CONVERT_FBE);
+        Preference convertFbePreference = findPreference(KEY_CONVERT_FBE);
 
         try {
             IBinder service = ServiceManager.getService("mount");

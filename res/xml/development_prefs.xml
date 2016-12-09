@@ -22,7 +22,7 @@
             android:title="@*android:string/bugreport_title"
             android:dialogTitle="@*android:string/bugreport_title" />
 
-    <PreferenceScreen
+    <Preference
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
             android:summary="@string/local_backup_password_summary_none"
@@ -31,7 +31,7 @@
                 android:action="android.settings.privacy.SET_FULL_BACKUP_PASSWORD"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.SetFullBackupPassword" />
-    </PreferenceScreen>
+    </Preference>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="keep_screen_on"
@@ -57,13 +57,13 @@
         android:summary="@string/oem_unlock_enable_summary"
         settings:useAdditionalSummary="true"/>
 
-    <PreferenceScreen
+    <Preference
         android:key="running_apps"
         android:title="@string/runningservices_settings_title"
         android:summary="@string/runningservices_settings_summary"
         android:fragment="com.android.settings.applications.RunningServices" />
 
-    <PreferenceScreen
+    <Preference
         android:key="convert_to_file_encryption"
         android:title="@string/convert_to_file_encryption"
         android:summary="@string/convert_to_file_encryption_enabled"
@@ -94,11 +94,11 @@
         android:key="ota_disable_automatic_update"
         android:title="@string/ota_disable_automatic_update" />
 
-    <PreferenceScreen
+    <Preference
         android:key="demo_mode"
         android:title="@string/demo_mode">
         <intent android:action="com.android.settings.action.DEMO_MODE" />
-    </PreferenceScreen>
+    </Preference>
 
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
@@ -121,14 +121,14 @@
             android:title="@string/bugreport_in_power"
             android:summary="@string/bugreport_in_power_summary"/>
 
-        <PreferenceScreen android:key="mock_location_app"
+        <Preference android:key="mock_location_app"
             android:title="@string/mock_location_app" />
 
         <SwitchPreference
                 android:key="debug_view_attributes"
                 android:title="@string/debug_view_attributes" />
 
-        <PreferenceScreen android:key="debug_app"
+        <Preference android:key="debug_app"
                 android:title="@string/debug_app" />
 
         <SwitchPreference

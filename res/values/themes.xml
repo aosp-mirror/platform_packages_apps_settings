@@ -88,11 +88,16 @@
     </style>
 
     <style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
-        <item name="android:preferenceStyle">@style/Preference</item>
-        <item name="android:editTextPreferenceStyle">@style/EditTextPreference</item>
-        <item name="dropdownPreferenceStyle">@style/Preference.DropDown.Material</item>
-        <item name="android:preferenceFragmentStyle">@style/PreferenceFragmentStyle</item>
+        <!-- Parent path frameworks/support/v14/preference/res/values/themes.xml -->
+        <item name="android:scrollbars">vertical</item>
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
+        <item name="dialogPreferenceStyle">@style/SettingsDialogPreference</item>
+        <item name="dropdownPreferenceStyle">@style/SettingsDropdownPreference</item>
+        <item name="editTextPreferenceStyle">@style/EditTextPreference</item>
+        <item name="preferenceCategoryStyle">@style/SettingsPreferenceCategory</item>
+        <item name="preferenceFragmentStyle">@style/PreferenceFragmentStyle</item>
+        <item name="preferenceStyle">@style/SettingsPreference</item>
+        <item name="switchPreferenceStyle">@style/SettingsSwitchPreference</item>
     </style>
 
     <style name="PreferenceTheme.SetupWizard" parent="PreferenceTheme">
@@ -124,6 +129,7 @@
 
     <style name="Theme.Settings" parent="Theme.SettingsBase">
         <item name="preferenceTheme">@style/PreferenceTheme</item>
+        <item name="android:listPreferredItemHeight">72dip</item>
         <item name="*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
         <item name="*android:preferencePanelStyle">@style/PreferencePanelSinglePane</item>
         <item name="*android:preferenceListStyle">@style/PreferenceHeaderListSinglePane</item>

@@ -15,7 +15,6 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/accessibility_settings"
         android:persistent="true">
 
@@ -28,17 +27,17 @@
             android:key="system_category"
             android:title="@string/accessibility_system_title">
 
-        <PreferenceScreen
+        <Preference
             android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
             android:key="captioning_preference_screen"
             android:title="@string/accessibility_captioning_title" />
 
-        <PreferenceScreen
+        <Preference
             android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
             android:key="screen_magnification_preference_screen"
             android:title="@string/accessibility_screen_magnification_title"/>
 
-        <PreferenceScreen
+        <Preference
             android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
             android:key="font_size_preference_screen"
             android:title="@string/title_font_size"/>
@@ -47,7 +46,7 @@
             android:key="screen_zoom"
             android:title="@string/screen_zoom_title"/>
 
-        <PreferenceScreen
+        <Preference
             android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
             android:key="autoclick_preference_screen"
             android:title="@string/accessibility_autoclick_preference_title"/>
@@ -82,12 +81,13 @@
                 android:summary="@string/accessibility_toggle_master_mono_summary"
                 android:persistent="false"/>
 
-        <PreferenceScreen
+        <Preference
                 android:fragment="com.android.settings.accessibility.ToggleGlobalGesturePreferenceFragment"
                 android:key="enable_global_gesture_preference_screen"
                 android:title="@string/accessibility_global_gesture_preference_title"/>
 
-        <PreferenceScreen android:key="tts_settings_preference"
+        <Preference
+                android:key="tts_settings_preference"
                 android:fragment="com.android.settings.tts.TextToSpeechSettings"
                 android:title="@string/tts_settings_title"/>
 
@@ -107,7 +107,7 @@
             android:title="@string/accessibility_display_inversion_preference_title"
             android:summary="@string/accessibility_display_inversion_preference_subtitle"
             android:persistent="false" />
-        <PreferenceScreen
+        <Preference
             android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
             android:key="daltonizer_preference_screen"
             android:title="@string/accessibility_display_daltonizer_preference_title" />

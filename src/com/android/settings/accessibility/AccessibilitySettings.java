@@ -33,7 +33,6 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
@@ -185,12 +184,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mToggleMasterMonoPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
     private Preference mNoServicesMessagePreference;
-    private PreferenceScreen mCaptioningPreferenceScreen;
-    private PreferenceScreen mDisplayMagnificationPreferenceScreen;
-    private PreferenceScreen mFontSizePreferenceScreen;
-    private PreferenceScreen mAutoclickPreferenceScreen;
-    private PreferenceScreen mGlobalGesturePreferenceScreen;
-    private PreferenceScreen mDisplayDaltonizerPreferenceScreen;
+    private Preference mCaptioningPreferenceScreen;
+    private Preference mDisplayMagnificationPreferenceScreen;
+    private Preference mFontSizePreferenceScreen;
+    private Preference mAutoclickPreferenceScreen;
+    private Preference mGlobalGesturePreferenceScreen;
+    private Preference mDisplayDaltonizerPreferenceScreen;
     private SwitchPreference mToggleInversionPreference;
 
     private int mLongPressTimeoutDefault;
@@ -408,28 +407,24 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
 
         // Captioning.
-        mCaptioningPreferenceScreen = (PreferenceScreen) findPreference(
-                CAPTIONING_PREFERENCE_SCREEN);
+        mCaptioningPreferenceScreen = findPreference(CAPTIONING_PREFERENCE_SCREEN);
 
         // Display magnification.
-        mDisplayMagnificationPreferenceScreen = (PreferenceScreen) findPreference(
+        mDisplayMagnificationPreferenceScreen = findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
 
         // Font size.
-        mFontSizePreferenceScreen = (PreferenceScreen) findPreference(
-                FONT_SIZE_PREFERENCE_SCREEN);
+        mFontSizePreferenceScreen = findPreference(FONT_SIZE_PREFERENCE_SCREEN);
 
         // Autoclick after pointer stops.
-        mAutoclickPreferenceScreen = (PreferenceScreen) findPreference(
-                AUTOCLICK_PREFERENCE_SCREEN);
+        mAutoclickPreferenceScreen = findPreference(AUTOCLICK_PREFERENCE_SCREEN);
 
         // Display color adjustments.
-        mDisplayDaltonizerPreferenceScreen = (PreferenceScreen) findPreference(
-                DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
+        mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
 
         // Global gesture.
-        mGlobalGesturePreferenceScreen =
-                (PreferenceScreen) findPreference(ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN);
+        mGlobalGesturePreferenceScreen = findPreference(
+                ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN);
         final int longPressOnPowerBehavior = getActivity().getResources().getInteger(
                 com.android.internal.R.integer.config_longPressOnPowerBehavior);
         final int LONG_PRESS_POWER_GLOBAL_ACTIONS = 1;
@@ -468,7 +463,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         for (int i = 0, count = installedServices.size(); i < count; ++i) {
             AccessibilityServiceInfo info = installedServices.get(i);
 
-            RestrictedPreference preference = new RestrictedPreference(getActivity());
+            RestrictedPreference preference =
+                    new RestrictedPreference(mServicesCategory.getContext());
             String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
 
             ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
@@ -702,7 +698,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         @Override
         public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                boolean enabled) {
-            List<SearchIndexableResource> indexables = new ArrayList<SearchIndexableResource>();
+            List<SearchIndexableResource> indexables = new ArrayList<>();
             SearchIndexableResource indexable = new SearchIndexableResource(context);
             indexable.xmlResId = R.xml.accessibility_settings;
             indexables.add(indexable);
