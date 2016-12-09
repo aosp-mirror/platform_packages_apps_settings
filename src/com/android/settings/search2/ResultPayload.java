@@ -31,8 +31,19 @@ public abstract class ResultPayload implements Parcelable {
     @IntDef({PayloadType.INLINE_SLIDER, PayloadType.INLINE_SWITCH, PayloadType.INTENT})
     @Retention(RetentionPolicy.SOURCE)
     public @interface PayloadType {
+        /**
+         * Resulting page will be started using an intent
+         */
         int INTENT = 0;
+
+        /**
+         * Result is a inline widget, using a slider widget as UI.
+         */
         int INLINE_SLIDER = 1;
+
+        /**
+         * Result is a inline widget, using a toggle widget as UI.
+         */
         int INLINE_SWITCH = 2;
     }
 

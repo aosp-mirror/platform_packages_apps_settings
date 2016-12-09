@@ -22,20 +22,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.MatrixCursor;
 import android.graphics.drawable.Drawable;
+
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
+import com.android.settings.gestures.GestureSettings;
 import com.android.settings.search2.DatabaseResultLoader;
 import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.ResultPayload;
 import com.android.settings.search2.ResultPayload.PayloadType;
 import com.android.settings.search2.SearchResult;
-import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import org.robolectric.annotation.Config;
 import org.robolectric.Robolectric;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +50,11 @@ import static com.google.common.truth.Truth.assertThat;
 public class DatabaseResultLoaderTest {
     private DatabaseResultLoader mLoader;
 
-    private static final String[] TITLES = new String[] {"title1", "title2", "title3"};
+    private static final String[] COLUMNS = new String[]{"rank", "title", "summary_on",
+            "summary off", "entries", "keywords", "class name", "screen title", "icon",
+            "intent action", "target package", "target class", "enabled", "key", "user id"};
+
+    private static final String[] TITLES = new String[]{"title1", "title2", "title3"};
     private static final String SUMMARY = "SUMMARY";
     private static final int EXAMPLES = 3;
     private static final Intent mIntent = new Intent("com.android.settings");
@@ -108,6 +115,16 @@ public class DatabaseResultLoaderTest {
     }
 
     @Test
+    public void testParseCursor_NoIcon() {
+        List<SearchResult> results = mLoader.parseCursorForSearch(
+                getDummyCursor(false /* hasIcon */));
+        for (int i = 0; i < EXAMPLES; i++) {
+            Drawable resultDrawable = results.get(i).icon;
+            assertThat(resultDrawable).isNull();
+        }
+    }
+
+    @Test
     public void testParseCursor_MatchesPayloadType() {
         List<SearchResult> results = mLoader.parseCursorForSearch(getDummyCursor());
         ResultPayload payload;
@@ -115,6 +132,33 @@ public class DatabaseResultLoaderTest {
             payload = results.get(i).payload;
             assertThat(payload.getType()).isEqualTo(PayloadType.INTENT);
         }
+    }
+
+    @Test
+    public void testParseCursor_MatchesIntentForSubSettings() {
+        MatrixCursor cursor = new MatrixCursor(COLUMNS);
+        final String BLANK = "";
+        cursor.addRow(new Object[]{
+                0,       // rank
+                TITLES[0],
+                SUMMARY,
+                SUMMARY, // summary off
+                BLANK,   // entries
+                BLANK,   // Keywords
+                GestureSettings.class.getName(),
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                BLANK,   // enabled
+                BLANK,   // key
+                BLANK    // user id
+        });
+        List<SearchResult> results = mLoader.parseCursorForSearch(cursor);
+        IntentPayload payload = (IntentPayload) results.get(0).payload;
+        Intent intent = payload.intent;
+        assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
     }
 
     @Test
@@ -129,14 +173,15 @@ public class DatabaseResultLoaderTest {
     }
 
     private MatrixCursor getDummyCursor() {
-        String[] columns = new String[] {"rank", "title",  "summary_on", "summary off", "entries",
-                "keywords", "class name", "screen title", "icon", "intent action",
-                "target package", "target class", "enabled", "key", "user id"};
-        MatrixCursor cursor = new MatrixCursor(columns);
+        return getDummyCursor(true /* hasIcon */);
+    }
+
+    private MatrixCursor getDummyCursor(boolean hasIcon) {
+        MatrixCursor cursor = new MatrixCursor(COLUMNS);
         final String BLANK = "";
 
         for (int i = 0; i < EXAMPLES; i++) {
-            ArrayList<String> item = new ArrayList<>(columns.length);
+            ArrayList<String> item = new ArrayList<>(COLUMNS.length);
             item.add(Integer.toString(i));
             item.add(TITLES[i]);
             item.add(SUMMARY);
@@ -145,7 +190,7 @@ public class DatabaseResultLoaderTest {
             item.add(BLANK); // keywords
             item.add(BLANK); // classname
             item.add(BLANK); // screen title
-            item.add(Integer.toString(mIcon));
+            item.add(hasIcon ? Integer.toString(mIcon) : null);
             item.add(mIntent.getAction());
             item.add(BLANK); // target package
             item.add(BLANK); // target class

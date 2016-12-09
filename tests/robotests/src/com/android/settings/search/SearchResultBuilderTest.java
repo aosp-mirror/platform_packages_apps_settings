@@ -124,13 +124,7 @@ public class SearchResultBuilderTest {
                 .addBreadcrumbs(mBreadcrumbs)
                 .addPayload(mResultPayload);
 
-        SearchResult result = null;
-        try {
-            result = mBuilder.build();
-        } catch (IllegalArgumentException e) {
-            // passes.
-        }
-        assertThat(result).isNull();
+        assertThat(mBuilder.build()).isNotNull();
     }
 
     @Test
