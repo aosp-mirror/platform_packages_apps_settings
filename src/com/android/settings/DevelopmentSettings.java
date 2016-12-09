@@ -83,6 +83,8 @@ import com.android.internal.app.LocalePicker;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.applications.BackgroundCheckSummary;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.development.BugReportPreferenceController;
+import com.android.settings.development.BugReportInPowerPreferenceController;
 import com.android.settings.fuelgauge.InactiveApps;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -129,8 +131,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
     private static final String HARDWARE_UI_PROPERTY = "persist.sys.ui.hw";
     private static final String MSAA_PROPERTY = "debug.egl.force_msaa";
-    private static final String BUGREPORT = "bugreport";
-    private static final String BUGREPORT_IN_POWER_KEY = "bugreport_in_power";
     private static final String OPENGL_TRACES_PROPERTY = "debug.egl.trace";
     private static final String TUNER_UI_KEY = "tuner_ui";
     private static final String COLOR_TEMPERATURE_PROPERTY = "persist.sys.debug.color_temp";
@@ -248,8 +248,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mEnableAdb;
     private Preference mClearAdbKeys;
     private SwitchPreference mEnableTerminal;
-    private Preference mBugreport;
-    private SwitchPreference mBugreportInPower;
     private RestrictedSwitchPreference mKeepScreenOn;
     private SwitchPreference mBtHciSnoopLog;
     private RestrictedSwitchPreference mEnableOemUnlock;
@@ -330,6 +328,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private boolean mLogpersistCleared;
     private Dialog mLogpersistClearDialog;
     private DashboardFeatureProvider mDashboardFeatureProvider;
+    private BugReportPreferenceController mBugReportController;
+    private BugReportInPowerPreferenceController mBugReportInPowerController;
 
     public DevelopmentSettings() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
@@ -365,6 +365,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
+        mBugReportController = new BugReportPreferenceController(getActivity());
+        mBugReportInPowerController = new BugReportInPowerPreferenceController(getActivity());
+
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted() || !Utils.isDeviceProvisioned(getActivity())) {
             // Block access to developer options if the user is not the owner, if user policy
@@ -392,8 +395,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mEnableTerminal = null;
         }
 
-        mBugreport = findPreference(BUGREPORT);
-        mBugreportInPower = findAndInitSwitchPref(BUGREPORT_IN_POWER_KEY);
+        mBugReportController.displayPreference(getPreferenceScreen());
+        mBugReportInPowerController.displayPreference(getPreferenceScreen());
+
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
         mEnableOemUnlock = (RestrictedSwitchPreference) findAndInitSwitchPref(ENABLE_OEM_UNLOCK);
@@ -601,6 +605,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             Preference pref = mAllPrefs.get(i);
             pref.setEnabled(enabled && !mDisabledPrefs.contains(pref));
         }
+        mBugReportInPowerController.enablePreference(enabled);
         updateAllOptions();
     }
 
@@ -702,8 +707,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     context.getPackageManager().getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)
                             == PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         }
-        updateSwitchPreference(mBugreportInPower, Settings.Secure.getInt(cr,
-                Settings.Global.BUGREPORT_IN_POWER_MENU, 0) != 0);
+        mHaveDebugSettings |= mBugReportInPowerController.updatePreference();
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateSwitchPreference(mBtHciSnoopLog, Settings.Secure.getInt(cr,
@@ -765,6 +769,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 onPreferenceTreeClick(cb);
             }
         }
+        mBugReportInPowerController.resetPreference();
         resetDebuggerOptions();
         writeLogpersistOption(null, true);
         writeLogdSizeOption(null);
@@ -1076,19 +1081,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void updateBugreportOptions() {
-        mBugreport.setEnabled(true);
-        mBugreportInPower.setEnabled(true);
-        setBugreportStorageProviderStatus();
-    }
-
-    private void setBugreportStorageProviderStatus() {
-        final ComponentName componentName = new ComponentName("com.android.shell",
-                "com.android.shell.BugreportStorageProvider");
-        final boolean enabled = mBugreportInPower.isChecked();
-        getPackageManager().setComponentEnabledSetting(componentName,
-                enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                        : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
-                0);
+        mBugReportController.enablePreference(true);
+        mBugReportInPowerController.updateBugreportOptions();
     }
 
     // Returns the current state of the system property that controls
@@ -1951,6 +1945,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return false;
         }
 
+        if (mBugReportInPowerController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+
         if (preference == mEnableAdb) {
             if (mEnableAdb.isChecked()) {
                 mDialogClicked = false;
@@ -1981,11 +1979,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             pm.setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
                     mEnableTerminal.isChecked() ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                             : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);
-        } else if (preference == mBugreportInPower) {
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Global.BUGREPORT_IN_POWER_MENU,
-                    mBugreportInPower.isChecked() ? 1 : 0);
-            setBugreportStorageProviderStatus();
         } else if (preference == mKeepScreenOn) {
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
