@@ -30,18 +30,9 @@ import java.util.regex.Pattern;
 /**
  * Utility class to parse elements of XML preferences
  */
-public class XMLParserUtil {
-
-    private static final String NON_BREAKING_HYPHEN = "\u2011";
-    private static final String EMPTY = "";
-    private static final String LIST_DELIMITERS = "[,]\\s*";
-    private static final String HYPHEN = "-";
-    private static final String SPACE = " ";
+public class XmlParserUtils {
 
     private static final String ENTRIES_SEPARATOR = "|";
-
-    private static final Pattern REMOVE_DIACRITICALS_PATTERN
-            = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 
     public static String getDataKey(Context context, AttributeSet attrs) {
         return getData(context, attrs,
@@ -83,7 +74,7 @@ public class XMLParserUtil {
         return getData(context, attrs, R.styleable.Preference, R.styleable.Preference_keywords);
     }
 
-    public static String getData(Context context, AttributeSet set, int[] attrs, int resId) {
+    private static String getData(Context context, AttributeSet set, int[] attrs, int resId) {
         final TypedArray sa = context.obtainStyledAttributes(set, attrs);
         final TypedValue tv = sa.peekValue(resId);
 
@@ -98,7 +89,7 @@ public class XMLParserUtil {
         return (data != null) ? data.toString() : null;
     }
 
-    public static String getDataEntries(Context context, AttributeSet set, int[] attrs, int resId) {
+    private static String getDataEntries(Context context, AttributeSet set, int[] attrs, int resId) {
         final TypedArray sa = context.obtainStyledAttributes(set, attrs);
         final TypedValue tv = sa.peekValue(resId);
 
@@ -118,20 +109,5 @@ public class XMLParserUtil {
             result.append(ENTRIES_SEPARATOR);
         }
         return result.toString();
-    }
-
-    public static String normalizeHyphen(String input) {
-        return (input != null) ? input.replaceAll(NON_BREAKING_HYPHEN, HYPHEN) : EMPTY;
-    }
-
-    public static String normalizeString(String input) {
-        final String nohyphen = (input != null) ? input.replaceAll(HYPHEN, EMPTY) : EMPTY;
-        final String normalized = Normalizer.normalize(nohyphen, Normalizer.Form.NFD);
-
-        return REMOVE_DIACRITICALS_PATTERN.matcher(normalized).replaceAll("").toLowerCase();
-    }
-
-    public static String normalizeKeywords(String input) {
-        return (input != null) ? input.replaceAll(LIST_DELIMITERS, SPACE) : EMPTY;
     }
 }

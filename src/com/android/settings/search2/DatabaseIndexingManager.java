@@ -34,10 +34,12 @@ import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
+import com.android.settings.core.PreferenceController;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.Ranking;
@@ -85,56 +87,6 @@ import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RES
  */
 public class DatabaseIndexingManager {
     private static final String LOG_TAG = "DatabaseIndexingManager";
-
-    // Those indices should match the indices of SELECT_COLUMNS !
-    public static final int COLUMN_INDEX_RANK = 0;
-    public static final int COLUMN_INDEX_TITLE = 1;
-    public static final int COLUMN_INDEX_SUMMARY_ON = 2;
-    public static final int COLUMN_INDEX_SUMMARY_OFF = 3;
-    public static final int COLUMN_INDEX_ENTRIES = 4;
-    public static final int COLUMN_INDEX_KEYWORDS = 5;
-    public static final int COLUMN_INDEX_CLASS_NAME = 6;
-    public static final int COLUMN_INDEX_SCREEN_TITLE = 7;
-    public static final int COLUMN_INDEX_ICON = 8;
-    public static final int COLUMN_INDEX_INTENT_ACTION = 9;
-    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 10;
-    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 11;
-    public static final int COLUMN_INDEX_ENABLED = 12;
-    public static final int COLUMN_INDEX_KEY = 13;
-    public static final int COLUMN_INDEX_USER_ID = 14;
-
-    // If you change the order of columns here, you SHOULD change the COLUMN_INDEX_XXX values
-    private static final String[] SELECT_COLUMNS = new String[] {
-            IndexDatabaseHelper.IndexColumns.DATA_RANK,               // 0
-            IndexDatabaseHelper.IndexColumns.DATA_TITLE,              // 1
-            IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON,         // 2
-            IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF,        // 3
-            IndexDatabaseHelper.IndexColumns.DATA_ENTRIES,            // 4
-            IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS,           // 5
-            IndexDatabaseHelper.IndexColumns.CLASS_NAME,              // 6
-            IndexDatabaseHelper.IndexColumns.SCREEN_TITLE,            // 7
-            IndexDatabaseHelper.IndexColumns.ICON,                    // 8
-            IndexDatabaseHelper.IndexColumns.INTENT_ACTION,           // 9
-            IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE,   // 10
-            IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS,     // 11
-            IndexDatabaseHelper.IndexColumns.ENABLED,                 // 12
-            IndexDatabaseHelper.IndexColumns.DATA_KEY_REF             // 13
-    };
-
-    private static final String[] MATCH_COLUMNS_PRIMARY = {
-            IndexDatabaseHelper.IndexColumns.DATA_TITLE,
-            IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED,
-            IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS
-    };
-
-    private static final String[] MATCH_COLUMNS_SECONDARY = {
-            IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON,
-            IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED,
-            IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF,
-            IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED,
-            IndexDatabaseHelper.IndexColumns.DATA_ENTRIES
-    };
-
 
     private static final String NODE_NAME_PREFERENCE_SCREEN = "PreferenceScreen";
     private static final String NODE_NAME_CHECK_BOX_PREFERENCE = "CheckBoxPreference";
@@ -514,7 +466,7 @@ public class DatabaseIndexingManager {
         }
     }
 
-    private void indexOneSearchIndexableData(SQLiteDatabase database, String localeStr,
+    public void indexOneSearchIndexableData(SQLiteDatabase database, String localeStr,
             SearchIndexableData data, Map<String, List<String>> nonIndexableKeys) {
         if (data instanceof SearchIndexableResource) {
             indexOneResource(database, localeStr, (SearchIndexableResource) data, nonIndexableKeys);
@@ -530,22 +482,22 @@ public class DatabaseIndexingManager {
             return;
         }
 
-        updateOneRowWithFilteredData(database, localeStr,
-                raw.title,
-                raw.summaryOn,
-                raw.summaryOff,
-                raw.entries,
-                raw.className,
-                raw.screenTitle,
-                raw.iconResId,
-                raw.rank,
-                raw.keywords,
-                raw.intentAction,
-                raw.intentTargetPackage,
-                raw.intentTargetClass,
-                raw.enabled,
-                raw.key,
-                raw.userId);
+        DatabaseRow.Builder builder = new DatabaseRow.Builder();
+        builder.setLocale(localeStr)
+                .setEntries(raw.entries)
+                .setClassName(raw.className)
+                .setScreenTitle(raw.screenTitle)
+                .setIconResId(raw.iconResId)
+                .setRank(raw.rank)
+                .setIntentAction(raw.intentAction)
+                .setIntentTargetPackage(raw.intentTargetPackage)
+                .setIntentTargetClass(raw.intentTargetClass)
+                .setEnabled(raw.enabled)
+                .setKey(raw.key)
+                .setUserId(raw.userId);
+
+        updateOneRowWithFilteredData(database, builder, raw.title, raw.summaryOn, raw.summaryOff,
+                raw.keywords);
     }
 
     private void indexOneResource(SQLiteDatabase database, String localeStr,
@@ -622,25 +574,45 @@ public class DatabaseIndexingManager {
             final int outerDepth = parser.getDepth();
             final AttributeSet attrs = Xml.asAttributeSet(parser);
 
-            final String screenTitle = XMLParserUtil.getDataTitle(context, attrs);
+            final String screenTitle = XmlParserUtils.getDataTitle(context, attrs);
 
-            String key = XMLParserUtil.getDataKey(context, attrs);
+            String key = XmlParserUtils.getDataKey(context, attrs);
 
             String title;
             String summary;
             String keywords;
+            ResultPayload payload;
+
+            ArrayMap<String, PreferenceController> controllerUriMap = null;
+
+            if (fragmentName != null) {
+                controllerUriMap = (ArrayMap) DatabaseIndexingUtils
+                        .getPreferenceControllerUriMap(fragmentName, context);
+            }
 
             // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
             // hyphens.
             if (!nonIndexableKeys.contains(key)) {
-                title = XMLParserUtil.getDataTitle(context, attrs);
-                summary = XMLParserUtil.getDataSummary(context, attrs);
-                keywords = XMLParserUtil.getDataKeywords(context, attrs);
+                title = XmlParserUtils.getDataTitle(context, attrs);
+                summary = XmlParserUtils.getDataSummary(context, attrs);
+                keywords = XmlParserUtils.getDataKeywords(context, attrs);
 
-                updateOneRowWithFilteredData(database, localeStr, title, summary, null, null,
-                        fragmentName, screenTitle, iconResId, rank,
-                        keywords, intentAction, intentTargetPackage, intentTargetClass, true,
-                        key, -1 /* default user id */);
+                DatabaseRow.Builder builder = new DatabaseRow.Builder();
+                builder.setLocale(localeStr)
+                        .setEntries(null)
+                        .setClassName(fragmentName)
+                        .setScreenTitle(screenTitle)
+                        .setIconResId(iconResId)
+                        .setRank(rank)
+                        .setIntentAction(intentAction)
+                        .setIntentTargetPackage(intentTargetPackage)
+                        .setIntentTargetClass(intentTargetClass)
+                        .setEnabled(true)
+                        .setKey(key)
+                        .setUserId(-1 /* default user id */);
+
+                updateOneRowWithFilteredData(database, builder, title, summary,
+                        null /* summary off */, keywords);
             }
 
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
@@ -651,43 +623,56 @@ public class DatabaseIndexingManager {
 
                 nodeName = parser.getName();
 
-                key = XMLParserUtil.getDataKey(context, attrs);
+                key = XmlParserUtils.getDataKey(context, attrs);
                 if (nonIndexableKeys.contains(key)) {
                     continue;
                 }
 
-                title = XMLParserUtil.getDataTitle(context, attrs);
-                keywords = XMLParserUtil.getDataKeywords(context, attrs);
+                title = XmlParserUtils.getDataTitle(context, attrs);
+                keywords = XmlParserUtils.getDataKeywords(context, attrs);
+
+                DatabaseRow.Builder builder = new DatabaseRow.Builder();
+                builder.setLocale(localeStr)
+                        .setClassName(fragmentName)
+                        .setScreenTitle(screenTitle)
+                        .setIconResId(iconResId)
+                        .setRank(rank)
+                        .setIntentAction(intentAction)
+                        .setIntentTargetPackage(intentTargetPackage)
+                        .setIntentTargetClass(intentTargetClass)
+                        .setEnabled(true)
+                        .setKey(key)
+                        .setUserId(-1 /* default user id */);
 
                 if (!nodeName.equals(NODE_NAME_CHECK_BOX_PREFERENCE)) {
-                    summary = XMLParserUtil.getDataSummary(context, attrs);
+                    summary = XmlParserUtils.getDataSummary(context, attrs);
 
                     String entries = null;
 
                     if (nodeName.endsWith(NODE_NAME_LIST_PREFERENCE)) {
-                        entries = XMLParserUtil.getDataEntries(context, attrs);
+                        entries = XmlParserUtils.getDataEntries(context, attrs);
                     }
+
+                    payload = DatabaseIndexingUtils.getPayloadFromUriMap(controllerUriMap, key);
+
+                    builder.setEntries(entries)
+                            .setPayload(payload);
 
                     // Insert rows for the child nodes of PreferenceScreen
-                    updateOneRowWithFilteredData(database, localeStr, title, summary, null, entries,
-                            fragmentName, screenTitle, iconResId, rank,
-                            keywords, intentAction, intentTargetPackage, intentTargetClass,
-                            true, key, -1 /* default user id */);
+                    updateOneRowWithFilteredData(database, builder, title, summary,
+                            null /* summary off */, keywords);
                 } else {
-                    String summaryOn = XMLParserUtil.getDataSummaryOn(context, attrs);
-                    String summaryOff = XMLParserUtil.getDataSummaryOff(context, attrs);
+                    String summaryOn = XmlParserUtils.getDataSummaryOn(context, attrs);
+                    String summaryOff = XmlParserUtils.getDataSummaryOff(context, attrs);
 
                     if (TextUtils.isEmpty(summaryOn) && TextUtils.isEmpty(summaryOff)) {
-                        summaryOn = XMLParserUtil.getDataSummary(context, attrs);
+                        summaryOn = XmlParserUtils.getDataSummary(context, attrs);
                     }
 
-                    updateOneRowWithFilteredData(database, localeStr, title, summaryOn, summaryOff,
-                            null, fragmentName, screenTitle, iconResId, rank,
-                            keywords, intentAction, intentTargetPackage, intentTargetClass,
-                            true, key, -1 /* default user id */);
+                    updateOneRowWithFilteredData(database, builder, title, summaryOn, summaryOff,
+                            keywords);
                 }
             }
-
         } catch (XmlPullParserException e) {
             throw new RuntimeException("Error parsing PreferenceScreen", e);
         } catch (IOException e) {
@@ -709,6 +694,7 @@ public class DatabaseIndexingManager {
         final List<SearchIndexableRaw> rawList = provider.getRawDataToIndex(context, enabled);
 
         if (rawList != null) {
+
             final int rawSize = rawList.size();
             for (int i = 0; i < rawSize; i++) {
                 SearchIndexableRaw raw = rawList.get(i);
@@ -722,22 +708,22 @@ public class DatabaseIndexingManager {
                     continue;
                 }
 
-                updateOneRowWithFilteredData(database, localeStr,
-                        raw.title,
-                        raw.summaryOn,
-                        raw.summaryOff,
-                        raw.entries,
-                        className,
-                        raw.screenTitle,
-                        iconResId,
-                        rank,
-                        raw.keywords,
-                        raw.intentAction,
-                        raw.intentTargetPackage,
-                        raw.intentTargetClass,
-                        raw.enabled,
-                        raw.key,
-                        raw.userId);
+                DatabaseRow.Builder builder = new DatabaseRow.Builder();
+                builder.setLocale(localeStr)
+                        .setEntries(raw.entries)
+                        .setClassName(className)
+                        .setScreenTitle(raw.screenTitle)
+                        .setIconResId(iconResId)
+                        .setRank(rank)
+                        .setIntentAction(raw.intentAction)
+                        .setIntentTargetPackage(raw.intentTargetPackage)
+                        .setIntentTargetClass(raw.intentTargetClass)
+                        .setEnabled(raw.enabled)
+                        .setKey(raw.key)
+                        .setUserId(raw.userId);
+
+                updateOneRowWithFilteredData(database, builder, raw.title, raw.summaryOn,
+                        raw.summaryOff, raw.keywords);
             }
         }
 
@@ -766,70 +752,68 @@ public class DatabaseIndexingManager {
         }
     }
 
-    private void updateOneRowWithFilteredData(SQLiteDatabase database, String locale,
-            String title, String summaryOn, String summaryOff, String entries,
-            String className,
-            String screenTitle, int iconResId, int rank, String keywords,
-            String intentAction, String intentTargetPackage, String intentTargetClass,
-            boolean enabled, String key, int userId) {
+    private void updateOneRowWithFilteredData(SQLiteDatabase database, DatabaseRow.Builder builder,
+            String title, String summaryOn, String summaryOff,String keywords) {
 
-        final String updatedTitle = XMLParserUtil.normalizeHyphen(title);
-        final String updatedSummaryOn = XMLParserUtil.normalizeHyphen(summaryOn);
-        final String updatedSummaryOff = XMLParserUtil.normalizeHyphen(summaryOff);
+        final String updatedTitle = DatabaseIndexingUtils.normalizeHyphen(title);
+        final String updatedSummaryOn = DatabaseIndexingUtils.normalizeHyphen(summaryOn);
+        final String updatedSummaryOff = DatabaseIndexingUtils.normalizeHyphen(summaryOff);
 
-        final String normalizedTitle = XMLParserUtil.normalizeString(updatedTitle);
-        final String normalizedSummaryOn = XMLParserUtil.normalizeString(updatedSummaryOn);
-        final String normalizedSummaryOff = XMLParserUtil.normalizeString(updatedSummaryOff);
+        final String normalizedTitle = DatabaseIndexingUtils.normalizeString(updatedTitle);
+        final String normalizedSummaryOn = DatabaseIndexingUtils.normalizeString(updatedSummaryOn);
+        final String normalizedSummaryOff = DatabaseIndexingUtils
+                .normalizeString(updatedSummaryOff);
 
-        final String spaceDelimitedKeywords = XMLParserUtil.normalizeKeywords(keywords);
+        final String spaceDelimitedKeywords = DatabaseIndexingUtils.normalizeKeywords(keywords);
 
-        updateOneRow(database, locale,
-                updatedTitle, normalizedTitle, updatedSummaryOn, normalizedSummaryOn,
-                updatedSummaryOff, normalizedSummaryOff, entries, className, screenTitle, iconResId,
-                rank, spaceDelimitedKeywords, intentAction, intentTargetPackage, intentTargetClass,
-                enabled, key, userId);
+        builder.setUpdatedTitle(updatedTitle)
+                .setUpdatedSummaryOn(updatedSummaryOn)
+                .setUpdatedSummaryOff(updatedSummaryOff)
+                .setNormalizedTitle(normalizedTitle)
+                .setNormalizedSummaryOn(normalizedSummaryOn)
+                .setNormalizedSummaryOff(normalizedSummaryOff)
+                .setSpaceDelimitedKeywords(spaceDelimitedKeywords);
+
+        updateOneRow(database, builder.build());
     }
 
-    private void updateOneRow(SQLiteDatabase database, String locale, String updatedTitle,
-            String normalizedTitle, String updatedSummaryOn, String normalizedSummaryOn,
-            String updatedSummaryOff, String normalizedSummaryOff, String entries, String className,
-            String screenTitle, int iconResId, int rank, String spaceDelimitedKeywords,
-            String intentAction, String intentTargetPackage, String intentTargetClass,
-            boolean enabled, String key, int userId) {
+    private void updateOneRow(SQLiteDatabase database, DatabaseRow row) {
 
-        if (TextUtils.isEmpty(updatedTitle)) {
+        if (TextUtils.isEmpty(row.updatedTitle)) {
             return;
         }
 
         // The DocID should contains more than the title string itself (you may have two settings
         // with the same title). So we need to use a combination of the title and the screenTitle.
-        StringBuilder sb = new StringBuilder(updatedTitle);
-        sb.append(screenTitle);
+        StringBuilder sb = new StringBuilder(row.updatedTitle);
+        sb.append(row.screenTitle);
         int docId = sb.toString().hashCode();
 
         ContentValues values = new ContentValues();
         values.put(IndexDatabaseHelper.IndexColumns.DOCID, docId);
-        values.put(IndexDatabaseHelper.IndexColumns.LOCALE, locale);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_RANK, rank);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, updatedTitle);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED, normalizedTitle);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON, updatedSummaryOn);
+        values.put(IndexDatabaseHelper.IndexColumns.LOCALE, row.locale);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_RANK, row.rank);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, row.updatedTitle);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED, row.normalizedTitle);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON, row.updatedSummaryOn);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED,
-                normalizedSummaryOn);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF, updatedSummaryOff);
+                row.normalizedSummaryOn);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF, row.updatedSummaryOff);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED,
-                normalizedSummaryOff);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_ENTRIES, entries);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS, spaceDelimitedKeywords);
-        values.put(IndexDatabaseHelper.IndexColumns.CLASS_NAME, className);
-        values.put(IndexDatabaseHelper.IndexColumns.SCREEN_TITLE, screenTitle);
-        values.put(IndexDatabaseHelper.IndexColumns.INTENT_ACTION, intentAction);
-        values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE, intentTargetPackage);
-        values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS, intentTargetClass);
-        values.put(IndexDatabaseHelper.IndexColumns.ICON, iconResId);
-        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, enabled);
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, key);
-        values.put(IndexDatabaseHelper.IndexColumns.USER_ID, userId);
+                row.normalizedSummaryOff);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_ENTRIES, row.entries);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS, row.spaceDelimitedKeywords);
+        values.put(IndexDatabaseHelper.IndexColumns.CLASS_NAME, row.className);
+        values.put(IndexDatabaseHelper.IndexColumns.SCREEN_TITLE, row.screenTitle);
+        values.put(IndexDatabaseHelper.IndexColumns.INTENT_ACTION, row.intentAction);
+        values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE, row.intentTargetPackage);
+        values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS, row.intentTargetClass);
+        values.put(IndexDatabaseHelper.IndexColumns.ICON, row.iconResId);
+        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, row.enabled);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, row.key);
+        values.put(IndexDatabaseHelper.IndexColumns.USER_ID, row.userId);
+        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, row.payloadType);
+        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, row.payload);
 
         database.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
     }
@@ -958,6 +942,197 @@ public class DatabaseIndexingManager {
 
             return database.delete(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, whereClause,
                     whereArgs);
+        }
+    }
+
+    public static class DatabaseRow {
+        public final String locale;
+        public final String updatedTitle;
+        public final String normalizedTitle;
+        public final String updatedSummaryOn;
+        public final String normalizedSummaryOn;
+        public final String updatedSummaryOff;
+        public final String normalizedSummaryOff;
+        public final String entries;
+        public final String className;
+        public final String screenTitle;
+        public final int iconResId;
+        public final int rank;
+        public final String spaceDelimitedKeywords;
+        public final String intentAction;
+        public final String intentTargetPackage;
+        public final String intentTargetClass;
+        public final boolean enabled;
+        public final String key;
+        public final int userId;
+        public final int payloadType;
+        public final byte[] payload;
+
+        private DatabaseRow(Builder builder) {
+            locale = builder.mLocale;
+            updatedTitle = builder.mUpdatedTitle;
+            normalizedTitle = builder.mNormalizedTitle;
+            updatedSummaryOn = builder.mUpdatedSummaryOn;
+            normalizedSummaryOn = builder.mNormalizedSummaryOn;
+            updatedSummaryOff = builder.mUpdatedSummaryOff;
+            normalizedSummaryOff = builder.mNormalizedSummaryOff;
+            entries = builder.mEntries;
+            className = builder.mClassName;
+            screenTitle = builder.mScreenTitle;
+            iconResId = builder.mIconResId;
+            rank = builder.mRank;
+            spaceDelimitedKeywords = builder.mSpaceDelimitedKeywords;
+            intentAction = builder.mIntentAction;
+            intentTargetPackage = builder.mIntentTargetPackage;
+            intentTargetClass = builder.mIntentTargetClass;
+            enabled = builder.mEnabled;
+            key = builder.mKey;
+            userId = builder.mUserId;
+            payloadType = builder.mPayloadType;
+            payload = builder.mPayload != null ? ResultPayloadUtils.marshall(builder.mPayload)
+                    : null;
+        }
+
+        public static class Builder {
+            private String mLocale;
+            private String mUpdatedTitle;
+            private String mNormalizedTitle;
+            private String mUpdatedSummaryOn;
+            private String mNormalizedSummaryOn;
+            private String mUpdatedSummaryOff;
+            private String mNormalizedSummaryOff;
+            private String mEntries;
+            private String mClassName;
+            private String mScreenTitle;
+            private int mIconResId;
+            private int mRank;
+            private String mSpaceDelimitedKeywords;
+            private String mIntentAction;
+            private String mIntentTargetPackage;
+            private String mIntentTargetClass;
+            private boolean mEnabled;
+            private String mKey;
+            private int mUserId;
+            @ResultPayload.PayloadType private int mPayloadType;
+            private ResultPayload mPayload;
+
+            public Builder setLocale(String locale) {
+                mLocale = locale;
+                return this;
+            }
+
+            public Builder setUpdatedTitle(String updatedTitle) {
+                mUpdatedTitle = updatedTitle;
+                return this;
+            }
+
+            public Builder setNormalizedTitle(String normalizedTitle) {
+                mNormalizedTitle = normalizedTitle;
+                return this;
+            }
+
+            public Builder setUpdatedSummaryOn(String updatedSummaryOn) {
+                mUpdatedSummaryOn = updatedSummaryOn;
+                return this;
+            }
+
+            public Builder setNormalizedSummaryOn(String normalizedSummaryOn) {
+                mNormalizedSummaryOn = normalizedSummaryOn;
+                return this;
+            }
+
+            public Builder setUpdatedSummaryOff(String updatedSummaryOff) {
+                mUpdatedSummaryOff = updatedSummaryOff;
+                return this;
+            }
+
+            public Builder setNormalizedSummaryOff(String normalizedSummaryOff) {
+                this.mNormalizedSummaryOff = normalizedSummaryOff;
+                return this;
+            }
+
+            public Builder setEntries(String entries) {
+                mEntries = entries;
+                return this;
+            }
+
+            public Builder setClassName(String className) {
+                mClassName = className;
+                return this;
+            }
+
+            public Builder setScreenTitle(String screenTitle) {
+                mScreenTitle = screenTitle;
+                return this;
+            }
+
+            public Builder setIconResId(int iconResId) {
+                mIconResId = iconResId;
+                return this;
+            }
+
+            public Builder setRank(int rank) {
+                mRank = rank;
+                return this;
+            }
+
+            public Builder setSpaceDelimitedKeywords(String spaceDelimitedKeywords) {
+                mSpaceDelimitedKeywords = spaceDelimitedKeywords;
+                return this;
+            }
+
+            public Builder setIntentAction(String intentAction) {
+                mIntentAction = intentAction;
+                return this;
+            }
+
+            public Builder setIntentTargetPackage(String intentTargetPackage) {
+                mIntentTargetPackage = intentTargetPackage;
+                return this;
+            }
+
+            public Builder setIntentTargetClass(String intentTargetClass) {
+                mIntentTargetClass = intentTargetClass;
+                return this;
+            }
+
+            public Builder setEnabled(boolean enabled) {
+                mEnabled = enabled;
+                return this;
+            }
+
+            public Builder setKey(String key) {
+                mKey = key;
+                return this;
+            }
+
+            public Builder setUserId(int userId) {
+                mUserId = userId;
+                return this;
+            }
+
+            public Builder setPayload(ResultPayload payload) {
+                mPayload = payload;
+
+                if(mPayload != null) {
+                    setPayloadType(mPayload.getType());
+                }
+                return this;
+            }
+
+            /**
+             * Payload type is added when a Payload is added to the Builder in {setPayload}
+             * @param payloadType PayloadType
+             * @return The Builder
+             */
+            private Builder setPayloadType(@ResultPayload.PayloadType int payloadType) {
+                mPayloadType = payloadType;
+                return this;
+            }
+
+            public DatabaseRow build() {
+                return new DatabaseRow(this);
+            }
         }
     }
 }

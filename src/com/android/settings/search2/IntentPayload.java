@@ -18,7 +18,6 @@ package com.android.settings.search2;
 
 import android.content.Intent;
 import android.os.Parcel;
-import com.android.internal.annotations.VisibleForTesting;
 
 /**
  * Encapsulates the standard intent based results as seen in first party apps and Settings results.
