@@ -18,12 +18,18 @@
 package com.android.settings.search;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.Configuration;
 import android.view.Menu;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search2.DatabaseIndexingManager;
 import com.android.settings.search2.SearchFeatureProviderImpl;
 
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.drawer.DashboardCategory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,9 +39,14 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -63,5 +74,23 @@ public class SearchFeatureProviderImplTest {
         mProvider.setUpSearchMenu(menu, mActivity);
 
         verify(menu).add(anyInt(), anyInt(), anyInt(), anyString());
+    }
+
+    @Test
+    public void testUpdateIndexNewSearch_UsesDatabaseIndexingManager() {
+        mProvider = spy(new SearchFeatureProviderImpl(mActivity));
+        when(mProvider.isEnabled()).thenReturn(true);
+
+        mProvider.updateIndex(mActivity);
+        verify(mProvider).getIndexingManager(any(Context.class));
+    }
+
+    @Test
+    public void testUpdateIndexNewSearch_UsesIndex() {
+        mProvider = spy(new SearchFeatureProviderImpl(mActivity));
+        when(mProvider.isEnabled()).thenReturn(false);
+
+        mProvider.updateIndex(mActivity);
+        verify(mProvider, never()).getIndexingManager(any(Context.class));
     }
 }

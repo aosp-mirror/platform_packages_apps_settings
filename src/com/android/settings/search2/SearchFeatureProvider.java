@@ -46,4 +46,14 @@ public interface SearchFeatureProvider {
      * Returns a new loader to search installed apps.
      */
     InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query);
+
+    /**
+     * Returns the manager for indexing Settings data.
+     */
+    DatabaseIndexingManager getIndexingManager(Context context);
+
+    /**
+     * Updates the Settings indexes
+     */
+    void updateIndex(Context context);
 }

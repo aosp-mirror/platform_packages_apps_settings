@@ -253,7 +253,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             String action = intent.getAction();
             if (action.equals(Intent.ACTION_USER_ADDED)
                     || action.equals(Intent.ACTION_USER_REMOVED)) {
-                Index.getInstance(getApplicationContext()).update();
+                mSearchFeatureProvider.updateIndex(getApplicationContext());
             }
         }
     };
@@ -310,7 +310,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Index.getInstance(this).update();
+        mSearchFeatureProvider.updateIndex(getApplicationContext());
     }
 
     @Override
