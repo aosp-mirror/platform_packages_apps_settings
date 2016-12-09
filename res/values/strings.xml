@@ -81,7 +81,23 @@
     <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_menu_viewSDN">View Service Dialing Numbers</string>
     <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_menu_getPDP">Get PDP List</string>
+    <string name="radioInfo_menu_getIMS">IMS Service Status</string>
+
+    <!-- Phone Info screen. IMS Registration Title.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="radio_info_ims_reg_status_title">IMS Status</string>
+
+    <!-- Phone Info screen. IMS Status - Registered.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="radio_info_ims_reg_status_registered">Registered</string>
+    <!-- Phone Info screen. Ims Status - Unregistered.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="radio_info_ims_reg_status_not_registered">Not Registered</string>
+
+    <!-- Phone Info screen. Ims Feature Status label.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="radio_info_ims_feature_status_available">Available</string>
+    <!-- Phone Info screen. Ims Feature status label.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="radio_info_ims_feature_status_unavailable">Unavailable</string>
+
+    <!-- Phone Info screen. IMS Registration.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="radio_info_ims_reg_status">IMS Registration: <xliff:g id="status" example="registered">%1$s</xliff:g>\u000AVoice over LTE: <xliff:g id="availability" example="available">%2$s</xliff:g>\u000AVoice over WiFi: <xliff:g id="availability" example="available">%3$s</xliff:g>\u000AVideo Calling: <xliff:g id="availability" example="available">%4$s</xliff:g>\u000AUT Interface: <xliff:g id="availability" example="available">%5$s</xliff:g></string>
 
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_service_in">In Service</string>
