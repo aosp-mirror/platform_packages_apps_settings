@@ -54,6 +54,7 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
     private static final String KEY_CELLULAR_FALLBACK = "wifi_cellular_data_fallback";
     private static final String KEY_WIFI_ASSISTANT = "wifi_assistant";
+    private static final String KEY_CONNECT_CARRIER_NETWORKS = "connect_carrier_networks";
 
     private WifiManager mWifiManager;
     private NetworkScoreManager mNetworkScoreManager;
@@ -98,11 +99,20 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
             removePreference(KEY_SAVED_NETWORKS);
         }
 
+        if (!mWifiManager.hasCarrierConfiguredNetworks()){
+            removePreference(KEY_CONNECT_CARRIER_NETWORKS);
+        }
+
         SwitchPreference notifyOpenNetworks =
                 (SwitchPreference) findPreference(KEY_NOTIFY_OPEN_NETWORKS);
         notifyOpenNetworks.setChecked(Settings.Global.getInt(getContentResolver(),
                 Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
         notifyOpenNetworks.setEnabled(mWifiManager.isWifiEnabled());
+
+        SwitchPreference connectToCarrierNetworks =
+                (SwitchPreference) findPreference(KEY_CONNECT_CARRIER_NETWORKS);
+        connectToCarrierNetworks.setChecked(Settings.Global.getInt(getContentResolver(),
+                Settings.Global.WIFI_CONNECT_CARRIER_NETWORKS, 0) == 1);
 
         final Context context = getActivity();
         if (avoidBadWifiConfig()) {
@@ -187,6 +197,10 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
             String settingName = Settings.Global.NETWORK_AVOID_BAD_WIFI;
             Settings.Global.putString(getContentResolver(), settingName,
                     ((SwitchPreference) preference).isChecked() ? "1" : null);
+        } else if (KEY_CONNECT_CARRIER_NETWORKS.equals(key)) {
+            Settings.Global.putInt(getContentResolver(),
+                    Settings.Global.WIFI_CONNECT_CARRIER_NETWORKS,
+                    ((SwitchPreference) preference).isChecked() ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(preference);
         }

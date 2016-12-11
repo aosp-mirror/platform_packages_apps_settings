@@ -29,6 +29,11 @@
         android:title="@string/wifi_notify_open_networks"
         android:summary="@string/wifi_notify_open_networks_summary" />
 
+    <SwitchPreference
+        android:key="connect_carrier_networks"
+        android:title="@string/wifi_connect_carrier_networks"
+        android:summary="@string/wifi_connect_carrier_networks_summary" />
+
     <ListPreference
         android:key="sleep_policy"
         android:title="@string/wifi_setting_sleep_policy_title"
