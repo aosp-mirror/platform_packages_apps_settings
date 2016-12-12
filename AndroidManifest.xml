@@ -2070,10 +2070,11 @@
                   android:label="@string/bluetooth_permission_request"
                   android:excludeFromRecents="true"
                   android:permission="android.permission.BLUETOOTH"
-                  android:theme="@*android:style/Theme.DeviceDefault.Light.Dialog.Alert">
+                  android:theme="@style/BluetoothPermission">
             <intent-filter android:priority="1">
                 <action android:name="android.bluetooth.adapter.action.REQUEST_DISCOVERABLE" />
                 <action android:name="android.bluetooth.adapter.action.REQUEST_ENABLE" />
+                <action android:name="android.bluetooth.adapter.action.REQUEST_DISABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
