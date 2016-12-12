@@ -51,6 +51,7 @@ public class SupportItemAdapterTest {
     private final Account USER_2 = new Account("user2", ACCOUNT_TYPE);
     private final Account TWO_ACCOUNTS[] = {USER_1, USER_2};
     private final Account ONE_ACCOUNT[] = {USER_1};
+    private final Account ZERO_ACCOUNT[] = {};
 
     private ShadowActivity mShadowActivity;
     private Activity mActivity;
@@ -96,6 +97,18 @@ public class SupportItemAdapterTest {
         Robolectric.flushForegroundThreadScheduler();
 
         verify(mSupportFeatureProvider).getAccountLoginIntent();
+    }
+
+    @Test
+    public void testSetAccount_AccountEmpty_NotCrash() {
+        when(mSupportFeatureProvider.getSupportEligibleAccounts(mActivity)).thenReturn(ZERO_ACCOUNT);
+        mSupportItemAdapter = new SupportItemAdapter(mActivity, null, mSupportFeatureProvider,
+            mMetricsFeatureProvider, null);
+
+        // Should not crash in this method
+        mSupportItemAdapter.setAccounts(ONE_ACCOUNT);
+
+        verify(mSupportFeatureProvider).getSupportEligibleAccounts(mActivity);
     }
 
     /**

@@ -170,8 +170,13 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
 
     public void setAccounts(Account accounts[]) {
         if (!Arrays.equals(mAccounts, accounts)) {
-            int index = ArrayUtils.indexOf(accounts, mAccounts[mSelectedAccountIndex]);
-            mSelectedAccountIndex = index != -1 ? index : 0;
+            if (mAccounts.length == 0) {
+                mSelectedAccountIndex = 0;
+            } else {
+                final int index = ArrayUtils.indexOf(accounts, mAccounts[mSelectedAccountIndex]);
+                mSelectedAccountIndex = index != -1 ? index : 0;
+            }
+
             mAccounts = accounts;
             mSupportFeatureProvider.refreshOperationRules();
             refreshEscalationCards();
