@@ -16,29 +16,27 @@
 
 package com.android.settings.tts;
 
+import android.support.v7.preference.ListPreference;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings.SettingNotFoundException;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
 import android.speech.tts.UtteranceProgressListener;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Checkable;
+import android.util.Pair;
+import java.util.Comparator;
+import java.util.Collections;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SeekBarPreference;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.tts.TtsEnginePreference.RadioButtonGroupState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,13 +46,15 @@ import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Set;
 
-import static android.provider.Settings.Secure.TTS_DEFAULT_PITCH;
-import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
+import static android.provider.Settings.Secure.TTS_DEFAULT_PITCH;
 
-public class TextToSpeechSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
-        RadioButtonGroupState {
+public class TextToSpeechSettings extends SettingsPreferenceFragment
+        implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+
+    private static final String STATE_KEY_LOCALE_ENTRIES = "locale_entries";
+    private static final String STATE_KEY_LOCALE_ENTRY_VALUES = "locale_entry_values";
+    private static final String STATE_KEY_LOCALE_VALUE = "locale_value";
 
     private static final String TAG = "TextToSpeechSettings";
     private static final boolean DBG = false;
@@ -62,26 +62,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     /** Preference key for the "play TTS example" preference. */
     private static final String KEY_PLAY_EXAMPLE = "tts_play_example";;
 
-    /** Preference key for the TTS pitch selection slider. */
-    private static final String KEY_DEFAULT_PITCH = "tts_default_pitch";
-
-    /** Preference key for the TTS rate selection slider. */
-    private static final String KEY_DEFAULT_RATE = "tts_default_rate";
-
-    /** Preference key for the TTS reset speech rate preference. */
-    private static final String KEY_RESET_SPEECH_RATE = "reset_speech_rate";
-
-    /** Preference key for the TTS reset speech pitch preference. */
-    private static final String KEY_RESET_SPEECH_PITCH = "reset_speech_pitch";
-
     /** Preference key for the TTS status field. */
     private static final String KEY_STATUS = "tts_status";
-
-    /**
-     * Preference key for the engine selection preference.
-     */
-    private static final String KEY_ENGINE_PREFERENCE_SECTION =
-            "tts_engine_preference_section";
 
     /**
      * These look like birth years, but they aren't mine. I'm much younger than this.
@@ -89,56 +71,27 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private static final int GET_SAMPLE_TEXT = 1983;
     private static final int VOICE_DATA_INTEGRITY_CHECK = 1977;
 
-    /**
-     * Speech rate value.
-     * This value should be kept in sync with the max value set in tts_settings xml.
-     */
-    private static final int MAX_SPEECH_RATE = 600;
-    private static final int MIN_SPEECH_RATE = 10;
-
-    /**
-     * Speech pitch value.
-     * TTS pitch value varies from 25 to 400, where 100 is the value
-     * for normal pitch. The max pitch value is set to 400, based on feedback from users
-     * and the GoogleTTS pitch variation range. The range for pitch is not set in stone
-     * and should be readjusted based on user need.
-     * This value should be kept in sync with the max value set in tts_settings xml.
-     */
-    private static final int MAX_SPEECH_PITCH = 400;
-    private static final int MIN_SPEECH_PITCH = 25;
-
-    private PreferenceCategory mEnginePreferenceCategory;
-    private SeekBarPreference mDefaultPitchPref;
-    private SeekBarPreference mDefaultRatePref;
-    private Preference mResetSpeechRate;
-    private Preference mResetSpeechPitch;
     private Preference mPlayExample;
     private Preference mEngineStatus;
 
-    private int mDefaultPitch = TextToSpeech.Engine.DEFAULT_PITCH;
-    private int mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
 
-    /**
-     * The currently selected engine.
-     */
+    private static final String KEY_ENGINE_LOCALE = "tts_default_lang";
+    private static final String KEY_ENGINE_SETTINGS = "tts_engine_settings";
+    private static final String KEY_INSTALL_DATA = "tts_install_data";
+
+    private int mSelectedLocaleIndex = -1;
+
+    /** The currently selected engine. */
     private String mCurrentEngine;
-
-    /**
-     * The engine checkbox that is currently checked. Saves us a bit of effort
-     * in deducing the right one from the currently selected engine.
-     */
-    private Checkable mCurrentChecked;
-
-    /**
-     * The previously selected TTS engine. Useful for rollbacks if the users
-     * choice is not loaded or fails a voice integrity check.
-     */
-    private String mPreviousEngine;
 
     private TextToSpeech mTts = null;
     private TtsEngines mEnginesHelper = null;
 
     private String mSampleText = null;
+
+    private ListPreference mLocalePreference;
+    private Preference mEngineSettingsPreference;
+    private Preference mInstallVoicesPreference;
 
     /**
      * Default locale used by selected TTS engine, null if not connected to any engine.
@@ -164,18 +117,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         }
     };
 
-    /**
-     * The initialization listener used when the user changes his choice of
-     * engine (as opposed to when then screen is being initialized for the first
-     * time).
-     */
-    private final TextToSpeech.OnInitListener mUpdateListener = new TextToSpeech.OnInitListener() {
-        @Override
-        public void onInit(int status) {
-            onUpdateEngine(status);
-        }
-    };
-
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.TTS_TEXT_TO_SPEECH;
@@ -192,21 +133,40 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mPlayExample.setOnPreferenceClickListener(this);
         mPlayExample.setEnabled(false);
 
-        mResetSpeechRate = findPreference(KEY_RESET_SPEECH_RATE);
-        mResetSpeechRate.setOnPreferenceClickListener(this);
-        mResetSpeechPitch = findPreference(KEY_RESET_SPEECH_PITCH);
-        mResetSpeechPitch.setOnPreferenceClickListener(this);
+        mEnginesHelper = new TtsEngines(getActivity().getApplicationContext());
 
-        mEnginePreferenceCategory = (PreferenceCategory) findPreference(
-                KEY_ENGINE_PREFERENCE_SECTION);
-        mDefaultPitchPref = (SeekBarPreference) findPreference(KEY_DEFAULT_PITCH);
-        mDefaultRatePref = (SeekBarPreference) findPreference(KEY_DEFAULT_RATE);
+        mLocalePreference = (ListPreference) findPreference(KEY_ENGINE_LOCALE);
+        mLocalePreference.setOnPreferenceChangeListener(this);
+
+        if (savedInstanceState == null) {
+            mLocalePreference.setEnabled(false);
+            mLocalePreference.setEntries(new CharSequence[0]);
+            mLocalePreference.setEntryValues(new CharSequence[0]);
+        } else {
+            // Repopulate mLocalePreference with saved state. Will be updated later with
+            // up-to-date values when checkTtsData() calls back with results.
+            final CharSequence[] entries =
+                    savedInstanceState.getCharSequenceArray(STATE_KEY_LOCALE_ENTRIES);
+            final CharSequence[] entryValues =
+                    savedInstanceState.getCharSequenceArray(STATE_KEY_LOCALE_ENTRY_VALUES);
+            final CharSequence value = savedInstanceState.getCharSequence(STATE_KEY_LOCALE_VALUE);
+
+            mLocalePreference.setEntries(entries);
+            mLocalePreference.setEntryValues(entryValues);
+            mLocalePreference.setValue(value != null ? value.toString() : null);
+            mLocalePreference.setEnabled(entries.length > 0);
+        }
+
+        mEngineSettingsPreference = findPreference(KEY_ENGINE_SETTINGS);
+        mEngineSettingsPreference.setOnPreferenceClickListener(this);
+        mInstallVoicesPreference = findPreference(KEY_INSTALL_DATA);
+        mInstallVoicesPreference.setOnPreferenceClickListener(this);
+        mInstallVoicesPreference.setEnabled(false);
 
         mEngineStatus = findPreference(KEY_STATUS);
         updateEngineStatus(R.string.tts_status_checking);
 
         mTts = new TextToSpeech(getActivity().getApplicationContext(), mInitListener);
-        mEnginesHelper = new TtsEngines(getActivity().getApplicationContext());
 
         setTtsUtteranceProgressListener();
         initSettings();
@@ -222,6 +182,23 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         if (mTts == null || mCurrentDefaultLocale == null) {
             return;
         }
+        if (!mTts.getDefaultEngine().equals(mTts.getCurrentEngine())) {
+            try {
+                mTts.shutdown();
+                mTts = null;
+            } catch (Exception e) {
+                Log.e(TAG, "Error shutting down TTS engine" + e);
+            }
+            mTts = new TextToSpeech(getActivity().getApplicationContext(), mInitListener);
+            setTtsUtteranceProgressListener();
+            initSettings();
+        } else {
+            // Do set pitch correctly after it may have changed, and unlike speed, it doesn't change
+            // immediately.
+            final ContentResolver resolver = getContentResolver();
+            mTts.setPitch(android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH)/100.0f);
+        }
+
         Locale ttsDefaultLocale = mTts.getDefaultLanguage();
         if (mCurrentDefaultLocale != null && !mCurrentDefaultLocale.equals(ttsDefaultLocale)) {
             updateWidgetState(false);
@@ -259,26 +236,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private void initSettings() {
         final ContentResolver resolver = getContentResolver();
 
-        // Set up the default rate and pitch.
-        mDefaultRate = android.provider.Settings.Secure.getInt(
-            resolver, TTS_DEFAULT_RATE, TextToSpeech.Engine.DEFAULT_RATE);
-        mDefaultPitch = android.provider.Settings.Secure.getInt(
-            resolver, TTS_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH);
-
-        mDefaultRatePref.setProgress(getSeekBarProgressFromValue(KEY_DEFAULT_RATE, mDefaultRate));
-        mDefaultRatePref.setOnPreferenceChangeListener(this);
-        mDefaultRatePref.setMax(getSeekBarProgressFromValue(KEY_DEFAULT_RATE, MAX_SPEECH_RATE));
-
-        mDefaultPitchPref.setProgress(getSeekBarProgressFromValue(KEY_DEFAULT_PITCH,
-              mDefaultPitch));
-        mDefaultPitchPref.setOnPreferenceChangeListener(this);
-        mDefaultPitchPref.setMax(getSeekBarProgressFromValue(KEY_DEFAULT_PITCH,
-              MAX_SPEECH_PITCH));
-
         if (mTts != null) {
             mCurrentEngine = mTts.getCurrentEngine();
-            mTts.setSpeechRate(mDefaultRate/100.0f);
-            mTts.setPitch(mDefaultPitch/100.0f);
+            mTts.setPitch(android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH)/100.0f);
         }
 
         SettingsActivity activity = null;
@@ -289,44 +249,20 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
                     "Settings");
         }
 
-        mEnginePreferenceCategory.removeAll();
+        if (mCurrentEngine != null) {
+            EngineInfo info = mEnginesHelper.getEngineInfo(mCurrentEngine);
+            mEngineSettingsPreference.setSummary(info.label);
+            final Intent settingsIntent = mEnginesHelper.getSettingsIntent(info.name);
+            mEngineSettingsPreference.setIntent(settingsIntent);
+            if (settingsIntent == null) {
+                mEngineSettingsPreference.setEnabled(false);
+            }
 
-        List<EngineInfo> engines = mEnginesHelper.getEngines();
-        for (EngineInfo engine : engines) {
-            TtsEnginePreference enginePref = new TtsEnginePreference(getPrefContext(), engine,
-                    this, activity);
-            mEnginePreferenceCategory.addPreference(enginePref);
+            Preference mEnginePreference = findPreference("tts_engine_preference");
+            mEnginePreference.setSummary(info.label);
         }
 
         checkVoiceData(mCurrentEngine);
-    }
-
-    /**
-     * The minimum speech pitch/rate value should be > 0 but the minimum value of a seekbar in
-     * android is fixed at 0. Therefore, we increment the seekbar progress with MIN_SPEECH_VALUE
-     * so that the minimum seekbar progress value is MIN_SPEECH_PITCH/RATE.
-     *     SPEECH_VALUE = MIN_SPEECH_VALUE + SEEKBAR_PROGRESS
-     */
-    private int getValueFromSeekBarProgress(String preferenceKey, int progress) {
-        if (preferenceKey.equals(KEY_DEFAULT_RATE)) {
-            return MIN_SPEECH_RATE + progress;
-        } else if (preferenceKey.equals(KEY_DEFAULT_PITCH)) {
-            return MIN_SPEECH_PITCH + progress;
-        }
-        return progress;
-    }
-
-    /**
-     * Since we are appending the MIN_SPEECH value to the speech seekbar progress, the
-     * speech seekbar progress should be set to (speechValue - MIN_SPEECH value).
-     */
-    private int getSeekBarProgressFromValue(String preferenceKey, int value) {
-        if (preferenceKey.equals(KEY_DEFAULT_RATE)) {
-            return value - MIN_SPEECH_RATE;
-        } else if (preferenceKey.equals(KEY_DEFAULT_PITCH)) {
-            return value - MIN_SPEECH_PITCH;
-        }
-        return value;
     }
 
     /**
@@ -336,6 +272,14 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         if (status == TextToSpeech.SUCCESS) {
             if (DBG) Log.d(TAG, "TTS engine for settings screen initialized.");
             checkDefaultLocale();
+            getActivity()
+                    .runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    mLocalePreference.setEnabled(true);
+                                }
+                            });
         } else {
             if (DBG) Log.d(TAG, "TTS engine for settings screen failed to initialize successfully.");
             updateWidgetState(false);
@@ -452,8 +396,87 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             onSampleTextReceived(resultCode, data);
         } else if (requestCode == VOICE_DATA_INTEGRITY_CHECK) {
             onVoiceDataIntegrityCheckDone(data);
+            if (resultCode != TextToSpeech.Engine.CHECK_VOICE_DATA_FAIL) {
+                updateDefaultLocalePref(data);
+            }
         }
     }
+
+    private void updateDefaultLocalePref(Intent data) {
+        final ArrayList<String> availableLangs =
+                data.getStringArrayListExtra(TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
+
+        final ArrayList<String> unavailableLangs =
+                data.getStringArrayListExtra(TextToSpeech.Engine.EXTRA_UNAVAILABLE_VOICES);
+
+        if (availableLangs != null && unavailableLangs.size() > 0) {
+            mInstallVoicesPreference.setEnabled(true);
+        } else {
+            mInstallVoicesPreference.setEnabled(false);
+        }
+
+        if (availableLangs == null || availableLangs.size() == 0) {
+            mLocalePreference.setEnabled(false);
+            return;
+        }
+        Locale currentLocale = null;
+        if (!mEnginesHelper.isLocaleSetToDefaultForEngine(mTts.getCurrentEngine())) {
+            currentLocale = mEnginesHelper.getLocalePrefForEngine(mTts.getCurrentEngine());
+        }
+
+        ArrayList<Pair<String, Locale>> entryPairs =
+                new ArrayList<Pair<String, Locale>>(availableLangs.size());
+        for (int i = 0; i < availableLangs.size(); i++) {
+            Locale locale = mEnginesHelper.parseLocaleString(availableLangs.get(i));
+            if (locale != null) {
+                entryPairs.add(new Pair<String, Locale>(locale.getDisplayName(), locale));
+            }
+        }
+
+        // Sort it
+        Collections.sort(
+                entryPairs,
+                new Comparator<Pair<String, Locale>>() {
+                    @Override
+                    public int compare(Pair<String, Locale> lhs, Pair<String, Locale> rhs) {
+                        return lhs.first.compareToIgnoreCase(rhs.first);
+                    }
+                });
+
+        // Get two arrays out of one of pairs
+        mSelectedLocaleIndex = 0; // Will point to the R.string.tts_lang_use_system value
+        CharSequence[] entries = new CharSequence[availableLangs.size() + 1];
+        CharSequence[] entryValues = new CharSequence[availableLangs.size() + 1];
+
+        entries[0] = getActivity().getString(R.string.tts_lang_use_system);
+        entryValues[0] = "";
+
+        int i = 1;
+        for (Pair<String, Locale> entry : entryPairs) {
+            if (entry.second.equals(currentLocale)) {
+                mSelectedLocaleIndex = i;
+            }
+            entries[i] = entry.first;
+            entryValues[i++] = entry.second.toString();
+        }
+
+        mLocalePreference.setEntries(entries);
+        mLocalePreference.setEntryValues(entryValues);
+        mLocalePreference.setEnabled(true);
+        setLocalePreference(mSelectedLocaleIndex);
+    }
+
+    /** Set entry from entry table in mLocalePreference */
+    private void setLocalePreference(int index) {
+        if (index < 0) {
+            mLocalePreference.setValue("");
+            mLocalePreference.setSummary(R.string.tts_lang_not_selected);
+        } else {
+            mLocalePreference.setValueIndex(index);
+            mLocalePreference.setSummary(mLocalePreference.getEntries()[index]);
+        }
+    }
+
 
     private String getDefaultSampleString() {
         if (mTts != null && mTts.getLanguage() != null) {
@@ -522,17 +545,59 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (KEY_DEFAULT_RATE.equals(preference.getKey())) {
-            updateSpeechRate((Integer) objValue);
-        } else if (KEY_DEFAULT_PITCH.equals(preference.getKey())) {
-            updateSpeechPitchValue((Integer) objValue);
+        if (preference == mLocalePreference) {
+            String localeString = (String) objValue;
+            updateLanguageTo(
+                    (!TextUtils.isEmpty(localeString)
+                            ? mEnginesHelper.parseLocaleString(localeString)
+                            : null));
+            checkDefaultLocale();
+            return true;
         }
         return true;
     }
 
+    private void updateLanguageTo(Locale locale) {
+        int selectedLocaleIndex = -1;
+        String localeString = (locale != null) ? locale.toString() : "";
+        for (int i = 0; i < mLocalePreference.getEntryValues().length; i++) {
+            if (localeString.equalsIgnoreCase(mLocalePreference.getEntryValues()[i].toString())) {
+                selectedLocaleIndex = i;
+                break;
+            }
+        }
+
+        if (selectedLocaleIndex == -1) {
+            Log.w(TAG, "updateLanguageTo called with unknown locale argument");
+            return;
+        }
+        mLocalePreference.setSummary(mLocalePreference.getEntries()[selectedLocaleIndex]);
+        mSelectedLocaleIndex = selectedLocaleIndex;
+
+        mEnginesHelper.updateLocalePrefForEngine(mTts.getCurrentEngine(), locale);
+
+        // Null locale means "use system default"
+        mTts.setLanguage((locale != null) ? locale : Locale.getDefault());
+    }
+
     /**
-     * Called when mPlayExample, mResetSpeechRate or mResetSpeechPitch is
-     * clicked.
+     * Ask the current default engine to launch the matching INSTALL_TTS_DATA activity so the
+     * required TTS files are properly installed.
+     */
+    private void installVoiceData() {
+        if (TextUtils.isEmpty(mCurrentEngine)) return;
+        Intent intent = new Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+        intent.setPackage(mCurrentEngine);
+        try {
+            Log.v(TAG, "Installing voice data: " + intent.toUri(0));
+            startActivity(intent);
+        } catch (ActivityNotFoundException ex) {
+            Log.e(TAG, "Failed to install TTS data, no acitivty found for " + intent + ")");
+        }
+    }
+
+    /**
+     * Called when mPlayExample, mInstallVoicesPreference is clicked.
      */
     @Override
     public boolean onPreferenceClick(Preference preference) {
@@ -541,57 +606,15 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             // the actual speaking
             speakSampleText();
             return true;
-        } else if (preference == mResetSpeechRate) {
-          int speechRateSeekbarProgress = getSeekBarProgressFromValue(
-              KEY_DEFAULT_RATE, TextToSpeech.Engine.DEFAULT_RATE);
-          mDefaultRatePref.setProgress(speechRateSeekbarProgress);
-          updateSpeechRate(speechRateSeekbarProgress);
-          return true;
-        } else if (preference == mResetSpeechPitch) {
-          int pitchSeekbarProgress = getSeekBarProgressFromValue(
-              KEY_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH);
-          mDefaultPitchPref.setProgress(pitchSeekbarProgress);
-          updateSpeechPitchValue(pitchSeekbarProgress);
-          return true;
+        } else if (preference == mInstallVoicesPreference) {
+            installVoiceData();
+            return true;
         }
         return false;
     }
 
-    private void updateSpeechRate(int speechRateSeekBarProgress) {
-        mDefaultRate = getValueFromSeekBarProgress(KEY_DEFAULT_RATE,
-            speechRateSeekBarProgress);
-        try {
-            android.provider.Settings.Secure.putInt(getContentResolver(),
-                    TTS_DEFAULT_RATE, mDefaultRate);
-            if (mTts != null) {
-                mTts.setSpeechRate(mDefaultRate / 100.0f);
-            }
-            if (DBG) Log.d(TAG, "TTS default rate changed, now " + mDefaultRate);
-        } catch (NumberFormatException e) {
-            Log.e(TAG, "could not persist default TTS rate setting", e);
-        }
-        return;
-    }
-
-    private void updateSpeechPitchValue(int speechPitchSeekBarProgress) {
-        mDefaultPitch = getValueFromSeekBarProgress(KEY_DEFAULT_PITCH,
-            speechPitchSeekBarProgress);
-        try {
-            android.provider.Settings.Secure.putInt(getContentResolver(),
-                    TTS_DEFAULT_PITCH, mDefaultPitch);
-            if (mTts != null) {
-                mTts.setPitch(mDefaultPitch / 100.0f);
-            }
-            if (DBG) Log.d(TAG, "TTS default pitch changed, now" + mDefaultPitch);
-        } catch (NumberFormatException e) {
-            Log.e(TAG, "could not persist default TTS pitch setting", e);
-        }
-        return;
-    }
-
     private void updateWidgetState(boolean enable) {
         mPlayExample.setEnabled(enable);
-        mDefaultRatePref.setEnabled(enable);
         mEngineStatus.setEnabled(enable);
     }
 
@@ -614,67 +637,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         dialog.show();
     }
 
-    private void updateDefaultEngine(String engine) {
-        if (DBG) Log.d(TAG, "Updating default synth to : " + engine);
-
-        // Disable the "play sample text" preference and the speech
-        // rate preference while the engine is being swapped.
-        updateWidgetState(false);
-        updateEngineStatus(R.string.tts_status_checking);
-
-        // Keep track of the previous engine that was being used. So that
-        // we can reuse the previous engine.
-        //
-        // Note that if TextToSpeech#getCurrentEngine is not null, it means at
-        // the very least that we successfully bound to the engine service.
-        mPreviousEngine = mTts.getCurrentEngine();
-
-        // Step 1: Shut down the existing TTS engine.
-        if (mTts != null) {
-            try {
-                mTts.shutdown();
-                mTts = null;
-            } catch (Exception e) {
-                Log.e(TAG, "Error shutting down TTS engine" + e);
-            }
-        }
-
-        // Step 2: Connect to the new TTS engine.
-        // Step 3 is continued on #onUpdateEngine (below) which is called when
-        // the app binds successfully to the engine.
-        if (DBG) Log.d(TAG, "Updating engine : Attempting to connect to engine: " + engine);
-        mTts = new TextToSpeech(getActivity().getApplicationContext(), mUpdateListener, engine);
-        setTtsUtteranceProgressListener();
-    }
-
-    /*
-     * Step 3: We have now bound to the TTS engine the user requested. We will
-     * attempt to check voice data for the engine if we successfully bound to it,
-     * or revert to the previous engine if we didn't.
-     */
-    public void onUpdateEngine(int status) {
-        if (status == TextToSpeech.SUCCESS) {
-            if (DBG) {
-                Log.d(TAG, "Updating engine: Successfully bound to the engine: " +
-                        mTts.getCurrentEngine());
-            }
-            checkVoiceData(mTts.getCurrentEngine());
-        } else {
-            if (DBG) Log.d(TAG, "Updating engine: Failed to bind to engine, reverting.");
-            if (mPreviousEngine != null) {
-                // This is guaranteed to at least bind, since mPreviousEngine would be
-                // null if the previous bind to this engine failed.
-                mTts = new TextToSpeech(getActivity().getApplicationContext(), mInitListener,
-                        mPreviousEngine);
-                setTtsUtteranceProgressListener();
-            }
-            mPreviousEngine = null;
-        }
-    }
-
-    /*
-     * Step 4: Check whether the voice data for the engine is ok.
-     */
+    /** Check whether the voice data for the engine is ok. */
     private void checkVoiceData(String engine) {
         Intent intent = new Intent(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         intent.setPackage(engine);
@@ -686,9 +649,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         }
     }
 
-    /*
-     * Step 5: The voice data check is complete.
-     */
+    /** The voice data check is complete. */
     private void onVoiceDataIntegrityCheckDone(Intent data) {
         final String engine = mTts.getCurrentEngine();
 
@@ -715,39 +676,5 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         if (evaluateDefaultLocale()) {
             getSampleText();
         }
-
-        final int engineCount = mEnginePreferenceCategory.getPreferenceCount();
-        for (int i = 0; i < engineCount; ++i) {
-            final Preference p = mEnginePreferenceCategory.getPreference(i);
-            if (p instanceof TtsEnginePreference) {
-                TtsEnginePreference enginePref = (TtsEnginePreference) p;
-                if (enginePref.getKey().equals(engine)) {
-                    enginePref.setVoiceDataDetails(data);
-                    break;
-                }
-            }
-        }
     }
-
-    @Override
-    public Checkable getCurrentChecked() {
-        return mCurrentChecked;
-    }
-
-    @Override
-    public String getCurrentKey() {
-        return mCurrentEngine;
-    }
-
-    @Override
-    public void setCurrentChecked(Checkable current) {
-        mCurrentChecked = current;
-    }
-
-    @Override
-    public void setCurrentKey(String key) {
-        mCurrentEngine = key;
-        updateDefaultEngine(mCurrentEngine);
-    }
-
 }

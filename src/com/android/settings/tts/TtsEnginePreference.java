@@ -20,49 +20,21 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.Log;
-import android.view.View;
 import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.Utils;
 
 
 public class TtsEnginePreference extends Preference {
 
     private static final String TAG = "TtsEnginePreference";
-
-    /**
-     * Key for the name of the TTS engine passed in to the engine
-     * settings fragment {@link TtsEngineSettingsFragment}.
-     */
-    static final String FRAGMENT_ARGS_NAME = "name";
-
-    /**
-     * Key for the label of the TTS engine passed in to the engine
-     * settings fragment. This is used as the title of the fragment
-     * {@link TtsEngineSettingsFragment}.
-     */
-    static final String FRAGMENT_ARGS_LABEL = "label";
-
-    /**
-     * Key for the voice data data passed in to the engine settings
-     * fragmetn {@link TtsEngineSettingsFragment}.
-     */
-    static final String FRAGMENT_ARGS_VOICES = "voices";
-
-    /**
-     * The preference activity that owns this preference. Required
-     * for instantiating the engine specific settings screen.
-     */
-    private final SettingsActivity mSettingsActivity;
 
     /**
      * The engine information for the engine this preference represents.
@@ -81,7 +53,6 @@ public class TtsEnginePreference extends Preference {
      */
     private volatile boolean mPreventRadioButtonCallbacks;
 
-    private View mSettingsIcon;
     private RadioButton mRadioButton;
     private Intent mVoiceCheckData;
 
@@ -99,7 +70,6 @@ public class TtsEnginePreference extends Preference {
         setLayoutResource(R.layout.preference_tts_engine);
 
         mSharedState = state;
-        mSettingsActivity = prefActivity;
         mEngineInfo = info;
         mPreventRadioButtonCallbacks = false;
 
@@ -130,52 +100,10 @@ public class TtsEnginePreference extends Preference {
         mPreventRadioButtonCallbacks = false;
 
         mRadioButton = rb;
-
-        mSettingsIcon = view.findViewById(R.id.tts_engine_settings);
-        // Will be enabled only the engine has passed the voice check, and
-        // is currently enabled.
-        mSettingsIcon.setEnabled(isChecked && mVoiceCheckData != null);
-        if (!isChecked) {
-            mSettingsIcon.setAlpha(Utils.DISABLED_ALPHA);
-        }
-        mSettingsIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle args = new Bundle();
-                args.putString(FRAGMENT_ARGS_NAME, mEngineInfo.name);
-                args.putString(FRAGMENT_ARGS_LABEL, mEngineInfo.label);
-                if (mVoiceCheckData != null) {
-                    args.putParcelable(FRAGMENT_ARGS_VOICES, mVoiceCheckData);
-                }
-
-                // Note that we use this instead of the (easier to use)
-                // SettingsActivity.startPreferenceFragment because the
-                // title will not be updated correctly in the fragment
-                // breadcrumb since it isn't inflated from the XML layout.
-                mSettingsActivity.startPreferencePanel(
-                        TtsEngineSettingsFragment.class.getName(),
-                        args, 0, mEngineInfo.label, null, 0);
-            }
-        });
-
-        if (mVoiceCheckData != null) {
-            mSettingsIcon.setEnabled(mRadioButton.isChecked());
-        }
     }
 
     public void setVoiceDataDetails(Intent data) {
         mVoiceCheckData = data;
-        // This might end up running before getView aboive, in which
-        // case mSettingsIcon && mRadioButton will be null. In this case
-        // getView will set the right values.
-        if (mSettingsIcon != null && mRadioButton != null) {
-            if (mRadioButton.isChecked()) {
-                mSettingsIcon.setEnabled(true);
-            } else {
-                mSettingsIcon.setEnabled(false);
-                mSettingsIcon.setAlpha(Utils.DISABLED_ALPHA);
-            }
-        }
     }
 
     private boolean shouldDisplayDataAlert() {
@@ -227,8 +155,6 @@ public class TtsEnginePreference extends Preference {
                 // Privileged engine, set it current
                 makeCurrentEngine(buttonView);
             }
-        } else {
-            mSettingsIcon.setEnabled(false);
         }
     }
 
@@ -239,7 +165,6 @@ public class TtsEnginePreference extends Preference {
         mSharedState.setCurrentChecked(current);
         mSharedState.setCurrentKey(getKey());
         callChangeListener(mSharedState.getCurrentKey());
-        mSettingsIcon.setEnabled(true);
     }
 
 

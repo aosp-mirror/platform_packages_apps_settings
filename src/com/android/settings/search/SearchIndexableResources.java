@@ -72,6 +72,8 @@ import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.system.SystemDashboardFragment;
+import com.android.settings.tts.TtsEnginePreferenceFragment;
+import com.android.settings.tts.TtsSlidersFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
@@ -167,6 +169,9 @@ public final class SearchIndexableResources {
         addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_bt_laptop);
         addIndex(EnterprisePrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(PaymentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_nfc_payment);
+        addIndex(
+                TtsEnginePreferenceFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
+        addIndex(TtsSlidersFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
     }
 
     private SearchIndexableResources() {
