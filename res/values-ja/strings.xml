@@ -45,7 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM のアドレス帳を表示"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"発信番号制限を表示"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"サービス電話番号を表示"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"PDP リストを取得"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"IMS サービスのステータス"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS ステータス"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"登録済み"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"未登録"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"使用可能"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"使用不可"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS 登録: <xliff:g id="STATUS">%1$s</xliff:g>\nボイスオーバー LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nボイスオーバー WiFi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nビデオハングアウト: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT インターフェース: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"圏内"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"圏外"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"緊急通報のみ"</string>
@@ -3082,8 +3088,8 @@
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> データ警告"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> データ警告 / <xliff:g id="ID_2">%2$s</xliff:g> データ上限"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"請求期間"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"月単位の請求期間の開始日は、毎月 <xliff:g id="ID_1">%1$s</xliff:g>です"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"<xliff:g id="ID_1">%1$s</xliff:g>から月単位"</string>
+    <string name="billing_cycle_summary" msgid="9009106526129293752">"月単位の請求期間の開始日は、毎月 <xliff:g id="ID_1">%1$s</xliff:g> 日です"</string>
+    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"<xliff:g id="ID_1">%1$s</xliff:g> 日から月単位で請求"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"ネットワーク制限"</string>
     <string name="operator_warning" msgid="1862988028996859195">"端末で記録されるデータ使用量と携帯通信会社のデータ使用量は異なる場合があります"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> 使用"</string>

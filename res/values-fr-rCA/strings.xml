@@ -45,7 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Afficher le carnet d\'adresses de la carte SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Afficher les numéros autorisés"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Afficher les numéros de service"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"Télécharger la liste de PDP"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"État du service IMS"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"État IMS"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"Enregistré"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"Non enregistré"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Accessible"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"Non accessible"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"Enregistrement IMS : <xliff:g id="STATUS">%1$s</xliff:g>\nVoix sur LTE : <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nVoix sur Wi-Fi : <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nAppels vidéo : <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nInterface UT : <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"En service"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Hors service"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Appels d\'urgence seulement"</string>
@@ -207,7 +213,7 @@
     <string name="oem_radio_info_label" msgid="6163141792477958941">"Infos/paramètres OEM"</string>
     <string name="band_mode_title" msgid="4071411679019296568">"Définir le mode de bande radio"</string>
     <string name="band_mode_loading" msgid="3555063585133586152">"Chargement de la liste de bandes en cours..."</string>
-    <string name="band_mode_set" msgid="5730560180249458484">"Paramètres"</string>
+    <string name="band_mode_set" msgid="5730560180249458484">"Définir"</string>
     <string name="band_mode_failed" msgid="1495968863884716379">"Échec"</string>
     <string name="band_mode_succeeded" msgid="2701016190055887575">"Opération effectuée"</string>
     <string name="sdcard_changes_instructions" msgid="4482324130377280131">"Les modifications prendront effet lors de la prochaine connexion du câble USB."</string>
@@ -2216,7 +2222,7 @@
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Cette action limite la consommation de données et l\'utilisation de la pile, mais vous devrez synchroniser manuellement chaque compte pour recueillir les informations récentes. Par ailleurs, vous ne recevrez pas de notifications en cas de mise à jour."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Date de réinitialisation du cycle de consommation"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Jour du mois :"</string>
-    <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Paramètres"</string>
+    <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Définir"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"Définir l\'avertissement d\'utilisation des données"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"Définir la limite de consommation des données"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limitation de la consommation de données mobiles"</string>

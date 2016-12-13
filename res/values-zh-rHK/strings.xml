@@ -45,7 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"查看 SIM 卡通訊錄"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"查看固定撥號"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"查看服務撥號"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"取得 PDP 清單"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"IMS 服務狀態"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS 狀態"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"已註冊"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"未註冊"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"可用"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"無法使用"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS 註冊：<xliff:g id="STATUS">%1$s</xliff:g>\n語音 LTE：<xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\n語音 Wi-Fi：<xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\n視像通話：<xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT 介面：<xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"服務中"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"沒有服務"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"只可撥打緊急電話"</string>
@@ -1988,9 +1994,7 @@
     <string name="gadget_sync" msgid="858895763714222152">"同步"</string>
     <string name="gadget_brightness_template" msgid="930541920933123603">"亮度 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="gadget_brightness_state_auto" msgid="6667967252426515446">"自動"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for gadget_brightness_state_full (6814570109772137631) -->
-    <skip />
+    <string name="gadget_brightness_state_full" msgid="6814570109772137631">"最亮"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for gadget_brightness_state_half (3696671957608774204) -->
     <skip />
@@ -2649,11 +2653,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"如果您關閉「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」的通知存取權，「請勿騷擾」的存取權亦可能會關閉。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"關閉"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"取消"</string>
-    <string name="vr_listeners_title" msgid="1318901577754715777">"虛擬現實協助服務"</string>
-    <string name="no_vr_listeners" msgid="2689382881717507390">"沒有已安裝的應用程式要求使用虛擬現實協助服務。"</string>
-    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"允許虛擬現實服務存取 <xliff:g id="SERVICE">%1$s</xliff:g> 嗎？"</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"VR 助手服務"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"沒有已安裝的應用程式要求提供 VR 助手服務。"</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"允許 VR 服務存取 <xliff:g id="SERVICE">%1$s</xliff:g> 嗎？"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"在虛擬現實模式下使用應用程式時，方可使用「<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>」。"</string>
-    <string name="display_vr_pref_title" msgid="8104485269504335481">"裝置處於虛擬現實模式時"</string>
+    <string name="display_vr_pref_title" msgid="8104485269504335481">"裝置在 VR 模式時"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"減少模糊 (建議)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"減少閃爍"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"[請勿騷擾] 存取"</string>

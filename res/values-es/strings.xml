@@ -45,7 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Ver libreta de direcciones de tarjeta SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Ver números de marcación fija"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Ver números de marcación de servicio"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"Obtener lista PDP"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"Estado del servicio IMS"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"Estado de IMS"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"Registrado"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"No registrado"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Disponible"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"No disponible"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"Registro en IMS: <xliff:g id="STATUS">%1$s</xliff:g>\nVoz a través de LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nVoz a través de Wi-Fi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideollamadas: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nInterfaz UT: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"En servicio"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Fuera de servicio"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Solo llamadas de emergencia"</string>
@@ -546,7 +552,7 @@
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Cancelar"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"Siguiente"</string>
     <string name="lock_setup" msgid="3355847066343753943">"Se ha completado la configuración."</string>
-    <string name="device_admin_title" msgid="3562216873644263804">"Administración de dispositivos"</string>
+    <string name="device_admin_title" msgid="3562216873644263804">"Administración del dispositivo"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Administradores de dispositivos"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Ver o desactivar administradores de dispositivos"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Agentes de confianza"</string>
@@ -1285,7 +1291,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"¿Cambiar aplicación de SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"¿Usar <xliff:g id="NEW_APP">%1$s</xliff:g> en lugar de <xliff:g id="CURRENT_APP">%2$s</xliff:g> como aplicación de SMS?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"¿Usar <xliff:g id="NEW_APP">%s</xliff:g> como aplicación de SMS?"</string>
-    <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"¿Cambiar Asistente de Wi‑Fi?"</string>
+    <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"¿Cambiar asistente de Wi‑Fi?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"¿Quieres usar <xliff:g id="NEW_APP">%1$s</xliff:g> en lugar de <xliff:g id="CURRENT_APP">%2$s</xliff:g> para administrar tus conexiones de red?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"¿Quieres usar <xliff:g id="NEW_APP">%s</xliff:g> para administrar tus conexiones de red?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Operador de SIM desconocido"</string>
@@ -1718,7 +1724,7 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Experimental) Puede afectar al rendimiento"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"Clic después de que el puntero deje de moverse"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Retraso antes del clic"</string>
-    <string name="enable_quick_setting" msgid="2366999897816894536">"Mostrar en Ajustes rápidos"</string>
+    <string name="enable_quick_setting" msgid="2366999897816894536">"Mostrar en ajustes rápidos"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Modo de corrección"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
       <item quantity="other">Retraso demasiado corto (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> ms)</item>
@@ -2336,11 +2342,11 @@
     <string name="user_list_title" msgid="7937158411137563543">"Usuarios y perfiles"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Añadir usuario o perfil"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Añadir usuario"</string>
-    <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Perfil limitado"</string>
+    <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Perfil restringido"</string>
     <string name="user_need_lock_message" msgid="5879715064416886811">"Para poder crear un perfil restringido, debes configurar una pantalla de bloqueo que proteja tus aplicaciones y datos personales."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Establecer bloqueo"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Sin configurar"</string>
-    <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"No se ha configurado: perfil limitado"</string>
+    <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"No se ha configurado: perfil restringido"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"Sin configurar: perfil de trabajo"</string>
     <string name="user_admin" msgid="993402590002400782">"Administrador"</string>
     <string name="user_you" msgid="1639158809315025986">"Tú (<xliff:g id="NAME">%s</xliff:g>)"</string>
@@ -2350,7 +2356,7 @@
     <string name="user_add_user_item_summary" msgid="4702776187132008661">"Los usuarios tienen contenido y aplicaciones propios"</string>
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Desde tu cuenta, puedes restringir el acceso a las aplicaciones y al contenido"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Usuario"</string>
-    <string name="user_add_profile_item_title" msgid="8353515490730363621">"Perfil limitado"</string>
+    <string name="user_add_profile_item_title" msgid="8353515490730363621">"Perfil restringido"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"¿Añadir nuevo usuario?"</string>
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Puedes crear más usuarios para compartir este dispositivo con otras personas. Cada usuario tiene su propio espacio, que puede personalizar con aplicaciones, fondos de pantalla, etc., y puede modificar opciones de configuración del dispositivo que afectan a todos los usuarios, como la conexión Wi‑Fi.\n\nCuando se añade un usuario, este debe configurar su espacio.\n\nCualquier usuario puede actualizar las aplicaciones del resto de usuarios."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Al añadir un usuario nuevo, este debe configurar su espacio.\n\nCualquier usuario puede actualizar las aplicaciones del resto de usuarios."</string>
@@ -2994,7 +3000,7 @@
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Gira la muñeca dos veces para abrir la aplicación Cámara"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Botón de encendido dos veces para cámara"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="7355664631775680376">"Abre la cámara rápidamente sin desbloquear la pantalla"</string>
-    <string name="screen_zoom_title" msgid="5233515303733473927">"Tamaño de la pantalla"</string>
+    <string name="screen_zoom_title" msgid="5233515303733473927">"Tamaño del contenido de la pantalla"</string>
     <string name="screen_zoom_short_summary" msgid="7291960817349834688">"Aumenta o disminuye el tamaño de los elementos de la pantalla"</string>
     <string name="screen_zoom_keywords" msgid="9176477565403352552">"densidad de pantalla, zoom, escala"</string>
     <string name="screen_zoom_summary" msgid="6445488991799015407">"Aumenta o disminuye el tamaño de los elementos de la pantalla. Puede que algunas aplicaciones cambien de sitio."</string>

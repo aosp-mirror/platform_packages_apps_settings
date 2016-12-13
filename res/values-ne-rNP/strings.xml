@@ -45,7 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM को ठेगाना पुस्तिका हेर्नुहोस्"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"स्थिर डायल गर्ने नम्बरहरू हेर्नुहोस्"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"सेवा डायल गर्ने नम्बरहरू हेर्नुहोस्"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"PDP को सूची प्राप्त गर्नुहोस्"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"IMS सेवाको स्थिति"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS को स्थिति"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"दर्ता गरिएको"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"दर्ता नगरिएको"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"उपलब्ध"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"अनुपलब्ध"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS को दर्ता: <xliff:g id="STATUS">%1$s</xliff:g>\nभ्वाइस ओभर LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nभ्वाइस ओभर WiFi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nभिडियो कलिङ: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT को इन्टरफेस: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"सेवामा"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"सेवा उपलब्ध छैन"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"आपतकालीन कल मात्र"</string>
@@ -795,7 +801,7 @@
     <string name="wifi_ip_settings_invalid_ip_address" msgid="2513142355364274970">"एउटा मान्य IP ठेगाना टाइप गर्नुहोस्।"</string>
     <string name="wifi_ip_settings_invalid_gateway" msgid="8164264988361096450">"एउटा मान्य गेटवे ठेगाना टाइप गर्नुहोस्।"</string>
     <string name="wifi_ip_settings_invalid_dns" msgid="8744583948328391047">"एउटा मान्य DNS ठेगाना टाइप गर्नुहोस्।"</string>
-    <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="40470058023181052">"नेटवर्क प्रेफिक्सको लम्बाइ ० देखि ३२का बिच टाइप गर्नुहोस्।"</string>
+    <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="40470058023181052">"नेटवर्क प्रेफिक्सको लम्बाइ ० देखि ३२का बीच टाइप गर्नुहोस्।"</string>
     <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"गेटवे"</string>
@@ -938,7 +944,7 @@
     <string name="night_display_category_status" msgid="1952928783124400330">"वस्तुस्थिति"</string>
     <string name="night_display_auto_mode_title" msgid="8046314360381608455">"स्वतः सक्रिय पार्नुहोस्"</string>
     <string name="night_display_auto_mode_never" msgid="6723636142053240947">"कहिले पनि होइन"</string>
-    <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"अनुकूलन समय सहितको कार्यतालिका"</string>
+    <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"आफू अनुकूल समय सहितको कार्यतालिका"</string>
     <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"सूर्यास्तदेखि सूर्योदयसम्म"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"सुरु समय"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"समय समाप्ति"</string>
@@ -1693,7 +1699,7 @@
     <string name="accessibility_settings" msgid="3975902491934816215">"पहुँच"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"उपलब्धता सेटिङहरू"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"दृश्यका सेटिङहरू"</string>
-    <string name="vision_settings_description" msgid="5679491180156408260">"तपाईंले आफ्नो आवश्यकताहरूसँग मेल खाने बनाउन यस यन्त्रलाई अनुकूलन गर्न सक्नुहुन्छ। यी पहुँच सुविधाहरू सेटिङमा पछि परिवर्तन गर्न सकिनेछ।"</string>
+    <string name="vision_settings_description" msgid="5679491180156408260">"तपाईंले आफ्नो आवश्यकताहरूसँग मेल खाने बनाउन यस यन्त्रलाई आफू अनुकूल गर्न सक्नुहुन्छ। यी पहुँच सुविधाहरू सेटिङमा पछि परिवर्तन गर्न सकिनेछ।"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"सेवाहरू"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"मुख्तया दृष्टिविहीन र कम दृष्टि भएका व्यक्तिहरूको लागि स्क्रिन रिडर"</string>
@@ -1750,7 +1756,7 @@
     <string name="captioning_locale" msgid="4559155661018823503">"भाषा"</string>
     <string name="captioning_text_size" msgid="6737002449104466028">"पाठ आकार"</string>
     <string name="captioning_preset" msgid="8939737196538429044">"क्याप्सन शैली"</string>
-    <string name="captioning_custom_options_title" msgid="5067500939930322405">"अनुकूलन विकल्प"</string>
+    <string name="captioning_custom_options_title" msgid="5067500939930322405">"आफू अनुकूल विकल्प"</string>
     <string name="captioning_background_color" msgid="9053011212948992570">"पृष्ठभूमि रङ्ग"</string>
     <string name="captioning_background_opacity" msgid="6029993616419971202">"पृष्ठभूमि अपारदर्शकता"</string>
     <string name="captioning_window_color" msgid="6902052743419717394">"window रङ्ग क्याप्सन गर्नुहोस्"</string>
@@ -1915,7 +1921,7 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"पुनःताजा गर्नुहोस्"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"एन्ड्रोइड OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"मिडिया सर्भर"</string>
-    <string name="process_dex2oat_label" msgid="2592408651060518226">"अनुप्रयोग अनुकूलन"</string>
+    <string name="process_dex2oat_label" msgid="2592408651060518226">"अनुप्रयोग आफू अनुकूल"</string>
     <string name="battery_saver" msgid="1426682272004907982">"ब्याट्री सेभर"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"स्वतः खोल्नुहोस्"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"कहिले पनि होइन"</string>
@@ -2354,7 +2360,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"प्रयोगकर्ता"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"प्रतिबन्धित प्रोफाइल"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"नयाँ प्रयोगकर्ता थप्ने हो?"</string>
-    <string name="user_add_user_message_long" msgid="8562152293752222985">"यस यन्त्रलाई अन्य व्यक्तिसँग साझेदारी गर्न थप प्रयोगकर्ताहरू सिर्जना गरेर गर्न सक्नुहुनेछ। प्रत्येक प्रयोगकर्ताको आफ्नै ठाउँ हुन्छ, जसलाई तिनीहरूले अनुप्रयोगहरू, वालपेपर र अन्य धेरै अन्तर्गत अनुकूलन गर्न र सक्छन्। प्रयोगकर्ताले यन्त्र सेटिङ पनि मिलाउन सक्छन् जस्तै Wi-Fi, जसले सबैलाई असर गर्छ।\n\nजब तपाईँ नयाँ प्रयोगकर्ता थप्नु हुन्छ, त्यो व्यक्तिले आफ्नो ठाउँ सेटअप गर्न आवश्यक छ।\n\nकुनै पनि प्रयोगकर्ताले सबै अन्य प्रयोगकर्ताहरूको लागि अनुप्रयोगहरू अद्यावधिक गर्न सक्नेछ।"</string>
+    <string name="user_add_user_message_long" msgid="8562152293752222985">"यस यन्त्रलाई अन्य व्यक्तिसँग साझेदारी गर्न थप प्रयोगकर्ताहरू सिर्जना गरेर गर्न सक्नुहुनेछ। प्रत्येक प्रयोगकर्ताको आफ्नै ठाउँ हुन्छ, जसलाई तिनीहरूले अनुप्रयोगहरू, वालपेपर र अन्य धेरै अन्तर्गत आफू अनुकूल गर्न र सक्छन्। प्रयोगकर्ताले यन्त्र सेटिङ पनि मिलाउन सक्छन् जस्तै Wi-Fi, जसले सबैलाई असर गर्छ।\n\nजब तपाईँ नयाँ प्रयोगकर्ता थप्नु हुन्छ, त्यो व्यक्तिले आफ्नो ठाउँ सेटअप गर्न आवश्यक छ।\n\nकुनै पनि प्रयोगकर्ताले सबै अन्य प्रयोगकर्ताहरूको लागि अनुप्रयोगहरू अद्यावधिक गर्न सक्नेछ।"</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"जब तपाईंले नयाँ प्रयोगकर्ता थप्नुहुन्छ, त्यो व्यक्तिले आफ्नो ठाउँ सेट गर्न आवश्यक छ।\n\nकुनै पनि प्रयोगकर्ताले सबै अन्य प्रयोगकर्ताहरूका लागि अनुप्रयोगहरू अद्यावधिक गर्न सक्छन्।"</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"अहिले प्रयोगकर्ता सेटअप गर्ने हो?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"यन्त्र लिन र आफ्नो ठाउँ बनाउन व्यक्ति उपलब्ध छ भन्ने कुराको निश्चित गर्नुहोस्"</string>
@@ -2527,7 +2533,7 @@
     <string name="keywords_display_brightness_level" msgid="3891383826236015854">"मधुरो स्क्रिन, टचस्क्रिन, ब्याट्री"</string>
     <string name="keywords_display_auto_brightness" msgid="3325150824507953765">"मधुरो स्क्रिन, टचस्क्रिन, ब्याट्री"</string>
     <string name="keywords_display_night_display" msgid="7630169927425425754">"मधुरो स्क्रिन, रात, हल्का रङ"</string>
-    <string name="keywords_display_wallpaper" msgid="7362076351860131776">"पृष्ठभूमि, निजीकृत गर्नुहोस्, प्रदर्शन अनुकूलन गर्नुहोस्"</string>
+    <string name="keywords_display_wallpaper" msgid="7362076351860131776">"पृष्ठभूमि, निजीकृत गर्नुहोस्, प्रदर्शन आफू अनुकूल गर्नुहोस्"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"पाठ आकार"</string>
     <string name="keywords_display_cast_screen" msgid="7684618996741933067">"प्रोजेक्ट गर्नुहोस्, cast गर्नुहोस्"</string>
     <string name="keywords_storage" msgid="3299217909546089225">"ठाउँ, डिस्क, हार्ड ड्राइभ, यन्त्र उपयोग"</string>
@@ -2888,15 +2894,15 @@
     <string name="memory_avg_desc" msgid="1551240906596518412">"औसत <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="3459065925679828230">"ब्याट्री अनुकूलन"</string>
-    <string name="high_power_filter_on" msgid="3222265297576680099">"अनुकूलन भएको छैन"</string>
-    <string name="high_power_on" msgid="6216293998227583810">"अनुकूलन नगरिएको"</string>
-    <string name="high_power_off" msgid="3393904131961263278">"ब्याट्री प्रयोग अनुकूलन गर्दै"</string>
-    <string name="high_power_system" msgid="7362862974428225301">"ब्याट्री अनुकूलन उपलब्ध छैन"</string>
-    <string name="high_power_desc" msgid="6283926163708585760">"ब्याट्री अनुकूलन लागू नगर्नुहोस्। तपाईँको ब्याट्री निकै छिटो सिध्याउन सक्छ।"</string>
+    <string name="high_power_apps" msgid="3459065925679828230">"ब्याट्री आफू अनुकूल"</string>
+    <string name="high_power_filter_on" msgid="3222265297576680099">"आफू अनुकूल भएको छैन"</string>
+    <string name="high_power_on" msgid="6216293998227583810">"आफू अनुकूल नगरिएको"</string>
+    <string name="high_power_off" msgid="3393904131961263278">"ब्याट्री प्रयोग आफू अनुकूल गर्दै"</string>
+    <string name="high_power_system" msgid="7362862974428225301">"ब्याट्री आफू अनुकूल उपलब्ध छैन"</string>
+    <string name="high_power_desc" msgid="6283926163708585760">"ब्याट्री आफू अनुकूल लागू नगर्नुहोस्। तपाईँको ब्याट्री निकै छिटो सिध्याउन सक्छ।"</string>
     <plurals name="high_power_count" formatted="false" msgid="2464701722383894640">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> अनुप्रयोगहरूलाई ब्याट्री अनुकूलन बेवास्ता गर्न अनुमति दिइयो</item>
-      <item quantity="one"> १ अनुप्रयोगलाई ब्याट्री अनुकूलन बेवास्ता गर्न अनुमति दिइयो</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> अनुप्रयोगहरूलाई ब्याट्री आफू अनुकूल बेवास्ता गर्न अनुमति दिइयो</item>
+      <item quantity="one"> १ अनुप्रयोगलाई ब्याट्री आफू अनुकूल बेवास्ता गर्न अनुमति दिइयो</item>
     </plurals>
     <string name="high_power_prompt_title" msgid="4257734526819699048">"ब्याट्री अनुकूलनको उपेक्षा गर्ने हो?"</string>
     <string name="high_power_prompt_body" msgid="4072587909486730876">"अनुप्रयोग <xliff:g id="APP_NAME">%1$s</xliff:g> लाई पृष्ठभूमिमा जडित रहन दिने हो? यसले थप ब्याट्री खपत गर्न सक्छ।"</string>
@@ -2958,11 +2964,11 @@
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"सूचना सम्बन्धी पहुँच सक्रिय हुनाले यसलाई अनिवार्य रूपमा सक्रिय राख्नु पर्छ"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"<xliff:g id="APP">%1$s</xliff:g> को बाधा नपुर्याउनुहोस् माथि पहुँच उल्टाउने हो?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="5518216907304930148">"यस अनुप्रयोगले बनाएका सबै बाधा नपुर्याउनुहोस् नियम हटाइनेछ।"</string>
-    <string name="ignore_optimizations_on" msgid="6915689518016285116">"अनुकूलन नगर्नुहोस्"</string>
+    <string name="ignore_optimizations_on" msgid="6915689518016285116">"आफू अनुकूल नगर्नुहोस्"</string>
     <string name="ignore_optimizations_off" msgid="6153196256410296835">"अनुकुलन गर्नुहोस्"</string>
     <string name="ignore_optimizations_on_desc" msgid="2321398930330555815">"यसले तपाईँको ब्याट्री चाँडै खपत गर्न सक्छ।"</string>
     <string name="ignore_optimizations_off_desc" msgid="5255731062045426544">"अझ टिकाउयुक्त ब्याट्रीका लागि सिफारिस गरिएको"</string>
-    <string name="ignore_optimizations_title" msgid="2829637961185027768">"<xliff:g id="APP">%s</xliff:g> लाई ब्याट्री अनुकूलन बेवास्ता गर्नै अनुमति दिने हो?"</string>
+    <string name="ignore_optimizations_title" msgid="2829637961185027768">"<xliff:g id="APP">%s</xliff:g> लाई ब्याट्री आफू अनुकूल बेवास्ता गर्नै अनुमति दिने हो?"</string>
     <string name="app_list_preference_none" msgid="108006867520327904">"कुनै पनि होइन"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"यस अनुप्रयोगका लागि प्रयोग पहुँच बन्द गर्नाले तपाईँको कार्य प्रोफाइलमा अनुप्रयोगहरूका डेटाको प्रयोग ट्र्याक गर्न तपाईँको प्रशासकलाई रोक्दैन।"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_1">%2$d</xliff:g> को <xliff:g id="COUNT_0">%1$d</xliff:g> वर्णहरू प्रयोग गरिए"</string>
@@ -3115,7 +3121,7 @@
     <!-- String.format failed for translation -->
     <!-- no translation found for battery_saver_desc_turn_on_auto_pct (7472323223085636533) -->
     <skip />
-    <string name="not_battery_optimizing" msgid="5362861851864837617">"ब्याट्री अनुकूलन प्रयोग गरिएको छैन"</string>
+    <string name="not_battery_optimizing" msgid="5362861851864837617">"ब्याट्री आफू अनुकूल प्रयोग गरिएको छैन"</string>
     <string name="lockscreen_remote_input" msgid="969871538778211843">"यदि यन्त्रलाई लक गरिएको छ भने सूचनाहरूमा जवाफ वा अन्य पाठ टाइप गर्न रोक लगाउनुहोस्"</string>
     <string name="default_spell_checker" msgid="8506899870026026660">"पूर्वनिर्धारित हिज्जे परीक्षक"</string>
     <string name="choose_spell_checker" msgid="6596539862291699367">"हिज्जे परीक्षक छनोट गर्नुहोस्"</string>
@@ -3137,7 +3143,7 @@
     <string name="notification_log_details_actions" msgid="242523930165118066">"कारवाहीहरू"</string>
     <string name="notification_log_details_title" msgid="7177091647508863295">"शीर्षक"</string>
     <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"रिमोट इनपुटहरू"</string>
-    <string name="notification_log_details_content_view" msgid="6638731378278561786">"अनुकूलन दृश्य"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"आफू अनुकूल दृश्य"</string>
     <string name="notification_log_details_extras" msgid="4188418723779942047">"अतिरिक्त"</string>
     <string name="notification_log_details_icon" msgid="8939114059726188218">"आइकन"</string>
     <string name="notification_log_details_parcel" msgid="243148037601903212">"पार्सलको आकार"</string>

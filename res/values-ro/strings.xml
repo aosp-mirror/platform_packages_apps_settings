@@ -46,7 +46,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Afișați agenda de pe SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Afișați numerele fixe de apelare"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Vedeți numere de apelare de serviciu"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"Obțineți lista PDP"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"Starea serviciului IMS"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"Stare IMS"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"Înregistrat"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"Neînregistrat"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Disponibil"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"Indisponibil"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"Înregistrare IMS: <xliff:g id="STATUS">%1$s</xliff:g>\nVoice prin LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nVoce prin WiFi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nApelare video: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nInterfață UT: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"În aria de acoperire"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"În afara ariei de acoperire"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Numai apeluri de urgență"</string>
@@ -407,8 +413,8 @@
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Criptare"</string>
     <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"Așteptați criptarea tabletei. Finalizat <xliff:g id="PERCENT">^1</xliff:g>%."</string>
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Așteptați criptarea telefonului. Finalizat <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Așteptați criptarea tabletei. Finalizat: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Așteptați criptarea telefonului. Finalizat: <xliff:g id="DURATION">^1</xliff:g>"</string>
+    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Așteptați criptarea tabletei. Finalizat în <xliff:g id="DURATION">^1</xliff:g>"</string>
+    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Așteptați criptarea telefonului. Finalizat în <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"Pentru a debloca tableta, opriți-o și reporniți-o."</string>
     <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"Pentru a debloca telefonul, opriți-l și reporniți-l."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Avertisment: datele de pe dispozitiv vor fi șterse după încă <xliff:g id="COUNT">^1</xliff:g> încercări nereușite de deblocare!"</string>
@@ -940,7 +946,7 @@
     <string name="brightness_title" msgid="5746272622112982836">"Luminozitate"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ajustați luminozitatea ecranului"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Luminozitate adaptivă"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimizează nivelul de luminozitate pentru lumina disponibilă"</string>
+    <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimizează nivelul de luminozitate în funcție de lumina disponibilă"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Lumină de noapte"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Lumina de noapte dă o nuanță de chihlimbar ecranului. Astfel, este mai ușor să priviți ecranul sau să citiți într-o lumină slabă și vă poate ajuta să adormiți mai rapid."</string>
     <string name="night_display_category_schedule" msgid="2044072617637348966">"Program"</string>

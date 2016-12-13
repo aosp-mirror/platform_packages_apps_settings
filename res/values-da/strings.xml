@@ -45,7 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Vis adressebog på SIM-kortet"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Vis numre til begrænset opkald"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Vis tjenesten faste opkaldsnumre"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"Hent PDP-liste"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"IMS-tjenestestatus"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS-status"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"Registreret"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"Ikke registreret"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Tilgængelig"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"Ikke tilgængelig"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS-registrering: <xliff:g id="STATUS">%1$s</xliff:g>\nVoLTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nVoWiFi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideoopkald: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT-grænseflade: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"I drift"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Ude af drift"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Kun nødopkald"</string>
@@ -1929,7 +1935,7 @@
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Forgrund"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Cachelagret"</string>
     <string name="process_stats_os_label" msgid="4813434110442733392">"Android OS"</string>
-    <string name="process_stats_os_native" msgid="5322428494231768472">"Indbygget"</string>
+    <string name="process_stats_os_native" msgid="5322428494231768472">"Native"</string>
     <string name="process_stats_os_kernel" msgid="1938523592369780924">"Kerne"</string>
     <string name="process_stats_os_zram" msgid="677138324651671575">"Z-Ram"</string>
     <string name="process_stats_os_cache" msgid="6432533624875078233">"Cacher"</string>
@@ -1943,7 +1949,7 @@
     <string name="mem_state_subtitle" msgid="2407238869781011933">"Hukommelsestilstande"</string>
     <string name="mem_use_subtitle" msgid="7319468770222422412">"Anvendt hukommelse"</string>
     <string name="mem_use_kernel_type" msgid="8698327165935012484">"Kerne"</string>
-    <string name="mem_use_native_type" msgid="5976704902328347400">"Indbygget"</string>
+    <string name="mem_use_native_type" msgid="5976704902328347400">"Native"</string>
     <string name="mem_use_kernel_cache_type" msgid="6411475064463957513">"Kernecacher"</string>
     <string name="mem_use_zram_type" msgid="9087217476795358232">"ZRam-udskiftning"</string>
     <string name="mem_use_free_type" msgid="717708548454880840">"Tilgængelig"</string>
@@ -2394,7 +2400,7 @@
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Opkaldshistorikken deles med denne bruger."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Vil du aktivere telefonopkald og sms?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Opkalds- og sms-historikken deles med denne bruger."</string>
-    <string name="emergency_info_title" msgid="208607506217060337">"Oplysninger om nødopkald"</string>
+    <string name="emergency_info_title" msgid="208607506217060337">"Oplysninger i nødsituationer"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Tillad apps og indhold"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applikationer med begrænsninger"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Udvid indstillingerne for applikationen"</string>

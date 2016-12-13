@@ -45,7 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"SIM хаягийн лавлахыг харах"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Тогтвортой залгах дугаарыг харах"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Үйлчилгээний Залгах Дугаарыг харах"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"PDP жагсаалт авах"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"IMS үйлчилгээний төлөв"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS төлөв"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"Бүртгэсэн"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"Бүртгээгүй"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Боломжтой"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"Бoломжгүй"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS-н бүртгэл: <xliff:g id="STATUS">%1$s</xliff:g>\nLTE-н дуу оруулалт: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nWiFi-н дуу оруулалт: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nВидео дуудлага: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT харагдах байдал: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"Үйлчилгээнд байгаа"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Үйлчилгээнээс гарсан"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Зөвхөн яаралтай дуудлага"</string>
@@ -1291,7 +1297,7 @@
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Өөрийн сүлжээнии холболтуудыг удирдахад <xliff:g id="NEW_APP">%1$s</xliff:g>-г <xliff:g id="CURRENT_APP">%2$s</xliff:g>-н оронд ашиглах уу?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Сүлжээний холболтуудыг удирдахад <xliff:g id="NEW_APP">%s</xliff:g>-г ашиглах уу?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Тодорхойгүй SIM оператор"</string>
-    <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s-д мэдэгдэж байгаа эрх зохицуулах вебсайт байхгүй байна"</string>
+    <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s-д мэдэгдэж байгаа эрх зохицуулах вэбсайт байхгүй байна"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"SIM карт оруулаад дахин эхлүүлнэ үү"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Интернэтэд холбогдоно уу"</string>
     <string name="location_title" msgid="1029961368397484576">"Миний Байршил"</string>
@@ -2452,7 +2458,7 @@
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"Апп хязгаарлалт тохируулах"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Контрол хийгч <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_sees_restricted_accounts" msgid="7503264525057246240">"Энэ апп таны акаунтуудад хандалт хийж чадна"</string>
-    <string name="app_sees_restricted_accounts_and_controlled_by" msgid="6968697624437267294">"Энэхүү програм нь таны хаягт нэвтрэх боломжтой байна. <xliff:g id="APP">%1$s</xliff:g> хянаж байна"</string>
+    <string name="app_sees_restricted_accounts_and_controlled_by" msgid="6968697624437267294">"Энэхүү апп нь таны хаягт нэвтрэх боломжтой байна. <xliff:g id="APP">%1$s</xliff:g> хянаж байна"</string>
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi болон мобайл"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Wi‑Fi болон Мобайл тохиргоог өөрчлөхийг зөвшөөрөх"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
@@ -2642,11 +2648,11 @@
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Хэрэв та <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>-н мэдэгдлийн хандалтыг унтраавал Бүү саад бол хандалт мөн адил унтрах болно."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Унтраах"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Цуцлах"</string>
-    <string name="vr_listeners_title" msgid="1318901577754715777">"VR туслагч үйлчилгээ"</string>
-    <string name="no_vr_listeners" msgid="2689382881717507390">"Суулгасан апп-с VR туслагч үйлчилгээгээр ажиллах хүсэлт гаргаагүй байна."</string>
-    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"VR үйлчилгээг <xliff:g id="SERVICE">%1$s</xliff:g>-д хандахыг зөвшөөрөх үү?"</string>
+    <string name="vr_listeners_title" msgid="1318901577754715777">"Виртуал Орчин (VR) туслагч үйлчилгээ"</string>
+    <string name="no_vr_listeners" msgid="2689382881717507390">"Суулгасан апп-с Виртуал Орчин (VR) туслагч үйлчилгээгээр ажиллах хүсэлт гаргаагүй байна."</string>
+    <string name="vr_listener_security_warning_title" msgid="8309673749124927122">"Виртуал Орчин (VR) үйлчилгээг <xliff:g id="SERVICE">%1$s</xliff:g>-д хандахыг зөвшөөрөх үү?"</string>
     <string name="vr_listener_security_warning_summary" msgid="6931541068825094653">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> нь таныг апп-г виртуал бодит горимд ашиглах үед ажиллах болно."</string>
-    <string name="display_vr_pref_title" msgid="8104485269504335481">"Төхөөрөмж VR горимын үед"</string>
+    <string name="display_vr_pref_title" msgid="8104485269504335481">"Төхөөрөмж Виртуал Орчин (VR) горимын үед"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Бүдгэрлийг бууруулах (санал болгож буй)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Анивчилтыг бууруулах"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"\"Бүү саад бол\" хандалт"</string>

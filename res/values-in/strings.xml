@@ -45,7 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Lihat Buku Alamat SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Lihat Nomor Panggilan Tetap"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Lihat Nomor Panggilan Layanan"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"Dapatkan Daftar PDP"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"Status Layanan IMS"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"Status IMS"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"Terdaftar"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"Tidak Terdaftar"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Tersedia"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"Tidak tersedia"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"Pendaftaran IMS: <xliff:g id="STATUS">%1$s</xliff:g>\nSuara melalui LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nSuara melalui Wi-Fi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideo Call: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nAntarmuka UT: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"Dalam Layanan"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Di Luar Area Layanan"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Telepon urgen saja"</string>
@@ -390,8 +396,8 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Enkripsi tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Enkripsi ponsel"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Dienkripsi"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="503014594435731275">"Anda dapat mengenkripsi akun, setelan, aplikasi yang diunduh serta datanya, media, dan file lainnya. Setelah mengenkripsi tablet, anggaplah Anda telah menyiapkan kunci layar (pola, PIN numerik, atau sandi), Anda perlu membuka layar untuk mendekripsi tablet setiap kali menyalakannya. Satu-satunya cara lain untuk mendekripsi adalah mengembalikannya ke setelan pabrik yang akan menghapus semua data Anda.\n\nProses enkripsi membutuhkan waktu satu jam atau lebih. Anda perlu memulainya dengan baterai yang terisi penuh dan mencolokkan tablet ke sumber listrik selama proses berlangsung. Jika Anda menghentikannya, semua atau beberapa data Anda akan hilang."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="2579929266645543631">"Anda dapat mengenkripsi akun, setelan, aplikasi yang diunduh serta datanya, media, dan file lainnya. Setelah mengenkripsi ponsel, anggaplah Anda telah menyiapkan kunci layar (pola, PIN numerik, atau sandi), Anda perlu membuka layar untuk mendekripsi ponsel setiap kali menyalakannya. Satu-satunya cara lain untuk mendekripsi adalah mengembalikannya ke setelan pabrik yang akan menghapus semua data Anda.\n\nProses enkripsi membutuhkan waktu satu jam atau lebih. Anda perlu memulainya dengan baterai yang terisi penuh dan mencolokkan ponsel ke sumber listrik selama proses berlangsung. Jika Anda menghentikannya, semua atau beberapa data Anda akan hilang."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="503014594435731275">"Anda dapat mengenkripsi akun, setelan, aplikasi yang didownload serta datanya, media, dan file lainnya. Setelah mengenkripsi tablet, anggaplah Anda telah menyiapkan kunci layar (pola, PIN numerik, atau sandi), Anda perlu membuka layar untuk mendekripsi tablet setiap kali menyalakannya. Satu-satunya cara lain untuk mendekripsi adalah mengembalikannya ke setelan pabrik yang akan menghapus semua data Anda.\n\nProses enkripsi membutuhkan waktu satu jam atau lebih. Anda perlu memulainya dengan baterai yang terisi penuh dan mencolokkan tablet ke sumber listrik selama proses berlangsung. Jika Anda menghentikannya, semua atau beberapa data Anda akan hilang."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="2579929266645543631">"Anda dapat mengenkripsi akun, setelan, aplikasi yang didownload serta datanya, media, dan file lainnya. Setelah mengenkripsi ponsel, anggaplah Anda telah menyiapkan kunci layar (pola, PIN numerik, atau sandi), Anda perlu membuka layar untuk mendekripsi ponsel setiap kali menyalakannya. Satu-satunya cara lain untuk mendekripsi adalah mengembalikannya ke setelan pabrik yang akan menghapus semua data Anda.\n\nProses enkripsi membutuhkan waktu satu jam atau lebih. Anda perlu memulainya dengan baterai yang terisi penuh dan mencolokkan ponsel ke sumber listrik selama proses berlangsung. Jika Anda menghentikannya, semua atau beberapa data Anda akan hilang."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Enkripsi tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Enkripsi ponsel"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Isi daya baterai Anda dan coba lagi."</string>
@@ -773,9 +779,9 @@
     <string name="wifi_cancel" msgid="6763568902542968964">"Batal"</string>
     <string name="wifi_skip_anyway" msgid="6965361454438011190">"Lewati saja"</string>
     <string name="wifi_dont_skip" msgid="3615535136327231588">"Kembali"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"PERINGATAN: jika Anda melompati Wi‑Fi, tablet Anda hanya akan menggunakan data seluler untuk unduhan dan pembaruan awal. Untuk menghindari kemungkinan biaya data, sambungkan ke Wi‑Fi."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"PERINGATAN: jika Anda melompati Wi‑Fi, perangkat Anda hanya akan menggunakan data seluler untuk unduhan dan pembaruan awal. Untuk menghindari kemungkinan biaya data, sambungkan ke Wi‑Fi."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"PERINGATAN: jika Anda melompati Wi‑Fi, ponsel Anda hanya akan menggunakan data seluler untuk unduhan atau pembaruan awal. Untuk menghindari kemungkinan biaya data, sambungkan ke Wi‑Fi."</string>
+    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"PERINGATAN: jika Anda melompati Wi‑Fi, tablet Anda hanya akan menggunakan data seluler untuk download dan pembaruan awal. Untuk menghindari kemungkinan biaya data, sambungkan ke Wi‑Fi."</string>
+    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"PERINGATAN: jika Anda melompati Wi‑Fi, perangkat Anda hanya akan menggunakan data seluler untuk download dan pembaruan awal. Untuk menghindari kemungkinan biaya data, sambungkan ke Wi‑Fi."</string>
+    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"PERINGATAN: jika Anda melompati Wi‑Fi, ponsel Anda hanya akan menggunakan data seluler untuk download atau pembaruan awal. Untuk menghindari kemungkinan biaya data, sambungkan ke Wi‑Fi."</string>
     <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Jika Anda mengabaikan Wi‑Fi:\n\n"<li>"Tablet tidak akan memiliki sambungan internet."</li>\n\n<li>"Anda tidak akan mendapatkan pembaruan perangkat lunak jika tidak tersambung ke internet."</li>\n\n<li>"Anda tidak dapat mengaktifkan fitur perlindungan perangkat saat ini."</li></string>
     <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Jika Anda mengabaikan Wi‑Fi:\n\n"<li>"Perangkat tidak akan memiliki sambungan internet."</li>\n\n<li>"Anda tidak akan mendapatkan pembaruan perangkat lunak jika tidak tersambung ke internet."</li>\n\n<li>"Anda tidak dapat mengaktifkan fitur perlindungan perangkat saat ini."</li></string>
     <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Jika Anda mengabaikan Wi‑Fi:\n\n"<li>"Ponsel tidak akan memiliki sambungan internet."</li>\n\n<li>"Anda tidak akan mendapatkan pembaruan perangkat lunak jika tidak tersambung ke internet."</li>\n\n<li>"Anda tidak dapat mengaktifkan fitur perlindungan perangkat saat ini."</li></string>
@@ -1059,7 +1065,7 @@
     <string name="memory_calculating_size" msgid="2188358544203768588">"Menghitung..."</string>
     <string name="memory_apps_usage" msgid="5128673488173839077">"Aplikasi &amp; data aplikasi"</string>
     <string name="memory_media_usage" msgid="3738830697707880405">"Media"</string>
-    <string name="memory_downloads_usage" msgid="3755173051677533027">"Unduhan"</string>
+    <string name="memory_downloads_usage" msgid="3755173051677533027">"Download"</string>
     <string name="memory_dcim_usage" msgid="558887013613822577">"Gambar, video"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"Audio (musik, nada dering, podcast, dll.)"</string>
     <string name="memory_media_misc_usage" msgid="6094866738586451683">"File lainnya"</string>
@@ -1145,7 +1151,7 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Lainnya"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Sistem"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Jelajahi <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Lainnya meliputi file bersama yang disimpan oleh aplikasi, file yang diunduh dari internet atau Bluetooth, file Android, dan sebagainya. \n\nUntuk melihat konten yang terlihat dari <xliff:g id="NAME">^1</xliff:g> ini, tap Jelajahi."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Lainnya meliputi file bersama yang disimpan oleh aplikasi, file yang didownload dari internet atau Bluetooth, file Android, dan sebagainya. \n\nUntuk melihat konten yang terlihat dari <xliff:g id="NAME">^1</xliff:g> ini, tap Jelajahi."</string>
     <string name="storage_detail_dialog_system" msgid="3417679651116003900">"Sistem meliputi file yang tidak dapat ditampilkan Android satu per satu."</string>
     <string name="storage_detail_dialog_user" msgid="1675756743326079688">"<xliff:g id="USER_0">^1</xliff:g> mungkin telah menyimpan foto, musik, film, aplikasi atau data lain yang menghabiskan <xliff:g id="SIZE">^2</xliff:g> penyimpanan. \n\nUntuk melihat detailnya, beralihlah ke <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Siapkan <xliff:g id="NAME">^1</xliff:g>"</string>
@@ -1231,8 +1237,8 @@
     <string name="reset_network_complete_toast" msgid="787829973559541880">"Setelan jaringan telah disetel ulang"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Setel ulang perangkat"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Kembalikan ke setelan pabrik"</string>
-    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" tablet Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan apl serta setelan"</li>\n<li>"Apl unduhan"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" ponsel Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan apl serta setelan"</li>\n<li>"Apl unduhan"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" tablet Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan apl serta setelan"</li>\n<li>"Apl download"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Ini akan menghapus semua data dari "<b>"penyimpanan internal"</b>" ponsel Anda, termasuk:\n\n"<li>"Akun Google Anda"</li>\n<li>"Data sistem dan apl serta setelan"</li>\n<li>"Apl download"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Saat ini Anda telah masuk ke akun berikut ini:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Ada pengguna lain yang aktif di perangkat ini.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musik"</li>\n<li>"Foto"</li>\n<li>"Data pengguna lainnya"</li></string>
@@ -1243,8 +1249,8 @@
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Hapus semua data di penyimpanan USB internal, seperti musik atau foto."</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Hapus semua data di kartu SD, seperti musik atau foto"</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Setel ulang tablet"</string>
-    <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Setel ulang telepon"</string>
-    <string name="master_clear_final_desc" msgid="7318683914280403086">"Hapus semua informasi pribadi dan aplikasi yang diunduh? Tindakan ini tidak dapat diurungkan!"</string>
+    <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Setel ulang ponsel"</string>
+    <string name="master_clear_final_desc" msgid="7318683914280403086">"Hapus semua informasi pribadi dan aplikasi yang didownload? Tindakan ini tidak dapat diurungkan!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Hapus semua"</string>
     <string name="master_clear_failed" msgid="2503230016394586353">"Penyetelan ulang tidak dilakukan karena layanan System Clear tidak tersedia."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Setel ulang?"</string>
@@ -1482,7 +1488,7 @@
     <string name="filter_dlg_title" msgid="8693024463731076091">"Pilih opsi filter"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Semua"</string>
     <string name="filter_apps_disabled" msgid="5364447573326472890">"Dinonaktifkan"</string>
-    <string name="filter_apps_third_party" msgid="7786348047690140979">"Terunduh"</string>
+    <string name="filter_apps_third_party" msgid="7786348047690140979">"Terdownload"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Menjalankan"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Penyimpanan USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"Pada kartu SD"</string>
@@ -2235,7 +2241,7 @@
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>: sekitar <xliff:g id="TOTAL">%1$s</xliff:g> yang digunakan menurut tablet. Hitungan data operator dapat berbeda."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>: sekitar <xliff:g id="TOTAL">%1$s</xliff:g> yang digunakan menurut ponsel. Hitungan data operator dapat berbeda."</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"Batasan jaringan"</string>
-    <string name="data_usage_metered_body" msgid="3262343834446126044">"Jaringan terukur diperlakukan seperti seluler jika data latar belakang dibatasi. Aplikasi mungkin memberi peringatan sebelum menggunakan jaringan ini untuk unduhan yang besar."</string>
+    <string name="data_usage_metered_body" msgid="3262343834446126044">"Jaringan terukur diperlakukan seperti seluler jika data latar belakang dibatasi. Aplikasi mungkin memberi peringatan sebelum menggunakan jaringan ini untuk download yang besar."</string>
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"Jaringan seluler"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Jaringan Wi‑Fi terukur"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Untuk memilih jaringan terukur, aktifkan Wi‑Fi."</string>
@@ -2550,7 +2556,7 @@
     <string name="keywords_reset_apps" msgid="5293291209613191845">"setel ulang, preferensi, default"</string>
     <string name="keywords_emergency_app" msgid="3143078441279044780">"darurat, es, aplikasi, default"</string>
     <string name="keywords_default_phone_app" msgid="4213090563141778486">"ponsel, telepon, default"</string>
-    <string name="keywords_all_apps" msgid="7814015440655563156">"apl unduh aplikasi sistem"</string>
+    <string name="keywords_all_apps" msgid="7814015440655563156">"apl download aplikasi sistem"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"aplikasi, izin, keamanan"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"aplikasi, default"</string>
     <string name="keywords_ignore_optimizations" msgid="6102579291119055029">"abaikan, pengoptimalan, istirahatkan, aplikasi siaga"</string>

@@ -46,7 +46,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Prikaži SIM adresar"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Prikaži brojeve fiksnog biranja"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Prikaži brojeve biranja usluga"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"Preuzmi PDP spisak"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"Status IMS usluge"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"Status za IMS"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"Registrirano"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"Nije registrirano"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Dostupno"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"Nedostupno"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS registracija: <xliff:g id="STATUS">%1$s</xliff:g>\nGovor putem LTE mreže: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nGovor putem Wi-Fi mreže: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideo pozivanje: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT sučelje: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"Aktivan"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Ne radi"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Samo pozivi za hitne slučajeve"</string>
@@ -302,7 +308,7 @@
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Datum"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Postavi datum"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Sortiraj po abecedi"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sortiraj po vremenskim zonama"</string>
+    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Poredaj po vremenskim zonama"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Vrijeme"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Automatski zaključaj"</string>
@@ -876,7 +882,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Kada je opcija Wi-Fi pozivanje uključena, telefon može preusmjeravati pozive preko Wi-Fi mreža ili mreže vašeg operatera, u zavisnosti od toga kakve su vaše postavke i koji signal je jači. Prije nego što uključite ovu funkciju, provjerite sa svojim operaterom kakvi su troškovi i ostali detalji."</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Ažuriraj adresu za hitne slučajeve"</string>
     <string name="emergency_address_summary" msgid="306028701568728126">"Adresa koju hitna služba koristi kao vašu lokaciju ukoliko pozovete 911 (hitnu službu) koristeći Wi-Fi mrežu"</string>
-    <string name="home_settings" msgid="212375129455718176">"Početna stranica"</string>
+    <string name="home_settings" msgid="212375129455718176">"Početna"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Prikaz"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Zvuk"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
@@ -1479,8 +1485,8 @@
     <string name="ask_compatibility" msgid="7225195569089607846">"Pitaj prilikom pokretanja"</string>
     <string name="enable_compatibility" msgid="5806819252068617811">"Skaliraj aplikaciju"</string>
     <string name="unknown" msgid="1592123443519355854">"Nepoznato"</string>
-    <string name="sort_order_alpha" msgid="1410278099123670628">"Sortiraj po nazivu"</string>
-    <string name="sort_order_size" msgid="7024513286636502362">"Sortiraj po veličini"</string>
+    <string name="sort_order_alpha" msgid="1410278099123670628">"Poredaj po nazivu"</string>
+    <string name="sort_order_size" msgid="7024513286636502362">"Poredaj po veličini"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Prikaži pokrenute usluge"</string>
     <string name="show_background_processes" msgid="2009840211972293429">"Prikaži keširane procese"</string>
     <string name="default_emergency_app" msgid="1951760659640369980">"Aplikacija za hitne situacije"</string>
@@ -1697,7 +1703,7 @@
     <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> min"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"Statistika korištenja"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Statistika korištenja"</string>
-    <string name="display_order_text" msgid="8592776965827565271">"Sortiraj po:"</string>
+    <string name="display_order_text" msgid="8592776965827565271">"Poredaj po:"</string>
     <string name="app_name_label" msgid="5440362857006046193">"Aplikacija"</string>
     <string name="last_time_used_label" msgid="8459441968795479307">"Posljednji put korišteno"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Vrijeme korištenja"</string>
@@ -2969,8 +2975,8 @@
     <string name="memory_details" msgid="5943436005716991782">"Detalji"</string>
     <string name="memory_use_summary" msgid="5608257211903075754">"<xliff:g id="SIZE">%1$s</xliff:g> memorije korišteno u prosjeku u zadnja 3 sata"</string>
     <string name="no_memory_use_summary" msgid="2016900536806235588">"Nikakva memorija se ne koristi u posljednja tri sata"</string>
-    <string name="sort_avg_use" msgid="3998036180505143129">"Sortiraj po prosječnoj upotrebi"</string>
-    <string name="sort_max_use" msgid="4629247978290075124">"Sortiraj po maksimalnom korištenju"</string>
+    <string name="sort_avg_use" msgid="3998036180505143129">"Poredaj po prosječnoj upotrebi"</string>
+    <string name="sort_max_use" msgid="4629247978290075124">"Poredaj po maksimalnom korištenju"</string>
     <string name="memory_performance" msgid="5661005192284103281">"Performanse"</string>
     <string name="total_memory" msgid="2017287600738630165">"Ukupno memorije"</string>
     <string name="average_used" msgid="5338339266517245782">"Prosječna iskorištenost (%)"</string>
@@ -3238,7 +3244,7 @@
     <string name="support_estimated_wait_time" msgid="6523081420029378051">"Sačekajte ~<xliff:g id="ESTIMATE">%1$s</xliff:g>"</string>
     <string name="bluetooth_talkback_computer" msgid="4875089335641234463">"Računar"</string>
     <string name="bluetooth_talkback_headset" msgid="5140152177885220949">"Slušalice s mikrofonom"</string>
-    <string name="bluetooth_talkback_phone" msgid="4260255181240622896">"Telefoniraj"</string>
+    <string name="bluetooth_talkback_phone" msgid="4260255181240622896">"Telefon"</string>
     <string name="bluetooth_talkback_imaging" msgid="551146170554589119">"Snimanje"</string>
     <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Slušalice"</string>
     <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Ulazni periferni uređaj"</string>

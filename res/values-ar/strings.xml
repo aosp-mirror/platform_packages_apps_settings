@@ -49,7 +49,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"‏عرض دفتر عناوين SIM"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"عرض أرقام الاتصال الثابت"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"عرض أرقام اتصال الخدمة"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"‏الحصول على قائمة PDP"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"حالة خدمة الرسائل الفورية"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"حالة الرسائل الفورية"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"مسجل"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"غير مسجل"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"متاح"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"غير متاح"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"‏تسجيل الرسائل الفورية: <xliff:g id="STATUS">%1$s</xliff:g>\nالصوت عبر LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nالصوت عبر WiFi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nمكالمات الفيديو: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nواجهةUT: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"قيد الخدمة"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"خارج نطاق الخدمة"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"مكالمات طوارئ فقط"</string>
@@ -2768,9 +2774,9 @@
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"غير معروف"</string>
     <string name="zen_mode_configure_rule" msgid="8865785428056490305">"تهيئة القاعدة"</string>
     <string name="zen_schedule_rule_type_name" msgid="142936744435271449">"قاعدة زمنية"</string>
-    <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"تم ضبط القاعدة التلقائية على تشغيل وضع \"الرجاء عدم الإزعاج\" أثناء أوقات محددة"</string>
+    <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"تم ضبط القاعدة التلقائية على تشغيل وضع \"عدم الإزعاج\" أثناء أوقات محددة"</string>
     <string name="zen_event_rule_type_name" msgid="2645981990973086797">"قاعدة حدث"</string>
-    <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"تم ضبط القاعدة التلقائية على تشغيل وضع \"الرجاء عدم الإزعاج\" أثناء أحداث محددة"</string>
+    <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"تم ضبط القاعدة التلقائية على تشغيل وضع \"عدم الإزعاج\" أثناء أحداث محددة"</string>
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"أثناء الأحداث لـ"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"أثناء الأحداث للتقويم <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="4936646399126636358">"أي تقويم"</string>
@@ -3176,7 +3182,7 @@
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"‏نقطة اتصال Wi-Fi المتنقلة <xliff:g id="ID_1">%1$s</xliff:g> نشطة، وتم تعطيل Wi-Fi في هذا الجهاز."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"وضع الطائرة قيد التشغيل"</string>
     <string name="condition_airplane_summary" msgid="2136872325308526329">"‏تم تعطيل Wi-Fi وبلوتوث والشبكة الخلوية. ولا يمكنك إجراء مكالمات هاتفية أو الاتصال بالإنترنت."</string>
-    <string name="condition_zen_title" msgid="2679168532600816392">"تم تشغيل الرجاء عدم الإزعاج (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
+    <string name="condition_zen_title" msgid="2679168532600816392">"تم تشغيل \"عدم الإزعاج\" (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"تم تشغيل وضع توفير شحن البطارية"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"تم خفض مستوى الأداء. تم تعطيل خدمات المواقع وبيانات الخلفية."</string>
     <string name="condition_cellular_title" msgid="2398754272044917264">"تم تعطيل بيانات شبكة الجوّال"</string>
@@ -3279,7 +3285,7 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"ترتيب العناصر مفقود."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"لا يحتوي ترتيب العناصر على هذا المفتاح."</string>
     <string name="special_access" msgid="8275242424094109976">"الوصول الخاص"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"هل تريد بالتأكيد مسح بيانات المستخدم والتحويل إلى تشفير الملفات؟"</string>
+    <string name="confirm_convert_to_fbe_warning" msgid="1487005506049137659">"هل تريد فعلًا مسح بيانات المستخدم والتحويل إلى تشفير الملفات؟"</string>
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"مسح وتحويل"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"‏هل تريد إعادة تعيين تقييد المعدل في ShortcutManager؟"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"‏تمت إعادة تعيين تقييد المعدل في ShortcutManager."</string>

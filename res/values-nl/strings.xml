@@ -45,7 +45,13 @@
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Adresboek op simkaart weergeven"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Vaste nummers weergeven"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Servicenummers weergeven"</string>
-    <string name="radioInfo_menu_getPDP" msgid="8951059003824985976">"PDP-lijst ophalen"</string>
+    <string name="radioInfo_menu_getIMS" msgid="185171476413967831">"IMS-servicestatus"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="16971785902696970">"IMS-status"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="5614116179751126247">"Geregistreerd"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="4438054067642750717">"Niet geregistreerd"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="3687807290327566879">"Beschikbaar"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="4606182208970114368">"Niet beschikbaar"</string>
+    <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS-registratie: <xliff:g id="STATUS">%1$s</xliff:g>\nBellen via LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nBellen via wifi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideo-oproepen: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT-interface: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"In gebruik"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Niet in gebruik"</string>
     <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Alleen noodoproepen"</string>
@@ -1307,9 +1313,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Hoog accugebruik"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Laag accugebruik"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Locatiemodus"</string>
-    <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"GPS, wifi, Bluetooth of mobiele netwerken gebruiken om locatie te bepalen"</string>
+    <string name="location_mode_high_accuracy_description" msgid="5703350404315028607">"gps, wifi, Bluetooth of mobiele netwerken gebruiken om locatie te bepalen"</string>
     <string name="location_mode_battery_saving_description" msgid="8361848607963121770">"Wifi, Bluetooth of mobiele netwerken gebruiken om locatie te bepalen"</string>
-    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"GPS gebruiken om locatie te bepalen"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"gps gebruiken om locatie te bepalen"</string>
     <string name="location_menu_scanning" msgid="8536245838478802959">"Scannen"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Scannen"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wifi-scannen"</string>
@@ -1319,12 +1325,12 @@
     <string name="location_network_based" msgid="6010456018401296590">"Locatie via wifi en mob. netw."</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Apps toestaan de locatieservice van Google te gebruiken om je locatie sneller te schatten. Anonieme locatiegegevens worden verzameld en verzonden naar Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Locatie bepaald via wifi"</string>
-    <string name="location_gps" msgid="8392461023569708478">"GPS-satellieten"</string>
-    <string name="location_street_level" product="tablet" msgid="1669562198260860802">"Apps toestaan GPS op je telefoon te gebruiken om je locatie te bepalen"</string>
-    <string name="location_street_level" product="default" msgid="4617445745492014203">"Apps toestaan GPS op je telefoon te gebruiken om je locatie te bepalen"</string>
-    <string name="assisted_gps" msgid="4649317129586736885">"Ondersteunde GPS gebruiken"</string>
-    <string name="assisted_gps_enabled" msgid="8751899609589792803">"Server gebruiken ter ondersteuning van GPS (uitschakelen om het netwerkgebruik te beperken)"</string>
-    <string name="assisted_gps_disabled" msgid="6982698333968010748">"Server gebruiken ter ondersteuning van GPS (uitschakelen om GPS-prestaties te verbeteren)"</string>
+    <string name="location_gps" msgid="8392461023569708478">"gps-satellieten"</string>
+    <string name="location_street_level" product="tablet" msgid="1669562198260860802">"Apps toestaan gps op je telefoon te gebruiken om je locatie te bepalen"</string>
+    <string name="location_street_level" product="default" msgid="4617445745492014203">"Apps toestaan gps op je telefoon te gebruiken om je locatie te bepalen"</string>
+    <string name="assisted_gps" msgid="4649317129586736885">"Ondersteunde gps gebruiken"</string>
+    <string name="assisted_gps_enabled" msgid="8751899609589792803">"Server gebruiken ter ondersteuning van gps (uitschakelen om het netwerkgebruik te beperken)"</string>
+    <string name="assisted_gps_disabled" msgid="6982698333968010748">"Server gebruiken ter ondersteuning van gps (uitschakelen om gps-prestaties te verbeteren)"</string>
     <string name="use_location_title" msgid="5206937465504979977">"Locatie en Google Zoeken"</string>
     <string name="use_location_summary" msgid="3978805802386162520">"Google toestaan je locatie te gebruiken om zoekresultaten en andere services te verbeteren"</string>
     <string name="location_access_title" msgid="7064108942964081243">"Toegang tot mijn locatie"</string>
@@ -1832,7 +1838,7 @@
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> sinds losgekoppeld"</string>
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"Opladen"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Scherm aan"</string>
-    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS ingeschakeld"</string>
+    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"gps ingeschakeld"</string>
     <string name="battery_stats_camera_on_label" msgid="4935637383628414968">"Camera aan"</string>
     <string name="battery_stats_flashlight_on_label" msgid="4319637669889411307">"Zaklamp aan"</string>
     <string name="battery_stats_wifi_running_label" msgid="1845839195549226252">"Wifi"</string>
@@ -1862,7 +1868,7 @@
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU-totaal"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU op voorgrond"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Ingeschakeld houden"</string>
-    <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
+    <string name="usage_type_gps" msgid="7989688715128160790">"gps"</string>
     <string name="usage_type_wifi_running" msgid="3134357198266380400">"Wifi actief"</string>
     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Tablet"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Telefoon"</string>
