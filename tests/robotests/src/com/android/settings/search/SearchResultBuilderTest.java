@@ -100,24 +100,18 @@ public class SearchResultBuilderTest {
     }
 
     @Test
-    public void testNoRank_BuildSearchResultException() {
+    public void testNoRank_BuildSearchResult_pass() {
         mBuilder.addTitle(mTitle)
                 .addSummary(mSummary)
                 .addBreadcrumbs(mBreadcrumbs)
                 .addIcon(mIcon)
                 .addPayload(mResultPayload);
 
-        SearchResult result = null;
-        try {
-            result = mBuilder.build();
-        } catch (IllegalArgumentException e) {
-            // passes.
-        }
-        assertThat(result).isNull();
+        assertThat(mBuilder.build()).isNotNull();
     }
 
     @Test
-    public void testNoIcon_BuildSearchResultException() {
+    public void testNoIcon_BuildSearchResult_pass() {
         mBuilder.addTitle(mTitle)
                 .addSummary(mSummary)
                 .addRank(mRank)

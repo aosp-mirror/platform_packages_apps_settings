@@ -18,6 +18,7 @@ package com.android.settings.core.lifecycle;
 import android.annotation.UiThread;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.lifecycle.events.OnAttach;
 import com.android.settings.core.lifecycle.events.OnCreate;
@@ -27,6 +28,7 @@ import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settings.core.lifecycle.events.OnStart;
 import com.android.settings.core.lifecycle.events.OnStop;
+import com.android.settings.core.lifecycle.events.SetPreferenceScreen;
 import com.android.settings.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -69,6 +71,14 @@ public class Lifecycle {
         for (LifecycleObserver observer : mObservers) {
             if (observer instanceof OnStart) {
                 ((OnStart) observer).onStart();
+            }
+        }
+    }
+
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        for (LifecycleObserver observer : mObservers) {
+            if (observer instanceof SetPreferenceScreen) {
+                ((SetPreferenceScreen) observer).setPreferenceScreen(preferenceScreen);
             }
         }
     }

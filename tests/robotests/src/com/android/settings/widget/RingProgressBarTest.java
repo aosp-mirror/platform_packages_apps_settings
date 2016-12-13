@@ -16,21 +16,21 @@
 
 package com.android.settings.widget;
 
-import static junit.framework.Assert.assertEquals;
-
 import android.content.Context;
 import android.view.View.MeasureSpec;
 
+import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(RobolectricTestRunner.class)
+import static junit.framework.Assert.assertEquals;
+
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RingProgressBarTest {
 

@@ -17,7 +17,6 @@
 package com.android.settings.fingerprint;
 
 
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -26,7 +25,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.Fingerprint;
@@ -49,15 +47,12 @@ import android.text.Annotation;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
 import android.text.style.URLSpan;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -68,6 +63,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.widget.FooterPreference;
+import com.android.settings.widget.FooterPreferenceMixin;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -298,21 +295,14 @@ public class FingerprintSettings extends SubSettings {
                 mLaunchedConfirm = true;
                 launchChooseOrConfirmLock();
             }
-        }
 
-        @Override
-        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            TextView v = (TextView) LayoutInflater.from(view.getContext()).inflate(
-                    R.layout.fingerprint_settings_footer, null);
-            EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
-                    getActivity(), DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
-            v.setText(LearnMoreSpan.linkify(getText(admin != null
+            final FooterPreference pref = mFooterPreferenceMixin.createFooterPreference();
+            final EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+                    activity, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
+            pref.setTitle(LearnMoreSpan.linkify(getText(admin != null
                             ? R.string.security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
                             : R.string.security_settings_fingerprint_enroll_disclaimer),
                     getString(getHelpResource()), admin));
-            v.setMovementMethod(new LinkMovementMethod());
-            setFooterView(v);
         }
 
         protected void removeFingerprintPreference(int fingerprintId) {

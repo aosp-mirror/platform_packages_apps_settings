@@ -20,6 +20,7 @@ import android.annotation.CallSuper;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.PreferenceScreen;
 
 /**
  * {@link PreferenceFragment} that has hooks to observe fragment lifecycle events.
@@ -44,6 +45,12 @@ public abstract class ObservablePreferenceFragment extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         mLifecycle.onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        mLifecycle.setPreferenceScreen(preferenceScreen);
+        super.setPreferenceScreen(preferenceScreen);
     }
 
     @CallSuper

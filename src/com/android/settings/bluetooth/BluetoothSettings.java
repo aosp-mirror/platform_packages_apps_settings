@@ -50,6 +50,7 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.widget.FooterPreference;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
@@ -97,7 +98,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
 
     // accessed from inner class (not private to avoid thunks)
-    Preference mMyDevicePreference;
+    FooterPreference mMyDevicePreference;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -120,7 +121,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 final Resources res = context.getResources();
                 final Locale locale = res.getConfiguration().getLocales().get(0);
                 final BidiFormatter bidiFormatter = BidiFormatter.getInstance(locale);
-                mMyDevicePreference.setSummary(res.getString(
+                mMyDevicePreference.setTitle(res.getString(
                             R.string.bluetooth_is_visible_message,
                             bidiFormatter.unicodeWrap(mLocalAdapter.getName())));
             }
@@ -171,10 +172,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         mAvailableDevicesCategory.setOrder(2);
         getPreferenceScreen().addPreference(mAvailableDevicesCategory);
 
-        mMyDevicePreference = new Preference(getPrefContext());
+        mMyDevicePreference = mFooterPreferenceMixin.createFooterPreference();
         mMyDevicePreference.setSelectable(false);
-        mMyDevicePreference.setOrder(3);
-        getPreferenceScreen().addPreference(mMyDevicePreference);
 
         setHasOptionsMenu(true);
     }
@@ -356,7 +355,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 final Resources res = getResources();
                 final Locale locale = res.getConfiguration().getLocales().get(0);
                 final BidiFormatter bidiFormatter = BidiFormatter.getInstance(locale);
-                mMyDevicePreference.setSummary(res.getString(
+                mMyDevicePreference.setTitle(res.getString(
                             R.string.bluetooth_is_visible_message,
                             bidiFormatter.unicodeWrap(mLocalAdapter.getName())));
 

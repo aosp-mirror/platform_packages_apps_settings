@@ -35,7 +35,7 @@ public interface ApplicationFeatureProvider {
     /**
      * Callback that receives the total number of packages installed on the device.
      */
-    public interface NumberOfInstalledAppsCallback {
+    interface NumberOfInstalledAppsCallback {
         void onNumberOfInstalledAppsResult(int num);
     }
 }
