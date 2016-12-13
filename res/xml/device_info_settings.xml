@@ -19,56 +19,54 @@
         android:title="@string/about_settings">
 
         <!-- System update settings - launches activity -->
-        <PreferenceScreen android:key="system_update_settings"
+        <Preference android:key="system_update_settings"
                 android:title="@string/system_update_settings_list_item_title"
                 android:summary="@string/system_update_settings_list_item_summary">
             <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS" />
-        </PreferenceScreen>
+        </Preference>
 
 
-        <PreferenceScreen android:key="additional_system_update_settings"
+        <Preference android:key="additional_system_update_settings"
                           android:title="@string/additional_system_update_settings_list_item_title">
             <intent android:action="android.intent.action.MAIN"
                     android:targetPackage="@string/additional_system_update"
                     android:targetClass="@string/additional_system_update_menu" />
-        </PreferenceScreen>
+        </Preference>
 
         <!-- Device status - launches activity -->
-        <PreferenceScreen android:key="status_info"
+        <Preference android:key="status_info"
                 android:title="@string/device_status"
                 android:summary="@string/device_status_summary"
-                android:fragment="com.android.settings.deviceinfo.Status">
-        </PreferenceScreen>
+                android:fragment="com.android.settings.deviceinfo.Status"/>
 
         <!-- Manual -->
-        <PreferenceScreen
+        <Preference
                 android:key="manual"
                 android:title="@string/manual">
             <intent android:action="android.settings.SHOW_MANUAL" />
-        </PreferenceScreen>
+        </Preference>
 
         <!-- Legal Information -->
-        <PreferenceScreen
+        <Preference
                 android:key="container"
                 android:title="@string/legal_information"
                 android:fragment="com.android.settings.LegalSettings" />
 
-        <PreferenceScreen
+        <Preference
                 android:key="regulatory_info"
                 android:title="@string/regulatory_labels">
             <intent android:action="android.settings.SHOW_REGULATORY_INFO" />
-        </PreferenceScreen>
+        </Preference>
 
-        <PreferenceScreen
+        <Preference
                 android:key="safety_info"
                 android:title="@string/safety_and_regulatory_info">
                 <intent android:action="android.settings.SHOW_SAFETY_AND_REGULATORY_INFO" />
-        </PreferenceScreen>
+        </Preference>
 
         <!-- Feedback on the device -->
-        <PreferenceScreen android:key="device_feedback"
-                android:title="@string/device_feedback">
-        </PreferenceScreen>
+        <Preference android:key="device_feedback"
+                android:title="@string/device_feedback" />
 
         <!-- Device hardware model -->
         <com.android.settings.DividerPreference
@@ -89,12 +87,12 @@
                 android:summary="@string/device_info_default"/>
 
         <!-- Security patch level -->
-        <PreferenceScreen android:key="security_patch"
+        <Preference android:key="security_patch"
                 android:title="@string/security_patch"
                 android:summary="@string/device_info_default">
                 <intent android:action="android.intent.action.VIEW"
                         android:data="https://source.android.com/security/bulletin/" />
-        </PreferenceScreen>
+        </Preference>
 
         <!-- Device FCC equipment id -->
         <com.android.settings.DividerPreference

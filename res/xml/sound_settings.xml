@@ -16,9 +16,9 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/sound_settings"
-        android:key="sound_settings"
-        settings:keywords="@string/keywords_sounds">
+          android:title="@string/sound_settings"
+          android:key="sound_settings"
+          settings:keywords="@string/keywords_sounds">
 
         <!-- Media volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
@@ -87,7 +87,7 @@
                 android:key="cell_broadcast_settings"
                 android:title="@string/cell_broadcast_settings"
                 settings:useAdminDisabledSummary="true">
-                <intent
+                    <intent
                         android:action="android.intent.action.MAIN"
                         android:targetPackage="com.android.cellbroadcastreceiver"
                         android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" />
@@ -101,7 +101,7 @@
                 android:fragment="com.android.settings.notification.OtherSoundSettings" />
 
         <!-- Cast -->
-        <PreferenceScreen
+        <Preference
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />

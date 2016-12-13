@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2016 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<!-- This file only contains custom attribute and style definition for preferences -->
+<!-- Things unrelated to preference framework UI customization should go to other styles files -->
+<resources>
+    <style name="ApnPreference">
+        <item name="android:layout">@layout/apn_preference_layout</item>
+    </style>
+
+    <style name="EditTextPreference"
+           parent="@style/Preference.DialogPreference.EditTextPreference.Material">
+        <item name="android:layout">@layout/preference_material_settings</item>
+        <item name="android:dialogLayout">@layout/preference_dialog_edittext</item>
+    </style>
+
+    <style name="PreferenceFragmentStyle" parent="@*android:style/PreferenceFragment.Material">
+        <item name="android:layout">@layout/preference_list_fragment</item>
+    </style>
+
+    <style name="SettingsPreference">
+        <item name="android:layout">@layout/preference_material_settings</item>
+    </style>
+
+    <style name="SettingsDropdownPreference">
+        <item name="android:layout">@layout/preference_dropdown_material_settings</item>
+    </style>
+
+    <style name="SettingsDialogPreference" parent="SettingsPreference"/>
+
+    <style name="SettingsPreferenceCategory" parent="@style/Preference.Category.Material">
+        <item name="android:layout">@layout/preference_category_material_settings</item>
+    </style>
+
+    <style name="SettingsSwitchPreference" parent="SettingsPreference">
+        <item name="widgetLayout">@*android:layout/preference_widget_switch</item>
+        <item name="switchTextOn">@*android:string/capital_on</item>
+        <item name="switchTextOff">@*android:string/capital_off</item>
+    </style>
+
+    <style name="SyncSwitchPreference" parent="SettingsPreference">
+        <item name="android:widgetLayout">@layout/preference_widget_sync_toggle</item>
+    </style>
+</resources>
