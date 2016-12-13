@@ -24,4 +24,6 @@ public interface PowerUsageFeatureProvider {
    * Check whether location setting is enabled
    */
   boolean isLocationSettingEnabled(String[] packages);
+
+  boolean isAdditionalBatteryInfoEnabled();
 }
