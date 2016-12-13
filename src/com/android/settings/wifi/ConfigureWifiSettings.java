@@ -19,14 +19,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
-import android.net.NetworkScoreManager;
-import android.net.NetworkScorerAppManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
@@ -35,12 +31,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.AppListSwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-
-import java.util.Collection;
 import java.util.List;
 
 public class ConfigureWifiSettings extends SettingsPreferenceFragment
@@ -53,12 +46,9 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
     private static final String KEY_CELLULAR_FALLBACK = "wifi_cellular_data_fallback";
-    private static final String KEY_WIFI_ASSISTANT = "wifi_assistant";
+    private static final String KEY_ALLOW_RECOMMENDATIONS = "allow_recommendations";
 
     private WifiManager mWifiManager;
-    private NetworkScoreManager mNetworkScoreManager;
-    private AppListSwitchPreference mWifiAssistantPreference;
-
     private IntentFilter mFilter;
 
     @Override
@@ -74,8 +64,6 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
         mFilter = new IntentFilter();
         mFilter.addAction(WifiManager.LINK_CONFIGURATION_CHANGED_ACTION);
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-        mNetworkScoreManager =
-                (NetworkScoreManager) getSystemService(Context.NETWORK_SCORE_SERVICE);
     }
 
     @Override
@@ -119,15 +107,10 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
             }
         }
 
-        mWifiAssistantPreference = (AppListSwitchPreference) findPreference(KEY_WIFI_ASSISTANT);
-        Collection<NetworkScorerAppManager.NetworkScorerAppData> scorers =
-                new NetworkScorerAppManager(context).getAllValidScorers();
-        if (UserManager.get(context).isAdminUser() && !scorers.isEmpty()) {
-            mWifiAssistantPreference.setOnPreferenceChangeListener(this);
-            initWifiAssistantPreference(scorers);
-        } else if (mWifiAssistantPreference != null) {
-            getPreferenceScreen().removePreference(mWifiAssistantPreference);
-        }
+        SwitchPreference allowRecommendations =
+            (SwitchPreference) findPreference(KEY_ALLOW_RECOMMENDATIONS);
+        allowRecommendations.setChecked(Settings.Global.getInt(getContentResolver(),
+            Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1);
 
         ListPreference sleepPolicyPref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
         if (sleepPolicyPref != null) {
@@ -187,6 +170,10 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
             String settingName = Settings.Global.NETWORK_AVOID_BAD_WIFI;
             Settings.Global.putString(getContentResolver(), settingName,
                     ((SwitchPreference) preference).isChecked() ? "1" : null);
+        } else if (KEY_ALLOW_RECOMMENDATIONS.equals(key)) {
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED,
+                ((SwitchPreference) preference).isChecked() ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(preference);
         }
@@ -197,34 +184,6 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final Context context = getActivity();
         String key = preference.getKey();
-
-        if (KEY_WIFI_ASSISTANT.equals(key)) {
-            NetworkScorerAppManager.NetworkScorerAppData wifiAssistant =
-                    new NetworkScorerAppManager(context).getScorer((String) newValue);
-            if (wifiAssistant == null) {
-                mNetworkScoreManager.setActiveScorer(null);
-                return true;
-            }
-
-            Intent intent = new Intent();
-            if (wifiAssistant.mConfigurationActivityClassName != null) {
-                // App has a custom configuration activity; launch that.
-                // This custom activity will be responsible for launching the system
-                // dialog.
-                intent.setClassName(wifiAssistant.mPackageName,
-                        wifiAssistant.mConfigurationActivityClassName);
-            } else {
-                // Fall back on the system dialog.
-                intent.setAction(NetworkScoreManager.ACTION_CHANGE_ACTIVE);
-                intent.putExtra(NetworkScoreManager.EXTRA_PACKAGE_NAME,
-                        wifiAssistant.mPackageName);
-            }
-
-            startActivity(intent);
-            // Don't update the preference widget state until the child activity returns.
-            // It will be updated in onResume after the activity finishes.
-            return false;
-        }
 
         if (KEY_SLEEP_POLICY.equals(key)) {
             try {
@@ -257,19 +216,6 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
         wifiIpAddressPref.setSummary(ipAddress == null ?
                 context.getString(R.string.status_unavailable) : ipAddress);
         wifiIpAddressPref.setSelectable(false);
-    }
-
-    private void initWifiAssistantPreference(
-            Collection<NetworkScorerAppManager.NetworkScorerAppData> scorers) {
-        int count = scorers.size();
-        String[] packageNames = new String[count];
-        int i = 0;
-        for (NetworkScorerAppManager.NetworkScorerAppData scorer : scorers) {
-            packageNames[i] = scorer.mPackageName;
-            i++;
-        }
-        mWifiAssistantPreference.setPackageNames(packageNames,
-                mNetworkScoreManager.getActiveScorerPackage());
     }
 
     @Override
