@@ -78,7 +78,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import android.webkit.IWebViewUpdateService;
-import android.webkit.WebViewProviderInfo;
+import android.webkit.WebViewFactory;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -92,6 +92,7 @@ import com.android.settings.fuelgauge.InactiveApps;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.webview.WebViewAppPreferenceController;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -126,7 +127,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String ENABLE_TERMINAL = "enable_terminal";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String BT_HCI_SNOOP_LOG = "bt_hci_snoop_log";
-    private static final String WEBVIEW_PROVIDER_KEY = "select_webview_provider";
     private static final String WEBVIEW_MULTIPROCESS_KEY = "enable_webview_multiprocess";
     private static final String ENABLE_OEM_UNLOCK = "oem_unlock_enable";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
@@ -230,6 +230,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
+    private static final int RESULT_WEBVIEW_APP = 1002;
 
     private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
     private static final String FLASH_LOCKED_PROP = "ro.boot.flash.locked";
@@ -310,8 +311,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mAnimatorDurationScale;
     private ListPreference mOverlayDisplayDevices;
 
+    private WebViewAppPreferenceController mWebViewAppPrefController;
     private SwitchPreference mWebViewMultiprocess;
-    private ListPreference mWebViewProvider;
 
     private ListPreference mSimulateColorSpace;
 
@@ -371,8 +372,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
-        mWebViewUpdateService =
-                IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
+        mWebViewUpdateService = WebViewFactory.getUpdateService();
         mOemUnlockManager = (PersistentDataBlockManager) getActivity()
                 .getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
         mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -384,6 +384,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mBugReportController = new BugReportPreferenceController(getActivity());
         mBugReportInPowerController = new BugReportInPowerPreferenceController(getActivity());
+        mWebViewAppPrefController = new WebViewAppPreferenceController(getActivity());
 
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted() || !Utils.isDeviceProvisioned(getActivity())) {
@@ -414,6 +415,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mBugReportController.displayPreference(getPreferenceScreen());
         mBugReportInPowerController.displayPreference(getPreferenceScreen());
+        mWebViewAppPrefController.displayPreference(getPreferenceScreen());
 
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
@@ -483,7 +485,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mLogpersist = null;
         }
         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
-        mWebViewProvider = addListPreference(WEBVIEW_PROVIDER_KEY);
         mWebViewMultiprocess = findAndInitSwitchPref(WEBVIEW_MULTIPROCESS_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
 
@@ -544,7 +545,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             removePreference(KEY_COLOR_MODE);
             mColorModePreference = null;
         }
-        updateWebViewProviderOptions();
 
         mColorTemperaturePreference = (SwitchPreference) findPreference(COLOR_TEMPERATURE_KEY);
         if (getResources().getBoolean(R.bool.config_enableColorTemperature)) {
@@ -629,6 +629,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             pref.setEnabled(enabled && !mDisabledPrefs.contains(pref));
         }
         mBugReportInPowerController.enablePreference(enabled);
+        mWebViewAppPrefController.enablePreference(enabled);
         updateAllOptions();
     }
 
@@ -793,8 +794,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateSimulateColorSpace();
         updateUSBAudioOptions();
         updateForceResizableOptions();
+        mWebViewAppPrefController.updateState(null);
         updateWebViewMultiprocessOptions();
-        updateWebViewProviderOptions();
         updateOemUnlockOptions();
         if (mColorTemperaturePreference != null) {
             updateColorTemperature();
@@ -829,39 +830,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateAllOptions();
         mDontPokeProperties = false;
         pokeSystemProperties();
-    }
-
-    private void updateWebViewProviderOptions() {
-        try {
-            WebViewProviderInfo[] providers = mWebViewUpdateService.getValidWebViewPackages();
-            if (providers == null) {
-                Log.e(TAG, "No WebView providers available");
-                return;
-            }
-            ArrayList<String> options = new ArrayList<String>();
-            ArrayList<String> values = new ArrayList<String>();
-            for (int n = 0; n < providers.length; n++) {
-                if (Utils.isPackageEnabled(getActivity(), providers[n].packageName)) {
-                    options.add(providers[n].description);
-                    values.add(providers[n].packageName);
-                }
-            }
-            mWebViewProvider.setEntries(options.toArray(new String[options.size()]));
-            mWebViewProvider.setEntryValues(values.toArray(new String[values.size()]));
-
-            String value = mWebViewUpdateService.getCurrentWebViewPackageName();
-            if (value == null) {
-                value = "";
-            }
-
-            for (int i = 0; i < values.size(); i++) {
-                if (value.contentEquals(values.get(i))) {
-                    mWebViewProvider.setValueIndex(i);
-                    return;
-                }
-            }
-        } catch (RemoteException e) {
-        }
     }
 
     private void updateWebViewMultiprocessOptions() {
@@ -916,17 +884,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         Settings.Secure.putInt(getActivity().getContentResolver(),
                 Settings.Secure.BLUETOOTH_HCI_LOG,
                 mBtHciSnoopLog.isChecked() ? 1 : 0);
-    }
-
-    private boolean writeWebViewProviderOptions(Object newValue) {
-        try {
-            String updatedProvider = mWebViewUpdateService.changeProviderAndSetting(
-                    newValue == null ? "" : newValue.toString());
-            updateWebViewProviderOptions();
-            return newValue != null && newValue.equals(updatedProvider);
-        } catch (RemoteException e) {
-        }
-        return false;
     }
 
     private void writeDebuggerOptions() {
@@ -2327,6 +2284,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 writeMockLocation();
                 updateMockLocation();
             }
+        } else if (requestCode == RESULT_WEBVIEW_APP) {
+            mWebViewAppPrefController.onActivityResult(resultCode, data);
         } else if (requestCode == REQUEST_CODE_ENABLE_OEM_UNLOCK) {
             if (resultCode == Activity.RESULT_OK) {
                 if (mEnableOemUnlock.isChecked()) {
@@ -2348,6 +2307,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         if (mBugReportInPowerController.handlePreferenceTreeClick(preference)) {
             return true;
+        }
+        if (mWebViewAppPrefController.handlePreferenceTreeClick(preference)) {
+            startActivityForResult(
+                    mWebViewAppPrefController.getActivityIntent(), RESULT_WEBVIEW_APP);
         }
 
         if (preference == mEnableAdb) {
@@ -2502,21 +2465,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             updateHdcpValues();
             pokeSystemProperties();
             return true;
-        } else if (preference == mWebViewProvider) {
-            if (newValue == null) {
-                Log.e(TAG, "Tried to set a null WebView provider");
-                return false;
-            }
-            if (writeWebViewProviderOptions(newValue)) {
-                return true;
-            } else {
-                // The user chose a package that became invalid since the list was last updated,
-                // show a Toast to explain the situation.
-                Toast toast = Toast.makeText(getActivity(),
-                        R.string.select_webview_provider_toast_text, Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            return false;
         } else if ((preference == mBluetoothSelectA2dpCodec) ||
                    (preference == mBluetoothSelectA2dpSampleRate) ||
                    (preference == mBluetoothSelectA2dpBitsPerSample) ||

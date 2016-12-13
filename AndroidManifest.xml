@@ -2005,6 +2005,9 @@
         <activity android:name=".AppPicker" android:label="@string/select_application"
                 android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
 
+        <activity android:name=".webview.WebViewAppPicker" android:label="@string/select_webview_provider_dialog_title"
+                android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="UsbSettings"
                   android:exported="true"
@@ -2940,7 +2943,9 @@
                         android:value="true" />
         </activity>
 
-        <activity android:name=".WebViewImplementation"
+        <!-- Keep compatibility with old WebView-picker implementation -->
+        <activity-alias android:name=".WebViewImplementation"
+                  android:targetActivity=".webview.WebViewAppPicker"
                   android:exported="true"
                   android:excludeFromRecents="true"
                   android:theme="@*android:style/Theme.DeviceDefault.Light.Dialog.Alert">
@@ -2950,7 +2955,7 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-        </activity>
+      </activity-alias>
 
         <!-- activity for gesture settings -->
         <activity android:name="Settings$GestureSettingsActivity"
