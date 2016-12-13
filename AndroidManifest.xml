@@ -2557,16 +2557,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActiveNetworkScorerDialog"
-                  android:label="@string/wifi_assistant_title"
-                  android:excludeFromRecents="true"
-                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert">
-            <intent-filter android:priority="1">
-                <action android:name="android.net.scoring.CHANGE_ACTIVE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Settings$NotificationAccessSettingsActivity"
                   android:label="@string/manage_notification_access_title"
                   android:taskAffinity="">
