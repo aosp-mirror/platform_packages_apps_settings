@@ -51,7 +51,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private final CategoryManager mCategoryManager;
 
     public DashboardFeatureProviderImpl(Context context) {
-        this(context.getApplicationContext(), CategoryManager.get(context));
+        mContext = context;
+        mCategoryManager = CategoryManager.get(context, getExtraIntentAction());
     }
 
     @VisibleForTesting
@@ -181,5 +182,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     public ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
             DashboardFragment fragment) {
         return new ProgressiveDisclosureMixin(context, this, fragment);
+    }
+
+    @Override
+    public String getExtraIntentAction() {
+        return null;
     }
 }
