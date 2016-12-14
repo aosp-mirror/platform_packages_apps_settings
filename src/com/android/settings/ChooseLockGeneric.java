@@ -186,22 +186,15 @@ public class ChooseLockGeneric extends SettingsActivity {
                         ENCRYPT_REQUESTED_DISABLED);
             }
 
-            int targetUser = Utils.getSecureTargetUser(
+            // a) If this is started from other user, use that user id.
+            // b) If this is started from the same user, read the extra if this is launched
+            //    from Settings app itself.
+            // c) Otherwise, use UserHandle.myUserId().
+            mUserId = Utils.getSecureTargetUser(
                     getActivity().getActivityToken(),
                     UserManager.get(getActivity()),
-                    null,
+                    getArguments(),
                     getActivity().getIntent().getExtras()).getIdentifier();
-            if (ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
-                    || !mLockPatternUtils.isSeparateProfileChallengeAllowed(targetUser)) {
-                // Always use parent if explicitely requested or if profile challenge is not
-                // supported
-                Bundle arguments = getArguments();
-                mUserId = Utils.getUserIdFromBundle(getContext(), arguments != null ? arguments
-                        : getActivity().getIntent().getExtras());
-            } else {
-                mUserId = targetUser;
-            }
-
             if (ACTION_SET_NEW_PASSWORD.equals(chooseLockAction)
                     && Utils.isManagedProfile(UserManager.get(getActivity()), mUserId)
                     && mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
@@ -256,6 +249,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else if (KEY_SKIP_FINGERPRINT.equals(key)) {
                 Intent chooseLockGenericIntent = new Intent(getActivity(), ChooseLockGeneric.class);
                 chooseLockGenericIntent.setAction(getIntent().getAction());
+                // Forward the target user id to  ChooseLockGeneric.
+                chooseLockGenericIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 chooseLockGenericIntent.putExtra(PASSWORD_CONFIRMED, mPasswordConfirmed);
                 startActivityForResult(chooseLockGenericIntent, SKIP_FINGERPRINT_REQUEST);
                 return true;
@@ -343,6 +338,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 if (data != null) {
                     intent.putExtras(data.getExtras());
                 }
+                // Forward the target user id to fingerprint setup page.
+                intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 startActivity(intent);
                 finish();
             } else if (requestCode == SKIP_FINGERPRINT_REQUEST) {

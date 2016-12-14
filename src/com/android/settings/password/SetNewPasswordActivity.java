@@ -16,13 +16,18 @@
 
 package com.android.settings.password;
 
-import android.annotation.Nullable;
+import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
+import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
+
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.settings.ChooseLockGeneric;
+import com.android.settings.SetupChooseLockGeneric;
+import com.android.settings.Utils;
 
 /**
  * Trampolines {@link DevicePolicyManager#ACTION_SET_NEW_PASSWORD} and
@@ -30,6 +35,7 @@ import com.android.settings.ChooseLockGeneric;
  * activity for handling set new password.
  */
 public class SetNewPasswordActivity extends Activity implements SetNewPasswordController.Ui {
+    private static final String TAG = "SetNewPasswordActivity";
     private String mNewPasswordAction;
     private SetNewPasswordController mSetNewPasswordController;
 
@@ -38,17 +44,22 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
         super.onCreate(savedState);
 
         mNewPasswordAction = getIntent().getAction();
-        mSetNewPasswordController = new SetNewPasswordController(this, this);
+        if (!ACTION_SET_NEW_PASSWORD.equals(mNewPasswordAction)
+                && !ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(mNewPasswordAction)) {
+            Log.e(TAG, "Unexpected action to launch this activity");
+            finish();
+            return;
+        }
+        mSetNewPasswordController = SetNewPasswordController.create(
+                this, this, getIntent(), getActivityToken());
         mSetNewPasswordController.dispatchSetNewPasswordIntent();
     }
 
     @Override
-    public void launchChooseLock(@Nullable Bundle chooseLockFingerprintExtras) {
+    public void launchChooseLock(Bundle chooseLockFingerprintExtras) {
         Intent intent = new Intent(this, ChooseLockGeneric.class)
                 .setAction(mNewPasswordAction);
-        if (chooseLockFingerprintExtras != null) {
-            intent.putExtras(chooseLockFingerprintExtras);
-        }
+        intent.putExtras(chooseLockFingerprintExtras);
         startActivity(intent);
         finish();
     }

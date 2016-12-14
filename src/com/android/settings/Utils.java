@@ -102,6 +102,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static android.content.Intent.EXTRA_USER;
+import static android.content.Intent.EXTRA_USER_ID;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
@@ -651,16 +652,21 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /**
      * Returns the target user for a Settings activity.
-     *
-     * The target user can be either the current user, the user that launched this activity or
-     * the user contained as an extra in the arguments or intent extras.
-     *
+     * <p>
+     * User would be retrieved in this order:
+     * <ul>
+     * <li> If this activity is launched from other user, return that user id.
+     * <li> If this is launched from the Settings app in same user, return the user contained as an
+     *      extra in the arguments or intent extras.
+     * <li> Otherwise, return UserHandle.myUserId().
+     * </ul>
+     * <p>
      * Note: This is secure in the sense that it only returns a target user different to the current
      * one if the app launching this activity is the Settings app itself, running in the same user
      * or in one that is in the same profile group, or if the user id is provided by the system.
      */
     public static UserHandle getSecureTargetUser(IBinder activityToken,
-           UserManager um, @Nullable Bundle arguments, @Nullable Bundle intentExtras) {
+            UserManager um, @Nullable Bundle arguments, @Nullable Bundle intentExtras) {
         UserHandle currentUser = new UserHandle(UserHandle.myUserId());
         IActivityManager am = ActivityManagerNative.getDefault();
         try {
@@ -675,16 +681,14 @@ public final class Utils extends com.android.settingslib.Utils {
                     return launchedFromUser;
                 }
             }
-            UserHandle extrasUser = intentExtras != null
-                    ? (UserHandle) intentExtras.getParcelable(EXTRA_USER) : null;
+            UserHandle extrasUser = getUserHandleFromBundle(intentExtras);
             if (extrasUser != null && !extrasUser.equals(currentUser)) {
                 // Check it's secure
                 if (launchedFromSettingsApp && isProfileOf(um, extrasUser)) {
                     return extrasUser;
                 }
             }
-            UserHandle argumentsUser = arguments != null
-                    ? (UserHandle) arguments.getParcelable(EXTRA_USER) : null;
+            UserHandle argumentsUser = getUserHandleFromBundle(arguments);
             if (argumentsUser != null && !argumentsUser.equals(currentUser)) {
                 // Check it's secure
                 if (launchedFromSettingsApp && isProfileOf(um, argumentsUser)) {
@@ -696,7 +700,26 @@ public final class Utils extends com.android.settingslib.Utils {
             Log.v(TAG, "Could not talk to activity manager.", e);
         }
         return currentUser;
-   }
+    }
+
+    /**
+     * Lookup both {@link Intent#EXTRA_USER} and {@link Intent#EXTRA_USER_ID} in the bundle
+     * and return the {@link UserHandle} object. Return {@code null} if nothing is found.
+     */
+    private static @Nullable UserHandle getUserHandleFromBundle(Bundle bundle) {
+        if (bundle == null) {
+            return null;
+        }
+        final UserHandle user = bundle.getParcelable(EXTRA_USER);
+        if (user != null) {
+            return user;
+        }
+        final int userId = bundle.getInt(EXTRA_USER_ID, -1);
+        if (userId != -1) {
+            return UserHandle.of(userId);
+        }
+        return null;
+    }
 
     /**
      * Returns the target user for a Settings activity.
