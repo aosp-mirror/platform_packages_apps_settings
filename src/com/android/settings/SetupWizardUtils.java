@@ -16,11 +16,8 @@
 
 package com.android.settings;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 
-import com.android.setupwizardlib.util.SystemBarHelper;
 import com.android.setupwizardlib.util.WizardManagerHelper;
 
 public class SetupWizardUtils {
@@ -39,22 +36,6 @@ public class SetupWizardUtils {
         } else {
             return R.style.SetupWizardTheme_Transparent;
         }
-    }
-
-    /**
-     * Sets the immersive mode related flags based on the extra in the intent which started the
-     * activity.
-     */
-    public static void setImmersiveMode(Activity activity) {
-        final boolean useImmersiveMode = activity.getIntent().getBooleanExtra(
-                WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE, false);
-        if (useImmersiveMode) {
-            SystemBarHelper.hideSystemBars(activity.getWindow());
-        }
-    }
-
-    public static void applyImmersiveFlags(final Dialog dialog) {
-        SystemBarHelper.hideSystemBars(dialog);
     }
 
     public static void copySetupExtras(Intent fromIntent, Intent toIntent) {

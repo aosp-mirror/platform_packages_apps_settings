@@ -22,13 +22,6 @@
     <attr name="side_margin" format="reference|dimension" />
     <attr name="wifi_signal_color" format="reference" />
 
-    <style name="SetupWizardDisableAppStartingTheme">
-        <!-- Theme to disable the app starting window. The actual theme of the activity needs to
-             be then set in code via setTheme or onApplyThemeResource. -->
-        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
-        <item name="android:windowBackground">@null</item>
-    </style>
-
     <style name="SetupWizardTheme" parent="SuwThemeGlif">
         <!-- For all Alert Dialogs -->
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
