@@ -31,14 +31,18 @@ import android.os.Environment;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -69,6 +73,15 @@ public class MasterClear extends OptionsMenuFragment {
     private Button mInitiateButton;
     private View mExternalStorageContainer;
     private CheckBox mExternalStorage;
+    private ScrollView mScrollView;
+
+    private final OnGlobalLayoutListener mOnGlobalLayoutListener = new OnGlobalLayoutListener() {
+        @Override
+        public void onGlobalLayout() {
+            mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(mOnGlobalLayoutListener);
+            mInitiateButton.setEnabled(hasReachedBottom(mScrollView));
+        }
+    };
 
     /**
      * Keyguard validation is run using the standard {@link ConfirmLockPattern}
@@ -137,6 +150,7 @@ public class MasterClear extends OptionsMenuFragment {
         mInitiateButton.setOnClickListener(mInitiateListener);
         mExternalStorageContainer = mContentView.findViewById(R.id.erase_external_container);
         mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
+        mScrollView = (ScrollView) mContentView.findViewById(R.id.master_clear_scrollview);
 
         /*
          * If the external storage is emulated, it will be erased with a factory
@@ -175,6 +189,32 @@ public class MasterClear extends OptionsMenuFragment {
         View masterClearContainer = mContentView.findViewById(R.id.master_clear_container);
         getContentDescription(masterClearContainer, contentDescription);
         masterClearContainer.setContentDescription(contentDescription);
+
+        // Set the status of initiateButton based on scrollview
+        mScrollView.setOnScrollChangeListener(new OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX,
+                int oldScrollY) {
+                if (v instanceof ScrollView && hasReachedBottom((ScrollView) v)) {
+                    mInitiateButton.setEnabled(true);
+                }
+            }
+        });
+
+        // Set the initial state of the initiateButton
+        mScrollView.getViewTreeObserver().addOnGlobalLayoutListener(mOnGlobalLayoutListener);
+    }
+
+    @VisibleForTesting
+    boolean hasReachedBottom(final ScrollView scrollView) {
+        if (scrollView.getChildCount() < 1) {
+            return true;
+        }
+
+        final View view = scrollView.getChildAt(0);
+        final int diff = view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY());
+
+        return diff <= 0;
     }
 
     private void getContentDescription(View v, StringBuffer description) {
