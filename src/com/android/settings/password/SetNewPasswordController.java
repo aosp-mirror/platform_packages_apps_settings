@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.UserManager;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -60,14 +61,15 @@ final class SetNewPasswordController {
     private final DevicePolicyManager mDevicePolicyManager;
     private final Ui mUi;
 
-    public static SetNewPasswordController create(Context context, Ui ui, Intent intent) {
+    public static SetNewPasswordController create(Context context, Ui ui, Intent intent,
+            IBinder activityToken) {
         // Trying to figure out which user is setting new password. If it is
         // ACTION_SET_NEW_PARENT_PROFILE_PASSWORD or the calling user is not allowed to set
         // separate profile challenge, it is the current user to set new password. Otherwise,
         // it is the user who starts this activity setting new password.
         int userId = ActivityManager.getCurrentUser();
         if (ACTION_SET_NEW_PASSWORD.equals(intent.getAction())) {
-            final int callingUserId = Utils.getSecureTargetUser(context.getActivityToken(),
+            final int callingUserId = Utils.getSecureTargetUser(activityToken,
                     UserManager.get(context), null, intent.getExtras()).getIdentifier();
             final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
             if (lockPatternUtils.isSeparateProfileChallengeAllowed(callingUserId)) {
