@@ -138,7 +138,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
         Fragment target = getTargetFragment();
-        if (target != null) {
+        if (target != null && target.getActivity() != null) {
             target.onActivityResult(getTargetRequestCode(), 0, null);
         }
     }
