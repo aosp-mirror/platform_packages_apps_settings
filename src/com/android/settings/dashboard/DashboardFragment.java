@@ -17,9 +17,6 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -115,16 +112,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
         refreshAllPreferences(getLogTag());
-    }
-
-    @Override
-    public void setDivider(Drawable divider) {
-        if (mDashboardFeatureProvider.isEnabled()) {
-            // Intercept divider and set it transparent so system divider decoration is disabled.
-            super.setDivider(new ColorDrawable(Color.TRANSPARENT));
-        } else {
-            super.setDivider(divider);
-        }
     }
 
     @Override
