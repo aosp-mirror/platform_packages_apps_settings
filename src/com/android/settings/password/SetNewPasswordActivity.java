@@ -50,7 +50,8 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
             finish();
             return;
         }
-        mSetNewPasswordController = SetNewPasswordController.create(this, this, getIntent());
+        mSetNewPasswordController = SetNewPasswordController.create(
+                this, this, getIntent(), getActivityToken());
         mSetNewPasswordController.dispatchSetNewPasswordIntent();
     }
 
