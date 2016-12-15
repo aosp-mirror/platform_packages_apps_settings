@@ -28,46 +28,48 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 115;
+    private static final int DATABASE_VERSION = 116;
 
     private static final String INDEX = "index";
 
     public interface Tables {
-        public static final String TABLE_PREFS_INDEX = "prefs_index";
-        public static final String TABLE_META_INDEX = "meta_index";
-        public static final String TABLE_SAVED_QUERIES = "saved_queries";
+        String TABLE_PREFS_INDEX = "prefs_index";
+        String TABLE_META_INDEX = "meta_index";
+        String TABLE_SAVED_QUERIES = "saved_queries";
     }
 
     public interface IndexColumns {
-        public static final String DOCID = "docid";
-        public static final String LOCALE = "locale";
-        public static final String DATA_RANK = "data_rank";
-        public static final String DATA_TITLE = "data_title";
-        public static final String DATA_TITLE_NORMALIZED = "data_title_normalized";
-        public static final String DATA_SUMMARY_ON = "data_summary_on";
-        public static final String DATA_SUMMARY_ON_NORMALIZED = "data_summary_on_normalized";
-        public static final String DATA_SUMMARY_OFF = "data_summary_off";
-        public static final String DATA_SUMMARY_OFF_NORMALIZED = "data_summary_off_normalized";
-        public static final String DATA_ENTRIES = "data_entries";
-        public static final String DATA_KEYWORDS = "data_keywords";
-        public static final String CLASS_NAME = "class_name";
-        public static final String SCREEN_TITLE = "screen_title";
-        public static final String INTENT_ACTION = "intent_action";
-        public static final String INTENT_TARGET_PACKAGE = "intent_target_package";
-        public static final String INTENT_TARGET_CLASS = "intent_target_class";
-        public static final String ICON = "icon";
-        public static final String ENABLED = "enabled";
-        public static final String DATA_KEY_REF = "data_key_reference";
-        public static final String USER_ID = "user_id";
+        String DOCID = "docid";
+        String LOCALE = "locale";
+        String DATA_RANK = "data_rank";
+        String DATA_TITLE = "data_title";
+        String DATA_TITLE_NORMALIZED = "data_title_normalized";
+        String DATA_SUMMARY_ON = "data_summary_on";
+        String DATA_SUMMARY_ON_NORMALIZED = "data_summary_on_normalized";
+        String DATA_SUMMARY_OFF = "data_summary_off";
+        String DATA_SUMMARY_OFF_NORMALIZED = "data_summary_off_normalized";
+        String DATA_ENTRIES = "data_entries";
+        String DATA_KEYWORDS = "data_keywords";
+        String CLASS_NAME = "class_name";
+        String SCREEN_TITLE = "screen_title";
+        String INTENT_ACTION = "intent_action";
+        String INTENT_TARGET_PACKAGE = "intent_target_package";
+        String INTENT_TARGET_CLASS = "intent_target_class";
+        String ICON = "icon";
+        String ENABLED = "enabled";
+        String DATA_KEY_REF = "data_key_reference";
+        String USER_ID = "user_id";
+        String PAYLOAD_TYPE = "payload_type";
+        String PAYLOAD = "payload";
     }
 
     public interface MetaColumns {
-        public static final String BUILD = "build";
+        String BUILD = "build";
     }
 
     public interface SavedQueriesColums {
-        public static final String QUERY = "query";
-        public static final String TIME_STAMP = "timestamp";
+        String QUERY = "query";
+        String TIME_STAMP = "timestamp";
     }
 
     private static final String CREATE_INDEX_TABLE =
@@ -110,6 +112,10 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.DATA_KEY_REF +
                     ", " +
                     IndexColumns.USER_ID +
+                    ", " +
+                    IndexColumns.PAYLOAD_TYPE +
+                    ", " +
+                    IndexColumns.PAYLOAD +
                     ");";
 
     private static final String CREATE_META_TABLE =
