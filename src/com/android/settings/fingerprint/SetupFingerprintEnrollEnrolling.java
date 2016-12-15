@@ -19,7 +19,6 @@ package com.android.settings.fingerprint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -93,7 +92,7 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling 
                     .setTitle(R.string.setup_fingerprint_enroll_enrolling_skip_title)
                     .setMessage(R.string.setup_fingerprint_enroll_enrolling_skip_message)
                     .setCancelable(false)
-                    .setPositiveButton(R.string.wifi_skip_anyway,
+                    .setPositiveButton(R.string.skip_anyway_button_label,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
@@ -104,7 +103,7 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling 
                                     }
                                 }
                             })
-                    .setNegativeButton(R.string.wifi_dont_skip,
+                    .setNegativeButton(R.string.go_back_button_label,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
