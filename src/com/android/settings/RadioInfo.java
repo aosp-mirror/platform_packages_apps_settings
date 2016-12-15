@@ -1164,7 +1164,7 @@ public class RadioInfo extends Activity {
 
     void setImsConfigProvisionedState(int configItem, boolean state) {
         if (phone != null && mImsManager != null) {
-            QueuedWork.singleThreadExecutor().submit(new Runnable() {
+            QueuedWork.queue(new Runnable() {
                 public void run() {
                     try {
                         mImsManager.getConfigInterface().setProvisionedValue(
@@ -1174,7 +1174,7 @@ public class RadioInfo extends Activity {
                         Log.e(TAG, "setImsConfigProvisioned() exception:", e);
                     }
                 }
-            });
+            }, false);
         }
     }
 
