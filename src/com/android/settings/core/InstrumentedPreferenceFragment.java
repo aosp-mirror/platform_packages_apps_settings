@@ -31,6 +31,7 @@ import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.PreferenceDividerDecoration;
+import com.android.settings.survey.SurveyMixin;
 
 /**
  * Instrumented fragment that logs visibility state.
@@ -61,6 +62,7 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     public InstrumentedPreferenceFragment() {
         // Mixin that logs visibility change for activity.
         getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
+        getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
     }
 
     @Override
