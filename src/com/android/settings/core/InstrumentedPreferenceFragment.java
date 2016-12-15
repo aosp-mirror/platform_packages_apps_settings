@@ -17,13 +17,20 @@
 package com.android.settings.core;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.PreferenceDividerDecoration;
 
 /**
  * Instrumented fragment that logs visibility state.
@@ -48,6 +55,9 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     protected final int GESTURE_DOUBLE_TAP_SCREEN = PLACEHOLDER_METRIC + 11;
     protected final int GESTURE_DOUBLE_TWIST = PLACEHOLDER_METRIC + 12;
 
+    private final PreferenceDividerDecoration mDividerDecoration =
+            new PreferenceDividerDecoration();
+
     public InstrumentedPreferenceFragment() {
         // Mixin that logs visibility change for activity.
         getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
@@ -60,6 +70,20 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        getListView().addItemDecoration(mDividerDecoration);
+        return view;
+    }
+
+    @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    }
+
+    @Override
+    public void setDivider(Drawable divider) {
+        mDividerDecoration.setDivider(divider);
+        super.setDivider(new ColorDrawable(Color.TRANSPARENT));
     }
 }
