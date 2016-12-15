@@ -46,7 +46,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         }
         String menuTitle = activity.getString(R.string.search_menu);
         MenuItem menuItem = menu.add(Menu.NONE, Menu.NONE, Menu.NONE, menuTitle)
-                .setIcon(R.drawable.abc_ic_search_api_material)
+                .setIcon(R.drawable.ic_search_24dp)
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
