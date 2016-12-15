@@ -34,13 +34,13 @@ public class IntentSearchViewHolder extends SearchViewHolder {
 
     public IntentSearchViewHolder(View view) {
         super(view);
-        titleView = (TextView) view.findViewById(R.id.title);
-        summaryView = (TextView) view.findViewById(R.id.summary);
-        iconView = (ImageView) view.findViewById(R.id.icon);
+        titleView = (TextView) view.findViewById(android.R.id.title);
+        summaryView = (TextView) view.findViewById(android.R.id.summary);
+        iconView = (ImageView) view.findViewById(android.R.id.icon);
     }
 
     @Override
-    public void onBind(Fragment fragment, SearchResult result) {
+    public void onBind(final Fragment fragment, final SearchResult result) {
         titleView.setText(result.title);
         summaryView.setText(result.summary);
         iconView.setImageDrawable(result.icon);

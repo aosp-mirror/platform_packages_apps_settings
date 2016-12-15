@@ -20,7 +20,10 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
+import android.util.ArrayMap;
 import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settings.search2.InlineSwitchPayload;
+import com.android.settings.search2.ResultPayload;
 
 public class DoubleTapPowerPreferenceController extends GesturePreferenceController {
 
@@ -60,5 +63,15 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
         final int cameraDisabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
         return cameraDisabled == 0;
+    }
+
+    @Override
+    public ResultPayload getResultPayload() {
+        ArrayMap<Integer, Boolean> valueMap = new ArrayMap<>();
+        valueMap.put(0, true);
+        valueMap.put(1, false);
+
+        return new InlineSwitchPayload(Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
+                ResultPayload.SettingsSource.SECURE, valueMap);
     }
 }

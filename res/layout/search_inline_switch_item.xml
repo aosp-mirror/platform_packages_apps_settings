@@ -66,7 +66,16 @@
                 android:layout_alignStart="@android:id/title"
                 android:textAppearance="?android:attr/textAppearanceListItemSecondary"
                 android:textColor="?android:attr/textColorSecondary"
+                android:maxLength="60"
                 android:maxLines="10"/>
 
     </RelativeLayout>
+
+    <Switch
+            android:id="@+id/switchView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="end|center_vertical"
+            android:paddingStart="16dp"
+            android:orientation="vertical"/>
 </LinearLayout>

@@ -17,12 +17,15 @@
 package com.android.internal.hardware;
 
 import android.provider.Settings;
+import android.content.Context;
 
 /**
  * Fake controller to make robolectric test compile. Should be removed when Robolectric supports
  * API 25.
  */
 public class AmbientDisplayConfiguration {
+
+    public AmbientDisplayConfiguration(Context context) {}
 
     public boolean pulseOnPickupAvailable() {
         return false;

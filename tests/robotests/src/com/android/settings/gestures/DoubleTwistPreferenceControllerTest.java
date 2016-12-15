@@ -24,6 +24,8 @@ import android.provider.Settings;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
+import com.android.settings.search2.InlineSwitchPayload;
+import com.android.settings.search2.ResultPayload;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -110,5 +112,20 @@ public class DoubleTwistPreferenceControllerTest {
         mController = new DoubleTwistPreferenceController(context, null);
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
+    }
+
+    @Test
+    public void testPreferenceController_ProperResultPayloadType() {
+        ResultPayload payload = mController.getResultPayload();
+        assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
+    }
+
+    @Test
+    public void testPreferenceController_CorrectPayload() {
+        InlineSwitchPayload payload = (InlineSwitchPayload) mController.getResultPayload();
+        assertThat(payload.settingsUri).isEqualTo("camera_double_twist_to_flip_enabled");
+        assertThat(payload.settingSource).isEqualTo(ResultPayload.SettingsSource.SECURE);
+        assertThat(payload.valueMap.get(1)).isEqualTo(true);
+        assertThat(payload.valueMap.get(0)).isEqualTo(false);
     }
 }

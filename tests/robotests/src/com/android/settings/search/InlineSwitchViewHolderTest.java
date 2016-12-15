@@ -19,7 +19,6 @@ package com.android.settings.search;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +26,10 @@ import android.view.View;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.search2.InlineSwitchPayload;
+import com.android.settings.search2.InlineSwitchViewHolder;
 import com.android.settings.search2.IntentPayload;
-import com.android.settings.search2.IntentSearchViewHolder;
 import com.android.settings.search2.SearchResult;
-import com.android.settings.search2.SearchResult.Builder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,26 +43,29 @@ import java.util.ArrayList;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class IntentSearchViewHolderTest {
+public class InlineSwitchViewHolderTest {
 
     private static final String TITLE = "title";
     private static final String SUMMARY = "summary";
 
     @Mock
     private Fragment mFragment;
-    private IntentSearchViewHolder mHolder;
+
+    @Mock
+    private InlineSwitchPayload mPayload;
+    private InlineSwitchViewHolder mHolder;
     private Drawable mIcon;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         final Context context = ShadowApplication.getInstance().getApplicationContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.search_intent_item, null);
-        mHolder = new IntentSearchViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.search_inline_switch_item, null);
+        mHolder = new InlineSwitchViewHolder(view, context);
 
         mIcon = context.getDrawable(R.drawable.ic_search_history);
     }
@@ -73,28 +75,31 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.titleView).isNotNull();
         assertThat(mHolder.summaryView).isNotNull();
         assertThat(mHolder.iconView).isNotNull();
+        assertThat(mHolder.switchView).isNotNull();
     }
 
     @Test
     public void testBindViewElements_AllUpdated() {
+        when(mPayload.getSwitchValue(any(Context.class))).thenReturn(true);
         SearchResult result = getSearchResult();
         mHolder.onBind(mFragment, result);
-        mHolder.itemView.performClick();
+        mHolder.switchView.setChecked(true);
 
         assertThat(mHolder.titleView.getText()).isEqualTo(TITLE);
         assertThat(mHolder.summaryView.getText()).isEqualTo(SUMMARY);
         assertThat(mHolder.iconView.getDrawable()).isEqualTo(mIcon);
-        verify(mFragment).startActivity(any(Intent.class));
+        assertThat(mHolder.switchView.isChecked()).isTrue();
     }
 
     private SearchResult getSearchResult() {
-        Builder builder = new Builder();
+        SearchResult.Builder builder = new SearchResult.Builder();
         builder.addTitle(TITLE)
                 .addSummary(SUMMARY)
                 .addRank(1)
-                .addPayload(new IntentPayload(null))
+                .addPayload(new InlineSwitchPayload("", 0, null))
                 .addBreadcrumbs(new ArrayList<String>())
-                .addIcon(mIcon);
+                .addIcon(mIcon)
+                .addPayload(mPayload);
 
         return builder.build();
     }

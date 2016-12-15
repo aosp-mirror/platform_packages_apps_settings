@@ -15,7 +15,7 @@
  *
  */
 
-package com.android.settings.search;
+package com.android.settings.search2;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,16 +23,13 @@ import android.content.Intent;
 import android.database.MatrixCursor;
 import android.graphics.drawable.Drawable;
 
+import android.util.ArrayMap;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
 import com.android.settings.gestures.GestureSettings;
-import com.android.settings.search2.DatabaseResultLoader;
-import com.android.settings.search2.IntentPayload;
-import com.android.settings.search2.ResultPayload;
 import com.android.settings.search2.ResultPayload.PayloadType;
-import com.android.settings.search2.SearchResult;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,12 +44,14 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class DatabaseResultLoaderTest {
-    private DatabaseResultLoader mLoader;
+public class CursorToSearchResultConverterTest {
+
+    private CursorToSearchResultConverter mConverter;
 
     private static final String[] COLUMNS = new String[]{"rank", "title", "summary_on",
             "summary off", "entries", "keywords", "class name", "screen title", "icon",
-            "intent action", "target package", "target class", "enabled", "key", "user id"};
+            "intent action", "target package", "target class", "enabled", "key",
+            "payload_type", "payload"};
 
     private static final String[] TITLES = new String[]{"title1", "title2", "title3"};
     private static final String SUMMARY = "SUMMARY";
@@ -66,24 +65,24 @@ public class DatabaseResultLoaderTest {
     public void setUp() {
         Context context = Robolectric.buildActivity(Activity.class).get();
         mDrawable = context.getDrawable(mIcon);
-        mLoader = new DatabaseResultLoader(context, "");
+        mConverter = new CursorToSearchResultConverter(context);
     }
 
     @Test
     public void testParseNullResults_ReturnsNull() {
-        List<SearchResult> results = mLoader.parseCursorForSearch(null);
+        List<SearchResult> results = mConverter.convertCursor(null);
         assertThat(results).isNull();
     }
 
     @Test
     public void testParseCursor_NotNull() {
-        List<SearchResult> results = mLoader.parseCursorForSearch(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
         assertThat(results).isNotNull();
     }
 
     @Test
     public void testParseCursor_MatchesRank() {
-        List<SearchResult> results = mLoader.parseCursorForSearch(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
         for (int i = 0; i < EXAMPLES; i++) {
             assertThat(results.get(i).rank).isEqualTo(i);
         }
@@ -91,7 +90,7 @@ public class DatabaseResultLoaderTest {
 
     @Test
     public void testParseCursor_MatchesTitle() {
-        List<SearchResult> results = mLoader.parseCursorForSearch(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
         for (int i = 0; i < EXAMPLES; i++) {
             assertThat(results.get(i).title).isEqualTo(TITLES[i]);
         }
@@ -99,7 +98,7 @@ public class DatabaseResultLoaderTest {
 
     @Test
     public void testParseCursor_MatchesSummary() {
-        List<SearchResult> results = mLoader.parseCursorForSearch(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
         for (int i = 0; i < EXAMPLES; i++) {
             assertThat(results.get(i).summary).isEqualTo(SUMMARY);
         }
@@ -107,7 +106,7 @@ public class DatabaseResultLoaderTest {
 
     @Test
     public void testParseCursor_MatchesIcon() {
-        List<SearchResult> results = mLoader.parseCursorForSearch(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
         for (int i = 0; i < EXAMPLES; i++) {
             Drawable resultDrawable = results.get(i).icon;
             assertThat(resultDrawable.toString()).isEqualTo(mDrawable.toString());
@@ -116,7 +115,7 @@ public class DatabaseResultLoaderTest {
 
     @Test
     public void testParseCursor_NoIcon() {
-        List<SearchResult> results = mLoader.parseCursorForSearch(
+        List<SearchResult> results = mConverter.convertCursor(
                 getDummyCursor(false /* hasIcon */));
         for (int i = 0; i < EXAMPLES; i++) {
             Drawable resultDrawable = results.get(i).icon;
@@ -126,7 +125,7 @@ public class DatabaseResultLoaderTest {
 
     @Test
     public void testParseCursor_MatchesPayloadType() {
-        List<SearchResult> results = mLoader.parseCursorForSearch(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
         ResultPayload payload;
         for (int i = 0; i < EXAMPLES; i++) {
             payload = results.get(i).payload;
@@ -153,9 +152,10 @@ public class DatabaseResultLoaderTest {
                 BLANK,   // target class
                 BLANK,   // enabled
                 BLANK,   // key
-                BLANK    // user id
+                0,       // Payload Type
+                null     // Payload
         });
-        List<SearchResult> results = mLoader.parseCursorForSearch(cursor);
+        List<SearchResult> results = mConverter.convertCursor(cursor);
         IntentPayload payload = (IntentPayload) results.get(0).payload;
         Intent intent = payload.intent;
         assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
@@ -163,13 +163,53 @@ public class DatabaseResultLoaderTest {
 
     @Test
     public void testParseCursor_MatchesIntentPayload() {
-        List<SearchResult> results = mLoader.parseCursorForSearch(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
         IntentPayload payload;
         for (int i = 0; i < EXAMPLES; i++) {
             payload = (IntentPayload) results.get(i).payload;
             Intent intent = payload.intent;
             assertThat(intent.getAction()).isEqualTo(mIntent.getAction());
         }
+    }
+
+    @Test
+    public void testParseCursor_MatchesInlineSwitchPayload() {
+        MatrixCursor cursor = new MatrixCursor(COLUMNS);
+        final String BLANK = "";
+        final String uri = "test.com";
+        final int type = ResultPayload.PayloadType.INLINE_SWITCH;
+        final int source = ResultPayload.SettingsSource.SECURE;
+        final ArrayMap<Integer, Boolean> map = new ArrayMap<>();
+        map.put(1, true);
+        map.put(0, false);
+        final InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, map);
+
+        cursor.addRow(new Object[]{
+                0,       // rank
+                TITLES[0],
+                SUMMARY,
+                SUMMARY, // summary off
+                BLANK,   // entries
+                BLANK,   // Keywords
+                GestureSettings.class.getName(),
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                BLANK,   // enabled
+                BLANK,   // key
+                type,    // Payload Type
+                ResultPayloadUtils.marshall(payload) // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(cursor);
+        InlineSwitchPayload newPayload = (InlineSwitchPayload) results.get(0).payload;
+
+        assertThat(newPayload.settingsUri).isEqualTo(uri);
+        assertThat(newPayload.inlineType).isEqualTo(type);
+        assertThat(newPayload.settingSource).isEqualTo(source);
+        assertThat(newPayload.valueMap.get(1)).isTrue();
+        assertThat(newPayload.valueMap.get(0)).isFalse();
     }
 
     private MatrixCursor getDummyCursor() {
@@ -196,7 +236,10 @@ public class DatabaseResultLoaderTest {
             item.add(BLANK); // target class
             item.add(BLANK); // enabled
             item.add(BLANK); // key
-            item.add(BLANK); // user id
+                             // Note there is no user id. This is omitted because it is not being
+                             // queried. Should the queries change, so should this method.
+            item.add(Integer.toString(0));     // Payload Type
+            item.add(null); // Payload
 
             cursor.addRow(item);
         }
