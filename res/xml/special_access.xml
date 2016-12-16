@@ -92,4 +92,15 @@
             android:name="classname"
             android:value="com.android.settings.Settings$UsageAccessSettingsActivity" />
     </Preference>
+
+    <Preference
+        android:key="manage_external_sources"
+        android:title="@string/install_other_apps"
+        android:fragment="com.android.settings.applications.ManageApplications"
+        settings:keywords="@string/keywords_install_other_apps">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$ManageExternalSourcesActivity" />
+    </Preference>
+
 </PreferenceScreen>
