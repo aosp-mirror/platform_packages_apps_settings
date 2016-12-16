@@ -16,8 +16,12 @@
 
 package com.android.settings.notification;
 
+import android.annotation.UserIdInt;
 import android.content.Context;
 import android.media.AudioSystem;
+import android.os.UserHandle;
+import android.os.UserManager;
+import com.android.settings.Utils;
 
 /**
  * Helper class to wrap API for testing
@@ -34,4 +38,11 @@ public class AudioHelper {
         return AudioSystem.isSingleVolume(mContext);
     }
 
+    public int getManagedProfileId(UserManager um) {
+        return Utils.getManagedProfileId(um, UserHandle.myUserId());
+    }
+
+    public Context createPackageContextAsUser(@UserIdInt int profileId) {
+        return Utils.createPackageContextAsUser(mContext, profileId);
+    }
 }
