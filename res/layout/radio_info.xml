@@ -302,5 +302,23 @@
                       android:textSize="12sp" />
         </LinearLayout>
 
+        <!-- Carrier Provisioning -->
+        <LinearLayout style="@style/entry_layout">
+            <Button android:id="@+id/carrier_provisioning"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/carrier_provisioning"
+            />
+            <Button android:id="@+id/trigger_carrier_provisioning"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trigger_carrier_provisioning"
+            />
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

@@ -6,6 +6,9 @@
 
     <original-package android:name="com.android.settings" />
 
+    <protected-broadcast android:name="com.android.settings.CARRIER_PROVISIONING" />
+    <protected-broadcast android:name="com.android.settings.TRIGGER_CARRIER_PROVISIONING" />
+
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

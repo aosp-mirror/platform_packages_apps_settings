@@ -195,6 +195,8 @@ public class RadioInfo extends Activity {
     private Button updateSmscButton;
     private Button refreshSmscButton;
     private Button oemInfoButton;
+    private Button carrierProvisioningButton;
+    private Button triggercarrierProvisioningButton;
     private Switch imsVolteProvisionedSwitch;
     private Switch imsVtProvisionedSwitch;
     private Switch imsWfcProvisionedSwitch;
@@ -414,6 +416,11 @@ public class RadioInfo extends Activity {
         refreshSmscButton.setOnClickListener(mRefreshSmscButtonHandler);
         dnsCheckToggleButton = (Button) findViewById(R.id.dns_check_toggle);
         dnsCheckToggleButton.setOnClickListener(mDnsCheckButtonHandler);
+        carrierProvisioningButton = (Button) findViewById(R.id.carrier_provisioning);
+        carrierProvisioningButton.setOnClickListener(mCarrierProvisioningButtonHandler);
+        triggercarrierProvisioningButton = (Button) findViewById(R.id.trigger_carrier_provisioning);
+        triggercarrierProvisioningButton.setOnClickListener(
+                mTriggerCarrierProvisioningButtonHandler);
 
         oemInfoButton = (Button) findViewById(R.id.oem_info);
         oemInfoButton.setOnClickListener(mOemInfoButtonHandler);
@@ -1292,6 +1299,22 @@ public class RadioInfo extends Activity {
     OnClickListener mRefreshSmscButtonHandler = new OnClickListener() {
         public void onClick(View v) {
             refreshSmsc();
+        }
+    };
+
+    OnClickListener mCarrierProvisioningButtonHandler = new OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent("com.android.settings.CARRIER_PROVISIONING");
+            getApplicationContext().sendBroadcast(
+                    intent, android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE);
+        }
+    };
+
+    OnClickListener mTriggerCarrierProvisioningButtonHandler = new OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent("com.android.settings.TRIGGER_CARRIER_PROVISIONING");
+            getApplicationContext().sendBroadcast(
+                    intent, android.Manifest.permission.MODIFY_PHONE_STATE);
         }
     };
 
