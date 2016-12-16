@@ -1088,10 +1088,6 @@ public class InstalledAppDetails extends AppInfoBase
         return NetworkTemplate.buildTemplateEthernet();
     }
 
-    public static CharSequence getNotificationSummary(AppEntry appEntry, Context context) {
-        return getNotificationSummary(appEntry, context, new NotificationBackend());
-    }
-
     public static CharSequence getNotificationSummary(AppEntry appEntry, Context context,
             NotificationBackend backend) {
         AppRow appRow = backend.loadAppRow(context, context.getPackageManager(), appEntry.info);
@@ -1099,43 +1095,8 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     public static CharSequence getNotificationSummary(AppRow appRow, Context context) {
-        boolean showSlider = Settings.Secure.getInt(
-                context.getContentResolver(), NOTIFICATION_TUNER_SETTING, 0) == 1;
-        List<String> summaryAttributes = new ArrayList<>();
-        StringBuffer summary = new StringBuffer();
-        if (showSlider) {
-            if (appRow.appImportance != NotificationManager.IMPORTANCE_UNSPECIFIED) {
-                summaryAttributes.add(context.getString(
-                        R.string.notification_summary_level, appRow.appImportance));
-            }
-        } else {
-            if (appRow.banned) {
-                summaryAttributes.add(context.getString(R.string.notifications_disabled));
-            } else if (appRow.appImportance > NotificationManager.IMPORTANCE_NONE
-                    && appRow.appImportance < NotificationManager.IMPORTANCE_DEFAULT) {
-                summaryAttributes.add(context.getString(R.string.notifications_silenced));
-            }
-        }
-        final boolean lockscreenSecure = new LockPatternUtils(context).isSecure(
-                UserHandle.myUserId());
-        if (lockscreenSecure) {
-            if (appRow.appVisOverride == Notification.VISIBILITY_PRIVATE) {
-                summaryAttributes.add(context.getString(R.string.notifications_redacted));
-            } else if (appRow.appVisOverride == Notification.VISIBILITY_SECRET) {
-                summaryAttributes.add(context.getString(R.string.notifications_hidden));
-            }
-        }
-        if (appRow.appBypassDnd) {
-            summaryAttributes.add(context.getString(R.string.notifications_priority));
-        }
-        final int N = summaryAttributes.size();
-        for (int i = 0; i < N; i++) {
-            if (i > 0) {
-                summary.append(context.getString(R.string.notifications_summary_divider));
-            }
-            summary.append(summaryAttributes.get(i));
-        }
-        return summary.toString();
+        // TODO: implement summary when it is known what it should say
+        return "";
     }
 
     @Override

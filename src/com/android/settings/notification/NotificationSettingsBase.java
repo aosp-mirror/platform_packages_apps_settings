@@ -51,15 +51,10 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 abstract public class NotificationSettingsBase extends SettingsPreferenceFragment {
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    private static final String TUNER_SETTING = "show_importance_slider";
 
     protected static final String ARG_CHANNEL = "channel";
 
-    protected static final String KEY_BYPASS_DND = "bypass_dnd";
-    protected static final String KEY_VISIBILITY_OVERRIDE = "visibility_override";
-    protected static final String KEY_IMPORTANCE = "importance";
     protected static final String KEY_BLOCK = "block";
-    protected static final String KEY_SILENT = "silent";
 
     protected PackageManager mPm;
     protected UserManager mUm;
@@ -70,13 +65,10 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected int mUserId;
     protected String mPkg;
     protected PackageInfo mPkgInfo;
-    protected ImportanceSeekBarPreference mImportance;
-    protected RestrictedSwitchPreference mPriority;
-    protected RestrictedDropDownPreference mVisibilityOverride;
     protected RestrictedSwitchPreference mBlock;
-    protected RestrictedSwitchPreference mSilent;
+    protected RestrictedSwitchPreference mShow;
+    protected RestrictedSwitchPreference mBadge;
     protected EnforcedAdmin mSuspendedAppsAdmin;
-    protected boolean mShowSlider = false;
     protected boolean mDndVisualEffectsSuppressed;
 
     protected NotificationChannel mChannel;
@@ -138,7 +130,6 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
 
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
-        mShowSlider = Settings.Secure.getInt(getContentResolver(), TUNER_SETTING, 0) == 1;
         NotificationManager.Policy policy =
                 NotificationManager.from(mContext).getNotificationPolicy();
         mDndVisualEffectsSuppressed = policy == null ? false : policy.suppressedVisualEffects != 0;
@@ -154,237 +145,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
-        if (mImportance != null) {
-            mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-        if (mPriority != null) {
-            mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-        if (mBlock != null) {
-            mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-        if (mSilent != null) {
-            mSilent.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-        if (mVisibilityOverride != null) {
-            mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-    }
-
-    protected void setupImportancePrefs(boolean notBlockable, int importance, boolean banned,
-            int maxImportance) {
-        if (mShowSlider) {
-            setVisible(mBlock, false);
-            setVisible(mSilent, false);
-            mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
-            mImportance.setMinimumProgress(
-                    notBlockable ? NotificationManager.IMPORTANCE_MIN
-                            : NotificationManager.IMPORTANCE_NONE);
-            mImportance.setMax(maxImportance);
-            mImportance.setProgress(Math.min(importance, maxImportance));
-            mImportance.setAutoOn(importance == NotificationManager.IMPORTANCE_UNSPECIFIED);
-            mImportance.setCallback(new ImportanceSeekBarPreference.Callback() {
-                @Override
-                public void onImportanceChanged(int progress, boolean fromUser) {
-                    if (fromUser) {
-                        if (mChannel != null) {
-                            mChannel.setImportance(progress);
-                            mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
-                            mBackend.updateChannel(mPkg, mUid, mChannel);
-                        } else {
-                            mBackend.setImportance(mPkg, mUid, progress);
-                        }
-                    }
-                    updateDependents(progress);
-                }
-            });
-        } else {
-            setVisible(mImportance, false);
-            if (notBlockable) {
-                setVisible(mBlock, false);
-            } else {
-                mBlock.setChecked(banned);
-                mBlock.setOnPreferenceChangeListener(
-                        new Preference.OnPreferenceChangeListener() {
-                            @Override
-                            public boolean onPreferenceChange(Preference preference,
-                                    Object newValue) {
-                                final boolean blocked = (Boolean) newValue;
-                                final int importance = blocked
-                                        ? NotificationManager.IMPORTANCE_NONE
-                                        : NotificationManager.IMPORTANCE_UNSPECIFIED;
-                                if (mChannel != null) {
-                                    mChannel.setImportance(importance);
-                                    mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
-                                    mBackend.updateChannel(mPkg, mUid, mChannel);
-                                } else {
-                                    mBackend.setImportance(mPkgInfo.packageName, mUid,
-                                            importance);
-                                }
-                                updateDependents(importance);
-                                return true;
-                            }
-                        });
-            }
-            // app silenced; cannot un-silence a channel
-            if (maxImportance == NotificationManager.IMPORTANCE_LOW) {
-                setVisible(mSilent, false);
-                updateDependents(banned ? NotificationManager.IMPORTANCE_NONE
-                        : NotificationManager.IMPORTANCE_LOW);
-            } else {
-                mSilent.setChecked(importance == NotificationManager.IMPORTANCE_LOW);
-                mSilent.setOnPreferenceChangeListener(
-                        new Preference.OnPreferenceChangeListener() {
-                            @Override
-                            public boolean onPreferenceChange(Preference preference,
-                                    Object newValue) {
-                                final boolean silenced = (Boolean) newValue;
-                                final int importance = silenced
-                                        ? NotificationManager.IMPORTANCE_LOW
-                                        : NotificationManager.IMPORTANCE_UNSPECIFIED;
-                                if (mChannel != null) {
-                                    mChannel.setImportance(importance);
-                                    mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
-                                    mBackend.updateChannel(mPkg, mUid, mChannel);
-                                } else {
-                                    mBackend.setImportance(mPkgInfo.packageName, mUid,
-                                            importance);
-                                }
-                                updateDependents(importance);
-                                return true;
-                            }
-                        });
-                updateDependents(banned ? NotificationManager.IMPORTANCE_NONE : importance);
-            }
-        }
-    }
-
-    protected void setupPriorityPref(boolean priority) {
-        mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mPriority.setChecked(priority);
-        mPriority.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean bypassZenMode = (Boolean) newValue;
-                if (mChannel != null) {
-                    mChannel.setBypassDnd(bypassZenMode);
-                    mChannel.lockFields(NotificationChannel.USER_LOCKED_PRIORITY);
-                    mBackend.updateChannel(mPkg, mUid, mChannel);
-                    return true;
-                } else {
-                    return mBackend.setBypassZenMode(mPkgInfo.packageName, mUid, bypassZenMode);
-                }
-            }
-        });
-    }
-
-    protected void setupVisOverridePref(int sensitive) {
-        ArrayList<CharSequence> entries = new ArrayList<>();
-        ArrayList<CharSequence> values = new ArrayList<>();
-
-        mVisibilityOverride.clearRestrictedItems();
-        if (getLockscreenNotificationsEnabled() && getLockscreenAllowPrivateNotifications()) {
-            final String summaryShowEntry =
-                    getString(R.string.lock_screen_notifications_summary_show);
-            final String summaryShowEntryValue =
-                    Integer.toString(NotificationManager.VISIBILITY_NO_OVERRIDE);
-            entries.add(summaryShowEntry);
-            values.add(summaryShowEntryValue);
-            setRestrictedIfNotificationFeaturesDisabled(summaryShowEntry, summaryShowEntryValue,
-                    DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS
-                            | DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
-        }
-
-        final String summaryHideEntry = getString(R.string.lock_screen_notifications_summary_hide);
-        final String summaryHideEntryValue = Integer.toString(Notification.VISIBILITY_PRIVATE);
-        entries.add(summaryHideEntry);
-        values.add(summaryHideEntryValue);
-        setRestrictedIfNotificationFeaturesDisabled(summaryHideEntry, summaryHideEntryValue,
-                DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
-        entries.add(getString(R.string.lock_screen_notifications_summary_disable));
-        values.add(Integer.toString(Notification.VISIBILITY_SECRET));
-        mVisibilityOverride.setEntries(entries.toArray(new CharSequence[entries.size()]));
-        mVisibilityOverride.setEntryValues(values.toArray(new CharSequence[values.size()]));
-
-        if (sensitive == Ranking.VISIBILITY_NO_OVERRIDE) {
-            mVisibilityOverride.setValue(Integer.toString(getGlobalVisibility()));
-        } else {
-            mVisibilityOverride.setValue(Integer.toString(sensitive));
-        }
-        mVisibilityOverride.setSummary("%s");
-
-        mVisibilityOverride.setOnPreferenceChangeListener(
-                new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                int sensitive = Integer.parseInt((String) newValue);
-                if (sensitive == getGlobalVisibility()) {
-                    sensitive = Ranking.VISIBILITY_NO_OVERRIDE;
-                }
-                if (mChannel != null) {
-                    mChannel.setLockscreenVisibility(sensitive);
-                    mChannel.lockFields(NotificationChannel.USER_LOCKED_VISIBILITY);
-                    mBackend.updateChannel(mPkg, mUid, mChannel);
-                } else {
-                    mBackend.setVisibilityOverride(mPkgInfo.packageName, mUid, sensitive);
-                }
-                return true;
-            }
-        });
-    }
-
-    private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,
-            CharSequence entryValue, int keyguardNotificationFeatures) {
-        EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
-                mContext, keyguardNotificationFeatures, mUserId);
-        if (admin != null) {
-            RestrictedItem item = new RestrictedItem(entry, entryValue, admin);
-            mVisibilityOverride.addRestrictedItem(item);
-        }
-    }
-
-    private int getGlobalVisibility() {
-        int globalVis = Ranking.VISIBILITY_NO_OVERRIDE;
-        if (!getLockscreenNotificationsEnabled()) {
-            globalVis = Notification.VISIBILITY_SECRET;
-        } else if (!getLockscreenAllowPrivateNotifications()) {
-            globalVis = Notification.VISIBILITY_PRIVATE;
-        }
-        return globalVis;
-    }
-
-    private boolean getLockscreenNotificationsEnabled() {
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
-    }
-
-    private boolean getLockscreenAllowPrivateNotifications() {
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
-    }
-
-    private boolean isLockScreenSecure() {
-        LockPatternUtils utils = new LockPatternUtils(getActivity());
-        boolean lockscreenSecure = utils.isSecure(UserHandle.myUserId());
-        UserInfo parentUser = mUm.getProfileParent(UserHandle.myUserId());
-        if (parentUser != null){
-            lockscreenSecure |= utils.isSecure(parentUser.id);
-        }
-
-        return lockscreenSecure;
-    }
-
-    protected void updateDependents(int importance) {
-        if (getPreferenceScreen().findPreference(mBlock.getKey()) != null) {
-            setVisible(mSilent, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN, importance));
-            mSilent.setChecked(importance == NotificationManager.IMPORTANCE_LOW);
-        }
-        setVisible(mPriority, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT, importance)
-                || (checkCanBeVisible(NotificationManager.IMPORTANCE_LOW, importance)
-                && mDndVisualEffectsSuppressed));
-        setVisible(mVisibilityOverride,
-                checkCanBeVisible(NotificationManager.IMPORTANCE_MIN, importance)
-                        && isLockScreenSecure());
+        mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
     }
 
     protected void setVisible(Preference p, boolean visible) {
@@ -395,13 +156,6 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         } else {
             getPreferenceScreen().removePreference(p);
         }
-    }
-
-    protected boolean checkCanBeVisible(int minImportanceVisible, int importance) {
-        if (importance == NotificationManager.IMPORTANCE_UNSPECIFIED) {
-            return true;
-        }
-        return importance >= minImportanceVisible;
     }
 
     protected void toastAndFinish() {

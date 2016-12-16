@@ -6220,25 +6220,19 @@
     <string name="notification_importance_none">Not set</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: blocked importance level description -->
-    <string name="notification_importance_blocked">Never show notifications from this app</string>
+    <string name="notification_importance_blocked">Never show notifications</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: min importance level description -->
-    <string name="notification_importance_min">No full screen interruption, peeking, sound, or vibration. Show at the bottom of the notification list. Hide from lock screen and status bar.</string>
+    <string name="notification_importance_min">No sound or visual interruption</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: low importance level description -->
-    <string name="notification_importance_low">No full screen interruption, peeking, sound, or vibration.</string>
+    <string name="notification_importance_low">Show silently</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: normal importance level description -->
-    <string name="notification_importance_default">No full screen interruption or peeking.</string>
+    <string name="notification_importance_default">Make sound</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: high importance level description -->
-    <string name="notification_importance_high">Always peek. No full screen interruption.</string>
-
-    <!-- [CHAR LIMIT=100] Notification Importance slider: max importance level description -->
-    <string name="notification_importance_max">Always peek, and allow full screen interruption. Show at the top of the notification list.</string>
-
-    <!-- [CHAR LIMIT=100] Notification Importance slider: max importance level description -->
-    <string name="notification_importance_unspecified">App determines importance for each notification</string>
+    <string name="notification_importance_high">Make sound and pop on screen</string>
 
     <!-- [CHAR LIMIT=60] Notification importance reset button -->
     <string name="importance_reset">Reset</string>
@@ -6329,13 +6323,19 @@
     <string name="app_notification_block_title">Block all</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Block option description-->
-    <string name="app_notification_block_summary">Never show notifications from this app</string>
+    <string name="app_notification_block_summary">Never show these notifications</string>
 
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Block option title -->
-    <string name="channel_notification_block_title">Block all</string>
+    <string name="notification_content_block_title">Show notifications</string>
 
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Block option description-->
-    <string name="channel_notification_block_summary">Never show notifications from this channel</string>
+    <string name="notification_content_block_summary">Never show notifications in the shade or on peripheral devices</string>
+
+    <!-- [CHAR LIMIT=NONE] Channel notification settings: Badging option title -->
+    <string name="notification_badge_title">Show badge</string>
+
+    <!-- [CHAR LIMIT=NONE] Channel notification settings: Badge option description-->
+    <string name="notification_badge_summary">Show notifications as badges on the Home app, if supported.</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Override DND option title -->
     <string name="app_notification_override_dnd_title">Override Do Not Disturb</string>
@@ -6346,7 +6346,7 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: Visibility override option title -->
     <string name="app_notification_visibility_override_title">On the lock screen</string>
 
-    <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when banned -->
+    <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when allowed -->
     <string name="app_notification_row_banned">Blocked</string>
 
     <!-- [CHAR LIMIT=40] Notification settings: App notifications row summary when high priority -->
@@ -6788,14 +6788,6 @@
     <string name="filter_notif_blocked_apps">Blocked</string>
     <!-- Label for showing apps with domain URLs (data URI with http or https) in list [CHAR LIMIT=30] -->
     <string name="filter_with_domain_urls_apps">With domain URLs</string>
-    <!-- Label for showing apps with priority notifications in list [CHAR LIMIT=50] -->
-    <string name="filter_notif_priority_apps">Overrides Do Not Disturb</string>
-    <!-- Label for showing apps redacting sensitive notifications in list [CHAR LIMIT=50] -->
-    <string name="filter_notif_sensitive_apps">No sensitive content on lock screen</string>
-    <!-- Label for showing apps hiding notifications from lockscreen [CHAR LIMIT=50] -->
-    <string name="filter_notif_hide_notifications_apps">Never shown on lock screen</string>
-    <!-- Filter label for apps that the user has silenced [CHAR LIMIT=40] -->
-    <string name="filter_notif_silent">Shown silently</string>
 
     <!-- Title for advanced application management settings [CHAR LIMIT=30] -->
     <string name="advanced_apps">Advanced</string>

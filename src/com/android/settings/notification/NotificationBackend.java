@@ -16,7 +16,6 @@
 package com.android.settings.notification;
 
 import android.app.INotificationManager;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -27,11 +26,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
-import android.os.UserHandle;
-import android.service.notification.NotificationListenerService;
 import android.util.Log;
 
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.Utils;
 
 public class NotificationBackend {
@@ -52,11 +48,6 @@ public class NotificationBackend {
         }
         row.icon = app.loadIcon(pm);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
-        row.appImportance = getImportance(row.pkg, row.uid);
-        row.appBypassDnd = getBypassZenMode(row.pkg, row.uid);
-        row.appVisOverride = getVisibilityOverride(row.pkg, row.uid);
-        row.lockScreenSecure = new LockPatternUtils(context).isSecure(
-                UserHandle.myUserId());
         return row;
     }
 
@@ -86,61 +77,13 @@ public class NotificationBackend {
         }
     }
 
-    public boolean getBypassZenMode(String pkg, int uid) {
+    public boolean setNotificationsEnabledForPackage(String pkg, int uid, boolean enabled) {
         try {
-            return sINM.getPriority(pkg, uid) == Notification.PRIORITY_MAX;
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return false;
-        }
-    }
-
-    public boolean setBypassZenMode(String pkg, int uid, boolean bypassZen) {
-        try {
-            sINM.setPriority(pkg, uid,
-                    bypassZen ? Notification.PRIORITY_MAX : Notification.PRIORITY_DEFAULT);
+            sINM.setNotificationsEnabledForPackage(pkg, uid, enabled);
             return true;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
-        }
-    }
-
-    public int getVisibilityOverride(String pkg, int uid) {
-        try {
-            return sINM.getVisibilityOverride(pkg, uid);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE;
-        }
-    }
-
-    public boolean setVisibilityOverride(String pkg, int uid, int override) {
-        try {
-            sINM.setVisibilityOverride(pkg, uid, override);
-            return true;
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return false;
-        }
-    }
-
-    public boolean setImportance(String pkg, int uid, int importance) {
-        try {
-            sINM.setImportance(pkg, uid, importance);
-            return true;
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return false;
-        }
-    }
-
-    public int getImportance(String pkg, int uid) {
-        try {
-            return sINM.getImportance(pkg, uid);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return NotificationManager.IMPORTANCE_UNSPECIFIED;
         }
     }
 
@@ -186,10 +129,6 @@ public class NotificationBackend {
         public boolean banned;
         public boolean first;  // first app in section
         public boolean systemApp;
-        public int appImportance;
-        public boolean appBypassDnd;
-        public int appVisOverride;
-        public boolean lockScreenSecure;
     }
 
     public static class ChannelRow extends AppRow {
