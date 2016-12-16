@@ -70,7 +70,7 @@ public abstract class FeatureFactory {
 
     public abstract MetricsFeatureProvider getMetricsFeatureProvider();
 
-    public abstract PowerUsageFeatureProvider getPowerUsageFeatureProvider();
+    public abstract PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context);
 
     public abstract DashboardFeatureProvider getDashboardFeatureProvider(Context context);
 

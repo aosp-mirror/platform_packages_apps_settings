@@ -91,7 +91,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public PowerUsageFeatureProvider getPowerUsageFeatureProvider() {
+    public PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context) {
         return powerUsageFeatureProvider;
     }
 

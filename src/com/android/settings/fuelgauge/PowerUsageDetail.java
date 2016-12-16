@@ -350,8 +350,10 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mPm = getActivity().getPackageManager();
-        mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
+
+        Activity activity = getActivity();
+        mPm = activity.getPackageManager();
+        mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         addPreferencesFromResource(R.xml.power_usage_details);
         mDetailsParent = (PreferenceCategory) findPreference(KEY_DETAILS_PARENT);
@@ -360,7 +362,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         mPackagesParent = (PreferenceCategory) findPreference(KEY_PACKAGES_PARENT);
 
         mPowerUsageFeatureProvider =
-                FeatureFactory.getFactory(getActivity()).getPowerUsageFeatureProvider();
+                FeatureFactory.getFactory(activity).getPowerUsageFeatureProvider(activity);
 
         createDetails();
     }
