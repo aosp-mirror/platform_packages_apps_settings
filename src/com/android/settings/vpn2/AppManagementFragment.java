@@ -33,7 +33,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
@@ -63,6 +62,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
     private static final String KEY_VERSION = "version";
     private static final String KEY_ALWAYS_ON_VPN = "always_on_vpn";
+    private static final String KEY_LOCKDOWN_VPN = "lockdown_vpn";
     private static final String KEY_FORGET_VPN = "forget_vpn";
 
     private PackageManager mPackageManager;
@@ -78,6 +78,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     // UI preference
     private Preference mPreferenceVersion;
     private RestrictedSwitchPreference mPreferenceAlwaysOn;
+    private RestrictedSwitchPreference mPreferenceLockdown;
     private RestrictedPreference mPreferenceForget;
 
     // Listener
@@ -87,7 +88,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         public void onForget() {
             // Unset always-on-vpn when forgetting the VPN
             if (isVpnAlwaysOn()) {
-                setAlwaysOnVpn(false);
+                setAlwaysOnVpn(false, false);
             }
             // Also dismiss and go back to VPN list
             finish();
@@ -118,9 +119,11 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
         mPreferenceVersion = findPreference(KEY_VERSION);
         mPreferenceAlwaysOn = (RestrictedSwitchPreference) findPreference(KEY_ALWAYS_ON_VPN);
+        mPreferenceLockdown = (RestrictedSwitchPreference) findPreference(KEY_LOCKDOWN_VPN);
         mPreferenceForget = (RestrictedPreference) findPreference(KEY_FORGET_VPN);
 
         mPreferenceAlwaysOn.setOnPreferenceChangeListener(this);
+        mPreferenceLockdown.setOnPreferenceChangeListener(this);
         mPreferenceForget.setOnPreferenceClickListener(this);
     }
 
@@ -154,7 +157,9 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         switch (preference.getKey()) {
             case KEY_ALWAYS_ON_VPN:
-                return onAlwaysOnVpnClick((Boolean) newValue);
+                return onAlwaysOnVpnClick((Boolean) newValue, mPreferenceLockdown.isChecked());
+            case KEY_LOCKDOWN_VPN:
+                return onAlwaysOnVpnClick(mPreferenceAlwaysOn.isChecked(), (Boolean) newValue);
             default:
                 Log.w(TAG, "unknown key is clicked: " + preference.getKey());
                 return false;
@@ -176,27 +181,28 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         return true;
     }
 
-    private boolean onAlwaysOnVpnClick(final boolean alwaysOnSetting) {
+    private boolean onAlwaysOnVpnClick(final boolean alwaysOnSetting, final boolean lockdown) {
         final boolean replacing = isAnotherVpnActive();
-        final boolean wasAlwaysOn = VpnUtils.isAlwaysOnOrLegacyLockdownActive(getActivity());
-        if (ConfirmLockdownFragment.shouldShow(replacing, wasAlwaysOn, alwaysOnSetting)) {
+        final boolean wasLockdown = VpnUtils.isAnyLockdownActive(getActivity());
+        if (ConfirmLockdownFragment.shouldShow(replacing, wasLockdown, lockdown)) {
             // Place a dialog to confirm that traffic should be locked down.
             final Bundle options = null;
-            ConfirmLockdownFragment.show(this, replacing, wasAlwaysOn, alwaysOnSetting, options);
+            ConfirmLockdownFragment.show(
+                    this, replacing, alwaysOnSetting, wasLockdown, lockdown, options);
             return false;
         }
         // No need to show the dialog. Change the setting straight away.
-        return setAlwaysOnVpnByUI(alwaysOnSetting);
+        return setAlwaysOnVpnByUI(alwaysOnSetting, lockdown);
     }
 
     @Override
-    public void onConfirmLockdown(Bundle options, boolean isEnabled) {
-        if (setAlwaysOnVpnByUI(isEnabled)) {
+    public void onConfirmLockdown(Bundle options, boolean isEnabled, boolean isLockdown) {
+        if (setAlwaysOnVpnByUI(isEnabled, isLockdown)) {
             updateUI();
         }
     }
 
-    private boolean setAlwaysOnVpnByUI(boolean isEnabled) {
+    private boolean setAlwaysOnVpnByUI(boolean isEnabled, boolean isLockdown) {
         updateRestrictedViews();
         if (!mPreferenceAlwaysOn.isEnabled()) {
             return false;
@@ -205,16 +211,16 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         if (mUserId == UserHandle.USER_SYSTEM) {
             VpnUtils.clearLockdownVpn(getContext());
         }
-        final boolean success = setAlwaysOnVpn(isEnabled);
+        final boolean success = setAlwaysOnVpn(isEnabled, isLockdown);
         if (isEnabled && (!success || !isVpnAlwaysOn())) {
             CannotConnectFragment.show(this, mVpnLabel);
         }
         return success;
     }
 
-    private boolean setAlwaysOnVpn(boolean isEnabled) {
-         return mConnectivityManager.setAlwaysOnVpnPackageForUser(mUserId,
-                isEnabled ? mPackageName : null, /* lockdownEnabled */ true);
+    private boolean setAlwaysOnVpn(boolean isEnabled, boolean isLockdown) {
+        return mConnectivityManager.setAlwaysOnVpnPackageForUser(mUserId,
+                isEnabled ? mPackageName : null, isLockdown);
     }
 
     @VisibleForTesting
@@ -232,7 +238,12 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
     private void updateUI() {
         if (isAdded()) {
-            mPreferenceAlwaysOn.setChecked(isVpnAlwaysOn());
+            final boolean alwaysOn = isVpnAlwaysOn();
+            final boolean lockdown = alwaysOn
+                    && VpnUtils.isAnyLockdownActive(getActivity());
+
+            mPreferenceAlwaysOn.setChecked(alwaysOn);
+            mPreferenceLockdown.setChecked(lockdown);
             updateRestrictedViews();
         }
     }
@@ -240,6 +251,8 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     private void updateRestrictedViews() {
         if (isAdded()) {
             mPreferenceAlwaysOn.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN,
+                    mUserId);
+            mPreferenceLockdown.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN,
                     mUserId);
             mPreferenceForget.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN,
                     mUserId);
@@ -251,6 +264,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
                 // should have refreshed the enable state.
             } else {
                 mPreferenceAlwaysOn.setEnabled(false);
+                mPreferenceLockdown.setEnabled(false);
                 mPreferenceAlwaysOn.setSummary(R.string.vpn_not_supported_by_this_app);
             }
         }
