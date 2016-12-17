@@ -1,5 +1,6 @@
 package com.android.settings.survey;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
@@ -11,11 +12,15 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +29,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -102,7 +108,7 @@ public class SurveyMixinTest {
     }
 
     @Test
-    public void onPause_removesReceiverWhenInstantiated() {
+    public void onPause_removesReceiverIfPreviouslySet() {
         // Pretend there is a survey in memory
         when(mProvider.getSurveyExpirationDate(any(), any())).thenReturn(-1L);
 
@@ -110,12 +116,16 @@ public class SurveyMixinTest {
         Activity temp = Robolectric.setupActivity(Activity.class);
         when(mFragment.getActivity()).thenReturn(temp);
         when(mProvider.createAndRegisterReceiver(any())).thenReturn(mReceiver);
+        LocalBroadcastManager manager = LocalBroadcastManager.getInstance(temp);
         SurveyMixin mixin = new SurveyMixin(mFragment, FAKE_KEY);
         mixin.onResume();
+        manager.registerReceiver(mReceiver, new IntentFilter());
         mixin.onPause();
 
         // Verify we remove the receiver
-        verify(mProvider, times(1)).unregisterReceiver(any(), any());
+        HashMap<BroadcastReceiver, ArrayList<IntentFilter>> map =
+                ReflectionHelpers.getField(manager, "mReceivers");
+        assertThat(map.containsKey(mReceiver)).isFalse();
     }
 
     @Test
@@ -129,15 +139,15 @@ public class SurveyMixinTest {
         SurveyMixin mixin = new SurveyMixin(mFragment, FAKE_KEY);
         mixin.onPause();
 
-        // Verify we do nothing
-        verify(mProvider, never()).unregisterReceiver(any(), any());
+        // Verify we do nothing;
+        verify(mProvider, never()).showSurveyIfAvailable(any(), any());
 
         // pretend the activity died before onPause
         when(mFragment.getActivity()).thenReturn(null);
         mixin.onPause();
 
         // Verify we do nothing
-        verify(mProvider, never()).unregisterReceiver(any(), any());
+        verify(mProvider, never()).showSurveyIfAvailable(any(), any());
     }
 
 }
