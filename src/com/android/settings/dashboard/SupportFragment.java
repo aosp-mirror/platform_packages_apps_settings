@@ -84,6 +84,7 @@ public final class SupportFragment extends InstrumentedFragment implements View.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         mActivity = getActivity();
         mAccountManager = AccountManager.get(mActivity);
         mSupportFeatureProvider =
