@@ -453,6 +453,7 @@
         <activity android:name="TetherProvisioningActivity"
             android:exported="true"
             android:permission="android.permission.TETHER_PRIVILEGED"
+            android:excludeFromRecents="true"
             android:theme="@style/Theme.ProvisioningActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.TETHER_PROVISIONING_UI" />
