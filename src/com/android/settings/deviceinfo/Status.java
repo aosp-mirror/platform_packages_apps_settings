@@ -46,14 +46,6 @@ import java.lang.ref.WeakReference;
 import static android.content.Context.CONNECTIVITY_SERVICE;
 import static android.content.Context.WIFI_SERVICE;
 
-/**
- * Display the following information
- * # Battery Strength  : TODO
- * # Uptime
- * # Awake Time
- * # XMPP/buzz/tickle status : TODO
- *
- */
 public class Status extends SettingsPreferenceFragment {
 
     private static final String KEY_BATTERY_STATUS = "battery_status";

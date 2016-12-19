@@ -161,13 +161,13 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     @Override
     void addPreferencesForActivity() {
         addPreferencesFromResource(R.xml.bluetooth_settings);
-
-        mPairedDevicesCategory = new PreferenceCategory(getPrefContext());
+        final Context prefContext = getPrefContext();
+        mPairedDevicesCategory = new PreferenceCategory(prefContext);
         mPairedDevicesCategory.setKey(KEY_PAIRED_DEVICES);
         mPairedDevicesCategory.setOrder(1);
         getPreferenceScreen().addPreference(mPairedDevicesCategory);
 
-        mAvailableDevicesCategory = new BluetoothProgressCategory(getActivity());
+        mAvailableDevicesCategory = new BluetoothProgressCategory(prefContext);
         mAvailableDevicesCategory.setSelectable(false);
         mAvailableDevicesCategory.setOrder(2);
         getPreferenceScreen().addPreference(mAvailableDevicesCategory);

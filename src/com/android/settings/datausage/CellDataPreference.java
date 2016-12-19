@@ -25,6 +25,7 @@ import android.os.Looper;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings.Global;
+import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -53,7 +54,9 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
     private SubscriptionManager mSubscriptionManager;
 
     public CellDataPreference(Context context, AttributeSet attrs) {
-        super(context, attrs, android.R.attr.switchPreferenceStyle);
+        super(context, attrs, TypedArrayUtils.getAttr(context,
+                android.support.v7.preference.R.attr.switchPreferenceStyle,
+                android.R.attr.switchPreferenceStyle));
     }
 
     @Override

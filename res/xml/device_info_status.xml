@@ -29,18 +29,18 @@
         android:title="@string/battery_level_title"
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
-    <PreferenceScreen android:key="sim_status"
+    <Preference android:key="sim_status"
         android:title="@string/sim_status_title"
         android:persistent="false">
         <intent android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.Settings$SimStatusActivity" />
-    </PreferenceScreen>
-    <PreferenceScreen android:key="imei_info"
+    </Preference>
+    <Preference android:key="imei_info"
         android:title="@string/imei_information_title"
         android:persistent="false">
         <intent android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.Settings$ImeiInformationActivity" />
-    </PreferenceScreen>
+    </Preference>
     <com.android.settings.CopyablePreference android:key="wifi_ip_address"
         android:enabled="false"
         android:shouldDisableView="false"
