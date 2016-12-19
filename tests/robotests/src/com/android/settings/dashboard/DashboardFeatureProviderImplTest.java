@@ -242,4 +242,9 @@ public class DashboardFeatureProviderImplTest {
                 CategoryKey.CATEGORY_HOMEPAGE).isEmpty())
                 .isFalse();
     }
+
+    @Test
+    public void testGetExtraIntentAction_shouldReturnNull() {
+        assertThat(mImpl.getExtraIntentAction()).isNull();
+    }
 }

@@ -88,5 +88,9 @@ public interface DashboardFeatureProvider {
     ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
             DashboardFragment fragment);
 
+    /**
+     * Returns additional intent filter action for dashboard tiles
+     */
+    String getExtraIntentAction();
 
 }
