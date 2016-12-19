@@ -1447,9 +1447,6 @@
     <!-- Bluetooth settings.  Dock Setting Dialog - Remember setting and don't ask user again -->
     <string name="bluetooth_dock_settings_remember">Remember settings</string>
 
-    <!-- Wifi Assistant title.  [CHAR LIMIT=40] -->
-    <string name="wifi_assistant_title">Wi\u2011Fi Assistant</string>
-
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
     <!-- Wifi Display settings. The title of a menu item to enable wireless display [CHAR LIMIT=40] -->
@@ -1568,12 +1565,12 @@
     <string name="wifi_poor_network_detection_summary">Don\u2019t use a Wi\u2011Fi network unless it has a good Internet connection</string>
     <!-- Checkbox summary for option to toggle poor network detection [CHAR LIMIT=60] -->
     <string name="wifi_avoid_poor_network_detection_summary">Only use networks that have a good Internet connection</string>
-    <!-- Checkbox title for option to connect to open Wi-Fi automatically [CHAR LIMIT=40] -->
-    <string name="wifi_automatically_connect_title">Use open Wi\u2011Fi automatically</string>
-    <!-- Checkbox summary for option to connect to open Wi-Fi automatically  [CHAR LIMIT=100] -->
-    <string name="wifi_automatically_connect_summary">Let a Wi\u2011Fi assistant automatically connect to open networks determined to be high quality</string>
-    <!-- Dialog title for option to select an app which connects to open Wi-Fi automatically [CHAR LIMIT=40] -->
-    <string name="wifi_select_assistant_dialog_title">Choose assistant</string>
+
+    <!-- Network recommendations toggle -->
+    <!--TODO(jjoslin): Provide final strings and mark for translation. BUG: 32913919 -->
+    <string translatable="false" name="networking_allow_recommendations_title">Use network recommendations</string>
+    <string translatable="false" name="networking_allow_recommendations_summary">When enabled, use network recommendations when selecting the Wi\u2011Fi network to connect to</string>
+
     <!-- Preference title for option to install certificates -->
     <string name="wifi_install_credentials">Install certificates</string>
     <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off. The
