@@ -12,7 +12,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     truth-prebuilt
 
 LOCAL_JAVA_LIBRARIES := \
-    junit4-target \
+    junit \
     platform-robolectric-prebuilt \
     sdk_vcurrent
 
