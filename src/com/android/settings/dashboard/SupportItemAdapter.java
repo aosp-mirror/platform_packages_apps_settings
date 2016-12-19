@@ -192,7 +192,7 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
      * Create data for the adapter. If there is already data in the adapter, they will be
      * destroyed and recreated.
      */
-    private void refreshData() {
+    void refreshData() {
         mSupportData.clear();
         addEscalationCards();
         addMoreHelpItems();
@@ -601,7 +601,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     /**
      * Data for a single support item.
      */
-    private static class SupportData {
+    @VisibleForTesting
+    static class SupportData {
 
         final Intent intent;
         final int metricsEvent;
@@ -688,7 +689,8 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
     /**
      * Data model for escalation cards.
      */
-    private static class EscalationData extends SupportData {
+    @VisibleForTesting
+    static class EscalationData extends SupportData {
 
         @StringRes
         final int text1;
@@ -812,5 +814,10 @@ public final class SupportItemAdapter extends RecyclerView.Adapter<SupportItemAd
                 return new OfflineEscalationData(this);
             }
         }
+    }
+
+    @VisibleForTesting
+    List<SupportData> getSupportData() {
+        return mSupportData;
     }
 }

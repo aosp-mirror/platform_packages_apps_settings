@@ -119,6 +119,7 @@ public final class SupportFragment extends InstrumentedFragment implements View.
                         .build(),
                 mNetworkCallback);
         mSupportItemAdapter.setHasInternet(hasInternet());
+        mSupportItemAdapter.refreshData();
     }
 
     @Override
