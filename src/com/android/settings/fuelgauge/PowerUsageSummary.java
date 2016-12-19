@@ -30,6 +30,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -359,10 +360,8 @@ public class PowerUsageSummary extends PowerUsageBase {
                         userHandle);
                 final CharSequence contentDescription = mUm.getBadgedLabelForUser(entry.getLabel(),
                         userHandle);
-                final String key = sipper.drainType == DrainType.APP ? sipper.getPackages() != null
-                        ? TextUtils.concat(sipper.getPackages()).toString()
-                        : String.valueOf(sipper.getUid())
-                        : sipper.drainType.toString();
+
+                final String key = extractKeyFromSipper(sipper);
                 PowerGaugePreference pref = (PowerGaugePreference) getCachedPreference(key);
                 if (pref == null) {
                     pref = new PowerGaugePreference(getPrefContext(), badgedIcon,
@@ -376,9 +375,6 @@ public class PowerUsageSummary extends PowerUsageBase {
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfMax, percentOfTotal);
-                if (sipper.uidObj != null) {
-                    pref.setKey(Integer.toString(sipper.uidObj.getUid()));
-                }
                 if ((sipper.drainType != DrainType.APP || sipper.uidObj.getUid() == 0)
                          && sipper.drainType != DrainType.USER) {
                     pref.setTint(colorControl);
@@ -397,6 +393,20 @@ public class PowerUsageSummary extends PowerUsageBase {
         removeCachedPrefs(mAppListGroup);
 
         BatteryEntry.startRequestQueue();
+    }
+
+    @VisibleForTesting
+    String extractKeyFromSipper(BatterySipper sipper) {
+        if (sipper.uidObj != null) {
+            return Integer.toString(sipper.getUid());
+        } else if (sipper.drainType != DrainType.APP) {
+            return sipper.drainType.toString();
+        } else if (sipper.getPackages() != null) {
+            return TextUtils.concat(sipper.getPackages()).toString();
+        } else {
+            Log.w(TAG, "Inappropriate BatterySipper without uid and package names: " + sipper);
+            return "-1";
+        }
     }
 
     private static List<BatterySipper> getFakeStats() {
