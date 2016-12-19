@@ -22,24 +22,25 @@ import android.util.AttributeSet;
 
 public abstract class ProgressCategoryBase extends PreferenceCategory {
     public ProgressCategoryBase(Context context) {
-        this(context, null);
+        super(context);
     }
 
     public ProgressCategoryBase(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
     }
 
     public ProgressCategoryBase(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
     }
 
     public ProgressCategoryBase(Context context, AttributeSet attrs, int defStyleAttr,
-                                int defStyleRes) {
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     /**
      * Turn on/off the progress indicator and text on the right.
+     *
      * @param progressOn whether or not the progress should be displayed
      */
     public abstract void setProgress(boolean progressOn);

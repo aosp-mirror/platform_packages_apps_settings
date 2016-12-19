@@ -20,18 +20,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingStart="@dimen/preference_no_icon_padding_start"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
-        android:layout_height="48sp"
+        android:layout_height="48dp"
         android:singleLine="true"
         android:ellipsize="marquee"
         android:textAppearance="@android:style/TextAppearance.Material.Body2"
-        android:textColor="?android:attr/colorAccent"
+        android:textColor="?android:attr/textColorPrimary"
         android:textAlignment="viewStart"
         android:gravity="left|center_vertical"
         android:text="@string/running_processes_header_title" />
@@ -44,12 +44,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32sp"
-        android:layout_marginTop="8sp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="16sp"
-            android:layout_height="16sp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_gravity="center"
             android:scaleType="centerInside"
             android:src="@color/running_processes_system_ram"
@@ -90,11 +90,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32sp"
+        android:layout_height="32dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="16sp"
-            android:layout_height="16sp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_gravity="center"
             android:scaleType="centerInside"
             android:src="?android:attr/colorAccent"
@@ -135,11 +135,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32sp"
+        android:layout_height="32dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="16sp"
-            android:layout_height="16sp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_gravity="center"
             android:scaleType="centerInside"
             android:src="@color/running_processes_free_ram"
@@ -182,11 +182,11 @@
         android:id="@+id/listHeader"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="8sp"
+        android:layout_marginTop="8dp"
         android:singleLine="true"
         android:ellipsize="marquee"
         android:textAppearance="@android:style/TextAppearance.Material.Body2"
-        android:textColor="?android:attr/colorAccent"
+        android:textColor="?android:attr/textColorPrimary"
         android:textAlignment="viewStart"
         android:gravity="left|center_vertical"
         android:text="@string/running_processes_header_footer" />

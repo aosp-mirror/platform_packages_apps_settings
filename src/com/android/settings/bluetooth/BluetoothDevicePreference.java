@@ -65,9 +65,9 @@ public final class BluetoothDevicePreference extends Preference implements
 
     /* Talk-back descriptions for various BT icons */
     Resources r = getContext().getResources();
-    public final String COMPUTER =  r.getString(R.string.bluetooth_talkback_computer);
+    public final String COMPUTER = r.getString(R.string.bluetooth_talkback_computer);
     public final String INPUT_PERIPHERAL = r.getString(
-        R.string.bluetooth_talkback_input_peripheral);
+            R.string.bluetooth_talkback_input_peripheral);
     public final String HEADSET = r.getString(R.string.bluetooth_talkback_headset);
     public final String PHONE = r.getString(R.string.bluetooth_talkback_phone);
     public final String IMAGING = r.getString(R.string.bluetooth_talkback_imaging);
@@ -85,11 +85,9 @@ public final class BluetoothDevicePreference extends Preference implements
 
         mCachedDevice = cachedDevice;
 
-        setLayoutResource(R.layout.preference_bt_icon);
-
         if (cachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
             UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-            if (! um.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)) {
+            if (!um.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)) {
                 setWidgetLayoutResource(R.layout.preference_bluetooth);
             }
         }
@@ -266,7 +264,7 @@ public final class BluetoothDevicePreference extends Preference implements
 
                 case BluetoothClass.Device.Major.PERIPHERAL:
                     return new Pair<Integer, String>(HidProfile.getHidClassDrawable(btClass),
-                                                     INPUT_PERIPHERAL);
+                            INPUT_PERIPHERAL);
 
                 case BluetoothClass.Device.Major.IMAGING:
                     return new Pair<Integer, String>(R.drawable.ic_bt_imaging, IMAGING);
