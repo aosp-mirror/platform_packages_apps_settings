@@ -16,7 +16,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/virtual_keyboard_category">
     <!-- Enabled input method list will be populated programmatically here. -->
-    <PreferenceScreen
+    <Preference
         android:key="add_virtual_keyboard_screen"
         android:title="@string/add_virtual_keyboard"
         android:fragment="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment" />

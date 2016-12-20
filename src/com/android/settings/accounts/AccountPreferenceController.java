@@ -271,7 +271,6 @@ public class AccountPreferenceController extends PreferenceController
         } else {
             List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
             final int profilesCount = profiles.size();
-            final boolean addCategory = profilesCount > 1;
             for (int i = 0; i < profilesCount; i++) {
                 updateProfileUi(profiles.get(i));
             }
@@ -298,7 +297,6 @@ public class AccountPreferenceController extends PreferenceController
             preferenceGroup.setContentDescription(
                 mContext.getString(R.string.account_settings));
         } else if (userInfo.isManagedProfile()) {
-            preferenceGroup.setLayoutResource(R.layout.work_profile_category);
             preferenceGroup.setTitle(R.string.category_work);
             String workGroupSummary = getWorkGroupSummary(context, userInfo);
             preferenceGroup.setSummary(workGroupSummary);
