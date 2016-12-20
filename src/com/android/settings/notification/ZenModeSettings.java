@@ -18,16 +18,14 @@ package com.android.settings.notification;
 
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 
 public class ZenModeSettings extends ZenModeSettingsBase {
     private static final String KEY_PRIORITY_SETTINGS = "priority_settings";
@@ -80,25 +78,25 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
     private void updatePrioritySettingsSummary() {
         String s = getResources().getString(R.string.zen_mode_alarms);
-        s = appendLowercase(s, isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_REMINDERS),
+        s = append(s, isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_REMINDERS),
                 R.string.zen_mode_reminders);
-        s = appendLowercase(s, isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_EVENTS),
+        s = append(s, isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_EVENTS),
                 R.string.zen_mode_events);
         if (isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_MESSAGES)) {
             if (mPolicy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
-                s = appendLowercase(s, true, R.string.zen_mode_all_messages);
+                s = append(s, true, R.string.zen_mode_all_messages);
             } else {
-                s = appendLowercase(s, true, R.string.zen_mode_selected_messages);
+                s = append(s, true, R.string.zen_mode_selected_messages);
             }
         }
         if (isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_CALLS)) {
             if (mPolicy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
-                s = appendLowercase(s, true, R.string.zen_mode_all_callers);
+                s = append(s, true, R.string.zen_mode_all_callers);
             } else {
-                s = appendLowercase(s, true, R.string.zen_mode_selected_callers);
+                s = append(s, true, R.string.zen_mode_selected_callers);
             }
         } else if (isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_REPEAT_CALLERS)) {
-            s = appendLowercase(s, true, R.string.zen_mode_repeat_callers);
+            s = append(s, true, R.string.zen_mode_repeat_callers);
         }
         mPrioritySettings.setSummary(s);
     }
@@ -124,10 +122,11 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         return (policy.priorityCategories & categoryType) != 0;
     }
 
-    private String appendLowercase(String s, boolean condition, int resId) {
+    @VisibleForTesting
+    String append(String s, boolean condition, int resId) {
         if (condition) {
-            return getResources().getString(R.string.join_many_items_middle, s,
-                    getResources().getString(resId).toLowerCase());
+            final Context context = getContext();
+            return context.getString(R.string.join_many_items_middle, s, context.getString(resId));
         }
         return s;
     }
