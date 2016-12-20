@@ -108,15 +108,15 @@ public class DatabaseIndexingManager {
         public boolean fullIndex;
 
         public UpdateData() {
-            dataToUpdate = new ArrayList<SearchIndexableData>();
-            dataToDelete = new ArrayList<SearchIndexableData>();
-            nonIndexableKeys = new HashMap<String, List<String>>();
+            dataToUpdate = new ArrayList<>();
+            dataToDelete = new ArrayList<>();
+            nonIndexableKeys = new HashMap<>();
         }
 
         public UpdateData(DatabaseIndexingManager.UpdateData other) {
-            dataToUpdate = new ArrayList<SearchIndexableData>(other.dataToUpdate);
-            dataToDelete = new ArrayList<SearchIndexableData>(other.dataToDelete);
-            nonIndexableKeys = new HashMap<String, List<String>>(other.nonIndexableKeys);
+            dataToUpdate = new ArrayList<>(other.dataToUpdate);
+            dataToDelete = new ArrayList<>(other.dataToDelete);
+            nonIndexableKeys = new HashMap<>(other.nonIndexableKeys);
             forceUpdate = other.forceUpdate;
             fullIndex = other.fullIndex;
         }

@@ -16,31 +16,19 @@
 
 package com.android.settings.search2;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
-import android.text.TextUtils;
-import android.util.Log;
 
-import com.android.settings.SettingsActivity;
-import com.android.settings.Utils;
-import com.android.settings.search.Index;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.utils.AsyncLoader;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns;
+import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX;
 
 /**
  * AsyncTask to retrieve Settings, First party app and any intent based results.
@@ -54,30 +42,68 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
     private final CursorToSearchResultConverter mConverter;
 
     /* These indices are used to match the columns of the this loader's SELECT statement.
-     These are not necessarily the same order or coverage as the schema defined in
+     These are not necessarily the same order nor similar coverage as the schema defined in
      IndexDatabaseHelper */
-    public static final int COLUMN_INDEX_RANK = 0;
-    public static final int COLUMN_INDEX_TITLE = 1;
-    public static final int COLUMN_INDEX_SUMMARY_ON = 2;
-    public static final int COLUMN_INDEX_SUMMARY_OFF = 3;
-    public static final int COLUMN_INDEX_ENTRIES = 4;
-    public static final int COLUMN_INDEX_KEYWORDS = 5;
-    public static final int COLUMN_INDEX_CLASS_NAME = 6;
-    public static final int COLUMN_INDEX_SCREEN_TITLE = 7;
-    public static final int COLUMN_INDEX_ICON = 8;
-    public static final int COLUMN_INDEX_INTENT_ACTION = 9;
-    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 10;
-    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 11;
-    public static final int COLUMN_INDEX_ENABLED = 12;
-    public static final int COLUMN_INDEX_KEY = 13;
-    public static final int COLUMN_INDEX_PAYLOAD_TYPE = 14;
-    public static final int COLUMN_INDEX_PAYLOAD = 15;
+    static final int COLUMN_INDEX_ID = 0;
+    static final int COLUMN_INDEX_TITLE = 1;
+    static final int COLUMN_INDEX_SUMMARY_ON = 2;
+    static final int COLUMN_INDEX_SUMMARY_OFF = 3;
+    static final int COLUMN_INDEX_CLASS_NAME = 4;
+    static final int COLUMN_INDEX_SCREEN_TITLE = 5;
+    static final int COLUMN_INDEX_ICON = 6;
+    static final int COLUMN_INDEX_INTENT_ACTION = 7;
+    static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 8;
+    static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 9;
+    static final int COLUMN_INDEX_KEY = 10;
+    static final int COLUMN_INDEX_PAYLOAD_TYPE = 11;
+    static final int COLUMN_INDEX_PAYLOAD = 12;
+
+    public static final String[] SELECT_COLUMNS = {
+            IndexColumns.DOCID,
+            IndexColumns.DATA_TITLE,
+            IndexColumns.DATA_SUMMARY_ON,
+            IndexColumns.DATA_SUMMARY_OFF,
+            IndexColumns.CLASS_NAME,
+            IndexColumns.SCREEN_TITLE,
+            IndexColumns.ICON,
+            IndexColumns.INTENT_ACTION,
+            IndexColumns.INTENT_TARGET_PACKAGE,
+            IndexColumns.INTENT_TARGET_CLASS,
+            IndexColumns.DATA_KEY_REF,
+            IndexColumns.PAYLOAD_TYPE,
+            IndexColumns.PAYLOAD
+    };
+
+    public static final String[] MATCH_COLUMNS_PRIMARY = {
+            IndexColumns.DATA_TITLE,
+            IndexColumns.DATA_TITLE_NORMALIZED,
+    };
+
+    public static final String[] MATCH_COLUMNS_SECONDARY = {
+            IndexColumns.DATA_SUMMARY_ON,
+            IndexColumns.DATA_SUMMARY_ON_NORMALIZED,
+            IndexColumns.DATA_SUMMARY_OFF,
+            IndexColumns.DATA_SUMMARY_OFF_NORMALIZED,
+    };
+
+    public static final String[] MATCH_COLUMNS_TERTIARY = {
+            IndexColumns.DATA_KEYWORDS,
+            IndexColumns.DATA_ENTRIES
+    };
+
+    /**
+     * Base ranks defines the best possible rank based on what the query matches.
+     * If the query matches the title, the best rank it can be is 1
+     * If the query only matches the summary, the best rank it can be is 4
+     * If the query only matches keywords or entries, the best rank it can be is 7
+     */
+    private static final int[] BASE_RANKS = {1, 4, 7};
 
     public DatabaseResultLoader(Context context, String queryText) {
         super(context);
         mDatabase = IndexDatabaseHelper.getInstance(context).getReadableDatabase();
-        mQueryText = queryText;
-        mConverter = new CursorToSearchResultConverter(context);
+        mQueryText = cleanQuery(queryText);
+        mConverter = new CursorToSearchResultConverter(context, mQueryText);
     }
 
     @Override
@@ -91,10 +117,34 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
             return null;
         }
 
-        String query = getSQLQuery();
-        Cursor result = mDatabase.rawQuery(query, null);
+        final List<SearchResult> primaryResults;
+        final List<SearchResult> secondaryResults;
+        final List<SearchResult> tertiaryResults;
 
-        return mConverter.convertCursor(result);
+        primaryResults = query(MATCH_COLUMNS_PRIMARY, BASE_RANKS[0]);
+        secondaryResults = query(MATCH_COLUMNS_SECONDARY, BASE_RANKS[1]);
+        tertiaryResults = query(MATCH_COLUMNS_TERTIARY, BASE_RANKS[2]);
+
+
+        final List<SearchResult> results = new ArrayList<>(primaryResults.size()
+                + secondaryResults.size()
+                + tertiaryResults.size());
+
+        results.addAll(primaryResults);
+        results.addAll(secondaryResults);
+        results.addAll(tertiaryResults);
+        return results;
+    }
+
+    private List<SearchResult> query(String[] matchColumns, int baseRank) {
+        final String whereClause = buildWhereClause(matchColumns);
+        final String[] selection = new String[matchColumns.length];
+        final String query = "%" + mQueryText + "%";
+        Arrays.fill(selection, query);
+
+        final Cursor resultCursor = mDatabase.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
+                selection, null, null, null);
+        return mConverter.convertCursor(resultCursor, baseRank);
     }
 
     @Override
@@ -103,17 +153,24 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
         return super.onCancelLoad();
     }
 
-    protected String getSQLQuery() {
-        return String.format("SELECT data_rank, data_title, data_summary_on, " +
-                        "data_summary_off, data_entries, data_keywords, class_name, screen_title,"
-                        + " icon, " +
-                        "intent_action, intent_target_package, intent_target_class, enabled, " +
-                        "data_key_reference, payload_type, payload FROM prefs_index WHERE prefs_index MATCH "
-                        + "'data_title:%s* " +
-                        "OR data_title_normalized:%s* OR data_keywords:%s*' AND locale = 'en_US'",
-                mQueryText, mQueryText, mQueryText);
+    /**
+     * A generic method to make the query suitable for searching the database.
+     * @return the cleaned query string
+     */
+    private static String cleanQuery(String query) {
+        return query.trim();
     }
 
-
-
+    private static String buildWhereClause(String[] matchColumns) {
+        StringBuilder sb = new StringBuilder(" ");
+        final int count = matchColumns.length;
+        for (int n = 0; n < count; n++) {
+            sb.append(matchColumns[n]);
+            sb.append(" like ?");
+            if (n < count - 1) {
+                sb.append(" OR ");
+            }
+        }
+        return sb.toString();
+    }
 }

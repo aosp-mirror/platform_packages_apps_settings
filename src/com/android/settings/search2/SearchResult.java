@@ -18,7 +18,7 @@ package com.android.settings.search2;
 
 import android.graphics.drawable.Drawable;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -42,7 +42,7 @@ public class SearchResult implements Comparable<SearchResult> {
      * An ordered list of the information hierarchy.
      * Intent Results: Displayed a hierarchy of selections to reach the setting from the home screen
      */
-    public final ArrayList<String> breadcrumbs;
+    public final List<String> breadcrumbs;
 
     /**
      * A suggestion for the ranking of the result.
@@ -96,7 +96,7 @@ public class SearchResult implements Comparable<SearchResult> {
     public static class Builder {
         protected CharSequence mTitle;
         protected CharSequence mSummary;
-        protected ArrayList<String> mBreadcrumbs;
+        protected List<String> mBreadcrumbs;
         protected int mRank = 42;
         protected ResultPayload mResultPayload;
         protected Drawable mIcon;
@@ -111,7 +111,7 @@ public class SearchResult implements Comparable<SearchResult> {
             return this;
         }
 
-        public Builder addBreadcrumbs(ArrayList<String> breadcrumbs) {
+        public Builder addBreadcrumbs(List<String> breadcrumbs) {
             mBreadcrumbs = breadcrumbs;
             return this;
         }

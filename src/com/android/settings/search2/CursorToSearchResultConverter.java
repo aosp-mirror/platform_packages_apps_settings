@@ -35,10 +35,12 @@ import com.android.settings.search.Index;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_RANK;
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_ID;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_TITLE;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_SUMMARY_ON;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_CLASS_NAME;
@@ -63,21 +65,28 @@ class CursorToSearchResultConverter {
 
     private final String TAG = "CursorConverter";
 
+    private final String mQueryText;
+
     private final Context mContext;
 
-    public CursorToSearchResultConverter(Context context) {
+    private final Set<String> mKeys;
+
+    public CursorToSearchResultConverter(Context context, String queryText) {
         mContext = context;
+        mKeys = new HashSet<>();
+        mQueryText = queryText;
     }
 
-    public List<SearchResult> convertCursor(Cursor cursorResults) {
+    public List<SearchResult> convertCursor(Cursor cursorResults, int baseRank) {
         if (cursorResults == null) {
             return null;
         }
         final Map<String, Context> contextMap = new HashMap<>();
-        final ArrayList<SearchResult> results = new ArrayList<>();
+        final List<SearchResult> results = new ArrayList<>();
 
         while (cursorResults.moveToNext()) {
-            SearchResult result = buildSingleSearchResultFromCursor(contextMap, cursorResults);
+            SearchResult result = buildSingleSearchResultFromCursor(contextMap, cursorResults,
+                    baseRank);
             if (result != null) {
                 results.add(result);
             }
@@ -87,13 +96,22 @@ class CursorToSearchResultConverter {
     }
 
     private SearchResult buildSingleSearchResultFromCursor(Map<String, Context> contextMap,
-            Cursor cursor) {
+            Cursor cursor, int baseRank) {
+        final String docId = cursor.getString(COLUMN_INDEX_ID);
+        /* Make sure that this result has not yet been added as a result. Checking the docID
+           covers the case of multiple queries matching the same row, but we need to also to check
+           for potentially the same named or slightly varied names pointing to the same page.
+         */
+        if (mKeys.contains(docId)) {
+            return null;
+        }
+        mKeys.add(docId);
+
         final String pkgName = cursor.getString(COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE);
         final String action = cursor.getString(COLUMN_INDEX_INTENT_ACTION);
         final String title = cursor.getString(COLUMN_INDEX_TITLE);
         final String summaryOn = cursor.getString(COLUMN_INDEX_SUMMARY_ON);
         final String className = cursor.getString(COLUMN_INDEX_CLASS_NAME);
-        final int rank = cursor.getInt(COLUMN_INDEX_RANK);
         final String key = cursor.getString(COLUMN_INDEX_KEY);
         final String iconResStr = cursor.getString(COLUMN_INDEX_ICON);
         final int payloadType = cursor.getInt(COLUMN_INDEX_PAYLOAD_TYPE);
@@ -109,9 +127,13 @@ class CursorToSearchResultConverter {
             return null;
         }
 
+        final List<String> breadcrumbs = getBreadcrumbs(cursor);
+        final int rank = getRank(breadcrumbs, baseRank);
+
         final SearchResult.Builder builder = new SearchResult.Builder();
         builder.addTitle(title)
                 .addSummary(summaryOn)
+                .addBreadcrumbs(breadcrumbs)
                 .addRank(rank)
                 .addIcon(getIconForPackage(contextMap, pkgName, className, iconResStr))
                 .addPayload(payload);
@@ -186,5 +208,25 @@ class CursorToSearchResultConverter {
             Log.w(TAG, "Error creating parcelable: " + e);
         }
         return null;
+    }
+
+    private List<String> getBreadcrumbs(Cursor cursor) {
+        return new ArrayList<>();
+    }
+
+    /** Uses the breadcrumbs to determine the offset to the base rank.
+     *  There are two checks
+     *  A) If the query matches the highest level menu title
+     *  B) If the query matches a subsequent menu title
+     *
+     *  If the query matches A and B, the offset is 0.
+     *  If the query matches A only, the offset is 1.
+     *  If the query matches neither A nor B, the offset is 2.
+     * @param crumbs from the Information Architecture
+     * @param baseRank of the result. Lower if it's a better result.
+     * @return
+     */
+    private int getRank(List<String> crumbs, int baseRank) {
+        return baseRank;
     }
 }
