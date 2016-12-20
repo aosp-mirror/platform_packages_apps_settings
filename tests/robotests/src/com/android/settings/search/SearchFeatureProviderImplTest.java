@@ -61,7 +61,7 @@ public class SearchFeatureProviderImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mActivity = Robolectric.buildActivity(Activity.class).create().visible().get();
-        mProvider = new SearchFeatureProviderImpl(mActivity);
+        mProvider = new SearchFeatureProviderImpl();
     }
 
     @Test
@@ -78,8 +78,8 @@ public class SearchFeatureProviderImplTest {
 
     @Test
     public void testUpdateIndexNewSearch_UsesDatabaseIndexingManager() {
-        mProvider = spy(new SearchFeatureProviderImpl(mActivity));
-        when(mProvider.isEnabled()).thenReturn(true);
+        mProvider = spy(new SearchFeatureProviderImpl());
+        when(mProvider.isEnabled(mActivity)).thenReturn(true);
 
         mProvider.updateIndex(mActivity);
         verify(mProvider).getIndexingManager(any(Context.class));
@@ -87,8 +87,8 @@ public class SearchFeatureProviderImplTest {
 
     @Test
     public void testUpdateIndexNewSearch_UsesIndex() {
-        mProvider = spy(new SearchFeatureProviderImpl(mActivity));
-        when(mProvider.isEnabled()).thenReturn(false);
+        mProvider = spy(new SearchFeatureProviderImpl());
+        when(mProvider.isEnabled(mActivity)).thenReturn(false);
 
         mProvider.updateIndex(mActivity);
         verify(mProvider, never()).getIndexingManager(any(Context.class));

@@ -124,7 +124,7 @@ public class DashboardFeatureProviderImplTest {
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
 
-        when(mActivity.getApplicationContext().getSystemService(Context.USER_SERVICE))
+        when(mActivity.getSystemService(Context.USER_SERVICE))
                 .thenReturn(mUserManager);
 
         mImpl.bindPreferenceToTile(mActivity, preference, tile, "123", Preference.DEFAULT_ORDER);

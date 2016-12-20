@@ -329,7 +329,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
 
         MenuInflater inflater = getMenuInflater();
-        if (mSearchFeatureProvider.isEnabled()) {
+        if (mSearchFeatureProvider.isEnabled(this)) {
             mSearchFeatureProvider.setUpSearchMenu(menu, this);
             return true;
         }
@@ -405,7 +405,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         final FeatureFactory factory = FeatureFactory.getFactory(this);
 
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
-        mSearchFeatureProvider = factory.getSearchFeatureProvider(this);
+        mSearchFeatureProvider = factory.getSearchFeatureProvider();
 
         // Should happen before any call to getIntent()
         getMetaData();
@@ -1097,7 +1097,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Deprecated
     @Override
     public boolean onQueryTextSubmit(String query) {
-        if (mSearchFeatureProvider.isEnabled()) {
+        if (mSearchFeatureProvider.isEnabled(this)) {
             return false;
         }
         mSearchQuery = query;
@@ -1109,7 +1109,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     public boolean onQueryTextChange(String newText) {
         mSearchQuery = newText;
-        if (mSearchFeatureProvider.isEnabled() || mSearchResultsFragment == null) {
+        if (mSearchFeatureProvider.isEnabled(this) || mSearchResultsFragment == null) {
             return false;
         }
         return mSearchResultsFragment.onQueryTextChange(newText);

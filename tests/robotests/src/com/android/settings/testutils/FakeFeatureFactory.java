@@ -116,7 +116,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public SearchFeatureProvider getSearchFeatureProvider(Context context) {
+    public SearchFeatureProvider getSearchFeatureProvider() {
         return searchFeatureProvider;
     }
 
