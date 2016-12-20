@@ -134,9 +134,9 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
     }
 
     @Override
-    public void onConfirmLockdown(Bundle options, boolean isEnabled) {
+    public void onConfirmLockdown(Bundle options, boolean isAlwaysOn, boolean isLockdown) {
         VpnProfile profile = (VpnProfile) options.getParcelable(ARG_PROFILE);
-        connect(profile, isEnabled);
+        connect(profile, isAlwaysOn);
         dismiss();
     }
 
@@ -149,14 +149,15 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
             // Possibly throw up a dialog to explain lockdown VPN.
             final boolean shouldLockdown = dialog.isVpnAlwaysOn();
             final boolean shouldConnect = shouldLockdown || !dialog.isEditing();
-            final boolean wasAlwaysOn = VpnUtils.isAlwaysOnOrLegacyLockdownActive(mContext);
+            final boolean wasLockdown = VpnUtils.isAnyLockdownActive(mContext);
             try {
                 final boolean replace = VpnUtils.isVpnActive(mContext);
                 if (shouldConnect && !isConnected(profile) &&
-                        ConfirmLockdownFragment.shouldShow(replace, wasAlwaysOn, shouldLockdown)) {
+                        ConfirmLockdownFragment.shouldShow(replace, wasLockdown, shouldLockdown)) {
                     final Bundle opts = new Bundle();
                     opts.putParcelable(ARG_PROFILE, profile);
-                    ConfirmLockdownFragment.show(this, replace, wasAlwaysOn, shouldLockdown, opts);
+                    ConfirmLockdownFragment.show(this, replace, /* alwaysOn */ shouldLockdown,
+                           /* from */  wasLockdown, /* to */ shouldLockdown, opts);
                 } else if (shouldConnect) {
                     connect(profile, shouldLockdown);
                 } else {

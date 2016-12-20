@@ -20,6 +20,7 @@ import android.net.ConnectivityManager;
 import android.net.IConnectivityManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
 
@@ -53,10 +54,14 @@ public class VpnUtils {
         return key.equals(getLockdownVpn());
     }
 
-    public static boolean isAlwaysOnOrLegacyLockdownActive(Context context) {
+    public static boolean isAnyLockdownActive(Context context) {
         final int userId = context.getUserId();
-        return getLockdownVpn() != null
-                || getConnectivityManager(context).getAlwaysOnVpnPackageForUser(userId) != null;
+        if (getLockdownVpn() != null) {
+            return true;
+        }
+        return getConnectivityManager(context).getAlwaysOnVpnPackageForUser(userId) != null
+                && Settings.Secure.getIntForUser(context.getContentResolver(),
+                        Settings.Secure.ALWAYS_ON_VPN_LOCKDOWN, /* default */ 0, userId) != 0;
     }
 
     public static boolean isVpnActive(Context context) throws RemoteException {

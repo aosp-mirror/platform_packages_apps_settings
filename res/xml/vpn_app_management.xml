@@ -33,6 +33,17 @@
                 settings:useAdditionalSummary="true"
                 settings:restrictedSwitchSummary="@string/disabled_by_admin_summary_text" />
 
+        <com.android.settingslib.RestrictedSwitchPreference
+                android:key="lockdown_vpn"
+                android:title="@string/vpn_require_connection"
+                android:defaultValue="false"
+                android:summaryOn="@string/vpn_lockdown_active"
+                android:summaryOff="@string/vpn_lockdown_inactive"
+                android:dependency="always_on_vpn"
+                settings:userRestriction="no_config_vpn"
+                settings:useAdditionalSummary="true"
+                settings:restrictedSwitchSummary="@string/disabled_by_admin_summary_text" />
+
         <com.android.settings.DimmableIconPreference
                 android:key="forget_vpn"
                 android:title="@string/vpn_forget_long"
