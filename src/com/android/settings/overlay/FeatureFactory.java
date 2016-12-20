@@ -81,7 +81,7 @@ public abstract class FeatureFactory {
     public abstract EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(
             Context context);
 
-    public abstract SearchFeatureProvider getSearchFeatureProvider(Context context);
+    public abstract SearchFeatureProvider getSearchFeatureProvider();
 
     public abstract SurveyFeatureProvider getSurveyFeatureProvider(Context context);
 

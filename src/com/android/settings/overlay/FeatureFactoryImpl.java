@@ -104,9 +104,9 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public SearchFeatureProvider getSearchFeatureProvider(Context context) {
+    public SearchFeatureProvider getSearchFeatureProvider() {
         if (mSearchFeatureProvider == null) {
-            mSearchFeatureProvider = new SearchFeatureProviderImpl(context);
+            mSearchFeatureProvider = new SearchFeatureProviderImpl();
         }
         return mSearchFeatureProvider;
     }

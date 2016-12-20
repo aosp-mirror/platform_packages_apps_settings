@@ -27,7 +27,7 @@ public interface SearchFeatureProvider {
     /**
      * @return true to use the new version of search
      */
-    boolean isEnabled();
+    boolean isEnabled(Context context);
 
     /**
      * Inserts the Menu items into Settings activity.

@@ -66,7 +66,7 @@ public class SearchFragment extends InstrumentedFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
         mSearchFeatureProvider = FeatureFactory.getFactory(context)
-                .getSearchFeatureProvider(context);
+                .getSearchFeatureProvider();
     }
 
     @Override

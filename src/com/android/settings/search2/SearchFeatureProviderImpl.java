@@ -31,16 +31,11 @@ import com.android.settings.applications.PackageManagerWrapperImpl;
  * FeatureProvider for the refactored search code.
  */
 public class SearchFeatureProviderImpl implements SearchFeatureProvider {
-    protected Context mContext;
 
     private DatabaseIndexingManager mDatabaseIndexingManager;
 
-    public SearchFeatureProviderImpl(Context context) {
-        mContext = context;
-    }
-
     @Override
-    public boolean isEnabled() {
+    public boolean isEnabled(Context context) {
         return false;
     }
 
@@ -49,7 +44,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         if (menu == null || activity == null) {
             return;
         }
-        String menuTitle = mContext.getString(R.string.search_menu);
+        String menuTitle = activity.getString(R.string.search_menu);
         MenuItem menuItem = menu.add(Menu.NONE, Menu.NONE, Menu.NONE, menuTitle)
                 .setIcon(R.drawable.abc_ic_search_api_material)
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -86,7 +81,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     @Override
     public void updateIndex(Context context) {
-        if (isEnabled()) {
+        if (isEnabled(context)) {
             getIndexingManager(context).update();
         } else {
             Index.getInstance(context).update();
