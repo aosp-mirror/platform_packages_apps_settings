@@ -175,6 +175,11 @@ public class PowerUsageSummary extends PowerUsageBase {
                 sa.startPreferencePanel(ManageApplications.class.getName(), args,
                         R.string.high_power_apps, null, null, 0);
                 return true;
+            case MENU_ADDITIONAL_BATTERY_INFO:
+                startActivity(FeatureFactory.getFactory(getContext())
+                        .getPowerUsageFeatureProvider(getContext())
+                        .getAdditionalBatteryInfoIntent());
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
