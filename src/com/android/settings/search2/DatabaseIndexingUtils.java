@@ -66,6 +66,10 @@ public class DatabaseIndexingUtils {
      */
     public static Map<String, PreferenceController> getPreferenceControllerUriMap(
             String className, Context context) {
+        if (context == null) {
+            return null;
+        }
+
         final Class<?> clazz = getIndexableClass(className);
 
         if (clazz == null) {
@@ -77,6 +81,7 @@ public class DatabaseIndexingUtils {
         // Will be non null only for a Local provider implementing a
         // SEARCH_INDEX_DATA_PROVIDER field
         final Indexable.SearchIndexProvider provider = getSearchIndexProvider(clazz);
+
         List<PreferenceController> controllers =
                 provider.getPreferenceControllers(context);
 
@@ -94,8 +99,9 @@ public class DatabaseIndexingUtils {
     }
 
     /**
-     * @param uriMap Map between the {@link PreferenceController} keys and the controllers themselves.
-     * @param key The look up key
+     * @param uriMap Map between the {@link PreferenceController} keys
+     *               and the controllers themselves.
+     * @param key The look-up key
      * @return The Payload from the {@link PreferenceController} specified by the key, if it exists.
      * Otherwise null.
      */
@@ -135,15 +141,13 @@ public class DatabaseIndexingUtils {
         } catch (NoSuchFieldException e) {
             Log.d(TAG, "Cannot find field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         } catch (SecurityException se) {
-            Log.d(TAG,
-                    "Security exception for field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
+            Log.d(TAG, "Security exception for field '" +
+                    FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         } catch (IllegalAccessException e) {
-            Log.d(TAG,
-                    "Illegal access to field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
+            Log.d(TAG, "Illegal access to field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         } catch (IllegalArgumentException e) {
-            Log.d(TAG,
-                    "Illegal argument when accessing field '" +
-                            FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
+            Log.d(TAG, "Illegal argument when accessing field '" +
+                    FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         }
         return null;
     }

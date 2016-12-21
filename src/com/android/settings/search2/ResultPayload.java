@@ -28,7 +28,8 @@ import java.lang.annotation.RetentionPolicy;
  */
 public abstract class ResultPayload implements Parcelable {
 
-    @IntDef({PayloadType.INLINE_SLIDER, PayloadType.INLINE_SWITCH, PayloadType.INTENT})
+    @IntDef({PayloadType.INLINE_SLIDER, PayloadType.INLINE_SWITCH,
+            PayloadType.INTENT})
     @Retention(RetentionPolicy.SOURCE)
     public @interface PayloadType {
         /**
@@ -46,6 +47,17 @@ public abstract class ResultPayload implements Parcelable {
          */
         int INLINE_SWITCH = 2;
     }
+
+    @IntDef({SettingsSource.UNKNOWN, SettingsSource.SYSTEM, SettingsSource.SECURE,
+            SettingsSource.GLOBAL})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface SettingsSource {
+        int UNKNOWN = 0;
+        int SYSTEM = 1;
+        int SECURE = 2;
+        int GLOBAL = 3;
+    }
+
 
     @ResultPayload.PayloadType public abstract int getType();
 }

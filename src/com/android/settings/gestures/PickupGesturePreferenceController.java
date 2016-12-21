@@ -21,8 +21,11 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
+import android.util.ArrayMap;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settings.search2.InlineSwitchPayload;
+import com.android.settings.search2.ResultPayload;
 
 public class PickupGesturePreferenceController extends GesturePreferenceController {
 
@@ -68,4 +71,13 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
         return true;
     }
 
+    @Override
+    public ResultPayload getResultPayload() {
+        ArrayMap<Integer, Boolean> valueMap = new ArrayMap<>();
+        valueMap.put(1, true);
+        valueMap.put(0, false);
+
+        return new InlineSwitchPayload(Settings.Secure.DOZE_PULSE_ON_PICK_UP,
+                ResultPayload.SettingsSource.SECURE, valueMap);
+    }
 }

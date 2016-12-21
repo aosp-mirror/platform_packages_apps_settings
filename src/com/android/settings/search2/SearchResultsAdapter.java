@@ -16,8 +16,10 @@
 
 package com.android.settings.search2;
 
+import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,6 @@ import com.android.settings.R;
 import com.android.settings.search2.ResultPayload.PayloadType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,22 +39,23 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
     public SearchResultsAdapter(SearchFragment fragment) {
         mFragment = fragment;
         mSearchResults = new ArrayList<>();
-        mResultsMap = new HashMap<>();
+        mResultsMap = new ArrayMap<>();
 
         setHasStableIds(true);
     }
 
     @Override
     public SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        switch (viewType) {
+        final Context context = parent.getContext();
+        final LayoutInflater inflater = LayoutInflater.from(context);
+        final View view;
+        switch(viewType) {
             case PayloadType.INTENT:
-                View view = inflater.inflate(R.layout.search_intent_item, parent, false);
+                view = inflater.inflate(R.layout.search_intent_item, parent, false);
                 return new IntentSearchViewHolder(view);
-            case PayloadType.INLINE_SLIDER:
-                return null;
             case PayloadType.INLINE_SWITCH:
-                return null;
+                view = inflater.inflate(R.layout.search_inline_switch_item, parent, false);
+                return new InlineSwitchViewHolder(view, context);
             default:
                 return null;
         }

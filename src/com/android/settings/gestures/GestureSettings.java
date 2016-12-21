@@ -167,21 +167,32 @@ public class GestureSettings extends DashboardFragment {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     ArrayList<String> result = new ArrayList<String>();
+
+                    List<PreferenceController> preferenceControllers =
+                            getPreferenceControllers(context);
+                    for(PreferenceController controller : preferenceControllers) {
+                        controller.updateNonIndexableKeys(result);
+                    }
+                    return result;
+                }
+
+                @Override
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    List<PreferenceController> controllers = new ArrayList<>();
                     AmbientDisplayConfiguration ambientConfig
                             = new AmbientDisplayConfiguration(context);
-                    new DoubleTapPowerPreferenceController(context, null /* lifecycle */)
-                            .updateNonIndexableKeys(result);
-                    new PickupGesturePreferenceController(
-                            context, null /* lifecycle */, ambientConfig, UserHandle.myUserId())
-                            .updateNonIndexableKeys(result);
-                    new DoubleTapScreenPreferenceController(
-                            context, null /* lifecycle */, ambientConfig, UserHandle.myUserId())
-                            .updateNonIndexableKeys(result);
-                    new SwipeToNotificationPreferenceController(context, null /* lifecycle */)
-                            .updateNonIndexableKeys(result);
-                    new DoubleTwistPreferenceController(context, null /* lifecycle */)
-                            .updateNonIndexableKeys(result);
-                    return result;
+
+                    controllers.add(new DoubleTapPowerPreferenceController(context,
+                            null /* lifecycle */));
+                    controllers.add(new PickupGesturePreferenceController(context,
+                            null /* lifecycle */, ambientConfig, UserHandle.myUserId()));
+                    controllers.add(new DoubleTapScreenPreferenceController(context,
+                            null /* lifecycle */, ambientConfig, UserHandle.myUserId()));
+                    controllers.add(new SwipeToNotificationPreferenceController(context,
+                            null /* lifecycle */));
+                    controllers.add(new DoubleTwistPreferenceController(context,
+                            null /* lifecycle */));
+                    return controllers;
                 }
             };
 }

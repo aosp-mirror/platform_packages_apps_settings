@@ -20,7 +20,10 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
+import android.util.ArrayMap;
 import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settings.search2.InlineSwitchPayload;
+import com.android.settings.search2.ResultPayload;
 
 public class SwipeToNotificationPreferenceController extends GesturePreferenceController {
 
@@ -59,5 +62,15 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
         return Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0)
                 == 1;
+    }
+
+    @Override
+    public ResultPayload getResultPayload() {
+        ArrayMap<Integer, Boolean> valueMap = new ArrayMap<>();
+        valueMap.put(1, true);
+        valueMap.put(0, false);
+
+        return new InlineSwitchPayload(Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED,
+                ResultPayload.SettingsSource.SECURE, valueMap);
     }
 }
