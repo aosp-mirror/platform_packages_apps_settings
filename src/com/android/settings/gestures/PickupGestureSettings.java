@@ -21,6 +21,7 @@ import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -37,7 +38,7 @@ public class PickupGestureSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return GESTURE_PICKUP;
+        return MetricsProto.MetricsEvent.SETTINGS_GESTURE_PICKUP;
     }
 
     @Override

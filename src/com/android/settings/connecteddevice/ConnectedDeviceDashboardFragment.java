@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -39,7 +40,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return CONNECTED_DEVICE_CATEGORY_FRAGMENT;
+        return MetricsProto.MetricsEvent.SETTINGS_CONNECTED_DEVICE_CATEGORY;
     }
 
     @Override

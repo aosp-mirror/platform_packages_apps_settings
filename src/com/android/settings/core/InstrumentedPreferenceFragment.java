@@ -43,18 +43,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
 
     // metrics placeholder value. Only use this for development.
     protected final int PLACEHOLDER_METRIC = 10000;
-    protected final int SYSTEM_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 1;
-    protected final int STORAGE_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 2;
-    protected final int NETWORK_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 3;
-    protected final int CONNECTED_DEVICE_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 4;
-    protected final int APP_AND_NOTIFICATION_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 5;
-    protected final int INPUT_AND_GESTURE_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 6;
-    protected final int LANGUAGE_AND_REGION_CATEGORY_FRAGMENT = PLACEHOLDER_METRIC + 7;
-    protected final int GESTURE_SWIPE_TO_NOTIFICATION = PLACEHOLDER_METRIC + 8;
-    protected final int GESTURE_DOUBLE_TAP_POWER = PLACEHOLDER_METRIC + 9;
-    protected final int GESTURE_PICKUP = PLACEHOLDER_METRIC + 10;
-    protected final int GESTURE_DOUBLE_TAP_SCREEN = PLACEHOLDER_METRIC + 11;
-    protected final int GESTURE_DOUBLE_TWIST = PLACEHOLDER_METRIC + 12;
 
     private final PreferenceDividerDecoration mDividerDecoration =
             new PreferenceDividerDecoration();

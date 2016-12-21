@@ -43,7 +43,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return NETWORK_CATEGORY_FRAGMENT;
+        return MetricsProto.MetricsEvent.SETTINGS_NETWORK_CATEGORY;
     }
 
     @Override

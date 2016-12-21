@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -37,7 +38,7 @@ public class StorageDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return STORAGE_CATEGORY_FRAGMENT;
+        return MetricsProto.MetricsEvent.SETTINGS_STORAGE_CATEGORY;
     }
 
     @Override
