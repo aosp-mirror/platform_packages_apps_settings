@@ -40,26 +40,13 @@
             android:maxHeight="18dp"/>
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@android:id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Material.Body2"
+        android:textColor="?android:attr/textColorPrimary"
         android:paddingStart="60dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@android:id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@android:style/TextAppearance.Material.Body2"
-            android:textColor="?android:attr/textColorPrimary"
-            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"/>
-        <TextView
-            android:id="@android:id/summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-            android:textColor="?android:attr/textColorSecondary"
-            android:ellipsize="end"
-            android:singleLine="true" />
-    </LinearLayout>
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"/>
 
 </FrameLayout>

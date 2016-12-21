@@ -14,46 +14,27 @@
      limitations under the License.
 -->
 
+<!-- Layout used for "Work" preference group in Accounts. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    android:gravity="center_vertical"
+    android:layout_marginBottom="16dip"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:paddingTop="16dip"
-    android:paddingBottom="16dip"
-    android:background="?android:attr/selectableItemBackground">
-
+    android:orientation="vertical">
     <TextView
         android:id="@android:id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:textAlignment="viewStart"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        android:textColor="?android:attr/colorAccent"
-        android:textSize="36sp"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal" />
-
+        android:textAppearance="@android:style/TextAppearance.Material.Body2"
+        android:textColor="?android:attr/colorAccent" />
     <TextView
         android:id="@android:id/summary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="viewStart"
-        android:textAppearance="@android:style/TextAppearance.Material.Body1"
-        android:maxLines="10" />
-
-    <ProgressBar
-        android:id="@android:id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone"
-        android:max="100"
-        style="?android:attr/progressBarStyleHorizontal" />
-
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        android:textColor="?android:attr/textColorSecondary"
+        android:ellipsize="end"
+        android:singleLine="true" />
 </LinearLayout>
