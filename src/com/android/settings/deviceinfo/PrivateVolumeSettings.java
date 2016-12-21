@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -37,7 +36,6 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
 import android.provider.DocumentsContract;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
@@ -65,9 +63,9 @@ import com.android.settings.deviceinfo.StorageSettings.MountTask;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageMeasurement.MeasurementDetails;
 import com.android.settingslib.deviceinfo.StorageMeasurement.MeasurementReceiver;
+
 import com.google.android.collect.Lists;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -106,9 +104,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             R.string.storage_detail_system,
             R.string.storage_detail_other,
     };
-
-    private static final int DELETION_HELPER_SETTINGS = 1;
-    private static final int DELETION_HELPER_CLEAR = 1;
 
     private StorageManager mStorageManager;
     private UserManager mUserManager;
@@ -285,8 +280,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         if (mHeaderPoolIndex < mHeaderPreferencePool.size()) {
             category = mHeaderPreferencePool.get(mHeaderPoolIndex);
         } else {
-            category = new PreferenceCategory(getPrefContext(), null,
-                    com.android.internal.R.attr.preferenceCategoryStyle);
+            category = new PreferenceCategory(getPrefContext());
             mHeaderPreferencePool.add(category);
         }
         category.setTitle(title);

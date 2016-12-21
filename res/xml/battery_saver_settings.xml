@@ -15,7 +15,6 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/battery_saver"
         android:key="battery_saver">
 
@@ -24,13 +23,5 @@
             android:key="turn_on_automatically"
             android:title="@string/battery_saver_turn_on_automatically_title"
             android:summary="%s" />
-
-    <!-- Feature description text -->
-    <com.android.settings.fuelgauge.WallOfTextPreference
-            android:key="description"
-            android:summary="@*android:string/battery_saver_description"
-            android:persistent="false"
-            android:selectable="false"
-            settings:allowDividerAbove="true" />
 
 </PreferenceScreen>

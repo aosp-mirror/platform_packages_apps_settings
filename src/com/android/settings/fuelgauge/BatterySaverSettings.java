@@ -78,7 +78,8 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
         }
         mCreated = true;
         addPreferencesFromResource(R.xml.battery_saver_settings);
-
+        mFooterPreferenceMixin.createFooterPreference()
+                .setTitle(com.android.internal.R.string.battery_saver_description);
         mContext = getActivity();
         mSwitchBar = ((SettingsActivity) mContext).getSwitchBar();
         mSwitch = mSwitchBar.getSwitch();
