@@ -18,6 +18,7 @@ package com.android.settings.dashboard;
 
 import android.accounts.Account;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -26,7 +27,9 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.dashboard.SupportItemAdapter.EscalationData;
 import com.android.settings.overlay.SupportFeatureProvider;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +41,8 @@ import org.robolectric.annotation.Config;
 import com.android.settings.R;
 import org.robolectric.shadows.ShadowActivity;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
 import static org.mockito.Mockito.when;
@@ -109,6 +114,37 @@ public class SupportItemAdapterTest {
         mSupportItemAdapter.setAccounts(ONE_ACCOUNT);
 
         verify(mSupportFeatureProvider).getSupportEligibleAccounts(mActivity);
+    }
+
+    @Test
+    public void testRefreshData_CardUpdatedOnEnteringOrLeavingSupportHours() {
+        // pretend we have support right now
+        when(mSupportFeatureProvider.isSupportTypeEnabled(any(), anyInt()))
+                .thenReturn(true);
+        when(mSupportFeatureProvider.isOperatingNow(anyInt())).thenReturn(true);
+        when(mSupportFeatureProvider.getSupportEligibleAccounts(any())).thenReturn(ONE_ACCOUNT);
+        mSupportItemAdapter = new SupportItemAdapter(mActivity, null, mSupportFeatureProvider,
+                mMetricsFeatureProvider, null);
+
+        // If this doesn't return escalation data something has gone wrong
+        EscalationData data = (EscalationData) mSupportItemAdapter.getSupportData().get(0);
+
+        // precondition, support is enabled
+        assertThat(data.enabled1).isTrue();
+
+        // pretend we support hours are over
+        when(mSupportFeatureProvider.isOperatingNow(anyInt())).thenReturn(false);
+        mSupportItemAdapter.refreshData();
+        data = (EscalationData) mSupportItemAdapter.getSupportData().get(0);
+
+        assertThat(data.enabled1).isFalse();
+
+        // pretend support hours have started again
+        when(mSupportFeatureProvider.isOperatingNow(anyInt())).thenReturn(true);
+        mSupportItemAdapter.refreshData();
+        data = (EscalationData) mSupportItemAdapter.getSupportData().get(0);
+
+        assertThat(data.enabled1).isTrue();
     }
 
     /**
