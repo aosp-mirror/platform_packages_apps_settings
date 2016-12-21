@@ -35,7 +35,7 @@ import static org.robolectric.internal.Shadow.directlyOn;
 @Implements(Resources.class)
 public class SettingsShadowResources extends ShadowResources {
 
-    @RealObject Resources realResources;
+    @RealObject public Resources realResources;
 
     @Implementation
     public int getDimensionPixelSize(@DimenRes int id) throws NotFoundException {

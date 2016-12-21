@@ -95,10 +95,15 @@ public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFra
         final Activity activity = getActivity();
         final CheckBox doNotShow =
                 (CheckBox) getDialog().findViewById(R.id.support_disclaimer_do_not_show_again);
+        final boolean isChecked = doNotShow.isChecked();
         final SupportFeatureProvider supportFeatureProvider =
                 FeatureFactory.getFactory(activity).getSupportFeatureProvider(activity);
-        supportFeatureProvider.setShouldShowDisclaimerDialog(getContext(), !doNotShow.isChecked());
+        supportFeatureProvider.setShouldShowDisclaimerDialog(getContext(), !isChecked);
         final Bundle bundle = getArguments();
+        if (isChecked) {
+            mMetricsFeatureProvider.action(activity,
+                    MetricsProto.MetricsEvent.ACTION_SKIP_DISCLAIMER_SELECTED);
+        }
         mMetricsFeatureProvider.action(activity,
                 MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_OK);
         supportFeatureProvider.startSupport(getActivity(),
