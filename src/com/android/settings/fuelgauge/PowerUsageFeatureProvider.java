@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge;
 
+import android.content.Intent;
+
 /**
  * Feature Provider used in power usage
  */
@@ -25,5 +27,13 @@ public interface PowerUsageFeatureProvider {
    */
   boolean isLocationSettingEnabled(String[] packages);
 
+  /**
+   * Check whether additional battery info feature is enabled.
+   */
   boolean isAdditionalBatteryInfoEnabled();
+
+  /**
+   * Gets an {@link Intent} to show additional battery info.
+   */
+  Intent getAdditionalBatteryInfoIntent();
 }
