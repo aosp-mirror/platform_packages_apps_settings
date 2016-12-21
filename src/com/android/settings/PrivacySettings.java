@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Activity;
 import android.app.backup.IBackupManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -30,6 +29,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -37,11 +37,9 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,18 +54,22 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
 
     // Vendor specific
     private static final String GSETTINGS_PROVIDER = "com.google.settings";
-    private static final String BACKUP_DATA = "backup_data";
-    private static final String AUTO_RESTORE = "auto_restore";
-    private static final String CONFIGURE_ACCOUNT = "configure_account";
-    private static final String DATA_MANAGEMENT = "data_management";
+    @VisibleForTesting
+    static final String BACKUP_DATA = "backup_data";
+    @VisibleForTesting
+    static final String AUTO_RESTORE = "auto_restore";
+    @VisibleForTesting
+    static final String CONFIGURE_ACCOUNT = "configure_account";
+    @VisibleForTesting
+    static final String DATA_MANAGEMENT = "data_management";
     private static final String BACKUP_INACTIVE = "backup_inactive";
     private static final String FACTORY_RESET = "factory_reset";
     private static final String TAG = "PrivacySettings";
     private IBackupManager mBackupManager;
-    private PreferenceScreen mBackup;
+    private Preference mBackup;
     private SwitchPreference mAutoRestore;
-    private PreferenceScreen mConfigure;
-    private PreferenceScreen mManageData;
+    private Preference mConfigure;
+    private Preference mManageData;
     private boolean mEnabled;
 
     @Override
@@ -90,13 +92,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
 
-        mBackup = (PreferenceScreen) screen.findPreference(BACKUP_DATA);
-
-        mAutoRestore = (SwitchPreference) screen.findPreference(AUTO_RESTORE);
-        mAutoRestore.setOnPreferenceChangeListener(preferenceChangeListener);
-
-        mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_ACCOUNT);
-        mManageData = (PreferenceScreen) screen.findPreference(DATA_MANAGEMENT);
+        setPreferenceReferences(screen);
 
         Set<String> keysToRemove = new HashSet<>();
         getNonVisibleKeys(getActivity(), keysToRemove);
@@ -119,6 +115,17 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         if (mEnabled) {
             updateToggles();
         }
+    }
+
+    @VisibleForTesting
+    void setPreferenceReferences(PreferenceScreen screen) {
+        mBackup = screen.findPreference(BACKUP_DATA);
+
+        mAutoRestore = (SwitchPreference) screen.findPreference(AUTO_RESTORE);
+        mAutoRestore.setOnPreferenceChangeListener(preferenceChangeListener);
+
+        mConfigure = screen.findPreference(CONFIGURE_ACCOUNT);
+        mManageData = screen.findPreference(DATA_MANAGEMENT);
     }
 
     private OnPreferenceChangeListener preferenceChangeListener = new OnPreferenceChangeListener() {

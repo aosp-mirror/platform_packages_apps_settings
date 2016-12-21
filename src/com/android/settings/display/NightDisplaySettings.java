@@ -73,7 +73,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
         // Load the preferences from xml.
         addPreferencesFromResource(R.xml.night_display_settings);
-
+        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.night_display_text);
         mAutoModePreference = (DropDownPreference) findPreference(KEY_NIGHT_DISPLAY_AUTO_MODE);
         mStartTimePreference = findPreference(KEY_NIGHT_DISPLAY_START_TIME);
         mEndTimePreference = findPreference(KEY_NIGHT_DISPLAY_END_TIME);
