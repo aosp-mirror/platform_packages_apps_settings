@@ -131,15 +131,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int FILTER_APPS_ENABLED = 3;
     public static final int FILTER_APPS_DISABLED = 4;
     public static final int FILTER_APPS_BLOCKED = 5;
-    public static final int FILTER_APPS_SILENT = 6;
-    public static final int FILTER_APPS_SENSITIVE = 7;
-    public static final int FILTER_APPS_HIDE_NOTIFICATIONS = 8;
-    public static final int FILTER_APPS_PRIORITY = 9;
-    public static final int FILTER_APPS_PERSONAL = 10;
-    public static final int FILTER_APPS_WORK = 11;
-    public static final int FILTER_APPS_USAGE_ACCESS = 13;
-    public static final int FILTER_APPS_WITH_OVERLAY = 14;
-    public static final int FILTER_APPS_WRITE_SETTINGS = 15;
+    public static final int FILTER_APPS_PERSONAL = 6;
+    public static final int FILTER_APPS_WORK = 7;
+    public static final int FILTER_APPS_USAGE_ACCESS = 8;
+    public static final int FILTER_APPS_WITH_OVERLAY = 9;
+    public static final int FILTER_APPS_WRITE_SETTINGS = 10;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[]{
@@ -149,10 +145,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             R.string.filter_enabled_apps,  // Enabled
             R.string.filter_apps_disabled, // Disabled
             R.string.filter_notif_blocked_apps,   // Blocked Notifications
-            R.string.filter_notif_silent,    // Silenced Notifications
-            R.string.filter_notif_sensitive_apps, // Sensitive Notifications
-            R.string.filter_notif_hide_notifications_apps, // Sensitive Notifications
-            R.string.filter_notif_priority_apps,  // Priority Notifications
             R.string.filter_personal_apps, // Personal
             R.string.filter_work_apps,     // Work
             R.string.filter_with_domain_urls_apps,     // Domain URLs
@@ -171,10 +163,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             ApplicationsState.FILTER_ALL_ENABLED, // Enabled
             ApplicationsState.FILTER_DISABLED,    // Disabled
             AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,   // Blocked Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_SILENCED,   // Silenced Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_HIDE_SENSITIVE, // Sensitive Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_HIDE_ALL, // Hide all Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_PRIORITY,  // Priority Notifications
             ApplicationsState.FILTER_PERSONAL,    // Personal
             ApplicationsState.FILTER_WORK,        // Work
             ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
@@ -356,10 +344,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
         if (mListType == LIST_TYPE_NOTIFICATION) {
             mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
-            mFilterAdapter.enableFilter(FILTER_APPS_SILENT);
-            mFilterAdapter.enableFilter(FILTER_APPS_SENSITIVE);
-            mFilterAdapter.enableFilter(FILTER_APPS_HIDE_NOTIFICATIONS);
-            mFilterAdapter.enableFilter(FILTER_APPS_PRIORITY);
         }
         if (mListType == LIST_TYPE_HIGH_POWER) {
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);

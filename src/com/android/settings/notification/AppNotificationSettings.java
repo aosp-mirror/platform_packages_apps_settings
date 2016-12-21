@@ -54,11 +54,11 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES);
 
     private static final String KEY_CHANNELS = "channels";
+    private static final String KEY_BLOCK = "block";
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private PreferenceCategory mChannels;
     private List<NotificationChannel> mChannelList;
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -84,27 +84,16 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
         addPreferencesFromResource(R.xml.app_notification_settings);
 
-        mImportance = (ImportanceSeekBarPreference) findPreference(KEY_IMPORTANCE);
-        mPriority =
-                (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BYPASS_DND);
-        mVisibilityOverride =
-                (RestrictedDropDownPreference) getPreferenceScreen().findPreference(
-                        KEY_VISIBILITY_OVERRIDE);
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
-        mSilent = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_SILENT);
         mChannels = (PreferenceCategory) findPreference(KEY_CHANNELS);
 
         if (mPkgInfo != null) {
+            setupBlock(mAppRow.systemApp, mAppRow.banned);
             // load settings intent
             ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
             rows.put(mAppRow.pkg, mAppRow);
             collectConfigActivities(rows);
             mChannelList = mBackend.getChannels(mPkg, mUid).getList();
-
-            setupImportancePrefs(mAppRow.systemApp, mAppRow.appImportance, mAppRow.banned,
-                    NotificationManager.IMPORTANCE_HIGH);
-            setupPriorityPref(mAppRow.appBypassDnd);
-            setupVisOverridePref(mAppRow.appVisOverride);
 
             if (mChannelList.isEmpty()) {
                 setVisible(mChannels, false);
@@ -129,7 +118,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     mChannels.addPreference(channelPref);
                 }
             }
-            updateDependents(mAppRow.appImportance);
+            updateDependents(mAppRow.banned);
         }
         if (mDashboardFeatureProvider.isEnabled()) {
             final Preference pref = FeatureFactory.getFactory(activity)
@@ -148,10 +137,40 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     @Override
-    protected void updateDependents(int importance) {
-        super.updateDependents(importance);
-        setVisible(mChannels,
-                !(mChannelList.isEmpty() || importance == NotificationManager.IMPORTANCE_NONE));
+    public void onResume() {
+        super.onResume();
+        if ((mUid != -1 && getPackageManager().getPackagesForUid(mUid) == null)) {
+            // App isn't around anymore, must have been removed.
+            finish();
+            return;
+        }
+        if (mBlock != null) {
+            mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
+        }
+    }
+
+    private void setupBlock(boolean notBlockable, boolean banned) {
+        if (notBlockable) {
+            setVisible(mBlock, false);
+        } else {
+            mBlock.setChecked(banned);
+            mBlock.setOnPreferenceChangeListener(
+                    new Preference.OnPreferenceChangeListener() {
+                        @Override
+                        public boolean onPreferenceChange(Preference preference,
+                                Object newValue) {
+                            final boolean blocked = (Boolean) newValue;
+                            mBackend.setNotificationsEnabledForPackage(mPkgInfo.packageName, mUid,
+                                    !blocked);
+                            updateDependents(blocked);
+                            return true;
+                        }
+                    });
+        }
+    }
+
+    private void updateDependents(boolean banned) {
+        setVisible(mChannels, !(mChannelList.isEmpty() || banned));
     }
 
     private List<ResolveInfo> queryNotificationConfigActivities() {

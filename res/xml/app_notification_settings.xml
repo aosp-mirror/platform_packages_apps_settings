@@ -18,46 +18,18 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/app_notifications_title"
         android:key="app_notification_settings">
-
-    <!-- Importance -->
     <!-- Block -->
     <com.android.settingslib.RestrictedSwitchPreference
-            android:key="block"
-            android:title="@string/app_notification_block_title"
-            android:summary="@string/app_notification_block_summary"
-            android:order="2"
-            settings:useAdditionalSummary="true"
-            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
-    <!-- Silent -->
-    <com.android.settingslib.RestrictedSwitchPreference
-            android:key="silent"
-            android:title="@string/show_silently"
-            android:summary="@string/show_silently_summary"
-            android:order="3"
-            settings:useAdditionalSummary="true" />
-    <!-- Slider -->
-    <com.android.settings.notification.ImportanceSeekBarPreference
-            android:key="importance"
-            android:title="@string/notification_importance_title"
-            android:order="4"/>
-
-    <!-- Visibility Override -->
-    <com.android.settings.notification.RestrictedDropDownPreference
-            android:key="visibility_override"
-            android:title="@string/app_notification_visibility_override_title"
-            android:order="5" />
-
-    <!-- Bypass DND -->
-    <com.android.settingslib.RestrictedSwitchPreference
-            android:key="bypass_dnd"
-            android:title="@string/app_notification_override_dnd_title"
-            android:summary="@string/app_notification_override_dnd_summary"
-            android:order="6"
-            settings:useAdditionalSummary="true" />
+        android:key="block"
+        android:title="@string/app_notification_block_title"
+        android:summary="@string/app_notification_block_summary"
+        android:order="2"
+        settings:useAdditionalSummary="true"
+        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
 
     <PreferenceCategory
             android:key="channels"
             android:title="@string/notification_channels"
-            android:order="7" />
+            android:order="3" />
 
 </PreferenceScreen>
