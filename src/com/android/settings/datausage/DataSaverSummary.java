@@ -54,8 +54,6 @@ public class DataSaverSummary extends SettingsPreferenceFragment
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.data_saver);
-        mFooterPreferenceMixin.createFooterPreference()
-                .setTitle(com.android.internal.R.string.data_saver_description);
         mUnrestrictedAccess = findPreference(KEY_UNRESTRICTED_ACCESS);
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) getContext().getApplicationContext());

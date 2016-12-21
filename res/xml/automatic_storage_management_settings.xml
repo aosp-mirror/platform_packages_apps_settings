@@ -32,10 +32,12 @@
             android:title="@string/downloads_backup_preference_title"
             android:summary="@string/downloads_backup_text"/>
 
-        <Preference
+        <com.android.settings.fuelgauge.WallOfTextPreference
             android:key="freed_bytes"
             android:persistent="false"
-            android:selectable="false" />
+            android:selectable="false"
+            settings:allowDividerAbove="false"
+            settings:allowDividerBelow="true" />
 
         <DropDownPreference
             android:key="days"

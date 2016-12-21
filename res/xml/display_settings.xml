@@ -19,12 +19,12 @@
         android:title="@string/display_settings"
         settings:keywords="@string/keywords_display">
 
-        <Preference
+        <PreferenceScreen
                 android:key="brightness"
                 android:title="@string/brightness"
                 settings:keywords="@string/keywords_display_brightness_level">
             <intent android:action="android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
-        </Preference>
+        </PreferenceScreen>
 
         <SwitchPreference
                 android:key="auto_brightness"
@@ -70,7 +70,7 @@
                 android:title="@string/camera_gesture_title"
                 android:summary="@string/camera_gesture_desc" />
 
-        <Preference
+        <PreferenceScreen
                 android:key="screensaver"
                 android:title="@string/screensaver_settings_title"
                 android:fragment="com.android.settings.DreamSettings" />
@@ -89,7 +89,7 @@
                 android:title="@string/tap_to_wake"
                 android:summary="@string/tap_to_wake_summary" />
 
-        <Preference
+        <PreferenceScreen
                 android:key="font_size"
                 android:title="@string/title_font_size"
                 android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
@@ -105,7 +105,7 @@
                 android:summary="%s"
                 android:title="@string/display_auto_rotate_title" />
 
-        <Preference
+        <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 settings:keywords="@string/keywords_display_cast_screen"
