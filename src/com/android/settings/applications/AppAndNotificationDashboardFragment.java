@@ -19,6 +19,7 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -35,7 +36,7 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return APP_AND_NOTIFICATION_CATEGORY_FRAGMENT;
+        return MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY;
     }
 
     @Override

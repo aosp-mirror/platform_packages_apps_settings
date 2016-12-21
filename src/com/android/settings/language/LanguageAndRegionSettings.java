@@ -19,6 +19,7 @@ package com.android.settings.language;
 import android.content.Context;
 import android.speech.tts.TtsEngines;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -34,7 +35,7 @@ public class LanguageAndRegionSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return LANGUAGE_AND_REGION_CATEGORY_FRAGMENT;
+        return MetricsProto.MetricsEvent.SETTINGS_LANGUAGE_CATEGORY;
     }
 
     @Override

@@ -21,6 +21,7 @@ import android.os.UserHandle;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
@@ -43,7 +44,7 @@ public class InputAndGestureSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return INPUT_AND_GESTURE_CATEGORY_FRAGMENT;
+        return MetricsProto.MetricsEvent.SETTINGS_INPUT_CATEGORY;
     }
 
     @Override
