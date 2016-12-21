@@ -18,7 +18,7 @@
                   android:key="language_keyboard_settings"
                   android:title="@string/language_keyboard_settings_title">
 
-    <Preference
+    <PreferenceScreen
             android:key="phone_language"
             android:title="@string/phone_language"
             android:fragment="com.android.settings.localepicker.LocaleListEditor"
@@ -34,17 +34,17 @@
         android:persistent="false"/>
 
     <!-- User dictionary preference title and fragment will be set programmatically. -->
-    <Preference
+    <PreferenceScreen
             android:key="key_user_dictionary_settings"
             android:title="@string/user_dict_settings_title"
             />
 
     <PreferenceCategory
         android:title="@string/keyboard_and_input_methods_category">
-        <Preference
+        <PreferenceScreen
             android:title="@string/virtual_keyboard_category"
             android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment" />
-        <Preference
+        <PreferenceScreen
             android:title="@string/physical_keyboard_title"
             android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment" />
     </PreferenceCategory>
@@ -53,7 +53,7 @@
             android:key="voice_category"
             android:title="@string/voice_category" >
 
-        <Preference
+        <PreferenceScreen
                 android:key="tts_settings"
                 android:title="@string/tts_settings_title"
                 android:fragment="com.android.settings.tts.TextToSpeechSettings"

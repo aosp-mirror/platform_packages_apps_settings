@@ -26,26 +26,26 @@
         android:summary="@string/applications_settings_summary"
         android:key="applications_settings">
 
-    <Preference
+    <PreferenceScreen
             android:fragment="com.android.settings.applications.ManageApplications"
             android:title="@string/manageapplications_settings_title"
             android:summary="@string/manageapplications_settings_summary">
-    </Preference>
+    </PreferenceScreen>
 
-    <Preference
+    <PreferenceScreen
             android:fragment="com.android.settings.applications.ManageApplications"
             android:title="@string/runningservices_settings_title"
             android:summary="@string/runningservices_settings_summary">
         <extra android:name="classname" android:value="com.android.settings.Settings$RunningServicesActivity" />
-    </Preference>
+    </PreferenceScreen>
 
-    <Preference
+    <PreferenceScreen
             android:fragment="com.android.settings.applications.ManageApplications"
             android:title="@string/storageuse_settings_title"
             android:summary="@string/storageuse_settings_summary">
         <extra android:name="classname"
                 android:value="com.android.settings.Settings$StorageUseActivity" />
-    </Preference>
+    </PreferenceScreen>
 
     <CheckBoxPreference
             android:key="toggle_advanced_settings"
