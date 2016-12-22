@@ -390,6 +390,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"የማያ ገጽ መቆለፊያ አማራጭ ተሰናክሏል። ተጨማሪ ለመረዳት የድርጅትዎን አስተዳዳሪ ያነጋግሩ። "<annotation id="admin_details">"ተጨማሪ ዝርዝሮች"</annotation>\n\n"አሁንም ግዢዎችን እና የመተግበሪያ መዳረሻን ለመፍቀድ የጣት አሻራዎን መጠቀም ይችላሉ። "<annotation id="url">"ተጨማሪ ለመረዳት"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"ጣትዎን ያንሱ፣ ከዚያ በድጋሚ ዳሳሽ ይንኩ"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"እስከ <xliff:g id="COUNT">%d</xliff:g> የሚደርሱ የጣት አሻራዎችን ማከል ይችላሉ"</string>
+    <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"የሚፈቀደውን ከፍተኛ የጣት አሻራ ብዛት አክለዋል"</string>
+    <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"ተጨማሪ የጣት አሻራዎችን ማከል አይቻልም"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"ሁሉም የጣት አሻራዎች ይወገዱ?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"ስልክዎን ለመክፈት፣ ለግዢዎች ፍቃድ ለመስጠት ወይም በጣት አሻራዎችዎ በመለያ ወደ መተግበሪያዎች ለመግባት የእርስዎን የጣት አሻራዎች መጠቀም አይችሉም።"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"የጣት አሻራዎችዎን ተጠቅመው የስራ መገለጫዎን መክፈት፣ ግዢዎችን ማጽደቅ ወይም ወደ የስራ መተግበሪያዎች መግባት አይችሉም።"</string>
@@ -628,7 +630,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"እንደ ተናጋሪ ስልክ"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"ለሙዚቃ እና ማህደረ መረጃ"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"ቅንብሮች አስታውስ"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi ረዳት"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"ውሰድ"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"ገመድ-አልባ ማሳየትን ያንቁ"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"በአቅራቢያ ምንም መሳሪያዎች አልተገኙም።"</string>
@@ -663,7 +664,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"የWi-Fi ቅንብሮች"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi‑Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"አዘጋጅ&amp; የገመድ አልባ ድረስ ነጥብ አደራጅ"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"የWi‑Fi አውታረ መረብ ይምረጡ"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Wi‑Fi ይምረጡ"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Wi-Fi በማብራት ላይ..."</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Wi-Fi በማጥፋት ላይ..."</string>
@@ -675,9 +675,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"ደካማ ግንኙነቶችን አስወግድ"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"ጥሩ የበይነመረብ ግንኙነት ከሌለው በስተቀር የWi-Fi አውታረ መረብ አይጠቀሙ"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"ጥሩ የበይነመረብ ግንኙነት ያላቸው አውታረ መረቦችን ብቻ ተጠቀም"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"ክፍት Wi‑Fi ራስ-ሰርን ይጠቀሙ"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"ከፍተኛ ጥራት እንዳላቸው ለተረጋገጠላቸው ክፍት አውታረ መረቦች Wi-Fi ረዳት በራስ-ሰር እንዲያገናኝ ይተውት"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"ረዳት ይምረጡ"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"የእውቅና ማረጋገጫዎችን ይጫኑ"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"የአካባቢ ትክክለኛነትን ለማሻሻል የስርዓት መተግበሪያዎች እና አገልግሎቶች አሁንም የWi‑Fi መሣሪያዎችን ማግኘት ይችላሉ። ይህን ለውጥ በ<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ቅንብሮችን መቃኘት<xliff:g id="LINK_END_1">LINK_END</xliff:g> ላይ ሊለውጡት ይችላሉ።"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"ዳግመኛ አታሳይ"</string>
@@ -708,7 +705,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"ያሉ አውታረ መረቦችን ለማየት Wi-Fi ያብሩ።"</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"የWi-Fi አውታረ መረቦችን በመፈለግ ላይ…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"የWi‑Fi አውታረ መረቡን የመቀየር ፍቃድ የሉዎትም።"</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"ሌላ አውታረ መረብ ያክሉ"</string>
     <string name="wifi_more" msgid="3195296805089107950">"ተጨማሪ"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"በራስ ሰር ማወቀር (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"የላቁ አማራጮች"</string>
@@ -782,17 +778,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"አስቀምጥ"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"አውታረ መረብ ማስቀመጥ አልተሳካም"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"ይቅር"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"ለማንኛውም ዝለለ"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"ወደኋላ ተመለስ"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"ማስጠንቀቂያ፦ Wi‑Fiን ከዘለሉ ጡባዊዎ ለተጀመሩ ውርዶች እና ዝማኔዎች የተንቀሳቃሽ ስልክ ውሂብ ብቻ ነው የሚጠቀመው። ሊከሰቱ የሚችሉ የውሂብ ክፍያዎችን ለማቀብ ከWi‑Fi ጋር ይገናኙ።"</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"ማስጠንቀቂያ፦ Wi‑Fiን ከዘለሉ መሣሪያዎ ለተጀመሩ ውርዶች እና ዝማኔዎች የተንቀሳቃሽ ስልክ ውሂብ ብቻ ነው የሚጠቀመው። ሊከሰቱ የሚችሉ የውሂብ ክፍያዎችን ለማቀብ ከWi‑Fi ጋር ይገናኙ።"</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"ማስጠንቀቂያ፦ Wi‑Fiን ከዘለሉ ስልክዎ ለተጀመሩ ውርዶች እና ዝማኔዎች የተንቀሳቃሽ ስልክ ውሂብ ብቻ ነው የሚጠቀመው። ሊከሰቱ የሚችሉ የውሂብ ክፍያዎችን ለማቀብ ከWi‑Fi ጋር ይገናኙ።"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Wi‑Fiን ከዘለሉ፦\n\n"<li>"የእርስዎ ጡባዊ የበይነመረብ ግንኙነት አይኖረውም።"</li>\n\n<li>"ከበይነመረቡ ጋር እስካልተገናኙ ድረስ የሶፍትዌር ዝማኔዎችን አያገኙም።"</li>\n\n<li>"በዚህ ጊዜ የመሣሪያ ጥበቃ ባህሪያትን ማግበር አይችሉም።"</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Wi‑Fiን ከዘለሉ፦\n\n"<li>"የእርስዎ መሣሪያ የበይነመረብ ግንኙነት አይኖረውም።"</li>\n\n<li>"ከበይነመረቡ ጋር እስካልተገናኙ ድረስ የሶፍትዌር ዝማኔዎችን አያገኙም።"</li>\n\n<li>"በዚህ ጊዜ የመሣሪያ ጥበቃ ባህሪያትን ማግበር አይችሉም።"</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Wi‑Fiን ከዘለሉ፦\n\n"<li>"የእርስዎ ስልክ የበይነመረብ ግንኙነት አይኖረውም።"</li>\n\n<li>"ከበይነመረቡ ጋር እስካልተገናኙ ድረስ የሶፍትዌር ዝማኔዎችን አያገኙም።"</li>\n\n<li>"በዚህ ጊዜ የመሣሪያ ጥበቃ ባህሪያትን ማግበር አይችሉም።"</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"ጡባዊው ከዚህ የWi-Fi አውታረ መረብ ጋር መገናኘት አልቻለም።"</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"መሣሪያው ከዚህ የWi‑Fi አውታረ መረብ ጋር ሊገናኝ አልቻለም።"</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"ስልኩ ከዚህ የWi-Fi አውታረ መረብ ጋር መገናኘት አልቻለም።"</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"የተቀመጡ አውታረ መረቦች"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"የላቀ Wi-Fi"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"የWi-Fi ያዋቅሩ"</string>
@@ -2307,6 +2292,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"ሁልጊዜ-የበራ ንቁ"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"ሁልጊዜ-የበራ ቦዝኗል"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"በዚህ መተግበሪያ አይደገፍም"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"ሁልጊዜ እንደተገናኙ የሚቆዩበት የVPN መገለጫ ይምረጡ። ከዚህ VPN ጋር ሲገናኝ ብቻ ነው የአውታረ መረብ ትራፊክ የሚፈቀደው።"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"ምንም"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"ሁልጊዜ የበራ VPN ለአገልጋይም ለDNSም የአይ.ፒ. አድራሻ ያስፈልገዋል።"</string>
@@ -3198,7 +3189,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"ፕሪሚየም ኤስኤምኤስ ውድ ገንዘብ ሊያስወጣዎት ይችላል፣ እና በአገልግሎት አቅራቢ ክፍያዎ ላይ ሒሳብ ያስጨምርብዎታል። ለመተግበሪያ ፈቃድን ካነቁ ያንን መተግበሪያ በመጠቀም ፕሪሚየም ኤስኤምኤስ መላክ ይችላሉ።"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"የፕሪሚየም ኤስኤምኤስ መዳረሻ"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"ተሰናክሏል"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"የተግባራዊነት ማሳይ ሁነታ"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"እርስዎን ለመርዳት እዚህ እንገኛለን"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"እዚህ ላይ 24/7 ለእርስዎ እንገኛለን"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"እዚህ 24/7 ለእርስዎ እንገኛለን"</string>

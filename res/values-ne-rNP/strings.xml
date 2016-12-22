@@ -390,6 +390,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"स्क्रिन लक विकल्प अक्षम भयो। थप जान्नका लागि तपाईंको संगठनको प्रशासकलाई सम्पर्क गर्नुहोस्। "<annotation id="admin_details">"थप विवरणहरु"</annotation>\n\n"तपाईं अझै पनि खरिद र अनुप्रयोग पहुँच प्राधिकरणमा आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ। "<annotation id="url">"थप जान्नुहोस्"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"औँला उठाई, फेरि सेंसर छुनुहोस्"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"तपाईँ <xliff:g id="COUNT">%d</xliff:g> सम्म फिंगरप्रिन्टहरू थप्न सक्नुहुन्छ"</string>
+    <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"तपाईंले अधिकतम संख्यामा फिंगरप्रिन्टहरू थप्नुभएको छ"</string>
+    <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"थप फिंगरप्रिन्टहरू थप्न सकिँदैन"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"सबै फिंगरप्रिन्टहरू हटाउने हो?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"तपाईँको फोन अनलक गर्न, खरिद अधिकार प्रदान गर्न वा तिनीहरूमार्फत अनुप्रयोगहरूमा साइन इन गर्न तपाईँ आफ्नो फिंगरप्रिन्टहरूको प्रयोग गर्न सक्षम हुनु हुने छैन।"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"तपाईं आफ्नो कार्य प्रोफाइल अनलक गर्न, खरिद गर्ने अनुमति दिन, वा कार्य apps मा साइन इन गर्न आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुने छैन।"</string>
@@ -628,7 +630,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"स्पिकर फोनको रूपमा"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"संगीत र मिडियाका लागि"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"सेटिङहरू सम्झनुहोस्"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi-Fi सहायक"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Cast"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"वायरलेस प्रदर्शन सक्षम गर्नुहोस्"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"नजिकै कुनै उपकरण भेटिएन।"</string>
@@ -663,7 +664,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Wi-Fi सेटिङहरू"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"ताररहित पहुँच बिन्दुहरू सेटअप र प्रबन्ध गर्नुहोस्"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Wi-Fi सञ्जाल चयन गर्नुहोस्"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Wi-Fi चयन गर्नुहोस्"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Wi-Fi खुला गर्दै..."</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Wi-Fi निष्क्रिय पार्दै..."</string>
@@ -675,9 +675,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"कमजोर जडान त्याग्नुहोस्"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Wi-Fi नेटवर्क राम्रो इन्टरनेट जडान नभएसम्म प्रयोग नगर्नुहोस्।"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"केवल राम्रो इन्टरनेट जडान हुने सञ्जालको उपयोग गर्नुहोस्"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"खुला Wi-Fi लाई स्वत: प्रयोग गर्नुहोस्"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Wi-Fi सहायकलाई स्वतः उच्च गुणस्तर निर्धारण भएको खुला सञ्जालहरूसँग जडान गर्ने अनुमति दिनुहोस्"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"सहायक छान्नुहोस्"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"प्रमाणपत्रहरू स्थापना गर्नुहोस्"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"स्थान पहिचान सामर्थ्यतामा सुधार गर्न, प्रणाली अनुप्रयोगहरू र सेवाहरूले अझै पनि Wi-Fi नेटवर्कहरू स्क्यान गर्न सक्छन्। तपाईँले यसलाई  <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g> स्क्यानिङ सेटिङहरू <xliff:g id="LINK_END_1">LINK_END</xliff:g> मा परिवर्तन गर्न सक्नुहुन्छ।"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"फेरि नदेखाउनुहोस्"</string>
@@ -708,7 +705,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"उपलब्ध नेटवर्कहरू हेर्नको लागि Wi-Fi खुला गर्नुहोस्।"</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Wi-Fi सञ्जालका लागि खोज्दै ..."</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Wi-Fi सञ्जाल बदल्न तपाईँसँग अनुमति छैन।"</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"अर्को सञ्जाल थप्नुहोस्"</string>
     <string name="wifi_more" msgid="3195296805089107950">"बढी"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"स्वचालित सेटअप (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"उन्नत विकल्पहरू"</string>
@@ -782,17 +778,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"बचत गर्नुहोस्"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"सञ्जाल बचत गर्न विफल"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"रद्द गर्नुहोस्"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"जसरी पनि स्किप गर्नुहोस्"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"पछाडि जानुहोस्"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"चेतावनी: यदि तपाईँले Wi-Fi छोड्नु हुन्छ भने, तपाईँको ट्याब्लेटले प्रारम्भिक डाउनलोड र अद्यावधिकहरूको लागि सेलुलर डेटा मात्र प्रयोग गर्नेछ। सम्भावित डेटा शुल्क हटाउन, Wi-Fi जडान गर्नुहोस्।"</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"चेतावनी: यदि तपाईँले Wi-Fi छोड्नु हुन्छ भने, तपाईँको उपकरणले प्रारम्भिक डाउनलोड र अद्यावधिकहरूको लागि सेलुलर डेटा मात्र प्रयोग गर्नेछ। सम्भावित डेटा शुल्क हटाउन, Wi-Fi जडान गर्नुहोस्।"</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"चेतावनी: यदि तपाईँले Wi-Fi छोड्नु हुन्छ भने, तपाईँको फोनले प्रारम्भिक डाउनलोड र अद्यावधिकहरूको लागि सेलुलर डेटा मात्र प्रयोग गर्नेछ। सम्भावित डेटा शुल्क हटाउन, Wi-Fi जडान गर्नुहोस्।"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"यदि तपाईँले Wi-Fi लाई छोड्नु भयो भने:\n\n"<li>"तपाईँको ट्याब्लेटमा इन्टरनेट जडान हुने छैन।"</li>\n\n<li>"इन्टरनेट नभए सम्म तपाईँले सफ्टवेयर अद्यावधिकहरु प्राप्त गर्नु हुन्न।"</li>\n\n<li>"यस समयमा यन्त्र सुरक्षा विशेषताहरु सक्रिय पार्न सक्नुहुन्‍न।"</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"यदि तपाईँले Wi-Fi लाई छोड्नु भयो भने:\n\n"<li>"तपाईँको यन्त्रमा इन्टरनेट जडान हुने छैन।"</li>\n\n<li>"इन्टरनेट नभए सम्म तपाईँले सफ्टवेयर अद्यावधिकहरु प्राप्त गर्नुहुन्न ।"</li>\n\n<li>"यस समयमा यन्त्र सुरक्षा विशेषताहरु सक्रिय पार्न सक्नुहुन्‍न।"</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"यदि तपाईँले Wi-Fi लाई छोड्नु भयो भने:\n\n"<li>"तपाईँको फोनमा इन्टरनेट जडान हुने छैन।"</li>\n\n<li>"इन्टरनेट नभए सम्म तपाईँले सफ्टवेयर अद्यावधिकहरु प्राप्त गर्नुहुन्न।"</li>\n\n<li>"यस समयमा यन्त्र सुरक्षा विशेषताहरु सक्रिय पार्न सक्नुहुन्‍न।"</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"ट्याब्लेट यस Wi-Fi नेटवर्कसँग जडान गर्न असमर्थ भयो।"</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"यस Wi-Fi सञ्जालमा जडान गर्न उपकरण असमर्थ थियो।"</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"यस Wi-Fi नेटवर्कमा जडान गर्न फोन असमर्थ थियो।"</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"सुरक्षित सञ्जालहरू"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"जटिल Wi-Fi"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wi-Fi कन्फिगर गर्नुहोस्"</string>
@@ -2307,6 +2292,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"सधैँ-सक्रिय भन्ने सुविधा सक्रिय छ"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"सधैँ-सक्रिय भन्ने सुविधा निष्क्रिय छ"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"यो अनुप्रयोगले समर्थन गर्दैन"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"सधैँ जडान भइरहन VPN प्रोफाइल चयन गर्नुहोस्। यस VPN जडान भएको बेला नेटवर्क ट्राफिकलाई मात्र अनुमति हुने छ।"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"कुनै पनि होइन"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"सधैँ चल्ने VPN लाई IP ठेगाना दुबै सर्भर र DNS का लागि चाहिन्छ।"</string>
@@ -3200,7 +3191,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"प्रिमियम SMS सक्रिय गर्नाले तपाईँलाई पैसा लाग्न सक्छ र उक्त रकम तपाईँको वाहकलाई तिर्नु पर्ने बिलमा जोडिनेछ। यदि तपाईँ अनुप्रयोगको लागि अनुमति सक्रिय गर्नुहुन्छ भने तपाईँ त्यस अनुप्रयोगको प्रयोग गरेर प्रिमियम SMS पठाउन सक्नुहुनेछ।"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"प्रिमियम SMS माथि पहुँच"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"असक्षम गरियो"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"डेमो मोड"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"हामी मद्दतका लागि तयार छौँ"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"हामी तपाईँको सहायताका लागि २४/७ उपलब्ध छौँ"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"हामी तपाईँको सहायताका लागि २४ घन्टा ७ दिन उपलब्ध छौँ"</string>

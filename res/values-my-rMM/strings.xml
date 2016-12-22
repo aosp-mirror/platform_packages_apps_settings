@@ -390,6 +390,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"မျက်နှာပြင်သော့ခတ်မှု ကိုပိတ်ထားသည်။ ပိုမိုလေ့လာရန် သင့်အဖွဲ့အစည်း၏ စီမံခန့်ခွဲသူကို ဆက်သွယ်ပါ။ "<annotation id="admin_details">"နောက်ထပ် အသေးစိတ်များ"</annotation>\n\n"ဝယ်ယူမှုများနှင့် အက်ပ်အသုံးပြုမှုကို ခွင့်ပြုရန် သင့်လက်ဗွေကိုအသုံးပြုနိုင်ပါသေးသည်။ "<annotation id="url">"ပိုမိုလေ့လာရန်"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"လက်ချောင်းအား မပြီး၊ အာရုံခံနေရာအား ထပ်မံထိပါ"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"လက်ဗွေရာ <xliff:g id="COUNT">%d</xliff:g> ခု အထိ သင်ထည့်နိုင်၏"</string>
+    <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"အများဆုံးထည့်နိုင်သည့် လက်ဗွေရာအရေအတွက်အထိ ထည့်သွင်းပြီးဖြစ်သည်"</string>
+    <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"နောက်ထပ်လက်ဗွေရာများ ထည့်၍မရတော့ပါ"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"လက်ဗွေ အားလုံးကို ဖယ်ရှားရမလား?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"သင်သည် သင့်ဖုန်းကို သော့ဖွင့်ခြင်း၊ ဈေးဝယ်မှုများကို အတည်ပြုခြင်း၊ သို့မဟုတ် အကပ်များကို လက်မှတ်ထိုးဝင်ရန်အတွက် သင်၏ လက်ဗွေများကို သုံးနိုင်မည် မဟုတ်ပါ။"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"သင့်အလုပ်ပရိုဖိုင်ကို လော့ခ်ဖွင့်ရန်၊ ဝယ်ယူမှုများကို ခွင့်ပြုပေးရန်၊ သို့မဟုတ် အလုပ်အက်ပ်များသို့ လက်မှတ်ထိုးဝင်ရန် သင့်လက်ဗွေရာကို အသုံးပြုနိုင်တော့မည် မဟုတ်ပါ။"</string>
@@ -628,7 +630,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"စပီကာဖုန်းအနေဖြင့်"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"သီချင်းနှင့်မီဒီယာအတွက်"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"ဆက်တင်များအားမှတ်မိစေရန်"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"ကြိုးမဲ့ ကူညီပေးသူ"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Cast"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"ကြိုးမဲ့ ပြသမှုကို ဖွင့်ရန်"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"အနီးနားတွင် စက်ပစ္စည်း ရှာမတွေ့ပါ။"</string>
@@ -663,7 +664,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"ဝိုင်ဖိုင်ဆက်တင်များ"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"ကြိုးမဲ့ချိတ်ဆက်ပွိုင့်များအား သတ်မှတ်ခြင်း &amp;  စီမံခြင်း"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"ဝိုင်ဖိုင်ကွန်ယက် ရွေးချယ်ရန်"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"ကြိုးမဲ့ကို ရွေးချယ်ရန်"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"ဝိုင်ဖိုင်ဖွင့်နေသည် …"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"ဝိုင်ဖိုင်ပိတ်နေသည် …"</string>
@@ -675,9 +675,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"အားနည်းသော ချိတ်ဆက်မှုများကို ရှောင်ကြဉ်ရန်"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"ကောင်းမွန်သော အင်တာနက် ချိတ်ဆက်မှု မရှိသော ဝိုင်ဖိုင်ကွန်ရက်အား မသုံးပါနှင့်"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"အင်တာနက် ချိတ်ဆက်မှု ကောင်းသည့် ကွန်ရက်များကိုသာ အသုံးပြုရန်"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"ပွင့်လင်း ကြိုးမဲ့အင်တာနက် အလိုအလျောက် အသုံးပြုမည်"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"အရည်အသွေးမြင့်သည်ဟု သတ်မှတ်ထားသည့် ပွင့်လင်းကွန်ရက်များသို့  ကြိုးမဲ့ကူပေးသူမှ အလိုအလျောက် ချိတ်ဆက်စေပါ။"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"အကူ ရွေးချယ်ပါ"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"အသိအမှတ်ပြုလက်မှတ်များထည့်သွင်းရန်"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"တည်နေရာမှန်ကန်မှု တိုးတက်စေရန်၊ စနစ်အပ်ဖ်များနှင့် ဝန်ဆောင်မှုများသည် ဝိုင်ဖိုင်ကွန်ရက်များ ရှာဖွေနိုင်ပါသေးသည်။ ၎င်းကို <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ရှာဖွေမှု ချိန်ညှိချက်များ<xliff:g id="LINK_END_1">LINK_END</xliff:g> တွင်ပြောင်းလဲနိုင်ပါသည်။"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"နောက်ထပ်မပြပါနှင့်"</string>
@@ -708,7 +705,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"ရရှိနိုင်သည့်ကွန်ရက်များကို မြင်ရန် ဝိုင်ဖိုင်ဖွင့်ပါ"</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"ဝိုင်ဖိုင်ကွန်ယက်များရှာဖွေနေသည်"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"သင့်မှာ Wi-Fi  ကွန်ရက်ကို ပြောင်းလဲရန် ခွင့်ပြုချက် မရှိပါ။"</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"အခြား ကွန်ရက်တစ်ခု သုံးရန်"</string>
     <string name="wifi_more" msgid="3195296805089107950">"နောက်ထပ်"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"အလိုအလျောက် အစီအမံ (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"အဆင့်မြင့် ရွေးစရာများ"</string>
@@ -782,17 +778,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"သိမ်းရန်"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"ကွန်ရက်ကို မှတ်သားရန် မအောင်မြင်ခဲ့ပါ"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"မလုပ်တော့"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"ကျော်ပါ"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"ပြန်သွားရန်"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"သတိပေးချက်: သင်က ကြိုးမဲ့ကို ကျော်သွားလျင်၊ သင်၏ တက်ဘလက်မှာ ကနဦး ဒေါင်းလုဒ်များ နှင့်  မွမ်းမံမှုများ အတွက် ဆဲလ်လူလာ ဒေတာကို သုံးမည် မဟုတ်ပါ။ ဒေတာ အတွက် ငွေတောင်းခံ လာနိုင်တာကို ရှောင်ရှားရန်၊ ကြိုးမဲ့သို့  ချိတ်ဆက်ပါ။"</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"သတိပေးချက်: သင်က ကြိုးမဲ့ကို ကျော်သွားလျင်၊ သင်၏ ကိရိယာမှာ ကနဦး ဒေါင်းလုဒ်များ နှင့်  မွမ်းမံမှုများ အတွက် ဆဲလ်လူလာ ဒေတာကို သုံးမည် မဟုတ်ပါ။ ဒေတာ အတွက် ငွေတောင်းခံ လာနိုင်တာကို ရှောင်ရှားရန်၊ ကြိုးမဲ့သို့ ချိတ်ဆက်ပါ။"</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"သတိပေးချက်: သင်က ကြိုးမဲ့ကို ကျော်သွားလျင်၊ သင်၏ ဖုန်းမှာ ကနဦး ဒေါင်းလုဒ်များ နှင့်  မွမ်းမံမှုများ အတွက် ဆဲလ်လူလာ ဒေတာကို သုံးမည် မဟုတ်ပါ။ ဒေတာ အတွက် ငွေတောင်းခံ လာနိုင်တာကို ရှောင်ရှားရန်၊ ကြိုးမဲ့သို့  ချိတ်ဆက်ပါ။"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"အကယ်၍ ကြိုးမဲ့အင်တာနက်အား(မချိတ်ဆက်ဘဲ)ကျော်သွားလျှင်:\n\n"<li>" သင့်တပ်ဘလက်မှာ အင်တာနက်ချိတ်ဆက်မှုရှိမည်မဟုတ်ပါ။"</li>\n\n<li>" သင်အင်တာနက်သို့ မဆက်သွယ်မချင်း ဆော့ဖ်ဝဲအဆင့်မြှင့်မှုများရရှိလိမ့်မည်မဟုတ်ပါ။ "</li>\n\n<li>" ယခုအချိန်တွင် စက်ပစ္စည်းကာကွယ်ရေး အင်္ဂါရပ်များအား စတင်အလုပလုပ်ရန် သင်အသက်သွင်းနိုင်မည်မဟုတ်ပါ။ "</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"အကယ်၍ ကြိုးမဲ့အင်တာနက်အား(မချိတ်ဆက်ဘဲ)ကျော်သွားလျှင်:\n\n"<li>" သင့်စက်ပစ္စည်းမှာ အင်တာနက်ချိတ်ဆက်မှု ရှိမည်မဟုတ်ပါ။ "</li>\n\n<li>" သင်အင်တာနက်သို့ မဆက်သွယ်မချင်း ဆော့ဖ်ဝဲအဆင့်မြှင့်မှုများ ရရှိလိမ့်မည်မဟုတ်ပါ။ "</li>\n\n<li>" ယခုအချိန်တွင် စက်ပစ္စည်းကာကွယ်ရေးအင်္ဂါရပ်များအား စတင်အလုပ်လုပ်ရန် သင်အသက်သွင်းနိုင်မည်မဟုတ်ပါ။ "</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"အကယ်၍ ကြိုးမဲ့အင်တာနက်အား(မချိတ်ဆက်ဘဲ)ကျော်သွားလျှင်: \n\n"<li>" သင့်ဖုန်းမှာ အင်တာနက်ချိတ်ဆက်မှုရှိမည်မဟုတ်ပါ။ "</li>\n\n<li>" သင်အင်တာနက်သို့ မဆက်သွယ်မချင်း ဆော့ဖ်ဝဲအဆင့်မြှင့်မှုများ ရရှိလိမ့်မည်မဟုတ်ပါ။ "</li>\n\n<li>" ယခုအချိန်တွင် စက်ပစ္စည်းကာကွယ်ရေးအင်္ဂါရပ်များအား စတင်အလုပ်လုပ်ရန် သင်အသက်သွင်းနိုင်မည်မဟုတ်ပါ။ "</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"တက်ဘလက်သည် ဤ ဝိုင်ဖိုင်ကွန်ရက်သို့ မချိတ်ဆက်နိုင်ပါ။"</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"ကိရိယာသည် လက်ရှိ ကြိုးမဲ့ ကွန်ရက်ကို ချိတ်ဆက် မရခဲ့ပါ။"</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"ဖုန်းသည် ဤဝိုင်ဖိုင်ကွန်ရက်သို့ ချိတ်ဆက်၍ မရနိုင်ပါ"</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"သိမ်းဆည်းခဲ့သည့် ကွန်ရက်များ"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"အဆင့်မြင့် Wi-Fi"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"ကြိုးမဲ့ကွန်ရက်ကို စီဖွဲ့ပါ"</string>
@@ -2307,6 +2292,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"အမြဲတမ်းဖွင့်ခြင်းဆက်တင် ဖွင့်ထားသည်"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"\'အမြဲတမ်းဖွင့်ထားရန်\' ကို ပိတ်ထားသည်"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"ဤအက်ပ်က ပံ့ပိုးမထားပါ"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"VPN ကိုယ်ရေးအချက်အလက်ကို အမြဲတမ်းချိတ်ဆက်ထားလျက် ရှိနေရန် ရွေးပါ။ ၎င်းသည် VPN ကို ချိတ်ဆက်ထားသောအခါမှသာ ကွန်ရက်အသွားအလာကို ခွင့်ပြုလိမ့်မည်။"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"တစ်ခုမှမဟုတ်ပါ"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"အမြဲပွင့်နေသော VPN အတွက် ဆာဗာနှင့်DNS.နှစ်ခုလုံးအတွက် IP လိပ်စာတစ်ခုလိုအပ်သည်။"</string>
@@ -3198,7 +3189,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"ပရီမီယံ SMS သည်ငွေကြေးကုန်ကျနိုင်ပြီး သင့်ဖုန်းဝန်​ဆောင်မှုပေးသူ၏ ငွေတောင်းခံလွှာသို့ ပေါင်း၍ ထည့်သွင်းပါမည်။ အက်ပ်တစ်ခုကို သင်ခွင့်ပြုလိုက်လျှင် ၎င်းအက်ပ်ကိုအသုံးပြုပြီး ပရီမီယံ SMS ပို့နိုင်မည်ဖြစ်သည်။"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"ပရီမီယံ SMS အသုံးပြုခွင့်"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"ပိတ်ထားသည်"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"သရုပ်ပြမုဒ်"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"ကျွန်ုပ်တို့ကူညီဖို့ အသင့်ရှိနေပါသည်"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"သင့်အတွက် ကျွန်ုပ်တို့သည် တစ်နေ့ ၂၄ နာရီနှင့် ၇ ရက်တပတ်လုံး အသင့်ရှိနေပါသည်။"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"ကျွန်ုပ်တို့သည် တစ်နေ့ ၂၄ နာရီနှင့် ၇ ရက်တပတ်လုံး အသင့်ရှိနေပါသည်"</string>

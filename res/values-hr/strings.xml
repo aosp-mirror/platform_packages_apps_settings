@@ -393,6 +393,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Opcija zaključavanja zaslona onemogućena je. Obratite se administratoru svoje organizacije da biste saznali više. "<annotation id="admin_details">"Više pojedinosti"</annotation>\n\n"Za autorizaciju kupnji i pristup aplikacijama i dalje možete upotrebljavati otisak prsta. "<annotation id="url">"Saznajte više"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Podignite prst, a zatim ponovo dodirnite senzor"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Maksimalni broj otisaka prstiju koji se može dodati iznosi <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <!-- no translation found for fingerprint_intro_error_max (6864066984678078441) -->
+    <skip />
+    <!-- no translation found for fingerprint_intro_error_unknown (1905692132326523040) -->
+    <skip />
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Želite ukloniti sve otiske prstiju?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Nećete moći upotrebljavati otiske prstiju za otključavanje telefona, autorizaciju kupnji ili prijavljivanje na aplikacije."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"Nećete moći otiskom prsta otključati radni profil, autorizirati kupnje niti se prijaviti na aplikacije za posao."</string>
@@ -637,7 +641,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Kao telefonski zvučnik"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Za glazbu i medije"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Zapamti postavke"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Emitiranje"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Omogući bežični prikaz"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"U blizini nema uređaja."</string>
@@ -672,7 +675,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Postavke Wi-Fi-ja"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Postavljanje i upravljanje bežičnim pristupnim točkama"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Odabir Wi-Fi mreže"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Odaberite Wi‑Fi mrežu"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Uključivanje Wi-Fi-ja…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Isključivanje Wi-Fi-ja…"</string>
@@ -684,9 +686,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Izbjegavati slabe veze"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Ne upotrebljavaj Wi-Fi mrežu ako internetska veza nije zadovoljavajuća"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Koristi samo mreže s dobrom internetskom vezom"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Automatski upotrebljavaj otvoreni Wi‑Fi"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Dopusti pomoćniku za Wi‑Fi automatsko povezivanje s otvorenim mrežama s utvrđenom visokom kvalitetom"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Odaberite pomoćnik"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instaliranje certifikata"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Radi poboljšanja preciznosti lokacije aplikacije i usluge sustava i dalje mogu tražiti Wi‑Fi mreže. To možete promijeniti u <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>postavkama traženja<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Ne prikazuj ponovno"</string>
@@ -717,7 +716,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Da biste vidjeli dostupne mreže, uključite Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Traženje Wi-Fi mreža…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Nemate dopuštenje za promjenu Wi‑Fi mreže."</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"Dodaj još jednu mrežu"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Više"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Autom. postavljanje (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Napredne opcije"</string>
@@ -791,17 +789,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"Spremi"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Spremanje mreže nije uspjelo"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Odustani"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Svejedno preskoči"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"Natrag"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"UPOZORENJE: ako preskočite Wi‑Fi, tablet će upotrebljavati samo mobilne podatke za početna preuzimanja i ažuriranja. Da biste izbjegli moguće troškove za prijenos podataka, povežite se s Wi-Fi-jem."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"UPOZORENJE: ako preskočite Wi‑Fi, uređaj će upotrebljavati samo mobilne podatke za početna preuzimanja i ažuriranja. Da biste izbjegli moguće troškove za prijenos podataka, povežite se s Wi-Fi-jem."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"UPOZORENJE: ako preskočite Wi‑Fi, telefon će upotrebljavati samo mobilne podatke za početna preuzimanja i ažuriranja. Da biste izbjegli moguće troškove za prijenos podataka, povežite se s Wi-Fi-jem."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Ako preskočite Wi‑Fi:\n\n"<li>"Tablet neće imati internetsku vezu."</li>\n\n<li>"Nećete primati ažuriranja softvera dok se ne povežete s internetom."</li>\n\n<li>"Nećete moći aktivirati značajke zaštite uređaja."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Ako preskočite Wi‑Fi:\n\n"<li>"Uređaj neće imati internetsku vezu."</li>\n\n<li>"Nećete primati ažuriranja softvera dok se ne povežete s internetom."</li>\n\n<li>"Nećete moći aktivirati značajke zaštite uređaja."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Ako preskočite Wi‑Fi:\n\n"<li>"telefon neće imati internetsku vezu"</li>\n\n<li>"nećete primati ažuriranja softvera dok se ne povežete s internetom"</li>\n\n<li>"nećete moći aktivirati značajke zaštite uređaja"</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"Tabletno računalo nije se moglo povezati s ovom Wi-Fi mrežom."</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Uređaj se nije mogao povezati s tom Wi‑Fi mrežom."</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"Telefon se nije mogao povezati s ovom Wi-Fi mrežom."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Spremljene mreže"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Napredni Wi-Fi"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Konfiguriranje Wi‑Fi-ja"</string>
@@ -2324,6 +2311,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"Značajka Uvijek uključeno aktivna"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"Značajka Uvijek uključeno nije aktivna"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Ova aplikacija ne podržava tu opciju"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Odaberite VPN profil s kojim ćete uvijek biti povezani. Mrežni promet bit će dopušten samo kada ste povezani s tom VPN mrežom."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Ništa"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Uvijek uključena VPN mreža zahtijeva IP adresu za poslužitelj i za DNS."</string>
@@ -3230,7 +3223,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium SMS-ovi mogu se dodatno naplaćivati i povećat će vaš račun. Ako nekoj aplikaciji date to dopuštenje, moći ćete slati premium SMS-ove pomoću te aplikacije."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Pristup premium SMS-ovima"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Onemogućeno"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"Demo način"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"Rado ćemo vam pomoći"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Uvijek smo tu za vas"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Uvijek smo tu za vas"</string>

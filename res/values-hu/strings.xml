@@ -390,6 +390,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"A képernyőzár használata le van tiltva. További információért forduljon szervezete rendszergazdájához. "<annotation id="admin_details">"További részletek"</annotation>\n\n"Ujjlenyomatát továbbra is használhatja a vásárlások és az alkalmazások hozzáférésének engedélyezéséhez. "<annotation id="url">"További információ"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Emelje fel ujját, majd érintse meg újra az érzékelőt"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Legfeljebb <xliff:g id="COUNT">%d</xliff:g> ujjlenyomatot adhat hozzá"</string>
+    <!-- no translation found for fingerprint_intro_error_max (6864066984678078441) -->
+    <skip />
+    <!-- no translation found for fingerprint_intro_error_unknown (1905692132326523040) -->
+    <skip />
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Eltávolítja az összes ujjlenyomatot?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Nem tudja majd ujjlenyomatával feloldani telefonját, engedélyezni a vásárlásokat, illetve az alkalmazásokba sem tud majd belépni."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"Nem tudja majd ujjlenyomatát használni munkaprofilja feloldásához, a vásárlások engedélyezéséhez vagy a munkahelyi alkalmazásokba való bejelentkezéshez."</string>
@@ -628,7 +632,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Telefonhangszóróként"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Zenéhez és médiához"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Beállítások megjegyzése"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi-kezelő"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Tartalomátküldés"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Vezeték nélküli kijelző engedélyezése"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Nem található a közelben más eszköz."</string>
@@ -663,7 +666,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Wi-Fi beállítások"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Vezeték nélküli hozzáférési pontok beállítása és kezelése"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Wi-Fi-hálózat kiválasztása"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Wi-Fi-hálózat kiválasztása"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Bekapcsolja a Wi-Fit?"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Wi-Fi kikapcsolása..."</string>
@@ -675,9 +677,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Rossz minőségű kapcsolatok kerülése"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Csak akkor használjon Wi-Fi hálózatot, ha jó internetkapcsolatot tud biztosítani."</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Csak jó internetkapcsolattal rendelkező hálózatok használata"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Nyílt Wi‑Fi automatikus használata"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"A Wi-Fi-segéd automatikusan csatlakozhat a jó minőségűnek ítélt nyílt hálózatokhoz"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Segéd kiválasztása"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Tanúsítványok telepítése"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"A pontosabb helyadatok érdekében a rendszeralkalmazások és -szolgáltatások továbbra is kereshetnek Wi-Fi-hálózatokat. Ezt a <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>keresési beállításoknál<xliff:g id="LINK_END_1">LINK_END</xliff:g> módosíthatja."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Ne jelenjen meg többé"</string>
@@ -708,7 +707,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Kapcsolja be a Wi-Fit a hálózatok megjelenítéséhez"</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Wi-Fi hálózatok keresése..."</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Nincs jogosultsága a Wi‑Fi hálózat módosítására."</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"Újabb hálózat hozzáadása"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Egyebek"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Automat. beállítás (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Speciális beállítások"</string>
@@ -782,17 +780,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"Mentés"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Nem sikerült menteni a hálózatot."</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Mégse"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Mégis kihagyom"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"Vissza"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"FIGYELMEZTETÉS: ha kihagyja a Wi‑Fi bekapcsolását, akkor táblagépe csak mobiladatokat fog használni a kezdeti letöltésekhez és frissítésekhez. Az esetleges adatforgalmi díjak elkerülése érdekében csatlakozzon egy Wi-Fi-hálózathoz."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"FIGYELMEZTETÉS: ha kihagyja a Wi‑Fi bekapcsolását, akkor eszköze csak mobiladatokat fog használni a kezdeti letöltésekhez és frissítésekhez. Az esetleges adatforgalmi díjak elkerülése érdekében csatlakozzon egy Wi-Fi-hálózathoz."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"FIGYELMEZTETÉS: ha kihagyja a Wi‑Fi bekapcsolását, akkor telefonja csak mobiladatokat fog használni a kezdeti letöltésekhez és frissítésekhez. Az esetleges adatforgalmi díjak elkerülése érdekében csatlakozzon egy Wi-Fi-hálózathoz."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Ha kihagyja a Wi‑Fi beállítását: \n\n"<li>"Táblagépének nem lesz internetkapcsolata."</li>\n\n<li>"Nem kap szoftverfrissítéseket, amíg nem csatlakozik az internethez."</li>\n\n<li>"Most nem aktiválhatja az eszköz védelmi funkcióit."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Ha kihagyja a Wi‑Fi beállítását: \n\n"<li>"Eszközének nem lesz internetkapcsolata. "</li>\n\n<li>"Nem kap szoftverfrissítéseket, amíg nem csatlakozik az internethez."</li>\n\n<li>"Most nem aktiválhatja az eszköz védelmi funkcióit."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Ha kihagyja a Wi‑Fi beállítását:\n\n"<li>"Telefonjának nem lesz internetkapcsolata. "</li>\n\n<li>"Nem kap szoftverfrissítéseket, amíg nem csatlakozik az internethez."</li>\n\n<li>"Most nem aktiválhatja az eszköz védelmi funkcióit."</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"A táblagép nem tudott csatlakozni ehhez a Wi-Fi hálózathoz."</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Az eszköz nem tudott csatlakozni ehhez a Wi-Fi-hálózathoz."</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"A telefon nem tudott csatlakozni ehhez a Wi-Fi hálózathoz."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Mentett hálózatok"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Speciális Wi-Fi-beállítások"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wi‑Fi beállítása"</string>
@@ -2307,6 +2294,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"A mindig bekapcsolt VPN aktív"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"A „mindig bekapcsolt” mód inaktív"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Ez az alkalmazás nem támogatja"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Válasszon ki egy VPN-profilt, amelyhez mindig csatlakozni szeretne. A hálózati forgalom csak akkor lesz engedélyezve, ha ehhez a VPN-hez csatlakozik."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Nincs"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"A mindig bekapcsolt VPN-hez a szerver és a DNS IP-címe is szükséges."</string>
@@ -3198,7 +3191,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"A Prémium sms-ek használata pénzbe kerülhet Önnek, és a szolgáltató által kiállított számlák végösszegét növeli. Ha engedélyt ad valamelyik alkalmazásnak, akkor azzal lehetősége lesz prémium sms-eket küldeni."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Prémium sms-hozzáférés"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Kikapcsolva"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"Demó mód"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"Szívesen segítünk"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"A hét minden napján, 24 órában a rendelkezésére állunk"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"A hét minden napján 24 órában a rendelkezésére állunk"</string>
