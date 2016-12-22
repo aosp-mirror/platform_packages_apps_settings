@@ -45,7 +45,7 @@ ifneq ($(INCREMENTAL_BUILDS),)
     LOCAL_JACK_FLAGS := --multi-dex native
 endif
 
-include frameworks/opt/setupwizard/library/common-full-support.mk
+include frameworks/opt/setupwizard/library/common-gingerbread.mk
 include frameworks/base/packages/SettingsLib/common.mk
 
 include $(BUILD_PACKAGE)
