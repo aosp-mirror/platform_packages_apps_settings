@@ -523,8 +523,10 @@
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Debe tener al menos una letra"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Debe tener al menos un dígito"</string>
     <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"Debe tener al menos un símbolo"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">Debe tener al menos %d letras</item>
+      <item quantity="one">Debe tener al menos 1 letra</item>
+    </plurals>
     <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
       <item quantity="other">Debe tener al menos %d letras minúsculas</item>
       <item quantity="one">Debe tener al menos 1 letra minúscula</item>
@@ -3252,4 +3254,8 @@
     <string name="web_action_section_title" msgid="806405168097593614">"Aplicaciones no instaladas"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Aplicaciones instaladas"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"El Administrador de Almacenamiento gestiona ahora el almacenamiento"</string>
+    <!-- no translation found for carrier_provisioning (4398683675591893169) -->
+    <skip />
+    <!-- no translation found for trigger_carrier_provisioning (3434865918009286187) -->
+    <skip />
 </resources>
