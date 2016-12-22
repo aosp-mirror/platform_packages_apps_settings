@@ -390,6 +390,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"స్క్రీన్ లాక్ ఎంపిక నిలిపివేయబడింది. మరింత తెలుసుకోవడానికి మీ సంస్థ నిర్వాహకుడిని సంప్రదించండి. "<annotation id="admin_details">"మరిన్ని వివరాలు"</annotation>\n\n"మీరు ఇప్పటికీ కొనుగోళ్లు లేదా అనువర్తన ప్రాప్యతను ప్రామాణీకరించడం కోసం మీ వేలిముద్రను ఉపయోగించవచ్చు. "<annotation id="url">"మరింత తెలుసుకోండి"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"వేలిని పైకి ఎత్తి, ఆపై మళ్లీ సెన్సార్‌ను తాకండి"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"మీరు గరిష్టంగా <xliff:g id="COUNT">%d</xliff:g> వేలిముద్రలను జోడించవచ్చు"</string>
+    <!-- no translation found for fingerprint_intro_error_max (6864066984678078441) -->
+    <skip />
+    <!-- no translation found for fingerprint_intro_error_unknown (1905692132326523040) -->
+    <skip />
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"అన్ని వేలిముద్రలు తీసివేయాలా?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"మీరు మీ ఫోన్ అన్‌లాక్ చేయడానికి, కొనుగోళ్లు ప్రామాణీకరించడానికి లేదా అనువర్తనాలకు సైన్ ఇన్ చేయడానికి మీ వేలిముద్రలను ఉపయోగించలేరు."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"మీరు మీ కార్యాలయ ప్రొఫైల్‌ను అన్‌లాక్ చేయడానికి, కొనుగోళ్లపై అధికారం కలిగి ఉండటానికి లేదా కార్యాలయ అనువర్తనాలకు సైన్ ఇన్ చేయడానికి మీ వేలిముద్రలను ఉపయోగించలేరు."</string>
@@ -628,7 +632,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"స్పీకర్ ఫోన్ వలె"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"సంగీతం మరియు మీడియా కోసం"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"సెట్టింగ్‌లను గుర్తుంచుకో"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi సహాయకం"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"ప్రసారం చేయండి"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"వైర్‌లెస్ ప్రదర్శనను ప్రారంభించు"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"సమీపంలోని పరికరాలు కనుగొనబడలేదు."</string>
@@ -663,7 +666,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Wi‑Fi సెట్టింగ్‌లు"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi‑Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"వైర్‌లెస్ ప్రాప్యత స్థానాలను సెటప్ చేయండి &amp; నిర్వహించండి"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Wi‑Fi నెట్‌వర్క్‌ను ఎంచుకోండి"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Wi‑Fiను ఎంచుకోండి"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Wi‑Fiను ప్రారంభిస్తోంది…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Wi‑Fiని ఆపివేస్తోంది…"</string>
@@ -675,9 +677,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"బలహీన కనెక్షన్‌లను నివారించు"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Wi‑Fi నెట్‌వర్క్ ఉత్తమ ఇంటర్నెట్ కనెక్షన్‌ను కలిగి ఉంటే మినహా ఉపయోగించవద్దు"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"ఉత్తమ ఇంటర్నెట్ కనెక్షన్ ఉన్న నెట్‌వర్క్‌లను మాత్రమే ఉపయోగించు"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"స్వయంచాలకంగా బహిరంగ Wi‑Fiని ఉపయోగించు"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Wi‑Fi సహాయకం అధిక నాణ్యమైనవిగా గుర్తించిన బహిరంగ నెట్‌వర్క్‌లకు స్వయం. కనెక్ట్ కావడానికి అనుమతించండి"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"సహాయకాన్ని ఎంచుకోండి"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"ప్రమాణపత్రాలను ఇన్‌స్టాల్ చేయి"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"స్థాన ఖచ్చితత్వాన్ని మెరుగుపరచడానికి, సిస్టమ్ అనువర్తనాలు మరియు సేవలు ఇప్పటికీ Wi‑Fi నెట్‌వర్క్‌ల కోసం స్కాన్ చేయగలవు. మీరు దీన్ని <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>స్కానింగ్ సెట్టింగ్‌లు<xliff:g id="LINK_END_1">LINK_END</xliff:g>లో మార్చవచ్చు."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"మళ్లీ చూపవద్దు"</string>
@@ -708,7 +707,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"అందుబాటులో ఉన్న నెట్‌వర్క్‌లను చూడటానికి, Wi‑Fi ప్రారంభించండి."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Wi‑Fi నెట్‌వర్క్‌ల కోసం శోధిస్తోంది…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"మీకు Wi‑Fi నెట్‌వర్క్‌ను మార్చడానికి అనుమతి లేదు."</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"మరో నెట్‌వర్క్‌ను జోడించు"</string>
     <string name="wifi_more" msgid="3195296805089107950">"మరిన్ని"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"స్వయంచాలక సెటప్ (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"అధునాతన ఎంపికలు"</string>
@@ -782,17 +780,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"సేవ్ చేయి"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"నెట్‌వర్క్‌ను సేవ్ చేయడం విఫలమైంది"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"రద్దు చేయి"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"ఏదేమైనా దాటవేయి"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"వెనుకకు వెళ్లు"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"హెచ్చరిక: మీరు Wi‑Fiని దాటవేస్తే, మీ టాబ్లెట్ ప్రాథమిక డౌన్‌లోడ్‌లు మరియు నవీకరణల కోసం సెల్యులార్ డేటాని మాత్రమే ఉపయోగిస్తుంది. సంభావ్య డేటా ఛార్జీలను నివారించడానికి, Wi‑Fiకి కనెక్ట్ చేయండి."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"హెచ్చరిక: మీరు Wi‑Fiని దాటవేస్తే, మీ పరికరం ప్రాథమిక డౌన్‌లోడ్‌లు మరియు నవీకరణల కోసం సెల్యులార్ డేటాని మాత్రమే ఉపయోగిస్తుంది. సంభావ్య డేటా ఛార్జీలను నివారించడానికి, Wi‑Fiకి కనెక్ట్ చేయండి."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"హెచ్చరిక: మీరు Wi‑Fiని దాటవేస్తే, మీ ఫోన్ ప్రాథమిక డౌన్‌లోడ్‌లు మరియు నవీకరణల కోసం సెల్యులార్ డేటాని మాత్రమే ఉపయోగిస్తుంది. సంభావ్య డేటా ఛార్జీలను నివారించడానికి, Wi‑Fiకి కనెక్ట్ చేయండి."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"మీరు Wi‑Fiని వదిలివేస్తే:\n\n"<li>"మీ టాబ్లెట్‌కి ఇంటర్నెట్ కనెక్షన్ ఉండదు."</li>\n\n<li>"మీరు ఇంటర్నెట్‍కి కనెక్ట్ అయ్యే వరకు సాఫ్ట్‌వేర్ నవీకరణలను పొందరు."</li>\n\n<li>"ఈ సమయంలో మీరు పరికర సంరక్షణ లక్షణాలను సక్రియం చేయలేరు."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"మీరు Wi‑Fiని వదిలివేస్తే:\n\n"<li>"మీ పరికరానికి ఇంటర్నెట్ కనెక్షన్ ఉండదు."</li>\n\n<li>"మీరు ఇంటర్నెట్‍కి కనెక్ట్ అయ్యే వరకు సాఫ్ట్‌వేర్ నవీకరణలను పొందరు."</li>\n\n<li>"ఈ సమయంలో మీరు పరికర సంరక్షణ లక్షణాలను సక్రియం చేయలేరు."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"మీరు Wi‑Fiని వదిలివేస్తే:\n\n"<li>"మీ ఫోన్‌కి ఇంటర్నెట్ కనెక్షన్ ఉండదు."</li>\n\n<li>"మీరు ఇంటర్నెట్‍కి కనెక్ట్ అయ్యే వరకు సాఫ్ట్‌వేర్ నవీకరణలను పొందరు."</li>\n\n<li>"ఈ సమయంలో మీరు పరికర సంరక్షణ లక్షణాలను సక్రియం చేయలేరు."</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"టాబ్లెట్‌ను ఈ Wi‑Fi నెట్‌వర్క్‌కు కనెక్ట్ చేయడం సాధ్యపడలేదు."</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"పరికరాన్ని ఈ Wi‑Fi నెట్‌వర్క్‌కి కనెక్ట్ చేయడం సాధ్యపడలేదు."</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"ఫోన్‌ను ఈ Wi‑Fi నెట్‌వర్క్‌కు కనెక్ట్ చేయడం సాధ్యపడలేదు."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"సేవ్ చేసిన నెట్‌వర్క్‌లు"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"అధునాతన Wi‑Fi"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wi‑Fiని కాన్ఫిగర్ చేయండి"</string>
@@ -2307,6 +2294,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"ఎల్లప్పుడూ ఆన్ ఎంపిక సక్రియంగా ఉంది"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"ఎల్లప్పుడూ-ఆన్‌లో ఉంచడం నిష్క్రియంగా ఉంది"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"ఈ అనువర్తనం మద్దతు ఇవ్వదు"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"ఎల్లప్పుడూ కనెక్ట్ చేయబడి ఉండటానికి VPN ప్రొఫైల్‌ను ఎంచుకోండి. ఈ VPNకి కనెక్ట్ అయి ఉన్నప్పుడు మాత్రమే నెట్‌వర్క్ ట్రాఫిక్ అనుమతించబడుతుంది."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"ఏదీ వద్దు"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"ఎల్లప్పుడూ-ఆన్‌లో ఉండే VPNకి సర్వర్ మరియు DNS రెండింటి IP చిరునామా అవసరం."</string>
@@ -3198,7 +3191,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"ప్రీమియం SMSతో మీకు డబ్బు ఖర్చు కావచ్చు, ఈ ఛార్జీ మీ క్యారియర్ బిల్లుల్లో విధించబడుతుంది. మీరు ఒక అనువర్తనానికి అనుమతిని అందిస్తే, ఆ అనువర్తనాన్ని ఉపయోగించి ప్రీమియం SMSను పంపగలరు."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"ప్రీమియం SMS ప్రాప్యత"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"నిలిపివేయబడింది"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"డెమో మోడ్"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"మేము సహాయం అందిస్తాము"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"మేము మీ కోసం 24/7 అందుబాటులో ఉంటాము"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"మేము మీ కోసం 24 7 అందుబాటులో ఉంటాము"</string>

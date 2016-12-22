@@ -390,6 +390,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Se ha inhabilitado la opción de bloqueo de pantalla. Ponte en contacto con el administrador de tu organización para obtener más información. "<annotation id="admin_details">"Más información"</annotation>\n\n"Puedes seguir utilizando tu huella digital para acceder a aplicaciones y autorizar compras. "<annotation id="url">"Más información"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Levanta el dedo y vuelve a tocar el sensor"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Puedes añadir hasta <xliff:g id="COUNT">%d</xliff:g> huellas digitales"</string>
+    <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"Has añadido el número máximo de huellas digitales"</string>
+    <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"No se pueden añadir más huellas digitales"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"¿Quitar todas las huellas?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"No podrás utilizar tus huellas digitales para desbloquear el teléfono, autorizar compras o iniciar sesión en las aplicaciones."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"No puedes utilizar tus huellas digitales para desbloquear el perfil de trabajo, autorizar compras o iniciar sesión en aplicaciones de trabajo."</string>
@@ -526,8 +528,10 @@
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Debe tener al menos una letra"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Debe tener al menos un dígito"</string>
     <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"Debe tener al menos un símbolo"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for lockpassword_password_requires_letters (3121545900151618401) -->
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="3121545900151618401">
+      <item quantity="other">Debe tener al menos %d letras</item>
+      <item quantity="one">Debe tener al menos 1 letra</item>
+    </plurals>
     <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5415008859853535577">
       <item quantity="other">Debe tener al menos %d letras minúsculas</item>
       <item quantity="one">Debe tener al menos 1 letra minúscula</item>
@@ -626,7 +630,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Como altavoz del teléfono"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para música y contenido multimedia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Ajustes de recordatorio"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Asistente de Wi‑Fi"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Enviar pantalla"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Habilitar pantalla inalámbrica"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"No hay dispositivos cercanos."</string>
@@ -661,7 +664,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Ajustes de Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Configurar y administrar puntos de acceso inalámbricos"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Selecciona una red Wi‑Fi"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Selecciona una red Wi-Fi"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Activando Wi‑Fi…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Desactivando Wi‑Fi…"</string>
@@ -673,9 +675,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Solo conexiones estables"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"No usar una red Wi-Fi a menos que tenga una buena conexión a Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Solo usar redes con buena conexión a Internet"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Usar redes Wi‑Fi abiertas automáticamente"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Dejar que un asistente de Wi‑Fi se conecte automáticamente a redes abiertas consideradas de buena calidad"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Elige un asistente"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Para mejorar la precisión de la ubicación, los servicios y las aplicaciones del sistema pueden buscar redes Wi-Fi aunque esté desactivada la conexión Wi-Fi. Puedes cambiar esta opción en los <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ajustes de búsqueda<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"No volver a mostrar"</string>
@@ -706,7 +705,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Para ver redes disponibles, activa el Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Buscando redes Wi-Fi…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"No tienes permiso para cambiar la red Wi‑Fi."</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"Añadir otra red"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Más"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Configuración automática (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Opciones avanzadas"</string>
@@ -780,17 +778,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"Guardar"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Error al guardar la red"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Cancelar"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Saltar de todas formas"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"Volver"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"ADVERTENCIA: Si omites la conexión Wi‑Fi, el tablet solo utilizará datos móviles para realizar descargas y actualizaciones iniciales. Conéctate al Wi‑Fi para evitar posibles cargos de datos."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"ADVERTENCIA: Si omites la conexión Wi‑Fi, el dispositivo solo utilizará datos móviles para realizar descargas y actualizaciones iniciales. Conéctate al Wi‑Fi para evitar posibles cargos de datos."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"ADVERTENCIA: Si omites la conexión Wi‑Fi, el teléfono solo utilizará datos móviles para realizar descargas y actualizaciones iniciales. Conéctate al Wi‑Fi para evitar posibles cargos de datos."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Si te saltas el paso de la conexión Wi‑Fi:\n\n"<li>"Tu tablet no tendrá conexión a Internet."</li>\n\n<li>"No recibirás actualizaciones de software hasta que te conectes a Internet."</li>\n\n<li>"No podrás activar las funciones de protección del dispositivo en este momento."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Si te saltas el paso de la conexión Wi‑Fi:\n\n"<li>"Tu dispositivo no tendrá conexión a Internet."</li>\n\n<li>"No recibirás actualizaciones de software hasta que te conectes a Internet."</li>\n\n<li>"No podrás activar las funciones de protección del dispositivo en este momento."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Si te saltas el paso de la conexión Wi‑Fi:\n\n"<li>"Tu teléfono no tendrá conexión a Internet."</li>\n\n<li>"No recibirás actualizaciones de software hasta que te conectes a Internet."</li>\n\n<li>"No podrás activar las funciones de protección del dispositivo en este momento."</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"El tablet no se ha podido conectar a esta red Wi-Fi."</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"El dispositivo no se ha podido conectar a esta red Wi‑Fi."</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"El teléfono no se ha podido conectar a esta red Wi‑Fi."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Redes guardadas"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Ajustes avanzados de Wi-Fi"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Configurar Wi‑Fi"</string>
@@ -2305,6 +2292,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"Siempre activada habilitada"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"Siempre activa inhabilitado"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"No compatible con esta aplicación"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Selecciona un perfil de VPN para permanecer conectado de forma continua. Solo se permitirá el tráfico de red cuando estés conectado a esta red VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Ninguno"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Las redes VPN activadas continuamente requieren una dirección IP para el servidor y el DNS."</string>
@@ -3196,7 +3189,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Es posible que el envío de SMS premium te cueste dinero y el importe correspondiente se sume a las facturas de tu operador. Si habilitas el permiso para una aplicación, puedes enviar SMS premium con ella."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Acceso SMS premium"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Inhabilitado"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"Modo de demostración"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"Queremos ayudarte"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Estamos disponibles las 24 horas del día, 7 días a la semana"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Estamos disponibles las 24 horas del día, 7 días a la semana"</string>

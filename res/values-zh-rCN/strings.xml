@@ -390,6 +390,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"屏幕锁定选项已被禁用。请与贵单位的管理员联系以了解详情。"<annotation id="admin_details">"更多详情"</annotation>\n\n"您仍然可以使用指纹对购买交易进行授权以及登录应用。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"移开手指，然后再次触摸传感器"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"您最多可以添加 <xliff:g id="COUNT">%d</xliff:g> 个指纹"</string>
+    <!-- no translation found for fingerprint_intro_error_max (6864066984678078441) -->
+    <skip />
+    <!-- no translation found for fingerprint_intro_error_unknown (1905692132326523040) -->
+    <skip />
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"要移除所有指纹吗？"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"您将无法使用指纹来解锁手机、授权购买交易或登录应用。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"您将无法使用指纹解锁您的工作资料、对购买交易进行授权或登录工作应用。"</string>
@@ -628,7 +632,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"将基座用作免提电话"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"用于音乐和媒体"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"记住设置"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"WLAN助手"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"投射"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"开启无线显示"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"未在附近找到设备。"</string>
@@ -663,7 +666,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"WLAN设置"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"WLAN"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"设置和管理无线接入点"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"选择 WLAN 网络"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"选择WLAN网络"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"正在打开WLAN…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"正在关闭WLAN…"</string>
@@ -675,9 +677,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"避开状况不佳的网络"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"仅在WLAN互联网连接状况良好时使用WLAN网络"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"仅使用互联网连接情况良好的网络"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"自动使用开放的 WLAN 网络"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"允许 WLAN 助手自动连接到评定为优质的开放网络上"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"选择助手"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安装证书"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"为了提高位置信息的精确度，系统应用和服务仍然会扫描 WLAN 网络。您可以在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>扫描设置<xliff:g id="LINK_END_1">LINK_END</xliff:g>中更改此设置。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"不再显示"</string>
@@ -708,7 +707,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"要查看可用网络，请打开WLAN。"</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"正在搜索WLAN网络…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"您无权更改WLAN网络。"</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"添加其他网络"</string>
     <string name="wifi_more" msgid="3195296805089107950">"更多"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"自动设置 (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"高级选项"</string>
@@ -782,17 +780,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"保存"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"无法保存网络"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"取消"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"仍然跳过"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"返回"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"警告：如果您跳过WLAN网络设置，您的平板电脑将只能通过移动数据网络进行初始下载和更新。为了避免产生数据流量费，请连接到WLAN网络。"</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"警告：如果您跳过WLAN网络设置，您的设备将只能通过移动数据网络进行初始下载和更新。为了避免产生数据流量费，请连接到WLAN网络。"</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"警告：如果您跳过WLAN网络设置，您的手机将只能通过移动数据网络进行初始下载和更新。为了避免产生数据流量费，请连接到WLAN网络。"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"如果您跳过 WLAN 网络设置：\n\n"<li>"您的平板电脑将不会连接到互联网。"</li>\n\n<li>"您必须先连接到互联网，才能获取软件更新。"</li>\n\n<li>"您目前将无法启用设备保护功能。"</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"如果您跳过 WLAN 网络设置：\n\n"<li>"您的设备将不会连接到互联网。"</li>\n\n<li>"您必须先连接到互联网，才能获取软件更新。"</li>\n\n<li>"您目前将无法启用设备保护功能。"</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"如果您跳过 WLAN 网络设置：\n\n"<li>"您的手机将不会连接到互联网。"</li>\n\n<li>"您必须先连接到互联网，才能获取软件更新。"</li>\n\n<li>"您目前将无法启用设备保护功能。"</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"平板电脑无法连接到此WLAN网络。"</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"设备无法连接到此WLAN网络。"</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"手机无法连接到此WLAN网络。"</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"已保存的网络"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"高级WLAN"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"配置 WLAN"</string>
@@ -2307,6 +2294,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"始终处于开启状态"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"“始终开启”功能已停用"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"此应用不支持这项功能"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"选择要始终保持连接的VPN配置文件。只有在连接到此VPN之后才可以使用网络。"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"无"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"始终开启的 VPN 需要服务器和 DNS 的 IP 地址。"</string>
@@ -3198,7 +3191,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"“付费短信”可能会产生费用，而且相关费用将计入您的运营商帐单。如果您为某个应用启用该权限，那么您将能够使用该应用发送付费短信。"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"付费短信权限"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"已停用"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"演示模式"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"我们会随时为您提供帮助"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我们可全天候为您提供服务"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"我们可全天候为您提供服务"</string>

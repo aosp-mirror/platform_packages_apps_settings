@@ -396,6 +396,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Zámka obrazovky bola zakázaná. Ďalšie informácie získate od správcu vašej organizácie. "<annotation id="admin_details">"Ďalšie podrobnosti"</annotation>\n\n"Naďalej môžete pomocou odtlačku prsta schvaľovať nákupy a prístup do aplikácií. "<annotation id="url">"Ďalšie informácie"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Nadvihnite prst, potom sa opäť dotknite senzora"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Môžete pridať ďalšie odtlačky (max. <xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"Pridali ste maximálny počet odtlačkov prstov"</string>
+    <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"Nie je možné pridať ďalšie odtlačky prstov"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Odstrániť všetky odtlačky prstov?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Pomocou odtlačkov prstov nebudete môcť odomknúť telefón, autorizovať nákupy ani sa prihlásiť do aplikácií."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"Nebudete môcť pomocou odtlačkov prstov odomknúť pracovný profil, schváliť nákupy ani sa prihlásiť do pracovných aplikácií."</string>
@@ -646,7 +648,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Ako reproduktor telefónu"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Pre hudbu a médiá"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Zapamätať nastavenia"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Prenos"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Povoliť bezdrôtové zobrazenie"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"V okolí sa nenašli žiadne zariadenia."</string>
@@ -681,7 +682,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Nastavenia Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Umožňuje nastaviť a spravovať prístupové body bezdrôtovej siete"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Vyberte sieť Wi-Fi"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Vybrať sieť Wi-Fi"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Prebieha zapínanie siete Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Prebieha vypínanie Wi-Fi..."</string>
@@ -693,9 +693,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Vyhnúť sa nekvalitným pripojeniam"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Nepoužívať sieť Wi-Fi, pokiaľ nemá dostatočne kvalitné internetové pripojenie"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Použiť iba siete s dobrým pripojením k internetu"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Automaticky používať otvor. siete Wi‑Fi"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Umožniť asistentovi Wi‑Fi automaticky sa pripojiť k otvoreným sieťam, ktoré určí ako vysokokvalitné"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Výber asistenta"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Inštalácia certifikátov"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Systémové aplikácie a služby môžu stále vyhľadávať siete Wi-Fi, aby tak zlepšili presnosť polohy. Môžete to zmeniť v <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>nastaveniach vyhľadávania zariadení<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Túto správu znova nezobrazovať"</string>
@@ -726,7 +723,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Ak chcete zobraziť dostupné siete, zapnite Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Prebieha vyhľadávanie sietí Wi-Fi..."</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Nemáte povolenie na zmenu siete Wi-Fi."</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"Pridať ďalšiu sieť"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Ďalšie"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Automatické nastavenie (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Rozšírené možnosti"</string>
@@ -800,17 +796,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"Uložiť"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Nepodarilo sa uložiť sieť"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Zrušiť"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Preskočiť"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"Späť"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"UPOZORNENIE: Ak nastavenie siete Wi‑Fi preskočíte, tablet na stiahnutie počiatočných súborov a aktualizácií použije iba mobilné dátové pripojenie. Ak chcete zabrániť možným poplatkom za prenos dát, pripojte sa k sieti Wi-Fi."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"UPOZORNENIE: Ak nastavenie siete Wi‑Fi preskočíte, zariadenie na stiahnutie počiatočných súborov a aktualizácií použije iba mobilné dátové pripojenie. Ak chcete zabrániť možným poplatkom za prenos dát, pripojte sa k sieti Wi-Fi."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"UPOZORNENIE: Ak nastavenie siete Wi‑Fi preskočíte, telefón na stiahnutie počiatočných súborov a aktualizácií použije iba mobilné dátové pripojenie. Ak chcete zabrániť možným poplatkom za prenos dát, pripojte sa k sieti Wi-Fi."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Ak preskočíte pripojenie Wi‑Fi:\n\n"<li>"váš tablet nebude pripojený k internetu;"</li>\n\n<li>"aktualizácie softvéru získate až po pripojení k internetu;"</li>\n\n<li>"nebudete môcť dočasne aktivovať funkcie ochrany zariadenia."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Ak preskočíte pripojenie Wi‑Fi:\n\n"<li>"vaše zariadenie nebude pripojené k internetu;"</li>\n\n<li>"aktualizácie softvéru získate až po pripojení k internetu;"</li>\n\n<li>"nebudete môcť dočasne aktivovať funkcie ochrany zariadenia."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Ak preskočíte pripojenie Wi‑Fi:\n\n"<li>"váš telefón nebude pripojený k internetu;"</li>\n\n<li>"aktualizácie softvéru získate až po pripojení k internetu;"</li>\n\n<li>"nebudete môcť zatiaľ aktivovať funkcie ochrany zariadenia."</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"Tablet sa k tejto sieti Wi-Fi nedokázal pripojiť."</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Zariadenie sa k tejto sieti Wi-Fi nedokázalo pripojiť."</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"Telefón sa k tejto sieti Wi-Fi nedokázal pripojiť."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Uložené siete"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Wi-Fi, rozšírené"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Konfigurácia Wi‑Fi"</string>
@@ -2341,6 +2326,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"Vždy zapnuté VPN je aktívne"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"Nastavenie Vždy zapnuté je deaktivované"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Nepodporované touto aplikáciou"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Vyberte profil VPN, ku ktorému chcete mať vždy pripojenie. Sieťová premávka bude povolená len v prípade pripojenia k tejto sieti VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Žiadna"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Vždy zapnutá sieť VPN vyžaduje adresu IP pre server aj DNS."</string>
@@ -3262,7 +3253,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Za prémiové správy SMS sa môžu účtovať poplatky, ktoré sa naúčtujú na faktúru operátora. Ak aktivujete toto povolenie pre aplikáciu, budete môcť pomocou nej posielať prémiové správy SMS."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Prístup k prémiovým správam SMS"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Vypnuté"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"Režim ukážky"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"Radi vám pomôžeme"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Sme tu pre vás nepretržite"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Sme tu pre vás nepretržite"</string>

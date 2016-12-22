@@ -390,6 +390,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Na-disable ang opsyon sa screen lock. Makipag-ugnayan sa administrator ng iyong organisasyon upang matuto nang higit pa. "<annotation id="admin_details">"Higit pang mga detalye"</annotation>\n\n"Maaari mo pa ring gamitin ang iyong fingerprint upang pahintulutan ang mga pagbili at pag-access sa app. "<annotation id="url">"Matuto nang higit pa"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Iangat ang daliri, pagkatapos ay muling pindutin ang sensor"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Maaari kang magdagdag ng hanggang <xliff:g id="COUNT">%d</xliff:g> (na) fingerprint"</string>
+    <!-- no translation found for fingerprint_intro_error_max (6864066984678078441) -->
+    <skip />
+    <!-- no translation found for fingerprint_intro_error_unknown (1905692132326523040) -->
+    <skip />
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Alisin ang lahat ng fingerprint?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Hindi mo magagamit ang iyong mga fingerprint upang i-unlock ang iyong telepono, pahintulutan ang mga pagbili o mag-sign in sa mga app gamit ang mga iyon."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"Hindi mo magagamit ang iyong mga fingerprint sa pag-unlock ng iyong profile sa trabaho, pagbibigay ng pahintulot sa mga pagbili o pag-sign in sa mga app para sa trabaho."</string>
@@ -628,7 +632,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Bilang speaker phone"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para sa musika at media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Tandaan ang mga setting"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"I-cast"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"I-enable ang wireless display"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Walang nakitang mga kalapit na device."</string>
@@ -663,7 +666,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Mga setting ng Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi‑Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Mag-set up &amp; mamahala ng mga wireless na access point"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Pumili ng Wi‑Fi network"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Pumili ng Wi-Fi"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Ino-on ang Wi‑Fi…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Ino-off ang Wi-Fi..."</string>
@@ -675,9 +677,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Iwasan ang mahihinang koneksyon"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Huwag gumamit ng Wi-Fi network maliban kung mayroon itong mahusay na koneksyon sa Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Gamit lang ng network na may maayos na koneksyon sa Internet"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Awtomatikong gamitin ang bukas na Wi‑Fi"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Hayaan ang Wi‑Fi assistant na awtomatikong kumonekta sa bukas na network na mataas ang kalidad."</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Pumili ng assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Mag-install ng mga certificate"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Upang pahusayin ang katumpakan ng lokasyon, maaari pa ring tumukoy ng mga Wi-Fi network ang mga app at serbisyo ng system. Maaari mo itong baguhin sa <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>mga setting ng pag-i-scan<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Huwag ipakitang muli"</string>
@@ -708,7 +707,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Para makita ang available network, i-on ang Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Naghahanap ng mga Wi-Fi network..."</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Wala kang pahintulot na baguhin ang Wi‑Fi network."</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"Magdagdag ng isa pang network"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Higit pa"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Awtomatikong setup (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Mga advanced na opsyon"</string>
@@ -782,17 +780,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"I-save"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Nabigong i-save ang network"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Kanselahin"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Laktawan pa rin"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"Bumalik"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"BABALA: kung lalaktawan mo ang Wi‑Fi, gagamitin lang ng iyong tablet ang mobile data para sa mga paunang pag-download at pag-update. Upang maiwasan ang mga posibleng karagdagang pagsingil sa data, kumonekta sa Wi‑Fi."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"BABALA: kung lalaktawan mo ang Wi‑Fi, gagamitin lang ng iyong device ang mobile data para sa mga paunang pag-download at pag-update. Upang maiwasan ang mga posibleng karagdagang pagsingil sa data, kumonekta sa Wi‑Fi."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"BABALA: kung lalaktawan mo ang Wi‑Fi, gagamitin lang ng iyong telepono ang mobile data para sa mga paunang pag-download at pag-update. Upang maiwasan ang mga posibleng karagdagang pagsingil sa data, kumonekta sa Wi‑Fi."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Kung lalaktawan mo ang Wi‑Fi:\n\n"<li>"Hindi magkakaroon ng koneksyon sa Internet ang iyong tablet."</li>\n\n<li>"Hindi ka makakatanggap ng mga update sa software hanggang kumonekta ka sa Internet."</li>\n\n<li>"Hindi mo maa-activate ang mga feature ng proteksyon sa device sa pagkakataong ito."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Kung lalaktawan mo ang Wi‑Fi:\n\n"<li>"Hindi magkakaroon ng koneksyon sa Internet ang iyong device."</li>\n\n<li>"Hindi ka makakatanggap ng mga update sa software hanggang kumonekta ka sa Internet."</li>\n\n<li>"Hindi mo maa-activate ang mga feature ng proteksyon sa device sa pagkakataong ito."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Kung lalaktawan mo ang Wi‑Fi:\n\n"<li>"Hindi magkakaroon ng koneksyon sa Internet ang iyong telepono."</li>\n\n<li>"Hindi ka makakatanggap ng mga update sa software hanggang kumonekta ka sa Internet."</li>\n\n<li>"Hindi mo maa-activate ang mga feature ng proteksyon sa device sa pagkakataong ito."</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"Hindi nakakonekta sa Wi-Fi network na ito ang tablet."</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Hindi nakakonekta ang device na ito sa Wi‑Fi network na ito."</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"Hindi nakakonekta sa Wi-Fi network na ito ang telepono."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Naka-save na networks"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Advanced na Wi-Fi"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"I-configure ang Wi‑Fi"</string>
@@ -2307,6 +2294,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"Aktibo ang palaging naka-on"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"Hindi aktibo ang Always-on"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Hindi sinusuportahan ng app na ito"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Pumili ng VPN profile kung saan palaging mananatiling nakakonekta. Papayagan lang ang trapiko ng network kapag nakakonekta sa VPN na ito."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Wala"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Nangangailangan ang Always-on VPN ng IP address para sa parehong server at DNS."</string>
@@ -3198,7 +3191,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Maaaring kailanganin mong magbayad para sa Premium SMS at isasama ito sa mga singilin ng iyong carrier. Kung ie-enable mo ang pahintulot para sa isang app, magagawa mong magpadala ng premium SMS gamit ang app na iyon."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Access sa Premium SMS"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Naka-disable"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"Demo mode"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"Narito kami upang tumulong"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Narito kami para sa iyo 24/7"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Narito kami para sa iyo 24/7"</string>

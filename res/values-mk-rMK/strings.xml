@@ -390,6 +390,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Опцијата за заклучување екран е оневозможена. Контактирајте со администраторот на организацијата за да дознаете повеќе. "<annotation id="admin_details">"Повеќе детали"</annotation>\n\n"Сепак може да го користите отпечатокот за да авторизирате купувања и пристап до апликации. "<annotation id="url">"Дознајте повеќе"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Подигнете го прстот, потоа допрете го сензорот повторно"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Може да додавате до <xliff:g id="COUNT">%d</xliff:g> отпечатоци"</string>
+    <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"Додадовте максимален број на отпечатоци"</string>
+    <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"Не може да се додадат повеќе отпечатоци"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Да се отстранат сите отпечатоци?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Нема да може да ги користите отпечатоците за да го отклучите телефонот, да овластувате купувања или да се најавувате на апликации со нив."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"Нема да може да ги користите отпечатоците за да го отклучите работниот профил, да авторизирате купувања или да се најавите на апликациите за работа."</string>
@@ -628,7 +630,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Како интерфон"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"За музика и медиуми"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомни поставки"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Помошник за Wi‑Fi"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Емитувај"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Овозможи приказ на безжични мрежи"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Не се пронајдени уреди во близина."</string>
@@ -663,7 +664,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Поставки за Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Постави и управувај со безжични пристапни точки"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Изберете Wi-Fi мрежа"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Избери Wi-Fi"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Вклучување на Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Исклучување на Wi-Fi..."</string>
@@ -675,9 +675,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Избегнувај слаби поврзувања"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Не користи Wi-Fi мрежа, освен ако има добро поврзување со интернет"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Користи само мрежи со добро поврзување на интернет"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Автоматски користете отворена Wi‑Fi"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Дозволете помошникот за Wi‑Fi автоматски да се поврзува со отворени мрежи со висок квалитет"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Изберете помошник"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Инсталирај сертификати"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"За да се подобри точноста на локацијата, системските апликации и услуги сѐ уште може да скенираат Wi‑Fi мрежи. Ова може да го измените во <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>поставките за скенирање<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Не прикажувај повторно"</string>
@@ -708,7 +705,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"За да ги видите достапните мрежи, вклучете Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Се пребарува за Wi-Fi мрежи..."</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Немате дозвола за промена на Wi-Fi мрежата."</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"Додајте друга мрежа"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Повеќе"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Автоматско подесување (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Напредни опции"</string>
@@ -782,17 +778,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"Зачувај"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Не успеа да се зачува мрежата"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Откажи"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Сепак прескокни"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"Врати се назад"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"ПРЕДУПРЕДУВАЊЕ: Ако прескокнете Wi‑Fi, таблетот ќе користи само мобилни податоци за првични преземања или ажурирања. За да избегнете можни трошоци за податоци, поврзете се на Wi‑Fi."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"ПРЕДУПРЕДУВАЊЕ: Ако прескокнете Wi‑Fi, уредот ќе користи само мобилни податоци за првични преземања или ажурирања. За да избегнете можни трошоци за податоци, поврзете се на Wi‑Fi."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"ПРЕДУПРЕДУВАЊЕ: Ако прескокнете Wi‑Fi, телефонот ќе користи само мобилни податоци за првични преземања или ажурирања. За да избегнете можни трошоци за податоци, поврзете се на Wi‑Fi."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Доколку го прескокнете Wi‑Fi:\n\n"<li>"Таблетот нема да има интернет-врска."</li>\n\n<li>"Нема да добивате софтверски ажурирања сѐ додека не се поврзете на интернет."</li>\n\n<li>"Во моментов не може да ги активирате функциите за заштита на уредот."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Доколку го прескокнете Wi‑Fi:\n\n"<li>"Уредот нема да има интернет-врска."</li>\n\n<li>"Нема да добивате софтверски ажурирања сѐ додека не се поврзете на интернет."</li>\n\n<li>"Во моментов не може да ги активирате функциите за заштита на уредот."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Доколку го прескокнете Wi‑Fi:\n\n"<li>"Телефонот нема да има интернет-врска."</li>\n\n<li>"Нема да добивате софтверски ажурирања сѐ додека не се поврзете на интернет."</li>\n\n<li>"Во моментов не може да ги активирате функциите за заштита на уредот."</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"Таблетот не можеше да се поврзете со оваа Wi-Fi мрежа."</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Уредот не можеше да се поврзе на оваа мрежа на Wi‑Fi."</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"Телефонот не можеше да се поврзе со оваа Wi-Fi мрежа."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Зачувани мрежи"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Напредна Wi-Fi"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Конфигурирање на Wi‑Fi"</string>
@@ -2307,6 +2292,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"„Секогаш вклучена“ е активна"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"Секогаш-вклучена е неактивна"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Не е поддржано од оваа апликација"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Избери VPN профил што секогаш ќе биде поврзан на мрежата, сообраќајот ќе биде дозволен само кога е поврзан со оваа VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Ниедна"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPN секогаш вклучена бара ИП адреса за серверот и за DNS."</string>
@@ -3198,7 +3189,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Премиум SMS може да ве чини пари, а сумата ќе се додаде на сметките од операторот. Ако овозможите дозвола за апликацијата, ќе може да испраќате премиум SMS со неа."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Пристап до премиум SMS"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Оневозможено"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"Демо режим"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"Тука сме за да ви помогнеме"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Ние сме тука за вас 24/7"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Ние сме тука за вас 24 часа на ден"</string>

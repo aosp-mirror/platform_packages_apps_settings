@@ -390,6 +390,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Optie voor schermvergrendeling uitgeschakeld. Neem voor meer informatie contact op met de beheerder van je organisatie. "<annotation id="admin_details">"Meer informatie"</annotation>\n\n"Je kunt nog steeds je vingerafdruk gebruiken om toestemming te geven voor aankopen en app-toegang. "<annotation id="url">"Meer informatie"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Til je vinger op en raak de sensor opnieuw aan"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Je kunt maximaal <xliff:g id="COUNT">%d</xliff:g> vingerafdrukken toevoegen"</string>
+    <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"Je hebt het maximale aantal vingerafdrukken toegevoegd"</string>
+    <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"Kan geen extra vingerafdrukken toevoegen"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Alle vingerafdrukken verwijderen?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Je kunt je vingerafdrukken niet gebruiken om je telefoon te ontgrendelen, aankopen te autoriseren of in te loggen bij apps."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"Je kunt je vingerafdrukken niet gebruiken om je werkprofiel te ontgrendelen, aankopen te autoriseren of in te loggen bij werk-apps."</string>
@@ -628,7 +630,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Als luidsprekertelefoon"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Voor muziek en media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Instellingen onthouden"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Casten"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Draadloze weergave inschakelen"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Geen apparaten in de buurt gevonden."</string>
@@ -663,7 +664,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Wifi-instellingen"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wifi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Draadloze toegangspunten instellen en beheren"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Wifi-netwerk selecteren"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Wifi selecteren"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Wifi inschakelen…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Wifi uitschakelen…"</string>
@@ -675,9 +675,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Slechte verbindingen vermijden"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Wifi-netwerk niet gebruiken, tenzij dit een goede internetverbinding heeft"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Alleen netwerken gebruiken met een goede internetverbinding"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Automatisch open wifi gebruiken"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Een Wifi-assistent automatisch verbinding laten maken met open netwerken van hoge kwaliteit"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Assistent kiezen"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Certificaten installeren"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Systeem-apps en services kunnen nog steeds zoeken naar wifi-netwerken om de nauwkeurigheid van locaties te verbeteren. Je kunt dit wijzigen in de <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>instellingen voor scannen<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Niet opnieuw weergeven"</string>
@@ -708,7 +705,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Schakel wifi in om beschikbare netwerken te zien."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Wifi-netwerken zoeken…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Je hebt geen toestemming om het wifi-netwerk te wijzigen."</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"Nog een netwerk toevoegen"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Meer"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Autom. config. (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Geavanceerde opties"</string>
@@ -782,17 +778,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"Opslaan"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Opslaan van netwerk is mislukt"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Annuleren"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Toch overslaan"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"Terug"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"WAARSCHUWING: als je wifi overslaat, gebruikt je telefoon alleen mobiele data voor initiële downloads en updates. Maak verbinding met wifi om te voorkomen dat er datakosten in rekening worden gebracht."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"WAARSCHUWING: als je wifi overslaat, gebruikt  apparaat alleen mobiele data voor initiële downloads en updates. Maak verbinding met wifi om te voorkomen dat er datakosten in rekening worden gebracht."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"WAARSCHUWING: als je wifi overslaat, gebruikt je telefoon alleen mobiele data voor initiële downloads en updates. Maak verbinding met wifi om te voorkomen dat er datakosten in rekening worden gebracht."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Als je wifi overslaat:\n\n"<li>"Je tablet heeft geen verbinding met internet."</li>\n\n<li>"Je ontvangt geen software-updates totdat je verbinding maakt met internet."</li>\n\n<li>"Je kunt op dit moment geen functies voor apparaatbescherming activeren."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Als je wifi overslaat:\n\n"<li>"Je apparaat heeft geen verbinding met internet."</li>\n\n<li>"Je ontvangt geen software-updates totdat je verbinding maakt met internet."</li>\n\n<li>"Je kunt op dit moment geen functies voor apparaatbescherming activeren."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Als je wifi overslaat:\n\n"<li>"Heeft je telefoon geen verbinding met internet."</li>\n\n<li>"Ontvang je geen software-updates totdat je verbinding maakt met internet."</li>\n\n<li>"Kun je op dit moment geen functies voor apparaatbescherming activeren."</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"De tablet kan geen verbinding maken met dit wifi-netwerk."</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Het apparaat kan geen verbinding maken met dit wifi-netwerk."</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"De telefoon kan geen verbinding maken met dit wifi-netwerk."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Opgeslagen netwerken"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Geavanceerde wifi-instellingen"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wifi configureren"</string>
@@ -2307,6 +2292,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"\'Altijd aan\' is actief"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"\'Altijd aan\' is inactief"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Niet ondersteund door deze app"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Selecteer een VPN-profiel waarmee je altijd verbonden wilt blijven. Netwerkverkeer wordt alleen toegestaan bij verbinding met dit VPN."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Geen"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Voor Always-on VPN is een IP-adres voor zowel de server als DNS vereist."</string>
@@ -3198,7 +3189,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium sms\'jes kunnen je geld kosten en worden toegevoegd aan de facturen van je provider. Als je rechten aan een app verleent, kun je premium sms\'jes verzenden met die app."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Premium sms-toegang"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Uitgeschakeld"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"Demomodus"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"We zijn er om je te helpen"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"We staan voor je klaar"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"We staan altijd voor je klaar"</string>

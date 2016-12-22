@@ -390,6 +390,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"Skjálásvalkostur óvirkur. Hafðu samband við kerfisstjóra fyrirtækisins til að fá frekari upplýsingar. "<annotation id="admin_details">"Nánar"</annotation>\n\n"Þú getur áfram notað fingrafarið til að staðfesta kaup og aðgang að forritum. "<annotation id="url">"Frekari upplýsingar"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"Lyftu fingrinum og snertu svo skynjarann aftur"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"Þú getur bætt við allt að <xliff:g id="COUNT">%d</xliff:g> fingraförum"</string>
+    <!-- no translation found for fingerprint_intro_error_max (6864066984678078441) -->
+    <skip />
+    <!-- no translation found for fingerprint_intro_error_unknown (1905692132326523040) -->
+    <skip />
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"Fjarlægja öll fingraför?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"Þú getur ekki notað fingraför til að taka símann úr lás, heimila kaup eða skrá þig inn í forrit."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"Þú getur ekki notað fingraför til að taka vinnusniðið úr lás, heimila kaup eða skrá þig inn í vinnuforrit."</string>
@@ -628,7 +632,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Sem hátalari"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Fyrir tónlist og margmiðlunarefni"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Muna stillingar"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi-Fi aðstoð"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Útsending"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Leyfa þráðlausan skjá"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Engin nálæg tæki fundust."</string>
@@ -663,7 +666,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Stillingar Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Setja upp og stjórna þráðlausum aðgangsstöðum"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Veldu Wi-Fi net"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Velja Wi-Fi"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Kveikir á Wi‑Fi…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Slekkur á Wi‑Fi…"</string>
@@ -675,9 +677,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Forðast lélegar tengingar"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Ekki nota Wi-Fi net nema nettengingin sé góð"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Nota aðeins net með góða tengingu"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Nota opin Wi-Fi net sjálfkrafa"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Leyfa Wi-Fi aðstoð að tengjast neti sjálfkrafa ef gæði þess eru mikil"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Veldu aðstoðarforrit"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Setja upp vottorð"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Til þess að auka staðsetningarnákvæmni geta kerfisforrit og þjónusta áfram fundið Wi-Fi net. Hægt er að breyta þessu í <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>0leitarstillingum<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Ekki sýna þetta aftur"</string>
@@ -708,7 +707,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Kveiktu á Wi-Fi til að sjá tiltæk net."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Leitar að Wi-Fi netum…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Þú hefur ekki heimild til að breyta Wi-Fi netinu."</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"Bæta við öðru neti"</string>
     <string name="wifi_more" msgid="3195296805089107950">"Meira"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"Sjálfvirk uppsetning (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Ítarlegri valkostir"</string>
@@ -782,17 +780,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"Vista"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"Ekki tókst að vista net"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Hætta við"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"Sleppa samt"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"Til baka"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"VIÐVÖRUN: Ef þú notar ekki Wi-Fi getur spjaldtölvan aðeins sótt efni og uppfærslur með farsímagögnum. Tengdu tölvuna við Wi-Fi til að komast hjá mögulegum gagnakostnaði."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"VIÐVÖRUN: Ef þú notar ekki Wi-Fi getur tækið aðeins sótt efni og uppfærslur með farsímagögnum. Tengdu tækið við Wi-Fi til að komast hjá mögulegum gagnakostnaði."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"VIÐVÖRUN: Ef þú notar ekki Wi-Fi getur síminn aðeins sótt efni og uppfærslur með farsímagögnum. Tengdu símann við Wi-Fi til að komast hjá mögulegum gagnakostnaði."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"Ef þú sleppir Wi‑Fi:\n\n"<li>"Spjaldtölvan verður ónettengd."</li>\n\n<li>"Þú færð ekki hugbúnaðaruppfærslur fyrr en þú tengist netinu."</li>\n\n<li>"Þú getur ekki virkjað öryggiseiginleika tækisins á þessari stundu."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"Ef þú sleppir Wi‑Fi:\n\n"<li>"Tækið verður ónettengt."</li>\n\n<li>"Þú færð ekki hugbúnaðaruppfærslur fyrr en þú tengist netinu."</li>\n\n<li>"Þú getur ekki virkjað öryggiseiginleika tækisins á þessari stundu."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"Ef þú sleppir Wi‑Fi:\n\n"<li>"Síminn verður ónettengdur."</li>\n\n<li>"Þú færð ekki hugbúnaðaruppfærslur fyrr en þú tengist netinu."</li>\n\n<li>"Þú getur ekki virkjað öryggiseiginleika tækisins á þessari stundu."</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"Spjaldtölvan gat ekki tengst þessu Wi-Fi neti."</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Ekki var hægt að tengja tækið við þetta Wi-Fi net."</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"Síminn gat ekki tengst þessu Wi-Fi neti."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Vistuð net"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Ítarlegar Wi-Fi stillingar"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Stilla Wi-Fi"</string>
@@ -2307,6 +2294,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"Alltaf virkt"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"„Alltaf kveikt“ er óvirkt"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"Ekki stutt af þessu forriti"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Veldu VPN-snið sem alltaf á að vera tengt. Netumferð er aðeins leyfð þegar tenging við þetta VPN er virk."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Ekkert"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPN sem er alltaf virkt krefst IP-tölu þjóns og nafnaþjóns (DNS)."</string>
@@ -3198,7 +3191,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Sérstök SMS-skilaboð geta kostað þig peninga og munu bætast við símreikninginn þinn. Ef þú virkjar leyfi fyrir forrit geturðu sent sérstök SMS með því forriti."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Sérstakur SMS-aðgangur"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"Slökkt"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"Prufustilling"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"Við erum hér til að hjálpa þér"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Við erum til staðar allan sólarhringinn"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Við erum til staðar allan sólarhringinn"</string>

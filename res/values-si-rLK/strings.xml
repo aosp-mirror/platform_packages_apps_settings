@@ -390,6 +390,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"තිර අගුලු විකල්පය අබලයි. තව දැන ගැනීමට ඔබේ සංවිධානයේ පරිපාලක අමතන්න. "<annotation id="admin_details">"තවත් විස්තර"</annotation>\n\n"ඔබට තවමත් මිලදී ගැනීම් සහ යෙදුම් ප්‍රවේශය සඳහා අනුමැතිය දීමට ඔබේ ඇඟිලි සලකුණ භාවිත කළ හැකිය. "<annotation id="url">"තව දැන ගන්න"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"ඇඟිල්ල ඔසවා, අනතුරුව නැවත සංවේදකය ස්පර්ශ කරන්න"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"ඔබට ඇඟිලි සලකුණු <xliff:g id="COUNT">%d</xliff:g> දක්වා එකතු කළ හැකිය"</string>
+    <string name="fingerprint_intro_error_max" msgid="6864066984678078441">"ඔබ ඇඟිලි සලකුණු උපරිම සංඛ්‍යාව එක් කර ඇත"</string>
+    <string name="fingerprint_intro_error_unknown" msgid="1905692132326523040">"තවත් ඇඟිලි සලකුණු එක් කළ නොහැකිය"</string>
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"සියලු ඇඟිලි සලකුණු ඉවත් කරන්නද?"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"ඔබට ඔබේ දුරකථනය අගුලු හැරීමට, මිලදී ගැනීම්වලට අවසර දීමට, හෝ ඒවා සමගින් යෙදුම්වලට පිරීමට ඔබේ ඇඟිලි සලකුණු භාවිත කළ නොහැකි වනු ඇත."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"ඔබට ඔබේ කාර්යාල පැතිකඩ අගුලු හැරීමට, මිලදී ගැනීම්වලට අවසර දීමට, හෝ කාර්යාල යෙදුම්වලට පිරීමට ඔබේ ඇඟිලි සලකුණු භාවිත කළ නොහැකි වනු ඇත."</string>
@@ -628,7 +630,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"නාදක දුරකථනයක් ලෙස"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"සංගීතය සහ මාධ්‍යය සඳහා"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"සැකසීම් මතක තබාගන්න"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi සහායක"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Cast"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"රැහැන් රහිත දර්ශනය සබල කරන්න"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"කිසිඳු උපාංගයක් අවටින් සොයාගත්තේ නැත."</string>
@@ -663,7 +664,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Wi-Fi සැකසුම්"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"රැහැන් රහිත ප්‍රවේශ තැන් සකසන්න සහ කළමනාකරණය කරන්න"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Wi‑Fi ජාලය තෝරන්න"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Wi-Fi තෝරන්න"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Wi‑Fi සක්‍රිය කරමින්..."</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Wi-Fi අක්‍රිය කරමින්..."</string>
@@ -675,9 +675,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"දුර්වල සම්බන්ධතා මඟහරින්න"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"හොඳ අන්තර්ජාල සම්බන්ධතාවයක් නොමැති නම් Wi‑Fi ජාල භාවිතා නොකරන්න"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"හොඳ අන්තර්ජාල සම්බන්ධතාවක් තිබෙන ජාල පමණක් භාවිතා කරන්න"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"විවෘත Wi‑Fi ස්වයංක්‍රියව භාවිතා කරන්න"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"විවෘත ජාල තත්ත්වයෙන් උසස් යැයි නිර්ණය කර ඒවාට ස්වයංක්‍රියව සම්බන්ධ වීමට Wi‑Fi සහායකට ඉඩ දෙන්න"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"සහායක තෝරන්න"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"සහතික ස්ථාපනය කරන්න"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"ස්ථාන නිරවද්‍යතාව වැඩිදියුණු කිරීමට, පද්ධති යෙදුම් සහ සේවාවලට තවමත් Wi‑Fi ජාල සඳහා ස්කෑන් කිරීමට හැකිය. ඔබට මෙය <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ස්කෑන් කිරීමේ සැකසීම්<xliff:g id="LINK_END_1">LINK_END</xliff:g> තුළ වෙනස් කළ හැකිය."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"නැවත නොපෙන්වන්න"</string>
@@ -691,7 +688,7 @@
     <string name="wifi_switch_away_when_unvalidated" msgid="1410499115509796174">"Wi-Fi සඳහා අන්තර්ජාල ප්‍රවේශ නැති වුවහොත් සෙලියුලර් දත්තවලට මාරු වෙන්න."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="8741291033791891668">"සෙලියුලර් දත්ත වෙත ස්වයංක්‍රියව මාරු වන්න"</string>
     <string name="wifi_cellular_data_fallback_summary" msgid="2641527693037426430">"Wi‑Fi සඳහා අන්තර්ජාල සම්බන්ධතාව නැති විට සෙලියුලර් දත්ත භාවිත කරන්න. දත්ත භාවිතය අදාළ විය හැකිය."</string>
-    <string name="wifi_add_network" msgid="6234851776910938957">"ජාලය එකතු කරන්න"</string>
+    <string name="wifi_add_network" msgid="6234851776910938957">"ජාලය එක් කරන්න"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"Wi-Fi ජාල"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS තල්ලු යතුර"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"තවත් විකල්ප"</string>
@@ -708,7 +705,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"ලබා ගත හැකි ජාල බැලීමට Wi-Fi සක්‍රිය කරන්න."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Wi-Fi සඳහා පරිලෝකනය කරමින්…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Wi-Fi ජාලය වෙනස් කිරීමට ඔබට අවසර නැත."</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"වෙනත් ජාලයක් එකතු කරන්න"</string>
     <string name="wifi_more" msgid="3195296805089107950">"තව"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"ස්වයංක්‍රිය සැකසුම (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"උසස් විකල්ප"</string>
@@ -782,17 +778,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"සුරකින්න"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"ජාලය සුරැකීම අසාර්ථක වුණි"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"අවලංගු කරන්න"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"කමක් නෑ මඟ හරින්න"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"ආපසු යන්න"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"අවවාදයයි: ඔබ Wi‑Fi මඟ හැරියා නම්, මුල් බාගැනීම් හෝ යාවත්කාලීන කිරීම් සඳහා ඔබගේ ටැබ්ලටය සෙලියුලර් දත්ත පමණක් භාවිතා කරයි. අය විය හැකි දත්ත වැළක්වීමට Wi‑Fi වෙත සම්බන්ධ වෙන්න."</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"අවවාදයයි: ඔබ Wi‑Fi මඟ හැරියා නම්, මුල් බාගැනීම් හෝ යාවත්කාලීන කිරීම් සඳහා ඔබගේ උපාංගය සෙලියුලර් දත්ත පමණක් භාවිතා කරයි. අය විය හැකි දත්ත වැළක්වීමට Wi‑Fi වෙත සම්බන්ධ වෙන්න."</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"අවවාදයයි: ඔබ Wi‑Fi මඟ හැරියා නම්, මුල් බාගැනීම් හෝ යාවත්කාලීන කිරීම් සඳහා ඔබගේ දුරකථනය සෙලියුලර් දත්ත පමණක් භාවිතා කරයි. අය විය හැකි දත්ත වැළක්වීමට Wi‑Fi වෙත සම්බන්ධ වෙන්න."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"ඔබ Wi‑Fi මග හැරියොත්:\n\n"<li>"ඔබේ ටැබ්ලටයට අන්තර්ජාල සම්බන්ධතාවක් නොතිබෙනු ඇත."</li>\n\n<li>"ඔබ අන්තර්ජාලයට සම්බන්ධ වනතෙක් ඔබට මෘදුකාංග යාවත්කාලීන නොලැබෙනු ඇත."</li>\n\n<li>"ඔබට මෙම අවස්ථාවේදී උපාංග ආරක්ෂක විශේෂාංග සක්‍රිය කළ නොහැකිය."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"ඔබ Wi‑Fi මග හැරියොත්:\n\n"<li>"ඔබේ උපාංගයට අන්තර්ජාල සම්බන්ධතාවක් නොතිබෙනු ඇත."</li>\n\n<li>"ඔබ අන්තර්ජාලයට සම්බන්ධ වනතෙක් ඔබට මෘදුකාංග යාවත්කාලීන නොලැබෙනු ඇත."</li>\n\n<li>"ඔබට මෙම අවස්ථාවේදී උපාංග ආරක්ෂක විශේෂාංග සක්‍රිය කළ නොහැකිය."</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"ඔබ Wi‑Fi මග හැරියොත්:\n\n"<li>"ඔබේ දුරකථනයට අන්තර්ජාල සම්බන්ධතාවක් නොතිබෙනු ඇත."</li>\n\n<li>"ඔබ අන්තර්ජාලයට සම්බන්ධ වනතෙක් ඔබට මෘදුකාංග යාවත්කාලීන නොලැබෙනු ඇත."</li>\n\n<li>"ඔබට මෙම අවස්ථාවේදී උපාංග ආරක්ෂක විශේෂාංග සක්‍රිය කළ නොහැකිය."</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"ටැබ්ලටයට මෙම Wi-Fi ජාලයට සම්බන්ධ වීමට නොහැකි වී ඇත."</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"මෙම Wi-Fi ජාලය වෙත සම්බන්ධ වීමට උපාංගයට නොහැකි විය."</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"මෙම Wi-Fi ජාලය වෙත සම්බන්ධ වීමට දුරකථනයට නොහැකි විය."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"සුරකින ලද ජාල"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"උසස් Wi‑Fi"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wi‑Fi වින්‍යාස කිරීම"</string>
@@ -1812,11 +1797,11 @@
     <string name="print_no_services_installed" msgid="8443039625463872294">"සේවා ස්ථාපනය කර නැත"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"මුද්‍රක සොයා නොගැනුණි"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"සැකසීම්"</string>
-    <string name="print_menu_item_add_printers" msgid="2890738028215834012">"මුද්‍රණ යන්ත්‍ර එකතු කරන්න"</string>
+    <string name="print_menu_item_add_printers" msgid="2890738028215834012">"මුද්‍රණ යන්ත්‍ර එක් කරන්න"</string>
     <string name="print_feature_state_on" msgid="8098901852502441048">"ක්‍රියාත්මකයි"</string>
     <string name="print_feature_state_off" msgid="7294876968403966040">"අක්‍රියයි"</string>
     <string name="print_menu_item_add_service" msgid="3811645167869797802">"සේවාව එක් කිරීම"</string>
-    <string name="print_menu_item_add_printer" msgid="8251218970577291032">"මුද්‍රණ යන්ත්‍ර එකතු කරන්න"</string>
+    <string name="print_menu_item_add_printer" msgid="8251218970577291032">"මුද්‍රණ යන්ත්‍ර එක් කරන්න"</string>
     <string name="print_menu_item_search" msgid="7025589328240514553">"සෙවීම"</string>
     <string name="print_searching_for_printers" msgid="4680248496457576358">"මුද්‍රණ යන්ත්‍ර සොයමින්"</string>
     <string name="print_service_disabled" msgid="7739452396114245222">"සේවාව අබල කර ඇත"</string>
@@ -2307,6 +2292,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"සැම විටම ක්‍රියාකාරීව ඇති"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"සැම විටම ක්‍රියාත්මකයි අක්‍රියයි"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"මෙම යෙදුම මගින් සහාය නොදක්වයි"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"සෑම විටම සම්බන්ධ වී පැවතීමට VPN පැතිකඩක් තෝරන්න. මෙම VPN හා සම්බන්ධවී ඇතිවිට පමණක් ජාල ගමනාගමනයට අවසර ඇත."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"කිසිවක් නැත"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"සේවාදායක සහ DNS සඳහා සෑම විටම සක්‍රිය VPN සඳහා IP ලිපිනයක් අවශ්‍ය වේ."</string>
@@ -2359,7 +2350,7 @@
     </plurals>
     <string name="user_settings_title" msgid="6151874007858148344">"පරිශීලකයින්"</string>
     <string name="user_list_title" msgid="7937158411137563543">"පරිශීලකයින් සහ පැතිකඩ"</string>
-    <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"පරිශීලයෙකු හෝ ගිණුමක් එකතු කරන්න"</string>
+    <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"පරිශීලයෙකු හෝ ගිණුමක් එක් කරන්න"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"පරිශීලකයෙක් එක් කරන්න"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"සීමිත පැතිකඩ"</string>
     <string name="user_need_lock_message" msgid="5879715064416886811">"සීමිත පැතිකඩක් නිර්මාණය කිරීමට කලින්. ඔබගේ යෙදුම් සහ පෞද්ගලික දත්ත ආරක්ෂා කිරීමට තිර අගුලක් සැකසිය යුතුයි."</string>
@@ -2376,7 +2367,7 @@
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"ඔබගේ ගිණුමෙන් යෙදුම් සහ අන්තර්ගත වෙත පිවිසීම ඔබට සීමා කළ හැක"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"පරිශීලක"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"සීමිත පැතිකඩ"</string>
-    <string name="user_add_user_title" msgid="2108112641783146007">"අලුත් පරිශීලකයෙක් එකතු කරන්නද?"</string>
+    <string name="user_add_user_title" msgid="2108112641783146007">"අලුත් පරිශීලකයෙක් එක් කරන්නද?"</string>
     <string name="user_add_user_message_long" msgid="8562152293752222985">"අමතර පරිශීලකයින් නිර්මාණය කිරීම මඟින් වෙනත් පුද්ගලයන් සමඟ මෙම උපාංගය ඔබට බෙදා ගත හැක. සෑම පරිශිලකයෙක්ටම ඔවුන්ගේ යෙදුම්, බිතුපත, සහ වෙනත් ඒවා අභිරුචි කළ හැකි තමන්ට අයිති ඉඩක් ඇත. පරිශීලකයින්ට Wi‑Fi වැනි සෑම දෙනාටම බලපාන උපාංග සැකසීම්ද සීරුමාරු කළ හැක.\n\nඔබ නව පරිශීලකයෙකු එක් කළ විට ඔවුන්ගේ ඉඩ එම පුද්ගලයා සකසා ගත යුතු වේ.\n\nඕනෑම පරිශීලකයෙකුට වෙනත් සියලු පරිශීලකයන් සඳහා යෙදුම් යාවත්කාලීන කළ හැක."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"ඔබ අලුත් පරිශීලකයෙක් එකතු කරන විට, එම පුද්ගලයා ඔහුගේ වැඩ කරන ඉඩ සකසා ගත යුතුය.\n\nසියළුම අනෙක් පරිශීලකයින් සඳහා ඕනෑම පරිශීලකයෙකුට යාවත්කාලීන කළ හැක."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"දැන් පරිශීලකයා සකසන්නද?"</string>
@@ -3198,7 +3189,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"වාරික SMS ඔබෙන් මුදල් අය කළ හැකි අතර ඔබේ වාහක බිල්පතට එක් කරනු ඇත. ඔබ යෙදුමක් සඳහා අවසර සබල කරන්නේ නම්, ඔබට එම යෙදුම භාවිතයෙන් වාරික SMS යැවීමට හැකි වනු ඇත."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"වාරික SMS ප්රවේශය"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"අබලයි"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"ආදර්ශන ප්‍රකාරය"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"උදවු කිරීමට අප මෙතැනය"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"අප දින 7 පැය 24 පුරා ඔබ වෙනුවෙන් මෙතැනය"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"අප දින 7 පැය 24 පුරා ඔබ වෙනුවෙන් මෙතැනය"</string>

@@ -390,6 +390,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="7007548031540826618">"ปิดใช้ตัวเลือกล็อกหน้าจอแล้ว โปรดสอบถามข้อมูลเพิ่มเติมจากผู้ดูแลระบบขององค์กร "<annotation id="admin_details">"รายละเอียดเพิ่มเติม"</annotation>\n\n"คุณยังคงใช้ลายนิ้วมือเพื่อให้สิทธิ์การซื้อและการเข้าถึงแอปได้ "<annotation id="url">"เรียนรู้เพิ่มเติม"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="1888772560642539718">"ยกนิ้วขึ้น แล้วแตะเซ็นเซอร์อีกครั้ง"</string>
     <string name="fingerprint_add_max" msgid="1020927549936895822">"คุณสามารถเพิ่มลายนิ้วมือได้ถึง <xliff:g id="COUNT">%d</xliff:g> ลาย"</string>
+    <!-- no translation found for fingerprint_intro_error_max (6864066984678078441) -->
+    <skip />
+    <!-- no translation found for fingerprint_intro_error_unknown (1905692132326523040) -->
+    <skip />
     <string name="fingerprint_last_delete_title" msgid="6410310101247028988">"นำลายนิ้วมือทั้งหมดออกใช่ไหม"</string>
     <string name="fingerprint_last_delete_message" msgid="8318926239554839722">"คุณจะไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์ อนุญาตให้ซื้อ หรือลงชื่อเข้าใช้แอปต่างๆ ด้วยลายนิ้วมือได้"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="8840100810725902159">"คุณจะไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกโปรไฟล์งาน อนุญาตการซื้อสินค้า หรือลงชื่อเข้าใช้แอปงาน"</string>
@@ -628,7 +632,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"เป็นลำโพง"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"สำหรับเพลงและสื่อ"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"จำการตั้งค่า"</string>
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"แคสต์"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"เปิดใช้การแสดงผลแบบไร้สาย"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"ไม่พบอุปกรณ์ในบริเวณใกล้เคียง"</string>
@@ -663,7 +666,6 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"การตั้งค่า WiFi"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"WiFi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"ตั้งค่าและจัดการจุดเข้าใช้งานระบบไร้สาย"</string>
-    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"เลือกเครือข่าย Wi‑Fi"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"เลือก Wi-Fi"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"กำลังเปิด WiFi…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"กำลังปิด WiFi…"</string>
@@ -675,9 +677,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"หลีกเลี่ยงการเชื่อมต่อที่สัญญาณไม่แรงพอ"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"อย่าใช้เครือข่าย WiFi หากไม่มีการเชื่อมต่ออินเทอร์เน็ตที่ดีเพียงพอ"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"ใช้เครือข่ายที่มีการเชื่อมต่ออินเทอร์เน็ตสัญญาณแรงเท่านั้น"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"ใช้ Wi-Fi แบบเปิดโดยอัตโนมัติ"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"ให้ Wi‑Fi Assistant เชื่อมต่อโดยอัตโนมัติเพื่อเปิดเครือข่ายที่กำหนดไว้เป็นแบบคุณภาพสูง"</string>
-    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"เลือกผู้ช่วย"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"ติดตั้งใบรับรอง"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"หากต้องการปรับปรุงความแม่นยำของตำแหน่ง แอปและบริการของระบบจะยังคงสามารถสแกนหาเครือข่าย Wi-Fi ได้ คุณสามารถเปลี่ยนแปลงคุณลักษณะนี้ได้ใน<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>การตั้งค่าการสแกน<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"ไม่ต้องแสดงข้อความนี้อีก"</string>
@@ -708,7 +707,6 @@
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"หากต้องการดูเครือข่ายที่ใช้ได้ ให้เปิด WiFi"</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"กำลังค้นหาเครือข่าย WiFi…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"คุณไม่ได้รับอนุญาตให้เปลี่ยนแปลงเครือข่าย WiFi"</string>
-    <string name="wifi_other_network" msgid="1484433183857764750">"เพิ่มเครือข่ายอื่น"</string>
     <string name="wifi_more" msgid="3195296805089107950">"เพิ่มเติม"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"การตั้งค่าอัตโนมัติ (WPS)"</string>
     <string name="wifi_show_advanced" msgid="3409422789616520979">"ตัวเลือกขั้นสูง"</string>
@@ -782,17 +780,6 @@
     <string name="wifi_save" msgid="3331121567988522826">"บันทึก"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"ไม่สามารถบันทึกเครือข่าย"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"ยกเลิก"</string>
-    <string name="wifi_skip_anyway" msgid="6965361454438011190">"ข้ามไปเลย"</string>
-    <string name="wifi_dont_skip" msgid="3615535136327231588">"ย้อนกลับ"</string>
-    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"คำเตือน: หากไม่ใช้ Wi-Fi แท็บเล็ตของคุณจะใช้เฉพาะข้อมูลมือถือสำหรับการดาวน์โหลดและการอัปเดตเริ่มต้น หากต้องการหลีกเลี่ยงการเรียกเก็บค่าบริการข้อมูลที่อาจเกิดขึ้น โปรดเชื่อมต่อ Wi-Fi"</string>
-    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"คำเตือน: หากไม่ใช้ Wi-Fi อุปกรณ์ของคุณจะใช้เฉพาะข้อมูลมือถือสำหรับการดาวน์โหลดและการอัปเดตเริ่มต้น หากต้องการหลีกเลี่ยงการเรียกเก็บค่าบริการข้อมูลที่อาจเกิดขึ้น โปรดเชื่อมต่อ Wi-Fi"</string>
-    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"คำเตือน: หากไม่ใช้ Wi-Fi โทรศัพท์ของคุณจะใช้เฉพาะข้อมูลมือถือสำหรับการดาวน์โหลดและการอัปเดตเริ่มต้น หากต้องการหลีกเลี่ยงการเรียกเก็บค่าบริการข้อมูลที่อาจเกิดขึ้น โปรดเชื่อมต่อ Wi-Fi"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6324917391996718760">"หากคุณข้าม Wi‑Fi ไป:\n\n"<li>"แท็บเล็ตจะไม่มีการเชื่อมต่ออินเทอร์เน็ต"</li>\n\n<li>"ซอฟต์แวร์จะไม่ได้รับการอัปเดตจนกว่าจะมีการเชื่อมต่ออินเทอร์เน็ต"</li>\n\n<li>"คุณไม่สามารถเปิดใช้งานคุณลักษณะการปกป้องอุปกรณ์ได้ในขณะนี้"</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1110629752293998468">"หากคุณข้าม Wi‑Fi ไป:\n\n"<li>"อุปกรณ์จะไม่มีการเชื่อมต่ออินเทอร์เน็ต"</li>\n\n<li>"ซอฟต์แวร์จะไม่ได้รับการอัปเดตจนกว่าจะมีการเชื่อมต่ออินเทอร์เน็ต"</li>\n\n<li>"คุณไม่สามารถเปิดใช้งานคุณลักษณะการปกป้องอุปกรณ์ได้ในขณะนี้"</li></string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="8271524692702309267">"หากคุณข้าม Wi‑Fi ไป:\n\n"<li>"โทรศัพท์จะไม่มีการเชื่อมต่ออินเทอร์เน็ต"</li>\n\n<li>"ซอฟต์แวร์จะไม่ได้รับการอัปเดตจนกว่าจะมีการเชื่อมต่ออินเทอร์เน็ต"</li>\n\n<li>"คุณไม่สามารถเปิดใช้งานคุณลักษณะการปกป้องอุปกรณ์ได้ในขณะนี้"</li></string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"แท็บเล็ตไม่สามารถเชื่อมต่อกับเครือข่าย WiFi นี้"</string>
-    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"อุปกรณ์ไม่สามารถเชื่อมต่อกับเครือข่าย Wi-Fi นี้"</string>
-    <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"โทรศัพท์ไม่สามารถเชื่อมต่อกับเครือข่าย WiFi นี้"</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"เครือข่ายที่บันทึก"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"WiFi ขั้นสูง"</string>
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"กำหนดค่า Wi-Fi"</string>
@@ -2307,6 +2294,12 @@
     <string name="vpn_always_on_active" msgid="2789423425184556882">"\"เปิดเสมอ\" ใช้งานอยู่"</string>
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"\"เปิดใช้เสมอ\" ไม่ทำงาน"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"แอปนี้ไม่สนับสนุน"</string>
+    <!-- no translation found for vpn_require_connection (4564777707170757146) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_active (4687243926584886862) -->
+    <skip />
+    <!-- no translation found for vpn_lockdown_inactive (3366835171623444107) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"เลือกโปรไฟล์ VPN เพื่อคงการเชื่อมต่อเอาไว้ตลอดเวลา การเข้าใช้เครือข่ายจะได้รับอนุญาตเฉพาะเมื่อมีการเชื่อมต่อกับ VPN นี้เท่านั้น"</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"ไม่มี"</string>
     <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"VPN แบบเปิดตลอดเวลาจำเป็นต้องใช้ที่อยู่ IP ทั้งสำหรับเซิร์ฟเวอร์และ DNS"</string>
@@ -3198,7 +3191,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS แบบพรีเมียมอาจมีค่าใช้จ่ายและจะเพิ่มเข้าไปในใบเรียกเก็บเงินจากผู้ให้บริการ หากคุณให้สิทธิ์แอปหนึ่งๆ คุณจะใช้แอปนั้นส่ง SMS แบบพรีเมียมได้"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"การเข้าถึง SMS แบบพรีเมียม"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"ปิดใช้แล้ว"</string>
-    <string name="demo_mode" msgid="2655748420527206870">"โหมดสาธิต"</string>
+    <!-- no translation found for demo_mode (2798762752209330277) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"เราพร้อมช่วยเหลือคุณ"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"เราพร้อมให้การสนับสนุนทุกวันตลอด 24 ชั่วโมง"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"เราพร้อมให้การสนับสนุนทุกวันตลอด 24 ชั่วโมง"</string>
