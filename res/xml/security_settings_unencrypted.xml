@@ -21,7 +21,7 @@
         android:key="security_category"
         android:title="@string/crypt_keeper_settings_title">
 
-        <PreferenceScreen
+        <Preference
             android:key="encryption"
             android:title="@string/crypt_keeper_encrypt_title"
             android:fragment="com.android.settings.CryptKeeperSettings" />
