@@ -49,6 +49,10 @@
         <item name="android:layout">@layout/preference_category_material_settings</item>
     </style>
 
+    <style name="SettingsSeekBarPreference">
+        <item name="android:layout">@layout/preference_widget_seekbar_settings</item>
+    </style>
+
     <style name="SettingsSwitchPreference" parent="SettingsPreference">
         <item name="widgetLayout">@*android:layout/preference_widget_switch</item>
         <item name="switchTextOn">@*android:string/capital_on</item>
