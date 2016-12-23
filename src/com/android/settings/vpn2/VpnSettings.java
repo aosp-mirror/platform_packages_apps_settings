@@ -170,6 +170,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     public void onResume() {
         super.onResume();
 
+        mUnavailable = mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN);
         if (mUnavailable) {
             // Show a message to explain that VPN settings have been disabled
             if (!isUiRestrictedByOnlyAdmin()) {
@@ -178,6 +179,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             getPreferenceScreen().removeAll();
             return;
         } else {
+            setEmptyView(getEmptyTextView());
             getEmptyTextView().setText(R.string.vpn_no_vpns_added);
         }
 
