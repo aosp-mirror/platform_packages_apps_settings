@@ -222,6 +222,7 @@ public class InputMethodAndLanguageSettings extends DashboardFragment
             InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(
                     Context.INPUT_METHOD_SERVICE);
 
+            // TODO: Move to VirtualKeyboardFragment and AvailableVirtualKeyboardFragment.
             // All other IMEs.
             List<InputMethodInfo> inputMethods = immValues.getInputMethodList();
             final int inputMethodCount = (inputMethods == null ? 0 : inputMethods.size());
@@ -245,6 +246,7 @@ public class InputMethodAndLanguageSettings extends DashboardFragment
                 indexables.add(indexable);
             }
 
+            // TODO: Move to PhysicalKeyboardFragment.
             // Hard keyboards
             InputManager inputManager = (InputManager) context.getSystemService(
                     Context.INPUT_SERVICE);

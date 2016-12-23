@@ -723,7 +723,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         unregisterReceiver(mBatteryInfoReceiver);
         unregisterReceiver(mUserAddRemoveReceiver);
         if (mDynamicIndexableContentMonitor != null) {
-            mDynamicIndexableContentMonitor.unregister();
+            mDynamicIndexableContentMonitor.unregister(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
         }
     }
 
