@@ -1,10 +1,28 @@
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -32,6 +50,8 @@ import static org.mockito.Mockito.when;
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PowerUsageSummaryTest {
+    private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
+    private static final int UID = 123;
 
     private static final Intent ADDITIONAL_BATTERY_INFO_INTENT =
             new Intent("com.example.app.ADDITIONAL_BATTERY_INFO");
@@ -46,13 +66,17 @@ public class PowerUsageSummaryTest {
     private MenuItem mAdditionalBatteryInfoMenu;
     @Mock
     private MenuInflater mMenuInflater;
+    @Mock
+    private BatterySipper mBatterySipper;
 
     private TestFragment mFragment;
     private FakeFeatureFactory mFeatureFactory;
+    private PowerUsageSummary mPowerUsageSummary;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
 
@@ -67,6 +91,11 @@ public class PowerUsageSummaryTest {
                 .thenReturn(MENU_ADDITIONAL_BATTERY_INFO);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(ADDITIONAL_BATTERY_INFO_INTENT);
+
+        mPowerUsageSummary = new PowerUsageSummary();
+
+        when(mBatterySipper.getPackages()).thenReturn(PACKAGE_NAMES);
+        when(mBatterySipper.getUid()).thenReturn(UID);
     }
 
     @Test
@@ -94,6 +123,33 @@ public class PowerUsageSummaryTest {
 
         verify(mMenu, never()).add(Menu.NONE, MENU_ADDITIONAL_BATTERY_INFO,
                 Menu.NONE, R.string.additional_battery_info);
+    }
+
+    @Test
+    public void testExtractKeyFromSipper_TypeAPPUidObjectNull_ReturnPackageNames() {
+        mBatterySipper.uidObj = null;
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+
+        final String key = mPowerUsageSummary.extractKeyFromSipper(mBatterySipper);
+        assertThat(key).isEqualTo(TextUtils.concat(mBatterySipper.getPackages()).toString());
+    }
+
+    @Test
+    public void testExtractKeyFromSipper_TypeOther_ReturnDrainType() {
+        mBatterySipper.uidObj = null;
+        mBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
+
+        final String key = mPowerUsageSummary.extractKeyFromSipper(mBatterySipper);
+        assertThat(key).isEqualTo(mBatterySipper.drainType.toString());
+    }
+
+    @Test
+    public void testExtractKeyFromSipper_TypeAPPUidObjectNotNull_ReturnUid() {
+        mBatterySipper.uidObj = new BatteryStatsImpl.Uid(new BatteryStatsImpl(), UID);
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+
+        final String key = mPowerUsageSummary.extractKeyFromSipper(mBatterySipper);
+        assertThat(key).isEqualTo(Integer.toString(mBatterySipper.getUid()));
     }
 
     public static class TestFragment extends PowerUsageSummary {
