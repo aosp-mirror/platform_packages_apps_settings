@@ -65,4 +65,10 @@ public class UtilsTest {
 
         assertThat(Utils.getWifiIpAddresses(mContext)).isNull();
     }
+
+    @Test
+    public void testAssignDefaultPhoto_ContextNull_ReturnFalseAndNotCrash() {
+        // Should not crash here
+        assertThat(Utils.assignDefaultPhoto(null, 0)).isFalse();
+    }
 }
