@@ -27,7 +27,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -58,6 +58,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -105,7 +106,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             final int state =
-                intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+                    intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
 
             if (action.equals(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED)) {
                 updateDeviceName(context);
@@ -122,8 +123,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 final Locale locale = res.getConfiguration().getLocales().get(0);
                 final BidiFormatter bidiFormatter = BidiFormatter.getInstance(locale);
                 mMyDevicePreference.setTitle(res.getString(
-                            R.string.bluetooth_is_visible_message,
-                            bidiFormatter.unicodeWrap(mLocalAdapter.getName())));
+                        R.string.bluetooth_is_visible_message,
+                        bidiFormatter.unicodeWrap(mLocalAdapter.getName())));
             }
         }
     };
@@ -230,7 +231,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         boolean bluetoothIsEnabled = mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON;
         boolean isDiscovering = mLocalAdapter.isDiscovering();
         int textId = isDiscovering ? R.string.bluetooth_searching_for_devices :
-            R.string.bluetooth_search_for_devices;
+                R.string.bluetooth_search_for_devices;
         menu.add(Menu.NONE, MENU_ID_SCAN, 0, textId)
                 .setEnabled(bluetoothIsEnabled && !isDiscovering)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
@@ -356,8 +357,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 final Locale locale = res.getConfiguration().getLocales().get(0);
                 final BidiFormatter bidiFormatter = BidiFormatter.getInstance(locale);
                 mMyDevicePreference.setTitle(res.getString(
-                            R.string.bluetooth_is_visible_message,
-                            bidiFormatter.unicodeWrap(mLocalAdapter.getName())));
+                        R.string.bluetooth_is_visible_message,
+                        bidiFormatter.unicodeWrap(mLocalAdapter.getName())));
 
                 getActivity().invalidateOptionsMenu();
 
@@ -438,8 +439,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         super.onBluetoothStateChanged(bluetoothState);
         // If BT is turned off/on staying in the same BT Settings screen
         // discoverability to be set again
-        if (BluetoothAdapter.STATE_ON == bluetoothState)
+        if (BluetoothAdapter.STATE_ON == bluetoothState) {
             mInitiateDiscoverable = true;
+        }
         updateContent(bluetoothState);
     }
 
@@ -481,6 +483,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
     /**
      * Add a listener, which enables the advanced settings icon.
+     *
      * @param preference the newly added preference
      */
     @Override
@@ -497,7 +500,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         return R.string.help_url_bluetooth;
     }
 
-    private static class SummaryProvider
+    @VisibleForTesting
+    static class SummaryProvider
             implements SummaryLoader.SummaryProvider, BluetoothCallback {
 
         private final LocalBluetoothManager mBluetoothManager;
@@ -505,10 +509,11 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         private final SummaryLoader mSummaryLoader;
 
         private boolean mEnabled;
-        private boolean mConnected;
+        private int mConnectionState;
 
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mBluetoothManager = Utils.getLocalBtManager(context);
+        public SummaryProvider(Context context, SummaryLoader summaryLoader,
+                LocalBluetoothManager bluetoothManager) {
+            mBluetoothManager = bluetoothManager;
             mContext = context;
             mSummaryLoader = summaryLoader;
         }
@@ -519,8 +524,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             if (defaultAdapter == null) return;
             if (listening) {
                 mEnabled = defaultAdapter.isEnabled();
-                mConnected =
-                        defaultAdapter.getConnectionState() == BluetoothAdapter.STATE_CONNECTED;
+                mConnectionState = defaultAdapter.getConnectionState();
                 mSummaryLoader.setSummary(this, getSummary());
                 mBluetoothManager.getEventManager().registerCallback(this);
             } else {
@@ -529,20 +533,26 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         }
 
         private CharSequence getSummary() {
-            return mContext.getString(!mEnabled ? R.string.bluetooth_disabled
-                    : mConnected ? R.string.bluetooth_connected
-                    : R.string.bluetooth_disconnected);
+            if (!mEnabled) {
+                return mContext.getString(R.string.bluetooth_disabled);
+            } else if (mConnectionState == BluetoothAdapter.STATE_CONNECTED) {
+                return mContext.getString(R.string.bluetooth_connected);
+            } else {
+                return mContext.getString(R.string.bluetooth_disconnected);
+            }
         }
 
         @Override
         public void onBluetoothStateChanged(int bluetoothState) {
-            mEnabled = bluetoothState == BluetoothAdapter.STATE_ON;
+            mEnabled = bluetoothState == BluetoothAdapter.STATE_ON
+                    || bluetoothState == BluetoothAdapter.STATE_TURNING_ON;
             mSummaryLoader.setSummary(this, getSummary());
         }
 
         @Override
         public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
-            mConnected = state == BluetoothAdapter.STATE_CONNECTED;
+            mConnectionState = state;
+            updateConnected();
             mSummaryLoader.setSummary(this, getSummary());
         }
 
@@ -565,49 +575,84 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
 
         }
+
+        private void updateConnected() {
+            // Make sure our connection state is up to date.
+            int state = mBluetoothManager.getBluetoothAdapter().getConnectionState();
+            if (state != mConnectionState) {
+                mConnectionState = state;
+                return;
+            }
+            final Collection<CachedBluetoothDevice> devices = getDevices();
+            if (devices == null) {
+                mConnectionState = BluetoothAdapter.STATE_DISCONNECTED;
+                return;
+            }
+            if (mConnectionState == BluetoothAdapter.STATE_CONNECTED) {
+                CachedBluetoothDevice connectedDevice = null;
+                for (CachedBluetoothDevice device : devices) {
+                    if (device.isConnected()) {
+                        connectedDevice = device;
+                    }
+                }
+                if (connectedDevice == null) {
+                    // If somehow we think we are connected, but have no connected devices, we
+                    // aren't connected.
+                    mConnectionState = BluetoothAdapter.STATE_DISCONNECTED;
+                }
+            }
+        }
+
+        private Collection<CachedBluetoothDevice> getDevices() {
+            return mBluetoothManager != null
+                    ? mBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy()
+                    : null;
+        }
     }
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
             = new SummaryLoader.SummaryProviderFactory() {
         @Override
         public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
+                SummaryLoader summaryLoader) {
+
+            return new SummaryProvider(activity, summaryLoader, Utils.getLocalBtManager(activity));
         }
     };
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
 
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+                    final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
 
-                final Resources res = context.getResources();
+                    final Resources res = context.getResources();
 
-                // Add fragment title
-                SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = res.getString(R.string.bluetooth_settings);
-                data.screenTitle = res.getString(R.string.bluetooth_settings);
-                result.add(data);
+                    // Add fragment title
+                    SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    data.title = res.getString(R.string.bluetooth_settings);
+                    data.screenTitle = res.getString(R.string.bluetooth_settings);
+                    result.add(data);
 
-                // Add cached paired BT devices
-                LocalBluetoothManager lbtm = Utils.getLocalBtManager(context);
-                // LocalBluetoothManager.getInstance can return null if the device does not
-                // support bluetooth (e.g. the emulator).
-                if (lbtm != null) {
-                    Set<BluetoothDevice> bondedDevices =
-                            lbtm.getBluetoothAdapter().getBondedDevices();
+                    // Add cached paired BT devices
+                    LocalBluetoothManager lbtm = Utils.getLocalBtManager(context);
+                    // LocalBluetoothManager.getInstance can return null if the device does not
+                    // support bluetooth (e.g. the emulator).
+                    if (lbtm != null) {
+                        Set<BluetoothDevice> bondedDevices =
+                                lbtm.getBluetoothAdapter().getBondedDevices();
 
-                    for (BluetoothDevice device : bondedDevices) {
-                        data = new SearchIndexableRaw(context);
-                        data.title = device.getName();
-                        data.screenTitle = res.getString(R.string.bluetooth_settings);
-                        data.enabled = enabled;
-                        result.add(data);
+                        for (BluetoothDevice device : bondedDevices) {
+                            data = new SearchIndexableRaw(context);
+                            data.title = device.getName();
+                            data.screenTitle = res.getString(R.string.bluetooth_settings);
+                            data.enabled = enabled;
+                            result.add(data);
+                        }
                     }
+                    return result;
                 }
-                return result;
-            }
-        };
+            };
 }
