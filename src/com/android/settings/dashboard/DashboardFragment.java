@@ -330,5 +330,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             mDashboardTilePrefKeys.remove(key);
             mProgressiveDisclosureMixin.removePreference(screen, key);
         }
+        mSummaryLoader.setListening(true);
     }
 }
