@@ -62,10 +62,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +133,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private DevicePolicyManager mDPM;
+    private SecurityFeatureProvider mSecurityFeatureProvider;
     private SubscriptionManager mSubscriptionManager;
     private UserManager mUm;
 
@@ -182,6 +186,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
                 .getDashboardFeatureProvider(activity);
+
+        mSecurityFeatureProvider = FeatureFactory.getFactory(activity).getSecurityFeatureProvider();
 
         if (savedInstanceState != null
                 && savedInstanceState.containsKey(TRUST_AGENT_CLICK_INTENT)) {
@@ -415,6 +421,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 root.addPreference(preference);
             }
         }
+
+        // Update preference data with tile data. Security feature provider only updates the data
+        // if it actually needs to be changed.
+        mSecurityFeatureProvider.updatePreferences(getActivity(), root,
+                mDashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY));
 
         for (int i = 0; i < SWITCH_PREFERENCE_KEYS.length; i++) {
             final Preference pref = findPreference(SWITCH_PREFERENCE_KEYS[i]);

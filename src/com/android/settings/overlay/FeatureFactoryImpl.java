@@ -33,6 +33,8 @@ import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
+import com.android.settings.security.SecurityFeatureProvider;
+import com.android.settings.security.SecurityFeatureProviderImpl;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.search2.SearchFeatureProviderImpl;
 
@@ -48,6 +50,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private LocaleFeatureProvider mLocaleFeatureProvider;
     private EnterprisePrivacyFeatureProvider mEnterprisePrivacyFeatureProvider;
     private SearchFeatureProvider mSearchFeatureProvider;
+    private SecurityFeatureProvider mSecurityFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -114,5 +117,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public SurveyFeatureProvider getSurveyFeatureProvider(Context context) {
         return null;
+    }
+
+    @Override
+    public SecurityFeatureProvider getSecurityFeatureProvider() {
+        if (mSecurityFeatureProvider == null) {
+            mSecurityFeatureProvider = new SecurityFeatureProviderImpl();
+        }
+        return mSecurityFeatureProvider;
     }
 }
