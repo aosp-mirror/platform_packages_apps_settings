@@ -28,6 +28,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
@@ -38,6 +39,7 @@ import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.DeviceInfoUtils;
@@ -55,6 +57,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
     private static final String KEY_MANUAL = "manual";
     private static final String KEY_REGULATORY_INFO = "regulatory_info";
+    private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     private static final String PROPERTY_SELINUX_STATUS = "ro.build.selinux";
     private static final String KEY_KERNEL_VERSION = "kernel_version";
@@ -102,7 +105,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         super.onCreate(icicle);
         final Activity activity = getActivity();
         mUm = UserManager.get(activity);
-        mSystemUpdatePreferenceController = new SystemUpdatePreferenceController(activity, mUm);
         mAdditionalSystemUpdatePreferenceController =
                 new AdditionalSystemUpdatePreferenceController(activity);
         mBuildNumberPreferenceController =
@@ -160,7 +162,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
          * Settings is a generic app and should not contain any device-specific
          * info.
          */
-        mSystemUpdatePreferenceController.displayPreference(getPreferenceScreen());
+        displaySystemUpdates(activity);
         mAdditionalSystemUpdatePreferenceController.displayPreference(getPreferenceScreen());
 
         // Remove manual entry if none present.
@@ -220,8 +222,21 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         } else if (preference.getKey().equals(KEY_DEVICE_FEEDBACK)) {
             sendFeedback();
         }
-        mSystemUpdatePreferenceController.handlePreferenceTreeClick(preference);
+        if (mSystemUpdatePreferenceController != null) {
+            mSystemUpdatePreferenceController.handlePreferenceTreeClick(preference);
+        }
         return super.onPreferenceTreeClick(preference);
+    }
+
+    @VisibleForTesting
+    void displaySystemUpdates(Context context) {
+        if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context).isEnabled()) {
+            mSystemUpdatePreferenceController
+                    = new SystemUpdatePreferenceController(context, UserManager.get(context));
+            mSystemUpdatePreferenceController.displayPreference(getPreferenceScreen());
+        } else {
+            getPreferenceScreen().removePreference(findPreference(KEY_SYSTEM_UPDATE_SETTINGS));
+        }
     }
 
     private void removePreferenceIfPropertyMissing(PreferenceGroup preferenceGroup,
