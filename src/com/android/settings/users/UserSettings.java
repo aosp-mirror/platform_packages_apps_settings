@@ -422,14 +422,16 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private UserInfo createRestrictedProfile() {
         UserInfo newUserInfo = mUserManager.createRestrictedProfile(mAddingUserName);
-        Utils.assignDefaultPhoto(getActivity(), newUserInfo.id);
+        if (newUserInfo != null && !Utils.assignDefaultPhoto(getActivity(), newUserInfo.id)) {
+            return null;
+        }
         return newUserInfo;
     }
 
     private UserInfo createTrustedUser() {
         UserInfo newUserInfo = mUserManager.createUser(mAddingUserName, 0);
-        if (newUserInfo != null) {
-            Utils.assignDefaultPhoto(getActivity(), newUserInfo.id);
+        if (newUserInfo != null && !Utils.assignDefaultPhoto(getActivity(), newUserInfo.id)) {
+            return null;
         }
         return newUserInfo;
     }
