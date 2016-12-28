@@ -16,16 +16,55 @@
 
 package com.android.settings;
 
+import android.content.Context;
+import android.os.UserManager;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
+
 import com.android.settingslib.DeviceInfoUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
+
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.Test;
+import org.mockito.Answers;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DeviceInfoSettingsTest extends AndroidTestCase {
+
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mContext;
+    @Mock
+    private PreferenceScreen mScreen;
+    @Mock
+    private UserManager mUserManager;
+
+    private FakeFeatureFactory mFeatureFactory;
+    private DeviceInfoSettings mSettings;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        mSettings = spy(new DeviceInfoSettings());
+        doReturn(mScreen).when(mSettings).getPreferenceScreen();
+    }
 
     @Test
     public void testGetFormattedKernelVersion() throws Exception {
@@ -64,5 +103,21 @@ public class DeviceInfoSettingsTest extends AndroidTestCase {
                         "3.18.31-g3ce5faa-dirty (x@y) (Android clang " +
                         "version 3.8.275480 (based on LLVM 3.8.275480)) " +
                         "#5 SMP PREEMPT Fri Oct 28 14:38:13 PDT 2016"));
+    }
+
+    @Test
+    public void testShowSystemUpdatesWhenIADisabled() throws Exception {
+        when(mFeatureFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
+        mSettings.displaySystemUpdates(mContext);
+
+        verify(mScreen).removePreference(any(Preference.class));
+    }
+
+    @Test
+    public void testHideSystemUpdatesWhenIAEnabled() throws Exception {
+        when(mFeatureFactory.dashboardFeatureProvider.isEnabled()).thenReturn(false);
+        mSettings.displaySystemUpdates(mContext);
+
+        verify(mScreen, never()).removePreference(any(Preference.class));
     }
 }
