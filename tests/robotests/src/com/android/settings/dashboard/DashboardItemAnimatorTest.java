@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SupportItemAdapter.ViewHolder;
+import com.android.settingslib.drawer.Tile;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,20 +42,30 @@ public class DashboardItemAnimatorTest {
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         mDashboardItemAnimator = new DashboardItemAnimator();
         mViewHolder = new ViewHolder(new TextView(context));
+        mViewHolder.itemView.setTag(new Tile());
     }
 
     @Test
-    public void testAnimateChange_NoOffset_NoPendingAnimation() {
+    public void testAnimateChange_NoPositionChange_NoPendingAnimation() {
         final boolean hasPendingAnimation = mDashboardItemAnimator
                 .animateChange(mViewHolder, mViewHolder, 0, 1, 0, 1);
         assertThat(hasPendingAnimation).isFalse();
     }
 
     @Test
-    public void testAnimateChange_HasOffset_HasPendingAnimation() {
+    public void testAnimateChange_HasPositionChange_HasPendingAnimation() {
         final boolean hasPendingAnimation = mDashboardItemAnimator
                 .animateChange(mViewHolder, mViewHolder, 0, 0, 1, 1);
         assertThat(hasPendingAnimation).isTrue();
     }
 
+    @Test
+    public void testAnimateChange_HasRunningAnimationWhileNoPositionChange_NoPendingAnimation() {
+        // Set pending move animations
+        mDashboardItemAnimator.animateMove(mViewHolder, 0, 0, 1, 1);
+
+        final boolean hasPendingAnimation = mDashboardItemAnimator
+                .animateChange(mViewHolder, mViewHolder, 0, 1, 0, 1);
+        assertThat(hasPendingAnimation).isFalse();
+    }
 }

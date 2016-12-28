@@ -18,15 +18,22 @@ package com.android.settings.dashboard;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import com.android.settingslib.drawer.Tile;
 
 public class DashboardItemAnimator extends DefaultItemAnimator {
 
     @Override
     public boolean animateChange(ViewHolder oldHolder, ViewHolder newHolder, int fromX, int fromY,
             int toX, int toY) {
-        if (oldHolder == newHolder) {
-            fromX += ViewCompat.getTranslationX(oldHolder.itemView);
-            fromY += ViewCompat.getTranslationY(oldHolder.itemView);
+        final Object tag = oldHolder.itemView.getTag();
+        if (tag instanceof Tile && oldHolder == newHolder) {
+            // When this view has other move animation running, skip this value to avoid
+            // animations interrupt each other.
+            if (!isRunning()) {
+                fromX += ViewCompat.getTranslationX(oldHolder.itemView);
+                fromY += ViewCompat.getTranslationY(oldHolder.itemView);
+            }
+
             if (fromX == toX && fromY == toY) {
                 dispatchMoveFinished(oldHolder);
                 return false;
