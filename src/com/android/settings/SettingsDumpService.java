@@ -16,14 +16,18 @@ package com.android.settings;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
+import android.net.Uri;
 import android.os.IBinder;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.applications.ProcStatsData;
 import com.android.settingslib.net.DataUsageController;
 import org.json.JSONArray;
@@ -35,6 +39,13 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
 public class SettingsDumpService extends Service {
+    @VisibleForTesting static final String KEY_SERVICE = "service";
+    @VisibleForTesting static final String KEY_STORAGE = "storage";
+    @VisibleForTesting static final String KEY_DATAUSAGE = "datausage";
+    @VisibleForTesting static final String KEY_MEMORY = "memory";
+    @VisibleForTesting static final String KEY_DEFAULT_BROWSER_APP = "default_browser_app";
+    @VisibleForTesting static final Intent BROWSER_INTENT =
+            new Intent("android.intent.action.VIEW", Uri.parse("http://"));
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -46,10 +57,11 @@ public class SettingsDumpService extends Service {
         JSONObject dump = new JSONObject();
 
         try {
-            dump.put("service", "Settings State");
-            dump.put("storage", dumpStorage());
-            dump.put("datausage", dumpDataUsage());
-            dump.put("memory", dumpMemory());
+            dump.put(KEY_SERVICE, "Settings State");
+            dump.put(KEY_STORAGE, dumpStorage());
+            dump.put(KEY_DATAUSAGE, dumpDataUsage());
+            dump.put(KEY_MEMORY, dumpMemory());
+            dump.put(KEY_DEFAULT_BROWSER_APP, dumpDefaultBrowser());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -126,5 +138,17 @@ public class SettingsDumpService extends Service {
             obj.put(volume.getId(), volObj);
         }
         return obj;
+    }
+
+    @VisibleForTesting
+    String dumpDefaultBrowser() {
+        final ResolveInfo resolveInfo = getPackageManager().resolveActivity(
+                BROWSER_INTENT, PackageManager.MATCH_DEFAULT_ONLY);
+
+        if (resolveInfo == null || resolveInfo.activityInfo.packageName.equals("android")) {
+            return null;
+        } else {
+            return resolveInfo.activityInfo.packageName;
+        }
     }
 }
