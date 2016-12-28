@@ -54,6 +54,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.SimpleAdapter;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ChooseLockGeneric;
@@ -66,6 +67,7 @@ import com.android.settings.Utils;
 import com.android.settings.accounts.AddUserWhenLockedPreferenceController;
 import com.android.settings.accounts.EmergencyInfoPreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -137,6 +139,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private UserPreference mMePreference;
     private DimmableIconPreference mAddUser;
     private PreferenceGroup mLockScreenSettings;
+    private RestrictedSwitchPreference mAddUserWhenLocked;
     private Preference mEmergencyInfoPreference;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
@@ -235,10 +238,14 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUser.setTitle(R.string.user_add_user_menu);
             }
         }
-        mLockScreenSettings = (PreferenceGroup) findPreference("lock_screen_settings");
-        mEmergencyInfoPreference = findPreference(KEY_EMERGENCY_INFO);
-        mEnergencyInfoController = new EmergencyInfoPreferenceController(context);
-        mAddUserWhenLockedController = new AddUserWhenLockedPreferenceController(context);
+        if (showEmergencyInfoAndAddUsersWhenLock(context)) {
+            mLockScreenSettings = (PreferenceGroup) findPreference("lock_screen_settings");
+            mAddUserWhenLocked =
+                    (RestrictedSwitchPreference) findPreference("add_users_when_locked");
+            mEmergencyInfoPreference = findPreference(KEY_EMERGENCY_INFO);
+            mEnergencyInfoController = new EmergencyInfoPreferenceController(context);
+            mAddUserWhenLockedController = new AddUserWhenLockedPreferenceController(context);
+        }
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
         filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
@@ -651,6 +658,11 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
+    @VisibleForTesting
+    boolean showEmergencyInfoAndAddUsersWhenLock(Context context) {
+        return !FeatureFactory.getFactory(context).getDashboardFeatureProvider(context).isEnabled();
+    }
+
     private static boolean emergencyInfoActivityPresent(Context context) {
         Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO).setPackage("com.android.emergency");
         List<ResolveInfo> infos = context.getPackageManager().queryIntentActivities(intent, 0);
@@ -891,15 +903,19 @@ public class UserSettings extends SettingsPreferenceFragment
             }
         }
 
-        if (mAddUserWhenLockedController.isAvailable()) {
-            mLockScreenSettings.setOrder(Preference.DEFAULT_ORDER);
-            preferenceScreen.addPreference(mLockScreenSettings);
-        }
+        if (showEmergencyInfoAndAddUsersWhenLock(context)) {
+            if (mAddUserWhenLockedController.isAvailable()) {
+                mLockScreenSettings.setOrder(Preference.DEFAULT_ORDER);
+                preferenceScreen.addPreference(mLockScreenSettings);
+                mAddUserWhenLockedController.updateState(mAddUserWhenLocked);
+                mAddUserWhenLocked.setOnPreferenceChangeListener(mAddUserWhenLockedController);
+            }
 
-        if (emergencyInfoActivityPresent(getContext())) {
-            mEmergencyInfoPreference.setOnPreferenceClickListener(this);
-            mEmergencyInfoPreference.setOrder(Preference.DEFAULT_ORDER);
-            preferenceScreen.addPreference(mEmergencyInfoPreference);
+            if (emergencyInfoActivityPresent(getContext())) {
+                mEmergencyInfoPreference.setOnPreferenceClickListener(this);
+                mEmergencyInfoPreference.setOrder(Preference.DEFAULT_ORDER);
+                preferenceScreen.addPreference(mEmergencyInfoPreference);
+            }
         }
     }
 
@@ -981,7 +997,7 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 onAddUserClicked(USER_TYPE_USER);
             }
-        } else {
+        } else if (mEnergencyInfoController != null) {
             mEnergencyInfoController.handlePreferenceTreeClick(pref);
         }
         return false;
