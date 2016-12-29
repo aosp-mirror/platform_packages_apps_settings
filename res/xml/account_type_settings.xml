@@ -20,6 +20,12 @@
         settings:keywords="@string/keywords_accounts">
 
     <Preference
+      android:key="account_header"
+      android:layout="@layout/account_header"
+      android:selectable="false"
+      android:order="0"/>
+
+    <Preference
         android:key="account_sync"
         android:title="@string/account_sync_title"
         android:order="1"/>
@@ -27,5 +33,10 @@
     <PreferenceCategory
       android:key="dashboard_tile_placeholder"
       android:order="10"/>
+
+    <com.android.settings.applications.LayoutPreference
+      android:key="remove_account"
+      android:layout="@layout/remove_account_button"
+      android:order="100" />
 
 </PreferenceScreen>
