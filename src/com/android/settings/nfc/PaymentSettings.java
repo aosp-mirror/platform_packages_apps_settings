@@ -19,6 +19,7 @@ package com.android.settings.nfc;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
@@ -31,13 +32,18 @@ import android.view.ViewGroup;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
 
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-public class PaymentSettings extends SettingsPreferenceFragment {
+public class PaymentSettings extends SettingsPreferenceFragment implements Indexable {
     public static final String TAG = "PaymentSettings";
     private PaymentBackend mPaymentBackend;
 
@@ -131,5 +137,22 @@ public class PaymentSettings extends SettingsPreferenceFragment {
                                                                    SummaryLoader summaryLoader) {
             return new SummaryProvider(activity, summaryLoader);
         }
+    };
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+                final Resources res = context.getResources();
+
+                // Add fragment title
+                SearchIndexableRaw data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.nfc_payment_settings_title);
+                data.screenTitle = res.getString(R.string.nfc_payment_settings_title);
+                data.keywords = res.getString(R.string.keywords_payment_settings);
+                result.add(data);
+                return result;
+            }
     };
 }
