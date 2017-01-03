@@ -119,9 +119,7 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
         if (Objects.equals(suppressor, mSuppressor)) return;
         mSuppressor = suppressor;
         if (mPreference != null) {
-            final String text = suppressor != null ?
-                mContext.getString(com.android.internal.R.string.muted_by,
-                    getSuppressorCaption(suppressor)) : null;
+            final String text = SuppressorHelper.getSuppressionText(mContext, suppressor);
             mPreference.setSuppressionText(text);
         }
         updatePreferenceIcon();
@@ -135,25 +133,6 @@ public class RingVolumePreferenceController extends VolumeSeekBarPreferenceContr
                     ? com.android.internal.R.drawable.ic_audio_ring_notif_vibrate
                     : com.android.internal.R.drawable.ic_audio_ring_notif);
         }
-    }
-
-    private String getSuppressorCaption(ComponentName suppressor) {
-        final PackageManager pm = mContext.getPackageManager();
-        try {
-            final ServiceInfo info = pm.getServiceInfo(suppressor, 0);
-            if (info != null) {
-                final CharSequence seq = info.loadLabel(pm);
-                if (seq != null) {
-                    final String str = seq.toString().trim();
-                    if (str.length() > 0) {
-                        return str;
-                    }
-                }
-            }
-        } catch (Throwable e) {
-            Log.w(TAG, "Error loading suppressor caption", e);
-        }
-        return suppressor.getPackageName();
     }
 
     private final class H extends Handler {
