@@ -263,6 +263,7 @@ public class DashboardSummary extends InstrumentedPreferenceFragment
     public void onConditionsChanged() {
         Log.d(TAG, "onConditionsChanged");
         mAdapter.setConditions(mConditionManager.getConditions());
+        mDashboard.scrollToPosition(0);
     }
 
     private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
