@@ -34,7 +34,16 @@ public class FirstIdViewMatcher {
             private boolean mMatched;
 
             public void describeTo(Description description) {
-                description.appendText(" is the first view that matches id.");
+                String idDescription = Integer.toString(id);
+                if (resources != null) {
+                    try {
+                        idDescription = resources.getResourceName(id);
+                    } catch (Resources.NotFoundException e) {
+                        // No big deal, will just use the int value.
+                        idDescription = String.format("%s (resource name not found)", id);
+                    }
+                }
+                description.appendText("with first id: " + idDescription);
             }
 
             public boolean matchesSafely(View view) {
@@ -42,7 +51,7 @@ public class FirstIdViewMatcher {
                 if (mMatched) {
                     return false;
                 } else {
-                    mMatched |= id == view.getId();
+                    mMatched = id == view.getId();
                     return mMatched;
                 }
             }
