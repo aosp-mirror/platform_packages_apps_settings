@@ -428,10 +428,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             });
         }
         getPreferenceScreen().removeAll();
-        Spannable boldSpan = (Spannable) emptyView.getText();
-        boldSpan.setSpan(
-                new TextAppearanceSpan(getActivity(), android.R.style.TextAppearance_Medium), 0,
-                briefText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        setTextSpan(emptyView.getText(), briefText);
     }
 
     @Override
@@ -459,6 +456,16 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         setDeviceListGroup(getPreferenceScreen());
         removeAllDevices();
         updateContent(mLocalAdapter.getBluetoothState());
+    }
+
+    @VisibleForTesting
+    void setTextSpan(CharSequence text, CharSequence briefText) {
+        if (text instanceof Spannable) {
+            Spannable boldSpan = (Spannable) text;
+            boldSpan.setSpan(
+                new TextAppearanceSpan(getActivity(), android.R.style.TextAppearance_Medium), 0,
+                briefText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
     }
 
     private final View.OnClickListener mDeviceProfilesListener = new View.OnClickListener() {
