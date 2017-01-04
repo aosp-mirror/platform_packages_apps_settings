@@ -25,6 +25,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
+import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
 
@@ -47,6 +48,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final EnterprisePrivacyFeatureProvider enterprisePrivacyFeatureProvider;
     public final SearchFeatureProvider searchFeatureProvider;
     public final SurveyFeatureProvider surveyFeatureProvider;
+    public final SecurityFeatureProvider securityFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -78,6 +80,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         enterprisePrivacyFeatureProvider = mock(EnterprisePrivacyFeatureProvider.class);
         searchFeatureProvider = mock(SearchFeatureProvider.class);
         surveyFeatureProvider = mock(SurveyFeatureProvider.class);
+        securityFeatureProvider = mock(SecurityFeatureProvider.class);
     }
 
     @Override
@@ -123,5 +126,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public SurveyFeatureProvider getSurveyFeatureProvider(Context context) {
         return surveyFeatureProvider;
+    }
+
+    @Override
+    public SecurityFeatureProvider getSecurityFeatureProvider() {
+        return securityFeatureProvider;
     }
 }
