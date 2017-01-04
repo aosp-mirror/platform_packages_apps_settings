@@ -675,7 +675,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 mLockPatternUtils.setSeparateProfileChallengeEnabled(mUserId, true, mUserPassword);
-                mChooseLockSettingsHelper.utils().clearLock(mUserId);
+                mChooseLockSettingsHelper.utils().clearLock(mUserPassword, mUserId);
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
                 removeAllFingerprintForUserAndFinish(mUserId);
