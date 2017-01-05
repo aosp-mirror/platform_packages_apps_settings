@@ -27,7 +27,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -249,8 +248,11 @@ public class DashboardSummary extends InstrumentedPreferenceFragment
     @Override
     public void onConditionsChanged() {
         Log.d(TAG, "onConditionsChanged");
+        final boolean scrollToTop = mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
         mAdapter.setConditions(mConditionManager.getConditions());
-        mDashboard.scrollToPosition(0);
+        if (scrollToTop) {
+            mDashboard.scrollToPosition(0);
+        }
     }
 
     private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
