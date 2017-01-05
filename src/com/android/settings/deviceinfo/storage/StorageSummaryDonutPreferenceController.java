@@ -1,16 +1,33 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android.settings.deviceinfo.storage;
 
 import android.content.Context;
+import android.os.storage.StorageManager;
+import android.os.storage.VolumeInfo;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.Formatter;
-import android.util.Log;
-import android.widget.TextView;
 
-import com.android.settings.core.PreferenceController;
 import com.android.settings.R;
+import com.android.settings.core.PreferenceController;
+import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 /**
  * StorgaeSummaryPreferenceController updates the donut storage summary preference to have the
@@ -37,22 +54,18 @@ public class StorageSummaryDonutPreferenceController extends PreferenceControlle
         StorageSummaryDonutPreference summary = (StorageSummaryDonutPreference) preference;
         final Formatter.BytesResult result = Formatter.formatBytes(mContext.getResources(),
                 mUsedBytes, 0);
-        summary.setTitle(TextUtils.expandTemplate(mContext.getText(R.string.storage_size_large),
-                result.value, result.units));
-        summary.setSummary(mContext.getString(R.string.storage_volume_used,
-                Formatter.formatFileSize(mContext, mTotalBytes)));
-        summary.setEnabled(true);
+        summary.setTitle(TextUtils.expandTemplate(
+                mContext.getText(R.string.storage_size_large_alternate), result.value,
+                result.units));
+        summary.setSummary(mContext.getString(R.string.storage_volume_free,
+                Formatter.formatFileSize(mContext, mTotalBytes - mUsedBytes)));
         summary.setPercent(mUsedBytes, mTotalBytes);
+        summary.setEnabled(true);
     }
 
     @Override
     public boolean isAvailable() {
         return true;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
     }
 
     @Override
@@ -68,5 +81,21 @@ public class StorageSummaryDonutPreferenceController extends PreferenceControlle
     public void updateBytes(long used, long total) {
         mUsedBytes = used;
         mTotalBytes = total;
+    }
+
+    /**
+     * Updates the state of the donut preference for the next update using volume to summarize.
+     * @param volume VolumeInfo to use to populate the informayion.
+     */
+    public void updateSizes(StorageVolumeProvider svp, VolumeInfo volume) {
+        final long sharedDataSize = volume.getPath().getTotalSpace();
+        long totalSize = svp.getPrimaryStorageSize();
+
+        if (totalSize <= 0) {
+            totalSize = sharedDataSize;
+        }
+
+        final long usedBytes = totalSize - volume.getPath().getFreeSpace();
+        updateBytes(usedBytes, totalSize);
     }
 }
