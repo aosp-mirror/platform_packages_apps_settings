@@ -3467,25 +3467,24 @@
 
         <!-- Quick Settings tiles for Developer Options -->
         <service
-                android:name=".qstile.DevelopmentTiles$ShowLayout"
-                android:label="@string/debug_layout"
-                android:icon="@drawable/tile_icon_show_layout"
-                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-                android:enabled="false">
+            android:name=".qstile.DevelopmentModeTile"
+            android:label="@string/developer_tile"
+            android:icon="@drawable/ic_settings_development"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-        <service
-                android:name=".qstile.DevelopmentTiles$GPUProfiling"
-                android:label="@string/track_frame_time"
-                android:icon="@drawable/tile_icon_graphics"
-                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-                android:enabled="false">
+        <activity
+            android:name=".qstile.DevelopmentTileConfigActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:label="@string/developer_tile">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
             </intent-filter>
-        </service>
+        </activity>
 
         <activity android:name=".HelpTrampoline"
             android:exported="true"
