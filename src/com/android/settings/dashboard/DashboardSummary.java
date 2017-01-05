@@ -29,7 +29,6 @@ import android.view.ViewGroup;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.conditional.Condition;
@@ -53,15 +52,6 @@ public class DashboardSummary extends InstrumentedPreferenceFragment
     private static final boolean DEBUG_TIMING = false;
     private static final int MAX_WAIT_MILLIS = 700;
     private static final String TAG = "DashboardSummary";
-
-    public static final String[] INITIAL_ITEMS = new String[]{
-            Settings.WifiSettingsActivity.class.getName(),
-            Settings.BluetoothSettingsActivity.class.getName(),
-            Settings.DataUsageSummaryActivity.class.getName(),
-            Settings.PowerUsageSummaryActivity.class.getName(),
-            Settings.ManageApplicationsActivity.class.getName(),
-            Settings.StorageSettingsActivity.class.getName(),
-    };
 
     private static final String SUGGESTIONS = "suggestions";
 
