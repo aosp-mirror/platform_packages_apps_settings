@@ -23,7 +23,7 @@ import com.android.settings.core.PreferenceController;
 
 public class ManageStoragePreferenceController extends PreferenceController {
 
-    public static final String KEY_MANAGE_STORAGE = "pref_manage_storage";
+    public static final String KEY_MANAGE_STORAGE = "footer_preference";
 
     public ManageStoragePreferenceController(Context context) {
         super(context);
