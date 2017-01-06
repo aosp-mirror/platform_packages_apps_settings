@@ -23,11 +23,13 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 
+import android.support.v7.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
@@ -43,11 +45,16 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     public static final String KEY_ACCOUNT_TYPE = "account_type";
     public static final String KEY_ACCOUNT_LABEL = "account_label";
     public static final String KEY_ACCOUNT_TITLE_RES = "account_title_res";
+    public static final String KEY_ACCOUNT_HEADER = "account_header";
+    public static final String KEY_USER_HANDLE = "user_handle";
 
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    Account mAccount;
     private String mAccountLabel;
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     String mAccountType;
     private AccountSyncPreferenceController mAccountSynController;
+    private RemoveAccountPreferenceController mRemoveAccountController;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -57,10 +64,9 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         UserHandle userHandle = Utils.getSecureTargetUser(activity.getActivityToken(),
             (UserManager) getSystemService(Context.USER_SERVICE), args,
             activity.getIntent().getExtras());
-        Account account = null;
         if (args != null) {
             if (args.containsKey(KEY_ACCOUNT)) {
-                account = args.getParcelable(KEY_ACCOUNT);
+                mAccount = args.getParcelable(KEY_ACCOUNT);
             }
             if (args.containsKey(KEY_ACCOUNT_LABEL)) {
                 mAccountLabel = args.getString(KEY_ACCOUNT_LABEL);
@@ -69,7 +75,8 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
                 mAccountType = args.getString(KEY_ACCOUNT_TYPE);
             }
         }
-        mAccountSynController.init(account, userHandle);
+        mAccountSynController.init(mAccount, userHandle);
+        mRemoveAccountController.setAccount(mAccount);
     }
 
     @Override
@@ -78,6 +85,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         if (mAccountLabel != null) {
             getActivity().setTitle(mAccountLabel);
         }
+        updateAccountHeader();
     }
 
     @Override
@@ -105,6 +113,8 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         final List<PreferenceController> controllers = new ArrayList<>();
         mAccountSynController = new AccountSyncPreferenceController(context);
         controllers.add(mAccountSynController);
+        mRemoveAccountController = new RemoveAccountPreferenceController(context, this);
+        controllers.add(mRemoveAccountController);
         return controllers;
     }
 
@@ -119,5 +129,19 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         }
         return mAccountType.equals(metadata.getString(METADATA_IA_ACCOUNT));
     }
+
+    @VisibleForTesting
+    void updateAccountHeader() {
+        final Preference headerPreference = findPreference(KEY_ACCOUNT_HEADER);
+        headerPreference.setTitle(mAccount.name);
+        final Context context = getContext();
+        UserHandle userHandle = null;
+        Bundle args = getArguments();
+        if (args != null && args.containsKey(KEY_USER_HANDLE)) {
+            userHandle = args.getParcelable(KEY_USER_HANDLE);
+        }
+        final AuthenticatorHelper helper = new AuthenticatorHelper(context, userHandle, null);
+        headerPreference.setIcon(helper.getDrawableForType(context, mAccountType));
+   }
 
 }

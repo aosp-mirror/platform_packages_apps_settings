@@ -465,6 +465,8 @@ public class AccountPreferenceController extends PreferenceController
                     final Bundle fragmentArguments = new Bundle();
                     fragmentArguments.putParcelable(AccountDetailDashboardFragment.KEY_ACCOUNT,
                         account);
+                    fragmentArguments.putParcelable(AccountDetailDashboardFragment.KEY_USER_HANDLE,
+                        userHandle);
                     fragmentArguments.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_TYPE,
                         accountType);
                     fragmentArguments.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_LABEL,
