@@ -19,18 +19,20 @@ package com.android.settings.search2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.R;
-import com.android.settings.search.Index;
-
 import com.android.settings.applications.PackageManagerWrapperImpl;
+import com.android.settings.search.Index;
 
 /**
  * FeatureProvider for the refactored search code.
  */
 public class SearchFeatureProviderImpl implements SearchFeatureProvider {
+
+    private static final String TAG = "SearchFeatureProvider";
 
     private DatabaseIndexingManager mDatabaseIndexingManager;
 
@@ -81,10 +83,12 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     @Override
     public void updateIndex(Context context) {
+        long indexStartTime = System.currentTimeMillis();
         if (isEnabled(context)) {
             getIndexingManager(context).update();
         } else {
             Index.getInstance(context).update();
         }
+        Log.d(TAG, "Index.update() took " + (System.currentTimeMillis() - indexStartTime) + " ms");
     }
 }
