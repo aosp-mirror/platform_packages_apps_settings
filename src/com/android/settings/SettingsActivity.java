@@ -462,10 +462,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (mIsShowingDashboard) {
             // Run the Index update only if we have some space
             if (!Utils.isLowStorage(this)) {
-                long indexStartTime = System.currentTimeMillis();
-                Index.getInstance(getApplicationContext()).update();
-                if (DEBUG_TIMING) Log.d(LOG_TAG, "Index.update() took "
-                        + (System.currentTimeMillis() - indexStartTime) + " ms");
+                mSearchFeatureProvider.updateIndex(getApplicationContext());
             } else {
                 Log.w(LOG_TAG, "Cannot update the Indexer as we are running low on storage space!");
             }
