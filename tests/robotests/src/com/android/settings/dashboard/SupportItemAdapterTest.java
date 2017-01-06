@@ -18,37 +18,37 @@ package com.android.settings.dashboard;
 
 import android.accounts.Account;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+
+import com.android.settings.R;
+import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.SupportItemAdapter.EscalationData;
 import com.android.settings.overlay.SupportFeatureProvider;
-import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import com.android.settings.R;
 import org.robolectric.shadows.ShadowActivity;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
-import static org.robolectric.Shadows.shadowOf;
 import static org.mockito.Mockito.when;
-import static com.google.common.truth.Truth.assertThat;
+import static org.robolectric.Shadows.shadowOf;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SupportItemAdapterTest {
     private static final String ACCOUNT_TYPE = "com.google";
@@ -106,9 +106,10 @@ public class SupportItemAdapterTest {
 
     @Test
     public void testSetAccount_AccountEmpty_NotCrash() {
-        when(mSupportFeatureProvider.getSupportEligibleAccounts(mActivity)).thenReturn(ZERO_ACCOUNT);
+        when(mSupportFeatureProvider.getSupportEligibleAccounts(mActivity)).thenReturn(
+                ZERO_ACCOUNT);
         mSupportItemAdapter = new SupportItemAdapter(mActivity, null, mSupportFeatureProvider,
-            mMetricsFeatureProvider, null);
+                mMetricsFeatureProvider, null);
 
         // Should not crash in this method
         mSupportItemAdapter.setAccounts(ONE_ACCOUNT);

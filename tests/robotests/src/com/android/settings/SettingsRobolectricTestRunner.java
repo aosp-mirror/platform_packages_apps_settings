@@ -15,9 +15,9 @@
  */
 package com.android.settings;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+
 import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
@@ -55,10 +55,10 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
         // Using the manifest file's relative path, we can figure out the application directory.
         final String appRoot = "packages/apps/Settings";
         final String manifestPath = appRoot + "/AndroidManifest.xml";
-        final String resDir = appRoot + "/res";
+        final String resDir = appRoot + "/tests/robotests/res";
         final String assetsDir = appRoot + config.assetDir();
 
-        // By adding any resources from libraries we need to the AndroidManifest, we can access
+        // By adding any resources from libraries we need the AndroidManifest, we can access
         // them from within the parallel universe's resource loader.
         final AndroidManifest manifest = new AndroidManifest(Fs.fileFromPath(manifestPath),
                 Fs.fileFromPath(resDir), Fs.fileFromPath(assetsDir)) {
