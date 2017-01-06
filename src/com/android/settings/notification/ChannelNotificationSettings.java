@@ -55,7 +55,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     protected static final String KEY_LIGHTS = "lights";
     protected static final String KEY_VIBRATE = "vibrate";
     protected static final String KEY_RINGTONE = "ringtone";
-    protected static final String KEY_SHOW = "show";
     protected static final String KEY_BADGE = "badge";
 
     protected RestrictedSwitchPreference mLights;
@@ -91,7 +90,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         addPreferencesFromResource(R.xml.channel_notification_settings);
 
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
-        mShow = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_SHOW);
         mBadge = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BADGE);
         mImportance = (RestrictedDropDownPreference) findPreference(KEY_IMPORTANCE);
         mPriority =
@@ -141,7 +139,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
         mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
         mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mShow.setDisabledByAdmin(mSuspendedAppsAdmin);
         mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
     }
 
@@ -192,26 +189,12 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
 
     protected void setupBlockAndImportance() {
         mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mBlock.setChecked(!mChannel.isAllowed());
+        mBlock.setChecked(mChannel.getImportance() == NotificationManager.IMPORTANCE_NONE);
         mBlock.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean value = (Boolean) newValue;
-                mChannel.setAllowed(!value);
-                mChannel.lockFields(NotificationChannel.USER_LOCKED_ALLOWED);
-                mBackend.updateChannel(mPkg, mUid, mChannel);
-                updateDependents();
-                return true;
-            }
-        });
-
-        mShow.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mShow.setChecked(mChannel.getImportance() != NotificationManager.IMPORTANCE_NONE);
-        mShow.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean value = (Boolean) newValue;
-                int importance = value ? IMPORTANCE_LOW : IMPORTANCE_NONE;
+                int importance = value ?  IMPORTANCE_NONE : IMPORTANCE_LOW;
                 mImportance.setValue(String.valueOf(importance));
                 mChannel.setImportance(importance);
                 mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
@@ -386,7 +369,8 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         return lockscreenSecure;
     }
 
-    protected boolean checkCanBeVisible(int minImportanceVisible, int importance) {
+    protected boolean checkCanBeVisible(int minImportanceVisible) {
+        int importance = mChannel.getImportance();
         if (importance == NotificationManager.IMPORTANCE_UNSPECIFIED) {
             return true;
         }
@@ -420,23 +404,16 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     }
 
     private void updateDependents() {
-        boolean allowed = mChannel.isAllowed();
-        int importance = mChannel.getImportance();
-        setVisible(mShow, allowed);
-        setVisible(mBadge, allowed);
-        setVisible(mImportance, allowed && importance != NotificationManager.IMPORTANCE_NONE);
-        setVisible(mLights, allowed && checkCanBeVisible(
-                NotificationManager.IMPORTANCE_LOW, importance) && canPulseLight());
-        setVisible(mVibrate, allowed
-                && checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT, importance));
-        setVisible(mRingtone, allowed && checkCanBeVisible(
-                NotificationManager.IMPORTANCE_DEFAULT, importance));
-        setVisible(mPriority, allowed
-                && (checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT, importance)
-                || (checkCanBeVisible(NotificationManager.IMPORTANCE_LOW, importance)
-                        && mDndVisualEffectsSuppressed)));
-        setVisible(mVisibilityOverride, allowed
-                && checkCanBeVisible(NotificationManager.IMPORTANCE_MIN, importance)
+        setVisible(mBadge, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
+        setVisible(mImportance, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN));
+        setVisible(mLights, checkCanBeVisible(
+                NotificationManager.IMPORTANCE_LOW) && canPulseLight());
+        setVisible(mVibrate, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT));
+        setVisible(mRingtone, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT));
+        setVisible(mPriority, checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
+                || (checkCanBeVisible(NotificationManager.IMPORTANCE_LOW)
+                        && mDndVisualEffectsSuppressed));
+        setVisible(mVisibilityOverride, checkCanBeVisible(NotificationManager.IMPORTANCE_MIN)
                 && isLockScreenSecure());
     }
 }
