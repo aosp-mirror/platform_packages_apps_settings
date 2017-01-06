@@ -21,6 +21,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -236,11 +237,7 @@ public class DashboardSummary extends InstrumentedPreferenceFragment
         new SuggestionLoader().execute();
         // Set categories on their own if loading suggestions takes too long.
         mHandler.postDelayed(() -> {
-            final Activity activity = getActivity();
-            if (activity != null) {
-                mAdapter.setCategoriesAndSuggestions(
-                        ((SettingsActivity) activity).getDashboardCategories(), null);
-            }
+            updateCategoryAndSuggestion(null /* tiles */);
         }, MAX_WAIT_MILLIS);
     }
 
@@ -283,23 +280,27 @@ public class DashboardSummary extends InstrumentedPreferenceFragment
         protected void onPostExecute(List<Tile> tiles) {
             // tell handler that suggestions were loaded quickly enough
             mHandler.removeCallbacksAndMessages(null);
+            updateCategoryAndSuggestion(tiles);
+        }
+    }
 
-            final Activity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
+    @VisibleForTesting
+    void updateCategoryAndSuggestion(List<Tile> tiles) {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
 
-            if (mDashboardFeatureProvider.isEnabled()) {
-                // Temporary hack to wrap homepage category into a list. Soon we will create adapter
-                // API that takes a single category.
-                List<DashboardCategory> categories = new ArrayList<>();
-                categories.add(mDashboardFeatureProvider.getTilesForCategory(
-                        CategoryKey.CATEGORY_HOMEPAGE));
-                mAdapter.setCategoriesAndSuggestions(categories, tiles);
-            } else {
-                mAdapter.setCategoriesAndSuggestions(
-                        ((SettingsActivity) activity).getDashboardCategories(), tiles);
-            }
+        if (mDashboardFeatureProvider.isEnabled()) {
+            // Temporary hack to wrap homepage category into a list. Soon we will create adapter
+            // API that takes a single category.
+            List<DashboardCategory> categories = new ArrayList<>();
+            categories.add(mDashboardFeatureProvider.getTilesForCategory(
+                    CategoryKey.CATEGORY_HOMEPAGE));
+            mAdapter.setCategoriesAndSuggestions(categories, tiles);
+        } else {
+            mAdapter.setCategoriesAndSuggestions(
+                    ((SettingsActivity) activity).getDashboardCategories(), tiles);
         }
     }
 }
