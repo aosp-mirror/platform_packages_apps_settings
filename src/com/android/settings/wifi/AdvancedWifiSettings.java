@@ -26,6 +26,7 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.provider.SearchIndexableResource;
 import android.security.Credentials;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
@@ -35,7 +36,11 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class AdvancedWifiSettings extends RestrictedSettingsFragment {
     private static final String TAG = "AdvancedWifiSettings";
@@ -166,4 +171,14 @@ public class AdvancedWifiSettings extends RestrictedSettingsFragment {
         }
     }
 
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.wifi_advanced_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }

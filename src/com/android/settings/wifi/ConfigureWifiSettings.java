@@ -15,18 +15,22 @@
  */
 package com.android.settings.wifi;
 
+import static android.content.Context.WIFI_SERVICE;
+
 import android.content.Context;
 import android.net.wifi.WifiManager;
+import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import static android.content.Context.WIFI_SERVICE;
 
 public class ConfigureWifiSettings extends DashboardFragment {
 
@@ -67,4 +71,15 @@ public class ConfigureWifiSettings extends DashboardFragment {
         controllers.add(new WifiSleepPolicyPreferenceController(context));
         return controllers;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.wifi_configure_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }
