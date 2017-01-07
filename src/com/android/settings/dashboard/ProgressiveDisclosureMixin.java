@@ -25,6 +25,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.settings.R;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnCreate;
 import com.android.settings.core.lifecycle.events.OnSaveInstanceState;
@@ -40,18 +41,19 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     private static final String STATE_USER_EXPANDED = "state_user_expanded";
     private static final int DEFAULT_TILE_LIMIT = 300;
 
-    private int mTileLimit = DEFAULT_TILE_LIMIT;
-
+    private final Context mContext;
     private final DashboardFeatureProvider mDashboardFeatureProvider;
     // Collapsed preference sorted by order.
     private final List<Preference> mCollapsedPrefs = new ArrayList<>();
-    private final ExpandPreference mExpandButton;
+    private /* final */ ExpandPreference mExpandButton;
     private final PreferenceFragment mFragment;
 
+    private int mTileLimit = DEFAULT_TILE_LIMIT;
     private boolean mUserExpanded;
 
     public ProgressiveDisclosureMixin(Context context,
             DashboardFeatureProvider dashboardFeatureProvider, PreferenceFragment fragment) {
+        mContext = context;
         mFragment = fragment;
         mExpandButton = new ExpandPreference(context);
         mExpandButton.setOnPreferenceClickListener(this);
@@ -181,6 +183,8 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
                 if (mCollapsedPrefs.isEmpty()) {
                     // Removed last element, remove expand button too.
                     screen.removePreference(mExpandButton);
+                } else {
+                    updateExpandButtonSummary();
                 }
                 return;
             }
@@ -216,10 +220,28 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
             insertionIndex = insertionIndex * -1 - 1;
         }
         mCollapsedPrefs.add(insertionIndex, preference);
+        updateExpandButtonSummary();
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     List<Preference> getCollapsedPrefs() {
         return mCollapsedPrefs;
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    void updateExpandButtonSummary() {
+        final int size = mCollapsedPrefs.size();
+        if (size == 0) {
+            mExpandButton.setSummary(null);
+        } else if (size == 1) {
+            mExpandButton.setSummary(mCollapsedPrefs.get(0).getTitle());
+        } else {
+            CharSequence summary = mCollapsedPrefs.get(0).getTitle();
+            for (int i = 1; i < size; i++) {
+                summary = mContext.getString(R.string.join_many_items_middle, summary,
+                        mCollapsedPrefs.get(i).getTitle());
+            }
+            mExpandButton.setSummary(summary);
+        }
     }
 }

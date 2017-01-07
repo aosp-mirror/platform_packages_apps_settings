@@ -16,7 +16,6 @@
 package com.android.settings.applications;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -35,11 +34,6 @@ import java.util.List;
 public class AdvancedAppSettings extends DashboardFragment {
 
     static final String TAG = "AdvancedAppSettings";
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-    }
 
     @Override
     protected String getCategoryKey() {

@@ -21,6 +21,7 @@ import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.overlay.FeatureFactory;
@@ -34,6 +35,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -41,6 +43,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -56,10 +59,11 @@ public class ProgressiveDisclosureTest {
     private FakeFeatureFactory mFakeFeatureFactory;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceFragment mPreferenceFragment;
+    @Mock
+    private ExpandPreference mExpandButton;
     private PreferenceScreen mScreen;
     private Context mAppContext;
     private Preference mPreference;
-
     private ProgressiveDisclosureMixin mMixin;
 
     @Before
@@ -71,6 +75,7 @@ public class ProgressiveDisclosureTest {
         mFakeFeatureFactory = (FakeFeatureFactory) FeatureFactory.getFactory(mContext);
         mMixin = new ProgressiveDisclosureMixin(mAppContext,
                 mFakeFeatureFactory.dashboardFeatureProvider, mPreferenceFragment);
+        ReflectionHelpers.setField(mMixin, "mExpandButton", mExpandButton);
         mPreference = new Preference(mAppContext);
         mPreference.setKey("test");
         when(mFakeFeatureFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
@@ -166,6 +171,7 @@ public class ProgressiveDisclosureTest {
 
         mMixin.collapse(screen);
         assertThat(mMixin.isCollapsed()).isFalse();
+        verify(mExpandButton, never()).setSummary(anyString());
         verify(screen, never()).addPreference(any(Preference.class));
         verify(screen, never()).removePreference(any(Preference.class));
     }
@@ -180,6 +186,7 @@ public class ProgressiveDisclosureTest {
         mMixin.collapse(screen);
 
         assertThat(mMixin.isCollapsed()).isTrue();
+        verify(mExpandButton, atLeastOnce()).setSummary(anyString());
         verify(screen).addPreference(any(ExpandPreference.class));
         verify(screen, times(3)).removePreference(any(Preference.class));
     }
@@ -224,7 +231,9 @@ public class ProgressiveDisclosureTest {
         lastPref.setOrder(100);
         // Add something to collapsed list so we are in collapsed state.
         mMixin.addToCollapsedList(new Preference(mAppContext));
+        verify(mExpandButton).setSummary(anyString());
         assertThat(mMixin.getCollapsedPrefs().size()).isEqualTo(1);
+
         // 3 prefs on screen, 2 are real and the last one is more button.
         when(mScreen.getPreferenceCount()).thenReturn(3);
         when(mScreen.getPreference(1)).thenReturn(lastPref);
@@ -244,7 +253,9 @@ public class ProgressiveDisclosureTest {
         lastPref.setOrder(100);
         // Add something to collapsed list so we are in collapsed state.
         mMixin.addToCollapsedList(new Preference(mAppContext));
+        verify(mExpandButton).setSummary(anyString());
         assertThat(mMixin.getCollapsedPrefs().size()).isEqualTo(1);
+
         // 3 prefs on screen, 2 are real and the last one is more button.
         when(mScreen.getPreferenceCount()).thenReturn(3);
         when(mScreen.getPreference(1)).thenReturn(lastPref);
@@ -255,6 +266,40 @@ public class ProgressiveDisclosureTest {
 
         verify(mScreen, never()).removePreference(any(Preference.class));
         verify(mScreen, never()).addPreference(any(Preference.class));
+        verify(mExpandButton, times(2)).setSummary(anyString());
         assertThat(mMixin.getCollapsedPrefs().get(0)).isSameAs(toBeAdded);
+    }
+
+    @Test
+    public void updateExpandSummary_noPref_noSummary() {
+        mMixin.updateExpandButtonSummary();
+
+        verify(mExpandButton).setSummary(null);
+    }
+
+    @Test
+    public void updateExapndSummary_singlePref_expandSummarySameAsPrefTitle() {
+        final String TEST = "test";
+        final Preference pref = new Preference(mAppContext);
+        pref.setTitle(TEST);
+
+        mMixin.addToCollapsedList(pref);
+        verify(mExpandButton).setSummary(TEST);
+    }
+
+    @Test
+    public void updateExapndSummary_multiPrefs_useCombinedPrefTitleAsSummary() {
+        final String TEST1 = "test1";
+        final String TEST2 = "test2";
+        final Preference pref1 = new Preference(mAppContext);
+        pref1.setTitle(TEST1);
+        final Preference pref2 = new Preference(mAppContext);
+        pref2.setTitle(TEST2);
+
+        mMixin.addToCollapsedList(pref1);
+        mMixin.addToCollapsedList(pref2);
+
+        verify(mExpandButton)
+                .setSummary(mAppContext.getString(R.string.join_many_items_middle, TEST1, TEST2));
     }
 }
