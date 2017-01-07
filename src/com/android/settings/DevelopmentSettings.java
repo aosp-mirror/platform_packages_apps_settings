@@ -25,7 +25,10 @@ import android.app.AppOpsManager.PackageOps;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.backup.IBackupManager;
+import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothCodecConfig;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -196,6 +199,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY =
                                     "persist.bluetooth.disableabsvol";
 
+    private static final String BLUETOOTH_SELECT_A2DP_CODEC_KEY = "bluetooth_select_a2dp_codec";
+    private static final String BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY = "bluetooth_select_a2dp_sample_rate";
+    private static final String BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY = "bluetooth_select_a2dp_bits_per_sample";
+    private static final String BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY = "bluetooth_select_a2dp_channel_mode";
+    private static final String BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY = "bluetooth_select_a2dp_ldac_playback_quality";
+
     private static final String INACTIVE_APPS_KEY = "inactive_apps";
 
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
@@ -265,8 +274,16 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mWifiAggressiveHandover;
     private SwitchPreference mMobileDataAlwaysOn;
     private SwitchPreference mBluetoothDisableAbsVolume;
-    private SwitchPreference mOtaDisableAutomaticUpdate;
 
+    private BluetoothA2dp mBluetoothA2dp;
+    private final Object mBluetoothA2dpLock = new Object();
+    private ListPreference mBluetoothSelectA2dpCodec;
+    private ListPreference mBluetoothSelectA2dpSampleRate;
+    private ListPreference mBluetoothSelectA2dpBitsPerSample;
+    private ListPreference mBluetoothSelectA2dpChannelMode;
+    private ListPreference mBluetoothSelectA2dpLdacPlaybackQuality;
+
+    private SwitchPreference mOtaDisableAutomaticUpdate;
     private SwitchPreference mWifiAllowScansWithTraffic;
     private SwitchPreference mStrictMode;
     private SwitchPreference mPointerLocation;
@@ -452,6 +469,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWebViewProvider = addListPreference(WEBVIEW_PROVIDER_KEY);
         mWebViewMultiprocess = findAndInitSwitchPref(WEBVIEW_MULTIPROCESS_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
+
+        mBluetoothSelectA2dpCodec = addListPreference(BLUETOOTH_SELECT_A2DP_CODEC_KEY);
+        mBluetoothSelectA2dpSampleRate = addListPreference(BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY);
+        mBluetoothSelectA2dpBitsPerSample = addListPreference(BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY);
+        mBluetoothSelectA2dpChannelMode = addListPreference(BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY);
+        mBluetoothSelectA2dpLdacPlaybackQuality = addListPreference(BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY);
 
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
@@ -644,6 +667,20 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (getActivity().registerReceiver(mUsbReceiver, filter) == null) {
             updateUsbConfigurationValues();
         }
+
+        initBluetoothConfigurationValues();
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter != null) {
+            adapter.getProfileProxy(getActivity(),
+                                    mBluetoothA2dpServiceListener,
+                                    BluetoothProfile.A2DP);
+        }
+        filter = new IntentFilter();
+        filter.addAction(BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED);
+        if (getActivity().registerReceiver(mBluetoothA2dpReceiver, filter) == null) {
+            updateBluetoothA2dpConfigurationValues();
+        }
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -657,6 +694,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mSwitchBar.removeOnSwitchChangeListener(this);
         mSwitchBar.hide();
         getActivity().unregisterReceiver(mUsbReceiver);
+        getActivity().unregisterReceiver(mBluetoothA2dpReceiver);
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter != null) {
+            adapter.closeProfileProxy(BluetoothProfile.A2DP, mBluetoothA2dp);
+            mBluetoothA2dp = null;
+        }
     }
 
     void updateSwitchPreference(SwitchPreference switchPreference, boolean value) {
@@ -727,6 +770,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             updateColorTemperature();
         }
         updateBluetoothDisableAbsVolumeOptions();
+        updateBluetoothA2dpConfigurationValues();
     }
 
     private void resetDangerousOptions() {
@@ -1714,6 +1758,361 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
     }
 
+    private void initBluetoothConfigurationValues() {
+        String[] values;
+        String[] titles;
+        int index;
+
+        // Init the Codec Type - Default
+        values = getResources().getStringArray(R.array.bluetooth_a2dp_codec_values);
+        titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_titles);
+        index = 0;
+        mBluetoothSelectA2dpCodec.setValue(values[index]);
+        mBluetoothSelectA2dpCodec.setSummary(titles[index]);
+
+        // Init the Sample Rate - Default
+        values = getResources().getStringArray(R.array.bluetooth_a2dp_codec_sample_rate_values);
+        titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_sample_rate_titles);
+        index = 0;
+        mBluetoothSelectA2dpSampleRate.setValue(values[index]);
+        mBluetoothSelectA2dpSampleRate.setSummary(titles[index]);
+
+        // Init the Bits Per Sample - Default
+        values = getResources().getStringArray(R.array.bluetooth_a2dp_codec_bits_per_sample_values);
+        titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_bits_per_sample_titles);
+        index = 0;
+        mBluetoothSelectA2dpBitsPerSample.setValue(values[index]);
+        mBluetoothSelectA2dpBitsPerSample.setSummary(titles[index]);
+
+        // Init the Channel Mode - Default
+        values = getResources().getStringArray(R.array.bluetooth_a2dp_codec_channel_mode_values);
+        titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_channel_mode_titles);
+        index = 0;
+        mBluetoothSelectA2dpChannelMode.setValue(values[index]);
+        mBluetoothSelectA2dpChannelMode.setSummary(titles[index]);
+
+        // Init the LDAC Playback Quality - High
+        values = getResources().getStringArray(R.array.bluetooth_a2dp_codec_ldac_playback_quality_values);
+        titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_ldac_playback_quality_titles);
+        index = 0;
+        mBluetoothSelectA2dpLdacPlaybackQuality.setValue(values[index]);
+        mBluetoothSelectA2dpLdacPlaybackQuality.setSummary(titles[index]);
+    }
+
+    private void updateBluetoothA2dpConfigurationValues() {
+        int index;
+        String[] titles;
+        BluetoothCodecConfig codecConfig = null;
+
+        synchronized (mBluetoothA2dpLock) {
+            if (mBluetoothA2dp != null) {
+                codecConfig = mBluetoothA2dp.getCodecConfig();
+            }
+        }
+        if (codecConfig == null)
+            return;
+
+        // Update the Codec Type
+        index = -1;
+        switch (codecConfig.getCodecType()) {
+        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC:
+            index = 1;
+            break;
+        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX:
+            index = 2;
+            break;
+        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD:
+            index = 3;
+            break;
+        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC:
+            index = 4;
+            break;
+        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_INVALID:
+        default:
+            break;
+        }
+        if (index >= 0) {
+            titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_titles);
+            mBluetoothSelectA2dpCodec.setSummary("Streaming: " + titles[index]);
+        }
+
+        // Update the Sample Rate
+        index = -1;
+        switch (codecConfig.getSampleRate()) {
+        case BluetoothCodecConfig.SAMPLE_RATE_44100:
+            index = 1;
+            break;
+        case BluetoothCodecConfig.SAMPLE_RATE_48000:
+            index = 2;
+            break;
+        case BluetoothCodecConfig.SAMPLE_RATE_88200:
+            index = 3;
+            break;
+        case BluetoothCodecConfig.SAMPLE_RATE_96000:
+            index = 4;
+            break;
+        case BluetoothCodecConfig.SAMPLE_RATE_176400:
+        case BluetoothCodecConfig.SAMPLE_RATE_192000:
+        case BluetoothCodecConfig.SAMPLE_RATE_NONE:
+        default:
+            break;
+        }
+        if (index >= 0) {
+            titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_sample_rate_titles);
+            mBluetoothSelectA2dpSampleRate.setSummary("Streaming: " + titles[index]);
+        }
+
+        // Update the Bits Per Sample
+        index = -1;
+        switch (codecConfig.getBitsPerSample()) {
+        case BluetoothCodecConfig.BITS_PER_SAMPLE_16:
+            index = 1;
+            break;
+        case BluetoothCodecConfig.BITS_PER_SAMPLE_24:
+            index = 2;
+            break;
+        case BluetoothCodecConfig.BITS_PER_SAMPLE_32:
+            index = 3;
+            break;
+        case BluetoothCodecConfig.BITS_PER_SAMPLE_NONE:
+        default:
+            break;
+        }
+        if (index >= 0) {
+            titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_bits_per_sample_titles);
+            mBluetoothSelectA2dpBitsPerSample.setSummary("Streaming: " + titles[index]);
+        }
+
+        // Update the Channel Mode
+        index = -1;
+        switch (codecConfig.getChannelMode()) {
+        case BluetoothCodecConfig.CHANNEL_MODE_MONO:
+            index = 1;
+            break;
+        case BluetoothCodecConfig.CHANNEL_MODE_STEREO:
+            index = 2;
+            break;
+        case BluetoothCodecConfig.CHANNEL_MODE_NONE:
+        default:
+            break;
+        }
+        if (index >= 0) {
+            titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_channel_mode_titles);
+            mBluetoothSelectA2dpChannelMode.setSummary("Streaming: " + titles[index]);
+        }
+
+        // Update the LDAC Playback Quality
+        index = -1;
+        switch ((int)codecConfig.getCodecSpecific1()) {
+        case 1000:
+            index = 0;
+            break;
+        case 1001:
+            index = 1;
+            break;
+        case 1002:
+            index = 2;
+            break;
+        default:
+            break;
+        }
+        if (index >= 0) {
+            titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_ldac_playback_quality_titles);
+            mBluetoothSelectA2dpLdacPlaybackQuality.setSummary("Streaming: " + titles[index]);
+        }
+    }
+
+    private void writeBluetoothConfigurationOption(Preference preference,
+                                                   Object newValue) {
+        String[] titles;
+        int index;
+        int codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_INVALID;
+        int codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
+        int sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_NONE;
+        int bitsPerSampleValue = BluetoothCodecConfig.BITS_PER_SAMPLE_NONE;
+        int channelModeValue = BluetoothCodecConfig.CHANNEL_MODE_NONE;
+        long codecSpecific1Value = 0;
+        long codecSpecific2Value = 0;
+        long codecSpecific3Value = 0;
+        long codecSpecific4Value = 0;
+
+        // Codec Type
+        String codecType = mBluetoothSelectA2dpCodec.getValue();
+        if (preference == mBluetoothSelectA2dpCodec) {
+            codecType = newValue.toString();
+            index = mBluetoothSelectA2dpCodec.findIndexOfValue(newValue.toString());
+            if (index >= 0) {
+                titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_titles);
+                mBluetoothSelectA2dpCodec.setSummary(titles[index]);
+            }
+        }
+        index = mBluetoothSelectA2dpCodec.findIndexOfValue(codecType);
+        switch (index) {
+        case 0:
+            // Reset the priority of the current codec to default
+            String oldValue = mBluetoothSelectA2dpCodec.getValue();
+            switch (mBluetoothSelectA2dpCodec.findIndexOfValue(oldValue)) {
+            case 0:
+                break;      // No current codec
+            case 1:
+                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC;
+                break;
+            case 2:
+                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX;
+                break;
+            case 3:
+                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD;
+                break;
+            case 4:
+                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC;
+                break;
+            default:
+                break;
+            }
+            break;
+        case 1:
+            codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC;
+            codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
+            break;
+        case 2:
+            codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX;
+            codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
+            break;
+        case 3:
+            codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD;
+            codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
+            break;
+        case 4:
+            codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC;
+            codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
+            break;
+        default:
+            break;
+        }
+
+        // Sample Rate
+        String sampleRate = mBluetoothSelectA2dpSampleRate.getValue();
+        if (preference == mBluetoothSelectA2dpSampleRate) {
+            sampleRate = newValue.toString();
+            index = mBluetoothSelectA2dpSampleRate.findIndexOfValue(newValue.toString());
+            if (index >= 0) {
+                titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_sample_rate_titles);
+                mBluetoothSelectA2dpSampleRate.setSummary(titles[index]);
+            }
+        }
+        index = mBluetoothSelectA2dpSampleRate.findIndexOfValue(sampleRate);
+        switch (index) {
+        case 0:
+            // Reset to default
+            break;
+        case 1:
+            sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_44100;
+            break;
+        case 2:
+            sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_48000;
+            break;
+        case 3:
+            sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_88200;
+            break;
+        case 4:
+            sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_96000;
+            break;
+        default:
+            break;
+        }
+
+        // Bits Per Sample
+        String bitsPerSample = mBluetoothSelectA2dpBitsPerSample.getValue();
+        if (preference == mBluetoothSelectA2dpBitsPerSample) {
+            bitsPerSample = newValue.toString();
+            index = mBluetoothSelectA2dpBitsPerSample.findIndexOfValue(newValue.toString());
+            if (index >= 0) {
+                titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_bits_per_sample_titles);
+                mBluetoothSelectA2dpBitsPerSample.setSummary(titles[index]);
+            }
+        }
+        index = mBluetoothSelectA2dpBitsPerSample.findIndexOfValue(bitsPerSample);
+        switch (index) {
+        case 0:
+            // Reset to default
+            break;
+        case 1:
+            bitsPerSampleValue = BluetoothCodecConfig.BITS_PER_SAMPLE_16;
+            break;
+        case 2:
+            bitsPerSampleValue = BluetoothCodecConfig.BITS_PER_SAMPLE_24;
+            break;
+        case 3:
+            bitsPerSampleValue = BluetoothCodecConfig.BITS_PER_SAMPLE_32;
+            break;
+        default:
+            break;
+        }
+
+        // Channel Mode
+        String channelMode = mBluetoothSelectA2dpChannelMode.getValue();
+        if (preference == mBluetoothSelectA2dpChannelMode) {
+            channelMode = newValue.toString();
+            index = mBluetoothSelectA2dpChannelMode.findIndexOfValue(newValue.toString());
+            if (index >= 0) {
+                titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_channel_mode_titles);
+                mBluetoothSelectA2dpChannelMode.setSummary(titles[index]);
+            }
+        }
+        index = mBluetoothSelectA2dpChannelMode.findIndexOfValue(channelMode);
+        switch (index) {
+        case 0:
+            // Reset to default
+            break;
+        case 1:
+            channelModeValue = BluetoothCodecConfig.CHANNEL_MODE_MONO;
+            break;
+        case 2:
+            channelModeValue = BluetoothCodecConfig.CHANNEL_MODE_STEREO;
+            break;
+        default:
+            break;
+        }
+
+        // LDAC Playback Quality
+        String ldacPlaybackQuality = mBluetoothSelectA2dpLdacPlaybackQuality.getValue();
+        if (preference == mBluetoothSelectA2dpLdacPlaybackQuality) {
+            ldacPlaybackQuality = newValue.toString();
+            index = mBluetoothSelectA2dpLdacPlaybackQuality.findIndexOfValue(newValue.toString());
+            if (index >= 0) {
+                titles = getResources().getStringArray(R.array.bluetooth_a2dp_codec_ldac_playback_quality_titles);
+                mBluetoothSelectA2dpLdacPlaybackQuality.setSummary(titles[index]);
+            }
+        }
+        index = mBluetoothSelectA2dpLdacPlaybackQuality.findIndexOfValue(ldacPlaybackQuality);
+        switch (index) {
+        case 0:
+            codecSpecific1Value = 1000;
+            break;
+        case 1:
+            codecSpecific1Value = 1001;
+            break;
+        case 2:
+            codecSpecific1Value = 1002;
+            break;
+        default:
+            break;
+        }
+
+        BluetoothCodecConfig codecConfig =
+            new BluetoothCodecConfig(codecTypeValue, codecPriorityValue,
+                                     sampleRateValue, bitsPerSampleValue,
+                                     channelModeValue, codecSpecific1Value,
+                                     codecSpecific2Value, codecSpecific3Value,
+                                     codecSpecific4Value);
+
+        synchronized (mBluetoothA2dpLock) {
+            if (mBluetoothA2dp != null) {
+                mBluetoothA2dp.setCodecConfigPreference(codecConfig);
+            }
+        }
+    }
+
     private void writeImmediatelyDestroyActivitiesOptions() {
         try {
             ActivityManagerNative.getDefault().setAlwaysFinish(
@@ -2090,6 +2489,13 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 toast.show();
             }
             return false;
+        } else if ((preference == mBluetoothSelectA2dpCodec) ||
+                   (preference == mBluetoothSelectA2dpSampleRate) ||
+                   (preference == mBluetoothSelectA2dpBitsPerSample) ||
+                   (preference == mBluetoothSelectA2dpChannelMode) ||
+                   (preference == mBluetoothSelectA2dpLdacPlaybackQuality)) {
+            writeBluetoothConfigurationOption(preference, newValue);
+            return true;
         } else if (preference == mLogdSize) {
             writeLogdSizeOption(newValue);
             return true;
@@ -2228,6 +2634,31 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             updateUsbConfigurationValues();
         }
     };
+
+    private BroadcastReceiver mBluetoothA2dpReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateBluetoothA2dpConfigurationValues();
+        }
+    };
+
+    private BluetoothProfile.ServiceListener mBluetoothA2dpServiceListener =
+        new BluetoothProfile.ServiceListener() {
+            public void onServiceConnected(int profile,
+                                           BluetoothProfile proxy) {
+                synchronized (mBluetoothA2dpLock) {
+                    mBluetoothA2dp = (BluetoothA2dp) proxy;
+                }
+                updateBluetoothA2dpConfigurationValues();
+            }
+
+            public void onServiceDisconnected(int profile) {
+                synchronized (mBluetoothA2dpLock) {
+                    mBluetoothA2dp = null;
+                }
+                updateBluetoothA2dpConfigurationValues();
+            }
+        };
 
     public static class SystemPropPoker extends AsyncTask<Void, Void, Void> {
         @Override
