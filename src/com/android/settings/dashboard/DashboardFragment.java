@@ -268,6 +268,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
         // Add resource based tiles.
         displayResourceTiles();
+        mProgressiveDisclosureMixin.collapse(getPreferenceScreen());
 
         refreshDashboardTiles(TAG);
     }
