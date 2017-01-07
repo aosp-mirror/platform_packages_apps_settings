@@ -31,7 +31,7 @@ import android.view.ViewGroup;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
@@ -46,7 +46,7 @@ import com.android.settingslib.drawer.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardSummary extends InstrumentedPreferenceFragment
+public class DashboardSummary extends InstrumentedFragment
         implements SettingsDrawerActivity.CategoryListener, ConditionManager.ConditionListener,
         FocusRecyclerView.FocusListener {
     public static final boolean DEBUG = false;
@@ -93,10 +93,9 @@ public class DashboardSummary extends InstrumentedPreferenceFragment
                     ((SettingsActivity) getActivity()).getDashboardCategories());
         }
 
-        Context context = getContext();
-        mConditionManager = ConditionManager.get(context, false);
-        mSuggestionParser = new SuggestionParser(context,
-                context.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
+        mConditionManager = ConditionManager.get(activity, false);
+        mSuggestionParser = new SuggestionParser(activity,
+                activity.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
         mSuggestionsChecks = new SuggestionsChecks(getContext());
         if (savedInstanceState == null) {
             mSuggestionsShownLogged = new ArrayList<>();
