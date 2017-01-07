@@ -63,7 +63,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override
