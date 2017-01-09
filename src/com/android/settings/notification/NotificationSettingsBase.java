@@ -66,7 +66,6 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected String mPkg;
     protected PackageInfo mPkgInfo;
     protected RestrictedSwitchPreference mBlock;
-    protected RestrictedSwitchPreference mShow;
     protected RestrictedSwitchPreference mBadge;
     protected EnforcedAdmin mSuspendedAppsAdmin;
     protected boolean mDndVisualEffectsSuppressed;

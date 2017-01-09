@@ -27,15 +27,6 @@
         settings:useAdditionalSummary="true"
         settings:restrictedSwitchSummary="@string/enabled_by_admin" />
 
-    <!-- Show notification -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="show"
-        android:title="@string/notification_content_block_title"
-        android:summary="@string/notification_content_block_summary"
-        android:order="2"
-        settings:useAdditionalSummary="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
-
     <!-- Show badge -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="badge"
