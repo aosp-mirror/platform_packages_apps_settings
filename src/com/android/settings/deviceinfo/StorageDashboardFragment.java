@@ -35,6 +35,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.FooterPreference;
+import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class StorageDashboardFragment extends DashboardFragment {
     private long mTotalSize;
 
     private StorageSummaryDonutPreferenceController mSummaryController;
+    private StorageItemPreferenceController mPreferenceController;
 
     private boolean isVolumeValid() {
         return (mVolume != null) && (mVolume.getType() == VolumeInfo.TYPE_PRIVATE)
@@ -78,6 +80,7 @@ public class StorageDashboardFragment extends DashboardFragment {
 
         final long usedBytes = mTotalSize - mVolume.getPath().getFreeSpace();
         mSummaryController.updateBytes(usedBytes, mTotalSize);
+        mPreferenceController.setVolume(mVolume);
 
         // Initialize the footer preference to go to the smart storage management.
         final FooterPreference pref = mFooterPreferenceMixin.createFooterPreference();
@@ -114,13 +117,12 @@ public class StorageDashboardFragment extends DashboardFragment {
         final List<PreferenceController> controllers = new ArrayList<>();
         mSummaryController = new StorageSummaryDonutPreferenceController(context);
         controllers.add(mSummaryController);
+
+        StorageManager sm = context.getSystemService(StorageManager.class);
+        mPreferenceController = new StorageItemPreferenceController(context, this, mVolume,
+                new StorageManagerVolumeProvider(sm));
+        controllers.add(mPreferenceController);
         controllers.add(new ManageStoragePreferenceController(context));
-        controllers.add(new StorageItemPreferenceController(context, "pref_photos_videos"));
-        controllers.add(new StorageItemPreferenceController(context, "pref_music_audio"));
-        controllers.add(new StorageItemPreferenceController(context, "pref_games"));
-        controllers.add(new StorageItemPreferenceController(context, "pref_other_apps"));
-        controllers.add(new StorageItemPreferenceController(context, "pref_system"));
-        controllers.add(new StorageItemPreferenceController(context, "pref_files"));
         return controllers;
     }
 
