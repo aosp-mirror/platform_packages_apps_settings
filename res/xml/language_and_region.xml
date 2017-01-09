@@ -28,7 +28,8 @@
     <Preference
         android:key="spellcheckers_settings"
         android:title="@string/spellcheckers_settings_title"
-        android:persistent="false"/>
+        android:persistent="false"
+        android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"/>
 
     <!-- User dictionary preference title and fragment will be set programmatically. -->
     <Preference

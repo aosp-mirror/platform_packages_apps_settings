@@ -974,6 +974,11 @@ public class SettingsActivity extends SettingsDrawerActivity
                 pm.hasSystemFeature(PackageManager.FEATURE_NFC)
                         && pm.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)
                         && adapter != null && adapter.isEnabled(), isAdmin);
+        setTileEnabled(new ComponentName(packageName,
+                        "com.android.settings.PaymentSettingsDashboardAlias"),
+                pm.hasSystemFeature(PackageManager.FEATURE_NFC)
+                        && pm.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)
+                        && adapter != null && adapter.isEnabled(), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.PrintSettingsActivity.class.getName()),

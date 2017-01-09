@@ -31,8 +31,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
@@ -53,7 +53,7 @@ public class SpellCheckerPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mAppContext = ShadowApplication.getInstance().getApplicationContext();
+        mAppContext = RuntimeEnvironment.application;
         when(mContext.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE))
                 .thenReturn(mTextServicesManager);
         mPreference = new Preference(mAppContext);
@@ -76,7 +76,6 @@ public class SpellCheckerPreferenceControllerTest {
         when(mTextServicesManager.isSpellCheckerEnabled()).thenReturn(false);
 
         mController.updateState(mPreference);
-
         assertThat(mPreference.getSummary())
                 .isEqualTo(mAppContext.getString(R.string.switch_off_text));
     }

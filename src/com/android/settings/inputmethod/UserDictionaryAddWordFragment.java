@@ -86,7 +86,7 @@ public class UserDictionaryAddWordFragment extends InstrumentedPreferenceFragmen
     @Override
     public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
         MenuItem actionItem = menu.add(0, OPTIONS_MENU_DELETE, 0, R.string.delete)
-                .setIcon(android.R.drawable.ic_menu_delete);
+                .setIcon(R.drawable.ic_delete);
         actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
