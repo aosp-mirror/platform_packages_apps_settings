@@ -18,8 +18,11 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 
+import android.support.v7.widget.LinearLayoutManager;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.dashboard.conditional.ConditionManager;
+import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
@@ -32,6 +35,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -44,6 +48,12 @@ public class DashboardSummaryTest {
     private DashboardAdapter mAdapter;
     @Mock
     private DashboardFeatureProvider mDashboardFeatureProvider;
+    @Mock
+    private FocusRecyclerView mDashboard;
+    @Mock
+    private LinearLayoutManager mLayoutManager;
+    @Mock
+    private ConditionManager mConditionManager;
 
     private DashboardSummary mSummary;
 
@@ -54,6 +64,9 @@ public class DashboardSummaryTest {
         ReflectionHelpers.setField(mSummary, "mAdapter", mAdapter);
         ReflectionHelpers.setField(mSummary, "mDashboardFeatureProvider",
                 mDashboardFeatureProvider);
+        ReflectionHelpers.setField(mSummary, "mDashboard", mDashboard);
+        ReflectionHelpers.setField(mSummary, "mLayoutManager", mLayoutManager);
+        ReflectionHelpers.setField(mSummary, "mConditionManager", mConditionManager);
     }
 
     @Test
@@ -62,5 +75,19 @@ public class DashboardSummaryTest {
         when(mDashboardFeatureProvider.isEnabled()).thenReturn(true);
         mSummary.updateCategoryAndSuggestion(null);
         verify(mDashboardFeatureProvider).getTilesForCategory(CategoryKey.CATEGORY_HOMEPAGE);
+    }
+
+    @Test
+    public void onConditionChanged_PositionAtTop_ScrollToTop() {
+        when(mLayoutManager.findFirstCompletelyVisibleItemPosition()).thenReturn(1);
+        mSummary.onConditionsChanged();
+        verify(mDashboard).scrollToPosition(0);
+    }
+
+    @Test
+    public void onConditionChanged_PositionNotTop_RemainPosition() {
+        when(mLayoutManager.findFirstCompletelyVisibleItemPosition()).thenReturn(2);
+        mSummary.onConditionsChanged();
+        verify(mDashboard, never()).scrollToPosition(0);
     }
 }

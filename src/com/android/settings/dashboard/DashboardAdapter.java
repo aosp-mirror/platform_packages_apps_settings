@@ -20,6 +20,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -58,8 +59,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final IconCache mCache;
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private DashboardData mDashboardData;
     private SuggestionParser mSuggestionParser;
+
+    @VisibleForTesting DashboardData mDashboardData;
 
     private View.OnClickListener mTileClickListener = new View.OnClickListener() {
         @Override
@@ -157,6 +159,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         Log.d(TAG, "adapter setConditions called");
         mDashboardData = new DashboardData.Builder(prevData)
                 .setConditions(conditions)
+                .setExpandedCondition(null)
                 .build();
         notifyDashboardDataChanged(prevData);
     }
