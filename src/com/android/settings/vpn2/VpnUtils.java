@@ -82,4 +82,8 @@ public class VpnUtils {
         return IConnectivityManager.Stub.asInterface(
                 ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
     }
+
+    public static boolean isAlwaysOnVpnSet(ConnectivityManagerWrapper cm, final int userId) {
+        return cm.getAlwaysOnVpnPackageForUser(userId) != null;
+    }
 }

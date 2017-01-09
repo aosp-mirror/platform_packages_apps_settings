@@ -26,6 +26,12 @@ public interface EnterprisePrivacyFeatureProvider {
     boolean hasDeviceOwner();
 
     /**
+     * Returns whether the device is in COMP mode (primary user managed by a Device Owner app and
+     * work profile managed by a Profile Owner app).
+     */
+    boolean isInCompMode();
+
+    /**
      * Returns the time at which the Device Owner last retrieved security logs, or {@code null} if
      * logs were never retrieved by the Device Owner on this device.
      */
@@ -42,4 +48,14 @@ public interface EnterprisePrivacyFeatureProvider {
      * logs were never retrieved by the Device Owner on this device.
      */
     Date getLastNetworkLogRetrievalTime();
+
+    /**
+     * Returns whether the Device Owner in the primary user set an always-on VPN.
+     */
+    boolean isAlwaysOnVpnSetInPrimaryUser();
+
+    /**
+     * Returns whether the Profile Owner in the managed profile (if any) set an always-on VPN.
+     */
+    boolean isAlwaysOnVpnSetInManagedProfile();
 }

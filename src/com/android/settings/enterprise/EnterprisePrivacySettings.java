@@ -61,6 +61,8 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         controllers.add(new NetworkLogsPreferenceController(context));
         controllers.add(new BugReportsPreferenceController(context));
         controllers.add(new SecurityLogsPreferenceController(context));
+        controllers.add(new AlwaysOnVpnPrimaryUserPreferenceController(context));
+        controllers.add(new AlwaysOnVpnManagedProfilePreferenceController(context));
         return controllers;
     }
 
