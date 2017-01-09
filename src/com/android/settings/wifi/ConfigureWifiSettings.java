@@ -101,6 +101,13 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
 
         if (!mWifiManager.hasCarrierConfiguredNetworks()){
             removePreference(KEY_CONNECT_CARRIER_NETWORKS);
+        } else {
+            SwitchPreference connectToCarrierNetworks =
+                    (SwitchPreference) findPreference(KEY_CONNECT_CARRIER_NETWORKS);
+            if (connectToCarrierNetworks != null) {
+                connectToCarrierNetworks.setChecked(Settings.Global.getInt(getContentResolver(),
+                        Settings.Global.WIFI_CONNECT_CARRIER_NETWORKS, 0) == 1);
+            }
         }
 
         SwitchPreference notifyOpenNetworks =
@@ -108,11 +115,6 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
         notifyOpenNetworks.setChecked(Settings.Global.getInt(getContentResolver(),
                 Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
         notifyOpenNetworks.setEnabled(mWifiManager.isWifiEnabled());
-
-        SwitchPreference connectToCarrierNetworks =
-                (SwitchPreference) findPreference(KEY_CONNECT_CARRIER_NETWORKS);
-        connectToCarrierNetworks.setChecked(Settings.Global.getInt(getContentResolver(),
-                Settings.Global.WIFI_CONNECT_CARRIER_NETWORKS, 0) == 1);
 
         final Context context = getActivity();
         if (avoidBadWifiConfig()) {
