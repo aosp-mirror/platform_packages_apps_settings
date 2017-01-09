@@ -63,6 +63,12 @@ public class SoundSettings extends DashboardFragment {
     private RingtonePreference mRequestPreference;
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mProgressiveDisclosureMixin.setTileLimit(5);
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsEvent.SOUND;
     }
