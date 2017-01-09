@@ -34,16 +34,15 @@ import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
 
 /**
- * {@link PreferenceController} that controls whether we should notify user when open network is
- * available.
+ * {@link PreferenceController} that controls whether the Wi-Fi Wakeup feature should be enabled.
  */
-public class NotifyOpenNetworksPreferenceController extends PreferenceController implements
+public class WifiWakeupPreferenceController extends PreferenceController implements
         LifecycleObserver, OnResume, OnPause {
 
-    private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
+    private static final String KEY_ENABLE_WIFI_WAKEUP = "enable_wifi_wakeup";
     private SettingObserver mSettingObserver;
 
-    public NotifyOpenNetworksPreferenceController(Context context, Lifecycle lifecycle) {
+    public WifiWakeupPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
         lifecycle.addObserver(this);
     }
@@ -51,7 +50,7 @@ public class NotifyOpenNetworksPreferenceController extends PreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSettingObserver = new SettingObserver(screen.findPreference(KEY_NOTIFY_OPEN_NETWORKS));
+        mSettingObserver = new SettingObserver(screen.findPreference(KEY_ENABLE_WIFI_WAKEUP));
     }
 
     @Override
@@ -75,21 +74,21 @@ public class NotifyOpenNetworksPreferenceController extends PreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), KEY_NOTIFY_OPEN_NETWORKS)) {
+        if (!TextUtils.equals(preference.getKey(), KEY_ENABLE_WIFI_WAKEUP)) {
             return false;
         }
         if (!(preference instanceof SwitchPreference)) {
             return false;
         }
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
+                Settings.Global.WIFI_WAKEUP_ENABLED,
                 ((SwitchPreference) preference).isChecked() ? 1 : 0);
         return true;
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_NOTIFY_OPEN_NETWORKS;
+        return KEY_ENABLE_WIFI_WAKEUP;
     }
 
     @Override
@@ -97,10 +96,10 @@ public class NotifyOpenNetworksPreferenceController extends PreferenceController
         if (!(preference instanceof SwitchPreference)) {
             return;
         }
-        final SwitchPreference notifyOpenNetworks = (SwitchPreference) preference;
-        notifyOpenNetworks.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
-        notifyOpenNetworks.setEnabled(Settings.Global.getInt(mContext.getContentResolver(),
+        final SwitchPreference enableWifiWakeup = (SwitchPreference) preference;
+        enableWifiWakeup.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1);
+        enableWifiWakeup.setEnabled(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1);
     }
 

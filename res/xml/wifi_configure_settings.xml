@@ -23,11 +23,6 @@
         android:fragment="com.android.settings.wifi.SavedAccessPointsWifiSettings" />
 
     <!-- android:dependency="enable_wifi" -->
-    <SwitchPreference
-        android:key="notify_open_networks"
-        android:title="@string/wifi_notify_open_networks"
-        android:summary="@string/wifi_notify_open_networks_summary" />
-
     <ListPreference
         android:key="sleep_policy"
         android:title="@string/wifi_setting_sleep_policy_title"
@@ -38,6 +33,16 @@
       android:key="allow_recommendations"
       android:title="@string/networking_allow_recommendations_title"
       android:summary="@string/networking_allow_recommendations_summary"/>
+
+    <SwitchPreference
+        android:key="notify_open_networks"
+        android:title="@string/wifi_notify_open_networks"
+        android:summary="@string/wifi_notify_open_networks_summary" />
+
+    <SwitchPreference
+        android:key="enable_wifi_wakeup"
+        android:title="@string/wifi_wakeup"
+        android:summary="@string/wifi_wakeup_summary" />
 
     <SwitchPreference
         android:key="wifi_cellular_data_fallback"
