@@ -96,7 +96,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
         if (hasWifiRadio(context) && mWifiManager.isWifiEnabled()) {
             for (WifiConfiguration config : mWifiManager.getConfiguredNetworks()) {
                 if (config.SSID != null) {
-                    mWifiCategory.addPreference(buildWifiPref(context, config));
+                    mWifiCategory.addPreference(buildWifiPref(config));
                 }
             }
         } else {
@@ -113,10 +113,10 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
         return pref;
     }
 
-    private Preference buildWifiPref(Context context, WifiConfiguration config) {
+    private Preference buildWifiPref(WifiConfiguration config) {
         final String networkId = config.SSID;
         final NetworkTemplate template = NetworkTemplate.buildTemplateWifi(networkId);
-        final MeteredPreference pref = new MeteredPreference(context, template);
+        final MeteredPreference pref = new MeteredPreference(getPrefContext(), template);
         pref.setTitle(removeDoubleQuotes(networkId));
         return pref;
     }
