@@ -311,7 +311,10 @@ public class AccountPreferenceController extends PreferenceController
             preferenceGroup.setContentDescription(
                 mContext.getString(R.string.accessibility_category_personal));
         }
-        mParent.getPreferenceScreen().addPreference(preferenceGroup);
+        final PreferenceScreen screen = mParent.getPreferenceScreen();
+        if (screen != null) {
+            screen.addPreference(preferenceGroup);
+        }
         profileData.preferenceGroup = preferenceGroup;
         if (userInfo.isEnabled()) {
             profileData.authenticatorHelper = new AuthenticatorHelper(context,
@@ -367,6 +370,9 @@ public class AccountPreferenceController extends PreferenceController
 
     void cleanUpPreferences() {
         PreferenceScreen screen = mParent.getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
         for (int i = 0; i < mProfiles.size(); i++) {
             final PreferenceGroup preferenceGroup = mProfiles.valueAt(i).preferenceGroup;
             screen.removePreference(preferenceGroup);
