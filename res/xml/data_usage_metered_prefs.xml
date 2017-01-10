@@ -35,9 +35,8 @@
 
     </PreferenceCategory>
 
-    <Preference
-        android:summary="@string/data_usage_metered_body"
-        android:persistent="false"
+    <com.android.settings.widget.FooterPreference
+        android:title="@string/data_usage_metered_body"
         android:selectable="false" />
 
 </PreferenceScreen>
