@@ -15,60 +15,73 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:gravity="center_vertical"
-              android:background="?android:attr/selectableItemBackground">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"
-                  android:minHeight="?android:attr/listPreferredItemHeightSmall"
-                  android:gravity="center_vertical"
-                  android:paddingStart="@dimen/preference_no_icon_padding_start"
-                  android:paddingEnd="@dimen/storage_summary_padding_end"
-                  android:paddingTop="16dip"
-                  android:paddingBottom="16dip"
-                  android:enabled="false">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:enabled="false"
+        android:gravity="center_vertical"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/preference_no_icon_padding_start"
+        android:paddingEnd="@dimen/storage_summary_padding_end"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp" >
 
         <TextView
             android:id="@android:id/title"
-            android:layout_width="wrap_content"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:textAlignment="viewStart"
             android:textAppearance="@android:style/TextAppearance.Material.Subhead"
             android:textColor="?android:attr/colorAccent"
-            android:textSize="36sp"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal" />
+            android:textSize="36sp" />
 
         <TextView
             android:id="@android:id/summary"
-            android:layout_marginStart="4dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:maxLines="10"
             android:textAlignment="viewStart"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1"
-            android:maxLines="10" />
+            android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+        <TextView
+            android:id="@+id/storage_manager_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:textAlignment="viewStart"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"/>
 
         <Button
             android:id="@+id/deletion_helper_button"
-            android:theme="@style/FreeUpStorageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@android:id/summary"
-            android:text="@string/storage_menu_free"/>
+            android:text="@string/storage_menu_free"
+            style="@android:style/@Widget.Material.Button.Colored" />
     </LinearLayout>
 
     <com.android.settings.widget.DonutView
         android:id="@+id/donut"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginEnd="48dp"
+        android:gravity="end|center_vertical"
+        android:minWidth="58dp"
         android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:minWidth="58dip"
-        android:gravity="end|center_vertical"/>
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd" />
 
 </LinearLayout>

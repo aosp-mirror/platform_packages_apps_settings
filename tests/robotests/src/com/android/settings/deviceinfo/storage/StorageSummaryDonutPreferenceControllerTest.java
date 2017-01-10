@@ -22,9 +22,14 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.storage.VolumeInfo;
+import android.provider.Settings;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
@@ -41,11 +46,10 @@ import java.io.File;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class StorageSummaryDonutPreferenceControllerTest {
-    private static String KEY = "pref";
-
     private Context mContext;
     private StorageSummaryDonutPreferenceController mController;
     private StorageSummaryDonutPreference mPreference;
+    private PreferenceViewHolder mHolder;
 
     @Before
     public void setUp() throws Exception {
@@ -54,7 +58,11 @@ public class StorageSummaryDonutPreferenceControllerTest {
         mPreference = new StorageSummaryDonutPreference(mContext);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        inflater.inflate(mPreference.getLayoutResource(), new LinearLayout(mContext), false);
+        final View view =
+                inflater.inflate(
+                        mPreference.getLayoutResource(), new LinearLayout(mContext), false);
+
+        mHolder = new PreferenceViewHolder(view);
     }
 
     @Test
@@ -90,5 +98,23 @@ public class StorageSummaryDonutPreferenceControllerTest {
 
         assertThat(mPreference.getTitle().toString()).isEqualTo("9.00KB used");
         assertThat(mPreference.getSummary().toString()).isEqualTo("1.00KB free");
+    }
+
+    @Test
+    public void testAutomaticStorageManagerLabelOff() throws Exception {
+        mPreference.onBindViewHolder(mHolder);
+        TextView asmTextView = (TextView) mHolder.findViewById(R.id.storage_manager_indicator);
+        assertThat(asmTextView.getText().toString()).isEqualTo("Storage Manager: OFF");
+    }
+
+    @Test
+    public void testAutomaticStorageManagerLabelOn() throws Exception {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 1);
+
+        mPreference.onBindViewHolder(mHolder);
+
+        TextView asmTextView = (TextView) mHolder.findViewById(R.id.storage_manager_indicator);
+        assertThat(asmTextView.getText().toString()).isEqualTo("Storage Manager: ON");
     }
 }
