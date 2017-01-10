@@ -19,6 +19,7 @@ package com.android.settings.search2;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -36,6 +37,8 @@ import org.robolectric.util.ActivityController;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -97,7 +100,14 @@ public class SearchFragmentTest {
                 .findFragmentById(R.id.main_content);
 
         fragment.onQueryTextChange(testQuery);
+        activityController.get().onBackPressed();
+        activityController.pause().stop().destroy();
 
+        verify(mFeatureFactory.metricsFeatureProvider, never()).action(
+                any(Context.class),
+                eq(MetricsProto.MetricsEvent.ACTION_LEAVE_SEARCH_RESULT_WITHOUT_QUERY));
+        verify(mFeatureFactory.metricsFeatureProvider).histogram(
+                any(Context.class), eq(SearchFragment.RESULT_CLICK_COUNT), eq(0));
         verify(mFeatureFactory.searchFeatureProvider)
                 .getDatabaseSearchLoader(any(Context.class), anyString());
         verify(mFeatureFactory.searchFeatureProvider)
