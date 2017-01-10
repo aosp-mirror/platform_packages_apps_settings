@@ -1,0 +1,76 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.wifi;
+
+import android.content.Context;
+import android.net.wifi.WifiManager;
+import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
+import android.text.TextUtils;
+
+import com.android.settings.core.PreferenceController;
+
+/**
+ * {@link PreferenceController} that controls whether we should notify user when open network is
+ * available.
+ */
+public class NotifyOpenNetworksPreferenceController extends PreferenceController {
+
+    private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
+    private final WifiManager mWifiManager;
+
+    public NotifyOpenNetworksPreferenceController(Context context, WifiManager wifiManager) {
+        super(context);
+        mWifiManager = wifiManager;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return true;
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), KEY_NOTIFY_OPEN_NETWORKS)) {
+            return false;
+        }
+        if (!(preference instanceof SwitchPreference)) {
+            return false;
+        }
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
+                ((SwitchPreference) preference).isChecked() ? 1 : 0);
+        return true;
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return KEY_NOTIFY_OPEN_NETWORKS;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        if (!(preference instanceof SwitchPreference)) {
+            return;
+        }
+        final SwitchPreference notifyOpenNetworks = (SwitchPreference) preference;
+        notifyOpenNetworks.setChecked(Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
+        notifyOpenNetworks.setEnabled(mWifiManager.isWifiEnabled());
+    }
+}
