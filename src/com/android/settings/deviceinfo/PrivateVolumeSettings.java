@@ -636,12 +636,11 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
             final long usedSize = mTotalSize - details.availSize;
             final long unaccountedSize = usedSize - accountedSize;
             final long otherSize = totalMiscSize + totalDownloadsSize + unaccountedSize;
-            if (LOGV)
-                Log.v(TAG, "Other items: \n\tmTotalSize: " + mTotalSize + " availSize: "
-                        + details.availSize + " usedSize: " + usedSize + "\n\taccountedSize: "
-                        + accountedSize + " unaccountedSize size: " + unaccountedSize
-                        + "\n\ttotalMiscSize: " + totalMiscSize + " totalDownloadsSize: "
-                        + totalDownloadsSize + "\n\tdetails: " + details);
+            Log.v(TAG, "Other items: \n\tmTotalSize: " + mTotalSize + " availSize: "
+                    + details.availSize + " usedSize: " + usedSize + "\n\taccountedSize: "
+                    + accountedSize + " unaccountedSize size: " + unaccountedSize
+                    + "\n\ttotalMiscSize: " + totalMiscSize + " totalDownloadsSize: "
+                    + totalDownloadsSize + "\n\tdetails: " + details);
             updatePreference(otherItem, otherSize);
         }
     }
