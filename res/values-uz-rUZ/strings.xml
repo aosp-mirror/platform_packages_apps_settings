@@ -54,7 +54,7 @@
     <string name="radio_info_ims_reg_status" msgid="7534612158445529715">"IMS registratsiyasi: <xliff:g id="STATUS">%1$s</xliff:g>\nLTE orqali: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nWi-Fi orqali: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideoqo‘ng‘iroq: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nUT interfeysi: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="1697703164394784618">"Xizmat doirasida"</string>
     <string name="radioInfo_service_out" msgid="7999094221728929681">"Xizmat doirasidan tashqarida"</string>
-    <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Faqat favqulodda qo‘ng‘iroqlar"</string>
+    <string name="radioInfo_service_emergency" msgid="6274434235469661525">"Faqat favqulodda chaqiruvlar"</string>
     <string name="radioInfo_service_off" msgid="7536423790014501173">"Tarmoq o‘chirilgan"</string>
     <string name="radioInfo_roaming_in" msgid="9045363884600341051">"Rouming"</string>
     <string name="radioInfo_roaming_not" msgid="4849214885629672819">"Rouming o‘chirilgan"</string>
@@ -277,7 +277,7 @@
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Simsiz tarmoqlar"</string>
     <string name="radio_controls_summary" msgid="2837395036275123133">"Wi‑Fi, Bluetooth, parvoz rejimi, mobil tarmoq va VPN tarmoqlarni boshqarish"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Mobil internet"</string>
-    <string name="calls_title" msgid="3544471959217176768">"Qo‘ng‘iroqlar"</string>
+    <string name="calls_title" msgid="3544471959217176768">"Chaqiruvlar"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"SMS xabarlar"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Mobil internetdan foydalanishga ruxsat"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Roumingda mob. int-dan foyd-sh"</string>
@@ -658,7 +658,8 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"O‘chiq"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"NFC o‘chiqligi tufayli bajarilmadi"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="1828555626055290684">"Ushbu xususiyat yoqilganda NFC bilan ishlay oladigan boshqa qurilmani yaqin ushlab, unga nur orqali ma’lumot uzatishingiz mumkin. Masalan, brauzer sahifalari, YouTube videolari, odamlar kontaktlari va boshqa ko‘pgina narsalarni.\n\nQurilmalarni birgalikda (odatda orqama-orqa) ushlang va keyin ekranni bosing. Ilova nima olish kerakliligini aniqlaydi."</string>
+    <!-- no translation found for android_beam_explained (1810540319385192758) -->
+    <skip />
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi‑Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Wi‑Fi‘ni yoqish"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi‑Fi"</string>
@@ -2581,6 +2582,8 @@
     <string name="keywords_profile_challenge" msgid="789611397846512845">"ish vazifasi, ish, profil"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"ishchi profil, boshqariluvchi profil, birlashtirish, birlashuv, ish, profil"</string>
     <string name="keywords_gesture" msgid="5696040361482126337">"imo-ishora orqali matn kiritish"</string>
+    <!-- no translation found for keywords_payment_settings (5220104934130446416) -->
+    <skip />
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi’ni sozlash u-n NFC yorliq"</string>
     <string name="write_tag" msgid="8571858602896222537">"Yozish"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Yozish uchun yorliq ustiga bosing…"</string>
@@ -2746,7 +2749,7 @@
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
-    <string name="zen_mode_calls" msgid="7051492091133751208">"Qo‘ng‘iroqlar"</string>
+    <string name="zen_mode_calls" msgid="7051492091133751208">"Chaqiruvlar"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Xabarlar"</string>
     <string name="zen_mode_all_messages" msgid="6449223378976743208">"Barcha xabarlar"</string>
     <string name="zen_mode_selected_messages" msgid="8245990149599142281">"Tanlangan xabarlar"</string>
@@ -2802,7 +2805,8 @@
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Bu ishchi profil quyidagi tomonidan boshqariladi:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> tomonidan boshqariladi"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Tajribaviy)"</string>
-    <string name="display_auto_rotate_title" msgid="6176450657107806043">"Qurilma burilganda"</string>
+    <!-- no translation found for display_auto_rotate_title (7119684966039069439) -->
+    <skip />
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Ekrandagi tasvir ham burilsin"</string>
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Tik holatda qolsin"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Yotiq holatda qolsin"</string>
@@ -3192,6 +3196,10 @@
     <string name="page_tab_title_support" msgid="6330657582897417458">"Ko‘mak"</string>
     <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Eng kichik eni"</string>
+    <!-- no translation found for developer_tile (4822711696408279658) -->
+    <skip />
+    <!-- no translation found for developer_tile_unavailable (6559656549479711827) -->
+    <skip />
     <string name="premium_sms_none" msgid="8268105565738040566">"O‘rnatilgan ilovalardan hech biri SMSdan foydalanish uchun ruxsat so‘ramagan."</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS uchun sizdan haq olinishi va operatorga qo‘shimcha to‘lov amalga oshirilishi mumkin. Agar ilova uchun ruxsatnoma taqdim etsangiz, o‘sha ilovadan SMS yuborishingiz mumkin bo‘ladi."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"SMSdan foydalanish"</string>
@@ -3313,4 +3321,16 @@
     <string name="enterprise_privacy_bug_reports" msgid="4762460041705169944">"Eng oxirgi xatoliklar hisoboti"</string>
     <string name="enterprise_privacy_security_logs" msgid="3648730027522011684">"Eng oxirgi xavfsizlik jurnali"</string>
     <string name="enterprise_privacy_never" msgid="1304035596746436921">"Hech qachon"</string>
+    <!-- no translation found for storage_photos_videos (1872663116054954685) -->
+    <skip />
+    <!-- no translation found for storage_music_audio (7890103397813503615) -->
+    <skip />
+    <!-- no translation found for storage_games (7703159201697117621) -->
+    <skip />
+    <!-- no translation found for storage_other_apps (5524321740031718083) -->
+    <skip />
+    <!-- no translation found for storage_files (8581083146777364063) -->
+    <skip />
+    <!-- no translation found for storage_settings_2 (6369810699930056554) -->
+    <skip />
 </resources>
