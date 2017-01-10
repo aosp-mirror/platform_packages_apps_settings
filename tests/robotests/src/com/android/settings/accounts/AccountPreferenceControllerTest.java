@@ -190,6 +190,24 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    public void onResume_noPreferenceScreen_shouldNotCrash() {
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(1, "user 1", 0));
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
+
+        AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
+        when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
+                preferenceGroup);
+
+        mController.onResume();
+
+        // Should not crash
+    }
+
+    @Test
     public void updateRawDataToIndex_ManagedProfile_shouldNotUpdate() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         when(mUserManager.isManagedProfile()).thenReturn(true);
