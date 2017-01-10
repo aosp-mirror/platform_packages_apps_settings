@@ -18,8 +18,11 @@ package com.android.settings.wifi;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -43,6 +46,13 @@ public class AdvancedWifiSettings extends RestrictedSettingsFragment {
     private static final String KEY_WPS_PIN = "wps_pin_entry";
 
     private boolean mUnavailable;
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            initPreferences();
+        }
+    };
 
     public AdvancedWifiSettings() {
         super(UserManager.DISALLOW_CONFIG_WIFI);
@@ -74,10 +84,20 @@ public class AdvancedWifiSettings extends RestrictedSettingsFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         if (!mUnavailable) {
+            getActivity().registerReceiver(mReceiver,
+                    new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
             initPreferences();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (!mUnavailable) {
+            getActivity().unregisterReceiver(mReceiver);
         }
     }
 
@@ -90,11 +110,13 @@ public class AdvancedWifiSettings extends RestrictedSettingsFragment {
         Preference pref = findPreference(KEY_INSTALL_CREDENTIALS);
         pref.setIntent(intent);
 
-
+        final WifiManager wifiManager =
+                (WifiManager)getActivity().getSystemService(Context.WIFI_SERVICE);
         Intent wifiDirectIntent = new Intent(context,
                 com.android.settings.Settings.WifiP2pSettingsActivity.class);
         Preference wifiDirectPref = findPreference(KEY_WIFI_DIRECT);
         wifiDirectPref.setIntent(wifiDirectIntent);
+        wifiDirectPref.setEnabled(wifiManager.isWifiEnabled());
 
         // WpsDialog: Create the dialog like WifiSettings does.
         Preference wpsPushPref = findPreference(KEY_WPS_PUSH);
@@ -105,6 +127,7 @@ public class AdvancedWifiSettings extends RestrictedSettingsFragment {
                     return true;
                 }
         });
+        wpsPushPref.setEnabled(wifiManager.isWifiEnabled());
 
         // WpsDialog: Create the dialog like WifiSettings does.
         Preference wpsPinPref = findPreference(KEY_WPS_PIN);
@@ -115,6 +138,7 @@ public class AdvancedWifiSettings extends RestrictedSettingsFragment {
                     return true;
                 }
         });
+        wpsPinPref.setEnabled(wifiManager.isWifiEnabled());
     }
 
     /* Wrapper class for the WPS dialog to properly handle life cycle events like rotation. */
