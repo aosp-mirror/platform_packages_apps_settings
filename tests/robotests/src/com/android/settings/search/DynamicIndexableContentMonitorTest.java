@@ -23,7 +23,6 @@ import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.only;
@@ -58,6 +57,7 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
+import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.testutils.shadow.ShadowActivityWithLoadManager;
 import com.android.settings.testutils.shadow.ShadowContextImplWithRegisterReceiver;
@@ -69,7 +69,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.verification.VerificationMode;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -210,9 +209,7 @@ public class DynamicIndexableContentMonitorTest {
         mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
 
         // Rebuild indexing should happen.
-        // CAVEAT: Currently InputMethodAndLanuageSettings may be indexed once for input devices and
-        // once for input methods.
-        verifyRebuildIndexing(InputMethodAndLanguageSettings.class, atLeastOnce());
+        verifyRebuildIndexing(PhysicalKeyboardFragment.class);
         // Input monitor should be registered to InputManager.
         final InputManager.InputDeviceListener listener = extactInputDeviceListener();
         assertThat(listener).isNotNull();
@@ -224,7 +221,7 @@ public class DynamicIndexableContentMonitorTest {
 
         mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
 
-        verifyNoIndexing(InputMethodAndLanguageSettings.class);
+        verifyNoIndexing(PhysicalKeyboardFragment.class);
         assertThat(extactInputDeviceListener()).isEqualTo(listener);
 
         /*
@@ -234,7 +231,7 @@ public class DynamicIndexableContentMonitorTest {
 
         listener.onInputDeviceAdded(1 /* deviceId */);
 
-        verifyIncrementalIndexing(InputMethodAndLanguageSettings.class);
+        verifyIncrementalIndexing(PhysicalKeyboardFragment.class);
 
         /*
          * A device is removed.
@@ -243,7 +240,7 @@ public class DynamicIndexableContentMonitorTest {
 
         listener.onInputDeviceRemoved(2 /* deviceId */);
 
-        verifyRebuildIndexing(InputMethodAndLanguageSettings.class);
+        verifyRebuildIndexing(PhysicalKeyboardFragment.class);
 
         /*
          * A device is changed.
@@ -252,7 +249,7 @@ public class DynamicIndexableContentMonitorTest {
 
         listener.onInputDeviceChanged(3 /* deviceId */);
 
-        verifyRebuildIndexing(InputMethodAndLanguageSettings.class);
+        verifyRebuildIndexing(PhysicalKeyboardFragment.class);
     }
 
     @Test
@@ -338,9 +335,7 @@ public class DynamicIndexableContentMonitorTest {
         final PackageMonitor packageMonitor = extractPackageMonitor();
         assertThat(packageMonitor).isNotNull();
 
-        // CAVEAT: Currently InputMethodAndLanuageSettings may be indexed once for input devices and
-        // once for input methods.
-        verifyRebuildIndexing(InputMethodAndLanguageSettings.class, atLeastOnce());
+        verifyRebuildIndexing(InputMethodAndLanguageSettings.class);
 
         /*
          * When an input method service package is installed, incremental indexing happen.
@@ -417,9 +412,7 @@ public class DynamicIndexableContentMonitorTest {
         final ContentObserver observer = extractContentObserver(UserDictionary.Words.CONTENT_URI);
         assertThat(observer).isNotNull();
 
-        // CAVEAT: Currently InputMethodAndLanuageSettings may be indexed once for input devices and
-        // once for input methods.
-        verifyRebuildIndexing(InputMethodAndLanguageSettings.class, atLeastOnce());
+        verifyRebuildIndexing(InputMethodAndLanguageSettings.class);
 
         /*
          * When user dictionary content is changed, rebuild indexing happens.
@@ -441,11 +434,7 @@ public class DynamicIndexableContentMonitorTest {
     }
 
     private void verifyRebuildIndexing(Class<?> indexingClass) {
-        verifyRebuildIndexing(indexingClass, times(1));
-    }
-
-    private void verifyRebuildIndexing(Class<?> indexingClass, VerificationMode verificationMode) {
-        verify(mIndex, verificationMode).updateFromClassNameResource(indexingClass.getName(),
+        verify(mIndex, times(1)).updateFromClassNameResource(indexingClass.getName(),
                 true /* rebuild */, true /* includeInSearchResults */);
         verify(mIndex, never()).updateFromClassNameResource(indexingClass.getName(),
                 false /* rebuild */, true /* includeInSearchResults */);

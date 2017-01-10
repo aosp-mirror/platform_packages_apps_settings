@@ -48,6 +48,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
+import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.print.PrintSettingsFragment;
 
 import java.util.ArrayList;
@@ -205,8 +206,7 @@ public final class DynamicIndexableContentMonitor implements
         }
 
         private void buildIndex(boolean rebuild) {
-            // TODO: Fix landing page to PhysicalKeyboardFragment.
-            mIndex.updateFromClassNameResource(InputMethodAndLanguageSettings.class.getName(),
+            mIndex.updateFromClassNameResource(PhysicalKeyboardFragment.class.getName(),
                     rebuild, true /* includeInSearchResult */);
         }
 

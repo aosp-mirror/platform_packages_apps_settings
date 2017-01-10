@@ -22,11 +22,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
 import android.hardware.input.InputDeviceIdentifier;
-import android.hardware.input.InputManager;
-import android.hardware.input.KeyboardLayout;
 import android.speech.tts.TtsEngines;
 import android.support.v7.preference.Preference;
-import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
@@ -246,44 +243,7 @@ public class InputMethodAndLanguageSettings extends DashboardFragment
                 indexables.add(indexable);
             }
 
-            // TODO: Move to PhysicalKeyboardFragment.
-            // Hard keyboards
-            InputManager inputManager = (InputManager) context.getSystemService(
-                    Context.INPUT_SERVICE);
-            boolean hasHardKeyboards = false;
-
-            final int[] devices = InputDevice.getDeviceIds();
-            for (int i = 0; i < devices.length; i++) {
-                InputDevice device = InputDevice.getDevice(devices[i]);
-                if (device == null || device.isVirtual() || !device.isFullKeyboard()) {
-                    continue;
-                }
-
-                hasHardKeyboards = true;
-
-                InputDeviceIdentifier identifier = device.getIdentifier();
-                String keyboardLayoutDescriptor =
-                        inputManager.getCurrentKeyboardLayoutForInputDevice(identifier);
-                KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
-                        inputManager.getKeyboardLayout(keyboardLayoutDescriptor) : null;
-
-                String summary;
-                if (keyboardLayout != null) {
-                    summary = keyboardLayout.toString();
-                } else {
-                    summary = context.getString(R.string.keyboard_layout_default_label);
-                }
-
-                indexable = new SearchIndexableRaw(context);
-                indexable.key = device.getName();
-                indexable.title = device.getName();
-                indexable.summaryOn = summary;
-                indexable.summaryOff = summary;
-                indexable.screenTitle = screenTitle;
-                indexables.add(indexable);
-            }
-
-            if (hasHardKeyboards) {
+            if (!PhysicalKeyboardFragment.getPhysicalFullKeyboards().isEmpty()) {
                 // Hard keyboard category.
                 indexable = new SearchIndexableRaw(context);
                 indexable.key = "builtin_keyboard_settings";
