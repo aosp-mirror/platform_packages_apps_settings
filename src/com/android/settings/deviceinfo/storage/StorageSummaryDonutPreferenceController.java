@@ -26,7 +26,6 @@ public class StorageSummaryDonutPreferenceController extends PreferenceControlle
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        Log.d("dhnishi", "Preference displayed!");
         StorageSummaryDonutPreference summary = (StorageSummaryDonutPreference)
                 screen.findPreference("pref_summary");
         summary.setEnabled(true);
