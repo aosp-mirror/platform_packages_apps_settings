@@ -49,6 +49,7 @@ import android.os.Bundle;
 import android.print.PrintManager;
 import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
+import android.provider.Settings;
 import android.provider.UserDictionary;
 import android.view.inputmethod.InputMethodInfo;
 
@@ -340,6 +341,12 @@ public class DynamicIndexableContentMonitorTest {
         verifyRebuildIndexing(VirtualKeyboardFragment.class);
         verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
 
+        final Uri enabledInputMethodsContentUri = Settings.Secure.getUriFor(
+                Settings.Secure.ENABLED_INPUT_METHODS);
+        // Content observer should be registered.
+        final ContentObserver observer = extractContentObserver(enabledInputMethodsContentUri);
+        assertThat(observer).isNotNull();
+
         /*
          * When an input method service package is installed, incremental indexing happen.
          */
@@ -411,6 +418,16 @@ public class DynamicIndexableContentMonitorTest {
 
         verifyNoIndexing(VirtualKeyboardFragment.class);
         verifyNoIndexing(AvailableVirtualKeyboardFragment.class);
+
+        /*
+         * When enabled IMEs list is changed, rebuild indexing happens.
+         */
+        reset(mIndex);
+
+        observer.onChange(false /* selfChange */, enabledInputMethodsContentUri);
+
+        verifyRebuildIndexing(VirtualKeyboardFragment.class);
+        verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
     }
 
     @Test
