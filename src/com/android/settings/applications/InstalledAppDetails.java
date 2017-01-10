@@ -324,7 +324,12 @@ public class InstalledAppDetails extends AppInfoBase
                 ? R.xml.installed_app_details_ia
                 : R.xml.installed_app_details);
         addDynamicPrefs();
-
+        if (mDashboardFeatureProvider.isEnabled()) {
+            mFooter = new LayoutPreference(getPrefContext(), R.layout.app_action_buttons);
+            mFooter.setOrder(10000);
+            mFooter.setKey(KEY_FOOTER);
+            getPreferenceScreen().addPreference(mFooter);
+        }
         if (Utils.isBandwidthControlEnabled()) {
             INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
                     ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
@@ -964,12 +969,6 @@ public class InstalledAppDetails extends AppInfoBase
         }
 
         addAppInstallerInfoPref(screen);
-        if (mDashboardFeatureProvider.isEnabled()) {
-            mFooter = new LayoutPreference(screen.getContext(), R.layout.app_action_buttons);
-            mFooter.setOrder(10000);
-            mFooter.setKey(KEY_FOOTER);
-            screen.addPreference(mFooter);
-        }
     }
 
     private void addAppInstallerInfoPref(PreferenceScreen screen) {
