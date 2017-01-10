@@ -155,7 +155,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     }
 
     protected void setupImportancePrefs(boolean notBlockable, boolean notSilenceable,
-                                        int importance, boolean banned) {
+            int importance, boolean banned) {
         if (mShowSlider && !notSilenceable) {
             setVisible(mBlock, false);
             setVisible(mSilent, false);
@@ -176,10 +176,11 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             });
         } else {
             setVisible(mImportance, false);
-            if (notBlockable) {
+            // Hide controls that are not settable, unless they are already switched on.
+            final boolean blocked = (importance == Ranking.IMPORTANCE_NONE || banned);
+            if (notBlockable && !blocked) {
                 setVisible(mBlock, false);
             } else {
-                boolean blocked = importance == Ranking.IMPORTANCE_NONE || banned;
                 mBlock.setChecked(blocked);
                 mBlock.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                     @Override
@@ -193,10 +194,11 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                     }
                 });
             }
-            if (notSilenceable) {
+            final boolean silenced = (importance == Ranking.IMPORTANCE_LOW);
+            if (notSilenceable && !silenced) {
                 setVisible(mSilent, false);
             } else {
-                mSilent.setChecked(importance == Ranking.IMPORTANCE_LOW);
+                mSilent.setChecked(silenced);
                 mSilent.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
