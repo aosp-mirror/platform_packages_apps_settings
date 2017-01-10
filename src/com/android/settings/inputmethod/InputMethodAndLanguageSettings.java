@@ -17,16 +17,11 @@
 package com.android.settings.inputmethod;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ServiceInfo;
 import android.hardware.input.InputDeviceIdentifier;
 import android.speech.tts.TtsEngines;
 import android.support.v7.preference.Preference;
-import android.view.inputmethod.InputMethodInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.view.inputmethod.InputMethodSubtype;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -211,37 +206,6 @@ public class InputMethodAndLanguageSettings extends DashboardFragment
             indexable.screenTitle = screenTitle;
             indexable.keywords = context.getString(R.string.keywords_keyboard_and_ime);
             indexables.add(indexable);
-
-            InputMethodSettingValuesWrapper immValues = InputMethodSettingValuesWrapper
-                    .getInstance(context);
-            immValues.refreshAllInputMethodAndSubtypes();
-
-            InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(
-                    Context.INPUT_METHOD_SERVICE);
-
-            // TODO: Move to VirtualKeyboardFragment and AvailableVirtualKeyboardFragment.
-            // All other IMEs.
-            List<InputMethodInfo> inputMethods = immValues.getInputMethodList();
-            final int inputMethodCount = (inputMethods == null ? 0 : inputMethods.size());
-            for (int i = 0; i < inputMethodCount; ++i) {
-                InputMethodInfo inputMethod = inputMethods.get(i);
-                List<InputMethodSubtype> subtypes = inputMethodManager
-                        .getEnabledInputMethodSubtypeList(inputMethod, true);
-                String summary = InputMethodAndSubtypeUtil.getSubtypeLocaleNameListAsSentence(
-                        subtypes, context, inputMethod);
-
-                ServiceInfo serviceInfo = inputMethod.getServiceInfo();
-                ComponentName componentName = new ComponentName(serviceInfo.packageName,
-                        serviceInfo.name);
-
-                indexable = new SearchIndexableRaw(context);
-                indexable.key = componentName.flattenToString();
-                indexable.title = inputMethod.loadLabel(context.getPackageManager()).toString();
-                indexable.summaryOn = summary;
-                indexable.summaryOff = summary;
-                indexable.screenTitle = screenTitle;
-                indexables.add(indexable);
-            }
 
             if (!PhysicalKeyboardFragment.getPhysicalFullKeyboards().isEmpty()) {
                 // Hard keyboard category.

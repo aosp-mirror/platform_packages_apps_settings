@@ -21,6 +21,7 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -33,9 +34,14 @@ import android.os.Bundle;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -44,7 +50,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFragment
-        implements InputMethodPreference.OnSavePreferenceListener {
+        implements InputMethodPreference.OnSavePreferenceListener, Indexable {
 
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
     private InputMethodSettingValuesWrapper mInputMethodSettingValues;
@@ -169,4 +175,51 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
             pref.updatePreferenceViews();
         }
     }
+
+    private static List<InputMethodSubtype> getAllSubtypesOf(final InputMethodInfo imi) {
+        final int subtypeCount = imi.getSubtypeCount();
+        final List<InputMethodSubtype> allSubtypes = new ArrayList<>(subtypeCount);
+        for (int index = 0; index < subtypeCount; index++) {
+            allSubtypes.add(imi.getSubtypeAt(index));
+        }
+        return allSubtypes;
+    }
+
+    static List<SearchIndexableRaw> buildSearchIndexOfInputMethods(final Context context,
+            final List<InputMethodInfo> inputMethods, final String screenTitle) {
+        final List<SearchIndexableRaw> indexes = new ArrayList<>();
+        final InputMethodManager imm = (InputMethodManager) context.getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        for (int i = 0; i < inputMethods.size(); i++) {
+            final InputMethodInfo imi = inputMethods.get(i);
+            final ServiceInfo serviceInfo = imi.getServiceInfo();
+            final SearchIndexableRaw index = new SearchIndexableRaw(context);
+            index.key = new ComponentName(serviceInfo.packageName, serviceInfo.name)
+                    .flattenToString();
+            index.title = imi.loadLabel(context.getPackageManager()).toString();
+            index.summaryOn = index.summaryOff = InputMethodAndSubtypeUtil
+                    .getSubtypeLocaleNameListAsSentence(getAllSubtypesOf(imi), context, imi);
+            index.screenTitle = screenTitle;
+            indexes.add(index);
+        }
+        return indexes;
+    }
+
+    public static Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+        @Override
+        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+            final InputMethodManager imm = context.getSystemService(InputMethodManager.class);
+            final List<InputMethodInfo> enabledInputMethods = imm.getEnabledInputMethodList();
+            final List<InputMethodInfo> disabledInputMethods = new ArrayList<>();
+            for (final InputMethodInfo imi : imm.getInputMethodList()) {
+                if (!enabledInputMethods.contains(imi)) {
+                    disabledInputMethods.add(imi);
+                }
+            }
+            final String screenTitle = context.getString(
+                    R.string.available_virtual_keyboard_category);
+            return buildSearchIndexOfInputMethods(context, disabledInputMethods, screenTitle);
+        }
+    };
 }

@@ -56,8 +56,10 @@ import com.android.internal.content.PackageMonitor;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
+import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.testutils.shadow.ShadowActivityWithLoadManager;
 import com.android.settings.testutils.shadow.ShadowContextImplWithRegisterReceiver;
@@ -335,7 +337,8 @@ public class DynamicIndexableContentMonitorTest {
         final PackageMonitor packageMonitor = extractPackageMonitor();
         assertThat(packageMonitor).isNotNull();
 
-        verifyRebuildIndexing(InputMethodAndLanguageSettings.class);
+        verifyRebuildIndexing(VirtualKeyboardFragment.class);
+        verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
 
         /*
          * When an input method service package is installed, incremental indexing happen.
@@ -346,7 +349,8 @@ public class DynamicIndexableContentMonitorTest {
         packageMonitor.onPackageAppeared(IME_PACKAGE_1, USER_ID);
         Robolectric.flushBackgroundThreadScheduler();
 
-        verifyIncrementalIndexing(InputMethodAndLanguageSettings.class);
+        verifyIncrementalIndexing(VirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(AvailableVirtualKeyboardFragment.class);
 
         /*
          * When another input method service package is installed, incremental indexing happens.
@@ -357,7 +361,8 @@ public class DynamicIndexableContentMonitorTest {
         packageMonitor.onPackageAppeared(IME_PACKAGE_2, USER_ID);
         Robolectric.flushBackgroundThreadScheduler();
 
-        verifyIncrementalIndexing(InputMethodAndLanguageSettings.class);
+        verifyIncrementalIndexing(VirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(AvailableVirtualKeyboardFragment.class);
 
         /*
          * When an input method service is disabled, rebuild indexing happens.
@@ -369,7 +374,8 @@ public class DynamicIndexableContentMonitorTest {
         packageMonitor.onPackageModified(IME_PACKAGE_1);
         Robolectric.flushBackgroundThreadScheduler();
 
-        verifyRebuildIndexing(InputMethodAndLanguageSettings.class);
+        verifyRebuildIndexing(VirtualKeyboardFragment.class);
+        verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
 
         /*
          * When an input method service is enabled, incremental indexing happens.
@@ -381,7 +387,8 @@ public class DynamicIndexableContentMonitorTest {
         packageMonitor.onPackageModified(IME_PACKAGE_1);
         Robolectric.flushBackgroundThreadScheduler();
 
-        verifyIncrementalIndexing(InputMethodAndLanguageSettings.class);
+        verifyIncrementalIndexing(VirtualKeyboardFragment.class);
+        verifyIncrementalIndexing(AvailableVirtualKeyboardFragment.class);
 
         /*
          * When an input method service package is uninstalled, rebuild indexing happens.
@@ -391,7 +398,8 @@ public class DynamicIndexableContentMonitorTest {
 
         packageMonitor.onPackageDisappeared(IME_PACKAGE_1, USER_ID);
 
-        verifyRebuildIndexing(InputMethodAndLanguageSettings.class);
+        verifyRebuildIndexing(VirtualKeyboardFragment.class);
+        verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
 
         /*
          * When an accessibility service package is installed, nothing happens.
@@ -401,7 +409,8 @@ public class DynamicIndexableContentMonitorTest {
 
         packageMonitor.onPackageAppeared(A11Y_PACKAGE_1, USER_ID);
 
-        verifyNoIndexing(InputMethodAndLanguageSettings.class);
+        verifyNoIndexing(VirtualKeyboardFragment.class);
+        verifyNoIndexing(AvailableVirtualKeyboardFragment.class);
     }
 
     @Test

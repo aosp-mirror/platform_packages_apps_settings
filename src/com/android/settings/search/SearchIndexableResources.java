@@ -54,8 +54,10 @@ import com.android.settings.gestures.DoubleTwistGestureSettings;
 import com.android.settings.gestures.GestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
+import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
+import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.NetworkDashboardFragment;
@@ -141,6 +143,9 @@ public final class SearchIndexableResources {
         addIndex(UserAndAccountDashboardFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_accounts);
         addIndex(InputMethodAndLanguageSettings.class,
+                NO_DATA_RES_ID, R.drawable.ic_settings_language);
+        addIndex(VirtualKeyboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
+        addIndex(AvailableVirtualKeyboardFragment.class,
                 NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(PhysicalKeyboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(PrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_backup);
