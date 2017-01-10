@@ -235,9 +235,8 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             // Only showing primary internal storage, so just shortcut
             final Bundle args = new Bundle();
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
-            PrivateVolumeSettings.setVolumeSize(args, sTotalInternalStorage);
             Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
-                    PrivateVolumeSettings.class.getName(), args, null, R.string.apps_storage, null,
+                    StorageDashboardFragment.class.getName(), args, null, R.string.apps_storage, null,
                     false);
             intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
             getActivity().startActivity(intent);
@@ -280,9 +279,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
                 final Bundle args = new Bundle();
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, vol.getId());
-                PrivateVolumeSettings.setVolumeSize(args, PrivateStorageInfo.getTotalSize(vol,
-                        sTotalInternalStorage));
-                startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
+                startFragment(this, StorageDashboardFragment.class.getCanonicalName(),
                         -1, 0, args);
                 return true;
 
