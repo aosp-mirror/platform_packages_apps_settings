@@ -165,64 +165,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     private CharSequence mInitialTitle;
     private int mInitialTitleResId;
 
-    // Show only these settings for restricted users
-    private String[] SETTINGS_FOR_RESTRICTED = {
-            //wireless_section
-            WifiSettingsActivity.class.getName(),
-            Settings.BluetoothSettingsActivity.class.getName(),
-            Settings.DataUsageSummaryActivity.class.getName(),
-            Settings.SimSettingsActivity.class.getName(),
-            Settings.WirelessSettingsActivity.class.getName(),
-            //device_section
-            Settings.HomeSettingsActivity.class.getName(),
-            Settings.SoundSettingsActivity.class.getName(),
-            Settings.DisplaySettingsActivity.class.getName(),
-            Settings.StorageSettingsActivity.class.getName(),
-            Settings.ManageApplicationsActivity.class.getName(),
-            Settings.PowerUsageSummaryActivity.class.getName(),
-            Settings.GestureSettingsActivity.class.getName(),
-            //personal_section
-            Settings.LocationSettingsActivity.class.getName(),
-            Settings.SecuritySettingsActivity.class.getName(),
-            Settings.InputMethodAndLanguageSettingsActivity.class.getName(),
-            Settings.UserSettingsActivity.class.getName(),
-            Settings.AccountSettingsActivity.class.getName(),
-            //system_section
-            Settings.DateTimeSettingsActivity.class.getName(),
-            Settings.DeviceInfoSettingsActivity.class.getName(),
-            Settings.AccessibilitySettingsActivity.class.getName(),
-            Settings.PrintSettingsActivity.class.getName(),
-            Settings.PaymentSettingsActivity.class.getName(),
-            Settings.EnterprisePrivacySettingsActivity.class.getName(),
-
-            // New IA
-            // Home page
-            Settings.NetworkDashboardActivity.class.getName(),
-            Settings.ConnectedDeviceDashboardActivity.class.getName(),
-            Settings.AppAndNotificationDashboardActivity.class.getName(),
-            "com.android.settings.Settings.BatteryDashboardAlias",
-            "com.android.settings.Settings.DisplayDashboardAlias",
-            "com.android.settings.Settings.SoundDashboardAlias",
-            "com.android.settings.Settings.SecurityDashboardAlias",
-            Settings.UserAndAccountDashboardActivity.class.getName(),
-            Settings.SystemDashboardActivity.class.getName(),
-            Settings.SupportDashboardActivity.class.getName(),
-            // Home page > Apps & Notifications
-            "com.android.settings.Settings.ManageApplicationsDashboardAlias",
-            "com.android.settings.Settings.PaymentSettingsDashboardAlias",
-            // Home page > Network & Internet
-            "com.android.settings.Settings.WifiDashboardAlias",
-            "com.android.settings.Settings.DataUsageDashboardAlias",
-            // Home page > Security
-            "com.android.settings.Settings.LocationDashboardAlias",
-            // Home page > System
-            Settings.LanguageAndRegionSettingsActivity.class.getName(),
-            Settings.InputAndGestureSettingsActivity.class.getName(),
-            "com.android.settings.Settings.DateTimeDashboardAlias",
-            "com.android.settings.Settings.AccessibilityDashboardAlias",
-            "com.android.settings.Settings.AboutDeviceDashboardAlias",
-    };
-
     private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {
             "android.settings.APPLICATION_DETAILS_SETTINGS"
     };
@@ -1009,8 +951,10 @@ public class SettingsActivity extends SettingsDrawerActivity
             for (DashboardCategory category : categories) {
                 for (Tile tile : category.tiles) {
                     ComponentName component = tile.intent.getComponent();
-                    if (packageName.equals(component.getPackageName()) && !ArrayUtils.contains(
-                            SETTINGS_FOR_RESTRICTED, component.getClassName())) {
+                    final String name = component.getClassName();
+                    final boolean isEnabledForRestricted = ArrayUtils.contains(
+                            SettingsGateway.SETTINGS_FOR_RESTRICTED, name);
+                    if (packageName.equals(component.getPackageName()) && !isEnabledForRestricted) {
                         setTileEnabled(component, false, isAdmin);
                     }
                 }
@@ -1055,7 +999,8 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private void setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin) {
         if (UserHandle.MU_ENABLED && !isAdmin && getPackageName().equals(component.getPackageName())
-                && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, component.getClassName())) {
+                && !ArrayUtils.contains(SettingsGateway.SETTINGS_FOR_RESTRICTED,
+                component.getClassName())) {
             enabled = false;
         }
         setTileEnabled(component, enabled);

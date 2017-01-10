@@ -32,6 +32,7 @@ import com.android.settings.IccLockSettings;
 import com.android.settings.MasterClear;
 import com.android.settings.PrivacySettings;
 import com.android.settings.SecuritySettings;
+import com.android.settings.Settings;
 import com.android.settings.TestingSettings;
 import com.android.settings.TetherSettings;
 import com.android.settings.TrustedCredentialsSettings;
@@ -243,5 +244,61 @@ public class SettingsGateway {
             AppAndNotificationDashboardFragment.class.getName(),
             UserAndAccountDashboardFragment.class.getName(),
             EnterprisePrivacySettings.class.getName(),
+    };
+
+    public static final String[] SETTINGS_FOR_RESTRICTED = {
+            //wireless_section
+            Settings.WifiSettingsActivity.class.getName(),
+            Settings.BluetoothSettingsActivity.class.getName(),
+            Settings.DataUsageSummaryActivity.class.getName(),
+            Settings.SimSettingsActivity.class.getName(),
+            Settings.WirelessSettingsActivity.class.getName(),
+            //device_section
+            Settings.SoundSettingsActivity.class.getName(),
+            Settings.DisplaySettingsActivity.class.getName(),
+            Settings.StorageSettingsActivity.class.getName(),
+            Settings.ManageApplicationsActivity.class.getName(),
+            Settings.PowerUsageSummaryActivity.class.getName(),
+            Settings.GestureSettingsActivity.class.getName(),
+            //personal_section
+            Settings.LocationSettingsActivity.class.getName(),
+            Settings.SecuritySettingsActivity.class.getName(),
+            Settings.InputMethodAndLanguageSettingsActivity.class.getName(),
+            Settings.UserSettingsActivity.class.getName(),
+            Settings.AccountSettingsActivity.class.getName(),
+            //system_section
+            Settings.DateTimeSettingsActivity.class.getName(),
+            Settings.DeviceInfoSettingsActivity.class.getName(),
+            Settings.AccessibilitySettingsActivity.class.getName(),
+            Settings.PrintSettingsActivity.class.getName(),
+            Settings.PaymentSettingsActivity.class.getName(),
+            Settings.EnterprisePrivacySettingsActivity.class.getName(),
+
+            // New IA
+            // Home page
+            Settings.NetworkDashboardActivity.class.getName(),
+            Settings.ConnectedDeviceDashboardActivity.class.getName(),
+            Settings.AppAndNotificationDashboardActivity.class.getName(),
+            "com.android.settings.BatteryDashboardAlias",
+            "com.android.settings.DisplayDashboardAlias",
+            "com.android.settings.SoundDashboardAlias",
+            "com.android.settings.SecurityDashboardAlias",
+            Settings.UserAndAccountDashboardActivity.class.getName(),
+            Settings.SystemDashboardActivity.class.getName(),
+            Settings.SupportDashboardActivity.class.getName(),
+            // Home page > Apps & Notifications
+            "com.android.settings.ManageApplicationsDashboardAlias",
+            "com.android.settings.PaymentSettingsDashboardAlias",
+            // Home page > Network & Internet
+            "com.android.settings.WifiDashboardAlias",
+            "com.android.settings.DataUsageDashboardAlias",
+            // Home page > Security
+            "com.android.settings.LocationDashboardAlias",
+            // Home page > System
+            Settings.LanguageAndRegionSettingsActivity.class.getName(),
+            Settings.InputAndGestureSettingsActivity.class.getName(),
+            "com.android.settings.DateTimeDashboardAlias",
+            "com.android.settings.AccessibilityDashboardAlias",
+            "com.android.settings.AboutDeviceDashboardAlias",
     };
 }
