@@ -14,47 +14,61 @@
      limitations under the License.
 -->
 
-<!-- TODO: Update this view to not match the existing storage summary.-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:minHeight="?android:attr/listPreferredItemHeightSmall"
+              android:orientation="horizontal"
               android:gravity="center_vertical"
-              android:paddingStart="@dimen/preference_no_icon_padding_start"
-              android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-              android:paddingTop="16dip"
-              android:paddingBottom="16dip"
               android:background="?android:attr/selectableItemBackground">
 
-    <TextView
-        android:id="@android:id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:textAlignment="viewStart"
-        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        android:textColor="?android:attr/colorAccent"
-        android:textSize="36sp"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal" />
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                  android:gravity="center_vertical"
+                  android:paddingStart="@dimen/preference_no_icon_padding_start"
+                  android:paddingEnd="@dimen/storage_summary_padding_end"
+                  android:paddingTop="16dip"
+                  android:paddingBottom="16dip"
+                  android:enabled="false">
 
-    <TextView
-        android:id="@android:id/summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="viewStart"
-        android:textAppearance="@android:style/TextAppearance.Material.Body1"
-        android:maxLines="10" />
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textAlignment="viewStart"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            android:textColor="?android:attr/colorAccent"
+            android:textSize="36sp"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal" />
 
-    <ProgressBar
-        android:id="@android:id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone"
-        android:max="100"
-        style="?android:attr/progressBarStyleHorizontal" />
+        <TextView
+            android:id="@android:id/summary"
+            android:layout_marginStart="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:maxLines="10" />
+
+        <Button
+            android:id="@+id/deletion_helper_button"
+            android:theme="@style/FreeUpStorageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@android:id/summary"
+            android:text="@string/storage_menu_free"/>
+    </LinearLayout>
+
+    <com.android.settings.widget.DonutView
+        android:id="@+id/donut"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:minWidth="58dip"
+        android:gravity="end|center_vertical"/>
 
 </LinearLayout>

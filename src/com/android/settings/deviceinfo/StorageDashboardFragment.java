@@ -46,7 +46,6 @@ public class StorageDashboardFragment extends DashboardFragment {
     private static final String TAG = "StorageDashboardFrag";
 
     private VolumeInfo mVolume;
-    private long mTotalSize;
 
     private StorageSummaryDonutPreferenceController mSummaryController;
     private StorageItemPreferenceController mPreferenceController;
@@ -70,16 +69,16 @@ public class StorageDashboardFragment extends DashboardFragment {
         }
 
         final long sharedDataSize = mVolume.getPath().getTotalSpace();
-        mTotalSize = sm.getPrimaryStorageSize();
-        long systemSize = mTotalSize - sharedDataSize;
+        long totalSize = sm.getPrimaryStorageSize();
+        long systemSize = totalSize - sharedDataSize;
 
-        if (mTotalSize <= 0) {
-            mTotalSize = sharedDataSize;
+        if (totalSize <= 0) {
+            totalSize = sharedDataSize;
             systemSize = 0;
         }
 
-        final long usedBytes = mTotalSize - mVolume.getPath().getFreeSpace();
-        mSummaryController.updateBytes(usedBytes, mTotalSize);
+        final long usedBytes = totalSize - mVolume.getPath().getFreeSpace();
+        mSummaryController.updateBytes(usedBytes, totalSize);
         mPreferenceController.setVolume(mVolume);
         mPreferenceController.setSystemSize(systemSize);
         mPreferenceController.startMeasurement();
@@ -90,8 +89,6 @@ public class StorageDashboardFragment extends DashboardFragment {
         pref.setFragment("com.android.settings.deletionhelper.AutomaticStorageManagerSettings");
         pref.setIcon(R.drawable.ic_settings_storage);
         pref.setEnabled(true);
-
-
     }
 
     @Override
@@ -128,13 +125,6 @@ public class StorageDashboardFragment extends DashboardFragment {
         return controllers;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View root = super.onCreateView(inflater, container, savedInstanceState);
-        // TODO: Add loader to load the storage sizes for the StorageItemPreferenceControllers.
-        return root;
-    }
     /**
      * For Search.
      */
