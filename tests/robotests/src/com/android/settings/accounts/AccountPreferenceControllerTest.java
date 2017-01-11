@@ -20,13 +20,12 @@ import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.os.UserManager;
 import android.os.UserHandle;
+import android.os.UserManager;
+import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.PreferenceFragment;
-import android.util.SparseArray;
 
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
@@ -37,8 +36,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,6 +43,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
@@ -202,6 +202,20 @@ public class AccountPreferenceControllerTest {
         when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
                 preferenceGroup);
 
+        mController.onResume();
+
+        // Should not crash
+    }
+
+    @Test
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    public void onResume_noPreferenceManager_shouldNotCrash() {
+        when(mFragment.getPreferenceManager()).thenReturn(null);
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(1, "user 1", 0));
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
         mController.onResume();
 
         // Should not crash

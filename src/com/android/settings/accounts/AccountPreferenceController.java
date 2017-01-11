@@ -286,6 +286,9 @@ public class AccountPreferenceController extends PreferenceController
     }
 
     private void updateProfileUi(final UserInfo userInfo) {
+        if (mParent.getPreferenceManager() == null) {
+            return;
+        }
         final Context context = mContext;
         final ProfileData profileData = new ProfileData();
         profileData.userInfo = userInfo;
@@ -402,6 +405,10 @@ public class AccountPreferenceController extends PreferenceController
     }
 
     private void updateAccountTypes(ProfileData profileData) {
+        if (mParent.getPreferenceManager() == null) {
+            // This could happen if activity is finishing
+            return;
+        }
         profileData.preferenceGroup.removeAll();
         if (profileData.userInfo.isEnabled()) {
             final ArrayList<AccountTypePreference> preferences = getAccountTypePreferences(
