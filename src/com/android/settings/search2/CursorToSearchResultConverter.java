@@ -30,7 +30,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.search.Index;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,6 +40,8 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_ID;
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS;
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_SCREEN_TITLE;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_TITLE;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_SUMMARY_ON;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_CLASS_NAME;
@@ -176,7 +177,7 @@ class CursorToSearchResultConverter {
             String className, String pkgName ) {
         IntentPayload payload;
         if (TextUtils.isEmpty(action)) {
-            final String screenTitle = cursor.getString(Index.COLUMN_INDEX_SCREEN_TITLE);
+            final String screenTitle = cursor.getString(COLUMN_INDEX_SCREEN_TITLE);
             // Action is null, we will launch it as a sub-setting
             final Bundle args = new Bundle();
             args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
@@ -185,8 +186,7 @@ class CursorToSearchResultConverter {
             payload = new IntentPayload(intent);
         } else {
             final Intent intent = new Intent(action);
-            final String targetClass = cursor.getString(
-                    Index.COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS);
+            final String targetClass = cursor.getString(COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS);
             if (!TextUtils.isEmpty(pkgName) && !TextUtils.isEmpty(targetClass)) {
                 final ComponentName component = new ComponentName(pkgName, targetClass);
                 intent.setComponent(component);
