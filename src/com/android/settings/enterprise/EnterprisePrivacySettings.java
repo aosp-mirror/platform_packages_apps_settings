@@ -63,6 +63,7 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         controllers.add(new SecurityLogsPreferenceController(context));
         controllers.add(new AlwaysOnVpnPrimaryUserPreferenceController(context));
         controllers.add(new AlwaysOnVpnManagedProfilePreferenceController(context));
+        controllers.add(new GlobalHttpProxyPreferenceController(context));
         return controllers;
     }
 

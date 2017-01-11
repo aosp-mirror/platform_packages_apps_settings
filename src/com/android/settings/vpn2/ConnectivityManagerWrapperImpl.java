@@ -17,6 +17,7 @@
 package com.android.settings.vpn2;
 
 import android.net.ConnectivityManager;
+import android.net.ProxyInfo;
 
 public class ConnectivityManagerWrapperImpl implements ConnectivityManagerWrapper {
 
@@ -29,5 +30,10 @@ public class ConnectivityManagerWrapperImpl implements ConnectivityManagerWrappe
     @Override
     public String getAlwaysOnVpnPackageForUser(int userId) {
         return mCm.getAlwaysOnVpnPackageForUser(userId);
+    }
+
+    @Override
+    public ProxyInfo getGlobalProxy() {
+        return mCm.getGlobalProxy();
     }
 }

@@ -58,4 +58,9 @@ public interface EnterprisePrivacyFeatureProvider {
      * Returns whether the Profile Owner in the managed profile (if any) set an always-on VPN.
      */
     boolean isAlwaysOnVpnSetInManagedProfile();
+
+    /**
+     * Returns whether the Device Owner set a recommended global HTTP proxy.
+     */
+    boolean isGlobalHttpProxySet();
 }

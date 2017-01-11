@@ -68,6 +68,11 @@
                 android:title="@string/enterprise_privacy_always_on_vpn_work"
                 settings:allowDividerBelow="true"
                 settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="global_http_proxy"
+                android:title="@string/enterprise_privacy_global_http_proxy"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_device_access_category">
