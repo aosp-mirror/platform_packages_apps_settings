@@ -81,6 +81,8 @@ public class StorageDashboardFragment extends DashboardFragment {
         final long usedBytes = mTotalSize - mVolume.getPath().getFreeSpace();
         mSummaryController.updateBytes(usedBytes, mTotalSize);
         mPreferenceController.setVolume(mVolume);
+        mPreferenceController.setSystemSize(systemSize);
+        mPreferenceController.startMeasurement();
 
         // Initialize the footer preference to go to the smart storage management.
         final FooterPreference pref = mFooterPreferenceMixin.createFooterPreference();
@@ -119,8 +121,8 @@ public class StorageDashboardFragment extends DashboardFragment {
         controllers.add(mSummaryController);
 
         StorageManager sm = context.getSystemService(StorageManager.class);
-        mPreferenceController = new StorageItemPreferenceController(context, this, mVolume,
-                new StorageManagerVolumeProvider(sm));
+        mPreferenceController = new StorageItemPreferenceController(context, getLifecycle(), this,
+                mVolume, new StorageManagerVolumeProvider(sm));
         controllers.add(mPreferenceController);
         controllers.add(new ManageStoragePreferenceController(context));
         return controllers;
