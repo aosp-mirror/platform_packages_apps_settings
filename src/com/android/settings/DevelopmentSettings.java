@@ -475,6 +475,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBluetoothSelectA2dpBitsPerSample = addListPreference(BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY);
         mBluetoothSelectA2dpChannelMode = addListPreference(BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY);
         mBluetoothSelectA2dpLdacPlaybackQuality = addListPreference(BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY);
+        initBluetoothConfigurationValues();
 
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
@@ -668,7 +669,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             updateUsbConfigurationValues();
         }
 
-        initBluetoothConfigurationValues();
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter != null) {
             adapter.getProfileProxy(getActivity(),
