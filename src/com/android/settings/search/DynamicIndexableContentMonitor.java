@@ -36,6 +36,7 @@ import android.os.UserManager;
 import android.print.PrintManager;
 import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
+import android.provider.Settings;
 import android.provider.UserDictionary;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -382,6 +383,9 @@ public final class DynamicIndexableContentMonitor implements
     // Also it monitors user dictionary changes and updates search index.
     private static class InputMethodServicesMonitor extends ContentObserver {
 
+        private static final Uri ENABLED_INPUT_METHODS_CONTENT_URI =
+                Settings.Secure.getUriFor(Settings.Secure.ENABLED_INPUT_METHODS);
+
         // Null if not initialized.
         @Nullable private Index mIndex;
         private PackageManager mPackageManager;
@@ -439,8 +443,9 @@ public final class DynamicIndexableContentMonitor implements
             // Watch for related content URIs.
             mContentResolver.registerContentObserver(UserDictionary.Words.CONTENT_URI,
                     true /* notifyForDescendants */, this /* observer */);
-            // TODO: Should monitor android.provider.Settings.Secure.ENABLED_INPUT_METHODS and
-            // update index of AvailableVirtualKeyboardFragment and VirtualKeyboardFragment.
+            // Watch for changing enabled IMEs.
+            mContentResolver.registerContentObserver(ENABLED_INPUT_METHODS_CONTENT_URI,
+                    false /* notifyForDescendants */, this /* observer */);
         }
 
         private void buildIndex(Class<?> indexClass, boolean rebuild) {
@@ -470,7 +475,10 @@ public final class DynamicIndexableContentMonitor implements
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            if (UserDictionary.Words.CONTENT_URI.equals(uri)) {
+            if (ENABLED_INPUT_METHODS_CONTENT_URI.equals(uri)) {
+                buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
+                buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
+            } else if (UserDictionary.Words.CONTENT_URI.equals(uri)) {
                 buildIndex(InputMethodAndLanguageSettings.class, true /* rebuild */);
             }
         }
