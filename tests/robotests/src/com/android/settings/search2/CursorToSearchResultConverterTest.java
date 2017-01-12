@@ -22,8 +22,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.MatrixCursor;
 import android.graphics.drawable.Drawable;
-
 import android.util.ArrayMap;
+
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.SubSettings;
@@ -40,50 +40,30 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns;
-
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CursorToSearchResultConverterTest {
 
-    private CursorToSearchResultConverter mConverter;
-
-    private static final String[] COLUMNS = new String[]{
-            IndexColumns.DOCID,
-            IndexColumns.DATA_TITLE,
-            IndexColumns.DATA_SUMMARY_ON,
-            IndexColumns.DATA_SUMMARY_OFF,
-            IndexColumns.CLASS_NAME,
-            IndexColumns.SCREEN_TITLE,
-            IndexColumns.ICON,
-            IndexColumns.INTENT_ACTION,
-            IndexColumns.INTENT_TARGET_PACKAGE,
-            IndexColumns.INTENT_TARGET_CLASS,
-            IndexColumns.DATA_KEY_REF,
-            IndexColumns.PAYLOAD_TYPE,
-            IndexColumns.PAYLOAD
-    };
-
     private static final String ID = "id";
     private static final String[] TITLES = {"title1", "title2", "title3"};
     private static final String SUMMARY = "summary";
+    private static final String TARGET_PACKAGE = "a.b.c";
+    private static final String TARGET_CLASS = "a.b.c.class";
     private static final String QUERY = "query";
-    private final int BASE_RANK = 1;
+    private static final Intent INTENT = new Intent("com.android.settings");
+    private static final int ICON = R.drawable.ic_search_history;
+    private static final int BASE_RANK = 1;
     private static final int EXAMPLES = 3;
 
-    private static final Intent mIntent = new Intent("com.android.settings");
-    private static final int mIcon = R.drawable.ic_search_history;
-    private List<SearchResult> mResults;
-
     private Drawable mDrawable;
+    private CursorToSearchResultConverter mConverter;
 
     @Before
     public void setUp() {
         Context context = Robolectric.buildActivity(Activity.class).get();
-        mDrawable = context.getDrawable(mIcon);
-        mResults = new ArrayList<>();
+        mDrawable = context.getDrawable(ICON);
         mConverter = new CursorToSearchResultConverter(context, QUERY);
     }
 
@@ -128,6 +108,7 @@ public class CursorToSearchResultConverterTest {
         List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
             Drawable resultDrawable = results.get(i).icon;
+            assertThat(resultDrawable).isNotNull();
             assertThat(resultDrawable.toString()).isEqualTo(mDrawable.toString());
         }
     }
@@ -154,7 +135,7 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesIntentForSubSettings() {
-        MatrixCursor cursor = new MatrixCursor(COLUMNS);
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
         final String BLANK = "";
         cursor.addRow(new Object[]{
                 ID,      // Doc ID
@@ -184,13 +165,39 @@ public class CursorToSearchResultConverterTest {
         for (int i = 0; i < EXAMPLES; i++) {
             payload = (IntentPayload) results.get(i).payload;
             Intent intent = payload.intent;
-            assertThat(intent.getAction()).isEqualTo(mIntent.getAction());
+            assertThat(intent.getAction()).isEqualTo(INTENT.getAction());
         }
     }
 
     @Test
+    public void testParseCursor_MatchesIntentPayloadForExternalApps() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                null,    // class
+                TITLES[0], // Title
+                null,    // icon
+                Intent.ACTION_VIEW,   // action
+                TARGET_PACKAGE,    // target package
+                TARGET_CLASS,   // target class
+                QUERY,   // Key
+                PayloadType.INTENT,    // Payload Type
+                null // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
+        IntentPayload payload = (IntentPayload) results.get(0).payload;
+        Intent intent = payload.intent;
+
+        assertThat(intent.getComponent().getPackageName()).isEqualTo(TARGET_PACKAGE);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(TARGET_CLASS);
+    }
+
+    @Test
     public void testParseCursor_MatchesInlineSwitchPayload() {
-        MatrixCursor cursor = new MatrixCursor(COLUMNS);
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
         final String BLANK = "";
         final String uri = "test.com";
         final int type = ResultPayload.PayloadType.INLINE_SWITCH;
@@ -230,19 +237,19 @@ public class CursorToSearchResultConverterTest {
     }
 
     private MatrixCursor getDummyCursor(boolean hasIcon) {
-        MatrixCursor cursor = new MatrixCursor(COLUMNS);
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
         final String BLANK = "";
 
         for (int i = 0; i < EXAMPLES; i++) {
-            ArrayList<String> item = new ArrayList<>(COLUMNS.length);
+            ArrayList<String> item = new ArrayList<>(DatabaseResultLoader.SELECT_COLUMNS.length);
             item.add(ID + i); // Doc ID
             item.add(TITLES[i]); // Title
             item.add(SUMMARY); // Summary on
             item.add(BLANK); // summary off
             item.add(BLANK); // classname
             item.add(BLANK); // screen title
-            item.add(hasIcon ? Integer.toString(mIcon) : null); // Icon
-            item.add(mIntent.getAction()); // Intent action
+            item.add(hasIcon ? Integer.toString(ICON) : null); // Icon
+            item.add(INTENT.getAction()); // Intent action
             item.add(BLANK); // target package
             item.add(BLANK); // target class
             item.add(BLANK); // Key
