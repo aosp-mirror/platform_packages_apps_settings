@@ -73,6 +73,7 @@ import com.android.settings.sim.SimSettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
+import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 
@@ -97,10 +98,10 @@ public final class SearchIndexableResources {
     static {
         addIndex(WifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
         addIndex(NetworkDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
-        addIndex(AdvancedWifiSettings.class,
-                R.xml.wifi_advanced_settings, R.drawable.ic_settings_wireless);
-        addIndex(SavedAccessPointsWifiSettings.class,
-                R.xml.wifi_display_saved_access_points, R.drawable.ic_settings_wireless);
+        addIndex(AdvancedWifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
+        addIndex(ConfigureWifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
+        addIndex(SavedAccessPointsWifiSettings.class, NO_DATA_RES_ID,
+                R.drawable.ic_settings_wireless);
         addIndex(BluetoothSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_bluetooth);
         addIndex(SimSettings.class, NO_DATA_RES_ID, R.drawable.ic_sim_sd);
         addIndex(DataUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);

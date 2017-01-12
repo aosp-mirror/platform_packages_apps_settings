@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
@@ -37,6 +38,7 @@ import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiTracker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -205,6 +207,14 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
      */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                    boolean enabled) {
+                SearchIndexableResource sir = new SearchIndexableResource(context);
+                sir.xmlResId = R.xml.wifi_display_saved_access_points;
+                return Arrays.asList(sir);
+            }
+
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
                 final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();

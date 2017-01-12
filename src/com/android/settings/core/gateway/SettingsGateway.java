@@ -121,6 +121,7 @@ import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
+import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiAPITest;
 import com.android.settings.wifi.WifiInfo;
@@ -136,6 +137,7 @@ public class SettingsGateway {
     public static final String[] ENTRY_FRAGMENTS = {
             WirelessSettings.class.getName(),
             WifiSettings.class.getName(),
+            ConfigureWifiSettings.class.getName(),
             AdvancedWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings.class.getName(),
             BluetoothSettings.class.getName(),

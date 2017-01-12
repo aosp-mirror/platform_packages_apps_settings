@@ -57,6 +57,7 @@ import com.android.settings.sim.SimSettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
+import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 
@@ -104,6 +105,7 @@ public final class Ranking {
     static {
         // Wi-Fi
         sRankMap.put(WifiSettings.class.getName(), RANK_WIFI);
+        sRankMap.put(ConfigureWifiSettings.class.getName(), RANK_WIFI);
         sRankMap.put(AdvancedWifiSettings.class.getName(), RANK_WIFI);
         sRankMap.put(SavedAccessPointsWifiSettings.class.getName(), RANK_WIFI);
 
