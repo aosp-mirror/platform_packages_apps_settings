@@ -17,7 +17,7 @@
 package com.android.settings.wifi;
 
 import static android.provider.Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED;
-import static android.provider.Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON;
+import static android.provider.Settings.Global.WIFI_WAKEUP_ENABLED;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -42,16 +42,16 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class NotifyOpenNetworkPreferenceControllerTest {
+public class WifiWakeupPreferenceControllerTest {
 
     private Context mContext;
-    private NotifyOpenNetworksPreferenceController mController;
+    private WifiWakeupPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new NotifyOpenNetworksPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new WifiWakeupPreferenceController(mContext, mock(Lifecycle.class));
     }
 
     @Test
@@ -81,8 +81,7 @@ public class NotifyOpenNetworkPreferenceControllerTest {
         pref.setKey(mController.getPreferenceKey());
 
         assertThat(mController.handlePreferenceTreeClick(pref)).isTrue();
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0))
+        assertThat(Settings.Global.getInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 0))
                 .isEqualTo(1);
     }
 
@@ -90,8 +89,7 @@ public class NotifyOpenNetworkPreferenceControllerTest {
     public void updateState_preferenceSetCheckedAndSetEnabledWhenSettingsAreEnabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
         Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 1);
-        Settings.System.putInt(mContext.getContentResolver(),
-                WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 1);
+        Settings.System.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 1);
 
         mController.updateState(preference);
 
@@ -103,8 +101,7 @@ public class NotifyOpenNetworkPreferenceControllerTest {
     public void updateState_preferenceSetCheckedAndSetEnabledWhenSettingsAreDisabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
         Settings.System.putInt(mContext.getContentResolver(), NETWORK_RECOMMENDATIONS_ENABLED, 0);
-        Settings.System.putInt(mContext.getContentResolver(),
-                WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0);
+        Settings.System.putInt(mContext.getContentResolver(), WIFI_WAKEUP_ENABLED, 0);
 
         mController.updateState(preference);
 
