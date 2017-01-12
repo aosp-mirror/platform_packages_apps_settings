@@ -106,10 +106,8 @@ public class StorageItemPreferenceControllerTest {
                 any(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
-        assertThat(intent.getAction()).isEqualTo(DocumentsContract.ACTION_BROWSE);
-        assertThat(intent.getData()).isEqualTo(DocumentsContract.buildRootUri(
-                "com.android.providers.media.documents",
-                "images_root"));
+        assertThat(intent.getType()).isEqualTo("image/*");
+        assertThat(intent.getAction()).isEqualTo(android.content.Intent.ACTION_VIEW);
     }
 
     @Test
