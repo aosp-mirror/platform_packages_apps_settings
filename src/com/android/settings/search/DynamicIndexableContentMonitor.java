@@ -47,8 +47,10 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
+import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.print.PrintSettingsFragment;
 
 import java.util.ArrayList;
@@ -418,7 +420,11 @@ public final class DynamicIndexableContentMonitor implements
             mPackageManager = context.getPackageManager();
             mContentResolver = context.getContentResolver();
             mInputMethodServices.clear();
+            // Build index of {@link UserDictionary}.
             buildIndex(InputMethodAndLanguageSettings.class, true /* rebuild */);
+            // Build index of IMEs.
+            buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
+            buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
 
             // Cache IME service packages to know when they go away.
             final InputMethodManager inputMethodManager = (InputMethodManager) context
@@ -451,15 +457,15 @@ public final class DynamicIndexableContentMonitor implements
                     .queryIntentServices(intent, 0 /* flags */);
             if (services == null || services.isEmpty()) return;
             mInputMethodServices.add(packageName);
-            // TODO: Fix landing page to VirtualKeyboardFragment.
-            buildIndex(InputMethodAndLanguageSettings.class, false /* rebuild */);
+            buildIndex(VirtualKeyboardFragment.class, false /* rebuild */);
+            buildIndex(AvailableVirtualKeyboardFragment.class, false /* rebuild */);
         }
 
         synchronized void onPackageUnavailable(String packageName) {
             if (mIndex == null) return;
             if (!mInputMethodServices.remove(packageName)) return;
-            // TODO: Fix landing page to AvailableVirtualKeyboardFragment.
-            buildIndex(InputMethodAndLanguageSettings.class, true /* rebuild */);
+            buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
+            buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
         }
 
         @Override
