@@ -140,6 +140,8 @@ public class StorageItemPreferenceControllerTest {
         assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
                 ManageApplications.class.getName());
+        assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.apps_storage);
     }
 
     @Test
@@ -156,6 +158,24 @@ public class StorageItemPreferenceControllerTest {
         Intent browseIntent = mVolume.buildBrowseIntent();
         assertThat(intent.getAction()).isEqualTo(browseIntent.getAction());
         assertThat(intent.getData()).isEqualTo(browseIntent.getData());
+    }
+
+    @Test
+    public void testClickGames() {
+        mPreference.setKey("pref_games");
+        mController.handlePreferenceTreeClick(mPreference);
+
+        final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                any(UserHandle.class));
+
+        Intent intent = argumentCaptor.getValue();
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
+                ManageApplications.class.getName());
+        assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.game_storage_settings);
     }
 
     @Test
