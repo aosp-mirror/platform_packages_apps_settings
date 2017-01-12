@@ -3032,7 +3032,7 @@
 
         <activity android:name=".Settings$ConnectedDeviceDashboardActivity"
                   android:label="@string/connected_devices_dashboard_title"
-                  android:icon="@drawable/ic_bt_laptop">
+                  android:icon="@drawable/ic_devices_other">
             <intent-filter android:priority="10">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3044,7 +3044,7 @@
 
         <activity android:name=".Settings$AppAndNotificationDashboardActivity"
                   android:label="@string/app_and_notification_dashboard_title"
-                  android:icon="@drawable/ic_settings_applications">
+                  android:icon="@drawable/ic_apps">
             <intent-filter android:priority="9">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3170,7 +3170,7 @@
 
         <activity android:name=".Settings$SupportDashboardActivity"
                   android:label="@string/page_tab_title_support"
-                  android:icon="@drawable/ic_support_24dp">
+                  android:icon="@drawable/ic_help">
             <intent-filter android:priority="0">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3338,7 +3338,8 @@
         </activity-alias>
 
         <activity-alias android:name="AppNotificationDashboardAlias"
-                        android:targetActivity="Settings$NotificationAppListActivity">
+                        android:targetActivity="Settings$NotificationAppListActivity"
+                        android:icon="@drawable/ic_notifications">
             <intent-filter android:priority="150">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3346,6 +3347,7 @@
                        android:value="com.android.settings.category.ia.apps"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.NotificationApps"/>
+
         </activity-alias>
 
         <activity-alias android:name="ConfigureNotificationDashboardAlias"
@@ -3375,7 +3377,7 @@
         <activity-alias android:name="AppDefaultDashboardAlias"
                         android:targetActivity="Settings$AdvancedAppsActivity"
                         android:label="@string/app_default_dashboard_title"
-                        android:icon="@drawable/ic_settings_applications">
+                        android:icon="@drawable/ic_adb">
             <intent-filter android:priority="130">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
