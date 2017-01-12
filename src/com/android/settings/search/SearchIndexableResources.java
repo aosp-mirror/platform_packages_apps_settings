@@ -55,6 +55,7 @@ import com.android.settings.gestures.GestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
+import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.NetworkDashboardFragment;
@@ -141,6 +142,7 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_accounts);
         addIndex(InputMethodAndLanguageSettings.class,
                 NO_DATA_RES_ID, R.drawable.ic_settings_language);
+        addIndex(PhysicalKeyboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(PrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_backup);
         addIndex(DateTimeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_date_time);
         addIndex(AccessibilitySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accessibility);
