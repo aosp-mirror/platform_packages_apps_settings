@@ -40,16 +40,46 @@ public interface SurveyFeatureProvider {
      *
      * @param activity The host activity to show the survey in.
      * @param surveyId A unique Id representing a survey to download.
+     * @return A boolean indicating if a survey was shown or not.
      */
-    void showSurveyIfAvailable(Activity activity, String surveyId);
+    boolean showSurveyIfAvailable(Activity activity, String surveyId);
 
     /**
      * A helper method to get the surveyId. Implementers should create a mapping of
      * keys to surveyIds and provide them via this function.
      *
      * @param context A valid context.
-     * @param key The key to get the surveyId for.
+     * @param simpleKey The simple name of the key to get the surveyId for.
      * @return The unique Id as a string or null on error.
      */
-    String getSurveyId(Context context, String key);
+    String getSurveyId(Context context, String simpleKey);
+
+    /**
+     * Removes the survey for {@code siteId} if it expired, then returns the expiration date (as a
+     * unix timestamp) for the remaining survey should it exist and be ready to show. Returns -1 if
+     * no valid survey exists after removing the potentially expired one.
+     *
+     * @param context the calling context.
+     * @param surveyId the site ID.
+     * @return the unix timestamp for the available survey for the given {@coe siteId} or -1 if
+     * there is none available.
+     */
+    long getSurveyExpirationDate(Context context, String surveyId);
+
+    /**
+     * Registers an activity to show surveys/prompts as soon as they are downloaded. The receiver
+     * should be unregistered prior to destroying the activity to avoid undefined behavior by
+     * calling {@link #unregisterReceiver(Activity, BroadcastReceiver)}.
+     * @param activity The activity that should show surveys once they are downloaded.
+     * @return the broadcast receiver listening for survey downloads. Must be unregistered before
+     * leaving the activity.
+     */
+    BroadcastReceiver createAndRegisterReceiver(Activity activity);
+
+    /**
+     * Unregisters the broadcast receiver for this activity. Should only be called once per activity
+     * after a call to {@link #createAndRegisterReceiver(Activity)}.
+     * @param activity The activity that was used to register the BroadcastReceiver.
+     */
+    void unregisterReceiver(Activity activity, BroadcastReceiver receiver);
 }
