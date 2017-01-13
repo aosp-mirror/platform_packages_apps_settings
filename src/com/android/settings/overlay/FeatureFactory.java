@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.dashboard.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
@@ -66,6 +67,8 @@ public abstract class FeatureFactory {
         if (DEBUG) Log.d(LOG_TAG, "started " + sFactory.getClass().getSimpleName());
         return sFactory;
     }
+
+    public abstract SuggestionFeatureProvider getSuggestionFeatureProvider();
 
     public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
 

@@ -30,16 +30,18 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
+import com.android.settings.dashboard.SuggestionFeatureProvider;
+import com.android.settings.dashboard.SuggestionFeatureProviderImpl;
 import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
-import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.security.SecurityFeatureProviderImpl;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.search2.SearchFeatureProviderImpl;
+import com.android.settings.security.SecurityFeatureProvider;
+import com.android.settings.security.SecurityFeatureProviderImpl;
 import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
 
 /**
@@ -55,6 +57,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private EnterprisePrivacyFeatureProvider mEnterprisePrivacyFeatureProvider;
     private SearchFeatureProvider mSearchFeatureProvider;
     private SecurityFeatureProvider mSecurityFeatureProvider;
+    private SuggestionFeatureProvider mSuggestionFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -135,5 +138,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mSecurityFeatureProvider = new SecurityFeatureProviderImpl();
         }
         return mSecurityFeatureProvider;
+    }
+
+    @Override
+    public SuggestionFeatureProvider getSuggestionFeatureProvider() {
+        if (mSuggestionFeatureProvider == null) {
+            mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl();
+        }
+        return mSuggestionFeatureProvider;
     }
 }
