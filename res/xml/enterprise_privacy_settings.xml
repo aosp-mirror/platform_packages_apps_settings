@@ -59,6 +59,15 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_exposure_changes_category">
+        <com.android.settings.DividerPreference
+                android:key="always_on_vpn_primary_user"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="always_on_vpn_managed_profile"
+                android:title="@string/enterprise_privacy_always_on_vpn_work"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_device_access_category">

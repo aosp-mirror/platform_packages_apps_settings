@@ -17,12 +17,15 @@
 package com.android.settings.enterprise;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.vpn2.ConnectivityManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +34,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
@@ -45,9 +50,16 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
     private final ComponentName DEVICE_OWNER = new ComponentName("dummy", "component");
     private final Date TIMESTAMP = new Date(2011, 11, 11);
+    private final int MY_USER_ID = UserHandle.myUserId();
+    private final int MANAGED_PROFILE_USER_ID = MY_USER_ID + 1;
+    private final String VPN_PACKAGE_ID = "com.example.vpn";
+
+    private List<UserInfo> mProfiles = new ArrayList();
 
     private @Mock DevicePolicyManagerWrapper mDevicePolicyManager;
     private @Mock PackageManagerWrapper mPackageManager;
+    private @Mock UserManager mUserManager;
+    private @Mock ConnectivityManagerWrapper mConnectivityManger;
 
     private EnterprisePrivacyFeatureProvider mProvider;
 
@@ -57,8 +69,11 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN))
                 .thenReturn(true);
+        when(mUserManager.getProfiles(MY_USER_ID)).thenReturn(mProfiles);
+        mProfiles.add(new UserInfo(MY_USER_ID, "", "", 0 /* flags */));
 
-        mProvider = new EnterprisePrivacyFeatureProviderImpl(mDevicePolicyManager, mPackageManager);
+        mProvider = new EnterprisePrivacyFeatureProviderImpl(mDevicePolicyManager, mPackageManager,
+                mUserManager, mConnectivityManger);
     }
 
     @Test
@@ -68,6 +83,15 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_OWNER);
         assertThat(mProvider.hasDeviceOwner()).isTrue();
+    }
+
+    @Test
+    public void testIsInCompMode() {
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_OWNER);
+        assertThat(mProvider.isInCompMode()).isFalse();
+
+        mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
+        assertThat(mProvider.isInCompMode()).isTrue();
     }
 
     @Test
@@ -96,5 +120,30 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
         when(mDevicePolicyManager.getLastNetworkLogRetrievalTime()).thenReturn(TIMESTAMP.getTime());
         assertThat(mProvider.getLastNetworkLogRetrievalTime()).isEqualTo(TIMESTAMP);
+    }
+
+    @Test
+    public void testIsAlwaysOnVpnSetInPrimaryUser() {
+        when(mConnectivityManger.getAlwaysOnVpnPackageForUser(MY_USER_ID)).thenReturn(null);
+        assertThat(mProvider.isAlwaysOnVpnSetInPrimaryUser()).isFalse();
+
+        when(mConnectivityManger.getAlwaysOnVpnPackageForUser(MY_USER_ID))
+                .thenReturn(VPN_PACKAGE_ID);
+        assertThat(mProvider.isAlwaysOnVpnSetInPrimaryUser()).isTrue();
+    }
+
+    @Test
+    public void testIsAlwaysOnVpnSetInManagedProfileProfile() {
+        assertThat(mProvider.isAlwaysOnVpnSetInManagedProfile()).isFalse();
+
+        mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
+
+        when(mConnectivityManger.getAlwaysOnVpnPackageForUser(MANAGED_PROFILE_USER_ID))
+                .thenReturn(null);
+        assertThat(mProvider.isAlwaysOnVpnSetInManagedProfile()).isFalse();
+
+        when(mConnectivityManger.getAlwaysOnVpnPackageForUser(MANAGED_PROFILE_USER_ID))
+                .thenReturn(VPN_PACKAGE_ID);
+        assertThat(mProvider.isAlwaysOnVpnSetInManagedProfile()).isTrue();
     }
 }
