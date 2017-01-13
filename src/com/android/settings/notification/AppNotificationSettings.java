@@ -19,7 +19,6 @@ package com.android.settings.notification;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -42,7 +41,11 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 /** These settings are per app, so should not be returned in global search results. */
 public class AppNotificationSettings extends NotificationSettingsBase {
@@ -94,6 +97,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             rows.put(mAppRow.pkg, mAppRow);
             collectConfigActivities(rows);
             mChannelList = mBackend.getChannels(mPkg, mUid).getList();
+            Collections.sort(mChannelList, mChannelComparator);
 
             if (mChannelList.isEmpty()) {
                 setVisible(mChannels, false);
@@ -105,16 +109,21 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     channelPref.setDisabledByAdmin(mSuspendedAppsAdmin);
                     channelPref.setKey(channel.getId());
                     channelPref.setTitle(channel.getName());
-                    Bundle channelArgs = new Bundle();
-                    channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-                    channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
-                    channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
-                    channelArgs.putString(ARG_CHANNEL, channel.getId());
 
-                    Intent topicIntent = Utils.onBuildStartFragmentIntent(getActivity(),
-                            ChannelNotificationSettings.class.getName(),
-                            channelArgs, null, 0, null, false);
-                    channelPref.setIntent(topicIntent);
+                    if (channel.isDeleted()) {
+                        channelPref.setTitle(
+                                getString(R.string.deleted_channel_name, channel.getName()));
+                    } else {
+                        Bundle channelArgs = new Bundle();
+                        channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
+                        channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
+                        channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
+                        channelArgs.putString(ARG_CHANNEL, channel.getId());
+                        Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
+                                ChannelNotificationSettings.class.getName(),
+                                channelArgs, null, 0, null, false);
+                        channelPref.setIntent(channelIntent);
+                    }
                     mChannels.addPreference(channelPref);
                 }
             }
@@ -212,4 +221,20 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     .setClassName(activityInfo.packageName, activityInfo.name);
         }
     }
+
+    private Comparator<NotificationChannel> mChannelComparator =
+            new Comparator<NotificationChannel>() {
+        private final Collator sCollator = Collator.getInstance();
+
+        @Override
+        public int compare(NotificationChannel left, NotificationChannel right) {
+            if (left.isDeleted() != right.isDeleted()) {
+                return Boolean.compare(left.isDeleted(), right.isDeleted());
+            }
+            if (!Objects.equals(left.getName(), right.getName())) {
+                return sCollator.compare(left.getName().toString(), right.getName().toString());
+            }
+            return left.getId().compareTo(right.getId());
+        }
+    };
 }
