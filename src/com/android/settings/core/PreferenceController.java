@@ -16,56 +16,20 @@
 package com.android.settings.core;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search2.ResultPayload;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
 /**
  * A controller that manages event for preference.
  */
-public abstract class PreferenceController {
-
-    protected final Context mContext;
+public abstract class PreferenceController extends AbstractPreferenceController {
 
     public PreferenceController(Context context) {
-        mContext = context;
-    }
-
-    /**
-     * Displays preference in this controller.
-     */
-    public void displayPreference(PreferenceScreen screen) {
-        if (isAvailable()) {
-            if (this instanceof Preference.OnPreferenceChangeListener) {
-                final Preference preference = screen.findPreference(getPreferenceKey());
-                preference.setOnPreferenceChangeListener(
-                        (Preference.OnPreferenceChangeListener) this);
-            }
-        } else {
-            removePreference(screen, getPreferenceKey());
-        }
-    }
-
-    /**
-     * Updates the current status of preference (summary, switch state, etc)
-     */
-    public void updateState(Preference preference) {
-
-    }
-
-    /**
-     * Updates non-indexable keys for search provider.
-     *
-     * Called by SearchIndexProvider#getNonIndexableKeys
-     */
-    public void updateNonIndexableKeys(List<String> keys) {
-        if (!isAvailable()) {
-            keys.add(getPreferenceKey());
-        }
+        super(context);
     }
 
     /**
@@ -74,36 +38,6 @@ public abstract class PreferenceController {
      * Called by SearchIndexProvider#getRawDataToIndex
      */
     public void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
-    }
-
-    /**
-     * Returns true if preference is available (should be displayed)
-     */
-    public abstract boolean isAvailable();
-
-    /**
-     * Handles preference tree click
-     *
-     * @param preference the preference being clicked
-     * @return true if click is handled
-     */
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
-    }
-
-    /**
-     * Returns the key for this preference.
-     */
-    public abstract String getPreferenceKey();
-
-    /**
-     * Removes preference from screen.
-     */
-    protected final void removePreference(PreferenceScreen screen, String key) {
-        Preference pref = screen.findPreference(key);
-        if (pref != null) {
-            screen.removePreference(pref);
-        }
     }
 
     /**
