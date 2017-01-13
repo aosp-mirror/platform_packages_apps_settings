@@ -17,6 +17,7 @@ package com.android.settings.dashboard;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -130,9 +132,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void setCategoriesAndSuggestions(List<DashboardCategory> categories,
             List<Tile> suggestions) {
         // TODO: Better place for tinting?
-        TypedValue tintColor = new TypedValue();
-        mContext.getTheme().resolveAttribute(com.android.internal.R.attr.colorAccent,
-                tintColor, true);
+        final TypedArray a = mContext.obtainStyledAttributes(new int[] {
+            FeatureFactory.getFactory(mContext).getDashboardFeatureProvider(mContext).isEnabled()
+                ? android.R.attr.colorControlNormal : android.R.attr.colorAccent });
+        int tintColor = a.getColor(0, mContext.getColor(android.R.color.white));
+        a.recycle();
         for (int i = 0; i < categories.size(); i++) {
             for (int j = 0; j < categories.get(i).tiles.size(); j++) {
                 final Tile tile = categories.get(i).tiles.get(j);
@@ -141,7 +145,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                         tile.intent.getComponent().getPackageName())) {
                     // If this drawable is coming from outside Settings, tint it to match the
                     // color.
-                    tile.icon.setTint(tintColor.data);
+                    tile.icon.setTint(tintColor);
                 }
             }
         }

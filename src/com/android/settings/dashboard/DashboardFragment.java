@@ -17,6 +17,7 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -298,8 +299,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         if (mSummaryLoader != null) {
             mSummaryLoader.release();
         }
-        mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
+        final Activity activity = getActivity();
+        mSummaryLoader = new SummaryLoader(activity, getCategoryKey());
         mSummaryLoader.setSummaryConsumer(this);
+        final TypedArray a = activity.obtainStyledAttributes(new int[] {
+            mDashboardFeatureProvider.isEnabled() ? android.R.attr.colorControlNormal
+                : android.R.attr.colorAccent});
+        final int tintColor = a.getColor(0, activity.getColor(android.R.color.white));
+        a.recycle();
+        final String pkgName = activity.getPackageName();
         // Install dashboard tiles.
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
@@ -310,16 +318,20 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             if (!displayTile(tile)) {
                 continue;
             }
+            if (!pkgName.equals(tile.intent.getComponent().getPackageName())) {
+                // If this drawable is coming from outside Settings, tint it to match the color.
+                tile.icon.setTint(tintColor);
+            }
             if (mDashboardTilePrefKeys.contains(key)) {
                 // Have the key already, will rebind.
                 final Preference preference = mProgressiveDisclosureMixin.findPreference(
                         screen, key);
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), preference, tile, key,
+                mDashboardFeatureProvider.bindPreferenceToTile(activity, preference, tile, key,
                         mPlaceholderPreferenceController.getOrder());
             } else {
                 // Don't have this key, add it.
                 final Preference pref = new Preference(getPrefContext());
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), pref, tile, key,
+                mDashboardFeatureProvider.bindPreferenceToTile(activity, pref, tile, key,
                         mPlaceholderPreferenceController.getOrder());
                 mProgressiveDisclosureMixin.addPreference(screen, pref);
                 mDashboardTilePrefKeys.add(key);
