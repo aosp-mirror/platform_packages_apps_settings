@@ -62,7 +62,8 @@ public class StorageDashboardFragment extends DashboardFragment {
 
         // Initialize the storage sizes that we can quickly calc.
         StorageManager sm = context.getSystemService(StorageManager.class);
-        mVolume = sm.findVolumeById(VolumeInfo.ID_PRIVATE_INTERNAL);
+        String volumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
+        mVolume = sm.findVolumeById(volumeId);
         if (!isVolumeValid()) {
             getActivity().finish();
             return;
