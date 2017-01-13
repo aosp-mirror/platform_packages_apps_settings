@@ -120,7 +120,7 @@
          layouts against a remote context using our local theme colors. Due to the implementation
          details of Theme, we can't reference any local resources and MUST instead use the values
          directly. So use #ff263238 instead of @color/theme_primary and so on. -->
-    <style name="Theme.SettingsBase" parent="@*android:style/Theme.DeviceDefault.Settings.LightActionBar" />
+    <style name="Theme.SettingsBase" parent="@android:style/Theme.DeviceDefault.Settings" />
 
     <style name="Theme.Settings" parent="Theme.SettingsBase">
         <item name="preferenceTheme">@style/PreferenceTheme</item>
@@ -141,7 +141,6 @@
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
-        <item name="*android:actionBarSize">@dimen/actionbar_size</item>
 
         <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
 
@@ -154,8 +153,6 @@
         <item name="*android:regularColor">@color/lock_pattern_view_regular_color</item>
         <item name="*android:successColor">@color/lock_pattern_view_success_color</item>
         <item name="*android:errorColor">@color/lock_pattern_view_error_color</item>
-
-        <item name="android:statusBarColor">@color/status_bar_color</item>
     </style>
 
     <style name="Theme.SubSettings" parent="Theme.Settings">
@@ -175,7 +172,7 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="Theme.ActionBar" parent="@android:style/Widget.DeviceDefault.Light.ActionBar">
+    <style name="Theme.ActionBar" parent="@android:style/Widget.Material.ActionBar.Solid">
         <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     </style>
 
@@ -183,16 +180,16 @@
         <item name="android:contentInsetStart">@dimen/actionbar_subsettings_contentInsetStart</item>
     </style>
 
-    <style name="ThemeOverlay.SwitchBar.Settings" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar.Accent">
+    <style name="ThemeOverlay.SwitchBar.Settings" parent="@android:style/ThemeOverlay.Material.ActionBar">
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
-        <item name="switchBarBackgroundColor">?android:attr/colorBackground</item>
+        <item name="switchBarBackgroundColor">?android:attr/colorSecondary</item>
     </style>
 
-    <style name="ThemeOverlay.SwitchBar.SubSettings" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar.Accent">
+    <style name="ThemeOverlay.SwitchBar.SubSettings" parent="@android:style/ThemeOverlay.Material.ActionBar">
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
-        <item name="switchBarBackgroundColor">?android:attr/colorBackground</item>
+        <item name="switchBarBackgroundColor">?android:attr/colorSecondary</item>
     </style>
 
     <style name="Theme.DialogWhenLarge" parent="@*android:style/Theme.DeviceDefault.Settings.DialogWhenLarge">
@@ -217,7 +214,7 @@
     <style name="Theme.SubSettingsDialogWhenLarge" parent="Theme.DialogWhenLarge">
         <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="android:actionBarWidgetTheme">@null</item>
-        <item name="android:actionBarTheme">@*android:style/ThemeOverlay.DeviceDefault.ActionBar.Accent</item>
+        <item name="android:actionBarTheme">@android:style/ThemeOverlay.Material.ActionBar</item>
         <item name="preferenceBackgroundColor">@drawable/preference_background</item>
     </style>
 
