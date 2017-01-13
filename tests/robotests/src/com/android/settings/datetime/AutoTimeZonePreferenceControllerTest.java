@@ -55,6 +55,7 @@ public class AutoTimeZonePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ShadowApplication.getInstance().setSystemService(Context.CONNECTIVITY_SERVICE, mCm);
         mContext = ShadowApplication.getInstance().getApplicationContext();
         mPreference = new Preference(mContext);
         when(mMockContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(mCm);
@@ -85,6 +86,24 @@ public class AutoTimeZonePreferenceControllerTest {
                 mMockContext, null /* callback */, false /* isFromSUW */);
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isFromSUW_notEnable() {
+        mController = new AutoTimeZonePreferenceController(
+            mMockContext, null /* callback */, true /* isFromSUW */);
+
+        assertThat(mController.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void isWifiOnly_notEnable() {
+        when(mCm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(false);
+
+        mController = new AutoTimeZonePreferenceController(
+            mMockContext, null /* callback */, false /* isFromSUW */);
+
+        assertThat(mController.isEnabled()).isFalse();
     }
 
     @Test

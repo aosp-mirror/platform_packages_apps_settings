@@ -67,7 +67,7 @@ public class AutoTimeZonePreferenceController extends PreferenceController
     }
 
     public boolean isEnabled() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
+        return isAvailable() && Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.AUTO_TIME_ZONE, 0) > 0;
     }
 }
