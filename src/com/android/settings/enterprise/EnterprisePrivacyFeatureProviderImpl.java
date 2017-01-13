@@ -96,4 +96,9 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         return managedProfileUserId != -1 &&
                 VpnUtils.isAlwaysOnVpnSet(mCm, managedProfileUserId);
     }
+
+    @Override
+    public boolean isGlobalHttpProxySet() {
+        return mCm.getGlobalProxy() != null;
+    }
 }

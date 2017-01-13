@@ -16,6 +16,8 @@
 
 package com.android.settings.vpn2;
 
+import android.net.ProxyInfo;
+
 /**
  * This interface replicates a subset of the android.net.ConnectivityManager (CM). The interface
  * exists so that we can use a thin wrapper around the CM in production code and a mock in tests.
@@ -30,4 +32,11 @@ public interface ConnectivityManagerWrapper {
      * @see android.net.ConnectivityManager#getAlwaysOnVpnPackageForUser
      */
    String getAlwaysOnVpnPackageForUser(int userId);
+
+    /**
+     * Calls {@code ConnectivityManager.getGlobalProxy()}.
+     *
+     * @see android.net.ConnectivityManager#getGlobalProxy
+     */
+   ProxyInfo getGlobalProxy();
 }
