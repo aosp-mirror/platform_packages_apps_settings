@@ -17,7 +17,6 @@
 
 package com.android.settings.search;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -28,7 +27,7 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search2.InlineSwitchPayload;
 import com.android.settings.search2.InlineSwitchViewHolder;
-import com.android.settings.search2.IntentPayload;
+import com.android.settings.search2.SearchFragment;
 import com.android.settings.search2.SearchResult;
 
 import org.junit.Before;
@@ -53,7 +52,7 @@ public class InlineSwitchViewHolderTest {
     private static final String SUMMARY = "summary";
 
     @Mock
-    private Fragment mFragment;
+    private SearchFragment mFragment;
 
     @Mock
     private InlineSwitchPayload mPayload;
@@ -97,7 +96,7 @@ public class InlineSwitchViewHolderTest {
                 .addSummary(SUMMARY)
                 .addRank(1)
                 .addPayload(new InlineSwitchPayload("", 0, null))
-                .addBreadcrumbs(new ArrayList<String>())
+                .addBreadcrumbs(new ArrayList<>())
                 .addIcon(mIcon)
                 .addPayload(mPayload);
 

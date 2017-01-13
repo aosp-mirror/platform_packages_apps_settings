@@ -17,7 +17,6 @@
 
 package com.android.settings.search;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -29,6 +28,7 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.IntentSearchViewHolder;
+import com.android.settings.search2.SearchFragment;
 import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
 
@@ -54,7 +54,7 @@ public class IntentSearchViewHolderTest {
     private static final String SUMMARY = "summary";
 
     @Mock
-    private Fragment mFragment;
+    private SearchFragment mFragment;
     private IntentSearchViewHolder mHolder;
     private Drawable mIcon;
 
@@ -84,6 +84,8 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.titleView.getText()).isEqualTo(TITLE);
         assertThat(mHolder.summaryView.getText()).isEqualTo(SUMMARY);
         assertThat(mHolder.iconView.getDrawable()).isEqualTo(mIcon);
+
+        verify(mFragment).onSearchResultClicked();
         verify(mFragment).startActivity(any(Intent.class));
     }
 
@@ -93,7 +95,7 @@ public class IntentSearchViewHolderTest {
                 .addSummary(SUMMARY)
                 .addRank(1)
                 .addPayload(new IntentPayload(null))
-                .addBreadcrumbs(new ArrayList<String>())
+                .addBreadcrumbs(new ArrayList<>())
                 .addIcon(mIcon);
 
         return builder.build();

@@ -17,14 +17,11 @@
 
 package com.android.settings.search2;
 
-import android.app.Fragment;
-import android.util.Log;
+import android.content.Context;
 import android.view.View;
-import android.view.ViewParent;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.content.Context;
 
 import com.android.internal.widget.PreferenceImageView;
 import com.android.settings.R;
@@ -52,7 +49,7 @@ public class InlineSwitchViewHolder extends SearchViewHolder {
     }
 
     @Override
-    public void onBind(Fragment fragment, SearchResult result) {
+    public void onBind(SearchFragment fragment, SearchResult result) {
         if (mContext == null) {
             return;
         }
@@ -62,6 +59,7 @@ public class InlineSwitchViewHolder extends SearchViewHolder {
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                fragment.onSearchResultClicked();
                 payload.setSwitchValue(mContext, isChecked);
             }
         });

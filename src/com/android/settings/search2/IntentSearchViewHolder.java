@@ -15,7 +15,6 @@
  */
 package com.android.settings.search2;
 
-import android.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,7 +39,7 @@ public class IntentSearchViewHolder extends SearchViewHolder {
     }
 
     @Override
-    public void onBind(final Fragment fragment, final SearchResult result) {
+    public void onBind(final SearchFragment fragment, final SearchResult result) {
         titleView.setText(result.title);
         summaryView.setText(result.summary);
         iconView.setImageDrawable(result.icon);
@@ -50,6 +49,7 @@ public class IntentSearchViewHolder extends SearchViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fragment.onSearchResultClicked();
                 fragment.startActivity(((IntentPayload) result.payload).intent);
             }
         });

@@ -35,23 +35,33 @@ import android.widget.SearchView;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
 
 public class SearchFragment extends InstrumentedFragment implements
         SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<List<SearchResult>> {
+    private static final String TAG = "SearchFragment";
 
     // State values
-    static final String STATE_QUERY = "query";
+    private static final String STATE_QUERY = "state_query";
+    private static final String STATE_NEVER_ENTERED_QUERY = "state_never_entered_query";
+    private static final String STATE_RESULT_CLICK_COUNT = "state_result_click_count";
 
     // Loader IDs
     private static final int LOADER_ID_DATABASE = 0;
     private static final int LOADER_ID_INSTALLED_APPS = 1;
 
-    @VisibleForTesting
-    String mQuery;
+    // Logging
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    static final String RESULT_CLICK_COUNT = "settings_search_result_click_count";
 
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    String mQuery;
+    private boolean mNeverEnteredQuery = true;
+    private int mResultClickCount;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private SearchFeatureProvider mSearchFeatureProvider;
 
     private SearchResultsAdapter mSearchAdapter;
@@ -65,8 +75,8 @@ public class SearchFragment extends InstrumentedFragment implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mSearchFeatureProvider = FeatureFactory.getFactory(context)
-                .getSearchFeatureProvider();
+        mSearchFeatureProvider = FeatureFactory.getFactory(context).getSearchFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -76,6 +86,8 @@ public class SearchFragment extends InstrumentedFragment implements
         mSearchAdapter = new SearchResultsAdapter(this);
         if (savedInstanceState != null) {
             mQuery = savedInstanceState.getString(STATE_QUERY);
+            mNeverEnteredQuery = savedInstanceState.getBoolean(STATE_NEVER_ENTERED_QUERY);
+            mResultClickCount = savedInstanceState.getInt(STATE_RESULT_CLICK_COUNT);
             final LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(LOADER_ID_DATABASE, null, this);
             loaderManager.initLoader(LOADER_ID_INSTALLED_APPS, null, this);
@@ -97,9 +109,24 @@ public class SearchFragment extends InstrumentedFragment implements
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        final Activity activity = getActivity();
+        if (activity != null && activity.isFinishing()) {
+            mMetricsFeatureProvider.histogram(activity, RESULT_CLICK_COUNT, mResultClickCount);
+            if (mNeverEnteredQuery) {
+                mMetricsFeatureProvider.action(activity,
+                        MetricsProto.MetricsEvent.ACTION_LEAVE_SEARCH_RESULT_WITHOUT_QUERY);
+            }
+        }
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(STATE_QUERY, mQuery);
+        outState.putBoolean(STATE_NEVER_ENTERED_QUERY, mNeverEnteredQuery);
+        outState.putInt(STATE_RESULT_CLICK_COUNT, mResultClickCount);
     }
 
     @Override
@@ -107,6 +134,8 @@ public class SearchFragment extends InstrumentedFragment implements
         if (TextUtils.equals(query, mQuery)) {
             return true;
         }
+        mResultClickCount = 0;
+        mNeverEnteredQuery = false;
         mQuery = query;
         mSearchAdapter.clearResults();
 
@@ -145,6 +174,10 @@ public class SearchFragment extends InstrumentedFragment implements
 
     @Override
     public void onLoaderReset(Loader<List<SearchResult>> loader) {
+    }
+
+    public void onSearchResultClicked() {
+        mResultClickCount++;
     }
 
     private void restartLoaders() {
