@@ -58,6 +58,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserDialogs;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -395,6 +398,7 @@ public class DeviceAdminAdd extends Activity {
 
     void addAndFinish() {
         try {
+            logSpecialPermissionChange(true, mDeviceAdmin.getComponent().getPackageName());
             mDPM.setActiveAdmin(mDeviceAdmin.getComponent(), mRefreshing);
             EventLog.writeEvent(EventLogTags.EXP_DET_DEVICE_ADMIN_ACTIVATED_BY_USER,
                 mDeviceAdmin.getActivityInfo().applicationInfo.uid);
@@ -429,6 +433,7 @@ public class DeviceAdminAdd extends Activity {
                 ActivityManager.getService().resumeAppSwitches();
             } catch (RemoteException e) {
             }
+            logSpecialPermissionChange(false, mDeviceAdmin.getComponent().getPackageName());
             mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
             finish();
         } else {
@@ -442,6 +447,12 @@ public class DeviceAdminAdd extends Activity {
                     DeviceAdminReceiver.EXTRA_DISABLE_WARNING, msg);
             showDialog(DIALOG_WARNING, args);
         }
+    }
+
+    void logSpecialPermissionChange(boolean allow, String packageName) {
+        int logCategory = allow ? MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_ALLOW :
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_DENY;
+        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this, logCategory, packageName);
     }
 
     @Override

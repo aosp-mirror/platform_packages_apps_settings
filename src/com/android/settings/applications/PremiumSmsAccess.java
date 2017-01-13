@@ -24,13 +24,17 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
+
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.DividerPreference;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.applications.AppStateSmsPremBridge.SmsState;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.notification.EmptyTextSettings;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
@@ -81,9 +85,31 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         PremiumSmsPreference pref = (PremiumSmsPreference) preference;
-        mSmsBackend.setSmsState(pref.mAppEntry.info.packageName,
-                Integer.parseInt((String) newValue));
+        int smsState = Integer.parseInt((String) newValue);
+        logSpecialPermissionChange(smsState, pref.mAppEntry.info.packageName);
+        mSmsBackend.setSmsState(pref.mAppEntry.info.packageName, smsState);
         return true;
+    }
+
+    @VisibleForTesting
+    void logSpecialPermissionChange(int smsState, String packageName) {
+        int category = SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN;
+        switch (smsState) {
+            case SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ASK_USER:
+                category = MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ASK;
+                break;
+            case SmsUsageMonitor.PREMIUM_SMS_PERMISSION_NEVER_ALLOW:
+                category = MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_DENY;
+                break;
+            case SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW:
+                category = MetricsProto.MetricsEvent.
+                        APP_SPECIAL_PERMISSION_PREMIUM_SMS_ALWAYS_ALLOW;
+                break;
+        }
+        if (category != SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN) {
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(
+                    getContext(), category, packageName);
+        }
     }
 
     private void updatePrefs(ArrayList<AppEntry> apps) {

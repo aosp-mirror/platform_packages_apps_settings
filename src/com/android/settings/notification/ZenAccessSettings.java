@@ -44,9 +44,11 @@ import android.util.ArraySet;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -171,6 +173,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
     }
 
     private static void setAccess(final Context context, final String pkg, final boolean access) {
+        logSpecialPermissionChange(access, pkg, context);
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -179,6 +182,15 @@ public class ZenAccessSettings extends EmptyTextSettings {
             }
         });
     }
+
+    @VisibleForTesting
+    static void logSpecialPermissionChange(boolean enable, String packageName, Context context) {
+        int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_DND_ALLOW
+                : MetricsEvent.APP_SPECIAL_PERMISSION_DND_DENY;
+        FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
+                logCategory, packageName);
+    }
+
 
     private static void deleteRules(final Context context, final String pkg) {
         AsyncTask.execute(new Runnable() {

@@ -33,9 +33,12 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
@@ -119,8 +122,17 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
     }
 
     private void setHasAccess(boolean newState) {
+        logSpecialPermissionChange(newState, mPackageName);
         mAppOpsManager.setMode(AppOpsManager.OP_GET_USAGE_STATS, mPackageInfo.applicationInfo.uid,
                 mPackageName, newState ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED);
+    }
+
+    @VisibleForTesting
+    void logSpecialPermissionChange(boolean newState, String packageName) {
+        int logCategory = newState ? MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_ALLOW
+                : MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY;
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
+                logCategory, packageName);
     }
 
     @Override
