@@ -18,6 +18,7 @@ package com.android.settings.overlay;
 
 import android.content.Context;
 import android.support.annotation.Keep;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 
 /**
  * {@link FeatureFactory} implementation for AOSP Settings.
@@ -27,6 +28,11 @@ public class FeatureFactoryImpl extends FeatureFactory {
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
+        return null;
+    }
+
+    @Override
+    public PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context) {
         return null;
     }
 
