@@ -22,12 +22,14 @@
     <SwitchPreference
         android:key="toggle_airplane"
         android:title="@string/airplane_mode"
+        android:icon="@drawable/ic_airplanemode_active"
         android:disableDependentsState="true"
         android:order="-30"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="mobile_network_settings"
         android:title="@string/network_settings_title"
+        android:icon="@drawable/ic_network_cell"
         android:dependency="toggle_airplane"
         android:order="-15"
         settings:keywords="@string/keywords_more_mobile_networks"
@@ -43,6 +45,7 @@
         android:fragment="com.android.settings.TetherSettings"
         android:key="tether_settings"
         android:title="@string/tether_settings_title_all"
+        android:icon="@drawable/ic_wifi_tethering"
         android:order="-5"
         settings:userRestriction="no_config_tethering"
         settings:useAdminDisabledSummary="true"/>
@@ -51,6 +54,7 @@
         android:fragment="com.android.settings.vpn2.VpnSettings"
         android:key="vpn_settings"
         android:title="@string/vpn_settings_title"
+        android:icon="@drawable/ic_vpn_key"
         android:order="0"
         settings:userRestriction="no_config_vpn"
         settings:useAdminDisabledSummary="true"/>
@@ -77,6 +81,7 @@
     <com.android.settingslib.RestrictedPreference
         android:key="network_reset"
         android:title="@string/reset_network_title"
+        android:icon="@drawable/ic_settings_backup_restore"
         settings:keywords="@string/keywords_network_reset"
         android:fragment="com.android.settings.ResetNetwork"
         settings:userRestriction="no_network_reset"
