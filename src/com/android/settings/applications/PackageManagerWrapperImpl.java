@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.UserHandle;
 
 import java.util.List;
 
@@ -49,5 +50,10 @@ public class PackageManagerWrapperImpl implements PackageManagerWrapper {
     @Override
     public List<ResolveInfo> queryIntentActivitiesAsUser(Intent intent, int flags, int userId) {
         return mPm.queryIntentActivitiesAsUser(intent, flags, userId);
+    }
+
+    @Override
+    public int getInstallReason(String packageName, UserHandle user) {
+        return mPm.getInstallReason(packageName, user);
     }
 }

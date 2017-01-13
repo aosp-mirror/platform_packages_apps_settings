@@ -27,10 +27,20 @@ public interface ApplicationFeatureProvider {
     AppHeaderController newAppHeaderController(Fragment fragment, View appHeader);
 
     /**
+     * Count all installed packages, irrespective of install reason.
+     */
+    public static final int IGNORE_INSTALL_REASON = -1;
+
+    /**
      * Asynchronously calculates the total number of apps installed on the device, across all users
      * and managed profiles.
+     *
+     * @param installReason Only consider packages with this install reason; may be any install
+     *         reason defined in {@link android.content.pm.PackageManager} or
+     *         {@link #IGNORE_INSTALL_REASON} to count all packages, irrespective of install reason.
+     * @param callback The callback to invoke with the result
      */
-    void calculateNumberOfInstalledApps(NumberOfInstalledAppsCallback callback);
+    void calculateNumberOfInstalledApps(int installReason, NumberOfInstalledAppsCallback callback);
 
     /**
      * Callback that receives the total number of packages installed on the device.

@@ -42,15 +42,16 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     }
 
     @Override
-    public void calculateNumberOfInstalledApps(NumberOfInstalledAppsCallback callback) {
-        new AllUserInstalledAppCounter(callback).execute();
+    public void calculateNumberOfInstalledApps(int installReason,
+            NumberOfInstalledAppsCallback callback) {
+        new AllUserInstalledAppCounter(installReason, callback).execute();
     }
 
     private class AllUserInstalledAppCounter extends InstalledAppCounter {
         private NumberOfInstalledAppsCallback mCallback;
 
-        AllUserInstalledAppCounter(NumberOfInstalledAppsCallback callback) {
-            super(mContext, ApplicationFeatureProviderImpl.this.mPm);
+        AllUserInstalledAppCounter(int installReason, NumberOfInstalledAppsCallback callback) {
+            super(mContext, installReason, ApplicationFeatureProviderImpl.this.mPm);
             mCallback = callback;
         }
 

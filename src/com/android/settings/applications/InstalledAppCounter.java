@@ -25,12 +25,24 @@ import java.util.List;
 
 public abstract class InstalledAppCounter extends AppCounter {
 
-    public InstalledAppCounter(Context context, PackageManagerWrapper packageManager) {
+    private final int mInstallReason;
+    private final PackageManagerWrapper mPackageManager;
+
+    public InstalledAppCounter(Context context, int installReason,
+            PackageManagerWrapper packageManager) {
         super(context, packageManager);
+        mInstallReason = installReason;
+        mPackageManager = packageManager;
     }
 
     @Override
     protected boolean includeInCount(ApplicationInfo info) {
+        final int userId = UserHandle.getUserId(info.uid);
+        if (mInstallReason != ApplicationFeatureProvider.IGNORE_INSTALL_REASON
+                && mPackageManager.getInstallReason(info.packageName,
+                        new UserHandle(userId)) != mInstallReason) {
+            return false;
+        }
         if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
             return true;
         }
@@ -40,7 +52,6 @@ public abstract class InstalledAppCounter extends AppCounter {
         Intent launchIntent = new Intent(Intent.ACTION_MAIN, null)
                 .addCategory(Intent.CATEGORY_LAUNCHER)
                 .setPackage(info.packageName);
-        int userId = UserHandle.getUserId(info.uid);
         List<ResolveInfo> intents = mPm.queryIntentActivitiesAsUser(
                 launchIntent,
                 PackageManager.GET_DISABLED_COMPONENTS

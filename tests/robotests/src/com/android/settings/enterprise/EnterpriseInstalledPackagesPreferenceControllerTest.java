@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
@@ -44,42 +45,53 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests for {@link InstalledPackagesPreferenceController}.
+ * Tests for {@link EnterpriseInstalledPackagesPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class InstalledPackagesPreferenceControllerTest {
+public final class EnterpriseInstalledPackagesPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
 
-    private InstalledPackagesPreferenceController mController;
+    private EnterpriseInstalledPackagesPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new InstalledPackagesPreferenceController(mContext);
+        mController = new EnterpriseInstalledPackagesPreferenceController(mContext);
+    }
+
+    private void setNumberOfEnterpriseInstalledPackages(int number) {
+        doAnswer(new Answer() {
+            public Object answer(InvocationOnMock invocation) {
+                ((ApplicationFeatureProvider.NumberOfInstalledAppsCallback)
+                        invocation.getArguments()[1]).onNumberOfInstalledAppsResult(number);
+                return null;
+            }}).when(mFeatureFactory.applicationFeatureProvider)
+                    .calculateNumberOfInstalledApps(eq(PackageManager.INSTALL_REASON_POLICY),
+                            anyObject());
     }
 
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        doAnswer(new Answer() {
-            public Object answer(InvocationOnMock invocation) {
-                ((ApplicationFeatureProvider.NumberOfInstalledAppsCallback)
-                        invocation.getArguments()[1]).onNumberOfInstalledAppsResult(20);
-                return null;
-            }}).when(mFeatureFactory.applicationFeatureProvider)
-                    .calculateNumberOfInstalledApps(
-                            eq(ApplicationFeatureProvider.IGNORE_INSTALL_REASON), anyObject());
+        preference.setVisible(true);
+
+        setNumberOfEnterpriseInstalledPackages(20);
         when(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_installed_packages, 20, 20))
+                R.plurals.enterprise_privacy_number_enterprise_installed_packages, 20, 20))
                 .thenReturn("20 packages");
         mController.updateState(preference);
         assertThat(preference.getTitle()).isEqualTo("20 packages");
+        assertThat(preference.isVisible()).isTrue();
+
+        setNumberOfEnterpriseInstalledPackages(0);
+        mController.updateState(preference);
+        assertThat(preference.isVisible()).isFalse();
     }
 
     @Test
@@ -95,6 +107,7 @@ public final class InstalledPackagesPreferenceControllerTest {
 
     @Test
     public void testGetPreferenceKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("number_installed_packages");
+        assertThat(mController.getPreferenceKey())
+                .isEqualTo("number_enterprise_installed_packages");
     }
 }
