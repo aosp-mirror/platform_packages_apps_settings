@@ -26,4 +26,10 @@ public interface SuggestionFeatureProvider {
      */
     boolean isSmartSuggestionEnabled(Context context);
 
+    /** Return true if className is the name of a class of one of your newly added suggestion. */
+    boolean isPresent(String className);
+
+    /** Return true if the suggestion has already been completed and does not need to be shown */
+    boolean isSuggestionCompleted(Context context);
+
 }
