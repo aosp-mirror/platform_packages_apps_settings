@@ -727,10 +727,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         getActivity().setResult(result);
     }
 
-    protected final Context getPrefContext() {
-        return getPreferenceManager().getContext();
-    }
-
     public boolean startFragment(Fragment caller, String fragmentClass, int titleRes,
             int requestCode, Bundle extras) {
         final Activity activity = getActivity();

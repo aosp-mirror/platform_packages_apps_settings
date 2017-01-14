@@ -76,4 +76,8 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         mDividerDecoration.setDivider(divider);
         super.setDivider(new ColorDrawable(Color.TRANSPARENT));
     }
+
+    protected final Context getPrefContext() {
+        return getPreferenceManager().getContext();
+    }
 }

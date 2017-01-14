@@ -49,7 +49,11 @@ import java.util.List;
  * Extends ListPreference to allow us to show the icons for a given list of applications. We do this
  * because the names of applications are very similar and the user may not be able to determine what
  * app they are selecting without an icon.
+ *
+ * @deprecated Selecting app from a list should be done in full UI. Use DefaultAppPickerFragment
+ * instead.
  */
+@Deprecated
 public class AppListPreference extends CustomListPreference {
 
     public static final String ITEM_NONE_VALUE = "";

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,20 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
+import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
+import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultWorkBrowserPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultWorkPhonePreferenceController;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.drawer.CategoryKey;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,14 +53,20 @@ public class AdvancedAppSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return mDashboardFeatureProvider.isEnabled()
-                ? R.xml.app_default_settings
-                : R.xml.advanced_apps;
+        return R.xml.app_default_settings;
     }
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        return null;
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new DefaultBrowserPreferenceController(context));
+        controllers.add(new DefaultWorkBrowserPreferenceController(context));
+        controllers.add(new DefaultPhonePreferenceController(context));
+        controllers.add(new DefaultWorkPhonePreferenceController(context));
+        controllers.add(new DefaultSmsPreferenceController(context));
+        controllers.add(new DefaultEmergencyPreferenceController(context));
+        controllers.add(new DefaultHomePreferenceController(context));
+        return controllers;
     }
 
     @Override
@@ -68,16 +80,8 @@ public class AdvancedAppSettings extends DashboardFragment {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = FeatureFactory.getFactory(context)
-                            .getDashboardFeatureProvider(context).isEnabled()
-                            ? R.xml.app_default_settings
-                            : R.xml.advanced_apps;
+                    sir.xmlResId = R.xml.app_default_settings;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    return Utils.getNonIndexable(R.xml.advanced_apps, context);
                 }
             };
 }
