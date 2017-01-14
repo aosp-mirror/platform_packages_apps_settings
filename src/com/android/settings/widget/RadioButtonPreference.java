@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.location;
+package com.android.settings.widget;
 
 import android.content.Context;
+import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
@@ -36,7 +37,7 @@ import com.android.settings.R;
  */
 public class RadioButtonPreference extends CheckBoxPreference {
     public interface OnClickListener {
-        public abstract void onRadioButtonClicked(RadioButtonPreference emiter);
+       void onRadioButtonClicked(RadioButtonPreference emiter);
     }
 
     private OnClickListener mListener = null;
@@ -47,14 +48,16 @@ public class RadioButtonPreference extends CheckBoxPreference {
     }
 
     public RadioButtonPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, com.android.internal.R.attr.checkBoxPreferenceStyle);
+        this(context, attrs, TypedArrayUtils.getAttr(context,
+                android.support.v7.preference.R.attr.preferenceStyle,
+                android.R.attr.preferenceStyle));
     }
 
     public RadioButtonPreference(Context context) {
         this(context, null);
     }
 
-    void setOnClickListener(OnClickListener listener) {
+    public void setOnClickListener(OnClickListener listener) {
         mListener = listener;
     }
 
