@@ -63,7 +63,6 @@ import java.util.List;
 import static android.content.Intent.EXTRA_USER;
 import static android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS;
 import static android.os.UserManager.DISALLOW_REMOVE_MANAGED_PROFILE;
-import static android.os.UserManager.DISALLOW_REMOVE_USER;
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
 public class AccountPreferenceController extends PreferenceController
@@ -405,7 +404,8 @@ public class AccountPreferenceController extends PreferenceController
     }
 
     private void updateAccountTypes(ProfileData profileData) {
-        if (mParent.getPreferenceManager() == null) {
+        if (mParent.getPreferenceManager() == null
+                || profileData.preferenceGroup.getPreferenceManager() == null) {
             // This could happen if activity is finishing
             return;
         }

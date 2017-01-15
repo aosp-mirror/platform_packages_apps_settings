@@ -21,6 +21,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.widget.RadioButtonPreference;
 
 /**
  * A page with 3 radio buttons to choose the location mode.
