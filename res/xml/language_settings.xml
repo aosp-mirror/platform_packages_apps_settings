@@ -81,6 +81,15 @@
                 android:dialogTitle="@string/pointer_speed"
                 />
 
+        <!-- Gesture pad settings -->
+        <Preference
+            android:key="gesture_pad_settings">
+            <intent
+                android:action="com.cyanogenmod.action.LAUNCH_GESTURE_PAD_SETTINGS"
+                android:targetPackage="com.cyanogenmod.settings.device"
+                android:targetClass="com.cyanogenmod.settings.device.GesturePadSettings" />
+        </Preference>
+
     </PreferenceCategory>
 
     <PreferenceCategory

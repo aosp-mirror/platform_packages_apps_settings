@@ -94,6 +94,17 @@
                 android:icon="@drawable/ic_settings_display"
                 />
 
+        <!-- Gestures -->
+        <dashboard-tile
+                android:id="@+id/device_specific_gesture_settings"
+                android:title="@string/gesture_settings_title"
+                android:icon="@drawable/ic_settings_home">
+                <intent
+                    android:action="com.cyanogenmod.action.LAUNCH_TOUCHSCREEN_GESTURE_SETTINGS"
+                    android:targetPackage="com.cyanogenmod.settings.device"
+                    android:targetClass="com.cyanogenmod.settings.device.TouchscreenGestureSettings" />
+        </dashboard-tile>
+
         <!-- Notifications -->
         <dashboard-tile
                 android:id="@+id/notification_settings"
