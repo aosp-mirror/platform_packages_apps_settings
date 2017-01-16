@@ -69,8 +69,8 @@ public final class InstalledPackagesPreferenceControllerTest {
         final Preference preference = new Preference(mContext, null, 0, 0);
         doAnswer(new Answer() {
             public Object answer(InvocationOnMock invocation) {
-                ((ApplicationFeatureProvider.NumberOfInstalledAppsCallback)
-                        invocation.getArguments()[1]).onNumberOfInstalledAppsResult(20);
+                ((ApplicationFeatureProvider.NumberOfAppsCallback)
+                        invocation.getArguments()[1]).onNumberOfAppsResult(20);
                 return null;
             }}).when(mFeatureFactory.applicationFeatureProvider)
                     .calculateNumberOfInstalledApps(

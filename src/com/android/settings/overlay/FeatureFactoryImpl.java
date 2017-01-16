@@ -16,6 +16,7 @@
 
 package com.android.settings.overlay;
 
+import android.app.AppGlobals;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -85,7 +86,10 @@ public class FeatureFactoryImpl extends FeatureFactory {
     public ApplicationFeatureProvider getApplicationFeatureProvider(Context context) {
         if (mApplicationFeatureProvider == null) {
             mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(context,
-                    new PackageManagerWrapperImpl(context.getPackageManager()));
+                    new PackageManagerWrapperImpl(context.getPackageManager()),
+                    AppGlobals.getPackageManager(),
+                    new DevicePolicyManagerWrapperImpl((DevicePolicyManager) context
+                            .getSystemService(Context.DEVICE_POLICY_SERVICE)));
         }
         return mApplicationFeatureProvider;
     }

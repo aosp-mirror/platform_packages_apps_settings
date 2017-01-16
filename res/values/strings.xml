@@ -8007,6 +8007,26 @@
     <string name="enterprise_privacy_security_logs">Your most recent security log</string>
     <!-- Label indicating that the date at which the admin last took a particular action was "never" (i.e. the admin never took the action so far). -->
     <string name="enterprise_privacy_never">Never</string>
+    <!-- Label indicating how many apps were installed on the device by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_enterprise_installed_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app installed by your admin</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps installed by your admin</item>
+    </plurals>
+    <!-- Label indicating how many apps were granted permission to access the device's location by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_location_access_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your location by your admin</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your location by your admin</item>
+    </plurals>
+    <!-- Label indicating how many apps were granted permission to access the microphone by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_microphone_access_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your microphone by your admin</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your microphone by your admin</item>
+    </plurals>
+    <!-- Label indicating how many apps were granted permission to access the camera by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_camera_access_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your camera by your admin</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your camera by your admin</item>
+    </plurals>
     <!-- Label explaining that an always-on VPN was set by the admin for the entire device. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_always_on_vpn_device">Always-on VPN turned on</string>
     <!-- Label explaining that an always-on VPN was set by the admin in the personal profile. [CHAR LIMIT=NONE] -->
@@ -8015,11 +8035,6 @@
     <string name="enterprise_privacy_always_on_vpn_work">Always-on VPN turned on in your work profile</string>
     <!-- Label explaining that a global HTTP proxy was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
-    <!-- Label indicating how many apps were installed on the device by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_enterprise_installed_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app installed by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps installed by your admin</item>
-    </plurals>
 
     <!-- Preference label for the Photos & Videos storage section. [CHAR LIMIT=50] -->
     <string name="storage_photos_videos">Photos &amp; Videos</string>

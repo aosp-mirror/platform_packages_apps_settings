@@ -64,11 +64,16 @@ public class InstalledAppResultLoaderTest {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
-                        ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM),
-                        ApplicationTestUtils.buildInfo(0 /* uid */, "app2", FLAG_SYSTEM),
-                        ApplicationTestUtils.buildInfo(0 /* uid */, "app3", FLAG_SYSTEM),
-                        ApplicationTestUtils.buildInfo(0 /* uid */, "app4", 0 /* flags */),
-                        ApplicationTestUtils.buildInfo(0 /* uid */, "app", 0 /* flags */)));
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM,
+                                0 /* targetSdkVersion */),
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app2", FLAG_SYSTEM,
+                                0 /* targetSdkVersion */),
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app3", FLAG_SYSTEM,
+                                0 /* targetSdkVersion */),
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app4", 0 /* flags */,
+                                0 /* targetSdkVersion */),
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app", 0 /* flags */,
+                                0 /* targetSdkVersion */)));
     }
 
     @Test

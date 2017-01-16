@@ -19,8 +19,8 @@ package com.android.settings.enterprise;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.settings.R;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -61,10 +61,13 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         controllers.add(new NetworkLogsPreferenceController(context));
         controllers.add(new BugReportsPreferenceController(context));
         controllers.add(new SecurityLogsPreferenceController(context));
+        controllers.add(new EnterpriseInstalledPackagesPreferenceController(context));
+        controllers.add(new AdminGrantedLocationPermissionsPreferenceController(context));
+        controllers.add(new AdminGrantedMicrophonePermissionPreferenceController(context));
+        controllers.add(new AdminGrantedCameraPermissionPreferenceController(context));
         controllers.add(new AlwaysOnVpnPrimaryUserPreferenceController(context));
         controllers.add(new AlwaysOnVpnManagedProfilePreferenceController(context));
         controllers.add(new GlobalHttpProxyPreferenceController(context));
-        controllers.add(new EnterpriseInstalledPackagesPreferenceController(context));
         return controllers;
     }
 
