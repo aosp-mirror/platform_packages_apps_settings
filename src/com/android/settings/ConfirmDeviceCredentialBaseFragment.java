@@ -90,9 +90,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
         final UserManager userManager = UserManager.get(getActivity());
         mEffectiveUserId = userManager.getCredentialOwnerProfile(mUserId);
         mLockPatternUtils = new LockPatternUtils(getActivity());
-        mIsStrongAuthRequired = isFingerprintDisallowedByStrongAuth();
-        mAllowFpAuthentication = mAllowFpAuthentication && !isFingerprintDisabledByAdmin()
-                && !mReturnCredentials && !mIsStrongAuthRequired;
     }
 
     @Override
@@ -141,6 +138,10 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     @Override
     public void onResume() {
         super.onResume();
+        mIsStrongAuthRequired = isFingerprintDisallowedByStrongAuth();
+        mAllowFpAuthentication = getActivity().getIntent().getBooleanExtra(
+                        ALLOW_FP_AUTHENTICATION, false)
+                && !isFingerprintDisabledByAdmin() && !mReturnCredentials && !mIsStrongAuthRequired;
         refreshLockScreen();
     }
 
