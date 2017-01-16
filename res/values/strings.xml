@@ -8015,6 +8015,11 @@
     <string name="enterprise_privacy_always_on_vpn_work">Always-on VPN turned on in your work profile</string>
     <!-- Label explaining that a global HTTP proxy was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
+    <!-- Label indicating how many apps were installed on the device by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_enterprise_installed_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app installed by your admin</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps installed by your admin</item>
+    </plurals>
 
     <!-- Preference label for the Photos & Videos storage section. [CHAR LIMIT=50] -->
     <string name="storage_photos_videos">Photos &amp; Videos</string>

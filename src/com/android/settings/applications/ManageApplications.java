@@ -1252,7 +1252,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                new InstalledAppCounter(mContext,
+                new InstalledAppCounter(mContext, ApplicationFeatureProvider.IGNORE_INSTALL_REASON,
                         new PackageManagerWrapperImpl(mContext.getPackageManager())) {
                     @Override
                     protected void onCountComplete(int num) {

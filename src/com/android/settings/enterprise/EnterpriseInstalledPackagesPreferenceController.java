@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -14,6 +14,7 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
@@ -22,12 +23,13 @@ import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
-public class InstalledPackagesPreferenceController extends PreferenceController {
+public class EnterpriseInstalledPackagesPreferenceController extends PreferenceController {
 
-    private static final String KEY_NUMBER_INSTALLED_PACKAGES = "number_installed_packages";
+    private static final String KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES
+            = "number_enterprise_installed_packages";
     private final ApplicationFeatureProvider mFeatureProvider;
 
-    public InstalledPackagesPreferenceController(Context context) {
+    public EnterpriseInstalledPackagesPreferenceController(Context context) {
         super(context);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getApplicationFeatureProvider(context);
@@ -36,10 +38,16 @@ public class InstalledPackagesPreferenceController extends PreferenceController 
     @Override
     public void updateState(Preference preference) {
         mFeatureProvider.calculateNumberOfInstalledApps(
-                ApplicationFeatureProvider.IGNORE_INSTALL_REASON,
+                PackageManager.INSTALL_REASON_POLICY,
                 (num) -> {
-                    preference.setTitle(mContext.getResources().getQuantityString(
-                            R.plurals.enterprise_privacy_number_installed_packages, num, num));
+                    if (num == 0) {
+                        preference.setVisible(false);
+                    } else {
+                        preference.setVisible(true);
+                        preference.setTitle(mContext.getResources().getQuantityString(
+                                R.plurals.enterprise_privacy_number_enterprise_installed_packages,
+                                num, num));
+                    }
                 });
     }
 
@@ -50,6 +58,6 @@ public class InstalledPackagesPreferenceController extends PreferenceController 
 
     @Override
     public String getPreferenceKey() {
-        return KEY_NUMBER_INSTALLED_PACKAGES;
+        return KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES;
     }
 }

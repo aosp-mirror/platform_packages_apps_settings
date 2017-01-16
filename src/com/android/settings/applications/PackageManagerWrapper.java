@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.UserHandle;
 
 import java.util.List;
 
@@ -56,4 +57,12 @@ public interface PackageManagerWrapper {
      * @see android.content.pm.PackageManager#queryIntentActivitiesAsUser
      */
     List<ResolveInfo> queryIntentActivitiesAsUser(Intent intent, int flags, int userId);
+
+
+    /**
+     * Calls {@code PackageManager.getInstallReason()}.
+     *
+     * @see android.content.pm.PackageManager#getInstallReason
+     */
+    int getInstallReason(String packageName, UserHandle user);
 }

@@ -73,6 +73,10 @@
                 android:title="@string/enterprise_privacy_global_http_proxy"
                 settings:allowDividerBelow="true"
                 settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="number_enterprise_installed_packages"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_device_access_category">
