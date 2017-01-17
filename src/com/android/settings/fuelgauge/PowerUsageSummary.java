@@ -319,7 +319,7 @@ public class PowerUsageSummary extends PowerUsageBase {
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
                 final BatterySipper sipper = usageList.get(i);
-                if ((sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP) {
+                if (shouldHideSipper(sipper)) {
                     continue;
                 }
                 double totalPower = USE_FAKE_DATA ? 4000 : mStatsHelper.getTotalPower();
@@ -375,7 +375,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfMax, percentOfTotal);
-                if ((sipper.drainType != DrainType.APP || sipper.uidObj.getUid() == 0)
+                if ((sipper.drainType != DrainType.APP || sipper.uidObj.getUid() == Process.ROOT_UID)
                          && sipper.drainType != DrainType.USER) {
                     pref.setTint(colorControl);
                 }
@@ -393,6 +393,16 @@ public class PowerUsageSummary extends PowerUsageBase {
         removeCachedPrefs(mAppListGroup);
 
         BatteryEntry.startRequestQueue();
+    }
+
+    @VisibleForTesting
+    boolean shouldHideSipper(BatterySipper sipper) {
+        final DrainType drainType = sipper.drainType;
+        final int uid = sipper.getUid();
+
+        return drainType == DrainType.IDLE || drainType == DrainType.CELL
+                || uid == Process.ROOT_UID || uid == Process.SYSTEM_UID
+                || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP;
     }
 
     @VisibleForTesting
