@@ -17,12 +17,16 @@
 package com.android.settings.enterprise;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.net.ProxyInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.SpannableStringBuilder;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
@@ -34,12 +38,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
@@ -50,6 +56,7 @@ import static org.mockito.Mockito.when;
 public final class EnterprisePrivacyFeatureProviderImplTest {
 
     private final ComponentName DEVICE_OWNER = new ComponentName("dummy", "component");
+    private final String DEVICE_OWNER_ORGANIZATION = new String("ACME");
     private final Date TIMESTAMP = new Date(2011, 11, 11);
     private final int MY_USER_ID = UserHandle.myUserId();
     private final int MANAGED_PROFILE_USER_ID = MY_USER_ID + 1;
@@ -61,6 +68,7 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
     private @Mock PackageManagerWrapper mPackageManager;
     private @Mock UserManager mUserManager;
     private @Mock ConnectivityManagerWrapper mConnectivityManger;
+    private Resources mResources;
 
     private EnterprisePrivacyFeatureProvider mProvider;
 
@@ -72,9 +80,10 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
                 .thenReturn(true);
         when(mUserManager.getProfiles(MY_USER_ID)).thenReturn(mProfiles);
         mProfiles.add(new UserInfo(MY_USER_ID, "", "", 0 /* flags */));
+        mResources = ShadowApplication.getInstance().getApplicationContext().getResources();
 
         mProvider = new EnterprisePrivacyFeatureProviderImpl(mDevicePolicyManager, mPackageManager,
-                mUserManager, mConnectivityManger);
+                mUserManager, mConnectivityManger, mResources);
     }
 
     @Test
@@ -93,6 +102,33 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
         mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
         assertThat(mProvider.isInCompMode()).isTrue();
+    }
+
+    @Test
+    public void testGetDeviceOwnerDisclosure() {
+        final Context context = mock(Context.class);
+
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
+        assertThat(mProvider.getDeviceOwnerDisclosure(context)).isNull();
+
+        SpannableStringBuilder disclosure = new SpannableStringBuilder();
+        disclosure.append(mResources.getString(R.string.do_disclosure_generic));
+        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
+        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
+                new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(context), 0);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_OWNER);
+        when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(null);
+        assertThat(mProvider.getDeviceOwnerDisclosure(context)).isEqualTo(disclosure);
+
+        disclosure = new SpannableStringBuilder();
+        disclosure.append(mResources.getString(R.string.do_disclosure_with_name,
+                DEVICE_OWNER_ORGANIZATION));
+        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
+        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
+                new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(context), 0);
+        when(mDevicePolicyManager.getDeviceOwnerOrganizationName())
+                .thenReturn(DEVICE_OWNER_ORGANIZATION);
+        assertThat(mProvider.getDeviceOwnerDisclosure(context)).isEqualTo(disclosure);
     }
 
     @Test

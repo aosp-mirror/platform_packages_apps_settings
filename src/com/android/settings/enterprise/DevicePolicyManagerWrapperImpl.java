@@ -33,6 +33,11 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     }
 
     @Override
+    public CharSequence getDeviceOwnerOrganizationName() {
+        return mDpm.getDeviceOwnerOrganizationName();
+    }
+
+    @Override
     public int getPermissionGrantState(@Nullable ComponentName admin, String packageName,
             String permission) {
         return mDpm.getPermissionGrantState(admin, packageName, permission);

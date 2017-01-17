@@ -22,6 +22,7 @@ import static android.content.Intent.EXTRA_USER;
 
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +42,10 @@ import com.android.internal.util.CharSequences;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.FooterPreference;
+import com.android.settings.widget.FooterPreferenceMixin;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -61,6 +66,10 @@ import java.util.Map;
 public class ChooseAccountActivity extends SettingsPreferenceFragment {
 
     private static final String TAG = "ChooseAccountActivity";
+
+    private EnterprisePrivacyFeatureProvider mFeatureProvider;
+    private FooterPreference mEnterpriseDisclosurePreference = null;
+
     private String[] mAuthorities;
     private PreferenceGroup mAddAccountGroup;
     private final ArrayList<ProviderEntry> mProviderList = new ArrayList<ProviderEntry>();
@@ -100,6 +109,10 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        final Activity activity = getActivity();
+        mFeatureProvider = FeatureFactory.getFactory(activity)
+                .getEnterprisePrivacyFeatureProvider(activity);
 
         addPreferencesFromResource(R.xml.add_account_settings);
         mAuthorities = getIntent().getStringArrayExtra(
@@ -187,6 +200,7 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
                 p.checkAccountManagementAndSetDisabled(mUserHandle.getIdentifier());
                 mAddAccountGroup.addPreference(p);
             }
+            addEnterpriseDisclosure();
         } else {
             if (Log.isLoggable(TAG, Log.VERBOSE)) {
                 final StringBuilder auths = new StringBuilder();
@@ -199,6 +213,19 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
             setResult(RESULT_CANCELED);
             finish();
         }
+    }
+
+    private void addEnterpriseDisclosure() {
+        final CharSequence disclosure = mFeatureProvider.getDeviceOwnerDisclosure(getActivity());
+        if (disclosure == null) {
+            return;
+        }
+        if (mEnterpriseDisclosurePreference == null) {
+            mEnterpriseDisclosurePreference = mFooterPreferenceMixin.createFooterPreference();
+            mEnterpriseDisclosurePreference.setSelectable(false);
+        }
+        mEnterpriseDisclosurePreference.setTitle(disclosure);
+        mAddAccountGroup.addPreference(mEnterpriseDisclosurePreference);
     }
 
     public ArrayList<String> getAuthoritiesForAccountType(String type) {

@@ -198,7 +198,7 @@ public final class InstalledAppCounterTest {
         }
     }
 
-    private class IsLaunchIntentFor extends ArgumentMatcher<Intent> {
+    private static class IsLaunchIntentFor extends ArgumentMatcher<Intent> {
         private final String mPackageName;
 
         IsLaunchIntentFor(String packageName) {
@@ -211,7 +211,7 @@ public final class InstalledAppCounterTest {
             if (intent == null) {
                 return false;
             }
-            if (intent.getAction() != Intent.ACTION_MAIN) {
+            if (!Intent.ACTION_MAIN.equals(intent.getAction())) {
                 return false;
             }
             final Set<String> categories = intent.getCategories();

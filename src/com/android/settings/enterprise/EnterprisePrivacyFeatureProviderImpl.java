@@ -16,11 +16,19 @@
 
 package com.android.settings.enterprise;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
+import android.text.SpannableStringBuilder;
+import android.text.style.ClickableSpan;
+import android.view.View;
 
+import com.android.settings.R;
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.vpn2.ConnectivityManagerWrapper;
 import com.android.settings.vpn2.VpnUtils;
@@ -34,15 +42,18 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     private final PackageManagerWrapper mPm;
     private final UserManager mUm;
     private final ConnectivityManagerWrapper mCm;
+    private final Resources mResources;
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
     public EnterprisePrivacyFeatureProviderImpl(DevicePolicyManagerWrapper dpm,
-            PackageManagerWrapper pm, UserManager um, ConnectivityManagerWrapper cm) {
+            PackageManagerWrapper pm, UserManager um, ConnectivityManagerWrapper cm,
+            Resources resources) {
         mDpm = dpm;
         mPm = pm;
         mUm = um;
         mCm = cm;
+        mResources = resources;
     }
 
     @Override
@@ -65,6 +76,26 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     @Override
     public boolean isInCompMode() {
         return hasDeviceOwner() && getManagedProfileUserId() != -1;
+    }
+
+    @Override
+    public CharSequence getDeviceOwnerDisclosure(Context context) {
+        if (!hasDeviceOwner()) {
+            return null;
+        }
+
+        final SpannableStringBuilder disclosure = new SpannableStringBuilder();
+        final CharSequence organizationName = mDpm.getDeviceOwnerOrganizationName();
+        if (organizationName != null) {
+            disclosure.append(mResources.getString(R.string.do_disclosure_with_name,
+                    organizationName));
+        } else {
+            disclosure.append(mResources.getString(R.string.do_disclosure_generic));
+        }
+        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
+        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
+                new EnterprisePrivacySpan(context), 0);
+        return disclosure;
     }
 
     @Override
@@ -100,5 +131,24 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     @Override
     public boolean isGlobalHttpProxySet() {
         return mCm.getGlobalProxy() != null;
+    }
+
+    protected static class EnterprisePrivacySpan extends ClickableSpan {
+        private final Context mContext;
+
+        public EnterprisePrivacySpan(Context context) {
+            mContext = context;
+        }
+
+        @Override
+        public void onClick(View widget) {
+            mContext.startActivity(new Intent(Settings.ACTION_ENTERPRISE_PRIVACY_SETTINGS));
+        }
+
+        @Override
+        public boolean equals(Object object) {
+            return object instanceof EnterprisePrivacySpan
+                    && ((EnterprisePrivacySpan) object).mContext == mContext;
+        }
     }
 }

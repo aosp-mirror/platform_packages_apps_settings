@@ -111,7 +111,8 @@ public class FeatureFactoryImpl extends FeatureFactory {
                     new PackageManagerWrapperImpl(context.getPackageManager()),
                     UserManager.get(context),
                     new ConnectivityManagerWrapperImpl((ConnectivityManager) context
-                            .getSystemService(Context.CONNECTIVITY_SERVICE)));
+                            .getSystemService(Context.CONNECTIVITY_SERVICE)),
+                    context.getResources());
         }
         return mEnterprisePrivacyFeatureProvider;
     }

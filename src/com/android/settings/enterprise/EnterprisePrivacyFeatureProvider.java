@@ -16,6 +16,8 @@
 
 package com.android.settings.enterprise;
 
+import android.content.Context;
+
 import java.util.Date;
 
 public interface EnterprisePrivacyFeatureProvider {
@@ -30,6 +32,15 @@ public interface EnterprisePrivacyFeatureProvider {
      * work profile managed by a Profile Owner app).
      */
     boolean isInCompMode();
+
+    /**
+     * Returns a message informing the user that the device is managed by a Device Owner app. The
+     * message includes a Learn More link that takes the user to the enterprise privacy section of
+     * Settings. If the device is not managed by a Device Owner app, returns {@code null}.
+     *
+     * @param context The context in which to show the enterprise privacy section of Settings
+     */
+    CharSequence getDeviceOwnerDisclosure(Context context);
 
     /**
      * Returns the time at which the Device Owner last retrieved security logs, or {@code null} if

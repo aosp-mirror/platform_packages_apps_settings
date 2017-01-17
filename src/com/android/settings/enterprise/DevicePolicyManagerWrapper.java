@@ -34,6 +34,13 @@ public interface DevicePolicyManagerWrapper {
     ComponentName getDeviceOwnerComponentOnAnyUser();
 
     /**
+     * Calls {@code DevicePolicyManager.getDeviceOwnerNameOnAnyUser()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getDeviceOwnerNameOnAnyUser
+     */
+    public CharSequence getDeviceOwnerOrganizationName();
+
+    /**
      * Calls {@code DevicePolicyManager.getPermissionGrantState()}.
      *
      * @see android.app.admin.DevicePolicyManager#getPermissionGrantState
