@@ -34,6 +34,9 @@ import android.util.ArraySet;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.security.SecurityFeatureProvider;
+import com.android.settings.trustagent.TrustAgentManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -49,6 +52,7 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
     private final ArraySet<ComponentName> mActiveAgents = new ArraySet<ComponentName>();
     private LockPatternUtils mLockPatternUtils;
     private DevicePolicyManager mDpm;
+    private TrustAgentManager mTrustAgentManager;
 
     public static final class AgentInfo {
         CharSequence label;
@@ -78,6 +82,10 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mDpm = getActivity().getSystemService(DevicePolicyManager.class);
+        mTrustAgentManager =
+            FeatureFactory.getFactory(getActivity()).getSecurityFeatureProvider()
+                .getTrustAgentManager();
+
         addPreferencesFromResource(R.xml.trust_agent_settings);
     }
 
@@ -151,8 +159,12 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
         agents.ensureCapacity(count);
         for (int i = 0; i < count; i++ ) {
             ResolveInfo resolveInfo = resolveInfos.get(i);
-            if (resolveInfo.serviceInfo == null) continue;
-            if (!TrustAgentUtils.checkProvidePermission(resolveInfo, pm)) continue;
+            if (resolveInfo.serviceInfo == null) {
+                continue;
+            }
+            if (!mTrustAgentManager.shouldProvideTrust(resolveInfo, pm)) {
+                continue;
+            }
             ComponentName name = TrustAgentUtils.getComponentName(resolveInfo);
             AgentInfo agentInfo = new AgentInfo();
             agentInfo.label = resolveInfo.loadLabel(pm);

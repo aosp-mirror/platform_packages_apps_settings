@@ -67,6 +67,7 @@ import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.security.SecurityFeatureProvider;
+import com.android.settings.trustagent.TrustAgentManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -144,6 +145,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private DevicePolicyManager mDPM;
     private SecurityFeatureProvider mSecurityFeatureProvider;
+    private TrustAgentManager mTrustAgentManager;
     private SubscriptionManager mSubscriptionManager;
     private UserManager mUm;
 
@@ -198,6 +200,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 .getDashboardFeatureProvider(activity);
 
         mSecurityFeatureProvider = FeatureFactory.getFactory(activity).getSecurityFeatureProvider();
+
+        mTrustAgentManager = mSecurityFeatureProvider.getTrustAgentManager();
 
         if (savedInstanceState != null
                 && savedInstanceState.containsKey(TRUST_AGENT_CLICK_INTENT)) {
@@ -472,8 +476,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private void addTrustAgentSettings(PreferenceGroup securityCategory) {
         final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);
-        ArrayList<TrustAgentComponentInfo> agents =
-                getActiveTrustAgents(getActivity(), mLockPatternUtils, mDPM);
+        ArrayList<TrustAgentComponentInfo> agents = getActiveTrustAgents(
+            getActivity(), mTrustAgentManager, mLockPatternUtils, mDPM);
         for (int i = 0; i < agents.size(); i++) {
             final TrustAgentComponentInfo agent = agents.get(i);
             RestrictedPreference trustAgentPreference =
@@ -534,8 +538,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return false;
     }
 
-    private static ArrayList<TrustAgentComponentInfo> getActiveTrustAgents(
-            Context context, LockPatternUtils utils, DevicePolicyManager dpm) {
+    private static ArrayList<TrustAgentComponentInfo> getActiveTrustAgents(Context context,
+        TrustAgentManager trustAgentManager, LockPatternUtils utils,
+        DevicePolicyManager dpm) {
         PackageManager pm = context.getPackageManager();
         ArrayList<TrustAgentComponentInfo> result = new ArrayList<TrustAgentComponentInfo>();
         List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
@@ -549,7 +554,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
             for (int i = 0; i < resolveInfos.size(); i++) {
                 ResolveInfo resolveInfo = resolveInfos.get(i);
                 if (resolveInfo.serviceInfo == null) continue;
-                if (!TrustAgentUtils.checkProvidePermission(resolveInfo, pm)) continue;
+                if (!trustAgentManager.shouldProvideTrust(resolveInfo, pm)) {
+                    continue;
+                }
                 TrustAgentComponentInfo trustAgentComponentInfo =
                         TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
                 if (trustAgentComponentInfo.componentName == null ||
@@ -989,8 +996,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
             // Advanced
             if (lockPatternUtils.isSecure(MY_USER_ID)) {
-                ArrayList<TrustAgentComponentInfo> agents =
-                        getActiveTrustAgents(context, lockPatternUtils,
+                final TrustAgentManager trustAgentManager =
+                    FeatureFactory.getFactory(context).getSecurityFeatureProvider()
+                        .getTrustAgentManager();
+                final List<TrustAgentComponentInfo> agents =
+                        getActiveTrustAgents(context, trustAgentManager, lockPatternUtils,
                                 context.getSystemService(DevicePolicyManager.class));
                 for (int i = 0; i < agents.size(); i++) {
                     final TrustAgentComponentInfo agent = agents.get(i);

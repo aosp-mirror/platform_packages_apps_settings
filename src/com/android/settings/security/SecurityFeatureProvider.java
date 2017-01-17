@@ -19,6 +19,7 @@ package com.android.settings.security;
 import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.trustagent.TrustAgentManager;
 import com.android.settingslib.drawer.DashboardCategory;
 
 
@@ -28,4 +29,7 @@ public interface SecurityFeatureProvider {
     /** Update preferences with data from associated tiles. */
     void updatePreferences(Context context, PreferenceScreen preferenceScreen,
             DashboardCategory dashboardCategory);
+
+    /** Returns the {@link TrustAgentManager} bound to this {@link SecurityFeatureProvider}. */
+    TrustAgentManager getTrustAgentManager();
 }
