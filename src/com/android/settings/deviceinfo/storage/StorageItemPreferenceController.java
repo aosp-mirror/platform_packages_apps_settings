@@ -54,6 +54,7 @@ public class StorageItemPreferenceController extends PreferenceController
         implements StorageMeasurement.MeasurementReceiver, LifecycleObserver, OnDestroy {
     private static final String TAG = "StorageItemPreference";
 
+    private static final String IMAGE_MIME_TYPE = "image/*";
     @VisibleForTesting
     static final String PHOTO_KEY = "pref_photos_videos";
     @VisibleForTesting
@@ -233,9 +234,10 @@ public class StorageItemPreferenceController extends PreferenceController
     }
 
     private Intent getPhotosIntent() {
-        Intent intent = new Intent(DocumentsContract.ACTION_BROWSE);
-        intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "images_root"));
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        Intent intent = new Intent();
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        intent.setType(IMAGE_MIME_TYPE);
         return intent;
     }
 
