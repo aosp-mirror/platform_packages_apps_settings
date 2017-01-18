@@ -25,6 +25,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.IContentProvider;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -38,6 +39,7 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.security.KeyStore;
 import android.service.trust.TrustAgentService;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -49,6 +51,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -56,6 +59,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -69,6 +73,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.drawer.TileUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +124,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
     private static final String KEY_TRUST_AGENT = "trust_agent";
     private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
+
+    // Package verifier Settings
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    static final String KEY_PACKAGE_VERIFIER_STATE = "package_verifier_state";
+    private static final int PACKAGE_VERIFIER_STATE_ENABLED = 1;
 
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = {
@@ -414,18 +424,20 @@ public class SecuritySettings extends SettingsPreferenceFragment
         Index.getInstance(getActivity())
                 .updateFromClassNameResource(SecuritySettings.class.getName(), true, true);
 
-        final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
-                getActivity(), getPrefContext(), CategoryKey.CATEGORY_SECURITY);
-        if (tilePrefs != null && !tilePrefs.isEmpty()) {
-            for (Preference preference : tilePrefs) {
-                root.addPreference(preference);
+        if (mDashboardFeatureProvider.isEnabled()) {
+            final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
+                    getActivity(), getPrefContext(), CategoryKey.CATEGORY_SECURITY);
+            if (tilePrefs != null && !tilePrefs.isEmpty()) {
+                for (Preference preference : tilePrefs) {
+                    root.addPreference(preference);
+                }
             }
-        }
 
-        // Update preference data with tile data. Security feature provider only updates the data
-        // if it actually needs to be changed.
-        mSecurityFeatureProvider.updatePreferences(getActivity(), root,
-                mDashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY));
+            // Update preference data with tile data. Security feature provider only updates the
+            // data if it actually needs to be changed.
+            mSecurityFeatureProvider.updatePreferences(getActivity(), root,
+                    mDashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY));
+        }
 
         for (int i = 0; i < SWITCH_PREFERENCE_KEYS.length; i++) {
             final Preference pref = findPreference(SWITCH_PREFERENCE_KEYS[i]);
@@ -1305,5 +1317,64 @@ public class SecuritySettings extends SettingsPreferenceFragment
             return MetricsEvent.DIALOG_UNIFICATION_CONFIRMATION;
         }
     }
+
+    static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (!listening) {
+                return;
+            }
+            int packageVerifierState = Settings.Secure.getInt(mContext.getContentResolver(),
+                    Settings.Secure.PACKAGE_VERIFIER_STATE, 0);
+            DashboardFeatureProvider dashboardFeatureProvider =
+                    FeatureFactory.getFactory(mContext).getDashboardFeatureProvider(mContext);
+            if (dashboardFeatureProvider.isEnabled()
+                    && (packageVerifierState == PACKAGE_VERIFIER_STATE_ENABLED)) {
+                DashboardCategory dashboardCategory =
+                        dashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY);
+                mSummaryLoader.setSummary(this, getPackageVerifierSummary(dashboardCategory));
+            } else {
+                mSummaryLoader.setSummary(this, null);
+            }
+        }
+
+        @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+        String getPackageVerifierSummary(DashboardCategory dashboardCategory) {
+            int tilesCount = (dashboardCategory != null) ? dashboardCategory.getTilesCount() : 0;
+            if (tilesCount == 0) {
+                return null;
+            }
+            for (int i = 0; i < tilesCount; i++) {
+                Tile tile = dashboardCategory.getTile(i);
+                if (!KEY_PACKAGE_VERIFIER_STATE.equals(tile.key)) {
+                    continue;
+                }
+                String summaryUri = tile.metaData.getString(
+                        TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, null);
+                return TileUtils.getTextFromUri(mContext, summaryUri,
+                            new ArrayMap<String, IContentProvider>(),
+                            TileUtils.META_DATA_PREFERENCE_SUMMARY);
+            }
+            return null;
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
+            new SummaryLoader.SummaryProviderFactory() {
+        @Override
+        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                SummaryLoader summaryLoader) {
+            return new SummaryProvider(activity, summaryLoader);
+        }
+    };
 
 }
