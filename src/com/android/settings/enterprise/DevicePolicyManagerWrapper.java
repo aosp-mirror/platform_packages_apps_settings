@@ -17,6 +17,7 @@
 package com.android.settings.enterprise;
 
 import android.content.ComponentName;
+import android.support.annotation.Nullable;
 
 /**
  * This interface replicates a subset of the android.app.admin.DevicePolicyManager (DPM). The
@@ -31,6 +32,14 @@ public interface DevicePolicyManagerWrapper {
      * @see android.app.admin.DevicePolicyManager#getDeviceOwnerComponentOnAnyUser
      */
     ComponentName getDeviceOwnerComponentOnAnyUser();
+
+    /**
+     * Calls {@code DevicePolicyManager.getPermissionGrantState()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getPermissionGrantState
+     */
+    int getPermissionGrantState(@Nullable ComponentName admin, String packageName,
+            String permission);
 
     /**
      * Calls {@code DevicePolicyManager.getLastSecurityLogRetrievalTime()}.

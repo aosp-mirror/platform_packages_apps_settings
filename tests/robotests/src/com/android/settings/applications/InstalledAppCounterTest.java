@@ -71,6 +71,10 @@ public final class InstalledAppCounterTest {
     private final int MAIN_USER_ID = 0;
     private final int MANAGED_PROFILE_ID = 10;
 
+    private final int PER_USER_UID_RANGE = 100000;
+    private final int MAIN_USER_APP_UID = MAIN_USER_ID * PER_USER_UID_RANGE;
+    private final int MANAGED_PROFILE_APP_UID = MANAGED_PROFILE_ID * PER_USER_UID_RANGE;
+
     @Mock private UserManager mUserManager;
     @Mock private Context mContext;
     @Mock private PackageManagerWrapper mPackageManager;
@@ -109,10 +113,14 @@ public final class InstalledAppCounterTest {
                 | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
                 | PackageManager.MATCH_ANY_USER,
                 MAIN_USER_ID)).thenReturn(Arrays.asList(
-                        buildInfo(MAIN_USER_ID, APP_1, ApplicationInfo.FLAG_UPDATED_SYSTEM_APP),
-                        buildInfo(MAIN_USER_ID, APP_2, 0 /* flags */),
-                        buildInfo(MAIN_USER_ID, APP_3, ApplicationInfo.FLAG_SYSTEM),
-                        buildInfo(MAIN_USER_ID, APP_4, ApplicationInfo.FLAG_SYSTEM)));
+                        buildInfo(MAIN_USER_APP_UID, APP_1,
+                                ApplicationInfo.FLAG_UPDATED_SYSTEM_APP, 0 /* targetSdkVersion */),
+                        buildInfo(MAIN_USER_APP_UID, APP_2, 0 /* flags */,
+                                0 /* targetSdkVersion */),
+                        buildInfo(MAIN_USER_APP_UID, APP_3, ApplicationInfo.FLAG_SYSTEM,
+                                0 /* targetSdkVersion */),
+                        buildInfo(MAIN_USER_APP_UID, APP_4, ApplicationInfo.FLAG_SYSTEM,
+                                0 /* targetSdkVersion */)));
         // For system apps, InstalledAppCounter checks whether they handle the default launcher
         // intent to decide whether to include them in the count of installed apps or not.
         expectQueryIntentActivities(MAIN_USER_ID, APP_3, true /* launchable */);
@@ -129,14 +137,16 @@ public final class InstalledAppCounterTest {
         when(mPackageManager.getInstallReason(APP_4, mainUser))
                 .thenReturn(PackageManager.INSTALL_REASON_POLICY);
 
-        // The second user has four apps installed:
+        // The second user has two apps installed:
         // * app5 is a user-installed app. It should be counted.
         // * app6 is a system app that provides a launcher icon. It should be counted.
         when(mPackageManager.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
                 | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS,
                 MANAGED_PROFILE_ID)).thenReturn(Arrays.asList(
-                        buildInfo(MANAGED_PROFILE_ID, APP_5, 0 /* flags */),
-                        buildInfo(MANAGED_PROFILE_ID, APP_6, ApplicationInfo.FLAG_SYSTEM)));
+                        buildInfo(MANAGED_PROFILE_APP_UID, APP_5, 0 /* flags */,
+                                0 /* targetSdkVersion */),
+                        buildInfo(MANAGED_PROFILE_APP_UID, APP_6, ApplicationInfo.FLAG_SYSTEM,
+                                0 /* targetSdkVersion */)));
         expectQueryIntentActivities(MANAGED_PROFILE_ID, APP_6, true /* launchable */);
 
         // app5 is installed by enterprise policy.
@@ -165,7 +175,7 @@ public final class InstalledAppCounterTest {
 
         // Count once more, considering apps installed by enterprise policy only. Wait for the
         // background task to finish.
-        mInstalledAppCount = 0;
+        mInstalledAppCount = -1;
         (new InstalledAppCounterTestable(PackageManager.INSTALL_REASON_POLICY)).execute();
         ShadowApplication.runBackgroundTasks();
 

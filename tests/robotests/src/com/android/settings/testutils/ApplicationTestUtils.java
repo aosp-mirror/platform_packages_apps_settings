@@ -15,7 +15,6 @@
 package com.android.settings.testutils;
 
 import android.content.pm.ApplicationInfo;
-import android.os.UserHandle;
 
 /**
  * Helper for mocking installed applications.
@@ -25,19 +24,21 @@ public class ApplicationTestUtils {
      * Create and populate an {@link android.content.pm.ApplicationInfo} object that describes an
      * installed app.
      *
-     * @param userId The user id that this app is installed for. Typical values are 0 for the
-     *         system user and 10, 11, 12... for secondary users.
+     * @param uid The app's uid
      * @param packageName The app's package name.
      * @param flags Flags describing the app. See {@link android.content.pm.ApplicationInfo#flags}
      *         for possible values.
+     * @param targetSdkVersion The app's target SDK version
      *
      * @see android.content.pm.ApplicationInfo
      */
-    public static ApplicationInfo buildInfo(int userId, String packageName, int flags) {
+    public static ApplicationInfo buildInfo(int uid, String packageName, int flags,
+            int targetSdkVersion) {
         final ApplicationInfo info = new ApplicationInfo();
-        info.uid = UserHandle.getUid(userId, 1);
+        info.uid = uid;
         info.packageName = packageName;
         info.flags = flags;
+        info.targetSdkVersion = targetSdkVersion;
         return info;
     }
 }

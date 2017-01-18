@@ -18,6 +18,7 @@ package com.android.settings.enterprise;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.support.annotation.Nullable;
 
 public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrapper {
     private final DevicePolicyManager mDpm;
@@ -29,6 +30,12 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     @Override
     public ComponentName getDeviceOwnerComponentOnAnyUser() {
         return mDpm.getDeviceOwnerComponentOnAnyUser();
+    }
+
+    @Override
+    public int getPermissionGrantState(@Nullable ComponentName admin, String packageName,
+            String permission) {
+        return mDpm.getPermissionGrantState(admin, packageName, permission);
     }
 
     @Override

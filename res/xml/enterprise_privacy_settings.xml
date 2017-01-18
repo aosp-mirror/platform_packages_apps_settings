@@ -60,6 +60,22 @@
 
     <PreferenceCategory android:title="@string/enterprise_privacy_exposure_changes_category">
         <com.android.settings.DividerPreference
+                android:key="number_enterprise_installed_packages"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="enterprise_privacy_number_location_access_packages"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="enterprise_privacy_number_microphone_access_packages"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="enterprise_privacy_number_camera_access_packages"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
                 android:key="always_on_vpn_primary_user"
                 settings:allowDividerBelow="true"
                 settings:multiLine="true"/>
@@ -71,10 +87,6 @@
         <com.android.settings.DividerPreference
                 android:key="global_http_proxy"
                 android:title="@string/enterprise_privacy_global_http_proxy"
-                settings:allowDividerBelow="true"
-                settings:multiLine="true"/>
-        <com.android.settings.DividerPreference
-                android:key="number_enterprise_installed_packages"
                 settings:allowDividerBelow="true"
                 settings:multiLine="true"/>
     </PreferenceCategory>

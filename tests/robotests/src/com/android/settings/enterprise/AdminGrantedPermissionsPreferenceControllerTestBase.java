@@ -17,26 +17,19 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.anyObject;
@@ -45,34 +38,42 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests for {@link EnterpriseInstalledPackagesPreferenceController}.
+ * Common base for testing subclasses of {@link AdminGrantedPermissionsPreferenceControllerBase}.
  */
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class EnterpriseInstalledPackagesPreferenceControllerTest {
+public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
+
+    protected final String mKey;
+    protected final String[] mPermissions;
+    protected final int mStringResourceId;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
+    protected Context mContext;
     private FakeFeatureFactory mFeatureFactory;
 
-    private EnterpriseInstalledPackagesPreferenceController mController;
+    protected AdminGrantedPermissionsPreferenceControllerBase mController;
+
+    public AdminGrantedPermissionsPreferenceControllerTestBase(String key, String[] permissions,
+            int stringResourceId) {
+        mKey = key;
+        mPermissions = permissions;
+        mStringResourceId = stringResourceId;
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new EnterpriseInstalledPackagesPreferenceController(mContext);
     }
 
-    private void setNumberOfEnterpriseInstalledPackages(int number) {
+    private void setNumberOfPackagesWithAdminGrantedPermissions(int number) {
         doAnswer(new Answer() {
             public Object answer(InvocationOnMock invocation) {
                 ((ApplicationFeatureProvider.NumberOfAppsCallback)
                         invocation.getArguments()[1]).onNumberOfAppsResult(number);
                 return null;
             }}).when(mFeatureFactory.applicationFeatureProvider)
-                    .calculateNumberOfInstalledApps(eq(PackageManager.INSTALL_REASON_POLICY),
+                    .calculateNumberOfAppsWithAdminGrantedPermissions(eq(mPermissions),
                             anyObject());
     }
 
@@ -81,15 +82,14 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         final Preference preference = new Preference(mContext, null, 0, 0);
         preference.setVisible(true);
 
-        setNumberOfEnterpriseInstalledPackages(20);
-        when(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_enterprise_installed_packages, 20, 20))
+        setNumberOfPackagesWithAdminGrantedPermissions(20);
+        when(mContext.getResources().getQuantityString(mStringResourceId, 20, 20))
                 .thenReturn("20 packages");
         mController.updateState(preference);
         assertThat(preference.getTitle()).isEqualTo("20 packages");
         assertThat(preference.isVisible()).isTrue();
 
-        setNumberOfEnterpriseInstalledPackages(0);
+        setNumberOfPackagesWithAdminGrantedPermissions(0);
         mController.updateState(preference);
         assertThat(preference.isVisible()).isFalse();
     }
@@ -107,7 +107,6 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
 
     @Test
     public void testGetPreferenceKey() {
-        assertThat(mController.getPreferenceKey())
-                .isEqualTo("number_enterprise_installed_packages");
+        assertThat(mController.getPreferenceKey()).isEqualTo(mKey);
     }
 }
