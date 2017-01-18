@@ -29,9 +29,12 @@ import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.ManagedServiceSettings;
 
 public class NotificationAccessSettings extends ManagedServiceSettings {
@@ -68,6 +71,7 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
     }
 
     protected boolean setEnabled(ComponentName service, String title, boolean enable) {
+        logSpecialPermissionChange(enable, service.getPackageName());
         if (!enable) {
             if (!mServiceListing.isEnabled(service)) {
                 return true; // already disabled
@@ -80,6 +84,14 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
         } else {
             return super.setEnabled(service, title, enable);
         }
+    }
+
+    @VisibleForTesting
+    void logSpecialPermissionChange(boolean enable, String packageName) {
+        int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_NOTIVIEW_ALLOW
+                : MetricsEvent.APP_SPECIAL_PERMISSION_NOTIVIEW_DENY;
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
+                logCategory, packageName);
     }
 
     private static void disable(final Context context, final NotificationAccessSettings parent,

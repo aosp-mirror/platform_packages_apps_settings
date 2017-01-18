@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-package com.android.settings.datausage;
+
+package com.android.settings.fuelgauge;
+
+import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.os.Process;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.applications.ApplicationsState;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,21 +31,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class UnrestrictedDataAccessTest {
+public class HighPowerDetailTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
 
-    @Mock
-    private ApplicationsState.AppEntry mAppEntry;
-    private UnrestrictedDataAccess mFragment;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
@@ -53,34 +49,18 @@ public class UnrestrictedDataAccessTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mFragment = new UnrestrictedDataAccess();
-    }
-
-    @Test
-    public void testShouldAddPreferenceForApps() {
-        mAppEntry.info = new ApplicationInfo();
-        mAppEntry.info.uid = Process.FIRST_APPLICATION_UID + 10;
-
-        assertThat(mFragment.shouldAddPreference(mAppEntry)).isTrue();
-    }
-
-    @Test
-    public void testShouldNotAddPreferenceForNonApps() {
-        mAppEntry.info = new ApplicationInfo();
-        mAppEntry.info.uid = Process.FIRST_APPLICATION_UID - 10;
-
-        assertThat(mFragment.shouldAddPreference(mAppEntry)).isFalse();
     }
 
     @Test
     public void logSpecialPermissionChange() {
-        mFragment.logSpecialPermissionChange(true, "app");
+        // Deny means app is whitelisted to opt out of power save restrictions
+        HighPowerDetail.logSpecialPermissionChange(true, "app", mContext);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW), eq("app"));
+                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_DENY), eq("app"));
 
-        mFragment.logSpecialPermissionChange(false, "app");
+        // Allow means app is NOT whitelisted to opt out of power save restrictions
+        HighPowerDetail.logSpecialPermissionChange(false, "app", mContext);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_DENY), eq("app"));
+                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_ALLOW), eq("app"));
     }
-
 }

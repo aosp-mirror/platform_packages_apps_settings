@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-package com.android.settings.datausage;
+
+package com.android.settings.applications;
+
+import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.os.Process;
+import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.applications.ApplicationsState;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,57 +31,47 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
-import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class UnrestrictedDataAccessTest {
+public class PremiumSmsAccessTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
 
-    @Mock
-    private ApplicationsState.AppEntry mAppEntry;
-    private UnrestrictedDataAccess mFragment;
     private FakeFeatureFactory mFeatureFactory;
+    private PremiumSmsAccess mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mFragment = new UnrestrictedDataAccess();
-    }
-
-    @Test
-    public void testShouldAddPreferenceForApps() {
-        mAppEntry.info = new ApplicationInfo();
-        mAppEntry.info.uid = Process.FIRST_APPLICATION_UID + 10;
-
-        assertThat(mFragment.shouldAddPreference(mAppEntry)).isTrue();
-    }
-
-    @Test
-    public void testShouldNotAddPreferenceForNonApps() {
-        mAppEntry.info = new ApplicationInfo();
-        mAppEntry.info.uid = Process.FIRST_APPLICATION_UID - 10;
-
-        assertThat(mFragment.shouldAddPreference(mAppEntry)).isFalse();
+        mFragment = new PremiumSmsAccess();
+        mFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
     }
 
     @Test
     public void logSpecialPermissionChange() {
-        mFragment.logSpecialPermissionChange(true, "app");
+        mFragment.logSpecialPermissionChange(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ASK_USER,
+                "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW), eq("app"));
+                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ASK), eq("app"));
 
-        mFragment.logSpecialPermissionChange(false, "app");
+        mFragment.logSpecialPermissionChange(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_NEVER_ALLOW,
+                "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_DENY), eq("app"));
+                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_DENY), eq("app"));
+
+        mFragment.logSpecialPermissionChange(SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW,
+                "app");
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_PREMIUM_SMS_ALWAYS_ALLOW),
+                eq("app"));
     }
-
 }

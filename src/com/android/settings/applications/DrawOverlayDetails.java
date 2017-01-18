@@ -31,10 +31,12 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateOverlayBridge.OverlayState;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
@@ -121,9 +123,18 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     }
 
     private void setCanDrawOverlay(boolean newState) {
+        logSpecialPermissionChange(newState, mPackageName);
         mAppOpsManager.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
                 mPackageInfo.applicationInfo.uid, mPackageName, newState
                 ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
+    }
+
+    @VisibleForTesting
+    void logSpecialPermissionChange(boolean newState, String packageName) {
+        int logCategory = newState ? MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW
+                : MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_DENY;
+        FeatureFactory.getFactory(getContext())
+                .getMetricsFeatureProvider().action(getContext(), logCategory, packageName);
     }
 
     private boolean canDrawOverlay(String pkgName) {

@@ -30,10 +30,12 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 public class HighPowerDetail extends InstrumentedDialogFragment implements OnClickListener,
@@ -125,6 +127,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
             boolean newValue = mIsEnabled;
             boolean oldValue = mBackend.isWhitelisted(mPackageName);
             if (newValue != oldValue) {
+                logSpecialPermissionChange(newValue, mPackageName, getContext());
                 if (newValue) {
                     mBackend.addApp(mPackageName);
                 } else {
@@ -132,6 +135,14 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
                 }
             }
         }
+    }
+
+    @VisibleForTesting
+    static void logSpecialPermissionChange(boolean whitelist, String packageName, Context context) {
+        int logCategory = whitelist ? MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_DENY
+                : MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_ALLOW;
+        FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context, logCategory,
+                packageName);
     }
 
     @Override

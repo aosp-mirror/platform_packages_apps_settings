@@ -14,7 +14,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 LOCAL_JAVA_LIBRARIES := \
     junit \
     platform-robolectric-prebuilt \
-    sdk_vcurrent
+    sdk_vcurrent \
+    telephony-common
 
 LOCAL_INSTRUMENTATION_FOR := Settings
 LOCAL_MODULE := SettingsRoboTests
