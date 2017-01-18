@@ -36,6 +36,9 @@ import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.suggestions.EventStore;
+import com.android.settings.suggestions.SuggestionFeaturizer;
+import com.android.settings.suggestions.SuggestionRanker;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -66,11 +69,13 @@ public class DashboardSummary extends InstrumentedFragment
     private SummaryLoader mSummaryLoader;
     private ConditionManager mConditionManager;
     private SuggestionParser mSuggestionParser;
+    private SuggestionRanker mSuggestionRanker;
     private LinearLayoutManager mLayoutManager;
     private SuggestionsChecks mSuggestionsChecks;
     private ArrayList<String> mSuggestionsShownLogged;
     private ArrayList<String> mSuggestionsHiddenLogged;
     private DashboardFeatureProvider mDashboardFeatureProvider;
+    private SuggestionFeatureProvider mSuggestionFeatureProvider;
 
     @Override
     public int getMetricsCategory() {
@@ -84,6 +89,8 @@ public class DashboardSummary extends InstrumentedFragment
         final Activity activity = getActivity();
         mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
                 .getDashboardFeatureProvider(activity);
+        mSuggestionFeatureProvider = FeatureFactory.getFactory(activity)
+                .getSuggestionFeatureProvider();
 
         if (mDashboardFeatureProvider.isEnabled()) {
             mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
@@ -95,6 +102,8 @@ public class DashboardSummary extends InstrumentedFragment
         mConditionManager = ConditionManager.get(activity, false);
         mSuggestionParser = new SuggestionParser(activity,
                 activity.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
+        mSuggestionRanker = new SuggestionRanker(
+                new SuggestionFeaturizer(new EventStore(activity)));
         mSuggestionsChecks = new SuggestionsChecks(getContext());
         if (savedInstanceState == null) {
             mSuggestionsShownLogged = new ArrayList<>();
@@ -260,6 +269,16 @@ public class DashboardSummary extends InstrumentedFragment
         protected List<Tile> doInBackground(Void... params) {
             final Context context = getContext();
             List<Tile> suggestions = mSuggestionParser.getSuggestions();
+            if (mSuggestionFeatureProvider.isSmartSuggestionEnabled(context)) {
+                List<String> suggestionIds = new ArrayList<>(suggestions.size());
+                for (Tile suggestion : suggestions) {
+                    suggestionIds.add(
+                        DashboardAdapter.getSuggestionIdentifier(context, suggestion));
+                }
+                // TODO: create a Suggestion class to maintain the id and other info
+                mSuggestionRanker.rank(suggestions, suggestionIds);
+                // TODO: consider showing only top-k (e.g., top-3)
+            }
             for (int i = 0; i < suggestions.size(); i++) {
                 Tile suggestion = suggestions.get(i);
                 if (mSuggestionsChecks.isSuggestionComplete(suggestion)) {
