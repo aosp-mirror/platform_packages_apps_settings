@@ -44,7 +44,7 @@ import android.util.ArraySet;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 import java.util.ArrayList;

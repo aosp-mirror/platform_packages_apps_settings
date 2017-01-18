@@ -27,7 +27,7 @@ import android.os.UserManager;
 import android.util.Log;
 import android.webkit.IWebViewUpdateService;
 import android.webkit.WebViewProviderInfo;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import java.util.ArrayList;
 

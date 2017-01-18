@@ -29,7 +29,7 @@ import android.service.notification.NotificationListenerService.Ranking;
 import android.util.ArrayMap;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.R;

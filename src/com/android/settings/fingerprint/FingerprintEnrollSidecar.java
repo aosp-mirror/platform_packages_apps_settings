@@ -25,7 +25,7 @@ import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.UserHandle;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.InstrumentedFragment;
 
