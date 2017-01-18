@@ -35,7 +35,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;

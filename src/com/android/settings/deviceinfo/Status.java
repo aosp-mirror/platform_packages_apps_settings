@@ -38,7 +38,7 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;

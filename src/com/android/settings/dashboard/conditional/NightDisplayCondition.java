@@ -19,7 +19,7 @@ package com.android.settings.dashboard.conditional;
 import android.graphics.drawable.Icon;
 
 import com.android.internal.app.NightDisplayController;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.display.NightDisplaySettings;

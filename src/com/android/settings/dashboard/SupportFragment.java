@@ -35,7 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;

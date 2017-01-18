@@ -38,7 +38,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.support.SupportDisclaimerDialogFragment;

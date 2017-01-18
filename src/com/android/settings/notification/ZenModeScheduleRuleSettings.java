@@ -37,7 +37,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.TimePicker;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 import java.text.SimpleDateFormat;

@@ -53,7 +53,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.dataconnection.ApnSetting;

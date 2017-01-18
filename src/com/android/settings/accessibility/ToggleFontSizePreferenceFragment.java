@@ -22,7 +22,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.PreviewSeekBarPreferenceFragment;
 import com.android.settings.R;
 

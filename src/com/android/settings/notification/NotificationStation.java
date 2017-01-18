@@ -44,7 +44,7 @@ import android.widget.DateTimeView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.CopyablePreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
