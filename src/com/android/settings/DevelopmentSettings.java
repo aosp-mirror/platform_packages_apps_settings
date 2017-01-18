@@ -865,20 +865,16 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void updateWebViewMultiprocessOptions() {
-        updateSwitchPreference(mWebViewMultiprocess,
-                Settings.Global.getInt(getActivity().getContentResolver(),
-                        Settings.Global.WEBVIEW_MULTIPROCESS, 0) != 0);
+        try {
+            updateSwitchPreference(mWebViewMultiprocess,
+                                   mWebViewUpdateService.isMultiProcessEnabled());
+        } catch (RemoteException e) {
+        }
     }
 
     private void writeWebViewMultiprocessOptions() {
-        boolean value = mWebViewMultiprocess.isChecked();
-        Settings.Global.putInt(getActivity().getContentResolver(),
-                Settings.Global.WEBVIEW_MULTIPROCESS, value ? 1 : 0);
-
         try {
-            String wv_package = mWebViewUpdateService.getCurrentWebViewPackageName();
-            ActivityManager.getService().killPackageDependents(
-                    wv_package, UserHandle.USER_ALL);
+            mWebViewUpdateService.enableMultiProcess(mWebViewMultiprocess.isChecked());
         } catch (RemoteException e) {
         }
     }
