@@ -25,7 +25,7 @@ import android.util.Log;
 import android.util.SparseBooleanArray;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 import java.util.ArrayList;
 

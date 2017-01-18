@@ -17,7 +17,7 @@
 package com.android.settings.accessibility;
 
 import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 
 public class FontSizePreferenceFragmentForSetupWizard
         extends ToggleFontSizePreferenceFragment {

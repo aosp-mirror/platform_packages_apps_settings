@@ -38,7 +38,7 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     /**
      * Declare the view of this category.
      *
-     * Categories are defined in {@link com.android.internal.logging.nano.MetricsProto.MetricsEvent}
+     * Categories are defined in {@link com.android.internal.logging.MetricsProto.MetricsEvent}
      * or if there is no relevant existing category you may define one in
      * {@link com.android.settings.InstrumentedFragment}.
      */

@@ -26,7 +26,7 @@ import android.support.v7.preference.TwoStatePreference;
 import android.widget.TimePicker;
 
 import com.android.internal.app.NightDisplayController;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 

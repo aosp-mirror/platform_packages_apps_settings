@@ -33,7 +33,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Checkable;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SeekBarPreference;
 import com.android.settings.SettingsActivity;

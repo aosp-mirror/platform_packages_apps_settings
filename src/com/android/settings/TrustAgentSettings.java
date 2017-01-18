@@ -32,7 +32,7 @@ import android.support.v7.preference.PreferenceGroup;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;

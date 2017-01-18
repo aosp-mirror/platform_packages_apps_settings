@@ -53,7 +53,7 @@ import android.view.textservice.TextServicesManager;
 
 import com.android.internal.app.LocaleHelper;
 import com.android.internal.app.LocalePicker;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings.KeyboardLayoutPickerActivity;
 import com.android.settings.SettingsActivity;
