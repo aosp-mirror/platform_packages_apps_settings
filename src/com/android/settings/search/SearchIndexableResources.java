@@ -20,7 +20,6 @@ import android.provider.SearchIndexableResource;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
-
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
@@ -47,6 +46,7 @@ import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
+import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
@@ -124,6 +124,7 @@ public final class SearchIndexableResources {
         addIndex(StorageSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
         addIndex(PowerUsageSummary.class,
                 R.xml.power_usage_summary, R.drawable.ic_settings_battery);
+        addIndex(PowerUsageDetail.class, NO_DATA_RES_ID, R.drawable.ic_settings_battery);
         addIndex(BatterySaverSettings.class,
                 R.xml.battery_saver_settings, R.drawable.ic_settings_battery);
         addIndex(AdvancedAppSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);

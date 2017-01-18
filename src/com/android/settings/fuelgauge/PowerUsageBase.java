@@ -32,12 +32,12 @@ import android.view.MenuItem;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 
 /**
  * Common base class for things that need to show the battery usage graph.
  */
-public abstract class PowerUsageBase extends SettingsPreferenceFragment {
+public abstract class PowerUsageBase extends DashboardFragment {
 
     // +1 to allow ordering for PowerUsageSummary.
     @VisibleForTesting

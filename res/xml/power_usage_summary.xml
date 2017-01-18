@@ -14,20 +14,42 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/power_usage_summary_title"
-        settings:keywords="@string/keywords_battery">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/power_usage_summary_title"
+    settings:keywords="@string/keywords_battery">
+
+    <com.android.settings.fuelgauge.BatteryHistoryPreference
+        android:key="battery_history"/>
+
+    <PreferenceCategory
+        android:key="power_management"
+        android:title="@string/battery_power_management">
 
         <com.android.settings.fuelgauge.BatterySaverPreference
             android:title="@string/battery_saver"
-            android:fragment="com.android.settings.fuelgauge.BatterySaverSettings" />
+            android:fragment="com.android.settings.fuelgauge.BatterySaverSettings"/>
 
-        <com.android.settings.fuelgauge.BatteryHistoryPreference
-            android:key="battery_history" />
+        <!-- Cross-listed item, if you change this, also change it in ia_display_settings.xml -->
+        <SwitchPreference
+            android:key="auto_brightness"
+            android:title="@string/auto_brightness_title"
+            android:summary="@string/auto_brightness_summary"
+            settings:keywords="@string/keywords_display_auto_brightness"/>
 
-        <PreferenceCategory
-            android:key="app_list"
-            android:title="@string/power_usage_list_summary" />
+        <!-- Cross-listed item, if you change this, also change it in ia_display_settings.xml -->
+        <com.android.settings.TimeoutListPreference
+            android:key="screen_timeout"
+            android:title="@string/screen_timeout"
+            android:summary="@string/screen_timeout_summary"
+            android:entries="@array/screen_timeout_entries"
+            android:entryValues="@array/screen_timeout_values"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="app_list"
+        android:title="@string/power_usage_list_summary"/>
 
 </PreferenceScreen>

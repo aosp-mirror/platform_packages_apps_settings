@@ -26,6 +26,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -44,11 +45,17 @@ import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ManageApplications;
+import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.display.AutoBrightnessPreferenceController;
+import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.BatteryInfo;
+import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -89,7 +96,6 @@ public class PowerUsageSummary extends PowerUsageBase {
         super.onCreate(icicle);
         setAnimationAllowed(true);
 
-        addPreferencesFromResource(R.xml.power_usage_summary);
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_HISTORY);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
     }
@@ -130,6 +136,29 @@ public class PowerUsageSummary extends PowerUsageBase {
         PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), mStatsHelper,
                 mStatsType, entry, true, true);
         return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    protected String getCategoryKey() {
+        return CategoryKey.CATEGORY_BATTERY;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.power_usage_summary;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new AutoBrightnessPreferenceController(context));
+        controllers.add(new TimeoutPreferenceController(context));
+        return controllers;
     }
 
     @Override
@@ -209,6 +238,7 @@ public class PowerUsageSummary extends PowerUsageBase {
      * We want to coalesce some UIDs. For example, dex2oat runs under a shared gid that
      * exists for all users of the same app. We detect this case and merge the power use
      * for dex2oat to the device OWNER's use of the app.
+     *
      * @return A sorted list of apps using power.
      */
     private static List<BatterySipper> getCoalescedUsageList(final List<BatterySipper> sippers) {
@@ -331,7 +361,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 if (sipper.drainType == BatterySipper.DrainType.OVERCOUNTED) {
                     // Don't show over-counted unless it is at least 2/3 the size of
                     // the largest real entry, and its percent of total is more significant
-                    if (sipper.totalPowerMah < ((mStatsHelper.getMaxRealPower()*2)/3)) {
+                    if (sipper.totalPowerMah < ((mStatsHelper.getMaxRealPower() * 2) / 3)) {
                         continue;
                     }
                     if (percentOfTotal < 10) {
@@ -344,7 +374,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 if (sipper.drainType == BatterySipper.DrainType.UNACCOUNTED) {
                     // Don't show over-counted unless it is at least 1/2 the size of
                     // the largest real entry, and its percent of total is more significant
-                    if (sipper.totalPowerMah < (mStatsHelper.getMaxRealPower()/2)) {
+                    if (sipper.totalPowerMah < (mStatsHelper.getMaxRealPower() / 2)) {
                         continue;
                     }
                     if (percentOfTotal < 5) {
@@ -507,6 +537,21 @@ public class PowerUsageSummary extends PowerUsageBase {
             }
         }
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.power_usage_summary;
+                    return Arrays.asList(sir);
+                }
+            };
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
             = new SummaryLoader.SummaryProviderFactory() {

@@ -34,6 +34,7 @@ import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
@@ -42,7 +43,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -58,13 +58,17 @@ import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.core.PreferenceController;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiSettings;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Arrays;
+import java.util.List;
 
 public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickListener {
 
@@ -355,7 +359,6 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         mPm = activity.getPackageManager();
         mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        addPreferencesFromResource(R.xml.power_usage_details);
         mDetailsParent = (PreferenceCategory) findPreference(KEY_DETAILS_PARENT);
         mControlsParent = (PreferenceCategory) findPreference(KEY_CONTROLS_PARENT);
         mMessagesParent = (PreferenceCategory) findPreference(KEY_MESSAGES_PARENT);
@@ -382,6 +385,26 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         }
 
         setupHeader();
+    }
+
+    @Override
+    protected String getCategoryKey() {
+        return null;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.power_usage_details;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return null;
     }
 
     @Override
@@ -810,4 +833,19 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
             }
         }
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.power_usage_details;
+                    return Arrays.asList(sir);
+                }
+            };
 }
