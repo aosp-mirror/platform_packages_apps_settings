@@ -34,6 +34,11 @@
             android:enabled="false"
             android:selectable="true" />
 
+        <!-- This preference category gets removed if new_recent_location_ui is disabled -->
+        <Preference
+            android:key="app_level_permissions"
+            android:title="@string/location_app_level_permissions" />
+
         <com.android.settings.DividedCategory
             android:key="recent_location_requests"
             android:title="@string/location_category_recent_location_requests" />

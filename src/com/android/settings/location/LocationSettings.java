@@ -18,6 +18,7 @@ package com.android.settings.location;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -95,11 +96,14 @@ public class LocationSettings extends LocationSettingsBase
     private static final String KEY_LOCATION_MODE = "location_mode";
     /** Key for preference category "Recent location requests" */
     private static final String KEY_RECENT_LOCATION_REQUESTS = "recent_location_requests";
+    /** Key for preference "App-level permissions" */
+    private static final String KEY_APP_LEVEL_PERMISSIONS = "app_level_permissions";
     /** Key for preference category "Location services" */
     private static final String KEY_LOCATION_SERVICES = "location_services";
 
     private static final int MENU_SCANNING = Menu.FIRST;
 
+    private static final String KEY_LOCATION_PERMISSION = "android.permission-group.LOCATION";
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
     private boolean mValidListener = false;
@@ -201,10 +205,21 @@ public class LocationSettings extends LocationSettingsBase
                     }
                 });
 
-        mCategoryRecentLocationRequests =
-                (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
         RecentLocationApps recentApps = new RecentLocationApps(activity);
         List<RecentLocationApps.Request> recentLocationRequests = recentApps.getAppList();
+
+        final AppLocationPermissionPreferenceController preferenceController =
+                new AppLocationPermissionPreferenceController(activity);
+        preferenceController.displayPreference(root);
+        if (preferenceController.isAvailable()) {
+            Preference preferenceAppLevelPermissions =
+                    root.findPreference(KEY_APP_LEVEL_PERMISSIONS);
+            setupAppLevelPermissionsPreference(preferenceAppLevelPermissions);
+        }
+
+        mCategoryRecentLocationRequests =
+                (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
+
         List<Preference> recentLocationPrefs = new ArrayList<>(recentLocationRequests.size());
         for (final RecentLocationApps.Request request : recentLocationRequests) {
             DimmableIconPreference pref = new DimmableIconPreference(getPrefContext(),
@@ -259,6 +274,23 @@ public class LocationSettings extends LocationSettingsBase
                     .findPreference(KEY_MANAGED_PROFILE_SWITCH);
             mManagedProfileSwitch.setOnPreferenceClickListener(null);
         }
+    }
+
+    private void setupAppLevelPermissionsPreference(Preference preference) {
+        preference.setOnPreferenceClickListener(
+                new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        Intent intent = new Intent(Intent.ACTION_MANAGE_PERMISSION_APPS)
+                                .putExtra(Intent.EXTRA_PERMISSION_NAME, KEY_LOCATION_PERMISSION);
+                        try {
+                            getActivity().startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            Log.w("Permission", "No app to handle " + intent);
+                        }
+                        return true;
+                    }
+                });
     }
 
     private void changeManagedProfileLocationAccessStatus(boolean mainSwitchOn) {
