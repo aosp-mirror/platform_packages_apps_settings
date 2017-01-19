@@ -81,9 +81,8 @@
                 android:summary="@string/accessibility_toggle_master_mono_summary"
                 android:persistent="false"/>
 
-        <Preference
-                android:fragment="com.android.settings.accessibility.ToggleGlobalGesturePreferenceFragment"
-                android:key="enable_global_gesture_preference_screen"
+        <ListPreference
+                android:key="accessibility_shortcut_preference"
                 android:title="@string/accessibility_global_gesture_preference_title"/>
 
         <Preference

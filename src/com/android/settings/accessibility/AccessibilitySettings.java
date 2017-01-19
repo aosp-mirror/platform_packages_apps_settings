@@ -17,9 +17,11 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
@@ -87,8 +89,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "toggle_master_mono";
     private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
             "select_long_press_timeout_preference";
-    private static final String ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN =
-            "enable_global_gesture_preference_screen";
+    private static final String ACCESSIBILITY_SHORTCUT_PREFERENCE =
+            "accessibility_shortcut_preference";
     private static final String CAPTIONING_PREFERENCE_SCREEN =
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
@@ -114,6 +116,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     // to generate the AccessibilityServiceInfo we need for proper
     // presentation.
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
+
+    // ID for dialog that confirms shortcut capabilities
+    private static final int DIALOG_ID_ADD_SHORTCUT_WARNING = 1;
 
     // Auxiliary members.
     static final Set<ComponentName> sInstalledServices = new HashSet<>();
@@ -188,7 +193,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mDisplayMagnificationPreferenceScreen;
     private Preference mFontSizePreferenceScreen;
     private Preference mAutoclickPreferenceScreen;
-    private Preference mGlobalGesturePreferenceScreen;
+    private ListPreference mAccessibilityShortcutPreference;
     private Preference mDisplayDaltonizerPreferenceScreen;
     private SwitchPreference mToggleInversionPreference;
 
@@ -247,6 +252,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         } else if (mToggleInversionPreference == preference) {
             handleToggleInversionPreferenceChange((Boolean) newValue);
             return true;
+        } else if (mAccessibilityShortcutPreference == preference) {
+            handleAccessibilityShortcutPreferenceChange((String) newValue);
+            return true;
         }
         return false;
     }
@@ -261,6 +269,58 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private void handleToggleInversionPreferenceChange(boolean checked) {
         Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, (checked ? 1 : 0));
+    }
+
+    private void handleAccessibilityShortcutPreferenceChange(String serviceComponentName) {
+        // When assigning a service to the shortcut the user must explicitly agree to the same
+        // capabilities that are present if the service were being enabled.
+        // No need if clearing the setting or the service is already enabled.
+        if (TextUtils.isEmpty(serviceComponentName)
+                || AccessibilityUtils.getEnabledServicesFromSettings(getActivity())
+                        .contains(ComponentName.unflattenFromString(serviceComponentName))) {
+            Settings.Secure.putString(getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE, serviceComponentName);
+            updateAccessibilityShortcut();
+            return;
+        }
+        if (!serviceComponentName.equals(mAccessibilityShortcutPreference.getValue())) {
+            showDialog(DIALOG_ID_ADD_SHORTCUT_WARNING);
+        }
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        switch (dialogId) {
+            case DIALOG_ID_ADD_SHORTCUT_WARNING: {
+                DialogInterface.OnClickListener listener =
+                        (DialogInterface dialogInterface, int buttonId) -> {
+                            if (buttonId == DialogInterface.BUTTON_POSITIVE) {
+                                Settings.Secure.putString(getContentResolver(),
+                                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE,
+                                        mAccessibilityShortcutPreference.getValue());
+                            }
+                            updateAccessibilityShortcut();
+                        };
+                AccessibilityServiceInfo info = AccessibilityManager.getInstance(getActivity())
+                        .getInstalledServiceInfoWithComponentName(
+                                ComponentName.unflattenFromString(
+                                        mAccessibilityShortcutPreference.getValue()));
+                if (info == null) {
+                    return null;
+                }
+                return AccessibilityServiceWarning
+                        .createCapabilitiesDialog(getActivity(), info, listener);
+            }
+            default: {
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        // The only dialog is the one that confirms the properties for the accessibility shortcut
+        return MetricsEvent.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
     }
 
     @Override
@@ -282,9 +342,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             return true;
         } else if (mToggleMasterMonoPreference == preference) {
             handleToggleMasterMonoPreferenceClick();
-            return true;
-        } else if (mGlobalGesturePreferenceScreen == preference) {
-            handleToggleEnableAccessibilityGesturePreferenceClick();
             return true;
         } else if (mDisplayMagnificationPreferenceScreen == preference) {
             handleDisplayMagnificationPreferenceScreenClick();
@@ -327,17 +384,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private void handleToggleMasterMonoPreferenceClick() {
         Settings.System.putIntForUser(getContentResolver(), Settings.System.MASTER_MONO,
                 mToggleMasterMonoPreference.isChecked() ? 1 : 0, UserHandle.USER_CURRENT);
-    }
-
-    private void handleToggleEnableAccessibilityGesturePreferenceClick() {
-        Bundle extras = mGlobalGesturePreferenceScreen.getExtras();
-        extras.putString(EXTRA_TITLE, getString(
-                R.string.accessibility_global_gesture_preference_title));
-        extras.putString(EXTRA_SUMMARY, getString(
-                R.string.accessibility_global_gesture_preference_description));
-        extras.putBoolean(EXTRA_CHECKED, Settings.Global.getInt(getContentResolver(),
-                Settings.Global.ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED, 0) == 1);
-        super.onPreferenceTreeClick(mGlobalGesturePreferenceScreen);
     }
 
     private void handleDisplayMagnificationPreferenceScreenClick() {
@@ -422,18 +468,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Display color adjustments.
         mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
 
-        // Global gesture.
-        mGlobalGesturePreferenceScreen = findPreference(
-                ENABLE_ACCESSIBILITY_GESTURE_PREFERENCE_SCREEN);
-        final int longPressOnPowerBehavior = getActivity().getResources().getInteger(
-                com.android.internal.R.integer.config_longPressOnPowerBehavior);
-        final int LONG_PRESS_POWER_GLOBAL_ACTIONS = 1;
-        if (!KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
-                || longPressOnPowerBehavior != LONG_PRESS_POWER_GLOBAL_ACTIONS) {
-            // Remove accessibility shortcut if power key is not present
-            // nor long press power does not show global actions menu.
-            mSystemsCategory.removePreference(mGlobalGesturePreferenceScreen);
-        }
+        // Accessibility shortcut
+        mAccessibilityShortcutPreference =
+                (ListPreference) findPreference(ACCESSIBILITY_SHORTCUT_PREFERENCE);
+        mAccessibilityShortcutPreference.setOnPreferenceChangeListener(this);
     }
 
     private void updateAllPreferences() {
@@ -598,16 +636,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
-        // Global gesture
-        final boolean globalGestureEnabled = Settings.Global.getInt(getContentResolver(),
-                Settings.Global.ENABLE_ACCESSIBILITY_GLOBAL_GESTURE_ENABLED, 0) == 1;
-        if (globalGestureEnabled) {
-            mGlobalGesturePreferenceScreen.setSummary(
-                    R.string.accessibility_global_gesture_preference_summary_on);
-        } else {
-            mGlobalGesturePreferenceScreen.setSummary(
-                    R.string.accessibility_global_gesture_preference_summary_off);
-        }
+        updateAccessibilityShortcut();
     }
 
     private void updateFeatureSummary(String prefKey, Preference pref) {
@@ -656,6 +685,37 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mToggleMasterMonoPreference.setChecked(masterMono);
     }
 
+    private void updateAccessibilityShortcut() {
+        String currentShortcutNameString =
+                AccessibilityUtils.getShortcutTargetServiceComponentNameString(getActivity(),
+                        UserHandle.myUserId());
+        final PackageManager pm = getPackageManager();
+        final AccessibilityManager accessibilityManager = getActivity()
+                .getSystemService(AccessibilityManager.class);
+        final List<AccessibilityServiceInfo> installedServices =
+                accessibilityManager.getInstalledAccessibilityServiceList();
+        final int numInstalledServices = installedServices.size();
+
+        CharSequence[] entries = new CharSequence[numInstalledServices + 1];
+        CharSequence[] entryValues = new CharSequence[numInstalledServices + 1];
+        int currentSettingIndex = numInstalledServices;
+        for (int i = 0; i < numInstalledServices; i++) {
+            AccessibilityServiceInfo installedService = installedServices.get(i);
+            entries[i] = installedService.getResolveInfo().loadLabel(pm);
+            entryValues[i] = installedService.getComponentName().flattenToShortString();
+            if (installedService.getId().equals(currentShortcutNameString)) {
+                currentSettingIndex = i;
+            }
+        }
+        entries[numInstalledServices] =
+                getString(com.android.internal.R.string.disable_accessibility_shortcut);
+        entryValues[numInstalledServices] = "";
+        mAccessibilityShortcutPreference.setEntryValues(entryValues);
+        mAccessibilityShortcutPreference.setEntries(entries);
+        mAccessibilityShortcutPreference.setSummary(entries[currentSettingIndex]);
+        mAccessibilityShortcutPreference.setValueIndex(currentSettingIndex);
+    }
+
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
         @Override
@@ -663,8 +723,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             List<SearchIndexableRaw> indexables = new ArrayList<SearchIndexableRaw>();
 
             PackageManager packageManager = context.getPackageManager();
-            AccessibilityManager accessibilityManager = (AccessibilityManager)
-                    context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+            AccessibilityManager accessibilityManager =
+                    context.getSystemService(AccessibilityManager.class);
 
             String screenTitle = context.getResources().getString(
                     R.string.accessibility_services_title);
