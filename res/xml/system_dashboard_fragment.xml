@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/header_category_system">
 
     <!-- System updates -->
@@ -37,4 +38,14 @@
                 android:targetClass="@string/additional_system_update_menu"/>
     </Preference>
 
+    <!-- Factory reset -->
+    <com.android.settingslib.RestrictedPreference
+        android:key="factory_reset"
+        android:title="@string/device_reset_title"
+        android:icon="@drawable/ic_restore"
+        android:order="-20"
+        settings:keywords="@string/keywords_factory_data_reset"
+        settings:userRestriction="no_factory_reset"
+        settings:useAdminDisabledSummary="true"
+        android:fragment="com.android.settings.MasterClear" />
 </PreferenceScreen>
