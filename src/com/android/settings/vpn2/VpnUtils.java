@@ -23,7 +23,9 @@ import android.os.ServiceManager;
 import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.util.Log;
 
+import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 
 /**
@@ -32,6 +34,9 @@ import com.android.internal.net.VpnConfig;
  * Keystore methods should only be called in system user
  */
 public class VpnUtils {
+
+    private static final String TAG = "VpnUtils";
+
     public static String getLockdownVpn() {
         final byte[] value = KeyStore.getInstance().get(Credentials.LOCKDOWN_VPN);
         return value == null ? null : new String(value);
@@ -85,5 +90,21 @@ public class VpnUtils {
 
     public static boolean isAlwaysOnVpnSet(ConnectivityManagerWrapper cm, final int userId) {
         return cm.getAlwaysOnVpnPackageForUser(userId) != null;
+    }
+
+    public static boolean disconnectLegacyVpn(Context context) {
+        try {
+            int userId = context.getUserId();
+            IConnectivityManager connectivityService = getIConnectivityManager();
+            LegacyVpnInfo currentLegacyVpn = connectivityService.getLegacyVpnInfo(userId);
+            if (currentLegacyVpn != null) {
+                clearLockdownVpn(context);
+                connectivityService.prepareVpn(null, VpnConfig.LEGACY_VPN, userId);
+                return true;
+            }
+        } catch (RemoteException e) {
+            Log.e(TAG, "Legacy VPN could not be disconnected", e);
+        }
+        return false;
     }
 }

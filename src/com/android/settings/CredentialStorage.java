@@ -47,6 +47,7 @@ import android.widget.Toast;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import com.android.settings.vpn2.VpnUtils;
 
 import sun.security.util.ObjectIdentifier;
 import sun.security.x509.AlgorithmId;
@@ -361,11 +362,20 @@ public final class CredentialStorage extends Activity {
             if (success) {
                 Toast.makeText(CredentialStorage.this,
                                R.string.credentials_erased, Toast.LENGTH_SHORT).show();
+                clearLegacyVpnIfEstablished();
             } else {
                 Toast.makeText(CredentialStorage.this,
                                R.string.credentials_not_erased, Toast.LENGTH_SHORT).show();
             }
             finish();
+        }
+    }
+
+    private void clearLegacyVpnIfEstablished() {
+        boolean isDone = VpnUtils.disconnectLegacyVpn(getApplicationContext());
+        if (isDone) {
+            Toast.makeText(CredentialStorage.this, R.string.vpn_disconnected,
+                    Toast.LENGTH_SHORT).show();
         }
     }
 

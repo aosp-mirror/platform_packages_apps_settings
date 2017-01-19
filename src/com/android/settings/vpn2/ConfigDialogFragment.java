@@ -249,8 +249,7 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
             if (!isConnected(profile)) {
                 return true;
             }
-            VpnUtils.clearLockdownVpn(mContext);
-            return mService.prepareVpn(null, VpnConfig.LEGACY_VPN, UserHandle.myUserId());
+            return VpnUtils.disconnectLegacyVpn(getContext());
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to disconnect", e);
             return false;
