@@ -32,8 +32,7 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static com.google.common.truth.Truth.assertThat;
 
 @SmallTest
 @RunWith(AndroidJUnit4.class)
@@ -47,7 +46,8 @@ public class SearchActivityTest {
         final List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(
                 intent, PackageManager.GET_META_DATA);
 
-        assertFalse(resolveInfos.isEmpty());
-        assertEquals(Settings.class.getName(), resolveInfos.get(0).activityInfo.parentActivityName);
+        assertThat(resolveInfos).isNotEmpty();
+        assertThat(resolveInfos.get(0).activityInfo.parentActivityName)
+                .isEqualTo(Settings.class.getName());
     }
 }
