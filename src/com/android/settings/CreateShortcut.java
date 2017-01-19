@@ -17,15 +17,21 @@
 package com.android.settings;
 
 import android.app.LauncherActivity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
+import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
+import android.support.annotation.VisibleForTesting;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,34 +41,52 @@ import android.widget.ListView;
 
 import com.android.settings.Settings.TetherSettingsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreateShortcut extends LauncherActivity {
 
+    @VisibleForTesting
+    static final String SHORTCUT_ID_PREFIX = "component-shortcut-";
+
     @Override
     protected Intent getTargetIntent() {
-        Intent targetIntent = new Intent(Intent.ACTION_MAIN, null);
-        targetIntent.addCategory("com.android.settings.SHORTCUT");
-        targetIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return targetIntent;
+        return getBaseIntent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        Intent shortcutIntent = intentForPosition(position);
+        ListItem item = itemForPosition(position);
+        setResult(RESULT_OK, createResultIntent(intentForPosition(position),
+                item.resolveInfo, item.label));
+        finish();
+    }
+
+    protected Intent createResultIntent(Intent shortcutIntent, ResolveInfo resolveInfo,
+            CharSequence label) {
         shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-        Intent intent = new Intent();
+
+        ActivityInfo activityInfo = resolveInfo.activityInfo;
+        Bitmap icon = activityInfo.icon != 0 ? createIcon(activityInfo.icon) : null;
+
+        String shortcutId = SHORTCUT_ID_PREFIX +
+                shortcutIntent.getComponent().flattenToShortString();
+        ShortcutInfo info = new ShortcutInfo.Builder(this, shortcutId)
+                .setShortLabel(label)
+                .setIntent(shortcutIntent)
+                .setIcon(icon != null ? Icon.createWithBitmap(icon) :
+                        Icon.createWithResource(this, R.mipmap.ic_launcher_settings))
+                .build();
+        Intent intent = getSystemService(ShortcutManager.class).createShortcutResultIntent(info);
+        if (intent == null) {
+            intent = new Intent();
+        }
         intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
                 Intent.ShortcutIconResource.fromContext(this, R.mipmap.ic_launcher_settings));
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, itemForPosition(position).label);
-        ResolveInfo resolveInfo = itemForPosition(position).resolveInfo;
-        ActivityInfo activityInfo = resolveInfo.activityInfo;
-        if (activityInfo.icon != 0) {
-            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createIcon(activityInfo.icon));
-        }
-        setResult(RESULT_OK, intent);
-        finish();
+        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, label);
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, icon);
+        return intent;
     }
 
     private Bitmap createIcon(int resource) {
@@ -109,5 +133,44 @@ public class CreateShortcut extends LauncherActivity {
             }
         }
         return activities;
+    }
+
+    @VisibleForTesting
+    static Intent getBaseIntent() {
+        return new Intent(Intent.ACTION_MAIN).addCategory("com.android.settings.SHORTCUT");
+    }
+
+    public static class ShortcutsUpdateTask extends AsyncTask<Void, Void, Void> {
+
+        private final Context mContext;
+
+        public ShortcutsUpdateTask(Context context) {
+            mContext = context;
+        }
+
+        @Override
+        public Void doInBackground(Void... params) {
+            ShortcutManager sm = mContext.getSystemService(ShortcutManager.class);
+            PackageManager pm = mContext.getPackageManager();
+
+            List<ShortcutInfo> updates = new ArrayList<>();
+            for (ShortcutInfo info : sm.getPinnedShortcuts()) {
+                if (!info.getId().startsWith(SHORTCUT_ID_PREFIX)) {
+                    continue;
+                }
+                ComponentName cn = ComponentName.unflattenFromString(
+                        info.getId().substring(SHORTCUT_ID_PREFIX.length()));
+                ResolveInfo ri = pm.resolveActivity(getBaseIntent().setComponent(cn), 0);
+                if (ri == null) {
+                    continue;
+                }
+                updates.add(new ShortcutInfo.Builder(mContext, info.getId())
+                    .setShortLabel(ri.loadLabel(pm)).build());
+            }
+            if (!updates.isEmpty()) {
+                sm.updateShortcuts(updates);
+            }
+            return null;
+        }
     }
 }
