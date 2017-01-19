@@ -243,10 +243,15 @@ public class StorageItemPreferenceController extends PreferenceController
     }
 
     private Intent getAudioIntent() {
-        Intent intent = new Intent(DocumentsContract.ACTION_BROWSE);
-        intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"));
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        return intent;
+        Bundle args = new Bundle();
+        args.putString(ManageApplications.EXTRA_CLASSNAME,
+                Settings.StorageUseActivity.class.getName());
+        args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
+        args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
+        args.putInt(ManageApplications.EXTRA_STORAGE_TYPE, ManageApplications.STORAGE_TYPE_MUSIC);
+        return Utils.onBuildStartFragmentIntent(mContext,
+                ManageApplications.class.getName(), args, null, R.string.audio_storage_title, null,
+                false);
     }
 
     private Intent getAppsIntent() {

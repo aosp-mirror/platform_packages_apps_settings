@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
+import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -32,6 +33,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -71,6 +73,7 @@ import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsSt
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.deviceinfo.storage.StorageStatsSource;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.fuelgauge.PowerWhitelistBackend;
 import com.android.settings.notification.AppNotificationSettings;
@@ -108,6 +111,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     // Used for storage only.
     public static final String EXTRA_VOLUME_UUID = "volumeUuid";
     public static final String EXTRA_VOLUME_NAME = "volumeName";
+    public static final String EXTRA_STORAGE_TYPE = "storageType";
 
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_SYSTEM = "showSystem";
@@ -139,6 +143,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int FILTER_APPS_WITH_OVERLAY = 9;
     public static final int FILTER_APPS_WRITE_SETTINGS = 10;
     public static final int FILTER_APPS_INSTALL_SOURCES = 12;
+
+    // Storage types. Used to determine what the extra item in the list of preferences is.
+    public static final int STORAGE_TYPE_DEFAULT = 0;
+    public static final int STORAGE_TYPE_MUSIC = 1;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[]{
@@ -227,6 +235,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private ResetAppsHelper mResetAppsHelper;
     private String mVolumeUuid;
     private String mVolumeName;
+    private int mStorageType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -250,6 +259,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             if (args != null && args.containsKey(EXTRA_VOLUME_UUID)) {
                 mVolumeUuid = args.getString(EXTRA_VOLUME_UUID);
                 mVolumeName = args.getString(EXTRA_VOLUME_NAME);
+                mStorageType = args.getInt(EXTRA_STORAGE_TYPE, STORAGE_TYPE_DEFAULT);
                 mListType = LIST_TYPE_STORAGE;
             } else {
                 // No volume selected, display a normal list, sorted by size.
@@ -316,6 +326,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mApplications.mHasReceivedBridgeCallback =
                         savedInstanceState.getBoolean(EXTRA_HAS_BRIDGE, false);
             }
+            if (mStorageType == STORAGE_TYPE_MUSIC) {
+                Context context = getContext();
+                mApplications.setExtraViewController(new MusicViewHolderController(
+                        context,
+                        new StorageStatsSource(context),
+                        mVolumeUuid));
+            }
             mListView.setAdapter(mApplications);
             mListView.setRecyclerListener(mApplications);
             mListView.setFastScrollEnabled(isFastScrollEnabled());
@@ -361,7 +378,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
         }
         if (mListType == LIST_TYPE_STORAGE) {
-            mApplications.setOverrideFilter(new VolumeFilter(mVolumeUuid));
+            AppFilter filter = new VolumeFilter(mVolumeUuid);
+            if (mStorageType == STORAGE_TYPE_MUSIC) {
+                filter = new CompoundFilter(ApplicationsState.FILTER_AUDIO, filter);
+            }
+            mApplications.setOverrideFilter(filter);
         }
         if (mListType == LIST_TYPE_GAMES) {
             mApplications.setOverrideFilter(ApplicationsState.FILTER_GAMES);
@@ -626,11 +647,17 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (mApplications != null && mApplications.getCount() > position) {
+        if (mApplications == null) {
+            return;
+        }
+
+        if (mApplications.getApplicationCount() > position) {
             ApplicationsState.AppEntry entry = mApplications.getAppEntry(position);
             mCurrentPkgName = entry.info.packageName;
             mCurrentUid = entry.info.uid;
             startApplicationDetailsActivity();
+        } else {
+            mApplications.mExtraViewController.onClick(this);
         }
     }
 
@@ -769,6 +796,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         private AppFilter mOverrideFilter;
         private boolean mHasReceivedLoadEntries;
         private boolean mHasReceivedBridgeCallback;
+        private FileViewHolderController mExtraViewController;
 
         // These two variables are used to remember and restore the last scroll position when this
         // fragment is paused. We need this special handling because app entries are added gradually
@@ -839,6 +867,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             rebuild(true);
         }
 
+        public void setExtraViewController(FileViewHolderController extraViewController) {
+            mExtraViewController = extraViewController;
+        }
+
         public void resume(int sort) {
             if (DEBUG) Log.i(TAG, "Resume!  mResumed=" + mResumed);
             if (!mResumed) {
@@ -889,7 +921,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 // Don't rebuild the list until all the app entries are loaded.
                 return;
             }
-            if (DEBUG) Log.i(TAG, "Rebuilding app list...");
             ApplicationsState.AppFilter filterObj;
             Comparator<AppEntry> comparatorObj;
             boolean emulated = Environment.isExternalStorageEmulated();
@@ -924,8 +955,12 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
                     break;
             }
-            filterObj = new CompoundFilter(filterObj, ApplicationsState.FILTER_NOT_HIDE);
 
+            if (mExtraViewController != null) {
+                mExtraViewController.queryStats();
+            }
+
+            filterObj = new CompoundFilter(filterObj, ApplicationsState.FILTER_NOT_HIDE);
             AppFilter finalFilterObj = filterObj;
             mBgHandler.post(() -> {
                 final ArrayList<AppEntry> entries = mSession.rebuild(finalFilterObj,
@@ -1104,6 +1139,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         public void onPackageSizeChanged(String packageName) {
             for (int i = 0; i < mActive.size(); i++) {
                 AppViewHolder holder = (AppViewHolder) mActive.get(i).getTag();
+                ApplicationInfo info = holder.entry.info;
+                if (info == null) {
+                    continue;
+                }
                 if (holder.entry.info.packageName.equals(packageName)) {
                     synchronized (holder.entry) {
                         updateSummary(holder);
@@ -1136,10 +1175,22 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         public int getCount() {
+            if (mEntries == null) {
+                return 0;
+            }
+            int extraViewAddition =
+                    (mExtraViewController != null && mExtraViewController.shouldShow()) ? 1 : 0;
+            return mEntries.size() + extraViewAddition;
+        }
+
+        public int getApplicationCount() {
             return mEntries != null ? mEntries.size() : 0;
         }
 
         public Object getItem(int position) {
+            if (position == mEntries.size()) {
+                return mExtraViewController;
+            }
             return mEntries.get(position);
         }
 
@@ -1148,6 +1199,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         public long getItemId(int position) {
+            if (position == mEntries.size()) {
+                return -1;
+            }
             return mEntries.get(position).id;
         }
 
@@ -1158,6 +1212,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         @Override
         public boolean isEnabled(int position) {
+            if (position == mEntries.size() && mExtraViewController != null &&
+                    mExtraViewController.shouldShow()) {
+                return true;
+            }
+
             if (mManageApplications.mListType != LIST_TYPE_HIGH_POWER) {
                 return true;
             }
@@ -1172,31 +1231,38 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     convertView);
             convertView = holder.rootView;
 
-            // Bind the data efficiently with the holder
-            ApplicationsState.AppEntry entry = mEntries.get(position);
-            synchronized (entry) {
-                holder.entry = entry;
-                if (entry.label != null) {
-                    holder.appName.setText(entry.label);
+            // Handle the extra view if it is the last entry.
+            if (mEntries != null && mExtraViewController != null && position == mEntries.size()) {
+                mExtraViewController.setupView(holder);
+                convertView.setEnabled(true);
+            } else {
+                // Bind the data efficiently with the holder
+                ApplicationsState.AppEntry entry = mEntries.get(position);
+                synchronized (entry) {
+                    holder.entry = entry;
+                    if (entry.label != null) {
+                        holder.appName.setText(entry.label);
+                    }
+                    mState.ensureIcon(entry);
+                    if (entry.icon != null) {
+                        holder.appIcon.setImageDrawable(entry.icon);
+                    }
+                    updateSummary(holder);
+                    if ((entry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
+                        holder.disabled.setVisibility(View.VISIBLE);
+                        holder.disabled.setText(R.string.not_installed);
+                    } else if (!entry.info.enabled) {
+                        holder.disabled.setVisibility(View.VISIBLE);
+                        holder.disabled.setText(R.string.disabled);
+                    } else {
+                        holder.disabled.setVisibility(View.GONE);
+                    }
                 }
-                mState.ensureIcon(entry);
-                if (entry.icon != null) {
-                    holder.appIcon.setImageDrawable(entry.icon);
-                }
-                updateSummary(holder);
-                if ((entry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
-                    holder.disabled.setVisibility(View.VISIBLE);
-                    holder.disabled.setText(R.string.not_installed);
-                } else if (!entry.info.enabled) {
-                    holder.disabled.setVisibility(View.VISIBLE);
-                    holder.disabled.setText(R.string.disabled);
-                } else {
-                    holder.disabled.setVisibility(View.GONE);
-                }
+                convertView.setEnabled(isEnabled(position));
             }
+
             mActive.remove(convertView);
             mActive.add(convertView);
-            convertView.setEnabled(isEnabled(position));
             return convertView;
         }
 

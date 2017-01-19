@@ -533,7 +533,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         if (intent != null) {
             intent.putExtra(Intent.EXTRA_USER_ID, userId);
 
-            launchIntent(this, intent);
+            Utils.launchIntent(this, intent);
             return true;
         }
         return super.onPreferenceTreeClick(pref);
@@ -670,20 +670,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         return total;
     }
 
-    private static void launchIntent(Fragment fragment, Intent intent) {
-        try {
-            final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, -1);
-
-            if (userId == -1) {
-                fragment.startActivity(intent);
-            } else {
-                fragment.getActivity().startActivityAsUser(intent, new UserHandle(userId));
-            }
-        } catch (ActivityNotFoundException e) {
-            Log.w(TAG, "No activity found for " + intent);
-        }
-    }
-
     private final StorageEventListener mStorageListener = new StorageEventListener() {
         @Override
         public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
@@ -815,7 +801,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            launchIntent(OtherInfoFragment.this, intent);
+                            Utils.launchIntent(OtherInfoFragment.this, intent);
                         }
                     });
             builder.setNegativeButton(android.R.string.cancel, null);
