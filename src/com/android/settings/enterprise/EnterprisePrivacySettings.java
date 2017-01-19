@@ -59,6 +59,7 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         controllers.add(new AdminGrantedLocationPermissionsPreferenceController(context));
         controllers.add(new AdminGrantedMicrophonePermissionPreferenceController(context));
         controllers.add(new AdminGrantedCameraPermissionPreferenceController(context));
+        controllers.add(new EnterpriseSetDefaultAppsPreferenceController(context));
         controllers.add(new AlwaysOnVpnPrimaryUserPreferenceController(context));
         controllers.add(new AlwaysOnVpnManagedProfilePreferenceController(context));
         controllers.add(new GlobalHttpProxyPreferenceController(context));

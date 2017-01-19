@@ -17,7 +17,6 @@ package com.android.settings.applications;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.RemoteException;
@@ -33,11 +32,11 @@ public abstract class AppWithAdminGrantedPermissionsCounter extends AppCounter {
 
     private final String[] mPermissions;
     private final PackageManagerWrapper mPackageManager;
-    private final IPackageManager mPackageManagerService;
+    private final IPackageManagerWrapper mPackageManagerService;
     private final DevicePolicyManagerWrapper mDevicePolicyManager;
 
     public AppWithAdminGrantedPermissionsCounter(Context context, String[] permissions,
-            PackageManagerWrapper packageManager, IPackageManager packageManagerService,
+            PackageManagerWrapper packageManager, IPackageManagerWrapper packageManagerService,
             DevicePolicyManagerWrapper devicePolicyManager) {
         super(context, packageManager);
         mPermissions = permissions;

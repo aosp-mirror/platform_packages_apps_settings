@@ -18,25 +18,34 @@ package com.android.settings.applications;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.pm.IPackageManager;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ComponentInfo;
+import android.content.pm.ProviderInfo;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.content.pm.UserInfo;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.ArraySet;
 import android.view.View;
 
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 
 import java.util.List;
+import java.util.Set;
 
 public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvider {
 
     private final Context mContext;
     private final PackageManagerWrapper mPm;
-    private final IPackageManager mPms;
+    private final IPackageManagerWrapper mPms;
     private final DevicePolicyManagerWrapper mDpm;
     private final UserManager mUm;
 
     public ApplicationFeatureProviderImpl(Context context, PackageManagerWrapper pm,
-            IPackageManager pms, DevicePolicyManagerWrapper dpm) {
+            IPackageManagerWrapper pms, DevicePolicyManagerWrapper dpm) {
         mContext = context.getApplicationContext();
         mPm = pm;
         mPms = pms;
@@ -59,6 +68,39 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
             NumberOfAppsCallback callback) {
         new AllUserAppWithAdminGrantedPermissionsCounter(mContext, permissions, mPm, mPms, mDpm,
                 callback).execute();
+    }
+
+    @Override
+    public Set<PersistentPreferredActivityInfo> findPersistentPreferredActivities(
+            Intent[] intents) {
+        final Set<PersistentPreferredActivityInfo> activities = new ArraySet<>();
+        final List<UserHandle> users = mUm.getUserProfiles();
+        for (final Intent intent : intents) {
+            for (final UserHandle user : users) {
+                final int userId = user.getIdentifier();
+                try {
+                    final ResolveInfo resolveInfo = mPms.findPersistentPreferredActivity(intent,
+                            userId);
+                    if (resolveInfo != null) {
+                        ComponentInfo componentInfo = null;
+                        if (resolveInfo.activityInfo != null) {
+                            componentInfo = resolveInfo.activityInfo;
+                        } else if (resolveInfo.serviceInfo != null) {
+                            componentInfo = resolveInfo.serviceInfo;
+                        } else if (resolveInfo.providerInfo != null) {
+                            componentInfo = resolveInfo.providerInfo;
+                        }
+                        if (componentInfo != null) {
+                            activities.add(new PersistentPreferredActivityInfo(
+                                    componentInfo.packageName, userId));
+                        }
+                    }
+                } catch (RemoteException exception) {
+                }
+            }
+
+        }
+        return activities;
     }
 
     private static class AllUserInstalledAppCounter extends InstalledAppCounter {
@@ -86,7 +128,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         private NumberOfAppsCallback mCallback;
 
         AllUserAppWithAdminGrantedPermissionsCounter(Context context, String[] permissions,
-                PackageManagerWrapper packageManager, IPackageManager packageManagerService,
+                PackageManagerWrapper packageManager, IPackageManagerWrapper packageManagerService,
                 DevicePolicyManagerWrapper devicePolicyManager, NumberOfAppsCallback callback) {
             super(context, permissions, packageManager, packageManagerService, devicePolicyManager);
             mCallback = callback;

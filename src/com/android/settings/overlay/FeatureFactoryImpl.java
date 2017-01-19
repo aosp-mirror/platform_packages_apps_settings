@@ -25,6 +25,7 @@ import android.support.annotation.Keep;
 
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.applications.IPackageManagerWrapperImpl;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
@@ -90,7 +91,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
         if (mApplicationFeatureProvider == null) {
             mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(context,
                     new PackageManagerWrapperImpl(context.getPackageManager()),
-                    AppGlobals.getPackageManager(),
+                    new IPackageManagerWrapperImpl(AppGlobals.getPackageManager()),
                     new DevicePolicyManagerWrapperImpl((DevicePolicyManager) context
                             .getSystemService(Context.DEVICE_POLICY_SERVICE)));
         }

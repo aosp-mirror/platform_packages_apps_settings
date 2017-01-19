@@ -81,6 +81,10 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         final Preference preference = new Preference(mContext, null, 0, 0);
         preference.setVisible(true);
 
+        setNumberOfEnterpriseInstalledPackages(0);
+        mController.updateState(preference);
+        assertThat(preference.isVisible()).isFalse();
+
         setNumberOfEnterpriseInstalledPackages(20);
         when(mContext.getResources().getQuantityString(
                 R.plurals.enterprise_privacy_number_enterprise_installed_packages, 20, 20))
@@ -88,10 +92,6 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         mController.updateState(preference);
         assertThat(preference.getTitle()).isEqualTo("20 packages");
         assertThat(preference.isVisible()).isTrue();
-
-        setNumberOfEnterpriseInstalledPackages(0);
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
     }
 
     @Test
