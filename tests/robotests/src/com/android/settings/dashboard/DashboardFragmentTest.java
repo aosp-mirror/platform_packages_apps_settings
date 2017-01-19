@@ -79,6 +79,7 @@ public class DashboardFragmentTest {
         when(mFakeFeatureFactory.dashboardFeatureProvider.getTilesForCategory(anyString()))
                 .thenReturn(mDashboardCategory);
         mTestFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
+        when(mContext.getPackageName()).thenReturn("TestPackage");
     }
 
     @Test
