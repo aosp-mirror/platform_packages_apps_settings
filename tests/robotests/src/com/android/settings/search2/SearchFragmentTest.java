@@ -113,4 +113,16 @@ public class SearchFragmentTest {
         verify(mFeatureFactory.searchFeatureProvider)
                 .getInstalledAppSearchLoader(any(Context.class), anyString());
     }
+
+    @Test
+    public void updateIndex_TriggerOnCreate() {
+        ActivityController<SearchActivity> activityController =
+                Robolectric.buildActivity(SearchActivity.class);
+        activityController.setup();
+        SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content);
+
+        fragment.onAttach(null);
+        verify(mFeatureFactory.searchFeatureProvider).updateIndex(any(Context.class));
+    }
 }

@@ -201,7 +201,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         reconstruct(db);
     }
 
-    private void reconstruct(SQLiteDatabase db) {
+    public void reconstruct(SQLiteDatabase db) {
         dropTables(db);
         bootstrapDB(db);
     }
