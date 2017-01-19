@@ -209,6 +209,7 @@ public class PowerUsageSummary extends PowerUsageBase {
      * We want to coalesce some UIDs. For example, dex2oat runs under a shared gid that
      * exists for all users of the same app. We detect this case and merge the power use
      * for dex2oat to the device OWNER's use of the app.
+     *
      * @return A sorted list of apps using power.
      */
     private static List<BatterySipper> getCoalescedUsageList(final List<BatterySipper> sippers) {
@@ -314,6 +315,8 @@ public class PowerUsageSummary extends PowerUsageBase {
             final List<BatterySipper> usageList = getCoalescedUsageList(
                     USE_FAKE_DATA ? getFakeStats() : mStatsHelper.getUsageList());
 
+            final double screenPowerMah = removeScreenBatterySipper(usageList);
+
             final int dischargeAmount = USE_FAKE_DATA ? 5000
                     : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
             final int numSippers = usageList.size();
@@ -322,16 +325,23 @@ public class PowerUsageSummary extends PowerUsageBase {
                 if (shouldHideSipper(sipper)) {
                     continue;
                 }
-                double totalPower = USE_FAKE_DATA ? 4000 : mStatsHelper.getTotalPower();
+
+                // Deduct the screen power from total power, used to calculate percentOfTotal
+                double totalPower = USE_FAKE_DATA ?
+                        4000 : mStatsHelper.getTotalPower() - screenPowerMah;
+
+                // With deduction in totalPower, percentOfTotal is higher because it adds the part
+                // used in screen
                 final double percentOfTotal =
                         ((sipper.totalPowerMah / totalPower) * dischargeAmount);
+
                 if (((int) (percentOfTotal + .5)) < 1) {
                     continue;
                 }
                 if (sipper.drainType == BatterySipper.DrainType.OVERCOUNTED) {
                     // Don't show over-counted unless it is at least 2/3 the size of
                     // the largest real entry, and its percent of total is more significant
-                    if (sipper.totalPowerMah < ((mStatsHelper.getMaxRealPower()*2)/3)) {
+                    if (sipper.totalPowerMah < ((mStatsHelper.getMaxRealPower() * 2) / 3)) {
                         continue;
                     }
                     if (percentOfTotal < 10) {
@@ -344,7 +354,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 if (sipper.drainType == BatterySipper.DrainType.UNACCOUNTED) {
                     // Don't show over-counted unless it is at least 1/2 the size of
                     // the largest real entry, and its percent of total is more significant
-                    if (sipper.totalPowerMah < (mStatsHelper.getMaxRealPower()/2)) {
+                    if (sipper.totalPowerMah < (mStatsHelper.getMaxRealPower() / 2)) {
                         continue;
                     }
                     if (percentOfTotal < 5) {
@@ -417,6 +427,19 @@ public class PowerUsageSummary extends PowerUsageBase {
             Log.w(TAG, "Inappropriate BatterySipper without uid and package names: " + sipper);
             return "-1";
         }
+    }
+
+    @VisibleForTesting
+    double removeScreenBatterySipper(List<BatterySipper> sippers) {
+        for (int i = 0, size = sippers.size(); i < size; i++) {
+            final BatterySipper sipper = sippers.get(i);
+            if (sipper.drainType == DrainType.SCREEN) {
+                sippers.remove(i);
+                return sipper.totalPowerMah;
+            }
+        }
+
+        return 0;
     }
 
     private static List<BatterySipper> getFakeStats() {
