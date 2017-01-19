@@ -191,10 +191,12 @@ public class SettingsActivity extends SettingsDrawerActivity
     private final BroadcastReceiver mUserAddRemoveReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(Intent.ACTION_USER_ADDED)
-                    || action.equals(Intent.ACTION_USER_REMOVED)) {
-                mSearchFeatureProvider.updateIndex(getApplicationContext());
+            if (mSearchFeatureProvider != null && !mSearchFeatureProvider.isEnabled(context)) {
+                String action = intent.getAction();
+                if (action.equals(Intent.ACTION_USER_ADDED)
+                        || action.equals(Intent.ACTION_USER_REMOVED)) {
+                    mSearchFeatureProvider.updateIndex(getApplicationContext());
+                }
             }
         }
     };
@@ -251,7 +253,9 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mSearchFeatureProvider.updateIndex(getApplicationContext());
+        if (!mSearchFeatureProvider.isEnabled(this)) {
+            mSearchFeatureProvider.updateIndex(getApplicationContext());
+        }
     }
 
     @Override
@@ -400,7 +404,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         getFragmentManager().addOnBackStackChangedListener(this);
 
-        if (mIsShowingDashboard) {
+        if (mIsShowingDashboard && !mSearchFeatureProvider.isEnabled(this)) {
             // Run the Index update only if we have some space
             if (!Utils.isLowStorage(this)) {
                 mSearchFeatureProvider.updateIndex(getApplicationContext());
@@ -642,8 +646,10 @@ public class SettingsActivity extends SettingsDrawerActivity
                 mDevelopmentPreferencesListener);
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_ADDED));
-        registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_REMOVED));
+        if (!mSearchFeatureProvider.isEnabled(this)) {
+            registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_ADDED));
+            registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_REMOVED));
+        }
         if (mDynamicIndexableContentMonitor == null) {
             mDynamicIndexableContentMonitor = new DynamicIndexableContentMonitor();
         }
@@ -659,7 +665,9 @@ public class SettingsActivity extends SettingsDrawerActivity
     protected void onPause() {
         super.onPause();
         unregisterReceiver(mBatteryInfoReceiver);
-        unregisterReceiver(mUserAddRemoveReceiver);
+        if (!mSearchFeatureProvider.isEnabled(this)) {
+            unregisterReceiver(mUserAddRemoveReceiver);
+        }
         if (mDynamicIndexableContentMonitor != null) {
             mDynamicIndexableContentMonitor.unregister(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
         }

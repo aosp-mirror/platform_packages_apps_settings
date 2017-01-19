@@ -26,6 +26,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import android.widget.SearchView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -92,10 +94,19 @@ public class SearchFragment extends InstrumentedFragment implements
             loaderManager.initLoader(LOADER_ID_DATABASE, null, this);
             loaderManager.initLoader(LOADER_ID_INSTALLED_APPS, null, this);
         }
-        final ActionBar actionBar = getActivity().getActionBar();
+
+        final Activity activity = getActivity();
+        final ActionBar actionBar = activity.getActionBar();
         actionBar.setCustomView(makeSearchView(actionBar, mQuery));
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
+
+        // Run the Index update only if we have some space
+        if (!Utils.isLowStorage(activity)) {
+            mSearchFeatureProvider.updateIndex(activity);
+        } else {
+            Log.w(TAG, "Cannot update the Indexer as we are running low on storage space!");
+        }
     }
 
     @Override

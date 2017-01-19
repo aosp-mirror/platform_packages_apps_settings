@@ -85,10 +85,11 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     public void updateIndex(Context context) {
         long indexStartTime = System.currentTimeMillis();
         if (isEnabled(context)) {
-            getIndexingManager(context).update();
+            getIndexingManager(context).indexDatabase();
         } else {
             Index.getInstance(context).update();
         }
-        Log.d(TAG, "Index.update() took " + (System.currentTimeMillis() - indexStartTime) + " ms");
+        Log.d(TAG, "IndexDatabase() took " +
+                (System.currentTimeMillis() - indexStartTime) + " ms");
     }
 }

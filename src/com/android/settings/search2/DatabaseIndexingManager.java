@@ -152,7 +152,7 @@ public class DatabaseIndexingManager {
         return mIsAvailable.get();
     }
 
-    public void update() {
+    public void indexDatabase() {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
