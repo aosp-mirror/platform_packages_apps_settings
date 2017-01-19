@@ -22,6 +22,8 @@ import android.content.IContentProvider;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import com.android.settings.trustagent.TrustAgentManager;
+import com.android.settings.trustagent.TrustAgentManagerImpl;
 import com.android.settingslib.drawer.DashboardCategory;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
@@ -36,6 +38,8 @@ import java.util.Map;
 
 /** Implementation for {@code SecurityFeatureProvider}. */
 public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
+
+    private TrustAgentManager mTrustAgentManager;
 
     /** Update preferences with data from associated tiles. */
     public void updatePreferences(Context context, PreferenceScreen preferenceScreen,
@@ -113,5 +117,13 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
                 }
             }
         }
+    }
+
+    @Override
+    public TrustAgentManager getTrustAgentManager() {
+        if (mTrustAgentManager == null) {
+            mTrustAgentManager = new TrustAgentManagerImpl();
+        }
+        return mTrustAgentManager;
     }
 }
