@@ -21,10 +21,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.SearchIndexableResource;
+
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search2.DatabaseIndexingManager;
+import com.android.settings.testutils.DatabaseTestUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -33,7 +35,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -85,15 +86,7 @@ public class DatabaseIndexingManagerTest {
 
     @After
     public void cleanUp() {
-        Field instance;
-        Class clazz = IndexDatabaseHelper.class;
-        try {
-            instance = clazz.getDeclaredField("sSingleton");
-            instance.setAccessible(true);
-            instance.set(null, null);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+        DatabaseTestUtils.clearDb();
     }
 
     @Test

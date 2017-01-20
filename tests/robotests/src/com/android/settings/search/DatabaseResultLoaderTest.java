@@ -20,18 +20,19 @@ package com.android.settings.search;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search2.DatabaseIndexingUtils;
 import com.android.settings.search2.DatabaseResultLoader;
+import com.android.settings.testutils.DatabaseTestUtils;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import java.lang.reflect.Field;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -53,15 +54,7 @@ public class DatabaseResultLoaderTest {
 
     @After
     public void cleanUp() {
-        Field instance;
-        Class clazz = IndexDatabaseHelper.class;
-        try {
-            instance = clazz.getDeclaredField("sSingleton");
-            instance.setAccessible(true);
-            instance.set(null, null);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+        DatabaseTestUtils.clearDb();
     }
 
     @Test

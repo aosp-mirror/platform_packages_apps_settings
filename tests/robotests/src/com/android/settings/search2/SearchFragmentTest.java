@@ -39,6 +39,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -52,6 +53,9 @@ public class SearchFragmentTest {
     private DatabaseResultLoader mDatabaseResultLoader;
     @Mock
     private InstalledAppResultLoader mInstalledAppResultLoader;
+    @Mock
+    private SavedQueryLoader mSavedQueryLoader;
+
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
@@ -65,6 +69,8 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mInstalledAppResultLoader);
+        when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
+                .thenReturn(mSavedQueryLoader);
     }
 
     @Test
@@ -112,6 +118,27 @@ public class SearchFragmentTest {
                 .getDatabaseSearchLoader(any(Context.class), anyString());
         verify(mFeatureFactory.searchFeatureProvider)
                 .getInstalledAppSearchLoader(any(Context.class), anyString());
+    }
+
+    @Test
+    public void queryTextChangeToEmpty_shouldTriggerSavedQueryLoader() {
+        ActivityController<SearchActivity> activityController =
+                Robolectric.buildActivity(SearchActivity.class);
+        activityController.setup();
+        SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content);
+
+        fragment.onQueryTextChange("");
+        activityController.get().onBackPressed();
+        activityController.pause().stop().destroy();
+
+        verify(mFeatureFactory.searchFeatureProvider, never())
+                .getDatabaseSearchLoader(any(Context.class), anyString());
+        verify(mFeatureFactory.searchFeatureProvider, never())
+                .getInstalledAppSearchLoader(any(Context.class), anyString());
+        // Saved query loaded 2 times: fragment start, and query change to empty.
+        verify(mFeatureFactory.searchFeatureProvider, times(2))
+                .getSavedQueryLoader(any(Context.class));
     }
 
     @Test

@@ -29,7 +29,7 @@ import java.lang.annotation.RetentionPolicy;
 public abstract class ResultPayload implements Parcelable {
 
     @IntDef({PayloadType.INLINE_SLIDER, PayloadType.INLINE_SWITCH,
-            PayloadType.INTENT})
+            PayloadType.INTENT, PayloadType.SAVED_QUERY})
     @Retention(RetentionPolicy.SOURCE)
     public @interface PayloadType {
         /**
@@ -46,6 +46,11 @@ public abstract class ResultPayload implements Parcelable {
          * Result is a inline widget, using a toggle widget as UI.
          */
         int INLINE_SWITCH = 2;
+
+        /**
+         * Result is a recently saved query.
+         */
+        int SAVED_QUERY = 3;
     }
 
     @IntDef({SettingsSource.UNKNOWN, SettingsSource.SYSTEM, SettingsSource.SECURE,
@@ -59,5 +64,6 @@ public abstract class ResultPayload implements Parcelable {
     }
 
 
-    @ResultPayload.PayloadType public abstract int getType();
+    @ResultPayload.PayloadType
+    public abstract int getType();
 }

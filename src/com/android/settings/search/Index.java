@@ -266,7 +266,7 @@ public class Index {
         StringBuilder sb = new StringBuilder();
 
         sb.append("SELECT ");
-        sb.append(IndexDatabaseHelper.SavedQueriesColums.QUERY);
+        sb.append(IndexDatabaseHelper.SavedQueriesColumns.QUERY);
         sb.append(" FROM ");
         sb.append(Tables.TABLE_SAVED_QUERIES);
 
@@ -274,7 +274,7 @@ public class Index {
             sb.append(" ORDER BY rowId DESC");
         } else {
             sb.append(" WHERE ");
-            sb.append(IndexDatabaseHelper.SavedQueriesColums.QUERY);
+            sb.append(IndexDatabaseHelper.SavedQueriesColumns.QUERY);
             sb.append(" LIKE ");
             sb.append("'");
             sb.append(query);
@@ -1299,8 +1299,8 @@ public class Index {
             final long now = new Date().getTime();
 
             final ContentValues values = new ContentValues();
-            values.put(IndexDatabaseHelper.SavedQueriesColums.QUERY, params[0]);
-            values.put(IndexDatabaseHelper.SavedQueriesColums.TIME_STAMP, now);
+            values.put(IndexDatabaseHelper.SavedQueriesColumns.QUERY, params[0]);
+            values.put(IndexDatabaseHelper.SavedQueriesColumns.TIME_STAMP, now);
 
             final SQLiteDatabase database = getWritableDatabase();
             if (database == null) {
@@ -1312,7 +1312,7 @@ public class Index {
             try {
                 // First, delete all saved queries that are the same
                 database.delete(Tables.TABLE_SAVED_QUERIES,
-                        IndexDatabaseHelper.SavedQueriesColums.QUERY + " = ?",
+                        IndexDatabaseHelper.SavedQueriesColumns.QUERY + " = ?",
                         new String[] { params[0] });
 
                 // Second, insert the saved query
