@@ -96,5 +96,15 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_device_access_category">
+        <com.android.settings.DividerPreference
+                android:key="lock_device"
+                android:title="@string/enterprise_privacy_lock_device"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="wipe_device"
+                android:title="@string/enterprise_privacy_wipe_device"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
     </PreferenceCategory>
 </PreferenceScreen>
