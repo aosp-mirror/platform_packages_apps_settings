@@ -743,6 +743,8 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void forceStopPackage(String pkgName) {
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
+                MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
         ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
         am.forceStopPackage(pkgName);
