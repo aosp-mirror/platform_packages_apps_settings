@@ -92,7 +92,7 @@ public class NotificationBackend {
             return null;
         }
         try {
-            return sINM.getNotificationChannelForPackage(pkg, uid, channelId);
+            return sINM.getNotificationChannelForPackage(pkg, uid, channelId, true);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return null;
@@ -101,7 +101,7 @@ public class NotificationBackend {
 
     public ParceledListSlice<NotificationChannel> getChannels(String pkg, int uid) {
         try {
-            return sINM.getNotificationChannelsForPackage(pkg, uid);
+            return sINM.getNotificationChannelsForPackage(pkg, uid, true);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return ParceledListSlice.emptyList();
