@@ -57,6 +57,7 @@ import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ManageAssist;
 import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.NotificationApps;
+import com.android.settings.applications.PictureInPictureSettings;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
@@ -225,6 +226,7 @@ public class SettingsGateway {
             AdvancedAppSettings.class.getName(),
             WallpaperTypeSettings.class.getName(),
             VrListenerSettings.class.getName(),
+            PictureInPictureSettings.class.getName(),
             ManagedProfileSettings.class.getName(),
             ChooseAccountActivity.class.getName(),
             IccLockSettings.class.getName(),

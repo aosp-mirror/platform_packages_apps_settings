@@ -105,6 +105,7 @@ public class Settings extends SettingsActivity {
     public static class UserSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class VrListenersSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConditionProviderSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UsbSettingsActivity extends SettingsActivity { /* empty */ }
