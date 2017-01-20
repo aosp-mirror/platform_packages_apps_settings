@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
@@ -25,8 +26,11 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.applications.UserManagerWrapper;
+import com.android.settings.applications.UserManagerWrapperImpl;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.deviceinfo.storage.SecondaryUserController;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -110,6 +114,10 @@ public class StorageDashboardFragment extends DashboardFragment {
         mPreferenceController = new StorageItemPreferenceController(context, this,
                 mVolume, new StorageManagerVolumeProvider(sm));
         controllers.add(mPreferenceController);
+
+        UserManagerWrapper userManager =
+                new UserManagerWrapperImpl(context.getSystemService(UserManager.class));
+        SecondaryUserController.addAllSecondaryUserControllers(context, userManager, controllers);
         controllers.add(new ManageStoragePreferenceController(context));
         return controllers;
     }

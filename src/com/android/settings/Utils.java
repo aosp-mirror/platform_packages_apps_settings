@@ -1246,4 +1246,16 @@ public final class Utils extends com.android.settingslib.Utils {
                 && (Settings.Secure.getInt(context.getContentResolver(),
                         carrierDemoModeSetting, 0) == 1);
     }
+
+    /**
+     * Returns if a given user is a profile of another user.
+     * @param user The user whose profiles will be checked.
+     * @param profile The (potential) profile.
+     * @return if the profile is actually a profile
+     */
+    public static boolean isProfileOf(UserInfo user, UserInfo profile) {
+        return user.id == profile.id ||
+                (user.profileGroupId != UserInfo.NO_PROFILE_GROUP_ID
+                        && user.profileGroupId == profile.profileGroupId);
+    }
 }

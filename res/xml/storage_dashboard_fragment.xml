@@ -43,6 +43,9 @@
         android:key="pref_system"
         android:title="@string/storage_detail_system">
     </com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate>
+    <PreferenceCategory
+        android:key="pref_secondary_users"
+        android:title="@string/storage_other_users" />
     <Preference
         android:key="manage_storage"
         android:title="@string/storage_menu_manage"

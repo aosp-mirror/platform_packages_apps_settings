@@ -110,6 +110,9 @@ public class StorageItemPreferenceController extends PreferenceController
         // TODO: Currently, this reflects the existing behavior for these toggles.
         //       After the intermediate views are built, swap them in.
         Intent intent = null;
+        if (preference.getKey() == null) {
+            return false;
+        }
         switch (preference.getKey()) {
             case PHOTO_KEY:
                 intent = getPhotosIntent();
