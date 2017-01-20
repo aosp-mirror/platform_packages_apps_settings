@@ -7224,6 +7224,12 @@
     <!-- Summary of app not allowed to draw overlay [CHAR LIMIT=60] -->
     <string name="system_alert_window_off">No</string>
 
+    <!-- Title for settings screen for controlling apps that can install other apps on device [CHAR LIMIT=30] -->
+    <string name="install_other_apps">Install other apps</string>
+    <!-- Keywords for setting screen for controlling apps that can install other apps on device -->
+    <string name="keywords_install_other_apps">install apps external unknown sources</string>
+    <!-- Label for setting which controls whether app is trusted to install apps on the device [CHAR LIMIT=45] -->
+    <string name="permit_install_other_apps">Allows to install other apps</string>
 
     <!-- Write Settings settings -->
     <!-- Settings title in main settings screen for WRITE_SETTINGS [CHAR LIMIT=30] -->
@@ -7233,6 +7239,8 @@
     <!-- Summary of number of apps currently can draw overlays [CHAR LIMIT=60] -->
     <string name="write_settings_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed to modify system settings</string>
 
+    <!-- Label for showing apps that can install other apps [CHAR LIMIT=45] -->
+    <string name="filter_install_sources_apps">Can install other apps</string>
     <!-- Label for showing apps that can write system settings [CHAR LIMIT=45] -->
     <string name="filter_write_settings_apps">Can modify system settings</string>
     <!-- Title for the apps that are allowed to write system settings [CHAR LIMIT=60] -->
@@ -7249,6 +7257,12 @@
     <string name="write_settings_on">Yes</string>
     <!-- Summary of app not allowed to write system settings [CHAR LIMIT=45] -->
     <string name="write_settings_off">No</string>
+    <!-- Summary of app trusted to install apps [CHAR LIMIT=45] -->
+    <string name="external_source_trusted">Yes</string>
+    <!-- Summary of app not trusted to install apps [CHAR LIMIT=45] -->
+    <string name="external_source_untrusted">No</string>
+    <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=100] -->
+    <string name="external_source_switch_title">Trust apps from this source</string>
 
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
     <string name="camera_gesture_title">Double twist for camera</string>
