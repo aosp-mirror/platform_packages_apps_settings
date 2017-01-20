@@ -25,4 +25,14 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         return false;
     }
 
+    @Override
+    public boolean isPresent(String className) {
+        return false;
+    }
+
+    @Override
+    public boolean isSuggestionCompleted(Context context) {
+        return false;
+    }
+
 }
