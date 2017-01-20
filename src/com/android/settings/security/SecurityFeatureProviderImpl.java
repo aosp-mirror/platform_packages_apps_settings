@@ -30,6 +30,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.Pair;
 
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
@@ -68,37 +69,23 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
             String summaryUri =
                     tile.metaData.getString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, null);
             if (!TextUtils.isEmpty(iconUri)) {
-                int icon = TileUtils.getIconFromUri(context, iconUri, providerMap);
-                boolean updateIcon = true;
                 String packageName = null;
-                // Dynamic icon has to come from the same package that the preference launches.
                 if (tile.intent != null) {
-                        Intent intent = tile.intent;
-                        if (!TextUtils.isEmpty(intent.getPackage())) {
-                            packageName = intent.getPackage();
-                        } else if (intent.getComponent() != null) {
-                            packageName = intent.getComponent().getPackageName();
-                        }
-                }
-                if (TextUtils.isEmpty(packageName)) {
-                    updateIcon = false;
-                } else {
-                    if (tile.icon == null) {
-                        // If the tile does not have an icon already, only update if the suggested
-                        // icon is non-zero.
-                        updateIcon = (icon != 0);
-                    } else {
-                        // If the existing icon has the same resource package and resource id, the
-                        // icon does not need to be updated.
-                        updateIcon = !(packageName.equals(tile.icon.getResPackage())
-                                && (icon == tile.icon.getResId()));
+                    Intent intent = tile.intent;
+                    if (!TextUtils.isEmpty(intent.getPackage())) {
+                        packageName = intent.getPackage();
+                    } else if (intent.getComponent() != null) {
+                        packageName = intent.getComponent().getPackageName();
                     }
                 }
-                if (updateIcon) {
+                Pair<String, Integer> icon =
+                        TileUtils.getIconFromUri(context, packageName, iconUri, providerMap);
+                if (icon != null) {
+                    // Icon is only returned if the icon belongs to Settings or the target app.
                     try {
                         matchingPref.setIcon(context.getPackageManager()
-                                .getResourcesForApplication(packageName)
-                                        .getDrawable(icon, context.getTheme()));
+                                .getResourcesForApplication(icon.first /* package name */)
+                                        .getDrawable(icon.second /* res id */, context.getTheme()));
                     } catch (PackageManager.NameNotFoundException | Resources.NotFoundException e) {
                         // Intentionally ignored. If icon resources cannot be found, do not update.
                     }

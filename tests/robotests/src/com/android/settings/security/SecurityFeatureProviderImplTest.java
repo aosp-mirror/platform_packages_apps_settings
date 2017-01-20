@@ -25,6 +25,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.Pair;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -77,9 +78,9 @@ public class SecurityFeatureProviderImplTest {
     @Implements(com.android.settingslib.drawer.TileUtils.class)
     public static class TileUtilsMock {
         @Implementation
-        public static int getIconFromUri(Context context, String uriString,
+        public static Pair getIconFromUri(Context context, String packageName, String uriString,
                 Map<String, IContentProvider> providerMap) {
-            return 161803;
+            return Pair.create("package", 161803);
         }
 
         @Implementation
