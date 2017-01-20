@@ -31,6 +31,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
@@ -45,6 +46,7 @@ import com.android.internal.os.PowerProfile;
 import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
@@ -331,10 +333,12 @@ public class PowerUsageSummary extends PowerUsageBase {
         final PowerProfile powerProfile = mStatsHelper.getPowerProfile();
         final BatteryStats stats = mStatsHelper.getStats();
         final double averagePower = powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL);
+        final Context context = getContext();
 
-        TypedValue value = new TypedValue();
-        getContext().getTheme().resolveAttribute(android.R.attr.colorControlNormal, value, true);
-        int colorControl = getContext().getColor(value.resourceId);
+        final TypedValue value = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.colorControlNormal, value, true);
+        final int colorControl = context.getColor(value.resourceId);
+        final String usedTime = context.getString(R.string.battery_used_for);
 
         if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP || USE_FAKE_DATA) {
             final List<BatterySipper> usageList = getCoalescedUsageList(
@@ -410,6 +414,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfMax, percentOfTotal);
+                setUsageSummary(pref, usedTime, sipper.usageTimeMs);
                 if ((sipper.drainType != DrainType.APP
                         || sipper.uidObj.getUid() == Process.ROOT_UID)
                         && sipper.drainType != DrainType.USER) {
@@ -429,6 +434,15 @@ public class PowerUsageSummary extends PowerUsageBase {
         removeCachedPrefs(mAppListGroup);
 
         BatteryEntry.startRequestQueue();
+    }
+
+    @VisibleForTesting
+    void setUsageSummary(Preference preference, String usedTimePrefix, long usageTimeMs) {
+        // Only show summary when usage time is longer than one minute
+        if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
+            preference.setSummary(String.format(usedTimePrefix,
+                    Utils.formatElapsedTime(getContext(), usageTimeMs, false)));
+        }
     }
 
     @VisibleForTesting

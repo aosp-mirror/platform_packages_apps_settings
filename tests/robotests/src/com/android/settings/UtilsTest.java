@@ -6,6 +6,7 @@ import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
+import android.text.format.DateUtils;
 import java.net.InetAddress;
 import org.junit.Before;
 import org.junit.Test;
@@ -70,5 +71,30 @@ public class UtilsTest {
     public void testAssignDefaultPhoto_ContextNull_ReturnFalseAndNotCrash() {
         // Should not crash here
         assertThat(Utils.assignDefaultPhoto(null, 0)).isFalse();
+    }
+
+    @Test
+    public void testFormatElapsedTime_WithSeconds_ShowSeconds() {
+        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS;
+        final String expectedTime = "5m 0s";
+
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, true)).isEqualTo(expectedTime);
+    }
+
+    @Test
+    public void testFormatElapsedTime_NoSeconds_DoNotShowSeconds() {
+        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS;
+        final String expectedTime = "5m";
+
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, false)).isEqualTo(expectedTime);
+    }
+
+    @Test
+    public void testFormatElapsedTime_TimeMoreThanOneDay_ShowCorrectly() {
+        final double testMillis = 2 * DateUtils.DAY_IN_MILLIS
+                + 4 * DateUtils.HOUR_IN_MILLIS + 15 * DateUtils.MINUTE_IN_MILLIS;
+        final String expectedTime = "2d 4h 15m";
+
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, false)).isEqualTo(expectedTime);
     }
 }
