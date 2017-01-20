@@ -196,7 +196,7 @@ public class DatabaseIndexingManagerTest {
     @Test
     public void testNullResource_NothingInserted() {
         mManager.indexOneSearchIndexableData(mDb, localeStr, null /* searchIndexableResource */,
-                new HashMap<String, List<String>>());
+                new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         assertThat(cursor.getCount()).isEqualTo(0);
     }
@@ -205,7 +205,7 @@ public class DatabaseIndexingManagerTest {
     public void testAddResource_RowsInserted() {
         SearchIndexableResource resource = getFakeResource(R.xml.gesture_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<String, List<String>>());
+                new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         assertThat(cursor.getCount()).isEqualTo(6);
     }
@@ -214,7 +214,7 @@ public class DatabaseIndexingManagerTest {
     public void testAddResourceHeader_RowsMatch() {
         SearchIndexableResource resource = getFakeResource(R.xml.application_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<String, List<String>>());
+                new HashMap<>());
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
         cursor.moveToPosition(1);
@@ -267,25 +267,27 @@ public class DatabaseIndexingManagerTest {
     public void testAddResourceCustomSetting_RowsMatch() {
         SearchIndexableResource resource = getFakeResource(R.xml.gesture_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<String, List<String>>());
-
-        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        cursor.moveToPosition(0);
+                new HashMap<>());
+        final String prefTitle =
+                mContext.getString(R.string.fingerprint_swipe_for_notifications_title);
+        final String prefSummary =
+                mContext.getString(R.string.fingerprint_swipe_for_notifications_summary);
+        Cursor cursor = mDb.rawQuery(
+                "SELECT * FROM prefs_index where data_title='" + prefTitle + "'", null);
+        cursor.moveToFirst();
 
         // Locale
         assertThat(cursor.getString(0)).isEqualTo(localeStr);
         // Data Rank
         assertThat(cursor.getInt(1)).isEqualTo(rank);
         // Data Title
-        assertThat(cursor.getString(2)).isEqualTo("Swipe for notifications");
+        assertThat(cursor.getString(2)).isEqualTo(prefTitle);
         // Normalized Title
-        assertThat(cursor.getString(3)).isEqualTo("swipe for notifications");
+        assertThat(cursor.getString(3)).isEqualTo(prefTitle.toLowerCase());
         // Summary On
-        assertThat(cursor.getString(4)).isEqualTo("To check your notifications, " +
-                "swipe down on the fingerprint sensor on the back of your phone.");
+        assertThat(cursor.getString(4)).isEqualTo(prefSummary);
         // Summary On Normalized
-        assertThat(cursor.getString(5)).isEqualTo("to check your notifications, " +
-                "swipe down on the fingerprint sensor on the back of your phone.");
+        assertThat(cursor.getString(5)).isEqualTo(prefSummary.toLowerCase());
         // Summary Off - only on for checkbox preferences
         assertThat(cursor.getString(6)).isEmpty();
         // Summary off normalized - only on for checkbox preferences
@@ -295,7 +297,8 @@ public class DatabaseIndexingManagerTest {
         // Keywords
         assertThat(cursor.getString(9)).isEmpty();
         // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo("Gestures");
+        assertThat(cursor.getString(10)).isEqualTo(
+                mContext.getString(R.string.gesture_preference_title));
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
@@ -322,7 +325,7 @@ public class DatabaseIndexingManagerTest {
     public void testAddResourceCheckboxPreference_RowsMatch() {
         SearchIndexableResource resource = getFakeResource(R.xml.application_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<String, List<String>>());
+                new HashMap<>());
 
         /* Should return 6 results, with the following titles:
          * Advanced Settings, Apps, Manage Apps, Preferred install location, Running Services
@@ -377,7 +380,7 @@ public class DatabaseIndexingManagerTest {
     public void testAddResourceListPreference_RowsMatch() {
         SearchIndexableResource resource = getFakeResource(R.xml.application_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<String, List<String>>());
+                new HashMap<>());
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
         cursor.moveToPosition(3);
@@ -436,7 +439,7 @@ public class DatabaseIndexingManagerTest {
         resource.className = "com.android.settings.display.ScreenZoomSettings";
 
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<String, List<String>>());
+                new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         assertThat(cursor.getCount()).isEqualTo(1);
     }
@@ -448,7 +451,7 @@ public class DatabaseIndexingManagerTest {
         resource.className = "com.android.settings.display.ScreenZoomSettings";
 
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<String, List<String>>());
+                new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         cursor.moveToPosition(0);
 
@@ -504,7 +507,7 @@ public class DatabaseIndexingManagerTest {
         resource.className = "com.android.settings.LegalSettings";
 
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<String, List<String>>());
+                new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         assertThat(cursor.getCount()).isEqualTo(2);
     }
@@ -516,7 +519,7 @@ public class DatabaseIndexingManagerTest {
         resource.className = "com.android.settings.LegalSettings";
 
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<String, List<String>>());
+                new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
         cursor.moveToPosition(0);
 

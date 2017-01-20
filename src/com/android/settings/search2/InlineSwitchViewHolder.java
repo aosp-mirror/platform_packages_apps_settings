@@ -21,41 +21,32 @@ import android.content.Context;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.TextView;
 
-import com.android.internal.widget.PreferenceImageView;
 import com.android.settings.R;
 
 /**
  * ViewHolder for Settings represented as SwitchPreferences.
  */
 public class InlineSwitchViewHolder extends SearchViewHolder {
-    public final TextView titleView;
-    public final TextView summaryView;
-    public final PreferenceImageView iconView;
+
     public final Switch switchView;
 
     private final Context mContext;
 
-    private final String TAG = "SwitchViewHolder";
-
     public InlineSwitchViewHolder(View view, Context context) {
         super(view);
         mContext = context;
-        titleView = (TextView) view.findViewById(android.R.id.title);
-        summaryView = (TextView) view.findViewById(android.R.id.summary);
-        iconView = (PreferenceImageView) view.findViewById(android.R.id.icon);
         switchView = (Switch) view.findViewById(R.id.switchView);
     }
 
     @Override
     public void onBind(SearchFragment fragment, SearchResult result) {
+        super.onBind(fragment, result);
         if (mContext == null) {
             return;
         }
         final InlineSwitchPayload payload = (InlineSwitchPayload) result.payload;
         switchView.setChecked(payload.getSwitchValue(mContext));
-
         switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -63,9 +54,5 @@ public class InlineSwitchViewHolder extends SearchViewHolder {
                 payload.setSwitchValue(mContext, isChecked);
             }
         });
-
-        titleView.setText(result.title);
-        summaryView.setText(result.summary);
-        iconView.setImageDrawable(result.icon);
     }
 }

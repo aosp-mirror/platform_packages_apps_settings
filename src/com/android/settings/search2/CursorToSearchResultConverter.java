@@ -211,7 +211,12 @@ class CursorToSearchResultConverter {
     }
 
     private List<String> getBreadcrumbs(Cursor cursor) {
-        return new ArrayList<>();
+        final List<String> breadcrumbs = new ArrayList<>();
+        final String screenTitle = cursor.getString(COLUMN_INDEX_SCREEN_TITLE);
+        if (!TextUtils.isEmpty(screenTitle)) {
+            breadcrumbs.add(screenTitle);
+        }
+        return breadcrumbs;
     }
 
     /** Uses the breadcrumbs to determine the offset to the base rank.
