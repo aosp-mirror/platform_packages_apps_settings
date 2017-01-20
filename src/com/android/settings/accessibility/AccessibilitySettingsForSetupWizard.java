@@ -41,11 +41,21 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE =
             "screen_magnification_preference";
     private static final String SCREEN_READER_PREFERENCE = "screen_reader_preference";
+    private static final String SELECT_TO_SPEAK_PREFERENCE = "select_to_speak_preference";
     private static final String FONT_SIZE_PREFERENCE = "font_size_preference";
+
+    // Package names and service names used to identify screen reader and SelectToSpeak services.
+    private static final String SCREEN_READER_PACKAGE_NAME = "com.google.android.marvin.talkback";
+    private static final String SCREEN_READER_SERVICE_NAME =
+            "com.google.android.marvin.talkback.TalkBackService";
+    private static final String SELECT_TO_SPEAK_PACKAGE_NAME = "com.google.android.marvin.talkback";
+    private static final String SELECT_TO_SPEAK_SERVICE_NAME =
+            "com.google.android.accessibility.selecttospeak.SelectToSpeakService";
 
     // Preference controls.
     private Preference mDisplayMagnificationPreference;
     private Preference mScreenReaderPreference;
+    private Preference mSelectToSpeakPreference;
 
     @Override
     public int getMetricsCategory() {
@@ -59,12 +69,16 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
 
         mDisplayMagnificationPreference = findPreference(DISPLAY_MAGNIFICATION_PREFERENCE);
         mScreenReaderPreference = findPreference(SCREEN_READER_PREFERENCE);
+        mSelectToSpeakPreference = findPreference(SELECT_TO_SPEAK_PREFERENCE);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        updateScreenReaderPreference();
+        updateAccessibilityServicePreference(mScreenReaderPreference,
+                findService(SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME));
+        updateAccessibilityServicePreference(mSelectToSpeakPreference,
+                findService(SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME));
     }
 
     @Override
@@ -94,13 +108,15 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         return super.onPreferenceTreeClick(preference);
     }
 
-    private AccessibilityServiceInfo findFirstServiceWithSpokenFeedback() {
+    private AccessibilityServiceInfo findService(String packageName, String serviceName) {
         final AccessibilityManager manager =
                 getActivity().getSystemService(AccessibilityManager.class);
         final List<AccessibilityServiceInfo> accessibilityServices =
                 manager.getInstalledAccessibilityServiceList();
         for (AccessibilityServiceInfo info : accessibilityServices) {
-            if ((info.feedbackType & AccessibilityServiceInfo.FEEDBACK_SPOKEN) != 0) {
+            ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
+            if (packageName.equals(serviceInfo.packageName)
+                    && serviceName.equals(serviceInfo.name)) {
                 return info;
             }
         }
@@ -108,28 +124,25 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         return null;
     }
 
-    private void updateScreenReaderPreference() {
-        // Find a screen reader.
-        AccessibilityServiceInfo info = findFirstServiceWithSpokenFeedback();
+    private void updateAccessibilityServicePreference(Preference preference,
+            AccessibilityServiceInfo info) {
         if (info == null) {
-            mScreenReaderPreference.setEnabled(false);
-        } else {
-            mScreenReaderPreference.setEnabled(true);
+            getPreferenceScreen().removePreference(preference);
+            return;
         }
 
         ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
         String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
-        mScreenReaderPreference.setTitle(title);
-
+        preference.setTitle(title);
         ComponentName componentName = new ComponentName(serviceInfo.packageName, serviceInfo.name);
-        mScreenReaderPreference.setKey(componentName.flattenToString());
+        preference.setKey(componentName.flattenToString());
 
         // Update the extras.
-        Bundle extras = mScreenReaderPreference.getExtras();
+        Bundle extras = preference.getExtras();
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
 
         extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
-                mScreenReaderPreference.getKey());
+            preference.getKey());
         extras.putString(AccessibilitySettings.EXTRA_TITLE, title);
 
         String description = info.loadDescription(getPackageManager());
