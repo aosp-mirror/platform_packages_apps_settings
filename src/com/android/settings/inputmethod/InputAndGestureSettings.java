@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import android.content.Context;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
@@ -31,9 +32,12 @@ import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.DoubleTwistPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class InputAndGestureSettings extends DashboardFragment {
@@ -90,4 +94,19 @@ public class InputAndGestureSettings extends DashboardFragment {
     void setAmbientDisplayConfig(AmbientDisplayConfiguration ambientConfig) {
         mAmbientDisplayConfig = ambientConfig;
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.input_and_gesture;
+                    return Arrays.asList(sir);
+                }
+            };
 }
