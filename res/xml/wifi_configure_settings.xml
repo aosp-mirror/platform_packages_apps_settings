@@ -17,11 +17,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/wifi_configure_titlebar">
 
-    <Preference
-        android:key="saved_networks"
-        android:title="@string/wifi_saved_access_points_label"
-        android:fragment="com.android.settings.wifi.SavedAccessPointsWifiSettings" />
-
     <!-- android:dependency="enable_wifi" -->
     <ListPreference
         android:key="sleep_policy"
