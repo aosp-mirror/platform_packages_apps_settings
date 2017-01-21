@@ -73,6 +73,11 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
+    public SavedQueryLoader getSavedQueryLoader(Context context) {
+        return new SavedQueryLoader(context);
+    }
+
+    @Override
     public DatabaseIndexingManager getIndexingManager(Context context) {
         if (mDatabaseIndexingManager == null) {
             mDatabaseIndexingManager = new DatabaseIndexingManager(context.getApplicationContext(),

@@ -49,13 +49,16 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
         final Context context = parent.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view;
-        switch(viewType) {
+        switch (viewType) {
             case PayloadType.INTENT:
                 view = inflater.inflate(R.layout.search_intent_item, parent, false);
                 return new IntentSearchViewHolder(view);
             case PayloadType.INLINE_SWITCH:
                 view = inflater.inflate(R.layout.search_inline_switch_item, parent, false);
                 return new InlineSwitchViewHolder(view, context);
+            case PayloadType.SAVED_QUERY:
+                view = inflater.inflate(R.layout.search_saved_query_item, parent, false);
+                return new SavedQueryViewHolder(view);
             default:
                 return null;
         }

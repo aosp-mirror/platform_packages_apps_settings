@@ -67,7 +67,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         String BUILD = "build";
     }
 
-    public interface SavedQueriesColums {
+    public interface SavedQueriesColumns {
         String QUERY = "query";
         String TIME_STAMP = "timestamp";
     }
@@ -127,9 +127,9 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_SAVED_QUERIES_TABLE =
             "CREATE TABLE " + Tables.TABLE_SAVED_QUERIES +
                     "(" +
-                    SavedQueriesColums.QUERY + " VARCHAR(64) NOT NULL" +
+                    SavedQueriesColumns.QUERY + " VARCHAR(64) NOT NULL" +
                     ", " +
-                    SavedQueriesColums.TIME_STAMP + " INTEGER" +
+                    SavedQueriesColumns.TIME_STAMP + " INTEGER" +
                     ")";
 
     private static final String INSERT_BUILD_VERSION =
