@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.SuggestionFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 
 /**
@@ -59,6 +60,8 @@ public abstract class FeatureFactory {
         if (DEBUG) Log.d(LOG_TAG, "started " + sFactory.getClass().getSimpleName());
         return sFactory;
     }
+
+    public abstract SuggestionFeatureProvider getSuggestionFeatureProvider();
 
     public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
 
