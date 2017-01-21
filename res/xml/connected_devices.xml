@@ -18,6 +18,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/connected_devices_dashboard_title">
 
+    <com.android.settings.widget.MasterSwitchPreference
+      android:fragment="com.android.settings.bluetooth.BluetoothSettings"
+      android:key="toggle_bluetooth"
+      android:title="@string/bluetooth_settings_title"
+      android:icon="@drawable/ic_settings_bluetooth"
+      android:order="-7"/>
+
     <SwitchPreference
         android:key="toggle_nfc"
         android:title="@string/nfc_quick_toggle_title"

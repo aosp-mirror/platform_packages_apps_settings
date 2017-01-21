@@ -45,6 +45,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.bluetooth.BluetoothSummaryHelper.OnSummaryChangeListener;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -52,13 +53,12 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.FooterPreference;
 import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.bluetooth.BluetoothCallback;
+import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -148,7 +148,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
 
-        mBluetoothEnabler = new BluetoothEnabler(activity, mSwitchBar, mMetricsFeatureProvider);
+        mBluetoothEnabler = new BluetoothEnabler(activity, new SwitchBarController(mSwitchBar),
+            mMetricsFeatureProvider, Utils.getLocalBtManager(activity));
         mBluetoothEnabler.setupSwitchBar();
     }
 
@@ -508,112 +509,34 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     }
 
     @VisibleForTesting
-    static class SummaryProvider
-            implements SummaryLoader.SummaryProvider, BluetoothCallback {
+    static class SummaryProvider implements SummaryLoader.SummaryProvider, OnSummaryChangeListener {
 
         private final LocalBluetoothManager mBluetoothManager;
         private final Context mContext;
         private final SummaryLoader mSummaryLoader;
 
-        private boolean mEnabled;
-        private int mConnectionState;
+        @VisibleForTesting
+        BluetoothSummaryHelper mSummaryHelper;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader,
                 LocalBluetoothManager bluetoothManager) {
             mBluetoothManager = bluetoothManager;
             mContext = context;
             mSummaryLoader = summaryLoader;
+            mSummaryHelper = new BluetoothSummaryHelper(mContext, mBluetoothManager);
+            mSummaryHelper.setOnSummaryChangeListener(this);
         }
 
         @Override
         public void setListening(boolean listening) {
-            BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
-            if (defaultAdapter == null) return;
-            if (listening) {
-                mEnabled = defaultAdapter.isEnabled();
-                mConnectionState = defaultAdapter.getConnectionState();
-                mSummaryLoader.setSummary(this, getSummary());
-                mBluetoothManager.getEventManager().registerCallback(this);
-            } else {
-                mBluetoothManager.getEventManager().unregisterCallback(this);
+            mSummaryHelper.setListening(listening);
+        }
+
+        @Override
+        public void onSummaryChanged(String summary) {
+            if (mSummaryLoader != null) {
+                mSummaryLoader.setSummary(this, summary);
             }
-        }
-
-        private CharSequence getSummary() {
-            if (!mEnabled) {
-                return mContext.getString(R.string.bluetooth_disabled);
-            } else if (mConnectionState == BluetoothAdapter.STATE_CONNECTED) {
-                return mContext.getString(R.string.bluetooth_connected);
-            } else {
-                return mContext.getString(R.string.bluetooth_disconnected);
-            }
-        }
-
-        @Override
-        public void onBluetoothStateChanged(int bluetoothState) {
-            mEnabled = bluetoothState == BluetoothAdapter.STATE_ON
-                    || bluetoothState == BluetoothAdapter.STATE_TURNING_ON;
-            mSummaryLoader.setSummary(this, getSummary());
-        }
-
-        @Override
-        public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
-            mConnectionState = state;
-            updateConnected();
-            mSummaryLoader.setSummary(this, getSummary());
-        }
-
-        @Override
-        public void onScanningStateChanged(boolean started) {
-
-        }
-
-        @Override
-        public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
-
-        }
-
-        @Override
-        public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
-
-        }
-
-        @Override
-        public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
-
-        }
-
-        private void updateConnected() {
-            // Make sure our connection state is up to date.
-            int state = mBluetoothManager.getBluetoothAdapter().getConnectionState();
-            if (state != mConnectionState) {
-                mConnectionState = state;
-                return;
-            }
-            final Collection<CachedBluetoothDevice> devices = getDevices();
-            if (devices == null) {
-                mConnectionState = BluetoothAdapter.STATE_DISCONNECTED;
-                return;
-            }
-            if (mConnectionState == BluetoothAdapter.STATE_CONNECTED) {
-                CachedBluetoothDevice connectedDevice = null;
-                for (CachedBluetoothDevice device : devices) {
-                    if (device.isConnected()) {
-                        connectedDevice = device;
-                    }
-                }
-                if (connectedDevice == null) {
-                    // If somehow we think we are connected, but have no connected devices, we
-                    // aren't connected.
-                    mConnectionState = BluetoothAdapter.STATE_DISCONNECTED;
-                }
-            }
-        }
-
-        private Collection<CachedBluetoothDevice> getDevices() {
-            return mBluetoothManager != null
-                    ? mBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy()
-                    : null;
         }
     }
 

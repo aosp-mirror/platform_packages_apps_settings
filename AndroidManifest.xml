@@ -3324,17 +3324,6 @@
                        android:value="com.android.settings.applications.ProcessStatsSummary" />
         </activity-alias>
 
-        <activity-alias android:name="BluetoothDashboardAlias"
-                        android:targetActivity="Settings$BluetoothSettingsActivity">
-            <intent-filter android:priority="7">
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.bluetooth.BluetoothSettings" />
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.device" />
-        </activity-alias>
-
         <activity-alias android:name="CastDashboardAlias"
                         android:targetActivity="Settings$WifiDisplaySettingsActivity">
             <intent-filter android:priority="6">
