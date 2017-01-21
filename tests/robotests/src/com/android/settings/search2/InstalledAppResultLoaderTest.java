@@ -17,6 +17,8 @@
 package com.android.settings.search2;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 
@@ -38,8 +40,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
+import static android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -92,6 +97,55 @@ public class InstalledAppResultLoaderTest {
         mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(2);
+    }
+
+    @Test
+    public void query_matchingQuery_shouldReturnSystemAppUpdates() {
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_UPDATED_SYSTEM_APP,
+                                0 /* targetSdkVersion */)));
+        final String query = "app";
+
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_matchingQuery_shouldReturnSystemAppIfLaunchable() {
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM,
+                                0 /* targetSdkVersion */)));
+        final List<ResolveInfo> list = mock(List.class);
+        when(list.size()).thenReturn(1);
+        when(mPackageManagerWrapper.queryIntentActivitiesAsUser(
+                any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(list);
+
+        final String query = "app";
+
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_matchingQuery_shouldNOtReturnSystemAppIfNotLaunchable() {
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM,
+                                0 /* targetSdkVersion */)));
+        when(mPackageManagerWrapper.queryIntentActivitiesAsUser(
+                any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(null);
+
+        final String query = "app";
+
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground()).isEmpty();
     }
 
     @Test

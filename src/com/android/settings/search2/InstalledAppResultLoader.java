@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.net.Uri;
 import android.os.UserHandle;
@@ -41,10 +42,13 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
 
     private static final int NAME_NO_MATCH = -1;
     private static final int NAME_EXACT_MATCH = 0;
+    private static final Intent LAUNCHER_PROBE = new Intent(Intent.ACTION_MAIN)
+            .addCategory(Intent.CATEGORY_LAUNCHER);
 
     private final String mQuery;
     private final UserManager mUserManager;
     private final PackageManagerWrapper mPackageManager;
+
 
     public InstalledAppResultLoader(Context context, PackageManagerWrapper pmWrapper,
             String query) {
@@ -67,7 +71,7 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
                                     | (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0),
                             user.id);
             for (ApplicationInfo info : apps) {
-                if (info.isSystemApp()) {
+                if (!shouldIncludeAsCandidate(info, user)) {
                     continue;
                 }
                 final CharSequence label = info.loadLabel(pm);
@@ -89,6 +93,22 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
         }
         Collections.sort(results);
         return results;
+    }
+
+    private boolean shouldIncludeAsCandidate(ApplicationInfo info, UserInfo user) {
+        if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0
+                || (info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+            return true;
+        }
+        final Intent launchIntent = new Intent(LAUNCHER_PROBE)
+                .setPackage(info.packageName);
+        final List<ResolveInfo> intents = mPackageManager.queryIntentActivitiesAsUser(
+                launchIntent,
+                PackageManager.MATCH_DISABLED_COMPONENTS
+                        | PackageManager.MATCH_DIRECT_BOOT_AWARE
+                        | PackageManager.MATCH_DIRECT_BOOT_UNAWARE,
+                user.id);
+        return intents != null && intents.size() != 0;
     }
 
     @Override
