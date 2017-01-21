@@ -20,6 +20,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.utils.AsyncLoader;
 
@@ -35,11 +37,6 @@ import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS
  */
 public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
     private static final String LOG = "DatabaseResultLoader";
-    private final String mQueryText;
-
-    protected final SQLiteDatabase mDatabase;
-
-    private final CursorToSearchResultConverter mConverter;
 
     /* These indices are used to match the columns of the this loader's SELECT statement.
      These are not necessarily the same order nor similar coverage as the schema defined in
@@ -99,8 +96,15 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
      */
     private static final int[] BASE_RANKS = {1, 4, 7};
 
+    private final String mQueryText;
+    private final SQLiteDatabase mDatabase;
+    private final CursorToSearchResultConverter mConverter;
+    private final SiteMapManager mSiteMapManager;
+
     public DatabaseResultLoader(Context context, String queryText) {
         super(context);
+        mSiteMapManager = FeatureFactory.getFactory(context)
+                .getSearchFeatureProvider().getSiteMapManager();
         mDatabase = IndexDatabaseHelper.getInstance(context).getReadableDatabase();
         mQueryText = cleanQuery(queryText);
         mConverter = new CursorToSearchResultConverter(context, mQueryText);
@@ -144,7 +148,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
 
         final Cursor resultCursor = mDatabase.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
                 selection, null, null, null);
-        return mConverter.convertCursor(resultCursor, baseRank);
+        return mConverter.convertCursor(mSiteMapManager, resultCursor, baseRank);
     }
 
     @Override
@@ -155,6 +159,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
 
     /**
      * A generic method to make the query suitable for searching the database.
+     *
      * @return the cleaned query string
      */
     private static String cleanQuery(String query) {

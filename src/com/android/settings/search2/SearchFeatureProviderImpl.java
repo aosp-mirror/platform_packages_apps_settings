@@ -25,6 +25,7 @@ import android.view.MenuItem;
 
 import com.android.settings.R;
 import com.android.settings.applications.PackageManagerWrapperImpl;
+import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.search.Index;
 
 /**
@@ -35,6 +36,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     private static final String TAG = "SearchFeatureProvider";
 
     private DatabaseIndexingManager mDatabaseIndexingManager;
+    private SiteMapManager mSiteMapManager;
 
     @Override
     public boolean isEnabled(Context context) {
@@ -84,6 +86,13 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
                     context.getPackageName());
         }
         return mDatabaseIndexingManager;
+    }
+
+    public SiteMapManager getSiteMapManager() {
+        if (mSiteMapManager == null) {
+            mSiteMapManager = new SiteMapManager();
+        }
+        return mSiteMapManager;
     }
 
     @Override

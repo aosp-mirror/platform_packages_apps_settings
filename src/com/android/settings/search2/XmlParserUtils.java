@@ -24,9 +24,6 @@ import android.util.TypedValue;
 
 import com.android.settings.R;
 
-import java.text.Normalizer;
-import java.util.regex.Pattern;
-
 /**
  * Utility class to parse elements of XML preferences
  */
@@ -72,6 +69,14 @@ public class XmlParserUtils {
 
     public static String getDataKeywords(Context context, AttributeSet attrs) {
         return getData(context, attrs, R.styleable.Preference, R.styleable.Preference_keywords);
+    }
+
+    /**
+     * Returns the fragment name if this preference launches a child fragment.
+     */
+    public static String getDataChildFragment(Context context, AttributeSet attrs) {
+        return getData(context, attrs, R.styleable.Preference,
+                R.styleable.Preference_android_fragment);
     }
 
     private static String getData(Context context, AttributeSet set, int[] attrs, int resId) {

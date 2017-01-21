@@ -19,17 +19,13 @@ package com.android.settings.search;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.view.Menu;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search2.DatabaseIndexingManager;
+import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.search2.SearchFeatureProviderImpl;
 
-import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.drawer.DashboardCategory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,6 +70,14 @@ public class SearchFeatureProviderImplTest {
         mProvider.setUpSearchMenu(menu, mActivity);
 
         verify(menu).add(anyInt(), anyInt(), anyInt(), anyString());
+    }
+
+    @Test
+    public void getSiteMapManager_shouldCacheInstanec() {
+        final SiteMapManager manager1 = mProvider.getSiteMapManager();
+        final SiteMapManager manager2 = mProvider.getSiteMapManager();
+
+        assertThat(manager1).isSameAs(manager2);
     }
 
     @Test

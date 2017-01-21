@@ -28,8 +28,10 @@ import android.os.BadParcelableException;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.dashboard.SiteMapManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,18 +41,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_ID;
-import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS;
-import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_SCREEN_TITLE;
-import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_TITLE;
-import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_SUMMARY_ON;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_CLASS_NAME;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_ICON;
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_ID;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_INTENT_ACTION;
-import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
+import static com.android.settings.search2.DatabaseResultLoader
+        .COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS;
+import static com.android.settings.search2.DatabaseResultLoader
+        .COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_KEY;
-import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_PAYLOAD_TYPE;
 import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_PAYLOAD;
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_PAYLOAD_TYPE;
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_SCREEN_TITLE;
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_SUMMARY_ON;
+import static com.android.settings.search2.DatabaseResultLoader.COLUMN_INDEX_TITLE;
 
 /**
  * Controller to Build search results from {@link Cursor} Objects.
@@ -78,7 +82,8 @@ class CursorToSearchResultConverter {
         mQueryText = queryText;
     }
 
-    public List<SearchResult> convertCursor(Cursor cursorResults, int baseRank) {
+    public List<SearchResult> convertCursor(SiteMapManager sitemapManager,
+            Cursor cursorResults, int baseRank) {
         if (cursorResults == null) {
             return null;
         }
@@ -86,8 +91,8 @@ class CursorToSearchResultConverter {
         final List<SearchResult> results = new ArrayList<>();
 
         while (cursorResults.moveToNext()) {
-            SearchResult result = buildSingleSearchResultFromCursor(contextMap, cursorResults,
-                    baseRank);
+            SearchResult result = buildSingleSearchResultFromCursor(sitemapManager,
+                    contextMap, cursorResults, baseRank);
             if (result != null) {
                 results.add(result);
             }
@@ -96,8 +101,8 @@ class CursorToSearchResultConverter {
         return results;
     }
 
-    private SearchResult buildSingleSearchResultFromCursor(Map<String, Context> contextMap,
-            Cursor cursor, int baseRank) {
+    private SearchResult buildSingleSearchResultFromCursor(SiteMapManager sitemapManager,
+            Map<String, Context> contextMap, Cursor cursor, int baseRank) {
         final String docId = cursor.getString(COLUMN_INDEX_ID);
         /* Make sure that this result has not yet been added as a result. Checking the docID
            covers the case of multiple queries matching the same row, but we need to also to check
@@ -128,7 +133,7 @@ class CursorToSearchResultConverter {
             return null;
         }
 
-        final List<String> breadcrumbs = getBreadcrumbs(cursor);
+        final List<String> breadcrumbs = getBreadcrumbs(sitemapManager, cursor);
         final int rank = getRank(breadcrumbs, baseRank);
 
         final SearchResult.Builder builder = new SearchResult.Builder();
@@ -210,12 +215,11 @@ class CursorToSearchResultConverter {
         return null;
     }
 
-    private List<String> getBreadcrumbs(Cursor cursor) {
-        final List<String> breadcrumbs = new ArrayList<>();
+    private List<String> getBreadcrumbs(SiteMapManager siteMapManager, Cursor cursor) {
         final String screenTitle = cursor.getString(COLUMN_INDEX_SCREEN_TITLE);
-        if (!TextUtils.isEmpty(screenTitle)) {
-            breadcrumbs.add(screenTitle);
-        }
+        final String screenClass = cursor.getString(COLUMN_INDEX_CLASS_NAME);
+        final List<String> breadcrumbs = siteMapManager.buildBreadCrumb(mContext, screenClass,
+                screenTitle);
         return breadcrumbs;
     }
 

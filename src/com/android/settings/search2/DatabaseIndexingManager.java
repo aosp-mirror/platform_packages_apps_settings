@@ -34,7 +34,6 @@ import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
@@ -582,12 +581,13 @@ public class DatabaseIndexingManager {
             String title;
             String summary;
             String keywords;
+            String childFragment;
             ResultPayload payload;
 
-            ArrayMap<String, PreferenceController> controllerUriMap = null;
+            Map<String, PreferenceController> controllerUriMap = null;
 
             if (fragmentName != null) {
-                controllerUriMap = (ArrayMap) DatabaseIndexingUtils
+                controllerUriMap = DatabaseIndexingUtils
                         .getPreferenceControllerUriMap(fragmentName, context);
             }
 
@@ -655,8 +655,10 @@ public class DatabaseIndexingManager {
                     }
 
                     payload = DatabaseIndexingUtils.getPayloadFromUriMap(controllerUriMap, key);
+                    childFragment = XmlParserUtils.getDataChildFragment(context, attrs);
 
                     builder.setEntries(entries)
+                            .setChildClassName(childFragment)
                             .setPayload(payload);
 
                     // Insert rows for the child nodes of PreferenceScreen
@@ -811,6 +813,18 @@ public class DatabaseIndexingManager {
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, row.payload);
 
         database.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
+
+        if (!TextUtils.isEmpty(row.className) && !TextUtils.isEmpty(row.childClassName)) {
+            ContentValues siteMapPair = new ContentValues();
+            final int pairDocId = Objects.hash(row.className, row.childClassName);
+            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.DOCID, pairDocId);
+            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.PARENT_CLASS, row.className);
+            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.PARENT_TITLE, row.screenTitle);
+            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.CHILD_CLASS, row.childClassName);
+            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.CHILD_TITLE, row.updatedTitle);
+
+            database.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_SITE_MAP, null, siteMapPair);
+        }
     }
 
     /**
@@ -950,6 +964,7 @@ public class DatabaseIndexingManager {
         public final String normalizedSummaryOff;
         public final String entries;
         public final String className;
+        public final String childClassName;
         public final String screenTitle;
         public final int iconResId;
         public final int rank;
@@ -973,6 +988,7 @@ public class DatabaseIndexingManager {
             normalizedSummaryOff = builder.mNormalizedSummaryOff;
             entries = builder.mEntries;
             className = builder.mClassName;
+            childClassName = builder.mChildClassName;
             screenTitle = builder.mScreenTitle;
             iconResId = builder.mIconResId;
             rank = builder.mRank;
@@ -1008,6 +1024,7 @@ public class DatabaseIndexingManager {
             private String mNormalizedSummaryOff;
             private String mEntries;
             private String mClassName;
+            private String mChildClassName;
             private String mScreenTitle;
             private int mIconResId;
             private int mRank;
@@ -1064,6 +1081,11 @@ public class DatabaseIndexingManager {
 
             public Builder setClassName(String className) {
                 mClassName = className;
+                return this;
+            }
+
+            public Builder setChildClassName(String childClassName) {
+                mChildClassName = childClassName;
                 return this;
             }
 

@@ -105,7 +105,7 @@ public class DatabaseIndexingUtils {
      * @return The Payload from the {@link PreferenceController} specified by the key, if it exists.
      * Otherwise null.
      */
-    public static ResultPayload getPayloadFromUriMap(ArrayMap<String, PreferenceController> uriMap,
+    public static ResultPayload getPayloadFromUriMap(Map<String, PreferenceController> uriMap,
             String key) {
         if (uriMap == null) {
             return null;

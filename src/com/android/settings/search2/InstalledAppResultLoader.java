@@ -29,7 +29,10 @@ import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AsyncLoader;
 
 import java.util.ArrayList;
@@ -46,7 +49,8 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
     private static final Intent LAUNCHER_PROBE = new Intent(Intent.ACTION_MAIN)
             .addCategory(Intent.CATEGORY_LAUNCHER);
 
-    private final List<String> mBreadcrumb;
+    private List<String> mBreadcrumb;
+    private SiteMapManager mSiteMapManager;
     private final String mQuery;
     private final UserManager mUserManager;
     private final PackageManagerWrapper mPackageManager;
@@ -55,9 +59,8 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
     public InstalledAppResultLoader(Context context, PackageManagerWrapper pmWrapper,
             String query) {
         super(context);
-        mBreadcrumb = new ArrayList<>();
-        mBreadcrumb.add(context.getString(R.string.app_and_notification_dashboard_title));
-        mBreadcrumb.add(context.getString(R.string.applications_settings));
+        mSiteMapManager = FeatureFactory.getFactory(context)
+                .getSearchFeatureProvider().getSiteMapManager();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPackageManager = pmWrapper;
         mQuery = query;
@@ -92,7 +95,7 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
                 builder.addIcon(info.loadIcon(pm))
                         .addTitle(info.loadLabel(pm))
                         .addRank(wordDiff)
-                        .addBreadcrumbs(mBreadcrumb)
+                        .addBreadcrumbs(getBreadCrumb())
                         .addPayload(new IntentPayload(intent));
                 results.add(builder.build());
             }
@@ -161,5 +164,15 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
         // Use the diff in length as a proxy of how close the 2 words match. Value range from 0
         // to infinity.
         return valueText.length - queryTokens.length;
+    }
+
+    private List<String> getBreadCrumb() {
+        if (mBreadcrumb == null || mBreadcrumb.isEmpty()) {
+            final Context context = getContext();
+            mBreadcrumb = mSiteMapManager.buildBreadCrumb(
+                    context, ManageApplications.class.getName(),
+                    context.getString(R.string.applications_settings));
+        }
+        return mBreadcrumb;
     }
 }

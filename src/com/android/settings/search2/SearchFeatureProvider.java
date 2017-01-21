@@ -19,6 +19,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.Menu;
 
+import com.android.settings.dashboard.SiteMapManager;
+
 /**
  * FeatureProvider for Settings Search
  */
@@ -56,6 +58,11 @@ public interface SearchFeatureProvider {
      * Returns the manager for indexing Settings data.
      */
     DatabaseIndexingManager getIndexingManager(Context context);
+
+    /**
+     * Returns the manager for looking up breadcrumbs.
+     */
+    SiteMapManager getSiteMapManager();
 
     /**
      * Updates the Settings indexes

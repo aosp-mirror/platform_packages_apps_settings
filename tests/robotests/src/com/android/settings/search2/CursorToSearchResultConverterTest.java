@@ -28,12 +28,16 @@ import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
+import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.gestures.GestureSettings;
 import com.android.settings.search2.ResultPayload.PayloadType;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
@@ -57,11 +61,14 @@ public class CursorToSearchResultConverterTest {
     private static final int BASE_RANK = 1;
     private static final int EXAMPLES = 3;
 
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private SiteMapManager mSiteMapManager;
     private Drawable mDrawable;
     private CursorToSearchResultConverter mConverter;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         Context context = Robolectric.buildActivity(Activity.class).get();
         mDrawable = context.getDrawable(ICON);
         mConverter = new CursorToSearchResultConverter(context, QUERY);
@@ -69,19 +76,21 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseNullResults_ReturnsNull() {
-        List<SearchResult> results = mConverter.convertCursor(null, BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, null, BASE_RANK);
         assertThat(results).isNull();
     }
 
     @Test
     public void testParseCursor_NotNull() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(
+                mSiteMapManager, getDummyCursor(), BASE_RANK);
         assertThat(results).isNotNull();
     }
 
     @Test
     public void testParseCursor_MatchesRank() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(
+                mSiteMapManager, getDummyCursor(), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
             assertThat(results.get(i).rank).isEqualTo(BASE_RANK);
         }
@@ -89,7 +98,8 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesTitle() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(
+                mSiteMapManager, getDummyCursor(), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
             assertThat(results.get(i).title).isEqualTo(TITLES[i]);
         }
@@ -97,7 +107,8 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesSummary() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(
+                mSiteMapManager, getDummyCursor(), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
             assertThat(results.get(i).summary).isEqualTo(SUMMARY);
         }
@@ -105,7 +116,8 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesIcon() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(
+                mSiteMapManager, getDummyCursor(), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
             Drawable resultDrawable = results.get(i).icon;
             assertThat(resultDrawable).isNotNull();
@@ -116,7 +128,7 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testParseCursor_NoIcon() {
         List<SearchResult> results = mConverter.convertCursor(
-                getDummyCursor(false /* hasIcon */), BASE_RANK);
+                mSiteMapManager, getDummyCursor(false /* hasIcon */), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
             Drawable resultDrawable = results.get(i).icon;
             assertThat(resultDrawable).isNull();
@@ -125,7 +137,8 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesPayloadType() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(
+                mSiteMapManager, getDummyCursor(), BASE_RANK);
         ResultPayload payload;
         for (int i = 0; i < EXAMPLES; i++) {
             payload = results.get(i).payload;
@@ -152,7 +165,7 @@ public class CursorToSearchResultConverterTest {
                 0,       // Payload Type
                 null     // Payload
         });
-        List<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
         IntentPayload payload = (IntentPayload) results.get(0).payload;
         Intent intent = payload.intent;
         assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
@@ -160,7 +173,8 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesIntentPayload() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(
+                mSiteMapManager, getDummyCursor(), BASE_RANK);
         IntentPayload payload;
         for (int i = 0; i < EXAMPLES; i++) {
             payload = (IntentPayload) results.get(i).payload;
@@ -187,7 +201,7 @@ public class CursorToSearchResultConverterTest {
                 PayloadType.INTENT,    // Payload Type
                 null // Payload
         });
-        List<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
         IntentPayload payload = (IntentPayload) results.get(0).payload;
         Intent intent = payload.intent;
 
@@ -222,7 +236,7 @@ public class CursorToSearchResultConverterTest {
                 type,    // Payload Type
                 ResultPayloadUtils.marshall(payload) // Payload
         });
-        List<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
         InlineSwitchPayload newPayload = (InlineSwitchPayload) results.get(0).payload;
 
         assertThat(newPayload.settingsUri).isEqualTo(uri);

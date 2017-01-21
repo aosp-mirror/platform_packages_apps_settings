@@ -25,6 +25,7 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.search.IndexDatabaseHelper.SiteMapColumns;
 import com.android.settings.search2.DatabaseIndexingManager;
 import com.android.settings.testutils.DatabaseTestUtils;
 
@@ -41,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import static com.android.settings.dashboard.SiteMapManager.SITE_MAP_COLUMNS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
@@ -57,7 +59,7 @@ public class DatabaseIndexingManagerTest {
     private final String updatedSummaryOn = "summary-on";
     private final String normalizedSummaryOn = "summaryon";
     private final String summaryOff = "summary\u2011off";
-    private final String updatedSummaryOff ="summary-off";
+    private final String updatedSummaryOff = "summary-off";
     private final String normalizedSummaryOff = "summaryoff";
     private final String entries = "entries";
     private final String keywords = "keywords, keywordss, keywordsss";
@@ -94,7 +96,7 @@ public class DatabaseIndexingManagerTest {
         Cursor dbCursor = mDb.query("prefs_index", null, null, null, null, null, null);
         List<String> columnNames = new ArrayList<>(Arrays.asList(dbCursor.getColumnNames()));
         // Note that docid is not included.
-        List<String> expColumnNames = new ArrayList<>(Arrays.asList(new String[ ]{
+        List<String> expColumnNames = new ArrayList<>(Arrays.asList(new String[]{
                 "locale",
                 "data_rank",
                 "data_title",
@@ -264,6 +266,29 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
+    public void testAddResourceWithChildFragment_shouldUpdateSiteMapDb() {
+        SearchIndexableResource resource = getFakeResource(R.xml.network_and_internet);
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
+                new HashMap<>());
+        Cursor query = mDb.query(IndexDatabaseHelper.Tables.TABLE_SITE_MAP, SITE_MAP_COLUMNS,
+                null, null, null, null, null);
+        query.moveToPosition(-1);
+        int count = 0;
+        while (query.moveToNext()) {
+            count++;
+            assertThat(query.getString(query.getColumnIndex(SiteMapColumns.PARENT_CLASS)))
+                    .isEqualTo(className);
+            assertThat(query.getString(query.getColumnIndex(SiteMapColumns.PARENT_TITLE)))
+                    .isEqualTo(mContext.getString(R.string.network_dashboard_title));
+            assertThat(query.getString(query.getColumnIndex(SiteMapColumns.CHILD_CLASS)))
+                    .isNotEmpty();
+            assertThat(query.getString(query.getColumnIndex(SiteMapColumns.CHILD_TITLE)))
+                    .isNotEmpty();
+        }
+        assertThat(count).isEqualTo(5);
+    }
+
+    @Test
     public void testAddResourceCustomSetting_RowsMatch() {
         SearchIndexableResource resource = getFakeResource(R.xml.gesture_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
@@ -393,16 +418,18 @@ public class DatabaseIndexingManagerTest {
         // Normalized Title
         assertThat(cursor.getString(3)).isEqualTo("preferred install location");
         // Summary On
-        assertThat(cursor.getString(4)).isEqualTo("Change the preferred installation location for new apps");
+        assertThat(cursor.getString(4)).isEqualTo(
+                "Change the preferred installation location for new apps");
         // Summary On Normalized
-        assertThat(cursor.getString(5)).isEqualTo("change the preferred installation location for new apps");
+        assertThat(cursor.getString(5)).isEqualTo(
+                "change the preferred installation location for new apps");
         // Summary Off - only on for checkbox preferences
         assertThat(cursor.getString(6)).isEmpty();
         // Summary off normalized - only on for checkbox preferences
         assertThat(cursor.getString(7)).isEmpty();
         // Entries - only on for list preferences
         assertThat(cursor.getString(8)).isEqualTo("Internal device storage|Removable SD card|" +
-                        "Let the system decide|");
+                "Let the system decide|");
         // Keywords
         assertThat(cursor.getString(9)).isEmpty();
         // Screen Title

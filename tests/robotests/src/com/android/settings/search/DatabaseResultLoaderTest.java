@@ -23,31 +23,51 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.search2.DatabaseIndexingUtils;
 import com.android.settings.search2.DatabaseResultLoader;
 import com.android.settings.testutils.DatabaseTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DatabaseResultLoaderTest {
-    private Context mContext;
 
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mMockContext;
+    @Mock
+    private SiteMapManager mSiteMapManager;
+    private Context mContext;
     private DatabaseResultLoader loader;
 
     SQLiteDatabase mDb;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        FakeFeatureFactory.setupForTest(mMockContext);
+        FakeFeatureFactory factory =
+                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mMockContext);
+        when(factory.searchFeatureProvider.getSiteMapManager())
+                .thenReturn(mSiteMapManager);
         mDb = IndexDatabaseHelper.getInstance(mContext).getWritableDatabase();
         setUpDb();
     }
@@ -61,6 +81,7 @@ public class DatabaseResultLoaderTest {
     public void testMatchTitle() {
         loader = new DatabaseResultLoader(mContext, "title");
         assertThat(loader.loadInBackground().size()).isEqualTo(3);
+        verify(mSiteMapManager, times(3)).buildBreadCrumb(eq(mContext), anyString(), anyString());
     }
 
     @Test
