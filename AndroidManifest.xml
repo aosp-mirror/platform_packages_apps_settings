@@ -166,11 +166,11 @@
                 android:parentActivityName="Settings">
         </activity>
 
-        <activity android:name="CreateShortcut" android:label="@string/settings_shortcut"
-            android:theme="@style/Theme.SubSettingsDialogWhenLarge">
+        <activity android:name="CreateShortcut"
+                  android:label="@string/settings_shortcut">
             <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.CREATE_SHORTCUT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
@@ -341,7 +341,6 @@
         </activity>
 
         <activity android:name=".Settings$WifiInfoActivity"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$WifiSettingsActivity">
             <intent-filter>
@@ -354,7 +353,6 @@
         </activity>
 
         <activity android:name=".wifi.WifiConfigInfo"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$WifiSettingsActivity">
             <intent-filter>
@@ -364,8 +362,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Settings$WifiAPITestActivity"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge">
+        <activity android:name=".Settings$WifiAPITestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
@@ -375,8 +372,7 @@
                        android:value="com.android.settings.wifi.WifiAPITest" />
         </activity>
 
-        <activity android:name=".wifi.WifiStatusTest"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge">
+        <activity android:name=".wifi.WifiStatusTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
@@ -460,7 +456,6 @@
         </activity-alias>
 
         <activity android:name=".bluetooth.DevicePickerActivity"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:label="@string/device_picker"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -966,7 +961,6 @@
         </activity>
 
         <activity android:name="Settings$DeviceInfoSettingsActivity"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:label="@string/device_info_settings"
                 android:icon="@drawable/ic_settings_about"
                 android:taskAffinity="com.android.settings"
@@ -1391,7 +1385,6 @@
         </activity>
 
         <activity android:name="SetFullBackupPassword"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:exported="false">
         </activity>
 
@@ -1431,7 +1424,6 @@
 
         <activity android:name="DeviceAdminAdd"
                 android:label="@string/device_admin_add_title"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
@@ -1466,7 +1458,6 @@
 
         <activity android:name="Settings$IccLockSettingsActivity"
                 android:label="@string/sim_lock_settings"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1788,7 +1779,6 @@
 
         <activity android:name=".Settings$StatusActivity"
                 android:label="@string/device_status_activity_title"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$DeviceInfoSettingsActivity">
             <intent-filter>
@@ -1803,7 +1793,6 @@
         <!-- Runs in the phone process since it needs access to the Phone object -->
         <activity android:name=".Settings$SimStatusActivity"
                 android:label="@string/sim_status_title"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1817,7 +1806,6 @@
         <!-- Runs in the phone process since it needs access to the Phone object -->
         <activity android:name=".Settings$ImeiInformationActivity"
                 android:label="@string/imei_information_title"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -2371,8 +2359,7 @@
 
         <activity android:name="Settings$ChooseAccountActivity"
             android:label="@string/header_add_an_account"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/Theme.SubSettingsDialogWhenLarge">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.accounts.ChooseAccountActivity" />
         </activity>
