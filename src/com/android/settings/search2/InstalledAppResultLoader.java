@@ -28,6 +28,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import com.android.settings.R;
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.utils.AsyncLoader;
 
@@ -45,6 +46,7 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
     private static final Intent LAUNCHER_PROBE = new Intent(Intent.ACTION_MAIN)
             .addCategory(Intent.CATEGORY_LAUNCHER);
 
+    private final List<String> mBreadcrumb;
     private final String mQuery;
     private final UserManager mUserManager;
     private final PackageManagerWrapper mPackageManager;
@@ -53,6 +55,9 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
     public InstalledAppResultLoader(Context context, PackageManagerWrapper pmWrapper,
             String query) {
         super(context);
+        mBreadcrumb = new ArrayList<>();
+        mBreadcrumb.add(context.getString(R.string.app_and_notification_dashboard_title));
+        mBreadcrumb.add(context.getString(R.string.applications_settings));
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPackageManager = pmWrapper;
         mQuery = query;
@@ -87,6 +92,7 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
                 builder.addIcon(info.loadIcon(pm))
                         .addTitle(info.loadLabel(pm))
                         .addRank(wordDiff)
+                        .addBreadcrumbs(mBreadcrumb)
                         .addPayload(new IntentPayload(intent));
                 results.add(builder.build());
             }
@@ -127,7 +133,7 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
      * perfectly, and larger values means they are less similar.
      * <p/>
      * Example:
-     * appName: Abcde, query: Abcde, Returns NAME_EXACT_MATCH
+     * appName: Abcde, query: Abcde, Returns {@link #NAME_EXACT_MATCH}
      * appName: Abcde, query: ade, Returns 2
      * appName: Abcde, query: ae, Returns 3
      * appName: Abcde, query: ea, Returns NAME_NO_MATCH

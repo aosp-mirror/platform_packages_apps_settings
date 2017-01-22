@@ -16,10 +16,6 @@
 package com.android.settings.search2;
 
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.android.settings.R;
 
 /**
  * ViewHolder for intent based search results.
@@ -27,25 +23,14 @@ import com.android.settings.R;
  */
 public class IntentSearchViewHolder extends SearchViewHolder {
 
-    public final TextView titleView;
-    public final TextView summaryView;
-    public final ImageView iconView;
-
     public IntentSearchViewHolder(View view) {
         super(view);
-        titleView = (TextView) view.findViewById(android.R.id.title);
-        summaryView = (TextView) view.findViewById(android.R.id.summary);
-        iconView = (ImageView) view.findViewById(android.R.id.icon);
     }
 
     @Override
     public void onBind(final SearchFragment fragment, final SearchResult result) {
-        titleView.setText(result.title);
-        summaryView.setText(result.summary);
-        iconView.setImageDrawable(result.icon);
-        if (result.icon == null) {
-            iconView.setBackgroundResource(R.drawable.empty_icon);
-        }
+        super.onBind(fragment, result);
+
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

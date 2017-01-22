@@ -41,6 +41,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -73,6 +74,7 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.titleView).isNotNull();
         assertThat(mHolder.summaryView).isNotNull();
         assertThat(mHolder.iconView).isNotNull();
+        assertThat(mHolder.breadcrumbView).isNotNull();
     }
 
     @Test
@@ -84,9 +86,41 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.titleView.getText()).isEqualTo(TITLE);
         assertThat(mHolder.summaryView.getText()).isEqualTo(SUMMARY);
         assertThat(mHolder.iconView.getDrawable()).isEqualTo(mIcon);
+        assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mHolder.breadcrumbView.getVisibility()).isEqualTo(View.GONE);
 
         verify(mFragment).onSearchResultClicked();
         verify(mFragment).startActivity(any(Intent.class));
+    }
+
+    @Test
+    public void testBindViewElements_emptySummary_hideSummaryView() {
+        final SearchResult result = new Builder().addTitle(TITLE)
+                .addRank(1)
+                .addPayload(new IntentPayload(null))
+                .addIcon(mIcon)
+                .build();
+
+        mHolder.onBind(mFragment, result);
+        assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void testBindViewElements_withBreadcrumb_shouldFormatBreadcrumb() {
+        final List<String> breadcrumbs = new ArrayList<>();
+        breadcrumbs.add("a");
+        breadcrumbs.add("b");
+        breadcrumbs.add("c");
+        final SearchResult result = new Builder().addTitle(TITLE)
+                .addRank(1)
+                .addPayload(new IntentPayload(null))
+                .addBreadcrumbs(breadcrumbs)
+                .addIcon(mIcon)
+                .build();
+
+        mHolder.onBind(mFragment, result);
+        assertThat(mHolder.breadcrumbView.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mHolder.breadcrumbView.getText()).isEqualTo("a > b > c");
     }
 
     private SearchResult getSearchResult() {

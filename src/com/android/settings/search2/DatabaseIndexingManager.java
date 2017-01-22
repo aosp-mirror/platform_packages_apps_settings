@@ -56,6 +56,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
@@ -279,7 +280,7 @@ public class DatabaseIndexingManager {
      * @param className the class name (typically a fragment name).
      * @param rebuild true means that you want to delete the data from the Index first.
      * @param includeInSearchResults true means that you want the bit "enabled" set so that the
-     *                               data will be seen included into the search results
+     * data will be seen included into the search results
      */
     public void updateFromClassNameResource(String className, final boolean rebuild,
             boolean includeInSearchResults) {
@@ -287,7 +288,7 @@ public class DatabaseIndexingManager {
             throw new IllegalArgumentException("class name cannot be null!");
         }
         final SearchIndexableResource res = SearchIndexableResources.getResourceByName(className);
-        if (res == null ) {
+        if (res == null) {
             Log.e(LOG_TAG, "Cannot find SearchIndexableResources for class name: " + className);
             return;
         }
@@ -753,7 +754,7 @@ public class DatabaseIndexingManager {
     }
 
     private void updateOneRowWithFilteredData(SQLiteDatabase database, DatabaseRow.Builder builder,
-            String title, String summaryOn, String summaryOff,String keywords) {
+            String title, String summaryOn, String summaryOff, String keywords) {
 
         final String updatedTitle = DatabaseIndexingUtils.normalizeHyphen(title);
         final String updatedSummaryOn = DatabaseIndexingUtils.normalizeHyphen(summaryOn);
@@ -783,14 +784,8 @@ public class DatabaseIndexingManager {
             return;
         }
 
-        // The DocID should contains more than the title string itself (you may have two settings
-        // with the same title). So we need to use a combination of the title and the screenTitle.
-        StringBuilder sb = new StringBuilder(row.updatedTitle);
-        sb.append(row.screenTitle);
-        int docId = sb.toString().hashCode();
-
         ContentValues values = new ContentValues();
-        values.put(IndexDatabaseHelper.IndexColumns.DOCID, docId);
+        values.put(IndexDatabaseHelper.IndexColumns.DOCID, row.getDocId());
         values.put(IndexDatabaseHelper.IndexColumns.LOCALE, row.locale);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_RANK, row.rank);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, row.updatedTitle);
@@ -919,7 +914,7 @@ public class DatabaseIndexingManager {
                 }
                 if (!TextUtils.isEmpty(data.className)) {
                     delete(database, IndexDatabaseHelper.IndexColumns.CLASS_NAME, data.className);
-                } else  {
+                } else {
                     if (data instanceof SearchIndexableRaw) {
                         final SearchIndexableRaw raw = (SearchIndexableRaw) data;
                         if (!TextUtils.isEmpty(raw.title)) {
@@ -938,7 +933,7 @@ public class DatabaseIndexingManager {
 
         private int delete(SQLiteDatabase database, String columName, String value) {
             final String whereClause = columName + "=?";
-            final String[] whereArgs = new String[] { value };
+            final String[] whereArgs = new String[]{value};
 
             return database.delete(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, whereClause,
                     whereArgs);
@@ -993,6 +988,16 @@ public class DatabaseIndexingManager {
                     : null;
         }
 
+        /**
+         * Returns the doc id for this row.
+         */
+        public int getDocId() {
+            // The DocID should contains more than the title string itself (you may have two
+            // settings with the same title). So we need to use a combination of multiple
+            // attributes from this row.
+            return Objects.hash(updatedTitle, screenTitle, key, payloadType);
+        }
+
         public static class Builder {
             private String mLocale;
             private String mUpdatedTitle;
@@ -1013,7 +1018,8 @@ public class DatabaseIndexingManager {
             private boolean mEnabled;
             private String mKey;
             private int mUserId;
-            @ResultPayload.PayloadType private int mPayloadType;
+            @ResultPayload.PayloadType
+            private int mPayloadType;
             private ResultPayload mPayload;
 
             public Builder setLocale(String locale) {
@@ -1114,7 +1120,7 @@ public class DatabaseIndexingManager {
             public Builder setPayload(ResultPayload payload) {
                 mPayload = payload;
 
-                if(mPayload != null) {
+                if (mPayload != null) {
                     setPayloadType(mPayload.getType());
                 }
                 return this;
@@ -1122,6 +1128,7 @@ public class DatabaseIndexingManager {
 
             /**
              * Payload type is added when a Payload is added to the Builder in {setPayload}
+             *
              * @param payloadType PayloadType
              * @return The Builder
              */
