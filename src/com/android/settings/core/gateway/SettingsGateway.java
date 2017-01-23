@@ -302,5 +302,6 @@ public class SettingsGateway {
             "com.android.settings.DateTimeDashboardAlias",
             "com.android.settings.AccessibilityDashboardAlias",
             "com.android.settings.AboutDeviceDashboardAlias",
+            "com.android.settings.EnterprisePrivacyDashboardAlias",
     };
 }
