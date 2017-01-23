@@ -44,6 +44,8 @@ public class SettingsInitialize extends BroadcastReceiver {
     private static final String TAG = "Settings";
     private static final String PRIMARY_PROFILE_SETTING =
             "com.android.settings.PRIMARY_PROFILE_CONTROLLED";
+    private static final String SETTINGS_PACKAGE = "com.android.settings";
+    private static final String WEBVIEW_IMPLEMENTATION_ACTIVITY = ".WebViewImplementation";
 
     @Override
     public void onReceive(Context context, Intent broadcast) {
@@ -100,7 +102,7 @@ public class SettingsInitialize extends BroadcastReceiver {
             return;
         }
         ComponentName settingsComponentName =
-            new ComponentName(context, WebViewImplementation.class);
+            new ComponentName(SETTINGS_PACKAGE, SETTINGS_PACKAGE + WEBVIEW_IMPLEMENTATION_ACTIVITY);
         pm.setComponentEnabledSetting(settingsComponentName,
                 userInfo.isAdmin() ?
                         PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
