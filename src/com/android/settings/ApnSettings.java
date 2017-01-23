@@ -240,8 +240,9 @@ public class ApnSettings extends RestrictedSettingsFragment implements
 
     private void fillList() {
         final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        final String mccmnc = mSubscriptionInfo == null ? ""
-            : tm.getSimOperator(mSubscriptionInfo.getSubscriptionId());
+        final int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
+                : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        final String mccmnc = mSubscriptionInfo == null ? "" : tm.getSimOperator(subId);
         Log.d(TAG, "mccmnc = " + mccmnc);
         StringBuilder where = new StringBuilder("numeric=\"" + mccmnc +
                 "\" AND NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND user_visible!=0");
@@ -257,8 +258,8 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         if (cursor != null) {
             IccRecords r = null;
             if (mUiccController != null && mSubscriptionInfo != null) {
-                r = mUiccController.getIccRecords(SubscriptionManager.getPhoneId(
-                        mSubscriptionInfo.getSubscriptionId()), UiccController.APP_FAM_3GPP);
+                r = mUiccController.getIccRecords(
+                        SubscriptionManager.getPhoneId(subId), UiccController.APP_FAM_3GPP);
             }
             PreferenceGroup apnList = (PreferenceGroup) findPreference("apn_list");
             apnList.removeAll();
@@ -285,6 +286,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                 pref.setSummary(apn);
                 pref.setPersistent(false);
                 pref.setOnPreferenceChangeListener(this);
+                pref.setSubId(subId);
 
                 boolean selectable = ((type == null) || !type.equals("mms"));
                 pref.setSelectable(selectable);
