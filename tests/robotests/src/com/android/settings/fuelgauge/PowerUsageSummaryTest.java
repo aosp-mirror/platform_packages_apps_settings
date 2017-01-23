@@ -36,6 +36,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.android.settings.fuelgauge.PowerUsageBase.MENU_STATS_REFRESH;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
 import static com.google.common.truth.Truth.assertThat;
@@ -53,7 +56,8 @@ public class PowerUsageSummaryTest {
     private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
     private static final int UID = 123;
     private static final int POWER_MAH = 100;
-
+    private static final double BATTERY_SCREEN_USAGE = 300;
+    private static final double PRECISION = 0.001;
     private static final Intent ADDITIONAL_BATTERY_INFO_INTENT =
             new Intent("com.example.app.ADDITIONAL_BATTERY_INFO");
 
@@ -68,7 +72,9 @@ public class PowerUsageSummaryTest {
     @Mock
     private MenuInflater mMenuInflater;
     @Mock
-    private BatterySipper mBatterySipper;
+    private BatterySipper mNormalBatterySipper;
+    @Mock
+    private BatterySipper mScreenBatterySipper;
 
     private TestFragment mFragment;
     private FakeFeatureFactory mFeatureFactory;
@@ -95,9 +101,12 @@ public class PowerUsageSummaryTest {
 
         mPowerUsageSummary = new PowerUsageSummary();
 
-        when(mBatterySipper.getPackages()).thenReturn(PACKAGE_NAMES);
-        when(mBatterySipper.getUid()).thenReturn(UID);
-        mBatterySipper.totalPowerMah = POWER_MAH;
+        when(mNormalBatterySipper.getPackages()).thenReturn(PACKAGE_NAMES);
+        when(mNormalBatterySipper.getUid()).thenReturn(UID);
+        mNormalBatterySipper.totalPowerMah = POWER_MAH;
+
+        mScreenBatterySipper.drainType = BatterySipper.DrainType.SCREEN;
+        mScreenBatterySipper.totalPowerMah = BATTERY_SCREEN_USAGE;
     }
 
     @Test
@@ -129,62 +138,73 @@ public class PowerUsageSummaryTest {
 
     @Test
     public void testExtractKeyFromSipper_TypeAPPUidObjectNull_ReturnPackageNames() {
-        mBatterySipper.uidObj = null;
-        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        mNormalBatterySipper.uidObj = null;
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
 
-        final String key = mPowerUsageSummary.extractKeyFromSipper(mBatterySipper);
-        assertThat(key).isEqualTo(TextUtils.concat(mBatterySipper.getPackages()).toString());
+        final String key = mPowerUsageSummary.extractKeyFromSipper(mNormalBatterySipper);
+        assertThat(key).isEqualTo(TextUtils.concat(mNormalBatterySipper.getPackages()).toString());
     }
 
     @Test
     public void testExtractKeyFromSipper_TypeOther_ReturnDrainType() {
-        mBatterySipper.uidObj = null;
-        mBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
+        mNormalBatterySipper.uidObj = null;
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
 
-        final String key = mPowerUsageSummary.extractKeyFromSipper(mBatterySipper);
-        assertThat(key).isEqualTo(mBatterySipper.drainType.toString());
+        final String key = mPowerUsageSummary.extractKeyFromSipper(mNormalBatterySipper);
+        assertThat(key).isEqualTo(mNormalBatterySipper.drainType.toString());
+    }
+
+    @Test
+    public void testRemoveScreenBatterySipper_ContainsScreenSipper_RemoveAndReturnValue() {
+        final List<BatterySipper> sippers = new ArrayList<>();
+        sippers.add(mNormalBatterySipper);
+        sippers.add(mScreenBatterySipper);
+
+        final double screenUsage = mPowerUsageSummary.removeScreenBatterySipper(sippers);
+        assertThat(sippers).containsExactly(mNormalBatterySipper);
+        assertThat(screenUsage).isWithin(PRECISION).of(BATTERY_SCREEN_USAGE);
     }
 
     @Test
     public void testExtractKeyFromSipper_TypeAPPUidObjectNotNull_ReturnUid() {
-        mBatterySipper.uidObj = new BatteryStatsImpl.Uid(new BatteryStatsImpl(), UID);
-        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        mNormalBatterySipper.uidObj = new BatteryStatsImpl.Uid(new BatteryStatsImpl(), UID);
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
 
-        final String key = mPowerUsageSummary.extractKeyFromSipper(mBatterySipper);
-        assertThat(key).isEqualTo(Integer.toString(mBatterySipper.getUid()));
+        final String key = mPowerUsageSummary.extractKeyFromSipper(mNormalBatterySipper);
+        assertThat(key).isEqualTo(Integer.toString(mNormalBatterySipper.getUid()));
     }
 
     @Test
     public void testShouldHideSipper_TypeIdle_ReturnTrue() {
-        mBatterySipper.drainType = BatterySipper.DrainType.IDLE;
-        assertThat(mPowerUsageSummary.shouldHideSipper(mBatterySipper)).isTrue();
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.IDLE;
+        assertThat(mPowerUsageSummary.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test
     public void testShouldHideSipper_TypeCell_ReturnTrue() {
-        mBatterySipper.drainType = BatterySipper.DrainType.CELL;
-        assertThat(mPowerUsageSummary.shouldHideSipper(mBatterySipper)).isTrue();
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.CELL;
+        assertThat(mPowerUsageSummary.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test
     public void testShouldHideSipper_UidRoot_ReturnTrue() {
-        mBatterySipper.drainType = BatterySipper.DrainType.APP;
-        when(mBatterySipper.getUid()).thenReturn(Process.ROOT_UID);
-        assertThat(mPowerUsageSummary.shouldHideSipper(mBatterySipper)).isTrue();
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mNormalBatterySipper.getUid()).thenReturn(Process.ROOT_UID);
+        assertThat(mPowerUsageSummary.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test
     public void testShouldHideSipper_UidSystem_ReturnTrue() {
-        mBatterySipper.drainType = BatterySipper.DrainType.APP;
-        when(mBatterySipper.getUid()).thenReturn(Process.SYSTEM_UID);
-        assertThat(mPowerUsageSummary.shouldHideSipper(mBatterySipper)).isTrue();
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mNormalBatterySipper.getUid()).thenReturn(Process.SYSTEM_UID);
+        assertThat(mPowerUsageSummary.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test
     public void testShouldHideSipper_UidNormal_ReturnFalse() {
-        mBatterySipper.drainType = BatterySipper.DrainType.APP;
-        when(mBatterySipper.getUid()).thenReturn(UID);
-        assertThat(mPowerUsageSummary.shouldHideSipper(mBatterySipper)).isFalse();
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mNormalBatterySipper.getUid()).thenReturn(UID);
+        assertThat(mPowerUsageSummary.shouldHideSipper(mNormalBatterySipper)).isFalse();
     }
 
     public static class TestFragment extends PowerUsageSummary {
