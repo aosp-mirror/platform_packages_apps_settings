@@ -42,6 +42,7 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
 
     private CheckBox mAlwaysUse;
     private int mAppWidgetId;
+    private Bundle mBindOptions;
     private UserHandle mProfile;
     private ComponentName mComponentName;
     private String mCallingPackage;
@@ -57,7 +58,7 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
             if (mAppWidgetId != -1 && mComponentName != null && mCallingPackage != null) {
                 try {
                     final boolean bound = mAppWidgetManager.bindAppWidgetIdIfAllowed(mAppWidgetId,
-                            mProfile, mComponentName, null);
+                            mProfile, mComponentName, mBindOptions);
                     if (bound) {
                         Intent result = new Intent();
                         result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
@@ -100,6 +101,8 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
                 }
                 mComponentName =
                         intent.getParcelableExtra(AppWidgetManager.EXTRA_APPWIDGET_PROVIDER);
+                mBindOptions =
+                        intent.getParcelableExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
                 mCallingPackage = getCallingPackage();
                 PackageManager pm = getPackageManager();
                 ApplicationInfo ai = pm.getApplicationInfo(mCallingPackage, 0);
