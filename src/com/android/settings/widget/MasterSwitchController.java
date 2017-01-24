@@ -17,6 +17,8 @@
 package com.android.settings.widget;
 
 import android.support.v7.preference.Preference;
+import android.widget.Switch;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /*
  * The switch controller that is used to update the switch widget in the MasterSwitchPreference
@@ -66,5 +68,15 @@ public class MasterSwitchController extends SwitchWidgetController implements
             return mListener.onSwitchToggled((Boolean) newValue);
         }
         return false;
+    }
+
+    @Override
+    public void setDisabledByAdmin(EnforcedAdmin admin) {
+        mPreference.setDisabledByAdmin(admin);
+    }
+
+    @Override
+    public Switch getSwitch() {
+        return mPreference.getSwitch();
     }
 }

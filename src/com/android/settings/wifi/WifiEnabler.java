@@ -29,23 +29,22 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.search.Index;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.WirelessUtils;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
+public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListener  {
 
-    private final SwitchBar mSwitchBar;
+    private final SwitchWidgetController mSwitchWidget;
     private final WifiManager mWifiManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -93,10 +92,11 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
         }
     };
 
-    public WifiEnabler(Context context, SwitchBar switchBar,
+    public WifiEnabler(Context context, SwitchWidgetController switchWidget,
             MetricsFeatureProvider metricsFeatureProvider) {
         mContext = context;
-        mSwitchBar = switchBar;
+        mSwitchWidget = switchWidget;
+        mSwitchWidget.setListener(this);
         mMetricsFeatureProvider = metricsFeatureProvider;
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
@@ -105,25 +105,25 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
         mIntentFilter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
         mIntentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
 
-        setupSwitchBar();
+        setupSwitchController();
     }
 
-    public void setupSwitchBar() {
+    public void setupSwitchController() {
         final int state = mWifiManager.getWifiState();
         handleWifiStateChanged(state);
         if (!mListeningToOnSwitchChange) {
-            mSwitchBar.addOnSwitchChangeListener(this);
+            mSwitchWidget.startListening();
             mListeningToOnSwitchChange = true;
         }
-        mSwitchBar.show();
+        mSwitchWidget.setupView();
     }
 
-    public void teardownSwitchBar() {
+    public void teardownSwitchController() {
         if (mListeningToOnSwitchChange) {
-            mSwitchBar.removeOnSwitchChangeListener(this);
+            mSwitchWidget.stopListening();
             mListeningToOnSwitchChange = false;
         }
-        mSwitchBar.hide();
+        mSwitchWidget.teardownView();
     }
 
     public void resume(Context context) {
@@ -131,7 +131,7 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
         // Wi-Fi state is sticky, so just let the receiver update UI
         mContext.registerReceiver(mReceiver, mIntentFilter);
         if (!mListeningToOnSwitchChange) {
-            mSwitchBar.addOnSwitchChangeListener(this);
+            mSwitchWidget.startListening();
             mListeningToOnSwitchChange = true;
         }
     }
@@ -139,45 +139,45 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
     public void pause() {
         mContext.unregisterReceiver(mReceiver);
         if (mListeningToOnSwitchChange) {
-            mSwitchBar.removeOnSwitchChangeListener(this);
+            mSwitchWidget.stopListening();
             mListeningToOnSwitchChange = false;
         }
     }
 
     private void handleWifiStateChanged(int state) {
         // Clear any previous state
-        mSwitchBar.setDisabledByAdmin(null);
+        mSwitchWidget.setDisabledByAdmin(null);
 
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLING:
-                mSwitchBar.setEnabled(false);
+                mSwitchWidget.setEnabled(false);
                 break;
             case WifiManager.WIFI_STATE_ENABLED:
                 setSwitchBarChecked(true);
-                mSwitchBar.setEnabled(true);
+                mSwitchWidget.setEnabled(true);
                 updateSearchIndex(true);
                 break;
             case WifiManager.WIFI_STATE_DISABLING:
-                mSwitchBar.setEnabled(false);
+                mSwitchWidget.setEnabled(false);
                 break;
             case WifiManager.WIFI_STATE_DISABLED:
                 setSwitchBarChecked(false);
-                mSwitchBar.setEnabled(true);
+                mSwitchWidget.setEnabled(true);
                 updateSearchIndex(false);
                 break;
             default:
                 setSwitchBarChecked(false);
-                mSwitchBar.setEnabled(true);
+                mSwitchWidget.setEnabled(true);
                 updateSearchIndex(false);
         }
-        if (mayDisableTethering(!mSwitchBar.isChecked())) {
+        if (mayDisableTethering(!mSwitchWidget.isChecked())) {
             if (RestrictedLockUtils.hasBaseUserRestriction(mContext,
                     UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
-                mSwitchBar.setEnabled(false);
+                mSwitchWidget.setEnabled(false);
             } else {
                 final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
                     UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
-                mSwitchBar.setDisabledByAdmin(admin);
+                mSwitchWidget.setDisabledByAdmin(admin);
             }
         }
     }
@@ -193,7 +193,7 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
 
     private void setSwitchBarChecked(boolean checked) {
         mStateMachineEvent = true;
-        mSwitchBar.setChecked(checked);
+        mSwitchWidget.setChecked(checked);
         mStateMachineEvent = false;
     }
 
@@ -214,17 +214,17 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public boolean onSwitchToggled(boolean isChecked) {
         //Do nothing if called as a result of a state machine event
         if (mStateMachineEvent) {
-            return;
+            return true;
         }
         // Show toast message if Wi-Fi is not allowed in airplane mode
         if (isChecked && !WirelessUtils.isRadioAllowed(mContext, Settings.Global.RADIO_WIFI)) {
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
             // Reset switch to off. No infinite check/listenenr loop.
-            mSwitchBar.setChecked(false);
-            return;
+            mSwitchWidget.setChecked(false);
+            return false;
         }
 
         // Disable tethering if enabling Wifi
@@ -240,9 +240,10 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
         }
         if (!mWifiManager.setWifiEnabled(isChecked)) {
             // Error
-            mSwitchBar.setEnabled(true);
+            mSwitchWidget.setEnabled(true);
             Toast.makeText(mContext, R.string.wifi_error, Toast.LENGTH_SHORT).show();
         }
+        return true;
     }
 
     private boolean mayDisableTethering(boolean isChecked) {

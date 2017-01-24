@@ -19,12 +19,10 @@ package com.android.settings.wifi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
@@ -39,6 +37,7 @@ import android.os.Bundle;
 import android.os.HandlerThread;
 import android.os.Process;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
@@ -64,11 +63,12 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
+import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
-import com.android.settingslib.wifi.WifiStatusTracker;
 import com.android.settingslib.wifi.WifiTracker;
 
 import java.util.ArrayList;
@@ -303,7 +303,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onDestroyView();
 
         if (mWifiEnabler != null) {
-            mWifiEnabler.teardownSwitchBar();
+            mWifiEnabler.teardownSwitchController();
         }
     }
 
@@ -320,7 +320,8 @@ public class WifiSettings extends RestrictedSettingsFragment
      */
     private WifiEnabler createWifiEnabler() {
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        return new WifiEnabler(activity, activity.getSwitchBar(), mMetricsFeatureProvider);
+        return new WifiEnabler(activity, new SwitchBarController(activity.getSwitchBar()),
+            mMetricsFeatureProvider);
     }
 
     @Override
@@ -1002,46 +1003,30 @@ public class WifiSettings extends RestrictedSettingsFragment
         return !isLockdownFeatureEnabled;
     }
 
-    private static class SummaryProvider extends BroadcastReceiver
-            implements SummaryLoader.SummaryProvider {
+    private static class SummaryProvider
+            implements SummaryLoader.SummaryProvider, OnSummaryChangeListener {
 
         private final Context mContext;
-        private final WifiManager mWifiManager;
-        private final WifiStatusTracker mWifiTracker;
         private final SummaryLoader mSummaryLoader;
+
+        @VisibleForTesting
+        WifiSummaryUpdater mSummaryHelper;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader) {
             mContext = context;
             mSummaryLoader = summaryLoader;
-            mWifiManager = context.getSystemService(WifiManager.class);
-            mWifiTracker = new WifiStatusTracker(mWifiManager);
+            mSummaryHelper = new WifiSummaryUpdater(mContext, this);
         }
 
-        private CharSequence getSummary() {
-            if (!mWifiTracker.enabled) {
-                return mContext.getString(R.string.wifi_disabled_generic);
-            }
-            if (!mWifiTracker.connected) {
-                return mContext.getString(R.string.disconnected);
-            }
-            return mWifiTracker.ssid;
-        }
 
         @Override
         public void setListening(boolean listening) {
-            if (listening) {
-                IntentFilter filter = new IntentFilter();
-                filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-                filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-                filter.addAction(WifiManager.RSSI_CHANGED_ACTION);
-                mSummaryLoader.registerReceiver(this, filter);
-            }
+            mSummaryHelper.register(listening);
         }
 
         @Override
-        public void onReceive(Context context, Intent intent) {
-            mWifiTracker.handleBroadcast(intent);
-            mSummaryLoader.setSummary(this, getSummary());
+        public void onSummaryChanged(String summary) {
+            mSummaryLoader.setSummary(this, summary);
         }
     }
 

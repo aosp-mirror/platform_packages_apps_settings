@@ -294,7 +294,6 @@ public class SettingsGateway {
             "com.android.settings.ManageApplicationsDashboardAlias",
             "com.android.settings.PaymentSettingsDashboardAlias",
             // Home page > Network & Internet
-            "com.android.settings.WifiDashboardAlias",
             "com.android.settings.DataUsageDashboardAlias",
             // Home page > Security
             "com.android.settings.LocationDashboardAlias",

@@ -24,6 +24,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.android.settings.R;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * A custom preference that provides inline switch toggle. It has a mandatory field for title, and
@@ -76,7 +77,7 @@ public class MasterSwitchPreference extends Preference {
     }
 
     public boolean isChecked() {
-        return isEnabled() && mChecked;
+        return mSwitch != null && mSwitch.isEnabled() && mChecked;
     }
 
     public void setChecked(boolean checked) {
@@ -87,13 +88,25 @@ public class MasterSwitchPreference extends Preference {
     }
 
     public boolean isSwitchEnabled() {
-        return isEnabled() && mSwitch != null && mSwitch.isEnabled();
+        return mSwitch != null && mSwitch.isEnabled();
     }
 
     public void setSwitchEnabled(boolean enabled) {
         if (mSwitch != null) {
             mSwitch.setEnabled(enabled);
         }
+    }
+
+    /**
+     * If admin is not null, disables the switch.
+     * Otherwise, keep it enabled.
+     */
+    public void setDisabledByAdmin(EnforcedAdmin admin) {
+        setSwitchEnabled(admin == null);
+    }
+
+    public Switch getSwitch() {
+        return mSwitch;
     }
 
     private void init() {

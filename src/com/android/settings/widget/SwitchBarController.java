@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import android.widget.Switch;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /*
  * The switch controller that is used to update the switch widget in the SwitchBar layout.
@@ -25,11 +26,9 @@ public class SwitchBarController extends SwitchWidgetController implements
     SwitchBar.OnSwitchChangeListener {
 
     private final SwitchBar mSwitchBar;
-    private final Switch mSwitch;
 
     public SwitchBarController(SwitchBar switchBar) {
         mSwitchBar = switchBar;
-        mSwitch = switchBar.getSwitch();
     }
 
     @Override
@@ -59,17 +58,17 @@ public class SwitchBarController extends SwitchWidgetController implements
 
     @Override
     public void setChecked(boolean checked) {
-        mSwitch.setChecked(checked);
+        mSwitchBar.setChecked(checked);
     }
 
     @Override
     public boolean isChecked() {
-        return mSwitch.isChecked();
+        return mSwitchBar.isChecked();
     }
 
     @Override
     public void setEnabled(boolean enabled) {
-        mSwitch.setEnabled(enabled);
+        mSwitchBar.setEnabled(enabled);
     }
 
     @Override
@@ -78,4 +77,15 @@ public class SwitchBarController extends SwitchWidgetController implements
             mListener.onSwitchToggled(isChecked);
         }
     }
+
+    @Override
+    public void setDisabledByAdmin(EnforcedAdmin admin) {
+        mSwitchBar.setDisabledByAdmin(admin);
+    }
+
+    @Override
+    public Switch getSwitch() {
+        return mSwitchBar.getSwitch();
+    }
+
 }

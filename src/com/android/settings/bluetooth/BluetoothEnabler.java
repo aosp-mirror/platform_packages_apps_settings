@@ -24,6 +24,7 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -41,6 +42,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
  * preference reflects the current state.
  */
 public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchChangeListener {
+    private final Switch mSwitch;
     private final SwitchWidgetController mSwitchWidget;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private Context mContext;
@@ -79,6 +81,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
         mContext = context;
         mMetricsFeatureProvider = metricsFeatureProvider;
         mSwitchWidget = switchWidget;
+        mSwitch = mSwitchWidget.getSwitch();
         mSwitchWidget.setListener(this);
         mValidListener = false;
 
@@ -92,11 +95,11 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
     }
 
-    public void setupSwitchBar() {
+    public void setupSwitchController() {
         mSwitchWidget.setupView();
     }
 
-    public void teardownSwitchBar() {
+    public void teardownSwitchController() {
         mSwitchWidget.teardownView();
     }
 
@@ -184,7 +187,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
                 !WirelessUtils.isRadioAllowed(mContext, Settings.Global.RADIO_BLUETOOTH)) {
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
             // Reset switch to off
-            mSwitchWidget.setChecked(false);
+            mSwitch.setChecked(false);
             return false;
         }
 
@@ -196,8 +199,8 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
             // a) The switch should be OFF but it should still be togglable (enabled = True)
             // b) The switch bar should have OFF text.
             if (isChecked && !status) {
-                mSwitchWidget.setChecked(false);
-                mSwitchWidget.setEnabled(true);
+                mSwitch.setChecked(false);
+                mSwitch.setEnabled(true);
                 mSwitchWidget.updateTitle(false);
                 return false;
             }
