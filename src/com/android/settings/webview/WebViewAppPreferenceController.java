@@ -73,9 +73,10 @@ public class WebViewAppPreferenceController extends PreferenceController {
      * Handle the return-value from the WebViewAppPicker Activity.
      */
     public void onActivityResult(int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            updateState(null);
-        }
+        // Update the preference summary no matter whether we succeeded to change the webview
+        // implementation correctly - we might have changed implementation to one the user did not
+        // choose.
+        updateState(null);
     }
 
     private String getCurrentWebViewPackageLabel(Context context) {

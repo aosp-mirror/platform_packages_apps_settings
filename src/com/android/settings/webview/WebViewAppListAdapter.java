@@ -16,8 +16,10 @@ package com.android.settings.webview;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
+import android.graphics.Color;
 import android.support.annotation.VisibleForTesting;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,7 @@ import java.util.List;
  */
 class WebViewAppListAdapter extends ArrayAdapter<WebViewApplicationInfo> {
     private final LayoutInflater mInflater;
+    private final String mCurrentWebViewPackageName;
 
     public WebViewAppListAdapter(Context context,
             WebViewUpdateServiceWrapper webviewUpdateServiceWrapper) {
@@ -53,6 +56,10 @@ class WebViewAppListAdapter extends ArrayAdapter<WebViewApplicationInfo> {
             packageInfoList.add(info);
         }
         addAll(packageInfoList);
+
+        PackageInfo currentWebViewPackage = webviewUpdateServiceWrapper.getCurrentWebViewPackage();
+        mCurrentWebViewPackageName =
+                currentWebViewPackage == null ? null : currentWebViewPackage.packageName;
     }
 
     @Override
@@ -80,6 +87,11 @@ class WebViewAppListAdapter extends ArrayAdapter<WebViewApplicationInfo> {
         holder.disabled.setVisibility(View.GONE);
         // Only allow a package to be chosen if it is enabled and installed for all users.
         convertView.setEnabled(isEnabled(position));
+        if (info.info.packageName.equals(mCurrentWebViewPackageName)) {
+            convertView.setBackgroundColor(Color.GRAY);
+        } else {
+            convertView.setBackgroundColor(Color.WHITE);
+        }
         return convertView;
     }
 
