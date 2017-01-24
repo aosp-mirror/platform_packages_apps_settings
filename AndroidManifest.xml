@@ -2045,15 +2045,6 @@
         </activity>
 
         <receiver
-            android:name=".bluetooth.BluetoothDiscoveryReceiver">
-            <intent-filter>
-                <action android:name="android.bluetooth.adapter.action.DISCOVERY_STARTED" />
-                <action android:name="android.bluetooth.adapter.action.DISCOVERY_FINISHED" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
-        <receiver
             android:name=".bluetooth.DockEventReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOCK_EVENT" />
