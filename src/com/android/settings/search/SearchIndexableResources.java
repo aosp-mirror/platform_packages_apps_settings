@@ -86,7 +86,8 @@ public final class SearchIndexableResources {
     @XmlRes
     public static final int NO_DATA_RES_ID = 0;
 
-    private static final HashMap<String, SearchIndexableResource> sResMap = new HashMap<>();
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    static final HashMap<String, SearchIndexableResource> sResMap = new HashMap<>();
 
     @VisibleForTesting
     static void addIndex(Class<?> indexClass, @XmlRes int xmlResId,

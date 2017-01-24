@@ -16,14 +16,20 @@
 
 package com.android.settings.search;
 
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
 import static com.android.settings.search.SearchIndexableResources.NO_DATA_RES_ID;
 
+import static com.android.settings.search.SearchIndexableResources.sResMap;
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 import android.annotation.DrawableRes;
 import android.annotation.XmlRes;
+import android.database.Cursor;
 import android.provider.SearchIndexableResource;
 
+import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -31,7 +37,10 @@ import com.android.settings.wifi.WifiSettings;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.HashMap;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -71,5 +80,25 @@ public class SearchIndexableResourcesTest {
         assertThat(index.rank).isEqualTo(Ranking.RANK_WIFI);
         assertThat(index.xmlResId).isEqualTo(NO_DATA_RES_ID);
         assertThat(index.iconResId).isEqualTo(R.drawable.ic_settings_wireless);
+    }
+
+    @Test
+    public void testNonIndexableKeys_GetsKeyFromProvider() {
+        SearchIndexableResources.sResMap.clear();
+        SearchIndexableResources.addIndex(FakeIndexProvider.class, 0, 0);
+
+        SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
+
+        Cursor cursor = provider.queryNonIndexableKeys(null);
+        boolean hasTestKey = false;
+        while(cursor.moveToNext()) {
+            String key = cursor.getString(COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE);
+            if (TextUtils.equals(key, FakeIndexProvider.KEY)) {
+                hasTestKey = true;
+                break;
+            }
+        }
+
+        assertThat(hasTestKey).isTrue();
     }
 }
