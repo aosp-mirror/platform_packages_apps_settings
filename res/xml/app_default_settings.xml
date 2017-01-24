@@ -26,40 +26,48 @@
         android:fragment="com.android.settings.applications.ManageAssist"
         android:order="-20"/>
 
-    <com.android.settings.applications.DefaultBrowserPreference
+    <Preference
         android:key="default_browser"
         android:title="@string/default_browser_title"
         android:summary="@string/default_browser_title_none"
-        android:order="-19"/>
+        android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker"
+        android:order="-19">
+        <extra android:name="for_work" android:value="false"/>
+    </Preference>
 
-    <com.android.settings.applications.DefaultHomePreference
+    <Preference
         android:key="default_home"
         android:title="@string/home_app"
         android:summary="@string/no_default_home"
         settings:keywords="@string/keywords_home"
+        android:fragment="com.android.settings.applications.defaultapps.DefaultHomePicker"
         android:order="-18"/>
 
-    <com.android.settings.applications.DefaultPhonePreference
+    <Preference
         android:key="default_phone_app"
         android:title="@string/default_phone_title"
+        android:fragment="com.android.settings.applications.defaultapps.DefaultPhonePicker"
         settings:keywords="@string/keywords_default_phone_app"
         android:order="-17"/>
 
-    <com.android.settings.applications.DefaultSmsPreference
+    <Preference
         android:key="default_sms_app"
         android:title="@string/sms_application_title"
+        android:fragment="com.android.settings.applications.defaultapps.DefaultSmsPicker"
         settings:keywords="@string/keywords_more_default_sms_app"
         android:order="-16"/>
 
-    <com.android.settings.applications.DefaultEmergencyPreference
+    <Preference
         android:key="default_emergency_app"
         android:title="@string/default_emergency_app"
         settings:keywords="@string/keywords_emergency_app"
+        android:fragment="com.android.settings.applications.defaultapps.DefaultEmergencyPicker"
         android:order="-15"/>
 
-    <com.android.settings.applications.DefaultNotificationAssistantPreference
+    <Preference
         android:key="default_notification_asst_app"
         android:title="@string/default_notification_assistant"
+        android:fragment="com.android.settings.applications.defaultapps.DefaultNotificationAssistantPicker"
         android:order="-14"/>
 
     <Preference
@@ -71,17 +79,21 @@
         android:key="work_defaults"
         android:title="@string/default_for_work">
 
-        <com.android.settings.applications.DefaultBrowserPreference
+        <Preference
             android:key="work_default_browser"
             android:title="@string/default_browser_title"
             android:summary="@string/default_browser_title_none"
-            settings:forWork="true"/>
+            android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker">
+            <extra android:name="for_work" android:value="true"/>
+        </Preference>
 
-        <com.android.settings.applications.DefaultPhonePreference
-            android:key="work_default_phone_app"
-            android:title="@string/default_phone_title"
-            settings:keywords="@string/keywords_default_phone_app"
-            settings:forWork="true"/>
+        <Preference
+            android:key="work_default_phone_app_new"
+            android:title="new phone pref work"
+            android:fragment="com.android.settings.applications.defaultapps.DefaultPhonePicker"
+            settings:keywords="@string/keywords_default_phone_app">
+            <extra android:name="for_work" android:value="true"/>
+        </Preference>
 
     </com.android.settings.WorkOnlyCategory>
 

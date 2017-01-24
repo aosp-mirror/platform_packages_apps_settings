@@ -21,7 +21,6 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +32,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -42,27 +40,20 @@ public class AdvancedAppSettingsTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
 
-    private FakeFeatureFactory mFeatureFactory;
     private AdvancedAppSettings mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+
         mFragment = new AdvancedAppSettings();
         mFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
     }
 
     @Test
-    public void getPreferenceScreenResId_differentIAEnabledState_shouldUseDifferentPrefLayout() {
-        when(mFeatureFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
+    public void getPreferenceScreenResId_shouldUseAppDefaultSettingPrefLayout() {
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
                 R.xml.app_default_settings);
-
-        when(mFeatureFactory.dashboardFeatureProvider.isEnabled()).thenReturn(false);
-        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
-                R.xml.advanced_apps);
     }
 
 }

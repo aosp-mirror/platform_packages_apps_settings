@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2016 The Android Open Source Project
+/*
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,65 +14,48 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
-
-import com.android.settings.AppListPreference;
+package com.android.settings.applications.defaultapps;
 
 import android.app.ActivityManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 import android.service.notification.NotificationAssistantService;
-import android.util.AttributeSet;
 import android.util.Slog;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.android.settings.R;
 import com.android.settings.utils.ManagedServiceSettings;
 
-public class DefaultNotificationAssistantPreference extends AppListPreference {
+import java.util.ArrayList;
+import java.util.List;
+
+public class DefaultNotificationAssistantPicker extends DefaultAppPickerFragment {
     private static final String TAG = "DefaultNotiAssist";
 
-    private PackageManager mPm;
-    private final ManagedServiceSettings.Config mConfig;
-    private final Context mContext;
+    private final ManagedServiceSettings.Config mConfig = getConfig();
 
-    public DefaultNotificationAssistantPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
-
-        mContext = context;
-        mPm = context.getPackageManager();
-        mConfig = getConfig();
-        setShowItemNone(true);
-        updateList(getServices());
+    @Override
+    public int getMetricsCategory() {
+        return 0;
     }
 
     @Override
-    protected boolean persistString(String value) {
-        Settings.Secure.putString(mContext.getContentResolver(), mConfig.setting, value);
-        setSummary(getEntry());
+    protected String getDefaultAppKey() {
+        return Settings.Secure.getString(getContext().getContentResolver(), mConfig.setting);
+    }
+
+    @Override
+    protected boolean setDefaultAppKey(String value) {
+        Settings.Secure.putString(getContext().getContentResolver(), mConfig.setting, value);
         return true;
     }
 
-    private void updateList(List<ServiceInfo> services) {
-        final ComponentName[] assistants = new ComponentName[services.size()];
-        for (int i = 0; i < services.size(); i++) {
-            assistants[i] = new ComponentName(services.get(i).packageName, services.get(i).name);
-        }
-        final String assistant =
-                Settings.Secure.getString(mContext.getContentResolver(), mConfig.setting);
-        setComponentNames(assistants, assistant == null ? null
-                : ComponentName.unflattenFromString(assistant));
-    }
-
-    private List<ServiceInfo> getServices() {
-        List<ServiceInfo> services = new ArrayList<>();
+    @Override
+    protected List<DefaultAppInfo> getCandidates() {
+        List<DefaultAppInfo> candidates = new ArrayList<>();
         final int user = ActivityManager.getCurrentUser();
 
         List<ResolveInfo> installedServices = mPm.queryIntentServicesAsUser(
@@ -91,9 +74,16 @@ public class DefaultNotificationAssistantPreference extends AppListPreference {
                         + mConfig.permission);
                 continue;
             }
-            services.add(info);
+
+            candidates.add(new DefaultAppInfo(
+                    mUserId, new ComponentName(info.packageName, info.name), null /* summary */));
         }
-        return services;
+        return candidates;
+    }
+
+    @Override
+    protected boolean shouldShowItemNone() {
+        return true;
     }
 
     private ManagedServiceSettings.Config getConfig() {

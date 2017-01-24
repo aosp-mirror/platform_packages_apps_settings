@@ -16,7 +16,9 @@
 
 package com.android.settings.applications;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -55,5 +57,37 @@ public class PackageManagerWrapperImpl implements PackageManagerWrapper {
     @Override
     public int getInstallReason(String packageName, UserHandle user) {
         return mPm.getInstallReason(packageName, user);
+    }
+
+    @Override
+    public ApplicationInfo getApplicationInfoAsUser(String packageName, int i, int userId)
+            throws PackageManager.NameNotFoundException {
+        return mPm.getApplicationInfoAsUser(packageName, i, userId);
+    }
+
+    @Override
+    public boolean setDefaultBrowserPackageNameAsUser(String packageName, int userId) {
+        return mPm.setDefaultBrowserPackageNameAsUser(packageName, userId);
+    }
+
+    @Override
+    public String getDefaultBrowserPackageNameAsUser(int userId) {
+        return mPm.getDefaultBrowserPackageNameAsUser(userId);
+    }
+
+    @Override
+    public ComponentName getHomeActivities(List<ResolveInfo> homeActivities) {
+        return mPm.getHomeActivities(homeActivities);
+    }
+
+    @Override
+    public List<ResolveInfo> queryIntentServicesAsUser(Intent intent, int i, int user) {
+        return mPm.queryIntentServicesAsUser(intent, i, user);
+    }
+
+    @Override
+    public void replacePreferredActivity(IntentFilter homeFilter, int matchCategoryEmpty,
+            ComponentName[] componentNames, ComponentName component) {
+        mPm.replacePreferredActivity(homeFilter, matchCategoryEmpty, componentNames, component);
     }
 }
