@@ -126,9 +126,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_TRUST_AGENT = "trust_agent";
     private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
 
+    // Security status
+    private static final String KEY_SECURITY_STATUS = "security_status";
+    private static final String SECURITY_STATUS_KEY_PREFIX = "security_status_";
+
     // Package verifier Settings
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    static final String KEY_PACKAGE_VERIFIER_STATE = "package_verifier_state";
+    static final String KEY_PACKAGE_VERIFIER_STATUS = "security_status_package_verifier";
     private static final int PACKAGE_VERIFIER_STATE_ENABLED = 1;
 
     // These switch preferences need special handling since they're not all stored in Settings.
@@ -260,6 +264,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
         addPreferencesFromResource(R.xml.security_settings);
         root = getPreferenceScreen();
+
+        // Add category for security status
+        addPreferencesFromResource(R.xml.security_settings_status);
 
         // Add options for lock/unlock screen
         final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils,
@@ -428,19 +435,38 @@ public class SecuritySettings extends SettingsPreferenceFragment
         Index.getInstance(getActivity())
                 .updateFromClassNameResource(SecuritySettings.class.getName(), true, true);
 
+        PreferenceGroup securityStatusPreferenceGroup =
+                (PreferenceGroup) root.findPreference(KEY_SECURITY_STATUS);
         if (mDashboardFeatureProvider.isEnabled()) {
             final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
                     getActivity(), getPrefContext(), CategoryKey.CATEGORY_SECURITY);
+            int numSecurityStatusPrefs = 0;
             if (tilePrefs != null && !tilePrefs.isEmpty()) {
                 for (Preference preference : tilePrefs) {
-                    root.addPreference(preference);
+                    if (!TextUtils.isEmpty(preference.getKey())
+                            && preference.getKey().startsWith(SECURITY_STATUS_KEY_PREFIX)) {
+                        // Injected security status settings are placed under the Security status
+                        // category.
+                        securityStatusPreferenceGroup.addPreference(preference);
+                        numSecurityStatusPrefs++;
+                    } else {
+                        // Other injected settings are placed under the Security preference screen.
+                        root.addPreference(preference);
+                    }
                 }
             }
 
-            // Update preference data with tile data. Security feature provider only updates the
-            // data if it actually needs to be changed.
-            mSecurityFeatureProvider.updatePreferences(getActivity(), root,
-                    mDashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY));
+            if (numSecurityStatusPrefs == 0) {
+                root.removePreference(securityStatusPreferenceGroup);
+            } else if (numSecurityStatusPrefs > 0) {
+                // Update preference data with tile data. Security feature provider only updates the
+                // data if it actually needs to be changed.
+                mSecurityFeatureProvider.updatePreferences(getActivity(), root,
+                        mDashboardFeatureProvider.getTilesForCategory(
+                                CategoryKey.CATEGORY_SECURITY));
+            }
+        } else {
+            root.removePreference(root.findPreference(KEY_SECURITY_STATUS));
         }
 
         for (int i = 0; i < SWITCH_PREFERENCE_KEYS.length; i++) {
@@ -1365,7 +1391,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
             for (int i = 0; i < tilesCount; i++) {
                 Tile tile = dashboardCategory.getTile(i);
-                if (!KEY_PACKAGE_VERIFIER_STATE.equals(tile.key)) {
+                if (!KEY_PACKAGE_VERIFIER_STATUS.equals(tile.key)) {
                     continue;
                 }
                 String summaryUri = tile.metaData.getString(
