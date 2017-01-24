@@ -129,14 +129,25 @@
                 android:orientation="vertical"
                 android:divider="?android:attr/dividerHorizontal"
                 android:showDividers="beginning|middle|end">
-                <Button android:id="@+id/action_button"
-                    android:layout_width="match_parent"
-                    android:layout_gravity="start"
-                    android:gravity="start|center_vertical"
-                    android:maxLines="2"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:textAllCaps="false"
-                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:id="@+id/restricted_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Button android:id="@+id/action_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="2"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textAllCaps="false"
+                        />
+                    <include layout="@layout/restricted_icon" />
+                </LinearLayout>
                 <Button android:id="@+id/cancel_button"
                     android:layout_width="match_parent"
                     android:layout_gravity="end"
