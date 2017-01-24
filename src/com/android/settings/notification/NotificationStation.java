@@ -56,7 +56,7 @@ import java.util.*;
 public class NotificationStation extends SettingsPreferenceFragment {
     private static final String TAG = NotificationStation.class.getSimpleName();
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     private static final boolean DUMP_EXTRAS = true;
     private static final boolean DUMP_PARCEL = true;
     private Handler mHandler;
@@ -362,6 +362,11 @@ public class NotificationStation extends SettingsPreferenceFragment {
                                         .append(delim)
                                         .append(rank.getImportanceExplanation());
                             }
+                            sb.append("\n")
+                                    .append(bold(getString(
+                                            R.string.notification_log_details_badge)))
+                                    .append(delim)
+                                    .append(Boolean.toString(rank.canShowBadge()));
                         } else {
                             if (mRanking == null) {
                                 sb.append("\n")

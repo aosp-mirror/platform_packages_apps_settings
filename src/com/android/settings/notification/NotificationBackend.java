@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.util.Log;
 
 import com.android.settingslib.Utils;
@@ -48,6 +49,8 @@ public class NotificationBackend {
         }
         row.icon = app.loadIcon(pm);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
+        row.showBadge = canShowBadge(row.pkg, row.uid);
+        row.userId = UserHandle.getUserId(row.uid);
         return row;
     }
 
@@ -80,6 +83,25 @@ public class NotificationBackend {
     public boolean setNotificationsEnabledForPackage(String pkg, int uid, boolean enabled) {
         try {
             sINM.setNotificationsEnabledForPackage(pkg, uid, enabled);
+            return true;
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public boolean canShowBadge(String pkg, int uid) {
+        try {
+            return sINM.canShowBadge(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public boolean setShowBadge(String pkg, int uid, boolean showBadge) {
+        try {
+            sINM.setShowBadge(pkg, uid, showBadge);
             return true;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
@@ -129,6 +151,8 @@ public class NotificationBackend {
         public boolean banned;
         public boolean first;  // first app in section
         public boolean systemApp;
+        public boolean showBadge;
+        public int userId;
     }
 
     public static class ChannelRow extends AppRow {

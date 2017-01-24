@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -35,11 +36,13 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.drawer.CategoryKey;
 
 import java.text.Collator;
 import java.util.Collections;
@@ -88,10 +91,12 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         addPreferencesFromResource(R.xml.app_notification_settings);
 
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
+        mBadge = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BADGE);
         mChannels = (PreferenceCategory) findPreference(KEY_CHANNELS);
 
         if (mPkgInfo != null) {
-            setupBlock(mAppRow.systemApp, mAppRow.banned);
+            setupBlock();
+            setupBadge();
             // load settings intent
             ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
             rows.put(mAppRow.pkg, mAppRow);
@@ -113,6 +118,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     if (channel.isDeleted()) {
                         channelPref.setTitle(
                                 getString(R.string.deleted_channel_name, channel.getName()));
+                        channelPref.setEnabled(false);
                     } else {
                         Bundle channelArgs = new Bundle();
                         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
@@ -153,16 +159,27 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             finish();
             return;
         }
-        if (mBlock != null) {
-            mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
     }
 
-    private void setupBlock(boolean notBlockable, boolean banned) {
-        if (notBlockable) {
+    private void setupBadge() {
+        mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mBadge.setChecked(mAppRow.showBadge);
+        mBadge.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean value = (Boolean) newValue;
+                mBackend.setShowBadge(mPkg, mUid, value);
+                return true;
+            }
+        });
+    }
+
+    private void setupBlock() {
+        if (mAppRow.systemApp) {
             setVisible(mBlock, false);
         } else {
-            mBlock.setChecked(banned);
+            mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
+            mBlock.setChecked(mAppRow.banned);
             mBlock.setOnPreferenceChangeListener(
                     new Preference.OnPreferenceChangeListener() {
                         @Override
@@ -180,6 +197,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     private void updateDependents(boolean banned) {
         setVisible(mChannels, !(mChannelList.isEmpty() || banned));
+        setVisible(mBadge, !banned);
     }
 
     private List<ResolveInfo> queryNotificationConfigActivities() {

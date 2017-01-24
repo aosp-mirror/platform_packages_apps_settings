@@ -26,6 +26,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.net.Uri;
@@ -47,15 +48,17 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChannelNotificationSettings extends NotificationSettingsBase {
+    private static final String TAG = "ChannelSettings";
+
     protected static final String KEY_BYPASS_DND = "bypass_dnd";
     protected static final String KEY_VISIBILITY_OVERRIDE = "visibility_override";
     protected static final String KEY_IMPORTANCE = "importance";
     protected static final String KEY_LIGHTS = "lights";
     protected static final String KEY_VIBRATE = "vibrate";
     protected static final String KEY_RINGTONE = "ringtone";
-    protected static final String KEY_BADGE = "badge";
 
     protected RestrictedSwitchPreference mLights;
     protected RestrictedSwitchPreference mVibrate;
@@ -114,8 +117,8 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                     .getApplicationFeatureProvider(activity)
                     .newAppHeaderController(this /* fragment */, null /* appHeader */)
                     .setIcon(mAppRow.icon)
-                    .setLabel(mAppRow.label)
-                    .setSummary(mChannel.getName())
+                    .setLabel(mChannel.getName())
+                    .setSummary(mAppRow.label)
                     .setPackageName(mAppRow.pkg)
                     .setUid(mAppRow.uid)
                     .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
@@ -138,8 +141,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
         mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
         mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
     }
 
     private void setupLights() {
@@ -204,6 +205,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             }
         });
         mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mBadge.setEnabled(mAppRow.showBadge);
         mBadge.setChecked(mChannel.canShowBadge());
         mBadge.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -218,15 +220,20 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
 
         mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
         final int numImportances = IMPORTANCE_HIGH - IMPORTANCE_MIN + 1;
-        String[] summaries = new String[numImportances];
-        String[] values = new String[numImportances];
+        List<String> summaries = new ArrayList<>();
+        List<String> values = new ArrayList<>();;
         for (int i = 0; i < numImportances; i++) {
             int importance = i + 1;
-            summaries[i] = getSummary(importance);
-            values[i] = String.valueOf(importance);
+            summaries.add(getSummary(importance));
+            values.add(String.valueOf(importance));
         }
-        mImportance.setEntryValues(values);
-        mImportance.setEntries(summaries);
+        if (NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
+            // Add option to reset to letting the app decide
+            summaries.add(getSummary(NotificationManager.IMPORTANCE_UNSPECIFIED));
+            values.add(String.valueOf(NotificationManager.IMPORTANCE_UNSPECIFIED));
+        }
+        mImportance.setEntryValues(values.toArray(new String[0]));
+        mImportance.setEntries(summaries.toArray(new String[0]));
         mImportance.setValue(String.valueOf(mChannel.getImportance()));
         mImportance.setSummary("%s");
 
@@ -245,6 +252,8 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
 
     private String getSummary(int importance) {
         switch (importance) {
+            case NotificationManager.IMPORTANCE_UNSPECIFIED:
+                return getContext().getString(R.string.notification_importance_unspecified);
             case NotificationManager.IMPORTANCE_NONE:
                 return getContext().getString(R.string.notification_importance_blocked);
             case NotificationManager.IMPORTANCE_MIN:

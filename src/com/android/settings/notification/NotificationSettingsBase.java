@@ -16,36 +16,28 @@
 
 package com.android.settings.notification;
 
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import static com.android.settings.notification.RestrictedDropDownPreference.RestrictedItem;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 abstract public class NotificationSettingsBase extends SettingsPreferenceFragment {
@@ -55,6 +47,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected static final String ARG_CHANNEL = "channel";
 
     protected static final String KEY_BLOCK = "block";
+    protected static final String KEY_BADGE = "badge";
 
     protected PackageManager mPm;
     protected UserManager mUm;
@@ -145,6 +138,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
         mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
     }
 
     protected void setVisible(Preference p, boolean visible) {
