@@ -24,7 +24,7 @@ package com.android.settings.applications;
 public interface ActivityInfoWrapper {
 
     /**
-     * Returns the resizeMode of the activity.
+     * Returns whether this activity supports picture-in-picture.
      */
-    int getResizeMode();
+    boolean supportsPictureInPicture();
 }

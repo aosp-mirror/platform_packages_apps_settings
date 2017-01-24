@@ -107,9 +107,7 @@ public class PictureInPictureSettingsTest {
         if (resizeableActivityState.length > 0) {
             activities = new ActivityInfoWrapper[resizeableActivityState.length];
             for (int i = 0; i < activities.length; i++) {
-                activities[i] = new MockActivityInfo(resizeableActivityState[i]
-                        ? ActivityInfo.RESIZE_MODE_RESIZEABLE_AND_PIPABLE
-                        : ActivityInfo.RESIZE_MODE_UNRESIZEABLE);
+                activities[i] = new MockActivityInfo(resizeableActivityState[i]);
             }
         }
         return PictureInPictureSettings.checkPackageHasPictureInPictureActivities(packageName,
@@ -118,15 +116,15 @@ public class PictureInPictureSettingsTest {
 
     private class MockActivityInfo implements ActivityInfoWrapper {
 
-        private int mResizeMode;
+        private boolean mSupportsPictureInPicture;
 
-        public MockActivityInfo(int resizeMode) {
-            mResizeMode = resizeMode;
+        public MockActivityInfo(boolean supportsPictureInPicture) {
+            mSupportsPictureInPicture = supportsPictureInPicture;
         }
 
         @Override
-        public int getResizeMode() {
-            return mResizeMode;
+        public boolean supportsPictureInPicture() {
+            return mSupportsPictureInPicture;
         }
     }
 }
