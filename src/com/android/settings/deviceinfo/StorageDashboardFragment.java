@@ -21,9 +21,6 @@ import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -62,7 +59,8 @@ public class StorageDashboardFragment extends DashboardFragment {
 
         // Initialize the storage sizes that we can quickly calc.
         StorageManager sm = context.getSystemService(StorageManager.class);
-        String volumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
+        String volumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID,
+                VolumeInfo.ID_PRIVATE_INTERNAL);
         mVolume = sm.findVolumeById(volumeId);
         if (!isVolumeValid()) {
             getActivity().finish();
