@@ -31,7 +31,6 @@ import android.os.LocaleList;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,6 +56,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
+import com.android.settings.Settings.GamesStorageActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.Settings.ManageExternalSourcesActivity;
 import com.android.settings.Settings.NotificationAppListActivity;
@@ -216,6 +216,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int LIST_TYPE_OVERLAY = 6;
     public static final int LIST_TYPE_WRITE_SETTINGS = 7;
     public static final int LIST_TYPE_MANAGE_SOURCES = 8;
+    public static final int LIST_TYPE_GAMES = 9;
 
     private View mRootView;
 
@@ -267,6 +268,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mListType = LIST_TYPE_WRITE_SETTINGS;
         } else if (className.equals(ManageExternalSourcesActivity.class.getName())) {
             mListType = LIST_TYPE_MANAGE_SOURCES;
+        } else if (className.equals(GamesStorageActivity.class.getName())) {
+            mListType = LIST_TYPE_GAMES;
+            mSortOrder = R.id.sort_order_size;
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -359,6 +363,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         if (mListType == LIST_TYPE_STORAGE) {
             mApplications.setOverrideFilter(new VolumeFilter(mVolumeUuid));
         }
+        if (mListType == LIST_TYPE_GAMES) {
+            mApplications.setOverrideFilter(ApplicationsState.FILTER_GAMES);
+        }
     }
 
     @Override
@@ -399,6 +406,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_MAIN:
             case LIST_TYPE_NOTIFICATION:
             case LIST_TYPE_STORAGE:
+            case LIST_TYPE_GAMES:
                 return mSortOrder == R.id.sort_order_alpha;
             default:
                 return false;
@@ -413,6 +421,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_NOTIFICATION:
                 return MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS;
             case LIST_TYPE_STORAGE:
+            case LIST_TYPE_GAMES:
                 return MetricsEvent.APPLICATIONS_STORAGE_APPS;
             case LIST_TYPE_USAGE_ACCESS:
                 return MetricsEvent.USAGE_ACCESS;
@@ -517,6 +526,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 break;
             case LIST_TYPE_MANAGE_SOURCES:
                 startAppInfoFragment(ExternalSourcesDetails.class, R.string.install_other_apps);
+            case LIST_TYPE_GAMES:
+                startAppInfoFragment(AppStorageSettings.class, R.string.game_storage_settings);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed app.

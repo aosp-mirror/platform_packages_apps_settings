@@ -122,7 +122,8 @@ public class StorageItemPreferenceController extends PreferenceController
                 intent = getAudioIntent();
                 break;
             case GAME_KEY:
-                // TODO: Once app categorization is added, make this section.
+                intent = getGamesIntent();
+                break;
             case OTHER_APPS_KEY:
                 // Because we are likely constructed with a null volume, this is theoretically
                 // possible.
@@ -257,6 +258,15 @@ public class StorageItemPreferenceController extends PreferenceController
         return Utils.onBuildStartFragmentIntent(mContext,
                 ManageApplications.class.getName(), args, null, R.string.apps_storage, null,
                 false);
+    }
+
+    private Intent getGamesIntent() {
+            Bundle args = new Bundle(1);
+            args.putString(ManageApplications.EXTRA_CLASSNAME,
+                    Settings.GamesStorageActivity.class.getName());
+            return Utils.onBuildStartFragmentIntent(mContext,
+                    ManageApplications.class.getName(), args, null, R.string.game_storage_settings,
+                    null, false);
     }
 
     private Intent getFilesIntent() {
