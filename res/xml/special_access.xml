@@ -75,6 +75,11 @@
         android:fragment="com.android.settings.notification.NotificationAccessSettings" />
 
     <Preference
+        android:key="picture_in_picture"
+        android:title="@string/picture_in_picture_title"
+        android:fragment="com.android.settings.applications.PictureInPictureSettings"
+        settings:keywords="@string/picture_in_picture_keywords" />
+    <Preference
         android:key="premium_sms"
         android:title="@string/premium_sms_access"
         android:fragment="com.android.settings.applications.PremiumSmsAccess" />

@@ -51,6 +51,7 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
@@ -934,9 +935,23 @@ public class InstalledAppDetails extends AppInfoBase
                     AdvancedAppSettings.class, "default_sms_app", R.string.sms_application_title,
                     R.string.configure_apps));
         }
+
+        // Get the package info with the activities
+        PackageInfo packageInfoWithActivities = null;
+        try {
+            packageInfoWithActivities = mPm.getPackageInfoAsUser(mPackageName,
+                    PackageManager.GET_ACTIVITIES, UserHandle.myUserId());
+        } catch (NameNotFoundException e) {
+            Log.e(TAG, "Exception while retrieving the package info of " + mPackageName, e);
+        }
+
         boolean hasDrawOverOtherApps = hasPermission(permission.SYSTEM_ALERT_WINDOW);
         boolean hasWriteSettings = hasPermission(permission.WRITE_SETTINGS);
-        if (hasDrawOverOtherApps || hasWriteSettings) {
+        boolean hasPictureInPictureActivities = (packageInfoWithActivities != null) &&
+                PictureInPictureSettings.checkPackageHasPictureInPictureActivities(
+                        packageInfoWithActivities.packageName,
+                        packageInfoWithActivities.activities);
+        if (hasDrawOverOtherApps || hasWriteSettings || hasPictureInPictureActivities) {
             PreferenceCategory category = new PreferenceCategory(getPrefContext());
             category.setTitle(R.string.advanced_apps);
             screen.addPreference(category);
@@ -964,6 +979,23 @@ public class InstalledAppDetails extends AppInfoBase
                     public boolean onPreferenceClick(Preference preference) {
                         startAppInfoFragment(WriteSettingsDetails.class,
                                 getString(R.string.write_settings));
+                        return true;
+                    }
+                });
+                category.addPreference(pref);
+            }
+            if (hasPictureInPictureActivities) {
+                final SwitchPreference pref = new SwitchPreference(getPrefContext());
+                pref.setPersistent(false);
+                pref.setTitle(R.string.picture_in_picture_app_detail_title);
+                pref.setSummary(R.string.picture_in_picture_app_detail_summary);
+                pref.setChecked(PictureInPictureSettings.getEnterPipOnHideStateForPackage(
+                        getContext(), mPackageInfo.applicationInfo.uid, mPackageName));
+                pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        PictureInPictureSettings.setEnterPipOnHideStateForPackage(getContext(),
+                                mPackageInfo.applicationInfo.uid, mPackageName, (Boolean) newValue);
                         return true;
                     }
                 });
