@@ -18,7 +18,6 @@ package com.android.settings.applications;
 import static android.app.AppOpsManager.MODE_ALLOWED;
 import static android.app.AppOpsManager.MODE_ERRORED;
 import static android.app.AppOpsManager.OP_ENTER_PICTURE_IN_PICTURE_ON_HIDE;
-import static android.content.pm.ActivityInfo.RESIZE_MODE_RESIZEABLE_AND_PIPABLE;
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
 
 import android.annotation.Nullable;
@@ -91,7 +90,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         // picture-in-picture
         if (activities != null) {
             for (int i = activities.length - 1; i >= 0; i--) {
-                if (activities[i].getResizeMode() == RESIZE_MODE_RESIZEABLE_AND_PIPABLE) {
+                if (activities[i].supportsPictureInPicture()) {
                     return true;
                 }
             }

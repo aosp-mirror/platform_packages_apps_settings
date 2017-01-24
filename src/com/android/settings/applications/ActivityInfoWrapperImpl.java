@@ -27,7 +27,7 @@ public class ActivityInfoWrapperImpl implements ActivityInfoWrapper {
     }
 
     @Override
-    public int getResizeMode() {
-        return mInfo.resizeMode;
+    public boolean supportsPictureInPicture() {
+        return mInfo.supportsPictureInPicture();
     }
 }
