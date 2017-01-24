@@ -102,7 +102,6 @@ import java.util.List;
 )
 public class DynamicIndexableContentMonitorTest {
 
-    private static final int USER_ID = 5678;
     private static final int LOADER_ID = 1234;
     private static final String A11Y_PACKAGE_1 = "a11y-1";
     private static final String A11Y_PACKAGE_2 = "a11y-2";
@@ -151,6 +150,10 @@ public class DynamicIndexableContentMonitorTest {
 
     @After
     public void shutDown() {
+        mMonitor.unregister(mActivity, LOADER_ID);
+        // BroadcastReceiver must be unregistered.
+        assertThat(extractPackageMonitor()).isNull();
+
         DynamicIndexableContentMonitor.resetForTesting();
         mRobolectricPackageManager.reset();
     }
@@ -187,6 +190,11 @@ public class DynamicIndexableContentMonitorTest {
 
         // No destroy loader should happen.
         verify(mLoaderManager, never()).destroyLoader(anyInt());
+        // BroadcastReceiver must be unregistered.
+        assertThat(extractPackageMonitor()).isNull();
+
+        // To suppress spurious test fail in {@link #shutDown()}.
+        mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
     }
 
     @Test
@@ -220,6 +228,7 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * Nothing happens on successive register calls.
          */
+        mMonitor.unregister(mActivity, LOADER_ID);
         reset(mIndex);
 
         mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
@@ -259,74 +268,59 @@ public class DynamicIndexableContentMonitorTest {
     public void testAccessibilityServicesMonitor() throws Exception {
         mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
 
-        final PackageMonitor packageMonitor = extractPackageMonitor();
-        assertThat(packageMonitor).isNotNull();
-
         verifyRebuildIndexing(AccessibilitySettings.class);
 
         /*
          * When an accessibility service package is installed, incremental indexing happen.
          */
-        installAccessibilityService(A11Y_PACKAGE_1);
         reset(mIndex);
 
-        packageMonitor.onPackageAppeared(A11Y_PACKAGE_1, USER_ID);
-        Robolectric.flushBackgroundThreadScheduler();
+        installAccessibilityService(A11Y_PACKAGE_1);
 
         verifyIncrementalIndexing(AccessibilitySettings.class);
 
         /*
          * When another accessibility service package is installed, incremental indexing happens.
          */
-        installAccessibilityService(A11Y_PACKAGE_2);
         reset(mIndex);
 
-        packageMonitor.onPackageAppeared(A11Y_PACKAGE_2, USER_ID);
-        Robolectric.flushBackgroundThreadScheduler();
+        installAccessibilityService(A11Y_PACKAGE_2);
 
         verifyIncrementalIndexing(AccessibilitySettings.class);
 
         /*
          * When an accessibility service is disabled, rebuild indexing happens.
          */
-        ((PackageManager) mRobolectricPackageManager).setApplicationEnabledSetting(
-                A11Y_PACKAGE_1, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0 /* flags */);
         reset(mIndex);
 
-        packageMonitor.onPackageModified(A11Y_PACKAGE_1);
-        Robolectric.flushBackgroundThreadScheduler();
+        disableInstalledPackage(A11Y_PACKAGE_1);
 
         verifyRebuildIndexing(AccessibilitySettings.class);
 
         /*
          * When an accessibility service is enabled, incremental indexing happens.
          */
-        ((PackageManager) mRobolectricPackageManager).setApplicationEnabledSetting(
-                A11Y_PACKAGE_1, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0 /* flags */);
         reset(mIndex);
 
-        packageMonitor.onPackageModified(A11Y_PACKAGE_1);
-        Robolectric.flushBackgroundThreadScheduler();
+        enableInstalledPackage(A11Y_PACKAGE_1);
 
         verifyIncrementalIndexing(AccessibilitySettings.class);
 
         /*
          * When an accessibility service package is uninstalled, rebuild indexing happens.
          */
-        uninstallAccessibilityService(A11Y_PACKAGE_1);
         reset(mIndex);
 
-        packageMonitor.onPackageDisappeared(A11Y_PACKAGE_1, USER_ID);
+        uninstallAccessibilityService(A11Y_PACKAGE_1);
 
         verifyRebuildIndexing(AccessibilitySettings.class);
 
         /*
          * When an input method service package is installed, nothing happens.
          */
-        installInputMethodService(IME_PACKAGE_1);
         reset(mIndex);
 
-        packageMonitor.onPackageAppeared(IME_PACKAGE_1, USER_ID);
+        installInputMethodService(IME_PACKAGE_1);
 
         verifyNoIndexing(AccessibilitySettings.class);
     }
@@ -334,9 +328,6 @@ public class DynamicIndexableContentMonitorTest {
     @Test
     public void testInputMethodServicesMonitor() throws Exception {
         mMonitor.register(mActivity, LOADER_ID, mIndex, true /* isUserUnlocked */);
-
-        final PackageMonitor packageMonitor = extractPackageMonitor();
-        assertThat(packageMonitor).isNotNull();
 
         verifyRebuildIndexing(VirtualKeyboardFragment.class);
         verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
@@ -350,11 +341,9 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an input method service package is installed, incremental indexing happen.
          */
-        installInputMethodService(IME_PACKAGE_1);
         reset(mIndex);
 
-        packageMonitor.onPackageAppeared(IME_PACKAGE_1, USER_ID);
-        Robolectric.flushBackgroundThreadScheduler();
+        installInputMethodService(IME_PACKAGE_1);
 
         verifyIncrementalIndexing(VirtualKeyboardFragment.class);
         verifyIncrementalIndexing(AvailableVirtualKeyboardFragment.class);
@@ -362,11 +351,9 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When another input method service package is installed, incremental indexing happens.
          */
-        installInputMethodService(IME_PACKAGE_2);
         reset(mIndex);
 
-        packageMonitor.onPackageAppeared(IME_PACKAGE_2, USER_ID);
-        Robolectric.flushBackgroundThreadScheduler();
+        installInputMethodService(IME_PACKAGE_2);
 
         verifyIncrementalIndexing(VirtualKeyboardFragment.class);
         verifyIncrementalIndexing(AvailableVirtualKeyboardFragment.class);
@@ -374,12 +361,9 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an input method service is disabled, rebuild indexing happens.
          */
-        ((PackageManager) mRobolectricPackageManager).setApplicationEnabledSetting(
-                IME_PACKAGE_1, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0 /* flags */);
         reset(mIndex);
 
-        packageMonitor.onPackageModified(IME_PACKAGE_1);
-        Robolectric.flushBackgroundThreadScheduler();
+        disableInstalledPackage(IME_PACKAGE_1);
 
         verifyRebuildIndexing(VirtualKeyboardFragment.class);
         verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
@@ -387,12 +371,9 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an input method service is enabled, incremental indexing happens.
          */
-        ((PackageManager) mRobolectricPackageManager).setApplicationEnabledSetting(
-                IME_PACKAGE_1, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0 /* flags */);
         reset(mIndex);
 
-        packageMonitor.onPackageModified(IME_PACKAGE_1);
-        Robolectric.flushBackgroundThreadScheduler();
+        enableInstalledPackage(IME_PACKAGE_1);
 
         verifyIncrementalIndexing(VirtualKeyboardFragment.class);
         verifyIncrementalIndexing(AvailableVirtualKeyboardFragment.class);
@@ -400,10 +381,9 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an input method service package is uninstalled, rebuild indexing happens.
          */
-        uninstallInputMethodService(IME_PACKAGE_1);
         reset(mIndex);
 
-        packageMonitor.onPackageDisappeared(IME_PACKAGE_1, USER_ID);
+        uninstallInputMethodService(IME_PACKAGE_1);
 
         verifyRebuildIndexing(VirtualKeyboardFragment.class);
         verifyRebuildIndexing(AvailableVirtualKeyboardFragment.class);
@@ -411,10 +391,9 @@ public class DynamicIndexableContentMonitorTest {
         /*
          * When an accessibility service package is installed, nothing happens.
          */
-        installAccessibilityService(A11Y_PACKAGE_1);
         reset(mIndex);
 
-        packageMonitor.onPackageAppeared(A11Y_PACKAGE_1, USER_ID);
+        installAccessibilityService(A11Y_PACKAGE_1);
 
         verifyNoIndexing(VirtualKeyboardFragment.class);
         verifyNoIndexing(AvailableVirtualKeyboardFragment.class);
@@ -528,6 +507,20 @@ public class DynamicIndexableContentMonitorTest {
         return contentObserver;
     }
 
+    private void enableInstalledPackage(String packageName) {
+        ((PackageManager) mRobolectricPackageManager).setApplicationEnabledSetting(
+                packageName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0 /* flags */);
+        extractPackageMonitor().onPackageModified(packageName);
+        Robolectric.flushBackgroundThreadScheduler();
+    }
+
+    private void disableInstalledPackage(String packageName) {
+        ((PackageManager) mRobolectricPackageManager).setApplicationEnabledSetting(
+                packageName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0 /* flags */);
+        extractPackageMonitor().onPackageModified(packageName);
+        Robolectric.flushBackgroundThreadScheduler();
+    }
+
     private void installAccessibilityService(String packageName) throws Exception {
         final AccessibilityServiceInfo serviceToAdd = buildAccessibilityServiceInfo(packageName);
 
@@ -540,6 +533,10 @@ public class DynamicIndexableContentMonitorTest {
                 .getAccessibilityServiceIntent(packageName);
         mRobolectricPackageManager.addResolveInfoForIntent(intent, serviceToAdd.getResolveInfo());
         mRobolectricPackageManager.addPackage(packageName);
+
+        extractPackageMonitor()
+                .onPackageAppeared(packageName, PackageMonitor.PACKAGE_PERMANENT_CHANGE);
+        Robolectric.flushBackgroundThreadScheduler();
     }
 
     private void uninstallAccessibilityService(String packageName) throws Exception {
@@ -554,6 +551,10 @@ public class DynamicIndexableContentMonitorTest {
                 .getAccessibilityServiceIntent(packageName);
         mRobolectricPackageManager.removeResolveInfosForIntent(intent, packageName);
         mRobolectricPackageManager.removePackage(packageName);
+
+        extractPackageMonitor()
+                .onPackageDisappeared(packageName, PackageMonitor.PACKAGE_PERMANENT_CHANGE);
+        Robolectric.flushBackgroundThreadScheduler();
     }
 
     private void installInputMethodService(String packageName) throws Exception {
@@ -568,6 +569,10 @@ public class DynamicIndexableContentMonitorTest {
         final Intent intent = DynamicIndexableContentMonitor.getIMEServiceIntent(packageName);
         mRobolectricPackageManager.addResolveInfoForIntent(intent, resolveInfoToAdd);
         mRobolectricPackageManager.addPackage(packageName);
+
+        extractPackageMonitor()
+                .onPackageAppeared(packageName, PackageMonitor.PACKAGE_PERMANENT_CHANGE);
+        Robolectric.flushBackgroundThreadScheduler();
     }
 
     private void uninstallInputMethodService(String packageName) throws Exception {
@@ -582,6 +587,10 @@ public class DynamicIndexableContentMonitorTest {
         final Intent intent = DynamicIndexableContentMonitor.getIMEServiceIntent(packageName);
         mRobolectricPackageManager.removeResolveInfosForIntent(intent, packageName);
         mRobolectricPackageManager.removePackage(packageName);
+
+        extractPackageMonitor()
+                .onPackageDisappeared(packageName, PackageMonitor.PACKAGE_PERMANENT_CHANGE);
+        Robolectric.flushBackgroundThreadScheduler();
     }
 
     private AccessibilityServiceInfo buildAccessibilityServiceInfo(String packageName)

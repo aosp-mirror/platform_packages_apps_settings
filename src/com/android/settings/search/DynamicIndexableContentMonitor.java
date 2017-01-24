@@ -62,8 +62,9 @@ public final class DynamicIndexableContentMonitor implements
     // Shorten the class name because log TAG can be at most 23 chars.
     private static final String TAG = "DynamicContentMonitor";
 
-    @VisibleForTesting
-    static final long DELAY_PROCESS_PACKAGE_CHANGE = 2000;
+    private static final long DELAY_PROCESS_PACKAGE_CHANGE = 2000;
+    // A PackageMonitor shared among Settings activities.
+    private static final PackageChangeMonitor PACKAGE_CHANGE_MONITOR = new PackageChangeMonitor();
 
     // Null if not initialized.
     @Nullable private Index mIndex;
@@ -87,7 +88,8 @@ public final class DynamicIndexableContentMonitor implements
     @VisibleForTesting
     static void resetForTesting() {
         InputDevicesMonitor.getInstance().resetForTesting();
-        PackageChangeMonitor.getInstance().resetForTesting();
+        AccessibilityServicesMonitor.getInstance().resetForTesting();
+        InputMethodServicesMonitor.getInstance().resetForTesting();
     }
 
     /**
@@ -123,20 +125,23 @@ public final class DynamicIndexableContentMonitor implements
             Log.w(TAG, "Skipping content monitoring because user is locked");
             return;
         }
-        mContext = activity;
+        final Context context = activity.getApplicationContext();
+        mContext = context;
         mIndex = index;
 
-        mHasFeaturePrinting = mContext.getPackageManager()
+        PACKAGE_CHANGE_MONITOR.register(context);
+        mHasFeaturePrinting = context.getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_PRINTING);
         if (mHasFeaturePrinting) {
             activity.getLoaderManager().initLoader(loaderId, null /* args */, this /* callbacks */);
         }
 
         // Watch for input device changes.
-        InputDevicesMonitor.getInstance().initialize(mContext, mIndex);
+        InputDevicesMonitor.getInstance().initialize(context, index);
 
         // Start tracking packages.
-        PackageChangeMonitor.getInstance().initialize(mContext, mIndex);
+        AccessibilityServicesMonitor.getInstance().initialize(context, index);
+        InputMethodServicesMonitor.getInstance().initialize(context, index);
     }
 
     /**
@@ -149,6 +154,7 @@ public final class DynamicIndexableContentMonitor implements
     public void unregister(Activity activity, int loaderId) {
         if (mIndex == null) return;
 
+        PACKAGE_CHANGE_MONITOR.unregister();
         if (mHasFeaturePrinting) {
             activity.getLoaderManager().destroyLoader(loaderId);
         }
@@ -237,32 +243,8 @@ public final class DynamicIndexableContentMonitor implements
         // Null if not initialized.
         @Nullable private PackageManager mPackageManager;
 
-        private PackageChangeMonitor() {}
-
-        private static class SingletonHolder {
-            private static final PackageChangeMonitor INSTANCE = new PackageChangeMonitor();
-        }
-
-        static PackageChangeMonitor getInstance() {
-            return SingletonHolder.INSTANCE;
-        }
-
-        @VisibleForTesting
-        synchronized void resetForTesting() {
-            if (mPackageManager != null) {
-                unregister();
-            }
-            mPackageManager = null;
-            AccessibilityServicesMonitor.getInstance().resetForTesting();
-            InputMethodServicesMonitor.getInstance().resetForTesting();
-        }
-
-        synchronized void initialize(Context context, Index index) {
-            if (mPackageManager != null) return;;
+        public void register(Context context) {
             mPackageManager = context.getPackageManager();
-
-            AccessibilityServicesMonitor.getInstance().initialize(context, index);
-            InputMethodServicesMonitor.getInstance().initialize(context, index);
 
             // Start tracking packages. Use background thread for monitoring. Note that no need to
             // unregister this monitor. This should be alive while Settings app is running.
@@ -271,13 +253,13 @@ public final class DynamicIndexableContentMonitor implements
 
         // Covers installed, appeared external storage with the package, upgraded.
         @Override
-        public void onPackageAppeared(String packageName, int uid) {
+        public void onPackageAppeared(String packageName, int reason) {
             postPackageAvailable(packageName);
         }
 
         // Covers uninstalled, removed external storage with the package.
         @Override
-        public void onPackageDisappeared(String packageName, int uid) {
+        public void onPackageDisappeared(String packageName, int reason) {
             postPackageUnavailable(packageName);
         }
 
@@ -440,6 +422,7 @@ public final class DynamicIndexableContentMonitor implements
                 }
             }
 
+            // TODO: Implements by JobScheduler with TriggerContentUri parameters.
             // Watch for related content URIs.
             mContentResolver.registerContentObserver(UserDictionary.Words.CONTENT_URI,
                     true /* notifyForDescendants */, this /* observer */);
