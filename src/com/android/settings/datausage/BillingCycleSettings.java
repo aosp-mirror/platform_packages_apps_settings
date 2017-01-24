@@ -44,14 +44,16 @@ import com.android.settingslib.net.DataUsageController;
 
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
-import static android.net.TrafficStats.GB_IN_BYTES;
-import static android.net.TrafficStats.MB_IN_BYTES;
 
 public class BillingCycleSettings extends DataUsageBase implements
         Preference.OnPreferenceChangeListener, DataUsageEditController {
 
     private static final String TAG = "BillingCycleSettings";
     private static final boolean LOGD = false;
+    public static final long KB_IN_BYTES = 1000;
+    public static final long MB_IN_BYTES = KB_IN_BYTES * 1000;
+    public static final long GB_IN_BYTES = MB_IN_BYTES * 1000;
+
     private static final long MAX_DATA_LIMIT_BYTES = 50000 * GB_IN_BYTES;
 
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
