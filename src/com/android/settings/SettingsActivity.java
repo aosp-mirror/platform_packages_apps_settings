@@ -33,6 +33,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.nfc.NfcAdapter;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -965,29 +967,27 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
         }
 
-        String backupIntent = getResources().getString(R.string.config_backup_settings_intent);
-        boolean useDefaultBackup = TextUtils.isEmpty(backupIntent);
+        // Check if the backup transport has provided an intent to launch the backup settings.
+        BackupSettingsHelper backupHelper = new BackupSettingsHelper();
+        boolean useDefaultBackup = !backupHelper.isIntentProvidedByTransport(getPackageManager());
+        if (Log.isLoggable(LOG_TAG, Log.VERBOSE)) {
+            Log.v(LOG_TAG, "Enabling default backup settings page: " + useDefaultBackup);
+        }
+
         setTileEnabled(new ComponentName(packageName,
                 Settings.PrivacySettingsActivity.class.getName()), useDefaultBackup, isAdmin);
         setTileEnabled(new ComponentName(packageName,
                         "com.android.settings.PrivacyDashboardAlias"),
                 useDefaultBackup, isAdmin);
 
-        boolean hasBackupActivity = false;
-        if (!useDefaultBackup) {
-            try {
-                Intent intent = Intent.parseUri(backupIntent, 0);
-                hasBackupActivity = !getPackageManager().queryIntentActivities(intent, 0).isEmpty();
-            } catch (URISyntaxException e) {
-                Log.e(LOG_TAG, "Invalid backup intent URI!", e);
-            }
-        }
-
         // Enable/disable BackupSettingsActivity and its alias.
+        if (Log.isLoggable(LOG_TAG, Log.VERBOSE)) {
+            Log.v(LOG_TAG, "Enabling transport provided backup settings: " + !useDefaultBackup);
+        }
         setTileEnabled(new ComponentName(packageName,
-                BackupSettingsActivity.class.getName()), hasBackupActivity, isAdmin);
+                BackupSettingsActivity.class.getName()), !useDefaultBackup, isAdmin);
         setTileEnabled(new ComponentName(packageName,
-                "com.android.settings.BackupResetDashboardAlias"), hasBackupActivity, isAdmin);
+                "com.android.settings.BackupResetDashboardAlias"), !useDefaultBackup, isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.EnterprisePrivacySettingsActivity.class.getName()),
