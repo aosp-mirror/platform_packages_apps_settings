@@ -68,11 +68,6 @@ public class DisplaySettings extends DashboardFragment {
     }
 
     @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_DISPLAY;
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         if (mDashboardFeatureProvider.isEnabled()) {
             return R.xml.ia_display_settings;

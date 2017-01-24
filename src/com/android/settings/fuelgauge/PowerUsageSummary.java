@@ -37,6 +37,7 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -52,7 +53,6 @@ import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.BatteryInfo;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -136,11 +136,6 @@ public class PowerUsageSummary extends PowerUsageBase {
         PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), mStatsHelper,
                 mStatsType, entry, true, true);
         return super.onPreferenceTreeClick(preference);
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_BATTERY;
     }
 
     @Override
@@ -414,8 +409,9 @@ public class PowerUsageSummary extends PowerUsageBase {
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfMax, percentOfTotal);
-                if ((sipper.drainType != DrainType.APP || sipper.uidObj.getUid() == Process.ROOT_UID)
-                         && sipper.drainType != DrainType.USER) {
+                if ((sipper.drainType != DrainType.APP
+                        || sipper.uidObj.getUid() == Process.ROOT_UID)
+                        && sipper.drainType != DrainType.USER) {
                     pref.setTint(colorControl);
                 }
                 addedSome = true;
@@ -579,7 +575,7 @@ public class PowerUsageSummary extends PowerUsageBase {
             = new SummaryLoader.SummaryProviderFactory() {
         @Override
         public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
+                SummaryLoader summaryLoader) {
             return new SummaryProvider(activity, summaryLoader);
         }
     };

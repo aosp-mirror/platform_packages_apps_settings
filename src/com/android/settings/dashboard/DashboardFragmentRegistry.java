@@ -21,13 +21,16 @@ import android.util.ArrayMap;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.SecuritySettings;
+import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
+import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputAndGestureSettings;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
+import com.android.settings.language.LanguageAndRegionSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.system.SystemDashboardFragment;
@@ -37,7 +40,6 @@ import java.util.Map;
 
 /**
  * A registry to keep track of which page hosts which category.
- * TODO: Remove DashboardFragment#getCategoryKey() and just use this registry instead.
  */
 public class DashboardFragmentRegistry {
 
@@ -61,6 +63,8 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_DEVICE);
         PARENT_TO_CATEGORY_KEY_MAP.put(AppAndNotificationDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_APPS);
+        PARENT_TO_CATEGORY_KEY_MAP.put(PowerUsageSummary.class.getName(),
+                CategoryKey.CATEGORY_BATTERY);
         PARENT_TO_CATEGORY_KEY_MAP.put(AdvancedAppSettings.class.getName(),
                 CategoryKey.CATEGORY_APPS_DEFAULT);
         PARENT_TO_CATEGORY_KEY_MAP.put(DisplaySettings.class.getName(),
@@ -71,7 +75,7 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_STORAGE);
         PARENT_TO_CATEGORY_KEY_MAP.put(SecuritySettings.class.getName(),
                 CategoryKey.CATEGORY_SECURITY);
-        PARENT_TO_CATEGORY_KEY_MAP.put(UserAndAccountDashboardFragment.class.getName(),
+        PARENT_TO_CATEGORY_KEY_MAP.put(AccountDetailDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_ACCOUNT);
         PARENT_TO_CATEGORY_KEY_MAP.put(UserAndAccountDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_ACCOUNT);
@@ -80,6 +84,8 @@ public class DashboardFragmentRegistry {
         PARENT_TO_CATEGORY_KEY_MAP.put(
                 InputAndGestureSettings.class.getName(), CategoryKey.CATEGORY_SYSTEM_INPUT);
         PARENT_TO_CATEGORY_KEY_MAP.put(InputMethodAndLanguageSettings.class.getName(),
+                CategoryKey.CATEGORY_SYSTEM_LANGUAGE);
+        PARENT_TO_CATEGORY_KEY_MAP.put(LanguageAndRegionSettings.class.getName(),
                 CategoryKey.CATEGORY_SYSTEM_LANGUAGE);
         PARENT_TO_CATEGORY_KEY_MAP.put(DevelopmentSettings.class.getName(),
                 CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);

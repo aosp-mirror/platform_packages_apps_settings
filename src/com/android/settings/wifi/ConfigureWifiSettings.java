@@ -15,8 +15,6 @@
  */
 package com.android.settings.wifi;
 
-import static android.content.Context.WIFI_SERVICE;
-
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.provider.SearchIndexableResource;
@@ -32,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.content.Context.WIFI_SERVICE;
+
 public class ConfigureWifiSettings extends DashboardFragment {
 
     private static final String TAG = "ConfigureWifiSettings";
@@ -41,12 +41,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.CONFIGURE_WIFI;
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        // We don't want to inject any external settings into this screen.
-        return null;
     }
 
     @Override

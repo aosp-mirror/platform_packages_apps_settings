@@ -122,11 +122,6 @@ public class GestureSettings extends DashboardFragment {
     }
 
     @Override
-    protected String getCategoryKey() {
-        return null;
-    }
-
-    @Override
     protected String getLogTag() {
         return TAG;
     }
@@ -170,7 +165,7 @@ public class GestureSettings extends DashboardFragment {
 
                     List<PreferenceController> preferenceControllers =
                             getPreferenceControllers(context);
-                    for(PreferenceController controller : preferenceControllers) {
+                    for (PreferenceController controller : preferenceControllers) {
                         controller.updateNonIndexableKeys(result);
                     }
                     return result;

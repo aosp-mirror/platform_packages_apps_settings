@@ -22,15 +22,14 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
-
 import android.support.v7.preference.Preference;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.accounts.AuthenticatorHelper;
-import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
@@ -62,8 +61,8 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         Bundle args = getArguments();
         final Activity activity = getActivity();
         UserHandle userHandle = Utils.getSecureTargetUser(activity.getActivityToken(),
-            (UserManager) getSystemService(Context.USER_SERVICE), args,
-            activity.getIntent().getExtras());
+                (UserManager) getSystemService(Context.USER_SERVICE), args,
+                activity.getIntent().getExtras());
         if (args != null) {
             if (args.containsKey(KEY_ACCOUNT)) {
                 mAccount = args.getParcelable(KEY_ACCOUNT);
@@ -91,11 +90,6 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.ACCOUNT;
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_ACCOUNT;
     }
 
     @Override
@@ -142,6 +136,6 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         }
         final AuthenticatorHelper helper = new AuthenticatorHelper(context, userHandle, null);
         headerPreference.setIcon(helper.getDrawableForType(context, mAccountType));
-   }
+    }
 
 }

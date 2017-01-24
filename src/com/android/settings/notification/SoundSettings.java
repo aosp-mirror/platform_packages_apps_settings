@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -43,7 +42,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.drawer.CategoryKey;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -100,11 +99,6 @@ public class SoundSettings extends DashboardFragment {
             return true;
         }
         return super.onPreferenceTreeClick(preference);
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_SOUND;
     }
 
     @Override

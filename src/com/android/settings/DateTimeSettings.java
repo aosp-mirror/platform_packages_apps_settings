@@ -56,11 +56,6 @@ public class DateTimeSettings extends DashboardFragment implements
     }
 
     @Override
-    protected String getCategoryKey() {
-        return null;
-    }
-
-    @Override
     protected String getLogTag() {
         return TAG;
     }

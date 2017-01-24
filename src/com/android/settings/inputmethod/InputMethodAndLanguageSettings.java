@@ -38,7 +38,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,11 +57,6 @@ public class InputMethodAndLanguageSettings extends DashboardFragment
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.INPUTMETHOD_LANGUAGE;
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_SYSTEM_LANGUAGE;
     }
 
     @Override

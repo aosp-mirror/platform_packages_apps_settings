@@ -40,11 +40,6 @@ public class ConfigureNotificationSettings extends DashboardFragment {
     }
 
     @Override
-    protected String getCategoryKey() {
-        return "";
-    }
-
-    @Override
     protected String getLogTag() {
         return TAG;
     }

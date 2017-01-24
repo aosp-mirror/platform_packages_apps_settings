@@ -24,7 +24,6 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.inputmethod.SpellCheckerPreferenceController;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +35,6 @@ public class LanguageAndRegionSettings extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_LANGUAGE_CATEGORY;
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_SYSTEM_LANGUAGE;
     }
 
     @Override
