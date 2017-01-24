@@ -80,26 +80,26 @@ public class DatabaseResultLoaderTest {
     @Test
     public void testMatchTitle() {
         loader = new DatabaseResultLoader(mContext, "title");
-        assertThat(loader.loadInBackground().size()).isEqualTo(3);
-        verify(mSiteMapManager, times(3)).buildBreadCrumb(eq(mContext), anyString(), anyString());
+        assertThat(loader.loadInBackground().size()).isEqualTo(2);
+        verify(mSiteMapManager, times(2)).buildBreadCrumb(eq(mContext), anyString(), anyString());
     }
 
     @Test
     public void testMatchSummary() {
         loader = new DatabaseResultLoader(mContext, "summary");
-        assertThat(loader.loadInBackground().size()).isEqualTo(3);
+        assertThat(loader.loadInBackground().size()).isEqualTo(2);
     }
 
     @Test
     public void testMatchKeywords() {
         loader = new DatabaseResultLoader(mContext, "keywords");
-        assertThat(loader.loadInBackground().size()).isEqualTo(3);
+        assertThat(loader.loadInBackground().size()).isEqualTo(2);
     }
 
     @Test
     public void testMatchEntries() {
         loader = new DatabaseResultLoader(mContext, "entries");
-        assertThat(loader.loadInBackground().size()).isEqualTo(3);
+        assertThat(loader.loadInBackground().size()).isEqualTo(2);
     }
 
     @Test
@@ -167,7 +167,7 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE, "");
         values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS, "");
         values.put(IndexDatabaseHelper.IndexColumns.ICON, "");
-        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, "");
+        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, true);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, "gesture_double_tap_power");
         values.put(IndexDatabaseHelper.IndexColumns.USER_ID, 0);
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, 0);
@@ -196,7 +196,7 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE, "");
         values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS, "");
         values.put(IndexDatabaseHelper.IndexColumns.ICON, "");
-        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, "");
+        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, true);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, "gesture_double_tap_power");
         values.put(IndexDatabaseHelper.IndexColumns.USER_ID, 0);
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, 0);
@@ -223,7 +223,7 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE, "");
         values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS, "");
         values.put(IndexDatabaseHelper.IndexColumns.ICON, "");
-        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, "");
+        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, true);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, "gesture_double_tap_power");
         values.put(IndexDatabaseHelper.IndexColumns.USER_ID, 0);
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, 0);
@@ -249,7 +249,7 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE, "");
         values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS, "");
         values.put(IndexDatabaseHelper.IndexColumns.ICON, "");
-        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, "");
+        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, false);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, "gesture_double_tap_power");
         values.put(IndexDatabaseHelper.IndexColumns.USER_ID, 0);
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, 0);

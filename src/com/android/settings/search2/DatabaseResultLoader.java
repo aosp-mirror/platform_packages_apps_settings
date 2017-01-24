@@ -129,7 +129,6 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
         secondaryResults = query(MATCH_COLUMNS_SECONDARY, BASE_RANKS[1]);
         tertiaryResults = query(MATCH_COLUMNS_TERTIARY, BASE_RANKS[2]);
 
-
         final List<SearchResult> results = new ArrayList<>(primaryResults.size()
                 + secondaryResults.size()
                 + tertiaryResults.size());
@@ -167,7 +166,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
     }
 
     private static String buildWhereClause(String[] matchColumns) {
-        StringBuilder sb = new StringBuilder(" ");
+        StringBuilder sb = new StringBuilder(" (");
         final int count = matchColumns.length;
         for (int n = 0; n < count; n++) {
             sb.append(matchColumns[n]);
@@ -176,6 +175,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
                 sb.append(" OR ");
             }
         }
+        sb.append(") AND enabled = 1");
         return sb.toString();
     }
 }
