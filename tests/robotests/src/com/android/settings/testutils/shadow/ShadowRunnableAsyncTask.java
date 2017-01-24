@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,21 +12,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
 package com.android.settings.testutils.shadow;
 
-import android.content.ContentResolver;
-import android.content.SyncAdapterType;
-
+import android.os.AsyncTask;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.ShadowAsyncTask;
 
-@Implements(ContentResolver.class)
-public class ShadowContentResolver {
+import java.util.concurrent.Executor;
+
+/**
+ * Shadow async task to handle runnables in roboletric
+ */
+@Implements(AsyncTask.class)
+public class ShadowRunnableAsyncTask<Params, Progress, Result> extends
+        ShadowAsyncTask<Params, Progress, Result> {
 
     @Implementation
-    public static SyncAdapterType[] getSyncAdapterTypesAsUser(int userId) {
-        return new SyncAdapterType[0];
+    public AsyncTask<Params, Progress, Result> executeOnExecutor(Executor executor,
+            Params... params) {
+        return super.execute(params);
     }
 }

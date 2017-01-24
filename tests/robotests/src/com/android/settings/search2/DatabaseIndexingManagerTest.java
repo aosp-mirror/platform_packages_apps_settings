@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,37 +17,65 @@
 
 package com.android.settings.search2;
 
+import android.annotation.NonNull;
+import android.annotation.Nullable;
+import android.content.ContentProvider;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.provider.SearchIndexableResource;
-
+import android.provider.SearchIndexablesContract;
+import android.util.ArrayMap;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.DatabaseTestUtils;
-
+import com.android.settings.testutils.shadow.ShadowDatabaseIndexingUtils;
+import com.android.settings.testutils.shadow.ShadowRunnableAsyncTask;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowContentResolver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyList;
+import static org.mockito.Matchers.anyMap;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows={ShadowRunnableAsyncTask.class})
 public class DatabaseIndexingManagerTest {
     private final String localeStr = "en_US";
 
@@ -75,15 +103,30 @@ public class DatabaseIndexingManagerTest {
     private final int userId = -1;
     private final boolean enabled = true;
 
+    private final String AUTHORITY_ONE = "authority";
+    private final String PACKAGE_ONE = "com.android.settings";
+
+    private final String TITLE_ONE = "title one";
+    private final String TITLE_TWO = "title two";
+    private final String KEY_ONE = "key one";
+    private final String KEY_TWO = "key two";
+
     private Context mContext;
+
     private DatabaseIndexingManager mManager;
     private SQLiteDatabase mDb;
 
+    @Mock
+    private PackageManager mPackageManager;
+
     @Before
     public void setUp() {
-        mContext = ShadowApplication.getInstance().getApplicationContext();
-        mManager = spy(new DatabaseIndexingManager(mContext, mContext.getPackageName()));
+        MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
+        mManager = spy(new DatabaseIndexingManager(mContext,"com.android.settings"));
         mDb = IndexDatabaseHelper.getInstance(mContext).getWritableDatabase();
+
+        doReturn(mPackageManager).when(mContext).getPackageManager();
     }
 
     @After
@@ -126,7 +169,7 @@ public class DatabaseIndexingManagerTest {
     // Tests for the flow: IndexOneRaw -> UpdateOneRowWithFilteredData -> UpdateOneRow
 
     @Test
-    public void testInsertRawColumn_RowInserted() {
+    public void testInsertRawColumn_rowInserted() {
         SearchIndexableRaw raw = getFakeRaw();
         mManager.indexOneSearchIndexableData(mDb, localeStr, raw, null /* Non-indexable keys */);
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
@@ -134,7 +177,7 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testInsertRawColumn_RowMatches() {
+    public void testInsertRawColumn_rowMatches() {
         SearchIndexableRaw raw = getFakeRaw();
         mManager.indexOneSearchIndexableData(mDb, localeStr, raw, null /* Non-indexable keys */);
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
@@ -185,7 +228,7 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testInsertRawColumnMismatchedLocale_NoRowInserted() {
+    public void testInsertRawColumn_mismatchedLocale_noRowInserted() {
         SearchIndexableRaw raw = getFakeRaw("ca-fr");
         mManager.indexOneSearchIndexableData(mDb, localeStr, raw, null /* Non-indexable keys */);
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
@@ -206,18 +249,18 @@ public class DatabaseIndexingManagerTest {
     @Test
     public void testAddResource_RowsInserted() {
         SearchIndexableResource resource = getFakeResource(R.xml.ia_display_settings);
-        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<>());
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         assertThat(cursor.getCount()).isEqualTo(16);
     }
 
     @Test
-    public void testAddResourceWithNIKs_RowsInsertedDisabled() {
+    public void testAddResource_withNIKs_rowsInsertedDisabled() {
         SearchIndexableResource resource = getFakeResource(R.xml.ia_display_settings);
         // Only add 2 of 16 items to be disabled.
         String[] keys = {"brightness", "wallpaper"};
-        Map<String, List<String>> niks = getNonIndexableKeys(keys);
+        Map<String, Set<String>> niks = getNonIndexableKeys(keys);
+
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource, niks);
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
@@ -227,10 +270,9 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testAddResourceHeader_RowsMatch() {
+    public void testAddResourceHeader_rowsMatch() {
         SearchIndexableResource resource = getFakeResource(R.xml.application_settings);
-        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<>());
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
         cursor.moveToPosition(1);
@@ -280,7 +322,7 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testAddResourceWithChildFragment_shouldUpdateSiteMapDb() {
+    public void testAddResource_withChildFragment_shouldUpdateSiteMapDb() {
         // FIXME: This test was failing. (count = 6 at the end)
 
 //        SearchIndexableResource resource = getFakeResource(R.xml.network_and_internet);
@@ -305,10 +347,9 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testAddResourceCustomSetting_RowsMatch() {
+    public void testAddResource_customSetting_rowsMatch() {
         SearchIndexableResource resource = getFakeResource(R.xml.swipe_to_notification_settings);
-        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<>());
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
         final String prefTitle =
                 mContext.getString(R.string.fingerprint_swipe_for_notifications_title);
         final String prefSummary =
@@ -363,10 +404,9 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testAddResourceCheckboxPreference_RowsMatch() {
+    public void testAddResource_checkboxPreference_rowsMatch() {
         SearchIndexableResource resource = getFakeResource(R.xml.application_settings);
-        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<>());
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
 
         /* Should return 6 results, with the following titles:
          * Advanced Settings, Apps, Manage Apps, Preferred install location, Running Services
@@ -418,10 +458,9 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testAddResourceListPreference_RowsMatch() {
+    public void testAddResource_listPreference_rowsMatch() {
         SearchIndexableResource resource = getFakeResource(R.xml.application_settings);
-        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<>());
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
         cursor.moveToPosition(3);
@@ -476,25 +515,23 @@ public class DatabaseIndexingManagerTest {
     //                     UpdateOneRowWithFilteredData -> UpdateOneRow
 
     @Test
-    public void testResourceProvider_RowInserted() {
+    public void testResourceProvider_rowInserted() {
         SearchIndexableResource resource = getFakeResource(R.xml.swipe_to_notification_settings);
         resource.xmlResId = 0;
         resource.className = "com.android.settings.display.ScreenZoomSettings";
 
-        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<>());
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         assertThat(cursor.getCount()).isEqualTo(1);
     }
 
     @Test
-    public void testResourceProvider_Matches() {
+    public void testResourceProvider_rowMatches() {
         SearchIndexableResource resource = getFakeResource(R.xml.swipe_to_notification_settings);
         resource.xmlResId = 0;
         resource.className = "com.android.settings.display.ScreenZoomSettings";
 
-        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<>());
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         cursor.moveToPosition(0);
 
@@ -544,23 +581,21 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testResourceProvider_ResourceRowInserted() {
+    public void testResourceProvider_resourceRowInserted() {
         SearchIndexableResource resource = getFakeResource(0);
         resource.className = "com.android.settings.LegalSettings";
 
-        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<>());
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         assertThat(cursor.getCount()).isEqualTo(6);
     }
 
     @Test
-    public void testResourceProvider_ResourceRowMatches() {
+    public void testResourceProvider_resourceRowMatches() {
         SearchIndexableResource resource = getFakeResource(0);
         resource.className = "com.android.settings.display.ScreenZoomSettings";
 
-        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<>());
+        mManager.indexOneSearchIndexableData(mDb, localeStr, resource, new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index ORDER BY data_title", null);
         cursor.moveToPosition(0);
 
@@ -611,12 +646,12 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testResourceProvider_DisabledResourceRowsInserted() {
+    public void testResourceProvider_disabledResource_rowsInserted() {
         SearchIndexableResource resource = getFakeResource(0);
         resource.className = "com.android.settings.LegalSettings";
 
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-                new HashMap<String, List<String>>());
+                new HashMap<String, Set<String>>());
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
         assertThat(cursor.getCount()).isEqualTo(2);
@@ -625,13 +660,183 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testResourceWithTitleAndSettingName_TitleNotInserted() {
+    public void testResource_withTitleAndSettingName_titleNotInserted() {
         SearchIndexableResource resource = getFakeResource(R.xml.swipe_to_notification_settings);
         mManager.indexFromResource(mDb, localeStr, resource, new ArrayList<String>());
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE" +
                 " enabled = 1", null);
         assertThat(cursor.getCount()).isEqualTo(1);
+    }
+
+    // Test new public indexing flow
+
+    @Test
+    @Config(shadows= {
+            ShadowDatabaseIndexingUtils.class,
+    })
+    public void testPerformIndexing_fullIndex_getsDataFromProviders() {
+        DummyProvider provider = new DummyProvider();
+        provider.onCreate();
+        ShadowContentResolver.registerProvider(
+                AUTHORITY_ONE, provider
+        );
+
+        // Test that Indexables are added for Full indexing
+        when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
+                .thenReturn(getDummyResolveInfo());
+
+        DatabaseIndexingManager manager =
+                spy(new DatabaseIndexingManager(mContext, "com.android.settings"));
+        doReturn(false).when(manager).isLocaleIndexed();
+
+        manager.performIndexing();
+
+        verify(manager).updateDatabase(false, Locale.getDefault().toString());
+
+        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
+        cursor.moveToPosition(0);
+
+        // Data Title
+        assertThat(cursor.getString(2)).isEqualTo(TITLE_ONE);
+    }
+
+    @Test
+    @Config(shadows= {
+            ShadowDatabaseIndexingUtils.class,
+    })
+    public void testPerformIndexing_incrementalIndex_noDataAdded() {
+        DummyProvider provider = new DummyProvider();
+        provider.onCreate();
+        ShadowContentResolver.registerProvider(
+                AUTHORITY_ONE, provider
+        );
+
+        // Test that Indexables are added for Full indexing
+        when(mPackageManager.queryIntentContentProviders(any(Intent.class), anyInt()))
+                .thenReturn(getDummyResolveInfo());
+
+        DatabaseIndexingManager manager =
+                spy(new DatabaseIndexingManager(mContext, "com.android.settings"));
+        doReturn(true).when(manager).isLocaleIndexed();
+
+        manager.performIndexing();
+
+        final Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
+
+        assertThat(cursor.getCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void testFullUpdatedDatabase_noData_addDataToDatabaseNotCalled() {
+        mManager.updateDatabase(false, localeStr);
+        mManager.mDataToProcess.dataToUpdate.clear();
+        verify(mManager, times(0)).addDataToDatabase(any(SQLiteDatabase.class), anyString(),
+                anyList(), anyMap());
+    }
+
+    @Test
+    public void testFullUpdatedDatabase_updatedDataInDatabaseNotCalled() {
+        mManager.updateDatabase(false, localeStr);
+        verify(mManager, times(0)).updateDataInDatabase(any(SQLiteDatabase.class), anyMap());
+    }
+
+    @Test
+    public void testLocaleUpdated_afterIndexing_localeAdded() {
+        mManager.updateDatabase(false, localeStr);
+        assertThat(IndexDatabaseHelper.getInstance(mContext)
+                .isLocaleAlreadyIndexed(mContext, localeStr)).isTrue();
+    }
+
+    @Test
+    public void testUpdateDatabase_newEligibleData_addedToDatabase() {
+        // Test that addDataToDatabase is called when dataToUpdate is non-empty
+        mManager.mDataToProcess.dataToUpdate.add(getFakeRaw());
+        mManager.updateDatabase(false, localeStr);
+
+        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
+        cursor.moveToPosition(0);
+
+        // Locale
+        assertThat(cursor.getString(0)).isEqualTo(localeStr);
+        // Data Rank
+        assertThat(cursor.getInt(1)).isEqualTo(rank);
+        // Data Title
+        assertThat(cursor.getString(2)).isEqualTo(updatedTitle);
+        // Normalized Title
+        assertThat(cursor.getString(3)).isEqualTo(normalizedTitle);
+        // Summary On
+        assertThat(cursor.getString(4)).isEqualTo(updatedSummaryOn);
+        // Summary On Normalized
+        assertThat(cursor.getString(5)).isEqualTo(normalizedSummaryOn);
+        // Summary Off
+        assertThat(cursor.getString(6)).isEqualTo(updatedSummaryOff);
+        // Summary off normalized
+        assertThat(cursor.getString(7)).isEqualTo(normalizedSummaryOff);
+        // Entries
+        assertThat(cursor.getString(8)).isEqualTo(entries);
+        // Keywords
+        assertThat(cursor.getString(9)).isEqualTo(spaceDelimittedKeywords);
+        // Screen Title
+        assertThat(cursor.getString(10)).isEqualTo(screenTitle);
+        // Class Name
+        assertThat(cursor.getString(11)).isEqualTo(className);
+        // Icon
+        assertThat(cursor.getInt(12)).isEqualTo(iconResId);
+        // Intent Action
+        assertThat(cursor.getString(13)).isEqualTo(action);
+        // Target Package
+        assertThat(cursor.getString(14)).isEqualTo(targetPackage);
+        // Target Class
+        assertThat(cursor.getString(15)).isEqualTo(targetClass);
+        // Enabled
+        assertThat(cursor.getInt(16) == 1).isEqualTo(enabled);
+        // Data ref key
+        assertThat(cursor.getString(17)).isNotNull();
+        // User Id
+        assertThat(cursor.getInt(18)).isEqualTo(userId);
+        // Payload Type - default is 0
+        assertThat(cursor.getInt(19)).isEqualTo(0);
+        // Payload
+        assertThat(cursor.getBlob(20)).isNull();
+    }
+
+    @Test
+    public void testUpdateDataInDatabase_enabledResultsAreNonIndexable_becomeDisabled() {
+        // Both results are enabled, and then TITLE_ONE gets disabled.
+        final boolean enabled = true;
+        insertSpecialCase(TITLE_ONE, enabled, KEY_ONE);
+        insertSpecialCase(TITLE_TWO, enabled, KEY_TWO);
+        Map<String, Set<String>> niks = new ArrayMap<>();
+        Set<String> keys = new HashSet<>();
+        keys.add(KEY_ONE);
+        niks.put(targetPackage, keys);
+
+        mManager.updateDataInDatabase(mDb, niks);
+
+        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
+        cursor.moveToPosition(0);
+
+        assertThat(cursor.getString(2)).isEqualTo(TITLE_ONE);
+    }
+
+    @Test
+    public void testUpdateDataInDatabase_DisabledResultsAreIndexable_BecomeEnabled() {
+        // Both results are initially disabled, and then TITLE_TWO gets enabled.
+        final boolean enabled = false;
+        insertSpecialCase(TITLE_ONE, enabled, KEY_ONE);
+        insertSpecialCase(TITLE_TWO, enabled, KEY_TWO);
+        Map<String, Set<String>> niks = new ArrayMap<>();
+        Set<String> keys = new HashSet<>();
+        keys.add(KEY_ONE);
+        niks.put(targetPackage, keys);
+
+        mManager.updateDataInDatabase(mDb, niks);
+
+        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
+        cursor.moveToPosition(0);
+
+        assertThat(cursor.getString(2)).isEqualTo(TITLE_TWO);
     }
 
     // Util functions
@@ -676,10 +881,119 @@ public class DatabaseIndexingManagerTest {
         return sir;
     }
 
-    private Map<String, List<String>> getNonIndexableKeys(String[] keys) {
-        Map<String, List<String>> niks = new HashMap<>();
-        List<String> keysList = new ArrayList<>(Arrays.asList(keys));
+    private Map<String, Set<String>> getNonIndexableKeys(String[] keys) {
+        Map<String, Set<String>> niks = new HashMap<>();
+        Set<String> keysList = new HashSet<>();
+        keysList.addAll(Arrays.asList(keys));
         niks.put(packageName, keysList);
         return niks;
+    }
+
+    private List<ResolveInfo> getDummyResolveInfo() {
+        List<ResolveInfo> infoList = new ArrayList<>();
+        ResolveInfo info = new ResolveInfo();
+        info.providerInfo = new ProviderInfo();
+        info.providerInfo.exported = true;
+        info.providerInfo.authority = AUTHORITY_ONE;
+        info.providerInfo.packageName = PACKAGE_ONE;
+        infoList.add(info);
+
+        return infoList;
+    }
+
+    // TODO move this method and its counterpart in CursorToSearchResultConverterTest into
+    // a util class with public fields to assert values.
+    private Cursor getDummyCursor() {
+        MatrixCursor cursor = new MatrixCursor(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS);
+        final String BLANK = "";
+
+        ArrayList<String> item =
+                new ArrayList<>(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS.length);
+        item.add("42"); // Rank
+        item.add(TITLE_ONE); // Title
+        item.add(BLANK); // Summary on
+        item.add(BLANK); // summary off
+        item.add(BLANK); // entries
+        item.add(BLANK); // keywords
+        item.add(BLANK); // screen title
+        item.add(BLANK); // classname
+        item.add("123"); // Icon
+        item.add(BLANK); // Intent action
+        item.add(BLANK); // target package
+        item.add(BLANK); // target class
+        item.add(KEY_ONE); // Key
+        item.add("-1"); // userId
+        cursor.addRow(item);
+
+        return cursor;
+    }
+
+    private void insertSpecialCase(String specialCase, boolean enabled, String key) {
+
+        ContentValues values = new ContentValues();
+        values.put(IndexDatabaseHelper.IndexColumns.DOCID, specialCase.hashCode());
+        values.put(IndexDatabaseHelper.IndexColumns.LOCALE, localeStr);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_RANK, 1);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, specialCase);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED, "");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON, "");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED, "");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF, "");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED, "");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_ENTRIES, "");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS, "");
+        values.put(IndexDatabaseHelper.IndexColumns.CLASS_NAME, "");
+        values.put(IndexDatabaseHelper.IndexColumns.SCREEN_TITLE, "Moves");
+        values.put(IndexDatabaseHelper.IndexColumns.INTENT_ACTION, "");
+        values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_PACKAGE, targetPackage);
+        values.put(IndexDatabaseHelper.IndexColumns.INTENT_TARGET_CLASS, "");
+        values.put(IndexDatabaseHelper.IndexColumns.ICON, "");
+        values.put(IndexDatabaseHelper.IndexColumns.ENABLED, enabled);
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEY_REF, key);
+        values.put(IndexDatabaseHelper.IndexColumns.USER_ID, 0);
+        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD_TYPE, 0);
+        values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, (String) null);
+
+        mDb.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
+    }
+
+    private class DummyProvider extends ContentProvider {
+
+        @Override
+        public boolean onCreate() {
+            return false;
+        }
+
+        @Override
+        public Cursor query(@NonNull Uri uri, @Nullable String[] projection,
+                @Nullable String selection, @Nullable String[] selectionArgs,
+                @Nullable String sortOrder) {
+            if (uri.toString().contains("xml")) {
+                return null;
+            }
+            return getDummyCursor();
+        }
+
+        @Override
+        public String getType(@NonNull Uri uri) {
+            return null;
+        }
+
+        @Override
+        public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+            return null;
+        }
+
+        @Override
+        public int delete(@NonNull Uri uri, @Nullable String selection,
+                @Nullable String[] selectionArgs) {
+            return 0;
+        }
+
+        @Override
+        public int update(@NonNull Uri uri, @Nullable ContentValues values,
+                @Nullable String selection, @Nullable String[] selectionArgs) {
+            return 0;
+        }
     }
 }
