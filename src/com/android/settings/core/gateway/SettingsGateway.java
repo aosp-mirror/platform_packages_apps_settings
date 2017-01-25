@@ -101,6 +101,7 @@ import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.AppNotificationSettings;
+import com.android.settings.notification.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationStation;
@@ -209,6 +210,7 @@ public class SettingsGateway {
             InstalledAppDetails.class.getName(),
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),
+            ChannelNotificationSettings.class.getName(),
             OtherSoundSettings.class.getName(),
             ApnSettings.class.getName(),
             ApnEditor.class.getName(),
