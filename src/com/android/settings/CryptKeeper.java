@@ -210,6 +210,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
                 // Factory reset the device.
                 Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
+                intent.setPackage("android");
                 intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
                 intent.putExtra(Intent.EXTRA_REASON, "CryptKeeper.MAX_FAILED_ATTEMPTS");
                 sendBroadcast(intent);
@@ -612,6 +613,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             public void onClick(View v) {
                 // Factory reset the device.
                 Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
+                intent.setPackage("android");
                 intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
                 intent.putExtra(Intent.EXTRA_REASON,
                         "CryptKeeper.showFactoryReset() corrupt=" + corrupt);
