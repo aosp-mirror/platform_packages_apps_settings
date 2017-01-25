@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -55,14 +56,11 @@ public class StorageDashboardFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        final Context context = getActivity();
 
         // Initialize the storage sizes that we can quickly calc.
+        final Context context = getActivity();
         StorageManager sm = context.getSystemService(StorageManager.class);
-        String volumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID,
-                VolumeInfo.ID_PRIVATE_INTERNAL);
-        mVolume = sm.findVolumeById(volumeId);
-        if (!isVolumeValid()) {
+        if (!initializeVolume(sm, getArguments())) {
             getActivity().finish();
             return;
         }
@@ -117,6 +115,17 @@ public class StorageDashboardFragment extends DashboardFragment {
         controllers.add(mPreferenceController);
         controllers.add(new ManageStoragePreferenceController(context));
         return controllers;
+    }
+
+    /**
+     * Initializes the volume with a given bundle and returns if the volume is valid.
+     */
+    @VisibleForTesting
+    boolean initializeVolume(StorageManager sm, Bundle bundle) {
+        String volumeId = bundle.getString(VolumeInfo.EXTRA_VOLUME_ID,
+                VolumeInfo.ID_PRIVATE_INTERNAL);
+        mVolume = sm.findVolumeById(volumeId);
+        return isVolumeValid();
     }
 
     /**
