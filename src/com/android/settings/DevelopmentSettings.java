@@ -1707,11 +1707,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void writeUsbConfigurationOption(Object newValue) {
         UsbManager manager = (UsbManager)getActivity().getSystemService(Context.USB_SERVICE);
         String function = newValue.toString();
-        manager.setCurrentFunction(function);
         if (function.equals("none")) {
-            manager.setUsbDataUnlocked(false);
+            manager.setCurrentFunction(function, false);
         } else {
-            manager.setUsbDataUnlocked(true);
+            manager.setCurrentFunction(function, true);
         }
     }
 
