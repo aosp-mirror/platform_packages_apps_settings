@@ -20,6 +20,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import android.text.TextUtils;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.IndexDatabaseHelper;
@@ -162,6 +163,9 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
      * @return the cleaned query string
      */
     private static String cleanQuery(String query) {
+        if (TextUtils.isEmpty(query)) {
+            return null;
+        }
         return query.trim();
     }
 
