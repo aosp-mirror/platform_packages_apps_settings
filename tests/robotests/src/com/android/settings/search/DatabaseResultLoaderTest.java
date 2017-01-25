@@ -144,6 +144,62 @@ public class DatabaseResultLoaderTest {
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
+    @Test
+    public void testSpecialCasePrefix_MatchesPrefixOfEntry() {
+        insertSpecialCase("Photos");
+        loader = new DatabaseResultLoader(mContext, "pho");
+        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void testSpecialCasePrefix_DoesNotMatchNonPrefixSubstring() {
+        insertSpecialCase("Photos");
+        loader = new DatabaseResultLoader(mContext, "hot");
+        assertThat(loader.loadInBackground().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void testSpecialCaseMultiWordPrefix_MatchesPrefixOfEntry() {
+        insertSpecialCase("Apps Notifications");
+        loader = new DatabaseResultLoader(mContext, "Apps");
+        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void testSpecialCaseMultiWordPrefix_MatchesSecondWordPrefixOfEntry() {
+        insertSpecialCase("Apps Notifications");
+        loader = new DatabaseResultLoader(mContext, "Not");
+        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void testSpecialCaseMultiWordPrefix_DoesNotMatchMatchesPrefixOfFirstEntry() {
+        insertSpecialCase("Apps Notifications");
+        loader = new DatabaseResultLoader(mContext, "pp");
+        assertThat(loader.loadInBackground().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void testSpecialCaseMultiWordPrefix_DoesNotMatchMatchesPrefixOfSecondEntry() {
+        insertSpecialCase("Apps Notifications");
+        loader = new DatabaseResultLoader(mContext, "tion");
+        assertThat(loader.loadInBackground().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void testSpecialCaseMultiWordPrefixWithSpecial_MatchesPrefixOfEntry() {
+        insertSpecialCase("Apps & Notifications");
+        loader = new DatabaseResultLoader(mContext, "App");
+        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void testSpecialCaseMultiWordPrefixWithSpecial_MatchesPrefixOfSecondEntry() {
+        insertSpecialCase("Apps & Notifications");
+        loader = new DatabaseResultLoader(mContext, "No");
+        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+    }
+
     private void insertSpecialCase(String specialCase) {
         String normalized = DatabaseIndexingUtils.normalizeHyphen(specialCase);
         normalized = DatabaseIndexingUtils.normalizeString(normalized);
@@ -184,11 +240,11 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, "alpha_title");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED, "alpha title");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON, "alpha_summary");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED, "alpha_summary");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED, "alpha summary");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF, "alpha_summary");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED, "alpha_summary");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_ENTRIES, "alpha_entries");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS, "alpha_keywords");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED, "alpha summary");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_ENTRIES, "alpha entries");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS, "alpha keywords");
         values.put(IndexDatabaseHelper.IndexColumns.CLASS_NAME,
                 "com.android.settings.gestures.GestureSettings");
         values.put(IndexDatabaseHelper.IndexColumns.SCREEN_TITLE, "Moves");
@@ -211,11 +267,11 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, "bravo_title");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED, "bravo title");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON, "bravo_summary");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED, "bravo_summary");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED, "bravo summary");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF, "bravo_summary");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED, "bravo_summary");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_ENTRIES, "bravo_entries");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS, "bravo_keywords");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED, "bravo summary");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_ENTRIES, "bravo entries");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS, "bravo keywords");
         values.put(IndexDatabaseHelper.IndexColumns.CLASS_NAME,
                 "com.android.settings.gestures.GestureSettings");
         values.put(IndexDatabaseHelper.IndexColumns.SCREEN_TITLE, "Moves");
@@ -237,11 +293,11 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, "charlie_title");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED, "charlie title");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON, "charlie_summary");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED, "charlie_summary");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED, "charlie summary");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF, "charlie_summary");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED, "charlie_summary");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_ENTRIES, "charlie_entries");
-        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS, "charlie_keywords");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED, "charlie summary");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_ENTRIES, "charlie entries");
+        values.put(IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS, "charlie keywords");
         values.put(IndexDatabaseHelper.IndexColumns.CLASS_NAME,
                 "com.android.settings.gestures.GestureSettings");
         values.put(IndexDatabaseHelper.IndexColumns.SCREEN_TITLE, "Moves");
