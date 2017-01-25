@@ -26,7 +26,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.net.Uri;
@@ -35,6 +34,8 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
@@ -87,6 +88,11 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo or channel");
+            toastAndFinish();
+            return;
+        }
         final Activity activity = getActivity();
         mDashboardFeatureProvider =
                 FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
@@ -103,7 +109,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mVibrate = (RestrictedSwitchPreference) findPreference(KEY_VIBRATE);
         mRingtone = (DefaultNotificationTonePreference) findPreference(KEY_RINGTONE);
 
-        if (mPkgInfo != null) {
+        if (mPkgInfo != null && mChannel != null) {
             setupPriorityPref(mChannel.canBypassDnd());
             setupVisOverridePref(mChannel.getLockscreenVisibility());
             setupLights();
@@ -131,8 +137,8 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     @Override
     public void onResume() {
         super.onResume();
-        if ((mUid != -1 && getPackageManager().getPackagesForUid(mUid) == null)) {
-            // App isn't around anymore, must have been removed.
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo or channel");
             finish();
             return;
         }

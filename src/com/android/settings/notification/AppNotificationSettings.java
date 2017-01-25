@@ -25,8 +25,10 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -84,6 +86,11 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo");
+            toastAndFinish();
+            return;
+        }
         final Activity activity = getActivity();
         mDashboardFeatureProvider =
                 FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
@@ -124,7 +131,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
                         channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
                         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
-                        channelArgs.putString(ARG_CHANNEL, channel.getId());
+                        channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
                         Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
                                 ChannelNotificationSettings.class.getName(),
                                 channelArgs, null, 0, null, false);
@@ -154,8 +161,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     @Override
     public void onResume() {
         super.onResume();
-        if ((mUid != -1 && getPackageManager().getPackagesForUid(mUid) == null)) {
-            // App isn't around anymore, must have been removed.
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo");
             finish();
             return;
         }

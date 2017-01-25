@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -43,8 +44,6 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 abstract public class NotificationSettingsBase extends SettingsPreferenceFragment {
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-
-    protected static final String ARG_CHANNEL = "channel";
 
     protected static final String KEY_BLOCK = "block";
     protected static final String KEY_BADGE = "badge";
@@ -99,26 +98,26 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         mUid = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_UID)
                 ? args.getInt(AppInfoBase.ARG_PACKAGE_UID)
                 : intent.getIntExtra(Settings.EXTRA_APP_UID, -1);
-        if (mUid == -1 || TextUtils.isEmpty(mPkg)) {
-            Log.w(TAG, "Missing extras: " + Settings.EXTRA_APP_PACKAGE + " was " + mPkg + ", "
-                    + Settings.EXTRA_APP_UID + " was " + mUid);
-            toastAndFinish();
-            return;
-        }
-        mUserId = UserHandle.getUserId(mUid);
 
-        if (DEBUG) Log.d(TAG, "Load details for pkg=" + mPkg + " uid=" + mUid);
+        if (mUid < 0) {
+            try {
+                mUid = mPm.getPackageUid(mPkg, 0);
+            } catch (NameNotFoundException e) {
+            }
+        }
+
         mPkgInfo = findPackageInfo(mPkg, mUid);
-        if (mPkgInfo == null) {
-            Log.w(TAG, "Failed to find package info: " + Settings.EXTRA_APP_PACKAGE + " was " + mPkg
-                    + ", " + Settings.EXTRA_APP_UID + " was " + mUid);
+
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo");
             toastAndFinish();
             return;
         }
 
+        mUserId = UserHandle.getUserId(mUid);
         mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
-        mChannel = (args != null && args.containsKey(ARG_CHANNEL)) ?
-                mBackend.getChannel(mPkg, mUid, args.getString(ARG_CHANNEL)) : null;
+        mChannel = (args != null && args.containsKey(Settings.EXTRA_CHANNEL_ID)) ?
+                mBackend.getChannel(mPkg, mUid, args.getString(Settings.EXTRA_CHANNEL_ID)) : null;
 
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
@@ -130,8 +129,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     @Override
     public void onResume() {
         super.onResume();
-        if ((mUid != -1 && getPackageManager().getPackagesForUid(mUid) == null)) {
-            // App isn't around anymore, must have been removed.
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo");
             finish();
             return;
         }
@@ -157,6 +156,9 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     }
 
     private PackageInfo findPackageInfo(String pkg, int uid) {
+        if (pkg == null || uid < 0) {
+            return null;
+        }
         final String[] packages = mPm.getPackagesForUid(uid);
         if (packages != null && pkg != null) {
             final int N = packages.length;
@@ -170,6 +172,18 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                     }
                 }
             }
+        }
+        return null;
+    }
+
+    private PackageInfo findPackageInfo(String pkg) {
+        if (pkg == null) {
+            return null;
+        }
+        try {
+            return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
+        } catch (NameNotFoundException e) {
+            Log.w(TAG, "Failed to load package " + pkg, e);
         }
         return null;
     }
