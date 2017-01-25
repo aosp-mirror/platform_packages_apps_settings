@@ -61,6 +61,8 @@ public class AppListPreference extends CustomListPreference {
     protected final boolean mForWork;
     protected final int mUserId;
 
+
+    private boolean mSavesState = true;
     private Drawable[] mEntryDrawables;
     private boolean mShowItemNone = false;
     private CharSequence[] mSummaries;
@@ -128,6 +130,10 @@ public class AppListPreference extends CustomListPreference {
         final UserHandle managedProfile = Utils.getManagedProfile(UserManager.get(context));
         mUserId = mForWork && managedProfile != null ? managedProfile.getIdentifier()
                 : UserHandle.myUserId();
+    }
+
+    public void setSavesState(boolean savesState) {
+        mSavesState = savesState;
     }
 
     public void setShowItemNone(boolean showItemNone) {
@@ -261,12 +267,16 @@ public class AppListPreference extends CustomListPreference {
     @Override
     protected Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
-        return new SavedState(getEntryValues(), getValue(), mSummaries, mShowItemNone, superState);
+        if (mSavesState) {
+            return new SavedState(getEntryValues(), getValue(), mSummaries, mShowItemNone, superState);
+        } else {
+            return superState;
+        }
     }
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        if (state instanceof SavedState) {
+        if (mSavesState || state instanceof SavedState) {
             SavedState savedState = (SavedState) state;
             mShowItemNone = savedState.showItemNone;
             setPackageNames(savedState.entryValues, savedState.value);
