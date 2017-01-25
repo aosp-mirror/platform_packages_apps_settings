@@ -70,7 +70,7 @@ public class WebViewAppPreferenceControllerTest {
         verify(controller, times(1)).updateState(any());
     }
 
-    @Test public void testOnActivityResultWithFailureDoesNothing() {
+    @Test public void testOnActivityResultWithFailure() {
         WebViewUpdateServiceWrapper wvusWrapper = mock(WebViewUpdateServiceWrapper.class);
 
         WebViewAppPreferenceController controller =
@@ -78,6 +78,6 @@ public class WebViewAppPreferenceControllerTest {
 
         controller.displayPreference(mPreferenceScreen); // Makes sure Preference is non-null
         controller.onActivityResult(Activity.RESULT_CANCELED, new Intent(DEFAULT_PACKAGE_NAME));
-        verify(controller, never()).updateState(any());
+        verify(controller, times(1)).updateState(any());
     }
 }
