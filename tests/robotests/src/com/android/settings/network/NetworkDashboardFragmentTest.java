@@ -21,6 +21,7 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
+import com.android.settings.dashboard.DashboardFragmentRegistry;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
 import org.junit.Before;

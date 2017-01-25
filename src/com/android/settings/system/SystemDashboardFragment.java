@@ -30,7 +30,6 @@ import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,11 +53,6 @@ public class SystemDashboardFragment extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.system_dashboard_fragment;
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_SYSTEM;
     }
 
     @Override

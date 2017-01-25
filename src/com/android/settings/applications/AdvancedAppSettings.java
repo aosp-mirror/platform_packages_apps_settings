@@ -31,7 +31,6 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,11 +39,6 @@ import java.util.List;
 public class AdvancedAppSettings extends DashboardFragment {
 
     static final String TAG = "AdvancedAppSettings";
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_APPS_DEFAULT;
-    }
 
     @Override
     protected String getLogTag() {

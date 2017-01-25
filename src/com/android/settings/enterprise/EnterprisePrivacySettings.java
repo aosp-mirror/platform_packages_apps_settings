@@ -24,7 +24,6 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable.SearchIndexProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,11 +36,6 @@ public class EnterprisePrivacySettings extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.ENTERPRISE_PRIVACY_SETTINGS;
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return null;
     }
 
     @Override

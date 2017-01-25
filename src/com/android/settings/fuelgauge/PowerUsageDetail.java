@@ -388,11 +388,6 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     }
 
     @Override
-    protected String getCategoryKey() {
-        return null;
-    }
-
-    @Override
     protected String getLogTag() {
         return TAG;
     }

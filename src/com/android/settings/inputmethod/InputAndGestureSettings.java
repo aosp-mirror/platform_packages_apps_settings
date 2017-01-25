@@ -34,7 +34,6 @@ import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,11 +48,6 @@ public class InputAndGestureSettings extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_INPUT_CATEGORY;
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_SYSTEM_INPUT;
     }
 
     @Override

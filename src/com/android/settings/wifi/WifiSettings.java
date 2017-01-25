@@ -305,7 +305,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     /**
      * @return new WifiEnabler or null (as overridden by WifiSettingsForSetupWizard)
      */
-    /* package */ WifiEnabler createWifiEnabler() {
+    private WifiEnabler createWifiEnabler() {
         final SettingsActivity activity = (SettingsActivity) getActivity();
         return new WifiEnabler(activity, activity.getSwitchBar(), mMetricsFeatureProvider);
     }

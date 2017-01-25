@@ -27,7 +27,6 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,11 +43,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_NETWORK_CATEGORY;
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_NETWORK;
     }
 
     @Override

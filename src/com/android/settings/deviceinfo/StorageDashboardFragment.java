@@ -101,11 +101,6 @@ public class StorageDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_STORAGE;
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.storage_dashboard_fragment;
     }

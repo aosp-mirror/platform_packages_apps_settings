@@ -82,7 +82,8 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void testCategory_isAccount() {
-        assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_ACCOUNT);
+        assertThat(new AccountDetailDashboardFragment().getCategoryKey())
+                .isEqualTo(CategoryKey.CATEGORY_ACCOUNT);
     }
 
     @Test

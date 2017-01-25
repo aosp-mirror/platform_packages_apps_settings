@@ -194,7 +194,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Returns the CategoryKey for loading {@link DashboardCategory} for this fragment.
      */
-    protected abstract String getCategoryKey();
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    public String getCategoryKey() {
+        return DashboardFragmentRegistry.PARENT_TO_CATEGORY_KEY_MAP.get(getClass().getName());
+    }
 
     /**
      * Get the tag string for logging.
@@ -302,9 +305,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         final Context context = getContext();
         mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
         mSummaryLoader.setSummaryConsumer(this);
-        final TypedArray a = context.obtainStyledAttributes(new int[] {
-            mDashboardFeatureProvider.isEnabled() ? android.R.attr.colorControlNormal
-                : android.R.attr.colorAccent});
+        final TypedArray a = context.obtainStyledAttributes(new int[]{
+                mDashboardFeatureProvider.isEnabled() ? android.R.attr.colorControlNormal
+                        : android.R.attr.colorAccent});
         final int tintColor = a.getColor(0, context.getColor(android.R.color.white));
         a.recycle();
         final String pkgName = context.getPackageName();
@@ -319,7 +322,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 continue;
             }
             if (pkgName != null && tile.intent != null
-                && !pkgName.equals(tile.intent.getComponent().getPackageName())) {
+                    && !pkgName.equals(tile.intent.getComponent().getPackageName())) {
                 // If this drawable is coming from outside Settings, tint it to match the color.
                 tile.icon.setTint(tintColor);
             }

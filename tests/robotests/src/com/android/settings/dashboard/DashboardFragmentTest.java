@@ -26,7 +26,6 @@ import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -197,11 +196,6 @@ public class DashboardFragmentTest {
         @Override
         public int getMetricsCategory() {
             return 0;
-        }
-
-        @Override
-        protected String getCategoryKey() {
-            return CategoryKey.CATEGORY_HOMEPAGE;
         }
 
         @Override

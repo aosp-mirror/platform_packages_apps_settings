@@ -25,7 +25,6 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
@@ -42,11 +41,6 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.ACCOUNT;
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_ACCOUNT;
     }
 
     @Override

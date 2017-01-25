@@ -30,7 +30,6 @@ import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,11 +44,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_CONNECTED_DEVICE_CATEGORY;
-    }
-
-    @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_DEVICE;
     }
 
     @Override
@@ -73,8 +67,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         mUsbPrefController = new UsbModePreferenceController(context, new UsbBackend(context));
         lifecycle.addObserver(mUsbPrefController);
         controllers.add(mUsbPrefController);
-        mBluetoothPreferenceController =
-            new BluetoothMasterSwitchPreferenceController(
+        mBluetoothPreferenceController = new BluetoothMasterSwitchPreferenceController(
                 context, Utils.getLocalBtManager(context));
         lifecycle.addObserver(mBluetoothPreferenceController);
         controllers.add(mBluetoothPreferenceController);

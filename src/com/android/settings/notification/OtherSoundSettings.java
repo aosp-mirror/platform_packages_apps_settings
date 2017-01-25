@@ -47,11 +47,6 @@ public class OtherSoundSettings extends DashboardFragment {
     }
 
     @Override
-    protected String getCategoryKey() {
-        return null;
-    }
-
-    @Override
     protected String getLogTag() {
         return TAG;
     }
