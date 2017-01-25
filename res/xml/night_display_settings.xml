@@ -16,7 +16,6 @@
 
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/night_display_title">
 
     <PreferenceCategory
@@ -43,6 +42,10 @@
         <com.android.settings.display.NightDisplayPreference
                 android:key="night_display_activated"
                 android:title="@string/night_display_title" />
+
+        <com.android.settings.SeekBarPreference
+            android:key="night_display_temperature"
+            android:title="@string/night_display_temperature_title"/>
 
     </PreferenceCategory>
 
