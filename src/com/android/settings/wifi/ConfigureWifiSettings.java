@@ -58,7 +58,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
         mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new WifiInfoPreferenceController(context, getLifecycle(), mWifiManager));
-        controllers.add(new SavedNetworkPreferenceController(context, mWifiManager));
         controllers.add(new CellularFallbackPreferenceController(context));
         controllers.add(new AllowRecommendationPreferenceController(context));
         controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
