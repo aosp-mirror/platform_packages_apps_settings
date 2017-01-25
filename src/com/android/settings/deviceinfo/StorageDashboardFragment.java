@@ -17,7 +17,9 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.content.Loader;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
@@ -27,6 +29,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.deviceinfo.storage.AppsAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -42,6 +45,7 @@ import java.util.List;
 
 public class StorageDashboardFragment extends DashboardFragment {
     private static final String TAG = "StorageDashboardFrag";
+    private static final int APPS_JOB_ID = 0;
 
     private VolumeInfo mVolume;
 
@@ -51,6 +55,12 @@ public class StorageDashboardFragment extends DashboardFragment {
     private boolean isVolumeValid() {
         return (mVolume != null) && (mVolume.getType() == VolumeInfo.TYPE_PRIVATE)
                 && mVolume.isMountedReadable();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getLoaderManager().initLoader(APPS_JOB_ID, Bundle.EMPTY, mPreferenceController);
     }
 
     @Override

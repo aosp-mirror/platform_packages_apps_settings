@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import android.app.usage.StorageStats;
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.os.UserHandle;
@@ -24,14 +25,19 @@ import android.os.UserHandle;
  * StorageStatsSource wraps the StorageStatsManager for testability purposes.
  */
 public class StorageStatsSource {
-    private StorageStatsManager mSsm;
+    private StorageStatsManager mStorageStatsManager;
 
     public StorageStatsSource(Context context) {
-        mSsm = context.getSystemService(StorageStatsManager.class);
+        mStorageStatsManager = context.getSystemService(StorageStatsManager.class);
     }
 
     public ExternalStorageStats getExternalStorageStats(String volumeUuid, UserHandle user) {
-        return new ExternalStorageStats(mSsm.queryExternalStatsForUser(volumeUuid, user));
+        return new ExternalStorageStats(
+                mStorageStatsManager.queryExternalStatsForUser(volumeUuid, user));
+    }
+
+    public AppStorageStats getStatsForUid(String volumeUuid, int uid) {
+        return new AppStorageStatsImpl(mStorageStatsManager.queryStatsForUid(volumeUuid, uid));
     }
 
     public static class ExternalStorageStats {
@@ -53,6 +59,32 @@ public class StorageStatsSource {
             audioBytes = stats.getAudioBytes();
             videoBytes = stats.getVideoBytes();
             imageBytes = stats.getImageBytes();
+        }
+    }
+
+    public interface AppStorageStats {
+        long getCodeBytes();
+        long getDataBytes();
+        long getCacheBytes();
+    }
+
+    public static class AppStorageStatsImpl implements AppStorageStats {
+        private StorageStats mStats;
+
+        public AppStorageStatsImpl(StorageStats stats) {
+            mStats = stats;
+        }
+
+        public long getCodeBytes() {
+            return mStats.getCodeBytes();
+        }
+
+        public long getDataBytes() {
+            return mStats.getDataBytes();
+        }
+
+        public long getCacheBytes() {
+            return mStats.getCacheBytes();
         }
     }
 }
