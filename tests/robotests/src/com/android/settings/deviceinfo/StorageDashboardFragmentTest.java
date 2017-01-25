@@ -16,6 +16,10 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.storage.DiskInfo;
+import android.os.storage.StorageManager;
+import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -35,14 +39,18 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class StorageDashboardFragmentTest {
-
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private StorageManager mStorageManager;
 
     private StorageDashboardFragment mFragment;
 
@@ -70,5 +78,12 @@ public class StorageDashboardFragmentTest {
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
+    }
+
+    @Test
+    public void testInitializeVolumeDoesntBreakOnNullVolume() {
+        VolumeInfo info = new VolumeInfo("id", 0, new DiskInfo("id", 0), "");
+        when(mStorageManager.findVolumeById(anyString())).thenReturn(info);
+        mFragment.initializeVolume(mStorageManager, new Bundle());
     }
 }
