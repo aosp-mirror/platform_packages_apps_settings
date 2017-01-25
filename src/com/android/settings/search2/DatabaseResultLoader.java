@@ -142,9 +142,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
 
     private List<SearchResult> query(String[] matchColumns, int baseRank) {
         final String whereClause = buildWhereClause(matchColumns);
-        final String[] selection = new String[matchColumns.length];
-        final String query = "%" + mQueryText + "%";
-        Arrays.fill(selection, query);
+        final String[] selection = buildQuerySelection(matchColumns.length * 2);
 
         final Cursor resultCursor = mDatabase.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
                 selection, null, null, null);
@@ -174,6 +172,8 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
         final int count = matchColumns.length;
         for (int n = 0; n < count; n++) {
             sb.append(matchColumns[n]);
+            sb.append(" like ? OR ");
+            sb.append(matchColumns[n]);
             sb.append(" like ?");
             if (n < count - 1) {
                 sb.append(" OR ");
@@ -181,5 +181,24 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
         }
         sb.append(") AND enabled = 1");
         return sb.toString();
+    }
+
+    /**
+     * Fills out the selection array to match the query as the prefix of a word.
+     *
+     * @param size is twice the number of columns to be matched. The first match is for the prefix
+     *             of the first word in the column. The second match is for any subsequent word
+     *             prefix match.
+     */
+    private String[] buildQuerySelection(int size) {
+        String[] selection = new String[size];
+        final String query = mQueryText + "%";
+        final String subStringQuery = "% " + mQueryText + "%";
+
+        for(int i = 0; i < (size - 1); i += 2) {
+            selection[i] = query;
+            selection[i + 1] = subStringQuery;
+        }
+        return selection;
     }
 }
