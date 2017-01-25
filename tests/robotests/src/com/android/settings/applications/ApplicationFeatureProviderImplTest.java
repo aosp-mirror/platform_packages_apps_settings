@@ -18,12 +18,15 @@ package com.android.settings.applications;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.content.pm.IPackageManager;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.ArraySet;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -39,10 +42,11 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Arrays;
+import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
-import org.robolectric.shadows.ShadowApplication;
+
 /**
  * Tests for {@link ApplicationFeatureProviderImpl}.
  */
@@ -66,7 +70,7 @@ public final class ApplicationFeatureProviderImplTest {
     private @Mock UserManager mUserManager;
     private @Mock Context mContext;
     private @Mock PackageManagerWrapper mPackageManager;
-    @Mock private IPackageManager mPackageManagerService;
+    @Mock private IPackageManagerWrapper mPackageManagerService;
     @Mock private DevicePolicyManagerWrapper mDevicePolicyManager;
 
     private ApplicationFeatureProvider mProvider;
@@ -139,6 +143,43 @@ public final class ApplicationFeatureProviderImplTest {
 
     }
 
+    @Test
+    public void testFindPersistentPreferredActivities() throws Exception {
+        when(mUserManager.getUserProfiles()).thenReturn(Arrays.asList(new UserHandle(MAIN_USER_ID),
+                new UserHandle(MANAGED_PROFILE_ID)));
+
+        final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
+        final Intent editIntent = new Intent(Intent.ACTION_EDIT);
+        final Intent sendIntent = new Intent(Intent.ACTION_SEND);
+
+        final ResolveInfo app1 = createResolveInfo(APP_1);
+        final ResolveInfo app2 = createResolveInfo(APP_2);
+        when(mPackageManagerService.findPersistentPreferredActivity(viewIntent, MAIN_USER_ID))
+                .thenReturn(app1);
+        when(mPackageManagerService.findPersistentPreferredActivity(viewIntent, MANAGED_PROFILE_ID))
+                .thenReturn(app1);
+        when(mPackageManagerService.findPersistentPreferredActivity(editIntent, MAIN_USER_ID))
+                .thenReturn(null);
+        when(mPackageManagerService.findPersistentPreferredActivity(editIntent, MANAGED_PROFILE_ID))
+                .thenReturn(app2);
+        when(mPackageManagerService.findPersistentPreferredActivity(sendIntent, MAIN_USER_ID))
+                .thenReturn(app1);
+        when(mPackageManagerService.findPersistentPreferredActivity(sendIntent, MANAGED_PROFILE_ID))
+                .thenReturn(null);
+
+        final Set<ApplicationFeatureProvider.PersistentPreferredActivityInfo> expectedActivities
+                = new ArraySet<>();
+        expectedActivities.add(new ApplicationFeatureProvider.PersistentPreferredActivityInfo(APP_1,
+                MAIN_USER_ID));
+        expectedActivities.add(new ApplicationFeatureProvider.PersistentPreferredActivityInfo(APP_1,
+                MANAGED_PROFILE_ID));
+        expectedActivities.add(new ApplicationFeatureProvider.PersistentPreferredActivityInfo(APP_2,
+                MANAGED_PROFILE_ID));
+
+        assertThat(mProvider.findPersistentPreferredActivities(
+                new Intent[] {viewIntent, editIntent, sendIntent})).isEqualTo(expectedActivities);
+    }
+
     private void setUpUsersAndInstalledApps() {
         when(mUserManager.getUsers(true)).thenReturn(Arrays.asList(
                 new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN),
@@ -155,5 +196,13 @@ public final class ApplicationFeatureProviderImplTest {
                 MANAGED_PROFILE_ID)).thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(APP_2_UID, APP_2, 0 /* flags */,
                                 Build.VERSION_CODES.LOLLIPOP)));
+    }
+
+    private ResolveInfo createResolveInfo(String packageName) {
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = packageName;
+        final ResolveInfo resolveInfo = new ResolveInfo();
+        resolveInfo.activityInfo = activityInfo;
+        return resolveInfo;
     }
 }

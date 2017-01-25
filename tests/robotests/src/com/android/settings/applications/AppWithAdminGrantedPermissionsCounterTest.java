@@ -18,7 +18,6 @@ package com.android.settings.applications;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.Build;
@@ -79,7 +78,7 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
 
     @Mock private Context mContext;
     @Mock private PackageManagerWrapper mPackageManager;
-    @Mock private IPackageManager mPackageManagerService;
+    @Mock private IPackageManagerWrapper mPackageManagerService;
     @Mock private DevicePolicyManagerWrapper mDevicePolicyManager;
     private List<UserInfo> mUsersToCount;
 
