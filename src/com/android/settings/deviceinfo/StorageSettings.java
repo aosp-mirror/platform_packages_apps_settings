@@ -279,8 +279,19 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
                 final Bundle args = new Bundle();
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, vol.getId());
-                startFragment(this, StorageDashboardFragment.class.getCanonicalName(),
-                        -1, 0, args);
+
+                if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(vol.getId())) {
+                    startFragment(this, StorageDashboardFragment.class.getCanonicalName(),
+                            -1, 0, args);
+                } else {
+                    // TODO: Go to the StorageDashboardFragment once it fully handles all of the
+                    //       SD card cases and other private internal storage cases.
+                    PrivateVolumeSettings.setVolumeSize(args, PrivateStorageInfo.getTotalSize(vol,
+                            sTotalInternalStorage));
+                    startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
+                            -1, 0, args);
+                }
+
                 return true;
 
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
