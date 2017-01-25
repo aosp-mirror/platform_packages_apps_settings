@@ -153,6 +153,7 @@ public class PowerUsageSummary extends PowerUsageBase {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new AutoBrightnessPreferenceController(context));
         controllers.add(new TimeoutPreferenceController(context));
+        controllers.add(new BatterySaverController(context, getLifecycle()));
         return controllers;
     }
 

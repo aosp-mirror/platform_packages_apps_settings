@@ -27,7 +27,8 @@
         android:key="power_management"
         android:title="@string/battery_power_management">
 
-        <com.android.settings.fuelgauge.BatterySaverPreference
+        <com.android.settings.widget.MasterSwitchPreference
+            android:key="battery_saver"
             android:title="@string/battery_saver"
             android:fragment="com.android.settings.fuelgauge.BatterySaverSettings"/>
 
