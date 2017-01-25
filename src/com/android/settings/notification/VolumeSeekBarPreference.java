@@ -59,15 +59,18 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
+        setLayoutResource(R.layout.preference_volume_slider);
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        setLayoutResource(R.layout.preference_volume_slider);
     }
 
     public VolumeSeekBarPreference(Context context) {
-        this(context, null);
+        super(context);
+        setLayoutResource(R.layout.preference_volume_slider);
     }
 
     public void setStream(int stream) {
