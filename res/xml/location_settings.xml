@@ -37,7 +37,12 @@
         <!-- This preference category gets removed if new_recent_location_ui is disabled -->
         <Preference
             android:key="app_level_permissions"
-            android:title="@string/location_app_level_permissions" />
+            android:title="@string/location_app_level_permissions">
+            <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
+                <extra android:name="android.intent.extra.PERMISSION_NAME"
+                       android:value="android.permission-group.LOCATION" />
+            </intent>
+        </Preference>
 
         <com.android.settings.DividedCategory
             android:key="recent_location_requests"
