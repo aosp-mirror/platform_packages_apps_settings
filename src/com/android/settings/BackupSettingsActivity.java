@@ -17,13 +17,19 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.content.ComponentName;
+import android.app.backup.BackupManager;
+import android.app.backup.IBackupManager;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.ServiceManager;
+import android.os.UserHandle;
+import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.Settings.PrivacySettingsActivity;
+import com.android.settings.R;
+
+import java.net.URISyntaxException;
 
 /**
  * A trampoline activity used to launch the configured Backup activity.
@@ -36,24 +42,30 @@ public class BackupSettingsActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        BackupSettingsHelper backupHelper = new BackupSettingsHelper();
-        if (backupHelper.isIntentProvidedByTransport(getPackageManager())) {
-            Intent intent = backupHelper.getIntentForBackupSettings();
-            if (intent != null) {
-                // use startActivityForResult to let the activity check the caller signature
-                startActivityForResult(intent, -1);
+        String backup = getResources().getString(R.string.config_backup_settings_intent);
+        if (!TextUtils.isEmpty(backup)) {
+            try {
+                Intent intent = Intent.parseUri(backup, 0);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    // use startActivityForResult to let the activity check the caller signature
+                    IBackupManager bmgr = IBackupManager.Stub.asInterface(
+                            ServiceManager.getService(Context.BACKUP_SERVICE));
+                    boolean backupOkay;
+                    try {
+                        backupOkay = bmgr.isBackupServiceActive(UserHandle.myUserId());
+                    } catch (Exception e) {
+                        // things go wrong talking to the backup system => ignore and
+                        // pass the default 'false' as the "backup is a thing?" state.
+                        backupOkay = false;
+                    }
+                    intent.putExtra(BackupManager.EXTRA_BACKUP_SERVICES_AVAILABLE, backupOkay);
+                    startActivityForResult(intent, -1);
+                } else {
+                    Log.e(TAG, "Backup component not found!");
+                }
+            } catch (URISyntaxException e) {
+                Log.e(TAG, "Invalid backup component URI!", e);
             }
-        } else {
-            // This should never happen, because isIntentProvidedByTransport() is called before
-            // starting this activity.
-            Log.e(TAG, "Backup transport has not provided an intent"
-                    + " or the component for the intent is not found!");
-            getPackageManager().setComponentEnabledSetting(
-                    new ComponentName(getPackageName(), PrivacySettingsActivity.class.getName()),
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                    PackageManager.DONT_KILL_APP);
-            startActivityForResult(new Intent(this, PrivacySettingsActivity.class), -1);
         }
         finish();
     }
