@@ -44,7 +44,6 @@ public class NfcPreferenceController extends PreferenceController
 
     private NfcEnabler mNfcEnabler;
     private NfcAdapter mNfcAdapter;
-    private final Handler mHandler = new Handler();
     private int mAirplaneMode;
     private AirplaneModeObserver mAirplaneModeObserver;
     private SwitchPreference mNfcPreference;
@@ -146,7 +145,7 @@ public class NfcPreferenceController extends PreferenceController
                 Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON);
 
         private AirplaneModeObserver() {
-            super(mHandler);
+            super(new Handler());
         }
 
         public void register() {
