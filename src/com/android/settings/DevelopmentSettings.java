@@ -1812,14 +1812,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         case BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC:
             index = 1;
             break;
-        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX:
+        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC:
             index = 2;
             break;
-        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD:
+        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX:
             index = 3;
             break;
-        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC:
+        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD:
             index = 4;
+            break;
+        case BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC:
+            index = 5;
             break;
         case BluetoothCodecConfig.SOURCE_CODEC_TYPE_INVALID:
         default:
@@ -1962,12 +1965,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC;
                 break;
             case 2:
-                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX;
+                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC;
                 break;
             case 3:
-                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD;
+                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX;
                 break;
             case 4:
+                codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD;
+                break;
+            case 5:
                 codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC;
                 break;
             default:
@@ -1979,14 +1985,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
             break;
         case 2:
-            codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX;
+            codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC;
             codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
             break;
         case 3:
-            codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD;
+            codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX;
             codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
             break;
         case 4:
+            codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD;
+            codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
+            break;
+        case 5:
             codecTypeValue = BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC;
             codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
             break;
