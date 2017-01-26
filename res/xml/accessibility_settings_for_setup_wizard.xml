@@ -46,6 +46,13 @@
 
     <Preference
         android:fragment=
+                "com.android.settings.accessibility.ToggleSelectToSpeakPreferenceFragmentForSetupWizard"
+        android:key="select_to_speak_preference"
+        android:summary="@string/select_to_speak_summary"
+        android:persistent="true" />
+
+    <Preference
+        android:fragment=
                 "com.android.settings.accessibility.ToggleScreenReaderPreferenceFragmentForSetupWizard"
         android:key="screen_reader_preference"
         android:summary="@string/talkback_summary"
