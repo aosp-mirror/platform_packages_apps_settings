@@ -76,7 +76,6 @@ import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TtsEnginePreferenceFragment;
 import com.android.settings.tts.TtsSlidersFragment;
 import com.android.settings.users.UserSettings;
-import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
@@ -103,7 +102,6 @@ public final class SearchIndexableResources {
     static {
         addIndex(WifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
         addIndex(NetworkDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
-        addIndex(AdvancedWifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
         addIndex(ConfigureWifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
         addIndex(SavedAccessPointsWifiSettings.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_wireless);

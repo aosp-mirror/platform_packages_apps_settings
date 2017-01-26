@@ -15,6 +15,8 @@
  */
 package com.android.settings.wifi;
 
+import static android.content.Context.WIFI_SERVICE;
+
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.provider.SearchIndexableResource;
@@ -25,12 +27,11 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.wifi.p2p.WifiP2pPreferenceController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static android.content.Context.WIFI_SERVICE;
 
 public class ConfigureWifiSettings extends DashboardFragment {
 
@@ -63,6 +64,9 @@ public class ConfigureWifiSettings extends DashboardFragment {
         controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
         controllers.add(new WifiWakeupPreferenceController(context, getLifecycle()));
         controllers.add(new WifiSleepPolicyPreferenceController(context));
+        controllers.add(new WifiP2pPreferenceController(context, getLifecycle(), mWifiManager));
+        controllers.add(new WpsPreferenceController(
+                context, getLifecycle(), mWifiManager, getFragmentManager()));
         return controllers;
     }
 

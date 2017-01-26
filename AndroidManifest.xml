@@ -299,27 +299,6 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name="Settings$AdvancedWifiSettingsActivity"
-                android:taskAffinity="com.android.settings"
-                android:label="@string/wifi_advanced_settings_label"
-                android:icon="@drawable/ic_settings_wireless"
-                android:configChanges="orientation|keyboardHidden|screenSize"
-                android:parentActivityName="Settings$WifiSettingsActivity">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.WIFI_IP_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.wifi.AdvancedWifiSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
         <activity android:name="Settings$SavedAccessPointsSettingsActivity"
                 android:taskAffinity="com.android.settings"
                 android:label="@string/wifi_saved_access_points_label"
