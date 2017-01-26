@@ -30,7 +30,7 @@ import android.util.Log;
 public class DefaultRingtonePreference extends RingtonePreference {
     private static final String TAG = "DefaultRingtonePreference";
 
-    private int mUserId;
+    private int mUserId = UserHandle.USER_CURRENT;
     protected Context mUserContext;
 
     public DefaultRingtonePreference(Context context, AttributeSet attrs) {
@@ -40,21 +40,19 @@ public class DefaultRingtonePreference extends RingtonePreference {
 
     public void setUserId(int userId) {
         mUserId = userId;
-        Context context = getContext();
-        mUserContext = Utils.createPackageContextAsUser(context, mUserId);
+        mUserContext = Utils.createPackageContextAsUser(getContext(), mUserId);
     }
 
     @Override
     public void performClick() {
-        if (!Utils.startQuietModeDialogIfNecessary(getContext(), UserManager.get(getContext()),
-                mUserId)) {
-            super.performClick();
+        if (mUserId != UserHandle.USER_CURRENT) {
+            if (Utils.unlockWorkProfileIfNecessary(getContext(), mUserId) ||
+                    Utils.startQuietModeDialogIfNecessary(getContext(),
+                            UserManager.get(getContext()), mUserId)) {
+                return;
+            }
         }
-    }
-
-    public void clearUserId(int userId) {
-        mUserId = UserHandle.USER_CURRENT;
-        mUserContext = getContext();
+        super.performClick();
     }
 
     @Override
