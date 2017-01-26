@@ -73,14 +73,6 @@ public class DatabaseIndexingUtilsTest {
     }
 
     @Test
-    public void testGetPreferenceControllerUriMap_CompatibleClass_ReturnsNotNull() {
-        String className = "com.android.settings.gestures.GestureSettings";
-
-        Map map = DatabaseIndexingUtils.getPreferenceControllerUriMap(className, mContext);
-        assertThat(map).isNotNull();
-    }
-
-    @Test
     public void testGetPreferenceControllerUriMap_CompatibleClass_ReturnsValidMap() {
         String className = "com.android.settings.DisplaySettings";
 
@@ -96,7 +88,7 @@ public class DatabaseIndexingUtilsTest {
     }
 
     @Test
-    public void testGetPayloadFromMap_MatchingKey_ReturnsPayloa() {
+    public void testGetPayloadFromMap_MatchingKey_ReturnsPayload() {
         final String key = "key";
         PreferenceController prefController = new PreferenceController(mContext) {
             @Override
