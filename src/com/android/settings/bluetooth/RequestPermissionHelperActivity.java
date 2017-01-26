@@ -17,12 +17,14 @@
 package com.android.settings.bluetooth;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
@@ -125,8 +127,19 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
         switch (mRequest) {
             case RequestPermissionActivity.REQUEST_ENABLE:
             case RequestPermissionActivity.REQUEST_ENABLE_DISCOVERABLE: {
-                mLocalAdapter.enable();
-                setResult(Activity.RESULT_OK);
+                UserManager userManager = getSystemService(UserManager.class);
+                if (userManager.hasUserRestriction(UserManager.DISALLOW_BLUETOOTH)) {
+                    // If Bluetooth is disallowed, don't try to enable it, show policy transparency
+                    // message instead.
+                    DevicePolicyManager dpm = getSystemService(DevicePolicyManager.class);
+                    Intent intent = dpm.createAdminSupportIntent(UserManager.DISALLOW_BLUETOOTH);
+                    if (intent != null) {
+                        startActivity(intent);
+                    }
+                } else {
+                    mLocalAdapter.enable();
+                    setResult(Activity.RESULT_OK);
+                }
             } break;
 
             case RequestPermissionActivity.REQUEST_DISABLE: {
