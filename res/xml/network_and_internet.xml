@@ -19,12 +19,23 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/network_dashboard_title">
 
+    <com.android.settings.widget.MasterSwitchPreference
+        android:fragment="com.android.settings.wifi.WifiSettings"
+        android:key="toggle_wifi"
+        android:title="@string/wifi_settings"
+        android:icon="@drawable/ic_settings_wireless"
+        android:order="-30">
+        <intent
+          android:action="android.settings.WIFI_SETTINGS"
+          android:targetClass="Settings$WifiSettingsActivity" />
+    </com.android.settings.widget.MasterSwitchPreference>
+
     <SwitchPreference
         android:key="toggle_airplane"
         android:title="@string/airplane_mode"
         android:icon="@drawable/ic_airplanemode_active"
         android:disableDependentsState="true"
-        android:order="-30"/>
+        android:order="5"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="mobile_network_settings"

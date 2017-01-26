@@ -22,6 +22,7 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
@@ -45,7 +46,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class BluetoothSummaryHelperTest {
+public class BluetoothSummaryUpdaterTest {
 
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -53,7 +54,7 @@ public class BluetoothSummaryHelperTest {
     @Mock
     private LocalBluetoothAdapter mBtAdapter;
 
-    private BluetoothSummaryHelper mHelper;
+    private BluetoothSummaryUpdater mSummaryUpdater;
     @Mock
     private SummaryListener mListener;
 
@@ -64,43 +65,42 @@ public class BluetoothSummaryHelperTest {
         when(mBtAdapter.isEnabled()).thenReturn(true);
         when(mBtAdapter.getConnectionState()).thenReturn(BluetoothAdapter.STATE_CONNECTED);
         mContext = RuntimeEnvironment.application.getApplicationContext();
-        mHelper = new BluetoothSummaryHelper(mContext, mBluetoothManager);
-        mHelper.setOnSummaryChangeListener(mListener);
+        mSummaryUpdater = new BluetoothSummaryUpdater(mContext, mListener, mBluetoothManager);
     }
 
     @Test
-    public void setListening_shouldRegisterListener() {
-        mHelper.setListening(true);
+    public void register_true_shouldRegisterListener() {
+        mSummaryUpdater.register(true);
 
-        verify(mBluetoothManager.getEventManager()).registerCallback(mHelper);
+        verify(mBluetoothManager.getEventManager()).registerCallback(mSummaryUpdater);
     }
 
     @Test
-    public void setNotListening_shouldUnregisterListener() {
-        mHelper.setListening(false);
+    public void register_false_shouldUnregisterListener() {
+        mSummaryUpdater.register(false);
 
-        verify(mBluetoothManager.getEventManager()).unregisterCallback(mHelper);
+        verify(mBluetoothManager.getEventManager()).unregisterCallback(mSummaryUpdater);
     }
 
     @Test
-    public void setListening_shouldSendSummaryChange() {
-        mHelper.setListening(true);
+    public void register_true_shouldSendSummaryChange() {
+        mSummaryUpdater.register(true);
 
         verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_connected));
     }
 
     @Test
     public void onBluetoothStateChanged_btDisabled_shouldSendDisabledSummary() {
-        mHelper.setListening(true);
-        mHelper.onBluetoothStateChanged(BluetoothAdapter.STATE_OFF);
+        mSummaryUpdater.register(true);
+        mSummaryUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_OFF);
 
         verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disabled));
     }
 
     @Test
     public void onBluetoothStateChanged_btEnabled_connected_shouldSendConnectedSummary() {
-        mHelper.setListening(true);
-        mHelper.onBluetoothStateChanged(BluetoothAdapter.STATE_ON);
+        mSummaryUpdater.register(true);
+        mSummaryUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_ON);
 
         verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_connected));
     }
@@ -108,8 +108,8 @@ public class BluetoothSummaryHelperTest {
     @Test
     public void onBluetoothStateChanged_btEnabled_notConnected_shouldSendDisconnectedMessage() {
         when(mBtAdapter.getConnectionState()).thenReturn(BluetoothAdapter.STATE_DISCONNECTED);
-        mHelper.setListening(true);
-        mHelper.onBluetoothStateChanged(BluetoothAdapter.STATE_TURNING_ON);
+        mSummaryUpdater.register(true);
+        mSummaryUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_TURNING_ON);
 
         verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disconnected));
     }
@@ -122,41 +122,45 @@ public class BluetoothSummaryHelperTest {
         when(mBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy())
             .thenReturn(devices);
         when(mBtAdapter.getConnectionState()).thenReturn(BluetoothAdapter.STATE_DISCONNECTED);
-        mHelper.setListening(true);
+        mSummaryUpdater.register(true);
 
         when(mBtAdapter.getConnectionState()).thenReturn(BluetoothAdapter.STATE_CONNECTED);
-        mHelper.onConnectionStateChanged(null /* device */, BluetoothAdapter.STATE_CONNECTED);
+        mSummaryUpdater.onConnectionStateChanged(null /* device */,
+            BluetoothAdapter.STATE_CONNECTED);
 
         verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_connected));
     }
 
     @Test
     public void onConnectionStateChanged_inconsistentState_shouldSendDisconnectedMessage() {
-        mHelper.setListening(true);
-        mHelper.onConnectionStateChanged(null /* device */, BluetoothAdapter.STATE_CONNECTED);
+        mSummaryUpdater.register(true);
+        mSummaryUpdater.onConnectionStateChanged(null /* device */,
+            BluetoothAdapter.STATE_CONNECTED);
 
         verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disconnected));
     }
 
     @Test
     public void onConnectionStateChanged_connecting_shouldSendConnectingMessage() {
-        mHelper.setListening(true);
+        mSummaryUpdater.register(true);
         when(mBtAdapter.getConnectionState()).thenReturn(BluetoothAdapter.STATE_CONNECTING);
-        mHelper.onConnectionStateChanged(null /* device */, BluetoothAdapter.STATE_CONNECTING);
+        mSummaryUpdater.onConnectionStateChanged(null /* device */,
+            BluetoothAdapter.STATE_CONNECTING);
 
         verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_connecting));
     }
 
     @Test
     public void onConnectionStateChanged_disconnecting_shouldSendDisconnectingMessage() {
-        mHelper.setListening(true);
+        mSummaryUpdater.register(true);
         when(mBtAdapter.getConnectionState()).thenReturn(BluetoothAdapter.STATE_DISCONNECTING);
-        mHelper.onConnectionStateChanged(null /* device */, BluetoothAdapter.STATE_DISCONNECTING);
+        mSummaryUpdater.onConnectionStateChanged(null /* device */,
+            BluetoothAdapter.STATE_DISCONNECTING);
 
         verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disconnecting));
     }
 
-    private class SummaryListener implements BluetoothSummaryHelper.OnSummaryChangeListener {
+    private class SummaryListener implements OnSummaryChangeListener {
         String summary;
 
         @Override

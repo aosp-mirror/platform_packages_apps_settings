@@ -13,48 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.bluetooth;
+package com.android.settings.wifi;
 
 import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.core.lifecycle.events.OnStart;
 import com.android.settings.core.lifecycle.events.OnStop;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
+import com.android.settings.widget.SummaryUpdater;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.MasterSwitchController;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
-public class BluetoothMasterSwitchPreferenceController extends PreferenceController
-        implements OnSummaryChangeListener,
+public class WifiMasterSwitchPreferenceController extends PreferenceController
+        implements SummaryUpdater.OnSummaryChangeListener,
         LifecycleObserver, OnResume, OnPause, OnStart, OnStop {
 
-    private static final String KEY_TOGGLE_BLUETOOTH = "toggle_bluetooth";
+    private static final String KEY_TOGGLE_WIFI = "toggle_wifi";
 
-    private LocalBluetoothManager mBluetoothManager;
-    private MasterSwitchPreference mBtPreference;
-    private BluetoothEnabler mBluetoothEnabler;
-    private BluetoothSummaryUpdater mSummaryUpdater;
+    private MasterSwitchPreference mWifiPreference;
+    private WifiEnabler mWifiEnabler;
+    private final WifiSummaryUpdater mSummaryHelper;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public BluetoothMasterSwitchPreferenceController(Context context,
-            LocalBluetoothManager bluetoothManager) {
+    public WifiMasterSwitchPreferenceController(Context context,
+            MetricsFeatureProvider metricsFeatureProvider) {
         super(context);
-        mBluetoothManager = bluetoothManager;
-        mSummaryUpdater = new BluetoothSummaryUpdater(mContext, this, mBluetoothManager);
+        mMetricsFeatureProvider = metricsFeatureProvider;
+        mSummaryHelper = new WifiSummaryUpdater(mContext, this);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mBtPreference = (MasterSwitchPreference) screen.findPreference(KEY_TOGGLE_BLUETOOTH);
-        mBluetoothEnabler = new BluetoothEnabler(mContext,
-            new MasterSwitchController(mBtPreference),
-            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider(), mBluetoothManager);
+        mWifiPreference = (MasterSwitchPreference) screen.findPreference(KEY_TOGGLE_WIFI);
     }
 
     @Override
@@ -64,36 +60,42 @@ public class BluetoothMasterSwitchPreferenceController extends PreferenceControl
 
     @Override
     public String getPreferenceKey() {
-        return KEY_TOGGLE_BLUETOOTH;
+        return KEY_TOGGLE_WIFI;
     }
 
+    @Override
     public void onResume() {
-        mSummaryUpdater.register(true);
-    }
-
-    @Override
-    public void onPause() {
-        mSummaryUpdater.register(false);
-    }
-
-    @Override
-    public void onStart() {
-        if (mBluetoothEnabler != null) {
-            mBluetoothEnabler.resume(mContext);
+        mSummaryHelper.register(true);
+        if (mWifiEnabler != null) {
+            mWifiEnabler.resume(mContext);
         }
     }
 
     @Override
+    public void onPause() {
+        if (mWifiEnabler != null) {
+            mWifiEnabler.pause();
+        }
+        mSummaryHelper.register(false);
+    }
+
+    @Override
+    public void onStart() {
+        mWifiEnabler = new WifiEnabler(mContext, new MasterSwitchController(mWifiPreference),
+            mMetricsFeatureProvider);
+    }
+
+    @Override
     public void onStop() {
-        if (mBluetoothEnabler != null) {
-            mBluetoothEnabler.pause();
+        if (mWifiEnabler != null) {
+            mWifiEnabler.teardownSwitchController();
         }
     }
 
     @Override
     public void onSummaryChanged(String summary) {
-        if (mBtPreference != null) {
-            mBtPreference.setSummary(summary);
+        if (mWifiPreference != null) {
+            mWifiPreference.setSummary(summary);
         }
     }
 

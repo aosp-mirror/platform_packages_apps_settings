@@ -45,7 +45,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.bluetooth.BluetoothSummaryHelper.OnSummaryChangeListener;
+import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -150,14 +150,14 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
         mBluetoothEnabler = new BluetoothEnabler(activity, new SwitchBarController(mSwitchBar),
             mMetricsFeatureProvider, Utils.getLocalBtManager(activity));
-        mBluetoothEnabler.setupSwitchBar();
+        mBluetoothEnabler.setupSwitchController();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
 
-        mBluetoothEnabler.teardownSwitchBar();
+        mBluetoothEnabler.teardownSwitchController();
     }
 
     @Override
@@ -516,20 +516,19 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         private final SummaryLoader mSummaryLoader;
 
         @VisibleForTesting
-        BluetoothSummaryHelper mSummaryHelper;
+        BluetoothSummaryUpdater mSummaryUpdater;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader,
                 LocalBluetoothManager bluetoothManager) {
             mBluetoothManager = bluetoothManager;
             mContext = context;
             mSummaryLoader = summaryLoader;
-            mSummaryHelper = new BluetoothSummaryHelper(mContext, mBluetoothManager);
-            mSummaryHelper.setOnSummaryChangeListener(this);
+            mSummaryUpdater = new BluetoothSummaryUpdater(mContext, this, mBluetoothManager);
         }
 
         @Override
         public void setListening(boolean listening) {
-            mSummaryHelper.setListening(listening);
+            mSummaryUpdater.register(listening);
         }
 
         @Override

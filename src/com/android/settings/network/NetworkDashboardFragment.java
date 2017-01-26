@@ -24,9 +24,11 @@ import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,8 +63,12 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 new AirplaneModePreferenceController(context, this /* fragment */);
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, this);
-        getLifecycle().addObserver(airplaneModePreferenceController);
-        getLifecycle().addObserver(mobilePlanPreferenceController);
+        final WifiMasterSwitchPreferenceController wifiPreferenceController =
+            new WifiMasterSwitchPreferenceController(context, mMetricsFeatureProvider);
+        final Lifecycle lifecycle = getLifecycle();
+        lifecycle.addObserver(airplaneModePreferenceController);
+        lifecycle.addObserver(mobilePlanPreferenceController);
+        lifecycle.addObserver(wifiPreferenceController);
 
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(airplaneModePreferenceController);
@@ -73,6 +79,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         controllers.add(new NetworkResetPreferenceController(context));
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
+        controllers.add(wifiPreferenceController);
         return controllers;
     }
 

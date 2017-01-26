@@ -63,7 +63,7 @@ public class BluetoothSettingsSummaryProviderTest {
         mSummaryProvider.setListening(true);
 
         verify(mBluetoothManager.getEventManager()).registerCallback(
-            mSummaryProvider.mSummaryHelper);
+            mSummaryProvider.mSummaryUpdater);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class BluetoothSettingsSummaryProviderTest {
         mSummaryProvider.setListening(false);
 
         verify(mBluetoothManager.getEventManager()).unregisterCallback(
-            mSummaryProvider.mSummaryHelper);
+            mSummaryProvider.mSummaryUpdater);
     }
 
     @Test

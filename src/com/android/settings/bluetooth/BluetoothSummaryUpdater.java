@@ -18,8 +18,8 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.text.TextUtils;
 import com.android.settings.R;
+import com.android.settings.widget.SummaryUpdater;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
@@ -30,29 +30,17 @@ import java.util.Collection;
  * Helper class that listeners to bluetooth callback and notify client when there is update in
  * bluetooth summary info.
  */
-public final class BluetoothSummaryHelper implements BluetoothCallback {
-
-    private OnSummaryChangeListener mListener;
+public final class BluetoothSummaryUpdater extends SummaryUpdater implements BluetoothCallback {
 
     private final LocalBluetoothManager mBluetoothManager;
     private final LocalBluetoothAdapter mBluetoothAdapter;
-    private final Context mContext;
 
     private boolean mEnabled;
     private int mConnectionState;
-    private String mSummary;
 
-    public interface OnSummaryChangeListener {
-        /**
-         * Called when bluetooth summary has changed.
-         *
-         * @param summary The new bluetooth summary .
-         */
-        void onSummaryChanged(String summary);
-    }
-
-    public BluetoothSummaryHelper(Context context, LocalBluetoothManager bluetoothManager) {
-        mContext = context;
+    public BluetoothSummaryUpdater(Context context, OnSummaryChangeListener listener,
+            LocalBluetoothManager bluetoothManager) {
+        super(context, listener);
         mBluetoothManager = bluetoothManager;
         mBluetoothAdapter = mBluetoothManager != null
             ? mBluetoothManager.getBluetoothAdapter() : null;
@@ -88,11 +76,8 @@ public final class BluetoothSummaryHelper implements BluetoothCallback {
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
     }
 
-    public void setOnSummaryChangeListener(OnSummaryChangeListener listener) {
-        mListener = listener;
-    }
-
-    public void setListening(boolean listening) {
+    @Override
+    public void register(boolean listening) {
         if (mBluetoothAdapter == null) {
             return;
         }
@@ -106,17 +91,8 @@ public final class BluetoothSummaryHelper implements BluetoothCallback {
         }
     }
 
-    private void notifyChangeIfNeeded() {
-        String summary = getSummary();
-        if (!TextUtils.equals(mSummary, summary)) {
-            mSummary = summary;
-            if (mListener != null) {
-                mListener.onSummaryChanged(summary);
-            }
-        }
-    }
-
-    private String getSummary() {
+    @Override
+    public String getSummary() {
         if (!mEnabled) {
             return mContext.getString(R.string.bluetooth_disabled);
         }

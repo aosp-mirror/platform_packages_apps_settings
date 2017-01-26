@@ -27,6 +27,7 @@ import android.widget.Switch;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -117,5 +118,31 @@ public class MasterSwitchPreferenceTest {
 
         toggle.setChecked(false);
         verify(listener).onPreferenceChange(preference, false);
+    }
+
+    @Test
+    public void setDisabledByAdmin_hasEnforcedAdmin_shouldDisableButton() {
+        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
+        final PreferenceViewHolder holder = new PreferenceViewHolder(
+            LayoutInflater.from(mContext).inflate(R.layout.preference_widget_master_switch, null));
+        final Switch toggle = (Switch) holder.itemView.findViewById(R.id.switchWidget);
+        toggle.setEnabled(true);
+        preference.onBindViewHolder(holder);
+
+        preference.setDisabledByAdmin(mock(EnforcedAdmin.class));
+        assertThat(toggle.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void setDisabledByAdmin_noEnforcedAdmin_shouldEnaableButton() {
+        final MasterSwitchPreference preference = new MasterSwitchPreference(mContext);
+        final PreferenceViewHolder holder = new PreferenceViewHolder(
+            LayoutInflater.from(mContext).inflate(R.layout.preference_widget_master_switch, null));
+        final Switch toggle = (Switch) holder.itemView.findViewById(R.id.switchWidget);
+        toggle.setEnabled(false);
+        preference.onBindViewHolder(holder);
+
+        preference.setDisabledByAdmin(null);
+        assertThat(toggle.isEnabled()).isTrue();
     }
 }

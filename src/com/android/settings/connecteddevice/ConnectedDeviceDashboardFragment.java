@@ -39,7 +39,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "ConnectedDeviceFrag";
     private UsbModePreferenceController mUsbPrefController;
-    private BluetoothMasterSwitchPreferenceController mBluetoothPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -67,10 +66,11 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         mUsbPrefController = new UsbModePreferenceController(context, new UsbBackend(context));
         lifecycle.addObserver(mUsbPrefController);
         controllers.add(mUsbPrefController);
-        mBluetoothPreferenceController = new BluetoothMasterSwitchPreferenceController(
+        final BluetoothMasterSwitchPreferenceController bluetoothPreferenceController =
+            new BluetoothMasterSwitchPreferenceController(
                 context, Utils.getLocalBtManager(context));
-        lifecycle.addObserver(mBluetoothPreferenceController);
-        controllers.add(mBluetoothPreferenceController);
+        lifecycle.addObserver(bluetoothPreferenceController);
+        controllers.add(bluetoothPreferenceController);
         return controllers;
     }
 
