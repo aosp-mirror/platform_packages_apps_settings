@@ -144,7 +144,7 @@ public class SecuritySettingsTest {
     public void testGetPackageVerifierSummary_matchingTile() {
         when(mDashboardCategory.getTilesCount()).thenReturn(1);
         Tile tile = new Tile();
-        tile.key = SecuritySettings.KEY_PACKAGE_VERIFIER_STATE;
+        tile.key = SecuritySettings.KEY_PACKAGE_VERIFIER_STATUS;
         Bundle bundle = new Bundle();
         bundle.putString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, "content://host/path");
         tile.metaData = bundle;
