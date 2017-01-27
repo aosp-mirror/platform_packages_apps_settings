@@ -65,7 +65,7 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
                 if (provider.getSurveyExpirationDate(activity, id) <= -1) {
                     // register the receiver to show the survey on completion.
                     mReceiver = provider.createAndRegisterReceiver(activity);
-                    provider.downloadSurvey(activity, id, "fakeData");
+                    provider.downloadSurvey(activity, id, null /* data */);
                 } else {
                     provider.showSurveyIfAvailable(activity, id);
                 }
