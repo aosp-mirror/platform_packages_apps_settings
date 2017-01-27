@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 
 /**
  * An interface for classes wishing to provide the ability to serve surveys to implement.
@@ -81,5 +82,11 @@ public interface SurveyFeatureProvider {
      * after a call to {@link #createAndRegisterReceiver(Activity)}.
      * @param activity The activity that was used to register the BroadcastReceiver.
      */
-    void unregisterReceiver(Activity activity, BroadcastReceiver receiver);
+    static void unregisterReceiver(Activity activity, BroadcastReceiver receiver) {
+        if (activity == null) {
+            throw new IllegalStateException("Cannot unregister receiver if activity is null");
+        }
+
+        LocalBroadcastManager.getInstance(activity).unregisterReceiver(receiver);
+    }
 }
