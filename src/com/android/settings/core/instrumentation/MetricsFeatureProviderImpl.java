@@ -34,6 +34,7 @@ public class MetricsFeatureProviderImpl implements MetricsFeatureProvider {
 
     protected void installLogWriters() {
         mLoggerWriters.add(new EventLogWriter());
+        mLoggerWriters.add(new SettingSuggestionsLogWriter());
     }
 
     @Override
