@@ -186,7 +186,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 Uri ringtone = Uri.parse((String) newValue);
                 mRingtone.setRingtone(ringtone);
-                mChannel.setSound(ringtone);
+                mChannel.setSound(ringtone, mChannel.getAudioAttributes());
                 mChannel.lockFields(NotificationChannel.USER_LOCKED_SOUND);
                 mBackend.updateChannel(mPkg, mUid, mChannel);
                 return false;
