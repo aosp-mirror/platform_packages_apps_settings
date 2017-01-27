@@ -19,7 +19,7 @@ package com.android.settings.notification;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
-import android.content.Context;
+import android.app.NotificationChannelGroup;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -38,13 +38,11 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.text.Collator;
 import java.util.Collections;
@@ -66,7 +64,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private PreferenceCategory mChannels;
-    private List<NotificationChannel> mChannelList;
+    private List<NotificationChannelGroup> mChannelGroupList;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -96,6 +94,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
 
         addPreferencesFromResource(R.xml.app_notification_settings);
+        getPreferenceScreen().setOrderingAsAdded(true);
 
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
         mBadge = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BADGE);
@@ -108,36 +107,57 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
             rows.put(mAppRow.pkg, mAppRow);
             collectConfigActivities(rows);
-            mChannelList = mBackend.getChannels(mPkg, mUid).getList();
-            Collections.sort(mChannelList, mChannelComparator);
+            // TODO: load channels in asynctask?
+            mChannelGroupList = mBackend.getChannelGroups(mPkg, mUid).getList();
+            Collections.sort(mChannelGroupList, mChannelGroupComparator);
 
-            if (mChannelList.isEmpty()) {
-                setVisible(mChannels, false);
+            if (mChannelGroupList.isEmpty()) {
+                Preference empty = new Preference(getPrefContext());
+                empty.setTitle(R.string.no_channels);
+                empty.setEnabled(false);
+                mChannels.addPreference(empty);
             } else {
-                int N = mChannelList.size();
-                for (int i = 0; i < N; i++) {
-                    final NotificationChannel channel = mChannelList.get(i);
-                    RestrictedPreference channelPref = new RestrictedPreference(getPrefContext());
-                    channelPref.setDisabledByAdmin(mSuspendedAppsAdmin);
-                    channelPref.setKey(channel.getId());
-                    channelPref.setTitle(channel.getName());
-
-                    if (channel.isDeleted()) {
-                        channelPref.setTitle(
-                                getString(R.string.deleted_channel_name, channel.getName()));
-                        channelPref.setEnabled(false);
-                    } else {
-                        Bundle channelArgs = new Bundle();
-                        channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-                        channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
-                        channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
-                        channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
-                        Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
-                                ChannelNotificationSettings.class.getName(),
-                                channelArgs, null, 0, null, false);
-                        channelPref.setIntent(channelIntent);
+                for (NotificationChannelGroup group : mChannelGroupList) {
+                    PreferenceCategory groupCategory = null;
+                    if (group.getId() != null && group.getName() != null) {
+                        groupCategory = new PreferenceCategory(getPrefContext());
+                        groupCategory.setTitle(group.getName());
+                        groupCategory.setKey(group.getId());
+                        groupCategory.setOrderingAsAdded(true);
+                        getPreferenceScreen().addPreference(groupCategory);
                     }
-                    mChannels.addPreference(channelPref);
+                    final List<NotificationChannel> channels = group.getChannels();
+                    Collections.sort(channels, mChannelComparator);
+                    int N = channels.size();
+                    for (int i = 0; i < N; i++) {
+                        final NotificationChannel channel = channels.get(i);
+                        RestrictedPreference channelPref = new RestrictedPreference(
+                                getPrefContext());
+                        channelPref.setDisabledByAdmin(mSuspendedAppsAdmin);
+                        channelPref.setKey(channel.getId());
+                        channelPref.setTitle(channel.getName());
+
+                        if (channel.isDeleted()) {
+                            channelPref.setTitle(
+                                    getString(R.string.deleted_channel_name, channel.getName()));
+                            channelPref.setEnabled(false);
+                        } else {
+                            Bundle channelArgs = new Bundle();
+                            channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
+                            channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
+                            channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
+                            channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
+                            Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
+                                    ChannelNotificationSettings.class.getName(),
+                                    channelArgs, null, 0, null, false);
+                            channelPref.setIntent(channelIntent);
+                        }
+                        if (groupCategory != null) {
+                            groupCategory.addPreference(channelPref);
+                        } else {
+                            mChannels.addPreference(channelPref);
+                        }
+                    }
                 }
             }
             updateDependents(mAppRow.banned);
@@ -203,7 +223,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     private void updateDependents(boolean banned) {
-        setVisible(mChannels, !(mChannelList.isEmpty() || banned));
+        setVisible(mChannels, !banned);
         setVisible(mBadge, !banned);
     }
 
@@ -262,4 +282,25 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             return left.getId().compareTo(right.getId());
         }
     };
+
+    private Comparator<NotificationChannelGroup> mChannelGroupComparator =
+            new Comparator<NotificationChannelGroup>() {
+                private final Collator sCollator = Collator.getInstance();
+
+                @Override
+                public int compare(NotificationChannelGroup left, NotificationChannelGroup right) {
+                    // Non-groups channels (in placeholder group with a null id) come first
+                    if (left.getId() == null && right.getId() != null) {
+                        return 1;
+                    } else if (right.getId() == null && left.getId() != null) {
+                        return -1;
+                    }
+                    // sort rest of the groups by name
+                    if (!Objects.equals(left.getName(), right.getName())) {
+                        return sCollator.compare(left.getName().toString(),
+                                right.getName().toString());
+                    }
+                    return left.getId().compareTo(right.getId());
+                }
+            };
 }

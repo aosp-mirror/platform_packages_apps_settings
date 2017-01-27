@@ -17,6 +17,7 @@ package com.android.settings.notification;
 
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -121,9 +122,9 @@ public class NotificationBackend {
         }
     }
 
-    public ParceledListSlice<NotificationChannel> getChannels(String pkg, int uid) {
+    public ParceledListSlice<NotificationChannelGroup> getChannelGroups(String pkg, int uid) {
         try {
-            return sINM.getNotificationChannelsForPackage(pkg, uid, true);
+            return sINM.getNotificationChannelGroupsForPackage(pkg, uid, true);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return ParceledListSlice.emptyList();
