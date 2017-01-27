@@ -77,9 +77,7 @@ public abstract class InstrumentedFragment extends PreferenceFragment {
     public void onPause() {
         Activity activity = getActivity();
         if (mReceiver != null && activity != null) {
-            SurveyFeatureProvider provider =
-                    FeatureFactory.getFactory(activity).getSurveyFeatureProvider(activity);
-            provider.unregisterReceiver(activity, mReceiver);
+            SurveyFeatureProvider.unregisterReceiver(activity, mReceiver);
             mReceiver = null;
         }
 
