@@ -74,9 +74,8 @@ public class SurveyMixin implements LifecycleObserver, OnResume, OnPause {
     public void onPause() {
         Activity activity = mFragment.getActivity();
         if (mReceiver != null && activity != null) {
-            SurveyFeatureProvider provider =
-                    FeatureFactory.getFactory(activity).getSurveyFeatureProvider(activity);
-            provider.unregisterReceiver(activity, mReceiver);
+            SurveyFeatureProvider.unregisterReceiver(activity, mReceiver);
+            mReceiver = null;
         }
     }
 }
