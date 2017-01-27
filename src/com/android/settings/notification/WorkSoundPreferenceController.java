@@ -160,9 +160,8 @@ public class WorkSoundPreferenceController extends PreferenceController implemen
     }
 
     private CharSequence updateRingtoneName(Context context, int type) {
-        if (context == null) {
-            Log.e(TAG, "Unable to update ringtone name, no context provided");
-            return null;
+        if (context == null || !UserManager.get(context).isUserUnlocked(context.getUserId())) {
+            return context.getString(R.string.managed_profile_not_available_label);
         }
         Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(context, type);
         return Ringtone.getTitle(context, ringtoneUri, false /* followSettingsUri */,
