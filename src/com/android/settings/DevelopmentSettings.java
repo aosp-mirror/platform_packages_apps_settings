@@ -28,6 +28,7 @@ import android.app.backup.IBackupManager;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCodecConfig;
+import android.bluetooth.BluetoothCodecStatus;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -1819,12 +1820,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void updateBluetoothA2dpConfigurationValues() {
         int index;
         String[] summaries;
+        BluetoothCodecStatus codecStatus = null;
         BluetoothCodecConfig codecConfig = null;
+        BluetoothCodecConfig[] codecsLocalCapabilities = null;
+        BluetoothCodecConfig[] codecsSelectableCapabilities = null;
         String streaming;
 
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
-                codecConfig = mBluetoothA2dp.getCodecConfig();
+                codecStatus = mBluetoothA2dp.getCodecStatus();
+                codecConfig = codecStatus.getCodecConfig();
+                codecsLocalCapabilities = codecStatus.getCodecsLocalCapabilities();
+                codecsSelectableCapabilities = codecStatus.getCodecsSelectableCapabilities();
             }
         }
         if (codecConfig == null)
@@ -2674,7 +2681,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private BroadcastReceiver mBluetoothA2dpReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateBluetoothA2dpConfigurationValues();
+            Log.d(TAG, "mBluetoothA2dpReceiver.onReceive intent=" + intent);
+            String action = intent.getAction();
+
+            if (BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED.equals(action)) {
+                BluetoothCodecStatus codecStatus =
+                    (BluetoothCodecStatus)intent.getParcelableExtra(BluetoothCodecStatus.EXTRA_CODEC_STATUS);
+                Log.d(TAG, "Received BluetoothCodecStatus=" + codecStatus);
+                updateBluetoothA2dpConfigurationValues();
+            }
         }
     };
 
