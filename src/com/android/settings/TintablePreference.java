@@ -17,17 +17,23 @@ package com.android.settings;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
+import android.support.annotation.ColorInt;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 public class TintablePreference extends Preference {
-
+    @ColorInt
     private int mTintColor;
 
     public TintablePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TintablePreference);
+        mTintColor = a.getColor(R.styleable.TintablePreference_android_tint, 0);
+        a.recycle();
     }
 
     public void setTint(int color) {
