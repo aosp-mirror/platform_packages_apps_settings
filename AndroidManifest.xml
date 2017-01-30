@@ -1373,11 +1373,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <intent-filter android:priority="-2">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.personal" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.PrivacySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -3007,10 +3002,9 @@
                        android:resource="@string/gesture_preference_summary" />
         </activity>
 
-        <activity android:name="BackupSettingsActivity"
+        <activity android:name=".backup.BackupSettingsActivity"
                   android:label="@string/privacy_settings_title"
                   android:icon="@drawable/ic_settings_backup"
-                  android:theme="@android:style/Theme.NoDisplay"
                   android:taskAffinity="com.android.settings"
                   android:parentActivityName="Settings">
             <intent-filter android:priority="1">
@@ -3268,21 +3262,8 @@
                        android:value="true" />
         </activity-alias>
 
-        <activity-alias android:name="PrivacyDashboardAlias"
-            android:targetActivity="Settings$PrivacySettingsActivity">
-            <intent-filter android:priority="60">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.PrivacySettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity-alias>
-
         <activity-alias android:name="BackupResetDashboardAlias"
-                        android:targetActivity=".BackupSettingsActivity">
+                        android:targetActivity=".backup.BackupSettingsActivity">
             <intent-filter android:priority="60">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>

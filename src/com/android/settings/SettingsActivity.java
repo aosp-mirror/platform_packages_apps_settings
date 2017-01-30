@@ -54,6 +54,7 @@ import android.widget.SearchView;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
+import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardContainerFragment;
@@ -965,29 +966,11 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
         }
 
-        String backupIntent = getResources().getString(R.string.config_backup_settings_intent);
-        boolean useDefaultBackup = TextUtils.isEmpty(backupIntent);
+        // Enable/disable backup settings depending on whether the user is admin.
         setTileEnabled(new ComponentName(packageName,
-                Settings.PrivacySettingsActivity.class.getName()), useDefaultBackup, isAdmin);
+                BackupSettingsActivity.class.getName()), true, isAdmin);
         setTileEnabled(new ComponentName(packageName,
-                        "com.android.settings.PrivacyDashboardAlias"),
-                useDefaultBackup, isAdmin);
-
-        boolean hasBackupActivity = false;
-        if (!useDefaultBackup) {
-            try {
-                Intent intent = Intent.parseUri(backupIntent, 0);
-                hasBackupActivity = !getPackageManager().queryIntentActivities(intent, 0).isEmpty();
-            } catch (URISyntaxException e) {
-                Log.e(LOG_TAG, "Invalid backup intent URI!", e);
-            }
-        }
-
-        // Enable/disable BackupSettingsActivity and its alias.
-        setTileEnabled(new ComponentName(packageName,
-                BackupSettingsActivity.class.getName()), hasBackupActivity, isAdmin);
-        setTileEnabled(new ComponentName(packageName,
-                "com.android.settings.BackupResetDashboardAlias"), hasBackupActivity, isAdmin);
+                "com.android.settings.BackupResetDashboardAlias"), true, isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.EnterprisePrivacySettingsActivity.class.getName()),
