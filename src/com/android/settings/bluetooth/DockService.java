@@ -938,13 +938,7 @@ public final class DockService extends Service implements ServiceListener {
         public void onDeviceAdded(CachedBluetoothDevice cachedDevice) { }
         public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) { }
         public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) { }
-
-        @Override
-        public void onScanningStateChanged(boolean started) {
-            // TODO: Find a more unified place for a persistent BluetoothCallback to live
-            // as this is not exactly dock related.
-            LocalBluetoothPreferences.persistDiscoveringTimestamp(mContext);
-        }
+        public void onScanningStateChanged(boolean started) { }
 
         @Override
         public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
