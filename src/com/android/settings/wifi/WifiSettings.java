@@ -93,7 +93,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     /* package */ static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
-    private static final int MENU_ID_ADVANCED = Menu.FIRST + 4;
     private static final int MENU_ID_SCAN = Menu.FIRST + 5;
     private static final int MENU_ID_CONNECT = Menu.FIRST + 6;
     private static final int MENU_ID_FORGET = Menu.FIRST + 7;
@@ -113,6 +112,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
     private static final String PREF_KEY_ADDITIONAL_SETTINGS = "additional_settings";
+    private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
 
     protected WifiManager mWifiManager;
@@ -155,6 +155,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private PreferenceCategory mAccessPointsPreferenceCategory;
     private PreferenceCategory mAdditionalSettingsPreferenceCategory;
     private Preference mAddPreference;
+    private Preference mConfigureWifiSettingsPreference;
     private Preference mSavedNetworksPreference;
     private LinkablePreference mStatusMessagePreference;
 
@@ -186,6 +187,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 (PreferenceCategory) findPreference(PREF_KEY_ACCESS_POINTS);
         mAdditionalSettingsPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_ADDITIONAL_SETTINGS);
+        mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_WIFI_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
 
         Context prefContext = getPrefContext();
@@ -359,9 +361,6 @@ public class WifiSettings extends RestrictedSettingsFragment
      * @param menu
      */
     void addOptionsMenuItems(Menu menu) {
-        menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-
         final boolean wifiIsEnabled = mWifiTracker.isWifiEnabled();
         mScanMenuItem = menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.menu_stats_refresh)
                 .setIcon(com.android.internal.R.drawable.ic_menu_refresh);
@@ -424,17 +423,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             case MENU_ID_SCAN:
                 mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_FORCE_SCAN);
                 mWifiTracker.forceScan();
-                return true;
-            case MENU_ID_ADVANCED:
-                if (getActivity() instanceof SettingsActivity) {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(
-                            AdvancedWifiSettings.class.getCanonicalName(), null,
-                            R.string.wifi_advanced_titlebar, null, this, 0);
-                } else {
-                    startFragment(this, AdvancedWifiSettings.class.getCanonicalName(),
-                            R.string.wifi_advanced_titlebar, -1 /* Do not request a results */,
-                            null);
-                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -689,11 +677,11 @@ public class WifiSettings extends RestrictedSettingsFragment
                     mAccessPointsPreferenceCategory.addPreference(pref);
                     mAddPreference.setOrder(index++);
                     mAccessPointsPreferenceCategory.addPreference(mAddPreference);
-                    setSavedNetworkPreferenceVisibility();
+                    setConfigureWifiSettingsVisibility();
                 } else {
                     mAddPreference.setOrder(index++);
                     mAccessPointsPreferenceCategory.addPreference(mAddPreference);
-                    setSavedNetworkPreferenceVisibility();
+                    setConfigureWifiSettingsVisibility();
                     setProgressBarVisible(false);
                 }
                 if (mScanMenuItem != null) {
@@ -713,7 +701,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
             case WifiManager.WIFI_STATE_DISABLED:
                 setOffMessage();
-                setSavedNetworkPreferenceVisibility();
+                setConfigureWifiSettingsVisibility();
                 setProgressBarVisible(false);
                 if (mScanMenuItem != null) {
                     mScanMenuItem.setEnabled(false);
@@ -722,7 +710,12 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
-    private void setSavedNetworkPreferenceVisibility() {
+    private void setConfigureWifiSettingsVisibility() {
+        if (isUiRestricted()) {
+            mAdditionalSettingsPreferenceCategory.removeAll();
+            return;
+        }
+        mAdditionalSettingsPreferenceCategory.addPreference(mConfigureWifiSettingsPreference);
         if (mWifiTracker.doSavedNetworksExist()) {
             mAdditionalSettingsPreferenceCategory.addPreference(mSavedNetworksPreference);
         } else {

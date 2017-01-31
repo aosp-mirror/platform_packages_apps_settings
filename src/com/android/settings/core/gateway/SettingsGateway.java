@@ -122,7 +122,6 @@ import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
-import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiAPITest;
@@ -140,7 +139,6 @@ public class SettingsGateway {
             WirelessSettings.class.getName(),
             WifiSettings.class.getName(),
             ConfigureWifiSettings.class.getName(),
-            AdvancedWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings.class.getName(),
             BluetoothSettings.class.getName(),
             SimSettings.class.getName(),
