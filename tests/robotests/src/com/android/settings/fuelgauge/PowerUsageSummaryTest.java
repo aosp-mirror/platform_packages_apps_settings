@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Process;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,7 +43,10 @@ import java.util.List;
 import static com.android.settings.fuelgauge.PowerUsageBase.MENU_STATS_REFRESH;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -75,6 +79,8 @@ public class PowerUsageSummaryTest {
     private BatterySipper mNormalBatterySipper;
     @Mock
     private BatterySipper mScreenBatterySipper;
+    @Mock
+    private PowerGaugePreference mPreference;
 
     private TestFragment mFragment;
     private FakeFeatureFactory mFeatureFactory;
@@ -99,8 +105,9 @@ public class PowerUsageSummaryTest {
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(ADDITIONAL_BATTERY_INFO_INTENT);
 
-        mPowerUsageSummary = new PowerUsageSummary();
+        mPowerUsageSummary = spy(new PowerUsageSummary());
 
+        when(mPowerUsageSummary.getContext()).thenReturn(mContext);
         when(mNormalBatterySipper.getPackages()).thenReturn(PACKAGE_NAMES);
         when(mNormalBatterySipper.getUid()).thenReturn(UID);
         mNormalBatterySipper.totalPowerMah = POWER_MAH;
@@ -205,6 +212,22 @@ public class PowerUsageSummaryTest {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
         when(mNormalBatterySipper.getUid()).thenReturn(UID);
         assertThat(mPowerUsageSummary.shouldHideSipper(mNormalBatterySipper)).isFalse();
+    }
+
+    @Test
+    public void testSetUsageSummary_TimeLessThanOneMinute_DoNotSetSummary() {
+        final long usageTimeMs = 59 * DateUtils.SECOND_IN_MILLIS;
+
+        mPowerUsageSummary.setUsageSummary(mPreference, "", usageTimeMs);
+        verify(mPreference, never()).setSummary(anyString());
+    }
+
+    @Test
+    public void testSetUsageSummary_TimeMoreThanOneMinute_SetSummary() {
+        final long usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+
+        mPowerUsageSummary.setUsageSummary(mPreference, "", usageTimeMs);
+        verify(mPreference).setSummary(anyString());
     }
 
     public static class TestFragment extends PowerUsageSummary {
