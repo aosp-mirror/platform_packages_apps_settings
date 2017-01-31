@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -72,7 +73,6 @@ import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiTracker;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
@@ -110,6 +110,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final String SAVED_WIFI_NFC_DIALOG_STATE = "wifi_nfc_dlg_state";
 
     private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
+    private static final String PREF_KEY_CONNECTED_ACCESS_POINTS = "connected_access_point";
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
     private static final String PREF_KEY_ADDITIONAL_SETTINGS = "additional_settings";
     private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_settings";
@@ -152,6 +153,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private AccessPointPreference.UserBadgeCache mUserBadgeCache;
 
+    private PreferenceCategory mConnectedAccessPointPreferenceCategory;
     private PreferenceCategory mAccessPointsPreferenceCategory;
     private PreferenceCategory mAdditionalSettingsPreferenceCategory;
     private Preference mAddPreference;
@@ -182,6 +184,10 @@ public class WifiSettings extends RestrictedSettingsFragment
         getPreferenceManager().setPreferenceComparisonCallback(
                 new PreferenceManager.SimplePreferenceComparisonCallback());
         addPreferencesFromResource(R.xml.wifi_settings);
+
+        mConnectedAccessPointPreferenceCategory =
+                (PreferenceCategory) findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
+        mConnectedAccessPointPreferenceCategory.setVisible(false); // initially hidden
 
         mAccessPointsPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_ACCESS_POINTS);
@@ -610,6 +616,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         // Safeguard from some delayed event handling
         if (getActivity() == null) return;
         if (isUiRestricted()) {
+            removeConnectedAccessPointPreference();
             mAccessPointsPreferenceCategory.removeAll();
             if (!isUiRestrictedByOnlyAdmin()) {
                 addMessagePreference(R.string.wifi_empty_list_user_restricted);
@@ -620,15 +627,17 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
-                // AccessPoints are automatically sorted with TreeSet.
-                final Collection<AccessPoint> accessPoints =
-                        mWifiTracker.getAccessPoints();
+                // AccessPoints are sorted by the WifiTracker
+                final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
 
                 boolean hasAvailableAccessPoints = false;
-                int index = 0;
                 mAccessPointsPreferenceCategory.removePreference(mStatusMessagePreference);
                 cacheRemoveAllPrefs(mAccessPointsPreferenceCategory);
-                for (AccessPoint accessPoint : accessPoints) {
+
+                int index = configureConnectedAccessPointPreferenceCategory(accessPoints) ? 1 : 0;
+
+                for (; index < accessPoints.size(); index++) {
+                    AccessPoint accessPoint = accessPoints.get(index);
                     // Ignore access points that are out of range.
                     if (accessPoint.getLevel() != -1) {
                         String key = accessPoint.getBssid();
@@ -639,15 +648,13 @@ public class WifiSettings extends RestrictedSettingsFragment
                         LongPressAccessPointPreference pref = (LongPressAccessPointPreference)
                                 getCachedPreference(key);
                         if (pref != null) {
-                            pref.setOrder(index++);
+                            pref.setOrder(index);
                             continue;
                         }
                         LongPressAccessPointPreference
-                                preference = new LongPressAccessPointPreference(accessPoint,
-                                getPrefContext(), mUserBadgeCache, false,
-                                R.drawable.ic_wifi_signal_0, this);
+                                preference = createLongPressActionPointPreference(accessPoint);
                         preference.setKey(key);
-                        preference.setOrder(index++);
+                        preference.setOrder(index);
                         if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
                                 && !accessPoint.isSaved()
                                 && accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
@@ -690,6 +697,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:
+                removeConnectedAccessPointPreference();
                 mAccessPointsPreferenceCategory.removeAll();
                 setProgressBarVisible(true);
                 break;
@@ -710,6 +718,71 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
+    @NonNull
+    private LongPressAccessPointPreference createLongPressActionPointPreference(
+            AccessPoint accessPoint) {
+        return new LongPressAccessPointPreference(accessPoint, getPrefContext(), mUserBadgeCache,
+                false, R.drawable.ic_wifi_signal_0, this);
+    }
+
+    /**
+     * Configure the ConnectedAccessPointPreferenceCategory and return true if the Category was
+     * shown.
+     */
+    private boolean configureConnectedAccessPointPreferenceCategory(
+            List<AccessPoint> accessPoints) {
+        if (accessPoints.size() == 0) {
+            removeConnectedAccessPointPreference();
+            return false;
+        }
+
+        AccessPoint connectedAp = accessPoints.get(0);
+        if (!connectedAp.isActive()) {
+            removeConnectedAccessPointPreference();
+            return false;
+        }
+
+        // Is the preference category empty?
+        if (mConnectedAccessPointPreferenceCategory.getPreferenceCount() == 0) {
+            addConnectedAccessPointPreference(connectedAp);
+            return true;
+        }
+
+        // Is the previous currently connected SSID different from the new one?
+        if (!((AccessPointPreference)
+                mConnectedAccessPointPreferenceCategory.getPreference(0))
+                        .getAccessPoint().getSsidStr().equals(
+                                connectedAp.getSsidStr())) {
+            removeConnectedAccessPointPreference();
+            addConnectedAccessPointPreference(connectedAp);
+            return true;
+        }
+
+        // Else same AP is connected, nothing to do
+        return true;
+    }
+
+    /**
+     * Creates a Preference for the given {@link AccessPoint} and adds it to the
+     * {@link #mConnectedAccessPointPreferenceCategory}.
+     */
+    private void addConnectedAccessPointPreference(AccessPoint connectedAp) {
+        String key = connectedAp.getBssid();
+        LongPressAccessPointPreference pref = (LongPressAccessPointPreference)
+                getCachedPreference(key);
+        if (pref == null) {
+            pref = createLongPressActionPointPreference(connectedAp);
+        }
+        mConnectedAccessPointPreferenceCategory.addPreference(pref);
+        mConnectedAccessPointPreferenceCategory.setVisible(true);
+    }
+
+    /** Removes all preferences and hide the {@link #mConnectedAccessPointPreferenceCategory}. */
+    private void removeConnectedAccessPointPreference() {
+        mConnectedAccessPointPreferenceCategory.removeAll();
+        mConnectedAccessPointPreferenceCategory.setVisible(false);
+    }
+
     private void setConfigureWifiSettingsVisibility() {
         if (isUiRestricted()) {
             mAdditionalSettingsPreferenceCategory.removeAll();
@@ -728,6 +801,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (!isUiRestrictedByOnlyAdmin()) {
                 addMessagePreference(R.string.wifi_empty_list_user_restricted);
             }
+            removeConnectedAccessPointPreference();
             mAccessPointsPreferenceCategory.removeAll();
             return;
         }
@@ -757,12 +831,14 @@ public class WifiSettings extends RestrictedSettingsFragment
             mStatusMessagePreference.setText(
                     briefText, getText(R.string.wifi_scan_notify_text), clickListener);
         }
+        removeConnectedAccessPointPreference();
         mAccessPointsPreferenceCategory.removeAll();
         mAccessPointsPreferenceCategory.addPreference(mStatusMessagePreference);
     }
 
     private void addMessagePreference(int messageId) {
         mStatusMessagePreference.setTitle(messageId);
+        removeConnectedAccessPointPreference();
         mAccessPointsPreferenceCategory.removeAll();
         mAccessPointsPreferenceCategory.addPreference(mStatusMessagePreference);
     }
@@ -926,7 +1002,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 result.add(data);
 
                 // Add saved Wi-Fi access points
-                final Collection<AccessPoint> accessPoints =
+                final List<AccessPoint> accessPoints =
                         WifiTracker.getCurrentAccessPoints(context, true, false, false);
                 for (AccessPoint accessPoint : accessPoints) {
                     data = new SearchIndexableRaw(context);
