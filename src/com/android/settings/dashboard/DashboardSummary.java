@@ -268,8 +268,10 @@ public class DashboardSummary extends InstrumentedFragment
         @Override
         protected List<Tile> doInBackground(Void... params) {
             final Context context = getContext();
-            List<Tile> suggestions = mSuggestionParser.getSuggestions();
-            if (mSuggestionFeatureProvider.isSmartSuggestionEnabled(context)) {
+            boolean isSmartSuggestionEnabled =
+                    mSuggestionFeatureProvider.isSmartSuggestionEnabled(context);
+            List<Tile> suggestions = mSuggestionParser.getSuggestions(isSmartSuggestionEnabled);
+            if (isSmartSuggestionEnabled) {
                 List<String> suggestionIds = new ArrayList<>(suggestions.size());
                 for (Tile suggestion : suggestions) {
                     suggestionIds.add(
