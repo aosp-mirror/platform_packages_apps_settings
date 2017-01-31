@@ -42,6 +42,10 @@ public class AudioHelper {
         return Utils.getManagedProfileId(um, UserHandle.myUserId());
     }
 
+    public boolean isUserUnlocked(UserManager um, @UserIdInt int userId) {
+        return um.isUserUnlocked(userId);
+    }
+
     public Context createPackageContextAsUser(@UserIdInt int profileId) {
         return Utils.createPackageContextAsUser(mContext, profileId);
     }

@@ -160,8 +160,8 @@ public class WorkSoundPreferenceController extends PreferenceController implemen
     }
 
     private CharSequence updateRingtoneName(Context context, int type) {
-        if (context == null || !UserManager.get(context).isUserUnlocked(context.getUserId())) {
-            return context.getString(R.string.managed_profile_not_available_label);
+        if (context == null || !mHelper.isUserUnlocked(mUserManager, context.getUserId())) {
+            return mContext.getString(R.string.managed_profile_not_available_label);
         }
         Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(context, type);
         return Ringtone.getTitle(context, ringtoneUri, false /* followSettingsUri */,
