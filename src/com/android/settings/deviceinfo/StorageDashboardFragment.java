@@ -17,9 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.content.Loader;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
@@ -29,7 +27,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.deviceinfo.storage.AppsAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -37,7 +34,6 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.FooterPreference;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -88,7 +84,6 @@ public class StorageDashboardFragment extends DashboardFragment {
         mSummaryController.updateBytes(usedBytes, totalSize);
         mPreferenceController.setVolume(mVolume);
         mPreferenceController.setSystemSize(systemSize);
-        mPreferenceController.startMeasurement();
 
         // Initialize the footer preference to go to the smart storage management.
         final FooterPreference pref = mFooterPreferenceMixin.createFooterPreference();
@@ -120,7 +115,7 @@ public class StorageDashboardFragment extends DashboardFragment {
         controllers.add(mSummaryController);
 
         StorageManager sm = context.getSystemService(StorageManager.class);
-        mPreferenceController = new StorageItemPreferenceController(context, getLifecycle(), this,
+        mPreferenceController = new StorageItemPreferenceController(context, this,
                 mVolume, new StorageManagerVolumeProvider(sm));
         controllers.add(mPreferenceController);
         controllers.add(new ManageStoragePreferenceController(context));

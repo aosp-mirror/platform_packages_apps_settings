@@ -18,13 +18,11 @@ package com.android.settings.deviceinfo.storage;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
-import android.app.usage.StorageStatsManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.VolumeInfo;
@@ -40,23 +38,17 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnDestroy;
-import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import java.util.HashMap;
-
 
 /**
  * StorageItemPreferenceController handles the storage line items which summarize the storage
  * categorization breakdown.
  */
 public class StorageItemPreferenceController extends PreferenceController
-        implements StorageMeasurement.MeasurementReceiver, LifecycleObserver, OnDestroy,
-        LoaderManager.LoaderCallbacks<AppsAsyncLoader.AppsStorageResult> {
+        implements LoaderManager.LoaderCallbacks<StorageAsyncLoader.AppsStorageResult> {
     private static final String TAG = "StorageItemPreference";
 
     private static final String IMAGE_MIME_TYPE = "image/*";
@@ -78,9 +70,7 @@ public class StorageItemPreferenceController extends PreferenceController
     private final StorageVolumeProvider mSvp;
     private VolumeInfo mVolume;
     private final int mUserId;
-    private StorageMeasurement mMeasure;
     private long mSystemSize;
-    private long mUsedSize;
 
     private StorageItemPreferenceAlternate mPhotoPreference;
     private StorageItemPreferenceAlternate mAudioPreference;
@@ -91,8 +81,8 @@ public class StorageItemPreferenceController extends PreferenceController
 
     private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
 
-    public StorageItemPreferenceController(Context context, Lifecycle lifecycle,
-            Fragment hostFragment, VolumeInfo volume, StorageVolumeProvider svp) {
+    public StorageItemPreferenceController(
+            Context context, Fragment hostFragment, VolumeInfo volume, StorageVolumeProvider svp) {
         super(context);
         mFragment = hostFragment;
         mVolume = volume;
@@ -100,10 +90,6 @@ public class StorageItemPreferenceController extends PreferenceController
 
         UserManager um = mContext.getSystemService(UserManager.class);
         mUserId = um.getUserHandle();
-
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
     }
 
     @Override
@@ -166,44 +152,6 @@ public class StorageItemPreferenceController extends PreferenceController
     }
 
     @Override
-    public void onDetailsChanged(StorageMeasurement.MeasurementDetails details) {
-        final long imagesSize = totalValues(details, mUserId,
-                Environment.DIRECTORY_DCIM,
-                Environment.DIRECTORY_PICTURES,
-                Environment.DIRECTORY_MOVIES);
-        if (mPhotoPreference != null) {
-            mPhotoPreference.setStorageSize(imagesSize);
-        }
-
-        final long audioSize = totalValues(details, mUserId,
-                Environment.DIRECTORY_MUSIC,
-                Environment.DIRECTORY_ALARMS,
-                Environment.DIRECTORY_NOTIFICATIONS,
-                Environment.DIRECTORY_RINGTONES,
-                Environment.DIRECTORY_PODCASTS);
-        if (mAudioPreference != null) {
-            mAudioPreference.setStorageSize(audioSize);
-        }
-
-        if (mSystemPreference != null) {
-            mSystemPreference.setStorageSize(mSystemSize);
-        }
-
-        final long downloadsSize = totalValues(details, mUserId, Environment.DIRECTORY_DOWNLOADS);
-        final long miscSize = details.miscSize.get(mUserId);
-        if (mFilePreference != null) {
-            mFilePreference.setStorageSize(downloadsSize + miscSize);
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        if (mMeasure != null) {
-            mMeasure.onDestroy();
-        }
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         mPhotoPreference = (StorageItemPreferenceAlternate) screen.findPreference(PHOTO_KEY);
         mAudioPreference = (StorageItemPreferenceAlternate) screen.findPreference(AUDIO_KEY);
@@ -214,32 +162,30 @@ public class StorageItemPreferenceController extends PreferenceController
     }
 
     @Override
-    public Loader<AppsAsyncLoader.AppsStorageResult> onCreateLoader(int id,
+    public Loader<StorageAsyncLoader.AppsStorageResult> onCreateLoader(int id,
             Bundle args) {
-        return new AppsAsyncLoader(mContext, UserHandle.myUserId(), mVolume.fsUuid,
+        return new StorageAsyncLoader(mContext, UserHandle.myUserId(), mVolume.fsUuid,
                 new StorageStatsSource(mContext),
                 new PackageManagerWrapperImpl(mContext.getPackageManager()));
     }
 
     @Override
-    public void onLoadFinished(Loader<AppsAsyncLoader.AppsStorageResult> loader,
-            AppsAsyncLoader.AppsStorageResult data) {
+    public void onLoadFinished(Loader<StorageAsyncLoader.AppsStorageResult> loader,
+            StorageAsyncLoader.AppsStorageResult data) {
+        mPhotoPreference.setStorageSize(
+                data.externalStats.imageBytes + data.externalStats.videoBytes);
+        mAudioPreference.setStorageSize(data.musicAppsSize + data.externalStats.audioBytes);
         mGamePreference.setStorageSize(data.gamesSize);
         mAppPreference.setStorageSize(data.otherAppsSize);
+        mSystemPreference.setStorageSize(mSystemSize);
+
+        long unattributedBytes = data.externalStats.totalBytes - data.externalStats.audioBytes
+                - data.externalStats.videoBytes - data.externalStats.imageBytes;
+        mFilePreference.setStorageSize(unattributedBytes);
     }
 
     @Override
-    public void onLoaderReset(Loader<AppsAsyncLoader.AppsStorageResult> loader) {
-    }
-
-    /**
-     * Begins an asynchronous storage measurement task for the preferences.
-     */
-    public void startMeasurement() {
-        //TODO: When the GID-based measurement system is completed, swap in the GID impl.
-        mMeasure = new StorageMeasurement(mContext, mVolume, mSvp.findEmulatedForPrivate(mVolume));
-        mMeasure.setReceiver(this);
-        mMeasure.forceMeasure();
+    public void onLoaderReset(Loader<StorageAsyncLoader.AppsStorageResult> loader) {
     }
 
     /**

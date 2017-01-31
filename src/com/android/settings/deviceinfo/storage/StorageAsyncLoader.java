@@ -16,8 +16,12 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import static android.content.pm.ApplicationInfo.CATEGORY_AUDIO;
+import static android.content.pm.ApplicationInfo.CATEGORY_GAME;
+
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.os.UserHandle;
 import android.util.ArraySet;
 
 import com.android.settings.applications.PackageManagerWrapper;
@@ -29,13 +33,13 @@ import java.util.List;
  * AppsAsyncLoader is a Loader which loads app storage information and categories it by the app's
  * specified categorization.
  */
-public class AppsAsyncLoader extends AsyncLoader<AppsAsyncLoader.AppsStorageResult> {
+public class StorageAsyncLoader extends AsyncLoader<StorageAsyncLoader.AppsStorageResult> {
     private int mUserId;
     private String mUuid;
     private StorageStatsSource mStatsManager;
     private PackageManagerWrapper mPackageManager;
 
-    public AppsAsyncLoader(Context context, int userId, String uuid, StorageStatsSource source,
+    public StorageAsyncLoader(Context context, int userId, String uuid, StorageStatsSource source,
             PackageManagerWrapper pm) {
         super(context);
         mUserId = userId;
@@ -66,12 +70,20 @@ public class AppsAsyncLoader extends AsyncLoader<AppsAsyncLoader.AppsStorageResu
             StorageStatsSource.AppStorageStats stats = mStatsManager.getStatsForUid(mUuid, app.uid);
             // Note: This omits cache intentionally -- we are not attributing it to the apps.
             long appSize = stats.getCodeBytes() + stats.getDataBytes();
-            if (app.category == ApplicationInfo.CATEGORY_GAME) {
-                result.gamesSize += appSize;
-            } else {
-                result.otherAppsSize += appSize;
+            switch (app.category) {
+                case CATEGORY_GAME:
+                    result.gamesSize += appSize;
+                    break;
+                case CATEGORY_AUDIO:
+                    result.musicAppsSize += appSize;
+                    break;
+                default:
+                    result.otherAppsSize += appSize;
+                    break;
             }
         }
+
+        result.externalStats = mStatsManager.getExternalStorageStats(mUuid, UserHandle.of(mUserId));
         return result;
     }
 
@@ -81,6 +93,8 @@ public class AppsAsyncLoader extends AsyncLoader<AppsAsyncLoader.AppsStorageResu
 
     public static class AppsStorageResult {
         public long gamesSize;
+        public long musicAppsSize;
         public long otherAppsSize;
+        public StorageStatsSource.ExternalStorageStats externalStats;
     }
 }
