@@ -16,8 +16,8 @@
 package com.android.settings.survey;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.BroadcastReceiver;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
@@ -32,7 +32,7 @@ import com.android.settings.overlay.SurveyFeatureProvider;
 public class SurveyMixin implements LifecycleObserver, OnResume, OnPause {
 
     private String mName;
-    private InstrumentedPreferenceFragment mFragment;
+    private Fragment mFragment;
     private BroadcastReceiver mReceiver;
 
     /**
@@ -42,7 +42,7 @@ public class SurveyMixin implements LifecycleObserver, OnResume, OnPause {
      * @param fragment The fragment that this mixin will be attached to.
      * @param fragmentName The simple name of the fragment.
      */
-    public SurveyMixin(InstrumentedPreferenceFragment fragment, String fragmentName) {
+    public SurveyMixin(Fragment fragment, String fragmentName) {
         mName = fragmentName;
         mFragment = fragment;
     }

@@ -23,6 +23,7 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.core.lifecycle.ObservableFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.survey.SurveyMixin;
 
 public abstract class InstrumentedFragment extends ObservableFragment implements Instrumentable {
 
@@ -31,6 +32,7 @@ public abstract class InstrumentedFragment extends ObservableFragment implements
     public InstrumentedFragment() {
         // Mixin that logs visibility change for activity.
         getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
+        getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
     }
 
     @Override
