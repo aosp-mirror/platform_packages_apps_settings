@@ -3344,7 +3344,7 @@
                        android:value="true" />
         </activity-alias>
 
-        <activity-alias android:name="UserDashboardAlias"
+        <activity-alias android:name="UsersDashboardAlias"
                         android:targetActivity="Settings$UserSettingsActivity">
             <intent-filter android:priority="8">
                 <action android:name="com.android.settings.action.SETTINGS"/>
@@ -3353,6 +3353,8 @@
                        android:value="com.android.settings.users.UserSettings" />
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.accounts" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity-alias>
 
         <activity-alias android:name="AppDefaultDashboardAlias"

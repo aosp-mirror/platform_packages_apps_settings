@@ -287,6 +287,7 @@ public class SettingsGateway {
             "com.android.settings.DisplayDashboardAlias",
             "com.android.settings.SoundDashboardAlias",
             "com.android.settings.SecurityDashboardAlias",
+            "com.android.settings.UsersDashboardAlias",
             Settings.UserAndAccountDashboardActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
             Settings.SupportDashboardActivity.class.getName(),
