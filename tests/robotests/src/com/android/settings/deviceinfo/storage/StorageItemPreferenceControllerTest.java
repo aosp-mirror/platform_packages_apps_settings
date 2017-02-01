@@ -35,6 +35,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.SubSettings;
@@ -118,12 +119,15 @@ public class StorageItemPreferenceControllerTest {
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
                 any(UserHandle.class));
-
         Intent intent = argumentCaptor.getValue();
-        assertThat(intent.getAction()).isEqualTo(DocumentsContract.ACTION_BROWSE);
-        assertThat(intent.getData()).isEqualTo(DocumentsContract.buildRootUri(
-                "com.android.providers.media.documents",
-                "audio_root"));
+
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
+                ManageApplications.class.getName());
+        assertThat(intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS).getInt(
+                ManageApplications.EXTRA_STORAGE_TYPE, 0)).isEqualTo(
+                ManageApplications.STORAGE_TYPE_MUSIC);
     }
 
     @Test

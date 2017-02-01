@@ -25,6 +25,7 @@ import android.app.Fragment;
 import android.app.IActivityManager;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -1224,4 +1225,24 @@ public final class Utils extends com.android.settingslib.Utils {
             return null;
         }
     }
+
+    /**
+     * Launches an intent which may optionally have a user id defined.
+     * @param fragment Fragment to use to launch the activity.
+     * @param intent Intent to launch.
+     */
+    public static void launchIntent(Fragment fragment, Intent intent) {
+        try {
+            final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, -1);
+
+            if (userId == -1) {
+                fragment.startActivity(intent);
+            } else {
+                fragment.getActivity().startActivityAsUser(intent, new UserHandle(userId));
+            }
+        } catch (ActivityNotFoundException e) {
+            Log.w(TAG, "No activity found for " + intent);
+        }
+    }
+
 }
