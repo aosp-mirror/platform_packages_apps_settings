@@ -124,7 +124,7 @@ public class AccessibilityServiceWarning {
                 parentActivity.getString(R.string.capability_desc_receiveAccessibilityEvents));
 
         List<AccessibilityServiceInfo.CapabilityInfo> capabilities =
-                info.getCapabilityInfos();
+                info.getCapabilityInfos(parentActivity);
 
         capabilitiesView.addView(capabilityView);
 
