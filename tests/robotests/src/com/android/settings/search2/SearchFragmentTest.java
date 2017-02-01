@@ -20,16 +20,12 @@ import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
 
-import android.os.UserManager;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,14 +37,11 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -248,5 +241,4 @@ public class SearchFragmentTest {
 
         verify(fragment, times(2)).onLoadFinished(any(Loader.class), any(List.class));
     }
-
 }

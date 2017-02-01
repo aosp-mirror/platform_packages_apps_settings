@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.SearchView;
 
@@ -47,6 +48,9 @@ public class SearchFragment extends InstrumentedFragment implements
         SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<List<? extends SearchResult>>
 {
     private static final String TAG = "SearchFragment";
+
+    @VisibleForTesting
+    static final int SEARCH_TAG = "SearchViewTag".hashCode();
 
     // State values
     private static final String STATE_QUERY = "state_query";
@@ -80,11 +84,22 @@ public class SearchFragment extends InstrumentedFragment implements
     @VisibleForTesting (otherwise = VisibleForTesting.PRIVATE)
     SearchFeatureProvider mSearchFeatureProvider;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    SearchResultsAdapter mSearchAdapter;
+    private SearchResultsAdapter mSearchAdapter;
 
-    private RecyclerView mResultsRecyclerView;
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    RecyclerView mResultsRecyclerView;
     private SearchView mSearchView;
+
+    @VisibleForTesting
+    final RecyclerView.OnScrollListener mScrollListener =
+            new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            if (dy != 0) {
+                hideKeyboard();
+            }
+        }
+    };
 
     @Override
     public int getMetricsCategory() {
@@ -122,6 +137,7 @@ public class SearchFragment extends InstrumentedFragment implements
         actionBar.setCustomView(mSearchView);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
+        mSearchView.requestFocus();
 
         // Run the Index update only if we have some space
         if (!Utils.isLowStorage(activity)) {
@@ -138,6 +154,7 @@ public class SearchFragment extends InstrumentedFragment implements
         mResultsRecyclerView = (RecyclerView) view.findViewById(R.id.list_results);
         mResultsRecyclerView.setAdapter(mSearchAdapter);
         mResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mResultsRecyclerView.addOnScrollListener(mScrollListener);
         return view;
     }
 
@@ -189,7 +206,7 @@ public class SearchFragment extends InstrumentedFragment implements
         // Save submitted query.
         getLoaderManager().restartLoader(SaveQueryRecorderCallback.LOADER_ID_SAVE_QUERY_TASK, null,
                 mSaveQueryRecorderCallback);
-
+        hideKeyboard();
         return true;
     }
 
@@ -240,15 +257,31 @@ public class SearchFragment extends InstrumentedFragment implements
         loaderManager.restartLoader(LOADER_ID_INSTALLED_APPS, null /* args */, this /* callback */);
     }
 
-    private SearchView makeSearchView(ActionBar actionBar, String query) {
+    @VisibleForTesting (otherwise = VisibleForTesting.PRIVATE)
+    SearchView makeSearchView(ActionBar actionBar, String query) {
         final SearchView searchView = new SearchView(actionBar.getThemedContext());
         searchView.setIconifiedByDefault(false);
         searchView.setQuery(query, false /* submitQuery */);
         searchView.setOnQueryTextListener(this);
+        searchView.setTag(SEARCH_TAG, searchView);
         final LayoutParams lp =
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         searchView.setLayoutParams(lp);
         return searchView;
+    }
+
+    private void hideKeyboard() {
+        final Activity activity = getActivity();
+        if (activity != null) {
+            View view = activity.getCurrentFocus();
+            InputMethodManager imm = (InputMethodManager)
+                    activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+
+        if (mResultsRecyclerView != null) {
+            mResultsRecyclerView.requestFocus();
+        }
     }
 
     private class SaveQueryRecorderCallback implements LoaderManager.LoaderCallbacks<Void> {
