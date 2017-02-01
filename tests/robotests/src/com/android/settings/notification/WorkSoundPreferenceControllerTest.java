@@ -41,10 +41,10 @@ import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assume.assumeTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -77,14 +77,15 @@ public class WorkSoundPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
         mController = new WorkSoundPreferenceController(mContext, mFragment, null, mAudioHelper);
     }
 
     @Test
     public void isAvailable_managedProfileAndNotSingleVolume_shouldReturnTrue() {
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
         when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
+        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -92,9 +93,9 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void isAvailable_noManagedProfile_shouldReturnFalse() {
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
         when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
                 .thenReturn(UserHandle.USER_NULL);
+        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -102,9 +103,9 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void isAvailable_singleVolume_shouldReturnFalse() {
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
         when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
+        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
         when(mAudioHelper.isSingleVolume()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -112,12 +113,9 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void onResume_available_shouldAddPreferenceCategory() {
-        // Test requires UserManager.isUserUnlocked, which is an N API.
-        assumeTrue(RuntimeEnvironment.getApiLevel() >= VERSION_CODES.N);
-
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
         when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
+        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
@@ -130,9 +128,6 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void onManagedProfileAdded_shouldAddPreferenceCategory() {
-        // Test requires UserManager.isUserUnlocked, which is an N API.
-        assumeTrue(RuntimeEnvironment.getApiLevel() >= VERSION_CODES.N);
-
         // Given a device without any managed profiles:
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
@@ -156,15 +151,13 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void onManagedProfileRemoved_shouldRemovePreferenceCategory() {
-        // Test requires UserManager.isUserUnlocked, which is an N API.
-        assumeTrue(RuntimeEnvironment.getApiLevel() >= VERSION_CODES.N);
-
         // Given a device with a managed profile:
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
         when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
+        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
         mockWorkCategory();
 
         // Which is in resumed state:
@@ -180,7 +173,6 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void onResume_notAvailable_shouldNotAddPreferenceCategory() {
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
         when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
             .thenReturn(UserHandle.USER_NULL);
         when(mAudioHelper.isSingleVolume()).thenReturn(true);
@@ -193,9 +185,6 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_shouldUpdateSummary() {
-        // Test requires UserManager.isUserUnlocked, which is an N API.
-        assumeTrue(RuntimeEnvironment.getApiLevel() >= VERSION_CODES.N);
-
         final Preference preference = mock(Preference.class);
         when(preference.getKey()).thenReturn(KEY_WORK_PHONE_RINGTONE);
 
