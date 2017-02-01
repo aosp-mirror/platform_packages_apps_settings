@@ -1214,6 +1214,7 @@ public final class Utils extends com.android.settingslib.Utils {
         return UserManager.isDeviceInDemoMode(context)
                 && getUserManager(context).isDemoUser()
                 && !TextUtils.isEmpty(carrierDemoModeSetting)
-                && Settings.Secure.getInt(context.getContentResolver(), carrierDemoModeSetting, 0) == 1;
+                && Settings.Secure.getInt(
+                        context.getContentResolver(), carrierDemoModeSetting, 0) == 1;
     }
 }

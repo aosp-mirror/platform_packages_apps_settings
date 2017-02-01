@@ -20,6 +20,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -41,6 +42,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.settings.widget.CarrierDemoPasswordDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
@@ -57,7 +59,8 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  *
  * This is the initial screen.
  */
-public class MasterClear extends OptionsMenuFragment {
+public class MasterClear extends OptionsMenuFragment
+        implements CarrierDemoPasswordDialogFragment.Callback {
     private static final String TAG = "MasterClear";
 
     private static final int KEYGUARD_REQUEST = 55;
@@ -113,11 +116,24 @@ public class MasterClear extends OptionsMenuFragment {
     private final Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
 
         public void onClick(View v) {
-            if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
+            if ( Utils.isCarrierDemoUser(v.getContext())) {
+                // Require the carrier password before displaying the final confirmation.
+                final CarrierDemoPasswordDialogFragment passwordDialog =
+                        new CarrierDemoPasswordDialogFragment();
+                final FragmentManager fm = getChildFragmentManager();
+                if (fm != null && !fm.isDestroyed()) {
+                    passwordDialog.show(fm, null /* tag */);
+                }
+            } else if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
                 showFinalConfirmation();
             }
         }
     };
+
+    @Override
+    public void onPasswordVerified() {
+        showFinalConfirmation();
+    }
 
     /**
      * In its initial state, the activity presents a button for the user to
