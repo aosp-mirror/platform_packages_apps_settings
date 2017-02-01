@@ -1434,7 +1434,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         Settings.Global.putInt(getActivity().getContentResolver(),
                 Settings.Global.DEVELOPMENT_FORCE_RTL, value ? 1 : 0);
         SystemProperties.set(Settings.Global.DEVELOPMENT_FORCE_RTL, value ? "1" : "0");
-        LocalePicker.updateLocale(getActivity().getResources().getConfiguration().locale);
+        LocalePicker.updateLocales(getActivity().getResources().getConfiguration().getLocales());
     }
 
     private void updateWifiDisplayCertificationOptions() {
