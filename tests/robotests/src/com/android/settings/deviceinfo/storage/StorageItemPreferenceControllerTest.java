@@ -215,11 +215,15 @@ public class StorageItemPreferenceControllerTest {
         details.mediaSize.put(0, mediaSizes);
         mController.setSystemSize(KILOBYTE * 6);
         mController.onDetailsChanged(details);
+        AppsAsyncLoader.AppsStorageResult result = new AppsAsyncLoader.AppsStorageResult();
+        result.gamesSize = KILOBYTE * 8;
+        result.otherAppsSize = KILOBYTE * 9;
+        mController.onLoadFinished(null, result);
 
         assertThat(audio.getSummary().toString()).isEqualTo("4.00KB");
         assertThat(image.getSummary().toString()).isEqualTo("5.00KB");
-        assertThat(games.getSummary().toString()).isEqualTo("0");
-        assertThat(apps.getSummary().toString()).isEqualTo("1.00KB");
+        assertThat(games.getSummary().toString()).isEqualTo("8.00KB");
+        assertThat(apps.getSummary().toString()).isEqualTo("9.00KB");
         assertThat(system.getSummary().toString()).isEqualTo("6.00KB");
         assertThat(files.getSummary().toString()).isEqualTo("5.00KB");
     }
