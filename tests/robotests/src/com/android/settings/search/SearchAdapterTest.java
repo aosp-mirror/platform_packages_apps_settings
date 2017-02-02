@@ -19,6 +19,7 @@ package com.android.settings.search;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import android.view.ViewGroup;
@@ -26,11 +27,14 @@ import android.widget.FrameLayout;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.search2.AppSearchResult;
 import com.android.settings.search2.DatabaseResultLoader;
 import com.android.settings.search2.InlineSwitchViewHolder;
+import com.android.settings.search2.InstalledAppResultLoader;
 import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.IntentSearchViewHolder;
 import com.android.settings.search2.ResultPayload;
+import com.android.settings.search2.SearchActivity;
 import com.android.settings.search2.SearchFragment;
 import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
@@ -46,11 +50,13 @@ import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowViewGroup;
+import org.robolectric.util.ActivityController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -79,17 +85,8 @@ public class SearchAdapterTest {
     @Test
     public void testSingleSourceMerge_ExactCopyReturned() {
         ArrayList<SearchResult> intentResults = getIntentSampleResults();
-        mAdapter.mergeResults(intentResults, mLoaderClassName);
-
-        List<SearchResult> updatedResults = mAdapter.getSearchResults();
-        assertThat(updatedResults).containsAllIn(intentResults);
-    }
-
-    @Test
-    public void testDuplicateSourceMerge_ExactCopyReturned() {
-        ArrayList<SearchResult> intentResults = getIntentSampleResults();
-        mAdapter.mergeResults(intentResults, mLoaderClassName);
-        mAdapter.mergeResults(intentResults, mLoaderClassName);
+        mAdapter.addResultsToMap(intentResults, mLoaderClassName);
+        mAdapter.mergeResults();
 
         List<SearchResult> updatedResults = mAdapter.getSearchResults();
         assertThat(updatedResults).containsAllIn(intentResults);
@@ -109,6 +106,65 @@ public class SearchAdapterTest {
         SearchViewHolder view = mAdapter.onCreateViewHolder(group,
                 ResultPayload.PayloadType.INLINE_SWITCH);
         assertThat(view).isInstanceOf(InlineSwitchViewHolder.class);
+    }
+
+    @Test
+    public void testEndToEndSearch_ProperResultsMerged() {
+        mAdapter.addResultsToMap(getDummyAppResults(),
+                InstalledAppResultLoader.class.getName());
+        mAdapter.addResultsToMap(getDummyDbResults(),
+                DatabaseResultLoader.class.getName());
+        mAdapter.mergeResults();
+
+        List<SearchResult> results = mAdapter.getSearchResults();
+        assertThat(results.get(0).title).isEqualTo("alpha");
+        assertThat(results.get(1).title).isEqualTo("appAlpha");
+        assertThat(results.get(2).title).isEqualTo("appBravo");
+        assertThat(results.get(3).title).isEqualTo("bravo");
+        assertThat(results.get(4).title).isEqualTo("appCharlie");
+        assertThat(results.get(5).title).isEqualTo("Charlie");
+    }
+
+    private List<SearchResult> getDummyDbResults() {
+        List<SearchResult> results = new ArrayList<>();
+        IntentPayload payload = new IntentPayload(new Intent());
+        SearchResult.Builder builder = new SearchResult.Builder();
+        builder.addPayload(payload);
+
+        builder.addTitle("alpha")
+                .addRank(1);
+        results.add(builder.build());
+
+        builder.addTitle("bravo")
+                .addRank(3);
+        results.add(builder.build());
+
+        builder.addTitle("Charlie")
+                .addRank(6);
+        results.add(builder.build());
+
+        return results;
+    }
+
+    private List<AppSearchResult> getDummyAppResults() {
+        List<AppSearchResult> results = new ArrayList<>();
+        IntentPayload payload = new IntentPayload(new Intent());
+        AppSearchResult.Builder builder = new AppSearchResult.Builder();
+        builder.addPayload(payload);
+
+        builder.addTitle("appAlpha")
+                .addRank(1);
+        results.add(builder.build());
+
+        builder.addTitle("appBravo")
+                .addRank(2);
+        results.add(builder.build());
+
+        builder.addTitle("appCharlie")
+                .addRank(4);
+        results.add(builder.build());
+
+        return results;
     }
 
     private ArrayList<SearchResult> getIntentSampleResults() {

@@ -27,6 +27,12 @@ import java.util.Objects;
 public class SearchResult implements Comparable<SearchResult> {
 
     /**
+     * Defines the max rank for a search result to be considered as ranked. Results with ranks
+     * higher than this have no guarantee for sorting order.
+     */
+    public static final int MAX_RANK  = 9;
+
+    /**
      * The title of the result and main text displayed.
      * Intent Results: Displays as the primary
      */
@@ -74,7 +80,7 @@ public class SearchResult implements Comparable<SearchResult> {
      */
     public final long stableId;
 
-    private SearchResult(Builder builder) {
+    protected SearchResult(Builder builder) {
         title = builder.mTitle;
         summary = builder.mSummary;
         breadcrumbs = builder.mBreadcrumbs;
@@ -116,19 +122,19 @@ public class SearchResult implements Comparable<SearchResult> {
             return this;
         }
 
-        public Builder addRank(int rank) {
+        public Builder  addRank(int rank) {
             if (rank >= 0 && rank <= 9) {
                 mRank = rank;
             }
             return this;
         }
 
-        public Builder addIcon(Drawable icon) {
+        public Builder  addIcon(Drawable icon) {
             mIcon = icon;
             return this;
         }
 
-        public Builder addPayload(ResultPayload payload) {
+        public Builder  addPayload(ResultPayload payload) {
             mResultPayload = payload;
             return this;
         }

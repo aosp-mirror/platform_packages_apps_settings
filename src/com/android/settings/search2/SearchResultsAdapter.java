@@ -17,6 +17,7 @@
 package com.android.settings.search2;
 
 import android.content.Context;
+import android.support.annotation.MainThread;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.util.ArrayMap;
@@ -31,10 +32,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.android.settings.search2.SearchResult.MAX_RANK;
+
 public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
+
     private final List<SearchResult> mSearchResults;
-    private final Map<String, List<SearchResult>> mResultsMap;
     private final SearchFragment mFragment;
+    private Map<String, List<? extends SearchResult>> mResultsMap;
 
     public SearchResultsAdapter(SearchFragment fragment) {
         mFragment = fragment;
@@ -84,15 +88,56 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
         return mSearchResults.size();
     }
 
-    public void mergeResults(List<SearchResult> freshResults, String loaderClassName) {
+    /**
+     * Store the results from each of the loaders to be merged when all loaders are finished.
+     * @param freshResults are the results from the loader.
+     * @param loaderClassName class name of the loader.
+     */
+    @MainThread
+    public void addResultsToMap(List<? extends SearchResult> freshResults,
+            String loaderClassName) {
         if (freshResults == null) {
             return;
         }
         mResultsMap.put(loaderClassName, freshResults);
-        final int oldSize = mSearchResults.size();
-        mSearchResults.addAll(freshResults);
-        final int newSize = mSearchResults.size();
-        notifyItemRangeInserted(oldSize, newSize - oldSize);
+    }
+
+    /**
+     * Merge the results from each of the loaders into one list for the adapter.
+     * Prioritizes results from the local database over installed apps.
+     */
+    public void mergeResults() {
+        final List<? extends SearchResult> databaseResults = mResultsMap
+                .get(DatabaseResultLoader.class.getName());
+        final List<? extends SearchResult> installedAppResults = mResultsMap
+                .get(InstalledAppResultLoader.class.getName());
+        final int dbSize = (databaseResults != null) ? databaseResults.size() : 0;
+        final int appSize = (installedAppResults != null) ? installedAppResults.size() : 0;
+        final List<SearchResult> results = new ArrayList<>(dbSize + appSize);
+
+        int dbIndex = 0;
+        int appIndex = 0;
+        int rank = 1;
+
+        while (rank <= MAX_RANK) {
+            while ((dbIndex < dbSize) && (databaseResults.get(dbIndex).rank == rank)) {
+                results.add(databaseResults.get(dbIndex++));
+            }
+            while ((appIndex < appSize) && (installedAppResults.get(appIndex).rank == rank)) {
+                results.add(installedAppResults.get(appIndex++));
+            }
+            rank ++;
+        }
+
+        while (dbIndex < dbSize) {
+            results.add(databaseResults.get(dbIndex++));
+        }
+        while (appIndex < appSize) {
+            results.add(installedAppResults.get(appIndex++));
+        }
+
+        mSearchResults.addAll(results);
+        notifyDataSetChanged();
     }
 
     public void clearResults() {

@@ -79,124 +79,124 @@ public class DatabaseResultLoaderTest {
 
     @Test
     public void testMatchTitle() {
-        loader = new DatabaseResultLoader(mContext, "title");
+        loader = new DatabaseResultLoader(mContext, "title", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(2);
         verify(mSiteMapManager, times(2)).buildBreadCrumb(eq(mContext), anyString(), anyString());
     }
 
     @Test
     public void testMatchSummary() {
-        loader = new DatabaseResultLoader(mContext, "summary");
+        loader = new DatabaseResultLoader(mContext, "summary", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(2);
     }
 
     @Test
     public void testMatchKeywords() {
-        loader = new DatabaseResultLoader(mContext, "keywords");
+        loader = new DatabaseResultLoader(mContext, "keywords", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(2);
     }
 
     @Test
     public void testMatchEntries() {
-        loader = new DatabaseResultLoader(mContext, "entries");
+        loader = new DatabaseResultLoader(mContext, "entries", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(2);
     }
 
     @Test
     public void testSpecialCaseWord_MatchesNonPrefix() {
         insertSpecialCase("Data usage");
-        loader = new DatabaseResultLoader(mContext, "usage");
+        loader = new DatabaseResultLoader(mContext, "usage", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
     public void testSpecialCaseSpace_Matches() {
         insertSpecialCase("space");
-        loader = new DatabaseResultLoader(mContext, " space ");
+        loader = new DatabaseResultLoader(mContext, " space ", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
     public void testSpecialCaseDash_MatchesWordNoDash() {
         insertSpecialCase("wi-fi calling");
-        loader = new DatabaseResultLoader(mContext, "wifi");
+        loader = new DatabaseResultLoader(mContext, "wifi", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
     public void testSpecialCaseDash_MatchesWordWithDash() {
         insertSpecialCase("priorités seulment");
-        loader = new DatabaseResultLoader(mContext, "priorités");
+        loader = new DatabaseResultLoader(mContext, "priorités", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
     public void testSpecialCaseDash_MatchesWordWithoutDash() {
         insertSpecialCase("priorités seulment");
-        loader = new DatabaseResultLoader(mContext, "priorites");
+        loader = new DatabaseResultLoader(mContext, "priorites", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
     public void testSpecialCaseDash_MatchesEntireQueryWithoutDash() {
         insertSpecialCase("wi-fi calling");
-        loader = new DatabaseResultLoader(mContext, "wifi calling");
+        loader = new DatabaseResultLoader(mContext, "wifi calling", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
     public void testSpecialCasePrefix_MatchesPrefixOfEntry() {
         insertSpecialCase("Photos");
-        loader = new DatabaseResultLoader(mContext, "pho");
+        loader = new DatabaseResultLoader(mContext, "pho", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
     public void testSpecialCasePrefix_DoesNotMatchNonPrefixSubstring() {
         insertSpecialCase("Photos");
-        loader = new DatabaseResultLoader(mContext, "hot");
+        loader = new DatabaseResultLoader(mContext, "hot", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(0);
     }
 
     @Test
     public void testSpecialCaseMultiWordPrefix_MatchesPrefixOfEntry() {
         insertSpecialCase("Apps Notifications");
-        loader = new DatabaseResultLoader(mContext, "Apps");
+        loader = new DatabaseResultLoader(mContext, "Apps", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
     public void testSpecialCaseMultiWordPrefix_MatchesSecondWordPrefixOfEntry() {
         insertSpecialCase("Apps Notifications");
-        loader = new DatabaseResultLoader(mContext, "Not");
+        loader = new DatabaseResultLoader(mContext, "Not", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
     public void testSpecialCaseMultiWordPrefix_DoesNotMatchMatchesPrefixOfFirstEntry() {
         insertSpecialCase("Apps Notifications");
-        loader = new DatabaseResultLoader(mContext, "pp");
+        loader = new DatabaseResultLoader(mContext, "pp", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(0);
     }
 
     @Test
     public void testSpecialCaseMultiWordPrefix_DoesNotMatchMatchesPrefixOfSecondEntry() {
         insertSpecialCase("Apps Notifications");
-        loader = new DatabaseResultLoader(mContext, "tion");
+        loader = new DatabaseResultLoader(mContext, "tion", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(0);
     }
 
     @Test
     public void testSpecialCaseMultiWordPrefixWithSpecial_MatchesPrefixOfEntry() {
         insertSpecialCase("Apps & Notifications");
-        loader = new DatabaseResultLoader(mContext, "App");
+        loader = new DatabaseResultLoader(mContext, "App", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
     public void testSpecialCaseMultiWordPrefixWithSpecial_MatchesPrefixOfSecondEntry() {
         insertSpecialCase("Apps & Notifications");
-        loader = new DatabaseResultLoader(mContext, "No");
+        loader = new DatabaseResultLoader(mContext, "No", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 

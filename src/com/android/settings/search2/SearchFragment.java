@@ -41,9 +41,11 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchFragment extends InstrumentedFragment implements
-        SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<List<SearchResult>> {
+        SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<List<? extends SearchResult>>
+{
     private static final String TAG = "SearchFragment";
 
     // State values
@@ -55,6 +57,11 @@ public class SearchFragment extends InstrumentedFragment implements
     private static final int LOADER_ID_RECENTS = 0;
     private static final int LOADER_ID_DATABASE = 1;
     private static final int LOADER_ID_INSTALLED_APPS = 2;
+
+    private static final int NUM_QUERY_LOADERS = 2;
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    AtomicInteger mUnfinishedLoadersCount = new AtomicInteger(NUM_QUERY_LOADERS);;
 
     // Logging
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -69,9 +76,13 @@ public class SearchFragment extends InstrumentedFragment implements
     private boolean mNeverEnteredQuery = true;
     private int mResultClickCount;
     private MetricsFeatureProvider mMetricsFeatureProvider;
-    private SearchFeatureProvider mSearchFeatureProvider;
 
-    private SearchResultsAdapter mSearchAdapter;
+    @VisibleForTesting (otherwise = VisibleForTesting.PRIVATE)
+    SearchFeatureProvider mSearchFeatureProvider;
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    SearchResultsAdapter mSearchAdapter;
+
     private RecyclerView mResultsRecyclerView;
     private SearchView mSearchView;
 
@@ -92,7 +103,9 @@ public class SearchFragment extends InstrumentedFragment implements
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         mSearchAdapter = new SearchResultsAdapter(this);
+
         final LoaderManager loaderManager = getLoaderManager();
+
         if (savedInstanceState != null) {
             mQuery = savedInstanceState.getString(STATE_QUERY);
             mNeverEnteredQuery = savedInstanceState.getBoolean(STATE_NEVER_ENTERED_QUERY);
@@ -181,7 +194,7 @@ public class SearchFragment extends InstrumentedFragment implements
     }
 
     @Override
-    public Loader<List<SearchResult>> onCreateLoader(int id, Bundle args) {
+    public Loader<List<? extends SearchResult>> onCreateLoader(int id, Bundle args) {
         final Activity activity = getActivity();
 
         switch (id) {
@@ -197,12 +210,17 @@ public class SearchFragment extends InstrumentedFragment implements
     }
 
     @Override
-    public void onLoadFinished(Loader<List<SearchResult>> loader, List<SearchResult> data) {
-        mSearchAdapter.mergeResults(data, loader.getClass().getName());
+    public void onLoadFinished(Loader<List<? extends SearchResult>> loader,
+            List<? extends SearchResult> data) {
+        mSearchAdapter.addResultsToMap(data, loader.getClass().getName());
+
+        if (mUnfinishedLoadersCount.decrementAndGet() == 0) {
+            mSearchAdapter.mergeResults();
+        }
     }
 
     @Override
-    public void onLoaderReset(Loader<List<SearchResult>> loader) {
+    public void onLoaderReset(Loader<List<? extends SearchResult>> loader) {
     }
 
     public void onSearchResultClicked() {
@@ -217,6 +235,7 @@ public class SearchFragment extends InstrumentedFragment implements
 
     private void restartLoaders() {
         final LoaderManager loaderManager = getLoaderManager();
+        mUnfinishedLoadersCount.set(NUM_QUERY_LOADERS);
         loaderManager.restartLoader(LOADER_ID_DATABASE, null /* args */, this /* callback */);
         loaderManager.restartLoader(LOADER_ID_INSTALLED_APPS, null /* args */, this /* callback */);
     }

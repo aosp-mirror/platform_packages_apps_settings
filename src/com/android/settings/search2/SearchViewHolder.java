@@ -16,6 +16,9 @@
 package com.android.settings.search2;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.os.UserHandle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -52,8 +55,14 @@ public abstract class SearchViewHolder extends RecyclerView.ViewHolder {
             summaryView.setText(result.summary);
             summaryView.setVisibility(View.VISIBLE);
         }
-        iconView.setImageDrawable(result.icon);
-        if (result.icon == null) {
+
+        if (result instanceof AppSearchResult) {
+            AppSearchResult appResult = (AppSearchResult) result;
+            PackageManager pm = fragment.getActivity().getPackageManager();
+            iconView.setImageDrawable(appResult.info.loadIcon(pm));
+        } else if (result.icon != null) {
+            iconView.setImageDrawable(result.icon);
+        } else {
             iconView.setBackgroundResource(R.drawable.empty_icon);
         }
         bindBreadcrumbView(result);
