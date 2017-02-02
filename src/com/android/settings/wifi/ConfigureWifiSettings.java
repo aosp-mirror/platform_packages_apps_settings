@@ -19,6 +19,7 @@ import static android.content.Context.NETWORK_SCORE_SERVICE;
 import static android.content.Context.WIFI_SERVICE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.provider.SearchIndexableResource;
@@ -43,7 +44,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     private static final String TAG = "ConfigureWifiSettings";
 
-    private WifiManager mWifiManager;
+    private UseOpenWifiPreferenceController mUseOpenWifiPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -58,7 +59,8 @@ public class ConfigureWifiSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(2);
+        mProgressiveDisclosureMixin.setTileLimit(
+            mUseOpenWifiPreferenceController.isAvailable() ? 3 : 2);
         ((SettingsActivity) getActivity()).setDisplaySearchMenu(true);
     }
 
@@ -69,21 +71,33 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        final NetworkScoreManagerWrapper networkScoreManagerWrapper =
+                new NetworkScoreManagerWrapper(context.getSystemService(NetworkScoreManager.class));
+        mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
+                networkScoreManagerWrapper, getLifecycle());
+        final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new WifiInfoPreferenceController(context, getLifecycle(), mWifiManager));
-        controllers.add(new CellularFallbackPreferenceController(context));
-        controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
         controllers.add(new WifiWakeupPreferenceController(context, getLifecycle()));
         controllers.add(new NetworkScorerPickerPreferenceController(context,
-                new NetworkScoreManagerWrapper(
-                        (NetworkScoreManager) getSystemService(NETWORK_SCORE_SERVICE))));
+                networkScoreManagerWrapper));
+        controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
+        controllers.add(mUseOpenWifiPreferenceController);
         controllers.add(new WifiSleepPolicyPreferenceController(context));
-        controllers.add(new WifiP2pPreferenceController(context, getLifecycle(), mWifiManager));
+        controllers.add(new WifiInfoPreferenceController(context, getLifecycle(), wifiManager));
+        controllers.add(new CellularFallbackPreferenceController(context));
+        controllers.add(new WifiP2pPreferenceController(context, getLifecycle(), wifiManager));
         controllers.add(new WifiCallingPreferenceController(context));
         controllers.add(new WpsPreferenceController(
-                context, getLifecycle(), mWifiManager, getFragmentManager()));
+                context, getLifecycle(), wifiManager, getFragmentManager()));
         return controllers;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (mUseOpenWifiPreferenceController == null ||
+                !mUseOpenWifiPreferenceController.onActivityResult(requestCode, resultCode)) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
