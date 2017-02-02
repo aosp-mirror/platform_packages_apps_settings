@@ -193,6 +193,30 @@ public class WorkSoundPreferenceControllerTest {
         verify(preference).setSummary(anyString());
     }
 
+    @Test
+    public void onResume_availableButLocked_shouldRedactPreferences() {
+        final String notAvailable = "(not available)";
+        when(mContext.getString(R.string.managed_profile_not_available_label))
+                .thenReturn(notAvailable);
+
+        // Given a device with a managed profile:
+        when(mAudioHelper.isSingleVolume()).thenReturn(false);
+        when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
+        when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
+        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+                .thenReturn(UserHandle.myUserId());
+        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(false);
+        mockWorkCategory();
+
+        // When resumed:
+        mController.onResume();
+
+        // Sound preferences should explain that the profile isn't available yet.
+        verify(mScreen.findPreference(KEY_WORK_PHONE_RINGTONE)).setSummary(eq(notAvailable));
+        verify(mScreen.findPreference(KEY_WORK_NOTIFICATION_RINGTONE)).setSummary(eq(notAvailable));
+        verify(mScreen.findPreference(KEY_WORK_ALARM_RINGTONE)).setSummary(eq(notAvailable));
+    }
+
     private void mockWorkCategory() {
         when(mScreen.findPreference(KEY_WORK_CATEGORY))
             .thenReturn(mock(PreferenceGroup.class));
