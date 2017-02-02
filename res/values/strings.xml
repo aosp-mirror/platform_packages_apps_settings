@@ -1209,9 +1209,9 @@
     <string name="lock_profile_wipe_dismiss">Dismiss</string>
 
     <!-- Hint shown in dialog screen when password is too short -->
-    <string name="lockpassword_password_too_short">Must be at least %d characters</string>
+    <string name="lockpassword_password_too_short">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</string>
     <!-- Hint shown in dialog screen when PIN is too short -->
-    <string name="lockpassword_pin_too_short">PIN must be at least %d digits</string>
+    <string name="lockpassword_pin_too_short">PIN must be at least <xliff:g id="count" example="3">%d</xliff:g> digits</string>
 
     <!-- Hint shown after minimum password criteria is met -->
     <string name="lockpassword_continue_label">Continue</string>
@@ -1242,37 +1242,37 @@
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of letters -->
     <plurals name="lockpassword_password_requires_letters">
         <item quantity="one">Must contain at least 1 letter</item>
-        <item quantity="other">Must contain at least %d letters</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> letters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of lowercase letters -->
     <plurals name="lockpassword_password_requires_lowercase">
         <item quantity="one">Must contain at least 1 lowercase letter</item>
-        <item quantity="other">Must contain at least %d lowercase letters</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> lowercase letters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of uppercase letters -->
     <plurals name="lockpassword_password_requires_uppercase">
         <item quantity="one">Must contain at least 1 uppercase letter</item>
-        <item quantity="other">Must contain at least %d uppercase letters</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> uppercase letters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of numerical digits -->
     <plurals name="lockpassword_password_requires_numeric">
         <item quantity="one">Must contain at least 1 numerical digit</item>
-        <item quantity="other">Must contain at least %d numerical digits</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> numerical digits</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of special symbols -->
     <plurals name="lockpassword_password_requires_symbols">
         <item quantity="one">Must contain at least 1 special symbol</item>
-        <item quantity="other">Must contain at least %d special symbols</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> special symbols</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of non-letter characters -->
     <plurals name="lockpassword_password_requires_nonletter">
         <item quantity="one">Must contain at least 1 non-letter character</item>
-        <item quantity="other">Must contain at least %d non-letter characters</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-letter characters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
