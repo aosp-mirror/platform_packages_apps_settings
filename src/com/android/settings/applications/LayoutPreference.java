@@ -59,7 +59,6 @@ public class LayoutPreference extends Preference {
 
     private void setView(View view) {
         setLayoutResource(R.layout.layout_preference_frame);
-        setSelectable(false);
         final ViewGroup allDetails = (ViewGroup) view.findViewById(R.id.all_details);
         if (allDetails != null) {
             Utils.forceCustomPadding(allDetails, true /* additive padding */);
@@ -70,6 +69,7 @@ public class LayoutPreference extends Preference {
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
         FrameLayout layout = (FrameLayout) view.itemView;
         layout.removeAllViews();
         ViewGroup parent = (ViewGroup) mRootView.getParent();

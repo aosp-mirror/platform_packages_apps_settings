@@ -23,11 +23,15 @@ import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.BatteryInfo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +40,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +49,6 @@ import static com.android.settings.fuelgauge.PowerUsageBase.MENU_STATS_REFRESH;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -58,8 +62,11 @@ import static org.mockito.Mockito.when;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PowerUsageSummaryTest {
     private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
+    private static final String TIME_LEFT = "2h30min";
     private static final int UID = 123;
     private static final int POWER_MAH = 100;
+    private static final int BATTERY_LEVEL_FULL = 100;
+    private static final int BATTERY_LEVEL_HALF = 50;
     private static final double BATTERY_SCREEN_USAGE = 300;
     private static final double PRECISION = 0.001;
     private static final Intent ADDITIONAL_BATTERY_INFO_INTENT =
@@ -81,6 +88,18 @@ public class PowerUsageSummaryTest {
     private BatterySipper mScreenBatterySipper;
     @Mock
     private PowerGaugePreference mPreference;
+    @Mock
+    private LayoutPreference mBatteryLayoutPref;
+    @Mock
+    private BatteryMeterView mBatteryMeterView;
+    @Mock
+    private TextView mTimeText;
+    @Mock
+    private TextView mSummary1;
+    @Mock
+    private TextView mSummary2;
+    @Mock
+    private BatteryInfo mBatteryInfo;
 
     private TestFragment mFragment;
     private FakeFeatureFactory mFeatureFactory;
@@ -111,6 +130,12 @@ public class PowerUsageSummaryTest {
         when(mNormalBatterySipper.getPackages()).thenReturn(PACKAGE_NAMES);
         when(mNormalBatterySipper.getUid()).thenReturn(UID);
         mNormalBatterySipper.totalPowerMah = POWER_MAH;
+        when(mBatteryLayoutPref.findViewById(R.id.summary1)).thenReturn(mSummary1);
+        when(mBatteryLayoutPref.findViewById(R.id.summary2)).thenReturn(mSummary2);
+        when(mBatteryLayoutPref.findViewById(R.id.time)).thenReturn(mTimeText);
+        when(mBatteryLayoutPref.findViewById(R.id.battery_header_icon))
+                .thenReturn(mBatteryMeterView);
+        mPowerUsageSummary.setBatteryLayoutPreference(mBatteryLayoutPref);
 
         mScreenBatterySipper.drainType = BatterySipper.DrainType.SCREEN;
         mScreenBatterySipper.totalPowerMah = BATTERY_SCREEN_USAGE;
@@ -228,6 +253,28 @@ public class PowerUsageSummaryTest {
 
         mPowerUsageSummary.setUsageSummary(mPreference, "", usageTimeMs);
         verify(mPreference).setSummary(anyString());
+    }
+
+    @Test
+    public void testUpdatePreference_BatteryFull_DoNotShowSummary() {
+        mBatteryInfo.mBatteryLevel = BATTERY_LEVEL_FULL;
+        mBatteryInfo.remainingLabel = TIME_LEFT;
+        mPowerUsageSummary.updateHeaderPreference(mBatteryInfo);
+
+        verify(mSummary1).setVisibility(View.INVISIBLE);
+        verify(mSummary2).setVisibility(View.INVISIBLE);
+        verify(mTimeText).setText(mBatteryInfo.remainingLabel);
+    }
+
+    @Test
+    public void testUpdatePreference_BatteryNotFull_ShowSummary() {
+        mBatteryInfo.mBatteryLevel = BATTERY_LEVEL_HALF;
+        mBatteryInfo.remainingLabel = TIME_LEFT;
+        mPowerUsageSummary.updateHeaderPreference(mBatteryInfo);
+
+        verify(mSummary1).setVisibility(View.VISIBLE);
+        verify(mSummary2).setVisibility(View.VISIBLE);
+        verify(mTimeText).setText(mBatteryInfo.remainingLabel);
     }
 
     public static class TestFragment extends PowerUsageSummary {
