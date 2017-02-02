@@ -45,7 +45,6 @@ import java.util.List;
 public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
 
     private static final int NAME_NO_MATCH = -1;
-    private static final int NAME_EXACT_MATCH = 0;
     private static final Intent LAUNCHER_PROBE = new Intent(Intent.ACTION_MAIN)
             .addCategory(Intent.CATEGORY_LAUNCHER);
 
@@ -131,39 +130,65 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
 
     /**
      * Returns "difference" between appName and query string. appName must contain all
-     * characters from query, in the same order. If not, returns NAME_NO_MATCH. If they do match,
-     * returns an int value representing how different they are, NAME_EXACT_MATCH means they match
-     * perfectly, and larger values means they are less similar.
+     * characters from query as a prefix to a word, in the same order.
+     * If not, returns NAME_NO_MATCH.
+     * If they do match, returns an int value representing  how different they are,
+     * and larger values means they are less similar.
      * <p/>
      * Example:
-     * appName: Abcde, query: Abcde, Returns {@link #NAME_EXACT_MATCH}
-     * appName: Abcde, query: ade, Returns 2
-     * appName: Abcde, query: ae, Returns 3
-     * appName: Abcde, query: ea, Returns NAME_NO_MATCH
+     * appName: Abcde, query: Abcde, Returns 0
+     * appName: Abcde, query: abc, Returns 2
+     * appName: Abcde, query: ab, Returns 3
+     * appName: Abcde, query: bc, Returns NAME_NO_MATCH
      * appName: Abcde, query: xyz, Returns NAME_NO_MATCH
+     * appName: Abc de, query: de, Returns 4
      */
     private int getWordDifference(String appName, String query) {
         if (TextUtils.isEmpty(appName) || TextUtils.isEmpty(query)) {
             return NAME_NO_MATCH;
         }
-        final char[] queryTokens = query.toString().toLowerCase().toCharArray();
-        final char[] valueText = appName.toLowerCase().toCharArray();
-        if (queryTokens.length > valueText.length) {
+
+        final char[] queryTokens = query.toLowerCase().toCharArray();
+        final char[] appTokens = appName.toLowerCase().toCharArray();
+        final int appLength = appTokens.length;
+        if (queryTokens.length > appLength) {
             return NAME_NO_MATCH;
         }
+
         int i = 0;
-        int j = 0;
-        while (i < valueText.length && j < queryTokens.length) {
-            if (valueText[i++] == queryTokens[j]) {
-                j++;
+        int j;
+
+        while (i < appLength) {
+            j = 0;
+            // Currently matching a prefix
+            while ((i + j < appLength) && (queryTokens[j] == appTokens[i + j])) {
+                // Matched the entire query
+                if (++j >= queryTokens.length) {
+                    // Use the diff in length as a proxy of how close the 2 words match.
+                    // Value range from 0 to infinity.
+                    return appLength - queryTokens.length;
+                }
+            }
+
+            i += j;
+
+            // Remaining string is longer that the query or we have search the whole app name.
+            if (queryTokens.length > appLength - i) {
+                return NAME_NO_MATCH;
+            }
+
+            // This is the first index where app name and query name are different
+            // Find the next space in the app name or the end of the app name.
+            while ((i < appLength) && (!Character.isWhitespace(appTokens[i++]))) ;
+
+            // Find the start of the next word
+            while ((i < appLength) && !(Character.isLetter(appTokens[i])
+                    || Character.isDigit(appTokens[i]))) {
+                // Increment in body because we cannot guarantee which condition was true
+                i++;
             }
         }
-        if (j != queryTokens.length) {
-            return NAME_NO_MATCH;
-        }
-        // Use the diff in length as a proxy of how close the 2 words match. Value range from 0
-        // to infinity.
-        return valueText.length - queryTokens.length;
+        return NAME_NO_MATCH;
     }
 
     private List<String> getBreadCrumb() {
