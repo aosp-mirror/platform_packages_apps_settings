@@ -76,7 +76,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private static final String TAG_DISK_INIT = "disk_init";
 
     static final int COLOR_PUBLIC = Color.parseColor("#ff9e9e9e");
-    static final int COLOR_WARNING = Color.parseColor("#fff4511e");
 
     static final int[] COLOR_PRIVATE = new int[] {
             Color.parseColor("#ff26a69a"),

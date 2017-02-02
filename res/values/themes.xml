@@ -40,9 +40,7 @@
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <!-- LockPatternView colors -->
-        <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_dark</item>
-        <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_dark</item>
-        <item name="*android:errorColor">@color/setup_lock_pattern_view_error_color_dark</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
     </style>
 
     <style name="SetupWizardTheme.Light" parent="SuwThemeGlif.Light">
@@ -62,10 +60,7 @@
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
-        <!-- LockPatternView colors -->
-        <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
-        <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
-        <item name="*android:errorColor">@color/setup_lock_pattern_view_error_color_light</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
     </style>
 
     <style name="SetupWizardTheme.Transparent" parent="SetupWizardTheme">
@@ -152,10 +147,7 @@
         <!-- For all Alert Dialogs -->
         <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
 
-        <!-- LockPatternView colors -->
-        <item name="*android:regularColor">@color/lock_pattern_view_regular_color</item>
-        <item name="*android:successColor">@color/lock_pattern_view_success_color</item>
-        <item name="*android:errorColor">@color/lock_pattern_view_error_color</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
     </style>
 
     <style name="Theme.SubSettings" parent="Theme.Settings">
@@ -201,10 +193,7 @@
         <item name="android:windowDrawsSystemBarBackgrounds">false</item>
         <item name="android:background">@android:color/black</item>
 
-        <!-- LockPatternView colors -->
-        <item name="*android:regularColor">@color/unlock_pattern_view_regular_color</item>
-        <item name="*android:successColor">@color/unlock_pattern_view_success_color</item>
-        <item name="*android:errorColor">@color/unlock_pattern_view_error_color</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Unlock</item>
     </style>
 
     <style name="ThemeOverlay.AlertDialog" parent="@android:style/ThemeOverlay.Material.Dialog.Alert">
@@ -240,15 +229,13 @@
         <item name="confirmDeviceCredentialsSideMargin">32dp</item>
         <item name="confirmDeviceCredentialsTopMargin">32dp</item>
 
-        <!-- LockPatternView colors -->
-        <item name="*android:regularColor">@color/lock_pattern_view_regular_color_dark</item>
-        <item name="*android:successColor">@color/lock_pattern_view_regular_color_dark</item>
-        <item name="*android:errorColor">@color/lock_pattern_view_error_color</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Dark</item>
 
         <item name="android:windowAnimationStyle">@style/ConfirmDeviceCredentialsAnimationStyle</item>
     </style>
+
     <style name="Theme.ConfirmDeviceCredentialsWork" parent="Theme.ConfirmDeviceCredentialsDark">
-        <item name="*android:regularColor">@*android:color/white</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Dark.Work</item>
         <item name="android:colorAccent">@*android:color/white</item>
     </style>
 
