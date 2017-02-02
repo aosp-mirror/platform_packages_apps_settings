@@ -1805,9 +1805,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
                 codecStatus = mBluetoothA2dp.getCodecStatus();
-                codecConfig = codecStatus.getCodecConfig();
-                codecsLocalCapabilities = codecStatus.getCodecsLocalCapabilities();
-                codecsSelectableCapabilities = codecStatus.getCodecsSelectableCapabilities();
+                if (codecStatus != null) {
+                    codecConfig = codecStatus.getCodecConfig();
+                    codecsLocalCapabilities = codecStatus.getCodecsLocalCapabilities();
+                    codecsSelectableCapabilities = codecStatus.getCodecsSelectableCapabilities();
+                }
             }
         }
         if (codecConfig == null)
