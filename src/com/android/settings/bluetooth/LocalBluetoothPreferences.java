@@ -148,6 +148,20 @@ final class LocalBluetoothPreferences {
         editor.apply();
     }
 
+    static void persistDiscoveringTimestamp(final Context context) {
+        // Load the shared preferences and edit it on a background
+        // thread (but serialized!).
+        QueuedWork.queue(new Runnable() {
+                public void run() {
+                    SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+                    editor.putLong(
+                            KEY_DISCOVERING_TIMESTAMP,
+                        System.currentTimeMillis());
+                    editor.apply();
+                }
+            }, false);
+    }
+
     static boolean hasDockAutoConnectSetting(Context context, String addr) {
         return getSharedPreferences(context).contains(KEY_DOCK_AUTO_CONNECT + addr);
     }
