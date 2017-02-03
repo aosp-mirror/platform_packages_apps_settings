@@ -232,7 +232,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
-    private static final int RESULT_WEBVIEW_APP = 1002;
 
     private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
     private static final String FLASH_LOCKED_PROP = "ro.boot.flash.locked";
@@ -800,7 +799,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateSimulateColorSpace();
         updateUSBAudioOptions();
         updateForceResizableOptions();
-        mWebViewAppPrefController.updateState(null);
+        Preference webViewAppPref = findPreference(mWebViewAppPrefController.getPreferenceKey());
+        mWebViewAppPrefController.updateState(webViewAppPref);
         updateWebViewMultiprocessOptions();
         updateOemUnlockOptions();
         if (mColorTemperaturePreference != null) {
@@ -2311,8 +2311,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 writeMockLocation();
                 updateMockLocation();
             }
-        } else if (requestCode == RESULT_WEBVIEW_APP) {
-            mWebViewAppPrefController.onActivityResult(resultCode, data);
         } else if (requestCode == REQUEST_CODE_ENABLE_OEM_UNLOCK) {
             if (resultCode == Activity.RESULT_OK) {
                 if (mEnableOemUnlock.isChecked()) {
@@ -2336,8 +2334,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return true;
         }
         if (mWebViewAppPrefController.handlePreferenceTreeClick(preference)) {
-            startActivityForResult(
-                    mWebViewAppPrefController.getActivityIntent(), RESULT_WEBVIEW_APP);
+            return true;
         }
 
         if (preference == mEnableAdb) {

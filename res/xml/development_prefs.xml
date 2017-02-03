@@ -76,7 +76,8 @@
 
     <Preference android:key="select_webview_provider"
         android:title="@string/select_webview_provider_title"
-        android:dialogTitle="@string/select_webview_provider_dialog_title" />
+        android:dialogTitle="@string/select_webview_provider_dialog_title"
+        android:fragment="com.android.settings.webview.WebViewAppPicker" />
 
     <SwitchPreference
         android:key="enable_webview_multiprocess"

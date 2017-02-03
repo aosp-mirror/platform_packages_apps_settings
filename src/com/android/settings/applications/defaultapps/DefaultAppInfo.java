@@ -29,25 +29,33 @@ import android.os.UserHandle;
 /**
  * Data model representing an app in DefaultAppPicker UI.
  */
-class DefaultAppInfo {
+public class DefaultAppInfo {
 
     public final int userId;
     public final ComponentName componentName;
     public final PackageItemInfo packageItemInfo;
     public final String summary;
+    // Description for why this item is disabled, if null, the item is enabled.
+    public final String disabledDescription;
 
     public DefaultAppInfo(int uid, ComponentName cn, String summary) {
         packageItemInfo = null;
         userId = uid;
         componentName = cn;
         this.summary = summary;
+        this.disabledDescription = null;
     }
 
-    public DefaultAppInfo(PackageItemInfo info) {
+    public DefaultAppInfo(PackageItemInfo info, String description) {
         userId = UserHandle.myUserId();
         packageItemInfo = info;
         componentName = null;
         summary = null;
+        this.disabledDescription = description;
+    }
+
+    public DefaultAppInfo(PackageItemInfo info) {
+        this(info, null);
     }
 
     public CharSequence loadLabel(PackageManager pm) {

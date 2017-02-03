@@ -16,56 +16,82 @@
 
 package com.android.settings.webview;
 
-import android.app.ListActivity;
+import static android.provider.Settings.ACTION_WEBVIEW_SETTINGS;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.RemoteException;
 import android.support.annotation.VisibleForTesting;
-import android.util.Log;
-import android.view.View;
-import android.webkit.WebViewFactory;
-import android.widget.ListView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.instrumentation.Instrumentable;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settings.R;
+import com.android.settings.applications.defaultapps.DefaultAppInfo;
+import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 
-public class WebViewAppPicker extends ListActivity implements Instrumentable {
-    private static final String TAG = WebViewAppPicker.class.getSimpleName();
-    private WebViewAppListAdapter mAdapter;
+import java.util.ArrayList;
+import java.util.List;
+
+public class WebViewAppPicker extends DefaultAppPickerFragment {
     private WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
 
-    private final VisibilityLoggerMixin mVisibilityLoggerMixin =
-            new VisibilityLoggerMixin(getMetricsCategory());
-
-    @Override
-    protected void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
+    private WebViewUpdateServiceWrapper getWebViewUpdateServiceWrapper() {
         if (mWebViewUpdateServiceWrapper == null) {
             setWebViewUpdateServiceWrapper(createDefaultWebViewUpdateServiceWrapper());
         }
-        mAdapter = new WebViewAppListAdapter(this, mWebViewUpdateServiceWrapper);
-        setListAdapter(mAdapter);
-
-        mVisibilityLoggerMixin.onAttach(this);
+        return mWebViewUpdateServiceWrapper;
     }
 
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        WebViewApplicationInfo app = mAdapter.getItem(position);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
-        if (mWebViewUpdateServiceWrapper.setWebViewProvider(app.info.packageName)) {
-            Intent intent = new Intent();
-            intent.setAction(app.info.packageName);
-            setResult(RESULT_OK, intent);
-        } else {
-            mWebViewUpdateServiceWrapper.showInvalidChoiceToast(this);
+        if (!mUserManager.isAdminUser()) {
+            getActivity().finish();
         }
-        finish();
     }
+
+    @Override
+    protected List<DefaultAppInfo> getCandidates() {
+        final List<DefaultAppInfo> packageInfoList = new ArrayList<DefaultAppInfo>();
+        List<ApplicationInfo> pkgs =
+                getWebViewUpdateServiceWrapper().getValidWebViewApplicationInfos(getContext());
+        for (ApplicationInfo ai : pkgs) {
+            packageInfoList.add(new DefaultAppInfo(ai,
+                      getDisabledReason(getWebViewUpdateServiceWrapper(),
+                              getContext(), ai.packageName)));
+        }
+        return packageInfoList;
+    }
+
+    @Override
+    protected String getDefaultAppKey() {
+        PackageInfo currentPackage = getWebViewUpdateServiceWrapper().getCurrentWebViewPackage();
+        return currentPackage == null ? null : currentPackage.packageName;
+    }
+
+    protected boolean setDefaultAppKey(String key) {
+        boolean success = getWebViewUpdateServiceWrapper().setWebViewProvider(key);
+        return success;
+    }
+
+    @Override
+    protected void onSelectionPerformed(boolean success) {
+        if (success) {
+            Activity activity = getActivity();
+            Intent intent = activity == null ? null : activity.getIntent();
+            if (intent != null && ACTION_WEBVIEW_SETTINGS.equals(intent.getAction())) {
+                // If this was started through ACTION_WEBVIEW_SETTINGS then return once we have
+                // chosen a new package.
+                getActivity().finish();
+            }
+        } else {
+            getWebViewUpdateServiceWrapper().showInvalidChoiceToast(getActivity());
+            updateCandidates();
+        }
+    }
+
 
     private WebViewUpdateServiceWrapper createDefaultWebViewUpdateServiceWrapper() {
         return new WebViewUpdateServiceWrapper();
@@ -77,19 +103,31 @@ public class WebViewAppPicker extends ListActivity implements Instrumentable {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mVisibilityLoggerMixin.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mVisibilityLoggerMixin.onPause();
-    }
-
-    @Override
     public int getMetricsCategory() {
         return MetricsEvent.WEBVIEW_IMPLEMENTATION;
+    }
+
+    /**
+     * Returns the reason why a package cannot be used as WebView implementation.
+     * This is either because of it being disabled, uninstalled, or hidden for any user.
+     */
+    @VisibleForTesting
+    String getDisabledReason(WebViewUpdateServiceWrapper webviewUpdateServiceWrapper,
+            Context context, String packageName) {
+        StringBuilder disabledReason = new StringBuilder();
+        List<UserPackageWrapper> userPackages =
+                webviewUpdateServiceWrapper.getPackageInfosAllUsers(context, packageName);
+        for (UserPackageWrapper userPackage : userPackages) {
+            if (!userPackage.isInstalledPackage()) {
+                // Package uninstalled/hidden
+                return context.getString(
+                        R.string.webview_uninstalled_for_user, userPackage.getUserInfo().name);
+            } else if (!userPackage.isEnabledPackage()) {
+                // Package disabled
+                return context.getString(
+                    R.string.webview_disabled_for_user, userPackage.getUserInfo().name);
+            }
+        }
+        return null;
     }
 }
