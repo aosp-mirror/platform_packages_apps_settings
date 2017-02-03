@@ -17,14 +17,12 @@
 package com.android.settings.applications;
 
 import android.annotation.Nullable;
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
-import android.os.Parcelable;
 import android.provider.Settings;
 import android.service.autofill.AutoFillService;
 import android.service.autofill.AutoFillServiceInfo;
@@ -130,11 +128,7 @@ public class DefaultAutoFillPreference extends AppListPreferenceWithSettings {
         for (ResolveInfo resolveInfo : resolveInfos) {
             ServiceInfo serviceInfo = resolveInfo.serviceInfo;
             AutoFillServiceInfo info = new AutoFillServiceInfo(pm, serviceInfo);
-            if (info.getParseError() == null) {
-                infos.add(info);
-            } else {
-                Log.i(TAG, "Invalid AutoFillService " + serviceInfo + ": " + info.getParseError());
-            }
+            infos.add(info);
         }
         return infos;
     }
