@@ -17,6 +17,8 @@
 package com.android.settings.backup;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -41,8 +43,13 @@ public class BackupSettingsActivity extends Activity {
                 Log.d(TAG,
                         "No manufacturer settings found, launching the backup settings directly");
             }
+            Intent intent = backupHelper.getIntentForBackupSettings();
+            // enable the activity before launching it
+            getPackageManager().setComponentEnabledSetting(intent.getComponent(),
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+
             // use startActivityForResult to let the activity check the caller signature
-            startActivityForResult(backupHelper.getIntentForBackupSettings(), 1);
+            startActivityForResult(intent, 1);
             finish();
         } else {
             if (Log.isLoggable(TAG, Log.DEBUG)) {
