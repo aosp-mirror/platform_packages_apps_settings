@@ -18,19 +18,14 @@ package com.android.settings.wifi;
 import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.util.AttributeSet;
+import android.widget.ImageView;
+import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 
 public class LongPressAccessPointPreference extends AccessPointPreference {
 
     private final Fragment mFragment;
-
-    // Used for dummy pref.
-    public LongPressAccessPointPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        mFragment = null;
-    }
 
     public LongPressAccessPointPreference(AccessPoint accessPoint, Context context,
             UserBadgeCache cache, boolean forSavedNetworks, Fragment fragment) {
@@ -52,5 +47,11 @@ public class LongPressAccessPointPreference extends AccessPointPreference {
             view.itemView.setTag(this);
             view.itemView.setLongClickable(true);
         }
+
+        ImageView iconImageView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
+        int imageSize = getContext().getResources().getDimensionPixelSize(
+                R.dimen.wifi_picker_icon_size);
+        iconImageView.setMinimumHeight(imageSize);
+        iconImageView.setMinimumWidth(imageSize);
     }
 }
