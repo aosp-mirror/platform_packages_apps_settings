@@ -18,11 +18,17 @@ package com.android.settings.accounts;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.testutils.shadow.ShadowAccountManager;
+import com.android.settings.testutils.shadow.ShadowContentResolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +57,8 @@ public class EmergencyInfoPreferenceControllerTest {
     private Context mContext;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
+    @Mock(answer = RETURNS_DEEP_STUBS)
+    private UserManager mUserManager;
 
     private EmergencyInfoPreferenceController mController;
 
@@ -109,6 +117,21 @@ public class EmergencyInfoPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         verify(mScreen, never()).removePreference(any(Preference.class));
+    }
+
+    @Test
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    public void updateState_shouldSetSummary() {
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_MANAGED_PROFILE));
+        when((Object) mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
+        final Preference preference = mock(Preference.class);
+
+        mController.updateState(preference);
+
+        verify(preference).setSummary(
+            mContext.getString(R.string.emergency_info_summary, "user 1"));
     }
 
     @Test

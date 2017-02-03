@@ -18,10 +18,14 @@ package com.android.settings.accounts;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.search.SearchIndexableRaw;
 
@@ -46,6 +50,12 @@ public class EmergencyInfoPreferenceController extends PreferenceController {
             data.screenTitle = res.getString(com.android.settings.R.string.emergency_info_title);
             rawData.add(data);
         }
+    }
+
+    public void updateState(Preference preference) {
+        UserInfo info = mContext.getSystemService(UserManager.class).getUserInfo(
+            UserHandle.myUserId());
+        preference.setSummary(mContext.getString(R.string.emergency_info_summary, info.name));
     }
 
     @Override

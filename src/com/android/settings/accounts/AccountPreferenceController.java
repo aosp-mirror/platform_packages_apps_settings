@@ -295,7 +295,8 @@ public class AccountPreferenceController extends PreferenceController
             mHelper.createAccessiblePreferenceCategory(mParent.getPreferenceManager().getContext());
         preferenceGroup.setOrder(mAccountProfileOrder++);
         if (isSingleProfile()) {
-            preferenceGroup.setTitle(R.string.account_for_section_header);
+            preferenceGroup.setTitle(context.getString(R.string.account_for_section_header,
+                userInfo.name));
             preferenceGroup.setContentDescription(
                 mContext.getString(R.string.account_settings));
         } else if (userInfo.isManagedProfile()) {

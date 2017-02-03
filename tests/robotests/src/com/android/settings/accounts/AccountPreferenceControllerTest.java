@@ -192,6 +192,25 @@ public class AccountPreferenceControllerTest {
 
     @Test
     @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
+    public void onResume_oneProfile_shouldSetAccountTitleWithUserName() {
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_MANAGED_PROFILE));
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
+        AccessiblePreferenceCategory preferenceGroup = mock(AccessiblePreferenceCategory.class);
+        when(mAccountHelper.createAccessiblePreferenceCategory(any(Context.class))).thenReturn(
+            preferenceGroup);
+
+        mController.onResume();
+
+        verify(preferenceGroup).setTitle(
+            mContext.getString(R.string.account_for_section_header, "user 1"));
+
+    }
+
+    @Test
+    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void onResume_noPreferenceScreen_shouldNotCrash() {
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
