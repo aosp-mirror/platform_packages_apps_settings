@@ -17,12 +17,16 @@
 package com.android.settings.language;
 
 import android.content.Context;
+import android.hardware.input.InputManager;
 import android.view.textservice.TextServicesManager;
 
+import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settings.core.lifecycle.LifecycleObserver;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,12 +39,15 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class LanguageAndRegionSettingsTest {
+public class LanguageAndInputSettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -49,14 +56,28 @@ public class LanguageAndRegionSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mock(InputManager.class));
         when(mContext.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE))
-                .thenReturn(mock(TextServicesManager.class));
+            .thenReturn(mock(TextServicesManager.class));
         mFragment = new TestFragment(mContext);
     }
 
     @Test
     public void testGetPreferenceScreenResId() {
-        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.language_and_region);
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.language_and_input);
+    }
+
+    @Test
+    public void testGetPreferenceControllers_shouldRegisterLifecycleObservers() {
+        final List<PreferenceController> controllers = mFragment.getPreferenceControllers(mContext);
+        int lifecycleObserverCount = 0;
+        for (PreferenceController controller : controllers) {
+            if (controller instanceof LifecycleObserver) {
+                lifecycleObserverCount++;
+            }
+        }
+        verify(mFragment.getLifecycle(), times(lifecycleObserverCount))
+                .addObserver(any(LifecycleObserver.class));
     }
 
     @Test
@@ -66,18 +87,31 @@ public class LanguageAndRegionSettingsTest {
         assertThat(controllers.isEmpty()).isFalse();
     }
 
-    public static class TestFragment extends LanguageAndRegionSettings {
+    /**
+     * Test fragment to expose lifecycle and context so we can verify behavior for observables.
+     */
+    public static class TestFragment extends LanguageAndInputSettings {
 
+        private Lifecycle mLifecycle;
         private Context mContext;
 
         public TestFragment(Context context) {
             mContext = context;
+            mLifecycle = mock(Lifecycle.class);
+            setAmbientDisplayConfig(mock(AmbientDisplayConfiguration.class));
         }
 
         @Override
         public Context getContext() {
             return mContext;
         }
-    }
 
+        @Override
+        protected Lifecycle getLifecycle() {
+            if (mLifecycle == null) {
+                return super.getLifecycle();
+            }
+            return mLifecycle;
+        }
+    }
 }

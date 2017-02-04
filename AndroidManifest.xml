@@ -3187,8 +3187,8 @@
         </activity>
 
         <!-- Alias for IME & Language in new IA. Should merge into TargetActivity when launch -->
-        <activity android:name=".Settings$LanguageAndRegionSettingsActivity"
-                  android:label="@string/language_and_region_settings_title"
+        <activity android:name=".Settings$LanguageAndInputSettingsActivity"
+                  android:label="@string/language_keyboard_settings_title"
                   android:icon="@drawable/ic_settings_language">
             <intent-filter android:priority="260">
                 <action android:name="com.android.settings.action.SETTINGS"/>
@@ -3196,24 +3196,9 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.language.LanguageAndRegionSettings"/>
+                       android:value="com.android.settings.language.LanguageAndInputSettings"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true"/>
-            <!-- Inherit intent-filter from LanguageSettingsActivity -->
-        </activity>
-
-        <activity android:name=".Settings$InputAndGestureSettingsActivity"
-                  android:label="@string/input_gesture_settings_title"
-                  android:icon="@drawable/ic_settings_language">
-            <intent-filter android:priority="255">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.inputmethod.InputAndGestureSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
             <!-- Inherit intent-filter from LanguageSettingsActivity -->
         </activity>
 
@@ -3267,6 +3252,8 @@
                        android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.DeviceInfoSettings" />
+            <meta-data android:name="com.android.settings.title"
+                android:resource="@string/about_settings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity-alias>
