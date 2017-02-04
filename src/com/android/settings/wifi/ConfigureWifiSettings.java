@@ -52,7 +52,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(5);
+        mProgressiveDisclosureMixin.setTileLimit(4);
     }
 
     @Override
