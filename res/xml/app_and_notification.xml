@@ -33,4 +33,10 @@
         android:key="dashboard_tile_placeholder"
         android:order="10"/>
 
+    <Preference
+        android:key="special_access"
+        android:fragment="com.android.settings.applications.SpecialAccessSettings"
+        android:title="@string/special_access"
+        android:order="20"/>
+
 </PreferenceScreen>
