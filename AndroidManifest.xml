@@ -3420,11 +3420,41 @@
 
         <!-- Quick Settings tiles for Developer Options -->
         <service
-            android:name=".qstile.DevelopmentModeTile"
-            android:label="@string/developer_tile"
-            android:icon="@drawable/ic_settings_development"
+            android:name=".qstile.DevelopmentTiles$ShowLayout"
+            android:label="@string/debug_layout"
+            android:icon="@drawable/tile_icon_show_layout"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:enabled="true">
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".qstile.DevelopmentTiles$GPUProfiling"
+            android:label="@string/track_frame_time"
+            android:icon="@drawable/tile_icon_graphics"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".qstile.DevelopmentTiles$ForceRTL"
+            android:label="@string/force_rtl_layout_all_locales"
+            android:icon="@drawable/tile_icon_force_rtl"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".qstile.DevelopmentTiles$AnimationSpeed"
+            android:label="@string/window_animation_scale_title"
+            android:icon="@drawable/tile_icon_animation_speed"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="false">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -3433,11 +3463,7 @@
             android:name=".qstile.DevelopmentTileConfigActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
-            android:label="@string/developer_tile">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
-            </intent-filter>
-        </activity>
+            android:label="@string/quick_settings_developer_tiles" />
 
         <activity android:name=".HelpTrampoline"
             android:exported="true"
