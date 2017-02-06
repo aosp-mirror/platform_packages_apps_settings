@@ -538,6 +538,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         }
     }
 
+    @Override
     public void onClick(View v) {
         doAction((Integer) v.getTag());
     }
