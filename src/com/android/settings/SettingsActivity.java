@@ -968,7 +968,8 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         // Enable/disable backup settings depending on whether the user is admin.
         setTileEnabled(new ComponentName(packageName,
-                BackupSettingsActivity.class.getName()), true, isAdmin);
+                BackupSettingsActivity.class.getName()), true,
+                isAdmin || Utils.isCarrierDemoUser(this));
         setTileEnabled(new ComponentName(packageName,
                 "com.android.settings.BackupResetDashboardAlias"), true, isAdmin);
 

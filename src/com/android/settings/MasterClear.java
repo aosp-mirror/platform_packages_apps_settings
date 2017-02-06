@@ -326,11 +326,13 @@ public class MasterClear extends OptionsMenuFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                getActivity(), UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId());
-        final UserManager um = UserManager.get(getActivity());
-        if (!um.isAdminUser() || RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
-                UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId())) {
+        final Context context = getContext();
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
+                UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId());
+        final UserManager um = UserManager.get(context);
+        final boolean disallow = !um.isAdminUser() || RestrictedLockUtils.hasBaseUserRestriction(
+                context, UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId());
+        if (disallow && !Utils.isCarrierDemoUser(context)) {
             return inflater.inflate(R.layout.master_clear_disallowed_screen, null);
         } else if (admin != null) {
             View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);

@@ -1245,4 +1245,13 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
+    public static boolean isCarrierDemoUser(Context context) {
+        final String carrierDemoModeSetting =
+                context.getString(com.android.internal.R.string.config_carrierDemoModeSetting);
+        return UserManager.isDeviceInDemoMode(context)
+                && getUserManager(context).isDemoUser()
+                && !TextUtils.isEmpty(carrierDemoModeSetting)
+                && (Settings.Secure.getInt(context.getContentResolver(),
+                        carrierDemoModeSetting, 0) == 1);
+    }
 }
