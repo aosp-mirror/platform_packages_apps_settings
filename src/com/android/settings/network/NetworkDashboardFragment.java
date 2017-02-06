@@ -20,6 +20,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -42,6 +44,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     private static final String TAG = "NetworkDashboardFrag";
 
+    private NetworkResetActionMenuController mNetworkResetController;
+
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SETTINGS_NETWORK_CATEGORY;
@@ -58,13 +62,25 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mNetworkResetController = new NetworkResetActionMenuController(context);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        mNetworkResetController.buildMenuItem(menu);
+    }
+
+    @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final AirplaneModePreferenceController airplaneModePreferenceController =
                 new AirplaneModePreferenceController(context, this /* fragment */);
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, this);
         final WifiMasterSwitchPreferenceController wifiPreferenceController =
-            new WifiMasterSwitchPreferenceController(context, mMetricsFeatureProvider);
+                new WifiMasterSwitchPreferenceController(context, mMetricsFeatureProvider);
         final Lifecycle lifecycle = getLifecycle();
         lifecycle.addObserver(airplaneModePreferenceController);
         lifecycle.addObserver(mobilePlanPreferenceController);
@@ -75,8 +91,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         controllers.add(new MobileNetworkPreferenceController(context));
         controllers.add(new TetherPreferenceController(context));
         controllers.add(new VpnPreferenceController(context));
-        controllers.add(new WifiCallingPreferenceController(context));
-        controllers.add(new NetworkResetPreferenceController(context));
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
         controllers.add(wifiPreferenceController);

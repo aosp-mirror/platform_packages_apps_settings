@@ -110,6 +110,7 @@ public class MasterSwitchPreference extends Preference {
     }
 
     private void init() {
+        setLayoutResource(R.layout.preference_master_switch);
         setWidgetLayoutResource(R.layout.preference_widget_master_switch);
     }
 }

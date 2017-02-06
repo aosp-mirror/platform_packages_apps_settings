@@ -17,13 +17,13 @@ package com.android.settings.network;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+import android.view.Menu;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.accounts.UserAndAccountDashboardFragment;
-import com.android.settings.dashboard.DashboardFragmentRegistry;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,10 +32,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -72,4 +76,16 @@ public class NetworkDashboardFragmentTest {
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
     }
+
+    @Test
+    public void testPrepareActionBar_networkResetShouldBeCreated() {
+        final NetworkResetActionMenuController resetController =
+                mock(NetworkResetActionMenuController.class);
+        ReflectionHelpers.setField(mFragment, "mNetworkResetController", resetController);
+
+        mFragment.onCreateOptionsMenu(null, null);
+
+        verify(resetController).buildMenuItem(any(Menu.class));
+    }
+
 }

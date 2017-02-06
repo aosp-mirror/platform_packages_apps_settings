@@ -23,7 +23,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -31,14 +30,12 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.network.MobileNetworkPreferenceController;
 import com.android.settings.network.MobilePlanPreferenceController;
-import com.android.settings.network.NetworkResetPreferenceController;
 import com.android.settings.network.ProxyPreferenceController;
 import com.android.settings.network.TetherPreferenceController;
 import com.android.settings.network.VpnPreferenceController;
@@ -47,7 +44,6 @@ import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,7 +65,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     private TetherPreferenceController mTetherPreferenceController;
     private MobileNetworkPreferenceController mMobileNetworkPreferenceController;
     private VpnPreferenceController mVpnPreferenceController;
-    private NetworkResetPreferenceController mNetworkResetPreferenceController;
     private WifiCallingPreferenceController mWifiCallingPreferenceController;
     private ProxyPreferenceController mProxyPreferenceController;
     private MobilePlanPreferenceController mMobilePlanPreferenceController;
@@ -150,7 +145,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         mMobileNetworkPreferenceController = new MobileNetworkPreferenceController(activity);
         mVpnPreferenceController = new VpnPreferenceController(activity);
         mWifiCallingPreferenceController = new WifiCallingPreferenceController(activity);
-        mNetworkResetPreferenceController = new NetworkResetPreferenceController(activity);
         mProxyPreferenceController = new ProxyPreferenceController(activity);
         mMobilePlanPreferenceController = new MobilePlanPreferenceController(activity, this);
         mNfcPreferenceController = new NfcPreferenceController(activity);
@@ -162,7 +156,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         mMobileNetworkPreferenceController.displayPreference(screen);
         mVpnPreferenceController.displayPreference(screen);
         mWifiCallingPreferenceController.displayPreference(screen);
-        mNetworkResetPreferenceController.displayPreference(screen);
         mProxyPreferenceController.displayPreference(screen);
         mMobilePlanPreferenceController.displayPreference(screen);
         mNfcPreferenceController.displayPreference(screen);
@@ -270,7 +263,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
                     new TetherPreferenceController(context).updateNonIndexableKeys(result);
                     new WifiCallingPreferenceController(context).updateNonIndexableKeys(result);
-                    new NetworkResetPreferenceController(context).updateNonIndexableKeys(result);
 
                     return result;
                 }
