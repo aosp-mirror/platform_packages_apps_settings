@@ -86,7 +86,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  * Gesture lock pattern settings.
  */
 public class SecuritySettings extends SettingsPreferenceFragment
-        implements OnPreferenceChangeListener, DialogInterface.OnClickListener, Indexable,
+        implements OnPreferenceChangeListener, Indexable,
         GearPreference.OnGearClickListener {
 
     private static final String TAG = "SecuritySettings";
@@ -120,7 +120,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_USER_CREDENTIALS = "user_credentials";
     private static final String KEY_RESET_CREDENTIALS = "credentials_reset";
     private static final String KEY_CREDENTIALS_INSTALL = "credentials_install";
-    private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
     private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
     private static final String KEY_TRUST_AGENT = "trust_agent";
@@ -137,8 +136,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = {
-            KEY_SHOW_PASSWORD, KEY_TOGGLE_INSTALL_APPLICATIONS, KEY_UNIFICATION,
-            KEY_VISIBLE_PATTERN_PROFILE
+            KEY_SHOW_PASSWORD, KEY_UNIFICATION, KEY_VISIBLE_PATTERN_PROFILE
     };
 
     // Only allow one trust agent on the platform.
@@ -164,9 +162,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private KeyStore mKeyStore;
     private RestrictedPreference mResetCredentials;
-
-    private RestrictedSwitchPreference mToggleAppInstallation;
-    private DialogInterface mWarnInstallApps;
 
     private boolean mIsAdmin;
 
@@ -397,26 +392,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Application install
         PreferenceGroup deviceAdminCategory = (PreferenceGroup)
                 root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
-        mToggleAppInstallation = (RestrictedSwitchPreference) findPreference(
-                KEY_TOGGLE_INSTALL_APPLICATIONS);
-        mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
-        // Side loading of apps.
-        // Disable for restricted profiles. For others, check if policy disallows it.
-        mToggleAppInstallation.setEnabled(!um.getUserInfo(MY_USER_ID).isRestricted());
-        if (RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
-                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, MY_USER_ID)
-                || RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
-                        UserManager.DISALLOW_INSTALL_APPS, MY_USER_ID)) {
-            mToggleAppInstallation.setEnabled(false);
-        }
-        if (mToggleAppInstallation.isEnabled()) {
-            mToggleAppInstallation.checkRestrictionAndSetDisabled(
-                    UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);
-            if (!mToggleAppInstallation.isDisabledByAdmin()) {
-                mToggleAppInstallation.checkRestrictionAndSetDisabled(
-                        UserManager.DISALLOW_INSTALL_APPS);
-            }
-        }
 
         // Advanced Security features
         PreferenceGroup advancedCategory =
@@ -600,55 +575,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return result;
     }
 
-    private boolean isNonMarketAppsAllowed() {
-        return Settings.Global.getInt(getContentResolver(),
-                                      Settings.Global.INSTALL_NON_MARKET_APPS, 0) > 0;
-    }
-
-    private void setNonMarketAppsAllowed(boolean enabled) {
-        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        if (um.hasUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES)) {
-            return;
-        }
-        // Change the system setting
-        Settings.Global.putInt(getContentResolver(), Settings.Global.INSTALL_NON_MARKET_APPS,
-                                enabled ? 1 : 0);
-    }
-
-    private void warnAppInstallation() {
-        // TODO: DialogFragment?
-        mWarnInstallApps = new AlertDialog.Builder(getActivity()).setTitle(
-                getResources().getString(R.string.error_title))
-                .setIcon(com.android.internal.R.drawable.ic_dialog_alert)
-                .setMessage(getResources().getString(R.string.install_all_warning))
-                .setPositiveButton(android.R.string.yes, this)
-                .setNegativeButton(android.R.string.no, this)
-                .show();
-    }
-
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-        if (dialog == mWarnInstallApps) {
-            boolean turnOn = which == DialogInterface.BUTTON_POSITIVE;
-            setNonMarketAppsAllowed(turnOn);
-            if (mToggleAppInstallation != null) {
-                mToggleAppInstallation.setChecked(turnOn);
-            }
-        }
-    }
-
     @Override
     public void onGearClick(GearPreference p) {
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(p.getKey())) {
             startFragment(this, SecuritySubSettings.class.getName(), 0, 0, null);
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mWarnInstallApps != null) {
-            mWarnInstallApps.dismiss();
         }
     }
 
@@ -857,15 +787,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     ((Boolean) value) ? 1 : 0);
             lockPatternUtils.setVisiblePasswordEnabled((Boolean) value, MY_USER_ID);
-        } else if (KEY_TOGGLE_INSTALL_APPLICATIONS.equals(key)) {
-            if ((Boolean) value) {
-                mToggleAppInstallation.setChecked(false);
-                warnAppInstallation();
-                // Don't change Switch status until user makes choice in dialog, so return false.
-                result = false;
-            } else {
-                setNonMarketAppsAllowed(false);
-            }
         }
         return result;
     }
