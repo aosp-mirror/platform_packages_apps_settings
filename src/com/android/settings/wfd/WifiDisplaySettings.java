@@ -61,6 +61,7 @@ import com.android.internal.app.MediaRouteDialogPresenter;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.SummaryLoader;
 
 /**
  * The Settings screen for WifiDisplay configuration and connection management.
@@ -744,4 +745,71 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
             return true;
         }
     }
+
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+        private final MediaRouter mRouter;
+        private final MediaRouter.Callback mRouterCallback = new MediaRouter.SimpleCallback() {
+            @Override
+            public void onRouteSelected(MediaRouter router, int type, RouteInfo info) {
+                updateSummary();
+            }
+
+            @Override
+            public void onRouteUnselected(MediaRouter router, int type, RouteInfo info) {
+                updateSummary();
+            }
+
+            @Override
+            public void onRouteAdded(MediaRouter router, RouteInfo info) {
+                updateSummary();
+            }
+
+            @Override
+            public void onRouteRemoved(MediaRouter router, RouteInfo info) {
+                updateSummary();
+            }
+
+            @Override
+            public void onRouteChanged(MediaRouter router, RouteInfo info) {
+                updateSummary();
+            }
+        };
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+            mRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                mRouter.addCallback(MediaRouter.ROUTE_TYPE_REMOTE_DISPLAY, mRouterCallback);
+                updateSummary();
+            } else {
+                mRouter.removeCallback(mRouterCallback);
+            }
+        }
+
+        private void updateSummary() {
+            String summary = mContext.getString(R.string.disconnected);
+
+            final int routeCount = mRouter.getRouteCount();
+            for (int i = 0; i < routeCount; i++) {
+                final MediaRouter.RouteInfo route = mRouter.getRouteAt(i);
+                if (route.matchesTypes(MediaRouter.ROUTE_TYPE_REMOTE_DISPLAY)
+                        && route.isSelected() && !route.isConnecting()) {
+                    summary = mContext.getString(R.string.wifi_display_status_connected);
+                    break;
+                }
+            }
+            mSummaryLoader.setSummary(this, summary);
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 }
