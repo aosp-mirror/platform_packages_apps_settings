@@ -2130,6 +2130,11 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter android:priority="6">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.device" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wfd.WifiDisplaySettings" />
         </activity>
@@ -3268,17 +3273,6 @@
                        android:value="com.android.settings.category.ia.development" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.ProcessStatsSummary" />
-        </activity-alias>
-
-        <activity-alias android:name="CastDashboardAlias"
-                        android:targetActivity="Settings$WifiDisplaySettingsActivity">
-            <intent-filter android:priority="6">
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.wfd.WifiDisplaySettings" />
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.device" />
         </activity-alias>
 
         <activity-alias android:name="PrintDashboardAlias"
