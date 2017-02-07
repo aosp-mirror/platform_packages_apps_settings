@@ -547,6 +547,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 break;
             case LIST_TYPE_MANAGE_SOURCES:
                 startAppInfoFragment(ExternalSourcesDetails.class, R.string.install_other_apps);
+                break;
             case LIST_TYPE_GAMES:
                 startAppInfoFragment(AppStorageSettings.class, R.string.game_storage_settings);
                 break;
