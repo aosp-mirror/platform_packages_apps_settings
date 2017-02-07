@@ -1139,7 +1139,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         public void onPackageSizeChanged(String packageName) {
             for (int i = 0; i < mActive.size(); i++) {
                 AppViewHolder holder = (AppViewHolder) mActive.get(i).getTag();
-                if (holder == null) {
+                if (holder == null || holder.entry == null) {
                     continue;
                 }
                 ApplicationInfo info = holder.entry.info;
