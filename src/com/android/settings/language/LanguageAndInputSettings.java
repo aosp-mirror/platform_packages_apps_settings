@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.inputmethod;
+package com.android.settings.language;
 
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
+import android.speech.tts.TtsEngines;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
@@ -31,6 +32,8 @@ import com.android.settings.gestures.DoubleTapPowerPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.DoubleTwistPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
+import com.android.settings.inputmethod.GameControllerPreferenceController;
+import com.android.settings.inputmethod.SpellCheckerPreferenceController;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -39,15 +42,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class InputAndGestureSettings extends DashboardFragment {
+public class LanguageAndInputSettings extends DashboardFragment {
 
-    private static final String TAG = "InputAndGestureSettings";
+    private static final String TAG = "LangAndInputSettings";
 
     private AmbientDisplayConfiguration mAmbientDisplayConfig;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_INPUT_CATEGORY;
+        return MetricsProto.MetricsEvent.SETTINGS_LANGUAGE_CATEGORY;
     }
 
     @Override
@@ -56,13 +59,26 @@ public class InputAndGestureSettings extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mProgressiveDisclosureMixin.setTileLimit(2);
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.input_and_gesture;
+        return R.xml.language_and_input;
     }
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final Lifecycle lifecycle = getLifecycle();
+        final List<PreferenceController> controllers = new ArrayList<>();
+        // Language
+        controllers.add(new PhoneLanguagePreferenceController(context));
+        controllers.add(new SpellCheckerPreferenceController(context));
+        controllers.add(new UserDictionaryPreferenceController(context));
+        controllers.add(new TtsPreferenceController(context, new TtsEngines(context)));
+        // Input
         final GameControllerPreferenceController gameControllerPreferenceController
                 = new GameControllerPreferenceController(context);
         getLifecycle().addObserver(gameControllerPreferenceController);
@@ -70,7 +86,6 @@ public class InputAndGestureSettings extends DashboardFragment {
         if (mAmbientDisplayConfig == null) {
             mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
         }
-        final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(gameControllerPreferenceController);
         // Gestures
 
@@ -99,7 +114,7 @@ public class InputAndGestureSettings extends DashboardFragment {
                         return null;
                     }
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.input_and_gesture;
+                    sir.xmlResId = R.xml.language_and_input;
                     return Arrays.asList(sir);
                 }
             };
