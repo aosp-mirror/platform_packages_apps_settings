@@ -21,7 +21,6 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings;
-import android.util.ArrayMap;
 
 import java.util.Map;
 
@@ -39,7 +38,7 @@ public class InlineSwitchPayload extends InlinePayload {
     public final Map<Integer, Boolean> valueMap;
 
     public InlineSwitchPayload(String newUri, @SettingsSource int settingsSource,
-            ArrayMap<Integer, Boolean> map) {
+            Map<Integer, Boolean> map) {
         super(newUri, PayloadType.INLINE_SWITCH, settingsSource);
         valueMap = map;
     }
@@ -91,6 +90,16 @@ public class InlineSwitchPayload extends InlinePayload {
             case SettingsSource.SECURE:
                 settingsValue = Settings.Secure.getInt(context.getContentResolver(),
                         settingsUri, 0);
+                break;
+            case SettingsSource.SYSTEM:
+                settingsValue = Settings.System.getInt(context.getContentResolver(),
+                        settingsUri, 0);
+                break;
+
+            case SettingsSource.GLOBAL:
+                settingsValue = Settings.Global.getInt(context.getContentResolver(),
+                        settingsUri, 0);
+                break;
         }
 
         if (settingsValue == -1) {
@@ -126,10 +135,13 @@ public class InlineSwitchPayload extends InlinePayload {
 
         switch(settingSource) {
             case SettingsSource.GLOBAL:
+                Settings.Global.putInt(context.getContentResolver(), settingsUri, switchValue);
                 return;
             case SettingsSource.SECURE:
                 Settings.Secure.putInt(context.getContentResolver(), settingsUri, switchValue);
+                return;
             case SettingsSource.SYSTEM:
+                Settings.System.putInt(context.getContentResolver(), settingsUri, switchValue);
                 return;
             case SettingsSource.UNKNOWN:
                 return;

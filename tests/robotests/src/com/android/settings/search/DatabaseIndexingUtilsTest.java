@@ -24,6 +24,7 @@ import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.DoubleTwistPreferenceController;
@@ -81,19 +82,11 @@ public class DatabaseIndexingUtilsTest {
 
     @Test
     public void testGetPreferenceControllerUriMap_CompatibleClass_ReturnsValidMap() {
-        String className = "com.android.settings.gestures.GestureSettings";
+        String className = "com.android.settings.DisplaySettings";
 
         Map map = DatabaseIndexingUtils.getPreferenceControllerUriMap(className, mContext);
-        assertThat(map.get("gesture_double_twist"))
-                .isInstanceOf(DoubleTwistPreferenceController.class);
-        assertThat(map.get("gesture_swipe_down_fingerprint"))
-                .isInstanceOf(SwipeToNotificationPreferenceController.class);
-        assertThat(map.get("gesture_double_tap_screen"))
-                .isInstanceOf(DoubleTapScreenPreferenceController.class);
-        assertThat(map.get("gesture_pick_up"))
-                .isInstanceOf(PickupGesturePreferenceController.class);
-        assertThat(map.get("gesture_double_tap_power"))
-                .isInstanceOf(DoubleTapPowerPreferenceController.class);
+        assertThat(map.get("auto_brightness"))
+                .isInstanceOf(AutoBrightnessPreferenceController.class);
     }
 
     @Test

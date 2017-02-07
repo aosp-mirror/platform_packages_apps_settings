@@ -183,5 +183,12 @@ public class DisplaySettings extends DashboardFragment {
 
                     return result;
                 }
+
+                @Override
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    final List<PreferenceController> controllers = new ArrayList<>();
+                    controllers.add(new AutoBrightnessPreferenceController(context));
+                    return controllers;
+                }
             };
 }
