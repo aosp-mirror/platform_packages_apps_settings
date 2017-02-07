@@ -20,6 +20,8 @@
         android:title="@string/wifi_settings"
         settings:keywords="@string/keywords_wifi">
 
+    <PreferenceCategory android:key="connected_access_point" />
+
     <PreferenceCategory android:key="access_points"/>
 
     <PreferenceCategory android:key="additional_settings">
