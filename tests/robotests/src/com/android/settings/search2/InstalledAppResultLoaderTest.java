@@ -188,4 +188,147 @@ public class InstalledAppResultLoaderTest {
         // Then partial match
         assertThat(results.get(1).title).isNotEqualTo(query);
     }
+
+    @Test
+    public void query_normalWord_MatchPrefix() {
+        final String query = "ba";
+        final String packageName = "Bananas";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_CapitalCase_DoestMatchSecondWord() {
+        final String query = "Apples";
+        final String packageName = "BananasApples";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void query_TwoWords_MatchesFirstWord() {
+        final String query = "Banana";
+        final String packageName = "Bananas Apples";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_TwoWords_MatchesSecondWord() {
+        final String query = "Apple";
+        final String packageName = "Bananas Apples";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_ThreeWords_MatchesThirdWord() {
+        final String query = "Pear";
+        final String packageName = "Bananas Apples Pears";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_DoubleSpacedWords_MatchesSecondWord() {
+        final String query = "Apple";
+        final String packageName = "Bananas  Apples";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_SpecialChar_MatchesSecondWord() {
+        final String query = "Apple";
+        final String packageName = "Bananas & Apples";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_TabSeparated_MatchesSecondWord() {
+        final String query = "Apple";
+        final String packageName = "Bananas\tApples";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_LeadingNumber_MatchesWord() {
+        final String query = "4";
+        final String packageName = "4Bananas";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_FirstWordPrefixOfQuery_NoMatch() {
+        final String query = "Bananass";
+        final String packageName = "Bananas Apples";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void query_QueryLongerThanAppName_NoMatch() {
+        final String query = "BananasApples";
+        final String packageName = "Bananas";
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
+                                0 /* targetSdkVersion */)));
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(0);
+    }
 }
