@@ -14,8 +14,10 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/wifi_configure_titlebar">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/wifi_configure_titlebar">
 
     <SwitchPreference
             android:key="enable_wifi_wakeup"
@@ -52,6 +54,12 @@
             <extra android:name="install_as_uid" android:value="1010"/>
         </intent>
     </Preference>
+
+    <Preference
+        android:key="wifi_calling_settings"
+        android:title="@string/wifi_calling_settings_title"
+        android:fragment="com.android.settings.WifiCallingSettings"
+        settings:keywords="@string/keywords_wifi_calling"/>
 
     <Preference
             android:key="wifi_direct"

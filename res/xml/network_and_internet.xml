@@ -26,8 +26,8 @@
         android:icon="@drawable/ic_settings_wireless"
         android:order="-30">
         <intent
-          android:action="android.settings.WIFI_SETTINGS"
-          android:targetClass="Settings$WifiSettingsActivity" />
+            android:action="android.settings.WIFI_SETTINGS"
+            android:targetClass="Settings$WifiSettingsActivity"/>
     </com.android.settings.widget.MasterSwitchPreference>
 
     <SwitchPreference
@@ -78,23 +78,8 @@
         settings:useAdminDisabledSummary="true"/>
 
     <Preference
-        android:key="wifi_calling_settings"
-        android:title="@string/wifi_calling_settings_title"
-        android:fragment="com.android.settings.WifiCallingSettings"
-        settings:keywords="@string/keywords_wifi_calling"/>
-
-    <Preference
         android:fragment="com.android.settings.ProxySelector"
         android:key="proxy_settings"
         android:title="@string/proxy_settings_title"/>
 
-    <!-- Network reset -->
-    <com.android.settingslib.RestrictedPreference
-        android:key="network_reset"
-        android:title="@string/reset_network_title"
-        android:icon="@drawable/ic_settings_backup_restore"
-        settings:keywords="@string/keywords_network_reset"
-        android:fragment="com.android.settings.ResetNetwork"
-        settings:userRestriction="no_network_reset"
-        settings:useAdminDisabledSummary="true"/>
 </PreferenceScreen>
