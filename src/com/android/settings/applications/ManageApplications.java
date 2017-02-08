@@ -331,7 +331,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mApplications.setExtraViewController(new MusicViewHolderController(
                         context,
                         new StorageStatsSource(context),
-                        mVolumeUuid));
+                        mVolumeUuid,
+                        UserHandle.of(UserHandle.getUserId(mCurrentUid))));
             }
             mListView.setAdapter(mApplications);
             mListView.setRecyclerListener(mApplications);
@@ -870,6 +871,12 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         public void setExtraViewController(FileViewHolderController extraViewController) {
             mExtraViewController = extraViewController;
+            mBgHandler.post(() -> {
+                mExtraViewController.queryStats();
+                mFgHandler.post(() -> {
+                    onExtraViewCompleted();
+                });
+            });
         }
 
         public void resume(int sort) {
@@ -955,10 +962,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 default:
                     comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
                     break;
-            }
-
-            if (mExtraViewController != null) {
-                mExtraViewController.queryStats();
             }
 
             filterObj = new CompoundFilter(filterObj, ApplicationsState.FILTER_NOT_HIDE);
@@ -1176,6 +1179,23 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             if (mLastSortMode == R.id.sort_order_size) {
                 rebuild(false);
             }
+        }
+
+        public void onExtraViewCompleted() {
+            int size = mActive.size();
+            // If we have no elements, don't do anything.
+            if (size < 1) {
+                return;
+            }
+            AppViewHolder holder = (AppViewHolder) mActive.get(size - 1).getTag();
+
+            // HACK: The extra view has no AppEntry -- and should be the only element without one.
+            // Thus, if the last active element has no AppEntry, it is the extra view.
+            if (holder == null || holder.entry != null) {
+                return;
+            }
+
+            mExtraViewController.setupView(holder);
         }
 
         public int getCount() {
