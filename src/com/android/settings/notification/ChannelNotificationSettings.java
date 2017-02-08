@@ -156,7 +156,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean lights = (Boolean) newValue;
-                mChannel.setLights(lights);
+                mChannel.enableLights(lights);
                 mChannel.lockFields(NotificationChannel.USER_LOCKED_LIGHTS);
                 mBackend.updateChannel(mPkg, mUid, mChannel);
                 return true;
