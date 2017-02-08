@@ -23,6 +23,16 @@
         android:selectable="false"/>
 
     <Preference
+        android:key="notification_settings"
+        android:title="@string/notifications_label"
+        android:selectable="true"/>
+
+    <Preference
+        android:key="permission_settings"
+        android:title="@string/permissions_label"
+        android:selectable="true"/>
+
+    <Preference
         android:key="storage_settings"
         android:title="@string/storage_settings"
         android:selectable="true"/>
@@ -33,23 +43,13 @@
         android:selectable="true"/>
 
     <Preference
-        android:key="permission_settings"
-        android:title="@string/permissions_label"
-        android:selectable="true"/>
-
-    <Preference
-        android:key="notification_settings"
-        android:title="@string/notifications_label"
+        android:key="battery"
+        android:title="@string/power_usage_summary_title"
         android:selectable="true"/>
 
     <Preference
         android:key="preferred_settings"
         android:title="@string/launch_by_default"
-        android:selectable="true"/>
-
-    <Preference
-        android:key="battery"
-        android:title="@string/power_usage_summary_title"
         android:selectable="true"/>
 
     <Preference
