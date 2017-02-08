@@ -176,15 +176,22 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         return null;
     }
 
-    private PackageInfo findPackageInfo(String pkg) {
-        if (pkg == null) {
-            return null;
+    protected String getImportanceSummary(int importance) {
+        switch (importance) {
+            case NotificationManager.IMPORTANCE_UNSPECIFIED:
+                return getContext().getString(R.string.notification_importance_unspecified);
+            case NotificationManager.IMPORTANCE_NONE:
+                return getContext().getString(R.string.notification_importance_blocked);
+            case NotificationManager.IMPORTANCE_MIN:
+                return getContext().getString(R.string.notification_importance_min);
+            case NotificationManager.IMPORTANCE_LOW:
+                return getContext().getString(R.string.notification_importance_low);
+            case NotificationManager.IMPORTANCE_DEFAULT:
+                return getContext().getString(R.string.notification_importance_default);
+            case NotificationManager.IMPORTANCE_HIGH:
+            case NotificationManager.IMPORTANCE_MAX:
+            default:
+                return getContext().getString(R.string.notification_importance_high);
         }
-        try {
-            return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
-        } catch (NameNotFoundException e) {
-            Log.w(TAG, "Failed to load package " + pkg, e);
-        }
-        return null;
     }
 }
