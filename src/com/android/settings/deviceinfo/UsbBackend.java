@@ -24,6 +24,7 @@ import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 
 public class UsbBackend {
 
@@ -41,7 +42,6 @@ public class UsbBackend {
     private final boolean mRestrictedBySystem;
     private final boolean mMidi;
 
-    private UserManager mUserManager;
     private UsbManager mUsbManager;
     private UsbPort mPort;
     private UsbPortStatus mPortStatus;
@@ -49,20 +49,26 @@ public class UsbBackend {
     private boolean mIsUnlocked;
 
     public UsbBackend(Context context) {
+        this(context, new UserRestrictionUtil(context));
+    }
+
+    @VisibleForTesting
+    UsbBackend(Context context, UserRestrictionUtil userRestrictionUtil) {
         Intent intent = context.registerReceiver(null,
                 new IntentFilter(UsbManager.ACTION_USB_STATE));
         mIsUnlocked = intent == null ?
                 false : intent.getBooleanExtra(UsbManager.USB_DATA_UNLOCKED, false);
 
-        mUserManager = UserManager.get(context);
         mUsbManager = context.getSystemService(UsbManager.class);
 
-        mRestricted = mUserManager.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER);
-        mRestrictedBySystem = mUserManager.hasBaseUserRestriction(
-                UserManager.DISALLOW_USB_FILE_TRANSFER, UserHandle.of(UserHandle.myUserId()));
+        mRestricted = userRestrictionUtil.isUsbFileTransferRestricted();
+        mRestrictedBySystem = userRestrictionUtil.isUsbFileTransferRestrictedBySystem();
         mMidi = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI);
 
         UsbPort[] ports = mUsbManager.getPorts();
+        if (ports == null) {
+            return;
+        }
         // For now look for a connected port, in the future we should identify port in the
         // notification and pick based on that.
         final int N = ports.length;
@@ -171,5 +177,23 @@ public class UsbBackend {
         }
         // No port, support sink modes only.
         return (mode & MODE_POWER_MASK) != MODE_POWER_SOURCE;
+    }
+
+    // Wrapper class to enable testing with UserManager APIs
+    public static class UserRestrictionUtil {
+        private UserManager mUserManager;
+
+        public UserRestrictionUtil(Context context) {
+            mUserManager = UserManager.get(context);
+        }
+
+        public boolean isUsbFileTransferRestricted() {
+            return mUserManager.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER);
+        }
+
+        public boolean isUsbFileTransferRestrictedBySystem() {
+            return mUserManager.hasBaseUserRestriction(
+                UserManager.DISALLOW_USB_FILE_TRANSFER, UserHandle.of(UserHandle.myUserId()));
+        }
     }
 }
