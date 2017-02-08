@@ -52,12 +52,6 @@
                 android:persistent="false"
                 android:fragment="com.android.settings.DeviceAdminSettings"/>
 
-        <com.android.settingslib.RestrictedSwitchPreference android:key="toggle_install_applications"
-                android:title="@string/install_applications"
-                android:summaryOff="@string/install_unknown_applications"
-                android:summaryOn="@string/install_unknown_applications"
-                settings:useAdditionalSummary="true" />
-
     </PreferenceCategory>
 
     <PreferenceCategory android:key="credentials_management"
