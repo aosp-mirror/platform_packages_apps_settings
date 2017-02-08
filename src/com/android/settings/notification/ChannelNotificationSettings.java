@@ -230,12 +230,12 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         List<String> values = new ArrayList<>();;
         for (int i = 0; i < numImportances; i++) {
             int importance = i + 1;
-            summaries.add(getSummary(importance));
+            summaries.add(getImportanceSummary(importance));
             values.add(String.valueOf(importance));
         }
         if (NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
             // Add option to reset to letting the app decide
-            summaries.add(getSummary(NotificationManager.IMPORTANCE_UNSPECIFIED));
+            summaries.add(getImportanceSummary(NotificationManager.IMPORTANCE_UNSPECIFIED));
             values.add(String.valueOf(NotificationManager.IMPORTANCE_UNSPECIFIED));
         }
         mImportance.setEntryValues(values.toArray(new String[0]));
@@ -254,25 +254,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                 return true;
             }
         });
-    }
-
-    private String getSummary(int importance) {
-        switch (importance) {
-            case NotificationManager.IMPORTANCE_UNSPECIFIED:
-                return getContext().getString(R.string.notification_importance_unspecified);
-            case NotificationManager.IMPORTANCE_NONE:
-                return getContext().getString(R.string.notification_importance_blocked);
-            case NotificationManager.IMPORTANCE_MIN:
-                return getContext().getString(R.string.notification_importance_min);
-            case NotificationManager.IMPORTANCE_LOW:
-                return getContext().getString(R.string.notification_importance_low);
-            case NotificationManager.IMPORTANCE_DEFAULT:
-                return getContext().getString(R.string.notification_importance_default);
-            case NotificationManager.IMPORTANCE_HIGH:
-            case NotificationManager.IMPORTANCE_MAX:
-            default:
-                return getContext().getString(R.string.notification_importance_high);
-        }
     }
 
     protected void setupPriorityPref(boolean priority) {
