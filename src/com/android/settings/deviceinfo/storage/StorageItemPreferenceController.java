@@ -26,12 +26,12 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.VolumeInfo;
-import android.provider.DocumentsContract;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
@@ -39,6 +39,7 @@ import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
@@ -129,6 +130,8 @@ public class StorageItemPreferenceController extends PreferenceController
                 break;
             case FILES_KEY:
                 intent = getFilesIntent();
+                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(
+                        mContext, MetricsEvent.STORAGE_FILES);
                 break;
         }
 

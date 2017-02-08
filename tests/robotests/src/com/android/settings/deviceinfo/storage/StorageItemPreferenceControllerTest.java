@@ -18,7 +18,10 @@ package com.android.settings.deviceinfo.storage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,19 +30,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
-import android.provider.DocumentsContract;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.ManageApplications;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.Before;
@@ -48,7 +52,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -61,7 +64,6 @@ public class StorageItemPreferenceControllerTest {
      *  kilobyte.
      */
     private static long KILOBYTE = 1024L;
-
     private Context mContext;
     private VolumeInfo mVolume;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -70,12 +72,17 @@ public class StorageItemPreferenceControllerTest {
     private StorageVolumeProvider mSvp;
     private StorageItemPreferenceController mController;
     private StorageItemPreferenceAlternate mPreference;
+    private FakeFeatureFactory mFakeFeatureFactory;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        FakeFeatureFactory.setupForTest(mContext);
+        mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
         mVolume = new VolumeInfo("id", 0, null, "id");
-        mContext = RuntimeEnvironment.application;
         // Note: null is passed as the Lifecycle because we are handling it outside of the normal
         //       Settings fragment lifecycle for test purposes.
         mController = new StorageItemPreferenceController(mContext, mFragment, mVolume, mSvp);
@@ -158,6 +165,8 @@ public class StorageItemPreferenceControllerTest {
         Intent browseIntent = mVolume.buildBrowseIntent();
         assertThat(intent.getAction()).isEqualTo(browseIntent.getAction());
         assertThat(intent.getData()).isEqualTo(browseIntent.getData());
+        verify(mMetricsFeatureProvider, times(1)).action(
+                any(Context.class), eq(MetricsEvent.STORAGE_FILES));
     }
 
     @Test
@@ -188,17 +197,17 @@ public class StorageItemPreferenceControllerTest {
         StorageItemPreferenceAlternate files = new StorageItemPreferenceAlternate(mContext);
         PreferenceScreen screen = mock(PreferenceScreen.class);
         when(screen.findPreference(
-                Mockito.eq(StorageItemPreferenceController.AUDIO_KEY))).thenReturn(audio);
+                eq(StorageItemPreferenceController.AUDIO_KEY))).thenReturn(audio);
         when(screen.findPreference(
-                Mockito.eq(StorageItemPreferenceController.PHOTO_KEY))).thenReturn(image);
+                eq(StorageItemPreferenceController.PHOTO_KEY))).thenReturn(image);
         when(screen.findPreference(
-                Mockito.eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
+                eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
         when(screen.findPreference(
-                Mockito.eq(StorageItemPreferenceController.OTHER_APPS_KEY))).thenReturn(apps);
+                eq(StorageItemPreferenceController.OTHER_APPS_KEY))).thenReturn(apps);
         when(screen.findPreference(
-                Mockito.eq(StorageItemPreferenceController.SYSTEM_KEY))).thenReturn(system);
+                eq(StorageItemPreferenceController.SYSTEM_KEY))).thenReturn(system);
         when(screen.findPreference(
-                Mockito.eq(StorageItemPreferenceController.FILES_KEY))).thenReturn(files);
+                eq(StorageItemPreferenceController.FILES_KEY))).thenReturn(files);
         mController.displayPreference(screen);
 
         mController.setSystemSize(KILOBYTE * 6);

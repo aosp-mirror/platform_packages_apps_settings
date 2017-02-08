@@ -443,8 +443,12 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_NOTIFICATION:
                 return MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS;
             case LIST_TYPE_STORAGE:
-            case LIST_TYPE_GAMES:
+                if (mStorageType == STORAGE_TYPE_MUSIC) {
+                    return MetricsEvent.APPLICATIONS_STORAGE_MUSIC;
+                }
                 return MetricsEvent.APPLICATIONS_STORAGE_APPS;
+            case LIST_TYPE_GAMES:
+                return MetricsEvent.APPLICATIONS_STORAGE_GAMES;
             case LIST_TYPE_USAGE_ACCESS:
                 return MetricsEvent.USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
