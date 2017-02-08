@@ -25,7 +25,6 @@ import static org.mockito.Mockito.when;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
 import android.provider.DocumentsContract;
@@ -41,7 +40,6 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.ManageApplications;
-import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.Before;
@@ -54,8 +52,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import java.util.HashMap;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -82,7 +78,7 @@ public class StorageItemPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         // Note: null is passed as the Lifecycle because we are handling it outside of the normal
         //       Settings fragment lifecycle for test purposes.
-        mController = new StorageItemPreferenceController(mContext, null, mFragment, mVolume, mSvp);
+        mController = new StorageItemPreferenceController(mContext, mFragment, mVolume, mSvp);
         mPreference = new StorageItemPreferenceAlternate(mContext);
 
         // Inflate the preference and the widget.
@@ -205,23 +201,23 @@ public class StorageItemPreferenceControllerTest {
                 Mockito.eq(StorageItemPreferenceController.FILES_KEY))).thenReturn(files);
         mController.displayPreference(screen);
 
-        StorageMeasurement.MeasurementDetails details = new StorageMeasurement.MeasurementDetails();
-        details.appsSize.put(0, KILOBYTE);
-        HashMap<String, Long> mediaSizes = new HashMap<>();
-        mediaSizes.put(Environment.DIRECTORY_PICTURES, KILOBYTE * 2);
-        mediaSizes.put(Environment.DIRECTORY_MOVIES, KILOBYTE * 3);
-        mediaSizes.put(Environment.DIRECTORY_MUSIC, KILOBYTE * 4);
-        mediaSizes.put(Environment.DIRECTORY_DOWNLOADS, KILOBYTE * 5);
-        details.mediaSize.put(0, mediaSizes);
         mController.setSystemSize(KILOBYTE * 6);
-        mController.onDetailsChanged(details);
-        AppsAsyncLoader.AppsStorageResult result = new AppsAsyncLoader.AppsStorageResult();
+        StorageAsyncLoader.AppsStorageResult result = new StorageAsyncLoader.AppsStorageResult();
+        result.gamesSize = KILOBYTE * 8;
+        result.musicAppsSize = KILOBYTE * 4;
+        result.otherAppsSize = KILOBYTE * 9;
+        result.externalStats = new StorageStatsSource.ExternalStorageStats(
+                KILOBYTE * 50, // total
+                KILOBYTE * 10, // audio
+                KILOBYTE * 15, // video
+                KILOBYTE * 20); // image
+
         result.gamesSize = KILOBYTE * 8;
         result.otherAppsSize = KILOBYTE * 9;
         mController.onLoadFinished(null, result);
 
-        assertThat(audio.getSummary().toString()).isEqualTo("4.00KB");
-        assertThat(image.getSummary().toString()).isEqualTo("5.00KB");
+        assertThat(audio.getSummary().toString()).isEqualTo("14.00KB"); // 4KB apps + 10KB files
+        assertThat(image.getSummary().toString()).isEqualTo("35.00KB"); // 15KB video + 20KB images
         assertThat(games.getSummary().toString()).isEqualTo("8.00KB");
         assertThat(apps.getSummary().toString()).isEqualTo("9.00KB");
         assertThat(system.getSummary().toString()).isEqualTo("6.00KB");

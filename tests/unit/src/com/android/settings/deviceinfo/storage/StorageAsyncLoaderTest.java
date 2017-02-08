@@ -42,7 +42,7 @@ import java.util.ArrayList;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
-public class AppAsyncLoaderTest {
+public class StorageAsyncLoaderTest {
     @Mock
     private StorageStatsSource mSource;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -51,13 +51,13 @@ public class AppAsyncLoaderTest {
     private PackageManagerWrapper mPackageManager;
     ArrayList<ApplicationInfo> mInfo = new ArrayList<>();
 
-    private AppsAsyncLoader mLoader;
+    private StorageAsyncLoader mLoader;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mInfo = new ArrayList<>();
-        mLoader = new AppsAsyncLoader(mContext, 1, "id", mSource, mPackageManager);
+        mLoader = new StorageAsyncLoader(mContext, 1, "id", mSource, mPackageManager);
         when(mPackageManager.getInstalledApplicationsAsUser(anyInt(), anyInt())).thenReturn(mInfo);
     }
 
@@ -66,7 +66,7 @@ public class AppAsyncLoaderTest {
         addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
         addPackage(1002, 0, 100, 1000, ApplicationInfo.CATEGORY_UNDEFINED);
 
-        AppsAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
+        StorageAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
 
         assertThat(result.gamesSize).isEqualTo(0L);
         assertThat(result.otherAppsSize).isEqualTo(1111L);
@@ -76,7 +76,7 @@ public class AppAsyncLoaderTest {
     public void testGamesAreFiltered() throws Exception {
         addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_GAME);
 
-        AppsAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
+        StorageAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
 
         assertThat(result.gamesSize).isEqualTo(11L);
         assertThat(result.otherAppsSize).isEqualTo(0);
@@ -87,7 +87,7 @@ public class AppAsyncLoaderTest {
         addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
         addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
 
-        AppsAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
+        StorageAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
 
         assertThat(result.otherAppsSize).isEqualTo(11L);
     }
@@ -96,7 +96,7 @@ public class AppAsyncLoaderTest {
     public void testCacheIsIgnored() throws Exception {
         addPackage(1001, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
 
-        AppsAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
+        StorageAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
 
         assertThat(result.otherAppsSize).isEqualTo(11L);
     }
