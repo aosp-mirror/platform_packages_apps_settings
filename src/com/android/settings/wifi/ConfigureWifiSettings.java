@@ -53,7 +53,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(3);
+        mProgressiveDisclosureMixin.setTileLimit(2);
     }
 
     @Override
@@ -67,7 +67,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new WifiInfoPreferenceController(context, getLifecycle(), mWifiManager));
         controllers.add(new CellularFallbackPreferenceController(context));
-        controllers.add(new AllowRecommendationPreferenceController(context));
         controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
         controllers.add(new WifiWakeupPreferenceController(context, getLifecycle()));
         controllers.add(new WifiSleepPolicyPreferenceController(context));
