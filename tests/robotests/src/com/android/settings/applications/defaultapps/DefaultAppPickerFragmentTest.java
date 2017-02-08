@@ -106,6 +106,18 @@ public class DefaultAppPickerFragmentTest {
         mFragment.onRadioButtonClicked(pref);
     }
 
+    @Test
+    public void displaySingleOption_shouldSelectRadioButton() {
+        final RadioButtonPreference pref =
+                new RadioButtonPreference(RuntimeEnvironment.application);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(pref);
+
+        mFragment.mayCheckOnlyRadioButton();
+
+        assertThat(pref.isChecked()).isTrue();
+    }
+
     public static class TestFragment extends DefaultAppPickerFragment {
 
         boolean setDefaultAppKeyCalled;

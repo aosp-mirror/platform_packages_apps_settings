@@ -126,6 +126,7 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
             pref.setOnClickListener(this);
             screen.addPreference(pref);
         }
+        mayCheckOnlyRadioButton();
     }
 
     @Override
@@ -159,6 +160,18 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    void mayCheckOnlyRadioButton() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        // If there is only 1 thing on screen, select it.
+        if (screen != null && screen.getPreferenceCount() == 1) {
+            final Preference onlyPref = screen.getPreference(0);
+            if (onlyPref instanceof RadioButtonPreference) {
+                ((RadioButtonPreference) onlyPref).setChecked(true);
             }
         }
     }
