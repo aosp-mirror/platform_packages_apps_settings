@@ -381,6 +381,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             AppFilter filter = new VolumeFilter(mVolumeUuid);
             if (mStorageType == STORAGE_TYPE_MUSIC) {
                 filter = new CompoundFilter(ApplicationsState.FILTER_AUDIO, filter);
+            } else {
+                filter = new CompoundFilter(ApplicationsState.FILTER_OTHER_APPS, filter);
             }
             mApplications.setOverrideFilter(filter);
         }
