@@ -37,6 +37,7 @@ import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.fuelgauge.PowerUsageFeatureProviderImpl;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
 import com.android.settings.search2.SearchFeatureProvider;
@@ -59,6 +60,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private SearchFeatureProvider mSearchFeatureProvider;
     private SecurityFeatureProvider mSecurityFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -75,7 +77,10 @@ public class FeatureFactoryImpl extends FeatureFactory {
 
     @Override
     public PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context) {
-        return null;
+        if (mPowerUsageFeatureProvider == null) {
+            mPowerUsageFeatureProvider = new PowerUsageFeatureProviderImpl();
+        }
+        return mPowerUsageFeatureProvider;
     }
 
     @Override

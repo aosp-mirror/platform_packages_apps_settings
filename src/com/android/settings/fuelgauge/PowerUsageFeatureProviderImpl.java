@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,27 +18,24 @@ package com.android.settings.fuelgauge;
 
 import android.content.Intent;
 
-/**
- * Feature Provider used in power usage
- */
-public interface PowerUsageFeatureProvider {
-  /**
-   * Check whether location setting is enabled
-   */
-  boolean isLocationSettingEnabled(String[] packages);
+public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
+    @Override
+    public boolean isLocationSettingEnabled(String[] packages) {
+        return false;
+    }
 
-  /**
-   * Check whether additional battery info feature is enabled.
-   */
-  boolean isAdditionalBatteryInfoEnabled();
+    @Override
+    public boolean isAdditionalBatteryInfoEnabled() {
+        return false;
+    }
 
-  /**
-   * Gets an {@link Intent} to show additional battery info.
-   */
-  Intent getAdditionalBatteryInfoIntent();
+    @Override
+    public Intent getAdditionalBatteryInfoIntent() {
+        return null;
+    }
 
-  /**
-   * Check whether advanced ui is enabled
-   */
-  boolean isAdvancedUiEnabled();
+    @Override
+    public boolean isAdvancedUiEnabled() {
+        return false;
+    }
 }

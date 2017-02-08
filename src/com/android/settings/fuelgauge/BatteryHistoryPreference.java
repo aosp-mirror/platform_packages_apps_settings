@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.BatteryInfo;
 import com.android.settingslib.graph.UsageView;
 
@@ -49,12 +50,22 @@ public class BatteryHistoryPreference extends Preference {
 
     @Override
     public void performClick() {
-        mHelper.storeStatsHistoryInFile(BATTERY_HISTORY_FILE);
-        Bundle args = new Bundle();
-        args.putString(BatteryHistoryDetail.EXTRA_STATS, BATTERY_HISTORY_FILE);
-        args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST, mHelper.getBatteryBroadcast());
-        Utils.startWithFragment(getContext(), BatteryHistoryDetail.class.getName(), args,
-                null, 0, R.string.history_details_title, null);
+        // TODO(b/34890746): remove this since history graph is not clickable
+        final Context context = getContext();
+        final PowerUsageFeatureProvider featureProvider = FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context);
+
+        if (featureProvider.isAdvancedUiEnabled()) {
+            Utils.startWithFragment(getContext(), PowerUsageAdvanced.class.getName(), null,
+                    null, 0, R.string.advanced_battery_title, null);
+        } else {
+            mHelper.storeStatsHistoryInFile(BATTERY_HISTORY_FILE);
+            Bundle args = new Bundle();
+            args.putString(BatteryHistoryDetail.EXTRA_STATS, BATTERY_HISTORY_FILE);
+            args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST, mHelper.getBatteryBroadcast());
+            Utils.startWithFragment(getContext(), BatteryHistoryDetail.class.getName(), args,
+                    null, 0, R.string.history_details_title, null);
+        }
     }
 
     public void setStats(BatteryStatsHelper batteryStats) {

@@ -413,7 +413,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 sipper.percent = percentOfTotal;
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
-                pref.setPercent(percentOfMax, percentOfTotal);
+                pref.setPercent(percentOfTotal);
                 setUsageSummary(pref, usedTime, sipper.usageTimeMs);
                 if ((sipper.drainType != DrainType.APP
                         || sipper.uidObj.getUid() == Process.ROOT_UID)

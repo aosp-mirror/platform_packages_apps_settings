@@ -4317,7 +4317,9 @@
     <!-- Bluetooth on time -->
     <string name="bluetooth_on_time">Wi\u2011Fi on time</string>
 
-    <!-- Activity title for battery usage history details -->
+    <!-- Activity title for advanced battery usage page [CHAR LIMIT=60] -->
+    <string name="advanced_battery_title">Advanced battery usage</string>
+    <!-- Activity title for battery usage history details [CHAR LIMIT=60] -->
     <string name="history_details_title">History details</string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
@@ -4351,6 +4353,14 @@
     <string name="power_unaccounted">Miscellaneous</string>
     <!-- Label for power that we computed too much for -->
     <string name="power_overcounted">Over-counted</string>
+    <!-- Label for power consumed by apps [CHAR LIMIT=30] -->
+    <string name="power_apps">Apps</string>
+    <!-- Label for power consumed by services [CHAR LIMIT=30] -->
+    <string name="power_service">Services</string>
+    <!-- Label for power consumed by system [CHAR LIMIT=30] -->
+    <string name="power_system">System</string>
+    <!-- Label for power consumed by user [CHAR LIMIT=30] -->
+    <string name="power_user">User</string>
 
     <!-- Label for CPU usage time -->
     <string name="usage_type_cpu">CPU total</string>
@@ -4470,6 +4480,8 @@
 
     <!-- Description for battery usage time for an app, i.e. Used for 30min. [CHAR LIMIT=60] -->
     <string name="battery_used_for">Used for %1$s</string>
+    <!-- Description for battery usage detail information since last full charge. [CHAR LIMIT=120] -->
+    <string name="battery_detail_since_full_charge">Usage breakdown since last full charge</string>
 
     <!-- Menu label for viewing battery usage since unplugged -->
     <string name="menu_stats_unplugged"><xliff:g id="unplugged">%1$s</xliff:g> since unplugged</string>

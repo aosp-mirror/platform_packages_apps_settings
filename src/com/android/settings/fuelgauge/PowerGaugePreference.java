@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -48,12 +49,21 @@ public class PowerGaugePreference extends TintablePreference {
         mIconSize = context.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
     }
 
+    public PowerGaugePreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        final Drawable icon = context.getDrawable(R.drawable.ic_battery_circle);
+
+        setIcon(icon);
+        setWidgetLayoutResource(R.layout.preference_widget_summary);
+        mIconSize = icon.getIntrinsicWidth();
+    }
+
     public void setContentDescription(String name) {
         mContentDescription = name;
         notifyChanged();
     }
 
-    public void setPercent(double percentOfMax, double percentOfTotal) {
+    public void setPercent(double percentOfTotal) {
         mProgress = Utils.formatPercentage((int) (percentOfTotal + 0.5));
         notifyChanged();
     }
