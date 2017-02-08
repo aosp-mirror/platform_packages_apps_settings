@@ -527,8 +527,9 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
         }
 
-        if (DEBUG_TIMING) Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
-                + " ms");
+        if (DEBUG_TIMING) {
+            Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
+        }
     }
 
     public void setDisplaySearchMenu(boolean displaySearch) {

@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -231,26 +232,25 @@ public class DashboardSummary extends InstrumentedFragment
             Log.d(TAG, "onViewCreated took "
                     + (System.currentTimeMillis() - startTime) + " ms");
         }
-        rebuildUI();
+        rebuildUI(true /* rebuildSuggestions */);
     }
 
-    private void rebuildUI() {
-        if (!isAdded()) {
-            Log.w(TAG, "Cannot build the DashboardSummary UI yet as the Fragment is not added");
-            return;
-        }
-
-        // recheck to see if any suggestions have been changed.
-        new SuggestionLoader().execute();
-        // Set categories on their own if loading suggestions takes too long.
-        mHandler.postDelayed(() -> {
+    private void rebuildUI(boolean rebuildSuggestions) {
+        if (rebuildSuggestions) {
+            // recheck to see if any suggestions have been changed.
+            new SuggestionLoader().execute();
+            // Set categories on their own if loading suggestions takes too long.
+            mHandler.postDelayed(() -> {
+                updateCategoryAndSuggestion(null /* tiles */);
+            }, MAX_WAIT_MILLIS);
+        } else {
             updateCategoryAndSuggestion(null /* tiles */);
-        }, MAX_WAIT_MILLIS);
+        }
     }
 
     @Override
     public void onCategoriesChanged() {
-        rebuildUI();
+        rebuildUI(false /* rebuildSuggestions */);
     }
 
     @Override
@@ -264,7 +264,6 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
-
         @Override
         protected List<Tile> doInBackground(Void... params) {
             final Context context = getContext();
@@ -307,7 +306,7 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     @VisibleForTesting
-    void updateCategoryAndSuggestion(List<Tile> tiles) {
+    void updateCategoryAndSuggestion(List<Tile> suggestions) {
         final Activity activity = getActivity();
         if (activity == null) {
             return;
@@ -319,10 +318,14 @@ public class DashboardSummary extends InstrumentedFragment
             List<DashboardCategory> categories = new ArrayList<>();
             categories.add(mDashboardFeatureProvider.getTilesForCategory(
                     CategoryKey.CATEGORY_HOMEPAGE));
-            mAdapter.setCategoriesAndSuggestions(categories, tiles);
+            if (suggestions != null) {
+                mAdapter.setCategoriesAndSuggestions(categories, suggestions);
+            } else {
+                mAdapter.setCategory(categories);
+            }
         } else {
             mAdapter.setCategoriesAndSuggestions(
-                    ((SettingsActivity) activity).getDashboardCategories(), tiles);
+                    ((SettingsActivity) activity).getDashboardCategories(), suggestions);
         }
     }
 }

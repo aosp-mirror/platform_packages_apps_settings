@@ -17,8 +17,8 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
-
 import android.support.v7.widget.LinearLayoutManager;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.ConditionManager;
@@ -33,6 +33,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -89,5 +90,14 @@ public class DashboardSummaryTest {
         when(mLayoutManager.findFirstCompletelyVisibleItemPosition()).thenReturn(2);
         mSummary.onConditionsChanged();
         verify(mDashboard, never()).scrollToPosition(0);
+    }
+
+    @Test
+    public void onCategoryChanged_updateCategoryOnly() {
+        doReturn(mock(Activity.class)).when(mSummary).getActivity();
+        when(mDashboardFeatureProvider.isEnabled()).thenReturn(true);
+
+        mSummary.onCategoriesChanged();
+        verify(mAdapter).setCategory(anyList());
     }
 }
