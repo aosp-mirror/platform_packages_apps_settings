@@ -69,7 +69,7 @@ public class StorageSummaryDonutPreferenceControllerTest {
         mController.updateBytes(0, 0);
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getTitle().toString()).isEqualTo("0.00B used");
+        assertThat(mPreference.getTitle().toString()).isEqualTo("0.00B");
         assertThat(mPreference.getSummary().toString()).isEqualTo("0.00B free");
     }
 
@@ -78,7 +78,7 @@ public class StorageSummaryDonutPreferenceControllerTest {
         mController.updateBytes(1024, 1024 * 10);
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getTitle().toString()).isEqualTo("1.00KB used");
+        assertThat(mPreference.getTitle().toString()).isEqualTo("1.00KB");
         assertThat(mPreference.getSummary().toString()).isEqualTo("9.00KB free");
     }
 
@@ -95,7 +95,7 @@ public class StorageSummaryDonutPreferenceControllerTest {
         mController.updateSizes(svp, volume);
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getTitle().toString()).isEqualTo("9.00KB used");
+        assertThat(mPreference.getTitle().toString()).isEqualTo("9.00KB");
         assertThat(mPreference.getSummary().toString()).isEqualTo("1.00KB free");
     }
 
