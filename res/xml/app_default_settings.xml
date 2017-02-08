@@ -94,8 +94,8 @@
         </Preference>
 
         <Preference
-            android:key="work_default_phone_app_new"
-            android:title="new phone pref work"
+            android:key="work_default_phone_app"
+            android:title="@string/default_phone_title"
             android:fragment="com.android.settings.applications.defaultapps.DefaultPhonePicker"
             settings:keywords="@string/keywords_default_phone_app">
             <extra android:name="for_work" android:value="true"/>
