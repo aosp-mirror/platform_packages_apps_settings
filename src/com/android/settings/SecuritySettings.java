@@ -1300,7 +1300,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         dashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY);
                 mSummaryLoader.setSummary(this, getPackageVerifierSummary(dashboardCategory));
             } else {
-                mSummaryLoader.setSummary(this, null);
+                mSummaryLoader.setSummary(this,
+                        mContext.getString(R.string.security_dashboard_summary));
             }
         }
 

@@ -3030,6 +3030,8 @@
                        android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.network.NetworkDashboardFragment"/>
+            <meta-data android:name="com.android.settings.summary"
+                       android:value="@string/network_dashboard_summary"/>
         </activity>
 
         <activity-alias android:name="DataUsageDashboardAlias"
@@ -3053,6 +3055,8 @@
                        android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
+            <meta-data android:name="com.android.settings.summary"
+                       android:value="@string/connected_devices_dashboard_summary"/>
         </activity>
 
         <activity android:name=".Settings$AppAndNotificationDashboardActivity"
@@ -3065,6 +3069,8 @@
                        android:value="com.android.settings.applications.AppAndNotificationDashboardFragment"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
+            <meta-data android:name="com.android.settings.summary"
+                       android:value="@string/app_and_notification_dashboard_summary"/>
         </activity>
 
         <activity-alias android:name="BatteryDashboardAlias"
@@ -3089,6 +3095,8 @@
                        android:value="com.android.settings.DisplaySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:value="@string/display_dashboard_summary"/>
         </activity-alias>
 
         <activity-alias android:name="SoundDashboardAlias"
@@ -3102,6 +3110,8 @@
                        android:value="com.android.settings.notification.SoundSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:value="@string/sound_dashboard_summary"/>
         </activity-alias>
 
         <activity android:name=".Settings$StorageDashboardActivity"
@@ -3167,6 +3177,8 @@
                        android:value="com.android.settings.accessibility.AccessibilitySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/accessibility_settings_summary" />
         </activity-alias>
 
         <activity android:name=".Settings$SystemDashboardActivity"
@@ -3179,6 +3191,8 @@
                        android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.system.SystemDashboardFragment"/>
+            <meta-data android:name="com.android.settings.summary"
+                       android:value="@string/system_dashboard_summary"/>
         </activity>
 
         <activity android:name=".Settings$SupportDashboardActivity"
@@ -3192,7 +3206,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.dashboard.SupportFragment"/>
             <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/help_label"/>
+                       android:resource="@string/support_summary"/>
         </activity>
 
         <!-- Alias for IME & Language in new IA. Should merge into TargetActivity when launch -->
