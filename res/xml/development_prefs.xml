@@ -166,6 +166,11 @@
             android:entries="@array/select_logpersist_titles"
             android:entryValues="@array/select_logpersist_values" />
 
+        <SwitchPreference
+            android:key="telephony_monitor_switch"
+            android:title="@string/telephony_monitor_switch"
+            android:summary="@string/telephony_monitor_switch_summary"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_networking_category"

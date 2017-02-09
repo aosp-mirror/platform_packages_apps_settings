@@ -89,6 +89,7 @@ import com.android.settings.applications.BackgroundCheckSummary;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.development.BugReportPreferenceController;
 import com.android.settings.development.BugReportInPowerPreferenceController;
+import com.android.settings.development.TelephonyMonitorPreferenceController;
 import com.android.settings.fuelgauge.InactiveApps;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -353,6 +354,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private BugReportPreferenceController mBugReportController;
     private BugReportInPowerPreferenceController mBugReportInPowerController;
+    private TelephonyMonitorPreferenceController mTelephonyMonitorController;
 
     public DevelopmentSettings() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
@@ -389,6 +391,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mBugReportController = new BugReportPreferenceController(getActivity());
         mBugReportInPowerController = new BugReportInPowerPreferenceController(getActivity());
+        mTelephonyMonitorController = new TelephonyMonitorPreferenceController(getActivity());
         mWebViewAppPrefController = new WebViewAppPreferenceController(getActivity());
 
         setIfOnlyAvailableForAdmins(true);
@@ -420,6 +423,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mBugReportController.displayPreference(getPreferenceScreen());
         mBugReportInPowerController.displayPreference(getPreferenceScreen());
+        mTelephonyMonitorController.displayPreference(getPreferenceScreen());
         mWebViewAppPrefController.displayPreference(getPreferenceScreen());
 
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
@@ -638,6 +642,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             pref.setEnabled(enabled && !mDisabledPrefs.contains(pref));
         }
         mBugReportInPowerController.enablePreference(enabled);
+        mTelephonyMonitorController.enablePreference(enabled);
         mWebViewAppPrefController.enablePreference(enabled);
         updateAllOptions();
     }
@@ -760,6 +765,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                             == PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
         }
         mHaveDebugSettings |= mBugReportInPowerController.updatePreference();
+        mHaveDebugSettings |= mTelephonyMonitorController.updatePreference();
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateSwitchPreference(mBtHciSnoopLog, Settings.Secure.getInt(cr,
@@ -2382,6 +2388,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (mBugReportInPowerController.handlePreferenceTreeClick(preference)) {
             return true;
         }
+
+        if (mTelephonyMonitorController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+
         if (mWebViewAppPrefController.handlePreferenceTreeClick(preference)) {
             return true;
         }
