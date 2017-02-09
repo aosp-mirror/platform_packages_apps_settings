@@ -329,7 +329,8 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"खाताहरू"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"स्थान"</string>
     <string name="account_settings_title" msgid="626177544686329806">"खाताहरू"</string>
-    <string name="security_settings_title" msgid="7945465324818485460">"सुरक्षा"</string>
+    <!-- no translation found for security_settings_title (3149425684006628826) -->
+    <skip />
     <string name="security_settings_summary" msgid="967393342537986570">"मेरो स्थान, स्क्रिन अनलक, SIM कार्ड लक, प्रामाणिक भण्डारण लक सेट गर्नुहोस्"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"मेरो स्थान, स्क्रिन अनलक, भण्डारण लकका गोप्य डेटा सेट गर्नुहोस्"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"पासवर्डहरू"</string>
@@ -518,10 +519,8 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"तपाईंले यो प्रयासमा गलत कार्य पासवर्ड प्रविष्ट गर्नुभयो भने, तपाईंको कार्य प्रोफाइल र सम्बन्धित डेटा यो यन्त्रबाट हटाइनेछ।"</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"धेरै पकट गलत प्रयास गरियो। तपाईंको कार्य प्रोफाइल र सम्बन्धित डेटा यो यन्त्रबाट हटाइनेछ।"</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"खारेज गर्नुहोस्"</string>
-    <!-- no translation found for lockpassword_password_too_short (2726090378672764986) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_short (3638188874397727648) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"कम्तीमा पनि <xliff:g id="COUNT">%d</xliff:g> वटा वर्ण हुनु अनिवार्य छ"</string>
+    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN कम्तीमा पनि <xliff:g id="COUNT">%d</xliff:g> अङ्कको हुनु अनिवार्य छ"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"जारी राख्नुहोस्"</string>
     <string name="lockpassword_password_too_long" msgid="4520363269062591833">"<xliff:g id="NUMBER">%d</xliff:g> भन्दा कम वर्णहरू हुनुपर्दछ।"</string>
     <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"<xliff:g id="NUMBER">%d</xliff:g> भन्दा थोरै अङ्क हुनुपर्छ।"</string>
@@ -531,12 +530,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"कम्तीमा एउटा अक्षर हुन अनिवार्य छ"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"कम्तीमा एउटा अङ्क हुन अनिवार्य छ"</string>
     <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"कम्तीमा एउटा प्रतीक हुन अनिवार्य छ"</string>
-    <!-- no translation found for lockpassword_password_requires_letters (9013132344745898400) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (2626327674921055486) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (7860796359913920356) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (1967587658356336828) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (6751305770863640574) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (4440596998172043055) -->
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="9013132344745898400">
+      <item quantity="other">कम्तीमा पनि <xliff:g id="COUNT">%d</xliff:g> वटा अक्षर हुनु अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा पनि एउटा अक्षर हुनु अनिवार्य छ</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2626327674921055486">
+      <item quantity="other">कम्तीमा पनि <xliff:g id="COUNT">%d</xliff:g> वटा साना अक्षर हुनु अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा पनि एउटा सानो अक्षर हुनु अनिवार्य छ</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="7860796359913920356">
+      <item quantity="other">कम्तीमा पनि <xliff:g id="COUNT">%d</xliff:g> वटा ठूला अक्षर हुनु अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा पनि एउटा ठूलो अक्षर हुनु अनिवार्य छ</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="1967587658356336828">
+      <item quantity="other">कम्तीमा पनि <xliff:g id="COUNT">%d</xliff:g> वटा संख्यात्मक अङ्क हुनु अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा पनि एउटा संख्यात्मक अङ्क हुनु अनिवार्य छ</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="6751305770863640574">
+      <item quantity="other">कम्तीमा पनि <xliff:g id="COUNT">%d</xliff:g> वटा विशेष प्रतीक हुनु अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा पनि एउटा विशेष प्रतीक हुनु अनिवार्य छ</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4440596998172043055">
+      <item quantity="other">कम्तीमा पनि <xliff:g id="COUNT">%d</xliff:g> वटा गैर-अक्षर वर्ण हुनु अनिवार्य छ</item>
+      <item quantity="one">कम्तीमा पनि एउटा गैर-अक्षर वर्ण हुनु अनिवार्य छ</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"उपकरण प्रशासकले हालसालको पासवर्ड प्रयोग गर्न अनुमति दिदैन।"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"बढ्दो, घट्दो वा अंकको बारम्बार अनुक्रम निषेध गरिएको छ"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"ठीक छ"</string>
@@ -1241,7 +1258,8 @@
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"पोर्टेबल हटस्पट"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"ब्लुटुथ टेथर गर्दै"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"टेदर गर्दै"</string>
-    <string name="tether_settings_title_all" msgid="8356136101061143841">"टेदर गर्ने र पोर्टेबल हटस्पट"</string>
+    <!-- no translation found for tether_settings_title_all (3216237959149430007) -->
+    <skip />
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"डेटा सेभर अन हुँदा टेदरिङ वा पोर्टेबल हटस्पटहरूको प्रयोग गर्न सक्दैन"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB टेदर गर्दै"</string>
@@ -1581,8 +1599,6 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"यदि तपाईँले यस सेवालाई बन्द गर्नु भएको खण्डमा तपाईँको फोनका केही सुविधाहरू सही तवरले काम गर्न बन्द गर्न सक्छन् तबसम्म तपाईँले फेरि यसलाई पावर बन्द गरी फेरि सुरु गर्नु हुन्न।"</string>
     <string name="language_settings" msgid="8758655933029560944">"भाषा र इनपुट"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"भाषा र इनपुट"</string>
-    <string name="language_and_region_settings_title" msgid="117593114157670585">"भाषा र क्षेत्र"</string>
-    <string name="input_gesture_settings_title" msgid="2201979773768106872">"इनपुट र इसाराहरू"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"किबोर्ड र इनपुट विधिहरू"</string>
     <string name="phone_language" msgid="7116581601133118044">"भाषाहरू"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
@@ -1828,6 +1844,8 @@
     <string name="awake" msgid="387122265874485088">"उपकरण जाग्ने समय"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"समयमा Wi-Fi"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"समयमा Wi-Fi"</string>
+    <!-- no translation found for advanced_battery_title (2068039111517508622) -->
+    <skip />
     <string name="history_details_title" msgid="3608240585315506067">"इतिहास विवरणहरू"</string>
     <string name="details_title" msgid="3792801565213935385">"विवरणहरू प्रयोग गर्नुहोस्"</string>
     <string name="details_subtitle" msgid="32593908269911734">"विवरणहरू प्रयोग गर्नुहोस्"</string>
@@ -1844,6 +1862,14 @@
     <string name="power_idle" product="default" msgid="9055659695602194990">"निष्क्रिय फोन"</string>
     <string name="power_unaccounted" msgid="709925017022660740">"विविध"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"बढी गिन्ती"</string>
+    <!-- no translation found for power_apps (2043554781293951327) -->
+    <skip />
+    <!-- no translation found for power_service (1599661212370831780) -->
+    <skip />
+    <!-- no translation found for power_system (8290455327965307383) -->
+    <skip />
+    <!-- no translation found for power_user (1889728099253018005) -->
+    <skip />
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU कुल"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU अग्रभूमि"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"जागा रहनुहोस्"</string>
@@ -1895,6 +1921,8 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"बढी गिन्ती गरिएको उर्जा प्रयोग"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="4383512863007718804">"%1$s को लागि प्रयोग गरियो"</string>
+    <!-- no translation found for battery_detail_since_full_charge (4329720759041042322) -->
+    <skip />
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> अनप्लग भएदेखि"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"पछिल्लो पटक <xliff:g id="UNPLUGGED">%1$s</xliff:g>का लागि अनप्लग गरिँदा"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"उपयोग कूलहरू"</string>
@@ -2399,6 +2427,8 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"फोन कल तथा SMS सक्षम गर्ने हो?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"कल र SMS इतिहास यो प्रयोगकर्तासँग साझेदारी गरिने छ।"</string>
     <string name="emergency_info_title" msgid="208607506217060337">"आपतकालीन सूचना"</string>
+    <!-- no translation found for emergency_info_summary (8791523394921560711) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"अनुप्रयोगहरू र सामग्री अनुमति दिनुहोस्"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"प्रतिबन्धको साथ अनुप्रयोगहरू"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"अनुप्रयोगको लागि सेटिङहरू विस्तार गर्नुहोस्"</string>
@@ -2682,7 +2712,10 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"पहुँचमा बाधा नपुर्‍यानुहोस्"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"कुनै पनि स्थापित अनुप्रयोगहरू द्वारा पहुँचमा बाधा नपुर्‍यानुहोस् को माग गरेका छैनन्"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"अनुप्रयोगहरू लोड हुँदै..."</string>
-    <string name="notification_channels" msgid="8681423709659818791">"च्यानलहरू"</string>
+    <!-- no translation found for notification_channels (5346841743182627500) -->
+    <skip />
+    <!-- no translation found for notification_channels_other (5645317113885788226) -->
+    <skip />
     <string name="no_channels" msgid="3077375508177744586">"यो अनुप्रयोगले कुनै पनि सूचना पोस्ट गरेको छैन"</string>
     <string name="deleted_channel_name" msgid="1443368457916958928">"<xliff:g id="CHANNEL_NAME">%1$s</xliff:g> (मेटाइयो)"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"सबै रोक्नुहोस्"</string>
@@ -3294,7 +3327,8 @@
     <string name="web_action_section_title" msgid="806405168097593614">"अनुप्रयोगहरूको स्थापना गरिएको छैन"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"स्थापना गरिएका अनुप्रयोगहरू"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"तपाईंको भण्डारण अहिले भण्डारण प्रबन्धकद्वारा व्यवस्थापन भइरहेको छ"</string>
-    <string name="account_for_section_header" msgid="5867553104728848377">"खाताहरू"</string>
+    <!-- no translation found for account_for_section_header (5356566418548737121) -->
+    <skip />
     <string name="configure_section_header" msgid="7391183586410814450">"कन्फिगर गर्नुहोस्"</string>
     <string name="auto_sync_account_title" msgid="7647106425106072285">"खाताको डेटा स्वतः सिंक गर्नुहोस्"</string>
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"व्यक्तिगत खाताको डेटा स्वतः सिंक गर्नुहोस्"</string>
@@ -3360,10 +3394,8 @@
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"निष्क्रिय"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"सक्रिय"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"खेलहरू"</string>
-    <!-- no translation found for audio_files_title (4777048870657911307) -->
-    <skip />
-    <!-- no translation found for audio_storage_title (5494923634269236874) -->
-    <skip />
+    <string name="audio_files_title" msgid="4777048870657911307">"अडियो फाइलहरू"</string>
+    <string name="audio_storage_title" msgid="5494923634269236874">"संगीत"</string>
     <string name="webview_uninstalled_for_user" msgid="2088190546280992258">"प्रयोगकर्ता <xliff:g id="USER">%s</xliff:g> को लागि स्थापना रद्द गरियो\n"</string>
     <string name="webview_disabled_for_user" msgid="894201527719182879">"प्रयोगकर्ता <xliff:g id="USER">%s</xliff:g> को लागि असक्षम पारियो\n"</string>
     <string name="autofill_app" msgid="3889348218462883960">"स्वत: भरण अनुप्रयोग"</string>
