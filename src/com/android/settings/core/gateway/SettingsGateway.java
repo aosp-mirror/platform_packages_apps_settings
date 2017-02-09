@@ -120,6 +120,7 @@ import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
+import com.android.settings.webview.WebViewAppPicker;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
@@ -246,6 +247,7 @@ public class SettingsGateway {
             AppAndNotificationDashboardFragment.class.getName(),
             UserAndAccountDashboardFragment.class.getName(),
             EnterprisePrivacySettings.class.getName(),
+            WebViewAppPicker.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

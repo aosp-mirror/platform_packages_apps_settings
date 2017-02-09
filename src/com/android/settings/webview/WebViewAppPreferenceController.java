@@ -14,18 +14,15 @@
 
 package com.android.settings.webview;
 
-import android.app.Activity;
-import android.content.pm.PackageInfo;
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.VisibleForTesting;
+import android.content.pm.PackageInfo;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.DevelopmentSettings;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.applications.defaultapps.DefaultAppInfo;
+import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
 
-public class WebViewAppPreferenceController extends PreferenceController {
+public class WebViewAppPreferenceController extends DefaultAppPreferenceController {
 
     private static final String WEBVIEW_APP_KEY = "select_webview_provider";
 
@@ -45,20 +42,9 @@ public class WebViewAppPreferenceController extends PreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (getPreferenceKey().equals(preference.getKey())) {
-            return true;
-        }
-        return false;
-    }
-
-    public Intent getActivityIntent() {
-        return new Intent(mContext, WebViewAppPicker.class);
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        mPreference.setSummary(getCurrentWebViewPackageLabel(mContext));
+    public DefaultAppInfo getDefaultAppInfo() {
+        PackageInfo currentPackage = mWebViewUpdateServiceWrapper.getCurrentWebViewPackage();
+        return new DefaultAppInfo(currentPackage == null ? null : currentPackage.applicationInfo);
     }
 
     @Override
@@ -68,23 +54,6 @@ public class WebViewAppPreferenceController extends PreferenceController {
             mPreference = screen.findPreference(WEBVIEW_APP_KEY);
         }
     }
-
-    /**
-     * Handle the return-value from the WebViewAppPicker Activity.
-     */
-    public void onActivityResult(int resultCode, Intent data) {
-        // Update the preference summary no matter whether we succeeded to change the webview
-        // implementation correctly - we might have changed implementation to one the user did not
-        // choose.
-        updateState(null);
-    }
-
-    private String getCurrentWebViewPackageLabel(Context context) {
-        PackageInfo webViewPackage = mWebViewUpdateServiceWrapper.getCurrentWebViewPackage();
-        if (webViewPackage == null) return "";
-        return webViewPackage.applicationInfo.loadLabel(context.getPackageManager()).toString();
-    }
-
 
     @Override
     public String getPreferenceKey() {
