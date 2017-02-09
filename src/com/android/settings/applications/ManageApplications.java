@@ -71,7 +71,6 @@ import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsSt
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.deviceinfo.storage.StorageStatsSource;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.fuelgauge.PowerWhitelistBackend;
 import com.android.settings.notification.AppNotificationSettings;
@@ -85,6 +84,7 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
 import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
+import com.android.settingslib.applications.StorageStatsSource;
 
 import java.util.ArrayList;
 import java.util.Collections;

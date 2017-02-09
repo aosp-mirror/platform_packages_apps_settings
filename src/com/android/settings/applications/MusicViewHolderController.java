@@ -26,7 +26,7 @@ import android.text.format.Formatter;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.deviceinfo.storage.StorageStatsSource;
+import com.android.settingslib.applications.StorageStatsSource;
 
 /**
  * MusicViewHolderController controls an Audio/Music file view in the ManageApplications view.

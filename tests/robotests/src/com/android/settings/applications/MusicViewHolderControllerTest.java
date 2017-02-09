@@ -32,8 +32,8 @@ import android.view.LayoutInflater;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.deviceinfo.storage.StorageStatsSource;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
+import com.android.settingslib.applications.StorageStatsSource;
 
 import org.junit.Before;
 import org.junit.Test;
