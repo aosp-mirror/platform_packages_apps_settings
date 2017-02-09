@@ -344,23 +344,20 @@ public class PowerUsageSummary extends PowerUsageBase {
             final List<BatterySipper> usageList = getCoalescedUsageList(
                     USE_FAKE_DATA ? getFakeStats() : mStatsHelper.getUsageList());
 
-            final double screenPowerMah = removeScreenBatterySipper(usageList);
+            final double hiddenPowerMah = removeHiddenBatterySippers(usageList);
 
             final int dischargeAmount = USE_FAKE_DATA ? 5000
                     : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
                 final BatterySipper sipper = usageList.get(i);
-                if (shouldHideSipper(sipper)) {
-                    continue;
-                }
-
-                // Deduct the screen power from total power, used to calculate percentOfTotal
+                // Deduct the power of hidden items from total power, which is used to
+                // calculate percentOfTotal
                 double totalPower = USE_FAKE_DATA ?
-                        4000 : mStatsHelper.getTotalPower() - screenPowerMah;
+                        4000 : mStatsHelper.getTotalPower() - hiddenPowerMah;
 
                 // With deduction in totalPower, percentOfTotal is higher because it adds the part
-                // used in screen
+                // used in screen, system, etc
                 final double percentOfTotal =
                         ((sipper.totalPowerMah / totalPower) * dischargeAmount);
 
@@ -451,7 +448,8 @@ public class PowerUsageSummary extends PowerUsageBase {
         final int uid = sipper.getUid();
 
         return drainType == DrainType.IDLE || drainType == DrainType.CELL
-                || uid == Process.ROOT_UID || uid == Process.SYSTEM_UID
+                || drainType == DrainType.SCREEN || uid == Process.ROOT_UID
+                || uid == Process.SYSTEM_UID
                 || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP;
     }
 
@@ -470,16 +468,17 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     @VisibleForTesting
-    double removeScreenBatterySipper(List<BatterySipper> sippers) {
-        for (int i = 0, size = sippers.size(); i < size; i++) {
+    double removeHiddenBatterySippers(List<BatterySipper> sippers) {
+        double totalPowerMah = 0;
+        for (int i = sippers.size() - 1; i >= 0; i--) {
             final BatterySipper sipper = sippers.get(i);
-            if (sipper.drainType == DrainType.SCREEN) {
+            if (shouldHideSipper(sipper)) {
                 sippers.remove(i);
-                return sipper.totalPowerMah;
+                totalPowerMah += sipper.totalPowerMah;
             }
         }
 
-        return 0;
+        return totalPowerMah;
     }
 
     private static List<BatterySipper> getFakeStats() {
