@@ -17,6 +17,7 @@
 package com.android.settings.applications.defaultapps;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -26,6 +27,7 @@ import android.util.Log;
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.widget.GearPreference;
 
 public abstract class DefaultAppPreferenceController extends PreferenceController {
 
@@ -54,8 +56,31 @@ public abstract class DefaultAppPreferenceController extends PreferenceControlle
             preference.setSummary(defaultAppLabel);
         } else {
             Log.d(TAG, "No default app");
+            preference.setSummary(null);
+        }
+        mayUpdateGearIcon(app, preference);
+    }
+
+    private void mayUpdateGearIcon(DefaultAppInfo app, Preference preference) {
+        if (!(preference instanceof GearPreference)) {
+            return;
+        }
+        final Intent settingIntent = getSettingIntent(app);
+        if (settingIntent != null) {
+            ((GearPreference) preference).setOnGearClickListener(
+                    p -> mContext.startActivity(settingIntent));
+        } else {
+            ((GearPreference) preference).setOnGearClickListener(null);
         }
     }
 
     protected abstract DefaultAppInfo getDefaultAppInfo();
+
+    /**
+     * Returns an optional intent that will be launched when clicking "gear" icon.
+     */
+    protected Intent getSettingIntent(DefaultAppInfo info) {
+        //By default return null. It's up to subclasses to provide logic.
+        return null;
+    }
 }

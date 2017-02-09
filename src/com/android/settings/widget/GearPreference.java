@@ -45,7 +45,13 @@ public class GearPreference extends RestrictedPreference implements View.OnClick
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         final View gear = holder.findViewById(R.id.settings_button);
-        gear.setOnClickListener(this);
+        if (mOnGearClickListener != null) {
+            gear.setVisibility(View.VISIBLE);
+            gear.setOnClickListener(this);
+        } else {
+            gear.setVisibility(View.GONE);
+            gear.setOnClickListener(null);
+        }
         gear.setEnabled(true);  // Make gear available even if the preference itself is disabled.
     }
 

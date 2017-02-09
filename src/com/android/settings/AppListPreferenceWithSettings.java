@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 /**
  * An AppListPreference with optional settings button.
  */
+@Deprecated
 public class AppListPreferenceWithSettings extends AppListPreference {
 
     private View mSettingsIcon;
