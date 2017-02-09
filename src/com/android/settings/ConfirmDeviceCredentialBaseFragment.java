@@ -14,18 +14,21 @@
  * limitations under the License
  */
 
+// TODO (b/35202196): move this class out of the root of the package.
 package com.android.settings;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.app.IActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Point;
@@ -289,12 +292,13 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 // Last try
                 final String title = getActivity().getString(
                         R.string.lock_profile_wipe_warning_title);
-                final String message = getActivity().getString(getLastTryErrorMessage());
-                showDialog(title, message, android.R.string.ok, false /* dismiss */);
+                LastTryDialog.show(getFragmentManager(), title, getLastTryErrorMessage(),
+                        android.R.string.ok, false /* dismiss */);
             } else if (remainingAttempts <= 0) {
                 // Profile is wiped
-                final String message = getActivity().getString(R.string.lock_profile_wipe_content);
-                showDialog(null, message, R.string.lock_profile_wipe_dismiss, true /* dismiss */);
+                LastTryDialog.show(getFragmentManager(), null /* title */,
+                        R.string.lock_profile_wipe_content, R.string.lock_profile_wipe_dismiss,
+                        true /* dismiss */);
             }
             if (mErrorTextView != null) {
                 final String message = getActivity().getString(R.string.lock_profile_wipe_attempts,
@@ -328,19 +332,55 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
         showError(getText(msg), timeout);
     }
 
-    private void showDialog(String title, String message, int buttonString, final boolean dismiss) {
-        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(buttonString, new OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (dismiss) {
-                        getActivity().finish();
-                    }
-                }
-            })
-            .create();
-        dialog.show();
+    public static class LastTryDialog extends DialogFragment {
+        private static final String TAG = LastTryDialog.class.getSimpleName();
+
+        private static final String ARG_TITLE = "title";
+        private static final String ARG_MESSAGE = "message";
+        private static final String ARG_BUTTON = "button";
+        private static final String ARG_DISMISS = "dismiss";
+
+        static boolean show(FragmentManager from, String title, int message, int button,
+                boolean dismiss) {
+            LastTryDialog existent = (LastTryDialog) from.findFragmentByTag(TAG);
+            if (existent != null && !existent.isRemoving()) {
+                return false;
+            }
+            Bundle args = new Bundle();
+            args.putString(ARG_TITLE, title);
+            args.putInt(ARG_MESSAGE, message);
+            args.putInt(ARG_BUTTON, button);
+            args.putBoolean(ARG_DISMISS, dismiss);
+
+            DialogFragment dialog = new LastTryDialog();
+            dialog.setArguments(args);
+            dialog.show(from, TAG);
+            return true;
+        }
+
+        static void hide(FragmentManager from) {
+            LastTryDialog dialog = (LastTryDialog) from.findFragmentByTag(TAG);
+            if (dialog != null) {
+                dialog.dismissAllowingStateLoss();
+                from.executePendingTransactions();
+            }
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(getArguments().getString(ARG_TITLE))
+                    .setMessage(getArguments().getInt(ARG_MESSAGE))
+                    .setPositiveButton(getArguments().getInt(ARG_BUTTON), null)
+                    .create();
+        }
+
+        @Override
+        public void onDismiss(final DialogInterface dialog) {
+            super.onDismiss(dialog);
+            if (getActivity() != null && getArguments().getBoolean(ARG_DISMISS)) {
+                getActivity().finish();
+            }
+        }
     }
 }
