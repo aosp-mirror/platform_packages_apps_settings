@@ -118,15 +118,17 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
         for (Map.Entry<String, DefaultAppInfo> app : mCandidates.entrySet()) {
             final RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
             final String appKey = app.getKey();
-
-            pref.setTitle(app.getValue().loadLabel(mPm.getPackageManager()));
-            pref.setIcon(app.getValue().loadIcon(mPm.getPackageManager()));
+            final DefaultAppInfo info = app.getValue();
+            pref.setTitle(info.loadLabel(mPm.getPackageManager()));
+            pref.setIcon(info.loadIcon(mPm.getPackageManager()));
             pref.setKey(appKey);
             if (TextUtils.equals(defaultAppKey, appKey)) {
                 pref.setChecked(true);
             }
             if (TextUtils.equals(systemDefaultAppKey, appKey)) {
                 pref.setSummary(R.string.system_app);
+            } else if (!TextUtils.isEmpty(info.summary)) {
+                pref.setSummary(info.summary);
             }
             if (!TextUtils.isEmpty(app.getValue().disabledDescription)) {
                 pref.setEnabled(false);

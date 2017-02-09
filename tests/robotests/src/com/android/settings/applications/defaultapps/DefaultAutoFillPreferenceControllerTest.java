@@ -18,8 +18,9 @@ package com.android.settings.applications.defaultapps;
 
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -32,19 +33,19 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class DefaultBrowserPreferenceControllerTest {
+public class DefaultAutoFillPreferenceControllerTest {
 
     @Mock
     private Context mContext;
@@ -53,14 +54,14 @@ public class DefaultBrowserPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PackageManagerWrapper mPackageManager;
 
-    private DefaultBrowserPreferenceController mController;
+    private DefaultAutoFillPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
-        mController = new DefaultBrowserPreferenceController(mContext);
+        mController = spy(new DefaultAutoFillPreferenceController(mContext));
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
     }
 
@@ -70,9 +71,7 @@ public class DefaultBrowserPreferenceControllerTest {
     }
 
     @Test
-    public void getSoleAppLabel_hasNoApp_shouldNotReturnLabel() {
-        when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
-                .thenReturn(null);
+    public void updateState_hasNoApp_shouldNotReturnLabel() {
         final Preference pref = mock(Preference.class);
 
         mController.updateState(pref);
@@ -80,9 +79,18 @@ public class DefaultBrowserPreferenceControllerTest {
     }
 
     @Test
-    public void getDefaultApp_shouldGetDefaultBrowserPackage() {
-        mController.getDefaultAppInfo();
+    public void getDefaultAppInfo_shouldHaveSettingsProvider() {
+        ReflectionHelpers.setField(mController, "mContext", RuntimeEnvironment.application);
+        Settings.Secure.putString(RuntimeEnvironment.application.getContentResolver(),
+                DefaultAutoFillPicker.SETTING, "com.android.settings/SettingsActivity.class");
 
-        verify(mPackageManager).getDefaultBrowserPackageNameAsUser(anyInt());
+        final DefaultAppInfo info = mController.getDefaultAppInfo();
+
+        assertThat(info).isNotNull();
+
+        mController.getSettingIntent(info);
+
+        verify(mPackageManager.getPackageManager()).queryIntentServices(
+                DefaultAutoFillPicker.AUTO_FILL_PROBE, PackageManager.GET_META_DATA);
     }
 }

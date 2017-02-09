@@ -32,9 +32,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -77,7 +75,7 @@ public class DefaultAppPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference, never()).setSummary(any(CharSequence.class));
+        verify(mPreference).setSummary(null);
     }
 
     private static class TestPreferenceController extends DefaultAppPreferenceController {
