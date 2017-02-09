@@ -23,7 +23,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-import com.android.settings.GearPreference;
+import com.android.settings.widget.GearPreference;
 import com.android.settings.R;
 
 /**
