@@ -68,7 +68,8 @@ public class ManageAssist extends SettingsPreferenceFragment
 
         mFlashPref = (SwitchPreference) findPreference(KEY_FLASH);
         mFlashPref.setOnPreferenceChangeListener(this);
-
+        mFooterPreferenceMixin.createFooterPreference()
+                .setTitle(R.string.assist_footer);
         mVoiceInputPref = (VoiceInputListPreference) findPreference(KEY_VOICE_INPUT);
         updateUi();
     }
