@@ -44,8 +44,6 @@ final class LocalBluetoothPreferences {
 
     private static final String KEY_LAST_SELECTED_DEVICE_TIME = "last_selected_device_time";
 
-    private static final String KEY_DOCK_AUTO_CONNECT = "auto_connect_to_dock";
-
     private static final String KEY_DISCOVERABLE_END_TIMESTAMP = "discoverable_end_timestamp";
 
     private LocalBluetoothPreferences() {
@@ -145,27 +143,6 @@ final class LocalBluetoothPreferences {
     static void persistDiscoverableEndTimestamp(Context context, long endTimestamp) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putLong(KEY_DISCOVERABLE_END_TIMESTAMP, endTimestamp);
-        editor.apply();
-    }
-
-    static boolean hasDockAutoConnectSetting(Context context, String addr) {
-        return getSharedPreferences(context).contains(KEY_DOCK_AUTO_CONNECT + addr);
-    }
-
-    static boolean getDockAutoConnectSetting(Context context, String addr) {
-        return getSharedPreferences(context).getBoolean(KEY_DOCK_AUTO_CONNECT + addr,
-                false);
-    }
-
-    static void saveDockAutoConnectSetting(Context context, String addr, boolean autoConnect) {
-        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putBoolean(KEY_DOCK_AUTO_CONNECT + addr, autoConnect);
-        editor.apply();
-    }
-
-    static void removeDockAutoConnectSetting(Context context, String addr) {
-        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.remove(KEY_DOCK_AUTO_CONNECT + addr);
         editor.apply();
     }
 }
