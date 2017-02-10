@@ -18,7 +18,8 @@ package com.android.settings.deviceinfo.storage;
 
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.os.UserManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -27,6 +28,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.core.PreferenceController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,24 +39,27 @@ public class SecondaryUserController extends PreferenceController {
     // PreferenceGroupKey to try to add our preference onto.
     private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";
     private static final String PREFERENCE_KEY_BASE = "pref_user_";
+    private static final int SIZE_NOT_SET = -1;
 
-    private UserInfo mUser;
-    private StorageItemPreferenceAlternate mPreference;
+    private @NonNull UserInfo mUser;
+    private @Nullable StorageItemPreferenceAlternate mStoragePreference;
+    private long mSize;
 
     /**
      * Adds the appropriate controllers to a controller list for handling all secondary users on
      * a device.
      * @param context Context for initializing the preference controllers.
-     * @param controllers List of preference controllers for a Settings fragment.
+     * @param userManager UserManagerWrapper for figuring out which controllers to add.
      */
-    public static void addAllSecondaryUserControllers(Context context,
-            UserManagerWrapper userManager, List<PreferenceController> controllers) {
+    public static List<PreferenceController> getSecondaryUserControllers(
+            Context context, UserManagerWrapper userManager) {
+        List<PreferenceController> controllers = new ArrayList<>();
         UserInfo primaryUser = userManager.getPrimaryUser();
         boolean addedUser = false;
         List<UserInfo> infos = userManager.getUsers();
         for (int i = 0, size = infos.size(); i < size; i++) {
             UserInfo info = infos.get(i);
-            if (Utils.isProfileOf(primaryUser, info)) {
+            if (info == null || Utils.isProfileOf(primaryUser, info)) {
                 continue;
             }
 
@@ -65,6 +70,7 @@ public class SecondaryUserController extends PreferenceController {
         if (!addedUser) {
             controllers.add(new NoSecondaryUserController(context));
         }
+        return controllers;
     }
 
     /**
@@ -73,22 +79,26 @@ public class SecondaryUserController extends PreferenceController {
      * @param info {@link UserInfo} for the secondary user which this controllers covers.
      */
     @VisibleForTesting
-    SecondaryUserController(Context context, UserInfo info) {
+    SecondaryUserController(Context context, @NonNull UserInfo info) {
         super(context);
         mUser = info;
+        mSize = SIZE_NOT_SET;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        if (mPreference == null) {
-            mPreference = new StorageItemPreferenceAlternate(mContext);
+        if (mStoragePreference == null) {
+            mStoragePreference = new StorageItemPreferenceAlternate(mContext);
 
             PreferenceGroup group =
                     (PreferenceGroup) screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
-            mPreference.setTitle(mUser.name);
-            mPreference.setKey(PREFERENCE_KEY_BASE + mUser.id);
+            mStoragePreference.setTitle(mUser.name);
+            mStoragePreference.setKey(PREFERENCE_KEY_BASE + mUser.id);
+            if (mSize != SIZE_NOT_SET) {
+                mStoragePreference.setStorageSize(mSize);
+            }
             group.setVisible(true);
-            group.addPreference(mPreference);
+            group.addPreference(mStoragePreference);
         }
     }
 
@@ -99,7 +109,15 @@ public class SecondaryUserController extends PreferenceController {
 
     @Override
     public String getPreferenceKey() {
-        return (mPreference != null) ? mPreference.getKey() : null;
+        return mStoragePreference != null ? mStoragePreference.getKey() : null;
+    }
+
+    /**
+     * Returns the user for which this is the secondary user controller.
+     */
+    @NonNull
+    public UserInfo getUser() {
+        return mUser;
     }
 
     /**
@@ -107,8 +125,9 @@ public class SecondaryUserController extends PreferenceController {
      * @param size Size in bytes.
      */
     public void setSize(long size) {
-        if (mPreference != null) {
-            mPreference.setStorageSize(size);
+        mSize = size;
+        if (mStoragePreference != null) {
+            mStoragePreference.setStorageSize(mSize);
         }
     }
 

@@ -18,10 +18,8 @@ package com.android.settings.deviceinfo.storage;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
-import android.view.View;
 
 import com.android.settings.R;
 

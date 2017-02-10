@@ -21,46 +21,61 @@ import static android.content.pm.ApplicationInfo.CATEGORY_GAME;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
+import android.util.ArrayMap;
 import android.util.ArraySet;
+import android.util.SparseArray;
 
 import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.applications.StorageStatsSource;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * AppsAsyncLoader is a Loader which loads app storage information and categories it by the app's
- * specified categorization.
+ * StorageAsyncLoader is a Loader which loads categorized app information and external stats for all
+ * users
  */
-public class StorageAsyncLoader extends AsyncLoader<StorageAsyncLoader.AppsStorageResult> {
-    private int mUserId;
+public class StorageAsyncLoader
+        extends AsyncLoader<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
+    private UserManagerWrapper mUserManager;
     private String mUuid;
     private StorageStatsSource mStatsManager;
     private PackageManagerWrapper mPackageManager;
 
-    public StorageAsyncLoader(Context context, int userId, String uuid, StorageStatsSource source,
-            PackageManagerWrapper pm) {
+    public StorageAsyncLoader(Context context, UserManagerWrapper userManager,
+            String uuid, StorageStatsSource source, PackageManagerWrapper pm) {
         super(context);
-        mUserId = userId;
+        mUserManager = userManager;
         mUuid = uuid;
         mStatsManager = source;
         mPackageManager = pm;
     }
 
     @Override
-    public AppsStorageResult loadInBackground() {
+    public SparseArray<AppsStorageResult> loadInBackground() {
         return loadApps();
     }
 
-    private AppsStorageResult loadApps() {
-        AppsStorageResult result = new AppsStorageResult();
-        ArraySet<Integer> seenUid = new ArraySet<>(); // some apps share a uid
+    private SparseArray<AppsStorageResult> loadApps() {
+        SparseArray<AppsStorageResult> result = new SparseArray<>();
+        List<UserInfo> infos = mUserManager.getUsers();
+        for (int i = 0, userCount = infos.size(); i < userCount; i++) {
+            UserInfo info = infos.get(i);
+            result.put(info.id, getStorageResultForUser(info.id));
+        }
+        return result;
+    }
 
+    private AppsStorageResult getStorageResultForUser(int userId) {
         List<ApplicationInfo> applicationInfos =
-                mPackageManager.getInstalledApplicationsAsUser(0, mUserId);
-        int size = applicationInfos.size();
-        for (int i = 0; i < size; i++) {
+                mPackageManager.getInstalledApplicationsAsUser(0, userId);
+        ArraySet<Integer> seenUid = new ArraySet<>(); // some apps share a uid
+        AppsStorageResult result = new AppsStorageResult();
+        for (int i = 0, size = applicationInfos.size(); i < size; i++) {
             ApplicationInfo app = applicationInfos.get(i);
             if (seenUid.contains(app.uid)) {
                 continue;
@@ -83,12 +98,12 @@ public class StorageAsyncLoader extends AsyncLoader<StorageAsyncLoader.AppsStora
             }
         }
 
-        result.externalStats = mStatsManager.getExternalStorageStats(mUuid, UserHandle.of(mUserId));
+        result.externalStats = mStatsManager.getExternalStorageStats(mUuid, UserHandle.of(userId));
         return result;
     }
 
     @Override
-    protected void onDiscardResult(AppsStorageResult result) {
+    protected void onDiscardResult(SparseArray<AppsStorageResult> result) {
     }
 
     public static class AppsStorageResult {

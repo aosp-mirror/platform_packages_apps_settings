@@ -44,6 +44,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.Before;
@@ -223,7 +224,7 @@ public class StorageItemPreferenceControllerTest {
 
         result.gamesSize = KILOBYTE * 8;
         result.otherAppsSize = KILOBYTE * 9;
-        mController.onLoadFinished(null, result);
+        mController.onLoadFinished(result);
 
         assertThat(audio.getSummary().toString()).isEqualTo("14.00KB"); // 4KB apps + 10KB files
         assertThat(image.getSummary().toString()).isEqualTo("35.00KB"); // 15KB video + 20KB images

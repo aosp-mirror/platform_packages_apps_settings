@@ -16,6 +16,11 @@
 
 package com.android.settings;
 
+import static android.content.Intent.EXTRA_USER;
+import static android.content.Intent.EXTRA_USER_ID;
+import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
+import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
+
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -103,11 +108,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
-import static android.content.Intent.EXTRA_USER;
-import static android.content.Intent.EXTRA_USER_ID;
-import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
-import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 public final class Utils extends com.android.settingslib.Utils {
 

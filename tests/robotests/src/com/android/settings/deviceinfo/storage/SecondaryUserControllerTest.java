@@ -44,6 +44,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -103,9 +104,8 @@ public class SecondaryUserControllerTest {
         userInfos.add(mPrimaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        ArrayList<PreferenceController> controllers = new ArrayList<>();
-
-        SecondaryUserController.addAllSecondaryUserControllers(mContext, mUserManager, controllers);
+        List<PreferenceController> controllers =
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
         // We should have the NoSecondaryUserController.
@@ -122,9 +122,8 @@ public class SecondaryUserControllerTest {
         userInfos.add(secondaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        ArrayList<PreferenceController> controllers = new ArrayList<>();
-
-        SecondaryUserController.addAllSecondaryUserControllers(mContext, mUserManager, controllers);
+        List<PreferenceController> controllers =
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0) instanceof SecondaryUserController).isTrue();
@@ -139,9 +138,9 @@ public class SecondaryUserControllerTest {
         userInfos.add(secondaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        ArrayList<PreferenceController> controllers = new ArrayList<>();
 
-        SecondaryUserController.addAllSecondaryUserControllers(mContext, mUserManager, controllers);
+        List<PreferenceController> controllers =
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
