@@ -23,22 +23,22 @@
       android:key="account_header"
       android:layout="@layout/account_header"
       android:selectable="false"
-      android:order="0"/>
+      android:order="-10000"/>
 
     <Preference
         android:key="account_sync"
         android:title="@string/account_sync_title"
         android:icon="@drawable/ic_sync"
-        android:order="1"/>
+        android:order="-9999"/>
 
     <PreferenceCategory
       android:key="dashboard_tile_placeholder"
-      android:order="10"/>
+      android:order="-9998"/>
 
     <com.android.settings.applications.LayoutPreference
       android:key="remove_account"
       android:layout="@layout/remove_account_button"
-      android:order="100"
+      android:order="1000"
       android:selectable="false"/>
 
 </PreferenceScreen>

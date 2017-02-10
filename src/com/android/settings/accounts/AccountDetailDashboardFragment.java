@@ -24,6 +24,7 @@ import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
+import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -84,7 +85,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         if (mAccountLabel != null) {
             getActivity().setTitle(mAccountLabel);
         }
-        updateAccountHeader();
+        updateUi();
     }
 
     @Override
@@ -125,7 +126,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     }
 
     @VisibleForTesting
-    void updateAccountHeader() {
+    void updateUi() {
         final Preference headerPreference = findPreference(KEY_ACCOUNT_HEADER);
         headerPreference.setTitle(mAccount.name);
         final Context context = getContext();
@@ -136,6 +137,13 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         }
         final AuthenticatorHelper helper = new AuthenticatorHelper(context, userHandle, null);
         headerPreference.setIcon(helper.getDrawableForType(context, mAccountType));
+        final AccountTypePreferenceLoader accountTypePreferenceLoader =
+            new AccountTypePreferenceLoader(this, helper, userHandle);
+        PreferenceScreen prefs =
+            accountTypePreferenceLoader.addPreferencesForType(mAccountType, getPreferenceScreen());
+        if (prefs != null) {
+            accountTypePreferenceLoader.updatePreferenceIntents(prefs, mAccountType, mAccount);
+        }
     }
 
 }
