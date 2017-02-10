@@ -493,7 +493,7 @@ public class RadioInfo extends Activity {
         log("onPause: unregister phone & data intents");
 
         mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
-        phone.setCellInfoListRate(CELL_INFO_LIST_RATE_DISABLED);
+        mTelephonyManager.setCellInfoListRate(CELL_INFO_LIST_RATE_DISABLED);
     }
 
     private void restoreFromBundle(Bundle b) {
@@ -1282,7 +1282,7 @@ public class RadioInfo extends Activity {
 
         public void onItemSelected(AdapterView parent, View v, int pos, long id) {
             mCellInfoRefreshRateIndex = pos;
-            phone.setCellInfoListRate(mCellInfoRefreshRates[pos]);
+            mTelephonyManager.setCellInfoListRate(mCellInfoRefreshRates[pos]);
             updateAllCellInfo();
         }
 
