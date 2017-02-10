@@ -136,12 +136,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int FILTER_APPS_ALL = 2;
     public static final int FILTER_APPS_ENABLED = 3;
     public static final int FILTER_APPS_DISABLED = 4;
-    public static final int FILTER_APPS_BLOCKED = 5;
-    public static final int FILTER_APPS_PERSONAL = 6;
-    public static final int FILTER_APPS_WORK = 7;
-    public static final int FILTER_APPS_USAGE_ACCESS = 8;
-    public static final int FILTER_APPS_WITH_OVERLAY = 9;
-    public static final int FILTER_APPS_WRITE_SETTINGS = 10;
+    public static final int FILTER_APPS_INSTANT = 5;
+    public static final int FILTER_APPS_BLOCKED = 6;
+    public static final int FILTER_APPS_PERSONAL = 7;
+    public static final int FILTER_APPS_WORK = 8;
+    public static final int FILTER_APPS_USAGE_ACCESS = 9;
+    public static final int FILTER_APPS_WITH_OVERLAY = 10;
+    public static final int FILTER_APPS_WRITE_SETTINGS = 11;
     public static final int FILTER_APPS_INSTALL_SOURCES = 12;
 
     // Storage types. Used to determine what the extra item in the list of preferences is.
@@ -155,6 +156,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             R.string.filter_all_apps,      // All apps
             R.string.filter_enabled_apps,  // Enabled
             R.string.filter_apps_disabled, // Disabled
+            R.string.filter_instant_apps,  // Instant apps
             R.string.filter_notif_blocked_apps,   // Blocked Notifications
             R.string.filter_personal_apps, // Personal
             R.string.filter_work_apps,     // Work
@@ -174,6 +176,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             ApplicationsState.FILTER_EVERYTHING,  // All apps
             ApplicationsState.FILTER_ALL_ENABLED, // Enabled
             ApplicationsState.FILTER_DISABLED,    // Disabled
+            ApplicationsState.FILTER_INSTANT,      // Instant
             AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,   // Blocked Notifications
             ApplicationsState.FILTER_PERSONAL,    // Personal
             ApplicationsState.FILTER_WORK,        // Work
@@ -691,6 +694,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         mFilterAdapter.setFilterEnabled(FILTER_APPS_DISABLED, hasDisabledApps);
     }
 
+    public void setHasInstant(boolean haveInstantApps) {
+        mFilterAdapter.setFilterEnabled(FILTER_APPS_INSTANT, haveInstantApps);
+    }
+
     static class FilterSpinnerAdapter extends ArrayAdapter<CharSequence> {
 
         private final ManageApplications mManageApplications;
@@ -1042,6 +1049,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             }
 
             mManageApplications.setHasDisabled(mState.haveDisabledApps());
+            mManageApplications.setHasInstant(mState.haveInstantApps());
         }
 
         private void rebuildSections() {
