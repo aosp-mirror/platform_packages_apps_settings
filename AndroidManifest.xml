@@ -2004,18 +2004,6 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".bluetooth.DockEventReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.DOCK_EVENT" />
-                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
-                <action android:name="android.bluetooth.headset.action.STATE_CHANGED" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".bluetooth.DockService" />
-
         <activity android:name=".bluetooth.RequestPermissionActivity"
                   android:excludeFromRecents="true"
                   android:permission="android.permission.BLUETOOTH"

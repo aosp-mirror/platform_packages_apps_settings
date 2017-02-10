@@ -24,7 +24,6 @@ import android.content.DialogInterface;
 import android.widget.Toast;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.DockService.DockBluetoothCallback;
 import com.android.settings.search.Index;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -85,11 +84,6 @@ public final class Utils {
 
     // TODO: wire this up to show connection errors...
     static void showConnectingError(Context context, String name) {
-        // if (!mIsConnectingErrorPossible) {
-        //     return;
-        // }
-        // mIsConnectingErrorPossible = false;
-
         showError(context, name, R.string.bluetooth_connecting_error_message);
     }
 
@@ -147,8 +141,6 @@ public final class Utils {
         @Override
         public void onBluetoothManagerInitialized(Context appContext,
                 LocalBluetoothManager bluetoothManager) {
-            bluetoothManager.getEventManager().registerCallback(
-                    new DockBluetoothCallback(appContext));
             com.android.settingslib.bluetooth.Utils.setErrorListener(mErrorListener);
         }
     };
