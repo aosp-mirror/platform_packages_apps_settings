@@ -275,7 +275,7 @@ public class BillingCycleSettings extends DataUsageBase implements
             Spinner spinner = (Spinner) mView.findViewById(R.id.size_spinner);
 
             String bytesString = bytesField.getText().toString();
-            if (bytesString.isEmpty()) {
+            if (bytesString.isEmpty() || bytesString.equals(".")) {
                 bytesString = "0";
             }
             final long bytes = (long) (Float.valueOf(bytesString)
