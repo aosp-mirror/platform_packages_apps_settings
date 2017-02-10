@@ -743,7 +743,8 @@
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
-    <string name="security_settings_title">Security &amp; lockscreen</string>
+    <string name="security_settings_title">Security &amp; screen lock</string>
+
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
     <!-- Main Settings screen setting option summary text for the item to take you to the CDMA security and location screen -->
@@ -754,7 +755,8 @@
     <string name="disabled_by_administrator_summary">Disabled by administrator</string>
     <!-- In the security screen, the header title for security statuses -->
     <string name="security_status_title">Security status</string>
-
+    <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="security_dashboard_summary">Location, fingerprint</string>
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
@@ -3960,6 +3962,8 @@
     <string name="accessibility_settings">Accessibility</string>
     <!-- Settings title for accessibility settings screen -->
     <string name="accessibility_settings_title">Accessibility settings</string>
+    <!-- Summary for Accessibility settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="accessibility_settings_summary">Screen readers, audio, display, interaction controls</string>
     <!-- Settings title for a brief version of Vision-Related Accessibility Settings. Displayed in Setup Wizard only. [CHAR LIMIT=35] -->
     <string name="vision_settings_title">Vision Settings</string>
     <!-- Settings description for a brief version of Vision-Related Accessibility Settings. Tells the user that they can adjust these settings now to help them through the remainder of the Setup Wizard and that they can later be changed in Settings. Displayed in Setup Wizard only. [CHAR LIMIT=none] -->
@@ -5698,6 +5702,9 @@
     <!-- Help menu label [CHAR LIMIT=20] -->
     <string name="help_label">Help &amp; feedback</string>
 
+    <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
+    <string name="support_summary">Help articles, phone &amp; chat support</string>
+
     <!-- Help URI, Default [DO NOT TRANSLATE] -->
     <string name="help_uri_default" translatable="false"></string>
     <!-- Help URI, Android beam [DO NOT TRANSLATE] -->
@@ -5956,17 +5963,23 @@
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
     <string name="network_dashboard_title">Network &amp; internet</string>
+    <!-- Summary for Network and Internet settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="network_dashboard_summary">Wi-Fi, cellular, data usage, hotspot</string>
     <!-- Title for setting tile leading to Connected devices settings [CHAR LIMIT=40]-->
     <string name="connected_devices_dashboard_title">Connected devices</string>
+    <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="connected_devices_dashboard_summary">Bluetooth, NFC, cast</string>
     <!-- Title for setting tile leading to Apps & Notification settings [CHAR LIMIT=40]-->
     <string name="app_and_notification_dashboard_title">Apps &amp; notifications</string>
+    <!-- Summary for Apps & Notification settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="app_and_notification_dashboard_summary">Permissions, default apps</string>
     <!-- Title for setting tile leading to User and accounts settings [CHAR LIMIT=40]-->
     <string name="account_dashboard_title">User &amp; accounts</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
-    <!-- Summary text for system preference tile, showing current display language of device [CHAR LIMIT=NONE]-->
-    <string name="system_dashboard_summary">Language: <xliff:g id="language">%1$s</xliff:g></string>
+    <!-- Summary text for system preference tile, showing important setting items under system setting [CHAR LIMIT=NONE]-->
+    <string name="system_dashboard_summary">Languages, backup, updates, about phone</string>
 
     <!-- Search strings -->
     <!-- Text to describe the search results fragment title [CHAR LIMIT=16] -->
@@ -6059,6 +6072,9 @@
     <!-- Sound: Dashboard summary indicating the volume of ringtone. example: Ring volume at 20%.
     [CHAR LIMIT=100] -->
     <string name="sound_settings_summary">Ring volume at <xliff:g id="percentage" example="2%">%1$s</xliff:g></string>
+
+    <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="sound_dashboard_summary">Volume, vibration, Do not disturb</string>
 
     <!-- Sound: Dashboard summary indicating the volume of ringtone when at 0% with vibrate enabled. [CHAR LIMIT=100] -->
     <string name="sound_settings_summary_vibrate">Ringer set to vibrate</string>
@@ -7401,6 +7417,8 @@
 
     <!-- Summary of display with screen sleep timeout [CHAR LIMIT=NONE] -->
     <string name="display_summary">Sleep after <xliff:g id="timeout_description" example="10 minutes">%1$s</xliff:g> of inactivity</string>
+    <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="display_dashboard_summary">Wallpaper, sleep, font size</string>
     <!-- Example summary of display used in Setup Wizard preview screen [CHAR LIMIT=NONE] -->
     <string name="display_summary_example">Sleep after 10 minutes of inactivity</string>
 

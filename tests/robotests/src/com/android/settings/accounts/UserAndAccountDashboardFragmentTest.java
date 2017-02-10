@@ -15,11 +15,16 @@
  */
 package com.android.settings.accounts;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
+import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
@@ -37,6 +42,9 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
@@ -48,6 +56,8 @@ public class UserAndAccountDashboardFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock
+    private UserManager mUserManager;
     private UserAndAccountDashboardFragment mFragment;
 
     @Before
@@ -84,6 +94,24 @@ public class UserAndAccountDashboardFragmentTest {
         tile.metaData = metaData;
 
         assertThat(mFragment.displayTile(tile)).isTrue();
+    }
+
+    @Test
+    public void updateSummary_shouldDisplaySignedInUser() {
+        final Activity activity = mock(Activity.class);
+        final SummaryLoader loader = mock(SummaryLoader.class);
+        final UserInfo userInfo = new UserInfo();
+        userInfo.name = "test_name";
+
+        when(activity.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.getUserInfo(anyInt())).thenReturn(userInfo);
+
+        final SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
+                .createSummaryProvider(activity, loader);
+        provider.setListening(true);
+
+        verify(activity).getString(R.string.user_summary,
+                userInfo.name);
     }
 
     @Test
