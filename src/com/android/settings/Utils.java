@@ -1161,6 +1161,18 @@ public final class Utils extends com.android.settingslib.Utils {
         if (!(new LockPatternUtils(context)).isSecure(userId)) {
             return false;
         }
+        return confirmWorkProfileCredentials(context, userId);
+    }
+
+    public static boolean confirmWorkProfileCredentialsIfNecessary(Context context, int userId) {
+        KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        if (!km.isDeviceLocked(userId)) {
+            return false;
+        }
+        return confirmWorkProfileCredentials(context, userId);
+    }
+
+    private static boolean confirmWorkProfileCredentials(Context context, int userId) {
         final KeyguardManager km = (KeyguardManager) context.getSystemService(
                 Context.KEYGUARD_SERVICE);
         final Intent unlockIntent = km.createConfirmDeviceCredentialIntent(null, null, userId);
@@ -1170,7 +1182,6 @@ public final class Utils extends com.android.settingslib.Utils {
         } else {
             return false;
         }
-
     }
 
     public static CharSequence getApplicationLabel(Context context, String packageName) {

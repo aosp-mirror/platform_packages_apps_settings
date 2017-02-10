@@ -46,7 +46,7 @@ public class DefaultRingtonePreference extends RingtonePreference {
     @Override
     public void performClick() {
         if (mUserId != UserHandle.USER_CURRENT) {
-            if (Utils.unlockWorkProfileIfNecessary(getContext(), mUserId) ||
+            if (Utils.confirmWorkProfileCredentialsIfNecessary(getContext(), mUserId) ||
                     Utils.startQuietModeDialogIfNecessary(getContext(),
                             UserManager.get(getContext()), mUserId)) {
                 return;
