@@ -49,7 +49,9 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
         implements SummaryLoader.SummaryConsumer {
@@ -57,11 +59,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private static final String STATE_SUGGESTION_LIST = "suggestion_list";
     private static final String STATE_CATEGORY_LIST = "category_list";
     private static final String STATE_SUGGESTION_MODE = "suggestion_mode";
+    private static final String STATE_SUGGESTIONS_SHOWN_LOGGED = "suggestions_shown_logged";
 
     private final IconCache mCache;
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final DashboardFeatureProvider mDashboardFeatureProvider;
+    private final ArrayList<String> mSuggestionsShownLogged;
     private SuggestionParser mSuggestionParser;
     private boolean mFirstFrameDrawn;
 
@@ -120,6 +124,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             categories = savedInstanceState.getParcelableArrayList(STATE_CATEGORY_LIST);
             suggestionMode = savedInstanceState.getInt(
                     STATE_SUGGESTION_MODE, DashboardData.SUGGESTION_MODE_DEFAULT);
+            mSuggestionsShownLogged = savedInstanceState.getStringArrayList(
+                    STATE_SUGGESTIONS_SHOWN_LOGGED);
+        } else {
+            mSuggestionsShownLogged = new ArrayList<String>();
         }
 
         mDashboardData = new DashboardData.Builder()
@@ -161,6 +169,25 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 .setCategories(categories)
                 .build();
         notifyDashboardDataChanged(prevData);
+        List<Tile> shownSuggestions = null;
+        switch (mDashboardData.getSuggestionMode()) {
+            case DashboardData.SUGGESTION_MODE_DEFAULT:
+                shownSuggestions = suggestions.subList(0,
+                        Math.min(suggestions.size(), DashboardData.DEFAULT_SUGGESTION_COUNT));
+                break;
+            case DashboardData.SUGGESTION_MODE_EXPANDED:
+                shownSuggestions = suggestions;
+                break;
+        }
+        if (shownSuggestions != null) {
+            for (Tile suggestion : shownSuggestions) {
+                String suggestionId = getSuggestionIdentifier(mContext, suggestion);
+                mMetricsFeatureProvider.action(
+                        mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
+                        getSuggestionIdentifier(mContext, suggestion));
+                mSuggestionsShownLogged.add(getSuggestionIdentifier(mContext, suggestion));
+            }
+        }
     }
 
     public void setCategory(List<DashboardCategory> category) {
@@ -234,6 +261,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 break;
             case R.layout.suggestion_tile:
                 final Tile suggestion = (Tile) mDashboardData.getItemEntityByPosition(position);
+                String suggestionId = getSuggestionIdentifier(mContext, suggestion);
+                // This is for cases when a suggestion is dismissed and the next one comes to view
+                if (!mSuggestionsShownLogged.contains(suggestionId)) {
+                    mMetricsFeatureProvider.action(
+                            mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, suggestionId);
+                    mSuggestionsShownLogged.add(suggestionId);
+                }
                 onBindTile(holder, suggestion);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -281,6 +315,20 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public int getItemCount() {
         return mDashboardData.size();
+    }
+
+    public void onPause() {
+        if (mDashboardData.getSuggestions() == null) {
+            return;
+        }
+        for (Tile suggestion : mDashboardData.getSuggestions()) {
+            String suggestionId = getSuggestionIdentifier(mContext, suggestion);
+            if (mSuggestionsShownLogged.contains(suggestionId)) {
+                mMetricsFeatureProvider.action(
+                        mContext, MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION, suggestionId);
+            }
+        }
+        mSuggestionsShownLogged.clear();
     }
 
     public void onExpandClick(View v) {
@@ -388,6 +436,19 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 final int suggestionMode;
                 if (moreSuggestions) {
                     suggestionMode = DashboardData.SUGGESTION_MODE_EXPANDED;
+                    List<Tile> expandedSuggestions = mDashboardData.getSuggestions().subList(
+                            DashboardData.DEFAULT_SUGGESTION_COUNT,
+                            mDashboardData.getSuggestions().size());
+                    for (Tile suggestion : expandedSuggestions) {
+                        String suggestionId =
+                                DashboardAdapter.getSuggestionIdentifier(mContext, suggestion);
+                        if (!mSuggestionsShownLogged.contains(suggestionId)) {
+                            mMetricsFeatureProvider.action(
+                                    mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
+                                    suggestionId);
+                            mSuggestionsShownLogged.add(suggestionId);
+                        }
+                    }
                 } else {
                     suggestionMode = DashboardData.SUGGESTION_MODE_COLLAPSED;
                 }
@@ -426,6 +487,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             outState.putParcelableArrayList(STATE_CATEGORY_LIST, new ArrayList<>(categories));
         }
         outState.putInt(STATE_SUGGESTION_MODE, mDashboardData.getSuggestionMode());
+        outState.putStringArrayList(STATE_SUGGESTIONS_SHOWN_LOGGED, mSuggestionsShownLogged);
     }
 
     private static class IconCache {

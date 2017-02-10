@@ -60,8 +60,6 @@ public class DashboardSummary extends InstrumentedFragment
     private static final String SUGGESTIONS = "suggestions";
 
     private static final String EXTRA_SCROLL_POSITION = "scroll_position";
-    private static final String EXTRA_SUGGESTION_SHOWN_LOGGED = "suggestions_shown_logged";
-    private static final String EXTRA_SUGGESTION_HIDDEN_LOGGED = "suggestions_hidden_logged";
 
     private final Handler mHandler = new Handler();
 
@@ -73,8 +71,6 @@ public class DashboardSummary extends InstrumentedFragment
     private SuggestionRanker mSuggestionRanker;
     private LinearLayoutManager mLayoutManager;
     private SuggestionsChecks mSuggestionsChecks;
-    private ArrayList<String> mSuggestionsShownLogged;
-    private ArrayList<String> mSuggestionsHiddenLogged;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
 
@@ -106,15 +102,6 @@ public class DashboardSummary extends InstrumentedFragment
         mSuggestionRanker = new SuggestionRanker(
                 new SuggestionFeaturizer(new EventStore(activity)));
         mSuggestionsChecks = new SuggestionsChecks(getContext());
-        if (savedInstanceState == null) {
-            mSuggestionsShownLogged = new ArrayList<>();
-            mSuggestionsHiddenLogged = new ArrayList<>();
-        } else {
-            mSuggestionsShownLogged =
-                    savedInstanceState.getStringArrayList(EXTRA_SUGGESTION_SHOWN_LOGGED);
-            mSuggestionsHiddenLogged =
-                    savedInstanceState.getStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED);
-        }
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                     + " ms");
@@ -158,18 +145,8 @@ public class DashboardSummary extends InstrumentedFragment
                 mMetricsFeatureProvider.hidden(getContext(), c.getMetricsConstant());
             }
         }
-        if (mAdapter.getSuggestions() == null) {
-            return;
-        }
         if (!getActivity().isChangingConfigurations()) {
-            for (Tile suggestion : mAdapter.getSuggestions()) {
-                String id = DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion);
-                if (!mSuggestionsHiddenLogged.contains(id)) {
-                    mSuggestionsHiddenLogged.add(id);
-                    mMetricsFeatureProvider.action(getContext(),
-                            MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION, id);
-                }
-            }
+            mAdapter.onPause();
         }
     }
 
@@ -200,8 +177,6 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED, mSuggestionsHiddenLogged);
-        outState.putStringArrayList(EXTRA_SUGGESTION_SHOWN_LOGGED, mSuggestionsShownLogged);
         if (mLayoutManager == null) return;
         outState.putInt(EXTRA_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
         if (mAdapter != null) {
@@ -280,20 +255,12 @@ public class DashboardSummary extends InstrumentedFragment
                 }
                 // TODO: create a Suggestion class to maintain the id and other info
                 mSuggestionRanker.rank(suggestions, suggestionIds);
-                // TODO: consider showing only top-k (e.g., top-3)
             }
             for (int i = 0; i < suggestions.size(); i++) {
                 Tile suggestion = suggestions.get(i);
                 if (mSuggestionsChecks.isSuggestionComplete(suggestion)) {
                     mAdapter.disableSuggestion(suggestion);
                     suggestions.remove(i--);
-                } else if (context != null) {
-                    String id = DashboardAdapter.getSuggestionIdentifier(context, suggestion);
-                    if (!mSuggestionsShownLogged.contains(id)) {
-                        mSuggestionsShownLogged.add(id);
-                        mMetricsFeatureProvider.action(context,
-                                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, id);
-                    }
                 }
             }
             return suggestions;
