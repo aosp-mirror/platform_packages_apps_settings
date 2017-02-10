@@ -16,16 +16,20 @@
 
 package com.android.settings.qstile;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.os.Bundle;
-import android.view.View;
+import android.service.quicksettings.TileService;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.instrumentation.Instrumentable;
-import com.android.settings.widget.SwitchBar;
 
 public class DevelopmentTileConfigActivity extends SettingsActivity {
 
@@ -42,35 +46,38 @@ public class DevelopmentTileConfigActivity extends SettingsActivity {
         return (DevelopmentTileConfigFragment.class.getName().equals(fragmentName));
     }
 
-    public static class DevelopmentTileConfigFragment extends SettingsPreferenceFragment implements
-            SharedPreferences.OnSharedPreferenceChangeListener {
-
-        private DevelopmentModeTile.DevModeProperties mProps =
-                new DevelopmentModeTile.DevModeProperties();
-
-        private SwitchBar mSwitchBar;
-        private View mDisabledMessage;
+    public static class DevelopmentTileConfigFragment extends SettingsPreferenceFragment
+            implements Preference.OnPreferenceChangeListener {
 
         @Override
         public void onCreate(Bundle icicle) {
             super.onCreate(icicle);
-            getPreferenceManager()
-                    .setSharedPreferencesName(DevelopmentModeTile.SHARED_PREFERENCES_NAME);
-            addPreferencesFromResource(R.xml.development_tile_prefs);
-        }
 
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            mDisabledMessage = setPinnedHeaderView(R.layout.development_tile_config_header);
-            refreshHeader();
-        }
+            Context context = getPrefContext();
+            setPreferenceScreen(getPreferenceManager().createPreferenceScreen(context));
+            getPreferenceScreen().removeAll();
 
-        @Override
-        public void onActivityCreated(Bundle savedInstanceState) {
-            super.onActivityCreated(savedInstanceState);
-            mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
-            mSwitchBar.setEnabled(false);
+            Intent intent = new Intent(TileService.ACTION_QS_TILE)
+                    .setPackage(context.getPackageName());
+            PackageManager pm = getPackageManager();
+            for (ResolveInfo info :
+                    pm.queryIntentServices(intent, PackageManager.MATCH_DISABLED_COMPONENTS)) {
+                ServiceInfo sInfo = info.serviceInfo;
+                int enabledSetting = pm.getComponentEnabledSetting(
+                        new ComponentName(sInfo.packageName, sInfo.name));
+                boolean checked = enabledSetting == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                        || ((enabledSetting == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
+                        && sInfo.enabled);
+
+                SwitchPreference preference = new SwitchPreference(context);
+                preference.setTitle(sInfo.loadLabel(pm));
+                preference.setIcon(sInfo.icon);
+                preference.setKey(sInfo.name);
+                preference.setChecked(checked);
+                preference.setPersistent(false);
+                preference.setOnPreferenceChangeListener(this);
+                getPreferenceScreen().addPreference(preference);
+            }
         }
 
         @Override
@@ -79,37 +86,14 @@ public class DevelopmentTileConfigActivity extends SettingsActivity {
         }
 
         @Override
-        public void onResume() {
-            super.onResume();
-            refreshHeader();
-            getPreferenceManager().getSharedPreferences()
-                    .registerOnSharedPreferenceChangeListener(this);
-        }
-
-        @Override
-        public void onPause() {
-            super.onPause();
-            getPreferenceManager().getSharedPreferences()
-                    .unregisterOnSharedPreferenceChangeListener(this);
-        }
-
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            refreshHeader();
-        }
-
-        private void refreshHeader() {
-            if (mSwitchBar != null && mDisabledMessage != null) {
-                mProps.refreshState(getActivity());
-                if (mProps.isSet) {
-                    mSwitchBar.show();
-                    mDisabledMessage.setVisibility(View.GONE);
-                } else {
-                    mSwitchBar.hide();
-                    mDisabledMessage.setVisibility(View.VISIBLE);
-                }
-                mSwitchBar.setChecked(mProps.allMatch);
-            }
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            ComponentName cn = new ComponentName(
+                    getPrefContext().getPackageName(), preference.getKey());
+            getPackageManager().setComponentEnabledSetting(cn, (Boolean) newValue
+                            ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                            : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP);
+            return true;
         }
     }
 }

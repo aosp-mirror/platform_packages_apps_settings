@@ -103,6 +103,14 @@
         <intent android:action="com.android.settings.action.DEMO_MODE" />
     </Preference>
 
+    <Preference
+        android:key="quick_settings_tiles"
+        android:title="@string/quick_settings_developer_tiles">
+        <intent
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.qstile.DevelopmentTileConfigActivity" />
+    </Preference>
+
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
 

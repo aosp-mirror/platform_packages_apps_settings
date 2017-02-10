@@ -62,7 +62,6 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.qstile.DevelopmentModeTile;
 import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.widget.SwitchBar;
@@ -940,9 +939,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsActivity.DASHBOARD_ALIAS),
                 showDev, isAdmin);
-
-        // Reveal development-only quick settings tiles
-        setTileEnabled(new ComponentName(this, DevelopmentModeTile.class), showDev);
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
             // When on restricted users, disable all extra categories (but only the settings ones).
