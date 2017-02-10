@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -59,10 +58,10 @@ import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 import java.io.File;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -513,10 +512,13 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
         private final Context mContext;
         private final SummaryLoader mLoader;
+        private final StorageManagerVolumeProvider mStorageManagerVolumeProvider;
 
         private SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
             mLoader = loader;
+            final StorageManager storageManager = mContext.getSystemService(StorageManager.class);
+            mStorageManagerVolumeProvider = new StorageManagerVolumeProvider(storageManager);
         }
 
         @Override
@@ -528,13 +530,13 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
         private void updateSummary() {
             // TODO: Register listener.
-            final StorageManager storageManager = mContext.getSystemService(StorageManager.class);
-            PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
-                    new StorageManagerVolumeProvider(storageManager));
-            long privateUsedBytes = info.totalBytes - info.freeBytes;
+            final NumberFormat percentageFormat = NumberFormat.getPercentInstance();
+            final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
+                    mStorageManagerVolumeProvider);
+            double privateUsedBytes = info.totalBytes - info.freeBytes;
             mLoader.setSummary(this, mContext.getString(R.string.storage_summary,
-                    Formatter.formatFileSize(mContext, privateUsedBytes),
-                    Formatter.formatFileSize(mContext, info.totalBytes)));
+                    percentageFormat.format(privateUsedBytes / info.totalBytes),
+                    Formatter.formatFileSize(mContext, info.freeBytes)));
         }
     }
 
