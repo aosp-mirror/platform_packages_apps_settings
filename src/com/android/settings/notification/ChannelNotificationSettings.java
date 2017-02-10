@@ -35,6 +35,7 @@ import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -98,6 +99,12 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                 FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
         addPreferencesFromResource(R.xml.channel_notification_settings);
 
+        // load settings intent
+        ArrayMap<String, NotificationBackend.AppRow>
+                rows = new ArrayMap<String, NotificationBackend.AppRow>();
+        rows.put(mAppRow.pkg, mAppRow);
+        collectConfigActivities(rows);
+
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
         mBadge = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BADGE);
         mImportance = (RestrictedDropDownPreference) findPreference(KEY_IMPORTANCE);
@@ -127,8 +134,9 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                     .setSummary(mAppRow.label)
                     .setPackageName(mAppRow.pkg)
                     .setUid(mAppRow.uid)
+                    .setAppNotifPrefIntent(mAppRow.settingsIntent)
                     .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                            AppHeaderController.ActionType.ACTION_NONE)
+                            AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
                     .done(getPrefContext());
             getPreferenceScreen().addPreference(pref);
         }

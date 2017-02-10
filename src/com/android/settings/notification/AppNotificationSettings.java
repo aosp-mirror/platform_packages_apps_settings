@@ -61,11 +61,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
-            = new Intent(Intent.ACTION_MAIN)
-                .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES);
-
-    private static final String KEY_CHANNELS = "channels";
     private static final String KEY_BLOCK = "block";
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
@@ -268,46 +263,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             setVisible(category, !banned);
         }
         setVisible(mBadge, !banned);
-    }
-
-    private List<ResolveInfo> queryNotificationConfigActivities() {
-        if (DEBUG) Log.d(TAG, "APP_NOTIFICATION_PREFS_CATEGORY_INTENT is "
-                + APP_NOTIFICATION_PREFS_CATEGORY_INTENT);
-        final List<ResolveInfo> resolveInfos = mPm.queryIntentActivities(
-                APP_NOTIFICATION_PREFS_CATEGORY_INTENT,
-                0 //PackageManager.MATCH_DEFAULT_ONLY
-        );
-        return resolveInfos;
-    }
-
-    private void collectConfigActivities(ArrayMap<String, AppRow> rows) {
-        final List<ResolveInfo> resolveInfos = queryNotificationConfigActivities();
-        applyConfigActivities(rows, resolveInfos);
-    }
-
-    private void applyConfigActivities(ArrayMap<String, AppRow> rows,
-            List<ResolveInfo> resolveInfos) {
-        if (DEBUG) Log.d(TAG, "Found " + resolveInfos.size() + " preference activities"
-                + (resolveInfos.size() == 0 ? " ;_;" : ""));
-        for (ResolveInfo ri : resolveInfos) {
-            final ActivityInfo activityInfo = ri.activityInfo;
-            final ApplicationInfo appInfo = activityInfo.applicationInfo;
-            final AppRow row = rows.get(appInfo.packageName);
-            if (row == null) {
-                if (DEBUG) Log.v(TAG, "Ignoring notification preference activity ("
-                        + activityInfo.name + ") for unknown package "
-                        + activityInfo.packageName);
-                continue;
-            }
-            if (row.settingsIntent != null) {
-                if (DEBUG) Log.v(TAG, "Ignoring duplicate notification preference activity ("
-                        + activityInfo.name + ") for package "
-                        + activityInfo.packageName);
-                continue;
-            }
-            row.settingsIntent = new Intent(APP_NOTIFICATION_PREFS_CATEGORY_INTENT)
-                    .setClassName(activityInfo.packageName, activityInfo.name);
-        }
     }
 
     private Comparator<NotificationChannel> mChannelComparator =
