@@ -366,13 +366,22 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
             }
         }
 
+        /**
+         * Dialog setup.
+         * <p>
+         * To make it less likely that the dialog is dismissed accidentally, for example if the
+         * device is malfunctioning or if the device is in a pocket, we set
+         * {@code setCanceledOnTouchOutside(false)}.
+         */
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return new AlertDialog.Builder(getActivity())
+            Dialog dialog = new AlertDialog.Builder(getActivity())
                     .setTitle(getArguments().getString(ARG_TITLE))
                     .setMessage(getArguments().getInt(ARG_MESSAGE))
                     .setPositiveButton(getArguments().getInt(ARG_BUTTON), null)
                     .create();
+            dialog.setCanceledOnTouchOutside(false);
+            return dialog;
         }
 
         @Override
