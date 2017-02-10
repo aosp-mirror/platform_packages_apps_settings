@@ -44,7 +44,6 @@ import static com.android.settings.fuelgauge.PowerUsageBase.MENU_STATS_REFRESH;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -61,6 +60,7 @@ public class PowerUsageSummaryTest {
     private static final int UID = 123;
     private static final int POWER_MAH = 100;
     private static final double BATTERY_SCREEN_USAGE = 300;
+    private static final double BATTERY_SYSTEM_USAGE = 600;
     private static final double PRECISION = 0.001;
     private static final Intent ADDITIONAL_BATTERY_INFO_INTENT =
             new Intent("com.example.app.ADDITIONAL_BATTERY_INFO");
@@ -79,6 +79,8 @@ public class PowerUsageSummaryTest {
     private BatterySipper mNormalBatterySipper;
     @Mock
     private BatterySipper mScreenBatterySipper;
+    @Mock
+    private BatterySipper mSystemBatterySipper;
     @Mock
     private PowerGaugePreference mPreference;
 
@@ -114,6 +116,9 @@ public class PowerUsageSummaryTest {
 
         mScreenBatterySipper.drainType = BatterySipper.DrainType.SCREEN;
         mScreenBatterySipper.totalPowerMah = BATTERY_SCREEN_USAGE;
+        mSystemBatterySipper.drainType = BatterySipper.DrainType.APP;
+        mSystemBatterySipper.totalPowerMah = BATTERY_SYSTEM_USAGE;
+        when(mSystemBatterySipper.getUid()).thenReturn(Process.SYSTEM_UID);
     }
 
     @Test
@@ -162,23 +167,24 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testRemoveScreenBatterySipper_ContainsScreenSipper_RemoveAndReturnValue() {
-        final List<BatterySipper> sippers = new ArrayList<>();
-        sippers.add(mNormalBatterySipper);
-        sippers.add(mScreenBatterySipper);
-
-        final double screenUsage = mPowerUsageSummary.removeScreenBatterySipper(sippers);
-        assertThat(sippers).containsExactly(mNormalBatterySipper);
-        assertThat(screenUsage).isWithin(PRECISION).of(BATTERY_SCREEN_USAGE);
-    }
-
-    @Test
     public void testExtractKeyFromSipper_TypeAPPUidObjectNotNull_ReturnUid() {
         mNormalBatterySipper.uidObj = new BatteryStatsImpl.Uid(new BatteryStatsImpl(), UID);
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
 
         final String key = mPowerUsageSummary.extractKeyFromSipper(mNormalBatterySipper);
         assertThat(key).isEqualTo(Integer.toString(mNormalBatterySipper.getUid()));
+    }
+
+    @Test
+    public void testRemoveHiddenBatterySippers_ContainsHiddenSippers_RemoveAndReturnValue() {
+        final List<BatterySipper> sippers = new ArrayList<>();
+        sippers.add(mNormalBatterySipper);
+        sippers.add(mScreenBatterySipper);
+        sippers.add(mSystemBatterySipper);
+
+        final double totalUsage = mPowerUsageSummary.removeHiddenBatterySippers(sippers);
+        assertThat(sippers).containsExactly(mNormalBatterySipper);
+        assertThat(totalUsage).isWithin(PRECISION).of(BATTERY_SCREEN_USAGE + BATTERY_SYSTEM_USAGE);
     }
 
     @Test
@@ -190,6 +196,12 @@ public class PowerUsageSummaryTest {
     @Test
     public void testShouldHideSipper_TypeCell_ReturnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.CELL;
+        assertThat(mPowerUsageSummary.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSipper_TypeScreen_ReturnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.SCREEN;
         assertThat(mPowerUsageSummary.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
