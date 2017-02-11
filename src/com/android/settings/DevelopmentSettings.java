@@ -1871,7 +1871,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         default:
             break;
         }
-        if (index >= 0) {
+        if (index >= 0 && mBluetoothSelectA2dpCodec != null) {
             summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_summaries);
             streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
             mBluetoothSelectA2dpCodec.setSummary(streaming);
@@ -1898,7 +1898,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         default:
             break;
         }
-        if (index >= 0) {
+        if (index >= 0 && mBluetoothSelectA2dpSampleRate != null) {
             summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_sample_rate_summaries);
             streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
              mBluetoothSelectA2dpSampleRate.setSummary(streaming);
@@ -1920,7 +1920,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         default:
             break;
         }
-        if (index >= 0) {
+        if (index >= 0 && mBluetoothSelectA2dpBitsPerSample != null) {
             summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_bits_per_sample_summaries);
             streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
             mBluetoothSelectA2dpBitsPerSample.setSummary(streaming);
@@ -1939,7 +1939,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         default:
             break;
         }
-        if (index >= 0) {
+        if (index >= 0 && mBluetoothSelectA2dpChannelMode != null) {
             summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_channel_mode_summaries);
             streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
              mBluetoothSelectA2dpChannelMode.setSummary(streaming);
@@ -1965,7 +1965,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             index = -1;
             break;
         }
-        if (index >= 0) {
+        if (index >= 0 && mBluetoothSelectA2dpLdacPlaybackQuality != null) {
             summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_ldac_playback_quality_summaries);
             streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
             mBluetoothSelectA2dpLdacPlaybackQuality.setSummary(streaming);
