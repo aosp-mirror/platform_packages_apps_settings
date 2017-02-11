@@ -26,7 +26,6 @@ import android.telephony.TelephonyManager;
 
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;

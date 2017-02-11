@@ -83,17 +83,20 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 new WifiMasterSwitchPreferenceController(context, mMetricsFeatureProvider);
         final MobileNetworkPreferenceController mobileNetworkPreferenceController =
                 new MobileNetworkPreferenceController(context);
+        final VpnPreferenceController vpnPreferenceController =
+                new VpnPreferenceController(context);
         final Lifecycle lifecycle = getLifecycle();
         lifecycle.addObserver(airplaneModePreferenceController);
         lifecycle.addObserver(mobilePlanPreferenceController);
         lifecycle.addObserver(wifiPreferenceController);
         lifecycle.addObserver(mobileNetworkPreferenceController);
+        lifecycle.addObserver(vpnPreferenceController);
 
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(airplaneModePreferenceController);
         controllers.add(mobileNetworkPreferenceController);
         controllers.add(new TetherPreferenceController(context));
-        controllers.add(new VpnPreferenceController(context));
+        controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
         controllers.add(wifiPreferenceController);
