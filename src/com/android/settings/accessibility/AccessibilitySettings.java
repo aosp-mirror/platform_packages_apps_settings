@@ -81,8 +81,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "toggle_power_button_ends_call_preference";
     private static final String TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE =
             "toggle_lock_screen_rotation_preference";
-    private static final String TOGGLE_SPEAK_PASSWORD_PREFERENCE =
-            "toggle_speak_password_preference";
     private static final String TOGGLE_LARGE_POINTER_ICON =
             "toggle_large_pointer_icon";
     private static final String TOGGLE_MASTER_MONO =
@@ -184,7 +182,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mToggleHighTextContrastPreference;
     private SwitchPreference mTogglePowerButtonEndsCallPreference;
     private SwitchPreference mToggleLockScreenRotationPreference;
-    private SwitchPreference mToggleSpeakPasswordPreference;
     private SwitchPreference mToggleLargePointerIconPreference;
     private SwitchPreference mToggleMasterMonoPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
@@ -334,9 +331,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         } else if (mToggleLockScreenRotationPreference == preference) {
             handleLockScreenRotationPreferenceClick();
             return true;
-        } else if (mToggleSpeakPasswordPreference == preference) {
-            handleToggleSpeakPasswordPreferenceClick();
-            return true;
         } else if (mToggleLargePointerIconPreference == preference) {
             handleToggleLargePointerIconPreferenceClick();
             return true;
@@ -367,12 +361,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private void handleLockScreenRotationPreferenceClick() {
         RotationPolicy.setRotationLockForAccessibility(getActivity(),
                 !mToggleLockScreenRotationPreference.isChecked());
-    }
-
-    private void handleToggleSpeakPasswordPreferenceClick() {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SPEAK_PASSWORD,
-                mToggleSpeakPasswordPreference.isChecked() ? 1 : 0);
     }
 
     private void handleToggleLargePointerIconPreferenceClick() {
@@ -423,10 +411,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (!RotationPolicy.isRotationSupported(getActivity())) {
             mSystemsCategory.removePreference(mToggleLockScreenRotationPreference);
         }
-
-        // Speak passwords.
-        mToggleSpeakPasswordPreference =
-                (SwitchPreference) findPreference(TOGGLE_SPEAK_PASSWORD_PREFERENCE);
 
         // Large pointer icon.
         mToggleLargePointerIconPreference =
@@ -605,11 +589,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         // Auto-rotate screen
         updateLockScreenRotationCheckbox();
-
-        // Speak passwords.
-        final boolean speakPasswordEnabled = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SPEAK_PASSWORD, 0) != 0;
-        mToggleSpeakPasswordPreference.setChecked(speakPasswordEnabled);
 
         // Large pointer icon.
         mToggleLargePointerIconPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
