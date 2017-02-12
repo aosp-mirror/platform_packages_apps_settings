@@ -60,7 +60,7 @@ public class SavedQueryLoaderTest {
 
     @Test
     public void loadInBackground_shouldReturnSavedQueries() {
-        final List<SearchResult> results = mLoader.loadInBackground();
+        final List<? extends SearchResult> results = mLoader.loadInBackground();
         assertThat(results.size()).isEqualTo(SavedQueryLoader.MAX_PROPOSED_SUGGESTIONS);
         for (SearchResult result : results) {
             assertThat(result.viewType).isEqualTo(ResultPayload.PayloadType.SAVED_QUERY);

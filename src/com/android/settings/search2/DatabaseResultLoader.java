@@ -36,7 +36,7 @@ import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS
 /**
  * AsyncTask to retrieve Settings, First party app and any intent based results.
  */
-public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
+public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResult>> {
     private static final String LOG = "DatabaseResultLoader";
 
     /* These indices are used to match the columns of the this loader's SELECT statement.
@@ -98,26 +98,25 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
     private static final int[] BASE_RANKS = {1, 4, 7};
 
     private final String mQueryText;
-    private final SQLiteDatabase mDatabase;
+    private final Context mContext;
     private final CursorToSearchResultConverter mConverter;
     private final SiteMapManager mSiteMapManager;
 
-    public DatabaseResultLoader(Context context, String queryText) {
+    public DatabaseResultLoader(Context context, String queryText, SiteMapManager mapManager) {
         super(context);
-        mSiteMapManager = FeatureFactory.getFactory(context)
-                .getSearchFeatureProvider().getSiteMapManager();
-        mDatabase = IndexDatabaseHelper.getInstance(context).getReadableDatabase();
+        mSiteMapManager = mapManager;
+        mContext = context;
         mQueryText = cleanQuery(queryText);
         mConverter = new CursorToSearchResultConverter(context, mQueryText);
     }
 
     @Override
-    protected void onDiscardResult(List<SearchResult> result) {
+    protected void onDiscardResult(List<? extends SearchResult> result) {
         // TODO Search
     }
 
     @Override
-    public List<SearchResult> loadInBackground() {
+    public List<? extends SearchResult> loadInBackground() {
         if (mQueryText == null || mQueryText.isEmpty()) {
             return null;
         }
@@ -144,7 +143,9 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
         final String whereClause = buildWhereClause(matchColumns);
         final String[] selection = buildQuerySelection(matchColumns.length * 2);
 
-        final Cursor resultCursor = mDatabase.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
+        final SQLiteDatabase database = IndexDatabaseHelper.getInstance(mContext)
+                .getReadableDatabase();
+        final Cursor resultCursor = database.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
                 selection, null, null, null);
         return mConverter.convertCursor(mSiteMapManager, resultCursor, baseRank);
     }

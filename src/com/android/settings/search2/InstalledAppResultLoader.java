@@ -42,7 +42,7 @@ import java.util.List;
 /**
  * Search loader for installed apps.
  */
-public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
+public class InstalledAppResultLoader extends AsyncLoader<List<? extends SearchResult>> {
 
     private static final int NAME_NO_MATCH = -1;
     private static final Intent LAUNCHER_PROBE = new Intent(Intent.ACTION_MAIN)
@@ -56,18 +56,17 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
 
 
     public InstalledAppResultLoader(Context context, PackageManagerWrapper pmWrapper,
-            String query) {
+            String query, SiteMapManager mapManager) {
         super(context);
-        mSiteMapManager = FeatureFactory.getFactory(context)
-                .getSearchFeatureProvider().getSiteMapManager();
+        mSiteMapManager = mapManager;
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPackageManager = pmWrapper;
         mQuery = query;
     }
 
     @Override
-    public List<SearchResult> loadInBackground() {
-        final List<SearchResult> results = new ArrayList<>();
+    public List<? extends SearchResult> loadInBackground() {
+        final List<AppSearchResult> results = new ArrayList<>();
         final PackageManager pm = mPackageManager.getPackageManager();
 
         for (UserInfo user : getUsersToCount()) {
@@ -90,10 +89,10 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
                         .setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                         .setData(Uri.fromParts("package", info.packageName, null));
 
-                final SearchResult.Builder builder = new SearchResult.Builder();
-                builder.addIcon(info.loadIcon(pm))
+                final AppSearchResult.Builder builder = new AppSearchResult.Builder();
+                builder.setAppInfo(info)
                         .addTitle(info.loadLabel(pm))
-                        .addRank(wordDiff)
+                        .addRank(getRank(wordDiff))
                         .addBreadcrumbs(getBreadCrumb())
                         .addPayload(new IntentPayload(intent));
                 results.add(builder.build());
@@ -120,7 +119,7 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
     }
 
     @Override
-    protected void onDiscardResult(List<SearchResult> result) {
+    protected void onDiscardResult(List<? extends SearchResult> result) {
 
     }
 
@@ -199,5 +198,17 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
                     context.getString(R.string.applications_settings));
         }
         return mBreadcrumb;
+    }
+
+    /**
+     * A temporary ranking scheme for installed apps.
+     * @param wordDiff difference between query length and app name length.
+     * @return the ranking.
+     */
+    private int getRank(int wordDiff) {
+        if (wordDiff < 6) {
+            return 3;
+        }
+        return 4;
     }
 }

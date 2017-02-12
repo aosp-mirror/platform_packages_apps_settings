@@ -59,7 +59,7 @@ public class SavedQueryRecorderTest {
         mRecorder.loadInBackground();
 
         final SavedQueryLoader loader = new SavedQueryLoader(mContext);
-        List<SearchResult> results = loader.loadInBackground();
+        List<? extends SearchResult> results = loader.loadInBackground();
 
         assertThat(results.size()).isEqualTo(1);
         assertThat(results.get(0).title).isEqualTo(query);

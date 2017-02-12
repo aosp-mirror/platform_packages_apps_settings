@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Loader for recently searched queries.
  */
-public class SavedQueryLoader extends AsyncLoader<List<SearchResult>> {
+public class SavedQueryLoader extends AsyncLoader<List<? extends SearchResult>> {
 
     // Max number of proposed suggestions
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -45,12 +45,12 @@ public class SavedQueryLoader extends AsyncLoader<List<SearchResult>> {
     }
 
     @Override
-    protected void onDiscardResult(List<SearchResult> result) {
+    protected void onDiscardResult(List<? extends SearchResult> result) {
 
     }
 
     @Override
-    public List<SearchResult> loadInBackground() {
+    public List<? extends SearchResult> loadInBackground() {
         Cursor cursor = mDatabase.query(IndexDatabaseHelper.Tables.TABLE_SAVED_QUERIES /* table */,
                 new String[]{SavedQueriesColumns.QUERY} /* columns */,
                 null /* selection */,

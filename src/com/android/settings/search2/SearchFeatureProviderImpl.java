@@ -65,13 +65,14 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     @Override
     public DatabaseResultLoader getDatabaseSearchLoader(Context context, String query) {
-        return new DatabaseResultLoader(context, query);
+        return new DatabaseResultLoader(context, query, getSiteMapManager());
     }
 
     @Override
     public InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query) {
         return new InstalledAppResultLoader(
-                context, new PackageManagerWrapperImpl(context.getPackageManager()), query);
+                context, new PackageManagerWrapperImpl(context.getPackageManager()), query,
+                getSiteMapManager());
     }
 
     @Override

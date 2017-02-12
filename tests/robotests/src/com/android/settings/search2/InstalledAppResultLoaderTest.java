@@ -94,6 +94,8 @@ public class InstalledAppResultLoaderTest {
                         ApplicationTestUtils.buildInfo(0 /* uid */, "app4", 0 /* flags */,
                                 0 /* targetSdkVersion */),
                         ApplicationTestUtils.buildInfo(0 /* uid */, "app", 0 /* flags */,
+                                0 /* targetSdkVersion */),
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "appBuffer", 0 /* flags */,
                                 0 /* targetSdkVersion */)));
     }
 
@@ -101,7 +103,8 @@ public class InstalledAppResultLoaderTest {
     public void query_noMatchingQuery_shouldReturnEmptyResult() {
         final String query = "abc";
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground()).isEmpty();
     }
@@ -110,12 +113,13 @@ public class InstalledAppResultLoaderTest {
     public void query_matchingQuery_shouldReturnNonSystemApps() {
         final String query = "app";
 
-        mLoader = spy(new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query));
+        mLoader = spy(new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager));
         when(mLoader.getContext()).thenReturn(mContext);
         when(mSiteMapManager.buildBreadCrumb(eq(mContext), anyString(), anyString()))
                 .thenReturn(Arrays.asList(new String[]{"123"}));
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(2);
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(3);
         verify(mSiteMapManager)
                 .buildBreadCrumb(eq(mContext), anyString(), anyString());
     }
@@ -128,7 +132,8 @@ public class InstalledAppResultLoaderTest {
                                 0 /* targetSdkVersion */)));
         final String query = "app";
 
-        mLoader = spy(new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query));
+        mLoader = spy(new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager));
         when(mLoader.getContext()).thenReturn(mContext);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
@@ -150,7 +155,8 @@ public class InstalledAppResultLoaderTest {
 
         final String query = "app";
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
     }
@@ -167,7 +173,8 @@ public class InstalledAppResultLoaderTest {
 
         final String query = "app";
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground()).isEmpty();
         verify(mSiteMapManager, never())
@@ -178,15 +185,15 @@ public class InstalledAppResultLoaderTest {
     public void query_matchingQuery_shouldRankBasedOnSimilarity() {
         final String query = "app";
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
-        final List<SearchResult> results = mLoader.loadInBackground();
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
+        final List<? extends SearchResult> results = mLoader.loadInBackground();
 
         // List is sorted by rank
-        assertThat(results.get(0).rank).isLessThan(results.get(1).rank);
-        // perfect match first
-        assertThat(results.get(0).title).isEqualTo(query);
-        // Then partial match
-        assertThat(results.get(1).title).isNotEqualTo(query);
+        assertThat(results.get(0).rank).isAtMost(results.get(1).rank);
+        assertThat(results.get(0).title).isEqualTo("app4");
+        assertThat(results.get(1).title).isEqualTo("app");
+        assertThat(results.get(2).title).isEqualTo("appBuffer");
     }
 
     @Test
@@ -197,7 +204,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
     }
@@ -210,7 +218,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(0);
     }
@@ -223,7 +232,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
     }
@@ -236,7 +246,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
     }
@@ -249,7 +260,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
     }
@@ -262,7 +274,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
     }
@@ -275,7 +288,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
     }
@@ -288,7 +302,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
     }
@@ -301,7 +316,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
     }
@@ -314,7 +330,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(0);
     }
@@ -327,7 +344,8 @@ public class InstalledAppResultLoaderTest {
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+                mSiteMapManager);
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(0);
     }
