@@ -49,6 +49,8 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.ArrayList;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -72,6 +74,11 @@ public class DashboardFeatureProviderImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mImpl = new DashboardFeatureProviderImpl(mActivity);
+    }
+
+    @Test
+    public void shouldHoldAppContext() {
+        assertThat(mImpl.mContext).isEqualTo(mActivity.getApplicationContext());
     }
 
     @Test
@@ -191,7 +198,7 @@ public class DashboardFeatureProviderImplTest {
         ShadowActivity shadowActivity = shadowOf(activity);
 
         assertThat(shadowActivity.getNextStartedActivityForResult().intent.getAction())
-            .isEqualTo("TestAction");
+                .isEqualTo("TestAction");
     }
 
     @Test
@@ -234,7 +241,8 @@ public class DashboardFeatureProviderImplTest {
         when(mSpy.isEnabled()).thenReturn(true);
         final DashboardCategory category = new DashboardCategory();
         category.tiles.add(new Tile());
-        when(mCategoryManager.getTilesByCategory(mActivity, CategoryKey.CATEGORY_HOMEPAGE))
+        when(mCategoryManager
+                .getTilesByCategory(any(Context.class), eq(CategoryKey.CATEGORY_HOMEPAGE)))
                 .thenReturn(category);
 
         assertThat(mSpy.getPreferencesForCategory(mActivity,
