@@ -51,13 +51,13 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private final CategoryManager mCategoryManager;
 
     public DashboardFeatureProviderImpl(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mCategoryManager = CategoryManager.get(context, getExtraIntentAction());
     }
 
     @VisibleForTesting
     DashboardFeatureProviderImpl(Context context, CategoryManager categoryManager) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mCategoryManager = categoryManager;
     }
 
