@@ -120,7 +120,7 @@ public class MasterClearConfirm extends OptionsMenuFragment {
     };
 
     private void doMasterClear() {
-        Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
+        Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);
         intent.setPackage("android");
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         intent.putExtra(Intent.EXTRA_REASON, "MasterClearConfirm");

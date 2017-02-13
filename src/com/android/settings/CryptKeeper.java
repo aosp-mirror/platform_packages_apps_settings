@@ -209,7 +209,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 hide(R.id.emergencyCallButton);
             } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
                 // Factory reset the device.
-                Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
+                Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);
                 intent.setPackage("android");
                 intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
                 intent.putExtra(Intent.EXTRA_REASON, "CryptKeeper.MAX_FAILED_ATTEMPTS");
@@ -612,7 +612,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 @Override
             public void onClick(View v) {
                 // Factory reset the device.
-                Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
+                Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);
                 intent.setPackage("android");
                 intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
                 intent.putExtra(Intent.EXTRA_REASON,
