@@ -32,7 +32,6 @@ import com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceCont
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.widget.FooterPreference;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
 import java.util.ArrayList;
@@ -84,13 +83,6 @@ public class StorageDashboardFragment extends DashboardFragment {
         mSummaryController.updateBytes(usedBytes, totalSize);
         mPreferenceController.setVolume(mVolume);
         mPreferenceController.setSystemSize(systemSize);
-
-        // Initialize the footer preference to go to the smart storage management.
-        final FooterPreference pref = mFooterPreferenceMixin.createFooterPreference();
-        pref.setTitle(R.string.storage_menu_manage);
-        pref.setFragment("com.android.settings.deletionhelper.AutomaticStorageManagerSettings");
-        pref.setIcon(R.drawable.ic_settings_storage);
-        pref.setEnabled(true);
     }
 
     @Override

@@ -43,4 +43,10 @@
         android:key="pref_system"
         android:title="@string/storage_detail_system">
     </com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate>
+    <Preference
+        android:key="manage_storage"
+        android:title="@string/storage_menu_manage"
+        android:icon="@drawable/ic_settings_storage"
+        android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings">
+    </Preference>
 </PreferenceScreen>
