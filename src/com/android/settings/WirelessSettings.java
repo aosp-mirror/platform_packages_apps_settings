@@ -253,7 +253,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                     new NfcPreferenceController(context).updateNonIndexableKeys(result);
                     new MobilePlanPreferenceController(context, null /* MobilePlanClickHandler */)
                             .updateNonIndexableKeys(result);
-                    new MobileNetworkPreferenceController(context).updateNonIndexableKeys(result);
+                    new MobileNetworkPreferenceController(context)
+                            .updateNonIndexableKeys(result);
 
                     // Remove Airplane Mode settings if it's a stationary device such as a TV.
                     new AirplaneModePreferenceController(context, null /* fragment */)

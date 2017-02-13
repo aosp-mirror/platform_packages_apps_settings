@@ -17,25 +17,39 @@ package com.android.settings.network;
 
 import android.content.Context;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+import android.telephony.PhoneStateListener;
+import android.telephony.ServiceState;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.LifecycleObserver;
+import com.android.settings.core.lifecycle.events.OnPause;
+import com.android.settings.core.lifecycle.events.OnResume;
 
 import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
 import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
 
-public class MobileNetworkPreferenceController extends PreferenceController {
+public class MobileNetworkPreferenceController extends PreferenceController implements
+        LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
 
     private final UserManager mUserManager;
     private final boolean mIsSecondaryUser;
+    private final TelephonyManager mTelephonyManager;
+    private Preference mPreference;
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    PhoneStateListener mPhoneStateListener;
 
     public MobileNetworkPreferenceController(Context context) {
         super(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mIsSecondaryUser = !mUserManager.isAdminUser();
     }
 
@@ -47,7 +61,39 @@ public class MobileNetworkPreferenceController extends PreferenceController {
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        if (isAvailable()) {
+            mPreference = screen.findPreference(getPreferenceKey());
+        }
+    }
+
+    @Override
     public String getPreferenceKey() {
         return KEY_MOBILE_NETWORK_SETTINGS;
+    }
+
+    @Override
+    public void onResume() {
+        if (isAvailable()) {
+            if (mPhoneStateListener == null) {
+                mPhoneStateListener = new PhoneStateListener() {
+                    @Override
+                    public void onServiceStateChanged(ServiceState serviceState) {
+                        if (mPreference != null) {
+                            mPreference.setSummary(mTelephonyManager.getNetworkOperatorName());
+                        }
+                    }
+                };
+            }
+            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_SERVICE_STATE);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mPhoneStateListener != null) {
+            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+        }
     }
 }
