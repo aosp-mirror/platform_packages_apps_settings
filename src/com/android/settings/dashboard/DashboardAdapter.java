@@ -15,6 +15,7 @@
  */
 package com.android.settings.dashboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
@@ -28,7 +29,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -61,15 +61,17 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final IconCache mCache;
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionParser mSuggestionParser;
 
-    @VisibleForTesting DashboardData mDashboardData;
+    @VisibleForTesting
+    DashboardData mDashboardData;
 
     private View.OnClickListener mTileClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             //TODO: get rid of setTag/getTag
-            ((SettingsActivity) mContext).openTile((Tile) v.getTag());
+            mDashboardFeatureProvider.openTileIntent((Activity) mContext, (Tile) v.getTag());
         }
     };
 
@@ -105,6 +107,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
         mContext = context;
         mMetricsFeatureProvider = metricsFeatureProvider;
+        mDashboardFeatureProvider = FeatureFactory.getFactory(context)
+                .getDashboardFeatureProvider(context);
         mCache = new IconCache(context);
         mSuggestionParser = parser;
 
@@ -132,9 +136,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void setCategoriesAndSuggestions(List<DashboardCategory> categories,
             List<Tile> suggestions) {
         // TODO: Better place for tinting?
-        final TypedArray a = mContext.obtainStyledAttributes(new int[] {
-            FeatureFactory.getFactory(mContext).getDashboardFeatureProvider(mContext).isEnabled()
-                ? android.R.attr.colorControlNormal : android.R.attr.colorAccent });
+        final TypedArray a = mContext.obtainStyledAttributes(new int[]{
+                mDashboardFeatureProvider.isEnabled()
+                        ? android.R.attr.colorControlNormal : android.R.attr.colorAccent});
         int tintColor = a.getColor(0, mContext.getColor(android.R.color.white));
         a.recycle();
         for (int i = 0; i < categories.size(); i++) {
@@ -405,12 +409,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         final List<Tile> suggestions = mDashboardData.getSuggestions();
         final List<DashboardCategory> categories = mDashboardData.getCategories();
         if (suggestions != null) {
-            outState.putParcelableArrayList(STATE_SUGGESTION_LIST,
-                    new ArrayList<Tile>(suggestions));
+            outState.putParcelableArrayList(STATE_SUGGESTION_LIST, new ArrayList<>(suggestions));
         }
         if (categories != null) {
-            outState.putParcelableArrayList(STATE_CATEGORY_LIST,
-                    new ArrayList<DashboardCategory>(categories));
+            outState.putParcelableArrayList(STATE_CATEGORY_LIST, new ArrayList<>(categories));
         }
         outState.putInt(STATE_SUGGESTION_MODE, mDashboardData.getSuggestionMode());
     }

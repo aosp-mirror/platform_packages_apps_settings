@@ -93,4 +93,9 @@ public interface DashboardFeatureProvider {
      */
     String getExtraIntentAction();
 
+    /**
+     * Opens a tile to its destination intent.
+     */
+    void openTileIntent(Activity activity, Tile tile);
+
 }
