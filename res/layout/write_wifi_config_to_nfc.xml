@@ -15,53 +15,62 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            style="@style/wifi_section">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="false"
+        android:scrollIndicators="top|bottom">
 
-    <LinearLayout android:id="@+id/password_layout"
-                  style="@style/wifi_item"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:padding="8dip"
-                  android:orientation="vertical" >
-
-        <TextView
-                android:id="@+id/password_label"
-                style="?android:attr/textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dip"
-                android:text="@string/wifi_password" />
-
-        <EditText android:id="@+id/password"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:singleLine="true"
-                  android:password="true"
-                  android:maxLength="63"
-                  android:imeOptions="flagForceAscii" />
-        <TextView
-                style="@style/wifi_item_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        <CheckBox android:id="@+id/show_password"
-                  style="@style/wifi_item_content"
-                  android:textSize="14sp"
-                  android:text="@string/wifi_show_password"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-
-    <ProgressBar
-            android:id="@+id/progress_bar"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:padding="8dip"
-            android:visibility="gone"
-            style="@android:style/Widget.ProgressBar.Large" />
+            style="@style/wifi_section">
 
-</LinearLayout>
+        <LinearLayout android:id="@+id/password_layout"
+                      style="@style/wifi_item"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:padding="8dip"
+                      android:orientation="vertical" >
+
+            <TextView
+                    android:id="@+id/password_label"
+                    style="?android:attr/textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dip"
+                    android:text="@string/wifi_password" />
+
+            <EditText android:id="@+id/password"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:singleLine="true"
+                      android:password="true"
+                      android:maxLength="63"
+                      android:imeOptions="flagForceAscii" />
+            <TextView
+                    style="@style/wifi_item_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            <CheckBox android:id="@+id/show_password"
+                      style="@style/wifi_item_content"
+                      android:textSize="14sp"
+                      android:text="@string/wifi_show_password"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:padding="8dip"
+                android:visibility="gone"
+                style="@android:style/Widget.ProgressBar.Large" />
+
+    </LinearLayout>
+</ScrollView>
