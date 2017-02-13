@@ -38,4 +38,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public boolean isAdvancedUiEnabled() {
         return false;
     }
+
+    @Override
+    public boolean isTypeService(String[] packages) {
+        return false;
+    }
 }

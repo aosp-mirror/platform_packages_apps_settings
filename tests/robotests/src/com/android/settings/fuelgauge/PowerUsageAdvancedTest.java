@@ -1,5 +1,6 @@
 package com.android.settings.fuelgauge;
 
+import android.content.pm.PackageManager;
 import android.os.Process;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -38,6 +40,10 @@ public class PowerUsageAdvancedTest {
     private BatterySipper mBatterySipper;
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
+    @Mock
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    @Mock
+    private PackageManager mPackageManager;
     private PowerUsageAdvanced mPowerUsageAdvanced;
 
     @Before
@@ -57,6 +63,8 @@ public class PowerUsageAdvancedTest {
 
         when(mBatteryStatsHelper.getUsageList()).thenReturn(batterySippers);
         when(mBatteryStatsHelper.getTotalPower()).thenReturn(TOTAL_USAGE);
+        mPowerUsageAdvanced.setPackageManager(mPackageManager);
+        mPowerUsageAdvanced.setPowerUsageFeatureProvider(mPowerUsageFeatureProvider);
     }
 
     @Test
@@ -84,6 +92,16 @@ public class PowerUsageAdvancedTest {
             assertThat(mPowerUsageAdvanced.extractUsageType(mBatterySipper))
                     .isEqualTo(usageTypes[i]);
         }
+    }
+
+    @Test
+    public void testExtractUsageType_TypeService_ReturnService() {
+        mBatterySipper.drainType = DrainType.APP;
+        when(mBatterySipper.getUid()).thenReturn(FAKE_UID_1);
+        when(mPowerUsageFeatureProvider.isTypeService(any())).thenReturn(true);
+
+        assertThat(mPowerUsageAdvanced.extractUsageType(mBatterySipper))
+                .isEqualTo(UsageType.SERVICE);
     }
 
     @Test
