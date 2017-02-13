@@ -2264,10 +2264,6 @@
             android:icon="@drawable/ic_settings_accounts"
             android:taskAffinity=""
             android:parentActivityName="Settings">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.SYNC_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3134,6 +3130,10 @@
                   android:icon="@drawable/ic_settings_accounts">
             <intent-filter android:priority="3">
                 <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SYNC_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.accounts.UserAndAccountDashboardFragment"/>
