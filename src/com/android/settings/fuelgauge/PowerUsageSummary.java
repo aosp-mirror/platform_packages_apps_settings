@@ -38,7 +38,9 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -47,6 +49,7 @@ import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
@@ -75,7 +78,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     static final String TAG = "PowerUsageSummary";
 
     private static final String KEY_APP_LIST = "app_list";
-    private static final String KEY_BATTERY_HISTORY = "battery_history";
+    private static final String KEY_BATTERY_HEADER = "battery_header";
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     private static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
@@ -83,7 +86,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     static final int MENU_ADDITIONAL_BATTERY_INFO = Menu.FIRST + 4;
     private static final int MENU_HELP = Menu.FIRST + 5;
 
-    private BatteryHistoryPreference mHistPref;
+    private LayoutPreference mBatteryLayoutPref;
     private PreferenceGroup mAppListGroup;
 
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
@@ -98,7 +101,7 @@ public class PowerUsageSummary extends PowerUsageBase {
         super.onCreate(icicle);
         setAnimationAllowed(true);
 
-        mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_HISTORY);
+        mBatteryLayoutPref = (LayoutPreference) findPreference(KEY_BATTERY_HEADER);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
     }
 
@@ -130,7 +133,10 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (!(preference instanceof PowerGaugePreference)) {
+        if (KEY_BATTERY_HEADER.equals(preference.getKey())) {
+            performBatteryHeaderClick();
+            return true;
+        } else if (!(preference instanceof PowerGaugePreference)) {
             return super.onPreferenceTreeClick(preference);
         }
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
@@ -221,6 +227,26 @@ public class PowerUsageSummary extends PowerUsageBase {
             notAvailable.setKey(NOT_AVAILABLE);
             notAvailable.setTitle(R.string.power_usage_not_available);
             mAppListGroup.addPreference(notAvailable);
+        }
+    }
+
+    private void performBatteryHeaderClick() {
+        final Context context = getContext();
+        final PowerUsageFeatureProvider featureProvider = FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context);
+
+        if (featureProvider.isAdvancedUiEnabled()) {
+            Utils.startWithFragment(getContext(), PowerUsageAdvanced.class.getName(), null,
+                    null, 0, R.string.advanced_battery_title, null);
+        } else {
+            mStatsHelper.storeStatsHistoryInFile(BatteryHistoryDetail.BATTERY_HISTORY_FILE);
+            Bundle args = new Bundle(2);
+            args.putString(BatteryHistoryDetail.EXTRA_STATS,
+                    BatteryHistoryDetail.BATTERY_HISTORY_FILE);
+            args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST,
+                    mStatsHelper.getBatteryBroadcast());
+            Utils.startWithFragment(getContext(), BatteryHistoryDetail.class.getName(), args,
+                    null, 0, R.string.history_details_title, null);
         }
     }
 
@@ -325,7 +351,14 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     protected void refreshStats() {
         super.refreshStats();
-        updatePreference(mHistPref);
+
+        BatteryInfo.getBatteryInfo(getContext(), new BatteryInfo.Callback() {
+            @Override
+            public void onBatteryInfoLoaded(BatteryInfo info) {
+                updateHeaderPreference(info);
+            }
+        });
+
         cacheRemoveAllPrefs(mAppListGroup);
         mAppListGroup.setOrderingAsAdded(false);
         boolean addedSome = false;
@@ -434,6 +467,27 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     @VisibleForTesting
+    void updateHeaderPreference(BatteryInfo info) {
+        final BatteryMeterView batteryView = (BatteryMeterView) mBatteryLayoutPref
+                .findViewById(R.id.battery_header_icon);
+        final TextView timeText = (TextView) mBatteryLayoutPref.findViewById(R.id.time);
+        final TextView summary1 = (TextView) mBatteryLayoutPref.findViewById(R.id.summary1);
+        final TextView summary2 = (TextView) mBatteryLayoutPref.findViewById(R.id.summary2);
+        final int visible = info.mBatteryLevel != 100 ? View.VISIBLE : View.INVISIBLE;
+
+        if (info.remainingTimeUs != 0) {
+            timeText.setText(Utils.formatElapsedTime(getContext(),
+                    info.remainingTimeUs / 1000, false));
+        } else {
+            timeText.setText(info.remainingLabel != null ?
+                    info.remainingLabel : info.batteryPercentString);
+        }
+        summary1.setVisibility(visible);
+        summary2.setVisibility(visible);
+        batteryView.setBatteryInfo(info.mBatteryLevel);
+    }
+
+    @VisibleForTesting
     void setUsageSummary(Preference preference, String usedTimePrefix, long usageTimeMs) {
         // Only show summary when usage time is longer than one minute
         if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
@@ -479,6 +533,11 @@ public class PowerUsageSummary extends PowerUsageBase {
         }
 
         return totalPowerMah;
+    }
+
+    @VisibleForTesting
+    void setBatteryLayoutPreference(LayoutPreference layoutPreference) {
+        mBatteryLayoutPref = layoutPreference;
     }
 
     private static List<BatterySipper> getFakeStats() {

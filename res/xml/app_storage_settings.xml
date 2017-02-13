@@ -30,6 +30,7 @@
 
     <com.android.settings.applications.LayoutPreference
         android:key="change_storage_button"
+        android:selectable="false"
         android:layout="@layout/single_button_panel" />
 
     <PreferenceCategory
@@ -69,6 +70,7 @@
 
         <com.android.settings.applications.LayoutPreference
             android:key="clear_data_button"
+            android:selectable="false"
             android:layout="@layout/single_button_panel" />
     </PreferenceCategory>
 

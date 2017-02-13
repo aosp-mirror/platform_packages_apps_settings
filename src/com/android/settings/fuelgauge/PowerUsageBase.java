@@ -72,7 +72,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
-        BatteryStatsHelper.dropFile(getActivity(), BatteryHistoryPreference.BATTERY_HISTORY_FILE);
+        BatteryStatsHelper.dropFile(getActivity(), BatteryHistoryDetail.BATTERY_HISTORY_FILE);
         updateBatteryStatus(getActivity().registerReceiver(mBatteryInfoReceiver,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED)));
         if (mHandler.hasMessages(MSG_REFRESH_STATS)) {

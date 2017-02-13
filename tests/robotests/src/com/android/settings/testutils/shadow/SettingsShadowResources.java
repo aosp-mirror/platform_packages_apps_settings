@@ -7,6 +7,7 @@ import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ArrayRes;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import org.robolectric.RuntimeEnvironment;
@@ -57,6 +58,16 @@ public class SettingsShadowResources extends ShadowResources {
             return new ColorDrawable();
         }
         return super.loadDrawable(value, id, theme);
+    }
+
+    @Implementation
+    public int[] getIntArray(@ArrayRes int id) throws NotFoundException {
+        // The Robolectric isn't aware of resources in settingslib, so we need to stub it here
+        if (id == com.android.settings.R.array.batterymeter_bolt_points
+                || id == com.android.settings.R.array.batterymeter_plus_points) {
+            return new int[2];
+        }
+        return directlyOn(realResources, Resources.class).getIntArray(id);
     }
 
     @Implements(Theme.class)

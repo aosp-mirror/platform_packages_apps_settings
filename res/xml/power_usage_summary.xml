@@ -20,8 +20,10 @@
     android:title="@string/power_usage_summary_title"
     settings:keywords="@string/keywords_battery">
 
-    <com.android.settings.fuelgauge.BatteryHistoryPreference
-        android:key="battery_history"/>
+    <com.android.settings.applications.LayoutPreference
+        android:key="battery_header"
+        android:selectable="true"
+        android:layout="@layout/battery_header"/>
 
     <PreferenceCategory
         android:key="power_management"

@@ -33,43 +33,18 @@ import com.android.settingslib.graph.UsageView;
 /**
  * Custom preference for displaying power consumption as a bar and an icon on the left for the
  * subsystem/app type.
- *
  */
 public class BatteryHistoryPreference extends Preference {
 
-    protected static final String BATTERY_HISTORY_FILE = "tmp_bat_history.bin";
-
-    private BatteryStatsHelper mHelper;
     private BatteryInfo mBatteryInfo;
 
     public BatteryHistoryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.battery_usage_graph);
-        setSelectable(true);
-    }
-
-    @Override
-    public void performClick() {
-        // TODO(b/34890746): remove this since history graph is not clickable
-        final Context context = getContext();
-        final PowerUsageFeatureProvider featureProvider = FeatureFactory.getFactory(context)
-                .getPowerUsageFeatureProvider(context);
-
-        if (featureProvider.isAdvancedUiEnabled()) {
-            Utils.startWithFragment(getContext(), PowerUsageAdvanced.class.getName(), null,
-                    null, 0, R.string.advanced_battery_title, null);
-        } else {
-            mHelper.storeStatsHistoryInFile(BATTERY_HISTORY_FILE);
-            Bundle args = new Bundle();
-            args.putString(BatteryHistoryDetail.EXTRA_STATS, BATTERY_HISTORY_FILE);
-            args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST, mHelper.getBatteryBroadcast());
-            Utils.startWithFragment(getContext(), BatteryHistoryDetail.class.getName(), args,
-                    null, 0, R.string.history_details_title, null);
-        }
+        setSelectable(false);
     }
 
     public void setStats(BatteryStatsHelper batteryStats) {
-        mHelper = batteryStats;
         final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
         mBatteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryStats.getBatteryBroadcast(),
                 batteryStats.getStats(), elapsedRealtimeUs);

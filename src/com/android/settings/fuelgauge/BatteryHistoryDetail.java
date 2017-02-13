@@ -37,6 +37,7 @@ import com.android.settingslib.graph.UsageView;
 public class BatteryHistoryDetail extends SettingsPreferenceFragment {
     public static final String EXTRA_STATS = "stats";
     public static final String EXTRA_BROADCAST = "broadcast";
+    public static final String BATTERY_HISTORY_FILE = "tmp_bat_history.bin";
 
     private BatteryStats mStats;
     private Intent mBatteryBroadcast;
