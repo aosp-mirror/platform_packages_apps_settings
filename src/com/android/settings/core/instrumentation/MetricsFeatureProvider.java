@@ -15,8 +15,79 @@
  */
 package com.android.settings.core.instrumentation;
 
+import android.content.Context;
+import android.metrics.LogMaker;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * FeatureProvider for metrics.
  */
-public interface MetricsFeatureProvider extends LogWriter {
+public class MetricsFeatureProvider {
+    private List<LogWriter> mLoggerWriters;
+
+    public MetricsFeatureProvider() {
+        mLoggerWriters = new ArrayList<>();
+        installLogWriters();
+    }
+
+    protected void installLogWriters() {
+        mLoggerWriters.add(new EventLogWriter());
+        mLoggerWriters.add(new SettingSuggestionsLogWriter());
+    }
+
+    public void visible(Context context, int category) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.visible(context, category);
+        }
+    }
+
+    public void hidden(Context context, int category) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.hidden(context, category);
+        }
+    }
+
+    public void actionWithSource(Context context, int source, int category) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.actionWithSource(context, source, category);
+        }
+    }
+
+    public void action(Context context, int category) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.action(context, category);
+        }
+    }
+
+    public void action(Context context, int category, int value) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.action(context, category, value);
+        }
+    }
+
+    public void action(Context context, int category, boolean value) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.action(context, category, value);
+        }
+    }
+
+    public void action(Context context, int category, String pkg) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.action(context, category, pkg);
+        }
+    }
+
+    public void count(Context context, String name, int value) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.count(context, name, value);
+        }
+    }
+
+    public void histogram(Context context, String name, int bucket) {
+        for (LogWriter writer : mLoggerWriters) {
+            writer.histogram(context, name, bucket);
+        }
+    }
 }

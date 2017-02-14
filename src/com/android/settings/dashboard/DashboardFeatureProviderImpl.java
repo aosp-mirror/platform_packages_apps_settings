@@ -181,7 +181,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
             DashboardFragment fragment) {
-        return new ProgressiveDisclosureMixin(context, this, fragment);
+        return new ProgressiveDisclosureMixin(context, this, mMetricsFeatureProvider, fragment);
     }
 
     @Override

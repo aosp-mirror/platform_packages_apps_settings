@@ -28,7 +28,6 @@ import com.android.settings.applications.ApplicationFeatureProviderImpl;
 import com.android.settings.applications.IPackageManagerWrapperImpl;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.dashboard.SuggestionFeatureProvider;
@@ -70,7 +69,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public MetricsFeatureProvider getMetricsFeatureProvider() {
         if (mMetricsFeatureProvider == null) {
-            mMetricsFeatureProvider = new MetricsFeatureProviderImpl();
+            mMetricsFeatureProvider = new MetricsFeatureProvider();
         }
         return mMetricsFeatureProvider;
     }

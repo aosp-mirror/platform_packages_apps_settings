@@ -40,6 +40,11 @@ public interface LogWriter {
     /**
      * Logs an user action.
      */
+    void actionWithSource(Context context, int source, int category);
+
+    /**
+     * Logs an user action.
+     */
     void action(Context context, int category, int value);
 
     /**

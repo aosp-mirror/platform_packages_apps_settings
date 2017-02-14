@@ -74,7 +74,9 @@ public class ProgressiveDisclosureTest {
         mAppContext = ShadowApplication.getInstance().getApplicationContext();
         mFakeFeatureFactory = (FakeFeatureFactory) FeatureFactory.getFactory(mContext);
         mMixin = new ProgressiveDisclosureMixin(mAppContext,
-                mFakeFeatureFactory.dashboardFeatureProvider, mPreferenceFragment);
+                mFakeFeatureFactory.dashboardFeatureProvider,
+                mFakeFeatureFactory.metricsFeatureProvider,
+                mPreferenceFragment);
         ReflectionHelpers.setField(mMixin, "mExpandButton", mExpandButton);
         mPreference = new Preference(mAppContext);
         mPreference.setKey("test");
