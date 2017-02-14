@@ -170,5 +170,24 @@ public class GestureSettings extends DashboardFragment {
                     }
                     return result;
                 }
+
+                @Override
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    List<PreferenceController> controllers = new ArrayList<>();
+                    AmbientDisplayConfiguration ambientConfig
+                            = new AmbientDisplayConfiguration(context);
+
+                    controllers.add(new DoubleTapPowerPreferenceController(context,
+                            null /* lifecycle */));
+                    controllers.add(new PickupGesturePreferenceController(context,
+                            null /* lifecycle */, ambientConfig, UserHandle.myUserId()));
+                    controllers.add(new DoubleTapScreenPreferenceController(context,
+                            null /* lifecycle */, ambientConfig, UserHandle.myUserId()));
+                    controllers.add(new SwipeToNotificationPreferenceController(context,
+                            null /* lifecycle */));
+                    controllers.add(new DoubleTwistPreferenceController(context,
+                            null /* lifecycle */));
+                    return controllers;
+                }
             };
 }

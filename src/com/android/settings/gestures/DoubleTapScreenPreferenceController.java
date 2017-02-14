@@ -70,4 +70,14 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
     protected boolean isSwitchPrefEnabled() {
         return mAmbientConfig.pulseOnDoubleTapEnabled(mUserId);
     }
+
+    @Override
+    public ResultPayload getResultPayload() {
+        ArrayMap<Integer, Boolean> valueMap = new ArrayMap<>();
+        valueMap.put(1, true);
+        valueMap.put(0, false);
+
+        return new InlineSwitchPayload(Settings.Secure.DOZE_PULSE_ON_DOUBLE_TAP,
+                ResultPayload.SettingsSource.SECURE, valueMap);
+    }
 }

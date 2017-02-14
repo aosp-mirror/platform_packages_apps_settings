@@ -81,4 +81,19 @@ public class DoubleTapScreenPreferenceControllerTest {
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }
+
+    @Test
+    public void testPreferenceController_ProperResultPayloadType() {
+        ResultPayload payload = mController.getResultPayload();
+        assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
+    }
+
+    @Test
+    public void testPreferenceController_CorrectPayload() {
+        InlineSwitchPayload payload = (InlineSwitchPayload) mController.getResultPayload();
+        assertThat(payload.settingsUri).isEqualTo("doze_pulse_on_double_tap");
+        assertThat(payload.settingSource).isEqualTo(ResultPayload.SettingsSource.SECURE);
+        assertThat(payload.valueMap.get(1)).isEqualTo(true);
+        assertThat(payload.valueMap.get(0)).isEqualTo(false);
+    }
 }
