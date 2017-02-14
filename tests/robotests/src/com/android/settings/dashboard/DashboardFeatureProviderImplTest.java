@@ -50,6 +50,7 @@ import java.util.ArrayList;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -138,6 +139,27 @@ public class DashboardFeatureProviderImplTest {
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
 
         verify(mActivity).getFragmentManager();
+    }
+
+    @Test
+    public void bindPreference_noFragmentMetadataSingleUser_shouldBindToDirectLaunchIntent() {
+        final Preference preference = new Preference(
+                ShadowApplication.getInstance().getApplicationContext());
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.userHandle = new ArrayList<>();
+        tile.userHandle.add(mock(UserHandle.class));
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+
+        when(mActivity.getSystemService(Context.USER_SERVICE))
+                .thenReturn(mUserManager);
+
+        mImpl.bindPreferenceToTile(mActivity, preference, tile, "123", Preference.DEFAULT_ORDER);
+        preference.getOnPreferenceClickListener().onPreferenceClick(null);
+
+        verify(mActivity)
+                .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
     }
 
     @Test
