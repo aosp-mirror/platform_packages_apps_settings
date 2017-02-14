@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,51 +16,46 @@
 
 package com.android.settings.enterprise;
 
-import android.content.Context;
-
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
-import java.util.Date;
-
 /**
- * Tests for {@link AdminActionPreferenceControllerBase}.
+ * Tests for {@link FailedPasswordWipePreferenceControllerBase}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class AdminActionPreferenceControllerBaseTest extends
-        AdminActionPreferenceControllerTestBase {
+public final class FailedPasswordWipePreferenceControllerBaseTest extends
+        FailedPasswordWipePreferenceControllerTestBase {
 
-    private Date mDate;
+    private int mMaximumFailedPasswordsBeforeWipe = 0;
+
+    public FailedPasswordWipePreferenceControllerBaseTest() {
+        super(null, 123 /* stringResourceId */);
+    }
 
     @Override
     public void setUp() {
         super.setUp();
-        mController = new AdminActionPreferenceControllerBaseTestable();
+        mController = new FailedPasswordWipePreferenceControllerBaseTestable();
     }
 
     @Override
-    public void setDate(Date date) {
-        mDate = date;
+    public void setMaximumFailedPasswordsBeforeWipe(int maximum) {
+        mMaximumFailedPasswordsBeforeWipe = maximum;
     }
 
-    @Override
-    public String getPreferenceKey() {
-        return null;
-    }
-
-    private class AdminActionPreferenceControllerBaseTestable extends
-            AdminActionPreferenceControllerBase {
-        AdminActionPreferenceControllerBaseTestable() {
-            super(AdminActionPreferenceControllerBaseTest.this.mContext);
+    private class FailedPasswordWipePreferenceControllerBaseTestable extends
+            FailedPasswordWipePreferenceControllerBase {
+        FailedPasswordWipePreferenceControllerBaseTestable() {
+            super(FailedPasswordWipePreferenceControllerBaseTest.this.mContext, mStringResourceId);
         }
 
         @Override
-        protected Date getAdminActionTimestamp() {
-            return mDate;
+        protected int getMaximumFailedPasswordsBeforeWipe() {
+            return mMaximumFailedPasswordsBeforeWipe;
         }
 
         @Override

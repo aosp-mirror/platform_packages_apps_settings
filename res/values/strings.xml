@@ -8153,6 +8153,16 @@
     <string name="enterprise_privacy_lock_device">Admin can lock device and reset password</string>
     <!-- Label explaining that the admin can wipe the device remotely. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_wipe_device">Admin can delete all device data</string>
+    <!-- Label explaining that the admin configured the device to wipe itself when the password is mistyped this many times. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_failed_password_wipe_device">
+        <item quantity="one">Admin set maximum password attempts to <xliff:g id="count">%d</xliff:g> before deleting all device data</item>
+        <item quantity="other">Admin set maximum password attempts to <xliff:g id="count">%d</xliff:g> before deleting all device data</item>
+    </plurals>
+    <!-- Label explaining that the admin configured the work profile to wipe itself when the password is mistyped this many times. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_failed_password_wipe_work">
+        <item quantity="one">Admin set maximum password attempts to <xliff:g id="count">%d</xliff:g> before deleting work profile data</item>
+        <item quantity="other">Admin set maximum password attempts to <xliff:g id="count">%d</xliff:g> before deleting work profile data</item>
+    </plurals>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
     <string name="do_disclosure_generic">This device is managed.</string>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->

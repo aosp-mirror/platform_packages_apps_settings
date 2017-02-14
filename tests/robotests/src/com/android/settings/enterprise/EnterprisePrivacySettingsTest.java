@@ -73,7 +73,7 @@ public final class EnterprisePrivacySettingsTest {
         final List<PreferenceController> controllers = mSettings.getPreferenceControllers(
                 ShadowApplication.getInstance().getApplicationContext());
         assertThat(controllers).isNotNull();
-        assertThat(controllers.size()).isEqualTo(12);
+        assertThat(controllers.size()).isEqualTo(14);
         assertThat(controllers.get(0)).isInstanceOf(InstalledPackagesPreferenceController.class);
         assertThat(controllers.get(1)).isInstanceOf(NetworkLogsPreferenceController.class);
         assertThat(controllers.get(2)).isInstanceOf(BugReportsPreferenceController.class);
@@ -93,5 +93,7 @@ public final class EnterprisePrivacySettingsTest {
         assertThat(controllers.get(10)).isInstanceOf(
                 AlwaysOnVpnManagedProfilePreferenceController.class);
         assertThat(controllers.get(11)).isInstanceOf(GlobalHttpProxyPreferenceController.class);
+        assertThat(controllers.get(12)).isInstanceOf(FailedPasswordWipePrimaryUserPreferenceController.class);
+        assertThat(controllers.get(13)).isInstanceOf(FailedPasswordWipeManagedProfilePreferenceController.class);
     }
 }

@@ -27,6 +27,13 @@ import android.support.annotation.Nullable;
  */
 public interface DevicePolicyManagerWrapper {
     /**
+     * Calls {@code DevicePolicyManager.getMaximumFailedPasswordsForWipe()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getMaximumFailedPasswordsForWipe
+     */
+    int getMaximumFailedPasswordsForWipe(@Nullable ComponentName admin, int userHandle);
+
+    /**
      * Calls {@code DevicePolicyManager.getDeviceOwnerComponentOnAnyUser()}.
      *
      * @see android.app.admin.DevicePolicyManager#getDeviceOwnerComponentOnAnyUser
@@ -34,11 +41,25 @@ public interface DevicePolicyManagerWrapper {
     ComponentName getDeviceOwnerComponentOnAnyUser();
 
     /**
+     * Calls {@code DevicePolicyManager.getDeviceOwnerUserId()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getDeviceOwnerUserId
+     */
+    int getDeviceOwnerUserId();
+
+    /**
+     * Calls {@code DevicePolicyManager.getProfileOwnerAsUser()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getProfileOwnerAsUser
+     */
+    @Nullable ComponentName getProfileOwnerAsUser(final int userId);
+
+    /**
      * Calls {@code DevicePolicyManager.getDeviceOwnerNameOnAnyUser()}.
      *
      * @see android.app.admin.DevicePolicyManager#getDeviceOwnerNameOnAnyUser
      */
-    public CharSequence getDeviceOwnerOrganizationName();
+    CharSequence getDeviceOwnerOrganizationName();
 
     /**
      * Calls {@code DevicePolicyManager.getPermissionGrantState()}.
@@ -53,19 +74,19 @@ public interface DevicePolicyManagerWrapper {
      *
      * @see android.app.admin.DevicePolicyManager#getLastSecurityLogRetrievalTime
      */
-    public long getLastSecurityLogRetrievalTime();
+    long getLastSecurityLogRetrievalTime();
 
     /**
      * Calls {@code DevicePolicyManager.getLastBugReportRequestTime()}.
      *
      * @see android.app.admin.DevicePolicyManager#getLastBugReportRequestTime
      */
-    public long getLastBugReportRequestTime();
+    long getLastBugReportRequestTime();
 
     /**
      * Calls {@code DevicePolicyManager.getLastNetworkLogRetrievalTime()}.
      *
      * @see android.app.admin.DevicePolicyManager#getLastNetworkLogRetrievalTime
      */
-    public long getLastNetworkLogRetrievalTime();
+    long getLastNetworkLogRetrievalTime();
 }

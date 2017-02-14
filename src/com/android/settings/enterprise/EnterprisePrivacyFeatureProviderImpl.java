@@ -16,6 +16,7 @@
 
 package com.android.settings.enterprise;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -70,12 +71,12 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
                 return userInfo.id;
             }
         }
-        return -1;
+        return UserHandle.USER_NULL;
     }
 
     @Override
     public boolean isInCompMode() {
-        return hasDeviceOwner() && getManagedProfileUserId() != -1;
+        return hasDeviceOwner() && getManagedProfileUserId() != UserHandle.USER_NULL;
     }
 
     @Override
@@ -124,13 +125,35 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     @Override
     public boolean isAlwaysOnVpnSetInManagedProfile() {
         final int managedProfileUserId = getManagedProfileUserId();
-        return managedProfileUserId != -1 &&
+        return managedProfileUserId != UserHandle.USER_NULL &&
                 VpnUtils.isAlwaysOnVpnSet(mCm, managedProfileUserId);
     }
 
     @Override
     public boolean isGlobalHttpProxySet() {
         return mCm.getGlobalProxy() != null;
+    }
+
+    @Override
+    public int getMaximumFailedPasswordsBeforeWipeInPrimaryUser() {
+        final ComponentName deviceOwner = mDpm.getDeviceOwnerComponentOnAnyUser();
+        if (deviceOwner == null) {
+            return 0;
+        }
+        return mDpm.getMaximumFailedPasswordsForWipe(deviceOwner, mDpm.getDeviceOwnerUserId());
+    }
+
+    @Override
+    public int getMaximumFailedPasswordsBeforeWipeInManagedProfile() {
+        final int userId = getManagedProfileUserId();
+        if (userId == UserHandle.USER_NULL) {
+            return 0;
+        }
+        final ComponentName profileOwner = mDpm.getProfileOwnerAsUser(userId);
+        if (profileOwner == null) {
+            return 0;
+        }
+        return mDpm.getMaximumFailedPasswordsForWipe(profileOwner, userId);
     }
 
     protected static class EnterprisePrivacySpan extends ClickableSpan {

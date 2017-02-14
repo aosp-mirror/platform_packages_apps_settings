@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,9 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.provider.Settings;
+import android.content.res.Resources;
 import android.support.v7.preference.Preference;
-import android.text.format.DateUtils;
 
-import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -30,22 +28,27 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 /**
- * Common base for testing subclasses of {@link AdminActionPreferenceControllerBase}.
+ * Common base for testing subclasses of {@link FailedPasswordWipePreferenceControllerBase}.
  */
-public abstract class AdminActionPreferenceControllerTestBase {
+public abstract class FailedPasswordWipePreferenceControllerTestBase {
+
+    protected final String mKey;
+    protected final int mStringResourceId;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     protected Context mContext;
     protected FakeFeatureFactory mFeatureFactory;
 
-    protected AdminActionPreferenceControllerBase mController;
+    protected FailedPasswordWipePreferenceControllerBase mController;
+
+    public FailedPasswordWipePreferenceControllerTestBase(String key, int stringResourceId) {
+        mKey = key;
+        mStringResourceId = stringResourceId;
+    }
 
     @Before
     public void setUp() {
@@ -54,24 +57,23 @@ public abstract class AdminActionPreferenceControllerTestBase {
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
     }
 
-    public abstract void setDate(Date date);
+    public abstract void setMaximumFailedPasswordsBeforeWipe(int maximum);
 
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        when(mContext.getString(R.string.enterprise_privacy_never)).thenReturn("Never");
-        Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24, "24");
+        preference.setVisible(false);
 
-        setDate(null);
+        setMaximumFailedPasswordsBeforeWipe(10);
+        when(mContext.getResources().getQuantityString(mStringResourceId, 10, 10))
+                .thenReturn("10 attempts");
         mController.updateState(preference);
-        assertThat(preference.getSummary()).isEqualTo("Never");
+        assertThat(preference.getTitle()).isEqualTo("10 attempts");
+        assertThat(preference.isVisible()).isTrue();
 
-        final Date date = new GregorianCalendar(2011 /* year */, 10 /* month */, 9 /* dayOfMonth */,
-                8 /* hourOfDay */, 7 /* minute */, 6 /* second */).getTime();
-        setDate(date);
+        setMaximumFailedPasswordsBeforeWipe(0);
         mController.updateState(preference);
-        assertThat(preference.getSummary()).isEqualTo(DateUtils.formatDateTime(
-                mContext, date.getTime(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE));
+        assertThat(preference.isVisible()).isFalse();
     }
 
     @Test
@@ -85,10 +87,8 @@ public abstract class AdminActionPreferenceControllerTestBase {
                 .isFalse();
     }
 
-    public abstract String getPreferenceKey();
-
     @Test
     public void testGetPreferenceKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo(getPreferenceKey());
+        assertThat(mController.getPreferenceKey()).isEqualTo(mKey);
     }
 }

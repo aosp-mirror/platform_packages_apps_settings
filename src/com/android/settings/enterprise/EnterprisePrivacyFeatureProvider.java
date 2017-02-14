@@ -74,4 +74,16 @@ public interface EnterprisePrivacyFeatureProvider {
      * Returns whether the Device Owner set a recommended global HTTP proxy.
      */
     boolean isGlobalHttpProxySet();
+
+    /**
+     * Returns the number of failed login attempts that the Device Owner allows before the entire
+     * device is wiped, or zero if no such limit is set.
+     */
+    int getMaximumFailedPasswordsBeforeWipeInPrimaryUser();
+
+    /**
+     * Returns the number of failed login attempts that the Profile Owner allows before the current
+     * user's managed profile (if any) is wiped, or zero if no such limit is set.
+     */
+    int getMaximumFailedPasswordsBeforeWipeInManagedProfile();
 }
