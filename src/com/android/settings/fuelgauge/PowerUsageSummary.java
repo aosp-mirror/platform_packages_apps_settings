@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge;
 
+import android.annotation.StringRes;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -473,15 +474,18 @@ public class PowerUsageSummary extends PowerUsageBase {
         final TextView timeText = (TextView) mBatteryLayoutPref.findViewById(R.id.time);
         final TextView summary1 = (TextView) mBatteryLayoutPref.findViewById(R.id.summary1);
         final TextView summary2 = (TextView) mBatteryLayoutPref.findViewById(R.id.summary2);
-        final int visible = info.mBatteryLevel != 100 ? View.VISIBLE : View.INVISIBLE;
+        final int visible = info.remainingTimeUs != 0 ? View.VISIBLE : View.INVISIBLE;
+        final int summaryResId = info.mDischarging ?
+                R.string.estimated_time_left : R.string.estimated_charging_time_left;
 
         if (info.remainingTimeUs != 0) {
             timeText.setText(Utils.formatElapsedTime(getContext(),
                     info.remainingTimeUs / 1000, false));
         } else {
-            timeText.setText(info.remainingLabel != null ?
-                    info.remainingLabel : info.batteryPercentString);
+            timeText.setText(info.statusLabel);
         }
+
+        summary1.setText(summaryResId);
         summary1.setVisibility(visible);
         summary2.setVisibility(visible);
         batteryView.setBatteryInfo(info.mBatteryLevel);
