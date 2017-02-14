@@ -4285,8 +4285,17 @@
     <!-- Display time remaining until battery is charged [CHAR_LIMIT=60] -->
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
 
-    <!-- [CHAR_LIMIT=40] Label for list of apps using battery in power use UI -->
-    <string name="power_usage_list_summary">Use since last full charge</string>
+    <!-- Title for the screen usage in power use UI [CHAR_LIMIT=40] -->
+    <string name="device_screen_usage">Screen usage</string>
+    <!-- Title for the screen consumption in power use UI(i.e. Screen consumption: 30% of battery usage) [CHAR_LIMIT=40] -->
+    <string name="device_screen_consumption">Screen consumption</string>
+    <!-- Title for the cellular network in power use UI(i.e. Mobile network scanning: 30% of battery usage) [CHAR_LIMIT=40] -->
+    <string name="device_cellular_network">Mobile network scanning</string>
+
+    <!-- Label for list of apps using battery in power use UI [CHAR_LIMIT=60] -->
+    <string name="power_usage_list_summary">App usage since last full charge</string>
+    <!-- Label for list of different types using battery in power use UI [CHAR_LIMIT=60] -->
+    <string name="device_usage_list_summary">Device usage since last full charge</string>
     <!-- Battery usage since unplugged -->
     <string name="battery_since_unplugged">Battery use since unplugged</string>
     <!-- Battery usage since user reset the stats -->
@@ -4483,6 +4492,8 @@
 
     <!-- Description for battery usage time for an app, i.e. Used for 30min. [CHAR LIMIT=60] -->
     <string name="battery_used_for">Used for %1$s</string>
+    <!-- Description for percentage of battery usage for an app, i.e. Screen: 30% of overall battery. [CHAR LIMIT=60] -->
+    <string name="battery_overall_usage">%1$s of overall battery</string>
     <!-- Description for battery usage detail information since last full charge. [CHAR LIMIT=120] -->
     <string name="battery_detail_since_full_charge">Usage breakdown since last full charge</string>
 
