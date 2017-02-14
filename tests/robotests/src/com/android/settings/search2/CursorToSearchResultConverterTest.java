@@ -24,6 +24,7 @@ import android.database.MatrixCursor;
 import android.graphics.drawable.Drawable;
 import android.util.ArrayMap;
 
+import com.android.settings.DisplaySettings;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.SubSettings;
@@ -32,6 +33,7 @@ import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.search2.ResultPayload.PayloadType;
 
+import com.android.settings.wifi.WifiSettings;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -147,6 +149,29 @@ public class CursorToSearchResultConverterTest {
     }
 
     @Test
+    public void testLongTitle_PenalizedInRank() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        final String BLANK = "";
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                "Longer than 20 characters", // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                DisplaySettings.class.getName(),
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                BLANK,   // Key
+                0,       // Payload Type
+                null     // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+        assertThat(results.get(0).rank).isEqualTo(BASE_RANK + 2);
+    }
+
+    @Test
     public void testParseCursor_MatchesIntentForSubSettings() {
         MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
         final String BLANK = "";
@@ -245,6 +270,245 @@ public class CursorToSearchResultConverterTest {
         assertThat(newPayload.valueMap.get(1)).isTrue();
         assertThat(newPayload.valueMap.get(0)).isFalse();
     }
+
+    // The following tests are temporary, and should be removed when we replace the Search
+    // White-list solution for elevating ranking.
+
+    @Test
+    public void testWifiKey_PrioritizedResult() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        final String BLANK = "";
+        final String key = "main_toggle_wifi";
+
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                WifiSettings.class.getName(),   // ClassName
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                key,     // Key
+                0,   // Payload Type
+                null     // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+
+        assertThat(results.get(0).rank).isEqualTo(SearchResult.TOP_RANK);
+    }
+
+    @Test
+    public void testBluetoothKey_PrioritizedResult() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        final String BLANK = "";
+        final String key = "main_toggle_bluetooth";
+
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                WifiSettings.class.getName(),   // ClassName
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                key,     // Key
+                0,   // Payload Type
+                null     // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+
+        assertThat(results.get(0).rank).isEqualTo(SearchResult.TOP_RANK);
+    }
+
+    @Test
+    public void testAirplaneKey_PrioritizedResult() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        final String BLANK = "";
+        final String key = "toggle_airplane";
+
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                WifiSettings.class.getName(),   // ClassName
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                key,     // Key
+                0,   // Payload Type
+                null     // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+
+        assertThat(results.get(0).rank).isEqualTo(SearchResult.TOP_RANK);
+    }
+
+    @Test
+    public void testHotspotKey_PrioritizedResult() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        final String BLANK = "";
+        final String key = "tether_settings";
+
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                WifiSettings.class.getName(),   // ClassName
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                key,     // Key
+                0,   // Payload Type
+                null     // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+
+        assertThat(results.get(0).rank).isEqualTo(SearchResult.TOP_RANK);
+    }
+
+    @Test
+    public void testBatterySaverKey_PrioritizedResult() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        final String BLANK = "";
+        final String key = "battery_saver";
+
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                WifiSettings.class.getName(),   // ClassName
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                key,     // Key
+                0,   // Payload Type
+                null     // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+
+        assertThat(results.get(0).rank).isEqualTo(SearchResult.TOP_RANK);
+    }
+
+    @Test
+    public void testNFCKey_PrioritizedResult() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        final String BLANK = "";
+        final String key = "toggle_nfc";
+
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                WifiSettings.class.getName(),   // ClassName
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                key,     // Key
+                0,   // Payload Type
+                null     // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+
+        assertThat(results.get(0).rank).isEqualTo(SearchResult.TOP_RANK);
+    }
+
+    @Test
+    public void testDataSaverKey_PrioritizedResult() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        final String BLANK = "";
+        final String key = "restrict_background";
+
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                WifiSettings.class.getName(),   // ClassName
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                key,     // Key
+                0,   // Payload Type
+                null     // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+
+        assertThat(results.get(0).rank).isEqualTo(SearchResult.TOP_RANK);
+    }
+
+    @Test
+    public void testDataUsageKey_PrioritizedResult() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        final String BLANK = "";
+        final String key = "data_usage_enable";
+
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                WifiSettings.class.getName(),   // ClassName
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                key,     // Key
+                0,   // Payload Type
+                null     // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+
+        assertThat(results.get(0).rank).isEqualTo(SearchResult.TOP_RANK);
+    }
+
+    @Test
+    public void testRoamingKey_PrioritizedResult() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        final String BLANK = "";
+        final String key = "button_roaming_key";
+
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                WifiSettings.class.getName(),   // ClassName
+                BLANK,   // screen title
+                null,    // icon
+                BLANK,   // action
+                null,    // target package
+                BLANK,   // target class
+                key,     // Key
+                0,   // Payload Type
+                null     // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+
+        assertThat(results.get(0).rank).isEqualTo(SearchResult.TOP_RANK);
+    }
+
+    // End of temporary tests
 
     private MatrixCursor getDummyCursor() {
         return getDummyCursor(true /* hasIcon */);

@@ -27,10 +27,15 @@ import java.util.Objects;
 public class SearchResult implements Comparable<SearchResult> {
 
     /**
-     * Defines the max rank for a search result to be considered as ranked. Results with ranks
+     * Defines the lowest rank for a search result to be considered as ranked. Results with ranks
      * higher than this have no guarantee for sorting order.
      */
-    public static final int MAX_RANK  = 10;
+    public static final int BOTTOM_RANK = 10;
+
+    /**
+     * Defines the highest rank for a search result. Used for special search results only.
+     */
+    public static final int TOP_RANK = 0;
 
     /**
      * The title of the result and main text displayed.
