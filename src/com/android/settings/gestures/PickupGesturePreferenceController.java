@@ -70,14 +70,4 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
                 Settings.Secure.DOZE_PULSE_ON_PICK_UP, enabled ? 1 : 0);
         return true;
     }
-
-    @Override
-    public ResultPayload getResultPayload() {
-        ArrayMap<Integer, Boolean> valueMap = new ArrayMap<>();
-        valueMap.put(1, true);
-        valueMap.put(0, false);
-
-        return new InlineSwitchPayload(Settings.Secure.DOZE_PULSE_ON_PICK_UP,
-                ResultPayload.SettingsSource.SECURE, valueMap);
-    }
 }

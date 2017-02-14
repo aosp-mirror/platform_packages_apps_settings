@@ -64,14 +64,4 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
                 Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
         return cameraDisabled == 0;
     }
-
-    @Override
-    public ResultPayload getResultPayload() {
-        ArrayMap<Integer, Boolean> valueMap = new ArrayMap<>();
-        valueMap.put(0, true);
-        valueMap.put(1, false);
-
-        return new InlineSwitchPayload(Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
-                ResultPayload.SettingsSource.SECURE, valueMap);
-    }
 }
