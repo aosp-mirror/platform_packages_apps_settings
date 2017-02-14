@@ -39,7 +39,9 @@ import android.view.View.MeasureSpec;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.Settings.TetherSettingsActivity;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +58,8 @@ public class CreateShortcut extends LauncherActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        ListItem item = itemForPosition(position);
+        final ListItem item = itemForPosition(position);
+        logCreateShortcut(item.resolveInfo);
         setResult(RESULT_OK, createResultIntent(intentForPosition(position),
                 item.resolveInfo, item.label));
         finish();
@@ -87,6 +90,15 @@ public class CreateShortcut extends LauncherActivity {
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, label);
         intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, icon);
         return intent;
+    }
+
+    private void logCreateShortcut(ResolveInfo info) {
+        if (info == null || info.activityInfo == null) {
+            return;
+        }
+        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(
+                this, MetricsProto.MetricsEvent.ACTION_SETTINGS_CREATE_SHORTCUT,
+                info.activityInfo.name);
     }
 
     private Bitmap createIcon(int resource) {
@@ -165,7 +177,7 @@ public class CreateShortcut extends LauncherActivity {
                     continue;
                 }
                 updates.add(new ShortcutInfo.Builder(mContext, info.getId())
-                    .setShortLabel(ri.loadLabel(pm)).build());
+                        .setShortLabel(ri.loadLabel(pm)).build());
             }
             if (!updates.isEmpty()) {
                 sm.updateShortcuts(updates);

@@ -27,9 +27,11 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -68,12 +70,15 @@ public class DashboardFeatureProviderImplTest {
     private UserManager mUserManager;
     @Mock
     private CategoryManager mCategoryManager;
+    private FakeFeatureFactory mFeatureFactory;
 
     private DashboardFeatureProviderImpl mImpl;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mActivity);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
         mImpl = new DashboardFeatureProviderImpl(mActivity);
     }
 
@@ -157,7 +162,10 @@ public class DashboardFeatureProviderImplTest {
 
         mImpl.bindPreferenceToTile(mActivity, preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
-
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(Context.class),
+                eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
+                eq(tile.intent.getComponent().flattenToString()));
         verify(mActivity)
                 .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
     }

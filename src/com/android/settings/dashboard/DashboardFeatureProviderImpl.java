@@ -27,7 +27,10 @@ import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProfileSelectDialog;
@@ -49,18 +52,20 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
 
     protected final Context mContext;
-
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final CategoryManager mCategoryManager;
 
     public DashboardFeatureProviderImpl(Context context) {
         mContext = context.getApplicationContext();
         mCategoryManager = CategoryManager.get(context, getExtraIntentAction());
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @VisibleForTesting
     DashboardFeatureProviderImpl(Context context, CategoryManager categoryManager) {
         mContext = context.getApplicationContext();
         mCategoryManager = categoryManager;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -205,11 +210,26 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private void launchIntentOrSelectProfile(Activity activity, Tile tile, Intent intent) {
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
         if (tile.userHandle == null) {
+            logStartActivity(intent);
             activity.startActivityForResult(intent, 0);
         } else if (tile.userHandle.size() == 1) {
+            logStartActivity(intent);
             activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
         } else {
             ProfileSelectDialog.show(activity.getFragmentManager(), tile);
         }
+    }
+
+    private void logStartActivity(Intent intent) {
+        if (intent == null) {
+            return;
+        }
+        final ComponentName cn = intent.getComponent();
+        if (cn == null) {
+            return;
+        }
+        mMetricsFeatureProvider.action(mContext,
+                MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK,
+                cn.flattenToString());
     }
 }
