@@ -129,7 +129,7 @@ public final class DynamicIndexableContentMonitor implements
         mContext = context;
         mIndex = index;
 
-        PACKAGE_CHANGE_MONITOR.register(context);
+        PACKAGE_CHANGE_MONITOR.registerMonitor(context);
         mHasFeaturePrinting = context.getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_PRINTING);
         if (mHasFeaturePrinting) {
@@ -154,7 +154,7 @@ public final class DynamicIndexableContentMonitor implements
     public void unregister(Activity activity, int loaderId) {
         if (mIndex == null) return;
 
-        PACKAGE_CHANGE_MONITOR.unregister();
+        PACKAGE_CHANGE_MONITOR.unregisterMonitor();
         if (mHasFeaturePrinting) {
             activity.getLoaderManager().destroyLoader(loaderId);
         }
@@ -240,15 +240,31 @@ public final class DynamicIndexableContentMonitor implements
     private static class PackageChangeMonitor extends PackageMonitor {
         private static final String TAG = PackageChangeMonitor.class.getSimpleName();
 
-        // Null if not initialized.
+        // Null if not initialized. Guarded by {@link #mLock}.
         @Nullable private PackageManager mPackageManager;
+        private final Object mLock = new Object();
 
-        public void register(Context context) {
-            mPackageManager = context.getPackageManager();
+        public void registerMonitor(Context context) {
+            synchronized (mLock) {
+                if (mPackageManager != null) {
+                    return;
+                }
+                mPackageManager = context.getPackageManager();
 
-            // Start tracking packages. Use background thread for monitoring. Note that no need to
-            // unregister this monitor. This should be alive while Settings app is running.
-            register(context, null /* thread */, UserHandle.CURRENT, false);
+                // Start tracking packages. Use background thread for monitoring. Note that no need
+                // to unregister this monitor. This should be alive while Settings app is running.
+                super.register(context, null /* thread */, UserHandle.CURRENT, false);
+            }
+        }
+
+        public void unregisterMonitor() {
+            synchronized (mLock) {
+                if (mPackageManager == null) {
+                    return;
+                }
+                super.unregister();
+                mPackageManager = null;
+            }
         }
 
         // Covers installed, appeared external storage with the package, upgraded.
