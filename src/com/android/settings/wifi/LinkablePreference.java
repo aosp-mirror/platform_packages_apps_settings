@@ -55,11 +55,15 @@ public class LinkablePreference extends Preference {
         super.onBindViewHolder(view);
 
         TextView textView = (TextView) view.findViewById(android.R.id.title);
-        if (textView == null || mContentTitle == null || mClickListener == null) {
+        if (textView == null) {
+            return;
+        }
+        textView.setSingleLine(false);
+
+        if (mContentTitle == null || mClickListener == null) {
             return;
         }
 
-        textView.setSingleLine(false);
         StringBuilder contentBuilder = new StringBuilder().append(mContentTitle);
         if (mContentDescription != null) {
             contentBuilder.append("\n\n");
