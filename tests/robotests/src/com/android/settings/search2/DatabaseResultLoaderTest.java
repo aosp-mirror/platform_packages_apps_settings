@@ -19,6 +19,7 @@ package com.android.settings.search2;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -38,6 +39,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -57,6 +59,15 @@ public class DatabaseResultLoaderTest {
     private SiteMapManager mSiteMapManager;
     private Context mContext;
     private DatabaseResultLoader loader;
+
+    private final String titleOne = "titleOne";
+    private final String titleTwo = "titleTwo";
+    private final String titleThree = "titleThree";
+    private final String titleFour = "titleFour";
+    private final String summaryOne = "summaryOne";
+    private final String summaryTwo = "summaryTwo";
+    private final String summaryThree = "summaryThree";
+    private final String summaryFour = "summaryFour";
 
     SQLiteDatabase mDb;
 
@@ -104,49 +115,49 @@ public class DatabaseResultLoaderTest {
     }
 
     @Test
-    public void testSpecialCaseWord_MatchesNonPrefix() {
+    public void testSpecialCaseWord_matchesNonPrefix() {
         insertSpecialCase("Data usage");
         loader = new DatabaseResultLoader(mContext, "usage", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
-    public void testSpecialCaseSpace_Matches() {
+    public void testSpecialCaseSpace_matches() {
         insertSpecialCase("space");
         loader = new DatabaseResultLoader(mContext, " space ", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
-    public void testSpecialCaseDash_MatchesWordNoDash() {
+    public void testSpecialCaseDash_matchesWordNoDash() {
         insertSpecialCase("wi-fi calling");
         loader = new DatabaseResultLoader(mContext, "wifi", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
-    public void testSpecialCaseDash_MatchesWordWithDash() {
+    public void testSpecialCaseDash_matchesWordWithDash() {
         insertSpecialCase("priorités seulment");
         loader = new DatabaseResultLoader(mContext, "priorités", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
-    public void testSpecialCaseDash_MatchesWordWithoutDash() {
+    public void testSpecialCaseDash_matchesWordWithoutDash() {
         insertSpecialCase("priorités seulment");
         loader = new DatabaseResultLoader(mContext, "priorites", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
-    public void testSpecialCaseDash_MatchesEntireQueryWithoutDash() {
+    public void testSpecialCaseDash_matchesEntireQueryWithoutDash() {
         insertSpecialCase("wi-fi calling");
         loader = new DatabaseResultLoader(mContext, "wifi calling", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
-    public void testSpecialCasePrefix_MatchesPrefixOfEntry() {
+    public void testSpecialCasePrefix_matchesPrefixOfEntry() {
         insertSpecialCase("Photos");
         loader = new DatabaseResultLoader(mContext, "pho", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
@@ -160,14 +171,14 @@ public class DatabaseResultLoaderTest {
     }
 
     @Test
-    public void testSpecialCaseMultiWordPrefix_MatchesPrefixOfEntry() {
+    public void testSpecialCaseMultiWordPrefix_matchesPrefixOfEntry() {
         insertSpecialCase("Apps Notifications");
         loader = new DatabaseResultLoader(mContext, "Apps", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
-    public void testSpecialCaseMultiWordPrefix_MatchesSecondWordPrefixOfEntry() {
+    public void testSpecialCaseMultiWordPrefix_matchesSecondWordPrefixOfEntry() {
         insertSpecialCase("Apps Notifications");
         loader = new DatabaseResultLoader(mContext, "Not", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
@@ -188,21 +199,188 @@ public class DatabaseResultLoaderTest {
     }
 
     @Test
-    public void testSpecialCaseMultiWordPrefixWithSpecial_MatchesPrefixOfEntry() {
+    public void testSpecialCaseMultiWordPrefixWithSpecial_matchesPrefixOfEntry() {
         insertSpecialCase("Apps & Notifications");
         loader = new DatabaseResultLoader(mContext, "App", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
-    public void testSpecialCaseMultiWordPrefixWithSpecial_MatchesPrefixOfSecondEntry() {
+    public void testSpecialCaseMultiWordPrefixWithSpecial_matchesPrefixOfSecondEntry() {
         insertSpecialCase("Apps & Notifications");
         loader = new DatabaseResultLoader(mContext, "No", mSiteMapManager);
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
     @Test
-    public void testSpecialCaseTwoWords_FirstWordMatches_RanksHigher() {
+    public void testDeDupe_noDuplicates_originalListReturn() {
+        // Three elements with unique titles and summaries
+        List<SearchResult> results = new ArrayList();
+        IntentPayload intentPayload = new IntentPayload(new Intent());
+
+        SearchResult.Builder builder = new SearchResult.Builder();
+        builder.addTitle(titleOne)
+                .addSummary(summaryOne)
+                .addPayload(intentPayload);
+        SearchResult resultOne = builder.build();
+        results.add(resultOne);
+
+        builder.addTitle(titleTwo)
+                .addSummary(summaryTwo);
+        SearchResult resultTwo = builder.build();
+        results.add(resultTwo);
+
+        builder.addTitle(titleThree)
+                .addSummary(summaryThree);
+        SearchResult resultThree = builder.build();
+        results.add(resultThree);
+
+        loader = new DatabaseResultLoader(mContext, "", null);
+        loader.removeDuplicates(results);
+        assertThat(results.size()).isEqualTo(3);
+        assertThat(results.get(0)).isEqualTo(resultOne);
+        assertThat(results.get(1)).isEqualTo(resultTwo);
+        assertThat(results.get(2)).isEqualTo(resultThree);
+    }
+
+    @Test
+    public void testDeDupe_oneDuplicate_duplicateRemoved() {
+        List<SearchResult> results = new ArrayList();
+        IntentPayload intentPayload = new IntentPayload(new Intent());
+
+        SearchResult.Builder builder = new SearchResult.Builder();
+        builder.addTitle(titleOne)
+                .addSummary(summaryOne)
+                .addRank(0)
+                .addPayload(intentPayload);
+        SearchResult resultOne = builder.build();
+        results.add(resultOne);
+
+        // Duplicate of the first element
+        builder.addTitle(titleOne)
+                .addSummary(summaryOne)
+                .addRank(1);
+        SearchResult resultTwo = builder.build();
+        results.add(resultTwo);
+
+        // Unique
+        builder.addTitle(titleThree)
+                .addSummary(summaryThree);
+        SearchResult resultThree = builder.build();
+        results.add(resultThree);
+
+        loader = new DatabaseResultLoader(mContext, "", null);
+        loader.removeDuplicates(results);
+        assertThat(results.size()).isEqualTo(2);
+        assertThat(results.get(0)).isEqualTo(resultOne);
+        assertThat(results.get(1)).isEqualTo(resultThree);
+    }
+
+    @Test
+    public void testDeDupe_firstDupeInline_secondDuplicateRemoved() {
+        List<SearchResult> results = new ArrayList();
+        InlineSwitchPayload inlinePayload = new InlineSwitchPayload("", 0,
+                null);
+        IntentPayload intentPayload = new IntentPayload(new Intent());
+
+        SearchResult.Builder builder = new SearchResult.Builder();
+        // Inline result
+        builder.addTitle(titleOne)
+                .addSummary(summaryOne)
+                .addRank(0)
+                .addPayload(inlinePayload);
+        SearchResult resultOne = builder.build();
+        results.add(resultOne);
+
+        // Duplicate of first result, but Intent Result. Should be removed.
+        builder.addTitle(titleOne)
+                .addSummary(summaryOne)
+                .addRank(1)
+                .addPayload(intentPayload);
+        SearchResult resultTwo = builder.build();
+        results.add(resultTwo);
+
+        // Unique
+        builder.addTitle(titleThree)
+                .addSummary(summaryThree);
+        SearchResult resultThree = builder.build();
+        results.add(resultThree);
+
+        loader = new DatabaseResultLoader(mContext, "", null);
+        loader.removeDuplicates(results);
+        assertThat(results.size()).isEqualTo(2);
+        assertThat(results.get(0)).isEqualTo(resultOne);
+        assertThat(results.get(1)).isEqualTo(resultThree);
+    }
+
+    @Test
+    public void testDeDupe_secondDupeInline_firstDuplicateRemoved() {
+        /*
+         * Create a list as follows:
+         * (5) Intent Four
+         * (4) Inline Two
+         * (3) Intent Three
+         * (2) Intent Two
+         * (1) Intent One
+         *
+         * After removing duplicates:
+         * (4) Intent Four
+         * (3) Inline Two
+         * (2) Intent Three
+         * (1) Intent One
+         */
+        List<SearchResult> results = new ArrayList();
+        InlineSwitchPayload inlinePayload = new InlineSwitchPayload("", 0,
+                null);
+        IntentPayload intentPayload = new IntentPayload(new Intent());
+
+
+        SearchResult.Builder builder = new SearchResult.Builder();
+        // Intent One
+        builder.addTitle(titleOne)
+                .addSummary(summaryOne)
+                .addPayload(intentPayload);
+        SearchResult resultOne = builder.build();
+        results.add(resultOne);
+
+        // Intent Two
+        builder.addTitle(titleTwo)
+                .addSummary(summaryTwo)
+                .addPayload(intentPayload);
+        SearchResult resultTwo = builder.build();
+        results.add(resultTwo);
+
+        // Intent Three
+        builder.addTitle(titleThree)
+                .addSummary(summaryThree);
+        SearchResult resultThree = builder.build();
+        results.add(resultThree);
+
+        // Inline Two
+        builder.addTitle(titleTwo)
+                .addSummary(summaryTwo)
+                .addPayload(inlinePayload);
+        SearchResult resultFour = builder.build();
+        results.add(resultFour);
+
+        // Intent Four
+        builder.addTitle(titleFour)
+                .addSummary(summaryOne)
+                .addPayload(intentPayload);
+        SearchResult resultFive = builder.build();
+        results.add(resultFive);
+
+        loader = new DatabaseResultLoader(mContext, "", null);
+        loader.removeDuplicates(results);
+        assertThat(results.size()).isEqualTo(4);
+        assertThat(results.get(0)).isEqualTo(resultOne);
+        assertThat(results.get(1)).isEqualTo(resultThree);
+        assertThat(results.get(2)).isEqualTo(resultFour);
+        assertThat(results.get(3)).isEqualTo(resultFive);
+    }
+
+    @Test
+    public void testSpecialCaseTwoWords_firstWordMatches_ranksHigher() {
         final String caseOne = "Apple pear";
         final String caseTwo = "Banana apple";
         insertSpecialCase(caseOne);

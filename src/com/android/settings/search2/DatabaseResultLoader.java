@@ -144,7 +144,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
         results.addAll(secondaryResults);
         results.addAll(tertiaryResults);
 
-        return results;
+        return removeDuplicates(results);
     }
 
     @Override
@@ -299,5 +299,56 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
             selection[i + 1] = subStringQuery;
         }
         return selection;
+    }
+
+    /**
+     * Goes through the list of search results and verifies that none of the results are duplicates.
+     * A duplicate is quantified by a result with the same Title and the same non-empty Summary.
+     *
+     * The method walks through the results starting with the highest priority result. It removes
+     * the duplicates by doing the first rule that applies below:
+     * - If a result is inline, remove the intent result.
+     * - Remove the lower rank item.
+     * @param results A list of results with potential duplicates
+     * @return The list of results with duplicates removed.
+     */
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    List<SearchResult> removeDuplicates(List<SearchResult> results) {
+        SearchResult primaryResult, secondaryResult;
+
+        // We accept the O(n^2) solution because the number of results is small.
+        for (int i = results.size() - 1; i >= 0; i--) {
+            secondaryResult = results.get(i);
+
+            for (int j = i - 1; j >= 0; j--) {
+                primaryResult = results.get(j);
+                if (areDuplicateResults(primaryResult, secondaryResult)) {
+
+                    if (primaryResult.viewType != ResultPayload.PayloadType.INTENT) {
+                        // Case where both payloads are inline
+                        results.remove(i);
+                        break;
+                    } else if (secondaryResult.viewType != ResultPayload.PayloadType.INTENT) {
+                        // Case where only second result is inline
+                        results.remove(j);
+                        i--; // shift the top index to reflect the lower element being removed
+                    } else {
+                        // Case where both payloads are intent
+                        results.remove(i);
+                    }
+                }
+            }
+        }
+        return results;
+    }
+
+    /**
+     * @return True when the two {@link SearchResult SearchResults} have the same title, and the same
+     * non-empty summary.
+     */
+    private boolean areDuplicateResults(SearchResult primary, SearchResult secondary) {
+        return TextUtils.equals(primary.title, secondary.title)
+                && TextUtils.equals(primary.summary, secondary.summary)
+                && !TextUtils.isEmpty(primary.summary);
     }
 }
