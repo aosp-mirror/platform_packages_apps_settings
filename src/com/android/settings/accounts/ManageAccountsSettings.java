@@ -18,26 +18,17 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AuthenticatorDescription;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
-import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.ArraySet;
 import android.util.Log;
@@ -53,7 +44,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.location.LocationSettings;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 
 import java.util.ArrayList;
@@ -66,14 +56,8 @@ import static android.content.Intent.EXTRA_USER;
 /** Manages settings for Google Account. */
 public class ManageAccountsSettings extends AccountPreferenceBase
         implements AuthenticatorHelper.OnAccountsUpdateListener {
-    private static final String ACCOUNT_KEY = "account"; // to pass to auth settings
     public static final String KEY_ACCOUNT_TYPE = "account_type";
     public static final String KEY_ACCOUNT_LABEL = "account_label";
-
-    // Action name for the broadcast intent when the Google account preferences page is launching
-    // the location settings.
-    private static final String LAUNCHING_LOCATION_SETTINGS =
-            "com.android.settings.accounts.LAUNCHING_LOCATION_SETTINGS";
 
     private static final int MENU_SYNC_NOW_ID = Menu.FIRST;
     private static final int MENU_SYNC_CANCEL_ID = Menu.FIRST + 1;
@@ -414,145 +398,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     private void addAuthenticatorSettings() {
         PreferenceScreen prefs = addPreferencesForType(mAccountType, getPreferenceScreen());
         if (prefs != null) {
-            updatePreferenceIntents(prefs);
-        }
-    }
-
-    /** Listens to a preference click event and starts a fragment */
-    private class FragmentStarter
-            implements Preference.OnPreferenceClickListener {
-        private final String mClass;
-        private final int mTitleRes;
-
-        /**
-         * @param className the class name of the fragment to be started.
-         * @param title the title resource id of the started preference panel.
-         */
-        public FragmentStarter(String className, int title) {
-            mClass = className;
-            mTitleRes = title;
-        }
-
-        @Override
-        public boolean onPreferenceClick(Preference preference) {
-            ((SettingsActivity) getActivity()).startPreferencePanel(
-                    mClass, null, mTitleRes, null, null, 0);
-            // Hack: announce that the Google account preferences page is launching the location
-            // settings
-            if (mClass.equals(LocationSettings.class.getName())) {
-                Intent intent = new Intent(LAUNCHING_LOCATION_SETTINGS);
-                getActivity().sendBroadcast(
-                        intent, android.Manifest.permission.WRITE_SECURE_SETTINGS);
-            }
-            return true;
-        }
-    }
-
-    /**
-     * Recursively filters through the preference list provided by GoogleLoginService.
-     *
-     * This method removes all the invalid intent from the list, adds account name as extra into the
-     * intent, and hack the location settings to start it as a fragment.
-     */
-    private void updatePreferenceIntents(PreferenceGroup prefs) {
-        final PackageManager pm = getActivity().getPackageManager();
-        for (int i = 0; i < prefs.getPreferenceCount(); ) {
-            Preference pref = prefs.getPreference(i);
-            if (pref instanceof PreferenceGroup) {
-                updatePreferenceIntents((PreferenceGroup) pref);
-            }
-            Intent intent = pref.getIntent();
-            if (intent != null) {
-                // Hack. Launch "Location" as fragment instead of as activity.
-                //
-                // When "Location" is launched as activity via Intent, there's no "Up" button at the
-                // top left, and if there's another running instance of "Location" activity, the
-                // back stack would usually point to some other place so the user won't be able to
-                // go back to the previous page by "back" key. Using fragment is a much easier
-                // solution to those problems.
-                //
-                // If we set Intent to null and assign a fragment to the PreferenceScreen item here,
-                // in order to make it work as expected, we still need to modify the container
-                // PreferenceActivity, override onPreferenceStartFragment() and call
-                // startPreferencePanel() there. In order to inject the title string there, more
-                // dirty further hack is still needed. It's much easier and cleaner to listen to
-                // preference click event here directly.
-                if (intent.getAction().equals(
-                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)) {
-                    // The OnPreferenceClickListener overrides the click event completely. No intent
-                    // will get fired.
-                    pref.setOnPreferenceClickListener(new FragmentStarter(
-                            LocationSettings.class.getName(),
-                            R.string.location_settings_title));
-                } else {
-                    ResolveInfo ri = pm.resolveActivityAsUser(intent,
-                            PackageManager.MATCH_DEFAULT_ONLY, mUserHandle.getIdentifier());
-                    if (ri == null) {
-                        prefs.removePreference(pref);
-                        continue;
-                    } else {
-                        intent.putExtra(ACCOUNT_KEY, mFirstAccount);
-                        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                            @Override
-                            public boolean onPreferenceClick(Preference preference) {
-                                Intent prefIntent = preference.getIntent();
-                                /*
-                                 * Check the intent to see if it resolves to a exported=false
-                                 * activity that doesn't share a uid with the authenticator.
-                                 *
-                                 * Otherwise the intent is considered unsafe in that it will be
-                                 * exploiting the fact that settings has system privileges.
-                                 */
-                                if (isSafeIntent(pm, prefIntent)) {
-                                    getActivity().startActivityAsUser(prefIntent, mUserHandle);
-                                } else {
-                                    Log.e(TAG,
-                                            "Refusing to launch authenticator intent because"
-                                                    + "it exploits Settings permissions: "
-                                                    + prefIntent);
-                                }
-                                return true;
-                            }
-                        });
-                    }
-                }
-            }
-            i++;
-        }
-    }
-
-    /**
-     * Determines if the supplied Intent is safe. A safe intent is one that is
-     * will launch a exported=true activity or owned by the same uid as the
-     * authenticator supplying the intent.
-     */
-    private boolean isSafeIntent(PackageManager pm, Intent intent) {
-        AuthenticatorDescription authDesc =
-                mAuthenticatorHelper.getAccountTypeDescription(mAccountType);
-        ResolveInfo resolveInfo =
-            pm.resolveActivityAsUser(intent, 0, mUserHandle.getIdentifier());
-        if (resolveInfo == null) {
-            return false;
-        }
-        ActivityInfo resolvedActivityInfo = resolveInfo.activityInfo;
-        ApplicationInfo resolvedAppInfo = resolvedActivityInfo.applicationInfo;
-        try {
-            if (resolvedActivityInfo.exported) {
-                if (resolvedActivityInfo.permission == null) {
-                    return true; // exported activity without permission.
-                } else if (pm.checkPermission(resolvedActivityInfo.permission,
-                        authDesc.packageName) == PackageManager.PERMISSION_GRANTED) {
-                    return true;
-                }
-            }
-            ApplicationInfo authenticatorAppInf = pm.getApplicationInfo(authDesc.packageName, 0);
-            return  resolvedAppInfo.uid == authenticatorAppInf.uid;
-        } catch (NameNotFoundException e) {
-            Log.e(TAG,
-                    "Intent considered unsafe due to exception.",
-                    e);
-            return false;
+            mAccountTypePreferenceLoader.updatePreferenceIntents(prefs, mAccountType, mFirstAccount);
         }
     }
 

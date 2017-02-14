@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -61,6 +62,8 @@ public class AccountDetailDashboardFragmentTest {
     private AccountManager mAccountManager;
     @Mock
     private Preference mPreference;
+    @Mock
+    private PreferenceScreen mScreen;
 
     private AccountDetailDashboardFragment mFragment;
     private Context mContext;
@@ -125,9 +128,10 @@ public class AccountDetailDashboardFragmentTest {
             new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
         when(mFragment.getContext()).thenReturn(mContext);
+        doReturn(mScreen).when(mFragment).getPreferenceScreen();
         doReturn(mPreference).when(mFragment).findPreference(PREF_ACCOUNT_HEADER);
 
-        mFragment.updateAccountHeader();
+        mFragment.updateUi();
 
         verify(mPreference).setTitle("name1@abc.com");
     }

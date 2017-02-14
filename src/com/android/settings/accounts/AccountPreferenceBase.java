@@ -58,6 +58,7 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
     private Object mStatusChangeListenerHandle;
     protected AuthenticatorHelper mAuthenticatorHelper;
     protected UserHandle mUserHandle;
+    protected AccountTypePreferenceLoader mAccountTypePreferenceLoader;
 
     private java.text.DateFormat mDateFormat;
     private java.text.DateFormat mTimeFormat;
@@ -70,6 +71,8 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
         mUserHandle = Utils.getSecureTargetUser(activity.getActivityToken(), mUm, getArguments(),
                 activity.getIntent().getExtras());
         mAuthenticatorHelper = new AuthenticatorHelper(activity, mUserHandle, this);
+        mAccountTypePreferenceLoader =
+            new AccountTypePreferenceLoader(this, mAuthenticatorHelper, mUserHandle);
     }
 
     /**
@@ -142,35 +145,7 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
      */
     public PreferenceScreen addPreferencesForType(final String accountType,
             PreferenceScreen parent) {
-        PreferenceScreen prefs = null;
-        if (mAuthenticatorHelper.containsAccountType(accountType)) {
-            AuthenticatorDescription desc = null;
-            try {
-                desc = mAuthenticatorHelper.getAccountTypeDescription(accountType);
-                if (desc != null && desc.accountPreferencesId != 0) {
-                    // Load the context of the target package, then apply the
-                    // base Settings theme (no references to local resources)
-                    // and create a context theme wrapper so that we get the
-                    // correct text colors. Control colors will still be wrong,
-                    // but there's not much we can do about it since we can't
-                    // reference local color resources.
-                    final Context targetCtx = getActivity().createPackageContextAsUser(
-                            desc.packageName, 0, mUserHandle);
-                    final Theme baseTheme = getResources().newTheme();
-                    baseTheme.applyStyle(com.android.settings.R.style.Theme_SettingsBase, true);
-                    final Context themedCtx =
-                            new LocalClassLoaderContextThemeWrapper(getClass(), targetCtx, 0);
-                    themedCtx.getTheme().setTo(baseTheme);
-                    prefs = getPreferenceManager().inflateFromResource(themedCtx,
-                            desc.accountPreferencesId, parent);
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, "Couldn't load preferences.xml file from " + desc.packageName);
-            } catch (Resources.NotFoundException e) {
-                Log.w(TAG, "Couldn't load preferences.xml file from " + desc.packageName);
-            }
-        }
-        return prefs;
+        return mAccountTypePreferenceLoader.addPreferencesForType(accountType, parent);
     }
 
     public void updateAuthDescriptions() {
