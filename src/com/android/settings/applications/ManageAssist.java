@@ -29,6 +29,8 @@ import com.android.internal.app.AssistUtils;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.gestures.AssistGestureFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.voice.VoiceInputListPreference;
 
 /**
@@ -38,6 +40,7 @@ public class ManageAssist extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_DEFAULT_ASSIST = "default_assist";
+    private static final String KEY_ASSIST_GESTURE = "gesture_assist";
     private static final String KEY_CONTEXT = "context";
     private static final String KEY_SCREENSHOT = "screenshot";
     private static final String KEY_VOICE_INPUT = "voice_input_settings";
@@ -50,6 +53,9 @@ public class ManageAssist extends SettingsPreferenceFragment
     private VoiceInputListPreference mVoiceInputPref;
     private Handler mHandler = new Handler();
 
+    private Preference mAssistGesturePref;
+    private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -57,6 +63,10 @@ public class ManageAssist extends SettingsPreferenceFragment
 
         mDefaultAssitPref = (DefaultAssistPreference) findPreference(KEY_DEFAULT_ASSIST);
         mDefaultAssitPref.setOnPreferenceChangeListener(this);
+
+        mAssistGesturePref = findPreference(KEY_ASSIST_GESTURE);
+        mAssistGestureFeatureProvider =
+                FeatureFactory.getFactory(getContext()).getAssistGestureFeatureProvider();
 
         mContextPref = (SwitchPreference) findPreference(KEY_CONTEXT);
         mContextPref.setChecked(Settings.Secure.getInt(getContentResolver(),
@@ -140,6 +150,12 @@ public class ManageAssist extends SettingsPreferenceFragment
             getPreferenceScreen().removePreference(mContextPref);
             getPreferenceScreen().removePreference(mScreenshotPref);
             getPreferenceScreen().removePreference(mFlashPref);
+        }
+
+        if (hasAssistant && mAssistGestureFeatureProvider.isSupported(getContext())) {
+            getPreferenceScreen().addPreference(mAssistGesturePref);
+        } else {
+            getPreferenceScreen().removePreference(mAssistGesturePref);
         }
 
         if (hasAssistant && AssistUtils.allowDisablingAssistDisclosure(getContext())) {

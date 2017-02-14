@@ -24,6 +24,11 @@
         android:title="@string/default_assist_title"
         android:summary="@string/default_assist_none"/>
 
+    <Preference
+        android:key="gesture_assist"
+        android:title="@string/assist_gesture_title"
+        android:fragment="com.android.settings.gestures.AssistGestureSettings"/>
+
     <SwitchPreference
         android:key="context"
         android:title="@string/assist_access_context_title"

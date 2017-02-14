@@ -58,6 +58,7 @@ public class GestureSettings extends DashboardFragment {
         final AmbientDisplayConfiguration ambientConfig = new AmbientDisplayConfiguration(context);
         final List<PreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
+        controllers.add(new AssistGesturePreferenceController(context, lifecycle));
         controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle));
         controllers.add(new DoubleTapPowerPreferenceController(context, lifecycle));
         controllers.add(new DoubleTwistPreferenceController(context, lifecycle));
@@ -72,6 +73,7 @@ public class GestureSettings extends DashboardFragment {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
         mPreferences = new ArrayList();
+        addPreferenceToTrackingList(AssistGesturePreferenceController.class);
         addPreferenceToTrackingList(SwipeToNotificationPreferenceController.class);
         addPreferenceToTrackingList(DoubleTapScreenPreferenceController.class);
         addPreferenceToTrackingList(DoubleTwistPreferenceController.class);

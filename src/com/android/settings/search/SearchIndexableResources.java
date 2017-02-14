@@ -50,6 +50,7 @@ import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
@@ -136,6 +137,7 @@ public final class SearchIndexableResources {
                 R.xml.special_access, R.drawable.ic_settings_applications);
         addIndex(UserSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_multiuser);
         addIndex(GestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
+        addIndex(AssistGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(PickupGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(DoubleTapScreenSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(DoubleTapPowerSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);

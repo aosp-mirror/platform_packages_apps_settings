@@ -53,6 +53,11 @@
         android:title="@string/gesture_preference_title">
 
         <Preference
+            android:key="gesture_assist"
+            android:title="@string/assist_gesture_title"
+            android:fragment="com.android.settings.gestures.AssistGestureSettings"/>
+
+        <Preference
             android:key="gesture_swipe_down_fingerprint"
             android:title="@string/fingerprint_swipe_for_notifications_title"
             android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"/>

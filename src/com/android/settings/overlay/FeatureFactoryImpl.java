@@ -38,6 +38,8 @@ import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProviderImpl;
+import com.android.settings.gestures.AssistGestureFeatureProvider;
+import com.android.settings.gestures.AssistGestureFeatureProviderImpl;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
 import com.android.settings.search2.SearchFeatureProvider;
@@ -61,6 +63,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private SecurityFeatureProvider mSecurityFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -153,5 +156,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl();
         }
         return mSuggestionFeatureProvider;
+    }
+
+    @Override
+    public AssistGestureFeatureProvider getAssistGestureFeatureProvider() {
+        if (mAssistGestureFeatureProvider == null) {
+            mAssistGestureFeatureProvider = new AssistGestureFeatureProviderImpl();
+        }
+        return mAssistGestureFeatureProvider;
     }
 }

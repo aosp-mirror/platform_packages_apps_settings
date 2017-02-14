@@ -60,7 +60,7 @@ public class XmlParserUtilTest {
                 "com.android.settings.gestures.GesturePreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String title = XmlParserUtils.getDataTitle(mContext, attrs);
-        String expTitle = mContext.getString(R.string.fingerprint_swipe_for_notifications_title);
+        String expTitle = mContext.getString(R.string.assist_gesture_title);
         assertThat(title).isEqualTo(expTitle);
     }
 
@@ -79,7 +79,7 @@ public class XmlParserUtilTest {
                 "com.android.settings.gestures.GesturePreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String key = XmlParserUtils.getDataKey(mContext, attrs);
-        String expKey = "gesture_swipe_down_fingerprint";
+        String expKey = "gesture_assist";
         assertThat(key).isEqualTo(expKey);
     }
 
@@ -89,7 +89,7 @@ public class XmlParserUtilTest {
                 "com.android.settings.gestures.GesturePreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String summary = XmlParserUtils.getDataSummary(mContext, attrs);
-        String expSummary = mContext.getString(R.string.fingerprint_swipe_for_notifications_summary);
+        String expSummary = mContext.getString(R.string.assist_gesture_summary);
         assertThat(summary).isEqualTo(expSummary);
 
     }
