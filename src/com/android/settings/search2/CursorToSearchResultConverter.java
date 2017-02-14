@@ -220,9 +220,8 @@ class CursorToSearchResultConverter {
     private List<String> getBreadcrumbs(SiteMapManager siteMapManager, Cursor cursor) {
         final String screenTitle = cursor.getString(COLUMN_INDEX_SCREEN_TITLE);
         final String screenClass = cursor.getString(COLUMN_INDEX_CLASS_NAME);
-        final List<String> breadcrumbs = siteMapManager.buildBreadCrumb(mContext, screenClass,
+        return siteMapManager == null ? null : siteMapManager.buildBreadCrumb(mContext, screenClass,
                 screenTitle);
-        return breadcrumbs;
     }
 
     /** Uses the breadcrumbs to determine the offset to the base rank.

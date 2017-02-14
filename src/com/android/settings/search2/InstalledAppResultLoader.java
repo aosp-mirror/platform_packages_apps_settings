@@ -207,8 +207,8 @@ public class InstalledAppResultLoader extends AsyncLoader<List<? extends SearchR
      */
     private int getRank(int wordDiff) {
         if (wordDiff < 6) {
-            return 3;
+            return 2;
         }
-        return 4;
+        return 3;
     }
 }

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
@@ -27,7 +28,6 @@ import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.utils.AsyncLoader;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns;
@@ -91,11 +91,13 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
 
     /**
      * Base ranks defines the best possible rank based on what the query matches.
-     * If the query matches the title, the best rank it can be is 1
-     * If the query only matches the summary, the best rank it can be is 4
-     * If the query only matches keywords or entries, the best rank it can be is 7
+     * If the query matches the prefix of the first word in the title, the best rank it can be is 1
+     * If the query matches the prefix of the other words in the title, the best rank it can be is 3
+     * If the query only matches the summary, the best rank it can be is 7
+     * If the query only matches keywords or entries, the best rank it can be is 9
+     *
      */
-    private static final int[] BASE_RANKS = {1, 4, 7};
+    private static final int[] BASE_RANKS = {1, 3, 7, 9};
 
     private final String mQueryText;
     private final Context mContext;
@@ -121,33 +123,28 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
             return null;
         }
 
-        final List<SearchResult> primaryResults;
+        final List<SearchResult> primaryFirstWordResults;
+        final List<SearchResult> primaryMidWordResults;
         final List<SearchResult> secondaryResults;
         final List<SearchResult> tertiaryResults;
 
-        primaryResults = query(MATCH_COLUMNS_PRIMARY, BASE_RANKS[0]);
-        secondaryResults = query(MATCH_COLUMNS_SECONDARY, BASE_RANKS[1]);
-        tertiaryResults = query(MATCH_COLUMNS_TERTIARY, BASE_RANKS[2]);
+        primaryFirstWordResults = firstWordQuery(MATCH_COLUMNS_PRIMARY, BASE_RANKS[0]);
+        primaryMidWordResults = secondaryWordQuery(MATCH_COLUMNS_PRIMARY, BASE_RANKS[1]);
+        secondaryResults = anyWordQuery(MATCH_COLUMNS_SECONDARY, BASE_RANKS[2]);
+        tertiaryResults = anyWordQuery(MATCH_COLUMNS_TERTIARY, BASE_RANKS[3]);
 
-        final List<SearchResult> results = new ArrayList<>(primaryResults.size()
+        final List<SearchResult> results = new ArrayList<>(
+                primaryFirstWordResults.size()
+                + primaryMidWordResults.size()
                 + secondaryResults.size()
                 + tertiaryResults.size());
 
-        results.addAll(primaryResults);
+        results.addAll(primaryFirstWordResults);
+        results.addAll(primaryMidWordResults);
         results.addAll(secondaryResults);
         results.addAll(tertiaryResults);
+
         return results;
-    }
-
-    private List<SearchResult> query(String[] matchColumns, int baseRank) {
-        final String whereClause = buildWhereClause(matchColumns);
-        final String[] selection = buildQuerySelection(matchColumns.length * 2);
-
-        final SQLiteDatabase database = IndexDatabaseHelper.getInstance(mContext)
-                .getReadableDatabase();
-        final Cursor resultCursor = database.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
-                selection, null, null, null);
-        return mConverter.convertCursor(mSiteMapManager, resultCursor, baseRank);
     }
 
     @Override
@@ -168,7 +165,94 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
         return query.trim();
     }
 
-    private static String buildWhereClause(String[] matchColumns) {
+    /**
+     * Creates and executes the query which matches prefixes of the first word of the given columns.
+     *
+     * @param matchColumns The columns to match on
+     * @param baseRank The highest rank achievable by these results
+     * @return A list of the matching results.
+     */
+    private List<SearchResult> firstWordQuery(String[] matchColumns, int baseRank) {
+        final String whereClause = buildSingleWordWhereClause(matchColumns);
+        final String query = mQueryText + "%";
+        final String[] selection = buildSingleWordSelection(query, matchColumns.length);
+
+        return query(whereClause, selection, baseRank);
+    }
+
+    /**
+     * Creates and executes the query which matches prefixes of the non-first words of the
+     * given columns.
+     *
+     * @param matchColumns The columns to match on
+     * @param baseRank The highest rank achievable by these results
+     * @return A list of the matching results.
+     */
+    private List<SearchResult> secondaryWordQuery(String[] matchColumns, int baseRank) {
+        final String whereClause = buildSingleWordWhereClause(matchColumns);
+        final String query = "% " + mQueryText + "%";
+        final String[] selection = buildSingleWordSelection(query, matchColumns.length);
+
+        return query(whereClause, selection, baseRank);
+    }
+
+    /**
+     * Creates and executes the query which matches prefixes of the any word of the given columns.
+     *
+     * @param matchColumns The columns to match on
+     * @param baseRank The highest rank achievable by these results
+     * @return A list of the matching results.
+     */
+    private List<SearchResult> anyWordQuery(String[] matchColumns, int baseRank) {
+        final String whereClause = buildTwoWordWhereClause(matchColumns);
+        final String[] selection = buildAnyWordSelection(matchColumns.length * 2);
+
+        return query(whereClause, selection, baseRank);
+    }
+
+    /**
+     * Generic method used by all of the query methods above to execute a query.
+     *
+     * @param whereClause Where clause for the SQL query which uses bindings.
+     * @param selection List of the transformed query to match each bind in the whereClause
+     * @param baseRank The highest rank achievable by these results.
+     * @return A list of the matching results.
+     */
+    private List<SearchResult> query(String whereClause, String[] selection, int baseRank) {
+        final SQLiteDatabase database = IndexDatabaseHelper.getInstance(mContext)
+                .getReadableDatabase();
+        final Cursor resultCursor = database.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
+                selection, null, null, null);
+        return mConverter.convertCursor(mSiteMapManager, resultCursor, baseRank);
+    }
+
+    /**
+     * Builds the SQLite WHERE clause that matches all matchColumns for a single query.
+     *
+     * @param matchColumns List of columns that will be used for matching.
+     * @return The constructed WHERE clause.
+     */
+    private static String buildSingleWordWhereClause(String[] matchColumns) {
+        StringBuilder sb = new StringBuilder(" (");
+        final int count = matchColumns.length;
+        for (int n = 0; n < count; n++) {
+            sb.append(matchColumns[n]);
+            sb.append(" like ? ");
+            if (n < count - 1) {
+                sb.append(" OR ");
+            }
+        }
+        sb.append(") AND enabled = 1");
+        return sb.toString();
+    }
+
+    /**
+     * Builds the SQLite WHERE clause that matches all matchColumns to two different queries.
+     *
+     * @param matchColumns List of columns that will be used for matching.
+     * @return The constructed WHERE clause.
+     */
+    private static String buildTwoWordWhereClause(String[] matchColumns) {
         StringBuilder sb = new StringBuilder(" (");
         final int count = matchColumns.length;
         for (int n = 0; n < count; n++) {
@@ -185,13 +269,27 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
     }
 
     /**
+     * Fills out the selection array to match the query as the prefix of a single word.
+     *
+     * @param size is the number of columns to be matched.
+     */
+    private String[] buildSingleWordSelection(String query, int size) {
+        String[] selection = new String[size];
+
+        for(int i = 0; i < size; i ++) {
+            selection[i] = query;
+        }
+        return selection;
+    }
+
+    /**
      * Fills out the selection array to match the query as the prefix of a word.
      *
      * @param size is twice the number of columns to be matched. The first match is for the prefix
      *             of the first word in the column. The second match is for any subsequent word
      *             prefix match.
      */
-    private String[] buildQuerySelection(int size) {
+    private String[] buildAnyWordSelection(int size) {
         String[] selection = new String[size];
         final String query = mQueryText + "%";
         final String subStringQuery = "% " + mQueryText + "%";
