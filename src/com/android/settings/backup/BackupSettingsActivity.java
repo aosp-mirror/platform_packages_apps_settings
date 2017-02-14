@@ -17,9 +17,11 @@
 package com.android.settings.backup;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 
@@ -29,6 +31,7 @@ import android.util.Log;
  */
 public class BackupSettingsActivity extends Activity {
     private static final String TAG = "BackupSettingsActivity";
+    private FragmentManager mFragmentManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,9 +58,18 @@ public class BackupSettingsActivity extends Activity {
             if (Log.isLoggable(TAG, Log.DEBUG)) {
                 Log.d(TAG, "Manufacturer provided backup settings, showing the preference screen");
             }
-            getFragmentManager().beginTransaction()
+            // mFragmentManager can be set by {@link #setFragmentManager()} for testing
+            if (mFragmentManager == null) {
+                mFragmentManager = getFragmentManager();
+            }
+            mFragmentManager.beginTransaction()
                     .replace(android.R.id.content, new BackupSettingsFragment())
                     .commit();
         }
+    }
+
+    @VisibleForTesting
+    void setFragmentManager(FragmentManager fragmentManager) {
+        mFragmentManager = fragmentManager;
     }
 }
