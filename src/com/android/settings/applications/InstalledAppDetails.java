@@ -811,7 +811,8 @@ public class InstalledAppDetails extends AppInfoBase
         args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
 
         SettingsActivity sa = (SettingsActivity) caller.getActivity();
-        sa.startPreferencePanel(fragment.getName(), args, -1, title, caller, SUB_INFO_FRAGMENT);
+        sa.startPreferencePanel(caller, fragment.getName(), args, -1, title, caller,
+                SUB_INFO_FRAGMENT);
     }
 
     /*
@@ -896,7 +897,7 @@ public class InstalledAppDetails extends AppInfoBase
             startAppInfoFragment(AppDataUsage.class, getString(R.string.app_data_usage));
         } else if (preference == mBatteryPreference) {
             BatteryEntry entry = new BatteryEntry(getActivity(), null, mUserManager, mSipper);
-            PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
+            PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), this,
                     mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, true, false);
         } else {
             return false;

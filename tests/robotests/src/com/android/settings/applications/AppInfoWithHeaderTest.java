@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -57,18 +58,20 @@ public class AppInfoWithHeaderTest {
         FakeFeatureFactory.setupForTest(mContext);
 
         mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-
+        when(mFactory.metricsFeatureProvider.getMetricsCategory(any(Object.class)))
+                .thenReturn(MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY);
         mAppInfoWithHeader = new TestFragment();
     }
 
     @Test
     public void testAppHeaderIsAdded() {
+        final AppHeaderController appHeaderController = new AppHeaderController(
+                ShadowApplication.getInstance().getApplicationContext(),
+                mAppInfoWithHeader,
+                null);
         when(mFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
         when(mFactory.applicationFeatureProvider.newAppHeaderController(mAppInfoWithHeader, null))
-                .thenReturn(new AppHeaderController(
-                        ShadowApplication.getInstance().getApplicationContext(),
-                        mAppInfoWithHeader,
-                        null));
+                .thenReturn(appHeaderController);
         mAppInfoWithHeader.onActivityCreated(null);
 
         verify(mAppInfoWithHeader.mScreen).addPreference(any(LayoutPreference.class));

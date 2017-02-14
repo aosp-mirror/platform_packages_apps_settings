@@ -194,6 +194,7 @@ public class LocationSettings extends LocationSettingsBase
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
                         activity.startPreferencePanel(
+                                LocationSettings.this,
                                 LocationMode.class.getName(), null,
                                 R.string.location_mode_screen_title, null, LocationSettings.this,
                                 0);
@@ -348,6 +349,7 @@ public class LocationSettings extends LocationSettingsBase
         switch (item.getItemId()) {
             case MENU_SCANNING:
                 activity.startPreferencePanel(
+                        this,
                         ScanningSettings.class.getName(), null,
                         R.string.location_scanning_screen_title, null, LocationSettings.this,
                         0);
@@ -467,6 +469,7 @@ public class LocationSettings extends LocationSettingsBase
             Bundle args = new Bundle();
             args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mPackage);
             ((SettingsActivity) getActivity()).startPreferencePanelAsUser(
+                    LocationSettings.this,
                     InstalledAppDetails.class.getName(), args,
                     R.string.application_info_label, null, mUserHandle);
             return true;

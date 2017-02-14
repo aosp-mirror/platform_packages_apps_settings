@@ -63,7 +63,7 @@ public final class NightDisplayCondition extends Condition
     @Override
     public void onPrimaryClick() {
         Utils.startWithFragment(mManager.getContext(), NightDisplaySettings.class.getName(), null,
-                null, 0, R.string.night_display_title, null);
+                null, 0, R.string.night_display_title, null, MetricsEvent.DASHBOARD_SUMMARY);
     }
 
     @Override

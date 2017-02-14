@@ -414,7 +414,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 (PreferenceGroup) root.findPreference(KEY_SECURITY_STATUS);
         if (mDashboardFeatureProvider.isEnabled()) {
             final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
-                    getActivity(), getPrefContext(), CategoryKey.CATEGORY_SECURITY);
+                    getActivity(), getPrefContext(), getMetricsCategory(),
+                    CategoryKey.CATEGORY_SECURITY);
             int numSecurityStatusPrefs = 0;
             if (tilePrefs != null && !tilePrefs.isEmpty()) {
                 for (Preference preference : tilePrefs) {

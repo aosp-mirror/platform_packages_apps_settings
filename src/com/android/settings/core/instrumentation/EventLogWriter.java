@@ -27,8 +27,11 @@ import com.android.internal.logging.nano.MetricsProto;
  */
 public class EventLogWriter implements LogWriter {
 
-    public void visible(Context context, int category) {
-        MetricsLogger.visible(context, category);
+    public void visible(Context context, int source, int category) {
+        final LogMaker logMaker = new LogMaker(category)
+                .setType(MetricsProto.MetricsEvent.TYPE_OPEN)
+                .addTaggedData(MetricsProto.MetricsEvent.FIELD_CONTEXT, source);
+        MetricsLogger.action(logMaker);
     }
 
     public void hidden(Context context, int category) {

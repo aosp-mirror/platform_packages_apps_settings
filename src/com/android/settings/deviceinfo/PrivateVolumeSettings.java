@@ -479,7 +479,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
                 intent = Utils.onBuildStartFragmentIntent(getActivity(),
                         ManageApplications.class.getName(), args, null, R.string.apps_storage, null,
-                        false);
+                        false, getMetricsCategory());
 
             } break;
             case R.string.storage_detail_images: {

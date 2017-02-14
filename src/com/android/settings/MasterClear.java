@@ -118,7 +118,8 @@ public class MasterClear extends OptionsMenuFragment
     private void showFinalConfirmation() {
         Bundle args = new Bundle();
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
-        ((SettingsActivity) getActivity()).startPreferencePanel(MasterClearConfirm.class.getName(),
+        ((SettingsActivity) getActivity()).startPreferencePanel(
+                this, MasterClearConfirm.class.getName(),
                 args, R.string.master_clear_confirm_title, null, null, 0);
     }
 

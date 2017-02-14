@@ -98,7 +98,8 @@ public class ResetNetwork extends OptionsMenuFragment {
             SubscriptionInfo subscription = mSubscriptions.get(selectedIndex);
             args.putInt(PhoneConstants.SUBSCRIPTION_KEY, subscription.getSubscriptionId());
         }
-        ((SettingsActivity) getActivity()).startPreferencePanel(ResetNetworkConfirm.class.getName(),
+        ((SettingsActivity) getActivity()).startPreferencePanel(
+                this, ResetNetworkConfirm.class.getName(),
                 args, R.string.reset_network_confirm_title, null, null, 0);
     }
 

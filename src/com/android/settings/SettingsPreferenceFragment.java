@@ -732,7 +732,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         final Activity activity = getActivity();
         if (activity instanceof SettingsActivity) {
             SettingsActivity sa = (SettingsActivity) activity;
-            sa.startPreferencePanel(fragmentClass, extras, titleRes, null, caller, requestCode);
+            sa.startPreferencePanel(
+                    caller, fragmentClass, extras, titleRes, null, caller, requestCode);
             return true;
         } else {
             Log.w(TAG,

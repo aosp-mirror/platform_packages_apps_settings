@@ -15,9 +15,15 @@
  */
 package com.android.settings.core.instrumentation;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,9 +35,11 @@ import static com.android.settings.core.instrumentation.Instrumentable.METRICS_C
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -54,7 +62,23 @@ public class VisibilityLoggerMixinTest {
         mMixin.onResume();
 
         verify(mMetricsFeature, times(1))
-                .visible(any(Context.class), eq(TestInstrumentable.TEST_METRIC));
+                .visible(any(Context.class), eq(MetricsProto.MetricsEvent.VIEW_UNKNOWN),
+                        eq(TestInstrumentable.TEST_METRIC));
+    }
+
+    @Test
+    public void shouldLogVisibleWithSource() {
+        final Intent sourceIntent = new Intent()
+                .putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY,
+                        MetricsProto.MetricsEvent.SETTINGS_GESTURES);
+        final Activity activity = mock(Activity.class);
+        when(activity.getIntent()).thenReturn(sourceIntent);
+        mMixin.setSourceMetricsCategory(activity);
+        mMixin.onResume();
+
+        verify(mMetricsFeature, times(1))
+                .visible(any(Context.class), eq(MetricsProto.MetricsEvent.SETTINGS_GESTURES),
+                        eq(TestInstrumentable.TEST_METRIC));
     }
 
     @Test

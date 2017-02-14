@@ -24,6 +24,7 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -37,6 +38,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -186,6 +188,8 @@ public class DashboardFragmentTest {
             mControllers = new ArrayList<>();
 
             when(mPreferenceManager.getContext()).thenReturn(mContext);
+            ReflectionHelpers.setField(
+                    this, "mVisibilityLoggerMixin", mock(VisibilityLoggerMixin.class));
         }
 
         @Override

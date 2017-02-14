@@ -22,6 +22,8 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.support.v7.preference.Preference;
 import android.util.AttributeSet;
+
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.datausage.CellDataPreference.DataStateListener;
@@ -76,7 +78,7 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
         Bundle args = new Bundle();
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
         return Utils.onBuildStartFragmentIntent(getContext(), BillingCycleSettings.class.getName(),
-                args, null, 0, getTitle(), false);
+                args, null, 0, getTitle(), false, MetricsProto.MetricsEvent.VIEW_UNKNOWN);
     }
 
     private final DataStateListener mListener = new DataStateListener() {

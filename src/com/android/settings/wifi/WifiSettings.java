@@ -850,8 +850,9 @@ public class WifiSettings extends RestrictedSettingsFragment
                 @Override
                 public void onClick() {
                     final SettingsActivity activity = (SettingsActivity) getActivity();
-                    activity.startPreferencePanel(ScanningSettings.class.getName(), null,
-                            R.string.location_scanning_screen_title, null, null, 0);
+                    activity.startPreferencePanel(WifiSettings.this,
+                            ScanningSettings.class.getName(),
+                            null, R.string.location_scanning_screen_title, null, null, 0);
                 }
             };
             mStatusMessagePreference.setText(

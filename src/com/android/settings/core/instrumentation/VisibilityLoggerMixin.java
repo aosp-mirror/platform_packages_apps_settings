@@ -16,8 +16,12 @@
 
 package com.android.settings.core.instrumentation;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnAttach;
 import com.android.settings.core.lifecycle.events.OnPause;
@@ -31,9 +35,12 @@ import static com.android.settings.core.instrumentation.Instrumentable.METRICS_C
  */
 public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPause, OnAttach {
 
+    private static final String TAG = "VisibilityLoggerMixin";
+
     private final int mMetricsCategory;
 
     private MetricsFeatureProvider mMetricsFeature;
+    private int mSourceMetricsCategory = MetricsProto.MetricsEvent.VIEW_UNKNOWN;
 
     public VisibilityLoggerMixin(int metricsCategory) {
         // MetricsFeature will be set during onAttach.
@@ -53,7 +60,7 @@ public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPau
     @Override
     public void onResume() {
         if (mMetricsFeature != null && mMetricsCategory != METRICS_CATEGORY_UNKNOWN) {
-            mMetricsFeature.visible(null /* context */, mMetricsCategory);
+            mMetricsFeature.visible(null /* context */, mSourceMetricsCategory, mMetricsCategory);
         }
     }
 
@@ -62,5 +69,20 @@ public class VisibilityLoggerMixin implements LifecycleObserver, OnResume, OnPau
         if (mMetricsFeature != null && mMetricsCategory != METRICS_CATEGORY_UNKNOWN) {
             mMetricsFeature.hidden(null /* context */, mMetricsCategory);
         }
+    }
+
+    /**
+     * Sets source metrics category for this logger. Source is the caller that opened this UI.
+     */
+    public void setSourceMetricsCategory(Activity activity) {
+        if (mSourceMetricsCategory != MetricsProto.MetricsEvent.VIEW_UNKNOWN || activity == null) {
+            return;
+        }
+        final Intent intent = activity.getIntent();
+        if (intent == null) {
+            return;
+        }
+        mSourceMetricsCategory = intent.getIntExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY,
+                MetricsProto.MetricsEvent.VIEW_UNKNOWN);
     }
 }

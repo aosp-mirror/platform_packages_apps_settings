@@ -21,9 +21,11 @@ import android.os.UserManager;
 import com.android.settings.Settings;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
+import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settingslib.applications.ApplicationsState;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +48,8 @@ import static org.mockito.Mockito.when;
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowTheme.class,
-                ShadowDynamicIndexableContentMonitor.class
+                ShadowDynamicIndexableContentMonitor.class,
+                ShadowEventLogWriter.class
         })
 public class ManageApplicationsTest {
 
@@ -55,8 +58,8 @@ public class ManageApplicationsTest {
     @Mock private UserManager mUserManager;
 
     private Looper mBgLooper;
-
     private ManageApplications mFragment;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -67,6 +70,7 @@ public class ManageApplicationsTest {
         when(mState.getBackgroundLooper()).thenReturn(mBgLooper);
 
         mFragment = new ManageApplications();
+        ReflectionHelpers.setField(mFragment, "mLifecycle", new Lifecycle());
     }
 
     @Test

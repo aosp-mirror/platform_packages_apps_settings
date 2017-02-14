@@ -16,7 +16,8 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
-import android.metrics.LogMaker;
+
+import com.android.internal.logging.nano.MetricsProto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +38,9 @@ public class MetricsFeatureProvider {
         mLoggerWriters.add(new SettingSuggestionsLogWriter());
     }
 
-    public void visible(Context context, int category) {
+    public void visible(Context context, int source, int category) {
         for (LogWriter writer : mLoggerWriters) {
-            writer.visible(context, category);
+            writer.visible(context, source, category);
         }
     }
 
@@ -89,5 +90,12 @@ public class MetricsFeatureProvider {
         for (LogWriter writer : mLoggerWriters) {
             writer.histogram(context, name, bucket);
         }
+    }
+
+    public int getMetricsCategory(Object object) {
+        if (object == null || !(object instanceof Instrumentable)) {
+            return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
+        }
+        return ((Instrumentable) object).getMetricsCategory();
     }
 }

@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.InstalledAppDetails;
 
@@ -88,7 +89,7 @@ public class AppHeader {
                     if (includeAppInfo) {
                         AppInfoBase.startAppInfoFragment(InstalledAppDetails.class,
                                 R.string.application_info_label, pkgName, uid, activity,
-                                INSTALLED_APP_DETAILS);
+                                INSTALLED_APP_DETAILS, MetricsProto.MetricsEvent.VIEW_UNKNOWN);
                     } else {
                         activity.finish();
                     }

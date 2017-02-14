@@ -23,6 +23,7 @@ import android.support.annotation.VisibleForTesting;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.ResetNetwork;
 import com.android.settings.Utils;
@@ -45,7 +46,8 @@ public class NetworkResetActionMenuController {
         if (item != null) {
             item.setOnMenuItemClickListener(target -> {
                 Utils.startWithFragment(mContext, ResetNetwork.class.getName(), null, null,
-                        0, R.string.reset_network_title, null);
+                        0, R.string.reset_network_title, null,
+                        MetricsProto.MetricsEvent.SETTINGS_NETWORK_CATEGORY);
                 return true;
             });
         }

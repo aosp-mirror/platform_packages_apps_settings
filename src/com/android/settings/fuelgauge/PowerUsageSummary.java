@@ -40,7 +40,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -141,8 +141,8 @@ public class PowerUsageSummary extends PowerUsageBase {
         }
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
         BatteryEntry entry = pgp.getInfo();
-        PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), mStatsHelper,
-                mStatsType, entry, true, true);
+        PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), this,
+                mStatsHelper, mStatsType, entry, true, true);
         return super.onPreferenceTreeClick(preference);
     }
 
@@ -206,7 +206,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 Bundle args = new Bundle();
                 args.putString(ManageApplications.EXTRA_CLASSNAME,
                         HighPowerApplicationsActivity.class.getName());
-                sa.startPreferencePanel(ManageApplications.class.getName(), args,
+                sa.startPreferencePanel(this, ManageApplications.class.getName(), args,
                         R.string.high_power_apps, null, null, 0);
                 return true;
             case MENU_ADDITIONAL_BATTERY_INFO:
@@ -237,7 +237,7 @@ public class PowerUsageSummary extends PowerUsageBase {
 
         if (featureProvider.isAdvancedUiEnabled()) {
             Utils.startWithFragment(getContext(), PowerUsageAdvanced.class.getName(), null,
-                    null, 0, R.string.advanced_battery_title, null);
+                    null, 0, R.string.advanced_battery_title, null, getMetricsCategory());
         } else {
             mStatsHelper.storeStatsHistoryInFile(BatteryHistoryDetail.BATTERY_HISTORY_FILE);
             Bundle args = new Bundle(2);
@@ -246,7 +246,7 @@ public class PowerUsageSummary extends PowerUsageBase {
             args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST,
                     mStatsHelper.getBatteryBroadcast());
             Utils.startWithFragment(getContext(), BatteryHistoryDetail.class.getName(), args,
-                    null, 0, R.string.history_details_title, null);
+                    null, 0, R.string.history_details_title, null, getMetricsCategory());
         }
     }
 

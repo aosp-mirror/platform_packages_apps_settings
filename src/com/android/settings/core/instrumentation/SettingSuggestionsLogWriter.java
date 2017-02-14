@@ -31,7 +31,7 @@ public class SettingSuggestionsLogWriter implements LogWriter {
     private EventStore mEventStore;
 
     @Override
-    public void visible(Context context, int category) {
+    public void visible(Context context, int source, int category) {
     }
 
     @Override

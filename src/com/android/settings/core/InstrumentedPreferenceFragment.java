@@ -30,8 +30,8 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.PreferenceDividerDecoration;
 import com.android.settings.survey.SurveyMixin;
+import com.android.settings.widget.PreferenceDividerDecoration;
 
 /**
  * Instrumented fragment that logs visibility state.
@@ -47,9 +47,12 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     private final PreferenceDividerDecoration mDividerDecoration =
             new PreferenceDividerDecoration();
 
+    private final VisibilityLoggerMixin mVisibilityLoggerMixin;
+
     public InstrumentedPreferenceFragment() {
         // Mixin that logs visibility change for activity.
-        getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
+        mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory());
+        getLifecycle().addObserver(mVisibilityLoggerMixin);
         getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
     }
 
@@ -65,6 +68,12 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         getListView().addItemDecoration(mDividerDecoration);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        mVisibilityLoggerMixin.setSourceMetricsCategory(getActivity());
+        super.onResume();
     }
 
     @Override

@@ -100,11 +100,11 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         }
     };
 
-    public static void show(Context context, AppPreference pref) {
+    public static void show(Context context, AppPreference pref, int sourceMetricsCategory) {
         Bundle args = new Bundle();
         args.putString(ARG_PACKAGE_NAME, pref.getPackageName());
         Utils.startWithFragmentAsUser(context, AppManagementFragment.class.getName(), args, -1,
-                pref.getLabel(), false, new UserHandle(pref.getUserId()));
+                pref.getLabel(), false, sourceMetricsCategory, new UserHandle(pref.getUserId()));
     }
 
     @Override

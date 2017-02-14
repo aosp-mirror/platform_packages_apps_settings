@@ -206,7 +206,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
             ApplicationsState.AppEntry entry = ((DomainAppPreference) preference).mEntry;
             AppInfoBase.startAppInfoFragment(AppLaunchSettings.class, R.string.auto_launch_label,
                     entry.info.packageName, entry.info.uid, this,
-                    INSTALLED_APP_DETAILS);
+                    INSTALLED_APP_DETAILS, getMetricsCategory());
             return true;
         }
         return false;
