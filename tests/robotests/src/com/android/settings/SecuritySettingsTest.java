@@ -16,14 +16,14 @@
 
 package com.android.settings;
 
-import android.content.Context;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.IContentProvider;
-import android.provider.Settings;
+import android.content.pm.PackageManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.provider.Settings;
 
-import com.android.settings.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -46,7 +46,7 @@ import java.util.Map;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.isNull;
-import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -119,6 +119,27 @@ public class SecuritySettingsTest {
 
         verify(mSummaryLoader, times(1)).setSummary(any(), isNull(String.class));
     }
+
+    @Test
+    @Config(shadows = {
+            ShadowSecureSettings.class,
+    })
+    public void testSummaryProvider_hasFingerPrint_hasStaticSummary() {
+        // Package verifier state is set to disabled.
+        ShadowSecureSettings.putInt(null, Settings.Secure.PACKAGE_VERIFIER_STATE, -1);
+        final FingerprintManager fpm = mock(FingerprintManager.class);
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+                .thenReturn(true);
+
+        // Cast to Object to workaround a robolectric casting bug
+        when((Object) mContext.getSystemService(FingerprintManager.class)).thenReturn(fpm);
+        when(fpm.isHardwareDetected()).thenReturn(true);
+
+        mSummaryProvider.setListening(true);
+
+        verify(mContext).getString(R.string.security_dashboard_summary);
+    }
+
 
     @Test
     public void testGetPackageVerifierSummary_nullInput() {
