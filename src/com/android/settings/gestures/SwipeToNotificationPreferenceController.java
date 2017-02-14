@@ -63,4 +63,14 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
                 Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0)
                 == 1;
     }
+
+    @Override
+    public ResultPayload getResultPayload() {
+        ArrayMap<Integer, Boolean> valueMap = new ArrayMap<>();
+        valueMap.put(1, true);
+        valueMap.put(0, false);
+
+        return new InlineSwitchPayload(Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED,
+                ResultPayload.SettingsSource.SECURE, valueMap);
+    }
 }

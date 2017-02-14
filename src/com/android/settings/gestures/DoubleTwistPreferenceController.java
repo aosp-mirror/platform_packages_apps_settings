@@ -85,4 +85,14 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
         }
         return false;
     }
+
+    @Override
+    public ResultPayload getResultPayload() {
+        ArrayMap<Integer, Boolean> valueMap = new ArrayMap<>();
+        valueMap.put(1, true);
+        valueMap.put(0, false);
+
+        return new InlineSwitchPayload(Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED,
+                ResultPayload.SettingsSource.SECURE, valueMap);
+    }
 }

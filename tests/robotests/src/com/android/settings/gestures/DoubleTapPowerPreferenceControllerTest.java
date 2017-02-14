@@ -93,4 +93,23 @@ public class DoubleTapPowerPreferenceControllerTest {
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }
+
+    @Test
+    public void testPreferenceController_ProperResultPayloadType() {
+        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        mController = new DoubleTapPowerPreferenceController(context, null);
+        ResultPayload payload = mController.getResultPayload();
+        assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
+    }
+
+    @Test
+    public void testPreferenceController_CorrectPayload() {
+        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        mController = new DoubleTapPowerPreferenceController(context, null);
+        InlineSwitchPayload payload = (InlineSwitchPayload) mController.getResultPayload();
+        assertThat(payload.settingsUri).isEqualTo("camera_double_tap_power_gesture_disabled");
+        assertThat(payload.settingSource).isEqualTo(ResultPayload.SettingsSource.SECURE);
+        assertThat(payload.valueMap.get(0)).isEqualTo(true);
+        assertThat(payload.valueMap.get(1)).isEqualTo(false);
+    }
 }
