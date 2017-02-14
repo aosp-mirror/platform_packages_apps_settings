@@ -60,32 +60,34 @@
 
         <PreferenceCategory
           android:key="ringtones_preferecence_category"
-          android:title="@string/ringtones_category_preference_title" />
+          android:title="@string/ringtones_category_preference_title" >
 
-        <!-- Phone ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-                android:key="ringtone"
-                android:title="@string/ringtone_title"
-                android:dialogTitle="@string/ringtone_title"
-                android:summary="@string/ringtone_summary"
-                android:ringtoneType="ringtone" />
+                <!-- Phone ringtone -->
+                <com.android.settings.DefaultRingtonePreference
+                    android:key="ringtone"
+                    android:title="@string/ringtone_title"
+                    android:dialogTitle="@string/ringtone_title"
+                    android:summary="@string/ringtone_summary"
+                    android:ringtoneType="ringtone" />
 
-        <!-- Default notification ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-                android:key="notification_ringtone"
-                android:title="@string/notification_ringtone_title"
-                android:dialogTitle="@string/notification_ringtone_title"
-                android:summary="@string/ringtone_summary"
-                android:ringtoneType="notification" />
+                <!-- Default notification ringtone -->
+                <com.android.settings.DefaultRingtonePreference
+                    android:key="notification_ringtone"
+                    android:title="@string/notification_ringtone_title"
+                    android:dialogTitle="@string/notification_ringtone_title"
+                    android:summary="@string/ringtone_summary"
+                    android:ringtoneType="notification" />
 
-        <!-- Default alarm ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-                android:key="alarm_ringtone"
-                android:title="@string/alarm_ringtone_title"
-                android:dialogTitle="@string/alarm_ringtone_title"
-                android:summary="@string/ringtone_summary"
-                android:persistent="false"
-                android:ringtoneType="alarm" />
+                <!-- Default alarm ringtone -->
+                <com.android.settings.DefaultRingtonePreference
+                    android:key="alarm_ringtone"
+                    android:title="@string/alarm_ringtone_title"
+                    android:dialogTitle="@string/alarm_ringtone_title"
+                    android:summary="@string/ringtone_summary"
+                    android:persistent="false"
+                    android:ringtoneType="alarm" />
+
+        </PreferenceCategory>
 
         <!-- Other sounds -->
         <PreferenceCategory
