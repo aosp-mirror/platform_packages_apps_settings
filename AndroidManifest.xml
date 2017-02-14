@@ -1342,11 +1342,6 @@
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.PRIVACY_SETTINGS" />
-                <action android:name="android.settings.BACKUP_AND_RESET_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
