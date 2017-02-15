@@ -28,11 +28,13 @@ import android.content.pm.UserInfo;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.SparseArray;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.core.PreferenceController;
+import com.android.settingslib.applications.StorageStatsSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -130,7 +132,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void profilesOfPrimaryUserAreIgnored() throws Exception {
+    public void profilesOfPrimaryUserAreNotIgnored() throws Exception {
         ArrayList<UserInfo> userInfos = new ArrayList<>();
         UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = mPrimaryUser.id;
@@ -142,7 +144,31 @@ public class SecondaryUserControllerTest {
         List<PreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
-        assertThat(controllers).hasSize(1);
-        assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
+        assertThat(controllers).hasSize(2);
+        assertThat(controllers.get(0) instanceof UserProfileController).isTrue();
+        assertThat(controllers.get(1) instanceof SecondaryUserController).isFalse();
+    }
+
+    @Test
+    public void controllerUpdatesPreferenceOnAcceptingResult() throws Exception {
+        mPrimaryUser.name = TEST_NAME;
+        mPrimaryUser.id = 10;
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        PreferenceGroup group = mock(PreferenceGroup.class);
+        when(screen.findPreference(anyString())).thenReturn(group);
+        when(group.getKey()).thenReturn(TARGET_PREFERENCE_GROUP_KEY);
+        mController.displayPreference(screen);
+        StorageAsyncLoader.AppsStorageResult userResult =
+                new StorageAsyncLoader.AppsStorageResult();
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
+        userResult.externalStats = new StorageStatsSource.ExternalStorageStats(99, 33, 33, 33);
+        result.put(10, userResult);
+
+        mController.handleResult(result);
+        final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
+        verify(group).addPreference(argumentCaptor.capture());
+        Preference preference = argumentCaptor.getValue();
+
+        assertThat(preference.getSummary()).isEqualTo("99.00B");
     }
 }

@@ -23,10 +23,9 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
-import android.util.ArrayMap;
 import android.util.ArraySet;
-import android.util.SparseArray;
 import android.util.Log;
+import android.util.SparseArray;
 
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.UserManagerWrapper;
@@ -34,7 +33,6 @@ import com.android.settings.utils.AsyncLoader;
 import com.android.settingslib.applications.StorageStatsSource;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * StorageAsyncLoader is a Loader which loads categorized app information and external stats for all
@@ -117,5 +115,13 @@ public class StorageAsyncLoader
         public long musicAppsSize;
         public long otherAppsSize;
         public StorageStatsSource.ExternalStorageStats externalStats;
+    }
+
+    /**
+     * ResultHandler defines a destination of data which can handle a result from
+     * {@link StorageAsyncLoader}.
+     */
+    public interface ResultHandler {
+        void handleResult(SparseArray<AppsStorageResult> result);
     }
 }

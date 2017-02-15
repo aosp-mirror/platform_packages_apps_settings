@@ -25,11 +25,11 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
 import android.util.SparseArray;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.applications.UserManagerWrapperImpl;
@@ -48,7 +48,6 @@ import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class StorageDashboardFragment extends DashboardFragment
     implements LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
@@ -60,11 +59,6 @@ public class StorageDashboardFragment extends DashboardFragment
     private StorageSummaryDonutPreferenceController mSummaryController;
     private StorageItemPreferenceController mPreferenceController;
     private List<PreferenceController> mSecondaryUsers;
-
-    private boolean isVolumeValid() {
-        return (mVolume != null) && (mVolume.getType() == VolumeInfo.TYPE_PRIVATE)
-                && mVolume.isMountedReadable();
-    }
 
     @Override
     public void onResume() {
@@ -101,7 +95,8 @@ public class StorageDashboardFragment extends DashboardFragment
         // Initialize the storage sizes that we can quickly calc.
         final Context context = getActivity();
         StorageManager sm = context.getSystemService(StorageManager.class);
-        if (!initializeVolume(sm, getArguments())) {
+        mVolume = Utils.maybeInitializeVolume(sm, getArguments());
+        if (mVolume == null) {
             getActivity().finish();
             return;
         }
@@ -157,30 +152,16 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     /**
-     * Initializes the volume with a given bundle and returns if the volume is valid.
-     */
-    @VisibleForTesting
-    boolean initializeVolume(StorageManager sm, Bundle bundle) {
-        String volumeId = bundle.getString(VolumeInfo.EXTRA_VOLUME_ID,
-                VolumeInfo.ID_PRIVATE_INTERNAL);
-        mVolume = sm.findVolumeById(volumeId);
-        return isVolumeValid();
-    }
-
-    /**
      * Updates the secondary user controller sizes.
      */
     private void updateSecondaryUserControllers(List<PreferenceController> controllers,
             SparseArray<StorageAsyncLoader.AppsStorageResult> stats) {
         for (int i = 0, size = controllers.size(); i < size; i++) {
             PreferenceController controller = controllers.get(i);
-            if (controller instanceof SecondaryUserController) {
-                SecondaryUserController userController = (SecondaryUserController) controller;
-                int userId = userController.getUser().id;
-                StorageAsyncLoader.AppsStorageResult result = stats.get(userId);
-                if (result != null) {
-                    userController.setSize(result.externalStats.totalBytes);
-                }
+            if (controller instanceof StorageAsyncLoader.ResultHandler) {
+                StorageAsyncLoader.ResultHandler userController =
+                        (StorageAsyncLoader.ResultHandler) controller;
+                userController.handleResult(stats);
             }
         }
     }

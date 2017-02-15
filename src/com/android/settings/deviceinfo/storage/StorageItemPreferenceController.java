@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.os.storage.VolumeInfo;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -36,12 +35,12 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
-import com.android.settingslib.applications.StorageStatsSource;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -70,7 +69,7 @@ public class StorageItemPreferenceController extends PreferenceController {
     private final  MetricsFeatureProvider mMetricsFeatureProvider;
     private final StorageVolumeProvider mSvp;
     private VolumeInfo mVolume;
-    private final int mUserId;
+    private int mUserId;
     private long mSystemSize;
 
     private StorageItemPreferenceAlternate mPhotoPreference;
@@ -89,8 +88,7 @@ public class StorageItemPreferenceController extends PreferenceController {
         mVolume = volume;
         mSvp = svp;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        UserManager um = mContext.getSystemService(UserManager.class);
-        mUserId = um.getUserHandle();
+        mUserId = UserHandle.myUserId();
     }
 
     @Override
@@ -157,6 +155,13 @@ public class StorageItemPreferenceController extends PreferenceController {
         mVolume = volume;
     }
 
+    /**
+     * Sets the user id for which this preference controller is handling.
+     */
+    public void setUserId(int userId) {
+        mUserId = userId;
+    }
+
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mPhotoPreference = (StorageItemPreferenceAlternate) screen.findPreference(PHOTO_KEY);
@@ -173,7 +178,9 @@ public class StorageItemPreferenceController extends PreferenceController {
         mAudioPreference.setStorageSize(data.musicAppsSize + data.externalStats.audioBytes);
         mGamePreference.setStorageSize(data.gamesSize);
         mAppPreference.setStorageSize(data.otherAppsSize);
-        mSystemPreference.setStorageSize(mSystemSize);
+        if (mSystemPreference != null) {
+            mSystemPreference.setStorageSize(mSystemSize);
+        }
 
         long unattributedBytes = data.externalStats.totalBytes - data.externalStats.audioBytes
                 - data.externalStats.videoBytes - data.externalStats.imageBytes;
@@ -186,6 +193,20 @@ public class StorageItemPreferenceController extends PreferenceController {
      */
     public void setSystemSize(long systemSize) {
         mSystemSize = systemSize;
+    }
+
+    /**
+     * Returns a list of keys used by this preference controller.
+     */
+    public static List<String> getUsedKeys() {
+        List<String> list = new ArrayList<>();
+        list.add(PHOTO_KEY);
+        list.add(AUDIO_KEY);
+        list.add(GAME_KEY);
+        list.add(OTHER_APPS_KEY);
+        list.add(SYSTEM_KEY);
+        list.add(FILES_KEY);
+        return list;
     }
 
     private Intent getPhotosIntent() {

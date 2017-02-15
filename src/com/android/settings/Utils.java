@@ -65,6 +65,7 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.os.storage.VolumeInfo;
 import android.preference.PreferenceFrameLayout;
 import android.provider.ContactsContract.CommonDataKinds;
 import android.provider.ContactsContract.Contacts;
@@ -1257,5 +1258,22 @@ public final class Utils extends com.android.settingslib.Utils {
         return user.id == profile.id ||
                 (user.profileGroupId != UserInfo.NO_PROFILE_GROUP_ID
                         && user.profileGroupId == profile.profileGroupId);
+    }
+
+    /**
+     * Tries to initalize a volume with the given bundle. If it is a valid, private, and readable
+     * {@link VolumeInfo}, it is returned. If it is not valid, null is returned.
+     */
+    @Nullable
+    public static VolumeInfo maybeInitializeVolume(StorageManager sm, Bundle bundle) {
+        final String volumeId = bundle.getString(VolumeInfo.EXTRA_VOLUME_ID,
+                VolumeInfo.ID_PRIVATE_INTERNAL);
+        VolumeInfo volume = sm.findVolumeById(volumeId);
+        return isVolumeValid(volume) ? volume : null;
+    }
+
+    private static boolean isVolumeValid(VolumeInfo volume) {
+        return (volume != null) && (volume.getType() == VolumeInfo.TYPE_PRIVATE)
+                && volume.isMountedReadable();
     }
 }
