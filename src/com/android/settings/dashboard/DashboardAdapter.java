@@ -225,7 +225,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             return;
         }
         boolean isSmartSuggestionEnabled = FeatureFactory.getFactory(mContext)
-                .getSuggestionFeatureProvider().isSmartSuggestionEnabled(mContext);
+                .getSuggestionFeatureProvider(mContext).isSmartSuggestionEnabled(mContext);
         if (mSuggestionParser.dismissSuggestion(suggestion, isSmartSuggestionEnabled)) {
             mContext.getPackageManager().setComponentEnabledSetting(
                     suggestion.intent.getComponent(),

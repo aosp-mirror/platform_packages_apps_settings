@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.settings.dashboard;
+package com.android.settings.suggestions;
 
 import android.content.Context;
 
+import com.android.settingslib.drawer.Tile;
+
+import java.util.List;
+
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
+
+    private final SuggestionRanker mSuggestionRanker;
 
     @Override
     public boolean isSmartSuggestionEnabled(Context context) {
@@ -33,6 +39,17 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     @Override
     public boolean isSuggestionCompleted(Context context) {
         return false;
+    }
+
+
+    public SuggestionFeatureProviderImpl(Context context) {
+        mSuggestionRanker = new SuggestionRanker(
+                new SuggestionFeaturizer(new EventStore(context.getApplicationContext())));
+    }
+
+    @Override
+    public void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds) {
+        mSuggestionRanker.rankSuggestions(suggestions, suggestionIds);
     }
 
 }

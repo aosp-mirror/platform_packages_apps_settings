@@ -40,7 +40,7 @@ public class SuggestionRanker {
         put(SuggestionFeaturizer.FEATURE_TIME_FROM_LAST_SHOWN, 3.18832024515);
         put(SuggestionFeaturizer.FEATURE_TIME_FROM_LAST_DISMISSED, 1.09902706645);
         put(SuggestionFeaturizer.FEATURE_TIME_FROM_LAST_CLICKED, 0.262631082877);
-        put(SuggestionFeaturizer.FEATURE_SHOWN_COUNT, -0.918484103748 * 240);
+        put(SuggestionFeaturizer.FEATURE_SHOWN_COUNT, -220.4361849);
     }};
 
     private final SuggestionFeaturizer mSuggestionFeaturizer;
@@ -59,7 +59,7 @@ public class SuggestionRanker {
         relevanceMetrics = new HashMap<Tile, Double>();
     }
 
-    public void rank(final List<Tile> suggestions, List<String> suggestionIds) {
+    public void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds) {
         relevanceMetrics.clear();
         Map<String, Map<String, Double>> features = mSuggestionFeaturizer.featurize(suggestionIds);
         for (int i = 0; i < suggestionIds.size(); i++) {

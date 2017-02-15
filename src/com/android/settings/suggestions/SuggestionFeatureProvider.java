@@ -14,9 +14,13 @@
  * limitations under the License
  */
 
-package com.android.settings.dashboard;
+package com.android.settings.suggestions;
 
 import android.content.Context;
+
+import com.android.settingslib.drawer.Tile;
+
+import java.util.List;
 
 /** Interface should be implemented if you have added new suggestions */
 public interface SuggestionFeatureProvider {
@@ -32,4 +36,10 @@ public interface SuggestionFeatureProvider {
     /** Return true if the suggestion has already been completed and does not need to be shown */
     boolean isSuggestionCompleted(Context context);
 
+    /**
+     * Ranks the list of suggestions in place.
+     * @param suggestions: List of suggestion Tiles
+     * @param suggestionIds: List of suggestion ids corresponding to the suggestion tiles.
+     */
+    void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds);
 }

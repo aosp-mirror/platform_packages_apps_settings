@@ -24,13 +24,13 @@ import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
-import com.android.settings.dashboard.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.search2.SearchFeatureProvider;
+import com.android.settings.suggestions.SuggestionFeatureProvider;
 
 /**
  * Abstract class for creating feature controllers. Allows OEM implementations to define their own
@@ -71,7 +71,7 @@ public abstract class FeatureFactory {
 
     public abstract AssistGestureFeatureProvider getAssistGestureFeatureProvider();
 
-    public abstract SuggestionFeatureProvider getSuggestionFeatureProvider();
+    public abstract SuggestionFeatureProvider getSuggestionFeatureProvider(Context context);
 
     public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
 

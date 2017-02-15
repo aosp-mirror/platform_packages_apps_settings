@@ -87,7 +87,7 @@ public class SuggestionRankerTest {
                 add(mSuggestions.get(1)); // relevance = 0.1
             }
         };
-        mSuggestionRanker.rank(mSuggestions, mPkgNames);
+        mSuggestionRanker.rankSuggestions(mSuggestions, mPkgNames);
         assertThat(mSuggestions).isEqualTo(expectedOrderdList);
     }
 }
