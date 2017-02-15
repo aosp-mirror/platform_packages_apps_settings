@@ -179,7 +179,9 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onViewCreated(view, savedInstanceState);
         final Activity activity = getActivity();
         if (activity != null) {
-            mProgressHeader = (ProgressBar) setPinnedHeaderView(R.layout.wifi_progress_header);
+            if (!isUiRestricted()) {
+                mProgressHeader = (ProgressBar) setPinnedHeaderView(R.layout.wifi_progress_header);
+            }
         }
     }
 
@@ -200,6 +202,10 @@ public class WifiSettings extends RestrictedSettingsFragment
                 (PreferenceCategory) findPreference(PREF_KEY_ADDITIONAL_SETTINGS);
         mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_WIFI_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
+
+        if (isUiRestricted()) {
+            getPreferenceScreen().removePreference(mAdditionalSettingsPreferenceCategory);
+        }
 
         Context prefContext = getPrefContext();
         mAddPreference = new Preference(prefContext);
@@ -818,11 +824,11 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private void setOffMessage() {
         if (isUiRestricted()) {
+            removeConnectedAccessPointPreference();
+            mAccessPointsPreferenceCategory.removeAll();
             if (!isUiRestrictedByOnlyAdmin()) {
                 addMessagePreference(R.string.wifi_empty_list_user_restricted);
             }
-            removeConnectedAccessPointPreference();
-            mAccessPointsPreferenceCategory.removeAll();
             return;
         }
 
