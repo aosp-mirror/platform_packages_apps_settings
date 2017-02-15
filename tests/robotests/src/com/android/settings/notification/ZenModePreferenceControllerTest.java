@@ -16,7 +16,10 @@
 
 package com.android.settings.notification;
 
+import android.app.NotificationManager;
+import android.app.NotificationManager.Policy;
 import android.content.Context;
+import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -27,8 +30,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -36,6 +44,12 @@ public class ZenModePreferenceControllerTest {
 
     @Mock
     private Context mContext;
+    @Mock
+    private Preference mPreference;
+    @Mock
+    private NotificationManager mNotificationManager;
+    @Mock
+    private Policy mPolicy;
 
     private ZenModePreferenceController mController;
 
@@ -43,11 +57,32 @@ public class ZenModePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new ZenModePreferenceController(mContext);
+        when(mContext.getSystemService(Context.NOTIFICATION_SERVICE))
+            .thenReturn(mNotificationManager);
+        when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
     }
 
     @Test
     public void isAlwaysAvailable() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void updateState_preferenceEnabled_shouldSetSummary() {
+        when(mPreference.isEnabled()).thenReturn(true);
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setSummary(anyString());
+    }
+
+    @Test
+    public void updateState_preferenceDisabled_shouldNotSetSummary() {
+        when(mPreference.isEnabled()).thenReturn(false);
+
+        mController.updateState(mPreference);
+
+        verify(mPreference, never()).setSummary(anyString());
     }
 
 }

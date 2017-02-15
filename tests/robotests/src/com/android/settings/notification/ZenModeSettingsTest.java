@@ -36,21 +36,20 @@ import static org.mockito.Mockito.spy;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeSettingsTest {
 
-    private ZenModeSettings mSettings;
+    private ZenModeSettings.SummaryBuilder mBuilder;
     private Context mContext;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application.getApplicationContext();
-        mSettings = spy(ZenModeSettings.class);
-        doReturn(mContext).when(mSettings).getContext();
+        mBuilder = new ZenModeSettings.SummaryBuilder(mContext);
     }
 
     @Test
     public void testAppend_conditionFalse_shouldNotAppend() {
         String original = "test";
 
-        final String result = mSettings.append(original, false, R.string.zen_mode_alarms);
+        final String result = mBuilder.append(original, false, R.string.zen_mode_alarms);
 
         assertThat(result).isEqualTo(original);
     }
@@ -60,7 +59,7 @@ public class ZenModeSettingsTest {
         String original = "test";
         String alarm = mContext.getString(R.string.zen_mode_alarms);
 
-        final String result = mSettings.append(original, true, R.string.zen_mode_alarms);
+        final String result = mBuilder.append(original, true, R.string.zen_mode_alarms);
 
         assertThat(result).contains(alarm);
     }
