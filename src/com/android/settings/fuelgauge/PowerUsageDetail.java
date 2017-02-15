@@ -829,19 +829,4 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
             }
         }
     }
-
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.power_usage_details;
-                    return Arrays.asList(sir);
-                }
-            };
 }
