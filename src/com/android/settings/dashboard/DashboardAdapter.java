@@ -63,6 +63,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionParser mSuggestionParser;
+    private boolean mFirstFrameDrawn;
 
     @VisibleForTesting
     DashboardData mDashboardData;
@@ -158,6 +159,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mDashboardData = new DashboardData.Builder(prevData)
                 .setSuggestions(suggestions)
                 .setCategories(categories)
+                .build();
+        notifyDashboardDataChanged(prevData);
+    }
+
+    public void setCategory(List<DashboardCategory> category) {
+        final DashboardData prevData = mDashboardData;
+        Log.d(TAG, "adapter setCategory called");
+        mDashboardData = new DashboardData.Builder(prevData)
+                .setCategories(category)
                 .build();
         notifyDashboardDataChanged(prevData);
     }
@@ -304,11 +314,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     private void notifyDashboardDataChanged(DashboardData prevData) {
-        if (prevData != null) {
+        if (mFirstFrameDrawn && prevData != null) {
             final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DashboardData
                     .ItemsDataDiffCallback(prevData.getItemList(), mDashboardData.getItemList()));
             diffResult.dispatchUpdatesTo(this);
         } else {
+            mFirstFrameDrawn = true;
             notifyDataSetChanged();
         }
     }
