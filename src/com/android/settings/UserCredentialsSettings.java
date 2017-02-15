@@ -264,10 +264,16 @@ public class UserCredentialsSettings extends OptionsMenuFragment implements OnIt
             final SortedMap<String, Credential> aliasMap = new TreeMap<>();
             for (final Credential.Type type : Credential.Type.values()) {
                 for (final String alias : keyStore.list(type.prefix, uid)) {
-                    // Do not show work profile keys in user credentials
-                    if (alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_ENCRYPT) ||
-                            alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_DECRYPT)) {
-                        continue;
+                    if (UserHandle.getAppId(uid) == Process.SYSTEM_UID) {
+                        // Do not show work profile keys in user credentials
+                        if (alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_ENCRYPT) ||
+                                alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_DECRYPT)) {
+                            continue;
+                        }
+                        // Do not show synthetic password keys in user credential
+                        if (alias.startsWith(LockPatternUtils.SYNTHETIC_PASSWORD_KEY_PREFIX)) {
+                            continue;
+                        }
                     }
                     Credential c = aliasMap.get(alias);
                     if (c == null) {
