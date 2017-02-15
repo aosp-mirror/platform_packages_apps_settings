@@ -15,7 +15,7 @@
  *
  */
 
-package com.android.settings.search;
+package com.android.settings.search2;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -25,8 +25,8 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search.IndexDatabaseHelper.SiteMapColumns;
-import com.android.settings.search2.DatabaseIndexingManager;
+import com.android.settings.search.IndexDatabaseHelper;
+import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.DatabaseTestUtils;
 
 import org.junit.After;
@@ -43,7 +43,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.android.settings.dashboard.SiteMapManager.SITE_MAP_COLUMNS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
@@ -623,6 +622,16 @@ public class DatabaseIndexingManagerTest {
         assertThat(cursor.getCount()).isEqualTo(2);
         cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
         assertThat(cursor.getCount()).isEqualTo(4);
+    }
+
+    @Test
+    public void testResourceWithTitleAndSettingName_TitleNotInserted() {
+        SearchIndexableResource resource = getFakeResource(R.xml.swipe_to_notification_settings);
+        mManager.indexFromResource(mDb, localeStr, resource, new ArrayList<String>());
+
+        Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE" +
+                " enabled = 1", null);
+        assertThat(cursor.getCount()).isEqualTo(1);
     }
 
     // Util functions
