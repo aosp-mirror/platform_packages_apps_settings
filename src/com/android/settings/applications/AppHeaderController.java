@@ -163,17 +163,17 @@ public class AppHeaderController {
         final Resources res = mAppHeader.getResources();
 
         // Set Icon
-        final ImageView iconView = (ImageView) mAppHeader.findViewById(android.R.id.icon);
+        final ImageView iconView = (ImageView) mAppHeader.findViewById(R.id.app_detail_icon);
         if (appEntry.icon != null) {
             iconView.setImageDrawable(appEntry.icon.getConstantState().newDrawable(res));
         }
 
         // Set application name.
-        final TextView labelView = (TextView) mAppHeader.findViewById(android.R.id.title);
+        final TextView labelView = (TextView) mAppHeader.findViewById(R.id.app_detail_title);
         labelView.setText(appEntry.label);
 
         // Version number of application
-        final TextView appVersion = (TextView) mAppHeader.findViewById(android.R.id.summary);
+        final TextView appVersion = (TextView) mAppHeader.findViewById(R.id.app_detail_summary);
 
         if (!TextUtils.isEmpty(versionName)) {
             appVersion.setSelected(true);
@@ -206,12 +206,12 @@ public class AppHeaderController {
      * Done mutating appheader, rebinds everything (optionally skip rebinding buttons).
      */
     public View done(boolean rebindActions) {
-        ImageView iconView = (ImageView) mAppHeader.findViewById(android.R.id.icon);
+        ImageView iconView = (ImageView) mAppHeader.findViewById(R.id.app_detail_icon);
         if (iconView != null) {
             iconView.setImageDrawable(mIcon);
         }
-        setText(android.R.id.title, mLabel);
-        setText(android.R.id.summary, mSummary);
+        setText(R.id.app_detail_title, mLabel);
+        setText(R.id.app_detail_summary, mSummary);
         if (rebindActions) {
             bindAppHeaderButtons();
         }
