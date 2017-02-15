@@ -1300,8 +1300,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         dashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY);
                 mSummaryLoader.setSummary(this, getPackageVerifierSummary(dashboardCategory));
             } else {
-                mSummaryLoader.setSummary(this,
-                        mContext.getString(R.string.security_dashboard_summary));
+                final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(mContext);
+                if (fpm != null && fpm.isHardwareDetected()) {
+                    mSummaryLoader.setSummary(this,
+                            mContext.getString(R.string.security_dashboard_summary));
+                } else {
+                    mSummaryLoader.setSummary(this, null);
+                }
             }
         }
 
@@ -1319,8 +1324,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 String summaryUri = tile.metaData.getString(
                         TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, null);
                 return TileUtils.getTextFromUri(mContext, summaryUri,
-                            new ArrayMap<String, IContentProvider>(),
-                            TileUtils.META_DATA_PREFERENCE_SUMMARY);
+                        new ArrayMap<>(), TileUtils.META_DATA_PREFERENCE_SUMMARY);
             }
             return null;
         }
