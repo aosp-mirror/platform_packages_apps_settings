@@ -16,14 +16,13 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 
 public class ManageStoragePreferenceController extends PreferenceController {
 
-    public static final String KEY_MANAGE_STORAGE = "footer_preference";
+    public static final String KEY_MANAGE_STORAGE = "manage_storage";
 
     public ManageStoragePreferenceController(Context context) {
         super(context);
