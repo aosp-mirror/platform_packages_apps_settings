@@ -2091,11 +2091,11 @@
                   android:theme="@*android:style/Theme.DeviceDefault.Light.Dialog.Alert">
         </activity>
 
+        <service android:name=".bluetooth.BluetoothPairingService" />
+
         <receiver android:name=".bluetooth.BluetoothPairingRequest">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
-                <action android:name="android.bluetooth.device.action.PAIRING_CANCEL" />
-                <action android:name="android.bluetooth.device.action.BOND_STATE_CHANGED" />
             </intent-filter>
         </receiver>
 
