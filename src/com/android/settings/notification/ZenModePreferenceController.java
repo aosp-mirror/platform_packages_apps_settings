@@ -16,14 +16,22 @@
 
 package com.android.settings.notification;
 
+import android.app.NotificationManager;
 import android.content.Context;
+import android.support.v7.preference.Preference;
+import com.android.settings.R;
 
 public class ZenModePreferenceController extends AdjustVolumeRestrictedPreferenceController {
 
     private static final String KEY_ZEN_MODE = "zen_mode";
+    private String mSummaryPrefix;
+
+    private ZenModeSettings.SummaryBuilder mSummaryBuilder;
 
     public ZenModePreferenceController(Context context) {
         super(context);
+        mSummaryBuilder = new ZenModeSettings.SummaryBuilder(context);
+        mSummaryPrefix = context.getString(R.string.zen_mode_priority_settings_title) + " ";
     }
 
     @Override
@@ -36,4 +44,12 @@ public class ZenModePreferenceController extends AdjustVolumeRestrictedPreferenc
         return true;
     }
 
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference.isEnabled()) {
+            preference.setSummary(mSummaryPrefix + mSummaryBuilder.getPrioritySettingSummary(
+                NotificationManager.from(mContext).getNotificationPolicy()));
+        }
+    }
 }

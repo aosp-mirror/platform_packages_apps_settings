@@ -34,6 +34,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     private Preference mPrioritySettings;
     private Preference mVisualSettings;
     private Policy mPolicy;
+    private SummaryBuilder mSummaryBuilder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         mPrioritySettings = root.findPreference(KEY_PRIORITY_SETTINGS);
         mVisualSettings = root.findPreference(KEY_VISUAL_SETTINGS);
         mPolicy = NotificationManager.from(mContext).getNotificationPolicy();
+        mSummaryBuilder = new SummaryBuilder(getContext());
     }
 
     @Override
@@ -77,62 +79,80 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     }
 
     private void updatePrioritySettingsSummary() {
-        String s = getResources().getString(R.string.zen_mode_alarms);
-        s = append(s, isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_REMINDERS),
-                R.string.zen_mode_reminders);
-        s = append(s, isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_EVENTS),
-                R.string.zen_mode_events);
-        if (isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_MESSAGES)) {
-            if (mPolicy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
-                s = append(s, true, R.string.zen_mode_all_messages);
-            } else {
-                s = append(s, true, R.string.zen_mode_selected_messages);
-            }
-        }
-        if (isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_CALLS)) {
-            if (mPolicy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
-                s = append(s, true, R.string.zen_mode_all_callers);
-            } else {
-                s = append(s, true, R.string.zen_mode_selected_callers);
-            }
-        } else if (isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_REPEAT_CALLERS)) {
-            s = append(s, true, R.string.zen_mode_repeat_callers);
-        }
-        mPrioritySettings.setSummary(s);
+        mPrioritySettings.setSummary(mSummaryBuilder.getPrioritySettingSummary(mPolicy));
     }
 
     private void updateVisualSettingsSummary() {
-        String s = getString(R.string.zen_mode_all_visual_interruptions);
-        if (isEffectSuppressed(Policy.SUPPRESSED_EFFECT_SCREEN_ON)
-                && isEffectSuppressed(Policy.SUPPRESSED_EFFECT_SCREEN_OFF)) {
-            s = getString(R.string.zen_mode_no_visual_interruptions);
-        } else if (isEffectSuppressed(Policy.SUPPRESSED_EFFECT_SCREEN_ON)) {
-            s = getString(R.string.zen_mode_screen_on_visual_interruptions);
-        } else if (isEffectSuppressed(Policy.SUPPRESSED_EFFECT_SCREEN_OFF)) {
-            s = getString(R.string.zen_mode_screen_off_visual_interruptions);
-        }
-        mVisualSettings.setSummary(s);
-    }
-
-    private boolean isEffectSuppressed(int effect) {
-        return (mPolicy.suppressedVisualEffects & effect) != 0;
-    }
-
-    private boolean isCategoryEnabled(Policy policy, int categoryType) {
-        return (policy.priorityCategories & categoryType) != 0;
-    }
-
-    @VisibleForTesting
-    String append(String s, boolean condition, int resId) {
-        if (condition) {
-            final Context context = getContext();
-            return context.getString(R.string.join_many_items_middle, s, context.getString(resId));
-        }
-        return s;
+        mVisualSettings.setSummary(mSummaryBuilder.getVisualSettingSummary(mPolicy));
     }
 
     @Override
     protected int getHelpResource() {
         return R.string.help_uri_interruptions;
+    }
+
+    public static class SummaryBuilder {
+
+        private Context mContext;
+
+        public SummaryBuilder(Context context) {
+            mContext = context;
+        }
+
+        String getPrioritySettingSummary(Policy policy) {
+            String s = mContext.getString(R.string.zen_mode_alarms);
+            s = append(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REMINDERS),
+                R.string.zen_mode_reminders);
+            s = append(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_EVENTS),
+                R.string.zen_mode_events);
+            if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_MESSAGES)) {
+                if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
+                    s = append(s, true, R.string.zen_mode_all_messages);
+                } else {
+                    s = append(s, true, R.string.zen_mode_selected_messages);
+                }
+            }
+            if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_CALLS)) {
+                if (policy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
+                    s = append(s, true, R.string.zen_mode_all_callers);
+                } else {
+                    s = append(s, true, R.string.zen_mode_selected_callers);
+                }
+            } else if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REPEAT_CALLERS)) {
+                s = append(s, true, R.string.zen_mode_repeat_callers);
+            }
+            return s;
+        }
+
+        String getVisualSettingSummary(Policy policy) {
+            String s = mContext.getString(R.string.zen_mode_all_visual_interruptions);
+            if (isEffectSuppressed(policy, Policy.SUPPRESSED_EFFECT_SCREEN_ON)
+                && isEffectSuppressed(policy, Policy.SUPPRESSED_EFFECT_SCREEN_OFF)) {
+                s = mContext.getString(R.string.zen_mode_no_visual_interruptions);
+            } else if (isEffectSuppressed(policy, Policy.SUPPRESSED_EFFECT_SCREEN_ON)) {
+                s = mContext.getString(R.string.zen_mode_screen_on_visual_interruptions);
+            } else if (isEffectSuppressed(policy, Policy.SUPPRESSED_EFFECT_SCREEN_OFF)) {
+                s = mContext.getString(R.string.zen_mode_screen_off_visual_interruptions);
+            }
+            return s;
+        }
+
+        @VisibleForTesting
+        String append(String s, boolean condition, int resId) {
+            if (condition) {
+                return mContext.getString(
+                    R.string.join_many_items_middle, s, mContext.getString(resId));
+            }
+            return s;
+        }
+
+        private boolean isCategoryEnabled(Policy policy, int categoryType) {
+            return (policy.priorityCategories & categoryType) != 0;
+        }
+
+        private boolean isEffectSuppressed(Policy policy, int effect) {
+            return (policy.suppressedVisualEffects & effect) != 0;
+        }
+
     }
 }
