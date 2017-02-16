@@ -110,12 +110,6 @@
                 android:title="@string/device_theme"
                 android:summary="%s" />
 
-        <Preference
-                android:key="wifi_display"
-                android:title="@string/wifi_display_settings_title"
-                settings:keywords="@string/keywords_display_cast_screen"
-                android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
-
         <DropDownPreference
                 android:key="vr_display_pref"
                 android:summary="%s"
