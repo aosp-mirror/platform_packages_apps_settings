@@ -46,4 +46,9 @@ public interface PowerUsageFeatureProvider {
    * Check whether it is type service
    */
   boolean isTypeService(String[] packages);
+
+  /**
+   * Check whether the toggle for power accounting is enabled
+   */
+  boolean isPowerAccountingToggleEnabled();
 }

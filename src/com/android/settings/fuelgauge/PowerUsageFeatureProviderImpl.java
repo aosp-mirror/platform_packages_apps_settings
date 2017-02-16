@@ -43,4 +43,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public boolean isTypeService(String[] packages) {
         return false;
     }
+
+    @Override
+    public boolean isPowerAccountingToggleEnabled() {
+        return false;
+    }
 }
