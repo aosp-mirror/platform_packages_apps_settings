@@ -115,8 +115,8 @@ public class AppHeaderControllerTest {
     public void bindViews_shouldBindAllData() {
         final String testString = "test";
         final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
-        final TextView label = (TextView) appHeader.findViewById(android.R.id.title);
-        final TextView version = (TextView) appHeader.findViewById(android.R.id.summary);
+        final TextView label = (TextView) appHeader.findViewById(R.id.app_detail_title);
+        final TextView version = (TextView) appHeader.findViewById(R.id.app_detail_summary);
 
         mController = new AppHeaderController(mShadowContext, mFragment, appHeader);
         mController.setLabel(testString);

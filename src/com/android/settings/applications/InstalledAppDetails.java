@@ -327,7 +327,7 @@ public class InstalledAppDetails extends AppInfoBase
         addDynamicPrefs();
         if (mDashboardFeatureProvider.isEnabled()) {
             mFooter = new LayoutPreference(getPrefContext(), R.layout.app_action_buttons);
-            mFooter.setOrder(10000);
+            mFooter.setOrder(-9999);
             mFooter.setKey(KEY_FOOTER);
             getPreferenceScreen().addPreference(mFooter);
         }
@@ -1098,10 +1098,10 @@ public class InstalledAppDetails extends AppInfoBase
         LayoutInflater.from(appSnippet.getContext()).inflate(R.layout.widget_text_views,
                 (ViewGroup) appSnippet.findViewById(android.R.id.widget_frame));
 
-        ImageView iconView = (ImageView) appSnippet.findViewById(android.R.id.icon);
+        ImageView iconView = (ImageView) appSnippet.findViewById(R.id.app_detail_icon);
         iconView.setImageDrawable(icon);
         // Set application name.
-        TextView labelView = (TextView) appSnippet.findViewById(android.R.id.title);
+        TextView labelView = (TextView) appSnippet.findViewById(R.id.app_detail_title);
         labelView.setText(label);
         // Version number of application
         TextView appVersion = (TextView) appSnippet.findViewById(R.id.widget_text1);
