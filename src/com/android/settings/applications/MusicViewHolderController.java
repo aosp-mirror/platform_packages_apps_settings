@@ -38,18 +38,20 @@ public class MusicViewHolderController implements FileViewHolderController {
     private StorageStatsSource mSource;
     private String mVolumeUuid;
     private long mMusicSize;
+    private UserHandle mUser;
 
     public MusicViewHolderController(
-            Context context, StorageStatsSource source, String volumeUuid) {
+            Context context, StorageStatsSource source, String volumeUuid, UserHandle user) {
         mContext = context;
         mSource = source;
         mVolumeUuid = volumeUuid;
+        mUser = user;
     }
 
     @Override
     @WorkerThread
     public void queryStats() {
-        mMusicSize = mSource.getExternalStorageStats(mVolumeUuid, UserHandle.CURRENT).audioBytes;
+        mMusicSize = mSource.getExternalStorageStats(mVolumeUuid, mUser).audioBytes;
     }
 
     @Override
@@ -69,7 +71,7 @@ public class MusicViewHolderController implements FileViewHolderController {
         Intent intent = new Intent(DocumentsContract.ACTION_BROWSE);
         intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"));
         intent.addCategory(Intent.CATEGORY_DEFAULT);
-        intent.putExtra(Intent.EXTRA_USER_ID, UserHandle.CURRENT);
+        intent.putExtra(Intent.EXTRA_USER_ID, mUser);
         Utils.launchIntent(fragment, intent);
     }
 }
