@@ -1010,10 +1010,10 @@
     <string name="sim_change_data_message" msgid="1313940695939674633">"Mobil internet uchun <xliff:g id="OLD_SIM">%2$s</xliff:g> o‘rniga <xliff:g id="NEW_SIM">%1$s</xliff:g> ishlatilsinmi?"</string>
     <string name="sim_preferred_title" msgid="5567909634636045268">"Ma’qul SIM karta o‘zg-sinmi?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> – qurilmangizdagi yagona SIM karta. Undan qo‘ng‘iroqlar, mobil internet va SMS xabarlar uchun foydalanmoqchimisiz?"</string>
-    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM karta noto‘g‘ri PIN kodi. Endi siz qurilmangiz qulfini ochish uchun operatoringizga murojaat qilishingiz lozim."</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM kartaning PIN kodi xato. Qurilma qulfini ochish uchun aloqa operatoringizga murojaat qiling."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
-      <item quantity="other">SIM kartaning PIN kodi noto‘g‘ri. Sizda yana <xliff:g id="NUMBER_1">%d</xliff:g> ta urinish qoldi.</item>
-      <item quantity="one">SIM kartaning PIN kodi noto‘g‘ri. Qurilmani qulfdan chiqarish uchun sizda yana <xliff:g id="NUMBER_0">%d</xliff:g> ta urinish qoldi.</item>
+      <item quantity="other">SIM kartaning PIN kodi xato. Qurilma qulfini ochish uchun sizda yana <xliff:g id="NUMBER_1">%d</xliff:g> ta urinish qoldi.</item>
+      <item quantity="one">SIM kartaning PIN kodi xato. Qurilma qulfini ochish uchun sizda yana <xliff:g id="NUMBER_0">%d</xliff:g> ta urinish qoldi.</item>
     </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"SIM karta PIN kodining amaliyoti bajarilmadi!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Planshet holati"</string>
@@ -2630,7 +2630,7 @@
     <string name="app_notifications_title" msgid="139788604658984593">"Bildirishnomalar"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Muhimligi"</string>
     <string name="notification_importance_none" msgid="3173515479356106227">"Ko‘rsatilmagan"</string>
-    <string name="notification_importance_blocked" msgid="4348392266695847526">"Bu ilovadan keladigan bildirishnomalarni hech qachon ko‘rsatmaslik"</string>
+    <string name="notification_importance_blocked" msgid="4348392266695847526">"Bu ilovadan keladigan bildirishnomalarni ko‘rsatmaslik"</string>
     <string name="notification_importance_min" msgid="1859001310034196751">"Qalqib chiquvchi va to‘liq ekranli bildirishnomalarni ko‘rsatmaslik. Ovoz yoki tebranishdan foydalanmaslik. Bildirishnomani ro‘yxatning oxirida ko‘rsatish."</string>
     <string name="notification_importance_low" msgid="1466326143251705794">"Qalqib chiquvchi va to‘liq ekranli bildirishnomalar ko‘rsatmaslik. Ovoz va tebranishdan foydalanmaslik."</string>
     <string name="notification_importance_default" msgid="2857618184137114962">"Qalqib chiquvchi va to‘liq ekranli bildirishnomalarni ko‘rsatmaslik."</string>
@@ -2639,7 +2639,7 @@
     <string name="notification_importance_unspecified" msgid="6172151762388245221">"Ilova har bir bildirishnomaning muhimligini o‘zi aniqlaydi"</string>
     <string name="importance_reset" msgid="7458420788555607007">"Asliga qaytarish"</string>
     <string name="show_silently" msgid="2222875799232222056">"Ovozsiz"</string>
-    <string name="show_silently_summary" msgid="7616604629123146565">"Ovozli signal va vibratsiyani o‘chirib qo‘yish, bildirishnomalarni boshqa ilovalar ustida ko‘rsatmaslik."</string>
+    <string name="show_silently_summary" msgid="7616604629123146565">"Qurilma ovozli signal va tebranish bermaydi, bildirishnomalar boshqa ilovalar ustidan ochilmaydi"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Bildirishnomalarga kirish"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Ilovalar bildirishnomalarni ko‘ra olmaydi"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
@@ -2662,10 +2662,10 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"“Bezovta qilinmasin” fuksiyasi"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Hech qaysi ilova “Bezovta qilinmasin” funksiyasiga ruxsat so‘ramagan"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Ilovalar yuklanmoqda…"</string>
-    <string name="app_notification_block_title" msgid="4069351066849087649">"Barchasini bloklash"</string>
-    <string name="app_notification_block_summary" msgid="9049487483231233726">"Ushbu ilovadan keladigan bildirishnomalar hech qachon ko‘rsatilmasin"</string>
-    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"“Bezovta qilinmasin” rejimini qayta o‘rnatish"</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"“Bezovta qilinmasin” rejimi “Faqat muhim bildirishnomalar” uchun istisno qilingan holatda ushbu bildirishnomalar ham ko‘rsatilsin."</string>
+    <string name="app_notification_block_title" msgid="4069351066849087649">"Hammasini bloklash"</string>
+    <string name="app_notification_block_summary" msgid="9049487483231233726">"Bu ilovadan keladigan bildirishnomalarni ko‘rsatmaslik"</string>
+    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Bezovta qilinmasin rejimi ustidan yozish"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Bezovta qilinmasin rejimida faqat muhim bildirishnomalarga ruxsat berilgan bo‘lsa, ushbu bildirishnomalarga ham ruxsat beriladi"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Qulflangan ekranda"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloklangan"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Muhimlik darajasi"</string>
@@ -2840,7 +2840,7 @@
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Bloklangan"</string>
     <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Domen havolalari bilan"</string>
     <string name="filter_notif_priority_apps" msgid="5056470299318500609">"Bezovta qilinmasin rejimiga amal qilmaydigan"</string>
-    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Qulf ekranda maxfiy axborot ko‘rsatmaydigan"</string>
+    <string name="filter_notif_sensitive_apps" msgid="3847012996691991486">"Qulf ekranda maxfiy axborotsiz"</string>
     <string name="filter_notif_hide_notifications_apps" msgid="3977513041080404368">"Qulf ekranda umuman ko‘rinmaydigan"</string>
     <string name="filter_notif_silent" msgid="8533960664617048281">"Ovozsiz ko‘rsatiladigan"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Qo‘shimcha sozlamalar"</string>
