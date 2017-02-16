@@ -17,6 +17,8 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
+import android.metrics.LogMaker;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.suggestions.EventStore;
@@ -38,6 +40,10 @@ public class SettingSuggestionsLogWriter implements LogWriter {
 
     @Override
     public void action(Context context, int category) {
+    }
+
+    @Override
+    public void actionWithSource(Context context, int source, int category) {
     }
 
     @Override

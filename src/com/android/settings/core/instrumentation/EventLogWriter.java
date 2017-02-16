@@ -17,8 +17,10 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
+import android.metrics.LogMaker;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.nano.MetricsProto;
 
 /**
  * {@link LogWriter} that writes data to eventlog.
@@ -35,6 +37,15 @@ public class EventLogWriter implements LogWriter {
 
     public void action(Context context, int category) {
         MetricsLogger.action(context, category, "");
+    }
+
+    public void actionWithSource(Context context, int source, int category) {
+        final LogMaker logMaker = new LogMaker(category)
+                .setType(MetricsProto.MetricsEvent.TYPE_ACTION);
+        if (source != MetricsProto.MetricsEvent.VIEW_UNKNOWN) {
+            logMaker.addTaggedData(MetricsProto.MetricsEvent.FIELD_CONTEXT, source);
+        }
+        MetricsLogger.action(logMaker);
     }
 
     public void action(Context context, int category, int value) {
