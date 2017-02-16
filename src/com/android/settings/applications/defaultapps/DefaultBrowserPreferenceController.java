@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
@@ -96,9 +95,15 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
     /**
      * Whether or not the pkg is the default browser
      */
-    public static boolean isBrowserDefault(String pkg, Context context) {
-        String defaultPackage = context.getPackageManager()
-                .getDefaultBrowserPackageNameAsUser(UserHandle.myUserId());
-        return defaultPackage != null && defaultPackage.equals(pkg);
+    public boolean isBrowserDefault(String pkg, int userId) {
+        String defaultPackage = mPackageManager.getDefaultBrowserPackageNameAsUser(userId);
+        if (defaultPackage != null) {
+            return defaultPackage.equals(pkg);
+        }
+
+        final List<ResolveInfo> list = mPackageManager.queryIntentActivitiesAsUser(BROWSE_PROBE,
+                PackageManager.MATCH_ALL, userId);
+        // There is only 1 app, it must be the default browser.
+        return list != null && list.size() == 1;
     }
 }

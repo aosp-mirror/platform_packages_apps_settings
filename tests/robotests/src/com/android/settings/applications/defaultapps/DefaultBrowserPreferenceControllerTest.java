@@ -19,6 +19,7 @@ package com.android.settings.applications.defaultapps;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
@@ -34,6 +35,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
+
+import java.util.Arrays;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -84,5 +87,16 @@ public class DefaultBrowserPreferenceControllerTest {
         mController.getDefaultAppInfo();
 
         verify(mPackageManager).getDefaultBrowserPackageNameAsUser(anyInt());
+    }
+
+    @Test
+    public void isBrowserDefault_onlyApp_shouldReturnTrue() {
+        final String testPkg = "pkg";
+        when(mPackageManager.getDefaultBrowserPackageNameAsUser(anyInt()))
+                .thenReturn(null);
+        when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(new ResolveInfo()));
+
+        assertThat(mController.isBrowserDefault(testPkg, 0)).isTrue();
     }
 }
