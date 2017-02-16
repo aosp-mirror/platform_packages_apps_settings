@@ -29,6 +29,7 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.drawable.Icon;
+import android.graphics.drawable.MaskableIconDrawable;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.annotation.VisibleForTesting;
@@ -68,19 +69,22 @@ public class CreateShortcut extends LauncherActivity {
     protected Intent createResultIntent(Intent shortcutIntent, ResolveInfo resolveInfo,
             CharSequence label) {
         shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-
+        ShortcutManager sm = getSystemService(ShortcutManager.class);
         ActivityInfo activityInfo = resolveInfo.activityInfo;
-        Bitmap icon = activityInfo.icon != 0 ? createIcon(activityInfo.icon) : null;
 
+        Icon maskableIcon = activityInfo.icon != 0 ? Icon.createWithMaskableBitmap(
+                createIcon(activityInfo.icon,
+                        R.layout.shortcut_badge_maskable,
+                        getResources().getDimensionPixelSize(R.dimen.shortcut_size_maskable))) :
+                Icon.createWithResource(this, R.drawable.ic_launcher_settings);
         String shortcutId = SHORTCUT_ID_PREFIX +
                 shortcutIntent.getComponent().flattenToShortString();
         ShortcutInfo info = new ShortcutInfo.Builder(this, shortcutId)
                 .setShortLabel(label)
                 .setIntent(shortcutIntent)
-                .setIcon(icon != null ? Icon.createWithBitmap(icon) :
-                        Icon.createWithResource(this, R.mipmap.ic_launcher_settings))
+                .setIcon(maskableIcon)
                 .build();
-        Intent intent = getSystemService(ShortcutManager.class).createShortcutResultIntent(info);
+        Intent intent = sm.createShortcutResultIntent(info);
         if (intent == null) {
             intent = new Intent();
         }
@@ -88,7 +92,12 @@ public class CreateShortcut extends LauncherActivity {
                 Intent.ShortcutIconResource.fromContext(this, R.mipmap.ic_launcher_settings));
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, label);
-        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, icon);
+
+        if (activityInfo.icon != 0) {
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createIcon(activityInfo.icon,
+                R.layout.shortcut_badge,
+                getResources().getDimensionPixelSize(R.dimen.shortcut_size)));
+        }
         return intent;
     }
 
@@ -101,12 +110,12 @@ public class CreateShortcut extends LauncherActivity {
                 info.activityInfo.name);
     }
 
-    private Bitmap createIcon(int resource) {
+    private Bitmap createIcon(int resource, int layoutRes, int size) {
         Context context = new ContextThemeWrapper(this, android.R.style.Theme_Material);
-        View view = LayoutInflater.from(context).inflate(R.layout.shortcut_badge, null);
+        View view = LayoutInflater.from(context).inflate(layoutRes, null);
         ((ImageView) view.findViewById(android.R.id.icon)).setImageResource(resource);
 
-        int spec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+        int spec = MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY);
         view.measure(spec, spec);
         Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
                 Config.ARGB_8888);
