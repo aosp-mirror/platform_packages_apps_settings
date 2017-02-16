@@ -97,7 +97,7 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
     @VisibleForTesting
     public void updateCandidates() {
         mCandidates.clear();
-        final List<DefaultAppInfo> candidateList = getCandidates();
+        final List<? extends DefaultAppInfo> candidateList = getCandidates();
         if (candidateList != null) {
             for (DefaultAppInfo info : candidateList) {
                 mCandidates.put(info.getKey(), info);
@@ -134,6 +134,7 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
                 pref.setEnabled(false);
                 pref.setSummary(app.getValue().disabledDescription);
             }
+            pref.setEnabled(info.enabled);
             pref.setOnClickListener(this);
             screen.addPreference(pref);
         }
@@ -200,14 +201,15 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
         return null;
     }
 
-    protected abstract List<DefaultAppInfo> getCandidates();
+    protected abstract List<? extends DefaultAppInfo> getCandidates();
 
     protected abstract String getDefaultAppKey();
 
     protected abstract boolean setDefaultAppKey(String key);
 
     // Called after the user tries to select an item.
-    protected void onSelectionPerformed(boolean success) {}
+    protected void onSelectionPerformed(boolean success) {
+    }
 
     protected String getConfirmationMessage(DefaultAppInfo appInfo) {
         return null;

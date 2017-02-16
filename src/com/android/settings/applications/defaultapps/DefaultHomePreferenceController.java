@@ -75,7 +75,7 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
         final ArrayList<ResolveInfo> homeActivities = new ArrayList<>();
         final ComponentName currentDefaultHome = mPackageManager.getHomeActivities(homeActivities);
 
-        return new DefaultAppInfo(mUserId, currentDefaultHome, null /* summary */);
+        return new DefaultAppInfo(mUserId, currentDefaultHome);
     }
 
     private String getOnlyAppLabel() {

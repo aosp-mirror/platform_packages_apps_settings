@@ -76,7 +76,7 @@ public class DefaultNotificationAssistantPicker extends DefaultAppPickerFragment
             }
 
             candidates.add(new DefaultAppInfo(
-                    mUserId, new ComponentName(info.packageName, info.name), null /* summary */));
+                    mUserId, new ComponentName(info.packageName, info.name)));
         }
         return candidates;
     }

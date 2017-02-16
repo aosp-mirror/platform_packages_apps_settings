@@ -37,13 +37,23 @@ public class DefaultAppInfo {
     public final String summary;
     // Description for why this item is disabled, if null, the item is enabled.
     public final String disabledDescription;
+    public final boolean enabled;
+
+    public DefaultAppInfo(int uid, ComponentName cn) {
+        this(uid, cn, null /* summary */);
+    }
 
     public DefaultAppInfo(int uid, ComponentName cn, String summary) {
+        this(uid, cn, summary, true /* enabled */);
+    }
+
+    public DefaultAppInfo(int uid, ComponentName cn, String summary, boolean enabled) {
         packageItemInfo = null;
         userId = uid;
         componentName = cn;
         this.summary = summary;
         this.disabledDescription = null;
+        this.enabled = enabled;
     }
 
     public DefaultAppInfo(PackageItemInfo info, String description) {
@@ -52,6 +62,7 @@ public class DefaultAppInfo {
         componentName = null;
         summary = null;
         this.disabledDescription = description;
+        enabled = true;
     }
 
     public DefaultAppInfo(PackageItemInfo info) {

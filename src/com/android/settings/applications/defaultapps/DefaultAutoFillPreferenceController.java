@@ -55,7 +55,7 @@ public class DefaultAutoFillPreferenceController extends DefaultAppPreferenceCon
                 DefaultAutoFillPicker.SETTING);
         if (!TextUtils.isEmpty(flattenComponent)) {
             DefaultAppInfo appInfo = new DefaultAppInfo(
-                    mUserId, ComponentName.unflattenFromString(flattenComponent), null /*summary*/);
+                    mUserId, ComponentName.unflattenFromString(flattenComponent));
             return appInfo;
         }
         return null;

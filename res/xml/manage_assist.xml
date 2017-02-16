@@ -19,10 +19,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/assist_and_voice_input_title">
 
-    <com.android.settings.applications.DefaultAssistPreference
+    <com.android.settings.widget.GearPreference
         android:key="default_assist"
         android:title="@string/default_assist_title"
-        android:summary="@string/default_assist_none"/>
+        android:summary="@string/app_list_preference_none"
+        android:fragment="com.android.settings.applications.assist.DefaultAssistPicker"/>
 
     <Preference
         android:key="gesture_assist"
@@ -36,7 +37,6 @@
 
     <SwitchPreference
         android:key="screenshot"
-        android:dependency="context"
         android:title="@string/assist_access_screenshot_title"
         android:summary="@string/assist_access_screenshot_summary"/>
 
@@ -45,8 +45,9 @@
         android:title="@string/assist_flash_title"
         android:summary="@string/assist_flash_summary"/>
 
-    <com.android.settings.voice.VoiceInputListPreference
+    <com.android.settings.widget.GearPreference
         android:key="voice_input_settings"
-        android:title="@string/voice_input_settings_title"/>
+        android:title="@string/voice_input_settings_title"
+        android:fragment="com.android.settings.applications.assist.DefaultVoiceInputPicker"/>
 
 </PreferenceScreen>

@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.IContentProvider;
 import android.content.pm.PackageManager;
@@ -26,6 +25,7 @@ import android.provider.Settings;
 
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
@@ -40,7 +40,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -66,24 +65,6 @@ public class SecuritySettingsTest {
     private SummaryLoader mSummaryLoader;
 
     private SecuritySettings.SummaryProvider mSummaryProvider;
-
-    @Implements(Settings.Secure.class)
-    public static class ShadowSecureSettings {
-
-        private static final Map<String, Object> mValueMap = new HashMap<>();
-
-        @Implementation
-        public static boolean putInt(ContentResolver resolver, String name, int value) {
-            mValueMap.put(name, value);
-            return true;
-        }
-
-        @Implementation
-        public static int getInt(ContentResolver resolver, String name, int defaultValue) {
-            Integer value = (Integer) mValueMap.get(name);
-            return value == null ? defaultValue : value;
-        }
-    }
 
     @Implements(com.android.settingslib.drawer.TileUtils.class)
     public static class ShadowTileUtils {

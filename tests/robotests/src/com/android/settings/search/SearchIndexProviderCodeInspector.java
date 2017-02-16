@@ -36,7 +36,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
     private static final String TAG = "SearchCodeInspector";
 
     private static final String NOT_IMPLEMENTING_INDEXABLE_ERROR =
-            "SettingsPreferenceFragment should implement Indexable, but these are not:\n";
+            "SettingsPreferenceFragment should implement Indexable, but these do not:\n";
     private static final String NOT_CONTAINING_PROVIDER_OBJECT_ERROR =
             "Indexable should have public field " + Index.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
                     + " but these are not:\n";
