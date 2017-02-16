@@ -423,7 +423,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 public void onClick() {
                     final SettingsActivity activity =
                             (SettingsActivity) BluetoothSettings.this.getActivity();
-                    activity.startPreferencePanel(ScanningSettings.class.getName(), null,
+                    activity.startPreferencePanel(BluetoothSettings.this,
+                            ScanningSettings.class.getName(), null,
                             R.string.location_scanning_screen_title, null, null, 0);
                 }
             });

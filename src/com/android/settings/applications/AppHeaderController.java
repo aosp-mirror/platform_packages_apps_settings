@@ -38,6 +38,7 @@ import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.instantapps.InstantAppDetails;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 
 import java.lang.annotation.Retention;
@@ -65,6 +66,7 @@ public class AppHeaderController {
 
     private final Context mContext;
     private final Fragment mFragment;
+    private final int mMetricsCategory;
     private final View mAppHeader;
 
     private Drawable mIcon;
@@ -84,6 +86,8 @@ public class AppHeaderController {
     public AppHeaderController(Context context, Fragment fragment, View appHeader) {
         mContext = context;
         mFragment = fragment;
+        mMetricsCategory = FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                .getMetricsCategory(fragment);
         if (appHeader != null) {
             mAppHeader = appHeader;
         } else {
@@ -266,7 +270,7 @@ public class AppHeaderController {
                     button.setImageResource(com.android.settings.R.drawable.ic_info);
                     button.setOnClickListener(v -> AppInfoBase.startAppInfoFragment(
                             InstalledAppDetails.class, R.string.application_info_label,
-                            mPackageName, mUid, mFragment, 0));
+                            mPackageName, mUid, mFragment, 0 /* request */, mMetricsCategory));
                     button.setVisibility(View.VISIBLE);
                 }
                 return;

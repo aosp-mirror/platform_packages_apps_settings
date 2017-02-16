@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
+import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
@@ -88,9 +89,9 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         R.string.battery_desc_camera,
     };
 
-    public static void startBatteryDetailPage(
-            SettingsActivity caller, BatteryStatsHelper helper, int statsType, BatteryEntry entry,
-            boolean showLocationButton, boolean includeAppInfo) {
+    public static void startBatteryDetailPage(SettingsActivity caller,
+            PreferenceFragment fragment, BatteryStatsHelper helper, int statsType,
+            BatteryEntry entry, boolean showLocationButton, boolean includeAppInfo) {
         // Initialize mStats if necessary.
         helper.getStats();
 
@@ -283,7 +284,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         args.putIntArray(PowerUsageDetail.EXTRA_DETAIL_TYPES, types);
         args.putDoubleArray(PowerUsageDetail.EXTRA_DETAIL_VALUES, values);
 
-        caller.startPreferencePanelAsUser(PowerUsageDetail.class.getName(), args,
+        caller.startPreferencePanelAsUser(fragment, PowerUsageDetail.class.getName(), args,
                 R.string.details_title, null, new UserHandle(userId));
     }
 
@@ -550,7 +551,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mPackages[0]);
 
         SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(InstalledAppDetails.class.getName(), args,
+        sa.startPreferencePanel(this, InstalledAppDetails.class.getName(), args,
                 R.string.application_info_label, null, null, 0);
     }
 
@@ -558,26 +559,26 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         SettingsActivity sa = (SettingsActivity)getActivity();
         switch (action) {
             case ACTION_DISPLAY_SETTINGS:
-                sa.startPreferencePanel(DisplaySettings.class.getName(), null,
+                sa.startPreferencePanel(this, DisplaySettings.class.getName(), null,
                         R.string.display_settings_title, null, null, 0);
                 break;
             case ACTION_WIFI_SETTINGS:
-                sa.startPreferencePanel(WifiSettings.class.getName(), null,
+                sa.startPreferencePanel(this, WifiSettings.class.getName(), null,
                         R.string.wifi_settings, null, null, 0);
                 break;
             case ACTION_BLUETOOTH_SETTINGS:
-                sa.startPreferencePanel(BluetoothSettings.class.getName(), null,
+                sa.startPreferencePanel(this, BluetoothSettings.class.getName(), null,
                         R.string.bluetooth_settings, null, null, 0);
                 break;
             case ACTION_WIRELESS_SETTINGS:
-                sa.startPreferencePanel(WirelessSettings.class.getName(), null,
+                sa.startPreferencePanel(this, WirelessSettings.class.getName(), null,
                         R.string.radio_controls_title, null, null, 0);
                 break;
             case ACTION_APP_DETAILS:
                 startApplicationDetailsActivity();
                 break;
             case ACTION_LOCATION_SETTINGS:
-                sa.startPreferencePanel(LocationSettings.class.getName(), null,
+                sa.startPreferencePanel(this, LocationSettings.class.getName(), null,
                         R.string.location_settings_title, null, null, 0);
                 break;
             case ACTION_FORCE_STOP:

@@ -134,9 +134,11 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
+        final int metricsCategory = getMetricsCategory();
         for (Condition c : mConditionManager.getConditions()) {
             if (c.shouldShow()) {
-                mMetricsFeatureProvider.visible(getContext(), c.getMetricsConstant());
+                mMetricsFeatureProvider.visible(getContext(), metricsCategory,
+                        c.getMetricsConstant());
             }
         }
         if (DEBUG_TIMING) {

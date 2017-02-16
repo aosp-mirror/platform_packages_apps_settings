@@ -235,8 +235,8 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             final Bundle args = new Bundle();
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
             Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
-                    StorageDashboardFragment.class.getName(), args, null, R.string.apps_storage, null,
-                    false);
+                    StorageDashboardFragment.class.getName(), args, null, R.string.apps_storage,
+                    null, false, getMetricsCategory());
             intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
             getActivity().startActivity(intent);
             finish();

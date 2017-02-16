@@ -400,6 +400,7 @@
         <!-- hiding for now.
         <Preference
                 android:key="background_check"
+                android:fragment="com.android.settings.applications.BackgroundCheckSummary"
                 android:title="@string/background_check_pref" />
         -->
 
@@ -410,7 +411,8 @@
 
         <Preference
                 android:key="inactive_apps"
-                android:title="@string/inactive_apps_title" />
+                android:title="@string/inactive_apps_title"
+                android:fragment="com.android.settings.fuelgauge.InactiveApps"/>
 
         <SwitchPreference
             android:key="force_allow_on_external"

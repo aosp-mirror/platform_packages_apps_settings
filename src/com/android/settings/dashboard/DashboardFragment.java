@@ -330,13 +330,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 // Have the key already, will rebind.
                 final Preference preference = mProgressiveDisclosureMixin.findPreference(
                         screen, key);
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), preference, tile, key,
-                        mPlaceholderPreferenceController.getOrder());
+                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), getMetricsCategory(),
+                        preference, tile, key, mPlaceholderPreferenceController.getOrder());
             } else {
                 // Don't have this key, add it.
                 final Preference pref = new Preference(getPrefContext());
-                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), pref, tile, key,
-                        mPlaceholderPreferenceController.getOrder());
+                mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), getMetricsCategory(),
+                        pref, tile, key, mPlaceholderPreferenceController.getOrder());
                 mProgressiveDisclosureMixin.addPreference(screen, pref);
                 mDashboardTilePrefKeys.add(key);
             }

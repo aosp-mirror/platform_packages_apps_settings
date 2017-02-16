@@ -91,7 +91,7 @@ public class HotspotCondition extends Condition {
     @Override
     public void onPrimaryClick() {
         Utils.startWithFragment(mManager.getContext(), TetherSettings.class.getName(), null, null,
-                0, R.string.tether_settings_title_all, null);
+                0, R.string.tether_settings_title_all, null, MetricsEvent.DASHBOARD_SUMMARY);
     }
 
     @Override

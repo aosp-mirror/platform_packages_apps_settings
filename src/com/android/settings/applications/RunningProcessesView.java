@@ -411,7 +411,7 @@ public class RunningProcessesView extends FrameLayout
             args.putBoolean(RunningServiceDetails.KEY_BACKGROUND, mAdapter.mShowBackground);
 
             SettingsActivity sa = (SettingsActivity) mOwner.getActivity();
-            sa.startPreferencePanel(RunningServiceDetails.class.getName(), args,
+            sa.startPreferencePanel(null, RunningServiceDetails.class.getName(), args,
                     R.string.runningservicedetails_settings_title, null, null, 0);
         }
     }

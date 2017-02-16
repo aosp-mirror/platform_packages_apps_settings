@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SiteMapManager;
@@ -187,7 +188,8 @@ class CursorToSearchResultConverter {
             final Bundle args = new Bundle();
             args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
             final Intent intent = Utils.onBuildStartFragmentIntent(mContext,
-                    className, args, null, 0, screenTitle, false);
+                    className, args, null, 0, screenTitle, false,
+                    MetricsProto.MetricsEvent.DASHBOARD_SEARCH_RESULTS);
             payload = new IntentPayload(intent);
         } else {
             final Intent intent = new Intent(action);

@@ -139,7 +139,7 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
                 memInfo.usedWeight * memInfo.weightToRam);
         args.putDouble(ProcessStatsDetail.EXTRA_TOTAL_SCALE, memInfo.totalScale);
         args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, !includeAppInfo);
-        activity.startPreferencePanel(ProcessStatsDetail.class.getName(), args,
+        activity.startPreferencePanel(null, ProcessStatsDetail.class.getName(), args,
                 R.string.memory_usage, null, null, 0);
     }
 }

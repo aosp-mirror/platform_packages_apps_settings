@@ -16,6 +16,7 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
@@ -44,25 +45,20 @@ public interface DashboardFeatureProvider {
      *
      * @param activity Activity hosting the preference
      * @param context UI context to inflate preference
+     * @param sourceMetricsCategory The context (source) from which an action is performed
      * @param key Value from CategoryKey
      * @deprecated Pages implementing {@code DashboardFragment} should use
      * {@link #getTilesForCategory(String)} instead. Using this method will not get the benefit
      * of auto-ordering, progressive disclosure, auto-refreshing summary text etc.
      */
     @Deprecated
-    List<Preference> getPreferencesForCategory(Activity activity, Context context, String key);
+    List<Preference> getPreferencesForCategory(Activity activity, Context context,
+            int sourceMetricsCategory, String key);
 
     /**
      * Get all tiles, grouped by category.
      */
     List<DashboardCategory> getAllCategories();
-
-    /**
-     * Returns a priority group for tile. priority level is grouped into hundreds. tiles with
-     * priority 100 - 199 belongs to priority level 100, tiles with priority 200 - 299 is in
-     * group 200, and so on.
-     */
-    int getPriorityGroup(Preference preference);
 
     /**
      * Returns an unique string key for the tile.
@@ -73,14 +69,15 @@ public interface DashboardFeatureProvider {
      * Binds preference to data provided by tile.
      *
      * @param activity If tile contains intent to launch, it will be launched from this activity
+     * @param sourceMetricsCategory The context (source) from which an action is performed
      * @param pref The preference to bind data
      * @param tile The binding data
      * @param key They key for preference. If null, we will generate one from tile data
      * @param baseOrder The order offset value. When binding, pref's order is determined by
      * both this value and tile's own priority.
      */
-    void bindPreferenceToTile(Activity activity, Preference pref, Tile tile, String key,
-            int baseOrder);
+    void bindPreferenceToTile(Activity activity, int sourceMetricsCategory, Preference pref,
+            Tile tile, String key, int baseOrder);
 
     /**
      * Returns a {@link ProgressiveDisclosureMixin} for specified fragment.

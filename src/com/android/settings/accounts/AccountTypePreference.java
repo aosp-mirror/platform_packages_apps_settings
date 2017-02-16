@@ -65,15 +65,18 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
      */
     private final Bundle mFragmentArguments;
 
-    public AccountTypePreference(Context context, CharSequence title, String titleResPackageName,
-        int titleResId, String fragment, Bundle fragmentArguments, Drawable icon) {
-        this(context, title, titleResPackageName, titleResId, null, fragment, fragmentArguments,
-            icon);
+    private final int mMetricsCategory;
+
+    public AccountTypePreference(Context context, int metricsCategory, CharSequence title,
+            String titleResPackageName, int titleResId, String fragment, Bundle fragmentArguments,
+            Drawable icon) {
+        this(context, metricsCategory, title, titleResPackageName, titleResId, null, fragment,
+                fragmentArguments, icon);
     }
 
-    public AccountTypePreference(Context context, CharSequence title, String titleResPackageName,
-        int titleResId, CharSequence summary, String fragment, Bundle fragmentArguments,
-        Drawable icon) {
+    public AccountTypePreference(Context context, int metricsCategory, CharSequence title,
+            String titleResPackageName, int titleResId, CharSequence summary, String fragment,
+            Bundle fragmentArguments, Drawable icon) {
         super(context);
         mTitle = title;
         mTitleResPackageName = titleResPackageName;
@@ -81,6 +84,7 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
         mSummary = summary;
         mFragment = fragment;
         mFragmentArguments = fragmentArguments;
+        mMetricsCategory = metricsCategory;
         setWidgetLayoutResource(R.layout.account_type_preference);
 
         setTitle(title);
@@ -105,7 +109,7 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
             }
             Utils.startWithFragment(getContext(), mFragment, mFragmentArguments,
                 null /* resultTo */, 0 /* resultRequestCode */, mTitleResPackageName,
-                mTitleResId, null /* title */);
+                mTitleResId, null /* title */, mMetricsCategory);
             return true;
         }
         return false;

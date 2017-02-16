@@ -229,7 +229,7 @@ public class AccountTypePreferenceLoader {
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
-            ((SettingsActivity) mFragment.getActivity()).startPreferencePanel(
+            ((SettingsActivity) mFragment.getActivity()).startPreferencePanel(mFragment,
                 mClass, null, mTitleRes, null, null, 0);
             // Hack: announce that the Google account preferences page is launching the location
             // settings

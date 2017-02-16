@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
-import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -33,7 +32,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -564,7 +562,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
     private void startAppInfoFragment(Class<?> fragment, int titleRes) {
         AppInfoBase.startAppInfoFragment(fragment, titleRes, mCurrentPkgName, mCurrentUid, this,
-                INSTALLED_APP_DETAILS);
+                INSTALLED_APP_DETAILS, getMetricsCategory());
     }
 
     @Override
@@ -631,11 +629,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 return true;
             case R.id.advanced:
                 if (mListType == LIST_TYPE_NOTIFICATION) {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(
+                    ((SettingsActivity) getActivity()).startPreferencePanel(this,
                             ConfigureNotificationSettings.class.getName(), null,
                             R.string.configure_notification_settings, null, this, ADVANCED_SETTINGS);
                 } else {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(
+                    ((SettingsActivity) getActivity()).startPreferencePanel(this,
                             AdvancedAppSettings.class.getName(), null, R.string.configure_apps,
                             null, this, ADVANCED_SETTINGS);
                 }

@@ -405,8 +405,8 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                 ConfigDialogFragment.show(VpnSettings.this, pref.getProfile(), true /* editing */,
                         true /* exists */);
             } else if (p instanceof AppPreference) {
-                AppPreference pref = (AppPreference) p;;
-                AppManagementFragment.show(getPrefContext(), pref);
+                AppPreference pref = (AppPreference) p;
+                AppManagementFragment.show(getPrefContext(), pref, getMetricsCategory());
             }
         }
     };

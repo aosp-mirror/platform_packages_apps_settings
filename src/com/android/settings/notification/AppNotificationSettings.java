@@ -198,7 +198,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                         channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
                         Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
                                 ChannelNotificationSettings.class.getName(),
-                                channelArgs, null, 0, null, false);
+                                channelArgs, null, 0, null, false, getMetricsCategory());
                         channelPref.setIntent(channelIntent);
 
                         channelPref.setOnPreferenceChangeListener(

@@ -439,7 +439,7 @@ public class UserSettings extends SettingsPreferenceFragment
         if (userId == UserPreference.USERID_GUEST_DEFAULTS) {
             Bundle extras = new Bundle();
             extras.putBoolean(UserDetailsSettings.EXTRA_USER_GUEST, true);
-            ((SettingsActivity) getActivity()).startPreferencePanel(
+            ((SettingsActivity) getActivity()).startPreferencePanel(this,
                     UserDetailsSettings.class.getName(),
                     extras, R.string.user_guest, null, null, 0);
             return;
@@ -449,7 +449,7 @@ public class UserSettings extends SettingsPreferenceFragment
             Bundle extras = new Bundle();
             extras.putInt(RestrictedProfileSettings.EXTRA_USER_ID, userId);
             extras.putBoolean(RestrictedProfileSettings.EXTRA_NEW_USER, newUser);
-            ((SettingsActivity) getActivity()).startPreferencePanel(
+            ((SettingsActivity) getActivity()).startPreferencePanel(this,
                     RestrictedProfileSettings.class.getName(),
                     extras, R.string.user_restrictions_title, null,
                     null, 0);
@@ -459,7 +459,7 @@ public class UserSettings extends SettingsPreferenceFragment
         } else if (mUserCaps.mIsAdmin) {
             Bundle extras = new Bundle();
             extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userId);
-            ((SettingsActivity) getActivity()).startPreferencePanel(
+            ((SettingsActivity) getActivity()).startPreferencePanel(this,
                     UserDetailsSettings.class.getName(),
                     extras,
                     -1, /* No title res id */

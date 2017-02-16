@@ -158,7 +158,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         Bundle args = new Bundle();
         args.putParcelable(AccountSyncSettings.ACCOUNT_KEY, acctPref.getAccount());
         args.putParcelable(EXTRA_USER, mUserHandle);
-        ((SettingsActivity) getActivity()).startPreferencePanel(
+        ((SettingsActivity) getActivity()).startPreferencePanel(this,
                 AccountSyncSettings.class.getCanonicalName(), args,
                 R.string.account_sync_settings_title, acctPref.getAccount().name,
                 this, REQUEST_SHOW_SYNC_SETTINGS);

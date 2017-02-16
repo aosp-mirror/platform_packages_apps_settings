@@ -79,7 +79,7 @@ public class ConvertToFbe extends SettingsPreferenceFragment {
 
     private void convert() {
         SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(ConfirmConvertToFbe.class.getName(), null,
+        sa.startPreferencePanel(this, ConfirmConvertToFbe.class.getName(), null,
                                 R.string.convert_to_file_encryption, null, null, 0);
     }
 

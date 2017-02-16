@@ -567,7 +567,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     void addDashboardCategoryPreferences() {
         final PreferenceScreen screen = getPreferenceScreen();
         final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
-                getActivity(), getPrefContext(), CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
+                getActivity(), getPrefContext(), getMetricsCategory(),
+                CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
         if (tilePrefs != null) {
             for (Preference preference : tilePrefs) {
                 screen.addPreference(preference);
@@ -2469,10 +2470,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeUSBAudioOptions();
         } else if (preference == mForceResizable) {
             writeForceResizableOptions();
-        } else if (INACTIVE_APPS_KEY.equals(preference.getKey())) {
-            startInactiveAppsFragment();
-        } else if (BACKGROUND_CHECK_KEY.equals(preference.getKey())) {
-            startBackgroundCheckFragment();
         } else if (preference == mBluetoothDisableAbsVolume) {
             writeBluetoothDisableAbsVolumeOptions();
         } else if (preference == mWebViewMultiprocess) {
@@ -2484,18 +2481,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
 
         return false;
-    }
-
-    private void startInactiveAppsFragment() {
-        ((SettingsActivity) getActivity()).startPreferencePanel(
-                InactiveApps.class.getName(),
-                null, R.string.inactive_apps_title, null, null, 0);
-    }
-
-    private void startBackgroundCheckFragment() {
-        ((SettingsActivity) getActivity()).startPreferencePanel(
-                BackgroundCheckSummary.class.getName(),
-                null, R.string.background_check_title, null, null, 0);
     }
 
     private boolean showKeyguardConfirmation(Resources resources, int requestCode) {

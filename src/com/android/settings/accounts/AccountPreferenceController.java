@@ -45,6 +45,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
@@ -89,6 +90,7 @@ public class AccountPreferenceController extends PreferenceController
     private int mAccountProfileOrder = ORDER_ACCOUNT_PROFILES;
     private AccountRestrictionHelper mHelper;
     private DashboardFeatureProvider mDashboardFeatureProvider;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     /**
      * Holds data related to the accounts belonging to one profile.
@@ -135,8 +137,9 @@ public class AccountPreferenceController extends PreferenceController
         if (mAuthorities != null) {
             mAuthoritiesCount = mAuthorities.length;
         }
-        mDashboardFeatureProvider =
-            FeatureFactory.getFactory(mContext).getDashboardFeatureProvider(mContext);
+        final FeatureFactory featureFactory = FeatureFactory.getFactory(mContext);
+        mDashboardFeatureProvider = featureFactory.getDashboardFeatureProvider(mContext);
+        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mIAEnabled = mDashboardFeatureProvider.isEnabled();
         mHelper = helper;
     }
@@ -235,7 +238,7 @@ public class AccountPreferenceController extends PreferenceController
             if (preference == profileData.managedProfilePreference) {
                 Bundle arguments = new Bundle();
                 arguments.putParcelable(Intent.EXTRA_USER, profileData.userInfo.getUserHandle());
-                ((SettingsActivity) mParent.getActivity()).startPreferencePanel(
+                ((SettingsActivity) mParent.getActivity()).startPreferencePanel(mParent,
                         ManagedProfileSettings.class.getName(), arguments,
                         R.string.managed_profile_settings_title, null, null, 0);
                 return true;
@@ -446,7 +449,7 @@ public class AccountPreferenceController extends PreferenceController
             UserHandle userHandle) {
         final String[] accountTypes = helper.getEnabledAccountTypes();
         final ArrayList<AccountTypePreference> accountTypePreferences =
-                new ArrayList<AccountTypePreference>(accountTypes.length);
+                new ArrayList<>(accountTypes.length);
 
         for (int i = 0; i < accountTypes.length; i++) {
             final String accountType = accountTypes[i];
@@ -489,7 +492,8 @@ public class AccountPreferenceController extends PreferenceController
                         titleResId);
                     fragmentArguments.putParcelable(EXTRA_USER, userHandle);
                     accountTypePreferences.add(new AccountTypePreference(
-                        prefContext, account.name, titleResPackageName, titleResId, label,
+                        prefContext, mMetricsFeatureProvider.getMetricsCategory(mParent),
+                            account.name, titleResPackageName, titleResId, label,
                         AccountDetailDashboardFragment.class.getName(), fragmentArguments, icon));
                 }
             } else if (skipToAccount) {
@@ -499,8 +503,9 @@ public class AccountPreferenceController extends PreferenceController
                 fragmentArguments.putParcelable(EXTRA_USER, userHandle);
 
                 accountTypePreferences.add(new AccountTypePreference(
-                        prefContext, label, titleResPackageName,
-                    titleResId, AccountSyncSettings.class.getName(), fragmentArguments, icon));
+                        prefContext, mMetricsFeatureProvider.getMetricsCategory(mParent),
+                        label, titleResPackageName, titleResId, AccountSyncSettings.class.getName(),
+                        fragmentArguments, icon));
             } else {
                 final Bundle fragmentArguments = new Bundle();
                 fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
@@ -509,9 +514,9 @@ public class AccountPreferenceController extends PreferenceController
                 fragmentArguments.putParcelable(EXTRA_USER, userHandle);
 
                 accountTypePreferences.add(new AccountTypePreference(
-
-                        prefContext, label, titleResPackageName,
-                    titleResId, ManageAccountsSettings.class.getName(), fragmentArguments, icon));
+                        prefContext, mMetricsFeatureProvider.getMetricsCategory(mParent), label,
+                        titleResPackageName, titleResId, ManageAccountsSettings.class.getName(),
+                        fragmentArguments, icon));
             }
             helper.preloadDrawableForType(mContext, accountType);
         }

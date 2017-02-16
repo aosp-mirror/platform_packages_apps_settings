@@ -38,6 +38,8 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
@@ -67,6 +69,7 @@ public class StorageItemPreferenceController extends PreferenceController
     static final String FILES_KEY = "pref_files";
 
     private final Fragment mFragment;
+    private final  MetricsFeatureProvider mMetricsFeatureProvider;
     private final StorageVolumeProvider mSvp;
     private VolumeInfo mVolume;
     private final int mUserId;
@@ -87,7 +90,7 @@ public class StorageItemPreferenceController extends PreferenceController
         mFragment = hostFragment;
         mVolume = volume;
         mSvp = svp;
-
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         UserManager um = mContext.getSystemService(UserManager.class);
         mUserId = um.getUserHandle();
     }
@@ -213,7 +216,7 @@ public class StorageItemPreferenceController extends PreferenceController
         args.putInt(ManageApplications.EXTRA_STORAGE_TYPE, ManageApplications.STORAGE_TYPE_MUSIC);
         return Utils.onBuildStartFragmentIntent(mContext,
                 ManageApplications.class.getName(), args, null, R.string.audio_storage_title, null,
-                false);
+                false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
     }
 
     private Intent getAppsIntent() {
@@ -224,7 +227,7 @@ public class StorageItemPreferenceController extends PreferenceController
         args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
         return Utils.onBuildStartFragmentIntent(mContext,
                 ManageApplications.class.getName(), args, null, R.string.apps_storage, null,
-                false);
+                false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
     }
 
     private Intent getGamesIntent() {
@@ -233,7 +236,7 @@ public class StorageItemPreferenceController extends PreferenceController
                     Settings.GamesStorageActivity.class.getName());
             return Utils.onBuildStartFragmentIntent(mContext,
                     ManageApplications.class.getName(), args, null, R.string.game_storage_settings,
-                    null, false);
+                    null, false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
     }
 
     private Intent getFilesIntent() {

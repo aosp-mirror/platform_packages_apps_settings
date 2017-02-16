@@ -56,6 +56,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.core.gateway.SettingsGateway;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardContainerFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
@@ -99,6 +100,11 @@ public class SettingsActivity extends SettingsDrawerActivity
      * activity.
      */
     public static final String EXTRA_SHOW_FRAGMENT = ":settings:show_fragment";
+
+    /**
+     * The metrics category constant for logging source when a setting fragment is opened.
+     */
+    public static final String EXTRA_SOURCE_METRICS_CATEGORY = ":settings:source_metrics";
 
     /**
      * When starting this activity and using {@link #EXTRA_SHOW_FRAGMENT},
@@ -220,6 +226,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     private boolean mSearchMenuItemExpanded = false;
     private SearchResultsSummary mSearchResultsFragment;
     private SearchFeatureProvider mSearchFeatureProvider;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     // Categories
     private ArrayList<DashboardCategory> mCategories = new ArrayList<>();
@@ -239,7 +246,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
-        startPreferencePanel(pref.getFragment(), pref.getExtras(), -1, pref.getTitle(),
+        startPreferencePanel(caller, pref.getFragment(), pref.getExtras(), -1, pref.getTitle(),
                 null, 0);
         return true;
     }
@@ -350,6 +357,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
         mSearchFeatureProvider = factory.getSearchFeatureProvider();
+        mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
 
         // Should happen before any call to getIntent()
         getMetaData();
@@ -748,8 +756,8 @@ public class SettingsActivity extends SettingsDrawerActivity
      * @param resultRequestCode If resultTo is non-null, this is the caller's
      * request code to be received with the result.
      */
-    public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
-            CharSequence titleText, Fragment resultTo, int resultRequestCode) {
+    public void startPreferencePanel(Fragment caller, String fragmentClass, Bundle args,
+            int titleRes, CharSequence titleText, Fragment resultTo, int resultRequestCode) {
         String title = null;
         if (titleRes < 0) {
             if (titleText != null) {
@@ -760,7 +768,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
         }
         Utils.startWithFragment(this, fragmentClass, args, resultTo, resultRequestCode,
-                titleRes, title, mIsShortcut);
+                titleRes, title, mIsShortcut, mMetricsFeatureProvider.getMetricsCategory(caller));
     }
 
     /**
@@ -775,8 +783,8 @@ public class SettingsActivity extends SettingsDrawerActivity
      * @param titleText Optional text of the title of this fragment.
      * @param userHandle The user for which the panel has to be started.
      */
-    public void startPreferencePanelAsUser(String fragmentClass, Bundle args, int titleRes,
-            CharSequence titleText, UserHandle userHandle) {
+    public void startPreferencePanelAsUser(Fragment caller, String fragmentClass,
+            Bundle args, int titleRes, CharSequence titleText, UserHandle userHandle) {
         // This is a workaround.
         //
         // Calling startWithFragmentAsUser() without specifying FLAG_ACTIVITY_NEW_TASK to the intent
@@ -788,7 +796,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         // another check here to call startPreferencePanel() instead of startWithFragmentAsUser()
         // when we're calling it as the same user.
         if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startPreferencePanel(fragmentClass, args, titleRes, titleText, null, 0);
+            startPreferencePanel(caller, fragmentClass, args, titleRes, titleText, null, 0);
         } else {
             String title = null;
             if (titleRes < 0) {
@@ -799,8 +807,8 @@ public class SettingsActivity extends SettingsDrawerActivity
                     title = "";
                 }
             }
-            Utils.startWithFragmentAsUser(this, fragmentClass, args,
-                    titleRes, title, mIsShortcut, userHandle);
+            Utils.startWithFragmentAsUser(this, fragmentClass, args, titleRes, title,
+                    mIsShortcut, mMetricsFeatureProvider.getMetricsCategory(caller), userHandle);
         }
     }
 

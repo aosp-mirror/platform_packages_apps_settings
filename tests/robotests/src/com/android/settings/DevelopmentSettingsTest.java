@@ -79,7 +79,8 @@ public class DevelopmentSettingsTest {
         doReturn(mActivity).when(mSettings).getActivity();
         when(mPreferenceManager.getContext()).thenReturn(mContext);
         when(mFeatureFactory.dashboardFeatureProvider.getPreferencesForCategory(
-                mActivity, mContext, CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT))
+                mActivity, mContext, mSettings.getMetricsCategory(),
+                CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT))
                 .thenReturn(preferences);
 
         mSettings.onAttach(mContext);

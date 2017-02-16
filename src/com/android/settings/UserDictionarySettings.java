@@ -215,7 +215,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
         args.putString(UserDictionaryAddWordContents.EXTRA_SHORTCUT, editingShortcut);
         args.putString(UserDictionaryAddWordContents.EXTRA_LOCALE, mLocale);
         SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(
+        sa.startPreferencePanel(this,
                 com.android.settings.inputmethod.UserDictionaryAddWordFragment.class.getName(),
                 args, R.string.user_dict_settings_add_dialog_title, null, null, 0);
     }

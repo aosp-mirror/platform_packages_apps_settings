@@ -56,7 +56,7 @@ public class BatterySaverCondition extends Condition {
     @Override
     public void onPrimaryClick() {
         Utils.startWithFragment(mManager.getContext(), BatterySaverSettings.class.getName(), null,
-                null, 0, R.string.battery_saver, null);
+                null, 0, R.string.battery_saver, null, MetricsEvent.DASHBOARD_SUMMARY);
     }
 
     @Override
