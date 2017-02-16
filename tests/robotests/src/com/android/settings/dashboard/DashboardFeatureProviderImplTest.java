@@ -44,6 +44,7 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
@@ -55,6 +56,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -167,6 +169,33 @@ public class DashboardFeatureProviderImplTest {
                 preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
         verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(Context.class),
+                eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
+                eq(tile.intent.getComponent().flattenToString()));
+        verify(mActivity)
+                .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
+    }
+
+    @Test
+    public void bindPreference_toInternalSettingActivity_shouldBindToDirectLaunchIntentAndNotLog() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.userHandle = new ArrayList<>();
+        tile.userHandle.add(mock(UserHandle.class));
+        tile.intent = new Intent();
+        tile.intent.setComponent(
+                new ComponentName(RuntimeEnvironment.application.getPackageName(), "class"));
+
+        when(mActivity.getSystemService(Context.USER_SERVICE))
+                .thenReturn(mUserManager);
+        when(mActivity.getApplicationContext().getPackageName())
+                .thenReturn(RuntimeEnvironment.application.getPackageName());
+
+        mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.SETTINGS_GESTURES,
+                preference, tile, "123", Preference.DEFAULT_ORDER);
+        preference.getOnPreferenceClickListener().onPreferenceClick(null);
+        verify(mFeatureFactory.metricsFeatureProvider, never()).action(
                 any(Context.class),
                 eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
                 eq(tile.intent.getComponent().flattenToString()));

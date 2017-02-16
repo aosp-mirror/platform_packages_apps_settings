@@ -28,7 +28,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SubSettings;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.CategoryManager;
@@ -198,6 +200,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             return;
         }
         final Intent intent = new Intent(tile.intent)
+                .putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY,
+                        MetricsEvent.DASHBOARD_SUMMARY)
                 .putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         launchIntentOrSelectProfile(activity, tile, intent);
@@ -222,10 +226,15 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         final ComponentName cn = intent.getComponent();
         if (cn == null) {
+            // Not loggable
+            return;
+        } else if (TextUtils.equals(cn.getPackageName(), mContext.getPackageName())) {
+            // Going to a Setting internal page, skip click logging in favor of page's own
+            // visibility logging.
             return;
         }
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK,
+                MetricsEvent.ACTION_SETTINGS_TILE_CLICK,
                 cn.flattenToString());
     }
 }
