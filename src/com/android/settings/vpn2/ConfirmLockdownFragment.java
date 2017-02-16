@@ -78,7 +78,8 @@ public class ConfirmLockdownFragment extends InstrumentedDialogFragment
         final boolean wasLockdown = getArguments().getBoolean(ARG_LOCKDOWN_SRC);
         final boolean nowLockdown = getArguments().getBoolean(ARG_LOCKDOWN_DST);
 
-        final int titleId = replacing ? R.string.vpn_replace_vpn_title : R.string.vpn_set_vpn_title;
+        final int titleId = (nowLockdown ? R.string.vpn_require_connection_title :
+                (replacing ? R.string.vpn_replace_vpn_title : R.string.vpn_set_vpn_title));
         final int actionId =
                 (replacing ? R.string.vpn_replace :
                 (nowLockdown ? R.string.vpn_turn_on : R.string.okay));
