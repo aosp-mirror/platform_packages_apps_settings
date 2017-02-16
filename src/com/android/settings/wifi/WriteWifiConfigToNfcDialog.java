@@ -145,7 +145,7 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
 
         passwordHex = String.format(PASSWORD_FORMAT, passwordLength, passwordHex).toUpperCase();
 
-        if (wpsNfcConfigurationToken.contains(passwordHex)) {
+        if (wpsNfcConfigurationToken != null && wpsNfcConfigurationToken.contains(passwordHex)) {
             mWpsNfcConfigurationToken = wpsNfcConfigurationToken;
 
             Activity activity = getOwnerActivity();
