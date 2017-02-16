@@ -151,6 +151,7 @@ public class InstalledAppDetails extends AppInfoBase
     private static final String KEY_LAUNCH = "preferred_settings";
     private static final String KEY_BATTERY = "battery";
     private static final String KEY_MEMORY = "memory";
+    private static final String KEY_VERSION = "app_version";
 
     private static final String NOTIFICATION_TUNER_SETTING = "show_importance_slider";
 
@@ -171,6 +172,7 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mLaunchPreference;
     private Preference mDataPreference;
     private Preference mMemoryPreference;
+    private Preference mVersionPreference;
 
     private boolean mDisableAfterUninstall;
 
@@ -416,6 +418,7 @@ public class InstalledAppDetails extends AppInfoBase
         mBatteryPreference.setOnPreferenceClickListener(this);
         mMemoryPreference = findPreference(KEY_MEMORY);
         mMemoryPreference.setOnPreferenceClickListener(this);
+        mVersionPreference = findPreference(KEY_VERSION);
 
         mLaunchPreference = findPreference(KEY_LAUNCH);
         if (mAppEntry != null && mAppEntry.info != null) {
@@ -559,12 +562,21 @@ public class InstalledAppDetails extends AppInfoBase
                     .newAppHeaderController(this, appSnippet)
                     .setLabel(mAppEntry)
                     .setIcon(mAppEntry)
-                    .setSummary(pkgInfo)
+                    .setSummary(getString(getInstallationStatus(mAppEntry.info)))
                     .done(false /* rebindActions */);
+            mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
         } else {
             setupAppSnippet(appSnippet, mAppEntry.label, mAppEntry.icon,
                     pkgInfo != null ? pkgInfo.versionName : null);
         }
+    }
+
+    @VisibleForTesting
+    int getInstallationStatus(ApplicationInfo info) {
+        if ((info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
+            return R.string.not_installed;
+        }
+        return info.enabled ? R.string.installed : R.string.disabled;
     }
 
     private boolean signaturesMatch(String pkg1, String pkg2) {

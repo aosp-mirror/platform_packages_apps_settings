@@ -241,9 +241,9 @@ public class DatabaseIndexingManagerTest {
         // Data Rank
         assertThat(cursor.getInt(1)).isEqualTo(rank);
         // Data Title
-        assertThat(cursor.getString(2)).isEqualTo("Apps");
+        assertThat(cursor.getString(2)).isEqualTo("App info");
         // Normalized Title
-        assertThat(cursor.getString(3)).isEqualTo("apps");
+        assertThat(cursor.getString(3)).isEqualTo("app info");
         // Summary On
         assertThat(cursor.getString(4)).isEqualTo("Manage apps, set up quick launch shortcuts");
         // Summary On Normalized
@@ -257,7 +257,7 @@ public class DatabaseIndexingManagerTest {
         // Keywords
         assertThat(cursor.getString(9)).isEmpty();
         // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo("Apps");
+        assertThat(cursor.getString(10)).isEqualTo("App info");
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
@@ -395,7 +395,7 @@ public class DatabaseIndexingManagerTest {
         // Keywords
         assertThat(cursor.getString(9)).isEmpty();
         // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo("Apps");
+        assertThat(cursor.getString(10)).isEqualTo("App info");
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
@@ -450,7 +450,7 @@ public class DatabaseIndexingManagerTest {
         // Keywords
         assertThat(cursor.getString(9)).isEmpty();
         // Screen Title
-        assertThat(cursor.getString(10)).isEqualTo("Apps");
+        assertThat(cursor.getString(10)).isEqualTo("App info");
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
