@@ -16,6 +16,7 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
+import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
 
@@ -74,9 +75,10 @@ public class MetricsFeatureProvider {
         }
     }
 
-    public void action(Context context, int category, String pkg) {
+    public void action(Context context, int category, String pkg,
+            Pair<Integer, Object>... taggedData) {
         for (LogWriter writer : mLoggerWriters) {
-            writer.action(context, category, pkg);
+            writer.action(context, category, pkg, taggedData);
         }
     }
 

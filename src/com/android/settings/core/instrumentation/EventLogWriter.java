@@ -18,6 +18,7 @@ package com.android.settings.core.instrumentation;
 
 import android.content.Context;
 import android.metrics.LogMaker;
+import android.util.Pair;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto;
@@ -59,8 +60,19 @@ public class EventLogWriter implements LogWriter {
         MetricsLogger.action(context, category, Boolean.toString(value));
     }
 
-    public void action(Context context, int category, String pkg) {
-        MetricsLogger.action(context, category, pkg);
+    public void action(Context context, int category, String pkg,
+            Pair<Integer, Object>... taggedData) {
+        if (taggedData == null || taggedData.length == 0) {
+            MetricsLogger.action(context, category, pkg);
+        } else {
+            final LogMaker logMaker = new LogMaker(category)
+                    .setType(MetricsProto.MetricsEvent.TYPE_ACTION)
+                    .setPackageName(pkg);
+            for (Pair<Integer, Object> pair : taggedData) {
+                logMaker.addTaggedData(pair.first, pair.second);
+            }
+            MetricsLogger.action(logMaker);
+        }
     }
 
     public void count(Context context, String name, int value) {
