@@ -3153,19 +3153,6 @@
                        android:value="com.android.settings.category.ia.homepage"/>
         </activity>
 
-        <activity-alias android:name="LocationDashboardAlias"
-                        android:targetActivity="Settings$LocationSettingsActivity">
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.security" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.location.LocationSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity-alias>
-
         <activity-alias android:name="AccessibilityDashboardAlias"
                         android:targetActivity="Settings$AccessibilitySettingsActivity">
             <intent-filter android:priority="2">

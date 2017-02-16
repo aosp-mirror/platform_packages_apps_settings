@@ -25,7 +25,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.IContentProvider;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -37,7 +36,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.security.KeyStore;
 import android.service.trust.TrustAgentService;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
@@ -61,6 +59,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fingerprint.FingerprintSettings;
+import com.android.settings.location.LocationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
@@ -101,7 +100,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_VISIBLE_PATTERN_PROFILE = "visiblepattern_profile";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
     private static final String KEY_DEVICE_ADMIN_CATEGORY = "device_admin_category";
-    private static final String KEY_ADVANCED_SECURITY = "advanced_security";
     private static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
     private static final String KEY_UNIFICATION = "unification";
 
@@ -114,14 +112,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String TAG_UNIFICATION_DIALOG = "unification_dialog";
 
     // Misc Settings
-    private static final String KEY_SIM_LOCK = "sim_lock";
+    private static final String KEY_SIM_LOCK = "sim_lock_settings";
     private static final String KEY_SHOW_PASSWORD = "show_password";
-    private static final String KEY_CREDENTIAL_STORAGE_TYPE = "credential_storage_type";
-    private static final String KEY_USER_CREDENTIALS = "user_credentials";
-    private static final String KEY_RESET_CREDENTIALS = "credentials_reset";
-    private static final String KEY_CREDENTIALS_INSTALL = "credentials_install";
-    private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
-    private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
     private static final String KEY_TRUST_AGENT = "trust_agent";
     private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
 
@@ -160,9 +152,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private SwitchPreference mShowPassword;
 
-    private KeyStore mKeyStore;
-    private RestrictedPreference mResetCredentials;
-
     private boolean mIsAdmin;
 
     private Intent mTrustAgentClickIntent;
@@ -171,6 +160,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private String mCurrentDevicePassword;
     private String mCurrentProfilePassword;
+
+    private LocationPreferenceController mLocationcontroller;
 
     @Override
     public int getMetricsCategory() {
@@ -206,6 +197,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 && savedInstanceState.containsKey(TRUST_AGENT_CLICK_INTENT)) {
             mTrustAgentClickIntent = savedInstanceState.getParcelable(TRUST_AGENT_CLICK_INTENT);
         }
+
+        mLocationcontroller = new LocationPreferenceController(activity);
     }
 
     private static int getResIdForLockUnlockScreen(Context context,
@@ -304,18 +297,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             ((GearPreference) unlockSetOrChange).setOnGearClickListener(this);
         }
 
-        // Add options for device encryption
         mIsAdmin = mUm.isAdminUser();
-
-        if (mIsAdmin) {
-            if (LockPatternUtils.isDeviceEncryptionEnabled()) {
-                // The device is currently encrypted.
-                addPreferencesFromResource(R.xml.security_settings_encrypted);
-            } else {
-                // This device supports encryption but isn't encrypted.
-                addPreferencesFromResource(R.xml.security_settings_unencrypted);
-            }
-        }
 
         // Fingerprint and trust agents
         PreferenceGroup securityCategory = (PreferenceGroup)
@@ -352,56 +334,19 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // Show password
         mShowPassword = (SwitchPreference) root.findPreference(KEY_SHOW_PASSWORD);
-        mResetCredentials = (RestrictedPreference) root.findPreference(KEY_RESET_CREDENTIALS);
 
         // Credential storage
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        mKeyStore = KeyStore.getInstance(); // needs to be initialized for onResume()
-
-        if (!RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
-                UserManager.DISALLOW_CONFIG_CREDENTIALS, MY_USER_ID)) {
-            RestrictedPreference userCredentials = (RestrictedPreference) root.findPreference(
-                    KEY_USER_CREDENTIALS);
-            userCredentials.checkRestrictionAndSetDisabled(
-                    UserManager.DISALLOW_CONFIG_CREDENTIALS);
-            RestrictedPreference credentialStorageType = (RestrictedPreference) root.findPreference(
-                    KEY_CREDENTIAL_STORAGE_TYPE);
-            credentialStorageType.checkRestrictionAndSetDisabled(
-                    UserManager.DISALLOW_CONFIG_CREDENTIALS);
-            RestrictedPreference installCredentials = (RestrictedPreference) root.findPreference(
-                    KEY_CREDENTIALS_INSTALL);
-            installCredentials.checkRestrictionAndSetDisabled(
-                    UserManager.DISALLOW_CONFIG_CREDENTIALS);
-            mResetCredentials.checkRestrictionAndSetDisabled(
-                    UserManager.DISALLOW_CONFIG_CREDENTIALS);
-
-            final int storageSummaryRes =
-                    mKeyStore.isHardwareBacked() ? R.string.credential_storage_type_hardware
-                            : R.string.credential_storage_type_software;
-            credentialStorageType.setSummary(storageSummaryRes);
-        } else {
-            PreferenceGroup credentialsManager = (PreferenceGroup)
-                    root.findPreference(KEY_CREDENTIALS_MANAGER);
-            credentialsManager.removePreference(root.findPreference(KEY_RESET_CREDENTIALS));
-            credentialsManager.removePreference(root.findPreference(KEY_CREDENTIALS_INSTALL));
-            credentialsManager.removePreference(root.findPreference(KEY_CREDENTIAL_STORAGE_TYPE));
-            credentialsManager.removePreference(root.findPreference(KEY_USER_CREDENTIALS));
-        }
-
 
         // Application install
         PreferenceGroup deviceAdminCategory = (PreferenceGroup)
                 root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
 
         // Advanced Security features
-        PreferenceGroup advancedCategory =
-                (PreferenceGroup)root.findPreference(KEY_ADVANCED_SECURITY);
-        if (advancedCategory != null) {
-            Preference manageAgents = advancedCategory.findPreference(KEY_MANAGE_TRUST_AGENTS);
-            if (manageAgents != null && !mLockPatternUtils.isSecure(MY_USER_ID)) {
-                manageAgents.setEnabled(false);
-                manageAgents.setSummary(R.string.disabled_because_no_backup_security);
-            }
+        Preference manageAgents = root.findPreference(KEY_MANAGE_TRUST_AGENTS);
+        if (manageAgents != null && !mLockPatternUtils.isSecure(MY_USER_ID)) {
+            manageAgents.setEnabled(false);
+            manageAgents.setSummary(R.string.disabled_because_no_backup_security);
         }
 
         // The above preferences come and go based on security state, so we need to update
@@ -448,6 +393,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
             final Preference pref = findPreference(SWITCH_PREFERENCE_KEYS[i]);
             if (pref != null) pref.setOnPreferenceChangeListener(this);
         }
+
+        mLocationcontroller.displayPreference(root);
         return root;
     }
 
@@ -610,9 +557,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
         }
 
-        if (mResetCredentials != null && !mResetCredentials.isDisabledByAdmin()) {
-            mResetCredentials.setEnabled(!mKeyStore.isEmpty());
-        }
+        mLocationcontroller.updateSummary();
     }
 
     private void updateUnificationPreference() {
@@ -836,19 +781,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         lockPatternUtils, managedPasswordProvider, profileUserId)));
             }
 
-            if (um.isAdminUser()) {
-                switch (dpm.getStorageEncryptionStatus()) {
-                    case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
-                        // The device is currently encrypted.
-                        index.add(getSearchResource(context, R.xml.security_settings_encrypted));
-                        break;
-                    case DevicePolicyManager.ENCRYPTION_STATUS_INACTIVE:
-                        // This device supports encryption but isn't encrypted.
-                        index.add(getSearchResource(context, R.xml.security_settings_unencrypted));
-                        break;
-                }
-            }
-
             final SearchIndexableResource sir = getSearchResource(context,
                     SecuritySubSettings.getResIdForLockUnlockSubScreen(context, lockPatternUtils,
                             managedPasswordProvider));
@@ -887,15 +819,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             result.add(data);
 
             final UserManager um = UserManager.get(context);
-            if (!um.isAdminUser()) {
-                int resId = um.isLinkedUser() ?
-                        R.string.profile_info_settings_title : R.string.user_info_settings_title;
-
-                data = new SearchIndexableRaw(context);
-                data.title = res.getString(resId);
-                data.screenTitle = screenTitle;
-                result.add(data);
-            }
 
             // Fingerprint
             final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(context);
@@ -925,20 +848,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     data.screenTitle = screenTitle;
                     result.add(data);
                 }
-            }
-
-            // Credential storage
-            if (!um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
-                KeyStore keyStore = KeyStore.getInstance();
-
-                final int storageSummaryRes = keyStore.isHardwareBacked() ?
-                        R.string.credential_storage_type_hardware :
-                        R.string.credential_storage_type_software;
-
-                data = new SearchIndexableRaw(context);
-                data.title = res.getString(storageSummaryRes);
-                data.screenTitle = screenTitle;
-                result.add(data);
             }
 
             // Advanced
@@ -971,10 +880,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             final TelephonyManager tm = TelephonyManager.from(context);
             if (!um.isAdminUser() || !tm.hasIccCard()) {
                 keys.add(KEY_SIM_LOCK);
-            }
-
-            if (um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
-                keys.add(KEY_CREDENTIALS_MANAGER);
             }
 
             // TrustAgent settings disappear when the user has no primary security.
