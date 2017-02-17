@@ -33,6 +33,7 @@ import android.os.AsyncTask;
 import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -545,7 +546,8 @@ public class DatabaseIndexingManager {
         }
     }
 
-    private void indexFromResource(SQLiteDatabase database, String localeStr,
+    @VisibleForTesting
+    void indexFromResource(SQLiteDatabase database, String localeStr,
             SearchIndexableResource sir, List<String> nonIndexableKeys) {
         final Context context = sir.context;
         XmlResourceParser parser = null;
@@ -573,8 +575,11 @@ public class DatabaseIndexingManager {
             String key = XmlParserUtils.getDataKey(context, attrs);
 
             String title;
+            String headerTitle;
             String summary;
+            String headerSummary;
             String keywords;
+            String headerKeywords;
             String childFragment;
             ResultPayload payload;
             boolean enabled;
@@ -595,13 +600,13 @@ public class DatabaseIndexingManager {
             // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
             // hyphens.
 
-            title = XmlParserUtils.getDataTitle(context, attrs);
-            summary = XmlParserUtils.getDataSummary(context, attrs);
-            keywords = XmlParserUtils.getDataKeywords(context, attrs);
+            headerTitle = XmlParserUtils.getDataTitle(context, attrs);
+            headerSummary = XmlParserUtils.getDataSummary(context, attrs);
+            headerKeywords = XmlParserUtils.getDataKeywords(context, attrs);
             enabled = !nonIndexableKeys.contains(key);
 
-            DatabaseRow.Builder builder = new DatabaseRow.Builder();
-            builder.setLocale(localeStr)
+            DatabaseRow.Builder headerBuilder = new DatabaseRow.Builder();
+            headerBuilder.setLocale(localeStr)
                     .setEntries(null)
                     .setClassName(fragmentName)
                     .setScreenTitle(screenTitle)
@@ -614,8 +619,9 @@ public class DatabaseIndexingManager {
                     .setKey(key)
                     .setUserId(-1 /* default user id */);
 
-            updateOneRowWithFilteredData(database, builder, title, summary,
-                    null /* summary off */, keywords);
+            // Flag for XML headers which a child element's title.
+            boolean isHeaderUnique = true;
+            DatabaseRow.Builder builder;
 
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                     && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
@@ -625,10 +631,14 @@ public class DatabaseIndexingManager {
 
                 nodeName = parser.getName();
 
+                title = XmlParserUtils.getDataTitle(context, attrs);
                 key = XmlParserUtils.getDataKey(context, attrs);
                 enabled = ! nonIndexableKeys.contains(key);
-                title = XmlParserUtils.getDataTitle(context, attrs);
                 keywords = XmlParserUtils.getDataKeywords(context, attrs);
+
+                if (isHeaderUnique && TextUtils.equals(headerTitle, title)) {
+                    isHeaderUnique = false;
+                }
 
                 builder = new DatabaseRow.Builder();
                 builder.setLocale(localeStr)
@@ -673,6 +683,12 @@ public class DatabaseIndexingManager {
                     updateOneRowWithFilteredData(database, builder, title, summaryOn, summaryOff,
                             keywords);
                 }
+            }
+
+            // The xml header's title does not match the title of one of the child settings.
+            if (isHeaderUnique) {
+                updateOneRowWithFilteredData(database, headerBuilder, headerTitle, headerSummary,
+                        null /* summary off */, headerKeywords);
             }
         } catch (XmlPullParserException e) {
             throw new RuntimeException("Error parsing PreferenceScreen", e);
