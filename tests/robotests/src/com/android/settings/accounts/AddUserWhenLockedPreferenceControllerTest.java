@@ -69,6 +69,10 @@ public class AddUserWhenLockedPreferenceControllerTest {
     public void displayPref_NotAdmin_shouldNotDisplay() {
         when(mUserManager.getUserInfo(anyInt())).thenReturn(mUserInfo);
         when(mUserInfo.isAdmin()).thenReturn(false);
+        final RestrictedSwitchPreference preference = mock(RestrictedSwitchPreference.class);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(preference);
+        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
 
         mController.displayPreference(mScreen);
 

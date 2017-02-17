@@ -56,6 +56,8 @@ public class AutoSyncDataPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private Fragment mFragment;
+    @Mock
+    private Preference mPreference;
 
     private Context mContext;
     private AutoSyncDataPreferenceController mController;
@@ -70,6 +72,9 @@ public class AutoSyncDataPreferenceControllerTest {
         mController = new AutoSyncDataPreferenceController(mContext, mFragment);
         mConfirmSyncFragment = new AutoSyncDataPreferenceController.ConfirmAutoSyncChangeFragment();
         mConfirmSyncFragment.setTargetFragment(mFragment, 0);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(mPreference);
+        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
     }
 
     @Test
