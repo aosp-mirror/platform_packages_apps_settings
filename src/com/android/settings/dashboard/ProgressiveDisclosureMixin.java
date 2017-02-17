@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
@@ -218,6 +219,12 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
             final Preference pref = mCollapsedPrefs.get(i);
             if (TextUtils.equals(key, pref.getKey())) {
                 return pref;
+            }
+            if (pref instanceof PreferenceGroup) {
+                final Preference returnedPreference = ((PreferenceGroup)pref).findPreference(key);
+                if (returnedPreference != null) {
+                    return returnedPreference;
+                }
             }
         }
         Log.d(TAG, "Cannot find preference with key " + key);
