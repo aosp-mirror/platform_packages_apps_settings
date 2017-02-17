@@ -42,6 +42,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
+import com.android.settingslib.inputmethod.InputMethodSettingValuesWrapper;
 
 import java.text.Collator;
 import java.util.ArrayList;
