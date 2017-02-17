@@ -46,7 +46,7 @@ public class UsbBackend {
     private UsbPort mPort;
     private UsbPortStatus mPortStatus;
 
-    private boolean mIsUnlocked;
+    private Context mContext;
 
     public UsbBackend(Context context) {
         this(context, new UserRestrictionUtil(context));
@@ -54,11 +54,7 @@ public class UsbBackend {
 
     @VisibleForTesting
     UsbBackend(Context context, UserRestrictionUtil userRestrictionUtil) {
-        Intent intent = context.registerReceiver(null,
-                new IntentFilter(UsbManager.ACTION_USB_STATE));
-        mIsUnlocked = intent == null ?
-                false : intent.getBooleanExtra(UsbManager.USB_DATA_UNLOCKED, false);
-
+        mContext = context;
         mUsbManager = context.getSystemService(UsbManager.class);
 
         mRestricted = userRestrictionUtil.isUsbFileTransferRestricted();
@@ -92,7 +88,7 @@ public class UsbBackend {
     }
 
     public int getUsbDataMode() {
-        if (!mIsUnlocked) {
+        if (!isUsbDataUnlocked()) {
             return MODE_DATA_NONE;
         } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MTP)) {
             return MODE_DATA_MTP;
@@ -102,6 +98,13 @@ public class UsbBackend {
             return MODE_DATA_MIDI;
         }
         return MODE_DATA_NONE; // ...
+    }
+
+    private boolean isUsbDataUnlocked() {
+        Intent intent = mContext.registerReceiver(null,
+            new IntentFilter(UsbManager.ACTION_USB_STATE));
+        return intent == null ?
+            false : intent.getBooleanExtra(UsbManager.USB_DATA_UNLOCKED, false);
     }
 
     private void setUsbFunction(int mode) {
