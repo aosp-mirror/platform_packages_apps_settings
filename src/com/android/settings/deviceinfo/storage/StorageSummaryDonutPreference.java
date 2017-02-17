@@ -34,7 +34,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.DonutView;
 
 import java.util.Locale;
@@ -100,6 +102,9 @@ public class StorageSummaryDonutPreference extends Preference implements View.On
     @Override
     public void onClick(View v) {
         if (v != null && R.id.deletion_helper_button == v.getId()) {
+            Context context = getContext();
+            FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(
+                    context, MetricsEvent.STORAGE_FREE_UP_SPACE_NOW);
             Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
             getContext().startActivity(intent);
         }

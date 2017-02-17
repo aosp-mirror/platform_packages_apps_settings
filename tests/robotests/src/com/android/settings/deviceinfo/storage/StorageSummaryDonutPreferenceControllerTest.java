@@ -18,6 +18,11 @@ package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -26,12 +31,16 @@ import android.provider.Settings;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.Before;
@@ -50,10 +59,15 @@ public class StorageSummaryDonutPreferenceControllerTest {
     private StorageSummaryDonutPreferenceController mController;
     private StorageSummaryDonutPreference mPreference;
     private PreferenceViewHolder mHolder;
+    private FakeFeatureFactory mFakeFeatureFactory;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() throws Exception {
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        FakeFeatureFactory.setupForTest(mContext);
+        mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
         mController = new StorageSummaryDonutPreferenceController(mContext);
         mPreference = new StorageSummaryDonutPreference(mContext);
 
@@ -104,6 +118,17 @@ public class StorageSummaryDonutPreferenceControllerTest {
         mPreference.onBindViewHolder(mHolder);
         TextView asmTextView = (TextView) mHolder.findViewById(R.id.storage_manager_indicator);
         assertThat(asmTextView.getText().toString()).isEqualTo("Storage Manager: OFF");
+    }
+
+    @Test
+    public void testFreeUpSpaceMetricIsTriggered() throws Exception {
+        mPreference.onBindViewHolder(mHolder);
+        Button button = (Button) mHolder.findViewById(R.id.deletion_helper_button);
+
+        mPreference.onClick(button);
+
+        verify(mMetricsFeatureProvider, times(1)).action(
+                any(Context.class), eq(MetricsEvent.STORAGE_FREE_UP_SPACE_NOW));
     }
 
     @Test
