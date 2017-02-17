@@ -71,9 +71,12 @@ public class SerialNumberPreferenceControllerTest {
 
     @Test
     public void testDisplay_noSerial_shouldHidePreference() {
-        when(mScreen.findPreference(anyString())).thenReturn(mock(Preference.class));
-
+        final Preference preference = mock(Preference.class);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(preference);
         mController = new SerialNumberPreferenceController(mContext, null);
+        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
+
         mController.displayPreference(mScreen);
 
         verify(mScreen).removePreference(any(Preference.class));

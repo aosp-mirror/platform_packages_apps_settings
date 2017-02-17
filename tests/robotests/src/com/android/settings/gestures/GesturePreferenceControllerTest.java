@@ -73,8 +73,10 @@ public class GesturePreferenceControllerTest {
     @Test
     public void display_configIsFalse_shouldNotDisplay() {
         mController.mIsPrefAvailable = false;
-        when(mScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn(mock(Preference.class));
+        final Preference preference = mock(Preference.class);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(preference);
+        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
 
         mController.displayPreference(mScreen);
 
@@ -84,7 +86,7 @@ public class GesturePreferenceControllerTest {
     @Test
     public void onStart_shouldStartVideoPreference() {
         final VideoPreference videoPreference = mock(VideoPreference.class);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(videoPreference);
+        when(mScreen.findPreference(mController.getVideoPrefKey())).thenReturn(videoPreference);
         mController.mIsPrefAvailable = true;
 
         mController.displayPreference(mScreen);
@@ -96,7 +98,7 @@ public class GesturePreferenceControllerTest {
     @Test
     public void onStop_shouldStopVideoPreference() {
         final VideoPreference videoPreference = mock(VideoPreference.class);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(videoPreference);
+        when(mScreen.findPreference(mController.getVideoPrefKey())).thenReturn(videoPreference);
         mController.mIsPrefAvailable = true;
 
         mController.displayPreference(mScreen);
@@ -163,12 +165,12 @@ public class GesturePreferenceControllerTest {
 
         @Override
         public String getPreferenceKey() {
-            return null;
+            return "testKey";
         }
 
         @Override
         protected String getVideoPrefKey() {
-            return null;
+            return "videoKey";
         }
 
         @Override

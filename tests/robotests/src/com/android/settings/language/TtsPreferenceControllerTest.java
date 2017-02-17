@@ -84,7 +84,13 @@ public class TtsPreferenceControllerTest {
 
     @Test
     public void displayPreference_notAvailable_shouldRemoveCategory() {
-        when(mScreen.findPreference(anyString())).thenReturn(mock(Preference.class));
+        final Preference preference = mock(Preference.class);
+        final Preference category = mock(Preference.class);
+        when(mScreen.getPreferenceCount()).thenReturn(2);
+        when(mScreen.getPreference(0)).thenReturn(preference);
+        when(mScreen.getPreference(1)).thenReturn(category);
+        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
+        when(category.getKey()).thenReturn("voice_category");
 
         mController.displayPreference(mScreen);
 

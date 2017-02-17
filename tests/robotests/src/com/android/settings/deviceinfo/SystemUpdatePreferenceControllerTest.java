@@ -34,6 +34,7 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -80,6 +81,11 @@ public class SystemUpdatePreferenceControllerTest {
 
     @Test
     public void displayPrefs_nothingAvailable_shouldNotDisplay() {
+        final Preference preference = mock(Preference.class);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(preference);
+        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
+
         mController.displayPreference(mScreen);
 
         verify(mScreen).removePreference(any(Preference.class));
@@ -87,6 +93,11 @@ public class SystemUpdatePreferenceControllerTest {
 
     @Test
     public void displayPrefs_oneAvailable_shouldDisplayOne() {
+        final Preference preference = mock(Preference.class);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(preference);
+        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
+
         when(mContext.getResources().getBoolean(
                 R.bool.config_additional_system_update_setting_enable))
                 .thenReturn(true);

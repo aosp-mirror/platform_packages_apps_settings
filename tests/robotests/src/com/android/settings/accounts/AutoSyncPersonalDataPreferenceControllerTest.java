@@ -52,6 +52,8 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private Fragment mFragment;
+    @Mock
+    private Preference mPreference;
 
     private Context mContext;
     private AutoSyncPersonalDataPreferenceController mController;
@@ -63,6 +65,9 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
         shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
         mContext = shadowContext.getApplicationContext();
         mController = new AutoSyncPersonalDataPreferenceController(mContext, mFragment);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(mPreference);
+        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
     }
 
     @Test

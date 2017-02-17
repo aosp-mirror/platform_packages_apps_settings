@@ -73,8 +73,10 @@ public class PulseNotificationPreferenceControllerTest {
         when(mContext.getResources().
                 getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed))
                 .thenReturn(false);
-        when(mScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn(mock(Preference.class));
+        final Preference preference = mock(Preference.class);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(preference);
+        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
 
         mController.displayPreference(mScreen);
 

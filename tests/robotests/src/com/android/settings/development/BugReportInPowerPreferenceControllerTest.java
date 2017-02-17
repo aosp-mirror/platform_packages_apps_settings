@@ -80,6 +80,8 @@ public class BugReportInPowerPreferenceControllerTest {
     @Test
     public void displayPreference_hasDebugRestriction_shouldRemovePreference() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(true);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(mPreference);
 
         mController.displayPreference(mScreen);
 

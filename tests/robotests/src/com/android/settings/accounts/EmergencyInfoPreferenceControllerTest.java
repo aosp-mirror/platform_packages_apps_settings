@@ -99,6 +99,10 @@ public class EmergencyInfoPreferenceControllerTest {
         when(mContext.getPackageManager().queryIntentActivities(
                 any(Intent.class), anyInt()))
                 .thenReturn(null);
+        final Preference preference = mock(Preference.class);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(preference);
+        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
 
         mController.displayPreference(mScreen);
 

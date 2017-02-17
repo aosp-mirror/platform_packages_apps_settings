@@ -34,6 +34,7 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -88,7 +89,12 @@ public class ManageStoragePreferenceControllerTest {
     }
 
     @Test
-    public void displayPref_prefAvaiable_shouldNotDisplay() {
+    public void displayPref_prefNotAvaiable_shouldNotDisplay() {
+        final Preference preference = mock(Preference.class);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(preference);
+        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
+
         mController.displayPreference(mScreen);
 
         verify(mScreen).removePreference(any(Preference.class));

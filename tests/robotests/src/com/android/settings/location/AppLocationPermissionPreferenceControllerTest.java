@@ -50,6 +50,9 @@ public class AppLocationPermissionPreferenceControllerTest {
         Settings.System.putInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.LOCATION_SETTINGS_LINK_TO_PERMISSIONS_ENABLED,
                 0);
+        when(mScreen.getPreferenceCount()).thenReturn(1);
+        when(mScreen.getPreference(0)).thenReturn(mPreference);
+        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
 
         mController.displayPreference(mScreen);
 
