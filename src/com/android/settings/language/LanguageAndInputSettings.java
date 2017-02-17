@@ -28,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.gestures.AssistGesturePreferenceController;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.DoubleTwistPreferenceController;
@@ -88,7 +89,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
         }
         controllers.add(gameControllerPreferenceController);
         // Gestures
-
+        controllers.add(new AssistGesturePreferenceController(context, lifecycle));
         controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle));
         controllers.add(new DoubleTwistPreferenceController(context, lifecycle));
         controllers.add(new DoubleTapPowerPreferenceController(context, lifecycle));

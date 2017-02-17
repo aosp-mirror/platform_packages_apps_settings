@@ -23,6 +23,7 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
@@ -51,6 +52,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final SurveyFeatureProvider surveyFeatureProvider;
     public final SecurityFeatureProvider securityFeatureProvider;
     public final SuggestionFeatureProvider suggestionsFeatureProvider;
+    public final AssistGestureFeatureProvider assistGestureFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -84,6 +86,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         surveyFeatureProvider = mock(SurveyFeatureProvider.class);
         securityFeatureProvider = mock(SecurityFeatureProvider.class);
         suggestionsFeatureProvider = mock(SuggestionFeatureProvider.class);
+        assistGestureFeatureProvider = mock(AssistGestureFeatureProvider.class);
     }
 
     @Override
@@ -139,5 +142,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public SecurityFeatureProvider getSecurityFeatureProvider() {
         return securityFeatureProvider;
+    }
+
+    @Override
+    public AssistGestureFeatureProvider getAssistGestureFeatureProvider() {
+        return assistGestureFeatureProvider;
     }
 }

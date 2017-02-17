@@ -20,6 +20,13 @@
     settings:keywords="@string/keywords_gesture">
 
     <com.android.settings.gestures.GesturePreference
+        android:key="gesture_assist"
+        android:title="@string/assist_gesture_title"
+        android:summary="@string/assist_gesture_summary"
+        settings:animation="@raw/gesture_assist"
+        settings:preview="@drawable/gesture_assist"/>
+
+    <com.android.settings.gestures.GesturePreference
         android:key="gesture_swipe_down_fingerprint"
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:summary="@string/fingerprint_swipe_for_notifications_summary"

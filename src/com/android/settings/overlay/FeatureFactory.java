@@ -27,6 +27,7 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.search2.SearchFeatureProvider;
@@ -67,6 +68,8 @@ public abstract class FeatureFactory {
         if (DEBUG) Log.d(LOG_TAG, "started " + sFactory.getClass().getSimpleName());
         return sFactory;
     }
+
+    public abstract AssistGestureFeatureProvider getAssistGestureFeatureProvider();
 
     public abstract SuggestionFeatureProvider getSuggestionFeatureProvider();
 
