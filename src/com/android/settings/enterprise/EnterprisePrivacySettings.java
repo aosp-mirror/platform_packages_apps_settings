@@ -65,6 +65,7 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         controllers.add(new GlobalHttpProxyPreferenceController(context));
         controllers.add(new FailedPasswordWipePrimaryUserPreferenceController(context));
         controllers.add(new FailedPasswordWipeManagedProfilePreferenceController(context));
+        controllers.add(new ImePreferenceController(context));
         return controllers;
     }
 

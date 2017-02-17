@@ -216,7 +216,7 @@ public class ChooseAccountActivity extends SettingsPreferenceFragment {
     }
 
     private void addEnterpriseDisclosure() {
-        final CharSequence disclosure = mFeatureProvider.getDeviceOwnerDisclosure(getActivity());
+        final CharSequence disclosure = mFeatureProvider.getDeviceOwnerDisclosure();
         if (disclosure == null) {
             return;
         }

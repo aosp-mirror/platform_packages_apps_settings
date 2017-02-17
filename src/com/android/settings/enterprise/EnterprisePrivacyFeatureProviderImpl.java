@@ -17,8 +17,10 @@
 package com.android.settings.enterprise;
 
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
@@ -39,6 +41,7 @@ import java.util.List;
 
 public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFeatureProvider {
 
+    private final Context mContext;
     private final DevicePolicyManagerWrapper mDpm;
     private final PackageManagerWrapper mPm;
     private final UserManager mUm;
@@ -47,9 +50,10 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
-    public EnterprisePrivacyFeatureProviderImpl(DevicePolicyManagerWrapper dpm,
+    public EnterprisePrivacyFeatureProviderImpl(Context context, DevicePolicyManagerWrapper dpm,
             PackageManagerWrapper pm, UserManager um, ConnectivityManagerWrapper cm,
             Resources resources) {
+        mContext = context.getApplicationContext();
         mDpm = dpm;
         mPm = pm;
         mUm = um;
@@ -80,7 +84,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     }
 
     @Override
-    public CharSequence getDeviceOwnerDisclosure(Context context) {
+    public CharSequence getDeviceOwnerDisclosure() {
         if (!hasDeviceOwner()) {
             return null;
         }
@@ -95,7 +99,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         }
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
-                new EnterprisePrivacySpan(context), 0);
+                new EnterprisePrivacySpan(mContext), 0);
         return disclosure;
     }
 
@@ -154,6 +158,24 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
             return 0;
         }
         return mDpm.getMaximumFailedPasswordsForWipe(profileOwner, userId);
+    }
+
+    @Override
+    public String getImeLabelIfOwnerSet() {
+        if (!mDpm.isCurrentInputMethodSetByOwner()) {
+            return null;
+        }
+        final String packageName = Settings.Secure.getStringForUser(mContext.getContentResolver(),
+                Settings.Secure.DEFAULT_INPUT_METHOD, MY_USER_ID);
+        if (packageName == null) {
+            return null;
+        }
+        try {
+            return mPm.getApplicationInfoAsUser(packageName, 0 /* flags */, MY_USER_ID)
+                    .loadLabel(mPm.getPackageManager()).toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            return null;
+        }
     }
 
     protected static class EnterprisePrivacySpan extends ClickableSpan {

@@ -18,6 +18,7 @@ package com.android.settings.enterprise;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.os.UserHandle;
 import android.support.annotation.Nullable;
 
 public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrapper {
@@ -71,5 +72,10 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     @Override
     public long getLastNetworkLogRetrievalTime() {
         return mDpm.getLastNetworkLogRetrievalTime();
+    }
+
+    @Override
+    public boolean isCurrentInputMethodSetByOwner() {
+        return mDpm.isCurrentInputMethodSetByOwner();
     }
 }

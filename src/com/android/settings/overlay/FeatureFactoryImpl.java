@@ -116,7 +116,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(Context context) {
         if (mEnterprisePrivacyFeatureProvider == null) {
-            mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(
+            mEnterprisePrivacyFeatureProvider = new EnterprisePrivacyFeatureProviderImpl(context,
                     new DevicePolicyManagerWrapperImpl((DevicePolicyManager) context
                             .getSystemService(Context.DEVICE_POLICY_SERVICE)),
                     new PackageManagerWrapperImpl(context.getPackageManager()),
