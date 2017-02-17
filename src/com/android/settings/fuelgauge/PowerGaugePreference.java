@@ -49,13 +49,8 @@ public class PowerGaugePreference extends TintablePreference {
         mIconSize = context.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
     }
 
-    public PowerGaugePreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        final Drawable icon = context.getDrawable(R.drawable.ic_battery_circle);
-
-        setIcon(icon);
-        setWidgetLayoutResource(R.layout.preference_widget_summary);
-        mIconSize = icon.getIntrinsicWidth();
+    public PowerGaugePreference(Context context) {
+        this(context, null, null, null);
     }
 
     public void setContentDescription(String name) {

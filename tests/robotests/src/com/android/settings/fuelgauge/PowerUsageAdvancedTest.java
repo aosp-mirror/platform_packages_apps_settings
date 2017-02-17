@@ -1,7 +1,6 @@
 package com.android.settings.fuelgauge;
 
 import android.os.Process;
-import android.util.SparseArray;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.BatteryStatsHelper;
@@ -17,7 +16,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
@@ -33,7 +34,6 @@ public class PowerUsageAdvancedTest {
     private static final double TOTAL_USAGE = TYPE_APP_USAGE * 2 + TYPE_BLUETOOTH_USAGE
             + TYPE_WIFI_USAGE;
     private static final double PRECISION = 0.001;
-    private static final String STRING_NOT_FOUND = "not_found";
     @Mock
     private BatterySipper mBatterySipper;
     @Mock
@@ -92,7 +92,6 @@ public class PowerUsageAdvancedTest {
         final double percentWifi = TYPE_WIFI_USAGE / TOTAL_USAGE * 100;
         final double percentBluetooth = TYPE_BLUETOOTH_USAGE / TOTAL_USAGE * 100;
 
-        mPowerUsageAdvanced.init();
         List<PowerUsageData> batteryData =
                 mPowerUsageAdvanced.parsePowerUsageData(mBatteryStatsHelper);
         for (PowerUsageData data : batteryData) {
@@ -114,24 +113,24 @@ public class PowerUsageAdvancedTest {
 
     @Test
     public void testInit_ContainsAllUsageType() {
-        mPowerUsageAdvanced.init();
-        final SparseArray<String> array = mPowerUsageAdvanced.mUsageTypeMap;
+        final int[] usageTypeSet = mPowerUsageAdvanced.mUsageTypes;
 
-        assertThat(array.get(UsageType.APP, STRING_NOT_FOUND))
-                .isNotEqualTo(STRING_NOT_FOUND);
-        assertThat(array.get(UsageType.WIFI, STRING_NOT_FOUND))
-                .isNotEqualTo(STRING_NOT_FOUND);
-        assertThat(array.get(UsageType.CELL, STRING_NOT_FOUND))
-                .isNotEqualTo(STRING_NOT_FOUND);
-        assertThat(array.get(UsageType.BLUETOOTH, STRING_NOT_FOUND))
-                .isNotEqualTo(STRING_NOT_FOUND);
-        assertThat(array.get(UsageType.IDLE, STRING_NOT_FOUND))
-                .isNotEqualTo(STRING_NOT_FOUND);
-        assertThat(array.get(UsageType.SERVICE, STRING_NOT_FOUND))
-                .isNotEqualTo(STRING_NOT_FOUND);
-        assertThat(array.get(UsageType.USER, STRING_NOT_FOUND))
-                .isNotEqualTo(STRING_NOT_FOUND);
-        assertThat(array.get(UsageType.SYSTEM, STRING_NOT_FOUND))
-                .isNotEqualTo(STRING_NOT_FOUND);
+        assertThat(usageTypeSet).asList().containsExactly(UsageType.APP, UsageType.WIFI,
+                UsageType.CELL, UsageType.BLUETOOTH, UsageType.IDLE, UsageType.SERVICE,
+                UsageType.USER, UsageType.SYSTEM);
+    }
+
+    @Test
+    public void testPowerUsageData_SortedByUsage() {
+        List<PowerUsageData> dataList = new ArrayList<>();
+
+        dataList.add(new PowerUsageData(UsageType.WIFI, TYPE_WIFI_USAGE));
+        dataList.add(new PowerUsageData(UsageType.BLUETOOTH, TYPE_BLUETOOTH_USAGE));
+        dataList.add(new PowerUsageData(UsageType.APP, TYPE_APP_USAGE));
+        Collections.sort(dataList);
+
+        for (int i = 1, size = dataList.size(); i < size; i++) {
+            assertThat(dataList.get(i - 1).totalPowerMah).isAtLeast(dataList.get(i).totalPowerMah);
+        }
     }
 }
