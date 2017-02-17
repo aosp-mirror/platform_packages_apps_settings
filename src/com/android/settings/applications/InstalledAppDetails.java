@@ -1076,8 +1076,8 @@ public class InstalledAppDetails extends AppInfoBase
         }
         pref = findPreference("default_browser");
         if (pref != null) {
-            pref.setSummary(
-                    DefaultBrowserPreferenceController.isBrowserDefault(mPackageName, context)
+            pref.setSummary(new DefaultBrowserPreferenceController(context)
+                    .isBrowserDefault(mPackageName, mUserId)
                     ? R.string.yes : R.string.no);
         }
         pref = findPreference("default_phone_app");
