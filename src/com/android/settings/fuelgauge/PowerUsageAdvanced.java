@@ -14,6 +14,7 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Process;
 import android.provider.SearchIndexableResource;
@@ -61,6 +62,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             UsageType.APP};
     private BatteryHistoryPreference mHistPref;
     private PreferenceGroup mUsageListGroup;
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private PackageManager mPackageManager;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -68,6 +71,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
         mUsageListGroup = (PreferenceGroup) findPreference(KEY_BATTERY_USAGE_LIST);
+        mPowerUsageFeatureProvider = FeatureFactory.getFactory(getContext())
+                .getPowerUsageFeatureProvider(getContext());
+        mPackageManager = getContext().getPackageManager();
     }
 
     @Override
@@ -133,6 +139,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return UsageType.CELL;
         } else if (uid == Process.SYSTEM_UID || uid == Process.ROOT_UID) {
             return UsageType.SYSTEM;
+        } else if (mPowerUsageFeatureProvider.isTypeService(sipper.mPackages)) {
+            return UsageType.SERVICE;
         } else {
             return UsageType.APP;
         }
@@ -149,6 +157,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
         // Accumulate power usage based on usage type
         for (final BatterySipper sipper : batterySippers) {
+            sipper.mPackages = mPackageManager.getPackagesForUid(sipper.getUid());
             final PowerUsageData usageData = batteryDataMap.get(extractUsageType(sipper));
             usageData.totalPowerMah += sipper.totalPowerMah;
         }
@@ -163,6 +172,16 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         Collections.sort(batteryDataList);
 
         return batteryDataList;
+    }
+
+    @VisibleForTesting
+    void setPackageManager(PackageManager packageManager) {
+        mPackageManager = packageManager;
+    }
+
+    @VisibleForTesting
+    void setPowerUsageFeatureProvider(PowerUsageFeatureProvider provider) {
+        mPowerUsageFeatureProvider = provider;
     }
 
     /**
