@@ -29,7 +29,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
@@ -129,7 +128,7 @@ public class MobilePlanPreferenceController extends PreferenceController impleme
         NetworkInfo ni = mCm.getActiveNetworkInfo();
         if (mTm.hasIccCard() && (ni != null)) {
             // Check for carrier apps that can handle provisioning first
-            Intent provisioningIntent = new Intent(TelephonyIntents.ACTION_CARRIER_SETUP);
+            Intent provisioningIntent = new Intent(Intent.ACTION_CARRIER_SETUP);
             List<String> carrierPackages =
                     mTm.getCarrierPackageNamesForIntent(provisioningIntent);
             if (carrierPackages != null && !carrierPackages.isEmpty()) {
