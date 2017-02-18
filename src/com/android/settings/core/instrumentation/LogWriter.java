@@ -16,6 +16,7 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
+import android.util.Pair;
 
 /**
  * Generic log writer interface.
@@ -55,7 +56,7 @@ public interface LogWriter {
     /**
      * Logs an user action.
      */
-    void action(Context context, int category, String pkg);
+    void action(Context context, int category, String pkg, Pair<Integer, Object>... taggedData);
 
     /**
      * Logs a count.

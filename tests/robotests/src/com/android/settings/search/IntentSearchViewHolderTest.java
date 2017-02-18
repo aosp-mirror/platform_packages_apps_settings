@@ -17,12 +17,15 @@
 
 package com.android.settings.search;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -31,20 +34,23 @@ import com.android.settings.search2.IntentSearchViewHolder;
 import com.android.settings.search2.SearchFragment;
 import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -54,15 +60,21 @@ public class IntentSearchViewHolderTest {
     private static final String TITLE = "title";
     private static final String SUMMARY = "summary";
 
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mContext;
     @Mock
     private SearchFragment mFragment;
+    private FakeFeatureFactory mFeatureFactory;
     private IntentSearchViewHolder mHolder;
     private Drawable mIcon;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+
+        final Context context = RuntimeEnvironment.application;
         View view = LayoutInflater.from(context).inflate(R.layout.search_intent_item, null);
         mHolder = new IntentSearchViewHolder(view);
 
@@ -91,6 +103,10 @@ public class IntentSearchViewHolderTest {
 
         verify(mFragment).onSearchResultClicked();
         verify(mFragment).startActivity(any(Intent.class));
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+                eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT),
+                eq(((IntentPayload)result.payload).intent.getComponent().flattenToString()),
+                any(Pair.class));
     }
 
     @Test
@@ -128,7 +144,8 @@ public class IntentSearchViewHolderTest {
         builder.addTitle(TITLE)
                 .addSummary(SUMMARY)
                 .addRank(1)
-                .addPayload(new IntentPayload(null))
+                .addPayload(new IntentPayload(
+                        new Intent().setComponent(new ComponentName("pkg", "class"))))
                 .addBreadcrumbs(new ArrayList<>())
                 .addIcon(mIcon);
 

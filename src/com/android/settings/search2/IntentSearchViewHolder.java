@@ -15,7 +15,16 @@
  */
 package com.android.settings.search2;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.text.TextUtils;
+import android.util.Pair;
 import android.view.View;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.SettingsActivity;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * ViewHolder for intent based search results.
@@ -23,20 +32,32 @@ import android.view.View;
  */
 public class IntentSearchViewHolder extends SearchViewHolder {
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+
     public IntentSearchViewHolder(View view) {
         super(view);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(view.getContext())
+                .getMetricsFeatureProvider();
     }
 
     @Override
     public void onBind(final SearchFragment fragment, final SearchResult result) {
         super.onBind(fragment, result);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragment.onSearchResultClicked();
-                fragment.startActivity(((IntentPayload) result.payload).intent);
+        itemView.setOnClickListener(v -> {
+            fragment.onSearchResultClicked();
+            final Intent intent = ((IntentPayload) result.payload).intent;
+            final ComponentName cn = intent.getComponent();
+            final Pair<Integer, Object> rank = Pair.create(
+                    MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK, getAdapterPosition());
+            String resultName = intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT);
+            if (TextUtils.isEmpty(resultName) && cn != null) {
+                resultName = cn.flattenToString();
             }
+            mMetricsFeatureProvider.action(v.getContext(),
+                    MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT,
+                    resultName, rank);
+            fragment.startActivity(intent);
         });
     }
 }
