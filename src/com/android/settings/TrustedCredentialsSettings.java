@@ -63,7 +63,6 @@ import android.widget.TextView;
 
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.util.ParcelableString;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.security.cert.CertificateEncodingException;
@@ -125,7 +124,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             mSwitch = withSwitch;
         }
 
-        private List<ParcelableString> getAliases(IKeyChainService service) throws RemoteException {
+        private List<String> getAliases(IKeyChainService service) throws RemoteException {
             switch (this) {
                 case SYSTEM: {
                     return service.getSystemCaAliases().getList();
@@ -689,8 +688,8 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                     final int n = profiles.size();
                     // First we get all aliases for all profiles in order to show progress
                     // correctly. Otherwise this could all be in a single loop.
-                    SparseArray<List<ParcelableString>> aliasesByProfileId = new SparseArray<
-                            List<ParcelableString>>(n);
+                    SparseArray<List<String>> aliasesByProfileId = new SparseArray<
+                            List<String>>(n);
                     int max = 0;
                     int progress = 0;
                     for (int i = 0; i < n; ++i) {
@@ -704,7 +703,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                         // Saving the connection for later use on the certificate dialog.
                         mKeyChainConnectionByProfileId.put(profileId, keyChainConnection);
                         IKeyChainService service = keyChainConnection.getService();
-                        List<ParcelableString> aliases = mTab.getAliases(service);
+                        List<String> aliases = mTab.getAliases(service);
                         if (isCancelled()) {
                             return new SparseArray<List<CertHolder>>();
                         }
@@ -714,7 +713,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                     for (int i = 0; i < n; ++i) {
                         UserHandle profile = profiles.get(i);
                         int profileId = profile.getIdentifier();
-                        List<ParcelableString> aliases = aliasesByProfileId.get(profileId);
+                        List<String> aliases = aliasesByProfileId.get(profileId);
                         if (isCancelled()) {
                             return new SparseArray<List<CertHolder>>();
                         }
@@ -729,7 +728,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                         List<CertHolder> certHolders = new ArrayList<CertHolder>(max);
                         final int aliasMax = aliases.size();
                         for (int j = 0; j < aliasMax; ++j) {
-                            String alias = aliases.get(j).string;
+                            String alias = aliases.get(j);
                             byte[] encodedCertificate = service.getEncodedCaCertificate(alias,
                                     true);
                             X509Certificate cert = KeyChain.toCertificate(encodedCertificate);
