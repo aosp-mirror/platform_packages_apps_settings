@@ -30,7 +30,7 @@ public class SearchResult implements Comparable<SearchResult> {
      * Defines the max rank for a search result to be considered as ranked. Results with ranks
      * higher than this have no guarantee for sorting order.
      */
-    public static final int MAX_RANK  = 9;
+    public static final int MAX_RANK  = 10;
 
     /**
      * The title of the result and main text displayed.

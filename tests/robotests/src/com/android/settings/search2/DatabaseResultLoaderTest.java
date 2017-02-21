@@ -15,7 +15,7 @@
  *
  */
 
-package com.android.settings.search;
+package com.android.settings.search2;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -24,8 +24,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.search2.DatabaseIndexingUtils;
-import com.android.settings.search2.DatabaseResultLoader;
+import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -38,6 +37,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
@@ -200,12 +201,26 @@ public class DatabaseResultLoaderTest {
         assertThat(loader.loadInBackground().size()).isEqualTo(1);
     }
 
+    @Test
+    public void testSpecialCaseTwoWords_FirstWordMatches_RanksHigher() {
+        final String caseOne = "Apple pear";
+        final String caseTwo = "Banana apple";
+        insertSpecialCase(caseOne);
+        insertSpecialCase(caseTwo);
+        loader = new DatabaseResultLoader(mContext, "App", null);
+        List<? extends SearchResult> results = loader.loadInBackground();
+
+        assertThat(results.get(0).title).isEqualTo(caseOne);
+        assertThat(results.get(1).title).isEqualTo(caseTwo);
+        assertThat(results.get(0).rank).isLessThan(results.get(1).rank);
+    }
+
     private void insertSpecialCase(String specialCase) {
         String normalized = DatabaseIndexingUtils.normalizeHyphen(specialCase);
         normalized = DatabaseIndexingUtils.normalizeString(normalized);
 
         ContentValues values = new ContentValues();
-        values.put(IndexDatabaseHelper.IndexColumns.DOCID, 0);
+        values.put(IndexDatabaseHelper.IndexColumns.DOCID, normalized.hashCode());
         values.put(IndexDatabaseHelper.IndexColumns.LOCALE, "en-us");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_RANK, 1);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, specialCase);
