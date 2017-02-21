@@ -67,7 +67,6 @@ public class DatabaseResultLoaderTest {
     private final String summaryOne = "summaryOne";
     private final String summaryTwo = "summaryTwo";
     private final String summaryThree = "summaryThree";
-    private final String summaryFour = "summaryFour";
 
     SQLiteDatabase mDb;
 

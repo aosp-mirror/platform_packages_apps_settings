@@ -13,18 +13,19 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/search_panel"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_gravity="center"
-              android:orientation="vertical">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_panel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/search_panel_list_background">
 
     <LinearLayout android:id="@+id/layout_recent_searches"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_gravity="center"
-                  android:orientation="vertical">
+                  android:orientation="vertical"
+                  android:layout_alignParentTop="true">
 
         <!-- Padding is included in the background -->
         <android.support.v7.widget.RecyclerView android:id="@+id/list_recent_searches"
@@ -36,27 +37,47 @@
                   android:paddingBottom="@dimen/dashboard_padding_bottom"
                   android:scrollbarStyle="outsideOverlay"
                   android:headerDividersEnabled="false"
-                  android:background="@drawable/search_panel_list_background"
                   android:elevation="@dimen/search_panel_elevation"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/layout_results"
                   android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_gravity="center"
+                  android:layout_height="fill_parent"
+                  android:layout_above="@id/feedback_popup"
                   android:orientation="vertical">
 
         <!-- Padding is included in the background -->
         <android.support.v7.widget.RecyclerView android:id="@+id/list_results"
                   android:layout_width="match_parent"
-                  android:layout_height="match_parent"
+                  android:layout_height="wrap_content"
                   android:paddingStart="@dimen/dashboard_padding_start"
                   android:paddingEnd="@dimen/dashboard_padding_end"
                   android:paddingTop="@dimen/dashboard_padding_top"
                   android:paddingBottom="@dimen/dashboard_padding_bottom"
                   android:scrollbarStyle="outsideOverlay"
-                  android:scrollbars="vertical"
-                  android:background="@drawable/search_panel_list_background"/>
+                  android:scrollbars="vertical"/>
+
+        <LinearLayout
+            android:id="@+id/no_results_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+            android:layout_height="112dp"
+            android:layout_width="112dp"
+            android:src="@drawable/no_search_results"/>
+
+            <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="18sp"
+            android:text="@string/search_settings_no_results"
+            android:gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <include layout="@layout/search_feedback"/>
+</RelativeLayout>
