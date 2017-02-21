@@ -26,10 +26,15 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.SparseArray;
 
 import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.applications.UserManagerWrapper;
+import com.android.settingslib.applications.StorageStatsSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,26 +44,39 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class StorageAsyncLoaderTest {
+    private static final int PRIMARY_USER_ID = 0;
+    private static final int SECONDARY_USER_ID = 10;
+
     @Mock
     private StorageStatsSource mSource;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private PackageManagerWrapper mPackageManager;
-    ArrayList<ApplicationInfo> mInfo = new ArrayList<>();
+    @Mock
+    private UserManagerWrapper mUserManager;
+    private List<ApplicationInfo> mInfo = new ArrayList<>();
+    private List<UserInfo> mUsers;
 
     private StorageAsyncLoader mLoader;
+
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mInfo = new ArrayList<>();
-        mLoader = new StorageAsyncLoader(mContext, 1, "id", mSource, mPackageManager);
+        mLoader = new StorageAsyncLoader(mContext, mUserManager, "id", mSource, mPackageManager);
         when(mPackageManager.getInstalledApplicationsAsUser(anyInt(), anyInt())).thenReturn(mInfo);
+        UserInfo info = new UserInfo();
+        mUsers = new ArrayList<>();
+        mUsers.add(info);
+        when(mUserManager.getUsers()).thenReturn(mUsers);
     }
 
     @Test
@@ -66,20 +84,22 @@ public class StorageAsyncLoaderTest {
         addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
         addPackage(1002, 0, 100, 1000, ApplicationInfo.CATEGORY_UNDEFINED);
 
-        StorageAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
-        assertThat(result.gamesSize).isEqualTo(0L);
-        assertThat(result.otherAppsSize).isEqualTo(1111L);
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).gamesSize).isEqualTo(0L);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(1111L);
     }
 
     @Test
     public void testGamesAreFiltered() throws Exception {
         addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_GAME);
 
-        StorageAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
-        assertThat(result.gamesSize).isEqualTo(11L);
-        assertThat(result.otherAppsSize).isEqualTo(0);
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).gamesSize).isEqualTo(11L);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(0);
     }
 
     @Test
@@ -87,18 +107,37 @@ public class StorageAsyncLoaderTest {
         addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
         addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
 
-        StorageAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
-        assertThat(result.otherAppsSize).isEqualTo(11L);
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(11L);
     }
 
     @Test
     public void testCacheIsIgnored() throws Exception {
         addPackage(1001, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
 
-        StorageAsyncLoader.AppsStorageResult result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
-        assertThat(result.otherAppsSize).isEqualTo(11L);
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(11L);
+    }
+
+    @Test
+    public void testMultipleUsers() throws Exception {
+        UserInfo info = new UserInfo();
+        info.id = SECONDARY_USER_ID;
+        mUsers.add(info);
+        when(mSource.getExternalStorageStats(anyString(), eq(UserHandle.SYSTEM)))
+                .thenReturn(new StorageStatsSource.ExternalStorageStats(9, 2, 3, 4));
+        when(mSource.getExternalStorageStats(anyString(), eq(new UserHandle(SECONDARY_USER_ID))))
+                .thenReturn(new StorageStatsSource.ExternalStorageStats(10, 3, 3, 4));
+
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result.get(PRIMARY_USER_ID).externalStats.totalBytes).isEqualTo(9L);
+        assertThat(result.get(SECONDARY_USER_ID).externalStats.totalBytes).isEqualTo(10L);
     }
 
     private void addPackage(int uid, long cacheSize, long codeSize, long dataSize, int category) {

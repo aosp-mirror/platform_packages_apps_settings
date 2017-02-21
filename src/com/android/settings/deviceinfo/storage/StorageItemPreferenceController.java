@@ -17,11 +17,9 @@
 package com.android.settings.deviceinfo.storage;
 
 import android.app.Fragment;
-import android.app.LoaderManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -36,22 +34,21 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
-import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
+import com.android.settingslib.applications.StorageStatsSource;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * StorageItemPreferenceController handles the storage line items which summarize the storage
  * categorization breakdown.
  */
-public class StorageItemPreferenceController extends PreferenceController
-        implements LoaderManager.LoaderCallbacks<StorageAsyncLoader.AppsStorageResult> {
+public class StorageItemPreferenceController extends PreferenceController {
     private static final String TAG = "StorageItemPreference";
 
     private static final String IMAGE_MIME_TYPE = "image/*";
@@ -110,6 +107,9 @@ public class StorageItemPreferenceController extends PreferenceController
         // TODO: Currently, this reflects the existing behavior for these toggles.
         //       After the intermediate views are built, swap them in.
         Intent intent = null;
+        if (preference.getKey() == null) {
+            return false;
+        }
         switch (preference.getKey()) {
             case PHOTO_KEY:
                 intent = getPhotosIntent();
@@ -167,17 +167,7 @@ public class StorageItemPreferenceController extends PreferenceController
         mFilePreference = (StorageItemPreferenceAlternate) screen.findPreference(FILES_KEY);
     }
 
-    @Override
-    public Loader<StorageAsyncLoader.AppsStorageResult> onCreateLoader(int id,
-            Bundle args) {
-        return new StorageAsyncLoader(mContext, UserHandle.myUserId(), mVolume.fsUuid,
-                new StorageStatsSource(mContext),
-                new PackageManagerWrapperImpl(mContext.getPackageManager()));
-    }
-
-    @Override
-    public void onLoadFinished(Loader<StorageAsyncLoader.AppsStorageResult> loader,
-            StorageAsyncLoader.AppsStorageResult data) {
+    public void onLoadFinished(StorageAsyncLoader.AppsStorageResult data) {
         mPhotoPreference.setStorageSize(
                 data.externalStats.imageBytes + data.externalStats.videoBytes);
         mAudioPreference.setStorageSize(data.musicAppsSize + data.externalStats.audioBytes);
@@ -188,10 +178,6 @@ public class StorageItemPreferenceController extends PreferenceController
         long unattributedBytes = data.externalStats.totalBytes - data.externalStats.audioBytes
                 - data.externalStats.videoBytes - data.externalStats.imageBytes;
         mFilePreference.setStorageSize(unattributedBytes);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<StorageAsyncLoader.AppsStorageResult> loader) {
     }
 
     /**
@@ -263,7 +249,7 @@ public class StorageItemPreferenceController extends PreferenceController
     private static long totalValues(StorageMeasurement.MeasurementDetails details, int userId,
             String... keys) {
         long total = 0;
-        HashMap<String, Long> map = details.mediaSize.get(userId);
+        Map<String, Long> map = details.mediaSize.get(userId);
         if (map != null) {
             for (String key : keys) {
                 if (map.containsKey(key)) {

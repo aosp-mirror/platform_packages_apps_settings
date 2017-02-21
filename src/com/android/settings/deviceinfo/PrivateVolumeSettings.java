@@ -228,7 +228,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
         // Add current user and its profiles first
         for (int userIndex = 0; userIndex < userCount; ++userIndex) {
             final UserInfo userInfo = allUsers.get(userIndex);
-            if (isProfileOf(mCurrentUser, userInfo)) {
+            if (Utils.isProfileOf(mCurrentUser, userInfo)) {
                 final PreferenceGroup details = showHeaders ?
                         addCategory(screen, userInfo.name) : screen;
                 addDetailItems(details, showShared, userInfo.id);
@@ -242,7 +242,7 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                     getText(R.string.storage_other_users));
             for (int userIndex = 0; userIndex < userCount; ++userIndex) {
                 final UserInfo userInfo = allUsers.get(userIndex);
-                if (!isProfileOf(mCurrentUser, userInfo)) {
+                if (!Utils.isProfileOf(mCurrentUser, userInfo)) {
                     addItem(otherUsers, /* titleRes */ 0, userInfo.name, userInfo.id);
                 }
             }
@@ -647,12 +647,6 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
 
     private void updatePreference(StorageItemPreference pref, long size) {
         pref.setStorageSize(size, mTotalSize);
-    }
-
-    private boolean isProfileOf(UserInfo user, UserInfo profile) {
-        return user.id == profile.id ||
-                (user.profileGroupId != UserInfo.NO_PROFILE_GROUP_ID
-                && user.profileGroupId == profile.profileGroupId);
     }
 
     private static long totalValues(MeasurementDetails details, int userId, String... keys) {
