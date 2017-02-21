@@ -159,6 +159,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String SHOW_HW_SCREEN_UPDATES_KEY = "show_hw_screen_udpates";
     private static final String SHOW_HW_LAYERS_UPDATES_KEY = "show_hw_layers_udpates";
     private static final String DEBUG_HW_OVERDRAW_KEY = "debug_hw_overdraw";
+    private static final String DEBUG_HW_RENDERER_KEY = "debug_hw_renderer";
     private static final String DEBUG_LAYOUT_KEY = "debug_layout";
     private static final String FORCE_RTL_LAYOUT_KEY = "force_rtl_layout_all_locales";
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
@@ -304,6 +305,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mDebugLayout;
     private SwitchPreference mForceRtlLayout;
     private ListPreference mDebugHwOverdraw;
+    private ListPreference mDebugHwRenderer;
     private ListPreference mLogdSize;
     private ListPreference mLogpersist;
     private ListPreference mUsbConfiguration;
@@ -469,6 +471,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mDebugLayout = findAndInitSwitchPref(DEBUG_LAYOUT_KEY);
         mForceRtlLayout = findAndInitSwitchPref(FORCE_RTL_LAYOUT_KEY);
         mDebugHwOverdraw = addListPreference(DEBUG_HW_OVERDRAW_KEY);
+        mDebugHwRenderer = addListPreference(DEBUG_HW_RENDERER_KEY);
         mWifiDisplayCertification = findAndInitSwitchPref(WIFI_DISPLAY_CERTIFICATION_KEY);
         mWifiVerboseLogging = findAndInitSwitchPref(WIFI_VERBOSE_LOGGING_KEY);
         mWifiAggressiveHandover = findAndInitSwitchPref(WIFI_AGGRESSIVE_HANDOVER_KEY);
@@ -780,6 +783,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateShowHwScreenUpdatesOptions();
         updateShowHwLayersUpdatesOptions();
         updateDebugHwOverdrawOptions();
+        updateDebugHwRendererOptions();
         updateDebugLayoutOptions();
         updateAnimationScaleOptions();
         updateOverlayDisplayDevicesOptions();
@@ -1322,6 +1326,31 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 newValue == null ? "" : newValue.toString());
         pokeSystemProperties();
         updateDebugHwOverdrawOptions();
+    }
+
+    private void updateDebugHwRendererOptions() {
+        String value = SystemProperties.get(ThreadedRenderer.DEBUG_RENDERER_PROPERTY);
+        if (value == null) {
+            value = "";
+        }
+
+        CharSequence[] values = mDebugHwRenderer.getEntryValues();
+        for (int i = 0; i < values.length; i++) {
+            if (value.contentEquals(values[i])) {
+                mDebugHwRenderer.setValueIndex(i);
+                mDebugHwRenderer.setSummary(mDebugHwRenderer.getEntries()[i]);
+                return;
+            }
+        }
+        mDebugHwRenderer.setValueIndex(0);
+        mDebugHwRenderer.setSummary(mDebugHwRenderer.getEntries()[0]);
+    }
+
+    private void writeDebugHwRendererOptions(Object newValue) {
+        SystemProperties.set(ThreadedRenderer.DEBUG_RENDERER_PROPERTY,
+                newValue == null ? "" : newValue.toString());
+        pokeSystemProperties();
+        updateDebugHwRendererOptions();
     }
 
     private void updateDebugLayoutOptions() {
@@ -2528,6 +2557,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return true;
         } else if (preference == mDebugHwOverdraw) {
             writeDebugHwOverdrawOptions(newValue);
+            return true;
+        } else if (preference == mDebugHwRenderer) {
+            writeDebugHwRendererOptions(newValue);
             return true;
         } else if (preference == mShowNonRectClip) {
             writeShowNonRectClipOptions(newValue);
