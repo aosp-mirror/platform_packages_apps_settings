@@ -65,8 +65,7 @@ public class PowerUsageSummaryTest {
     private static final String TIME_LEFT = "2h30min";
     private static final int UID = 123;
     private static final int POWER_MAH = 100;
-    private static final int BATTERY_LEVEL_FULL = 100;
-    private static final int BATTERY_LEVEL_HALF = 50;
+    private static final long REMAINING_TIME_US = 100000;
     private static final double BATTERY_SCREEN_USAGE = 300;
     private static final double BATTERY_SYSTEM_USAGE = 600;
     private static final double PRECISION = 0.001;
@@ -269,25 +268,41 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testUpdatePreference_BatteryFull_DoNotShowSummary() {
-        mBatteryInfo.mBatteryLevel = BATTERY_LEVEL_FULL;
+    public void testUpdatePreference_NoEstimatedTime_DoNotShowSummary() {
+        mBatteryInfo.remainingTimeUs = 0;
         mBatteryInfo.remainingLabel = TIME_LEFT;
         mPowerUsageSummary.updateHeaderPreference(mBatteryInfo);
 
         verify(mSummary1).setVisibility(View.INVISIBLE);
         verify(mSummary2).setVisibility(View.INVISIBLE);
-        verify(mTimeText).setText(mBatteryInfo.remainingLabel);
     }
 
     @Test
-    public void testUpdatePreference_BatteryNotFull_ShowSummary() {
-        mBatteryInfo.mBatteryLevel = BATTERY_LEVEL_HALF;
+    public void testUpdatePreference_HasEstimatedTime_ShowSummary() {
+        mBatteryInfo.remainingTimeUs = REMAINING_TIME_US;
         mBatteryInfo.remainingLabel = TIME_LEFT;
         mPowerUsageSummary.updateHeaderPreference(mBatteryInfo);
 
         verify(mSummary1).setVisibility(View.VISIBLE);
         verify(mSummary2).setVisibility(View.VISIBLE);
-        verify(mTimeText).setText(mBatteryInfo.remainingLabel);
+    }
+
+    @Test
+    public void testUpdatePreference_Charging_ShowChargingTimeLeft() {
+        mBatteryInfo.remainingTimeUs = REMAINING_TIME_US;
+        mBatteryInfo.mDischarging = false;
+
+        mPowerUsageSummary.updateHeaderPreference(mBatteryInfo);
+        verify(mSummary1).setText(R.string.estimated_charging_time_left);
+    }
+
+    @Test
+    public void testUpdatePreference_NotCharging_ShowTimeLeft() {
+        mBatteryInfo.remainingTimeUs = REMAINING_TIME_US;
+        mBatteryInfo.mDischarging = true;
+
+        mPowerUsageSummary.updateHeaderPreference(mBatteryInfo);
+        verify(mSummary1).setText(R.string.estimated_time_left);
     }
 
     public static class TestFragment extends PowerUsageSummary {

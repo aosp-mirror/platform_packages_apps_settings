@@ -60,7 +60,9 @@ public class BatteryHistoryPreference extends Preference {
         view.itemView.setClickable(true);
         view.setDividerAllowedAbove(true);
         ((TextView) view.findViewById(R.id.charge)).setText(mBatteryInfo.batteryPercentString);
-        ((TextView) view.findViewById(R.id.estimation)).setText(mBatteryInfo.remainingLabel);
+        ((TextView) view.findViewById(R.id.estimation)).setText(
+                mBatteryInfo.remainingLabel != null ?
+                        mBatteryInfo.remainingLabel : mBatteryInfo.statusLabel);
         UsageView usageView = (UsageView) view.findViewById(R.id.battery_usage);
         usageView.findViewById(R.id.label_group).setAlpha(.7f);
         mBatteryInfo.bindHistory(usageView);
