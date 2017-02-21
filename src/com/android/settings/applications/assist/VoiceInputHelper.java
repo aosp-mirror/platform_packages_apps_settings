@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.voice;
+package com.android.settings.applications.assist;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -71,7 +71,7 @@ public final class VoiceInputHelper {
 
         @Override
         public int compareTo(Object another) {
-            return labelStr.compareTo(((BaseInfo)another).labelStr);
+            return labelStr.compareTo(((BaseInfo) another).labelStr);
         }
     }
 
@@ -100,15 +100,11 @@ public final class VoiceInputHelper {
         mContext = context;
 
         mAvailableVoiceInteractions = mContext.getPackageManager().queryIntentServices(
-                        new Intent(VoiceInteractionService.SERVICE_INTERFACE),
-                        PackageManager.GET_META_DATA);
+                new Intent(VoiceInteractionService.SERVICE_INTERFACE),
+                PackageManager.GET_META_DATA);
         mAvailableRecognition = mContext.getPackageManager().queryIntentServices(
-                        new Intent(RecognitionService.SERVICE_INTERFACE),
-                        PackageManager.GET_META_DATA);
-    }
-
-    public boolean hasItems() {
-        return mAvailableVoiceInteractions.size() > 0 || mAvailableRecognition.size() > 0;
+                new Intent(RecognitionService.SERVICE_INTERFACE),
+                PackageManager.GET_META_DATA);
     }
 
     public void buildUi() {
@@ -178,7 +174,7 @@ public final class VoiceInputHelper {
                 AttributeSet attrs = Xml.asAttributeSet(parser);
 
                 int type;
-                while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
+                while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                         && type != XmlPullParser.START_TAG) {
                 }
 

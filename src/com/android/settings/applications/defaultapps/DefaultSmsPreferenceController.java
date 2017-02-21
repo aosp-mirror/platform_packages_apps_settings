@@ -47,7 +47,7 @@ public class DefaultSmsPreferenceController extends DefaultAppPreferenceControll
     protected DefaultAppInfo getDefaultAppInfo() {
         final ComponentName app = SmsApplication.getDefaultSmsApplication(mContext, true);
         if (app != null) {
-            return new DefaultAppInfo(mUserId, app, null /* summary */);
+            return new DefaultAppInfo(mUserId, app);
         }
         return null;
     }

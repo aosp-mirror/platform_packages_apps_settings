@@ -54,7 +54,7 @@ public class DefaultAutoFillPicker extends DefaultAppPickerFragment {
                 .queryIntentServices(AUTO_FILL_PROBE, PackageManager.GET_META_DATA);
         for (ResolveInfo info : resolveInfos) {
             candidates.add(new DefaultAppInfo(mUserId, new ComponentName(
-                    info.serviceInfo.packageName, info.serviceInfo.name), null /* summary */));
+                    info.serviceInfo.packageName, info.serviceInfo.name)));
         }
         return candidates;
     }

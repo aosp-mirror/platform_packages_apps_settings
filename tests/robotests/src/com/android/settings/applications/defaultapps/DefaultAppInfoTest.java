@@ -85,7 +85,7 @@ public class DefaultAppInfoTest {
     public void initInfoWithComponent_shouldLoadInfo() {
         when(mComponentName.getPackageName()).thenReturn("com.android.settings");
 
-        mInfo = new DefaultAppInfo(0 /* uid */, mComponentName, null /*summary */);
+        mInfo = new DefaultAppInfo(0 /* uid */, mComponentName);
         mInfo.getKey();
 
         verify(mComponentName).flattenToString();
