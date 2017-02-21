@@ -15,24 +15,26 @@
 -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/wifi_configure_titlebar">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="@string/wifi_configure_titlebar">
 
     <SwitchPreference
             android:key="enable_wifi_wakeup"
             android:title="@string/wifi_wakeup"
+            android:icon="@drawable/ic_settings_home"
             android:summary="@string/wifi_wakeup_summary" />
 
     <SwitchPreference
-        android:key="notify_open_networks"
-        android:title="@string/wifi_notify_open_networks"
-        android:summary="@string/wifi_notify_open_networks_summary" />
+            android:key="notify_open_networks"
+            android:title="@string/wifi_notify_open_networks"
+            android:icon="@drawable/ic_settings_notifications"
+            android:summary="@string/wifi_notify_open_networks_summary" />
 
     <SwitchPreference
-        android:key="wifi_cellular_data_fallback"
-        android:title="@string/wifi_cellular_data_fallback_title"
-        android:summary="@string/wifi_cellular_data_fallback_summary"/>
+            android:key="wifi_cellular_data_fallback"
+            android:title="@string/wifi_cellular_data_fallback_title"
+            android:summary="@string/wifi_cellular_data_fallback_summary"/>
 
     <ListPreference
             android:key="sleep_policy"
@@ -51,10 +53,10 @@
     </Preference>
 
     <Preference
-        android:key="wifi_calling_settings"
-        android:title="@string/wifi_calling_settings_title"
-        android:fragment="com.android.settings.WifiCallingSettings"
-        settings:keywords="@string/keywords_wifi_calling"/>
+            android:key="wifi_calling_settings"
+            android:title="@string/wifi_calling_settings_title"
+            android:fragment="com.android.settings.WifiCallingSettings"
+            settings:keywords="@string/keywords_wifi_calling"/>
 
     <Preference
             android:key="wifi_direct"
