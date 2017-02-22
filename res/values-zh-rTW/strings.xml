@@ -679,8 +679,8 @@
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"休眠狀態仍保持 Wi-Fi 連線"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"休眠時仍保持 Wi-Fi 連線"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"變更設定時發生問題"</string>
-    <string name="wifi_connect_carrier_networks" msgid="8126250792185749891">"連線至行動通訊業者網路"</string>
-    <string name="wifi_connect_carrier_networks_summary" msgid="4812773364191051399">"有可用行動通訊業者網路時連上網路"</string>
+    <string name="wifi_connect_carrier_networks" msgid="8126250792185749891">"連線至電信業者網路"</string>
+    <string name="wifi_connect_carrier_networks_summary" msgid="4812773364191051399">"有可用電信業者網路時連上網路"</string>
     <string name="wifi_suspend_efficiency_title" msgid="2338325886934703895">"提升效能"</string>
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Wi-Fi 最佳化"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"開啟 Wi-Fi 時儘可能節約電池用量"</string>
@@ -872,7 +872,7 @@
     <item msgid="2339246858001475047">"2"</item>
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
-    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"開啟 Wi-Fi 通話功能之後，您的手機可依據您的偏好設定，透過 Wi-Fi 網路或您的行動通訊網路通話 (選擇訊號較強者)。開啟這項功能前，請先與您的行動通訊業者詢問費用與其他細節。"</string>
+    <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"開啟 Wi-Fi 通話功能之後，您的手機可依據您的偏好設定，透過 Wi-Fi 網路或您的行動通訊網路通話 (選擇訊號較強者)。開啟這項功能前，請先與您的電信業者詢問費用與其他細節。"</string>
     <string name="emergency_address_title" msgid="3571902448699714454">"更新緊急地址"</string>
     <string name="emergency_address_summary" msgid="306028701568728126">"如果您使用 Wi-Fi 撥打 119，緊急服務會判定您位在這個地址"</string>
     <string name="home_settings" msgid="212375129455718176">"主螢幕"</string>
@@ -1010,10 +1010,10 @@
     <string name="sim_change_data_message" msgid="1313940695939674633">"要將行動數據連線 SIM 卡從「<xliff:g id="OLD_SIM">%2$s</xliff:g>」改為「<xliff:g id="NEW_SIM">%1$s</xliff:g>」嗎？"</string>
     <string name="sim_preferred_title" msgid="5567909634636045268">"更新慣用的 SIM 卡？"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"「<xliff:g id="NEW_SIM">%1$s</xliff:g>」是裝置中唯一的 SIM 卡。您要使用這張 SIM 卡連線到行動網路、通話及傳送簡訊嗎？"</string>
-    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM 卡的 PIN 碼輸入錯誤，您現在必須請行動通訊業者為裝置解鎖。"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM 卡的 PIN 碼輸入錯誤，您現在必須請電信業者為裝置解鎖。"</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
       <item quantity="other">SIM 卡的 PIN 碼輸入錯誤，您還可以再試 <xliff:g id="NUMBER_1">%d</xliff:g> 次。</item>
-      <item quantity="one">SIM 卡的 PIN 碼輸入錯誤，您還可以再試 <xliff:g id="NUMBER_0">%d</xliff:g> 次。如果仍然失敗，就必須請行動通訊業者為裝置解鎖。</item>
+      <item quantity="one">SIM 卡的 PIN 碼輸入錯誤，您還可以再試 <xliff:g id="NUMBER_0">%d</xliff:g> 次。如果仍然失敗，就必須請電信業者為裝置解鎖。</item>
     </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"SIM 卡 PIN 碼解鎖失敗！"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"平板電腦狀態"</string>
@@ -1046,7 +1046,7 @@
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
     <string name="status_network_type" msgid="952552009117455166">"行動網路類型"</string>
-    <string name="status_latest_area_info" msgid="7222470836568238054">"行動通訊業者資訊"</string>
+    <string name="status_latest_area_info" msgid="7222470836568238054">"電信業者資訊"</string>
     <string name="status_data_state" msgid="4578972321533789767">"行動網路狀態"</string>
     <string name="status_service_state" msgid="2323931627519429503">"服務狀態"</string>
     <string name="status_signal_strength" msgid="3732655254188304547">"訊號強度"</string>
@@ -1298,7 +1298,7 @@
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"變更 Wi‑Fi Assistant？"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"改以「<xliff:g id="NEW_APP">%1$s</xliff:g>」取代「<xliff:g id="CURRENT_APP">%2$s</xliff:g>」管理您的網路連線？"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"使用「<xliff:g id="NEW_APP">%s</xliff:g>」管理您的網路連線？"</string>
-    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"未知的 SIM 卡行動通訊業者"</string>
+    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"未知的 SIM 卡電信業者"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s 沒有任何已知的佈建網站"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"請插入 SIM 卡，並重新啟動裝置"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"請連線至網際網路"</string>
@@ -2168,7 +2168,7 @@
     <string name="select_all" msgid="1562774643280376715">"全選"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"數據用量"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"應用程式數據用量"</string>
-    <string name="data_usage_accounting" msgid="7170028915873577387">"行動通訊業者與裝置的數據計算方式可能有所不同。"</string>
+    <string name="data_usage_accounting" msgid="7170028915873577387">"電信業者與裝置的數據計算方式可能有所不同。"</string>
     <string name="data_usage_app" msgid="4970478397515423303">"應用程式使用情況"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"應用程式資訊"</string>
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"行動數據"</string>
@@ -2232,8 +2232,8 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"設定數據用量警告"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"設定數據用量上限"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"限制數據用量"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="5788774061143636263">"一旦平板電腦達到指定的行動數據上限，將關閉行動數據功能。\n\n由於數據用量是由平板電腦自行計算，而行動通訊業者對用量的計算方式可能有所不同，建議您在設定上限時保留一些空間。"</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3511301596446820549">"一旦手機達到指定的行動數據上限，將關閉行動數據功能。\n\n由於數據用量是由手機自行計算，而行動通訊業者對用量的計算方式可能有所不同，建議您在設定上限時保留一些空間。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="5788774061143636263">"一旦平板電腦達到指定的行動數據上限，將關閉行動數據功能。\n\n由於數據用量是由平板電腦自行計算，而電信業者對用量的計算方式可能有所不同，建議您在設定上限時保留一些空間。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3511301596446820549">"一旦手機達到指定的行動數據上限，將關閉行動數據功能。\n\n由於數據用量是由手機自行計算，而電信業者對用量的計算方式可能有所不同，建議您在設定上限時保留一些空間。"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"限制背景資料？"</string>
     <string name="data_usage_restrict_background" msgid="6264965779074729381">"如果您禁止背景行動數據傳輸，部分應用程式和服務只有在裝置連上 Wi-Fi 網路時才能運作。"</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7954930300449415764">"如果您禁止背景行動數據傳輸，部分應用程式和服務只有在平板電腦連上 Wi-Fi 網路時才能運作。\n\n這項設定適用於這台平板電腦的所有使用者。"</string>
@@ -2244,14 +2244,14 @@
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"已移除的應用程式和使用者"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"已接收 <xliff:g id="RECEIVED">%1$s</xliff:g>，已傳送 <xliff:g id="SENT">%2$s</xliff:g>"</string>
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>：已使用約 <xliff:g id="TOTAL">%1$s</xliff:g>。"</string>
-    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>：根據平板電腦計算，已使用約 <xliff:g id="TOTAL">%1$s</xliff:g>。您的行動通訊業者對於數據用量的計算方式可能會有所不同。"</string>
-    <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>：根據手機計算，已使用約 <xliff:g id="TOTAL">%1$s</xliff:g>。您的行動通訊業者對於數據用量的計算方式可能會有所不同。"</string>
+    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="1925687342154538972">"<xliff:g id="RANGE">%2$s</xliff:g>：根據平板電腦計算，已使用約 <xliff:g id="TOTAL">%1$s</xliff:g>。您的電信業者對於數據用量的計算方式可能會有所不同。"</string>
+    <string name="data_usage_total_during_range_mobile" product="default" msgid="5063981061103812900">"<xliff:g id="RANGE">%2$s</xliff:g>：根據手機計算，已使用約 <xliff:g id="TOTAL">%1$s</xliff:g>。您的電信業者對於數據用量的計算方式可能會有所不同。"</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"網路限制"</string>
     <string name="data_usage_metered_body" msgid="3262343834446126044">"計量付費網路在背景資料受限時等同行動網路。使用這類網路下載大量資料前，應用程式可能會顯示警告訊息。"</string>
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"行動網路"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"計量付費 Wi‑Fi 網路"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"如要選取計量付費網路，請開啟 Wi‑Fi。"</string>
-    <string name="data_usage_disclaimer" msgid="6887858149980673444">"行動通訊業者與裝置的數據計算方式可能有所不同。"</string>
+    <string name="data_usage_disclaimer" msgid="6887858149980673444">"電信業者與裝置的數據計算方式可能有所不同。"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"緊急電話"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"返回通話"</string>
     <string name="vpn_name" msgid="4689699885361002297">"名稱"</string>
@@ -2499,7 +2499,7 @@
     <string name="sim_editor_name" msgid="1722945976676142029">"SIM 卡名稱"</string>
     <string name="sim_name_hint" msgid="7038643345238968930">"輸入 SIM 卡名稱"</string>
     <string name="sim_editor_title" msgid="4034301817366627870">"SIM 卡插槽 %1$d"</string>
-    <string name="sim_editor_carrier" msgid="5684523444677746573">"行動通訊業者"</string>
+    <string name="sim_editor_carrier" msgid="5684523444677746573">"電信業者"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"號碼"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIM 卡顏色"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"選取 SIM 卡"</string>
@@ -2532,7 +2532,7 @@
     <string name="search_results_label" msgid="4163304782363526148">"搜尋結果"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi, wi-fi, 網路連線"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"文字訊息, 傳送文字訊息, 簡訊, 傳送簡訊"</string>
-    <string name="keywords_more_mobile_networks" msgid="1538131503712402851">"行動網路, 行動通訊業者, 無線, 數據, 4G, 3G, 2G, LTE"</string>
+    <string name="keywords_more_mobile_networks" msgid="1538131503712402851">"行動網路, 電信業者, 無線, 數據, 4G, 3G, 2G, LTE"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, 通話, 撥號"</string>
     <string name="keywords_home" msgid="3626170808219458848">"啟動器"</string>
     <string name="keywords_display" msgid="8910345814565493016">"螢幕, 觸控螢幕"</string>
@@ -2888,7 +2888,7 @@
     <string name="usage_access" msgid="5479504953931038165">"使用紀錄存取權"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"允許存取使用紀錄"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"應用程式使用偏好設定"</string>
-    <string name="usage_access_description" msgid="1352111094596416795">"具有使用紀錄存取權的應用程式可以追蹤您使用的其他應用程式與頻率，以及您的行動通訊業者、語言設定和其他詳細資料。"</string>
+    <string name="usage_access_description" msgid="1352111094596416795">"具有使用紀錄存取權的應用程式可以追蹤您使用的其他應用程式與頻率，以及您的電信業者、語言設定和其他詳細資料。"</string>
     <string name="memory_settings_title" msgid="7490541005204254222">"記憶體"</string>
     <string name="memory_details_title" msgid="8542565326053693320">"記憶體詳細資料"</string>
     <string name="always_running" msgid="6042448320077429656">"一律執行 (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -3094,7 +3094,7 @@
     <string name="billing_cycle_summary" msgid="9009106526129293752">"每月週期從當月 <xliff:g id="ID_1">%1$s</xliff:g>日起算"</string>
     <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"每月 <xliff:g id="ID_1">%1$s</xliff:g>日起算"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"網路限制"</string>
-    <string name="operator_warning" msgid="1862988028996859195">"行動通訊業者與裝置的數據計算方式可能有所不同"</string>
+    <string name="operator_warning" msgid="1862988028996859195">"電信業者與裝置的數據計算方式可能有所不同"</string>
     <string name="data_used_template" msgid="3245919669966296505">"已使用 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"設定數據用量警告"</string>
     <string name="data_warning" msgid="209133958008062117">"數據用量警告"</string>
@@ -3253,14 +3253,14 @@
     <string name="gesture_setting_off" msgid="5230169535435881894">"關閉"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"開機載入器已解除鎖定"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"請先連上網際網路"</string>
-    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"請連上網際網路或與您的行動通訊業者聯絡"</string>
-    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"綁定特定行動通訊業者服務的裝置無法使用"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"請連上網際網路或與您的電信業者聯絡"</string>
+    <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"綁定特定電信業者服務的裝置無法使用"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"總共釋出 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次執行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="web_action_enable_title" msgid="8502552575492048305">"在應用程式中開啟連結"</string>
     <string name="web_action_enable_summary" msgid="4679844581193646863">"在支援的應用程式中開啟連結，即使你的裝置未安裝該應用程式也沒問題"</string>
     <string name="web_action_section_title" msgid="806405168097593614">"未安裝的應用程式"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"已安裝的應用程式"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"你的儲存空間目前是由儲存空間管理員管理"</string>
-    <string name="carrier_provisioning" msgid="4398683675591893169">"行動通訊業者佈建資訊"</string>
-    <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"觸發行動通訊業者佈建程序"</string>
+    <string name="carrier_provisioning" msgid="4398683675591893169">"電信業者佈建資訊"</string>
+    <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"觸發電信業者佈建程序"</string>
 </resources>
