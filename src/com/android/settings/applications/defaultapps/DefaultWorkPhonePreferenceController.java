@@ -17,11 +17,28 @@
 package com.android.settings.applications.defaultapps;
 
 import android.content.Context;
+import android.os.UserHandle;
+
+import com.android.settings.Utils;
 
 public class DefaultWorkPhonePreferenceController extends DefaultPhonePreferenceController {
 
+    private final UserHandle mUserHandle;
+
     public DefaultWorkPhonePreferenceController(Context context) {
         super(context);
+        mUserHandle = Utils.getManagedProfile(mUserManager);
+        if (mUserHandle != null) {
+            mUserId = mUserHandle.getIdentifier();
+        }
+    }
+
+    @Override
+    public boolean isAvailable() {
+        if (mUserHandle == null) {
+            return false;
+        }
+        return super.isAvailable();
     }
 
     @Override

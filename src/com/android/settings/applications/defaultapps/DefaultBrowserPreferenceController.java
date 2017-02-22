@@ -39,7 +39,8 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
 
     @Override
     public boolean isAvailable() {
-        return true;
+        final List<ResolveInfo> candidates = getCandidates();
+        return candidates != null && !candidates.isEmpty();
     }
 
     @Override
@@ -61,16 +62,6 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         }
     }
 
-    private String getOnlyAppLabel() {
-        // Resolve that intent and check that the handleAllWebDataURI boolean is set
-        final List<ResolveInfo> list = mPackageManager.queryIntentActivitiesAsUser(BROWSE_PROBE,
-                PackageManager.MATCH_ALL, mUserId);
-        if (list != null && list.size() == 1) {
-            return list.get(0).loadLabel(mPackageManager.getPackageManager()).toString();
-        }
-        return null;
-    }
-
     @Override
     protected DefaultAppInfo getDefaultAppInfo() {
         try {
@@ -79,6 +70,20 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }
+    }
+
+    private List<ResolveInfo> getCandidates() {
+        return mPackageManager.queryIntentActivitiesAsUser(BROWSE_PROBE, PackageManager.MATCH_ALL,
+                mUserId);
+    }
+
+    private String getOnlyAppLabel() {
+        // Resolve that intent and check that the handleAllWebDataURI boolean is set
+        final List<ResolveInfo> list = getCandidates();
+        if (list != null && list.size() == 1) {
+            return list.get(0).loadLabel(mPackageManager.getPackageManager()).toString();
+        }
+        return null;
     }
 
     /**

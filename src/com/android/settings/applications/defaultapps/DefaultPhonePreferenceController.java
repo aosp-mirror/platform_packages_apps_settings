@@ -42,7 +42,11 @@ public class DefaultPhonePreferenceController extends DefaultAppPreferenceContro
         final boolean hasUserRestriction =
                 um.hasUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS);
 
-        return !hasUserRestriction;
+        if (hasUserRestriction) {
+            return false;
+        }
+        final List<String> candidates = getCandidates();
+        return candidates != null && !candidates.isEmpty();
     }
 
     @Override
@@ -58,6 +62,10 @@ public class DefaultPhonePreferenceController extends DefaultAppPreferenceContro
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }
+    }
+
+    private List<String> getCandidates() {
+        return DefaultDialerManager.getInstalledDialerApplications(mContext, mUserId);
     }
 
     public static boolean hasPhonePreference(String pkg, Context context) {
