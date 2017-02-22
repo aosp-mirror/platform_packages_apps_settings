@@ -30,7 +30,7 @@ public abstract class AssistSettingObserver extends ContentObserver {
             Settings.Secure.getUriFor(Settings.Secure.ASSISTANT);
 
     public AssistSettingObserver() {
-        super(new Handler());
+        super(null /* handler */);
     }
 
     public void register(ContentResolver cr, boolean register) {
