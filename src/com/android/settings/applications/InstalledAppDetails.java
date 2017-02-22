@@ -760,6 +760,7 @@ public class InstalledAppDetails extends AppInfoBase
                 MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
         ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
+        Log.d(LOG_TAG, "Stopping package " + pkgName);
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);
         mState.invalidatePackage(pkgName, userId);
@@ -782,10 +783,12 @@ public class InstalledAppDetails extends AppInfoBase
     private void checkForceStop() {
         if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             // User can't force stop device admin.
+            Log.w(LOG_TAG, "User can't force stop device admin");
             updateForceStopButton(false);
-        } else if ((mAppEntry.info.flags&ApplicationInfo.FLAG_STOPPED) == 0) {
+        } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
             // If the app isn't explicitly stopped, then always show the
             // force stop button.
+            Log.w(LOG_TAG, "App is not explicitly stopped");
             updateForceStopButton(true);
         } else {
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
@@ -793,6 +796,8 @@ public class InstalledAppDetails extends AppInfoBase
             intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mAppEntry.info.packageName });
             intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
+            Log.d(LOG_TAG, "Sending broadcast to query restart status for "
+                    + mAppEntry.info.packageName);
             getActivity().sendOrderedBroadcastAsUser(intent, UserHandle.CURRENT, null,
                     mCheckKillProcessesReceiver, null, Activity.RESULT_CANCELED, null, null);
         }
@@ -1302,7 +1307,10 @@ public class InstalledAppDetails extends AppInfoBase
     private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateForceStopButton(getResultCode() != Activity.RESULT_CANCELED);
+            final boolean enabled = getResultCode() != Activity.RESULT_CANCELED;
+            Log.d(LOG_TAG, "Got broadcast response: Restart status for "
+                    + mAppEntry.info.packageName + " " + enabled);
+            updateForceStopButton(enabled);
         }
     };
 
