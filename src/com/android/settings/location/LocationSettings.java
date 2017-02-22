@@ -364,23 +364,9 @@ public class LocationSettings extends LocationSettingsBase
         return R.string.help_url_location_access;
     }
 
-    private static int getLocationString(int mode) {
-        switch (mode) {
-            case android.provider.Settings.Secure.LOCATION_MODE_OFF:
-                return R.string.location_mode_location_off_title;
-            case android.provider.Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
-                return R.string.location_mode_sensors_only_title;
-            case android.provider.Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
-                return R.string.location_mode_battery_saving_title;
-            case android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
-                return R.string.location_mode_high_accuracy_title;
-        }
-        return 0;
-    }
-
     @Override
     public void onModeChanged(int mode, boolean restricted) {
-        int modeDescription = getLocationString(mode);
+        int modeDescription = LocationPreferenceController.getLocationString(mode);
         if (modeDescription != 0) {
             mLocationMode.setSummary(modeDescription);
         }
@@ -489,15 +475,8 @@ public class LocationSettings extends LocationSettingsBase
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                        Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
-                if (mode != Settings.Secure.LOCATION_MODE_OFF) {
-                    mSummaryLoader.setSummary(this, mContext.getString(R.string.location_on_summary,
-                            mContext.getString(getLocationString(mode))));
-                } else {
-                    mSummaryLoader.setSummary(this,
-                            mContext.getString(R.string.location_off_summary));
-                }
+                mSummaryLoader.setSummary(
+                    this, LocationPreferenceController.getLocationSummary(mContext));
             }
         }
     }

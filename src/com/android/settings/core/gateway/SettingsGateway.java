@@ -298,8 +298,6 @@ public class SettingsGateway {
             "com.android.settings.PaymentSettingsDashboardAlias",
             // Home page > Network & Internet
             "com.android.settings.DataUsageDashboardAlias",
-            // Home page > Security
-            "com.android.settings.LocationDashboardAlias",
             // Home page > System
             Settings.LanguageAndInputSettingsActivity.class.getName(),
             "com.android.settings.DateTimeDashboardAlias",

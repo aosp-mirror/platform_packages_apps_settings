@@ -24,6 +24,7 @@ import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
+import com.android.settings.EncryptionAndCredential;
 import com.android.settings.LegalSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.R;
@@ -150,6 +151,8 @@ public final class SearchIndexableResources {
         addIndex(LocationSettings.class, R.xml.location_settings, R.drawable.ic_settings_location);
         addIndex(ScanningSettings.class, R.xml.location_scanning, R.drawable.ic_settings_location);
         addIndex(SecuritySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
+        addIndex(EncryptionAndCredential.class, R.xml.encryption_and_credential,
+                R.drawable.ic_settings_security);
         addIndex(ScreenPinningSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
         addIndex(AccountSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accounts);
         addIndex(UserAndAccountDashboardFragment.class, NO_DATA_RES_ID,
