@@ -72,30 +72,31 @@ import java.util.List;
  */
 public class PowerUsageSummary extends PowerUsageBase {
 
-    private static final boolean DEBUG = false;
-
-    private static final boolean USE_FAKE_DATA = false;
-
     static final String TAG = "PowerUsageSummary";
 
+    private static final boolean DEBUG = false;
+    private static final boolean USE_FAKE_DATA = false;
     private static final String KEY_APP_LIST = "app_list";
     private static final String KEY_BATTERY_HEADER = "battery_header";
+    private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
+    private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 10;
+    private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
+    private static final int SECONDS_IN_HOUR = 60 * 60;
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     private static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
     @VisibleForTesting
     static final int MENU_ADDITIONAL_BATTERY_INFO = Menu.FIRST + 4;
-    private static final int MENU_HELP = Menu.FIRST + 5;
+    @VisibleForTesting
+    static final int MENU_TOGGLE_APPS = Menu.FIRST + 5;
+    private static final int MENU_HELP = Menu.FIRST + 6;
 
+    @VisibleForTesting
+    boolean mShowAllApps = false;
     private LayoutPreference mBatteryLayoutPref;
     private PreferenceGroup mAppListGroup;
 
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
-
-    private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
-    private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 10;
-    private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
-    private static final int SECONDS_IN_HOUR = 60 * 60;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -183,6 +184,11 @@ public class PowerUsageSummary extends PowerUsageBase {
             menu.add(Menu.NONE, MENU_ADDITIONAL_BATTERY_INFO,
                     Menu.NONE, R.string.additional_battery_info);
         }
+        if (powerUsageFeatureProvider.isPowerAccountingToggleEnabled()) {
+            menu.add(Menu.NONE, MENU_TOGGLE_APPS, Menu.NONE,
+                    mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
+        }
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -214,6 +220,11 @@ public class PowerUsageSummary extends PowerUsageBase {
                 startActivity(FeatureFactory.getFactory(getContext())
                         .getPowerUsageFeatureProvider(getContext())
                         .getAdditionalBatteryInfoIntent());
+                return true;
+            case MENU_TOGGLE_APPS:
+                mShowAllApps = !mShowAllApps;
+                item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
+                refreshStats();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -378,7 +389,7 @@ public class PowerUsageSummary extends PowerUsageBase {
             final List<BatterySipper> usageList = getCoalescedUsageList(
                     USE_FAKE_DATA ? getFakeStats() : mStatsHelper.getUsageList());
 
-            final double hiddenPowerMah = removeHiddenBatterySippers(usageList);
+            double hiddenPowerMah = mShowAllApps ? 0 : removeHiddenBatterySippers(usageList);
 
             final int dischargeAmount = USE_FAKE_DATA ? 5000
                     : stats != null ? stats.getDischargeAmount(mStatsType) : 0;

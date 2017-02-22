@@ -47,6 +47,7 @@ import java.util.List;
 
 import static com.android.settings.fuelgauge.PowerUsageBase.MENU_STATS_REFRESH;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
+import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_TOGGLE_APPS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.never;
@@ -80,6 +81,8 @@ public class PowerUsageSummaryTest {
     private MenuItem mRefreshMenu;
     @Mock
     private MenuItem mAdditionalBatteryInfoMenu;
+    @Mock
+    private MenuItem mToggleAppsMenu;
     @Mock
     private MenuInflater mMenuInflater;
     @Mock
@@ -123,6 +126,7 @@ public class PowerUsageSummaryTest {
                 .thenReturn(mRefreshMenu);
         when(mAdditionalBatteryInfoMenu.getItemId())
                 .thenReturn(MENU_ADDITIONAL_BATTERY_INFO);
+        when(mToggleAppsMenu.getItemId()).thenReturn(MENU_TOGGLE_APPS);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(ADDITIONAL_BATTERY_INFO_INTENT);
 
@@ -171,6 +175,23 @@ public class PowerUsageSummaryTest {
 
         verify(mMenu, never()).add(Menu.NONE, MENU_ADDITIONAL_BATTERY_INFO,
                 Menu.NONE, R.string.additional_battery_info);
+    }
+
+    @Test
+    public void testOptionsMenu_ToggleAppsEnabled() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isPowerAccountingToggleEnabled())
+                .thenReturn(true);
+        mFragment.mShowAllApps = false;
+
+        mFragment.onCreateOptionsMenu(mMenu, mMenuInflater);
+
+        verify(mMenu).add(Menu.NONE, MENU_TOGGLE_APPS, Menu.NONE, R.string.show_all_apps);
+    }
+
+    @Test
+    public void testOptionsMenu_ClickToggleAppsMenu_DataChanged() {
+        testToggleAllApps(true);
+        testToggleAllApps(false);
     }
 
     @Test
@@ -305,6 +326,13 @@ public class PowerUsageSummaryTest {
         verify(mSummary1).setText(R.string.estimated_time_left);
     }
 
+    private void testToggleAllApps(final boolean isShowApps) {
+        mFragment.mShowAllApps = isShowApps;
+
+        mFragment.onOptionsItemSelected(mToggleAppsMenu);
+        assertThat(mFragment.mShowAllApps).isEqualTo(!isShowApps);
+    }
+
     public static class TestFragment extends PowerUsageSummary {
 
         private Context mContext;
@@ -324,6 +352,11 @@ public class PowerUsageSummaryTest {
         public void startActivity(Intent intent) {
             mStartActivityCalled = true;
             mStartActivityIntent = intent;
+        }
+
+        @Override
+        protected void refreshStats() {
+            // Leave it empty for toggle apps menu test
         }
     }
 }
