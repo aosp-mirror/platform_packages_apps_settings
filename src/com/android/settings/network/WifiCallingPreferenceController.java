@@ -17,7 +17,6 @@ package com.android.settings.network;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
 import com.android.ims.ImsManager;
@@ -35,13 +34,9 @@ public class WifiCallingPreferenceController extends PreferenceController {
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final Preference pref = screen.findPreference(KEY_WFC_SETTINGS);
-        if (pref != null) {
-            pref.setSummary(WifiCallingSettings.getWfcModeSummary(
-                    mContext, ImsManager.getWfcMode(mContext, mTm.isNetworkRoaming())));
-        }
+    public void updateState(Preference preference) {
+        preference.setSummary(WifiCallingSettings.getWfcModeSummary(
+                mContext, ImsManager.getWfcMode(mContext, mTm.isNetworkRoaming())));
     }
 
     @Override
