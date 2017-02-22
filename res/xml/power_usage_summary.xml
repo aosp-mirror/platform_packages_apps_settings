@@ -55,4 +55,22 @@
         android:key="app_list"
         android:title="@string/power_usage_list_summary"/>
 
+    <PreferenceCategory
+        android:key="device_usage_list"
+        android:title="@string/device_usage_list_summary">
+
+        <Preference
+            android:key="screen_usage"
+            android:title="@string/device_screen_usage"/>
+
+        <Preference
+            android:key="screen_consumption"
+            android:title="@string/device_screen_consumption"/>
+
+        <Preference
+            android:key="cellular_network"
+            android:title="@string/device_cellular_network"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

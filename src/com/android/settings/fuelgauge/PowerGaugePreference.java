@@ -59,7 +59,7 @@ public class PowerGaugePreference extends TintablePreference {
     }
 
     public void setPercent(double percentOfTotal) {
-        mProgress = Utils.formatPercentage((int) (percentOfTotal + 0.5));
+        mProgress = Utils.formatPercentage(percentOfTotal, true);
         notifyChanged();
     }
 

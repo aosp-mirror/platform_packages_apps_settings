@@ -78,10 +78,16 @@ public class PowerUsageSummary extends PowerUsageBase {
     private static final boolean USE_FAKE_DATA = false;
     private static final String KEY_APP_LIST = "app_list";
     private static final String KEY_BATTERY_HEADER = "battery_header";
+
     private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 10;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
     private static final int SECONDS_IN_HOUR = 60 * 60;
+
+    private static final String KEY_SCREEN_USAGE = "screen_usage";
+    private static final String KEY_SCREEN_CONSUMPTION = "screen_consumption";
+    private static final String KEY_CELLULAR_NETWORK = "cellular_network";
+
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     private static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
@@ -93,6 +99,13 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     @VisibleForTesting
     boolean mShowAllApps = false;
+
+    Preference mScreenUsagePref;
+    @VisibleForTesting
+    Preference mScreenConsumptionPref;
+    @VisibleForTesting
+    Preference mCellularNetworkPref;
+
     private LayoutPreference mBatteryLayoutPref;
     private PreferenceGroup mAppListGroup;
 
@@ -105,6 +118,9 @@ public class PowerUsageSummary extends PowerUsageBase {
 
         mBatteryLayoutPref = (LayoutPreference) findPreference(KEY_BATTERY_HEADER);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
+        mScreenUsagePref = findPreference(KEY_SCREEN_USAGE);
+        mScreenConsumptionPref = findPreference(KEY_SCREEN_CONSUMPTION);
+        mCellularNetworkPref = findPreference(KEY_CELLULAR_NETWORK);
     }
 
     @Override
@@ -384,6 +400,11 @@ public class PowerUsageSummary extends PowerUsageBase {
         context.getTheme().resolveAttribute(android.R.attr.colorControlNormal, value, true);
         final int colorControl = context.getColor(value.resourceId);
         final String usedTime = context.getString(R.string.battery_used_for);
+        final int dischargeAmount = USE_FAKE_DATA ? 5000
+                : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
+
+        updateScreenPreference(dischargeAmount);
+        updateCellularPreference(dischargeAmount);
 
         if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP || USE_FAKE_DATA) {
             final List<BatterySipper> usageList = getCoalescedUsageList(
@@ -391,8 +412,6 @@ public class PowerUsageSummary extends PowerUsageBase {
 
             double hiddenPowerMah = mShowAllApps ? 0 : removeHiddenBatterySippers(usageList);
 
-            final int dischargeAmount = USE_FAKE_DATA ? 5000
-                    : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
                 final BatterySipper sipper = usageList.get(i);
@@ -479,6 +498,39 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     @VisibleForTesting
+    BatterySipper findBatterySipperByType(List<BatterySipper> usageList, DrainType type) {
+        for (int i = 0, size = usageList.size(); i < size; i++) {
+            final BatterySipper sipper = usageList.get(i);
+            if (sipper.drainType == type) {
+                return sipper;
+            }
+        }
+        return null;
+    }
+
+    @VisibleForTesting
+    void updateScreenPreference(final int dischargeAmount) {
+        final BatterySipper sipper = findBatterySipperByType(
+                mStatsHelper.getUsageList(), DrainType.SCREEN);
+        final Context context = getContext();
+        final double percentOfTotal = calculatePercentage(sipper.totalPowerMah, dischargeAmount);
+
+        mScreenUsagePref.setSummary(getString(R.string.battery_used_for,
+                Utils.formatElapsedTime(context, sipper.usageTimeMs, false)));
+        mScreenConsumptionPref.setSummary(getString(R.string.battery_overall_usage,
+                Utils.formatPercentage(percentOfTotal, true)));
+    }
+
+    @VisibleForTesting
+    void updateCellularPreference(final int dischargeAmount) {
+        final BatterySipper sipper = findBatterySipperByType(
+                mStatsHelper.getUsageList(), DrainType.CELL);
+        final double percentOfTotal = calculatePercentage(sipper.totalPowerMah, dischargeAmount);
+        mCellularNetworkPref.setSummary(getString(R.string.battery_overall_usage,
+                Utils.formatPercentage(percentOfTotal, true)));
+    }
+
+    @VisibleForTesting
     void updateHeaderPreference(BatteryInfo info) {
         final BatteryMeterView batteryView = (BatteryMeterView) mBatteryLayoutPref
                 .findViewById(R.id.battery_header_icon);
@@ -500,6 +552,11 @@ public class PowerUsageSummary extends PowerUsageBase {
         summary1.setVisibility(visible);
         summary2.setVisibility(visible);
         batteryView.setBatteryInfo(info.mBatteryLevel);
+    }
+
+    @VisibleForTesting
+    double calculatePercentage(double powerUsage, double dischargeAmount) {
+        return ((powerUsage / mStatsHelper.getTotalPower()) * dischargeAmount);
     }
 
     @VisibleForTesting
