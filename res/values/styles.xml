@@ -259,13 +259,13 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="SetupWizardButton.Negative" parent="@android:style/Widget.Material.Button.Borderless.Colored">
-        <item name="android:minWidth">0dp</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:theme">@style/AccentColorHighlightBorderlessButton</item>
+    <style name="SetupWizardButton.Negative" parent="@style/SuwGlifButton.Secondary">
+        <!-- Negative margin to offset for padding of the button itself. We want the label to be
+             aligned with the text above it -->
+        <item name="android:layout_marginStart">-16dp</item>
     </style>
 
-    <style name="SetupWizardButton.Positive" parent="@android:style/Widget.Material.Button.Colored" />
+    <style name="SetupWizardButton.Positive" parent="@style/SuwGlifButton.Primary" />
 
     <style name="AccentColorHighlightBorderlessButton">
         <item name="android:colorControlHighlight">?android:attr/colorAccent</item>
