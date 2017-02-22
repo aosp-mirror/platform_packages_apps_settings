@@ -77,8 +77,6 @@ public class PowerUsageSummaryTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Menu mMenu;
     @Mock
-    private MenuItem mRefreshMenu;
-    @Mock
     private MenuItem mAdditionalBatteryInfoMenu;
     @Mock
     private MenuInflater mMenuInflater;
@@ -116,11 +114,6 @@ public class PowerUsageSummaryTest {
 
         mFragment = new TestFragment(mContext);
 
-        when(mMenu.add(Menu.NONE, MENU_STATS_REFRESH, Menu.NONE,
-                R.string.menu_stats_refresh)
-                .setIcon(com.android.internal.R.drawable.ic_menu_refresh)
-                .setAlphabeticShortcut('r'))
-                .thenReturn(mRefreshMenu);
         when(mAdditionalBatteryInfoMenu.getItemId())
                 .thenReturn(MENU_ADDITIONAL_BATTERY_INFO);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
