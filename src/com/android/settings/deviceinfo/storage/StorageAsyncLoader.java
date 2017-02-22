@@ -26,6 +26,7 @@ import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseArray;
+import android.util.Log;
 
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.UserManagerWrapper;
@@ -42,6 +43,8 @@ import java.util.Map;
 public class StorageAsyncLoader
         extends AsyncLoader<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private UserManagerWrapper mUserManager;
+    private static final String TAG = "StorageAsyncLoader";
+
     private String mUuid;
     private StorageStatsSource mStatsManager;
     private PackageManagerWrapper mPackageManager;
@@ -71,6 +74,7 @@ public class StorageAsyncLoader
     }
 
     private AppsStorageResult getStorageResultForUser(int userId) {
+        Log.d(TAG, "Loading apps");
         List<ApplicationInfo> applicationInfos =
                 mPackageManager.getInstalledApplicationsAsUser(0, userId);
         ArraySet<Integer> seenUid = new ArraySet<>(); // some apps share a uid
@@ -98,7 +102,9 @@ public class StorageAsyncLoader
             }
         }
 
+        Log.d(TAG, "Loading external stats");
         result.externalStats = mStatsManager.getExternalStorageStats(mUuid, UserHandle.of(userId));
+        Log.d(TAG, "Obtaining result completed");
         return result;
     }
 
