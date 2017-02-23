@@ -67,7 +67,7 @@ public class EncryptionAndCredential extends SettingsPreferenceFragment implemen
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.SECURITY;
+        return MetricsEvent.ENCRYPTION_AND_CREDENTIAL;
     }
 
     @Override
