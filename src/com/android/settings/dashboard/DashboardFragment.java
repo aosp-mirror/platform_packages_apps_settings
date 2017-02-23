@@ -157,6 +157,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         Collection<PreferenceController> controllers = mPreferenceControllers.values();
+        // If preference contains intent, log it before handling.
+        mMetricsFeatureProvider.logDashboardStartIntent(
+                getContext(), preference.getIntent(), getMetricsCategory());
         // Give all controllers a chance to handle click.
         for (PreferenceController controller : controllers) {
             if (controller.handlePreferenceTreeClick(preference)) {

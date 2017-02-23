@@ -27,10 +27,8 @@ import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsActivity;
-import com.android.settings.SubSettings;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.CategoryManager;
@@ -154,7 +152,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 intent.setAction(action);
             }
             pref.setOnPreferenceClickListener(preference -> {
-                launchIntentOrSelectProfile(activity, tile, intent);
+                launchIntentOrSelectProfile(activity, tile, intent, sourceMetricsCategory);
                 return true;
             });
         }
@@ -204,37 +202,20 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                         MetricsEvent.DASHBOARD_SUMMARY)
                 .putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        launchIntentOrSelectProfile(activity, tile, intent);
+        launchIntentOrSelectProfile(activity, tile, intent, MetricsEvent.DASHBOARD_SUMMARY);
     }
 
-    private void launchIntentOrSelectProfile(Activity activity, Tile tile, Intent intent) {
+    private void launchIntentOrSelectProfile(Activity activity, Tile tile, Intent intent,
+            int sourceMetricCategory) {
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
         if (tile.userHandle == null) {
-            logStartActivity(intent);
+            mMetricsFeatureProvider.logDashboardStartIntent(mContext, intent, sourceMetricCategory);
             activity.startActivityForResult(intent, 0);
         } else if (tile.userHandle.size() == 1) {
-            logStartActivity(intent);
+            mMetricsFeatureProvider.logDashboardStartIntent(mContext, intent, sourceMetricCategory);
             activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
         } else {
             ProfileSelectDialog.show(activity.getFragmentManager(), tile);
         }
-    }
-
-    private void logStartActivity(Intent intent) {
-        if (intent == null) {
-            return;
-        }
-        final ComponentName cn = intent.getComponent();
-        if (cn == null) {
-            // Not loggable
-            return;
-        } else if (TextUtils.equals(cn.getPackageName(), mContext.getPackageName())) {
-            // Going to a Setting internal page, skip click logging in favor of page's own
-            // visibility logging.
-            return;
-        }
-        mMetricsFeatureProvider.action(mContext,
-                MetricsEvent.ACTION_SETTINGS_TILE_CLICK,
-                cn.flattenToString());
     }
 }
