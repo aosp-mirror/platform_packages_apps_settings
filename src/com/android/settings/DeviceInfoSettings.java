@@ -28,18 +28,19 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.PreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
+import com.android.settings.deviceinfo.ManualPreferenceController;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.DeviceInfoUtils;
@@ -51,13 +52,11 @@ import java.util.List;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-public class DeviceInfoSettings extends SettingsPreferenceFragment implements Indexable {
+public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     private static final String LOG_TAG = "DeviceInfoSettings";
 
-    private static final String KEY_MANUAL = "manual";
     private static final String KEY_REGULATORY_INFO = "regulatory_info";
-    private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     private static final String PROPERTY_SELINUX_STATUS = "ro.build.selinux";
     private static final String KEY_KERNEL_VERSION = "kernel_version";
@@ -73,8 +72,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
 
     long[] mHits = new long[3];
-    private SystemUpdatePreferenceController mSystemUpdatePreferenceController;
-    private AdditionalSystemUpdatePreferenceController mAdditionalSystemUpdatePreferenceController;
     private BuildNumberPreferenceController mBuildNumberPreferenceController;
 
     private UserManager mUm;
@@ -93,6 +90,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (mBuildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
             return;
@@ -103,14 +106,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        final Activity activity = getActivity();
-        mUm = UserManager.get(activity);
-        mAdditionalSystemUpdatePreferenceController =
-                new AdditionalSystemUpdatePreferenceController(activity);
-        mBuildNumberPreferenceController =
-                new BuildNumberPreferenceController(activity, activity, this /* fragment */);
-        getLifecycle().addObserver(mBuildNumberPreferenceController);
-        addPreferencesFromResource(R.xml.device_info_settings);
 
         setStringSummary(KEY_FIRMWARE_VERSION, Build.VERSION.RELEASE);
         findPreference(KEY_FIRMWARE_VERSION).setEnabled(true);
@@ -125,7 +120,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");
         setStringSummary(KEY_DEVICE_MODEL, Build.MODEL + DeviceInfoUtils.getMsvSuffix());
         setValueSummary(KEY_EQUIPMENT_ID, PROPERTY_EQUIPMENT_ID);
-        mBuildNumberPreferenceController.displayPreference(getPreferenceScreen());
         findPreference(KEY_KERNEL_VERSION).setSummary(DeviceInfoUtils.getFormattedKernelVersion());
 
         if (!SELinux.isSELinuxEnabled()) {
@@ -157,16 +151,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         if (TextUtils.isEmpty(DeviceInfoUtils.getFeedbackReporterPackage(getActivity()))) {
             getPreferenceScreen().removePreference(findPreference(KEY_DEVICE_FEEDBACK));
         }
-
-        /*
-         * Settings is a generic app and should not contain any device-specific
-         * info.
-         */
-        displaySystemUpdates(activity);
-        mAdditionalSystemUpdatePreferenceController.displayPreference(getPreferenceScreen());
-
-        // Remove manual entry if none present.
-        removePreferenceIfBoolFalse(KEY_MANUAL, R.bool.config_show_manual);
 
         // Remove regulatory labels if no activity present to handle intent.
         removePreferenceIfActivityMissing(
@@ -222,25 +206,33 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         } else if (preference.getKey().equals(KEY_DEVICE_FEEDBACK)) {
             sendFeedback();
         }
-        if (mSystemUpdatePreferenceController != null) {
-            mSystemUpdatePreferenceController.handlePreferenceTreeClick(preference);
-        }
         return super.onPreferenceTreeClick(preference);
     }
 
-    @VisibleForTesting
-    void displaySystemUpdates(Context context) {
-        if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context).isEnabled()) {
-            mSystemUpdatePreferenceController
-                    = new SystemUpdatePreferenceController(context, UserManager.get(context));
-            mSystemUpdatePreferenceController.displayPreference(getPreferenceScreen());
-        } else {
-            getPreferenceScreen().removePreference(findPreference(KEY_SYSTEM_UPDATE_SETTINGS));
-        }
+    @Override
+    protected String getLogTag() {
+        return LOG_TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.device_info_settings;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        mBuildNumberPreferenceController =
+                new BuildNumberPreferenceController(context, getActivity(), this /* fragment */);
+        getLifecycle().addObserver(mBuildNumberPreferenceController);
+        controllers.add(mBuildNumberPreferenceController);
+        controllers.add(new AdditionalSystemUpdatePreferenceController(context));
+        controllers.add(new ManualPreferenceController(context));
+        return controllers;
     }
 
     private void removePreferenceIfPropertyMissing(PreferenceGroup preferenceGroup,
-            String preference, String property ) {
+            String preference, String property) {
         if (SystemProperties.get(property).equals("")) {
             // Property is missing so remove preference from group
             try {
@@ -256,15 +248,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         final Intent intent = new Intent(action);
         if (getPackageManager().queryIntentActivities(intent, 0).isEmpty()) {
             Preference pref = findPreference(preferenceKey);
-            if (pref != null) {
-                getPreferenceScreen().removePreference(pref);
-            }
-        }
-    }
-
-    private void removePreferenceIfBoolFalse(String preference, int resId) {
-        if (!getResources().getBoolean(resId)) {
-            Preference pref = findPreference(preference);
             if (pref != null) {
                 getPreferenceScreen().removePreference(pref);
             }
