@@ -39,6 +39,8 @@
             android:layout_weight="1.0"
             android:layout_marginStart="?attr/suwMarginSides"
             android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="vertical">
 
             <ImageView
@@ -86,7 +88,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
-                android:layout_weight="1.0">
+                android:layout_weight="1.0"
+                android:clipChildren="false"
+                android:clipToPadding="false">
 
                 <!-- confirm / restart buttons -->
                 <LinearLayout android:id="@+id/buttonContainer"
@@ -94,6 +98,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
                     android:orientation="horizontal">
 
                     <!-- left / top button: skip, or re-try -->

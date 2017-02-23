@@ -36,12 +36,16 @@
             android:layout_height="match_parent"
             android:layout_marginStart="?attr/suwMarginSides"
             android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clipChildren="false"
+                android:clipToPadding="false">
 
                 <ImageView
                     android:id="@+id/suw_layout_icon"
