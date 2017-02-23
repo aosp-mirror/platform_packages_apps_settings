@@ -56,7 +56,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -166,10 +165,11 @@ public class DashboardFeatureProviderImplTest {
         mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.SETTINGS_GESTURES,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
+
+        verify(mFeatureFactory.metricsFeatureProvider).logDashboardStartIntent(
                 any(Context.class),
-                eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
-                eq(tile.intent.getComponent().flattenToString()));
+                any(Intent.class),
+                eq(MetricsProto.MetricsEvent.SETTINGS_GESTURES));
         verify(mActivity)
                 .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
     }
@@ -193,10 +193,10 @@ public class DashboardFeatureProviderImplTest {
         mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.SETTINGS_GESTURES,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
-        verify(mFeatureFactory.metricsFeatureProvider, never()).action(
+        verify(mFeatureFactory.metricsFeatureProvider).logDashboardStartIntent(
                 any(Context.class),
-                eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
-                eq(tile.intent.getComponent().flattenToString()));
+                any(Intent.class),
+                anyInt());
         verify(mActivity)
                 .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
     }

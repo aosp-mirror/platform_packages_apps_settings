@@ -29,9 +29,12 @@ public abstract class InstrumentedFragment extends ObservableFragment implements
 
     protected MetricsFeatureProvider mMetricsFeatureProvider;
 
+    private final VisibilityLoggerMixin mVisibilityLoggerMixin;
+
     public InstrumentedFragment() {
         // Mixin that logs visibility change for activity.
-        getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
+        mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory());
+        getLifecycle().addObserver(mVisibilityLoggerMixin);
         getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
     }
 
@@ -39,5 +42,11 @@ public abstract class InstrumentedFragment extends ObservableFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+    }
+
+    @Override
+    public void onResume() {
+        mVisibilityLoggerMixin.setSourceMetricsCategory(getActivity());
+        super.onResume();
     }
 }
