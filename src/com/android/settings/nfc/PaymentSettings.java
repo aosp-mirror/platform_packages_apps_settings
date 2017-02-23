@@ -19,6 +19,7 @@ package com.android.settings.nfc;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
@@ -45,6 +46,9 @@ import java.util.List;
 
 public class PaymentSettings extends SettingsPreferenceFragment implements Indexable {
     public static final String TAG = "PaymentSettings";
+
+    static final String PAYMENT_KEY = "payment";
+
     private PaymentBackend mPaymentBackend;
 
     @Override
@@ -66,7 +70,7 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
         if (appInfos != null && appInfos.size() > 0) {
             NfcPaymentPreference preference =
                     new NfcPaymentPreference(getPrefContext(), mPaymentBackend);
-            preference.setKey("payment");
+            preference.setKey(PAYMENT_KEY);
             screen.addPreference(preference);
             NfcForegroundPreference foreground = new NfcForegroundPreference(getPrefContext(),
                     mPaymentBackend);
@@ -153,6 +157,15 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
                 data.keywords = res.getString(R.string.keywords_payment_settings);
                 result.add(data);
                 return result;
+            }
+
+            @Override
+            public List<String> getNonIndexableKeys(Context context) {
+                final PackageManager pm = context.getPackageManager();
+                if (pm.hasSystemFeature(PackageManager.FEATURE_NFC)) return null;
+                final List<String> nonVisibleKeys = new ArrayList<String>();
+                nonVisibleKeys.add(PAYMENT_KEY);
+                return nonVisibleKeys;
             }
     };
 }
