@@ -14,6 +14,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     espresso-contrib-nodep \
     espresso-intents-nodep \
     ub-uiautomator \
+    truth-prebuilt \
     legacy-android-test
 
 # Include all test java files.
