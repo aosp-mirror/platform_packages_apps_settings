@@ -152,6 +152,7 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
 
                 // Add fragment title
                 SearchIndexableRaw data = new SearchIndexableRaw(context);
+                data.key = PAYMENT_KEY;
                 data.title = res.getString(R.string.nfc_payment_settings_title);
                 data.screenTitle = res.getString(R.string.nfc_payment_settings_title);
                 data.keywords = res.getString(R.string.keywords_payment_settings);
