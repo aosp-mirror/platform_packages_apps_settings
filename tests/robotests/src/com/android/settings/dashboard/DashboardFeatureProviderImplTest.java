@@ -131,8 +131,7 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void bindPreference_noFragmentMetadata_shouldBindToProfileSelector() {
-        final Preference preference = new Preference(
-                ShadowApplication.getInstance().getApplicationContext());
+        final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
         tile.metaData = new Bundle();
         tile.userHandle = new ArrayList<>();
@@ -141,7 +140,7 @@ public class DashboardFeatureProviderImplTest {
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
 
-        when(mActivity.getSystemService(Context.USER_SERVICE))
+        when(mActivity.getApplicationContext().getSystemService(Context.USER_SERVICE))
                 .thenReturn(mUserManager);
 
         mImpl.bindPreferenceToTile(mActivity, MetricsProto.MetricsEvent.SETTINGS_GESTURES,
@@ -153,8 +152,7 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void bindPreference_noFragmentMetadataSingleUser_shouldBindToDirectLaunchIntent() {
-        final Preference preference = new Preference(
-                ShadowApplication.getInstance().getApplicationContext());
+        final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
         tile.metaData = new Bundle();
         tile.userHandle = new ArrayList<>();
@@ -205,8 +203,7 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void bindPreference_withNullKeyNullPriority_shouldGenerateKeyAndPriority() {
-        final Preference preference = new Preference(
-                ShadowApplication.getInstance().getApplicationContext());
+        final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName("pkg", "class"));
@@ -219,8 +216,7 @@ public class DashboardFeatureProviderImplTest {
 
     @Test
     public void bindPreference_withNullKeyTileKey_shouldUseTileKey() {
-        final Preference preference = new Preference(
-                ShadowApplication.getInstance().getApplicationContext());
+        final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
         tile.key = "key";
         tile.intent = new Intent();
@@ -234,8 +230,7 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_withBaseOrder_shouldOffsetPriority() {
         final int baseOrder = 100;
-        final Preference preference = new Preference(
-                ShadowApplication.getInstance().getApplicationContext());
+        final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new Tile();
         tile.metaData = new Bundle();
         tile.priority = 10;
