@@ -252,7 +252,8 @@ public class TetherService extends Service {
         Intent intent = new Intent(provisionAction);
         int type = mCurrentTethers.get(index);
         intent.putExtra(TETHER_CHOICE, type);
-        intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+        intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND
+                | Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
 
         return intent;
     }
