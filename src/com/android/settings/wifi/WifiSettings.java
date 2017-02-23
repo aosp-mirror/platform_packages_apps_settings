@@ -194,7 +194,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         mConnectedAccessPointPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
-        mConnectedAccessPointPreferenceCategory.setVisible(false); // initially hidden
 
         mAccessPointsPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_ACCESS_POINTS);
@@ -799,6 +798,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (pref == null) {
             pref = createLongPressActionPointPreference(connectedAp);
         }
+        pref.refresh();
         mConnectedAccessPointPreferenceCategory.addPreference(pref);
         mConnectedAccessPointPreferenceCategory.setVisible(true);
     }
