@@ -19,15 +19,17 @@ import android.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 import android.text.TextUtils;
+
+import com.android.settings.R;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-import com.android.settings.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Description about data list used in the DashboardAdapter. In the data list each item can be
@@ -44,7 +46,6 @@ public class DashboardData {
 
     // id namespace for different type of items.
     private static final int NS_SPACER = 0;
-    private static final int NS_SUGGESTION = 1000;
     private static final int NS_ITEMS = 2000;
     private static final int NS_CONDITION = 3000;
 
@@ -171,6 +172,7 @@ public class DashboardData {
      * {@link #DEFAULT_SUGGESTION_COUNT}.
      *
      * When in expanded mode, display all the suggestions.
+     *
      * @return the count of suggestions to display
      */
     public int getDisplayableSuggestionCount() {
@@ -178,7 +180,7 @@ public class DashboardData {
         return mSuggestionMode == SUGGESTION_MODE_DEFAULT
                 ? Math.min(DEFAULT_SUGGESTION_COUNT, suggestionSize)
                 : mSuggestionMode == SUGGESTION_MODE_EXPANDED
-                ? suggestionSize : 0;
+                        ? suggestionSize : 0;
     }
 
     public boolean hasMoreSuggestions() {
@@ -198,14 +200,25 @@ public class DashboardData {
      * id stored in {@link Item} is shifted by {@paramref nameSpace}. This is a
      * simple way to keep the id stable.
      *
-     * @param object maybe {@link Condition}, {@link Tile}, {@link DashboardCategory} or null
-     * @param type type of the item, and value is the layout id
-     * @param add  flag about whether to add item into list
+     * @param object    maybe {@link Condition}, {@link Tile}, {@link DashboardCategory} or null
+     * @param type      type of the item, and value is the layout id
+     * @param add       flag about whether to add item into list
      * @param nameSpace namespace based on the type
      */
     private void countItem(Object object, int type, boolean add, int nameSpace) {
         if (add) {
             mItems.add(new Item(object, type, mId + nameSpace, object == mExpandedCondition));
+        }
+        mId++;
+    }
+
+    /**
+     * A special count item method for just suggestions. Id is calculated using suggestion hash
+     * instead of the position of suggestion in list. This is a more stable id than countItem.
+     */
+    private void countSuggestion(Tile tile, boolean add) {
+        if (add) {
+            mItems.add(new Item(tile, R.layout.suggestion_tile, Objects.hash(tile.title), false));
         }
         mId++;
     }
@@ -232,8 +245,7 @@ public class DashboardData {
         if (mSuggestions != null) {
             int maxSuggestions = getDisplayableSuggestionCount();
             for (int i = 0; i < mSuggestions.size(); i++) {
-                countItem(mSuggestions.get(i), R.layout.suggestion_tile, i < maxSuggestions,
-                        NS_SUGGESTION);
+                countSuggestion(mSuggestions.get(i), i < maxSuggestions);
             }
         }
         resetCount();
@@ -276,7 +288,6 @@ public class DashboardData {
         private List<DashboardCategory> mCategories;
         private List<Condition> mConditions;
         private List<Tile> mSuggestions;
-
 
         public Builder() {
         }
@@ -359,7 +370,7 @@ public class DashboardData {
                 return "condition"; // return anything but null to mark the payload
             }
             return null;
-         }
+        }
     }
 
     /**
@@ -433,11 +444,11 @@ public class DashboardData {
             switch (type) {
                 case TYPE_DASHBOARD_CATEGORY:
                     // Only check title for dashboard category
-                    return TextUtils.equals(((DashboardCategory)entity).title,
+                    return TextUtils.equals(((DashboardCategory) entity).title,
                             ((DashboardCategory) targetItem.entity).title);
                 case TYPE_DASHBOARD_TILE:
-                    final Tile localTile = (Tile)entity;
-                    final Tile targetTile = (Tile)targetItem.entity;
+                    final Tile localTile = (Tile) entity;
+                    final Tile targetTile = (Tile) targetItem.entity;
 
                     // Only check title and summary for dashboard tile
                     return TextUtils.equals(localTile.title, targetTile.title)

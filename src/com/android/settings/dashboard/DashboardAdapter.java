@@ -17,21 +17,17 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -43,18 +39,17 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
+import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
-        implements SummaryLoader.SummaryConsumer {
+        implements SummaryLoader.SummaryConsumer, SuggestionDismissController.Callback {
     public static final String TAG = "DashboardAdapter";
     private static final String STATE_SUGGESTION_LIST = "suggestion_list";
     private static final String STATE_CATEGORY_LIST = "category_list";
@@ -66,7 +61,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final DashboardFeatureProvider mDashboardFeatureProvider;
     private final ArrayList<String> mSuggestionsShownLogged;
-    private SuggestionParser mSuggestionParser;
     private boolean mFirstFrameDrawn;
 
     @VisibleForTesting
@@ -115,7 +109,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mDashboardFeatureProvider = FeatureFactory.getFactory(context)
                 .getDashboardFeatureProvider(context);
         mCache = new IconCache(context);
-        mSuggestionParser = parser;
 
         setHasStableIds(true);
 
@@ -218,22 +211,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
     }
 
-    // TODO: move this method to SuggestionParser or some other util class
-    public void disableSuggestion(Tile suggestion) {
-        if (mSuggestionParser == null) {
-            return;
-        }
-        boolean isSmartSuggestionEnabled = FeatureFactory.getFactory(mContext)
-                .getSuggestionFeatureProvider(mContext).isSmartSuggestionEnabled(mContext);
-        if (mSuggestionParser.dismissSuggestion(suggestion, isSmartSuggestionEnabled)) {
-            mContext.getPackageManager().setComponentEnabledSetting(
-                    suggestion.intent.getComponent(),
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
-            mSuggestionParser.markCategoryDone(suggestion.category);
-        }
-    }
-
     @Override
     public DashboardItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new DashboardItemHolder(LayoutInflater.from(parent.getContext()).inflate(
@@ -277,13 +254,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                         ((SettingsActivity) mContext).startSuggestion(suggestion.intent);
                     }
                 });
-                holder.itemView.findViewById(R.id.overflow).setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                showRemoveOption(v, suggestion);
-                            }
-                        });
                 break;
             case R.layout.condition_card:
                 final boolean isExpanded = mDashboardData.getItemEntityByPosition(position)
@@ -379,30 +349,24 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         notifyDashboardDataChanged(prevData);
     }
 
-    private void showRemoveOption(View v, final Tile suggestion) {
-        final PopupMenu popup = new PopupMenu(
-                new ContextThemeWrapper(mContext, R.style.Theme_AppCompat_DayNight), v);
-        popup.getMenu().add(R.string.suggestion_remove).setOnMenuItemClickListener(
-                new MenuItem.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        mMetricsFeatureProvider.action(
-                                mContext, MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
-                                DashboardAdapter.getSuggestionIdentifier(mContext, suggestion));
-                        disableSuggestion(suggestion);
-                        List<Tile> suggestions = mDashboardData.getSuggestions();
-                        suggestions.remove(suggestion);
+    @Override
+    public Tile getSuggestionForPosition(int position) {
+        return (Tile) mDashboardData.getItemEntityByPosition(position);
+    }
 
-                        DashboardData prevData = mDashboardData;
-                        mDashboardData = new DashboardData.Builder(prevData)
-                                .setSuggestions(suggestions)
-                                .build();
-                        notifyDashboardDataChanged(prevData);
+    @Override
+    public void onSuggestionDismissed(Tile suggestion) {
+        final List<Tile> suggestions = mDashboardData.getSuggestions();
+        if (suggestions == null) {
+            return;
+        }
+        suggestions.remove(suggestion);
 
-                        return true;
-                    }
-                });
-        popup.show();
+        final DashboardData prevData = mDashboardData;
+        mDashboardData = new DashboardData.Builder(prevData)
+                .setSuggestions(suggestions)
+                .build();
+        notifyDashboardDataChanged(prevData);
     }
 
     @VisibleForTesting
@@ -513,9 +477,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
         public DashboardItemHolder(View itemView) {
             super(itemView);
-            icon = (ImageView) itemView.findViewById(android.R.id.icon);
-            title = (TextView) itemView.findViewById(android.R.id.title);
-            summary = (TextView) itemView.findViewById(android.R.id.summary);
+            icon = itemView.findViewById(android.R.id.icon);
+            title = itemView.findViewById(android.R.id.title);
+            summary = itemView.findViewById(android.R.id.summary);
         }
     }
 }
