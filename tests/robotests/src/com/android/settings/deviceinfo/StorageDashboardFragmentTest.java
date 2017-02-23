@@ -79,11 +79,4 @@ public class StorageDashboardFragmentTest {
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
     }
-
-    @Test
-    public void testInitializeVolumeDoesntBreakOnNullVolume() {
-        VolumeInfo info = new VolumeInfo("id", 0, new DiskInfo("id", 0), "");
-        when(mStorageManager.findVolumeById(anyString())).thenReturn(info);
-        mFragment.initializeVolume(mStorageManager, new Bundle());
-    }
 }

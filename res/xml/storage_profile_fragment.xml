@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
+<!-- Copyright (C) 2017 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,52 +14,28 @@
      limitations under the License.
 -->
 
+<!-- Layout for the storage breakdown for a profile of the primary user. -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/storage_settings"
-    android:orderingFromXml="false">
-    <com.android.settings.deviceinfo.storage.StorageSummaryDonutPreference
-        android:key="pref_summary"
-        android:order="0" />
+    android:title="@string/storage_settings">
     <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
         android:key="pref_photos_videos"
-        android:title="@string/storage_photos_videos"
-        android:order="1" >
+        android:title="@string/storage_photos_videos">
     </com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate>
     <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
         android:key="pref_music_audio"
-        android:title="@string/storage_music_audio"
-        android:order="2" >
+        android:title="@string/storage_music_audio">
     </com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate>
     <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
         android:key="pref_games"
-        android:title="@string/storage_games"
-        android:order="3" >
+        android:title="@string/storage_games">
     </com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate>
     <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
         android:key="pref_other_apps"
-        android:title="@string/storage_other_apps"
-        android:order="4" >
+        android:title="@string/storage_other_apps">
     </com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate>
     <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
         android:key="pref_files"
-        android:title="@string/storage_files"
-        android:order="5" >
+        android:title="@string/storage_files">
     </com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate>
-    <com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate
-        android:key="pref_system"
-        android:title="@string/storage_detail_system"
-        android:order="100" >
-    </com.android.settings.deviceinfo.storage.StorageItemPreferenceAlternate>
-    <PreferenceCategory
-        android:key="pref_secondary_users"
-        android:title="@string/storage_other_users"
-        android:order="200" />
-    <Preference
-        android:key="manage_storage"
-        android:title="@string/storage_menu_manage"
-        android:icon="@drawable/ic_settings_storage"
-        android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
-        android:order="300" >
-    </Preference>
 </PreferenceScreen>

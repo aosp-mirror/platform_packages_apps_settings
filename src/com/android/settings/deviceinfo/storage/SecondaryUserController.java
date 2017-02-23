@@ -23,6 +23,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.SparseArray;
 
 import com.android.settings.Utils;
 import com.android.settings.applications.UserManagerWrapper;
@@ -35,10 +36,12 @@ import java.util.List;
  * SecondaryUserController controls the preferences on the Storage screen which had to do with
  * secondary users.
  */
-public class SecondaryUserController extends PreferenceController {
+public class SecondaryUserController extends PreferenceController implements
+        StorageAsyncLoader.ResultHandler {
     // PreferenceGroupKey to try to add our preference onto.
     private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";
     private static final String PREFERENCE_KEY_BASE = "pref_user_";
+    private static final int USER_PROFILE_INSERTION_LOCATION = 6;
     private static final int SIZE_NOT_SET = -1;
 
     private @NonNull UserInfo mUser;
@@ -59,7 +62,13 @@ public class SecondaryUserController extends PreferenceController {
         List<UserInfo> infos = userManager.getUsers();
         for (int i = 0, size = infos.size(); i < size; i++) {
             UserInfo info = infos.get(i);
+            if (info.equals(primaryUser)) {
+                continue;
+            }
+
             if (info == null || Utils.isProfileOf(primaryUser, info)) {
+                controllers.add(new UserProfileController(context, info,
+                        USER_PROFILE_INSERTION_LOCATION));
                 continue;
             }
 
@@ -128,6 +137,14 @@ public class SecondaryUserController extends PreferenceController {
         mSize = size;
         if (mStoragePreference != null) {
             mStoragePreference.setStorageSize(mSize);
+        }
+    }
+
+    public void handleResult(SparseArray<StorageAsyncLoader.AppsStorageResult> stats) {
+        int userId = getUser().id;
+        StorageAsyncLoader.AppsStorageResult result = stats.get(userId);
+        if (result != null) {
+            setSize(result.externalStats.totalBytes);
         }
     }
 

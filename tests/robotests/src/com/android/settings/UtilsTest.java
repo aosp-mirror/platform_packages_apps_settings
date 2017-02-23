@@ -1,13 +1,25 @@
 package com.android.settings;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.os.storage.DiskInfo;
+import android.os.storage.StorageManager;
+import android.os.storage.VolumeInfo;
 import android.text.format.DateUtils;
-import java.net.InetAddress;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,9 +28,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import java.net.InetAddress;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -96,5 +106,14 @@ public class UtilsTest {
         final String expectedTime = "2d 4h 15m";
 
         assertThat(Utils.formatElapsedTime(mContext, testMillis, false)).isEqualTo(expectedTime);
+    }
+
+    @Test
+    public void testInitializeVolumeDoesntBreakOnNullVolume() {
+        VolumeInfo info = new VolumeInfo("id", 0, new DiskInfo("id", 0), "");
+        StorageManager storageManager = mock(StorageManager.class, RETURNS_DEEP_STUBS);
+        when(storageManager.findVolumeById(anyString())).thenReturn(info);
+
+        Utils.maybeInitializeVolume(storageManager, new Bundle());
     }
 }
