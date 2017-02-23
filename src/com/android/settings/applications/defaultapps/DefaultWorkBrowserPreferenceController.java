@@ -23,21 +23,26 @@ import com.android.settings.Utils;
 
 public class DefaultWorkBrowserPreferenceController extends DefaultBrowserPreferenceController {
 
+    private final UserHandle mUserHandle;
+
     public DefaultWorkBrowserPreferenceController(Context context) {
         super(context);
-        final UserHandle managedProfile = Utils.getManagedProfile(mUserManager);
-        if (managedProfile != null) {
-            mUserId = managedProfile.getIdentifier();
+        mUserHandle = Utils.getManagedProfile(mUserManager);
+        if (mUserHandle != null) {
+            mUserId = mUserHandle.getIdentifier();
         }
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return Utils.getManagedProfile(mUserManager) != null;
     }
 
     @Override
     public String getPreferenceKey() {
         return "work_default_browser";
+    }
+
+    @Override
+    public boolean isAvailable() {
+        if (mUserHandle == null) {
+            return false;
+        }
+        return super.isAvailable();
     }
 }

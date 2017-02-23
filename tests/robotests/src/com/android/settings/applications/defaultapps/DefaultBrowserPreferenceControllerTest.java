@@ -36,7 +36,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -68,7 +70,18 @@ public class DefaultBrowserPreferenceControllerTest {
     }
 
     @Test
-    public void isAlwaysAvailable() {
+    public void isAvailable_noBrowser_shouldReturnFalse() {
+        when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(null);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_hasBrowser_shouldReturnTrue() {
+        final List<ResolveInfo> candidates = new ArrayList<>();
+        candidates.add(new ResolveInfo());
+        when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(candidates);
         assertThat(mController.isAvailable()).isTrue();
     }
 
