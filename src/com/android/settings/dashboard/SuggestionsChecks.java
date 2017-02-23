@@ -30,6 +30,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 
 import com.android.ims.ImsManager;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.Settings.FingerprintEnrollSuggestionActivity;
 import com.android.settings.Settings.FingerprintSuggestionActivity;
 import com.android.settings.Settings.ScreenLockSuggestionActivity;
@@ -38,7 +39,6 @@ import com.android.settings.Settings.ZenModeAutomationSuggestionActivity;
 import com.android.settings.Utils;
 import com.android.settings.WallpaperSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.suggestions.SuggestionFeatureProvider;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.Collection;

@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings.suggestions;
+package com.android.settings.dashboard.suggestions;
 
 import java.util.ArrayList;
 import java.util.Arrays;

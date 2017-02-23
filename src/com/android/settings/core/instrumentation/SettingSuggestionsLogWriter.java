@@ -17,12 +17,10 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
-import android.metrics.LogMaker;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.logging.MetricsLogger;
-import com.android.settings.suggestions.EventStore;
+import com.android.settings.dashboard.suggestions.EventStore;
 
 /**
  * {@link LogWriter} that writes setting suggestion related logs.
