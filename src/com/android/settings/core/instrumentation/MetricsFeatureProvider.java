@@ -118,6 +118,7 @@ public class MetricsFeatureProvider {
             }
             action(context, MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK, action,
                     Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, sourceMetricsCategory));
+            return;
         } else if (TextUtils.equals(cn.getPackageName(), context.getPackageName())) {
             // Going to a Setting internal page, skip click logging in favor of page's own
             // visibility logging.
