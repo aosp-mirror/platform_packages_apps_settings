@@ -17,38 +17,44 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Intent;
+import com.android.internal.os.BatterySipper;
 
 /**
  * Feature Provider used in power usage
  */
 public interface PowerUsageFeatureProvider {
-  /**
-   * Check whether location setting is enabled
-   */
-  boolean isLocationSettingEnabled(String[] packages);
+    /**
+     * Check whether location setting is enabled
+     */
+    boolean isLocationSettingEnabled(String[] packages);
 
-  /**
-   * Check whether additional battery info feature is enabled.
-   */
-  boolean isAdditionalBatteryInfoEnabled();
+    /**
+     * Check whether additional battery info feature is enabled.
+     */
+    boolean isAdditionalBatteryInfoEnabled();
 
-  /**
-   * Gets an {@link Intent} to show additional battery info.
-   */
-  Intent getAdditionalBatteryInfoIntent();
+    /**
+     * Gets an {@link Intent} to show additional battery info.
+     */
+    Intent getAdditionalBatteryInfoIntent();
 
-  /**
-   * Check whether advanced ui is enabled
-   */
-  boolean isAdvancedUiEnabled();
+    /**
+     * Check whether advanced ui is enabled
+     */
+    boolean isAdvancedUiEnabled();
 
-  /**
-   * Check whether it is type service
-   */
-  boolean isTypeService(String[] packages);
+    /**
+     * Check whether it is type service
+     */
+    boolean isTypeService(BatterySipper sipper);
 
-  /**
-   * Check whether the toggle for power accounting is enabled
-   */
-  boolean isPowerAccountingToggleEnabled();
+    /**
+     * Check whether it is type system
+     */
+    boolean isTypeSystem(BatterySipper sipper);
+
+    /**
+     * Check whether the toggle for power accounting is enabled
+     */
+    boolean isPowerAccountingToggleEnabled();
 }

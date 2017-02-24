@@ -71,9 +71,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
         mUsageListGroup = (PreferenceGroup) findPreference(KEY_BATTERY_USAGE_LIST);
-        mPowerUsageFeatureProvider = FeatureFactory.getFactory(getContext())
-                .getPowerUsageFeatureProvider(getContext());
-        mPackageManager = getContext().getPackageManager();
+
+        final Context context = getContext();
+        mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context);
+        mPackageManager = context.getPackageManager();
     }
 
     @Override
@@ -137,9 +139,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return UsageType.USER;
         } else if (drainType == DrainType.CELL) {
             return UsageType.CELL;
-        } else if (uid == Process.SYSTEM_UID || uid == Process.ROOT_UID) {
+        } else if (mPowerUsageFeatureProvider.isTypeSystem(sipper)) {
             return UsageType.SYSTEM;
-        } else if (mPowerUsageFeatureProvider.isTypeService(sipper.mPackages)) {
+        } else if (mPowerUsageFeatureProvider.isTypeService(sipper)) {
             return UsageType.SERVICE;
         } else {
             return UsageType.APP;
