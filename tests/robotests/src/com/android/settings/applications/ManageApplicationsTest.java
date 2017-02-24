@@ -16,8 +16,12 @@
 
 package com.android.settings.applications;
 
+import android.app.Activity;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Looper;
-import android.os.UserManager;
+import android.widget.TextView;
+import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -36,6 +40,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -55,7 +61,6 @@ public class ManageApplicationsTest {
 
     @Mock private ApplicationsState mState;
     @Mock private ApplicationsState.Session mSession;
-    @Mock private UserManager mUserManager;
 
     private Looper mBgLooper;
     private ManageApplications mFragment;
@@ -77,5 +82,22 @@ public class ManageApplicationsTest {
     public void launchFragment() {
         SettingsRobolectricTestRunner.startSettingsFragment(
                 mFragment, Settings.ManageApplicationsActivity.class);
+    }
+
+    @Test
+    public void updateDisableView_appDisabledUntilUsed_shouldSetDisabled() {
+        final TextView view = mock(TextView.class);
+        final ApplicationInfo info = new ApplicationInfo();
+        info.flags = ApplicationInfo.FLAG_INSTALLED;
+        info.enabled = true;
+        info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED;
+        ManageApplications fragment = mock(ManageApplications.class);
+        when(fragment.getActivity()).thenReturn(mock(Activity.class));
+        final ManageApplications.ApplicationsAdapter adapter =
+            new ManageApplications.ApplicationsAdapter(mState, fragment, 0);
+
+        adapter.updateDisableView(view, info);
+
+        verify(view).setText(R.string.disabled);
     }
 }

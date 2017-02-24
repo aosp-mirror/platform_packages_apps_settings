@@ -31,6 +31,7 @@ import android.os.LocaleList;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,6 +53,7 @@ import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.Spinner;
 
+import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
@@ -1284,15 +1286,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                         holder.appIcon.setImageDrawable(entry.icon);
                     }
                     updateSummary(holder);
-                    if ((entry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
-                        holder.disabled.setVisibility(View.VISIBLE);
-                        holder.disabled.setText(R.string.not_installed);
-                    } else if (!entry.info.enabled) {
-                        holder.disabled.setVisibility(View.VISIBLE);
-                        holder.disabled.setText(R.string.disabled);
-                    } else {
-                        holder.disabled.setVisibility(View.GONE);
-                    }
+                    updateDisableView(holder.disabled, entry.info);
                 }
                 convertView.setEnabled(isEnabled(position));
             }
@@ -1300,6 +1294,20 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mActive.remove(convertView);
             mActive.add(convertView);
             return convertView;
+        }
+
+        @VisibleForTesting
+        void updateDisableView(TextView view, ApplicationInfo info) {
+            if ((info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
+                view.setVisibility(View.VISIBLE);
+                view.setText(R.string.not_installed);
+            } else if (!info.enabled || info.enabledSetting
+                    == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED) {
+                view.setVisibility(View.VISIBLE);
+                view.setText(R.string.disabled);
+            } else {
+                view.setVisibility(View.GONE);
+            }
         }
 
         private void updateSummary(AppViewHolder holder) {
