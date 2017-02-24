@@ -16,32 +16,42 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
-import com.android.settingslib.DeviceInfoUtils;
 
-public class KernelVersionPreferenceController extends PreferenceController {
+public class FccEquipmentIdPreferenceController extends PreferenceController {
 
-    private static final String KEY_KERNEL_VERSION = "kernel_version";
 
-    public KernelVersionPreferenceController(Context context) {
+    private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
+    private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
+
+    public FccEquipmentIdPreferenceController(Context context) {
         super(context);
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return !TextUtils.isEmpty(SystemProperties.get(PROPERTY_EQUIPMENT_ID));
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        preference.setSummary(DeviceInfoUtils.getFormattedKernelVersion());
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final Preference pref = screen.findPreference(KEY_EQUIPMENT_ID);
+        if (pref != null) {
+            final String summary = SystemProperties.get(PROPERTY_EQUIPMENT_ID,
+                    mContext.getResources().getString(R.string.device_info_default));
+            pref.setSummary(summary);
+        }
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_KERNEL_VERSION;
+        return KEY_EQUIPMENT_ID;
     }
 }

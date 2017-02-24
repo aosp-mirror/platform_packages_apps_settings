@@ -15,11 +15,14 @@
  */
 package com.android.settings.deviceinfo;
 
-import android.app.Fragment;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.os.SystemProperties;
+import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,32 +31,52 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowSystemProperties;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class FeedbackPreferenceControllerTest {
-    @Mock
-    private Fragment mFragment;
+public class BasebandVersionPreferenceControllerTest {
+
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    private FeedbackPreferenceController mController;
+    @Mock
+    private ConnectivityManager mCm;
+    @Mock
+    private Preference mPreference;
 
-    public FeedbackPreferenceControllerTest() {
-    }
+    private BasebandVersionPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.mController = new FeedbackPreferenceController(this.mFragment, this.mContext);
+        mController = new BasebandVersionPreferenceController(mContext);
+        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(mCm);
     }
 
     @Test
-    public void isAvailable_noReporterPackage_shouldReturnFalse() {
-        when(this.mContext.getResources().getString(anyInt())).thenReturn("");
-        assertThat(Boolean.valueOf(this.mController.isAvailable())).isFalse();
+    public void isAvailable_wifiOnly_shouldReturnFalse() {
+        when(mCm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(false);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_hasMobile_shouldReturnTrue() {
+        when(mCm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(true);
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Config(shadows = {SettingsShadowSystemProperties.class})
+    @Test
+    public void updateState_shouldLoadFromSysProperty() {
+        SettingsShadowSystemProperties.set("gsm.version.baseband", "test");
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setSummary("test");
     }
 }
