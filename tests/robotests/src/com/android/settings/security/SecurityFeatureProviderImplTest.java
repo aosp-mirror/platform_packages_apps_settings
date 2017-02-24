@@ -42,6 +42,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.ShadowLooper;
 
 import java.util.Map;
 
@@ -102,8 +103,11 @@ public class SecurityFeatureProviderImplTest {
 
     @Test
     public void updateTilesData_shouldNotProcessEmptyScreenOrTiles() {
-        mImpl.updatePreferences(mContext, null, null);
-        mImpl.updatePreferences(mContext, new PreferenceScreen(mContext, null), null);
+        mImpl.updatePreferencesToRunOnWorkerThread(mContext, null, null);
+        ShadowLooper.runUiThreadTasks();
+        mImpl.updatePreferencesToRunOnWorkerThread(
+                mContext, new PreferenceScreen(mContext, null), null);
+        ShadowLooper.runUiThreadTasks();
         verifyNoMoreInteractions(mPackageManager);
     }
 
@@ -111,13 +115,17 @@ public class SecurityFeatureProviderImplTest {
     public void updateTilesData_shouldNotProcessNonMatchingPreference() {
         DashboardCategory dashboardCategory = new DashboardCategory();
         dashboardCategory.addTile(new Tile());
-        mImpl.updatePreferences(mContext, getPreferenceScreen(), dashboardCategory);
+        mImpl.updatePreferencesToRunOnWorkerThread(
+                mContext, getPreferenceScreen(), dashboardCategory);
+        ShadowLooper.runUiThreadTasks();
         verifyNoMoreInteractions(mPackageManager);
     }
 
     @Test
     public void updateTilesData_shouldNotProcessMatchingPreferenceWithNoData() {
-        mImpl.updatePreferences(mContext, getPreferenceScreen(), getDashboardCategory());
+        mImpl.updatePreferencesToRunOnWorkerThread(
+                mContext, getPreferenceScreen(), getDashboardCategory());
+        ShadowLooper.runUiThreadTasks();
         verifyNoMoreInteractions(mPackageManager);
     }
 
@@ -135,7 +143,8 @@ public class SecurityFeatureProviderImplTest {
         dashboardCategory.getTile(0).intent = new Intent().setPackage("package");
         dashboardCategory.getTile(0).metaData = bundle;
 
-        mImpl.updatePreferences(mContext, screen, dashboardCategory);
+        mImpl.updatePreferencesToRunOnWorkerThread(mContext, screen, dashboardCategory);
+        ShadowLooper.runUiThreadTasks();
         verify(screen.findPreference(MOCK_KEY)).setIcon(mMockDrawable);
         verify(screen.findPreference(MOCK_KEY)).setSummary(MOCK_SUMMARY);
     }
@@ -157,7 +166,8 @@ public class SecurityFeatureProviderImplTest {
         dashboardCategory.getTile(0).intent = new Intent().setPackage("package");
         dashboardCategory.getTile(0).metaData = bundle;
 
-        mImpl.updatePreferences(mContext, screen, dashboardCategory);
+        mImpl.updatePreferencesToRunOnWorkerThread(mContext, screen, dashboardCategory);
+        ShadowLooper.runUiThreadTasks();
         verify(screen.findPreference(MOCK_KEY), never()).setSummary(anyString());
     }
 

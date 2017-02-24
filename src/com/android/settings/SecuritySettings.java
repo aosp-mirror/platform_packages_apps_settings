@@ -77,6 +77,8 @@ import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
 import java.util.List;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
@@ -1032,8 +1034,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         MY_USER_ID));
             }
             if (mPowerButtonInstantlyLocks != null) {
-                mPowerButtonInstantlyLocks.setChecked(mLockPatternUtils.getPowerButtonInstantlyLocks(
-                        MY_USER_ID));
+                mPowerButtonInstantlyLocks.setChecked(
+                        mLockPatternUtils.getPowerButtonInstantlyLocks(MY_USER_ID));
             }
 
             updateOwnerInfo();
@@ -1297,9 +1299,18 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     FeatureFactory.getFactory(mContext).getDashboardFeatureProvider(mContext);
             if (dashboardFeatureProvider.isEnabled()
                     && (packageVerifierState == PACKAGE_VERIFIER_STATE_ENABLED)) {
-                DashboardCategory dashboardCategory =
-                        dashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY);
-                mSummaryLoader.setSummary(this, getPackageVerifierSummary(dashboardCategory));
+                // Calling the feature provider could potentially be slow, so do this on a separate
+                // thread so as to not block the loading of Settings.
+                Executors.newSingleThreadExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        DashboardCategory dashboardCategory =
+                                dashboardFeatureProvider.getTilesForCategory(
+                                        CategoryKey.CATEGORY_SECURITY);
+                        mSummaryLoader.setSummary(SummaryProvider.this,
+                                getPackageVerifierSummary(dashboardCategory));
+                    }
+                });
             } else {
                 final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(mContext);
                 if (fpm != null && fpm.isHardwareDetected()) {
