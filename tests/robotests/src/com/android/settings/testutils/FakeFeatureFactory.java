@@ -20,6 +20,7 @@ import android.content.Context;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
@@ -27,7 +28,6 @@ import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.suggestions.SuggestionFeatureProvider;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
 

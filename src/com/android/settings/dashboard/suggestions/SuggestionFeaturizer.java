@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-package com.android.settings.suggestions;
+package com.android.settings.dashboard.suggestions;
 
 import java.util.HashMap;
 import java.util.List;
