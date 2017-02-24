@@ -80,7 +80,7 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        preference.setVisible(true);
+        preference.setVisible(false);
 
         setNumberOfPackagesWithAdminGrantedPermissions(20);
         when(mContext.getResources().getQuantityString(mStringResourceId, 20, 20))

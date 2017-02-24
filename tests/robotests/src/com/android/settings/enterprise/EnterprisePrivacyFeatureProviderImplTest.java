@@ -55,8 +55,8 @@ import static org.mockito.Mockito.when;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterprisePrivacyFeatureProviderImplTest {
 
-    private final ComponentName DEVICE_OWNER = new ComponentName("dummy", "component");
-    private final String DEVICE_OWNER_ORGANIZATION = new String("ACME");
+    private final ComponentName OWNER = new ComponentName("dummy", "component");
+    private final String OWNER_ORGANIZATION = new String("ACME");
     private final Date TIMESTAMP = new Date(2011, 11, 11);
     private final int MY_USER_ID = UserHandle.myUserId();
     private final int MANAGED_PROFILE_USER_ID = MY_USER_ID + 1;
@@ -91,13 +91,13 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
         assertThat(mProvider.hasDeviceOwner()).isFalse();
 
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_OWNER);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
         assertThat(mProvider.hasDeviceOwner()).isTrue();
     }
 
     @Test
     public void testIsInCompMode() {
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_OWNER);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
         assertThat(mProvider.isInCompMode()).isFalse();
 
         mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
@@ -116,18 +116,17 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
                 new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(context), 0);
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_OWNER);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
         when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(null);
         assertThat(mProvider.getDeviceOwnerDisclosure(context)).isEqualTo(disclosure);
 
         disclosure = new SpannableStringBuilder();
         disclosure.append(mResources.getString(R.string.do_disclosure_with_name,
-                DEVICE_OWNER_ORGANIZATION));
+                OWNER_ORGANIZATION));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
                 new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(context), 0);
-        when(mDevicePolicyManager.getDeviceOwnerOrganizationName())
-                .thenReturn(DEVICE_OWNER_ORGANIZATION);
+        when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(OWNER_ORGANIZATION);
         assertThat(mProvider.getDeviceOwnerDisclosure(context)).isEqualTo(disclosure);
     }
 
@@ -192,5 +191,30 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         when(mConnectivityManger.getGlobalProxy()).thenReturn(
                 ProxyInfo.buildDirectProxy("localhost", 123));
         assertThat(mProvider.isGlobalHttpProxySet()).isTrue();
+    }
+
+    @Test
+    public void testGetMaximumFailedPasswordsForWipeInPrimaryUser() {
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
+        when(mDevicePolicyManager.getDeviceOwnerUserId()).thenReturn(UserHandle.USER_NULL);
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInPrimaryUser()).isEqualTo(0);
+
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
+        when(mDevicePolicyManager.getDeviceOwnerUserId()).thenReturn(UserHandle.USER_SYSTEM);
+        when(mDevicePolicyManager.getMaximumFailedPasswordsForWipe(OWNER, UserHandle.USER_SYSTEM))
+                .thenReturn(10);
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInPrimaryUser()).isEqualTo(10);
+    }
+
+    @Test
+    public void testGetMaximumFailedPasswordsForWipeInManagedProfile() {
+        when(mDevicePolicyManager.getProfileOwnerAsUser(MANAGED_PROFILE_USER_ID)).thenReturn(OWNER);
+        when(mDevicePolicyManager.getMaximumFailedPasswordsForWipe(OWNER, MANAGED_PROFILE_USER_ID))
+                .thenReturn(10);
+
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInManagedProfile()).isEqualTo(0);
+
+        mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInManagedProfile()).isEqualTo(10);
     }
 }
