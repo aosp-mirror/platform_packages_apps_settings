@@ -81,6 +81,19 @@ public class MetricsFeatureProviderTest {
     }
 
     @Test
+    public void logDashboardStartIntent_intentHasNoComponent_shouldLog() {
+        final Intent intent = new Intent(Intent.ACTION_ASSIST);
+
+        mProvider.logDashboardStartIntent(mContext, intent, MetricsEvent.SETTINGS_GESTURES);
+
+        verify(mLogWriter).action(
+                eq(mContext),
+                eq(MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
+                anyString(),
+                eq(Pair.create(MetricsEvent.FIELD_CONTEXT, MetricsEvent.SETTINGS_GESTURES)));
+    }
+
+    @Test
     public void logDashboardStartIntent_intentIsExternal_shouldLog() {
         final Intent intent = new Intent().setComponent(new ComponentName("pkg", "cls"));
 
