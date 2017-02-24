@@ -27,7 +27,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -53,7 +52,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.SimpleAdapter;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ChooseLockGeneric;
@@ -63,9 +61,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.accounts.AddUserWhenLockedPreferenceController;
-import com.android.settings.accounts.EmergencyInfoPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -102,9 +97,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_USER_LIST = "user_list";
     private static final String KEY_USER_ME = "user_me";
     private static final String KEY_ADD_USER = "user_add";
-    private static final String KEY_EMERGENCY_INFO = "emergency_info";
-
-    private static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENGY_INFO";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
@@ -136,9 +128,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private PreferenceGroup mUserListCategory;
     private UserPreference mMePreference;
     private DimmableIconPreference mAddUser;
-    private PreferenceGroup mLockScreenSettings;
-    private RestrictedSwitchPreference mAddUserWhenLocked;
-    private Preference mEmergencyInfoPreference;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
@@ -151,8 +140,6 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private EditUserInfoController mEditUserInfoController =
             new EditUserInfoController();
-    private EmergencyInfoPreferenceController mEnergencyInfoController;
-    private AddUserWhenLockedPreferenceController mAddUserWhenLockedController;
 
     // A place to cache the generated default avatar
     private Drawable mDefaultIconDrawable;
@@ -235,14 +222,6 @@ public class UserSettings extends SettingsPreferenceFragment
             if (!mUserCaps.mCanAddRestrictedProfile) {
                 mAddUser.setTitle(R.string.user_add_user_menu);
             }
-        }
-        if (showEmergencyInfoAndAddUsersWhenLock(context)) {
-            mLockScreenSettings = (PreferenceGroup) findPreference("lock_screen_settings");
-            mAddUserWhenLocked =
-                    (RestrictedSwitchPreference) findPreference("add_users_when_locked");
-            mEmergencyInfoPreference = findPreference(KEY_EMERGENCY_INFO);
-            mEnergencyInfoController = new EmergencyInfoPreferenceController(context);
-            mAddUserWhenLockedController = new AddUserWhenLockedPreferenceController(context);
         }
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
@@ -658,20 +637,6 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    @VisibleForTesting
-    boolean showEmergencyInfoAndAddUsersWhenLock(Context context) {
-        return !FeatureFactory.getFactory(context).getDashboardFeatureProvider(context).isEnabled();
-    }
-
-    private static boolean emergencyInfoActivityPresent(Context context) {
-        Intent intent = new Intent(ACTION_EDIT_EMERGENCY_INFO).setPackage("com.android.emergency");
-        List<ResolveInfo> infos = context.getPackageManager().queryIntentActivities(intent, 0);
-        if (infos == null || infos.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
     private void removeUserNow() {
         if (mRemovingUserId == UserHandle.myUserId()) {
             removeThisUser();
@@ -903,20 +868,6 @@ public class UserSettings extends SettingsPreferenceFragment
             }
         }
 
-        if (showEmergencyInfoAndAddUsersWhenLock(context)) {
-            if (mAddUserWhenLockedController.isAvailable()) {
-                mLockScreenSettings.setOrder(Preference.DEFAULT_ORDER);
-                preferenceScreen.addPreference(mLockScreenSettings);
-                mAddUserWhenLockedController.updateState(mAddUserWhenLocked);
-                mAddUserWhenLocked.setOnPreferenceChangeListener(mAddUserWhenLockedController);
-            }
-
-            if (emergencyInfoActivityPresent(getContext())) {
-                mEmergencyInfoPreference.setOnPreferenceClickListener(this);
-                mEmergencyInfoPreference.setOrder(Preference.DEFAULT_ORDER);
-                preferenceScreen.addPreference(mEmergencyInfoPreference);
-            }
-        }
     }
 
     private int getMaxRealUsers() {
@@ -997,8 +948,6 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 onAddUserClicked(USER_TYPE_USER);
             }
-        } else if (mEnergencyInfoController != null) {
-            mEnergencyInfoController.handlePreferenceTreeClick(pref);
         }
         return false;
     }
@@ -1080,12 +1029,6 @@ public class UserSettings extends SettingsPreferenceFragment
                                 R.string.user_add_user_or_profile_menu
                                 : R.string.user_add_user_menu);
                         data.screenTitle = res.getString(R.string.user_settings_title);
-                        result.add(data);
-                    }
-                    if (emergencyInfoActivityPresent(context)) {
-                        data = new SearchIndexableRaw(context);
-                        data.title = res.getString(R.string.emergency_info_title);
-                        data.screenTitle = res.getString(R.string.emergency_info_title);
                         result.add(data);
                     }
                     return result;
