@@ -32,6 +32,7 @@ import android.widget.ProgressBar;
 
 import com.android.settings.R;
 import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
+import com.android.settingslib.Utils;
 
 import java.io.File;
 
@@ -83,7 +84,7 @@ public class StorageVolumePreference extends Preference {
             }
 
             if (freeBytes < mStorageManager.getStorageLowBytes(path)) {
-                mColor = StorageSettings.COLOR_WARNING;
+                mColor = Utils.getColorAttr(context, android.R.attr.colorError);
                 icon = context.getDrawable(R.drawable.ic_warning_24dp);
             }
 

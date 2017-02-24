@@ -192,7 +192,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
-        <item name="android:textColor">@*android:color/system_error</item>
+        <item name="android:textColor">?android:attr/colorError</item>
     </style>
 
     <style name="wifi_item_content">
@@ -330,7 +330,7 @@
 
     <style name="TextAppearance.FingerprintErrorText"
         parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">@*android:color/system_error</item>
+        <item name="android:textColor">?android:attr/colorError</item>
     </style>
 
     <style name="TextAppearance.SupportTitle"
@@ -354,7 +354,7 @@
 
     <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
         parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">@*android:color/system_error</item>
+        <item name="android:textColor">?android:attr/colorError</item>
     </style>
 
     <style name="TextAppearance.Small.SwitchBar">
@@ -429,4 +429,30 @@
     </style>
 
     <style name="AppActionPrimaryButton" parent="android:Widget.Material.Button.Colored"/>
+
+    <style name="LockPatternStyle">
+        <item name="*android:regularColor">@color/lock_pattern_view_regular_color</item>
+        <item name="*android:successColor">@color/lock_pattern_view_success_color</item>
+        <item name="*android:errorColor">?android:attr/colorError</item>
+    </style>
+
+    <style name="LockPatternStyle.Dark">
+        <item name="*android:regularColor">@color/lock_pattern_view_regular_color_dark</item>
+        <item name="*android:successColor">@color/lock_pattern_view_regular_color_dark</item>
+    </style>
+
+    <style name="LockPatternStyle.Dark.Work">
+        <item name="*android:regularColor">@*android:color/white</item>
+    </style>
+
+    <style name="LockPatternStyle.Unlock">
+        <item name="*android:regularColor">@color/unlock_pattern_view_regular_color</item>
+        <item name="*android:successColor">@color/unlock_pattern_view_success_color</item>
+    </style>
+
+    <style name="LockPatternStyle.Setup">
+        <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
+        <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
+    </style>
+
 </resources>
