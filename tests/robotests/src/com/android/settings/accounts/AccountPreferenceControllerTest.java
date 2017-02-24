@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
@@ -30,6 +29,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchIndexableRaw;
@@ -70,7 +70,7 @@ public class AccountPreferenceControllerTest {
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
     @Mock(answer = RETURNS_DEEP_STUBS)
-    private PreferenceFragment mFragment;
+    private SettingsPreferenceFragment mFragment;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private AccountManager mAccountManager;
     @Mock(answer = RETURNS_DEEP_STUBS)

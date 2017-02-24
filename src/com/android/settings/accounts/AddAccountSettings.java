@@ -72,7 +72,7 @@ public class AddAccountSettings extends Activity {
     private static final String KEY_CALLER_IDENTITY = "pendingIntent";
     private static final String SHOULD_NOT_RESOLVE = "SHOULDN'T RESOLVE!";
 
-    private static final String TAG = "AccountSettings";
+    private static final String TAG = "AddAccountSettings";
 
     /* package */ static final String EXTRA_SELECTED_ACCOUNT = "selected_account";
 

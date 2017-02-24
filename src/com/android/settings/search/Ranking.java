@@ -28,7 +28,7 @@ import com.android.settings.SecuritySettings;
 import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
-import com.android.settings.accounts.AccountSettings;
+import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -166,7 +166,7 @@ public final class Ranking {
         sRankMap.put(ScreenPinningSettings.class.getName(), RANK_SECURITY);
 
         // Accounts
-        sRankMap.put(AccountSettings.class.getName(), RANK_ACCOUNT);
+        sRankMap.put(UserAndAccountDashboardFragment.class.getName(), RANK_ACCOUNT);
 
         // IMEs
         sRankMap.put(InputMethodAndLanguageSettings.class.getName(), RANK_IME);

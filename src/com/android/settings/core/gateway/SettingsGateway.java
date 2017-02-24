@@ -44,7 +44,6 @@ import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
-import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountActivity;
 import com.android.settings.accounts.ManagedProfileSettings;
@@ -181,7 +180,6 @@ public class SettingsGateway {
             WifiDisplaySettings.class.getName(),
             PowerUsageSummary.class.getName(),
             AccountSyncSettings.class.getName(),
-            AccountSettings.class.getName(),
             GestureSettings.class.getName(),
             AssistGestureSettings.class.getName(),
             SwipeToNotificationSettings.class.getName(),
@@ -271,7 +269,6 @@ public class SettingsGateway {
             Settings.SecuritySettingsActivity.class.getName(),
             Settings.InputMethodAndLanguageSettingsActivity.class.getName(),
             Settings.UserSettingsActivity.class.getName(),
-            Settings.AccountSettingsActivity.class.getName(),
             //system_section
             Settings.DateTimeSettingsActivity.class.getName(),
             Settings.DeviceInfoSettingsActivity.class.getName(),
