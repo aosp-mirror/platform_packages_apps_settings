@@ -39,8 +39,10 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
+import com.android.settings.deviceinfo.FeedbackPreferenceController;
+import com.android.settings.deviceinfo.KernelVersionPreferenceController;
 import com.android.settings.deviceinfo.ManualPreferenceController;
-import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
+import com.android.settings.deviceinfo.SafetyLegalPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.DeviceInfoUtils;
@@ -57,9 +59,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     private static final String LOG_TAG = "DeviceInfoSettings";
 
     private static final String KEY_REGULATORY_INFO = "regulatory_info";
-    private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     private static final String PROPERTY_SELINUX_STATUS = "ro.build.selinux";
-    private static final String KEY_KERNEL_VERSION = "kernel_version";
     private static final String KEY_DEVICE_MODEL = "device_model";
     private static final String KEY_SELINUX_STATUS = "selinux_status";
     private static final String KEY_BASEBAND_VERSION = "baseband_version";
@@ -67,8 +67,6 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     private static final String KEY_SECURITY_PATCH = "security_patch";
     private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
-    private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
-    private static final String KEY_SAFETY_LEGAL = "safetylegal";
 
 
     long[] mHits = new long[3];
@@ -120,7 +118,6 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
         setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");
         setStringSummary(KEY_DEVICE_MODEL, Build.MODEL + DeviceInfoUtils.getMsvSuffix());
         setValueSummary(KEY_EQUIPMENT_ID, PROPERTY_EQUIPMENT_ID);
-        findPreference(KEY_KERNEL_VERSION).setSummary(DeviceInfoUtils.getFormattedKernelVersion());
 
         if (!SELinux.isSELinuxEnabled()) {
             String status = getResources().getString(R.string.selinux_status_disabled);
@@ -134,10 +131,6 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SELINUX_STATUS,
                 PROPERTY_SELINUX_STATUS);
 
-        // Remove Safety information preference if PROPERTY_URL_SAFETYLEGAL is not set
-        removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SAFETY_LEGAL,
-                PROPERTY_URL_SAFETYLEGAL);
-
         // Remove Equipment id preference if FCC ID is not set by RIL
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_EQUIPMENT_ID,
                 PROPERTY_EQUIPMENT_ID);
@@ -145,11 +138,6 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
         // Remove Baseband version if wifi-only device
         if (Utils.isWifiOnly(getActivity())) {
             getPreferenceScreen().removePreference(findPreference(KEY_BASEBAND_VERSION));
-        }
-
-        // Dont show feedback option if there is no reporter.
-        if (TextUtils.isEmpty(DeviceInfoUtils.getFeedbackReporterPackage(getActivity()))) {
-            getPreferenceScreen().removePreference(findPreference(KEY_DEVICE_FEEDBACK));
         }
 
         // Remove regulatory labels if no activity present to handle intent.
@@ -171,9 +159,6 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (mBuildNumberPreferenceController.handlePreferenceTreeClick(preference)) {
-            return true;
-        }
         if (preference.getKey().equals(KEY_FIRMWARE_VERSION)) {
             System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
             mHits[mHits.length - 1] = SystemClock.uptimeMillis();
@@ -200,11 +185,9 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
             if (getPackageManager().queryIntentActivities(preference.getIntent(), 0).isEmpty()) {
                 // Don't send out the intent to stop crash
                 Log.w(LOG_TAG, "Stop click action on " + KEY_SECURITY_PATCH + ": "
-                        + "queryIntentActivities() returns empty" );
+                        + "queryIntentActivities() returns empty");
                 return true;
             }
-        } else if (preference.getKey().equals(KEY_DEVICE_FEEDBACK)) {
-            sendFeedback();
         }
         return super.onPreferenceTreeClick(preference);
     }
@@ -228,6 +211,8 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
         controllers.add(mBuildNumberPreferenceController);
         controllers.add(new AdditionalSystemUpdatePreferenceController(context));
         controllers.add(new ManualPreferenceController(context));
+        controllers.add(new FeedbackPreferenceController(this, context));
+        controllers.add(new KernelVersionPreferenceController(context));
         return controllers;
     }
 
@@ -271,16 +256,6 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
         } catch (RuntimeException e) {
             // No recovery
         }
-    }
-
-    private void sendFeedback() {
-        String reporterPackage = DeviceInfoUtils.getFeedbackReporterPackage(getActivity());
-        if (TextUtils.isEmpty(reporterPackage)) {
-            return;
-        }
-        Intent intent = new Intent(Intent.ACTION_BUG_REPORT);
-        intent.setPackage(reporterPackage);
-        startActivityForResult(intent, 0);
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
@@ -331,9 +306,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 if (isPropertyMissing(PROPERTY_SELINUX_STATUS)) {
                     keys.add(KEY_SELINUX_STATUS);
                 }
-                if (isPropertyMissing(PROPERTY_URL_SAFETYLEGAL)) {
-                    keys.add(KEY_SAFETY_LEGAL);
-                }
+                new SafetyLegalPreferenceController(context).updateNonIndexableKeys(keys);
                 if (isPropertyMissing(PROPERTY_EQUIPMENT_ID)) {
                     keys.add(KEY_EQUIPMENT_ID);
                 }
@@ -341,11 +314,8 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 if (Utils.isWifiOnly(context)) {
                     keys.add((KEY_BASEBAND_VERSION));
                 }
-                // Dont show feedback option if there is no reporter.
-                if (TextUtils.isEmpty(DeviceInfoUtils.getFeedbackReporterPackage(context))) {
-                    keys.add(KEY_DEVICE_FEEDBACK);
-                }
-                new SystemUpdatePreferenceController(context, UserManager.get(context))
+
+                new FeedbackPreferenceController(null, context)
                         .updateNonIndexableKeys(keys);
                 new AdditionalSystemUpdatePreferenceController(context)
                         .updateNonIndexableKeys(keys);

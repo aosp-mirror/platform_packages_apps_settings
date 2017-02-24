@@ -66,43 +66,4 @@ public class DeviceInfoSettingsTest extends AndroidTestCase {
     public void getPrefXml_shoudlReturnDeviceInfoXml() {
         assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.device_info_settings);
     }
-
-    @Test
-    public void testGetFormattedKernelVersion() throws Exception {
-        assertWithMessage("formatKernelVersion can't cope with this device's /proc/version")
-                .that(DeviceInfoUtils.getFormattedKernelVersion())
-                .isNotEqualTo("Unavailable");
-    }
-
-    @Test
-    public void testFormatKernelVersion() throws Exception {
-        assertThat(DeviceInfoUtils.formatKernelVersion("")).isEqualTo("Unavailable");
-        assertThat(DeviceInfoUtils.formatKernelVersion("Linux version 2.6.38.8-gg784 " +
-                "(root@hpao4.eem.corp.google.com) " +
-                "(gcc version 4.4.3 (Ubuntu 4.4.3-4ubuntu5) ) #2 SMP " +
-                "Fri Feb 24 03:31:23 PST 2012"))
-                .isEqualTo("2.6.38.8-gg784\n" +
-                        "root@hpao4.eem.corp.google.com #2\n" +
-                        "Fri Feb 24 03:31:23 PST 2012");
-        assertThat(DeviceInfoUtils.formatKernelVersion("Linux version 3.0.31-g6fb96c9 " +
-                "(android-build@vpbs1.mtv.corp.google.com) " +
-                "(gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) #1 " +
-                "SMP PREEMPT Thu Jun 28 11:02:39 PDT 2012"))
-                .isEqualTo("3.0.31-g6fb96c9\n" +
-                        "android-build@vpbs1.mtv.corp.google.com #1\n" +
-                        "Thu Jun 28 11:02:39 PDT 2012");
-        assertThat(DeviceInfoUtils.formatKernelVersion("Linux version " +
-                "2.6.38.8-a-b-jellybean+ (x@y) " +
-                "(gcc version 4.4.3 (GCC) ) #1 PREEMPT Tue Aug 28 22:10:46 CDT 2012"))
-                .isEqualTo("2.6.38.8-a-b-jellybean+\n" +
-                        "x@y #1\n" +
-                        "Tue Aug 28 22:10:46 CDT 2012");
-        assertThat(DeviceInfoUtils.formatKernelVersion("Linux version " +
-                "3.18.31-g3ce5faa-dirty (x@y) (Android clang " +
-                "version 3.8.275480 (based on LLVM 3.8.275480)) " +
-                "#5 SMP PREEMPT Fri Oct 28 14:38:13 PDT 2016"))
-                .isEqualTo("3.18.31-g3ce5faa-dirty\n" +
-                        "x@y #5\n" +
-                        "Fri Oct 28 14:38:13 PDT 2016");
-    }
 }
