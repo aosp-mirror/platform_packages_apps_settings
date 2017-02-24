@@ -36,7 +36,7 @@ public interface LogWriter {
     /**
      * Logs an user action.
      */
-    void action(Context context, int category);
+    void action(Context context, int category, Pair<Integer, Object>... taggedData);
 
     /**
      * Logs an user action.

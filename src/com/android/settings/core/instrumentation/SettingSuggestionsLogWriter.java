@@ -40,7 +40,7 @@ public class SettingSuggestionsLogWriter implements LogWriter {
     }
 
     @Override
-    public void action(Context context, int category) {
+    public void action(Context context, int category, Pair<Integer, Object>... taggedData) {
     }
 
     @Override
