@@ -182,8 +182,8 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     public void onForget(WifiDialog dialog) {
         if (mSelectedAccessPoint != null) {
             mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId, null);
-            getPreferenceScreen().removePreference((Preference) mSelectedAccessPoint.getTag());
             mSelectedAccessPoint = null;
+            initPreferences();
         }
     }
 
