@@ -77,6 +77,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     /* Private intent to show the list of received files */
     private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
             "android.btopp.intent.action.OPEN_RECEIVED_FILES";
+    private static final String BTOPP_PACKAGE =
+            "com.android.bluetooth";
 
     private static final String KEY_PAIRED_DEVICES = "paired_devices";
 
@@ -262,6 +264,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             case MENU_ID_SHOW_RECEIVED:
                 MetricsLogger.action(getActivity(), MetricsEvent.ACTION_BLUETOOTH_FILES);
                 Intent intent = new Intent(BTOPP_ACTION_OPEN_RECEIVED_FILES);
+                intent.setPackage(BTOPP_PACKAGE);
                 getActivity().sendBroadcast(intent);
                 return true;
         }
