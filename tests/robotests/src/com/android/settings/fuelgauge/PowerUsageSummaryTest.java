@@ -40,6 +40,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -180,6 +181,9 @@ public class PowerUsageSummaryTest {
 
         mPowerUsageSummary.mStatsHelper = mBatteryHelper;
         when(mBatteryHelper.getUsageList()).thenReturn(mUsageList);
+        mPowerUsageSummary.mScreenUsagePref = mScreenUsagePref;
+        mPowerUsageSummary.mScreenConsumptionPref = mScreenConsumptionPref;
+        mPowerUsageSummary.mCellularNetworkPref = mCellularNetworkPref;
     }
 
     @Test
@@ -384,7 +388,6 @@ public class PowerUsageSummaryTest {
 
     @Test
     public void testUpdateCellularPreference_ShowCorrectSummary() {
-        mPowerUsageSummary.mCellularNetworkPref = mCellularNetworkPref;
         final double percent = POWER_MAH / TOTAL_POWER * DISCHARGE_AMOUNT;
         final String expectedSummary = mRealContext.getString(R.string.battery_overall_usage,
                 Utils.formatPercentage((int) percent));
@@ -397,8 +400,6 @@ public class PowerUsageSummaryTest {
 
     @Test
     public void testUpdateScreenPreference_ShowCorrectSummary() {
-        mPowerUsageSummary.mScreenUsagePref = mScreenUsagePref;
-        mPowerUsageSummary.mScreenConsumptionPref = mScreenConsumptionPref;
         final String expectedUsedTime = mRealContext.getString(R.string.battery_used_for,
                 Utils.formatElapsedTime(mRealContext, USAGE_TIME_MS, false));
         final double percent = BATTERY_SCREEN_USAGE / TOTAL_POWER * DISCHARGE_AMOUNT;
@@ -413,6 +414,16 @@ public class PowerUsageSummaryTest {
 
         verify(mScreenUsagePref).setSummary(expectedUsedTime);
         verify(mScreenConsumptionPref).setSummary(expectedOverallUsage);
+    }
+
+    @Test
+    public void testUpdatePreference_UsageListEmpty_ShouldNotCrash() {
+        when(mBatteryHelper.getUsageList()).thenReturn(new ArrayList<BatterySipper>());
+        doReturn("").when(mPowerUsageSummary).getString(anyInt(), Matchers.anyObject());
+
+        // Should not crash when update
+        mPowerUsageSummary.updateScreenPreference(DISCHARGE_AMOUNT);
+        mPowerUsageSummary.updateCellularPreference(DISCHARGE_AMOUNT);
     }
 
     @Test

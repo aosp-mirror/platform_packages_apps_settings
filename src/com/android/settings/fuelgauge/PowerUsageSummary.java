@@ -422,7 +422,7 @@ public class PowerUsageSummary extends PowerUsageBase {
 
                 // With deduction in totalPower, percentOfTotal is higher because it adds the part
                 // used in screen, system, etc
-                final double percentOfTotal =
+                final double percentOfTotal = totalPower == 0 ? 0 :
                         ((sipper.totalPowerMah / totalPower) * dischargeAmount);
 
                 if (((int) (percentOfTotal + .5)) < 1) {
@@ -513,10 +513,12 @@ public class PowerUsageSummary extends PowerUsageBase {
         final BatterySipper sipper = findBatterySipperByType(
                 mStatsHelper.getUsageList(), DrainType.SCREEN);
         final Context context = getContext();
-        final double percentOfTotal = calculatePercentage(sipper.totalPowerMah, dischargeAmount);
+        final double totalPowerMah = sipper != null ? sipper.totalPowerMah : 0;
+        final long usageTimeMs = sipper != null ? sipper.usageTimeMs : 0;
+        final double percentOfTotal = calculatePercentage(totalPowerMah, dischargeAmount);
 
         mScreenUsagePref.setSummary(getString(R.string.battery_used_for,
-                Utils.formatElapsedTime(context, sipper.usageTimeMs, false)));
+                Utils.formatElapsedTime(context, usageTimeMs, false)));
         mScreenConsumptionPref.setSummary(getString(R.string.battery_overall_usage,
                 Utils.formatPercentage(percentOfTotal, true)));
     }
@@ -525,7 +527,8 @@ public class PowerUsageSummary extends PowerUsageBase {
     void updateCellularPreference(final int dischargeAmount) {
         final BatterySipper sipper = findBatterySipperByType(
                 mStatsHelper.getUsageList(), DrainType.CELL);
-        final double percentOfTotal = calculatePercentage(sipper.totalPowerMah, dischargeAmount);
+        final double totalPowerMah = sipper != null ? sipper.totalPowerMah : 0;
+        final double percentOfTotal = calculatePercentage(totalPowerMah, dischargeAmount);
         mCellularNetworkPref.setSummary(getString(R.string.battery_overall_usage,
                 Utils.formatPercentage(percentOfTotal, true)));
     }
@@ -556,7 +559,9 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     @VisibleForTesting
     double calculatePercentage(double powerUsage, double dischargeAmount) {
-        return ((powerUsage / mStatsHelper.getTotalPower()) * dischargeAmount);
+        final double totalPower = mStatsHelper.getTotalPower();
+        return totalPower == 0 ? 0 :
+                ((powerUsage / totalPower) * dischargeAmount);
     }
 
     @VisibleForTesting
