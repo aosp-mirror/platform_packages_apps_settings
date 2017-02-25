@@ -26,15 +26,19 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.widget.Toast;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.Index;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -49,6 +53,7 @@ public class BuildNumberPreferenceController extends PreferenceController
     private final Activity mActivity;
     private final Fragment mFragment;
     private final UserManager mUm;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private Toast mDevHitToast;
     private RestrictedLockUtils.EnforcedAdmin mDebuggingFeaturesDisallowedAdmin;
@@ -61,6 +66,7 @@ public class BuildNumberPreferenceController extends PreferenceController
         mActivity = activity;
         mFragment = fragment;
         mUm = UserManager.get(activity);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -106,11 +112,15 @@ public class BuildNumberPreferenceController extends PreferenceController
         }
         // Don't enable developer options for secondary users.
         if (!mUm.isAdminUser()) {
+            mMetricsFeatureProvider.action(
+                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;
         }
 
         // Don't enable developer options until device has been provisioned
         if (!Utils.isDeviceProvisioned(mContext)) {
+            mMetricsFeatureProvider.action(
+                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;
         }
 
@@ -120,6 +130,8 @@ public class BuildNumberPreferenceController extends PreferenceController
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext,
                         mDebuggingFeaturesDisallowedAdmin);
             }
+            mMetricsFeatureProvider.action(
+                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF);
             return false;
         }
 
@@ -136,6 +148,10 @@ public class BuildNumberPreferenceController extends PreferenceController
                 if (!mProcessingLastDevHit) {
                     enableDevelopmentSettings();
                 }
+                mMetricsFeatureProvider.action(
+                        mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF,
+                        Pair.create(MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
+                                mProcessingLastDevHit ? 0 : 1));
             } else if (mDevHitCountdown > 0
                     && mDevHitCountdown < (TAPS_TO_BE_A_DEVELOPER - 2)) {
                 if (mDevHitToast != null) {
@@ -148,6 +164,10 @@ public class BuildNumberPreferenceController extends PreferenceController
                         Toast.LENGTH_SHORT);
                 mDevHitToast.show();
             }
+            mMetricsFeatureProvider.action(
+                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF,
+                    Pair.create(MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
+                            0));
         } else if (mDevHitCountdown < 0) {
             if (mDevHitToast != null) {
                 mDevHitToast.cancel();
@@ -155,6 +175,10 @@ public class BuildNumberPreferenceController extends PreferenceController
             mDevHitToast = Toast.makeText(mContext, R.string.show_dev_already,
                     Toast.LENGTH_LONG);
             mDevHitToast.show();
+            mMetricsFeatureProvider.action(
+                    mContext, MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF,
+                    Pair.create(MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
+                            1));
         }
         return true;
     }

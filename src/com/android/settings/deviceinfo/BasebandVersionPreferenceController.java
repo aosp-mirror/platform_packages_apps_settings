@@ -16,32 +16,36 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
-import com.android.settingslib.DeviceInfoUtils;
 
-public class KernelVersionPreferenceController extends PreferenceController {
+public class BasebandVersionPreferenceController extends PreferenceController {
 
-    private static final String KEY_KERNEL_VERSION = "kernel_version";
+    private static final String BASEBAND_PROPERTY = "gsm.version.baseband";
+    private static final String KEY_BASEBAND_VERSION = "baseband_version";
 
-    public KernelVersionPreferenceController(Context context) {
+    public BasebandVersionPreferenceController(Context context) {
         super(context);
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return !Utils.isWifiOnly(mContext);
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return KEY_BASEBAND_VERSION;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setSummary(DeviceInfoUtils.getFormattedKernelVersion());
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_KERNEL_VERSION;
+        preference.setSummary(SystemProperties.get(BASEBAND_PROPERTY,
+                mContext.getResources().getString(R.string.device_info_default)));
     }
 }

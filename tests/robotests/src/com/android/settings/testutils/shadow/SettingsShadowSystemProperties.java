@@ -18,12 +18,12 @@ package com.android.settings.testutils.shadow;
 
 import android.os.SystemProperties;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowSystemProperties;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class provides write capability to ShadowSystemProperties.
@@ -43,8 +43,23 @@ public class SettingsShadowSystemProperties extends ShadowSystemProperties {
         return ShadowSystemProperties.getBoolean(key, def);
     }
 
+    @Implementation
+    public static synchronized String get(String key) {
+        if (sValues.containsKey(key)) {
+            return sValues.get(key);
+        }
+        return ShadowSystemProperties.get(key);
+    }
+
     public static synchronized void set(String key, String val) {
         sValues.put(key, val);
+    }
+
+
+    @Implementation
+    public static String get(String key, String def) {
+        String value = sValues.get(key);
+        return value == null ? def : value;
     }
 
     public static synchronized void clear() {

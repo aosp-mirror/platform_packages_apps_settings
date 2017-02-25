@@ -16,16 +16,18 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
 
-public class KernelVersionPreferenceController extends PreferenceController {
+public class DeviceModelPreferenceController extends PreferenceController {
 
-    private static final String KEY_KERNEL_VERSION = "kernel_version";
+    private static final String KEY_DEVICE_MODEL = "device_model";
 
-    public KernelVersionPreferenceController(Context context) {
+    public DeviceModelPreferenceController(Context context) {
         super(context);
     }
 
@@ -35,13 +37,16 @@ public class KernelVersionPreferenceController extends PreferenceController {
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        preference.setSummary(DeviceInfoUtils.getFormattedKernelVersion());
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final Preference pref = screen.findPreference(KEY_DEVICE_MODEL);
+        if (pref != null) {
+            pref.setSummary(Build.MODEL + DeviceInfoUtils.getMsvSuffix());
+        }
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_KERNEL_VERSION;
+        return KEY_DEVICE_MODEL;
     }
 }

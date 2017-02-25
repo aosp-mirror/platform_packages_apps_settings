@@ -39,8 +39,8 @@ public class EventLogWriter implements LogWriter {
         MetricsLogger.hidden(context, category);
     }
 
-    public void action(Context context, int category) {
-        MetricsLogger.action(context, category, "");
+    public void action(Context context, int category, Pair<Integer, Object>... taggedData) {
+        action(context, category, "", taggedData);
     }
 
     public void actionWithSource(Context context, int source, int category) {

@@ -15,11 +15,14 @@
  */
 package com.android.settings.deviceinfo;
 
-import android.app.Fragment;
 import android.content.Context;
+import android.os.UserManager;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,30 +33,36 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class FeedbackPreferenceControllerTest {
-    @Mock
-    private Fragment mFragment;
+public class FirmwareVersionPreferenceControllerTest {
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    private FeedbackPreferenceController mController;
-
-    public FeedbackPreferenceControllerTest() {
-    }
+    @Mock
+    private Preference mPreference;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
+    @Mock
+    private UserManager mUserManager;
+    private FirmwareVersionPreferenceController mController;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.mController = new FeedbackPreferenceController(this.mFragment, this.mContext);
+        mLifecycle = new Lifecycle();
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(null);
+        mController = new FirmwareVersionPreferenceController(mContext, mLifecycle);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+                .thenReturn(mPreference);
     }
 
     @Test
-    public void isAvailable_noReporterPackage_shouldReturnFalse() {
-        when(this.mContext.getResources().getString(anyInt())).thenReturn("");
-        assertThat(Boolean.valueOf(this.mController.isAvailable())).isFalse();
+    public void isAlwaysAvailable() {
+        assertThat(mController.isAvailable()).isTrue();
     }
 }

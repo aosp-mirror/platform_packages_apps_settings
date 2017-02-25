@@ -60,9 +60,9 @@ public class MetricsFeatureProvider {
         }
     }
 
-    public void action(Context context, int category) {
+    public void action(Context context, int category, Pair<Integer, Object>... taggedData) {
         for (LogWriter writer : mLoggerWriters) {
-            writer.action(context, category);
+            writer.action(context, category, taggedData);
         }
     }
 
