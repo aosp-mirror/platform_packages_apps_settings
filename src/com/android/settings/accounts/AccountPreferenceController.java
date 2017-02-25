@@ -30,7 +30,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
@@ -43,6 +42,7 @@ import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -53,6 +53,7 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.Index;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.search2.SearchFeatureProviderImpl;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 
@@ -85,8 +86,7 @@ public class AccountPreferenceController extends PreferenceController
     private Preference mProfileNotAvailablePreference;
     private String[] mAuthorities;
     private int mAuthoritiesCount = 0;
-    private PreferenceFragment mParent;
-    private boolean mIAEnabled;
+    private SettingsPreferenceFragment mParent;
     private int mAccountProfileOrder = ORDER_ACCOUNT_PROFILES;
     private AccountRestrictionHelper mHelper;
     private DashboardFeatureProvider mDashboardFeatureProvider;
@@ -122,13 +122,13 @@ public class AccountPreferenceController extends PreferenceController
         public UserInfo userInfo;
     }
 
-    public AccountPreferenceController(Context context, PreferenceFragment parent,
+    public AccountPreferenceController(Context context, SettingsPreferenceFragment parent,
         String[] authorities) {
         this(context, parent, authorities, new AccountRestrictionHelper(context));
     }
 
     @VisibleForTesting
-    AccountPreferenceController(Context context, PreferenceFragment parent,
+    AccountPreferenceController(Context context, SettingsPreferenceFragment parent,
         String[] authorities, AccountRestrictionHelper helper) {
         super(context);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
@@ -140,7 +140,6 @@ public class AccountPreferenceController extends PreferenceController
         final FeatureFactory featureFactory = FeatureFactory.getFactory(mContext);
         mDashboardFeatureProvider = featureFactory.getDashboardFeatureProvider(mContext);
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
-        mIAEnabled = mDashboardFeatureProvider.isEnabled();
         mHelper = helper;
     }
 
@@ -255,15 +254,7 @@ public class AccountPreferenceController extends PreferenceController
         if (!isAvailable()) {
             // This should not happen
             Log.e(TAG, "We should not be showing settings for a managed profile");
-            if (!mIAEnabled) {
-                ((AccountSettings) mParent).finish();
-            }
             return;
-        }
-
-        if (!mIAEnabled) {
-            // Load the preferences from an XML resource
-            mParent.addPreferencesFromResource(R.xml.account_settings);
         }
 
         if (mUm.isLinkedUser()) {
@@ -330,8 +321,8 @@ public class AccountPreferenceController extends PreferenceController
                 DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
         }
         mProfiles.put(userInfo.id, profileData);
-        Index.getInstance(mContext).updateFromClassNameResource(
-                AccountSettings.class.getName(), true, true);
+        new SearchFeatureProviderImpl().getIndexingManager(mContext).updateFromClassNameResource(
+                UserAndAccountDashboardFragment.class.getName(), true, true);
     }
 
     private DimmableIconPreference newAddAccountPreference(Context context) {
@@ -471,52 +462,29 @@ public class AccountPreferenceController extends PreferenceController
             final Drawable icon = helper.getDrawableForType(mContext, accountType);
             final Context prefContext = mParent.getPreferenceManager().getContext();
 
-            if (mIAEnabled) {
-                // Add a preference row for each individual account
-                for (Account account : accounts) {
-                    final ArrayList<String> auths =
-                        helper.getAuthoritiesForAccountType(account.type);
-                    if (!AccountRestrictionHelper.showAccount(mAuthorities, auths)) {
-                        continue;
-                    }
-                    final Bundle fragmentArguments = new Bundle();
-                    fragmentArguments.putParcelable(AccountDetailDashboardFragment.KEY_ACCOUNT,
-                        account);
-                    fragmentArguments.putParcelable(AccountDetailDashboardFragment.KEY_USER_HANDLE,
-                        userHandle);
-                    fragmentArguments.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_TYPE,
-                        accountType);
-                    fragmentArguments.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_LABEL,
-                        label.toString());
-                    fragmentArguments.putInt(AccountDetailDashboardFragment.KEY_ACCOUNT_TITLE_RES,
-                        titleResId);
-                    fragmentArguments.putParcelable(EXTRA_USER, userHandle);
-                    accountTypePreferences.add(new AccountTypePreference(
-                        prefContext, mMetricsFeatureProvider.getMetricsCategory(mParent),
-                            account.name, titleResPackageName, titleResId, label,
-                        AccountDetailDashboardFragment.class.getName(), fragmentArguments, icon));
+            // Add a preference row for each individual account
+            for (Account account : accounts) {
+                final ArrayList<String> auths =
+                    helper.getAuthoritiesForAccountType(account.type);
+                if (!AccountRestrictionHelper.showAccount(mAuthorities, auths)) {
+                    continue;
                 }
-            } else if (skipToAccount) {
                 final Bundle fragmentArguments = new Bundle();
-                fragmentArguments.putParcelable(AccountSyncSettings.ACCOUNT_KEY,
-                        accounts[0]);
+                fragmentArguments.putParcelable(AccountDetailDashboardFragment.KEY_ACCOUNT,
+                    account);
+                fragmentArguments.putParcelable(AccountDetailDashboardFragment.KEY_USER_HANDLE,
+                    userHandle);
+                fragmentArguments.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_TYPE,
+                    accountType);
+                fragmentArguments.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_LABEL,
+                    label.toString());
+                fragmentArguments.putInt(AccountDetailDashboardFragment.KEY_ACCOUNT_TITLE_RES,
+                    titleResId);
                 fragmentArguments.putParcelable(EXTRA_USER, userHandle);
-
                 accountTypePreferences.add(new AccountTypePreference(
-                        prefContext, mMetricsFeatureProvider.getMetricsCategory(mParent),
-                        label, titleResPackageName, titleResId, AccountSyncSettings.class.getName(),
-                        fragmentArguments, icon));
-            } else {
-                final Bundle fragmentArguments = new Bundle();
-                fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
-                fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_LABEL,
-                        label.toString());
-                fragmentArguments.putParcelable(EXTRA_USER, userHandle);
-
-                accountTypePreferences.add(new AccountTypePreference(
-                        prefContext, mMetricsFeatureProvider.getMetricsCategory(mParent), label,
-                        titleResPackageName, titleResId, ManageAccountsSettings.class.getName(),
-                        fragmentArguments, icon));
+                    prefContext, mMetricsFeatureProvider.getMetricsCategory(mParent),
+                    account.name, titleResPackageName, titleResId, label,
+                    AccountDetailDashboardFragment.class.getName(), fragmentArguments, icon));
             }
             helper.preloadDrawableForType(mContext, accountType);
         }
@@ -524,10 +492,7 @@ public class AccountPreferenceController extends PreferenceController
         Collections.sort(accountTypePreferences, new Comparator<AccountTypePreference>() {
             @Override
             public int compare(AccountTypePreference t1, AccountTypePreference t2) {
-                int result = 0;
-                if (mIAEnabled) {
-                    result = t1.getSummary().toString().compareTo(t2.getSummary().toString());
-                }
+                int result = t1.getSummary().toString().compareTo(t2.getSummary().toString());
                 return result != 0
                     ? result : t1.getTitle().toString().compareTo(t2.getTitle().toString());
             }

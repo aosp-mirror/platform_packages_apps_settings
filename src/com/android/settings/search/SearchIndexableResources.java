@@ -33,7 +33,6 @@ import com.android.settings.SecuritySettings;
 import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
-import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
@@ -155,7 +154,6 @@ public final class SearchIndexableResources {
         addIndex(EncryptionAndCredential.class, R.xml.encryption_and_credential,
                 R.drawable.ic_settings_security);
         addIndex(ScreenPinningSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
-        addIndex(AccountSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accounts);
         addIndex(UserAndAccountDashboardFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_accounts);
         addIndex(InputMethodAndLanguageSettings.class,

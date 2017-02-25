@@ -46,7 +46,7 @@ import java.util.Date;
 abstract class AccountPreferenceBase extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener {
 
-    protected static final String TAG = "AccountSettings";
+    protected static final String TAG = "AccountPreferenceBase";
     protected static final boolean VERBOSE = Log.isLoggable(TAG, Log.VERBOSE);
 
     public static final String AUTHORITIES_FILTER_KEY = "authorities";

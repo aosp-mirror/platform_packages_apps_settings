@@ -2254,26 +2254,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="Settings$AccountSettingsActivity"
-            android:label="@string/account_settings_title"
-            android:icon="@drawable/ic_settings_accounts"
-            android:taskAffinity=""
-            android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter android:priority="1">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.personal" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.accounts.AccountSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
         <activity android:name="Settings$AccountSyncSettingsActivity"
             android:label="@string/account_sync_settings_title"
             android:taskAffinity=""
@@ -2309,7 +2289,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/header_add_an_account"
             android:taskAffinity="com.android.settings"
-            android:parentActivityName="Settings$ManageAccountsSettingsActivity">
+            android:parentActivityName="Settings$UserAndAccountDashboardActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ADD_ACCOUNT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3146,6 +3126,8 @@
                        android:value="com.android.settings.accounts.UserAndAccountDashboardFragment"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+              android:value="true" />
         </activity>
 
         <activity-alias android:name="AccessibilityDashboardAlias"
