@@ -17,13 +17,7 @@
 package com.android.settings.core;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -31,7 +25,6 @@ import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.survey.SurveyMixin;
-import com.android.settings.widget.PreferenceDividerDecoration;
 
 /**
  * Instrumented fragment that logs visibility state.
@@ -43,9 +36,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
 
     // metrics placeholder value. Only use this for development.
     protected final int PLACEHOLDER_METRIC = 10000;
-
-    private final PreferenceDividerDecoration mDividerDecoration =
-            new PreferenceDividerDecoration();
 
     private final VisibilityLoggerMixin mVisibilityLoggerMixin;
 
@@ -63,14 +53,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        final View view = super.onCreateView(inflater, container, savedInstanceState);
-        getListView().addItemDecoration(mDividerDecoration);
-        return view;
-    }
-
-    @Override
     public void onResume() {
         mVisibilityLoggerMixin.setSourceMetricsCategory(getActivity());
         super.onResume();
@@ -78,12 +60,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-    }
-
-    @Override
-    public void setDivider(Drawable divider) {
-        mDividerDecoration.setDivider(divider);
-        super.setDivider(new ColorDrawable(Color.TRANSPARENT));
     }
 
     protected final Context getPrefContext() {
