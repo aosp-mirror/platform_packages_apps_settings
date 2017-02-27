@@ -114,13 +114,6 @@ public class StorageSummaryDonutPreferenceControllerTest {
     }
 
     @Test
-    public void testAutomaticStorageManagerLabelOff() throws Exception {
-        mPreference.onBindViewHolder(mHolder);
-        TextView asmTextView = (TextView) mHolder.findViewById(R.id.storage_manager_indicator);
-        assertThat(asmTextView.getText().toString()).isEqualTo("Storage Manager: OFF");
-    }
-
-    @Test
     public void testFreeUpSpaceMetricIsTriggered() throws Exception {
         mPreference.onBindViewHolder(mHolder);
         Button button = (Button) mHolder.findViewById(R.id.deletion_helper_button);
@@ -129,16 +122,5 @@ public class StorageSummaryDonutPreferenceControllerTest {
 
         verify(mMetricsFeatureProvider, times(1)).action(
                 any(Context.class), eq(MetricsEvent.STORAGE_FREE_UP_SPACE_NOW));
-    }
-
-    @Test
-    public void testAutomaticStorageManagerLabelOn() throws Exception {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 1);
-
-        mPreference.onBindViewHolder(mHolder);
-
-        TextView asmTextView = (TextView) mHolder.findViewById(R.id.storage_manager_indicator);
-        assertThat(asmTextView.getText().toString()).isEqualTo("Storage Manager: ON");
     }
 }

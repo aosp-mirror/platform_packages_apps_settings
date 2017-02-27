@@ -18,6 +18,7 @@ package com.android.settings.deletionhelper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;

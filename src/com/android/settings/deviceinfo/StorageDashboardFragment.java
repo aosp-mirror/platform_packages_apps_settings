@@ -35,6 +35,7 @@ import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.applications.UserManagerWrapperImpl;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
 import com.android.settings.deviceinfo.storage.SecondaryUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
@@ -146,7 +147,11 @@ public class StorageDashboardFragment extends DashboardFragment
         mSecondaryUsers = SecondaryUserController.getSecondaryUserControllers(context, userManager);
         controllers.addAll(mSecondaryUsers);
 
-        controllers.add(new ManageStoragePreferenceController(context));
+        final AutomaticStorageManagementSwitchPreferenceController asmController =
+                new AutomaticStorageManagementSwitchPreferenceController(
+                        context, mMetricsFeatureProvider, getFragmentManager());
+        getLifecycle().addObserver(asmController);
+        controllers.add(asmController);
         return controllers;
     }
 
@@ -189,7 +194,6 @@ public class StorageDashboardFragment extends DashboardFragment
                             null /* volume */, new StorageManagerVolumeProvider(sm)));
                     controllers.addAll(SecondaryUserController.getSecondaryUserControllers(
                             context, userManager));
-                    controllers.add(new ManageStoragePreferenceController(context));
                     return controllers;
                 }
 
