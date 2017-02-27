@@ -16,6 +16,7 @@
 
 package com.android.settings.applications;
 
+import android.annotation.IdRes;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -144,48 +145,75 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int FILTER_APPS_WITH_OVERLAY = 10;
     public static final int FILTER_APPS_WRITE_SETTINGS = 11;
     public static final int FILTER_APPS_INSTALL_SOURCES = 12;
+    public static final int FILTER_APPS_COUNT = 13;  // This should always be the last entry
+
+    // Mapping to string labels for the FILTER_APPS_* constants above.
+    public static final @IdRes int[] FILTER_LABELS = new int[FILTER_APPS_COUNT];
+
+    // Mapping to filters for the FILTER_APPS_* constants above.
+    public static final AppFilter[] FILTERS = new AppFilter[FILTER_APPS_COUNT];
+
+    static {
+        // High power whitelist, on
+        FILTER_LABELS[FILTER_APPS_POWER_WHITELIST] = R.string.high_power_filter_on;
+        FILTERS[FILTER_APPS_POWER_WHITELIST] = new CompoundFilter(
+                AppStatePowerBridge.FILTER_POWER_WHITELISTED,
+                ApplicationsState.FILTER_ALL_ENABLED);
+
+        // Without disabled until used
+        FILTER_LABELS[FILTER_APPS_POWER_WHITELIST_ALL] = R.string.filter_all_apps;
+        FILTERS[FILTER_APPS_POWER_WHITELIST_ALL] = new CompoundFilter(
+                ApplicationsState.FILTER_WITHOUT_DISABLED_UNTIL_USED,
+                ApplicationsState.FILTER_ALL_ENABLED);
+
+        // All apps
+        FILTER_LABELS[FILTER_APPS_ALL] = R.string.filter_all_apps;
+        FILTERS[FILTER_APPS_ALL] = ApplicationsState.FILTER_EVERYTHING;
+
+        // Enabled
+        FILTER_LABELS[FILTER_APPS_ENABLED] = R.string.filter_enabled_apps;
+        FILTERS[FILTER_APPS_ENABLED] = ApplicationsState.FILTER_ALL_ENABLED;
+
+        // Disabled
+        FILTER_LABELS[FILTER_APPS_DISABLED] = R.string.filter_apps_disabled;
+        FILTERS[FILTER_APPS_DISABLED] = ApplicationsState.FILTER_DISABLED;
+
+        // Instant
+        FILTER_LABELS[FILTER_APPS_INSTANT] = R.string.filter_instant_apps;
+        FILTERS[FILTER_APPS_INSTANT] = ApplicationsState.FILTER_INSTANT;
+
+        // Blocked Notifications
+        FILTER_LABELS[FILTER_APPS_BLOCKED] = R.string.filter_notif_blocked_apps;
+        FILTERS[FILTER_APPS_BLOCKED] = AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED;
+
+        // Personal
+        FILTER_LABELS[FILTER_APPS_PERSONAL] = R.string.filter_personal_apps;
+        FILTERS[FILTER_APPS_PERSONAL] = ApplicationsState.FILTER_PERSONAL;
+
+        // Work
+        FILTER_LABELS[FILTER_APPS_WORK] = R.string.filter_work_apps;
+        FILTERS[FILTER_APPS_WORK] = ApplicationsState.FILTER_WORK;
+
+        // Usage access screen, never displayed.
+        FILTER_LABELS[FILTER_APPS_USAGE_ACCESS] = R.string.filter_all_apps;
+        FILTERS[FILTER_APPS_USAGE_ACCESS] = AppStateUsageBridge.FILTER_APP_USAGE;
+
+        // Apps that can draw overlays
+        FILTER_LABELS[FILTER_APPS_WITH_OVERLAY] = R.string.filter_overlay_apps;
+        FILTERS[FILTER_APPS_WITH_OVERLAY] = AppStateOverlayBridge.FILTER_SYSTEM_ALERT_WINDOW;
+
+        // Apps that can write system settings
+        FILTER_LABELS[FILTER_APPS_WRITE_SETTINGS] = R.string.filter_write_settings_apps;
+        FILTERS[FILTER_APPS_WRITE_SETTINGS] = AppStateWriteSettingsBridge.FILTER_WRITE_SETTINGS;
+
+        // Apps that are trusted sources of apks
+        FILTER_LABELS[FILTER_APPS_INSTALL_SOURCES] = R.string.filter_install_sources_apps;
+        FILTERS[FILTER_APPS_INSTALL_SOURCES] = AppStateInstallAppsBridge.FILTER_APP_SOURCES;
+    }
 
     // Storage types. Used to determine what the extra item in the list of preferences is.
     public static final int STORAGE_TYPE_DEFAULT = 0;
     public static final int STORAGE_TYPE_MUSIC = 1;
-
-    // This is the string labels for the filter modes above, the order must be kept in sync.
-    public static final int[] FILTER_LABELS = new int[]{
-            R.string.high_power_filter_on, // High power whitelist, on
-            R.string.filter_all_apps,      // Without disabled until used
-            R.string.filter_all_apps,      // All apps
-            R.string.filter_enabled_apps,  // Enabled
-            R.string.filter_apps_disabled, // Disabled
-            R.string.filter_instant_apps,  // Instant apps
-            R.string.filter_notif_blocked_apps,   // Blocked Notifications
-            R.string.filter_personal_apps, // Personal
-            R.string.filter_work_apps,     // Work
-            R.string.filter_with_domain_urls_apps,     // Domain URLs
-            R.string.filter_all_apps,      // Usage access screen, never displayed
-            R.string.filter_overlay_apps,   // Apps with overlay permission
-            R.string.filter_write_settings_apps,   // Apps that can write system settings
-            R.string.filter_install_sources_apps, // Apps that are trusted sources of apks
-    };
-    // This is the actual mapping to filters from FILTER_ constants above, the order must
-    // be kept in sync.
-    public static final AppFilter[] FILTERS = new AppFilter[]{
-            new CompoundFilter(AppStatePowerBridge.FILTER_POWER_WHITELISTED,
-                    ApplicationsState.FILTER_ALL_ENABLED),     // High power whitelist, on
-            new CompoundFilter(ApplicationsState.FILTER_WITHOUT_DISABLED_UNTIL_USED,
-                    ApplicationsState.FILTER_ALL_ENABLED),     // Without disabled until used
-            ApplicationsState.FILTER_EVERYTHING,  // All apps
-            ApplicationsState.FILTER_ALL_ENABLED, // Enabled
-            ApplicationsState.FILTER_DISABLED,    // Disabled
-            ApplicationsState.FILTER_INSTANT,      // Instant
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,   // Blocked Notifications
-            ApplicationsState.FILTER_PERSONAL,    // Personal
-            ApplicationsState.FILTER_WORK,        // Work
-            ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
-            AppStateUsageBridge.FILTER_APP_USAGE, // Apps with Domain URLs
-            AppStateOverlayBridge.FILTER_SYSTEM_ALERT_WINDOW,   // Apps that can draw overlays
-            AppStateWriteSettingsBridge.FILTER_WRITE_SETTINGS,  // Apps that can write system settings
-            AppStateInstallAppsBridge.FILTER_APP_SOURCES,
-    };
 
     // sort order
     private int mSortOrder = R.id.sort_order_alpha;
