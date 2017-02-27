@@ -535,6 +535,10 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     @VisibleForTesting
     void updateHeaderPreference(BatteryInfo info) {
+        final Context context = getContext();
+        if (context == null) {
+            return;
+        }
         final BatteryMeterView batteryView = (BatteryMeterView) mBatteryLayoutPref
                 .findViewById(R.id.battery_header_icon);
         final TextView timeText = (TextView) mBatteryLayoutPref.findViewById(R.id.time);
@@ -545,8 +549,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 R.string.estimated_time_left : R.string.estimated_charging_time_left;
 
         if (info.remainingTimeUs != 0) {
-            timeText.setText(Utils.formatElapsedTime(getContext(),
-                    info.remainingTimeUs / 1000, false));
+            timeText.setText(Utils.formatElapsedTime(context, info.remainingTimeUs / 1000, false));
         } else {
             timeText.setText(info.statusLabel);
         }

@@ -362,6 +362,14 @@ public class PowerUsageSummaryTest {
         verify(mSummary1).setText(R.string.estimated_time_left);
     }
 
+    @Test
+    public void testUpdateHeaderPreference_AsyncUpdate_ShouldNotCrash() {
+        when(mPowerUsageSummary.getContext()).thenReturn(null);
+        mBatteryInfo.remainingTimeUs = REMAINING_TIME_US;
+
+        //Should not crash
+        mPowerUsageSummary.updateHeaderPreference(mBatteryInfo);
+    }
 
     private void testToggleAllApps(final boolean isShowApps) {
         mFragment.mShowAllApps = isShowApps;
