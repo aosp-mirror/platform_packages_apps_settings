@@ -70,6 +70,7 @@ public class DashboardSummary extends InstrumentedFragment
     private SuggestionsChecks mSuggestionsChecks;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
+    private boolean isOnCategoriesChangedCalled;
 
     @Override
     public int getMetricsCategory() {
@@ -204,25 +205,27 @@ public class DashboardSummary extends InstrumentedFragment
             Log.d(TAG, "onViewCreated took "
                     + (System.currentTimeMillis() - startTime) + " ms");
         }
-        rebuildUI(true /* rebuildSuggestions */);
+        rebuildUI();
     }
 
-    private void rebuildUI(boolean rebuildSuggestions) {
-        if (rebuildSuggestions) {
-            // recheck to see if any suggestions have been changed.
-            new SuggestionLoader().execute();
-            // Set categories on their own if loading suggestions takes too long.
-            mHandler.postDelayed(() -> {
-                updateCategoryAndSuggestion(null /* tiles */);
-            }, MAX_WAIT_MILLIS);
-        } else {
+    @VisibleForTesting
+    void rebuildUI() {
+        new SuggestionLoader().execute();
+        // Set categories on their own if loading suggestions takes too long.
+        mHandler.postDelayed(() -> {
             updateCategoryAndSuggestion(null /* tiles */);
-        }
+        }, MAX_WAIT_MILLIS);
     }
 
     @Override
     public void onCategoriesChanged() {
-        rebuildUI(false /* rebuildSuggestions */);
+        // Bypass rebuildUI() on the first call of onCategoriesChanged, since rebuildUI() happens
+        // in onViewCreated as well when app starts. But, on the subsequent calls we need to
+        // rebuildUI() because there might be some changes to suggestions and categories.
+        if (isOnCategoriesChangedCalled) {
+            rebuildUI();
+        }
+        isOnCategoriesChangedCalled = true;
     }
 
     @Override
