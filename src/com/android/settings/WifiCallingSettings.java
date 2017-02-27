@@ -252,15 +252,6 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         final Context context = getActivity();
 
-        if (ImsManager.isWfcEnabledByPlatform(context)) {
-            TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-
-            mSwitchBar.addOnSwitchChangeListener(this);
-
-            mValidListener = true;
-        }
-
         // NOTE: Buttons will be enabled/disabled in mPhoneStateListener
         boolean wfcEnabled = ImsManager.isWfcEnabledByUser(context)
                 && ImsManager.isNonTtyOrTtyOnVolteEnabled(context);
@@ -270,6 +261,15 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mButtonWfcMode.setValue(Integer.toString(wfcMode));
         mButtonWfcRoamingMode.setValue(Integer.toString(wfcRoamingMode));
         updateButtonWfcMode(context, wfcEnabled, wfcMode, wfcRoamingMode);
+
+        if (ImsManager.isWfcEnabledByPlatform(context)) {
+            TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+
+            mSwitchBar.addOnSwitchChangeListener(this);
+
+            mValidListener = true;
+        }
 
         context.registerReceiver(mIntentReceiver, mIntentFilter);
 
