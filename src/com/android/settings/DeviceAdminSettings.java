@@ -416,7 +416,8 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
                     ai = iPackageManager.getReceiverInfo(activeAdmin,
                             PackageManager.GET_META_DATA |
                             PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
-                            PackageManager.MATCH_ENCRYPTION_AWARE_AND_UNAWARE, profileId);
+                            PackageManager.MATCH_DIRECT_BOOT_UNAWARE |
+                            PackageManager.MATCH_DIRECT_BOOT_AWARE, profileId);
                 } catch (RemoteException e) {
                     Log.w(TAG, "Unable to load component: " + activeAdmin);
                     continue;
