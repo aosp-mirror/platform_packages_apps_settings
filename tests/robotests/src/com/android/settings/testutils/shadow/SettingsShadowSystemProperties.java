@@ -55,7 +55,6 @@ public class SettingsShadowSystemProperties extends ShadowSystemProperties {
         sValues.put(key, val);
     }
 
-
     @Implementation
     public static String get(String key, String def) {
         String value = sValues.get(key);
