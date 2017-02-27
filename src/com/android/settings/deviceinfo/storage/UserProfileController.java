@@ -66,6 +66,7 @@ public class UserProfileController extends PreferenceController implements
         mStoragePreference.setOrder(mPreferenceOrder);
         mStoragePreference.setKey(PREFERENCE_KEY_BASE + mUser.id);
         mStoragePreference.setTitle(mUser.name);
+        // TODO(b/36252572): Set user icon here.
         screen.addPreference(mStoragePreference);
     }
 

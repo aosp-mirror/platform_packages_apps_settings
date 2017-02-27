@@ -33,7 +33,6 @@ import com.android.settings.deviceinfo.StorageItemPreference;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * SecondaryUserController controls the preferences on the Storage screen which had to do with
  * secondary users.
@@ -109,6 +108,9 @@ public class SecondaryUserController extends PreferenceController implements
             if (mSize != SIZE_NOT_SET) {
                 mStoragePreference.setStorageSize(mSize, mTotalSizeBytes);
             }
+
+            // TODO(b/36252572): Set the user icon appropriately here.
+
             group.setVisible(true);
             group.addPreference(mStoragePreference);
         }

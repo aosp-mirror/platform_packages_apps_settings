@@ -73,6 +73,7 @@ public class StorageProfileFragment extends DashboardFragment
 
         mPreferenceController.setVolume(mVolume);
         mUserId = args.getInt(USER_ID_EXTRA, UserHandle.myUserId());
+        // TODO(b/36224168): Use the user id to appropriately badge the preferences.
         mPreferenceController.setUserId(mUserId);
     }
 
@@ -137,6 +138,7 @@ public class StorageProfileFragment extends DashboardFragment
             return null;
         }
 
+        // TODO(b/35927909): Attribute app sizes better than zeroing out for profiles.
         result.gamesSize = 0;
         result.musicAppsSize = 0;
         result.otherAppsSize = 0;
