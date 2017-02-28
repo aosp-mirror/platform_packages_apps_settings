@@ -26,6 +26,9 @@ import com.android.internal.util.ArrayUtils;
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
 
     private static final String PACKAGE_CALENDAR_PROVIDER = "com.android.providers.calendar";
+    private static final String PACKAGE_MEDIA_PROVIDER = "com.android.providers.media";
+    private static final String[] PACKAGES_SYSTEM = {PACKAGE_MEDIA_PROVIDER,
+            PACKAGE_CALENDAR_PROVIDER};
 
     protected PackageManager mPackageManager;
 
@@ -45,9 +48,15 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
         // Classify all the sippers to type system if the range of uid is 0...FIRST_APPLICATION_UID
         if (uid >= Process.ROOT_UID && uid < Process.FIRST_APPLICATION_UID) {
             return true;
-        } else {
-            return ArrayUtils.contains(sipper.mPackages, PACKAGE_CALENDAR_PROVIDER);
+        } else if (sipper.mPackages != null) {
+            for (final String packageName : sipper.mPackages) {
+                if (ArrayUtils.contains(PACKAGES_SYSTEM, packageName)) {
+                    return true;
+                }
+            }
         }
+
+        return false;
     }
 
     @Override

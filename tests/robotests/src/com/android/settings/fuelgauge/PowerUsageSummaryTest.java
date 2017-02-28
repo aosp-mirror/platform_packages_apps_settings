@@ -292,6 +292,12 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
+    public void testShouldHideSipper_TypeBluetooth_ReturnTrue() {
+        mNormalBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
+        assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
     public void testShouldHideSipper_TypeSystem_ReturnTrue() {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
         when(mNormalBatterySipper.getUid()).thenReturn(Process.ROOT_UID);
