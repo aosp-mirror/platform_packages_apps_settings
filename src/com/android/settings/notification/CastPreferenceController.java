@@ -17,11 +17,8 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
-import java.util.List;
 
 public class CastPreferenceController extends PreferenceController {
 
@@ -39,13 +36,6 @@ public class CastPreferenceController extends PreferenceController {
     @Override
     public boolean isAvailable() {
         return true;
-    }
-
-    @Override
-    public void updateNonIndexableKeys(List<String> keys) {
-        if (!Utils.isVoiceCapable(mContext)) {
-            keys.add(KEY_WIFI_DISPLAY);
-        }
     }
 
 }

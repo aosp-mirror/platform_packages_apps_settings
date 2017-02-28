@@ -33,7 +33,6 @@ import com.android.settings.RingtonePreference;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 
 import java.util.ArrayList;
@@ -51,7 +50,6 @@ public class SoundSettings extends DashboardFragment {
     private final VolumePreferenceCallback mVolumeCallback = new VolumePreferenceCallback();
     private final H mHandler = new H();
 
-    private WorkSoundPreferenceController mWorkSoundController;
     private RingtonePreference mRequestPreference;
 
     @Override
@@ -105,40 +103,7 @@ public class SoundSettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
-        Lifecycle lifecycle = getLifecycle();
-        controllers.add(new ZenModePreferenceController(context));
-        controllers.add(new EmergencyBroadcastPreferenceController(context));
-        controllers.add(new VibrateWhenRingPreferenceController(context));
-
-        // === Volumes ===
-        controllers.add(new AlarmVolumePreferenceController(context, mVolumeCallback, lifecycle));
-        controllers.add(new MediaVolumePreferenceController(context, mVolumeCallback, lifecycle));
-        controllers.add(
-                new NotificationVolumePreferenceController(context, mVolumeCallback, lifecycle));
-        controllers.add(new RingVolumePreferenceController(context, mVolumeCallback, lifecycle));
-
-        // === Phone & notification ringtone ===
-        controllers.add(new PhoneRingtonePreferenceController(context));
-        controllers.add(new AlarmRingtonePreferenceController(context));
-        controllers.add(new NotificationRingtonePreferenceController(context));
-
-        // === Work Sound Settings ===
-        mWorkSoundController = new WorkSoundPreferenceController(context, this, getLifecycle());
-        controllers.add(mWorkSoundController);
-
-        // === Other Sound Settings ===
-        controllers.add(new DialPadTonePreferenceController(context, this, lifecycle));
-        controllers.add(new ScreenLockSoundPreferenceController(context, this, lifecycle));
-        controllers.add(new ChargingSoundPreferenceController(context, this, lifecycle));
-        controllers.add(new DockingSoundPreferenceController(context, this, lifecycle));
-        controllers.add(new TouchSoundPreferenceController(context, this, lifecycle));
-        controllers.add(new VibrateOnTouchPreferenceController(context, this, lifecycle));
-        controllers.add(new DockAudioMediaPreferenceController(context, this, lifecycle));
-        controllers.add(new BootSoundPreferenceController(context));
-        controllers.add(new EmergencyTonePreferenceController(context, this, lifecycle));
-
-        return controllers;
+        return buildPreferenceControllers(context, this, mVolumeCallback, getLifecycle());
     }
 
     @Override
@@ -206,6 +171,43 @@ public class SoundSettings extends DashboardFragment {
         }
     }
 
+    private static List<PreferenceController> buildPreferenceControllers(Context context,
+            SoundSettings fragment, VolumeSeekBarPreference.Callback callback,
+            Lifecycle lifecycle) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ZenModePreferenceController(context));
+        controllers.add(new EmergencyBroadcastPreferenceController(context));
+        controllers.add(new VibrateWhenRingPreferenceController(context));
+
+        // === Volumes ===
+        controllers.add(new AlarmVolumePreferenceController(context, callback, lifecycle));
+        controllers.add(new MediaVolumePreferenceController(context, callback, lifecycle));
+        controllers.add(
+                new NotificationVolumePreferenceController(context, callback, lifecycle));
+        controllers.add(new RingVolumePreferenceController(context, callback, lifecycle));
+
+        // === Phone & notification ringtone ===
+        controllers.add(new PhoneRingtonePreferenceController(context));
+        controllers.add(new AlarmRingtonePreferenceController(context));
+        controllers.add(new NotificationRingtonePreferenceController(context));
+
+        // === Work Sound Settings ===
+        controllers.add(new WorkSoundPreferenceController(context, fragment, lifecycle));
+
+        // === Other Sound Settings ===
+        controllers.add(new DialPadTonePreferenceController(context, fragment, lifecycle));
+        controllers.add(new ScreenLockSoundPreferenceController(context, fragment, lifecycle));
+        controllers.add(new ChargingSoundPreferenceController(context, fragment, lifecycle));
+        controllers.add(new DockingSoundPreferenceController(context, fragment, lifecycle));
+        controllers.add(new TouchSoundPreferenceController(context, fragment, lifecycle));
+        controllers.add(new VibrateOnTouchPreferenceController(context, fragment, lifecycle));
+        controllers.add(new DockAudioMediaPreferenceController(context, fragment, lifecycle));
+        controllers.add(new BootSoundPreferenceController(context));
+        controllers.add(new EmergencyTonePreferenceController(context, fragment, lifecycle));
+
+        return controllers;
+    }
+
     // === Indexing ===
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -218,52 +220,20 @@ public class SoundSettings extends DashboardFragment {
                     return Arrays.asList(sir);
                 }
 
-                public List<String> getNonIndexableKeys(Context context) {
-                    final ArrayList<String> rt = new ArrayList<String>();
-                    new NotificationVolumePreferenceController(
-                            context, null /* Callback */,
-                            null /* Lifecycle */).updateNonIndexableKeys(rt);
-                    new RingVolumePreferenceController(
-                            context, null /* Callback */,
-                            null /* Lifecycle */).updateNonIndexableKeys(rt);
-                    new PhoneRingtonePreferenceController(context).updateNonIndexableKeys(rt);
-                    new VibrateWhenRingPreferenceController(context).updateNonIndexableKeys(rt);
-                    new EmergencyBroadcastPreferenceController(context).updateNonIndexableKeys(rt);
-                    new DialPadTonePreferenceController(context,
-                        null /* SettingsPreferenceFragment */,
-                        null /* Lifecycle */).updateNonIndexableKeys(rt);
-                    new ScreenLockSoundPreferenceController(context,
-                        null /* SettingsPreferenceFragment */,
-                        null /* Lifecycle */).updateNonIndexableKeys(rt);
-                    new ChargingSoundPreferenceController(context,
-                        null /* SettingsPreferenceFragment */,
-                        null /* Lifecycle */).updateNonIndexableKeys(rt);
-                    new DockingSoundPreferenceController(context,
-                        null /* SettingsPreferenceFragment */,
-                        null /* Lifecycle */).updateNonIndexableKeys(rt);
-                    new TouchSoundPreferenceController(context, null /*
-                        SettingsPreferenceFragment */,
-                        null /* Lifecycle */).updateNonIndexableKeys(rt);
-                    new VibrateOnTouchPreferenceController(context,
-                        null /* SettingsPreferenceFragment */,
-                        null /* Lifecycle */).updateNonIndexableKeys(rt);
-                    new DockAudioMediaPreferenceController(context,
-                        null /* SettingsPreferenceFragment */,
-                        null /* Lifecycle */).updateNonIndexableKeys(rt);
-                    new BootSoundPreferenceController(context).updateNonIndexableKeys(rt);
-                    new EmergencyTonePreferenceController(context,
-                        null /* SettingsPreferenceFragment */,
-                        null /* Lifecycle */).updateNonIndexableKeys(rt);
-
-                    return rt;
+                @Override
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context, null /* fragment */,
+                            null /* callback */, null /* lifecycle */);
                 }
             };
 
     // === Work Sound Settings ===
 
     void enableWorkSync() {
-        if (mWorkSoundController != null) {
-            mWorkSoundController.enableWorkSync();
+        final WorkSoundPreferenceController workSoundController =
+                getPreferenceController(WorkSoundPreferenceController.class);
+        if (workSoundController != null) {
+            workSoundController.enableWorkSync();
         }
     }
 }

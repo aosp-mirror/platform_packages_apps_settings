@@ -184,16 +184,19 @@ public class StorageDashboardFragment extends DashboardFragment
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
-                    final ManageStoragePreferenceController controller =
-                            new ManageStoragePreferenceController(context);
-                    final List<String> keys = new ArrayList<>();
-                    controller.updateNonIndexableKeys(keys);
-                    return keys;
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    final StorageManager sm = context.getSystemService(StorageManager.class);
+                    final UserManagerWrapper userManager =
+                            new UserManagerWrapperImpl(context.getSystemService(UserManager.class));
+                    final List<PreferenceController> controllers = new ArrayList<>();
+                    controllers.add(new StorageSummaryDonutPreferenceController(context));
+                    controllers.add(new StorageItemPreferenceController(context, null /* host */,
+                            null /* volume */, new StorageManagerVolumeProvider(sm)));
+                    controllers.addAll(SecondaryUserController.getSecondaryUserControllers(
+                            context, userManager));
+                    controllers.add(new ManageStoragePreferenceController(context));
+                    return controllers;
                 }
+
             };
 }

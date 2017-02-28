@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -24,6 +25,7 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
@@ -38,7 +40,6 @@ import com.android.settings.deviceinfo.ManualPreferenceController;
 import com.android.settings.deviceinfo.RegulatoryInfoPreferenceController;
 import com.android.settings.deviceinfo.SELinuxStatusPreferenceController;
 import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
-import com.android.settings.deviceinfo.SafetyLegalPreferenceController;
 import com.android.settings.deviceinfo.SecurityPatchPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -50,8 +51,6 @@ import java.util.List;
 public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     private static final String LOG_TAG = "DeviceInfoSettings";
-
-    private BuildNumberPreferenceController mBuildNumberPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -65,7 +64,9 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (mBuildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
+        final BuildNumberPreferenceController buildNumberPreferenceController =
+                getPreferenceController(BuildNumberPreferenceController.class);
+        if (buildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -83,24 +84,8 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
-        mBuildNumberPreferenceController =
-                new BuildNumberPreferenceController(context, getActivity(), this /* fragment */);
-        getLifecycle().addObserver(mBuildNumberPreferenceController);
-        controllers.add(mBuildNumberPreferenceController);
-        controllers.add(new AdditionalSystemUpdatePreferenceController(context));
-        controllers.add(new ManualPreferenceController(context));
-        controllers.add(new FeedbackPreferenceController(this, context));
-        controllers.add(new KernelVersionPreferenceController(context));
-        controllers.add(new BasebandVersionPreferenceController(context));
-        controllers.add(new FirmwareVersionPreferenceController(context, getLifecycle()));
-        controllers.add(new RegulatoryInfoPreferenceController(context));
-        controllers.add(new DeviceModelPreferenceController(context));
-        controllers.add(new SecurityPatchPreferenceController(context));
-        controllers.add(new FccEquipmentIdPreferenceController(context));
-        controllers.add(new SELinuxStatusPreferenceController(context));
-        controllers.add(new SafetyInfoPreferenceController(context));
-        return controllers;
+        return buildPreferenceControllers(context, getActivity(), this /* fragment */,
+                getLifecycle());
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
@@ -131,6 +116,26 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
         }
     };
 
+    private static List<PreferenceController> buildPreferenceControllers(Context context,
+            Activity activity, Fragment fragment, Lifecycle lifecycle) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(
+                new BuildNumberPreferenceController(context, activity, fragment, lifecycle));
+        controllers.add(new AdditionalSystemUpdatePreferenceController(context));
+        controllers.add(new ManualPreferenceController(context));
+        controllers.add(new FeedbackPreferenceController(fragment, context));
+        controllers.add(new KernelVersionPreferenceController(context));
+        controllers.add(new BasebandVersionPreferenceController(context));
+        controllers.add(new FirmwareVersionPreferenceController(context, lifecycle));
+        controllers.add(new RegulatoryInfoPreferenceController(context));
+        controllers.add(new DeviceModelPreferenceController(context));
+        controllers.add(new SecurityPatchPreferenceController(context));
+        controllers.add(new FccEquipmentIdPreferenceController(context));
+        controllers.add(new SELinuxStatusPreferenceController(context));
+        controllers.add(new SafetyInfoPreferenceController(context));
+        return controllers;
+    }
+
     /**
      * For Search.
      */
@@ -146,19 +151,9 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = new ArrayList<>();
-                    new SafetyLegalPreferenceController(context).updateNonIndexableKeys(keys);
-                    new BasebandVersionPreferenceController(context).updateNonIndexableKeys(keys);
-                    new FeedbackPreferenceController(null, context).updateNonIndexableKeys(keys);
-                    new AdditionalSystemUpdatePreferenceController(context)
-                            .updateNonIndexableKeys(keys);
-                    new RegulatoryInfoPreferenceController(context).updateNonIndexableKeys(keys);
-                    new SecurityPatchPreferenceController(context).updateNonIndexableKeys(keys);
-                    new FccEquipmentIdPreferenceController(context).updateNonIndexableKeys(keys);
-                    new SELinuxStatusPreferenceController(context).updateNonIndexableKeys(keys);
-                    new SafetyInfoPreferenceController(context).updateNonIndexableKeys(keys);
-                    return keys;
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context, null /*activity */,
+                            null /* fragment */, null /* lifecycle */);
                 }
             };
 }

@@ -69,6 +69,15 @@ public class DisplaySettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_display;
+    }
+
+    private static List<PreferenceController> buildPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new AutoBrightnessPreferenceController(context));
         controllers.add(new AutoRotatePreferenceController(context));
@@ -87,11 +96,6 @@ public class DisplaySettings extends DashboardFragment {
         return controllers;
     }
 
-    @Override
-    protected int getHelpResource() {
-        return R.string.help_uri_display;
-    }
-
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
@@ -106,32 +110,8 @@ public class DisplaySettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    ArrayList<String> result = new ArrayList<>();
-
-                    new AutoBrightnessPreferenceController(context).updateNonIndexableKeys(result);
-                    new AutoRotatePreferenceController(context).updateNonIndexableKeys(result);
-                    new CameraGesturePreferenceController(context).updateNonIndexableKeys(result);
-                    new DozePreferenceController(context).updateNonIndexableKeys(result);
-                    new FontSizePreferenceController(context).updateNonIndexableKeys(result);
-                    new LiftToWakePreferenceController(context).updateNonIndexableKeys(result);
-                    new NightDisplayPreferenceController(context).updateNonIndexableKeys(result);
-                    new NightModePreferenceController(context).updateNonIndexableKeys(result);
-                    new ScreenSaverPreferenceController(context).updateNonIndexableKeys(result);
-                    new TapToWakePreferenceController(context).updateNonIndexableKeys(result);
-                    new TimeoutPreferenceController(context).updateNonIndexableKeys(result);
-                    new VrDisplayPreferenceController(context).updateNonIndexableKeys(result);
-                    new WallpaperPreferenceController(context).updateNonIndexableKeys(result);
-                    new ThemePreferenceController(context).updateNonIndexableKeys(result);
-
-                    return result;
-                }
-
-                @Override
                 public List<PreferenceController> getPreferenceControllers(Context context) {
-                    final List<PreferenceController> controllers = new ArrayList<>();
-                    controllers.add(new AutoBrightnessPreferenceController(context));
-                    return controllers;
+                    return buildPreferenceControllers(context);
                 }
             };
 }
