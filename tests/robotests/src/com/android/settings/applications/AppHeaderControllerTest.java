@@ -52,6 +52,7 @@ import org.robolectric.shadows.ShadowApplication;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -231,6 +232,25 @@ public class AppHeaderControllerTest {
                 .isEqualTo(View.VISIBLE);
         assertThat(appLinks.findViewById(R.id.right_button).getVisibility())
                 .isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void bindButton_hasAppInfo_shouldHaveContentDescription() {
+        final View appLinks = mLayoutInflater
+                .inflate(R.layout.app_details, null /* root */);
+        when(mFragment.getActivity()).thenReturn(mock(Activity.class));
+        when(mContext.getString(eq(R.string.application_info_label))).thenReturn("App Info");
+
+        mController = new AppHeaderController(mContext, mFragment, appLinks);
+        mController.setPackageName("123")
+                .setUid(UserHandle.USER_SYSTEM)
+                .setButtonActions(
+                        AppHeaderController.ActionType.ACTION_APP_INFO,
+                        AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE);
+        mController.done();
+
+        assertThat(appLinks.findViewById(R.id.left_button).getContentDescription())
+                .isEqualTo("App Info");
     }
 
     @Test

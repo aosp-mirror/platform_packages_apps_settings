@@ -267,6 +267,8 @@ public class AppHeaderController {
                         || !AppHeader.includeAppInfo(mFragment)) {
                     button.setVisibility(View.GONE);
                 } else {
+                    button.setContentDescription(
+                            mContext.getString(R.string.application_info_label));
                     button.setImageResource(com.android.settings.R.drawable.ic_info);
                     button.setOnClickListener(v -> AppInfoBase.startAppInfoFragment(
                             InstalledAppDetails.class, R.string.application_info_label,
