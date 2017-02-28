@@ -104,7 +104,6 @@ import com.android.settings.notification.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationStation;
-import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenAccessSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
@@ -208,7 +207,6 @@ public class SettingsGateway {
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),
             ChannelNotificationSettings.class.getName(),
-            OtherSoundSettings.class.getName(),
             ApnSettings.class.getName(),
             ApnEditor.class.getName(),
             WifiCallingSettings.class.getName(),

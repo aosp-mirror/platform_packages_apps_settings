@@ -100,17 +100,13 @@ public class SoundSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return mDashboardFeatureProvider.isEnabled()
-                ? R.xml.ia_sound_settings : R.xml.sound_settings;
+        return R.xml.ia_sound_settings;
     }
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
         Lifecycle lifecycle = getLifecycle();
-        if (!mDashboardFeatureProvider.isEnabled()) {
-            controllers.add(new CastPreferenceController(context));
-        }
         controllers.add(new ZenModePreferenceController(context));
         controllers.add(new EmergencyBroadcastPreferenceController(context));
         controllers.add(new VibrateWhenRingPreferenceController(context));
@@ -132,17 +128,15 @@ public class SoundSettings extends DashboardFragment {
         controllers.add(mWorkSoundController);
 
         // === Other Sound Settings ===
-        if (mDashboardFeatureProvider.isEnabled()) {
-            controllers.add(new DialPadTonePreferenceController(context, this, lifecycle));
-            controllers.add(new ScreenLockSoundPreferenceController(context, this, lifecycle));
-            controllers.add(new ChargingSoundPreferenceController(context, this, lifecycle));
-            controllers.add(new DockingSoundPreferenceController(context, this, lifecycle));
-            controllers.add(new TouchSoundPreferenceController(context, this, lifecycle));
-            controllers.add(new VibrateOnTouchPreferenceController(context, this, lifecycle));
-            controllers.add(new DockAudioMediaPreferenceController(context, this, lifecycle));
-            controllers.add(new BootSoundPreferenceController(context));
-            controllers.add(new EmergencyTonePreferenceController(context, this, lifecycle));
-        }
+        controllers.add(new DialPadTonePreferenceController(context, this, lifecycle));
+        controllers.add(new ScreenLockSoundPreferenceController(context, this, lifecycle));
+        controllers.add(new ChargingSoundPreferenceController(context, this, lifecycle));
+        controllers.add(new DockingSoundPreferenceController(context, this, lifecycle));
+        controllers.add(new TouchSoundPreferenceController(context, this, lifecycle));
+        controllers.add(new VibrateOnTouchPreferenceController(context, this, lifecycle));
+        controllers.add(new DockAudioMediaPreferenceController(context, this, lifecycle));
+        controllers.add(new BootSoundPreferenceController(context));
+        controllers.add(new EmergencyTonePreferenceController(context, this, lifecycle));
 
         return controllers;
     }
@@ -192,8 +186,6 @@ public class SoundSettings extends DashboardFragment {
         }
     }
 
-    ;
-
     // === Callbacks ===
 
 
@@ -222,7 +214,7 @@ public class SoundSettings extends DashboardFragment {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.sound_settings;
+                    sir.xmlResId = R.xml.ia_sound_settings;
                     return Arrays.asList(sir);
                 }
 
@@ -237,36 +229,31 @@ public class SoundSettings extends DashboardFragment {
                     new PhoneRingtonePreferenceController(context).updateNonIndexableKeys(rt);
                     new VibrateWhenRingPreferenceController(context).updateNonIndexableKeys(rt);
                     new EmergencyBroadcastPreferenceController(context).updateNonIndexableKeys(rt);
-                    if (FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        new DialPadTonePreferenceController(context,
-                                null /* SettingsPreferenceFragment */,
-                                null /* Lifecycle */).updateNonIndexableKeys(rt);
-                        new ScreenLockSoundPreferenceController(context,
-                                null /* SettingsPreferenceFragment */,
-                                null /* Lifecycle */).updateNonIndexableKeys(rt);
-                        new ChargingSoundPreferenceController(context,
-                                null /* SettingsPreferenceFragment */,
-                                null /* Lifecycle */).updateNonIndexableKeys(rt);
-                        new DockingSoundPreferenceController(context,
-                                null /* SettingsPreferenceFragment */,
-                                null /* Lifecycle */).updateNonIndexableKeys(rt);
-                        new TouchSoundPreferenceController(context, null /*
+                    new DialPadTonePreferenceController(context,
+                        null /* SettingsPreferenceFragment */,
+                        null /* Lifecycle */).updateNonIndexableKeys(rt);
+                    new ScreenLockSoundPreferenceController(context,
+                        null /* SettingsPreferenceFragment */,
+                        null /* Lifecycle */).updateNonIndexableKeys(rt);
+                    new ChargingSoundPreferenceController(context,
+                        null /* SettingsPreferenceFragment */,
+                        null /* Lifecycle */).updateNonIndexableKeys(rt);
+                    new DockingSoundPreferenceController(context,
+                        null /* SettingsPreferenceFragment */,
+                        null /* Lifecycle */).updateNonIndexableKeys(rt);
+                    new TouchSoundPreferenceController(context, null /*
                         SettingsPreferenceFragment */,
-                                null /* Lifecycle */).updateNonIndexableKeys(rt);
-                        new VibrateOnTouchPreferenceController(context,
-                                null /* SettingsPreferenceFragment */,
-                                null /* Lifecycle */).updateNonIndexableKeys(rt);
-                        new DockAudioMediaPreferenceController(context,
-                                null /* SettingsPreferenceFragment */,
-                                null /* Lifecycle */).updateNonIndexableKeys(rt);
-                        new BootSoundPreferenceController(context).updateNonIndexableKeys(rt);
-                        new EmergencyTonePreferenceController(context,
-                                null /* SettingsPreferenceFragment */,
-                                null /* Lifecycle */).updateNonIndexableKeys(rt);
-                    } else {
-                        new CastPreferenceController(context).updateNonIndexableKeys(rt);
-                    }
+                        null /* Lifecycle */).updateNonIndexableKeys(rt);
+                    new VibrateOnTouchPreferenceController(context,
+                        null /* SettingsPreferenceFragment */,
+                        null /* Lifecycle */).updateNonIndexableKeys(rt);
+                    new DockAudioMediaPreferenceController(context,
+                        null /* SettingsPreferenceFragment */,
+                        null /* Lifecycle */).updateNonIndexableKeys(rt);
+                    new BootSoundPreferenceController(context).updateNonIndexableKeys(rt);
+                    new EmergencyTonePreferenceController(context,
+                        null /* SettingsPreferenceFragment */,
+                        null /* Lifecycle */).updateNonIndexableKeys(rt);
 
                     return rt;
                 }

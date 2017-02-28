@@ -53,7 +53,7 @@ public class SettingPrefControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private OtherSoundSettings mSetting;
+    private SoundSettings mSetting;
     @Mock
     private Activity mActivity;
     @Mock

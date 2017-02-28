@@ -2575,15 +2575,21 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="7">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACTION_OTHER_SOUND_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="6">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.device" />
+                       android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.SoundSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+            <meta-data android:name="com.android.settings.summary"
+                android:value="@string/sound_dashboard_summary"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -2594,24 +2600,6 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.SoundSettings" />
         </activity-alias>
-
-        <activity android:name="Settings$OtherSoundSettingsActivity"
-                android:label="@string/other_sound_settings"
-                android:exported="true"
-                android:taskAffinity="">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.ACTION_OTHER_SOUND_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.OtherSoundSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
 
         <!-- Show apps for which application-level notification settings are applicable -->
         <activity android:name="Settings$NotificationAppListActivity"
@@ -3055,22 +3043,6 @@
                        android:value="com.android.settings.fuelgauge.PowerUsageSummary"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
-        </activity-alias>
-
-        <activity-alias android:name="SoundDashboardAlias"
-                        android:targetActivity="Settings$SoundSettingsActivity"
-                        android:icon="@drawable/ic_dashboard_sound">
-            <intent-filter android:priority="6">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.homepage" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.SoundSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:value="@string/sound_dashboard_summary"/>
         </activity-alias>
 
         <activity android:name=".Settings$StorageDashboardActivity"
