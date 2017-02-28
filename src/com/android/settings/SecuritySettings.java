@@ -525,6 +525,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return result;
     }
 
+    private static CharSequence getActiveTrustAgentLabel(Context context,
+            TrustAgentManager trustAgentManager, LockPatternUtils utils,
+            DevicePolicyManager dpm) {
+        ArrayList<TrustAgentComponentInfo> agents = getActiveTrustAgents(context,
+                trustAgentManager, utils, dpm);
+        return agents.isEmpty() ? null : agents.get(0).title;
+    }
+
     @Override
     public void onGearClick(GearPreference p) {
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(p.getKey())) {
@@ -912,6 +920,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         private SwitchPreference mPowerButtonInstantlyLocks;
         private RestrictedPreference mOwnerInfoPref;
 
+        private TrustAgentManager mTrustAgentManager;
         private LockPatternUtils mLockPatternUtils;
         private DevicePolicyManager mDPM;
 
@@ -923,6 +932,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
         @Override
         public void onCreate(Bundle icicle) {
             super.onCreate(icicle);
+            SecurityFeatureProvider securityFeatureProvider =
+                    FeatureFactory.getFactory(getActivity()).getSecurityFeatureProvider();
+            mTrustAgentManager = securityFeatureProvider.getTrustAgentManager();
             mLockPatternUtils = new LockPatternUtils(getContext());
             mDPM = getContext().getSystemService(DevicePolicyManager.class);
             createPreferenceHierarchy();
@@ -977,13 +989,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // lock instantly on power key press
             mPowerButtonInstantlyLocks = (SwitchPreference) findPreference(
                     KEY_POWER_INSTANTLY_LOCKS);
-            Preference trustAgentPreference = findPreference(KEY_TRUST_AGENT);
-            if (mPowerButtonInstantlyLocks != null &&
-                    trustAgentPreference != null &&
-                    trustAgentPreference.getTitle().length() > 0) {
+            CharSequence trustAgentLabel = getActiveTrustAgentLabel(getContext(),
+                    mTrustAgentManager, mLockPatternUtils, mDPM);
+            if (mPowerButtonInstantlyLocks != null && !TextUtils.isEmpty(trustAgentLabel)) {
                 mPowerButtonInstantlyLocks.setSummary(getString(
                         R.string.lockpattern_settings_power_button_instantly_locks_summary,
-                        trustAgentPreference.getTitle()));
+                        trustAgentLabel));
             }
 
             mOwnerInfoPref = (RestrictedPreference) findPreference(KEY_OWNER_INFO_SETTINGS);
@@ -1052,14 +1063,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     }
                 }
 
-                Preference preference = findPreference(KEY_TRUST_AGENT);
-                if (preference != null && preference.getTitle().length() > 0) {
+                CharSequence trustAgentLabel = getActiveTrustAgentLabel(getContext(),
+                        mTrustAgentManager, mLockPatternUtils, mDPM);
+                if (!TextUtils.isEmpty(trustAgentLabel)) {
                     if (Long.valueOf(values[best].toString()) == 0) {
                         summary = getString(R.string.lock_immediately_summary_with_exception,
-                                preference.getTitle());
+                                trustAgentLabel);
                     } else {
                         summary = getString(R.string.lock_after_timeout_summary_with_exception,
-                                entries[best], preference.getTitle());
+                                entries[best], trustAgentLabel);
                     }
                 } else {
                     summary = getString(R.string.lock_after_timeout_summary, entries[best]);
