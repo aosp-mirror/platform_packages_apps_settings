@@ -19,9 +19,11 @@ import android.app.AlertDialog;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 
+import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -59,17 +61,18 @@ public class ThemePreferenceController extends PreferenceController implements
     @Override
     public void updateState(Preference preference) {
         ListPreference pref = (ListPreference) preference;
-        String[] options = mUiModeManager.getAvailableThemes();
+        String[] options = getAvailableThemes();
         for (int i = 0; i < options.length; i++) {
             options[i] = nullToDefault(options[i]);
         }
         pref.setEntries(options);
         pref.setEntryValues(options);
-        String theme = mUiModeManager.getTheme();
-        if (theme == null) {
+        String theme = getCurrentTheme();
+        if (TextUtils.isEmpty(theme)) {
             theme = mContext.getString(R.string.default_theme);
+            pref.setSummary(theme);
         }
-        pref.setValue(nullToDefault(theme));
+        pref.setValue(theme);
     }
 
     @Override
@@ -92,12 +95,22 @@ public class ThemePreferenceController extends PreferenceController implements
 
     @Override
     public boolean isAvailable() {
-        String[] themes = mUiModeManager.getAvailableThemes();
+        String[] themes = getAvailableThemes();
         return themes != null && themes.length > 1;
     }
 
+    @VisibleForTesting
+    String getCurrentTheme() {
+        return mUiModeManager.getTheme();
+    }
+
+    @VisibleForTesting
+    String[] getAvailableThemes() {
+        return mUiModeManager.getAvailableThemes();
+    }
+
     private String nullToDefault(String input) {
-        if (input == null) {
+        if (TextUtils.isEmpty(input)) {
             return mContext.getString(R.string.default_theme);
         }
         return input;
