@@ -64,11 +64,7 @@ public class DisplaySettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (mDashboardFeatureProvider.isEnabled()) {
-            return R.xml.ia_display_settings;
-        } else {
-            return R.xml.display_settings;
-        }
+        return R.xml.ia_display_settings;
     }
 
     @Override
@@ -104,14 +100,7 @@ public class DisplaySettings extends DashboardFragment {
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    final boolean useNewIA = FeatureFactory.getFactory(context)
-                            .getDashboardFeatureProvider(context)
-                            .isEnabled();
-                    if (useNewIA) {
-                        sir.xmlResId = R.xml.ia_display_settings;
-                    } else {
-                        sir.xmlResId = R.xml.display_settings;
-                    }
+                    sir.xmlResId = R.xml.ia_display_settings;
                     result.add(sir);
                     return result;
                 }
