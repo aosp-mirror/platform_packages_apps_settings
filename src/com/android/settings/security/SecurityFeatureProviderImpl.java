@@ -22,9 +22,12 @@ import android.content.IContentProvider;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Looper;
 import com.android.settings.trustagent.TrustAgentManager;
 import com.android.settings.trustagent.TrustAgentManagerImpl;
 import com.android.settingslib.drawer.DashboardCategory;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -35,6 +38,7 @@ import android.util.Pair;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 
+import java.util.concurrent.Executors;
 import java.util.Map;
 
 /** Implementation for {@code SecurityFeatureProvider}. */
@@ -43,8 +47,22 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
     private TrustAgentManager mTrustAgentManager;
 
     /** Update preferences with data from associated tiles. */
-    public void updatePreferences(Context context, PreferenceScreen preferenceScreen,
+    public void updatePreferences(final Context context, final PreferenceScreen preferenceScreen,
+            final DashboardCategory dashboardCategory) {
+        // Fetching the summary and icon from the provider introduces latency, so do this on a
+        // separate thread.
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                updatePreferencesToRunOnWorkerThread(context, preferenceScreen, dashboardCategory);
+            }
+        });
+    }
+
+    @VisibleForTesting
+    void updatePreferencesToRunOnWorkerThread(Context context, PreferenceScreen preferenceScreen,
             DashboardCategory dashboardCategory) {
+
         if (preferenceScreen == null) {
             return;
         }
@@ -82,26 +100,41 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
                         TileUtils.getIconFromUri(context, packageName, iconUri, providerMap);
                 if (icon != null) {
                     // Icon is only returned if the icon belongs to Settings or the target app.
-                    try {
-                        matchingPref.setIcon(context.getPackageManager()
-                                .getResourcesForApplication(icon.first /* package name */)
-                                        .getDrawable(icon.second /* res id */, context.getTheme()));
-                    } catch (PackageManager.NameNotFoundException | Resources.NotFoundException e) {
-                        // Intentionally ignored. If icon resources cannot be found, do not update.
-                    }
+                    // setIcon must be called on the UI thread.
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                matchingPref.setIcon(context.getPackageManager()
+                                        .getResourcesForApplication(icon.first /* package name */)
+                                                .getDrawable(icon.second /* res id */,
+                                                        context.getTheme()));
+                            } catch (PackageManager.NameNotFoundException
+                                    | Resources.NotFoundException e) {
+                                // Intentionally ignored. If icon resources cannot be found, do not
+                                // update.
+                            }
+                        }
+                    });
                 }
             }
             if (!TextUtils.isEmpty(summaryUri)) {
                 String summary = TileUtils.getTextFromUri(context, summaryUri, providerMap,
                         TileUtils.META_DATA_PREFERENCE_SUMMARY);
-                // Only update the summary if it has actually changed.
-                if (summary == null) {
-                    if (matchingPref.getSummary() != null) {
-                        matchingPref.setSummary(summary);
+                // setSummary must be called on UI thread.
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Only update the summary if it has actually changed.
+                        if (summary == null) {
+                            if (matchingPref.getSummary() != null) {
+                                matchingPref.setSummary(summary);
+                            }
+                        } else if (!summary.equals(matchingPref.getSummary())) {
+                            matchingPref.setSummary(summary);
+                        }
                     }
-                } else if (!summary.equals(matchingPref.getSummary())) {
-                    matchingPref.setSummary(summary);
-                }
+                });
             }
         }
     }
