@@ -225,7 +225,7 @@ public class StorageItemPreferenceController extends PreferenceController {
         args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
         args.putInt(ManageApplications.EXTRA_STORAGE_TYPE, ManageApplications.STORAGE_TYPE_MUSIC);
         return Utils.onBuildStartFragmentIntent(mContext,
-                ManageApplications.class.getName(), args, null, R.string.audio_storage_title, null,
+                ManageApplications.class.getName(), args, null, R.string.storage_music_audio, null,
                 false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
     }
 
