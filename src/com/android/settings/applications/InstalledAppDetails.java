@@ -563,6 +563,7 @@ public class InstalledAppDetails extends AppInfoBase
                     .setLabel(mAppEntry)
                     .setIcon(mAppEntry)
                     .setSummary(getString(getInstallationStatus(mAppEntry.info)))
+                    .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
                     .done(false /* rebindActions */);
             mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
         } else {

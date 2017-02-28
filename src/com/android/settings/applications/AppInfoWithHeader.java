@@ -23,6 +23,7 @@ import android.util.Log;
 
 import com.android.settings.AppHeader;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.applications.AppUtils;
 
 import static com.android.settings.applications.AppHeaderController.ActionType;
 
@@ -52,6 +53,7 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
                     .setIcon(mPackageInfo.applicationInfo.loadIcon(mPm))
                     .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
                     .setSummary(mPackageInfo)
+                    .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
                     .setPackageName(mPackageName)
                     .setUid(mPackageInfo.applicationInfo.uid)
                     .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)

@@ -36,8 +36,6 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.InstantDataBuilder.Param;
-import com.android.settings.applications.instantapps.InstantAppDetails;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -251,102 +249,27 @@ public class AppHeaderControllerTest {
                 .isEqualTo(View.GONE);
     }
 
-    // Ensure that no instant app related information shows up when the AppHeaderController's
-    // InstantAppDetails are null.
+    // Ensure that the instant app label does not show up when we haven't told the controller the
+    // app is instant.
     @Test
-    public void instantApps_nullInstantAppDetails() {
+    public void instantApps_normalAppsDontGetLabel() {
         final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
         mController = new AppHeaderController(mContext, mFragment, appHeader);
-        mController.setInstantAppDetails(null);
         mController.done();
-        assertThat(appHeader.findViewById(R.id.instant_app_developer_title).getVisibility())
-                .isEqualTo(View.GONE);
-        assertThat(appHeader.findViewById(R.id.instant_app_maturity).getVisibility())
-                .isEqualTo(View.GONE);
-        assertThat(appHeader.findViewById(R.id.instant_app_monetization).getVisibility())
+        assertThat(appHeader.findViewById(R.id.install_type).getVisibility())
                 .isEqualTo(View.GONE);
     }
 
-    // Ensure that no instant app related information shows up when the AppHeaderController has
-    // a non-null InstantAppDetails, but each member of it is null.
+    // Test that the "instant apps" label is present in the header when we have an instant app.
     @Test
-    public void instantApps_detailsMembersNull() {
+    public void instantApps_expectedHeaderItem() {
         final View appHeader = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
         mController = new AppHeaderController(mContext, mFragment, appHeader);
-
-        InstantAppDetails details = InstantDataBuilder.build(mContext, EnumSet.noneOf(Param.class));
-        mController.setInstantAppDetails(details);
+        mController.setIsInstantApp(true);
         mController.done();
-        assertThat(appHeader.findViewById(R.id.instant_app_developer_title).getVisibility())
-                .isEqualTo(View.GONE);
-        assertThat(appHeader.findViewById(R.id.instant_app_maturity).getVisibility())
-                .isEqualTo(View.GONE);
-        assertThat(appHeader.findViewById(R.id.instant_app_monetization).getVisibility())
-                .isEqualTo(View.GONE);
-    }
-
-    // Helper to assert a TextView for a given id is visible and has a certain string value.
-    private void assertVisibleContent(View header, @IdRes int id, String expectedValue) {
-        TextView view = (TextView)header.findViewById(id);
-        assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(view.getText()).isEqualTo(expectedValue);
-    }
-
-    // Helper to assert an ImageView for a given id is visible and has a certain Drawable value.
-    private void assertVisibleContent(View header, @IdRes int id, Drawable expectedValue) {
-        ImageView view = (ImageView)header.findViewById(id);
-        assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(view.getDrawable()).isEqualTo(expectedValue);
-    }
-
-    // Test that expected items are present in the header when we have a complete InstantAppDetails.
-    @Test
-    public void instantApps_expectedHeaderItems() {
-        final View header = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
-        mController = new AppHeaderController(mContext, mFragment, header);
-
-        InstantAppDetails details = InstantDataBuilder.build(mContext);
-        mController.setInstantAppDetails(details);
-        mController.done();
-
-        assertVisibleContent(header, R.id.instant_app_developer_title, details.developerTitle);
-        assertVisibleContent(header, R.id.instant_app_maturity_icon,
-                details.maturityRatingIcon);
-        assertVisibleContent(header, R.id.instant_app_maturity_text,
-                details.maturityRatingString);
-        assertVisibleContent(header, R.id.instant_app_monetization,
-                details.monetizationNotice);
-    }
-
-    // Test having each member of InstantAppDetails be null.
-    @Test
-    public void instantApps_expectedHeaderItemsWithSingleNullMembers() {
-        final EnumSet<Param> allParams = EnumSet.allOf(Param.class);
-        for (Param paramToRemove : allParams) {
-            EnumSet<Param> params = allParams.clone();
-            params.remove(paramToRemove);
-            final View header = mLayoutInflater.inflate(R.layout.app_details, null /* root */);
-            mController = new AppHeaderController(mContext, mFragment, header);
-            InstantAppDetails details = InstantDataBuilder.build(mContext, params);
-            mController.setInstantAppDetails(details);
-            mController.done();
-
-            if (params.contains(Param.DEVELOPER_TITLE)) {
-                assertVisibleContent(header, R.id.instant_app_developer_title,
-                        details.developerTitle);
-            }
-            if (params.contains(Param.MATURITY_RATING_ICON)) {
-                assertVisibleContent(header, R.id.instant_app_maturity_icon,
-                        details.maturityRatingIcon);
-            }
-            if (params.contains(Param.MATURITY_RATING_STRING)) {
-                assertVisibleContent(header, R.id.instant_app_maturity_text,
-                        details.maturityRatingString);
-            }
-            if (params.contains(Param.MONETIZATION_NOTICE)) {
-                assertVisibleContent(header, R.id.instant_app_monetization,
-                        details.monetizationNotice);
-            }
-        }
+        TextView label = (TextView)appHeader.findViewById(R.id.install_type);
+        assertThat(label.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(label.getText()).isEqualTo(
+                appHeader.getResources().getString(R.string.install_type_instant));
     }
 }
