@@ -58,7 +58,6 @@ import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
-import com.android.settings.dashboard.DashboardContainerFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.SearchResultsSummary;
@@ -154,6 +153,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting";
 
+    @Deprecated
     public static final String EXTRA_HIDE_DRAWER = ":settings:hide_drawer";
 
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
@@ -367,9 +367,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
-        if (intent.getBooleanExtra(EXTRA_HIDE_DRAWER, false)) {
-            setIsDrawerPresent(false);
-        }
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
@@ -461,17 +458,8 @@ public class SettingsActivity extends SettingsDrawerActivity
                 mDisplaySearch = true;
                 mInitialTitleResId = R.string.dashboard_title;
 
-                // add argument to indicate which settings tab should be initially selected
-                final Bundle args = new Bundle();
-                final String extraName = DashboardContainerFragment.EXTRA_SELECT_SETTINGS_TAB;
-                args.putString(extraName, intent.getStringExtra(extraName));
-                if (isDashboardFeatureEnabled()) {
-                    switchToFragment(DashboardSummary.class.getName(), args, false, false,
+                switchToFragment(DashboardSummary.class.getName(), null /* args */, false, false,
                             mInitialTitleResId, mInitialTitle, false);
-                } else {
-                    switchToFragment(DashboardContainerFragment.class.getName(), args, false, false,
-                            mInitialTitleResId, mInitialTitle, false);
-                }
             }
         }
 
@@ -957,12 +945,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
             // When on restricted users, disable all extra categories (but only the settings ones).
-            List<DashboardCategory> categories;
-            if (isDashboardFeatureEnabled()) {
-                categories = mDashboardFeatureProvider.getAllCategories();
-            } else {
-                categories = getDashboardCategories();
-            }
+            final List<DashboardCategory> categories = mDashboardFeatureProvider.getAllCategories();
 
             for (DashboardCategory category : categories) {
                 for (Tile tile : category.tiles) {
@@ -1015,15 +998,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             // No recovery
             Log.d(LOG_TAG, "Cannot get Metadata for: " + getComponentName().toString());
         }
-    }
-
-    @Override
-    protected boolean isDashboardFeatureEnabled() {
-        if (mDashboardFeatureProvider == null) {
-            mDashboardFeatureProvider =
-                    FeatureFactory.getFactory(this).getDashboardFeatureProvider(this);
-        }
-        return mDashboardFeatureProvider.isEnabled();
     }
 
     // give subclasses access to the Next button
@@ -1082,16 +1056,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
         }
         return true;
-    }
-
-    @Override
-    protected void onTileClicked(Tile tile) {
-        if (mIsShowingDashboard) {
-            // If on dashboard, don't finish so the back comes back to here.
-            openTile(tile);
-        } else {
-            super.onTileClicked(tile);
-        }
     }
 
     @Override
