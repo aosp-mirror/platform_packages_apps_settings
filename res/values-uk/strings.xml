@@ -334,12 +334,10 @@
     <string name="location_settings_title" msgid="1369675479310751735">"Місцезнаходження"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Облікові записи"</string>
     <string name="security_settings_title" msgid="9087149148665560415">"Безпека та блокування екрана"</string>
-    <!-- no translation found for encryption_and_credential_settings_title (6514904533438791561) -->
-    <skip />
+    <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Шифрування й облікові дані"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Устан. Моє місцезн., розблок. екрана, блок. SIM-карти, сховища обл. даних"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Устан. Моє місцезн., розбл. екрана, блок. схов. обл. даних"</string>
-    <!-- no translation found for security_passwords_title (2881269890053568809) -->
-    <skip />
+    <string name="security_passwords_title" msgid="2881269890053568809">"Конфіденційність"</string>
     <string name="disabled_by_administrator_summary" msgid="5989801404248162477">"Вимкнено адміністратором"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Статус безпеки"</string>
     <string name="security_dashboard_summary" msgid="7778812098315813315">"Місцезнаходження та цифровий відбиток"</string>
@@ -1511,8 +1509,8 @@
     <string name="manage_space_text" msgid="8852711522447794676">"Кер. простором"</string>
     <string name="filter" msgid="2018011724373033887">"Фільтрув."</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Вибрати параметри фільтра"</string>
-    <string name="filter_apps_all" msgid="5142129378749391876">"Усі"</string>
-    <string name="filter_apps_disabled" msgid="5364447573326472890">"Вимкнені"</string>
+    <string name="filter_apps_all" msgid="8899612398848280352">"Усі додатки"</string>
+    <string name="filter_apps_disabled" msgid="5862632369555319938">"Вимкнені додатки"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Завантажені"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Запущені"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Носій USB"</string>
@@ -1865,7 +1863,11 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Залишилося <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Залишилося заряджати <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="2409288197839512482">"Використання після ост. повного зарядж."</string>
+    <string name="device_screen_usage" msgid="224482533839040430">"Використання заряду екраном"</string>
+    <string name="device_screen_consumption" msgid="4607589286438986687">"Споживання заряду екраном"</string>
+    <string name="device_cellular_network" msgid="4724773411762382950">"Сканування мобільної мережі"</string>
+    <string name="power_usage_list_summary" msgid="792703666229965848">"Використання додатком після останнього повного заряджання"</string>
+    <string name="device_usage_list_summary" msgid="1545514224536252111">"Використання пристроєм після останнього повного заряджання"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Споживання акумулятора з часу відключення"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Споживання акумулятора з моменту перезавантаження"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> від акумулятора"</string>
@@ -1955,10 +1957,10 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Переоцінене енергоспоживання"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> мА/год"</string>
     <string name="battery_used_for" msgid="4383512863007718804">"Використовується %1$s"</string>
+    <string name="battery_overall_usage" msgid="5541736421708733643">"%1$s усього заряду"</string>
     <string name="battery_detail_since_full_charge" msgid="4329720759041042322">"Статистика використання після останнього повного заряджання"</string>
     <string name="estimated_time_left" msgid="7514194472683370877">"Залишилося приблизно"</string>
-    <!-- no translation found for estimated_charging_time_left (5877141166478224765) -->
-    <skip />
+    <string name="estimated_charging_time_left" msgid="5877141166478224765">"Час до повного заряджання"</string>
     <string name="estimated_time_description" msgid="6722669204902760489">"Оцінка може змінюватися залежно від використання"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> з часу відключ."</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"З часу ост. відключ. для <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -2472,7 +2474,8 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Увімкнути телефонні дзвінки й SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Цей користувач матиме доступ до історії дзвінків і SMS"</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Інформація для екстрених випадків"</string>
-    <string name="emergency_info_summary" msgid="8791523394921560711">"Інформація про користувача <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for emergency_info_summary (5062945162967838521) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"Дозволи для програм і вмісту"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Програми з обмеженнями"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Розгорнути налаштув. програм"</string>
@@ -2595,8 +2598,7 @@
       <item quantity="other">Показати %d схованого елемента</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Мережа й Інтернет"</string>
-    <!-- no translation found for network_dashboard_summary (3274556191585905652) -->
-    <skip />
+    <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, мобільний, використання трафіку, точка доступу"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Під’єднані пристрої"</string>
     <string name="connected_devices_dashboard_summary" msgid="6595300910405977083">"Bluetooth, NFC та трансляція"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Додатки та сповіщення"</string>
@@ -2612,8 +2614,7 @@
     <string name="search_results_label" msgid="4163304782363526148">"Результати"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi, wi-fi, мережа, з’єднання"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"текстове повідомлення, писати, повідомлення, обмін повідомленнями"</string>
-    <!-- no translation found for keywords_more_mobile_networks (8995946622054642367) -->
-    <skip />
+    <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"мобільний зв’язок, мобільний, оператор мобільного зв’язку, без дротів, трафік, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, дзвінок, телефонувати"</string>
     <string name="keywords_home" msgid="3626170808219458848">"панель запуску"</string>
     <string name="keywords_display" msgid="8910345814565493016">"екран, сенсорний екран"</string>
@@ -2706,9 +2707,9 @@
     <string name="work_notification_ringtone_title" msgid="2108983018726925833">"Сигнал робочих сповіщень"</string>
     <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"Сигнал робочого будильника"</string>
     <string name="work_sound_same_as_personal" msgid="3123383644475266478">"Такі самі, як в особистому профілі"</string>
-    <string name="work_sync_dialog_title" msgid="4235493986362911084">"Замінити звуки робоч. профілю?"</string>
+    <string name="work_sync_dialog_title" msgid="3351285490304048243">"Використовувати звуки особистого профілю?"</string>
     <string name="work_sync_dialog_yes" msgid="7243884940551635717">"Замінити"</string>
-    <string name="work_sync_dialog_message" msgid="1655410601622810837">"Поточні звуки робочого профілю буде замінено на звуки особистого профілю"</string>
+    <string name="work_sync_dialog_message" msgid="9066322310245055242">"Поточні звуки робочого профілю буде замінено на звуки особистого профілю"</string>
     <string name="ringtones_category_preference_title" msgid="5675912303120102366">"Сигнали дзвінка"</string>
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"Інші звуки та вібросигнали"</string>
     <string name="configure_notification_settings" msgid="7447797716856573587">"Налаштування сповіщень"</string>
@@ -2956,11 +2957,11 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"Немає дозволів"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"Немає запитів на дозволи"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Усі додатки"</string>
-    <string name="filter_enabled_apps" msgid="3318021007093070639">"Увімкнені"</string>
+    <string name="filter_enabled_apps" msgid="5395727306799456250">"Установлені додатки"</string>
+    <string name="filter_instant_apps" msgid="574277769963965565">"Додатки з миттєвим запуском"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"Особисті"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Робочі"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Заблоковані"</string>
-    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"З URL-адресами домену"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Розширені налаштування"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Налаштування додатків"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Невідомий додаток"</string>
@@ -3016,10 +3017,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Оптимізація акумулятора"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Сповіщення про використання"</string>
-    <!-- no translation found for show_all_apps (1742726460081356745) -->
-    <skip />
-    <!-- no translation found for hide_extra_apps (5568177134273528751) -->
-    <skip />
+    <string name="show_all_apps" msgid="1742726460081356745">"Показати всі додатки"</string>
+    <string name="hide_extra_apps" msgid="5568177134273528751">"Сховати зайві додатки"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Додатки без оптимізації"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Не оптимізовано"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Використання акумулятора оптимізується"</string>
@@ -3204,6 +3203,8 @@
     <string name="color_temperature" msgid="2070126836910615605">"Холодна температура кольорів"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Використовувати холодніші кольори дисплея"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Щоб змінити кольори, вимкніть екран"</string>
+    <!-- no translation found for telephony_monitor_toast (7003764250271195384) -->
+    <skip />
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Автоматичне оновлення системи"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Зв’язані модулі HAL (потрібно перезапустити)"</string>
     <string name="usage" msgid="2977875522080448986">"Використання"</string>
@@ -3464,6 +3465,8 @@
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Установлено глобальний проксі-сервер HTTP"</string>
     <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"Адміністратор може заблокувати пристрій і скинути пароль"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"Адміністратор може видалити всі дані пристрою"</string>
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (7687271729962516228) -->
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4192488502181650982) -->
     <string name="do_disclosure_generic" msgid="5666469247267523806">"Цим пристроєм керує адміністратор."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"Цим пристроєм керує <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>

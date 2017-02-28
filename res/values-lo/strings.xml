@@ -330,12 +330,10 @@
     <string name="location_settings_title" msgid="1369675479310751735">"ສະຖານທີ່"</string>
     <string name="account_settings_title" msgid="626177544686329806">"ບັນຊີ"</string>
     <string name="security_settings_title" msgid="9087149148665560415">"Security &amp; screen lock"</string>
-    <!-- no translation found for encryption_and_credential_settings_title (6514904533438791561) -->
-    <skip />
+    <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"ການເຂົ້າລະຫັດ ແລະ ຂໍ້ມູນການເຂົ້າສູ່ລະບົບ"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"ຕັ້ງທີ່ຢູ່ຂອງຂ້ອຍ, ໜ້າຈໍປົດລັອກ, ການລັອກຊິມກາດ, ການລັອກບ່ອນຈັດເກັບຂໍ້ມູນຮັບຮອງ"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"ກຳນົດທີ່ຢູ່ຂອງຂ້ອຍ, ການປົດລັອກໜ້າຈໍ, ການລັອກບ່ອນເຈັດເກັບຂໍ້ມູນຮັບຮອງ"</string>
-    <!-- no translation found for security_passwords_title (2881269890053568809) -->
-    <skip />
+    <string name="security_passwords_title" msgid="2881269890053568809">"ຄວາມເປັນສ່ວນຕົວ"</string>
     <string name="disabled_by_administrator_summary" msgid="5989801404248162477">"ຖືກປິດການນຳໃຊ້ໂດຍຜູ່ເບິ່ງແຍງລະບົບ"</string>
     <string name="security_status_title" msgid="5848766673665944640">"ສະຖານະຄວາມປອດໄພ"</string>
     <string name="security_dashboard_summary" msgid="7778812098315813315">"Location, fingerprint"</string>
@@ -1489,8 +1487,10 @@
     <string name="manage_space_text" msgid="8852711522447794676">"ຈັດການພື້ນທີ່"</string>
     <string name="filter" msgid="2018011724373033887">"ໂຕກັ່ນຕອງ"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"ເລືອກໂຕເລືອກການກັ່ນຕອງ"</string>
-    <string name="filter_apps_all" msgid="5142129378749391876">"ທັງໝົດ"</string>
-    <string name="filter_apps_disabled" msgid="5364447573326472890">"ປິດການນຳໃຊ້"</string>
+    <!-- no translation found for filter_apps_all (8899612398848280352) -->
+    <skip />
+    <!-- no translation found for filter_apps_disabled (5862632369555319938) -->
+    <skip />
     <string name="filter_apps_third_party" msgid="7786348047690140979">"ດາວໂຫລດແລ້ວ"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"ກຳລັງເຮັດວຽກ"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"ບ່ອນຈັດເກັບຂໍ້ມູນ USB"</string>
@@ -1831,7 +1831,16 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"ເຫຼືອອີກ <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> ​ກ່ອນ​ຈະ​ເຕັມ"</string>
-    <string name="power_usage_list_summary" msgid="2409288197839512482">"​ໃຊ້​ຕັ້ງ​ແຕ່​ການ​ສາກ​ໄຟ​ເຕັມ​ເທື່ອ​ສຸດ​ທ້າຍ"</string>
+    <!-- no translation found for device_screen_usage (224482533839040430) -->
+    <skip />
+    <!-- no translation found for device_screen_consumption (4607589286438986687) -->
+    <skip />
+    <!-- no translation found for device_cellular_network (4724773411762382950) -->
+    <skip />
+    <!-- no translation found for power_usage_list_summary (792703666229965848) -->
+    <skip />
+    <!-- no translation found for device_usage_list_summary (1545514224536252111) -->
+    <skip />
     <string name="battery_since_unplugged" msgid="338073389740738437">"ການນຳໃຊ້ແບັດເຕີຣີຕັ້ງແຕ່ຖອດສາຍສາກ"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"ການໃຊ້ແບັດເຕີຣີນັບຈາກການຣີເຊັດ"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"ໃຊ້ແບັດເຕີຣີມາ <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -1921,10 +1930,11 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"ການໃຊ້ພະລັງງານທີ່ຄິດໄລ່ເກີນ"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="4383512863007718804">"ໃຊ້ເປັນເວລາ %1$s"</string>
+    <!-- no translation found for battery_overall_usage (5541736421708733643) -->
+    <skip />
     <string name="battery_detail_since_full_charge" msgid="4329720759041042322">"ແຍກສ່ວນການນຳໃຊ້ນັບຕັ້ງແຕ່ສາກຈົນເຕັມເທື່ອຫຼ້າສຸດ"</string>
     <string name="estimated_time_left" msgid="7514194472683370877">"ເວລາທີ່ເຫຼືອໂດຍປະມານ"</string>
-    <!-- no translation found for estimated_charging_time_left (5877141166478224765) -->
-    <skip />
+    <string name="estimated_charging_time_left" msgid="5877141166478224765">"ເວລາທີ່ໃຊ້ໃນການສາກໃຫ້ເຕັມ"</string>
     <string name="estimated_time_description" msgid="6722669204902760489">"ການປະມານອາດມີການປ່ຽນແປງໂດຍອ້າງອີງຈາກການນຳໃຊ້"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> ຕັ້ງແຕ່ຖອດສາຍສາກ"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"ການນຳໃຊ້ຕັ້ງແຕ່ຖອດສາຍໄຟອອກ <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -2430,7 +2440,8 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"ເປີດ​ໂທ​ລະ​ສັບ &amp; SMS ບໍ?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"ປະ​ຫວັດ​ການ​ໂທ​ ແລະ ​ການ​ສົ່ງ SMS ຈະ​ຖືກ​ແບ່ງ​ປັນ​ໃຫ້​ກັບ​ຜູ້​ໃຊ້​ນີ້."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"ຂໍ້ມູນສຸກເສີນ"</string>
-    <string name="emergency_info_summary" msgid="8791523394921560711">"ຂໍ້ມູນກ່ຽວກັບ <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for emergency_info_summary (5062945162967838521) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"ອະນຸຍາດແອັບຯ ແລະເນື້ອຫາ"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"ແອັບພລິເຄຊັນທີ່ມີຂໍ້ຈຳກັດ"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"ຂະຫຍາຍການຕັ້ງຄ່າສຳລັບແອັບພລິເຄຊັນ"</string>
@@ -2551,8 +2562,7 @@
       <item quantity="one">ສະແດງ %d ລາຍການທີ່ເຊື່ອງໄວ້</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"ເຄືອຂ່າຍ ແລະ ອິນເຕີເນັດ"</string>
-    <!-- no translation found for network_dashboard_summary (3274556191585905652) -->
-    <skip />
+    <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, ມືຖື, ການນຳໃຊ້ອິນເຕີເນັດ, ຮັອດສະປອດ"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"ອຸປະກອນທີ່ເຊື່ອມຕໍ່ແລ້ວ"</string>
     <string name="connected_devices_dashboard_summary" msgid="6595300910405977083">"Bluetooth, NFC, cast"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"ແອັບ ແລະ ການແຈ້ງເຕືອນ"</string>
@@ -2568,8 +2578,7 @@
     <string name="search_results_label" msgid="4163304782363526148">"ຜົນ​ການ​ຊອກ​ຫາ"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi, wi-fi, ການເຊື່ອມຕໍ່ເຄືອຂ່າຍ"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"ຂໍ້ຄວາມອັກສອນ, ການສົ່ງຂໍ້ຄວາມ, ຂໍ້ຄວາມ, ການສົ່ງຂໍ້ຄວາມ"</string>
-    <!-- no translation found for keywords_more_mobile_networks (8995946622054642367) -->
-    <skip />
+    <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"ເຄືອຂ່າຍມືຖື, ມືຖື, ຜູ້ໃຫ້ບໍລິການມືຖື, ໄຮ້ສາຍ, ຂໍ້ມູນ, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, ໂທ, ການໂທ"</string>
     <string name="keywords_home" msgid="3626170808219458848">"​ລອນ​ເຊີ"</string>
     <string name="keywords_display" msgid="8910345814565493016">"ສຳຜັດ, ໜ້າຈໍສຳພັດ"</string>
@@ -2662,9 +2671,11 @@
     <string name="work_notification_ringtone_title" msgid="2108983018726925833">"ສຽງກນແຈ້ງເຕືອນບ່ອນເຮັດວຽກ"</string>
     <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"ຣິງໂທນປຸກບ່ອນເຮັດວຽກ"</string>
     <string name="work_sound_same_as_personal" msgid="3123383644475266478">"ຄືກັນກັບໂປຣໄຟລ໌ສ່ວນຕົວ"</string>
-    <string name="work_sync_dialog_title" msgid="4235493986362911084">"ແທນທີ່ສຽງໂປຣໄຟລ໌ບ່ອນເຮັດວຽກບໍ?"</string>
+    <!-- no translation found for work_sync_dialog_title (3351285490304048243) -->
+    <skip />
     <string name="work_sync_dialog_yes" msgid="7243884940551635717">"ແທນທີ່"</string>
-    <string name="work_sync_dialog_message" msgid="1655410601622810837">"ສຽງໂປຣໄຟລ໌ບ່ອນເຮັດວຽກຂອງທ່ານໃນປັດຈຸບັນຈະຖືກແທນທີ່ດ້ວຍສຽງໂປຣໄຟລ໌ສ່ວນຕົວຂອງທ່ານ"</string>
+    <!-- no translation found for work_sync_dialog_message (9066322310245055242) -->
+    <skip />
     <string name="ringtones_category_preference_title" msgid="5675912303120102366">"ຣິງໂທນ"</string>
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"Other sounds and vibrations"</string>
     <string name="configure_notification_settings" msgid="7447797716856573587">"ການຕັ້ງຄ່າການແຈ້ງເຕືອນ"</string>
@@ -2900,11 +2911,13 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"ບໍ່ໄດ້ໃຫ້ການອະນຸຍາດໃດ"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"ບໍ່ມີການຮ້ອງຂໍການອະນຸຍາດໃດ"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"ແອັບທັງໝົດ"</string>
-    <string name="filter_enabled_apps" msgid="3318021007093070639">"ເປີດຳໃຊ້ງານ​ແລ້ວ"</string>
+    <!-- no translation found for filter_enabled_apps (5395727306799456250) -->
+    <skip />
+    <!-- no translation found for filter_instant_apps (574277769963965565) -->
+    <skip />
     <string name="filter_personal_apps" msgid="3277727374174355971">"​ສ່ວນ​ໂຕ"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"ວຽກ"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"ບລັອກ​ແລ້ວ"</string>
-    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"ກັບ URL ໂດ​ເມນ"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"​ຂັ້ນ​ສູງ"</string>
     <string name="configure_apps" msgid="6685680790825882528">"ກຳນົດຄ່າແອັບ"</string>
     <string name="unknown_app" msgid="5275921288718717656">"ແອັບທີ່ບໍ່ຮູ້ຈັກ"</string>
@@ -2958,10 +2971,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"ການປັບແບັດເຕີຣີໃຫ້ເໝາະສົມ"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Usage alerts"</string>
-    <!-- no translation found for show_all_apps (1742726460081356745) -->
-    <skip />
-    <!-- no translation found for hide_extra_apps (5568177134273528751) -->
-    <skip />
+    <string name="show_all_apps" msgid="1742726460081356745">"ສະແດງແອັບທັງໝົດ"</string>
+    <string name="hide_extra_apps" msgid="5568177134273528751">"ເຊື່ອງແອັບເພີ່ມເຕີມ"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"ບໍ່ໄດ້ປັບໃຫ້ເໝາະສົມ"</string>
     <string name="high_power_on" msgid="6216293998227583810">"ບໍ່ໄດ້ປັບໃຫ້ເໝາະສົມ"</string>
     <string name="high_power_off" msgid="3393904131961263278">"ກຳລັງປັບການໃຊ້ແບັດເຕີຣີໃຫ້ເໝາະສົມ"</string>
@@ -3142,6 +3153,8 @@
     <string name="color_temperature" msgid="2070126836910615605">"ອຸນຫະພູມສີເຢັນ"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"ໃຊ້ສີຈໍສະແດງຜົນທີ່ເຢັນກວ່າ"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"ເພື່ອນຳໃຊ້ການປ່ຽນສີ, ໃຫ້ປິດໜ້າຈໍ"</string>
+    <!-- no translation found for telephony_monitor_toast (7003764250271195384) -->
+    <skip />
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"ການອັບເດດລະບົບອັດຕະໂນມັດ"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Binderized HALs (ຕ້ອງປິດແລ້ວເປີດໃໝ່)"</string>
     <string name="usage" msgid="2977875522080448986">"ການໃຊ້"</string>
@@ -3382,6 +3395,8 @@
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Global HTTP proxy set"</string>
     <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"ຜູ້ເບິ່ງແຍງລະບົບສາມາດລັອກອຸປະກອນ ແລະ ຕັ້ງລະຫັດຜ່ານໃໝ່ໄດ້"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"ຜູ້ເບິ່ງແຍງສາມາດລຶບຂໍ້ມູນອຸປະກອນທັງໝົດໄດ້"</string>
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (7687271729962516228) -->
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4192488502181650982) -->
     <string name="do_disclosure_generic" msgid="5666469247267523806">"ອຸປະກອນນີ້ຖືກຈັດການຢູ່"</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"ອຸປະກອນນີ້ຖືກຈັດການໂດຍ <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
