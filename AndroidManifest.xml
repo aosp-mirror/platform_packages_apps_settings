@@ -904,15 +904,17 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="9">
+            <intent-filter android:priority="7">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.device" />
+                android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.DisplaySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+            <meta-data android:name="com.android.settings.summary"
+                android:value="@string/display_dashboard_summary"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -3053,21 +3055,6 @@
                        android:value="com.android.settings.fuelgauge.PowerUsageSummary"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
-        </activity-alias>
-
-        <activity-alias android:name="DisplayDashboardAlias"
-                        android:targetActivity="Settings$DisplaySettingsActivity">
-            <intent-filter android:priority="7">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.homepage" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.DisplaySettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:value="@string/display_dashboard_summary"/>
         </activity-alias>
 
         <activity-alias android:name="SoundDashboardAlias"
