@@ -330,12 +330,10 @@
     <string name="location_settings_title" msgid="1369675479310751735">"Ubicació"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Comptes"</string>
     <string name="security_settings_title" msgid="9087149148665560415">"Seguretat i bloqueig de pantalla"</string>
-    <!-- no translation found for encryption_and_credential_settings_title (6514904533438791561) -->
-    <skip />
+    <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Encriptació i credencials"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Defineix La meva ubicació, el desbloqueig de la pantalla, el bloqueig de la targeta SIM i el bloqueig de l\'emmagatzematge de credencials"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Defineix La meva ubicació, el desbloqueig de pantalla i el bloqueig d\'emmagatzematge de credencials"</string>
-    <!-- no translation found for security_passwords_title (2881269890053568809) -->
-    <skip />
+    <string name="security_passwords_title" msgid="2881269890053568809">"Privadesa"</string>
     <string name="disabled_by_administrator_summary" msgid="5989801404248162477">"Opció desactivada per l\'administrador"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Estat de seguretat"</string>
     <string name="security_dashboard_summary" msgid="7778812098315813315">"Ubicació, empremta digital"</string>
@@ -1489,8 +1487,8 @@
     <string name="manage_space_text" msgid="8852711522447794676">"Gestiona l\'espai"</string>
     <string name="filter" msgid="2018011724373033887">"Filtra"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Selecció d\'opcions de filtre"</string>
-    <string name="filter_apps_all" msgid="5142129378749391876">"Totes"</string>
-    <string name="filter_apps_disabled" msgid="5364447573326472890">"Desactivades"</string>
+    <string name="filter_apps_all" msgid="8899612398848280352">"Totes les aplicacions"</string>
+    <string name="filter_apps_disabled" msgid="5862632369555319938">"Aplicacions desactivades"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Baixades"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"En execució"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Emmagatzematge USB"</string>
@@ -1831,7 +1829,11 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Temps restant: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> per completar la càrrega"</string>
-    <string name="power_usage_list_summary" msgid="2409288197839512482">"Ús des de l\'última càrrega completa"</string>
+    <string name="device_screen_usage" msgid="224482533839040430">"Ús de la pantalla"</string>
+    <string name="device_screen_consumption" msgid="4607589286438986687">"Consum de la pantalla"</string>
+    <string name="device_cellular_network" msgid="4724773411762382950">"Cerca de xarxes de telefonia mòbil"</string>
+    <string name="power_usage_list_summary" msgid="792703666229965848">"Ús de les aplicacions des de l\'última càrrega completa"</string>
+    <string name="device_usage_list_summary" msgid="1545514224536252111">"Ús del dispositiu des de l\'última càrrega completa"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Ús de la bateria des que s\'ha desconnectat"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Ús de la bateria des que s\'ha restablert"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> utilitzant bateria"</string>
@@ -1921,10 +1923,10 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Consum d\'energia comptabilitzat més d\'una vegada"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="4383512863007718804">"S\'ha utilitzat durant %1$s"</string>
+    <string name="battery_overall_usage" msgid="5541736421708733643">"%1$s d\'ús de la bateria"</string>
     <string name="battery_detail_since_full_charge" msgid="4329720759041042322">"Desglossament de l\'ús des de l\'última càrrega completa"</string>
     <string name="estimated_time_left" msgid="7514194472683370877">"Temps estimat restant"</string>
-    <!-- no translation found for estimated_charging_time_left (5877141166478224765) -->
-    <skip />
+    <string name="estimated_charging_time_left" msgid="5877141166478224765">"Temps per acabar de carregar"</string>
     <string name="estimated_time_description" msgid="6722669204902760489">"El temps estimat pot variar en funció de l\'ús"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> des de la desconnexió"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Mentre es va desconnectar per darrera vegada durant <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -2316,7 +2318,7 @@
     <string name="vpn_always_on_inactive" msgid="3488804214062121892">"VPN sempre activada: opció no activada"</string>
     <string name="vpn_not_supported_by_this_app" msgid="5002053874215892179">"No compatible amb aquesta aplicació"</string>
     <string name="vpn_require_connection" msgid="4564777707170757146">"Permet només connexions mitjançant VPN"</string>
-    <string name="vpn_require_connection_title" msgid="159053539340576331">"Cal una connexió VPN?"</string>
+    <string name="vpn_require_connection_title" msgid="159053539340576331">"La connexió VPN ha de ser obligatòria?"</string>
     <string name="vpn_lockdown_active" msgid="4687243926584886862">"El bloqueig està actiu"</string>
     <string name="vpn_lockdown_inactive" msgid="3366835171623444107">"El bloqueig està inactiu"</string>
     <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Selecciona un perfil de VPN per estar-hi sempre connectat. El trànsit de la xarxa només es permetrà quan estiguis connectat a aquesta VPN."</string>
@@ -2430,7 +2432,8 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Vols activar les trucades i els SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"L\'historial de trucades i de SMS es compartirà amb aquest usuari."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Informació d\'emergència"</string>
-    <string name="emergency_info_summary" msgid="8791523394921560711">"Informació sobre <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for emergency_info_summary (5062945162967838521) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"Permet aplicacions i contingut"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplicacions amb restriccions"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Desplega configuració aplicació"</string>
@@ -2551,8 +2554,7 @@
       <item quantity="one">Mostra %d element amagat</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Xarxa i Internet"</string>
-    <!-- no translation found for network_dashboard_summary (3274556191585905652) -->
-    <skip />
+    <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, mòbil, ús de dades i punt d\'accés Wi-Fi"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Dispositius connectats"</string>
     <string name="connected_devices_dashboard_summary" msgid="6595300910405977083">"Bluetooth, NFC, emissió"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplicacions i notificacions"</string>
@@ -2568,8 +2570,7 @@
     <string name="search_results_label" msgid="4163304782363526148">"Resultats"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi, wi-fi, connexió de xarxa"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"missatge de text, enviar missatges, missatges, missatgeria"</string>
-    <!-- no translation found for keywords_more_mobile_networks (8995946622054642367) -->
-    <skip />
+    <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"telèfon, mòbil, operador de telefonia mòbil, sense fil, dades, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, trucar, trucades"</string>
     <string name="keywords_home" msgid="3626170808219458848">"Launcher"</string>
     <string name="keywords_display" msgid="8910345814565493016">"pantalla, pantalla tàctil"</string>
@@ -2662,9 +2663,9 @@
     <string name="work_notification_ringtone_title" msgid="2108983018726925833">"So de notificació prof. pred."</string>
     <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"So d\'alarma professional pred."</string>
     <string name="work_sound_same_as_personal" msgid="3123383644475266478">"Igual que al perfil personal"</string>
-    <string name="work_sync_dialog_title" msgid="4235493986362911084">"Subst. sons del perfil prof.?"</string>
+    <string name="work_sync_dialog_title" msgid="3351285490304048243">"Vols utilitzar els sons del perfil personal?"</string>
     <string name="work_sync_dialog_yes" msgid="7243884940551635717">"Substitueix"</string>
-    <string name="work_sync_dialog_message" msgid="1655410601622810837">"El sons actuals del teu perfil professional se substituiran pels del perfil personal"</string>
+    <string name="work_sync_dialog_message" msgid="9066322310245055242">"S\'utilitzaran els sons del perfil personal en lloc dels sons del perfil professional actual"</string>
     <string name="ringtones_category_preference_title" msgid="5675912303120102366">"Sons de trucada"</string>
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"Vibracions i altres sons"</string>
     <string name="configure_notification_settings" msgid="7447797716856573587">"Preferències de notificació"</string>
@@ -2900,11 +2901,11 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="1679758182657005375">"No s\'ha concedit cap permís"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7655100570513818534">"No s\'ha sol·licitat cap permís"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Totes les aplicacions"</string>
-    <string name="filter_enabled_apps" msgid="3318021007093070639">"Activades"</string>
+    <string name="filter_enabled_apps" msgid="5395727306799456250">"Aplicacions instal·lades"</string>
+    <string name="filter_instant_apps" msgid="574277769963965565">"Aplicacions instantànies"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"Personals"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Professionals"</string>
     <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Bloquejades"</string>
-    <string name="filter_with_domain_urls_apps" msgid="4573276638806792792">"Amb URL del domini"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avançada"</string>
     <string name="configure_apps" msgid="6685680790825882528">"Configura aplicacions"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Aplicació desconeguda"</string>
@@ -2958,10 +2959,8 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"Optimització de la bateria"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"Alertes d\'ús"</string>
-    <!-- no translation found for show_all_apps (1742726460081356745) -->
-    <skip />
-    <!-- no translation found for hide_extra_apps (5568177134273528751) -->
-    <skip />
+    <string name="show_all_apps" msgid="1742726460081356745">"Mostra totes les aplicacions"</string>
+    <string name="hide_extra_apps" msgid="5568177134273528751">"Amaga aplicacions addicionals"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"No optimitzen la bateria"</string>
     <string name="high_power_on" msgid="6216293998227583810">"No optimitzen la bateria"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Optimitza l\'ús de la bateria"</string>
@@ -3038,17 +3037,17 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Cap"</string>
     <string name="work_profile_usage_access_warning" msgid="8870622842216566692">"Encara que es desactivi l\'accés a l\'ús d\'aquesta aplicació, l\'administrador podrà continuar fent el seguiment de les aplicacions del perfil professional."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Caràcters utilitzats: <xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="draw_overlay_title" msgid="4003905926278954971">"Aplic. que poden dibuixar sobre altres aplic."</string>
-    <string name="draw_overlay" msgid="9078696044299199938">"Dibuixa a sobre d\'aplicacions"</string>
-    <string name="system_alert_window_settings" msgid="1757821151143694951">"Dibuixa a sobre d\'altres aplicacions"</string>
+    <string name="draw_overlay_title" msgid="4003905926278954971">"Aplicacions que poden superposar-se"</string>
+    <string name="draw_overlay" msgid="9078696044299199938">"Superposa a altres aplicacions"</string>
+    <string name="system_alert_window_settings" msgid="1757821151143694951">"Superposa a altres aplicacions"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Aplicacions"</string>
-    <string name="system_alert_window_access_title" msgid="8811695381437304132">"Dibuixa a sobre d\'altres aplicacions"</string>
+    <string name="system_alert_window_access_title" msgid="8811695381437304132">"Superposa a altres aplicacions"</string>
     <string name="permit_draw_overlay" msgid="6606018549732046201">"Permet la superposició d\'aplicacions"</string>
     <string name="app_overlay_permission_preference" msgid="8355410276571387439">"Permís de l\'aplicació per dibuixar a sobre"</string>
     <string name="allow_overlay_description" msgid="7895191337585827691">"Amb aquest permís l\'aplicació es pot mostrar sobre les altres aplicacions que utilitzes i pot interferir amb l\'ús que fas de la interfície en altres aplicacions o canviar el que penses que estàs veient en altres aplicacions."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"RV realitat virtual processador estèreo servei ajuda"</string>
     <string name="keywords_system_alert_window" msgid="8579673659566564926">"finestra de diàleg d\'alerta del sistema per dibuixar sobre altres aplicacions"</string>
-    <string name="overlay_settings" msgid="222062091489691363">"Dibuixa sobre altres aplicac."</string>
+    <string name="overlay_settings" msgid="222062091489691363">"Superposa a altres aplicacions"</string>
     <string name="system_alert_window_summary" msgid="4268867238063922290">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> aplicacions tenen permís per dibuixar sobre aplicacions"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplicacions amb permís"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Sí"</string>
@@ -3142,6 +3141,8 @@
     <string name="color_temperature" msgid="2070126836910615605">"Temperatura de color freda"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Utilitza colors de pantalla més freds"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Desactiva la pantalla per aplicar el canvi de color"</string>
+    <!-- no translation found for telephony_monitor_toast (7003764250271195384) -->
+    <skip />
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Actualitzacions del sistema automàtiques"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Binderized HALs (s\'ha de reiniciar)"</string>
     <string name="usage" msgid="2977875522080448986">"Ús"</string>
@@ -3319,7 +3320,7 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Per consultar les notificacions, llisca el dit cap avall al sensor d\'empremtes digitals de la part posterior del telèfon."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Per consultar les notificacions, llisca el dit cap avall al sensor d\'empremtes digitals de la part posterior de la tauleta."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Per consultar les notificacions, llisca el dit cap avall al sensor d\'empremtes digitals de la part posterior del dispositiu."</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Gest d\'assistència"</string>
+    <string name="assist_gesture_title" msgid="7746563137898655539">"Gest per obrir Assistència"</string>
     <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activat"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Desactivat"</string>
@@ -3382,6 +3383,8 @@
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"S\'ha definit el servidor intermediari HTTP global"</string>
     <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"L\'administrador pot bloquejar el dispositiu i restablir-ne la contrasenya"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"L\'administrador pot suprimir totes les dades del dispositiu"</string>
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (7687271729962516228) -->
+    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4192488502181650982) -->
     <string name="do_disclosure_generic" msgid="5666469247267523806">"Aquest és un dispositiu gestionat."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> gestiona aquest dispositiu."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
