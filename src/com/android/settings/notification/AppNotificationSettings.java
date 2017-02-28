@@ -184,6 +184,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     channelPref.setKey(channel.getId());
                     channelPref.setTitle(channel.getName());
                     channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
+                    channelPref.setMultiLine(true);
 
                     if (channel.isDeleted()) {
                         channelPref.setTitle(
