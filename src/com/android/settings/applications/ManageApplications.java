@@ -1373,8 +1373,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     break;
 
                 case LIST_TYPE_MANAGE_SOURCES:
-                    holder.summary
-                            .setText(((InstallAppsState) holder.entry.extraInfo).getSummary());
+                    holder.summary.setText(ExternalSourcesDetails.getPreferenceSummary(mContext,
+                            holder.entry));
                     break;
 
                 default:

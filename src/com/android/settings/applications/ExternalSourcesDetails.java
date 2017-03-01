@@ -27,6 +27,7 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 public class ExternalSourcesDetails extends AppInfoWithHeader
         implements OnPreferenceChangeListener {
@@ -72,6 +73,18 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
             return true;
         }
         return false;
+    }
+
+    static CharSequence getPreferenceSummary(Context context, AppEntry entry) {
+        final InstallAppsState appsState;
+        if (entry.extraInfo instanceof InstallAppsState) {
+            appsState = (InstallAppsState) entry.extraInfo;
+        } else {
+            appsState = new AppStateInstallAppsBridge(context, null, null)
+                    .createInstallAppsStateFor(entry.info.packageName, entry.info.uid);
+        }
+        return context.getString(appsState.canInstallApps() ? R.string.external_source_trusted
+                : R.string.external_source_untrusted);
     }
 
     private void setCanInstallApps(boolean newState) {

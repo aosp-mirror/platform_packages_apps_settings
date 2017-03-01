@@ -969,7 +969,9 @@ public class InstalledAppDetails extends AppInfoBase
                 PictureInPictureSettings.checkPackageHasPictureInPictureActivities(
                         packageInfoWithActivities.packageName,
                         packageInfoWithActivities.activities);
-        if (hasDrawOverOtherApps || hasWriteSettings || hasPictureInPictureActivities) {
+        boolean isPotentialAppSource = isPotentialAppSource();
+        if (hasDrawOverOtherApps || hasWriteSettings || hasPictureInPictureActivities ||
+                isPotentialAppSource) {
             PreferenceCategory category = new PreferenceCategory(getPrefContext());
             category.setTitle(R.string.advanced_apps);
             screen.addPreference(category);
@@ -1019,9 +1021,30 @@ public class InstalledAppDetails extends AppInfoBase
                 });
                 category.addPreference(pref);
             }
+            if (isPotentialAppSource) {
+                Preference pref = new Preference(getPrefContext());
+                pref.setTitle(R.string.install_other_apps);
+                pref.setKey("install_other_apps");
+                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        startAppInfoFragment(ExternalSourcesDetails.class,
+                                getString(R.string.install_other_apps));
+                        return true;
+                    }
+                });
+                category.addPreference(pref);
+            }
         }
 
         addAppInstallerInfoPref(screen);
+    }
+
+    private boolean isPotentialAppSource() {
+        AppStateInstallAppsBridge.InstallAppsState appState =
+                new AppStateInstallAppsBridge(getContext(), null, null)
+                        .createInstallAppsStateFor(mPackageName, mPackageInfo.applicationInfo.uid);
+        return appState.isPotentialAppSource();
     }
 
     private void addAppInstallerInfoPref(PreferenceScreen screen) {
@@ -1108,6 +1131,10 @@ public class InstalledAppDetails extends AppInfoBase
         pref = findPreference("write_settings_apps");
         if (pref != null) {
             pref.setSummary(WriteSettingsDetails.getSummary(getContext(), mAppEntry));
+        }
+        pref = findPreference("install_other_apps");
+        if (pref != null) {
+            pref.setSummary(ExternalSourcesDetails.getPreferenceSummary(getContext(), mAppEntry));
         }
     }
 
