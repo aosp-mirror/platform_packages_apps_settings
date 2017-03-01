@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo.storage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -45,13 +46,14 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class StorageAsyncLoaderTest {
     private static final int PRIMARY_USER_ID = 0;
     private static final int SECONDARY_USER_ID = 10;
+    private static final String PACKAGE_NAME_1 = "com.blah.test";
+    private static final String PACKAGE_NAME_2 = "com.blah.test2";
 
     @Mock
     private StorageStatsSource mSource;
@@ -81,8 +83,8 @@ public class StorageAsyncLoaderTest {
 
     @Test
     public void testLoadingApps() throws Exception {
-        addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
-        addPackage(1002, 0, 100, 1000, ApplicationInfo.CATEGORY_UNDEFINED);
+        addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
+        addPackage(PACKAGE_NAME_2, 0, 100, 1000, ApplicationInfo.CATEGORY_UNDEFINED);
 
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
@@ -93,7 +95,7 @@ public class StorageAsyncLoaderTest {
 
     @Test
     public void testGamesAreFiltered() throws Exception {
-        addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_GAME);
+        addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_GAME);
 
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
@@ -103,19 +105,8 @@ public class StorageAsyncLoaderTest {
     }
 
     @Test
-    public void testDuplicateUidsAreSkipped() throws Exception {
-        addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
-        addPackage(1001, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
-
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
-
-        assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(11L);
-    }
-
-    @Test
     public void testCacheIsIgnored() throws Exception {
-        addPackage(1001, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
+        addPackage(PACKAGE_NAME_1, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
 
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
 
@@ -140,16 +131,43 @@ public class StorageAsyncLoaderTest {
         assertThat(result.get(SECONDARY_USER_ID).externalStats.totalBytes).isEqualTo(10L);
     }
 
-    private void addPackage(int uid, long cacheSize, long codeSize, long dataSize, int category) {
+    @Test
+    public void testSystemAppsBaseSizeIsIgnored() throws Exception {
+        ApplicationInfo systemApp =
+                addPackage(PACKAGE_NAME_1, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
+        systemApp.flags = ApplicationInfo.FLAG_SYSTEM;
+
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(10L);
+    }
+
+    @Test
+    public void testUpdatedSystemAppCodeSizeIsCounted() throws Exception {
+        ApplicationInfo systemApp =
+                addPackage(PACKAGE_NAME_1, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
+        systemApp.flags = ApplicationInfo.FLAG_SYSTEM & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
+
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(11L);
+    }
+
+    private ApplicationInfo addPackage(
+            String packageName, long cacheSize, long codeSize, long dataSize, int category) {
         StorageStatsSource.AppStorageStats storageStats =
                 mock(StorageStatsSource.AppStorageStats.class);
         when(storageStats.getCodeBytes()).thenReturn(codeSize);
         when(storageStats.getDataBytes()).thenReturn(dataSize);
-        when(mSource.getStatsForUid(anyString(), eq(uid))).thenReturn(storageStats);
+        when(mSource.getStatsForPackage(anyString(), eq(packageName), any(UserHandle.class)))
+                .thenReturn(storageStats);
 
         ApplicationInfo info = new ApplicationInfo();
-        info.uid = uid;
+        info.packageName = packageName;
         info.category = category;
         mInfo.add(info);
+        return info;
     }
 }

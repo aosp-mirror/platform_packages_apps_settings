@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
-import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -75,27 +74,31 @@ public class StorageAsyncLoader
         Log.d(TAG, "Loading apps");
         List<ApplicationInfo> applicationInfos =
                 mPackageManager.getInstalledApplicationsAsUser(0, userId);
-        ArraySet<Integer> seenUid = new ArraySet<>(); // some apps share a uid
         AppsStorageResult result = new AppsStorageResult();
+        UserHandle myUser = UserHandle.of(userId);
         for (int i = 0, size = applicationInfos.size(); i < size; i++) {
             ApplicationInfo app = applicationInfos.get(i);
-            if (seenUid.contains(app.uid)) {
-                continue;
-            }
-            seenUid.add(app.uid);
+            StorageStatsSource.AppStorageStats stats =
+                    mStatsManager.getStatsForPackage(mUuid, app.packageName, myUser);
 
-            StorageStatsSource.AppStorageStats stats = mStatsManager.getStatsForUid(mUuid, app.uid);
-            // Note: This omits cache intentionally -- we are not attributing it to the apps.
-            long appSize = stats.getCodeBytes() + stats.getDataBytes();
+            long attributedAppSizeInBytes = stats.getDataBytes();
+            // This matches how the package manager calculates sizes -- by zeroing out code sizes of
+            // system apps which are not updated. My initial tests suggest that this results in the
+            // original code size being counted for updated system apps when they shouldn't, but
+            // I am not sure how to avoid this problem without specifically going in to find that
+            // code size.
+            if (!app.isSystemApp() || app.isUpdatedSystemApp()) {
+                attributedAppSizeInBytes += stats.getCodeBytes();
+            }
             switch (app.category) {
                 case CATEGORY_GAME:
-                    result.gamesSize += appSize;
+                    result.gamesSize += attributedAppSizeInBytes;
                     break;
                 case CATEGORY_AUDIO:
-                    result.musicAppsSize += appSize;
+                    result.musicAppsSize += attributedAppSizeInBytes;
                     break;
                 default:
-                    result.otherAppsSize += appSize;
+                    result.otherAppsSize += attributedAppSizeInBytes;
                     break;
             }
         }
