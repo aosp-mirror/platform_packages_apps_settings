@@ -48,7 +48,7 @@ public class EmergencyBroadcastPreferenceController extends PreferenceController
     EmergencyBroadcastPreferenceController(Context context, AccountRestrictionHelper helper) {
         super(context);
         mHelper = helper;
-        mUserManager = UserManager.get(context);
+        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPm = mContext.getPackageManager();
         // Enable link to CMAS app settings depending on the value in config.xml.
         mCellBroadcastAppLinkEnabled = isCellBroadcastAppLinkEnabled();

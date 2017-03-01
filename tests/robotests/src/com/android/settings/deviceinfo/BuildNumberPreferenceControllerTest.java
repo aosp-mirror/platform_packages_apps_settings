@@ -47,6 +47,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -117,6 +118,7 @@ public class BuildNumberPreferenceControllerTest {
         mController = new BuildNumberPreferenceController(
                 context, mActivity, mFragment, mLifecycle);
         ReflectionHelpers.setField(mController, "mContext", context);
+        ReflectionHelpers.setField(mController, "mUm", mUserManager);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
         verify(mFactory.metricsFeatureProvider).action(

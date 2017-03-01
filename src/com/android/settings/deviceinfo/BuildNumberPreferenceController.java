@@ -67,7 +67,7 @@ public class BuildNumberPreferenceController extends PreferenceController
         super(context);
         mActivity = activity;
         mFragment = fragment;
-        mUm = UserManager.get(context);
+        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
