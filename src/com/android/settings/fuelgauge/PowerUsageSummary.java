@@ -53,6 +53,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
@@ -90,7 +91,8 @@ public class PowerUsageSummary extends PowerUsageBase {
 
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
-    private static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
+    @VisibleForTesting
+    static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
     @VisibleForTesting
     static final int MENU_ADDITIONAL_BATTERY_INFO = Menu.FIRST + 4;
     @VisibleForTesting
@@ -216,6 +218,10 @@ public class PowerUsageSummary extends PowerUsageBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final SettingsActivity sa = (SettingsActivity) getActivity();
+        final Context context = getContext();
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+
         switch (item.getItemId()) {
             case MENU_STATS_TYPE:
                 if (mStatsType == BatteryStats.STATS_SINCE_CHARGED) {
@@ -231,15 +237,21 @@ public class PowerUsageSummary extends PowerUsageBase {
                         HighPowerApplicationsActivity.class.getName());
                 sa.startPreferencePanel(this, ManageApplications.class.getName(), args,
                         R.string.high_power_apps, null, null, 0);
+                metricsFeatureProvider.action(context,
+                        MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
                 return true;
             case MENU_ADDITIONAL_BATTERY_INFO:
                 startActivity(FeatureFactory.getFactory(getContext())
                         .getPowerUsageFeatureProvider(getContext())
                         .getAdditionalBatteryInfoIntent());
+                metricsFeatureProvider.action(context,
+                        MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_USAGE_ALERTS);
                 return true;
             case MENU_TOGGLE_APPS:
                 mShowAllApps = !mShowAllApps;
                 item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
+                metricsFeatureProvider.action(context,
+                        MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE, mShowAllApps);
                 refreshStats();
                 return true;
             default:
