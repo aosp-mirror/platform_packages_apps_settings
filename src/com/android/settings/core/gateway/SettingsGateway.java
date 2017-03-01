@@ -53,7 +53,6 @@ import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
-import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.PictureInPictureSettings;
@@ -62,6 +61,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.applications.WriteSettingsDetails;
+import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.dashboard.SupportFragment;
@@ -273,7 +273,9 @@ public class SettingsGateway {
             // Home page
             Settings.NetworkDashboardActivity.class.getName(),
             Settings.ConnectedDeviceDashboardActivity.class.getName(),
+            Settings.WifiDisplaySettingsActivity.class.getName(),
             Settings.AppAndNotificationDashboardActivity.class.getName(),
+            Settings.StorageDashboardActivity.class.getName(),
             "com.android.settings.SoundDashboardAlias",
             "com.android.settings.SecurityDashboardAlias",
             "com.android.settings.UsersDashboardAlias",
