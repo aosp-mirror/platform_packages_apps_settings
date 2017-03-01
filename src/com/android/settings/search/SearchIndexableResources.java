@@ -69,7 +69,6 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
-import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
@@ -122,7 +121,6 @@ public final class SearchIndexableResources {
         addIndex(AppAndNotificationDashboardFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_applications);
         addIndex(SoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
-        addIndex(OtherSoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
         addIndex(ZenModeSettings.class,
                 R.xml.zen_mode_settings, R.drawable.ic_settings_notifications);
         addIndex(ZenModePrioritySettings.class,
