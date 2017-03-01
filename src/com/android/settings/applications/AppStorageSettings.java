@@ -19,9 +19,11 @@ package com.android.settings.applications;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.UriPermission;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
@@ -52,8 +54,9 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
+import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +67,8 @@ import static android.content.pm.ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA;
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 
 public class AppStorageSettings extends AppInfoWithHeader
-        implements OnClickListener, Callbacks, DialogInterface.OnClickListener {
+        implements OnClickListener, Callbacks, DialogInterface.OnClickListener,
+        LoaderManager.LoaderCallbacks<AppStorageStats> {
     private static final String TAG = AppStorageSettings.class.getSimpleName();
 
     //internal constants used in Handler
@@ -123,6 +127,7 @@ public class AppStorageSettings extends AppInfoWithHeader
     private boolean mCanClearData = true;
     private boolean mHaveSizes = false;
 
+    private AppStorageStats mLastResult;
     private long mLastCodeSize = -1;
     private long mLastDataSize = -1;
     private long mLastExternalCodeSize = -1;
@@ -139,6 +144,7 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     private VolumeInfo[] mCandidates;
     private AlertDialog.Builder mDialogBuilder;
+    private ApplicationInfo mInfo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -152,7 +158,7 @@ public class AppStorageSettings extends AppInfoWithHeader
     @Override
     public void onResume() {
         super.onResume();
-        mState.requestSize(mPackageName, mUserId);
+        updateSize();
     }
 
     private void setupViews() {
@@ -266,79 +272,13 @@ public class AppStorageSettings extends AppInfoWithHeader
         return Formatter.formatFileSize(getActivity(), size);
     }
 
-    private void refreshSizeInfo() {
-        if (mAppEntry.size == ApplicationsState.SIZE_INVALID
-                || mAppEntry.size == ApplicationsState.SIZE_UNKNOWN) {
-            mLastCodeSize = mLastDataSize = mLastCacheSize = mLastTotalSize = -1;
-            if (!mHaveSizes) {
-                mAppSize.setSummary(mComputingStr);
-                mDataSize.setSummary(mComputingStr);
-                mCacheSize.setSummary(mComputingStr);
-                mTotalSize.setSummary(mComputingStr);
-            }
-            mClearDataButton.setEnabled(false);
-            mClearCacheButton.setEnabled(false);
-        } else {
-            mHaveSizes = true;
-            long codeSize = mAppEntry.codeSize;
-            long dataSize = mAppEntry.dataSize;
-            if (Environment.isExternalStorageEmulated()) {
-                codeSize += mAppEntry.externalCodeSize;
-                dataSize +=  mAppEntry.externalDataSize;
-            } else {
-                if (mLastExternalCodeSize != mAppEntry.externalCodeSize) {
-                    mLastExternalCodeSize = mAppEntry.externalCodeSize;
-                    mExternalCodeSize.setSummary(getSizeStr(mAppEntry.externalCodeSize));
-                }
-                if (mLastExternalDataSize !=  mAppEntry.externalDataSize) {
-                    mLastExternalDataSize =  mAppEntry.externalDataSize;
-                    mExternalDataSize.setSummary(getSizeStr( mAppEntry.externalDataSize));
-                }
-            }
-            if (mLastCodeSize != codeSize) {
-                mLastCodeSize = codeSize;
-                mAppSize.setSummary(getSizeStr(codeSize));
-            }
-            if (mLastDataSize != dataSize) {
-                mLastDataSize = dataSize;
-                mDataSize.setSummary(getSizeStr(dataSize));
-            }
-            long cacheSize = mAppEntry.cacheSize + mAppEntry.externalCacheSize;
-            if (mLastCacheSize != cacheSize) {
-                mLastCacheSize = cacheSize;
-                mCacheSize.setSummary(getSizeStr(cacheSize));
-            }
-            if (mLastTotalSize != mAppEntry.size) {
-                mLastTotalSize = mAppEntry.size;
-                mTotalSize.setSummary(getSizeStr(mAppEntry.size));
-            }
-
-            if ((mAppEntry.dataSize+ mAppEntry.externalDataSize) <= 0 || !mCanClearData) {
-                mClearDataButton.setEnabled(false);
-            } else {
-                mClearDataButton.setEnabled(true);
-                mClearDataButton.setOnClickListener(this);
-            }
-            if (cacheSize <= 0) {
-                mClearCacheButton.setEnabled(false);
-            } else {
-                mClearCacheButton.setEnabled(true);
-                mClearCacheButton.setOnClickListener(this);
-            }
-        }
-        if (mAppsControlDisallowedBySystem) {
-            mClearCacheButton.setEnabled(false);
-            mClearDataButton.setEnabled(false);
-        }
-    }
-
     @Override
     protected boolean refreshUi() {
         retrieveAppEntry();
         if (mAppEntry == null) {
             return false;
         }
-        refreshSizeInfo();
+        updateUiWithSize(mLastResult);
         refreshGrantedUriPermissions();
 
         final VolumeInfo currentVol = getActivity().getPackageManager()
@@ -454,7 +394,7 @@ public class AppStorageSettings extends AppInfoWithHeader
         mClearDataButton.setText(R.string.clear_user_data_text);
         if (result == OP_SUCCESSFUL) {
             Log.i(TAG, "Cleared user data for package : "+packageName);
-            mState.requestSize(mPackageName, mUserId);
+            updateSize();
         } else {
             mClearDataButton.setEnabled(true);
         }
@@ -570,8 +510,91 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     @Override
     public void onPackageSizeChanged(String packageName) {
-        if (packageName.equals(mAppEntry.info.packageName)) {
-            refreshSizeInfo();
+    }
+
+    @Override
+    public Loader<AppStorageStats> onCreateLoader(int id, Bundle args) {
+        Context context = getContext();
+        return new FetchPackageStorageAsyncLoader(
+                context, new StorageStatsSource(context), mInfo, UserHandle.of(mUserId));
+    }
+
+    @Override
+    public void onLoadFinished(Loader<AppStorageStats> loader, AppStorageStats result) {
+        mLastResult = result;
+        updateUiWithSize(result);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<AppStorageStats> loader) {
+    }
+
+    private void updateSize() {
+        PackageManager packageManager = getPackageManager();
+        try {
+            mInfo = packageManager.getApplicationInfo(mPackageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Could not find package", e);
+        }
+
+        if (mInfo == null) {
+            return;
+        }
+
+        getLoaderManager().restartLoader(1, Bundle.EMPTY, this);
+    }
+
+    private void updateUiWithSize(AppStorageStats result) {
+        if (result == null) {
+            mLastCodeSize = mLastDataSize = mLastCacheSize = mLastTotalSize = -1;
+            if (!mHaveSizes) {
+                mAppSize.setSummary(mComputingStr);
+                mDataSize.setSummary(mComputingStr);
+                mCacheSize.setSummary(mComputingStr);
+                mTotalSize.setSummary(mComputingStr);
+            }
+            mClearDataButton.setEnabled(false);
+            mClearCacheButton.setEnabled(false);
+        } else {
+            mHaveSizes = true;
+            long codeSize = result.getCodeBytes();
+            long dataSize = result.getDataBytes();
+            if (mLastCodeSize != codeSize) {
+                mLastCodeSize = codeSize;
+                mAppSize.setSummary(getSizeStr(codeSize));
+            }
+            if (mLastDataSize != dataSize) {
+                mLastDataSize = dataSize;
+                mDataSize.setSummary(getSizeStr(dataSize));
+            }
+            long cacheSize = result.getCacheBytes();
+            if (mLastCacheSize != cacheSize) {
+                mLastCacheSize = cacheSize;
+                mCacheSize.setSummary(getSizeStr(cacheSize));
+            }
+
+            long totalSize = codeSize + dataSize + cacheSize;
+            if (mLastTotalSize != totalSize) {
+                mLastTotalSize = totalSize;
+                mTotalSize.setSummary(getSizeStr(totalSize));
+            }
+
+            if (dataSize <= 0 || !mCanClearData) {
+                mClearDataButton.setEnabled(false);
+            } else {
+                mClearDataButton.setEnabled(true);
+                mClearDataButton.setOnClickListener(this);
+            }
+            if (cacheSize <= 0) {
+                mClearCacheButton.setEnabled(false);
+            } else {
+                mClearCacheButton.setEnabled(true);
+                mClearCacheButton.setOnClickListener(this);
+            }
+        }
+        if (mAppsControlDisallowedBySystem) {
+            mClearCacheButton.setEnabled(false);
+            mClearDataButton.setEnabled(false);
         }
     }
 
@@ -586,7 +609,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                     break;
                 case MSG_CLEAR_CACHE:
                     // Refresh size info
-                    mState.requestSize(mPackageName, mUserId);
+                    updateSize();
                     break;
             }
         }
