@@ -2215,11 +2215,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="4">
+            <intent-filter android:priority="8">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.device" />
+                android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
         </activity>
@@ -3015,17 +3015,6 @@
             <meta-data android:name="com.android.settings.summary"
                        android:value="@string/app_and_notification_dashboard_summary"/>
         </activity>
-
-        <activity-alias android:name="BatteryDashboardAlias"
-                        android:targetActivity="Settings$PowerUsageSummaryActivity">
-            <intent-filter android:priority="8">
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.fuelgauge.PowerUsageSummary"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.homepage"/>
-        </activity-alias>
 
         <activity android:name=".Settings$StorageDashboardActivity"
                   android:label="@string/storage_settings"

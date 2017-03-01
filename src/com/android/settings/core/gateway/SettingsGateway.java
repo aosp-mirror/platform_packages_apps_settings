@@ -274,7 +274,6 @@ public class SettingsGateway {
             Settings.NetworkDashboardActivity.class.getName(),
             Settings.ConnectedDeviceDashboardActivity.class.getName(),
             Settings.AppAndNotificationDashboardActivity.class.getName(),
-            "com.android.settings.BatteryDashboardAlias",
             "com.android.settings.SoundDashboardAlias",
             "com.android.settings.SecurityDashboardAlias",
             "com.android.settings.UsersDashboardAlias",
