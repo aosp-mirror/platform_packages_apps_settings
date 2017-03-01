@@ -707,7 +707,7 @@ public class Index {
     }
 
     private String buildSearchMatchStringForColumns(String query, String[] columnNames) {
-        final String value = query + "*";
+        final String value = (query != null ? query.trim() : "") + "*";
         StringBuilder sb = new StringBuilder();
         final int count = columnNames.length;
         for (int n = 0; n < count; n++) {
