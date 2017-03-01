@@ -50,7 +50,7 @@ import java.util.Set;
 /**
  * Gesture lock pattern settings.
  */
-public class PrivacySettings extends SettingsPreferenceFragment implements Indexable {
+public class PrivacySettings extends SettingsPreferenceFragment {
 
     // Vendor specific
     private static final String GSETTINGS_PROVIDER = "com.google.settings";
@@ -223,49 +223,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
     @Override
     protected int getHelpResource() {
         return R.string.help_url_backup_reset;
-    }
-
-    /**
-     * For Search.
-     */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new PrivacySearchIndexProvider();
-
-    private static class PrivacySearchIndexProvider extends BaseSearchIndexProvider {
-
-        boolean mIsPrimary;
-
-        public PrivacySearchIndexProvider() {
-            super();
-
-            mIsPrimary = UserHandle.myUserId() == UserHandle.USER_SYSTEM;
-        }
-
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(
-                Context context, boolean enabled) {
-
-            List<SearchIndexableResource> result = new ArrayList<SearchIndexableResource>();
-
-            // For non-primary user, no backup or reset is available
-            // TODO: http://b/22388012
-            if (!mIsPrimary) {
-                return result;
-            }
-
-            SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.privacy_settings;
-            result.add(sir);
-
-            return result;
-        }
-
-        @Override
-        public List<String> getNonIndexableKeys(Context context) {
-            final List<String> nonVisibleKeys = new ArrayList<>();
-            getNonVisibleKeys(context, nonVisibleKeys);
-            return nonVisibleKeys;
-        }
     }
 
     private static void getNonVisibleKeys(Context context, Collection<String> nonVisibleKeys) {
