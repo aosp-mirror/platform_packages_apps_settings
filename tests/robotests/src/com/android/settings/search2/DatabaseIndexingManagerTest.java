@@ -205,25 +205,25 @@ public class DatabaseIndexingManagerTest {
 
     @Test
     public void testAddResource_RowsInserted() {
-        SearchIndexableResource resource = getFakeResource(R.xml.gesture_settings);
+        SearchIndexableResource resource = getFakeResource(R.xml.ia_display_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
                 new HashMap<>());
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
-        assertThat(cursor.getCount()).isEqualTo(7);
+        assertThat(cursor.getCount()).isEqualTo(16);
     }
 
     @Test
     public void testAddResourceWithNIKs_RowsInsertedDisabled() {
-        SearchIndexableResource resource = getFakeResource(R.xml.gesture_settings);
-        // Only add 2 of 6 items to be disabled.
-        String[] keys = {"gesture_double_tap_power", "gesture_swipe_down_fingerprint"};
+        SearchIndexableResource resource = getFakeResource(R.xml.ia_display_settings);
+        // Only add 2 of 16 items to be disabled.
+        String[] keys = {"brightness", "wallpaper"};
         Map<String, List<String>> niks = getNonIndexableKeys(keys);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource, niks);
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 0", null);
         assertThat(cursor.getCount()).isEqualTo(2);
         cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
-        assertThat(cursor.getCount()).isEqualTo(5);
+        assertThat(cursor.getCount()).isEqualTo(14);
     }
 
     @Test
@@ -306,7 +306,7 @@ public class DatabaseIndexingManagerTest {
 
     @Test
     public void testAddResourceCustomSetting_RowsMatch() {
-        SearchIndexableResource resource = getFakeResource(R.xml.gesture_settings);
+        SearchIndexableResource resource = getFakeResource(R.xml.swipe_to_notification_settings);
         mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
                 new HashMap<>());
         final String prefTitle =
@@ -339,7 +339,7 @@ public class DatabaseIndexingManagerTest {
         assertThat(cursor.getString(9)).isEmpty();
         // Screen Title
         assertThat(cursor.getString(10)).isEqualTo(
-                mContext.getString(R.string.gesture_preference_title));
+                mContext.getString(R.string.fingerprint_swipe_for_notifications_title));
         // Class Name
         assertThat(cursor.getString(11)).isEqualTo(className);
         // Icon
@@ -477,7 +477,7 @@ public class DatabaseIndexingManagerTest {
 
     @Test
     public void testResourceProvider_RowInserted() {
-        SearchIndexableResource resource = getFakeResource(R.xml.gesture_settings);
+        SearchIndexableResource resource = getFakeResource(R.xml.swipe_to_notification_settings);
         resource.xmlResId = 0;
         resource.className = "com.android.settings.display.ScreenZoomSettings";
 
@@ -489,7 +489,7 @@ public class DatabaseIndexingManagerTest {
 
     @Test
     public void testResourceProvider_Matches() {
-        SearchIndexableResource resource = getFakeResource(R.xml.gesture_settings);
+        SearchIndexableResource resource = getFakeResource(R.xml.swipe_to_notification_settings);
         resource.xmlResId = 0;
         resource.className = "com.android.settings.display.ScreenZoomSettings";
 

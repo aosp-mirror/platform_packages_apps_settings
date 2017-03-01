@@ -44,7 +44,6 @@ import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
-import com.android.settings.deviceinfo.StorageProfileFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
@@ -56,11 +55,9 @@ import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
-import com.android.settings.gestures.GestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
-import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.language.LanguageAndInputSettings;
@@ -139,7 +136,6 @@ public final class SearchIndexableResources {
         addIndex(SpecialAccessSettings.class,
                 R.xml.special_access, R.drawable.ic_settings_applications);
         addIndex(UserSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_multiuser);
-        addIndex(GestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(AssistGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(PickupGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(DoubleTapScreenSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
@@ -156,8 +152,6 @@ public final class SearchIndexableResources {
         addIndex(ScreenPinningSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
         addIndex(UserAndAccountDashboardFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_accounts);
-        addIndex(InputMethodAndLanguageSettings.class,
-                NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(VirtualKeyboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(AvailableVirtualKeyboardFragment.class,
                 NO_DATA_RES_ID, R.drawable.ic_settings_language);

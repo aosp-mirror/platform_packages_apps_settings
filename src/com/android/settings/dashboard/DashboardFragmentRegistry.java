@@ -28,7 +28,6 @@ import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.SoundSettings;
@@ -80,8 +79,6 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_ACCOUNT);
         PARENT_TO_CATEGORY_KEY_MAP.put(
                 SystemDashboardFragment.class.getName(), CategoryKey.CATEGORY_SYSTEM);
-        PARENT_TO_CATEGORY_KEY_MAP.put(InputMethodAndLanguageSettings.class.getName(),
-                CategoryKey.CATEGORY_SYSTEM_LANGUAGE);
         PARENT_TO_CATEGORY_KEY_MAP.put(LanguageAndInputSettings.class.getName(),
                 CategoryKey.CATEGORY_SYSTEM_LANGUAGE);
         PARENT_TO_CATEGORY_KEY_MAP.put(DevelopmentSettings.class.getName(),

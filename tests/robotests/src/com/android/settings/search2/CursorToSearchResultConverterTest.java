@@ -29,7 +29,7 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.gestures.GestureSettings;
+import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.search2.ResultPayload.PayloadType;
 
 import org.junit.Before;
@@ -155,7 +155,7 @@ public class CursorToSearchResultConverterTest {
                 TITLES[0], // Title
                 SUMMARY, // Summary on
                 SUMMARY, // summary off
-                GestureSettings.class.getName(),
+                SwipeToNotificationSettings.class.getName(),
                 BLANK,   // screen title
                 null,    // icon
                 BLANK,   // action
@@ -226,7 +226,7 @@ public class CursorToSearchResultConverterTest {
                 TITLES[0], // Title
                 SUMMARY, // Summary on
                 SUMMARY, // summary off
-                GestureSettings.class.getName(),
+                SwipeToNotificationSettings.class.getName(),
                 BLANK,   // screen title
                 null,    // icon
                 BLANK,   // action

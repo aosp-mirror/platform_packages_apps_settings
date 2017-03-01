@@ -951,9 +951,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsActivity.class.getName()),
                 showDev, isAdmin);
-        setTileEnabled(new ComponentName(packageName,
-                        Settings.DevelopmentSettingsActivity.DASHBOARD_ALIAS),
-                showDev, isAdmin);
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
             // When on restricted users, disable all extra categories (but only the settings ones).
@@ -981,15 +978,9 @@ public class SettingsActivity extends SettingsDrawerActivity
         setTileEnabled(new ComponentName(packageName,
                 BackupSettingsActivity.class.getName()), true,
                 isAdmin || Utils.isCarrierDemoUser(this));
-        setTileEnabled(new ComponentName(packageName,
-                "com.android.settings.BackupResetDashboardAlias"), true, isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.EnterprisePrivacySettingsActivity.class.getName()),
-                FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
-                        .hasDeviceOwner(), isAdmin);
-        setTileEnabled(new ComponentName(packageName,
-                        "com.android.settings.EnterprisePrivacyDashboardAlias"),
                 FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
                         .hasDeviceOwner(), isAdmin);
         // Final step, refresh categories.

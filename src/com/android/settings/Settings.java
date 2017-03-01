@@ -40,7 +40,6 @@ public class Settings extends SettingsActivity {
     public static class PublicVolumeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class InputMethodAndLanguageSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
     public static class PhysicalKeyboardActivity extends SettingsActivity { /* empty */ }
@@ -68,10 +67,7 @@ public class Settings extends SettingsActivity {
     }
     public static class BackgroundCheckSummaryActivity extends SettingsActivity { /* empty */ }
     public static class StorageUseActivity extends SettingsActivity { /* empty */ }
-    public static class DevelopmentSettingsActivity extends SettingsActivity {
-        public static final String DASHBOARD_ALIAS =
-                "com.android.settings.DevelopmentSettingsDashboardAlias";
-    }
+    public static class DevelopmentSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilitySettingsActivity extends SettingsActivity { /* empty */ }
     public static class CaptioningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityInversionSettingsActivity extends SettingsActivity { /* empty */ }
@@ -87,7 +83,6 @@ public class Settings extends SettingsActivity {
     public static class BatterySaverSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsInAddAccountActivity extends SettingsActivity { /* empty */ }
-    public static class GestureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CryptKeeperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeviceAdminSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DataUsageSummaryActivity extends SettingsActivity { /* empty */ }
