@@ -35,9 +35,11 @@ import static com.google.common.truth.Truth.assertThat;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PowerUsageFeatureProviderImplTest {
-    private static final int UID_CALENDAR = 1234;
     private static final int UID_OTHER = Process.FIRST_APPLICATION_UID + 2;
+    private static final int UID_CALENDAR = Process.FIRST_APPLICATION_UID + 3;
+    private static final int UID_MEDIA = Process.FIRST_APPLICATION_UID + 4;
     private static final String[] PACKAGES_CALENDAR = {"com.android.providers.calendar"};
+    private static final String[] PACKAGES_MEDIA = {"com.android.providers.media"};
     @Mock
     private Context mContext;
     @Mock
@@ -52,6 +54,7 @@ public class PowerUsageFeatureProviderImplTest {
 
         mPowerFeatureProvider = new PowerUsageFeatureProviderImpl(mContext);
         when(mPackageManager.getPackagesForUid(UID_CALENDAR)).thenReturn(PACKAGES_CALENDAR);
+        when(mPackageManager.getPackagesForUid(UID_MEDIA)).thenReturn(PACKAGES_MEDIA);
         mPowerFeatureProvider.mPackageManager = mPackageManager;
         mBatterySipper.uidObj = new FakeUid(UID_OTHER);
     }
@@ -84,6 +87,14 @@ public class PowerUsageFeatureProviderImplTest {
     public void testIsTypeSystem_AppCalendar_ReturnTrue() {
         mBatterySipper.drainType = BatterySipper.DrainType.APP;
         when(mBatterySipper.getUid()).thenReturn(UID_CALENDAR);
+
+        assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testIsTypeSystem_AppMedia_ReturnTrue() {
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mBatterySipper.getUid()).thenReturn(UID_MEDIA);
 
         assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isTrue();
     }
