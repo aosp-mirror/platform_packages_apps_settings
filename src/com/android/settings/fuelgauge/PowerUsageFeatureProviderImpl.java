@@ -16,9 +16,40 @@
 
 package com.android.settings.fuelgauge;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Process;
+import com.android.internal.os.BatterySipper;
+import com.android.internal.util.ArrayUtils;
 
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
+
+    private static final String PACKAGE_CALENDAR_PROVIDER = "com.android.providers.calendar";
+
+    protected PackageManager mPackageManager;
+
+    public PowerUsageFeatureProviderImpl(Context context) {
+        mPackageManager = context.getPackageManager();
+    }
+
+    @Override
+    public boolean isTypeService(BatterySipper sipper) {
+        return false;
+    }
+
+    @Override
+    public boolean isTypeSystem(BatterySipper sipper) {
+        final int uid = sipper.uidObj == null ? -1 : sipper.getUid();
+        sipper.mPackages = mPackageManager.getPackagesForUid(uid);
+        // Classify all the sippers to type system if the range of uid is 0...FIRST_APPLICATION_UID
+        if (uid >= Process.ROOT_UID && uid < Process.FIRST_APPLICATION_UID) {
+            return true;
+        } else {
+            return ArrayUtils.contains(sipper.mPackages, PACKAGE_CALENDAR_PROVIDER);
+        }
+    }
+
     @Override
     public boolean isLocationSettingEnabled(String[] packages) {
         return false;
@@ -36,11 +67,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public boolean isAdvancedUiEnabled() {
-        return false;
-    }
-
-    @Override
-    public boolean isTypeService(String[] packages) {
         return false;
     }
 

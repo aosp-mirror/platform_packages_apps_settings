@@ -80,7 +80,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context) {
         if (mPowerUsageFeatureProvider == null) {
-            mPowerUsageFeatureProvider = new PowerUsageFeatureProviderImpl();
+            mPowerUsageFeatureProvider = new PowerUsageFeatureProviderImpl(context);
         }
         return mPowerUsageFeatureProvider;
     }

@@ -99,16 +99,17 @@ public class PowerUsageSummary extends PowerUsageBase {
 
     @VisibleForTesting
     boolean mShowAllApps = false;
-
+    @VisibleForTesting
     Preference mScreenUsagePref;
     @VisibleForTesting
     Preference mScreenConsumptionPref;
     @VisibleForTesting
     Preference mCellularNetworkPref;
+    @VisibleForTesting
+    PowerUsageFeatureProvider mPowerFeatureProvider;
 
     private LayoutPreference mBatteryLayoutPref;
     private PreferenceGroup mAppListGroup;
-
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
     @Override
@@ -121,6 +122,8 @@ public class PowerUsageSummary extends PowerUsageBase {
         mScreenUsagePref = findPreference(KEY_SCREEN_USAGE);
         mScreenConsumptionPref = findPreference(KEY_SCREEN_CONSUMPTION);
         mCellularNetworkPref = findPreference(KEY_CELLULAR_NETWORK);
+
+        initFeatureProvider();
     }
 
     @Override
@@ -193,14 +196,11 @@ public class PowerUsageSummary extends PowerUsageBase {
 
         menu.add(Menu.NONE, MENU_HIGH_POWER_APPS, Menu.NONE, R.string.high_power_apps);
 
-        PowerUsageFeatureProvider powerUsageFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getPowerUsageFeatureProvider(getContext());
-        if (powerUsageFeatureProvider != null &&
-                powerUsageFeatureProvider.isAdditionalBatteryInfoEnabled()) {
+        if (mPowerFeatureProvider.isAdditionalBatteryInfoEnabled()) {
             menu.add(Menu.NONE, MENU_ADDITIONAL_BATTERY_INFO,
                     Menu.NONE, R.string.additional_battery_info);
         }
-        if (powerUsageFeatureProvider.isPowerAccountingToggleEnabled()) {
+        if (mPowerFeatureProvider.isPowerAccountingToggleEnabled()) {
             menu.add(Menu.NONE, MENU_TOGGLE_APPS, Menu.NONE,
                     mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
         }
@@ -579,12 +579,12 @@ public class PowerUsageSummary extends PowerUsageBase {
     @VisibleForTesting
     boolean shouldHideSipper(BatterySipper sipper) {
         final DrainType drainType = sipper.drainType;
-        final int uid = sipper.getUid();
 
         return drainType == DrainType.IDLE || drainType == DrainType.CELL
-                || drainType == DrainType.SCREEN || uid == Process.ROOT_UID
-                || uid == Process.SYSTEM_UID
-                || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP;
+                || drainType == DrainType.SCREEN
+                || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
+                || mPowerFeatureProvider.isTypeService(sipper)
+                || mPowerFeatureProvider.isTypeSystem(sipper);
     }
 
     @VisibleForTesting
@@ -618,6 +618,13 @@ public class PowerUsageSummary extends PowerUsageBase {
     @VisibleForTesting
     void setBatteryLayoutPreference(LayoutPreference layoutPreference) {
         mBatteryLayoutPref = layoutPreference;
+    }
+
+    @VisibleForTesting
+    void initFeatureProvider() {
+        final Context context = getContext();
+        mPowerFeatureProvider = FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context);
     }
 
     private static List<BatterySipper> getFakeStats() {
