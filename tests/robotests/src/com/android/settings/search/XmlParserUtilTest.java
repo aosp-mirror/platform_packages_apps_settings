@@ -56,40 +56,40 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataTitleValid_ReturnsPreferenceTitle() {
-        XmlResourceParser parser = getChildByType(R.xml.gesture_settings,
-                "com.android.settings.gestures.GesturePreference");
+        XmlResourceParser parser = getChildByType(R.xml.ia_display_settings,
+                "com.android.settings.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String title = XmlParserUtils.getDataTitle(mContext, attrs);
-        String expTitle = mContext.getString(R.string.assist_gesture_title);
+        String expTitle = mContext.getString(R.string.screen_timeout);
         assertThat(title).isEqualTo(expTitle);
     }
 
     @Test
     public void testDataKeywordsValid_ReturnsPreferenceKeywords() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.gesture_settings);
+        XmlResourceParser parser = getParentPrimedParser(R.xml.ia_display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String keywords = XmlParserUtils.getDataKeywords(mContext, attrs);
-        String expKeywords = mContext.getString(R.string.keywords_gesture);
+        String expKeywords = mContext.getString(R.string.keywords_display);
         assertThat(keywords).isEqualTo(expKeywords);
     }
 
     @Test
     public void testDataKeyValid_ReturnsPreferenceKey() {
-        XmlResourceParser parser = getChildByType(R.xml.gesture_settings,
-                "com.android.settings.gestures.GesturePreference");
+        XmlResourceParser parser = getChildByType(R.xml.ia_display_settings,
+                "com.android.settings.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String key = XmlParserUtils.getDataKey(mContext, attrs);
-        String expKey = "gesture_assist";
+        String expKey = "screen_timeout";
         assertThat(key).isEqualTo(expKey);
     }
 
     @Test
     public void testDataSummaryValid_ReturnsPreferenceSummary() {
-        XmlResourceParser parser = getChildByType(R.xml.gesture_settings,
-                "com.android.settings.gestures.GesturePreference");
+        XmlResourceParser parser = getChildByType(R.xml.ia_display_settings,
+                "com.android.settings.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String summary = XmlParserUtils.getDataSummary(mContext, attrs);
-        String expSummary = mContext.getString(R.string.assist_gesture_summary);
+        String expSummary = mContext.getString(R.string.screen_timeout_summary);
         assertThat(summary).isEqualTo(expSummary);
 
     }
@@ -128,7 +128,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataKeyInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.gesture_settings);
+        XmlResourceParser parser = getParentPrimedParser(R.xml.ia_display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String key = XmlParserUtils.getDataKey(mContext, attrs);
         assertThat(key).isNull();
@@ -136,7 +136,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataSummaryInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.gesture_settings);
+        XmlResourceParser parser = getParentPrimedParser(R.xml.ia_display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String summary = XmlParserUtils.getDataSummary(mContext, attrs);
         assertThat(summary).isNull();
@@ -144,7 +144,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataSummaryOffInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.gesture_settings);
+        XmlResourceParser parser = getParentPrimedParser(R.xml.ia_display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String summaryOff = XmlParserUtils.getDataSummaryOff(mContext, attrs);
         assertThat(summaryOff).isNull();
@@ -152,7 +152,7 @@ public class XmlParserUtilTest {
 
     @Test
     public void testDataEntriesInvalid_ReturnsNull() {
-        XmlResourceParser parser = getParentPrimedParser(R.xml.gesture_settings);
+        XmlResourceParser parser = getParentPrimedParser(R.xml.ia_display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String entries = XmlParserUtils.getDataEntries(mContext, attrs);
         assertThat(entries).isNull();

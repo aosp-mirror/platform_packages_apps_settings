@@ -84,11 +84,9 @@ import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
-import com.android.settings.gestures.GestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
-import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
@@ -146,7 +144,6 @@ public class SettingsGateway {
             VpnSettings.class.getName(),
             DateTimeSettings.class.getName(),
             LocaleListEditor.class.getName(),
-            InputMethodAndLanguageSettings.class.getName(),
             AvailableVirtualKeyboardFragment.class.getName(),
             LanguageAndInputSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
@@ -179,7 +176,6 @@ public class SettingsGateway {
             WifiDisplaySettings.class.getName(),
             PowerUsageSummary.class.getName(),
             AccountSyncSettings.class.getName(),
-            GestureSettings.class.getName(),
             AssistGestureSettings.class.getName(),
             SwipeToNotificationSettings.class.getName(),
             DoubleTapPowerSettings.class.getName(),
@@ -261,11 +257,9 @@ public class SettingsGateway {
             Settings.StorageSettingsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
             Settings.PowerUsageSummaryActivity.class.getName(),
-            Settings.GestureSettingsActivity.class.getName(),
             //personal_section
             Settings.LocationSettingsActivity.class.getName(),
             Settings.SecuritySettingsActivity.class.getName(),
-            Settings.InputMethodAndLanguageSettingsActivity.class.getName(),
             Settings.UserSettingsActivity.class.getName(),
             //system_section
             Settings.DateTimeSettingsActivity.class.getName(),
@@ -294,9 +288,5 @@ public class SettingsGateway {
             "com.android.settings.DataUsageDashboardAlias",
             // Home page > System
             Settings.LanguageAndInputSettingsActivity.class.getName(),
-            "com.android.settings.DateTimeDashboardAlias",
-            "com.android.settings.AccessibilityDashboardAlias",
-            "com.android.settings.AboutDeviceDashboardAlias",
-            "com.android.settings.EnterprisePrivacyDashboardAlias",
     };
 }

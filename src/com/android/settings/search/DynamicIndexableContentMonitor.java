@@ -49,9 +49,9 @@ import android.view.inputmethod.InputMethodManager;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
-import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
+import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.print.PrintSettingsFragment;
 
 import java.util.ArrayList;
@@ -423,7 +423,7 @@ public final class DynamicIndexableContentMonitor implements
             mContentResolver = context.getContentResolver();
             mInputMethodServices.clear();
             // Build index of {@link UserDictionary}.
-            buildIndex(InputMethodAndLanguageSettings.class, true /* rebuild */);
+            buildIndex(LanguageAndInputSettings.class, true /* rebuild */);
             // Build index of IMEs.
             buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
             buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
@@ -478,7 +478,7 @@ public final class DynamicIndexableContentMonitor implements
                 buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
                 buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
             } else if (UserDictionary.Words.CONTENT_URI.equals(uri)) {
-                buildIndex(InputMethodAndLanguageSettings.class, true /* rebuild */);
+                buildIndex(LanguageAndInputSettings.class, true /* rebuild */);
             }
         }
     }

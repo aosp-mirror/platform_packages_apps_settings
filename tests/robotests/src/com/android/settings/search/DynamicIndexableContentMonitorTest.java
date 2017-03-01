@@ -58,9 +58,9 @@ import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
-import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
+import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.testutils.shadow.ShadowActivityWithLoadManager;
 import com.android.settings.testutils.shadow.ShadowContextImplWithRegisterReceiver;
@@ -417,7 +417,7 @@ public class DynamicIndexableContentMonitorTest {
         final ContentObserver observer = extractContentObserver(UserDictionary.Words.CONTENT_URI);
         assertThat(observer).isNotNull();
 
-        verifyRebuildIndexing(InputMethodAndLanguageSettings.class);
+        verifyRebuildIndexing(LanguageAndInputSettings.class);
 
         /*
          * When user dictionary content is changed, rebuild indexing happens.
@@ -426,7 +426,7 @@ public class DynamicIndexableContentMonitorTest {
 
         observer.onChange(false /* selfChange */, UserDictionary.Words.CONTENT_URI);
 
-        verifyRebuildIndexing(InputMethodAndLanguageSettings.class);
+        verifyRebuildIndexing(LanguageAndInputSettings.class);
     }
 
     /*
