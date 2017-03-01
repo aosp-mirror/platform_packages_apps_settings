@@ -182,13 +182,13 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                             getPrefContext());
                     channelPref.setDisabledByAdmin(mSuspendedAppsAdmin);
                     channelPref.setKey(channel.getId());
-                    channelPref.setTitle(channel.getName());
+                    channelPref.setTitle(getNotificationChannelLabel(channel));
                     channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
                     channelPref.setMultiLine(true);
 
                     if (channel.isDeleted()) {
-                        channelPref.setTitle(
-                                getString(R.string.deleted_channel_name, channel.getName()));
+                        channelPref.setTitle(getString(R.string.deleted_channel_name,
+                                getNotificationChannelLabel(channel)));
                         channelPref.setEnabled(false);
                     } else {
                         channelPref.setSummary(getImportanceSummary(channel.getImportance()));
@@ -275,8 +275,10 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             if (left.isDeleted() != right.isDeleted()) {
                 return Boolean.compare(left.isDeleted(), right.isDeleted());
             }
-            if (!Objects.equals(left.getName(), right.getName())) {
-                return sCollator.compare(left.getName().toString(), right.getName().toString());
+            if (!Objects.equals(getNotificationChannelLabel(left),
+                    getNotificationChannelLabel(right))) {
+                return sCollator.compare(getNotificationChannelLabel(left).toString(),
+                        getNotificationChannelLabel(right).toString());
             }
             return left.getId().compareTo(right.getId());
         }

@@ -155,8 +155,4 @@ public class NotificationBackend {
         public boolean showBadge;
         public int userId;
     }
-
-    public static class ChannelRow extends AppRow {
-        public NotificationChannel channel;
-    }
 }

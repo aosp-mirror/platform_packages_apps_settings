@@ -248,4 +248,17 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
                 return getContext().getString(R.string.notification_importance_high);
         }
     }
+
+    protected CharSequence getNotificationChannelLabel(NotificationChannel channel) {
+        if (channel.getName() != null) {
+            return channel.getName();
+        }
+        try {
+            ApplicationInfo info = mPm.getApplicationInfoAsUser(mAppRow.pkg, 0, mAppRow.userId);
+            return mPm.getText(mAppRow.pkg, channel.getNameResId(), info);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
