@@ -236,7 +236,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private Intent mResultIntentData;
     private ComponentName mCurrentSuggestion;
-    private final StringBuffer mDebugData = new StringBuffer();
 
     @VisibleForTesting
     String mSearchQuery;
@@ -433,34 +432,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             mDisplaySearch = savedState.getBoolean(SAVE_KEY_SHOW_SEARCH);
 
         } else {
-            if (!mIsShowingDashboard) {
-                if (initialFragmentName == null) {
-                    logFragmentData(intent, className, isSubSettings);
-                }
-                mDisplaySearch = false;
-                // UP will be shown only if it is a sub settings
-                if (mIsShortcut) {
-                    mDisplayHomeAsUpEnabled = isSubSettings;
-                } else if (isSubSettings) {
-                    mDisplayHomeAsUpEnabled = true;
-                } else {
-                    mDisplayHomeAsUpEnabled = false;
-                }
-                setTitleFromIntent(intent);
-
-                Bundle initialArguments = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-                switchToFragment(initialFragmentName, initialArguments, true, false,
-                        mInitialTitleResId, mInitialTitle, false);
-            } else {
-                // No UP affordance if we are displaying the main Dashboard
-                mDisplayHomeAsUpEnabled = false;
-                // Show Search affordance
-                mDisplaySearch = true;
-                mInitialTitleResId = R.string.dashboard_title;
-
-                switchToFragment(DashboardSummary.class.getName(), null /* args */, false, false,
-                            mInitialTitleResId, mInitialTitle, false);
-            }
+            launchSettingFragment(initialFragmentName, isSubSettings, intent);
         }
 
         mActionBar = getActionBar();
@@ -529,6 +501,35 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         if (DEBUG_TIMING) {
             Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
+        }
+    }
+
+    @VisibleForTesting
+    void launchSettingFragment(String initialFragmentName, boolean isSubSettings, Intent intent) {
+        if (!mIsShowingDashboard && initialFragmentName != null) {
+            mDisplaySearch = false;
+            // UP will be shown only if it is a sub settings
+            if (mIsShortcut) {
+                mDisplayHomeAsUpEnabled = isSubSettings;
+            } else if (isSubSettings) {
+                mDisplayHomeAsUpEnabled = true;
+            } else {
+                mDisplayHomeAsUpEnabled = false;
+            }
+            setTitleFromIntent(intent);
+
+            Bundle initialArguments = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+            switchToFragment(initialFragmentName, initialArguments, true, false,
+                mInitialTitleResId, mInitialTitle, false);
+        } else {
+            // No UP affordance if we are displaying the main Dashboard
+            mDisplayHomeAsUpEnabled = false;
+            // Show Search affordance
+            mDisplaySearch = true;
+            mInitialTitleResId = R.string.dashboard_title;
+
+            switchToFragment(DashboardSummary.class.getName(), null /* args */, false, false,
+                mInitialTitleResId, mInitialTitle, false);
         }
     }
 
@@ -693,7 +694,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         String startingFragment = getStartingFragmentClass(superIntent);
         // This is called from super.onCreate, isMultiPane() is not yet reliable
         // Do not use onIsHidingHeaders either, which relies itself on this method
-        log("getIntent() startingFragment", startingFragment);
         if (startingFragment != null) {
             Intent modIntent = new Intent(superIntent);
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, startingFragment);
@@ -715,11 +715,9 @@ public class SettingsActivity extends SettingsDrawerActivity
      * returns the class name to load as a fragment.
      */
     private String getStartingFragmentClass(Intent intent) {
-        log("getStartingFragmentClass() mFragmentClass", mFragmentClass);
         if (mFragmentClass != null) return mFragmentClass;
 
         String intentClass = intent.getComponent().getClassName();
-        log("getStartingFragmentClass() intentClass", intentClass);
         if (intentClass.equals(getClass().getName())) return null;
 
         if ("com.android.settings.ManageApplications".equals(intentClass)
@@ -1115,38 +1113,5 @@ public class SettingsActivity extends SettingsDrawerActivity
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void logFragmentData(Intent intent, String className, boolean isSubSettings) {
-        if (intent != null) {
-            logBundleData(intent.getExtras(), "Intent extra");
-            logBundleData(intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS), "Fragment args");
-        } else {
-            log("Intent data", "NULL");
-        }
-        log("Fragment", mFragmentClass);
-        log("Shortcut", mIsShortcut);
-        log("Class Name", className);
-        log("Show dashboard", mIsShowingDashboard);
-        log("Sub setting", isSubSettings);
-        log("Title", mInitialTitle);
-        Log.d(LOG_TAG, mDebugData.toString());
-        mDebugData.delete(0, mDebugData.length());
-    }
-
-    private void logBundleData(Bundle data, String name) {
-        if (data != null) {
-            final Set<String> keys = data.keySet();
-            mDebugData.append(name).append(": ");
-            for (String key : keys) {
-                log(key, data.get(key));
-            }
-        } else {
-            log(name, "NULL");
-        }
-    }
-
-    private void log(String key, Object data) {
-        mDebugData.append(key).append("=").append(data).append(", ");
     }
 }
