@@ -29,6 +29,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -40,6 +41,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
@@ -47,6 +49,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -65,6 +68,7 @@ public class BuildNumberPreferenceControllerTest {
     @Mock
     private UserManager mUserManager;
 
+    private Lifecycle mLifecycle;
     private FakeFeatureFactory mFactory;
     private Preference mPreference;
     private BuildNumberPreferenceController mController;
@@ -74,8 +78,10 @@ public class BuildNumberPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mController = new BuildNumberPreferenceController(mContext, mActivity, mFragment);
+        mLifecycle = new Lifecycle();
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        mController = new BuildNumberPreferenceController(
+                mContext, mActivity, mFragment, mLifecycle);
 
         mPreference = new Preference(RuntimeEnvironment.application);
         mPreference.setKey(mController.getPreferenceKey());
@@ -104,11 +110,13 @@ public class BuildNumberPreferenceControllerTest {
     @Test
     public void handlePrefTreeClick_deviceNotProvisioned_doNothing() {
         when(mUserManager.isAdminUser()).thenReturn(true);
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.Global.putInt(context.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0);
 
-        mController = new BuildNumberPreferenceController(context, mActivity, mFragment);
+        mController = new BuildNumberPreferenceController(
+                context, mActivity, mFragment, mLifecycle);
+        ReflectionHelpers.setField(mController, "mContext", context);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
         verify(mFactory.metricsFeatureProvider).action(
@@ -118,14 +126,17 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     public void handlePrefTreeClick_userHasRestriction_doNothing() {
-        when(mUserManager.isAdminUser()).thenReturn(true);
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = spy(RuntimeEnvironment.application);
         Settings.Global.putInt(context.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);
+
+        when(mUserManager.isAdminUser()).thenReturn(true);
         when(mUserManager.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES))
                 .thenReturn(true);
 
-        mController = new BuildNumberPreferenceController(context, mActivity, mFragment);
+        mController = new BuildNumberPreferenceController(
+                mContext, mActivity, mFragment, mLifecycle);
+        ReflectionHelpers.setField(mController, "mContext", context);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
         verify(mFactory.metricsFeatureProvider).action(
@@ -161,7 +172,8 @@ public class BuildNumberPreferenceControllerTest {
     public void onActivityResult_confirmPasswordRequestCompleted_enableDevPref() {
         final Context context = ShadowApplication.getInstance().getApplicationContext();
 
-        mController = new BuildNumberPreferenceController(context, mActivity, mFragment);
+        mController = new BuildNumberPreferenceController(
+                context, mActivity, mFragment, mLifecycle);
 
         final boolean activityResultHandled = mController.onActivityResult(
                 BuildNumberPreferenceController.REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,

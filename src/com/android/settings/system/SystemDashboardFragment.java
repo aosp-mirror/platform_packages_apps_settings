@@ -55,6 +55,10 @@ public class SystemDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    private static List<PreferenceController> buildPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new SystemUpdatePreferenceController(context, UserManager.get(context)));
         controllers.add(new AdditionalSystemUpdatePreferenceController(context));
@@ -79,17 +83,8 @@ public class SystemDashboardFragment extends DashboardFragment {
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
-                    final List<String> keys = new ArrayList<>();
-                    new SystemUpdatePreferenceController(context, UserManager.get(context))
-                            .updateNonIndexableKeys(keys);
-                    new AdditionalSystemUpdatePreferenceController(context)
-                            .updateNonIndexableKeys(keys);
-                    return keys;
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context);
                 }
             };
 }

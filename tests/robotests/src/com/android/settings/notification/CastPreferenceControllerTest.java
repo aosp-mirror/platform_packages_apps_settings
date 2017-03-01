@@ -22,9 +22,6 @@ import android.telephony.TelephonyManager;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,8 +30,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -61,23 +60,12 @@ public class CastPreferenceControllerTest {
     }
 
     @Test
-    public void updateNonIndexableKeys_voiceCapable_shouldNotUpdate() {
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
+    public void updateNonIndexableKeys_shouldNotUpdate() {
         final List<String> keys = new ArrayList<>();
 
         mController.updateNonIndexableKeys(keys);
 
         assertThat(keys).isEmpty();
-    }
-
-    @Test
-    public void updateNonIndexableKeys_voiceIncapable_shouldUpdate() {
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
-        final List<String> keys = new ArrayList<>();
-
-        mController.updateNonIndexableKeys(keys);
-
-        assertThat(keys).isNotEmpty();
     }
 
 }

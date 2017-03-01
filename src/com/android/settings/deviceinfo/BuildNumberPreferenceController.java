@@ -36,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.overlay.FeatureFactory;
@@ -61,12 +62,16 @@ public class BuildNumberPreferenceController extends PreferenceController
     private int mDevHitCountdown;
     private boolean mProcessingLastDevHit;
 
-    public BuildNumberPreferenceController(Context context, Activity activity, Fragment fragment) {
+    public BuildNumberPreferenceController(Context context, Activity activity, Fragment fragment,
+            Lifecycle lifecycle) {
         super(context);
         mActivity = activity;
         mFragment = fragment;
-        mUm = UserManager.get(activity);
+        mUm = UserManager.get(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
     }
 
     @Override

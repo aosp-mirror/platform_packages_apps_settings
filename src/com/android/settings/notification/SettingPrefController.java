@@ -71,13 +71,6 @@ public abstract class SettingPrefController extends PreferenceController impleme
     }
 
     @Override
-    public void updateNonIndexableKeys(List<String> keys) {
-        if (!mPreference.isApplicable(mContext)) {
-            keys.add(mPreference.getKey());
-        }
-    }
-
-    @Override
     public void updateState(Preference preference) {
         mPreference.update(mContext);
     }

@@ -18,8 +18,10 @@ package com.android.settings.search;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+
 import com.android.settings.core.PreferenceController;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +30,7 @@ import java.util.List;
  */
 public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
 
-    private static final List<String> EMPTY_LIST = Collections.<String>emptyList();
+    private static final List<String> EMPTY_LIST = Collections.emptyList();
 
     public BaseSearchIndexProvider() {
     }
@@ -45,7 +47,16 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
 
     @Override
     public List<String> getNonIndexableKeys(Context context) {
-        return EMPTY_LIST;
+        final List<PreferenceController> controllers = getPreferenceControllers(context);
+        if (controllers != null && !controllers.isEmpty()) {
+            final List<String> nonIndexableKeys = new ArrayList<>();
+            for (PreferenceController controller : controllers) {
+                controller.updateNonIndexableKeys(nonIndexableKeys);
+            }
+            return nonIndexableKeys;
+        } else {
+            return EMPTY_LIST;
+        }
     }
 
     @Override

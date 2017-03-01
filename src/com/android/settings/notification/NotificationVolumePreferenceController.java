@@ -37,7 +37,7 @@ public class NotificationVolumePreferenceController extends
 
     @VisibleForTesting
     NotificationVolumePreferenceController(Context context,
-        VolumeSeekBarPreference.Callback callback, Lifecycle lifecycle, AudioHelper helper) {
+        Callback callback, Lifecycle lifecycle, AudioHelper helper) {
         super(context, callback, lifecycle);
         mHelper = helper;
     }

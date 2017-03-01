@@ -51,8 +51,6 @@ public class TetherPreferenceControllerTest {
     @Mock
     private BluetoothAdapter mBluetoothAdapter;
     @Mock
-    private UserManager mUserManager;
-    @Mock
     private Preference mPreference;
 
     private TetherPreferenceController mController;
@@ -64,7 +62,6 @@ public class TetherPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mContext", mContext);
         ReflectionHelpers.setField(mController, "mConnectivityManager", mConnectivityManager);
         ReflectionHelpers.setField(mController, "mBluetoothAdapter", mBluetoothAdapter);
-        ReflectionHelpers.setField(mController, "mUserManager", mUserManager);
     }
 
     @Test

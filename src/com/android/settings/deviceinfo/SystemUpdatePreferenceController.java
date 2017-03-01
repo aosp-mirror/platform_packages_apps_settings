@@ -28,8 +28,6 @@ import android.util.Log;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 
-import java.util.List;
-
 import static android.content.Context.CARRIER_CONFIG_SERVICE;
 
 public class SystemUpdatePreferenceController extends PreferenceController {
@@ -63,14 +61,6 @@ public class SystemUpdatePreferenceController extends PreferenceController {
                     Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         } else {
             removePreference(screen, KEY_SYSTEM_UPDATE_SETTINGS);
-        }
-    }
-
-    @Override
-    public void updateNonIndexableKeys(List<String> keys) {
-        // TODO: system update needs to be fixed for non-owner user b/22760654
-        if (!isAvailable()) {
-            keys.add(KEY_SYSTEM_UPDATE_SETTINGS);
         }
     }
 

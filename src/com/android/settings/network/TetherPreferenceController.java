@@ -21,7 +21,6 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -30,7 +29,6 @@ import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.core.PreferenceController;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
@@ -45,7 +43,6 @@ public class TetherPreferenceController extends PreferenceController {
     private final AtomicReference<BluetoothPan> mBluetoothPan;
     private final ConnectivityManager mConnectivityManager;
     private final BluetoothAdapter mBluetoothAdapter;
-    private final UserManager mUserManager;
 
     private final BluetoothProfile.ServiceListener mBtProfileServiceListener =
             new android.bluetooth.BluetoothProfile.ServiceListener() {
@@ -68,7 +65,6 @@ public class TetherPreferenceController extends PreferenceController {
         mBluetoothPan = null;
         mConnectivityManager = null;
         mBluetoothAdapter = null;
-        mUserManager = null;
     }
 
     public TetherPreferenceController(Context context) {
@@ -78,7 +74,6 @@ public class TetherPreferenceController extends PreferenceController {
                 context, DISALLOW_CONFIG_TETHERING, UserHandle.myUserId()) != null;
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter != null) {
             mBluetoothAdapter.getProfileProxy(context, mBtProfileServiceListener,
@@ -111,13 +106,6 @@ public class TetherPreferenceController extends PreferenceController {
     @Override
     public void updateState(Preference preference) {
         updateSummary();
-    }
-
-    @Override
-    public void updateNonIndexableKeys(List<String> keys) {
-        if (!mUserManager.isAdminUser() || !mConnectivityManager.isTetheringSupported()) {
-            keys.add(KEY_TETHER_SETTINGS);
-        }
     }
 
     @Override
