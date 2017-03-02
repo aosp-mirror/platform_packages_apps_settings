@@ -173,6 +173,8 @@ public class StorageItemPreferenceController extends PreferenceController {
     }
 
     public void onLoadFinished(StorageAsyncLoader.AppsStorageResult data) {
+        // TODO(b/35927909): Figure out how to split out apps which are only installed for work
+        //       profiles in order to attribute those app's code bytes only to that profile.
         mPhotoPreference.setStorageSize(
                 data.externalStats.imageBytes + data.externalStats.videoBytes);
         mAudioPreference.setStorageSize(data.musicAppsSize + data.externalStats.audioBytes);
