@@ -97,7 +97,7 @@ public class SecondaryUserController extends PreferenceController implements
     @Override
     public void displayPreference(PreferenceScreen screen) {
         if (mStoragePreference == null) {
-            mStoragePreference = new StorageItemPreferenceAlternate(mContext);
+            mStoragePreference = new StorageItemPreferenceAlternate(screen.getContext());
 
             PreferenceGroup group =
                     (PreferenceGroup) screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
