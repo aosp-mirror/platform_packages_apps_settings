@@ -196,6 +196,9 @@ public class EncryptionInterstitial extends SettingsActivity {
         @Override
         public boolean onPreferenceTreeClick(Preference preference) {
             final String key = preference.getKey();
+            if (key == null) {
+                return super.onPreferenceTreeClick(preference);
+            }
             if (key.equals(KEY_ENCRYPT_REQUIRE_PASSWORD)) {
                 final boolean accEn = AccessibilityManager.getInstance(getActivity()).isEnabled();
                 if (accEn && !mPasswordRequired) {
