@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -25,11 +26,17 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.applications.UserManagerWrapperImpl;
@@ -48,16 +55,19 @@ import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class StorageDashboardFragment extends DashboardFragment
     implements LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private static final String TAG = "StorageDashboardFrag";
     private static final int STORAGE_JOB_ID = 0;
+    private static final int OPTIONS_MENU_MIGRATE_DATA = 100;
 
     private VolumeInfo mVolume;
 
     private StorageSummaryDonutPreferenceController mSummaryController;
     private StorageItemPreferenceController mPreferenceController;
+    private PrivateVolumeOptionMenuController mOptionMenuController;
     private List<PreferenceController> mSecondaryUsers;
 
     @Override
@@ -100,6 +110,9 @@ public class StorageDashboardFragment extends DashboardFragment
             getActivity().finish();
             return;
         }
+
+        mOptionMenuController = new PrivateVolumeOptionMenuController(
+                context, mVolume, new PackageManagerWrapperImpl(context.getPackageManager()));
 
         final long sharedDataSize = mVolume.getPath().getTotalSpace();
         long totalSize = sm.getPrimaryStorageSize();
@@ -161,8 +174,14 @@ public class StorageDashboardFragment extends DashboardFragment
                 new AutomaticStorageManagementSwitchPreferenceController(
                         context, mMetricsFeatureProvider, getFragmentManager());
         getLifecycle().addObserver(asmController);
+        getLifecycle().addObserver(mOptionMenuController);
         controllers.add(asmController);
         return controllers;
+    }
+
+    @VisibleForTesting
+    protected void setVolume(VolumeInfo info) {
+        mVolume = info;
     }
 
     /**
