@@ -68,8 +68,10 @@ public class MusicViewHolderController implements FileViewHolderController {
 
     @Override
     public void onClick(Fragment fragment) {
-        Intent intent = new Intent(DocumentsContract.ACTION_BROWSE);
-        intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"));
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(
+                DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"),
+                DocumentsContract.Root.MIME_TYPE_ITEM);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.putExtra(Intent.EXTRA_USER_ID, mUser);
         Utils.launchIntent(fragment, intent);
