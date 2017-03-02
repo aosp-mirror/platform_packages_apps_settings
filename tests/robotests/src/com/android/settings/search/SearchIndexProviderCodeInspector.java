@@ -21,6 +21,7 @@ import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.codeinspection.CodeInspector;
+import com.android.settings.dashboard.DashboardFragmentSearchIndexProviderInspector;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -40,6 +41,9 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
     private static final String NOT_CONTAINING_PROVIDER_OBJECT_ERROR =
             "Indexable should have public field " + Index.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
                     + " but these are not:\n";
+    private static final String NOT_SHARING_PREF_CONTROLLERS_BETWEEN_FRAG_AND_PROVIDER =
+            "DashboardFragment should share pref controllers with its SearchIndexProvider, but "
+                    + " these are not: \n";
     private static final String NOT_IN_INDEXABLE_PROVIDER_REGISTRY =
             "Class containing " + Index.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + " must be added to "
                     + SearchIndexableResources.class.getName() + " but these are not: \n";
@@ -47,18 +51,22 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
     private final List<String> notImplementingIndexableGrandfatherList;
     private final List<String> notImplementingIndexProviderGrandfatherList;
     private final List<String> notInSearchIndexableRegistryGrandfatherList;
+    private final List<String> notSharingPrefControllersGrandfatherList;
 
     public SearchIndexProviderCodeInspector(List<Class<?>> classes) {
         super(classes);
         notImplementingIndexableGrandfatherList = new ArrayList<>();
         notImplementingIndexProviderGrandfatherList = new ArrayList<>();
         notInSearchIndexableRegistryGrandfatherList = new ArrayList<>();
+        notSharingPrefControllersGrandfatherList = new ArrayList<>();
         initializeGrandfatherList(notImplementingIndexableGrandfatherList,
                 "grandfather_not_implementing_indexable");
         initializeGrandfatherList(notImplementingIndexProviderGrandfatherList,
                 "grandfather_not_implementing_index_provider");
         initializeGrandfatherList(notInSearchIndexableRegistryGrandfatherList,
                 "grandfather_not_in_search_index_provider_registry");
+        initializeGrandfatherList(notSharingPrefControllersGrandfatherList,
+                "grandfather_not_sharing_pref_controllers_with_search_provider");
     }
 
     @Override
@@ -66,6 +74,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
         final Set<String> notImplementingIndexable = new ArraySet<>();
         final Set<String> notImplementingIndexProvider = new ArraySet<>();
         final Set<String> notInSearchProviderRegistry = new ArraySet<>();
+        final Set<String> notSharingPreferenceControllers = new ArraySet<>();
 
         for (Class clazz : mClasses) {
             if (!isConcreteSettingsClass(clazz)) {
@@ -78,20 +87,36 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             }
             // If it's a SettingsPreferenceFragment, it must also be Indexable.
             final boolean implementsIndexable = Indexable.class.isAssignableFrom(clazz);
-            if (!implementsIndexable
-                    && !notImplementingIndexableGrandfatherList.contains(className)) {
-                notImplementingIndexable.add(className);
+            if (!implementsIndexable) {
+                if (!notImplementingIndexableGrandfatherList.contains(className)) {
+                    notImplementingIndexable.add(className);
+                }
+                continue;
             }
             final boolean hasSearchIndexProvider = hasSearchIndexProvider(clazz);
             // If it implements Indexable, it must also implement the index provider field.
-            if (implementsIndexable && !hasSearchIndexProvider
-                    && !notImplementingIndexProviderGrandfatherList.contains(className)) {
-                notImplementingIndexProvider.add(className);
+            if (!hasSearchIndexProvider) {
+                if (!notImplementingIndexProviderGrandfatherList.contains(className)) {
+                    notImplementingIndexProvider.add(className);
+                }
+                continue;
             }
-            if (hasSearchIndexProvider
-                    && SearchIndexableResources.getResourceByName(className) == null
-                    && !notInSearchIndexableRegistryGrandfatherList.contains(className)) {
-                notInSearchProviderRegistry.add(className);
+            // If it implements index provider field AND it's a DashboardFragment, its fragment and
+            // search provider must share the same set of PreferenceControllers.
+            final boolean isSharingPrefControllers = DashboardFragmentSearchIndexProviderInspector
+                    .isSharingPreferenceControllers(clazz);
+            if (!isSharingPrefControllers) {
+                if (!notSharingPrefControllersGrandfatherList.contains(className)) {
+                    notSharingPreferenceControllers.add(className);
+                }
+                continue;
+            }
+            // Must be in SearchProviderRegistry
+            if (SearchIndexableResources.getResourceByName(className) == null) {
+                if (!notInSearchIndexableRegistryGrandfatherList.contains(className)) {
+                    notInSearchProviderRegistry.add(className);
+                }
+                continue;
             }
         }
 
@@ -100,15 +125,21 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
                 notImplementingIndexable);
         final String indexProviderError = buildErrorMessage(NOT_CONTAINING_PROVIDER_OBJECT_ERROR,
                 notImplementingIndexProvider);
+        final String notSharingPrefControllerError = buildErrorMessage(
+                NOT_SHARING_PREF_CONTROLLERS_BETWEEN_FRAG_AND_PROVIDER,
+                notSharingPreferenceControllers);
         final String notInProviderRegistryError =
                 buildErrorMessage(NOT_IN_INDEXABLE_PROVIDER_REGISTRY, notInSearchProviderRegistry);
         assertWithMessage(indexableError)
                 .that(notImplementingIndexable)
                 .isEmpty();
-        assertWithMessage(indexProviderError.toString())
+        assertWithMessage(indexProviderError)
                 .that(notImplementingIndexProvider)
                 .isEmpty();
-        assertWithMessage(notInProviderRegistryError.toString())
+        assertWithMessage(notSharingPrefControllerError)
+                .that(notSharingPreferenceControllers)
+                .isEmpty();
+        assertWithMessage(notInProviderRegistryError)
                 .that(notInSearchProviderRegistry)
                 .isEmpty();
     }
