@@ -16,21 +16,43 @@
 
 package com.android.settings.applications;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class InstalledAppDetailsTest {
+
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private UserManager mUserManager;
+    @Mock
+    private DevicePolicyManager mDevicePolicyManager;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void getInstallationStatus_notInstalled_shouldReturnUninstalled() {
@@ -58,6 +80,41 @@ public final class InstalledAppDetailsTest {
         info.enabled = false;
 
         assertThat(mAppDetail.getInstallationStatus(info)).isEqualTo(R.string.disabled);
+    }
+
+    @Test
+    public void shouldShowUninstallForAll_installForOneOtherUserOnly_shouldReturnTrue() {
+        when(mDevicePolicyManager.packageHasActiveAdmins(anyString())).thenReturn(false);
+        when(mUserManager.getUsers().size()).thenReturn(2);
+        final InstalledAppDetails mAppDetail = new InstalledAppDetails();
+        ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
+        ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
+        final ApplicationInfo info = new ApplicationInfo();
+        info.enabled = true;
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = info;
+        final PackageInfo packageInfo = mock(PackageInfo.class);
+        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
+
+        assertThat(mAppDetail.shouldShowUninstallForAll(appEntry)).isTrue();
+    }
+
+    @Test
+    public void shouldShowUninstallForAll_installForSelfOnly_shouldReturnFalse() {
+        when(mDevicePolicyManager.packageHasActiveAdmins(anyString())).thenReturn(false);
+        when(mUserManager.getUsers().size()).thenReturn(2);
+        final InstalledAppDetails mAppDetail = new InstalledAppDetails();
+        ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
+        ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
+        final ApplicationInfo info = new ApplicationInfo();
+        info.flags = ApplicationInfo.FLAG_INSTALLED;
+        info.enabled = true;
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = info;
+        final PackageInfo packageInfo = mock(PackageInfo.class);
+        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
+
+        assertThat(mAppDetail.shouldShowUninstallForAll(appEntry)).isFalse();
     }
 
 }

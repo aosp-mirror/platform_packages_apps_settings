@@ -490,23 +490,7 @@ public class InstalledAppDetails extends AppInfoBase
         if (mFinishing) {
             return;
         }
-        boolean showIt = true;
-        if (mUpdatedSysApp) {
-            showIt = false;
-        } else if (mAppEntry == null) {
-            showIt = false;
-        } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-            showIt = false;
-        } else if (mPackageInfo == null || mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
-            showIt = false;
-        } else if (UserHandle.myUserId() != 0) {
-            showIt = false;
-        } else if (mUserManager.getUsers().size() < 2) {
-            showIt = false;
-        } else if (PackageUtil.countPackageInUsers(mPm, mUserManager, mPackageName) < 2) {
-            showIt = false;
-        }
-        menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(showIt);
+        menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(shouldShowUninstallForAll(mAppEntry));
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
         uninstallUpdatesItem.setVisible(mUpdatedSysApp && !mAppsControlDisallowedBySystem);
@@ -569,6 +553,28 @@ public class InstalledAppDetails extends AppInfoBase
             setupAppSnippet(appSnippet, mAppEntry.label, mAppEntry.icon,
                     pkgInfo != null ? pkgInfo.versionName : null);
         }
+    }
+
+    @VisibleForTesting
+    boolean shouldShowUninstallForAll(ApplicationsState.AppEntry appEntry) {
+        boolean showIt = true;
+        if (mUpdatedSysApp) {
+            showIt = false;
+        } else if (appEntry == null) {
+            showIt = false;
+        } else if ((appEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+            showIt = false;
+        } else if (mPackageInfo == null || mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+            showIt = false;
+        } else if (UserHandle.myUserId() != 0) {
+            showIt = false;
+        } else if (mUserManager.getUsers().size() < 2) {
+            showIt = false;
+        } else if (PackageUtil.countPackageInUsers(mPm, mUserManager, mPackageName) < 2
+                && (appEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) != 0) {
+            showIt = false;
+        }
+        return showIt;
     }
 
     @VisibleForTesting
