@@ -15,6 +15,7 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
@@ -27,10 +28,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.Utils;
@@ -52,6 +55,7 @@ import java.util.List;
 
 import static com.android.settings.fuelgauge.PowerUsageBase.MENU_STATS_REFRESH;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
+import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_TOGGLE_APPS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
@@ -95,6 +99,8 @@ public class PowerUsageSummaryTest {
     @Mock
     private MenuItem mToggleAppsMenu;
     @Mock
+    private MenuItem mHighPowerMenu;
+    @Mock
     private MenuInflater mMenuInflater;
     @Mock
     private BatterySipper mNormalBatterySipper;
@@ -128,6 +134,8 @@ public class PowerUsageSummaryTest {
     private BatteryStatsHelper mBatteryHelper;
     @Mock
     private PowerManager mPowerManager;
+    @Mock
+    private SettingsActivity mSettingsActivity;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -145,10 +153,12 @@ public class PowerUsageSummaryTest {
 
         mFragment = spy(new TestFragment(mContext));
         mFragment.initFeatureProvider();
-
+        
+        when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mAdditionalBatteryInfoMenu.getItemId())
                 .thenReturn(MENU_ADDITIONAL_BATTERY_INFO);
         when(mToggleAppsMenu.getItemId()).thenReturn(MENU_TOGGLE_APPS);
+        when(mHighPowerMenu.getItemId()).thenReturn(MENU_HIGH_POWER_APPS);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(ADDITIONAL_BATTERY_INFO_INTENT);
         when(mBatteryHelper.getTotalPower()).thenReturn(TOTAL_POWER);
@@ -213,6 +223,31 @@ public class PowerUsageSummaryTest {
 
         verify(mMenu, never()).add(Menu.NONE, MENU_ADDITIONAL_BATTERY_INFO,
                 Menu.NONE, R.string.additional_battery_info);
+    }
+
+    @Test
+    public void testOptionsMenu_MenuHighPower_MetricEventInvoked() {
+        mFragment.onOptionsItemSelected(mHighPowerMenu);
+
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
+    }
+
+    @Test
+    public void testOptionsMenu_MenuAdditionalBattery_MetricEventInvoked() {
+        mFragment.onOptionsItemSelected(mAdditionalBatteryInfoMenu);
+
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_USAGE_ALERTS);
+    }
+
+    @Test
+    public void testOptionsMenu_MenuAppToggle_MetricEventInvoked() {
+        mFragment.onOptionsItemSelected(mToggleAppsMenu);
+        mFragment.mShowAllApps = false;
+
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE, true);
     }
 
     @Test
