@@ -37,7 +37,6 @@ import android.widget.TextView;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.instantapps.InstantAppDetails;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -81,7 +80,7 @@ public class AppHeaderController {
     @ActionType
     private int mRightAction;
 
-    private InstantAppDetails mInstantAppDetails;
+    private boolean mIsInstantApp;
 
     public AppHeaderController(Context context, Fragment fragment, View appHeader) {
         mContext = context;
@@ -154,8 +153,8 @@ public class AppHeaderController {
         return this;
     }
 
-    public AppHeaderController setInstantAppDetails(InstantAppDetails instantAppDetails) {
-        mInstantAppDetails = instantAppDetails;
+    public AppHeaderController setIsInstantApp(boolean isInstantApp) {
+        this.mIsInstantApp = isInstantApp;
         return this;
     }
 
@@ -220,26 +219,9 @@ public class AppHeaderController {
             bindAppHeaderButtons();
         }
 
-        if (mInstantAppDetails != null) {
-            setText(R.id.instant_app_developer_title, mInstantAppDetails.developerTitle);
-            View maturity = mAppHeader.findViewById(R.id.instant_app_maturity);
-
-            if (maturity != null) {
-                String maturityText = mInstantAppDetails.maturityRatingString;
-                Drawable maturityIcon = mInstantAppDetails.maturityRatingIcon;
-                if (!TextUtils.isEmpty(maturityText) || maturityIcon != null) {
-                    maturity.setVisibility(View.VISIBLE);
-                }
-                setText(R.id.instant_app_maturity_text, maturityText);
-                if (maturityIcon != null) {
-                    ImageView maturityIconView = (ImageView) mAppHeader.findViewById(
-                            R.id.instant_app_maturity_icon);
-                    if (maturityIconView != null) {
-                        maturityIconView.setImageDrawable(maturityIcon);
-                    }
-                }
-            }
-            setText(R.id.instant_app_monetization, mInstantAppDetails.monetizationNotice);
+        if (mIsInstantApp) {
+            setText(R.id.install_type,
+                    mAppHeader.getResources().getString(R.string.install_type_instant));
         }
 
         return mAppHeader;

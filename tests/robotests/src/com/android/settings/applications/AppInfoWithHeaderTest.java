@@ -28,6 +28,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,6 +39,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -88,7 +91,8 @@ public class AppInfoWithHeaderTest {
             mScreen = mock(PreferenceScreen.class);
             mPackageInfo = new PackageInfo();
             mPackageInfo.applicationInfo = new ApplicationInfo();
-
+            ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+                                             (InstantAppDataProvider) (info -> false));
             when(mManager.getContext())
                     .thenReturn(ShadowApplication.getInstance().getApplicationContext());
         }
