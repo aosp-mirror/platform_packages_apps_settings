@@ -161,12 +161,12 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         } else {
             for (NotificationChannelGroup group : mChannelGroupList) {
                 PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
-                if (group.getName() == null) {
+                if (group.getId() == null) {
                     groupCategory.setTitle(mChannelGroupList.size() > 1
                             ? R.string.notification_channels_other
                             : R.string.notification_channels);
                 } else {
-                    groupCategory.setTitle(group.getName());
+                    groupCategory.setTitle(getNotificationGroupLabel(group));
                 }
                 groupCategory.setKey(group.getId());
                 groupCategory.setOrderingAsAdded(true);
@@ -275,10 +275,10 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             if (left.isDeleted() != right.isDeleted()) {
                 return Boolean.compare(left.isDeleted(), right.isDeleted());
             }
-            if (!Objects.equals(getNotificationChannelLabel(left),
-                    getNotificationChannelLabel(right))) {
-                return sCollator.compare(getNotificationChannelLabel(left).toString(),
-                        getNotificationChannelLabel(right).toString());
+            CharSequence leftName = getNotificationChannelLabel(left);
+            CharSequence rightName = getNotificationChannelLabel(right);
+            if (!Objects.equals(leftName, rightName)) {
+                return sCollator.compare(leftName.toString(), rightName.toString());
             }
             return left.getId().compareTo(right.getId());
         }
@@ -296,10 +296,11 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     } else if (right.getId() == null && left.getId() != null) {
                         return -1;
                     }
+                    CharSequence leftName = getNotificationGroupLabel(left);
+                    CharSequence rightName = getNotificationGroupLabel(right);
                     // sort rest of the groups by name
-                    if (!Objects.equals(left.getName(), right.getName())) {
-                        return sCollator.compare(left.getName().toString(),
-                                right.getName().toString());
+                    if (!Objects.equals(leftName, rightName)) {
+                        return sCollator.compare(leftName.toString(), rightName.toString());
                     }
                     return left.getId().compareTo(right.getId());
                 }
