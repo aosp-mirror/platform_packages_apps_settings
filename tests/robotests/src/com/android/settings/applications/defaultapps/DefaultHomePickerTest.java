@@ -73,6 +73,7 @@ public class DefaultHomePickerTest {
     @Mock
     private PackageManager mPackageManager;
 
+    private Context mContext;
     private DefaultHomePicker mPicker;
 
     @Before
@@ -85,7 +86,8 @@ public class DefaultHomePickerTest {
         mPicker.onAttach((Context) mActivity);
 
         ReflectionHelpers.setField(mPicker, "mPm", mPackageManagerWrapper);
-        doReturn(RuntimeEnvironment.application).when(mPicker).getContext();
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mContext).when(mPicker).getContext();
     }
 
     @Test
@@ -94,6 +96,7 @@ public class DefaultHomePickerTest {
 
         verify(mPackageManagerWrapper).replacePreferredActivity(any(IntentFilter.class),
                 anyInt(), any(ComponentName[].class), any(ComponentName.class));
+        verify(mContext).startActivity(any());
     }
 
     @Test
