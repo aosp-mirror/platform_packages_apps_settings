@@ -105,12 +105,6 @@ public class AppStorageSettings extends AppInfoWithHeader
     private static final String KEY_URI_CATEGORY = "uri_category";
     private static final String KEY_CLEAR_URI = "clear_uri_button";
 
-    private Preference mTotalSize;
-    private Preference mAppSize;
-    private Preference mDataSize;
-    private Preference mExternalCodeSize;
-    private Preference mExternalDataSize;
-
     // Views related to cache info
     private Preference mCacheSize;
     private Button mClearDataButton;
@@ -125,15 +119,9 @@ public class AppStorageSettings extends AppInfoWithHeader
     private PreferenceCategory mUri;
 
     private boolean mCanClearData = true;
-    private boolean mHaveSizes = false;
 
     private AppStorageStats mLastResult;
-    private long mLastCodeSize = -1;
-    private long mLastDataSize = -1;
-    private long mLastExternalCodeSize = -1;
-    private long mLastExternalDataSize = -1;
-    private long mLastCacheSize = -1;
-    private long mLastTotalSize = -1;
+    private AppStorageSizesController mSizeController;
 
     private ClearCacheObserver mClearCacheObserver;
     private ClearUserDataObserver mClearDataObserver;
@@ -166,17 +154,15 @@ public class AppStorageSettings extends AppInfoWithHeader
         mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
 
         // Set default values on sizes
-        mTotalSize = findPreference(KEY_TOTAL_SIZE);
-        mAppSize =  findPreference(KEY_APP_SIZE);
-        mDataSize =  findPreference(KEY_DATA_SIZE);
-        mExternalCodeSize = findPreference(KEY_EXTERNAL_CODE_SIZE);
-        mExternalDataSize = findPreference(KEY_EXTERNAL_DATA_SIZE);
+        mSizeController = new AppStorageSizesController.Builder()
+                .setTotalSizePreference(findPreference(KEY_TOTAL_SIZE))
+                .setAppSizePreference(findPreference(KEY_APP_SIZE))
+                .setDataSizePreference(findPreference(KEY_DATA_SIZE))
+                .setCacheSizePreference(findPreference(KEY_CACHE_SIZE))
+                .setComputingString(R.string.computing_size)
+                .setErrorString(R.string.invalid_size_value)
+                .build();
 
-        if (Environment.isExternalStorageEmulated()) {
-            PreferenceCategory category = (PreferenceCategory) findPreference(KEY_STORAGE_CATEGORY);
-            category.removePreference(mExternalCodeSize);
-            category.removePreference(mExternalDataSize);
-        }
         mClearDataButton = (Button) ((LayoutPreference) findPreference(KEY_CLEAR_DATA))
                 .findViewById(R.id.button);
 
@@ -263,13 +249,6 @@ public class AppStorageSettings extends AppInfoWithHeader
             startActivity(intent);
         }
         dialog.dismiss();
-    }
-
-    private String getSizeStr(long size) {
-        if (size == SIZE_INVALID) {
-            return mInvalidSizeStr.toString();
-        }
-        return Formatter.formatFileSize(getActivity(), size);
     }
 
     @Override
@@ -521,7 +500,7 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     @Override
     public void onLoadFinished(Loader<AppStorageStats> loader, AppStorageStats result) {
-        mLastResult = result;
+        mSizeController.setResult(result);
         updateUiWithSize(result);
     }
 
@@ -545,39 +524,15 @@ public class AppStorageSettings extends AppInfoWithHeader
     }
 
     private void updateUiWithSize(AppStorageStats result) {
+        mSizeController.updateUi(getContext());
+
         if (result == null) {
-            mLastCodeSize = mLastDataSize = mLastCacheSize = mLastTotalSize = -1;
-            if (!mHaveSizes) {
-                mAppSize.setSummary(mComputingStr);
-                mDataSize.setSummary(mComputingStr);
-                mCacheSize.setSummary(mComputingStr);
-                mTotalSize.setSummary(mComputingStr);
-            }
             mClearDataButton.setEnabled(false);
             mClearCacheButton.setEnabled(false);
         } else {
-            mHaveSizes = true;
             long codeSize = result.getCodeBytes();
             long dataSize = result.getDataBytes();
-            if (mLastCodeSize != codeSize) {
-                mLastCodeSize = codeSize;
-                mAppSize.setSummary(getSizeStr(codeSize));
-            }
-            if (mLastDataSize != dataSize) {
-                mLastDataSize = dataSize;
-                mDataSize.setSummary(getSizeStr(dataSize));
-            }
             long cacheSize = result.getCacheBytes();
-            if (mLastCacheSize != cacheSize) {
-                mLastCacheSize = cacheSize;
-                mCacheSize.setSummary(getSizeStr(cacheSize));
-            }
-
-            long totalSize = codeSize + dataSize + cacheSize;
-            if (mLastTotalSize != totalSize) {
-                mLastTotalSize = totalSize;
-                mTotalSize.setSummary(getSizeStr(totalSize));
-            }
 
             if (dataSize <= 0 || !mCanClearData) {
                 mClearDataButton.setEnabled(false);

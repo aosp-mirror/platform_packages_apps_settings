@@ -43,6 +43,7 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class FetchPackageStorageAsyncLoaderTest {
+    private static final String PACKAGE_NAME = "com.test.package";
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
@@ -63,10 +64,22 @@ public class FetchPackageStorageAsyncLoaderTest {
         when(mSource.getStatsForPackage(anyString(), anyString(), any(UserHandle.class)))
                 .thenReturn(stats);
         ApplicationInfo info = new ApplicationInfo();
-        info.packageName = "com.test.package";
+        info.packageName = PACKAGE_NAME;
 
         FetchPackageStorageAsyncLoader task = new FetchPackageStorageAsyncLoader(
                 mContext, mSource, info, new UserHandle(0));
         assertThat(task.loadInBackground()).isEqualTo(stats);
+    }
+
+    @Test
+    public void installerExceptionHandledCleanly() {
+        when(mSource.getStatsForPackage(anyString(), anyString(), any(UserHandle.class))).
+                thenThrow(new IllegalStateException("intentional failure"));
+        ApplicationInfo info = new ApplicationInfo();
+        info.packageName = PACKAGE_NAME;
+        FetchPackageStorageAsyncLoader task = new FetchPackageStorageAsyncLoader(
+                mContext, mSource, info, new UserHandle(0));
+
+        assertThat(task.loadInBackground()).isNull();
     }
 }
