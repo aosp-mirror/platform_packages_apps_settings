@@ -16,7 +16,14 @@
 
 package com.android.settings.applications;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.os.UserManager;
@@ -25,6 +32,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,13 +40,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -117,4 +121,24 @@ public final class InstalledAppDetailsTest {
         assertThat(mAppDetail.shouldShowUninstallForAll(appEntry)).isFalse();
     }
 
+    @Test
+    public void getStorageSummary_shouldWorkForExternal() {
+        Context context = RuntimeEnvironment.application.getApplicationContext();
+        AppStorageStats stats = mock(AppStorageStats.class);
+        when(stats.getTotalBytes()).thenReturn(1L);
+
+        assertThat(InstalledAppDetails.getStorageSummary(context, stats, true))
+                .isEqualTo("1.00B used in External storage");
+    }
+
+    @Test
+    public void getStorageSummary_shouldWorkForInternal() {
+        Context context = RuntimeEnvironment.application.getApplicationContext();
+        AppStorageStats stats = mock(AppStorageStats.class);
+        when(stats.getTotalBytes()).thenReturn(1L);
+
+        assertThat(InstalledAppDetails.getStorageSummary(context, stats, false))
+                .isEqualTo("1.00B used in Internal storage");
+
+    }
 }
