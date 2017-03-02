@@ -23,6 +23,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
+import android.os.storage.VolumeInfo;
 
 import java.util.List;
 
@@ -89,5 +90,10 @@ public class PackageManagerWrapperImpl implements PackageManagerWrapper {
     public void replacePreferredActivity(IntentFilter homeFilter, int matchCategoryEmpty,
             ComponentName[] componentNames, ComponentName component) {
         mPm.replacePreferredActivity(homeFilter, matchCategoryEmpty, componentNames, component);
+    }
+
+    @Override
+    public VolumeInfo getPrimaryStorageCurrentVolume() {
+        return mPm.getPrimaryStorageCurrentVolume();
     }
 }
