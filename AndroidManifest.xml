@@ -1032,7 +1032,7 @@
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.device" />
+                android:value="com.android.settings.category.ia.development" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.ProcessStatsSummary" />
         </activity>
@@ -1287,11 +1287,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <intent-filter android:priority="2">
+            <intent-filter android:priority="4">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.personal" />
+                       android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.SecuritySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2378,11 +2378,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="1">
+            <intent-filter android:priority="10">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.wireless" />
+                android:value="com.android.settings.category.ia.wireless" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.datausage.DataUsageSummary" />
         </activity>
@@ -2977,17 +2977,6 @@
                        android:value="@string/network_dashboard_summary"/>
         </activity>
 
-        <activity-alias android:name="DataUsageDashboardAlias"
-                        android:targetActivity="Settings$DataUsageSummaryActivity">
-            <intent-filter android:priority="10">
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.wireless"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.datausage.DataUsageSummary"/>
-        </activity-alias>
-
         <activity android:name=".Settings$ConnectedDeviceDashboardActivity"
                   android:label="@string/connected_devices_dashboard_title"
                   android:icon="@drawable/ic_devices_other">
@@ -3029,19 +3018,6 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
-
-        <activity-alias android:name="SecurityDashboardAlias"
-                android:targetActivity="Settings$SecuritySettingsActivity">
-            <intent-filter android:priority="4">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.homepage" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.SecuritySettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity-alias>
 
         <activity android:name=".Settings$UserAndAccountDashboardActivity"
                   android:label="@string/account_dashboard_title"
@@ -3088,17 +3064,6 @@
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/support_summary"/>
         </activity>
-
-        <activity-alias android:name="MemorySettingsDashboardAlias"
-                        android:targetActivity=".Settings$MemorySettingsActivity">
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.development" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.ProcessStatsSummary" />
-        </activity-alias>
 
         <activity-alias android:name="ManageApplicationsDashboardAlias"
                         android:targetActivity="Settings$ManageApplicationsActivity">
