@@ -840,6 +840,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 Log.e(TAG, "Failed to forget invalid network " + mSelectedAccessPoint.getConfig());
                 return;
             }
+        } else if (mSelectedAccessPoint.getConfig().isPasspoint()) {
+            mWifiManager.removePasspointConfiguration(mSelectedAccessPoint.getConfig().FQDN);
         } else {
             mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId, mForgetListener);
         }
