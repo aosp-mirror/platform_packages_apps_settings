@@ -71,7 +71,7 @@ public class CreateShortcut extends LauncherActivity {
         ShortcutManager sm = getSystemService(ShortcutManager.class);
         ActivityInfo activityInfo = resolveInfo.activityInfo;
 
-        Icon maskableIcon = activityInfo.icon != 0 ? Icon.createWithMaskableBitmap(
+        Icon maskableIcon = activityInfo.icon != 0 ? Icon.createWithAdaptiveBitmap(
                 createIcon(activityInfo.icon,
                         R.layout.shortcut_badge_maskable,
                         getResources().getDimensionPixelSize(R.dimen.shortcut_size_maskable))) :
