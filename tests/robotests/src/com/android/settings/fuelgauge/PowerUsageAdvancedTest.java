@@ -94,9 +94,9 @@ public class PowerUsageAdvancedTest {
     @Test
     public void testExtractUsageType_TypeEqualsToDrainType_ReturnRelevantType() {
         final DrainType drainTypes[] = {DrainType.WIFI, DrainType.BLUETOOTH, DrainType.IDLE,
-                DrainType.USER, DrainType.CELL};
+                DrainType.USER, DrainType.CELL, DrainType.UNACCOUNTED};
         final int usageTypes[] = {UsageType.WIFI, UsageType.BLUETOOTH, UsageType.IDLE,
-                UsageType.USER, UsageType.CELL};
+                UsageType.USER, UsageType.CELL, UsageType.UNACCOUNTED};
 
         assertThat(drainTypes.length).isEqualTo(usageTypes.length);
         for (int i = 0, size = drainTypes.length; i < size; i++) {
@@ -147,7 +147,7 @@ public class PowerUsageAdvancedTest {
 
         assertThat(usageTypeSet).asList().containsExactly(UsageType.APP, UsageType.WIFI,
                 UsageType.CELL, UsageType.BLUETOOTH, UsageType.IDLE, UsageType.SERVICE,
-                UsageType.USER, UsageType.SYSTEM);
+                UsageType.USER, UsageType.SYSTEM, UsageType.UNACCOUNTED);
     }
 
     @Test

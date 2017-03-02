@@ -59,7 +59,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             UsageType.BLUETOOTH,
             UsageType.USER,
             UsageType.IDLE,
-            UsageType.APP};
+            UsageType.APP,
+            UsageType.UNACCOUNTED};
     private BatteryHistoryPreference mHistPref;
     private PreferenceGroup mUsageListGroup;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
@@ -114,7 +115,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mUsageListGroup.removeAll();
         for (int i = 0, size = dataList.size(); i < size; i++) {
             final PowerUsageData batteryData = dataList.get(i);
-            final PowerGaugePreference pref = new PowerGaugePreference(getContext());
+            final PowerGaugePreference pref = new PowerGaugePreference(getPrefContext());
 
             pref.setTitle(batteryData.titleResId);
             pref.setSummary(batteryData.summary);
@@ -139,6 +140,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return UsageType.USER;
         } else if (drainType == DrainType.CELL) {
             return UsageType.CELL;
+        } else if (drainType == DrainType.UNACCOUNTED) {
+            return UsageType.UNACCOUNTED;
         } else if (mPowerUsageFeatureProvider.isTypeSystem(sipper)) {
             return UsageType.SYSTEM;
         } else if (mPowerUsageFeatureProvider.isTypeService(sipper)) {
@@ -200,7 +203,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 UsageType.SYSTEM,
                 UsageType.BLUETOOTH,
                 UsageType.USER,
-                UsageType.IDLE})
+                UsageType.IDLE,
+                UsageType.UNACCOUNTED})
         public @interface UsageType {
             int APP = 0;
             int WIFI = 1;
@@ -210,6 +214,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             int BLUETOOTH = 5;
             int USER = 6;
             int IDLE = 7;
+            int UNACCOUNTED = 8;
         }
 
         @StringRes
@@ -249,6 +254,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     return R.string.power_user;
                 case UsageType.IDLE:
                     return R.string.power_idle;
+                case UsageType.UNACCOUNTED:
+                    return R.string.power_unaccounted;
                 case UsageType.APP:
                 default:
                     return R.string.power_apps;
