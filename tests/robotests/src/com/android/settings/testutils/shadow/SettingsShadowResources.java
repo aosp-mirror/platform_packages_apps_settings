@@ -56,6 +56,10 @@ public class SettingsShadowResources extends ShadowResources {
         // TODO: Remove this once Robolectric is updated.
         if (id == com.android.settings.R.drawable.switchbar_background) {
             return new ColorDrawable();
+        } else if (id == com.android.settings.R.drawable.ic_launcher_settings) {
+            // ic_launcher_settings uses adaptive-icon, which is not supported by robolectric,
+            // change it to a normal drawable.
+            id = com.android.settings.R.drawable.ic_settings_wireless;
         }
         return super.loadDrawable(value, id, theme);
     }

@@ -31,6 +31,10 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -679,6 +683,13 @@ public class SettingsActivity extends SettingsDrawerActivity
         mDevelopmentPreferencesListener = null;
     }
 
+    @Override
+    public void setTaskDescription(ActivityManager.TaskDescription taskDescription) {
+        final Bitmap icon = getBitmapFromXmlResource(R.drawable.ic_launcher_settings);
+        taskDescription.setIcon(icon);
+        super.setTaskDescription(taskDescription);
+    }
+
     protected boolean isValidFragment(String fragmentName) {
         // Almost all fragments are wrapped in this,
         // except for a few that have their own activities.
@@ -1113,5 +1124,18 @@ public class SettingsActivity extends SettingsDrawerActivity
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @VisibleForTesting
+    Bitmap getBitmapFromXmlResource(int drawableRes) {
+        Drawable drawable = getResources().getDrawable(drawableRes, getTheme());
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 }

@@ -16,12 +16,13 @@
 
 package com.android.settings;
 
+import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import com.android.settings.testutils.FakeFeatureFactory;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,9 +33,12 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -45,7 +49,10 @@ public class SettingsActivityTest {
     private Context mContext;
     @Mock
     private FragmentManager mFragmentManager;
-
+    @Mock
+    private ActivityManager.TaskDescription mTaskDescription;
+    @Mock
+    private Bitmap mBitmap;
     private SettingsActivity mActivity;
 
     @Before
@@ -53,14 +60,16 @@ public class SettingsActivityTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         final FakeFeatureFactory factory =
-            (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         when(factory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
+
+        mActivity = spy(new SettingsActivity());
+        doReturn(mBitmap).when(mActivity).getBitmapFromXmlResource(anyInt());
     }
 
     @Test
     public void testQueryTextChange_shouldUpdate() {
         final String testQuery = "abc";
-        mActivity = new SettingsActivity();
 
         assertThat(mActivity.mSearchQuery).isNull();
         try {
@@ -82,5 +91,12 @@ public class SettingsActivityTest {
         doReturn(RuntimeEnvironment.application.getClassLoader()).when(mActivity).getClassLoader();
 
         mActivity.launchSettingFragment(null, true, mock(Intent.class));
+    }
+
+    @Test
+    public void testSetTaskDescription_IconChanged() {
+        mActivity.setTaskDescription(mTaskDescription);
+
+        verify(mTaskDescription).setIcon(any());
     }
 }
