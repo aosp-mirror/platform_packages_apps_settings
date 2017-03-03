@@ -176,14 +176,40 @@
 
         <!-- Wireless Controls -->
 
-        <activity android:name="Settings$WirelessSettingsActivity"
-                android:taskAffinity="com.android.settings"
-                android:label="@string/wireless_networks_settings_title"
-                android:icon="@drawable/ic_settings_more"
-                android:parentActivityName="Settings">
+        <activity android:name=".Settings$NetworkDashboardActivity"
+            android:taskAffinity="com.android.settings"
+            android:label="@string/network_dashboard_title"
+            android:icon="@drawable/ic_dashboard_network"
+            android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
                 <action android:name="android.settings.AIRPLANE_MODE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.homepage"/>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.network.NetworkDashboardFragment"/>
+            <meta-data android:name="com.android.settings.summary"
+                android:value="@string/network_dashboard_summary"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity android:name=".Settings$ConnectedDeviceDashboardActivity"
+            android:taskAffinity="com.android.settings"
+            android:label="@string/connected_devices_dashboard_title"
+            android:icon="@drawable/ic_devices_other"
+            android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.NFC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -192,16 +218,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <intent-filter android:priority="-1">
-                <action android:name="com.android.settings.action.SETTINGS" />
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.wireless" />
-            <meta-data android:name="com.android.settings.title"
-                android:resource="@string/radio_controls_title" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.WirelessSettings" />
-            <!-- Note that this doesn't really show any Wireless settings. -->
+                android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"/>
+            <meta-data android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.homepage"/>
+            <meta-data android:name="com.android.settings.summary"
+                android:value="@string/connected_devices_dashboard_summary"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -384,7 +409,7 @@
                 android:launchMode="singleTask"
                 android:taskAffinity="com.android.settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:parentActivityName="Settings$WirelessSettingsActivity"
+                android:parentActivityName="Settings$NetworkDashboardActivity"
                 android:process="com.android.phone">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APN_SETTINGS" />
@@ -2091,7 +2116,7 @@
         <activity android:name="Settings$AndroidBeamSettingsActivity"
                 android:label="@string/android_beam_settings_title"
                 android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings$WirelessSettingsActivity">
+                android:parentActivityName="Settings$ConnectedDeviceDashboardActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NFCSHARING_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2962,35 +2987,6 @@
         <!-- Information architecture host activities -->
 
         <!-- Alias for battery settings in new IA. Remove and merge metadata into TargetActivity -->
-        <activity android:name=".Settings$NetworkDashboardActivity"
-                  android:taskAffinity=""
-                  android:label="@string/network_dashboard_title"
-                  android:icon="@drawable/ic_dashboard_network">
-            <intent-filter android:priority="10">
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.homepage"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.network.NetworkDashboardFragment"/>
-            <meta-data android:name="com.android.settings.summary"
-                       android:value="@string/network_dashboard_summary"/>
-        </activity>
-
-        <activity android:name=".Settings$ConnectedDeviceDashboardActivity"
-                  android:label="@string/connected_devices_dashboard_title"
-                  android:icon="@drawable/ic_devices_other">
-            <intent-filter android:priority="10">
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.homepage"/>
-            <meta-data android:name="com.android.settings.summary"
-                       android:value="@string/connected_devices_dashboard_summary"/>
-        </activity>
-
         <activity android:name=".Settings$AppAndNotificationDashboardActivity"
                   android:label="@string/app_and_notification_dashboard_title"
                   android:icon="@drawable/ic_dashboard_apps">

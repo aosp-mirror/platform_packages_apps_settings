@@ -54,13 +54,13 @@ import com.android.settings.DisplaySettings;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.WirelessSettings;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiSettings;
@@ -571,7 +571,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                         R.string.bluetooth_settings, null, null, 0);
                 break;
             case ACTION_WIRELESS_SETTINGS:
-                sa.startPreferencePanel(this, WirelessSettings.class.getName(), null,
+                sa.startPreferencePanel(this, NetworkDashboardFragment.class.getName(), null,
                         R.string.radio_controls_title, null, null, 0);
                 break;
             case ACTION_APP_DETAILS:

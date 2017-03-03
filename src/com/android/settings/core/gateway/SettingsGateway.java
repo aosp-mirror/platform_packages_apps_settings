@@ -39,7 +39,6 @@ import com.android.settings.TrustedCredentialsSettings;
 import com.android.settings.UserDictionarySettings;
 import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WifiCallingSettings;
-import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
@@ -133,7 +132,6 @@ public class SettingsGateway {
      * security exception if the fragment it needs to display is not in this list.
      */
     public static final String[] ENTRY_FRAGMENTS = {
-            WirelessSettings.class.getName(),
             WifiSettings.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings.class.getName(),
@@ -249,7 +247,6 @@ public class SettingsGateway {
             Settings.WifiSettingsActivity.class.getName(),
             Settings.BluetoothSettingsActivity.class.getName(),
             Settings.SimSettingsActivity.class.getName(),
-            Settings.WirelessSettingsActivity.class.getName(),
             //device_section
             Settings.SoundSettingsActivity.class.getName(),
             Settings.DisplaySettingsActivity.class.getName(),
