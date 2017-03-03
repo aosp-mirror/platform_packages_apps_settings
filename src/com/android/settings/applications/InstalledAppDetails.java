@@ -81,7 +81,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
@@ -102,6 +101,8 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.PermissionsSummaryHelper;
+import com.android.settingslib.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 
