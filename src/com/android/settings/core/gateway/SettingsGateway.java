@@ -248,7 +248,6 @@ public class SettingsGateway {
             //wireless_section
             Settings.WifiSettingsActivity.class.getName(),
             Settings.BluetoothSettingsActivity.class.getName(),
-            Settings.DataUsageSummaryActivity.class.getName(),
             Settings.SimSettingsActivity.class.getName(),
             Settings.WirelessSettingsActivity.class.getName(),
             //device_section
@@ -267,7 +266,7 @@ public class SettingsGateway {
             Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.PrintSettingsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
-            Settings.EnterprisePrivacySettingsActivity.class.getName(),
+
 
             // New IA
             // Home page
@@ -277,7 +276,6 @@ public class SettingsGateway {
             Settings.AppAndNotificationDashboardActivity.class.getName(),
             Settings.StorageDashboardActivity.class.getName(),
             "com.android.settings.SoundDashboardAlias",
-            "com.android.settings.SecurityDashboardAlias",
             "com.android.settings.UsersDashboardAlias",
             Settings.UserAndAccountDashboardActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
@@ -286,8 +284,9 @@ public class SettingsGateway {
             "com.android.settings.ManageApplicationsDashboardAlias",
             "com.android.settings.PaymentSettingsDashboardAlias",
             // Home page > Network & Internet
-            "com.android.settings.DataUsageDashboardAlias",
+            Settings.DataUsageSummaryActivity.class.getName(),
             // Home page > System
             Settings.LanguageAndInputSettingsActivity.class.getName(),
+            Settings.EnterprisePrivacySettingsActivity.class.getName(),
     };
 }
