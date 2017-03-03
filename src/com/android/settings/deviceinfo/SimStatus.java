@@ -48,8 +48,8 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.telephony.DefaultPhoneNotifier;
 import com.android.internal.telephony.Phone;
+import com.android.internal.telephony.PhoneConstantConversions;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -292,7 +292,7 @@ public class SimStatus extends SettingsPreferenceFragment {
 
     private void updateDataState() {
         final int state =
-                DefaultPhoneNotifier.convertDataState(mPhone.getDataConnectionState());
+                PhoneConstantConversions.convertDataState(mPhone.getDataConnectionState());
 
         String display = mRes.getString(R.string.radioInfo_unknown);
 
