@@ -26,7 +26,6 @@ import com.android.settings.PrivacySettings;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.WallpaperTypeSettings;
-import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
@@ -50,6 +49,7 @@ import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
+import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
@@ -122,8 +122,8 @@ public final class Ranking {
         sRankMap.put(DataUsageSummary.class.getName(), RANK_DATA_USAGE);
         sRankMap.put(DataUsageMeteredSettings.class.getName(), RANK_DATA_USAGE);
 
-        // Other wireless settinfs
-        sRankMap.put(WirelessSettings.class.getName(), RANK_WIRELESS);
+        // Other wireless settings
+        sRankMap.put(NetworkDashboardFragment.class.getName(), RANK_WIRELESS);
 
         // Display
         sRankMap.put(DisplaySettings.class.getName(), RANK_DISPLAY);

@@ -920,7 +920,11 @@ public class SettingsActivity extends SettingsDrawerActivity
                 && !Utils.isMonkeyRunning(), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
-                        Settings.WirelessSettingsActivity.class.getName()),
+                Settings.NetworkDashboardActivity.class.getName()),
+                !UserManager.isDeviceInDemoMode(this), isAdmin);
+
+        setTileEnabled(new ComponentName(packageName,
+                Settings.ConnectedDeviceDashboardActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
