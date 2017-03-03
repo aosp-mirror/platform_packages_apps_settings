@@ -22,6 +22,7 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -51,8 +52,13 @@ public class DoubleTwistGestureSettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getLifecycle());
+    }
+
+    private static List<PreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DoubleTwistPreferenceController(context, getLifecycle()));
+        controllers.add(new DoubleTwistPreferenceController(context, lifecycle));
         return controllers;
     }
 
@@ -69,5 +75,11 @@ public class DoubleTwistGestureSettings extends DashboardFragment {
                     sir.xmlResId = R.xml.double_twist_gesture_settings;
                     return Arrays.asList(sir);
                 }
+
+                @Override
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context, null /* lifecycle */);
+                }
             };
+
 }
