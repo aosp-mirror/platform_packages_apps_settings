@@ -56,7 +56,6 @@ import android.widget.Spinner;
 
 import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
 import com.android.settings.Settings.GamesStorageActivity;
@@ -80,7 +79,6 @@ import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -265,7 +263,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private NotificationBackend mNotifBackend;
     private ResetAppsHelper mResetAppsHelper;
     private String mVolumeUuid;
-    private String mVolumeName;
     private int mStorageType;
 
     @Override
@@ -289,7 +286,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         } else if (className.equals(StorageUseActivity.class.getName())) {
             if (args != null && args.containsKey(EXTRA_VOLUME_UUID)) {
                 mVolumeUuid = args.getString(EXTRA_VOLUME_UUID);
-                mVolumeName = args.getString(EXTRA_VOLUME_NAME);
                 mStorageType = args.getInt(EXTRA_STORAGE_TYPE, STORAGE_TYPE_DEFAULT);
                 mListType = LIST_TYPE_STORAGE;
             } else {
@@ -420,22 +416,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
         if (mListType == LIST_TYPE_GAMES) {
             mApplications.setOverrideFilter(ApplicationsState.FILTER_GAMES);
-        }
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        if (mListType == LIST_TYPE_STORAGE) {
-            final Activity activity = getActivity();
-            final boolean isNewIAEnabled = FeatureFactory.getFactory(activity)
-                    .getDashboardFeatureProvider(activity)
-                    .isEnabled();
-            if (!isNewIAEnabled) {
-                FrameLayout pinnedHeader = (FrameLayout) mRootView.findViewById(R.id.pinned_header);
-                AppHeader.createAppHeader(getActivity(), null, mVolumeName, null, -1, pinnedHeader);
-            }
         }
     }
 
@@ -627,12 +607,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             return;
         }
         final Context context = getActivity();
-        if (FeatureFactory.getFactory(context).getDashboardFeatureProvider(context).isEnabled()) {
-            mOptionsMenu.findItem(R.id.advanced).setVisible(false);
-        } else {
-            mOptionsMenu.findItem(R.id.advanced).setVisible(
-                    mListType == LIST_TYPE_MAIN || mListType == LIST_TYPE_NOTIFICATION);
-        }
+        mOptionsMenu.findItem(R.id.advanced).setVisible(false);
 
         mOptionsMenu.findItem(R.id.sort_order_alpha).setVisible(mListType == LIST_TYPE_STORAGE
                 && mSortOrder != R.id.sort_order_alpha);

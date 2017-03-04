@@ -68,17 +68,10 @@ public class NfcPreferenceController extends PreferenceController
         mNfcEnabler = new NfcEnabler(mContext, mNfcPreference, mBeamPreference);
         String toggleable = Settings.Global.getString(mContext.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
-        final boolean useNewIA = FeatureFactory.getFactory(mContext)
-                .getDashboardFeatureProvider(mContext).isEnabled();
         // Manually set dependencies for NFC when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_NFC)) {
-            if (useNewIA) {
-                mAirplaneModeObserver = new AirplaneModeObserver();
-                updateNfcPreference();
-            } else {
-                mNfcPreference.setDependency(AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
-                mBeamPreference.setDependency(AirplaneModePreferenceController.KEY_TOGGLE_AIRPLANE);
-            }
+            mAirplaneModeObserver = new AirplaneModeObserver();
+            updateNfcPreference();
         }
     }
 

@@ -116,23 +116,8 @@ public class SummaryLoader {
             @Override
             public void run() {
 
-                final Tile tile;
-                if (mDashboardFeatureProvider.isEnabled()) {
-                    tile = getTileFromCategory(
-                            mDashboardFeatureProvider.getTilesForCategory(mCategoryKey), component);
-                } else {
-                    // Since tiles are not always cached (like on locale change for instance),
-                    // we need to always get the latest one.
-                    if (!(mActivity instanceof SettingsDrawerActivity)) {
-                        if (DEBUG) {
-                            Log.d(TAG, "Can't get category list.");
-                        }
-                        return;
-                    }
-                    tile = getTileFromCategory(
-                            ((SettingsDrawerActivity) mActivity).getDashboardCategories(),
-                            component);
-                }
+                final Tile tile = getTileFromCategory(
+                    mDashboardFeatureProvider.getTilesForCategory(mCategoryKey), component);
 
                 if (tile == null) {
                     if (DEBUG) {

@@ -17,14 +17,12 @@
 package com.android.settings.notification;
 
 import android.content.Context;
-import android.os.Bundle;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,17 +59,5 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         controllers.add(pulseController);
         controllers.add(mLockScreenNotificationController);
         return controllers;
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
-        final Context context = getContext();
-        if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context).isEnabled()) {
-            final String prefKey = getPreferenceController(
-                    SwipeToNotificationPreferenceController.class)
-                    .getPreferenceKey();
-            removePreference(prefKey);
-        }
     }
 }

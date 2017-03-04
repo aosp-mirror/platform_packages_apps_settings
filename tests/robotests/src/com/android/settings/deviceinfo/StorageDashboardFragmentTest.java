@@ -15,7 +15,6 @@
  */
 package com.android.settings.deviceinfo;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
@@ -24,7 +23,6 @@ import android.provider.SearchIndexableResource;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
@@ -46,8 +44,6 @@ import static org.mockito.Mockito.when;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class StorageDashboardFragmentTest {
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private StorageManager mStorageManager;
@@ -57,10 +53,6 @@ public class StorageDashboardFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        final FakeFeatureFactory factory =
-                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        when(factory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
         mFragment = new StorageDashboardFragment();
     }
 

@@ -40,11 +40,9 @@ import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.applications.AppHeaderController;
-import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -69,18 +67,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     protected RestrictedSwitchPreference mPriority;
     protected RestrictedDropDownPreference mVisibilityOverride;
 
-    private DashboardFeatureProvider mDashboardFeatureProvider;
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (mAppRow == null || mChannel == null) return;
-        if (!mDashboardFeatureProvider.isEnabled()) {
-            AppHeader.createAppHeader(
-                    this, mAppRow.icon, mChannel.getName(), mAppRow.pkg, mAppRow.uid);
-        }
-    }
-
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_TOPIC_NOTIFICATION;
@@ -95,8 +81,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             return;
         }
         final Activity activity = getActivity();
-        mDashboardFeatureProvider =
-                FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
         addPreferencesFromResource(R.xml.channel_notification_settings);
 
         // load settings intent
@@ -125,21 +109,19 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             setupBlockAndImportance();
             updateDependents();
         }
-        if (mDashboardFeatureProvider.isEnabled()) {
-            final Preference pref = FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this /* fragment */, null /* appHeader */)
-                    .setIcon(mAppRow.icon)
-                    .setLabel(getNotificationChannelLabel(mChannel))
-                    .setSummary(mAppRow.label)
-                    .setPackageName(mAppRow.pkg)
-                    .setUid(mAppRow.uid)
-                    .setAppNotifPrefIntent(mAppRow.settingsIntent)
-                    .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                            AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
-                    .done(getPrefContext());
-            getPreferenceScreen().addPreference(pref);
-        }
+        final Preference pref = FeatureFactory.getFactory(activity)
+            .getApplicationFeatureProvider(activity)
+            .newAppHeaderController(this /* fragment */, null /* appHeader */)
+            .setIcon(mAppRow.icon)
+            .setLabel(getNotificationChannelLabel(mChannel))
+            .setSummary(mAppRow.label)
+            .setPackageName(mAppRow.pkg)
+            .setUid(mAppRow.uid)
+            .setAppNotifPrefIntent(mAppRow.settingsIntent)
+            .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
+            .done(getPrefContext());
+        getPreferenceScreen().addPreference(pref);
     }
 
     @Override

@@ -42,7 +42,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
@@ -354,24 +353,17 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         }
 
         final Activity activity = getActivity();
-        if (!FeatureFactory.getFactory(activity)
-                .getDashboardFeatureProvider(activity).isEnabled()) {
-            View header = setPinnedHeaderView(R.layout.app_header);
-            AppHeader.setupHeaderView(getActivity(), mIcon, mLabel,
-                    pkg, uid, AppHeader.includeAppInfo(this), 0, header, null);
-        } else {
-            final Preference pref = FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this, null /* appHeader */)
-                    .setIcon(mIcon)
-                    .setLabel(mLabel)
-                    .setPackageName(pkg)
-                    .setUid(uid)
-                    .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                            AppHeaderController.ActionType.ACTION_NONE)
-                    .done(getPrefContext());
-            getPreferenceScreen().addPreference(pref);
-        }
+        final Preference pref = FeatureFactory.getFactory(activity)
+            .getApplicationFeatureProvider(activity)
+            .newAppHeaderController(this, null /* appHeader */)
+            .setIcon(mIcon)
+            .setLabel(mLabel)
+            .setPackageName(pkg)
+            .setUid(uid)
+            .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                AppHeaderController.ActionType.ACTION_NONE)
+            .done(getPrefContext());
+        getPreferenceScreen().addPreference(pref);
     }
 
     @Override

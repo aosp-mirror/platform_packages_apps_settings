@@ -16,7 +16,6 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Process;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
@@ -40,10 +39,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
@@ -267,10 +264,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.power_usage_advanced;
                     return Arrays.asList(sir);

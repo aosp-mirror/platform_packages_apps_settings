@@ -77,13 +77,11 @@ public class ProgressiveDisclosureTest {
         mAppContext = ShadowApplication.getInstance().getApplicationContext();
         mFakeFeatureFactory = (FakeFeatureFactory) FeatureFactory.getFactory(mContext);
         mMixin = new ProgressiveDisclosureMixin(mAppContext,
-                mFakeFeatureFactory.dashboardFeatureProvider,
                 mFakeFeatureFactory.metricsFeatureProvider,
                 mPreferenceFragment);
         ReflectionHelpers.setField(mMixin, "mExpandButton", mExpandButton);
         mPreference = new Preference(mAppContext);
         mPreference.setKey("test");
-        when(mFakeFeatureFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
     }
 
     @Test
@@ -97,7 +95,6 @@ public class ProgressiveDisclosureTest {
 
     @Test
     public void shouldCollapse_morePreferenceThanLimit() {
-        when(mFakeFeatureFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
         when(mScreen.getPreferenceCount()).thenReturn(5);
         mMixin.setTileLimit(3);
 

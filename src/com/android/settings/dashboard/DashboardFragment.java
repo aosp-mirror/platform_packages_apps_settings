@@ -309,8 +309,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
         mSummaryLoader.setSummaryConsumer(this);
         final TypedArray a = context.obtainStyledAttributes(new int[]{
-                mDashboardFeatureProvider.isEnabled() ? android.R.attr.colorControlNormal
-                        : android.R.attr.colorAccent});
+                android.R.attr.colorControlNormal});
         final int tintColor = a.getColor(0, context.getColor(android.R.color.white));
         a.recycle();
         final String pkgName = context.getPackageName();

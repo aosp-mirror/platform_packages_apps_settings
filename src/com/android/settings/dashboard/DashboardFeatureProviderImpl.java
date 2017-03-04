@@ -69,11 +69,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    @Override
     public DashboardCategory getTilesForCategory(String key) {
         return mCategoryManager.getTilesByCategory(mContext, key);
     }
@@ -81,9 +76,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public List<Preference> getPreferencesForCategory(Activity activity, Context context,
             int sourceMetricsCategory, String key) {
-        if (!isEnabled()) {
-            return null;
-        }
         final DashboardCategory category = getTilesForCategory(key);
         if (category == null) {
             Log.d(TAG, "NO dashboard tiles for " + TAG);
@@ -177,7 +169,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
             DashboardFragment fragment) {
-        return new ProgressiveDisclosureMixin(context, this, mMetricsFeatureProvider, fragment);
+        return new ProgressiveDisclosureMixin(context, mMetricsFeatureProvider, fragment);
     }
 
     @Override

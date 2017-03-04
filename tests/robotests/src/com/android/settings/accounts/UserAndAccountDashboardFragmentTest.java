@@ -16,7 +16,6 @@
 package com.android.settings.accounts;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -25,14 +24,12 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -54,8 +51,6 @@ public class UserAndAccountDashboardFragmentTest {
     private static final String METADATA_CATEGORY = "com.android.settings.category";
     private static final String METADATA_ACCOUNT_TYPE = "com.android.settings.ia.account";
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private UserManager mUserManager;
     private UserAndAccountDashboardFragment mFragment;
@@ -63,10 +58,6 @@ public class UserAndAccountDashboardFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        final FakeFeatureFactory factory =
-                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        when(factory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
         mFragment = new UserAndAccountDashboardFragment();
     }
 

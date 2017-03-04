@@ -359,37 +359,33 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         PreferenceGroup securityStatusPreferenceGroup =
                 (PreferenceGroup) root.findPreference(KEY_SECURITY_STATUS);
-        if (mDashboardFeatureProvider.isEnabled()) {
-            final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
-                    getActivity(), getPrefContext(), getMetricsCategory(),
-                    CategoryKey.CATEGORY_SECURITY);
-            int numSecurityStatusPrefs = 0;
-            if (tilePrefs != null && !tilePrefs.isEmpty()) {
-                for (Preference preference : tilePrefs) {
-                    if (!TextUtils.isEmpty(preference.getKey())
-                            && preference.getKey().startsWith(SECURITY_STATUS_KEY_PREFIX)) {
-                        // Injected security status settings are placed under the Security status
-                        // category.
-                        securityStatusPreferenceGroup.addPreference(preference);
-                        numSecurityStatusPrefs++;
-                    } else {
-                        // Other injected settings are placed under the Security preference screen.
-                        root.addPreference(preference);
-                    }
+        final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
+            getActivity(), getPrefContext(), getMetricsCategory(),
+            CategoryKey.CATEGORY_SECURITY);
+        int numSecurityStatusPrefs = 0;
+        if (tilePrefs != null && !tilePrefs.isEmpty()) {
+            for (Preference preference : tilePrefs) {
+                if (!TextUtils.isEmpty(preference.getKey())
+                    && preference.getKey().startsWith(SECURITY_STATUS_KEY_PREFIX)) {
+                    // Injected security status settings are placed under the Security status
+                    // category.
+                    securityStatusPreferenceGroup.addPreference(preference);
+                    numSecurityStatusPrefs++;
+                } else {
+                    // Other injected settings are placed under the Security preference screen.
+                    root.addPreference(preference);
                 }
             }
+        }
 
-            if (numSecurityStatusPrefs == 0) {
-                root.removePreference(securityStatusPreferenceGroup);
-            } else if (numSecurityStatusPrefs > 0) {
-                // Update preference data with tile data. Security feature provider only updates the
-                // data if it actually needs to be changed.
-                mSecurityFeatureProvider.updatePreferences(getActivity(), root,
-                        mDashboardFeatureProvider.getTilesForCategory(
-                                CategoryKey.CATEGORY_SECURITY));
-            }
-        } else {
-            root.removePreference(root.findPreference(KEY_SECURITY_STATUS));
+        if (numSecurityStatusPrefs == 0) {
+            root.removePreference(securityStatusPreferenceGroup);
+        } else if (numSecurityStatusPrefs > 0) {
+            // Update preference data with tile data. Security feature provider only updates the
+            // data if it actually needs to be changed.
+            mSecurityFeatureProvider.updatePreferences(getActivity(), root,
+                mDashboardFeatureProvider.getTilesForCategory(
+                    CategoryKey.CATEGORY_SECURITY));
         }
 
         for (int i = 0; i < SWITCH_PREFERENCE_KEYS.length; i++) {
@@ -1202,8 +1198,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     Settings.Secure.PACKAGE_VERIFIER_STATE, 0);
             DashboardFeatureProvider dashboardFeatureProvider =
                     FeatureFactory.getFactory(mContext).getDashboardFeatureProvider(mContext);
-            if (dashboardFeatureProvider.isEnabled()
-                    && (packageVerifierState == PACKAGE_VERIFIER_STATE_ENABLED)) {
+            if (packageVerifierState == PACKAGE_VERIFIER_STATE_ENABLED) {
                 // Calling the feature provider could potentially be slow, so do this on a separate
                 // thread so as to not block the loading of Settings.
                 Executors.newSingleThreadExecutor().execute(new Runnable() {

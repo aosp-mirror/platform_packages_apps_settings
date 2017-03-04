@@ -75,7 +75,6 @@ public class DashboardSummaryTest {
     @Test
     public void updateCategoryAndSuggestion_shouldGetCategoryFromFeatureProvider() {
         doReturn(mock(Activity.class)).when(mSummary).getActivity();
-        when(mDashboardFeatureProvider.isEnabled()).thenReturn(true);
         mSummary.updateCategoryAndSuggestion(null);
         verify(mDashboardFeatureProvider).getTilesForCategory(CategoryKey.CATEGORY_HOMEPAGE);
     }
