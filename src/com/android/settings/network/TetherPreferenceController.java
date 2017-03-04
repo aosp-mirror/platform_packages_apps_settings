@@ -28,6 +28,9 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settings.core.lifecycle.LifecycleObserver;
+import com.android.settings.core.lifecycle.events.OnDestroy;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -35,7 +38,8 @@ import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
 import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
 import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
 
-public class TetherPreferenceController extends PreferenceController {
+public class TetherPreferenceController extends PreferenceController
+        implements LifecycleObserver, OnDestroy {
 
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
 
@@ -62,12 +66,12 @@ public class TetherPreferenceController extends PreferenceController {
     TetherPreferenceController() {
         super(null);
         mAdminDisallowedTetherConfig = false;
-        mBluetoothPan = null;
+        mBluetoothPan = new AtomicReference<>();
         mConnectivityManager = null;
-        mBluetoothAdapter = null;
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
-    public TetherPreferenceController(Context context) {
+    public TetherPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
         mBluetoothPan = new AtomicReference<>();
         mAdminDisallowedTetherConfig = checkIfRestrictionEnforced(
@@ -75,6 +79,9 @@ public class TetherPreferenceController extends PreferenceController {
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
         if (mBluetoothAdapter != null) {
             mBluetoothAdapter.getProfileProxy(context, mBtProfileServiceListener,
                     BluetoothProfile.PAN);
@@ -111,6 +118,14 @@ public class TetherPreferenceController extends PreferenceController {
     @Override
     public String getPreferenceKey() {
         return KEY_TETHER_SETTINGS;
+    }
+
+    @Override
+    public void onDestroy() {
+        final BluetoothProfile profile = mBluetoothPan.getAndSet(null);
+        if (profile != null && mBluetoothAdapter != null) {
+            mBluetoothAdapter.closeProfileProxy(BluetoothProfile.PAN, profile);
+        }
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)

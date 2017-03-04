@@ -18,9 +18,10 @@ package com.android.settings.network;
 
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothPan;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
@@ -35,6 +36,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.concurrent.atomic.AtomicReference;
+
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -62,6 +66,18 @@ public class TetherPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mContext", mContext);
         ReflectionHelpers.setField(mController, "mConnectivityManager", mConnectivityManager);
         ReflectionHelpers.setField(mController, "mBluetoothAdapter", mBluetoothAdapter);
+    }
+
+    @Test
+    public void goThroughLifecycle_shouldDestoryBluetoothProfile() {
+        final BluetoothPan pan = mock(BluetoothPan.class);
+        final AtomicReference<BluetoothPan> panRef =
+                ReflectionHelpers.getField(mController, "mBluetoothPan");
+        panRef.set(pan);
+
+        mController.onDestroy();
+
+        verify(mBluetoothAdapter).closeProfileProxy(BluetoothProfile.PAN, pan);
     }
 
     @Test
