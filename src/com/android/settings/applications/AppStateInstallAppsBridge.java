@@ -123,9 +123,8 @@ public class AppStateInstallAppsBridge extends AppStateBaseBridge {
             }
         }
 
-        public int getSummary() {
-            return canInstallApps() ? R.string.external_source_trusted
-                    : R.string.external_source_untrusted;
+        public boolean isPotentialAppSource() {
+            return appOpMode != AppOpsManager.MODE_DEFAULT || permissionRequested;
         }
 
         @Override
@@ -150,7 +149,7 @@ public class AppStateInstallAppsBridge extends AppStateBaseBridge {
                 return false;
             }
             InstallAppsState state = (InstallAppsState) info.extraInfo;
-            return (state.appOpMode != AppOpsManager.MODE_DEFAULT) || state.permissionRequested;
+            return state.isPotentialAppSource();
         }
     };
 }
