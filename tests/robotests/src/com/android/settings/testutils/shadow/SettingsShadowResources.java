@@ -10,6 +10,9 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ArrayRes;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+
+import com.android.settings.R;
+
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -36,7 +39,8 @@ import static org.robolectric.internal.Shadow.directlyOn;
 @Implements(Resources.class)
 public class SettingsShadowResources extends ShadowResources {
 
-    @RealObject public Resources realResources;
+    @RealObject
+    public Resources realResources;
 
     @Implementation
     public int getDimensionPixelSize(@DimenRes int id) throws NotFoundException {
@@ -54,12 +58,14 @@ public class SettingsShadowResources extends ShadowResources {
         // The drawable item in switchbar_background.xml refers to a very recent color attribute
         // that Robolectric isn't yet aware of.
         // TODO: Remove this once Robolectric is updated.
-        if (id == com.android.settings.R.drawable.switchbar_background) {
+        if (id == R.drawable.switchbar_background) {
             return new ColorDrawable();
-        } else if (id == com.android.settings.R.drawable.ic_launcher_settings) {
+        } else if (id == R.drawable.ic_launcher_settings) {
             // ic_launcher_settings uses adaptive-icon, which is not supported by robolectric,
             // change it to a normal drawable.
-            id = com.android.settings.R.drawable.ic_settings_wireless;
+            id = R.drawable.ic_settings_wireless;
+        } else if (id == R.drawable.app_filter_spinner_background) {
+            id = R.drawable.ic_expand_more_inverse;
         }
         return super.loadDrawable(value, id, theme);
     }
