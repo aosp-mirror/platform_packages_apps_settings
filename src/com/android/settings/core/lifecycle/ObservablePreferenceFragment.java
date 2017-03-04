@@ -88,4 +88,11 @@ public abstract class ObservablePreferenceFragment extends PreferenceFragment {
         super.onPause();
     }
 
+    @CallSuper
+    @Override
+    public void onDestroy() {
+        mLifecycle.onDestroy();
+        super.onDestroy();
+    }
+
 }
