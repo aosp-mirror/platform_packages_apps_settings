@@ -2432,8 +2432,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"දුරකථන ඇමතුම් සහ SMS ක්‍රියාත්මක කරන්න?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"මෙම පරිශීලකයා සමඟ ඇමතුම් සහ SMS ඉතිහාසය බෙදාගන්නා ලදි."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"හදිසි අවස්ථා තොරතුරු"</string>
-    <!-- no translation found for emergency_info_summary (5062945162967838521) -->
-    <skip />
+    <string name="emergency_info_summary" msgid="5062945162967838521">"<xliff:g id="USER_NAME">%1$s</xliff:g> සඳහා තොරතුරු සහ සම්බන්ධතා"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"යෙදුම්වලට හා අන්තර්ගතයන්ට ඉඩ දෙන්න"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"සීමා කිරීම් සහිත යෙදුම්"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"යෙදුම සඳහා සැකසීම් දිගහරින්න"</string>
@@ -3141,8 +3140,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"සිසිල් වර්ණ උෂ්ණත්වය"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"වඩා සිසිල් සංදර්ශක වර්ණ භාවිත කිරීම"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"වර්ණ වෙනස් කිරීම යෙදීමට තිරය ක්‍රියාවිරහිත කරන්න"</string>
-    <!-- no translation found for telephony_monitor_toast (7003764250271195384) -->
-    <skip />
+    <string name="telephony_monitor_toast" msgid="7003764250271195384">"Telephony Monitor වෙනස්කම සක්‍රිය කිරීමට, උපාංගය නැවත පණ ගන්වන්න"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"ස්වයංක්‍රිය පද්ධති යාවත්කාලීන"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Binderized HALs (නැවත පණ ගැන්වීම අවශ්‍යයි)"</string>
     <string name="usage" msgid="2977875522080448986">"භාවිතය"</string>
@@ -3383,14 +3381,22 @@
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"ගෝලීය HTTP ප්‍රොක්සි සකසන ලදී"</string>
     <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"පරිපාලකට උපාංගය අගුලු දැමීමට සහ මුරපදය යළි සැකසීමට හැකිය"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"පරිපාලකට සියලු උපාංග දත්ත මැකීමට හැකිය"</string>
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (7687271729962516228) -->
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4192488502181650982) -->
+    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
+      <item quantity="one">සියලුම උපාංග දත්ත මකා දැමීමට පෙර උපරිම මුරපද උත්සහ <xliff:g id="COUNT_1">%d</xliff:g>ක් වෙත පරිපාලක සකසා ඇත</item>
+      <item quantity="other">සියලුම උපාංග දත්ත මකා දැමීමට පෙර උපරිම මුරපද උත්සහ <xliff:g id="COUNT_1">%d</xliff:g>ක් වෙත පරිපාලක සකසා ඇත</item>
+    </plurals>
+    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
+      <item quantity="one">කාර්යාල පැතිකඩ දත්ත මකා දැමීමට පෙර උපරිම මුරපද උත්සහ <xliff:g id="COUNT_1">%d</xliff:g>ක් වෙත පරිපාලක සකසා ඇත</item>
+      <item quantity="other">කාර්යාල පැතිකඩ දත්ත මකා දැමීමට පෙර උපරිම මුරපද උත්සහ <xliff:g id="COUNT_1">%d</xliff:g>ක් වෙත පරිපාලක සකසා ඇත</item>
+    </plurals>
     <string name="do_disclosure_generic" msgid="5666469247267523806">"මෙම උපාංගය කළමනාකරණය කෙරේ."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"මෙම උපාංගය <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> මගින් කළමනාකරණය කෙරේ"</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"තව දැන ගන්න"</string>
-    <string name="storage_photos_videos" msgid="1872663116054954685">"ඡායාරූප සහ වීඩියෝ"</string>
-    <string name="storage_music_audio" msgid="7890103397813503615">"සංගීතය සහ ශ්‍රව්‍ය"</string>
+    <!-- no translation found for storage_photos_videos (319854636702241898) -->
+    <skip />
+    <!-- no translation found for storage_music_audio (789779084825206838) -->
+    <skip />
     <string name="storage_games" msgid="7703159201697117621">"ක්‍රීඩා"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"වෙනත් යෙදුම්"</string>
     <string name="storage_files" msgid="8581083146777364063">"ගොනු"</string>
@@ -3401,9 +3407,10 @@
     <string name="storage_manager_indicator" msgid="1516810749625915020">"ගබඩා කළමනාකරු: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"ක්‍රියාවිරහිතයි"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"ක්‍රියාත්මකයි"</string>
+    <!-- no translation found for install_type_instant (3174425974536078647) -->
+    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"ක්‍රීඩා"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"ශ්‍රව්‍ය ගොනු"</string>
-    <string name="audio_storage_title" msgid="5494923634269236874">"සංගීත"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(<xliff:g id="USER">%s</xliff:g> පරිශීලක සඳහා අස්ථාපනය කෙරිණි)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(<xliff:g id="USER">%s</xliff:g> පරිශීලක සඳහා අබල කෙරිණි)"</string>
     <string name="autofill_app" msgid="3889348218462883960">"ස්වයං පිරවුම් යෙදුම"</string>

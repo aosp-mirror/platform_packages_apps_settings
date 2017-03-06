@@ -2082,7 +2082,7 @@
     <string name="adding_profile_owner_warning" msgid="8081841501073689534">"Hvis du fortsætter, vil din bruger blive styret af din administrator, som også kan gemme tilknyttet data ud over dine personlige data.\n\nDin administrator har mulighed for at overvåge og administrere indstillinger, adgang, apps og data, der er knyttet til denne bruger, herunder netværksaktivitet og enhedens stedoplysninger."</string>
     <string name="admin_disabled_other_options" msgid="4564776259414246934">"Andre valgmuligheder er deaktiveret af din administrator."</string>
     <string name="admin_more_details" msgid="7901420667346456102">"Flere oplysninger"</string>
-    <string name="untitled_apn" msgid="1230060359198685513">"Ikke-navngivet"</string>
+    <string name="untitled_apn" msgid="1230060359198685513">"Unavngivet"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Generelt"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Underretningslogfil"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Ringetone og vibration ved opkald"</string>
@@ -2432,8 +2432,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Vil du aktivere telefonopkald og sms?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Opkalds- og sms-historikken deles med denne bruger."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Oplysninger i nødsituationer"</string>
-    <!-- no translation found for emergency_info_summary (5062945162967838521) -->
-    <skip />
+    <string name="emergency_info_summary" msgid="5062945162967838521">"Oplysninger og kontaktpersoner for <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Tillad apps og indhold"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applikationer med begrænsninger"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Udvid indstillingerne for applikationen"</string>
@@ -3141,8 +3140,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"Kølig farvetemperatur"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Brug køligere skærmfarver"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Du skal slå skærmen fra, før du kan anvende farveændringer"</string>
-    <!-- no translation found for telephony_monitor_toast (7003764250271195384) -->
-    <skip />
+    <string name="telephony_monitor_toast" msgid="7003764250271195384">"Genstart enheden for at anvende ændringen i forbindelse med Overvågning af telefoni"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatiske systemopdateringer"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Gruppér HAL\'er i mappe (kræver genstart)"</string>
     <string name="usage" msgid="2977875522080448986">"Forbrug"</string>
@@ -3383,14 +3381,22 @@
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Global HTTP-proxy er konfigureret"</string>
     <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"Administratoren kan låse enheden og nulstille adgangskoden"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"Administratoren kan slette alle data på enheden"</string>
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (7687271729962516228) -->
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4192488502181650982) -->
+    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
+      <item quantity="one">Administratoren har indstillet det maksimale antal adgangskodeforsøg til <xliff:g id="COUNT_1">%d</xliff:g>, hvorefter alle enhedens data slettes</item>
+      <item quantity="other">Administratoren har indstillet det maksimale antal adgangskodeforsøg til <xliff:g id="COUNT_1">%d</xliff:g>, hvorefter alle enhedens data slettes</item>
+    </plurals>
+    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
+      <item quantity="one">Administratoren har indstillet det maksimale antal adgangskodeforsøg til <xliff:g id="COUNT_1">%d</xliff:g>, hvorefter data for arbejdsprofilen slettes</item>
+      <item quantity="other">Administratoren har indstillet det maksimale antal adgangskodeforsøg til <xliff:g id="COUNT_1">%d</xliff:g>, hvorefter data for arbejdsprofilen slettes</item>
+    </plurals>
     <string name="do_disclosure_generic" msgid="5666469247267523806">"Dette er en administreret enhed."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"Denne enhed administreres af <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"Få flere oplysninger"</string>
-    <string name="storage_photos_videos" msgid="1872663116054954685">"Billeder og videoer"</string>
-    <string name="storage_music_audio" msgid="7890103397813503615">"Musik og lyd"</string>
+    <!-- no translation found for storage_photos_videos (319854636702241898) -->
+    <skip />
+    <!-- no translation found for storage_music_audio (789779084825206838) -->
+    <skip />
     <string name="storage_games" msgid="7703159201697117621">"Spil"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"Andre apps"</string>
     <string name="storage_files" msgid="8581083146777364063">"Filer"</string>
@@ -3401,9 +3407,10 @@
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Lagerstyring: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"Fra"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"Til"</string>
+    <!-- no translation found for install_type_instant (3174425974536078647) -->
+    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"Spil"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"Lydfiler"</string>
-    <string name="audio_storage_title" msgid="5494923634269236874">"Musik"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(afinstalleret for brugeren <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(deaktiveret for brugeren <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="3889348218462883960">"Autofyld-app"</string>

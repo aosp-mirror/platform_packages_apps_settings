@@ -2432,8 +2432,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"फोन कॉल आणि SMS चालू करायचे?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"या वापरकर्त्याशी कॉल आणि SMS इतिहास सामायिक केला जाईल."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"आणीबाणी माहिती"</string>
-    <!-- no translation found for emergency_info_summary (5062945162967838521) -->
-    <skip />
+    <string name="emergency_info_summary" msgid="5062945162967838521">"<xliff:g id="USER_NAME">%1$s</xliff:g> साठी माहिती आणि संपर्क"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"अॅप्स आणि सामग्रीला अनुमती द्या"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"प्रतिबंध असलेले अनुप्रयोग"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"अनुप्रयोगासाठी सेटिंग्ज विस्तृत करा"</string>
@@ -3141,8 +3140,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"छान रंगाचे तापमान"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"आणखी छान प्रदर्शन रंग वापरा"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"रंग बदल लागू करण्यासाठी, स्क्रीन बंद करा"</string>
-    <!-- no translation found for telephony_monitor_toast (7003764250271195384) -->
-    <skip />
+    <string name="telephony_monitor_toast" msgid="7003764250271195384">"टेलिफोनी मॉनिटर बदल लागू करण्‍यासाठी, डिव्‍हाइस रीबूट करा"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"स्वयंचलित सिस्टम अद्यतने"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Binderized HALs (रीबूट आवश्यक)"</string>
     <string name="usage" msgid="2977875522080448986">"वापर"</string>
@@ -3383,14 +3381,22 @@
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"जागतिक HTTP प्रॉक्‍सी सेट आहे"</string>
     <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"प्रशासक डिव्हाइस लॉक करु शकतो आणि संकेतशब्द रीसेट करु शकतो"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"प्रशासक डिव्हाइसवरील सर्व डेटा हटवू शकतो"</string>
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (7687271729962516228) -->
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4192488502181650982) -->
+    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
+      <item quantity="one">प्रशासकाने सर्व डिव्‍हाइस डेटा हटवण्‍यापूर्वी कमाल संकेतशब्द प्रयत्न <xliff:g id="COUNT_1">%d</xliff:g> वर सेट केले</item>
+      <item quantity="other">प्रशासकाने सर्व डिव्‍हाइस डेटा हटवण्‍यापूर्वी कमाल संकेतशब्द प्रयत्न <xliff:g id="COUNT_1">%d</xliff:g> वर सेट केले</item>
+    </plurals>
+    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
+      <item quantity="one">प्रशासकाने सर्व कार्य प्रोफाइल डेटा हटवण्‍यापूर्वी कमाल संकेतशब्द प्रयत्न <xliff:g id="COUNT_1">%d</xliff:g> वर सेट केले</item>
+      <item quantity="other">प्रशासकाने सर्व कार्य प्रोफाइल डेटा हटवण्‍यापूर्वी कमाल संकेतशब्द प्रयत्न <xliff:g id="COUNT_1">%d</xliff:g> वर सेट केले</item>
+    </plurals>
     <string name="do_disclosure_generic" msgid="5666469247267523806">"हे डिव्हाइस व्यवस्थापित आहे."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"हे डिव्हाइस <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> द्वारे व्यवस्थापित आहे."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"अधिक जाणून घ्या"</string>
-    <string name="storage_photos_videos" msgid="1872663116054954685">"फोटो आणि व्हिडिओ"</string>
-    <string name="storage_music_audio" msgid="7890103397813503615">"संगीत आणि ऑडिओ"</string>
+    <!-- no translation found for storage_photos_videos (319854636702241898) -->
+    <skip />
+    <!-- no translation found for storage_music_audio (789779084825206838) -->
+    <skip />
     <string name="storage_games" msgid="7703159201697117621">"गेम"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"अन्य अॅप्स"</string>
     <string name="storage_files" msgid="8581083146777364063">"फायली"</string>
@@ -3401,9 +3407,10 @@
     <string name="storage_manager_indicator" msgid="1516810749625915020">"संचय व्यवस्थापक: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"बंद"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"चालू"</string>
+    <!-- no translation found for install_type_instant (3174425974536078647) -->
+    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"गेम"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"ऑडिओ फायली"</string>
-    <string name="audio_storage_title" msgid="5494923634269236874">"संगीत"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(<xliff:g id="USER">%s</xliff:g> वापरकर्त्‍यासाठी विस्‍थापित)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(<xliff:g id="USER">%s</xliff:g> वापरकर्त्‍यासाठी अक्षम केले)"</string>
     <string name="autofill_app" msgid="3889348218462883960">"स्वयं-भरण अॅप"</string>

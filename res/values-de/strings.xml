@@ -2432,8 +2432,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Anrufe &amp; SMS aktivieren?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Anrufliste und SMS-Verlauf werden für diesen Nutzer freigegeben."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Notfallinformationen"</string>
-    <!-- no translation found for emergency_info_summary (5062945162967838521) -->
-    <skip />
+    <string name="emergency_info_summary" msgid="5062945162967838521">"Informationen und Kontakte für <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Apps und Inhalte zulassen"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Apps mit Einschränkungen"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"App-Einstellungen erweitern"</string>
@@ -2663,9 +2662,9 @@
     <string name="work_notification_ringtone_title" msgid="2108983018726925833">"Standard-Benachrichtigungston für Arbeitsprofil"</string>
     <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"Standard-Weckton für Arbeitsprofil"</string>
     <string name="work_sound_same_as_personal" msgid="3123383644475266478">"Dieselben wie beim persönlichen Profil"</string>
-    <string name="work_sync_dialog_title" msgid="3351285490304048243">"Töne vom persönlichen Profil verwenden?"</string>
+    <string name="work_sync_dialog_title" msgid="3351285490304048243">"Töne des persönlichen Profil verwenden?"</string>
     <string name="work_sync_dialog_yes" msgid="7243884940551635717">"Ersetzen"</string>
-    <string name="work_sync_dialog_message" msgid="9066322310245055242">"Statt der aktuellen Töne deines Arbeitsprofil werden die Töne deines persönlichen Profils verwendet"</string>
+    <string name="work_sync_dialog_message" msgid="9066322310245055242">"Statt der aktuellen Töne deines Arbeitsprofils werden die Töne deines persönlichen Profils verwendet"</string>
     <string name="ringtones_category_preference_title" msgid="5675912303120102366">"Klingeltöne"</string>
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"Andere Töne und Vibrationen"</string>
     <string name="configure_notification_settings" msgid="7447797716856573587">"Benachrichtigungseinstellungen"</string>
@@ -3143,8 +3142,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"Kalte Farbtemperatur"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Kältere Displayfarben verwenden"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Deaktiviere den Bildschirm, um die neue Farbeinstellung zu übernehmen"</string>
-    <!-- no translation found for telephony_monitor_toast (7003764250271195384) -->
-    <skip />
+    <string name="telephony_monitor_toast" msgid="7003764250271195384">"Gerät neu starten, damit die Änderungen bei Telephony Monitor wirksam werden"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatische Systemupdates"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Gebundene HALs (Neustart erforderlich)"</string>
     <string name="usage" msgid="2977875522080448986">"Nutzung"</string>
@@ -3385,14 +3383,22 @@
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Globaler HTTP-Proxy wurde eingerichet"</string>
     <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"Der Administrator kann das Gerät sperren und das Passwort zurücksetzen"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"Der Administrator kann alle Gerätedaten löschen"</string>
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (7687271729962516228) -->
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4192488502181650982) -->
+    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
+      <item quantity="other">Der Administrator lässt maximal <xliff:g id="COUNT_1">%d</xliff:g> falsche Passworteingaben zu. Bei Überschreitung dieser Anzahl werden alle Gerätedaten gelöscht.</item>
+      <item quantity="one">Der Administrator lässt maximal <xliff:g id="COUNT_0">%d</xliff:g> falsche Passworteingabe zu. Bei Überschreitung dieser Anzahl werden alle Gerätedaten gelöscht.</item>
+    </plurals>
+    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
+      <item quantity="other">Der Administrator lässt maximal <xliff:g id="COUNT_1">%d</xliff:g> falsche Passworteingaben zu. Bei Überschreitung dieser Anzahl werden alle Daten des Arbeitsprofils gelöscht.</item>
+      <item quantity="one">Der Administrator lässt maximal <xliff:g id="COUNT_0">%d</xliff:g> falsche Passworteingabe zu. Bei Überschreitung dieser Anzahl werden alle Daten des Arbeitsprofils gelöscht.</item>
+    </plurals>
     <string name="do_disclosure_generic" msgid="5666469247267523806">"Dieses Gerät wird verwaltet."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"Dieses Gerät wird von <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> verwaltet."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"Weitere Informationen"</string>
-    <string name="storage_photos_videos" msgid="1872663116054954685">"Fotos und Videos"</string>
-    <string name="storage_music_audio" msgid="7890103397813503615">"Musik und Audio"</string>
+    <!-- no translation found for storage_photos_videos (319854636702241898) -->
+    <skip />
+    <!-- no translation found for storage_music_audio (789779084825206838) -->
+    <skip />
     <string name="storage_games" msgid="7703159201697117621">"Spiele"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"Weitere Apps"</string>
     <string name="storage_files" msgid="8581083146777364063">"Dateien"</string>
@@ -3403,9 +3409,10 @@
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Speichermanager: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"Aus"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"An"</string>
+    <!-- no translation found for install_type_instant (3174425974536078647) -->
+    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"Spiele"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"Audiodateien"</string>
-    <string name="audio_storage_title" msgid="5494923634269236874">"Musik"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(für Nutzer <xliff:g id="USER">%s</xliff:g> deinstalliert)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(für Nutzer <xliff:g id="USER">%s</xliff:g> deaktiviert)"</string>
     <string name="autofill_app" msgid="3889348218462883960">"AutoFill-App"</string>

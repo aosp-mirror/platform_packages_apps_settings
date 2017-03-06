@@ -2432,8 +2432,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Vols activar les trucades i els SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"L\'historial de trucades i de SMS es compartirà amb aquest usuari."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Informació d\'emergència"</string>
-    <!-- no translation found for emergency_info_summary (5062945162967838521) -->
-    <skip />
+    <string name="emergency_info_summary" msgid="5062945162967838521">"Informació i contactes de: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Permet aplicacions i contingut"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplicacions amb restriccions"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Desplega configuració aplicació"</string>
@@ -3141,8 +3140,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"Temperatura de color freda"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Utilitza colors de pantalla més freds"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Desactiva la pantalla per aplicar el canvi de color"</string>
-    <!-- no translation found for telephony_monitor_toast (7003764250271195384) -->
-    <skip />
+    <string name="telephony_monitor_toast" msgid="7003764250271195384">"Per aplicar canvis al monitor de telefonia, reinicia el dispositiu"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Actualitzacions del sistema automàtiques"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Binderized HALs (s\'ha de reiniciar)"</string>
     <string name="usage" msgid="2977875522080448986">"Ús"</string>
@@ -3383,14 +3381,22 @@
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"S\'ha definit el servidor intermediari HTTP global"</string>
     <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"L\'administrador pot bloquejar el dispositiu i restablir-ne la contrasenya"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"L\'administrador pot suprimir totes les dades del dispositiu"</string>
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (7687271729962516228) -->
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4192488502181650982) -->
+    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
+      <item quantity="other">L\'administrador ha establert en <xliff:g id="COUNT_1">%d</xliff:g> el nombre màxim d\'intents per introduir la contrasenya abans que se suprimeixin totes les dades del dispositiu</item>
+      <item quantity="one">L\'administrador ha establert en <xliff:g id="COUNT_0">%d</xliff:g> el nombre màxim d\'intents per introduir la contrasenya abans que se suprimeixin totes les dades del dispositiu</item>
+    </plurals>
+    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
+      <item quantity="other">L\'administrador ha establert en <xliff:g id="COUNT_1">%d</xliff:g> el nombre màxim d\'intents per introduir la contrasenya abans que se suprimeixin les dades del perfil professional</item>
+      <item quantity="one">L\'administrador ha establert en <xliff:g id="COUNT_0">%d</xliff:g> el nombre màxim d\'intents per introduir la contrasenya abans que se suprimeixin les dades del perfil professional</item>
+    </plurals>
     <string name="do_disclosure_generic" msgid="5666469247267523806">"Aquest és un dispositiu gestionat."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> gestiona aquest dispositiu."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"Més informació"</string>
-    <string name="storage_photos_videos" msgid="1872663116054954685">"Fotos i vídeos"</string>
-    <string name="storage_music_audio" msgid="7890103397813503615">"Música i àudio"</string>
+    <!-- no translation found for storage_photos_videos (319854636702241898) -->
+    <skip />
+    <!-- no translation found for storage_music_audio (789779084825206838) -->
+    <skip />
     <string name="storage_games" msgid="7703159201697117621">"Jocs"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"Altres aplicacions"</string>
     <string name="storage_files" msgid="8581083146777364063">"Fitxers"</string>
@@ -3401,9 +3407,10 @@
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Gestor d\'emmagatzematge: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"Desactivat"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"Activat"</string>
+    <!-- no translation found for install_type_instant (3174425974536078647) -->
+    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"Jocs"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"Fitxers d\'àudio"</string>
-    <string name="audio_storage_title" msgid="5494923634269236874">"Música"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(desinstal·lat per a <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(desactivat per a <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="3889348218462883960">"Aplicació d\'emplenament automàtic"</string>
