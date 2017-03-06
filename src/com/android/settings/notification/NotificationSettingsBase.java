@@ -148,7 +148,9 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
-        mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
+        if (mBlock.isEnabled()) {
+            mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
+        }
         mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
     }
 

@@ -64,7 +64,7 @@ public class NotificationBackend {
             int N = nonBlockablePkgs.length;
             for (int i = 0; i < N; i++) {
                 if (app.packageName.equals(nonBlockablePkgs[i])) {
-                    row.systemApp = true;
+                    row.systemApp = row.lockedImportance = true;
                 }
             }
         }
@@ -152,6 +152,7 @@ public class NotificationBackend {
         public boolean banned;
         public boolean first;  // first app in section
         public boolean systemApp;
+        public boolean lockedImportance;
         public boolean showBadge;
         public int userId;
     }
