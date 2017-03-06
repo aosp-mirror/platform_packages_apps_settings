@@ -35,6 +35,7 @@ import com.android.settings.Utils;
 import com.android.settings.dashboard.SiteMapManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -76,6 +77,22 @@ class CursorToSearchResultConverter {
     private final Context mContext;
 
     private final Set<String> mKeys;
+
+    private final int LONG_TITLE_LENGTH = 20;
+
+    private static final String[] whiteList = {
+            "main_toggle_wifi",
+            "main_toggle_bluetooth",
+            "toggle_airplane",
+            "tether_settings",
+            "battery_saver",
+            "toggle_nfc",
+            "restrict_background",
+            "data_usage_enable",
+            "button_roaming_key",
+    };
+    private static final Set<String> prioritySettings = new HashSet(Arrays.asList(whiteList));
+
 
     public CursorToSearchResultConverter(Context context, String queryText) {
         mContext = context;
@@ -135,7 +152,7 @@ class CursorToSearchResultConverter {
         }
 
         final List<String> breadcrumbs = getBreadcrumbs(sitemapManager, cursor);
-        final int rank = getRank(breadcrumbs, baseRank);
+        final int rank = getRank(title, breadcrumbs, baseRank, key);
 
         final SearchResult.Builder builder = new SearchResult.Builder();
         builder.addTitle(title)
@@ -225,18 +242,32 @@ class CursorToSearchResultConverter {
     }
 
     /** Uses the breadcrumbs to determine the offset to the base rank.
-     *  There are two checks
-     *  A) If the query matches the highest level menu title
-     *  B) If the query matches a subsequent menu title
+     *  There are three checks
+     *  A) If the result is prioritized and the highest base level
+     *  B) If the query matches the highest level menu title
+     *  C) If the query matches a subsequent menu title
+     *  D) Is the title longer than 20
      *
-     *  If the query matches A and B, the offset is 0.
-     *  If the query matches A only, the offset is 1.
-     *  If the query matches neither A nor B, the offset is 2.
+     *  If the query matches A, set it to TOP_RANK
+     *  If the query matches B and C, the offset is 0.
+     *  If the query matches C only, the offset is 1.
+     *  If the query matches neither B nor C, the offset is 2.
+     *  If the query matches D, the offset is 2
+
+     * @param title of the result.
      * @param crumbs from the Information Architecture
      * @param baseRank of the result. Lower if it's a better result.
      * @return
      */
-    private int getRank(List<String> crumbs, int baseRank) {
+    private int getRank(String title, List<String> crumbs, int baseRank, String key) {
+        // The result can only be prioritized if it is a top ranked result.
+        if (prioritySettings.contains(key) && baseRank < DatabaseResultLoader.BASE_RANKS[1]) {
+            return SearchResult.TOP_RANK;
+        }
+        if (title.length() > LONG_TITLE_LENGTH) {
+            return baseRank + 2;
+        }
         return baseRank;
     }
+
 }

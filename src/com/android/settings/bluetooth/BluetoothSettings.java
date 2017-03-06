@@ -99,6 +99,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
     private final IntentFilter mIntentFilter;
 
+    // For Search
+    private static final String DATA_KEY_REFERENCE = "main_toggle_bluetooth";
 
     // accessed from inner class (not private to avoid thunks)
     FooterPreference mMyDevicePreference;
@@ -567,6 +569,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = res.getString(R.string.bluetooth_settings);
                     data.screenTitle = res.getString(R.string.bluetooth_settings);
+                    data.key = DATA_KEY_REFERENCE;
                     result.add(data);
 
                     // Add cached paired BT devices

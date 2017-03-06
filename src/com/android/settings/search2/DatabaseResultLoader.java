@@ -97,7 +97,7 @@ public class DatabaseResultLoader extends AsyncLoader<List<? extends SearchResul
      * If the query only matches keywords or entries, the best rank it can be is 9
      *
      */
-    private static final int[] BASE_RANKS = {1, 3, 7, 9};
+    public static final int[] BASE_RANKS = {1, 3, 7, 9};
 
     private final String mQueryText;
     private final Context mContext;

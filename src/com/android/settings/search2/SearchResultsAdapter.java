@@ -32,7 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.android.settings.search2.SearchResult.MAX_RANK;
+import static com.android.settings.search2.SearchResult.TOP_RANK;
+import static com.android.settings.search2.SearchResult.BOTTOM_RANK;
 
 public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
 
@@ -117,9 +118,9 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
 
         int dbIndex = 0;
         int appIndex = 0;
-        int rank = 1;
+        int rank = TOP_RANK;
 
-        while (rank <= MAX_RANK) {
+        while (rank <= BOTTOM_RANK) {
             while ((dbIndex < dbSize) && (databaseResults.get(dbIndex).rank == rank)) {
                 results.add(databaseResults.get(dbIndex++));
             }

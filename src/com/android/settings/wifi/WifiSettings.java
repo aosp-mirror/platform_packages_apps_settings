@@ -168,6 +168,9 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private MenuItem mScanMenuItem;
 
+    // For Search
+    private static final String DATA_KEY_REFERENCE = "main_toggle_wifi";
+
     /* End of "used in Wifi Setup context" */
 
     public WifiSettings() {
@@ -1028,6 +1031,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 data.title = res.getString(R.string.wifi_settings);
                 data.screenTitle = res.getString(R.string.wifi_settings);
                 data.keywords = res.getString(R.string.keywords_wifi);
+                data.key = DATA_KEY_REFERENCE;
                 result.add(data);
 
                 // Add saved Wi-Fi access points
