@@ -20,8 +20,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -29,16 +27,16 @@ import android.app.Application;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.backup.IBackupManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.IBinder;
+import android.os.UserHandle;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.search.SearchIndexableRaw;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,16 +47,20 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 import org.robolectric.res.builder.RobolectricPackageManager;
 import org.robolectric.util.ActivityController;
 import org.robolectric.shadows.ShadowActivity;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import java.util.List;
+
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {BackupSettingsActivityTest.ShadowBackupSettingsHelper.class})
+        shadows = {BackupSettingsActivityTest.ShadowBackupSettingsHelper.class,
+                BackupSettingsActivityTest.ShadowUserHandle.class})
 public class BackupSettingsActivityTest {
     private ActivityController<BackupSettingsActivity> mActivityController;
     private BackupSettingsActivity mActivity;
@@ -85,7 +87,6 @@ public class BackupSettingsActivityTest {
         mActivity = mActivityController.get();
         mPackageManager = (RobolectricPackageManager) mApplication.getPackageManager();
         doReturn(mComponent).when(mIntent).getComponent();
-
     }
 
     @Test
@@ -124,6 +125,41 @@ public class BackupSettingsActivityTest {
 
     }
 
+    @Test
+    public void getNonIndexableKeys_SystemUser() {
+        final List<SearchIndexableRaw> indexableRaws =
+                BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
+                        mApplication.getApplicationContext(), true);
+        final List<String> nonIndexableKeys =
+                BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+                        mApplication.getApplicationContext());
+
+        assertThat(indexableRaws).isNotNull();
+        assertThat(indexableRaws).isNotEmpty();
+        assertThat(nonIndexableKeys).isEmpty();
+    }
+
+    @Test
+    public void getNonIndexableKeys_NonSystemUser() {
+        ShadowUserHandle.setUid(1); // Non-SYSTEM user.
+
+        final List<SearchIndexableRaw> indexableRaws =
+                BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(
+                        mApplication.getApplicationContext(), true);
+        final List<String> nonIndexableKeys =
+                BackupSettingsActivity.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+                        mApplication.getApplicationContext());
+
+        assertThat(indexableRaws).isNotNull();
+        assertThat(indexableRaws).isNotEmpty();
+        assertThat(nonIndexableKeys).isNotEmpty();
+    }
+
+    @After
+    public void resetShadows() {
+        ShadowUserHandle.reset();
+    }
+
     @Implements(BackupSettingsHelper.class)
     public static class ShadowBackupSettingsHelper {
         @Implementation
@@ -134,6 +170,25 @@ public class BackupSettingsActivityTest {
         @Implementation
         public boolean isBackupProvidedByManufacturer() {
             return mIsBackupProvidedByOEM;
+        }
+    }
+
+    @Implements(UserHandle.class)
+    public static class ShadowUserHandle {
+        private static int sUid = 0; // SYSTEM by default
+
+        public static void setUid(int uid) {
+            sUid = uid;
+        }
+
+        @Implementation
+        public static int myUserId() {
+            return sUid;
+        }
+
+        @Resetter
+        public static void reset() {
+            sUid = 0;
         }
     }
 }
