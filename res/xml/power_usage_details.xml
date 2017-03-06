@@ -26,6 +26,11 @@
             android:key="controls_parent"
             android:title="@string/controls_subtitle">
 
+            <SwitchPreference
+                android:key="background_activity"
+                android:title="@string/background_activity_title"
+                android:summary="@string/background_activity_summary"/>
+
             <Preference
                 android:key="high_power"
                 android:title="@string/high_power_apps" />

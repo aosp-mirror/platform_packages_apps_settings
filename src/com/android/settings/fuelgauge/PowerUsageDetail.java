@@ -34,7 +34,6 @@ import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
-import android.provider.SearchIndexableResource;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
@@ -67,7 +66,7 @@ import com.android.settings.wifi.WifiSettings;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickListener {
@@ -396,7 +395,11 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        return null;
+        final List<PreferenceController> controllers = new ArrayList<>();
+        final int uid = getArguments().getInt(EXTRA_UID, 0);
+        controllers.add(new BackgroundActivityPreferenceController(context, uid));
+
+        return controllers;
     }
 
     @Override
