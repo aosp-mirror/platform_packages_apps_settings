@@ -16,10 +16,13 @@
 
 package com.android.settings.enterprise;
 
+import android.annotation.NonNull;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.os.UserHandle;
 import android.support.annotation.Nullable;
+
+import java.util.List;
 
 public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrapper {
     private final DevicePolicyManager mDpm;
@@ -77,5 +80,10 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     @Override
     public boolean isCurrentInputMethodSetByOwner() {
         return mDpm.isCurrentInputMethodSetByOwner();
+    }
+
+    @Override
+    public List<String> getOwnerInstalledCaCerts(@NonNull UserHandle user) {
+        return mDpm.getOwnerInstalledCaCerts(user);
     }
 }

@@ -16,9 +16,12 @@
 
 package com.android.settings.enterprise;
 
+import android.annotation.NonNull;
 import android.content.ComponentName;
 import android.os.UserHandle;
 import android.support.annotation.Nullable;
+
+import java.util.List;
 
 /**
  * This interface replicates a subset of the android.app.admin.DevicePolicyManager (DPM). The
@@ -97,4 +100,12 @@ public interface DevicePolicyManagerWrapper {
      * @see android.app.admin.DevicePolicyManager#isCurrentInputMethodSetByOwner
      */
     boolean isCurrentInputMethodSetByOwner();
+
+
+    /**
+     * Calls {@code DevicePolicyManager.getOwnerInstalledCaCerts()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getOwnerInstalledCaCerts
+     */
+    List<String> getOwnerInstalledCaCerts(@NonNull UserHandle user);
 }

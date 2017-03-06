@@ -43,6 +43,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -255,11 +256,46 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         assertThat(mProvider.getImeLabelIfOwnerSet()).isEqualTo(IME_PACKAGE_LABEL);
     }
 
+    @Test
+    public void testGetNumberOfOwnerInstalledCaCertsInCurrentUser() {
+        final UserHandle userHandle = new UserHandle(UserHandle.USER_SYSTEM);
+
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(null);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInCurrentUser()).isEqualTo(0);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(new ArrayList<String>());
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInCurrentUser()).isEqualTo(0);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInCurrentUser()).isEqualTo(2);
+    }
+
+    @Test
+    public void testGetNumberOfOwnerInstalledCaCertsInManagedProfile() {
+        final UserHandle userHandle = new UserHandle(MANAGED_PROFILE_USER_ID);
+        final UserInfo managedProfile =
+                new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE);
+
+        mProfiles.add(managedProfile);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(null);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(0);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(new ArrayList<String>());
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(0);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(2);
+
+        mProfiles.remove(managedProfile);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(0);
+    }
+
     private void resetAndInitializePackageManagerWrapper() {
         reset(mPackageManagerWrapper);
         when(mPackageManagerWrapper.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN))
                 .thenReturn(true);
         when(mPackageManagerWrapper.getPackageManager()).thenReturn(mPackageManager);
-
     }
 }
