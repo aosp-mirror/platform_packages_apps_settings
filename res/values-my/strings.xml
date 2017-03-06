@@ -2432,8 +2432,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"ဖုန်းခေါ်ဆိုမှုများ&amp; SMS ကို ဖွင့်မည်လား။"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"ခေါ်ဆိုမှုနှင့် SMS မှတ်တမ်းကို ဤအသုံးပြုသူနှင့် မျှဝေပေးမည်။"</string>
     <string name="emergency_info_title" msgid="208607506217060337">"အရေးပေါ်အချက်အလက်"</string>
-    <!-- no translation found for emergency_info_summary (5062945162967838521) -->
-    <skip />
+    <string name="emergency_info_summary" msgid="5062945162967838521">"<xliff:g id="USER_NAME">%1$s</xliff:g> အတွက် အချက်အလက်နှင့် အဆက်အသွယ်များ"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"အပလီကေးရှင်းနှင့် ပါရှိချက်များကို ခွင့်ပြုရန်"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"ကန့်သတ်ချက်များရှိသော အပလီကေးရှင်းများ"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"အပလီကေးရှင်းဆက်တင်းများကိုချဲ့ပြပါ"</string>
@@ -2663,9 +2662,9 @@
     <string name="work_notification_ringtone_title" msgid="2108983018726925833">"မူရင်းအလုပ်အကြောင်းကြားချက်အသံ"</string>
     <string name="work_alarm_ringtone_title" msgid="3670497923540424871">"မူရင်းအလုပ်သတိပေးချက် မြည်သံ"</string>
     <string name="work_sound_same_as_personal" msgid="3123383644475266478">"ကိုယ်ရေးကိုယ်တာပရိုဖိုင်အတိုင်းထားပါ"</string>
-    <string name="work_sync_dialog_title" msgid="3351285490304048243">"ကိုယ်ရေးကိုယ်တာ ပရိုဖိုင်အသံများကို သုံးလိုပါသလား။"</string>
+    <string name="work_sync_dialog_title" msgid="3351285490304048243">"ကိုယ်ရေး ပရိုဖိုင်အသံများကို သုံးလိုပါသလား။"</string>
     <string name="work_sync_dialog_yes" msgid="7243884940551635717">"အစားထိုးရန်"</string>
-    <string name="work_sync_dialog_message" msgid="9066322310245055242">"သင်၏ လက်ရှိ အလုပ်ပရိုဖိုင်အသံများအစား ကိုယ်ရေးကိုယ်တာ ပရိုဖိုင်အသံများကို အသုံးပြုသွားပါမည်"</string>
+    <string name="work_sync_dialog_message" msgid="9066322310245055242">"သင်၏ လက်ရှိ အလုပ်ပရိုဖိုင်အသံများအစား ကိုယ်ရေး ပရိုဖိုင်အသံများကို အသုံးပြုသွားပါမည်"</string>
     <string name="ringtones_category_preference_title" msgid="5675912303120102366">"ဖုန်းမြည်သံများ"</string>
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"အခြားအသံနှင့် တုန်ခါမှုများ"</string>
     <string name="configure_notification_settings" msgid="7447797716856573587">"အကြောင်းကြားချက် ရွေးချယ်မှု"</string>
@@ -3141,8 +3140,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"အေးသည့် အရောင်အပူချိန်"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"ပိုအေးသည့် မျက်နှာပြင် အရောင်များကိုအသုံးပြုရန်"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"အရောင်ပြောင်းလဲမှု ပြုလုပ်ရန်၊ မျက်နှာပြင်ကိုပိတ်ပါ"</string>
-    <!-- no translation found for telephony_monitor_toast (7003764250271195384) -->
-    <skip />
+    <string name="telephony_monitor_toast" msgid="7003764250271195384">"တယ်လီဖုန်း ဆက်သွယ်မှုမော်နီတာကို ပြောင်းလဲမှု ပြုလုပ်ရန် စက်ပစ္စည်းကို ပြန်လည်စတင်ပါ"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"အလိုအလျောက် စနစ်အပ်ဒိတ်များ"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"ပေါင်းစည်းထားသည့် HALs (ပြန်လည် အစပြုရန် လိုအပ်ပါသည်)"</string>
     <string name="usage" msgid="2977875522080448986">"အသုံးပြုမှု"</string>
@@ -3383,14 +3381,22 @@
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"ကမ္ဘာသုံး HTTP ပရောက်စီကို သတ်မှတ်ထားပါသည်"</string>
     <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"စီမံခန့်ခွဲသူသည် စက်ပစ္စည်းကို လော့ခ်ချနိုင်ပြီး စကားဝှက်ကို ပြင်ဆင်သတ်မှတ်နိုင်ပါသည်"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"စီမံခန့်ခွဲသူသည် စက်ပစ္စည်းဒေတာများအားလုံးကို ဖျက်နိုင်ပါသည်"</string>
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (7687271729962516228) -->
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4192488502181650982) -->
+    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
+      <item quantity="other">စက်ပစ္စည်းဒေတာများအားလုံးကို မဖျက်မီ စကားဝှက်စမ်းသပ်ထည့်သွင်းခြင်းကို <xliff:g id="COUNT_1">%d</xliff:g> ကြိမ်အထိ ခွင့်ပြုရန် စီမံခန့်ခွဲသူက သတ်မှတ်ထားပါသည်</item>
+      <item quantity="one">စက်ပစ္စည်းဒေတာများအားလုံးကို မဖျက်မီ စကားဝှက်စမ်းသပ်ထည့်သွင်းခြင်းကို <xliff:g id="COUNT_0">%d</xliff:g> ကြိမ်အထိ ခွင့်ပြုရန် စီမံခန့်ခွဲသူက သတ်မှတ်ထားပါသည်</item>
+    </plurals>
+    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
+      <item quantity="other">အလုပ်ပရိုဖိုင်ဒေတာများကို မဖျက်မီ စကားဝှက်စမ်းသပ်ထည့်သွင်းခြင်းကို <xliff:g id="COUNT_1">%d</xliff:g> ကြိမ်အထိ ခွင့်ပြုရန် စီမံခန့်ခွဲသူက သတ်မှတ်ထားပါသည်</item>
+      <item quantity="one">အလုပ်ပရိုဖိုင်ဒေတာများကို မဖျက်မီ စကားဝှက်စမ်းသပ်ထည့်သွင်းခြင်းကို <xliff:g id="COUNT_0">%d</xliff:g> ကြိမ်အထိ ခွင့်ပြုရန် စီမံခန့်ခွဲသူက သတ်မှတ်ထားပါသည်</item>
+    </plurals>
     <string name="do_disclosure_generic" msgid="5666469247267523806">"ဤစက်ပစ္စည်းကို စီမံခန့်ခွဲထားပါသည်။"</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"ဤစက်ပစ္စည်းကို <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> က စီမံခန့်ခွဲထားပါသည်။"</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"ပိုမိုလေ့လာရန်"</string>
-    <string name="storage_photos_videos" msgid="1872663116054954685">"ဓာတ်ပုံနှင့် ဗီဒီယိုများ"</string>
-    <string name="storage_music_audio" msgid="7890103397813503615">"တေးဂီတနှင့် အသံ"</string>
+    <!-- no translation found for storage_photos_videos (319854636702241898) -->
+    <skip />
+    <!-- no translation found for storage_music_audio (789779084825206838) -->
+    <skip />
     <string name="storage_games" msgid="7703159201697117621">"ဂိမ်းများ"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"အခြားအက်ပ်များ"</string>
     <string name="storage_files" msgid="8581083146777364063">"ဖိုင်များ"</string>
@@ -3401,9 +3407,10 @@
     <string name="storage_manager_indicator" msgid="1516810749625915020">"သိုလှောင်ခန်း စီမံခန့်ခွဲမှုစနစ်− <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"ပိတ်ထားသည်"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"ဖွင့်ထားသည်"</string>
+    <!-- no translation found for install_type_instant (3174425974536078647) -->
+    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"ဂိမ်းများ"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"အသံဖိုင်များ"</string>
-    <string name="audio_storage_title" msgid="5494923634269236874">"ဂီတ"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(အသုံးပြုသူ <xliff:g id="USER">%s</xliff:g> အတွက် ဖြုတ်ထားသည်)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(အသုံးပြုသူ <xliff:g id="USER">%s</xliff:g> အတွက် ပိတ်ထားသည်)"</string>
     <string name="autofill_app" msgid="3889348218462883960">"အလိုအလျောက် ဖြည့်စွက်ခြင်းအက်ပ်"</string>

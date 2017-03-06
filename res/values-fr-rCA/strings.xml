@@ -1830,7 +1830,7 @@
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Temps restant : <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> avant le chargement complet"</string>
     <string name="device_screen_usage" msgid="224482533839040430">"Utilisation de l\'écran"</string>
-    <string name="device_screen_consumption" msgid="4607589286438986687">"Utilisation par l\'écran"</string>
+    <string name="device_screen_consumption" msgid="4607589286438986687">"Consommation d\'énergie de l\'écran"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Recherche de réseaux cellulaires"</string>
     <string name="power_usage_list_summary" msgid="792703666229965848">"Utilisation des applis depuis la dernière charge complète"</string>
     <string name="device_usage_list_summary" msgid="1545514224536252111">"Utilisation de l\'appareil depuis la dernière charge complète"</string>
@@ -2432,8 +2432,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Activer les appels téléphoniques et les textos?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"L\'historique des appels et des textos sera partagé avec cet utilisateur."</string>
     <string name="emergency_info_title" msgid="208607506217060337">"Coordonnées d\'urgence"</string>
-    <!-- no translation found for emergency_info_summary (5062945162967838521) -->
-    <skip />
+    <string name="emergency_info_summary" msgid="5062945162967838521">"Information et contacts pour <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Autoriser des applications et des contenus"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applications avec restrictions"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Développer paramètres applis"</string>
@@ -3141,8 +3140,7 @@
     <string name="color_temperature" msgid="2070126836910615605">"Température des couleurs froides"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Utiliser des couleurs plus froides à l\'écran"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Pour appliquer la modification des couleurs, éteignez l\'écran"</string>
-    <!-- no translation found for telephony_monitor_toast (7003764250271195384) -->
-    <skip />
+    <string name="telephony_monitor_toast" msgid="7003764250271195384">"Pour appliquer les changements de TelephonyMonitor, redémarrez l\'appareil"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Mises à jour automatiques du système"</string>
     <string name="enable_hal_binderization" msgid="8933984983735990337">"Binderized HALs (redémarrage nécessaire)"</string>
     <string name="usage" msgid="2977875522080448986">"Utilisation"</string>
@@ -3383,14 +3381,22 @@
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"Le serveur mandataire HTTP global a été défini"</string>
     <string name="enterprise_privacy_lock_device" msgid="3823039578233930196">"L\'administrateur peut verrouiller l\'appareil et réinitialiser le mot de passe"</string>
     <string name="enterprise_privacy_wipe_device" msgid="2821960015797241790">"L\'administrateur peut supprimer toutes les données de l\'appareil"</string>
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_device (7687271729962516228) -->
-    <!-- no translation found for enterprise_privacy_failed_password_wipe_work (4192488502181650982) -->
+    <plurals name="enterprise_privacy_failed_password_wipe_device" formatted="false" msgid="7687271729962516228">
+      <item quantity="one">L\'administrateur a défini le nombre maximal autorisé de tentatives d’entrée du mot de passe à <xliff:g id="COUNT_1">%d</xliff:g>. Après cela, toutes les données de l\'appareil seront supprimées.</item>
+      <item quantity="other">L\'administrateur a défini le nombre maximal autorisé de tentatives d’entrée du mot de passe à <xliff:g id="COUNT_1">%d</xliff:g>. Après cela, toutes les données de l\'appareil seront supprimées.</item>
+    </plurals>
+    <plurals name="enterprise_privacy_failed_password_wipe_work" formatted="false" msgid="4192488502181650982">
+      <item quantity="one">L\'administrateur a défini le nombre maximal autorisé de tentatives d’entrée du mot de passe à <xliff:g id="COUNT_1">%d</xliff:g>. Après cela, les données du profil professionnel seront supprimées.</item>
+      <item quantity="other">L\'administrateur a défini le nombre maximal autorisé de tentatives d’entrée du mot de passe à <xliff:g id="COUNT_1">%d</xliff:g>. Après cela, les données du profil professionnel seront supprimées.</item>
+    </plurals>
     <string name="do_disclosure_generic" msgid="5666469247267523806">"Cet appareil est géré."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"Cet appareil est géré par <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
     <string name="do_disclosure_learn_more" msgid="2416766240581561009">"En savoir plus"</string>
-    <string name="storage_photos_videos" msgid="1872663116054954685">"Photos et vidéos"</string>
-    <string name="storage_music_audio" msgid="7890103397813503615">"Musique et audio"</string>
+    <!-- no translation found for storage_photos_videos (319854636702241898) -->
+    <skip />
+    <!-- no translation found for storage_music_audio (789779084825206838) -->
+    <skip />
     <string name="storage_games" msgid="7703159201697117621">"Jeux"</string>
     <string name="storage_other_apps" msgid="5524321740031718083">"Autres applications"</string>
     <string name="storage_files" msgid="8581083146777364063">"Fichiers"</string>
@@ -3401,9 +3407,10 @@
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Gestionnaire de stockage : <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"Désactivé"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"Activé"</string>
+    <!-- no translation found for install_type_instant (3174425974536078647) -->
+    <skip />
     <string name="game_storage_settings" msgid="3410689937046696557">"Jeux"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"Fichiers audio"</string>
-    <string name="audio_storage_title" msgid="5494923634269236874">"Musique"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(désinst. pour l\'utilisateur <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(désactivé pour l\'utilisateur <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="3889348218462883960">"Application de remplissage automatique"</string>
