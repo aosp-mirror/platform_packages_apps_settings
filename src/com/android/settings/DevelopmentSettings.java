@@ -1525,7 +1525,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void updateMobileDataAlwaysOnOptions() {
         updateSwitchPreference(mMobileDataAlwaysOn, Settings.Global.getInt(
                 getActivity().getContentResolver(),
-                Settings.Global.MOBILE_DATA_ALWAYS_ON, 0) != 0);
+                Settings.Global.MOBILE_DATA_ALWAYS_ON, 1) != 0);
     }
 
     private void writeMobileDataAlwaysOnOptions() {
