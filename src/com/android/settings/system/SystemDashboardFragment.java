@@ -62,6 +62,7 @@ public class SystemDashboardFragment extends DashboardFragment {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new SystemUpdatePreferenceController(context, UserManager.get(context)));
         controllers.add(new AdditionalSystemUpdatePreferenceController(context));
+        controllers.add(new FactoryResetPreferenceController(context, UserManager.get(context)));
         return controllers;
     }
 
