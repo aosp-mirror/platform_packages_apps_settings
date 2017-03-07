@@ -179,7 +179,7 @@
         <activity android:name=".Settings$NetworkDashboardActivity"
             android:taskAffinity="com.android.settings"
             android:label="@string/network_dashboard_title"
-            android:icon="@drawable/ic_dashboard_network"
+            android:icon="@drawable/ic_settings_wireless"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
@@ -916,7 +916,7 @@
 
         <activity android:name="Settings$DisplaySettingsActivity"
                 android:label="@string/display_settings"
-                android:icon="@drawable/ic_dashboard_display"
+                android:icon="@drawable/ic_settings_display"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.DISPLAY_SETTINGS" />
@@ -1298,7 +1298,7 @@
 
         <activity android:name="Settings$SecuritySettingsActivity"
                 android:label="@string/security_settings_title"
-                android:icon="@drawable/ic_dashboard_security"
+                android:icon="@drawable/ic_settings_security"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity=""
                 android:parentActivityName="Settings">
@@ -2989,7 +2989,7 @@
         <!-- Alias for battery settings in new IA. Remove and merge metadata into TargetActivity -->
         <activity android:name=".Settings$AppAndNotificationDashboardActivity"
                   android:label="@string/app_and_notification_dashboard_title"
-                  android:icon="@drawable/ic_dashboard_apps">
+                  android:icon="@drawable/ic_apps">
             <intent-filter android:priority="9">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3003,7 +3003,7 @@
 
         <activity android:name=".Settings$StorageDashboardActivity"
                   android:label="@string/storage_settings"
-                  android:icon="@drawable/ic_dashboard_storage">
+                  android:icon="@drawable/ic_settings_storage">
             <intent-filter android:priority="5">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
@@ -3017,7 +3017,7 @@
 
         <activity android:name=".Settings$UserAndAccountDashboardActivity"
                   android:label="@string/account_dashboard_title"
-                  android:icon="@drawable/ic_dashboard_user">
+                  android:icon="@drawable/ic_settings_accounts">
             <intent-filter android:priority="3">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3035,7 +3035,7 @@
 
         <activity android:name=".Settings$SystemDashboardActivity"
                   android:label="@string/header_category_system"
-                  android:icon="@drawable/ic_dashboard_system">
+                  android:icon="@drawable/ic_settings_about">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
