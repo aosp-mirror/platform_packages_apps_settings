@@ -23,7 +23,8 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 import android.service.autofill.AutoFillService;
-import android.service.autofill.AutoFillServiceInfo;
+import android.service.autofill.AutofillService;
+import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -32,10 +33,12 @@ import com.android.settings.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultAutoFillPicker extends DefaultAppPickerFragment {
+public class DefaultAutofillPicker extends DefaultAppPickerFragment {
 
-    static final String SETTING = Settings.Secure.AUTO_FILL_SERVICE;
-    static final Intent AUTO_FILL_PROBE = new Intent(AutoFillService.SERVICE_INTERFACE);
+    static final String SETTING = Settings.Secure.AUTOFILL_SERVICE;
+    // TODO(b/35956626): remove once clients migrated
+    static final Intent OLD_AUTO_FILL_PROBE = new Intent(AutoFillService.OLD_SERVICE_INTERFACE);
+    static final Intent AUTOFILL_PROBE = new Intent(AutofillService.SERVICE_INTERFACE);
 
     @Override
     public int getMetricsCategory() {
@@ -51,8 +54,14 @@ public class DefaultAutoFillPicker extends DefaultAppPickerFragment {
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
         final List<ResolveInfo> resolveInfos = mPm.getPackageManager()
-                .queryIntentServices(AUTO_FILL_PROBE, PackageManager.GET_META_DATA);
+                .queryIntentServices(AUTOFILL_PROBE, PackageManager.GET_META_DATA);
         for (ResolveInfo info : resolveInfos) {
+            candidates.add(new DefaultAppInfo(mUserId, new ComponentName(
+                    info.serviceInfo.packageName, info.serviceInfo.name)));
+        }
+        final List<ResolveInfo> oldResolveInfos = mPm.getPackageManager()
+                .queryIntentServices(OLD_AUTO_FILL_PROBE, PackageManager.GET_META_DATA);
+        for (ResolveInfo info : oldResolveInfos) {
             candidates.add(new DefaultAppInfo(mUserId, new ComponentName(
                     info.serviceInfo.packageName, info.serviceInfo.name)));
         }
@@ -82,13 +91,12 @@ public class DefaultAutoFillPicker extends DefaultAppPickerFragment {
     /**
      * Provides Intent to setting activity for the specified auto-fill service.
      */
-    static final class AutoFillSettingIntentProvider
-            implements SettingIntentProvider {
+    static final class AutofillSettingIntentProvider implements SettingIntentProvider {
 
         private final String mSelectedKey;
         private final PackageManager mPackageManager;
 
-        public AutoFillSettingIntentProvider(PackageManager packageManager, String key) {
+        public AutofillSettingIntentProvider(PackageManager packageManager, String key) {
             mSelectedKey = key;
             mPackageManager = packageManager;
         }
@@ -96,14 +104,33 @@ public class DefaultAutoFillPicker extends DefaultAppPickerFragment {
         @Override
         public Intent getIntent() {
             final List<ResolveInfo> resolveInfos = mPackageManager.queryIntentServices(
-                    AUTO_FILL_PROBE, PackageManager.GET_META_DATA);
+                    AUTOFILL_PROBE, PackageManager.GET_META_DATA);
 
             for (ResolveInfo resolveInfo : resolveInfos) {
                 final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
                 final String flattenKey = new ComponentName(
                         serviceInfo.packageName, serviceInfo.name).flattenToString();
                 if (TextUtils.equals(mSelectedKey, flattenKey)) {
-                    final String settingsActivity = new AutoFillServiceInfo(
+                    final String settingsActivity = new AutofillServiceInfo(
+                            mPackageManager, serviceInfo)
+                            .getSettingsActivity();
+                    if (TextUtils.isEmpty(settingsActivity)) {
+                        return null;
+                    }
+                    return new Intent(Intent.ACTION_MAIN).setComponent(
+                            new ComponentName(serviceInfo.packageName, settingsActivity));
+                }
+            }
+
+            final List<ResolveInfo> oldResolveInfos = mPackageManager.queryIntentServices(
+                    OLD_AUTO_FILL_PROBE, PackageManager.GET_META_DATA);
+
+            for (ResolveInfo resolveInfo : oldResolveInfos) {
+                final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
+                final String flattenKey = new ComponentName(
+                        serviceInfo.packageName, serviceInfo.name).flattenToString();
+                if (TextUtils.equals(mSelectedKey, flattenKey)) {
+                    final String settingsActivity = new AutofillServiceInfo(
                             mPackageManager, serviceInfo)
                             .getSettingsActivity();
                     if (TextUtils.isEmpty(settingsActivity)) {
