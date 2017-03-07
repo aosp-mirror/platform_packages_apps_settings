@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +54,8 @@ public class UserProfileControllerTest {
 
     @Mock
     private UserManagerWrapper mUserManager;
+    @Mock
+    private PreferenceScreen mScreen;
 
     private Context mContext;
     private UserProfileController mController;
@@ -64,17 +67,17 @@ public class UserProfileControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mPrimaryProfile = new UserInfo();
         mController = new UserProfileController(mContext, mPrimaryProfile, 0);
+        when(mScreen.getContext()).thenReturn(mContext);
     }
 
     @Test
     public void controllerAddsPrimaryProfilePreference() throws Exception {
         mPrimaryProfile.name = TEST_NAME;
         mPrimaryProfile.id = 10;
-        PreferenceScreen screen = mock(PreferenceScreen.class);
-        mController.displayPreference(screen);
+        mController.displayPreference(mScreen);
 
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
-        verify(screen).addPreference(argumentCaptor.capture());
+        verify(mScreen).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
 
         assertThat(preference.getTitle()).isEqualTo(TEST_NAME);
@@ -85,11 +88,10 @@ public class UserProfileControllerTest {
     public void tappingProfilePreferenceSendsToStorageProfileFragment() throws Exception {
         mPrimaryProfile.name = TEST_NAME;
         mPrimaryProfile.id = 10;
-        PreferenceScreen screen = mock(PreferenceScreen.class);
-        mController.displayPreference(screen);
+        mController.displayPreference(mScreen);
 
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
-        verify(screen).addPreference(argumentCaptor.capture());
+        verify(mScreen).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
         assertThat(mController.handlePreferenceTreeClick(preference)).isTrue();
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
@@ -105,8 +107,7 @@ public class UserProfileControllerTest {
     public void acceptingResultUpdatesPreferenceSize() throws Exception {
         mPrimaryProfile.name = TEST_NAME;
         mPrimaryProfile.id = 10;
-        PreferenceScreen screen = mock(PreferenceScreen.class);
-        mController.displayPreference(screen);
+        mController.displayPreference(mScreen);
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
         StorageAsyncLoader.AppsStorageResult userResult =
                 new StorageAsyncLoader.AppsStorageResult();
@@ -115,7 +116,7 @@ public class UserProfileControllerTest {
 
         mController.handleResult(result);
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
-        verify(screen).addPreference(argumentCaptor.capture());
+        verify(mScreen).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
 
         assertThat(preference.getSummary()).isEqualTo("99.00B");

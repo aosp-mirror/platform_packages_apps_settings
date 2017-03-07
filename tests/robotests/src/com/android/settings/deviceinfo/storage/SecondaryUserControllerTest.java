@@ -55,6 +55,10 @@ public class SecondaryUserControllerTest {
     private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";
     @Mock
     private UserManagerWrapper mUserManager;
+    @Mock
+    private PreferenceScreen mScreen;
+    @Mock
+    private PreferenceGroup mGroup;
 
     private Context mContext;
     private SecondaryUserController mController;
@@ -66,19 +70,19 @@ public class SecondaryUserControllerTest {
         mContext = RuntimeEnvironment.application;
         mPrimaryUser = new UserInfo();
         mController = new SecondaryUserController(mContext, mPrimaryUser);
+
+        when(mScreen.getContext()).thenReturn(mContext);
+        when(mScreen.findPreference(anyString())).thenReturn(mGroup);
+        when(mGroup.getKey()).thenReturn(TARGET_PREFERENCE_GROUP_KEY);
     }
 
     @Test
     public void controllerAddsSecondaryUser() throws Exception {
         mPrimaryUser.name = TEST_NAME;
-        PreferenceScreen screen = mock(PreferenceScreen.class);
-        PreferenceGroup group = mock(PreferenceGroup.class);
-        when(screen.findPreference(anyString())).thenReturn(group);
-        when(group.getKey()).thenReturn(TARGET_PREFERENCE_GROUP_KEY);
-        mController.displayPreference(screen);
+        mController.displayPreference(mScreen);
 
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
-        verify(group).addPreference(argumentCaptor.capture());
+        verify(mGroup).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
         assertThat(preference.getTitle()).isEqualTo(TEST_NAME);
     }
@@ -86,15 +90,11 @@ public class SecondaryUserControllerTest {
     @Test
     public void controllerUpdatesSummaryOfNewPreference() throws Exception {
         mPrimaryUser.name = TEST_NAME;
-        PreferenceScreen screen = mock(PreferenceScreen.class);
-        PreferenceGroup group = mock(PreferenceGroup.class);
-        when(screen.findPreference(anyString())).thenReturn(group);
-        when(group.getKey()).thenReturn(TARGET_PREFERENCE_GROUP_KEY);
-        mController.displayPreference(screen);
+        mController.displayPreference(mScreen);
         mController.setSize(10L);
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
 
-        verify(group).addPreference(argumentCaptor.capture());
+        verify(mGroup).addPreference(argumentCaptor.capture());
 
         Preference preference = argumentCaptor.getValue();
         assertThat(preference.getSummary()).isEqualTo("10.00B");
@@ -153,11 +153,7 @@ public class SecondaryUserControllerTest {
     public void controllerUpdatesPreferenceOnAcceptingResult() throws Exception {
         mPrimaryUser.name = TEST_NAME;
         mPrimaryUser.id = 10;
-        PreferenceScreen screen = mock(PreferenceScreen.class);
-        PreferenceGroup group = mock(PreferenceGroup.class);
-        when(screen.findPreference(anyString())).thenReturn(group);
-        when(group.getKey()).thenReturn(TARGET_PREFERENCE_GROUP_KEY);
-        mController.displayPreference(screen);
+        mController.displayPreference(mScreen);
         StorageAsyncLoader.AppsStorageResult userResult =
                 new StorageAsyncLoader.AppsStorageResult();
         SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
@@ -166,7 +162,7 @@ public class SecondaryUserControllerTest {
 
         mController.handleResult(result);
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
-        verify(group).addPreference(argumentCaptor.capture());
+        verify(mGroup).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
 
         assertThat(preference.getSummary()).isEqualTo("99.00B");

@@ -60,7 +60,7 @@ public class UserProfileController extends PreferenceController implements
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mStoragePreference = new StorageItemPreferenceAlternate(mContext);
+        mStoragePreference = new StorageItemPreferenceAlternate(screen.getContext());
         mStoragePreference.setOrder(mPreferenceOrder);
         mStoragePreference.setKey(PREFERENCE_KEY_BASE + mUser.id);
         mStoragePreference.setTitle(mUser.name);
