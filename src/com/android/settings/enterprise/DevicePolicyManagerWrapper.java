@@ -17,6 +17,7 @@
 package com.android.settings.enterprise;
 
 import android.content.ComponentName;
+import android.os.UserHandle;
 import android.support.annotation.Nullable;
 
 /**
@@ -89,4 +90,11 @@ public interface DevicePolicyManagerWrapper {
      * @see android.app.admin.DevicePolicyManager#getLastNetworkLogRetrievalTime
      */
     long getLastNetworkLogRetrievalTime();
+
+    /**
+     * Calls {@code DevicePolicyManager.isCurrentInputMethodSetByOwner()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#isCurrentInputMethodSetByOwner
+     */
+    boolean isCurrentInputMethodSetByOwner();
 }
