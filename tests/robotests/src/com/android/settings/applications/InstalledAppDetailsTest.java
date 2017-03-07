@@ -16,12 +16,8 @@
 
 package com.android.settings.applications;
 
-import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -44,6 +40,14 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class InstalledAppDetailsTest {
@@ -51,24 +55,27 @@ public final class InstalledAppDetailsTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
     @Mock
+    private Activity mActivity;
+    @Mock
     private DevicePolicyManager mDevicePolicyManager;
+
+    private InstalledAppDetails mAppDetail;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mAppDetail = new InstalledAppDetails();
     }
 
     @Test
     public void getInstallationStatus_notInstalled_shouldReturnUninstalled() {
-        final InstalledAppDetails mAppDetail = new InstalledAppDetails();
 
         assertThat(mAppDetail.getInstallationStatus(new ApplicationInfo()))
-            .isEqualTo(R.string.not_installed);
+                .isEqualTo(R.string.not_installed);
     }
 
     @Test
     public void getInstallationStatus_enabled_shouldReturnInstalled() {
-        final InstalledAppDetails mAppDetail = new InstalledAppDetails();
         final ApplicationInfo info = new ApplicationInfo();
         info.flags = ApplicationInfo.FLAG_INSTALLED;
         info.enabled = true;
@@ -78,7 +85,6 @@ public final class InstalledAppDetailsTest {
 
     @Test
     public void getInstallationStatus_disabled_shouldReturnDisabled() {
-        final InstalledAppDetails mAppDetail = new InstalledAppDetails();
         final ApplicationInfo info = new ApplicationInfo();
         info.flags = ApplicationInfo.FLAG_INSTALLED;
         info.enabled = false;
@@ -90,7 +96,6 @@ public final class InstalledAppDetailsTest {
     public void shouldShowUninstallForAll_installForOneOtherUserOnly_shouldReturnTrue() {
         when(mDevicePolicyManager.packageHasActiveAdmins(anyString())).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
-        final InstalledAppDetails mAppDetail = new InstalledAppDetails();
         ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
         ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
         final ApplicationInfo info = new ApplicationInfo();
@@ -107,7 +112,6 @@ public final class InstalledAppDetailsTest {
     public void shouldShowUninstallForAll_installForSelfOnly_shouldReturnFalse() {
         when(mDevicePolicyManager.packageHasActiveAdmins(anyString())).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
-        final InstalledAppDetails mAppDetail = new InstalledAppDetails();
         ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
         ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
         final ApplicationInfo info = new ApplicationInfo();
@@ -139,6 +143,22 @@ public final class InstalledAppDetailsTest {
 
         assertThat(InstalledAppDetails.getStorageSummary(context, stats, false))
                 .isEqualTo("1.00B used in Internal storage");
+    }
 
+    @Test
+    public void launchFragment_hasNoPackageInfo_shouldFinish() {
+        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", null);
+
+        assertThat(mAppDetail.ensurePackageInfoAvailable(mActivity)).isFalse();
+        verify(mActivity).finishAndRemoveTask();
+    }
+
+    @Test
+    public void launchFragment_hasPackageInfo_shouldReturnTrue() {
+        final PackageInfo packageInfo = mock(PackageInfo.class);
+        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
+
+        assertThat(mAppDetail.ensurePackageInfoAvailable(mActivity)).isTrue();
+        verify(mActivity, never()).finishAndRemoveTask();
     }
 }
