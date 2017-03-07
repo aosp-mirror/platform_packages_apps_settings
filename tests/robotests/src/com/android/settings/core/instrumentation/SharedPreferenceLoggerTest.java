@@ -17,6 +17,7 @@ package com.android.settings.core.instrumentation;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Pair;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -32,7 +33,6 @@ import org.robolectric.annotation.Config;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -71,7 +71,8 @@ public class SharedPreferenceLoggerTest {
         editor.putInt(TEST_KEY, 2);
         editor.putInt(TEST_KEY, 2);
 
-        verify(mMetricsFeature, times(6)).count(any(Context.class), anyString(), anyInt());
+        verify(mMetricsFeature, times(6)).action(any(Context.class), anyInt(),
+                any(Pair.class), any(Pair.class));
     }
 
     @Test
@@ -83,7 +84,8 @@ public class SharedPreferenceLoggerTest {
         editor.putBoolean(TEST_KEY, false);
         editor.putBoolean(TEST_KEY, false);
 
-        verify(mMetricsFeature, times(4)).count(any(Context.class), anyString(), anyInt());
+        verify(mMetricsFeature, times(4)).action(any(Context.class), anyInt(),
+                any(Pair.class), any(Pair.class));
     }
 
     @Test
@@ -95,7 +97,8 @@ public class SharedPreferenceLoggerTest {
         editor.putLong(TEST_KEY, 1);
         editor.putLong(TEST_KEY, 2);
 
-        verify(mMetricsFeature, times(4)).count(any(Context.class), anyString(), anyInt());
+        verify(mMetricsFeature, times(4)).action(any(Context.class), anyInt(),
+                any(Pair.class), any(Pair.class));
     }
 
     @Test
@@ -107,7 +110,8 @@ public class SharedPreferenceLoggerTest {
         editor.putFloat(TEST_KEY, 1);
         editor.putFloat(TEST_KEY, 2);
 
-        verify(mMetricsFeature, times(4)).count(any(Context.class), anyString(), anyInt());
+        verify(mMetricsFeature, times(4)).action(any(Context.class), anyInt(),
+                any(Pair.class), any(Pair.class));
     }
 
 }

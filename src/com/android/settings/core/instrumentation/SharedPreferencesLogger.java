@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.overlay.FeatureFactory;
@@ -111,13 +112,17 @@ public class SharedPreferencesLogger implements SharedPreferences {
             return;
         }
         // Pref key exists in set, log it's change in metrics.
-        mMetricsFeature.count(mContext, prefKey + "|" + value, 1);
+        mMetricsFeature.action(mContext, MetricsEvent.ACTION_SETTINGS_PREFERENCE_CHANGE,
+                Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, prefKey),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_VALUE, value));
     }
 
     private void logPackageName(String key, String value) {
-        mMetricsFeature.count(mContext, mTag + "/" + key, 1);
+        final String prefKey = mTag + "/" + key;
+        mMetricsFeature.action(mContext, MetricsEvent.ACTION_SETTINGS_PREFERENCE_CHANGE,
+                Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, prefKey));
         mMetricsFeature.action(mContext, MetricsEvent.ACTION_GENERIC_PACKAGE,
-                mTag + "/" + key + "|" + value);
+                prefKey + "|" + value);
     }
 
     private void safeLogValue(String key, String value) {
