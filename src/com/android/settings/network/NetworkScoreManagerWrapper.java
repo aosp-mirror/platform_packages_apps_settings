@@ -56,6 +56,13 @@ public class NetworkScoreManagerWrapper {
         return mNetworkScoreManager.getActiveScorerPackage();
     }
 
+    /**
+     * Returns metadata about the active scorer or <code>null</code> if there is no active scorer.
+     */
+    @Nullable
+    public NetworkScorerAppData getActiveScorer() {
+        return mNetworkScoreManager.getActiveScorer();
+    }
 
     /**
      * Set the active scorer to a new package and clear existing scores.
