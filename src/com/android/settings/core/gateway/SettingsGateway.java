@@ -243,47 +243,38 @@ public class SettingsGateway {
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
-            //wireless_section
-            Settings.WifiSettingsActivity.class.getName(),
-            Settings.BluetoothSettingsActivity.class.getName(),
-            Settings.SimSettingsActivity.class.getName(),
-            //device_section
-            Settings.SoundSettingsActivity.class.getName(),
-            Settings.DisplaySettingsActivity.class.getName(),
-            Settings.StorageSettingsActivity.class.getName(),
-            Settings.ManageApplicationsActivity.class.getName(),
-            Settings.PowerUsageSummaryActivity.class.getName(),
-            //personal_section
-            Settings.LocationSettingsActivity.class.getName(),
-            Settings.SecuritySettingsActivity.class.getName(),
-            Settings.UserSettingsActivity.class.getName(),
-            //system_section
-            Settings.DateTimeSettingsActivity.class.getName(),
-            Settings.DeviceInfoSettingsActivity.class.getName(),
-            Settings.AccessibilitySettingsActivity.class.getName(),
-            Settings.PrintSettingsActivity.class.getName(),
-            Settings.PaymentSettingsActivity.class.getName(),
-
-
             // New IA
             // Home page
             Settings.NetworkDashboardActivity.class.getName(),
             Settings.ConnectedDeviceDashboardActivity.class.getName(),
-            Settings.WifiDisplaySettingsActivity.class.getName(),
             Settings.AppAndNotificationDashboardActivity.class.getName(),
+            Settings.DisplaySettingsActivity.class.getName(),
+            Settings.SoundSettingsActivity.class.getName(),
             Settings.StorageDashboardActivity.class.getName(),
-            "com.android.settings.SoundDashboardAlias",
-            "com.android.settings.UsersDashboardAlias",
+            Settings.PowerUsageSummaryActivity.class.getName(),
             Settings.UserAndAccountDashboardActivity.class.getName(),
+            Settings.SecuritySettingsActivity.class.getName(),
+            Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
             Settings.SupportDashboardActivity.class.getName(),
-            // Home page > Apps & Notifications
-            "com.android.settings.ManageApplicationsDashboardAlias",
-            "com.android.settings.PaymentSettingsDashboardAlias",
             // Home page > Network & Internet
+            Settings.WifiSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
+            Settings.SimSettingsActivity.class.getName(),
+            // Home page > Connected devices
+            Settings.BluetoothSettingsActivity.class.getName(),
+            Settings.WifiDisplaySettingsActivity.class.getName(),
+            Settings.PrintSettingsActivity.class.getName(),
+            // Home page > Apps & Notifications
+            Settings.UserSettingsActivity.class.getName(),
+            Settings.ManageApplicationsActivity.class.getName(),
+            Settings.PaymentSettingsActivity.class.getName(),
+            // Home page > Security & screen lock
+            Settings.LocationSettingsActivity.class.getName(),
             // Home page > System
             Settings.LanguageAndInputSettingsActivity.class.getName(),
+            Settings.DateTimeSettingsActivity.class.getName(),
+            Settings.DeviceInfoSettingsActivity.class.getName(),
             Settings.EnterprisePrivacySettingsActivity.class.getName(),
     };
 }

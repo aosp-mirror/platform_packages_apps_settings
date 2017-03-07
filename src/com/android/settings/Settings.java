@@ -33,7 +33,6 @@ public class Settings extends SettingsActivity {
     public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DateTimeSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class StorageSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeForgetActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PublicVolumeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -155,12 +154,6 @@ public class Settings extends SettingsActivity {
     public static class WifiInfoActivity extends SettingsActivity { /* empty */ }
     public static class EnterprisePrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class WebViewAppPickerActivity extends SettingsActivity { /* empty */ }
-
-    // Categories.
-    public static class WirelessSettings extends SettingsActivity { /* empty */ }
-    public static class DeviceSettings extends SettingsActivity { /* empty */ }
-    public static class PersonalSettings extends SettingsActivity { /* empty */ }
-    public static class SystemSettings extends SettingsActivity { /* empty */ }
 
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}
