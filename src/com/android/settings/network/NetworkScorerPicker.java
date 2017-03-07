@@ -26,9 +26,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.widget.RadioButtonPreference;
 
 import java.util.List;
@@ -43,8 +43,7 @@ public class NetworkScorerPicker extends InstrumentedPreferenceFragment implemen
 
     @Override
     public int getMetricsCategory() {
-        //TODO(35854268): Add logging.
-        return Instrumentable.METRICS_CATEGORY_UNKNOWN;
+        return MetricsProto.MetricsEvent.SETTINGS_NETWORK_SCORER;
     }
 
     @Override
