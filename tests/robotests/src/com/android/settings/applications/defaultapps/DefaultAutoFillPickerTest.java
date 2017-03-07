@@ -24,6 +24,7 @@ import android.os.UserManager;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,6 +61,7 @@ public class DefaultAutoFillPickerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mActivity);
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mPicker = spy(new DefaultAutoFillPicker());
         mPicker.onAttach((Context) mActivity);
