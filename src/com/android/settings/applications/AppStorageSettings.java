@@ -615,28 +615,6 @@ public class AppStorageSettings extends AppInfoWithHeader
         }
     };
 
-    public static CharSequence getSummary(AppEntry appEntry, Context context) {
-        if (appEntry.size == ApplicationsState.SIZE_INVALID
-                || appEntry.size == ApplicationsState.SIZE_UNKNOWN) {
-            return context.getText(R.string.computing_size);
-        } else {
-            CharSequence storageType = context.getString(
-                    (appEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0
-                    ? R.string.storage_type_external
-                    : R.string.storage_type_internal);
-            return context.getString(R.string.storage_summary_format,
-                    getSize(appEntry, context), storageType);
-        }
-    }
-
-    private static CharSequence getSize(AppEntry appEntry, Context context) {
-        long size = appEntry.size;
-        if (size == SIZE_INVALID) {
-            return context.getText(R.string.invalid_size_value);
-        }
-        return Formatter.formatFileSize(context, size);
-    }
-
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_APP_STORAGE;

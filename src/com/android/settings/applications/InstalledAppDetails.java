@@ -16,10 +16,13 @@
 
 package com.android.settings.applications;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
@@ -103,6 +106,8 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.PermissionsSummaryHelper;
 import com.android.settingslib.applications.PermissionsSummaryHelper.PermissionsResultCallback;
+import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 
@@ -110,8 +115,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity to display application information from Settings. This activity presents
@@ -123,7 +126,8 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  * uninstall the application.
  */
 public class InstalledAppDetails extends AppInfoBase
-        implements View.OnClickListener, OnPreferenceClickListener {
+        implements View.OnClickListener, OnPreferenceClickListener,
+        LoaderManager.LoaderCallbacks<AppStorageStats> {
 
     private static final String LOG_TAG = "InstalledAppDetails";
 
@@ -138,6 +142,7 @@ public class InstalledAppDetails extends AppInfoBase
     private static final int SUB_INFO_FRAGMENT = 1;
 
     private static final int LOADER_CHART_DATA = 2;
+    private static final int LOADER_STORAGE = 3;
 
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
@@ -190,6 +195,8 @@ public class InstalledAppDetails extends AppInfoBase
 
     protected ProcStatsData mStatsManager;
     protected ProcStatsPackageEntry mStats;
+
+    private AppStorageStats mLastResult;
 
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
@@ -359,13 +366,14 @@ public class InstalledAppDetails extends AppInfoBase
         if (mFinishing) {
             return;
         }
-        mState.requestSize(mPackageName, mUserId);
         AppItem app = new AppItem(mAppEntry.info.uid);
         app.addUid(mAppEntry.info.uid);
         if (mStatsSession != null) {
-            getLoaderManager().restartLoader(LOADER_CHART_DATA,
+            LoaderManager loaderManager = getLoaderManager();
+            loaderManager.restartLoader(LOADER_CHART_DATA,
                     ChartDataLoader.buildArgs(getTemplate(getContext()), app),
                     mDataCallbacks);
+            loaderManager.restartLoader(LOADER_STORAGE, Bundle.EMPTY, this);
         }
         new BatteryUpdater().execute();
         new MemoryUpdater().execute();
@@ -536,6 +544,23 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
+    @Override
+    public Loader<AppStorageStats> onCreateLoader(int id, Bundle args) {
+        Context context = getContext();
+        return new FetchPackageStorageAsyncLoader(
+                context, new StorageStatsSource(context), mAppEntry.info, UserHandle.of(mUserId));
+    }
+
+    @Override
+    public void onLoadFinished(Loader<AppStorageStats> loader, AppStorageStats result) {
+        mLastResult = result;
+        refreshUi();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<AppStorageStats> loader) {
+    }
+
     // Utility method to set application label and icon.
     private void setAppLabelAndIcon(PackageInfo pkgInfo) {
         final View appSnippet = mHeader.findViewById(R.id.app_snippet);
@@ -638,7 +663,8 @@ public class InstalledAppDetails extends AppInfoBase
 
         // Update the preference summaries.
         Activity context = getActivity();
-        mStoragePreference.setSummary(AppStorageSettings.getSummary(mAppEntry, context));
+        boolean isExternal = ((mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0);
+        mStoragePreference.setSummary(getStorageSummary(context, mLastResult, isExternal));
 
         PermissionsSummaryHelper.getPermissionSummary(getContext(),
                 mPackageName, mPermissionCallback);
@@ -706,6 +732,25 @@ public class InstalledAppDetails extends AppInfoBase
         }
         return getString(R.string.computing_size);
     }
+
+    @VisibleForTesting
+    static CharSequence getStorageSummary(
+            Context context, AppStorageStats stats, boolean isExternal) {
+        if (stats == null) {
+            return context.getText(R.string.computing_size);
+        } else {
+            CharSequence storageType = context.getString(isExternal
+                    ? R.string.storage_type_external
+                    : R.string.storage_type_internal);
+            return context.getString(R.string.storage_summary_format,
+                    getSize(context, stats), storageType);
+        }
+    }
+
+    private static CharSequence getSize(Context context, AppStorageStats stats) {
+        return Formatter.formatFileSize(context, stats.getTotalBytes());
+    }
+
 
     @Override
     protected AlertDialog createDialog(int id, int errorCode) {
