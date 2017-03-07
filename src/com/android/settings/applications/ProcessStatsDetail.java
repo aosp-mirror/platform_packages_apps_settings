@@ -44,7 +44,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.AppHeader;
 import com.android.settings.CancellablePreference;
 import com.android.settings.CancellablePreference.OnCancelListener;
 import com.android.settings.R;
@@ -126,28 +125,20 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
             return;
         }
         final Activity activity = getActivity();
-        if (!FeatureFactory.getFactory(activity)
-                .getDashboardFeatureProvider(activity).isEnabled()) {
-            AppHeader.createAppHeader(this, mApp.mUiTargetApp != null
-                            ? mApp.mUiTargetApp.loadIcon(mPm)
-                            : new ColorDrawable(0),
-                    mApp.mUiLabel, mApp.mPackage, mApp.mUiTargetApp.uid);
-        } else {
-            final Preference pref = FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this, null /* appHeader */)
-                    .setIcon(mApp.mUiTargetApp != null
-                            ? mApp.mUiTargetApp.loadIcon(mPm)
-                            : new ColorDrawable(0))
-                    .setLabel(mApp.mUiLabel)
-                    .setPackageName(mApp.mPackage)
-                    .setUid(mApp.mUiTargetApp != null
-                            ? mApp.mUiTargetApp.uid
-                            : UserHandle.USER_NULL)
-                    .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
-                    .done(getPrefContext());
-            getPreferenceScreen().addPreference(pref);
-        }
+        final Preference pref = FeatureFactory.getFactory(activity)
+            .getApplicationFeatureProvider(activity)
+            .newAppHeaderController(this, null /* appHeader */)
+            .setIcon(mApp.mUiTargetApp != null
+                ? mApp.mUiTargetApp.loadIcon(mPm)
+                : new ColorDrawable(0))
+            .setLabel(mApp.mUiLabel)
+            .setPackageName(mApp.mPackage)
+            .setUid(mApp.mUiTargetApp != null
+                ? mApp.mUiTargetApp.uid
+                : UserHandle.USER_NULL)
+            .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
+            .done(getPrefContext());
+        getPreferenceScreen().addPreference(pref);
     }
 
     @Override

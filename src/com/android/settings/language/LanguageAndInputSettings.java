@@ -36,7 +36,6 @@ import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.inputmethod.GameControllerPreferenceController;
 import com.android.settings.inputmethod.SpellCheckerPreferenceController;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 
 import java.util.ArrayList;
@@ -110,10 +109,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.language_and_input;
                     return Arrays.asList(sir);

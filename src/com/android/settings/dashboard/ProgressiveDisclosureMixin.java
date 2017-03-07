@@ -46,7 +46,6 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     private static final int DEFAULT_TILE_LIMIT = 300;
 
     private final Context mContext;
-    private final DashboardFeatureProvider mDashboardFeatureProvider;
     // Collapsed preference sorted by order.
     private final List<Preference> mCollapsedPrefs = new ArrayList<>();
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -57,14 +56,12 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     private boolean mUserExpanded;
 
     public ProgressiveDisclosureMixin(Context context,
-            DashboardFeatureProvider dashboardFeatureProvider,
             MetricsFeatureProvider metricsFeatureProvider,
             PreferenceFragment fragment) {
         mContext = context;
         mFragment = fragment;
         mExpandButton = new ExpandPreference(context);
         mExpandButton.setOnPreferenceClickListener(this);
-        mDashboardFeatureProvider = dashboardFeatureProvider;
         mMetricsFeatureProvider = metricsFeatureProvider;
     }
 
@@ -122,8 +119,7 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
      * Whether the screen should be collapsed.
      */
     public boolean shouldCollapse(PreferenceScreen screen) {
-        return mDashboardFeatureProvider.isEnabled() && screen.getPreferenceCount() >= mTileLimit
-                && !mUserExpanded;
+        return screen.getPreferenceCount() >= mTileLimit && !mUserExpanded;
     }
 
     /**

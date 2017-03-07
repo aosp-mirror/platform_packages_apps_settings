@@ -72,7 +72,6 @@ public class AppInfoWithHeaderTest {
                 ShadowApplication.getInstance().getApplicationContext(),
                 mAppInfoWithHeader,
                 null);
-        when(mFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
         when(mFactory.applicationFeatureProvider.newAppHeaderController(mAppInfoWithHeader, null))
                 .thenReturn(appHeaderController);
         mAppInfoWithHeader.onActivityCreated(null);

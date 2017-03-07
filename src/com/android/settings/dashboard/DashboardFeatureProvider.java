@@ -31,11 +31,6 @@ import java.util.List;
 public interface DashboardFeatureProvider {
 
     /**
-     * Whether or not this feature is enabled.
-     */
-    boolean isEnabled();
-
-    /**
      * Get tiles (wrapped in {@link DashboardCategory}) for key defined in CategoryKey.
      */
     DashboardCategory getTilesForCategory(String key);

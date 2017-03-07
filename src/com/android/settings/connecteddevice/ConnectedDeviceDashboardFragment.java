@@ -27,7 +27,6 @@ import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.UsbBackend;
 import com.android.settings.nfc.NfcPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -82,10 +81,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.connected_devices;
                     return Arrays.asList(sir);

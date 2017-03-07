@@ -49,9 +49,7 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
-import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.Index;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search2.SearchFeatureProviderImpl;
 import com.android.settingslib.RestrictedPreference;
@@ -89,7 +87,6 @@ public class AccountPreferenceController extends PreferenceController
     private SettingsPreferenceFragment mParent;
     private int mAccountProfileOrder = ORDER_ACCOUNT_PROFILES;
     private AccountRestrictionHelper mHelper;
-    private DashboardFeatureProvider mDashboardFeatureProvider;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
     /**
@@ -138,7 +135,6 @@ public class AccountPreferenceController extends PreferenceController
             mAuthoritiesCount = mAuthorities.length;
         }
         final FeatureFactory featureFactory = FeatureFactory.getFactory(mContext);
-        mDashboardFeatureProvider = featureFactory.getDashboardFeatureProvider(mContext);
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mHelper = helper;
     }

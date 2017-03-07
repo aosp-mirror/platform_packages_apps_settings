@@ -33,7 +33,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 
@@ -55,7 +54,6 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -76,7 +74,6 @@ public class AccountPreferenceControllerTest {
     @Mock(answer = RETURNS_DEEP_STUBS)
     private AccountRestrictionHelper mAccountHelper;
 
-    private FakeFeatureFactory mFactory;
     private Context mContext;
     private AccountPreferenceController mController;
 
@@ -86,11 +83,8 @@ public class AccountPreferenceControllerTest {
         ShadowApplication shadowContext = ShadowApplication.getInstance();
         shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
         shadowContext.setSystemService(Context.ACCOUNT_SERVICE, mAccountManager);
-        mContext = spy(shadowContext.getApplicationContext());
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mContext = shadowContext.getApplicationContext();
 
-        when(mFactory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(

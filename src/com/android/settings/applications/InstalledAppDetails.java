@@ -89,7 +89,6 @@ import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceC
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
-import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
@@ -162,8 +161,6 @@ public class InstalledAppDetails extends AppInfoBase
     private static final String NOTIFICATION_TUNER_SETTING = "show_importance_slider";
 
     private final HashSet<String> mHomePackages = new HashSet<>();
-
-    private DashboardFeatureProvider mDashboardFeatureProvider;
 
     private boolean mInitialized;
     private boolean mShowUninstalled;
@@ -327,20 +324,14 @@ public class InstalledAppDetails extends AppInfoBase
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         final Activity activity = getActivity();
-        mDashboardFeatureProvider =
-                FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
 
         setHasOptionsMenu(true);
-        addPreferencesFromResource(mDashboardFeatureProvider.isEnabled()
-                ? R.xml.installed_app_details_ia
-                : R.xml.installed_app_details);
+        addPreferencesFromResource(R.xml.installed_app_details_ia);
         addDynamicPrefs();
-        if (mDashboardFeatureProvider.isEnabled()) {
-            mFooter = new LayoutPreference(getPrefContext(), R.layout.app_action_buttons);
-            mFooter.setOrder(-9999);
-            mFooter.setKey(KEY_FOOTER);
-            getPreferenceScreen().addPreference(mFooter);
-        }
+        mFooter = new LayoutPreference(getPrefContext(), R.layout.app_action_buttons);
+        mFooter.setOrder(-9999);
+        mFooter.setKey(KEY_FOOTER);
+        getPreferenceScreen().addPreference(mFooter);
         if (Utils.isBandwidthControlEnabled()) {
             INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
                     ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
@@ -397,20 +388,16 @@ public class InstalledAppDetails extends AppInfoBase
         if (mFinishing) {
             return;
         }
-        if (!mDashboardFeatureProvider.isEnabled()) {
-            handleHeader();
-        } else {
-            final Activity activity = getActivity();
-            mHeader = (LayoutPreference) findPreference(KEY_HEADER);
-            FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this, mHeader.findViewById(R.id.app_snippet))
-                    .setPackageName(mPackageName)
-                    .setButtonActions(AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
-                            AppHeaderController.ActionType.ACTION_APP_PREFERENCE)
-                    .bindAppHeaderButtons();
-            prepareUninstallAndStop();
-        }
+        final Activity activity = getActivity();
+        mHeader = (LayoutPreference) findPreference(KEY_HEADER);
+        FeatureFactory.getFactory(activity)
+            .getApplicationFeatureProvider(activity)
+            .newAppHeaderController(this, mHeader.findViewById(R.id.app_snippet))
+            .setPackageName(mPackageName)
+            .setButtonActions(AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
+                AppHeaderController.ActionType.ACTION_APP_PREFERENCE)
+            .bindAppHeaderButtons();
+        prepareUninstallAndStop();
 
         mNotificationPreference = findPreference(KEY_NOTIFICATION);
         mNotificationPreference.setOnPreferenceClickListener(this);
@@ -445,32 +432,6 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onPackageSizeChanged(String packageName) {
         refreshUi();
-    }
-
-    private void handleHeader() {
-        mHeader = (LayoutPreference) findPreference(KEY_HEADER);
-        // Get Control button panel
-        View btnPanel = mHeader.findViewById(R.id.control_buttons_panel);
-        mForceStopButton = (Button) btnPanel.findViewById(R.id.right_button);
-        mForceStopButton.setText(R.string.force_stop);
-        mUninstallButton = (Button) btnPanel.findViewById(R.id.left_button);
-        mForceStopButton.setEnabled(false);
-
-        View gear = mHeader.findViewById(R.id.gear);
-        Intent i = new Intent(Intent.ACTION_APPLICATION_PREFERENCES);
-        i.setPackage(mPackageName);
-        final Intent intent = resolveIntent(i);
-        if (intent != null) {
-            gear.setVisibility(View.VISIBLE);
-            gear.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(intent);
-                }
-            });
-        } else {
-            gear.setVisibility(View.GONE);
-        }
     }
 
     private void prepareUninstallAndStop() {
@@ -565,21 +526,16 @@ public class InstalledAppDetails extends AppInfoBase
     private void setAppLabelAndIcon(PackageInfo pkgInfo) {
         final View appSnippet = mHeader.findViewById(R.id.app_snippet);
         mState.ensureIcon(mAppEntry);
-        if (mDashboardFeatureProvider.isEnabled()) {
-            final Activity activity = getActivity();
-            FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this, appSnippet)
-                    .setLabel(mAppEntry)
-                    .setIcon(mAppEntry)
-                    .setSummary(getString(getInstallationStatus(mAppEntry.info)))
-                    .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
-                    .done(false /* rebindActions */);
-            mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
-        } else {
-            setupAppSnippet(appSnippet, mAppEntry.label, mAppEntry.icon,
-                    pkgInfo != null ? pkgInfo.versionName : null);
-        }
+        final Activity activity = getActivity();
+        FeatureFactory.getFactory(activity)
+            .getApplicationFeatureProvider(activity)
+            .newAppHeaderController(this, appSnippet)
+            .setLabel(mAppEntry)
+            .setIcon(mAppEntry)
+            .setSummary(getString(getInstallationStatus(mAppEntry.info)))
+            .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
+            .done(false /* rebindActions */);
+        mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
     }
 
     @VisibleForTesting
@@ -1191,6 +1147,9 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
+    /**
+     * @deprecated app info pages should use {@link AppHeaderController} to show the app header.
+     */
     public static void setupAppSnippet(View appSnippet, CharSequence label, Drawable icon,
             CharSequence versionName) {
         LayoutInflater.from(appSnippet.getContext()).inflate(R.layout.widget_text_views,

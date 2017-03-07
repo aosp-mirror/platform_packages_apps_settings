@@ -20,13 +20,9 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -42,11 +38,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.MasterSwitchPreference;
-import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.text.Collator;
@@ -63,19 +57,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     private static final String KEY_BLOCK = "block";
 
-    private DashboardFeatureProvider mDashboardFeatureProvider;
     private List<NotificationChannelGroup> mChannelGroupList;
     private List<PreferenceCategory> mChannelGroups = new ArrayList();
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (mAppRow == null) return;
-        if (!mDashboardFeatureProvider.isEnabled()) {
-            AppHeader.createAppHeader(this, mAppRow.icon, mAppRow.label, mAppRow.pkg, mAppRow.uid,
-                    mAppRow.settingsIntent);
-        }
-    }
 
     @Override
     public int getMetricsCategory() {
@@ -91,8 +74,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             return;
         }
         final Activity activity = getActivity();
-        mDashboardFeatureProvider =
-                FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
 
         addPreferencesFromResource(R.xml.app_notification_settings);
         getPreferenceScreen().setOrderingAsAdded(true);
@@ -121,20 +102,18 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 }
             }.execute();
         }
-        if (mDashboardFeatureProvider.isEnabled()) {
-            final Preference pref = FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this /* fragment */, null /* appHeader */)
-                    .setIcon(mAppRow.icon)
-                    .setLabel(mAppRow.label)
-                    .setPackageName(mAppRow.pkg)
-                    .setUid(mAppRow.uid)
-                    .setAppNotifPrefIntent(mAppRow.settingsIntent)
-                    .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                            AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
-                    .done(getPrefContext());
-            getPreferenceScreen().addPreference(pref);
-        }
+        final Preference pref = FeatureFactory.getFactory(activity)
+            .getApplicationFeatureProvider(activity)
+            .newAppHeaderController(this /* fragment */, null /* appHeader */)
+            .setIcon(mAppRow.icon)
+            .setLabel(mAppRow.label)
+            .setPackageName(mAppRow.pkg)
+            .setUid(mAppRow.uid)
+            .setAppNotifPrefIntent(mAppRow.settingsIntent)
+            .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
+            .done(getPrefContext());
+        getPreferenceScreen().addPreference(pref);
     }
 
     @Override

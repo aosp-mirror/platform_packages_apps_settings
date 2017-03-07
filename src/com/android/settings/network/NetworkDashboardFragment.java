@@ -138,10 +138,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.network_and_internet;
                     return Arrays.asList(sir);

@@ -15,21 +15,16 @@
  */
 package com.android.settings.network;
 
-import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.view.Menu;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
@@ -40,24 +35,15 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NetworkDashboardFragmentTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-
     private NetworkDashboardFragment mFragment;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        final FakeFeatureFactory factory =
-                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        when(factory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
         mFragment = new NetworkDashboardFragment();
     }
 

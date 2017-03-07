@@ -57,7 +57,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
@@ -268,24 +267,12 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    public void getPreferences_notEnabled_shouldReturnNull() {
-        final DashboardFeatureProviderImpl mSpy = spy(mImpl);
-        when(mSpy.isEnabled()).thenReturn(false);
-
-        assertThat(mSpy.getPreferencesForCategory(null, null,
-                MetricsProto.MetricsEvent.SETTINGS_GESTURES, CategoryKey.CATEGORY_HOMEPAGE))
-                .isNull();
-    }
-
-    @Test
     public void getPreferences_noCategory_shouldReturnNull() {
         mImpl = new DashboardFeatureProviderImpl(mActivity, mCategoryManager);
-        final DashboardFeatureProviderImpl mSpy = spy(mImpl);
-        when(mSpy.isEnabled()).thenReturn(true);
         when(mCategoryManager.getTilesByCategory(mActivity, CategoryKey.CATEGORY_HOMEPAGE))
                 .thenReturn(null);
 
-        assertThat(mSpy.getPreferencesForCategory(null, null,
+        assertThat(mImpl.getPreferencesForCategory(null, null,
                 MetricsProto.MetricsEvent.SETTINGS_GESTURES, CategoryKey.CATEGORY_HOMEPAGE))
                 .isNull();
     }
@@ -293,12 +280,10 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void getPreferences_noTileForCategory_shouldReturnNull() {
         mImpl = new DashboardFeatureProviderImpl(mActivity, mCategoryManager);
-        final DashboardFeatureProviderImpl mSpy = spy(mImpl);
-        when(mSpy.isEnabled()).thenReturn(true);
         when(mCategoryManager.getTilesByCategory(mActivity, CategoryKey.CATEGORY_HOMEPAGE))
                 .thenReturn(new DashboardCategory());
 
-        assertThat(mSpy.getPreferencesForCategory(null, null,
+        assertThat(mImpl.getPreferencesForCategory(null, null,
                 MetricsProto.MetricsEvent.SETTINGS_GESTURES, CategoryKey.CATEGORY_HOMEPAGE))
                 .isNull();
     }
@@ -306,15 +291,13 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void getPreferences_hasTileForCategory_shouldReturnPrefList() {
         mImpl = new DashboardFeatureProviderImpl(mActivity, mCategoryManager);
-        final DashboardFeatureProviderImpl mSpy = spy(mImpl);
-        when(mSpy.isEnabled()).thenReturn(true);
         final DashboardCategory category = new DashboardCategory();
         category.tiles.add(new Tile());
         when(mCategoryManager
                 .getTilesByCategory(any(Context.class), eq(CategoryKey.CATEGORY_HOMEPAGE)))
                 .thenReturn(category);
 
-        assertThat(mSpy.getPreferencesForCategory(mActivity,
+        assertThat(mImpl.getPreferencesForCategory(mActivity,
                 ShadowApplication.getInstance().getApplicationContext(),
                 MetricsProto.MetricsEvent.SETTINGS_GESTURES,
                 CategoryKey.CATEGORY_HOMEPAGE).isEmpty())

@@ -30,7 +30,6 @@ import android.view.ViewGroup;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
@@ -87,12 +86,7 @@ public class DashboardSummary extends InstrumentedFragment
         mSuggestionFeatureProvider = FeatureFactory.getFactory(activity)
                 .getSuggestionFeatureProvider(activity);
 
-        if (mDashboardFeatureProvider.isEnabled()) {
-            mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
-        } else {
-            mSummaryLoader = new SummaryLoader(activity,
-                    ((SettingsActivity) getActivity()).getDashboardCategories());
-        }
+        mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
 
         mConditionManager = ConditionManager.get(activity, false);
         mSuggestionParser = new SuggestionParser(activity,
@@ -279,20 +273,15 @@ public class DashboardSummary extends InstrumentedFragment
             return;
         }
 
-        if (mDashboardFeatureProvider.isEnabled()) {
-            // Temporary hack to wrap homepage category into a list. Soon we will create adapter
-            // API that takes a single category.
-            List<DashboardCategory> categories = new ArrayList<>();
-            categories.add(mDashboardFeatureProvider.getTilesForCategory(
-                    CategoryKey.CATEGORY_HOMEPAGE));
-            if (suggestions != null) {
-                mAdapter.setCategoriesAndSuggestions(categories, suggestions);
-            } else {
-                mAdapter.setCategory(categories);
-            }
+        // Temporary hack to wrap homepage category into a list. Soon we will create adapter
+        // API that takes a single category.
+        List<DashboardCategory> categories = new ArrayList<>();
+        categories.add(mDashboardFeatureProvider.getTilesForCategory(
+            CategoryKey.CATEGORY_HOMEPAGE));
+        if (suggestions != null) {
+            mAdapter.setCategoriesAndSuggestions(categories, suggestions);
         } else {
-            mAdapter.setCategoriesAndSuggestions(
-                    ((SettingsActivity) activity).getDashboardCategories(), suggestions);
+            mAdapter.setCategory(categories);
         }
     }
 }
