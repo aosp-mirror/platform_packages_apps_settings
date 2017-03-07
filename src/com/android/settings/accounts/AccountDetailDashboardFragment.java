@@ -76,7 +76,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
             }
         }
         mAccountSynController.init(mAccount, userHandle);
-        mRemoveAccountController.setAccount(mAccount);
+        mRemoveAccountController.init(mAccount, userHandle);
     }
 
     @Override

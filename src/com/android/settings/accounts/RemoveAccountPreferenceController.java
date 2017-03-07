@@ -27,8 +27,10 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Process;
+import android.os.UserHandle;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,6 +51,7 @@ public class RemoveAccountPreferenceController extends PreferenceController
 
     private Account mAccount;
     private Fragment mParentFragment;
+    private UserHandle mUserHandle;
 
     public RemoveAccountPreferenceController(Context context, Fragment parent) {
         super(context);
@@ -76,11 +79,12 @@ public class RemoveAccountPreferenceController extends PreferenceController
 
     @Override
     public void onClick(View v) {
-        ConfirmRemoveAccountDialog.show(mParentFragment, mAccount);
+        ConfirmRemoveAccountDialog.show(mParentFragment, mAccount, mUserHandle);
     }
 
-    public void setAccount(Account account) {
+    public void init(Account account, UserHandle userHandle) {
         mAccount = account;
+        mUserHandle = userHandle;
     }
 
     /**
@@ -88,39 +92,43 @@ public class RemoveAccountPreferenceController extends PreferenceController
      */
     public static class ConfirmRemoveAccountDialog extends InstrumentedDialogFragment implements
             DialogInterface.OnClickListener {
-        private static final String SAVE_ACCOUNT = "account";
+        private static final String KEY_ACCOUNT = "account";
         private static final String REMOVE_ACCOUNT_DIALOG = "confirmRemoveAccount";
         private Account mAccount;
+        private UserHandle mUserHandle;
 
-        public static ConfirmRemoveAccountDialog show(Fragment parent, Account account) {
+        public static ConfirmRemoveAccountDialog show(
+                Fragment parent, Account account, UserHandle userHandle) {
             if (!parent.isAdded()) {
                 return null;
             }
             final ConfirmRemoveAccountDialog dialog = new ConfirmRemoveAccountDialog();
-            dialog.mAccount = account;
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(KEY_ACCOUNT, account);
+            bundle.putParcelable(Intent.EXTRA_USER, userHandle);
+            dialog.setArguments(bundle);
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), REMOVE_ACCOUNT_DIALOG);
             return dialog;
         }
 
         @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            final Bundle arguments = getArguments();
+            mAccount = arguments.getParcelable(KEY_ACCOUNT);
+            mUserHandle = arguments.getParcelable(Intent.EXTRA_USER);
+        }
+
+        @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
-            if (savedInstanceState != null) {
-                mAccount = (Account) savedInstanceState.getParcelable(SAVE_ACCOUNT);
-            }
             return new AlertDialog.Builder(context)
                 .setTitle(R.string.really_remove_account_title)
                 .setMessage(R.string.really_remove_account_message)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(R.string.remove_account_label, this)
                 .create();
-        }
-
-        @Override
-        public void onSaveInstanceState(Bundle outState) {
-            super.onSaveInstanceState(outState);
-            outState.putParcelable(SAVE_ACCOUNT, mAccount);
         }
 
         @Override
@@ -159,7 +167,7 @@ public class RemoveAccountPreferenceController extends PreferenceController
                                 activity.finish();
                             }
                         }
-                    }, null, Process.myUserHandle());
+                    }, null, mUserHandle);
         }
     }
 

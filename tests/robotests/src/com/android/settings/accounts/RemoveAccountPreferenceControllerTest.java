@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.support.v7.preference.PreferenceScreen;
@@ -127,11 +128,13 @@ public class RemoveAccountPreferenceControllerTest {
         when(mFragment.getActivity()).thenReturn(activity);
 
         Account account = new Account("Account11", "com.acct1");
+        UserHandle userHandle = new UserHandle(10);
         RemoveAccountPreferenceController.ConfirmRemoveAccountDialog dialog =
-            RemoveAccountPreferenceController.ConfirmRemoveAccountDialog.show(mFragment, account);
-
+            RemoveAccountPreferenceController.ConfirmRemoveAccountDialog.show(
+                    mFragment, account, userHandle);
+        dialog.onCreate(new Bundle());
         dialog.onClick(null, 0);
         verify(mAccountManager).removeAccountAsUser(eq(account), any(Activity.class),
-            any(AccountManagerCallback.class), any(Handler.class), any(UserHandle.class));
+            any(AccountManagerCallback.class), any(Handler.class), eq(userHandle));
     }
 }
