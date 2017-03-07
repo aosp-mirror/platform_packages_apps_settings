@@ -17,10 +17,15 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.support.v7.preference.ListPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.display.ThemePreferenceController.OverlayManager;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,9 +33,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -40,24 +49,19 @@ public class ThemePreferenceControllerTest {
     private ListPreference mPreference;
     @Mock
     private Context mContext;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
 
     private ThemePreferenceController mController;
 
     @Before
-    public void setUp() {
+    public void setUp() throws NameNotFoundException {
         MockitoAnnotations.initMocks(this);
-        mController = spy(new ThemePreferenceController(mContext));
-    }
-
-    @Test
-    public void updateState_nullTheme_shouldSetSummaryToDefault() {
-        final String[] themes = {"Theme1", "Theme2"};
-        doReturn(null).when(mController).getCurrentTheme();
-        doReturn(themes).when(mController).getAvailableThemes();
-
-        mController.updateState(mPreference);
-
-        verify(mPreference).setSummary(mContext.getString(R.string.default_theme));
+        when(mPackageManager.getApplicationInfo(any(), anyInt())).thenReturn(mApplicationInfo);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        mController = spy(new ThemePreferenceController(mContext, mock(OverlayManager.class)));
     }
 
     @Test
