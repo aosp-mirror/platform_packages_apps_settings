@@ -24,6 +24,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.support.annotation.VisibleForTesting;
 import android.util.SparseArray;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -119,10 +120,26 @@ public class StorageProfileFragment extends DashboardFragment
     @Override
     public void onLoadFinished(Loader<SparseArray<AppsStorageResult>> loader,
             SparseArray<AppsStorageResult> result) {
-        mPreferenceController.onLoadFinished(result.get(mUserId));
+        mPreferenceController.onLoadFinished(scrubAppsFromResult(result.get(mUserId)));
     }
 
     @Override
     public void onLoaderReset(Loader<SparseArray<AppsStorageResult>> loader) {
+    }
+
+    @VisibleForTesting
+    void setPreferenceController(StorageItemPreferenceController controller) {
+        mPreferenceController = controller;
+    }
+
+    private AppsStorageResult scrubAppsFromResult(AppsStorageResult result) {
+        if (result == null) {
+            return null;
+        }
+
+        result.gamesSize = 0;
+        result.musicAppsSize = 0;
+        result.otherAppsSize = 0;
+        return result;
     }
 }
