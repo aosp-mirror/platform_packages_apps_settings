@@ -59,6 +59,11 @@
             settings:keywords="@string/keywords_wifi_calling"/>
 
     <Preference
+            android:key="network_scorer_picker"
+            android:title="@string/network_scorer_picker_title"
+            android:fragment="com.android.settings.network.NetworkScorerPicker"/>
+
+    <Preference
             android:key="wifi_direct"
             android:title="@string/wifi_menu_p2p">
         <intent android:targetPackage="com.android.settings"
