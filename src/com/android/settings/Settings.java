@@ -132,6 +132,7 @@ public class Settings extends SettingsActivity {
 
     public static class ManageExternalSourcesActivity extends SettingsActivity {
         /* empty */ }
+    public static class ManageAppExternalSourcesActivity extends SettingsActivity { /* empty */ }
 
     public static class WifiCallingSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeAutomationSuggestionActivity extends SettingsActivity { /* empty */ }

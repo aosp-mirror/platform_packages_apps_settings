@@ -15,6 +15,9 @@
  */
 package com.android.settings.applications;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 import android.app.AlertDialog;
@@ -26,6 +29,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -67,6 +71,10 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
         final boolean checked = (Boolean) newValue;
         if (preference == mSwitchPref) {
             if (mInstallAppsState != null && checked != mInstallAppsState.canInstallApps()) {
+                if (Settings.ManageAppExternalSourcesActivity.class.getName().equals(
+                        getIntent().getComponent().getClassName())) {
+                    setResult(checked ? RESULT_OK : RESULT_CANCELED);
+                }
                 setCanInstallApps(checked);
                 refreshUi();
             }
@@ -97,9 +105,13 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     protected boolean refreshUi() {
         mInstallAppsState = mAppBridge.createInstallAppsStateFor(mPackageName,
                 mPackageInfo.applicationInfo.uid);
-
-        final boolean canWrite = mInstallAppsState.canInstallApps();
-        mSwitchPref.setChecked(canWrite);
+        if (!mInstallAppsState.isPotentialAppSource()) {
+            // Invalid app entry. Should not allow changing permission
+            mSwitchPref.setEnabled(false);
+            return true;
+        }
+        final boolean canInstallApps = mInstallAppsState.canInstallApps();
+        mSwitchPref.setChecked(canInstallApps);
         return true;
     }
 

@@ -2885,6 +2885,19 @@
                 android:value="com.android.settings.applications.ManageApplications" />
         </activity>
 
+
+        <activity android:name="Settings$AppWriteSettingsActivity"
+                  android:label="@string/write_settings_title"
+                  android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.action.MANAGE_WRITE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.WriteSettingsDetails" />
+        </activity>
+
         <activity android:name="Settings$ManageExternalSourcesActivity"
                 android:label="@string/install_other_apps"
                 android:taskAffinity="">
@@ -2896,16 +2909,16 @@
                 android:value="com.android.settings.applications.ManageApplications" />
         </activity>
 
-        <activity android:name="Settings$AppWriteSettingsActivity"
-                android:label="@string/write_settings_title"
-                android:taskAffinity="">
+        <activity android:name="Settings$ManageAppExternalSourcesActivity"
+                  android:label="@string/install_other_apps"
+                  android:taskAffinity="">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.action.MANAGE_WRITE_SETTINGS" />
+                <action android:name="android.settings.action.MANAGE_EXTERNAL_SOURCES" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.applications.WriteSettingsDetails" />
+                       android:value="com.android.settings.applications.ExternalSourcesDetails" />
         </activity>
 
         <activity android:name="ShowAdminSupportDetailsDialog"
