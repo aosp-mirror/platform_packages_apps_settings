@@ -26,8 +26,10 @@
             <intent android:action="android.settings.LOCATION_SOURCE_SETTINGS"/>
         </Preference>
 
-        <SwitchPreference android:key="show_password"
-                android:title="@string/show_password"/>
+        <SwitchPreference
+            android:key="show_password"
+            android:title="@string/show_password"
+            android:summary="@string/show_password_summary"/>
 
     </PreferenceCategory>
 
