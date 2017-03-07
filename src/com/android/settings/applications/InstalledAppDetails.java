@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -68,7 +66,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.IWebViewUpdateService;
 import android.widget.Button;
@@ -114,6 +111,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity to display application information from Settings. This activity presents
@@ -325,6 +324,10 @@ public class InstalledAppDetails extends AppInfoBase
         super.onCreate(icicle);
         final Activity activity = getActivity();
 
+        if (!ensurePackageInfoAvailable(activity)) {
+            return;
+        }
+
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.installed_app_details_ia);
         addDynamicPrefs();
@@ -432,6 +435,23 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onPackageSizeChanged(String packageName) {
         refreshUi();
+    }
+
+    /**
+     * Ensures the {@link PackageInfo} is available to proceed. If it's not available, the fragment
+     * will finish.
+     *
+     * @return true if packageInfo is available.
+     */
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    boolean ensurePackageInfoAvailable(Activity activity) {
+        if (mPackageInfo == null) {
+            mFinishing = true;
+            Log.w(LOG_TAG, "Package info not available. Is this package already uninstalled?");
+            activity.finishAndRemoveTask();
+            return false;
+        }
+        return true;
     }
 
     private void prepareUninstallAndStop() {
