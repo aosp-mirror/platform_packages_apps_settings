@@ -15,9 +15,11 @@
  */
 package com.android.settings.wifi;
 
+import static android.content.Context.NETWORK_SCORE_SERVICE;
 import static android.content.Context.WIFI_SERVICE;
 
 import android.content.Context;
+import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.provider.SearchIndexableResource;
 
@@ -25,6 +27,8 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.NetworkScoreManagerWrapper;
+import com.android.settings.network.NetworkScorerPickerPreferenceController;
 import com.android.settings.network.WifiCallingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -69,6 +73,9 @@ public class ConfigureWifiSettings extends DashboardFragment {
         controllers.add(new CellularFallbackPreferenceController(context));
         controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
         controllers.add(new WifiWakeupPreferenceController(context, getLifecycle()));
+        controllers.add(new NetworkScorerPickerPreferenceController(context,
+                new NetworkScoreManagerWrapper(
+                        (NetworkScoreManager) getSystemService(NETWORK_SCORE_SERVICE))));
         controllers.add(new WifiSleepPolicyPreferenceController(context));
         controllers.add(new WifiP2pPreferenceController(context, getLifecycle(), mWifiManager));
         controllers.add(new WifiCallingPreferenceController(context));
