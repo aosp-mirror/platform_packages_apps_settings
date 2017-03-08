@@ -43,7 +43,10 @@ import static org.mockito.Mockito.when;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class CaCertsManagedProfilePreferenceControllerTest {
 
-    private final String INSTALLED_CERTS = "10 certs installed";
+    private final String INSTALLED_CERTS_1 = "cert installed";
+    private final String INSTALLED_CERTS_10 = "certs installed";
+    private final String NUMBER_INSTALLED_CERTS_1 = "1 cert";
+    private final String NUMBER_INSTALLED_CERTS_10 = "10 certs";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -57,8 +60,15 @@ public final class CaCertsManagedProfilePreferenceControllerTest {
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         mController = new CaCertsManagedProfilePreferenceController(mContext);
-        when(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_ca_certs_work, 10, 10)).thenReturn(INSTALLED_CERTS);
+
+        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_ca_certs_work,
+                1)).thenReturn(INSTALLED_CERTS_1);
+        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_ca_certs_work,
+                10)).thenReturn(INSTALLED_CERTS_10);
+        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_ca_certs,
+                1, 1)).thenReturn(NUMBER_INSTALLED_CERTS_1);
+        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_ca_certs,
+                10, 10)).thenReturn(NUMBER_INSTALLED_CERTS_10);
     }
 
     @Test
@@ -72,10 +82,19 @@ public final class CaCertsManagedProfilePreferenceControllerTest {
         assertThat(preference.isVisible()).isFalse();
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider
+                .getNumberOfOwnerInstalledCaCertsInManagedProfile()).thenReturn(1);
+        mController.updateState(preference);
+        assertThat(preference.isVisible()).isTrue();
+        assertThat(preference.getTitle()).isEqualTo(INSTALLED_CERTS_1);
+        assertThat(preference.getSummary()).isEqualTo(NUMBER_INSTALLED_CERTS_1);
+
+        preference.setVisible(false);
+        when(mFeatureFactory.enterprisePrivacyFeatureProvider
                 .getNumberOfOwnerInstalledCaCertsInManagedProfile()).thenReturn(10);
         mController.updateState(preference);
         assertThat(preference.isVisible()).isTrue();
-        assertThat(preference.getTitle()).isEqualTo(INSTALLED_CERTS);
+        assertThat(preference.getTitle()).isEqualTo(INSTALLED_CERTS_10);
+        assertThat(preference.getSummary()).isEqualTo(NUMBER_INSTALLED_CERTS_10);
     }
 
     @Test

@@ -64,22 +64,30 @@ public final class InstalledPackagesPreferenceControllerTest {
         mController = new InstalledPackagesPreferenceController(mContext);
     }
 
-    @Test
-    public void testUpdateState() {
-        final Preference preference = new Preference(mContext, null, 0, 0);
+    private void setNumberOfInstalledPackages(int number) {
         doAnswer(new Answer() {
             public Object answer(InvocationOnMock invocation) {
                 ((ApplicationFeatureProvider.NumberOfAppsCallback)
-                        invocation.getArguments()[1]).onNumberOfAppsResult(20);
+                        invocation.getArguments()[1]).onNumberOfAppsResult(number);
                 return null;
             }}).when(mFeatureFactory.applicationFeatureProvider)
                     .calculateNumberOfInstalledApps(
                             eq(ApplicationFeatureProvider.IGNORE_INSTALL_REASON), anyObject());
-        when(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_installed_packages, 20, 20))
-                .thenReturn("20 packages");
+    }
+
+    @Test
+    public void testUpdateState() {
+        final Preference preference = new Preference(mContext, null, 0, 0);
+
+        setNumberOfInstalledPackages(0);
         mController.updateState(preference);
-        assertThat(preference.getTitle()).isEqualTo("20 packages");
+        assertThat(preference.getSummary()).isEqualTo("");
+
+        setNumberOfInstalledPackages(20);
+        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_packages,
+                20, 20)).thenReturn("20 packages");
+        mController.updateState(preference);
+        assertThat(preference.getSummary()).isEqualTo("20 packages");
     }
 
     @Test
@@ -95,6 +103,6 @@ public final class InstalledPackagesPreferenceControllerTest {
 
     @Test
     public void testGetPreferenceKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("number_installed_packages");
+        assertThat(mController.getPreferenceKey()).isEqualTo("installed_packages");
     }
 }

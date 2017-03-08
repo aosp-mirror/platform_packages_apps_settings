@@ -40,8 +40,8 @@ public class ImePreferenceController extends PreferenceController {
             preference.setVisible(false);
             return;
         }
-        preference.setTitle(mContext.getResources().getString(
-            R.string.enterprise_privacy_input_method, ownerSetIme));
+        preference.setSummary(mContext.getResources().getString(
+            R.string.enterprise_privacy_input_method_name, ownerSetIme));
         preference.setVisible(true);
     }
 

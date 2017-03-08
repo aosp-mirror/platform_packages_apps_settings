@@ -44,9 +44,8 @@ public class EnterpriseInstalledPackagesPreferenceController extends PreferenceC
                         preference.setVisible(false);
                     } else {
                         preference.setVisible(true);
-                        preference.setTitle(mContext.getResources().getQuantityString(
-                                R.plurals.enterprise_privacy_number_enterprise_installed_packages,
-                                num, num));
+                        preference.setSummary(mContext.getResources().getQuantityString(
+                                R.plurals.enterprise_privacy_number_packages, num, num));
                     }
                 });
     }

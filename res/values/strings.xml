@@ -8114,64 +8114,58 @@
 
     <!-- Enterprise Privacy --> <skip />
 
-    <!-- Title of setting on main settings screen. This will take the user to a screen with information about his/her privacy on a managed device. Shown on enterprise-managed devices only. -->
-    <string name="enterprise_privacy_settings">Privacy</string>
+    <!-- Title of setting on security settings screen. This will take the user to a screen with information about admin powers and their impact on the user's privacy on a managed device. Shown on enterprise-managed devices only. -->
+    <string name="enterprise_privacy_settings">Device management</string>
+    <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
+    <string name="enterprise_privacy_settings_summary">View all settings applied by your admin</string>
     <!-- Enterprise Privacy settings activity title -->
-    <string name="enterprise_privacy_settings_title">Privacy</string>
-    <!-- Enterprise Privacy settings activity header, summarizing the powers that the admin has. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_header">To provide access to your work data, your organization may change settings and install software on your device, which could cause some of your personal content to be visible to your admin. Contact your organization\'s admin for more details.</string>
-    <!-- Title for the 'What types of information can your organization see?' preference category. [CHAR LIMIT=60] -->
-    <string name="enterprise_privacy_exposure_category">What types of information can your organization see?</string>
-    <!-- Title for the 'What changes affect what your organization can see?' preference category. [CHAR LIMIT=60] -->
-    <string name="enterprise_privacy_exposure_changes_category">What changes affect what your organization can see?</string>
-    <!-- Title for the 'What actions may impact your access to this device?' preference category. [CHAR LIMIT=60] -->
-    <string name="enterprise_privacy_device_access_category">What actions may impact your access to this device?</string>
+    <string name="enterprise_privacy_settings_title">Device management</string>
+    <!-- Enterprise Privacy settings activity footer, summarizing the powers that the admin has. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_footer">To provide access to your work data, your organization may change settings and install software on your device. \n\nFor more details, contact your organization\'s admin.</string>
+    <!-- Title for the 'Types of information your organization can see' preference category. [CHAR LIMIT=60] -->
+    <string name="enterprise_privacy_exposure_category">Types of information your organization can see</string>
+    <!-- Title for the 'Changes made by your organization’s admin' preference category. [CHAR LIMIT=60] -->
+    <string name="enterprise_privacy_exposure_changes_category">Changes made by your organization\'s admin</string>
+    <!-- Title for the 'Your access to this device' preference category. [CHAR LIMIT=60] -->
+    <string name="enterprise_privacy_device_access_category">Your access to this device</string>
     <!-- Label explaining that the admin can see data associated with his/her work account. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_enterprise_data">Data associated with your work account, such as email and calendar</string>
-    <!-- Label explaining that the admin can see all apps installed on the device. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_number_installed_packages_default">List of all apps on your device</string>
-    <!-- Label explaining that the admin can see all apps installed on the device. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_installed_packages">
-        <item quantity="one">List of all <xliff:g id="count">%d</xliff:g> app on your device</item>
-        <item quantity="other">List of all <xliff:g id="count">%d</xliff:g> apps on your device</item>
+    <!-- Label explaining that the admin can see apps installed on the device. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_installed_packages">List of apps on your device</string>
+    <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps</item>
+    </plurals>
+    <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_packages_actionable">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app. Tap to view.</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps. Tap to view.</item>
     </plurals>
     <!-- Label explaining that the admin can see app usage statistics. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_usage_stats">Usage (time spent and amount of data used) of each app on your device</string>
+    <string name="enterprise_privacy_usage_stats">Time and data spent in each app on your device</string>
     <!-- Label explaining that the admin can retrieve network logs on the device. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_network_logs">Traffic logs on your device</string>
+    <string name="enterprise_privacy_network_logs">Network traffic logs on your device</string>
     <!-- Label explaining that the admin can request bug reports on the device. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_bug_reports">Your most recent bug report</string>
+    <string name="enterprise_privacy_bug_reports">Most recent bug report</string>
     <!-- Label explaining that the admin can retrieve security on from the device. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_security_logs">Your most recent security log</string>
-    <!-- Label indicating that the date at which the admin last took a particular action was "never" (i.e. the admin never took the action so far). -->
-    <string name="enterprise_privacy_never">Never</string>
-    <!-- Label indicating how many apps were installed on the device by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_enterprise_installed_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app installed by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps installed by your admin</item>
-    </plurals>
-    <!-- Label indicating how many apps were granted permission to access the device's location by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_location_access_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your location by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your location by your admin</item>
-    </plurals>
-    <!-- Label indicating how many apps were granted permission to access the microphone by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_microphone_access_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your microphone by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your microphone by your admin</item>
-    </plurals>
-    <!-- Label indicating how many apps were granted permission to access the camera by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_camera_access_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your camera by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your camera by your admin</item>
-    </plurals>
-    <!-- Label indicating how many apps were set as default defaults for common actions (e.g. open browser, send e-mail) by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_enterprise_set_default_apps">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> default app set by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> default apps set by your admin</item>
-    </plurals>
+    <string name="enterprise_privacy_security_logs">Most recent security log</string>
+    <!-- Label indicating that the the admin never took a given action so far (e.g. did not retrieve security logs or request bug reports). -->
+    <string name="enterprise_privacy_none">None</string>
+    <!-- Label indicating that the admin installed one or more apps on the device. -->
+    <string name="enterprise_privacy_enterprise_installed_packages">Apps installed</string>
+    <!-- Label indicating that the admin granted one or more apps access to the device's location. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_location_access">Apps allowed to access your location</string>
+    <!-- Label indicating that the admin granted one or more apps access to the microphone. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_microphone_access">Apps allowed to access your microphone</string>
+    <!-- Label indicating that the admin granted one or more apps access to the camera. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_camera_access">Apps allowed to access your camera</string>
+    <!-- Label indicating that the admin set one or more apps as defaults for common actions (e.g. open browser, send e-mail). [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_enterprise_set_default_apps">Default apps set</string>
     <!-- Label explaining that the current input method was set by the admin. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_input_method">Default keyboard set to <xliff:g id="app_label" example="Example Keyboard">%s</xliff:g> by your admin</string>
+    <string name="enterprise_privacy_input_method">Default keyboard</string>
+    <!-- Summary indicating the input method set by the admin. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_input_method_name">Set to <xliff:g id="app_label" example="Example Keyboard">%s</xliff:g></string>
     <!-- Label explaining that an always-on VPN was set by the admin for the entire device. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_always_on_vpn_device">Always-on VPN turned on</string>
     <!-- Label explaining that an always-on VPN was set by the admin in the personal profile. [CHAR LIMIT=NONE] -->
@@ -8182,35 +8176,44 @@
     <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
     <!-- Label explaining that the admin installed trusted CA certificates for the current user. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_ca_certs_user">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> trusted CA certificate installed</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> trusted CA certificates installed</item>
+        <item quantity="one">Trusted CA Certificate installed</item>
+        <item quantity="other">Trusted CA Certificates installed</item>
     </plurals>
     <!-- Label explaining that the admin installed trusted CA certificates for the personal profile. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_ca_certs_personal">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> trusted CA certificate installed in the personal profile</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> trusted CA certificates installed in the personal profile</item>
+        <item quantity="one">Trusted CA Certificate installed in the personal profile</item>
+        <item quantity="other">Trusted CA Certificates installed in the personal profile</item>
+    </plurals>
+    <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_ca_certs">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> certificate</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> certificates</item>
+    </plurals>
+    <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_ca_certs_actionable">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> certificate. Tap to view.</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> certificates. Tap to view.</item>
     </plurals>
     <!-- Label explaining that the admin installed trusted CA certificates for the work profile. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_ca_certs_work">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> trusted CA certificate installed in the work profile</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> trusted CA certificates installed in the work profile</item>
+        <item quantity="one">Trusted CA Certificate installed in the work profile</item>
+        <item quantity="other">Trusted CA Certificates installed in the work profile</item>
     </plurals>
     <!-- Label explaining that the admin can lock the device and change the user's password. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_lock_device">Admin can lock device and reset password</string>
+    <string name="enterprise_privacy_lock_device">Admin can lock the device and reset password</string>
     <!-- Label explaining that the admin can wipe the device remotely. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_wipe_device">Admin can delete all device data</string>
-    <!-- Label explaining that the admin configured the device to wipe itself when the password is mistyped this many times. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_failed_password_wipe_device">
-        <item quantity="one">Admin set maximum password attempts to <xliff:g id="count">%d</xliff:g> before deleting all device data</item>
-        <item quantity="other">Admin set maximum password attempts to <xliff:g id="count">%d</xliff:g> before deleting all device data</item>
-    </plurals>
-    <!-- Label explaining that the admin configured the work profile to wipe itself when the password is mistyped this many times. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_failed_password_wipe_work">
-        <item quantity="one">Admin set maximum password attempts to <xliff:g id="count">%d</xliff:g> before deleting work profile data</item>
-        <item quantity="other">Admin set maximum password attempts to <xliff:g id="count">%d</xliff:g> before deleting work profile data</item>
+    <!-- Label explaining that the admin configured the device to wipe itself when the password is mistyped too many times. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_failed_password_wipe_device">Failed password attempts before deleting all device data</string>
+    <!-- Label explaining that the admin configured the work profile to wipe itself when the password is mistyped too many times. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_failed_password_wipe_work">Failed password attempts before deleting work profile data</string>
+    <!-- Summary indicating the number of mistyped passwords after which the device or work profile wipes itself. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_failed_password_wipe">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> attempt</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> attempts</item>
     </plurals>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
-    <string name="do_disclosure_generic">This device is managed.</string>
+    <string name="do_disclosure_generic">This device is managed by your organization.</string>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
     <string name="do_disclosure_with_name">This device is managed by <xliff:g id="organization_name" example="Foo, Inc.">%s</xliff:g>.</string>
     <!-- Message indicating that the device is enterprise-managed: Space that separates the main text and the "learn more" link that follows it. [CHAR LIMIT=NONE] -->

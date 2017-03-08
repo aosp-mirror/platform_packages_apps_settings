@@ -44,7 +44,7 @@ import static org.mockito.Mockito.when;
 public final class ImePreferenceControllerTest {
 
     private final String DEFAULT_IME_LABEL = "Test IME";
-    private final String DEFAULT_IME_TEXT = "IME set to Test IME";
+    private final String DEFAULT_IME_TEXT = "Set to Test IME";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -58,7 +58,7 @@ public final class ImePreferenceControllerTest {
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         mController = new ImePreferenceController(mContext);
-        when(mContext.getResources().getString(R.string.enterprise_privacy_input_method,
+        when(mContext.getResources().getString(R.string.enterprise_privacy_input_method_name,
                 DEFAULT_IME_LABEL)).thenReturn(DEFAULT_IME_TEXT);
     }
 
@@ -76,7 +76,7 @@ public final class ImePreferenceControllerTest {
             .thenReturn(DEFAULT_IME_LABEL);
         mController.updateState(preference);
         assertThat(preference.isVisible()).isTrue();
-        assertThat(preference.getTitle()).isEqualTo(DEFAULT_IME_TEXT);
+        assertThat(preference.getSummary()).isEqualTo(DEFAULT_IME_TEXT);
     }
 
     @Test

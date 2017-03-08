@@ -18,7 +18,6 @@ package com.android.settings.enterprise;
 
 import android.Manifest;
 
-import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import org.junit.runner.RunWith;
@@ -34,8 +33,7 @@ public final class AdminGrantedCameraPermissionPreferenceControllerTest extends
 
     public AdminGrantedCameraPermissionPreferenceControllerTest() {
         super("enterprise_privacy_number_camera_access_packages",
-                new String[] {Manifest.permission.CAMERA},
-                R.plurals.enterprise_privacy_number_camera_access_packages);
+                new String[] {Manifest.permission.CAMERA});
     }
 
     @Override

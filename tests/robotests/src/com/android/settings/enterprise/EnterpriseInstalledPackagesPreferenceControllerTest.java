@@ -86,11 +86,10 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
         assertThat(preference.isVisible()).isFalse();
 
         setNumberOfEnterpriseInstalledPackages(20);
-        when(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_enterprise_installed_packages, 20, 20))
-                .thenReturn("20 packages");
+        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_packages,
+                20, 20)).thenReturn("20 packages");
         mController.updateState(preference);
-        assertThat(preference.getTitle()).isEqualTo("20 packages");
+        assertThat(preference.getSummary()).isEqualTo("20 packages");
         assertThat(preference.isVisible()).isTrue();
     }
 

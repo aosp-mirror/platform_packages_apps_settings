@@ -30,7 +30,7 @@ public final class AdminGrantedPermissionsPreferenceControllerBaseTest extends
         AdminGrantedPermissionsPreferenceControllerTestBase {
 
     public AdminGrantedPermissionsPreferenceControllerBaseTest() {
-        super(null, new String[] {"some.permission"}, 123 /* resourceStringId */);
+        super(null, new String[] {"some.permission"});
     }
 
     @Override
@@ -43,8 +43,7 @@ public final class AdminGrantedPermissionsPreferenceControllerBaseTest extends
             AdminGrantedPermissionsPreferenceControllerBase {
 
         AdminGrantedPermissionsPreferenceControllerBaseTestable() {
-            super(AdminGrantedPermissionsPreferenceControllerBaseTest.this.mContext, mPermissions,
-                    mStringResourceId);
+            super(AdminGrantedPermissionsPreferenceControllerBaseTest.this.mContext, mPermissions);
         }
 
         @Override

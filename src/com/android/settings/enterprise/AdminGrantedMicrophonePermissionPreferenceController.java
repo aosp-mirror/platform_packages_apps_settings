@@ -17,8 +17,6 @@ package com.android.settings.enterprise;
 import android.Manifest;
 import android.content.Context;
 
-import com.android.settings.R;
-
 public class AdminGrantedMicrophonePermissionPreferenceController extends
         AdminGrantedPermissionsPreferenceControllerBase {
 
@@ -26,8 +24,7 @@ public class AdminGrantedMicrophonePermissionPreferenceController extends
             = "enterprise_privacy_number_microphone_access_packages";
 
     public AdminGrantedMicrophonePermissionPreferenceController(Context context) {
-        super(context, new String[] {Manifest.permission.RECORD_AUDIO},
-                R.plurals.enterprise_privacy_number_microphone_access_packages);
+        super(context, new String[] {Manifest.permission.RECORD_AUDIO});
     }
 
     @Override
