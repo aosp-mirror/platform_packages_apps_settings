@@ -20,6 +20,7 @@ import android.annotation.NonNull;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.UserHandle;
+import android.util.Log;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.utils.AsyncLoader;
@@ -30,6 +31,7 @@ import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
  * Fetches the storage stats using the StorageStatsManager for a given package and user tuple.
  */
 public class FetchPackageStorageAsyncLoader extends AsyncLoader<AppStorageStats> {
+    private static final String TAG = "FetchPackageStorage";
     private final StorageStatsSource mSource;
     private final ApplicationInfo mInfo;
     private final UserHandle mUser;
@@ -44,7 +46,13 @@ public class FetchPackageStorageAsyncLoader extends AsyncLoader<AppStorageStats>
 
     @Override
     public AppStorageStats loadInBackground() {
-        return mSource.getStatsForPackage(mInfo.volumeUuid, mInfo.packageName, mUser);
+        AppStorageStats result = null;
+        try {
+            result = mSource.getStatsForPackage(mInfo.volumeUuid, mInfo.packageName, mUser);
+        } catch (IllegalStateException e) {
+            Log.w(TAG, "Package may have been removed during query, failing gracefully", e);
+        }
+        return result;
     }
 
     @Override
