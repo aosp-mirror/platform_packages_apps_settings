@@ -24,6 +24,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -58,7 +59,7 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
         List<ApplicationInfo> pkgs =
                 getWebViewUpdateServiceWrapper().getValidWebViewApplicationInfos(getContext());
         for (ApplicationInfo ai : pkgs) {
-            packageInfoList.add(new DefaultAppInfo(ai,
+            packageInfoList.add(createDefaultAppInfo(ai,
                       getDisabledReason(getWebViewUpdateServiceWrapper(),
                               getContext(), ai.packageName)));
         }
@@ -92,7 +93,6 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
         }
     }
 
-
     private WebViewUpdateServiceWrapper createDefaultWebViewUpdateServiceWrapper() {
         return new WebViewUpdateServiceWrapper();
     }
@@ -105,6 +105,13 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.WEBVIEW_IMPLEMENTATION;
+    }
+
+    @VisibleForTesting
+    DefaultAppInfo createDefaultAppInfo(
+            ApplicationInfo applicationInfo, String disabledReason) {
+        return new DefaultAppInfo(applicationInfo, disabledReason,
+                TextUtils.isEmpty(disabledReason) /* enabled */);
     }
 
     /**

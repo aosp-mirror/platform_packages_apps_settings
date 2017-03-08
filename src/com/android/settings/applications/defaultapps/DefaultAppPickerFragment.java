@@ -116,26 +116,9 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
             screen.addPreference(nonePref);
         }
         for (Map.Entry<String, DefaultAppInfo> app : mCandidates.entrySet()) {
-            final RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
-            final String appKey = app.getKey();
-            final DefaultAppInfo info = app.getValue();
-            pref.setTitle(info.loadLabel(mPm.getPackageManager()));
-            pref.setIcon(info.loadIcon(mPm.getPackageManager()));
-            pref.setKey(appKey);
-            if (TextUtils.equals(defaultAppKey, appKey)) {
-                pref.setChecked(true);
-            }
-            if (TextUtils.equals(systemDefaultAppKey, appKey)) {
-                pref.setSummary(R.string.system_app);
-            } else if (!TextUtils.isEmpty(info.summary)) {
-                pref.setSummary(info.summary);
-            }
-            if (!TextUtils.isEmpty(app.getValue().disabledDescription)) {
-                pref.setEnabled(false);
-                pref.setSummary(app.getValue().disabledDescription);
-            }
-            pref.setEnabled(info.enabled);
-            pref.setOnClickListener(this);
+            RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
+            configurePreferenceFromAppInfo(
+                    pref, app.getKey(), app.getValue(), defaultAppKey, systemDefaultAppKey);
             screen.addPreference(pref);
         }
         mayCheckOnlyRadioButton();
@@ -259,4 +242,22 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
         }
     }
 
+    @VisibleForTesting
+    public RadioButtonPreference configurePreferenceFromAppInfo(RadioButtonPreference pref,
+            String appKey, DefaultAppInfo info, String defaultAppKey, String systemDefaultAppKey) {
+        pref.setTitle(info.loadLabel(mPm.getPackageManager()));
+        pref.setIcon(info.loadIcon(mPm.getPackageManager()));
+        pref.setKey(appKey);
+        if (TextUtils.equals(defaultAppKey, appKey)) {
+            pref.setChecked(true);
+        }
+        if (TextUtils.equals(systemDefaultAppKey, appKey)) {
+            pref.setSummary(R.string.system_app);
+        } else if (!TextUtils.isEmpty(info.summary)) {
+            pref.setSummary(info.summary);
+        }
+        pref.setEnabled(info.enabled);
+        pref.setOnClickListener(this);
+        return pref;
+    }
 }

@@ -35,8 +35,6 @@ public class DefaultAppInfo {
     public final ComponentName componentName;
     public final PackageItemInfo packageItemInfo;
     public final String summary;
-    // Description for why this item is disabled, if null, the item is enabled.
-    public final String disabledDescription;
     public final boolean enabled;
 
     public DefaultAppInfo(int uid, ComponentName cn) {
@@ -52,21 +50,19 @@ public class DefaultAppInfo {
         userId = uid;
         componentName = cn;
         this.summary = summary;
-        this.disabledDescription = null;
         this.enabled = enabled;
     }
 
-    public DefaultAppInfo(PackageItemInfo info, String description) {
+    public DefaultAppInfo(PackageItemInfo info, String summary, boolean enabled) {
         userId = UserHandle.myUserId();
         packageItemInfo = info;
         componentName = null;
-        summary = null;
-        this.disabledDescription = description;
-        enabled = true;
+        this.summary = summary;
+        this.enabled = enabled;
     }
 
     public DefaultAppInfo(PackageItemInfo info) {
-        this(info, null);
+        this(info, null /* summary */, true /* enabled */);
     }
 
     public CharSequence loadLabel(PackageManager pm) {
