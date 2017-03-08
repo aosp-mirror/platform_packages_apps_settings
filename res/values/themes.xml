@@ -102,8 +102,10 @@
 
     <!-- Accessibility portion of Setup Wizard -->
     <style name="SetupWizardAccessibilityTheme" parent="Theme.SettingsBase">
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:colorPrimary">@color/material_blue_700</item>
         <item name="android:colorPrimaryDark">@color/material_blue_700</item>
+        <item name="android:actionBarTheme">@android:style/ThemeOverlay.Material.Dark.ActionBar</item>
         <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="switchBarTheme">@style/SetupWizardAccessibilitySwitchBarTheme</item>
     </style>

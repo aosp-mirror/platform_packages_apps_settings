@@ -32,7 +32,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
@@ -661,6 +660,9 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     protected void onPause() {
         super.onPause();
+        mDevelopmentPreferences.unregisterOnSharedPreferenceChangeListener(
+                mDevelopmentPreferencesListener);
+        mDevelopmentPreferencesListener = null;
         unregisterReceiver(mBatteryInfoReceiver);
         if (!mSearchFeatureProvider.isEnabled(this)) {
             unregisterReceiver(mUserAddRemoveReceiver);
@@ -668,15 +670,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (mDynamicIndexableContentMonitor != null) {
             mDynamicIndexableContentMonitor.unregister(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        mDevelopmentPreferences.unregisterOnSharedPreferenceChangeListener(
-                mDevelopmentPreferencesListener);
-        mDevelopmentPreferencesListener = null;
     }
 
     @Override
@@ -895,32 +888,32 @@ public class SettingsActivity extends SettingsDrawerActivity
                 pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
-                Settings.BluetoothSettingsActivity.class.getName()),
+                        Settings.BluetoothSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
-                Settings.DataUsageSummaryActivity.class.getName()),
+                        Settings.DataUsageSummaryActivity.class.getName()),
                 Utils.isBandwidthControlEnabled(), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
-                Settings.SimSettingsActivity.class.getName()),
+                        Settings.SimSettingsActivity.class.getName()),
                 Utils.showSimCardTile(this), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
-                Settings.PowerUsageSummaryActivity.class.getName()),
+                        Settings.PowerUsageSummaryActivity.class.getName()),
                 mBatteryPresent, isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
-                Settings.UserSettingsActivity.class.getName()),
+                        Settings.UserSettingsActivity.class.getName()),
                 UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
-                && !Utils.isMonkeyRunning(), isAdmin);
+                        && !Utils.isMonkeyRunning(), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
-                Settings.NetworkDashboardActivity.class.getName()),
+                        Settings.NetworkDashboardActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
-                Settings.ConnectedDeviceDashboardActivity.class.getName()),
+                        Settings.ConnectedDeviceDashboardActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
@@ -934,42 +927,46 @@ public class SettingsActivity extends SettingsDrawerActivity
                         && adapter != null && adapter.isEnabled(), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
-                Settings.PrintSettingsActivity.class.getName()),
+                        Settings.PrintSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin);
 
         final boolean showDev = mDevelopmentPreferences.getBoolean(
-                    DevelopmentSettings.PREF_SHOW, android.os.Build.TYPE.equals("eng"))
+                DevelopmentSettings.PREF_SHOW, android.os.Build.TYPE.equals("eng"))
                 && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
         setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsActivity.class.getName()),
                 showDev, isAdmin);
 
+        // Enable/disable backup settings depending on whether the user is admin.
+        setTileEnabled(new ComponentName(packageName,
+                        BackupSettingsActivity.class.getName()), true,
+                isAdmin || Utils.isCarrierDemoUser(this));
+
+        setTileEnabled(new ComponentName(packageName,
+                        Settings.EnterprisePrivacySettingsActivity.class.getName()),
+                FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
+                        .hasDeviceOwner(), isAdmin);
+
         if (UserHandle.MU_ENABLED && !isAdmin) {
+
             // When on restricted users, disable all extra categories (but only the settings ones).
             final List<DashboardCategory> categories = mDashboardFeatureProvider.getAllCategories();
-
-            for (DashboardCategory category : categories) {
-                for (Tile tile : category.tiles) {
-                    ComponentName component = tile.intent.getComponent();
-                    final String name = component.getClassName();
-                    final boolean isEnabledForRestricted = ArrayUtils.contains(
-                            SettingsGateway.SETTINGS_FOR_RESTRICTED, name);
-                    if (packageName.equals(component.getPackageName()) && !isEnabledForRestricted) {
-                        setTileEnabled(component, false, isAdmin);
+            synchronized (categories) {
+                for (DashboardCategory category : categories) {
+                    for (Tile tile : category.tiles) {
+                        ComponentName component = tile.intent.getComponent();
+                        final String name = component.getClassName();
+                        final boolean isEnabledForRestricted = ArrayUtils.contains(
+                                SettingsGateway.SETTINGS_FOR_RESTRICTED, name);
+                        if (packageName.equals(component.getPackageName())
+                                && !isEnabledForRestricted) {
+                            setTileEnabled(component, false, isAdmin);
+                        }
                     }
                 }
             }
         }
 
-        // Enable/disable backup settings depending on whether the user is admin.
-        setTileEnabled(new ComponentName(packageName,
-                BackupSettingsActivity.class.getName()), true,
-                isAdmin || Utils.isCarrierDemoUser(this));
-
-        setTileEnabled(new ComponentName(packageName,
-                Settings.EnterprisePrivacySettingsActivity.class.getName()),
-                FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
-                        .hasDeviceOwner(), isAdmin);
         // Final step, refresh categories.
         updateCategories();
     }
@@ -1097,10 +1094,6 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     public Intent getResultIntentData() {
         return mResultIntentData;
-    }
-
-    public void setResultIntentData(Intent resultIntentData) {
-        mResultIntentData = resultIntentData;
     }
 
     public void startSuggestion(Intent intent) {

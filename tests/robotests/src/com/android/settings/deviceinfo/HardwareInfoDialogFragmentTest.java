@@ -31,6 +31,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -55,7 +56,11 @@ public class HardwareInfoDialogFragmentTest {
         fragment.show(mActivity.getFragmentManager(), HardwareInfoDialogFragment.TAG);
 
         verify(fragment).setText(
+                any(View.class), eq(R.id.model_label), eq(R.id.model_value),
+                anyString());
+
+        verify(fragment).setText(
                 any(View.class), eq(R.id.hardware_rev_label), eq(R.id.hardware_rev_value),
-                eq(TEST_HARDWARE_REV));
+                anyString());
     }
 }
