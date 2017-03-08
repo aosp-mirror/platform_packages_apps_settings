@@ -15,10 +15,12 @@
  */
 package com.android.settings.deviceinfo;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
@@ -27,8 +29,11 @@ public class DeviceModelPreferenceController extends PreferenceController {
 
     private static final String KEY_DEVICE_MODEL = "device_model";
 
-    public DeviceModelPreferenceController(Context context) {
+    private final Fragment mHost;
+
+    public DeviceModelPreferenceController(Context context, Fragment host) {
         super(context);
+        mHost = host;
     }
 
     @Override
@@ -48,5 +53,15 @@ public class DeviceModelPreferenceController extends PreferenceController {
     @Override
     public String getPreferenceKey() {
         return KEY_DEVICE_MODEL;
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), KEY_DEVICE_MODEL)) {
+            return false;
+        }
+        final HardwareInfoDialogFragment fragment = HardwareInfoDialogFragment.newInstance();
+        fragment.show(mHost.getFragmentManager(), HardwareInfoDialogFragment.TAG);
+        return true;
     }
 }
