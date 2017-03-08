@@ -23,6 +23,7 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.WifiCallingPreferenceController;
@@ -54,6 +55,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mProgressiveDisclosureMixin.setTileLimit(2);
+        ((SettingsActivity) getActivity()).setDisplaySearchMenu(true);
     }
 
     @Override
