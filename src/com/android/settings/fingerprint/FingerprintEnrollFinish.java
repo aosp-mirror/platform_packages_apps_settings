@@ -17,7 +17,6 @@
 package com.android.settings.fingerprint;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.view.View;
@@ -32,19 +31,31 @@ import com.android.settings.Utils;
  */
 public class FingerprintEnrollFinish extends FingerprintEnrollBase {
 
+    private static final int REQUEST_ADD_ANOTHER = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_finish);
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         Button addButton = (Button) findViewById(R.id.add_another_button);
 
         final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
-        int enrolled = fpm.getEnrolledFingerprints(mUserId).size();
-        int max = getResources().getInteger(
-                com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
-        if (enrolled >= max) {
-            /* Don't show "Add" button if too many fingerprints already added */
+        boolean hideAddAnother = false;
+        if (fpm != null) {
+            int enrolled = fpm.getEnrolledFingerprints(mUserId).size();
+            int max = getResources().getInteger(
+                    com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
+            hideAddAnother = enrolled >= max;
+        }
+        if (hideAddAnother) {
+            // Don't show "Add" button if too many fingerprints already added
             addButton.setVisibility(View.INVISIBLE);
         } else {
             addButton.setOnClickListener(this);
@@ -60,12 +71,19 @@ public class FingerprintEnrollFinish extends FingerprintEnrollBase {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.add_another_button) {
-            final Intent intent = getEnrollingIntent();
-            intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            startActivity(intent);
-            finish();
+            startActivityForResult(getEnrollingIntent(), REQUEST_ADD_ANOTHER);
         }
         super.onClick(v);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_ADD_ANOTHER && resultCode != RESULT_CANCELED) {
+            setResult(resultCode, data);
+            finish();
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override

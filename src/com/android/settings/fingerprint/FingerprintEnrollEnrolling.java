@@ -237,12 +237,15 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
 
     private void launchFinish(byte[] token) {
         Intent intent = getFinishIntent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
         startActivity(intent);
+        overridePendingTransition(R.anim.suw_slide_next_in, R.anim.suw_slide_next_out);
         finish();
     }
 
