@@ -62,6 +62,7 @@ public class VideoPreference extends Preference {
                     .build();
             mMediaPlayer = MediaPlayer.create(mContext, mVideoPath);
             if (mMediaPlayer != null && mMediaPlayer.getDuration() > 0) {
+                setVisible(true);
                 setLayoutResource(R.layout.video_preference);
 
                 mPreviewResource = attributes.getResourceId(
@@ -71,6 +72,8 @@ public class VideoPreference extends Preference {
 
                 mMediaPlayer.setOnPreparedListener(mediaPlayer -> mediaPlayer.setLooping(true));
                 mAnimationAvailable = true;
+            } else {
+                setVisible(false);
             }
         } catch (Exception e) {
             Log.w(TAG, "Animation resource not found. Will not show animation.");
