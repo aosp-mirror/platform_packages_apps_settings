@@ -147,7 +147,7 @@ public class InstalledAppDetails extends AppInfoBase
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
 
     private static final String KEY_HEADER = "header_view";
-    private static final String KEY_FOOTER = "header_footer";
+    private static final String KEY_ACTION_BUTTONS = "action_buttons";
     private static final String KEY_NOTIFICATION = "notification_settings";
     private static final String KEY_STORAGE = "storage_settings";
     private static final String KEY_PERMISSION = "permission_settings";
@@ -164,7 +164,7 @@ public class InstalledAppDetails extends AppInfoBase
     private boolean mInitialized;
     private boolean mShowUninstalled;
     private LayoutPreference mHeader;
-    private LayoutPreference mFooter;
+    private LayoutPreference mActionButtons;
     private Button mUninstallButton;
     private boolean mUpdatedSysApp = false;
     private Button mForceStopButton;
@@ -331,10 +331,6 @@ public class InstalledAppDetails extends AppInfoBase
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.installed_app_details_ia);
         addDynamicPrefs();
-        mFooter = new LayoutPreference(getPrefContext(), R.layout.app_action_buttons);
-        mFooter.setOrder(-9999);
-        mFooter.setKey(KEY_FOOTER);
-        getPreferenceScreen().addPreference(mFooter);
         if (Utils.isBandwidthControlEnabled()) {
             INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
                     ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
@@ -393,6 +389,7 @@ public class InstalledAppDetails extends AppInfoBase
         }
         final Activity activity = getActivity();
         mHeader = (LayoutPreference) findPreference(KEY_HEADER);
+        mActionButtons = (LayoutPreference) findPreference(KEY_ACTION_BUTTONS);
         FeatureFactory.getFactory(activity)
             .getApplicationFeatureProvider(activity)
             .newAppHeaderController(this, mHeader.findViewById(R.id.app_snippet))
@@ -455,9 +452,9 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void prepareUninstallAndStop() {
-        mForceStopButton = (Button) mFooter.findViewById(R.id.right_button);
+        mForceStopButton = (Button) mActionButtons.findViewById(R.id.right_button);
         mForceStopButton.setText(R.string.force_stop);
-        mUninstallButton = (Button) mFooter.findViewById(R.id.left_button);
+        mUninstallButton = (Button) mActionButtons.findViewById(R.id.left_button);
         mForceStopButton.setEnabled(false);
     }
 
