@@ -38,6 +38,11 @@
         <item name="android:layout">@layout/apn_preference_layout</item>
     </style>
 
+    <style name="FooterPreference" parent="SettingsPreference">
+        <item name="android:layout">@layout/preference_footer</item>
+        <item name="allowDividerAbove">true</item>
+    </style>
+
     <style name="EditTextPreference"
            parent="@style/Preference.DialogPreference.EditTextPreference.Material">
         <item name="allowDividerAbove">false</item>
