@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,8 @@ import android.widget.TextView;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import java.util.Objects;
+
 public class ShowAdminSupportDetailsDialog extends Activity
         implements DialogInterface.OnDismissListener {
 
@@ -46,17 +49,20 @@ public class ShowAdminSupportDetailsDialog extends Activity
 
     private EnforcedAdmin mEnforcedAdmin;
     private View mDialogView;
+    private String mRestriction = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mEnforcedAdmin = getAdminDetailsFromIntent(getIntent());
+        mRestriction = getRestrictionFromIntent(getIntent());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         mDialogView = LayoutInflater.from(builder.getContext()).inflate(
                 R.layout.admin_support_details_dialog, null);
-        initializeDialogViews(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId);
+        initializeDialogViews(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId,
+                mRestriction);
         builder.setOnDismissListener(this)
                 .setPositiveButton(R.string.okay, null)
                 .setView(mDialogView)
@@ -67,9 +73,12 @@ public class ShowAdminSupportDetailsDialog extends Activity
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         EnforcedAdmin admin = getAdminDetailsFromIntent(intent);
-        if (!mEnforcedAdmin.equals(admin)) {
+        String restriction = getRestrictionFromIntent(intent);
+        if (!mEnforcedAdmin.equals(admin) || !Objects.equals(mRestriction, restriction)) {
             mEnforcedAdmin = admin;
-            initializeDialogViews(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId);
+            mRestriction = restriction;
+            initializeDialogViews(mDialogView, mEnforcedAdmin.component, mEnforcedAdmin.userId,
+                    mRestriction);
         }
     }
 
@@ -83,7 +92,13 @@ public class ShowAdminSupportDetailsDialog extends Activity
         return admin;
     }
 
-    private void initializeDialogViews(View root, ComponentName admin, int userId) {
+    private String getRestrictionFromIntent(Intent intent) {
+        if (intent == null) return null;
+        return intent.getStringExtra(DevicePolicyManager.EXTRA_RESTRICTION);
+    }
+
+    private void initializeDialogViews(View root, ComponentName admin, int userId,
+                                               String restriction) {
         if (admin != null) {
             if (!RestrictedLockUtils.isAdminInCurrentUserOrProfile(this, admin)
                     || !RestrictedLockUtils.isCurrentUserOrProfile(this, userId)) {
@@ -106,7 +121,39 @@ public class ShowAdminSupportDetailsDialog extends Activity
             }
         }
 
+        setAdminSupportTitle(root, restriction);
         setAdminSupportDetails(this, root, new EnforcedAdmin(admin, userId), true);
+    }
+
+    private void setAdminSupportTitle(View root, String restriction) {
+        final TextView titleView = (TextView) root.findViewById(R.id.admin_support_dialog_title);
+        if (titleView == null) {
+            return;
+        }
+        if (restriction == null) {
+            titleView.setText(R.string.disabled_by_policy_title);
+            return;
+        }
+        switch(restriction) {
+            case UserManager.DISALLOW_ADJUST_VOLUME:
+                titleView.setText(R.string.disabled_by_policy_title_adjust_volume);
+                break;
+            case UserManager.DISALLOW_OUTGOING_CALLS:
+                titleView.setText(R.string.disabled_by_policy_title_outgoing_calls);
+                break;
+            case UserManager.DISALLOW_SMS:
+                titleView.setText(R.string.disabled_by_policy_title_sms);
+                break;
+            case DevicePolicyManager.POLICY_DISABLE_CAMERA:
+                titleView.setText(R.string.disabled_by_policy_title_camera);
+                break;
+            case DevicePolicyManager.POLICY_DISABLE_SCREEN_CAPTURE:
+                titleView.setText(R.string.disabled_by_policy_title_screen_capture);
+                break;
+            default:
+                // Use general text if no specialized title applies
+                titleView.setText(R.string.disabled_by_policy_title);
+        }
     }
 
     public static void setAdminSupportDetails(final Activity activity, View root,
