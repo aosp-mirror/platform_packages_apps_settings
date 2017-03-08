@@ -21,6 +21,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
