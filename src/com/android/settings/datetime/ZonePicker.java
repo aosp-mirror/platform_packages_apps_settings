@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.datetime;
 
 import android.annotation.NonNull;
 import android.app.Activity;
@@ -33,8 +33,9 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settings.R;
 import com.android.settings.core.instrumentation.Instrumentable;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.datetime.ZoneGetter;
 
 import java.util.Collections;
@@ -52,11 +53,6 @@ import java.util.TimeZone;
  */
 public class ZonePicker extends ListFragment implements Instrumentable {
 
-    public interface ZoneSelectionListener {
-        // You can add any argument if you really need it...
-        void onZoneSelected(TimeZone tz);
-    }
-
     private static final int MENU_TIMEZONE = Menu.FIRST+1;
     private static final int MENU_ALPHABETICAL = Menu.FIRST;
     private final VisibilityLoggerMixin mVisibilityLoggerMixin =
@@ -66,8 +62,6 @@ public class ZonePicker extends ListFragment implements Instrumentable {
 
     private SimpleAdapter mTimezoneSortedAdapter;
     private SimpleAdapter mAlphabeticalAdapter;
-
-    private ZoneSelectionListener mListener;
 
     /**
      * Constructs an adapter with TimeZone list. Sorted by TimeZone in default.
@@ -148,15 +142,6 @@ public class ZonePicker extends ListFragment implements Instrumentable {
         return -1;
     }
 
-    /**
-     * @param item one of items in adapters. The adapter should be constructed by
-     * {@link #constructTimezoneAdapter(Context, boolean)}.
-     * @return TimeZone object corresponding to the item.
-     */
-    public static TimeZone obtainTimeZoneFromItem(Object item) {
-        return TimeZone.getTimeZone((String)((Map<?, ?>)item).get(ZoneGetter.KEY_ID));
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -185,8 +170,8 @@ public class ZonePicker extends ListFragment implements Instrumentable {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
-        final ListView list = (ListView) view.findViewById(android.R.id.list);
-        Utils.forcePrepareCustomPreferencesList(container, view, list, false);
+        final ListView list = view.findViewById(android.R.id.list);
+        prepareCustomPreferencesList(list);
         return view;
     }
 
@@ -233,8 +218,10 @@ public class ZonePicker extends ListFragment implements Instrumentable {
         }
     }
 
-    public void setZoneSelectionListener(ZoneSelectionListener listener) {
-        mListener = listener;
+    static void prepareCustomPreferencesList(ListView list) {
+        list.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
+        list.setClipToPadding(false);
+        list.setDivider(null);
     }
 
     private void setSorting(boolean sortByTimezone) {
@@ -259,12 +246,9 @@ public class ZonePicker extends ListFragment implements Instrumentable {
         final Activity activity = getActivity();
         final AlarmManager alarm = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
         alarm.setTimeZone(tzId);
-        final TimeZone tz = TimeZone.getTimeZone(tzId);
-        if (mListener != null) {
-            mListener.onZoneSelected(tz);
-        } else {
-            getActivity().onBackPressed();
-        }
+
+        getActivity().onBackPressed();
+
     }
 
     @Override
