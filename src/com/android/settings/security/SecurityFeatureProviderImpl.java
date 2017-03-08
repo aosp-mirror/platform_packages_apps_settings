@@ -46,9 +46,24 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
 
     private TrustAgentManager mTrustAgentManager;
 
+    @VisibleForTesting
+    static final Drawable DEFAULT_ICON = null;
+    @VisibleForTesting
+    static final String DEFAULT_SUMMARY = " ";
+
     /** Update preferences with data from associated tiles. */
     public void updatePreferences(final Context context, final PreferenceScreen preferenceScreen,
             final DashboardCategory dashboardCategory) {
+        if (preferenceScreen == null) {
+            return;
+        }
+        int tilesCount = (dashboardCategory != null) ? dashboardCategory.getTilesCount() : 0;
+        if (tilesCount == 0) {
+            return;
+        }
+
+        initPreferences(context, preferenceScreen, dashboardCategory);
+
         // Fetching the summary and icon from the provider introduces latency, so do this on a
         // separate thread.
         Executors.newSingleThreadExecutor().execute(new Runnable() {
@@ -60,16 +75,33 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
     }
 
     @VisibleForTesting
+    static void initPreferences(Context context, PreferenceScreen preferenceScreen,
+            DashboardCategory dashboardCategory) {
+        int tilesCount = (dashboardCategory != null) ? dashboardCategory.getTilesCount() : 0;
+        for (int i = 0; i < tilesCount; i++) {
+            Tile tile = dashboardCategory.getTile(i);
+            // If the tile does not have a key or appropriate meta data, skip it.
+            if (TextUtils.isEmpty(tile.key) || (tile.metaData == null)) {
+                continue;
+            }
+            Preference matchingPref = preferenceScreen.findPreference(tile.key);
+            // If the tile does not have a matching preference, skip it.
+            if (matchingPref == null) {
+                continue;
+            }
+            // Remove any icons that may be loaded before we inject the final icon.
+            matchingPref.setIcon(DEFAULT_ICON);
+            // Reserve room for the summary. This prevents the title from having to shift when the
+            // final title is injected.
+            matchingPref.setSummary(DEFAULT_SUMMARY);
+        }
+    }
+
+    @VisibleForTesting
     void updatePreferencesToRunOnWorkerThread(Context context, PreferenceScreen preferenceScreen,
             DashboardCategory dashboardCategory) {
 
-        if (preferenceScreen == null) {
-            return;
-        }
         int tilesCount = (dashboardCategory != null) ? dashboardCategory.getTilesCount() : 0;
-        if (tilesCount == 0) {
-            return;
-        }
         Map<String, IContentProvider> providerMap = new ArrayMap<>();
         for (int i = 0; i < tilesCount; i++) {
             Tile tile = dashboardCategory.getTile(i);
