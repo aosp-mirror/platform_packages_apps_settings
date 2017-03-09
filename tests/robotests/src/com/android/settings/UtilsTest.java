@@ -9,6 +9,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
@@ -115,5 +116,29 @@ public class UtilsTest {
         when(storageManager.findVolumeById(anyString())).thenReturn(info);
 
         Utils.maybeInitializeVolume(storageManager, new Bundle());
+    }
+
+    @Test
+    public void getInstallationStatus_notInstalled_shouldReturnUninstalled() {
+        assertThat(Utils.getInstallationStatus(new ApplicationInfo()))
+                .isEqualTo(R.string.not_installed);
+    }
+
+    @Test
+    public void getInstallationStatus_enabled_shouldReturnInstalled() {
+        final ApplicationInfo info = new ApplicationInfo();
+        info.flags = ApplicationInfo.FLAG_INSTALLED;
+        info.enabled = true;
+
+        assertThat(Utils.getInstallationStatus(info)).isEqualTo(R.string.installed);
+    }
+
+    @Test
+    public void getInstallationStatus_disabled_shouldReturnDisabled() {
+        final ApplicationInfo info = new ApplicationInfo();
+        info.flags = ApplicationInfo.FLAG_INSTALLED;
+        info.enabled = false;
+
+        assertThat(Utils.getInstallationStatus(info)).isEqualTo(R.string.disabled);
     }
 }

@@ -1,0 +1,204 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.fuelgauge;
+
+import android.content.Context;
+import android.os.BatteryStats;
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.os.UserHandle;
+import android.support.annotation.VisibleForTesting;
+import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.Preference;
+import android.view.View;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
+import com.android.internal.util.ArrayUtils;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
+import com.android.settings.applications.AppHeaderController;
+import com.android.settings.applications.LayoutPreference;
+import com.android.settings.core.PreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.applications.ApplicationsState;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Power usage detail fragment for each app, this fragment contains
+ *
+ * 1. Detail battery usage information for app(i.e. usage time, usage amount)
+ * 2. Battery related controls for app(i.e uninstall, force stop)
+ *
+ * This fragment will replace {@link PowerUsageDetail}
+ */
+public class AdvancedPowerUsageDetail extends PowerUsageBase {
+
+    public static final String TAG = "AdvancedPowerUsageDetail";
+    public static final String EXTRA_UID = "extra_uid";
+    public static final String EXTRA_PACKAGE_NAME = "extra_package_name";
+    public static final String EXTRA_FOREGROUND_TIME = "extra_foreground_time";
+    public static final String EXTRA_BACKGROUND_TIME = "extra_background_time";
+    public static final String EXTRA_LABEL = "extra_label";
+    public static final String EXTRA_ICON_ID = "extra_icon_id";
+    public static final String EXTRA_POWER_USAGE_PERCENT = "extra_power_usage_percent";
+    public static final String EXTRA_POWER_USAGE_AMOUNT = "extra_power_usage_amount";
+
+    private static final String KEY_PREF_FOREGROUND = "app_usage_foreground";
+    private static final String KEY_PREF_BACKGROUND = "app_usage_background";
+    private static final String KEY_PREF_POWER_USAGE = "app_power_usage";
+    private static final String KEY_PREF_HEADER = "header_view";
+
+    @VisibleForTesting
+    LayoutPreference mHeaderPreference;
+    @VisibleForTesting
+    ApplicationsState mState;
+    @VisibleForTesting
+    ApplicationsState.AppEntry mAppEntry;
+
+    private Preference mForegroundPreference;
+    private Preference mBackgroundPreference;
+    private Preference mPowerUsagePreference;
+
+    public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
+            BatteryStatsHelper helper, int which, BatteryEntry entry, String usagePercent) {
+        // Initialize mStats if necessary.
+        helper.getStats();
+
+        final Bundle args = new Bundle();
+        final BatterySipper sipper = entry.sipper;
+        final BatteryStats.Uid uid = sipper.uidObj;
+
+        final long backgroundTimeMs = BatteryUtils.getProcessTimeMs(
+                BatteryUtils.StatusType.BACKGROUND, uid, which);
+        final long foregroundTimeMs = BatteryUtils.getProcessTimeMs(
+                BatteryUtils.StatusType.FOREGROUND, uid, which);
+
+        if (ArrayUtils.isEmpty(sipper.mPackages)) {
+            // populate data for system app
+            args.putString(EXTRA_LABEL, entry.getLabel());
+            args.putInt(EXTRA_ICON_ID, entry.iconId);
+            args.putString(EXTRA_PACKAGE_NAME, null);
+        } else {
+            // populate data for normal app
+            args.putString(EXTRA_PACKAGE_NAME, sipper.mPackages[0]);
+        }
+
+        args.putInt(EXTRA_UID, sipper.getUid());
+        args.putLong(EXTRA_BACKGROUND_TIME, backgroundTimeMs);
+        args.putLong(EXTRA_FOREGROUND_TIME, foregroundTimeMs);
+        args.putString(EXTRA_POWER_USAGE_PERCENT, usagePercent);
+        args.putInt(EXTRA_POWER_USAGE_AMOUNT, (int) sipper.totalPowerMah);
+
+        caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
+                R.string.details_title, null, new UserHandle(UserHandle.myUserId()));
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
+        mBackgroundPreference = findPreference(KEY_PREF_BACKGROUND);
+        mPowerUsagePreference = findPreference(KEY_PREF_POWER_USAGE);
+        mHeaderPreference = (LayoutPreference) findPreference(KEY_PREF_HEADER);
+        mState = ApplicationsState.getInstance(getActivity().getApplication());
+
+        final String packageName = getArguments().getString(EXTRA_PACKAGE_NAME);
+        if (packageName != null) {
+            mAppEntry = mState.getEntry(packageName, UserHandle.myUserId());
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        initHeader();
+
+        final Bundle bundle = getArguments();
+        final Context context = getContext();
+
+        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
+        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
+        final String usagePercent = bundle.getString(EXTRA_POWER_USAGE_PERCENT);
+        final int powerMah = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
+        mForegroundPreference.setSummary(Utils.formatElapsedTime(context, foregroundTimeMs, false));
+        mBackgroundPreference.setSummary(Utils.formatElapsedTime(context, backgroundTimeMs, false));
+        mPowerUsagePreference.setSummary(
+                getString(R.string.battery_detail_power_percentage, usagePercent, powerMah));
+    }
+
+    @VisibleForTesting
+    void initHeader() {
+        final View appSnippet = mHeaderPreference.findViewById(R.id.app_snippet);
+        final Context context = getContext();
+        final Bundle bundle = getArguments();
+        AppHeaderController controller = FeatureFactory.getFactory(context)
+                .getApplicationFeatureProvider(context)
+                .newAppHeaderController(this, appSnippet)
+                .setButtonActions(AppHeaderController.ActionType.ACTION_NONE,
+                        AppHeaderController.ActionType.ACTION_NONE);
+
+        if (mAppEntry == null) {
+            controller.setLabel(bundle.getString(EXTRA_LABEL));
+            controller.setIcon(getContext().getDrawable(bundle.getInt(EXTRA_ICON_ID)));
+        } else {
+            mState.ensureIcon(mAppEntry);
+            controller.setLabel(mAppEntry);
+            controller.setIcon(mAppEntry);
+            controller.setSummary(getString(Utils.getInstallationStatus(mAppEntry.info)));
+        }
+
+        controller.done(true /* rebindActions */);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsEvent.FUELGAUGE_POWER_USAGE_DETAIL;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.power_usage_detail_ia;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        final Bundle bundle = getArguments();
+        final int uid = bundle.getInt(EXTRA_UID, 0);
+        final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
+
+        controllers.add(new BackgroundActivityPreferenceController(context, uid));
+        controllers.add(new BatteryOptimizationPreferenceController(
+                (SettingsActivity) getActivity(), this));
+        controllers.add(
+                new AppButtonsPreferenceController(getActivity(), getLifecycle(), packageName));
+
+        return controllers;
+    }
+}

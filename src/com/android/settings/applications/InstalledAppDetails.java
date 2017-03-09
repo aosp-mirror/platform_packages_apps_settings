@@ -546,7 +546,7 @@ public class InstalledAppDetails extends AppInfoBase
             .newAppHeaderController(this, appSnippet)
             .setLabel(mAppEntry)
             .setIcon(mAppEntry)
-            .setSummary(getString(getInstallationStatus(mAppEntry.info)))
+            .setSummary(getString(Utils.getInstallationStatus(mAppEntry.info)))
             .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
             .done(false /* rebindActions */);
         mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
@@ -572,14 +572,6 @@ public class InstalledAppDetails extends AppInfoBase
             showIt = false;
         }
         return showIt;
-    }
-
-    @VisibleForTesting
-    int getInstallationStatus(ApplicationInfo info) {
-        if ((info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
-            return R.string.not_installed;
-        }
-        return info.enabled ? R.string.installed : R.string.disabled;
     }
 
     private boolean signaturesMatch(String pkg1, String pkg2) {

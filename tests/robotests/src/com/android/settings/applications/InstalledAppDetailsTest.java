@@ -68,31 +68,6 @@ public final class InstalledAppDetailsTest {
     }
 
     @Test
-    public void getInstallationStatus_notInstalled_shouldReturnUninstalled() {
-
-        assertThat(mAppDetail.getInstallationStatus(new ApplicationInfo()))
-                .isEqualTo(R.string.not_installed);
-    }
-
-    @Test
-    public void getInstallationStatus_enabled_shouldReturnInstalled() {
-        final ApplicationInfo info = new ApplicationInfo();
-        info.flags = ApplicationInfo.FLAG_INSTALLED;
-        info.enabled = true;
-
-        assertThat(mAppDetail.getInstallationStatus(info)).isEqualTo(R.string.installed);
-    }
-
-    @Test
-    public void getInstallationStatus_disabled_shouldReturnDisabled() {
-        final ApplicationInfo info = new ApplicationInfo();
-        info.flags = ApplicationInfo.FLAG_INSTALLED;
-        info.enabled = false;
-
-        assertThat(mAppDetail.getInstallationStatus(info)).isEqualTo(R.string.disabled);
-    }
-
-    @Test
     public void shouldShowUninstallForAll_installForOneOtherUserOnly_shouldReturnTrue() {
         when(mDevicePolicyManager.packageHasActiveAdmins(anyString())).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
