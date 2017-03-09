@@ -15,15 +15,19 @@ package com.android.settings.display;
 
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_THEME;
 
-import android.app.AlertDialog;
-import android.app.UiModeManager;
 import android.content.Context;
-import android.content.DialogInterface.OnClickListener;
+import android.content.om.IOverlayManager;
+import android.content.om.OverlayInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-
 import android.text.TextUtils;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -31,17 +35,27 @@ import com.android.settings.overlay.FeatureFactory;
 
 import libcore.util.Objects;
 
+import java.util.List;
+
 public class ThemePreferenceController extends PreferenceController implements
         Preference.OnPreferenceChangeListener {
 
     private static final String KEY_THEME = "theme";
 
-    private final UiModeManager mUiModeManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final OverlayManager mOverlayService;
+    private final PackageManager mPackageManager;
 
     public ThemePreferenceController(Context context) {
+        this(context, ServiceManager.getService(Context.OVERLAY_SERVICE) != null
+                ? new OverlayManager() : null);
+    }
+
+    @VisibleForTesting
+    ThemePreferenceController(Context context, OverlayManager overlayManager) {
         super(context);
-        mUiModeManager = context.getSystemService(UiModeManager.class);
+        mOverlayService = overlayManager;
+        mPackageManager = context.getPackageManager();
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
@@ -61,12 +75,18 @@ public class ThemePreferenceController extends PreferenceController implements
     @Override
     public void updateState(Preference preference) {
         ListPreference pref = (ListPreference) preference;
-        String[] options = getAvailableThemes();
-        for (int i = 0; i < options.length; i++) {
-            options[i] = nullToDefault(options[i]);
+        String[] pkgs = getAvailableThemes();
+        CharSequence[] labels = new CharSequence[pkgs.length];
+        for (int i = 0; i < pkgs.length; i++) {
+            try {
+                labels[i] = mPackageManager.getApplicationInfo(pkgs[i], 0)
+                        .loadLabel(mPackageManager);
+            } catch (NameNotFoundException e) {
+                labels[i] = pkgs[i];
+            }
         }
-        pref.setEntries(options);
-        pref.setEntryValues(options);
+        pref.setEntries(labels);
+        pref.setEntryValues(pkgs);
         String theme = getCurrentTheme();
         if (TextUtils.isEmpty(theme)) {
             theme = mContext.getString(R.string.default_theme);
@@ -77,49 +97,76 @@ public class ThemePreferenceController extends PreferenceController implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (Objects.equal(newValue, mUiModeManager.getTheme())) {
+        String current = getTheme();
+        if (Objects.equal(newValue, current)) {
             return true;
         }
-        // TODO: STOPSHIP Don't require reboot and remove this prompt.
-        OnClickListener onConfirm = (d, i) -> {
-            mUiModeManager.setTheme(defaultToNull((String) newValue));
-            ((ListPreference) preference).setValue((String) newValue);
-        };
-        new AlertDialog.Builder(mContext)
-                .setTitle(R.string.change_theme_reboot)
-                .setPositiveButton(com.android.internal.R.string.global_action_restart, onConfirm)
-                .setNegativeButton(android.R.string.cancel, null)
-                .show();
-        return false;
+        try {
+            mOverlayService.setEnabledExclusive((String) newValue, true, UserHandle.myUserId());
+        } catch (RemoteException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private String getTheme() {
+        try {
+            List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
+                    UserHandle.myUserId());
+            for (int i = 0, size = infos.size(); i < size; i++) {
+                if (infos.get(i).isEnabled()) {
+                    return infos.get(i).packageName;
+                }
+            }
+        } catch (RemoteException e) {
+        }
+        return null;
     }
 
     @Override
     public boolean isAvailable() {
+        if (mOverlayService == null) return false;
         String[] themes = getAvailableThemes();
         return themes != null && themes.length > 1;
     }
 
+
     @VisibleForTesting
     String getCurrentTheme() {
-        return mUiModeManager.getTheme();
+        return getTheme();
     }
 
     @VisibleForTesting
     String[] getAvailableThemes() {
-        return mUiModeManager.getAvailableThemes();
+        try {
+            List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
+                    UserHandle.myUserId());
+            String[] pkgs = new String[infos.size()];
+            for (int i = 0, size = infos.size(); i < size; i++) {
+                pkgs[i] = infos.get(i).packageName;
+            }
+            return pkgs;
+        } catch (RemoteException e) {
+        }
+        return new String[0];
     }
 
-    private String nullToDefault(String input) {
-        if (TextUtils.isEmpty(input)) {
-            return mContext.getString(R.string.default_theme);
-        }
-        return input;
-    }
+    public static class OverlayManager {
+        private final IOverlayManager mService;
 
-    private String defaultToNull(String input) {
-        if (mContext.getString(R.string.default_theme).equals(input)) {
-            return null;
+        public OverlayManager() {
+            mService = IOverlayManager.Stub.asInterface(
+                    ServiceManager.getService(Context.OVERLAY_SERVICE));
         }
-        return input;
+
+        public void setEnabledExclusive(String pkg, boolean enabled, int userId)
+                throws RemoteException {
+            mService.setEnabledExclusive(pkg, enabled, userId);
+        }
+
+        public List<OverlayInfo> getOverlayInfosForTarget(String target, int userId)
+                throws RemoteException {
+            return mService.getOverlayInfosForTarget(target, userId);
+        }
     }
 }
