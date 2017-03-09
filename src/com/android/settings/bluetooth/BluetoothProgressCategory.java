@@ -48,7 +48,6 @@ public class BluetoothProgressCategory extends ProgressCategory {
     }
 
     private void init() {
-        setIcon(R.drawable.ic_settings_bluetooth);
         setEmptyTextRes(R.string.bluetooth_no_devices_found);
     }
 }

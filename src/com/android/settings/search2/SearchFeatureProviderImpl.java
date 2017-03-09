@@ -40,7 +40,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     @Override
     public boolean isEnabled(Context context) {
-        return false;
+        return true;
     }
 
     @Override
