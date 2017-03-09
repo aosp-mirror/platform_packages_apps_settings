@@ -16,8 +16,11 @@
 
 package com.android.settings.notification;
 
-import android.app.*;
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.INotificationManager;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentSender;
@@ -26,7 +29,12 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.*;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcel;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.service.notification.NotificationListenerService.RankingMap;
@@ -45,13 +53,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.CopyablePreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-import java.lang.StringBuilder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 public class NotificationStation extends SettingsPreferenceFragment {
     private static final String TAG = NotificationStation.class.getSimpleName();
@@ -533,7 +543,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         return null;
     }
 
-    private static class HistoricalNotificationPreference extends CopyablePreference {
+    private static class HistoricalNotificationPreference extends Preference {
         private final HistoricalNotificationInfo mInfo;
 
         public HistoricalNotificationPreference(Context context, HistoricalNotificationInfo info) {
@@ -571,14 +581,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
                     });
 
             row.itemView.setAlpha(mInfo.active ? 1.0f : 0.5f);
-        }
-
-        @Override
-        public CharSequence getCopyableText() {
-            return new SpannableStringBuilder(mInfo.title)
-                    .append(" [").append(new Date(mInfo.timestamp).toString())
-                    .append("]\n").append(mInfo.pkgname)
-                    .append("\n").append(mInfo.extra);
         }
 
         @Override

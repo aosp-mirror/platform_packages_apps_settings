@@ -166,7 +166,7 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_notifications);
         addIndex(SystemDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(StorageDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
-        addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_bt_laptop);
+        addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_devices_other);
         addIndex(EnterprisePrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(PaymentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_nfc_payment);
         addIndex(
