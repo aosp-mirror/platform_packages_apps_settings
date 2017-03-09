@@ -18,17 +18,16 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
 public abstract class FailedPasswordWipePreferenceControllerBase extends PreferenceController {
 
-    private final int mStringResourceId;
     protected final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public FailedPasswordWipePreferenceControllerBase(Context context, int stringResourceId) {
+    public FailedPasswordWipePreferenceControllerBase(Context context) {
         super(context);
-        mStringResourceId = stringResourceId;
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
@@ -42,8 +41,9 @@ public abstract class FailedPasswordWipePreferenceControllerBase extends Prefere
             preference.setVisible(false);
         } else {
             preference.setVisible(true);
-            preference.setTitle(mContext.getResources().getQuantityString(
-                    mStringResourceId, failedPasswordsBeforeWipe, failedPasswordsBeforeWipe));
+            preference.setSummary(mContext.getResources().getQuantityString(
+                    R.plurals.enterprise_privacy_number_failed_password_wipe,
+                    failedPasswordsBeforeWipe, failedPasswordsBeforeWipe));
         }
     }
 

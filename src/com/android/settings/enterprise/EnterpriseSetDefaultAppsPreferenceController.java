@@ -68,9 +68,8 @@ public class EnterpriseSetDefaultAppsPreferenceController extends PreferenceCont
             preference.setVisible(false);
         } else {
             preference.setVisible(true);
-            preference.setTitle(mContext.getResources().getQuantityString(
-                    R.plurals.enterprise_privacy_number_enterprise_set_default_apps,
-                    num, num));
+            preference.setSummary(mContext.getResources().getQuantityString(
+                    R.plurals.enterprise_privacy_number_packages, num, num));
         }
     }
 

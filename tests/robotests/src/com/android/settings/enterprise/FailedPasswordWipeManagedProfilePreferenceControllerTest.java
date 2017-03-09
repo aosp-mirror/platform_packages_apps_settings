@@ -18,7 +18,6 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 
-import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -38,8 +37,7 @@ public final class FailedPasswordWipeManagedProfilePreferenceControllerTest exte
     private int mMaximumFailedPasswordsBeforeWipe = 0;
 
     public FailedPasswordWipeManagedProfilePreferenceControllerTest() {
-        super("failed_password_wipe_managed_profile",
-                R.plurals.enterprise_privacy_failed_password_wipe_work);
+        super("failed_password_wipe_managed_profile");
     }
 
     @Override

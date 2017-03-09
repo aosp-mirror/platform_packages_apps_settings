@@ -15,8 +15,6 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 
-import com.android.settings.R;
-
 public class FailedPasswordWipePrimaryUserPreferenceController
         extends FailedPasswordWipePreferenceControllerBase {
 
@@ -24,7 +22,7 @@ public class FailedPasswordWipePrimaryUserPreferenceController
             = "failed_password_wipe_primary_user";
 
     public FailedPasswordWipePrimaryUserPreferenceController(Context context) {
-        super(context, R.plurals.enterprise_privacy_failed_password_wipe_device);
+        super(context);
     }
 
     @Override

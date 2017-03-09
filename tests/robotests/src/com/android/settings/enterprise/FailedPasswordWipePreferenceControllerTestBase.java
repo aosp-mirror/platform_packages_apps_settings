@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -37,7 +38,6 @@ import static org.mockito.Mockito.when;
 public abstract class FailedPasswordWipePreferenceControllerTestBase {
 
     protected final String mKey;
-    protected final int mStringResourceId;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     protected Context mContext;
@@ -45,9 +45,8 @@ public abstract class FailedPasswordWipePreferenceControllerTestBase {
 
     protected FailedPasswordWipePreferenceControllerBase mController;
 
-    public FailedPasswordWipePreferenceControllerTestBase(String key, int stringResourceId) {
+    public FailedPasswordWipePreferenceControllerTestBase(String key) {
         mKey = key;
-        mStringResourceId = stringResourceId;
     }
 
     @Before
@@ -65,11 +64,11 @@ public abstract class FailedPasswordWipePreferenceControllerTestBase {
         preference.setVisible(false);
 
         setMaximumFailedPasswordsBeforeWipe(10);
-        when(mContext.getResources().getQuantityString(mStringResourceId, 10, 10))
+        when(mContext.getResources().getQuantityString(
+                R.plurals.enterprise_privacy_number_failed_password_wipe, 10, 10))
                 .thenReturn("10 attempts");
         mController.updateState(preference);
-        assertThat(preference.getTitle()).isEqualTo("10 attempts");
-        assertThat(preference.isVisible()).isTrue();
+        assertThat(preference.getSummary()).isEqualTo("10 attempts");
 
         setMaximumFailedPasswordsBeforeWipe(0);
         mController.updateState(preference);

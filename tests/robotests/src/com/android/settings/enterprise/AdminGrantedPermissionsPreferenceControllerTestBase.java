@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -44,7 +45,6 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
 
     protected final String mKey;
     protected final String[] mPermissions;
-    protected final int mStringResourceId;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     protected Context mContext;
@@ -52,11 +52,9 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
 
     protected AdminGrantedPermissionsPreferenceControllerBase mController;
 
-    public AdminGrantedPermissionsPreferenceControllerTestBase(String key, String[] permissions,
-            int stringResourceId) {
+    public AdminGrantedPermissionsPreferenceControllerTestBase(String key, String[] permissions) {
         mKey = key;
         mPermissions = permissions;
-        mStringResourceId = stringResourceId;
     }
 
     @Before
@@ -83,10 +81,10 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
         preference.setVisible(false);
 
         setNumberOfPackagesWithAdminGrantedPermissions(20);
-        when(mContext.getResources().getQuantityString(mStringResourceId, 20, 20))
-                .thenReturn("20 packages");
+        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_packages,
+                20, 20)).thenReturn("20 packages");
         mController.updateState(preference);
-        assertThat(preference.getTitle()).isEqualTo("20 packages");
+        assertThat(preference.getSummary()).isEqualTo("20 packages");
         assertThat(preference.isVisible()).isTrue();
 
         setNumberOfPackagesWithAdminGrantedPermissions(0);

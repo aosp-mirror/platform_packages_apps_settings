@@ -33,7 +33,7 @@ public final class FailedPasswordWipePreferenceControllerBaseTest extends
     private int mMaximumFailedPasswordsBeforeWipe = 0;
 
     public FailedPasswordWipePreferenceControllerBaseTest() {
-        super(null, 123 /* stringResourceId */);
+        super(null);
     }
 
     @Override
@@ -50,7 +50,7 @@ public final class FailedPasswordWipePreferenceControllerBaseTest extends
     private class FailedPasswordWipePreferenceControllerBaseTestable extends
             FailedPasswordWipePreferenceControllerBase {
         FailedPasswordWipePreferenceControllerBaseTestable() {
-            super(FailedPasswordWipePreferenceControllerBaseTest.this.mContext, mStringResourceId);
+            super(FailedPasswordWipePreferenceControllerBaseTest.this.mContext);
         }
 
         @Override

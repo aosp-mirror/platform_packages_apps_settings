@@ -118,11 +118,10 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
                 ContactsContract.Contacts.CONTENT_TYPE)}, 32);
         setEnterpriseSetDefaultApps(new Intent[] {new Intent(Intent.ACTION_DIAL),
                 new Intent(Intent.ACTION_CALL)}, 64);
-        when(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_enterprise_set_default_apps, 127, 127))
-                .thenReturn("127 apps");
+        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_packages,
+                127, 127)).thenReturn("127 apps");
         mController.updateState(preference);
-        assertThat(preference.getTitle()).isEqualTo("127 apps");
+        assertThat(preference.getSummary()).isEqualTo("127 apps");
         assertThat(preference.isVisible()).isTrue();
     }
 

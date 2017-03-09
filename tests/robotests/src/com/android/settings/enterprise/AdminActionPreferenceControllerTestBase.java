@@ -59,12 +59,12 @@ public abstract class AdminActionPreferenceControllerTestBase {
     @Test
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
-        when(mContext.getString(R.string.enterprise_privacy_never)).thenReturn("Never");
+        when(mContext.getString(R.string.enterprise_privacy_none)).thenReturn("None");
         Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24, "24");
 
         setDate(null);
         mController.updateState(preference);
-        assertThat(preference.getSummary()).isEqualTo("Never");
+        assertThat(preference.getSummary()).isEqualTo("None");
 
         final Date date = new GregorianCalendar(2011 /* year */, 10 /* month */, 9 /* dayOfMonth */,
                 8 /* hourOfDay */, 7 /* minute */, 6 /* second */).getTime();

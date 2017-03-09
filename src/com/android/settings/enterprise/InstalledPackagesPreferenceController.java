@@ -24,7 +24,7 @@ import com.android.settings.overlay.FeatureFactory;
 
 public class InstalledPackagesPreferenceController extends PreferenceController {
 
-    private static final String KEY_NUMBER_INSTALLED_PACKAGES = "number_installed_packages";
+    private static final String KEY_INSTALLED_PACKAGES = "installed_packages";
     private final ApplicationFeatureProvider mFeatureProvider;
 
     public InstalledPackagesPreferenceController(Context context) {
@@ -38,8 +38,12 @@ public class InstalledPackagesPreferenceController extends PreferenceController 
         mFeatureProvider.calculateNumberOfInstalledApps(
                 ApplicationFeatureProvider.IGNORE_INSTALL_REASON,
                 (num) -> {
-                    preference.setTitle(mContext.getResources().getQuantityString(
-                            R.plurals.enterprise_privacy_number_installed_packages, num, num));
+                    if (num == 0) {
+                        preference.setSummary("");
+                    } else {
+                        preference.setSummary(mContext.getResources().getQuantityString(
+                                R.plurals.enterprise_privacy_number_packages, num, num));
+                    }
                 });
     }
 
@@ -50,6 +54,6 @@ public class InstalledPackagesPreferenceController extends PreferenceController 
 
     @Override
     public String getPreferenceKey() {
-        return KEY_NUMBER_INSTALLED_PACKAGES;
+        return KEY_INSTALLED_PACKAGES;
     }
 }

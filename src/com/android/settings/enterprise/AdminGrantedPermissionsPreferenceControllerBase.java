@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -25,14 +26,11 @@ import com.android.settings.overlay.FeatureFactory;
 public abstract class AdminGrantedPermissionsPreferenceControllerBase extends PreferenceController {
 
     private final String[] mPermissions;
-    private final int mStringResourceId;
     private final ApplicationFeatureProvider mFeatureProvider;
 
-    public AdminGrantedPermissionsPreferenceControllerBase(Context context, String[] permissions,
-            int stringResourceId) {
+    public AdminGrantedPermissionsPreferenceControllerBase(Context context, String[] permissions) {
         super(context);
         mPermissions = permissions;
-        mStringResourceId = stringResourceId;
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getApplicationFeatureProvider(context);
     }
@@ -45,8 +43,8 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase extends Pr
                         preference.setVisible(false);
                     } else {
                         preference.setVisible(true);
-                        preference.setTitle(mContext.getResources().getQuantityString(
-                                mStringResourceId, num, num));
+                        preference.setSummary(mContext.getResources().getQuantityString(
+                                R.plurals.enterprise_privacy_number_packages, num, num));
                     }
                 });
     }

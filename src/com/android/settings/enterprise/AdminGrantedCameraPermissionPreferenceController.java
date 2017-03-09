@@ -17,8 +17,6 @@ package com.android.settings.enterprise;
 import android.Manifest;
 import android.content.Context;
 
-import com.android.settings.R;
-
 public class AdminGrantedCameraPermissionPreferenceController extends
         AdminGrantedPermissionsPreferenceControllerBase {
 
@@ -26,8 +24,7 @@ public class AdminGrantedCameraPermissionPreferenceController extends
             = "enterprise_privacy_number_camera_access_packages";
 
     public AdminGrantedCameraPermissionPreferenceController(Context context) {
-        super(context, new String[] {Manifest.permission.CAMERA},
-                R.plurals.enterprise_privacy_number_camera_access_packages);
+        super(context, new String[] {Manifest.permission.CAMERA});
     }
 
     @Override

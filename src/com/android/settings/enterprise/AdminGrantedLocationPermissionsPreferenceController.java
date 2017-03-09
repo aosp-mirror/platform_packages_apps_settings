@@ -17,8 +17,6 @@ package com.android.settings.enterprise;
 import android.Manifest;
 import android.content.Context;
 
-import com.android.settings.R;
-
 public class AdminGrantedLocationPermissionsPreferenceController extends
         AdminGrantedPermissionsPreferenceControllerBase {
 
@@ -27,8 +25,7 @@ public class AdminGrantedLocationPermissionsPreferenceController extends
 
     public AdminGrantedLocationPermissionsPreferenceController(Context context) {
         super(context, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION},
-                R.plurals.enterprise_privacy_number_location_access_packages);
+                Manifest.permission.ACCESS_FINE_LOCATION});
     }
 
     @Override

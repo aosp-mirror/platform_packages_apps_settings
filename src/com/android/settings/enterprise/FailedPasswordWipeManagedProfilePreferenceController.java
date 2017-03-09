@@ -15,8 +15,6 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 
-import com.android.settings.R;
-
 public class FailedPasswordWipeManagedProfilePreferenceController
         extends FailedPasswordWipePreferenceControllerBase {
 
@@ -24,7 +22,7 @@ public class FailedPasswordWipeManagedProfilePreferenceController
             = "failed_password_wipe_managed_profile";
 
     public FailedPasswordWipeManagedProfilePreferenceController(Context context) {
-        super(context, R.plurals.enterprise_privacy_failed_password_wipe_work);
+        super(context);
     }
 
     @Override

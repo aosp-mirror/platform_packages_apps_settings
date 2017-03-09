@@ -43,6 +43,12 @@
                 android:persistent="false"
                 android:fragment="com.android.settings.DeviceAdminSettings"/>
 
+        <Preference android:key="enterprise_privacy"
+                android:title="@string/enterprise_privacy_settings"
+                android:summary="@string/enterprise_privacy_settings_summary"
+                android:persistent="false"
+                android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"/>
+
     </PreferenceCategory>
 
     <Preference android:key="sim_lock_settings"
