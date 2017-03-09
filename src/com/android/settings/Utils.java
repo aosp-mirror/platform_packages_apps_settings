@@ -302,13 +302,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return formatPercentage(getBatteryLevel(batteryChangedIntent));
     }
 
-    public static void forcePrepareCustomPreferencesList(
-            ViewGroup parent, View child, ListView list, boolean ignoreSidePadding) {
-        list.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
-        list.setClipToPadding(false);
-        prepareCustomPreferencesList(parent, child, list, ignoreSidePadding);
-    }
-
     /**
      * Prepare a custom preferences layout, moving padding to {@link ListView}
      * when outside scrollbars are requested. Usually used to display
