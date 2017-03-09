@@ -171,6 +171,18 @@ public class SecurityFeatureProviderImplTest {
         verify(screen.findPreference(MOCK_KEY), never()).setSummary(anyString());
     }
 
+    @Test
+    public void initPreferences_shouldLoadDefaults() {
+        PreferenceScreen screen = getPreferenceScreen();
+        DashboardCategory dashboardCategory = getDashboardCategory();
+        dashboardCategory.getTile(0).metaData = new Bundle();
+
+        mImpl.initPreferences(mContext, screen, dashboardCategory);
+        verify(screen.findPreference(MOCK_KEY)).setIcon(SecurityFeatureProviderImpl.DEFAULT_ICON);
+        verify(screen.findPreference(MOCK_KEY))
+                .setSummary(SecurityFeatureProviderImpl.DEFAULT_SUMMARY);
+    }
+
     private PreferenceScreen getPreferenceScreen() {
         final PreferenceScreen screen = mock(PreferenceScreen.class);
         final Preference pref = mock(Preference.class);
