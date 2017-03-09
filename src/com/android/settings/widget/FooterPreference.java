@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.method.LinkMovementMethod;
@@ -34,36 +35,24 @@ public class FooterPreference extends Preference {
     static final int ORDER_FOOTER = Integer.MAX_VALUE - 1;
     static final String KEY_FOOTER = "footer_preference";
 
-    public FooterPreference(Context context, AttributeSet attrs,
-            int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
-
-    public FooterPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
-    }
-
     public FooterPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        super(context, attrs, TypedArrayUtils.getAttr(
+                context, R.attr.footerPreferenceStyle, android.R.attr.preferenceStyle));
         init();
     }
 
     public FooterPreference(Context context) {
-        super(context);
-        init();
+        this(context, null);
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        TextView title = (TextView) holder.itemView.findViewById(android.R.id.title);
+        TextView title = holder.itemView.findViewById(android.R.id.title);
         title.setMovementMethod(new LinkMovementMethod());
     }
 
     private void init() {
-        setLayoutResource(R.layout.preference_footer);
         setIcon(R.drawable.ic_info_outline_24dp);
         setKey(KEY_FOOTER);
         setOrder(ORDER_FOOTER);
