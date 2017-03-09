@@ -8185,6 +8185,21 @@
     <string name="enterprise_privacy_always_on_vpn_work">Always-on VPN turned on in your work profile</string>
     <!-- Label explaining that a global HTTP proxy was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
+    <!-- Label explaining that the admin installed trusted CA certificates for the current user. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_ca_certs_user">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> trusted CA certificate installed</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> trusted CA certificates installed</item>
+    </plurals>
+    <!-- Label explaining that the admin installed trusted CA certificates for the personal profile. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_ca_certs_personal">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> trusted CA certificate installed in the personal profile</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> trusted CA certificates installed in the personal profile</item>
+    </plurals>
+    <!-- Label explaining that the admin installed trusted CA certificates for the work profile. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_ca_certs_work">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> trusted CA certificate installed in the work profile</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> trusted CA certificates installed in the work profile</item>
+    </plurals>
     <!-- Label explaining that the admin can lock the device and change the user's password. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_lock_device">Admin can lock device and reset password</string>
     <!-- Label explaining that the admin can wipe the device remotely. [CHAR LIMIT=NONE] -->

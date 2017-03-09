@@ -97,6 +97,14 @@
                 android:title="@string/enterprise_privacy_global_http_proxy"
                 settings:allowDividerBelow="true"
                 settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="ca_certs_current_user"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
+        <com.android.settings.DividerPreference
+                android:key="ca_certs_managed_profile"
+                settings:allowDividerBelow="true"
+                settings:multiLine="true"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/enterprise_privacy_device_access_category">

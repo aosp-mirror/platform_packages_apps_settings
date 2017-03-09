@@ -178,6 +178,22 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         }
     }
 
+    @Override
+    public int getNumberOfOwnerInstalledCaCertsInCurrentUser() {
+        final List<String> certs = mDpm.getOwnerInstalledCaCerts(new UserHandle(MY_USER_ID));
+        return certs != null ? certs.size() : 0;
+    }
+
+    @Override
+    public int getNumberOfOwnerInstalledCaCertsInManagedProfile() {
+        final int userId = getManagedProfileUserId();
+        if (userId == UserHandle.USER_NULL) {
+            return 0;
+        }
+        final List<String> certs = mDpm.getOwnerInstalledCaCerts(new UserHandle(userId));
+        return certs != null ? certs.size() : 0;
+    }
+
     protected static class EnterprisePrivacySpan extends ClickableSpan {
         private final Context mContext;
 
