@@ -21,7 +21,9 @@ import static android.provider.Settings.ACTION_WEBVIEW_SETTINGS;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
@@ -60,8 +62,8 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
                 getWebViewUpdateServiceWrapper().getValidWebViewApplicationInfos(getContext());
         for (ApplicationInfo ai : pkgs) {
             packageInfoList.add(createDefaultAppInfo(ai,
-                      getDisabledReason(getWebViewUpdateServiceWrapper(),
-                              getContext(), ai.packageName)));
+                    getDisabledReason(getWebViewUpdateServiceWrapper(),
+                            getContext(), ai.packageName)));
         }
         return packageInfoList;
     }
@@ -107,10 +109,26 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
         return MetricsEvent.WEBVIEW_IMPLEMENTATION;
     }
 
+    private static class WebViewAppInfo extends DefaultAppInfo {
+        public WebViewAppInfo(PackageItemInfo packageItemInfo, String summary, boolean enabled) {
+          super(packageItemInfo, summary, enabled);
+        }
+
+        @Override
+        public CharSequence loadLabel(PackageManager pm) {
+            String versionName = "";
+            try {
+                versionName = pm.getPackageInfo(packageItemInfo.packageName, 0).versionName;
+            } catch (PackageManager.NameNotFoundException e) {
+            }
+            return String.format("%s %s", super.loadLabel(pm), versionName);
+        }
+    }
+
+
     @VisibleForTesting
-    DefaultAppInfo createDefaultAppInfo(
-            ApplicationInfo applicationInfo, String disabledReason) {
-        return new DefaultAppInfo(applicationInfo, disabledReason,
+    DefaultAppInfo createDefaultAppInfo(PackageItemInfo packageItemInfo, String disabledReason) {
+        return new WebViewAppInfo(packageItemInfo, disabledReason,
                 TextUtils.isEmpty(disabledReason) /* enabled */);
     }
 
