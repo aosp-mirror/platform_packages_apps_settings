@@ -31,6 +31,13 @@ import java.util.List;
  */
 public interface DevicePolicyManagerWrapper {
     /**
+     * Calls {@code DevicePolicyManager.getActiveAdminsAsUser()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#getActiveAdminsAsUser
+     */
+    public @Nullable List<ComponentName> getActiveAdminsAsUser(int userId);
+
+    /**
      * Calls {@code DevicePolicyManager.getMaximumFailedPasswordsForWipe()}.
      *
      * @see android.app.admin.DevicePolicyManager#getMaximumFailedPasswordsForWipe

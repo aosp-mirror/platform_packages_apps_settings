@@ -84,6 +84,16 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     }
 
     @Override
+    public String getDeviceOwnerOrganizationName() {
+        final CharSequence organizationName = mDpm.getDeviceOwnerOrganizationName();
+        if (organizationName == null) {
+            return null;
+        } else {
+            return organizationName.toString();
+        }
+    }
+
+    @Override
     public CharSequence getDeviceOwnerDisclosure() {
         if (!hasDeviceOwner()) {
             return null;
@@ -192,6 +202,19 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         }
         final List<String> certs = mDpm.getOwnerInstalledCaCerts(new UserHandle(userId));
         return certs != null ? certs.size() : 0;
+    }
+
+    @Override
+    public int getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile() {
+        int activeAdmins = 0;
+        for (final UserInfo userInfo : mUm.getProfiles(MY_USER_ID)) {
+            final List<ComponentName> activeAdminsForUser
+                    = mDpm.getActiveAdminsAsUser(userInfo.id);
+            if (activeAdminsForUser != null) {
+                activeAdmins += activeAdminsForUser.size();
+            }
+        }
+        return activeAdmins;
     }
 
     protected static class EnterprisePrivacySpan extends ClickableSpan {

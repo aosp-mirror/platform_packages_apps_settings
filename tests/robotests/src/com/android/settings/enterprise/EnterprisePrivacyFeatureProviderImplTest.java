@@ -60,6 +60,8 @@ import static org.mockito.Mockito.when;
 public final class EnterprisePrivacyFeatureProviderImplTest {
 
     private final ComponentName OWNER = new ComponentName("dummy", "component");
+    private final ComponentName ADMIN_1 = new ComponentName("dummy", "admin1");
+    private final ComponentName ADMIN_2 = new ComponentName("dummy", "admin2");
     private final String OWNER_ORGANIZATION = new String("ACME");
     private final Date TIMESTAMP = new Date(2011, 11, 11);
     private final int MY_USER_ID = UserHandle.myUserId();
@@ -111,6 +113,15 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
         mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
         assertThat(mProvider.isInCompMode()).isTrue();
+    }
+
+    @Test
+    public void testGetDeviceOwnerOrganizationName() {
+        when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(null);
+        assertThat(mProvider.getDeviceOwnerOrganizationName()).isNull();
+
+        when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(OWNER_ORGANIZATION);
+        assertThat(mProvider.getDeviceOwnerOrganizationName()).isEqualTo(OWNER_ORGANIZATION);
     }
 
     @Test
@@ -290,6 +301,21 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
         mProfiles.remove(managedProfile);
         assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(0);
+    }
+
+    @Test
+    public void testGetNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile() {
+        when(mDevicePolicyManager.getActiveAdminsAsUser(MY_USER_ID))
+                .thenReturn(Arrays.asList(new ComponentName[] {ADMIN_1, ADMIN_2}));
+        when(mDevicePolicyManager.getActiveAdminsAsUser(MANAGED_PROFILE_USER_ID))
+                .thenReturn(Arrays.asList(new ComponentName[] {ADMIN_1}));
+
+        assertThat(mProvider.getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile())
+                .isEqualTo(2);
+
+        mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
+        assertThat(mProvider.getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile())
+                .isEqualTo(3);
     }
 
     private void resetAndInitializePackageManagerWrapper() {

@@ -172,6 +172,7 @@ public final class Ranking {
         sRankMap.put(SecuritySettings.class.getName(), RANK_SECURITY);
         sRankMap.put(ChooseLockGeneric.ChooseLockGenericFragment.class.getName(), RANK_SECURITY);
         sRankMap.put(ScreenPinningSettings.class.getName(), RANK_SECURITY);
+        sRankMap.put(EnterprisePrivacySettings.class.getName(), RANK_SECURITY);
 
         // Accounts
         sRankMap.put(UserAndAccountDashboardFragment.class.getName(), RANK_ACCOUNT);
@@ -181,7 +182,6 @@ public final class Ranking {
 
         // Privacy
         sRankMap.put(PrivacySettings.class.getName(), RANK_PRIVACY);
-        sRankMap.put(EnterprisePrivacySettings.class.getName(), RANK_PRIVACY);
 
         // Date / Time
         sRankMap.put(DateTimeSettings.class.getName(), RANK_DATE_TIME);

@@ -58,6 +58,8 @@ import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
+import com.android.settings.enterprise.ManageDeviceAdminPreferenceController;
 import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.location.LocationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -128,6 +130,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
     static final String KEY_PACKAGE_VERIFIER_STATUS = "security_status_package_verifier";
     private static final int PACKAGE_VERIFIER_STATE_ENABLED = 1;
 
+    // Device management settings
+    private static final String KEY_ENTERPRISE_PRIVACY = "enterprise_privacy";
+    private static final String KEY_MANAGE_DEVICE_ADMIN = "manage_device_admin";
+
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = {
             KEY_SHOW_PASSWORD, KEY_UNIFICATION, KEY_VISIBLE_PATTERN_PROFILE
@@ -164,6 +170,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private String mCurrentProfilePassword;
 
     private LocationPreferenceController mLocationcontroller;
+    private ManageDeviceAdminPreferenceController mManageDeviceAdminPreferenceController;
+    private EnterprisePrivacyPreferenceController mEnterprisePrivacyPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -201,6 +209,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         mLocationcontroller = new LocationPreferenceController(activity);
+        mManageDeviceAdminPreferenceController
+                = new ManageDeviceAdminPreferenceController(activity);
+        mEnterprisePrivacyPreferenceController
+                = new EnterprisePrivacyPreferenceController(activity, null /* lifecycle */);
     }
 
     private static int getResIdForLockUnlockScreen(Context context,
@@ -394,6 +406,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         mLocationcontroller.displayPreference(root);
+        mManageDeviceAdminPreferenceController.updateState(
+                root.findPreference(KEY_MANAGE_DEVICE_ADMIN));
+        mEnterprisePrivacyPreferenceController.displayPreference(root);
+        mEnterprisePrivacyPreferenceController.onResume();
+
         return root;
     }
 
@@ -893,6 +910,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if (!lockPatternUtils.isSecure(MY_USER_ID)) {
                 keys.add(KEY_TRUST_AGENT);
                 keys.add(KEY_MANAGE_TRUST_AGENTS);
+            }
+
+            if (!(new EnterprisePrivacyPreferenceController(context, null /* lifecycle */))
+                    .isAvailable()) {
+                keys.add(KEY_ENTERPRISE_PRIVACY);
             }
 
             return keys;
