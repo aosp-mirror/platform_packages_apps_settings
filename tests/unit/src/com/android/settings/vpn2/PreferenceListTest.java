@@ -37,9 +37,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.compat.ArgumentMatcher;
 
 public class PreferenceListTest extends AndroidTestCase {
     private static final String TAG = "PreferenceListTest";
@@ -138,7 +138,7 @@ public class PreferenceListTest extends AndroidTestCase {
 
         final ArgumentMatcher<VpnProfile> equalsFake = new ArgumentMatcher<VpnProfile>() {
             @Override
-            public boolean matches(final Object arg) {
+            public boolean matchesObject(final Object arg) {
                 if (arg == vpnProfile) return true;
                 if (arg == null) return false;
                 return TextUtils.equals(((VpnProfile) arg).key, vpnProfile.key);
