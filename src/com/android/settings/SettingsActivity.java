@@ -67,6 +67,7 @@ import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search2.SearchFeatureProvider;
+import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
@@ -946,6 +947,10 @@ public class SettingsActivity extends SettingsDrawerActivity
                         Settings.EnterprisePrivacySettingsActivity.class.getName()),
                 FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
                         .hasDeviceOwner(), isAdmin);
+
+        setTileEnabled(new ComponentName(packageName,
+                        Settings.WifiDisplaySettingsActivity.class.getName()),
+                WifiDisplaySettings.isAvailable(this), isAdmin);
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
 

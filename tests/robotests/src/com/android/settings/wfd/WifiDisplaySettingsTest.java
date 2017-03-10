@@ -18,7 +18,9 @@ package com.android.settings.wfd;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.display.DisplayManager;
 import android.media.MediaRouter;
+import android.net.wifi.p2p.WifiP2pManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
@@ -32,6 +34,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -80,6 +83,24 @@ public class WifiDisplaySettingsTest {
         mSummaryProvider.setListening(true);
 
         verify(mActivity).getString(R.string.wifi_display_status_connected);
+    }
+
+    @Test
+    public void isAvailable_noService_shouldReturnFalse() {
+        assertThat(WifiDisplaySettings.isAvailable(mActivity))
+                .isFalse();
+
+    }
+
+    @Test
+    public void isAvailable_hasService_shouldReturnTrue() {
+        when(mActivity.getSystemService(Context.DISPLAY_SERVICE))
+                .thenReturn(mock(DisplayManager.class));
+        when(mActivity.getSystemService(Context.WIFI_P2P_SERVICE))
+                .thenReturn(mock(WifiP2pManager.class));
+
+        assertThat(WifiDisplaySettings.isAvailable(mActivity))
+                .isTrue();
     }
 
 }
