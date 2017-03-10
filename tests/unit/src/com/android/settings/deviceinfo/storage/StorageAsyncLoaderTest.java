@@ -105,6 +105,19 @@ public class StorageAsyncLoaderTest {
     }
 
     @Test
+    public void testLegacyGamesAreFiltered() throws Exception {
+        ApplicationInfo info =
+                addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
+        info.flags = ApplicationInfo.FLAG_IS_GAME;
+
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).gamesSize).isEqualTo(11L);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(0);
+    }
+
+    @Test
     public void testCacheIsIgnored() throws Exception {
         addPackage(PACKAGE_NAME_1, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
 
