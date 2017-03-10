@@ -153,7 +153,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         mSwitchBar = activity.getSwitchBar();
 
         mBluetoothEnabler = new BluetoothEnabler(activity, new SwitchBarController(mSwitchBar),
-            mMetricsFeatureProvider, Utils.getLocalBtManager(activity));
+            mMetricsFeatureProvider, Utils.getLocalBtManager(activity),
+            MetricsEvent.ACTION_BLUETOOTH_TOGGLE);
         mBluetoothEnabler.setupSwitchController();
     }
 
