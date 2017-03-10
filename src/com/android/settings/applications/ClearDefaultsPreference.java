@@ -24,6 +24,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.SpannableString;
@@ -68,7 +69,9 @@ public class ClearDefaultsPreference extends Preference {
     }
 
     public ClearDefaultsPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, TypedArrayUtils.getAttr(context,
+                android.support.v7.preference.R.attr.preferenceStyle,
+                android.R.attr.preferenceStyle));
     }
 
     public ClearDefaultsPreference(Context context) {
