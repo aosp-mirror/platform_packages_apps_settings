@@ -20,6 +20,7 @@ import android.Manifest;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
@@ -33,7 +34,8 @@ public final class AdminGrantedMicrophonePermissionPreferenceControllerTest exte
 
     public AdminGrantedMicrophonePermissionPreferenceControllerTest() {
         super("enterprise_privacy_number_microphone_access_packages",
-                new String[] {Manifest.permission.RECORD_AUDIO});
+                new String[] {Manifest.permission.RECORD_AUDIO},
+                Manifest.permission_group.MICROPHONE);
     }
 
     @Override

@@ -24,7 +24,8 @@ public class AdminGrantedMicrophonePermissionPreferenceController extends
             = "enterprise_privacy_number_microphone_access_packages";
 
     public AdminGrantedMicrophonePermissionPreferenceController(Context context) {
-        super(context, new String[] {Manifest.permission.RECORD_AUDIO});
+        super(context, new String[] {Manifest.permission.RECORD_AUDIO},
+                Manifest.permission_group.MICROPHONE);
     }
 
     @Override

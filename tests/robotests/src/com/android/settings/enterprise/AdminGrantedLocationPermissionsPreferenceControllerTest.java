@@ -20,6 +20,7 @@ import android.Manifest;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
@@ -34,7 +35,8 @@ public final class AdminGrantedLocationPermissionsPreferenceControllerTest exten
     public AdminGrantedLocationPermissionsPreferenceControllerTest() {
         super("enterprise_privacy_number_location_access_packages",
                 new String[] {Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION});
+                        Manifest.permission.ACCESS_FINE_LOCATION},
+                Manifest.permission_group.LOCATION);
     }
 
     @Override

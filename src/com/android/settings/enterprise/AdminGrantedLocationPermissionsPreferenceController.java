@@ -25,7 +25,7 @@ public class AdminGrantedLocationPermissionsPreferenceController extends
 
     public AdminGrantedLocationPermissionsPreferenceController(Context context) {
         super(context, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION});
+                Manifest.permission.ACCESS_FINE_LOCATION}, Manifest.permission_group.LOCATION);
     }
 
     @Override

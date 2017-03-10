@@ -16,8 +16,14 @@
 
 package com.android.settings.enterprise;
 
+import android.Manifest;
+import android.content.Intent;
+import android.support.v7.preference.Preference;
+import android.text.TextUtils;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
@@ -30,7 +36,7 @@ public final class AdminGrantedPermissionsPreferenceControllerBaseTest extends
         AdminGrantedPermissionsPreferenceControllerTestBase {
 
     public AdminGrantedPermissionsPreferenceControllerBaseTest() {
-        super(null, new String[] {"some.permission"});
+        super("some.key", new String[] {"some.permission"}, "some.permission");
     }
 
     @Override
@@ -43,12 +49,14 @@ public final class AdminGrantedPermissionsPreferenceControllerBaseTest extends
             AdminGrantedPermissionsPreferenceControllerBase {
 
         AdminGrantedPermissionsPreferenceControllerBaseTestable() {
-            super(AdminGrantedPermissionsPreferenceControllerBaseTest.this.mContext, mPermissions);
+            super(AdminGrantedPermissionsPreferenceControllerBaseTest.this.mContext, mPermissions,
+                    mPermissionGroup);
         }
 
         @Override
         public String getPreferenceKey() {
-            return null;
+            return "some.key";
         }
     }
 }
+

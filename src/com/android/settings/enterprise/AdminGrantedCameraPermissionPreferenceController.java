@@ -24,7 +24,7 @@ public class AdminGrantedCameraPermissionPreferenceController extends
             = "enterprise_privacy_number_camera_access_packages";
 
     public AdminGrantedCameraPermissionPreferenceController(Context context) {
-        super(context, new String[] {Manifest.permission.CAMERA});
+        super(context, new String[] {Manifest.permission.CAMERA}, Manifest.permission_group.CAMERA);
     }
 
     @Override

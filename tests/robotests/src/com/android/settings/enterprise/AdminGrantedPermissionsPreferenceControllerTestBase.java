@@ -17,6 +17,7 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
@@ -27,6 +28,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
@@ -36,6 +38,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.anyObject;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -45,6 +48,7 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
 
     protected final String mKey;
     protected final String[] mPermissions;
+    protected final String mPermissionGroup;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     protected Context mContext;
@@ -52,9 +56,11 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
 
     protected AdminGrantedPermissionsPreferenceControllerBase mController;
 
-    public AdminGrantedPermissionsPreferenceControllerTestBase(String key, String[] permissions) {
+    public AdminGrantedPermissionsPreferenceControllerTestBase(String key, String[] permissions,
+            String permissionGroup) {
         mKey = key;
         mPermissions = permissions;
+        mPermissionGroup = permissionGroup;
     }
 
     @Before
@@ -81,8 +87,9 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
         preference.setVisible(false);
 
         setNumberOfPackagesWithAdminGrantedPermissions(20);
-        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_packages,
-                20, 20)).thenReturn("20 packages");
+        when(mContext.getResources().getQuantityString(
+                R.plurals.enterprise_privacy_number_packages_actionable,20, 20))
+                .thenReturn("20 packages");
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("20 packages");
         assertThat(preference.isVisible()).isTrue();
@@ -99,8 +106,19 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
 
     @Test
     public void testHandlePreferenceTreeClick() {
-        assertThat(mController.handlePreferenceTreeClick(new Preference(mContext, null, 0, 0)))
-                .isFalse();
+        final Preference preference = new Preference(mContext, null, 0, 0);
+        preference.setKey(mKey);
+
+        assertThat(mController.handlePreferenceTreeClick(preference)).isTrue();
+
+        final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(argumentCaptor.capture());
+
+        final Intent intent = argumentCaptor.getValue();
+
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MANAGE_PERMISSION_APPS);
+        assertThat(intent.getStringExtra(Intent.EXTRA_PERMISSION_NAME)).
+                isEqualTo(mPermissionGroup);
     }
 
     @Test
