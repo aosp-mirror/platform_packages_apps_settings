@@ -16,15 +16,16 @@
 
 package com.android.settings.applications.defaultapps;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
+import android.provider.Settings;
+import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
-import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,52 +38,59 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class DefaultAutoFillPickerTest {
+public class DefaultAutofillPreferenceControllerTest {
 
-    private static final String TEST_APP_KEY = "123";
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
+    @Mock
+    private Context mContext;
     @Mock
     private UserManager mUserManager;
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PackageManagerWrapper mPackageManager;
-    private DefaultAutoFillPicker mPicker;
+
+    private DefaultAutofillPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
-        when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mPicker = spy(new DefaultAutoFillPicker());
-        mPicker.onAttach((Context) mActivity);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
-        ReflectionHelpers.setField(mPicker, "mPm", mPackageManager);
-
-        doReturn(RuntimeEnvironment.application).when(mPicker).getContext();
+        mController = spy(new DefaultAutofillPreferenceController(mContext));
+        ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
     }
 
     @Test
-    public void setAndGetDefaultAppKey_shouldUpdateDefaultAutoFill() {
-        assertThat(mPicker.setDefaultAppKey(TEST_APP_KEY)).isTrue();
-        assertThat(mPicker.getDefaultAppKey()).isEqualTo(TEST_APP_KEY);
+    public void isAlwaysAvailable() {
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void getConfirmationMessage_shouldNotBeNull() {
-        final DefaultAppInfo info = mock(DefaultAppInfo.class);
-        when(info.loadLabel(any(PackageManager.class))).thenReturn("test_app_name");
-        assertThat(mPicker.getConfirmationMessage(info)).isNotNull();
+    public void updateState_hasNoApp_shouldNotReturnLabel() {
+        final Preference pref = mock(Preference.class);
+
+        mController.updateState(pref);
+        verify(pref).setSummary(null);
     }
 
+    @Test
+    public void getDefaultAppInfo_shouldHaveSettingsProvider() {
+        ReflectionHelpers.setField(mController, "mContext", RuntimeEnvironment.application);
+        Settings.Secure.putString(RuntimeEnvironment.application.getContentResolver(),
+                DefaultAutofillPicker.SETTING, "com.android.settings/SettingsActivity.class");
 
+        final DefaultAppInfo info = mController.getDefaultAppInfo();
+
+        assertThat(info).isNotNull();
+
+        mController.getSettingIntent(info);
+
+        verify(mPackageManager.getPackageManager()).queryIntentServices(
+                DefaultAutofillPicker.AUTOFILL_PROBE, PackageManager.GET_META_DATA);
+    }
 }

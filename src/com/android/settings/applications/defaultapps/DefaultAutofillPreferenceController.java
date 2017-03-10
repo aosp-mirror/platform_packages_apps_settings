@@ -22,9 +22,9 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-public class DefaultAutoFillPreferenceController extends DefaultAppPreferenceController {
+public class DefaultAutofillPreferenceController extends DefaultAppPreferenceController {
 
-    public DefaultAutoFillPreferenceController(Context context) {
+    public DefaultAutofillPreferenceController(Context context) {
         super(context);
     }
 
@@ -43,8 +43,8 @@ public class DefaultAutoFillPreferenceController extends DefaultAppPreferenceCon
         if (info == null) {
             return null;
         }
-        final DefaultAutoFillPicker.AutoFillSettingIntentProvider intentProvider =
-                new DefaultAutoFillPicker.AutoFillSettingIntentProvider(
+        final DefaultAutofillPicker.AutofillSettingIntentProvider intentProvider =
+                new DefaultAutofillPicker.AutofillSettingIntentProvider(
                         mPackageManager.getPackageManager(), info.getKey());
         return intentProvider.getIntent();
     }
@@ -52,7 +52,7 @@ public class DefaultAutoFillPreferenceController extends DefaultAppPreferenceCon
     @Override
     protected DefaultAppInfo getDefaultAppInfo() {
         final String flattenComponent = Settings.Secure.getString(mContext.getContentResolver(),
-                DefaultAutoFillPicker.SETTING);
+                DefaultAutofillPicker.SETTING);
         if (!TextUtils.isEmpty(flattenComponent)) {
             DefaultAppInfo appInfo = new DefaultAppInfo(
                     mUserId, ComponentName.unflattenFromString(flattenComponent));
