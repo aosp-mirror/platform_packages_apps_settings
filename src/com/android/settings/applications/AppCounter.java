@@ -57,6 +57,10 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
         onCountComplete(count);
     }
 
+    void executeInForeground() {
+        onPostExecute(doInBackground());
+    }
+
     protected abstract void onCountComplete(int num);
     protected abstract List<UserInfo> getUsersToCount();
     protected abstract boolean includeInCount(ApplicationInfo info);

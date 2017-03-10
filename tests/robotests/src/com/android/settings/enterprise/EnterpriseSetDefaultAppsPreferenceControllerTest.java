@@ -65,7 +65,8 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new EnterpriseSetDefaultAppsPreferenceController(mContext);
+        mController = new EnterpriseSetDefaultAppsPreferenceController(mContext,
+                null /* lifecycle */);
     }
 
     private static Intent buildIntent(String action, String category, String protocol,
@@ -95,15 +96,6 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
 
     @Test
     public void testUpdateState() {
-        final Preference preference = new Preference(mContext, null, 0, 0);
-        preference.setVisible(true);
-
-        when(mFeatureFactory.applicationFeatureProvider.findPersistentPreferredActivities(
-                anyObject())).thenReturn(
-                        new ArraySet<ApplicationFeatureProvider.PersistentPreferredActivityInfo>());
-        mController.updateState(preference);
-        assertThat(preference.isVisible()).isFalse();
-
         setEnterpriseSetDefaultApps(new Intent[] {buildIntent(Intent.ACTION_VIEW,
                 Intent.CATEGORY_BROWSABLE, "http:", null)}, 1);
         setEnterpriseSetDefaultApps(new Intent[] {new Intent(MediaStore.ACTION_IMAGE_CAPTURE),
@@ -120,13 +112,21 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
                 new Intent(Intent.ACTION_CALL)}, 64);
         when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_packages,
                 127, 127)).thenReturn("127 apps");
+
+        final Preference preference = new Preference(mContext, null, 0, 0);
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("127 apps");
-        assertThat(preference.isVisible()).isTrue();
     }
 
     @Test
     public void testIsAvailable() {
+        when(mFeatureFactory.applicationFeatureProvider.findPersistentPreferredActivities(
+                anyObject())).thenReturn(
+                        new ArraySet<ApplicationFeatureProvider.PersistentPreferredActivityInfo>());
+        assertThat(mController.isAvailable()).isFalse();
+
+        setEnterpriseSetDefaultApps(new Intent[] {buildIntent(Intent.ACTION_VIEW,
+                Intent.CATEGORY_BROWSABLE, "http:", null)}, 1);
         assertThat(mController.isAvailable()).isTrue();
     }
 

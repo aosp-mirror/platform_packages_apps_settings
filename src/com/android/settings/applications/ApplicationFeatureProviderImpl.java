@@ -56,8 +56,15 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     }
 
     @Override
-    public void calculateNumberOfInstalledApps(int installReason, NumberOfAppsCallback callback) {
-        new AllUserInstalledAppCounter(mContext, installReason, mPm, callback).execute();
+    public void calculateNumberOfInstalledApps(int installReason, boolean async,
+            NumberOfAppsCallback callback) {
+        final AllUserInstalledAppCounter counter = new AllUserInstalledAppCounter(mContext,
+                installReason, mPm, callback);
+        if (async) {
+            counter.execute();
+        } else {
+            counter.executeInForeground();
+        }
     }
 
     @Override

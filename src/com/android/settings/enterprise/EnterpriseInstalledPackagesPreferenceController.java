@@ -20,25 +20,30 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 
-public class EnterpriseInstalledPackagesPreferenceController extends PreferenceController {
+public class EnterpriseInstalledPackagesPreferenceController
+        extends DynamicAvailabilityPreferenceController {
 
     private static final String KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES
             = "number_enterprise_installed_packages";
     private final ApplicationFeatureProvider mFeatureProvider;
+    private final boolean mAsync;
 
-    public EnterpriseInstalledPackagesPreferenceController(Context context) {
-        super(context);
+    public EnterpriseInstalledPackagesPreferenceController(Context context, Lifecycle lifecycle,
+            boolean async) {
+        super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getApplicationFeatureProvider(context);
+        mAsync = async;
     }
 
     @Override
     public void updateState(Preference preference) {
         mFeatureProvider.calculateNumberOfInstalledApps(
-                PackageManager.INSTALL_REASON_POLICY,
+                PackageManager.INSTALL_REASON_POLICY, true /* async */,
                 (num) -> {
                     if (num == 0) {
                         preference.setVisible(false);
@@ -52,7 +57,20 @@ public class EnterpriseInstalledPackagesPreferenceController extends PreferenceC
 
     @Override
     public boolean isAvailable() {
-        return true;
+        if (mAsync) {
+            // When called on the main UI thread, we must not block. Since calculating the number of
+            // enterprise-installed apps takes a bit of time, we always return true here and
+            // determine the pref's actual visibility asynchronously in updateState().
+            return true;
+        }
+
+        // When called by the search indexer, we are on a background thread that we can block. Also,
+        // changes to the pref's visibility made in updateState() would not be seen by the indexer.
+        // We block and return synchronously whether there are enterprise-installed apps or not.
+        final Boolean[] haveEnterpriseInstalledPackages = { null };
+        mFeatureProvider.calculateNumberOfInstalledApps(PackageManager.INSTALL_REASON_POLICY,
+                false /* async */, (num) -> haveEnterpriseInstalledPackages[0] = num > 0);
+        return haveEnterpriseInstalledPackages[0];
     }
 
     @Override

@@ -22,22 +22,40 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 
-public class EnterpriseSetDefaultAppsPreferenceController extends PreferenceController {
+public class EnterpriseSetDefaultAppsPreferenceController
+        extends DynamicAvailabilityPreferenceController {
 
     private static final String KEY_DEFAULT_APPS = "number_enterprise_set_default_apps";
     private final ApplicationFeatureProvider mFeatureProvider;
 
-    public EnterpriseSetDefaultAppsPreferenceController(Context context) {
-        super(context);
+    public EnterpriseSetDefaultAppsPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getApplicationFeatureProvider(context);
     }
 
     @Override
     public void updateState(Preference preference) {
+        final int num = getNumberOfEnterpriseSetDefaultApps();
+        preference.setSummary(mContext.getResources().getQuantityString(
+                R.plurals.enterprise_privacy_number_packages, num, num));
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return getNumberOfEnterpriseSetDefaultApps() > 0;
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return KEY_DEFAULT_APPS;
+    }
+
+    private int getNumberOfEnterpriseSetDefaultApps() {
         // Browser
         int num = mFeatureProvider.findPersistentPreferredActivities(new Intent[] {
                 buildIntent(Intent.ACTION_VIEW, Intent.CATEGORY_BROWSABLE, "http:", null)}).size();
@@ -64,23 +82,7 @@ public class EnterpriseSetDefaultAppsPreferenceController extends PreferenceCont
         num += mFeatureProvider.findPersistentPreferredActivities(new Intent[] {
                 new Intent(Intent.ACTION_DIAL), new Intent(Intent.ACTION_CALL)}).size();
 
-        if (num == 0) {
-            preference.setVisible(false);
-        } else {
-            preference.setVisible(true);
-            preference.setSummary(mContext.getResources().getQuantityString(
-                    R.plurals.enterprise_privacy_number_packages, num, num));
-        }
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_DEFAULT_APPS;
+        return num;
     }
 
     private static Intent buildIntent(String action, String category, String protocol,

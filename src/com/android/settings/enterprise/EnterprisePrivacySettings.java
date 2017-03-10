@@ -22,6 +22,7 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -51,16 +52,22 @@ public class EnterprisePrivacySettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getLifecycle(), true /* async */);
+    }
+
+    private static List<PreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle, boolean async) {
         final List controllers = new ArrayList<PreferenceController>();
         controllers.add(new InstalledPackagesPreferenceController(context));
         controllers.add(new NetworkLogsPreferenceController(context));
         controllers.add(new BugReportsPreferenceController(context));
         controllers.add(new SecurityLogsPreferenceController(context));
-        controllers.add(new EnterpriseInstalledPackagesPreferenceController(context));
+        controllers.add(new EnterpriseInstalledPackagesPreferenceController(context, lifecycle,
+                async));
         controllers.add(new AdminGrantedLocationPermissionsPreferenceController(context));
         controllers.add(new AdminGrantedMicrophonePermissionPreferenceController(context));
         controllers.add(new AdminGrantedCameraPermissionPreferenceController(context));
-        controllers.add(new EnterpriseSetDefaultAppsPreferenceController(context));
+        controllers.add(new EnterpriseSetDefaultAppsPreferenceController(context, lifecycle));
         controllers.add(new AlwaysOnVpnPrimaryUserPreferenceController(context));
         controllers.add(new AlwaysOnVpnManagedProfilePreferenceController(context));
         controllers.add(new GlobalHttpProxyPreferenceController(context));
@@ -91,6 +98,11 @@ public class EnterprisePrivacySettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.enterprise_privacy_settings;
                     return Arrays.asList(sir);
+            }
+
+            @Override
+            public List<PreferenceController> getPreferenceControllers(Context context) {
+                return buildPreferenceControllers(context, null /* lifecycle */, false /* async */);
                 }
             };
 }
