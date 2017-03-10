@@ -114,7 +114,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.confirm_lock_pattern, null);
+            ConfirmLockPattern activity = (ConfirmLockPattern) getActivity();
+            View view = inflater.inflate(
+                    activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.INTERNAL
+                            ? R.layout.confirm_lock_pattern_internal
+                            : R.layout.confirm_lock_pattern,
+                    container,
+                    false);
             mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mDetailsTextView = (TextView) view.findViewById(R.id.detailsText);
@@ -343,27 +349,24 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             }
             mDisappearing = true;
 
-            if (getActivity().getThemeResId() == R.style.Theme_ConfirmDeviceCredentialsDark) {
+            final ConfirmLockPattern activity = (ConfirmLockPattern) getActivity();
+            // Bail if there is no active activity.
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
+            if (activity.getConfirmCredentialTheme() == ConfirmCredentialTheme.DARK) {
                 mLockPatternView.clearPattern();
                 mDisappearAnimationUtils.startAnimation2d(getActiveViews(),
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                // Bail if there is no active activity.
-                                if (getActivity() == null || getActivity().isFinishing()) {
-                                    return;
-                                }
-
-                                getActivity().setResult(RESULT_OK, intent);
-                                getActivity().finish();
-                                getActivity().overridePendingTransition(
-                                        R.anim.confirm_credential_close_enter,
-                                        R.anim.confirm_credential_close_exit);
-                            }
+                        () -> {
+                            activity.setResult(RESULT_OK, intent);
+                            activity.finish();
+                            activity.overridePendingTransition(
+                                    R.anim.confirm_credential_close_enter,
+                                    R.anim.confirm_credential_close_exit);
                         }, this);
             } else {
-                getActivity().setResult(RESULT_OK, intent);
-                getActivity().finish();
+                activity.setResult(RESULT_OK, intent);
+                activity.finish();
             }
         }
 

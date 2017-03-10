@@ -22,16 +22,23 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
 
     private static final String STATE_IS_KEYGUARD_LOCKED = "STATE_IS_KEYGUARD_LOCKED";
 
+    enum ConfirmCredentialTheme {
+        INTERNAL,
+        DARK,
+        WORK
+    }
+
     private boolean mRestoring;
-    private boolean mDark;
     private boolean mEnterAnimationPending;
     private boolean mFirstTimeVisible = true;
     private boolean mIsKeyguardLocked = false;
+    private ConfirmCredentialTheme mConfirmCredentialTheme;
 
     @Override
     protected void onCreate(Bundle savedState) {
@@ -39,12 +46,24 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
                 Utils.getUserIdFromBundle(this, getIntent().getExtras()));
         if (UserManager.get(this).isManagedProfile(credentialOwnerUserId)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsWork);
+            mConfirmCredentialTheme = ConfirmCredentialTheme.WORK;
         } else if (getIntent().getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsDark);
-            mDark = true;
+            mConfirmCredentialTheme = ConfirmCredentialTheme.DARK;
+        } else {
+            setTheme(R.style.SetupWizardTheme_Light);
+            mConfirmCredentialTheme = ConfirmCredentialTheme.INTERNAL;
         }
         super.onCreate(savedState);
+
+        if (mConfirmCredentialTheme == ConfirmCredentialTheme.INTERNAL) {
+            // Prevent the content parent from consuming the window insets because GlifLayout uses
+            // it to show the status bar background.
+            LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
+            layout.setFitsSystemWindows(false);
+        }
+
         mIsKeyguardLocked = savedState == null
                 ? getSystemService(KeyguardManager.class).isKeyguardLocked()
                 : savedState.getBoolean(STATE_IS_KEYGUARD_LOCKED, false);
@@ -85,7 +104,8 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     @Override
     public void onResume() {
         super.onResume();
-        if (!isChangingConfigurations() && !mRestoring && mDark && mFirstTimeVisible) {
+        if (!isChangingConfigurations() && !mRestoring
+                && mConfirmCredentialTheme == ConfirmCredentialTheme.DARK && mFirstTimeVisible) {
             mFirstTimeVisible = false;
             prepareEnterAnimation();
             mEnterAnimationPending = true;
@@ -115,5 +135,9 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
 
     public void startEnterAnimation() {
         getFragment().startEnterAnimation();
+    }
+
+    public ConfirmCredentialTheme getConfirmCredentialTheme() {
+        return mConfirmCredentialTheme;
     }
 }

@@ -1572,11 +1572,11 @@
         </activity>
 
         <activity android:name="ConfirmLockPattern"
-            android:theme="@style/Theme.ConfirmDeviceCredentials"/>
+            android:theme="@style/SetupWizardTheme.Light"/>
 
         <activity android:name="ConfirmLockPassword"
             android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/Theme.ConfirmDeviceCredentials"/>
+            android:theme="@style/SetupWizardTheme.Light"/>
 
         <activity
             android:name=".Settings$FingerprintSuggestionActivity"
@@ -1618,13 +1618,13 @@
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name="ConfirmLockPattern$InternalActivity"
             android:exported="false"
-            android:theme="@style/Theme.ConfirmDeviceCredentials"/>
+            android:theme="@style/SetupWizardTheme.Light"/>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name="ConfirmLockPassword$InternalActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.ConfirmDeviceCredentials"/>
+            android:theme="@style/SetupWizardTheme.Light"/>
 
         <activity android:name="SetupChooseLockGeneric"
             android:taskAffinity="com.android.wizard"
