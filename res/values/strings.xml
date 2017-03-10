@@ -8251,18 +8251,6 @@
     <!-- The percent of storage used by a storage volume. Exposed inside of a donut graph. [CHAR LIMIT=4]-->
     <string name="storage_percent_used"><xliff:g id="percent" example="50%">%1$s</xliff:g>%%</string>
 
-    <!-- Indicates if the automatic storage manager is enabled or not. [CHAR_LIMIT=40] -->
-    <string name="storage_manager_indicator">Storage Manager: <xliff:g id="status" example="on">^1</xliff:g></string>
-
-    <!-- Off status for the automatic storage manager. [CHAR_LIMIT=10] -->
-    <string name="storage_manager_indicator_off">Off</string>
-
-    <!-- On status for the automatic storage manager. [CHAR_LIMIT=10] -->
-    <string name="storage_manager_indicator_on">On</string>
-
-    <!-- Added as the value of a header field indicating this is an instant app (as opposed to installed normally) -->
-    <string name="install_type_instant">Instant app</string>
-
     <!-- Title of games app storage screen [CHAR LIMIT=30] -->
     <string name="game_storage_settings">Games</string>
 
@@ -8290,5 +8278,17 @@
     <string name="default_theme">Default</string>
     <!-- Temporary reboot string, will be removed -->
     <string name="change_theme_reboot" translatable="false">Changing the theme requires a restart.</string>
+
+    <!-- Indicates if the automatic storage manager is enabled or not. [CHAR_LIMIT=40] -->
+    <string name="storage_manager_indicator">Storage Manager: <xliff:g id="status" example="on">^1</xliff:g></string>
+
+    <!-- Off status for the automatic storage manager. [CHAR_LIMIT=10] -->
+    <string name="storage_manager_indicator_off">Off</string>
+
+    <!-- On status for the automatic storage manager. [CHAR_LIMIT=10] -->
+    <string name="storage_manager_indicator_on">On</string>
+
+    <!-- Added as the value of a header field indicating this is an instant app (as opposed to installed normally) -->
+    <string name="install_type_instant">Instant app</string>
 
 </resources>

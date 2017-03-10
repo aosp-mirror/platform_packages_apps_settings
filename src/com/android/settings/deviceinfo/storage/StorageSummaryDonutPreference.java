@@ -80,23 +80,6 @@ public class StorageSummaryDonutPreference extends Preference implements View.On
         if (deletionHelperButton != null) {
             deletionHelperButton.setOnClickListener(this);
         }
-
-        final TextView storageManagerText =
-                (TextView) view.findViewById(R.id.storage_manager_indicator);
-        if (storageManagerText != null) {
-            Context context = getContext();
-            final SpannableString templateSs = new SpannableString(
-                    context.getString(R.string.storage_manager_indicator));
-            boolean isStorageManagerEnabled = Settings.Secure.getInt(context.getContentResolver(),
-                    Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
-            String value = isStorageManagerEnabled ?
-                    context.getString(R.string.storage_manager_indicator_on) :
-                    context.getString(R.string.storage_manager_indicator_off);
-            Locale locale = storageManagerText.getTextLocale();
-            final SpannableString ss = new SpannableString(value.toUpperCase(locale));
-            ss.setSpan(new BoldLinkSpan(), 0, value.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            storageManagerText.setText(TextUtils.expandTemplate(templateSs, ss));
-        }
     }
 
     @Override
