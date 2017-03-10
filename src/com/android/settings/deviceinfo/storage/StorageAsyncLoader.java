@@ -89,6 +89,8 @@ public class StorageAsyncLoader
             // code size.
             if (!app.isSystemApp() || app.isUpdatedSystemApp()) {
                 attributedAppSizeInBytes += stats.getCodeBytes();
+            } else {
+                result.systemSize += stats.getCodeBytes();
             }
             switch (app.category) {
                 case CATEGORY_GAME:
@@ -117,6 +119,7 @@ public class StorageAsyncLoader
         public long gamesSize;
         public long musicAppsSize;
         public long otherAppsSize;
+        public long systemSize;
         public StorageStatsSource.ExternalStorageStats externalStats;
     }
 

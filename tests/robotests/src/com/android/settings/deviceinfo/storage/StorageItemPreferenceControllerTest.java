@@ -216,6 +216,7 @@ public class StorageItemPreferenceControllerTest {
         result.gamesSize = KILOBYTE * 8;
         result.musicAppsSize = KILOBYTE * 4;
         result.otherAppsSize = KILOBYTE * 9;
+        result.systemSize = KILOBYTE * 10;
         result.externalStats = new StorageStatsSource.ExternalStorageStats(
                 KILOBYTE * 50, // total
                 KILOBYTE * 10, // audio
@@ -230,7 +231,7 @@ public class StorageItemPreferenceControllerTest {
         assertThat(image.getSummary().toString()).isEqualTo("35.00KB"); // 15KB video + 20KB images
         assertThat(games.getSummary().toString()).isEqualTo("8.00KB");
         assertThat(apps.getSummary().toString()).isEqualTo("9.00KB");
-        assertThat(system.getSummary().toString()).isEqualTo("6.00KB");
+        assertThat(system.getSummary().toString()).isEqualTo("16.00KB");
         assertThat(files.getSummary().toString()).isEqualTo("5.00KB");
     }
 }

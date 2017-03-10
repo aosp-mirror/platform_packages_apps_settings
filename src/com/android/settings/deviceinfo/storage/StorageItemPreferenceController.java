@@ -181,7 +181,7 @@ public class StorageItemPreferenceController extends PreferenceController {
         mGamePreference.setStorageSize(data.gamesSize);
         mAppPreference.setStorageSize(data.otherAppsSize);
         if (mSystemPreference != null) {
-            mSystemPreference.setStorageSize(mSystemSize);
+            mSystemPreference.setStorageSize(mSystemSize + data.systemSize);
         }
 
         long unattributedBytes = data.externalStats.totalBytes - data.externalStats.audioBytes
