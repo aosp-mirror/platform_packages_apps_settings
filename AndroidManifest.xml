@@ -159,7 +159,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <intent-filter android:priority="10">
+            <intent-filter android:priority="11">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -2976,7 +2976,7 @@
         <activity android:name=".Settings$SystemDashboardActivity"
                   android:label="@string/header_category_system"
                   android:icon="@drawable/ic_settings_about">
-            <intent-filter android:priority="1">
+            <intent-filter android:priority="-1">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -2991,7 +2991,7 @@
                   android:label="@string/page_tab_title_support"
                   android:icon="@drawable/ic_help"
                   android:enabled="@bool/config_support_enabled">
-            <intent-filter android:priority="0">
+            <intent-filter android:priority="-2">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
