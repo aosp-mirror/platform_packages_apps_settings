@@ -40,6 +40,7 @@ public class ConfirmConvertToFbe extends SettingsPreferenceFragment {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);
                 intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+                intent.setPackage("android");
                 intent.putExtra(Intent.EXTRA_REASON, "convert_fbe");
                 getActivity().sendBroadcast(intent);
             }
