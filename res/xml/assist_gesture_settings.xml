@@ -29,4 +29,10 @@
         android:title="@string/assist_gesture_title"
         android:summary="@string/assist_gesture_summary" />
 
+    <com.android.settings.SeekBarPreference
+        android:key="gesture_assist_sensitivity"
+        android:title="@string/assist_gesture_sensitivity_title"
+        android:defaultValue="2"
+        android:max="4" />
+
 </PreferenceScreen>

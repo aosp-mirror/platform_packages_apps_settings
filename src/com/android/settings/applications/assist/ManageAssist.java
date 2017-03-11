@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.gestures.AssistGesturePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -70,7 +71,7 @@ public class ManageAssist extends DashboardFragment {
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new DefaultAssistPreferenceController(context));
-        controllers.add(new GestureAssistPreferenceController(context));
+        controllers.add(new AssistGesturePreferenceController(context, lifecycle));
         controllers.add(new AssistContextPreferenceController(context, lifecycle));
         controllers.add(new AssistScreenshotPreferenceController(context, lifecycle));
         controllers.add(new AssistFlashScreenPreferenceController(context, lifecycle));
