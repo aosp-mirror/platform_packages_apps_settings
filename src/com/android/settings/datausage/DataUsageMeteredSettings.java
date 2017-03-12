@@ -114,7 +114,8 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
     }
 
     private Preference buildWifiPref(Context context, WifiConfiguration config) {
-        final String networkId = config.SSID;
+        final String networkId = config.isPasspoint() ?
+                config.providerFriendlyName : config.SSID;
         final NetworkTemplate template = NetworkTemplate.buildTemplateWifi(networkId);
         final MeteredPreference pref = new MeteredPreference(context, template);
         pref.setTitle(removeDoubleQuotes(networkId));
